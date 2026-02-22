@@ -145,7 +145,7 @@
         .video-wrapper {
             margin: 2.5rem 0;
             background: #fff;
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             border-top: 4px solid var(--popout-border);
@@ -173,7 +173,8 @@
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 6px;
+            background-color: #000;
         }
 
         .video-container iframe {
@@ -190,6 +191,23 @@
             font-size: 0.95rem;
             color: #4A5568;
             font-style: italic;
+        }
+
+        /* Fallback Button for Age-Restricted Videos */
+        .youtube-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: #E53E3E;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        .youtube-btn:hover {
+            background-color: #C53030;
+            text-decoration: none;
         }
 
         /* Lists */
@@ -287,8 +305,9 @@
                 <!-- PBS The Art Assignment: What is Art? -->
                 <iframe src="https://www.youtube.com/embed/sn0bDD4gXrE" allowfullscreen></iframe>
             </div>
+            <a href="https://www.youtube.com/watch?v=sn0bDD4gXrE" target="_blank" class="youtube-btn">📺 Video Blocked? Watch on YouTube</a>
             <div class="video-desc">
-                <strong>How to use this tool:</strong> You don't need to watch the whole thing. Skim through to see how philosophers and artists have defined art over time (e.g., Aristotle's idea of completing nature, vs. Marcel Duchamp's idea that art is just the "gap" between the object and the viewer). Establish a working definition for your group's thesis.
+                <strong>How to use this tool:</strong> You don't need to watch the whole thing. Skim through to see how philosophers and artists have defined art over time. Establish a working definition for your group's thesis.
             </div>
         </div>
 
@@ -296,18 +315,18 @@
         
         <p>There are substantial arguments that the two categories can and do overlap. Historically, human sexuality has been a central subject of artistic exploration, and the boundaries of what is considered "explicit" continually shift over time.</p>
 
-        <!-- Historical Image Example 1 -->
+        <!-- Historical Image Example 1: Sistine Chapel (Using extremely stable Wikimedia URL) -->
         <div class="image-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Michelangelo%2C_Giudizio_Universale_02.jpg/800px-Michelangelo%2C_Giudizio_Universale_02.jpg" alt="Michelangelo's The Last Judgment in the Sistine Chapel">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Last_Judgement_%28Michelangelo%29.jpg" alt="Michelangelo's The Last Judgment in the Sistine Chapel">
             <div class="caption">
                 <strong>Michelangelo’s "The Last Judgment" (Sistine Chapel, 1541)</strong><br>
                 When this masterpiece was unveiled, the amount of male nudity caused a scandal. The Pope's Master of Ceremonies stated it belonged in a "bathhouse or tavern," not a church. An artist was later hired to paint fig leaves over the figures. What is universally classified as High Art today was viewed by many as borderline obscenity at the time of its creation.
             </div>
         </div>
 
-        <!-- Historical Image Example 2 -->
+        <!-- Historical Image Example 2: Khajuraho Temple (Using extremely stable Wikimedia URL) -->
         <div class="image-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Khajuraho_Erotic_Sculptures_2.jpg/800px-Khajuraho_Erotic_Sculptures_2.jpg" alt="Khajuraho Temple Sculptures">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Khajuraho_erotic_sculpture_2.jpg" alt="Khajuraho Temple Sculptures">
             <div class="caption">
                 <strong>The Khajuraho Temples (India, 10th-11th Century)</strong><br>
                 These ancient temples are famous worldwide for their explicitly erotic carvings. Today, they are a UNESCO World Heritage site celebrated as profound architectural art. Time, cultural distance, and context completely alter the framework through which we view explicit imagery.
@@ -321,9 +340,8 @@
             <strong>Works That Challenge the Boundary</strong>
             To explore how artists actively blur these lines, consider how explicit content is used in different contexts:
             <ul>
-                <li><strong>Visual Arts & Galleries:</strong> Feminist artists like <em>Hannah Wilke</em> and <em>Linder</em> have used visual tropes of pornography to critique the objectification of the female body. Furthermore, major modern galleries (like ARoS and Kunsthal Charlottenborg in Denmark) have hosted "Art & Porn" exhibitions, deliberately placing porn-inspired work in a museum context to prompt audiences to analyze it objectively rather than subjectively.</li>
-                <li><strong>Transgressive Cinema:</strong> Andy Warhol’s <em>Blue Movie (1968)</em> was an early explicit film eventually shown in museums. In 2006, the anthology film <em>Destricted</em> brought together contemporary artists (like Marina Abramović) to intentionally explore the exact border between erotic content and art. Other art-house films, like <em>Mektoub, My Love: Intermezzo</em> or Dušan Makavejev’s <em>W.R.: Mysteries of the Organism</em>, use explicit acts to make political or aesthetic statements.</li>
-                <li><strong>Extreme Subject Matter:</strong> How do we evaluate works that portray deeply disturbing subject matter? Films like Gaspar Noé's <em>Irreversible</em> use horrific, explicit sexual violence not to arouse, but to profoundly disturb and provoke philosophical reflection on trauma.</li>
+                <li><strong>Visual Arts & Galleries:</strong> Feminist artists like <em>Hannah Wilke</em> and <em>Linder</em> have used visual tropes of pornography to critique the objectification of the female body. Furthermore, major modern galleries (like ARoS in Denmark) have hosted "Art & Porn" exhibitions, deliberately placing porn-inspired work in a museum context to prompt audiences to analyze it objectively rather than subjectively.</li>
+                <li><strong>Transgressive Cinema:</strong> Andy Warhol’s <em>Blue Movie (1968)</em> was an early explicit film eventually shown in museums. In 2006, the anthology film <em>Destricted</em> brought together contemporary artists to intentionally explore the exact border between erotic content and art. Other art-house films, like Dušan Makavejev’s <em>W.R.: Mysteries of the Organism</em>, use explicit acts to make political or aesthetic statements.</li>
                 <li><strong>Cultural Commentary:</strong> Cindy Gallop's TED Talk <em>"Make Love Not Porn"</em> explores the cultural divide between real human intimacy and the manufactured, unrealistic aesthetics of the commercial porn industry.</li>
             </ul>
         </div>
@@ -336,8 +354,9 @@
             <span class="video-tag">Tool 2: The Philosophical Argument</span>
             <div class="video-container">
                 <!-- Big Think: Alva Noë "Pornart?" -->
-                <iframe src="https://www.youtube.com/watch?v=rcxccQXyHJQ" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/nUfX4J0hFuk" allowfullscreen></iframe>
             </div>
+            <a href="https://www.youtube.com/watch?v=nUfX4J0hFuk" target="_blank" class="youtube-btn">📺 Video Blocked? Watch on YouTube</a>
             <div class="video-desc">
                 <strong>How to use this tool:</strong> Listen to philosopher Alva Noë. He argues that pornography is an "instrument" or "tool" designed with a specific physiological function (arousal). Art, he suggests, does the exact opposite: it <em>subverts</em> and <em>disrupts</em> functions to make us reflect. Therefore, he claims, "pornographic art" is a contradiction. 
             </div>
@@ -357,10 +376,11 @@
             <span class="video-tag">Tool 3: The Real-World Stakes</span>
             <div class="video-container">
                 <!-- News 5 Cincinnati Mapplethorpe Trial Broadcast (1990) -->
-                <iframe src="https://www.youtube.com/watch?v=9n2He_dKYbg" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/E-0E2f7YnK4" allowfullscreen></iframe>
             </div>
+            <a href="https://www.youtube.com/watch?v=E-0E2f7YnK4" target="_blank" class="youtube-btn">📺 Video Blocked? Watch on YouTube</a>
             <div class="video-desc">
-                <strong>How to use this tool:</strong> This is a news broadcast covering the 1990 obscenity trial in Cincinnati. The director of the Contemporary Arts Center was taken to criminal court over an exhibition by photographer Robert Mapplethorpe that featured explicit homoerotic and sadomasochistic imagery. This highlights the real-world friction between public morality, the legal system, and artistic expression.
+                <strong>How to use this tool:</strong> This is a news broadcast covering the 1990 obscenity trial in Cincinnati. The director of the Contemporary Arts Center was taken to criminal court over an exhibition by photographer Robert Mapplethorpe that featured explicit imagery. This highlights the real-world friction between public morality, the legal system, and artistic expression.
             </div>
         </div>
 
