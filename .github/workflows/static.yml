@@ -64,7 +64,6 @@ jobs:
                       width: 100%;
                       box-sizing: border-box;
                   }
-                  /* Section grouping AOK / Themes */
                   .section-title {
                       color: var(--ibo-blue);
                       font-size: 1.6rem;
@@ -95,7 +94,6 @@ jobs:
                       transform: translateY(-5px);
                       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
                   }
-                  /* Pill tag for subcategories like "Art" */
                   .category-tag {
                       background-color: #e9ecef;
                       color: #555;
@@ -152,24 +150,17 @@ jobs:
               <div class="container">
           EOF
 
-          # Process both AOK and Themes root folders
           for base_dir in AOK Themes; do
               if [ -d "$base_dir" ]; then
                   
-                  # Add Section Header (AOK or Themes)
                   echo "        <h2 class='section-title'>$base_dir</h2>" >> index.html
                   echo "        <div class='grid'>" >> index.html
                   
-                  # Find all index.html files inside this base directory
                   find "$base_dir" -type f -name "index.html" | sort | while IFS= read -r file; do
                       
-                      # E.g., dir_path will be "AOK/Art/Is Porn Art?"
                       dir_path=$(dirname "$file")
-                      
-                      # Get the relative path ignoring the base directory (e.g., "Art/Is Porn Art?")
                       rel_path=${dir_path#$base_dir/}
                       
-                      # Split logic: Subcategory = "Art", Topic = "Is Porn Art?"
                       if [ "$rel_path" = "$base_dir" ] || [ -z "$rel_path" ]; then
                           topic_name="$base_dir"
                           sub_category=""
@@ -178,23 +169,33 @@ jobs:
                           topic_name=$(basename "$dir_path")
                       fi
                       
-                      # Format text nicely (Capitalize, replace hyphens)
                       display_sub=$(echo "$sub_category" | tr '-_' ' ' | awk '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}}1')
                       display_proj=$(echo "$topic_name" | tr '-_' ' ' | awk '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}}1')
 
-                      # IMPORTANT: URL Encode Spaces, ?, and # so GitHub Pages routing works properly
+                      # Set up contextual naming for AOK vs Theme
+                      if [ "$base_dir" = "AOK" ]; then
+                          context_name="AOK"
+                      else
+                          context_name="Theme"
+                      fi
+
+                      # CREATE DESCRIPTIVE BUTTON TEXT
+                      if [ -n "$display_sub" ] && [ "$display_sub" != "$display_proj" ]; then
+                          btn_text="Explore $context_name: $display_sub"
+                      else
+                          btn_text="Explore $display_proj"
+                      fi
+
                       url_path=$(echo "$file" | sed -e 's/ /%20/g' -e 's/?/%3F/g' -e 's/#/%23/g')
 
-                      # Append Card to HTML
                       echo "            <div class='card'>" >> index.html
                       
-                      # Only show the Subcategory tag (e.g., "ART") if it exists and isn't identical to the topic
                       if [ -n "$display_sub" ] && [ "$display_sub" != "$display_proj" ]; then
                           echo "                <div class='category-tag'>$display_sub</div>" >> index.html
                       fi
                       
                       echo "                <h2>$display_proj</h2>" >> index.html
-                      echo "                <div><a href=\"$url_path\" class='btn'>View Material</a></div>" >> index.html
+                      echo "                <div><a href=\"$url_path\" class='btn'>$btn_text</a></div>" >> index.html
                       echo "            </div>" >> index.html
                   done
                   
