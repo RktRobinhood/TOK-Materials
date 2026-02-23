@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOK History Lab: Ethics, Perspectives, and Power</title>
+    <style>
+        :root {
+            --bg-color: #f4eee1; /* Parchment/cream */
+            --text-color: #2b2b2b;
+            --accent-red: #c0392b;
+            --dark-red: #8e1a10;
+            --liberal-blue: #2980b9;
+            --tok-gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            color: var(--bg-color);
+            text-align: center;
+            padding: 3rem 1rem;
+            border-bottom: 6px solid var(--accent-red);
+        }
+
+        header h1 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 1rem auto 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: #fff;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--accent-red);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 2rem;
+        }
+
+        .tok-box {
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--tok-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tok-box h3 {
+            margin-top: 0;
+            color: #1a1a1a;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: #000;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-red);
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-2px);
+        }
+
+        .btn.blue {
+            background-color: var(--liberal-blue);
+        }
+
+        .btn.blue:hover {
+            background-color: #1c5980;
+        }
+
+        .btn.dark {
+            background-color: #1a1a1a;
+        }
+
+        .btn.dark:hover {
+            background-color: #000;
+        }
+
+        .discussion-questions {
+            background-color: #2b2b2b;
+            color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .discussion-questions h3 {
+            color: var(--tok-gold);
+            margin-top: 0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 0.5rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Theory of Knowledge: History Lab</h1>
+        <p>An interactive exploration of causality, systemic power, and the ethical frameworks that shape our past and digital future.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- PART 1: Secret Hitler Simulation -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Part 1: The Mechanics of Dictatorship</h2>
+                <p><strong>Activity:</strong> Learn & Play Secret Hitler</p>
+            </div>
+
+            <p>We often study history as a series of inevitable events or the result of specific, powerful individuals. But how do democracies actually fall? Watch the rules below, then head over to CovertBoard to play a live digital simulation of the political collapse of the Weimar Republic.</p>
+
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/mbGXIDYdtas" 
+                    title="How to Play Secret Hitler in 4 Minutes" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="https://covertboard.com/" target="_blank" class="btn dark" style="font-size: 1.3rem; padding: 15px 30px;">
+                    ▶ Play Secret Hitler on CovertBoard
+                </a>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>Post-Game Discussion: Perspectives & Power</h3>
+                <ul>
+                    <li><strong>Informational Asymmetry:</strong> How did the Fascists (a minority who knew the truth) manipulate the Liberals (a majority kept in the dark)? How does this mirror historical political movements?</li>
+                    <li><strong>Manufactured Crises:</strong> During the game, did Liberal players ever intentionally pass Fascist policies to unlock the "Presidential Execution" power? Is it ethical to use authoritarian tools to protect a democracy?</li>
+                    <li><strong>Erosion of Trust:</strong> How quickly did the table resort to voting "Nein" on every government out of pure paranoia? How does chaos benefit extremists in history?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PART 2: Vibe-Coding & Ethical Dilemmas -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Part 2: Codifying Ethics & Causality</h2>
+                <p><strong>Activity:</strong> Vibe-Coded Ethics Extension (Time-Filler)</p>
+            </div>
+
+            <p>Now that you've experienced the messy, organic chaos of human decision-making, let's look at how we understand historical causality and how we are attempting to program those ethics into machines today.</p>
+
+            <div class="tok-box">
+                <h3>🔍 TOK Thought Experiment: The "Kill Baby Hitler" Dilemma</h3>
+                <p>A famous ethical and historical thought experiment asks: <em>"If you could travel back in time, would you kill a baby Hitler to prevent WWII?"</em></p>
+                <p>This isn't just an ethics question; it gets to the heart of <strong>historical causality</strong>. Does history happen because of <strong>"Great Men"</strong> (individual agency), meaning removing one person fixes everything? Or is history the result of <strong>inevitable socio-economic patterns</strong>, meaning someone else would have just taken his place?</p>
+            </div>
+
+            <p>Historians have long debated whether human behavior is a predictable science (a concept known as <em>Cliodynamics</em>). Today, we are testing this boundary by using AI. If we can create an entire digital experience through "vibe-coding" (prompting AI with ethical rules), are we proving that human morality and historical cause-and-effect can be reduced to algorithms?</p>
+
+            <p><strong>Your Task:</strong> Play the vibe-coded AI ethics game below. See how the AI handles moral dilemmas compared to how your classmates handled them in Part 1.</p>
+
+            <div class="btn-group">
+                <a href="https://ai.studio/apps/23f77d06-f2bf-4a78-add0-9d9593877b8f" target="_blank" class="btn blue">
+                    Launch Vibe-Coded Ethics Game
+                </a>
+            </div>
+
+            <div class="discussion-questions" style="background-color: #f4eee1; color: #2b2b2b; border: 2px solid #2b2b2b; margin-top: 2rem;">
+                <h3 style="color: var(--accent-red); border-bottom-color: #ccc;">Post-Game Discussion: Methods & Tools</h3>
+                <ul>
+                    <li><strong>Predictability:</strong> Compare the analog experience of lying to your classmates in <em>Secret Hitler</em> with the digital constraints of an AI-coded ethics game. What gets lost when we try to codify human morality into an app?</li>
+                    <li><strong>Objectivity & Bias:</strong> An AI model generates rulings based on its training data. If the AI makes an "ethical" decision in your game, is that ruling objective? Or does it carry the historical biases of its programmers and the dataset?</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
