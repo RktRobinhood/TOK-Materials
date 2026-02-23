@@ -17,10 +17,32 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Generate IBO-Branded Landing Page
+      - name: Generate Directory using Python
         run: |
-          cat <<EOF > index.html
-          <!DOCTYPE html>
+          cat << 'EOF' > generate_directory.py
+          import os
+          import urllib.parse
+          import re
+          from datetime import datetime
+
+          def get_html_title(filepath):
+              """Opens the HTML file and tries to extract the <title> tag."""
+              try:
+                  with open(filepath, 'r', encoding='utf-8') as f:
+                      content = f.read()
+                      match = re.search(r'<title[^>]*>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
+                      if match:
+                          title = match.group(1).strip()
+                          if title: return title
+              except Exception:
+                  pass
+              return None
+
+          def format_name(name):
+              """Cleans up folder names if used as fallback."""
+              return name.replace('-', ' ').replace('_', ' ').title()
+
+          html_content = """<!DOCTYPE html>
           <html lang="en">
           <head>
               <meta charset="UTF-8">
@@ -57,7 +79,7 @@ jobs:
                       letter-spacing: 0.5px;
                   }
                   .container {
-                      max-width: 1000px;
+                      max-width: 1100px;
                       margin: 20px auto 60px auto;
                       padding: 0 20px;
                       flex: 1;
@@ -74,7 +96,7 @@ jobs:
                   }
                   .grid {
                       display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
                       gap: 25px;
                   }
                   .card {
@@ -87,8 +109,8 @@ jobs:
                       border: 1px solid #eee;
                       display: flex;
                       flex-direction: column;
-                      justify-content: center;
                       align-items: center;
+                      min-height: 180px;
                   }
                   .card:hover {
                       transform: translateY(-5px);
@@ -98,32 +120,38 @@ jobs:
                       background-color: #e9ecef;
                       color: #555;
                       font-size: 0.75rem;
-                      padding: 5px 12px;
-                      border-radius: 15px;
+                      padding: 6px 14px;
+                      border-radius: 20px;
                       display: inline-block;
-                      margin-bottom: 12px;
+                      margin-bottom: 15px;
                       text-transform: uppercase;
                       letter-spacing: 0.5px;
-                      font-weight: 600;
+                      font-weight: 700;
                   }
                   .card h2 {
                       color: var(--ibo-blue);
-                      font-size: 1.25rem;
+                      font-size: 1.35rem;
                       margin-top: 0;
                       margin-bottom: 20px;
                       font-weight: 600;
                       line-height: 1.4;
+                      flex-grow: 1;
+                      display: flex;
+                      align-items: center;
+                      text-align: center;
                   }
                   .btn {
                       display: inline-block;
                       background-color: var(--ibo-blue);
                       color: white;
                       text-decoration: none;
-                      padding: 10px 22px;
+                      padding: 12px 28px;
                       border-radius: 50px;
                       font-weight: 600;
-                      font-size: 0.9rem;
+                      font-size: 0.95rem;
                       transition: background 0.2s;
+                      margin-top: auto;
+                      width: 80%;
                   }
                   .btn:hover {
                       background-color: var(--ibo-light-blue);
@@ -139,6 +167,7 @@ jobs:
                   @media (max-width: 600px) {
                       header { padding: 1.5rem 1rem; }
                       .container { margin: 10px auto 40px auto; }
+                      .btn { width: 100%; box-sizing: border-box; }
                   }
               </style>
           </head>
@@ -146,72 +175,74 @@ jobs:
               <header>
                   <h1>TOK Information System</h1>
               </header>
-
               <div class="container">
-          EOF
+          """
 
-          for base_dir in AOK Themes; do
-              if [ -d "$base_dir" ]; then
+          for base_dir in ['AOK', 'Themes']:
+              if os.path.isdir(base_dir):
+                  html_content += f"        <h2 class='section-title'>{base_dir}</h2>\n"
+                  html_content += "        <div class='grid'>\n"
                   
-                  echo "        <h2 class='section-title'>$base_dir</h2>" >> index.html
-                  echo "        <div class='grid'>" >> index.html
+                  # Find all index.html files
+                  found_files = []
+                  for root, dirs, files in os.walk(base_dir):
+                      if 'index.html' in files:
+                          found_files.append(os.path.join(root, 'index.html'))
                   
-                  find "$base_dir" -type f -name "index.html" | sort | while IFS= read -r file; do
-                      
-                      dir_path=$(dirname "$file")
-                      rel_path=${dir_path#$base_dir/}
-                      
-                      if [ "$rel_path" = "$base_dir" ] || [ -z "$rel_path" ]; then
-                          topic_name="$base_dir"
-                          sub_category=""
-                      else
-                          sub_category=$(echo "$rel_path" | cut -d'/' -f1)
-                          topic_name=$(basename "$dir_path")
-                      fi
-                      
-                      display_sub=$(echo "$sub_category" | tr '-_' ' ' | awk '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}}1')
-                      display_proj=$(echo "$topic_name" | tr '-_' ' ' | awk '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) substr($i,2)}}1')
-
-                      # Set up contextual naming for AOK vs Theme
-                      if [ "$base_dir" = "AOK" ]; then
-                          context_name="AOK"
-                      else
-                          context_name="Theme"
-                      fi
-
-                      # CREATE DESCRIPTIVE BUTTON TEXT
-                      if [ -n "$display_sub" ] && [ "$display_sub" != "$display_proj" ]; then
-                          btn_text="Explore $context_name: $display_sub"
-                      else
-                          btn_text="Explore $display_proj"
-                      fi
-
-                      url_path=$(echo "$file" | sed -e 's/ /%20/g' -e 's/?/%3F/g' -e 's/#/%23/g')
-
-                      echo "            <div class='card'>" >> index.html
-                      
-                      if [ -n "$display_sub" ] && [ "$display_sub" != "$display_proj" ]; then
-                          echo "                <div class='category-tag'>$display_sub</div>" >> index.html
-                      fi
-                      
-                      echo "                <h2>$display_proj</h2>" >> index.html
-                      echo "                <div><a href=\"$url_path\" class='btn'>$btn_text</a></div>" >> index.html
-                      echo "            </div>" >> index.html
-                  done
+                  found_files.sort()
                   
-                  echo "        </div>" >> index.html
-              fi
-          done
+                  for file_path in found_files:
+                      file_path = file_path.replace('\\', '/')
+                      dir_path = os.path.dirname(file_path)
+                      rel_dir = os.path.relpath(dir_path, base_dir).replace('\\', '/')
+                      
+                      if rel_dir == '.' or rel_dir == '':
+                          sub_category = ''
+                          topic_name = base_dir
+                      else:
+                          parts = rel_dir.split('/')
+                          sub_category = parts[0]
+                          topic_name = parts[-1]
+                      
+                      # 1. Grab Title directly from HTML, otherwise use Folder Name
+                      page_title = get_html_title(file_path)
+                      display_heading = page_title if page_title else format_name(topic_name)
+                      display_sub = format_name(sub_category)
+                      
+                      # 2. Safely URL encode links
+                      url_path = urllib.parse.quote(file_path, safe='/')
+                      
+                      # Build Card
+                      html_content += "            <div class='card'>\n"
+                      
+                      # Sub-category tag (e.g., "Art")
+                      if display_sub and display_sub.lower() != display_heading.lower() and display_sub.lower() != topic_name.lower():
+                          html_content += f"                <div class='category-tag'>{display_sub}</div>\n"
+                          
+                      # Main Lesson Title
+                      html_content += f"                <h2>{display_heading}</h2>\n"
+                      
+                      # Button Context
+                      btn_label = "View Lesson"
+                      html_content += f"                <div><a href='{url_path}' class='btn'>{btn_label}</a></div>\n"
+                      html_content += "            </div>\n"
+                      
+                  html_content += "        </div>\n"
 
-          cat <<EOF >> index.html
+          html_content += f"""
               </div>
-
               <footer>
-                  &copy; $(date +%Y) TOK Hub &bull; International Standards Layout
+                  &copy; {datetime.now().year} TOK Hub &bull; International Standards Layout
               </footer>
           </body>
           </html>
+          """
+
+          with open('index.html', 'w', encoding='utf-8') as f:
+              f.write(html_content)
           EOF
+          
+          python3 generate_directory.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
