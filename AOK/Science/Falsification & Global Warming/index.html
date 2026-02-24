@@ -1,179 +1,254 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Falsification & Global Warming — Group Research Project</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Falsification & Global Warming — Research Project</title>
 
-  <!--
-    Clean version with:
-    - NO rubric
-    - YouTube embeds restored
-    - Standard youtube.com embed (not youtube-nocookie)
-    - Minimal attributes (to reduce LMS interference)
-    - No JavaScript
-  -->
+<style>
+:root{
+  --bg:#f6f8fc;
+  --card:#ffffff;
+  --text:#0b1220;
+  --muted:#55607a;
+  --accent:#2f6bff;
+  --line:rgba(10,18,32,.08);
+  --radius:22px;
+  --shadow:0 18px 50px rgba(16,24,40,.12);
+}
 
-  <style>
-    :root{
-      --bg:#f6f8fc;
-      --surface:#ffffff;
-      --text:#0b1220;
-      --muted:#55607a;
-      --line:rgba(10,18,32,.10);
-      --shadow: 0 18px 50px rgba(16,24,40,.12);
-      --shadow2: 0 10px 30px rgba(16,24,40,.10);
-      --radius: 20px;
-      --radius2: 28px;
-      --accent:#2f6bff;
-      --accent2:#22b8ff;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#f8fbff,#eef3ff);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(47,107,255,.12), transparent 60%),
-        radial-gradient(900px 600px at 90% 0%, rgba(34,184,255,.10), transparent 55%),
-        var(--bg);
-      line-height:1.55;
-    }
+.wrap{max-width:1150px;margin:auto;padding:32px 20px 80px}
 
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
+.hero{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:48px;
+  margin-bottom:40px;
+}
 
-    .wrap{max-width:1120px; margin:0 auto; padding:26px 18px 64px}
+h1{
+  font-size:44px;
+  margin:0 0 16px;
+  letter-spacing:-.03em;
+}
 
-    .hero{
-      margin-top:16px;
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.82));
-      box-shadow: var(--shadow);
-      padding:30px;
-    }
+.lede{
+  font-size:18px;
+  color:var(--muted);
+  max-width:800px;
+}
 
-    h1{font-size:42px; margin:0 0 12px; letter-spacing:-.03em}
-    .lede{color:var(--muted); max-width:75ch}
+.section{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:40px;
+  margin-bottom:32px;
+}
 
-    section{margin-top:28px}
-    .section{
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      background:#fff;
-      box-shadow: var(--shadow2);
-      padding:22px;
-    }
+.section h2{
+  margin-top:0;
+  font-size:26px;
+  letter-spacing:-.02em;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:16px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:22px;
+}
 
-    .span-6{grid-column: span 6}
-    .span-12{grid-column: span 12}
+.span-6{grid-column:span 6}
+.span-4{grid-column:span 4}
+.span-12{grid-column:span 12}
 
-    @media (max-width:900px){
-      .span-6{grid-column: span 12}
-      h1{font-size:32px}
-    }
+@media(max-width:900px){
+  .span-6,.span-4{grid-column:span 12}
+  h1{font-size:34px}
+}
 
-    .video{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: 0 12px 25px rgba(16,24,40,.08);
-      background:#fff;
-    }
+.card{
+  background:#f9fbff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+}
 
-    .video iframe{
-      width:100%;
-      height:340px;
-      border:0;
-      display:block;
-    }
+.card h3{
+  margin-top:0;
+}
 
-    .vcap{
-      padding:12px;
-      font-size:14px;
-      color:var(--muted);
-    }
+ul{padding-left:20px;color:var(--muted)}
+li{margin-bottom:8px}
 
-  </style>
+.callout{
+  background:#eef4ff;
+  border:1px solid #d6e4ff;
+  padding:18px;
+  border-radius:16px;
+  margin-top:18px;
+}
+
+.video{
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  background:#000;
+}
+
+.video iframe{
+  width:100%;
+  height:360px;
+  border:0;
+  display:block;
+}
+
+.vcap{
+  padding:16px;
+  background:#fff;
+  font-size:14px;
+  color:var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
+<div class="wrap">
 
-    <header class="hero">
-      <h1>Test claims like a scientist. Use falsification.</h1>
-      <p class="lede">
-        Investigate a climate-related claim using peer‑reviewed research.
-        Build a clear falsification test: <b>What evidence would prove the claim wrong?</b>
-        Present your findings in a 10–12 slide deck.
-      </p>
-    </header>
+<div class="hero">
+  <h1>Test Claims Like a Scientist</h1>
+  <p class="lede">
+    In this project, you will investigate a climate‑related claim using peer‑reviewed research.
+    Your goal is not persuasion — it is scientific evaluation. 
+    Build a clear falsification test: <strong>What evidence would prove this claim wrong?</strong>
+  </p>
+</div>
 
-    <section class="section">
-      <h2>Required falsification slide</h2>
+<div class="section">
+  <h2>Project Requirements</h2>
+  <div class="grid">
+    <div class="card span-6">
+      <h3>Group Structure</h3>
       <ul>
-        <li><b>Prediction:</b> If our claim is true, we should observe ____.</li>
-        <li><b>Falsifier:</b> If we instead observe ____, the claim would be wrong or need revision.</li>
-        <li><b>Dataset:</b> Which measurable data could test this?</li>
+        <li>Teams of 3–4 students</li>
+        <li>8–10 minute presentation</li>
+        <li>10–12 slide deck</li>
+        <li>Every member must speak</li>
       </ul>
-    </section>
+    </div>
+    <div class="card span-6">
+      <h3>Minimum Source Quality</h3>
+      <ul>
+        <li>At least 2 peer‑reviewed sources</li>
+        <li>Use academic databases or discovery tools</li>
+        <li>Cite every figure and dataset</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-    <section class="section">
-      <h2>Video resources (embedded)</h2>
-      <div class="grid">
+<div class="section">
+  <h2>Research Questions (Choose One)</h2>
+  <div class="grid">
+    <div class="card span-4">
+      <h3>Falsifiability</h3>
+      <p>Why is falsifiability essential in science?</p>
+    </div>
+    <div class="card span-4">
+      <h3>Predictions & Testing</h3>
+      <p>What predictions has global warming theory made, and how are they tested?</p>
+    </div>
+    <div class="card span-4">
+      <h3>Challenges</h3>
+      <p>What evidence could potentially challenge aspects of climate theory?</p>
+    </div>
+    <div class="card span-4">
+      <h3>Scientific Responses</h3>
+      <p>How do scientists respond to critiques of climate models?</p>
+    </div>
+    <div class="card span-4">
+      <h3>Historical Revisions</h3>
+      <p>Have climate-related hypotheses ever been revised or falsified?</p>
+    </div>
+    <div class="card span-4">
+      <h3>Bias</h3>
+      <p>How does confirmation bias affect public understanding?</p>
+    </div>
+  </div>
+</div>
 
-        <div class="video span-6">
-          <iframe src="https://www.youtube.com/embed/hKXhUZA3Du4"
-                  title="Karl Popper and Falsification"
-                  allowfullscreen></iframe>
-          <div class="vcap">
-            <b>Karl Popper & Falsification</b><br>
-            What falsifiability means and why it defines science.
-          </div>
-        </div>
+<div class="section">
+  <h2>Required Falsification Slide</h2>
+  <ul>
+    <li><strong>Prediction:</strong> If our claim is true, we should observe ______.</li>
+    <li><strong>Falsifier:</strong> If we instead observe ______, the claim would be wrong or need revision.</li>
+    <li><strong>Dataset:</strong> Which measurable data could test this?</li>
+  </ul>
+  <div class="callout">
+    A claim that cannot be wrong in principle is not scientific.
+  </div>
+</div>
 
-        <div class="video span-6">
-          <iframe src="https://www.youtube.com/embed/-X8Xfl0JdTQ"
-                  title="Science vs Pseudoscience"
-                  allowfullscreen></iframe>
-          <div class="vcap">
-            <b>Science vs Pseudoscience</b><br>
-            Demarcation and common failures of non-scientific claims.
-          </div>
-        </div>
+<div class="section">
+  <h2>Recommended Research Tools</h2>
+  <ul>
+    <li><strong>Consensus.app</strong> – overview of peer‑reviewed findings</li>
+    <li><strong>ResearchRabbit</strong> – visual research mapping</li>
+    <li><strong>Google Scholar</strong> – citation tracking</li>
+    <li><strong>Connected Papers</strong> – related paper graphs</li>
+    <li><strong>Semantic Scholar</strong> – advanced filtering</li>
+  </ul>
+</div>
 
-        <div class="video span-6">
-          <iframe src="https://www.youtube.com/embed/xyd5NrXD_1A"
-                  title="NASA Climate Change Evidence"
-                  allowfullscreen></iframe>
-          <div class="vcap">
-            <b>Climate Change Evidence (NASA)</b><br>
-            Examples of measurable observations used in climate science.
-          </div>
-        </div>
+<div class="section">
+  <h2>Video Resources</h2>
+  <div class="grid">
 
-        <div class="video span-6">
-          <iframe src="https://www.youtube.com/embed/XuuRH4WJmN0"
-                  title="Climate Sensitivity and Uncertainty"
-                  allowfullscreen></iframe>
-          <div class="vcap">
-            <b>Climate Sensitivity & Uncertainty</b><br>
-            How uncertainty is quantified and how models are stress‑tested.
-          </div>
-        </div>
-
+    <div class="video span-6">
+      <iframe src="https://www.youtube.com/embed/hKXhUZA3Du4" allowfullscreen></iframe>
+      <div class="vcap">
+        <strong>Karl Popper & Falsification</strong><br>
+        What falsifiability means and why it defines science.
       </div>
-    </section>
+    </div>
+
+    <div class="video span-6">
+      <iframe src="https://www.youtube.com/embed/-X8Xfl0JdTQ" allowfullscreen></iframe>
+      <div class="vcap">
+        <strong>Science vs Pseudoscience</strong><br>
+        Demarcation and scientific standards.
+      </div>
+    </div>
+
+    <div class="video span-6">
+      <iframe src="https://www.youtube.com/embed/xyd5NrXD_1A" allowfullscreen></iframe>
+      <div class="vcap">
+        <strong>Climate Change Evidence (NASA)</strong><br>
+        Measurable observations used in climate science.
+      </div>
+    </div>
+
+    <div class="video span-6">
+      <iframe src="https://www.youtube.com/embed/XuuRH4WJmN0" allowfullscreen></iframe>
+      <div class="vcap">
+        <strong>Climate Sensitivity & Uncertainty</strong><br>
+        How uncertainty is quantified and predictions stress‑tested.
+      </div>
+    </div>
 
   </div>
+</div>
+
+</div>
 </body>
 </html>
