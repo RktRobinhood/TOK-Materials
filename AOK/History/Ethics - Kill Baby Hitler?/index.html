@@ -3,122 +3,457 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Watcher Times — Lesson Guide</title>
+  <title>The Watcher Times — Lesson Portal</title>
   <style>
     :root{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --bg:#0b0f14; --card:#0e141b; --ink:#e6edf3; --muted:#9fb0c3; --rule:#243040;
-      --btn:#132030; --btn2:#16263a;
+      --bg0:#070A12;
+      --bg1:#0B1022;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.10);
+      --stroke: rgba(255,255,255,0.10);
+      --stroke2: rgba(255,255,255,0.16);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --shadow: rgba(0,0,0,0.35);
+      --accent: #7C5CFF;
+      --accent2:#33D6FF;
+      --good:#3CE3A3;
+      --warn:#FFD479;
+      --radius: 18px;
+      --radius2: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--sans);
     }
-    body{ margin:0; background:var(--bg); color:var(--ink); }
-    header{ padding:18px 18px 12px; border-bottom:1px solid var(--rule); background:var(--card); }
-    h1{ margin:0; font-size:18px; }
-    .sub{ margin-top:8px; color:var(--muted); font-size:13px; max-width: 980px; line-height:1.35; }
-    main{ max-width: 980px; margin: 0 auto; padding: 16px; display:grid; gap: 12px; }
-    .box{ background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:14px; }
-    h2{ margin:0 0 10px 0; font-size:14px; letter-spacing:.2px; }
-    p, li{ color:var(--muted); font-size:13px; line-height:1.45; }
-    ul{ margin:8px 0 0 18px; }
-    code{ background:#0b0f14; border:1px solid var(--rule); padding:1px 6px; border-radius:8px; color:var(--ink); }
-    .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px; }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,0.22), transparent 55%),
+        radial-gradient(900px 500px at 80% 20%, rgba(51,214,255,0.16), transparent 55%),
+        radial-gradient(1000px 600px at 60% 110%, rgba(60,227,163,0.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+      padding: 26px 16px 40px;
+    }
+
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .brand{
+      display:flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,0.25), transparent 60%),
+        linear-gradient(135deg, rgba(124,92,255,0.95), rgba(51,214,255,0.85));
+      box-shadow: 0 12px 30px var(--shadow);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    h1{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+
+    .subtitle{
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      max-width: 62ch;
+    }
+
+    .badgeRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .badge{
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(51,214,255,0.18);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius2);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.25);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+    .cardHeader{
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cardHeader h2{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+    }
+    .cardHeader .small{
+      color: var(--muted2);
+      font-size: 12px;
+      line-height: 1.4;
+      max-width: 62ch;
+    }
+    .cardBody{ padding: 14px 16px 16px; }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
     a.btn, button.btn{
-      appearance:none; border:1px solid #33465f; background:var(--btn); color:var(--ink);
-      padding:10px 12px; border-radius:12px; cursor:pointer; font-size:13px; text-decoration:none; display:inline-block;
+      appearance:none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-size: 13px;
+      text-decoration:none;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      transition: transform .06s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
     }
-    a.btn:hover, button.btn:hover{ background:var(--btn2); }
-    .hint{ color:var(--muted); font-size:12px; margin-top:8px; }
-    .warn{ color:#ffd18a; font-size:12px; margin-top:8px; }
+    a.btn:hover, button.btn:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.20);
+    }
+    a.btn:active, button.btn:active{ transform: translateY(1px); }
+
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(124,92,255,0.9), rgba(51,214,255,0.75));
+      border-color: rgba(255,255,255,0.20);
+      box-shadow: 0 16px 34px rgba(124,92,255,0.18);
+    }
+    .btnPrimary:hover{ filter: brightness(1.03); }
+
+    .icon{
+      width: 18px; height: 18px; display:inline-block;
+    }
+
+    .callout{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .callout strong{ color: rgba(255,255,255,0.90); }
+
+    .steps{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .step{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 12px 12px;
+    }
+    .stepTop{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .stepTitle{
+      font-weight: 700;
+      letter-spacing: 0.1px;
+      font-size: 13px;
+    }
+    .chip{
+      font-size: 12px;
+      color: var(--muted2);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--mono);
+    }
+    .step p{ margin:0; color: var(--muted); font-size: 13px; }
+
     textarea{
-      width:100%; box-sizing:border-box; border:1px solid var(--rule); background:#0b0f14; color:var(--ink);
-      padding:10px 12px; border-radius:12px; min-height: 140px; font-size:12px; line-height:1.4;
+      width:100%;
+      min-height: 120px;
+      resize: vertical;
+      background: rgba(0,0,0,0.30);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      color: rgba(255,255,255,0.90);
+      padding: 12px 12px;
+      font-size: 12px;
+      line-height: 1.45;
+      font-family: var(--mono);
+      outline:none;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .list{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 10px;
+    }
+    .li{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .li b{ color: rgba(255,255,255,0.90); }
+
+    .footer{
+      margin-top: 14px;
+      color: var(--muted2);
+      font-size: 12px;
+      text-align:center;
+    }
+    .toast{
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10,14,24,0.88);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      display:none;
+      gap: 10px;
+      align-items:center;
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+    }
+    .toast .check{
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(60,227,163,0.18);
+      border: 1px solid rgba(60,227,163,0.35);
+      display:grid; place-items:center;
+      color: var(--good);
+      font-weight: 800;
+      font-family: var(--mono);
     }
   </style>
 </head>
 <body>
-<header>
-  <h1>The Watcher Times — Lesson Guide</h1>
-  <div class="sub">
-    A TOK-style historical simulation about ethical decision-making and causality. Students play “The Watcher” and confront
-    the classic counterfactual: would you prevent a future mass-harm catalyst in infancy? The engine tracks structural pressures
-    (zeitgeist) and individual agency (Great Person) through a branching timeline toward 2025.
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>The Watcher Times</h1>
+          <div class="subtitle">
+            A short TOK-style simulation about ethics + causality. You’ll test whether history is shaped by individuals (Great Person)
+            or by structural forces (zeitgeist), then defend your choices.
+          </div>
+          <div class="badgeRow">
+            <div class="badge"><span class="dot"></span>Student-facing portal</div>
+            <div class="badge">Format: <span style="font-family:var(--mono); color:var(--text)">Choice X — Frame — Justification</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: Student view -->
+      <section class="card">
+        <div class="cardHeader">
+          <div>
+            <h2>How to play (students)</h2>
+            <div class="small">You’ll receive a news-style “turn”. Pick a numbered choice and justify it using one ethical frame.</div>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="callout">
+            <div style="min-width:10px; height:10px; border-radius:50%; background:rgba(255,212,121,0.25); border:1px solid rgba(255,212,121,0.35); margin-top:4px;"></div>
+            <div>
+              <strong>Ethical frames</strong> (choose one each turn):
+              Consequentialist • Deontological • Non-interventionist • Tragic responsibility
+            </div>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepTitle">1) Read the turn</div>
+                <div class="chip">Newswire + Dilemmas</div>
+              </div>
+              <p>Skim the forecast and identify what pressures are rising (war, economy, ideology, institutions, resources, tech).</p>
+            </div>
+
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepTitle">2) Choose an option</div>
+                <div class="chip">Choice 1–5</div>
+              </div>
+              <p>Pick the numbered decision that fits your ethical frame and risk tolerance.</p>
+            </div>
+
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepTitle">3) Justify in one sentence</div>
+                <div class="chip">Required</div>
+              </div>
+              <p>Explain why you chose it. Then watch consequences and “entropy” realignment across turns.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <div style="color:var(--muted2); font-size:12px; margin-bottom:8px;">Paste this format into the chat:</div>
+            <textarea readonly>Choice 2 — Consequentialist — I accept limited near-term harms to reduce the probability of larger catastrophe later.</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Teacher setup + prompt controls -->
+      <section class="card">
+        <div class="cardHeader">
+          <div>
+            <h2>Get the master prompt</h2>
+            <div class="small">Use the buttons below. The prompt file must be in the same folder as this page.</div>
+          </div>
+        </div>
+        <div class="cardBody">
+          <div class="actions">
+            <a class="btn btnPrimary" href="./the-watcher-times-llm-prompt.md" download>
+              <span class="icon" aria-hidden="true">⬇️</span>
+              Download prompt (.md)
+            </a>
+            <button class="btn" id="copyBtn">
+              <span class="icon" aria-hidden="true">📋</span>
+              Copy prompt
+            </button>
+          </div>
+
+          <div style="margin-top:12px;">
+            <ul class="list">
+              <li class="li"><b>Teacher setup:</b> Start a new chat → paste the master prompt as the first message → students play in pairs.</li>
+              <li class="li"><b>Assessment idea:</b> require a one-paragraph reflection on Great Person vs zeitgeist after the end state.</li>
+              <li class="li"><b>Debrief:</b> “Did preventing one person change outcomes, or did pressures reproduce a similar disaster elsewhere?”</li>
+            </ul>
+          </div>
+
+          <div class="footer">If download/copy fails, confirm the file name is exactly <span style="font-family:var(--mono); color:var(--text)">the-watcher-times-llm-prompt.md</span>.</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer" style="margin-top:18px;">
+      Built for classroom use • Keep discussion analytical and ethical • Focus on causality, responsibility, and unintended consequences
+    </div>
   </div>
-</header>
 
-<main>
-  <section class="box">
-    <h2>Learning goals</h2>
-    <ul>
-      <li>Compare <b>Great Person</b> explanations of history with <b>structural/zeitgeist</b> explanations.</li>
-      <li>Evaluate ethical reasoning frameworks under uncertainty (tradeoffs, unintended consequences).</li>
-      <li>Reflect on responsibility for action vs inaction in morally loaded counterfactuals.</li>
-    </ul>
-  </section>
-
-  <section class="box">
-    <h2>Teacher setup (5 minutes)</h2>
-    <ul>
-      <li>Open a new ChatGPT chat (or your preferred LLM chat).</li>
-      <li>Download or copy the master prompt below and paste it as the <b>first</b> message.</li>
-      <li>Tell students: “Follow the format: <code>Choice X — Ethical frame — one-sentence justification</code>.”</li>
-      <li>Optional: run in pairs (one chooses, one justifies), then swap roles.</li>
-    </ul>
-
-    <div class="row">
-      <!-- Download link works if the file is in the same folder -->
-      <a class="btn" href="./the-watcher-times-llm-prompt.md" download>Download the Master Prompt (.md)</a>
-      <button class="btn" id="copyBtn">Copy Prompt to Clipboard</button>
-    </div>
-
-    <div class="hint">
-      If the download button 404s, confirm the filename in your repo is exactly:
-      <code>the-watcher-times-llm-prompt.md</code>
-    </div>
-  </section>
-
-  <section class="box">
-    <h2>Student instructions (in class)</h2>
-    <p><b>Core loop</b>: Read the “Newswire” → pick a numbered choice → justify with one ethical frame.</p>
-    <ul>
-      <li><b>Consequentialist</b>: minimize total harm.</li>
-      <li><b>Deontological</b>: some actions are wrong regardless of outcomes.</li>
-      <li><b>Non-interventionist</b>: you lack legitimacy to rewrite lives.</li>
-      <li><b>Tragic responsibility</b>: no clean hands; choose the least-worst.</li>
-    </ul>
-    <p>Response format:</p>
-    <textarea readonly>Choice 2 — Consequentialist — I accept limited near-term harms to reduce the probability of large-scale catastrophe later.</textarea>
-  </section>
-
-  <section class="box">
-    <h2>Debrief questions (10–15 minutes)</h2>
-    <ul>
-      <li>Which outcomes seemed driven by individuals vs structural pressures? Why?</li>
-      <li>Did “entropy” (history realigning) change how you judged interventions?</li>
-      <li>Did your ethical framework stay consistent? If it shifted, what justified the shift?</li>
-      <li>What counts as “making things worse” in a world of tradeoffs?</li>
-    </ul>
-    <div class="warn">
-      Classroom note: keep discussion analytical and ethical; avoid sensational details. The point is reasoning about causality and responsibility.
-    </div>
-  </section>
-</main>
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="check">✓</div>
+    <div id="toastText">Copied to clipboard</div>
+  </div>
 
 <script>
   const PROMPT_PATH = "./the-watcher-times-llm-prompt.md";
 
-  async function copyPrompt() {
+  const toast = document.getElementById("toast");
+  const toastText = document.getElementById("toastText");
+
+  function showToast(msg){
+    toastText.textContent = msg;
+    toast.style.display = "inline-flex";
+    clearTimeout(window.__toastT);
+    window.__toastT = setTimeout(() => toast.style.display = "none", 1400);
+  }
+
+  async function copyPrompt(){
     const btn = document.getElementById("copyBtn");
-    btn.textContent = "Copying…";
-    try {
-      const r = await fetch(PROMPT_PATH, { cache: "no-store" });
-      if (!r.ok) throw new Error("Could not load prompt file. Check filename/path.");
+    const old = btn.innerHTML;
+    btn.innerHTML = `<span class="icon" aria-hidden="true">⏳</span> Copying…`;
+    try{
+      const r = await fetch(PROMPT_PATH, { cache:"no-store" });
+      if (!r.ok) throw new Error("Could not load the prompt file. Check filename/path.");
       const text = await r.text();
       await navigator.clipboard.writeText(text);
-      btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = "Copy Prompt to Clipboard"), 1200);
-    } catch (e) {
-      btn.textContent = "Copy failed";
-      alert(String(e));
-      setTimeout(() => (btn.textContent = "Copy Prompt to Clipboard"), 1200);
+      btn.innerHTML = `<span class="icon" aria-hidden="true">✅</span> Copied`;
+      showToast("Prompt copied to clipboard");
+      setTimeout(() => btn.innerHTML = old, 900);
+    }catch(e){
+      btn.innerHTML = `<span class="icon" aria-hidden="true">⚠️</span> Copy failed`;
+      showToast(String(e));
+      setTimeout(() => btn.innerHTML = old, 1400);
     }
   }
 
