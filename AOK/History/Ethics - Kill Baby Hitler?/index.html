@@ -3,683 +3,126 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Watcher Times — Entropy of History</title>
+  <title>The Watcher Times — Lesson Guide</title>
   <style>
     :root{
-      --paper:#f4f1e8;
-      --paper2:#efe9da;
-      --ink:#141414;
-      --muted:#3c3c3c;
-      --rule:#c8c0ae;
-      --accent:#7a1f1f;
-      --blue:#1f4b7a;
-      --shadow: rgba(0,0,0,.45);
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --bg:#0b0f14; --card:#0e141b; --ink:#e6edf3; --muted:#9fb0c3; --rule:#243040;
+      --btn:#132030; --btn2:#16263a;
     }
-    body{
-      margin:0;
-      background:
-        radial-gradient(900px 320px at 20% 20%, rgba(255,255,255,.06), transparent 60%),
-        radial-gradient(900px 320px at 80% 20%, rgba(255,255,255,.05), transparent 60%),
-        #0b0f14;
-      padding: 18px 12px;
+    body{ margin:0; background:var(--bg); color:var(--ink); }
+    header{ padding:18px 18px 12px; border-bottom:1px solid var(--rule); background:var(--card); }
+    h1{ margin:0; font-size:18px; }
+    .sub{ margin-top:8px; color:var(--muted); font-size:13px; max-width: 980px; line-height:1.35; }
+    main{ max-width: 980px; margin: 0 auto; padding: 16px; display:grid; gap: 12px; }
+    .box{ background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:14px; }
+    h2{ margin:0 0 10px 0; font-size:14px; letter-spacing:.2px; }
+    p, li{ color:var(--muted); font-size:13px; line-height:1.45; }
+    ul{ margin:8px 0 0 18px; }
+    code{ background:#0b0f14; border:1px solid var(--rule); padding:1px 6px; border-radius:8px; color:var(--ink); }
+    .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px; }
+    a.btn, button.btn{
+      appearance:none; border:1px solid #33465f; background:var(--btn); color:var(--ink);
+      padding:10px 12px; border-radius:12px; cursor:pointer; font-size:13px; text-decoration:none; display:inline-block;
     }
-    .sheet{
-      max-width: 1240px;
-      margin: 0 auto;
-      background: var(--paper);
-      color: var(--ink);
-      border-radius: 14px;
-      overflow:hidden;
-      box-shadow: 0 24px 70px var(--shadow);
-      border: 1px solid rgba(0,0,0,.25);
+    a.btn:hover, button.btn:hover{ background:var(--btn2); }
+    .hint{ color:var(--muted); font-size:12px; margin-top:8px; }
+    .warn{ color:#ffd18a; font-size:12px; margin-top:8px; }
+    textarea{
+      width:100%; box-sizing:border-box; border:1px solid var(--rule); background:#0b0f14; color:var(--ink);
+      padding:10px 12px; border-radius:12px; min-height: 140px; font-size:12px; line-height:1.4;
     }
-
-    header{
-      background:
-        radial-gradient(700px 260px at 30% 10%, rgba(0,0,0,.04), transparent 60%),
-        radial-gradient(700px 260px at 70% 0%, rgba(0,0,0,.03), transparent 60%),
-        linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,0)),
-        var(--paper);
-      padding: 18px 22px 10px 22px;
-      border-bottom: 2px solid var(--ink);
-    }
-    .mast{
-      display:flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .mast h1{
-      margin:0;
-      font-size: 40px;
-      letter-spacing: 1px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-    .tagline{
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .3px;
-      max-width: 560px;
-      line-height: 1.35;
-    }
-    .issuebar{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--rule);
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .pill{
-      border: 1px solid var(--rule);
-      background: var(--paper2);
-      padding: 3px 10px;
-      border-radius: 999px;
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-    }
-    .stamp{
-      border: 1px solid rgba(31,75,122,.6);
-      color: var(--blue);
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-variant: small-caps;
-      letter-spacing: .6px;
-      background: rgba(31,75,122,.06);
-    }
-
-    main{
-      display:grid;
-      grid-template-columns: 390px 1fr;
-      gap: 14px;
-      padding: 14px;
-      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.02));
-    }
-    @media (max-width: 1000px){
-      main{ grid-template-columns: 1fr; }
-    }
-
-    .panel{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.35);
-      border-radius: 12px;
-      overflow:hidden;
-    }
-    .panel h2{
-      margin:0;
-      padding: 10px 12px 8px 12px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      border-bottom: 1px solid var(--rule);
-      background: rgba(0,0,0,.03);
-    }
-    .panel .content{
-      padding: 10px 12px 12px 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .box{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.5);
-      border-radius: 12px;
-      padding: 10px;
-    }
-    .box .k{
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      color: var(--muted);
-    }
-    .box .v{
-      margin-top: 6px;
-      font-size: 18px;
-      color: var(--ink);
-      font-weight: 700;
-    }
-    .hr{ height:1px; background: var(--rule); margin: 10px 0; }
-
-    .buttons{
-      display:grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    button{
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-      border: 1px solid var(--ink);
-      background: var(--paper2);
-      color: var(--ink);
-      padding: 12px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align:left;
-    }
-    button:hover{ filter: brightness(0.98); }
-    button:disabled{ opacity:.55; cursor:not-allowed; }
-    .choiceTitle{ font-weight: 800; }
-    .choiceMeta{ font-size: 12px; color: var(--muted); margin-top: 4px; }
-
-    .news{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.4);
-      border-radius: 12px;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      min-height: 78vh;
-    }
-    .newsHead{
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--rule);
-      background: rgba(0,0,0,.03);
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .newsHead .left{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .newsHead .right{
-      display:flex; gap:8px; flex-wrap:wrap;
-    }
-    .smallbtn{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.6);
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      cursor:pointer;
-      color: var(--muted);
-    }
-    .smallbtn:hover{ filter: brightness(.98); }
-
-    .feed{
-      padding: 12px;
-      overflow:auto;
-      flex:1;
-    }
-    .clip{
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,.65);
-      border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-    }
-    .clip .meta{
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      color: var(--muted);
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-bottom: 6px;
-    }
-    .clip .meta .label{
-      border: 1px solid var(--rule);
-      background: rgba(0,0,0,.02);
-      padding: 2px 8px;
-      border-radius: 999px;
-    }
-    .clip .text{
-      white-space: pre-wrap;
-      color: var(--ink);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.62);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-    }
-    .modal{
-      max-width: 720px;
-      width: 100%;
-      background: var(--paper);
-      border: 2px solid var(--ink);
-      border-radius: 14px;
-      padding: 16px 18px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
-    }
-    .modal h3{
-      margin: 0 0 6px 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 18px;
-    }
-    .modal p{
-      margin: 0 0 12px 0;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-    .modal .actions{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      margin-top: 10px;
-    }
-    .hint{
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-    code{ background: rgba(0,0,0,.04); padding: 1px 6px; border-radius: 8px; border:1px solid var(--rule); }
   </style>
 </head>
 <body>
-  <div class="sheet">
-    <header>
-      <div class="mast">
-        <div>
-          <h1>The Watcher Times</h1>
-          <div class="tagline">
-            A counterfactual newspaper: interventions change trajectories, but entropy pushes history back toward catastrophe unless structures change.
-          </div>
-        </div>
-        <div class="tagline" style="text-align:right;">
-          Classroom focus: ethical reasoning + causality.<br/>
-          Win: reach 2025 without making outcomes worse overall.
-        </div>
-      </div>
-      <div class="issuebar">
-        <span class="pill" id="issueLine">Dateline: — • Turn: —</span>
-        <span class="stamp" id="statusStamp">Status: READY</span>
-        <span class="pill">Lose: Exposure ≥ 10 / Anchors ≤ 0 / Integrity ≤ 0</span>
-      </div>
-    </header>
-
-    <main>
-      <section class="panel">
-        <h2>Indicators</h2>
-        <div class="content">
-          <div class="grid" id="dash"></div>
-          <div class="hr"></div>
-          <div>
-            <b>Play loop:</b> Read the lead story → pick a decision → justify with one frame.
-            <div class="hint">
-              Frames: consequentialist / deontological / non-interventionist / tragic responsibility
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>Editorial Decisions</h2>
-        <div class="content">
-          <div id="promptline" class="muted">Press <b>Start Issue #1</b> to begin at the fixed starting point (1889).</div>
-
-          <div class="buttons" id="choices"></div>
-
-          <div class="hr"></div>
-
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="startBtn"><div class="choiceTitle">Start Issue #1</div><div class="choiceMeta">Teacher code required (defaults to TOK).</div></button>
-            <button id="exportBtn"><div class="choiceTitle">Export Archive</div><div class="choiceMeta">Download transcript + state as JSON.</div></button>
-          </div>
-
-          <div class="hint">
-            Teacher code is verified server-side by Cloudflare Worker (<code>CLASS_CODE</code>).
-          </div>
-        </div>
-      </section>
-
-      <section class="news" style="grid-column: 2;">
-        <div class="newsHead">
-          <div class="left">
-            <span class="pill" id="datelinePill">Dateline: —</span>
-            <span class="pill" id="turnPill">Turn: —</span>
-            <span class="pill" id="integrityPill">Integrity: —</span>
-            <span class="pill" id="anchorsPill">Anchors: —</span>
-            <span class="pill" id="exposurePill">Exposure: —</span>
-          </div>
-          <div class="right">
-            <button class="smallbtn" id="clearBtn">Clear Feed</button>
-          </div>
-        </div>
-        <div class="feed" id="feed"></div>
-      </section>
-    </main>
+<header>
+  <h1>The Watcher Times — Lesson Guide</h1>
+  <div class="sub">
+    A TOK-style historical simulation about ethical decision-making and causality. Students play “The Watcher” and confront
+    the classic counterfactual: would you prevent a future mass-harm catalyst in infancy? The engine tracks structural pressures
+    (zeitgeist) and individual agency (Great Person) through a branching timeline toward 2025.
   </div>
+</header>
 
-  <div class="overlay" id="overlay">
-    <div class="modal">
-      <h3 id="endTitle">Outcome</h3>
-      <p id="endBody"></p>
-      <div class="actions">
-        <button id="closeEnd">Close</button>
-        <button id="restartEnd">Start New Run</button>
-      </div>
+<main>
+  <section class="box">
+    <h2>Learning goals</h2>
+    <ul>
+      <li>Compare <b>Great Person</b> explanations of history with <b>structural/zeitgeist</b> explanations.</li>
+      <li>Evaluate ethical reasoning frameworks under uncertainty (tradeoffs, unintended consequences).</li>
+      <li>Reflect on responsibility for action vs inaction in morally loaded counterfactuals.</li>
+    </ul>
+  </section>
+
+  <section class="box">
+    <h2>Teacher setup (5 minutes)</h2>
+    <ul>
+      <li>Open a new ChatGPT chat (or your preferred LLM chat).</li>
+      <li>Download or copy the master prompt below and paste it as the <b>first</b> message.</li>
+      <li>Tell students: “Follow the format: <code>Choice X — Ethical frame — one-sentence justification</code>.”</li>
+      <li>Optional: run in pairs (one chooses, one justifies), then swap roles.</li>
+    </ul>
+
+    <div class="row">
+      <!-- Download link works if the file is in the same folder -->
+      <a class="btn" href="./the-watcher-times-llm-prompt.md" download>Download the Master Prompt (.md)</a>
+      <button class="btn" id="copyBtn">Copy Prompt to Clipboard</button>
     </div>
-  </div>
+
+    <div class="hint">
+      If the download button 404s, confirm the filename in your repo is exactly:
+      <code>the-watcher-times-llm-prompt.md</code>
+    </div>
+  </section>
+
+  <section class="box">
+    <h2>Student instructions (in class)</h2>
+    <p><b>Core loop</b>: Read the “Newswire” → pick a numbered choice → justify with one ethical frame.</p>
+    <ul>
+      <li><b>Consequentialist</b>: minimize total harm.</li>
+      <li><b>Deontological</b>: some actions are wrong regardless of outcomes.</li>
+      <li><b>Non-interventionist</b>: you lack legitimacy to rewrite lives.</li>
+      <li><b>Tragic responsibility</b>: no clean hands; choose the least-worst.</li>
+    </ul>
+    <p>Response format:</p>
+    <textarea readonly>Choice 2 — Consequentialist — I accept limited near-term harms to reduce the probability of large-scale catastrophe later.</textarea>
+  </section>
+
+  <section class="box">
+    <h2>Debrief questions (10–15 minutes)</h2>
+    <ul>
+      <li>Which outcomes seemed driven by individuals vs structural pressures? Why?</li>
+      <li>Did “entropy” (history realigning) change how you judged interventions?</li>
+      <li>Did your ethical framework stay consistent? If it shifted, what justified the shift?</li>
+      <li>What counts as “making things worse” in a world of tradeoffs?</li>
+    </ul>
+    <div class="warn">
+      Classroom note: keep discussion analytical and ethical; avoid sensational details. The point is reasoning about causality and responsibility.
+    </div>
+  </section>
+</main>
 
 <script>
-  // ==== CONFIG (locked) ====
-  const WORKER_URL = "https://jolly-morning-e8c4.matt-pilley.workers.dev";
+  const PROMPT_PATH = "./the-watcher-times-llm-prompt.md";
 
-  // IMPORTANT:
-  // Your Worker has CLASS_CODE = TOK, so we must send X-CLASS-CODE: TOK.
-  // We'll prompt the teacher once; default is TOK. Students never need to see this.
-  let TEACHER_CODE = "";
-
-  // ==== ENGINE SPEC ====
-  const MASTER_SPEC = `
-You are the game engine for a stateful interactive narrative: THE WATCHER — ENTROPY OF HISTORY.
-
-Pedagogical preamble (must appear at the start, before Turn 1):
-Explain:
-1) Great Person theory
-2) Zeitgeist/structural view (pressures)
-Then introduce the counterfactual ethics dilemma about preventing future mass harm in infancy (no sensational detail).
-
-Tone: declassified memos + newsroom briefs. Sober. Avoid graphic detail.
-
-State emitted every turn in <STATE_JSON>:
-year (1889), turn (1)
-global pressures 0-10: militarisation, economicFragility, ideologicalHeat, institutionalLegitimacy, resourceStress, techAcceleration (start 3)
-watcher: anchors(5), exposure(0..10), moralDebt(0..10), integrity(0..10 start 5)
-agendas: [{name, momentum 0-3}]
-choices: [{id,label,risk,expected_effect}]
-
-Rules: Entropy nudges the two highest pressures +1 each turn unless reduced by interventions.
-Use probability language; do not reveal thresholds.
-
-Each turn:
-YEAR+TURN, pressures, watcher, agendas, FORECAST, NEWSWIRE (headline+brief), DILEMMAS (1–2), CHOICES (3–5 numbered).
-Choices must include: Do Nothing, Soft, Structural, Direct (tradeoffs only).
-
-Infant-catalyst node (turn 1–2): observe, divert, permanent removal (high moral+exposure), systemic reform.
-If removed/diverted: do NOT auto-solve; entropy spawns alternate catalysts if pressures remain.
-
-Endgame:
-Win: reach 2025 without making outcomes worse overall, integrity>=3, anchors>=1.
-Lose: exposure>=10 OR anchors<=0 OR integrity<=0.
-Partial: peace but moralDebt>=8.
-
-Output must end with <STATE_JSON>...</STATE_JSON>.
-`;
-
-  // ==== UI / STATE ====
-  let state = null;
-  let transcript = [];
-  let lastChoices = [];
-
-  const feed = document.getElementById("feed");
-  const choicesEl = document.getElementById("choices");
-  const dashEl = document.getElementById("dash");
-
-  const issueLine = document.getElementById("issueLine");
-  const statusStamp = document.getElementById("statusStamp");
-  const datelinePill = document.getElementById("datelinePill");
-  const turnPill = document.getElementById("turnPill");
-  const integrityPill = document.getElementById("integrityPill");
-  const anchorsPill = document.getElementById("anchorsPill");
-  const exposurePill = document.getElementById("exposurePill");
-
-  const overlay = document.getElementById("overlay");
-  const endTitle = document.getElementById("endTitle");
-  const endBody = document.getElementById("endBody");
-
-  function clip(tag, text) {
-    const div = document.createElement("div");
-    div.className = "clip";
-    const meta = document.createElement("div");
-    meta.className = "meta";
-    meta.innerHTML = `<span class="label">${tag}</span><span>${new Date().toLocaleString()}</span>`;
-    const body = document.createElement("div");
-    body.className = "text";
-    body.textContent = text;
-    div.appendChild(meta);
-    div.appendChild(body);
-    feed.appendChild(div);
-    feed.scrollTop = feed.scrollHeight;
-    transcript.push({ tag, text, ts: new Date().toISOString() });
-  }
-
-  function renderDash(s){
-    const items = [
-      ["Dateline", s?.year ?? "—"],
-      ["Turn", s?.turn ?? "—"],
-      ["War & Security", s?.militarisation ?? "—"],
-      ["Markets", s?.economicFragility ?? "—"],
-      ["Ideas", s?.ideologicalHeat ?? "—"],
-      ["Institutions", s?.institutionalLegitimacy ?? "—"],
-      ["Resources", s?.resourceStress ?? "—"],
-      ["Technology", s?.techAcceleration ?? "—"],
-      ["Anchors", s?.anchors ?? "—"],
-      ["Exposure", s?.exposure ?? "—"],
-      ["Moral Debt", s?.moralDebt ?? "—"],
-      ["Integrity", s?.integrity ?? "—"],
-    ];
-    dashEl.innerHTML = "";
-    for (const [k,v] of items){
-      const b = document.createElement("div");
-      b.className = "box";
-      b.innerHTML = `<div class="k">${k}</div><div class="v">${v}</div>`;
-      dashEl.appendChild(b);
-    }
-
-    issueLine.textContent = `Dateline: ${s?.year ?? "—"} • Turn: ${s?.turn ?? "—"}`;
-    datelinePill.textContent = `Dateline: ${s?.year ?? "—"}`;
-    turnPill.textContent = `Turn: ${s?.turn ?? "—"}`;
-    integrityPill.textContent = `Integrity: ${s?.integrity ?? "—"}`;
-    anchorsPill.textContent = `Anchors: ${s?.anchors ?? "—"}`;
-    exposurePill.textContent = `Exposure: ${s?.exposure ?? "—"}`;
-  }
-
-  function renderChoices(choices){
-    lastChoices = Array.isArray(choices) ? choices : [];
-    choicesEl.innerHTML = "";
-    for (const ch of lastChoices){
-      const btn = document.createElement("button");
-      btn.innerHTML = `<div class="choiceTitle">${ch.id}. ${ch.label}</div>
-                       <div class="choiceMeta">Risk: ${ch.risk} • Expected: ${ch.expected_effect}</div>`;
-      btn.onclick = () => submitChoice(ch.id);
-      choicesEl.appendChild(btn);
-    }
-    if (lastChoices.length === 0){
-      const b = document.createElement("div");
-      b.className = "hint";
-      b.textContent = "Awaiting the first issue…";
-      choicesEl.appendChild(b);
+  async function copyPrompt() {
+    const btn = document.getElementById("copyBtn");
+    btn.textContent = "Copying…";
+    try {
+      const r = await fetch(PROMPT_PATH, { cache: "no-store" });
+      if (!r.ok) throw new Error("Could not load prompt file. Check filename/path.");
+      const text = await r.text();
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = "Copy Prompt to Clipboard"), 1200);
+    } catch (e) {
+      btn.textContent = "Copy failed";
+      alert(String(e));
+      setTimeout(() => (btn.textContent = "Copy Prompt to Clipboard"), 1200);
     }
   }
 
-  function extractState(text){
-    const m = text.match(/<STATE_JSON>\s*([\s\S]*?)\s*<\/STATE_JSON>/);
-    if (!m) return null;
-    try { return JSON.parse(m[1]); } catch { return null; }
-  }
-  function stripState(text){
-    return text.replace(/<STATE_JSON>[\s\S]*<\/STATE_JSON>/, "").trim();
-  }
-
-  async function callWorker(payload){
-    const headers = { "Content-Type": "application/json" };
-    if (TEACHER_CODE) headers["X-CLASS-CODE"] = TEACHER_CODE;
-
-    const r = await fetch(WORKER_URL, {
-      method:"POST",
-      headers,
-      body: JSON.stringify(payload)
-    });
-
-    const t = await r.text();
-    if (!r.ok) throw new Error(t || `HTTP ${r.status}`);
-    return JSON.parse(t);
-  }
-
-  function disableAll(disabled){
-    for (const el of document.querySelectorAll("button")) el.disabled = disabled;
-  }
-
-  function checkEndgame(s){
-    if (!s) return null;
-    if (s.exposure >= 10) return { title:"ERASURE (LOSS)", body:"Paradox exposure reached the limit. The timeline rejects you." };
-    if (s.anchors <= 0) return { title:"DISLOCATION (LOSS)", body:"You lost your anchors in time. You can no longer remain coherent." };
-    if (s.integrity <= 0) return { title:"ETHICAL FAILURE (LOSS)", body:"Your reasoning collapsed into contradiction or nihilism." };
-    if (s.year >= 2025 && s.integrity >= 3 && s.anchors >= 1) return { title:"PRESENT REACHED (WIN)", body:"You reached the present without making outcomes worse overall. Debrief the moral tradeoffs in class." };
-    return null;
-  }
-
-  function showEnd(outcome){
-    endTitle.textContent = outcome.title;
-    endBody.textContent = outcome.body;
-    overlay.style.display = "flex";
-    statusStamp.textContent = `Status: ${outcome.title}`;
-    statusStamp.style.borderColor = "rgba(122,31,31,.7)";
-    statusStamp.style.color = "#7a1f1f";
-  }
-
-  async function runTurn(player){
-    const compact = {
-      state,
-      lastTurns: transcript.slice(-6),
-      player
-    };
-
-    const payload = {
-      model: "gpt-4.1-mini",
-      input: [
-        { role: "system", content: MASTER_SPEC },
-        { role: "user", content: JSON.stringify(compact) }
-      ],
-      max_output_tokens: 900
-    };
-
-    disableAll(true);
-    statusStamp.textContent = "Status: PUBLISHING…";
-    clip("SYSTEM", "Publishing… contacting the archive.");
-    try{
-      const resp = await callWorker(payload);
-      const text = (resp.output_text || "").trim();
-      clip("ISSUE", stripState(text));
-
-      const newState = extractState(text);
-      if (newState){
-        state = newState;
-        renderDash(state);
-        renderChoices(state.choices || []);
-        const outcome = checkEndgame(state);
-        if (outcome) showEnd(outcome);
-        statusStamp.textContent = "Status: RUNNING";
-        statusStamp.style.borderColor = "rgba(31,75,122,.6)";
-        statusStamp.style.color = "#1f4b7a";
-      } else {
-        clip("ERROR", "Could not parse <STATE_JSON>. The engine must output it exactly.");
-        statusStamp.textContent = "Status: ERROR";
-      }
-    } catch(e){
-      clip("ERROR", String(e));
-      statusStamp.textContent = "Status: ERROR";
-    } finally {
-      disableAll(false);
-    }
-  }
-
-  async function submitChoice(id){
-    clip("YOU", `Choice ${id}`);
-    await runTurn({ choiceId: id });
-  }
-
-  function resetRun(){
-    overlay.style.display = "none";
-    statusStamp.textContent = "Status: RUNNING";
-    statusStamp.style.borderColor = "rgba(31,75,122,.6)";
-    statusStamp.style.color = "#1f4b7a";
-
-    transcript = [];
-    feed.innerHTML = "";
-
-    state = {
-      year: 1889,
-      turn: 1,
-      militarisation: 3,
-      economicFragility: 3,
-      ideologicalHeat: 3,
-      institutionalLegitimacy: 3,
-      resourceStress: 3,
-      techAcceleration: 3,
-      anchors: 5,
-      exposure: 0,
-      moralDebt: 0,
-      integrity: 5,
-      agendas: [
-        { name:"Imperial Competition", momentum: 1 },
-        { name:"Arms Race Spiral", momentum: 1 },
-        { name:"Revolutionary Wave", momentum: 0 },
-        { name:"Resource Competition", momentum: 0 },
-        { name:"Media/Information Incentives", momentum: 0 }
-      ],
-      choices:[]
-    };
-
-    renderDash(state);
-    renderChoices([]);
-
-    clip("SYSTEM",
-`Welcome to THE WATCHER TIMES.
-
-You will receive:
-• A brief preamble (Great Person vs Zeitgeist)
-• The counterfactual ethics dilemma
-Then Issue #1 begins at the fixed starting point (1889).`);
-  }
-
-  async function startNewRun(){
-    // Prompt once per session. Default to TOK (matches your Cloudflare variable exactly).
-    if (!TEACHER_CODE){
-      const entered = prompt("Teacher code (default TOK):", "TOK");
-      TEACHER_CODE = (entered || "").trim();
-    }
-    resetRun();
-    await runTurn({ choiceId:null, note:"Begin. Provide the preamble, then Turn 1 with choices." });
-  }
-
-  function exportRun(){
-    const blob = new Blob([JSON.stringify({ state, transcript }, null, 2)], { type:"application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "watcher-run.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  document.getElementById("startBtn").onclick = startNewRun;
-  document.getElementById("exportBtn").onclick = exportRun;
-  document.getElementById("clearBtn").onclick = () => { feed.innerHTML = ""; };
-
-  document.getElementById("closeEnd").onclick = () => overlay.style.display = "none";
-  document.getElementById("restartEnd").onclick = startNewRun;
-
-  // initial render
-  renderDash(null);
-  renderChoices([]);
+  document.getElementById("copyBtn").addEventListener("click", copyPrompt);
 </script>
 </body>
 </html>
