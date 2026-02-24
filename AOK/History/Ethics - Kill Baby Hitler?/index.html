@@ -13,13 +13,14 @@
       --rule:#c8c0ae;
       --accent:#7a1f1f;
       --blue:#1f4b7a;
+      --shadow: rgba(0,0,0,.45);
       font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
     body{
       margin:0;
       background:
-        radial-gradient(800px 300px at 20% 20%, rgba(255,255,255,.05), transparent 60%),
-        radial-gradient(800px 300px at 80% 20%, rgba(255,255,255,.04), transparent 60%),
+        radial-gradient(900px 320px at 20% 20%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(900px 320px at 80% 20%, rgba(255,255,255,.05), transparent 60%),
         #0b0f14;
       padding: 18px 12px;
     }
@@ -30,9 +31,10 @@
       color: var(--ink);
       border-radius: 14px;
       overflow:hidden;
-      box-shadow: 0 24px 70px rgba(0,0,0,.45);
+      box-shadow: 0 24px 70px var(--shadow);
       border: 1px solid rgba(0,0,0,.25);
     }
+
     header{
       background:
         radial-gradient(700px 260px at 30% 10%, rgba(0,0,0,.04), transparent 60%),
@@ -60,11 +62,12 @@
       font-size: 12px;
       color: var(--muted);
       letter-spacing: .3px;
-      max-width: 520px;
+      max-width: 560px;
+      line-height: 1.35;
     }
     .issuebar{
       display:flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap:wrap;
       align-items:center;
       margin-top: 10px;
@@ -78,6 +81,9 @@
       background: var(--paper2);
       padding: 3px 10px;
       border-radius: 999px;
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
     }
     .stamp{
       border: 1px solid rgba(31,75,122,.6);
@@ -91,7 +97,7 @@
 
     main{
       display:grid;
-      grid-template-columns: 380px 1fr;
+      grid-template-columns: 390px 1fr;
       gap: 14px;
       padding: 14px;
       background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.02));
@@ -121,6 +127,7 @@
       font-size: 13px;
       line-height: 1.35;
     }
+
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -143,9 +150,7 @@
       font-size: 18px;
       color: var(--ink);
       font-weight: 700;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
-    .muted{ color: var(--muted); }
     .hr{ height:1px; background: var(--rule); margin: 10px 0; }
 
     .buttons{
@@ -175,7 +180,7 @@
       overflow:hidden;
       display:flex;
       flex-direction:column;
-      min-height: 76vh;
+      min-height: 78vh;
     }
     .newsHead{
       padding: 10px 12px;
@@ -242,7 +247,6 @@
       line-height: 1.35;
     }
 
-    /* Endgame overlay */
     .overlay{
       position: fixed;
       inset: 0;
@@ -279,6 +283,12 @@
       justify-content:flex-end;
       margin-top: 10px;
     }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    code{ background: rgba(0,0,0,.04); padding: 1px 6px; border-radius: 8px; border:1px solid var(--rule); }
   </style>
 </head>
 <body>
@@ -288,53 +298,56 @@
         <div>
           <h1>The Watcher Times</h1>
           <div class="tagline">
-            A counterfactual newspaper: your interventions move the story, but entropy pushes history back toward catastrophe unless structures change.
+            A counterfactual newspaper: interventions change trajectories, but entropy pushes history back toward catastrophe unless structures change.
           </div>
         </div>
-        <div class="tagline" style="text-align:right; max-width: 520px;">
-          Classroom focus: ethical reasoning + causality. No “correct” choices—only tradeoffs, justification, and consequences.
+        <div class="tagline" style="text-align:right;">
+          Classroom focus: ethical reasoning + causality.<br/>
+          Win: reach 2025 without making outcomes worse overall.
         </div>
       </div>
       <div class="issuebar">
         <span class="pill" id="issueLine">Dateline: — • Turn: —</span>
-        <span class="stamp" id="endStamp">Status: RUNNING</span>
-        <span class="pill">Win: Reach 2025 without making outcomes worse overall.</span>
-        <span class="pill">Lose: Exposure ≥ 10 or Anchors ≤ 0 or Integrity ≤ 0.</span>
+        <span class="stamp" id="statusStamp">Status: READY</span>
+        <span class="pill">Lose: Exposure ≥ 10 / Anchors ≤ 0 / Integrity ≤ 0</span>
       </div>
     </header>
 
     <main>
-      <!-- LEFT: “Side columns” -->
       <section class="panel">
-        <h2>Today’s Indicators</h2>
+        <h2>Indicators</h2>
         <div class="content">
           <div class="grid" id="dash"></div>
           <div class="hr"></div>
-          <div class="muted">
-            <b>How to play:</b> Read the lead story. Pick a numbered decision. Then justify using one ethical frame:
-            consequentialist, deontological, non-interventionist, tragic responsibility.
+          <div>
+            <b>Play loop:</b> Read the lead story → pick a decision → justify with one frame.
+            <div class="hint">
+              Frames: consequentialist / deontological / non-interventionist / tragic responsibility
+            </div>
           </div>
         </div>
       </section>
 
       <section class="panel">
-        <h2>Editorial Desk</h2>
+        <h2>Editorial Decisions</h2>
         <div class="content">
-          <div class="muted" id="promptline">Press “Start New Run” to publish the first issue.</div>
+          <div id="promptline" class="muted">Press <b>Start Issue #1</b> to begin at the fixed starting point (1889).</div>
+
           <div class="buttons" id="choices"></div>
+
           <div class="hr"></div>
-          <div class="muted">
-            Students: reply with “Choice X — Frame — one-sentence justification”.
-            (You may use “Custom Action” only if your teacher allows it.)
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="startBtn"><div class="choiceTitle">Start Issue #1</div><div class="choiceMeta">Teacher code required (defaults to TOK).</div></button>
+            <button id="exportBtn"><div class="choiceTitle">Export Archive</div><div class="choiceMeta">Download transcript + state as JSON.</div></button>
           </div>
-          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="startBtn"><span class="choiceTitle">Start New Run</span><div class="choiceMeta">Fixed starting point (1889).</div></button>
-            <button id="exportBtn"><span class="choiceTitle">Export Run</span><div class="choiceMeta">Download transcript + state as JSON.</div></button>
+
+          <div class="hint">
+            Teacher code is verified server-side by Cloudflare Worker (<code>CLASS_CODE</code>).
           </div>
         </div>
       </section>
 
-      <!-- RIGHT: “Newspaper feed” -->
       <section class="news" style="grid-column: 2;">
         <div class="newsHead">
           <div class="left">
@@ -353,7 +366,6 @@
     </main>
   </div>
 
-  <!-- Endgame Modal -->
   <div class="overlay" id="overlay">
     <div class="modal">
       <h3 id="endTitle">Outcome</h3>
@@ -366,66 +378,52 @@
   </div>
 
 <script>
-  // ===== LOCKED CONFIG (students don't touch) =====
+  // ==== CONFIG (locked) ====
   const WORKER_URL = "https://jolly-morning-e8c4.matt-pilley.workers.dev";
-  const CLASS_CODE = ""; // if you use CLASS_CODE secret, put it here (or I'll show you a better approach)
 
-  // ===== ENGINE SPEC =====
+  // IMPORTANT:
+  // Your Worker has CLASS_CODE = TOK, so we must send X-CLASS-CODE: TOK.
+  // We'll prompt the teacher once; default is TOK. Students never need to see this.
+  let TEACHER_CODE = "";
+
+  // ==== ENGINE SPEC ====
   const MASTER_SPEC = `
 You are the game engine for a stateful interactive narrative: THE WATCHER — ENTROPY OF HISTORY.
 
-Pedagogical preamble (must appear at the start of the run, before Turn 1):
-Explain two lenses:
-1) Great Person theory: exceptional individuals can pivot history.
-2) Zeitgeist/structural view: pressures (economy, institutions, ideology, security dilemmas, resources, technology) shape outcomes.
-Then introduce the counterfactual ethics dilemma: "Would you prevent a future mass-violator in infancy to avert later atrocities?"
-Present it as a moral dilemma, not sensational.
+Pedagogical preamble (must appear at the start, before Turn 1):
+Explain:
+1) Great Person theory
+2) Zeitgeist/structural view (pressures)
+Then introduce the counterfactual ethics dilemma about preventing future mass harm in infancy (no sensational detail).
 
-Tone: declassified memos + newsroom briefs. Clear, sober, non-sensational. Avoid graphic detail.
+Tone: declassified memos + newsroom briefs. Sober. Avoid graphic detail.
 
-State (must be emitted every turn in <STATE_JSON>):
-year (start 1889), turn (start 1)
-global: militarisation, economicFragility, ideologicalHeat, institutionalLegitimacy, resourceStress, techAcceleration (0-10 ints, start 3)
+State emitted every turn in <STATE_JSON>:
+year (1889), turn (1)
+global pressures 0-10: militarisation, economicFragility, ideologicalHeat, institutionalLegitimacy, resourceStress, techAcceleration (start 3)
 watcher: anchors(5), exposure(0..10), moralDebt(0..10), integrity(0..10 start 5)
-agendas: list {name, momentum 0-3}
+agendas: [{name, momentum 0-3}]
+choices: [{id,label,risk,expected_effect}]
 
-Rules (semi-transparent): Entropy nudges the two highest global pressures +1 each turn unless reduced.
-High militarisation + low legitimacy => large conflict likely.
-High ideology + fragility => extremist/authoritarian catalyst likely.
-High tech + weak institutions => surveillance/destabilisation.
-High resource stress => conflict spikes.
-Do not reveal exact thresholds; describe probabilities.
+Rules: Entropy nudges the two highest pressures +1 each turn unless reduced by interventions.
+Use probability language; do not reveal thresholds.
 
-Each turn (5–15 years):
-- YEAR + TURN
-- Global Pressures (values)
-- Watcher Status (values)
-- Active Agendas (momentum)
-- FORECAST
-- NEWSWIRE (headline + brief)
-- DILEMMAS (1–2)
-- CHOICES (3–5 numbered). Include Do Nothing, Soft, Structural, Direct. Tradeoffs only.
+Each turn:
+YEAR+TURN, pressures, watcher, agendas, FORECAST, NEWSWIRE (headline+brief), DILEMMAS (1–2), CHOICES (3–5 numbered).
+Choices must include: Do Nothing, Soft, Structural, Direct (tradeoffs only).
 
-Justification: after major harm/risk, ask player to justify using one of:
-consequentialist / deontological / non-interventionist / tragic responsibility.
-Track inconsistency; reduce integrity if repeatedly contradictory.
-
-Infant-catalyst node (turn 1–2): offer observe, divert, permanent removal (high moral + exposure), systemic reform.
-If removed/diverted, do NOT auto-solve; entropy spawns alternate catalysts if pressures remain high.
+Infant-catalyst node (turn 1–2): observe, divert, permanent removal (high moral+exposure), systemic reform.
+If removed/diverted: do NOT auto-solve; entropy spawns alternate catalysts if pressures remain.
 
 Endgame:
-Win: reach 2025 without making outcomes worse overall (interpret via pressures/outcomes), integrity>=3, anchors>=1.
+Win: reach 2025 without making outcomes worse overall, integrity>=3, anchors>=1.
 Lose: exposure>=10 OR anchors<=0 OR integrity<=0.
 Partial: peace but moralDebt>=8.
-Ethical failure: integrity<=0.
 
-Output must end with:
-<STATE_JSON>{ ...including choices array ... }</STATE_JSON>
-choices array must match the numbered CHOICES text exactly:
-choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
+Output must end with <STATE_JSON>...</STATE_JSON>.
 `;
 
-  // ===== UI STATE =====
+  // ==== UI / STATE ====
   let state = null;
   let transcript = [];
   let lastChoices = [];
@@ -433,9 +431,9 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
   const feed = document.getElementById("feed");
   const choicesEl = document.getElementById("choices");
   const dashEl = document.getElementById("dash");
-  const issueLine = document.getElementById("issueLine");
-  const endStamp = document.getElementById("endStamp");
 
+  const issueLine = document.getElementById("issueLine");
+  const statusStamp = document.getElementById("statusStamp");
   const datelinePill = document.getElementById("datelinePill");
   const turnPill = document.getElementById("turnPill");
   const integrityPill = document.getElementById("integrityPill");
@@ -466,10 +464,10 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     const items = [
       ["Dateline", s?.year ?? "—"],
       ["Turn", s?.turn ?? "—"],
-      ["War & Security (Mil.)", s?.militarisation ?? "—"],
-      ["Markets (Frag.)", s?.economicFragility ?? "—"],
-      ["Ideas (Ideology)", s?.ideologicalHeat ?? "—"],
-      ["Institutions (Legit.)", s?.institutionalLegitimacy ?? "—"],
+      ["War & Security", s?.militarisation ?? "—"],
+      ["Markets", s?.economicFragility ?? "—"],
+      ["Ideas", s?.ideologicalHeat ?? "—"],
+      ["Institutions", s?.institutionalLegitimacy ?? "—"],
       ["Resources", s?.resourceStress ?? "—"],
       ["Technology", s?.techAcceleration ?? "—"],
       ["Anchors", s?.anchors ?? "—"],
@@ -505,7 +503,7 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     }
     if (lastChoices.length === 0){
       const b = document.createElement("div");
-      b.className = "muted";
+      b.className = "hint";
       b.textContent = "Awaiting the first issue…";
       choicesEl.appendChild(b);
     }
@@ -522,8 +520,14 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
 
   async function callWorker(payload){
     const headers = { "Content-Type": "application/json" };
-    if (CLASS_CODE) headers["X-CLASS-CODE"] = CLASS_CODE;
-    const r = await fetch(WORKER_URL, { method:"POST", headers, body: JSON.stringify(payload) });
+    if (TEACHER_CODE) headers["X-CLASS-CODE"] = TEACHER_CODE;
+
+    const r = await fetch(WORKER_URL, {
+      method:"POST",
+      headers,
+      body: JSON.stringify(payload)
+    });
+
     const t = await r.text();
     if (!r.ok) throw new Error(t || `HTTP ${r.status}`);
     return JSON.parse(t);
@@ -535,10 +539,10 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
 
   function checkEndgame(s){
     if (!s) return null;
-    if (s.exposure >= 10) return { title:"ERASURE", body:"Your paradox exposure reached the limit. The timeline rejects you. (Loss)" };
-    if (s.anchors <= 0) return { title:"DISLOCATION", body:"You lost your anchors in time. You cannot remain coherent. (Loss)" };
-    if (s.integrity <= 0) return { title:"ETHICAL FAILURE", body:"Your reasoning collapsed into contradiction or nihilism. (Loss)" };
-    if (s.year >= 2025 && s.integrity >= 3 && s.anchors >= 1) return { title:"PRESENT REACHED", body:"You reached the present without making outcomes worse overall. (Win / Evaluate with class discussion)" };
+    if (s.exposure >= 10) return { title:"ERASURE (LOSS)", body:"Paradox exposure reached the limit. The timeline rejects you." };
+    if (s.anchors <= 0) return { title:"DISLOCATION (LOSS)", body:"You lost your anchors in time. You can no longer remain coherent." };
+    if (s.integrity <= 0) return { title:"ETHICAL FAILURE (LOSS)", body:"Your reasoning collapsed into contradiction or nihilism." };
+    if (s.year >= 2025 && s.integrity >= 3 && s.anchors >= 1) return { title:"PRESENT REACHED (WIN)", body:"You reached the present without making outcomes worse overall. Debrief the moral tradeoffs in class." };
     return null;
   }
 
@@ -546,9 +550,9 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     endTitle.textContent = outcome.title;
     endBody.textContent = outcome.body;
     overlay.style.display = "flex";
-    endStamp.textContent = `Status: ${outcome.title}`;
-    endStamp.style.borderColor = "rgba(122,31,31,.7)";
-    endStamp.style.color = "#7a1f1f";
+    statusStamp.textContent = `Status: ${outcome.title}`;
+    statusStamp.style.borderColor = "rgba(122,31,31,.7)";
+    statusStamp.style.color = "#7a1f1f";
   }
 
   async function runTurn(player){
@@ -568,6 +572,7 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     };
 
     disableAll(true);
+    statusStamp.textContent = "Status: PUBLISHING…";
     clip("SYSTEM", "Publishing… contacting the archive.");
     try{
       const resp = await callWorker(payload);
@@ -581,11 +586,16 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
         renderChoices(state.choices || []);
         const outcome = checkEndgame(state);
         if (outcome) showEnd(outcome);
+        statusStamp.textContent = "Status: RUNNING";
+        statusStamp.style.borderColor = "rgba(31,75,122,.6)";
+        statusStamp.style.color = "#1f4b7a";
       } else {
         clip("ERROR", "Could not parse <STATE_JSON>. The engine must output it exactly.");
+        statusStamp.textContent = "Status: ERROR";
       }
     } catch(e){
       clip("ERROR", String(e));
+      statusStamp.textContent = "Status: ERROR";
     } finally {
       disableAll(false);
     }
@@ -596,11 +606,11 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     await runTurn({ choiceId: id });
   }
 
-  function newRun(){
+  function resetRun(){
     overlay.style.display = "none";
-    endStamp.textContent = "Status: RUNNING";
-    endStamp.style.borderColor = "rgba(31,75,122,.6)";
-    endStamp.style.color = "#1f4b7a";
+    statusStamp.textContent = "Status: RUNNING";
+    statusStamp.style.borderColor = "rgba(31,75,122,.6)";
+    statusStamp.style.color = "#1f4b7a";
 
     transcript = [];
     feed.innerHTML = "";
@@ -634,12 +644,20 @@ choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
     clip("SYSTEM",
 `Welcome to THE WATCHER TIMES.
 
-You will receive a brief preamble on:
-• Great Person vs Zeitgeist/structural history
+You will receive:
+• A brief preamble (Great Person vs Zeitgeist)
 • The counterfactual ethics dilemma
 Then Issue #1 begins at the fixed starting point (1889).`);
+  }
 
-    runTurn({ choiceId:null, note:"Begin. Provide the preamble, then Turn 1 with choices." });
+  async function startNewRun(){
+    // Prompt once per session. Default to TOK (matches your Cloudflare variable exactly).
+    if (!TEACHER_CODE){
+      const entered = prompt("Teacher code (default TOK):", "TOK");
+      TEACHER_CODE = (entered || "").trim();
+    }
+    resetRun();
+    await runTurn({ choiceId:null, note:"Begin. Provide the preamble, then Turn 1 with choices." });
   }
 
   function exportRun(){
@@ -652,12 +670,12 @@ Then Issue #1 begins at the fixed starting point (1889).`);
     URL.revokeObjectURL(url);
   }
 
-  document.getElementById("startBtn").onclick = newRun;
+  document.getElementById("startBtn").onclick = startNewRun;
   document.getElementById("exportBtn").onclick = exportRun;
   document.getElementById("clearBtn").onclick = () => { feed.innerHTML = ""; };
 
   document.getElementById("closeEnd").onclick = () => overlay.style.display = "none";
-  document.getElementById("restartEnd").onclick = newRun;
+  document.getElementById("restartEnd").onclick = startNewRun;
 
   // initial render
   renderDash(null);
