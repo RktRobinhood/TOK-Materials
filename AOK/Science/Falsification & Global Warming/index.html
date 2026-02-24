@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Falsification & Global Warming — Group Research Project</title>
+
+  <!--
+    Visual direction: light, modern, conversion-style layout (hero + feature tiles + section blocks),
+    inspired by Blend B2B's “HubSpot website design” page.
+  -->
+
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --surface:#ffffff;
+      --surface2:#f0f4ff;
+      --text:#0b1220;
+      --muted:#55607a;
+      --line:rgba(10,18,32,.10);
+      --shadow: 0 18px 50px rgba(16,24,40,.12);
+      --shadow2: 0 10px 30px rgba(16,24,40,.10);
+      --radius: 20px;
+      --radius2: 28px;
+
+      --accent:#2f6bff;
+      --accent2:#22b8ff;
+      --accent3:#6a5cff;
+
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(47,107,255,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 0%, rgba(34,184,255,.10), transparent 55%),
+        radial-gradient(900px 600px at 50% 120%, rgba(106,92,255,.08), transparent 55%),
+        var(--bg);
+      line-height:1.55;
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1120px; margin:0 auto; padding:26px 18px 64px}
+
+    /* Top nav */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.75);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 22px rgba(16,24,40,.08);
+      position:sticky;
+      top:12px;
+      z-index:50;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:-.02em;
+      white-space:nowrap;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(47,107,255,1), rgba(34,184,255,1));
+      box-shadow: 0 10px 25px rgba(47,107,255,.25);
+      position:relative;
+      flex:0 0 auto;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:8px;
+      border-radius:8px;
+      background:rgba(255,255,255,.90);
+      clip-path: polygon(0 65%, 45% 35%, 65% 52%, 100% 18%, 100% 35%, 68% 70%, 45% 56%, 0 85%);
+      opacity:.95;
+    }
+
+    .nav{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .nav a{
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .nav a:hover{background:rgba(47,107,255,.08); color:var(--text); text-decoration:none}
+
+    /* Hero */
+    .hero{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.82));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:0;
+    }
+    .hero-left{padding:30px 30px 26px}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted);
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(240,244,255,.9);
+    }
+    .eyebrow .dot{
+      width:8px; height:8px; border-radius:999px;
+      background:var(--accent2);
+      box-shadow:0 0 0 6px rgba(34,184,255,.15);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:42px;
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+    .lede{
+      margin:0;
+      color:var(--muted);
+      max-width:72ch;
+      font-size:16px;
+    }
+
+    .hero-actions{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--surface);
+      color:var(--text);
+      font-weight:600;
+      box-shadow: 0 10px 22px rgba(16,24,40,.08);
+    }
+    .btn.primary{
+      border-color: rgba(47,107,255,.20);
+      background: linear-gradient(135deg, rgba(47,107,255,1), rgba(34,184,255,1));
+      color:#fff;
+      box-shadow: 0 16px 30px rgba(47,107,255,.22);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px)}
+    .btn small{opacity:.9; font-weight:700; font-family:var(--mono)}
+    .chips{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:16px;
+    }
+    .chip{
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.9);
+    }
+    .chip b{color:var(--text)}
+    .hero-right{
+      position:relative;
+      min-height: 340px;
+      border-left:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(240,244,255,.65), rgba(255,255,255,.75));
+    }
+    .hero-img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      filter:saturate(1.05) contrast(1.05);
+    }
+    .hero-right:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.88), rgba(255,255,255,.00) 55%),
+        linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.85));
+    }
+    .hero-card{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      right:18px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow2);
+      padding:14px 14px 12px;
+      z-index:2;
+    }
+    .hero-card .k{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+    .hero-card .v{margin-top:6px; font-weight:700; letter-spacing:-.01em}
+    .hero-card .s{margin-top:4px; color:var(--muted); font-size:13px}
+
+    /* Sections */
+    section{margin-top:18px}
+    .section{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .section-head{
+      padding:18px 18px 0;
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:10px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.02em;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      max-width:78ch;
+      font-size:14px;
+    }
+    .section-body{padding:16px 18px 18px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 12px 25px rgba(16,24,40,.08);
+      padding:16px;
+      min-height: 60px;
+    }
+    .card h3{margin:0 0 8px; font-size:16px; letter-spacing:-.01em}
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .span-12{grid-column: span 12}
+    .span-8{grid-column: span 8}
+    .span-7{grid-column: span 7}
+    .span-6{grid-column: span 6}
+    .span-5{grid-column: span 5}
+    .span-4{grid-column: span 4}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .hero-right{border-left:none; border-top:1px solid var(--line); min-height:280px}
+      .span-8,.span-7,.span-6,.span-5,.span-4{grid-column: span 12}
+      h1{font-size:34px}
+    }
+
+    .icon{
+      width:38px; height:38px;
+      border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(47,107,255,.10);
+      border:1px solid rgba(47,107,255,.18);
+      color:var(--accent);
+      flex:0 0 auto;
+    }
+    .row{
+      display:flex; gap:12px; align-items:flex-start;
+    }
+
+    /* Lists */
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+
+    .callout{
+      border-radius: var(--radius);
+      border:1px solid rgba(47,107,255,.22);
+      background: rgba(47,107,255,.06);
+      padding:14px 14px;
+      color:var(--text);
+    }
+    .callout b{color:var(--accent)}
+    .warn{
+      border-color: rgba(255,179,0,.28);
+      background: rgba(255,179,0,.08);
+    }
+
+    /* Rubric table */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 12px 25px rgba(16,24,40,.06);
+    }
+    th, td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+    }
+    th{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      background: rgba(240,244,255,.75);
+    }
+    tr:last-child td{border-bottom:none}
+    td{color:var(--muted)}
+    td.w{width:120px; text-align:right; color:var(--text); white-space:nowrap; font-weight:700}
+
+    /* Video cards */
+    .video{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: #fff;
+      box-shadow: 0 12px 25px rgba(16,24,40,.08);
+    }
+    .video iframe{
+      width:100%;
+      aspect-ratio:16/9;
+      border:0;
+      display:block;
+    }
+    .video .cap{
+      padding:10px 12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .foot{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+    .credits{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .credits a{color:var(--muted)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        Falsification Project
+      </div>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#overview">Overview</a>
+        <a href="#questions">Research questions</a>
+        <a href="#tools">Tools</a>
+        <a href="#slides">Slide structure</a>
+        <a href="#rubric">Rubric</a>
+        <a href="#videos">Videos</a>
+      </nav>
+    </div>
+
+    <header class="hero" id="overview">
+      <div class="hero-left">
+        <div class="eyebrow"><span class="dot"></span>Group research + slide presentation</div>
+        <h1>Test claims like a scientist.<br/>Use <span style="color:var(--accent)">falsification</span> — not vibes.</h1>
+        <p class="lede">
+          You will investigate a climate-related claim using high-quality sources, then build a clear
+          falsification test: <b>what evidence would prove the claim wrong?</b>
+          Your final output is a professional slide deck and a short presentation.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#slides"><small>10–12</small> Slide deck requirements</a>
+          <a class="btn" href="#tools"><small>Free</small> Research tools list</a>
+        </div>
+
+        <div class="chips" aria-label="quick facts">
+          <div class="chip">Teams: <b>3–4</b></div>
+          <div class="chip">Present: <b>8–10 min</b></div>
+          <div class="chip">Sources: <b>≥2 peer‑reviewed</b></div>
+          <div class="chip">Core method: <b>Falsification</b></div>
+        </div>
+
+        <div class="callout warn" style="margin-top:14px;">
+          <b>Non‑negotiable:</b> If your explanation cannot be wrong in principle, it’s not scientific.
+          Your slides must include a “could be falsified if…” statement.
+        </div>
+      </div>
+
+      <div class="hero-right" aria-label="hero image">
+        <!-- Unsplash source endpoint (free to use under Unsplash License) -->
+        <img class="hero-img" alt="Students collaborating around a laptop" src="https://source.unsplash.com/8gAbl776pc0/1400x1000" />
+        <div class="hero-card">
+          <div class="k">Key question</div>
+          <div class="v">“If this claim is false, what would we expect to observe?”</div>
+          <div class="s">Make your test specific and measurable.</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Learning targets + deliverables -->
+    <section class="section" style="margin-top:18px;">
+      <div class="section-head">
+        <div>
+          <h2>What you’re learning</h2>
+          <p>Evidence evaluation, scientific reasoning, and clear communication — with falsification as the core tool.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid">
+          <div class="card span-6">
+            <div class="row">
+              <div class="icon" aria-hidden="true">✓</div>
+              <div>
+                <h3>Learning targets</h3>
+                <ul>
+                  <li>Explain falsifiability and why it matters in science (Popper).</li>
+                  <li>Find and summarise peer‑reviewed evidence on a climate claim.</li>
+                  <li>Separate data from interpretation; state uncertainty clearly.</li>
+                  <li>Communicate with strong slide design: visuals > text, clean citations.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card span-6">
+            <div class="row">
+              <div class="icon" aria-hidden="true">📦</div>
+              <div>
+                <h3>What you submit</h3>
+                <ul>
+                  <li><b>Slides (10–12)</b> — PDF or PPTX. Citations on-slide.</li>
+                  <li><b>Reference list</b> — include at least <b>2 peer‑reviewed</b> sources.</li>
+                  <li><b>Falsification test</b> — a clear “this would be wrong if…” criterion.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card span-12" style="background: linear-gradient(135deg, rgba(47,107,255,.07), rgba(34,184,255,.05));">
+            <div class="row">
+              <div class="icon" aria-hidden="true">🧠</div>
+              <div>
+                <h3>How to think (the scientist’s workflow)</h3>
+                <div class="grid" style="margin-top:10px;">
+                  <div class="card span-4" style="box-shadow:none;">
+                    <h3 style="margin-bottom:6px;">1) Define the claim</h3>
+                    <p>Write it as: “If <b>X</b> is true, then we should observe <b>Y</b>.” Make it measurable.</p>
+                  </div>
+                  <div class="card span-4" style="box-shadow:none;">
+                    <h3 style="margin-bottom:6px;">2) Find best evidence</h3>
+                    <p>Use peer‑reviewed papers, datasets, and reputable scientific agencies.</p>
+                  </div>
+                  <div class="card span-4" style="box-shadow:none;">
+                    <h3 style="margin-bottom:6px;">3) Try to falsify</h3>
+                    <p>Actively search for disconfirming evidence and competing explanations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Research questions -->
+    <section class="section" id="questions">
+      <div class="section-head">
+        <div>
+          <h2>Choose a research question</h2>
+          <p>Pick one question. Your deck should make your claim testable, then evaluate evidence for and against it.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid">
+          <div class="card span-4">
+            <h3>Q1 — Falsifiability</h3>
+            <p>What is falsifiability, and why is it critical for scientific theories?</p>
+            <ul>
+              <li><b>Keywords:</b> Popper, demarcation, scientific method</li>
+              <li><b>Deliverable focus:</b> define + apply</li>
+            </ul>
+          </div>
+          <div class="card span-4">
+            <h3>Q2 — Predictions & tests</h3>
+            <p>What key global warming predictions have been made, and how are they tested?</p>
+            <ul>
+              <li><b>Keywords:</b> models, observations, uncertainty</li>
+              <li><b>Deliverable focus:</b> prediction → measurement</li>
+            </ul>
+          </div>
+          <div class="card span-4">
+            <h3>Q3 — Challenges</h3>
+            <p>What evidence could potentially challenge aspects of global warming theory?</p>
+            <ul>
+              <li><b>Keywords:</b> alternative explanations, critiques</li>
+              <li><b>Deliverable focus:</b> best counter‑evidence</li>
+            </ul>
+          </div>
+
+          <div class="card span-4">
+            <h3>Q4 — Responses</h3>
+            <p>How do climate scientists respond to critiques regarding falsifiability?</p>
+            <ul>
+              <li><b>Keywords:</b> methodology, robustness checks</li>
+              <li><b>Deliverable focus:</b> rebuttals + updated tests</li>
+            </ul>
+          </div>
+          <div class="card span-4">
+            <h3>Q5 — History</h3>
+            <p>What historical examples exist where climate-related theories were falsified?</p>
+            <ul>
+              <li><b>Keywords:</b> shifting hypotheses, revisions</li>
+              <li><b>Deliverable focus:</b> case study</li>
+            </ul>
+          </div>
+          <div class="card span-4">
+            <h3>Q6 — Bias</h3>
+            <p>What role does confirmation bias play in public perception of global warming?</p>
+            <ul>
+              <li><b>Keywords:</b> media framing, cognition</li>
+              <li><b>Deliverable focus:</b> evidence vs rhetoric</li>
+            </ul>
+          </div>
+
+          <div class="card span-12">
+            <div class="row">
+              <div class="icon" aria-hidden="true">🧾</div>
+              <div>
+                <h3>Minimum sourcing rule</h3>
+                <p>
+                  Your presentation must include at least <b>two peer‑reviewed</b> sources and must cite every figure, dataset,
+                  and non‑trivial claim. If you use AI summaries, you still must open and verify the original papers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools -->
+    <section class="section" id="tools">
+      <div class="section-head">
+        <div>
+          <h2>Free research tools (recommended)</h2>
+          <p>Use these to discover papers and map what the research community says — then read the originals.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid">
+          <div class="card span-7">
+            <div class="row">
+              <div class="icon" aria-hidden="true">🔎</div>
+              <div>
+                <h3>Smart discovery tools</h3>
+                <ul>
+                  <li><b>Consensus.app</b> — quick overview of peer‑reviewed findings on a question.</li>
+                  <li><b>ResearchRabbit</b> — visual “map” of related papers and authors.</li>
+                  <li><b>Connected Papers</b> (free tier) — paper graph around a seed article.</li>
+                  <li><b>Semantic Scholar</b> — strong filters + citation trails.</li>
+                  <li><b>OpenAlex</b> — open index of research works and citations.</li>
+                  <li><b>Google Scholar</b> — useful for “cited by” and year filters.</li>
+                </ul>
+                <div class="callout" style="margin-top:12px;">
+                  <b>Best practice:</b> start with one strong paper → follow “cited by” → compare opposing evidence → write your falsification test.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card span-5" style="overflow:hidden; padding:0;">
+            <img alt="Research desk with papers and books" src="https://source.unsplash.com/rBpTZ6msfgs/1200x900" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide plan -->
+    <section class="section" id="slides">
+      <div class="section-head">
+        <div>
+          <h2>Slide deck structure (10–12 slides)</h2>
+          <p>Clean, visual-first slides. One message per slide. Use graphs, diagrams, and short headlines.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid">
+          <div class="card span-6">
+            <h3>Suggested slide order</h3>
+            <ol style="margin:10px 0 0; padding-left:18px; color:var(--muted);">
+              <li>Title (question + names)</li>
+              <li>Claim / hypothesis (“If X, then Y”)</li>
+              <li>Background + key terms</li>
+              <li>How you searched (tools + keywords)</li>
+              <li>Best supporting evidence (1–2 slides)</li>
+              <li>Best challenging evidence (1–2 slides)</li>
+              <li><b>Falsification test</b> (what would prove it wrong?)</li>
+              <li>Alternative explanations / limitations</li>
+              <li>Conclusion (what survives + what’s uncertain)</li>
+              <li>References</li>
+            </ol>
+          </div>
+
+          <div class="card span-6">
+            <h3>Design rules</h3>
+            <ul>
+              <li><b>No paragraphs</b>. If it won’t fit in ~2 short bullets, it’s too much.</li>
+              <li>Prefer <b>figures</b> (with captions) to long explanations.</li>
+              <li>Make titles full sentences (the “takeaway”).</li>
+              <li>Cite sources on every slide with external info (author/year or org + link).</li>
+            </ul>
+            <div class="callout warn" style="margin-top:12px;">
+              <b>Common mistake:</b> treating news, opinion pieces, or social posts as scientific evidence. Use them only to analyse rhetoric/bias.
+            </div>
+          </div>
+
+          <div class="card span-12" style="background: linear-gradient(135deg, rgba(34,184,255,.08), rgba(106,92,255,.05));">
+            <div class="row">
+              <div class="icon" aria-hidden="true">🧪</div>
+              <div>
+                <h3>Required falsification slide</h3>
+                <p>
+                  Include one slide titled <b>“How could this be falsified?”</b> and write:
+                </p>
+                <ul>
+                  <li><b>Prediction:</b> If our claim is true, we should observe ____.</li>
+                  <li><b>Falsifier:</b> If we instead observe ____, our claim would be wrong (or need revision).</li>
+                  <li><b>Test:</b> Which measurement/dataset could check this?</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Rubric -->
+    <section class="section" id="rubric">
+      <div class="section-head">
+        <div>
+          <h2>Grading rubric</h2>
+          <p>Science quality matters more than persuasion. Show your reasoning and engage with counter‑evidence fairly.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <table aria-label="grading rubric">
+          <thead>
+            <tr>
+              <th>Criteria</th>
+              <th style="width:120px; text-align:right;">Weight</th>
+              <th>What strong looks like</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Understanding</b></td>
+              <td class="w">20%</td>
+              <td>Accurate definitions and correct use of scientific terminology; clear explanation of the claim.</td>
+            </tr>
+            <tr>
+              <td><b>Sources & research quality</b></td>
+              <td class="w">20%</td>
+              <td>Peer‑reviewed and authoritative sources; citations are transparent and consistent.</td>
+            </tr>
+            <tr>
+              <td><b>Falsification</b></td>
+              <td class="w">25%</td>
+              <td>Specific falsifiable prediction; identifies what would change your mind; engages with disconfirming evidence.</td>
+            </tr>
+            <tr>
+              <td><b>Critical evaluation</b></td>
+              <td class="w">20%</td>
+              <td>Discusses uncertainty, assumptions, alternative explanations, and limits of methods/models.</td>
+            </tr>
+            <tr>
+              <td><b>Communication & design</b></td>
+              <td class="w">15%</td>
+              <td>Visual-first slides; readable layout; balanced speaking roles; clear narrative.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section class="section" id="videos">
+      <div class="section-head">
+        <div>
+          <h2>Embedded video resources</h2>
+          <p>Use these to strengthen your understanding of falsification and evidence evaluation.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid">
+          <div class="video span-6">
+            <iframe src="https://www.youtube-nocookie.com/embed/hKXhUZA3Du4" title="Karl Popper and Falsification (Wireless Philosophy)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="cap"><b>Karl Popper & Falsification</b> (Wireless Philosophy)</div>
+          </div>
+          <div class="video span-6">
+            <iframe src="https://www.youtube-nocookie.com/embed/-X8Xfl0JdTQ" title="Crash Course Philosophy #8: Popper, Science & Pseudoscience"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="cap"><b>Science vs Pseudoscience</b> (Crash Course Philosophy)</div>
+          </div>
+          <div class="video span-6">
+            <iframe src="https://www.youtube-nocookie.com/embed/xyd5NrXD_1A" title="NASA Climate Change Evidence"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="cap"><b>Climate Change Evidence</b> (NASA)</div>
+          </div>
+          <div class="video span-6">
+            <iframe src="https://www.youtube-nocookie.com/embed/42QuXLucH3Q" title="Is Most Published Research Wrong? (Veritasium)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="cap"><b>Evaluating research quality</b> (Veritasium)</div>
+          </div>
+
+          <div class="card span-12" style="overflow:hidden; padding:0;">
+            <img alt="Abstract light gradient wave background" src="https://source.unsplash.com/_L_VxOteUfs/1600x700" style="width:100%; height:280px; object-fit:cover; display:block;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div>Designed for projector readability • Edit freely for your class</div>
+      <div class="credits">
+        Image credits (Unsplash, free under Unsplash License):
+        <a href="https://unsplash.com/photos/8gAbl776pc0" target="_blank" rel="noreferrer">students collaborating</a> ·
+        <a href="https://unsplash.com/photos/rBpTZ6msfgs" target="_blank" rel="noreferrer">research desk</a> ·
+        <a href="https://unsplash.com/illustrations/_L_VxOteUfs" target="_blank" rel="noreferrer">abstract wave</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
