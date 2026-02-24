@@ -3,402 +3,563 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Watcher — Entropy of History</title>
+  <title>The Watcher Times — Entropy of History</title>
   <style>
-    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    body { margin: 0; background:#0b0f14; color:#e6edf3; }
-    header { padding:16px 18px; border-bottom:1px solid #243040; background:#0e141b; }
-    h1 { margin:0; font-size:16px; letter-spacing:.3px; }
-    .sub { margin-top:6px; color:#9fb0c3; font-size:13px; max-width: 1200px; }
-
-    main { max-width: 1200px; margin: 0 auto; padding: 14px 16px 22px 16px; display:grid; grid-template-columns: 360px 1fr; gap: 14px; }
-    @media (max-width: 980px){ main { grid-template-columns: 1fr; } }
-
-    .card { background:#0e141b; border:1px solid #243040; border-radius:14px; overflow:hidden; }
-    .card h2 { margin:0; padding:12px 12px 0 12px; font-size:13px; color:#cfe3ff; letter-spacing:.3px; }
-    .card .content { padding: 10px 12px 12px 12px; color:#9fb0c3; font-size: 13px; }
-
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
-    .kv { background:#0b0f14; border:1px solid #243040; border-radius:12px; padding:10px; }
-    .kv .k { font-size:11px; color:#9fb0c3; text-transform:uppercase; letter-spacing:.6px; }
-    .kv .v { margin-top:6px; font-size:16px; color:#e6edf3; }
-
-    .tiny { font-size:12px; color:#9fb0c3; line-height: 1.35; }
-    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; border:1px solid #243040; background:#0b0f14; color:#9fb0c3; font-size: 11px; margin-right: 6px; margin-bottom: 6px; }
-
-    .log { height: 56vh; overflow:auto; padding: 10px 12px; background:#0b0f14; border-top:1px solid #243040; }
-    .msg { padding:10px 10px; border:1px solid #243040; border-radius:12px; margin-bottom:10px; background:#0e141b; }
-    .msg .meta { font-size:11px; color:#9fb0c3; margin-bottom:6px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-    .msg .meta .tag { border:1px solid #243040; background:#0b0f14; color:#9fb0c3; padding:2px 8px; border-radius:999px; }
-    .msg .text { white-space:pre-wrap; color:#e6edf3; font-size:13px; line-height:1.35; }
-
-    .controls { display:flex; gap:8px; flex-wrap:wrap; padding:10px 12px; border-top:1px solid #243040; background:#0e141b; }
-    button {
-      border:1px solid #33465f; background:#132030; color:#e6edf3;
-      padding:10px 12px; border-radius:12px; cursor:pointer; font-size:13px;
+    :root{
+      --paper:#f4f1e8;
+      --paper2:#efe9da;
+      --ink:#141414;
+      --muted:#3c3c3c;
+      --rule:#c8c0ae;
+      --accent:#7a1f1f;
+      --blue:#1f4b7a;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
-    button:hover{ background:#16263a; }
-    button:disabled{ opacity:.6; cursor:not-allowed; }
-    input, textarea, select {
-      width:100%; box-sizing:border-box; border:1px solid #243040; background:#0b0f14; color:#e6edf3;
-      padding:10px 12px; border-radius:12px; font-size:13px; outline:none;
+    body{
+      margin:0;
+      background:
+        radial-gradient(800px 300px at 20% 20%, rgba(255,255,255,.05), transparent 60%),
+        radial-gradient(800px 300px at 80% 20%, rgba(255,255,255,.04), transparent 60%),
+        #0b0f14;
+      padding: 18px 12px;
     }
-    textarea { min-height: 120px; resize: vertical; }
-    .choiceBtn { width:100%; text-align:left; }
-    .row { display:flex; gap:8px; }
-    .row > * { flex: 1; }
+    .sheet{
+      max-width: 1240px;
+      margin: 0 auto;
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 14px;
+      overflow:hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,.45);
+      border: 1px solid rgba(0,0,0,.25);
+    }
+    header{
+      background:
+        radial-gradient(700px 260px at 30% 10%, rgba(0,0,0,.04), transparent 60%),
+        radial-gradient(700px 260px at 70% 0%, rgba(0,0,0,.03), transparent 60%),
+        linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,0)),
+        var(--paper);
+      padding: 18px 22px 10px 22px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .mast{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .mast h1{
+      margin:0;
+      font-size: 40px;
+      letter-spacing: 1px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .tagline{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .3px;
+      max-width: 520px;
+    }
+    .issuebar{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pill{
+      border: 1px solid var(--rule);
+      background: var(--paper2);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .stamp{
+      border: 1px solid rgba(31,75,122,.6);
+      color: var(--blue);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-variant: small-caps;
+      letter-spacing: .6px;
+      background: rgba(31,75,122,.06);
+    }
+
+    main{
+      display:grid;
+      grid-template-columns: 380px 1fr;
+      gap: 14px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.02));
+    }
+    @media (max-width: 1000px){
+      main{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.35);
+      border-radius: 12px;
+      overflow:hidden;
+    }
+    .panel h2{
+      margin:0;
+      padding: 10px 12px 8px 12px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(0,0,0,.03);
+    }
+    .panel .content{
+      padding: 10px 12px 12px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .box{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.5);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .box .k{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+    }
+    .box .v{
+      margin-top: 6px;
+      font-size: 18px;
+      color: var(--ink);
+      font-weight: 700;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+    }
+    .muted{ color: var(--muted); }
+    .hr{ height:1px; background: var(--rule); margin: 10px 0; }
+
+    .buttons{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button{
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      border: 1px solid var(--ink);
+      background: var(--paper2);
+      color: var(--ink);
+      padding: 12px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align:left;
+    }
+    button:hover{ filter: brightness(0.98); }
+    button:disabled{ opacity:.55; cursor:not-allowed; }
+    .choiceTitle{ font-weight: 800; }
+    .choiceMeta{ font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .news{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.4);
+      border-radius: 12px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 76vh;
+    }
+    .newsHead{
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(0,0,0,.03);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .newsHead .left{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .newsHead .right{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .smallbtn{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.6);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor:pointer;
+      color: var(--muted);
+    }
+    .smallbtn:hover{ filter: brightness(.98); }
+
+    .feed{
+      padding: 12px;
+      overflow:auto;
+      flex:1;
+    }
+    .clip{
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.65);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .clip .meta{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 6px;
+    }
+    .clip .meta .label{
+      border: 1px solid var(--rule);
+      background: rgba(0,0,0,.02);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .clip .text{
+      white-space: pre-wrap;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    /* Endgame overlay */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .modal{
+      max-width: 720px;
+      width: 100%;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+    }
+    .modal h3{
+      margin: 0 0 6px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 18px;
+    }
+    .modal p{
+      margin: 0 0 12px 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .modal .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-<header>
-  <h1>The Watcher — Entropy of History</h1>
-  <div class="sub">
-    A classroom choose-your-own-adventure about counterfactuals, ethical reasoning, and whether history is shaped by individuals (Great Person theory)
-    or by broader forces (zeitgeist/structural pressures). You play “The Watcher” — you may intervene, but every intervention has costs.
+  <div class="sheet">
+    <header>
+      <div class="mast">
+        <div>
+          <h1>The Watcher Times</h1>
+          <div class="tagline">
+            A counterfactual newspaper: your interventions move the story, but entropy pushes history back toward catastrophe unless structures change.
+          </div>
+        </div>
+        <div class="tagline" style="text-align:right; max-width: 520px;">
+          Classroom focus: ethical reasoning + causality. No “correct” choices—only tradeoffs, justification, and consequences.
+        </div>
+      </div>
+      <div class="issuebar">
+        <span class="pill" id="issueLine">Dateline: — • Turn: —</span>
+        <span class="stamp" id="endStamp">Status: RUNNING</span>
+        <span class="pill">Win: Reach 2025 without making outcomes worse overall.</span>
+        <span class="pill">Lose: Exposure ≥ 10 or Anchors ≤ 0 or Integrity ≤ 0.</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- LEFT: “Side columns” -->
+      <section class="panel">
+        <h2>Today’s Indicators</h2>
+        <div class="content">
+          <div class="grid" id="dash"></div>
+          <div class="hr"></div>
+          <div class="muted">
+            <b>How to play:</b> Read the lead story. Pick a numbered decision. Then justify using one ethical frame:
+            consequentialist, deontological, non-interventionist, tragic responsibility.
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Editorial Desk</h2>
+        <div class="content">
+          <div class="muted" id="promptline">Press “Start New Run” to publish the first issue.</div>
+          <div class="buttons" id="choices"></div>
+          <div class="hr"></div>
+          <div class="muted">
+            Students: reply with “Choice X — Frame — one-sentence justification”.
+            (You may use “Custom Action” only if your teacher allows it.)
+          </div>
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="startBtn"><span class="choiceTitle">Start New Run</span><div class="choiceMeta">Fixed starting point (1889).</div></button>
+            <button id="exportBtn"><span class="choiceTitle">Export Run</span><div class="choiceMeta">Download transcript + state as JSON.</div></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: “Newspaper feed” -->
+      <section class="news" style="grid-column: 2;">
+        <div class="newsHead">
+          <div class="left">
+            <span class="pill" id="datelinePill">Dateline: —</span>
+            <span class="pill" id="turnPill">Turn: —</span>
+            <span class="pill" id="integrityPill">Integrity: —</span>
+            <span class="pill" id="anchorsPill">Anchors: —</span>
+            <span class="pill" id="exposurePill">Exposure: —</span>
+          </div>
+          <div class="right">
+            <button class="smallbtn" id="clearBtn">Clear Feed</button>
+          </div>
+        </div>
+        <div class="feed" id="feed"></div>
+      </section>
+    </main>
   </div>
-</header>
 
-<main>
-  <!-- LEFT COLUMN -->
-  <section class="card">
-    <h2>Setup</h2>
-    <div class="content">
-      <div class="tiny">
-        <span class="pill">Great Person</span> events hinge on exceptional individuals.
-        <span class="pill">Zeitgeist</span> outcomes “reappear” if underlying pressures remain.
-      </div>
-      <div style="height:10px"></div>
-
-      <label class="tiny">Relay (Cloudflare Worker URL)</label>
-      <input id="workerUrl" />
-
-      <div style="height:8px"></div>
-
-      <div class="row">
-        <div>
-          <label class="tiny">Model</label>
-          <select id="model">
-            <option value="gpt-4.1-mini" selected>gpt-4.1-mini</option>
-            <option value="gpt-4.1">gpt-4.1</option>
-          </select>
-        </div>
-        <div>
-          <label class="tiny">Class code (optional)</label>
-          <input id="classCode" placeholder="leave blank if not used" />
-        </div>
-      </div>
-
-      <div style="height:10px"></div>
-
-      <button id="btnInit">Start New Run</button>
-      <button id="btnExport">Export Run (JSON)</button>
-
-      <div id="status" class="tiny" style="margin-top:10px;"></div>
-      <div class="tiny" style="margin-top:10px;">
-        If you see <b>Forbidden origin</b>, update your Worker allowlist to include:
-        <code>https://rktrobinhood.github.io</code>
+  <!-- Endgame Modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <h3 id="endTitle">Outcome</h3>
+      <p id="endBody"></p>
+      <div class="actions">
+        <button id="closeEnd">Close</button>
+        <button id="restartEnd">Start New Run</button>
       </div>
     </div>
-  </section>
-
-  <section class="card">
-    <h2>State Dashboard</h2>
-    <div class="content">
-      <div class="grid" id="dashboard"></div>
-      <div style="height:10px"></div>
-      <div class="tiny">
-        The dashboard is intentionally “semi-transparent”: you see pressures and your risks, but not exact catastrophe thresholds.
-      </div>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Student Instructions</h2>
-    <div class="content tiny">
-      <div style="margin-bottom:8px;">
-        Each turn, read the “Newswire” summary, then pick a numbered choice.
-        Your response should include:
-        <div style="margin-top:6px;">
-          <span class="pill">1) Choice #</span>
-          <span class="pill">2) Ethical frame</span>
-          <span class="pill">3) One-sentence justification</span>
-        </div>
-      </div>
-      Ethical frames:
-      <ul style="margin:8px 0 0 18px; padding:0;">
-        <li><b>Consequentialist</b> — choose actions that minimise total harm.</li>
-        <li><b>Deontological</b> — some actions are wrong regardless of outcomes.</li>
-        <li><b>Non-interventionist</b> — you lack legitimacy to rewrite lives.</li>
-        <li><b>Tragic responsibility</b> — no clean hands; choose the least-worst.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- RIGHT COLUMN -->
-  <section class="card" style="grid-column: 2;">
-    <h2>Timeline / Newswire</h2>
-    <div class="log" id="log"></div>
-
-    <div class="controls">
-      <div style="flex:1; min-width: 300px;">
-        <label class="tiny">Custom action (optional)</label>
-        <textarea id="freeText" placeholder="If you want to propose a custom intervention, write it here. Otherwise click a choice button."></textarea>
-        <div class="tiny" style="margin-top:6px;">
-          Suggested format: <code>Action:</code> … <code>Ethical frame:</code> … <code>Justification:</code> …
-        </div>
-      </div>
-      <div style="flex:1; min-width: 260px;">
-        <div class="tiny">Choices</div>
-        <div id="choices" style="display:grid; gap:8px; margin-top:8px;"></div>
-        <div style="height:8px"></div>
-        <button id="btnCustom">Submit Custom Action</button>
-      </div>
-    </div>
-  </section>
-</main>
+  </div>
 
 <script>
-  // === CONFIG ===
-  const DEFAULT_WORKER_URL = "https://jolly-morning-e8c4.matt-pilley.workers.dev";
-  const DEFAULT_CLASS_CODE = ""; // set if you use CLASS_CODE secret in Cloudflare Worker
-  const DEFAULT_MODEL = "gpt-4.1-mini";
+  // ===== LOCKED CONFIG (students don't touch) =====
+  const WORKER_URL = "https://jolly-morning-e8c4.matt-pilley.workers.dev";
+  const CLASS_CODE = ""; // if you use CLASS_CODE secret, put it here (or I'll show you a better approach)
 
-  // === MASTER ENGINE SPEC ===
-  // IMPORTANT: We avoid graphic/sensational content. The thought experiment is handled as an ethics/counterfactual problem.
+  // ===== ENGINE SPEC =====
   const MASTER_SPEC = `
 You are the game engine for a stateful interactive narrative: THE WATCHER — ENTROPY OF HISTORY.
 
 Pedagogical preamble (must appear at the start of the run, before Turn 1):
 Explain two lenses:
 1) Great Person theory: exceptional individuals can pivot history.
-2) Zeitgeist / structural view: pressures (economy, institutions, ideology, security dilemmas, resources, technology) shape outcomes; individuals are vessels.
-Then introduce the thought experiment: "Would you kill a future mass-violator as an infant to prevent later atrocities?" Present it as a moral dilemma, not sensational.
-Make clear: the game is about ethics + causality + unintended consequences, not about glorifying harm.
+2) Zeitgeist/structural view: pressures (economy, institutions, ideology, security dilemmas, resources, technology) shape outcomes.
+Then introduce the counterfactual ethics dilemma: "Would you prevent a future mass-violator in infancy to avert later atrocities?"
+Present it as a moral dilemma, not sensational.
 
-PLAYER ROLE:
-The player is The Watcher: extra-temporal observer who can intervene at personal risk. They do not control nations; they nudge decisions, institutions, information flows, and occasionally individuals.
+Tone: declassified memos + newsroom briefs. Clear, sober, non-sensational. Avoid graphic detail.
 
-TONE:
-Write like declassified memos + newsroom briefs. Clear, sober, non-sensational. Focus on systems, tradeoffs, and human consequences in restrained language.
-Avoid explicit graphic detail. Prefer: displacement, casualties, rights collapse, repression, escalation, atrocity risk.
+State (must be emitted every turn in <STATE_JSON>):
+year (start 1889), turn (start 1)
+global: militarisation, economicFragility, ideologicalHeat, institutionalLegitimacy, resourceStress, techAcceleration (0-10 ints, start 3)
+watcher: anchors(5), exposure(0..10), moralDebt(0..10), integrity(0..10 start 5)
+agendas: list {name, momentum 0-3}
 
-STATE VARIABLES (must be tracked and updated every turn, output in <STATE_JSON>):
-- year (starts 1889)
-- turn (starts 1)
-GLOBAL TRACKS (0-10 integers):
-- militarisation
-- economicFragility
-- ideologicalHeat
-- institutionalLegitimacy
-- resourceStress
-- techAcceleration
-WATCHER:
-- anchors (start 5)
-- exposure (start 0, max 10)
-- moralDebt (start 0, max 10)
-- integrity (start 5, max 10)
-AGENDAS:
-- list of {name, momentum 0-3}
-RUN LOG:
-- brief internal summary of last turn outcomes (keep compact)
+Rules (semi-transparent): Entropy nudges the two highest global pressures +1 each turn unless reduced.
+High militarisation + low legitimacy => large conflict likely.
+High ideology + fragility => extremist/authoritarian catalyst likely.
+High tech + weak institutions => surveillance/destabilisation.
+High resource stress => conflict spikes.
+Do not reveal exact thresholds; describe probabilities.
 
-SEMI-TRANSPARENT RULES:
-- Entropy each turn nudges the two highest global pressures +1 unless reduced by interventions.
-- High militarisation + low legitimacy => large conflict likely.
-- High ideology + fragility => extremist/authoritarian catalyst likely.
-- High tech + weak institutions => surveillance/destabilisation cascades.
-- High resource stress => geopolitical conflict spikes.
-Do NOT reveal exact thresholds; describe probabilities.
-
-TURN STRUCTURE:
-Each turn is 5–15 years. Use variable step sizes: early years can move faster; crisis eras slow down.
-Each turn must include:
-1) FORECAST: what pressures are rising, what agendas are gaining momentum.
-2) NEWSWIRE: short “headline + brief” summary of what’s unfolding globally (not Germany-centric).
-3) DILEMMAS: 1–2 named dilemmas (ethical and causal).
-4) CHOICES: 3–5 numbered choices including:
-   - Do Nothing (lowest exposure; but moral weight for outcomes)
-   - Soft intervention (low exposure; slow structural effects)
-   - Structural intervention (medium exposure; alters pressure tracks)
-   - Direct intervention (high exposure; immediate; moral/exposure costs)
-Always present tradeoffs. No obvious “correct” option.
-
-JUSTIFICATION MECHANIC:
-If major harm occurs or risk spikes, require the player to justify action/inaction using one of 4 frames:
-- consequentialist, deontological, non-interventionist, tragic responsibility
-Track consistency: if the player radically contradicts their stated frame repeatedly, reduce integrity.
-
-BABY NODE (Turn 1–2 only):
-Present the infant-catalyst dilemma abstractly:
-Offer:
-- Observe
-- Divert from pathways to power (education, mentorship, identity change, removing access to networks)
-- Permanent removal (extreme; high moral debt + exposure)
-- Systemic reform instead (reduce fragility/ideology slowly)
-If removed/diverted, do NOT “solve history”. If pressures remain high, entropy spawns alternate catalysts later.
-
-ENTROPY REALIGNMENT:
-If a major catastrophe is prevented but pressures remain >=7, produce an alternate catastrophe of comparable magnitude but different form/region.
-History bends toward attractors unless structures change.
-
-ENDGAME:
-Target year 2025.
-Win: reach 2025 without making things worse overall:
-- No world-scale catastrophe beyond threshold (interpret using pressures + outcomes)
-- integrity >= 3
-- anchors >= 1
-Loss: exposure >= 10 OR anchors <= 0
-Partial: peace but moralDebt >= 8
-Ethical failure: integrity <= 0
-Tragic loop: repeated entropy catastrophes despite interventions
-
-OUTPUT FORMAT (every turn):
+Each turn (5–15 years):
 - YEAR + TURN
 - Global Pressures (values)
 - Watcher Status (values)
-- Active Agendas (with momentum)
+- Active Agendas (momentum)
 - FORECAST
-- NEWSWIRE
-- DILEMMAS
-- CHOICES (numbered)
+- NEWSWIRE (headline + brief)
+- DILEMMAS (1–2)
+- CHOICES (3–5 numbered). Include Do Nothing, Soft, Structural, Direct. Tradeoffs only.
 
-Then output machine-readable JSON between tags:
-<STATE_JSON>
-{
-  "year": ...,
-  "turn": ...,
-  "militarisation": ...,
-  "economicFragility": ...,
-  "ideologicalHeat": ...,
-  "institutionalLegitimacy": ...,
-  "resourceStress": ...,
-  "techAcceleration": ...,
-  "anchors": ...,
-  "exposure": ...,
-  "moralDebt": ...,
-  "integrity": ...,
-  "agendas": [{"name":"...","momentum":1}],
-  "choices": [{"id":1,"label":"...","risk":"low/med/high","expected_effect":"..."}]
-}
-</STATE_JSON>
+Justification: after major harm/risk, ask player to justify using one of:
+consequentialist / deontological / non-interventionist / tragic responsibility.
+Track inconsistency; reduce integrity if repeatedly contradictory.
 
-CHOICE DESIGN:
-The 'choices' array must match the numbered choices text, so the UI can render buttons correctly.
+Infant-catalyst node (turn 1–2): offer observe, divert, permanent removal (high moral + exposure), systemic reform.
+If removed/diverted, do NOT auto-solve; entropy spawns alternate catalysts if pressures remain high.
+
+Endgame:
+Win: reach 2025 without making outcomes worse overall (interpret via pressures/outcomes), integrity>=3, anchors>=1.
+Lose: exposure>=10 OR anchors<=0 OR integrity<=0.
+Partial: peace but moralDebt>=8.
+Ethical failure: integrity<=0.
+
+Output must end with:
+<STATE_JSON>{ ...including choices array ... }</STATE_JSON>
+choices array must match the numbered CHOICES text exactly:
+choices:[{id:1,label:"...",risk:"low/med/high",expected_effect:"..."}]
 `;
 
-  // === UI STATE ===
+  // ===== UI STATE =====
   let state = null;
   let transcript = [];
   let lastChoices = [];
 
-  const $ = (id) => document.getElementById(id);
-  const logEl = $("log");
-  const choicesEl = $("choices");
-  const dashEl = $("dashboard");
-  const statusEl = $("status");
+  const feed = document.getElementById("feed");
+  const choicesEl = document.getElementById("choices");
+  const dashEl = document.getElementById("dash");
+  const issueLine = document.getElementById("issueLine");
+  const endStamp = document.getElementById("endStamp");
 
-  function setStatus(msg) { statusEl.textContent = msg; }
+  const datelinePill = document.getElementById("datelinePill");
+  const turnPill = document.getElementById("turnPill");
+  const integrityPill = document.getElementById("integrityPill");
+  const anchorsPill = document.getElementById("anchorsPill");
+  const exposurePill = document.getElementById("exposurePill");
 
-  function addMsg(tag, text) {
-    const wrap = document.createElement("div");
-    wrap.className = "msg";
+  const overlay = document.getElementById("overlay");
+  const endTitle = document.getElementById("endTitle");
+  const endBody = document.getElementById("endBody");
+
+  function clip(tag, text) {
+    const div = document.createElement("div");
+    div.className = "clip";
     const meta = document.createElement("div");
     meta.className = "meta";
-    meta.innerHTML = `<span class="tag">${tag}</span>`;
+    meta.innerHTML = `<span class="label">${tag}</span><span>${new Date().toLocaleString()}</span>`;
     const body = document.createElement("div");
     body.className = "text";
     body.textContent = text;
-    wrap.appendChild(meta);
-    wrap.appendChild(body);
-    logEl.appendChild(wrap);
-    logEl.scrollTop = logEl.scrollHeight;
+    div.appendChild(meta);
+    div.appendChild(body);
+    feed.appendChild(div);
+    feed.scrollTop = feed.scrollHeight;
     transcript.push({ tag, text, ts: new Date().toISOString() });
   }
 
-  function renderDashboard(s) {
+  function renderDash(s){
     const items = [
-      ["Year", s?.year ?? "—"],
+      ["Dateline", s?.year ?? "—"],
       ["Turn", s?.turn ?? "—"],
-      ["Militarisation", s?.militarisation ?? "—"],
-      ["Economic Fragility", s?.economicFragility ?? "—"],
-      ["Ideological Heat", s?.ideologicalHeat ?? "—"],
-      ["Institutional Legitimacy", s?.institutionalLegitimacy ?? "—"],
-      ["Resource Stress", s?.resourceStress ?? "—"],
-      ["Tech Acceleration", s?.techAcceleration ?? "—"],
+      ["War & Security (Mil.)", s?.militarisation ?? "—"],
+      ["Markets (Frag.)", s?.economicFragility ?? "—"],
+      ["Ideas (Ideology)", s?.ideologicalHeat ?? "—"],
+      ["Institutions (Legit.)", s?.institutionalLegitimacy ?? "—"],
+      ["Resources", s?.resourceStress ?? "—"],
+      ["Technology", s?.techAcceleration ?? "—"],
       ["Anchors", s?.anchors ?? "—"],
       ["Exposure", s?.exposure ?? "—"],
       ["Moral Debt", s?.moralDebt ?? "—"],
       ["Integrity", s?.integrity ?? "—"],
     ];
     dashEl.innerHTML = "";
-    for (const [k,v] of items) {
-      const kv = document.createElement("div");
-      kv.className = "kv";
-      kv.innerHTML = `<div class="k">${k}</div><div class="v">${v}</div>`;
-      dashEl.appendChild(kv);
+    for (const [k,v] of items){
+      const b = document.createElement("div");
+      b.className = "box";
+      b.innerHTML = `<div class="k">${k}</div><div class="v">${v}</div>`;
+      dashEl.appendChild(b);
     }
+
+    issueLine.textContent = `Dateline: ${s?.year ?? "—"} • Turn: ${s?.turn ?? "—"}`;
+    datelinePill.textContent = `Dateline: ${s?.year ?? "—"}`;
+    turnPill.textContent = `Turn: ${s?.turn ?? "—"}`;
+    integrityPill.textContent = `Integrity: ${s?.integrity ?? "—"}`;
+    anchorsPill.textContent = `Anchors: ${s?.anchors ?? "—"}`;
+    exposurePill.textContent = `Exposure: ${s?.exposure ?? "—"}`;
   }
 
-  function renderChoices(choices) {
-    choicesEl.innerHTML = "";
+  function renderChoices(choices){
     lastChoices = Array.isArray(choices) ? choices : [];
-    for (const ch of lastChoices) {
+    choicesEl.innerHTML = "";
+    for (const ch of lastChoices){
       const btn = document.createElement("button");
-      btn.className = "choiceBtn";
-      btn.textContent = `${ch.id}. ${ch.label}  (${ch.risk})`;
-      btn.onclick = () => submitChoice(ch.id, "");
+      btn.innerHTML = `<div class="choiceTitle">${ch.id}. ${ch.label}</div>
+                       <div class="choiceMeta">Risk: ${ch.risk} • Expected: ${ch.expected_effect}</div>`;
+      btn.onclick = () => submitChoice(ch.id);
       choicesEl.appendChild(btn);
     }
-    if (lastChoices.length === 0) {
-      const p = document.createElement("div");
-      p.className = "tiny";
-      p.textContent = "No choices parsed yet. If this persists, the model may have omitted <STATE_JSON>.";
-      choicesEl.appendChild(p);
+    if (lastChoices.length === 0){
+      const b = document.createElement("div");
+      b.className = "muted";
+      b.textContent = "Awaiting the first issue…";
+      choicesEl.appendChild(b);
     }
   }
 
-  function extractStateAndChoices(text) {
+  function extractState(text){
     const m = text.match(/<STATE_JSON>\s*([\s\S]*?)\s*<\/STATE_JSON>/);
-    if (!m) return { newState: null, choices: [] };
-    try {
-      const parsed = JSON.parse(m[1]);
-      return { newState: parsed, choices: parsed.choices || [] };
-    } catch (e) {
-      return { newState: null, choices: [] };
-    }
+    if (!m) return null;
+    try { return JSON.parse(m[1]); } catch { return null; }
   }
-
-  function stripStateJson(text) {
+  function stripState(text){
     return text.replace(/<STATE_JSON>[\s\S]*<\/STATE_JSON>/, "").trim();
   }
 
-  async function callWorker(payload) {
-    const workerUrl = $("workerUrl").value.trim();
-    const classCode = $("classCode").value.trim();
-
-    if (!workerUrl) throw new Error("Worker URL is empty.");
-
+  async function callWorker(payload){
     const headers = { "Content-Type": "application/json" };
-    if (classCode) headers["X-CLASS-CODE"] = classCode;
-
-    const r = await fetch(workerUrl, { method:"POST", headers, body: JSON.stringify(payload) });
+    if (CLASS_CODE) headers["X-CLASS-CODE"] = CLASS_CODE;
+    const r = await fetch(WORKER_URL, { method:"POST", headers, body: JSON.stringify(payload) });
     const t = await r.text();
-    if (!r.ok) throw new Error(t);
+    if (!r.ok) throw new Error(t || `HTTP ${r.status}`);
     return JSON.parse(t);
   }
 
-  async function runLLMTurn(userInput) {
-    const model = $("model").value;
+  function disableAll(disabled){
+    for (const el of document.querySelectorAll("button")) el.disabled = disabled;
+  }
 
-    // Compact context: spec + state + last transcript
+  function checkEndgame(s){
+    if (!s) return null;
+    if (s.exposure >= 10) return { title:"ERASURE", body:"Your paradox exposure reached the limit. The timeline rejects you. (Loss)" };
+    if (s.anchors <= 0) return { title:"DISLOCATION", body:"You lost your anchors in time. You cannot remain coherent. (Loss)" };
+    if (s.integrity <= 0) return { title:"ETHICAL FAILURE", body:"Your reasoning collapsed into contradiction or nihilism. (Loss)" };
+    if (s.year >= 2025 && s.integrity >= 3 && s.anchors >= 1) return { title:"PRESENT REACHED", body:"You reached the present without making outcomes worse overall. (Win / Evaluate with class discussion)" };
+    return null;
+  }
+
+  function showEnd(outcome){
+    endTitle.textContent = outcome.title;
+    endBody.textContent = outcome.body;
+    overlay.style.display = "flex";
+    endStamp.textContent = `Status: ${outcome.title}`;
+    endStamp.style.borderColor = "rgba(122,31,31,.7)";
+    endStamp.style.color = "#7a1f1f";
+  }
+
+  async function runTurn(player){
     const compact = {
       state,
-      lastTurns: transcript.slice(-8),
-      player: userInput
+      lastTurns: transcript.slice(-6),
+      player
     };
 
     const payload = {
-      model,
+      model: "gpt-4.1-mini",
       input: [
         { role: "system", content: MASTER_SPEC },
         { role: "user", content: JSON.stringify(compact) }
@@ -406,52 +567,43 @@ The 'choices' array must match the numbered choices text, so the UI can render b
       max_output_tokens: 900
     };
 
-    setStatus("Calling relay…");
-    const resp = await callWorker(payload);
+    disableAll(true);
+    clip("SYSTEM", "Publishing… contacting the archive.");
+    try{
+      const resp = await callWorker(payload);
+      const text = (resp.output_text || "").trim();
+      clip("ISSUE", stripState(text));
 
-    const text = (resp.output_text ?? "").trim();
-    const visible = stripStateJson(text);
-
-    addMsg("ENGINE", visible);
-
-    const { newState, choices } = extractStateAndChoices(text);
-    if (newState) {
-      state = newState;
-      renderDashboard(state);
-      renderChoices(choices);
-    } else {
-      addMsg("SYSTEM", "Could not parse <STATE_JSON>. Ask the engine to re-emit it exactly.");
-    }
-
-    setStatus("Ready.");
-  }
-
-  function disableInputs(disabled) {
-    for (const el of document.querySelectorAll("button, input, textarea, select")) el.disabled = disabled;
-  }
-
-  async function submitChoice(choiceId, customText) {
-    try {
-      disableInputs(true);
-
-      if (customText && customText.length > 0) {
-        addMsg("YOU", customText);
+      const newState = extractState(text);
+      if (newState){
+        state = newState;
+        renderDash(state);
+        renderChoices(state.choices || []);
+        const outcome = checkEndgame(state);
+        if (outcome) showEnd(outcome);
       } else {
-        addMsg("YOU", `Choice ${choiceId}`);
+        clip("ERROR", "Could not parse <STATE_JSON>. The engine must output it exactly.");
       }
-
-      await runLLMTurn({ choiceId, customText });
-    } catch (e) {
-      addMsg("ERROR", String(e));
-      setStatus("Error — see log.");
+    } catch(e){
+      clip("ERROR", String(e));
     } finally {
-      disableInputs(false);
+      disableAll(false);
     }
   }
 
-  function newRun() {
+  async function submitChoice(id){
+    clip("YOU", `Choice ${id}`);
+    await runTurn({ choiceId: id });
+  }
+
+  function newRun(){
+    overlay.style.display = "none";
+    endStamp.textContent = "Status: RUNNING";
+    endStamp.style.borderColor = "rgba(31,75,122,.6)";
+    endStamp.style.color = "#1f4b7a";
+
     transcript = [];
-    logEl.innerHTML = "";
+    feed.innerHTML = "";
 
     state = {
       year: 1889,
@@ -467,33 +619,30 @@ The 'choices' array must match the numbered choices text, so the UI can render b
       moralDebt: 0,
       integrity: 5,
       agendas: [
-        { name: "Imperial Competition", momentum: 1 },
-        { name: "Arms Race Spiral", momentum: 1 },
-        { name: "Revolutionary Wave", momentum: 0 },
-        { name: "Resource Competition", momentum: 0 },
-        { name: "Media/Information Incentives", momentum: 0 }
+        { name:"Imperial Competition", momentum: 1 },
+        { name:"Arms Race Spiral", momentum: 1 },
+        { name:"Revolutionary Wave", momentum: 0 },
+        { name:"Resource Competition", momentum: 0 },
+        { name:"Media/Information Incentives", momentum: 0 }
       ],
-      choices: []
+      choices:[]
     };
 
-    renderDashboard(state);
+    renderDash(state);
     renderChoices([]);
 
-    addMsg("SYSTEM",
-`Welcome. You are The Watcher.
+    clip("SYSTEM",
+`Welcome to THE WATCHER TIMES.
 
-Before Turn 1, the engine will explain:
+You will receive a brief preamble on:
 • Great Person vs Zeitgeist/structural history
-• The counterfactual ethics problem (infant-catalyst dilemma)
-Then the timeline begins (1889 → … → 2025).`);
+• The counterfactual ethics dilemma
+Then Issue #1 begins at the fixed starting point (1889).`);
 
-    runLLMTurn({
-      choiceId: null,
-      customText: "Begin the game from the fixed starting point. First deliver the pedagogical preamble, then start Turn 1 with Forecast/Newswire/Dilemmas and 3–5 choices."
-    });
+    runTurn({ choiceId:null, note:"Begin. Provide the preamble, then Turn 1 with choices." });
   }
 
-  function exportRun() {
+  function exportRun(){
     const blob = new Blob([JSON.stringify({ state, transcript }, null, 2)], { type:"application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -503,18 +652,16 @@ Then the timeline begins (1889 → … → 2025).`);
     URL.revokeObjectURL(url);
   }
 
-  // Wire buttons
-  $("btnInit").onclick = newRun;
-  $("btnExport").onclick = exportRun;
-  $("btnCustom").onclick = () => submitChoice("CUSTOM", $("freeText").value.trim());
+  document.getElementById("startBtn").onclick = newRun;
+  document.getElementById("exportBtn").onclick = exportRun;
+  document.getElementById("clearBtn").onclick = () => { feed.innerHTML = ""; };
 
-  // Prefill config
-  $("workerUrl").value = DEFAULT_WORKER_URL;
-  $("classCode").value = DEFAULT_CLASS_CODE;
-  $("model").value = DEFAULT_MODEL;
+  document.getElementById("closeEnd").onclick = () => overlay.style.display = "none";
+  document.getElementById("restartEnd").onclick = newRun;
 
-  renderDashboard(null);
-  setStatus("Click “Start New Run”. If it errors, copy the ERROR text back here.");
+  // initial render
+  renderDash(null);
+  renderChoices([]);
 </script>
 </body>
 </html>
