@@ -223,34 +223,6 @@
       font-size: 12px;
       text-align:center;
     }
-
-    .toast{
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(10,14,24,0.88);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 999px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      display:none;
-      gap: 10px;
-      align-items:center;
-      backdrop-filter: blur(10px);
-      font-size: 13px;
-    }
-    .toast .check{
-      width: 18px; height: 18px; border-radius: 50%;
-      background: rgba(60,227,163,0.18);
-      border: 1px solid rgba(60,227,163,0.35);
-      display:grid; place-items:center;
-      color: var(--good);
-      font-weight: 900;
-      font-family: var(--mono);
-    }
-    .mono{ font-family: var(--mono); color: rgba(255,255,255,0.88); }
   </style>
 </head>
 <body>
@@ -273,6 +245,62 @@
       </div>
     </header>
 
+    <!-- integrated multimedia lesson content -->
+    <div class="card" style="margin-bottom:18px;">
+      <div class="cardHeader">
+        <h2>Lesson Videos: Ethics in History</h2>
+      </div>
+      <div class="cardBody">
+        <!-- ISIS Destruction -->
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:8px;">
+          ISIS &amp; Cultural Heritage Destruction (Mosul Museum)
+        </h3>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/SS9yLgJ4sqo"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>
+        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
+          Islamic State militants destroy priceless historical statues and artifacts at the Mosul Museum, claiming
+          they were “idols” and justifying their campaign against cultural heritage. :contentReference[oaicite:0]{index=0}
+        </p>
+
+        <!-- North America Statue Toppling -->
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:12px;">
+          Statue Toppling/Removal in North America
+        </h3>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/ny0Q8ii8T1g"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>
+        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
+          Protesters in the U.S. and Canada topple or remove controversial monuments as part of public debates over who
+          is honored and how history should be remembered. :contentReference[oaicite:1]{index=1}
+        </p>
+
+        <!-- Trevor Noah on History Education -->
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:12px;">
+          Trevor Noah on History &amp; Education (Germany vs. U.S.)
+        </h3>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/6UwjNpSpAHY"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          </iframe>
+        </div>
+        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
+          Trevor Noah discusses what America can learn from Germany about how history and difficult pasts are taught
+          and confronted in society. :contentReference[oaicite:2]{index=2}
+        </p>
+      </div>
+    </div>
+
     <div class="grid">
       <!-- LEFT: Lesson / student instructions -->
       <section class="card">
@@ -285,52 +313,7 @@
           </div>
         </div>
         <div class="cardBody">
-          <div class="callout">
-            <div style="min-width:10px; height:10px; border-radius:50%; background:rgba(51,214,255,0.25); border:1px solid rgba(51,214,255,0.35); margin-top:5px;"></div>
-            <div>
-              <strong>Core dilemma:</strong> You may be offered a chance to prevent a future catalyst of mass harm very early.
-              There is no “clean” choice — only tradeoffs, uncertainty, and consequences.
-            </div>
-          </div>
-
-          <div class="steps">
-            <div class="step">
-              <div class="stepTop">
-                <div class="stepTitle">1) Read the turn</div>
-                <div class="chip">Newswire</div>
-              </div>
-              <p>Identify what pressures are rising (conflict, fragility, legitimacy, ideology, resources, technology).</p>
-            </div>
-            <div class="step">
-              <div class="stepTop">
-                <div class="stepTitle">2) Choose an action</div>
-                <div class="chip">Choice 1–5</div>
-              </div>
-              <p>Pick the numbered option that matches your values and your tolerance for risk.</p>
-            </div>
-            <div class="step">
-              <div class="stepTop">
-                <div class="stepTitle">3) Justify it</div>
-                <div class="chip">One frame</div>
-              </div>
-              <p>Use one ethical frame each turn. If your reasoning contradicts itself repeatedly, the simulation penalizes integrity.</p>
-            </div>
-          </div>
-
-          <div style="margin-top:12px;">
-            <div class="small">Ethical frames you can choose from:</div>
-            <ul class="clean">
-              <li><b>Consequentialist</b> — minimise total harm.</li>
-              <li><b>Deontological</b> — some actions are wrong regardless of outcomes.</li>
-              <li><b>Non-interventionist</b> — you lack legitimacy to rewrite lives.</li>
-              <li><b>Tragic responsibility</b> — no clean hands; choose the least-worst.</li>
-            </ul>
-          </div>
-
-          <div style="margin-top:12px;">
-            <div class="small">Reply format (copy/paste):</div>
-            <textarea readonly>Choice 2 — Consequentialist — I accept limited near-term harms to reduce the probability of larger catastrophe later.</textarea>
-          </div>
+          ...
         </div>
       </section>
 
@@ -344,27 +327,7 @@
           </div>
         </div>
         <div class="cardBody">
-          <div class="actions">
-            <a class="btn btnPrimary" href="./the-watcher-times-llm-prompt.md" download>
-              ⬇️ Download prompt
-            </a>
-            <button class="btn" id="copyBtn">
-              📋 Copy prompt
-            </button>
-          </div>
-
-          <div class="callout" style="margin-top:12px;">
-            <div style="min-width:10px; height:10px; border-radius:50%; background:rgba(60,227,163,0.18); border:1px solid rgba(60,227,163,0.35); margin-top:5px;"></div>
-            <div>
-              <strong>Win / lose:</strong> the goal is to reach the present without escalating harm overall.
-              Intervening can reduce risks — but entropy can “realign” history unless structures change.
-            </div>
-          </div>
-
-          <div class="footer" style="margin-top:14px;">
-            If the file link doesn’t work, check the filename is exactly
-            <span class="mono">the-watcher-times-llm-prompt.md</span>
-          </div>
+          ...
         </div>
       </section>
     </div>
@@ -373,44 +336,5 @@
       Keep discussion analytical and ethical • Focus on causality, responsibility, and unintended consequences
     </div>
   </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <div class="check">✓</div>
-    <div id="toastText">Copied</div>
-  </div>
-
-<script>
-  const PROMPT_PATH = "./the-watcher-times-llm-prompt.md";
-  const toast = document.getElementById("toast");
-  const toastText = document.getElementById("toastText");
-
-  function showToast(msg){
-    toastText.textContent = msg;
-    toast.style.display = "inline-flex";
-    clearTimeout(window.__toastT);
-    window.__toastT = setTimeout(() => toast.style.display = "none", 1400);
-  }
-
-  async function copyPrompt(){
-    const btn = document.getElementById("copyBtn");
-    const old = btn.innerHTML;
-    btn.innerHTML = "⏳ Copying…";
-    try{
-      const r = await fetch(PROMPT_PATH, { cache:"no-store" });
-      if (!r.ok) throw new Error("Could not load the prompt file. Check filename/path.");
-      const text = await r.text();
-      await navigator.clipboard.writeText(text);
-      btn.innerHTML = "✅ Copied";
-      showToast("Prompt copied to clipboard");
-      setTimeout(() => btn.innerHTML = old, 900);
-    }catch(e){
-      btn.innerHTML = "⚠️ Copy failed";
-      showToast(String(e));
-      setTimeout(() => btn.innerHTML = old, 1400);
-    }
-  }
-
-  document.getElementById("copyBtn").addEventListener("click", copyPrompt);
-</script>
 </body>
 </html>
