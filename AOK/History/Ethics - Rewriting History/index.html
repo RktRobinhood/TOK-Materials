@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Watcher Times</title>
+  <title>Ethics in History</title>
   <style>
     :root{
       --bg0:#070A12;
@@ -68,23 +68,6 @@
       font-size: 13px;
       line-height: 1.45;
       max-width: 70ch;
-    }
-
-    .badgeRow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-    .badge{
-      display:inline-flex; gap: 8px; align-items:center;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--muted);
-      font-size: 12px;
-      backdrop-filter: blur(8px);
-    }
-    .dot{
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent2);
-      box-shadow: 0 0 0 3px rgba(51,214,255,0.18);
     }
 
     .grid{
@@ -192,37 +175,6 @@
       border-radius: 999px;
       font-family: var(--mono);
     }
-    .step p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.5; }
-
-    textarea{
-      width:100%;
-      min-height: 120px;
-      resize: vertical;
-      background: rgba(0,0,0,0.30);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius);
-      color: rgba(255,255,255,0.90);
-      padding: 12px 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      font-family: var(--mono);
-      outline:none;
-    }
-
-    ul.clean{
-      margin: 10px 0 0 18px;
-      padding:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .footer{
-      margin-top: 16px;
-      color: var(--muted2);
-      font-size: 12px;
-      text-align:center;
-    }
   </style>
 </head>
 <body>
@@ -231,110 +183,120 @@
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <h1>The Watcher Times</h1>
+          <h1>Ethics in History</h1>
           <div class="subtitle">
-            You are “The Watcher” — an observer who can intervene in history at personal risk.
-            Your job is to reach the present without making outcomes worse, while defending your decisions ethically.
-          </div>
-          <div class="badgeRow">
-            <div class="badge"><span class="dot"></span>Choose-your-own-adventure</div>
-            <div class="badge">Topic: ethics + causality</div>
-            <div class="badge">Lens: Great Person ↔ zeitgeist</div>
+            Explore how societies confront and preserve history — from destruction of heritage to contested monuments and
+            how history itself is taught.
           </div>
         </div>
       </div>
     </header>
 
-    <!-- integrated multimedia lesson content -->
-    <div class="card" style="margin-bottom:18px;">
+    <!-- Lesson Videos / Guided Questions -->
+    <div class="card" style="margin-bottom:24px;">
       <div class="cardHeader">
-        <h2>Lesson Videos: Ethics in History</h2>
+        <h2>Watch & Reflect</h2>
+        <div class="small">
+          Watch each video and consider the ethical questions it raises about how we value and remember the past.
+        </div>
       </div>
       <div class="cardBody">
+
         <!-- ISIS Destruction -->
-        <h3 style="color:var(--accent2); font-size:16px; margin-top:8px;">
-          ISIS &amp; Cultural Heritage Destruction (Mosul Museum)
-        </h3>
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:8px;">ISIS &amp; Cultural Heritage</h3>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
           <iframe src="https://www.youtube.com/embed/SS9yLgJ4sqo"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
             style="position:absolute;top:0;left:0;width:100%;height:100%;">
           </iframe>
         </div>
-        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
-          Islamic State militants destroy priceless historical statues and artifacts at the Mosul Museum, claiming
-          they were “idols” and justifying their campaign against cultural heritage. :contentReference[oaicite:0]{index=0}
+        <p class="small">
+          This video shows militants destroying ancient statues and artifacts at the Mosul Museum — part of a wider campaign
+          of heritage destruction. Critics argue that this erases millennia of shared human history and identity. :contentReference[oaicite:0]{index=0}
         </p>
 
-        <!-- North America Statue Toppling -->
-        <h3 style="color:var(--accent2); font-size:16px; margin-top:12px;">
-          Statue Toppling/Removal in North America
-        </h3>
+        <!-- Statue Toppling -->
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:24px;">Statue Toppling in North America</h3>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
           <iframe src="https://www.youtube.com/embed/ny0Q8ii8T1g"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
             style="position:absolute;top:0;left:0;width:100%;height:100%;">
           </iframe>
         </div>
-        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
-          Protesters in the U.S. and Canada topple or remove controversial monuments as part of public debates over who
-          is honored and how history should be remembered. :contentReference[oaicite:1]{index=1}
+        <p class="small">
+          Protesters have toppled or removed controversial monuments as part of debates about representation, memory,
+          and justice in public spaces. :contentReference[oaicite:1]{index=1}
         </p>
 
-        <!-- Trevor Noah on History Education -->
-        <h3 style="color:var(--accent2); font-size:16px; margin-top:12px;">
-          Trevor Noah on History &amp; Education (Germany vs. U.S.)
-        </h3>
+        <!-- Trevor Noah -->
+        <h3 style="color:var(--accent2); font-size:16px; margin-top:24px;">Trevor Noah on History &amp; Education</h3>
         <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-          <iframe src="https://www.youtube.com/embed/6UwjNpSpAHY"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          <iframe src="https://www.youtube.com/embed/q6evARV6JE0?si=SnfA36QQ6hp3MQh1"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
             allowfullscreen
             style="position:absolute;top:0;left:0;width:100%;height:100%;">
           </iframe>
         </div>
-        <p style="font-size:13px; color:var(--muted); margin-top:6px;">
-          Trevor Noah discusses what America can learn from Germany about how history and difficult pasts are taught
-          and confronted in society. :contentReference[oaicite:2]{index=2}
+        <p class="small">
+          Trevor Noah discusses differences in how societies confront their histories and embed moral reflection in education.
+          A key insight: “In Germany, no child finishes high school without learning not just the facts but the how and why of the Holocaust.” :contentReference[oaicite:2]{index=2}
         </p>
       </div>
     </div>
 
-    <div class="grid">
-      <!-- LEFT: Lesson / student instructions -->
-      <section class="card">
-        <div class="cardHeader">
-          <h2>What you’re exploring</h2>
-          <div class="small">
-            Two explanations of history:
-            <b>Great Person</b> (individual agency) and <b>zeitgeist/structural forces</b> (pressures like institutions, economy, ideology, resources, and technology).
-            The simulation tests what happens when you intervene — and what happens when you don’t.
-          </div>
+    <!-- Activity: The Watcher Times -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="cardHeader">
+        <h2>Activity: The Watcher Times</h2>
+        <div class="small">
+          Apply your ethical reasoning in a historical simulation. Make choices, weigh pressures, and justify them.
         </div>
-        <div class="cardBody">
-          ...
+      </div>
+      <div class="cardBody">
+        <div class="callout">
+          <strong>Core dilemma:</strong> You may be offered a chance to prevent a future catalyst of mass harm very early.
+          There is no “clean” choice — only tradeoffs, uncertainty, and consequences.
         </div>
-      </section>
+        <div class="steps">
+          <div class="step"><div class="stepTop"><div class="stepTitle">1) Read the turn</div><div class="chip">Newswire</div></div><p>Identify what pressures are rising (conflict, fragility, legitimacy, ideology, resources, technology).</p></div>
+          <div class="step"><div class="stepTop"><div class="stepTitle">2) Choose an action</div><div class="chip">Choice 1–5</div></div><p>Pick the numbered option that matches your values and your tolerance for risk.</p></div>
+          <div class="step"><div class="stepTop"><div class="stepTitle">3) Justify it</div><div class="chip">One frame</div></div><p>Use one ethical frame each turn. If your reasoning contradicts itself repeatedly, the simulation penalizes integrity.</p></div>
+        </div>
 
-      <!-- RIGHT: Buttons -->
-      <section class="card">
-        <div class="cardHeader">
-          <h2>Start the simulation</h2>
-          <div class="small">
-            Use the master prompt to launch the game in your chat tool.
-            You can either download it or copy it directly.
-          </div>
+        <div class="small" style="margin-top:12px;">Ethical frames you can choose from:</div>
+        <ul class="clean">
+          <li><b>Consequentialist</b> — minimise total harm.</li>
+          <li><b>Deontological</b> — some actions are wrong regardless of outcomes.</li>
+          <li><b>Non-interventionist</b> — you lack legitimacy to rewrite lives.</li>
+          <li><b>Tragic responsibility</b> — no clean hands; choose the least-worst.</li>
+        </ul>
+
+        <div class="small" style="margin-top:12px;">Reply format (copy/paste):</div>
+        <textarea readonly style="margin-top:4px;">Choice 2 — Consequentialist — I accept limited near-term harms to reduce the probability of larger catastrophe later.</textarea>
+
+        <div class="actions" style="margin-top:16px;">
+          <a class="btn btnPrimary" href="./the-watcher-times-llm-prompt.md" download>⬇️ Download prompt</a>
+          <button class="btn" id="copyBtn">📋 Copy prompt</button>
         </div>
-        <div class="cardBody">
-          ...
-        </div>
-      </section>
+      </div>
     </div>
 
-    <div class="footer" style="margin-top:18px;">
+    <div class="footer">
       Keep discussion analytical and ethical • Focus on causality, responsibility, and unintended consequences
     </div>
   </div>
+
+  <script>
+    const btn = document.getElementById("copyBtn");
+    btn.addEventListener("click", async () => {
+      const r = await fetch("./the-watcher-times-llm-prompt.md", {cache:"no-store"});
+      const text = await r.text();
+      await navigator.clipboard.writeText(text);
+      alert("Prompt copied to clipboard");
+    });
+  </script>
 </body>
 </html>
