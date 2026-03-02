@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TOK — Exit Through the Gift Shop: Reflection Lab</title>
+  <style>
+    /* MBW-inspired: bright pop, collage blocks, bold outlines, playful chaos (still readable) */
+    :root{
+      --bg:#fff9ee;
+      --panel:#ffffff;
+      --ink:#121212;
+      --muted:#3a3a3a;
+      --line:#121212;
+      --hot:#ff2aa6;
+      --acid:#b6ff3b;
+      --sky:#2bd3ff;
+      --sun:#ffd400;
+      --vio:#7c5cff;
+      --shadow: 0 10px 0 rgba(18,18,18,.16);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(1000px 700px at 10% 0%, rgba(43,211,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(255,42,166,.18), transparent 55%),
+        radial-gradient(900px 650px at 20% 90%, rgba(182,255,59,.20), transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      line-height:1.45;
+    }
+
+    header{
+      border-bottom:4px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,212,0,.35), rgba(255,212,0,.06)),
+        repeating-linear-gradient(45deg, rgba(18,18,18,.06), rgba(18,18,18,.06) 10px, rgba(255,255,255,0) 10px, rgba(255,255,255,0) 20px);
+      padding:22px 18px;
+    }
+
+    .wrap{max-width:980px;margin:0 auto;padding:16px}
+    h1{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}
+    p{margin:8px 0;color:var(--muted)}
+
+    .kicker{
+      display:inline-block;
+      background:var(--sun);
+      border:3px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:12px;
+    }
+
+    .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 14px}
+    .tabbtn{
+      border:3px solid var(--line);
+      background:var(--panel);
+      color:var(--ink);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      box-shadow:var(--shadow);
+      transform:translateY(0);
+      transition:transform .08s ease;
+    }
+    .tabbtn:hover{transform:translateY(-1px)}
+    .tabbtn[aria-selected="true"]{
+      background:linear-gradient(90deg, rgba(255,42,166,.20), rgba(43,211,255,.20), rgba(182,255,59,.20));
+      outline:0;
+    }
+
+    .panel{
+      display:none;
+      background:var(--panel);
+      border:3px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .panel.active{display:block}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media (min-width:880px){.grid{grid-template-columns:1fr 1fr}}
+
+    .card{
+      background:
+        radial-gradient(480px 260px at 20% 10%, rgba(255,42,166,.10), transparent 60%),
+        radial-gradient(520px 300px at 90% 20%, rgba(43,211,255,.12), transparent 60%),
+        #fff;
+      border:3px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 8px;font-size:15px}
+    .small{font-size:12px;color:var(--muted)}
+    ul{margin:8px 0 0 18px;color:var(--muted)}
+    li{margin:6px 0}
+    a{color:#0b5cff;font-weight:800}
+    a:hover{color:#003bb9}
+
+    .pill{
+      display:inline-block;
+      border:3px solid var(--line);
+      background:linear-gradient(90deg, rgba(255,42,166,.18), rgba(255,212,0,.20));
+      color:var(--ink);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      box-shadow: 0 6px 0 rgba(18,18,18,.12);
+      margin:2px 4px 0 0;
+    }
+
+    .task{
+      margin-top:10px;
+      border-left:8px solid var(--hot);
+      padding-left:12px;
+      background:rgba(255,42,166,.06);
+      border-radius:12px;
+      padding:10px 12px;
+    }
+    .task strong{font-weight:950}
+
+    .two{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width:880px){.two{grid-template-columns:1fr 1fr}}
+
+    .embed{
+      position:relative;
+      padding-top:56.25%;
+      border-radius:16px;
+      overflow:hidden;
+      border:3px solid var(--line);
+      box-shadow:var(--shadow);
+      background:#000;
+    }
+    .embed iframe{position:absolute;inset:0;width:100%;height:100%}
+
+    .divider{
+      height:10px;
+      background:linear-gradient(90deg, var(--hot), var(--sky), var(--acid), var(--sun), var(--vio));
+      border:3px solid var(--line);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      margin:18px 0 12px;
+    }
+
+    footer{
+      padding:18px;
+      color:var(--muted);
+      border-top:4px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+
+    .callout{
+      background:linear-gradient(180deg, rgba(182,255,59,.22), rgba(255,255,255,.75));
+      border:3px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-top:14px;
+    }
+
+    .checklist li{color:var(--ink)}
+  
+    .submission-template p{
+      border:3px dashed rgba(18,18,18,.35);
+      border-radius:14px;
+      padding:10px 12px;
+      margin:10px 0;
+      background:rgba(255,255,255,.65);
+      font-weight:700;
+    }
+    .submission-template .c1{color:#d1007f}
+    .submission-template .c2{color:#0057ff}
+    .submission-template .c3{color:#0a7a1f}
+    .submission-template .c4{color:#a35a00}
+    .submission-template .c5{color:#5a2cff}
+    .submission-template .c6{color:#007b8a}
+
+  </style>
+</head>
+
+<body>
+  
+  <header>
+    <div class="wrap">
+      <span class="kicker">TOK Reflection Lab</span>
+      <h1>Exit Through the Gift Shop — Can Anyone Be an Artist?</h1>
+      <p><strong>Last class we watched <em>Exit Through the Gift Shop</em>, but we did not have time to discuss it.</strong> As such, for your work alone activity I have set it up so that you will take a look at the art industry using the tools of TOK. I am hoping that you will show an understanding of the TOK Knowledge Framework, as well as 2-3 of the 12 TOK concepts. There is also a section on HeArt - Herning's museum of art. This is a seperate section, becasue I am looking to get your ideas since we are pitching a class trip to management :)</p>
+      <p class="small"><strong>Goals:</strong> (1) expose how value, authority, and authenticity operate in the art world, (2) practice evaluating sources, and (3) apply TOK vocabulary precisely.</p>
+    </div>
+  </header>
+
+
+  <main class="wrap">
+    <nav class="tabs" role="tablist" aria-label="Content tabs">
+      <button class="tabbtn" role="tab" aria-selected="true" aria-controls="p1" id="t1">1) Film Reflection</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p2" id="t2">2) Mr. Brainwash</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p3" id="t3">3) Art Market: Laundering</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p4" id="t4">4) NFTs (Fast Recap)</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p6" id="t6">5) Final Submission</button>
+    </nav>
+
+    <section class="panel active" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="grid">
+        <div class="card">
+          <h3>Anchor questions (from our viewing guide)</h3>
+          <ul>
+            <li><strong>Identity + authority:</strong> What does Banksy’s anonymity contribute to the message?</li>
+            <li><strong>Production vs creativity:</strong> What does MBW’s exhibition process reveal?</li>
+            <li><strong>Media power:</strong> What role do critics/media play in what counts as “valuable” art?</li>
+            <li><strong>Perception vs substance:</strong> How much is MBW’s success perception rather than quality?</li>
+            <li><strong>Truth status:</strong> Is the film a documentary or an artwork in disguise?</li>
+          </ul>
+
+          <div class="task">
+            <strong>Think (no writing here):</strong> decide your standard for “art.”<br/>
+            <span class="small">Your standard must be something you can defend — not just taste.</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>Source anchors (use for evidence)</h3>
+          <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Exit_Through_the_Gift_Shop" target="_blank" rel="noopener">Film overview + debate summary</a></li>
+            <li><a href="https://www.rogerebert.com/reviews/exit-through-the-gift-shop-2010" target="_blank" rel="noopener">Ebert review (truth vs art)</a></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Critical reflection prompts</h3>
+          <ul class="checklist">
+            <li><strong>Framing:</strong> What does the film invite you to believe, and what does it conveniently hide?</li>
+            <li><strong>Evidence quality:</strong> Which scenes function as “proof,” and why might that be misleading?</li>
+            <li><strong>Authority:</strong> Who has the power to label something “important” in this film?</li>
+            <li><strong>Ethics:</strong> If the film is manipulative, is that ethically acceptable — and does it change its value?</li>
+          </ul>
+
+          <div class="task">
+            <strong>Micro-task:</strong> Choose ONE scene that “manufactures meaning.”<br/>
+            <span class="small">In your final submission, you’ll analyze how that scene constructs knowledge/value.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" role="tabpanel" id="p2" aria-labelledby="t2">
+      <div class="grid">
+        <div class="card">
+          <h3>Mr. Brainwash: “Life is Beautiful” (2008)</h3>
+          <p class="small">We’re not grading taste. We’re grading justification.</p>
+          <ul>
+            <li><a href="https://obeygiant.com/mr-brainwash-life-is-beautiful-exhibition/" target="_blank" rel="noopener">Obey Giant: exhibition details</a></li>
+            <li><a href="https://www.artsy.net/artist-series/mr-brainwash-life-is-beautiful" target="_blank" rel="noopener">Artsy: series page + market framing</a></li>
+            <li><a href="https://mrbrainwash.com/life-is-beautiful-first-ever-solo-exhibition/" target="_blank" rel="noopener">MBW: timeline + venue details</a></li>
+          </ul>
+
+          <div class="task">
+            <strong>Key TOK wedge:</strong>
+            <span class="pill">craft</span>
+            <span class="pill">art</span>
+            <span class="pill">brand</span><br/>
+            <span class="small">Your analysis must explicitly separate these three — even if you think they overlap.</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Critical reflection prompts</h3>
+          <ul class="checklist">
+            <li><strong>Copying:</strong> When does appropriation become transformation — and when is it extraction?</li>
+            <li><strong>Authorship:</strong> If assistants fabricate the work, what exactly is the “artist” responsible for?</li>
+            <li><strong>Gatekeeping:</strong> Who benefits when MBW is accepted into the art world?</li>
+            <li><strong>Credibility:</strong> What counts as “good evidence” that MBW is (or isn’t) an artist?</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <h3>Optional perspective (profile)</h3>
+          <ul>
+            <li><a href="https://www.insidehook.com/culture/artist-mr-brainwash-banksy-interview" target="_blank" rel="noopener">InsideHook interview/profile</a></li>
+          </ul>
+
+          <div class="task">
+            <strong>Micro-task:</strong> Identify 2 persuasion moves (social proof, authority, narrative, aesthetics, scarcity).<br/>
+            <span class="small">Use these as evidence for how the “artist identity” is constructed.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" role="tabpanel" id="p3" aria-labelledby="t3">
+      <div class="grid">
+        <div class="card">
+          <h3>Money laundering + sanctions evasion (art market)</h3>
+          <ul>
+            <li><a href="https://baselgovernance.org/publications/quick-guide-29-money-laundering-and-sanctions-evasion-using-art-market" target="_blank" rel="noopener">Basel Institute: Quick Guide 29</a></li>
+            <li><a href="https://baselgovernance.org/sites/default/files/2023-04/230412-quickguide_29.pdf" target="_blank" rel="noopener">Basel Institute PDF (details)</a></li>
+            <li><a href="https://www.gov.uk/hmrc-internal-manuals/economic-crime-supervision-handbook/ecsh54750" target="_blank" rel="noopener">UK gov: freeports and AML risk (HMRC manual)</a></li>
+          </ul>
+
+          <div class="task">
+            <strong>Core idea:</strong> art is a “value container” where price is partly belief + authority, not just utility.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Video: freeports & opacity (pick ONE)</h3>
+          <div class="two">
+            <div>
+              <p class="small"><strong>Option 1:</strong> The Black Box of the Art Business (Geneva Freeport)</p>
+              <div class="embed">
+                <iframe src="https://www.youtube.com/embed/5TSE2TcMduc" title="The Black Box of the Art Business" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div>
+              <p class="small"><strong>Option 2:</strong> Inside the $100B “Museum of the Missing”</p>
+              <div class="embed">
+                <iframe src="https://www.youtube.com/embed/tPmwhU6F4Bk" title="Inside the $100 Billion Museum of the Missing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <strong>Critical prompts:</strong>
+            <ul class="checklist">
+              <li>What claims are made, and what evidence is shown?</li>
+              <li>What is missing (counterevidence, data, alternative explanations)?</li>
+              <li>What incentives might the creator or interviewees have?</li>
+              <li>How does this connect back to the film’s “value manufacturing” theme?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" role="tabpanel" id="p4" aria-labelledby="t4">
+      <div class="grid">
+        <div class="card">
+          <h3>NFTs: what you “own” vs what you can “copy”</h3>
+          <ul>
+            <li><a href="https://www.christies.com/en/artists/beeple" target="_blank" rel="noopener">Christie’s: Beeple sale details</a></li>
+            <li><a href="https://www.newyorker.com/tech/annals-of-technology/how-beeple-crashed-the-art-world" target="_blank" rel="noopener">The New Yorker: Beeple + NFTs</a></li>
+          </ul>
+
+          <div class="task">
+            <strong>Fast recap:</strong> an NFT is a ledger claim (a token) associated with an asset — it’s not the image itself.<br/>
+            <span class="small">TOK angle: value depends on community belief + system trust + scarcity stories.</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Critical reflection prompts</h3>
+          <ul class="checklist">
+            <li>Is NFT value closer to <strong>art</strong>, <strong>finance</strong>, or <strong>fandom</strong>? Justify.</li>
+            <li>What makes digital scarcity believable?</li>
+            <li>What parallels exist between NFTs and MBW’s rise (hype, authority, social proof, narrative)?</li>
+          </ul>
+
+          <div class="task">
+            <strong>Micro-task:</strong> Write down (on paper) one strong analogy you can use in your final submission:
+            <span class="pill">MBW</span> : <span class="pill">art market</span> :: <span class="pill">NFTs</span> : <span class="pill">_____</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" role="tabpanel" id="p6" aria-labelledby="t6">
+      <div class="card">
+        <h3>Final submission (TOK analysis)</h3>
+        <p><strong>Submit:</strong> a concise analysis using the <strong>Knowledge Framework</strong> + <strong>three TOK concepts</strong> to assess what this unit exposed about the art world.</p>
+
+        <div class="task" style="border-left-color:var(--sky);background:rgba(43,211,255,.08)">
+          <strong>Submission format (strict — short answers, not an essay)</strong><br/>
+          <span class="small">Use the exact headings below. This structure makes it obvious who actually read/watched the materials and who is submitting generic AI output.</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="callout">
+          <h3 style="margin-top:0">Copy/paste template (each paragraph must stay in its colour)</h3>
+          <p class="small">Keep each paragraph to <strong>3–6 sentences</strong>. Include at least <strong>one specific scene</strong> from the film and <strong>two specific details</strong> from sources you opened in the tabs.</p>
+
+          <div class="submission-template">
+            <p class="c1"><strong>1) Scope:</strong> What knowledge about “art” and “value” is being produced here? What is treated as valid/invalid knowledge?</p>
+            <p class="c2"><strong>2) Methods & tools:</strong> How is value/meaning constructed (media, critics, scarcity, institutions, marketing, provenance, freeports)? Use evidence.</p>
+            <p class="c3"><strong>3) Perspectives:</strong> Compare at least two perspectives (e.g., artist vs collector; critic vs public; museum vs regulator). Who has power and why?</p>
+            <p class="c4"><strong>4) Ethics:</strong> Identify one ethical tension (e.g., deception, laundering risks, gatekeeping, appropriation). Make a judgement with a clear standard.</p>
+            <p class="c5"><strong>5) TOK concepts (2–3):</strong> Choose 2–3 concepts from the TOK list and <strong>exemplify</strong> each one with a specific scene/detail. Then <strong>justify</strong> using evidence from the sources in the tabs.</p>
+            <p class="c6"><strong>6) Conclusion:</strong> After this unit, what is your best answer to “Can anyone be an artist?” Give your conditions (your standard) and one counterexample.</p>
+          </div>
+
+          <p class="small"><strong>Integrity note:</strong> If your submission reads like generic “AI slop” (vague claims, no specific evidence, no real engagement with sources), it will be treated as non-demonstrated understanding.</p>
+        </div>
+
+
+        <div class="divider"></div>
+
+        <div class="grid">
+          <div class="card" style="box-shadow:none">
+            <h3>Knowledge Framework (minimum requirements)</h3>
+            <ul class="checklist">
+              <li><strong>Scope:</strong> What counts as “art knowledge” here? What’s in/out?</li>
+              <li><strong>Methods & tools:</strong> How is value/meaning produced (curation, media, scarcity, provenance, institutions)?</li>
+              <li><strong>Perspectives:</strong> Compare at least two perspectives (artist, collector, critic, public, museum, regulator).</li>
+              <li><strong>Ethics:</strong> What ethical issues arise (deception, exploitation, laundering, gatekeeping, cultural appropriation)?</li>
+            </ul>
+            <p class="small">Use evidence from: the film + at least 2 sources you opened from the tabs.</p>
+          </div>
+
+          <div class="card" style="box-shadow:none">
+            <h3>Choose 3 TOK concepts (and apply them)</h3>
+            <p class="small">Pick <strong>2–3</strong> concepts from the full TOK list below. Do <strong>not</strong> define them. Instead, <strong>exemplify</strong> each concept with a specific moment from the film and <strong>justify</strong> your interpretation using evidence from the sources you opened in the tabs.</p>
+            
+            <p>
+              <span class="pill">evidence</span>
+              <span class="pill">certainty</span>
+              <span class="pill">truth</span>
+              <span class="pill">interpretation</span>
+              <span class="pill">perspective</span>
+              <span class="pill">culture</span>
+              <span class="pill">power</span>
+              <span class="pill">values</span>
+              <span class="pill">responsibility</span>
+              <span class="pill">justice</span>
+              <span class="pill">explanation</span>
+              <span class="pill">objectivity</span>
+            </p>
+
+            <ul class="checklist">
+              <li>Make 2–3 claims total (not 20 mini-claims).</li>
+              <li>For each claim: include a counterclaim + a standard for evaluating which is stronger.</li>
+              <li>Conclude with what you now think “counts as art” — and why.</li>
+            </ul>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+
+    <section class="callout" id="heart">
+      <span class="kicker">Class Trip — Separate Section</span>
+      <h2 style="margin:10px 0 6px">HEART (Herning) — Explore, then propose a year-group art action</h2>
+      <p class="small">This section is separate from your TOK submission. It’s for shaping a shared year-group art activity.</p>
+
+      <div class="grid">
+        <div class="card" style="box-shadow:none">
+          <h3>Current exhibitions (browse)</h3>
+          <ul>
+            <li><a href="https://heartmus.dk/udstillinger/everything-is-wrong/" target="_blank" rel="noopener">Everything is wrong</a></li>
+            <li><a href="https://heartmus.dk/udstillinger/smittet-af-bacillen/" target="_blank" rel="noopener">Smittet af bacillen</a></li>
+            <li><a href="https://heartmus.dk/udstillinger/form-l-aftryk/" target="_blank" rel="noopener">Form – Aftryk</a></li>
+          </ul>
+        </div>
+        <div class="card" style="box-shadow:none">
+          <h3>Year-group project prompt</h3>
+          <ul class="checklist">
+            <li>What kind of collective artwork would help us <strong>experience</strong> these TOK issues?</li>
+            <li>How could we “manufacture value” (reviews, scarcity, placement, documentation) and then critique it?</li>
+            <li>What ethical boundary would we refuse to cross — and why?</li>
+          </ul>
+          <div class="task">
+            <strong>Bring to class:</strong> one concrete proposal (materials + location + roles + how “value” will be constructed).
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="small">
+        Bright pop-art styling inspired by street-art/collage aesthetics. Keep your analysis concise and evidence-driven.
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // Tabs
+  const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
+  const panels = Array.from(document.querySelectorAll('.panel'));
+  tabButtons.forEach(btn => btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.setAttribute('aria-selected', 'false'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.setAttribute('aria-selected', 'true');
+    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }));
+</script>
+</body>
+</html>
