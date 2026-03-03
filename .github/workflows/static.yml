@@ -178,14 +178,25 @@ jobs:
               <div class="container">
           """
 
-          for base_dir in ['AOK', 'Themes']:
-              if os.path.isdir(base_dir):
-                  html_content += f"        <h2 class='section-title'>{base_dir}</h2>\n"
+          # Define the base directories to scan
+          # Changed 'Assessment/Exhibition' to be a single item to manage its title
+          for base_dir_item in ['AOK', 'Themes', 'Assessment/Exhibition']:
+              
+              # Determine the section title displayed on the page
+              if base_dir_item == 'Assessment/Exhibition':
+                  section_title = 'Assessment Materials' # Or 'Assessment / Exhibition' if you prefer
+                  scan_dir = 'Assessment/Exhibition' # Actual directory to scan
+              else:
+                  section_title = base_dir_item
+                  scan_dir = base_dir_item
+              
+              if os.path.isdir(scan_dir):
+                  html_content += f"        <h2 class='section-title'>{section_title}</h2>\n"
                   html_content += "        <div class='grid'>\n"
                   
                   # Find all index.html files
                   found_files = []
-                  for root, dirs, files in os.walk(base_dir):
+                  for root, dirs, files in os.walk(scan_dir):
                       if 'index.html' in files:
                           found_files.append(os.path.join(root, 'index.html'))
                   
@@ -194,15 +205,28 @@ jobs:
                   for file_path in found_files:
                       file_path = file_path.replace('\\', '/')
                       dir_path = os.path.dirname(file_path)
-                      rel_dir = os.path.relpath(dir_path, base_dir).replace('\\', '/')
+                      rel_dir = os.path.relpath(dir_path, scan_dir).replace('\\', '/')
                       
-                      if rel_dir == '.' or rel_dir == '':
-                          sub_category = ''
-                          topic_name = base_dir
-                      else:
-                          parts = rel_dir.split('/')
-                          sub_category = parts[0]
-                          topic_name = parts[-1]
+                      # For 'Assessment/Exhibition', we want 'Exhibition' as the topic if 'Assessment' is the base.
+                      # If rel_dir is empty, it means the index.html is directly in 'Assessment/Exhibition'
+                      if scan_dir == 'Assessment/Exhibition':
+                          if rel_dir == '.' or rel_dir == '':
+                              # This case handles an index.html directly inside Assessment/Exhibition
+                              sub_category = '' 
+                              topic_name = 'Exhibition' # Default for direct files in the main assessment folder
+                          else:
+                              # This will handle Assessment/Exhibition/SomeSubFolder/index.html
+                              parts = rel_dir.split('/')
+                              sub_category = parts[0]
+                              topic_name = parts[-1]
+                      else: # Existing logic for AOK and Themes
+                          if rel_dir == '.' or rel_dir == '':
+                              sub_category = ''
+                              topic_name = scan_dir
+                          else:
+                              parts = rel_dir.split('/')
+                              sub_category = parts[0]
+                              topic_name = parts[-1]
                       
                       # 1. Grab Title directly from HTML, otherwise use Folder Name
                       page_title = get_html_title(file_path)
@@ -216,14 +240,18 @@ jobs:
                       html_content += "            <div class='card'>\n"
                       
                       # Sub-category tag (e.g., "Art")
-                      if display_sub and display_sub.lower() != display_heading.lower() and display_sub.lower() != topic_name.lower():
+                      # Only show sub-category if it's meaningful and not the same as the main heading or a generic topic name
+                      if display_sub and \
+                         display_sub.lower() != display_heading.lower() and \
+                         display_sub.lower() != topic_name.lower() and \
+                         display_sub.lower() != section_title.lower().replace(' ', ''): # Avoid "Assessment" as a sub-tag if section is "Assessment Materials"
                           html_content += f"                <div class='category-tag'>{display_sub}</div>\n"
                           
                       # Main Lesson Title
                       html_content += f"                <h2>{display_heading}</h2>\n"
                       
                       # Button Context
-                      btn_label = "View Lesson"
+                      btn_label = "View Material" if scan_dir == 'Assessment/Exhibition' else "View Lesson"
                       html_content += f"                <div><a href='{url_path}' class='btn'>{btn_label}</a></div>\n"
                       html_content += "            </div>\n"
                       

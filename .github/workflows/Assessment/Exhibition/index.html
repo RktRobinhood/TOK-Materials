@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding the IB DP TOK Exhibition</title>
+    <style>
+        /* Basic Reset & Global Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        /* Layout & Container */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1, h2, h3, h4 {
+            margin-bottom: 0.8em;
+            color: #005792; /* IB Blue */
+            line-height: 1.3;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: #002b4a; /* Darker IB Blue */
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.5em;
+        }
+
+        .class-tag {
+            text-align: center;
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 2em;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #007bff; /* Lighter Blue */
+            margin-top: 1em;
+        }
+
+        h4 {
+            font-size: 1.1em;
+            color: #17a2b8; /* Teal */
+        }
+
+        /* Paragraphs and Lists */
+        p, ul, ol, table {
+            margin-bottom: 1em;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        strong {
+            color: #d9534f; /* Reddish emphasis */
+        }
+
+        code {
+            background-color: #e9ecef;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2.5em;
+            padding: 1.5em;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #fdfdff;
+        }
+
+        .section-intro {
+             background-color: #e7f3ff; /* Light blue background */
+             border-left: 5px solid #005792;
+        }
+
+        /* Generic vs Specific Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+            width: 50%;
+        }
+
+        .comparison-table th {
+            background-color: #e9ecef;
+            color: #002b4a;
+        }
+
+        .comparison-table td.weak { background-color: #fff5f5; }
+        .comparison-table td.strong { background-color: #f5fff5; }
+
+        /* IA Prompts Box */
+        .prompts-list {
+            background-color: #f1f3f5;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1em;
+        }
+
+        .prompt-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+        }
+
+        .prompt-num {
+            font-weight: bold;
+            color: #005792;
+            min-width: 35px;
+        }
+
+        /* Interactive Elements */
+        .toggle-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 10px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-button:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-content {
+            display: none;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+         .toggle-content.show {
+            display: block;
+        }
+
+        /* Rubric Styling */
+        .rubric-level {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .level-9-10 { background-color: #d4edda; border-left: 4px solid #28a745; }
+        .level-7-8 { background-color: #cce5ff; border-left: 4px solid #007bff; }
+        .level-5-6 { background-color: #fff3cd; border-left: 4px solid #ffc107; }
+        .level-3-4 { background-color: #f8d7da; border-left: 4px solid #dc3545; }
+        .level-1-2 { background-color: #e2e3e5; border-left: 4px solid #6c757d; }
+
+        /* Table Styling */
+        .roadmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        .roadmap-table th, .roadmap-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .roadmap-table th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .roadmap-table tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+
+        .highlight-row {
+            background-color: #fff3cd !important;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2em; }
+            .comparison-table { font-size: 0.9em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Understanding the IB DP TOK Exhibition</h1>
+        <div class="class-tag">OFFICIAL GUIDE: CLASS OF May 2027</div>
+
+        <div class="section section-intro">
+            <h2>What is the TOK Exhibition?</h2>
+            <p>The Theory of Knowledge (TOK) Exhibition is an <strong>internal assessment</strong> component of the IB Diploma Programme. It explores how TOK concepts manifest in the world around us.</p>
+            <p>Instead of a traditional essay, you create an exhibition featuring three objects and a written commentary, connecting them to one specific TOK IA Prompt.</p>
+            <ul>
+                <li>It is marked by your teacher and externally moderated by the IB.</li>
+                <li>It allows you to apply TOK thinking to your interests and experiences.</li>
+                <li>It accounts for <strong>33%</strong> of your final TOK grade.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Core Components</h2>
+            <p>Your TOK Exhibition submission must be a <strong>single digital file</strong> containing:</p>
+            <ol>
+                <li>
+                    <h3>One IA Prompt</h3>
+                    <p>You must choose <strong>one</strong> prompt from the list of 35 official IA Prompts. The prompt forms the central question your exhibition explores and must be used <strong>exactly</strong> as written.</p>
+                    
+                    <div class="prompts-list">
+                        <div class="prompt-item"><span class="prompt-num">1.</span> What counts as knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">2.</span> Are some types of knowledge more useful than others?</div>
+                        <div class="prompt-item"><span class="prompt-num">3.</span> What features of knowledge have an impact on its reliability?</div>
+                        <div class="prompt-item"><span class="prompt-num">4.</span> On what grounds might we doubt a claim?</div>
+                        <div class="prompt-item"><span class="prompt-num">5.</span> What counts as good evidence for a claim?</div>
+                        <div class="prompt-item"><span class="prompt-num">6.</span> How does the way that we organize or classify knowledge affect what we know?</div>
+                        <div class="prompt-item"><span class="prompt-num">7.</span> What are the implications of having, or not having, knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">8.</span> To what extent is certainty attainable?</div>
+                        <div class="prompt-item"><span class="prompt-num">9.</span> Are some types of knowledge less open to interpretation than others?</div>
+                        <div class="prompt-item"><span class="prompt-num">10.</span> What challenges are raised by the dissemination and/or communication of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">11.</span> Can new knowledge change established values or beliefs?</div>
+                        <div class="prompt-item"><span class="prompt-num">12.</span> Is bias inevitable in the production of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">13.</span> How can we know that current knowledge is an improvement upon past knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">14.</span> Does some knowledge belong only to particular communities of knowers?</div>
+                        <div class="prompt-item"><span class="prompt-num">15.</span> What constraints are there on the pursuit of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">16.</span> Should some knowledge not be sought on ethical grounds?</div>
+                        <div class="prompt-item"><span class="prompt-num">17.</span> Why do we seek knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">18.</span> Are some things unknowable?</div>
+                        <div class="prompt-item"><span class="prompt-num">19.</span> What counts as a good justification for a claim?</div>
+                        <div class="prompt-item"><span class="prompt-num">20.</span> What is the relationship between personal experience and knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">21.</span> What is the relationship between knowledge and culture?</div>
+                        <div class="prompt-item"><span class="prompt-num">22.</span> What role do experts play in influencing our consumption or acquisition of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">23.</span> How important are material tools in the production or acquisition of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">24.</span> How might the context in which knowledge is presented influence whether it is accepted or rejected?</div>
+                        <div class="prompt-item"><span class="prompt-num">25.</span> How can we distinguish between knowledge, belief and opinion?</div>
+                        <div class="prompt-item"><span class="prompt-num">26.</span> Does our knowledge depend on our interactions with other knowers?</div>
+                        <div class="prompt-item"><span class="prompt-num">27.</span> Does all knowledge impose ethical obligations on those who know it?</div>
+                        <div class="prompt-item"><span class="prompt-num">28.</span> To what extent is objectivity possible in the production or acquisition of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">29.</span> Who owns knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">30.</span> What role does imagination play in producing knowledge about the world?</div>
+                        <div class="prompt-item"><span class="prompt-num">31.</span> How can we judge when evidence is adequate?</div>
+                        <div class="prompt-item"><span class="prompt-num">32.</span> What makes a good explanation?</div>
+                        <div class="prompt-item"><span class="prompt-num">33.</span> How is current knowledge shaped by its historical development?</div>
+                        <div class="prompt-item"><span class="prompt-num">34.</span> In what ways do our values affect our acquisition of knowledge?</div>
+                        <div class="prompt-item"><span class="prompt-num">35.</span> In what ways do values affect the production of knowledge?</div>
+                    </div>
+                </li>
+                <li>
+                    <h3>Three Objects (or Images)</h3>
+                    <p>Select three specific objects that demonstrate how your chosen IA prompt manifests in the real world. You must include clear images of these objects in your file.</p>
+                    <ul>
+                        <li>Objects must have a <strong>specific real-world context</strong> (exist in a particular time and place).</li>
+                        <li>They can be physical or digital (e.g., a specific tweet or personal photo).</li>
+                        <li>They can be objects you created (e.g., an artwork) but must exist *before* you create the exhibition.</li>
+                    </ul>
+
+                    <h4>Generic vs. Specific Examples</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Generic / Weak Choice (Avoid)</th>
+                                <th>Specific / Strong Choice (Aim for)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="weak">A generic stock photo of a Bible.</td>
+                                <td class="strong">The specific Bible used by my grandfather in 1950, containing his handwritten notes.</td>
+                            </tr>
+                            <tr>
+                                <td class="weak">A general image of a smartphone from the internet.</td>
+                                <td class="strong">The specific iPhone 12 I used to film my DP film project in September 2025.</td>
+                            </tr>
+                            <tr>
+                                <td class="weak">A picture of "a 100g weight" from a textbook.</td>
+                                <td class="strong">The specific 100g weight I used during my Physics IA experiment on March 12th.</td>
+                            </tr>
+                            <tr>
+                                <td class="weak">A generic photo of a scientific graph.</td>
+                                <td class="strong">The specific graph from my Biology IA draft showing an anomalous result I had to explain in my analysis (April 2026).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <h3>Written Commentary (Max 950 words)</h3>
+                    <p>For each object, you write a commentary that:</p>
+                    <ul>
+                        <li>Identifies the object and its <strong>specific real-world context</strong>.</li>
+                        <li><strong>Justifies</strong> why you chose this object for your exhibition.</li>
+                        <li>Clearly explains the <strong>link</strong> between the object and your chosen IA Prompt.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>The Process & Teacher Support</h2>
+            <ul>
+                <li><strong>Theme Connection:</strong> The IB recommends you root your exhibition in one of the TOK themes (e.g., 'Knowledge and technology' or 'Knowledge and religion'), but in our experience this does not make a difference.</li>
+                <li><strong>Feedback:</strong> You can submit <strong>one draft</strong> of your commentary to your teacher for feedback. They provide advice but cannot edit your work directly.</li>
+                 <li><strong>Interactions:</strong> Evidence of teacher-student interaction is required, including discussion of prompts/objects and feedback on a draft.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Roadmap</h2>
+            <p>Note: Easter 2026 is Week 14. The Showcase Event occurs before the Final Submission to allow for last-minute refinements based on community feedback.</p>
+            <table class="roadmap-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Timeline</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>March</td>
+                        <td>Weeks 10-12</td>
+                        <td>
+                            <strong>Introduction to the TOK Exhibition:</strong> Review criteria, the 35 IA prompts, and example exhibitions. Begin brainstorming objects.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>March</td>
+                        <td>20th</td>
+                        <td>
+                            <strong>1st Interaction:</strong> Submit Prompt + Object ideas to teacher. approval needed before writing.
+                        </td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>March/April</td>
+                        <td>Week 14</td>
+                        <td>
+                            <strong>EASTER BREAK:</strong> Detailed research and drafting of commentaries.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>April</td>
+                        <td>Weeks 15-18</td>
+                        <td>
+                            Work on full commentary draft. Peer-review presentations in class.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>May</td>
+                        <td>1st</td>
+                        <td>
+                            <strong>Submit First Draft</strong> of commentaries to teacher for formal review.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>May</td>
+                        <td>Week 20</td>
+                        <td>
+                            <strong>2nd Interaction:</strong> Receive written/oral feedback from teacher on the first draft.
+                        </td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td>May</td>
+                        <td>Week 22</td>
+                        <td>
+                            <strong>Exhibition Showcase Event:</strong> Display final products to community. Use feedback from visitors to identify any remaining logic gaps.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>June</td>
+                        <td>1st</td>
+                        <td>
+                            <strong>Final Submission:</strong> Final authenticated file due, incorporating Showcase and Teacher feedback.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>How is it Assessed? (Marking Rubric)</h2>
+            <p>The exhibition is marked out of 10 points. Here's the breakdown:</p>
+             <button class="toggle-button" data-target="rubric-details">Show Rubric Level Descriptors</button>
+                <div id="rubric-details" class="toggle-content">
+                     <div class="rubric-levels">
+                        <div class="rubric-level level-9-10"><strong>9-10 (Lucid, Precise, Convincing):</strong> Clear identification of objects & context. Strong, well-explained links. Compelling justification. Points well-supported by specific evidence.</div>
+                        <div class="rubric-level level-7-8"><strong>7-8 (Focused, Relevant, Coherent):</strong> Objects identified. Links explained but may lack precision. Justification is present. Most points supported by evidence.</div>
+                         <div class="rubric-level level-5-6"><strong>5-6 (Adequate, Competent, Acceptable):</strong> Objects identified, possibly vaguely. Some explanation of links. Some justification and support provided.</div>
+                        <div class="rubric-level level-3-4"><strong>3-4 (Simplistic, Underdeveloped, Limited):</strong> Objects identified. Basic links made. Superficial justification. Lacks specific evidence.</div>
+                        <div class="rubric-level level-1-2"><strong>1-2 (Ineffective, Descriptive, Incoherent):</strong> Presents generic objects. Minimal links. Little justification. Mainly descriptive.</div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="section">
+            <h2>Common Myths & Pitfalls</h2>
+             <button class="toggle-button" data-target="myths-pitfalls">Reveal Myths & Pitfalls</button>
+            <div id="myths-pitfalls" class="toggle-content">
+                <ul>
+                    <li><strong>Myth:</strong> Objects must be physical items you can hold.
+                        <br><em>Reality:</em> Digital objects (tweets, screenshots, code) are perfectly acceptable.
+                    </li>
+                     <li><strong>Myth:</strong> Objects must be historically significant.
+                        <br><em>Reality:</em> Personal objects (a childhood toy, your own artwork) are often the most successful.
+                    </li>
+                    <li><strong>Myth:</strong> It is just "show and tell."
+                        <br><em>Reality:</em> The focus is on TOK analysis. Objects serve as evidence for your exploration of the prompt.
+                    </li>
+                    <li><strong>Pitfall:</strong> Choosing generic stock photos.
+                        <br><em>Problem:</em> Lacks "specific real-world context." An image of *your* textbook is specific; a stock photo of "a book" is not.
+                    </li>
+                    <li><strong>Pitfall:</strong> Commentary is purely descriptive.
+                        <br><em>Problem:</em> You must explain *how* the object illustrates knowledge concepts related to the prompt.
+                    </li>
+                    <li><strong>Pitfall:</strong> Repeating the same argument for all three objects.
+                        <br><em>Problem:</em> Each object should provide a distinct justification or perspective on the prompt.
+                    </li>
+                    <li><strong>Pitfall:</strong> Ignoring the word count (max 950 total).
+                        <br><em>Problem:</em> Examiners stop reading at 950 words.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+         <div class="section">
+            <h2>Tips for Success</h2>
+             <button class="toggle-button" data-target="success-tips">Show All Success Tips</button>
+             <div id="success-tips" class="toggle-content">
+                <h3>Foundational Tips</h3>
+                <ul>
+                    <li><strong>Start with the IA Prompt:</strong> Choose a prompt that genuinely interests you.</li>
+                    <li><strong>Brainstorm Widely, Choose Specifically:</strong> Think about objects from your studies, hobbies, and culture. Then narrow down to three *specific* examples.</li>
+                    <li><strong>Focus on the "Why":</strong> Why *this* object? Why is it a good illustration of the prompt? This is the core of your justification.</li>
+                    <li><strong>Make Explicit Links:</strong> Constantly refer back to the wording of the IA prompt in your commentary.</li>
+                    <li><strong>Explain the Context Clearly:</strong> Don't assume the reader knows the background of your object.</li>
+                    <li><strong>Show, Don't Just Tell:</strong> Use the object as evidence for your claims.</li>
+                    <li><strong>Draft and Revise:</strong> Use teacher feedback and peer review to sharpen your arguments.</li>
+                    <li><strong>Cite Everything:</strong> Be meticulous with referencing to maintain academic honesty.</li>
+                </ul>
+
+                <h3>Strategic Tip: The Triangulation Method</h3>
+                <p>To ensure each object provides a <strong>distinct justification</strong>, try to apply a different <strong>TOK Core Concept</strong> to each one:</p>
+                <ul>
+                    <li><strong>Object 1:</strong> Focus on <strong>Evidence</strong> or <strong>Certainty</strong>.</li>
+                    <li><strong>Object 2:</strong> Focus on <strong>Perspective</strong> or <strong>Culture</strong>.</li>
+                    <li><strong>Object 3:</strong> Focus on <strong>Power</strong>, <strong>Ethics</strong>, or <strong>Truth</strong>.</li>
+                </ul>
+                <p><strong>The 12 Core TOK Concepts:</strong> Evidence, Certainty, Truth, Interpretation, Power, Values, Responsibility, Justification, Perspective, Culture, Bias, and Objectivity.</p>
+
+                <!-- ======================= TABOO SECTION (ADDED) ======================= -->
+                <h3>Advanced Tip: “Taboo” / Overused Examples (High-Risk Choices)</h3>
+
+                <p>In TOK, examples are not “wrong” because they are famous. They become <strong>risky</strong> because they are <strong>overused</strong>.</p>
+
+                <p>When examiners (and teachers) read hundreds of exhibitions, some examples show up again and again. That creates two problems:</p>
+                <ul>
+                    <li><strong>They signal “generic TOK” thinking:</strong> the commentary often becomes a predictable template (e.g., “science changes over time,” “ethics matters,” “perspectives differ”).</li>
+                    <li><strong>They reduce your justification marks:</strong> because your object choice looks interchangeable with thousands of other students’ choices, and the link to the prompt tends to be broad rather than precise.</li>
+                </ul>
+
+                <p><strong>What makes these “taboo” in an exhibition?</strong> Most of them are not objects with a specific real-world context <em>that you personally encountered</em>. They tend to become generic “case studies,” and students often use stock photos instead of a genuinely contextualized object.</p>
+
+                <p><strong>If you use a taboo example anyway, you must do all of the following:</strong></p>
+                <ul>
+                    <li>Make a <strong>precise, contestable knowledge claim</strong> that depends on your chosen prompt wording (not a vague “knowledge changes”).</li>
+                    <li>Include <strong>specific detail most students omit</strong> (method, limitation, stakeholder perspective, counter-evidence, alternative interpretation).</li>
+                    <li>Develop a <strong>real counterclaim</strong> (not a token sentence) and weigh it against the claim.</li>
+                    <li>Anchor it to a <strong>specific object in a specific time/place context</strong> (e.g., your annotated textbook page, your lab notebook, a museum ticket + exhibit photo you took, your own notes/artefact from class).</li>
+                </ul>
+
+                <h4>Master List of Commonly Overused (“Taboo”) TOK Topics</h4>
+
+                <p>Use this list as a warning system when brainstorming. If your idea is on this list, choose it only if you can make it genuinely specific and original.</p>
+
+                <h4>Ethics, Medicine, and Human Experimentation</h4>
+                <ul>
+                    <li>Tuskegee syphilis experiment</li>
+                    <li>Nazi medical experiments / concentration camp research</li>
+                    <li>Bloodletting as an obsolete medical practice</li>
+                    <li>Lobotomy as an obsolete medical practice</li>
+                    <li>Thalidomide (pregnancy/morning sickness; later repurposed)</li>
+                    <li>Edward Jenner and smallpox vaccination ethics</li>
+                    <li>Anti-vaccination debates / Wakefield and MMR</li>
+                    <li>Animal testing debates (e.g., cosmetics/pharmaceuticals; PETA arguments)</li>
+                    <li>Stem cell research (often presented generically)</li>
+                    <li>Placebo use in medical testing (patient perspective)</li>
+                </ul>
+
+                <h4>Natural Sciences: “How Science Changes” Canon Examples</h4>
+                <ul>
+                    <li>Serendipitous discovery of penicillin (Alexander Fleming)</li>
+                    <li>Spontaneous generation disproved (Redi / Pasteur)</li>
+                    <li>Phlogiston theory replaced by oxygen theory</li>
+                    <li>Heliocentrism (Copernicus) and Galileo’s conflict with the Church</li>
+                    <li>Galileo’s house arrest + later Church statements (often simplified)</li>
+                    <li>Development of heliocentrism from Aristarchus to Copernicus</li>
+                    <li>Atomic models progression (Dalton → Thomson → Rutherford → Bohr → Schrödinger)</li>
+                    <li>Wöhler synthesizing urea (challenge to vitalism)</li>
+                    <li>Kekulé’s dream and benzene structure</li>
+                    <li>Membrane models (Davson-Danielli → Singer-Nicolson fluid mosaic)</li>
+                    <li>Wegener and continental drift (rejected then accepted)</li>
+                    <li>Semmelweis and handwashing / childbed fever</li>
+                    <li>Physiology history: Galen → Harvey (circulation)</li>
+                    <li>Natural selection “classic examples” (often simplistic)</li>
+                    <li>Industrial melanism (Biston betularia)</li>
+                    <li>Young’s double-slit experiment / wave-particle duality</li>
+                    <li>Feynman diagrams / quantum electrodynamics as “simplicity”</li>
+                    <li>CERN and the Higgs boson discovery</li>
+                    <li>Detection of gravitational waves confirming GR predictions</li>
+                    <li>Edwin Hubble and expansion of the universe</li>
+                    <li>Einstein and the cosmological constant (as a “mistake” story)</li>
+                    <li>String theory and “lack of evidence” (usually handled vaguely)</li>
+                    <li>Heinrich Hertz and later application of radio waves</li>
+                    <li>Enzyme models: lock-and-key vs induced fit</li>
+                    <li>“Complexity of photosynthesis” at different education stages</li>
+                </ul>
+
+                <h4>Human Sciences: Psychology, Language, and Fieldwork</h4>
+                <ul>
+                    <li>Elizabeth Loftus & John Palmer (leading questions/eyewitness testimony)</li>
+                    <li>Bandura’s Bobo doll experiment</li>
+                    <li>Asch conformity experiments</li>
+                    <li>Milgram obedience experiments</li>
+                    <li>Zimbardo Stanford prison experiment</li>
+                    <li>Multi-store model of memory + “Clive Wearing”</li>
+                    <li>DSM as authority in diagnosis (often used generically)</li>
+                    <li>Myers-Briggs personality test (MBTI)</li>
+                    <li>Maslow’s hierarchy of needs</li>
+                    <li>Margaret Mead’s Samoa fieldwork (perspective/culture)</li>
+                    <li>Lera Boroditsky (language and spatial orientation / Indigenous examples)</li>
+                    <li>Antonio Damasio and somatic marker theory</li>
+                    <li>“Confirmation bias” as a generic explanation without a specific object/context</li>
+                    <li>Human chromosome number error story (confirmation bias in science)</li>
+                </ul>
+
+                <h4>Mathematics: Proof, Beauty, Usefulness, and Different Systems</h4>
+                <ul>
+                    <li>Euler’s equation (“beauty/value without application”)</li>
+                    <li>Imaginary numbers (often as a shallow “useful but not real” example)</li>
+                    <li>Rounding π / approximation and “inaccuracy”</li>
+                    <li>Polynomials / factorisation and “complexity” (too generic)</li>
+                    <li>Different calculus notation (Newton vs Leibniz)</li>
+                    <li>Spherical geometry and hyperbolic geometry (perspectives)</li>
+                    <li>Euclidean vs non-Euclidean geometry (as a default “certainty” example)</li>
+                    <li>Number theory history: Pythagoras / Fermat / Wiles</li>
+                    <li>Riemann hypothesis / primes / internet security</li>
+                </ul>
+
+                <h4>History, Politics, and “Perspectives” (Often Over-Generalized)</h4>
+                <ul>
+                    <li>Treaty of Versailles and the rise of Nazism (simplified causality)</li>
+                    <li>Causes of WWI and Fritz Fischer thesis</li>
+                    <li>Cold War interpretations: traditional / revisionist / post-revisionist</li>
+                    <li>Nanjing Massacre (often treated as a generic “perspectives differ” case)</li>
+                    <li>Japanese history textbook controversies (as a generic “bias” example)</li>
+                    <li>JFK assassination conspiracy theories</li>
+                    <li>“Question wording” examples in politics (e.g., referendum question changes)</li>
+                </ul>
+
+                <h4>The Arts: Interpretation and “Famous Artwork” Defaults</h4>
+                <ul>
+                    <li>Vincent van Gogh and <em>Starry Night</em></li>
+                    <li>Pablo Picasso and <em>Guernica</em></li>
+                    <li>Leonardo da Vinci: <em>Mona Lisa</em> / <em>Vitruvian Man</em></li>
+                    <li>Mark Rothko and environmental/emotional interpretation</li>
+                    <li>Jackson Pollock as “ways of knowing”</li>
+                    <li>Banksy (as a default street art example)</li>
+                    <li>Kevin Carter’s Sudan famine photograph</li>
+                    <li>Nick Ut’s “Napalm Girl” photograph</li>
+                    <li>Wilfred Owen’s <em>Dulce et Decorum Est</em></li>
+                    <li>Common “banned books” examples without personal context (e.g., <em>Huckleberry Finn</em>, <em>Catcher in the Rye</em>)</li>
+                    <li>Music therapy (often used as a generic “arts are useful” point)</li>
+                    <li>Controversial art installations used as shock-value (without analysis)</li>
+                </ul>
+
+                <h4>Technology and “Value of Knowledge” (Often Treated as Morality Tales)</h4>
+                <ul>
+                    <li>Alan Turing and Enigma</li>
+                    <li>Thomas Edison and the light bulb invention (hero narrative)</li>
+                    <li>Hiroshima bomb vs nuclear fission reactors (“good vs bad knowledge”)</li>
+                    <li>Fritz Haber (fertilizer vs explosives dual-use)</li>
+                    <li>The Amish and rejection of modern technology</li>
+                    <li>NASA Mars rover “Curiosity” as “why we seek knowledge”</li>
+                    <li>Conventional current vs electron flow (terminology mismatch)</li>
+                </ul>
+
+                <h4>Economics and Models (Often Too Vague)</h4>
+                <ul>
+                    <li>Phillips curve and “transient accuracy”</li>
+                    <li>Neoclassical vs Keynesian economics (without a specific real-world object)</li>
+                </ul>
+
+                <p><strong>Bottom line:</strong> The best exhibitions usually avoid “big textbook examples” and instead use <strong>highly specific objects</strong> from the student’s world: class notes, lab artefacts, local cultural objects, personal projects, or a real piece of media with traceable context (date, creator, platform, audience, purpose).</p>
+                <!-- ===================== END TABOO SECTION (ADDED) ===================== -->
+
+            </div>
+        </div>
+
+        <footer>
+            <p style="text-align: center; font-size: 0.9em; color: #6c757d; margin-top: 30px;">
+                Guide for the IB Theory of Knowledge Exhibition (First assessment 2022).<br>
+                Class of 2026 version. Refer to the official IB TOK Guide for final verification.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButtons = document.querySelectorAll('.toggle-button');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.classList.toggle('show');
+                        button.textContent = targetElement.classList.contains('show') ? 
+                            button.textContent.replace('Show', 'Hide').replace('Reveal', 'Hide') : 
+                            button.textContent.replace('Hide', 'Show').replace('Hide', 'Reveal');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
