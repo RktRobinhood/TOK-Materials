@@ -145,19 +145,34 @@ function playReal(name,volume=.45,rate=1){
   const src=prisonAudio[name]; if(!src) return false;
   try{ const a=src.cloneNode(); a.volume=volume; a.playbackRate=rate; const p=a.play(); if(p&&p.catch)p.catch(()=>playSfx(name==="door"?"door":"reveal")); return true; }catch{ return false; }
 }
+const comicAudio = {
+  trust: new Audio("assets/audio/trust-holds.wav"),
+  betrayed: new Audio("assets/audio/sold-out.wav"),
+  escape: new Audio("assets/audio/you-walk.wav"),
+  double: new Audio("assets/audio/double-cross.wav")
+};
+Object.values(comicAudio).forEach(a=>{ a.preload="auto"; a.volume=.58; });
+let quoteTimer=null;
+function showOpponentQuote(key){
+  const bubble=$("opponentQuote");
+  if(!bubble) return;
+  const o=opponents[key], line=o.voice[Math.floor(Math.random()*o.voice.length)];
+  bubble.textContent=`“${line}”`;
+  bubble.classList.add("show");
+  clearTimeout(quoteTimer);
+  quoteTimer=setTimeout(()=>bubble.classList.remove("show"),2400);
+}
 function playAvatarCue(key){
-  playReal("bars",.28,.92+Math.random()*.12);
-  if(!state.sound || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const o=opponents[key], line=o.voice[Math.floor(Math.random()*o.voice.length)], u=new SpeechSynthesisUtterance(line);
-  u.rate=key==="miles"?1.1:key==="kai"?.84:.96; u.pitch=key==="nova"?1.05:key==="rex"?.82:key==="miles"?1.12:.88; u.volume=.82;
-  setTimeout(()=>window.speechSynthesis.speak(u),180);
+  showOpponentQuote(key);
+  playReal("bars",.16,.9+Math.random()*.08);
 }
 function playOutcomeSound(key){
-  if(key==="trust"){ playReal("knock",.28,1.08); playSfx("good"); }
-  if(key==="betrayed"){ playReal("bars",.68,.82); setTimeout(()=>playSfx("bad"),90); }
-  if(key==="escape"){ playReal("door",.42,1.08); playSfx("good"); }
-  if(key==="double"){ playReal("bars",.58,1); setTimeout(()=>playReal("bars",.34,.8),180); playSfx("bad"); }
+  if(!state.sound) return;
+  const src=comicAudio[key];
+  if(src){
+    try{ const a=src.cloneNode(); a.volume=.62; const p=a.play(); if(p&&p.catch)p.catch(()=>playSfx(key==="trust"||key==="escape"?"good":"bad")); return; }catch{}
+  }
+  playSfx(key==="trust"||key==="escape"?"good":"bad");
 }
 function playSfx(type){
   if(!state.sound) return;

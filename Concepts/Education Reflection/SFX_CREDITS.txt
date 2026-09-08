@@ -1,14 +1,14 @@
-PRISONER'S DILEMMA — AUDIO SOURCES
+PRISONER'S DILEMMA — AUDIO NOTES
 
-This build uses public-domain sound recordings streamed from Wikimedia Commons when an internet connection is available. The game has procedural fallback cues if a recording cannot load.
+Prison ambience / metal cues:
+- Hitting a wire cage.ogg — public domain, Wikimedia Commons / PDSounds
+  https://commons.wikimedia.org/wiki/File:Hitting_a_wire_cage.ogg
+- Open metallic door.ogg — public domain, Wikimedia Commons / PDSounds
+  https://commons.wikimedia.org/wiki/File:Open_metallic_door.ogg
 
-1. "Open metallic door" — artist: hc — public domain via PDSounds/Wikimedia Commons
-   https://commons.wikimedia.org/wiki/File:Open_metallic_door.ogg
-
-2. "Hitting a wire cage" — artist: stephan — public domain via PDSounds/Wikimedia Commons
-   https://commons.wikimedia.org/wiki/File:Hitting_a_wire_cage.ogg
-
-3. "Door knocker audio" — metal door knocker recording — Wikimedia Commons
-   https://commons.wikimedia.org/wiki/File:Door_knocker_audio.ogg
-
-Character lines use the browser's built-in SpeechSynthesis voices; no prerecorded character voice assets are distributed.
+Comic outcome stings:
+- trust-holds.wav
+- sold-out.wav
+- you-walk.wav
+- double-cross.wav
+These four short effects were generated specifically for this classroom game and are bundled locally with the site.

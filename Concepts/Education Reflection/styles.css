@@ -31,3 +31,5 @@
 @keyframes autoDrain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 @media(max-width:620px){.comic-burst{font-size:1.7rem;padding:10px 14px;margin-bottom:12px}.result-panel{padding:16px 14px}.auto-progress{margin-top:12px}.tap-to-hear{font-size:.45rem}}
 @media(prefers-reduced-motion:reduce){.result-panel.reveal-pop .comic-burst{animation:none;opacity:1;transform:none}.auto-progress i::after{animation:none}}
+.opponent-quote{margin-top:8px;max-width:28ch;padding:0 10px;max-height:0;overflow:hidden;opacity:0;transform:translateY(4px) rotate(-1deg);border-left:3px solid rgba(246,232,196,.55);font-size:.82rem;font-style:italic;line-height:1.35;color:#f6e8c4;transition:opacity .18s ease,transform .18s ease,max-height .18s ease,padding .18s ease}
+.opponent-quote.show{max-height:90px;padding-top:8px;padding-bottom:8px;opacity:1;transform:translateY(0) rotate(-1deg)}
