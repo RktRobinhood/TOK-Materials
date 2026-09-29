@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Boundary / Art — Teacher Review</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="teacher.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="brand-lockup"><span class="brand-word">TEACHER</span><span class="brand-slash">/</span><span class="brand-word outline">VIEW</span></div>
+    <div class="mast-meta"><span>local review</span><a href="index.html">student activity</a></div>
+  </header>
+  <main class="teacher-shell">
+    <section class="teacher-hero">
+      <div class="eyebrow">TEACHER REVIEW TOOL</div>
+      <h1>Scan the <span class="serif">process,</span><br>then inspect the work.</h1>
+      <p class="lede">Each student PDF carries a compact QR record. Load it by webcam, screenshot, drag-and-drop, clipboard, or code text. Records stay in this browser. Indicators are prompts for human review, not conclusions about authorship or misconduct.</p>
+    </section>
+
+    <nav class="teacher-view-tabs" aria-label="Teacher tool sections">
+      <button class="teacher-view-tab active" type="button" data-teacher-view="review">Review student reports</button>
+      <button class="teacher-view-tab" type="button" data-teacher-view="content">Preview student content</button>
+    </nav>
+
+    <section class="intake-shell review-pane">
+      <div class="section-head intake-head"><div><div class="eyebrow">01 / ADD A REPORT</div><h2>Use whichever input is easiest.</h2></div><div id="intake-status" class="intake-status">Ready to scan.</div></div>
+      <div class="scanner-grid three-way">
+        <article class="panel">
+          <div class="eyebrow">CAMERA</div><h2>Hold up a printed QR</h2>
+          <div class="camera-frame"><video id="camera" autoplay playsinline muted></video><div class="scan-frame" aria-hidden="true"></div></div>
+          <div class="panel-actions"><button class="button primary" id="start-camera">Start webcam</button><button class="button ghost" id="stop-camera" disabled>Stop</button></div>
+          <p class="microcopy">Webcam access normally requires HTTPS or localhost. If the browser blocks it, use a screenshot instead.</p>
+        </article>
+
+        <article class="panel">
+          <div class="eyebrow">SCREENSHOT / IMAGE</div><h2>Drop, choose, or paste</h2>
+          <div id="drop-zone" class="drop-zone" tabindex="0"><strong>Drop a screenshot here</strong><span>or use Choose image / Ctrl+V</span></div>
+          <div class="panel-actions"><label class="button primary upload-btn">Choose image<input id="image-input" type="file" accept="image/*"></label><button class="button ghost" id="clipboard-btn" type="button">Read clipboard</button></div>
+          <p class="microcopy">You can also take a screenshot of the QR, return to this page, and press Ctrl+V / Cmd+V anywhere.</p>
+        </article>
+
+        <article class="panel">
+          <div class="eyebrow">CODE / LINK</div><h2>Paste the raw record</h2>
+          <label class="field"><span>Telemetry code or scanned URL</span><textarea id="code-input" placeholder="TOKART1:... or the full teacher.html#q=... link"></textarea></label>
+          <div class="panel-actions"><button class="button primary" id="add-code">Add report</button></div>
+          <p class="microcopy">Useful when a phone camera shows the QR contents as text or opens the teacher link directly.</p>
+        </article>
+      </div>
+      <div id="decode-error" class="error-note"></div>
+      <div class="privacy-note compact"><strong>Local processing:</strong> screenshots and camera frames are decoded in the browser. If your browser lacks built-in QR detection, the page may download the open-source jsQR decoder code from a CDN; student images and QR contents are not uploaded to that service.</div>
+    </section>
+
+    <section class="results-section review-pane">
+      <div class="section-head"><div><div class="eyebrow">02 / REVIEW SET</div><h2>Loaded reports</h2></div><div class="panel-actions"><button class="button ghost" id="export-csv">Export CSV</button><button class="button ghost" id="clear-scans">Clear scans</button></div></div>
+      <div id="empty-state" class="empty-state">Scan the first student report to begin.</div>
+      <div id="cards" class="teacher-cards"></div>
+    </section>
+
+    <section class="results-section similarity-section review-pane">
+      <div class="section-head"><div><div class="eyebrow">03 / CROSS-REPORT SIGNAL</div><h2>Fingerprint proximity</h2></div></div>
+      <p class="lede small">Only sufficiently long open responses are compared. Low Hamming distance means the response fingerprints are unusually similar; it does <strong>not</strong> explain why. Shared teaching, common prompts, collaboration, quotations, or copying can all increase similarity.</p>
+      <div id="similarity"></div>
+    </section>
+
+    <section class="method-note review-pane">
+      <div class="eyebrow">INTERPRETATION RULE</div>
+      <h2>Signals trigger questions, not conclusions.</h2>
+      <p>Use a flag to decide what to inspect in the student PDF: compare the first and final answer, check whether revisions respond to the activity, see whether source choices appear in the final reasoning, and talk to the student if the process and product do not cohere.</p>
+    </section>
+
+    <section id="content-preview" class="content-preview" hidden>
+      <div class="section-head content-preview-head">
+        <div><div class="eyebrow">CONTENT LIBRARY</div><h2>Preview what students can encounter</h2><p class="lede small">Browse every live dossier, its local safe image, student-facing primary source, teacher/context source, safety level, and every branch pool that can call it. This view does not affect any student route or telemetry.</p></div>
+        <div class="content-count" id="content-count"></div>
+      </div>
+      <div class="content-tools">
+        <label class="field"><span>Search</span><input id="content-search" type="search" placeholder="title, medium, culture, tension, branch"></label>
+        <label class="field"><span>Medium</span><select id="content-medium"><option value="all">All media</option></select></label>
+        <label class="field"><span>Source safety</span><select id="content-risk"><option value="all">All safety levels</option><option value="green">Green / ordinary source</option><option value="amber">Amber / inspect first</option><option value="red">Red / mature external source</option></select></label>
+        <label class="field"><span>Pressure direction</span><select id="content-push"><option value="all">All directions</option><option value="toward_art">Pushes toward can-be-art</option><option value="toward_not_art">Pushes toward not-art</option><option value="anti_hedge">Anti-hedge / forced choice</option><option value="mixed">Mixed / collision</option><option value="definition">Definition stress-test</option></select></label>
+      </div>
+      <div id="content-library" class="content-library"></div>
+
+      <div class="branch-preview-shell">
+        <div class="section-head"><div><div class="eyebrow">BRANCH MAP</div><h2>Which case pools can appear?</h2></div></div>
+        <p class="lede small">These are the interchangeable case banks used by the current student build. Similar decisions can still lead to different dossiers.</p>
+        <div id="branch-preview" class="branch-preview"></div>
+      </div>
+
+      <div class="finale-preview-shell">
+        <div class="section-head"><div><div class="eyebrow">FINALE TOOL</div><h2>Evidence-spectrum preview</h2></div></div>
+        <div class="teacher-spectrum-preview" aria-label="Preview of student evidence spectrum">
+          <div class="teacher-spectrum-label left">Pornography <strong>can be art</strong></div>
+          <div class="teacher-spectrum-label middle">grey area</div>
+          <div class="teacher-spectrum-label right">Pornography <strong>is not art</strong></div>
+          <div class="teacher-spectrum-line"></div>
+          <div id="teacher-spectrum-samples" class="teacher-spectrum-samples"></div>
+        </div>
+        <div class="teacher-irrelevant-preview"><strong>Irrelevant / does not help this argument</strong><span>A separate bin in the student finale.</span></div>
+      </div>
+    </section>
+
+    <dialog id="content-dialog" class="content-dialog">
+      <form method="dialog" class="content-dialog-card">
+        <button class="dialog-x" value="cancel" aria-label="Close preview">×</button>
+        <div id="content-dialog-body"></div>
+      </form>
+    </dialog>
+  </main>
+  <canvas id="scan-canvas" hidden></canvas>
+  <script src="shared.js"></script>
+  <script src="case-data.js"></script>
+  <script src="teacher.js"></script>
+</body>
+</html>

@@ -1,399 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Pornography Art? A TOK Debate</title>
-    <style>
-        /* CSS Variables for a clean, modern aesthetic */
-        :root {
-            --bg-color: #FAFAFA;
-            --text-color: #2D3748;
-            --accent-color: #D34B4B;
-            --secondary-accent: #2B6CB0;
-            --popout-bg: #EDF2F7;
-            --popout-border: #4A5568;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-heading: 'Merriweather', Georgia, serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #1A202C;
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        header h1 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        h2 {
-            font-family: var(--font-heading);
-            color: #1A202C;
-            font-size: 2.2rem;
-            margin-top: 3.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            color: var(--secondary-accent);
-            margin-top: 2.5rem;
-        }
-
-        p {
-            font-size: 1.15rem;
-            margin-bottom: 1.5rem;
-        }
-
-        a {
-            color: var(--secondary-accent);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Magazine-style Popouts */
-        .popout {
-            background-color: var(--popout-bg);
-            border-left: 5px solid var(--popout-border);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
-            font-style: normal;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .popout strong {
-            display: block;
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            color: #1A202C;
-            margin-bottom: 0.5rem;
-        }
-
-        .kant-highlight {
-            background-color: #EBF8FF;
-            border-left: 5px solid var(--secondary-accent);
-        }
-        
-        .kant-highlight strong {
-            color: var(--secondary-accent);
-        }
-
-        .media-list {
-            background-color: #FFF5F5;
-            border-left: 5px solid var(--accent-color);
-        }
-
-        /* Responsive Images */
-        .image-container {
-            margin: 2.5rem 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            background-color: #fff;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .caption {
-            text-align: left;
-            font-size: 0.95rem;
-            color: #4A5568;
-            padding: 1.2rem;
-            background-color: #F7FAFC;
-            border-top: 1px solid #E2E8F0;
-        }
-
-        /* Responsive Video Embeds */
-        .video-wrapper {
-            margin: 2.5rem 0;
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            border-top: 4px solid var(--popout-border);
-        }
-
-        .video-wrapper.tool-1 { border-top-color: #38B2AC; }
-        .video-wrapper.tool-2 { border-top-color: #ED8936; }
-        .video-wrapper.tool-3 { border-top-color: #9F7AEA; }
-
-        .video-tag {
-            display: inline-block;
-            background: #EDF2F7;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            color: #4A5568;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 6px;
-            background-color: #1A202C; /* Dark background before video loads */
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .video-desc {
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: #4A5568;
-            font-style: italic;
-        }
-
-        /* Lists */
-        ul {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.8rem;
-        }
-
-        /* Call to Action Box */
-        .activity-box {
-            background-color: #2D3748;
-            color: white;
-            padding: 2.5rem;
-            border-radius: 8px;
-            margin-top: 4rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-        }
-
-        .activity-box h3 {
-            color: white;
-            margin-top: 0;
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            border-bottom: 1px solid #4A5568;
-            padding-bottom: 1rem;
-        }
-
-        .pro-tip {
-            background-color: #F6E05E;
-            color: #2D3748;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            margin: 1.5rem 0;
-            font-size: 1.05rem;
-            border-left: 4px solid #D69E2E;
-        }
-
-        .deliverable {
-            background-color: #4A5568;
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin-top: 2rem;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .deliverable h4 {
-            color: #FED7D7;
-            margin-top: 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #A0AEC0;
-            font-size: 0.9rem;
-            border-top: 1px solid #E2E8F0;
-            margin-top: 4rem;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Boundary / Art - TOK Lesson + Decision Journey</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="masthead">
+    <div class="brand-lockup" aria-label="Boundary slash Art">
+      <span class="brand-word">BOUNDARY</span><span class="brand-slash">/</span><span class="brand-word outline">ART</span>
+    </div>
+    <div class="mast-meta"><span>TOK case study</span><span id="move-label">BRIEFING</span></div>
+  </header>
 
-    <header>
-        <h1>Is Pornography Art?</h1>
-        <p>A TOK case study in navigating definitions, knowledge frameworks, and the boundary between objective analysis and subjective response.</p>
-    </header>
-
-    <div class="container">
-        
-        <p>Welcome to a topic that serves as a profound case study for TOK analysis. We are exploring a question that inherently touches upon personal values, cultural boundaries, and legal definitions: <em>Can pornography ever be considered art?</em></p>
-
-        <p>This question invites us to examine how we classify knowledge in the Arts. When discussing a topic that often elicits a strong initial reaction, your goal is to pause, reflect, and evaluate the question beyond your immediate subjective assumptions. We need to navigate the tension between <strong>subjective analysis</strong> (how a piece makes an individual feel) and <strong>objective analysis</strong> (the intent, cultural context, and formal qualities of the work).</p>
-
-        <div class="popout kant-highlight">
-            <strong>The TOK Goal: Immanuel Kant & "Disinterestedness"</strong>
-            To properly engage with this debate, we can look to the 18th-century philosopher Immanuel Kant. Kant proposed that to truly judge if something is "Art," we must view it with <em>disinterestedness</em>. This doesn't mean we are bored by it; it means we evaluate the work objectively, stripping away our personal appetites, desires, or moral offense. 
-            <br><br>
-            If you judge a painting of a bowl of fruit based purely on how much it makes you want to eat an apple, you are judging it subjectively as an object of desire. If pornography's primary design is to arouse (an interested desire), can we ever view it disinterestedly? Can we step back and objectively assess its cinematography, social critique, or metaphor?
-        </div>
-
-        <h2>Reference Tool 1: Defining Our Terms</h2>
-        <p>Before you can argue whether a medium fits into the category of "Art," your group needs to establish the criteria. What actually makes something art? Is it the expression of emotion? The replication of reality? The subversion of expectations?</p>
-
-        <div class="video-wrapper tool-1">
-            <span class="video-tag">Tool 1: Defining Art</span>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/sn0bDD4gXrE" allowfullscreen></iframe>
-            </div>
-            <div class="video-desc">
-                <strong>How to use this tool:</strong> You don't need to watch the whole thing. Skim through to see how philosophers and artists have defined art over time. Establish a working definition for your group's thesis.
-            </div>
-        </div>
-
-        <h2>The Case FOR Pornography as Art</h2>
-        
-        <p>There are substantial arguments that the two categories can and do overlap. Historically, human sexuality has been a central subject of artistic exploration, and the boundaries of what is considered "explicit" continually shift over time.</p>
-
-        <!-- Historical Image Example 1: Sistine Chapel -->
-        <div class="image-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Last_Judgement_%28Michelangelo%29.jpg" alt="Michelangelo's The Last Judgment in the Sistine Chapel">
-            <div class="caption">
-                <strong>Michelangelo’s "The Last Judgment" (Sistine Chapel, 1541)</strong><br>
-                When this masterpiece was unveiled, the amount of male nudity caused a scandal. The Pope's Master of Ceremonies stated it belonged in a "bathhouse or tavern," not a church. An artist was later hired to paint fig leaves over the figures. What is universally classified as High Art today was viewed by many as borderline obscenity at the time of its creation.
-            </div>
-        </div>
-
-        <!-- Historical Image Example 2: Khajuraho Temple -->
-        <div class="image-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Erotic_Sculptures_of_Khajuraho.jpg/960px-Erotic_Sculptures_of_Khajuraho.jpg?20240930064005" alt="Khajuraho Temple Sculptures">
-            <div class="caption">
-                <strong>The Khajuraho Temples (India, 10th-11th Century)</strong><br>
-                These ancient temples are famous worldwide for their explicitly erotic carvings. Today, they are a UNESCO World Heritage site celebrated as profound architectural art. Time, cultural distance, and context completely alter the framework through which we view explicit imagery.
-            </div>
-        </div>
-
-        <h3>Intention, Context, and Subversion</h3>
-        <p>The debate often hinges on <em>intention</em> and <em>context</em>. While mainstream pornography is generally produced for commercial profit and immediate physical response, it is entirely possible for creators to use sexually explicit material with deliberate artistic intent—whether to critique societal norms, challenge the viewer, or reclaim bodily autonomy.</p>
-
-        <div class="popout media-list">
-            <strong>Works That Challenge the Boundary</strong>
-            To explore how artists actively blur these lines, consider how explicit content is used in different contexts:
-            <ul>
-                <li><strong>Visual Arts & Galleries:</strong> Feminist artists like <em>Hannah Wilke</em> and <em>Linder</em> have used visual tropes of pornography to critique the objectification of the female body. Furthermore, major modern galleries (like ARoS in Denmark) have hosted "Art & Porn" exhibitions, deliberately placing porn-inspired work in a museum context to prompt audiences to analyze it objectively rather than subjectively.</li>
-                <li><strong>Transgressive Cinema:</strong> Andy Warhol’s <em>Blue Movie (1968)</em> was an early explicit film eventually shown in museums. In 2006, the anthology film <em>Destricted</em> brought together contemporary artists to intentionally explore the exact border between erotic content and art. Other art-house films, like Dušan Makavejev’s <em>W.R.: Mysteries of the Organism</em>, use explicit acts to make political or aesthetic statements.</li>
-                <li><strong>Cultural Commentary:</strong> Cindy Gallop's TED Talk <em>"Make Love Not Porn"</em> explores the cultural divide between real human intimacy and the manufactured, unrealistic aesthetics of the commercial porn industry.</li>
-            </ul>
-        </div>
-
-        <h2>The Case AGAINST Pornography as Art</h2>
-
-        <p>Conversely, many critics, philosophers, and sociologists argue that art and porn are fundamentally incompatible, primarily due to their distinct functions and modes of reception.</p>
-
-        <div class="video-wrapper tool-2">
-            <span class="video-tag">Tool 2: The Philosophical Argument</span>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/rcxccQXyHJQ?si=W6vgbJNfc3bpgyb-" allowfullscreen></iframe>
-            </div>
-            <div class="video-desc">
-                <strong>How to use this tool:</strong> Listen to philosopher Alva Noë. He argues that pornography is an "instrument" or "tool" designed with a specific physiological function (arousal). Art, he suggests, does the exact opposite: it <em>subverts</em> and <em>disrupts</em> functions to make us reflect. Therefore, he claims, "pornographic art" is a contradiction. 
-            </div>
-        </div>
-
-        <h3>The Audience Effect & Ethical Objections</h3>
-        <p>Critics often point to the "audience effect." The argument is that one <em>consumes</em> porn for instant gratification, but <em>appreciates</em> art through reflection. If a viewer is entirely fixated on a physical response, they may lack the cognitive distance required to appreciate metaphor, composition, or thematic depth.</p>
-        <p>Additionally, there are significant ethical critiques. Many scholars argue that mainstream pornography inherently commodifies participants, reducing human beings to mere instruments. If society expects art to elevate, enlighten, or offer constructive social critique, can an industry criticized for reinforcing harmful power dynamics be celebrated under the banner of art?</p>
-
-        <h2>Legal and Ethical Perspectives (The Real World)</h2>
-
-        <p>This is not merely a theoretical classroom exercise. In the real world, the boundary between "art" and "obscenity" has tangible legal consequences.</p>
-
-        <p>In the United States, the Supreme Court applies the <strong>Miller Test</strong> to determine if material is legally obscene and thus unprotected by free speech. Crucially, even the most explicit sexual content is legally protected if, taken as a whole, it can be proven to possess <em>"serious literary, artistic, political, or scientific value."</em></p>
-
-        <div class="video-wrapper tool-3">
-            <span class="video-tag">Tool 3: The Real-World Stakes</span>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/9n2He_dKYbg?si=U4PIu0xKn7zbm5c4" allowfullscreen></iframe>
-            </div>
-            <div class="video-desc">
-                <strong>How to use this tool:</strong> This is a news broadcast covering the 1990 obscenity trial in Cincinnati. The director of the Contemporary Arts Center was taken to criminal court over an exhibition by photographer Robert Mapplethorpe that featured explicit imagery. This highlights the real-world friction between public morality, the legal system, and artistic expression.
-            </div>
-        </div>
-
-        <div class="activity-box">
-            <h3>Your 70-Minute TOK Challenge</h3>
-            <p>Your task today is to engage in a rigorous debate using the tools provided. Move past initial subjective discomfort and apply objective, critical analysis to formulate a grounded argument.</p>
-            
-            <ul>
-                <li><strong>Define Your Terms:</strong> Decide how your group defines "art" (use Tool 1). Does intention matter most? Is it about context, or is it defined by the audience's reaction? </li>
-                <li><strong>Apply Objective Analysis:</strong> Use Kant’s concept of <em>disinterestedness</em>. Challenge yourselves to evaluate the topic based on objective criteria (e.g., historical context, thematic intent, cinematography) rather than subjective feelings.</li>
-                <li><strong>Integrate Perspectives:</strong> A top-tier TOK argument synthesizes multiple knowledge frameworks. Consider the aesthetic, legal, ethical, and cultural dimensions of the question.</li>
-            </ul>
-
-            <div class="pro-tip">
-                <strong>💡 TOK Pro-Tip: Consult the Academic Consensus</strong><br>
-                Need to anchor your argument in actual academic research? Go to <a href="https://consensus.app/" target="_blank">Consensus.app</a> (an AI search engine that pulls directly from peer-reviewed scientific papers) and type in questions like: <em>"How do art historians differentiate between erotica and pornography?"</em> or <em>"What is the psychological difference in how audiences view art versus pornography?"</em> 
-            </div>
-
-            <div class="deliverable">
-                <h4>📝 Today's Deliverable (Submission)</h4>
-                <p>To demonstrate your group's TOK analysis today, have one person create a shared Google Doc/Word file and include:</p>
-                <ol>
-                    <li><strong>Roll Call:</strong> The first and last names of everyone in your group.</li>
-                    <li><strong>Thesis Statement:</strong> A 1-2 sentence claim answering the question: <em>Is pornography art?</em> (Note: A conditional thesis like "Yes, but only when..." or "No, because..." often shows higher-level critical thinking).</li>
-                    <li><strong>Evidence & Objective Analysis:</strong> 3 bullet points of unique supporting evidence (like the exhibition). You must use objective reasoning (you can compare/contrast to the videos, Kant, Consensus.app research, or the specific media examples provided).</li>
-                    <li><strong>The Rebuttal:</strong> Provide 1 strong counter-argument to your thesis, and briefly explain how your group refutes it or resolves the contradiction.</li>
-                </ol>
-                <p><em>Submit your document to the class portal before the end of the period.</em></p>
-            </div>
-        </div>
-
+  <section id="briefing" class="lecture-shell" aria-labelledby="briefing-title">
+    <div class="lecture-progress" aria-label="Lesson sections">
+      <a href="#frame"><span>01</span>Frame the question</a>
+      <a href="#define"><span>02</span>Define art</a>
+      <a href="#for"><span>03</span>Case for</a>
+      <a href="#against"><span>04</span>Case against</a>
+      <a href="#stakes"><span>05</span>Real-world stakes</a>
+      <a href="#investigation-gate"><span>06</span>Investigate</a>
     </div>
 
-    <footer>
-        <p>Created for TOK Students | The goal is not to find a single "right" answer, but to understand the frameworks and objective criteria we use to justify our conclusions.</p>
-    </footer>
+    <div class="lecture-main">
+      <section id="frame" class="lecture-hero lecture-panel">
+        <div class="phase-kicker">PHASE 01 / BRIEFING · ABOUT 25–30 MIN</div>
+        <h1 id="briefing-title">Is Pornography <span class="serif">Art?</span></h1>
+        <p class="lecture-deck">A TOK case study in navigating definitions, knowledge frameworks, and the boundary between objective analysis and subjective response.</p>
+        <div class="lecture-lede-grid">
+          <p>Welcome to a topic that serves as a profound case study for TOK analysis. We are exploring a question that inherently touches upon personal values, cultural boundaries, and legal definitions: <em>Can pornography ever be considered art?</em></p>
+          <p>This question invites us to examine how we classify knowledge in the Arts. When discussing a topic that often elicits a strong initial reaction, your goal is to pause, reflect, and evaluate the question beyond your immediate subjective assumptions. We need to navigate the tension between <strong>subjective analysis</strong> (how a piece makes an individual feel) and <strong>objective analysis</strong> (the intent, cultural context, and formal qualities of the work).</p>
+        </div>
 
+        <article class="lecture-note kant-note">
+          <div class="lecture-note-mark">K</div>
+          <div>
+            <span class="lecture-label">THE TOK GOAL</span>
+            <h2>Immanuel Kant &amp; “Disinterestedness”</h2>
+            <p>To properly engage with this debate, we can look to the 18th-century philosopher Immanuel Kant. Kant proposed that to truly judge if something is "Art," we must view it with <em>disinterestedness</em>. This doesn't mean we are bored by it; it means we evaluate the work objectively, stripping away our personal appetites, desires, or moral offense.</p>
+            <p>If you judge a painting of a bowl of fruit based purely on how much it makes you want to eat an apple, you are judging it subjectively as an object of desire. If pornography's primary design is to arouse (an interested desire), can we ever view it disinterestedly? Can we step back and objectively assess its cinematography, social critique, or metaphor?</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="define" class="lecture-panel lecture-section">
+        <div class="section-number">02</div>
+        <div class="lecture-copy">
+          <span class="lecture-label">REFERENCE TOOL 1</span>
+          <h2>Defining Our Terms</h2>
+          <p>Before you can argue whether a medium fits into the category of "Art," your group needs to establish the criteria. What actually makes something art? Is it the expression of emotion? The replication of reality? The subversion of expectations?</p>
+        </div>
+        <article class="archive-video tool-one">
+          <div class="video-file-head"><span>SCREENING FILE 01</span><strong>DEFINING ART</strong></div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/sn0bDD4gXrE" title="Tool 1: Defining Art" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <p class="video-desc"><strong>How to use this tool:</strong> You don't need to watch the whole thing. Skim through to see how philosophers and artists have defined art over time. Establish a working definition for your group's thesis.</p>
+        </article>
+      </section>
+
+      <section id="for" class="lecture-panel lecture-section">
+        <div class="section-number">03</div>
+        <div class="lecture-copy">
+          <span class="lecture-label">POSITION FILE / FOR</span>
+          <h2>The Case FOR Pornography as Art</h2>
+          <p>There are substantial arguments that the two categories can and do overlap. Historically, human sexuality has been a central subject of artistic exploration, and the boundaries of what is considered "explicit" continually shift over time.</p>
+        </div>
+
+        <div class="artifact-pair">
+          <figure class="lecture-artifact">
+            <div class="artifact-image-wrap">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Last_Judgement_%28Michelangelo%29.jpg" alt="Michelangelo's The Last Judgment in the Sistine Chapel" loading="lazy" referrerpolicy="no-referrer">
+            </div>
+            <figcaption><strong>Michelangelo’s “The Last Judgment” (Sistine Chapel, 1541)</strong><span>When this masterpiece was unveiled, the amount of male nudity caused a scandal. The Pope's Master of Ceremonies stated it belonged in a "bathhouse or tavern," not a church. An artist was later hired to paint fig leaves over the figures. What is universally classified as High Art today was viewed by many as borderline obscenity at the time of its creation.</span></figcaption>
+          </figure>
+
+          <figure class="lecture-artifact">
+            <div class="artifact-image-wrap">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Erotic_Sculptures_of_Khajuraho.jpg/960px-Erotic_Sculptures_of_Khajuraho.jpg?20240930064005" alt="Khajuraho Temple Sculptures" loading="lazy" referrerpolicy="no-referrer">
+            </div>
+            <figcaption><strong>The Khajuraho Temples (India, 10th-11th Century)</strong><span>These ancient temples are famous worldwide for their explicitly erotic carvings. Today, they are a UNESCO World Heritage site celebrated as profound architectural art. Time, cultural distance, and context completely alter the framework through which we view explicit imagery.</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="lecture-copy secondary-copy">
+          <h3>Intention, Context, and Subversion</h3>
+          <p>The debate often hinges on <em>intention</em> and <em>context</em>. While mainstream pornography is generally produced for commercial profit and immediate physical response, it is entirely possible for creators to use sexually explicit material with deliberate artistic intent—whether to critique societal norms, challenge the viewer, or reclaim bodily autonomy.</p>
+        </div>
+
+        <article class="lecture-note boundary-note">
+          <div class="lecture-note-mark">↔</div>
+          <div>
+            <span class="lecture-label">WORKS THAT CHALLENGE THE BOUNDARY</span>
+            <p>To explore how artists actively blur these lines, consider how explicit content is used in different contexts:</p>
+            <ul>
+              <li><strong>Visual Arts &amp; Galleries:</strong> Feminist artists like <em>Hannah Wilke</em> and <em>Linder</em> have used visual tropes of pornography to critique the objectification of the female body. Furthermore, major modern galleries (like ARoS in Denmark) have hosted "Art &amp; Porn" exhibitions, deliberately placing porn-inspired work in a museum context to prompt audiences to analyze it objectively rather than subjectively.</li>
+              <li><strong>Transgressive Cinema:</strong> Andy Warhol’s <em>Blue Movie (1968)</em> was an early explicit film eventually shown in museums. In 2006, the anthology film <em>Destricted</em> brought together contemporary artists to intentionally explore the exact border between erotic content and art. Other art-house films, like Dušan Makavejev’s <em>W.R.: Mysteries of the Organism</em>, use explicit acts to make political or aesthetic statements.</li>
+              <li><strong>Cultural Commentary:</strong> Cindy Gallop's TED Talk <em>"Make Love Not Porn"</em> explores the cultural divide between real human intimacy and the manufactured, unrealistic aesthetics of the commercial porn industry.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section id="against" class="lecture-panel lecture-section">
+        <div class="section-number">04</div>
+        <div class="lecture-copy">
+          <span class="lecture-label">POSITION FILE / AGAINST</span>
+          <h2>The Case AGAINST Pornography as Art</h2>
+          <p>Conversely, many critics, philosophers, and sociologists argue that art and porn are fundamentally incompatible, primarily due to their distinct functions and modes of reception.</p>
+        </div>
+
+        <article class="archive-video tool-two">
+          <div class="video-file-head"><span>SCREENING FILE 02</span><strong>THE PHILOSOPHICAL ARGUMENT</strong></div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/rcxccQXyHJQ?si=W6vgbJNfc3bpgyb-" title="Tool 2: The Philosophical Argument" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <p class="video-desc"><strong>How to use this tool:</strong> Listen to philosopher Alva Noë. He argues that pornography is an "instrument" or "tool" designed with a specific physiological function (arousal). Art, he suggests, does the exact opposite: it <em>subverts</em> and <em>disrupts</em> functions to make us reflect. Therefore, he claims, "pornographic art" is a contradiction.</p>
+        </article>
+
+        <div class="lecture-copy secondary-copy two-column-copy">
+          <div>
+            <h3>The Audience Effect &amp; Ethical Objections</h3>
+            <p>Critics often point to the "audience effect." The argument is that one <em>consumes</em> porn for instant gratification, but <em>appreciates</em> art through reflection. If a viewer is entirely fixated on a physical response, they may lack the cognitive distance required to appreciate metaphor, composition, or thematic depth.</p>
+          </div>
+          <div>
+            <h3>Ethical Objections</h3>
+            <p>Additionally, there are significant ethical critiques. Many scholars argue that mainstream pornography inherently commodifies participants, reducing human beings to mere instruments. If society expects art to elevate, enlighten, or offer constructive social critique, can an industry criticized for reinforcing harmful power dynamics be celebrated under the banner of art?</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="stakes" class="lecture-panel lecture-section">
+        <div class="section-number">05</div>
+        <div class="lecture-copy">
+          <span class="lecture-label">LEGAL / ETHICAL FILE</span>
+          <h2>Legal and Ethical Perspectives <span class="serif">(The Real World)</span></h2>
+          <p>This is not merely a theoretical classroom exercise. In the real world, the boundary between "art" and "obscenity" has tangible legal consequences.</p>
+          <p>In the United States, the Supreme Court applies the <strong>Miller Test</strong> to determine if material is legally obscene and thus unprotected by free speech. Crucially, even the most explicit sexual content is legally protected if, taken as a whole, it can be proven to possess <em>"serious literary, artistic, political, or scientific value."</em></p>
+        </div>
+
+        <article class="archive-video tool-three">
+          <div class="video-file-head"><span>SCREENING FILE 03</span><strong>THE REAL-WORLD STAKES</strong></div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9n2He_dKYbg?si=U4PIu0xKn7zbm5c4" title="Tool 3: The Real-World Stakes" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <p class="video-desc"><strong>How to use this tool:</strong> This is a news broadcast covering the 1990 obscenity trial in Cincinnati. The director of the Contemporary Arts Center was taken to criminal court over an exhibition by photographer Robert Mapplethorpe that featured explicit imagery. This highlights the real-world friction between public morality, the legal system, and artistic expression.</p>
+        </article>
+      </section>
+
+      <section id="investigation-gate" class="investigation-gate">
+        <div class="gate-stamp">PHASE 02</div>
+        <div>
+          <span class="lecture-label">APPLY THE FRAMEWORKS · ABOUT 35–40 MIN</span>
+          <h2>Now test the ideas against <span class="serif">evidence.</span></h2>
+          <p>You have the definitions, competing arguments, historical examples and legal stakes. The dossier journey replaces the old open-ended debate task: make an initial judgment, collect case files, let the evidence push back, and finish with a defensible position.</p>
+          <p class="gate-principle">The goal is not to find a single “right” answer, but to understand the frameworks and objective criteria we use to justify our conclusions.</p>
+        </div>
+        <button id="enter-investigation" class="button primary lecture-cta" type="button">Continue to activity</button>
+      </section>
+    </div>
+  </section>
+
+  <main id="app" class="shell journey-shell" aria-live="polite" hidden>
+    <aside id="evidence-rail" class="evidence-rail" aria-label="Evidence collected">
+      <div class="evidence-rail-head"><span>CASE BOARD</span><strong>Evidence collected</strong></div>
+      <div id="evidence-stack" class="evidence-stack"></div>
+      <div class="evidence-rail-foot">ACTIVE FILE</div>
+    </aside>
+    <section class="stage journey-stage">
+      <div class="stage-art" aria-hidden="true">
+        <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="slash-line"></div>
+        <svg class="glyph" viewBox="0 0 220 220" role="presentation"><path d="M31 155 C75 19, 152 19, 190 151" fill="none" stroke="currentColor" stroke-width="14"/><path d="M48 108 L173 108" fill="none" stroke="currentColor" stroke-width="9"/><circle cx="109" cy="108" r="12" fill="currentColor"/></svg>
+      </div>
+      <div class="journey-phasebar"><span>PHASE 02 / DOSSIER INVESTIGATION</span><strong>APPLY THE BRIEFING TO THE EVIDENCE</strong></div>
+      <div id="screen"></div>
+      <nav class="nav-row one-way" aria-label="Activity navigation"><div class="nav-spacer"></div><button id="next-btn" class="button primary" type="button">Commit &amp; continue</button></nav>
+    </section>
+  </main>
+
+  <section id="print-root" class="print-root" aria-hidden="true"></section>
+
+  <dialog id="export-dialog" class="export-dialog">
+    <form method="dialog" class="dialog-card">
+      <button class="dialog-x" value="cancel" aria-label="Close">x</button>
+      <div class="eyebrow">TRAIL COMPLETE</div>
+      <h2>Your reasoning has a history.</h2>
+      <p>The PDF keeps your first reaction, the choices that changed your route, the challenges you met, and your final position.</p>
+      <div id="export-qr" class="qr-box"></div>
+      <div class="privacy-note"><strong>Teacher handoff:</strong> the QR carries a compact activity record for review. It does not contain your full written responses.</div>
+      <div class="dialog-actions"><button id="print-btn" class="button primary" type="button">Export PDF</button><button class="button ghost" value="cancel">Close</button></div>
+      <p class="microcopy">Choose <em>Save as PDF</em> in the browser print dialog.</p>
+    </form>
+  </dialog>
+
+  <script src="vendor/qr-browser.js"></script>
+  <script src="dictionary.js"></script>
+  <script src="shared.js"></script>
+  <script src="case-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function(){
+      const app=document.getElementById('app');
+      const enter=document.getElementById('enter-investigation');
+      const move=document.getElementById('move-label');
+      const key='tok-art-investigation-open-v1';
+      const briefing=document.getElementById('briefing');
+      const open=(smooth=true)=>{
+        document.body.classList.add('investigation-open');
+        if(briefing) briefing.hidden=true;
+        app.hidden=false;
+        try{sessionStorage.setItem(key,'1');}catch(e){}
+        if(move && move.textContent==='BRIEFING') move.textContent='ENTRY';
+        requestAnimationFrame(()=>{
+          if(smooth) app.scrollIntoView({block:'start',behavior:'smooth'});
+          else window.scrollTo({top:0,left:0,behavior:'auto'});
+        });
+      };
+      let already=false;
+      try{already=sessionStorage.getItem(key)==='1';}catch(e){}
+      if(already){open(false);}
+      else if(move){move.textContent='BRIEFING';}
+      enter?.addEventListener('click',open);
+    })();
+  </script>
 </body>
 </html>
