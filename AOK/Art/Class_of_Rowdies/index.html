@@ -69,29 +69,67 @@ p{font-family:var(--serif)}
 /* film gate */
 .film-gate{height:100vh;background:#030304;display:grid;place-items:center;overflow:hidden}
 .film-gate:before{content:"WATCH FIRST";position:absolute;left:-.06em;bottom:-.18em;font:900 22vw/.7 var(--sans);letter-spacing:-.08em;color:#0b0b0c;white-space:nowrap}
-.film-shell{position:relative;width:min(1180px,92vw);z-index:5;display:grid;grid-template-columns:.73fr 1.27fr;gap:5vw;align-items:center}
-.film-copy{position:relative;z-index:3;transform:rotate(-2.5deg)}
+.film-shell{position:relative;width:min(1180px,92vw);z-index:5;display:grid;grid-template-columns:.73fr 1.27fr;gap:5vw;align-items:center;transition:width .55s cubic-bezier(.2,.8,.2,1),height .55s cubic-bezier(.2,.8,.2,1)}
+.film-copy{position:relative;z-index:3;transform:rotate(-2.5deg);transition:opacity .35s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
 .film-copy .stamp{display:inline-block;border:1px solid #6f2220;color:#d88a7d;padding:6px 9px;font:9px var(--mono);letter-spacing:.15em;text-transform:uppercase;transform:rotate(4deg);margin-bottom:28px}
 .film-copy h1{max-width:7ch;text-shadow:-3px 0 rgba(206,89,73,.35),3px 0 rgba(231,255,77,.15)}
 .film-copy p{font:clamp(17px,1.55vw,23px)/1.4 var(--serif);color:#aaa49d;max-width:30ch;margin:28px 0 0}
-.film-frame{position:relative;aspect-ratio:16/9;background:#090909;border:1px solid #2d2d2d;box-shadow:0 28px 80px rgba(0,0,0,.55);transform:rotate(.55deg);overflow:hidden}
+.film-frame{position:relative;aspect-ratio:16/9;background:#090909;border:1px solid #2d2d2d;box-shadow:0 28px 80px rgba(0,0,0,.55);transform:rotate(.55deg);overflow:hidden;transition:width .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .4s ease}
 #ytPlayer,.yt-fallback{position:absolute;inset:0;width:100%;height:100%}
-#ytPlayer iframe{width:100%;height:100%;filter:grayscale(.9) sepia(.16) contrast(1.22) brightness(.72);transform:scale(1.018)}
+#ytPlayer iframe{width:100%;height:100%;border:0;filter:grayscale(.78) sepia(.12) saturate(.72) contrast(1.32) brightness(.72);transform:scale(1.022);animation:vhsBreath 8s steps(8,end) infinite}
 .yt-fallback{display:grid;place-items:center;padding:7%;text-align:center;font:13px/1.5 var(--mono);color:#9d9891;background:#0a0a0b}
-.film-overlay{position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(circle at 50% 45%,transparent 0 48%,rgba(0,0,0,.66) 100%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 8px);mix-blend-mode:screen}
-.film-overlay:after{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(0deg,transparent 0 16px,rgba(255,255,255,.035) 17px,transparent 18px);animation:filmJolt .38s steps(2,end) infinite;opacity:.38}
-@keyframes filmJolt{0%{transform:translate(0,0)}33%{transform:translate(2px,-1px)}66%{transform:translate(-1px,2px)}100%{transform:translate(0,0)}}
-.film-control{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(0,0,0,.18)}
+.film-overlay{position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(circle at 50% 45%,transparent 0 47%,rgba(0,0,0,.72) 100%),repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.78}
+.film-overlay:before{content:"";position:absolute;left:-8%;right:-8%;height:14%;top:-20%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.08),rgba(176,42,42,.08),transparent);filter:blur(2px);animation:vhsTrack 5.8s steps(9,end) infinite}
+.film-overlay:after{content:"";position:absolute;inset:-15%;background:repeating-linear-gradient(90deg,transparent 0 7px,rgba(255,0,70,.022) 8px,transparent 10px,rgba(0,220,255,.018) 12px,transparent 14px);animation:vhsJolt .52s steps(2,end) infinite;opacity:.55}
+@keyframes vhsTrack{0%{transform:translateY(-5%)}18%{transform:translateY(170%)}19%{transform:translateY(420%)}63%{transform:translateY(770%)}64%,100%{transform:translateY(920%)}}
+@keyframes vhsJolt{0%,80%,100%{transform:translate(0,0)}84%{transform:translate(3px,-1px)}88%{transform:translate(-2px,2px)}92%{transform:translate(1px,0)}}
+@keyframes vhsBreath{0%,100%{transform:scale(1.022) translate(0,0)}49%{transform:scale(1.024) translate(.4px,0)}50%{transform:scale(1.024) translate(-.8px,.3px)}}
+.film-control{position:absolute;inset:0;z-index:20;display:grid;place-items:center;background:rgba(0,0,0,.16)}
 .film-control.gone{display:none}
-#beginFilm{border:1px solid #ddd;background:rgba(0,0,0,.7);color:#fff;padding:16px 22px;font:700 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:10px 10px 0 rgba(206,89,73,.18)}
-.watch-ui{position:absolute;left:0;right:0;bottom:-76px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
-.watch-track{height:4px;background:#1d1d1d;overflow:hidden}.watch-fill{height:100%;width:0;background:var(--acid);transition:width .2s linear}
-.watch-meta{display:flex;justify-content:space-between;margin-top:8px;font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#827e78}
-#bypass{border:0;border-bottom:1px solid #555;background:none;color:#777;padding:8px 0;font:9px var(--mono);letter-spacing:.11em;text-transform:uppercase;cursor:not-allowed;white-space:nowrap}
-#bypass.ready{color:#ddd;border-bottom-color:#aaa;cursor:pointer}
-#journeyBtn{display:none;position:absolute;right:0;bottom:-138px;border:1px solid var(--acid);background:var(--acid);color:#0b0b0c;padding:14px 20px;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
-#journeyBtn.on{display:block}
+#beginFilm{border:1px solid #ddd;background:rgba(0,0,0,.78);color:#fff;padding:17px 24px;font:700 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:10px 10px 0 rgba(206,89,73,.18);transition:transform .2s ease,background .2s ease}
+#beginFilm:hover,#beginFilm:focus-visible{transform:translate(-2px,-2px);background:#111;outline:1px solid var(--acid);outline-offset:4px}
+.watch-ui{position:absolute;left:20px;right:176px;bottom:18px;z-index:16;display:grid;grid-template-columns:1fr;gap:7px;align-items:center;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.watch-track{height:3px;background:rgba(255,255,255,.14);overflow:hidden}.watch-fill{height:100%;width:0;background:var(--acid);transition:width .2s linear}
+.watch-meta{display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#aaa59d;text-shadow:0 1px 4px #000}
+.watch-external{position:absolute;left:20px;top:18px;z-index:18;opacity:0;pointer-events:none;color:#c2bdb5;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:4px;font:9px var(--mono);letter-spacing:.11em;text-transform:uppercase;transition:opacity .35s ease}
+.watch-external:hover{color:#fff;border-color:#fff}
 .film-note{position:absolute;left:0;bottom:-135px;font:9px/1.45 var(--mono);color:#67635e;max-width:55ch}
+
+/* leaking-glass minimum-time gate */
+.corner-gate{position:absolute;right:18px;top:18px;z-index:22;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease}
+#bypass{--remaining:1;display:grid;grid-template-columns:48px auto;gap:11px;align-items:center;min-width:154px;border:1px solid rgba(173,71,61,.45);background:rgba(5,5,6,.64);backdrop-filter:blur(9px);color:#d1cbc1;padding:9px 11px 9px 9px;text-align:left;cursor:not-allowed;transition:border-color .28s ease,background .28s ease,color .28s ease,transform .28s ease;box-shadow:0 10px 32px rgba(0,0,0,.28)}
+.leak-glass{position:relative;width:42px;height:56px;display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.45))}
+.glass-rim{position:absolute;left:7px;right:7px;top:0;height:7px;border:1px solid rgba(255,255,255,.62);border-bottom-color:rgba(255,255,255,.28);border-radius:50%;background:rgba(255,255,255,.04);z-index:5}
+.glass-body{position:absolute;left:5px;right:5px;top:4px;bottom:5px;border:1px solid rgba(255,255,255,.45);border-top:0;border-radius:3px 3px 10px 10px;overflow:hidden;background:linear-gradient(90deg,rgba(255,255,255,.03),rgba(255,255,255,.11) 48%,rgba(255,255,255,.02));clip-path:polygon(6% 0,94% 0,84% 100%,16% 100%)}
+.glass-liquid{position:absolute;left:0;right:0;bottom:0;height:calc(100% * var(--remaining));min-height:0;background:linear-gradient(180deg,#b2483f,#5f1010 72%,#2a0808);box-shadow:0 -2px 8px rgba(214,63,48,.35) inset;transition:height .9s linear,opacity .25s ease}
+.glass-liquid:before{content:"";position:absolute;left:0;right:0;top:-3px;height:6px;border-radius:50%;background:#c15348;opacity:.82}
+.leak-hole{position:absolute;left:19px;bottom:1px;width:4px;height:5px;border-radius:50%;background:#7e1d18;box-shadow:0 0 8px rgba(193,55,46,.8)}
+.drip{position:absolute;left:20px;bottom:-3px;width:3px;height:8px;border-radius:60% 60% 70% 70%;background:#8e241e;opacity:.9;animation:leakDrop 1.2s ease-in infinite}
+.drip.d2{left:17px;animation-delay:.43s;animation-duration:1.48s;opacity:.62}.drip.d3{left:22px;animation-delay:.76s;animation-duration:1.7s;opacity:.48}
+@keyframes leakDrop{0%{transform:translateY(0) scaleY(.3);opacity:0}20%{opacity:.9}70%{transform:translateY(13px) scaleY(1)}100%{transform:translateY(23px) scaleY(.65);opacity:0}}
+.play-mark{position:absolute;left:16px;top:18px;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid #111;opacity:0;transform:translateX(-2px);transition:opacity .25s ease}
+.bypass-copy{display:block;min-width:76px}.bypass-copy b,.bypass-copy span{display:block}.bypass-copy b{font:700 8px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#b9877e}.bypass-copy span{margin-top:4px;font:700 13px/1 var(--mono);letter-spacing:.06em;color:#ece6dc}
+#bypass.ready{cursor:pointer;pointer-events:auto;background:var(--acid);border-color:var(--acid);color:#111;transform:translateY(0)}
+#bypass.ready:hover,#bypass.ready:focus-visible{transform:translateY(-2px);outline:2px solid #fff;outline-offset:3px}
+#bypass.ready .glass-liquid,#bypass.ready .drip,#bypass.ready .leak-hole{opacity:0;animation:none}
+#bypass.ready .glass-body{border-color:rgba(17,17,17,.65);background:rgba(255,255,255,.25)}
+#bypass.ready .glass-rim{border-color:rgba(17,17,17,.7)}
+#bypass.ready .play-mark{opacity:1}
+#bypass.ready .bypass-copy b,#bypass.ready .bypass-copy span{color:#111}
+
+/* screening becomes its own full-viewport scene after the click */
+body.screening-active #screening{position:fixed;inset:0;height:100dvh;min-height:100vh;z-index:420;background:#010102;display:grid;place-items:center;padding:0}
+body.screening-active #screening:before{opacity:.35;transform:scale(1.05)}
+body.screening-active .film-shell{width:100vw;height:100dvh;display:grid;grid-template-columns:1fr;place-items:center;padding:1.5vh 1.5vw}
+body.screening-active .film-copy{position:absolute;opacity:0;pointer-events:none;transform:translateX(-8vw) rotate(-7deg)}
+body.screening-active .film-frame{width:min(96vw,170.5dvh);max-width:none;aspect-ratio:16/9;transform:none;border-color:#262626;box-shadow:0 0 0 1px rgba(255,255,255,.025),0 22px 90px rgba(0,0,0,.75)}
+body.screening-active .watch-ui{left:20px;right:184px;bottom:16px;opacity:1}
+body.screening-active .watch-external{opacity:.72;pointer-events:auto}
+body.screening-active .corner-gate{opacity:1;pointer-events:auto;transform:none}
+body.screening-active .film-note{display:none}
+body.screening-active #tools{z-index:460}
+body.screening-active #chapter{z-index:460}
+@media(max-width:700px){body.screening-active .film-shell{padding:1vh 1vw}body.screening-active .film-frame{width:98vw}.corner-gate{right:10px;top:10px}#bypass{min-width:0;grid-template-columns:42px auto;padding:7px}.bypass-copy b{display:none}.watch-ui{right:126px!important;left:12px!important;bottom:10px!important}.watch-external{left:12px;top:12px}.film-overlay{opacity:.62}}
 
 /* prologue */
 .prologue{min-height:128vh;background:#070708;display:grid;align-items:center;overflow:hidden}
@@ -167,7 +205,7 @@ footer{background:#0b0b0c;color:#918c85;padding:10vh 6vw;font:10px/1.55 var(--mo
 footer .inner{width:min(1120px,100%);margin:auto}footer details{border-top:1px solid #333;padding-top:18px}footer summary{cursor:pointer;color:#ddd;text-transform:uppercase;letter-spacing:.14em}.credits{display:grid;grid-template-columns:1fr 1fr;gap:20px 46px;margin-top:26px}.credits p{margin:0}.credits a{text-decoration-color:#4a4a4a}.footnote{margin-top:34px;max-width:100ch;color:#6f6b65}
 
 @media(max-width:900px){
-  #pathRail{display:none!important}.film-shell,.split,.plato-grid,.manifesto{grid-template-columns:1fr}.film-shell{gap:28px}.film-copy{transform:none}.film-copy h1{font-size:clamp(48px,12vw,86px)}.film-frame{width:100%}.watch-ui{bottom:-66px}.film-note{display:none}#journeyBtn{bottom:-124px}.prologue{min-height:120vh}.choice-grid,.prompt-grid,.credits{grid-template-columns:1fr}.choice-btn{min-height:180px}.art-panel,.phone-poster,.ifthen{min-height:52vh}.plato-visual{position:relative;top:auto;height:62vh}.plato-grid{padding-top:10vh}.plato-copy{padding-top:6vh}.horizon:after{background:linear-gradient(0deg,rgba(240,238,230,.95) 0 54%,rgba(240,238,230,.08) 88%)}.horizon .wrap{align-self:end}.manifesto{gap:30px}.art-credit{font-size:8px}.tool:nth-child(2){display:none}
+  #pathRail{display:none!important}.film-shell,.split,.plato-grid,.manifesto{grid-template-columns:1fr}.film-shell{gap:28px}.film-copy{transform:none}.film-copy h1{font-size:clamp(48px,12vw,86px)}.film-frame{width:100%}.watch-ui{bottom:-66px}.film-note{display:none}.prologue{min-height:120vh}.choice-grid,.prompt-grid,.credits{grid-template-columns:1fr}.choice-btn{min-height:180px}.art-panel,.phone-poster,.ifthen{min-height:52vh}.plato-visual{position:relative;top:auto;height:62vh}.plato-grid{padding-top:10vh}.plato-copy{padding-top:6vh}.horizon:after{background:linear-gradient(0deg,rgba(240,238,230,.95) 0 54%,rgba(240,238,230,.08) 88%)}.horizon .wrap{align-self:end}.manifesto{gap:30px}.art-credit{font-size:8px}.tool:nth-child(2){display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important;animation:none!important;transition:none!important}.kinetic{transform:none!important;filter:none!important}#tears,#scanlines{display:none!important}.reveal{opacity:1;transform:none}
@@ -199,18 +237,24 @@ footer .inner{width:min(1120px,100%);margin:auto}footer details{border-top:1px s
       <p>Before this page tells you anything, watch what changes when a class stops being an audience.</p>
     </div>
     <div class="film-frame" id="filmFrame">
-      <div id="ytPlayer"><div class="yt-fallback">Loading the screening...<br>If YouTube is blocked, a bypass will unlock after 30 seconds.</div></div>
-      <div class="film-overlay"></div>
-      <div class="film-control" id="filmControl"><button id="beginFilm">Begin screening</button></div>
-      <div class="watch-ui">
-        <div>
-          <div class="watch-track"><div class="watch-fill" id="watchFill"></div></div>
-          <div class="watch-meta"><span id="watchStatus">not started</span><span id="watchPct">0%</span></div>
-        </div>
-        <button id="bypass" disabled>skip unlocks in 00:30</button>
+      <div id="ytPlayer"><div class="yt-fallback">Loading the screening...<br>If YouTube refuses the embed, the leaking-glass exit will unlock after 30 seconds.</div></div>
+      <div class="film-overlay" aria-hidden="true"></div>
+      <div class="film-control" id="filmControl"><button id="beginFilm">Enter screening / play</button></div>
+      <a class="watch-external" href="https://www.youtube.com/watch?v=vsApwK9khRo" target="_blank" rel="noopener">embed blocked? open original &#8599;</a>
+      <div class="watch-ui" aria-live="polite">
+        <div class="watch-track"><div class="watch-fill" id="watchFill"></div></div>
+        <div class="watch-meta"><span id="watchStatus">not started</span><span id="watchPct">0%</span></div>
       </div>
-      <div class="film-note" id="filmNote">Controls are intentionally hidden. This is a soft classroom gate, not DRM: the page tracks forward viewing and rejects obvious fast-forward jumps. YouTube itself cannot provide tamper-proof watch enforcement in a standalone client-side page.</div>
-      <button id="journeyBtn">Continue into the experiment &#8595;</button>
+      <div class="corner-gate" id="cornerGate">
+        <button id="bypass" disabled aria-label="Minimum viewing time: 30 seconds">
+          <span class="leak-glass" aria-hidden="true">
+            <span class="glass-rim"></span><span class="glass-body"><span class="glass-liquid"></span></span>
+            <span class="leak-hole"></span><i class="drip"></i><i class="drip d2"></i><i class="drip d3"></i><i class="play-mark"></i>
+          </span>
+          <span class="bypass-copy"><b id="bypassTitle">minimum time</b><span id="bypassCount">00:30</span></span>
+        </button>
+      </div>
+      <div class="film-note" id="filmNote">The player uses YouTube's privacy-enhanced embed. If YouTube still asks you to sign in, use the original-video link; this page will not trap you.</div>
     </div>
   </div>
 </section>
@@ -432,7 +476,7 @@ footer .inner{width:min(1120px,100%);margin:auto}footer details{border-top:1px s
 <footer>
   <div class="inner"><details><summary>Sources, art, psychology and technical notes</summary><div class="credits">
     <p><b>Film</b><br><i>Short Film - Class of Rowdies</i>, YouTube video supplied for this activity: <a href="https://www.youtube.com/watch?v=vsApwK9khRo" target="_blank" rel="noopener">open on YouTube</a>. Short phrases on the page are taken from the transcript supplied with the project.</p>
-    <p><b>YouTube watch gate</b><br>The embed uses the YouTube IFrame API with visible controls and keyboard seeking disabled. The page tracks normal forward playback and reverses obvious jumps. Because this is client-side code, it is intentionally described as a soft classroom gate rather than tamper-proof enforcement.</p>
+    <p><b>YouTube watch gate</b><br>The screening uses YouTube's privacy-enhanced <code>youtube-nocookie.com</code> embed, hides native seeking controls, tracks normal forward playback and reverses obvious jumps. The film expands to a viewport-filling VHS-style screening. If YouTube itself requires sign-in, the original-video link and the 30-second leaking-glass exit prevent a dead end. This remains a soft classroom gate rather than tamper-proof enforcement.</p>
     <p><b>Self-determination theory</b><br>Ryan and Deci's framework describes autonomy, competence and relatedness as basic psychological needs relevant to motivation. Classroom autonomy support is an established application of the theory.</p>
     <p><b>Learned helplessness</b><br>Used here only as a conceptual analogy: repeated uncontrollability can reduce later attempts to act even when control becomes available. This page is not diagnosing students.</p>
     <p><b>Social media</b><br>APA's 2023 advisory states that adolescent social-media experience is shaped by both user choices and platform features, and specifically discusses features such as recommended content and endless scrolling. It also emphasizes that social media is not inherently harmful or beneficial.</p>
@@ -476,25 +520,60 @@ footer .inner{width:min(1120px,100%);margin:auto}footer details{border-top:1px s
   soundBtn.addEventListener('click',()=>{Sound.unlock();soundWanted=!soundWanted;soundBtn.setAttribute('aria-pressed',String(soundWanted));soundBtn.textContent=soundWanted?'sound on':'sound off';Sound.mute(!soundWanted);if(soundWanted)Sound.set(activeAudio())});
 
   /* --- YouTube screening gate --- */
-  let player=null,ytReady=false,watchTimer=null,bypassTimer=null,secondsToBypass=30,furthest=0,duration=0,lastTime=0,startedFilm=false;
-  const filmControl=document.getElementById('filmControl'),beginFilm=document.getElementById('beginFilm'),watchFill=document.getElementById('watchFill'),watchStatus=document.getElementById('watchStatus'),watchPct=document.getElementById('watchPct'),bypass=document.getElementById('bypass'),journeyBtn=document.getElementById('journeyBtn'),filmNote=document.getElementById('filmNote');
-  window.onYouTubeIframeAPIReady=()=>{
+  let player=null,ytReady=false,watchTimer=null,bypassTimer=null,secondsToBypass=30,furthest=0,duration=0,lastTime=0,startedFilm=false,gateReady=false;
+  const screening=document.getElementById('screening'),filmControl=document.getElementById('filmControl'),beginFilm=document.getElementById('beginFilm'),watchFill=document.getElementById('watchFill'),watchStatus=document.getElementById('watchStatus'),watchPct=document.getElementById('watchPct'),bypass=document.getElementById('bypass'),bypassTitle=document.getElementById('bypassTitle'),bypassCount=document.getElementById('bypassCount'),filmNote=document.getElementById('filmNote');
+
+  function buildPrivacyPlayer(){
     try{
-      player=new YT.Player('ytPlayer',{videoId:'vsApwK9khRo',playerVars:{controls:0,disablekb:1,rel:0,playsinline:1,fs:0,cc_load_policy:0},events:{onReady:()=>{ytReady=true;watchStatus.textContent='ready';},onStateChange:(e)=>{if(window.YT&&e.data===YT.PlayerState.ENDED) unlockJourney('screening complete');}}});
-    }catch(e){filmNote.textContent='The YouTube API could not initialize here. The 30-second bypass will still unlock the journey.';}
-  };
+      const holder=document.getElementById('ytPlayer'),iframe=document.createElement('iframe');
+      iframe.id='ytPrivacyFrame';iframe.title='Short Film - Class of Rowdies';iframe.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');iframe.setAttribute('referrerpolicy','strict-origin-when-cross-origin');iframe.setAttribute('allowfullscreen','');
+      const params=new URLSearchParams({enablejsapi:'1',controls:'0',disablekb:'1',rel:'0',playsinline:'1',fs:'0',cc_load_policy:'0'});
+      if(location.protocol==='http:'||location.protocol==='https:')params.set('origin',location.origin);
+      iframe.src='https://www.youtube-nocookie.com/embed/vsApwK9khRo?'+params.toString();holder.replaceChildren(iframe);
+      player=new YT.Player('ytPrivacyFrame',{events:{onReady:()=>{ytReady=true;watchStatus.textContent=startedFilm?'watching':'ready';if(startedFilm){try{player.playVideo()}catch(e){}}},onStateChange:(e)=>{if(window.YT&&e.data===YT.PlayerState.ENDED)armExit('screening complete',true)},onError:()=>{watchStatus.textContent='embed blocked - timer still works';}}});
+    }catch(e){watchStatus.textContent='embed unavailable - timer still works';filmNote.textContent='YouTube could not initialize here. Open the original video if needed; the leaking-glass exit still unlocks after 30 seconds.';}
+  }
+  window.onYouTubeIframeAPIReady=buildPrivacyPlayer;
   const api=document.createElement('script');api.src='https://www.youtube.com/iframe_api';document.head.appendChild(api);
 
-  beginFilm.addEventListener('click',()=>{
-    Sound.unlock();soundWanted=true;soundBtn.setAttribute('aria-pressed','true');soundBtn.textContent='sound on';Sound.mute(false);startedFilm=true;filmControl.classList.add('gone');watchStatus.textContent=ytReady?'watching':'loading player';startBypassCountdown();
-    if(ytReady){try{player.playVideo();}catch(e){}}
-    watchTimer=setInterval(trackWatch,500);
+  beginFilm.addEventListener('click',async()=>{
+    Sound.unlock();soundWanted=true;soundBtn.setAttribute('aria-pressed','true');soundBtn.textContent='sound on';Sound.mute(false);startedFilm=true;body.classList.add('screening-active');filmControl.classList.add('gone');watchStatus.textContent=ytReady?'watching':'loading player';startBypassCountdown();
+    try{if(!document.fullscreenElement&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen()}catch(e){}
+    if(ytReady){try{player.playVideo()}catch(e){}}
+    if(!watchTimer)watchTimer=setInterval(trackWatch,500);
   });
-  function startBypassCountdown(){if(bypassTimer)return;bypassTimer=setInterval(()=>{secondsToBypass=Math.max(0,secondsToBypass-1);if(secondsToBypass===0){clearInterval(bypassTimer);bypass.disabled=false;bypass.classList.add('ready');bypass.textContent='already watched? bypass';}else bypass.textContent='skip unlocks in 00:'+String(secondsToBypass).padStart(2,'0');},1000)}
-  function trackWatch(){if(!player||!ytReady)return;try{duration=player.getDuration()||duration;const state=player.getPlayerState();const t=player.getCurrentTime()||0;if(window.YT&&state===YT.PlayerState.PLAYING){if(lastTime>0&&t>furthest+2.6){player.seekTo(Math.max(0,furthest-.25),true);watchStatus.textContent='fast-forward blocked';Sound.hit();}else if(t>=furthest-.6&&t<=furthest+2.6){furthest=Math.max(furthest,t);watchStatus.textContent='watching';}}lastTime=t;const pct=duration?Math.min(100,furthest/duration*100):0;watchFill.style.width=pct.toFixed(1)+'%';watchPct.textContent=Math.floor(pct)+'%';if(pct>=90)unlockJourney('90% watched');}catch(e){}}
-  bypass.addEventListener('click',()=>{if(!bypass.disabled)unlockJourney('bypassed after 30 seconds')});
-  function unlockJourney(reason){if(journeyUnlocked)return;journeyUnlocked=true;clearInterval(watchTimer);body.classList.remove('film-locked');journeyBtn.classList.add('on');watchStatus.textContent=reason;watchFill.style.width='100%';if(reason.includes('90%')||reason.includes('complete'))watchPct.textContent='passed';filmNote.textContent='Gate open. Your next choice is below.';}
-  journeyBtn.addEventListener('click',()=>{try{if(player&&ytReady)player.pauseVideo()}catch(e){}pathRail.classList.add('on');Sound.set('machine');document.getElementById('prologue').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'})});
+
+  function paintGlass(){
+    const remaining=Math.max(0,secondsToBypass)/30;bypass.style.setProperty('--remaining',remaining.toFixed(3));bypassCount.textContent='00:'+String(secondsToBypass).padStart(2,'0');bypass.setAttribute('aria-label',secondsToBypass>0?'Minimum viewing time: '+secondsToBypass+' seconds':'Continue to the next screen');
+  }
+  paintGlass();
+  function startBypassCountdown(){
+    if(bypassTimer||secondsToBypass<=0)return;
+    bypassTimer=setInterval(()=>{secondsToBypass=Math.max(0,secondsToBypass-1);paintGlass();if(secondsToBypass===0){clearInterval(bypassTimer);bypassTimer=null;armExit('minimum elapsed',false)}},1000);
+  }
+  function armExit(reason,watched){
+    gateReady=true;bypass.disabled=false;bypass.classList.add('ready');bypassTitle.textContent=watched?'screening complete':'continue anyway';bypassCount.textContent='NEXT';watchStatus.textContent=watched?reason:'continue unlocked';
+    if(watched){watchFill.style.width='100%';watchPct.textContent='passed'}
+  }
+  function trackWatch(){
+    if(!player||!ytReady)return;
+    try{
+      duration=player.getDuration()||duration;const state=player.getPlayerState(),t=player.getCurrentTime()||0;
+      if(window.YT&&state===YT.PlayerState.PLAYING){
+        if(lastTime>0&&t>furthest+2.6){player.seekTo(Math.max(0,furthest-.25),true);watchStatus.textContent='fast-forward blocked';Sound.hit()}
+        else if(t>=furthest-.6&&t<=furthest+2.6){furthest=Math.max(furthest,t);watchStatus.textContent='watching'}
+      }
+      lastTime=t;const pct=duration?Math.min(100,furthest/duration*100):0;watchFill.style.width=pct.toFixed(1)+'%';watchPct.textContent=Math.floor(pct)+'%';if(pct>=90)armExit('90% watched',true);
+    }catch(e){}
+  }
+  bypass.addEventListener('click',async()=>{
+    if(!gateReady)return;
+    journeyUnlocked=true;clearInterval(watchTimer);watchTimer=null;clearInterval(bypassTimer);bypassTimer=null;
+    try{if(player&&ytReady)player.pauseVideo()}catch(e){}
+    body.classList.remove('screening-active','film-locked');pathRail.classList.add('on');Sound.set('machine');
+    try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}
+    setTimeout(()=>document.getElementById('prologue').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'}),70);
+  });
 
   /* --- branching choices --- */
   const chosen={};
