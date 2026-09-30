@@ -1,0 +1,23 @@
+{
+  "title": "Boundary / Art: Can Pornography Be Art?",
+  "summary": "A one-way decision journey through 73 real controversial cases, from Pompeii and Madame Bovary to Mapplethorpe and Twitch. It builds to one hard question: can pornography be art?",
+  "overview": [
+    "Students classify one concrete case at a time: literature, music, film, comedy, performance, propaganda, censorship and cross-cultural history. They commit each decision and move on without going back. A branching engine picks the next case to push against the rule the student seems to be using, whether that rule is permissive or restrictive. It later shows students their own earlier answers, so they have to face their own rule instead of inventing a new one on every screen.",
+    "Along the way they collect case dossiers. In the finale they sort every dossier onto a spectrum from 'supports: pornography can be art' to 'supports: it is not', with a separate bin for irrelevant evidence. Then they must make a forced final claim, choose their strongest evidence and write a short defended answer. The result exports as a PDF with a QR code.",
+    "The teacher console (teacher.html) scans the QR codes and lets you preview all 73 cases before class, filtered by medium, source safety and argumentative direction. Use it to cut any case that doesn't suit your group."
+  ],
+  "questions": [
+    "Who or what decides whether something counts as art: the maker's intention, the audience, the institution or the market?",
+    "Does commercial or sexual purpose disqualify a work as art?",
+    "How do censorship and context change what a work is taken to mean?"
+  ],
+  "time": "One long lesson (60–90 min)",
+  "format": "Individual, on laptops",
+  "needs": "Internet access for the case images (local fallbacks exist). The teacher console to review submissions.",
+  "advisories": ["Mature themes", "Preview first"],
+  "heads_up": "This is the edgiest thing in the collection. It deals directly with sexuality, obscenity, pornography, blasphemy, profanity and violent art. No explicit images are deliberately shown: mature cases use a safe cover, poster or venue image. Some optional external source links do lead to mature material, and these are flagged amber or red. Check your school's policy and your students' age, tell colleagues (and parents, if appropriate) beforehand, and go through the case bank in the teacher console first. Copy and paste is blocked in the written answers, and anonymous typing-process data is stored locally for the teacher.",
+  "links": [
+    {"label": "Teacher console", "href": "teacher.html"}
+  ],
+  "order": 30
+}

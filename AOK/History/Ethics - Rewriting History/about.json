@@ -1,0 +1,18 @@
+{
+  "title": "Ethics in History: The Watcher Times",
+  "summary": "Three short videos on destroying, toppling and teaching the past. Then students play 'The Watcher Times', an AI-run simulation in which they can step into history from 1889.",
+  "overview": [
+    "Watch & reflect: ISIS militants destroying artefacts in the Mosul Museum, statues being toppled in North America, and Trevor Noah on how Germany teaches the Holocaust. Students consider who has the right to erase, remove or reframe the past.",
+    "Then students paste a ready-made prompt (download or copy it from the page) into an AI chatbot, which runs 'The Watcher Times – Hard Mode'. The student is an entity outside time. In 1889 a child is born who may become a catalyst for mass harm, but only if world conditions push that way. Each turn brings a tense newswire and 3–5 numbered choices. Students pick one and justify it with an ethical frame: consequentialist, deontological, non-interventionist or 'tragic responsibility'. The simulation leans towards entropy and random shocks, so intervention is risky and there is no clean choice."
+  ],
+  "questions": [
+    "Is it ever right to destroy or remove a monument?",
+    "Do individuals shape history, or do structural forces make events inevitable?",
+    "How should moral responsibility be weighed under uncertainty?"
+  ],
+  "time": "One lesson",
+  "format": "Individual or pairs, on laptops",
+  "needs": "An AI chatbot (ChatGPT, Claude, Gemini…) that students may use. YouTube access.",
+  "advisories": ["Uses an AI chatbot", "Heritage destruction video"],
+  "heads_up": "Check your school's AI policy and the chatbots' age limits before class. LLM output varies from run to run, so skim a playthrough yourself first. The prompt tells the AI to keep things 'appropriate for high school'. The ISIS clip shows the destruction of artefacts, not violence against people."
+}

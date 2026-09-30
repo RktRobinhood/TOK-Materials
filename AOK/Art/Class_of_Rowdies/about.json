@@ -1,0 +1,20 @@
+{
+  "summary": "A short film, then a branching, sound-driven scroll-story told from inside a loud class. It ends with students 'enlisting' in their own course.",
+  "overview": [
+    "Students first watch the short film Class of Rowdies, about a class everyone has written off. The page then tells a parallel story from the seat of one student in a loud, turbulent class. The story takes the students' side: the joke really is funny, and the hand really is scary to raise.",
+    "The student's choices shape the room. Saying the joke or holding it back, battling the teacher or taking up an offer: each choice that feeds the noise lays a brick in a wall along the bottom of the screen. A Kantian turn ('now let everyone do what you did') multiplies the student's choice across all 28 seats. Public-domain paintings by Jan Steen, Bruegel, Hammershøi, Van Gogh and Raphael carry the argument without spelling it out.",
+    "The wall comes down only when students answer 'What would you bring?'. The piece ends on a defaced Kitchener poster ('THE CLASS NEEDS YOU') and an enlistment card that students save as an image and show you. On it they say what they can give, what they want to get and whose skill they would like to learn."
+  ],
+  "questions": [
+    "Can a piece of art make an argument without saying it?",
+    "If everyone in the room made your choice, what would the room become?",
+    "When does a teacher stop pushing for your future, and when do you start?"
+  ],
+  "time": "About one lesson (film, story and debrief)",
+  "format": "Individual, on devices, with sound",
+  "needs": "Headphones. YouTube access for the film (a fallback link unlocks after 30 seconds if the embed is blocked).",
+  "advisories": ["Sudden sound & flashes"],
+  "heads_up": "The piece is deliberately intense: sudden noise, screen shake and single white flashes (rate-limited, never strobing). A 'shocks: gentle' switch sits bottom left, and it turns on automatically for anyone with reduced motion enabled. It works best at the start of a year or to reset a class culture. It was written with one particular class in mind: a sports class that has lessons on Tuesdays. Frame it for your own group. Students' answers stay in their browser.",
+  "open_label": "Open lesson",
+  "order": 10
+}

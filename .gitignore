@@ -1,0 +1,3 @@
+# Generated at deploy time by scripts/generate_directory.py
+/index.html
+__pycache__/

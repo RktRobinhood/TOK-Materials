@@ -29,3 +29,11 @@ The project is designed as:
 - A scalable framework for long-term TOK resource development  
 
 All materials align with the IB TOK course framework and emphasize conceptual clarity, perspective analysis, and structured argumentation.
+
+---
+
+## ➕ Adding a Lesson
+
+Drop a folder containing an `index.html` anywhere under `AOK/`, `Themes/`, `Concepts/`, `Assessment/` or `Other/`, and it appears on the landing page on the next push. Folders named after an area of knowledge or theme (e.g. `AOK/Mathematics`, `Themes/Knowledge and Technology`) get their own artwork automatically (see `scripts/agora_art.py`).
+
+To give a lesson a teacher overview on the landing page, add an `about.json` next to its `index.html`. The field list is documented at the top of `scripts/generate_directory.py`.

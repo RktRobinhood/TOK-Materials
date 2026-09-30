@@ -1,0 +1,12 @@
+{
+  "title": "Copenhagen Field Guide",
+  "summary": "An interactive planner for our sports study trip to Copenhagen (4–6 Nov 2026), with filterable activities, live events, side quests and a map.",
+  "overview": [
+    "Not a TOK lesson. It is a single-page catalogue built so that a class of 32 could help choose its own trip programme on a 1,000 DKK budget. Activities can be filtered by cost, experience type and CAS potential (with AND/OR logic). There are date-specific events (sport, theatre, music, civic), optional side quests and a map with every option pinned.",
+    "Shared here as a template. The format works for any trip where you want students to weigh the options themselves."
+  ],
+  "time": "Planning resource",
+  "format": "Whole class or individual browsing",
+  "advisories": ["Large page (17 MB)"],
+  "heads_up": "All images are embedded in one 17 MB file, so it loads slowly on weak connections. Prices, dates and ticket availability are from the time of planning."
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Researching How We Learn",
+  "summary": "A 70-minute inquiry. If attendance weren't the organising principle of education, how would you learn? Alpha School's AI-driven 'two-hour school day' is the case study.",
+  "overview": [
+    "Frame: each student picks one real thing they want to get better at (maths, an essay, a language, exam prep) as their test case. They then look at Alpha School's claims (2 hours a day, 2.3× growth) next to coverage from Scientific American and WIRED.",
+    "Investigate: students listen to 20 minutes of a Huberman Lab podcast with Alpha co-founder Joe Liemandt, treating him as a source who knows the model well and also has a stake in its success. Prompts separate claim, evidence, cause and transfer, and an optional sports-training analogy lets them see where the comparison breaks down.",
+    "Develop: students sketch their own learning loop (attempt, feedback, adjustment, retention test) on a built-in drawing canvas, then save it as an image or PDF. Work is saved in the browser as they go."
+  ],
+  "questions": [
+    "What would distinguish real learning from short-term performance?",
+    "How far should we trust claims from people with a stake in the outcome?",
+    "Can a method that works in one context transfer to another?"
+  ],
+  "time": "70 min",
+  "format": "Individual, on laptops",
+  "needs": "Headphones for the podcast."
+}

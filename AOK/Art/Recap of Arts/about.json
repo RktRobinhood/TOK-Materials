@@ -1,0 +1,19 @@
+{
+  "title": "Exit Through the Gift Shop: Reflection Lab",
+  "summary": "A self-paced follow-up to Banksy's Exit Through the Gift Shop. Students investigate Mr. Brainwash, money laundering in the art market and NFTs, all through the question 'Can anyone be an artist?'",
+  "overview": [
+    "Built as a 'work alone' lesson for after the class has watched the film. Five tabs take students through a film reflection, Mr. Brainwash's 2008 show 'Life is Beautiful', art as a value container for laundering and sanctions evasion (freeports, Basel Institute), and a quick recap of NFTs (the Beeple sale). Each tab gives curated sources, critical prompts and a small micro-task.",
+    "The final submission is a short-answer template, not an essay. It is built on the Knowledge Framework (scope, methods & tools, perspectives, ethics) plus 2–3 TOK concepts. Each answer has to cite a specific scene and two details from the sources, which makes generic AI answers easy to spot.",
+    "A separate last tab asks students to pitch a year-group art action after browsing HEART, the art museum in Herning. Swap in your own local museum, or skip it."
+  ],
+  "questions": [
+    "Who has the authority to label something 'important' art?",
+    "How much of an artwork's value is belief, authority and scarcity rather than quality?",
+    "Is a documentary a source of knowledge, or an artwork in disguise?"
+  ],
+  "time": "One lesson, after the film (86 min)",
+  "format": "Individual, on laptops",
+  "needs": "The film watched beforehand. It has strong language, so check the rating for your group.",
+  "heads_up": "The HEART / class-trip tab and a couple of lines in the intro are specific to our school. Edit them or tell students to skip that tab.",
+  "order": 20
+}

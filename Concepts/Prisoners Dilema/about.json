@@ -1,0 +1,16 @@
+{
+  "title": "The Prisoner's Dilemma",
+  "summary": "An interrogation-room game of the repeated Prisoner's Dilemma. Stay quiet or snitch over five rounds against four suspects with hidden personalities.",
+  "overview": [
+    "Students choose an opponent in 'Room B'. Each one follows a different, persistent strategy. Over five rounds both sides choose at the same time: stay quiet (trust) or snitch (betray). A live score shows the prison sentence building up. A tutorial, atmospheric sound and a personal-best leaderboard keep it quick and replayable, and it works well on phones.",
+    "The debrief shows why snitching is the safe choice in any single round, yet if both players reason that way, both end up worse off. Students then replay against different personalities and ask whether trust makes sense when the other person can react to what you did before."
+  ],
+  "questions": [
+    "Is it rational to trust?",
+    "Can models from game theory explain, or predict, real human behaviour?",
+    "Does knowing someone's past choices change what you ought to do?"
+  ],
+  "time": "15–20 min plus debrief",
+  "format": "Individual, on phones or laptops",
+  "heads_up": "The leaderboard only saves scores on each device, so for a class-wide comparison ask students to call out their scores. It works well as a hook for the Human Sciences or Ethics."
+}

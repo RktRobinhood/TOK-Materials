@@ -1,0 +1,18 @@
+{
+  "title": "History Lab: How Democracies Fall",
+  "summary": "Students play Secret Hitler online to experience how a democracy collapses from the inside. They then test the 'kill baby Hitler' dilemma against an AI-built ethics game.",
+  "overview": [
+    "Part 1: students learn the rules and play a live round of the hidden-role game Secret Hitler, a simulation of the fall of the Weimar Republic. In the debrief they discuss information asymmetry (a fascist minority that knows the truth against a liberal majority kept in the dark), manufactured crises (passing fascist policies to unlock executive powers) and how quickly paranoia leads everyone to vote 'Nein'.",
+    "Part 2 turns the famous thought experiment 'would you kill baby Hitler?' into a question about historical causality. Does history turn on 'Great Men', or on structural forces that would have produced someone else? It touches on cliodynamics. Students then play a vibe-coded AI ethics game and compare how a machine handles moral dilemmas with how their classmates did."
+  ],
+  "questions": [
+    "Is history driven by individuals or by structures?",
+    "Can human morality and historical cause and effect be reduced to algorithms?",
+    "If an AI makes an 'ethical' ruling, is it objective, or does it inherit the biases of its data and makers?"
+  ],
+  "time": "One long lesson (a Secret Hitler game takes 30–45 min)",
+  "format": "Groups of 5–10 per game, on devices, then whole class",
+  "needs": "Access to secret-hitler.com and the AI Studio ethics game (both external sites).",
+  "advisories": ["Sensitive framing"],
+  "heads_up": "The game's name and Nazi theming need careful framing, and it's worth letting colleagues know what the lesson is (the file is called 'Hitler Day'). The game also rewards lying to classmates, so debrief both the history and the room. Part 2 is written as a time-filler and depends on an external AI Studio app that may change or go offline."
+}
