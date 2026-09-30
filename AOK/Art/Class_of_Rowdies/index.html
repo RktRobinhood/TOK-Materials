@@ -353,6 +353,161 @@ body.journey-live .reveal.in{filter:none}
 }
 @media(prefers-reduced-motion:reduce){.scene-word{transform:none!important}.choice-btn{animation:none!important}.prologue h2,.prologue .lead,.branch-copy,.fork-card h2,.fork-card .fork-lead{transform:none!important}}
 
+
+
+/* ==================================================================
+   LONG-RUN CUT — ritual horror, broken composition, gradual repair
+   The film gate above is intentionally untouched.
+   ================================================================== */
+:root{--redghost:#ff3157;--cyanghost:#28d7ff;--oldgold:#b88a37;--local-rise:0px;--local-sway:0px;--local-turn:0deg}
+body.journey-live{--prism-x:calc(1px + var(--scene-chaos)*5px)}
+body.journey-live main{background:#030304}
+body.journey-live main>section:not(.film-gate),body.journey-live main>div>section{overflow:hidden}
+
+/* a faint vertical wound remains until the page heals */
+body.journey-live main:before{content:"";position:fixed;z-index:248;top:0;bottom:0;left:63%;width:1px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.2),rgba(231,255,77,.15),transparent);opacity:calc(var(--scene-chaos)*.75);transform:rotate(2.5deg);pointer-events:none;mix-blend-mode:difference}
+body.journey-live main:after{content:"";position:fixed;z-index:247;inset:0;pointer-events:none;opacity:calc(var(--scene-chaos)*.2);background:linear-gradient(104deg,transparent 0 42%,rgba(255,49,87,.07) 42.2% 42.5%,transparent 42.8% 61%,rgba(40,215,255,.055) 61.2% 61.45%,transparent 61.8%);mix-blend-mode:screen}
+
+/* chromatic prism split: strongest early, gone by the horizon */
+.prism{position:relative;isolation:isolate}
+.prism:before,.prism:after{content:attr(data-echo);position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:calc(var(--scene-chaos)*.34);font:inherit;letter-spacing:inherit;line-height:inherit;white-space:pre-line}
+.prism:before{color:var(--redghost);transform:translate(calc(var(--prism-x)*-1),calc(var(--prism-x)*.32));mix-blend-mode:screen;clip-path:polygon(0 0,100% 0,100% 48%,0 54%)}
+.prism:after{color:var(--cyanghost);transform:translate(var(--prism-x),calc(var(--prism-x)*-.22));mix-blend-mode:screen;clip-path:polygon(0 43%,100% 38%,100% 100%,0 100%)}
+
+/* ghost language becomes more physical and less UI-like */
+.scene-words{z-index:1}
+.scene-word{font-stretch:condensed;text-shadow:0 0 18px rgba(0,0,0,.65)}
+.scene-word.w1{top:8%;left:-4vw}.scene-word.w2{top:51%;right:-6vw}.scene-word.w3{bottom:6%;left:31%}
+.prologue .scene-word{font-size:clamp(48px,9vw,150px)}
+.fork .scene-word{opacity:calc(.1 + var(--scene-chaos)*.68)}
+.branch .scene-word{font-size:clamp(32px,7vw,126px)}
+
+/* torn caption slips; never quite horizontal until late */
+.eyebrow{position:relative;display:inline-block}
+body.journey-live .prologue .eyebrow,body.journey-live .fork .eyebrow,body.journey-live .branch .eyebrow,body.journey-live .kafka .eyebrow{padding:7px 9px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.24);transform:rotate(-3deg);box-shadow:8px 7px 0 rgba(0,0,0,.25)}
+body.journey-live .branch:nth-of-type(even) .eyebrow{transform:rotate(3deg)}
+.horizon .eyebrow,.classroom .eyebrow,.final-choice .eyebrow{padding:0;border:0;background:none;box-shadow:none;transform:none}
+
+/* slow, uncanny intermittent movement rather than constant wobble */
+@keyframes hauntedPanel{0%,78%,100%{translate:0 0}79%{translate:2px -1px}80%{translate:-4px 1px}81%{translate:1px 2px}82%{translate:0 0}94%{translate:0 0}95%{translate:1px 0}96%{translate:-1px 0}}
+@keyframes wordFlicker{0%,89%,100%{opacity:1}90%{opacity:.2}91%{opacity:.9}92%{opacity:.35}93%{opacity:1}}
+@keyframes sickBreath{0%,100%{filter:contrast(1) brightness(1)}50%{filter:contrast(1.06) brightness(.93)}}
+body.journey-live .prologue .quote,body.journey-live .fork-card,body.journey-live .branch-copy{animation:hauntedPanel 5.8s steps(1,end) infinite}
+body.journey-live .prologue h2,body.journey-live #fork1 h2,body.journey-live #fork2 h2{animation:wordFlicker 7.6s steps(1,end) infinite}
+body.journey-live .art-panel,body.journey-live .phone-poster{animation:sickBreath 8.5s ease-in-out infinite}
+
+/* The Boat-like continuous scene: art hangs in the viewport while text crosses it. */
+.branch{min-height:178vh!important;display:block!important}
+.branch .wrap{position:relative;min-height:178vh!important;padding:0!important}
+.branch .art-panel,.branch .phone-poster,.branch .ifthen{position:sticky;top:8vh;margin-top:10vh;height:84vh!important}
+.branch .branch-copy{top:74vh!important}
+.room-path .branch-copy,.feed-path .branch-copy,.wait-path .branch-copy{right:3vw!important}
+.role-path .branch-copy,.crowd-path .branch-copy,.rule-path .branch-copy{left:3vw!important}
+.branch-question{margin-top:42px!important;padding:22px 0 6px 26px;border-left:4px solid var(--acid);font:clamp(24px,2.4vw,39px)/1.12 var(--serif)!important;color:#f3eee5!important;max-width:23ch!important;transform:rotate(-1.6deg)}
+.branch:after{content:""!important;position:absolute!important;inset:0!important;width:auto!important;height:auto!important;background:linear-gradient(118deg,transparent 0 42%,rgba(255,255,255,.025) 42.3% 44%,transparent 44.3% 67%,rgba(206,89,73,.035) 67.2% 68%,transparent 68.2%)!important;opacity:calc(.35 + var(--scene-chaos)*.45)!important;transform:none!important;pointer-events:none}
+
+/* Make the branches materially different, not merely alternate copy. */
+.room-path{background:linear-gradient(120deg,#030304,#0a0808 45%,#030304)!important}
+.room-path .art-panel{transform:rotate(-6deg) translateX(-4vw)}
+.room-path .branch-copy{transform:rotate(4.1deg) translateX(-5vw)}
+.role-path{background:repeating-radial-gradient(ellipse at 45% 50%,#070708 0 6vh,#0d0b0b 6.2vh 6.5vh,#070708 6.7vh 13vh)!important}
+.role-path .art-panel{transform:rotate(5deg) translateX(3vw)}
+.role-path .branch-copy{transform:rotate(-4.4deg) translateX(5vw)}
+.feed-path{background:radial-gradient(circle at 36% 45%,#21121c,#060507 52%,#030304)!important}
+.feed-path .phone-poster{box-shadow:0 0 0 1px #3b282e,0 60px 140px #000,0 0 90px rgba(184,138,55,.08)}
+.crowd-path{background:radial-gradient(circle at 73% 37%,#21100e,#050506 54%,#020203)!important}
+.wait-path{background:linear-gradient(150deg,#090705,#17110d 43%,#040404 76%)!important}
+.rule-path{background:linear-gradient(35deg,#030403,#10140c 48%,#050605 72%)!important}
+
+/* Forks feel like chambers with two exits, not forms. */
+.fork{min-height:128vh;padding:17vh 0 22vh}
+.fork-card{position:relative;margin-left:3vw}
+.fork-card:after{content:"";position:absolute;left:39%;top:-18vh;width:1px;height:125vh;background:linear-gradient(180deg,transparent,#6b3b38 20%,#6b3b38 79%,transparent);transform:rotate(14deg);opacity:.55;pointer-events:none}
+.choice-grid{position:relative;margin-top:4vh}
+.choice-btn{min-height:330px;overflow:visible}
+.choice-btn:before{font-size:108px;right:26px;top:12px;opacity:.1;mix-blend-mode:difference}
+.choice-btn strong{font-size:clamp(38px,4vw,68px)}
+.choice-btn span{font-size:14px;line-height:1.6}
+.fork-status{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a86a61}
+
+/* A historical hinge: golden restraint, rendered as an uncanny ritual chamber. */
+.boetie{position:relative;min-height:170vh;background:radial-gradient(circle at 50% 42%,#1d1509 0,#0b0907 36%,#030304 74%);color:#eee7d9;overflow:clip}
+.boetie-stage{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+.gold-cage{position:absolute;inset:0;pointer-events:none;perspective:900px;filter:drop-shadow(0 18px 45px rgba(0,0,0,.65))}
+.boetie .gold-bar{position:absolute!important;top:-10vh!important;bottom:-10vh!important;width:2.1vw!important;min-width:18px!important;height:auto!important;background:linear-gradient(90deg,#4a3514,#d2a549 35%,#6f4b18 68%,#e0b760)!important;border:1px solid #ecc46d!important;box-shadow:inset 0 0 18px rgba(0,0,0,.65),0 0 22px rgba(204,151,51,.08)!important;opacity:.8!important;transform:rotate(var(--barrot,0deg)) translateY(var(--local-rise))}
+.boetie .gb1{left:9%;--barrot:-5deg}.boetie .gb2{left:28%;--barrot:2deg}.boetie .gb3{left:51%;--barrot:-1deg}.boetie .gb4{left:72%;--barrot:5deg}.boetie .gb5{left:90%;--barrot:-3deg}
+.chain{position:absolute;display:flex;gap:2px;transform-origin:left center;opacity:.72}
+.chain span{width:64px;height:34px;border:8px solid #a9792b;border-radius:50%;margin-left:-14px;box-shadow:inset 0 0 0 2px #e0b65a,0 4px 12px #000;transform:rotate(19deg)}
+.chain-a{left:-6vw;top:21%;transform:rotate(16deg) translateX(var(--local-sway))}.chain-b{right:-7vw;bottom:18%;transform:rotate(-24deg) translateX(var(--local-sway-neg))}
+.boetie-copy{position:relative;z-index:7;width:min(820px,76vw);padding:52px 56px;background:rgba(5,5,5,.78);border:1px solid rgba(224,183,96,.5);box-shadow:28px 34px 0 rgba(0,0,0,.3);transform:rotate(-2.7deg)}
+.boetie-copy h2{font-size:clamp(58px,7.5vw,122px);max-width:7ch;line-height:.82;color:#f1eadb;text-shadow:-5px 0 rgba(206,89,73,.16),5px 0 rgba(231,255,77,.06)}
+.boetie-copy p{font:clamp(18px,1.7vw,27px)/1.45 var(--serif);max-width:36ch}
+.boetie-question{margin-top:38px;padding:24px 0 12px 28px;border-left:5px solid #c89a40;font:clamp(28px,3vw,50px)/1.08 var(--serif);max-width:24ch}
+.boetie-whisper{position:absolute;z-index:4;right:-3vw;bottom:4vh;font:900 clamp(38px,7vw,120px)/.8 var(--sans);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(226,183,92,.27);transform:rotate(7deg);white-space:nowrap}
+
+/* Kafka is a true threshold: the room narrows around the open door. */
+.kafka{min-height:165vh;background:radial-gradient(ellipse at 34% 48%,#16120f,#070606 48%,#020203 78%)}
+.kafka .wrap{min-height:140vh}
+.kafka-door{position:sticky;top:6vh;align-self:start;height:88vh}
+.kafka-door .light{opacity:.72;filter:blur(12px)}
+.kafka-copy{margin-top:36vh}
+.kafka-question{font-size:clamp(32px,3.6vw,60px);max-width:15ch}
+
+/* Plato becomes the ritual centre. Geometry visibly straightens here. */
+.plato{min-height:245vh;background:linear-gradient(180deg,#0b0a09 0,#17130f 34%,#2d271f 68%,#625b4d 100%)}
+.plato:before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background:radial-gradient(ellipse at 18% 44%,transparent 0 18%,rgba(0,0,0,.66) 45%,rgba(0,0,0,.9) 74%),linear-gradient(108deg,transparent 0 54%,rgba(247,227,176,.05) 54.3% 55%,transparent 56%)!important;pointer-events:none}
+.plato-grid{min-height:225vh;padding:0!important;align-items:start}
+.plato-visual{position:sticky!important;top:7vh!important;height:86vh!important;margin-top:9vh;z-index:2;transition:transform 1.2s cubic-bezier(.2,.8,.2,1);transform:rotate(calc(-2.2deg + var(--section-turn,0deg))) translateY(var(--section-rise,0px))!important}
+.plato-visual:after{content:"";position:absolute;inset:-18%;pointer-events:none;background:conic-gradient(from 235deg at 82% 42%,transparent 0 7deg,rgba(255,232,179,.13) 7.2deg 9deg,transparent 9.2deg 18deg,rgba(255,232,179,.06) 18.2deg 20deg,transparent 20.2deg);mix-blend-mode:screen;filter:blur(6px)}
+.plato-copy{position:relative;z-index:3;padding:24vh 2vw 32vh 4vw!important}
+.plato-copy h2{font-size:clamp(58px,7vw,118px);max-width:7ch}
+.plato-step{margin:22vh 0!important;padding:28px 24px 28px 30px!important;border-left:1px solid rgba(231,255,77,.34)!important;background:linear-gradient(90deg,rgba(255,255,255,.04),transparent)!important}
+.plato-step b{font-size:10px;letter-spacing:.22em}.plato-step p{font-size:clamp(20px,1.9vw,29px)!important;max-width:28ch!important}
+.plato-step:nth-child(odd),.plato-step:nth-child(even){transform:none!important}
+.plato-end{margin-top:18vh!important;background:rgba(0,0,0,.1)!important;border-left:0!important;border-top:1px solid rgba(255,255,255,.28);padding:32px 0!important;transform:none!important}
+.turn-arrow{animation:wordFlicker 8s steps(1,end) infinite}
+
+/* The repair is obvious rather than merely lighter. */
+.horizon{min-height:155vh;background:#b9c1c0}
+.horizon .wrap{padding:28vh 0 25vh}.horizon h2{letter-spacing:-.035em;line-height:.92}.horizon p{font-size:clamp(20px,1.8vw,28px);line-height:1.48}
+.horizon .scene-word{opacity:.08!important}.horizon:before{transform:rotate(-1deg)!important}
+.classroom{min-height:160vh;background:#f3efe4}.classroom .wrap{padding:25vh 0}.classroom .manifesto{margin-top:12vh}.classroom .big{font-size:clamp(34px,3.7vw,58px)}.classroom .smallcopy{font-size:clamp(18px,1.7vw,26px)}
+.pride-line{font-size:clamp(30px,3.4vw,54px)!important;max-width:25ch!important;text-transform:none!important;font-family:var(--serif)!important;font-weight:400!important;line-height:1.07!important;letter-spacing:-.035em!important}
+.final-choice{min-height:130vh}.final-choice .wrap{padding:16vh 0}.final-buttons{margin-top:8vh}.final-buttons button{font-size:11px;letter-spacing:.18em;transition:transform .4s ease,background .3s ease,color .3s ease}.final-buttons button:hover{transform:translateY(-5px)!important}
+
+/* vignette / sacred dust appears only as the cave gives way to order */
+#plato .scene-words,.horizon .scene-words{filter:none}
+.horizon:before,.classroom:before{opacity:.42}
+
+@media(max-width:900px){
+  .branch{min-height:150vh!important}.branch .wrap{min-height:150vh!important}.branch .art-panel,.branch .phone-poster,.branch .ifthen{position:relative!important;top:auto!important;margin-top:12vh!important}.branch .branch-copy{top:auto!important;margin-top:-8vh!important}.boetie{min-height:145vh}.boetie-stage{position:relative;height:145vh;padding:18vh 0}.boetie-copy{width:88vw;padding:34px 28px}.boetie .gold-bar{width:5vw!important}.chain span{width:48px;height:28px;border-width:6px}.kafka-door{position:relative;top:auto}.kafka-copy{margin-top:0}.plato{min-height:auto}.plato-grid{min-height:auto}.plato-visual{position:relative!important;top:auto!important}.plato-step{margin:9vh 0!important}
+}
+@media(prefers-reduced-motion:reduce){body.journey-live .prologue .quote,body.journey-live .fork-card,body.journey-live .branch-copy,body.journey-live .prologue h2,body.journey-live #fork1 h2,body.journey-live #fork2 h2,body.journey-live .art-panel,body.journey-live .phone-poster,.turn-arrow{animation:none!important}.prism:before,.prism:after{display:none}.boetie .gold-bar,.chain{transform:none!important}}
+
+
+
+/* critic-cycle corrections */
+.room-path .art-panel{background:#090909 url('assets/piranesi-fallback.svg') center/cover no-repeat}
+.role-path .art-panel{background:#090909 url('assets/vangogh-fallback.svg') center/cover no-repeat}
+.crowd-path .art-panel{background:#090909 url('assets/ensor-fallback.svg') center/cover no-repeat}
+.wait-path .art-panel{background:#090909 url('assets/goya-fallback.svg') center/cover no-repeat}
+.art-panel img{background:transparent}
+.art-panel img[data-fallback-used="1"]{filter:grayscale(.5) contrast(1.05) brightness(.95)!important;opacity:.95!important}
+.boetie-stage{place-items:start center;padding-top:9vh}
+.boetie-copy{width:min(780px,72vw);padding:38px 46px;max-height:84vh;overflow:auto;scrollbar-width:none}
+.boetie-copy::-webkit-scrollbar{display:none}
+.boetie-copy h2{font-size:clamp(52px,6.5vw,104px)}
+.boetie-copy p{font-size:clamp(17px,1.55vw,24px)}
+.boetie-question{font-size:clamp(25px,2.6vw,43px);margin-top:28px}
+.plato-visual.reveal{opacity:1!important}
+.plato-visual.reveal:not(.in){transform:rotate(calc(-2.2deg + var(--section-turn,0deg))) translateY(var(--section-rise,0px))!important;filter:none!important}
+.horizon .horizon-bg{background-position:67% center!important;opacity:.94!important}
+.horizon:after{background:linear-gradient(90deg,rgba(239,237,229,.97) 0 31%,rgba(239,237,229,.58) 43%,rgba(239,237,229,.08) 68%,rgba(239,237,229,.01) 100%)!important}
+#pathRail{transition:opacity .8s ease}
+
+
+@media(max-width:700px){.boetie-copy{margin-top:8vh}.fork-card h2{font-size:clamp(46px,13vw,72px);max-width:8.5ch}.fork-card{margin-left:0}.fork-card .fork-lead{margin-left:2vw}.prologue h2{margin-left:0}.prism:before,.prism:after{opacity:calc(var(--scene-chaos)*.22)}}
+
 </style>
 </head>
 <body class="film-locked">
@@ -405,23 +560,23 @@ body.journey-live .reveal.in{filter:none}
 <section class="prologue" id="prologue" data-chapter="01 / WHAT CHANGED" data-audio="machine">
   <div class="spray one">ROW DIES?</div><div class="spray two">OR VOICES?</div>
   <div class="wrap">
-    <div class="eyebrow reveal">01 / the film gives us a problem</div>
-    <h2 class="reveal kinetic" data-jolt=".9" data-tilt="-1.5">The room did not suddenly become less real.</h2>
-    <p class="lead reveal">Same walls. Same timetable. Same people. Yet the room begins behaving differently when the students are no longer only an audience.</p>
+    <div class="eyebrow reveal">01 / afterimage</div>
+    <h2 class="reveal kinetic" data-jolt=".9" data-tilt="-1.5">The film ends. The room does not.</h2>
+    <p class="lead reveal">Same walls. Same timetable. Same people. Then the students stop behaving as though <em>audience</em> is the only role available.</p>
     <div class="quote reveal">&ldquo;I just created a space where no one is judging them.&rdquo;<span>Class of Rowdies - line from the supplied transcript</span></div>
   </div>
 </section>
 
 <section class="fork" id="fork1" data-chapter="02 / CHOOSE A LENS" data-audio="machine">
   <div class="fork-card">
-    <div class="eyebrow">Fork 01 / lock a lens</div>
-    <h2 class="kinetic" data-jolt=".55" data-tilt="-.7">So what actually changed?</h2>
-    <p class="fork-lead">Two explanations are standing in the same doorway. Take one. The other disappears for this run.</p>
+    <div class="eyebrow">Fork 01 / what moved?</div>
+    <h2 class="kinetic" data-jolt=".55" data-tilt="-.7">Was the cage altered&mdash;or did someone notice the door?</h2>
+    <p class="fork-lead">Both explanations can survive. For now, choose the one you distrust less.</p>
     <div class="choice-grid">
-      <button class="choice-btn" data-fork="1" data-choice="room" data-number="A"><b>the room</b><strong>The environment changed.</strong><span>Permission, structure, psychological safety and real choice can change what people are willing to do.</span></button>
-      <button class="choice-btn" data-fork="1" data-choice="role" data-number="B"><b>the role</b><strong>The students changed.</strong><span>A space can be offered and still remain empty. Someone eventually has to risk using it.</span></button>
+      <button class="choice-btn" data-fork="1" data-choice="room" data-number="A"><b>the room</b><strong>Change the conditions.</strong><span>Permission, structure, safety and real choice can alter what feels possible inside a room.</span></button>
+      <button class="choice-btn" data-fork="1" data-choice="role" data-number="B"><b>the role</b><strong>Change the part being played.</strong><span>A space can open and remain empty. Someone still has to risk behaving differently inside it.</span></button>
     </div>
-    <div class="fork-status" id="forkStatus1">No neutral scroll here. Pick.</div>
+    <div class="fork-status" id="forkStatus1">Choose a corridor. The other goes dark.</div>
   </div>
 </section>
 
@@ -433,10 +588,10 @@ body.journey-live .reveal.in{filter:none}
         <div class="art-credit">Giovanni Battista Piranesi / Le Carceri d'Invenzione / 1761 / public domain</div>
       </div>
       <div class="branch-copy reveal">
-        <div class="eyebrow">You chose: the room</div><h2>Architecture matters.</h2>
-        <p>Piranesi makes the human figure almost disappear inside the architecture. A structure can make some actions feel natural and others absurd.</p>
-        <p>Psychology gives this a less Gothic name: autonomy-supportive environments can make voluntary engagement more likely. The room matters.</p>
-        <p class="small">But architecture is only the first half of the riddle. If a room opens, somebody still has to notice the opening.</p>
+        <div class="eyebrow">You chose: the room</div><h2>The building teaches you how to move.</h2>
+        <p>Piranesi lets the architecture swallow the people. Stairs, platforms, bridges, machinery: the structure decides which movements look imaginable.</p>
+        <p>Psychology is less theatrical, but it asks a related question. Social conditions can support or frustrate a person&rsquo;s sense of autonomy and initiative.</p>
+        <p class="branch-question">If a room teaches passivity for long enough, who owns the first move when it finally opens?</p>
       </div>
     </div>
   </section>
@@ -448,28 +603,28 @@ body.journey-live .reveal.in{filter:none}
         <div class="art-credit">Vincent van Gogh / Prisoners Exercising / 1890 / public domain</div>
       </div>
       <div class="branch-copy reveal">
-        <div class="eyebrow">You chose: the role</div><h2>A routine can become a costume.</h2>
-        <p>Van Gogh's prisoners move constantly and still go nowhere. Motion without direction. Routine without authorship. A loop can feel busy while remaining a loop.</p>
-        <p>One psychological cousin of this is learned helplessness: after repeated uncontrollability, attempts can fade even when some control later becomes available.</p>
-        <p class="small">Not a diagnosis. A provocation: can a habit of powerlessness outlive the cage that taught it?</p>
+        <div class="eyebrow">You chose: the role</div><h2>You can walk all day and remain in the circle.</h2>
+        <p>Van Gogh&rsquo;s prisoners are in motion. That is what makes the image worse. Movement is not the same thing as direction; activity is not automatically authorship.</p>
+        <p>Learned helplessness gives us one possible lens: repeated uncontrollability can reduce later attempts to act, even after some control returns.</p>
+        <p class="branch-question">Can yesterday&rsquo;s cage survive as today&rsquo;s habit?</p>
       </div>
     </div>
   </section>
 
   <section class="rejoin" data-chapter="03 / BOTH ARE TRUE" data-audio="machine">
-    <div class="wrap reveal"><div class="bar"></div><h3>A better room can create possibility. It cannot speak through you.</h3><p>The film works because both sides move. The teacher creates conditions. The students eventually fill them.</p></div>
+    <div class="wrap reveal"><div class="bar"></div><h3>Both answers survive.</h3><p>A room can close people down. A person can carry the closed room with them after it opens.</p></div>
   </section>
 
   <section class="fork" id="fork2" data-chapter="04 / WHO STEERS" data-audio="digital">
     <div class="fork-card">
-      <div class="eyebrow">Fork 02 / external pressure</div>
-      <h2 class="kinetic" data-jolt=".25" data-tilt=".35">What else gets a vote in your life?</h2>
-      <p class="fork-lead">Some chains are ugly. Others arrive polished, personalized, and very good at remembering what you like.</p>
+      <div class="eyebrow">Fork 02 / the pleasant cage</div>
+      <h2 class="kinetic" data-jolt=".25" data-tilt=".35">What if the bars are comfortable?</h2>
+      <p class="fork-lead">Not every force pushes. Some invite. Some flatter. Some simply make one next move much easier than all the others.</p>
       <div class="choice-grid">
         <button class="choice-btn" data-fork="2" data-choice="feed" data-number="A"><b>the feed</b><strong>My attention gets steered.</strong><span>Recommended content, endless scroll and notifications can make the next action feel frictionless.</span></button>
         <button class="choice-btn" data-fork="2" data-choice="crowd" data-number="B"><b>the crowd</b><strong>Approval gets a vote.</strong><span>Friends, influencers, likes and comparison can quietly decide what feels desirable or embarrassing.</span></button>
       </div>
-      <div class="fork-status" id="forkStatus2">Pick the pressure you think is harder to notice.</div>
+      <div class="fork-status" id="forkStatus2">Which pressure is easier to mistake for your own voice?</div>
     </div>
   </section>
 </div>
@@ -484,9 +639,9 @@ body.journey-live .reveal.in{filter:none}
       </div>
       <div class="branch-copy reveal">
         <div class="eyebrow">You chose: the feed</div><h2>The cage knows what you like.</h2>
-        <p>The bars are gold on purpose. Recommended content, autoplay, notifications and endless scroll do not need to command you. They only need to make the next move easier than stopping.</p>
-        <p>Research on adolescent social media is more nuanced than &ldquo;phones are bad&rdquo;: experience is shaped by both user choices and platform features. That shared authorship is exactly the uncomfortable part.</p>
-        <p class="small">The question is not &ldquo;does technology control me?&rdquo; It is: when does a designed default begin impersonating my intention?</p>
+        <p>The bars are gold on purpose. Recommendation, autoplay, alerts and endless scroll do not have to issue commands. They can simply make continuing cheaper than stopping.</p>
+        <p>APA guidance is deliberately more careful than &ldquo;phones are bad&rdquo;: online experience is shaped by both what users choose and what platforms make easy, visible and repeatable.</p>
+        <p class="branch-question">When does a designed default begin impersonating an intention?</p>
       </div>
     </div>
   </section>
@@ -499,27 +654,46 @@ body.journey-live .reveal.in{filter:none}
       </div>
       <div class="branch-copy reveal">
         <div class="eyebrow">You chose: the crowd</div><h2>A prison can applaud you.</h2>
-        <p>Ensor's crowd is theatrical, masked, comic and difficult to read. Everyone has a face. It is less obvious who owns it.</p>
-        <p>Comparison and belonging are not automatically harmful. But applause is a strange steering wheel: once approval chooses the destination, you can travel very fast without deciding where you meant to go.</p>
-        <p class="lead" style="font-size:clamp(21px,2vw,31px)">If everyone wants the same thing, how many people chose it?</p>
+        <p>Ensor&rsquo;s crowd is theatrical, masked, comic and difficult to read. Everyone has a face. It is less obvious who owns it.</p>
+        <p>Belonging is not a defect. Approval is not poison. But applause makes a strange steering wheel: it can reward motion long before anyone asks where the movement is going.</p>
+        <p class="branch-question">If everyone wants the same thing, how many people chose it?</p>
       </div>
     </div>
   </section>
 
   <section class="rejoin light" data-chapter="05 / NOTICE THE FORCE" data-audio="digital">
-    <div class="wrap reveal"><div class="bar"></div><h3>Influence is real. Destiny is a much larger claim.</h3><p>The page is not asking you to pretend the forces around you disappear. Only to notice the moment influence quietly asks to become authorship.</p></div>
+    <div class="wrap reveal"><div class="bar"></div><h3>Influence is real. Destiny is a larger claim.</h3><p>Pressure can shape a choice without becoming the person who made it.</p></div>
+  </section>
+
+  <section class="boetie" id="laboetie" data-chapter="05B / THE GOLDEN CHAIN" data-audio="cave">
+    <div class="boetie-stage">
+      <div class="gold-cage" aria-hidden="true">
+        <i class="gold-bar gb1"></i><i class="gold-bar gb2"></i><i class="gold-bar gb3"></i><i class="gold-bar gb4"></i><i class="gold-bar gb5"></i>
+        <div class="chain chain-a"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="chain chain-b"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="boetie-copy reveal">
+        <div class="eyebrow">&Eacute;tienne de La Bo&eacute;tie / <i>Discourse on Voluntary Servitude</i></div>
+        <h2>What if the cage needs your help?</h2>
+        <p>In the sixteenth century, La Bo&eacute;tie asked why people sometimes participate in sustaining power that limits them. Different problem. Useful disturbance.</p>
+        <p>Force matters. Habit matters. Reward matters. So does the small cooperation that makes a pattern easier to repeat tomorrow.</p>
+        <div class="boetie-question">What is the smallest cooperation a cage needs from the person inside it?</div>
+        <a class="art-source-link" href="https://www.gutenberg.org/ebooks/62051" target="_blank" rel="noopener">public-domain text &#8599;</a>
+      </div>
+      <div class="boetie-whisper" aria-hidden="true">GOLD DOES NOT MAKE A BAR LESS SOLID.</div>
+    </div>
   </section>
 
   <section class="fork light" id="fork3" data-chapter="06 / THE GAP" data-audio="pulse">
     <div class="fork-card">
-      <div class="eyebrow" style="color:#6f241d">Fork 03 / intention versus action</div>
-      <h2>What happens when you do not feel like it?</h2>
-      <p class="fork-lead">There is a small gap between &ldquo;I mean to&rdquo; and &ldquo;I did.&rdquo; Choose which side of that gap you want to inspect.</p>
+      <div class="eyebrow" style="color:#6f241d">Fork 03 / the gap</div>
+      <h2>What happens when nobody is stopping you?</h2>
+      <p class="fork-lead">The external pressure goes quiet. The smaller gap remains: the distance between intending a move and making one.</p>
       <div class="choice-grid">
-        <button class="choice-btn" data-fork="3" data-choice="wait" data-number="A"><b style="color:#8a2d26">wait</b><strong>I need motivation first.</strong><span>Maybe the feeling arrives. Maybe the day is decided before it does.</span></button>
-        <button class="choice-btn" data-fork="3" data-choice="rule" data-number="B"><b style="color:#6f241d">make a rule</b><strong>I can pre-decide a move.</strong><span>Use a self-authored rule so the choice is made before the convenient excuse appears.</span></button>
+        <button class="choice-btn" data-fork="3" data-choice="wait" data-number="A"><b style="color:#8a2d26">wait</b><strong>Wait for the feeling.</strong><span>Move when readiness, courage, interest or motivation finally arrives.</span></button>
+        <button class="choice-btn" data-fork="3" data-choice="rule" data-number="B"><b style="color:#6f241d">mark the path</b><strong>Leave future-you a trigger.</strong><span>Pre-decide one response so the moment does not require a fresh negotiation.</span></button>
       </div>
-      <div class="fork-status" id="forkStatus3">This choice is about self-direction, not obedience.</div>
+      <div class="fork-status" id="forkStatus3">When nobody is watching, what gets the deciding vote?</div>
     </div>
   </section>
 </div>
@@ -533,9 +707,9 @@ body.journey-live .reveal.in{filter:none}
       </div>
       <div class="branch-copy reveal">
         <div class="eyebrow">You chose: wait</div><h2>Tomorrow is a beautiful hiding place.</h2>
-        <p>Goya's image was not made as a productivity poster. Here it works as a provocation: what takes over while the directing mind is absent?</p>
-        <p>There is a well-studied gap between intending to do something and actually doing it. Waiting to feel ready can turn mood into the person with the key.</p>
-        <p class="small">No hustle-culture claim is being made here. Rest can be chosen. So can delay. The question is whether either is deliberate.</p>
+        <p>Goya did not make a productivity poster. The sleeping figure is surrounded by creatures that arrive when reason withdraws. Here, the image becomes a question rather than an instruction.</p>
+        <p>Intentions often fail to become actions. Sometimes waiting is rest. Sometimes it is avoidance. From the outside they can look identical.</p>
+        <p class="branch-question">Who has the key while you wait to feel ready?</p>
       </div>
     </div>
   </section>
@@ -544,16 +718,16 @@ body.journey-live .reveal.in{filter:none}
     <div class="wrap split">
       <div class="ifthen reveal"><div class="tag t1">self-authored structure</div><div class="if"><span>IF</span> X<br>THEN Y</div><div class="tag t2">do not renegotiate every minute</div></div>
       <div class="branch-copy reveal">
-        <div class="eyebrow">You chose: make a rule</div><h2>A rule can remember a choice for you.</h2>
-        <p>Psychologists call one version an implementation intention: an if-then plan that links a situation to a chosen response.</p>
-        <p>&ldquo;If discussion opens, then I ask one real question.&rdquo; &ldquo;If I disagree, then I say why.&rdquo; The point is not that the rule is imposed. The point is that <em>you wrote it before the easier option arrived.</em></p>
-        <p class="small">Research has repeatedly found that these specific plans can improve follow-through compared with a goal intention alone.</p>
+        <div class="eyebrow">You chose: mark the path</div><h2>A rule can be a cage. Or a handrail.</h2>
+        <p>One psychological tool is an implementation intention: an if-then plan that links a future cue to a response chosen in advance.</p>
+        <p>&ldquo;If discussion opens, then I ask one real question.&rdquo; &ldquo;If I disagree, then I say why.&rdquo; The interesting part is not the rule. It is <em>who authored it, and whether it can be revised.</em></p>
+        <p class="branch-question">Can structure sometimes protect a choice from the mood of the moment?</p>
       </div>
     </div>
   </section>
 
   <section class="rejoin" data-chapter="07 / DISCIPLINE" data-audio="cave">
-    <div class="wrap reveal"><div class="bar"></div><h3>Not every constraint is a cage.</h3><p>A rule imposed from outside and a rule you author for yourself can look identical from across the room. The difference is who wrote it — and whether you can still revise it.</p></div>
+    <div class="wrap reveal"><div class="bar"></div><h3>A handrail and a bar can be made of the same metal.</h3><p>From across the room, discipline and obedience can look almost identical. One question changes the picture: who wrote the rule?</p></div>
   </section>
 
 
@@ -565,15 +739,14 @@ body.journey-live .reveal.in{filter:none}
       <div class="kafka-copy reveal">
         <div class="eyebrow">Franz Kafka / <i>Before the Law</i></div>
         <h2>The door is open.</h2>
-        <p>Kafka gives us a man who waits for permission at a doorway for almost his entire life. The barrier is real enough to frighten him. But the waiting becomes its own architecture.</p>
-        <p>That is why the story is unsettling here. A gatekeeper can constrain you. So can a habit of asking the gatekeeper what you are allowed to become.</p>
-        <p class="small">Not a productivity slogan. Not &ldquo;just push through.&rdquo; A stranger question: how long can an unlocked threshold continue to function like a wall?</p>
-        <div class="kafka-question">When does waiting become one of the walls?</div>
+        <p>Kafka gives us a man who waits beside an open doorway for almost his entire life. The gatekeeper is real. The fear is real. So is the waiting.</p>
+        <p>Nothing here requires pretending that authority is imaginary. The horror is narrower: a barrier can be outside you, and then slowly acquire a second address inside you.</p>
+        <div class="kafka-question">What if the guard&rsquo;s strongest weapon is that you keep asking?</div>
       </div>
     </div>
   </section>
 
-  <section class="plato" id="plato" data-chapter="08 / THE TURN" data-audio="cave">
+  <section class="plato" id="plato" data-chapter="08 / THE TURN" data-audio="ritual">
     <div class="plato-grid">
       <div class="plato-visual reveal">
         <img alt="Diagram of Plato's cave showing chains, shadows, turning, and ascent" src="assets/plato-cave-map.svg">
@@ -581,46 +754,46 @@ body.journey-live .reveal.in{filter:none}
         <div class="art-credit">Interpretive cave map made for this experience / historical source: Jan Saenredam after Cornelis van Haarlem, 1604</div>
       </div>
       <div class="plato-copy">
-        <div class="eyebrow reveal">08 / Plato is more useful if we do not flatten him</div>
+        <div class="eyebrow reveal">08 / chain / shadow / turn / light</div>
         <h2 class="reveal">The prisoners begin actually chained.</h2>
-        <p class="intro reveal">That matters. The allegory is not &ldquo;people are trapped because they are lazy.&rdquo; Their first reality is genuinely constrained. The interesting question comes when another direction becomes possible.</p><a class="art-source-link reveal" href="https://commons.wikimedia.org/wiki/File:Platon_Cave_Sanraedam_1604.jpg" target="_blank" rel="noopener">view the 1604 cave engraving &#8599;</a>
-        <div class="plato-step reveal"><b>01 / chain</b><p>A real constraint limits the available action. Pretending it does not exist is not agency; it is denial.</p></div>
-        <div class="plato-step reveal"><b>02 / shadow</b><p>Long exposure makes a restricted view feel complete. Familiarity starts to impersonate necessity: &ldquo;this is just how it is.&rdquo;</p></div>
-        <div class="plato-step reveal"><b>03 / turn</b><p>The first act of liberation is not escape. It is orientation. The prisoner has to turn toward information that makes the old story less comfortable.</p></div>
-        <div class="plato-step reveal"><b>04 / ascent</b><p>Freedom is disorienting. The light hurts before it clarifies. Having options means losing the comfort of saying there were none.</p></div>
-        <div class="plato-end reveal">A chain can survive as a habit after the metal is gone.</div>
+        <p class="intro reveal">That matters. Plato&rsquo;s cave does not begin with a motivational failure. It begins with constraint. The unsettling part comes later, when another orientation becomes possible.</p><a class="art-source-link reveal" href="https://commons.wikimedia.org/wiki/File:Platon_Cave_Sanraedam_1604.jpg" target="_blank" rel="noopener">view the 1604 cave engraving &#8599;</a>
+        <div class="plato-step reveal"><b>01 / chain</b><p>Some constraints are real. Freedom does not begin by pretending otherwise.</p></div>
+        <div class="plato-step reveal"><b>02 / shadow</b><p>A repeated view can begin to feel like the whole world. Familiarity impersonates necessity.</p></div>
+        <div class="plato-step reveal"><b>03 / turn</b><p>The first movement is not escape. It is orientation: turning toward something that makes the familiar story less complete.</p></div>
+        <div class="plato-step reveal"><b>04 / light</b><p>The light gives no instructions. It only makes more of the room visible. Possibility can be disorienting precisely because it does not choose for you.</p></div>
+        <div class="plato-end reveal">A chain can survive as a reflex after the iron is gone.</div>
       </div>
     </div>
   </section>
 
   <section class="horizon" data-chapter="09 / NO MAP" data-audio="air">
     <div class="horizon-bg"></div><div class="spray">NO SCRIPT.</div>
-    <div class="wrap reveal"><div class="eyebrow">09 / the noise is almost gone</div><h2>No map is coming.</h2><p>Autonomy does not replace uncertainty. It removes one excuse for it. There may be no perfect instruction, no guaranteed reaction, no safe script.</p><p>The landscape remains larger than you. But you are no longer only scenery inside it.</p></div>
+    <div class="wrap reveal"><div class="eyebrow">09 / the noise thins</div><h2>No map is coming.</h2><p>Nothing here tells you what to do next. That is not the same as nothing being possible.</p><p>The landscape remains larger than you. You are simply no longer only scenery inside it.</p></div>
     <div class="art-credit" style="color:#222;text-shadow:none">Caspar David Friedrich / Wanderer above the Sea of Fog / c. 1817 / public domain</div>
   </section>
 
   <section class="classroom" data-chapter="10 / THE ROOM IS YOURS TOO" data-audio="air">
     <div class="wrap">
-      <div class="eyebrow reveal" style="color:#6f241d">back to the film / back to this room</div>
-      <h2 class="reveal">A space can be offered. Nobody else can use your part of it.</h2>
+      <div class="eyebrow reveal" style="color:#6f241d">the film again / this room now</div>
+      <h2 class="reveal">A room is partly made from what people bring into it.</h2>
       <div class="manifesto">
-        <div class="big reveal">The class in the film changes when the students cease to be only the subject of the story and become <mark>co-authors of what happens.</mark></div>
-        <div class="smallcopy reveal"><p>The teacher still matters. The room still matters. Other people still matter. Shared authorship does not erase circumstances; it adds your hand to them.</p><p>You can dislike something. Ask for something stranger. Disagree. Bring an obsession. Refuse a weak question. Make a better one. Or do none of those things.</p><p>That last possibility is important too. A choice does not become unreal because it is the choice to remain still.</p></div>
+        <div class="big reveal">The class in the film stops being something done <em>to</em> the students and becomes something made <mark>with them.</mark></div>
+        <div class="smallcopy reveal"><p>The teacher still matters. The timetable matters. Other people matter. None of that disappears.</p><p>But a room also changes when somebody brings an obsession, a disagreement, a question, a story, a refusal, an experiment&mdash;or chooses not to.</p><p>Neither silence nor participation proves anything by itself. The interesting part is whether the choice feels like yours.</p></div>
       </div>
-      <div class="pride-line reveal">The uncomfortable possibility: some cages survive because we keep performing the role they taught us.</div>
+      <div class="pride-line reveal">If you dislike the room, what would count as evidence that you had tried to alter it?</div>
     </div>
   </section>
 
   <section class="final-choice" id="finalChoice" data-chapter="11 / THE LAST FORK" data-audio="air">
-    <div class="wrap reveal"><div class="eyebrow" style="color:#6f241d">last fork / no correct-looking button</div><h2>When the door opens, who decides whether you turn?</h2><p>Some walls are real. Some habits outlive the walls. Some cages are comfortable enough that we help maintain them. The page cannot decide which is which for you.</p><div class="final-buttons"><button data-final="remain">Remain facing the wall</button><button class="author" data-final="author">Turn around</button></div></div>
+    <div class="wrap reveal"><div class="eyebrow" style="color:#6f241d">the last threshold</div><h2>When the door opens, who decides whether you turn?</h2><p>Some walls are real. Some habits outlive walls. Some restraints are comfortable enough that we help maintain them. You are the only useful witness to which is which.</p><div class="final-buttons"><button data-final="remain">Remain facing the wall</button><button class="author" data-final="author">Turn around</button></div></div>
   </section>
 
   <section class="final-result dark" id="remainResult" hidden data-chapter="12 / REMAIN" data-audio="machine">
-    <div class="inner"><div class="eyebrow">you chose to remain</div><h2>Nothing forces you through.</h2><p class="lead">That is part of the point. Agency includes refusal. The useful distinction is between &ldquo;there is no choice&rdquo; and &ldquo;I am choosing not to use the options I have right now.&rdquo;</p><div class="reflection">The door stays open. You are allowed to change your mind later.</div><button class="restart">walk the maze again</button></div>
+    <div class="inner"><div class="eyebrow">you remained</div><h2>The page does not punish you.</h2><p class="lead">The door stays where it was. Nothing drags you through it. From inside, a wall and a decision can sometimes feel surprisingly similar until one of them is named.</p><div class="reflection">The doorway remains part of the room.</div><button class="restart">walk the maze again</button></div>
   </section>
 
   <section class="final-result light" id="authorResult" hidden data-chapter="12 / TURN" data-audio="air">
-    <div class="inner"><div class="eyebrow" style="color:#6f241d">you turned</div><h2>No applause. No pledge.</h2><p class="lead">The interesting thing is smaller: you noticed a choice and made one. Before authorship becomes a grand story, it is usually just that.</p><div class="reflection">The film called every rowdy class &ldquo;a voice waiting to be heard.&rdquo; The question is what happens once the room is listening.</div><button class="restart">walk another path</button></div>
+    <div class="inner"><div class="eyebrow" style="color:#6f241d">you turned</div><h2>No applause. No pledge.</h2><p class="lead">The room is still the room. The difference is smaller: the wall is no longer the entire field of view.</p><div class="reflection">The film calls every rowdy class &ldquo;a voice waiting to be heard.&rdquo; A listening room creates possibility. It does not decide what the voice says.</div><button class="restart">walk another path</button></div>
   </section>
 </div>
 </main>
@@ -633,9 +806,10 @@ body.journey-live .reveal.in{filter:none}
     <p><b>Learned helplessness</b><br>Used here only as a conceptual analogy: repeated uncontrollability can reduce later attempts to act even when control becomes available. This page is not diagnosing students.</p>
     <p><b>Social media</b><br>APA's 2023 advisory states that adolescent social-media experience is shaped by both user choices and platform features, and specifically discusses features such as recommended content and endless scrolling. It also emphasizes that social media is not inherently harmful or beneficial.</p>
     <p><b>Implementation intentions</b><br>Gollwitzer and colleagues describe if-then plans as a self-regulation strategy linking a future cue with a chosen response; research reviews report improved goal follow-through in many contexts.</p>
+    <p><b>La Bo&eacute;tie</b><br><i>Discourse on Voluntary Servitude</i> is used as a historical provocation about the role of habit and participation in sustaining constraint. The site does not equate classroom disengagement, social media use, or ordinary social pressure with the political domination La Bo&eacute;tie was writing about. <a href="https://www.gutenberg.org/ebooks/62051" target="_blank" rel="noopener">Public-domain text</a>.</p>
     <p><b>Public-domain art</b><br>Piranesi, Van Gogh, Francisco Goya, Jan Saenredam, Caspar David Friedrich and James Ensor are used as interpretive prompts. Kafka's <i>Before the Law</i> appears as a literary threshold between the discipline and cave sections. Where a museum image cannot load, the site falls back to a local graphic interpretation. Plato uses a purpose-built cave map and links the historical Saenredam engraving. These classroom readings are not claims about the artists' intended meanings.</p>
-    <p><b>Sound</b><br>No audio files are downloaded. The mechanical hum, digital pulse, crowd texture, cave resonance, open-air noise and transition hits are synthesized live in the browser with the Web Audio API, then crossfaded by section. The screening click unlocks audio; a persistent mute control remains available.</p>
-  </div><div class="footnote">Research links: <a href="https://selfdeterminationtheory.org/about-the-theory/" target="_blank" rel="noopener">Self-Determination Theory overview</a> / <a href="https://dictionary.apa.org/learned-helplessness" target="_blank" rel="noopener">APA Dictionary: learned helplessness</a> / <a href="https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use" target="_blank" rel="noopener">APA adolescent social-media advisory</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/17295981/" target="_blank" rel="noopener">Implementation intentions review</a> / <a href="https://developers.google.com/youtube/iframe_api_reference" target="_blank" rel="noopener">YouTube IFrame API</a>.</div></details></div>
+    <p><b>Sound</b><br>No audio files are downloaded. The mechanical hum, digital pulse, crowd texture, cave resonance, ritual bell-tones, open-air noise and transition hits are synthesized live in the browser with the Web Audio API, then crossfaded by section. The screening click unlocks audio; a persistent mute control remains available.</p>
+  </div><div class="footnote">Research links: <a href="https://selfdeterminationtheory.org/about-the-theory/" target="_blank" rel="noopener">Self-Determination Theory overview</a> / <a href="https://dictionary.apa.org/learned-helplessness" target="_blank" rel="noopener">APA Dictionary: learned helplessness</a> / <a href="https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use" target="_blank" rel="noopener">APA adolescent social-media advisory</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/17295981/" target="_blank" rel="noopener">Implementation intentions review</a> / <a href="https://www.gutenberg.org/ebooks/62051" target="_blank" rel="noopener">La Bo&eacute;tie: <i>Voluntary Servitude</i></a> / <a href="https://developers.google.com/youtube/iframe_api_reference" target="_blank" rel="noopener">YouTube IFrame API</a>.</div></details></div>
 </footer>
 
 <script>
@@ -656,13 +830,14 @@ body.journey-live .reveal.in{filter:none}
     ['#fork2',.80,'GOLD CHAINS','WHO STEERS?','PLEASANT CAGES'],
     ['.feed-path',.70,'NEXT','NEXT','FOR YOU'],
     ['.crowd-path',.70,'APPLAUSE','MASK','LOOK AT ME'],
-    ['#stage2 .rejoin',.61,'NOTICE','THE FORCE','NOT DESTINY'],
-    ['#fork3',.58,'THE GAP','INTEND','DO'],
-    ['.wait-path',.50,'TOMORROW','NOT YET','WAIT'],
-    ['.rule-path',.50,'IF','THEN','PRE-DECIDE'],
-    ['#stage3>.rejoin',.41,'WHO WROTE IT?','DISCIPLINE','RULE'],
-    ['#kafka',.34,'WAIT','PERMISSION','OPEN'],
-    ['#plato',.27,'TURN','SHADOW','ASCEND'],
+    ['#stage2 .rejoin',.64,'NOTICE','THE FORCE','NOT DESTINY'],
+    ['#laboetie',.61,'GOLD','HABIT','SERVITUDE'],
+    ['#fork3',.56,'THE GAP','INTEND','DO'],
+    ['.wait-path',.49,'TOMORROW','NOT YET','WAIT'],
+    ['.rule-path',.49,'IF','THEN','PRE-DECIDE'],
+    ['#stage3>.rejoin',.42,'WHO WROTE IT?','DISCIPLINE','RULE'],
+    ['#kafka',.36,'WAIT','PERMISSION','OPEN'],
+    ['#plato',.24,'TURN','SHADOW','LIGHT'],
     ['.horizon',.12,'NO SCRIPT','UNCERTAINTY','OPEN'],
     ['.classroom',.035,'WITH YOU','CO-AUTHOR','ROOM'],
     ['#finalChoice',0,'CHOOSE','',''],
@@ -675,6 +850,7 @@ body.journey-live .reveal.in{filter:none}
     [a,b,c].filter(Boolean).forEach((t,i)=>{const sp=document.createElement('span');sp.className='scene-word w'+(i+1);sp.textContent=t;words.appendChild(sp)});section.prepend(words);
   }));
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.setProperty('--entry-rot',((i%2?1:-1)*(3+(i%4))).toFixed(1)+'deg')});
+  document.querySelectorAll('#prologue h2,#fork1 h2,#fork2 h2,#fork3 h2,.branch-copy h2,#laboetie h2,#kafka h2,#plato h2').forEach(h=>{h.classList.add('prism');h.dataset.echo=h.textContent.trim()});
 
 
   /* --- procedural soundscape --- */
@@ -683,14 +859,14 @@ body.journey-live .reveal.in{filter:none}
       if(this.ctx) return;
       const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
       this.ctx=new AC();this.master=this.ctx.createGain();this.master.gain.value=0.12;this.master.connect(this.ctx.destination);
-      const make=(name,type,freq,noiseCut)=>{
+      const make=(name,type,freq,noiseCut,toneGain=.16,noiseGain=.13,detune=0)=>{
         const g=this.ctx.createGain();g.gain.value=0;g.connect(this.master);
-        const o=this.ctx.createOscillator();o.type=type;o.frequency.value=freq;const og=this.ctx.createGain();og.gain.value=.16;o.connect(og).connect(g);o.start();
+        const o=this.ctx.createOscillator();o.type=type;o.frequency.value=freq;o.detune.value=detune;const og=this.ctx.createGain();og.gain.value=toneGain;o.connect(og).connect(g);o.start();
         const len=this.ctx.sampleRate*2,b=this.ctx.createBuffer(1,len,this.ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;
-        const n=this.ctx.createBufferSource();n.buffer=b;n.loop=true;const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=noiseCut;const ng=this.ctx.createGain();ng.gain.value=.13;n.connect(f).connect(ng).connect(g);n.start();
+        const n=this.ctx.createBufferSource();n.buffer=b;n.loop=true;const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=noiseCut;const ng=this.ctx.createGain();ng.gain.value=noiseGain;n.connect(f).connect(ng).connect(g);n.start();
         this.scenes[name]=g;
       };
-      make('machine','sine',52,460);make('digital','square',118,1550);make('crowd','sawtooth',74,930);make('pulse','triangle',92,680);make('cave','sine',43,330);make('air','sine',164,2400);
+      make('machine','sawtooth',47,360,.10,.19,-8);make('digital','square',113,1550,.045,.11,7);make('crowd','sawtooth',68,920,.04,.18,-4);make('pulse','triangle',49,470,.075,.08,0);make('cave','sine',41,280,.11,.07,-10);make('ritual','sine',55,780,.065,.055,0);make('air','sine',196,2600,.018,.12,0);
       this.started=true;
     },
     resume(){if(this.ctx&&this.ctx.state==='suspended')this.ctx.resume();},
@@ -707,13 +883,14 @@ body.journey-live .reveal.in{filter:none}
   function sceneCue(name){
     if(!soundWanted||!Sound.ctx)return;
     const c=Sound.ctx,now=c.currentTime;
-    const osc=(type,f1,f2,dur,vol)=>{const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f1,now);o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),now+dur);g.gain.setValueAtTime(vol,now);g.gain.exponentialRampToValueAtTime(.0008,now+dur);o.connect(g).connect(Sound.master);o.start(now);o.stop(now+dur+.02)};
-    if(name==='machine'){osc('sine',74,31,.65,.09);setTimeout(()=>soundWanted&&osc('triangle',410,86,.18,.045),80)}
-    else if(name==='digital'){osc('square',980,132,.12,.025);setTimeout(()=>soundWanted&&osc('square',680,92,.10,.018),120)}
-    else if(name==='crowd'){osc('sawtooth',126,48,.42,.035)}
-    else if(name==='pulse'){osc('triangle',184,91,.22,.045)}
-    else if(name==='cave'){osc('sine',720,96,.72,.036)}
-    else if(name==='air'){osc('sine',196,152,1.25,.012)}
+    const osc=(type,f1,f2,dur,vol,delay=0)=>{const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f1,now);o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),now+dur);g.gain.setValueAtTime(vol,now);g.gain.exponentialRampToValueAtTime(.0008,now+dur);o.connect(g).connect(Sound.master);if(delay){const d=c.createDelay(1.8),fb=c.createGain();d.delayTime.value=delay;fb.gain.value=.24;g.connect(d);d.connect(fb);fb.connect(d);d.connect(Sound.master)}o.start(now);o.stop(now+dur+.08)};
+    if(name==='machine'){osc('sawtooth',71,29,.72,.075,.09);setTimeout(()=>soundWanted&&osc('triangle',430,74,.19,.042),90)}
+    else if(name==='digital'){osc('square',1020,128,.13,.021);setTimeout(()=>soundWanted&&osc('square',710,96,.11,.018),120)}
+    else if(name==='crowd'){osc('sawtooth',132,46,.48,.03,.07);setTimeout(()=>soundWanted&&osc('triangle',96,61,.55,.018),110)}
+    else if(name==='pulse'){osc('triangle',108,54,.18,.05);setTimeout(()=>soundWanted&&osc('sine',84,42,.24,.025),210)}
+    else if(name==='cave'){osc('sine',510,72,1.05,.032,.19);setTimeout(()=>soundWanted&&osc('sine',255,64,1.25,.025,.24),140)}
+    else if(name==='ritual'){osc('sine',220,110,1.8,.024,.28);setTimeout(()=>soundWanted&&osc('sine',330,165,1.55,.018,.34),130);setTimeout(()=>soundWanted&&osc('sine',440,220,1.3,.012,.39),260)}
+    else if(name==='air'){osc('sine',196,174,1.7,.009,.18);setTimeout(()=>soundWanted&&osc('sine',294,261,1.5,.006,.22),160)}
   }
 
   /* --- YouTube screening gate --- */
@@ -775,7 +952,7 @@ body.journey-live .reveal.in{filter:none}
   /* --- branching choices --- */
   const chosen={};
   document.querySelectorAll('.choice-btn').forEach(btn=>btn.addEventListener('click',()=>choose(btn)));
-  function choose(btn){const fork=btn.dataset.fork;if(chosen[fork])return;const choice=btn.dataset.choice;chosen[fork]=choice;Sound.hit();const peers=[...document.querySelectorAll('.choice-btn[data-fork="'+fork+'"]')];peers.forEach(b=>{b.disabled=true;b.classList.add(b===btn?'selected':'locked')});document.getElementById('forkStatus'+fork).textContent='LOCKED: '+choice.toUpperCase()+'. Keep scrolling.';document.querySelectorAll('[data-path^="'+fork+':"]').forEach(s=>{s.hidden=s.dataset.path!==(fork+':'+choice)});const stage=document.getElementById('stage'+fork);stage.hidden=false;const labels={room:'the room',role:'the role',feed:'the feed',crowd:'the crowd',wait:'wait',rule:'make a rule'};const chip=document.getElementById('chip'+fork);chip.classList.add('set');chip.querySelector('b').textContent=labels[choice]||choice;refreshObservers();setTimeout(()=>update(),20)}
+  function choose(btn){const fork=btn.dataset.fork;if(chosen[fork])return;const choice=btn.dataset.choice;chosen[fork]=choice;Sound.hit();const peers=[...document.querySelectorAll('.choice-btn[data-fork="'+fork+'"]')];peers.forEach(b=>{b.disabled=true;b.classList.add(b===btn?'selected':'locked')});const lockLines={1:'The other corridor has gone dark.',2:'One pressure named. The other still exists.',3:'The moment has an answer. Follow it.'};document.getElementById('forkStatus'+fork).textContent=lockLines[fork]||'The path is set.';document.querySelectorAll('[data-path^="'+fork+':"]').forEach(s=>{s.hidden=s.dataset.path!==(fork+':'+choice)});const stage=document.getElementById('stage'+fork);stage.hidden=false;const labels={room:'the room',role:'the role',feed:'the feed',crowd:'the crowd',wait:'wait',rule:'make a rule'};const chip=document.getElementById('chip'+fork);chip.classList.add('set');chip.querySelector('b').textContent=labels[choice]||choice;refreshObservers();setTimeout(()=>update(),20)}
 
   /* --- final fork --- */
   document.querySelectorAll('[data-final]').forEach(btn=>btn.addEventListener('click',()=>{if(document.querySelector('[data-final].selected'))return;Sound.hit();document.querySelectorAll('[data-final]').forEach(b=>{b.disabled=true;b.classList.toggle('selected',b===btn);b.style.opacity=b===btn?'1':'.32'});const id=btn.dataset.final==='author'?'authorResult':'remainResult';document.getElementById(id).hidden=false;setTimeout(()=>document.getElementById(id).scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'}),120);refreshObservers()}));
@@ -797,12 +974,15 @@ body.journey-live .reveal.in{filter:none}
     for(const s of sections){const r=s.getBoundingClientRect();if(r.top<=marker&&r.bottom>marker){active=s;break}}
     const chaos=active?Math.max(0,Math.min(1,parseFloat(active.dataset.chaos||0))):0;
     root.style.setProperty('--scene-chaos',chaos.toFixed(3));root.style.setProperty('--chaos',chaos.toFixed(3));root.style.setProperty('--scan',(chaos*.24).toFixed(3));root.style.setProperty('--tear',(chaos*.88).toFixed(3));
+    pathRail.style.opacity=Math.min(1,Math.max(.03,chaos*1.35)).toFixed(2);
     const ar=active?.getBoundingClientRect(),local=ar?Math.max(0,Math.min(1,(innerHeight*.78-ar.top)/(ar.height+innerHeight*.35))):0;root.style.setProperty('--scene-progress',local.toFixed(3));
+    sections.forEach((sec,si)=>{const rr=sec.getBoundingClientRect();const lp=Math.max(0,Math.min(1,(innerHeight-rr.top)/(rr.height+innerHeight)));const ch=Math.max(0,Math.min(1,parseFloat(sec.dataset.chaos||0)));sec.style.setProperty('--local',lp.toFixed(3));sec.style.setProperty('--local-rise',((lp-.5)*-72*ch).toFixed(1)+'px');const sway=Math.sin(lp*Math.PI*2+si*.7)*38*ch;sec.style.setProperty('--local-sway',sway.toFixed(1)+'px');sec.style.setProperty('--local-sway-neg',(-sway).toFixed(1)+'px');sec.style.setProperty('--section-rise',((lp-.5)*-28*ch).toFixed(1)+'px');sec.style.setProperty('--section-turn',((.5-lp)*2.8*ch).toFixed(2)+'deg')});
+    if(Sound.ctx&&soundWanted){const target=.082+chaos*.038;Sound.master.gain.setTargetAtTime(target,Sound.ctx.currentTime,.35)}
     const snap=Math.floor(scrollY/46),wave=n=>Math.sin((snap+1)*(n*5.71+7.9));
     const tears=[document.querySelector('.t1'),document.querySelector('.t2'),document.querySelector('.t3')];
     tears.forEach((t,i)=>{if(!t)return;t.style.setProperty('--x',(wave(i+1)*(34+i*16)*chaos).toFixed(1)+'px');t.style.setProperty('--y',(wave(i+5)*(12+i*5)*chaos).toFixed(1)+'px')});
     if(!reduced){
-      document.querySelectorAll('.kinetic').forEach((el,i)=>{const amp=parseFloat(el.dataset.jolt||'1'),base=parseFloat(el.dataset.tilt||'0'),x=wave(i+7)*30*chaos*amp,y=wave(i+13)*15*chaos*amp,rot=base+wave(i+19)*3.2*chaos*amp,skew=wave(i+25)*2.7*chaos*amp;el.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) rotate('+rot.toFixed(2)+'deg) skewX('+skew.toFixed(2)+'deg)';el.style.filter='blur('+(chaos*.22*amp).toFixed(2)+'px)'});
+      document.querySelectorAll('.kinetic').forEach((el,i)=>{const amp=parseFloat(el.dataset.jolt||'1'),base=parseFloat(el.dataset.tilt||'0'),mob=innerWidth<700?.38:1,x=wave(i+7)*30*chaos*amp*mob,y=wave(i+13)*15*chaos*amp*mob,rot=base+wave(i+19)*3.2*chaos*amp*mob,skew=wave(i+25)*2.7*chaos*amp*mob;el.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) rotate('+rot.toFixed(2)+'deg) skewX('+skew.toFixed(2)+'deg)';el.style.filter='blur('+(chaos*.22*amp).toFixed(2)+'px)'});
       sections.forEach((sec,si)=>{const r=sec.getBoundingClientRect(),rel=(r.top-innerHeight*.5)/(innerHeight+r.height);sec.querySelectorAll('.scene-word').forEach((w,wi)=>{const dir=wi%2?1:-1,dx=dir*rel*150*chaos,dy=rel*(35+wi*18)*chaos,rot=(wi===0?-12:wi===1?7:-3)+rel*7*chaos;w.style.transform='translate3d('+dx.toFixed(1)+'px,'+dy.toFixed(1)+'px,0) rotate('+rot.toFixed(2)+'deg)'})});
       document.querySelectorAll('.art-panel img,.plato-visual img').forEach((img,i)=>{const sec=img.closest('section'),r=sec?.getBoundingClientRect();if(!r)return;const center=(r.top+r.height*.5-innerHeight*.5)/innerHeight;img.style.setProperty('--art-shift',(-center*44*(.35+chaos)).toFixed(1)+'px');img.style.setProperty('--art-rot',(wave(i+41)*.65*chaos).toFixed(2)+'deg')});
     }
