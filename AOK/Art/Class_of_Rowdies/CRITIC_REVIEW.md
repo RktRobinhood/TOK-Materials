@@ -1,60 +1,104 @@
-# Class of Rowdies / After Hours — Critic Gate
+# Class of Rowdies — Critic Gate
 
-Two deliberately separate critics reviewed the post-film story. The gate is **9.0/10 from both**. Scores are internal editorial QA, not objective measurement. Both critics worked from the code, the story file, and full-path screenshot runs: desktop at 1280×720 and 1440×860, mobile at 390×844. Every branch combination was covered, plus a timed-out fork.
+Two separate critics reviewed the post-film journey against the teacher's brief. The gate is **9.0/10 from both**. The scores are internal editorial QA, not objective measurement. Both critics worked from the code, the story file and full-path screenshot runs: desktop at 1280×720 and mobile at 390×844, across every branch combination, including a timed-out fork.
 
-## The brief being judged
-Horror and chaos resolve into order and light. The world is a glitching, broken-Matrix speakeasy of smoke and chatter that grows clearer as order approaches. It uses Boat-style scroll storytelling with Telltale-style choices, plus jarring shocks that make the point that it's time to wake up. The message stays implicit: a rowdy class in a moratorium can route the same energy into learning or into distraction, and the cage is one of its own making. Nothing may be preachy or browbeating.
+## Why this is the third version
 
-## 1. Story critic (continuity, logic, implicitness): 8.0 → 9.0 → **~9.3, passed**
+The first post-film build (a fluorescent corridor, then a speakeasy, then lamplight) passed an earlier critic gate. The teacher rejected it anyway: it followed the writer's own metaphor (electricity, a password door, an old man with a napkin) instead of the teacher's vision. This version starts again from that vision:
 
-**Round 1 (8.0).** The writing was praised: spare, wry, and honest about how good distraction feels. Three problems held it back.
-- **Shocks fired on neon choices.** A timeout (which defaults to neon) hit hardest. That made the cattle prod a "wrong answer" buzzer.
-- **The pre-wired cage bars read as a teacher's list of sins:** LATER, WHATEVER, NOT MY PROBLEM, TOMORROW.
-- **Act III ended with three narrator-explains scenes.** Setups dangled: the old man vanished on the phone path, the stairs line contradicted the corridor, and a blown-out lamp was relit without comment.
+- a loud, turbulent class like the one in the film, implicitly the teacher's own sports class;
+- a reciprocal relationship with a teacher who is present;
+- a wall the class builds itself (Pink Floyd, never quoted);
+- open doors nobody walks through;
+- Kant's "what if everyone did it";
+- "dreams are cheap, you get your Tuesdays";
+- unseen daily work (Goggins);
+- a room where people teach each other;
+- a Starship Troopers-style recruitment ending, with the teacher's own questions.
+
+The critics were briefed with the teacher's words, not the writer's summary.
+
+## 1. Story critic (vision fidelity, continuity, implicitness): 8.7 → **9.1, passed**
+
+**Round 1 (8.7).** The critic judged that the piece stays on the teacher's story: the film parallel is unspoken, the sports class is implied, and the Kant turn was "the best idea in the piece". Four problems blocked it:
+
+- **"Just listen. Properly."** presented the brief's worst acceptable case as equal to the best. It became "Ask the question nobody's asking", which keeps a route for quiet students but makes it active.
+- **The door contradicted the teacher's offer.** The lines had been "waiting to be told" and "Nobody is going to tell you". They became "waiting for someone else to go first" and "Nobody is going to push you through it."
+- **The wall fell on its own at the door.** It now stays through Act III and comes down only when the reader answers "What would you bring?".
+- **The takeaway lost the teacher's "let's".** It now ends "You've got the energy. / Let's decide where it goes."
+
+Also fixed in round 1:
+
+- The battle scene shows the students who wanted to learn giving up.
+- The teacher lays bricks too in a battle ("SIT THERE", "WORKSHEET").
+- The teacher's offer, after a battle, opens with "Okay. Different idea."
+- One poster-like line and one padding line were cut.
+- British-isms were localised (mate, sir, Year 7).
+- The free throw became a seven-metre throw.
+
+**Round 2 (9.1, passed).** Remaining polish was applied:
+
+- "hoop" became "goal";
+- a less self-pitying teacher line;
+- the teacher's phrase "authorship, citizenship, agency" printed on the enlistment card.
+
+The Tuesday motif stays pending the teacher's confirmation of the lesson day.
+
+## 2. Avant-garde art critic (motion, stylisation, sound vs content): 7.6 → 8.6 → **9.1, passed**
+
+**Round 1 (7.6).** The critic praised the central images: the teacher's-eye room map and Bruegel's *Children's Games* seen a second time. It called out several stock habits and weak spots:
+
+- **The Kant beat.** "Multiply" barely changed an already-pink room.
+- **The wall.** Red bevelled bricks read as a video game, and the wall sat like a status bar.
+- **The door** played a success chime.
+- **The poster** was quoted, not détourned.
+- **The form** looked like a worksheet.
+- **The ordered room** looked regimented.
+- **Flash safety.** Too many luminance changes were stacked in one shock.
 
 **Fixes.**
-- Shocks now land only on moments of recognition that every reader reaches: the slot, "since September", the overload, "Look up.", and idling.
-- A neon choice gives a pink bloom and a cheer, because distraction feels good. A timeout gives a dull thud, and the neon lights without you.
-- The other bars in the cage are now the speakeasy's own signs (NO CLOCKS, OPEN ALL NIGHT, TONIGHT ONLY, ONE MORE). The décor was the prison.
-- The old man returns as the Orrery lecturer on every path. The stairs, the relit lamp, the pencil in your pocket and the "one more" → late-for-Period-1 chain all pay off.
-- The thesis lines became images: "The neon hums. / The lamp doesn't. / Same current."
-- The phone option became "Answer it" (social, not a strawman). The blow option became "Nobody could see you in it" (anonymity, not laziness).
 
-**Round 2 (9.0, passed).** Two small contradictions remained: "forty messages" against "One becomes forty", and "every door on the way in" when the speakeasy door had a password. Both were fixed, as was the all-timeouts tally wording.
+- **Multiply** now spreads ring by ring from the reader's own seat, then cuts to 1.2 s of dead silence.
+- **The wall** is Floyd-white, with a red hand on your brick and faint hands on every brick at "Check whose hands". It stays faint and peripheral until its own scene, and falls with a rubble roar when the reader contributes.
+- **The poster** has "THE CLASS" / "NEEDS YOU." strips slapped over Kitchener, with gate-weave and a scratch.
+- **The form** is a service record ("SERVICE NO. 17 / 28 · SEAT 17").
+- **The ordered room** shows arcs of peer teaching.
+- **Flashes** are single-peak, and gentle mode strips the extras.
+- **The decode** uses each line's own letters.
+- **The glitch** leans toward datamosh.
+- **After enlisting**, the Period-5 fluorescent tube returns and holds steady.
 
-**One recommendation deliberately not taken.** The critic suggested replacing the 120 ms "WAKE UP." flash inside the blackout shock with "PERIOD 1.", because it is the one imperative on the page. It stays because "make the point it's time to wake up" is the creator's explicit brief, and at 120 ms it is felt rather than read. The teacher notes now say so honestly.
+One critic recommendation was only partly taken. It asked for the Matrix-style chatter rain to be cut as a cliché. The teacher's brief explicitly asks for a broken-Matrix feel, so the rain was kept, made sparser, and joined by more overheard phrases.
 
-## 2. Avant-garde art critic (motion, stylisation, sound vs content): 7.3 → 8.8 → **9.1, passed**
+**Round 2 (8.6).** The concept was judged sound. Layout faults at key moments remained, and all are fixed:
 
-**Round 1 (7.3).** The architecture was praised: a single eased `--chaos` dial drives the form. But it said the dial wasn't used as a dial.
-- Acts I and II shared one glitch vocabulary, so dread and delirium blurred.
-- The speakeasy read as "a tasteful salon with an overlay".
-- The Matrix rain read upside-down.
-- Lamplight still glitched.
-- The overload didn't peak, and the shocks escalated only in amplitude.
-- Bach's Prelude in C was "the most stock enlightenment cue there is".
+- the wall covered "Check whose hands";
+- the choices covered "Waiting for someone";
+- on phones, the takeaway's faint room sat across its headline;
+- reduced-motion users still saw the new animations.
 
-**Fixes.**
-- **Act I is now dread, not glitch.** Chaos sits at .4–.45, the words exist only while the tube is lit, and the slams bleed off the edge without an RGB fringe.
-- **Act II slopes** from seductive (.55) to rotten (1.0), and the reader's own neon and lamp choices bend it.
-- **Slams split into words** that scatter with chaos and settle into a line as order arrives.
-- **Chatter rain** now falls top-down in amber and pink, stutters, and lets whole overheard phrases surface.
-- **A second, dark smoke layer** actually hides words until it drifts on.
-- **"Silence." stops time:** the smoke freezes mid-air and the record is cut with a needle-lift.
-- **The overload** crowds in salon-hung frames, then drops everything off the wall before the blackout.
-- **Shocks escalate in kind:** scare, then jolt, then full.
-- **Glitch bursts** now displace real image bands and pixelate into macroblocks, and the previous painting datamoshes across Act II scene changes.
-- **Neon signs** have dying letters and audible buzz-outs.
-- **The bulb** lowers into the painted lamp.
-- **Bach is gone.** The same 1917 Original Dixieland Jass Band record returns clean from Rembrandt's stairs to Monet's sunrise: same electricity, different wiring, carried by sound.
+Also fixed:
 
-**Round 2 (8.8).** Two must-fixes remained. Lamplight still produced occasional glitches (fixed with a hard floor: no glitch below chaos .5). The match line collided with the line before it (fixed with a calm flow layout, words pinned still after the blowout, and older lines stepping back when a slam lands). The critic's should-fixes were also applied:
-- a clean "clear" shock for "Look up."
-- amber rather than Matrix-green decoding
-- the sharpest type in the piece at dawn
-- mobile tally and salon spacing
+- the triple "THE CLASS NEEDS YOU" on the poster page;
+- the card's italic answers.
 
-**Round 3 (9.1, passed).** Lamplight, the stairs and the blackout were confirmed clean. The critic's two leftover polish notes were also applied: a clean chime instead of an electric arc for the calm "Look up." jolt, and the calm column for the lamplight scenes on narrow screens.
+**Round 3 (9.1, passed).** Verified on fresh desktop and mobile captures. Key lines are clear at every moment that matters, and the poster "does the shouting". The one optional note was applied: the fuse caption is hidden on phone-sized room scenes.
+
+## Sound
+
+Measured output loudness per scene:
+
+- the loud scenes sit around −15 to −19 dBFS;
+- the wall's shock uses a 4-second reveille;
+- the door, the Sower and the teaching room drop to −24 to −31;
+- the recruitment march comes back at −16.
+
+Every recording is public domain or CC0 (`assets/CREDITS.json`).
 
 ## Safety
-Flashes are single hits of at most two luminance swings, at least 1.1 s apart. The fluorescent tube never toggles faster than every 340 ms and goes quiet for 1 s around a shock. "shocks: gentle" removes shake and lightning and softens flashes and flicker. It switches on automatically under `prefers-reduced-motion`, which also disables scrambling, glitches and the chatter rain.
+
+- Flashes are single-peak and at least 1.1 s apart.
+- The fluorescent tube never toggles faster than every 340 ms.
+- "shocks: gentle", which switches on automatically under reduced motion, removes shake, lightning and the colour jolt, softens flashes, and doubles choice timers.
+- Choice timers pause while the pointer is over them.
+- Beats carry aria-labels with the real words, so screen readers never read the scramble.

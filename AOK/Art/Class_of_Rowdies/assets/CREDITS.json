@@ -11,83 +11,6 @@
     "notes": "Etching; full plate from the 1761 second edition."
   },
   {
-    "file": "art/goya-saturn.jpg",
-    "title": "Saturn Devouring His Son",
-    "creator": "Francisco Goya",
-    "date": "c.1819-1823",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Francisco_de_Goya,_Saturno_devorando_a_su_hijo_(1819-1823).jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Black Painting, Museo del Prado. Full painting."
-  },
-  {
-    "file": "art/lautrec-moulin-rouge.jpg",
-    "title": "At the Moulin Rouge",
-    "creator": "Henri de Toulouse-Lautrec",
-    "date": "1892-1895",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Henri_de_Toulouse-Lautrec_-_At_the_Moulin_Rouge_-_Google_Art_Project.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Art Institute of Chicago (Google Art Project image). Full painting."
-  },
-  {
-    "file": "art/ensor-intrigue.jpg",
-    "title": "The Intrigue (L'Intrigue)",
-    "creator": "James Ensor",
-    "date": "1890",
-    "source_url": "https://commons.wikimedia.org/wiki/File:De_intrige,_James_Ensor,_1890,_Koninklijk_Museum_voor_Schone_Kunsten_Antwerpen,_1856.002.jpeg",
-    "license": "CC0 1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "attribution_required": false,
-    "notes": "Koninklijk Museum voor Schone Kunsten Antwerpen, inv. 1856; museum image released CC0."
-  },
-  {
-    "file": "art/ensor-skeletons-herring.jpg",
-    "title": "Skeletons Fighting over a Pickled Herring",
-    "creator": "James Ensor",
-    "date": "1891",
-    "source_url": "https://commons.wikimedia.org/wiki/File:James_Ensor,_Skeletons_Fighting_Over_a_Pickled_Herring_-_Mus%C3%A9es_royaux_des_Beaux-Arts_de_Belgique,_Brussels.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Royal Museums of Fine Arts of Belgium, Brussels. Full painting."
-  },
-  {
-    "file": "art/degas-star.jpg",
-    "title": "The Star (L'Etoile) / Dancer on Stage",
-    "creator": "Edgar Degas",
-    "date": "c.1876-1878",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Edgar_Degas_-_Ballet_(L%27%C3%89toile).jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Pastel, Musee d'Orsay. Full work."
-  },
-  {
-    "file": "art/degas-absinthe.jpg",
-    "title": "In a Cafe (L'Absinthe)",
-    "creator": "Edgar Degas",
-    "date": "1875-1876",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Edgar_Degas_-_In_a_Caf%C3%A9_-_Google_Art_Project.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Musee d'Orsay (Google Art Project image). Full painting."
-  },
-  {
-    "file": "art/leonardo-flying-machine.jpg",
-    "title": "Design for a flying-machine wing (Codex Atlanticus f.858r)",
-    "creator": "Leonardo da Vinci",
-    "date": "c.1485-1490",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Leonardo_da_Vinci_-_Ambrosiana-Codice-Atlantico-Codex-Atlanticus-f-858-recto.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Pen and ink sheet, Biblioteca Ambrosiana, Milan. Articulated bat-like wing mechanism; clean, legible."
-  },
-  {
     "file": "art/wright-orrery.jpg",
     "title": "A Philosopher Lecturing on the Orrery",
     "creator": "Joseph Wright of Derby",
@@ -97,84 +20,6 @@
     "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
     "attribution_required": false,
     "notes": "Derby Museum and Art Gallery. Full painting."
-  },
-  {
-    "file": "art/wright-air-pump.jpg",
-    "title": "An Experiment on a Bird in the Air Pump",
-    "creator": "Joseph Wright of Derby",
-    "date": "1768",
-    "source_url": "https://commons.wikimedia.org/wiki/File:An_Experiment_on_a_Bird_in_an_Air_Pump_by_Joseph_Wright_of_Derby,_1768.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "National Gallery, London. Full painting."
-  },
-  {
-    "file": "art/goya-sleep-reason.jpg",
-    "title": "The Sleep of Reason Produces Monsters (Los Caprichos, plate 43)",
-    "creator": "Francisco Goya",
-    "date": "1799",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Plate_43_from_%27Los_Caprichos%27-_The_sleep_of_reason_produces_monsters_(El_sue%C3%B1o_de_la_razon_produce_monstruos)_MET_DT652.jpg",
-    "license": "CC0 1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "attribution_required": false,
-    "notes": "Etching and aquatint, first-edition impression, Metropolitan Museum of Art (Open Access, CC0). Plate with narrow paper margin."
-  },
-  {
-    "file": "art/rembrandt-philosopher.jpg",
-    "title": "Philosopher in Meditation",
-    "creator": "Rembrandt (attributed)",
-    "date": "1632",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Rembrandt_Harmensz._van_Rijn_038.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Louvre. Yorck Project reproduction; colours warmer/more saturated than the museum's current photo (best PD-licensed full-res version on Commons)."
-  },
-  {
-    "file": "art/friedrich-woman-window.jpg",
-    "title": "Woman at a Window",
-    "creator": "Caspar David Friedrich",
-    "date": "1822",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Frau_am_Fenster_-_Google_Art_Project.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Alte Nationalgalerie, Berlin (Google Art Project image). Full painting."
-  },
-  {
-    "file": "art/monet-sunrise.jpg",
-    "title": "Impression, Sunrise",
-    "creator": "Claude Monet",
-    "date": "1872",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Monet_-_Impression,_Sunrise.jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "Musee Marmottan Monet. Full painting."
-  },
-  {
-    "file": "art/munch-karl-johan.jpg",
-    "title": "Evening on Karl Johan Street",
-    "creator": "Edvard Munch",
-    "date": "1892",
-    "source_url": "https://commons.wikimedia.org/wiki/File:Edvard_Munch_-_Evening_on_Karl_Johan_Street_(1892).jpg",
-    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
-    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
-    "attribution_required": false,
-    "notes": "KODE, Bergen. Full painting."
-  },
-  {
-    "file": "audio/jazz.mp3",
-    "title": "Dixie Jass Band One-Step (Victor 18255-A)",
-    "creator": "Original Dixieland Jass Band (comp. J. Russel Robinson / Nick LaRocca / Joe Jordan)",
-    "date": "Recorded 26 Feb 1917, New York; issued 1917",
-    "source_url": "https://commons.wikimedia.org/wiki/File:OriginalDixielandJassBand_DixieJassBandOneStep1917.ogg",
-    "license": "Public domain",
-    "license_url": "",
-    "attribution_required": false,
-    "duration_s": 86.48,
-    "notes": "Often cited as the first jazz record ever issued. Excerpt 61.0-148.5 s; loop length = 120 beats with 1.0 s equal-power crossfade; mono; -18 LUFS."
   },
   {
     "file": "audio/chatter.mp3",
@@ -225,18 +70,6 @@
     "notes": "Burst 14.41-15.23 s of source; harsh mains-buzz arc with abrupt start; -14 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
   },
   {
-    "file": "audio/zap-long.mp3",
-    "title": "Electrical arcing and sparking (long burst)",
-    "creator": "Sunset Editorial Library (USC)",
-    "date": "20th century",
-    "source_url": "https://archive.org/details/SSE_Library_ELECTRICITY",
-    "license": "CC0 1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "attribution_required": false,
-    "duration_s": 2.42,
-    "notes": "Burst 11.24-13.54 s of source; stuttering arc crackle; -14 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
-  },
-  {
     "file": "audio/heartbeat.mp3",
     "title": "R15-45 Heart Beat",
     "creator": "USC Red Library",
@@ -261,30 +94,6 @@
     "notes": "~4 ticks/s; tick-tock alternation preserved across loop point; 150 ms crossfade; -19 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
   },
   {
-    "file": "audio/match.mp3",
-    "title": "R16-13 Match Being Struck and Lit",
-    "creator": "USC Red Library",
-    "date": "1930s-1940s",
-    "source_url": "https://archive.org/details/Red_Library_Foley_Props_1",
-    "license": "CC0 1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "attribution_required": false,
-    "duration_s": 1.55,
-    "notes": "Single strike + flare; very peaky, so integrated loudness is ~-20 LUFS even with ~6 dB peak limiting (TP -2.4 dBTP); head silence trimmed. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
-  },
-  {
-    "file": "audio/knock.mp3",
-    "title": "R09-25 Door Knocks",
-    "creator": "USC Red Library",
-    "date": "1930s-1940s",
-    "source_url": "https://archive.org/details/Red_Library_Doors",
-    "license": "CC0 1.0",
-    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "attribution_required": false,
-    "duration_s": 1.15,
-    "notes": "Three firm knocks on a wooden door; head silence trimmed; ~-16.5 LUFS (peak-limited, TP -2.6 dBTP). Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
-  },
-  {
     "file": "audio/fluorescent.mp3",
     "title": "R21-41 Electric Light Hum",
     "creator": "USC Red Library",
@@ -307,5 +116,188 @@
     "attribution_required": false,
     "duration_s": 16.2,
     "notes": "Built only from the lead-in/run-out groove noise of the public-domain 78 transfer (no music): shuffled 0.45-0.9 s grains with 40 ms crossfades, 300 ms loop crossfade; ~-21 LUFS (limited by click true-peaks)."
+  },
+  {
+    "file": "art/steen-school.jpg",
+    "title": "A School for Boys and Girls",
+    "creator": "Jan Steen",
+    "date": "c.1670",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Jan_Steen_-_A_School_for_Boys_and_Girls_-_Google_Art_Project.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Scottish National Gallery, Edinburgh (Google Art Project image). Full painting: the riotous classroom. Steen d.1679."
+  },
+  {
+    "file": "art/steen-village-school.jpg",
+    "title": "The Village School",
+    "creator": "Jan Steen",
+    "date": "c.1665-1670",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Jan_Steen_-_The_Village_School_(National_Gallery_of_Ireland).jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "National Gallery of Ireland, Dublin. Full painting: the overwhelmed schoolmaster with a weeping pupil."
+  },
+  {
+    "file": "art/bruegel-childrens-games.jpg",
+    "title": "Children's Games",
+    "creator": "Pieter Bruegel the Elder",
+    "date": "1560",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_Children%E2%80%99s_Games_-_Google_Art_Project.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Kunsthistorisches Museum, Vienna (Google Art Project image). Full painting; 1740 px long edge to stay under 500 KB."
+  },
+  {
+    "file": "art/vangogh-prisoners.jpg",
+    "title": "Prisoners Exercising (Prisoners' Round, after Gustave Dore)",
+    "creator": "Vincent van Gogh",
+    "date": "February 1890",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Vincent_van_Gogh_-_The_Prison_Courtyard_(1890).jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Pushkin Museum, Moscow. Full painting. Very slight softening (0.65 px blur) before JPEG to keep the dense brushwork under 500 KB."
+  },
+  {
+    "file": "art/hammershoi-open-doors.jpg",
+    "title": "Open Doors / White Doors (Strandgade 30)",
+    "creator": "Vilhelm Hammershoi",
+    "date": "1905",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Vilhelm_Hammersh%C3%B8i-_Wei%C3%9Fe_T%C3%BCren,_offene_T%C3%BCren,_1905.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "The David Collection (Davids Samling), Copenhagen. Full painting: empty room seen through a sequence of open doors. Hammershoi d.1916."
+  },
+  {
+    "file": "art/raphael-athens.jpg",
+    "title": "The School of Athens",
+    "creator": "Raphael (Raffaello Sanzio)",
+    "date": "1509-1511",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Raphael_School_of_Athens.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Fresco, Stanza della Segnatura, Vatican. Full lunette fresco (without the surrounding wall and dado)."
+  },
+  {
+    "file": "art/leete-wants-you.jpg",
+    "title": "Britons: Lord Kitchener Wants You (Join Your Country's Army!)",
+    "creator": "Alfred Leete",
+    "date": "1914",
+    "source_url": "https://commons.wikimedia.org/wiki/File:30a_Sammlung_Eybl_Gro%C3%9Fbritannien._Alfred_Leete_(1882%E2%80%931933)_Britons_(Kitchener)_wants_you_(Briten_Kitchener_braucht_Euch)._1914_(Nachdruck),_74_x_50_cm._(Slg.Nr._552).jpg",
+    "license": "Public domain (Leete d.1933; PD-Art reproduction; also tagged PD-UKGov)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Full recruitment poster, from a scan of a later reprint of the 1914 design (Sammlung Eybl, Plakatmuseum Wien). Colours are brighter than surviving 1914 originals, but it is the only full-size copy of the 'Britons' poster on Commons."
+  },
+  {
+    "file": "art/vangogh-sower.jpg",
+    "title": "The Sower (Sower with Setting Sun)",
+    "creator": "Vincent van Gogh",
+    "date": "c.17-28 June 1888",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Vincent_van_Gogh_-_The_Sower_-_c._17-28_June_1888.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Kroller-Muller Museum, Otterlo (Google Art Project image). Full painting; 1520 px long edge and 0.45 px softening to stay under 500 KB (heavy impasto)."
+  },
+  {
+    "file": "art/millet-gleaners.jpg",
+    "title": "The Gleaners (Des glaneuses)",
+    "creator": "Jean-Francois Millet",
+    "date": "1857",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Millet_-_Gleaners_-_Google_Art_Project.jpg",
+    "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work)",
+    "license_url": "https://commons.wikimedia.org/wiki/Commons:Reuse_of_PD-Art_photographs",
+    "attribution_required": false,
+    "notes": "Musee d'Orsay, Paris (Google Art Project image). Full painting."
+  },
+  {
+    "file": "audio/classroom.mp3",
+    "title": "G29-62 Happy Teenager Walla",
+    "creator": "USC Gold Library (1930s-40s Hollywood optical sound effects)",
+    "date": "1930s-1940s",
+    "source_url": "https://archive.org/details/GOLD_TAPE_28_29_30_Crowds",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "duration_s": 42.0,
+    "notes": "Dense, steady room of teenagers chatting (a different recording from chatter.mp3); no dominant speaker is visible in the level or spectrum. The optical source is band-limited to about 8 kHz. Excerpt 16.5-60.5 s, 2 s equal-power crossfade loop; mono; -18 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
+  },
+  {
+    "file": "audio/chair-scrape.mp3",
+    "title": "R26-07 Large Wooden Object Dragged on Wood Floor (single drag)",
+    "creator": "USC Red Library",
+    "date": "1930s-1940s",
+    "source_url": "https://archive.org/details/Red_Library_Foley_Props_3",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "duration_s": 1.62,
+    "notes": "Single ~1.4 s wooden drag with stick-slip judder (a chair or desk scraped on a wooden floor), 2.75-4.4 s of source; head trimmed, 120 ms fade-out; -14 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
+  },
+  {
+    "file": "audio/desk-drum.mp3",
+    "title": "Desk drumming loop (assembled from R22-35 Wood Foley - Hollow Flat Surface)",
+    "creator": "USC Red Library (source hits); loop assembled for this project",
+    "date": "1930s-1940s (source)",
+    "source_url": "https://archive.org/details/Red_Library_Foley_Props_4",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "duration_s": 9.23,
+    "notes": "No rhythmic desk-drumming recording with a clean PD/CC0 licence was found, so single palm thumps, knuckle knocks and ghost taps on a hollow wooden surface, cut from this CC0 foley take, were sequenced into a 4-bar groove at 104 bpm (slight timing and velocity humanising, hit tails wrapped round the loop point, source room tone underneath). Loops seamlessly; -18 LUFS. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
+  },
+  {
+    "file": "audio/pencil-tap.mp3",
+    "title": "Pencil tapping loop (assembled from R22-35 Wood Foley - Hollow Flat Surface)",
+    "creator": "USC Red Library (source taps); loop assembled for this project",
+    "date": "1930s-1940s (source)",
+    "source_url": "https://archive.org/details/Red_Library_Foley_Props_4",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "duration_s": 6.0,
+    "notes": "Short hard taps on wood from this CC0 foley take, high-passed (~1.4 kHz) and shortened to a dry 'tk' click, then sequenced as a restless tapping pattern (~8 taps/s in bursts). Seamless loop. Very peaky, so about -20 LUFS at TP -1.5 dBTP. This is a built arrangement: no clean PD/CC0 pencil-tap recording was found. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
+  },
+  {
+    "file": "audio/reveille.mp3",
+    "title": "Reveille (bugle call)",
+    "creator": "United States Army Band",
+    "date": "undated (US Army bugle-call recording)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Reveille_on_bugle.ogg",
+    "license": "Public domain (work of the U.S. federal government, PD-USGov-Military-Army)",
+    "license_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Army",
+    "attribution_required": false,
+    "duration_s": 21.0,
+    "notes": "Full US Army 'Reveille' on solo bugle; head silence trimmed, natural tail with a 250 ms fade; mono (source band-limited to ~11.5 kHz); -14 LUFS."
+  },
+  {
+    "file": "audio/march.mp3",
+    "title": "The Stars and Stripes Forever (Edison Amberol cylinder 4M-285)",
+    "creator": "Sousa's Band (comp. John Philip Sousa, d.1932)",
+    "date": "Recorded November 1909",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Sousa%27s_Band_-_Stars_and_Stripes_Forever.ogg",
+    "license": "Public domain (1909 recording, PD-US-record-expired; composer d.1932)",
+    "license_url": "https://commons.wikimedia.org/wiki/Template:PD-US-record-expired",
+    "attribution_required": false,
+    "duration_s": 56.45,
+    "notes": "Excerpt 4.37-60.82 s = first strain (x2) + second strain (x2). The loop point jumps from the end of strain 2 back to the first strain's downbeat (like a da capo), found by self-similarity and beat alignment, with a 60 ms equal-power crossfade. Acoustic-era surface noise retained; mono; -18 LUFS. NPS catalogue EDIS 36682, click-removed transfer."
+  },
+  {
+    "file": "audio/stamp.mp3",
+    "title": "R16-41 Typewriter Roller Movements (single carriage slam)",
+    "creator": "USC Red Library",
+    "date": "1930s-1940s",
+    "source_url": "https://archive.org/details/Red_Library_Communications",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution_required": false,
+    "duration_s": 0.54,
+    "notes": "Single sharp typewriter carriage/roller slam with a short mechanical rattle (0.50-1.08 s of source), for use as a 'stamp' thud; head trimmed; -14 LUFS. No clean PD/CC0 rubber-stamp recording was found. Source: USC Optical Sound Effects Library / Sunset Editorial Library (Craig Smith collection), published by the Internet Archive with a CC0 1.0 dedication."
   }
 ]

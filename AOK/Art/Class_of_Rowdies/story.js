@@ -1,346 +1,279 @@
 /* =====================================================================
-   THE CLASS OF ROWDIES / AFTER HOURS — the story
+   THE CLASS OF ROWDIES — the journey after the film
    ---------------------------------------------------------------------
-   Everything a reader sees after the film lives here, in order.
+   A turbulent class, like the one in the film. The same room can become
+   a battle or something good, and it goes both ways: the teacher answers
+   what the class does. Everything a reader sees lives here, in order.
    Edit words freely; the engine (app.js) only cares about the shape.
 
    Scene fields
-     id        unique id
-     label     text in the vertical chapter marker
-     act       1 horror / 2 chaos / 3 order / 4 light
-     h         scroll length in viewport-heights (longer = slower)
-     chaos     0..1 — glitch, scrambled type, tilt, grain, smoke darkness.
-               Act I sits low on purpose: dread is quiet. Act II slopes up
-               from seductive (.55) to rotten (1.0) at the overload.
-               Scenes under .3 stop scattering their words and line them up.
-     smoke     0..1 — smoke density           rain 0..1 — falling chatter
-     art       image in assets/art/
-     look      stagecraft: tube | door | neon | overload | dark | dark-art | lamp | window-light | tally | window | dawn
-     mix       ambience levels (see Sound in app.js); mixAfter = after a 'silence' cue
-     beats     lines revealed by scroll: { at: 0..1, t: text, k: kind }
-               kinds: line (default) | slam | whisper | quote | sign
-               t may be a function of state (lines that remember you); '' hides the line
-     cue       one-shot events keyed by progress: { at, fx }
-               shocks ('jolt') sit only on moments every reader reaches — never on a choice
-     when      state => boolean — branch scenes only appear on their path
-     gate      'password' or a fork; nothing below appears until it is met
+     id / label  unique id / text in the vertical chapter marker
+     act         1 the noise / 2 the wall / 3 the door / 4 the call
+     h           scroll length in viewport-heights (longer = slower)
+     chaos       0..1 glitch, scrambled type, tilt, haze darkness.
+                 Under .3 the words stop scattering and line up to be read.
+     smoke/rain  0..1 haze density / falling classroom chatter
+     art         image in assets/art/ (artAlt: fallback image)
+     look        tube | frame | room | wall | lamp | clean | light | recruit
+     room        (look 'room') what the teacher sees: 'noise' | 'split' | 'waiting' | 'teaching'
+                 or a function of state
+     mix         ambience levels (see Sound in app.js)
+     beats       lines revealed by scroll: { at: 0..1, t: text, k: kind }
+                 kinds: line (default) | slam | whisper | quote
+                 t may be a function of state; '' hides the line
+     cue         one-shot events keyed by progress: { at, fx }
+     when        state => boolean, for branch scenes
+     gate        a fork, or 'enlist' (the form at the end)
+   Fork options
+     wire 'brick' lays a labelled brick in the wall along the bottom of the screen
+     wire 'open'  the room opens a little; nothing is laid
    ===================================================================== */
 
-const LIST=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+const VOICE={ brick:'The teacher noticed.', open:'The teacher noticed that too.' };
 
 window.STORY = [
 
-/* ---------------------------------------------------------------- ACT I — dread */
-{ id:'period5', label:'I / PERIOD 5', act:1, h:240, chaos:.4, look:'tube',
-  mix:{ hum:.75, drone:.25 },
+/* ================================================================ I — THE NOISE */
+{ id:'bell', label:'I / PERIOD 5', act:1, h:230, chaos:.5, look:'tube',
+  mix:{ hum:.6, classroom:.35, classroomCut:600 },
   cue:[ { at:.02, fx:'bellLow' } ],
   beats:[
     { at:.00, k:'whisper', t:'contains sudden noise, shaking and single flashes — “shocks: gentle” (bottom left) softens them' },
     { at:.12, k:'slam', t:'PERIOD 5.' },
-    { at:.34, t:'The bell went four minutes ago.' },
-    { at:.52, t:'Nobody came.' },
-    { at:.72, t:'The lights haven’t decided either.' }
+    { at:.32, t:'The bell goes. The noise doesn’t stop. It just changes rooms.' },
+    { at:.54, t:'Twenty-eight of you.' },
+    { at:.70, k:'slam', t:'One of them.' }
   ]},
 
-{ id:'corridor', label:'I / THE CORRIDOR', act:1, h:320, chaos:.45, look:'tube', art:'piranesi-carceri.jpg',
-  credit:'Giovanni Battista Piranesi, <i>Carceri d’invenzione</i> (Imaginary Prisons), 1761',
-  mix:{ hum:.55, drone:.45, heart:.35, jazz:.22, jazzCut:320 },
+{ id:'riot', label:'I / THE ROOM', act:1, h:300, chaos:.8, smoke:.6, rain:.8, look:'frame', art:'steen-school.jpg',
+  credit:'Jan Steen, <i>A School for Boys and Girls</i>, c. 1670',
+  mix:{ classroom:.9, drum:.55, pencil:.3, crackle:.1 },
+  cue:[ { at:.1, fx:'chair' }, { at:.45, fx:'chair' } ],
   beats:[
-    { at:.10, t:'The corridor keeps going.' },
-    { at:.28, t:'Stairs up. Stairs down. Stairs to more stairs.' },
-    { at:.48, t:'Every door you pass is propped open.' },
-    { at:.62, k:'slam', t:'Nobody walks through.' },
-    { at:.82, k:'whisper', t:'somewhere below: music' }
+    { at:.06, k:'slam', t:'You know this room.' },
+    { at:.22, t:'Someone’s drumming the desk. Someone’s halfway out of their chair.' },
+    { at:.40, t:'Someone’s actually trying. It’s hard to tell from here.' },
+    { at:.58, t:'Honestly? It’s the best part of the day.' },
+    { at:.78, k:'whisper', t:'somewhere at the front, someone is saying something about knowledge' }
   ]},
 
-{ id:'saturn', label:'I / TIME', act:1, h:300, chaos:.45, look:'tube', art:'goya-saturn.jpg',
-  credit:'Francisco Goya, <i>Saturn Devouring His Son</i>, c. 1819–23',
-  mix:{ drone:.7, heart:.6, clock:.55, clockRate:.72, jazz:.18, jazzCut:280 },
-  cue:[ { at:.66, fx:'jolt' } ],
+{ id:'front', label:'I / THE FRONT', act:1, h:230, chaos:.5, look:'room', room:'noise',
+  mix:{ classroom:.45, classroomCut:900, heart:.35 },
   beats:[
-    { at:.10, t:'Down here, time eats.' },
-    { at:.30, t:'Not all at once.' },
-    { at:.46, t:'An hour here. A lesson there.' },
-    { at:.66, k:'slam', t:'It’s been chewing since September.' }
+    { at:.04, k:'whisper', t:'from the front of the room' },
+    { at:.16, t:'Twenty-eight faces. Three looking back.' },
+    { at:.38, t:'This lesson got planned on Sunday night.' },
+    { at:.60, t:'Now: is it worth trying at all?' }
   ]},
 
-{ id:'door', label:'I / THE DOOR', act:1, h:230, chaos:.4, look:'door', gate:'password',
-  mix:{ drone:.35, heart:.55, jazz:.5, jazzCut:650, chatter:.18, chatterCut:500 },
-  cue:[ { at:.24, fx:'knock' }, { at:.46, fx:'slot' } ],
+{ id:'fork-friend', label:'I / THE JOKE', act:1, h:190, chaos:.7, smoke:.6, rain:.5, look:'frame', art:'steen-village-school.jpg', artAlt:'steen-school.jpg',
+  credit:'Jan Steen, <i>The Village School</i>, c. 1670',
+  mix:{ classroom:.6, pencil:.35 },
   beats:[
-    { at:.06, t:'A door. A slot at eye height.' },
-    { at:.20, k:'whisper', t:'you knock' }
-  ]},
-
-/* ---------------------------------------------------------------- ACT II — the speakeasy */
-{ id:'inside', label:'II / AFTER HOURS', act:2, h:340, chaos:.55, smoke:.8, rain:.45, look:'neon', art:'lautrec-moulin-rouge.jpg',
-  credit:'Henri de Toulouse-Lautrec, <i>At the Moulin Rouge</i>, 1892–95',
-  signs:['NO CLOCKS','OPEN ALL NIGHT'],
-  mix:{ jazz:.85, chatter:.7, crackle:.35, warp:.2, dirt:.05 },
-  cue:[ { at:.78, fx:'bulbOn' } ],
-  beats:[
-    { at:.08, k:'slam', t:'Nobody checks the time in here.' },
-    { at:.24, t:'Nobody checks anything.' },
-    { at:.38, t:'Everyone’s humming with the same thing. You can feel it in your teeth.' },
-    { at:.55, t:'It isn’t good. It isn’t bad.' },
-    { at:.64, k:'slam', t:'It’s just current.' },
-    { at:.78, t:'One bulb hangs over the bar, flickering like it can’t make up its mind.' }
-  ]},
-
-{ id:'fork-stage', label:'II / THE SILENCE', act:2, h:190, chaos:.65, smoke:.9, rain:.35, look:'neon',
-  signs:['TONIGHT ONLY'],
-  mix:{ jazz:.8, chatter:.6, crackle:.3, warp:.3, dirt:.08 },
-  mixAfter:{ chatter:.08, chatterCut:700, crackle:.55, heart:.42 },
-  cue:[ { at:.18, fx:'silence' } ],
-  beats:[
-    { at:.04, t:'The band stops for a smoke.' },
-    { at:.18, k:'slam', t:'Silence.' },
-    { at:.32, t:'Every face turns, looking for who fills it.' }
+    { at:.04, t:'Five minutes in. The teacher starts:' },
+    { at:.14, k:'quote', t:'“Today I want to try something—”' },
+    { at:.28, t:'Your friend leans over. It’s genuinely funny.' }
   ],
-  gate:{ fork:'stage', at:.42, timer:13, timeout:'heckle',
-    timeoutToast:'You didn’t choose. The room filled the silence for you.',
+  gate:{ fork:'friend', at:.40, timer:12, timeout:'say',
+    timeoutToast:'You didn’t choose. The joke did.',
     options:[
-      { id:'heckle', wire:'neon', sign:'HA HA HA', label:'Heckle the empty stage', sub:'The laugh is right there. Take it.', toast:'The room will remember that.' },
-      { id:'stage',  wire:'lamp', label:'Get up on it', sub:'No idea what you’ll do. Go anyway.', toast:'The bulb will remember that.' }
+      { id:'say',  wire:'brick', brick:'ONE MORE JOKE', label:'Say it now', sub:'It’s funnier now than it’ll be later.', toast:VOICE.brick },
+      { id:'hold', wire:'open', label:'Hold it', sub:'Save it for the break. See what the something is.', toast:VOICE.open }
     ]}},
 
-{ id:'heckle', label:'II / THE LAUGH', act:2, h:280, chaos:.85, smoke:1, rain:.9, look:'neon', art:'ensor-intrigue.jpg',
-  credit:'James Ensor, <i>The Intrigue</i>, 1890',
-  when:s=>s.forks.stage==='heckle',
-  mix:{ chatter:1, jazz:.35, warp:.5, dirt:.3, crackle:.3 },
-  cue:[ { at:.08, fx:'roar' } ],
+{ id:'all-noise', label:'I / EVERYONE', act:1, h:250, chaos:1, smoke:.9, rain:1, look:'room', room:'noise',
+  when:s=>s.forks.friend==='say',
+  mix:{ classroom:1, drum:.7, dirt:.25 },
+  cue:[ { at:.06, fx:'multiply' } ],
   beats:[
-    { at:.06, k:'slam', t:'It lands.' },
-    { at:.20, t:'The whole room roars.' },
-    { at:.38, t:'For eleven seconds you’re the most important person here.' },
-    { at:.60, t:'Then the laugh needs feeding again.' },
-    { at:.76, k:'slam', t:'And again.' }
+    { at:.06, k:'slam', t:'Now let everyone do what you did.' },
+    { at:.26, t:'Twenty-eight side conversations.' },
+    { at:.44, t:'Nobody hears what the something was.' },
+    { at:.62, k:'slam', t:'Nobody even knows they missed it.' }
   ]},
 
-{ id:'stage', label:'II / THE LIGHT ON YOU', act:2, h:300, chaos:.6, smoke:.6, rain:.1, look:'neon', art:'degas-star.jpg',
-  credit:'Edgar Degas, <i>The Star</i> (<i>L’Étoile</i>), c. 1876–78',
-  when:s=>s.forks.stage==='stage',
-  mix:{ chatter:.08, heart:.8, jazz:.12, jazzCut:500, crackle:.3 },
+{ id:'all-quiet', label:'I / EVERYONE', act:1, h:250, chaos:.45, look:'room', room:'split',
+  when:s=>s.forks.friend==='hold',
+  mix:{ classroom:.25, classroomCut:1200, pencil:.25, clock:.3 },
+  cue:[ { at:.06, fx:'multiply' } ],
   beats:[
-    { at:.06, t:'The spotlight is hotter than it looks.' },
-    { at:.22, t:'Your hands have nothing to do.' },
-    { at:.38, t:'You start anyway. Badly.' },
-    { at:.52, k:'slam', t:'Then less badly.' },
-    { at:.70, t:'The room goes quiet. Not bored quiet.' },
-    { at:.82, k:'slam', t:'Listening quiet.' }
+    { at:.06, k:'slam', t:'Now let everyone do what you did.' },
+    { at:.26, t:'Twenty-eight people sitting on a joke.' },
+    { at:.44, t:'It’s weirdly quiet.' },
+    { at:.62, k:'slam', t:'The something starts.' }
   ]},
 
-{ id:'bandback', label:'II / THE BAND COMES BACK', act:2, h:170, chaos:.8, smoke:1, rain:.7, look:'neon',
-  signs:['ONE MORE'],
-  mix:{ jazz:.85, chatter:.65, crackle:.3, warp:.45, dirt:.18 },
+/* ================================================================ II — THE WALL */
+{ id:'battle', label:'II / THE YARD', act:2, h:280, chaos:.85, smoke:.8, rain:.7, look:'frame', art:'vangogh-prisoners.jpg',
+  credit:'Vincent van Gogh, <i>Prisoners Exercising</i> (after Doré), 1890',
+  when:s=>s.forks.friend==='say',
+  mix:{ classroom:.7, drum:.4, heart:.5, clock:.35, clockRate:.85, dirt:.2 },
   beats:[
-    { at:.08, t:'The band comes back. The night goes on either way.' },
-    { at:.34, t:'Nobody in here is keeping score.' },
-    { at:.62, k:'whisper', t:'(the room is)' }
+    { at:.06, t:'The teacher raises their voice. Somebody laughs at that too.' },
+    { at:.24, t:'Now it’s a battle, and the lesson is whoever’s louder.' },
+    { at:.42, t:'Worksheets come out. Seats get moved. The three who were listening stop bothering.' },
+    { at:.58, k:'slam', t:'Round and round the yard.' },
+    { at:.76, t:'The thing from Sunday goes back in the drawer.' }
   ]},
 
-{ id:'fork-napkin', label:'II / THE NAPKIN', act:2, h:200, chaos:.85, smoke:.9, rain:.7, look:'neon', art:'munch-karl-johan.jpg',
-  credit:'Edvard Munch, <i>Evening on Karl Johan</i>, 1892',
-  mix:{ jazz:.6, chatter:.5, crackle:.3, warp:.4, dirt:.1 },
-  cue:[ { at:.20, fx:'buzz' }, { at:.28, fx:'buzz' }, { at:.36, fx:'buzz' } ],
-  beats:[
-    { at:.04, t:'At the end of the bar, an old man has been drawing on the same napkin all night.' },
-    { at:.20, k:'sign', t:'bzzt' },
-    { at:.28, k:'sign', t:'bzzt' },
-    { at:.36, k:'sign', t:'bzzt' }
-  ],
-  gate:{ fork:'napkin', at:.44, timer:13, timeout:'phone',
-    timeoutToast:'You didn’t choose. The buzzing did.',
-    options:[
-      { id:'phone',  wire:'neon', sign:'FOR YOU', label:'Answer it', sub:'One message. Somebody just said your name.', toast:'The room will remember that.' },
-      { id:'napkin', wire:'lamp', label:'Lean over his shoulder', sub:'Nobody has ever asked him what it is.', toast:'The bulb will remember that.' }
-    ]}},
-
-{ id:'phone', label:'II / FOR YOU', act:2, h:280, chaos:.95, smoke:.8, rain:1, look:'neon', art:'degas-absinthe.jpg',
-  credit:'Edgar Degas, <i>L’Absinthe</i>, 1875–76',
-  when:s=>s.forks.napkin==='phone',
-  mix:{ chatter:.35, chatterCut:900, jazz:.3, jazzCut:900, drone:.3, warp:.6, crackle:.3 },
-  beats:[
-    { at:.06, t:'One becomes forty.' },
-    { at:.22, t:'Everyone’s in there. Everyone’s typing.' },
-    { at:.42, t:'When you look up, his stool is empty.' },
-    { at:.56, t:'The napkin’s gone.' },
-    { at:.74, k:'slam', t:'You laughed at nine things. You can’t name one.' }
-  ]},
-
-{ id:'napkin', label:'II / THE WING', act:2, h:300, chaos:.55, smoke:.6, rain:.15, look:'neon', art:'leonardo-flying-machine.jpg',
-  credit:'Leonardo da Vinci, design for a flying machine, c. 1485–90',
-  when:s=>s.forks.napkin==='napkin',
-  mix:{ chatter:.3, chatterCut:1400, jazz:.35, jazzCut:1600, crackle:.25 },
-  beats:[
-    { at:.06, k:'slam', t:'It’s a wing.' },
-    { at:.20, t:'It doesn’t work.' },
-    { at:.34, t:'He’s been getting it wrong for forty years and looks delighted about it.' },
-    { at:.56, t:'He slides the pencil over.' },
-    { at:.72, k:'quote', t:'“What would you change?”' }
-  ]},
-
-{ id:'overload', label:'II / OVERLOAD', act:2, h:380, chaos:1, smoke:1, rain:1, look:'overload', art:'ensor-skeletons-herring.jpg',
-  credit:'James Ensor, <i>Skeletons Fighting over a Pickled Herring</i>, 1891',
-  mix:{ jazz:1, chatter:1, crackle:.5, warp:.9, dirt:.55, hum:.3 },
-  cue:[ { at:.20, fx:'salon' }, { at:.36, fx:'salon' }, { at:.74, fx:'blowout' } ],
-  beats:[
-    { at:.06, t:'Somebody turns it up.' },
-    { at:.20, k:'slam', t:'Somebody turns it up again.' },
-    { at:.36, t:s=>s.lamp>=2?'Even the corner you found is shaking. Everyone buzzing at once.':'Every body in here buzzing at once, and nowhere to put it.' },
-    { at:.56, k:'slam', t:'The bulb over the bar goes white —' },
-    { at:.86, k:'whisper', t:'ringing' }
-  ]},
-
-/* ---------------------------------------------------------------- ACT III — order */
-{ id:'dark', label:'III / DARK', act:3, h:250, chaos:.28, look:'dark',
-  mix:{ tinnitus:.6, room:.35 },
-  cue:[ { at:.34, fx:'breath' }, { at:.72, fx:'match' } ],
-  beats:[
-    { at:.10, t:'The silence is louder than the band was.' },
-    { at:.34, t:'Somebody near you is breathing.' },
-    { at:.52, t:'Somebody else is laughing, quietly, at nothing.' },
-    { at:.72, k:'slam', t:'Somebody strikes a match.' },
-    { at:.86, t:'Somebody else finds the lamp.' }
-  ]},
-
-{ id:'lamp', label:'III / LAMPLIGHT', act:3, h:320, chaos:.28, look:'lamp', art:'wright-orrery.jpg', lampAt:[.5,.55],
+{ id:'opened', label:'II / THE SOMETHING', act:2, h:280, chaos:.28, look:'lamp', art:'wright-orrery.jpg', lampAt:[.5,.55],
   credit:'Joseph Wright of Derby, <i>A Philosopher Lecturing on the Orrery</i>, c. 1766',
-  mix:{ tinnitus:.05, room:.4, clock:.25, clockRate:1 },
-  cue:[ { at:.02, fx:'lampOn' } ],
+  when:s=>s.forks.friend==='hold',
+  mix:{ classroom:.2, classroomCut:1500, clock:.2 },
   beats:[
-    { at:.10, t:'In lamplight the room is smaller than it sounded.' },
-    { at:.26, t:'Full of faces you thought you knew.' },
-    { at:.44, t:s=>s.forks.napkin==='napkin'?'The old man with the pencil is explaining how the planets move.':'Someone is explaining how the planets move. You’ve seen him before. End of the bar. The napkin.' },
-    { at:.60, t:'Nobody asked him to.' },
-    { at:.74, k:'slam', t:'Everyone’s leaning in anyway.' }
+    { at:.08, t:'The something is a question nobody can answer.' },
+    { at:.26, t:'Two people start arguing about it. Nobody stops them.' },
+    { at:.44, t:'The teacher is leaning on the desk, listening.' },
+    { at:.64, k:'slam', t:'It’s actually a bit good.' }
   ]},
 
-{ id:'fork-lamp', label:'III / THE WHISPER', act:3, h:180, chaos:.28, look:'lamp', art:'wright-orrery.jpg', lampAt:[.5,.55],
-  mix:{ room:.4, clock:.3 },
+{ id:'dream', label:'II / TUESDAYS', act:2, h:300, chaos:.65, smoke:.5, rain:.3, look:'tube', art:'piranesi-carceri.jpg',
+  credit:'Giovanni Battista Piranesi, <i>Carceri d’invenzione</i> (Imaginary Prisons), 1761',
+  mix:{ drone:.5, heart:.4, clock:.45, clockRate:.8, classroom:.25, classroomCut:500 },
   beats:[
-    { at:.04, t:'The kid beside you leans over.' },
-    { at:.18, k:'quote', t:'“Blow it out. It was better in the dark.”' }
+    { at:.06, t:'Everyone in here wants something.' },
+    { at:.22, t:'A place somewhere. A future with your name on it.' },
+    { at:.40, k:'slam', t:'Dreams are cheap.' },
+    { at:.72, k:'slam', t:'You don’t get the dream. You get your Tuesdays.' }
+  ]},
+
+{ id:'fork-offer', label:'II / THE OFFER', act:2, h:200, chaos:.7, look:'room', room:'waiting', keep:2,
+  mix:{ classroom:.3, classroomCut:800, heart:.55 },
+  beats:[
+    { at:.04, k:'quote', t:s=>(s.forks.friend==='say'?'“Okay. Different idea. ':'“')+'Next week — anyone who wants to — bring something. A skill. A sport. An argument. The lesson’s yours.”' },
+    { at:.20, t:'Twenty-eight people look around.' },
+    { at:.30, k:'slam', t:'Waiting for someone.' }
   ],
-  gate:{ fork:'lamp', at:.36, timer:15, timeout:'blow',
-    timeoutToast:'You didn’t choose. Somebody else’s breath did.',
+  gate:{ fork:'offer', at:.42, timer:13, timeout:'look',
+    timeoutToast:'You didn’t choose. The room waited, and so did you.',
     options:[
-      { id:'blow',  wire:'neon', sign:'LIGHTS OUT', label:'Blow it out', sub:'Back to the noise. Nobody could see you in it.', toast:'The room will remember that.' },
-      { id:'chair', wire:'lamp', label:'Pull up a chair', sub:'Closer. You might have to say something.', toast:'The bulb will remember that.' }
+      { id:'look', wire:'brick', brick:'WAITING FOR SOMEONE ELSE', label:'Look around like everyone else', sub:'Someone will. Someone always does.', toast:VOICE.brick },
+      { id:'hand', wire:'open', label:'Put your hand up. Halfway.', sub:'You don’t even know what you’d bring yet.', toast:VOICE.open }
     ]}},
 
-{ id:'blow', label:'III / THE SLEEP', act:3, h:270, chaos:.7, smoke:.3, look:'dark-art', art:'goya-sleep-reason.jpg',
-  credit:'Francisco Goya, <i>The Sleep of Reason Produces Monsters</i>, 1799',
-  when:s=>s.forks.lamp==='blow',
-  mix:{ drone:.45, room:.2, chatter:.12, chatterCut:400 },
+{ id:'wall', label:'II / THE WALL', act:2, h:300, chaos:.85, smoke:.4, look:'wall', keep:2,
+  mix:{ classroom:.5, drum:.35, heart:.6 },
+  cue:[ { at:.06, fx:'wallShow' }, { at:.62, fx:'wake' } ],
   beats:[
-    { at:.06, k:'slam', t:'Dark again. Nobody can see you.' },
-    { at:.26, t:'Things with wings come out when nobody’s looking.' },
-    { at:.46, t:'They don’t bite.' },
-    { at:.60, t:'They just stay.' },
-    { at:.76, t:'In the morning you won’t remember them. You’ll just be tired.' }
-  ]},
-
-{ id:'chair', label:'III / THE EXPERIMENT', act:3, h:300, chaos:.2, look:'lamp', art:'wright-air-pump.jpg', lampAt:[.5,.45],
-  credit:'Joseph Wright of Derby, <i>An Experiment on a Bird in the Air Pump</i>, 1768',
-  when:s=>s.forks.lamp==='chair',
-  mix:{ room:.4, clock:.2, clockRate:1 },
-  beats:[
-    { at:.06, t:'Up close it isn’t a lecture. It’s an experiment.' },
-    { at:.22, t:'Someone gets it wrong.' },
-    { at:.34, t:'Someone gets it less wrong.' },
-    { at:.52, t:'Someone asks the question you had and didn’t say.' },
-    { at:.70, k:'slam', t:'It was a good question.' }
-  ]},
-
-{ id:'stairs', label:'III / THE STAIRS', act:3, h:280, chaos:.12, look:'window-light', art:'rembrandt-philosopher.jpg',
-  credit:'Rembrandt (attributed), <i>Philosopher in Meditation</i>, 1632',
-  mix:{ room:.3, clock:.12, clockRate:1, birds:.1, jazz:.18 },
-  beats:[
-    { at:.08, t:s=>s.forks.lamp==='blow'?'Somebody lit it again. Nobody made a thing of it.':'The lamp is still going.' },
-    { at:.26, k:'slam', t:'Same stairs.' },
-    { at:.44, t:'Up. Down. Same as before.' },
-    { at:.62, t:'Only now you can see which way you’re facing.' }
-  ]},
-
-{ id:'tally', label:'III / THE WIRING', act:3, h:280, chaos:.08, look:'tally',
-  mix:{ room:.25, birds:.12, jazz:.22 },
-  cue:[ { at:.06, fx:'cageShow' } ],
-  beats:[
-    { at:.06, k:'slam', t:'Look up.' },
-    { at:.22, t:'Every bar in here was wired by somebody.' },
-    { at:.38, t:s=>{
-        const n=s.neon.length;
-        if(!n) return 'None of them have your wiring on them. They’re still here.';
-        let line=LIST(s.neon)+(n===1?' has your wiring on it.':' have your wiring on them.')+' At the time it just felt like the night.';
-        if(s.timeouts&&s.timeouts===n) line+=' You never picked '+(n===1?'it':'any of them')+'. Your hands wired '+(n===1?'it':'them')+' anyway.';
-        else if(s.timeouts) line+=' '+(s.timeouts===1?'One of them':'Some of them')+' you never picked. Your hands wired '+(s.timeouts===1?'it':'them')+' anyway.';
-        return line;
+    { at:.06, k:'slam', t:'Look at the wall.' },
+    { at:.20, t:'Every brick is something somebody did. Or didn’t.' },
+    { at:.36, t:s=>{
+        const n=s.bricks.length;
+        if(!n) return 'None of these have your name on them. You still sat behind it.';
+        return s.bricks.map(b=>'“'+b+'”').join(' and ')+(n===1?' — that one’s yours.':' — those are yours.')+' It didn’t feel like building anything at the time.';
       }},
-    { at:.56, t:'The neon hums.' },
-    { at:.66, t:'The lamp doesn’t.' },
-    { at:.80, k:'slam', t:'Same current.' }
+    { at:.50, t:'Nobody built it on purpose. Nobody had to.' },
+    { at:.62, k:'slam', t:'Check whose hands.' }
   ]},
 
-/* ---------------------------------------------------------------- ACT IV — light */
-{ id:'window', label:'IV / THE OPEN DOOR', act:4, h:260, chaos:.04, look:'window', art:'friedrich-woman-window.jpg',
-  credit:'Caspar David Friedrich, <i>Woman at a Window</i>, 1822',
-  mix:{ birds:.45, room:.15, jazz:.28 },
+{ id:'front2', label:'II / THE QUESTION', act:2, h:240, chaos:.28, look:'room', room:s=>s.bricks.length>1?'noise':s.bricks.length?'split':'waiting',
+  mix:{ room:.3, clock:.3 },
   beats:[
-    { at:.06, t:'Every door upstairs was propped open. So is this one.' },
-    { at:.22, t:'Morning is coming in around the edges.' },
-    { at:.38, t:'Nobody’s stopping you.' },
-    { at:.50, t:'Nobody’s pushing you, either.' }
-  ],
-  gate:{ fork:'final', at:.60,
-    options:[
-      { id:'stay', wire:'none', label:'One more song', sub:'The band is still good. It’s still dark enough.', toast:'The door stays open.' },
-      { id:'walk', wire:'none', label:'Walk out into it', sub:'No map. Just morning.', toast:'' }
-    ]}},
-
-{ id:'loop', label:'IV / ONE MORE SONG', act:4, h:240, chaos:.4, smoke:.5, rain:.2, look:'neon', art:'lautrec-moulin-rouge.jpg',
-  credit:'Henri de Toulouse-Lautrec, <i>At the Moulin Rouge</i>, 1892–95',
-  when:s=>s.forks.final==='stay',
-  signs:['ONE MORE'],
-  mix:{ jazz:.6, chatter:.35, crackle:.5, warp:.2, skip:1 },
-  beats:[
-    { at:.06, t:'The band plays it again.' },
-    { at:.24, t:'It’s a good song. It was a good song the last four times.' },
-    { at:.46, t:'Nobody’s stopping you.' },
-    { at:.58, t:'The door stays open. It doesn’t close on anyone.' }
-  ],
-  gate:{ fork:'door', at:.70,
-    options:[
-      { id:'again', wire:'none', label:'One more', sub:'Just one.', toast:'' },
-      { id:'walk',  wire:'none', label:'Walk out', sub:'Whenever you’re ready. It was always there.', toast:'' }
-    ]}},
-
-{ id:'packup', label:'IV / LAST ORDERS', act:4, h:200, chaos:.2, look:'dark',
-  when:s=>s.forks.door==='again',
-  mix:{ birds:.35, room:.2, crackle:.3 },
-  beats:[
-    { at:.08, t:'The band packs up.' },
-    { at:.30, t:'Somebody opens the shutters.' },
-    { at:.54, k:'slam', t:'Morning came in without asking.' }
+    { at:.04, k:'whisper', t:'from the front of the room' },
+    { at:.16, t:'The question is always the same one.' },
+    { at:.36, k:'slam', t:'When do I stop pushing for your future—' },
+    { at:.60, k:'slam', t:'—and when do you start?' }
   ]},
 
-{ id:'morning', label:'IV / MORNING', act:4, h:340, chaos:0, keep:9, look:'dawn', art:'monet-sunrise.jpg',
-  credit:'Claude Monet, <i>Impression, Sunrise</i>, 1872',
-  when:s=>s.forks.final==='walk'||!!s.forks.door,
-  mix:{ jazz:.55, birds:.45 },
-  cue:[ { at:.02, fx:'bulbOff' }, { at:.93, fx:'bellHigh' } ],
+/* ================================================================ III — THE DOOR */
+{ id:'door', label:'III / THE DOOR', act:3, h:280, chaos:.12, look:'clean', art:'hammershoi-open-doors.jpg',
+  credit:'Vilhelm Hammershøi, <i>Open Doors</i> (Strandgade 30), 1905',
+  mix:{ room:.3, clock:.15 },
   beats:[
-    { at:.06, k:'slam', t:'Morning.' },
-    { at:.18, t:s=>s.forks.final==='stay'?'Period 1. You’re a little late. Nobody says anything.':'Period 1.' },
-    { at:.30, t:'Same room. Same people.' },
-    { at:.42, k:'slam', t:'Same electricity.' },
-    { at:.56, t:'The bell hasn’t gone yet.' },
-    { at:.68, k:'whisper', t:s=>s.forks.napkin==='napkin'?'there’s a pencil in your pocket that isn’t yours':'' },
-    { at:.74, k:'whisper', t:s=>s.pw?'last night the word at the door was “'+s.pw+'”':'last night you didn’t need a word at the door' },
-    { at:.80, k:'whisper', t:'in daylight, nobody asks' }
+    { at:.08, t:'The door was never locked.' },
+    { at:.26, t:'Everyone was waiting for someone else to go first.' },
+    { at:.46, k:'slam', t:'Nobody is going to push you through it.' }
+  ]},
+
+{ id:'games', label:'III / LOOK AGAIN', act:3, h:320, chaos:.28, look:'clean', art:'bruegel-childrens-games.jpg',
+  credit:'Pieter Bruegel the Elder, <i>Children’s Games</i>, 1560',
+  mix:{ classroom:.3, classroomCut:2500, drum:.2 },
+  beats:[
+    { at:.06, t:'Look at the noise again.' },
+    { at:.20, t:'That one can hold a room.' },
+    { at:.32, t:'That one can’t sit still, because their body knows things the rest of us don’t.' },
+    { at:.48, t:'That one has been arguing with everyone since they were twelve. Imagine pointing it at something.' },
+    { at:.64, k:'slam', t:'It was never too much energy.' },
+    { at:.78, t:'It was energy with nowhere to go.' }
+  ]},
+
+{ id:'sower', label:'III / NOBODY CLAPS', act:3, h:300, chaos:.08, look:'clean', art:'vangogh-sower.jpg', artAlt:'millet-gleaners.jpg',
+  credit:'Vincent van Gogh, <i>The Sower</i>, 1888',
+  mix:{ room:.25, birds:.2 },
+  beats:[
+    { at:.06, k:'slam', t:'Nobody claps for this part.' },
+    { at:.22, t:'The reading nobody checks. The reps nobody sees.' },
+    { at:.38, t:'Doing it right when nobody’s watching isn’t a step towards the thing.' },
+    { at:.52, k:'slam', t:'It is the thing.' }
+  ]},
+
+{ id:'front3', label:'III / FROM THE FRONT', act:3, h:260, chaos:.04, look:'room', room:'teaching',
+  cue:[ { at:.05, fx:'peers' } ],
+  mix:{ room:.25, classroom:.12, classroomCut:3000, birds:.15 },
+  beats:[
+    { at:.04, k:'whisper', t:'from the front of the room, some other Tuesday' },
+    { at:.16, t:'Someone is explaining the angle of a seven-metre throw to people who didn’t know they cared.' },
+    { at:.36, t:'Someone asks a question the teacher can’t answer. Good.' },
+    { at:.54, k:'slam', t:'Twenty-eight people know more than one.' }
+  ]},
+
+/* ================================================================ IV — THE CALL */
+{ id:'fork-bring', label:'IV / YOURS', act:4, h:200, chaos:0, look:'light',
+  mix:{ room:.2, birds:.25 },
+  beats:[
+    { at:.04, t:'So.' },
+    { at:.14, k:'slam', t:'What would you bring?' }
   ],
-  end:true }
+  gate:{ fork:'bring', at:.30,
+    options:[
+      { id:'gym',    wire:'none', label:'Take us to the gym', sub:'Work out the angle of the shot. Physics you can feel.' },
+      { id:'teach',  wire:'none', label:'Teach the thing nobody else knows', sub:'The hobby, the language, the game, the craft.' },
+      { id:'argue',  wire:'none', label:'Start the argument', sub:'Pick a fight with an idea. Win it with reasons.' },
+      { id:'ask',    wire:'none', label:'Ask the question nobody’s asking', sub:'From the quiet seat. You don’t have to be loud to start something.' }
+    ]}},
+
+{ id:'athens', label:'IV / THE SAME CLASS', act:4, h:300, chaos:0, look:'clean', art:'raphael-athens.jpg',
+  credit:'Raphael, <i>The School of Athens</i>, 1509–11',
+  mix:{ classroom:.18, classroomCut:3500, birds:.2 },
+  beats:[
+    { at:.06, t:s=>({
+        gym:'Ball, goal, protractor. The whole room follows you down the corridor.',
+        teach:'Twenty-seven people learning something from you, for once.',
+        argue:'Two sides, both loud, both with reasons. Nobody loses the lesson.',
+        ask:'One question from the back row. The whole room turns round.'
+      })[s.forks.bring]||'' },
+    { at:.26, k:'slam', t:'This is the same class.' },
+    { at:.42, t:'Same people. Same noise.' },
+    { at:.58, k:'slam', t:'Pointed somewhere.' }
+  ]},
+
+{ id:'takeaway', label:'IV / THE CLASS OF ROWDIES', act:4, h:240, chaos:0, look:'light', room:'teaching',
+  mix:{ room:.3, birds:.18, classroom:.08, classroomCut:2500 },
+  beats:[
+    { at:.06, k:'slam', t:'You are the class of rowdies.' },
+    { at:.30, k:'slam', t:'You don’t have to be.' },
+    { at:.52, t:'You’ve got the energy.' },
+    { at:.64, k:'slam', t:'Let’s decide where it goes.' }
+  ]},
+
+{ id:'recruit', label:'IV / ENLIST', act:4, h:220, chaos:.15, look:'recruit', art:'leete-wants-you.jpg',
+  credit:'Alfred Leete, <i>Britons: Lord Kitchener Wants You</i>, 1914 recruitment poster',
+  mix:{ march:.7, crackle:.35 },
+  cue:[ { at:.02, fx:'reveille' } ],
+  beats:[
+    { at:.04, k:'whisper', t:'would you like to know more?' }
+  ],
+  gate:'enlist', end:true }
 ];
 
-/* The chatter that falls through the speakeasy like broken code. */
-window.CHATTER=['did you see','lol','wait wait','one more','who cares','nobody’s checking','shh','HAHA','later','tomorrow','bro','what time is it','doesn’t matter','again','look at this','skip','boring','5 more min','ok but','literally','no way','for you','again again','who even','same','dead','it’s fine','later later','LOUDER','did he just','say it again','who’s got','it’s not even','watch this','i swear','no because','i can’t'];
+/* The enlistment form. `private` answers are never printed on the card. */
+window.ENLIST=[
+  { id:'give',   q:'What could you give the group?',                       hint:'a skill, a sport, a story, a way of arguing…' },
+  { id:'get',    q:'What would you like to get from the group?',           hint:'what would make this hour worth it for you?' },
+  { id:'learn',  q:'Whose skill would you love to learn? (Or what skill?)', hint:'someone in this room can already do it' },
+  { id:'bucket', q:'Something on your bucket list that could be part of the course?', hint:'it probably has more to do with knowledge than you think' },
+  { id:'weekly', q:'One thing you’ll actually do every week.', hint:'this one doesn’t get printed. Don’t tell anyone. Just do it.', private:true }
+];
+
+/* Classroom chatter, falling like broken code. */
+window.CHATTER=['did you see','lol','wait wait','one more','who cares','shh','HAHA','later','bro','what time is it','does this even count','do we have to','can I go toilet','look at this','skip','boring','5 more min','ok but','literally','no way','again','who even','same','dead','it’s fine','LOUDER','no but actually','say it again','watch this','i swear','no because','i can’t','wait what','what page','are we doing anything','it’s literally period 5'];
