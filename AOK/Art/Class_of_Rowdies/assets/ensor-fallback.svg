@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<defs><filter id="grain"><feTurbulence baseFrequency=".7" numOctaves="3" seed="4"/><feComponentTransfer><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer></filter></defs>
+<rect width="1200" height="800" fill="#251b17"/>
+<g transform="translate(70 110)" stroke="#18100d" stroke-width="10">
+  <g fill="#d6d0c5"><ellipse cx="120" cy="210" rx="92" ry="120"/><ellipse cx="330" cy="160" rx="90" ry="115"/><ellipse cx="545" cy="235" rx="92" ry="120"/><ellipse cx="765" cy="155" rx="90" ry="115"/><ellipse cx="975" cy="235" rx="92" ry="120"/></g>
+  <g fill="#111"><ellipse cx="90" cy="195" rx="16" ry="24"/><ellipse cx="152" cy="195" rx="16" ry="24"/><path d="M80 255 Q120 290 165 252" fill="none"/>
+  <ellipse cx="300" cy="145" rx="16" ry="24"/><ellipse cx="360" cy="145" rx="16" ry="24"/><path d="M295 215 Q330 175 370 215" fill="none"/>
+  <ellipse cx="515" cy="215" rx="16" ry="24"/><ellipse cx="575" cy="215" rx="16" ry="24"/><path d="M510 285 Q545 320 590 280" fill="none"/>
+  <ellipse cx="735" cy="140" rx="16" ry="24"/><ellipse cx="795" cy="140" rx="16" ry="24"/><path d="M730 205 Q765 165 805 205" fill="none"/>
+  <ellipse cx="945" cy="215" rx="16" ry="24"/><ellipse cx="1005" cy="215" rx="16" ry="24"/><path d="M940 285 Q980 325 1020 280" fill="none"/></g>
+</g>
+<g font-family="Arial" font-weight="900" fill="#e7ff4d"><text x="65" y="690" font-size="72" transform="rotate(-4 65 690)">WHOSE FACE</text><text x="600" y="748" font-size="72" transform="rotate(3 600 748)">ARE YOU WEARING?</text></g>
+<rect width="1200" height="800" filter="url(#grain)"/>
+</svg>

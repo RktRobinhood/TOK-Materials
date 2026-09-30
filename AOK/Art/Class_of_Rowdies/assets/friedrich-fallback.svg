@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#b8c4c6"/><stop offset=".6" stop-color="#d8d5ca"/><stop offset="1" stop-color="#8f8b80"/></linearGradient><filter id="noise"><feTurbulence baseFrequency=".5" numOctaves="3" seed="9"/><feComponentTransfer><feFuncA type="table" tableValues="0 .06"/></feComponentTransfer></filter></defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<g fill="#9aa4a2" opacity=".72"><path d="M0 560 C220 470 360 470 560 565 C740 645 890 585 1020 520 C1210 430 1400 470 1600 590 V900 H0Z"/><path d="M0 660 C180 610 390 650 560 700 C790 770 970 680 1160 640 C1350 600 1490 650 1600 710 V900 H0Z" fill="#d8d5ca"/></g>
+<path d="M410 900 L610 550 L805 900Z" fill="#343330"/><path d="M535 900 L690 680 L850 900Z" fill="#24231f"/>
+<g transform="translate(650 460)" fill="#171716"><circle cx="0" cy="0" r="30"/><path d="M-30 25 h60 l26 170 h-112Z"/><path d="M-18 190 l-45 115 h40 l34-98 M20 190 l60 105 h-42 l-50-90"/></g>
+<text x="1020" y="170" fill="#262626" font-family="Arial" font-size="72" font-weight="900" transform="rotate(2 1020 170)">NO SCRIPT.</text>
+<rect width="1600" height="900" filter="url(#noise)"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+<defs><filter id="g"><feTurbulence baseFrequency=".8" numOctaves="2" seed="5"/><feComponentTransfer><feFuncA type="table" tableValues="0 .09"/></feComponentTransfer></filter></defs>
+<rect width="900" height="1200" fill="#0d1718"/>
+<g stroke="#708a83" stroke-width="18" opacity=".65">
+  <path d="M0 50 L900 170 M0 150 L900 250 M0 250 L900 350 M0 350 L900 450 M0 450 L900 550"/>
+  <path d="M40 0 L60 630 M180 0 L195 630 M330 0 L345 630 M520 0 L535 630 M700 0 L720 630 M850 0 L865 630" opacity=".38"/>
+</g>
+<path d="M120 910 C160 730 340 650 520 690 C700 730 820 870 760 1010 C700 1130 510 1140 330 1090 C160 1040 80 990 120 910Z" fill="none" stroke="#d4a94d" stroke-width="5" opacity=".45"/>
+<g fill="#a7b4a5" opacity=".92">
+  <g transform="translate(145 860)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+  <g transform="translate(230 790)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+  <g transform="translate(335 748)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+  <g transform="translate(455 752)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+  <g transform="translate(570 798)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+  <g transform="translate(650 875)"><circle r="18"/><rect x="-12" y="16" width="24" height="70" rx="10"/></g>
+</g>
+<text x="70" y="690" font-family="Arial" font-size="95" font-weight="900" fill="#e7ff4d" transform="rotate(-6 70 690)">MOVE.</text>
+<text x="430" y="1060" font-family="Arial" font-size="75" font-weight="900" fill="#e7ff4d" transform="rotate(4 430 1060)">REPEAT.</text>
+<rect width="900" height="1200" filter="url(#g)"/>
+</svg>

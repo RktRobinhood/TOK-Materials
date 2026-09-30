@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<defs>
+ <linearGradient id="cave" x1="0" x2="1"><stop stop-color="#050505"/><stop offset=".68" stop-color="#17130f"/><stop offset="1" stop-color="#d8c98e"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#fffbd2"/><stop offset=".45" stop-color="#e7ff4d" stop-opacity=".8"/><stop offset="1" stop-color="#e7ff4d" stop-opacity="0"/></radialGradient>
+ <filter id="grain"><feTurbulence baseFrequency=".65" numOctaves="3" seed="3"/><feComponentTransfer><feFuncA type="table" tableValues="0 .11"/></feComponentTransfer></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#cave)"/>
+<path d="M0 0 H900 C760 110 760 220 825 310 C900 415 865 520 760 610 C680 675 650 780 650 900 H0Z" fill="#050505"/>
+<!-- projection wall -->
+<path d="M410 140 V765" stroke="#777" stroke-width="8" opacity=".5"/>
+<g fill="#c6c1b4" opacity=".28"><circle cx="355" cy="310" r="44"/><path d="M305 380 q50 -80 100 0 v140 h-100Z"/><path d="M335 260 l-100 -80 M375 260 l80 -110" stroke="#c6c1b4" stroke-width="24"/></g>
+<!-- prisoners -->
+<g fill="#b9b4aa" stroke="#b9b4aa" stroke-width="9">
+ <circle cx="180" cy="650" r="34"/><path d="M180 686 v105 M132 730 h96"/>
+ <circle cx="300" cy="650" r="34"/><path d="M300 686 v105 M252 730 h96"/>
+</g>
+<g stroke="#7e765f" stroke-width="8" fill="none" opacity=".75"><path d="M145 745 C95 770 98 820 80 860"/><path d="M265 745 C220 780 230 820 205 865"/></g>
+<!-- turning prisoner -->
+<g transform="translate(500 590) rotate(-16)" fill="#e7ff4d" stroke="#e7ff4d" stroke-width="10"><circle cx="0" cy="0" r="36"/><path d="M0 40 v130 M-50 95 h100"/></g>
+<path d="M540 585 C670 520 720 390 805 300" fill="none" stroke="#e7ff4d" stroke-width="8" stroke-dasharray="18 14"/>
+<polygon points="796,286 838,290 814,326" fill="#e7ff4d"/>
+<circle cx="1080" cy="120" r="260" fill="url(#light)"/>
+<g font-family="Arial" font-weight="900" letter-spacing="3">
+ <text x="60" y="90" fill="#777" font-size="28">01 / CHAIN</text>
+ <text x="245" y="205" fill="#777" font-size="28">02 / SHADOW</text>
+ <text x="515" y="520" fill="#e7ff4d" font-size="34" transform="rotate(-10 515 520)">03 / TURN</text>
+ <text x="840" y="780" fill="#f3eccf" font-size="34">04 / ASCENT</text>
+</g>
+<text x="870" y="125" font-family="Georgia" font-style="italic" font-size="48" fill="#19160e">the light hurts first</text>
+<rect width="1200" height="900" filter="url(#grain)"/>
+</svg>

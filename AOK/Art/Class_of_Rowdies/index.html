@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>The Door Is Open - a branching experiment in agency</title>
+<style>
+:root{
+  --ink:#0a0a0b;
+  --paper:#f4f0e6;
+  --bone:#e8e1d3;
+  --acid:#e7ff4d;
+  --rust:#ce5949;
+  --gold:#d4a94d;
+  --blue:#8eb2be;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  --chaos:1;
+  --scan:.17;
+  --tear:.58;
+  --ghost:.72;
+}
+*{box-sizing:border-box}
+html{background:#050506;scroll-behavior:smooth}
+body{margin:0;background:#050506;color:#f2eee7;font-family:var(--sans);overflow-x:hidden}
+body.film-locked{overflow:hidden}
+button,input,textarea{font:inherit}
+a{color:inherit}
+::selection{background:var(--acid);color:#111}
+[hidden]{display:none!important}
+
+/* global atmosphere */
+#progress{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,#6c1919,var(--rust),var(--acid),#fff);z-index:300;transition:width .08s linear}
+#scanlines{position:fixed;inset:0;z-index:250;pointer-events:none;opacity:var(--scan);background:repeating-linear-gradient(0deg,rgba(255,255,255,.055) 0 1px,transparent 1px 4px);mix-blend-mode:overlay}
+#tears{position:fixed;inset:0;z-index:251;pointer-events:none;opacity:var(--tear);overflow:hidden}
+.tear{position:absolute;left:-8vw;width:116vw;height:4px;background:#050505;box-shadow:0 1px rgba(255,255,255,.09);transform:translate3d(var(--x,0),var(--y,0),0) skewX(-14deg)}
+.tear.t1{top:22%;--x:0px;--y:0px}.tear.t2{top:51%;height:2px;background:var(--acid);opacity:.45}.tear.t3{top:76%;height:10px;opacity:.55}
+#grain{position:fixed;inset:0;width:100%;height:100%;z-index:249;pointer-events:none;opacity:.075;mix-blend-mode:screen}
+#chapter{position:fixed;right:18px;top:17px;z-index:270;font:10px/1.1 var(--mono);letter-spacing:.18em;text-transform:uppercase;writing-mode:vertical-rl;color:#fff;mix-blend-mode:difference;opacity:.62}
+#tools{position:fixed;left:14px;bottom:14px;z-index:280;display:flex;gap:8px}
+.tool{border:1px solid rgba(255,255,255,.26);background:rgba(5,5,6,.54);backdrop-filter:blur(8px);color:#fff;padding:9px 11px;font:9px var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.tool[aria-pressed="true"]{background:#fff;color:#111}
+#pathRail{position:fixed;left:15px;top:50%;transform:translateY(-50%);z-index:260;display:none;gap:7px;flex-direction:column;width:126px;pointer-events:none}
+#pathRail.on{display:flex}
+.path-chip{border-left:2px solid rgba(255,255,255,.24);padding:7px 8px;color:rgba(255,255,255,.55);font:9px/1.25 var(--mono);letter-spacing:.09em;text-transform:uppercase;mix-blend-mode:difference}
+.path-chip b{display:block;color:#fff;font-size:10px;margin-top:3px;letter-spacing:.04em}
+.path-chip.set{border-left-color:var(--acid)}
+
+/* shared */
+section{position:relative}
+.wrap{width:min(1220px,88vw);margin:auto}
+.eyebrow{font:10px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--acid);margin-bottom:18px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.055em;margin:0}
+h1{font-size:clamp(58px,9.2vw,150px);line-height:.78}
+h2{font-size:clamp(50px,7.4vw,116px);line-height:.86}
+h3{font-size:clamp(34px,4.8vw,72px);line-height:.94}
+p{font-family:var(--serif)}
+.lead{font:clamp(21px,2.3vw,34px)/1.34 var(--serif);max-width:31ch}
+.small{font:12px/1.55 var(--mono);letter-spacing:.025em;color:#a8a49c}
+.reveal{opacity:0;transform:translateY(42px);transition:opacity .7s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.kinetic{will-change:transform,filter;transform-origin:left center}
+.slash{font-family:var(--sans);font-style:italic;color:var(--acid)}
+.spray{position:absolute;z-index:3;font:900 clamp(28px,6vw,110px)/.78 var(--sans);letter-spacing:-.07em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);pointer-events:none;white-space:nowrap}
+.art-credit{position:absolute;left:22px;bottom:18px;z-index:7;font:9px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.66);max-width:70vw;text-shadow:0 2px 8px #000}
+
+/* film gate */
+.film-gate{height:100vh;background:#030304;display:grid;place-items:center;overflow:hidden}
+.film-gate:before{content:"WATCH FIRST";position:absolute;left:-.06em;bottom:-.18em;font:900 22vw/.7 var(--sans);letter-spacing:-.08em;color:#0b0b0c;white-space:nowrap}
+.film-shell{position:relative;width:min(1180px,92vw);z-index:5;display:grid;grid-template-columns:.73fr 1.27fr;gap:5vw;align-items:center}
+.film-copy{position:relative;z-index:3;transform:rotate(-2.5deg)}
+.film-copy .stamp{display:inline-block;border:1px solid #6f2220;color:#d88a7d;padding:6px 9px;font:9px var(--mono);letter-spacing:.15em;text-transform:uppercase;transform:rotate(4deg);margin-bottom:28px}
+.film-copy h1{max-width:7ch;text-shadow:-3px 0 rgba(206,89,73,.35),3px 0 rgba(231,255,77,.15)}
+.film-copy p{font:clamp(17px,1.55vw,23px)/1.4 var(--serif);color:#aaa49d;max-width:30ch;margin:28px 0 0}
+.film-frame{position:relative;aspect-ratio:16/9;background:#090909;border:1px solid #2d2d2d;box-shadow:0 28px 80px rgba(0,0,0,.55);transform:rotate(.55deg);overflow:hidden}
+#ytPlayer,.yt-fallback{position:absolute;inset:0;width:100%;height:100%}
+#ytPlayer iframe{width:100%;height:100%;filter:grayscale(.9) sepia(.16) contrast(1.22) brightness(.72);transform:scale(1.018)}
+.yt-fallback{display:grid;place-items:center;padding:7%;text-align:center;font:13px/1.5 var(--mono);color:#9d9891;background:#0a0a0b}
+.film-overlay{position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(circle at 50% 45%,transparent 0 48%,rgba(0,0,0,.66) 100%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 8px);mix-blend-mode:screen}
+.film-overlay:after{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(0deg,transparent 0 16px,rgba(255,255,255,.035) 17px,transparent 18px);animation:filmJolt .38s steps(2,end) infinite;opacity:.38}
+@keyframes filmJolt{0%{transform:translate(0,0)}33%{transform:translate(2px,-1px)}66%{transform:translate(-1px,2px)}100%{transform:translate(0,0)}}
+.film-control{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(0,0,0,.18)}
+.film-control.gone{display:none}
+#beginFilm{border:1px solid #ddd;background:rgba(0,0,0,.7);color:#fff;padding:16px 22px;font:700 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:10px 10px 0 rgba(206,89,73,.18)}
+.watch-ui{position:absolute;left:0;right:0;bottom:-76px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.watch-track{height:4px;background:#1d1d1d;overflow:hidden}.watch-fill{height:100%;width:0;background:var(--acid);transition:width .2s linear}
+.watch-meta{display:flex;justify-content:space-between;margin-top:8px;font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#827e78}
+#bypass{border:0;border-bottom:1px solid #555;background:none;color:#777;padding:8px 0;font:9px var(--mono);letter-spacing:.11em;text-transform:uppercase;cursor:not-allowed;white-space:nowrap}
+#bypass.ready{color:#ddd;border-bottom-color:#aaa;cursor:pointer}
+#journeyBtn{display:none;position:absolute;right:0;bottom:-138px;border:1px solid var(--acid);background:var(--acid);color:#0b0b0c;padding:14px 20px;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+#journeyBtn.on{display:block}
+.film-note{position:absolute;left:0;bottom:-135px;font:9px/1.45 var(--mono);color:#67635e;max-width:55ch}
+
+/* prologue */
+.prologue{min-height:128vh;background:#070708;display:grid;align-items:center;overflow:hidden}
+.prologue .wrap{padding:18vh 0;position:relative}
+.prologue h2{max-width:10ch}
+.prologue .quote{margin:8vh 0 0 auto;max-width:700px;border-left:1px solid #666;padding:10px 0 10px 30px;font:clamp(21px,2.5vw,36px)/1.35 var(--serif);color:#d7d1c8;transform:rotate(1.3deg)}
+.prologue .quote span{display:block;margin-top:16px;font:9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#777}
+.prologue .spray.one{right:-3vw;top:16vh;transform:rotate(9deg)}
+.prologue .spray.two{left:38vw;bottom:9vh;transform:rotate(-6deg);font-size:clamp(22px,4.2vw,74px)}
+
+/* choice gates */
+.fork{min-height:100vh;background:#0b0b0c;display:grid;place-items:center;padding:12vh 0;overflow:hidden}
+.fork.light{background:#cbc4b7;color:#111}
+.fork-card{width:min(1120px,90vw);position:relative}
+.fork-card h2{max-width:10ch}
+.fork-card .fork-lead{font:clamp(18px,1.8vw,28px)/1.4 var(--serif);max-width:44ch;margin:28px 0 48px;color:#c8c2b8}
+.fork.light .fork-lead{color:#433f3a}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.choice-btn{position:relative;text-align:left;min-height:210px;border:1px solid #474747;background:#111;color:#fff;padding:26px;cursor:pointer;overflow:hidden;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.choice-btn:before{content:attr(data-number);position:absolute;right:-.02em;bottom:-.2em;font:900 10rem/.8 var(--sans);color:#171717;z-index:0}
+.choice-btn>*{position:relative;z-index:2}.choice-btn b{display:block;font:700 12px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--acid);margin-bottom:18px}.choice-btn strong{display:block;font:400 clamp(29px,3vw,48px)/1 var(--serif);letter-spacing:-.04em;margin-bottom:14px}.choice-btn span{display:block;font:14px/1.45 var(--mono);color:#9b9690;max-width:40ch}
+.choice-btn:hover,.choice-btn:focus-visible{transform:translateY(-5px) rotate(-.4deg);border-color:var(--acid);outline:none}.choice-btn:nth-child(2):hover{transform:translateY(-5px) rotate(.4deg)}
+.choice-btn.locked{opacity:.28;cursor:default;transform:none!important}.choice-btn.selected{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid) inset;background:#151612}.fork-status{min-height:34px;margin-top:22px;font:10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:#777}
+.fork.light .choice-btn{background:#e2dccf;color:#151515;border-color:#857f74}.fork.light .choice-btn:before{color:#d8d0c2}.fork.light .choice-btn span{color:#5e5951}.fork.light .choice-btn.selected{background:#f0eadf}
+
+/* branch scenes */
+.branch{min-height:125vh;display:grid;align-items:center;overflow:hidden}
+.branch .wrap{padding:15vh 0;position:relative;z-index:4}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center}
+.branch-copy h2{max-width:9ch}.branch-copy p{font:clamp(18px,1.7vw,26px)/1.42 var(--serif);max-width:31ch}.branch-copy .small{font:11px/1.55 var(--mono);max-width:52ch}
+.art-panel{position:relative;min-height:65vh;overflow:hidden;border:1px solid rgba(255,255,255,.15);box-shadow:0 32px 70px rgba(0,0,0,.25);transform:rotate(-1deg)}
+.art-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.7) contrast(1.16) brightness(.68);transform:scale(1.04);transition:transform 1.2s ease,filter 1.2s ease}.art-panel.in img{transform:scale(1);filter:grayscale(.42) contrast(1.08) brightness(.78)}
+.art-panel:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent 55%)}
+.room-path{background:#11100f}.role-path{background:#11181a}.feed-path{background:#0d0c13}.crowd-path{background:#241a16}.wait-path{background:#181513}.rule-path{background:#151712}
+
+/* original street poster visual */
+.phone-poster{min-height:70vh;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 50% 46%,#201a24,#09080d 70%);overflow:hidden;border:1px solid #333;transform:rotate(1deg)}
+.phone{width:min(310px,52vw);aspect-ratio:.52;border:8px solid #222;border-radius:34px;background:#111;position:relative;box-shadow:0 30px 80px #000;transform:rotate(-4deg)}
+.phone:before{content:"";position:absolute;left:37%;right:37%;top:12px;height:8px;border-radius:6px;background:#292929}.screen{position:absolute;inset:28px 15px 20px;border-radius:18px;background:linear-gradient(160deg,#1d1c24,#0c0b0f);overflow:hidden;padding:22px 14px}.notif{height:54px;border:1px solid #3c3b42;background:#17171d;margin:0 0 10px;padding:10px;color:#7e7b83;font:9px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}.notif b{color:#fff}.gold-bar{position:absolute;top:-8%;bottom:-8%;width:9px;background:linear-gradient(90deg,#7f5b19,#e8c96b,#8d651e);box-shadow:0 0 16px rgba(212,169,77,.3);z-index:5}.gold-bar.b1{left:17%}.gold-bar.b2{left:37%}.gold-bar.b3{left:58%}.gold-bar.b4{left:78%}
+.chain-word{position:absolute;font:900 clamp(32px,5.5vw,88px)/.8 var(--sans);letter-spacing:-.07em;text-transform:uppercase;color:var(--gold);mix-blend-mode:screen}.cw1{left:-1vw;top:8vh;transform:rotate(-12deg)}.cw2{right:-3vw;bottom:9vh;transform:rotate(8deg);color:#d95d4c}.cw3{right:7vw;top:17vh;transform:rotate(87deg);font-size:clamp(22px,3vw,48px);color:#9da65f}
+
+.ifthen{min-height:68vh;display:grid;place-items:center;background:#0c0e0b;border:1px solid #3a3f31;position:relative;overflow:hidden;transform:rotate(-.7deg)}
+.ifthen .if{font:900 clamp(60px,10vw,150px)/.72 var(--sans);letter-spacing:-.08em;text-transform:uppercase;color:#f0eee6;text-align:center}.ifthen .if span{color:var(--acid)}.ifthen .tag{position:absolute;font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#787f67}.ifthen .t1{left:5%;top:8%;transform:rotate(-8deg)}.ifthen .t2{right:5%;bottom:8%;transform:rotate(6deg)}
+
+/* rejoin */
+.rejoin{min-height:72vh;display:grid;place-items:center;background:#242321;color:#eee8df;overflow:hidden}
+.rejoin.light{background:#d4cec2;color:#1c1b19}
+.rejoin .wrap{padding:11vh 0}.rejoin h3{max-width:16ch}.rejoin p{font:clamp(18px,1.9vw,29px)/1.4 var(--serif);max-width:40ch;margin:28px 0 0}.rejoin .bar{width:160px;height:2px;background:var(--acid);margin-bottom:30px}
+
+/* Plato */
+.plato{background:#22201d;color:#fff;min-height:170vh;padding:0;overflow:hidden}
+.plato-grid{width:min(1280px,92vw);margin:auto;display:grid;grid-template-columns:.95fr 1.05fr;gap:6vw;align-items:start;padding:13vh 0 18vh}
+.plato-visual{position:sticky;top:8vh;height:84vh;overflow:hidden;border:1px solid #4b4640;background:#111}.plato-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(.72) sepia(.15) contrast(1.15) brightness(.62);transform:scale(1.04)}.plato-visual:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 13% 32%,rgba(248,229,167,.17),transparent 35%),linear-gradient(90deg,rgba(0,0,0,.08),rgba(0,0,0,.5))}.plato-visual .turn-arrow{position:absolute;z-index:4;left:9%;top:22%;font:900 clamp(30px,5vw,70px)/.85 var(--sans);letter-spacing:-.06em;transform:rotate(-17deg);color:var(--acid);text-transform:uppercase}.plato-copy{padding-top:4vh}.plato-copy h2{max-width:8ch}.plato-copy .intro{font:clamp(20px,2vw,30px)/1.4 var(--serif);color:#ded7ce;max-width:31ch;margin:30px 0 60px}.plato-step{border-top:1px solid #5d5952;padding:24px 0 42px;display:grid;grid-template-columns:90px 1fr;gap:22px}.plato-step b{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acid)}.plato-step p{font:clamp(17px,1.55vw,23px)/1.45 var(--serif);margin:0;color:#d2ccc2;max-width:34ch}.plato-end{margin-top:35px;padding:22px 0 0 24px;border-left:3px solid var(--acid);font:clamp(23px,2.2vw,34px)/1.3 var(--serif);max-width:29ch}
+
+
+.art-source-link{display:inline-block;margin:-32px 0 48px;color:#c9c1b5;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid #676159;padding-bottom:5px}.art-source-link:hover{color:var(--acid);border-color:var(--acid)}
+img[data-fallback-used="1"]{filter:grayscale(.25) contrast(1.08) brightness(.78)!important}
+
+/* horizon */
+.horizon{min-height:125vh;background:#aab5b7;color:#111;display:grid;align-items:center;overflow:hidden}
+ .horizon-bg{position:absolute;inset:0;background-image:url('https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Caspar_David_Friedrich_-_Wanderer_above_the_Sea_of_Fog.jpeg/1920px-Caspar_David_Friedrich_-_Wanderer_above_the_Sea_of_Fog.jpeg'),url('assets/friedrich-fallback.svg');background-position:center;background-size:cover;background-repeat:no-repeat;filter:saturate(.45) brightness(.9);opacity:.72}.horizon:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(240,238,230,.96) 0 38%,rgba(240,238,230,.15) 68%)}.horizon .wrap{position:relative;z-index:2;padding:16vh 0}.horizon h2{max-width:9ch}.horizon p{font:clamp(20px,2vw,30px)/1.4 var(--serif);max-width:29ch}.horizon .eyebrow{color:#6c2b22}.horizon .spray{right:-3vw;bottom:13vh;-webkit-text-stroke-color:rgba(0,0,0,.18);transform:rotate(6deg)}
+
+/* classroom */
+.classroom{min-height:135vh;background:var(--paper);color:#151413;display:grid;align-items:center;overflow:hidden}
+.classroom:before{content:"WITH YOU";position:absolute;right:-.08em;bottom:-.17em;font:900 24vw/.72 var(--sans);letter-spacing:-.09em;color:#e7e0d4;white-space:nowrap}
+.classroom .wrap{position:relative;z-index:3;padding:18vh 0}.classroom h2{max-width:8ch}.manifesto{display:grid;grid-template-columns:1fr 1fr;gap:7vw;margin-top:8vh}.manifesto .big{font:clamp(29px,3.3vw,51px)/1.12 var(--serif);letter-spacing:-.03em}.manifesto .smallcopy{font:clamp(17px,1.55vw,24px)/1.48 var(--serif)}.manifesto mark{background:var(--acid);color:#111;padding:0 .08em}.pride-line{margin-top:9vh;border-top:4px solid #171615;padding-top:24px;font:700 clamp(22px,2.3vw,35px)/1.2 var(--sans);text-transform:uppercase;letter-spacing:-.025em;max-width:31ch}
+
+/* final choice */
+.final-choice{min-height:100vh;background:#f7f3e9;color:#111;display:grid;place-items:center;text-align:center;padding:12vh 0}.final-choice .wrap{max-width:980px}.final-choice h2{max-width:none}.final-choice p{font:clamp(19px,2vw,29px)/1.4 var(--serif);max-width:700px;margin:26px auto 44px}.final-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}.final-buttons button{min-width:260px;border:1px solid #111;background:transparent;color:#111;padding:18px 22px;font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}.final-buttons button.author{background:#111;color:#fff}.final-buttons button:hover{transform:translateY(-2px)}
+.final-result{min-height:100vh;display:grid;place-items:center;padding:14vh 6vw}.final-result.dark{background:#090909;color:#ddd}.final-result.light{background:#fffef8;color:#111}.final-result .inner{width:min(1080px,92vw)}.final-result h2{max-width:8ch}.final-result .lead{margin:28px 0 7vh}.prompt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.prompt{border:1px solid #aaa;padding:18px;background:#fff}.prompt label{display:block;font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}.prompt textarea{width:100%;height:150px;border:0;border-top:1px solid #ddd;resize:vertical;padding:12px 0;background:transparent;outline:none;font:20px/1.35 var(--serif);color:#111}.prompt textarea:focus{border-top-color:#111}.one-move{margin-top:7vh;border-top:4px solid #111;padding-top:24px}.one-move h3{font-size:clamp(30px,4vw,58px);max-width:14ch}.move-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.move-buttons button{border:1px solid #111;background:transparent;padding:10px 12px;font:700 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}.move-buttons button.selected{background:var(--acid)}.ticket{display:none;margin-top:28px;padding:22px;border:1px dashed #555;font:clamp(19px,2vw,28px)/1.35 var(--serif);max-width:750px}.ticket.on{display:block}.restart{margin-top:40px;border:0;border-bottom:1px solid currentColor;background:none;color:inherit;padding:7px;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+
+footer{background:#0b0b0c;color:#918c85;padding:10vh 6vw;font:10px/1.55 var(--mono)}
+footer .inner{width:min(1120px,100%);margin:auto}footer details{border-top:1px solid #333;padding-top:18px}footer summary{cursor:pointer;color:#ddd;text-transform:uppercase;letter-spacing:.14em}.credits{display:grid;grid-template-columns:1fr 1fr;gap:20px 46px;margin-top:26px}.credits p{margin:0}.credits a{text-decoration-color:#4a4a4a}.footnote{margin-top:34px;max-width:100ch;color:#6f6b65}
+
+@media(max-width:900px){
+  #pathRail{display:none!important}.film-shell,.split,.plato-grid,.manifesto{grid-template-columns:1fr}.film-shell{gap:28px}.film-copy{transform:none}.film-copy h1{font-size:clamp(48px,12vw,86px)}.film-frame{width:100%}.watch-ui{bottom:-66px}.film-note{display:none}#journeyBtn{bottom:-124px}.prologue{min-height:120vh}.choice-grid,.prompt-grid,.credits{grid-template-columns:1fr}.choice-btn{min-height:180px}.art-panel,.phone-poster,.ifthen{min-height:52vh}.plato-visual{position:relative;top:auto;height:62vh}.plato-grid{padding-top:10vh}.plato-copy{padding-top:6vh}.horizon:after{background:linear-gradient(0deg,rgba(240,238,230,.95) 0 54%,rgba(240,238,230,.08) 88%)}.horizon .wrap{align-self:end}.manifesto{gap:30px}.art-credit{font-size:8px}.tool:nth-child(2){display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important;transition:none!important}.kinetic{transform:none!important;filter:none!important}#tears,#scanlines{display:none!important}.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="film-locked">
+<div id="progress"></div>
+<div id="scanlines" aria-hidden="true"></div>
+<div id="tears" aria-hidden="true"><i class="tear t1"></i><i class="tear t2"></i><i class="tear t3"></i></div>
+<div id="chapter">00 / SCREENING</div>
+<div id="pathRail" aria-hidden="true">
+  <div class="path-chip" id="chip1">01 / Lens<b>unmade</b></div>
+  <div class="path-chip" id="chip2">02 / Pressure<b>unmade</b></div>
+  <div class="path-chip" id="chip3">03 / Action<b>unmade</b></div>
+</div>
+<div id="tools">
+  <button class="tool" id="soundBtn" aria-pressed="false">sound off</button>
+  <button class="tool" id="fullBtn">fullscreen</button>
+</div>
+<svg id="grain" aria-hidden="true"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".83" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#noise)" opacity=".72"/></svg>
+
+<main>
+<section class="film-gate" id="screening" data-chapter="00 / SCREENING" data-audio="none">
+  <div class="film-shell">
+    <div class="film-copy kinetic" data-jolt="1.3" data-tilt="-2.5">
+      <div class="stamp">evidence / before argument</div>
+      <h1>THE CLASS<br>OF <span class="slash">ROWDIES.</span></h1>
+      <p>Before this page tells you anything, watch what changes when a class stops being an audience.</p>
+    </div>
+    <div class="film-frame" id="filmFrame">
+      <div id="ytPlayer"><div class="yt-fallback">Loading the screening...<br>If YouTube is blocked, a bypass will unlock after 30 seconds.</div></div>
+      <div class="film-overlay"></div>
+      <div class="film-control" id="filmControl"><button id="beginFilm">Begin screening</button></div>
+      <div class="watch-ui">
+        <div>
+          <div class="watch-track"><div class="watch-fill" id="watchFill"></div></div>
+          <div class="watch-meta"><span id="watchStatus">not started</span><span id="watchPct">0%</span></div>
+        </div>
+        <button id="bypass" disabled>skip unlocks in 00:30</button>
+      </div>
+      <div class="film-note" id="filmNote">Controls are intentionally hidden. This is a soft classroom gate, not DRM: the page tracks forward viewing and rejects obvious fast-forward jumps. YouTube itself cannot provide tamper-proof watch enforcement in a standalone client-side page.</div>
+      <button id="journeyBtn">Continue into the experiment &#8595;</button>
+    </div>
+  </div>
+</section>
+
+<section class="prologue" id="prologue" data-chapter="01 / WHAT CHANGED" data-audio="machine">
+  <div class="spray one">ROW DIES?</div><div class="spray two">OR VOICES?</div>
+  <div class="wrap">
+    <div class="eyebrow reveal">01 / the film gives us a problem</div>
+    <h2 class="reveal kinetic" data-jolt=".9" data-tilt="-1.5">The room did not suddenly become less real.</h2>
+    <p class="lead reveal">Same school. Same students. Same timetable. The teacher changes one thing: the students are no longer treated only as receivers. They are asked to bring something of themselves into the room.</p>
+    <div class="quote reveal">&ldquo;I just created a space where no one is judging them.&rdquo;<span>Class of Rowdies - line from the supplied transcript</span></div>
+  </div>
+</section>
+
+<section class="fork" id="fork1" data-chapter="02 / CHOOSE A LENS" data-audio="machine">
+  <div class="fork-card">
+    <div class="eyebrow">Fork 01 / lock a lens</div>
+    <h2 class="kinetic" data-jolt=".55" data-tilt="-.7">So what actually changed?</h2>
+    <p class="fork-lead">You only get one lens on this run. Choose the explanation you think matters more. The unchosen path disappears.</p>
+    <div class="choice-grid">
+      <button class="choice-btn" data-fork="1" data-choice="room" data-number="A"><b>the room</b><strong>The environment changed.</strong><span>Permission, structure, psychological safety and real choice can change what people are willing to do.</span></button>
+      <button class="choice-btn" data-fork="1" data-choice="role" data-number="B"><b>the role</b><strong>The students changed.</strong><span>A space can be offered and still remain empty. Someone eventually has to risk using it.</span></button>
+    </div>
+    <div class="fork-status" id="forkStatus1">No neutral scroll here. Pick.</div>
+  </div>
+</section>
+
+<div id="stage1" hidden>
+  <section class="branch room-path" data-path="1:room" data-chapter="02A / THE ROOM" data-audio="machine">
+    <div class="wrap split">
+      <div class="art-panel reveal">
+        <img alt="Piranesi Imaginary Prisons" data-fallback="assets/piranesi-fallback.svg" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Giovanni_Battista_Piranesi_-_Le_Carceri_d%27Invenzione_-_Second_Edition_-_1761_-_10_-_Prisoners_on_a_Projecting_Platform.jpg/1280px-Giovanni_Battista_Piranesi_-_Le_Carceri_d%27Invenzione_-_Second_Edition_-_1761_-_10_-_Prisoners_on_a_Projecting_Platform.jpg">
+        <div class="art-credit">Giovanni Battista Piranesi / Le Carceri d'Invenzione / 1761 / public domain</div>
+      </div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: the room</div><h2>Architecture matters.</h2>
+        <p>Piranesi makes the person tiny inside the structure. That is not a bad metaphor for school: rules, assessment, teacher behavior, peer judgment and routines can make agency easier or harder.</p>
+        <p>Self-determination theory treats autonomy as one of the psychological needs relevant to motivation. In classrooms, autonomy-supportive conditions can support more voluntary engagement.</p>
+        <p class="small">This path is not an excuse for the teacher. If the room punishes voice, the room has to change.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="branch role-path" data-path="1:role" data-chapter="02B / THE ROLE" data-audio="machine">
+    <div class="wrap split">
+      <div class="art-panel reveal">
+        <img alt="Vincent van Gogh Prisoners Exercising" data-fallback="assets/vangogh-fallback.svg" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Vincent_van_Gogh_-_The_Prison_Courtyard_%281890%29.jpg/1280px-Vincent_van_Gogh_-_The_Prison_Courtyard_%281890%29.jpg">
+        <div class="art-credit">Vincent van Gogh / Prisoners Exercising / 1890 / public domain</div>
+      </div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: the role</div><h2>A routine can become a costume.</h2>
+        <p>Van Gogh's prisoners move constantly and still go nowhere. The unsettling idea is that activity can coexist with passivity: arrive, comply, wait, complain, leave, repeat.</p>
+        <p>Psychology uses the term learned helplessness for a pattern in which repeated lack of control can reduce later attempts to use control that has become available.</p>
+        <p class="small">This is an analogy, not a diagnosis of a class. Its useful question is simpler: when circumstances change, do our habits notice?</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rejoin" data-chapter="03 / BOTH ARE TRUE" data-audio="machine">
+    <div class="wrap reveal"><div class="bar"></div><h3>A better room can create possibility. It cannot speak through you.</h3><p>The film works because both sides move. The teacher creates conditions. The students eventually fill them.</p></div>
+  </section>
+
+  <section class="fork" id="fork2" data-chapter="04 / WHO STEERS" data-audio="digital">
+    <div class="fork-card">
+      <div class="eyebrow">Fork 02 / external pressure</div>
+      <h2 class="kinetic" data-jolt=".25" data-tilt=".35">What else gets a vote in your life?</h2>
+      <p class="fork-lead">Not every chain looks like punishment. Some are pleasant, social, personalized and gold-plated.</p>
+      <div class="choice-grid">
+        <button class="choice-btn" data-fork="2" data-choice="feed" data-number="A"><b>the feed</b><strong>My attention gets steered.</strong><span>Recommended content, endless scroll and notifications can make the next action feel frictionless.</span></button>
+        <button class="choice-btn" data-fork="2" data-choice="crowd" data-number="B"><b>the crowd</b><strong>Approval gets a vote.</strong><span>Friends, influencers, likes and comparison can quietly decide what feels desirable or embarrassing.</span></button>
+      </div>
+      <div class="fork-status" id="forkStatus2">Pick the pressure you think is harder to notice.</div>
+    </div>
+  </section>
+</div>
+
+<div id="stage2" hidden>
+  <section class="branch feed-path" data-path="2:feed" data-chapter="04A / THE FEED" data-audio="digital">
+    <div class="wrap split">
+      <div class="phone-poster reveal" aria-label="Original street-poster style image of a phone behind golden bars">
+        <div class="chain-word cw1">FOR YOU</div><div class="chain-word cw2">ONE MORE</div><div class="chain-word cw3">AUTOPLAY</div>
+        <div class="phone"><div class="screen"><div class="notif"><b>recommended</b><br>because you watched...</div><div class="notif"><b>trending</b><br>everyone is seeing this</div><div class="notif"><b>next</b><br>you do not need to choose</div><div class="notif"><b>again</b><br>just one more</div></div></div>
+        <i class="gold-bar b1"></i><i class="gold-bar b2"></i><i class="gold-bar b3"></i><i class="gold-bar b4"></i>
+      </div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: the feed</div><h2>The easiest next move is still a move.</h2>
+        <p>APA's adolescent social-media advisory is deliberately more nuanced than &ldquo;phones are bad.&rdquo; It says online experience is shaped both by what young people choose and by platform features, including recommended content and endless scrolling.</p>
+        <p>The autonomy question is not whether technology controls you. It is whether you notice the moment a designed default starts impersonating your intention.</p>
+        <p class="small">Original visual for this page: the gold bars are deliberately attractive. A constraint does not have to feel unpleasant to reduce choice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="branch crowd-path" data-path="2:crowd" data-chapter="04B / THE CROWD" data-audio="crowd">
+    <div class="wrap split">
+      <div class="art-panel reveal">
+        <img alt="James Ensor The Intrigue" data-fallback="assets/ensor-fallback.svg" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/L%27Intrigue_%28James_Ensor%2C_1890%29.jpg">
+        <div class="art-credit">James Ensor / The Intrigue / 1890 / public-domain work via Wikimedia Commons</div>
+      </div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: the crowd</div><h2>A mask can be chosen and still become a cage.</h2>
+        <p>Ensor's crowd is comic, ugly, theatrical and difficult to read. Everyone has a face, but not necessarily their own face.</p>
+        <p>Social comparison is not automatically harmful, and social media can support real connection. But when approval becomes the steering mechanism, somebody else starts writing the criteria for a successful life.</p>
+        <p class="lead" style="font-size:clamp(21px,2vw,31px)">If everyone applauds the same destination, how many people actually chose it?</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rejoin light" data-chapter="05 / NOTICE THE FORCE" data-audio="digital">
+    <div class="wrap reveal"><div class="bar"></div><h3>Influence is real. Destiny is a stronger claim.</h3><p>Agency is not pretending that algorithms, friends, teachers, money or expectations do not influence you. It is noticing influence early enough to decide whether it gets the final word.</p></div>
+  </section>
+
+  <section class="fork light" id="fork3" data-chapter="06 / THE GAP" data-audio="pulse">
+    <div class="fork-card">
+      <div class="eyebrow" style="color:#6f241d">Fork 03 / intention versus action</div>
+      <h2>What happens when you do not feel like it?</h2>
+      <p class="fork-lead">Pride is cheap if it only exists when motivation is high. Choose which problem you want to confront.</p>
+      <div class="choice-grid">
+        <button class="choice-btn" data-fork="3" data-choice="wait" data-number="A"><b style="color:#8a2d26">wait</b><strong>I need motivation first.</strong><span>Maybe the feeling arrives. Maybe the day is decided before it does.</span></button>
+        <button class="choice-btn" data-fork="3" data-choice="rule" data-number="B"><b style="color:#6f241d">make a rule</b><strong>I can pre-decide a move.</strong><span>Use a self-authored rule so the choice is made before the convenient excuse appears.</span></button>
+      </div>
+      <div class="fork-status" id="forkStatus3">This choice is about self-direction, not obedience.</div>
+    </div>
+  </section>
+</div>
+
+<div id="stage3" hidden>
+  <section class="branch wait-path" data-path="3:wait" data-chapter="06A / WAITING" data-audio="pulse">
+    <div class="wrap split">
+      <div class="art-panel reveal">
+        <img alt="Goya The Sleep of Reason Produces Monsters" data-fallback="assets/goya-fallback.svg" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Francisco_de_Goya%2C_El_sue%C3%B1o_de_la_razon_produce_monstruos_%28The_Sleep_of_Reason_Produces_Monsters%29%2C_published_1799%2C_NGA_7502.jpg/960px-Francisco_de_Goya%2C_El_sue%C3%B1o_de_la_razon_produce_monstruos_%28The_Sleep_of_Reason_Produces_Monsters%29%2C_published_1799%2C_NGA_7502.jpg">
+        <div class="art-credit">Francisco Goya / The Sleep of Reason Produces Monsters / 1799 / public domain</div>
+      </div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: wait</div><h2>Motivation makes a terrible gatekeeper.</h2>
+        <p>Goya's image was not made as a productivity poster. Here it works as a provocation: what takes over while the directing mind is absent?</p>
+        <p>There is a well-studied gap between intending to do something and actually doing it. Waiting to feel ready can turn mood into the person with the key.</p>
+        <p class="small">No hustle-culture claim is being made here. Rest can be chosen. So can delay. The question is whether either is deliberate.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="branch rule-path" data-path="3:rule" data-chapter="06B / PRE-DECIDE" data-audio="pulse">
+    <div class="wrap split">
+      <div class="ifthen reveal"><div class="tag t1">self-authored structure</div><div class="if"><span>IF</span> X<br>THEN Y</div><div class="tag t2">do not renegotiate every minute</div></div>
+      <div class="branch-copy reveal">
+        <div class="eyebrow">You chose: make a rule</div><h2>Discipline can be autonomy with a memory.</h2>
+        <p>Psychologists call one version an implementation intention: an if-then plan that links a situation to a chosen response.</p>
+        <p>&ldquo;If discussion opens, then I ask one real question.&rdquo; &ldquo;If I disagree, then I say why.&rdquo; The point is not that the rule is imposed. The point is that <em>you wrote it before the easier option arrived.</em></p>
+        <p class="small">Research has repeatedly found that these specific plans can improve follow-through compared with a goal intention alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rejoin" data-chapter="07 / DISCIPLINE" data-audio="cave">
+    <div class="wrap reveal"><div class="bar"></div><h3>Discipline is not the opposite of freedom.</h3><p>Obedience follows somebody else's direction. Self-discipline can be the structure you build so that a choice you actually value survives boredom, embarrassment and convenience.</p></div>
+  </section>
+
+  <section class="plato" id="plato" data-chapter="08 / THE TURN" data-audio="cave">
+    <div class="plato-grid">
+      <div class="plato-visual reveal">
+        <img alt="Diagram of Plato's cave showing chains, shadows, turning, and ascent" src="assets/plato-cave-map.svg">
+        <div class="turn-arrow">TURN<br>YOUR<br>HEAD</div>
+        <div class="art-credit">Interpretive cave map made for this experience / historical source: Jan Saenredam after Cornelis van Haarlem, 1604</div>
+      </div>
+      <div class="plato-copy">
+        <div class="eyebrow reveal">08 / Plato is more useful if we do not flatten him</div>
+        <h2 class="reveal">The prisoners begin actually chained.</h2>
+        <p class="intro reveal">That matters. The allegory is not &ldquo;people are trapped because they are lazy.&rdquo; Their first reality is genuinely constrained. The interesting question comes when another direction becomes possible.</p><a class="art-source-link reveal" href="https://commons.wikimedia.org/wiki/File:Platon_Cave_Sanraedam_1604.jpg" target="_blank" rel="noopener">view the 1604 cave engraving &#8599;</a>
+        <div class="plato-step reveal"><b>01 / chain</b><p>A real constraint limits the available action. Pretending it does not exist is not agency; it is denial.</p></div>
+        <div class="plato-step reveal"><b>02 / shadow</b><p>Long exposure makes a restricted view feel complete. Familiarity starts to impersonate necessity: &ldquo;this is just how it is.&rdquo;</p></div>
+        <div class="plato-step reveal"><b>03 / turn</b><p>The first act of liberation is not escape. It is orientation. The prisoner has to turn toward information that makes the old story less comfortable.</p></div>
+        <div class="plato-step reveal"><b>04 / ascent</b><p>Freedom is disorienting. The light hurts before it clarifies. Having options means losing the comfort of saying there were none.</p></div>
+        <div class="plato-end reveal">A chain can survive as a habit after the metal is gone.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="horizon" data-chapter="09 / NO MAP" data-audio="air">
+    <div class="horizon-bg"></div><div class="spray">NO SCRIPT.</div>
+    <div class="wrap reveal"><div class="eyebrow">09 / autonomy has a cost</div><h2>No map is coming.</h2><p>Once you stop outsourcing every next move, uncertainty arrives. That is not a defect in autonomy. It is part of the price.</p><p>You do not control the whole landscape. You do control whether you remain only a spectator inside it.</p></div>
+    <div class="art-credit" style="color:#222;text-shadow:none">Caspar David Friedrich / Wanderer above the Sea of Fog / c. 1817 / public domain</div>
+  </section>
+
+  <section class="classroom" data-chapter="10 / THE ROOM IS YOURS TOO" data-audio="air">
+    <div class="wrap">
+      <div class="eyebrow reveal" style="color:#6f241d">back to the film / back to this room</div>
+      <h2 class="reveal">A teacher can create space. A teacher cannot occupy your place in it.</h2>
+      <div class="manifesto">
+        <div class="big reveal">The class in the film changes when students stop being a problem to be managed and start becoming <mark>authors of what happens.</mark></div>
+        <div class="smallcopy reveal"><p>That does not make the teacher irrelevant. It makes responsibility shared.</p><p>You are allowed to dislike an activity. You are allowed to ask for something different. You are allowed to disagree. You are allowed to bring something in. You are allowed to make the room stranger, smarter, funnier, more difficult or more yours.</p><p>But if you use none of that space, passivity is no longer only something the room did to you.</p></div>
+      </div>
+      <div class="pride-line reveal">You are too capable to rehearse powerlessness in a room where you have options.</div>
+    </div>
+  </section>
+
+  <section class="final-choice" id="finalChoice" data-chapter="11 / AUTHORSHIP" data-audio="air">
+    <div class="wrap reveal"><div class="eyebrow" style="color:#6f241d">last fork / no correct-looking button</div><h2>Does class happen <em>to</em> you or <em>with</em> you?</h2><p>Circumstances write some lines. Teachers write some lines. Other people write some lines. The question is whether you insist on writing any of the next ones.</p><div class="final-buttons"><button data-final="remain">Let it happen to me</button><button class="author" data-final="author">I take a share of authorship</button></div></div>
+  </section>
+
+  <section class="final-result dark" id="remainResult" hidden data-chapter="12 / OWN THE CHOICE" data-audio="machine">
+    <div class="inner"><div class="eyebrow">that is still a choice</div><h2>Then own it.</h2><p class="lead">No punishment follows. No door slams. But there is a difference between &ldquo;nothing can be done&rdquo; and &ldquo;I am choosing not to do anything with the options I have.&rdquo;</p><p class="lead">The second statement is harsher. It is also more honest - and honesty preserves the possibility of changing your mind later.</p><button class="restart">restart and choose another path</button></div>
+  </section>
+
+  <section class="final-result light" id="authorResult" hidden data-chapter="12 / MAKE A MOVE" data-audio="air">
+    <div class="inner"><div class="eyebrow" style="color:#6f241d">not a promise to be &ldquo;good&rdquo;</div><h2>Author something specific.</h2><p class="lead">Shared authorship means the teacher changes things too. So write both sides of the bargain.</p>
+      <div class="prompt-grid">
+        <div class="prompt"><label>01 / I want this class to have more...</label><textarea id="want" placeholder="debate, challenge, choice, weird examples, movement, quiet thinking, competition..."></textarea></div>
+        <div class="prompt"><label>02 / I can contribute...</label><textarea id="give" placeholder="a question, an opinion, preparation, an idea, disagreement, a risk..."></textarea></div>
+        <div class="prompt"><label>03 / The teacher should change...</label><textarea id="teacher" placeholder="Be concrete. Shared responsibility includes the teacher."></textarea></div>
+      </div>
+      <div class="one-move"><h3>Pick one move for the next class.</h3><div class="move-buttons"><button>ask</button><button>disagree</button><button>propose</button><button>bring</button><button>explain</button><button>build</button></div><div class="ticket" id="ticket"></div></div>
+      <button class="restart">restart and explore another path</button>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="inner"><details><summary>Sources, art, psychology and technical notes</summary><div class="credits">
+    <p><b>Film</b><br><i>Short Film - Class of Rowdies</i>, YouTube video supplied for this activity: <a href="https://www.youtube.com/watch?v=vsApwK9khRo" target="_blank" rel="noopener">open on YouTube</a>. Short phrases on the page are taken from the transcript supplied with the project.</p>
+    <p><b>YouTube watch gate</b><br>The embed uses the YouTube IFrame API with visible controls and keyboard seeking disabled. The page tracks normal forward playback and reverses obvious jumps. Because this is client-side code, it is intentionally described as a soft classroom gate rather than tamper-proof enforcement.</p>
+    <p><b>Self-determination theory</b><br>Ryan and Deci's framework describes autonomy, competence and relatedness as basic psychological needs relevant to motivation. Classroom autonomy support is an established application of the theory.</p>
+    <p><b>Learned helplessness</b><br>Used here only as a conceptual analogy: repeated uncontrollability can reduce later attempts to act even when control becomes available. This page is not diagnosing students.</p>
+    <p><b>Social media</b><br>APA's 2023 advisory states that adolescent social-media experience is shaped by both user choices and platform features, and specifically discusses features such as recommended content and endless scrolling. It also emphasizes that social media is not inherently harmful or beneficial.</p>
+    <p><b>Implementation intentions</b><br>Gollwitzer and colleagues describe if-then plans as a self-regulation strategy linking a future cue with a chosen response; research reviews report improved goal follow-through in many contexts.</p>
+    <p><b>Public-domain art</b><br>Piranesi, Van Gogh, Francisco Goya, Jan Saenredam, Caspar David Friedrich and James Ensor are used as interpretive prompts. Where a museum image cannot load, the site falls back to a local graphic interpretation. Plato uses a purpose-built cave map and links the historical Saenredam engraving. These classroom readings are not claims about the artists' intended meanings.</p>
+    <p><b>Sound</b><br>No audio files are downloaded. The mechanical hum, digital pulse, crowd texture, cave resonance, open-air noise and transition hits are synthesized live in the browser with the Web Audio API, then crossfaded by section. The screening click unlocks audio; a persistent mute control remains available.</p>
+  </div><div class="footnote">Research links: <a href="https://selfdeterminationtheory.org/about-the-theory/" target="_blank" rel="noopener">Self-Determination Theory overview</a> / <a href="https://dictionary.apa.org/learned-helplessness" target="_blank" rel="noopener">APA Dictionary: learned helplessness</a> / <a href="https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use" target="_blank" rel="noopener">APA adolescent social-media advisory</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/17295981/" target="_blank" rel="noopener">Implementation intentions review</a> / <a href="https://developers.google.com/youtube/iframe_api_reference" target="_blank" rel="noopener">YouTube IFrame API</a>.</div></details></div>
+</footer>
+
+<script>
+(() => {
+  const root=document.documentElement, body=document.body;
+  const chapter=document.getElementById('chapter'), progress=document.getElementById('progress');
+  const pathRail=document.getElementById('pathRail');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let journeyUnlocked=false, soundWanted=false;
+
+  /* --- procedural soundscape --- */
+  const Sound={ctx:null,master:null,scenes:{},current:'none',started:false,
+    init(){
+      if(this.ctx) return;
+      const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+      this.ctx=new AC();this.master=this.ctx.createGain();this.master.gain.value=0.12;this.master.connect(this.ctx.destination);
+      const make=(name,type,freq,noiseCut)=>{
+        const g=this.ctx.createGain();g.gain.value=0;g.connect(this.master);
+        const o=this.ctx.createOscillator();o.type=type;o.frequency.value=freq;const og=this.ctx.createGain();og.gain.value=.16;o.connect(og).connect(g);o.start();
+        const len=this.ctx.sampleRate*2,b=this.ctx.createBuffer(1,len,this.ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;
+        const n=this.ctx.createBufferSource();n.buffer=b;n.loop=true;const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=noiseCut;const ng=this.ctx.createGain();ng.gain.value=.13;n.connect(f).connect(ng).connect(g);n.start();
+        this.scenes[name]=g;
+      };
+      make('machine','sine',52,460);make('digital','square',118,1550);make('crowd','sawtooth',74,930);make('pulse','triangle',92,680);make('cave','sine',43,330);make('air','sine',164,2400);
+      this.started=true;
+    },
+    resume(){if(this.ctx&&this.ctx.state==='suspended')this.ctx.resume();},
+    set(name){if(!this.ctx||!soundWanted)return;this.current=name;const now=this.ctx.currentTime;Object.entries(this.scenes).forEach(([k,g])=>{g.gain.cancelScheduledValues(now);g.gain.setValueAtTime(g.gain.value,now);g.gain.linearRampToValueAtTime(k===name?.11:0,now+1.9)});},
+    mute(v){if(!this.ctx)return;const now=this.ctx.currentTime;this.master.gain.cancelScheduledValues(now);this.master.gain.linearRampToValueAtTime(v?0:.12,now+.3)},
+    hit(){if(!this.ctx||!soundWanted)return;const o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type='triangle';o.frequency.setValueAtTime(310,this.ctx.currentTime);o.frequency.exponentialRampToValueAtTime(62,this.ctx.currentTime+.24);g.gain.setValueAtTime(.22,this.ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+.28);o.connect(g).connect(this.master);o.start();o.stop(this.ctx.currentTime+.3)},
+    unlock(){this.init();this.resume();}
+  };
+  const soundBtn=document.getElementById('soundBtn');
+  soundBtn.addEventListener('click',()=>{Sound.unlock();soundWanted=!soundWanted;soundBtn.setAttribute('aria-pressed',String(soundWanted));soundBtn.textContent=soundWanted?'sound on':'sound off';Sound.mute(!soundWanted);if(soundWanted)Sound.set(activeAudio())});
+
+  /* --- YouTube screening gate --- */
+  let player=null,ytReady=false,watchTimer=null,bypassTimer=null,secondsToBypass=30,furthest=0,duration=0,lastTime=0,startedFilm=false;
+  const filmControl=document.getElementById('filmControl'),beginFilm=document.getElementById('beginFilm'),watchFill=document.getElementById('watchFill'),watchStatus=document.getElementById('watchStatus'),watchPct=document.getElementById('watchPct'),bypass=document.getElementById('bypass'),journeyBtn=document.getElementById('journeyBtn'),filmNote=document.getElementById('filmNote');
+  window.onYouTubeIframeAPIReady=()=>{
+    try{
+      player=new YT.Player('ytPlayer',{videoId:'vsApwK9khRo',playerVars:{controls:0,disablekb:1,rel:0,playsinline:1,fs:0,cc_load_policy:0},events:{onReady:()=>{ytReady=true;watchStatus.textContent='ready';},onStateChange:(e)=>{if(window.YT&&e.data===YT.PlayerState.ENDED) unlockJourney('screening complete');}}});
+    }catch(e){filmNote.textContent='The YouTube API could not initialize here. The 30-second bypass will still unlock the journey.';}
+  };
+  const api=document.createElement('script');api.src='https://www.youtube.com/iframe_api';document.head.appendChild(api);
+
+  beginFilm.addEventListener('click',()=>{
+    Sound.unlock();soundWanted=true;soundBtn.setAttribute('aria-pressed','true');soundBtn.textContent='sound on';Sound.mute(false);startedFilm=true;filmControl.classList.add('gone');watchStatus.textContent=ytReady?'watching':'loading player';startBypassCountdown();
+    if(ytReady){try{player.playVideo();}catch(e){}}
+    watchTimer=setInterval(trackWatch,500);
+  });
+  function startBypassCountdown(){if(bypassTimer)return;bypassTimer=setInterval(()=>{secondsToBypass=Math.max(0,secondsToBypass-1);if(secondsToBypass===0){clearInterval(bypassTimer);bypass.disabled=false;bypass.classList.add('ready');bypass.textContent='already watched? bypass';}else bypass.textContent='skip unlocks in 00:'+String(secondsToBypass).padStart(2,'0');},1000)}
+  function trackWatch(){if(!player||!ytReady)return;try{duration=player.getDuration()||duration;const state=player.getPlayerState();const t=player.getCurrentTime()||0;if(window.YT&&state===YT.PlayerState.PLAYING){if(lastTime>0&&t>furthest+2.6){player.seekTo(Math.max(0,furthest-.25),true);watchStatus.textContent='fast-forward blocked';Sound.hit();}else if(t>=furthest-.6&&t<=furthest+2.6){furthest=Math.max(furthest,t);watchStatus.textContent='watching';}}lastTime=t;const pct=duration?Math.min(100,furthest/duration*100):0;watchFill.style.width=pct.toFixed(1)+'%';watchPct.textContent=Math.floor(pct)+'%';if(pct>=90)unlockJourney('90% watched');}catch(e){}}
+  bypass.addEventListener('click',()=>{if(!bypass.disabled)unlockJourney('bypassed after 30 seconds')});
+  function unlockJourney(reason){if(journeyUnlocked)return;journeyUnlocked=true;clearInterval(watchTimer);body.classList.remove('film-locked');journeyBtn.classList.add('on');watchStatus.textContent=reason;watchFill.style.width='100%';if(reason.includes('90%')||reason.includes('complete'))watchPct.textContent='passed';filmNote.textContent='Gate open. Your next choice is below.';}
+  journeyBtn.addEventListener('click',()=>{try{if(player&&ytReady)player.pauseVideo()}catch(e){}pathRail.classList.add('on');Sound.set('machine');document.getElementById('prologue').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'})});
+
+  /* --- branching choices --- */
+  const chosen={};
+  document.querySelectorAll('.choice-btn').forEach(btn=>btn.addEventListener('click',()=>choose(btn)));
+  function choose(btn){const fork=btn.dataset.fork;if(chosen[fork])return;const choice=btn.dataset.choice;chosen[fork]=choice;Sound.hit();const peers=[...document.querySelectorAll('.choice-btn[data-fork="'+fork+'"]')];peers.forEach(b=>{b.disabled=true;b.classList.add(b===btn?'selected':'locked')});document.getElementById('forkStatus'+fork).textContent='LOCKED: '+choice.toUpperCase()+'. Keep scrolling.';document.querySelectorAll('[data-path^="'+fork+':"]').forEach(s=>{s.hidden=s.dataset.path!==(fork+':'+choice)});const stage=document.getElementById('stage'+fork);stage.hidden=false;const labels={room:'the room',role:'the role',feed:'the feed',crowd:'the crowd',wait:'wait',rule:'make a rule'};const chip=document.getElementById('chip'+fork);chip.classList.add('set');chip.querySelector('b').textContent=labels[choice]||choice;refreshObservers();setTimeout(()=>update(),20)}
+
+  /* --- final fork --- */
+  document.querySelectorAll('[data-final]').forEach(btn=>btn.addEventListener('click',()=>{if(document.querySelector('[data-final].selected'))return;Sound.hit();document.querySelectorAll('[data-final]').forEach(b=>{b.disabled=true;b.classList.toggle('selected',b===btn);b.style.opacity=b===btn?'1':'.32'});const id=btn.dataset.final==='author'?'authorResult':'remainResult';document.getElementById(id).hidden=false;setTimeout(()=>document.getElementById(id).scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'}),120);refreshObservers()}));
+  document.querySelectorAll('.restart').forEach(b=>b.addEventListener('click',()=>location.reload()));
+  let move='';document.querySelectorAll('.move-buttons button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.move-buttons button').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');move=btn.textContent.trim();const give=document.getElementById('give').value.trim();const ticket=document.getElementById('ticket');ticket.innerHTML='<b>YOUR NEXT MOVE:</b> '+move.toUpperCase()+(give?' - '+escapeHtml(give):'')+'.';ticket.classList.add('on');Sound.hit()}));
+  function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+  /* --- reveal observers and audio chaptering --- */
+  let revealObserver=null;
+  function refreshObservers(){if(revealObserver)revealObserver.disconnect();revealObserver=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.13});document.querySelectorAll('.reveal:not([hidden])').forEach(el=>revealObserver.observe(el))}
+  refreshObservers();
+  const allSections=()=>[...document.querySelectorAll('[data-chapter]:not([hidden])')];
+  function activeAudio(){let best=null,bestDist=1e9;for(const s of allSections()){const r=s.getBoundingClientRect();const d=Math.abs(r.top+r.height*.45-innerHeight*.5);if(d<bestDist){bestDist=d;best=s}}return best?.dataset.audio||'none'}
+
+  /* --- scroll motion: violent early, settles by the cave --- */
+  let ticking=false;
+  function update(){
+    const max=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=scrollY/max;progress.style.width=(p*100).toFixed(2)+'%';
+    const chaos=Math.max(0,1-scrollY/(innerHeight*10.5));root.style.setProperty('--chaos',chaos.toFixed(3));root.style.setProperty('--scan',(chaos*.17).toFixed(3));root.style.setProperty('--tear',(chaos*.58).toFixed(3));
+    const snap=Math.floor(scrollY/58),wave=n=>Math.sin((snap+1)*(n*6.73+9.1));document.querySelector('.t1').style.setProperty('--x',(wave(1)*36*chaos).toFixed(1)+'px');document.querySelector('.t1').style.setProperty('--y',(wave(2)*18*chaos).toFixed(1)+'px');document.querySelector('.t2').style.setProperty('--x',(wave(3)*64*chaos).toFixed(1)+'px');document.querySelector('.t2').style.setProperty('--y',(wave(4)*24*chaos).toFixed(1)+'px');document.querySelector('.t3').style.setProperty('--x',(wave(5)*28*chaos).toFixed(1)+'px');document.querySelector('.t3').style.setProperty('--y',(wave(6)*20*chaos).toFixed(1)+'px');
+    if(!reduced)document.querySelectorAll('.kinetic').forEach((el,i)=>{const amp=parseFloat(el.dataset.jolt||'1'),base=parseFloat(el.dataset.tilt||'0'),x=wave(i+7)*24*chaos*amp,y=wave(i+13)*12*chaos*amp,rot=base+wave(i+19)*2.4*chaos*amp,skew=wave(i+25)*2.1*chaos*amp;el.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) rotate('+rot.toFixed(2)+'deg) skewX('+skew.toFixed(2)+'deg)';el.style.filter='blur('+(chaos*.22*amp).toFixed(2)+'px)'});
+    let active=allSections()[0];const marker=innerHeight*.44;for(const s of allSections()){const r=s.getBoundingClientRect();if(r.top<=marker&&r.bottom>marker){active=s;break}}if(active){chapter.textContent=active.dataset.chapter;if(soundWanted&&journeyUnlocked)Sound.set(active.dataset.audio||'none')}
+    ticking=false;
+  }
+  addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update();
+
+  document.getElementById('fullBtn').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}});
+  document.querySelectorAll('img[data-fallback]').forEach(img=>img.addEventListener('error',()=>{const fallback=img.dataset.fallback;if(fallback&&!img.dataset.fallbackUsed){img.dataset.fallbackUsed='1';img.src=fallback;img.style.opacity='1';}}));
+})();
+</script>
+</body>
+</html>
