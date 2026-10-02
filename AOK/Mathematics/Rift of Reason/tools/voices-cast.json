@@ -49,5 +49,8 @@
     "attenbirdough": { "voice": "Gacrux", "style": "An elderly puffin naturalist. A hushed, reverent nature-documentary narration, almost whispering. A creature character, never an imitation of a real person; speak only the given words." },
     "kardashiant": { "voice": "Leda", "style": "A glamorous ant. Breezy, vain and a little bored, drawn-out vowels. A creature character, never an imitation of a real person; speak only the given words." },
     "messilion": { "voice": "Achernar", "style": "A shy lion cub. Quiet, soft and modest, few words. A creature character, never an imitation of a real person; speak only the given words." },
-    "shakirattle": { "voice": "Aoede", "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words." }
+    "shakirattle": { "voice": "Aoede", "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words." },
+    "judge": { "voice": "Algieba", "model": "flash", "style": "Judge Hoot, a stern old barn owl judge. Dry, measured and authoritative, slow and precise, a hint of weary humour" },
+    "fin": { "voice": "Rasalgethi", "style": "Prosecutor Fin, a slick shark lawyer. Smarmy, over-confident and theatrical; when losing, flustered and stammering" },
+    "pip": { "voice": "Laomedeia", "style": "Pip the court clerk, a tiny eager bat. Kind, quick and encouraging, bright young voice" }
 }
