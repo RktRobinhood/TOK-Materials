@@ -95,6 +95,7 @@
             dom.choice = el('div.b-choice'),
             dom.overlay = el('div.b-overlay'),
         ]);
+        rootEl.appendChild(Rift.Assets.img('scene/battle-table', { className: 'scene-bg', label: 'the card table' }));
         rootEl.appendChild(screen);
         screen.addEventListener('keydown', e => { if (e.key === 'Escape') { ui.selected = null; render(); } });
 

@@ -159,7 +159,7 @@ Every background uses (already included below):
 **Attach:** `style-board.png`
 **Save as:** `2-world/battle-table.png`
 
-> A wide 16:9 painted background, at least 1672×941, no characters and no text. Keep the lower left and lower right thirds fairly open (characters will stand there). Match the attached style board exactly. Top-down view of a heavy wooden tavern table lit by candles, with carved circles where cards would sit on each player's side, a slot in the middle for one face-up card, scattered dice, a mug, wax drips. Dark edges fading into shadow.
+> A wide 16:9 painted background, at least 1672×941, no characters and no text. Match the attached style board exactly. Top-down view straight onto a heavy, old wooden tavern table lit by candles. The middle two-thirds of the table must be clear, flat, evenly lit wood (cards will be placed there by the game), with only a faint carved border line around the edge. Clutter only around the outer edges: candles with wax drips, scattered dice, a mug, a few coins, a little brass hourglass, and a faint cyan glow from a crack in one corner. The edges fade into dark violet shadow.
 
 ### 2.7 Time-rift effect
 
@@ -334,3 +334,7 @@ Record what was approved and why, as in the Odyssey project.
 | 2.5a Forest road | First try (2026-10-02) | Blank signpost with lantern, magenta and cyan fungi, fireflies, and the stone bridge and cyan crack ahead (continuity with the map). Wide open road across the lower half. |
 | 2.5b Troll bridge | First try (2026-10-02) | Toll booth with a blank sign and striped barrier, lantern posts, waterfall, violet sky with the cyan crack. The lower right is river and rocks rather than open ground, so characters belong on the left/centre road here. |
 | 2.5c Gate of guards | First try (2026-10-02) | The closest background yet to the style board: clear outlines, crimson thorns on violet. Two moon-marked doors, lantern post between them, torches, blank moon banners, and a wide paved stage in front for the guards. |
+| 2.6 Battle table | First try (2026-10-02) | Prompt revised before generating: no painted card slots (they would never line up with the game's cards), a clear middle and clutter only at the edges. Result is exactly that: an evenly lit plank table with a carved moon border, candles, dice, coins, mug, hourglass and the cyan crack in one corner. |
+| 2.7 Time-rift effect | First try (2026-10-02) | Six stages in reading order, from a jagged crack to a wide portal with Greek column, Victorian lamp, grid and clock hands; glows well on the dark background. Floating rocks counted as extra pieces at first: sheets.json now gives this sheet minArea 1000, so the rocks are merged into their rift. |
+| 2.8a Burrow | First try (2026-10-02) | Cosy and warm with violet accents: moon door open onto the garden with the stone sundial in the dawn light, patchwork bed, books and jars, teapot. Wide open floor for characters. |
+| 2.8b Rift Pass | First try (2026-10-02) | Torch-lit pass, cyan rift opening onto a Victorian street with glowing windows and a clock tower (a good Ch2 teaser). A bit of speckled grain in the texture, not visible at game size. The centre right is a chasm, so characters stand on the path left and centre. |

@@ -235,6 +235,7 @@
                     case 'rumour':
                     case 'rift':
                         if (!done || n.type !== 'story' || await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now')) {
+                            if (n.fx === 'rift') await Rift.UI.riftFx();
                             await Rift.Dialogue.play(n.script);
                         }
                         finish();
@@ -280,7 +281,7 @@
                             m.close();
                             let first = false;
                             Rift.State.update(s => { first = Rift.World.jumpToChapter(s, cid); });
-                            Rift.Audio.sfx('rift');
+                            Rift.UI.riftFx();
                             const n = Rift.World.node(Rift.State.get().map.at);
                             placeAvatar(n.x, n.y);
                             draw();

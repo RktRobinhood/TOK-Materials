@@ -58,7 +58,7 @@
             },
             'fair-rift': {
                 name: 'The Crack in the Sky', chapter: 'prologue', type: 'story', x: 330, y: 575,
-                scene: 'scene/fair', script: 'prologue.rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
+                scene: 'scene/fair', script: 'prologue.rift', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',
             },
 
@@ -115,7 +115,7 @@
             },
             'rift-pass': {
                 name: 'The Rift Pass', chapter: 'ch2', type: 'rift', x: 1407, y: 143,
-                scene: 'scene/rift-pass', script: 'ch1.pass', links: ['gate'],
+                scene: 'scene/rift-pass', script: 'ch1.pass', fx: 'rift', links: ['gate'],
                 teaser: 'The time rift glows here. Chapter 2 opens in lesson 2.',
             },
         },

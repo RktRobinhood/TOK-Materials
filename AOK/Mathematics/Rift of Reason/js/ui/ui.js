@@ -119,5 +119,26 @@
         const m = modal('Bag', el('div.stack', null, rows));
     }
 
-    Rift.UI = { toast, modal, confirm, hud, hearts, maxHealth, bag };
+    // The time rift tearing open: fx/rift-1..6 played in order, then faded out.
+    // Resolves when done; skipped quietly if the frames aren't there yet.
+    function riftFx() {
+        const frames = [1, 2, 3, 4, 5, 6].map(i => 'fx/rift-' + i).filter(id => Rift.Assets.has(id));
+        Rift.Audio.sfx('rift');
+        if (!frames.length) return Promise.resolve();
+        return new Promise(resolve => {
+            const img = el('img.rift-fx', { src: Rift.Assets.src(frames[0]), alt: '' });
+            const layer = el('div.rift-fx-layer', null, [img]);
+            overlay().appendChild(layer);
+            let i = 0;
+            const timer = setInterval(() => {
+                i += 1;
+                if (i < frames.length) { img.src = Rift.Assets.src(frames[i]); return; }
+                clearInterval(timer);
+                layer.classList.add('fade');
+                setTimeout(() => { layer.remove(); resolve(); }, 600);
+            }, 160);
+        });
+    }
+
+    Rift.UI = { toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx };
 })(typeof window !== 'undefined' ? window : globalThis);
