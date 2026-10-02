@@ -75,11 +75,18 @@
         });
     }
 
+    // What the browser voice should actually say: no stage directions in
+    // brackets, no "…". A line that is only a direction stays silent.
+    function speakable(text) {
+        return String(text || '').replace(/\([^)]*\)/g, ' ').replace(/…/g, ' ').replace(/[*_]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
     function speakFallback(line, vol) {
         const synth = root.speechSynthesis;
-        if (!synth || !root.SpeechSynthesisUtterance) return Promise.resolve();
+        const words = speakable(line.text);
+        if (!synth || !root.SpeechSynthesisUtterance || !/[\p{L}\p{N}]/u.test(words)) return Promise.resolve();
         return new Promise(resolve => {
-            const u = new root.SpeechSynthesisUtterance(line.text.replace(/[*_]/g, ''));
+            const u = new root.SpeechSynthesisUtterance(words);
             const fb = fallbackFor(line.speaker);
             u.pitch = fb.pitch;
             u.rate = fb.rate;

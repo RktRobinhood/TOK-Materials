@@ -33,5 +33,21 @@
     "sweep": { "voice": "Puck", "style": "Smudge the sweep, a cheeky young mole chimney sweep. Bright, cheeky and quick, a street-smart kid" },
     "schoolteacher": { "voice": "Erinome", "style": "Miss Quill the schoolteacher, a prim stork. Crisp, strict and exact, every word pronounced carefully" },
     "gardener": { "voice": "Zubenelgenubi", "style": "Mr Thistle the gardener, a scruffy goat. Very slow, calm and easy-going, in no hurry at all" },
-    "booleon": { "voice": "Charon", "style": "Booleon, a dignified grey heron in a Victorian frock coat, inspired by a 19th-century logician. Calm, gentle and exact, a patient teacher who finds simple rules beautiful" }
+    "booleon": { "voice": "Charon", "style": "Booleon, a dignified grey heron in a Victorian frock coat, inspired by a 19th-century logician. Calm, gentle and exact, a patient teacher who finds simple rules beautiful" },
+    "carlseal": { "voice": "Charon", "style": "A young seal chess genius. Calm, quiet and faintly bored, as if every move is obvious. A creature character, never an imitation of a real person; speak only the given words." },
+    "khaby": { "voice": "Achird", "style": "A deadpan llama who never speaks. Only a soft, amused closed-mouth hum or a short exhale, no words. A creature character, never an imitation of a real person; speak only the given words." },
+    "eminemu": { "voice": "Fenrir", "style": "An intense emu rapper. Rapid, punchy, rhythmic delivery, clipped and tight. A creature character, never an imitation of a real person; speak only the given words." },
+    "obambu": { "voice": "Iapetus", "style": "A calm panda orator. Measured, warm and deliberate, with long thoughtful pauses. A creature character, never an imitation of a real person; speak only the given words." },
+    "beansprout": { "voice": "Puck", "style": "A rubber-faced teddy bear who barely talks. Mumbled single words, grunts and little noises. A creature character, never an imitation of a real person; speak only the given words." },
+    "gargoyle": { "voice": "Despina", "style": "A stone gargoyle diva. Theatrical, dramatic and grand, every word a performance. A creature character, never an imitation of a real person; speak only the given words." },
+    "haalandroid": { "voice": "Alnilam", "style": "A huge robot-viking footballer. Flat, robotic and monotone, short machine-like phrases. A creature character, never an imitation of a real person; speak only the given words." },
+    "usainvolt": { "voice": "Sadachbia", "style": "A speedy electric eel. Cheerful, fast and laid-back confident, laughing easily. A creature character, never an imitation of a real person; speak only the given words." },
+    "keanu": { "voice": "Umbriel", "style": "A kind black cat. Gentle, earnest and soft-spoken, sincerely polite. A creature character, never an imitation of a real person; speak only the given words." },
+    "beeyonce": { "voice": "Kore", "style": "A queen bee star. Regal, poised and confident, commanding without shouting. A creature character, never an imitation of a real person; speak only the given words." },
+    "eelish": { "voice": "Vindemiatrix", "style": "A moody eel singer. A soft, breathy whisper, close to the microphone. A creature character, never an imitation of a real person; speak only the given words." },
+    "rockodile": { "voice": "Orus", "style": "A huge bald crocodile. Booming, upbeat motivational hype, big grin in the voice. A creature character, never an imitation of a real person; speak only the given words." },
+    "attenbirdough": { "voice": "Gacrux", "style": "An elderly puffin naturalist. A hushed, reverent nature-documentary narration, almost whispering. A creature character, never an imitation of a real person; speak only the given words." },
+    "kardashiant": { "voice": "Leda", "style": "A glamorous ant. Breezy, vain and a little bored, drawn-out vowels. A creature character, never an imitation of a real person; speak only the given words." },
+    "messilion": { "voice": "Achernar", "style": "A shy lion cub. Quiet, soft and modest, few words. A creature character, never an imitation of a real person; speak only the given words." },
+    "shakirattle": { "voice": "Aoede", "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words." }
 }

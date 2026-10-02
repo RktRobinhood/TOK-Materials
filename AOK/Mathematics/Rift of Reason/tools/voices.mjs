@@ -50,6 +50,8 @@ function loadGame() {
 // so they are spoken, not spelled out.
 export function spoken(text) {
     let t = text.replace(/,\s*\{name\}/g, '').replace(/\{name\}[,!.]?\s*/g, '');
+    // Stage directions in brackets, e.g. "(whispering)" or "(raises one eyebrow)", are acted, not read.
+    t = t.replace(/\([^)]*\)/g, ' ').replace(/…\s*…/g, '…');
     t = t.replace(/\s+([,.!?…])/g, '$1').replace(/\s+/g, ' ').trim();
     const letters = t.replace(/[^A-Za-z]/g, '');
     if (letters.length > 8 && letters === letters.toUpperCase()) {
@@ -67,7 +69,7 @@ function collect(Rift) {
         seen.add(id);
         if (!CAST[who]) { skipped.push({ who, text, why: 'no voice in voices-cast.json' }); return; }
         const say = spoken(text);
-        if (!/[a-z]/i.test(say)) { skipped.push({ who, text, why: 'nothing to say' }); return; }
+        if (!/[a-z]/i.test(say)) { skipped.push({ who, text, why: 'nothing to say (stage direction only)' }); return; }
         lines.push({ id, who, text, say, mood, where });
     };
     const walk = (node, where) => {
