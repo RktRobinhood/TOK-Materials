@@ -6,15 +6,27 @@
 (function (root) {
     'use strict';
     root.Rift.data.assets = {
+        'avatar/mothkin-boy/happy': { file: 'avatars/mothkin-boy-happy.webp', w: 196, h: 240 },
+        'avatar/mothkin-boy/idle': { file: 'avatars/mothkin-boy-idle.webp', w: 326, h: 462 },
+        'avatar/mothkin-boy/neutral': { file: 'avatars/mothkin-boy-neutral.webp', w: 195, h: 240 },
+        'avatar/mothkin-boy/surprised': { file: 'avatars/mothkin-boy-surprised.webp', w: 201, h: 240 },
+        'avatar/mothkin-boy/worried': { file: 'avatars/mothkin-boy-worried.webp', w: 202, h: 240 },
+        'avatar/mothkin-girl/happy': { file: 'avatars/mothkin-girl-happy.webp', w: 187, h: 240 },
+        'avatar/mothkin-girl/idle': { file: 'avatars/mothkin-girl-idle.webp', w: 358, h: 478 },
+        'avatar/mothkin-girl/neutral': { file: 'avatars/mothkin-girl-neutral.webp', w: 191, h: 240 },
+        'avatar/mothkin-girl/surprised': { file: 'avatars/mothkin-girl-surprised.webp', w: 188, h: 240 },
+        'avatar/mothkin-girl/worried': { file: 'avatars/mothkin-girl-worried.webp', w: 171, h: 240 },
         'avatar/owlet-boy/happy': { file: 'avatars/owlet-boy-happy.webp', w: 194, h: 240 },
         'avatar/owlet-boy/idle': { file: 'avatars/owlet-boy-idle.webp', w: 366, h: 414 },
         'avatar/owlet-boy/neutral': { file: 'avatars/owlet-boy-neutral.webp', w: 207, h: 240 },
         'avatar/owlet-boy/surprised': { file: 'avatars/owlet-boy-surprised.webp', w: 201, h: 240 },
+        'avatar/owlet-boy/walk': { file: 'avatars/owlet-boy-walk.webp', w: 1674, h: 355, frames: 6, frameWidth: 279, frameHeight: 355 },
         'avatar/owlet-boy/worried': { file: 'avatars/owlet-boy-worried.webp', w: 220, h: 240 },
         'avatar/owlet-girl/happy': { file: 'avatars/owlet-girl-happy.webp', w: 232, h: 240 },
         'avatar/owlet-girl/idle': { file: 'avatars/owlet-girl-idle.webp', w: 366, h: 429 },
         'avatar/owlet-girl/neutral': { file: 'avatars/owlet-girl-neutral.webp', w: 228, h: 240 },
         'avatar/owlet-girl/surprised': { file: 'avatars/owlet-girl-surprised.webp', w: 228, h: 240 },
+        'avatar/owlet-girl/walk': { file: 'avatars/owlet-girl-walk.webp', w: 1734, h: 364, frames: 6, frameWidth: 289, frameHeight: 364 },
         'avatar/owlet-girl/worried': { file: 'avatars/owlet-girl-worried.webp', w: 245, h: 240 },
     };
 })(typeof window !== 'undefined' ? window : globalThis);
