@@ -22,8 +22,7 @@
             onclick: o.onclick,
             title: known ? c.name : '???',
         }, [
-            Rift.Assets.img('creature/' + speciesId + '/idle', { colour: known ? c.colour : '#333', label: known ? c.name : '???', className: known ? '' : 'silhouette' }),
-            el('div.dex-name', { text: known ? c.name : '???' }),
+            Rift.UI.framedCard(speciesId, { known }),
             o.count ? el('div.dex-count', { text: '×' + o.count }) : null,
         ]);
     }
@@ -33,8 +32,8 @@
         const c = Rift.data.creatures[speciesId];
         const mine = s.creatures.filter(x => x.species === speciesId);
         const body = el('div.stack', null, [
-            el('div.row', null, [
-                Rift.Assets.img('creature/' + speciesId + '/smug', { className: 'dex-portrait', colour: c.colour, label: c.name }),
+            el('div.row', { style: { alignItems: 'flex-start' } }, [
+                Rift.UI.framedCard(speciesId, { big: true }),
                 el('div.stack', null, [
                     el('div.row.wrap', null, [colourChip(c.colour), el('span.chip', { text: c.rarity }), el('span.chip', { text: '⚔ power ' + c.power })]),
                     el('div.small.muted', { text: 'Inspired by ' + c.inspiredBy + ' (a caricature).' }),

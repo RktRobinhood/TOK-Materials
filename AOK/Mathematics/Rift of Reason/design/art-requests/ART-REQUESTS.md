@@ -286,6 +286,13 @@ Every caricature sheet uses (two caricatures per sheet, one per row; already inc
 
 > On a transparent background (PNG), no text: nine separate game item icons, each about the same size, in two rows with wide clear gaps between them and an empty margin at the edges; each item is one connected shape. Top row, left to right: **1, catch charm:** a small woven basket-charm with a glowing knot. **2, great charm:** a fancier golden version with a gem. **3, lure:** a little lantern releasing a few sparkly moths (moths touching the lantern's glow). **4, tonic:** a round potion bottle with a glowing heart inside. **5, ward:** a small shield-shaped amulet with a protective rune shape (no letters). Bottom row, left to right: **6, mending:** a roll of glowing bandage with a needle stuck in it. **7, anchor:** a tiny brass anchor wrapped in a clock chain. **8, trickster coin:** a worn bronze coin with a winking face, tilted to show a little mask on its other side. **9, heartstone:** a small glowing red gemstone shaped like a heart, wrapped in silver wire. Match the attached style board.
 
+### 5.1b Battle items
+
+**Attach:** `style-board.png`, `items.png`
+**Save as:** `5-ui/items-extra.png`
+
+> Two more item icons in exactly the same style and size as the seven item icons above, on a transparent background (PNG), no text, side by side with a wide clear gap and an empty margin at the edges; each is one connected shape. **Left, trickster coin:** a worn bronze coin with a winking face, tilted to show a little mask on its other side. **Right, heartstone:** a small glowing red gemstone shaped like a heart, wrapped in silver wire.
+
 ### 5.2 Card frames
 
 **Attach:** `style-board.png`
@@ -354,3 +361,6 @@ Record what was approved and why, as in the Odyssey project.
 | 4.5 Siuuugull + Rawmsay | First try (2026-10-02) | Gelled, chest-out seagull in a plain kit with a spinning celebration; furious steaming lamb chef with spatula and flaming pan. Both lighter and less shaded than the earlier sheets, but they pop well on the dark background and fit the card game. Sliced cleanly. |
 | 4.6 Speedcheeta + Chimpossible | First try (2026-10-02) | Screaming cheetah cub with a flaming red aura and a wild backflip; headset chimp at a studio mic pointing at a glowing screen of a screaming chimp. Back to the richer shading of the earlier sheets. Chimp is furry rather than bald: fine. Sliced cleanly. All 12 lesson-1 caricatures done. |
 | 4.7 Legendaries | First try (2026-10-02) | Gorgeous and clearly a tier above the caricatures: geometer tortoise with compass and construction-line shell, punched-card-lace hummingbird, owl inside a Möbius loop, antlered astronomer with brass nose and quadrant, hexagon hedgehog poet. Golden auras overlapped, so sheets.json uses threshold 235 for this sheet (cuts on solid figures, auras kept). Stage 4 complete. |
+| 5.1 Items | First try (2026-10-02) | Seven rich, readable icons: charm, great charm, moth lantern, heart tonic, star-rune ward, glowing bandage, clock-chain anchor. Two battle items were added to the game afterwards, so they get their own small sheet (5.1b, items-extra.png). |
+| 5.1b Battle items | First try (2026-10-02) | Winking bronze coin with a mask on its twin, silver-wired heartstone; same size and finish as the other seven (checked side by side). |
+| 5.2 Card frames | First try (2026-10-02) | Six colour frames with emblems (compass, flame-heart, eye, quill, spiral star, hourglass), a parchment-and-chain axiom frame with keyhole, and a magenta rift-swirl card back. Art windows are truly transparent (checked); mocked up with Lobstorian inside the blue frame and it reads like a real card. Prompt revised before generating to ask for a see-through window. |

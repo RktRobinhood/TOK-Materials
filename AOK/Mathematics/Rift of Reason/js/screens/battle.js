@@ -202,7 +202,8 @@
         }
 
         function cardBack(small) {
-            return el('div.bcard.back' + (small ? '.small' : ''), {}, [el('div.back-mark', { text: '⟁' })]);
+            const art = Rift.Assets.url('ui/card-back');
+            return el('div.bcard.back' + (small ? '.small' : ''), art ? { style: { background: 'url("' + art + '") center / 100% 100% no-repeat', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)', border: '0' } } : {}, art ? [] : [el('div.back-mark', { text: '⟁' })]);
         }
 
         // ---- bars ----

@@ -118,13 +118,14 @@
         ] },
 
         "items.png": { "type": "islands", "minArea": 1500, "ids": [
-            "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor", "item/trickster-coin", "item/heartstone"
+            "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
         ] },
+        "items-extra.png": { "type": "islands", "minArea": 1500, "ids": ["item/trickster-coin", "item/heartstone"] },
         "card-frames.png": { "type": "islands", "class": "card", "ids": [
             "ui/card-reason", "ui/card-emotion", "ui/card-perception", "ui/card-language", "ui/card-imagination", "ui/card-memory",
             "ui/card-axiom", "ui/card-back"
         ] },
-        "ui-kit.png": { "type": "islands", "ids": [
+        "ui-kit.png": { "type": "islands", "minArea": 800, "ids": [
             "ui/panel", "ui/nameplate", "ui/button", "ui/button-hover", "ui/button-pressed",
             "ui/heart-full", "ui/heart-empty",
             "ui/scar-fogged-eye", "ui/scar-shaky-hand", "ui/scar-heavy-heart",

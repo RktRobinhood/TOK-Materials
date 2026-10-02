@@ -140,5 +140,26 @@
         });
     }
 
-    Rift.UI = { toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx };
+    // A creature as a framed card (ui/card-<colour>): art under the frame's
+    // transparent window, name (and optionally power + ability) in the dark panel.
+    // Falls back to a plain styled card until the frame art exists.
+    function framedCard(speciesId, opts) {
+        const o = opts || {};
+        const c = Rift.data.creatures[speciesId];
+        const known = o.known !== false;
+        const frameId = 'ui/card-' + c.colour;
+        const node = el('div.fcard' + (o.big ? '.big' : ''), { dataset: { colour: c.colour } }, [
+            el('div.fcard-art', null, [Rift.Assets.img('creature/' + speciesId + '/idle', { colour: known ? c.colour : '#333', label: known ? c.name : '???', className: known ? '' : 'silhouette' })]),
+            Rift.Assets.has(frameId) ? Rift.Assets.img(frameId, { className: 'fcard-frame' }) : null,
+            el('div.fcard-panel', null, [
+                el('div.fcard-name', { text: known ? c.name + (c.rarity === 'legendary' ? ' ★' : '') : '???' }),
+                o.big && known ? el('div.fcard-power', { text: '⚔ ' + c.power }) : null,
+                o.big && known ? el('div.fcard-text', { text: c.abilityText }) : null,
+            ]),
+        ]);
+        if (!Rift.Assets.has(frameId)) node.classList.add('no-frame');
+        return node;
+    }
+
+    Rift.UI = { toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx, framedCard };
 })(typeof window !== 'undefined' ? window : globalThis);
