@@ -66,5 +66,6 @@
         'avatar/raven-girl/surprised': { file: 'avatars/raven-girl-surprised.webp', w: 213, h: 240 },
         'avatar/raven-girl/walk': { file: 'avatars/raven-girl-walk.webp', w: 1566, h: 369, frames: 6, frameWidth: 261, frameHeight: 369 },
         'avatar/raven-girl/worried': { file: 'avatars/raven-girl-worried.webp', w: 211, h: 240 },
+        'scene/map': { file: 'scenes/map.webp', w: 1672, h: 941, small: 'scenes/map-small.webp' },
     };
 })(typeof window !== 'undefined' ? window : globalThis);
