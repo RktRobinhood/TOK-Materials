@@ -39,7 +39,7 @@ Every avatar sheet uses the same layout (already included in each prompt below):
 
 Every walk-cycle sheet uses the same layout (already included below):
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG).
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG).
 
 ### 1.1 Owlet: boy and girl
 
@@ -53,7 +53,7 @@ Every walk-cycle sheet uses the same layout (already included below):
 **Attach:** `style-board.png`, `owlet-sheet.png`
 **Save as:** `1-avatars/owlet-walk.png`
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Owlet boy (red scarf, satchel) and the Owlet girl (teal hooded cloak, spectacles, book) from the attached sheet. The scarf and cloak swing with the walk.
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Owlet boy (red scarf, satchel) and the Owlet girl (teal hooded cloak, spectacles, book) from the attached sheet. The scarf and cloak swing with the walk.
 
 ### 1.3 Moth-kin: boy and girl
 
@@ -67,7 +67,7 @@ Every walk-cycle sheet uses the same layout (already included below):
 **Attach:** `style-board.png`, `mothkin-sheet.png`
 **Save as:** `1-avatars/mothkin-walk.png`
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Moth-kin boy and girl from the attached sheet, each carrying their lantern, which swings gently with the walk.
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Moth-kin boy and girl from the attached sheet, each carrying their lantern, which swings gently with the walk.
 
 ### 1.5 Fox kit: boy and girl
 
@@ -81,7 +81,7 @@ Every walk-cycle sheet uses the same layout (already included below):
 **Attach:** `style-board.png`, `fox-sheet.png`
 **Save as:** `1-avatars/fox-walk.png`
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Fox kit boy and girl from the attached sheet; their tails sway with each step.
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Fox kit boy and girl from the attached sheet; their tails sway with each step.
 
 ### 1.7 Frogling: boy and girl
 
@@ -95,7 +95,7 @@ Every walk-cycle sheet uses the same layout (already included below):
 **Attach:** `style-board.png`, `frogling-sheet.png`
 **Save as:** `1-avatars/frogling-walk.png`
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Frogling boy and girl from the attached sheet; give the walk a slightly bouncy, springy feel.
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Frogling boy and girl from the attached sheet; give the walk a slightly bouncy, springy feel.
 
 ### 1.9 Raven chick: boy and girl
 
@@ -109,7 +109,7 @@ Every walk-cycle sheet uses the same layout (already included below):
 **Attach:** `style-board.png`, `raven-sheet.png`
 **Save as:** `1-avatars/raven-walk.png`
 
-> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Raven chick boy and girl from the attached sheet.
+> A walk-cycle sprite sheet: two rows on one transparent canvas, each row six frames of equal width. **Top row: the boy, bottom row: the girl.** Strict side profile facing right in every frame (never turned towards the viewer), a complete walk loop (contact, down, passing, up, contact, passing), identical character, outfit, colours and scale in every frame, all on the same ground line, feet visible, frames evenly spaced with clear empty space between them and an empty margin at the canvas edges. Match the attached sheet exactly. No text, no motion lines, no "!" marks, no dust puffs, no shadows; transparent background (PNG). The characters are the Raven chick boy and girl from the attached sheet.
 
 ---
 
@@ -319,3 +319,10 @@ Record what was approved and why, as in the Odyssey project.
 | 1.1 Owlet sheet | First try (2026-10-02) | Matches the style board; boy (red scarf, satchel) and girl (teal hooded cloak, spectacles, book) told apart at a glance. Real transparency, nothing touching; sliced cleanly into 10 assets on a dark background, no halos. The "!" marks on the surprised busts stay attached to the bust (fine). |
 | 1.2 Owlet walk | First try (2026-10-02) | Strict side profile, same character and scale in all 12 frames; the tool split both rows into 6 frames and re-packed them on one ground line with no head jitter. Legs read as stride / stride / passing. The scarf tail is slightly shorter in the boy's frame 6 (a small flicker at map size, acceptable). |
 | 1.3 Moth-kin sheet | First try (2026-10-02) | On style; blue fur + waistcoat + amber lantern vs lilac fur + star shawl + moon-white lantern read apart. Lanterns glow nicely on the dark game background. Sliced cleanly into 10 assets. Busts are three-quarter view facing right (the Owlet busts face front): accepted, portraits sit on the left of the dialogue box facing in. |
+| 1.4 Moth-kin walk | First try (2026-10-02) | Strict side profile, consistent across all 12 frames; legs alternate clearly and the lanterns swing. Sliced into two 6-frame strips on one ground line. |
+| 1.5 Fox kit sheet | First try (2026-10-02) | On style; orange + green bandana vs red + mustard duffle coat read apart instantly. Busts face the viewer (added "the busts face the viewer like the Owlet busts" to the prompt for consistency). Girl's ribbon sits mid-tail, not the tip: fine. Sliced cleanly into 10 assets. |
+| 1.6 Fox kit walk | First try (2026-10-02) | Strict side profile, tails sway and never merge with the next frame (prompt line about tails worked). The last frames sit at the canvas edge and lose a few pixels of muzzle outline, not visible at map size. |
+| 1.7 Frogling sheet | First try (2026-10-02) | On style and very readable; yellow raincoat + green boots vs lily-pad hat + red coat + red boots. The boy's yellow coat echoes the Fox girl's mustard coat, but the species silhouettes keep them apart. Sliced cleanly into 10 assets. |
+| 1.8 Frogling walk | First try (2026-10-02) | Strict side profile, consistent outfit and scale, boots alternate clearly with a little bounce; clear margins this time. Sliced into two 6-frame strips. |
+| 1.9 Raven chick sheet | First try (2026-10-02) | On style; grey hoodie + notebook + pencil vs purple beret + cape + magnifier. Checked on the dark game background: the rim-light line in the prompt worked and faces read clearly; the girl's lower feathers fade a little into the dark (a soft light drop-shadow on sprites in the game fixes this). Sliced cleanly into 10 assets. |
+| 1.10 Raven chick walk | First try (2026-10-02) | Consistent across all 12 frames, legs alternate, rim light kept. Bodies are a slight three-quarter turn rather than strict profile, but every frame turns the same way, so the loop holds. Stage 1 complete. |

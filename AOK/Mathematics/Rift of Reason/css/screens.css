@@ -115,3 +115,10 @@
 .wit-claim { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; }
 .wit-btns .btn.picked { background: linear-gradient(#f6c75a, #c98d14); color: var(--ink); }
 @media (max-width: 1000px) { .wit { grid-template-columns: 1fr; } }
+
+/* A soft light rim so dark characters (Raven chicks, imps) don't fade into dark backgrounds. */
+.avatar-option img, .avatar-big, .hud-face, .dialogue .portrait, .enc-creature, .dex-card img, .dex-portrait, .map-avatar {
+    filter: drop-shadow(0 0 3px rgba(239, 227, 200, 0.35)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.55));
+}
+.enc-creature.dizzy { filter: grayscale(0.3) drop-shadow(0 0 3px rgba(239, 227, 200, 0.35)) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
+.dex-card.unknown img { filter: brightness(0) opacity(0.5); }
