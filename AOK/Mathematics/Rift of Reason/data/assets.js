@@ -66,6 +66,13 @@
         'avatar/raven-girl/surprised': { file: 'avatars/raven-girl-surprised.webp', w: 213, h: 240 },
         'avatar/raven-girl/walk': { file: 'avatars/raven-girl-walk.webp', w: 1566, h: 369, frames: 6, frameWidth: 261, frameHeight: 369 },
         'avatar/raven-girl/worried': { file: 'avatars/raven-girl-worried.webp', w: 211, h: 240 },
+        'scene/fair': { file: 'scenes/fair.webp', w: 1600, h: 900, small: 'scenes/fair-small.webp' },
         'scene/map': { file: 'scenes/map.webp', w: 1672, h: 941, small: 'scenes/map-small.webp' },
+        'scene/road-bridge': { file: 'scenes/road-bridge.webp', w: 1600, h: 900, small: 'scenes/road-bridge-small.webp' },
+        'scene/road-forest': { file: 'scenes/road-forest.webp', w: 1600, h: 900, small: 'scenes/road-forest-small.webp' },
+        'scene/road-gate': { file: 'scenes/road-gate.webp', w: 1600, h: 900, small: 'scenes/road-gate-small.webp' },
+        'scene/stall-gallery': { file: 'scenes/stall-gallery.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-small.webp' },
+        'scene/stall-pattern': { file: 'scenes/stall-pattern.webp', w: 1600, h: 900, small: 'scenes/stall-pattern-small.webp' },
+        'scene/stall-witness': { file: 'scenes/stall-witness.webp', w: 1600, h: 900, small: 'scenes/stall-witness-small.webp' },
     };
 })(typeof window !== 'undefined' ? window : globalThis);
