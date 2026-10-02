@@ -117,6 +117,41 @@
             "creature/euclidon/idle", "creature/lovelace/idle", "creature/godelix/idle", "creature/tycho/idle", "creature/hexling/idle"
         ] },
 
+        "legendaries-poses-1.png": { "type": "islands", "minArea": 2500, "threshold": 235, "ids": [
+            "creature/euclidon/attack", "creature/euclidon/smug", "creature/euclidon/angry", "creature/euclidon/defeated",
+            "creature/lovelace/attack", "creature/lovelace/smug", "creature/lovelace/angry", "creature/lovelace/defeated",
+            "creature/godelix/attack", "creature/godelix/smug", "creature/godelix/angry", "creature/godelix/defeated"
+        ] },
+        "legendaries-poses-2.png": { "type": "islands", "minArea": 2500, "threshold": 235, "ids": [
+            "creature/tycho/attack", "creature/tycho/smug", "creature/tycho/angry", "creature/tycho/defeated",
+            "creature/hexling/attack", "creature/hexling/smug", "creature/hexling/angry", "creature/hexling/defeated"
+        ] },
+        "village-square.png": { "type": "scene", "id": "scene/village-square" },
+        "clock-tower.png": { "type": "scene", "id": "scene/clock-tower" },
+        "switch-room.png": { "type": "scene", "id": "scene/switch-room" },
+        "map-ch2.png": { "type": "scene", "id": "scene/map-ch2" },
+        "villagers-baker-postmistress.png": { "type": "islands", "minArea": 2500, "ids": [
+            "npc/villager-baker/idle", ["npc/villager-baker/neutral", "npc/villager-baker"], "npc/villager-baker/accusing", "npc/villager-baker/nervous", "npc/villager-baker/unmasked",
+            "npc/villager-postmistress/idle", ["npc/villager-postmistress/neutral", "npc/villager-postmistress"], "npc/villager-postmistress/accusing", "npc/villager-postmistress/nervous", "npc/villager-postmistress/unmasked"
+        ] },
+        "villagers-clockmaker-lamplighter.png": { "type": "islands", "minArea": 2500, "ids": [
+            "npc/villager-clockmaker/idle", ["npc/villager-clockmaker/neutral", "npc/villager-clockmaker"], "npc/villager-clockmaker/accusing", "npc/villager-clockmaker/nervous", "npc/villager-clockmaker/unmasked",
+            "npc/villager-lamplighter/idle", ["npc/villager-lamplighter/neutral", "npc/villager-lamplighter"], "npc/villager-lamplighter/accusing", "npc/villager-lamplighter/nervous", "npc/villager-lamplighter/unmasked"
+        ] },
+        "villagers-constable-sweep.png": { "type": "islands", "minArea": 2500, "ids": [
+            "npc/villager-constable/idle", ["npc/villager-constable/neutral", "npc/villager-constable"], "npc/villager-constable/accusing", "npc/villager-constable/nervous", "npc/villager-constable/unmasked",
+            "npc/villager-sweep/idle", ["npc/villager-sweep/neutral", "npc/villager-sweep"], "npc/villager-sweep/accusing", "npc/villager-sweep/nervous", "npc/villager-sweep/unmasked"
+        ] },
+        "villagers-schoolteacher-gardener.png": { "type": "islands", "minArea": 2500, "ids": [
+            "npc/villager-schoolteacher/idle", ["npc/villager-schoolteacher/neutral", "npc/villager-schoolteacher"], "npc/villager-schoolteacher/accusing", "npc/villager-schoolteacher/nervous", "npc/villager-schoolteacher/unmasked",
+            "npc/villager-gardener/idle", ["npc/villager-gardener/neutral", "npc/villager-gardener"], "npc/villager-gardener/accusing", "npc/villager-gardener/nervous", "npc/villager-gardener/unmasked"
+        ] },
+        "mayor.png": { "type": "islands", "minArea": 2500, "ids": ["npc/mayor/idle", ["npc/mayor/neutral", "npc/mayor"], "npc/mayor/accusing", "npc/mayor/nervous", "npc/mayor/unmasked"] },
+        "booleon.png": { "type": "islands", "minArea": 2500, "threshold": 235, "ids": ["creature/booleon/idle", "creature/booleon/attack", "creature/booleon/smug", "creature/booleon/angry", "creature/booleon/defeated"] },
+        "ch2-props.png": { "type": "islands", "minArea": 800, "ids": [
+            "ui/switch-off", "ui/switch-on", "ui/bulb-off", "ui/bulb-on", "ui/gate-plaque",
+            "ui/block-loose", "ui/block-cemented", "ui/block-cracked", "ui/accuse-token"
+        ] },
         "items.png": { "type": "islands", "minArea": 1500, "ids": [
             "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
         ] },
