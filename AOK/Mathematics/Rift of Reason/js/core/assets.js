@@ -16,13 +16,26 @@
         return (Rift.data && Rift.data.assets) || {};
     }
 
+    // A missing pose falls back to the same character's other art before a
+    // placeholder: creature/x/smug → creature/x/idle, npc/x/happy → npc/x → npc/x/idle,
+    // avatar/x/happy → avatar/x/neutral → avatar/x/idle.
+    function resolve(id) {
+        const m = manifest();
+        if (m[id]) return id;
+        const parts = id.split('/');
+        if (parts.length < 2 || parts[0] === 'scene') return null;
+        const base = parts.slice(0, 2).join('/');
+        const tries = [base, base + '/neutral', base + '/idle'];
+        return tries.find(t => t !== id && m[t]) || null;
+    }
+
     function has(id) {
-        return !!manifest()[id];
+        return !!resolve(id);
     }
 
     function url(id) {
-        const entry = manifest()[id];
-        return entry ? BASE + entry.file : null;
+        const found = resolve(id);
+        return found ? BASE + manifest()[found].file : null;
     }
 
     // Placeholder art: an SVG data URL with a soft silhouette, a glow in the
