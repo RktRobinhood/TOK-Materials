@@ -96,7 +96,7 @@
                 hintIx = 0;
                 const { def, difficulty } = current();
                 const rng = Rift.makeRng(visit.seed + ':stage' + stageIx);
-                const data = def.generate(rng, difficulty);
+                const data = def.generate(rng, difficulty, stages[stageIx].opts); // opts e.g. { theme: 'statistics' } from data/map.js
                 current().data = data;
                 stages[stageIx].data = data;
                 title.querySelector('.stage').textContent = def.name + (stages.length > 1 ? '  ·  stage ' + (stageIx + 1) + ' of ' + stages.length : '');

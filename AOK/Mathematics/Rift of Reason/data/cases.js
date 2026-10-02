@@ -1,0 +1,611 @@
+/*
+ * The Tribunal's cases (chapter 3, encounters 1-3; design/CH3.md).
+ *
+ * Each case puts one argument on trial and teaches one flaw. A witness (a
+ * caricature id from data/creatures.js) gives 4-6 statements of testimony.
+ * The player PRESSES statements (the witness says more: sometimes a hidden
+ * premise, a new statement or a new piece of evidence) and PRESENTS evidence
+ * at the statement it contradicts. Then they name the flaw.
+ *
+ * Shape (all text short, plain English for non-native readers):
+ *   id, title, theme ('argument' | 'statistics' | 'proof'), difficulty 1..3
+ *   flaw: a flaw id (js/puzzles/tribunal.js FLAWS); distractors: 3 other flaw ids
+ *   witness: creature id; claim: the claim on trial; opening (Prosecutor Fin); intro (witness)
+ *   params: optional list of number sets; {name} in any text is filled from one set
+ *   testimony: [{ id, text, hidden?, press: { q, reply, pip?, premise?, adds?, unlocks? } }]
+ *       hidden statements appear when a press `adds` them or a contradiction's `after.adds` does
+ *   evidence: [{ id, art (ui/evidence-<art>), name, desc, hidden? }]   hidden = unlocked by a press
+ *   contradictions: [{ statements: [ids], evidence: [ids], explain, reaction, after?: { lines, adds? } }]
+ *       any listed statement + any listed evidence counts; `need` of them must be found (default all)
+ *   near: [{ statement, evidence, say }]   close but not the point: a nudge, no penalty
+ *   hint, why: { right, wrong: [3] }, lesson, repair?: { question, options: [{ id, text, explain }], correct }
+ *
+ * Jokes stay with each caricature's public persona (see design/ROSTER.md).
+ * Mechanics in the spirit of courtroom cross-examination games; every name,
+ * line and picture here is new.
+ */
+(function (root) {
+    'use strict';
+    const Rift = root.Rift;
+
+    Rift.data.cases = [
+        // ===================================================================
+        // Difficulty 1
+        // ===================================================================
+        {
+            id: 'crowd-decimal',
+            title: 'The Case of the Shrinking Nines',
+            theme: 'argument',
+            difficulty: 1,
+            flaw: 'popularity',
+            distractors: ['authority', 'circular', 'misleading-chart'],
+            witness: 'tremendoodle',
+            claim: '0.999… (nines forever) is smaller than 1.',
+            opening: 'The witness has the people on his side, Your Honour. All of them. Practically.',
+            intro: 'Tremendous to be here. Nobody knows decimals like me. Nobody.',
+            testimony: [
+                { id: 's1', text: 'Everyone knows 0.999… is smaller than 1. Everyone!',
+                    press: { q: 'Everyone? Who exactly?', reply: 'Many people. The best people. I did a poll, a tremendous poll.' } },
+                { id: 's2', text: 'I asked 100 people at the Fair. 87 said it is smaller. A huge win!',
+                    press: { q: 'Did you ask any mathematicians?', reply: 'Why would I? A mathematician only gets one vote, same as everyone.' } },
+                { id: 's3', text: 'When most people believe something, it is true. That is how facts work.',
+                    press: { q: 'Has a big crowd ever been wrong?', reply: 'Never. The crowd has a perfect record. Perfect!', premise: 'If most people believe it, it is true.' } },
+                { id: 's4', text: 'The nines get closer and closer to 1, but they never arrive. Sad!',
+                    press: { q: 'Never arrive?', reply: 'Never. They keep walking forever. Very tired nines.' } },
+                { id: 's5', text: 'So 0.999… is smaller than 1. Case closed. Very closed.',
+                    press: { q: 'Closed already?', reply: 'Closed! I am locking it. Nobody open this case.' } },
+            ],
+            evidence: [
+                { id: 'poll', art: 'survey', name: 'Fair poll', desc: '100 visitors were asked: is 0.999… smaller than 1? 87 said yes. 13 said no.' },
+                { id: 'video', art: 'video', name: 'Ball-drop video', desc: 'Last year, 90 of 100 visitors said a heavy ball falls faster than a light one. The video: dropped together, both land at the same moment.' },
+                { id: 'notes', art: 'notebook', name: 'Pip’s notebook', desc: '1/3 = 0.333…  Three thirds make 1, and 3 × 0.333… = 0.999…  So 0.999… is exactly 1.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['video'],
+                    explain: 'Most people believed the heavy ball falls faster, and the video shows they were wrong. A crowd can be wrong about a fact.',
+                    reaction: 'A video?! Fake video! A very… very real-looking video.' },
+            ],
+            near: [
+                { statement: 's5', evidence: 'notes', say: 'True: Pip’s notebook shows 0.999… is exactly 1, so the conclusion is false. But the court wants the premise that fooled the witness. Which statement does his whole argument lean on?' },
+                { statement: 's4', evidence: 'notes', say: 'Good: 0.999… doesn’t “walk” anywhere, it is one number, and it equals 1. But why did he believe it? Look for the statement about crowds.' },
+                { statement: 's2', evidence: 'poll', say: 'The poll agrees with this statement: 87 people really did say it. The question is whether that makes it true.' },
+            ],
+            hint: 'His whole argument leans on one idea about crowds. Is there any evidence of a big crowd being wrong?',
+            why: {
+                right: 'It shows a big majority being wrong about a fact, so “most people believe it” cannot make something true.',
+                wrong: ['It proves that the 87 people in the poll did not really answer.', 'It shows heavy balls fall faster, which helps the witness.', 'A video always beats a poll, whatever it shows.'],
+            },
+            lesson: 'Facts are not decided by a vote. A poll tells you what people believe, not what is true. (And 0.999… really is equal to 1.)',
+        },
+        {
+            id: 'champion-primes',
+            title: 'The Case of the Last Prime',
+            theme: 'argument',
+            difficulty: 1,
+            flaw: 'authority',
+            distractors: ['popularity', 'correlation', 'false-dichotomy'],
+            witness: 'chimpossible',
+            claim: 'There is a biggest prime number.',
+            opening: 'The witness had a real champion on his show, Your Honour. Who are we to doubt a champion?',
+            intro: 'Have you ever thought about how big numbers get? It’s entirely possible they just… stop.',
+            testimony: [
+                { id: 's1', text: 'I had a guy on my show. A world champion. Top of his field.',
+                    press: { q: 'Champion of what?', reply: 'Arm-wrestling. Seven years in a row. Huge arms. Huge brain, probably.' } },
+                { id: 's2', text: 'He told me the primes stop. There is a biggest one, somewhere past a billion.',
+                    press: { q: 'Did he say which number?', reply: 'He said it’s a secret. Big Maths doesn’t want you to know.' } },
+                { id: 's3', text: 'He is a real expert on numbers. So I trust him on primes.',
+                    press: { q: 'How do you know he is an expert on numbers?', reply: 'He’s a champion! Champions are experts. At things.', premise: 'Being an expert at one thing makes you an expert at everything.' } },
+                { id: 's4', text: 'Jamie, pull that up: every number after a billion can be split up. It’s entirely possible.',
+                    press: { q: 'What did Jamie pull up?', reply: 'Jamie pulled up… a picture of a chimp. Classic Jamie.' } },
+                { id: 's5', text: 'So there is a biggest prime. Trust the experts.',
+                    press: { q: 'Which experts?', reply: 'Look, I’m just asking questions. Loudly. Into a microphone.' } },
+            ],
+            evidence: [
+                { id: 'trophy', art: 'photo', name: 'Trophy photo', desc: 'The guest’s trophy. It says: “World Arm-Wrestling Champion”.' },
+                { id: 'clip', art: 'recording', name: 'Podcast clip', desc: 'The guest, on the show: “I never studied maths. I just feel numbers in my arms.”' },
+                { id: 'euclid', art: 'notebook', name: 'Euclid’s argument', desc: 'Take any list of primes. Multiply them all and add 1. The new number has a prime factor that is not on the list. So no list of primes is ever complete.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['clip', 'trophy'],
+                    explain: 'The guest is a champion at arm-wrestling, not at numbers: he says himself that he never studied maths. Being an expert at one thing does not make you an expert at everything.',
+                    reaction: 'Okay, but have you SEEN his arms?' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'trophy', say: 'The trophy agrees with this statement: he really is top of his field. The question is: which field?' },
+                { statement: 's5', evidence: 'euclid', say: 'Euclid’s argument does show the primes never end, so the conclusion is false. But why did the witness believe it? Find the statement his argument leans on.' },
+                { statement: 's2', evidence: 'euclid', say: 'Yes, Euclid shows there is no biggest prime. But the court wants to know why the witness trusted his guest. Look at what he says about experts.' },
+            ],
+            hint: 'Ask yourself: an expert in WHAT? Press the statements about the guest.',
+            why: {
+                right: 'The guest is an expert at arm-wrestling, not numbers, so his word gives no reason to believe a claim about primes.',
+                wrong: ['Champions always lie, so the opposite must be true.', 'A recording is stronger evidence than a statement, whatever it says.', 'It shows the guest never existed.'],
+            },
+            lesson: 'An authority is only as good as their expertise in that exact field, and in maths even real experts must show a proof. (Euclid proved the primes never end.)',
+        },
+        {
+            id: 'two-kinds',
+            title: 'The Case of the Two Kinds of People',
+            theme: 'argument',
+            difficulty: 1,
+            flaw: 'false-dichotomy',
+            distractors: ['authority', 'circular', 'cherry-picking'],
+            witness: 'speedcheeta',
+            claim: 'Everyone is either a maths genius or totally hopeless at maths.',
+            opening: 'The witness has sorted everyone into two neat boxes, Your Honour. The prosecution loves a neat box.',
+            intro: 'AAAAH! Okay. Okay. I’m calm. I’M CALM!',
+            testimony: [
+                { id: 's1', text: 'There are TWO kinds of people! Maths geniuses and hopeless people!',
+                    press: { q: 'Only two?', reply: 'TWO! Like two feet! Two eyes! It’s science!', premise: 'There is no third option.' } },
+                { id: 's2', text: 'Geniuses get every answer right, instantly! No thinking!',
+                    press: { q: 'Has a genius ever been stuck?', reply: 'Never! They just KNOW!' } },
+                { id: 's3', text: 'My friend Owlet got a question wrong yesterday. So Owlet is hopeless!',
+                    press: { q: 'Just one question?', reply: 'ONE wrong! That’s not genius! So: hopeless!' } },
+                { id: 's4', text: 'Nobody is in the middle. NOBODY! Let’s GOOO!',
+                    press: { q: 'Did you check?', reply: 'I didn’t need to check. I FELT it!' } },
+            ],
+            evidence: [
+                { id: 'scores', art: 'chart', name: 'Class test scores', desc: 'Scores of 30 students: a few very high, a few low, and most of them somewhere in the middle.' },
+                { id: 'homework', art: 'notebook', name: 'Owlet’s homework', desc: '18 of 20 answers right. One mistake found and fixed after checking.' },
+                { id: 'letter', art: 'letter', name: 'Granny Axiom’s letter', desc: '“I have been stuck on problems for years. Being stuck is part of doing maths.”' },
+            ],
+            contradictions: [
+                { statements: ['s4', 's1'], evidence: ['scores'],
+                    explain: 'Most of the class is in the middle: not geniuses, not hopeless. There are many more options than two.',
+                    reaction: 'The MIDDLE?! Who lives in the MIDDLE?!' },
+            ],
+            near: [
+                { statement: 's2', evidence: 'letter', say: 'Granny’s letter does show that good mathematicians get stuck. That cracks one box. But the whole argument rests on there being only TWO boxes. Find evidence of a third option.' },
+                { statement: 's3', evidence: 'homework', say: 'Owlet got 18 of 20, so “hopeless” looks wrong. But that only matters because the witness allows just two boxes. Attack the two boxes.' },
+            ],
+            hint: 'Count the options the witness allows. Is there evidence of a third one?',
+            why: {
+                right: 'It shows most students between the two boxes, so “genius or hopeless” leaves out the most common option.',
+                wrong: ['It shows that the witness is bad at maths.', 'It shows that geniuses do not exist.', 'Charts are always right, so the testimony must be wrong.'],
+            },
+            lesson: 'A false dichotomy squeezes many options into two. Real abilities (like most things) come in degrees.',
+        },
+        {
+            id: 'twice-cat',
+            title: 'The Case of the Glitching Cat',
+            theme: 'argument',
+            difficulty: 1,
+            flaw: 'hidden-premise',
+            distractors: ['authority', 'popularity', 'misleading-chart'],
+            witness: 'keanu',
+            claim: 'The world is a computer simulation, because reality repeated itself.',
+            opening: 'The witness saw reality glitch with his own eyes, Your Honour. Eyes! The best evidence there is.',
+            intro: 'Whoa.',
+            need: 1,
+            testimony: [
+                { id: 's1', text: 'I was sitting outside the plaza café. A small black cat walked past me.',
+                    press: { q: 'Which way did it walk?', reply: 'Left to right. Slowly. A very cool cat.' } },
+                { id: 's2', text: 'Ten seconds later, the same cat walked past again. The same way!',
+                    press: { q: 'How do you know it was the same cat?', reply: 'Small. Black. Cat. It was the same cat.', premise: 'Two small black cats must be the same cat.' } },
+                { id: 's3', text: 'A cat can’t get back round to the start in ten seconds.',
+                    press: { q: 'Why not?', reply: 'The café is huge. Probably. I never walked round it. Here, I drew a map.', unlocks: 'route', premise: 'The way round the café is too long for a cat.' } },
+                { id: 's4', text: 'So reality repeated itself. We live in a simulation.',
+                    press: { q: 'Is there any other explanation?', reply: 'Whoa.', pip: 'He said “whoa” again. I don’t think that’s an answer.' } },
+            ],
+            evidence: [
+                { id: 'photo', art: 'photo', name: 'Café photo', desc: 'From the café owner: two identical small black cats asleep in one basket. Their names are Ping and Pong.' },
+                { id: 'route', art: 'map', name: 'Plaza map', desc: 'The path round the café is 40 metres. A cat can run 40 metres in about 5 seconds.', hidden: true },
+                { id: 'receipt', art: 'receipt', name: 'Café receipt', desc: 'The witness ordered one cup of tea at 10:02. Nothing strange about it.' },
+            ],
+            contradictions: [
+                { statements: ['s2'], evidence: ['photo'],
+                    explain: 'There are two identical black cats. Nobody saw the SAME cat twice: that was assumed, never checked.',
+                    reaction: 'Ping… and Pong? There are TWO of them? …Whoa.' },
+                { statements: ['s3'], evidence: ['route'],
+                    explain: 'The path is 40 metres: a cat runs it in about 5 seconds. “It can’t get round” was assumed, never checked.',
+                    reaction: 'Five seconds? That is… a fast cat. Whoa.' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'receipt', say: 'The receipt fits: he was at the café. Nothing in it clashes with what he said.' },
+                { statement: 's4', evidence: 'photo', say: 'The photo matters, but this statement is the conclusion. Which earlier statement quietly assumed something?' },
+            ],
+            hint: 'The argument needs something the witness never checked. Press the statements and look for what he just assumed.',
+            why: {
+                right: 'It shows there are two identical cats, so the unstated assumption “it was the same cat” is false.',
+                wrong: ['It shows that cats can’t walk in straight lines.', 'It proves we are definitely not in a simulation.', 'Photos are always more reliable than eyes.'],
+            },
+            lesson: 'Every argument rests on premises, and the dangerous ones are unstated. Spell out the hidden premise (“it was the same cat”) and test it. Breaking the argument doesn’t prove the opposite: it just leaves the claim unsupported.',
+        },
+
+        // ===================================================================
+        // Difficulty 2
+        // ===================================================================
+        {
+            id: 'calculator-plan',
+            title: 'The Case of the Calculator Plan',
+            theme: 'argument',
+            difficulty: 2,
+            flaw: 'strawman',
+            distractors: ['false-dichotomy', 'popularity', 'correlation'],
+            witness: 'rawmsay',
+            claim: 'Granny Axiom’s calculator plan should go in the bin.',
+            opening: 'Granny Axiom has a plan for calculators in tests. The witness has… strong feelings about it.',
+            intro: 'Right. Listen to me. LISTEN.',
+            testimony: [
+                { id: 's1', text: 'Granny Axiom wants machines to do ALL the maths. All of it!',
+                    press: { q: 'Did she say “all”?', reply: 'She might as well have! Machines everywhere! In the soup!' } },
+                { id: 's2', text: 'She said children should never learn their times tables. NEVER!',
+                    press: { q: 'Where did she say that?', reply: 'In her plan. I read it. Well, I read the title. Fine, here it is!', unlocks: 'plan' } },
+                { id: 's3', text: 'If machines do all the thinking, children forget how to add. Disaster!',
+                    press: { q: 'Have you seen that happen?', reply: 'I have seen a child put a calculator in a soufflé. It was RAW.' } },
+                { id: 's4', text: 'So her plan is RAW, and it goes in the bin!',
+                    press: { q: 'Straight in the bin?', reply: 'BIN! Lovely bin. Beautiful bin.' } },
+            ],
+            evidence: [
+                { id: 'plan', art: 'letter', name: 'Granny’s plan', desc: '“Part 1 of the test: times tables and mental maths, NO calculators. Part 2: statistics with big data sets, calculators allowed.”', hidden: true },
+                { id: 'kitchen', art: 'photo', name: 'Kitchen photo', desc: 'The witness’s own kitchen: a digital thermometer and a timer on every counter.' },
+                { id: 'survey', art: 'survey', name: 'Teacher survey', desc: '12 of 20 teachers liked the plan. 8 did not.' },
+            ],
+            contradictions: [
+                { statements: ['s2', 's1'], evidence: ['plan'],
+                    explain: 'The real plan keeps times tables, with no calculators, in Part 1. The witness attacked a plan nobody wrote.',
+                    reaction: 'Part… ONE? There’s a part one? Who READS part one?!' },
+            ],
+            near: [
+                { statement: 's3', evidence: 'kitchen', say: 'Ha: he uses machines in his own kitchen and still cooks. Fair point, but the bigger problem is this: is he even attacking Granny’s real plan?' },
+                { statement: 's4', evidence: 'survey', say: 'The survey shows teachers disagree. Opinions are split, but that doesn’t tell us what the plan actually says.' },
+            ],
+            hint: 'Before judging a plan, read the plan. Did the witness ever quote it?',
+            why: {
+                right: 'The real plan keeps times tables without calculators, so the witness is attacking a plan Granny never made.',
+                wrong: ['It shows calculators are always good in tests.', 'It shows Granny Axiom is more popular than the witness.', 'Letters always beat speeches in court.'],
+            },
+            lesson: 'A strawman beats a weaker copy of the argument. To break an argument fairly, first state it in its strongest form, the way its author would.',
+        },
+        {
+            id: 'prime-machine',
+            title: 'The Case of the Prime Machine',
+            theme: 'proof',
+            difficulty: 2,
+            flaw: 'hasty-generalisation',
+            distractors: ['popularity', 'correlation', 'strawman'],
+            witness: 'siuuugull',
+            claim: 'n² + n + 41 is a prime number for every whole number n.',
+            opening: 'The witness tested the formula again and again. Same result every time. Like his celebration.',
+            intro: 'SIUUUU! Sorry. Habit.',
+            testimony: [
+                { id: 's1', text: 'n = 0 gives 41. Prime! n = 1 gives 43. Prime!',
+                    press: { q: 'And then?', reply: 'n = 2 gives 47. PRIME! Siuuu!' } },
+                { id: 's2', text: 'I tested ten numbers. Ten primes. Ten out of ten!',
+                    press: { q: 'Only ten?', reply: 'Fine. I kept going. Forty in a row. All prime!', adds: 's2b' } },
+                { id: 's2b', hidden: true, text: 'From n = 0 up to n = 39: forty primes in a row. A perfect record!',
+                    press: { q: 'Did you try n = 40?', reply: 'Why would I? Forty in a row is plenty.' } },
+                { id: 's3', text: 'If it works every time I try it, it works forever. That’s a pattern!',
+                    press: { q: 'Does a pattern always continue?', reply: 'Mine do. Same jump. Every time.', premise: 'If a rule works for the cases you tried, it works for all cases.' } },
+                { id: 's4', text: 'So n² + n + 41 is ALWAYS prime. SIUUU!',
+                    press: { q: 'Always?', reply: 'Always! Write it down! In gold!' } },
+            ],
+            evidence: [
+                { id: 'table', art: 'chart', name: 'The witness’s table', desc: 'n = 0 to 39, with every answer ticked as prime.' },
+                { id: 'forty', art: 'notebook', name: 'Pip’s sum', desc: 'n = 40: 40² + 40 + 41 = 1600 + 40 + 41 = 1681 = 41 × 41.' },
+                { id: 'circle', art: 'map', name: 'Circle puzzle', desc: 'From the Road: dots on a circle cut it into 1, 2, 4, 8, 16 pieces… and then 31, not 32.' },
+            ],
+            contradictions: [
+                { statements: ['s4', 's3'], evidence: ['forty'],
+                    explain: 'At n = 40 the formula gives 1681 = 41 × 41, which is not prime. Forty successes are not a proof: one counterexample breaks “always”.',
+                    reaction: 'Forty-one times… forty-one? But the pattern… the PATTERN!' },
+            ],
+            near: [
+                { statement: 's3', evidence: 'circle', say: 'Good thinking: the circle pattern broke too! But that’s a different pattern. Find evidence that breaks THIS formula.' },
+                { statement: 's2b', evidence: 'table', say: 'The table agrees with him: up to 39 every answer really is prime. What about the next one?' },
+                { statement: 's2b', evidence: 'forty', say: 'Careful: he only claims n = 0 to 39 here, and that part is true. Which statement claims more than he checked?' },
+            ],
+            hint: 'Checking cases is not proving. Has anyone checked the case just after the witness stopped?',
+            why: {
+                right: 'It is a case where the formula gives a number that is not prime, so “always prime” is false, however many cases worked before.',
+                wrong: ['It shows the witness made mistakes in his first forty checks.', 'It shows that prime numbers stop after 1681.', 'It shows that patterns never work.'],
+            },
+            lesson: 'Forty examples are not a proof: one counterexample is enough to break “always”. That is why mathematicians prove things instead of just testing them. (Euler found this formula: prime for n = 0 to 39, then not.)',
+        },
+        {
+            id: 'gold-hoodie',
+            title: 'The Case of the Gold Hoodie',
+            theme: 'statistics',
+            difficulty: 2,
+            flaw: 'correlation',
+            distractors: ['popularity', 'false-dichotomy', 'circular'],
+            witness: 'beastie',
+            claim: 'Wearing the gold hoodie makes you better at maths.',
+            opening: 'The witness has data, Your Honour. Big data. The biggest.',
+            intro: 'This is the biggest trial EVER. Last one to leave the courtroom wins a hoodie!',
+            testimony: [
+                { id: 's1', text: 'Students with the gold hoodie score 20 points higher in maths. Fact!',
+                    press: { q: 'Where is that from?', reply: 'My chart! It’s a real chart! With real numbers!' } },
+                { id: 's2', text: 'Same school, same tests, same teachers. The only difference is the hoodie!',
+                    press: { q: 'The ONLY difference?', reply: 'The ONLY one. Okay, I didn’t check the others. But it’s GOLD!', premise: 'Nothing else is different between the two groups.' } },
+                { id: 's3', text: 'They got the hoodie, and then their maths got better. Bigger and better!',
+                    press: { q: 'When did they get the hoodies?', reply: 'At the Maths Fair. There was a ceremony. Here’s the list!', unlocks: 'prizes' } },
+                { id: 's4', text: 'So buy the hoodie, only 99 charms, and get smarter! Subscribe!',
+                    press: { q: 'Can you buy one today?', reply: 'Swipe up for the hoodie. Swipe down for logic.' } },
+            ],
+            evidence: [
+                { id: 'scores', art: 'chart', name: 'Score chart', desc: 'Hoodie owners: average score 78. Everyone else: average 58. (The numbers are real.)' },
+                { id: 'prizes', art: 'letter', name: 'Maths Fair prize list', desc: '“Prizes: the top 20 scorers in the Maths Fair test each win a gold hoodie.”', hidden: true },
+                { id: 'shop', art: 'receipt', name: 'Shop notice', desc: '“Gold hoodie: in shops from next month.”' },
+            ],
+            contradictions: [
+                { statements: ['s3', 's4'], evidence: ['prizes'],
+                    explain: 'The hoodies were prizes FOR high scores. The good maths came first and won the hoodie, not the other way round.',
+                    reaction: 'The hoodie… was the PRIZE? So the brains came FIRST? That’s… backwards!' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'scores', say: 'The chart agrees with the witness: hoodie owners really do score higher. The numbers are fine. The question is what causes what.' },
+                { statement: 's4', evidence: 'shop', say: 'True, nobody could buy one yet! So where did the owners get them? Find out which came first: the hoodie or the high score.' },
+                { statement: 's2', evidence: 'shop', say: 'Interesting: so the owners didn’t buy their hoodies. Press the witness about how they got them.' },
+            ],
+            hint: 'Two things go together. Ask which one came first: press the witness about when the hoodies arrived.',
+            why: {
+                right: 'It shows the high scores came first and earned the hoodie, so the link runs the other way: hoodies don’t cause good maths.',
+                wrong: ['It shows the score chart is fake.', 'It shows hoodie owners are worse at maths.', 'It shows that gold is an unlucky colour.'],
+            },
+            lesson: 'When two things go together (a correlation), that doesn’t tell you which causes which, or whether something else causes both. Ask: which came first? What else is different?',
+        },
+        {
+            id: 'perfect-reviews',
+            title: 'The Case of the Perfect Reviews',
+            theme: 'statistics',
+            difficulty: 2,
+            flaw: 'cherry-picking',
+            distractors: ['authority', 'popularity', 'false-dichotomy'],
+            witness: 'kardashiant',
+            claim: 'The GlowUp filter app makes its users happier.',
+            opening: 'The witness’s app has perfect reviews, Your Honour. Just look at them. Look!',
+            intro: 'Hold on, let me find my light. Okay. Ready.',
+            testimony: [
+                { id: 's1', text: 'My users love the GlowUp app. Look at these reviews!',
+                    press: { q: 'Are these all the reviews?', reply: 'These are the best ones. I have hundreds more in a folder. Somewhere. Fine, here.', unlocks: 'all' } },
+                { id: 's2', text: 'Five reviews. Five stars each. A perfect score!',
+                    press: { q: 'Five times five stars?', reply: 'That’s like twenty-five stars. Basically a galaxy.' } },
+                { id: 's3', text: 'I chose these five at random. Totally random.',
+                    press: { q: 'How did you choose them?', reply: 'Randomly! I scrolled until I saw five stars, then I stopped. Random.', premise: 'The reviews she shows are typical of all the reviews.' } },
+                { id: 's4', text: 'So 100% of my users are happier. With the filter, the data looks amazing.',
+                    press: { q: 'The data has a filter?', reply: 'Everything looks amazing with a filter. That’s the point.' } },
+            ],
+            evidence: [
+                { id: 'shown', art: 'photo', name: 'Review screenshot', desc: 'Five reviews, all five stars: “Love it!”, “Glowing!”, “Obsessed!”…' },
+                { id: 'all', art: 'survey', name: 'Full review list', desc: '500 reviews: 5 with five stars, 30 with three or four stars, 465 with one or two stars. The five shown are the ONLY five-star ones.', hidden: true },
+                { id: 'advert', art: 'video', name: 'App advert', desc: 'The advert shows a happy user… whose face is also filtered.' },
+            ],
+            contradictions: [
+                { statements: ['s3', 's4'], evidence: ['all'],
+                    explain: 'The five reviews shown are the ONLY five-star reviews out of 500. They weren’t random: they were picked because they fit.',
+                    reaction: 'Four hundred and sixty-five… one or two stars? Can we put a filter on those?' },
+            ],
+            near: [
+                { statement: 's2', evidence: 'shown', say: 'The screenshot agrees with the testimony: those five really are five stars. The question is what she didn’t show.' },
+                { statement: 's4', evidence: 'advert', say: 'The advert is filtered too. Suspicious! But what does the full data say?' },
+            ],
+            hint: 'Five reviews, out of how many? Ask the witness where the rest are.',
+            why: {
+                right: 'It shows the five reviews were the only good ones out of 500, so they were chosen because they fit, not at random.',
+                wrong: ['It shows nobody ever downloaded the app.', 'It shows that five-star reviews are always fake.', 'It shows the witness wrote the reviews herself.'],
+            },
+            lesson: 'Cherry-picking shows only the data that fits. Always ask: what is the whole data set, and how were these examples chosen?',
+        },
+
+        // ===================================================================
+        // Difficulty 3
+        // ===================================================================
+        {
+            id: 'tall-bar',
+            title: 'The Case of the Towering Bar',
+            theme: 'statistics',
+            difficulty: 3,
+            flaw: 'misleading-chart',
+            distractors: ['cherry-picking', 'correlation', 'authority'],
+            witness: 'muskrat',
+            claim: 'This year’s rockets are {ratio} times as reliable as last year’s.',
+            // Bar heights on the cut chart are (a - base) and (b - base): their ratio is {ratio}.
+            params: [
+                { a: 96, b: 98, base: 95, ratio: 'three', diff: 2 },
+                { a: 92, b: 96, base: 90, ratio: 'three', diff: 4 },
+                { a: 97, b: 99, base: 96, ratio: 'three', diff: 2 },
+                { a: 94, b: 98, base: 93, ratio: 'five', diff: 4 },
+                { a: 95, b: 99, base: 94, ratio: 'five', diff: 4 },
+            ],
+            opening: 'The witness has a chart, Your Honour. One bar is tiny and one is enormous. Need I say more?',
+            intro: 'We will reach a verdict by next year. Probably sooner.',
+            testimony: [
+                { id: 's1', text: 'Behold my chart. Last year’s bar: tiny. Embarrassing.',
+                    press: { q: 'How tiny?', reply: 'Barely there. A stub. I have renamed it the Stub.' } },
+                { id: 's2', text: 'This year’s bar is {ratio} times taller. Look at it go!',
+                    press: { q: 'Taller on the screen?', reply: 'Taller everywhere. It is a very tall bar. I measured it with a ruler.' } },
+                { id: 's3', text: 'My chart starts at zero, like every honest chart.',
+                    press: { q: 'Did you check the axis?', reply: 'I don’t check axes. I invent them.' } },
+                { id: 's4', text: 'A bar {ratio} times taller means rockets {ratio} times as reliable.',
+                    press: { q: 'Does bar height equal reliability?', reply: 'On my charts, yes. That’s what charts are for.', premise: 'The height of a bar on the screen shows the size of the real numbers.' } },
+                { id: 's5', text: 'So: {ratio} times as reliable. Mars next year. Definitely.',
+                    press: { q: 'Next year?', reply: 'I said that last year too. But this time I have a chart.' } },
+            ],
+            evidence: [
+                { id: 'chart', art: 'chart', name: 'Rocket chart', desc: 'Two bars, one {ratio} times taller. Small print on the side: the axis starts at {base}%, not at 0%.' },
+                { id: 'log', art: 'notebook', name: 'Launch log', desc: 'Last year: {a} of 100 rockets landed safely. This year: {b} of 100.' },
+                { id: 'photo', art: 'photo', name: 'Launch photo', desc: 'A rocket landing safely, under a banner: MARS NEXT YEAR.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['chart'],
+                    explain: 'The small print says the axis starts at {base}%, not 0%. Cutting off the bottom of a chart makes the bars look far more different than they are.',
+                    reaction: 'Small print? I never READ small print. I PUBLISH small print.',
+                    after: { lines: ['Fine, the axis starts at {base}. But the bar is still {ratio} times taller, so the rockets are still {ratio} times better!'] } },
+                { statements: ['s4', 's5'], evidence: ['log'],
+                    explain: 'The real numbers are {a} and {b} safe landings out of 100. That is {diff} more in 100: a small step, not {ratio} times as reliable.',
+                    reaction: 'Only {diff} more? But the bar… my beautiful bar…' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'chart', say: 'Yes, last year’s bar does look tiny on that chart. But why does it look so tiny? Read the small print.' },
+                { statement: 's2', evidence: 'chart', say: 'The bar really is {ratio} times taller on the screen. That part is true. Which statement says something about how the chart was drawn?' },
+                { statement: 's5', evidence: 'photo', say: 'A safe landing, but one photo can’t tell us how reliable the rockets are. Find the real numbers.' },
+            ],
+            hint: 'Bars can lie through their axis. Check where the chart starts, then compare it with the real numbers.',
+            why: {
+                right: 'The axis starts at {base}%, so the bars only show the part above {base}; the real numbers, {a} and {b}, are close together.',
+                wrong: ['It shows the rockets got less reliable.', 'It shows the chart uses the wrong colours.', 'It shows that all charts are lies.'],
+            },
+            lesson: 'Always read the axis. A chart that doesn’t start at zero can make a small change ({a}% to {b}%) look like a giant leap.',
+        },
+        {
+            id: 'psychic-coin',
+            title: 'The Case of the Psychic Coin',
+            theme: 'statistics',
+            difficulty: 3,
+            flaw: 'base-rate',
+            distractors: ['correlation', 'misleading-chart', 'authority'],
+            witness: 'altmanta',
+            claim: 'Altmanta can predict the future.',
+            // Chance of k right guesses = 1 in p = 2^k; with n players, about n / p = m win by luck.
+            params: [
+                { k: 5, p: 32, n: 160, m: 5 },
+                { k: 6, p: 64, n: 320, m: 5 },
+                { k: 7, p: 128, n: 640, m: 5 },
+                { k: 8, p: 256, n: 768, m: 3 },
+            ],
+            opening: 'The witness predicted {k} coin flips in a row, Your Honour. All correct. The odds are astronomical.',
+            intro: 'I knew you would call me. It’s going to be fine. Transformative, but fine.',
+            testimony: [
+                { id: 's1', text: 'At the Fair, I predicted {k} coin flips in a row. Every one was right.',
+                    press: { q: 'Were you the only one predicting?', reply: 'There was a contest. A few others had a go. Irrelevant. Here is the poster.', unlocks: 'poster' } },
+                { id: 's2', text: 'The chance of guessing {k} in a row by luck is 1 in {p}.',
+                    press: { q: 'Is that right?', reply: 'Of course it’s right. I predicted you would check.', pip: 'I checked: ½ multiplied together {k} times is 1 in {p}. That part is true!' } },
+                { id: 's3', text: '1 in {p} is tiny. So it can’t have been luck.',
+                    press: { q: 'Can’t?', reply: 'Practically can’t. Lucky things basically never happen.', premise: 'Something with a small chance can’t happen by luck, even when many people try.' } },
+                { id: 's4', text: 'So I can predict the future. I predicted this trial, too.',
+                    press: { q: 'Did you predict this question?', reply: 'Yes. And this answer. And this sentence.' } },
+                { id: 's5', hidden: true, text: 'Fine, {n} players tried. But I WON. Winning proves I’m psychic!',
+                    press: { q: 'Did anyone else win?', reply: 'A few. Irrelevant. They were not as calm as me.' } },
+            ],
+            evidence: [
+                { id: 'coin', art: 'coin', name: 'The Fair coin', desc: 'A normal coin. Tested 1,000 times: 503 heads, 497 tails. Fair.' },
+                { id: 'poster', art: 'letter', name: 'Contest poster', desc: '“Guess the Flips! {n} players, {k} coin flips each. A prize for everyone who gets all {k} right.”', hidden: true },
+                { id: 'results', art: 'recording', name: 'Contest results', desc: 'The announcer: “We have {m} winners with all {k} right! One is a manta ray. One is a goldfish, who chose by swimming left or right.”' },
+            ],
+            contradictions: [
+                { statements: ['s3', 's4'], evidence: ['poster'],
+                    explain: '{n} players tried. With a 1 in {p} chance each, about {n} ÷ {p} = {m} of them should get all {k} right by pure luck. Somebody was always going to win.',
+                    reaction: 'About {m} by luck? But… I felt so special.',
+                    after: { lines: ['Fine, {n} players tried. But I WON. Winning proves I’m psychic!'], adds: 's5' } },
+                { statements: ['s5'], evidence: ['results'],
+                    explain: 'A goldfish also got all {k} right. If winning proved psychic powers, the goldfish would be psychic too. The winners are exactly the lucky few we expected.',
+                    reaction: 'The goldfish… is my equal? I did not predict that.' },
+            ],
+            near: [
+                { statement: 's2', evidence: 'coin', say: 'The coin is fair, so the 1 in {p} chance is right. This statement is true! The problem is what he does with it next.' },
+                { statement: 's4', evidence: 'results', say: 'Other winners too? Keep that in mind. But first find out how many people were playing.' },
+                { statement: 's3', evidence: 'results', say: 'Good: other people won too. But how many tried? The size of the crowd is the key. Press him about the contest.' },
+            ],
+            hint: 'A 1 in {p} chance is small for one person. But how many people were trying? Press the witness about the contest.',
+            why: {
+                right: 'With {n} players, about {m} are expected to get all {k} right by pure luck, so one win tells you nothing about powers.',
+                wrong: ['It shows the coin was unfair.', 'It shows the chance was really 1 in 2.', 'It shows that nobody can ever be lucky.'],
+            },
+            lesson: 'A 1 in {p} event is rare for one person, but common when {n} people try: about {m} will succeed by luck. Before being amazed, ask: out of how many?',
+        },
+        {
+            id: 'truthful-feed',
+            title: 'The Case of the Truthful Feed',
+            theme: 'argument',
+            difficulty: 3,
+            flaw: 'circular',
+            distractors: ['authority', 'popularity', 'hasty-generalisation'],
+            witness: 'zuckerborg',
+            claim: 'Everything on the Feed is true.',
+            opening: 'The Feed is checked by its own Truth Checker, Your Honour. Airtight. Sealed. Like a… very normal box.',
+            intro: 'Hello, fellow humans. I am here to testify, in a normal human way.',
+            testimony: [
+                { id: 's1', text: 'Every post on the Feed is true. All of them.',
+                    press: { q: 'All of them?', reply: 'Every one. Engagement is up, and so is truth.' } },
+                { id: 's2', text: 'Each post is checked by our Truth Checker before you see it.',
+                    press: { q: 'Who built the Truth Checker?', reply: 'We did. It is very advanced. It runs on the Feed.' } },
+                { id: 's3', text: 'The Truth Checker checks every post against the real facts.',
+                    press: { q: 'Which facts?', reply: 'The facts. The true ones. They are… in the Feed. Here is the manual.', unlocks: 'manual' } },
+                { id: 's4', text: 'The Truth Checker is reliable: it has never marked a Feed post false.',
+                    press: { q: 'Why has it never marked one false?', reply: 'Because Feed posts are true. I just told you.', premise: 'The Feed is true (the very thing he is trying to prove).' } },
+            ],
+            evidence: [
+                { id: 'cheese', art: 'photo', name: 'Feed screenshot', desc: 'A Feed post: “The Moon is made of cheese.” Next to it, a green tick: TRUE ✓.' },
+                { id: 'manual', art: 'notebook', name: 'Truth Checker manual', desc: '“Step 1: if the post is on the Feed, mark it TRUE. Step 2: there is no Step 2.”', hidden: true },
+                { id: 'likes', art: 'chart', name: 'Engagement chart', desc: 'Likes per post: going up every month.' },
+            ],
+            contradictions: [
+                { statements: ['s1', 's4'], evidence: ['cheese'],
+                    explain: 'The Moon is not made of cheese, yet the Feed shows it and the Truth Checker ticked it. “Never marked one false” only means it never really checks.',
+                    reaction: 'The Moon… is not cheese? But the Feed told me…',
+                    after: { lines: ['A rare exception. The Truth Checker still checks every post against the real facts.'] } },
+                { statements: ['s3', 's4'], evidence: ['manual'],
+                    explain: 'The manual says: if it’s on the Feed, mark it TRUE. The checker doesn’t check facts; it assumes the Feed is true. The argument runs in a circle.',
+                    reaction: 'There is no step two? That is… the most efficient step two.' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'likes', say: 'More likes don’t make posts true. Popular isn’t proof. Look for evidence about truth.' },
+                { statement: 's2', evidence: 'manual', say: 'Yes, every post goes through the checker. That part is true! The question is HOW it checks.' },
+            ],
+            hint: 'Ask how the Truth Checker decides. If it uses the Feed to check the Feed, where does that leave you?',
+            why: {
+                right: 'The manual shows the checker marks posts TRUE just for being on the Feed, so “the Feed is true” is used to prove “the Feed is true”.',
+                wrong: ['It shows the manual is too short to be official.', 'It shows the Feed has no posts at all.', 'It shows that engagement is going down.'],
+            },
+            lesson: 'Circular reasoning hides its conclusion in a premise: “the Feed is true because the checker says so, and the checker is right because the Feed is true.” A real check must use something independent of what it checks.',
+        },
+        {
+            id: 'picture-frame',
+            title: 'The Case of the Picture Frame',
+            theme: 'proof',
+            difficulty: 3,
+            flaw: 'false-lemma',
+            distractors: ['circular', 'hasty-generalisation', 'authority'],
+            witness: 'lobstorian',
+            claim: 'For every solid with flat faces: corners − edges + faces = 2.',
+            opening: 'The witness has a PROOF, Your Honour. A real mathematical proof. Not even the defence can argue with a proof.',
+            intro: 'Before we begin: is your room clean? Good. Now, a proof.',
+            testimony: [
+                { id: 's1', text: 'Take any solid with flat faces. Count its corners, edges and faces.',
+                    press: { q: 'Any solid at all?', reply: 'Any. I am being precise. Roughly.' } },
+                { id: 's2', text: 'A cube: 8 − 12 + 6 = 2. A pyramid: 5 − 8 + 5 = 2. Orderly.',
+                    press: { q: 'Examples aren’t a proof, are they?', reply: 'Correct! Examples are where a proof begins. Now watch.' } },
+                { id: 's3', text: 'The proof: take off one face, then stretch the rest flat, like a rug on the floor.',
+                    press: { q: 'Can every solid be stretched flat?', reply: 'Every proper solid. Obviously. It is a lemma: a small step everybody accepts.', premise: 'Every solid with one face removed can be stretched flat.' } },
+                { id: 's4', text: 'On the flat rug, corners − edges + faces comes to 1. Put the face back: 2.',
+                    press: { q: 'You checked that step?', reply: 'Thoroughly. I counted triangles for forty minutes.' } },
+                { id: 's5', text: 'So every solid with flat faces gives 2. Stand up straight and accept it.',
+                    press: { q: 'Every single one?', reply: 'It is proved. Proofs are forever. Like lobsters. Roughly.' } },
+            ],
+            evidence: [
+                { id: 'frame', art: 'photo', name: 'Picture-frame solid', desc: 'A square frame with a square hole through the middle, built from flat faces. Counted: 16 corners, 32 edges, 16 faces.' },
+                { id: 'cube', art: 'notebook', name: 'Cube count', desc: '8 corners, 12 edges, 6 faces: 8 − 12 + 6 = 2.' },
+                { id: 'rug', art: 'video', name: 'Stretching video', desc: 'Pip takes one face off the frame and tries to stretch the rest flat. The hole stays a hole: it will not lie flat as one rug.' },
+            ],
+            contradictions: [
+                { statements: ['s5', 's1'], evidence: ['frame'],
+                    explain: 'The frame has flat faces, but 16 − 32 + 16 = 0, not 2. One counterexample, and the theorem falls.',
+                    reaction: 'Zero? ZERO? But I counted… roughly…',
+                    after: { lines: ['Very well, the answer is wrong for that thing. But my proof has no wrong STEP. Show me the step!'] } },
+                { statements: ['s3'], evidence: ['rug'],
+                    explain: 'The frame can’t be stretched flat: its hole gets in the way. The “small step everybody accepts” is false for solids with holes.',
+                    reaction: 'The lemma… my little lemma… betrayed me.' },
+            ],
+            near: [
+                { statement: 's2', evidence: 'cube', say: 'The cube count agrees with the witness: 8 − 12 + 6 really is 2. Examples that fit can’t break a theorem.' },
+                { statement: 's4', evidence: 'rug', say: 'This step is fine IF the solid lies flat. Which statement claims that it always can?' },
+            ],
+            hint: 'Look for a solid that breaks the rule. Then find the step of the proof that doesn’t work for it.',
+            why: {
+                right: 'The frame has flat faces but gives 16 − 32 + 16 = 0, so “every solid gives 2” is false, and the stretching step is the one that fails.',
+                wrong: ['It shows the cube was counted wrongly.', 'It shows the frame is not a real solid, so it doesn’t count.', 'It shows that proofs in maths can never be trusted.'],
+            },
+            repair: {
+                question: 'The frame breaks the proof. How should the mathematicians repair it?',
+                options: [
+                    { id: 'monster', text: 'Say the frame is “not a real solid” and carry on as before.', explain: 'That is “monster-barring”: changing the definition just to hide the counterexample. Nothing is learned.' },
+                    { id: 'lemma', text: 'Turn the hidden step into a condition: corners − edges + faces = 2 for every solid with no hole through it.', explain: 'Yes! The false step becomes part of the theorem. Now the proof is valid, and we know exactly when it works. (Solids with one hole give 0.)' },
+                    { id: 'bin', text: 'Throw the whole proof away: one counterexample makes it worthless.', explain: 'Too harsh. The proof showed us exactly which step needed a condition. A broken proof can still teach us a lot.' },
+                    { id: 'more', text: 'Check a hundred more cubes and pyramids to be sure.', explain: 'More examples that fit can’t undo a counterexample. Checking is not proving.' },
+                ],
+                correct: 'lemma',
+            },
+            lesson: 'After Lakatos: counterexamples improve proofs. The frame showed that a hidden step (“it can be stretched flat”) was false. Making it a condition gives a better theorem: corners − edges + faces = 2 for solids without holes.',
+        },
+    ];
+})(typeof window !== 'undefined' ? window : globalThis);

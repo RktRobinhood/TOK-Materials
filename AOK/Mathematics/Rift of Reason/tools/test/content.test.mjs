@@ -11,7 +11,7 @@ const puzzleFiles = fs.readdirSync(path.join(GAME_DIR, 'js/puzzles'))
 
 const Rift = loadRift([
     'js/core/rift.js', 'js/core/state.js', 'js/core/world.js',
-    'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'data/script/lesson1.js', 'data/script/lesson2.js',
+    'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'data/script/lesson1.js', 'data/script/lesson2.js', 'data/script/lesson3.js', 'data/cases.js',
     'js/puzzles/registry.js', ...puzzleFiles,
 ]);
 const { nodes } = Rift.data.map;
