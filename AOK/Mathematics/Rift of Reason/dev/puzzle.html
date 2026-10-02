@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puzzle bench</title>
+<link rel="stylesheet" href="../css/game.css">
+<link rel="stylesheet" href="../css/puzzles/liars-gate.css">
+<link rel="stylesheet" href="../css/puzzles/rule-hunter.css">
+<link rel="stylesheet" href="../css/puzzles/venn.css">
+<link rel="stylesheet" href="../css/puzzles/line-drawer.css">
+<style>
+    body { overflow: auto; }
+    .bench { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 100vh; }
+    .bench header { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    #stage { position: relative; flex: 1; min-height: 560px; border: 2px dashed #3a2d4a; border-radius: 14px; overflow: hidden; }
+    #log { font-family: monospace; font-size: 13px; white-space: pre-wrap; max-height: 160px; overflow: auto; }
+</style>
+</head>
+<body>
+<!--
+    Developer bench: mounts one puzzle with a stub api.
+    Open dev/puzzle.html?id=liars-gate&d=2&seed=abc from the game folder.
+-->
+<div class="bench">
+    <header>
+        <strong>Puzzle bench</strong>
+        <select id="pick"></select>
+        <label>difficulty <select id="diff"><option>1</option><option>2</option><option>3</option></select></label>
+        <label>seed <input id="seed" size="10"></label>
+        <button class="btn small" id="go">Generate</button>
+        <button class="btn small" id="hint">Hint</button>
+        <button class="btn small" id="why">Why?</button>
+        <button class="btn small" id="solve">Show solution (console)</button>
+    </header>
+    <div id="stage"></div>
+    <div id="log" class="panel"></div>
+</div>
+<script src="../js/core/rift.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/core/audio.js"></script>
+<script src="../data/creatures.js"></script>
+<script src="../js/puzzles/registry.js"></script>
+<script src="../js/puzzles/liars-gate.js"></script>
+<script src="../js/puzzles/rule-hunter.js"></script>
+<script src="../js/puzzles/venn.js"></script>
+<script src="../js/puzzles/line-drawer.js"></script>
+<script>
+(function () {
+    const R = window.Rift;
+    const q = new URLSearchParams(location.search);
+    const pick = document.getElementById('pick');
+    const log = m => { document.getElementById('log').textContent += m + '\n'; };
+    R.Puzzles.all().forEach(d => pick.appendChild(R.el('option', { value: d.id, text: d.name })));
+    if (q.get('id')) pick.value = q.get('id');
+    document.getElementById('diff').value = q.get('d') || '1';
+    document.getElementById('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);
+    let handle = null, data = null, def = null, hintIx = 0;
+
+    function run() {
+        def = R.Puzzles.get(pick.value);
+        const seed = document.getElementById('seed').value;
+        const d = +document.getElementById('diff').value;
+        const rng = R.makeRng(seed);
+        data = def.generate(rng, d);
+        hintIx = 0;
+        if (handle && handle.destroy) handle.destroy();
+        const stage = document.getElementById('stage');
+        stage.innerHTML = '';
+        handle = def.mount(stage, data, {
+            submit(answer) { const r = def.check(data, answer); log('submit → ' + JSON.stringify(r)); return r; },
+            sfx(n) { log('sfx ' + n); },
+            say(t, who) { log((who || 'npc') + ': ' + t); },
+            rng: R.makeRng(seed + ':ui'),
+            difficulty: d,
+            el: R.el,
+        });
+        log('— ' + def.id + ' d' + d + ' seed ' + seed);
+    }
+    document.getElementById('go').onclick = run;
+    document.getElementById('hint').onclick = () => { const h = def.hints(data); log('hint: ' + (h[hintIx++] || '(no more)')); };
+    document.getElementById('why').onclick = () => log('why: ' + JSON.stringify(def.why ? def.why(data) : null));
+    document.getElementById('solve').onclick = () => console.log(def.solve ? def.solve(data) : 'no solve()');
+    if (R.Puzzles.all().length) run();
+})();
+</script>
+</body>
+</html>

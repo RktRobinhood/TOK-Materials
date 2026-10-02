@@ -1,0 +1,172 @@
+/* Rift of Reason — base styles. Tokens follow design/ART-BIBLE.md. */
+
+:root {
+    --ink: #1A1020;
+    --night: #14121F;
+    --forest: #0F1F1A;
+    --parchment: #EFE3C8;
+    --parchment-dim: #CDBF9F;
+    --frame: #B0219E;
+    --rift: #3FE0D0;
+    --gold: #F2B632;
+
+    --reason: #3D7BFF;
+    --emotion: #E8384F;
+    --perception: #2FBF71;
+    --language: #F2B632;
+    --imagination: #A05CF0;
+    --memory: #C9C9D6;
+
+    --panel: rgba(20, 18, 31, 0.92);
+    --panel-edge: #3a2d4a;
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    --font-display: 'Fredoka', 'Trebuchet MS', sans-serif;
+    --font-body: 'Nunito', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--night);
+    color: var(--parchment);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.45;
+    overflow: hidden;
+    user-select: none;
+}
+
+button { font: inherit; }
+
+#app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at 50% 20%, #24203a 0%, var(--night) 60%, #07060c 100%);
+}
+
+.screen { position: absolute; inset: 0; overflow: hidden; }
+#overlay { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+#overlay > * { pointer-events: auto; }
+
+/* ---- buttons and panels ---- */
+
+.btn {
+    appearance: none;
+    border: 2px solid var(--ink);
+    background: linear-gradient(#3b2f52, #271f38);
+    color: var(--parchment);
+    padding: 0.55em 1.2em;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--ink), 0 0 0 2px rgba(239, 227, 200, 0.12) inset;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: transform 0.08s ease, filter 0.15s ease;
+}
+.btn:hover { filter: brightness(1.2); }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.btn:disabled { opacity: 0.45; cursor: default; filter: none; }
+.btn.primary { background: linear-gradient(#c8338f, #8d1b72); }
+.btn.gold { background: linear-gradient(#f6c75a, #c98d14); color: var(--ink); }
+.btn.small { padding: 0.3em 0.8em; font-size: 0.85em; }
+
+.panel {
+    background: var(--panel);
+    border: 2px solid var(--panel-edge);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.2rem;
+}
+
+.parchment {
+    background: linear-gradient(#f3e9d2, #e4d4b0);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.4em; line-height: 1.15; }
+
+.chip {
+    display: inline-flex; align-items: center; gap: 0.35em;
+    padding: 0.1em 0.6em; border-radius: 999px;
+    font-size: 0.8em; font-weight: 700;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.chip[data-colour="reason"] { color: var(--reason); border-color: var(--reason); }
+.chip[data-colour="emotion"] { color: var(--emotion); border-color: var(--emotion); }
+.chip[data-colour="perception"] { color: var(--perception); border-color: var(--perception); }
+.chip[data-colour="language"] { color: var(--language); border-color: var(--language); }
+.chip[data-colour="imagination"] { color: var(--imagination); border-color: var(--imagination); }
+.chip[data-colour="memory"] { color: var(--memory); border-color: var(--memory); }
+
+/* ---- HUD ---- */
+
+.hud {
+    position: absolute; top: 12px; left: 12px; right: 12px;
+    display: flex; align-items: center; gap: 12px; z-index: 20; pointer-events: none;
+}
+.hud > * { pointer-events: auto; }
+.hud .hearts { font-size: 1.25em; letter-spacing: 2px; }
+.hud .spacer { flex: 1; }
+
+/* ---- dialogue ---- */
+
+.dialogue {
+    position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+    width: min(920px, calc(100vw - 32px));
+    display: flex; gap: 14px; align-items: flex-end;
+}
+.dialogue .portrait {
+    width: 170px; height: 170px; flex: none;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.6));
+    object-fit: contain;
+}
+.dialogue .box { flex: 1; padding: 0.9rem 1.2rem 1.1rem; min-height: 128px; position: relative; cursor: pointer; }
+.dialogue .name {
+    position: absolute; top: -16px; left: 18px;
+    background: var(--frame); color: var(--parchment);
+    border: 2px solid var(--ink); border-radius: 8px;
+    padding: 0.05em 0.7em; font-family: var(--font-display); font-weight: 700;
+}
+.dialogue .text { font-size: 1.12em; min-height: 3.2em; }
+.dialogue .more { position: absolute; right: 14px; bottom: 6px; opacity: 0.6; animation: bob 1s infinite; }
+.dialogue .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.dialogue.avatar-line .box { font-style: italic; }
+
+@keyframes bob { 50% { transform: translateY(3px); } }
+
+/* ---- toasts ---- */
+
+.toasts { position: absolute; top: 70px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 60; }
+.toast { padding: 0.5em 0.9em; border-radius: 10px; background: var(--panel); border: 2px solid var(--panel-edge); box-shadow: var(--shadow); animation: toast-in 0.25s ease-out; }
+@keyframes toast-in { from { transform: translateX(30px); opacity: 0; } }
+
+/* ---- generic layout helpers ---- */
+
+.center { display: flex; align-items: center; justify-content: center; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.wrap { flex-wrap: wrap; }
+.muted { opacity: 0.7; }
+.small { font-size: 0.85em; }
+
+.scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.modal-backdrop { position: absolute; inset: 0; background: rgba(5, 4, 10, 0.65); display: flex; align-items: center; justify-content: center; z-index: 70; }
+.modal { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto; }
+
+@media (max-width: 760px) {
+    html, body { font-size: 15px; }
+    .dialogue .portrait { width: 110px; height: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}
