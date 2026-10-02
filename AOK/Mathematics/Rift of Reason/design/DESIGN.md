@@ -73,6 +73,9 @@ Hints cost **health**. Players can pick up **scars/debuffs** (risk) as consequen
 - **Shared axiom deck**: one Axiom card flips face-up per round for both players and rewrites the rules until the next flip ("weaker creature wins blocks", "no steals", "red +2", "attacks face-down"). A counter shows which axioms remain. New axioms can be won and added.
 - **Colours = Ways of Knowing** (Reason, Emotion, Sense perception, Language, Imagination; **colourless = Memory**, wild but weak). Simple wheel: each colour beats one, loses to one (+2 bonus).
 - **Fate table** for defeated creatures: fine / scarred / injured (stat or ability loss) / warp-cursed (abilities re-randomised) / permadeath. Good, bad, ugly — but not too punishing; tune by simulation.
+  - Tuned odds after 10,000 simulated battles (`node tools/sim-battle.mjs 10000`, `data/fate.js`): **losers** fine 66 / scarred 25 / injured 3.5 / warp 5 / death 0.5; **winners** fine 78 / scarred 20 / injured 1 / warp 1 / death 0. Result: a permanent loss in about 2% of battles (losers only); legendaries never die. Practice battles never roll fate.
+  - Colour wheel (+2 against the colour you beat): Reason > Emotion > Language > Perception > Imagination > Reason; Memory is outside the wheel. Each edge has a TOK flavour line in `data/axioms.js`.
+  - Balance tweaks from the simulation: Escalate capped at +3, It's Raw reaches power 4.
 - **Ante depends on opponent**: NPC trainers/bosses stake real items/creatures; between classmates the winner gets a **named trophy copy** and only items change hands.
 - Battles happen **outside** puzzles; puzzles are how you get creatures (and protective/healing consumables).
 - Multiplayer: **offline team codes first** (ghost battles vs an AI running a classmate's team, deterministic seeded engine). Live play (Supabase/Firebase, teacher laptop as host) and raids are stretch goals. See `research/serverless-multiplayer.md`.
