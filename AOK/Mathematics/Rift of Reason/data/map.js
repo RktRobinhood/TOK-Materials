@@ -112,7 +112,7 @@
             },
             'rift-pass': {
                 name: 'The Rift Pass', chapter: 'ch2', type: 'rift', x: 1480, y: 300,
-                scene: 'scene/rift', script: 'ch1.pass', links: ['gate'],
+                scene: 'scene/rift-pass', script: 'ch1.pass', links: ['gate'],
                 teaser: 'The time rift glows here. Chapter 2 opens in lesson 2.',
             },
         },

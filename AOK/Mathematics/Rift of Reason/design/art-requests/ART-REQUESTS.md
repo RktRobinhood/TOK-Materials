@@ -170,6 +170,13 @@ Every background uses (already included below):
 
 ---
 
+### 2.8 The burrow and the Rift Pass
+
+**Attach:** `style-board.png`
+**Save as:** `2-world/burrow.png`, `2-world/rift-pass.png`
+
+> Two backgrounds. Each is a wide 16:9 painted background, at least 1672×941, no characters and no text. Keep the lower left and lower right thirds fairly open (characters will stand there). Match the attached style board exactly. **1, the burrow:** the cosy round home of a small creature dug into a hillside, early morning: a round wooden door open to a garden, a little bed with a patchwork quilt, shelves of books and jars, a teapot, and through the round window an old stone sundial in the garden catching the first light. **2, the Rift Pass:** a high mountain pass at night, with jagged rocks and a narrow path. The cyan time rift swirls wide open in the sky, and through it you glimpse a Victorian village street with gas lamps where every window glows a little too brightly.
+
 ## Stage 3: story cast
 
 Every portrait set uses (already included below):
@@ -205,6 +212,13 @@ Every portrait set uses (already included below):
 > On a transparent background, no text, clear space between figures: four small shadowy imp creatures, each wearing a sweet, smiling painted villager mask (a bunny mask, a mouse mask, a hedgehog mask, a duck mask). For each imp, two versions side by side: mask on (looks adorable, only a hint of shadow and glowing eyes behind the mask), and mask slipping (the cute mask tilted aside, revealing a grinning shadowy face with glowing red eyes). Spooky, but in the cute-dark style.
 
 ---
+
+### 3.5 Corvina the Card Sharp
+
+**Attach:** `style-board.png`
+**Save as:** `3-cast/corvina.png`
+
+> One transparent canvas, no text, clear space between figures. A full-body idle pose, then four head-and-shoulders busts: neutral, happy, surprised, angry. Match the attached style board exactly. **Corvina**: a sly old crow card sharp in a dark velvet waistcoat with gold buttons, a green gambler's visor, one monocle, and a fan of cards held in one wing; a single playing card tucked behind her ear-feathers. Smug, theatrical, enjoys winning a little too much.
 
 ## Stage 4: caricatures
 
