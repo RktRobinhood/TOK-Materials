@@ -24,7 +24,7 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 ## World and story
 
 - Structure follows **Chrono Trigger's beats**: fun village fair → call to action → journey, with a **time-travel subplot** (time travel may happen within a chapter; it needs a logical progression along the avatar's journey).
-- Default villain (teacher may veto): **The Algorithm** — a faceless feed-entity leaking through time rifts, turning people into rabid caricatures and planting demons disguised as villagers. Finale reveal: it doesn't *know* anything; it is probabilities predicting clicks.
+- Villain: **The Algorithm** — a faceless feed-entity leaking through time rifts, turning people into rabid caricatures and planting demons disguised as villagers. Finale reveal: it doesn't *know* anything; it is probabilities predicting clicks.
 - Tone: absurd, Monty Python-ish comedy. Art: **cute and dark, close to Demon Bluff** (thick outlines, saturated colour on dark backgrounds, framed character cards).
 
 ## Overworld
@@ -61,7 +61,7 @@ Hints cost **health**. Players can pick up **scars/debuffs** (risk) as consequen
 
 ## Collecting
 
-- Collectibles are **Pokémon-ified caricatures of real people** (influencers, celebrities, politicians — satire welcome) plus **historical mathematicians as rare legendaries**. Exaggerate core public traits; fun, not bitter. Hard line: no jokes whose punchline is sexual abuse or its victims. Roster drafted by the builder, vetoed by the teacher.
+- Collectibles are **Pokémon-ified caricatures of real people** (influencers, celebrities, politicians — satire welcome) plus **historical mathematicians as rare legendaries**. Exaggerate core public traits; fun, not bitter. Hard line: no jokes whose punchline is sexual abuse or its victims. Roster and villains are chosen by the builder; the teacher reviews the art.
 - The **obstacle you beat is the creature you can catch**: after a challenge or boss, a **probability catch roll**.
 - **Items like Poké Balls / Pokémon Go items**: catch tools that change odds, support items. Drop tables and rarity; **rumours** hint where rare spawns appear.
 - Progress carries over: creatures, items, levels/accolades, story decisions (characters react later).
@@ -83,7 +83,7 @@ Hints cost **health**. Players can pick up **scars/debuffs** (risk) as consequen
 - Saves in `localStorage` plus an exportable **backup code** (device moves). No student data leaves the laptop.
 - Determinism: all generation and battles use a seeded PRNG.
 - Reuse the **Odyssey pipeline** from `AI Projects/psychology materials/` (art requests, slicing, WebP, voice manifest, Kenney SFX, CREDITS.md). Python is **not** installed on this machine — port tools to Node (v24 available).
-- Voices: Gemini TTS pre-rendered to MP3, batched several lines per request then split; `speechSynthesis` fallback for missing lines. Key file expected at `~/.gemini_api_key` (teacher action).
+- Voices: Gemini TTS pre-rendered to MP3, batched several lines per request then split; `speechSynthesis` fallback for missing lines. The key lives in `.secrets/gemini_api_key` at the repo root (gitignored, never committed or shipped); TTS models available include `gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`.
 - SFX: Kenney CC0 packs (never synthesized beeps — the teacher rejected them).
 
 ## Build order

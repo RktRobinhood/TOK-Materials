@@ -1,3 +1,6 @@
 # Generated at deploy time by scripts/generate_directory.py
 /index.html
 __pycache__/
+
+# Local secrets (API keys for voice tools) - never commit
+.secrets/
