@@ -5,5 +5,16 @@
  */
 (function (root) {
     'use strict';
-    root.Rift.data.assets = {};
+    root.Rift.data.assets = {
+        'avatar/owlet-boy/happy': { file: 'avatars/owlet-boy-happy.webp', w: 194, h: 240 },
+        'avatar/owlet-boy/idle': { file: 'avatars/owlet-boy-idle.webp', w: 366, h: 414 },
+        'avatar/owlet-boy/neutral': { file: 'avatars/owlet-boy-neutral.webp', w: 207, h: 240 },
+        'avatar/owlet-boy/surprised': { file: 'avatars/owlet-boy-surprised.webp', w: 201, h: 240 },
+        'avatar/owlet-boy/worried': { file: 'avatars/owlet-boy-worried.webp', w: 220, h: 240 },
+        'avatar/owlet-girl/happy': { file: 'avatars/owlet-girl-happy.webp', w: 232, h: 240 },
+        'avatar/owlet-girl/idle': { file: 'avatars/owlet-girl-idle.webp', w: 366, h: 429 },
+        'avatar/owlet-girl/neutral': { file: 'avatars/owlet-girl-neutral.webp', w: 228, h: 240 },
+        'avatar/owlet-girl/surprised': { file: 'avatars/owlet-girl-surprised.webp', w: 228, h: 240 },
+        'avatar/owlet-girl/worried': { file: 'avatars/owlet-girl-worried.webp', w: 245, h: 240 },
+    };
 })(typeof window !== 'undefined' ? window : globalThis);

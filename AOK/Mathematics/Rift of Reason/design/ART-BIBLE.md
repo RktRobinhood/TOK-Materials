@@ -5,7 +5,7 @@ The rules every image is judged against during the art sessions (#32). Once the 
 ## Look
 
 - **Cute and dark.** A storybook creature world at dusk: whimsical, slightly spooky, never gory. Big expressive eyes, round friendly shapes, sharp comedy in the poses.
-- **Thick, dark ink outlines** (consistent weight), cel shading with a soft painterly texture, a little rim light.
+- **Clear dark outlines** of consistent medium weight (dark brown-black, as on the approved style board), cel shading with a soft painterly texture, a little rim light.
 - **Saturated jewel colours that glow against deep, dark backgrounds** (forest green, midnight violet). Lanterns, magic and the time rift are the light sources.
 - Feels like a modern indie card game. Inspired by the cute-dark feel of games like Demon Bluff, but we never copy their characters, frames or layouts.
 - **Everyone is a creature.** No humans anywhere. Caricatures are creatures *inspired by* real people's public traits and props, never realistic likenesses.

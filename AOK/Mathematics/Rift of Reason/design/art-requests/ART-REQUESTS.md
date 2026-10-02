@@ -315,3 +315,5 @@ Record what was approved and why, as in the Odyssey project.
 
 | Part | Version kept | Notes |
 |---|---|---|
+| 0.1 Style board | First try (2026-10-02) | Approved as the style reference. Cute and dark, jewel colours glowing on violet dark, painterly cel shading; the fair swatch sets the world's mood. Outlines came out medium-weight dark brown, not thick black: the board wins, so every later sheet matches it. Its 3/4 walking pose and the "!" marks are fine here, but walk cycles must be strict side view with no marks. |
+| 1.1 Owlet sheet | First try (2026-10-02) | Matches the style board; boy (red scarf, satchel) and girl (teal hooded cloak, spectacles, book) told apart at a glance. Real transparency, nothing touching; sliced cleanly into 10 assets on a dark background, no halos. The "!" marks on the surprised busts stay attached to the bust (fine). |
