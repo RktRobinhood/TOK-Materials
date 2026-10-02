@@ -35,3 +35,7 @@ UI and evidence (`ui/…`, transparent):
 - Evidence illustrations, `ui/evidence-<id>` (drawn without readable text): `chart`, `photo`, `letter`, `receipt`, `video`, `survey`, `coin`, `map`, `recording`, `notebook`.
 
 Optional extras (only after the above): `ui/marker-<type>` map medallions (already in progress) and `ui/axiom-<id>` illustrations for the 18 axiom cards.
+
+## Map landmarks (scene/map-ch3, 1600×900 map space, checked with an overlay)
+
+arrival rift 244,679 · plaza 727,335 · newsstand 689,507 · data lab 1091,383 · gallery of charts 1435,430 · library 340,239 · café 378,397 · archive 1206,622 · tribunal steps 1340,239 · the Tribunal 1368,105 · server tower on the horizon (not walkable) 842,57 · extras: south bridge 622,670, west bridge 105,440.
