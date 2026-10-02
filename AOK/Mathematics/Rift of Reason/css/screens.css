@@ -1,0 +1,167 @@
+/* Rift of Reason — screen layouts (title, avatar, map, encounter, collection, settings, witness). */
+
+/* ---- title ---- */
+.title-card { position: absolute; inset: 0; align-items: flex-start; padding-top: 5vh; background: linear-gradient(rgba(10, 8, 18, 0.15), rgba(10, 8, 18, 0) 55%, rgba(10, 8, 18, 0.35)); }
+/* The title art keeps its heroes in the lower third: logo and buttons stay in the calm upper middle. */
+.title-card .tagline, .title-card .small { text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9); }
+.logo { width: min(52vw, 760px); max-width: 90vw; filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7)); }
+.logo-text {
+    font-size: clamp(2.6rem, 7vw, 5rem); color: var(--gold);
+    text-shadow: 0 4px 0 var(--ink), 0 0 30px rgba(63, 224, 208, 0.45);
+    -webkit-text-stroke: 2px var(--ink); letter-spacing: 0.02em;
+}
+.tagline { font-size: 1.15em; opacity: 0.9; }
+
+/* ---- avatar select ---- */
+.avatar-screen { position: absolute; inset: 0; overflow: auto; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.avatar-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; width: min(1100px, 100%); }
+.avatar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.avatar-option {
+    background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 12px; padding: 8px 4px 6px;
+    color: var(--parchment); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.avatar-option img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.avatar-option:hover { border-color: var(--frame); }
+.avatar-option.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), 0 0 18px rgba(242, 182, 50, 0.4); }
+.avatar-preview { display: flex; gap: 16px; align-items: center; }
+.avatar-big { width: 220px; height: 260px; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6)); }
+.perk { margin-top: 8px; }
+.name-input { font: inherit; padding: 0.5em 0.8em; border-radius: 999px; border: 2px solid var(--panel-edge); background: #0d0b15; color: var(--parchment); width: 260px; }
+
+/* ---- map ---- */
+.map-wrap { position: absolute; inset: 0; }
+.map-svg { width: 100%; height: 100%; display: block; }
+.fog { fill: #07060c; opacity: 0.88; }
+.map-path { fill: none; stroke: var(--parchment); stroke-width: 3; stroke-dasharray: 2 12; stroke-linecap: round; opacity: 0.35; }
+.map-path.faint { opacity: 0.15; }
+.map-node { cursor: pointer; outline: none; }
+.map-node .ring { fill: #1a1428; stroke: var(--parchment); stroke-width: 3; transition: r 0.15s; }
+.map-node .icon { fill: var(--parchment); font-size: 22px; font-family: var(--font-display); pointer-events: none; }
+.map-node:hover .ring, .map-node:focus .ring { stroke: var(--gold); stroke-width: 5; }
+.map-node.puzzle .ring { stroke: var(--rift); }
+.map-node.miniboss .ring { stroke: var(--emotion); }
+.map-node.boss .ring { stroke: var(--frame); stroke-width: 5; }
+.map-node.done .ring { fill: #2a2140; }
+.map-node.done .icon { opacity: 0.6; }
+.map-node.locked .ring { stroke-dasharray: 4 4; opacity: 0.7; }
+.map-node.hinted { cursor: help; }
+.map-node.hinted .ring { fill: rgba(20, 16, 30, 0.6); stroke: rgba(239, 227, 200, 0.35); stroke-dasharray: 3 5; }
+.map-node.hinted .icon { opacity: 0.5; }
+.map-node.here .ring { stroke: var(--gold); }
+.avatar-shadow { fill: rgba(0, 0, 0, 0.45); }
+.map-tip { position: absolute; max-width: 260px; z-index: 30; padding: 8px 12px; pointer-events: none; }
+.map-tip .warn { color: #ffb4b4; margin-top: 4px; }
+.map-bottom { position: absolute; left: 12px; bottom: 12px; }
+.chapter-label { padding: 6px 12px; font-family: var(--font-display); }
+.hud-face { width: 34px; height: 34px; object-fit: contain; }
+
+/* ---- encounter ---- */
+.enc-layout { position: absolute; inset: 64px 12px 12px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 12px; }
+.enc-side { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.enc-title { padding: 8px 12px; display: flex; flex-direction: column; }
+.enc-obstacle { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.enc-creature { width: 220px; height: 240px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
+.enc-creature.rabid { animation: rabid 1.6s ease-in-out infinite; }
+.enc-creature.dizzy { animation: dizzy 2.4s linear infinite; filter: grayscale(0.3) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
+@keyframes rabid { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-4px) rotate(-2deg); } 75% { transform: translateY(-2px) rotate(2deg); } }
+@keyframes dizzy { 0% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
+.bubble { background: var(--parchment); color: var(--ink); border: 2px solid var(--ink); border-radius: 14px; padding: 6px 12px; font-size: 0.95em; position: relative; max-width: 280px; text-align: center; }
+.enc-controls { flex-wrap: wrap; }
+.enc-feedback { padding: 10px 12px; border-radius: 10px; min-height: 1em; }
+.enc-feedback:empty { display: none; }
+.enc-feedback.good { background: rgba(47, 191, 113, 0.18); border: 2px solid var(--perception); }
+.enc-feedback.bad { background: rgba(232, 56, 79, 0.15); border: 2px solid var(--emotion); }
+.enc-feedback.hint { background: rgba(242, 182, 50, 0.15); border: 2px solid var(--gold); }
+.enc-stage { position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.enc-blurb { padding: 4px 2px; }
+.enc-puzzle { position: relative; flex: 1; min-height: 0; overflow: auto; border-radius: var(--radius); background: rgba(10, 8, 18, 0.55); border: 2px solid var(--panel-edge); }
+.tok-line { font-style: italic; border-left: 4px solid var(--rift); padding-left: 10px; }
+.why-option { text-align: left; border-radius: 12px; }
+.catch-panel { align-self: center; margin: auto; width: min(460px, 100%); text-align: center; align-items: center; }
+.thrown-charm { width: 90px; height: 90px; object-fit: contain; }
+.thrown-charm.shake { animation: shake 0.6s ease-in-out; }
+@keyframes shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-18deg); } 50% { transform: rotate(14deg); } 80% { transform: rotate(-8deg); } }
+.bag-icon { width: 44px; height: 44px; object-fit: contain; }
+
+@media (max-width: 1000px) {
+    .enc-layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+    .enc-side { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .enc-creature { width: 110px; height: 120px; }
+    .avatar-layout { grid-template-columns: 1fr; }
+}
+
+/* ---- collection ---- */
+.collection-screen, .settings-screen { position: absolute; inset: 64px 12px 12px; overflow: auto; padding: 8px 12px; }
+.settings-screen { width: min(640px, calc(100% - 24px)); margin: 0 auto; inset: 64px 0 12px; }
+.dex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+.dex-card { position: relative; background: var(--panel); border: 3px solid var(--panel-edge); border-radius: 12px; padding: 8px; color: var(--parchment); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.dex-card img { width: 100%; aspect-ratio: 1 / 1.1; object-fit: contain; }
+.dex-card.caught[data-colour="reason"] { border-color: var(--reason); }
+.dex-card.caught[data-colour="emotion"] { border-color: var(--emotion); }
+.dex-card.caught[data-colour="perception"] { border-color: var(--perception); }
+.dex-card.caught[data-colour="language"] { border-color: var(--language); }
+.dex-card.caught[data-colour="imagination"] { border-color: var(--imagination); }
+.dex-card.caught[data-colour="memory"] { border-color: var(--memory); }
+.dex-card.unknown img, .silhouette { filter: brightness(0) opacity(0.5); }
+.dex-card.seen { opacity: 0.75; }
+.dex-name { font-family: var(--font-display); font-weight: 600; }
+.dex-count { position: absolute; top: 6px; right: 8px; font-weight: 700; color: var(--gold); }
+.dex-portrait { width: 120px; height: 120px; object-fit: contain; }
+
+/* ---- witness puzzle ---- */
+.wit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 14px; padding: 14px; }
+.wit-scene { padding: 14px 18px; font-size: 1.05em; transition: filter 1.5s, opacity 1.5s; align-self: start; }
+.wit-scene p { margin: 0 0 0.5em; }
+.wit-scene.faded p { filter: blur(6px); opacity: 0.35; }
+.wit-claims { display: flex; flex-direction: column; gap: 8px; }
+.wit-claim { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; }
+.wit-btns .btn.picked { background: linear-gradient(#f6c75a, #c98d14); color: var(--ink); }
+@media (max-width: 1000px) { .wit { grid-template-columns: 1fr; } }
+
+/* A soft light rim so dark characters (Raven chicks, imps) don't fade into dark backgrounds. */
+.avatar-option img, .avatar-big, .hud-face, .dialogue .portrait, .enc-creature, .dex-card img, .dex-portrait, .map-avatar {
+    filter: drop-shadow(0 0 3px rgba(239, 227, 200, 0.35)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.55));
+}
+.enc-creature.dizzy { filter: grayscale(0.3) drop-shadow(0 0 3px rgba(239, 227, 200, 0.35)) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
+.dex-card.unknown img { filter: brightness(0) opacity(0.5); }
+
+/* ---- time-rift effect ---- */
+.rift-fx-layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 65; background: radial-gradient(circle, rgba(63, 224, 208, 0.18), rgba(7, 6, 12, 0.5) 70%); transition: opacity 0.6s; }
+.rift-fx-layer.fade { opacity: 0; }
+.rift-fx { height: min(70vh, 520px); filter: drop-shadow(0 0 30px rgba(63, 224, 208, 0.7)); }
+
+/* ---- framed creature cards (ui/card-<colour>): art box ≈ the frame's transparent window ---- */
+.fcard { position: relative; width: 100%; aspect-ratio: 5 / 8.1; }
+.fcard.big { width: 220px; flex: none; }
+.fcard-art { position: absolute; left: 18%; right: 15%; top: 13%; bottom: 35%; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; background: radial-gradient(circle at 50% 60%, rgba(239, 227, 200, 0.12), rgba(10, 8, 18, 0.6)); }
+.fcard-art img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.fcard-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.fcard-panel { position: absolute; left: 16%; right: 16%; top: 69%; bottom: 8%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; color: var(--parchment); overflow: hidden; }
+.fcard-name { font-family: var(--font-display); font-weight: 600; font-size: 0.82em; line-height: 1.1; }
+.fcard.big .fcard-name { font-size: 1.05em; }
+.fcard-power { font-weight: 700; color: var(--gold); font-size: 0.8em; }
+.fcard-text { font-size: 0.68em; line-height: 1.2; opacity: 0.9; }
+.fcard.no-frame { border: 3px solid var(--panel-edge); border-radius: 12px; background: var(--panel); }
+.dex-card { padding: 4px; background: transparent; border-color: transparent; }
+.dex-card.caught[data-colour] { border-color: transparent; box-shadow: none; }
+.dex-card:hover .fcard { transform: translateY(-3px); transition: transform 0.12s; }
+.dex-card.seen .fcard { opacity: 0.75; }
+.dex-card .fcard-art img { filter: none; }
+.dex-card.unknown .fcard-art img { filter: brightness(0) opacity(0.5); }
+
+/* ---- painted HUD pieces ---- */
+.hud .hearts { display: inline-flex; align-items: center; gap: 2px; }
+.hud-heart { width: 22px; height: 20px; object-fit: contain; }
+.hud-scar { width: 18px; height: 16px; object-fit: contain; vertical-align: -3px; margin-right: 3px; }
+
+/* Painted map medallions: the ring stays underneath as the state colour (done, here, locked). */
+.map-node .marker-art { pointer-events: none; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)); }
+.map-node.done .marker-art { opacity: 0.75; }
+.map-node.locked .marker-art { filter: grayscale(0.8) brightness(0.7); }
+
+/* ---- accolade badges ---- */
+.badge-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.badge { width: 96px; text-align: center; opacity: 0.4; filter: grayscale(1); }
+.badge.got { opacity: 1; filter: none; }
+.badge-img { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 4px; display: block; }
+.badge-fallback { font-size: 44px; line-height: 72px; }

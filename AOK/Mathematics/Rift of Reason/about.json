@@ -1,0 +1,23 @@
+{
+  "title": "Rift of Reason",
+  "summary": "A cute-but-dark adventure that runs alongside the maths unit. Students solve logic puzzles, catch caricatures of famous people and play bluffing card battles. Each lesson opens a new chapter.",
+  "overview": [
+    "Rift of Reason is the follow-up activity for the four-lesson introduction to Mathematics as an area of knowledge: reasoning; truth tables as a simple introduction to proof; breaking down arguments; and the ethics of maths and AI. You teach the concept, then students play the matching chapter for 30–40 minutes and carry on at home if they want.",
+    "Every puzzle is generated fresh each time and played with the mouse: liars and truth-tellers, the 2-4-6 rule hunt, Lewis Carroll syllogisms on a Venn board, line puzzles where proving impossibility is the win, and witness scenes that separate seeing from inferring. Hints cost health. Beating an obstacle lets students try to catch it on a probability roll.",
+    "The collectibles are affectionate caricatures of influencers, celebrities and politicians, plus legendary historical mathematicians. Collected creatures play in short bluffing card battles whose rules are rewritten by a shared deck of axioms.",
+    "Progress is saved in the student's own browser only. Settings has a backup code for moving to another device. Nothing is sent anywhere."
+  ],
+  "questions": [
+    "Can deduction give us certainty if we cannot trust the premises?",
+    "Does a pattern that keeps working count as a proof?",
+    "Is a valid argument always a good one?",
+    "Change the axioms and the same moves give a different game. What does that say about mathematical truth?"
+  ],
+  "time": "30–40 min per lesson, plus optional home play",
+  "format": "Pairs or individual, on laptops",
+  "needs": "Headphones (the characters are voiced).",
+  "advisories": ["Satire of public figures"],
+  "heads_up": "The caricatures poke fun at the public personas of real people, including politicians. In lesson 1, do the classic 3×3 nine-dots puzzle live in class: the game deliberately uses other layouts. Chapter 2 (Boolesbury, the truth-table chapter) is already open through the Rift Pass, so keen students may arrive early; that's fine.",
+  "open_label": "Play",
+  "order": 10
+}

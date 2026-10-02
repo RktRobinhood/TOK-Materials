@@ -1,0 +1,4 @@
+node_modules/
+.asset-cache.json
+voice-raw/
+voice-auditions/

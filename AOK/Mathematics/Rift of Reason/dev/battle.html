@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battle bench</title>
+<link rel="stylesheet" href="../css/game.css">
+<link rel="stylesheet" href="../css/battle.css">
+<style>
+    body { overflow: auto; }
+    .bench { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; height: 100vh; }
+    .bench header { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+    .bench header input, .bench header select, .bench textarea { font: inherit; background: #221a30; color: var(--parchment); border: 1px solid #3a2d4a; border-radius: 6px; padding: 2px 6px; }
+    #screen { position: relative; flex: 1; min-height: 640px; border: 2px dashed #3a2d4a; border-radius: 14px; overflow: hidden; }
+    #codes { display: none; gap: 8px; align-items: flex-start; }
+    #codes.show { display: flex; }
+    #codes textarea { width: 420px; height: 60px; font-family: monospace; font-size: 11px; }
+    #msg { font-size: 13px; color: var(--rift); }
+</style>
+</head>
+<body>
+<!--
+    Developer bench for the battle screen. Open dev/battle.html from the game folder.
+    ?mode=practice|trainer|boss|ghost&ai=easy|hard&seed=abc
+-->
+<div class="bench">
+    <header>
+        <strong>Battle bench</strong>
+        <label>mode <select id="mode"><option>practice</option><option>trainer</option><option>boss</option><option>ghost</option></select></label>
+        <label>AI <select id="ai"><option>easy</option><option selected>hard</option></select></label>
+        <label>seed <input id="seed" size="10"></label>
+        <button class="btn small" id="go">New battle</button>
+        <button class="btn small" id="codes-btn">Team codes…</button>
+        <span id="msg"></span>
+    </header>
+    <div id="codes" class="panel">
+        <div class="stack">
+            <button class="btn small" id="export">Export my sample team</button>
+            <button class="btn small" id="import">Fight this code as a ghost</button>
+        </div>
+        <textarea id="code" placeholder="Paste a team code here"></textarea>
+    </div>
+    <div id="screen"></div>
+</div>
+<script src="../js/core/rift.js"></script>
+<script src="../js/core/state.js"></script>
+<script src="../js/core/router.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/core/audio.js"></script>
+<script src="../data/creatures.js"></script>
+<script src="../data/items.js"></script>
+<script src="../data/axioms.js"></script>
+<script src="../data/fate.js"></script>
+<script src="../js/battle/abilities.js"></script>
+<script src="../js/battle/engine.js"></script>
+<script src="../js/battle/ai.js"></script>
+<script src="../js/battle/fate.js"></script>
+<script src="../js/battle/ante.js"></script>
+<script src="../js/battle/team-codes.js"></script>
+<script src="../js/screens/battle.js"></script>
+<script>
+(function () {
+    const R = window.Rift;
+    const q = new URLSearchParams(location.search);
+    const $ = id => document.getElementById(id);
+    const msg = t => { $('msg').textContent = t; };
+    $('mode').value = q.get('mode') || 'practice';
+    $('ai').value = q.get('ai') || 'hard';
+    $('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);
+
+    let uid = 0;
+    const mk = (species, extra) => Object.assign({ uid: 'bench-' + (++uid), species, caughtAt: 0, powerDelta: 0, scars: [], injuries: [], warped: null, trophyOf: null, wins: 0 }, extra || {});
+
+    // A sample player team that shows off injuries, warps and a trophy.
+    const myTeam = [
+        mk('lobstorian'), mk('astrophysicat'), mk('tremendoodle'), mk('swiftlet'),
+        mk('muskrat', { powerDelta: -1, injuries: ['minus-one'] }), mk('zuckerborg'), mk('altmanta'),
+        mk('beastie'), mk('speedcheeta', { warped: { ability: 'grook' } }), mk('chimpossible', { trophyOf: 'Ida' }),
+    ];
+    const myItems = { charm: 3, tonic: 1, ward: 1, anchor: 1 };
+    const trainer = {
+        name: 'Sergeant Syllo',
+        team: ['siuuugull', 'siuuugull', 'astrophysicat', 'lobstorian', 'rawmsay', 'zuckerborg', 'tremendoodle', 'beastie', 'muskrat', 'speedcheeta'].map(s => mk(s)),
+        stake: { items: { greatcharm: 1 }, creatures: ['siuuugull'] },
+    };
+    let ghost = null;
+
+    function start(opponentOverride) {
+        const mode = $('mode').value;
+        const opponent = Object.assign({}, opponentOverride || (mode === 'ghost' && ghost) || trainer, { ai: $('ai').value });
+        if (mode === 'boss') opponent.name = 'The Algorithm (test boss)';
+        msg('');
+        R.Router.replace('battle', {
+            mode,
+            opponent,
+            seed: $('seed').value,
+            player: { team: myTeam, items: myItems, axioms: ['age-of-wonder'] },
+            onEnd(result) {
+                console.log('battle result', result);
+                msg(`Result: ${result.outcome} in ${result.turns} turns` + (result.fate ? `; fate: ${result.fate.log.join(' ')}` : ''));
+            },
+        });
+    }
+
+    $('go').onclick = () => start();
+    $('codes-btn').onclick = () => $('codes').classList.toggle('show');
+    $('export').onclick = () => {
+        $('code').value = R.Battle.TeamCodes.exportTeam({ nickname: 'Bench', creatures: myTeam, axioms: ['age-of-wonder'] });
+        msg('Exported. Paste it into another bench and fight it as a ghost.');
+    };
+    $('import').onclick = () => {
+        try {
+            ghost = R.Battle.TeamCodes.ghostOpponent(R.Battle.TeamCodes.importTeam($('code').value));
+            $('mode').value = 'ghost';
+            start(ghost);
+        } catch (e) {
+            msg(e.message);
+        }
+    };
+    start();
+})();
+</script>
+</body>
+</html>

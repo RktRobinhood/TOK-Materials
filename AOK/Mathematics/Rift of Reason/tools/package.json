@@ -1,0 +1,13 @@
+{
+    "name": "rift-of-reason-tools",
+    "private": true,
+    "type": "module",
+    "description": "Dev-only build tools for Rift of Reason (art pipeline, voices). Never shipped with the game.",
+    "scripts": {
+        "assets": "node build-assets.mjs"
+    },
+    "dependencies": {
+        "lamejs": "^1.2.1",
+        "sharp": "^0.34.0"
+    }
+}

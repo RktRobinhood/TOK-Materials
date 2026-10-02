@@ -1,0 +1,255 @@
+/* Rift of Reason — battle screen. Builds on the tokens in css/game.css. */
+
+.battle {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 12px;
+    padding: 10px 12px;
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(63, 224, 208, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(7, 6, 12, 0.15) 0%, rgba(7, 6, 12, 0.6) 100%);
+    overflow: hidden;
+}
+
+.b-main {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto minmax(var(--board-h), 1fr) auto minmax(var(--board-h), 1fr) auto auto;
+    gap: 8px;
+    min-height: 0;
+    min-width: 0;
+    overflow-y: auto;
+}
+.battle { --card-w: 128px; --card-h: 178px; --art-h: 64px; --board-h: 196px; }
+
+/* ---- player bars ---- */
+.b-bar {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 6px 14px;
+    background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 999px;
+    font-size: 0.9em;
+}
+.b-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1em; min-width: 9em; }
+.b-name.active { color: var(--rift); text-shadow: 0 0 10px rgba(63, 224, 208, 0.6); }
+.b-lives .heart { color: var(--emotion); font-size: 1.25em; margin-right: 2px; }
+.b-lives .heart.lost { color: #5a4a62; }
+.b-steals { display: flex; align-items: center; gap: 4px; }
+.b-steals .label { opacity: 0.7; margin-right: 4px; }
+.steal-token { filter: drop-shadow(0 0 4px rgba(242, 182, 50, 0.6)); }
+.b-count { margin-left: auto; opacity: 0.75; font-size: 0.9em; }
+
+/* ---- boards and hands ---- */
+.b-board, .b-hand {
+    display: flex; gap: 10px; align-items: center; justify-content: center;
+    overflow-x: auto; overflow-y: hidden;
+    padding: 6px 4px;
+    min-height: 0;
+}
+.b-board {
+    border-radius: var(--radius);
+    background: rgba(15, 31, 26, 0.45);
+    border: 2px dashed rgba(239, 227, 200, 0.12);
+}
+.opp-board { background: rgba(40, 14, 30, 0.4); }
+.opp-hand { min-height: 60px; padding: 2px 0; gap: 6px; }
+.my-hand { min-height: calc(var(--card-h) + 22px); padding-top: 12px; }
+.b-board { padding-top: 12px; padding-bottom: 14px; }
+.b-empty { opacity: 0.45; font-style: italic; }
+
+/* ---- creature cards ---- */
+.bcard {
+    --c: var(--memory);
+    position: relative; flex: none;
+    width: var(--card-w); min-height: var(--card-h);
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 6px 7px 7px;
+    border-radius: 12px;
+    border: 3px solid var(--ink);
+    background: linear-gradient(170deg, #2b2140, #17121f 70%);
+    box-shadow: 0 0 0 2px var(--c), 0 6px 14px rgba(0, 0, 0, 0.55);
+    font-size: 11.5px; line-height: 1.25;
+    transition: transform 0.12s ease, box-shadow 0.15s ease;
+}
+.bcard[data-colour="reason"] { --c: var(--reason); }
+.bcard[data-colour="emotion"] { --c: var(--emotion); }
+.bcard[data-colour="perception"] { --c: var(--perception); }
+.bcard[data-colour="language"] { --c: var(--language); }
+.bcard[data-colour="imagination"] { --c: var(--imagination); }
+.bcard[data-colour="memory"] { --c: var(--memory); }
+
+.bcard-top { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.bcard-top { padding-right: 20px; min-height: 18px; }
+.bcard-top .chip { font-size: 9.5px; padding: 0 5px; white-space: nowrap; overflow: hidden; }
+.bcard-power {
+    position: absolute; top: -10px; right: -10px; z-index: 2;
+    flex: none; width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 17px;
+    color: var(--ink); background: var(--parchment); border: 2px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--c);
+}
+.bcard-power.up { background: #b9f5cf; }
+.bcard-power.down { background: #f5b9c2; }
+.bcard-art { height: var(--art-h); display: flex; justify-content: center; }
+.bcard-art img { height: 100%; width: auto; }
+.bcard-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; text-align: center; color: var(--c); }
+.bcard-nick { text-align: center; font-style: italic; color: var(--gold); font-size: 11px; }
+.bcard-text { color: var(--parchment-dim); }
+.b-ab b { color: var(--parchment); }
+.b-ab.warped b { color: var(--imagination); }
+.b-ab.gained b { color: var(--rift); }
+.b-ab.none { font-style: italic; opacity: 0.7; }
+.bcard-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: auto; }
+.b-tag { font-size: 10px; padding: 0 5px; border-radius: 6px; background: rgba(255, 255, 255, 0.08); }
+.b-tag.stolen { background: var(--frame); color: var(--parchment); }
+.b-tag.hurt { background: rgba(232, 56, 79, 0.25); }
+.b-tag.up { background: rgba(47, 191, 113, 0.25); }
+.bcard-note {
+    position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%);
+    white-space: nowrap; font-size: 11px; font-weight: 700;
+    padding: 1px 8px; border-radius: 999px; border: 2px solid var(--ink);
+    background: var(--parchment); color: var(--ink);
+}
+.bcard-note.good { background: #b9f5cf; }
+.bcard-note.bad { background: #f5b9c2; }
+.bcard-note.even { background: #f6e3a6; }
+
+.bcard.small { width: 96px; min-height: 0; font-size: 10px; }
+.bcard.small .bcard-art { height: 36px; }
+.bcard.small .bcard-text { display: none; }
+.bcard.revealed::after { content: 'revealed'; position: absolute; top: -8px; right: 6px; font-size: 9px; background: var(--gold); color: var(--ink); border-radius: 4px; padding: 0 4px; }
+
+.bcard.back {
+    width: 40px; min-height: 54px; padding: 0;
+    align-items: center; justify-content: center;
+    background: repeating-linear-gradient(45deg, #3a1f4a 0 6px, #2a1636 6px 12px);
+    box-shadow: 0 0 0 2px var(--frame), 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.back-mark { font-size: 18px; color: var(--rift); opacity: 0.8; }
+
+.bcard.clickable { cursor: pointer; }
+.bcard.can-act { box-shadow: 0 0 0 2px var(--c), 0 0 16px 3px rgba(63, 224, 208, 0.55); }
+.bcard.can-act:hover { transform: translateY(-4px); }
+.bcard.selected { transform: translateY(-8px); box-shadow: 0 0 0 3px var(--rift), 0 0 22px 6px rgba(63, 224, 208, 0.7); }
+.bcard.target { box-shadow: 0 0 0 3px var(--emotion), 0 0 18px 4px rgba(232, 56, 79, 0.65); cursor: crosshair; }
+.bcard.attacking { animation: lunge 0.9s ease-in-out infinite alternate; box-shadow: 0 0 0 3px var(--emotion), 0 0 20px 4px rgba(232, 56, 79, 0.6); }
+.bcard.entered { animation: enter 0.45s ease-out; }
+.bcard.option:hover { transform: translateY(-4px); }
+.bcard.spotlight { animation: pulse 1s ease-in-out infinite alternate; box-shadow: 0 0 0 3px var(--gold), 0 0 24px 6px rgba(242, 182, 50, 0.7); }
+@keyframes pulse { to { transform: scale(1.05); } }
+
+/* ---- choice popup (Pull That Up, Axiomatic) ---- */
+.b-choice {
+    position: absolute; left: 12px; right: 314px; top: 50%; transform: translateY(-50%);
+    z-index: 20;
+    padding: 12px 16px;
+    background: var(--panel); border: 2px solid var(--rift); border-radius: var(--radius);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.b-choice:empty { display: none; }
+.b-choice-title { font-family: var(--font-display); font-weight: 700; }
+.b-choice .b-spot { flex-wrap: wrap; }
+
+@keyframes lunge { to { transform: translateY(10px) scale(1.04); } }
+@keyframes enter { from { transform: translateY(-24px) scale(0.85); opacity: 0; } }
+
+/* ---- prompt ---- */
+.b-prompt { padding: 6px 14px; display: flex; flex-direction: column; gap: 4px; }
+.b-news { font-size: 0.85em; color: var(--parchment-dim); border-left: 3px solid var(--rift); padding-left: 8px; }
+.b-ask { font-family: var(--font-display); font-weight: 600; font-size: 1.05em; }
+.b-ask.wait { opacity: 0.75; font-style: italic; }
+.b-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.b-spot { display: flex; justify-content: center; gap: 10px; padding: 4px; }
+.b-spot.row { flex-wrap: wrap; }
+.btn.danger { background: linear-gradient(#c53e52, #8a1f30); }
+.colour-btn[data-colour="reason"] { background: linear-gradient(#3d7bff, #234ca8); }
+.colour-btn[data-colour="emotion"] { background: linear-gradient(#e8384f, #9b1f31); }
+.colour-btn[data-colour="perception"] { background: linear-gradient(#2fbf71, #1a7a47); }
+.colour-btn[data-colour="language"] { background: linear-gradient(#f2b632, #a87a15); color: var(--ink); }
+.colour-btn[data-colour="imagination"] { background: linear-gradient(#a05cf0, #6534a8); }
+.colour-btn[data-colour="memory"] { background: linear-gradient(#c9c9d6, #85859a); color: var(--ink); }
+.b-ab-list { font-size: 0.85em; color: var(--parchment-dim); }
+
+.battle.my-turn .my-board, .battle.my-turn .my-hand { border-color: rgba(63, 224, 208, 0.35); }
+
+/* ---- side panel ---- */
+.b-side { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.axiom-card {
+    position: relative;
+    padding: 10px 12px 12px;
+    border-radius: 12px;
+    background: linear-gradient(#f3e9d2, #e1cfa6);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--frame), var(--shadow);
+}
+.axiom-card.clickable { cursor: pointer; max-width: 230px; }
+.axiom-card.clickable:hover { transform: translateY(-3px); box-shadow: 0 0 0 3px var(--rift), var(--shadow); }
+.axiom-card.empty { font-style: italic; opacity: 0.8; }
+.axiom-card.flip { animation: flip 0.6s ease-out; }
+.axiom-kicker { font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.12em; color: var(--frame); font-weight: 800; }
+.axiom-name { font-family: var(--font-display); font-weight: 700; font-size: 1.15em; }
+.axiom-text { font-size: 0.9em; margin: 4px 0; }
+.axiom-flavour { font-size: 0.78em; font-style: italic; opacity: 0.75; }
+.axiom-count { font-size: 0.82em; opacity: 0.8; text-align: center; }
+.axiom-peek { font-size: 0.82em; color: var(--rift); text-align: center; }
+@keyframes flip { from { transform: perspective(600px) rotateY(90deg); } }
+
+.b-wheel { padding: 6px 10px; font-size: 0.82em; }
+.b-wheel summary { cursor: pointer; font-weight: 700; }
+.b-wheel ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 6px; }
+.b-wheel .chip { font-size: 0.85em; }
+.wheel-line { opacity: 0.75; font-style: italic; }
+
+.b-log-wrap { flex: 1; min-height: 120px; overflow: auto; padding: 8px 12px; }
+.b-log-wrap h3 { font-size: 0.95em; }
+.b-log { margin: 0; padding-left: 1.2em; font-size: 0.8em; display: flex; flex-direction: column; gap: 2px; }
+.b-log li { color: var(--parchment-dim); }
+.b-log .ev-round { list-style: none; margin-left: -1.2em; margin-top: 4px; color: var(--rift); font-weight: 700; }
+.b-log .ev-axiom { color: var(--gold); }
+.b-log .ev-steal, .b-log .ev-hit, .b-log .ev-end { color: var(--parchment); font-weight: 700; }
+
+/* ---- end overlay ---- */
+.b-overlay { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(5, 4, 10, 0.7); z-index: 30; }
+.b-overlay.show { display: flex; }
+.b-end { width: min(560px, calc(100% - 32px)); max-height: calc(100% - 40px); overflow: auto; animation: enter 0.4s ease-out; }
+.b-end h2 { font-size: 2em; color: var(--gold); }
+.fate-list, .ante-list { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.fate-list li { padding: 4px 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); }
+.fate-icon { margin-right: 6px; }
+.fate-death { background: rgba(232, 56, 79, 0.18) !important; }
+.fate-warp { background: rgba(160, 92, 240, 0.18) !important; }
+.fate-injured { background: rgba(242, 182, 50, 0.15) !important; }
+
+/* ---- responsive ---- */
+@media (max-width: 1180px) {
+    .battle { grid-template-columns: minmax(0, 1fr) 240px; --card-w: 116px; }
+    .b-choice { right: 264px; }
+    .bcard { font-size: 11px; }
+}
+@media (max-height: 900px) {
+    .battle { --card-w: 112px; --card-h: 150px; --art-h: 40px; --board-h: 166px; }
+    .bcard { font-size: 10.5px; }
+    .bcard-name { font-size: 12px; }
+    .b-bar { padding: 3px 12px; }
+}
+@media (max-height: 820px) {
+    .battle { --card-h: 128px; --art-h: 26px; --board-h: 142px; }
+    .opp-hand { min-height: 0; }
+    .bcard.back { min-height: 40px; width: 32px; }
+    .b-main { gap: 6px; }
+    .bcard-text { font-size: 10px; }
+}
+@media (max-width: 900px) {
+    .battle { grid-template-columns: 1fr; overflow: auto; }
+    .b-side { flex-direction: row; flex-wrap: wrap; }
+    .b-side > * { flex: 1 1 260px; }
+    .b-main { grid-template-rows: auto auto auto auto auto auto auto; overflow: visible; }
+    .b-choice { right: 12px; position: fixed; }
+}
+
+/* Axiom illustrations (ui/axiom-<id>): a round vignette at the top of the card. */
+.axiom-art { display: block; width: 64px; height: 64px; object-fit: contain; margin: 0 auto 4px; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.5)); }
+@media (max-width: 1100px) { .axiom-art { width: 44px; height: 44px; } }
