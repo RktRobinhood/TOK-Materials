@@ -53,8 +53,8 @@ test('every ability keyword used by a creature is implemented', () => {
 // ---- abilities ---------------------------------------------------------------------
 
 test('lecture: when it blocks, the attacker loses its ability this turn', () => {
-    // Mr. Beastie at 5 base (injured) + escalate 3 = 8 would beat Lobstorian (6). Lectured, it is 5.
-    const s = setup([inst('beastie', { powerDelta: -2 })], ['lobstorian']);
+    // Mr. Beastie at 5 base + escalate 3 = 8 would beat Lobstorian (6). Lectured, it is 5.
+    const s = setup([inst('beastie')], ['lobstorian']);
     toBoard(s, 'p0c0', 0);
     toBoard(s, 'p1c0', 1);
     s.players[0].playedCount = 3;
@@ -132,10 +132,10 @@ test('predict: guess the colour of the opponent\'s next creature; if right, +3',
 
 test('escalate: +1 power for each creature you have played this battle', () => {
     let t = play(setup(['beastie', 'lobstorian'], []), 'p0c0');
-    assert.equal(E.power(t, 'p0c0'), 8);
+    assert.equal(E.power(t, 'p0c0'), 6);
     t = play(t, 'p1c0');
     t = play(t, 'p0c1');
-    assert.equal(E.power(t, 'p0c0'), 9);
+    assert.equal(E.power(t, 'p0c0'), 7);
 });
 
 test('every-time: always attacks if it can', () => {
@@ -257,7 +257,7 @@ test('colour wheel: a clean 5-cycle with a TOK line per edge; Memory stays outsi
 });
 
 test('colour wheel: +2 power when fighting the colour you beat', () => {
-    const s = setup(['lobstorian'], ['rawmsay', 'beastie']); // reason vs emotion
+    const s = setup(['lobstorian'], [inst('rawmsay', { powerDelta: 2 }), 'beastie']); // reason vs emotion (Rawmsay boosted to 8 for a tie)
     toBoard(s, 'p0c0', 0);
     toBoard(s, 'p1c0', 1);
     toBoard(s, 'p1c1', 1);
@@ -370,14 +370,14 @@ test('axiom of choice: the attacker may choose the blocker', () => {
 test('the broken postulate: the colour wheel runs backwards', () => {
     const s = duel('curved-space', 'lobstorian', 'rawmsay'); // reason vs emotion
     assert.equal(E.power(s, 'p0c0', 'p1c0'), 6);
-    assert.equal(E.power(s, 'p1c0', 'p0c0'), 10);
+    assert.equal(E.power(s, 'p1c0', 'p0c0'), 8);
 });
 
 test('axiom of the empty set: abilities are switched off', () => {
     const s = setup(['beastie', 'godelix'], [], ['empty-set']);
     toBoard(s, 'p0c0', 0);
     s.players[0].playedCount = 4;
-    assert.equal(E.power(s, 'p0c0'), 7);
+    assert.equal(E.power(s, 'p0c0'), 5);
     assert.equal(act(s, { type: 'play', cid: 'p0c1' }).phase, 'steal', 'Gödelix can be stolen');
 });
 
