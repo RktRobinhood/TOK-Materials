@@ -89,31 +89,31 @@
             ["npc/imp-duck/masked", "npc/imp-duck"], "npc/imp-duck/unmasked"
         ] },
 
-        "lobstorian-astrophysicat.png": { "type": "islands", "ids": [
+        "lobstorian-astrophysicat.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/lobstorian/idle", "creature/lobstorian/attack", "creature/lobstorian/smug", "creature/lobstorian/angry", "creature/lobstorian/defeated",
             "creature/astrophysicat/idle", "creature/astrophysicat/attack", "creature/astrophysicat/smug", "creature/astrophysicat/angry", "creature/astrophysicat/defeated"
         ] },
-        "tremendoodle-swiftlet.png": { "type": "islands", "ids": [
+        "tremendoodle-swiftlet.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/tremendoodle/idle", "creature/tremendoodle/attack", "creature/tremendoodle/smug", "creature/tremendoodle/angry", "creature/tremendoodle/defeated",
             "creature/swiftlet/idle", "creature/swiftlet/attack", "creature/swiftlet/smug", "creature/swiftlet/angry", "creature/swiftlet/defeated"
         ] },
-        "muskrat-zuckerborg.png": { "type": "islands", "ids": [
+        "muskrat-zuckerborg.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/muskrat/idle", "creature/muskrat/attack", "creature/muskrat/smug", "creature/muskrat/angry", "creature/muskrat/defeated",
             "creature/zuckerborg/idle", "creature/zuckerborg/attack", "creature/zuckerborg/smug", "creature/zuckerborg/angry", "creature/zuckerborg/defeated"
         ] },
-        "altmanta-beastie.png": { "type": "islands", "ids": [
+        "altmanta-beastie.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/altmanta/idle", "creature/altmanta/attack", "creature/altmanta/smug", "creature/altmanta/angry", "creature/altmanta/defeated",
             "creature/beastie/idle", "creature/beastie/attack", "creature/beastie/smug", "creature/beastie/angry", "creature/beastie/defeated"
         ] },
-        "siuuugull-rawmsay.png": { "type": "islands", "ids": [
+        "siuuugull-rawmsay.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/siuuugull/idle", "creature/siuuugull/attack", "creature/siuuugull/smug", "creature/siuuugull/angry", "creature/siuuugull/defeated",
             "creature/rawmsay/idle", "creature/rawmsay/attack", "creature/rawmsay/smug", "creature/rawmsay/angry", "creature/rawmsay/defeated"
         ] },
-        "speedcheeta-chimpossible.png": { "type": "islands", "ids": [
+        "speedcheeta-chimpossible.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/speedcheeta/idle", "creature/speedcheeta/attack", "creature/speedcheeta/smug", "creature/speedcheeta/angry", "creature/speedcheeta/defeated",
             "creature/chimpossible/idle", "creature/chimpossible/attack", "creature/chimpossible/smug", "creature/chimpossible/angry", "creature/chimpossible/defeated"
         ] },
-        "legendaries.png": { "type": "islands", "ids": [
+        "legendaries.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/euclidon/idle", "creature/lovelace/idle", "creature/godelix/idle", "creature/tycho/idle", "creature/hexling/idle"
         ] },
 
