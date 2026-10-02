@@ -305,14 +305,14 @@ Every caricature sheet uses (two caricatures per sheet, one per row; already inc
 **Attach:** `style-board.png`
 **Save as:** `5-ui/ui-kit.png`
 
-> On a transparent background, no text: a game interface kit in the attached style: a large parchment dialogue panel with dark ink border, a name plate, three button shapes (normal, hover, pressed), a full heart and an empty heart, three scar icons (a cracked eye, a shaky hand, a bandaged heart), and six small round emblems: a compass (blue), a flame-heart (red), an eye (green), a quill (gold), a spiral star (violet), an hourglass (silver). Clear space between every element.
+> On a transparent background (PNG), no text or letters anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected shape. Arrange them in exactly four rows, left to right: **Row 1:** a large wide parchment dialogue panel with a dark ink border (empty), then a small parchment name plate (empty). **Row 2:** three rounded button shapes in the same magenta-and-gold style (normal, slightly brighter for hover, slightly darker and pressed-in), then a full red heart and an empty heart outline. **Row 3:** three small scar icons: a cracked, clouded eye; a trembling hand; a bandaged heart. **Row 4:** six small round emblems with gold rims: a compass (blue), a flame-heart (red), an eye (green), a quill (gold), a spiral star (violet), an hourglass (silver). Match the attached style board.
 
 ### 5.4 Puzzle props
 
 **Attach:** `style-board.png`
 **Save as:** `5-ui/puzzle-props.png`
 
-> On a transparent background, no text or numbers, clear space between each: **1,** a tall wooden door with iron studs (closed) and the same door open with light pouring out; **2,** a round wooden token with a sun (truth) and one with a crescent mask (lie); **3,** a large aged parchment sheet with three overlapping ink circles (a Venn diagram), empty inside; **4,** six blank square wooden number tiles; **5,** a dark slate board in a wooden frame with a few chalk dots; **6,** a small chalk stick.
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected shape. Arrange them in exactly four rows, left to right: **Row 1:** a tall arched wooden door with iron studs, closed; the same door open with warm light pouring out; a round wooden token with a sun (truth); a round wooden token with a crescent-moon mask (lie). **Row 2:** a large aged parchment sheet with three overlapping ink circles (an empty Venn diagram). **Row 3:** six identical blank square wooden tiles. **Row 4:** a dark slate board in a wooden frame with a few chalk dots on it, then a single small stick of white chalk. Match the attached style board.
 
 ---
 
@@ -364,3 +364,5 @@ Record what was approved and why, as in the Odyssey project.
 | 5.1 Items | First try (2026-10-02) | Seven rich, readable icons: charm, great charm, moth lantern, heart tonic, star-rune ward, glowing bandage, clock-chain anchor. Two battle items were added to the game afterwards, so they get their own small sheet (5.1b, items-extra.png). |
 | 5.1b Battle items | First try (2026-10-02) | Winking bronze coin with a mask on its twin, silver-wired heartstone; same size and finish as the other seven (checked side by side). |
 | 5.2 Card frames | First try (2026-10-02) | Six colour frames with emblems (compass, flame-heart, eye, quill, spiral star, hourglass), a parchment-and-chain axiom frame with keyhole, and a magenta rift-swirl card back. Art windows are truly transparent (checked); mocked up with Lobstorian inside the blue frame and it reads like a real card. Prompt revised before generating to ask for a see-through window. |
+| 5.3 UI kit | First try (2026-10-02) | Exactly the four requested rows (2 + 5 + 3 + 6), so all 16 pieces sliced into the right ids first time: parchment panel and name plate, three button states, gem heart and empty heart, the three scars, and six Ways-of-Knowing emblems that match the card-frame emblems. Prompt revised before generating to fix the row layout. |
+| 5.4 Puzzle props | First try (2026-10-02) | Exactly the four requested rows (4 + 1 + 6 + 2), all 13 pieces sliced into the right ids: ivy-framed door closed and open with golden light, sun and crescent-mask tokens, parchment Venn, six blank tiles, chalk slate, chalk stick. Prompt revised before generating to fix the row layout. Stage 5 complete. |

@@ -148,3 +148,8 @@
 .dex-card.seen .fcard { opacity: 0.75; }
 .dex-card .fcard-art img { filter: none; }
 .dex-card.unknown .fcard-art img { filter: brightness(0) opacity(0.5); }
+
+/* ---- painted HUD pieces ---- */
+.hud .hearts { display: inline-flex; align-items: center; gap: 2px; }
+.hud-heart { width: 22px; height: 20px; object-fit: contain; }
+.hud-scar { width: 18px; height: 16px; object-fit: contain; vertical-align: -3px; margin-right: 3px; }

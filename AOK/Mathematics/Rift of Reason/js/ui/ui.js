@@ -60,11 +60,20 @@
         const refresh = () => {
             const st = Rift.State.get();
             if (!st) return;
-            heartsNode.textContent = hearts(st);
+            if (Rift.Assets.has('ui/heart-full')) {
+                heartsNode.innerHTML = '';
+                for (let i = 0; i < maxHealth(st); i++) {
+                    heartsNode.appendChild(Rift.Assets.img(i < st.health ? 'ui/heart-full' : 'ui/heart-empty', { className: 'hud-heart', alt: i < st.health ? '♥' : '♡' }));
+                }
+            } else {
+                heartsNode.textContent = hearts(st);
+            }
             scarsNode.innerHTML = '';
             st.scars.forEach(id => {
                 const sc = Rift.data.scars[id];
-                if (sc) scarsNode.appendChild(el('span.chip', { text: sc.icon + ' ' + sc.name, title: sc.text }));
+                if (!sc) return;
+                const icon = Rift.Assets.has('ui/scar-' + id) ? Rift.Assets.img('ui/scar-' + id, { className: 'hud-scar' }) : sc.icon + ' ';
+                scarsNode.appendChild(el('span.chip', { title: sc.text }, [icon, sc.name]));
             });
             charmsNode.textContent = '🪢 ' + ((st.items.charm || 0) + (st.items.greatcharm || 0));
         };
