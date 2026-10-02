@@ -129,14 +129,18 @@
         if (n.type === 'puzzle') {
             out.xp = 10;
             if (rng.chance(0.5)) give('charm');
+            if (rng.chance(0.15)) give(rng.pick(['trickster-coin', 'heartstone']));
         } else if (n.type === 'miniboss') {
             out.xp = 25;
             give('charm', 2);
             give(rng.pick(['tonic', 'greatcharm', 'lure']));
+            give(rng.pick(['trickster-coin', 'heartstone']));
         } else if (n.type === 'boss') {
             out.xp = 50;
             give('greatcharm', 2);
             give(rng.pick(['ward', 'anchor', 'mending']));
+            give('trickster-coin');
+            give('heartstone');
         }
         if (o.noHints && out.xp) out.xp += 5;
         if (o.firstTime && out.xp) give('charm');

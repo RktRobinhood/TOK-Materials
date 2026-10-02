@@ -113,12 +113,12 @@
             "creature/speedcheeta/idle", "creature/speedcheeta/attack", "creature/speedcheeta/smug", "creature/speedcheeta/angry", "creature/speedcheeta/defeated",
             "creature/chimpossible/idle", "creature/chimpossible/attack", "creature/chimpossible/smug", "creature/chimpossible/angry", "creature/chimpossible/defeated"
         ] },
-        "legendaries.png": { "type": "islands", "minArea": 2500, "ids": [
+        "legendaries.png": { "type": "islands", "minArea": 2500, "threshold": 235, "ids": [
             "creature/euclidon/idle", "creature/lovelace/idle", "creature/godelix/idle", "creature/tycho/idle", "creature/hexling/idle"
         ] },
 
-        "items.png": { "type": "islands", "ids": [
-            "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
+        "items.png": { "type": "islands", "minArea": 1500, "ids": [
+            "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor", "item/trickster-coin", "item/heartstone"
         ] },
         "card-frames.png": { "type": "islands", "class": "card", "ids": [
             "ui/card-reason", "ui/card-emotion", "ui/card-perception", "ui/card-language", "ui/card-imagination", "ui/card-memory",

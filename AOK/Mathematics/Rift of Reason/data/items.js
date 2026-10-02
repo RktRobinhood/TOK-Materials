@@ -14,6 +14,9 @@
         ward: { name: 'Ward', kind: 'battle', text: 'Cancels one bad fate roll after a battle.' },
         mending: { name: 'Mending', kind: 'support', text: 'Heals one injury on a creature.' },
         anchor: { name: 'Anchor', kind: 'battle', text: 'Stops a creature being warp-cursed in one battle.' },
+        // Battle consumables earned from puzzles: chosen before a real battle, used up when it starts.
+        'trickster-coin': { name: 'Trickster Coin', kind: 'battle', consumable: 'extra-steal', text: 'Bring it into a battle for one extra steal.' },
+        heartstone: { name: 'Heartstone', kind: 'battle', consumable: 'extra-life', text: 'Bring it into a battle to start with one extra life.' },
     };
 
     // Player scars: consequences that make the run harder until removed at a shrine.

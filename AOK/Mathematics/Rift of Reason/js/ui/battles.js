@@ -41,17 +41,44 @@
         Rift.Router.replace(o.back || 'map');
     }
 
+    // Before a real battle: choose which battle consumables to bring (they are used up).
+    // Calls start(consumables) with e.g. { 'extra-steal': 1 }.
+    function prepare(start) {
+        const s = Rift.State.get();
+        const owned = Object.entries(Rift.data.items).filter(([id, it]) => it.consumable && (s.items[id] || 0) > 0);
+        if (!owned.length) { start({}); return; }
+        const picks = {};
+        const rows = owned.map(([id, it]) => el('label.row', null, [
+            el('input', { type: 'checkbox', onchange(ev) { picks[id] = ev.target.checked; } }),
+            Rift.Assets.img('item/' + id, { className: 'bag-icon', label: it.name }),
+            el('div', null, [el('strong', { text: it.name + ' (×' + s.items[id] + ')' }), el('div.small.muted', { text: it.text })]),
+        ]));
+        Rift.UI.modal('Bring anything?', el('div.stack', null, [el('p.small.muted', { text: 'Items you bring are used up, win or lose.' })].concat(rows)), [
+            { label: 'Battle!', primary: true, onclick() {
+                const consumables = {};
+                Object.entries(picks).filter(([, on]) => on).forEach(([id]) => {
+                    if (Rift.State.useItem(id)) {
+                        const key = Rift.data.items[id].consumable;
+                        consumables[key] = (consumables[key] || 0) + 1;
+                    }
+                });
+                start(consumables);
+            } },
+        ]);
+    }
+
     const Battles = {
         trainer(nodeId) {
             if (!needCreatures()) return;
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
-            Rift.Router.go('battle', {
+            prepare(consumables => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
+                player: { consumables },
                 opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ai: t.ai || 'easy', stake: t.ante },
                 onEnd: result => finish(result, { nodeId }),
-            });
+            }));
         },
 
         practice() {
@@ -75,12 +102,13 @@
                 Rift.UI.toast(e.message, 4000);
                 return;
             }
-            Rift.Router.go('battle', {
+            prepare(consumables => Rift.Router.go('battle', {
                 mode: 'ghost',
                 seed: seed('ghost'),
+                player: { consumables },
                 opponent: Rift.Battle.TeamCodes.ghostOpponent(imported),
                 onEnd: result => finish(result, { back: 'collection' }),
-            });
+            }));
         },
 
         shareCode() {
