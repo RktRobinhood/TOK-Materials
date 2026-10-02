@@ -82,7 +82,7 @@
         "algorithm.png": { "type": "islands", "class": "sprite", "ids": [
             "npc/algorithm/sky-eye", ["npc/algorithm/speaking", "npc/algorithm"]
         ] },
-        "imps.png": { "type": "islands", "class": "sprite", "ids": [
+        "imps.png": { "type": "islands", "class": "sprite", "minArea": 800, "ids": [
             ["npc/imp-bunny/masked", "npc/imp-bunny"], "npc/imp-bunny/unmasked",
             ["npc/imp-mouse/masked", "npc/imp-mouse"], "npc/imp-mouse/unmasked",
             ["npc/imp-hedgehog/masked", "npc/imp-hedgehog"], "npc/imp-hedgehog/unmasked",
