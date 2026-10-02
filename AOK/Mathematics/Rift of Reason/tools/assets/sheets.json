@@ -184,6 +184,25 @@
             "creature/messilion/idle", "creature/messilion/attack", "creature/messilion/smug", "creature/messilion/angry", "creature/messilion/defeated",
             "creature/shakirattle/idle", "creature/shakirattle/attack", "creature/shakirattle/smug", "creature/shakirattle/angry", "creature/shakirattle/defeated"
         ] },
+        "map-markers.png": { "type": "islands", "minArea": 800, "class": "item", "ids": [
+            "ui/marker-story", "ui/marker-puzzle", "ui/marker-miniboss", "ui/marker-boss",
+            "ui/marker-rest", "ui/marker-rumour", "ui/marker-battle", "ui/marker-rift"
+        ] },
+        "tribunal.png": { "type": "scene", "id": "scene/tribunal" },
+        "evidence-room.png": { "type": "scene", "id": "scene/evidence-room" },
+        "neon-plaza.png": { "type": "scene", "id": "scene/neon-plaza" },
+        "map-ch3.png": { "type": "scene", "id": "scene/map-ch3" },
+        "judge.png": { "type": "islands", "minArea": 2500, "ids": ["npc/judge/idle", ["npc/judge/neutral", "npc/judge"], "npc/judge/happy", "npc/judge/surprised", "npc/judge/angry", "npc/judge/gavel"] },
+        "prosecutor.png": { "type": "islands", "minArea": 2500, "ids": ["npc/prosecutor/idle", ["npc/prosecutor/neutral", "npc/prosecutor"], "npc/prosecutor/happy", "npc/prosecutor/surprised", "npc/prosecutor/angry", "npc/prosecutor/smug", "npc/prosecutor/shaken"] },
+        "clerk.png": { "type": "islands", "minArea": 2500, "ids": ["npc/clerk/idle", ["npc/clerk/neutral", "npc/clerk"], "npc/clerk/happy", "npc/clerk/surprised", "npc/clerk/angry", "npc/clerk/thinking"] },
+        "court-ui.png": { "type": "islands", "minArea": 800, "ids": [
+            "ui/objection", "ui/evidence-frame", "ui/court-record",
+            "ui/press", "ui/present", "ui/gavel"
+        ] },
+        "evidence.png": { "type": "islands", "minArea": 800, "class": "item", "ids": [
+            "ui/evidence-chart", "ui/evidence-photo", "ui/evidence-letter", "ui/evidence-receipt", "ui/evidence-video",
+            "ui/evidence-survey", "ui/evidence-coin", "ui/evidence-map", "ui/evidence-recording", "ui/evidence-notebook"
+        ] },
         "items.png": { "type": "islands", "minArea": 1500, "ids": [
             "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
         ] },
