@@ -210,7 +210,8 @@
                 const options = [];
                 s.players[card.controller].discard.forEach(cid => {
                     api.H.abilitiesOf(s.cards[cid]).forEach(ab => {
-                        if (ab !== 'program' && A[ab] && !options.includes(ab)) options.push(ab);
+                        // Never program itself (or a renamed copy of Program): that would loop forever.
+                        if (A[ab] && A[ab].onPlay !== A.program.onPlay && !options.includes(ab)) options.push(ab);
                     });
                 });
                 if (!api.ask({ player: card.controller, kind: 'ability', ability: 'program', cid: card.cid, options, prompt: 'Program which ability into this creature?' })) {
@@ -260,6 +261,30 @@
     };
 
     Object.keys(A).forEach(id => { A[id].id = id; });
+
+    // Expansion keywords (design/ROSTER.md "Expansion"): most reuse a tested
+    // mechanic under the character's own name; 'the-eyebrow' is new.
+    A['the-eyebrow'] = {
+        name: 'The Eyebrow',
+        text: 'Can\'t be stolen.',
+        canBeStolen: false,
+    };
+    const alias = (id, base, name, text) => { A[id] = Object.assign({}, A[base], { name, text: text || A[base].text }); };
+    alias('foresight', 'measure', 'Foresight');                  // Magnus Carlseal
+    alias('deadpan', 'lecture', 'Deadpan');                      // Khaby Llame
+    alias('rapid-fire', 'escalate', 'Rapid Fire');               // Eminemu
+    alias('let-me-be-clear', 'grook', 'Let Me Be Clear');        // Barack Obambu
+    alias('slapstick', 'metaverse', 'Slapstick');                // Mr. Beansprout
+    alias('reinvention', 'program', 'Reinvention');              // Lady Gargoyle
+    alias('machine', 'every-time', 'Machine');                   // Haalandroid
+    alias('lightning', 'unprovable', 'Lightning');               // Usain Volt
+    alias('deja-vu', 'metaverse', 'Déjà Vu');                    // Keanu Meows
+    alias('queen-b', 'hype', 'Queen B');                         // Beeyoncé
+    alias('whisper', 'lecture', 'Whisper');                      // Billie Eelish
+    alias('nature-watch', 'pull-that-up', 'Nature Watch');       // Sir David Attenbirdough
+    alias('filter', 'well-actually', 'Filter');                  // Kim Kardashiant
+    alias('vision', 'measure', 'Vision');                        // Messilion
+    alias('hips-dont-lie', 'easter-egg', 'Hips Don\'t Lie');     // Shakirattle
 
     Battle.Abilities = A;
     Battle.KEYWORDS = Object.keys(A);

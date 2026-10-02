@@ -45,7 +45,9 @@ test('every ability keyword used by a creature is implemented', () => {
     Object.values(Rift.data.creatures).forEach(sp => {
         assert.ok(Rift.Battle.Abilities[sp.ability], 'missing ability ' + sp.ability);
     });
-    assert.equal(Rift.Battle.KEYWORDS.length, 17);
+    // 17 original keywords, The Eyebrow, and 15 renamed copies for the expansion roster.
+    assert.equal(Rift.Battle.KEYWORDS.length, 33);
+    Rift.Battle.KEYWORDS.forEach(k => assert.ok(Rift.Battle.Abilities[k].name && Rift.Battle.Abilities[k].text, k));
 });
 
 // ---- abilities ---------------------------------------------------------------------
@@ -409,4 +411,14 @@ test('the AI respects axioms and the colour wheel when blocking', () => {
     toBoard(plain, 'p0c0', 0);
     toBoard(plain, 'p1c0', 1);
     assert.equal(Rift.Battle.AI.choose(act(plain, { type: 'attack', cid: 'p0c0' }), { level: 'hard' }).type, 'take');
+});
+
+test('the-eyebrow: the Rockodile can\'t be stolen', () => {
+    assert.equal(Rift.Battle.Abilities['the-eyebrow'].canBeStolen, false);
+});
+
+test('reinvention (a renamed Program) never programs itself, so it can\'t loop', () => {
+    const A = Rift.Battle.Abilities;
+    assert.equal(A.reinvention.onPlay, A.program.onPlay);
+    assert.notEqual(A.reinvention.onPlay, A.measure.onPlay);
 });
