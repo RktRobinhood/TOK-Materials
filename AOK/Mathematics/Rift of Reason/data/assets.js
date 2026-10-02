@@ -278,6 +278,7 @@
         'npc/villager-sweep/unmasked': { file: 'cast/villager-sweep-unmasked.webp', w: 271, h: 317 },
         'scene/battle-table': { file: 'scenes/battle-table.webp', w: 1600, h: 900, small: 'scenes/battle-table-small.webp' },
         'scene/burrow': { file: 'scenes/burrow.webp', w: 1600, h: 900, small: 'scenes/burrow-small.webp' },
+        'scene/clock-tower': { file: 'scenes/clock-tower.webp', w: 1600, h: 900, small: 'scenes/clock-tower-small.webp' },
         'scene/fair': { file: 'scenes/fair.webp', w: 1600, h: 900, small: 'scenes/fair-small.webp' },
         'scene/map': { file: 'scenes/map.webp', w: 1672, h: 941, small: 'scenes/map-small.webp' },
         'scene/map-ch2': { file: 'scenes/map-ch2.webp', w: 1600, h: 900, small: 'scenes/map-ch2-small.webp' },
