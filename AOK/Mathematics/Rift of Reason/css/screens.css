@@ -1,8 +1,10 @@
 /* Rift of Reason — screen layouts (title, avatar, map, encounter, collection, settings, witness). */
 
 /* ---- title ---- */
-.title-card { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(10, 8, 18, 0.2), rgba(10, 8, 18, 0.85)); }
-.logo { max-width: min(640px, 80vw); filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7)); }
+.title-card { position: absolute; inset: 0; align-items: flex-start; padding-top: 5vh; background: linear-gradient(rgba(10, 8, 18, 0.15), rgba(10, 8, 18, 0) 55%, rgba(10, 8, 18, 0.35)); }
+/* The title art keeps its heroes in the lower third: logo and buttons stay in the calm upper middle. */
+.title-card .tagline, .title-card .small { text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9); }
+.logo { width: min(52vw, 760px); max-width: 90vw; filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7)); }
 .logo-text {
     font-size: clamp(2.6rem, 7vw, 5rem); color: var(--gold);
     text-shadow: 0 4px 0 var(--ink), 0 0 30px rgba(63, 224, 208, 0.45);

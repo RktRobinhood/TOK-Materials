@@ -83,5 +83,7 @@
         'scene/stall-gallery': { file: 'scenes/stall-gallery.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-small.webp' },
         'scene/stall-pattern': { file: 'scenes/stall-pattern.webp', w: 1600, h: 900, small: 'scenes/stall-pattern-small.webp' },
         'scene/stall-witness': { file: 'scenes/stall-witness.webp', w: 1600, h: 900, small: 'scenes/stall-witness-small.webp' },
+        'scene/title': { file: 'scenes/title.webp', w: 1600, h: 900, small: 'scenes/title-small.webp' },
+        'ui/logo': { file: 'ui/logo.webp', w: 1200, h: 493 },
     };
 })(typeof window !== 'undefined' ? window : globalThis);
