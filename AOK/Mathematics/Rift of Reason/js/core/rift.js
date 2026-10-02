@@ -100,7 +100,10 @@
                 else if (key === 'html') node.innerHTML = value;
                 else if (key === 'text') node.textContent = value;
                 else if (key.startsWith('on') && typeof value === 'function') node.addEventListener(key.slice(2), value);
-                else if (key in node && typeof value !== 'string') node[key] = value;
+                else if (key === 'className') { if (value) String(value).split(/\s+/).filter(Boolean).forEach(c => node.classList.add(c)); }
+                // DOM properties (value, readOnly, maxLength, src…) must be set as properties:
+                // a textarea's value attribute, for one, does nothing.
+                else if (key in node) { try { node[key] = value; } catch (e) { node.setAttribute(key, value === true ? '' : value); } }
                 else node.setAttribute(key, value === true ? '' : value);
             }
         }
