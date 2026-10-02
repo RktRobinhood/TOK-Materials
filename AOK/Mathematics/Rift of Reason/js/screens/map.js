@@ -146,11 +146,18 @@
                     transform: `translate(${n.x},${n.y})`,
                     tabindex: kind === 'revealed' ? 0 : -1,
                 });
-                g.append(
-                    svg('circle', { r: n.type === 'boss' ? 30 : 24, class: 'ring' }),
-                    svg('text', { class: 'icon', 'text-anchor': 'middle', 'dominant-baseline': 'central' }),
-                );
-                g.querySelector('text').textContent = kind === 'hinted' ? '?' : (ICONS[n.type] || '•');
+                const r = n.type === 'boss' ? 30 : 24;
+                const marker = 'ui/marker-' + n.type;
+                g.append(svg('circle', { r, class: 'ring' }));
+                if (kind === 'revealed' && Rift.Assets.has(marker)) {
+                    // Painted medallion (art 'ui/marker-<type>') over the ring.
+                    const s = r * 2.3;
+                    g.append(svg('image', { href: Rift.Assets.src(marker), x: -s / 2, y: -s / 2, width: s, height: s, class: 'marker-art' }));
+                } else {
+                    const label = svg('text', { class: 'icon', 'text-anchor': 'middle', 'dominant-baseline': 'central' });
+                    label.textContent = kind === 'hinted' ? '?' : (ICONS[n.type] || '•');
+                    g.append(label);
+                }
                 g.addEventListener('mouseenter', () => showTip(id, kind, locked));
                 g.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
                 if (kind === 'revealed') {
