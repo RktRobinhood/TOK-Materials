@@ -48,12 +48,13 @@
             const controls = el('div.enc-controls.row', null, [hintBtn, perkBtn]);
             rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, host, controls, feedback]), stageBox]));
 
+            const taunt = obstacle ? Rift.makeRng(visit.seed + ':line').pick(Rift.data.creatures[obstacle].lines) : null;
             if (obstacle) {
                 const c = Rift.data.creatures[obstacle];
                 host.append(
                     Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature rabid', colour: c.colour, label: c.name }),
                     el('div.row.small', null, [el('span.chip', { dataset: { colour: c.colour }, text: Rift.COLOURS[c.colour].icon + ' ' + Rift.COLOURS[c.colour].name }), el('span.muted', { text: c.rarity })]),
-                    el('div.bubble', { text: '"' + Rift.makeRng(visit.seed + ':line').pick(c.lines) + '"' }),
+                    el('div.bubble', { text: '"' + taunt + '"' }),
                 );
                 if (!state.seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
             }
@@ -322,7 +323,9 @@
             }
             (async () => {
                 if (!params.shrine && Rift.Dialogue.has(n.script) && firstTime) await Rift.Dialogue.play(n.script);
-                if (!destroyed) mountStage();
+                if (destroyed) return;
+                mountStage();
+                if (taunt) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
             })();
 
             return {

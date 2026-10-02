@@ -92,16 +92,24 @@
         const s = Rift.State.get();
         const rows = Object.entries(Rift.data.items).map(([id, it]) => {
             const n = s.items[id] || 0;
-            const usable = id === 'tonic' && n > 0 && s.health < maxHealth(s);
+            const here = s.map.at && Rift.data.map.nodes[s.map.at];
+            const lureable = id === 'lure' && n > 0 && here && (here.spawns || []).length && !((s.lures || {})[s.map.at] > 0);
+            const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable;
             return el('div.row', { style: { opacity: n ? 1 : 0.45, alignItems: 'flex-start' } }, [
                 Rift.Assets.img('item/' + id, { className: 'bag-icon', label: it.name }),
                 el('div', { style: { flex: 1 } }, [el('strong', { text: it.name + '  ×' + n }), el('div.small.muted', { text: it.text })]),
                 usable ? el('button.btn.small', {
                     text: 'Use',
                     onclick() {
-                        Rift.State.useItem('tonic');
-                        Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
-                        Rift.Audio.sfx('heal');
+                        Rift.State.useItem(id);
+                        if (id === 'lure') {
+                            Rift.State.update(st => { st.lures[st.map.at] = 3; });
+                            Rift.Audio.sfx('jingle');
+                            toast('The lantern glows at ' + here.name + ': rare spawns are likelier for 3 visits.');
+                        } else {
+                            Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
+                            Rift.Audio.sfx('heal');
+                        }
                         m.close();
                         bag();
                     },
