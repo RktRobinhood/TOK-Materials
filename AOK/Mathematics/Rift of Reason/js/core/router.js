@@ -54,6 +54,8 @@
             else mount(fallback || 'map', {});
         },
         current() { return active && active.name; },
+        // The mounted screen's handle (playtest scripts use e.g. handle().debugSolve()).
+        handle() { return active && active.handle; },
     };
 
     Rift.Screens = Screens;

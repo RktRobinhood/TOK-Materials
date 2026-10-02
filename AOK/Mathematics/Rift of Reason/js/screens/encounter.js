@@ -334,6 +334,11 @@
                     if (handle && handle.destroy) handle.destroy();
                     if (hud.destroy) hud.destroy();
                 },
+                // Playtest helper: submits the generator's own solution for the current stage.
+                debugSolve() {
+                    const { def } = current();
+                    return def.solve ? onSubmit(def.solve(stages[stageIx].data)) : null;
+                },
             };
         },
     });
