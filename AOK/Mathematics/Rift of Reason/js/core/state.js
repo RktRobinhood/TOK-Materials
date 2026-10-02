@@ -34,6 +34,8 @@
             accolades: [],
             items: { charm: 3, tonic: 1 },
             creatures: [],         // owned creature instances, see makeCreature
+            team: [],              // creature uids chosen for battle (max 10)
+            trophies: [],          // named trophy copies won from classmates' ghosts
             seen: [],              // species ids seen
             axioms: [],            // axiom ids added to the player's pool
             rumours: [],           // rumour ids heard

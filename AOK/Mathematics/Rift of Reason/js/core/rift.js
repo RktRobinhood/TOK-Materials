@@ -123,6 +123,13 @@
         }
     }
 
+    // Voice lines are keyed by speaker + text, so editing a line's text makes it
+    // fall back to browser speech until tools/voices.mjs renders it again.
+    function voiceId(speaker, text) {
+        const clean = String(text).replace(/\s+/g, ' ').trim();
+        return speaker + '-' + hashSeed(speaker + '|' + clean).toString(36);
+    }
+
     // Colours = Ways of Knowing. Colour first, name second (see ART-BIBLE.md).
     const COLOURS = {
         reason: { name: 'Reason', colour: 'blue', hex: '#3D7BFF', icon: '🧭' },
@@ -137,6 +144,7 @@
         version: '0.1.0',
         hashSeed,
         makeRng,
+        voiceId,
         clamp,
         deepClone,
         bus,

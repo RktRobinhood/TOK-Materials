@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rift of Reason</title>
+<meta name="description" content="A TOK adventure in logic, proof and persuasion: puzzles, caricatures to catch, and bluffing card battles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/puzzles/liars-gate.css">
+<link rel="stylesheet" href="css/puzzles/rule-hunter.css">
+<link rel="stylesheet" href="css/puzzles/venn.css">
+<link rel="stylesheet" href="css/puzzles/line-drawer.css">
+<link rel="stylesheet" href="css/battle.css">
+</head>
+<body>
+<div id="app">
+    <div id="screen" class="screen"></div>
+    <div id="overlay"></div>
+</div>
+<noscript>Rift of Reason needs JavaScript.</noscript>
+
+<!-- Load order matters: core, then data, then UI, puzzles, battle, screens, boot. -->
+<script src="js/core/rift.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/assets.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/core/router.js"></script>
+<script src="js/core/world.js"></script>
+
+<script src="data/assets.js"></script>
+<script src="data/voice-manifest.js"></script>
+<script src="data/sfx.js"></script>
+<script src="data/avatars.js"></script>
+<script src="data/items.js"></script>
+<script src="data/creatures.js"></script>
+<script src="data/map.js"></script>
+<script src="data/script/lesson1.js"></script>
+
+<script src="js/ui/ui.js"></script>
+<script src="js/ui/dialogue.js"></script>
+
+<script src="js/puzzles/registry.js"></script>
+<script src="js/puzzles/liars-gate.js"></script>
+<script src="js/puzzles/rule-hunter.js"></script>
+<script src="js/puzzles/venn.js"></script>
+<script src="js/puzzles/line-drawer.js"></script>
+<script src="js/puzzles/witness.js"></script>
+
+<!-- BATTLE SCRIPTS -->
+
+<script src="js/screens/start.js"></script>
+<script src="js/screens/map.js"></script>
+<script src="js/screens/encounter.js"></script>
+<script src="js/screens/collection.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
