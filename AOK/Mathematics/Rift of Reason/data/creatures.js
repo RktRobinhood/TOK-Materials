@@ -55,7 +55,7 @@
         },
         beastie: {
             name: 'Mr. Beastie', inspiredBy: 'MrBeast', colour: 'memory', rarity: 'uncommon', power: 7,
-            ability: 'escalate', abilityText: '+1 power for each creature you have played this battle.',
+            ability: 'escalate', abilityText: '+1 power for each creature you have played this battle (max +3).',
             blurb: 'Every challenge is bigger than the last. Last one to leave the puzzle wins a puzzle.',
             lines: ['Last one to leave this circle wins ten thousand charms!', 'Bigger. We need bigger.', 'Subscribe… to logic.'],
         },
@@ -67,13 +67,13 @@
         },
         rawmsay: {
             name: 'Rawmsay', inspiredBy: 'Gordon Ramsay', colour: 'emotion', rarity: 'rare', power: 8,
-            ability: 'its-raw', abilityText: 'On play, defeat an enemy creature with power 3 or less.',
+            ability: 'its-raw', abilityText: 'On play, defeat an enemy creature with power 4 or less.',
             blurb: 'Volcanic about undercooked arguments. Unexpectedly gentle with beginners.',
             lines: ['This argument is RAW!', 'Where is the premise?!', 'Lovely. Well done, little one.'],
         },
         speedcheeta: {
             name: 'Speedcheeta', inspiredBy: 'IShowSpeed', colour: 'emotion', rarity: 'rare', power: 4,
-            ability: 'hype', abilityText: 'When played, your other creatures get +1 this turn.',
+            ability: 'hype', abilityText: 'When played, your other creatures get +1 until the end of your next turn.',
             blurb: 'Screams first, thinks never. Will backflip off anything.',
             lines: ['AAAAAAH!', 'Let\'s GOOOO!', 'Is that… is that a SYLLOGISM?!'],
         },

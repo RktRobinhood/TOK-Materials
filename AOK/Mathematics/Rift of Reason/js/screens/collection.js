@@ -68,6 +68,12 @@
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
+                el('div.row.wrap', { style: { marginBottom: '14px' } }, [
+                    el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
+                    el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
+                    el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
+                    el('span.small.muted', { text: 'Your first 10 creatures form your battle team.' }),
+                ]),
                 el('div.dex-grid', null, species.map(id => card(id, {
                     caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
                 }))),

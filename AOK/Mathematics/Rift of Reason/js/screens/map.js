@@ -248,9 +248,12 @@
                         shrineOffer();
                         break;
                     case 'battle':
-                        if (!Rift.Screens.get('battle')) { Rift.UI.toast('The cards are being shuffled. Battles open soon!'); finish(); break; }
                         await Rift.Dialogue.play(n.script);
-                        Rift.Router.go('battle', battleParams(id));
+                        if (!Rift.State.get().creatures.length) {
+                            Rift.UI.toast('Corvina laughs: "No creatures? Come back when you have caught one."', 4000);
+                            break;
+                        }
+                        Rift.Battles.trainer(id);
                         break;
                     default:
                         Rift.Router.go('encounter', { nodeId: id });
@@ -264,18 +267,6 @@
                     { label: 'Not now' },
                     { label: 'Try it', primary: true, onclick: () => Rift.Router.go('encounter', { nodeId: s.map.at, shrine: true }) },
                 ]);
-            }
-
-            function battleParams(id) {
-                const n = Rift.World.node(id);
-                const t = Rift.data.trainers[n.trainer];
-                return {
-                    mode: 'trainer',
-                    nodeId: id,
-                    seed: Rift.State.get().seed + ':' + id + ':' + Date.now(),
-                    opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ante: t.ante },
-                    onEnd() { Rift.State.update(s => Rift.World.complete(s, id)); Rift.Router.replace('map'); },
-                };
             }
 
             function riftMenu() {
