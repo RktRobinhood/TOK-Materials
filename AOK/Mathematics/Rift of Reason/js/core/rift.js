@@ -95,7 +95,13 @@
         if (props) {
             for (const [key, value] of Object.entries(props)) {
                 if (value == null || value === false) continue;
-                if (key === 'style' && typeof value === 'object') Object.assign(node.style, value);
+                if (key === 'style' && typeof value === 'object') {
+                    // setProperty handles custom properties ('--hue'), which Object.assign skips.
+                    Object.entries(value).forEach(([k, v]) => {
+                        if (k.startsWith('--')) node.style.setProperty(k, v);
+                        else node.style[k] = v;
+                    });
+                }
                 else if (key === 'dataset') Object.assign(node.dataset, value);
                 else if (key === 'html') node.innerHTML = value;
                 else if (key === 'text') node.textContent = value;
