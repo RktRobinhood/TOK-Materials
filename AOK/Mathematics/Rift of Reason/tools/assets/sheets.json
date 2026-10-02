@@ -150,7 +150,7 @@
         "booleon.png": { "type": "islands", "minArea": 2500, "threshold": 235, "ids": ["creature/booleon/idle", "creature/booleon/attack", "creature/booleon/smug", "creature/booleon/angry", "creature/booleon/defeated"] },
         "ch2-props.png": { "type": "islands", "minArea": 800, "ids": [
             "ui/switch-off", "ui/switch-on", "ui/bulb-off", "ui/bulb-on", "ui/gate-plaque",
-            "ui/block-loose", "ui/block-cemented", "ui/block-cracked", "ui/accuse-token"
+            { "id": "ui/block-loose", "rotate": 90 }, { "id": "ui/block-cemented", "rotate": 90 }, { "id": "ui/block-cracked", "rotate": 90 }, "ui/accuse-token"
         ] },
         "items.png": { "type": "islands", "minArea": 1500, "ids": [
             "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"

@@ -24,7 +24,7 @@ node tools/build-assets.mjs
 - **The file name matters, the folder does not.** A name the tool doesn't know is listed and ignored. Keep a replaced version by renaming it (e.g. `owlet-sheet-v1.png` is ignored).
 - **PNG with a real transparent background** for everything except backgrounds (title, map, fair, stalls, roads, battle table). If ChatGPT gives a checkerboard *painted* into the picture, ask again; the tool can't cut that.
 - **Figures must not touch.** The tool finds each figure as a separate island of colour. Small sparkles near a figure are joined to it; anything bigger counts as its own figure.
-- **Order is reading order:** rows top to bottom, left to right. If a sheet comes out in a different order, or with a different number of figures than the request asks for, the tool prints a warning and skips that sheet instead of guessing. Fix it by regenerating, or by editing the list for that file in `tools/assets/sheets.json` (no code changes needed).
+- **Order is reading order:** rows top to bottom, left to right. If a sheet comes out in a different order, or with a different number of figures than the request asks for, the tool prints a warning and skips that sheet instead of guessing. Fix it by regenerating, or by editing the list for that file in `tools/assets/sheets.json` (no code changes needed). An entry can also be `{ "id": "ui/block-loose", "rotate": 90 }` to turn a piece a quarter clockwise before saving (for things drawn upright that the game uses sideways).
 - Walk cycles: two rows (boy, girl) of six frames. If frames touch, the tool falls back to six equal-width cells and says so.
 - Backgrounds should be at least 1672×941 (the map at least 2048 wide).
 

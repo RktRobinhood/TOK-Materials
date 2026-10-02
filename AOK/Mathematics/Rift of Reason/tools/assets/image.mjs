@@ -24,6 +24,21 @@ export function crop(img, x, y, w, h) {
     return out;
 }
 
+// Quarter turns clockwise (1-3), for pieces drawn upright that the game uses sideways.
+export function rotate(img, quarters) {
+    let out = img;
+    for (let q = 0; q < ((quarters % 4) + 4) % 4; q++) {
+        const src = out;
+        out = blank(src.h, src.w);
+        for (let y = 0; y < src.h; y++) {
+            for (let x = 0; x < src.w; x++) {
+                src.data.copy(out.data, (x * out.w + (src.h - 1 - y)) * 4, (y * src.w + x) * 4, (y * src.w + x) * 4 + 4);
+            }
+        }
+    }
+    return out;
+}
+
 export function blit(dst, src, x, y) {
     for (let row = 0; row < src.h; row++) {
         const ty = y + row;

@@ -16,7 +16,7 @@ import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CLASSES, OUTPUT_FOLDERS, QUALITY, SMALL_QUALITY, classify, fileFor } from './assets/classes.mjs';
-import { alphaBox, crop, extract, findIslands, islandBox, load, mergeColumns, packWalk, readingOrder, sourceSize, trim, writeScene, writeSprite } from './assets/image.mjs';
+import { alphaBox, crop, extract, rotate, findIslands, islandBox, load, mergeColumns, packWalk, readingOrder, sourceSize, trim, writeScene, writeSprite } from './assets/image.mjs';
 import { manifestText, readManifest } from './assets/manifest.mjs';
 import { previewHtml } from './assets/preview.mjs';
 
@@ -74,12 +74,12 @@ async function findPngs(dir) {
     return out.sort();
 }
 
-// sheets.json entry -> { id, also, class } or null
+// sheets.json entry -> { id, also, class, rotate } or null
 function outputSpec(entry) {
     if (entry === null) return null;
     if (typeof entry === 'string') return { id: entry, also: [] };
     if (Array.isArray(entry)) return { id: entry[0], also: entry.slice(1) };
-    return { id: entry.id, also: entry.also || [], class: entry.class };
+    return { id: entry.id, also: entry.also || [], class: entry.class, rotate: entry.rotate };
 }
 
 function sheetIds(spec) {
@@ -148,7 +148,8 @@ async function doIslands(file, spec, ctx) {
     for (let i = 0; i < ordered.length; i++) {
         const o = outs[i];
         if (!o) continue;
-        const piece = extract(img, found, ordered[i], { margin: spec.margin });
+        let piece = extract(img, found, ordered[i], { margin: spec.margin });
+        if (o.rotate) piece = rotate(piece, Math.round(o.rotate / 90));
         const rel = fileFor(o.id);
         const { w, h } = await writeSprite(piece, join(ctx.out, rel), capsFor(o.id, o.class || spec.class), QUALITY, ctx.dry);
         for (const id of [o.id, ...o.also]) outputs.push({ id, entry: { file: rel, w, h } });
