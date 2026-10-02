@@ -249,3 +249,7 @@
     .b-main { grid-template-rows: auto auto auto auto auto auto auto; overflow: visible; }
     .b-choice { right: 12px; position: fixed; }
 }
+
+/* Axiom illustrations (ui/axiom-<id>): a round vignette at the top of the card. */
+.axiom-art { display: block; width: 64px; height: 64px; object-fit: contain; margin: 0 auto 4px; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.5)); }
+@media (max-width: 1100px) { .axiom-art { width: 44px; height: 44px; } }

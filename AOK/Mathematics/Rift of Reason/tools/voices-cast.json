@@ -52,5 +52,8 @@
     "shakirattle": { "voice": "Aoede", "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words." },
     "judge": { "voice": "Algieba", "model": "flash", "style": "Judge Hoot, a stern old barn owl judge. Dry, measured and authoritative, slow and precise, a hint of weary humour" },
     "fin": { "voice": "Rasalgethi", "style": "Prosecutor Fin, a slick shark lawyer. Smarmy, over-confident and theatrical; when losing, flustered and stammering" },
-    "pip": { "voice": "Laomedeia", "style": "Pip the court clerk, a tiny eager bat. Kind, quick and encouraging, bright young voice" }
+    "pip": { "voice": "Laomedeia", "style": "Pip the court clerk, a tiny eager bat. Kind, quick and encouraging, bright young voice" },
+    "oracle": { "voice": "Schedar", "style": "The Oracle Machine, a polite brass-and-glass automaton. Courteous, precise and slightly mechanical, with tiny hesitations as if it glitches" },
+    "colossus": { "voice": "Charon", "model": "flash", "style": "The Algorithm in its giant boss form. Booming, cold, synthetic and overwhelming, every word evenly weighted like an automated announcement" },
+    "core": { "voice": "Achird", "style": "The Algorithm's true form, a tiny cloud of dice. Small, quiet, almost sheepish and a little confused, speaking softly" }
 }

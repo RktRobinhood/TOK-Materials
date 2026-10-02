@@ -399,7 +399,9 @@
         // ---- side panel ----
         function axiomCard(id, onclick) {
             const ax = Rift.data.axioms[id];
+            const art = 'ui/axiom-' + id;
             return el('div.axiom-card' + (onclick ? '.clickable' : ''), { onclick: onclick || null }, [
+                Rift.Assets.has(art) ? Rift.Assets.img(art, { className: 'axiom-art', alt: '' }) : null,
                 el('div.axiom-kicker', { text: 'Axiom' }),
                 el('div.axiom-name', { text: ax.name }),
                 el('div.axiom-text', { text: ax.text }),
