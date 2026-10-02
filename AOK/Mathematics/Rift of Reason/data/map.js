@@ -18,7 +18,7 @@
     Rift.data.chapters = {
         prologue: { name: 'Prologue: The Fair', start: 'burrow', lesson: 1 },
         ch1: { name: 'Chapter 1: The Road', start: 'road-start', lesson: 1 },
-        ch2: { name: 'Chapter 2: The Village', start: 'b-arrival', lesson: 2, comingSoon: true },
+        ch2: { name: 'Chapter 2: The Village', start: 'b-arrival', lesson: 2 },
         ch3: { name: 'Chapter 3: The Tribunal', start: null, lesson: 3, comingSoon: true },
     };
 

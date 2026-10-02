@@ -160,6 +160,6 @@
     S['ch1.pass'] = [
         { s: 'narrator', t: 'The Rift Pass. Beyond it, a village where everyone smiles a little too much.' },
         { s: 'algorithm', t: 'YOU HAVE BEEN THINKING. THAT IS… UNUSUAL. RECALCULATING.' },
-        { s: 'narrator', t: 'The rift is still settling. It opens fully in your next lesson. Until then: explore, catch, battle, and come back stronger.' },
+        { s: 'narrator', t: 'The rift is open. Step through when you are ready, or stay a while: explore, catch, battle, and come back stronger.' },
     ];
 })(typeof window !== 'undefined' ? window : globalThis);
