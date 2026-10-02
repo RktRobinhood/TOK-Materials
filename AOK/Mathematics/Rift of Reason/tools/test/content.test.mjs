@@ -5,13 +5,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadRift, GAME_DIR } from './harness.mjs';
 
-const puzzleFiles = ['liars-gate', 'rule-hunter', 'venn', 'line-drawer', 'witness']
-    .map(id => 'js/puzzles/' + id + '.js')
-    .filter(f => fs.existsSync(path.join(GAME_DIR, f)));
+const puzzleFiles = fs.readdirSync(path.join(GAME_DIR, 'js/puzzles'))
+    .filter(f => f.endsWith('.js') && f !== 'registry.js')
+    .map(f => 'js/puzzles/' + f);
 
 const Rift = loadRift([
     'js/core/rift.js', 'js/core/state.js', 'js/core/world.js',
-    'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'data/script/lesson1.js',
+    'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'data/script/lesson1.js', 'data/script/lesson2.js',
     'js/puzzles/registry.js', ...puzzleFiles,
 ]);
 const { nodes } = Rift.data.map;
@@ -46,10 +46,14 @@ test('scripts, spawns, trainers and chapter starts exist', () => {
     Object.values(Rift.data.chapters).forEach(ch => { if (ch.start) assert.ok(nodes[ch.start], 'chapter start ' + ch.start); });
 });
 
-test('every puzzle a node uses is registered (once all generators exist)', () => {
-    const used = new Set(Object.values(nodes).flatMap(n => (n.puzzles || []).map(p => p.id)));
-    const missing = [...used].filter(id => !Rift.Puzzles.get(id));
-    if (puzzleFiles.length === 5) assert.deepEqual(missing, []);
+test('every puzzle a node uses is registered (chapters that are open)', () => {
+    const open = Object.values(nodes).filter(n => !(Rift.data.chapters[n.chapter] || {}).comingSoon);
+    const used = new Set(open.flatMap(n => (n.puzzles || []).map(p => p.id)));
+    assert.deepEqual([...used].filter(id => !Rift.Puzzles.get(id)), []);
+});
+
+test('every node is on a known painted map', () => {
+    for (const [id, n] of Object.entries(nodes)) assert.ok(Rift.data.maps[n.map || 'main'], id);
 });
 
 test('script speakers are known and lines are short enough to read', () => {

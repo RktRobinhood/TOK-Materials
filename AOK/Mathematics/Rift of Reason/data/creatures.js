@@ -109,6 +109,12 @@
             blurb: 'Measured the stars from a Danish island more precisely than anyone before telescopes. Brass nose.',
             lines: ['Measure twice. Then measure again.', 'The heavens do not lie. People do.', 'Hven has the best view.'],
         },
+        booleon: {
+            name: 'Booleon', inspiredBy: 'George Boole', colour: 'reason', rarity: 'legendary', power: 8,
+            ability: 'measure', abilityText: 'On play, look at the opponent\'s whole hand.',
+            blurb: 'Turned logic into algebra: every statement a 0 or a 1. A dignified heron who sees every case at once.',
+            lines: ['True is one. False is zero. Everything else is arithmetic.', 'Let us check every case.', 'The laws of thought are surprisingly short.'],
+        },
         hexling: {
             name: 'Piet Hexling', inspiredBy: 'Piet Hein', colour: 'language', rarity: 'legendary', power: 7,
             ability: 'grook', abilityText: 'When it blocks and survives, draw a card.',

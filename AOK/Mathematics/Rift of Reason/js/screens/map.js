@@ -19,9 +19,15 @@
         return n;
     }
 
-    // Shortest path through revealed nodes (BFS).
+    // Which painted map a node sits on (see Rift.data.maps).
+    function mapOf(id) {
+        return Rift.World.node(id).map || 'main';
+    }
+
+    // Shortest path through revealed nodes on the same map (BFS).
     function route(state, from, to) {
-        const ok = id => state.map.revealed.includes(id);
+        const here = mapOf(from);
+        const ok = id => state.map.revealed.includes(id) && mapOf(id) === here;
         const prev = { [from]: null };
         const queue = [from];
         while (queue.length) {
@@ -40,13 +46,16 @@
     Rift.Screens.register('map', {
         mount(rootNode, params) {
             const state = Rift.State.get();
+            const mapId = mapOf(state.map.at);
+            const mapDef = (Rift.data.maps || {})[mapId] || { scene: 'scene/map', name: '' };
+            const onThisMap = id => mapOf(id) === mapId;
             let walking = false;
             let destroyed = false;
             const tip = el('div.map-tip.panel');
             tip.style.display = 'none';
 
             const board = svg('svg', { viewBox: `0 0 ${W} ${H}`, class: 'map-svg', preserveAspectRatio: 'xMidYMid meet' });
-            const bg = svg('image', { href: Rift.Assets.src('scene/map', { width: W, height: H, label: 'the map' }), x: 0, y: 0, width: W, height: H, preserveAspectRatio: 'xMidYMid slice' });
+            const bg = svg('image', { href: Rift.Assets.src(mapDef.scene, { width: W, height: H, label: mapDef.name || 'the map' }), x: 0, y: 0, width: W, height: H, preserveAspectRatio: 'xMidYMid slice' });
             const pathsLayer = svg('g', { class: 'paths' });
             const fogMask = svg('mask', { id: 'fog-mask' });
             const fog = svg('rect', { x: 0, y: 0, width: W, height: H, class: 'fog', mask: 'url(#fog-mask)' });
@@ -99,8 +108,8 @@
             // ---- draw ----
             function draw() {
                 const st = Rift.State.get();
-                const revealed = st.map.revealed;
-                const hints = Rift.World.hinted(st);
+                const revealed = st.map.revealed.filter(onThisMap);
+                const hints = Rift.World.hinted(st).filter(onThisMap);
                 pathsLayer.innerHTML = '';
                 nodesLayer.innerHTML = '';
                 fogMask.innerHTML = '';
@@ -109,7 +118,7 @@
                 revealed.forEach(id => {
                     const n = Rift.World.node(id);
                     fogMask.append(svg('circle', { cx: n.x, cy: n.y, r: 210, fill: 'url(#fog-hole)' }));
-                    (n.links || []).forEach(m => {
+                    (n.links || []).filter(onThisMap).forEach(m => {
                         const key = [id, m].sort().join('|');
                         if (drawn.has(key)) return;
                         drawn.add(key);
@@ -124,7 +133,7 @@
                 hints.forEach(id => nodesLayer.append(nodeMarker(id, 'hinted')));
                 revealed.forEach(id => nodesLayer.append(nodeMarker(id, 'revealed')));
                 const ch = Rift.data.chapters[st.chapter] || {};
-                chapterLabel.textContent = (ch.name || '') + '  ·  Level ' + Rift.World.level(st);
+                chapterLabel.textContent = (mapDef.name ? mapDef.name + '  ·  ' : '') + (ch.name || '') + '  ·  Level ' + Rift.World.level(st);
             }
 
             function nodeMarker(id, kind) {
@@ -220,7 +229,7 @@
                 if (!destroyed) arrive(id);
             }
 
-            async function arrive(id) {
+            async function arrive(id, opts) {
                 const st = Rift.State.get();
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
@@ -239,6 +248,7 @@
                             await Rift.Dialogue.play(n.script);
                         }
                         finish();
+                        if (n.portal && !(opts && opts.fromPortal)) travel(n.portal);
                         break;
                     case 'rest':
                         await Rift.Dialogue.play(n.script);
@@ -259,6 +269,21 @@
                     default:
                         Rift.Router.go('encounter', { nodeId: id });
                 }
+            }
+
+            // Step through a rift to another painted map (the portal node's twin).
+            async function travel(targetId) {
+                const target = Rift.World.node(targetId);
+                const ch = Rift.data.chapters[target.chapter] || {};
+                if (ch.comingSoon) { Rift.UI.toast('The rift is still settling. It opens in a later lesson.', 3500); return; }
+                if (!(await Rift.UI.confirm('Step through the rift?', 'It leads to ' + ((Rift.data.maps[target.map || 'main'] || {}).name || 'somewhere else') + '. You can come back the same way.', 'Step through', 'Not yet'))) return;
+                await Rift.UI.riftFx();
+                Rift.State.update(s => {
+                    Rift.World.reveal(s, targetId);
+                    s.map.at = targetId;
+                    if (target.chapter && s.chapter !== target.chapter) s.chapter = target.chapter;
+                });
+                Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(targetId), fromPortal: true });
             }
 
             function shrineOffer() {
@@ -296,7 +321,7 @@
             const here = Rift.World.node(state.map.at);
             placeAvatar(here.x, here.y);
             draw();
-            if (params && params.arrive) setTimeout(() => arrive(state.map.at), 400);
+            if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal }), 400);
 
             return {
                 destroy() { destroyed = true; if (hud.destroy) hud.destroy(); },
