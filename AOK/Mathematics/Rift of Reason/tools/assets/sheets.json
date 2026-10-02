@@ -1,0 +1,134 @@
+{
+    "_readme": [
+        "Which game art ids each source PNG in design/source-assets/ turns into. Edit this file, not the code.",
+        "Keys are PNG file names; the stage folder does not matter. PNGs not listed here are reported and ignored.",
+        "type 'islands': a transparent sheet cut into separate figures. 'ids' lists them in reading order:",
+        "  rows top to bottom (figures overlapping vertically form a row), left to right within a row.",
+        "  Each entry is an id, a list of ids (the first names the file, the rest are aliases of the same image),",
+        "  null (drop that figure), or { \"id\": ..., \"also\": [...], \"class\": ... }.",
+        "  If the number of figures found differs from the list, the sheet is skipped with a warning.",
+        "  Optional: minArea (figure size in half-scale pixels below which a blob counts as a sparkle; default 400),",
+        "  threshold (alpha 0-255 that counts as solid when finding figures; default 170).",
+        "type 'walk': rows of 6 walk frames; 'rows' lists one id per row, top to bottom. Frames are re-packed",
+        "  into equal cells on a shared ground line. If a row does not split into 6 figures, equal-width cells are used.",
+        "type 'single': one transparent image, trimmed. type 'scene': an opaque background (not sliced) plus a -small copy.",
+        "type 'skip': known file that is not game art.",
+        "class (optional, per sheet or per figure) picks the size cap: sprite (620 tall), bust (240 tall), item (160 box),",
+        "  icon (160 box), card (500 tall), prop (600 box), panel (1000 box), fx (800 box), logo (1200 wide), scene (1600 wide).",
+        "  Without it the class is guessed from the id (see tools/assets/classes.mjs)."
+    ],
+    "sheets": {
+        "style-board.png": { "type": "skip" },
+
+        "owlet-sheet.png": { "type": "islands", "ids": [
+            "avatar/owlet-boy/idle", "avatar/owlet-boy/neutral", "avatar/owlet-boy/happy", "avatar/owlet-boy/surprised", "avatar/owlet-boy/worried",
+            "avatar/owlet-girl/idle", "avatar/owlet-girl/neutral", "avatar/owlet-girl/happy", "avatar/owlet-girl/surprised", "avatar/owlet-girl/worried"
+        ] },
+        "owlet-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/owlet-boy/walk", "avatar/owlet-girl/walk"] },
+        "mothkin-sheet.png": { "type": "islands", "ids": [
+            "avatar/mothkin-boy/idle", "avatar/mothkin-boy/neutral", "avatar/mothkin-boy/happy", "avatar/mothkin-boy/surprised", "avatar/mothkin-boy/worried",
+            "avatar/mothkin-girl/idle", "avatar/mothkin-girl/neutral", "avatar/mothkin-girl/happy", "avatar/mothkin-girl/surprised", "avatar/mothkin-girl/worried"
+        ] },
+        "mothkin-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/mothkin-boy/walk", "avatar/mothkin-girl/walk"] },
+        "fox-sheet.png": { "type": "islands", "ids": [
+            "avatar/fox-boy/idle", "avatar/fox-boy/neutral", "avatar/fox-boy/happy", "avatar/fox-boy/surprised", "avatar/fox-boy/worried",
+            "avatar/fox-girl/idle", "avatar/fox-girl/neutral", "avatar/fox-girl/happy", "avatar/fox-girl/surprised", "avatar/fox-girl/worried"
+        ] },
+        "fox-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/fox-boy/walk", "avatar/fox-girl/walk"] },
+        "frogling-sheet.png": { "type": "islands", "ids": [
+            "avatar/frogling-boy/idle", "avatar/frogling-boy/neutral", "avatar/frogling-boy/happy", "avatar/frogling-boy/surprised", "avatar/frogling-boy/worried",
+            "avatar/frogling-girl/idle", "avatar/frogling-girl/neutral", "avatar/frogling-girl/happy", "avatar/frogling-girl/surprised", "avatar/frogling-girl/worried"
+        ] },
+        "frogling-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/frogling-boy/walk", "avatar/frogling-girl/walk"] },
+        "raven-sheet.png": { "type": "islands", "ids": [
+            "avatar/raven-boy/idle", "avatar/raven-boy/neutral", "avatar/raven-boy/happy", "avatar/raven-boy/surprised", "avatar/raven-boy/worried",
+            "avatar/raven-girl/idle", "avatar/raven-girl/neutral", "avatar/raven-girl/happy", "avatar/raven-girl/surprised", "avatar/raven-girl/worried"
+        ] },
+        "raven-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/raven-boy/walk", "avatar/raven-girl/walk"] },
+
+        "title.png": { "type": "scene", "id": "scene/title" },
+        "logo.png": { "type": "single", "id": "ui/logo" },
+        "map.png": { "type": "scene", "id": "scene/map", "maxWidth": 2048 },
+        "fair.png": { "type": "scene", "id": "scene/fair" },
+        "stall-pattern.png": { "type": "scene", "id": "scene/stall-pattern" },
+        "stall-witness.png": { "type": "scene", "id": "scene/stall-witness" },
+        "stall-gallery.png": { "type": "scene", "id": "scene/stall-gallery" },
+        "road-forest.png": { "type": "scene", "id": "scene/road-forest" },
+        "road-bridge.png": { "type": "scene", "id": "scene/road-bridge" },
+        "road-gate.png": { "type": "scene", "id": "scene/road-gate" },
+        "battle-table.png": { "type": "scene", "id": "scene/battle-table" },
+        "rift-fx.png": { "type": "islands", "class": "fx", "ids": ["fx/rift-1", "fx/rift-2", "fx/rift-3", "fx/rift-4", "fx/rift-5", "fx/rift-6"] },
+
+        "sundial.png": { "type": "islands", "ids": [
+            "npc/sundial/idle", ["npc/sundial/neutral", "npc/sundial"], "npc/sundial/happy", "npc/sundial/surprised", "npc/sundial/angry"
+        ] },
+        "granny-axiom.png": { "type": "islands", "ids": [
+            "npc/granny-axiom/idle", ["npc/granny-axiom/neutral", "npc/granny-axiom"], "npc/granny-axiom/happy", "npc/granny-axiom/surprised", "npc/granny-axiom/angry"
+        ] },
+        "professor-sequins.png": { "type": "islands", "ids": [
+            "npc/professor-sequins/idle", ["npc/professor-sequins/neutral", "npc/professor-sequins"], "npc/professor-sequins/happy", "npc/professor-sequins/surprised", "npc/professor-sequins/angry"
+        ] },
+        "madame-mirage.png": { "type": "islands", "ids": [
+            "npc/madame-mirage/idle", ["npc/madame-mirage/neutral", "npc/madame-mirage"], "npc/madame-mirage/happy", "npc/madame-mirage/surprised", "npc/madame-mirage/angry"
+        ] },
+        "sergeant-syllo.png": { "type": "islands", "ids": [
+            "npc/sergeant-syllo/idle", ["npc/sergeant-syllo/neutral", "npc/sergeant-syllo"], "npc/sergeant-syllo/happy", "npc/sergeant-syllo/surprised", "npc/sergeant-syllo/angry"
+        ] },
+        "algorithm.png": { "type": "islands", "class": "sprite", "ids": [
+            "npc/algorithm/sky-eye", ["npc/algorithm/speaking", "npc/algorithm"]
+        ] },
+        "imps.png": { "type": "islands", "class": "sprite", "ids": [
+            ["npc/imp-bunny/masked", "npc/imp-bunny"], "npc/imp-bunny/unmasked",
+            ["npc/imp-mouse/masked", "npc/imp-mouse"], "npc/imp-mouse/unmasked",
+            ["npc/imp-hedgehog/masked", "npc/imp-hedgehog"], "npc/imp-hedgehog/unmasked",
+            ["npc/imp-duck/masked", "npc/imp-duck"], "npc/imp-duck/unmasked"
+        ] },
+
+        "lobstorian-astrophysicat.png": { "type": "islands", "ids": [
+            "creature/lobstorian/idle", "creature/lobstorian/attack", "creature/lobstorian/smug", "creature/lobstorian/angry", "creature/lobstorian/defeated",
+            "creature/astrophysicat/idle", "creature/astrophysicat/attack", "creature/astrophysicat/smug", "creature/astrophysicat/angry", "creature/astrophysicat/defeated"
+        ] },
+        "tremendoodle-swiftlet.png": { "type": "islands", "ids": [
+            "creature/tremendoodle/idle", "creature/tremendoodle/attack", "creature/tremendoodle/smug", "creature/tremendoodle/angry", "creature/tremendoodle/defeated",
+            "creature/swiftlet/idle", "creature/swiftlet/attack", "creature/swiftlet/smug", "creature/swiftlet/angry", "creature/swiftlet/defeated"
+        ] },
+        "muskrat-zuckerborg.png": { "type": "islands", "ids": [
+            "creature/muskrat/idle", "creature/muskrat/attack", "creature/muskrat/smug", "creature/muskrat/angry", "creature/muskrat/defeated",
+            "creature/zuckerborg/idle", "creature/zuckerborg/attack", "creature/zuckerborg/smug", "creature/zuckerborg/angry", "creature/zuckerborg/defeated"
+        ] },
+        "altmanta-beastie.png": { "type": "islands", "ids": [
+            "creature/altmanta/idle", "creature/altmanta/attack", "creature/altmanta/smug", "creature/altmanta/angry", "creature/altmanta/defeated",
+            "creature/beastie/idle", "creature/beastie/attack", "creature/beastie/smug", "creature/beastie/angry", "creature/beastie/defeated"
+        ] },
+        "siuuugull-rawmsay.png": { "type": "islands", "ids": [
+            "creature/siuuugull/idle", "creature/siuuugull/attack", "creature/siuuugull/smug", "creature/siuuugull/angry", "creature/siuuugull/defeated",
+            "creature/rawmsay/idle", "creature/rawmsay/attack", "creature/rawmsay/smug", "creature/rawmsay/angry", "creature/rawmsay/defeated"
+        ] },
+        "speedcheeta-chimpossible.png": { "type": "islands", "ids": [
+            "creature/speedcheeta/idle", "creature/speedcheeta/attack", "creature/speedcheeta/smug", "creature/speedcheeta/angry", "creature/speedcheeta/defeated",
+            "creature/chimpossible/idle", "creature/chimpossible/attack", "creature/chimpossible/smug", "creature/chimpossible/angry", "creature/chimpossible/defeated"
+        ] },
+        "legendaries.png": { "type": "islands", "ids": [
+            "creature/euclidon/idle", "creature/lovelace/idle", "creature/godelix/idle", "creature/tycho/idle", "creature/hexling/idle"
+        ] },
+
+        "items.png": { "type": "islands", "ids": [
+            "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
+        ] },
+        "card-frames.png": { "type": "islands", "class": "card", "ids": [
+            "ui/card-reason", "ui/card-emotion", "ui/card-perception", "ui/card-language", "ui/card-imagination", "ui/card-memory",
+            "ui/card-axiom", "ui/card-back"
+        ] },
+        "ui-kit.png": { "type": "islands", "ids": [
+            "ui/panel", "ui/nameplate", "ui/button", "ui/button-hover", "ui/button-pressed",
+            "ui/heart-full", "ui/heart-empty",
+            "ui/scar-fogged-eye", "ui/scar-shaky-hand", "ui/scar-heavy-heart",
+            "ui/icon-reason", "ui/icon-emotion", "ui/icon-perception", "ui/icon-language", "ui/icon-imagination", "ui/icon-memory"
+        ] },
+        "puzzle-props.png": { "type": "islands", "minArea": 150, "ids": [
+            "ui/door-closed", "ui/door-open", "ui/token-truth", "ui/token-lie", "ui/venn",
+            "ui/tile-1", "ui/tile-2", "ui/tile-3", "ui/tile-4", "ui/tile-5", "ui/tile-6",
+            "ui/slate", "ui/chalk"
+        ] }
+    }
+}

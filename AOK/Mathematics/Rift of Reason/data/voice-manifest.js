@@ -5,5 +5,24 @@
  */
 (function (root) {
     'use strict';
-    root.Rift.data.voices = {};
+    root.Rift.data.voices = {
+        "altmanta-1qh139n": "altmanta-1qh139n.mp3",
+        "altmanta-27yy1u": "altmanta-27yy1u.mp3",
+        "altmanta-7ej0wv": "altmanta-7ej0wv.mp3",
+        "astrophysicat-18yxpe2": "astrophysicat-18yxpe2.mp3",
+        "astrophysicat-1sitp6n": "astrophysicat-1sitp6n.mp3",
+        "astrophysicat-vewfel": "astrophysicat-vewfel.mp3",
+        "muskrat-18jdcut": "muskrat-18jdcut.mp3",
+        "muskrat-1kw1y3b": "muskrat-1kw1y3b.mp3",
+        "muskrat-1toiknb": "muskrat-1toiknb.mp3",
+        "muskrat-6ez2d6": "muskrat-6ez2d6.mp3",
+        "muskrat-m3fh48": "muskrat-m3fh48.mp3",
+        "muskrat-ssyzam": "muskrat-ssyzam.mp3",
+        "swiftlet-1ubf6mr": "swiftlet-1ubf6mr.mp3",
+        "swiftlet-jb1age": "swiftlet-jb1age.mp3",
+        "swiftlet-labepm": "swiftlet-labepm.mp3",
+        "zuckerborg-1t23oe": "zuckerborg-1t23oe.mp3",
+        "zuckerborg-1w96j5x": "zuckerborg-1w96j5x.mp3",
+        "zuckerborg-fe1p8p": "zuckerborg-fe1p8p.mp3",
+    };
 })(typeof window !== 'undefined' ? window : globalThis);
