@@ -139,7 +139,18 @@ async function doIslands(file, spec, ctx) {
     const outs = spec.ids.map(outputSpec);
     const found = findIslands(img, islandOpts(spec));
     const rows = readingOrder(found.islands);
-    const ordered = rows.flatMap(r => r.items);
+    let ordered = rows.flatMap(r => r.items);
+    // "join": [[a, b], ...] merges figure b into figure a (indexes in reading order, before
+    // matching ids): for an effect that floats free of its owner and overlaps a neighbour.
+    for (const [a, z] of [...(spec.join || [])].sort((p, q) => q[1] - p[1])) {
+        const keep = ordered[a], drop = ordered[z];
+        if (!keep || !drop) continue;
+        for (let l = 0; l < found.owner.length; l++) if (found.owner[l] === drop.label) found.owner[l] = keep.label;
+        keep.x0 = Math.min(keep.x0, drop.x0); keep.y0 = Math.min(keep.y0, drop.y0);
+        keep.x1 = Math.max(keep.x1, drop.x1); keep.y1 = Math.max(keep.y1, drop.y1);
+        keep.area += drop.area;
+        ordered = ordered.filter(i => i !== drop);
+    }
     const boxes = ordered.map((isl, i) => ({ ...islandBox(found, isl), label: outs[i] ? outs[i].id : (i < outs.length ? '(dropped)' : '?') }));
     if (ordered.length !== outs.length) {
         return { error: `found ${ordered.length} figures, expected ${outs.length} (${mismatchHint(found, rows)}); sheet skipped`, boxes, size };

@@ -50,3 +50,31 @@ Never die in battle. Each appears only after a rumour unlocks it.
 ## The villain
 
 **The Algorithm.** A vast, faceless feed-entity leaking through the time rifts: in the sky, a single glowing eye made of scrolling thumbnails; when it speaks, a swirling column of notification bubbles. It turns people into rabid caricatures and plants **demon imps** (small shadowy creatures wearing smiling villager masks) among the villagers. Finale reveal: it doesn't know anything; it's probabilities predicting clicks.
+
+## Expansion: 16 more caricatures (approved by the teacher, 2026-10-02)
+
+Requested by the teacher on 2026-10-02 for a wider spread in battles: more commons and uncommons, and Emotion (red) and Sense perception (green) brought up to the other colours. After this, each lesson adds a few more. Abilities are only a one-line idea for the battle designer; power and exact rules are set with the simulator.
+
+Species ids (data/creatures.js keys and art ids): carlseal, khaby, eminemu, obambu, beansprout, gargoyle, haalandroid, usainvolt, keanu, beeyonce, eelish, rockodile, attenbirdough, kardashiant, messilion, shakirattle (table order).
+
+| Game name | Inspired by | Colour | Rarity | Creature | Joke angle | Ability idea |
+|---|---|---|---|---|---|---|
+| **Magnus Carlseal** | Magnus Carlsen | 🔵 Reason | uncommon | A calm seal in a hoodie at a chessboard, one flipper on a knight | Thinks twenty moves ahead; bored by easy games | Look at the opponent's next two draws |
+| **Khaby Llame** | Khaby Lame | 🔵 Reason | common | A deadpan llama, both hooves held out palms-up | Silently shows the obvious, simple way (Occam's razor) | Cancel one "on play" effect |
+| **Eminemu** | Eminem | 🟡 Language | uncommon | A scrawny emu in a hoodie and beanie, microphone, rhyme-bubbles flying | Rapid-fire rhymes, too fast to follow | Extra attack if you played a gold creature this turn |
+| **Barack Obambu** | Barack Obama | 🟡 Language | rare | A calm, grinning panda at a lectern, chewing bamboo | Measured oratory, the pause, "let me be clear" | Allies can't lose their abilities |
+| **Mr. Beansprout** | Rowan Atkinson's Mr. Bean | 🟡 Language | common | A tiny, rubber-faced teddy bear in a tweed jacket, holding a teddy | Never says a word; communicates entirely by faces | Can't be targeted by Language effects |
+| **Lady Gargoyle** | Lady Gaga | 🟣 Imagination | uncommon | A dramatic little stone gargoyle in an outrageous costume of the week | Wild reinventions, every outfit stranger than the last | Changes colour each round |
+| **Haalandroid** | Erling Haaland | ⚪ Memory | uncommon | A huge, blond robot-viking cyborg with a ponytail, meditating | Scores the same way every match, like a machine | +1 power each time it defeats a creature |
+| **Usain Volt** | Usain Bolt | ⚪ Memory | common | A grinning electric eel doing the lightning-bolt pose | The same celebration after every win | First attack each battle can't be blocked |
+| **Keanu Meows** | Keanu Reeves | ⚪ Memory | common | A kind, sad-eyed black cat in a long dark coat | The déjà vu "glitch" (the black cat walks by twice); famously nice | Returns once from the discard pile |
+| **Beeyoncé** | Beyoncé | 🔴 Emotion | rare | A queen bee with a golden wind-machine-blown mane, on stage | Queen B, total stage command | Your other creatures get +1 power |
+| **Billie Eelish** | Billie Eilish | 🔴 Emotion | common | A whispering eel with green-and-black hair and baggy clothes | Whisper-singing, moody ballads | Weaker creature wins its first block |
+| **The Rockodile** | Dwayne "The Rock" Johnson | 🔴 Emotion | uncommon | A huge, bald, smiling crocodile with one eyebrow raised | The eyebrow; endless motivational hype | Can't be stolen |
+| **Sir David Attenbirdough** | David Attenborough | 🟢 Sense perception | common | An elderly puffin in a safari shirt, whispering behind a fern | Hushed nature narration of everything | Reveal the top card of each deck |
+| **Kim Kardashiant** | Kim Kardashian | 🟢 Sense perception | common | A glamorous ant posing for a selfie whose filter makes her look enormous | Filters and perfect photos: seeing isn't knowing | Shows double power until it fights |
+| **Messilion** | Lionel Messi | 🟢 Sense perception | uncommon | A small, quiet lion cub with a neat beard, ball glued to his paw | Sees every pass; calm genius (a rival for Siuuugull) | Look at the opponent's hand when it attacks |
+| **Shakirattle** | Shakira | 🟢 Sense perception | uncommon | A rattlesnake in a sequinned skirt, hips swinging | "Hips Don't Lie": the body as evidence | Exposes one opponent bluff |
+
+Balance after the expansion (catchable species, legendaries excluded): 🔵 4 · 🟡 5 · 🟣 4 · ⚪ 5 · 🔴 5 · 🟢 5; rarities: 10 common, 11 uncommon, 7 rare.
+Red and green have no lesson 1 puzzles of their own yet, so these need to appear as wild spawns or trainer rewards until the Switchboard (Ch2) and Chart Fixer (L4) arrive.

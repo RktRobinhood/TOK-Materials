@@ -152,6 +152,38 @@
             "ui/switch-off", "ui/switch-on", "ui/bulb-off", "ui/bulb-on", "ui/gate-plaque",
             { "id": "ui/block-loose", "rotate": 90 }, { "id": "ui/block-cemented", "rotate": 90 }, { "id": "ui/block-cracked", "rotate": 90 }, "ui/accuse-token"
         ] },
+        "carlseal-khaby.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/carlseal/idle", "creature/carlseal/attack", "creature/carlseal/smug", "creature/carlseal/angry", "creature/carlseal/defeated",
+            "creature/khaby/idle", "creature/khaby/attack", "creature/khaby/smug", "creature/khaby/angry", "creature/khaby/defeated"
+        ] },
+        "eminemu-obambu.png": { "type": "islands", "minArea": 2500, "join": [[1, 2]], "ids": [
+            "creature/eminemu/idle", "creature/eminemu/attack", "creature/eminemu/smug", "creature/eminemu/angry", "creature/eminemu/defeated",
+            "creature/obambu/idle", "creature/obambu/attack", "creature/obambu/smug", "creature/obambu/angry", "creature/obambu/defeated"
+        ] },
+        "beansprout-gargoyle.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/beansprout/idle", "creature/beansprout/attack", "creature/beansprout/smug", "creature/beansprout/angry", "creature/beansprout/defeated",
+            "creature/gargoyle/idle", "creature/gargoyle/attack", "creature/gargoyle/smug", "creature/gargoyle/angry", "creature/gargoyle/defeated"
+        ] },
+        "haalandroid-usainvolt.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/haalandroid/idle", "creature/haalandroid/attack", "creature/haalandroid/smug", "creature/haalandroid/angry", "creature/haalandroid/defeated",
+            "creature/usainvolt/idle", "creature/usainvolt/attack", "creature/usainvolt/smug", "creature/usainvolt/angry", "creature/usainvolt/defeated"
+        ] },
+        "keanu-beeyonce.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/keanu/idle", "creature/keanu/attack", "creature/keanu/smug", "creature/keanu/angry", "creature/keanu/defeated",
+            "creature/beeyonce/idle", "creature/beeyonce/attack", "creature/beeyonce/smug", "creature/beeyonce/angry", "creature/beeyonce/defeated"
+        ] },
+        "eelish-rockodile.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/eelish/idle", "creature/eelish/attack", "creature/eelish/smug", "creature/eelish/angry", "creature/eelish/defeated",
+            "creature/rockodile/idle", "creature/rockodile/attack", "creature/rockodile/smug", "creature/rockodile/angry", "creature/rockodile/defeated"
+        ] },
+        "attenbirdough-kardashiant.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/attenbirdough/idle", "creature/attenbirdough/attack", "creature/attenbirdough/smug", "creature/attenbirdough/angry", "creature/attenbirdough/defeated",
+            "creature/kardashiant/idle", "creature/kardashiant/attack", "creature/kardashiant/smug", "creature/kardashiant/angry", "creature/kardashiant/defeated"
+        ] },
+        "messilion-shakirattle.png": { "type": "islands", "minArea": 2500, "ids": [
+            "creature/messilion/idle", "creature/messilion/attack", "creature/messilion/smug", "creature/messilion/angry", "creature/messilion/defeated",
+            "creature/shakirattle/idle", "creature/shakirattle/attack", "creature/shakirattle/smug", "creature/shakirattle/angry", "creature/shakirattle/defeated"
+        ] },
         "items.png": { "type": "islands", "minArea": 1500, "ids": [
             "item/charm", "item/greatcharm", "item/lure", "item/tonic", "item/ward", "item/mending", "item/anchor"
         ] },
