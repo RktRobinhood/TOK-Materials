@@ -33,6 +33,7 @@
 
     function lockReason(state, id) {
         const n = node(id);
+        if (n.requiresFlag && !state.flags[n.requiresFlag]) return n.lockText || 'Not yet.';
         if (n.requires && completedPuzzlesInChapter(state, n.chapter) < n.requires) {
             return 'Win ' + n.requires + ' games here first (' + completedPuzzlesInChapter(state, n.chapter) + ' so far).';
         }
@@ -157,7 +158,27 @@
         return 1 + Math.floor(Math.sqrt(state.xp / 20));
     }
 
+    // Accolades (art 'ui/badge-<id>'): earned for real achievements, shown in the collection.
+    Rift.data.accolades = {
+        'clear-thinker': { name: 'Clear Thinker', text: 'Solved puzzles without a single hint.' },
+        'falsifier': { name: 'Falsifier', text: 'Tried to break the rule, not just confirm it.' },
+        'truth-tabler': { name: 'Truth-Tabler', text: 'Found the imps by checking every possible world.' },
+        'unmasker': { name: 'Unmasker', text: 'Unmasked the Mayor of Boolesbury.' },
+        'cross-examiner': { name: 'Cross-Examiner', text: 'Broke down an argument at the Tribunal.' },
+        'chart-honest': { name: 'Chart Honest', text: 'Made a misleading chart tell the truth.' },
+        'legend-hunter': { name: 'Legend Hunter', text: 'Caught a legendary thinker.' },
+        'rift-walker': { name: 'Rift Walker', text: 'Closed the rift and came home.' },
+    };
+
+    // Returns true the first time an accolade is earned.
+    function award(state, id) {
+        if (!Rift.data.accolades[id] || state.accolades.includes(id)) return false;
+        state.accolades.push(id);
+        return true;
+    }
+
     Rift.World = {
+        award,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter,

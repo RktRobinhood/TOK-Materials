@@ -118,6 +118,7 @@
                 const { def } = current();
                 const data = stages[stageIx].data;
                 const result = def.check(data, answer) || { solved: false };
+                if (result.solved) stages[stageIx].result = result;
                 if (result.solved) {
                     Rift.Audio.sfx('success');
                     feedback.className = 'enc-feedback good';
@@ -219,17 +220,28 @@
                 }
                 if (firstTime && Rift.Dialogue.has(n.script + '.win')) await Rift.Dialogue.play(n.script + '.win');
                 const rng = Rift.makeRng(visit.seed + ':reward');
+                let earned = [];
                 const r = Rift.World.rewards(s, n, rng, { noHints: hintsUsed === 0, firstTime });
                 Rift.State.update(st => {
                     Rift.World.applyRewards(st, r);
                     Rift.World.complete(st, n.id);
-                    if (!hintsUsed && st.stats.puzzlesSolved >= 5 && !st.accolades.includes('clear-thinker')) st.accolades.push('clear-thinker');
+                    if (!hintsUsed && st.stats.puzzlesSolved >= 5) earned.push('clear-thinker');
+                    stages.forEach(p => {
+                        const r = p.result || {};
+                        if (p.id === 'village') earned.push('truth-tabler');
+                        if (p.id === 'tribunal') earned.push('cross-examiner');
+                        if (p.id === 'chart-fixer') earned.push('chart-honest');
+                        if (p.id === 'rule-hunter' && r.strategy === 'tried-to-falsify') earned.push('falsifier');
+                    });
+                    if (n.id === 'b-town-hall') earned.push('unmasker');
+                    earned = earned.filter(id => Rift.World.award(st, id));
                 });
                 const def = Rift.Puzzles.get(stages[stages.length - 1].id);
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name).join(', ');
                 const body = el('div.stack', null, [
                     def && def.tok ? el('p.tok-line', { text: '💭 ' + def.tok }) : null,
                     el('p', { text: '+' + r.xp + ' XP' + (items ? '  ·  ' + items : '') }),
+                    earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
                 ]);
                 Rift.UI.modal('Solved!', body, [{ label: obstacle ? 'Catch the ' + Rift.data.creatures[obstacle].name + '!' : 'Back to the map', primary: true, onclick: () => (obstacle ? catchPhase() : Rift.Router.replace('map')) }]);
             }
@@ -289,6 +301,7 @@
                         Rift.State.update(st => {
                             st.creatures.push(Rift.State.makeCreature(obstacle));
                             st.stats.catches += 1;
+                            if (c.rarity === 'legendary' && Rift.World.award(st, 'legend-hunter')) Rift.UI.toast('🏅 New accolade: Legend Hunter');
                         });
                         panel.innerHTML = '';
                         panel.append(

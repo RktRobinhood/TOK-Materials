@@ -241,6 +241,7 @@
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
                 const finish = () => {
+                    if (id === 'fair-finale') Rift.State.update(s => { if (Rift.World.award(s, 'rift-walker')) Rift.UI.toast('🏅 New accolade: Rift Walker'); });
                     const before = st.map.revealed.length;
                     Rift.State.update(s => Rift.World.complete(s, id));
                     if (Rift.State.get().map.revealed.length > before) { Rift.Audio.sfx('reveal'); Rift.UI.toast('The fog lifts…'); }

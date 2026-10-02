@@ -76,7 +76,16 @@
                 el('div.dex-grid', null, species.map(id => card(id, {
                     caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
                 }))),
-                s.accolades.length ? el('div', null, [el('h3', { text: 'Accolades' }), el('div.row.wrap', null, s.accolades.map(a => el('span.chip', { text: '🏅 ' + a.replace(/-/g, ' ') })))]) : null,
+                el('div', null, [
+                    el('h3', { text: 'Accolades (' + s.accolades.length + ' of ' + Object.keys(Rift.data.accolades).length + ')' }),
+                    el('div.badge-row', null, Object.entries(Rift.data.accolades).map(([id, a]) => {
+                        const got = s.accolades.includes(id);
+                        return el('div.badge' + (got ? '.got' : ''), { title: got ? a.text : 'Not yet earned' }, [
+                            Rift.Assets.has('ui/badge-' + id) ? Rift.Assets.img('ui/badge-' + id, { className: 'badge-img' }) : el('div.badge-img.badge-fallback', { text: '🏅' }),
+                            el('div.small', { text: got ? a.name : '???' }),
+                        ]);
+                    })),
+                ]),
             ]));
             return { destroy() { if (hud.destroy) hud.destroy(); } };
         },

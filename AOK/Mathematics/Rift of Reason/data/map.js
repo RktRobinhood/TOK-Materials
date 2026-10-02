@@ -20,6 +20,7 @@
         ch1: { name: 'Chapter 1: The Road', start: 'road-start', lesson: 1 },
         ch2: { name: 'Chapter 2: The Village', start: 'b-arrival', lesson: 2 },
         ch3: { name: 'Chapter 3: The Tribunal', start: 't-arrival', lesson: 3 },
+        ch4: { name: 'Chapter 4: The Server Tower', start: 'k-base', lesson: 4 },
     };
 
     Rift.data.map = {
@@ -32,7 +33,7 @@
             },
             'fair-gate': {
                 name: 'The Fair Gate', chapter: 'prologue', type: 'story', x: 200, y: 600,
-                scene: 'scene/fair', script: 'prologue.fair', links: ['burrow', 'stall-pattern', 'stall-witness', 'stall-gallery'],
+                scene: 'scene/fair', script: 'prologue.fair', links: ['burrow', 'stall-pattern', 'stall-witness', 'stall-gallery', 'fair-finale'],
                 teaser: 'Music, lanterns and the smell of toasted nuts.',
             },
             'stall-pattern': {
@@ -254,7 +255,7 @@
             },
             't-plaza': {
                 name: 'The Neon Plaza', chapter: 'ch3', map: 'ch3', type: 'story', x: 727, y: 335,
-                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-newsstand', 't-library', 't-datalab', 't-archive'],
+                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-newsstand', 't-library', 't-datalab', 't-archive', 't-tower-gate'],
                 teaser: 'Giant feed-screens. Everyone is looking up. Nobody is looking at each other.',
             },
             't-datalab': {
@@ -290,6 +291,85 @@
                 spawns: ['zuckerborg', 'muskrat', 'lobstorian', 'lovelace'], links: ['t-steps'],
                 teaser: 'The great hall. Judge Hoot, Prosecutor Fin, and the trial of the season.',
             },
+
+            't-tower-gate': {
+                name: 'The Tower Road', chapter: 'ch3', map: 'ch3', type: 'rift', x: 842, y: 140,
+                scene: 'scene/neon-plaza', script: 'ch3.towergate', fx: 'rift', links: ['t-plaza', 'k-base'], portal: 'k-base',
+                teaser: 'The road to the dark tower on the horizon. Its windows flicker like a feed.',
+            },
+
+            // ---- Chapter 4: the Server Tower (map: scene/map-ch4, a vertical cutaway).
+            // Provisional coordinates: re-place on the painted landmarks when map-ch4 lands.
+            'k-base': {
+                name: 'The Tower Door', chapter: 'ch4', map: 'ch4', type: 'rift', x: 800, y: 820,
+                scene: 'scene/tower-base', script: 'ch4.arrive', links: ['t-tower-gate', 'k-gallery'], portal: 't-tower-gate',
+                teaser: 'A huge door. Cables like roots. The way back to Tomorrowton is behind you.',
+            },
+            'k-gallery': {
+                name: 'The Chart Gallery', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 600, y: 710,
+                scene: 'scene/chart-gallery', script: 'ch4.gallery',
+                puzzles: [{ id: 'chart-fixer', difficulty: 2 }, { id: 'chart-fixer', difficulty: 3 }],
+                spawns: ['kardashiant', 'attenbirdough', 'tycho'], links: ['k-base', 'k-prediction'],
+                teaser: 'Giant charts in gold frames. The Algorithm\'s favourite artworks.',
+            },
+            'k-prediction': {
+                name: 'The Prediction Hall', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 1000, y: 610,
+                scene: 'scene/server-hall', script: 'ch4.prediction',
+                puzzles: [{ id: 'prediction', difficulty: 1 }, { id: 'prediction', difficulty: 2 }],
+                spawns: ['altmanta', 'zuckerborg', 'haalandroid'], links: ['k-gallery', 'k-stairwell', 'k-sorting'],
+                teaser: 'A machine that says it knows what you will do next. It seems very sure.',
+            },
+            'k-stairwell': {
+                name: 'The Stairwell', chapter: 'ch4', map: 'ch4', type: 'rest', x: 1180, y: 500,
+                scene: 'scene/server-hall', script: 'ch4.stairwell', links: ['k-prediction', 'k-workshop'],
+                teaser: 'A quiet landing between floors. A good place to rest.',
+            },
+            'k-workshop': {
+                name: 'The Modelling Workshop', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 1180, y: 330,
+                scene: 'scene/oracle-chamber', script: 'ch4.workshop',
+                puzzles: [{ id: 'three-act', difficulty: 1 }, { id: 'three-act', difficulty: 2 }],
+                spawns: ['gargoyle', 'lovelace', 'euclidon'], links: ['k-stairwell', 'k-bridge'],
+                teaser: 'An hourglass, a dripping cauldron, a growing floor. Questions everywhere.',
+            },
+            'k-sorting': {
+                name: 'The Sorting Room', chapter: 'ch4', map: 'ch4', type: 'miniboss', x: 800, y: 500,
+                scene: 'scene/server-hall', script: 'ch4.sorting',
+                puzzles: [{ id: 'sorting', difficulty: 2 }],
+                spawns: ['rockodile', 'obambu', 'beeyonce'], links: ['k-prediction', 'k-oracle'],
+                teaser: 'A machine deciding who gets help. Everyone agrees it is very accurate.',
+            },
+            'k-oracle': {
+                name: 'The Oracle Chamber', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 600, y: 340,
+                scene: 'scene/oracle-chamber', script: 'ch4.oracle',
+                puzzles: [{ id: 'oracle', difficulty: 1 }, { id: 'oracle', difficulty: 2 }],
+                spawns: ['carlseal', 'booleon', 'godelix'], links: ['k-sorting', 'k-bridge'],
+                teaser: 'A brass machine printing proofs on paper tape. Faster than anyone can read.',
+            },
+            'k-bridge': {
+                name: 'The Sky Bridge', chapter: 'ch4', map: 'ch4', type: 'battle', x: 900, y: 230,
+                scene: 'scene/battle-table', script: 'ch4.cards', trainer: 'feed', links: ['k-oracle', 'k-workshop', 'k-core'],
+                teaser: 'The Algorithm\'s champion waits on the bridge, holding a perfectly optimised deck.',
+            },
+            'k-core': {
+                name: 'The Core', chapter: 'ch4', map: 'ch4', type: 'boss', x: 800, y: 110,
+                scene: 'scene/core-chamber', script: 'ch4.core',
+                puzzles: [{ id: 'prediction', difficulty: 3 }, { id: 'oracle', difficulty: 3 }, { id: 'three-act', difficulty: 3 }],
+                spawns: ['muskrat', 'altmanta', 'beastie'], links: ['k-bridge', 'k-summit'],
+                teaser: 'The top of the tower. Something vast is waiting. Or something small pretending to be vast.',
+            },
+            'k-summit': {
+                name: 'The Summit Rift', chapter: 'ch4', map: 'ch4', type: 'rift', x: 1000, y: 70,
+                scene: 'scene/core-chamber', script: 'ch4.summit', fx: 'rift', links: ['k-core', 'fair-finale'], portal: 'fair-finale',
+                teaser: 'The last rift. It leads home.',
+            },
+
+            // ---- The ending, back on the home map ----
+            'fair-finale': {
+                name: 'The Fair, Restored', chapter: 'ch4', type: 'story', x: 250, y: 545,
+                scene: 'scene/fair-restored', script: 'finale.home', links: ['k-summit', 'fair-gate'],
+                requiresFlag: 'finale-open', lockText: 'Roped off. Something is still wrong with the sky.',
+                teaser: 'A quiet corner of the fair, roped off with a sign: Closed until further notice.',
+            },
         },
     };
 
@@ -298,10 +378,17 @@
         main: { scene: 'scene/map', name: 'The Valley' },
         ch2: { scene: 'scene/map-ch2', name: 'Boolesbury' },
         ch3: { scene: 'scene/map-ch3', name: 'Tomorrowton' },
+        ch4: { scene: 'scene/map-ch4', name: 'The Server Tower' },
     };
 
     // NPC trainers for battle nodes.
     Rift.data.trainers = {
+        'feed': {
+            name: 'The Feed\'s Champion',
+            ai: 'hard',
+            team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
+            ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
+        },
         'fin': {
             name: 'Prosecutor Fin',
             ai: 'hard',

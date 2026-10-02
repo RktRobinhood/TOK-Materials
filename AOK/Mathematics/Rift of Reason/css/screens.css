@@ -158,3 +158,10 @@
 .map-node .marker-art { pointer-events: none; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6)); }
 .map-node.done .marker-art { opacity: 0.75; }
 .map-node.locked .marker-art { filter: grayscale(0.8) brightness(0.7); }
+
+/* ---- accolade badges ---- */
+.badge-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.badge { width: 96px; text-align: center; opacity: 0.4; filter: grayscale(1); }
+.badge.got { opacity: 1; filter: none; }
+.badge-img { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 4px; display: block; }
+.badge-fallback { font-size: 44px; line-height: 72px; }
