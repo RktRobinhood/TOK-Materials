@@ -306,23 +306,29 @@
             function riftMenu() {
                 const st = Rift.State.get();
                 const rows = Object.entries(Rift.data.chapters).map(([cid, ch]) => el('div.row', null, [
-                    el('div', { style: { flex: 1 } }, [el('strong', { text: ch.name }), el('div.small.muted', { text: 'Lesson ' + ch.lesson + (ch.comingSoon ? ' · opens later' : '') })]),
+                    el('div', { style: { flex: 1 } }, [
+                        el('strong', { text: ch.name }),
+                        el('div.small.muted', { text: 'Lesson ' + ch.lesson + (ch.comingSoon ? ' · opens later' : '') + (st.chapter === cid ? ' · you are here' : '') }),
+                    ]),
                     el('button.btn.small', {
                         text: 'Jump',
                         disabled: !!ch.comingSoon || !ch.start,
-                        onclick() {
+                        async onclick() {
                             m.close();
                             let first = false;
                             Rift.State.update(s => { first = Rift.World.jumpToChapter(s, cid); });
-                            Rift.UI.riftFx();
-                            const n = Rift.World.node(Rift.State.get().map.at);
-                            placeAvatar(n.x, n.y);
-                            draw();
-                            if (first) Rift.UI.toast('A starter kit tumbles out of the rift!');
+                            await Rift.UI.riftFx();
+                            // The chapter may be on another painted map, so rebuild the screen there.
+                            const at = Rift.State.get().map.at;
+                            Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true });
+                            if (first) Rift.UI.toast('A starter kit tumbles out of the rift: 3 Catch Charms and a Tonic!', 4000);
                         },
                     }),
                 ]));
-                const m = Rift.UI.modal('Time rift', el('div.stack', null, [el('p.small.muted', { text: 'Jump to any chapter. Skipped places stay in the fog for later.' })].concat(rows)));
+                const m = Rift.UI.modal('Time rift', el('div.stack', null, [
+                    el('p', { text: 'Jump to the start of any chapter: handy if you missed a lesson or want to catch up with the class.' }),
+                    el('p.small.muted', { text: 'Places you skip stay in the fog, so you can go back and explore them later. Your first jump into a chapter brings a small starter kit.' }),
+                ].concat(rows)));
             }
 
             // ---- start ----
