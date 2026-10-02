@@ -8,6 +8,14 @@
 
     function boot() {
         Rift.State.load();
+        // Calm motion (Settings) switches every animation off.
+        const applyCalm = () => {
+            const s = Rift.State.get();
+            root.document.body.classList.toggle('calm-motion', !!(s && s.settings.calm));
+        };
+        applyCalm();
+        Rift.bus.on('state:changed', applyCalm);
+        Rift.bus.on('state:replaced', applyCalm);
         Rift.Router.replace('title');
         // Unlock audio on the first interaction (browsers block autoplay).
         root.document.addEventListener('pointerdown', function unlock() {

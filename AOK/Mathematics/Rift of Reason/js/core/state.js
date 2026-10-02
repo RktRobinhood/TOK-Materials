@@ -42,7 +42,7 @@
             lures: {},             // node id -> visits of boosted rare spawns left
             perksUsed: {},         // perk id -> chapter it was used in
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0 },
-            settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1 },
+            settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1, calm: false },
         };
     }
 

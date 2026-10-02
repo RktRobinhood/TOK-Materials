@@ -170,3 +170,9 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.4em; line-height: 1
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
 }
+
+/* Calm motion (Settings): stops every animation and transition, for anyone who finds movement hard to watch. */
+body.calm-motion *, body.calm-motion *::before, body.calm-motion *::after {
+    animation: none !important;
+    transition: none !important;
+}

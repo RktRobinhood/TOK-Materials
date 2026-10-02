@@ -122,7 +122,7 @@
     box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(242, 182, 50, 0.55), 0 3px 0 rgba(0, 0, 0, 0.45);
 }
 .tw-block[data-status="loose"] { opacity: 0.92; }
-.tw-block.shaky { animation: tw-wobble 2.4s ease-in-out infinite; }
+.tw-block.shaky { animation: tw-wobble 2.4s ease-in-out 2; }
 .tw-block[data-status="cracked"]::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(115deg, transparent 44%, var(--ink) 45%, var(--ink) 47%, transparent 48%),

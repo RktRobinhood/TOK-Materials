@@ -61,9 +61,8 @@
 .enc-title { padding: 8px 12px; display: flex; flex-direction: column; }
 .enc-obstacle { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .enc-creature { width: 220px; height: 240px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
-.enc-creature.rabid { animation: rabid 1.6s ease-in-out infinite; }
-.enc-creature.dizzy { animation: dizzy 2.4s linear infinite; filter: grayscale(0.3) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
-@keyframes rabid { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-4px) rotate(-2deg); } 75% { transform: translateY(-2px) rotate(2deg); } }
+.enc-creature.rabid { animation: none; } /* no looping wobble: it read as aggressive vibrating */
+.enc-creature.dizzy { animation: dizzy 1.2s ease-out 1; transform: rotate(-3deg); filter: grayscale(0.3) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
 @keyframes dizzy { 0% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
 .bubble { background: var(--parchment); color: var(--ink); border: 2px solid var(--ink); border-radius: 14px; padding: 6px 12px; font-size: 0.95em; position: relative; max-width: 280px; text-align: center; }
 .enc-controls { flex-wrap: wrap; }
