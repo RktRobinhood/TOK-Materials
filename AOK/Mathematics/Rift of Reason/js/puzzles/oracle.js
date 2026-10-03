@@ -1176,6 +1176,35 @@
 
     const def = {
         id: 'oracle',
+        rules: [
+            "Read the claim, assumptions and proof steps. Choose a step to inspect.",
+            "The number tester looks for counterexamples. One failed case can break a universal claim.",
+            "A few successful tests do not prove a claim for all numbers. Check why every step follows.",
+            "Mark whether the proof holds or choose the broken step and flaw. Some proofs are valid; do not assume a trick.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "The machine prints a proof. Our task is to check the reasoning, not trust its confident voice.",
+                "highlight": ".om-claim"
+            },
+            {
+                "text": "Click a numbered step to inspect it. Read the assumptions: a division is allowed only if its divisor is not zero.",
+                "highlight": ".om-tape"
+            },
+            {
+                "text": "Example: \"all odd numbers are prime\" fails at 9. Use the number tester to look for a failed case. Testing 3 and 5 alone proves nothing about all odd numbers.",
+                "highlight": ".om-tester"
+            },
+            {
+                "text": "If no test breaks it, still ask why each step works for every allowed case. A valid proof needs a general reason.",
+                "highlight": ".om-tape"
+            },
+            {
+                "text": "Choose the broken step and flaw, or say the proof holds if every step is justified. Finish the task and read the explanation. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".om-verdict"
+            }
+        ],
         name: 'The Oracle Machine',
         colour: 'reason',
         family: 'Proof',

@@ -4,20 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Puzzle bench</title>
-<link rel="stylesheet" href="../css/game.css">
-<link rel="stylesheet" href="../css/puzzles/liars-gate.css">
-<link rel="stylesheet" href="../css/puzzles/rule-hunter.css">
-<link rel="stylesheet" href="../css/puzzles/venn.css">
-<link rel="stylesheet" href="../css/puzzles/line-drawer.css">
-<link rel="stylesheet" href="../css/puzzles/switchboard.css">
-<link rel="stylesheet" href="../css/puzzles/village.css">
-<link rel="stylesheet" href="../css/puzzles/tower.css">
-<link rel="stylesheet" href="../css/puzzles/chart-fixer.css">
-<link rel="stylesheet" href="../css/puzzles/tribunal.css">
-<link rel="stylesheet" href="../css/puzzles/prediction.css">
-<link rel="stylesheet" href="../css/puzzles/oracle.css">
-<link rel="stylesheet" href="../css/puzzles/sorting.css">
-<link rel="stylesheet" href="../css/puzzles/three-act.css">
+<base href="../">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/puzzles/liars-gate.css">
+<link rel="stylesheet" href="css/puzzles/rule-hunter.css">
+<link rel="stylesheet" href="css/puzzles/venn.css">
+<link rel="stylesheet" href="css/puzzles/line-drawer.css">
+<link rel="stylesheet" href="css/puzzles/switchboard.css">
+<link rel="stylesheet" href="css/puzzles/village.css">
+<link rel="stylesheet" href="css/puzzles/tower.css">
+<link rel="stylesheet" href="css/puzzles/chart-fixer.css">
+<link rel="stylesheet" href="css/puzzles/tribunal.css">
+<link rel="stylesheet" href="css/puzzles/prediction.css">
+<link rel="stylesheet" href="css/puzzles/oracle.css">
+<link rel="stylesheet" href="css/puzzles/sorting.css">
+<link rel="stylesheet" href="css/puzzles/three-act.css">
 <style>
     body { overflow: auto; }
     .bench { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 100vh; }
@@ -39,31 +41,42 @@
         <label>seed <input id="seed" size="10"></label>
         <button class="btn small" id="go">Generate</button>
         <button class="btn small" id="hint">Hint</button>
+        <button class="btn small" id="help">How to play</button>
         <button class="btn small" id="why">Why?</button>
         <button class="btn small" id="solve">Show solution (console)</button>
     </header>
     <div id="stage"></div>
     <div id="log" class="panel"></div>
 </div>
-<script src="../js/core/rift.js"></script>
-<script src="../js/core/assets.js"></script>
-<script src="../js/core/audio.js"></script>
-<script src="../data/creatures.js"></script>
-<script src="../js/puzzles/registry.js"></script>
-<script src="../js/puzzles/liars-gate.js"></script>
-<script src="../js/puzzles/rule-hunter.js"></script>
-<script src="../js/puzzles/venn.js"></script>
-<script src="../js/puzzles/line-drawer.js"></script>
-<script src="../js/puzzles/switchboard.js"></script>
-<script src="../js/puzzles/village.js"></script>
-<script src="../js/puzzles/tower.js"></script>
-<script src="../js/puzzles/chart-fixer.js"></script>
-<script src="../data/cases.js"></script>
-<script src="../js/puzzles/tribunal.js"></script>
-<script src="../js/puzzles/prediction.js"></script>
-<script src="../js/puzzles/oracle.js"></script>
-<script src="../js/puzzles/sorting.js"></script>
-<script src="../js/puzzles/three-act.js"></script>
+<div id="overlay"></div>
+<script src="js/core/rift.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/assets.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="data/creatures.js"></script>
+<script src="data/assets.js"></script>
+<script src="data/script/lesson1.js"></script>
+<script src="data/script/lesson2.js"></script>
+<script src="data/script/lesson3.js"></script>
+<script src="data/script/lesson4.js"></script>
+<script src="js/ui/ui.js"></script>
+<script src="js/ui/tutorial.js"></script>
+<script src="js/puzzles/registry.js"></script>
+<script src="js/puzzles/liars-gate.js"></script>
+<script src="js/puzzles/rule-hunter.js"></script>
+<script src="js/puzzles/venn.js"></script>
+<script src="js/puzzles/line-drawer.js"></script>
+<script src="js/puzzles/witness.js"></script>
+<script src="js/puzzles/switchboard.js"></script>
+<script src="js/puzzles/village.js"></script>
+<script src="js/puzzles/tower.js"></script>
+<script src="js/puzzles/chart-fixer.js"></script>
+<script src="data/cases.js"></script>
+<script src="js/puzzles/tribunal.js"></script>
+<script src="js/puzzles/prediction.js"></script>
+<script src="js/puzzles/oracle.js"></script>
+<script src="js/puzzles/sorting.js"></script>
+<script src="js/puzzles/three-act.js"></script>
 <script>
 (function () {
     const R = window.Rift;
@@ -74,9 +87,11 @@
     if (q.get('id')) pick.value = q.get('id');
     document.getElementById('diff').value = q.get('d') || '1';
     document.getElementById('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);
-    let handle = null, data = null, def = null, hintIx = 0;
+    let handle = null, data = null, def = null, hintIx = 0, tour = null, help = null;
 
     function run() {
+        if (tour) tour.close();
+        if (help) help.close();
         def = R.Puzzles.get(pick.value);
         const seed = document.getElementById('seed').value;
         const d = +document.getElementById('diff').value;
@@ -97,6 +112,16 @@
         log('— ' + def.id + ' d' + d + ' seed ' + seed);
     }
     document.getElementById('go').onclick = run;
+    document.getElementById('help').onclick = () => {
+        if (tour) tour.close();
+        if (help) help.close();
+        const resume = () => { if (handle && handle.resume) handle.resume(); };
+        if (handle && handle.pause) handle.pause();
+        help = R.Tutorial.rules(def, 'granny', () => {
+            if (handle && handle.pause) handle.pause();
+            tour = R.Tutorial.play(document.getElementById('stage'), def.tutorial, 'granny', { onClose: resume });
+        }, resume);
+    };
     document.getElementById('hint').onclick = () => { const h = def.hints(data); log('hint: ' + (h[hintIx++] || '(no more)')); };
     document.getElementById('why').onclick = () => log('why: ' + JSON.stringify(def.why ? def.why(data) : null));
     document.getElementById('solve').onclick = () => console.log(def.solve ? def.solve(data) : 'no solve()');

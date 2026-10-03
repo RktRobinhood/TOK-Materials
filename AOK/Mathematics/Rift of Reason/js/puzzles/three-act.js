@@ -1145,6 +1145,35 @@
 
     const def = {
         id: 'three-act',
+        rules: [
+            "Act 1: watch, ask a question, then make an estimate.",
+            "Act 2: ask for useful information. Decide which facts your model needs.",
+            "Use the calculator, table or graph to build a model. Enter your result as the task asks.",
+            "Act 3: compare with what happened and explain any gap. The starting guess does not have to be right.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+                "highlight": ".ta-acts"
+            },
+            {
+                "text": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+                "highlight": ".ta-stage"
+            },
+            {
+                "text": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+                "highlight": ".ta-side"
+            },
+            {
+                "text": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+                "highlight": ".ta-side"
+            },
+            {
+                "text": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".ta-acts"
+            }
+        ],
         name: 'The Three Acts',
         colour: 'imagination',
         family: 'Maths as thinking',

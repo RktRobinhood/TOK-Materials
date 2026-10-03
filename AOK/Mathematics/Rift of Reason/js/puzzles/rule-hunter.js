@@ -947,6 +947,39 @@
 
     const def = {
         id: 'rule-hunter',
+        rules: [
+            "The keeper has a secret number rule. Test triples to learn it.",
+            "Click three number tiles, then Test it. A yes only means that triple fits.",
+            "Look for a test that could break your guess. Compare more than one rule.",
+            "Then Name the rule. In Pattern Breaker mode, count the objects and choose the next value and the reason.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Find the secret rule, or check whether a pattern really keeps going.",
+                "highlight": ".rh-example, .rh-seq"
+            },
+            {
+                "text": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+                "highlight": ".rh-build, .rh-seq"
+            },
+            {
+                "text": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+                "highlight": ".rh-build, .rh-seq"
+            },
+            {
+                "text": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+                "highlight": ".rh-name-btn, .rh-planks"
+            },
+            {
+                "text": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+                "highlight": ".rh-seq, .rh-log"
+            },
+            {
+                "text": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".rh, .rh-pmain"
+            }
+        ],
         name: 'Rule Hunter',
         colour: 'memory',
         family: 'Pattern breakers',

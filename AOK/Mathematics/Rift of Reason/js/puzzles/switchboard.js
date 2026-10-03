@@ -1154,6 +1154,39 @@
 
     const def = {
         id: 'switchboard',
+        rules: [
+            "Switches are inputs: ON = true; OFF = false. Watch the output bulbs.",
+            "AND is true only if both inputs are true. OR needs at least one. NOT turns true into false and false into true.",
+            "Light mode: reach the requested output with as few ON switches as possible.",
+            "Wire mode: connect the sockets to match the table. Hidden mode: infer the hidden switch or gate from the reports.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+                "highlight": ".sb-top"
+            },
+            {
+                "text": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+                "highlight": ".sb-board"
+            },
+            {
+                "text": "Light mode: make the requested bulbs light with the fewest ON switches. Try a switch and watch its path through the gates.",
+                "highlight": ".sb-board"
+            },
+            {
+                "text": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+                "highlight": ".sb-side"
+            },
+            {
+                "text": "Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.",
+                "highlight": ".sb-side"
+            },
+            {
+                "text": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".sb-controls"
+            }
+        ],
         name: 'The Switchboard',
         colour: 'emotion',
         family: 'Hidden premise',

@@ -953,6 +953,35 @@
 
     Rift.Puzzles.register({
         id: 'tower',
+        rules: [
+            "Keep your cover story consistent with the facts on the right.",
+            "Each answer adds a block. A cemented block already follows from your story.",
+            "A loose block is an extra choice that your cover story did not force. It must still fit the facts and your other answers.",
+            "A contradiction makes the tower fall. Answer every question without contradicting a forced fact to win.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Read your cover story and the posted facts. Your answers must fit them all.",
+                "highlight": ".tw-right"
+            },
+            {
+                "text": "Choose an answer to the current question. Both choices may look safe, but later facts can force one.",
+                "highlight": ".tw-answers"
+            },
+            {
+                "text": "Cemented means already forced by your story. Loose means still open; it is not automatically wrong.",
+                "highlight": ".tw-tower"
+            },
+            {
+                "text": "Example: all runners wear boots; your story says you are a runner. \"I wear no boots\" would contradict that story.",
+                "highlight": ".tw-right"
+            },
+            {
+                "text": "Follow what the blocks force, rather than choose whatever sounds nice. Finish every question without a collapse. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".tw-left"
+            }
+        ],
         name: 'The Tower',
         colour: 'emotion',
         family: 'Hidden premise',

@@ -1060,6 +1060,35 @@
 
     const def = {
         id: 'chart-fixer',
+        rules: [
+            "Inspect the graph and its headline, then make the view fair.",
+            "Drag the axis handles and visible-window handles; the arrow keys also move focused handles.",
+            "Read the switches. Some reveal a trick; others were honest already.",
+            "Fix the distortions, choose what the data actually says, then submit. Changing the view does not change the data.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "We want a fair chart. Compare the headline with the actual values.",
+                "highlight": ".cf-titlebar"
+            },
+            {
+                "text": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+                "highlight": ".cf-ruler"
+            },
+            {
+                "text": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+                "highlight": ".cf-window"
+            },
+            {
+                "text": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+                "highlight": ".cf-side"
+            },
+            {
+                "text": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".cf-q"
+            }
+        ],
         name: 'Chart Fixer',
         colour: 'perception',
         family: 'Seeing vs knowing',

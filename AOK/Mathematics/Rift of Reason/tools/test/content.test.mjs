@@ -65,6 +65,18 @@ test('every puzzle a node uses is registered (chapters that are open)', () => {
     assert.deepEqual([...used].filter(id => !Rift.Puzzles.get(id)), []);
 });
 
+test('all fourteen puzzle types have short plain-text rules and worked tutorial steps', () => {
+    assert.equal(Rift.Puzzles.all().length, 14);
+    for (const p of Rift.Puzzles.all()) {
+        assert.ok(p.rules?.length > 0 && p.rules.length <= 5, p.id + ': rules card');
+        assert.ok(p.tutorial?.length >= 3 && p.tutorial.length <= 6, p.id + ': tutorial length');
+        for (const text of p.rules) assert.ok(typeof text === 'string' && !/<[^>]+>/.test(text), p.id + ': plain rules');
+        assert.ok(p.tutorial.some(step => /example/i.test(step.text)), p.id + ': worked example');
+        assert.ok(p.tutorial.some(step => /heart cost/i.test(step.text)), p.id + ': hint cost');
+        assert.ok(p.tutorial.every(step => step.text && step.highlight), p.id + ': highlight real controls');
+    }
+});
+
 test('every node is on a known painted map', () => {
     for (const [id, n] of Object.entries(nodes)) assert.ok(Rift.data.maps[n.map || 'main'], id);
 });

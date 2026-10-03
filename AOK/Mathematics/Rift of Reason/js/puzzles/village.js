@@ -965,6 +965,35 @@
 
     Rift.Puzzles.register({
         id: 'village',
+        rules: [
+            "Honest villagers tell true statements. Imps tell false statements.",
+            "Read every bubble. Put accusation tokens on the imps; leave honest villagers unmarked.",
+            "The truth table shows possible worlds. A row is one possible set of identities.",
+            "In each row, check the statements: honest + false, or imp + true, is a clash. Cross out that world.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+                "highlight": ".vg-rules"
+            },
+            {
+                "text": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+                "highlight": ".vg-square"
+            },
+            {
+                "text": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+                "highlight": ".vg-tt-toggle"
+            },
+            {
+                "text": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+                "highlight": ".vg-square"
+            },
+            {
+                "text": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".vg-bottom"
+            }
+        ],
         name: 'The Village',
         colour: 'reason',
         family: 'Deduction',

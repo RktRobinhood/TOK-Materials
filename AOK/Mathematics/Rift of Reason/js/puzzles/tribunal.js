@@ -803,6 +803,35 @@
 
     Rift.Puzzles.register({
         id: 'tribunal',
+        rules: [
+            "Read the claim and testimony. Use the arrows to move between statements.",
+            "Press asks for more detail. The Court record contains evidence and notes.",
+            "Present evidence only against the statement it contradicts.",
+            "After the objection, name the argument's flaw. Repair the proof if asked, then Close the case.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+                "highlight": ".tb-top"
+            },
+            {
+                "text": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+                "highlight": ".tb-box"
+            },
+            {
+                "text": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+                "highlight": ".tb-record-btn"
+            },
+            {
+                "text": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+                "highlight": ".tb-box"
+            },
+            {
+                "text": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".tb-box"
+            }
+        ],
         name: 'The Tribunal',
         colour: 'language',
         family: 'Breaking down arguments',

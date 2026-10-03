@@ -726,6 +726,35 @@
 
     const def = {
         id: 'prediction',
+        rules: [
+            "The machine locks a guess before you choose. Read the current target and score.",
+            "Choose a symbol or colour using the move buttons.",
+            "After the warm-up, its brain opens. Read the counts, then choose Now beat it to try with the table visible.",
+            "Reach the target by making guesses fail, then explain the pattern. A confident guess can still be wrong.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+                "highlight": ".pm-top"
+            },
+            {
+                "text": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+                "highlight": ".pm-options"
+            },
+            {
+                "text": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+                "highlight": ".pm-brain"
+            },
+            {
+                "text": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+                "highlight": ".pm-options, .pm-brain"
+            },
+            {
+                "text": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".pm-score"
+            }
+        ],
         name: 'The Prediction Machine',
         colour: 'memory',
         family: 'Pattern breakers',

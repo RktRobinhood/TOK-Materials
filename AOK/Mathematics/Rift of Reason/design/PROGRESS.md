@@ -15,10 +15,14 @@ Updated 2026-10-03. Work directly on `main`, as requested by the teacher. Limit 
 
 All 267 tests pass. Browser checks confirm first-use offer, optional tour, replayable rules and unchanged hearts. Independent standards/spec reviews found cleanup, timer, speaker and story-continuity problems; these are fixed. Timed Witness play pauses during help, repeat visits use visit history, and original first-visit story beats are preserved. Tutorials for individual puzzle types and round-two ratings are still #38/#35 work.
 
+## Tutorials (#38)
+
+All fourteen puzzle types now have five-line rules cards and five/six-step tours, with worked examples, controls, win conditions and the visible hint cost. Corrected instructions against actual UI controls. Browser checked 42 tours (14 types × 3 difficulties); all 268 tests pass. See `design/reviews/tutorial-round-2.md` for the focused source-based clarity assessment and explicit limits. Independent final review rechecks stopped on quota errors; their prior findings were fixed. Full station play remains #35.
+
 ## Next work
 
-1. Finish and commit baseline review reports #35/#36, clearly distinguishing browser-played stations from source-inspected stations. Exhaustive play and round two remain open until actually done.
-2. Complete #37, then write tutorials/rules for all 14 puzzle types (#38).
+1. Baseline reports #35/#36 are committed. #36 closed; exhaustive station play and full round two remain #35.
+2. #37 framework and #38 tutorials are implemented; #37 awaits the full station review.
 3. #39: free-check counter, heart costs, Witness reasoning feedback, stars and durable stage debriefs.
 4. #40: roll creature loot after success, sometimes none; reward clean performance and preserve lure/rumour effects.
 5. #41: statistical odds checks and two short catch games.

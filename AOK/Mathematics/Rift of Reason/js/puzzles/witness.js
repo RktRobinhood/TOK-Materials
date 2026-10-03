@@ -196,6 +196,35 @@
 
     Rift.Puzzles.register({
         id: 'witness',
+        rules: [
+            "Read the written scene. Use only what it tells you.",
+            "True: the scene supports the claim. False: it contradicts the claim.",
+            "Can't tell: the scene leaves it open. It does not mean the claim is false.",
+            "Choose one answer for every claim, then Give my testimony. At harder levels the scene fades; help pauses its clock.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+                "highlight": ".wit-scene"
+            },
+            {
+                "text": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+                "highlight": ".wit-claims"
+            },
+            {
+                "text": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+                "highlight": ".wit-btns"
+            },
+            {
+                "text": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+                "highlight": ".wit-claims"
+            },
+            {
+                "text": "Choose every answer, then Give my testimony. Read feedback before changing a claim. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".wit .primary"
+            }
+        ],
         name: "Madame Mirage's Witness",
         colour: 'perception',
         family: 'Seeing vs knowing',

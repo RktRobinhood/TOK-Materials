@@ -596,6 +596,35 @@
 
     Rift.Puzzles.register({
         id: 'liars-gate',
+        rules: [
+            "Honest guards always tell the truth; liars always lie.",
+            "Read the rules above the guards. Mark each guard Truth or Lie.",
+            "Test your marks against every statement, including statements about other guards.",
+            "Choose the safe door, then Open the gate. All marks and the door must fit.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "We need a safe route. These are the rules of this world, not promises about real people.",
+                "highlight": ".lg-rules"
+            },
+            {
+                "text": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+                "highlight": ".lg-marks"
+            },
+            {
+                "text": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+                "highlight": ".lg-guards"
+            },
+            {
+                "text": "Now check the other statements. A possible answer must make every honest statement true and every lie false.",
+                "highlight": ".lg-doors"
+            },
+            {
+                "text": "Choose a door and Open the gate when all your marks fit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".lg-bottom"
+            }
+        ],
         name: "Liar's Gate",
         colour: 'reason',
         family: 'Deduction',

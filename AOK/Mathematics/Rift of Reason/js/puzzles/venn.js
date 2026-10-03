@@ -1377,6 +1377,39 @@
 
     Rift.Puzzles.register({
         id: 'venn',
+        rules: [
+            "The scrolls give facts to assume for this argument.",
+            "Shade means empty. An x means at least one thing exists there.",
+            "Use Shade to click regions; drag an x from the tray. An x on a border leaves its side unknown.",
+            "Valid means the conclusion must follow. Judge real-world truth separately when asked. The diagram is a thinking tool; the verdict decides the win.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+                "highlight": ".vn-scrolls"
+            },
+            {
+                "text": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+                "highlight": ".vn-tools"
+            },
+            {
+                "text": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+                "highlight": ".vn-tools"
+            },
+            {
+                "text": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+                "highlight": ".vn-svg-wrap"
+            },
+            {
+                "text": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+                "highlight": ".vn-choices"
+            },
+            {
+                "text": "Judge real-world truth separately if asked, then Seal the verdict. The diagram helps you think; read its feedback too. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".vn-steps"
+            }
+        ],
         name: "Carroll's Venn Board",
         colour: 'language',
         family: 'Definitions and ambiguity',

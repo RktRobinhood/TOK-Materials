@@ -855,6 +855,35 @@
 
     const def = {
         id: 'sorting',
+        rules: [
+            "The machine makes decisions about people. Audit its results before judging it.",
+            "Compare the rule with the people's real needs and the allowed budget.",
+            "The confusion matrix counts right decisions and two kinds of mistake: help refused and help given by mistake.",
+            "Name the flaw, adjust the rule, and check the result and cost. A high accuracy score does not settle what is fair.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+                "highlight": ".sm-steps"
+            },
+            {
+                "text": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+                "highlight": ".sm-cards"
+            },
+            {
+                "text": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+                "highlight": ".sm-matrix"
+            },
+            {
+                "text": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+                "highlight": ".sm-rule"
+            },
+            {
+                "text": "Check who your fix changes, its cost, and the mistakes left. Choose the value your fix puts first if asked, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".sm-action"
+            }
+        ],
         name: 'The Sorting Machine',
         colour: 'emotion',
         family: 'Ethics of maths',

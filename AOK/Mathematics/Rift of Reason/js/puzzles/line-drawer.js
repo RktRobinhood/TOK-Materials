@@ -989,6 +989,39 @@
 
     const def = {
         id: 'line-drawer',
+        rules: [
+            "Read the slate: the drawing rule changes between tasks.",
+            "Dots: draw connected straight lines through every dot, within the stated line limit. Lines may go outside the dots.",
+            "One stroke: trace every edge exactly once without lifting. An odd vertex has an odd number of edges meeting there.",
+            "Impossible route: mark the odd vertices and submit the impossibility claim. A connected graph needs zero or two odd vertices for one stroke.",
+            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+        ],
+        tutorial: [
+            {
+                "text": "Check the slate first. We may need a drawing, a one-stroke route, or a proof that no route works.",
+                "highlight": ".ld-top"
+            },
+            {
+                "text": "Dots mode: click the turning points of connected straight lines. Go outside the dots if it helps; stay within the line limit.",
+                "highlight": ".ld-board"
+            },
+            {
+                "text": "One-stroke mode: click connected points along edges. Use every edge once. A point with 1, 3 or 5 edges is called odd.",
+                "highlight": ".ld-board"
+            },
+            {
+                "text": "Example: a T shape has four odd points. A single stroke can have only two ends, so that shape cannot be drawn in one stroke.",
+                "highlight": ".ld-controls"
+            },
+            {
+                "text": "For an impossible graph, choose This is impossible!, mark the odd points, then Submit proof. A complete drawing is checked automatically. Undo or Clear fixes a move.",
+                "highlight": ".ld-controls"
+            },
+            {
+                "text": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "highlight": ".ld-top"
+            }
+        ],
         name: 'Line Drawer',
         colour: 'imagination',
         family: 'Lateral thinking',
