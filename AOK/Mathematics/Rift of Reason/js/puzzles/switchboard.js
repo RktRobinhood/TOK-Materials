@@ -397,7 +397,7 @@
         if (wrong) {
             return {
                 solved: false, partial: (rows - wrong) / rows,
-                feedback: 'Your bulb does the wrong thing in ' + wrong + ' of the ' + rows + ' rows of the table.',
+                feedback: 'Your bulb differs in ' + wrong + ' rows. In row ' + (t.table.findIndex((v, r) => v !== data.target[r]) + 1) + ', follow each input through the gates and compare the target bulb.',
             };
         }
         return { solved: true, partial: 1, feedback: 'All ' + rows + ' rows match. Every possible case checked: that is a proof.' };

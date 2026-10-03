@@ -26,7 +26,7 @@
         frogling: {
             name: 'Frogling', colour: 'memory',
             looks: { boy: 'yellow raincoat', girl: 'lily-pad hat and red raincoat' },
-            perk: { id: 'leap', name: 'Big Leap', text: 'Walking between nodes is free of random events, and your first wrong answer each puzzle costs no health.' },
+            perk: { id: 'leap', name: 'Big Leap', text: 'One extra free wrong check in every puzzle stage.' },
         },
         raven: {
             name: 'Raven chick', colour: 'language',

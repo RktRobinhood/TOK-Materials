@@ -112,12 +112,13 @@
         const wrong = data.claims.filter(c => a[c.id] !== c.a);
         const right = data.claims.length - wrong.length;
         if (!wrong.length) return { solved: true, feedback: 'Every claim judged on the evidence alone. Sharp eyes.' };
-        const w = wrong[0];
         const missing = data.claims.filter(c => !a[c.id]).length;
         return {
             solved: false,
             partial: right / data.claims.length,
-            feedback: missing ? 'Judge every claim first (' + missing + ' left).' : right + ' of ' + data.claims.length + ' right. Look again at: "' + w.t + '"',
+            wrongIds: wrong.map(c => c.id),
+            reasons: wrong.map(c => ({ id: c.id, text: c.why })),
+            feedback: missing ? 'Judge every claim first (' + missing + ' left). Use only what the scene establishes.' : right + ' of ' + data.claims.length + ' right. For each marked claim, find supporting evidence, a contradiction, or a gap.',
         };
     }
 
@@ -152,7 +153,22 @@
         const answers = {};
         const scene = el('div.wit-scene.parchment', null, data.lines.map(l => el('p', { text: l })));
         const claims = el('div.wit-claims');
-        const submit = el('button.btn.primary', { text: 'Give my testimony', onclick: () => api.submit(Object.assign({}, answers)) });
+        let wrongChecks = 0;
+        const rows = {};
+        const submit = el('button.btn.primary', { text: 'Give my testimony', onclick() {
+            const result = api.submit(Object.assign({}, answers));
+            if (!result || result.solved) return;
+            wrongChecks += 1;
+            const wrong = result.wrongIds || [];
+            Object.entries(rows).forEach(([id, row]) => {
+                row.classList.toggle('wit-wrong', wrong.includes(id));
+                row.querySelector('.wit-reason').textContent = wrong.includes(id) ? 'Check this claim against the scene.' : '';
+            });
+            if (wrongChecks >= 2 && result.reasons && result.reasons.length) {
+                const reason = result.reasons[0];
+                rows[reason.id].querySelector('.wit-reason').textContent = 'Why: ' + reason.text;
+            }
+        } });
         data.claims.forEach(c => {
             const row = el('div.wit-claim.panel', null, [el('div.wit-text', { text: c.t })]);
             const btns = el('div.row.wit-btns');
@@ -162,12 +178,15 @@
                     dataset: { k },
                     onclick() {
                         answers[c.id] = k;
+                        row.classList.remove('wit-wrong');
+                        row.querySelector('.wit-reason').textContent = '';
                         btns.querySelectorAll('button').forEach(b => b.classList.toggle('picked', b.dataset.k === k));
                         api.sfx('place');
                     },
                 }));
             });
-            row.append(btns);
+            row.append(btns, el('div.wit-reason.small', { 'aria-live': 'polite' }));
+            rows[c.id] = row;
             claims.append(row);
         });
         container.append(el('div.wit', null, [scene, el('div.stack', null, [claims, submit])]));

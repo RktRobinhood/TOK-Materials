@@ -57,7 +57,7 @@
 
 /* ---- encounter ---- */
 .enc-layout { position: absolute; inset: 64px 12px 12px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 12px; }
-.enc-side { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.enc-side { display: flex; flex-direction: column; gap: 10px; min-height: 0; overflow: auto; }
 .enc-title { padding: 8px 12px; display: flex; flex-direction: column; }
 .enc-obstacle { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .enc-creature { width: 220px; height: 240px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7)); }
@@ -170,3 +170,8 @@
 .badge.got { opacity: 1; filter: none; }
 .badge-img { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 4px; display: block; }
 .badge-fallback { font-size: 44px; line-height: 72px; }
+
+.wit-claim.wit-wrong { border-color: var(--red, #ee7777); }
+.wit-reason { color: var(--gold); }
+.enc-stars { color: var(--gold); font-size: 1.25em; }
+.enc-attempt-rule { margin-top: 8px; }

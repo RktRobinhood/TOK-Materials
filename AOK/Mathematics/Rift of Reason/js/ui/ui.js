@@ -60,7 +60,7 @@
     function hud(opts) {
         const s = Rift.State.get();
         const o = opts || {};
-        const heartsNode = el('span.hearts', { title: 'Health: hints cost health' });
+        const heartsNode = el('span.hearts', { title: 'Hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map.' });
         const scarsNode = el('span.row', { style: { gap: '4px' } });
         const charmsNode = el('span.chip', { title: 'Catch Charms' });
         const refresh = () => {
@@ -90,6 +90,7 @@
                 Rift.Assets.img(Rift.avatarArt(s.avatar, 'neutral'), { className: 'hud-face', label: s.avatar.nickname }),
                 el('strong', { text: s.avatar.nickname }),
                 heartsNode,
+                o.status || null,
                 charmsNode,
             ]),
             scarsNode,

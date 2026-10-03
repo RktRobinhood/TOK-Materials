@@ -193,7 +193,7 @@
             ],
             contradictions: [
                 { statements: ['s2'], evidence: ['photo'],
-                    explain: 'There are two identical black cats. Nobody saw the SAME cat twice: that was assumed, never checked.',
+                    explain: 'There are two identical black cats. The witness did not establish it was the SAME cat twice: that was assumed, never checked.',
                     reaction: 'Ping… and Pong? There are TWO of them? …Whoa.' },
                 { statements: ['s3'], evidence: ['route'],
                     explain: 'The path is 40 metres: a cat runs it in about 5 seconds. “It can’t get round” was assumed, never checked.',
@@ -205,7 +205,7 @@
             ],
             hint: 'The argument needs something the witness never checked. Press the statements and look for what he just assumed.',
             why: {
-                right: 'It shows there are two identical cats, so the unstated assumption “it was the same cat” is false.',
+                right: 'It shows there are two identical cats, so the unstated assumption “it was the same cat” is unsupported.',
                 wrong: ['It shows that cats can’t walk in straight lines.', 'It proves we are definitely not in a simulation.', 'Photos are always more reliable than eyes.'],
             },
             lesson: 'Every argument rests on premises, and the dangerous ones are unstated. Spell out the hidden premise (“it was the same cat”) and test it. Breaking the argument doesn’t prove the opposite: it just leaves the claim unsupported.',

@@ -782,7 +782,7 @@
                 return { solved: false, partial: 0, feedback: 'One step does break. Test the steps with real numbers: plug the same value into both sides.' };
             }
             if (stepIx < data.flawStep) {
-                return { solved: false, partial: 0, feedback: 'Step ' + (stepIx + 1) + ' holds: test it with a few numbers and both sides agree. The flaw is further along the tape.' };
+                return { solved: false, partial: 0, feedback: 'Step ' + (stepIx + 1) + ' holds under the stated assumptions. Check the algebra, not just a few examples. The flaw is further along the tape.' };
             }
             if (stepIx > data.flawStep) {
                 return { solved: false, partial: 0.2, feedback: 'Step ' + (stepIx + 1) + ' is wrong, but only because of an earlier step. Find the FIRST step that breaks.' };
@@ -794,7 +794,7 @@
             return { solved: true, partial: 1, feedback: 'Found it: step ' + (data.flawStep + 1) + '. ' + FLAWS[data.flaw].explain };
         }
         if (stepIx !== null) {
-            return { solved: false, partial: 0, feedback: 'Step ' + (stepIx + 1) + ' actually holds. Test it with a few numbers: both sides agree every time.' };
+            return { solved: false, partial: 0, feedback: 'Step ' + (stepIx + 1) + ' actually holds under the stated assumptions. A few matching examples alone would not prove that.' };
         }
         if (answer.trust !== data.trust.correct) {
             return { solved: false, partial: 0.6, feedback: 'Yes, every step holds! Now think again: what would it take to trust the machine?' };
@@ -824,7 +824,7 @@
         }
         return [
             'Test every step with two or three different numbers. A flaw only needs one counter-example.',
-            'If no number breaks any step, stamp "every step holds".',
+            'Tests can find a flaw. To stamp "every step holds", justify every step for all allowed numbers.',
             'Every step holds. Now: does one good proof mean you can stop checking the next one?',
         ];
     }

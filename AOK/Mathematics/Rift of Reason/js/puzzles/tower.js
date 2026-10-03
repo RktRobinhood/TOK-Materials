@@ -62,11 +62,11 @@
         { id: 'thirteen', yes: 'I heard the clock strike thirteen', no: 'I did not hear the clock strike thirteen', ys: 'Heard it strike 13', ns: 'Did not hear 13', q: ['The clock struck thirteen this week. Did you hear it?'] },
         { id: 'watch', yes: 'I carry a pocket watch', no: 'I do not carry a pocket watch', ys: 'Pocket watch', ns: 'No pocket watch', q: ['Do you carry a pocket watch?', 'Got the time? Do you carry a pocket watch?'] },
         { id: 'pie', yes: 'I have eaten the famous goose pie', no: 'I have never eaten the goose pie', ys: 'Ate goose pie', ns: 'Never ate goose pie', q: ['Have you tasted our famous goose pie?'] },
-        { id: 'postmistress', yes: 'I know the Postmistress', no: 'I have never met the Postmistress', ys: 'Knows the Postmistress', ns: 'Never met the Postmistress', q: ['Do you know our Postmistress?'] },
+        { id: 'postmistress', yes: 'I know the Postmistress', no: 'I do not know the Postmistress', ys: 'Knows the Postmistress', ns: 'Does not know the Postmistress', q: ['Do you know our Postmistress?'] },
         { id: 'mayor', yes: 'I have met the Mayor', no: 'I have never met the Mayor', ys: 'Met the Mayor', ns: 'Never met the Mayor', q: ['Have you met our Mayor?'] },
         { id: 'chimney', yes: 'I have climbed up a chimney', no: 'I have never climbed a chimney', ys: 'Climbed a chimney', ns: 'Never in a chimney', q: ['Have you ever climbed up a chimney?'] },
         { id: 'ladder', yes: 'I own a ladder', no: 'I do not own a ladder', ys: 'Owns a ladder', ns: 'No ladder', q: ['Do you own a ladder?'] },
-        { id: 'dawn', yes: 'I get up before dawn', no: 'I sleep until after sunrise', ys: 'Up before dawn', ns: 'Sleeps past sunrise', q: ['Do you get up before dawn?', 'Early riser, are you? Up before dawn?'] },
+        { id: 'dawn', yes: 'I get up before dawn', no: 'I do not get up before dawn', ys: 'Up before dawn', ns: 'Not up before dawn', q: ['Do you get up before dawn?', 'Early riser, are you? Up before dawn?'] },
     ];
 
     const GROUP_INFO = {
@@ -109,7 +109,7 @@
 
         c => ({ id: 'tower-ladder', text: 'The clock tower has no stairs: you need your own ladder to get in.', imps: [imp([['tower', true]], ['ladder', true])] }),
         c => ({ id: 'mayor-parade', text: 'The Mayor never steps off his parade float, so anyone who has met him saw the parade.', imps: [imp([['mayor', true]], ['parade', true])] }),
-        c => ({ id: 'postmistress-pie', text: 'The Postmistress is terrified of geese, and her friends never eat goose pie.', imps: [imp([['postmistress', true]], ['pie', false])] }),
+        c => ({ id: 'postmistress-pie', text: 'Everyone who knows the Postmistress has never eaten goose pie.', imps: [imp([['postmistress', true]], ['pie', false])] }),
         c => ({ id: 'chimney-watch', text: 'Soot ruins pocket watches: nobody who has climbed a chimney still carries one.', imps: [imp([['chimney', true]], ['watch', false])] }),
         c => ({ id: 'tower-watch', text: 'The Mayor gives a pocket watch to everyone who climbs the clock tower.', imps: [imp([['tower', true]], ['watch', true])] }),
         c => ({ id: 'watch-mayor', text: "Pocket watches are only sold in the Mayor's own shop, and he shakes every customer's hand.", imps: [imp([['watch', true]], ['mayor', true])] }),
@@ -957,7 +957,7 @@
             "Keep your cover story consistent with the facts on the right.",
             "Each answer adds a block. A cemented block already follows from your story.",
             "A loose block is an extra choice that your cover story did not force. It must still fit the facts and your other answers.",
-            "A contradiction makes the tower fall. Answer every question without contradicting a forced fact to win.",
+            "A contradiction pulls supporting blocks. The tower falls if a cracked base breaks again or rubble reaches the limit. Finish with the tower standing.",
             "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
         ],
         tutorial: [

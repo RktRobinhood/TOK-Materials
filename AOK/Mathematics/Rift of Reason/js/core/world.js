@@ -121,6 +121,20 @@
         return { p, caught: rng.next() < p };
     }
 
+    // ---- attempts: the same rule for every puzzle stage ------------------------
+    function attempts(difficulty, avatar) {
+        return { free: (difficulty === 1 ? 3 : 2) + (avatar && avatar.type === 'frogling' ? 1 : 0), wrong: 0 };
+    }
+    function recordWrong(counter) {
+        counter.wrong += 1;
+        return counter.wrong > counter.free ? 1 : 0;
+    }
+    function hintCost(state) { return state.scars.includes('shaky-hand') ? 2 : 1; }
+    function solveStars(hints, wrongs) {
+        if (!hints && !wrongs) return 3;
+        return hints + wrongs <= 2 ? 2 : 1;
+    }
+
     // ---- rewards -------------------------------------------------------------------
 
     function rewards(state, n, rng, opts) {
@@ -143,7 +157,7 @@
             give('trickster-coin');
             give('heartstone');
         }
-        if (o.noHints && out.xp) out.xp += 5;
+        if (out.xp) out.xp += o.stars ? (o.stars - 1) * 5 : (o.noHints ? 5 : 0);
         if (o.firstTime && out.xp) give('charm');
         if (n.type === 'boss' && state.avatar && state.avatar.type === 'raven') give(rng.pick(['ward', 'tonic', 'lure']));
         return out;
@@ -162,7 +176,7 @@
     Rift.data.accolades = {
         'clear-thinker': { name: 'Clear Thinker', text: 'Solved puzzles without a single hint.' },
         'falsifier': { name: 'Falsifier', text: 'Tried to break the rule, not just confirm it.' },
-        'truth-tabler': { name: 'Truth-Tabler', text: 'Found the imps by checking every possible world.' },
+        'truth-tabler': { name: 'Truth-Tabler', text: 'Found identities that fit every statement in the village.' },
         'unmasker': { name: 'Unmasker', text: 'Unmasked the Mayor of Boolesbury.' },
         'cross-examiner': { name: 'Cross-Examiner', text: 'Broke down an argument at the Tribunal.' },
         'chart-honest': { name: 'Chart Honest', text: 'Made a misleading chart tell the truth.' },
@@ -178,7 +192,7 @@
     }
 
     Rift.World = {
-        award,
+        award, attempts, recordWrong, hintCost, solveStars,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter,

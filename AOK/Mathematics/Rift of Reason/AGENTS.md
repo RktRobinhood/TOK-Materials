@@ -44,7 +44,7 @@ A map node (`data/map.js`) has a `type` (story, puzzle, miniboss, boss, rest, ru
 3. mounts the puzzle with an `api` (`submit`, `sfx`, `say`, `rng`, `difficulty`, `el`);
 4. on success: plays `<script>.win`, gives rewards and accolades, then offers the catch.
 
-Hearts: a hint costs 1 (2 with the Shaky Hand scar). Wrong answers only cost a heart on mini-bosses and bosses. At 0 hearts the player is knocked out and gets a scar.
+Hearts: a hint costs 1 (2 with the Shaky Hand scar). Every stage has 3 free wrong checks at difficulty 1 and 2 at difficulty 2–3 (Frogling adds one). Later wrong checks cost 1 heart everywhere. Correct checks cost nothing. Boss Why answers/skips cost 1 heart if wrong. At 0 hearts the player is knocked out and gets a scar.
 
 ## Working with the teacher
 
