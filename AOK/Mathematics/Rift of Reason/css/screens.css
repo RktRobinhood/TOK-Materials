@@ -175,3 +175,18 @@
 .wit-reason { color: var(--gold); }
 .enc-stars { color: var(--gold); font-size: 1.25em; }
 .enc-attempt-rule { margin-top: 8px; }
+
+/* Catch controls fit laptop viewports; calm mode keeps the target still. */
+.catch-panel { max-height: 100%; overflow: auto; }
+.catch-game { align-items: center; width: 100%; gap: 8px; }
+.catch-game p, .catch-game h3 { margin: 0; }
+.catch-target { position: relative; width: 230px; height: 230px; padding: 10px; border: 0; background: transparent; cursor: crosshair; flex: none; }
+.catch-target img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.catch-ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 4px solid var(--gold); border-radius: 50%; pointer-events: none; }
+.catch-grid { display: grid; grid-template-columns: repeat(6, 1fr); width: min(330px, 100%); gap: 4px; }
+.catch-cell { aspect-ratio: 1; padding: 2px; border: 2px solid var(--panel-edge); border-radius: 6px; background: #201b30; cursor: pointer; min-width: 0; }
+.catch-cell img { width: 100%; height: 100%; object-fit: contain; }
+.catch-cell.creature { border-color: var(--gold); opacity: 1; }
+.catch-cell.blocked { background: #4b3c24; opacity: 1; }
+.catch-cell:focus-visible, .catch-target:focus-visible { outline: 3px solid var(--rift); }
+.catch-odds { color: var(--gold); font-weight: bold; }

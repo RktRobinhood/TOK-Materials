@@ -29,6 +29,8 @@
             stages = stages.filter(p => p && Rift.Puzzles.get(p.id));
             let obstacle = null;
             let catchOpts = null;
+            let catchGame = null;
+            let catchAttempt = 0;
             const firstTime = !state.map.completed.includes(n.id);
             const firstVisit = state.map.visitCount[n.id] === 1;
 
@@ -349,18 +351,16 @@
                 host.append(Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature', colour: c.colour, label: c.name }), el('div.bubble', { text: taunt }));
                 if (!Rift.State.get().seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
                 if (taunt) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
-                const catchItems = ['charm', 'greatcharm'].filter(id => (Rift.State.get().items[id] || 0) > 0);
+                const mode = Rift.makeRng(visit.seed + ':catch-mode').pick(['throw', 'box']);
                 stageBox.innerHTML = '';
                 controls.style.display = 'none';
                 feedback.textContent = '';
-                const creatureImg = host.querySelector('.enc-creature');
-                if (creatureImg) creatureImg.classList.replace('rabid', 'dizzy');
                 const panel = el('div.catch-panel.panel.stack');
                 stageBox.append(panel);
                 const render = () => {
                     panel.innerHTML = '';
                     const st = Rift.State.get();
-                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: 'Choose a charm. Stars add up to 6 points to your odds; an active lure adds 5. A chance is never a promise.' }));
+                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: (mode === 'throw' ? 'Time a click inside a shrinking ring. One charm per throw.' : 'Place charms on a grid to block every exit. Each placement uses a charm.') + ' Skill improves your chance; a miss leaves a small chance.' }));
                     const avail = ['charm', 'greatcharm'].filter(id => (st.items[id] || 0) > 0);
                     if (!avail.length) {
                         panel.append(el('p', { text: 'You have no charms left. It wanders off… for now.' }), el('button.btn', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }));
@@ -369,33 +369,37 @@
                     avail.forEach(id => {
                         const p = Rift.World.catchOdds(st, obstacle, id, catchOpts);
                         panel.append(el('button.btn' + (id === 'greatcharm' ? '.gold' : ''), {
-                            text: 'Throw ' + Rift.data.items[id].name + ' (' + st.items[id] + ' left) · ' + Math.round(p * 100) + '%',
-                            onclick: () => throwCharm(id),
+                            text: (mode === 'throw' ? 'Time a throw: ' : 'Box it in: ') + Rift.data.items[id].name + ' (' + st.items[id] + ' left) · ' + Math.round(p * 100) + '%',
+                            onclick: () => startCatch(id),
                         }));
                     });
                     panel.append(el('button.btn.small', { text: 'Let it go', onclick: () => Rift.Router.replace('map') }));
                 };
-                const throwCharm = id => {
-                    Rift.State.useItem(id);
-                    const st = Rift.State.get();
-                    const rng = Rift.makeRng(visit.seed + ':throw:' + st.stats.catches + ':' + st.stats.escapes + ':' + Date.now());
-                    const roll = Rift.World.rollCatch(st, obstacle, id, rng, catchOpts);
+                const startCatch = id => {
+                    if (destroyed || phase !== 'catch' || !(Rift.State.get().items[id] > 0)) return;
+                    if (catchGame) catchGame.destroy();
+                    catchAttempt += 1;
                     panel.innerHTML = '';
-                    const charm = Rift.Assets.img('item/' + id, { className: 'thrown-charm', label: 'charm' });
-                    panel.append(charm, el('p.center', { text: '…' }));
-                    Rift.Audio.sfx('throw');
-                    let shakes = 0;
-                    const maxShakes = roll.caught ? 3 : 1 + Math.floor(rng.next() * 3);
-                    const shake = () => {
-                        shakes += 1;
-                        charm.classList.remove('shake'); void charm.offsetWidth; charm.classList.add('shake');
-                        Rift.Audio.sfx('wobble');
-                        if (shakes < maxShakes) setTimeout(shake, 700);
-                        else setTimeout(() => finishThrow(roll), 800);
-                    };
-                    setTimeout(shake, 500);
+                    const base = Rift.World.catchOdds(Rift.State.get(), obstacle, id, catchOpts);
+                    catchGame = Rift.CatchGame.mount(panel, {
+                        mode, species: obstacle, item: id, lured: catchOpts.lured,
+                        seed: visit.seed + ':skill:' + catchAttempt, base,
+                        spend: item => Rift.State.useItem(item),
+                        available: item => Rift.State.get().items[item] || 0,
+                        onFinish(skill) {
+                            if (destroyed || phase !== 'catch') return;
+                            if (!skill.spent) { render(); return; }
+                            const st = Rift.State.get();
+                            const rng = Rift.makeRng(visit.seed + ':catch:' + catchAttempt + ':' + st.stats.catches + ':' + st.stats.escapes);
+                            const roll = Rift.World.rollCatch(st, obstacle, id, rng, Object.assign({}, catchOpts, { skillBonus: skill.bonus, skillFailed: skill.bonus === 0 }));
+                            Rift.Audio.sfx('throw');
+                            finishThrow(roll, skill, base);
+                        },
+                    });
                 };
-                const finishThrow = roll => {
+                const finishThrow = (roll, skill, base) => {
+                    panel.innerHTML = '';
+                    panel.append(el('p', { text: skill.label }), el('p.catch-odds', { text: 'Base ' + Math.round(base * 100) + '%' + (skill.bonus ? ' · skill +' + Math.round((roll.p - base) * 100) + ' points = ' : ' · missed: quarter chance = ') + Math.round(roll.p * 100) + '%. Used ' + skill.spent + ' charm(s).' }));
                     if (roll.caught) {
                         Rift.Audio.sfx('caught');
                         Rift.State.update(st => {
@@ -403,7 +407,7 @@
                             st.stats.catches += 1;
                             if (c.rarity === 'legendary' && Rift.World.award(st, 'legend-hunter')) Rift.UI.toast('🏅 New accolade: Legend Hunter');
                         });
-                        panel.innerHTML = '';
+                        phase = 'caught';
                         panel.append(
                             el('h2', { text: 'Caught! ' + c.name + ' joins you.' }),
                             el('p', { text: c.blurb }),
@@ -416,12 +420,12 @@
                     } else {
                         Rift.Audio.sfx('escape');
                         Rift.State.update(st => { st.stats.escapes += 1; });
-                        Rift.UI.toast('It broke free! (' + Math.round(roll.p * 100) + '% wasn\'t enough this time)');
-                        render();
+                        panel.append(el('h2', { text: 'It broke free. A chance is not a promise.' }),
+                            el('button.btn', { text: 'Try again', onclick: render }),
+                            el('button.btn.small', { text: 'Let it go', onclick: () => Rift.Router.replace('map') }));
                     }
                 };
                 render();
-                if (!catchItems.length) render();
             }
 
             function leave() {
@@ -447,6 +451,7 @@
                 destroy() {
                     destroyed = true;
                     modals.forEach(m => m.close());
+                    if (catchGame) catchGame.destroy();
                     if (tutorial) tutorial.close();
                     if (helpModal) helpModal.close();
                     if (handle && handle.destroy) handle.destroy();
@@ -454,6 +459,7 @@
                 },
                 // Playtest helper: submits the generator's own solution for the current stage.
                 debugSolve() {
+                    if (phase !== 'play') return null;
                     const { def } = current();
                     return def.solve ? onSubmit(def.solve(stages[stageIx].data)) : null;
                 },

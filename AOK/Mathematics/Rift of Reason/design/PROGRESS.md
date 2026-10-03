@@ -27,6 +27,10 @@ Implemented a visible per-stage check budget, paid wrong checks everywhere, firs
 
 Arrival now rolls only the puzzle and captures the active lure before spending its visit. Creature loot rolls after success with a separate seed. Normal puzzles yield no creature 50/42.5/35% of the time at 1/2/3 stars; mini-bosses and bosses have lower no-creature odds. Stars boost rarity weights and catch odds; lures still help on their last visit; legendaries need the rumour. No-creature wins retain rewards. Tests cover seeded rates/rarity, determinism, empty tables, last lure, matching catch odds and the controller calling loot only after success. All 287 tests pass. Both source reviews found no blockers; wording findings fixed.
 
+## Catch games (#41)
+
+Implemented timed ring throws and a 6×6 charm trap, seeded per visitor. Great Charms/lures/rarity change the challenge. Skill adds up to 15 points; failure quarters the displayed base odds (minimum5%, totalcap95%). Each placement/throw consumes real charms; timeout/leave cleanup is tested. Probability tests cover240,000 rolls; all48 grid-order/lure paths trap within5placements. Browser smoke at1024×768 covers both modes/items, a complete trap and calm motion. All 299 tests pass. See `design/reviews/catching-review.md` for reviewer ratings and scope limits.
+
 ## Next work
 
 1. Baseline reports #35/#36 are committed. #36 closed; exhaustive station play and full round two remain #35.

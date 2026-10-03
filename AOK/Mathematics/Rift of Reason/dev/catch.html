@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catch bench</title>
+<link rel="stylesheet" href="css/game.css"><link rel="stylesheet" href="css/screens.css">
+<style>body{overflow:auto;padding:20px}main{max-width:500px;margin:auto}#game{margin-top:12px}.catch-panel{max-height:640px}</style></head>
+<body><main><h1>Catch bench</h1><p class="small">Temporary state only; this bench does not read or write your game save.</p>
+<label>Game <select id="mode"><option value="throw">Throw</option><option value="box">Box it in</option></select></label>
+<label>Charm <select id="item"><option value="charm">Catch Charm</option><option value="greatcharm">Great Charm</option></select></label>
+<label>Rarity <select id="rarity"><option>common</option><option>uncommon</option><option>rare</option><option>legendary</option></select></label>
+<label><input id="lure" type="checkbox"> Lure</label><label><input id="calm" type="checkbox"> Calm motion</label>
+<button class="btn" id="start">Start game</button><div id="game" class="catch-panel panel stack"></div></main>
+<script src="js/core/rift.js"></script><script src="js/core/state.js"></script><script src="js/core/assets.js"></script><script src="js/core/audio.js"></script><script src="js/core/world.js"></script><script src="js/core/catching.js"></script><script src="data/assets.js"></script><script src="data/sfx.js"></script><script src="data/items.js"></script><script src="data/creatures.js"></script><script src="js/ui/catching.js"></script>
+<script>
+Rift.storage=()=>null;
+let handle=null;
+document.querySelector('#start').onclick=()=>{
+ if(handle)handle.destroy();const state=Rift.State.freshState();state.items={charm:8,greatcharm:8};state.settings.calm=document.querySelector('#calm').checked;Rift.State.replace(state);
+ const species=Object.keys(Rift.data.creatures).find(id=>Rift.data.creatures[id].rarity===document.querySelector('#rarity').value);
+ const item=document.querySelector('#item').value;const opts={stars:3,lured:document.querySelector('#lure').checked};const base=Rift.World.catchOdds(state,species,item,opts);const game=document.querySelector('#game');game.innerHTML='';
+ handle=Rift.CatchGame.mount(game,{mode:document.querySelector('#mode').value,species,item,lured:opts.lured,seed:'bench',base,spend:id=>Rift.State.useItem(id),available:id=>Rift.State.get().items[id]||0,onFinish:skill=>{
+  if(!skill.spent){game.innerHTML='';game.append(Rift.el('p',{text:'No charms used. No catch roll.'}));return;}
+  const roll=Rift.World.rollCatch(state,species,item,Rift.makeRng('bench-result'),Object.assign({},opts,{skillBonus:skill.bonus,skillFailed:skill.bonus===0}));game.innerHTML='';game.append(Rift.el('p',{text:skill.label}),Rift.el('p.catch-odds',{text:'Base '+Math.round(base*100)+'%'+(skill.bonus?' · skill +'+Math.round((roll.p-base)*100)+' points = ':' · missed: quarter chance = ')+Math.round(roll.p*100)+'%. Used '+skill.spent+' charm(s). '+(roll.caught?'Caught!':'Escaped.')}));
+ }});
+};
+</script></body></html>

@@ -131,6 +131,9 @@
         if (av.type === 'fox' && (c.colour === 'language' || c.colour === 'imagination')) p += 0.1;
         p += (Rift.clamp(o.stars || 1, 1, 3) - 1) * 0.03;
         if (o.lured) p += 0.05;
+        p = Rift.clamp(Math.round(p * 100) / 100, 0.05, 0.95);
+        if (o.skillFailed) p *= 0.25;
+        else p += Rift.clamp(o.skillBonus || 0, 0, 0.15);
         return Rift.clamp(Math.round(p * 100) / 100, 0.05, 0.95);
     }
 
