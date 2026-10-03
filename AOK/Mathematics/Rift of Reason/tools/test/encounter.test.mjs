@@ -63,3 +63,10 @@ test('Witness marks wrong claims without answers, then explains one on the secon
  assert.ok(rows.every(x=>x.querySelector('.wit-reason').textContent==='Check this claim against the scene.'));
  send.onclick();assert.equal(rows.filter(x=>x.querySelector('.wit-reason').textContent.startsWith('Why:')).length,1);
 });
+
+test('loot is rolled only after success and the stage debrief, never on arrival or a wrong check',async()=>{
+ const g=await game();let rolls=0;g.Rift.World.rollLoot=()=>{rolls++;return {species:null,chance:.65};};
+ assert.equal(rolls,0);g.api().submit(false);assert.equal(rolls,0);g.api().submit(true);assert.equal(rolls,0);
+ await g.modals.at(-1).buttons[0].onclick();assert.equal(rolls,1);assert.equal(g.modals.at(-1).title,'Solved!');
+ assert.ok(g.state.xp>0);assert.equal(g.modals.at(-1).buttons[0].label,'Back to the map');
+});

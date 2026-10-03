@@ -39,10 +39,10 @@ Live site: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20o
 
 A map node (`data/map.js`) has a `type` (story, puzzle, miniboss, boss, rest, rumour, battle, rift) and, for puzzles, a list of `{ id, difficulty, opts }`. Visiting it opens `js/screens/encounter.js`, which:
 
-1. rolls the visit (puzzle variant and obstacle creature) with `Rift.World.rollVisit`;
+1. rolls the visit (puzzle variant and captured lure bonus) with `Rift.World.rollVisit`;
 2. plays the node's script the first time (`script` key in `data/script/*.js`);
 3. mounts the puzzle with an `api` (`submit`, `sfx`, `say`, `rng`, `difficulty`, `el`);
-4. on success: plays `<script>.win`, gives rewards and accolades, then offers the catch.
+4. on success: plays `<script>.win`, gives stars/rewards/accolades, rolls creature loot (sometimes none), then offers the catch.
 
 Hearts: a hint costs 1 (2 with the Shaky Hand scar). Every stage has 3 free wrong checks at difficulty 1 and 2 at difficulty 2–3 (Frogling adds one). Later wrong checks cost 1 heart everywhere. Correct checks cost nothing. Boss Why answers/skips cost 1 heart if wrong. At 0 hearts the player is knocked out and gets a scar.
 

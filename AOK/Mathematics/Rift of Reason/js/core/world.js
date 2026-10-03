@@ -78,46 +78,64 @@
 
     // ---- visits ------------------------------------------------------------------
 
-    function spawnWeights(state, n) {
-        const lureLeft = (state.lures || {})[n.id] || 0;
+    function spawnWeights(state, n, opts) {
+        const o = opts || {};
+        const lured = o.lured === undefined ? ((state.lures || {})[n.id] || 0) > 0 : o.lured;
+        const stars = Rift.clamp(o.stars || 1, 1, 3);
         const out = {};
         (n.spawns || []).forEach(sp => {
             const c = Rift.data.creatures[sp];
             if (!c) return;
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
             let w = Rift.data.rarities[c.rarity].weight;
-            if (lureLeft > 0 && (c.rarity === 'rare' || c.rarity === 'legendary')) w *= 2;
+            if (c.rarity === 'uncommon') w *= 1 + (stars - 1) * 0.2;
+            if (c.rarity === 'rare' || c.rarity === 'legendary') {
+                w *= 1 + (stars - 1) * 0.5;
+                if (lured) w *= 2;
+            }
             out[sp] = w;
         });
         return out;
     }
 
-    // Rolls what this visit holds: which puzzle variant and which obstacle.
+    // Arrival rolls the puzzle only. Capture the lure before spending its visit.
     function rollVisit(state, id) {
         const n = Object.assign({ id }, node(id));
         state.map.visitCount[id] = (state.map.visitCount[id] || 0) + 1;
         const rng = Rift.makeRng(state.seed + ':' + id + ':' + state.map.visitCount[id]);
         const puzzle = n.puzzles && n.puzzles.length ? rng.pick(n.puzzles) : null;
-        const weights = spawnWeights(state, n);
-        const obstacle = Object.keys(weights).length ? rng.weighted(weights) : null;
+        const lured = !!(state.lures && state.lures[id] > 0);
         if (state.lures && state.lures[id] > 0) state.lures[id] -= 1;
-        return { node: n, puzzle, obstacle, seed: rng.seed, rng };
+        return { node: n, puzzle, lured, seed: rng.seed, rng };
+    }
+
+    // Call only after successful activity completion, with a separate seed.
+    function rollLoot(state, n, rng, opts) {
+        const o = opts || {};
+        const stars = Rift.clamp(o.stars || 1, 1, 3);
+        const base = n.type === 'boss' ? 0.75 : (n.type === 'miniboss' ? 0.65 : 0.5);
+        const chance = Math.round((base + (stars - 1) * 0.075) * 1000) / 1000;
+        const weights = spawnWeights(state, n, o);
+        const species = Object.keys(weights).length && rng.chance(chance) ? rng.weighted(weights) : null;
+        return { species, chance };
     }
 
     // ---- catching ---------------------------------------------------------------
 
-    function catchOdds(state, speciesId, itemId) {
+    function catchOdds(state, speciesId, itemId, opts) {
+        const o = opts || {};
         const c = Rift.data.creatures[speciesId];
         let p = Rift.data.rarities[c.rarity].catchBase;
         p += (Rift.data.items[itemId] || {}).catchBonus || 0;
         const av = state.avatar || {};
         if (av.type === 'fox' && (c.colour === 'language' || c.colour === 'imagination')) p += 0.1;
-        // A clean solve (no hints) steadies the throw.
+        p += (Rift.clamp(o.stars || 1, 1, 3) - 1) * 0.03;
+        if (o.lured) p += 0.05;
         return Rift.clamp(Math.round(p * 100) / 100, 0.05, 0.95);
     }
 
-    function rollCatch(state, speciesId, itemId, rng) {
-        const p = catchOdds(state, speciesId, itemId);
+    function rollCatch(state, speciesId, itemId, rng, opts) {
+        const p = catchOdds(state, speciesId, itemId, opts);
         return { p, caught: rng.next() < p };
     }
 
@@ -194,7 +212,7 @@
     Rift.World = {
         award, attempts, recordWrong, hintCost, solveStars,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
-        spawnWeights, rollVisit, catchOdds, rollCatch, rewards, applyRewards, level,
+        spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

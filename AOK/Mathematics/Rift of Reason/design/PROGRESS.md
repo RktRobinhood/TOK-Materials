@@ -23,6 +23,10 @@ All fourteen puzzle types now have five-line rules cards and five/six-step tours
 
 Implemented a visible per-stage check budget, paid wrong checks everywhere, first-use explanation, protected knockout and success phases, stars/XP, Witness wrong-claim marks and one evidence explanation on the second failure. Stage feedback now waits for Continue; each boss stage gets its own Why. All fourteen checker paths are audited in `design/reviews/feedback-audit.md`. Fixed Tower, Oracle and Tribunal reasoning wording. All 281 tests pass, including controller/feedback tests. Both source reviewers report no blockers; the DOM/modal adapter does not certify browser overlay removal. The sidebar can scroll at short laptop heights.
 
+## Creature loot (#40)
+
+Arrival now rolls only the puzzle and captures the active lure before spending its visit. Creature loot rolls after success with a separate seed. Normal puzzles yield no creature 50/42.5/35% of the time at 1/2/3 stars; mini-bosses and bosses have lower no-creature odds. Stars boost rarity weights and catch odds; lures still help on their last visit; legendaries need the rumour. No-creature wins retain rewards. Tests cover seeded rates/rarity, determinism, empty tables, last lure, matching catch odds and the controller calling loot only after success. All 287 tests pass. Both source reviews found no blockers; wording findings fixed.
+
 ## Next work
 
 1. Baseline reports #35/#36 are committed. #36 closed; exhaustive station play and full round two remain #35.

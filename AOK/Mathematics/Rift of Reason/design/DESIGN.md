@@ -62,7 +62,7 @@ Hints cost **health** (one heart, or two with Shaky Hand). Each puzzle stage has
 ## Collecting
 
 - Collectibles are **Pokémon-ified caricatures of real people** (influencers, celebrities, politicians — satire welcome) plus **historical mathematicians as rare legendaries**. Exaggerate core public traits; fun, not bitter. Hard line: no jokes whose punchline is sexual abuse or its victims. Roster and villains are chosen by the builder; the teacher reviews the art.
-- The **obstacle you beat is the creature you can catch**: after a challenge or boss, a **probability catch roll**.
+- Activities show their host. **Creature loot is rolled only after success**, separately from the puzzle seed; some wins yield no creature and still give rewards. Normal puzzles have 50/42.5/35% no-creature chance at 1/2/3 stars; mini-bosses 35/27.5/20%; bosses 25/17.5/10%. Better stars also raise uncommon/rare weights. Lures double rare/legendary weights for three visits (including the last), and legendaries still require their rumour flag. The visitor appears with its taunt before catching. Stars add 0/3/6 percentage points to catch odds; the active lure adds 5. Displayed and rolled odds share one function and are capped at 95%.
 - **Items like Poké Balls / Pokémon Go items**: catch tools that change odds, support items. Drop tables and rarity; **rumours** hint where rare spawns appear.
 - Progress carries over: creatures, items, levels/accolades, story decisions (characters react later).
 

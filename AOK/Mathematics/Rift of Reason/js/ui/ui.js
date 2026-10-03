@@ -121,7 +121,7 @@
                         if (id === 'lure') {
                             Rift.State.update(st => { st.lures[st.map.at] = 3; });
                             Rift.Audio.sfx('jingle');
-                            toast('The lantern glows at ' + here.name + ': rare spawns are likelier for 3 visits.');
+                            toast('The lantern glows at ' + here.name + ': rare creatures become more likely for 3 visits, with +5 points to catch odds.');
                         } else {
                             Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
                             Rift.Audio.sfx('heal');

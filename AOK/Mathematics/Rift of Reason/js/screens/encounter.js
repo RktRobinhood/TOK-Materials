@@ -1,7 +1,7 @@
 /*
  * Encounters: a node's puzzle (or a boss's chain of puzzles), hints that cost
  * health, the "why?" step on bosses, rewards, and the catch roll on the
- * obstacle you just beat.
+ * creature revealed after a successful activity.
  *
  * params: { nodeId, shrine? }  shrine = solve a harder puzzle to heal a scar.
  */
@@ -27,7 +27,8 @@
             let stages = isBoss ? n.puzzles.slice() : [visit.puzzle];
             if (params.shrine) stages = [{ id: visit.puzzle ? visit.puzzle.id : 'liars-gate', difficulty: 3 }];
             stages = stages.filter(p => p && Rift.Puzzles.get(p.id));
-            const obstacle = params.shrine ? null : visit.obstacle;
+            let obstacle = null;
+            let catchOpts = null;
             const firstTime = !state.map.completed.includes(n.id);
             const firstVisit = state.map.visitCount[n.id] === 1;
 
@@ -63,7 +64,6 @@
             const goal = el('div.enc-goal.panel.small', null, [el('p', { text: n.goal || 'Check the rules before you choose an answer.' }), el('p.enc-attempt-rule')]);
             rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, host, goal, controls, feedback]), stageBox]));
 
-            const taunt = obstacle ? Rift.makeRng(visit.seed + ':line').pick(Rift.data.creatures[obstacle].lines) : null;
             const hostId = n.host || 'narrator';
             const speaker = Rift.data.speakers[hostId];
             const reminder = (Rift.data.script[n.reminder] || []).find(line => line.t);
@@ -307,6 +307,8 @@
                 const rng = Rift.makeRng(visit.seed + ':reward');
                 let earned = [];
                 const stars = Rift.World.solveStars(hintsUsed, wrongs);
+                catchOpts = { stars, lured: visit.lured };
+                obstacle = Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
                 Rift.State.update(st => {
                     Rift.World.applyRewards(st, r);
@@ -326,6 +328,7 @@
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name).join(', ');
                 const body = el('div.stack', null, [
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
+                    obstacle ? el('p', { text: 'A rustle near the rift… something appeared!' }) : el('p', { text: 'No creature appeared this time. Your rewards are yours. More stars improve the chance of rare visitors.' }),
                     el('p.small', { text: 'Three stars: no hints or wrong checks. Two: up to two in total. More stars give more XP.' }),
                     el('p.enc-goal', { text: n.goal || 'Check the rules before you choose an answer.' }),
                     def && def.tok ? el('p.tok-line', { text: '💭 ' + def.tok }) : null,
@@ -341,6 +344,7 @@
                 closeHelp();
                 checks.style.display = 'none';
                 const c = Rift.data.creatures[obstacle];
+                const taunt = Rift.makeRng(visit.seed + ':line').pick(c.lines);
                 host.innerHTML = '';
                 host.append(Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature', colour: c.colour, label: c.name }), el('div.bubble', { text: taunt }));
                 if (!Rift.State.get().seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
@@ -356,14 +360,14 @@
                 const render = () => {
                     panel.innerHTML = '';
                     const st = Rift.State.get();
-                    panel.append(el('h2', { text: c.name + ' is dizzy!' }), el('p.muted', { text: 'Throw a charm. The odds are shown: probability is your friend.' }));
+                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: 'Choose a charm. Stars add up to 6 points to your odds; an active lure adds 5. A chance is never a promise.' }));
                     const avail = ['charm', 'greatcharm'].filter(id => (st.items[id] || 0) > 0);
                     if (!avail.length) {
                         panel.append(el('p', { text: 'You have no charms left. It wanders off… for now.' }), el('button.btn', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }));
                         return;
                     }
                     avail.forEach(id => {
-                        const p = Rift.World.catchOdds(st, obstacle, id);
+                        const p = Rift.World.catchOdds(st, obstacle, id, catchOpts);
                         panel.append(el('button.btn' + (id === 'greatcharm' ? '.gold' : ''), {
                             text: 'Throw ' + Rift.data.items[id].name + ' (' + st.items[id] + ' left) · ' + Math.round(p * 100) + '%',
                             onclick: () => throwCharm(id),
@@ -375,7 +379,7 @@
                     Rift.State.useItem(id);
                     const st = Rift.State.get();
                     const rng = Rift.makeRng(visit.seed + ':throw:' + st.stats.catches + ':' + st.stats.escapes + ':' + Date.now());
-                    const roll = Rift.World.rollCatch(st, obstacle, id, rng);
+                    const roll = Rift.World.rollCatch(st, obstacle, id, rng, catchOpts);
                     panel.innerHTML = '';
                     const charm = Rift.Assets.img('item/' + id, { className: 'thrown-charm', label: 'charm' });
                     panel.append(charm, el('p.center', { text: '…' }));

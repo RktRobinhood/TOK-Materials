@@ -7,9 +7,9 @@
     const Rift = root.Rift;
 
     Rift.data.items = {
-        charm: { name: 'Catch Charm', kind: 'catch', catchBonus: 0, text: 'A woven charm. Throw it to catch a beaten caricature.' },
+        charm: { name: 'Catch Charm', kind: 'catch', catchBonus: 0, text: 'A woven charm. Use it to catch a creature after solving a puzzle.' },
         greatcharm: { name: 'Great Charm', kind: 'catch', catchBonus: 0.2, text: 'A golden charm with a gem: +20% catch odds.' },
-        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it at a node: rare spawns are twice as likely there for your next 3 visits.' },
+        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it at a node: rare creatures become more likely for your next 3 visits; catch odds gain 5 points.' },
         tonic: { name: 'Tonic', kind: 'support', heal: 2, text: 'Restores 2 health.' },
         ward: { name: 'Ward', kind: 'battle', text: 'Cancels one bad fate roll after a battle.' },
         mending: { name: 'Mending', kind: 'support', text: 'Heals one injury on a creature.' },

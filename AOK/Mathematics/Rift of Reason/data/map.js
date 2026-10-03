@@ -7,7 +7,7 @@
  * The ruined shrine (392,244) is still free for a later chapter.
  * type: story | puzzle | miniboss | boss | rest | rumour | battle | rift
  * puzzles: candidate puzzle ids + difficulty, one is rolled per visit.
- * spawns: species that can be the obstacle here (weighted by rarity);
+ * spawns: visitors rolled after success (weighted by rarity);
  *         rare teasers from other colours can be listed too.
  * scene: background art id. script: dialogue key in data/script/*.js.
  */
