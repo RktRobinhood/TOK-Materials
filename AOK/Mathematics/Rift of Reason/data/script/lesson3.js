@@ -109,4 +109,19 @@
         { s: 'narrator', t: 'On the horizon, the Server Tower lights up. The last climb is close.' },
         { s: 'narrator', t: 'Breaking an argument down is not winning a fight. It is finding out what we have good reason to believe.' },
     ];
+    // Station hosts: a lead-in every visit, with a goal on first arrival.
+    S["station.t-south-bridge.intro"] = [{"s":"pip","t":"Screens shout claims at this bridge. Check the task before you join the shouting."},{"s":"pip","t":"Separate what a claim says from what its evidence supports."}];
+    S["station.t-south-bridge.reminder"] = [{"s":"pip","t":"Screens shout claims at this bridge. Check the task before you join the shouting."}];
+    S["station.t-newsstand.intro"] = [{"s":"pip","t":"A small trial is starting. Read the testimony, press it, and compare the evidence."},{"s":"pip","t":"Find evidence that breaks a claim, then name the weak step."}];
+    S["station.t-newsstand.reminder"] = [{"s":"pip","t":"A small trial is starting. Read the testimony, press it, and compare the evidence."}];
+    S["station.t-library.intro"] = [{"s":"pip","t":"A proof has arrived in the library. Check its steps against the court record."},{"s":"pip","t":"One broken step can make a claimed proof fail."}];
+    S["station.t-library.reminder"] = [{"s":"pip","t":"A proof has arrived in the library. Check its steps against the court record."}];
+    S["station.t-datalab.intro"] = [{"s":"pip","t":"The lab has numbers and a bold claim. See whether the evidence really supports it."},{"s":"pip","t":"Numbers need a fair comparison before they support a claim."}];
+    S["station.t-datalab.reminder"] = [{"s":"pip","t":"The lab has numbers and a bold claim. See whether the evidence really supports it."}];
+    S["station.t-gallery.intro"] = [{"s":"pip","t":"These charts impress the crowd. Adjust them so the numbers can speak fairly."},{"s":"pip","t":"The same numbers can look different when a chart changes."}];
+    S["station.t-gallery.reminder"] = [{"s":"pip","t":"These charts impress the crowd. Adjust them so the numbers can speak fairly."}];
+    S["station.t-steps.intro"] = [{"s":"pip","t":"A witness is waiting. Press the statement that seems too sure and check the record."},{"s":"pip","t":"Question a claim and connect your objection to evidence."}];
+    S["station.t-steps.reminder"] = [{"s":"pip","t":"A witness is waiting. Press the statement that seems too sure and check the record."}];
+    S["station.t-tribunal.intro"] = [{"s":"judge","t":"We judge arguments here. Check each case and explain the flaw you find."},{"s":"judge","t":"An argument must survive checks of its reasons, data and proof."}];
+    S["station.t-tribunal.reminder"] = [{"s":"judge","t":"We judge arguments here. Check each case and explain the flaw you find."}];
 })(typeof window !== 'undefined' ? window : globalThis);

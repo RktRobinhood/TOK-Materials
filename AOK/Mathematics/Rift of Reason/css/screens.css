@@ -66,6 +66,12 @@
 @keyframes dizzy { 0% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); } }
 .bubble { background: var(--parchment); color: var(--ink); border: 2px solid var(--ink); border-radius: 14px; padding: 6px 12px; font-size: 0.95em; position: relative; max-width: 280px; text-align: center; }
 .enc-controls { flex-wrap: wrap; }
+.enc-goal { padding: 8px 12px; border-left: 4px solid var(--rift); }
+#overlay > .tutorial-layer { position: absolute; inset: 0; z-index: 80; background: rgba(7, 6, 12, 0.6); pointer-events: none; }
+.tutorial-bubble { position: absolute; left: 16px; bottom: 16px; width: min(340px, calc(100% - 32px)); max-height: 45vh; overflow: auto; padding: 14px; pointer-events: auto; }
+.tutorial-bubble p { margin: 10px 0; }
+.tutorial-face { width: 44px; height: 48px; object-fit: contain; }
+.tutorial-highlight { position: relative; z-index: 81; outline: 4px solid var(--gold); outline-offset: -4px; background-color: var(--panel); }
 .enc-feedback { padding: 10px 12px; border-radius: 10px; min-height: 1em; }
 .enc-feedback:empty { display: none; }
 .enc-feedback.good { background: rgba(47, 191, 113, 0.18); border: 2px solid var(--perception); }

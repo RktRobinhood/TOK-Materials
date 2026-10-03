@@ -131,4 +131,23 @@
         { s: 'narrator', t: 'The Mayor was the Arch-Imp all along. Notice what caught him: not a feeling, but a table with one row left.' },
         { s: 'narrator', t: 'But the liar\'s sentence is still out there. Some statements cannot be settled by any table. Remember that.' },
     ];
+    // Station hosts: a lead-in every visit, with a goal on first arrival.
+    S["station.b-south-bridge.intro"] = [{"s":"lamplighter","t":"These brass switches control the bridge. Try the switches and watch what follows."},{"s":"lamplighter","t":"See how changing an assumption changes what follows."}];
+    S["station.b-south-bridge.reminder"] = [{"s":"lamplighter","t":"These brass switches control the bridge. Try the switches and watch what follows."}];
+    S["station.b-lamp-lane.intro"] = [{"s":"lamplighter","t":"My neighbours accuse each other. Match their words to the rules for honest folk and imps."},{"s":"lamplighter","t":"Test possible worlds to find which villagers can be honest."}];
+    S["station.b-lamp-lane.reminder"] = [{"s":"lamplighter","t":"My neighbours accuse each other. Match their words to the rules for honest folk and imps."}];
+    S["station.b-bakery.intro"] = [{"s":"baker","t":"My last loaf is missing! Check the villagers before you point a finger."},{"s":"baker","t":"Check every statement before accusing someone."}];
+    S["station.b-bakery.reminder"] = [{"s":"baker","t":"My last loaf is missing! Check the villagers before you point a finger."}];
+    S["station.b-post.intro"] = [{"s":"postmistress","t":"The Constable left an argument here. Check its blocks before we send it on."},{"s":"postmistress","t":"An argument stands only if its steps support its conclusion."}];
+    S["station.b-post.reminder"] = [{"s":"postmistress","t":"The Constable left an argument here. Check its blocks before we send it on."}];
+    S["station.b-clockmaker.intro"] = [{"s":"clockmaker","t":"My bulb only lights with the right inputs. Find which switches the task needs."},{"s":"clockmaker","t":"Find which assumptions a conclusion actually needs."}];
+    S["station.b-clockmaker.reminder"] = [{"s":"clockmaker","t":"My bulb only lights with the right inputs. Find which switches the task needs."}];
+    S["station.b-school.intro"] = [{"s":"schoolteacher","t":"The class needs help checking a claim. Read today's task and test the cases."},{"s":"schoolteacher","t":"Check the result in each case, rather than guess."}];
+    S["station.b-school.reminder"] = [{"s":"schoolteacher","t":"The class needs help checking a claim. Read today's task and test the cases."}];
+    S["station.b-clock-tower.intro"] = [{"s":"sweep","t":"I sweep the tower, but these arguments still wobble. Check what each block supports."},{"s":"sweep","t":"A true fact alone does not make an argument valid."}];
+    S["station.b-clock-tower.reminder"] = [{"s":"sweep","t":"I sweep the tower, but these arguments still wobble. Check what each block supports."}];
+    S["station.b-stairs.intro"] = [{"s":"clockmaker","t":"A hidden input runs this gate. Test the visible switches before trusting the result."},{"s":"clockmaker","t":"A hidden assumption can change an answer."}];
+    S["station.b-stairs.reminder"] = [{"s":"clockmaker","t":"A hidden input runs this gate. Test the visible switches before trusting the result."}];
+    S["station.b-town-hall.intro"] = [{"s":"schoolteacher","t":"The Mayor says every claim is certain. Let us check the tasks one by one."},{"s":"schoolteacher","t":"Use clear rules to check claims and their assumptions."}];
+    S["station.b-town-hall.reminder"] = [{"s":"schoolteacher","t":"The Mayor says every claim is certain. Let us check the tasks one by one."}];
 })(typeof window !== 'undefined' ? window : globalThis);

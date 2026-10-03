@@ -145,6 +145,9 @@
                     class: ['map-node', kind, n.type, done ? 'done' : '', locked ? 'locked' : '', st.map.at === id ? 'here' : ''].join(' '),
                     transform: `translate(${n.x},${n.y})`,
                     tabindex: kind === 'revealed' ? 0 : -1,
+                    role: kind === 'revealed' ? 'button' : 'img',
+                    'aria-label': n.name + (locked ? ' · ' + locked : ''),
+                    'data-node': id,
                 });
                 const r = n.type === 'boss' ? 30 : 24;
                 const marker = 'ui/marker-' + n.type;

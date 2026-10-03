@@ -37,22 +37,28 @@
                 teaser: 'Music, lanterns and the smell of toasted nuts.',
             },
             'stall-pattern': {
+                host: "sequins", goal: "Test a rule by looking for a case that breaks it.",
+                intro: "station.stall-pattern.intro", reminder: "station.stall-pattern.reminder",
                 name: "Professor Sequins' Pattern Stall", chapter: 'prologue', type: 'puzzle', x: 397, y: 636,
-                scene: 'scene/stall-pattern', host: 'professor-sequins', script: 'prologue.pattern',
+                scene: 'scene/stall-pattern', script: 'prologue.pattern',
                 puzzles: [{ id: 'rule-hunter', difficulty: 1 }],
                 spawns: ['siuuugull', 'beastie', 'speedcheeta', 'usainvolt', 'keanu'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A magpie in a ringmaster coat is shouting about secret rules.',
             },
             'stall-witness': {
+                host: "mirage", goal: "Separate what the scene says from what you assume.",
+                intro: "station.stall-witness.intro", reminder: "station.stall-witness.reminder",
                 name: "Madame Mirage's Witness Tent", chapter: 'prologue', type: 'puzzle', x: 105, y: 690,
-                scene: 'scene/stall-witness', host: 'madame-mirage', script: 'prologue.witness',
+                scene: 'scene/stall-witness', script: 'prologue.witness',
                 puzzles: [{ id: 'witness', difficulty: 1 }],
                 spawns: ['chimpossible', 'rawmsay', 'attenbirdough', 'kardashiant', 'shakirattle'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A velvet tent. "See what really happened," says the sign.',
             },
             'stall-gallery': {
+                host: "syllo", goal: "A conclusion can follow from the rules without being true in real life.",
+                intro: "station.stall-gallery.intro", reminder: "station.stall-gallery.reminder",
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
-                scene: 'scene/stall-gallery', host: 'sergeant-syllo', script: 'prologue.gallery',
+                scene: 'scene/stall-gallery', script: 'prologue.gallery',
                 puzzles: [{ id: 'venn', difficulty: 1 }],
                 spawns: ['tremendoodle', 'swiftlet', 'beansprout', 'eminemu'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
@@ -65,6 +71,8 @@
 
             // ---- Chapter 1: the Road ----
             'road-start': {
+                host: "granny", goal: "Use the stated rules to check a claim, rather than trust a loud voice.",
+                intro: "station.road-start.intro", reminder: "station.road-start.reminder",
                 name: 'The Forest Road', chapter: 'ch1', type: 'puzzle', x: 574, y: 583,
                 scene: 'scene/road-forest', script: 'ch1.road',
                 puzzles: [{ id: 'liars-gate', difficulty: 1 }, { id: 'venn', difficulty: 1 }],
@@ -77,6 +85,8 @@
                 teaser: 'A signpost that points in every direction at once.',
             },
             'well': {
+                host: "sequins", goal: "Decide what follows from evidence and what still needs testing.",
+                intro: "station.well.intro", reminder: "station.well.reminder",
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
                 puzzles: [{ id: 'venn', difficulty: 2 }, { id: 'rule-hunter', difficulty: 2 }],
@@ -84,6 +94,8 @@
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
             'troll-bridge': {
+                host: "syllo", goal: "You can prove that a drawing is impossible, as well as draw one.",
+                intro: "station.troll-bridge.intro", reminder: "station.troll-bridge.reminder",
                 name: 'The Troll Bridge', chapter: 'ch1', type: 'miniboss', x: 679, y: 550,
                 scene: 'scene/road-bridge', script: 'ch1.bridge',
                 puzzles: [{ id: 'line-drawer', difficulty: 2 }],
@@ -101,6 +113,8 @@
                 teaser: 'A crackling fire. A safe place to rest and mend.',
             },
             'standing-stone': {
+                host: "sequins", goal: "A pattern can hide a limit; look for a case where your idea fails.",
+                intro: "station.standing-stone.intro", reminder: "station.standing-stone.reminder",
                 name: 'The Standing Stone', chapter: 'ch1', type: 'puzzle', x: 1158, y: 531,
                 scene: 'scene/road-forest', script: 'ch1.stone',
                 puzzles: [{ id: 'rule-hunter', difficulty: 3 }, { id: 'line-drawer', difficulty: 3 }],
@@ -108,6 +122,8 @@
                 teaser: 'Strange patterns carved into old stone. They seem to change.',
             },
             'gate': {
+                host: "granny", goal: "A proof depends on the rules and facts you start with.",
+                intro: "station.gate.intro", reminder: "station.gate.reminder",
                 name: 'The Gate of Guards', chapter: 'ch1', type: 'boss', x: 1249, y: 316,
                 scene: 'scene/road-gate', script: 'ch1.gate',
                 puzzles: [{ id: 'liars-gate', difficulty: 2 }, { id: 'venn', difficulty: 2 }, { id: 'liars-gate', difficulty: 3 }],
@@ -127,6 +143,8 @@
                 teaser: 'Where the rift set you down. It hums. The way back is here too.',
             },
             'b-south-bridge': {
+                host: "lamplighter", goal: "See how changing an assumption changes what follows.",
+                intro: "station.b-south-bridge.intro", reminder: "station.b-south-bridge.reminder",
                 name: 'The Lever Bridge', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 756, y: 736,
                 scene: 'scene/switch-room', script: 'ch2.bridge',
                 puzzles: [{ id: 'switchboard', difficulty: 1 }],
@@ -134,6 +152,8 @@
                 teaser: 'A drawbridge worked by brass levers. Something about it is very sure of itself.',
             },
             'b-lamp-lane': {
+                host: "lamplighter", goal: "Test possible worlds to find which villagers can be honest.",
+                intro: "station.b-lamp-lane.intro", reminder: "station.b-lamp-lane.reminder",
                 name: 'Lamp Lane', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 670, y: 593,
                 scene: 'scene/village-square', script: 'ch2.lane',
                 puzzles: [{ id: 'village', difficulty: 1 }],
@@ -146,6 +166,8 @@
                 teaser: 'A fountain, a crowd, and a Mayor making a speech.',
             },
             'b-bakery': {
+                host: "baker", goal: "Check every statement before accusing someone.",
+                intro: "station.b-bakery.intro", reminder: "station.b-bakery.reminder",
                 name: 'The Bakery', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 633, y: 344,
                 scene: 'scene/village-square', script: 'ch2.bakery',
                 puzzles: [{ id: 'village', difficulty: 1 }, { id: 'village', difficulty: 2 }],
@@ -153,6 +175,8 @@
                 teaser: 'Warm bread, cold stares. Someone stole the last loaf.',
             },
             'b-post': {
+                host: "postmistress", goal: "An argument stands only if its steps support its conclusion.",
+                intro: "station.b-post.intro", reminder: "station.b-post.reminder",
                 name: 'The Post Office', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 383, y: 450,
                 scene: 'scene/village-square', script: 'ch2.post',
                 puzzles: [{ id: 'tower', difficulty: 1 }],
@@ -165,6 +189,8 @@
                 teaser: 'A quiet bridge where gossip collects like fog.',
             },
             'b-clockmaker': {
+                host: "clockmaker", goal: "Find which assumptions a conclusion actually needs.",
+                intro: "station.b-clockmaker.intro", reminder: "station.b-clockmaker.reminder",
                 name: "The Clockmaker's Workshop", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 919, y: 392,
                 scene: 'scene/switch-room', script: 'ch2.clockmaker',
                 puzzles: [{ id: 'switchboard', difficulty: 2 }],
@@ -172,6 +198,8 @@
                 teaser: 'Gears, wires and a bulb that lights only when you assume the right things.',
             },
             'b-school': {
+                host: "schoolteacher", goal: "Check the result in each case, rather than guess.",
+                intro: "station.b-school.intro", reminder: "station.b-school.reminder",
                 name: 'The Schoolhouse', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1005, y: 622,
                 scene: 'scene/village-square', script: 'ch2.school',
                 puzzles: [{ id: 'village', difficulty: 2 }, { id: 'switchboard', difficulty: 2 }],
@@ -189,6 +217,8 @@
                 teaser: 'The Constable, off duty, with a deck of cards and something to prove.',
             },
             'b-clock-tower': {
+                host: "sweep", goal: "A true fact alone does not make an argument valid.",
+                intro: "station.b-clock-tower.intro", reminder: "station.b-clock-tower.reminder",
                 name: 'The Clock Tower', chapter: 'ch2', map: 'ch2', type: 'miniboss', x: 1033, y: 287,
                 scene: 'scene/clock-tower', script: 'ch2.tower',
                 puzzles: [{ id: 'tower', difficulty: 2 }],
@@ -196,6 +226,8 @@
                 teaser: 'Gears grinding. Someone up there is asking questions, and keeping score.',
             },
             'b-stairs': {
+                host: "clockmaker", goal: "A hidden assumption can change an answer.",
+                intro: "station.b-stairs.intro", reminder: "station.b-stairs.reminder",
                 name: 'The Town Hall Stairs', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1244, y: 239,
                 scene: 'scene/switch-room', script: 'ch2.stairs',
                 puzzles: [{ id: 'switchboard', difficulty: 3 }],
@@ -203,6 +235,8 @@
                 teaser: 'A locked gate on the stairs. One switch is hidden behind a curtain.',
             },
             'b-town-hall': {
+                host: "schoolteacher", goal: "Use clear rules to check claims and their assumptions.",
+                intro: "station.b-town-hall.intro", reminder: "station.b-town-hall.reminder",
                 name: 'The Town Hall', chapter: 'ch2', map: 'ch2', type: 'boss', x: 1407, y: 191,
                 scene: 'scene/village-square', script: 'ch2.hall',
                 puzzles: [{ id: 'village', difficulty: 2 }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3 }],
@@ -223,6 +257,8 @@
                 teaser: 'Where the rift set you down. The way back to Boolesbury is here.',
             },
             't-south-bridge': {
+                host: "pip", goal: "Separate what a claim says from what its evidence supports.",
+                intro: "station.t-south-bridge.intro", reminder: "station.t-south-bridge.reminder",
                 name: 'The Neon Bridge', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 622, y: 670,
                 scene: 'scene/neon-plaza', script: 'ch3.bridge',
                 puzzles: [{ id: 'venn', difficulty: 2 }, { id: 'witness', difficulty: 2 }],
@@ -235,6 +271,8 @@
                 teaser: 'Quiet, for Tomorrowton. Someone has scratched a message into the rail.',
             },
             't-newsstand': {
+                host: "pip", goal: "Find evidence that breaks a claim, then name the weak step.",
+                intro: "station.t-newsstand.intro", reminder: "station.t-newsstand.reminder",
                 name: 'The Newsstand', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 689, y: 507,
                 scene: 'scene/tribunal', script: 'ch3.newsstand',
                 puzzles: [{ id: 'tribunal', difficulty: 1, opts: { theme: 'argument' } }],
@@ -247,6 +285,8 @@
                 teaser: 'Warm drinks, no screens. A safe place to rest.',
             },
             't-library': {
+                host: "pip", goal: "One broken step can make a claimed proof fail.",
+                intro: "station.t-library.intro", reminder: "station.t-library.reminder",
                 name: 'The Library', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 340, y: 239,
                 scene: 'scene/evidence-room', script: 'ch3.library',
                 puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'proof' } }],
@@ -259,6 +299,8 @@
                 teaser: 'Giant feed-screens. Everyone is looking up. Nobody is looking at each other.',
             },
             't-datalab': {
+                host: "pip", goal: "Numbers need a fair comparison before they support a claim.",
+                intro: "station.t-datalab.intro", reminder: "station.t-datalab.reminder",
                 name: 'The Data Lab', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 1091, y: 383,
                 scene: 'scene/evidence-room', script: 'ch3.datalab',
                 puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'statistics' } }],
@@ -266,6 +308,8 @@
                 teaser: 'Numbers on every wall. Some of them are telling the truth.',
             },
             't-gallery': {
+                host: "pip", goal: "The same numbers can look different when a chart changes.",
+                intro: "station.t-gallery.intro", reminder: "station.t-gallery.reminder",
                 name: 'The Gallery of Charts', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 1435, y: 430,
                 scene: 'scene/evidence-room', script: 'ch3.gallery',
                 puzzles: [{ id: 'chart-fixer', difficulty: 1 }, { id: 'chart-fixer', difficulty: 2 }],
@@ -278,6 +322,8 @@
                 teaser: 'Prosecutor Fin, off duty, shuffling a deck. He hates losing even more than in court.',
             },
             't-steps': {
+                host: "pip", goal: "Question a claim and connect your objection to evidence.",
+                intro: "station.t-steps.intro", reminder: "station.t-steps.reminder",
                 name: 'The Tribunal Steps', chapter: 'ch3', map: 'ch3', type: 'miniboss', x: 1340, y: 239,
                 scene: 'scene/tribunal', script: 'ch3.steps',
                 puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'argument' } }],
@@ -285,6 +331,8 @@
                 teaser: 'A witness is waiting on the steps, practising their story.',
             },
             't-tribunal': {
+                host: "judge", goal: "An argument must survive checks of its reasons, data and proof.",
+                intro: "station.t-tribunal.intro", reminder: "station.t-tribunal.reminder",
                 name: 'The Tribunal', chapter: 'ch3', map: 'ch3', type: 'boss', x: 1368, y: 105,
                 scene: 'scene/tribunal', script: 'ch3.trial',
                 puzzles: [{ id: 'tribunal', difficulty: 3, opts: { theme: 'argument' } }, { id: 'tribunal', difficulty: 3, opts: { theme: 'statistics' } }, { id: 'tribunal', difficulty: 3, opts: { theme: 'proof' } }],
@@ -306,6 +354,8 @@
                 teaser: 'A huge door. Cables like roots. The way back to Tomorrowton is behind you.',
             },
             'k-gallery': {
+                host: "oracle", goal: "A chart can use real numbers and still mislead.",
+                intro: "station.k-gallery.intro", reminder: "station.k-gallery.reminder",
                 name: 'The Chart Gallery', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 799, y: 727,
                 scene: 'scene/chart-gallery', script: 'ch4.gallery',
                 puzzles: [{ id: 'chart-fixer', difficulty: 2 }, { id: 'chart-fixer', difficulty: 3 }],
@@ -313,6 +363,8 @@
                 teaser: 'Giant charts in gold frames. The Algorithm\'s favourite artworks.',
             },
             'k-prediction': {
+                host: "oracle", goal: "A prediction uses past patterns and can still be wrong.",
+                intro: "station.k-prediction.intro", reminder: "station.k-prediction.reminder",
                 name: 'The Prediction Hall', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 804, y: 631,
                 scene: 'scene/server-hall', script: 'ch4.prediction',
                 puzzles: [{ id: 'prediction', difficulty: 1 }, { id: 'prediction', difficulty: 2 }],
@@ -325,6 +377,8 @@
                 teaser: 'A quiet landing between floors. A good place to rest.',
             },
             'k-workshop': {
+                host: "oracle", goal: "Choose useful information and a model before calculating.",
+                intro: "station.k-workshop.intro", reminder: "station.k-workshop.reminder",
                 name: 'The Modelling Workshop', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 794, y: 450,
                 scene: 'scene/oracle-chamber', script: 'ch4.workshop',
                 puzzles: [{ id: 'three-act', difficulty: 1 }, { id: 'three-act', difficulty: 2 }],
@@ -332,6 +386,8 @@
                 teaser: 'An hourglass, a dripping cauldron, a growing floor. Questions everywhere.',
             },
             'k-sorting': {
+                host: "oracle", goal: "A high score can hide who a model harms.",
+                intro: "station.k-sorting.intro", reminder: "station.k-sorting.reminder",
                 name: 'The Sorting Room', chapter: 'ch4', map: 'ch4', type: 'miniboss', x: 813, y: 359,
                 scene: 'scene/server-hall', script: 'ch4.sorting',
                 puzzles: [{ id: 'sorting', difficulty: 2 }],
@@ -339,6 +395,8 @@
                 teaser: 'A machine deciding who gets help. Everyone agrees it is very accurate.',
             },
             'k-oracle': {
+                host: "oracle", goal: "A machine's proof needs its assumptions and every step checked.",
+                intro: "station.k-oracle.intro", reminder: "station.k-oracle.reminder",
                 name: 'The Oracle Chamber', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 794, y: 249,
                 scene: 'scene/oracle-chamber', script: 'ch4.oracle',
                 puzzles: [{ id: 'oracle', difficulty: 1 }, { id: 'oracle', difficulty: 2 }],
@@ -351,6 +409,8 @@
                 teaser: 'The Algorithm\'s champion waits on the bridge, holding a perfectly optimised deck.',
             },
             'k-core': {
+                host: "granny", goal: "Check a model's limits, its proof and the choices behind it.",
+                intro: "station.k-core.intro", reminder: "station.k-core.reminder",
                 name: 'The Core', chapter: 'ch4', map: 'ch4', type: 'boss', x: 770, y: 77,
                 scene: 'scene/core-chamber', script: 'ch4.core',
                 puzzles: [{ id: 'prediction', difficulty: 3 }, { id: 'oracle', difficulty: 3 }, { id: 'three-act', difficulty: 3 }],

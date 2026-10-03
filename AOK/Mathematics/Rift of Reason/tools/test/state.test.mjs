@@ -42,4 +42,7 @@ test('migrate fills fields added since an old save', () => {
     assert.equal(s.avatar.type, 'fox');
     assert.ok(Array.isArray(s.creatures));
     assert.equal(typeof s.stats.puzzlesSolved, 'number');
+    assert.deepEqual(Object.keys(s.tutorialsSeen), []);
+    s.tutorialsSeen.venn = true;
+    assert.equal(Rift.State.migrate(s).tutorialsSeen.venn, true);
 });

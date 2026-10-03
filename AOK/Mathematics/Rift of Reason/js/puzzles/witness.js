@@ -172,12 +172,26 @@
         });
         container.append(el('div.wit', null, [scene, el('div.stack', null, [claims, submit])]));
         let timer = null;
-        if (data.hideAfter) {
-            const note = el('div.small.muted', { text: 'The scene fades in ' + data.hideAfter + ' seconds. Look carefully.' });
-            scene.append(note);
-            timer = setTimeout(() => { scene.classList.add('faded'); note.textContent = 'The scene has faded. Trust what you saw, not what you imagine.'; }, data.hideAfter * 1000);
+        let remaining = data.hideAfter * 1000;
+        let started = 0;
+        let stopped = false;
+        const note = data.hideAfter ? el('div.small.muted', { text: 'The scene fades after ' + data.hideAfter + ' seconds of play. Help pauses the clock.' }) : null;
+        function pause() {
+            if (!timer) return;
+            clearTimeout(timer);
+            timer = null;
+            remaining = Math.max(0, remaining - (Date.now() - started));
         }
-        return { destroy() { clearTimeout(timer); } };
+        function resume() {
+            if (stopped || timer || !data.hideAfter || scene.classList.contains('faded')) return;
+            started = Date.now();
+            timer = setTimeout(() => { timer = null; scene.classList.add('faded'); note.textContent = 'The scene has faded. Trust what you saw, not what you imagine.'; }, remaining);
+        }
+        if (data.hideAfter) {
+            scene.append(note);
+            resume();
+        }
+        return { pause, resume, destroy() { stopped = true; clearTimeout(timer); } };
     }
 
     Rift.Puzzles.register({

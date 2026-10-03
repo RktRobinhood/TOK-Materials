@@ -29,6 +29,7 @@
             stages = stages.filter(p => p && Rift.Puzzles.get(p.id));
             const obstacle = params.shrine ? null : visit.obstacle;
             const firstTime = !state.map.completed.includes(n.id);
+            const firstVisit = state.map.visitCount[n.id] === 1;
 
             let stageIx = 0;
             let handle = null;
@@ -36,6 +37,9 @@
             let hintIx = 0;
             let wrongs = 0;
             let destroyed = false;
+            let tutorial = null;
+            let helpModal = null;
+            let puzzleSlot = null;
 
             rootNode.append(Rift.Assets.img(n.scene || 'scene/road-forest', { className: 'scene-bg', label: n.name }));
             const hud = Rift.UI.hud({ back: { label: 'Map', onclick: leave } });
@@ -45,18 +49,44 @@
             const feedback = el('div.enc-feedback');
             const hintBtn = el('button.btn.small', { text: '💡 Hint', onclick: () => hint() });
             const perkBtn = el('button.btn.small', { onclick: () => usePerk() });
-            const controls = el('div.enc-controls.row', null, [hintBtn, perkBtn]);
-            rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, host, controls, feedback]), stageBox]));
+            const helpBtn = el('button.btn.small', { text: 'How to play', disabled: true, onclick: showHelp });
+            const controls = el('div.enc-controls.row', null, [hintBtn, perkBtn, helpBtn]);
+            const goal = el('div.enc-goal.panel.small', { text: n.goal || 'Check the rules before you choose an answer.' });
+            rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, host, goal, controls, feedback]), stageBox]));
 
             const taunt = obstacle ? Rift.makeRng(visit.seed + ':line').pick(Rift.data.creatures[obstacle].lines) : null;
-            if (obstacle) {
-                const c = Rift.data.creatures[obstacle];
-                host.append(
-                    Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature rabid', colour: c.colour, label: c.name }),
-                    el('div.row.small', null, [el('span.chip', { dataset: { colour: c.colour }, text: Rift.COLOURS[c.colour].icon + ' ' + Rift.COLOURS[c.colour].name }), el('span.muted', { text: c.rarity })]),
-                    el('div.bubble', { text: '"' + taunt + '"' }),
-                );
-                if (!state.seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
+            const hostId = n.host || 'narrator';
+            const speaker = Rift.data.speakers[hostId];
+            const reminder = (Rift.data.script[n.reminder] || []).find(line => line.t);
+            host.append(Rift.Assets.img(speaker.art, { className: 'enc-creature', label: speaker.name }),
+                el('strong', { text: speaker.name }), el('div.bubble', { text: reminder ? reminder.t : 'Take your time. Check the task and its rules.' }));
+
+            function runTutorial() {
+                if (tutorial) tutorial.close();
+                pausePuzzle();
+                const { def } = current();
+                const steps = def.tutorial || [{ text: def.blurb }, { text: 'Use the controls to check your answer. Hints cost hearts.' }];
+                tutorial = Rift.Tutorial.play(puzzleSlot, steps, hostId, { el, container: puzzleSlot, handle, onClose: resumePuzzle });
+            }
+            function pausePuzzle() { if (handle && handle.pause) handle.pause(); }
+            function resumePuzzle() { if (!destroyed && handle && handle.resume) handle.resume(); }
+            function closeHelp() {
+                if (tutorial) tutorial.close();
+                if (helpModal) helpModal.close();
+            }
+            function showHelp() {
+                closeHelp();
+                pausePuzzle();
+                helpModal = Rift.Tutorial.rules(current().def, hostId, runTutorial, resumePuzzle);
+            }
+            function offerTutorial(def) {
+                if (Rift.State.get().tutorialsSeen[def.id]) return;
+                Rift.State.update(s => { s.tutorialsSeen[def.id] = true; });
+                pausePuzzle();
+                helpModal = Rift.UI.modal('First time here?', el('div.stack', null, [el('p', { text: def.name }), el('p', { text: 'Would you like a short tour of the controls?' })]), [
+                    { label: "I'll figure it out" },
+                    { label: 'Show me how', primary: true, onclick: runTutorial },
+                ], { onClose: resumePuzzle });
             }
 
             // ---- perks shown in the encounter ----
@@ -90,6 +120,8 @@
             }
 
             function mountStage() {
+                if (tutorial) tutorial.close();
+                if (helpModal) helpModal.close();
                 if (handle && handle.destroy) handle.destroy();
                 stageBox.innerHTML = '';
                 feedback.textContent = '';
@@ -97,21 +129,27 @@
                 const { def, difficulty } = current();
                 const rng = Rift.makeRng(visit.seed + ':stage' + stageIx);
                 const data = def.generate(rng, difficulty, stages[stageIx].opts); // opts e.g. { theme: 'statistics' } from data/map.js
-                current().data = data;
                 stages[stageIx].data = data;
                 title.querySelector('.stage').textContent = def.name + (stages.length > 1 ? '  ·  stage ' + (stageIx + 1) + ' of ' + stages.length : '');
                 stageBox.append(el('div.enc-blurb.small', null, [el('span.chip', { dataset: { colour: def.colour }, text: Rift.COLOURS[def.colour].icon + ' ' + def.family }), ' ' + (def.blurb || '')]));
                 const slot = el('div.enc-puzzle');
+                puzzleSlot = slot;
                 stageBox.append(slot);
                 if (Rift.State.get().scars.includes('fogged-eye')) stageBox.classList.add('fogged-eye'); // puzzles may read this
                 handle = def.mount(slot, data, {
                     submit: answer => onSubmit(answer),
                     sfx: name => Rift.Audio.sfx(name),
-                    say: (text) => { const b = host.querySelector('.bubble'); if (b) b.textContent = '"' + text + '"'; },
+                    say: (text, speakerId) => {
+                        const b = host.querySelector('.bubble');
+                        const who = (Rift.data.speakers || {})[speakerId] || (Rift.data.creatures || {})[speakerId];
+                        if (b) b.textContent = (who ? who.name + ': ' : '') + '"' + text + '"';
+                    },
                     rng: Rift.makeRng(visit.seed + ':ui' + stageIx),
                     difficulty,
                     el: Rift.el,
                 });
+                helpBtn.disabled = false;
+                offerTutorial(def);
             }
 
             function onSubmit(answer) {
@@ -211,7 +249,9 @@
             }
 
             async function victory() {
+                closeHelp();
                 if (handle && handle.destroy) handle.destroy();
+                handle = null;
                 const s = Rift.State.get();
                 if (params.shrine) {
                     Rift.State.update(st => { st.scars.shift(); });
@@ -239,6 +279,7 @@
                 const def = Rift.Puzzles.get(stages[stages.length - 1].id);
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name).join(', ');
                 const body = el('div.stack', null, [
+                    el('p.enc-goal', { text: n.goal || 'Check the rules before you choose an answer.' }),
                     def && def.tok ? el('p.tok-line', { text: '💭 ' + def.tok }) : null,
                     el('p', { text: '+' + r.xp + ' XP' + (items ? '  ·  ' + items : '') }),
                     earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
@@ -248,7 +289,12 @@
 
             // ---- catching ----
             function catchPhase() {
+                closeHelp();
                 const c = Rift.data.creatures[obstacle];
+                host.innerHTML = '';
+                host.append(Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature', colour: c.colour, label: c.name }), el('div.bubble', { text: taunt }));
+                if (!Rift.State.get().seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
+                if (taunt) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
                 const catchItems = ['charm', 'greatcharm'].filter(id => (Rift.State.get().items[id] || 0) > 0);
                 stageBox.innerHTML = '';
                 controls.style.display = 'none';
@@ -335,15 +381,19 @@
                 return { destroy() { destroyed = true; } };
             }
             (async () => {
-                if (!params.shrine && Rift.Dialogue.has(n.script) && firstTime) await Rift.Dialogue.play(n.script);
+                if (!params.shrine && firstVisit && Rift.Dialogue.has(n.script)) await Rift.Dialogue.play(n.script);
+                if (destroyed) return;
+                const lead = firstVisit ? n.intro : n.reminder;
+                if (!params.shrine && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead);
                 if (destroyed) return;
                 mountStage();
-                if (taunt) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
             })();
 
             return {
                 destroy() {
                     destroyed = true;
+                    if (tutorial) tutorial.close();
+                    if (helpModal) helpModal.close();
                     if (handle && handle.destroy) handle.destroy();
                     if (hud.destroy) hud.destroy();
                 },

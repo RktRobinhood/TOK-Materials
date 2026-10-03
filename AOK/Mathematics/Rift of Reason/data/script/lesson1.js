@@ -162,4 +162,21 @@
         { s: 'algorithm', t: 'YOU HAVE BEEN THINKING. THAT IS… UNUSUAL. RECALCULATING.' },
         { s: 'narrator', t: 'The rift is open. Step through when you are ready, or stay a while: explore, catch, battle, and come back stronger.' },
     ];
+    // Station hosts: a lead-in every visit, with a goal on first arrival.
+    S["station.stall-pattern.intro"] = [{"s":"sequins","t":"My secret rule keeps the stall running. Test numbers, then tell me the rule."},{"s":"sequins","t":"Test a rule by looking for a case that breaks it."}];
+    S["station.stall-pattern.reminder"] = [{"s":"sequins","t":"My secret rule keeps the stall running. Test numbers, then tell me the rule."}];
+    S["station.stall-witness.intro"] = [{"s":"mirage","t":"The Fair needs a careful witness. Read the scene and judge each claim."},{"s":"mirage","t":"Separate what the scene says from what you assume."}];
+    S["station.stall-witness.reminder"] = [{"s":"mirage","t":"The Fair needs a careful witness. Read the scene and judge each claim."}];
+    S["station.stall-gallery.intro"] = [{"s":"syllo","t":"Recruit! Help me check these arguments. Draw the facts before you judge the claim."},{"s":"syllo","t":"A conclusion can follow from the rules without being true in real life."}];
+    S["station.stall-gallery.reminder"] = [{"s":"syllo","t":"Recruit! Help me check these arguments. Draw the facts before you judge the claim."}];
+    S["station.road-start.intro"] = [{"s":"granny","t":"The Road is full of loud claims. Check the task below before you trust one."},{"s":"granny","t":"Use the stated rules to check a claim, rather than trust a loud voice."}];
+    S["station.road-start.reminder"] = [{"s":"granny","t":"The Road is full of loud claims. Check the task below before you trust one."}];
+    S["station.well.intro"] = [{"s":"sequins","t":"This well wants reasons, not wishes. Read its task and test what it claims."},{"s":"sequins","t":"Decide what follows from evidence and what still needs testing."}];
+    S["station.well.reminder"] = [{"s":"sequins","t":"This well wants reasons, not wishes. Read its task and test what it claims."}];
+    S["station.troll-bridge.intro"] = [{"s":"syllo","t":"The bridge demands a drawing. Check its rule: draw the route or show why no route works."},{"s":"syllo","t":"You can prove that a drawing is impossible, as well as draw one."}];
+    S["station.troll-bridge.reminder"] = [{"s":"syllo","t":"The bridge demands a drawing. Check its rule: draw the route or show why no route works."}];
+    S["station.standing-stone.intro"] = [{"s":"sequins","t":"The stone looks certain of its pattern. Let us see where that certainty stops."},{"s":"sequins","t":"A pattern can hide a limit; look for a case where your idea fails."}];
+    S["station.standing-stone.reminder"] = [{"s":"sequins","t":"The stone looks certain of its pattern. Let us see where that certainty stops."}];
+    S["station.gate.intro"] = [{"s":"granny","t":"The guards want reasons. Solve each task in turn and check which facts you are using."},{"s":"granny","t":"A proof depends on the rules and facts you start with."}];
+    S["station.gate.reminder"] = [{"s":"granny","t":"The guards want reasons. Solve each task in turn and check which facts you are using."}];
 })(typeof window !== 'undefined' ? window : globalThis);

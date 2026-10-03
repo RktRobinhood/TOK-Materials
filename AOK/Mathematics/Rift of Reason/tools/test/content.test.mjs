@@ -16,6 +16,19 @@ const Rift = loadRift([
 ]);
 const { nodes } = Rift.data.map;
 
+test('every puzzle station has a known host, goal and first/repeat lead-in', () => {
+    for (const [id, n] of Object.entries(nodes)) {
+        if (!n.puzzles) continue;
+        assert.ok(Rift.data.speakers[n.host], id + ': unknown host');
+        assert.ok(n.goal && n.goal.length <= 160, id + ': missing or long goal');
+        for (const key of [n.intro, n.reminder]) {
+            assert.ok(key && Rift.data.script[key]?.length, id + ': missing lead-in');
+            assert.ok(Rift.data.script[key].some(step => step.s === n.host && step.t), id + ': host never speaks');
+        }
+        assert.equal(Rift.data.script[n.reminder].length, 1, id + ': repeat lead-in should be short');
+    }
+});
+
 test('map links are two-way and point at real nodes', () => {
     for (const [id, n] of Object.entries(nodes)) {
         for (const m of n.links) {

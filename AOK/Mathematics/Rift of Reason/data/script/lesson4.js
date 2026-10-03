@@ -103,4 +103,17 @@
         { flag: 'rift-walker', value: true },
         { s: 'narrator', t: 'The end. For now. Your creatures, your collection and the whole map are still here. Keep exploring.' },
     ];
+    // Station hosts: a lead-in every visit, with a goal on first arrival.
+    S["station.k-gallery.intro"] = [{"s":"oracle","t":"The Algorithm calls these charts perfect. Inspect the axes and switches before agreeing."},{"s":"oracle","t":"A chart can use real numbers and still mislead."}];
+    S["station.k-gallery.reminder"] = [{"s":"oracle","t":"The Algorithm calls these charts perfect. Inspect the axes and switches before agreeing."}];
+    S["station.k-prediction.intro"] = [{"s":"oracle","t":"This machine guesses your next move. Read its counting table and test its guess."},{"s":"oracle","t":"A prediction uses past patterns and can still be wrong."}];
+    S["station.k-prediction.reminder"] = [{"s":"oracle","t":"This machine guesses your next move. Read its counting table and test its guess."}];
+    S["station.k-workshop.intro"] = [{"s":"oracle","t":"The workshop has a question for you. Make a guess, ask for facts, then build a model."},{"s":"oracle","t":"Choose useful information and a model before calculating."}];
+    S["station.k-workshop.reminder"] = [{"s":"oracle","t":"The workshop has a question for you. Make a guess, ask for facts, then build a model."}];
+    S["station.k-sorting.intro"] = [{"s":"oracle","t":"This machine decides who gets help. Check the mistakes and who pays for them."},{"s":"oracle","t":"A high score can hide who a model harms."}];
+    S["station.k-sorting.reminder"] = [{"s":"oracle","t":"This machine decides who gets help. Check the mistakes and who pays for them."}];
+    S["station.k-oracle.intro"] = [{"s":"oracle","t":"My printer is fast. That does not make every proof right. Inspect a step and test it."},{"s":"oracle","t":"A machine's proof needs its assumptions and every step checked."}];
+    S["station.k-oracle.reminder"] = [{"s":"oracle","t":"My printer is fast. That does not make every proof right. Inspect a step and test it."}];
+    S["station.k-core.intro"] = [{"s":"granny","t":"The core claims it knows everything. Test its guesses, inspect its proof, then make your own model."},{"s":"granny","t":"Check a model's limits, its proof and the choices behind it."}];
+    S["station.k-core.reminder"] = [{"s":"granny","t":"The core claims it knows everything. Test its guesses, inspect its proof, then make your own model."}];
 })(typeof window !== 'undefined' ? window : globalThis);

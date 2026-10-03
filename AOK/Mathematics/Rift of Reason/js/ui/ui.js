@@ -18,8 +18,14 @@
     }
 
     // modal(title, bodyNode, [{ label, primary, onclick }]) → { close }
-    function modal(title, body, buttons) {
-        const close = () => backdrop.remove();
+    function modal(title, body, buttons, opts) {
+        let closed = false;
+        const close = () => {
+            if (closed) return;
+            closed = true;
+            backdrop.remove();
+            if (opts && opts.onClose) opts.onClose();
+        };
         const actions = el('div.row.wrap', { style: { justifyContent: 'flex-end', marginTop: '14px' } },
             (buttons || [{ label: 'Close' }]).map(b => el('button.btn' + (b.primary ? '.primary' : ''), {
                 text: b.label,

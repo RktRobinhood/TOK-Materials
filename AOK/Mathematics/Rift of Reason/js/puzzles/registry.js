@@ -8,6 +8,11 @@
  *   family: 'Deduction',
  *   blurb: 'One line shown before the puzzle.',
  *   tok: 'One-sentence TOK takeaway shown after solving.',
+ *   rules: ['Up to five plain-text lines explaining the controls and goal.'],
+ *   tutorial: [{ text: 'A short step.', highlight: '.control', demo(api) {} }],
+ *   // highlight is scoped to the mounted puzzle. demo is optional and must
+ *   // never submit an answer, spend items/hearts or change the real solution.
+ *   // Tutorials use Next/Back/Skip; they can be replayed at any time.
  *
  *   // PURE (no DOM) — also run by the Node tests in tools/test:
  *   generate(rng, difficulty),         // difficulty 1..3 → puzzle data (JSON-safe)
@@ -23,7 +28,7 @@
  * The api passed to mount:
  *   api.submit(answer)    → runs check(); the encounter handles success/failure, health and feedback
  *   api.sfx(name)         → play a sound (e.g. 'click', 'place', 'error')
- *   api.say(text, speaker)→ show a speech bubble line from the obstacle character
+ *   api.say(text, speaker)→ show a host bubble with a named speaker when supplied
  *   api.rng               → a seeded RNG for any cosmetic randomness
  *   api.difficulty        → 1..3
  *   api.el                → Rift.el
