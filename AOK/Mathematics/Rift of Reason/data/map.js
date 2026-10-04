@@ -32,6 +32,7 @@
                 teaser: 'Home. Warm, safe, and a bit too quiet today.',
             },
             'fair-gate': {
+                cardSchool: true, trainer: 'syllo',
                 name: 'The Fair Gate', chapter: 'prologue', type: 'story', x: 200, y: 600,
                 scene: 'scene/fair', script: 'prologue.fair', links: ['burrow', 'stall-pattern', 'stall-witness', 'stall-gallery', 'fair-finale'],
                 teaser: 'Music, lanterns and the smell of toasted nuts.',
@@ -55,6 +56,7 @@
                 teaser: 'A velvet tent. "See what really happened," says the sign.',
             },
             'stall-gallery': {
+                trainer: 'syllo',
                 host: "syllo", goal: "A conclusion can follow from the rules without being true in real life.",
                 intro: "station.stall-gallery.intro", reminder: "station.stall-gallery.reminder",
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
@@ -64,6 +66,7 @@
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
             },
             'fair-rift': {
+                requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s safe Road challenge at the Fair Gate first.',
                 name: 'The Crack in the Sky', chapter: 'prologue', type: 'story', x: 330, y: 575,
                 scene: 'scene/fair', script: 'prologue.rift', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',
@@ -207,6 +210,7 @@
                 teaser: 'A bell turret. Chalk on the board: 0 and 1, over and over.',
             },
             'b-garden': {
+                trainer: 'baker',
                 name: 'The Walled Garden', chapter: 'ch2', map: 'ch2', type: 'rest', x: 1388, y: 430,
                 scene: 'scene/village-square', script: 'ch2.garden', links: ['b-school', 'b-east-bridge'],
                 teaser: 'A greenhouse, a bench, and quiet. A safe place to rest.',
@@ -280,6 +284,7 @@
                 teaser: 'Headlines everywhere, and a crowd arguing about them. A practice trial is starting.',
             },
             't-cafe': {
+                trainer: 'pip',
                 name: 'The Café', chapter: 'ch3', map: 'ch3', type: 'rest', x: 378, y: 397,
                 scene: 'scene/neon-plaza', script: 'ch3.cafe', links: ['t-newsstand', 't-west-bridge', 't-library'],
                 teaser: 'Warm drinks, no screens. A safe place to rest.',
@@ -443,25 +448,44 @@
 
     // NPC trainers for battle nodes.
     Rift.data.trainers = {
+        'syllo': {
+            name:'Sergeant Syllo', speaker:'syllo', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
+            team:['lobstorian','astrophysicat','lobstorian','astrophysicat','beastie','astrophysicat','lobstorian','khaby','beastie','astrophysicat'],
+            ante:{items:{charm:2}},
+        },
+        'baker': {
+            name:'Mrs Crumb', speaker:'baker', intro:'“A recipe is a set of rules. Can your creatures follow mine?”',
+            team:['beastie','siuuugull','beansprout','eminemu','beastie','siuuugull','beansprout','eminemu','astrophysicat','lobstorian'],
+            ante:{items:{charm:2}},
+        },
+        'pip': {
+            name:'Pip, the Clerk', speaker:'pip', intro:'“Words can change a case. Watch my Language team and read each axiom.”',
+            team:['tremendoodle','swiftlet','kardashiant','eminemu','swiftlet','tremendoodle','kardashiant','eminemu','lobstorian','astrophysicat'],
+            ante:{items:{greatcharm:1}},
+        },
         'feed': {
+            speaker:'algorithm', intro:'“MY TEAM GETS ATTENTION. CAN YOURS THINK UNDER CHANGING RULES?”',
             name: 'The Feed\'s Champion',
             ai: 'hard',
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
         },
         'fin': {
+            speaker:'fin', intro:'“A strong case needs sound rules. Read every axiom before you attack.”',
             name: 'Prosecutor Fin',
             ai: 'hard',
             team: ['carlseal', 'altmanta', 'obambu', 'rockodile', 'messilion', 'gargoyle', 'beeyonce', 'haalandroid', 'lobstorian', 'muskrat'],
             ante: { items: { greatcharm: 2, 'trickster-coin': 1, heartstone: 1 } },
         },
         'constable': {
+            speaker:'constable', intro:'“Three lives. Two steals. The law can change each round.”',
             name: 'Constable Clobber',
             ai: 'hard',
             team: ['lobstorian', 'tremendoodle', 'rawmsay', 'rockodile', 'carlseal', 'beastie', 'swiftlet', 'muskrat', 'messilion', 'speedcheeta'],
             ante: { items: { greatcharm: 2, heartstone: 1 } },
         },
         'card-sharp': {
+            speaker:'corvina', intro:'“Fancy a match? A clever steal can turn the game.”',
             name: 'Corvina the Card Sharp',
             team: ['zuckerborg', 'astrophysicat', 'siuuugull', 'khaby', 'kardashiant', 'keanu', 'muskrat', 'lobstorian', 'beastie', 'tremendoodle'],
             ante: { items: { greatcharm: 1, ward: 1 } },

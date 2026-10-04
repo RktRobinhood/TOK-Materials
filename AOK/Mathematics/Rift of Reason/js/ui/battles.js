@@ -68,26 +68,86 @@
     }
 
     const Battles = {
-        trainer(nodeId) {
-            if (!needCreatures()) return;
+        rules(onClose) {
+            return Rift.UI.modal('How to play the card game', el('div.stack',null,[
+                'Start with 3 lives, 2 steals and 5 cards in your hand. Your deck has 10 creatures; missing cards are loaned.',
+                'On your turn: play one creature OR attack with one on your board. Your hand refills while your deck lasts.',
+                'When attacked: block with one creature OR lose one life. Normally the stronger creature wins; a tie defeats both.',
+                'Right after an opponent plays a creature: steal it OR let it stay. A steal costs one token and gives them an extra turn. Stolen cards return after the battle.',
+                'Read the shared axiom each round: it changes a rule for BOTH players. Colours give +2 against one colour; check the wheel. This is a game rule, not a ranking of knowledge.',
+                'Win when your opponent has no lives or cannot play or attack. Read creature abilities too. Practice and the story challenge have no stakes or fate rolls; other challenges can risk cards.',
+            ].map(text=>el('p.small',{text}))),[{label:'Close'}],{onClose});
+        },
+
+        learn(back) {
+            Rift.Router.go('battle-lesson',{onEnd(won){
+                if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;});
+                Rift.Router.replace(back||'map');
+                if(won&&back!=='collection'&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();
+            }});
+        },
+
+        storyOffer() {
+            const host=Rift.data.speakers.syllo;
+            Rift.UI.modal('Syllo’s Road challenge',el('div.stack',null,[
+                Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
+                el('p',{text:'Sergeant Syllo: “Before the Road, show me you can reason from the rules. Same moves, different axioms, different game.”'}),
+                el('p.small',{text:'Win this safe match to open the Road. You get a loaned starter team, even with an empty collection. No cards or items are at risk.'}),
+            ]),[{label:'Later'},{label:'Learn first',onclick:()=>Battles.learn('map')},{label:'Challenge',primary:true,onclick:()=>Battles.story()}]);
+        },
+
+        story() {
+            Rift.Router.go('battle',{
+                mode:'practice',seed:'syllo-road-challenge',
+                player:{team:Rift.Battle.Lesson.starter(),items:{},axioms:[]},
+                axiomDeck:['empty-set','age-of-reason','underdog','empty-set','age-of-reason'],
+                battleOptions:{first:0,shuffle:false,shuffleAxioms:false},
+                opponent:{name:'Sergeant Syllo · Road challenge',team:Rift.Battle.Lesson.team(Array(10).fill('speedcheeta'),'syllo-'),ai:'easy'},
+                onEnd(result){
+                    finish(result);
+                    if(result.outcome==='won'){
+                        Rift.State.update(s=>{s.flags['story-battle-won']=true;});
+                        // Rebuild the map after setting the flag so the Road unlock is visible immediately.
+                        Rift.Router.replace('map');
+                        Rift.UI.modal('The Road is open',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
+                    }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: save a steal for a strong creature. Read each axiom before blocking: under Underdog, the weaker creature wins.'}),[
+                        {label:'Later'},{label:'Learn again',onclick:()=>Battles.learn('map')},{label:'Retry',primary:true,onclick:()=>Battles.story()},
+                    ]);
+                },
+            });
+        },
+
+        offer(nodeId, activity) {
+            const n=Rift.World.node(nodeId), t=Rift.data.trainers[n.trainer], host=Rift.data.speakers[t.speaker];
+            const choices=[{label:'Later'}];
+            if(activity)choices.push({label:'Do the activity',onclick:activity});
+            choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
+                {label:'Challenge · Easy',primary:true,onclick:()=>Battles.trainer(nodeId,'easy')},
+                {label:'Challenge · Hard',onclick:()=>Battles.trainer(nodeId,'hard')});
+            Rift.UI.modal(t.name,el('div.stack',null,[Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
+                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes and fate rolls. Defeated collected cards may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
+            ]),choices);
+        },
+
+        trainer(nodeId, difficulty) {
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
             prepare(consumables => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
-                player: { consumables },
-                opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ai: t.ai || 'easy', stake: t.ante },
-                onEnd: result => finish(result, { nodeId }),
+                player: { consumables, team: Rift.State.get().creatures.length ? Rift.State.get().creatures.slice(0,10) : Rift.Battle.Lesson.starter() },
+                opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ai: difficulty || t.ai || 'easy', stake: t.ante },
+                onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null }),
             }));
         },
 
         practice() {
-            if (!needCreatures()) return;
             const sd = seed('practice');
             const team = Rift.Battle.Engine.randomTeam(Rift.makeRng(sd), 10, { prefix: 'spar', legendaries: false });
             Rift.Router.go('battle', {
                 mode: 'practice',
                 seed: sd,
+                player: { team: Rift.State.get().creatures.length ? Rift.State.get().creatures.slice(0,10) : Rift.Battle.Lesson.starter() },
                 opponent: { name: 'The Training Dummy', team, ai: 'easy' },
                 onEnd: result => finish(result, { back: 'collection' }),
             });

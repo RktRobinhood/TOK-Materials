@@ -68,12 +68,13 @@
                 { id: 'you', name: 'You', team: me.team, consumables: me.consumables },
                 { id: 'opp', name: opp.name || 'Rival', team: oppTeam },
             ],
-            axiomDeck: E.buildAxiomDeck(me.axioms, opp.axioms),
-            options: { mode },
+            axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, opp.axioms),
+            options: Object.assign({}, p.battleOptions, { mode }),
         });
         const startLives = state.players.map(P => P.lives);
         const ante = B().Ante.compute({ type: anteType, player: { items: me.items }, opponent: Object.assign({}, opp, { team: oppTeam }), seed });
         const ui = { selected: null, timer: null, ended: false, news: [] };
+        let help = null;
 
         // ---- skeleton ----
         const dom = {};
@@ -88,6 +89,11 @@
                 dom.myBar = el('div.b-bar.me'),
             ]),
             el('aside.b-side', {}, [
+                el('button.btn.small',{text:'How to play',onclick(){
+                    if(help)return;
+                    clearTimeout(ui.timer);
+                    help=Rift.Battles.rules(()=>{help=null;if(!ui.ended)schedule();});
+                }}),
                 dom.axiom = el('div.b-axiom'),
                 dom.wheel = wheelLegend(),
                 el('div.b-log-wrap.panel', {}, [el('h3', { text: 'What happened' }), dom.log = el('ol.b-log')]),
@@ -122,6 +128,7 @@
 
         function schedule() {
             clearTimeout(ui.timer);
+            if(ui.ended || help) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 900); return; }
             if (decider() === OPP) {
                 ui.timer = setTimeout(() => {
@@ -157,7 +164,7 @@
                     el('b', { text: (c.warped ? '🌀 ' : '') + defs[c.ability].name + ': ' }), defs[c.ability].text,
                 ]));
             } else if (!c.ability) {
-                lines.push(el('div.b-ab.none', { text: c.injured.includes('no-ability') ? '🤕 No ability (injured)' : 'No ability' }));
+                lines.push(el('div.b-ab.none', { text: c.injured.includes('no-ability') ? (c.loaner ? 'Teaching card: no ability' : '🤕 No ability (injured)') : 'No ability' }));
             }
             (c.gained || []).forEach(a => {
                 if (defs[a]) lines.push(el('div.b-ab.gained', {}, [el('b', { text: '+ ' + defs[a].name + ': ' }), defs[a].text]));
@@ -501,6 +508,7 @@
             items.push(el('li', {}, [colourChip('memory'), el('div.wheel-line', { text: W.memory })]));
             return el('details.b-wheel.panel', {}, [
                 el('summary', { text: `Colour wheel: +${W.bonus} power vs the colour you beat` }),
+                el('p.small',{text:'These are rules for this game, not a universal ranking of ways of knowing.'}),
                 el('ul', {}, items),
             ]);
         }
@@ -510,7 +518,7 @@
         schedule();
 
         const handle = {
-            destroy() { clearTimeout(ui.timer); ui.ended = true; },
+            destroy() { clearTimeout(ui.timer); ui.ended = true; if(help)help.close(); },
             get state() { return state; },
             result: null,
         };

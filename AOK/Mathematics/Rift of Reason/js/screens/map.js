@@ -164,6 +164,12 @@
                 g.addEventListener('mouseenter', () => showTip(id, kind, locked));
                 g.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
                 if (kind === 'revealed') {
+                    if(n.trainer){
+                        const trainer=Rift.data.trainers[n.trainer], host=Rift.data.speakers[trainer.speaker];
+                        g.append(svg('image',{href:Rift.Assets.src(host.art),x:-27,y:-86,width:54,height:60,'aria-label':trainer.name}));
+                        const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
+                        label.textContent=n.cardSchool?'Learn / Challenge':'Challenge';g.append(label);
+                    }
                     g.addEventListener('click', () => goTo(id));
                     g.addEventListener('keydown', ev => { if (ev.key === 'Enter') goTo(id); });
                 }
@@ -243,6 +249,9 @@
                 const st = Rift.State.get();
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
+                if(n.trainer&&!n.cardSchool&&n.type!=='battle'&&!(opts&&opts.skipTrainer)){
+                    Rift.Battles.offer(id,()=>arrive(id,{skipTrainer:true}));return;
+                }
                 const finish = () => {
                     if (id === 'fair-finale') Rift.State.update(s => { if (Rift.World.award(s, 'rift-walker')) Rift.UI.toast('🏅 New accolade: Rift Walker'); });
                     const before = st.map.revealed.length;
@@ -254,11 +263,17 @@
                     case 'story':
                     case 'rumour':
                     case 'rift':
-                        if (!done || n.type !== 'story' || await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now')) {
+                        if (!done || n.type !== 'story' || (!n.cardSchool && await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now'))) {
                             if (n.fx === 'rift') await Rift.UI.riftFx();
                             await Rift.Dialogue.play(n.script);
                         }
                         finish();
+                        if(n.cardSchool){
+                            if(!Rift.State.get().flags['card-lesson-won'])Rift.Battles.learn('map');
+                            else if(!Rift.State.get().flags['story-battle-won'])Rift.Battles.storyOffer();
+                            else Rift.Battles.offer(id);
+                            break;
+                        }
                         if (n.portal && !(opts && opts.fromPortal)) travel(n.portal);
                         break;
                     case 'rest':
@@ -271,11 +286,7 @@
                         break;
                     case 'battle':
                         await Rift.Dialogue.play(n.script);
-                        if (!Rift.State.get().creatures.length) {
-                            Rift.UI.toast('Corvina laughs: "No creatures? Come back when you have caught one."', 4000);
-                            break;
-                        }
-                        Rift.Battles.trainer(id);
+                        Rift.Battles.offer(id);
                         break;
                     default:
                         Rift.Router.go('encounter', { nodeId: id });

@@ -68,6 +68,7 @@
                 el('h1', { text: 'Collection' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
                 el('div.row.wrap', { style: { marginBottom: '14px' } }, [
+                    el('button.btn', { text: 'Learn the card game', onclick: () => Rift.Battles.learn('collection') }),
                     el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),

@@ -1,5 +1,12 @@
 /* Rift of Reason — battle screen. Builds on the tokens in css/game.css. */
 
+.battle-lesson { position:absolute; inset:12px; overflow:auto; padding:18px; }
+.battle-lesson h2, .battle-lesson h3 { margin:8px 0; }
+.lesson-score, .lesson-axiom, .lesson-controls { padding:10px; }
+.lesson-card { display:flex; flex-direction:column; align-items:center; width:135px; padding:6px; border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,.25); font-size:13px; }
+.lesson-card img { width:75px; height:80px; object-fit:contain; }
+.lesson-controls .btn { margin:4px; }
+
 .battle {
     position: absolute; inset: 0;
     display: grid;

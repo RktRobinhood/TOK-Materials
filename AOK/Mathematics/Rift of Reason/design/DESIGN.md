@@ -69,6 +69,8 @@ Hints cost **health** (one heart, or two with Shaky Hand). Each puzzle stage has
 
 ## Battles (payoff mode)
 
+The Fair Gate introduces Granny's fixed, eight-step teaching match before normal Road progression. It is replayable from Collection. Syllo then offers a separate safe Road challenge with a loaned starter team; victory opens the Fair rift alongside the two-puzzle requirement. Both matches use practice rules: no fate or stakes. The Time rift remains available for classroom catch-up. Challengers show portraits and introductions, and offer Easy/Hard; side challenges never count as completing their host puzzle. A shared rules card is available inside battles, with AI paused while it is open.
+
 - **Rules borrowed from Mindbug** (Garfield et al., 2022; BGG 7.5; Guldbrikken nominee): 3 lives, hand of 5; each turn **play a creature or attack**; defender **blocks** (lower power dies) or loses a life; **twice per game, steal the creature the opponent just played** (borrowed for that battle only). See `research/shared-deck-monster-battlers.md`.
 - Players battle with **their own creatures** (deck = their team).
 - **Shared axiom deck**: one Axiom card flips face-up per round for both players and rewrites the rules until the next flip ("weaker creature wins blocks", "no steals", "red +2", "attacks face-down"). A counter shows which axioms remain. New axioms can be won and added.

@@ -1,6 +1,6 @@
 # Rift of Reason — implementation progress
 
-Updated 2026-10-03. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
+Updated 2026-10-04. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
 
 ## Issue audit
 
@@ -11,9 +11,9 @@ Updated 2026-10-03. Work directly on `main`, as requested by the teacher. Limit 
 
 ## Active work
 
-#37: hosts, first/repeat lead-ins and goals for all 30 puzzle stations, migration-safe tutorial tracking, a reusable tutorial overlay, and a permanent How to play button. The encounter shows the station host; creatures are revealed only during the catch screen. The loot roll itself still needs #40.
+#37: hosts, first/repeat lead-ins and goals for all 30 puzzle stations, migration-safe tutorial tracking, a reusable tutorial overlay, and a permanent How to play button. The encounter shows the station host; creatures are revealed only during the catch screen. Post-success loot is implemented in #40 below.
 
-All 267 tests pass. Browser checks confirm first-use offer, optional tour, replayable rules and unchanged hearts. Independent standards/spec reviews found cleanup, timer, speaker and story-continuity problems; these are fixed. Timed Witness play pauses during help, repeat visits use visit history, and original first-visit story beats are preserved. Tutorials for individual puzzle types and round-two ratings are still #38/#35 work.
+Framework checks passed. Browser checks confirm first-use offer, optional tour, replayable rules and unchanged hearts. Independent standards/spec reviews found cleanup, timer, speaker and story-continuity problems; these are fixed. Timed Witness play pauses during help, repeat visits use visit history, and original first-visit story beats are preserved. Individual tours are implemented in #38 below; full station round-two review remains #35.
 
 ## Tutorials (#38)
 
@@ -35,19 +35,16 @@ Implemented timed ring throws and a 6×6 charm trap, seeded per visitor. Great C
 
 1. Baseline reports #35/#36 are committed. #36 closed; exhaustive station play and full round two remain #35.
 2. #37 framework and #38 tutorials are implemented; #37 awaits the full station review.
-3. #39: free-check counter, heart costs, Witness reasoning feedback, stars and durable stage debriefs.
-4. #40: roll creature loot after success, sometimes none; reward clean performance and preserve lure/rumour effects.
-5. #41: statistical odds checks and two short catch games.
-6. #42: guided card battle, visible challengers, starter loans and a required story battle.
-7. Run both critics again, release checks #25, then final-script voices #43. Bonus puzzles #13 and stretch #29–#31 remain separate.
+3. #38–#41 are closed: tutorials, attempts/feedback, post-success loot and skill catches are implemented and checked.
+4. #42: guided teaching battle, safe required story challenge, loaned starter teams, rules and seven visible challengers are implemented. See `reviews/card-introduction.md`; both final source reviews found no blocker, student clarity 7/10. The introduction's focused tests cover real engine/controller behaviour.
+5. Complete the station source/content review under the user's 2026-10-04 instruction to favour efficient text checks over prolonged browser traversal. Clearly label source ratings and browser limits. Finish #35/#37 before closing #34.
+6. Release checks #25, SFX #24, then final-script voices #43. Bonus puzzles #13 and stretch #29–#31 remain separate.
 
 ## Review findings to follow up
 
-- Tower wording equates knowing, meeting and friendship with the Postmistress; inspect its natural-language rules against the formal atoms.
-- Oracle hints must not suggest that a few failed counterexample searches prove a universal statement.
-- Tribunal's two-cat case should say identity is unsupported, rather than proved false merely because two similar cats exist.
+- Tower, Oracle and Tribunal wording findings were fixed in #39; see `reviews/feedback-audit.md`.
 - Venn currently accepts a correct verdict with an empty diagram. Explain the diagram's optional status or explicitly require construction when that is the learning outcome.
-- Boss success feedback disappears after 1.1 seconds and only the final puzzle gets a TOK debrief.
+- Boss feedback is now durable and every stage has a Why; fixed in #39.
 - The Pattern Stall has cramped controls at laptop widths and several competing character identities.
 
 ## Commands

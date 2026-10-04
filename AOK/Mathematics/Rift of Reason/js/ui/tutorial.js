@@ -47,7 +47,7 @@
             if (step.demo && !demonstrated.has(index)) { step.demo(api); demonstrated.add(index); }
             bubble.innerHTML = '';
             bubble.append(
-                el('div.row', null, [Rift.Assets.img(host.art, { className: 'tutorial-face', label: host.name }), el('strong', { text: host.name + ' · ' + (index + 1) + '/' + steps.length })]),
+                el('div.row', null, [Rift.Assets.img(host.art, { className: 'tutorial-face', label: host.name }), el('strong', { text: host.name + ' · ' + (step.progress || ((index + 1) + '/' + steps.length)) })]),
                 el('p', { text: step.text, 'aria-live': 'polite' }),
                 el('div.row.wrap', null, [
                     el('button.btn.small', { text: 'Back', disabled: index === 0, onclick() { index -= 1; render(); } }),
