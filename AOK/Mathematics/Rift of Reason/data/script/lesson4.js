@@ -37,7 +37,7 @@
         { s: 'colossus', t: 'A SIMPLE GAME. CHOOSE. I WILL ALREADY KNOW.' },
     ];
     S['ch4.prediction.win'] = [
-        { s: 'narrator', t: 'It did not know you. It counted what you did before and bet on it. That is a prediction, not knowledge.' },
+        { s: 'narrator', t: 'This machine counted your past choices. That did not guarantee your next move. When is a prediction well supported enough to count as knowledge?' },
     ];
 
     S['ch4.stairwell'] = [
@@ -48,7 +48,7 @@
         { s: 'narrator', t: 'A workshop full of questions. Not formulas. Questions. Look first, wonder, then decide what you need to know.' },
     ];
     S['ch4.workshop.win'] = [
-        { s: 'narrator', t: 'You chose what mattered and ignored what did not. That choice is most of mathematics.' },
+        { s: 'narrator', t: 'Your model matched within the allowed margin. Notice which facts it needed; extra facts did not make it better.' },
     ];
 
     S['ch4.sorting'] = [

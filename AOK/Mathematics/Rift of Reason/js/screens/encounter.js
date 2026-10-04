@@ -321,7 +321,7 @@
                         if (p.id === 'village') earned.push('truth-tabler');
                         if (p.id === 'tribunal') earned.push('cross-examiner');
                         if (p.id === 'chart-fixer') earned.push('chart-honest');
-                        if (p.id === 'rule-hunter' && r.strategy === 'tried-to-falsify') earned.push('falsifier');
+                        if (p.id === 'rule-hunter' && r.discriminating) earned.push('falsifier');
                     });
                     if (n.id === 'b-town-hall') earned.push('unmasker');
                     earned = earned.filter(id => Rift.World.award(st, id));

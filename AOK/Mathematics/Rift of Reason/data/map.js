@@ -192,13 +192,13 @@
                 teaser: 'A quiet bridge where gossip collects like fog.',
             },
             'b-clockmaker': {
-                host: "clockmaker", goal: "Find which assumptions a conclusion actually needs.",
+                host: "clockmaker", goal: "Check how true and false inputs pass through logical rules.",
                 intro: "station.b-clockmaker.intro", reminder: "station.b-clockmaker.reminder",
                 name: "The Clockmaker's Workshop", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 919, y: 392,
                 scene: 'scene/switch-room', script: 'ch2.clockmaker',
                 puzzles: [{ id: 'switchboard', difficulty: 2 }],
                 spawns: ['muskrat', 'altmanta', 'zuckerborg', 'gargoyle', 'haalandroid'], links: ['b-square', 'b-school', 'b-clock-tower'],
-                teaser: 'Gears, wires and a bulb that lights only when you assume the right things.',
+                teaser: 'Gears, wires and a bulb controlled by true and false inputs.',
             },
             'b-school': {
                 host: "schoolteacher", goal: "Check the result in each case, rather than guess.",
@@ -230,7 +230,7 @@
                 teaser: 'Gears grinding. Someone up there is asking questions, and keeping score.',
             },
             'b-stairs': {
-                host: "clockmaker", goal: "A hidden assumption can change an answer.",
+                host: "clockmaker", goal: "Check a circuit's inputs and rules before trusting its output.",
                 intro: "station.b-stairs.intro", reminder: "station.b-stairs.reminder",
                 name: 'The Town Hall Stairs', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1244, y: 239,
                 scene: 'scene/switch-room', script: 'ch2.stairs',

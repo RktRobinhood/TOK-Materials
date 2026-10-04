@@ -123,8 +123,10 @@ test('check: tolerance, red herrings, reflection and bad input', () => {
     assert.equal(r.tidy, false);
     // no reflection: not yet
     assert.equal(P.check(data, Object.assign({}, good, { reflection: null })).solved, false);
-    // any reflection is accepted
-    for (let i = 0; i < data.reflections.length; i++) assert.equal(P.check(data, Object.assign({}, good, { reflection: i })).solved, true);
+    // Reflection must agree with the observed prediction and requested facts.
+    for (let i = 0; i < data.reflections.length; i++) assert.equal(P.check(data, Object.assign({}, good, { reflection: i })).solved, i===I.MATCHED);
+    assert.equal(P.check(data,{...good,model:good.model+data.tolerance/2,reflection:0}).solved,true);
+    assert.equal(P.check(data,{...good,model:good.model+data.tolerance/2,reflection:2}).solved,false);
     // junk
     assert.equal(P.check(data, null).solved, false);
     assert.equal(P.check(data, {}).solved, false);

@@ -10,7 +10,7 @@
  *   non-sequitur  an "if… then" used backwards (affirming the consequent)
  *   diagram       trusting how a picture looks (a corner that only looks square)
  *   off-by-one    counting gaps instead of posts (or pages)
- *   sqrt-sign     forgetting the negative square root (√(x²) = x)
+ *   sqrt-sign     confusing equal squares with equal numbers (√(x²) = |x|)
  *
  * At difficulty 3 the machine may also print a huge, correct, case-by-case
  * proof that no human would read (hundreds of cases), like the computer
@@ -41,7 +41,7 @@
             explain: 'A picture can look right without being right. The step assumes something only because it looks that way.' },
         'off-by-one': { label: 'It counts one too few (or one too many)', short: 'Off by one',
             explain: 'Counting gaps is not counting posts: from a to b there are b − a + 1 whole numbers.' },
-        'sqrt-sign': { label: 'It forgets that a square root can be negative', short: 'Square-root sign',
+        'sqrt-sign': { label: 'It treats equal squares as equal numbers', short: 'Square-root sign',
             explain: 'If two squares are equal, the numbers are equal OR opposite: √(x²) is |x|, not always x.' },
     };
     const FLAW_IDS = Object.keys(FLAWS);
@@ -533,7 +533,7 @@
                 flawStep: 3,
                 vars: [],
                 hint: 'Work out ' + p + ' − ' + h + ' and ' + q + ' − ' + h + '. They have the same square, but are they the same number?',
-                explain: p + ' − ' + h + ' = ' + minus(p - h) + ' and ' + q + ' − ' + h + ' = ' + (q - h) + '. Their squares are equal, but the numbers are opposites: the square root forgot the minus sign.',
+                explain: p + ' − ' + h + ' = ' + minus(p - h) + ' and ' + q + ' − ' + h + ' = ' + (q - h) + '. Their squares are equal, but the numbers are opposites. Taking √ gives their absolute values, not the original signed numbers.',
             };
         }
         const x = rng.pick(['x', 'y', 'n']);

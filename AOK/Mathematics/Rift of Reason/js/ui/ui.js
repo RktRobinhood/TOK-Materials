@@ -110,14 +110,16 @@
             const n = s.items[id] || 0;
             const here = s.map.at && Rift.data.map.nodes[s.map.at];
             const lureable = id === 'lure' && n > 0 && here && (here.spawns || []).length && !((s.lures || {})[s.map.at] > 0);
-            const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable;
+            const mendable=id==='mending'&&n>0&&s.creatures.some(c=>c.injuries.some(x=>x==='no-ability'||x==='minus-one'));
+            const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable || mendable;
             return el('div.row', { style: { opacity: n ? 1 : 0.45, alignItems: 'flex-start' } }, [
                 Rift.Assets.img('item/' + id, { className: 'bag-icon', label: it.name }),
                 el('div', { style: { flex: 1 } }, [el('strong', { text: it.name + '  ×' + n }), el('div.small.muted', { text: it.text })]),
                 usable ? el('button.btn.small', {
                     text: 'Use',
                     onclick() {
-                        Rift.State.useItem(id);
+                        if(id==='mending'){m.close();mending();return;}
+                        if(!Rift.State.useItem(id))return;
                         if (id === 'lure') {
                             Rift.State.update(st => { st.lures[st.map.at] = 3; });
                             Rift.Audio.sfx('jingle');
@@ -133,6 +135,22 @@
             ]);
         });
         const m = modal('Bag', el('div.stack', null, rows));
+    }
+
+    function mending(){
+        const s=Rift.State.get();
+        const rows=s.creatures.filter(c=>c.injuries.some(x=>x==='no-ability'||x==='minus-one')).map(c=>
+            el('div.stack.panel',null,[el('strong',{text:Rift.data.creatures[c.species].name+' · '+c.uid.slice(-6)}),
+                el('div.row.wrap',null,c.injuries.filter(x=>x==='no-ability'||x==='minus-one').map(injury=>el('button.btn.small',{
+                    text:(injury==='no-ability'?'Restore ability':'Restore 1 power')+' · 1 Mending',onclick(){
+                        let healed=false;Rift.State.update(st=>{healed=Rift.World.mend(st,c.uid,injury);});
+                        if(healed){Rift.Audio.sfx('heal');toast('Creature mended.');}
+                        m.close();bag();
+                    },
+                }))),
+            ])
+        );
+        const m=modal('Mend a creature',el('div.stack',null,[el('p.small',{text:'Choose one injury. Each use spends 1 Mending. Cosmetic scars and warp changes stay.'}),...rows]),[{label:'Cancel',onclick:bag}]);
     }
 
     // The time rift tearing open: fx/rift-1..6 played in order, then faded out.

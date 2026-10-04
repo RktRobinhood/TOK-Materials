@@ -484,6 +484,8 @@
         if (!hasModel) return Object.assign(result, { solved: false, partial: 0.1, feedback: 'Your model needs a number: what does it predict?' });
         if (close && !missing.length) {
             if (!reflected) return Object.assign(result, { solved: false, partial: 0.8, feedback: 'Your model works! One last step: say why it matched (or was a little off).' });
+            if(answer.reflection===2) return Object.assign(result,{solved:false,partial:0.8,feedback:'You asked for every needed fact. Missing information does not explain this result. Compare your prediction with the answer and choose a reflection that fits.'});
+            if(off<=1e-9 && answer.reflection!==MATCHED) return Object.assign(result,{solved:false,partial:0.8,feedback:'Your prediction matched the answer exactly. Choose “It matched”, or change your model if you meant to show an error.'});
             const extras = [];
             if (tidy) extras.push('You asked only for what mattered.');
             else extras.push('You also asked about ' + herrings.length + ' thing' + (herrings.length > 1 ? 's' : '') + ' that did not matter: a tidy model leaves those out.');
@@ -531,7 +533,7 @@
             question: 'What did the three acts show about mathematics?',
             options: order.map(i => opts[i]),
             correct: order.indexOf(0),
-            explain: 'You started with a question, guessed, chose the information that mattered and ignored the rest, and then tested your model against the world. That is maths as a way of thinking, not a list of formulas.',
+            explain: 'Modelling means asking a question, finding the needed information and checking a prediction against the result. Extra facts are not always useful. This is one way mathematics helps us think.',
         };
     }
 

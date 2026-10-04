@@ -599,13 +599,13 @@
                 question: 'The frame breaks the proof. How should the mathematicians repair it?',
                 options: [
                     { id: 'monster', text: 'Say the frame is “not a real solid” and carry on as before.', explain: 'That is “monster-barring”: changing the definition just to hide the counterexample. Nothing is learned.' },
-                    { id: 'lemma', text: 'Turn the hidden step into a condition: corners − edges + faces = 2 for every solid with no hole through it.', explain: 'Yes! The false step becomes part of the theorem. Now the proof is valid, and we know exactly when it works. (Solids with one hole give 0.)' },
+                    { id: 'lemma', text: 'State a safe domain: corners − edges + faces = 2 for convex polyhedra (flat-faced solids with no dents).', explain: 'Yes! The flattening proof works for convex polyhedra. The frame is outside this domain. Some other shapes also satisfy the formula; we have not classified every solid.' },
                     { id: 'bin', text: 'Throw the whole proof away: one counterexample makes it worthless.', explain: 'Too harsh. The proof showed us exactly which step needed a condition. A broken proof can still teach us a lot.' },
                     { id: 'more', text: 'Check a hundred more cubes and pyramids to be sure.', explain: 'More examples that fit can’t undo a counterexample. Checking is not proving.' },
                 ],
                 correct: 'lemma',
             },
-            lesson: 'After Lakatos: counterexamples improve proofs. The frame showed that a hidden step (“it can be stretched flat”) was false. Making it a condition gives a better theorem: corners − edges + faces = 2 for solids without holes.',
+            lesson: 'After Lakatos: counterexamples improve proofs. The frame breaks the hidden flattening step. Restricting the theorem to convex polyhedra gives a safe domain; it is not a classification of every possible solid.',
         },
     ];
 })(typeof window !== 'undefined' ? window : globalThis);

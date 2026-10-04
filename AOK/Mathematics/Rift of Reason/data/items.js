@@ -12,7 +12,7 @@
         lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it at a node: rare creatures become more likely for your next 3 visits; catch odds gain 5 points.' },
         tonic: { name: 'Tonic', kind: 'support', heal: 2, text: 'Restores 2 health.' },
         ward: { name: 'Ward', kind: 'battle', text: 'Cancels one bad fate roll after a battle.' },
-        mending: { name: 'Mending', kind: 'support', text: 'Heals one injury on a creature.' },
+        mending: { name: 'Mending', kind: 'support', text: 'Use in the Bag: restore one lost ability or one lost power point on a creature.' },
         anchor: { name: 'Anchor', kind: 'battle', text: 'Stops a creature being warp-cursed in one battle.' },
         // Battle consumables earned from puzzles: chosen before a real battle, used up when it starts.
         'trickster-coin': { name: 'Trickster Coin', kind: 'battle', consumable: 'extra-steal', text: 'Bring it into a battle for one extra steal.' },

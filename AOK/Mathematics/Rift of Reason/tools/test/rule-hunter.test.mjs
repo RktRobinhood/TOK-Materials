@@ -15,6 +15,15 @@ const equivalent = (x, y) => { const p = truthTable(x), q = truthTable(y); retur
 
 const SEEDS = Array.from({ length: 60 }, (_, i) => 'seed-' + i);
 
+test('positive results can rule out alternatives; failures alone do not establish discriminating intent',()=>{
+    const data={mode:'rules',secret:'ascending',correct:0,candidates:['ascending','plus-two','all-even'].map(id=>({id,text:lib.RULE[id].text}))};
+    const positive=def.check(data,{rule:0,tests:[[1,2,4],[1,4,6]]});
+    assert.equal(positive.no,0);assert.equal(positive.eliminated,true);assert.equal(positive.discriminating,true);assert.equal(positive.partial,1);
+    assert.doesNotMatch(positive.feedback,/confirmation bias|can.t tell your idea apart/i);
+    const unhelpful=def.check(data,{rule:0,tests:[[30,1,1]]});
+    assert.equal(unhelpful.no,1);assert.equal(unhelpful.discriminating,false);assert.match(unhelpful.feedback,/did not separate/);
+});
+
 test('registers with the required fields', () => {
     assert.ok(def);
     assert.equal(def.colour, 'memory');
@@ -103,12 +112,12 @@ test('strategy: confirming-only vs tried-to-falsify', () => {
     const r1 = def.check(data, { rule: data.correct, tests: confirming });
     assert.equal(r1.strategy, 'confirming-only');
     assert.equal(r1.solved, true);
-    assert.match(r1.feedback, /confirmation bias/i);
+    assert.doesNotMatch(r1.feedback, /That is confirmation bias/i);
 
     const r2 = def.check(data, { rule: data.correct, tests: falsifying });
     assert.equal(r2.strategy, 'tried-to-falsify');
     assert.equal(r2.no, 2);
-    assert.ok(r2.partial > r1.partial);
+    assert.ok(r2.partial >= 0 && r2.partial <= 1);
 
     const r3 = def.check(data, { rule: wrong, tests: confirming });
     assert.equal(r3.solved, false);

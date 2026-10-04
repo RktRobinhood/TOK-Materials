@@ -11,6 +11,17 @@
     function nodes() { return Rift.data.map.nodes; }
     function node(id) { return nodes()[id]; }
 
+    // One Mending restores an ability or one lost power point on an owned card.
+    function mend(state,uid,injury){
+        const c=state.creatures.find(x=>x.uid===uid);
+        if(!c || !(state.items.mending>0) || !['no-ability','minus-one'].includes(injury) || !c.injuries.includes(injury))return false;
+        if(injury==='minus-one'){
+            c.powerDelta=(c.powerDelta||0)+1;
+            if(c.powerDelta>=0)c.injuries=c.injuries.filter(x=>x!==injury);
+        }else c.injuries=c.injuries.filter(x=>x!==injury);
+        state.items.mending--;return true;
+    }
+
     // ---- fog of war ------------------------------------------------------------
     // revealed: you can see and enter it. hinted: a fogged silhouette next to a
     // revealed node, showing only its teaser on hover.
@@ -196,7 +207,7 @@
     // Accolades (art 'ui/badge-<id>'): earned for real achievements, shown in the collection.
     Rift.data.accolades = {
         'clear-thinker': { name: 'Clear Thinker', text: 'Solved puzzles without a single hint.' },
-        'falsifier': { name: 'Falsifier', text: 'Tried to break the rule, not just confirm it.' },
+        'falsifier': { name: 'Falsifier', text: 'Ruled out alternative rules with test evidence.' },
         'truth-tabler': { name: 'Truth-Tabler', text: 'Found identities that fit every statement in the village.' },
         'unmasker': { name: 'Unmasker', text: 'Unmasked the Mayor of Boolesbury.' },
         'cross-examiner': { name: 'Cross-Examiner', text: 'Broke down an argument at the Tribunal.' },
@@ -213,7 +224,7 @@
     }
 
     Rift.World = {
-        award, attempts, recordWrong, hintCost, solveStars,
+        award, attempts, recordWrong, hintCost, solveStars, mend,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter,

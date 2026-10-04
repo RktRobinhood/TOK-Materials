@@ -80,6 +80,7 @@ The Fair Gate introduces Granny's fixed, eight-step teaching match before normal
   - Colour wheel (+2 against the colour you beat): Reason > Emotion > Language > Perception > Imagination > Reason; Memory is outside the wheel. Each edge has a TOK flavour line in `data/axioms.js`.
   - Balance tweaks from the simulation: Escalate capped at +3, It's Raw reaches power 4.
 - **Ante depends on opponent**: NPC trainers/bosses stake real items/creatures; between classmates the winner gets a **named trophy copy** and only items change hands.
+- Mending is used from the Bag: choose an owned injured creature, then restore one lost power point or its lost ability for one item. Cosmetic scars and warp changes stay. Cancelling spends nothing.
 - Battles happen **outside** puzzles; puzzles are how you get creatures (and protective/healing consumables).
 - Multiplayer: **offline team codes first** (ghost battles vs an AI running a classmate's team, deterministic seeded engine). Live play (Supabase/Firebase, teacher laptop as host) and raids are stretch goals. See `research/serverless-multiplayer.md`.
 

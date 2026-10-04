@@ -64,7 +64,7 @@
         { s: 'narrator', t: 'The Neon Plaza. Giant screens. Everyone is looking up. Nobody is looking at each other.' },
         { s: 'algorithm', t: 'TRENDING NOW: A CLAIM. TRENDING NEXT: THE OPPOSITE CLAIM. ENGAGEMENT SECURED.' },
         { s: 'fin', e: 'smug', t: 'Ah, the famous traveller. I am Prosecutor Fin. I have never lost a case. Not once. Ask anyone.' },
-        { s: 'avatar', t: 'Asking anyone is not evidence.' },
+        { s: 'avatar', t: 'Popularity does not prove the claim. A witness can give evidence, but we still need to check what supports it.' },
         { s: 'fin', e: 'shaken', t: 'We shall see. At the Tribunal.' },
     ];
 

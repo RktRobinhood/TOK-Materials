@@ -5,8 +5,8 @@
  * Mode 'rules' (difficulty 1-2): a gatekeeper lets number triples through by a
  * secret rule. The player is shown one triple that fits many rules, builds test
  * triples from wooden tiles 1-30, then names the rule from 4-5 candidates that
- * all fit the starting triple. check() also classifies the test strategy:
- * 'confirming-only' (every test got "fits") vs 'tried-to-falsify'.
+ * all fit the starting triple. The legacy `strategy` field counts responses,
+ * not intent. Discriminating tests rule out a listed alternative even if they fit.
  *
  * Mode 'pattern' (difficulty 3, or generate(rng, d, { mode: 'pattern' })): a
  * sequence that holds for a while then breaks (Moser's circle, n² + n + 41,
@@ -234,6 +234,8 @@
         const elim = eliminations(data, tests);
         const remaining = elim.filter(e => !e.correct && !e.ruledOutBy).map(e => data.candidates[e.index].text);
         const eliminated = remaining.length === 0;
+        const separated = elim.filter(e => !e.correct && e.ruledOutBy).length;
+        const discriminating = separated > 0;
         const truth = '"' + RULE[data.secret].text + '"';
         const parts = [];
 
@@ -241,11 +243,11 @@
         else parts.push('Not this time. The rule was ' + truth + (chosen ? ', not "' + chosen.text + '".' : '.'));
 
         if (tests.length === 0) {
-            parts.push('You named a rule without testing a single triple. That is a guess, not knowledge.');
-        } else if (strategy === 'confirming-only') {
-            parts.push('Every one of your ' + tests.length + ' tests got "fits". Tests that only confirm what you already believe can\'t tell your idea apart from other rules. That is confirmation bias. Next time, try a triple you expect to FAIL.');
+            parts.push('No tests were recorded. Your choice alone does not show how you reached this rule.');
+        } else if (discriminating) {
+            parts.push('Your tests ruled out ' + separated + ' listed alternative rules. A "fits" result can still be useful when another rule predicts "doesn’t fit".');
         } else {
-            parts.push('You tried triples that could fail (' + no + ' got "doesn\'t fit"). That is how scientists and mathematicians hunt for the real rule.');
+            parts.push('These tests did not separate the listed rules. Try a triple for which two rules predict different answers. A fit or a failure alone does not show what you intended to test.');
         }
 
         if (solved && !eliminated && tests.length) {
@@ -256,14 +258,15 @@
         }
 
         let partial = 0;
-        if (solved) partial = strategy === 'tried-to-falsify' ? (eliminated ? 1 : 0.85) : 0.6;
-        else partial = strategy === 'tried-to-falsify' ? 0.25 : 0;
+        if (solved) partial = eliminated ? 1 : discriminating ? 0.85 : 0.6;
+        else partial = discriminating ? 0.25 : 0;
 
         return {
             solved,
             feedback: parts.join(' '),
             partial,
             strategy,
+            discriminating,
             yes,
             no,
             eliminated,
@@ -526,14 +529,14 @@
             ];
             explain = 'There are infinitely many cases, and examples check only a few. Patterns are where proofs start, not where they end.';
         } else {
-            question = 'Your tests kept getting "fits". Why can\'t "fits" answers alone prove your rule?';
-            correct = 'Many different rules give the same "fits" answers. Only a test your rule says should fail can tell them apart.';
+            question = 'Why can a few "fits" answers not prove a rule for every possible triple?';
+            correct = 'Each test checks one case. A few cases do not establish a rule for every possible triple.';
             wrong = [
                 'Because the gatekeeper might be lying.',
                 'Because you need at least ten tests to prove a rule.',
                 'Because numbers bigger than 30 were not allowed.',
             ];
-            explain = 'This is confirmation bias: looking only for evidence that agrees with you. The philosopher Karl Popper said good tests are ones that could prove you wrong.';
+            explain = 'Confirmation bias means seeking only agreement. Compare what different rules predict. A test can rule out one rule even when it fits another. A few examples still do not prove a rule for infinitely many triples.';
         }
         const options = rng.shuffle([correct].concat(wrong));
         return { question, options, correct: options.indexOf(correct), explain };
@@ -809,9 +812,9 @@
                 else status = el('span.rh-st.open', { text: 'never ruled out by your tests' });
                 return el('li' + (i === state.chosen ? '.mine' : ''), null, [el('span.rh-res-text', { text: c.text }), status]);
             });
-            const strat = r.strategy === 'tried-to-falsify'
-                ? el('span.chip.rh-strat.good', { text: 'You tried to prove yourself wrong' })
-                : el('span.chip.rh-strat.bad', { text: state.tests.length ? 'Confirmation bias: only "fits" tests' : 'No tests: just a guess' });
+            const strat = r.discriminating
+                ? el('span.chip.rh-strat.good', { text: r.eliminated ? 'Ruled out every listed alternative' : 'Ruled out some listed alternatives' })
+                : el('span.chip.rh-strat.bad', { text: state.tests.length ? 'Tests did not separate the listed rules' : 'No tests recorded' });
             bench.scrollTop = 0;
             bench.appendChild(el('div.rh-namer.rh-result-wrap', null, [el('div.rh-result.panel' + (r.solved ? '.win' : '.lose'), null, [
                 el('h3', { text: r.solved ? 'Rule found!' : 'Wrong rule' }),

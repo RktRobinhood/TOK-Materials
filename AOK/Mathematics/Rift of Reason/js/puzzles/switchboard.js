@@ -6,7 +6,7 @@
  *
  * Three modes, chosen by generate():
  *   'light'  : a fixed circuit. Turn on switches so the bulb lights, using the
- *              fewest switches possible ("what is the least you must assume?").
+ *              fewest ON switches possible (OFF sets a claim false, not unknown).
  *              data.maxOn is the smallest number that works.
  *   'wire'   : a target truth table ("the bulb must light when…") and a small
  *              palette of plaques. Wire switches through plaques to the bulb.
@@ -227,7 +227,7 @@
         };
     }
 
-    // ---- mode A: light the bulb with the fewest assumptions ----
+    // ---- mode A: light the bulb with the fewest ON inputs ----
     const FALLBACK_LIGHT = { gates: [{ id: 'G0', op: 'AND', in: ['S0', 'S1'] }, { id: 'G1', op: 'OR', in: ['G0', 'S2'] }], out: 'G1' };
 
     function genLight(rng, d) {
@@ -365,16 +365,16 @@
         const used = countOn(on);
         const table = truthTable(data.circuit.gates, data.circuit.out, n).table;
         const min = minimalInfo(table, n).min;
-        if (!lit) return { solved: false, partial: 0, feedback: 'The bulb stays dark. These assumptions are not enough for the conclusion.' };
+        if (!lit) return { solved: false, partial: 0, feedback: 'The bulb stays dark. These true/false settings do not produce the requested output.' };
         if (used > min) {
             return {
                 solved: false, partial: min / used, minimal: false,
-                feedback: 'It lights! But you assumed ' + used + ' things, and it can be done with only ' + min + '. Which assumption can you drop?',
+                feedback: 'It lights! But ' + used + ' switches are ON, and only ' + min + ' are needed. Try another true/false setting with fewer ON switches.',
             };
         }
         return {
             solved: true, partial: 1, minimal: true,
-            feedback: 'Lit with only ' + min + (min === 1 ? ' assumption' : ' assumptions') + ': the least anyone needs. Everything else was extra baggage.',
+            feedback: 'Lit with ' + min + ' ON switches: the minimum for this circuit. OFF means false, not an unknown or removed premise.',
         };
     }
 
@@ -455,7 +455,7 @@
             return [
                 'Open the truth table. Look at the rows where the bulb is lit, and count the T\'s in each row.',
                 last,
-                'You need exactly ' + info.min + (info.min === 1 ? ' assumption' : ' assumptions') + '. One of them is ' + sw[one].label + ': "' + sw[one].claim + '".',
+                'You need exactly ' + info.min + ' ON switches. One is ' + sw[one].label + ': "' + sw[one].claim + '".',
             ];
         }
         if (data.mode === 'wire') {
@@ -488,7 +488,7 @@
     function whyFor(data) {
         if (data.mode === 'light') {
             const s = shuffleOptions(data.whyShuffle, [
-                'Every switch is an assumption we accept without proof. The fewer we need, the less can go wrong with the conclusion.',
+                'This task asks for the smallest number of ON inputs that lights the bulb. OFF sets an input false; it does not remove a premise.',
                 'Switches that are ON use up the village\'s gas.',
                 'More assumptions always make a conclusion more certain.',
                 'A conclusion that needs no assumptions at all is always false.',
@@ -496,7 +496,7 @@
             return {
                 question: 'Why does the Switchboard want the FEWEST switches turned on?',
                 options: s.options, correct: s.correct,
-                explain: 'Mathematicians try to prove things from as few axioms as possible. If you can drop an assumption and the conclusion still holds, it never depended on that assumption.',
+                explain: 'You found a true/false setting with the fewest ON inputs. Every OFF input was still set false. Finding this setting is different from proving that a conclusion needs fewer premises.',
             };
         }
         if (data.mode === 'wire') {
@@ -636,7 +636,7 @@
         const counter = el('span.sb-count');
         const statusEl = el('div.sb-status');
         const title = mode === 'light' ? 'Light the bulb' : mode === 'wire' ? 'Wire it' : 'Hidden premise';
-        const pieces = mode === 'light' ? ['switch ON = an assumption', 'light the conclusion', 'assume as little as you can']
+        const pieces = mode === 'light' ? ['ON = true · OFF = false', 'light the output', 'use the fewest ON switches']
             : mode === 'wire' ? ['match the table', 'any wiring that works is fine']
                 : ['one thing is hidden', 'read the witness reports', 'what must be behind the curtain?'];
         const top = el('div.sb-top', null, [
@@ -932,7 +932,7 @@
             }, row.cells)));
             tableBox.appendChild(el('div.sb-sidehead', { text: head }));
             tableBox.appendChild(el('table.sb-tt', null, [el('thead', null, [el('tr', null, headCells)]), tbody]));
-            tableBox.appendChild(el('div.sb-legend.small.muted', { text: 'T = switch ON (assumed true) · ● lit · ○ dark' }));
+            tableBox.appendChild(el('div.sb-legend.small.muted', { text: 'T = ON (true) · F = OFF (false) · ● lit · ○ dark' }));
         }
 
         function sockCentre(key, br) {
@@ -976,7 +976,7 @@
             if (mode === 'light') {
                 const lit = evaluate(data.circuit.gates, data.circuit.out, st.on);
                 const k = countOn(st.on);
-                if (lit) setStatus('The bulb is lit with ' + k + (k === 1 ? ' assumption.' : ' assumptions.') + (k > data.maxOn ? ' Can you drop one?' : ' Submit when you are sure.'), k <= data.maxOn ? 'good' : '');
+                if (lit) setStatus('The bulb is lit with ' + k + ' ON switches.' + (k > data.maxOn ? ' Can you use fewer?' : ' Submit when you are sure.'), k <= data.maxOn ? 'good' : '');
                 else setStatus('');
             }
             render();
@@ -1131,12 +1131,12 @@
 
         render();
         if (root.requestAnimationFrame) root.requestAnimationFrame(redraw);
-        setStatus(mode === 'light' ? 'Click the switches. Each one you turn ON is something you assume is true.'
+        setStatus(mode === 'light' ? 'Click the switches. ON sets an input true; OFF sets it false.'
             : mode === 'wire' ? 'Drag a wire from a right-hand socket (a switch or a plaque) to a left-hand socket (a plaque or the bulb).'
                 : 'Click a witness report to set the switches. What must be behind the curtain?');
         try {
             if (api && api.say) {
-                api.say(mode === 'light' ? 'Light the bulb: "' + data.bulb.claim + '". What is the least you must assume?'
+                api.say(mode === 'light' ? 'Light the bulb: "' + data.bulb.claim + '". What is the fewest ON switches you can use?'
                     : mode === 'wire' ? 'Wire the board so the bulb lights exactly when the table says.'
                         : 'Someone hid a ' + (hiddenGate ? 'plaque' : 'switch') + ' behind the curtain. The witnesses saw the bulb. What is hidden?');
             }
@@ -1190,8 +1190,8 @@
         name: 'The Switchboard',
         colour: 'emotion',
         family: 'Hidden premise',
-        blurb: 'Every switch is an assumption. Light the conclusion, and find out how little you really need to assume.',
-        tok: 'Every proof rests on assumptions. A truth table checks every case, and the strongest arguments assume as little as possible.',
+        blurb: 'ON sets an input true; OFF sets it false. Follow the task: light the bulb, rebuild a rule, or find a hidden input.',
+        tok: 'Conclusions depend on inputs and rules. A complete truth table checks every possible true/false setting of this finite circuit. OFF means false, not a missing premise.',
 
         generate(rng, difficulty) {
             const d = Math.max(1, Math.min(3, Math.round(Number(difficulty) || 1)));

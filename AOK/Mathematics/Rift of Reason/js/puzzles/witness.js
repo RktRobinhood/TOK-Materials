@@ -17,7 +17,7 @@
                 { t: 'Someone came in after the oven was switched off.', a: 'T', why: 'The oven went off "just before closing", then the figure came in.' },
                 { t: 'The hooded figure was a man.', a: 'U', why: 'We only know "a tall figure". Tall is not the same as male.' },
                 { t: 'The hooded figure paid for the loaf.', a: 'U', why: 'Coins clinked, but the story never says who put them there, or what for.' },
-                { t: 'The cat was on the counter before the figure left.', a: 'F', why: 'The cat jumped up "a moment later", after the figure left.' },
+                { t: 'The figure was still in the shop when the cat jumped onto the counter.', a: 'F', why: 'The figure left before the cat jumped up "a moment later".' },
                 { t: 'The bell rang when the figure left.', a: 'T', why: 'Stated directly.' },
                 { t: 'The figure asked for the last loaf.', a: 'T', why: 'Stated directly.' },
                 { t: 'The baker gave the loaf to the figure.', a: 'U', why: 'The baker wrapped it. We are never told it was handed over.' },
@@ -126,7 +126,7 @@
         const u = data.claims.find(c => c.a === 'U');
         const f = data.claims.find(c => c.a === 'F');
         return [
-            'Only mark True if the scene SAYS it. If you had to assume anything, it\'s "Can\'t tell".',
+            'Mark True if the scene states or clearly establishes it. False needs a contradiction. If the scene leaves it open, choose "Can\'t tell".',
             f ? 'One claim directly contradicts the scene. Find the line that disagrees with it.' : 'Check each claim against one specific line.',
             u ? '"' + u.t + '" → ' + u.why : 'Read the claims slowly.',
         ];

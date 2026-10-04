@@ -34,12 +34,12 @@
         { s: 'narrator', t: 'I am the Sundial. I tell the time. Mostly. On cloudy days I guess.' },
         { s: 'avatar', t: 'A talking sundial. In my garden. Normal.' },
         { s: 'granny', e: 'happy', t: '{name}! The Fair is today! Put on something with pockets. Pockets win prizes.' },
-        { s: 'narrator', t: 'Go on. Follow the music. Click the glowing path on the map.' },
+        { s: 'narrator', t: 'Go on. Follow the music. Click the Fair Gate marker on the map.' },
     ];
 
     S['prologue.fair'] = [
         { s: 'granny', e: 'happy', t: 'Three stalls, three games. Every game is about thinking, which is the best kind of game.' },
-        { s: 'granny', t: 'Win at least two and come and find me by the old oak. I have something to show you.' },
+        { s: 'granny', t: 'First, learn the card game here. Win Syllo’s safe challenge and two stalls. Then visit the Crack in the Sky.' },
         { s: 'avatar', t: 'What kind of something?' },
         { s: 'granny', e: 'surprised', t: 'The kind that is hard to explain. Off you go!' },
     ];
@@ -68,7 +68,7 @@
     ];
     S['prologue.gallery.win'] = [
         { s: 'syllo', e: 'happy', t: 'Outstanding! An argument can be valid and still be nonsense. Lobsters do not, in fact, play the trumpet.' },
-        { s: 'narrator', t: 'Valid means the steps hold. True means the world agrees. Mathematics needs both.' },
+        { s: 'narrator', t: 'Valid means the conclusion follows from the premises. Whether those premises describe the world is a separate question.' },
     ];
 
     S['prologue.rift'] = [
@@ -87,7 +87,7 @@
             then: [{ s: 'granny', e: 'happy', t: 'That is my {name}. Take these. And your brain. Mostly your brain.' }],
             else: [{ s: 'granny', e: 'happy', t: 'Ha! Honest. Fear is fine. Thinking anyway is braver. Take these.' }] },
         { give: { charm: 3, tonic: 1 } },
-        { s: 'narrator', t: 'When you beat a rabid one, throw a Catch Charm. If luck agrees, they come with you. Calmer.' },
+        { s: 'narrator', t: 'A creature may visit after you win a puzzle. If one arrives, try a Catch Charm. Each try spends charms; the shown odds are a chance, not a promise.' },
         { s: 'narrator', t: 'The road starts at the edge of the forest. Mind the trolls. And the guards. And the guards who are trolls.' },
     ];
 
@@ -102,8 +102,8 @@
 
     S['ch1.signpost'] = [
         { s: 'narrator', t: 'The signpost points everywhere. It also gossips.' },
-        { s: 'narrator', t: 'Travellers say a strange owl in a paper loop appears at the Standing Stone. Only for those who break patterns.' },
-        { s: 'narrator', t: 'And an old tortoise waits beyond the Gate of Guards for anyone who opens the right door with no hints.' },
+        { s: 'narrator', t: 'Travellers say a strange owl in a paper loop may appear after a win at the Standing Stone. It is rare; a visit is not promised.' },
+        { s: 'narrator', t: 'And an old tortoise may visit after a win at the Gate of Guards. Clean wins help your chances, but hints do not lock it out.' },
         { flag: 'rumour:godelix', value: true },
         { flag: 'rumour:euclidon', value: true },
     ];
@@ -121,8 +121,8 @@
         { s: 'muskrat', t: 'First principles! Draw my figure without lifting your pen. Or prove you cannot. Ha! Nobody can prove that.' },
     ];
     S['ch1.bridge.win'] = [
-        { s: 'muskrat', t: 'Wait. You can PROVE something is impossible? That is… actually useful.' },
-        { s: 'narrator', t: 'Sometimes the strongest answer in mathematics is: this cannot be done, and here is why.' },
+        { s: 'muskrat', t: 'Wait. The rules decide whether a route is possible? That is… actually useful.' },
+        { s: 'narrator', t: 'A valid route shows that a task can be done. A reason ruling out every route shows impossibility. These are different kinds of support.' },
     ];
 
     S['ch1.cardsharp'] = [
@@ -134,16 +134,16 @@
     ];
 
     S['ch1.campfire'] = [
-        { s: 'narrator', t: 'The campfire crackles. Rest here: your health returns, and your creatures can be mended.' },
+        { s: 'narrator', t: 'The campfire crackles. Rest restores your health. To heal a creature injury, use Mending in your Bag.' },
         { when: { flag: 'brave', is: false },
             then: [{ s: 'narrator', t: 'You wanted to hide under the nut stall. Yet here you are, deep in the forest. Interesting.' }] },
     ];
 
     S['ch1.stone'] = [
-        { s: 'narrator', t: 'Carvings on the Standing Stone. A pattern, going on and on. Surely it continues. Surely.' },
+        { s: 'narrator', t: 'Carvings on the Standing Stone: patterns and paths. Read the task before trusting what looks obvious.' },
     ];
     S['ch1.stone.win'] = [
-        { s: 'narrator', t: 'One counterexample can bring down a thousand confirming cases. Mathematicians love that. Everybody else hates it.' },
+        { s: 'narrator', t: 'A pattern or picture can suggest an answer. The task’s rules decide whether it holds.' },
     ];
 
     S['ch1.gate'] = [

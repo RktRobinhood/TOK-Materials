@@ -237,7 +237,7 @@ test('hints and why are well formed', () => {
         const w = P.why(data);
         assert.equal(w.options.length, 4);
         assert.ok(w.correct >= 0 && w.correct < 4);
-        assert.ok(/assum|every|contradiction/i.test(w.options[w.correct]));
+        assert.ok(/input|every|contradiction/i.test(w.options[w.correct]));
         assert.ok(!/undefined|NaN/.test(JSON.stringify(w)));
     });
 });

@@ -81,7 +81,7 @@
     const after = (c, i) => c.days.slice(i + 1);
     const TEMPLATES = [
         c => after(c, c.ev.parade).length && ({ id: 'parade-missed', text: "The Mayor's parade was on " + c.days[c.ev.parade] + '. Anyone who arrived after ' + c.days[c.ev.parade] + ' missed it.', imps: after(c, c.ev.parade).map(d => imp([['day:' + d, true]], ['parade', false])) }),
-        c => ({ id: 'parade-band', text: "The parade's brass band was so loud that everyone in town on " + c.days[c.ev.parade] + ' saw the parade.', imps: c.days.slice(0, c.ev.parade + 1).map(d => imp([['day:' + d, true]], ['parade', true])) }),
+        c => ({ id: 'parade-band', text: 'Everyone who arrived on ' + c.days[c.ev.parade] + ' or earlier has seen the parade.', imps: c.days.slice(0, c.ev.parade + 1).map(d => imp([['day:' + d, true]], ['parade', true])) }),
         c => after(c, c.ev.thirteen).length && ({ id: 'thirteen-late', text: 'On ' + c.days[c.ev.thirteen] + ' night the clock struck thirteen. Anyone who arrived after ' + c.days[c.ev.thirteen] + ' was too late to hear it.', imps: after(c, c.ev.thirteen).map(d => imp([['day:' + d, true]], ['thirteen', false])) }),
         c => ({ id: 'thirteen-tower', text: 'The thirteenth chime could only be heard from inside the clock tower.', imps: [imp([['thirteen', true]], ['tower', true])] }),
         c => after(c, c.ev.pie).length && ({ id: 'pie-gone', text: 'The last goose pie was eaten on ' + c.days[c.ev.pie] + '. Nobody who arrived after ' + c.days[c.ev.pie] + ' has tasted it.', imps: after(c, c.ev.pie).map(d => imp([['day:' + d, true]], ['pie', false])) }),
@@ -89,7 +89,7 @@
 
         c => c.job.clock && ({ id: 'clock-tower', text: 'The only clock in Boolesbury is in the tower, so every clock-mender has been inside it.', imps: [imp([['job:clock', true]], ['tower', true])] }),
         c => c.job.clock && ({ id: 'clock-watch', text: 'Clock-menders always carry a pocket watch.', imps: [imp([['job:clock', true]], ['watch', true])] }),
-        c => c.job.sweep && ({ id: 'sweep-tower', text: 'Chimney sweeps are banned from the clock tower: their soot jams the gears.', imps: [imp([['job:sweep', true]], ['tower', false])] }),
+        c => c.job.sweep && ({ id: 'sweep-tower', text: 'No chimney sweep has ever been inside the clock tower.', imps: [imp([['job:sweep', true]], ['tower', false])] }),
         c => c.job.sweep && ({ id: 'sweep-chimney', text: 'Every chimney sweep has climbed up a chimney.', imps: [imp([['job:sweep', true]], ['chimney', true])] }),
         c => c.job.baker && ({ id: 'baker-dawn', text: "Bakers' apprentices start work before dawn.", imps: [imp([['job:baker', true]], ['dawn', true])] }),
         c => c.job.baker && ({ id: 'baker-pie', text: "Every baker's apprentice has eaten the goose pie: it is the first thing they learn to bake.", imps: [imp([['job:baker', true]], ['pie', true])] }),
@@ -100,19 +100,19 @@
         c => c.job.garden && ({ id: 'garden-dawn', text: "Gardeners' helpers water the roses before dawn.", imps: [imp([['job:garden', true]], ['dawn', true])] }),
         c => c.job.garden && ({ id: 'garden-ladder', text: "Every gardener's helper owns a ladder for picking apples.", imps: [imp([['job:garden', true]], ['ladder', true])] }),
 
-        c => c.lodge.loft && c.job.baker && ({ id: 'loft-baker', text: "Only bakers' apprentices may sleep in the bakery loft.", imps: [imp([['lodge:loft', true]], ['job:baker', true])] }),
-        c => c.lodge.attic && ({ id: 'attic-postmistress', text: 'The Postmistress only rents her attic to people she knows.', imps: [imp([['lodge:attic', true]], ['postmistress', true])] }),
-        c => c.lodge.inn && ({ id: 'inn-pie', text: 'Guests at the Crooked Kettle are served goose pie every night.', imps: [imp([['lodge:inn', true]], ['pie', true])] }),
+        c => c.lodge.loft && c.job.baker && ({ id: 'loft-baker', text: "Everyone staying in the bakery loft is a baker's apprentice.", imps: [imp([['lodge:loft', true]], ['job:baker', true])] }),
+        c => c.lodge.attic && ({ id: 'attic-postmistress', text: 'Everyone staying in the post office attic knows the Postmistress.', imps: [imp([['lodge:attic', true]], ['postmistress', true])] }),
+        c => c.lodge.inn && ({ id: 'inn-pie', text: 'Every guest at the Crooked Kettle has eaten goose pie.', imps: [imp([['lodge:inn', true]], ['pie', true])] }),
         c => c.lodge.inn && ({ id: 'inn-ladder', text: 'The Crooked Kettle bans ladders, so none of its guests owns one.', imps: [imp([['lodge:inn', true]], ['ladder', false])] }),
-        c => c.lodge.shed && c.job.lamp && ({ id: 'shed-lamp', text: "Only lamplighters may sleep in the lamplighters' shed.", imps: [imp([['lodge:shed', true]], ['job:lamp', true])] }),
-        c => c.lodge.school && ({ id: 'school-dawn', text: 'The school bell rings at dawn and wakes everyone sleeping in the schoolhouse.', imps: [imp([['lodge:school', true]], ['dawn', true])] }),
+        c => c.lodge.shed && c.job.lamp && ({ id: 'shed-lamp', text: "Everyone staying in the lamplighters' shed is a lamplighter.", imps: [imp([['lodge:shed', true]], ['job:lamp', true])] }),
+        c => c.lodge.school && ({ id: 'school-dawn', text: 'Everyone staying in the schoolhouse gets up before dawn.', imps: [imp([['lodge:school', true]], ['dawn', true])] }),
 
         c => ({ id: 'tower-ladder', text: 'The clock tower has no stairs: you need your own ladder to get in.', imps: [imp([['tower', true]], ['ladder', true])] }),
         c => ({ id: 'mayor-parade', text: 'The Mayor never steps off his parade float, so anyone who has met him saw the parade.', imps: [imp([['mayor', true]], ['parade', true])] }),
         c => ({ id: 'postmistress-pie', text: 'Everyone who knows the Postmistress has never eaten goose pie.', imps: [imp([['postmistress', true]], ['pie', false])] }),
         c => ({ id: 'chimney-watch', text: 'Soot ruins pocket watches: nobody who has climbed a chimney still carries one.', imps: [imp([['chimney', true]], ['watch', false])] }),
-        c => ({ id: 'tower-watch', text: 'The Mayor gives a pocket watch to everyone who climbs the clock tower.', imps: [imp([['tower', true]], ['watch', true])] }),
-        c => ({ id: 'watch-mayor', text: "Pocket watches are only sold in the Mayor's own shop, and he shakes every customer's hand.", imps: [imp([['watch', true]], ['mayor', true])] }),
+        c => ({ id: 'tower-watch', text: 'Everyone who has been inside the clock tower now carries a pocket watch.', imps: [imp([['tower', true]], ['watch', true])] }),
+        c => ({ id: 'watch-mayor', text: 'Everyone who carries a pocket watch has met the Mayor.', imps: [imp([['watch', true]], ['mayor', true])] }),
     ];
 
     const CFG = {
@@ -654,22 +654,22 @@
         let question, correct, wrong, explain;
         if (variant === 0) {
             question = 'One answer contradicted a block near the bottom, and every block above it fell, even the cemented ones. Why?';
-            correct = 'The blocks above were only justified by the blocks under them. Take away a support and its proof goes with it, like every theorem proven from an axiom that turns out to be false.';
+            correct = 'Those blocks used that support in their proof. Remove it and that proof no longer justifies them. The claims might still be true for another reason.';
             wrong = [
                 'Because the Constable was angry and knocked down everything, whether it was proven or not.',
                 'Because cemented blocks are always the weakest part of a tower.',
                 'Because tall towers always fall, however strong their base is.',
             ];
-            explain = 'A proof shows that a claim follows from the claims beneath it. It never shows that the claim is true on its own. In mathematics, theorems rest on axioms in exactly this way: change or drop an axiom and every proof that used it must be rebuilt.';
+            explain = 'A proof shows what follows from its premises. If you drop a premise, that proof may no longer work. The conclusion is not automatically false: it might have another proof. Falling blocks represent lost support, not necessarily false claims.';
         } else {
             question = 'Why is a loose block, one that rests on an unproven claim, fragile?';
-            correct = 'Nothing below proves it, so if the claim it rests on is ever contradicted, it falls too. Mathematicians mark results like this as "assuming the conjecture is true".';
+            correct = 'Your story did not force that claim. It is an extra choice, so later evidence may contradict it. Unproven does not mean false.';
             wrong = [
                 'Because an unproven claim is always false.',
                 'Because loose blocks are heavier than cemented ones.',
                 'Because the more blocks a tower has, the more likely the Constable is right.',
             ];
-            explain = 'Unproven does not mean false: a loose claim may be perfectly true. But nothing guarantees it, so anything built on it is only as safe as that guess. Some real theorems are proven "assuming the Riemann hypothesis" and would all fall if it were false.';
+            explain = 'A loose claim may be true, but it needs support. A conditional proof says what follows IF its premise is true. If that premise fails, you lose that justification; the conclusion may still be true for another reason.';
         }
         const options = rng.shuffle([correct].concat(wrong));
         return { question, options, correct: options.indexOf(correct), explain };
@@ -986,7 +986,7 @@
         colour: 'emotion',
         family: 'Hidden premise',
         blurb: 'Keep your cover story straight! Every answer adds a block to your tower. Proven blocks are cemented; a contradiction pulls a block and everything resting on it.',
-        tok: 'A proof is only as strong as the axioms it rests on: proven claims follow from their premises, and if a premise falls, everything built on it falls too.',
+        tok: 'A proof shows what follows from its premises. Remove a premise and that proof may fail; the conclusion is not automatically false.',
         generate,
         check,
         hints,

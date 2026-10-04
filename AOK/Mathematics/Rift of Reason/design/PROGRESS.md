@@ -13,7 +13,7 @@ Updated 2026-10-04. Work directly on `main`, as requested by the teacher. Limit 
 
 #37: hosts, first/repeat lead-ins and goals for all 30 puzzle stations, migration-safe tutorial tracking, a reusable tutorial overlay, and a permanent How to play button. The encounter shows the station host; creatures are revealed only during the catch screen. Post-success loot is implemented in #40 below.
 
-Framework checks passed. Browser checks confirm first-use offer, optional tour, replayable rules and unchanged hearts. Independent standards/spec reviews found cleanup, timer, speaker and story-continuity problems; these are fixed. Timed Witness play pauses during help, repeat visits use visit history, and original first-visit story beats are preserved. Individual tours are implemented in #38 below; full station round-two review remains #35.
+Framework checks passed. Browser checks confirm first-use offer, optional tour, replayable rules and unchanged hearts. Independent standards/spec reviews found cleanup, timer, speaker and story-continuity problems; these are fixed. Timed Witness play pauses during help, repeat visits use visit history, and original first-visit story beats are preserved. Individual tours are implemented in #38 below; the completed round-two review is recorded below.
 
 ## Tutorials (#38)
 
@@ -31,22 +31,23 @@ Arrival now rolls only the puzzle and captures the active lure before spending i
 
 Implemented timed ring throws and a 6×6 charm trap, seeded per visitor. Great Charms/lures/rarity change the challenge. Skill adds up to 15 points; failure quarters the displayed base odds (minimum5%, totalcap95%). Each placement/throw consumes real charms; timeout/leave cleanup is tested. Probability tests cover240,000 rolls; all48 grid-order/lure paths trap within5placements. Browser smoke at1024×768 covers both modes/items, a complete trap and calm motion. All 299 tests pass. See `design/reviews/catching-review.md` for reviewer ratings and scope limits.
 
+## Card introduction (#42)
+
+The guided eight-step teaching battle, safe required Syllo challenge, loaned starter teams, permanent rules and seven visible challengers are implemented and pushed in `e049a20`. All 306 tests passed. Browser smoke completed the lesson from an empty collection; the same-card fight preview shows opposite winners under ordinary rules and Underdog. See `reviews/card-introduction.md` for evidence and limits.
+
+## Completed round-two corrections (#35/#37)
+
+`reviews/student-round-2.md` covers all 54 nodes and 26 support flows. Every revised source-based clarity estimate is at least 6/10. `reviews/education-round-2.md` covers all 30 puzzle stations and fourteen families; all seven named findings (R2-01..07) are corrected. Source review substitutes prolonged browser traversal under the user's 2026-10-04 instruction. These are not observed classroom comfort or mastery results.
+
+Corrections align Tower facts with displayed English, credit discriminating Rule Hunter evidence even when tests fit, correct a Witness contradiction, reject inconsistent Three Acts reflections, remove unobserved-process claims from victory scripts, distinguish proof/truth/evidence, and define the Euler repair's safe convex-polyhedron domain. Added an actual Bag Mending flow with guarded item use, power/ability restoration and preservation of scars/warps; classmate ghost entry now warns about fate and stakes. All 311 tests pass, including four Mending regressions and the positive-test Rule Hunter regression.
+
+Remaining refinements are documented in the reviews: dense Core vocabulary, optional diagram proficiency, exact item stakes before a real battle, plain injury/warp detail labels, small-viewport controls, and empirical classroom play. They do not fall below the agreed source-clarity threshold.
+
 ## Next work
 
-1. Baseline reports #35/#36 are committed. #36 closed; exhaustive station play and full round two remain #35.
-2. #37 framework and #38 tutorials are implemented; #37 awaits the full station review.
-3. #38–#41 are closed: tutorials, attempts/feedback, post-success loot and skill catches are implemented and checked.
-4. #42: guided teaching battle, safe required story challenge, loaned starter teams, rules and seven visible challengers are implemented. See `reviews/card-introduction.md`; both final source reviews found no blocker, student clarity 7/10. The introduction's focused tests cover real engine/controller behaviour.
-5. Complete the station source/content review under the user's 2026-10-04 instruction to favour efficient text checks over prolonged browser traversal. Clearly label source ratings and browser limits. Finish #35/#37 before closing #34.
-6. Release checks #25, SFX #24, then final-script voices #43. Bonus puzzles #13 and stretch #29–#31 remain separate.
-
-## Review findings to follow up
-
-- Tower, Oracle and Tribunal wording findings were fixed in #39; see `reviews/feedback-audit.md`.
-- Venn currently accepts a correct verdict with an empty diagram. Explain the diagram's optional status or explicitly require construction when that is the learning outcome.
-- Boss feedback is now durable and every stage has a Why; fixed in #39.
-- The Pattern Stall has cramped controls at laptop widths and several competing character identities.
-
+1. Finish dedicated SFX/music #24, then release validation #25 (fresh-save Prologue smoke, balance and published Pages checks).
+2. Final-script voice recording #43 remains explicitly paused; no recording requests or recurring tasks started during script edits. Update its fallback report after the final wording changes.
+3. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and stretch #29–#31 remain separate.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

@@ -28,11 +28,11 @@
     ];
 
     S['ch2.bridge'] = [
-        { s: 'lamplighter', t: 'The bridge only lowers if the right levers are pulled. Each lever is something you assume.' },
-        { s: 'lamplighter', t: 'Pull as few as you can, mind. Every assumption is a thing that might be wrong.' },
+        { s: 'lamplighter', t: 'The bridge follows AND, OR and NOT rules. Each lever sets an input true or false.' },
+        { s: 'lamplighter', t: 'The task may ask for the fewest ON levers, a new circuit, or a hidden input. Read its goal first.' },
     ];
     S['ch2.bridge.win'] = [
-        { s: 'narrator', t: 'The fewer assumptions an argument needs, the harder it is to knock down.' },
+        { s: 'narrator', t: 'Changing an input can change what follows. An OFF lever sets its claim false; it does not remove that claim.' },
     ];
 
     S['ch2.lane'] = [
@@ -40,7 +40,7 @@
         { s: 'narrator', t: 'Open the truth table if you get stuck. Every row is one possible world. Cross out the ones that contradict themselves.' },
     ];
     S['ch2.lane.win'] = [
-        { s: 'narrator', t: 'You did not guess. You checked every world, and only one survived. That is a proof.' },
+        { s: 'narrator', t: 'Your answer fits the village rules. A complete truth table can show why every other possible world fails.' },
     ];
 
     S['ch2.square'] = [
@@ -79,7 +79,7 @@
         { s: 'clockmaker', t: 'Mr Boole says all of thinking can be done this way. I say it makes very good clocks.' },
     ];
     S['ch2.clockmaker.win'] = [
-        { s: 'narrator', t: 'Every circuit has a truth table. So does every argument.' },
+        { s: 'narrator', t: 'These finite circuits have truth tables. A complete table checks every possible true/false input setting.' },
     ];
 
     S['ch2.school'] = [
@@ -88,7 +88,7 @@
         { s: 'schoolteacher', t: 'Saying so proves nothing, Smudge. An imp would say exactly the same.' },
     ];
     S['ch2.school.win'] = [
-        { s: 'schoolteacher', e: 'happy', t: 'Top marks. You did not trust anyone. You trusted the table.' },
+        { s: 'schoolteacher', e: 'happy', t: 'Top marks. Your answer fits the stated rules. A table can help you check every possible setting.' },
     ];
 
     S['ch2.garden'] = [
@@ -111,11 +111,11 @@
     ];
 
     S['ch2.stairs'] = [
-        { s: 'narrator', t: 'A locked gate on the Town Hall stairs. One of its switches is hidden behind a curtain.' },
-        { s: 'narrator', t: 'You cannot see the hidden premise. But you can see what it does. Work backwards.' },
+        { s: 'narrator', t: 'A locked gate on the Town Hall stairs. Its control box follows logical rules.' },
+        { s: 'narrator', t: 'Read the task: light the output, rebuild the circuit, or check a hidden switch or gate.' },
     ];
     S['ch2.stairs.win'] = [
-        { s: 'narrator', t: 'Finding the unstated assumption is half of every argument.' },
+        { s: 'narrator', t: 'An input or rule that stays hidden can change what follows. Check the conditions before trusting an output.' },
     ];
 
     S['ch2.hall'] = [
@@ -126,9 +126,9 @@
         { s: 'narrator', t: 'Build your tables. Check every world. Find the imps in the Town Hall.' },
     ];
     S['ch2.hall.win'] = [
-        { s: 'mayor', e: 'unmasked', t: 'No! You checked every case! Nobody checks every case!' },
+        { s: 'mayor', e: 'unmasked', t: 'No! Your answers fit the rules! I was relying on confident guessing!' },
         { s: 'algorithm', t: 'ASSET LOST. RECALCULATING. THE NEXT ERA WILL BE… LOUDER.' },
-        { s: 'narrator', t: 'The Mayor was the Arch-Imp all along. Notice what caught him: not a feeling, but a table with one row left.' },
+        { s: 'narrator', t: 'The Mayor was the Arch-Imp all along. Your answers passed the checks. To explain why they follow, use the stated rules and examine every possible case.' },
         { s: 'narrator', t: 'But the liar\'s sentence is still out there. Some statements cannot be settled by any table. Remember that.' },
     ];
     // Station hosts: a lead-in every visit, with a goal on first arrival.
@@ -140,14 +140,14 @@
     S["station.b-bakery.reminder"] = [{"s":"baker","t":"My last loaf is missing! Check the villagers before you point a finger."}];
     S["station.b-post.intro"] = [{"s":"postmistress","t":"The Constable left an argument here. Check its blocks before we send it on."},{"s":"postmistress","t":"An argument stands only if its steps support its conclusion."}];
     S["station.b-post.reminder"] = [{"s":"postmistress","t":"The Constable left an argument here. Check its blocks before we send it on."}];
-    S["station.b-clockmaker.intro"] = [{"s":"clockmaker","t":"My bulb only lights with the right inputs. Find which switches the task needs."},{"s":"clockmaker","t":"Find which assumptions a conclusion actually needs."}];
+    S["station.b-clockmaker.intro"] = [{"s":"clockmaker","t":"My bulb only lights with the right inputs. Find which switches the task needs."},{"s":"clockmaker","t":"Check how true and false inputs pass through logical rules."}];
     S["station.b-clockmaker.reminder"] = [{"s":"clockmaker","t":"My bulb only lights with the right inputs. Find which switches the task needs."}];
     S["station.b-school.intro"] = [{"s":"schoolteacher","t":"The class needs help checking a claim. Read today's task and test the cases."},{"s":"schoolteacher","t":"Check the result in each case, rather than guess."}];
     S["station.b-school.reminder"] = [{"s":"schoolteacher","t":"The class needs help checking a claim. Read today's task and test the cases."}];
     S["station.b-clock-tower.intro"] = [{"s":"sweep","t":"I sweep the tower, but these arguments still wobble. Check what each block supports."},{"s":"sweep","t":"A true fact alone does not make an argument valid."}];
     S["station.b-clock-tower.reminder"] = [{"s":"sweep","t":"I sweep the tower, but these arguments still wobble. Check what each block supports."}];
-    S["station.b-stairs.intro"] = [{"s":"clockmaker","t":"A hidden input runs this gate. Test the visible switches before trusting the result."},{"s":"clockmaker","t":"A hidden assumption can change an answer."}];
-    S["station.b-stairs.reminder"] = [{"s":"clockmaker","t":"A hidden input runs this gate. Test the visible switches before trusting the result."}];
+    S["station.b-stairs.intro"] = [{"s":"clockmaker","t":"Inputs and gates control this door. Read the task, then test what changes the output."},{"s":"clockmaker","t":"Check a circuit's inputs and rules before trusting its output."}];
+    S["station.b-stairs.reminder"] = [{"s":"clockmaker","t":"Inputs and gates control this door. Read the task, then test what changes the output."}];
     S["station.b-town-hall.intro"] = [{"s":"schoolteacher","t":"The Mayor says every claim is certain. Let us check the tasks one by one."},{"s":"schoolteacher","t":"Use clear rules to check claims and their assumptions."}];
     S["station.b-town-hall.reminder"] = [{"s":"schoolteacher","t":"The Mayor says every claim is certain. Let us check the tasks one by one."}];
 })(typeof window !== 'undefined' ? window : globalThis);

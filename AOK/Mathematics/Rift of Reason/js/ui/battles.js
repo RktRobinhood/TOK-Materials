@@ -185,7 +185,10 @@
         // Paste a classmate's code, then fight it.
         askGhost() {
             const input = el('textarea', { rows: 4, style: { width: '100%' }, placeholder: 'ROR1.team.…' });
-            Rift.UI.modal('Battle a classmate', el('div.stack', null, [el('p', { text: 'Paste your classmate\'s team code. You will battle a ghost of their team.' }), input]), [
+            Rift.UI.modal('Battle a classmate', el('div.stack', null, [
+                el('p', { text: 'Paste your classmate\'s team code. You will battle a ghost of their team.' }),
+                el('p.small', {text:'Your own collected cards face fate rolls if defeated and may be injured or lost. Items are at stake. Your classmate’s original cards stay safe; a win earns a trophy copy. Use Practice for a safe match.'}), input,
+            ]), [
                 { label: 'Cancel' },
                 { label: 'Battle!', primary: true, onclick: () => Battles.ghost(input.value) },
             ]);
