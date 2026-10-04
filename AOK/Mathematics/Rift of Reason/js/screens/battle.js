@@ -150,6 +150,7 @@
                 if (ev.t === 'play') sfx('card-play');
                 if (ev.t === 'steal') sfx('steal');
                 if (ev.t === 'hit') sfx('hit');
+                if (ev.t === 'fight') sfx('block');
                 if (ev.t === 'defeated') sfx('defeat');
                 if (ev.t === 'axiom') sfx('axiom');
             });
@@ -467,6 +468,11 @@
             }
             const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement };
             sfx(outcome === 'won' ? 'win' : 'lose');
+            if (fate && fate.results.length) {
+                const severity = ['death', 'warp', 'injured', 'scarred', 'fine'];
+                const worst = severity.find(kind => fate.results.some(r => r.outcome === kind));
+                sfx('fate-' + worst);
+            }
 
             const title = outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
             const reason = {

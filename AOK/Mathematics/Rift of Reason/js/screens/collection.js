@@ -105,10 +105,11 @@
                 el('h1', { text: 'Settings' }),
                 slider('voice', 'Voices'),
                 slider('sfx', 'Sounds'),
+                slider('music', 'Music'),
                 slider('textSpeed', 'Text speed'),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: !!s.settings.calm, onchange(ev) { Rift.State.update(st => { st.settings.calm = ev.target.checked; }); } }),
-                    el('span', { text: 'Calm motion: switch off all animations' }),
+                    el('span', { text: 'Calm motion: reduce animations and keep catch rings still' }),
                 ]),
                 el('h3', { text: 'Backup code' }),
                 el('p.small.muted', { text: 'Your adventure is saved in this browser. To move it to another laptop, or to be safe, copy this code somewhere. Load it from the title screen.' }),

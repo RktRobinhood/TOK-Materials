@@ -87,14 +87,22 @@
             tw.start();
             if (!isAvatar) Rift.Audio.speak({ speaker: step.s, text, voice: Rift.voiceId(step.s, step.t) });
             const advance = () => {
+                Rift.Audio.sfx('click');
                 if (!tw.isDone()) { tw.finish(); return; }
                 cleanup();
                 resolve();
             };
-            const onKey = ev => { if (ev.key === ' ' || ev.key === 'Enter') { ev.preventDefault(); advance(); } };
-            const cleanup = () => { root.document.removeEventListener('keydown', onKey); };
+            const onKey = ev => {
+                if (ev.key === ' ' || ev.key === 'Enter') {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    advance();
+                }
+            };
+            const cleanup = () => { root.document.removeEventListener('keydown', onKey, true); };
             box.addEventListener('click', advance);
-            root.document.addEventListener('keydown', onKey);
+            // Intercept before a focused map marker receives Enter/Space.
+            root.document.addEventListener('keydown', onKey, true);
         });
     }
 

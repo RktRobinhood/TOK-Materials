@@ -219,7 +219,11 @@
                         const y = (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * cy + t * t * b.y;
                         const phase = (now - t0) / 160;
                         const step = Math.floor(phase);
-                        if (step !== lastStep) { lastStep = step; Rift.Audio.sfx('step', { minGap: 120, volume: 0.5 }); }
+                        if (step !== lastStep) {
+                            lastStep = step;
+                            // Two footfalls per six-frame walk cycle.
+                            if (step % 3 === 0) Rift.Audio.sfx('step', { minGap: 350, volume: 0.5 });
+                        }
                         const hop = frameCount ? 0 : Math.abs(Math.sin(phase * Math.PI / 2)) * 10;
                         placeAvatar(x, y, hop, left, frameCount ? step % frameCount : 0);
                         if (t < 1) requestAnimationFrame(tick); else done();
@@ -237,12 +241,13 @@
                 if (!path) { Rift.UI.toast('No known path there yet.'); return; }
                 walking = true;
                 tip.style.display = 'none';
-                for (let i = 1; i < path.length; i++) {
-                    await walkEdge(path[i - 1], path[i]);
-                    Rift.State.update(s => { s.map.at = path[i]; });
-                }
-                walking = false;
-                if (!destroyed) arrive(id);
+                try {
+                    for (let i = 1; i < path.length; i++) {
+                        await walkEdge(path[i - 1], path[i]);
+                        Rift.State.update(s => { s.map.at = path[i]; });
+                    }
+                    if (!destroyed) await arrive(id);
+                } finally { walking = false; }
             }
 
             async function arrive(id, opts) {

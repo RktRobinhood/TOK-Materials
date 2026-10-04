@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import fs from 'node:fs';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
-async function game(type='puzzle',difficulty=1){
+async function game(type='puzzle',difficulty=1,clock=null){
  const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;
  Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
@@ -14,13 +14,13 @@ async function game(type='puzzle',difficulty=1){
  Rift.data.map={nodes:{test:{type,chapter:'prologue',links:[],puzzles,name:'Test',host:'narrator',goal:'Check rules'} }};
  Rift.data.chapters={prologue:{}};Rift.data.speakers={narrator:{name:'Host',art:'host'}};Rift.data.script={};
  const modals=[];let api;let screen;let paused=0;
- Rift.Assets={img:()=>new Node()};Rift.Audio={sfx:()=>{}};Rift.Dialogue={has:()=>false};Rift.Router={replace:()=>{}};
+ const sounds=[];Rift.Assets={img:()=>new Node()};Rift.Audio={sfx:name=>sounds.push(name),speak:()=>{}};Rift.Dialogue={has:()=>false};Rift.Router={replace:()=>{}};
  Rift.UI={hud:opts=>new Node('div',{},[opts.status]),toast:()=>{},modal:(title,body,buttons)=>{const m={title,body,buttons,close(){}};modals.push(m);return m;}};
  Rift.Tutorial={};Rift.Screens={register:(_,def)=>{screen=def;}};
  Rift.Puzzles.register({id:'fake',name:'Fake',colour:'reason',tok:'A conclusion needs a reason.',generate:()=>({}),check:(_,a)=>({solved:a===true,feedback:'Check the premise.'}),hints:()=>['Check the premise.'],why:()=>({question:'Why?',options:['Valid reason','Wrong'],correct:0,explain:'Reason'}),mount:(_,a,x)=>{api=x;return {pause(){paused++;},destroy(){}};}});
-  const ctx={window:{Rift},setTimeout,clearTimeout,Date};vm.runInNewContext(fs.readFileSync(new URL('../../js/screens/encounter.js',import.meta.url),'utf8'),ctx);
+  const ctx={window:{Rift},setTimeout:clock?.set||setTimeout,clearTimeout:clock?.clear||clearTimeout,Date};vm.runInNewContext(fs.readFileSync(new URL('../../js/screens/encounter.js',import.meta.url),'utf8'),ctx);
   const root=new Node();const handle=screen.mount(root,{nodeId:'test'});
-  return {Rift,state,root,handle,modals,api:()=>api,paused:()=>paused};
+  return {Rift,state,root,handle,modals,sounds,api:()=>api,paused:()=>paused};
 }
 test('normal station: three free wrong checks, then heart; success requires Continue and cannot be counted twice',async()=>{
  const g=await game();assert.match(g.root.querySelector('.enc-checks').textContent,/●●●/);
@@ -30,6 +30,7 @@ test('normal station: three free wrong checks, then heart; success requires Cont
  assert.equal(g.modals.at(-1).title,'Stage solved!');assert.deepEqual([...g.state.map.completed],[]);
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,1);
  await g.modals.at(-1).buttons[0].onclick();assert.deepEqual([...g.state.map.completed],['test']);assert.equal(g.modals.at(-1).title,'Solved!');
+ assert.ok(g.sounds.includes('win'));
 });
 test('a paid hint counts once; knockout blocks further checks and completion',async()=>{
  const g=await game();
@@ -37,7 +38,29 @@ test('a paid hint counts once; knockout blocks further checks and completion',as
  all(g.root).find(x=>x.textContent.startsWith('💡 Hint')).onclick();assert.equal(g.state.health,4);assert.equal(g.state.stats.hintsUsed,1);
  g.state.health=1;for(let i=0;i<4;i++)g.api().submit(false);
  assert.equal(g.state.health,2);assert.equal(g.state.scars.length,1);assert.equal(g.modals.at(-1).title,'Knocked out!');
+ assert.ok(g.sounds.includes('lose'));
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,0);assert.equal(g.state.map.completed.length,0);
+});
+
+test('timed catch settles once after a wobble, and leaving cancels its pending outcome',async()=>{
+ for(const leave of [false,true]){
+  const pending=new Map();let next=0;
+  const clock={set(fn){pending.set(++next,fn);return next;},clear(id){pending.delete(id);}};
+  const tick=()=>{const [id,fn]=pending.entries().next().value;pending.delete(id);fn();};
+  const g=await game('puzzle',1,clock);
+  g.Rift.World.rollLoot=()=>({species:'lobstorian'});g.Rift.World.rollCatch=()=>({caught:true,p:.65});
+  const rng=g.Rift.makeRng;g.Rift.makeRng=seed=>String(seed).endsWith(':catch-mode')?{pick:()=> 'throw'}:rng(seed);
+  let catchOptions;g.Rift.CatchGame={mount:(_,opts)=>{catchOptions=opts;return {destroy(){}};}};
+  g.Rift.voiceId=()=>'';
+  g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();g.modals.at(-1).buttons[0].onclick();
+  function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
+  all(g.root).find(n=>n.textContent.startsWith('Time a throw:')).onclick();
+  catchOptions.onFinish({spent:1,bonus:.15,label:'Excellent throw!'});
+  assert.equal(g.state.stats.catches,0);assert.equal(pending.size,1);
+  tick();assert.ok(g.sounds.includes('wobble'));assert.equal(pending.size,1);
+  if(leave){g.handle.destroy();assert.equal(pending.size,0);assert.equal(g.state.stats.catches,0);}
+  else{tick();assert.equal(g.state.stats.catches,1);assert.ok(g.sounds.includes('caught'));assert.equal(pending.size,0);}
+ }
 });
 test('boss Why knockout cannot grant rewards or advance to the next stage',async()=>{
  const g=await game('boss',3);g.state.health=1;g.api().submit(true);

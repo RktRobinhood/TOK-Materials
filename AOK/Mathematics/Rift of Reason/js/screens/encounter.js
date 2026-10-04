@@ -30,6 +30,7 @@
             let obstacle = null;
             let catchOpts = null;
             let catchGame = null;
+            let catchTimer = null;
             let catchAttempt = 0;
             const firstTime = !state.map.completed.includes(n.id);
             const firstVisit = state.map.visitCount[n.id] === 1;
@@ -241,6 +242,7 @@
 
             function knockedOut() {
                 phase = 'knocked-out';
+                Rift.Audio.sfx('lose');
                 closeHelp();
                 pausePuzzle();
                 hintBtn.disabled = perkBtn.disabled = helpBtn.disabled = true;
@@ -301,11 +303,13 @@
                 const s = Rift.State.get();
                 if (params.shrine) {
                     Rift.State.update(st => { st.scars.shift(); });
+                    Rift.Audio.sfx('heal');
                     modal('The shrine glows', el('p', { text: 'One scar fades away.' }), [{ label: 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }]);
                     return;
                 }
                 if (firstTime && Rift.Dialogue.has(n.script + '.win')) await Rift.Dialogue.play(n.script + '.win');
                 if (destroyed) return;
+                Rift.Audio.sfx('win');
                 const rng = Rift.makeRng(visit.seed + ':reward');
                 let earned = [];
                 const stars = Rift.World.solveStars(hintsUsed, wrongs);
@@ -392,8 +396,18 @@
                             const st = Rift.State.get();
                             const rng = Rift.makeRng(visit.seed + ':catch:' + catchAttempt + ':' + st.stats.catches + ':' + st.stats.escapes);
                             const roll = Rift.World.rollCatch(st, obstacle, id, rng, Object.assign({}, catchOpts, { skillBonus: skill.bonus, skillFailed: skill.bonus === 0 }));
-                            Rift.Audio.sfx('throw');
-                            finishThrow(roll, skill, base);
+                            if (mode === 'throw') {
+                                panel.innerHTML = '';
+                                panel.append(el('p', { text: 'The charm is settling…', 'aria-live': 'polite' }));
+                                catchTimer = setTimeout(() => {
+                                    if (destroyed || phase !== 'catch') return;
+                                    Rift.Audio.sfx('wobble');
+                                    catchTimer = setTimeout(() => {
+                                        catchTimer = null;
+                                        if (!destroyed && phase === 'catch') finishThrow(roll, skill, base);
+                                    }, 350);
+                                }, 250);
+                            } else finishThrow(roll, skill, base);
                         },
                     });
                 };
@@ -450,6 +464,7 @@
             return {
                 destroy() {
                     destroyed = true;
+                    if (catchTimer) clearTimeout(catchTimer);
                     modals.forEach(m => m.close());
                     if (catchGame) catchGame.destroy();
                     if (tutorial) tutorial.close();

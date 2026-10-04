@@ -4,17 +4,21 @@
 Characters, scenes and UI art were generated with ChatGPT from prompts written for this game (see `design/art-requests/ART-REQUESTS.md`) and reviewed and edited by hand. Caricatures are affectionate satire inspired by public figures' public personas; they are not likenesses and imply nothing beyond the jokes.
 
 ## Sound
-From [Kenney](https://kenney.nl) (CC0), converted to WAV and levelled (shared with the psychology games in `psychology materials`).
+From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-bit PCM WAVs for browser playback. Existing source sounds were shared with the psychology games in `psychology materials`. All effects peak at -13 dB; the four playback buses leave mix headroom. `tools/prepare-sfx.mjs` reproduces conversion and levelling with FFmpeg.
 
 | File | Source pack | Original |
 |---|---|---|
 | page1, page2, back | RPG Audio | bookFlip1, bookFlip3, bookFlip2 |
 | open, close, unlock | RPG Audio | bookOpen, bookClose, metalLatch |
 | door, creak | RPG Audio | doorOpen_1, creak1 |
+| step1, step2 | [RPG Audio](https://kenney.nl/assets/rpg-audio) | footstep00, footstep04 |
+| throw, block, cloth | RPG Audio | knifeSlice2, metalPot1, cloth1 |
+| rift | RPG Audio | creak3, reversed, slowed and faded |
 | tap, correct, wrong, notify, tile, count | Interface Sounds | click_001, confirmation_001, error_008, question_002, glass_005, glass_003 |
 | dial | Interface Sounds | tick_002 |
 | tick | UI Audio | click3 |
 | sigil, victory, escape | Music Jingles | jingles_PIZZI03, jingles_PIZZI07, jingles_PIZZI07 |
+| loss | Music Jingles | jingles_PIZZI07, reversed and slowed |
 | shatter, clunk | Impact Sounds | impactGlass_heavy_000, impactMetal_heavy_001 |
 
 ## Voices

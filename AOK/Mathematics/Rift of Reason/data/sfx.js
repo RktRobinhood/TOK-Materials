@@ -1,7 +1,6 @@
 /*
  * Sound effect names → files in assets/sfx (Kenney CC0, see assets/CREDITS.md).
  * A name with several files picks one at random. Never synthesize beeps.
- * TODO (#24): footsteps, throw whoosh and a rift swell from Kenney's RPG Audio pack.
  */
 (function (root) {
     'use strict';
@@ -14,12 +13,12 @@
         hurt: ['clunk.wav'],
         heal: ['unlock.wav'],
         reveal: ['page1.wav', 'page2.wav'],
-        rift: ['creak.wav'],
+        rift: ['rift.wav'],
         door: ['door.wav'],
         open: ['open.wav'],
         close: ['close.wav'],
-        step: ['tick.wav'],
-        throw: ['back.wav'],
+        step: ['step1.wav', 'step2.wav'],
+        throw: ['throw.wav'],
         wobble: ['dial.wav'],
         caught: ['victory.wav'],
         escape: ['shatter.wav'],
@@ -30,8 +29,14 @@
         steal: ['creak.wav'],
         hit: ['clunk.wav'],
         defeat: ['shatter.wav'],
+        block: ['block.wav'],
+        'fate-fine': ['unlock.wav'],
+        'fate-scarred': ['cloth.wav'],
+        'fate-injured': ['clunk.wav'],
+        'fate-warp': ['rift.wav'],
+        'fate-death': ['shatter.wav'],
         axiom: ['page1.wav', 'page2.wav'],
         win: ['victory.wav'],
-        lose: ['wrong.wav'],
+        lose: ['loss.wav'],
     };
 })(typeof window !== 'undefined' ? window : globalThis);

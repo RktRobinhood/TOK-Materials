@@ -25,6 +25,7 @@
         const spend = () => {
             if (!o.spend(o.item)) return false;
             spent += 1;
+            if (o.mode === 'throw') Rift.Audio.sfx('throw');
             return true;
         };
         const elapsed = () => (Date.now() - started) / 1000;
@@ -75,8 +76,9 @@
                             const step = Rift.Catching.boxStep(board, i, o.lured);
                             if (!step.valid) return;
                             if (!spend()) { finish(0, 'No charms left.'); return; }
+                            const moved = step.board.creature !== board.creature;
                             board = step.board;
-                            Rift.Audio.sfx('place');
+                            Rift.Audio.sfx(moved ? 'wobble' : 'place');
                             if (step.trapped) { finish(0.15, 'Trapped! Clever plan.'); return; }
                             if (spent >= cfg.placements || !o.available(o.item)) { finish(0, 'It still has an exit.'); return; }
                             render();
