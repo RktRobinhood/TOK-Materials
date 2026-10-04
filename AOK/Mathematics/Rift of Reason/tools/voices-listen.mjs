@@ -5,30 +5,26 @@
 //   node tools/voices-listen.mjs muskrat narrator     check every rendered line of these speakers
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadRift, GAME_DIR } from './test/harness.mjs';
-import { spoken } from './voices.mjs';
+import { GAME_DIR } from './test/harness.mjs';
+import { spoken, voiceCatalog } from './voices.mjs';
 
 const MODEL = process.env.LISTEN_MODEL || 'gemini-3.8-flash';
 const KEY_FILE = path.resolve(GAME_DIR, '..', '..', '..', '.secrets', 'gemini_api_key');
 const key = (process.env.GEMINI_API_KEY || fs.readFileSync(KEY_FILE, 'utf8')).trim().split(/\s+/)[0];
-const who = process.argv.slice(2);
-
-const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js'));
-const Rift = loadRift(['js/core/rift.js', 'data/creatures.js', ...scripts.map(f => 'data/script/' + f)]);
-const lines = [];
-const walk = n => {
-    if (Array.isArray(n)) return n.forEach(walk);
-    if (!n || typeof n !== 'object') return;
-    if (typeof n.s === 'string' && typeof n.t === 'string') lines.push({ who: n.s, text: n.t });
-    Object.entries(n).forEach(([k, v]) => { if (k !== 't' && typeof v === 'object') walk(v); });
-};
-walk(Object.values(Rift.data.script || {}));
-Object.entries(Rift.data.creatures).forEach(([id, c]) => (c.lines || []).forEach(t => lines.push({ who: id, text: t })));
+const args = process.argv.slice(2);
+const value = flag => args[args.indexOf(flag) + 1];
+const who = args.filter((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--'));
+const limit = args.includes('--limit') ? Math.max(0, Number(value('--limit'))) : Infinity;
+const id = args.includes('--id') ? value('--id') : null;
+const {lines} = voiceCatalog();
 
 let bad = 0;
-for (const l of lines.filter(x => who.includes(x.who))) {
-    const file = path.join(GAME_DIR, 'assets', 'voice', Rift.voiceId(l.who, l.text) + '.mp3');
+let checked = 0;
+for (const l of lines.filter(x => id ? x.id === id : who.includes(x.who))) {
+    if (checked >= limit) break;
+    const file = path.join(GAME_DIR, 'assets', 'voice', l.id + '.mp3');
     if (!fs.existsSync(file)) { console.log('MISSING', l.who, l.text.slice(0, 50)); continue; }
+    checked++;
     const prompt = `Listen to this voice line from a game. The script is: "${spoken(l.text)}".
 Reply in exactly three lines:
 HEARD: <verbatim transcript>
@@ -49,4 +45,4 @@ SOUND: <a few words on how the voice sounds>`;
     if (!/OK:\s*yes/i.test(out)) bad++;
     console.log(`--- ${l.who}: ${l.text.slice(0, 70)}\n${out}`);
 }
-console.log(bad ? `${bad} line(s) need a look.` : 'All checked lines OK.');
+console.log(`${checked} lines checked. ` + (bad ? `${bad} line(s) need a look.` : 'All checked lines OK.'));

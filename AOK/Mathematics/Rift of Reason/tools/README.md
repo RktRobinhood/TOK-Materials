@@ -15,7 +15,7 @@ NPCs, narration and creatures are voiced with pre-recorded MP3s from Google Gemi
 
 **The key** lives in `.secrets/gemini_api_key` at the repo root (one line, gitignored). The tools only read it from there; it is never printed, committed or shipped.
 
-**How lines are found.** `voices.mjs` reads every line in `data/script/*.js` (any step with a speaker `s` and text `t`) and every creature's `lines` in `data/creatures.js`. Each recording is named `Rift.voiceId(speaker, text)`, a hash of the speaker and the text as written, so the game finds it with no extra bookkeeping. `{name}` is left out of the spoken version ("Good morning, {name}." is recorded as "Good morning."), and all-caps lines (the Algorithm) are read in sentence case so they aren't spelled out.
+**How lines are found.** `voices.mjs` reads every line in `data/script/*.js` (any step with a speaker `s` and text `t`), each creature's `lines`, every puzzle tour for its actual station host, and Granny's eight card-lesson steps. Repeated host/text pairs are deduplicated. Each recording is named `Rift.voiceId(speaker, text)`, a hash of the speaker and the text as written, so the game finds it with no extra bookkeeping. `{name}` is left out of the spoken version ("Good morning, {name}." is recorded as "Good morning."), and all-caps lines (the Algorithm) are read in sentence case so they aren't spelled out. Stage directions stay silent; cast style and each line's emotional direction are passed as acting metadata, including in batches. Puzzle tours speak through the displayed host and stop when closed.
 
 ### Re-recording after a script change
 
@@ -30,13 +30,15 @@ node tools/voices.mjs --prune      # delete recordings whose line no longer exis
 
 Then commit `assets/voice/` and `data/voice-manifest.js`.
 
-**Quota.** The free tier allows about 10 requests a day per model. One request records up to 28 lines of a **single speaker**, then the audio is cut at the pauses into one file per line. A new line for one speaker costs one request, no matter how short it is. Batch your script edits, then record once. When the daily quota runs out, the run stops cleanly. Run `--render` again after the reset (around 09:00 Danish time); finished lines are never recorded twice.
+**Quota.** The tool conservatively caps actual TTS attempts at **10 per model per Pacific day**. The ignored `tools/voice-usage.json` records attempts before sending, including failed requests, split retries and auditions. A server daily-quota response also stops that model. Never run two render/audition commands at once against this ledger. Keep the file when resuming; do not reset it to retry a limit. This local allowance is a guard, not a claim about the account's available server quota. Do not increase it or change a character's pinned model to bypass a limit without user authorization.
 
-Other options: `--only <speaker>`, `--max-requests <n>`, `--batch <lines>`, `--single` (one request per line, so the expression `e` is acted; for paid quota), `--audition` (one sample per speaker into `tools/voice-auditions/`), `--report` (every line still on the browser voice).
+One request records up to 28 lines of a **single speaker**, then the audio is cut at pauses into one file per line. Batch settled script edits, then record once. Requests allow up to four minutes for a response. Run `--render` after the Pacific reset to resume; finished lines are skipped. New or incoming wording waits for another recording pass. Do not enable billing or recreate recurring recording tasks.
+
+Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max-requests <n>`, `--batch <lines>`, `--single` (one request per line for a difficult cut), `--audition` (one sample per speaker into ignored `tools/voice-auditions/`), `--report` (every line still on the browser voice). Back up a suspect MP3 outside the repo before a targeted re-render: existing recordings are skipped.
 
 **If a batch won't split** (the pieces don't match the lines), the raw audio is kept in `tools/voice-raw/` and the batch is retried as two halves. `--resplit` retries the splitter on the kept audio without using quota.
 
-**Checking by ear without an ear.** `node tools/voices-listen.mjs <speaker> …` asks a Gemini text model to transcribe each recording and say whether it matches its line. It uses a different quota from the voices.
+**Checking by ear without an ear.** `node tools/voices-listen.mjs <speaker> …` asks a Gemini text model to transcribe each recording and say whether it matches its line. Use `--limit 3` for a bounded sample or `--id <id> --limit 1` for a suspect boundary. It uses a different quota from the voices. Automated cuts are provisional: check beginnings, endings and neighbouring clips when a sample includes extra or missing words. A sample pass does not certify every clip.
 
 ### The cast
 

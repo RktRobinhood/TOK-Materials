@@ -5,9 +5,9 @@ Updated 2026-10-04. Work directly on `main`, as requested by the teacher. Limit 
 ## Issue audit
 
 - Closed stale art issues #19–#22. Art epic #32 was already closed. The manifest has 541 entries: all files exist, and 226 required avatar, creature, scene, host, item and UI IDs resolve without placeholders. All ten avatar walk sheets have six frames. The asset pipeline dry run reports 94 sheets to build, zero failures, one reference sheet skipped; the ignored `algorithm-v2.png` is a superseded variant.
-- Closed #23: the voice pipeline exists and its fallback report is available. The report after the onboarding additions lists 313 fallback lines and six silent/stage-direction lines. Final recording stays in #43 after the script is stable; do not start recording during script edits.
+- Closed #23: the voice pipeline exists and its fallback report is available. The latest user instruction on 2026-10-04 resumes #43 for settled lines, including tutorial speech; incoming wording waits. No recurring tasks were recreated.
 - Removed every open `teacher in the loop` label. Updated #25 to make playtest/release checks agent work and remove the old teacher approval gate. School Wi-Fi multiplayer checks belong to stretch #29.
-- Updated #1 to reflect already closed child issues. #24 remains open: dedicated footstep/throw/rift sounds still need implementation, with no teacher dependency.
+- Updated #1 to reflect already closed child issues. Dedicated sound #24 is now completed and closed; release #25 has fresh-save, simulation and deployed-build evidence below.
 
 ## Active work
 
@@ -43,11 +43,23 @@ Corrections align Tower facts with displayed English, credit discriminating Rule
 
 Remaining refinements are documented in the reviews: dense Core vocabulary, optional diagram proficiency, exact item stakes before a real battle, plain injury/warp detail labels, small-viewport controls, and empirical classroom play. They do not fall below the agreed source-clarity threshold.
 
+## Sound and release (#24/#25)
+
+Dedicated CC0 sounds, bounded playback buses, independent Music/Sounds/Voices controls, voice cancellation and dialogue keyboard re-entry are fixed and pushed in `e5acfe6`. All 317 tests passed. Fresh-save browser smoke completed Burrow/Fair Gate dialogue, the teaching match, a Gallery solve and a first catch attempt (escaped, with working retry controls). Balance: 1,000 Hard-vs-Hard and 2,000 Hard-vs-Easy matches, 50.4% first-player wins in equal play, 1.9% permanent loss overall, Hard beats Easy 77.2%. Pages deployment succeeded and public audio source/WAV returned 200. Details and limits: `reviews/sound-release-checks.md`.
+
+## Resumed voice work (#43)
+
+The current catalog includes 493 speakable host, creature, story, puzzle-tour and card-lesson lines; six silent stage directions are excluded. Tour speech matches the displayed host. Cast/style and per-line moods remain acting metadata. Actual request attempts (failures and auditions included) are capped locally at ten per pinned model per Pacific day, with an ignored persisted ledger. See `tools/README.md` before resuming; do not run recording processes concurrently or reset the ledger to evade its limit.
+
+The initial Sundial batch saved 84 lines using three requests. Bounded transcript checks caught a cut containing the next line's first word; both neighbouring recordings are backed up outside the repo and being re-recorded separately. Opening and ending samples matched. Granny's first 28-line request timed out and consumed one attempt; a smaller 14-line probe succeeded. Final counts, quality samples and exact continuation commands will be recorded in `reviews/voice-recording-2026-10-04.md`. Generated clips are committed separately from runtime/tool changes. No paid quota or recurring automation was enabled.
+
+All **321 tests pass** after tutorial narration/catalog/budget changes. Both Standards and Spec rechecks report no blockers after moving request accounting to the common TTS boundary; auditions now share the cap. Recording samples cannot certify every performance or audio cut.
+
 ## Next work
 
-1. Finish dedicated SFX/music #24, then release validation #25 (fresh-save Prologue smoke, balance and published Pages checks).
-2. Final-script voice recording #43 remains explicitly paused; no recording requests or recurring tasks started during script edits. Update its fallback report after the final wording changes.
-3. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and stretch #29–#31 remain separate.
+1. Commit/publish the reviewed tutorial voice support, finish today's guarded recording allowance, check suspect cuts, and update #43 with remaining coverage. Resume after the Pacific reset for missing settled lines.
+2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and stretch #29–#31 remain separate.
+3. #13 investigated: official Black Box/Mines browser pages timed out through both browser-fetch and direct HTTPS on 2026-10-04; upstream was also unreachable during the original research. No binaries/licence were vendored from an unverified substitute. Next agent should obtain pinned upstream browser JS/WASM and MIT notices, then implement the local frame and one-time reduced honour reward if completion cannot be detected. Verify HTTP and file:// before closing it.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

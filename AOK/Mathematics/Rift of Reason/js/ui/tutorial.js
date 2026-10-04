@@ -17,7 +17,8 @@
         let closed = false;
         const demonstrated = new Set();
         const previousFocus = root.document.activeElement;
-        const host = Rift.data.speakers[hostId] || Rift.data.speakers.narrator;
+        const speaker = Rift.data.speakers[hostId] ? hostId : 'narrator';
+        const host = Rift.data.speakers[speaker];
         const layer = el('div.tutorial-layer');
         const bubble = el('div.tutorial-bubble.panel', { role: 'dialog', 'aria-label': 'How to play' });
         layer.append(bubble);
@@ -29,6 +30,7 @@
         function close() {
             if (closed) return;
             closed = true;
+            if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice();
             unmark();
             layer.remove();
             root.document.removeEventListener('keydown', keydown);
@@ -39,6 +41,7 @@
         function render() {
             unmark();
             const step = steps[index];
+            if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker, text: step.text, voice: Rift.voiceId(speaker, step.text) });
             if (step.highlight) marked = container.querySelector(step.highlight);
             if (marked) {
                 marked.classList.add('tutorial-highlight');

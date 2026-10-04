@@ -1,0 +1,4 @@
+# Local recording intermediates and daily request counters.
+tools/voice-raw/
+tools/voice-auditions/
+tools/voice-usage.json

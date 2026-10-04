@@ -16,6 +16,12 @@ The grid accepted keyboard Enter and a pointer placement, spent exactly two char
 
 This run caught map Enter re-entry while a dialogue was open: multiple scenes could stack. Dialogue now captures Enter/Space before the focused marker, and map arrival stays busy through its scene. A fresh restart completed both introductions and the teaching match with a single dialogue layer. The keyboard regression exercises the actual dialogue handler and its cleanup.
 
-## Limits and remaining evidence
+## Balance and published build (#25)
+
+Ran `node tools/sim-battle.mjs 1000 --seed=release-2026-10-04`: 1,000 hard-vs-hard battles plus 2,000 hard-vs-easy battles across both starting seats. Hard-vs-hard first-player wins were 50.4%, no draws, mean 37 turns. Permanent loss affected 1.9% of players overall (0% winners, 3.8% losers); injury/death affected 15.8% overall (3.1% winners, 28.4% losers). Hard won 77.2% against Easy. These are seeded simulation outcomes, not observed student results. Onboarding matches use safe practice rules, with no fate or stakes.
+
+Main commit `e5acfe6` published successfully in Pages run `37215785079`. Public `js/core/audio.js` returned HTTP 200 and matched the local committed source; the dedicated throw WAV also returned HTTP 200. Final voice additions get their own published-build check.
+
+## Limits
 
 Source/controller checks and earlier viewport checks support release use; they do not certify classroom comprehension, every generated variant, audible mix quality on every device, or a Safari listening session on this Windows machine. PCM WAV compatibility is checked structurally. Full station source ratings and educational dispositions are in the round-two reports. Balance and final published-build verification are recorded in the release issue/progress handoff.

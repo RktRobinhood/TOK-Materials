@@ -24,6 +24,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { loadRift, GAME_DIR } from './test/harness.mjs';
 import { applyFx } from './voices-fx.mjs';
+import { reserveFileRequest } from './voice-budget.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(GAME_DIR, 'assets', 'voice');
@@ -31,6 +32,7 @@ const MANIFEST = path.join(GAME_DIR, 'data', 'voice-manifest.js');
 const RAW = path.join(HERE, 'voice-raw');
 const KEY_FILE = path.resolve(GAME_DIR, '..', '..', '..', '.secrets', 'gemini_api_key');
 const CAST = JSON.parse(fs.readFileSync(path.join(HERE, 'voices-cast.json'), 'utf8'));
+const USAGE = path.join(HERE, 'voice-usage.json');
 
 const args = process.argv.slice(2);
 const flag = n => args.includes(n);
@@ -43,7 +45,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 function loadGame() {
     const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js')).sort();
-    return loadRift(['js/core/rift.js', 'data/creatures.js', ...scripts.map(f => 'data/script/' + f)]);
+    const puzzles = fs.readdirSync(path.join(GAME_DIR, 'js', 'puzzles')).filter(f => f.endsWith('.js') && f !== 'registry.js').sort();
+    return loadRift(['js/core/rift.js', 'data/creatures.js', 'data/map.js', 'data/cases.js',
+        ...scripts.map(f => 'data/script/' + f), 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
 }
 
 // What the TTS reads: no nickname, and shouted all-caps lines (the Algorithm) in sentence case
@@ -81,8 +85,19 @@ function collect(Rift) {
     const scripts = Rift.data.script || Rift.data.scripts || {};
     for (const [key, steps] of Object.entries(scripts)) walk(steps, key);
     for (const [id, c] of Object.entries(Rift.data.creatures || {})) (c.lines || []).forEach(t => add(id, t, null, 'creature ' + id));
+    // Match the actual station host, not a second generic tutorial narrator.
+    // voice ids de-duplicate repeated family/host instructions across nodes.
+    for (const n of Object.values(Rift.data.map.nodes)) {
+        for (const p of n.puzzles || []) {
+            const def = Rift.Puzzles.get(p.id);
+            for (const step of (def && def.tutorial) || []) add(n.host, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
+        }
+    }
+    for (const step of Rift.Battle.Lesson.steps) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
     return { lines, skipped };
 }
+
+export function voiceCatalog() { return collect(loadGame()); }
 
 const fileOf = l => l.id + '.mp3';
 const rendered = l => fs.existsSync(path.join(OUT, fileOf(l)));
@@ -161,19 +176,21 @@ function apiKey() {
 }
 
 async function tts(key, model, voice, text, style) {
+    // The common boundary protects render retries, split jobs and auditions alike.
+    reserveFileRequest(USAGE, model, Number(opt('--daily-limit') ?? 10));
     const res = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
         method: 'POST',
         headers: { 'x-goog-api-key': key, 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(120000),
+        signal: AbortSignal.timeout(240000),
         body: JSON.stringify({
             model,
-            input: [{ type: 'user_input', content: [{ type: 'text', text, annotations: [{ type: 'speech_metadata', style }] }] }],
+            input: [{ type: 'user_input', content: Array.isArray(text) ? text : [{ type: 'text', text, annotations: [{ type: 'speech_metadata', style }] }] }],
             response_format: { type: 'audio' },
             generation_config: { speech_config: [{ voice }] },
         }),
     });
     const body = await res.text();
-    if (!res.ok) { const e = new Error(`HTTP ${res.status}: ${body.slice(0, 300)}`); e.status = res.status; throw e; }
+    if (!res.ok) { const e = new Error(`HTTP ${res.status}: ${body.slice(0, 300)}`); e.status = res.status; e.daily = /per.?day|PerDay|daily|RPD/i.test(body); throw e; }
     const data = findAudio(JSON.parse(body));
     if (!data) throw new Error('No audio in response: ' + body.slice(0, 300));
     return Buffer.from(data, 'base64');
@@ -184,7 +201,16 @@ function findAudio(o) {
     for (const v of Object.values(o)) { const r = findAudio(v); if (r) return r; }
     return null;
 }
-const dailyQuota = e => e.status === 429 && /per.?day|PerDay|daily|RPD/i.test(e.message);
+const dailyQuota = e => e.status === 429 && (e.daily || /per.?day|PerDay|daily|RPD/i.test(e.message));
+
+// Turn-level acting survives batching; directions are metadata, not spoken.
+export function speechParts(lines, style) {
+    return lines.map((line,i) => ({type:'text',
+        text:line.say + (i < lines.length-1 ? ' <long pause> <long pause> ' : ''),
+        annotations:[{type:'speech_metadata',style:style + (line.mood ? '; in this line: ' + line.mood : '')
+            + (lines.length > 1 ? '. Leave a long silent pause after this line.' : '')}],
+    }));
+}
 
 // ---- batch splitting ----------------------------------------------------------
 // Many lines from one speaker go into one request, separated by long pauses. The audio is
@@ -315,20 +341,19 @@ async function render(key, todo) {
             const job = queue.shift();
             const c = CAST[job.who];
             const single = job.lines.length === 1;
-            const mood = single && job.lines[0].mood ? '; in this line: ' + job.lines[0].mood : '';
-            const text = job.lines.map(l => l.say).join(' <long pause> <long pause> ');
-            const style = c.style + mood + (single ? '' : '. Read each sentence group as a separate line, with a long, silent pause between them.');
+            const text = speechParts(job.lines,c.style);
             requests++;
             let wav;
             try {
-                wav = await tts(key, model, c.voice, text, style);
+                wav = await tts(key, model, c.voice, text, c.style);
             } catch (e) {
+                if (e.code === 'LOCAL_DAILY_LIMIT') { requests--; console.log(e.message); return; }
                 if (dailyQuota(e)) { console.log(`DAILY QUOTA reached on ${model}; ${queue.length + 1} requests left for it. Run again after the reset.`); return; }
                 if (e.status === 429) {
                     const m = e.message.match(/retry in (\d+)/i);
                     console.log(`429 on ${model}, waiting ${m ? m[1] : 30}s`);
                     await sleep(((m ? +m[1] : 30) + 2) * 1000);
-                    queue.unshift(job); requests--;
+                    queue.unshift(job);
                     continue;
                 }
                 console.log(`FAILED ${job.who} x${job.lines.length}: ${String(e.message).slice(0, 160)}`);
@@ -363,9 +388,18 @@ async function audition(key, lines) {
     const dir = path.join(HERE, 'voice-auditions');
     fs.mkdirSync(dir, { recursive: true });
     const seen = new Set();
+    const exhausted = new Set();
     for (const l of lines.filter(x => !seen.has(x.who) && seen.add(x.who))) {
         const c = CAST[l.who];
-        const { rate, pcm } = pcmFromWav(await tts(key, modelFor(l.who), c.voice, l.say, c.style));
+        const model = modelFor(l.who);
+        if (exhausted.has(model)) continue;
+        let wav;
+        try { wav = await tts(key, model, c.voice, l.say, c.style); }
+        catch (e) {
+            if (e.code === 'LOCAL_DAILY_LIMIT' || dailyQuota(e)) { console.log(e.message); exhausted.add(model); continue; }
+            throw e;
+        }
+        const { rate, pcm } = pcmFromWav(wav);
         fs.writeFileSync(path.join(dir, l.who + '.mp3'), toMp3(applyFx(l.who, trim(pcm, rate), rate), rate));
         console.log('audition', l.who, c.voice);
         await sleep(DELAY);
@@ -377,9 +411,14 @@ async function audition(key, lines) {
 async function main() {
     if (flag('--manifest')) return console.log('Manifest lists ' + writeManifest() + ' files.');
     if (flag('--resplit')) return resplit();
-    const { lines: all, skipped } = collect(loadGame());
+    const { lines: all, skipped } = voiceCatalog();
     let lines = all;
     if (opt('--only')) lines = lines.filter(l => l.who === opt('--only'));
+    if (opt('--id')) {
+        const ids = new Set(opt('--id').split(','));
+        lines = lines.filter(l => ids.has(l.id));
+        if (lines.length !== ids.size) throw new Error('Unknown voice id in --id');
+    }
     const todo = lines.filter(l => !rendered(l));
 
     if (flag('--prune')) {

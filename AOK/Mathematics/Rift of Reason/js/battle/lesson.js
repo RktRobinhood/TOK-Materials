@@ -2,6 +2,7 @@
 (function (root) {
     'use strict';
     const Rift = root.Rift;
+    const Battle = Rift.Battle || (Rift.Battle = {});
     const E = () => Rift.Battle.Engine;
     const steps = [
         { title: 'Play', text: 'On your turn, play a creature from your hand OR attack with one on your board. First, play Lobstorian. Granny will play Speedcheeta.', label: 'Play Lobstorian', highlight: '.lesson-hand', actions: [{type:'play',cid:'p0c0'}, {type:'decline'}, {type:'play',cid:'p1c0'}, {type:'decline'}] },
@@ -31,5 +32,5 @@
         if (!step) throw new Error('Unknown lesson step');
         return step.actions.reduce((s, action) => E().applyAction(s, action), state);
     }
-    Rift.Battle.Lesson = {steps, create, advance, starter, team};
+    Battle.Lesson = {steps, create, advance, starter, team};
 })(typeof window !== 'undefined' ? window : globalThis);
