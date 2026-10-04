@@ -18,6 +18,8 @@ This run caught map Enter re-entry while a dialogue was open: multiple scenes co
 
 ## Balance and published build (#25)
 
+A final tutorial re-entry check exposed a decorative-avatar hit target: the sprite covered the current station's marker centre. Pointer events now pass through `.map-avatar`. Browser `elementFromPoint` changed from the avatar image to the station circle, and a mouse click opened Syllo's offer. Keyboard entry still works. The six-step tutorial shows the actual host; Next changes its text and Skip removes it without spending hearts. Controller tests cover its matching speech ID and voice cancellation.
+
 Ran `node tools/sim-battle.mjs 1000 --seed=release-2026-10-04`: 1,000 hard-vs-hard battles plus 2,000 hard-vs-easy battles across both starting seats. Hard-vs-hard first-player wins were 50.4%, no draws, mean 37 turns. Permanent loss affected 1.9% of players overall (0% winners, 3.8% losers); injury/death affected 15.8% overall (3.1% winners, 28.4% losers). Hard won 77.2% against Easy. These are seeded simulation outcomes, not observed student results. Onboarding matches use safe practice rules, with no fate or stakes.
 
 Main commit `e5acfe6` published successfully in Pages run `37215785079`. Public `js/core/audio.js` returned HTTP 200 and matched the local committed source; the dedicated throw WAV also returned HTTP 200. Final voice additions get their own published-build check.

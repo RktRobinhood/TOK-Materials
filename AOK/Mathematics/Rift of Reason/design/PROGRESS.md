@@ -55,6 +55,8 @@ The initial Sundial batch saved 84 lines using three requests. Bounded transcrip
 
 All **321 tests pass** after tutorial narration/catalog/budget changes. Both Standards and Spec rechecks report no blockers after moving request accounting to the common TTS boundary; auditions now share the cap. Recording samples cannot certify every performance or audio cut.
 
+The final follow-up has **324 passing tests**: three audit regressions catch cross-clip words, invalid response coverage, and changed mathematical operators/signs. The new bounded multi-clip transcription tool journals audio hashes, omits expected scripts from its prompt, and stops without claiming coverage on HTTP failures. Reviews caught and fixed a comparison that erased +/−. The browser avatar hit-target fix is verified with pointer and keyboard entry.
+
 ## Next work
 
 1. Commit/publish the reviewed tutorial voice support, finish today's guarded recording allowance, check suspect cuts, and update #43 with remaining coverage. Resume after the Pacific reset for missing settled lines.

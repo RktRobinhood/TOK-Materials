@@ -42,4 +42,6 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 
 ### The cast
 
+`node tools/voices-audit.mjs --only narrator --max-requests 12` checks up to eight separate clips per text-model request, without giving the model the expected script. It compares transcripts locally and keeps audio hashes in ignored `tools/voice-audit.json`, so a replacement is checked again and unchanged clips are skipped. Default allowance is three requests per run; `--plan` is free. A failed request stops without claiming coverage. Review differences before repairing: number spellings and proper names can be transcription errors. This check cannot certify acting or cast consistency.
+
 `tools/voices-cast.json` gives each speaker one prebuilt Gemini voice, an acting direction and the model it always uses (`"model": "flash"` or the default lite), so a voice never changes model halfway through. Caricature directions describe a style (energy, cadence), never a real person. To change a voice, edit its entry, delete that speaker's MP3s in `assets/voice/` and record again. `tools/voices-fx.mjs` adds the Algorithm's synthetic chorus and the Sundial's room echo after recording.
