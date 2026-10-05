@@ -55,6 +55,8 @@ Mouse-driven, interactive, **generated fresh each play** (replayable, and hard t
 
 Bonus nodes: **Simon Tatham's Black Box and Mines** (MIT; credit required). See `research/borrowable-puzzles.md` for the full steal list and licences.
 
+Both are optional Road side paths using locally vendored official engines. Their frames work offline with embedded WASM bytes. Native controls have no reliable solved-versus-Solve completion callback, so a reported solve earns 5 XP and one charm once per station. Bonus reports do not count toward checked puzzle requirements, heart costs, catch rolls or accolades. Replay is free. The Black Box hook distinguishes indirect evidence from a unique explanation; Mines' no-guessing claim applies to default generated boards.
+
 Anti-AI stance: deterrence, not surveillance. Generated layouts, interactive formats, text in pieces/images, speed/streak bonuses, a "why?" multiple-choice step on boss puzzles only. No tab-switch detection.
 
 Hints cost **health** (one heart, or two with Shaky Hand). Each puzzle stage has three free wrong checks at difficulty 1, two at difficulty 2–3; Frogling adds one. Later wrong checks cost one heart everywhere. Boss Why answers/skips cost one heart if wrong. At zero hearts, receive a scar and return to the map with two hearts. Campfires heal hearts; shrine puzzles heal scars. Solved stages keep their feedback until Continue. A clean solve earns three stars; one or two hints/wrong checks earns two; more earns one. Two/three stars add 5/10 XP. Free avatar hints still count as help for stars.

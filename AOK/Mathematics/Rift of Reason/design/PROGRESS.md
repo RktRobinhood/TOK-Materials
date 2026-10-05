@@ -1,6 +1,6 @@
 # Rift of Reason — implementation progress
 
-Updated 2026-10-04. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
+Updated 2026-10-05. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
 
 ## Issue audit
 
@@ -57,11 +57,17 @@ All **321 tests pass** after tutorial narration/catalog/budget changes. Both Sta
 
 The final follow-up has **324 passing tests**: three audit regressions catch cross-clip words, invalid response coverage, and changed mathematical operators/signs. The new bounded multi-clip transcription tool journals audio hashes, omits expected scripts from its prompt, and stops without claiming coverage on HTTP failures. Reviews caught and fixed a comparison that erased +/−. The browser avatar hit-target fix is verified with pointer and keyboard entry.
 
+## Bonus puzzles (#13)
+
+Official Black Box and Mines builds became reachable on 2026-10-05. Vendored version 20260923.616da16 with MIT notices, original hashes and a reproducible local conversion tool. The two optional chapter-one stations use local frames, embedded unchanged WASM engines, short TOK explanations and an explicit reduced honour reward (+5 XP, +1 charm, once per station). They do not affect checked core-puzzle gates, hearts or catches. No new art or spoken script is required.
+
+All 327 tests pass. Standards and Spec reviewers found no remaining source blockers after fixing the temporary bench Settings route. Browser checks confirm both games load, keyboard/mouse input, new boards, return navigation and once-only rewards in a disposable save. Offline loading is checked through source paths and compiled embedded binaries; browser policy blocks actual `file://` navigation. Exact evidence and limitations: `reviews/bonus-puzzles-2026-10-05.md`.
+
 ## Next work
 
 1. Voice support is committed and published. Today's run completed at ten actual attempts per model: 260 new clips, 277/493 current lines covered, 216 missing (40 planned batches). All current clips decode; checked cutting errors are repaired. Wider transcript audit hit HTTP 503, so complete it alongside future recording. Exact resume commands, sample evidence and limits: `reviews/voice-recording-2026-10-04.md`. #25 release validation is closed; #43 remains open.
-2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and stretch #29–#31 remain separate.
-3. #13 investigated: official Black Box/Mines browser pages timed out through both browser-fetch and direct HTTPS on 2026-10-04; upstream was also unreachable during the original research. No binaries/licence were vendored from an unverified substitute. Next agent should obtain pinned upstream browser JS/WASM and MIT notices, then implement the local frame and one-time reduced honour reward if completion cannot be detected. Verify HTTP and file:// before closing it.
+2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 are implemented; stretch #29–#31 remain separate.
+3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining feature issues are local teacher overview #31, optional ARG #30 and multiplayer #29.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

@@ -9,7 +9,7 @@
     const el = (...a) => Rift.el(...a);
     const SVG = 'http://www.w3.org/2000/svg';
     const W = 1600, H = 900;
-    const ICONS = { story: '✦', puzzle: '?', miniboss: '☠', boss: '♛', rest: '🔥', rumour: '💬', battle: '🂠', rift: '🌀' };
+    const ICONS = { story: '✦', puzzle: '?', bonus: '◇', miniboss: '☠', boss: '♛', rest: '🔥', rumour: '💬', battle: '🂠', rift: '🌀' };
     const SECONDS_PER_EDGE = 0.9;
 
     function svg(tag, attrs, children) {
@@ -150,7 +150,7 @@
                     'data-node': id,
                 });
                 const r = n.type === 'boss' ? 30 : 24;
-                const marker = 'ui/marker-' + n.type;
+                const marker = 'ui/marker-' + (n.type === 'bonus' ? 'puzzle' : n.type);
                 g.append(svg('circle', { r, class: 'ring' }));
                 if (kind === 'revealed' && Rift.Assets.has(marker)) {
                     // Painted medallion (art 'ui/marker-<type>') over the ring.
@@ -265,6 +265,9 @@
                     draw();
                 };
                 switch (n.type) {
+                    case 'bonus':
+                        Rift.Router.go('bonus', { nodeId: id });
+                        break;
                     case 'story':
                     case 'rumour':
                     case 'rift':

@@ -204,6 +204,16 @@
         return 1 + Math.floor(Math.sqrt(state.xp / 20));
     }
 
+    // Unchecked bonus reports are worth less than checked puzzle wins, once only.
+    function claimBonus(state, id) {
+        const n = node(id);
+        if (!n || n.type !== 'bonus' || !['blackbox', 'mines'].includes(n.bonus) || state.map.completed.includes(id)) return null;
+        const reward = { xp: 5, items: { charm: 1 } };
+        complete(state, id);
+        applyRewards(state, reward);
+        return reward;
+    }
+
     // Accolades (art 'ui/badge-<id>'): earned for real achievements, shown in the collection.
     Rift.data.accolades = {
         'clear-thinker': { name: 'Clear Thinker', text: 'Solved puzzles without a single hint.' },
@@ -227,6 +237,6 @@
         award, attempts, recordWrong, hintCost, solveStars, mend,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
-        completedPuzzlesInChapter,
+        completedPuzzlesInChapter, claimBonus,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

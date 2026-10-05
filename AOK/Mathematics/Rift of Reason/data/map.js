@@ -5,7 +5,7 @@
  * scene/map (design/source-assets/2-world/map.png): village, fair, pier, signpost,
  * bridge, well, campfire, tree stump (card table), standing stone, gate, rift pass.
  * The ruined shrine (392,244) is still free for a later chapter.
- * type: story | puzzle | miniboss | boss | rest | rumour | battle | rift
+ * type: story | puzzle | bonus | miniboss | boss | rest | rumour | battle | rift
  * puzzles: candidate puzzle ids + difficulty, one is rolled per visit.
  * spawns: visitors rolled after success (weighted by rarity);
  *         rare teasers from other colours can be listed too.
@@ -93,7 +93,7 @@
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
                 puzzles: [{ id: 'venn', difficulty: 2 }, { id: 'rule-hunter', difficulty: 2 }],
-                spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant'], links: ['troll-bridge', 'campfire', 'card-sharp'],
+                spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant'], links: ['troll-bridge', 'campfire', 'card-sharp', 'bonus-blackbox'],
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
             'troll-bridge': {
@@ -112,7 +112,7 @@
             },
             'campfire': {
                 name: 'The Campfire Clearing', chapter: 'ch1', type: 'rest', x: 761, y: 306,
-                scene: 'scene/road-forest', script: 'ch1.campfire', links: ['well', 'gate'],
+                scene: 'scene/road-forest', script: 'ch1.campfire', links: ['well', 'gate', 'bonus-mines'],
                 teaser: 'A crackling fire. A safe place to rest and mend.',
             },
             'standing-stone': {
@@ -123,6 +123,16 @@
                 puzzles: [{ id: 'rule-hunter', difficulty: 3 }, { id: 'line-drawer', difficulty: 3 }],
                 spawns: ['beastie', 'altmanta', 'godelix', 'haalandroid', 'keanu'], links: ['card-sharp'],
                 teaser: 'Strange patterns carved into old stone. They seem to change.',
+            },
+            'bonus-blackbox': {
+                name: 'Black Box Observatory', chapter: 'ch1', type: 'bonus', bonus: 'blackbox', x: 936, y: 665,
+                scene: 'scene/road-forest', links: ['well'],
+                teaser: 'Hidden balls, visible beams. What does the evidence let you infer?',
+            },
+            'bonus-mines': {
+                name: 'Mines Clearing', chapter: 'ch1', type: 'bonus', bonus: 'mines', x: 579, y: 287,
+                scene: 'scene/road-forest', links: ['campfire'],
+                teaser: 'Safe moves from numbers. Can you justify the next square?',
             },
             'gate': {
                 host: "granny", goal: "A proof depends on the rules and facts you start with.",

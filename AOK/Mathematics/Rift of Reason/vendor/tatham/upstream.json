@@ -1,0 +1,13 @@
+{
+  "version": "20260923.616da16",
+  "origin": "https://www.chiark.greenend.org.uk/~sgtatham/puzzles/",
+  "files": {
+    "blackbox.html": "c26204aed3296a641e5371ecad68c887a1b340e07eb9ed32b2b19f007668450b",
+    "blackbox.js": "dd86d0ed0c58572c663617dc0d34875609d2357cda27d106dd51be4887300ce2",
+    "blackbox.wasm": "f59efad7f577c6ae6cf105705812588db01a0054aed396b7e6040af872f13e05",
+    "mines.html": "275f8dab2e29af0703a7d2aa46075a9df5d2959546b026658230d6ad50632290",
+    "mines.js": "f57c608b553106d2fd077b3a78c3689b6b0238f4e27dbbf0304126abb3c4fbcc",
+    "mines.wasm": "f1aecafedc47d2b14558134642536241b93379a7357b67d29eb31989260b3182",
+    "licence.html": "ebc174ff5ca85f7fcc40b4a2c31f8d7eddd327db3913d86999e894b97645f299"
+  }
+}

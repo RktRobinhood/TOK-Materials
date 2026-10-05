@@ -25,10 +25,11 @@ From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-b
 Pre-rendered with Google Gemini text-to-speech from the game's own script.
 The voices are Gemini's prebuilt synthetic voices (`gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`), one fixed voice and acting direction per character in `tools/voices-cast.json`. Caricature voices are directed by style (energy, cadence) and never told to imitate a real person. The Algorithm's chorus and the Sundial's room echo are added afterwards by `tools/voices-fx.mjs`. Any line without a recording uses the browser's built-in speech. The player's avatar is never voiced, and recordings leave out the player's nickname.
 
-## Mechanics and puzzles borrowed (no names, art or text copied)
+## Mechanics and open puzzles
 - Battle rules adapted from *Mindbug* (Richard Garfield, Christian Kudahl, Marvin Hegen, Skaff Elias; Nerdlab Games, 2022).
 - Knights-and-knaves, the 2-4-6 task (Peter Wason, 1960), Euler paths (Leonhard Euler, 1736) and the nine-dots family are classic public puzzles.
 - Syllogism flavour after Lewis Carroll, *Symbolic Logic* (1896) and *The Game of Logic* (1886), public domain.
+- Black Box and Mines from [Simon Tatham's Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/), version 20260923.616da16, MIT. Local copies use the original compiled engines with an offline-loading frontend adaptation. Copyright/permission notices and original-file hashes are in `vendor/tatham/LICENSE.txt` and `upstream.json`; see its README and `tools/vendor-tatham.mjs`. Black Box was contributed by James Harvey, based on Eric Solomon's puzzle. Native games are credited in their station introductions and local frames.
 
 ## Fonts
 Fredoka and Nunito via Google Fonts (SIL Open Font License).
