@@ -85,6 +85,7 @@ The Fair Gate introduces Granny's fixed, eight-step teaching match before normal
 - Mending is used from the Bag: choose an owned injured creature, then restore one lost power point or its lost ability for one item. Cosmetic scars and warp changes stay. Cancelling spends nothing.
 - Battles happen **outside** puzzles; puzzles are how you get creatures (and protective/healing consumables).
 - Multiplayer: **offline team codes first** (ghost battles vs an AI running a classmate's team, deterministic seeded engine). Live play (Supabase/Firebase, teacher laptop as host) and raids are stretch goals. See `research/serverless-multiplayer.md`.
+- Teacher overview (`teacher.html`): pasted backup/team codes become anonymous group summaries in tab memory only; imports never touch the game save. Group slots replace earlier reports. Team-only codes do not contain progress and are excluded from class-map counts. Projector mode hides individual rows and shows chapter maps with reported completion counts. These snapshots are not grades, mastery measures or live tracking.
 
 ## Tech
 

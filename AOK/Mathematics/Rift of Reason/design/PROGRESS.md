@@ -63,11 +63,17 @@ Official Black Box and Mines builds became reachable on 2026-10-05. Vendored ver
 
 All 327 tests pass. Standards and Spec reviewers found no remaining source blockers after fixing the temporary bench Settings route. Browser checks confirm both games load, keyboard/mouse input, new boards, return navigation and once-only rewards in a disposable save. Offline loading is checked through source paths and compiled embedded binaries; browser policy blocks actual `file://` navigation. Exact evidence and limitations: `reviews/bonus-puzzles-2026-10-05.md`.
 
+## Local teacher overview (#31)
+
+`teacher.html`, linked from the title screen, reads pasted backup or team codes into anonymous group summaries without loading or replacing the player save. It retains summaries in tab memory, clears raw codes after successful reading, and supports slot replacement, removal and clearing. Team-only reports have no chapter/progress data and are excluded from map counts. Projector mode shows all five chapter maps without individual rows. No upload, camera or account is required.
+
+All 330 tests pass. Both source reviewers report no blockers. Browser smoke covers invalid input, backup/team reading, correct denominator, raw-code clearing, chapter selection, projector layout/escape, reload discard, removal and clearing; no console errors recorded on this page. Evidence and limits: `reviews/teacher-overview-2026-10-05.md`.
+
 ## Next work
 
 1. Voice support is committed and published. Today's run completed at ten actual attempts per model: 260 new clips, 277/493 current lines covered, 216 missing (40 planned batches). All current clips decode; checked cutting errors are repaired. Wider transcript audit hit HTTP 503, so complete it alongside future recording. Exact resume commands, sample evidence and limits: `reviews/voice-recording-2026-10-04.md`. #25 release validation is closed; #43 remains open.
-2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 are implemented; stretch #29–#31 remain separate.
-3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining feature issues are local teacher overview #31, optional ARG #30 and multiplayer #29.
+2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and local teacher overview #31 are implemented; stretch #29–#30 remain separate.
+3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining feature issues are optional ARG #30 and multiplayer #29.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

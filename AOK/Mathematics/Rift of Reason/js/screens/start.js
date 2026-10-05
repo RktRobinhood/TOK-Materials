@@ -31,6 +31,7 @@
                         el('button.btn', { text: 'Load a backup code', onclick: () => importCode() }),
                     ]),
                     el('p.small.muted', { style: { marginTop: '18px' }, text: 'A TOK adventure in logic, proof and persuasion. Progress is saved on this laptop only.' }),
+                    el('a.small', { href: 'teacher.html', text: 'Teacher overview' }),
                 ]),
             ]));
         },
