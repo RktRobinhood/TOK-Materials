@@ -1,502 +1,689 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TOK — Exit Through the Gift Shop: Reflection Lab</title>
-  <style>
-    /* MBW-inspired: bright pop, collage blocks, bold outlines, playful chaos (still readable) */
-    :root{
-      --bg:#fff9ee;
-      --panel:#ffffff;
-      --ink:#121212;
-      --muted:#3a3a3a;
-      --line:#121212;
-      --hot:#ff2aa6;
-      --acid:#b6ff3b;
-      --sky:#2bd3ff;
-      --sun:#ffd400;
-      --vio:#7c5cff;
-      --shadow: 0 10px 0 rgba(18,18,18,.16);
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3efe3">
+<title>Exit Through the Gift Shop — TOK Arts Recap</title>
+<style>
+:root{
+  --paper:#f3efe3;--paper2:#fffdf7;--ink:#111;--muted:#656057;--red:#f13f2f;--pink:#ff4ca8;
+  --cyan:#07bad7;--yellow:#ffdb31;--blue:#2869e8;--green:#109f6a;--purple:#7b46d7;--line:#111;
+  --shadow:8px 8px 0 #111;--soft:0 22px 60px rgba(0,0,0,.14);
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--paper)}
+body{margin:0;min-height:100vh;color:var(--ink);background:
+  radial-gradient(circle at 11px 11px,rgba(0,0,0,.045) 1.1px,transparent 1.2px) 0 0/22px 22px,
+  linear-gradient(97deg,transparent 0 49%,rgba(0,0,0,.014) 50%,transparent 51%),var(--paper);
+  font-family:Arial,Helvetica,sans-serif;line-height:1.45;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.08;background:
+  repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}
+::selection{background:var(--yellow);color:#111}
+[hidden]{display:none!important}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:
-        radial-gradient(1000px 700px at 10% 0%, rgba(43,211,255,.22), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(255,42,166,.18), transparent 55%),
-        radial-gradient(900px 650px at 20% 90%, rgba(182,255,59,.20), transparent 60%),
-        var(--bg);
-      color:var(--ink);
-      line-height:1.45;
-    }
+/* ---------- progress rail ---------- */
+#rail{position:sticky;top:0;z-index:80;border-bottom:3px solid #111;background:rgba(243,239,227,.95);backdrop-filter:blur(10px)}
+.rail-inner{max-width:1120px;margin:auto;padding:9px 16px;display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center}
+.rail-brand{font:900 11px/1 Arial Black,Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+.progress-track{height:13px;border:2px solid #111;background:#fff;overflow:hidden;position:relative}
+#progressFill{height:100%;width:0;background:repeating-linear-gradient(135deg,var(--pink) 0 13px,var(--yellow) 13px 26px,var(--cyan) 26px 39px);transition:width .28s ease}
+#progressText{font:900 11px/1 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap}
+.rail-btn{border:2px solid #111;background:#fff;padding:5px 8px;font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;box-shadow:2px 2px 0 #111}
 
-    header{
-      border-bottom:4px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,212,0,.35), rgba(255,212,0,.06)),
-        repeating-linear-gradient(45deg, rgba(18,18,18,.06), rgba(18,18,18,.06) 10px, rgba(255,255,255,0) 10px, rgba(255,255,255,0) 20px);
-      padding:22px 18px;
-    }
+/* ---------- shell / hero ---------- */
+.shell{max-width:1120px;margin:0 auto;padding:28px 16px 80px}
+.hero{max-width:980px;margin:0 auto 28px;display:grid;grid-template-columns:1.22fr .78fr;gap:26px;align-items:center;min-height:72vh}
+.kicker{display:inline-block;background:#111;color:#fff;padding:7px 10px;font:900 11px/1 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;box-shadow:4px 4px 0 var(--red);transform:rotate(-1deg)}
+.hero h1{margin:18px 0 12px;font:900 clamp(58px,9vw,116px)/.78 Impact,Arial Black,sans-serif;letter-spacing:-.035em;text-transform:uppercase}
+.hero h1 span{display:block}.hero h1 .hit{display:inline-block;background:var(--yellow);padding:1px 8px 8px;box-shadow:7px 6px 0 var(--pink);transform:rotate(.8deg)}
+.hero .lede{font-size:clamp(19px,2.1vw,27px);font-weight:800;line-height:1.18;max-width:720px;margin:24px 0 0}
+.hero .lede mark{background:var(--cyan);padding:0 .15em}
+.sticker-stack{position:relative;min-height:420px}
+.sticker{position:absolute;border:3px solid #111;background:#fff;box-shadow:var(--shadow);padding:16px;font-weight:900}
+.sticker.a{right:2%;top:4%;width:80%;background:var(--pink);font:900 27px/.96 Impact,Arial Black,sans-serif;text-transform:uppercase;transform:rotate(4deg)}
+.sticker.b{left:2%;top:36%;width:78%;background:#fff;transform:rotate(-4deg);font-size:17px}
+.sticker.c{right:0;top:64%;width:68%;background:var(--cyan);transform:rotate(2deg)}
+.sticker.d{left:8%;bottom:0;background:var(--yellow);font:900 12px/1 ui-monospace,monospace;text-transform:uppercase;transform:rotate(-2deg)}
+.spray{position:absolute;right:4%;bottom:-5%;font:900 130px/1 Arial Black,sans-serif;color:var(--red);transform:rotate(18deg);z-index:-1}
 
-    .wrap{max-width:980px;margin:0 auto;padding:16px}
-    h1{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}
-    p{margin:8px 0;color:var(--muted)}
+.start-card,.journey-card{position:relative;max-width:900px;margin:0 auto;background:var(--paper2);border:3px solid #111;box-shadow:var(--shadow);padding:26px;overflow:hidden}
+.start-card::before,.journey-card::before{content:"";position:absolute;width:105px;height:24px;background:rgba(255,219,49,.76);left:8%;top:-10px;transform:rotate(-4deg);z-index:5}
+.start-card::after,.journey-card::after{content:"";position:absolute;width:90px;height:22px;background:rgba(7,186,215,.38);right:7%;top:-9px;transform:rotate(5deg);z-index:5}
+.start-card h2,.journey-card h2{font:900 clamp(40px,6vw,68px)/.9 Impact,Arial Black,sans-serif;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 12px}
+.deck{font-size:18px;font-weight:800;max-width:760px;margin:0 0 18px;color:#34312d}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-grid .full{grid-column:1/-1}
+label.field-label{display:block;font:900 11px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;margin:0 0 7px}
+input[type=text]{width:100%;border:3px solid #111;background:#fff;padding:12px 13px;outline:none;box-shadow:3px 3px 0 #bbb4a8}
+input[type=text]:focus{box-shadow:5px 5px 0 var(--cyan)}
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.route{border:3px solid #111;background:#fff;padding:15px;text-align:left;font-weight:900;box-shadow:4px 4px 0 #111}
+.route span{display:block;font-weight:500;font-size:13px;color:var(--muted);margin-top:5px}.route.on{background:var(--yellow);transform:translate(2px,2px);box-shadow:2px 2px 0 #111}
+.action-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:19px}
+.primary,.secondary{border:3px solid #111;padding:12px 17px;font-weight:900;text-transform:uppercase;box-shadow:4px 4px 0 #111}
+.primary{background:#111;color:#fff;box-shadow:4px 4px 0 var(--red)}.secondary{background:#fff;color:#111}
+.micro{font-size:12px;color:var(--muted)}
 
-    .kicker{
-      display:inline-block;
-      background:var(--sun);
-      border:3px solid var(--line);
-      box-shadow:var(--shadow);
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:12px;
-    }
+/* ---------- stage ---------- */
+#journey{min-height:calc(100vh - 72px);display:grid;place-items:start center;padding-top:18px}
+.step{width:100%;animation:arrive .3s ease both}@keyframes arrive{from{opacity:0;transform:translateY(10px) rotate(-.3deg)}to{opacity:1;transform:none}}
+.journey-card{--accent:var(--pink);--paint:rgba(255,76,168,.25);padding:26px 26px 23px;transform:rotate(-.18deg)}
+.journey-card[data-tone="cyan"]{--accent:var(--cyan);--paint:rgba(7,186,215,.25);transform:rotate(.16deg)}
+.journey-card[data-tone="yellow"]{--accent:var(--yellow);--paint:rgba(255,219,49,.34);transform:rotate(-.12deg)}
+.journey-card[data-tone="red"]{--accent:var(--red);--paint:rgba(241,63,47,.23);transform:rotate(.15deg)}
+.journey-card[data-tone="purple"]{--accent:var(--purple);--paint:rgba(123,70,215,.23);transform:rotate(-.15deg)}
+.step-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:4px}
+.step-no{display:inline-block;background:#111;color:#fff;padding:7px 10px;font:900 11px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-1deg)}
+.framework-badge{display:inline-block;background:var(--accent);border:2px solid #111;padding:7px 9px;font:900 11px/1 ui-monospace,monospace;text-transform:uppercase;box-shadow:3px 3px 0 #111;transform:rotate(1deg)}
+.kq{margin:18px 0 10px;padding:18px;border:3px solid #111;background:#fff;font-size:clamp(20px,2.8vw,30px);font-weight:900;line-height:1.15;box-shadow:5px 5px 0 var(--accent);position:relative}
+.kq::before{content:"KNOWLEDGE QUESTION";display:block;font:900 10px/1 ui-monospace,monospace;letter-spacing:.1em;margin-bottom:8px;color:var(--muted)}
+.recap-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}
+.recap{border:2px solid #111;background:#fff;padding:10px;font-size:13px;font-weight:800}.recap b{display:block;font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;margin-bottom:4px;color:var(--muted)}
+.evidence-nudge{border-left:9px solid var(--accent);background:#fff;padding:11px 13px;margin:14px 0;font-size:14px}.evidence-nudge strong{font-weight:900}
 
-    .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 14px}
-    .tabbtn{
-      border:3px solid var(--line);
-      background:var(--panel);
-      color:var(--ink);
-      padding:10px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:900;
-      font-size:13px;
-      box-shadow:var(--shadow);
-      transform:translateY(0);
-      transition:transform .08s ease;
-    }
-    .tabbtn:hover{transform:translateY(-1px)}
-    .tabbtn[aria-selected="true"]{
-      background:linear-gradient(90deg, rgba(255,42,166,.20), rgba(43,211,255,.20), rgba(182,255,59,.20));
-      outline:0;
-    }
+.scaffold{border:3px solid #111;background:rgba(255,255,255,.76);margin:14px 0;box-shadow:4px 4px 0 var(--accent)}
+.scaffold summary{cursor:pointer;padding:11px 12px;font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:.05em;background:#111;color:#fff}.scaffold-body{padding:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.scaffold-chip{background:#fff;border:2px solid #111;padding:10px;font-size:12px;line-height:1.35}.scaffold-chip b{display:block;font:900 10px/1.1 ui-monospace,monospace;text-transform:uppercase;margin-bottom:6px;color:#111}.scaffold-chip .plain{display:block;color:var(--muted);font-weight:800;margin-bottom:6px}.scaffold-chip .starter{display:block;background:color-mix(in srgb,var(--accent) 24%,white);padding:6px 7px;font-weight:900;border-left:4px solid var(--accent)}
+.worked-example{grid-column:1/-1;border:2px solid #111;background:#f7f2e7;padding:11px 12px;font-size:13px;line-height:1.5}.worked-example .example-label{font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:7px}.worked-example .claim-example{background:var(--yellow);box-shadow:inset 0 -2px 0 #111;padding:1px 3px;font-weight:900}.worked-example .evidence-example{border-bottom:3px solid var(--cyan);font-weight:800}.worked-example .explain-example{border-bottom:3px solid var(--pink);font-weight:800}.worked-example .counter-example{border-bottom:3px solid var(--purple);font-weight:800}.worked-example .judge-example{border-bottom:3px solid var(--red);font-weight:800}.worked-example .legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px;font:800 10px/1.2 ui-monospace,monospace;text-transform:uppercase}.worked-example .legend span{border:1px solid #111;background:#fff;padding:4px 6px}.worked-example .example-note{margin-top:8px;font-size:11px;font-weight:800;color:var(--muted)}.first-write-help{border:3px solid #111;background:#fff;margin:14px 0;padding:11px 12px;box-shadow:4px 4px 0 var(--accent);font-size:13px;line-height:1.45}.first-write-help b{font-weight:900}.first-write-help .claim-example{background:var(--yellow);padding:1px 3px;font-weight:900}.first-write-help .mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:9px}.first-write-help .mini{border:2px solid #111;padding:8px;background:#fafafa}.first-write-help .mini strong{display:block;font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;margin-bottom:5px}
+.stencil{margin:14px 0;border:3px solid #111;background:#111;color:#fff;padding:10px 12px;font:900 13px/1.3 ui-monospace,monospace;transform:rotate(-.35deg);box-shadow:4px 4px 0 var(--accent)}
+.stencil::before{content:"MBW CHALLENGE — ADD THIS TO YOUR ANSWER / ";color:var(--yellow)}
 
-    .panel{
-      display:none;
-      background:var(--panel);
-      border:3px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      box-shadow:var(--shadow);
-    }
-    .panel.active{display:block}
+/* answer fill */
+.answer-block{margin:16px 0 12px}.answer-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:7px}
+.answer-head strong{font:900 11px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.07em}.answer-head span{font:800 11px/1 ui-monospace,monospace;color:var(--muted)}
+.ink-field{--fill:0%;position:relative;border:3px solid #111;background:#fff;box-shadow:4px 4px 0 #bdb7ab;overflow:hidden;transition:box-shadow .2s}
+.ink-field::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--paint) 0 var(--fill),transparent var(--fill) 100%);transition:background .18s;z-index:0}
+.ink-field::after{content:attr(data-level);position:absolute;right:8px;bottom:-3px;font:900 38px/.9 Impact,Arial Black,sans-serif;letter-spacing:.03em;color:rgba(0,0,0,.08);transform:rotate(-4deg);z-index:0;pointer-events:none;text-transform:uppercase}
+.ink-field.full{box-shadow:5px 5px 0 var(--accent)}
+.ink-field.full::after{color:rgba(0,0,0,.13)}
+textarea.answer{position:relative;z-index:1;width:100%;min-height:178px;border:0;background:transparent;resize:vertical;padding:14px 15px;color:#111;outline:none;line-height:1.52}
+.ink-meter{height:8px;border-top:2px solid #111;background:#fff;position:relative;z-index:2}.ink-meter span{display:block;height:100%;width:0;background:var(--accent);transition:width .18s}
 
-    .grid{display:grid;grid-template-columns:1fr;gap:12px}
-    @media (min-width:880px){.grid{grid-template-columns:1fr 1fr}}
+/* choices / concepts */
+.choice-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:14px 0}.choice{border:3px solid #111;background:#fff;padding:11px 8px;font-weight:900;min-height:74px;box-shadow:3px 3px 0 #111}.choice.on{background:var(--accent);transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+.concept-title{font:900 11px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;margin-top:16px}.concept-hint{margin:6px 0 0;font-size:12px;color:var(--muted);font-weight:700}.task-strip{margin:14px 0;border:3px solid #111;background:var(--accent);padding:11px 12px;box-shadow:4px 4px 0 #111;font-size:14px;font-weight:800}.task-strip b{font:900 10px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}.assessment-habit{margin:13px 0 4px;border-left:7px solid var(--accent);background:#fff;padding:9px 11px;font-size:13px}.assessment-habit b{font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:4px}.starter-q::before{content:"STARTER QUESTION"}.finish-bridge{margin:16px 0 0;border:3px solid #111;background:#fff;padding:13px 14px}.finish-bridge h4{margin:0 0 8px;font:900 13px/1 ui-monospace,monospace;text-transform:uppercase}.finish-bridge p{margin:7px 0;font-size:13px}.concept-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:8px 0 0}.concept{border:3px solid #111;background:#fff;padding:11px 9px;font-weight:900;text-transform:uppercase;box-shadow:3px 3px 0 #111}.concept.on{background:var(--accent);transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+.submit-line{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px}.submit-line .status{font:800 12px/1.35 ui-monospace,monospace;color:var(--muted);max-width:530px}.submit-line .status.good{color:var(--green)}
 
-    .card{
-      background:
-        radial-gradient(480px 260px at 20% 10%, rgba(255,42,166,.10), transparent 60%),
-        radial-gradient(520px 300px at 90% 20%, rgba(43,211,255,.12), transparent 60%),
-        #fff;
-      border:3px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-      box-shadow:var(--shadow);
-    }
-    .card h3{margin:0 0 8px;font-size:15px}
-    .small{font-size:12px;color:var(--muted)}
-    ul{margin:8px 0 0 18px;color:var(--muted)}
-    li{margin:6px 0}
-    a{color:#0b5cff;font-weight:800}
-    a:hover{color:#003bb9}
+/* evidence drawer */
+#evidenceDrawer{position:fixed;inset:0;z-index:140;background:rgba(0,0,0,.78);padding:20px;overflow:auto}.drawer-panel{max-width:1040px;margin:0 auto;background:var(--paper);border:3px solid #111;box-shadow:12px 12px 0 var(--pink);padding:20px}.drawer-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.drawer-head h2{font:900 48px/.9 Impact,Arial Black,sans-serif;text-transform:uppercase;margin:0}.drawer-close{border:3px solid #111;background:#fff;padding:8px 11px;font-weight:900;box-shadow:3px 3px 0 #111}
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.media{border:3px solid #111;background:#fff;box-shadow:5px 5px 0 #111;overflow:hidden}.media-head{padding:10px 12px;background:var(--yellow);border-bottom:3px solid #111;font-weight:900;text-transform:uppercase}.media.reference .media-head{background:var(--cyan)}.media.market .media-head{background:var(--pink)}.video{aspect-ratio:16/9;background:#111}.video iframe{width:100%;height:100%;border:0;display:block}.media-body{padding:12px 13px;font-size:14px}.media-body p{margin:0 0 8px}.media-body a{font-weight:900;color:inherit;text-decoration-thickness:2px;text-underline-offset:3px}.source-tag{display:inline-block;border:2px solid #111;background:#fff;padding:3px 6px;margin:0 5px 7px 0;font:900 9px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.07em}.source-question{border-left:5px solid var(--accent);padding:7px 9px;margin:9px 0;background:#f7f2e7;font-weight:800}
+.evidence-use{display:flex;align-items:center;gap:8px;font-weight:900;border-top:2px dashed #111;padding-top:9px;margin-top:9px}.evidence-use input{width:19px;height:19px;accent-color:#111}
 
-    .pill{
-      display:inline-block;
-      border:3px solid var(--line);
-      background:linear-gradient(90deg, rgba(255,42,166,.18), rgba(255,212,0,.20));
-      color:var(--ink);
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      box-shadow: 0 6px 0 rgba(18,18,18,.12);
-      margin:2px 4px 0 0;
-    }
+/* final scale */
+.scale{border:3px solid #111;background:#fff;padding:15px;margin:14px 0;box-shadow:4px 4px 0 var(--accent)}.scale-top{display:flex;justify-content:space-between;gap:10px;font:900 11px/1.2 ui-monospace,monospace;text-transform:uppercase}.scale input{width:100%;accent-color:var(--accent);margin:12px 0 6px}.scale-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.finish-box{border:3px solid #111;background:#111;color:#fff;padding:18px;margin-top:18px;box-shadow:6px 6px 0 var(--cyan)}.finish-box h3{font:900 34px/.9 Impact,Arial Black,sans-serif;text-transform:uppercase;margin:0 0 8px}.finish-box .secondary{background:var(--yellow)}
 
-    .task{
-      margin-top:10px;
-      border-left:8px solid var(--hot);
-      padding-left:12px;
-      background:rgba(255,42,166,.06);
-      border-radius:12px;
-      padding:10px 12px;
-    }
-    .task strong{font-weight:950}
+/* report */
+#reportView{position:fixed;inset:0;z-index:200;background:#fff;overflow:auto;color:#111}.report-toolbar{position:sticky;top:0;background:#111;color:#fff;padding:10px 14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;z-index:5}.report-toolbar button{border:2px solid #fff;background:#fff;color:#111;padding:9px 12px;font-weight:900}.report-toolbar .close-report{background:var(--yellow);border-color:var(--yellow)}
+.report-sheet{max-width:820px;margin:0 auto;padding:34px 34px 70px;font-family:Arial,Helvetica,sans-serif}.report-sheet h1{font:900 38px/.95 Arial Black,Arial,sans-serif;text-transform:uppercase;margin:0}.report-meta{border-bottom:2px solid #111;padding:8px 0 14px;margin-bottom:22px;font-size:13px}.report-section{break-inside:avoid;margin:0 0 23px}.report-section h2{font:900 19px/1.1 Arial Black,Arial,sans-serif;text-transform:uppercase;margin:0 0 7px}.report-question{font-weight:800;margin-bottom:7px}.report-answer{white-space:pre-wrap;border-left:5px solid #111;padding-left:12px}.report-badge{display:inline-block;border:2px solid #111;padding:3px 7px;font:900 10px/1 ui-monospace,monospace;text-transform:uppercase;margin:0 4px 5px 0}.report-process{border-top:2px solid #111;padding-top:12px;font-size:11px;color:#444}.print-help{max-width:820px;margin:0 auto;padding:16px 34px 0;font-size:12px;background:#fff;color:#444}.print-help strong{color:#111}
 
-    .two{display:grid;grid-template-columns:1fr;gap:10px}
-    @media (min-width:880px){.two{grid-template-columns:1fr 1fr}}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:400;background:#111;color:#fff;border:3px solid #fff;box-shadow:5px 5px 0 var(--red);padding:11px 15px;font-weight:900;transition:.18s}#toast.show{opacity:1;transform:translate(-50%,0)}
 
-    .embed{
-      position:relative;
-      padding-top:56.25%;
-      border-radius:16px;
-      overflow:hidden;
-      border:3px solid var(--line);
-      box-shadow:var(--shadow);
-      background:#000;
-    }
-    .embed iframe{position:absolute;inset:0;width:100%;height:100%}
+/* ---------- interaction / affordance pass ---------- */
+:where(button,a,summary,.evidence-use,input[type=text],textarea.answer){transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease,color .16s ease,border-color .16s ease,outline-color .16s ease}
+:where(button,a,summary,input,textarea):focus-visible{outline:4px solid var(--cyan);outline-offset:4px}
+button:not(:disabled),summary,.evidence-use,.media-body a{cursor:pointer}
 
-    .divider{
-      height:10px;
-      background:linear-gradient(90deg, var(--hot), var(--sky), var(--acid), var(--sun), var(--vio));
-      border:3px solid var(--line);
-      border-radius:999px;
-      box-shadow:var(--shadow);
-      margin:18px 0 12px;
-    }
+/* Static cues: these controls should not read as decorative text, even on touch devices. */
+.route,.choice,.concept{position:relative;padding-bottom:28px}
+.route::after,.choice::after,.concept::after{position:absolute;right:8px;bottom:7px;font:900 9px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;opacity:.58}
+.route::after{content:"choose route"}.choice::after{content:"select"}.concept::after{content:"select 1"}
+.route.on::after,.choice.on::after,.concept.on::after{content:"selected";opacity:1}
+.scaffold summary{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.scaffold summary::after{content:"hide guide";flex:0 0 auto;border:1px solid currentColor;padding:4px 6px;font:900 9px/1 ui-monospace,monospace;letter-spacing:.06em}
+.scaffold:not([open]) summary::after{content:"open writing guide"}
+.ink-field:focus-within{box-shadow:6px 6px 0 var(--accent);border-color:#111}
+.ink-field:focus-within::after{color:rgba(0,0,0,.16)}
+input[type=text]:focus-visible{box-shadow:5px 5px 0 var(--cyan);background:#fffef7}
+.evidence-use{padding:9px 8px;margin-left:-8px;margin-right:-8px;border-radius:2px}
+.media-body a{display:inline-block;padding:2px 3px;margin-left:-3px}
 
-    footer{
-      padding:18px;
-      color:var(--muted);
-      border-top:4px solid var(--line);
-      background:rgba(255,255,255,.55);
-    }
+@media(hover:hover) and (pointer:fine){
+  .rail-btn:hover:not(:disabled),.drawer-close:hover:not(:disabled),.report-toolbar button:hover:not(:disabled){transform:translate(-2px,-2px) rotate(-.35deg);box-shadow:5px 5px 0 var(--cyan);background:var(--yellow)}
+  .primary:hover:not(:disabled){transform:translate(-2px,-2px) rotate(-.25deg);box-shadow:7px 7px 0 var(--red);background:#292929}
+  .secondary:hover:not(:disabled){transform:translate(-2px,-2px) rotate(.2deg);box-shadow:6px 6px 0 var(--cyan);background:var(--yellow)}
+  .route:hover:not(:disabled){transform:translate(-2px,-2px) rotate(-.2deg);box-shadow:7px 7px 0 var(--cyan);background:#fffbe4}
+  .choice:hover:not(:disabled),.concept:hover:not(:disabled){transform:translate(-2px,-2px) rotate(.35deg);box-shadow:6px 6px 0 var(--accent);background:color-mix(in srgb,var(--accent) 22%,white)}
+  .route.on:hover:not(:disabled),.choice.on:hover:not(:disabled),.concept.on:hover:not(:disabled){transform:translate(1px,1px) rotate(-.2deg);box-shadow:3px 3px 0 #111;filter:saturate(1.08)}
+  .scaffold summary:hover{background:var(--accent);color:#111;box-shadow:inset 0 -4px 0 #111}
+  .evidence-use:hover{background:var(--yellow);transform:translateX(3px)}
+  .media-body a:hover{background:var(--cyan);color:#111;text-decoration-thickness:3px;transform:translateX(3px)}
+  input[type=text]:hover,textarea.answer:hover{background-color:rgba(255,255,255,.38)}
+  .ink-field:hover{box-shadow:5px 5px 0 var(--accent)}
+}
 
-    .callout{
-      background:linear-gradient(180deg, rgba(182,255,59,.22), rgba(255,255,255,.75));
-      border:3px solid var(--line);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:14px;
-      margin-top:14px;
-    }
+@media(prefers-reduced-motion:reduce){
+  :where(button,a,summary,.evidence-use,input[type=text],textarea.answer),.step,#progressFill,.ink-meter span,#toast{transition:none!important;animation:none!important}
+}
 
-    .checklist li{color:var(--ink)}
-  
-    .submission-template p{
-      border:3px dashed rgba(18,18,18,.35);
-      border-radius:14px;
-      padding:10px 12px;
-      margin:10px 0;
-      background:rgba(255,255,255,.65);
-      font-weight:700;
-    }
-    .submission-template .c1{color:#d1007f}
-    .submission-template .c2{color:#0057ff}
-    .submission-template .c3{color:#0a7a1f}
-    .submission-template .c4{color:#a35a00}
-    .submission-template .c5{color:#5a2cff}
-    .submission-template .c6{color:#007b8a}
-
-  </style>
+@media(max-width:860px){
+ .hero{grid-template-columns:1fr;min-height:auto}.sticker-stack{min-height:330px}.recap-strip{grid-template-columns:1fr}.scaffold-body{grid-template-columns:1fr 1fr}.choice-grid{grid-template-columns:repeat(2,1fr)}.media-grid{grid-template-columns:1fr}.media:last-child{grid-column:auto}.concept-row{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}
+}
+@media(max-width:620px){
+ .shell{padding-left:11px;padding-right:11px;padding-top:18px}.rail-inner{grid-template-columns:1fr auto auto}.rail-brand{display:none}.hero h1{font-size:60px}.sticker-stack{min-height:375px}.sticker.a{width:90%}.sticker.b{width:88%}.sticker.c{width:82%}.route-grid{grid-template-columns:1fr}.start-card,.journey-card{padding:21px 15px 18px;box-shadow:5px 5px 0 #111}.journey-card h2{font-size:45px}.step-top{gap:8px}.framework-badge{font-size:9px}.kq{font-size:22px;padding:14px}.scaffold-body{grid-template-columns:1fr}.first-write-help .mini-row{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}.drawer-panel{padding:14px}.drawer-head h2{font-size:38px}.report-sheet{padding:26px 18px 58px}.print-help{padding:14px 18px 0}.report-toolbar{justify-content:flex-start}
+}
+@media print{
+ @page{margin:13mm}
+ body{background:#fff!important}body::after,main.shell,#evidenceDrawer,.report-toolbar,.print-help,#rail,#toast{display:none!important}#reportView{display:block!important;position:static!important;overflow:visible!important}.report-sheet{max-width:none;padding:0!important}.report-section{break-inside:avoid}.report-answer{font-size:11pt}.report-question{font-size:11pt}.report-sheet h1{font-size:24pt}
+}
+</style>
 </head>
-
 <body>
-  
-  <header>
-    <div class="wrap">
-      <span class="kicker">TOK Reflection Lab</span>
-      <h1>Exit Through the Gift Shop — Can Anyone Be an Artist?</h1>
-      <p><strong>Last class we watched <em>Exit Through the Gift Shop</em>, but we did not have time to discuss it.</strong> As such, for your work alone activity I have set it up so that you will take a look at the art industry using the tools of TOK. I am hoping that you will show an understanding of the TOK Knowledge Framework, as well as 2-3 of the 12 TOK concepts. There is also a section on HeArt - Herning's museum of art. This is a seperate section, becasue I am looking to get your ideas since we are pitching a class trip to management :)</p>
-      <p class="small"><strong>Goals:</strong> (1) expose how value, authority, and authenticity operate in the art world, (2) practice evaluating sources, and (3) apply TOK vocabulary precisely.</p>
+<div id="rail">
+  <div class="rail-inner">
+    <div class="rail-brand">TOK / Arts / Gift Shop</div>
+    <div class="progress-track"><div id="progressFill"></div></div>
+    <div id="progressText">0 / 6 TAGS</div>
+    <button class="rail-btn" id="openEvidence">Optional evidence</button>
+  </div>
+</div>
+
+<main class="shell">
+  <section id="landing">
+    <header class="hero">
+      <div>
+        <span class="kicker">Arts recap / one strange route through TOK</span>
+        <h1><span>EXIT</span><span class="hit">THROUGH</span><span>THE GIFT SHOP?</span></h1>
+        <p class="lede">Use one film — or one artwork you know — to stress-test four big knowledge questions in the Arts: <mark>what art can let us know, whose interpretation is justified, how tools shape knowledge, and how responsibility changes representation.</mark></p>
+      </div>
+      <div class="sticker-stack" aria-hidden="true">
+        <div class="sticker a">MAKE IT. FRAME IT. SELL IT. CALL IT ART.</div>
+        <div class="sticker b">The surface can be messy. Your reasoning cannot.</div>
+        <div class="sticker c">One card at a time. One knowledge question at a time.</div>
+        <div class="sticker d">CLAIM → EVIDENCE → CHALLENGE → JUDGEMENT → SO WHAT?</div>
+        <div class="spray">X</div>
+      </div>
+    </header>
+
+    <section class="start-card" id="startCard">
+      <span class="kicker">Before anybody improves your opinion for you</span>
+      <h2>Choose your evidence route</h2>
+      <p class="deck">Most students will use <em>Exit Through the Gift Shop</em>. If you missed the film, use one <strong>specific</strong> artwork, exhibition, film, song, photograph, performance, design object or art-world controversy you actually know. That example becomes your <strong>chosen example</strong>: the real case you keep testing against each knowledge question. The questions stay the same.</p>
+      <div class="assessment-habit"><b>Where this is heading</b>The TOK essay asks you to answer a prescribed title through areas of knowledge. The TOK exhibition asks you to show how TOK appears in the real world through three specific objects and one IA prompt. This journey practises habits shared by both, but it is <strong>not</strong> an essay or exhibition draft.</div>
+      <div class="form-grid">
+        <div><label class="field-label" for="studentName">Name</label><input id="studentName" type="text" maxlength="70" autocomplete="name" placeholder="Your name"></div>
+        <div><label class="field-label" for="studentClass">Class / group</label><input id="studentClass" type="text" maxlength="50" placeholder="Optional"></div>
+        <div class="full">
+          <label class="field-label">Primary evidence</label>
+          <div class="route-grid" id="routeGrid">
+            <button class="route on" data-route="film">Exit Through the Gift Shop<span>Recommended if you watched the film. The page will give film-specific evidence nudges.</span></button>
+            <button class="route" data-route="other">Another Arts case<span>Use one named work, object or case with a real-world context — not a broad category such as “music” or “street art”.</span></button>
+          </div>
+        </div>
+        <div class="full" id="otherCaseWrap" hidden><label class="field-label" for="otherCase">Your anchor artwork / case</label><input id="otherCase" type="text" maxlength="120" placeholder="e.g. a specific artwork, film, exhibition, performance or controversy…"></div>
+      </div>
+      <div class="action-row"><button class="primary" id="beginJourney">Start the journey</button><span class="micro">Answers save only on this browser. Reflection boxes block paste/drop; process signals are not an AI detector.</span></div>
+    </section>
+  </section>
+
+  <section id="journey" hidden>
+    <!-- 1: first take -->
+    <article class="step" data-step="1">
+      <div class="journey-card" data-tone="pink">
+        <div class="step-top"><span class="step-no">01 / FIRST TAG</span><span class="framework-badge">Before the framework</span></div>
+        <h2>What makes it count?</h2>
+        <p class="deck">Freeze your instinct before the framework starts pushing back.</p>
+        <div class="kq starter-q">What gives something its status as art?</div>
+        <div class="choice-grid" id="firstChoiceGrid">
+          <button class="choice" data-choice="Creator intention">Creator intention</button>
+          <button class="choice" data-choice="Qualities of the work">Qualities of the work</button>
+          <button class="choice" data-choice="Audience experience">Audience experience</button>
+          <button class="choice" data-choice="Experts / institutions / market">Experts / institutions / market</button>
+          <button class="choice" data-choice="No single source">No single source</button>
+        </div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-anchor-cue></span></div>
+        <div class="task-strip"><b>Your job</b>Choose one position, then write 2–3 sentences that make a claim and use one specific example. <strong>Minimum 30 words.</strong></div>
+        <div class="assessment-habit"><b>Why start here?</b>This is a baseline opinion, not a TOK assessment question. You will compare it with your final judgement to see what your reasoning changed.</div>
+        <div class="first-write-help">
+          <b>Writing basic: your claim is usually your topic sentence.</b> It should answer the question straight away — not announce what you are going to discuss.
+          <div class="mini-row">
+            <div class="mini"><strong>1 · Topic sentence / claim</strong><span class="claim-example">School phones should be allowed at lunch because students need some control over how they use their break.</span></div>
+            <div class="mini"><strong>2 · Specific example</strong>A student might need to message a parent about transport home.</div>
+            <div class="mini"><strong>3 · Explain it</strong>This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</div>
+          </div>
+          <p style="margin:9px 0 0;"><b>Notice:</b> the yellow sentence answers the question. The example does not replace the claim; it helps prove it.</p>
+        </div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Make the first claim</strong><span><b class="wc">0</b> / 30 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="30"><textarea class="answer" id="firstAnswer" placeholder="Start: ‘I think art gets its status mainly from…’ Then use one example and explain why it matters."></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="submit-line"><div class="status" id="status1">Choose a position + reach the paint line.</div><button class="primary submit-step" data-submit="1" disabled>Lock first take → next card</button></div>
+      </div>
+    </article>
+
+    <!-- 2: scope -->
+    <article class="step" data-step="2" hidden>
+      <div class="journey-card" data-tone="cyan">
+        <div class="step-top"><span class="step-no">02 / KNOWLEDGE FRAMEWORK</span><span class="framework-badge">Scope</span></div>
+        <h2>Can art actually know?</h2>
+        <div class="kq">When does an artwork become a source of knowledge rather than merely an object to experience?</div>
+        <div class="task-strip"><b>Do this</b>Answer the knowledge question using the film or your other chosen arts example. Build one short paragraph using the five writing moves below, then choose one TOK concept that best names the knowledge issue. <strong>Minimum 48 words.</strong></div>
+        <div class="assessment-habit"><b>Assessment transfer</b><strong>Essay move:</strong> make the example do analytical work for the exact question instead of retelling it. <strong>Exhibition move:</strong> keep the object/case specific and state its real-world context.</div>
+        <div class="recap-strip">
+          <div class="recap"><b>Arts recap</b>Art can disclose experience, perspective, pattern and possibility without behaving like a scientific report.</div>
+          <div class="recap"><b>The pressure point</b>Meaning is not automatically knowledge. You still need a reason to trust what you think the work shows.</div>
+          <div class="recap"><b>Boundary test</b>Ask what the artwork lets you know that a plain description might not — and what it cannot establish.</div>
+        </div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-scope-cue></span></div>
+        <details class="scaffold" open><summary>Use these five moves — topic sentence → evidence → explain → counterpoint → judgement + so what?</summary><div class="scaffold-body">
+          <div class="scaffold-chip"><b>1 · Topic sentence / claim</b><span class="plain">Answer the knowledge question in one clear sentence.</span><span class="starter">An artwork can become knowledge when…</span></div>
+          <div class="scaffold-chip"><b>2 · Evidence</b><span class="plain">Point to one specific moment, detail or example.</span><span class="starter">In my case, the detail that matters is…</span></div>
+          <div class="scaffold-chip"><b>3 · Explain</b><span class="plain">Say exactly how that evidence supports your topic sentence.</span><span class="starter">This supports my claim because…</span></div>
+          <div class="scaffold-chip"><b>4 · Counterpoint</b><span class="plain">Give a reasonable problem, limit or different view.</span><span class="starter">However, this may only show… because…</span></div>
+          <div class="scaffold-chip"><b>5 · Judgement + so what?</b><span class="plain">Decide how far your claim survives, then say what follows if you are right.</span><span class="starter">So I would argue… This matters because…</span></div>
+          <div class="worked-example"><span class="example-label">Unrelated worked example — school phone rule</span><span class="claim-example">Phones should be allowed during lunch because students need some control over how they use their break.</span> <span class="evidence-example">For example, a student may need to message a parent about transport home.</span> <span class="explain-example">This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</span> <span class="counter-example">However, unrestricted phone use could reduce face-to-face interaction.</span> <span class="judge-example">Therefore a lunch-only rule is stronger than a total ban; this means school rules should distinguish between learning time and break time.</span><div class="legend"><span>yellow = topic sentence / claim</span><span>cyan = evidence</span><span>pink = explain</span><span>purple = counterpoint</span><span>red = judgement / so what?</span></div><div class="example-note">Aim for about 4–6 sentences. You can combine two moves in one sentence; this is a thinking guide, not a rigid formula.</div></div>
+        </div></details>
+        <div class="stencil" id="stencil2"></div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Build one short paragraph</strong><span><b class="wc">0</b> / 48 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="48"><textarea class="answer" id="scopeAnswer" placeholder="Start with a topic sentence that answers the question. Add a specific example, explain it, test it with a counterpoint, then finish with your judgement."></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="concept-title">Choose the TOK concept doing the most work in your answer</div><p class="concept-hint">Pick the concept that best names the knowledge issue you actually discussed. You do not need to define it separately.</p>
+        <div class="concept-row" data-concepts="2"><button class="concept" data-concept="Interpretation">Interpretation</button><button class="concept" data-concept="Culture">Culture</button><button class="concept" data-concept="Values">Values</button></div>
+        <div class="submit-line"><div class="status" id="status2">Write your paragraph + choose one TOK concept.</div><button class="primary submit-step" data-submit="2" disabled>Tag it → next card</button></div>
+      </div>
+    </article>
+
+    <!-- 3: perspectives -->
+    <article class="step" data-step="3" hidden>
+      <div class="journey-card" data-tone="yellow">
+        <div class="step-top"><span class="step-no">03 / KNOWLEDGE FRAMEWORK</span><span class="framework-badge">Perspectives</span></div>
+        <h2>Who gets the last word?</h2>
+        <div class="kq">When interpretations of art conflict, what can make one interpretation better supported than another?</div>
+        <div class="task-strip"><b>Do this</b>Compare at least two reasonable interpretations. Decide which is better supported by reasons and evidence, then explain what that means for how we judge interpretations. Then choose one TOK concept. <strong>Minimum 50 words.</strong></div>
+        <div class="assessment-habit"><b>Assessment transfer</b><strong>Essay move:</strong> acknowledge and evaluate a genuinely different point of view. <strong>Exhibition move:</strong> explain how this particular object helps us think about the prompt; “it is interesting” is not enough.</div>
+        <div class="recap-strip">
+          <div class="recap"><b>Arts recap</b>Creator, audience, critic, institution and culture may all see different things in the same work.</div>
+          <div class="recap"><b>The pressure point</b>“Everyone has an opinion” does not mean every interpretation is equally well supported.</div>
+          <div class="recap"><b>Justification</b>Look for attention to the work, relevant context, coherent reasoning and evidence — not merely confidence or popularity.</div>
+        </div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-perspective-cue></span></div>
+        <details class="scaffold" open><summary>Use these five moves — topic sentence → evidence → explain → counterpoint → judgement + so what?</summary><div class="scaffold-body">
+          <div class="scaffold-chip"><b>1 · Topic sentence / claim</b><span class="plain">Give your answer to the question immediately.</span><span class="starter">A stronger interpretation is one that…</span></div>
+          <div class="scaffold-chip"><b>2 · Evidence</b><span class="plain">Name two specific readings or pieces of support.</span><span class="starter">One reading is… Another is…</span></div>
+          <div class="scaffold-chip"><b>3 · Explain</b><span class="plain">Show why your evidence makes one reading better supported.</span><span class="starter">The first/second is stronger because…</span></div>
+          <div class="scaffold-chip"><b>4 · Counterpoint</b><span class="plain">Show why the other reading is not simply stupid or impossible.</span><span class="starter">However, the other reading still has force because…</span></div>
+          <div class="scaffold-chip"><b>5 · Judgement + so what?</b><span class="plain">State your standard and what it means for interpretation.</span><span class="starter">I would rank them by… This means…</span></div>
+          <div class="worked-example"><span class="example-label">Unrelated worked example — school phone rule</span><span class="claim-example">Phones should be allowed during lunch because students need some control over how they use their break.</span> <span class="evidence-example">For example, a student may need to message a parent about transport home.</span> <span class="explain-example">This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</span> <span class="counter-example">However, unrestricted phone use could reduce face-to-face interaction.</span> <span class="judge-example">Therefore a lunch-only rule is stronger than a total ban; this means school rules should distinguish between learning time and break time.</span><div class="legend"><span>yellow = topic sentence / claim</span><span>cyan = evidence</span><span>pink = explain</span><span>purple = counterpoint</span><span>red = judgement / so what?</span></div><div class="example-note">Aim for about 4–6 sentences. You can combine two moves in one sentence; this is a thinking guide, not a rigid formula.</div></div>
+        </div></details>
+        <div class="stencil" id="stencil3"></div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Build one short paragraph</strong><span><b class="wc">0</b> / 50 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="50"><textarea class="answer" id="perspectiveAnswer" placeholder="Start with your answer. Compare two readings, explain why one is better supported, then give the other view a fair chance before you judge."></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="concept-title">Choose the TOK concept doing the most work in your answer</div><p class="concept-hint">Pick the concept that best names the knowledge issue you actually discussed. You do not need to define it separately.</p>
+        <div class="concept-row" data-concepts="3"><button class="concept" data-concept="Evidence">Evidence</button><button class="concept" data-concept="Perspective">Perspective</button><button class="concept" data-concept="Objectivity">Objectivity</button></div>
+        <div class="submit-line"><div class="status" id="status3">Write your paragraph + choose one TOK concept.</div><button class="primary submit-step" data-submit="3" disabled>Tag it → next card</button></div>
+      </div>
+    </article>
+
+    <!-- 4: methods & tools -->
+    <article class="step" data-step="4" hidden>
+      <div class="journey-card" data-tone="red">
+        <div class="step-top"><span class="step-no">04 / KNOWLEDGE FRAMEWORK</span><span class="framework-badge">Methods &amp; tools</span></div>
+        <h2>The tool is never innocent</h2>
+        <div class="kq">How far do the tools used to create, edit, copy and distribute art shape the knowledge we take from it?</div>
+        <div class="task-strip"><b>Do this</b>Pick one method or tool and trace how it changes what an audience can notice, know or trust. Decide what follows if the tool is changed or removed. Then choose one TOK concept. <strong>Minimum 50 words.</strong></div>
+        <div class="assessment-habit"><b>Assessment transfer</b><strong>Essay move:</strong> analyse how knowledge is produced in the Arts, not merely that technology exists. <strong>Exhibition move:</strong> explain why this particular object/medium contributes something distinctive to the prompt.</div>
+        <div class="recap-strip">
+          <div class="recap"><b>Arts recap</b>Medium and technique do more than package an idea: they can change what can be noticed, repeated, manipulated or shared.</div>
+          <div class="recap"><b>The pressure point</b>A camera, edit, algorithm, gallery wall or printing process can reveal something while also filtering it.</div>
+          <div class="recap"><b>Tool test</b>Imagine the same idea made with a different tool. If the knowledge changes, the method is part of the claim.</div>
+        </div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-method-cue></span></div>
+        <details class="scaffold" open><summary>Use these five moves — topic sentence → evidence → explain → counterpoint → judgement + so what?</summary><div class="scaffold-body">
+          <div class="scaffold-chip"><b>1 · Topic sentence / claim</b><span class="plain">Answer how far the tool matters.</span><span class="starter">The tool shapes knowledge by…</span></div>
+          <div class="scaffold-chip"><b>2 · Evidence</b><span class="plain">Name one specific tool, edit, process or distribution choice.</span><span class="starter">The relevant tool/process in my case is…</span></div>
+          <div class="scaffold-chip"><b>3 · Explain</b><span class="plain">Show what the tool changes for the audience.</span><span class="starter">This changes what the audience can know/notice because…</span></div>
+          <div class="scaffold-chip"><b>4 · Counterpoint</b><span class="plain">Test whether the idea would survive a different medium or tool.</span><span class="starter">However, if the same idea used… then…</span></div>
+          <div class="scaffold-chip"><b>5 · Judgement + so what?</b><span class="plain">Decide whether the method is part of the knowledge and say what follows.</span><span class="starter">So the tool is / is not part of what is known because… Therefore…</span></div>
+          <div class="worked-example"><span class="example-label">Unrelated worked example — school phone rule</span><span class="claim-example">Phones should be allowed during lunch because students need some control over how they use their break.</span> <span class="evidence-example">For example, a student may need to message a parent about transport home.</span> <span class="explain-example">This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</span> <span class="counter-example">However, unrestricted phone use could reduce face-to-face interaction.</span> <span class="judge-example">Therefore a lunch-only rule is stronger than a total ban; this means school rules should distinguish between learning time and break time.</span><div class="legend"><span>yellow = topic sentence / claim</span><span>cyan = evidence</span><span>pink = explain</span><span>purple = counterpoint</span><span>red = judgement / so what?</span></div><div class="example-note">Aim for about 4–6 sentences. You can combine two moves in one sentence; this is a thinking guide, not a rigid formula.</div></div>
+        </div></details>
+        <div class="stencil" id="stencil4"></div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Build one short paragraph</strong><span><b class="wc">0</b> / 50 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="50"><textarea class="answer" id="methodsAnswer" placeholder="Start with your answer. Name one tool or method, explain what it changes for the audience, test a different medium, then judge how much the tool matters."></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="concept-title">Choose the TOK concept doing the most work in your answer</div><p class="concept-hint">Pick the concept that best names the knowledge issue you actually discussed. You do not need to define it separately.</p>
+        <div class="concept-row" data-concepts="4"><button class="concept" data-concept="Truth">Truth</button><button class="concept" data-concept="Explanation">Explanation</button><button class="concept" data-concept="Justification">Justification</button></div>
+        <div class="submit-line"><div class="status" id="status4">Write your paragraph + choose one TOK concept.</div><button class="primary submit-step" data-submit="4" disabled>Tag it → next card</button></div>
+      </div>
+    </article>
+
+    <!-- 5: ethics -->
+    <article class="step" data-step="5" hidden>
+      <div class="journey-card" data-tone="purple">
+        <div class="step-top"><span class="step-no">05 / KNOWLEDGE FRAMEWORK</span><span class="framework-badge">Ethics</span></div>
+        <h2>Who pays for the picture?</h2>
+        <div class="kq">How should ethical responsibilities affect the ways art represents and produces knowledge about real people, events or communities?</div>
+        <div class="task-strip"><b>Do this</b>Show how an ethical choice changes what an audience can reasonably know, trust or understand. Then test your answer against artistic freedom and explain what this means for the audience. Choose one TOK concept. <strong>Minimum 50 words.</strong></div>
+        <div class="assessment-habit"><b>Assessment transfer</b><strong>Essay move:</strong> keep it about knowledge — explain how ethics changes what can be known, trusted or represented, not only whether something is good or bad. <strong>Exhibition move:</strong> anchor the ethical issue in the object’s specific real-world context and explain its contribution to the prompt.</div>
+        <div class="recap-strip">
+          <div class="recap"><b>Arts recap</b>Art can expose, distort, honour, exploit, provoke or humanise. Because representation can become knowledge for an audience, ethical choices affect what is believed as well as what is shown.</div>
+          <div class="recap"><b>The pressure point</b>Offence, harm, censorship and responsibility are not the same thing. Keep them separate.</div>
+          <div class="recap"><b>Responsibility test</b>Ask who has the power to frame the subject, what knowledge is created or distorted, and what obligations follow from that power.</div>
+        </div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-ethics-cue></span></div>
+        <details class="scaffold" open><summary>Use these five moves — topic sentence → evidence → explain → counterpoint → judgement + so what?</summary><div class="scaffold-body">
+          <div class="scaffold-chip"><b>1 · Topic sentence / claim</b><span class="plain">Answer how ethics changes knowledge or trust.</span><span class="starter">Ethical responsibility matters to knowledge when…</span></div>
+          <div class="scaffold-chip"><b>2 · Evidence</b><span class="plain">Name one specific framing, representation or production choice.</span><span class="starter">In my case, the choice that matters is…</span></div>
+          <div class="scaffold-chip"><b>3 · Explain</b><span class="plain">Show how that choice changes what an audience can know, trust or understand.</span><span class="starter">This affects knowledge because…</span></div>
+          <div class="scaffold-chip"><b>4 · Counterpoint</b><span class="plain">Give artistic freedom its strongest reasonable case.</span><span class="starter">However, artistic freedom still matters because…</span></div>
+          <div class="scaffold-chip"><b>5 · Judgement + so what?</b><span class="plain">Set a limit and say why it matters for audiences.</span><span class="starter">So I would trust/reject/qualify the work when… This matters because…</span></div>
+          <div class="worked-example"><span class="example-label">Unrelated worked example — school phone rule</span><span class="claim-example">Phones should be allowed during lunch because students need some control over how they use their break.</span> <span class="evidence-example">For example, a student may need to message a parent about transport home.</span> <span class="explain-example">This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</span> <span class="counter-example">However, unrestricted phone use could reduce face-to-face interaction.</span> <span class="judge-example">Therefore a lunch-only rule is stronger than a total ban; this means school rules should distinguish between learning time and break time.</span><div class="legend"><span>yellow = topic sentence / claim</span><span>cyan = evidence</span><span>pink = explain</span><span>purple = counterpoint</span><span>red = judgement / so what?</span></div><div class="example-note">Aim for about 4–6 sentences. You can combine two moves in one sentence; this is a thinking guide, not a rigid formula.</div></div>
+        </div></details>
+        <div class="stencil" id="stencil5"></div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Build one short paragraph</strong><span><b class="wc">0</b> / 50 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="50"><textarea class="answer" id="ethicsAnswer" placeholder="Start with your answer. Name one ethical choice, explain how it changes knowledge or trust, test artistic freedom as a counterpoint, then make a judgement."></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="concept-title">Choose the TOK concept doing the most work in your answer</div><p class="concept-hint">Pick the concept that best names the knowledge issue you actually discussed. You do not need to define it separately.</p>
+        <div class="concept-row" data-concepts="5"><button class="concept" data-concept="Power">Power</button><button class="concept" data-concept="Responsibility">Responsibility</button><button class="concept" data-concept="Certainty">Certainty</button></div>
+        <div class="submit-line"><div class="status" id="status5">Write your paragraph + choose one TOK concept.</div><button class="primary submit-step" data-submit="5" disabled>Tag it → next card</button></div>
+      </div>
+    </article>
+
+    <!-- 6: synthesis -->
+    <article class="step" data-step="6" hidden>
+      <div class="journey-card" data-tone="pink">
+        <div class="step-top"><span class="step-no">06 / EXIT</span><span class="framework-badge">Essay-style synthesis</span></div>
+        <h2>Exit through the argument</h2>
+        <p class="deck">You have used the four knowledge-framework lenses. Now compress them into one judgement.</p>
+        <div class="scale">
+          <div class="scale-top"><span>What we know comes mainly from the work itself</span><strong id="valueScaleOut">50 / 100</strong><span>What we know is mainly shaped by surrounding context</span></div>
+          <input id="valueScale" type="range" min="0" max="100" value="50">
+          <div class="scale-labels"><span>work / form / technique</span><span>context / reputation / institutions / market</span></div>
+        </div>
+        <div class="kq">To what extent is what we know through art shaped by the stories, reputations and institutions surrounding the work?</div>
+        <div class="task-strip"><b>Do this</b>Make one clear judgement with a limit or condition. Use at least one specific piece of evidence and one of the four framework lenses, address one reasonable different view, then state one “so what?” consequence (an implication) of your conclusion. <strong>Minimum 70 words.</strong></div>
+        <div class="assessment-habit"><b>Essay transfer</b>Sustain focus on the exact question; use examples as evidence; evaluate another point of view; explain a “so what?” implication; and finish with a clear judgement that includes a limit or condition. Those are the habits this card is deliberately rehearsing.</div>
+        <div class="evidence-nudge"><strong data-anchor-title></strong> <span data-final-cue></span></div>
+        <details class="scaffold" open><summary>Use these five moves — topic sentence → evidence → explain → other reasonable view → judgement + so what?</summary><div class="scaffold-body">
+          <div class="scaffold-chip"><b>1 · Topic sentence / claim</b><span class="plain">Answer “to what extent” immediately. This is your paragraph’s main point.</span><span class="starter">To a large/some/limited extent, what we know through art is shaped by…</span></div>
+          <div class="scaffold-chip"><b>2 · Evidence</b><span class="plain">Use one specific example, not a general reference to the film.</span><span class="starter">The strongest specific example is…</span></div>
+          <div class="scaffold-chip"><b>3 · Explain</b><span class="plain">Use one of the four framework lenses to explain why the example supports your claim.</span><span class="starter">This supports my answer because the lens of… shows…</span></div>
+          <div class="scaffold-chip"><b>4 · Other reasonable view</b><span class="plain">Give a reasonable different answer and why someone could hold it.</span><span class="starter">However, someone could argue… because…</span></div>
+          <div class="scaffold-chip"><b>5 · Judgement + so what?</b><span class="plain">Return to your answer, add a limit, then state what follows if you are right.</span><span class="starter">Overall… although… If this is right, then…</span></div>
+          <div class="worked-example"><span class="example-label">Unrelated worked example — school phone rule</span><span class="claim-example">Phones should be allowed during lunch because students need some control over how they use their break.</span> <span class="evidence-example">For example, a student may need to message a parent about transport home.</span> <span class="explain-example">This supports the claim because lunch is not teaching time, so the reason for a classroom ban is weaker.</span> <span class="counter-example">However, unrestricted phone use could reduce face-to-face interaction.</span> <span class="judge-example">Therefore a lunch-only rule is stronger than a total ban; this means school rules should distinguish between learning time and break time.</span><div class="legend"><span>yellow = topic sentence / claim</span><span>cyan = evidence</span><span>pink = explain</span><span>purple = counterpoint</span><span>red = judgement / so what?</span></div><div class="example-note">Aim for about 4–6 sentences. You can combine two moves in one sentence; this is a thinking guide, not a rigid formula.</div></div>
+        </div></details>
+        <div class="stencil" id="stencil6"></div>
+        <div class="concept-title">After the journey, where do you now place the main weight?</div>
+        <div class="choice-grid" id="finalChoiceGrid">
+          <button class="choice" data-choice="Creator intention">Creator intention</button>
+          <button class="choice" data-choice="Qualities of the work">Qualities of the work</button>
+          <button class="choice" data-choice="Audience experience">Audience experience</button>
+          <button class="choice" data-choice="Experts / institutions / market">Experts / institutions / market</button>
+          <button class="choice" data-choice="No single source">No single source</button>
+        </div>
+        <div class="answer-block">
+          <div class="answer-head"><strong>Write the final judgement</strong><span><b class="wc">0</b> / 70 words</span></div>
+          <div class="ink-field" data-level="sketch" data-min="70"><textarea class="answer" id="finalAnswer" placeholder="Start with a clear topic sentence answering “to what extent.” Use one specific example, explain it through one framework lens, address another reasonable view, then finish with a limited judgement and a “so what?”"></textarea><div class="ink-meter"><span></span></div></div>
+        </div>
+        <div class="submit-line"><div class="status" id="status6">Final position + paint line.</div><button class="primary submit-step" data-submit="6" disabled>Finish journey → build report</button></div>
+        <div class="finish-box" id="finishBox" hidden>
+          <h3>Your wall is finished.</h3>
+          <p>Your journey has been assembled into a clean report. The safest cross-device route is to <strong>show the report first</strong>, then use the browser/system print tools to save it as a PDF. The report stays visible even if PDF printing is awkward.</p>
+          <div class="finish-bridge"><h4>Translate this into assessment</h4><p><b>TOK essay:</b> you would answer one prescribed title through areas of knowledge. Keep the line of argument focused, use specific examples analytically, evaluate another point of view, consider implications, and show where the conclusion has limits.</p><p><b>TOK exhibition:</b> one specific artwork/object from today could become <em>one</em> object; a broader case or controversy would need to be represented by a specific object. A full exhibition needs <b>three specific objects</b>, each in its <b>specific real-world context</b>, all linked explicitly to <b>one selected IA prompt</b>. For each object, you must justify <b>what that particular object contributes</b> to exploring the prompt. You do not simply write a general answer to the prompt.</p><p><strong>This report is practice for those habits, not an assessed draft.</strong></p></div>
+          <div class="action-row"><button class="secondary" id="showReport">Show clean report</button><button class="secondary" id="downloadBackup">Download HTML backup</button><button class="secondary" id="copyReport">Copy answers</button></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<!-- Evidence wall drawer -->
+<section id="evidenceDrawer" hidden aria-modal="true" role="dialog" aria-label="Evidence wall">
+  <div class="drawer-panel">
+    <div class="drawer-head"><div><span class="kicker">Optional evidence / not another assignment</span><h2>Evidence wall</h2><p class="deck">Use these only when they help your argument. If you chose another Arts case, you can ignore them completely.</p></div><button class="drawer-close" id="closeEvidence">Close ×</button></div>
+    <div class="media-grid">
+      <article class="media"><div class="media-head">The film sells itself</div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/JcGpNnPqCjg?rel=0" title="Exit Through the Gift Shop trailer" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="media-body"><p>Watch the trailer as framing rather than neutral summary: who is credible, mysterious, ridiculous, important?</p><label class="evidence-use"><input type="checkbox" value="Exit Through the Gift Shop trailer"> Add to my evidence trail</label></div></article>
+      <article class="media"><div class="media-head">MBW outside Banksy's edit</div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIuHRIuqIi8?rel=0" title="Associated Press feature on Mr Brainwash" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="media-body"><p>A period media feature on Mr. Brainwash. Treat the coverage itself as evidence about status, authority and hype.</p><label class="evidence-use"><input type="checkbox" value="Associated Press Mr Brainwash feature"> Add to my evidence trail</label></div></article>
+      <article class="media"><div class="media-head">Thierry answers back</div><div class="media-body"><p>Mr. Brainwash later presents his own account of his identity and career. That does not settle the question — it creates another perspective Banksy's film cannot fully control.</p><p><a href="https://the-talks.com/interview/mr-brainwash/" target="_blank" rel="noopener">Open the interview in a new tab ↗</a></p><label class="evidence-use"><input type="checkbox" value="Mr Brainwash interview"> Add to my evidence trail</label></div></article>
+      <article class="media reference"><div class="media-head">Mr. Brainwash controls the frame</div><div class="media-body"><span class="source-tag">Official artist site</span><span class="source-tag">Primary source</span><p>Compare the film's version of Thierry with the version presented by Mr. Brainwash himself. Look at what the site foregrounds: identity, artworks, exhibitions, branding and commerce.</p><div class="source-question">Use it for: <b>Who gets to shape what we know about an artist?</b> Does controlling your own presentation make the account more authentic — or simply more strategic?</div><p><a href="https://www.mrbrainwash.com/" target="_blank" rel="noopener">Open Mr. Brainwash's official site ↗</a></p><label class="evidence-use"><input type="checkbox" value="Mr Brainwash official website"> Add to my evidence trail</label></div></article>
+      <article class="media reference"><div class="media-head">Banksy controls the frame differently</div><div class="media-body"><span class="source-tag">Official artist site</span><span class="source-tag">Primary source</span><p>Banksy's official site offers a useful contrast: strong control over authorship and authentication without revealing a conventional public identity. The FAQ also rejects representation by outside galleries or institutions.</p><div class="source-question">Use it for: <b>Does knowing who made something matter to what we know about the work?</b> What counts as authority when the artist remains anonymous?</div><p><a href="https://www.banksy.co.uk/" target="_blank" rel="noopener">Open Banksy's official site ↗</a></p><label class="evidence-use"><input type="checkbox" value="Banksy official website"> Add to my evidence trail</label></div></article>
+      <article class="media market"><div class="media-head">When destruction adds value</div><div class="media-body"><span class="source-tag">Art market evidence</span><span class="source-tag">Sotheby's</span><p><i>Girl with Balloon</i> partially shredded itself immediately after selling at auction in 2018 and became <i>Love is in the Bin</i>. Sotheby's later sold the transformed work for £18.582 million in 2021.</p><div class="source-question">Use it for: <b>Where does artistic value come from?</b> The object itself, the artist's action, the story, institutional recognition, scarcity, publicity — or some combination?</div><p><a href="https://www.sothebys.com/en/articles/banksy-brings-down-the-house-at-the-contemporary-art-evening-auction" target="_blank" rel="noopener">Open the Sotheby's case ↗</a></p><label class="evidence-use"><input type="checkbox" value="Sothebys Love is in the Bin case"> Add to my evidence trail</label></div></article>
     </div>
-  </header>
+  </div>
+</section>
 
+<!-- Clean report view -->
+<section id="reportView" hidden>
+  <div class="report-toolbar"><button class="close-report" id="closeReport">← Back to journey</button><button id="printReport">Print / Save PDF</button><button id="reportDownload">Download HTML backup</button><button id="reportCopy">Copy report</button></div>
+  <div class="print-help"><strong>PDF fallback:</strong> this is already a clean printable report. On Mac use <b>⌘P → PDF → Save as PDF</b>. On phones/tablets use the browser's <b>Print/Share</b> controls; if PDF export misbehaves, keep this report open or download the HTML backup.</div>
+  <article class="report-sheet" id="reportSheet"></article>
+</section>
 
-  <main class="wrap">
-    <nav class="tabs" role="tablist" aria-label="Content tabs">
-      <button class="tabbtn" role="tab" aria-selected="true" aria-controls="p1" id="t1">1) Film Reflection</button>
-      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p2" id="t2">2) Mr. Brainwash</button>
-      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p3" id="t3">3) Art Market: Laundering</button>
-      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p4" id="t4">4) NFTs (Fast Recap)</button>
-      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="p6" id="t6">5) Final Submission</button>
-    </nav>
-
-    <section class="panel active" role="tabpanel" id="p1" aria-labelledby="t1">
-      <div class="grid">
-        <div class="card">
-          <h3>Anchor questions (from our viewing guide)</h3>
-          <ul>
-            <li><strong>Identity + authority:</strong> What does Banksy’s anonymity contribute to the message?</li>
-            <li><strong>Production vs creativity:</strong> What does MBW’s exhibition process reveal?</li>
-            <li><strong>Media power:</strong> What role do critics/media play in what counts as “valuable” art?</li>
-            <li><strong>Perception vs substance:</strong> How much is MBW’s success perception rather than quality?</li>
-            <li><strong>Truth status:</strong> Is the film a documentary or an artwork in disguise?</li>
-          </ul>
-
-          <div class="task">
-            <strong>Think (no writing here):</strong> decide your standard for “art.”<br/>
-            <span class="small">Your standard must be something you can defend — not just taste.</span>
-          </div>
-
-          <div class="divider"></div>
-
-          <h3>Source anchors (use for evidence)</h3>
-          <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Exit_Through_the_Gift_Shop" target="_blank" rel="noopener">Film overview + debate summary</a></li>
-            <li><a href="https://www.rogerebert.com/reviews/exit-through-the-gift-shop-2010" target="_blank" rel="noopener">Ebert review (truth vs art)</a></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Critical reflection prompts</h3>
-          <ul class="checklist">
-            <li><strong>Framing:</strong> What does the film invite you to believe, and what does it conveniently hide?</li>
-            <li><strong>Evidence quality:</strong> Which scenes function as “proof,” and why might that be misleading?</li>
-            <li><strong>Authority:</strong> Who has the power to label something “important” in this film?</li>
-            <li><strong>Ethics:</strong> If the film is manipulative, is that ethically acceptable — and does it change its value?</li>
-          </ul>
-
-          <div class="task">
-            <strong>Micro-task:</strong> Choose ONE scene that “manufactures meaning.”<br/>
-            <span class="small">In your final submission, you’ll analyze how that scene constructs knowledge/value.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" role="tabpanel" id="p2" aria-labelledby="t2">
-      <div class="grid">
-        <div class="card">
-          <h3>Mr. Brainwash: “Life is Beautiful” (2008)</h3>
-          <p class="small">We’re not grading taste. We’re grading justification.</p>
-          <ul>
-            <li><a href="https://obeygiant.com/mr-brainwash-life-is-beautiful-exhibition/" target="_blank" rel="noopener">Obey Giant: exhibition details</a></li>
-            <li><a href="https://www.artsy.net/artist-series/mr-brainwash-life-is-beautiful" target="_blank" rel="noopener">Artsy: series page + market framing</a></li>
-            <li><a href="https://mrbrainwash.com/life-is-beautiful-first-ever-solo-exhibition/" target="_blank" rel="noopener">MBW: timeline + venue details</a></li>
-          </ul>
-
-          <div class="task">
-            <strong>Key TOK wedge:</strong>
-            <span class="pill">craft</span>
-            <span class="pill">art</span>
-            <span class="pill">brand</span><br/>
-            <span class="small">Your analysis must explicitly separate these three — even if you think they overlap.</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Critical reflection prompts</h3>
-          <ul class="checklist">
-            <li><strong>Copying:</strong> When does appropriation become transformation — and when is it extraction?</li>
-            <li><strong>Authorship:</strong> If assistants fabricate the work, what exactly is the “artist” responsible for?</li>
-            <li><strong>Gatekeeping:</strong> Who benefits when MBW is accepted into the art world?</li>
-            <li><strong>Credibility:</strong> What counts as “good evidence” that MBW is (or isn’t) an artist?</li>
-          </ul>
-
-          <div class="divider"></div>
-
-          <h3>Optional perspective (profile)</h3>
-          <ul>
-            <li><a href="https://www.insidehook.com/culture/artist-mr-brainwash-banksy-interview" target="_blank" rel="noopener">InsideHook interview/profile</a></li>
-          </ul>
-
-          <div class="task">
-            <strong>Micro-task:</strong> Identify 2 persuasion moves (social proof, authority, narrative, aesthetics, scarcity).<br/>
-            <span class="small">Use these as evidence for how the “artist identity” is constructed.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" role="tabpanel" id="p3" aria-labelledby="t3">
-      <div class="grid">
-        <div class="card">
-          <h3>Money laundering + sanctions evasion (art market)</h3>
-          <ul>
-            <li><a href="https://baselgovernance.org/publications/quick-guide-29-money-laundering-and-sanctions-evasion-using-art-market" target="_blank" rel="noopener">Basel Institute: Quick Guide 29</a></li>
-            <li><a href="https://baselgovernance.org/sites/default/files/2023-04/230412-quickguide_29.pdf" target="_blank" rel="noopener">Basel Institute PDF (details)</a></li>
-            <li><a href="https://www.gov.uk/hmrc-internal-manuals/economic-crime-supervision-handbook/ecsh54750" target="_blank" rel="noopener">UK gov: freeports and AML risk (HMRC manual)</a></li>
-          </ul>
-
-          <div class="task">
-            <strong>Core idea:</strong> art is a “value container” where price is partly belief + authority, not just utility.
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Video: freeports & opacity (pick ONE)</h3>
-          <div class="two">
-            <div>
-              <p class="small"><strong>Option 1:</strong> The Black Box of the Art Business (Geneva Freeport)</p>
-              <div class="embed">
-                <iframe src="https://www.youtube.com/embed/5TSE2TcMduc" title="The Black Box of the Art Business" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-            </div>
-            <div>
-              <p class="small"><strong>Option 2:</strong> Inside the $100B “Museum of the Missing”</p>
-              <div class="embed">
-                <iframe src="https://www.youtube.com/embed/tPmwhU6F4Bk" title="Inside the $100 Billion Museum of the Missing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-
-          <div class="task">
-            <strong>Critical prompts:</strong>
-            <ul class="checklist">
-              <li>What claims are made, and what evidence is shown?</li>
-              <li>What is missing (counterevidence, data, alternative explanations)?</li>
-              <li>What incentives might the creator or interviewees have?</li>
-              <li>How does this connect back to the film’s “value manufacturing” theme?</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" role="tabpanel" id="p4" aria-labelledby="t4">
-      <div class="grid">
-        <div class="card">
-          <h3>NFTs: what you “own” vs what you can “copy”</h3>
-          <ul>
-            <li><a href="https://www.christies.com/en/artists/beeple" target="_blank" rel="noopener">Christie’s: Beeple sale details</a></li>
-            <li><a href="https://www.newyorker.com/tech/annals-of-technology/how-beeple-crashed-the-art-world" target="_blank" rel="noopener">The New Yorker: Beeple + NFTs</a></li>
-          </ul>
-
-          <div class="task">
-            <strong>Fast recap:</strong> an NFT is a ledger claim (a token) associated with an asset — it’s not the image itself.<br/>
-            <span class="small">TOK angle: value depends on community belief + system trust + scarcity stories.</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Critical reflection prompts</h3>
-          <ul class="checklist">
-            <li>Is NFT value closer to <strong>art</strong>, <strong>finance</strong>, or <strong>fandom</strong>? Justify.</li>
-            <li>What makes digital scarcity believable?</li>
-            <li>What parallels exist between NFTs and MBW’s rise (hype, authority, social proof, narrative)?</li>
-          </ul>
-
-          <div class="task">
-            <strong>Micro-task:</strong> Write down (on paper) one strong analogy you can use in your final submission:
-            <span class="pill">MBW</span> : <span class="pill">art market</span> :: <span class="pill">NFTs</span> : <span class="pill">_____</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel" role="tabpanel" id="p6" aria-labelledby="t6">
-      <div class="card">
-        <h3>Final submission (TOK analysis)</h3>
-        <p><strong>Submit:</strong> a concise analysis using the <strong>Knowledge Framework</strong> + <strong>three TOK concepts</strong> to assess what this unit exposed about the art world.</p>
-
-        <div class="task" style="border-left-color:var(--sky);background:rgba(43,211,255,.08)">
-          <strong>Submission format (strict — short answers, not an essay)</strong><br/>
-          <span class="small">Use the exact headings below. This structure makes it obvious who actually read/watched the materials and who is submitting generic AI output.</span>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="callout">
-          <h3 style="margin-top:0">Copy/paste template (each paragraph must stay in its colour)</h3>
-          <p class="small">Keep each paragraph to <strong>3–6 sentences</strong>. Include at least <strong>one specific scene</strong> from the film and <strong>two specific details</strong> from sources you opened in the tabs.</p>
-
-          <div class="submission-template">
-            <p class="c1"><strong>1) Scope:</strong> What knowledge about “art” and “value” is being produced here? What is treated as valid/invalid knowledge?</p>
-            <p class="c2"><strong>2) Methods & tools:</strong> How is value/meaning constructed (media, critics, scarcity, institutions, marketing, provenance, freeports)? Use evidence.</p>
-            <p class="c3"><strong>3) Perspectives:</strong> Compare at least two perspectives (e.g., artist vs collector; critic vs public; museum vs regulator). Who has power and why?</p>
-            <p class="c4"><strong>4) Ethics:</strong> Identify one ethical tension (e.g., deception, laundering risks, gatekeeping, appropriation). Make a judgement with a clear standard.</p>
-            <p class="c5"><strong>5) TOK concepts (2–3):</strong> Choose 2–3 concepts from the TOK list and <strong>exemplify</strong> each one with a specific scene/detail. Then <strong>justify</strong> using evidence from the sources in the tabs.</p>
-            <p class="c6"><strong>6) Conclusion:</strong> After this unit, what is your best answer to “Can anyone be an artist?” Give your conditions (your standard) and one counterexample.</p>
-          </div>
-
-          <p class="small"><strong>Integrity note:</strong> If your submission reads like generic “AI slop” (vague claims, no specific evidence, no real engagement with sources), it will be treated as non-demonstrated understanding.</p>
-        </div>
-
-
-        <div class="divider"></div>
-
-        <div class="grid">
-          <div class="card" style="box-shadow:none">
-            <h3>Knowledge Framework (minimum requirements)</h3>
-            <ul class="checklist">
-              <li><strong>Scope:</strong> What counts as “art knowledge” here? What’s in/out?</li>
-              <li><strong>Methods & tools:</strong> How is value/meaning produced (curation, media, scarcity, provenance, institutions)?</li>
-              <li><strong>Perspectives:</strong> Compare at least two perspectives (artist, collector, critic, public, museum, regulator).</li>
-              <li><strong>Ethics:</strong> What ethical issues arise (deception, exploitation, laundering, gatekeeping, cultural appropriation)?</li>
-            </ul>
-            <p class="small">Use evidence from: the film + at least 2 sources you opened from the tabs.</p>
-          </div>
-
-          <div class="card" style="box-shadow:none">
-            <h3>Choose 3 TOK concepts (and apply them)</h3>
-            <p class="small">Pick <strong>2–3</strong> concepts from the full TOK list below. Do <strong>not</strong> define them. Instead, <strong>exemplify</strong> each concept with a specific moment from the film and <strong>justify</strong> your interpretation using evidence from the sources you opened in the tabs.</p>
-            
-            <p>
-              <span class="pill">evidence</span>
-              <span class="pill">certainty</span>
-              <span class="pill">truth</span>
-              <span class="pill">interpretation</span>
-              <span class="pill">perspective</span>
-              <span class="pill">culture</span>
-              <span class="pill">power</span>
-              <span class="pill">values</span>
-              <span class="pill">responsibility</span>
-              <span class="pill">justice</span>
-              <span class="pill">explanation</span>
-              <span class="pill">objectivity</span>
-            </p>
-
-            <ul class="checklist">
-              <li>Make 2–3 claims total (not 20 mini-claims).</li>
-              <li>For each claim: include a counterclaim + a standard for evaluating which is stronger.</li>
-              <li>Conclude with what you now think “counts as art” — and why.</li>
-            </ul>
-          </div>
-        </div>
-
-        
-      </div>
-    </section>
-
-    <section class="callout" id="heart">
-      <span class="kicker">Class Trip — Separate Section</span>
-      <h2 style="margin:10px 0 6px">HEART (Herning) — Explore, then propose a year-group art action</h2>
-      <p class="small">This section is separate from your TOK submission. It’s for shaping a shared year-group art activity.</p>
-
-      <div class="grid">
-        <div class="card" style="box-shadow:none">
-          <h3>Current exhibitions (browse)</h3>
-          <ul>
-            <li><a href="https://heartmus.dk/udstillinger/everything-is-wrong/" target="_blank" rel="noopener">Everything is wrong</a></li>
-            <li><a href="https://heartmus.dk/udstillinger/smittet-af-bacillen/" target="_blank" rel="noopener">Smittet af bacillen</a></li>
-            <li><a href="https://heartmus.dk/udstillinger/form-l-aftryk/" target="_blank" rel="noopener">Form – Aftryk</a></li>
-          </ul>
-        </div>
-        <div class="card" style="box-shadow:none">
-          <h3>Year-group project prompt</h3>
-          <ul class="checklist">
-            <li>What kind of collective artwork would help us <strong>experience</strong> these TOK issues?</li>
-            <li>How could we “manufacture value” (reviews, scarcity, placement, documentation) and then critique it?</li>
-            <li>What ethical boundary would we refuse to cross — and why?</li>
-          </ul>
-          <div class="task">
-            <strong>Bring to class:</strong> one concrete proposal (materials + location + roles + how “value” will be constructed).
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div class="small">
-        Bright pop-art styling inspired by street-art/collage aesthetics. Keep your analysis concise and evidence-driven.
-      </div>
-    </div>
-  </footer>
-
+<div id="toast">Saved.</div>
 <script>
-  // Tabs
-  const tabButtons = Array.from(document.querySelectorAll('.tabbtn'));
-  const panels = Array.from(document.querySelectorAll('.panel'));
-  tabButtons.forEach(btn => btn.addEventListener('click', () => {
-    tabButtons.forEach(b => b.setAttribute('aria-selected', 'false'));
-    panels.forEach(p => p.classList.remove('active'));
-    btn.setAttribute('aria-selected', 'true');
-    document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }));
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const SAVE_KEY='tok_giftshop_arts_journey_v2';
+const QUESTIONS={
+  1:'What gives something its status as art?',
+  2:'When does an artwork become a source of knowledge rather than merely an object to experience?',
+  3:'When interpretations of art conflict, what can make one interpretation better supported than another?',
+  4:'How far do the tools used to create, edit, copy and distribute art shape the knowledge we take from it?',
+  5:'How should ethical responsibilities affect the ways art represents and produces knowledge about real people, events or communities?',
+  6:'To what extent is what we know through art shaped by the stories, reputations and institutions surrounding the work?'
+};
+const STENCILS={
+  2:[
+    'Name one thing the artwork can show that a plain factual description cannot.',
+    'Include a boundary case: when would meaning stop short of knowledge?',
+    'State one thing that would make you change your mind about what the work teaches us.'
+  ],
+  3:[
+    'Separate popularity from justification: the most common interpretation is not automatically the strongest.',
+    'Give one sentence to an interpretation you disagree with before judging it.',
+    'Name the standard you are using to rank two interpretations.'
+  ],
+  4:[
+    'Imagine the same idea made with a different medium. What knowledge would change?',
+    'Separate creation tools from distribution tools — do they shape us in the same way?',
+    'Name one thing the tool reveals and one thing it filters out.'
+  ],
+  5:[
+    'Separate offence from harm. Which one matters in your example — and why?',
+    'Name who bears the cost of the artist’s freedom in your example.',
+    'Give the responsibility a limit: when would your rule become too restrictive?'
+  ],
+  6:[
+    'Use one “however” sentence that genuinely weakens your own conclusion.',
+    'Distinguish what the work itself supports from what reputation or the market tells the audience.',
+    'Name one part of your first answer that survived the journey and one part that changed.'
+  ]
+};
+const DEFAULT={
+  started:false,name:'',group:'',route:'film',otherCase:'',current:1,completed:[false,false,false,false,false,false],
+  firstChoice:'',finalChoice:'',concepts:{},answers:{firstAnswer:'',scopeAnswer:'',perspectiveAnswer:'',methodsAnswer:'',ethicsAnswer:'',finalAnswer:''},
+  stencil:{},valueScale:50,evidence:[],signals:{paste:0,tabs:0,typed:0,activeSeconds:0},startedAt:null
+};
+function cloneDefault(){return JSON.parse(JSON.stringify(DEFAULT))}
+let state=cloneDefault();
+try{const raw=localStorage.getItem(SAVE_KEY);if(raw){const p=JSON.parse(raw);state={...state,...p,answers:{...state.answers,...(p.answers||{})},concepts:{...state.concepts,...(p.concepts||{})},signals:{...state.signals,...(p.signals||{})}}}}catch(e){}
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state))}catch(e){}}
+function words(v){return (String(v||'').trim().match(/\b[\w’'-]+\b/g)||[]).length}
+function uniqueWords(v){return new Set((String(v||'').toLowerCase().match(/\b[\w’'-]{3,}\b/g)||[])).size}
+function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function notify(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>t.classList.remove('show'),1900)}
+function anchorName(){return state.route==='film'?'Exit Through the Gift Shop':(state.otherCase.trim()||'your chosen Arts case')}
+function validText(id,min){const v=state.answers[id]||'';return words(v)>=min&&uniqueWords(v)>=Math.min(12,Math.max(7,Math.floor(min/5)))}
+function similar(a,b){const A=new Set((a.toLowerCase().match(/\b\w{4,}\b/g)||[])),B=new Set((b.toLowerCase().match(/\b\w{4,}\b/g)||[]));if(A.size<7||B.size<7)return false;let n=0;A.forEach(x=>{if(B.has(x))n++});return n/Math.min(A.size,B.size)>.76}
+function duplicateOfEarlier(id){const order=['firstAnswer','scopeAnswer','perspectiveAnswer','methodsAnswer','ethicsAnswer','finalAnswer'];const i=order.indexOf(id),v=state.answers[id]||'';return order.slice(0,i).some(k=>similar(v,state.answers[k]||''))}
+
+// deterministic-but-local stencil assignment
+for(let i=2;i<=6;i++){
+  if(state.stencil[i]===undefined){state.stencil[i]=Math.floor(Math.random()*STENCILS[i].length)}
+  $('#stencil'+i).textContent=STENCILS[i][state.stencil[i]];
+}
+save();
+
+// landing state
+$('#studentName').value=state.name;$('#studentClass').value=state.group;$('#otherCase').value=state.otherCase;
+function renderRoute(){
+  $$('#routeGrid .route').forEach(b=>b.classList.toggle('on',b.dataset.route===state.route));
+  $('#otherCaseWrap').hidden=state.route!=='other';
+}
+renderRoute();
+$$('#routeGrid .route').forEach(b=>b.addEventListener('click',()=>{state.route=b.dataset.route;renderRoute();save();renderAnchorCues()}));
+$('#studentName').addEventListener('input',e=>{state.name=e.target.value;save()});$('#studentClass').addEventListener('input',e=>{state.group=e.target.value;save()});$('#otherCase').addEventListener('input',e=>{state.otherCase=e.target.value;save();renderAnchorCues()});
+$('#beginJourney').addEventListener('click',()=>{
+  state.name=$('#studentName').value.trim();state.group=$('#studentClass').value.trim();state.otherCase=$('#otherCase').value.trim();
+  if(!state.name){notify('Add your name first.');$('#studentName').focus();return}
+  if(state.route==='other'&&!state.otherCase){notify('Name the artwork or case you will use.');$('#otherCase').focus();return}
+  state.started=true;state.startedAt=state.startedAt||new Date().toISOString();save();renderApp();
+});
+
+// cues
+function renderAnchorCues(){
+  $$('[data-anchor-title]').forEach(el=>el.textContent=anchorName()+':');
+  const film=state.route==='film';
+  $$('[data-anchor-cue]').forEach(el=>el.textContent=film?'Use MBW as a stress test: is his status produced by intention, the work, the audience, Banksy, critics, institutions or hype?':'Use your case to show what actually makes people treat something as art.');
+  $$('[data-scope-cue]').forEach(el=>el.textContent=film?'The film itself blurs documentary, performance and satire. What can that hybrid form let us know — and what does it make less certain?':'Ask what your artwork/case lets an audience know that a straightforward factual account would not.');
+  $$('[data-perspective-cue]').forEach(el=>el.textContent=film?'Compare Banksy’s framing of Thierry with Thierry’s own self-understanding, plus the audience/critics who validate him.':'Use two plausible interpretations of your case and decide what would justify ranking one above the other.');
+  $$('[data-method-cue]').forEach(el=>el.textContent=film?'Camera, editing, repetition, assistants, publicity and mass reproduction all help construct what we see as “the work.” Pick one tool and follow its effect.':'Choose one medium, technique, platform or distribution tool in your case and ask what changes because that tool exists.');
+  $$('[data-ethics-cue]').forEach(el=>el.textContent=film?'Banksy controls the final edit of Thierry’s story while the film questions appropriation, authorship and hype. How does that control affect what viewers think they know about Thierry?':'Use a real issue of representation, appropriation, censorship, harm or artistic freedom and explain how it changes what an audience can reasonably know or trust.');
+  $$('[data-final-cue]').forEach(el=>el.textContent=film?'Use MBW’s rise, Banksy’s framing, critics or the market around street art to test how surrounding stories change what audiences think they know about the work.':'Use your case to separate what the work itself supports from what its reputation, institution, audience or market encourages us to believe.');
+}
+renderAnchorCues();
+
+// answers / paint fill
+const MIN={firstAnswer:30,scopeAnswer:48,perspectiveAnswer:50,methodsAnswer:50,ethicsAnswer:50,finalAnswer:70};
+function paintField(t){
+  const id=t.id,min=MIN[id],count=words(t.value),pct=Math.min(100,Math.round(count/min*100)),wrap=t.closest('.answer-block'),field=t.closest('.ink-field');
+  wrap.querySelector('.wc').textContent=count;field.style.setProperty('--fill',pct+'%');field.querySelector('.ink-meter span').style.width=pct+'%';
+  const level=pct>=100?'tagged':pct>=70?'argue':pct>=35?'layer':'sketch';field.dataset.level=level;field.classList.toggle('full',pct>=100);
+}
+$$('textarea.answer').forEach(t=>{
+  t.value=state.answers[t.id]||'';paintField(t);
+  t.addEventListener('input',()=>{state.answers[t.id]=t.value;paintField(t);save();evaluateCurrent()});
+  t.addEventListener('keydown',e=>{if(e.key.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey){state.signals.typed++;}});
+  ['paste','drop'].forEach(evt=>t.addEventListener(evt,e=>{e.preventDefault();state.signals.paste++;save();notify('Paste / drop blocked — leave your own marks.')}));
+});
+
+// first/final choices
+function wireChoiceGrid(sel,key){
+  const grid=$(sel);$$('.choice',grid).forEach(b=>{
+    b.classList.toggle('on',b.dataset.choice===state[key]);
+    b.addEventListener('click',()=>{state[key]=b.dataset.choice;$$('.choice',grid).forEach(x=>x.classList.toggle('on',x===b));save();evaluateCurrent()});
+  });
+}
+wireChoiceGrid('#firstChoiceGrid','firstChoice');wireChoiceGrid('#finalChoiceGrid','finalChoice');
+
+// concept buttons
+$$('.concept-row').forEach(row=>{
+  const step=row.dataset.concepts;$$('.concept',row).forEach(b=>{
+    b.classList.toggle('on',state.concepts[step]===b.dataset.concept);
+    b.addEventListener('click',()=>{state.concepts[step]=b.dataset.concept;$$('.concept',row).forEach(x=>x.classList.toggle('on',x===b));save();evaluateCurrent()});
+  });
+});
+
+// evidence drawer
+function renderEvidence(){
+  $$('#evidenceDrawer input[type=checkbox]').forEach(c=>c.checked=state.evidence.includes(c.value));
+}
+renderEvidence();
+$('#openEvidence').addEventListener('click',()=>{$('#evidenceDrawer').hidden=false;document.body.style.overflow='hidden'});$('#closeEvidence').addEventListener('click',()=>{$('#evidenceDrawer').hidden=true;document.body.style.overflow=''});$('#evidenceDrawer').addEventListener('click',e=>{if(e.target===$('#evidenceDrawer')){$('#closeEvidence').click()}});
+$$('#evidenceDrawer input[type=checkbox]').forEach(c=>c.addEventListener('change',()=>{state.evidence=$$('#evidenceDrawer input:checked').map(x=>x.value);save()}));
+
+// final scale
+$('#valueScale').value=state.valueScale;$('#valueScaleOut').textContent=state.valueScale+' / 100';$('#valueScale').addEventListener('input',e=>{state.valueScale=+e.target.value;$('#valueScaleOut').textContent=state.valueScale+' / 100';save()});
+
+// completion and one-card route
+function rule(step){
+  if(step===1)return !!state.firstChoice&&validText('firstAnswer',30)&&!duplicateOfEarlier('firstAnswer');
+  if(step===2)return validText('scopeAnswer',48)&&!!state.concepts[2]&&!duplicateOfEarlier('scopeAnswer');
+  if(step===3)return validText('perspectiveAnswer',50)&&!!state.concepts[3]&&!duplicateOfEarlier('perspectiveAnswer');
+  if(step===4)return validText('methodsAnswer',50)&&!!state.concepts[4]&&!duplicateOfEarlier('methodsAnswer');
+  if(step===5)return validText('ethicsAnswer',50)&&!!state.concepts[5]&&!duplicateOfEarlier('ethicsAnswer');
+  if(step===6)return !!state.finalChoice&&validText('finalAnswer',70)&&!duplicateOfEarlier('finalAnswer');
+  return false;
+}
+function statusText(step){
+  const ids={1:'firstAnswer',2:'scopeAnswer',3:'perspectiveAnswer',4:'methodsAnswer',5:'ethicsAnswer',6:'finalAnswer'},id=ids[step],min=MIN[id],n=words(state.answers[id]||''),needs=[];
+  if(n<min)needs.push((min-n)+' more words');
+  if(step===1&&!state.firstChoice)needs.push('choose a position');
+  if(step>=2&&step<=5&&!state.concepts[step])needs.push('choose one TOK concept');
+  if(step===6&&!state.finalChoice)needs.push('choose your final position');
+  if(duplicateOfEarlier(id))needs.push('make this answer more distinct from an earlier one');
+  return needs.length?needs.join(' · '):'Ready to tag.';
+}
+function evaluateCurrent(){
+  const s=state.current,btn=$('.submit-step[data-submit="'+s+'"]'),status=$('#status'+s);if(!btn||!status)return;
+  const ok=rule(s);btn.disabled=!ok||state.completed[s-1];status.textContent=state.completed[s-1]?'Tag locked into the wall.':statusText(s);status.classList.toggle('good',ok||state.completed[s-1]);
+}
+function showStep(n){
+  state.current=Math.min(6,Math.max(1,n));save();$$('.step').forEach(s=>s.hidden=+s.dataset.step!==state.current);renderProgress();evaluateCurrent();window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.submit-step').forEach(b=>b.addEventListener('click',()=>{
+  const s=+b.dataset.submit;if(s!==state.current||!rule(s)){notify('The paint is not dry yet.');return}
+  state.completed[s-1]=true;save();renderProgress();applyLocks();notify(['First instinct locked.','Scope tagged.','Perspectives tagged.','Methods & tools tagged.','Ethics tagged.','Journey complete.'][s-1]);
+  if(s<6){state.current=s+1;save();setTimeout(()=>{showStep(s+1);applyLocks()},180)}else{$('#finishBox').hidden=false;buildReport();evaluateCurrent()}
+}));
+function renderProgress(){
+  const done=state.completed.filter(Boolean).length;$('#progressFill').style.width=(done/6*100)+'%';$('#progressText').textContent=done+' / 6 TAGS';
+}
+function renderApp(){
+  $('#landing').hidden=state.started;$('#journey').hidden=!state.started;renderProgress();renderAnchorCues();
+  if(state.started){normalizeCurrent();showStep(state.current);applyLocks();if(state.completed[5])$('#finishBox').hidden=false}
+}
+
+// lock submitted work and recover gracefully if a saved current step is stale
+function applyLocks(){
+  for(let s=1;s<=6;s++){
+    if(!state.completed[s-1]) continue;
+    const step=$('.step[data-step="'+s+'"]');if(!step) continue;
+    $$('textarea.answer, button.choice, button.concept',step).forEach(el=>el.disabled=true);
+    if(s===6){const scale=$('#valueScale');if(scale)scale.disabled=true;}
+  }
+}
+function normalizeCurrent(){
+  if(state.completed.every(Boolean)){state.current=6;return}
+  const firstOpen=state.completed.findIndex(x=>!x)+1;
+  if(state.current<firstOpen || state.completed[state.current-1]) state.current=firstOpen;
+}
+
+// report
+function reportData(){return [
+  {step:'FIRST TAG',q:QUESTIONS[1],meta:'Initial position: '+state.firstChoice,a:state.answers.firstAnswer},
+  {step:'SCOPE',q:QUESTIONS[2],meta:'TOK concept: '+(state.concepts[2]||'—')+' · Stencil: '+STENCILS[2][state.stencil[2]],a:state.answers.scopeAnswer},
+  {step:'PERSPECTIVES',q:QUESTIONS[3],meta:'TOK concept: '+(state.concepts[3]||'—')+' · Stencil: '+STENCILS[3][state.stencil[3]],a:state.answers.perspectiveAnswer},
+  {step:'METHODS & TOOLS',q:QUESTIONS[4],meta:'TOK concept: '+(state.concepts[4]||'—')+' · Stencil: '+STENCILS[4][state.stencil[4]],a:state.answers.methodsAnswer},
+  {step:'ETHICS',q:QUESTIONS[5],meta:'TOK concept: '+(state.concepts[5]||'—')+' · Stencil: '+STENCILS[5][state.stencil[5]],a:state.answers.ethicsAnswer},
+  {step:'EXIT SYNTHESIS',q:QUESTIONS[6],meta:'Final position: '+state.finalChoice+' · Value scale: '+state.valueScale+'/100 · Stencil: '+STENCILS[6][state.stencil[6]],a:state.answers.finalAnswer}
+]}
+function buildReport(){
+  const conceptTrail=[2,3,4,5].map(i=>state.concepts[i]).filter(Boolean);
+  $('#reportSheet').innerHTML=`<h1>Exit Through the Gift Shop — TOK Arts Journey</h1>
+    <div class="report-meta"><b>${safe(state.name)}</b>${state.group?' · '+safe(state.group):''}<br>Primary evidence: <b>${safe(anchorName())}</b>${state.evidence.length?'<br>Evidence wall used: '+state.evidence.map(safe).join(' · '):''}</div>
+    ${reportData().map(r=>`<section class="report-section"><h2>${safe(r.step)}</h2><div class="report-question">${safe(r.q)}</div><div>${r.meta.split(' · ').map(x=>'<span class="report-badge">'+safe(x)+'</span>').join('')}</div><p class="report-answer">${safe(r.a)}</p></section>`).join('')}
+    <section class="report-section"><h2>Assessment bridge</h2><p class="report-answer"><b>Essay habit:</b> sustained focus on the exact title; examples used analytically; evaluation of another point of view; a “so what?” implication considered; clear judgement with a limit or condition.<br><b>Exhibition habit:</b> identify a specific real-world object and context, link it explicitly to one selected IA prompt, and justify the particular contribution that object makes. A full exhibition uses three objects.</p></section><section class="report-section"><h2>Concept trail</h2><div>${conceptTrail.map(x=>'<span class="report-badge">'+safe(x)+'</span>').join('')}</div><p>Initial position: <b>${safe(state.firstChoice)}</b><br>Final position: <b>${safe(state.finalChoice)}</b></p></section>
+    <div class="report-process">Process receipt: ${totalWords()} words · ${state.signals.typed} typed characters · ${state.signals.paste} paste/drop attempts · ${state.signals.tabs} tab departures · ${Math.floor(state.signals.activeSeconds/60)} minutes active. These signals are not an AI detector.</div>`;
+}
+function totalWords(){return Object.values(state.answers).reduce((n,v)=>n+words(v),0)}
+function reportText(){return reportData().map(r=>`${r.step}\n${r.q}\n${r.meta}\n${r.a}`).join('\n\n')+`\n\nPrimary evidence: ${anchorName()}\nInitial position: ${state.firstChoice}\nFinal position: ${state.finalChoice}`}
+function openReport(){buildReport();$('#reportView').hidden=false;document.body.style.overflow='hidden';$('#reportView').scrollTop=0}
+function closeReport(){ $('#reportView').hidden=true;document.body.style.overflow=''}
+function downloadReport(){
+  buildReport();const style=`<style>body{font-family:Arial,sans-serif;max-width:820px;margin:36px auto;padding:0 22px;line-height:1.5;color:#111}h1{font-family:Arial Black,Arial,sans-serif;text-transform:uppercase;border-bottom:3px solid #111;padding-bottom:12px}section{margin:26px 0}h2{font-size:17px;text-transform:uppercase}.q{font-weight:700}.a{white-space:pre-wrap;border-left:5px solid #111;padding-left:12px}.meta{font-size:12px;color:#444}@media print{@page{margin:13mm}body{margin:0;max-width:none}}</style>`;
+  const body=reportData().map(r=>`<section><h2>${safe(r.step)}</h2><div class="q">${safe(r.q)}</div><div class="meta">${safe(r.meta)}</div><p class="a">${safe(r.a)}</p></section>`).join('');
+  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TOK Arts Journey — ${safe(state.name)}</title>${style}</head><body><h1>Exit Through the Gift Shop — TOK Arts Journey</h1><p><b>${safe(state.name)}</b>${state.group?' · '+safe(state.group):''}<br>Primary evidence: ${safe(anchorName())}</p>${body}<section><h2>Assessment bridge</h2><p class="a"><b>Essay:</b> keep focus on the exact title; use specific examples analytically; evaluate another point of view; consider implications; qualify the judgement.<br><b>Exhibition:</b> identify three specific objects and their real-world contexts, link each explicitly to one selected IA prompt, and justify the particular contribution each object makes.</p></section><p class="meta">Open this file in any browser and use Print → Save as PDF.</p></body></html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='TOK-Arts-Journey-'+(state.name.replace(/[^a-z0-9]+/gi,'-')||'student')+'.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+async function copyReport(){try{await navigator.clipboard.writeText(reportText());notify('Journey copied.')}catch(e){notify('Clipboard blocked — use the clean report and select manually.')}}
+$('#showReport').addEventListener('click',openReport);$('#closeReport').addEventListener('click',closeReport);$('#printReport').addEventListener('click',()=>window.print());$('#downloadBackup').addEventListener('click',downloadReport);$('#reportDownload').addEventListener('click',downloadReport);$('#copyReport').addEventListener('click',copyReport);$('#reportCopy').addEventListener('click',copyReport);
+
+// reset
+$('#progressText').addEventListener('dblclick',()=>{if(confirm('Erase this locally saved journey and start again?')){localStorage.removeItem(SAVE_KEY);location.reload()}});
+
+// active time + tab departures
+let last=Date.now();setInterval(()=>{const now=Date.now();if(!document.hidden&&document.hasFocus()&&state.started){state.signals.activeSeconds+=Math.min(5,Math.max(0,Math.round((now-last)/1000)));if(state.signals.activeSeconds%20<5)save()}last=now},5000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.started){state.signals.tabs++;save()}last=Date.now()});window.addEventListener('blur',()=>{last=Date.now()});
+
+renderApp();evaluateCurrent();if(state.completed[5])buildReport();
+})();
 </script>
 </body>
 </html>
