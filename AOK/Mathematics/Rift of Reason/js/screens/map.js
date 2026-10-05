@@ -164,7 +164,7 @@
                 g.addEventListener('mouseenter', () => showTip(id, kind, locked));
                 g.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
                 if (kind === 'revealed') {
-                    if(n.trainer){
+                    if(n.trainer&&Rift.Battles.canChallenge(id)){
                         const trainer=Rift.data.trainers[n.trainer], host=Rift.data.speakers[trainer.speaker];
                         g.append(svg('image',{href:Rift.Assets.src(host.art),x:-27,y:-86,width:54,height:60,'aria-label':trainer.name}));
                         const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
@@ -254,7 +254,7 @@
                 const st = Rift.State.get();
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
-                if(n.trainer&&!n.cardSchool&&n.type!=='battle'&&!(opts&&opts.skipTrainer)){
+                if(n.trainer&&Rift.Battles.canChallenge(id)&&!n.cardSchool&&n.type!=='battle'&&!(opts&&opts.skipTrainer)){
                     Rift.Battles.offer(id,()=>arrive(id,{skipTrainer:true}));return;
                 }
                 const finish = () => {
@@ -277,7 +277,7 @@
                         }
                         finish();
                         if(n.cardSchool){
-                            if(!Rift.State.get().flags['card-lesson-won'])Rift.Battles.learn('map');
+                            if(!Rift.State.get().flags['card-lesson-won'])Rift.Battles.introduction('map');
                             else if(!Rift.State.get().flags['story-battle-won'])Rift.Battles.storyOffer();
                             else Rift.Battles.offer(id);
                             break;

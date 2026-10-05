@@ -68,6 +68,15 @@
     }
 
     const Battles = {
+        introduction(back) {
+            Rift.UI.modal('A card minigame at the Fair',el('div.stack',null,[
+                Rift.Assets.img(Rift.data.speakers.granny.art,{className:'tutorial-face',label:'Granny Axiom'}),
+                el('p',{text:'Granny has a second game: creature cards. Puzzles help you collect creatures; cards let you challenge their keepers.'}),
+                el('p',{text:'Try a guided practice at her table. Click the highlighted cards. Granny will show each reply. You borrow a team and risk nothing.'}),
+                el('p.small',{text:'After you beat a station’s logic puzzle once, its keeper offers a card challenge when you return. The puzzle and the card match are separate.'}),
+            ]),[{label:'Explore first'},{label:'Try the card minigame',primary:true,onclick:()=>Battles.learn(back||'map')}]);
+        },
+
         rules(onClose) {
             return Rift.UI.modal('How to play the card game', el('div.stack',null,[
                 'Start with 3 lives, 2 steals and 5 cards in your hand. Your deck has 10 creatures; missing cards are loaned.',
@@ -119,6 +128,7 @@
 
         offer(nodeId, activity) {
             const n=Rift.World.node(nodeId), t=Rift.data.trainers[n.trainer], host=Rift.data.speakers[t.speaker];
+            if(!Battles.canChallenge(nodeId)){if(activity)activity();return;}
             const choices=[{label:'Later'}];
             if(activity)choices.push({label:'Do the activity',onclick:activity});
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
@@ -130,6 +140,7 @@
         },
 
         trainer(nodeId, difficulty) {
+            if(!Battles.canChallenge(nodeId)){Rift.UI.toast('Beat this station’s puzzle once to unlock its card challenge.',3500);return;}
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
             prepare(consumables => Rift.Router.go('battle', {
@@ -139,6 +150,11 @@
                 opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ai: difficulty || t.ai || 'easy', stake: t.ante },
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null }),
             }));
+        },
+
+        canChallenge(nodeId) {
+            const n=Rift.World.node(nodeId);
+            return !!(n&&n.trainer&&(n.cardSchool||n.type==='battle'||Rift.State.get().map.completed.includes(n.challengeAfter||nodeId)));
         },
 
         practice() {

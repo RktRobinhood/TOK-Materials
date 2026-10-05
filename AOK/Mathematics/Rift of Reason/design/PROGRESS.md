@@ -77,11 +77,19 @@ All 334 tests pass, including an actual encounter-controller win hook. Both revi
 
 The dev dependency install found existing Sharp advisories; `tools/package.json` and lockfile now pin patched Sharp 0.35.5. `npm audit --prefix tools` reports zero vulnerabilities. Asset pipeline compatibility evidence is recorded with the clue release checks.
 
+## Lesson-one tutorial overhaul (2026-10-05)
+
+The user reopened #38/#42 after finding abrupt onboarding and spoken pause markers. The Fair now introduces cards as a minigame and offers exploring first. Granny's eight-step lesson highlights actual card controls, animates moves once and paces enemy replies. Keeper challenges unlock after their logic puzzle is solved; rest keepers use explicit nearby puzzle prerequisites. All fourteen puzzle tours now contain independent guided practice with diagrams, wrong-click feedback and completion-gated Next. Rule Hunter keeps its candidate rules visible below the board and supports native keyboard tile entry. The tutorial overlay now stays above the highlighted board so Ready remains clickable.
+
+All **340 tests pass** after the final fixes. Both source reviewers report no blockers. Browser checks completed the entire card lesson, a fresh Fair introduction/explore-first route, the number worked example, keyboard number entry and a real first-station solve through its three-star reward/catch offer. See `reviews/onboarding-2026-10-05.md` for exact evidence and limits.
+
+Removed literal pause tokens from TTS spoken input, re-recorded eighteen marker-contaminated clips and recorded 117 settled lines. Six cross-clip boundary errors were repaired and re-scanned. Current coverage is **392/494**, with **102 missing / 32 planned default requests**. Five lesson-one story lines still use browser speech (Corvina ×3, Lobstorian and Tremendoodle ×1); all text remains visible. Today's quota is ten actual attempts per pinned model. Approximate local speech transcripts and current hashes for today's 135 clips are saved in `reviews/voice-repairs-2026-10-05.json`; broader acting/cut review remains unfinished.
+
 ## Next work
 
-1. Voice support is committed and published. Today's run completed at ten actual attempts per model: 260 new clips, 277/493 current lines covered, 216 missing (40 planned batches). All current clips decode; checked cutting errors are repaired. Wider transcript audit hit HTTP 503, so complete it alongside future recording. Exact resume commands, sample evidence and limits: `reviews/voice-recording-2026-10-04.md`. #25 release validation is closed; #43 remains open.
-2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13, local teacher overview #31 and optional clue layer #30 are implemented. Live multiplayer #29 remains separate.
-3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining work and the live-service dependency are documented in `reviews/remaining-handoff-2026-10-05.md`.
+1. After the natural **2026-10-06 09:00 Copenhagen** reset, prioritize the five missing lesson-one story lines in #43, then finish the remaining recordings and bounded boundary checks. Preserve the ignored ledger and pinned cast; do not evade the cap. See `reviews/remaining-handoff-2026-10-05.md` for commands.
+2. Close #38/#42 once this release is verified on Pages. #34 remains open while voice child #43 is pending. #1 tracks the usable core separately from pending audio polish and live multiplayer #29.
+3. Bonus puzzles #13, local teacher overview #31 and optional clue layer #30 are complete. Live multiplayer has no configured hosted service; keep #29 open with its documented dependency.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

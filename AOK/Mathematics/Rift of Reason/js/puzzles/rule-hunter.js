@@ -608,6 +608,8 @@
         for (let n = 1; n <= data.max; n++) {
             const t = el('button.rh-tile.rh-src', { text: String(n), type: 'button', 'aria-label': 'Number ' + n });
             t.addEventListener('pointerdown', ev => startDrag(ev, n, null));
+            // Native keyboard activation emits detail 0; pointer placement already runs on pointerup.
+            t.addEventListener('click', ev => { if(ev.detail===0)place(n,null); });
             tray.appendChild(t);
         }
         slots.forEach((s, i) => s.addEventListener('pointerdown', ev => {
@@ -628,7 +630,6 @@
             tray,
             el('div.rh-bench-foot', null, [
                 el('div.rh-tip.muted.small', { text: 'Click or drag tiles into the slots. Click a slot to empty it.' }),
-                nameBtn,
             ]),
         ]);
 
@@ -637,7 +638,14 @@
         const counts = el('div.rh-counts.small');
         const log = el('div.rh-log.panel', null, [el('h3', { text: 'Your tests' }), counts, logList]);
 
-        const wrap = el('div.rh.rh-rules', null, [keeper.col, bench, log]);
+        const reference = el('section.rh-reference.panel', { 'aria-label': 'Possible rules' }, [
+            el('div.row.wrap', { style: { justifyContent: 'space-between' } }, [el('h3', { text: 'Possible rules' }), nameBtn]),
+            el('p.small', { text: 'All fit ' + fmt(data.example) + '. Compare them while you test. When ready, choose Name the rule.' }),
+            el('ol.rh-reference-list', null, data.candidates.map((c, i) => el('li.parchment', null, [
+                el('strong', { text: String.fromCharCode(65 + i) + '. ' }), el('span', { text: c.text }),
+            ]))),
+        ]);
+        const wrap = el('div.rh.rh-rules', null, [keeper.col, bench, log, reference]);
         container.appendChild(wrap);
 
         function render() {

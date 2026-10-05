@@ -205,10 +205,11 @@ const dailyQuota = e => e.status === 429 && (e.daily || /per.?day|PerDay|daily|R
 
 // Turn-level acting survives batching; directions are metadata, not spoken.
 export function speechParts(lines, style) {
-    return lines.map((line,i) => ({type:'text',
-        text:line.say + (i < lines.length-1 ? ' <long pause> <long pause> ' : ''),
+    return lines.map(line => ({type:'text',
+        text:line.say,
         annotations:[{type:'speech_metadata',style:style + (line.mood ? '; in this line: ' + line.mood : '')
-            + (lines.length > 1 ? '. Leave a long silent pause after this line.' : '')}],
+            + '. Speak only the supplied dialogue. Act directions silently; never say their words.'
+            + (lines.length > 1 ? ' Leave at least one second of actual silence between lines.' : '')}],
     }));
 }
 

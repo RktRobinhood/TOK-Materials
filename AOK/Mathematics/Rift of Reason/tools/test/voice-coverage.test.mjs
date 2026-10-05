@@ -27,7 +27,7 @@ test('batch speech keeps acting directions in each line metadata',()=>{
  assert.match(parts[0].annotations[0].style,/whispering/);assert.match(parts[1].annotations[0].style,/triumphant/);
  assert.ok(parts.every(p=>p.annotations[0].style.includes('Dry tortoise humour')));
  assert.ok(parts.every(p=>!p.text.includes('whispering')&&!p.text.includes('triumphant')));
- assert.match(parts[0].text,/<long pause>/);assert.equal(parts[1].text,'We have a plan!');
+ assert.deepEqual(parts.map(p=>p.text),['Come closer.','We have a plan!'],'Only script words may enter spoken text; pause directions belong in metadata');
 });
 test('daily budget counts actual attempts independently per model and resets at Pacific midnight',()=>{
  const budget={counts:{flash:3}};

@@ -32,14 +32,25 @@ test('story gate requires victory and a side challenge never completes its puzzl
  g.state.flags['story-battle-won']=true;assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/Win 2/);
  g.state.map.completed.push('stall-pattern','stall-witness');assert.equal(g.Rift.World.lockReason(g.state,'fair-rift'),null);
  g.Rift.Battle.Ante.applyToSave=()=>{};
+ g.Rift.Battles.trainer('stall-gallery','easy');assert.equal(g.routes.length,0,'unfinished station cannot be challenged directly');
+ g.state.map.completed.push('stall-gallery');const completedBefore=JSON.stringify(g.state.map.completed);
  g.Rift.Battles.trainer('stall-gallery','easy');const p=g.routes.at(-1).params;
  assert.equal(p.opponent.ai,'easy');assert.ok(p.player.team.every(c=>c.loaner));
- p.onEnd({mode:'trainer',outcome:'won'});assert.ok(!g.state.map.completed.includes('stall-gallery'));
+ p.onEnd({mode:'trainer',outcome:'won'});assert.equal(JSON.stringify(g.state.map.completed),completedBefore);
 });
 test('every map challenger has a portrait, short introduction and complete themed team',()=>{
  const {Rift}=game();
  for(const [id,t] of Object.entries(Rift.data.trainers)){
   assert.ok(Rift.data.speakers[t.speaker],id);assert.ok(t.intro&&t.intro.length<180,id);
   assert.equal(t.team.length,10);assert.ok(t.team.every(sp=>Rift.data.creatures[sp]),id);
+ }
+});
+test('rest keeper challenges require their associated logic puzzle, not a rest visit',()=>{
+ const g=game();
+ for(const id of ['b-garden','t-cafe']){
+  const n=g.Rift.World.node(id);g.state.map.completed.push(id);
+  assert.equal(g.Rift.Battles.canChallenge(id),false);
+  const prerequisite=g.Rift.World.node(n.challengeAfter);assert.ok(prerequisite.puzzles.length);
+  g.state.map.completed.push(n.challengeAfter);assert.equal(g.Rift.Battles.canChallenge(id),true);
  }
 });

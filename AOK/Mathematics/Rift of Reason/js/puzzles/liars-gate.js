@@ -525,7 +525,7 @@
         });
 
         const status = el('div.lg-status');
-        const openBtn = el('button.btn.primary.lg-open', { type: 'button', onclick: submit, text: 'Open this door' });
+        const openBtn = el('button.btn.primary.lg-open', { type: 'button', onclick: submit, text: 'Open the gate' });
         const result = el('div.lg-result', { 'aria-live': 'polite' });
         const action = el('div.lg-action', {}, [status, openBtn]);
         rootEl.appendChild(el('div.lg-bottom', {}, [tray, doorRow, action]));

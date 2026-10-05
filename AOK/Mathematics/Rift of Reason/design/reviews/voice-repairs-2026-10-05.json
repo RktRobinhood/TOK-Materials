@@ -1,0 +1,952 @@
+{
+  "date": "2026-10-05",
+  "method": "Local onnx-community/whisper-tiny.en q8 CPU, via @huggingface/transformers 4.3.0; FFmpeg mono 16kHz decoding",
+  "limits": "Approximate automated transcripts; no acting certification or complete older-boundary approval. Hashes identify current clips. Not the separate cloud audit journal.",
+  "clips": [
+    {
+      "id": "algorithm-15xwa94",
+      "sha256": "cc8db4467b83ddf04d2634d6b8240ced573e6de1010cbf27c5e6d757a04ef592",
+      "seconds": 5.832,
+      "expected": "Hello. You might also like: everything. Forever.",
+      "approximateTranscript": "Hello! You might also like everything forever."
+    },
+    {
+      "id": "algorithm-1bbg1vn",
+      "sha256": "f40794a39d69a4f296cda297d2be95e91f45132fd6691b267530573a37c36e42",
+      "seconds": 8.856,
+      "expected": "Certainty down. Thinking up. This is… Unacceptable. Come to the tower.",
+      "approximateTranscript": "Searching deep down, thinking up. This is unacceptable. Come to the tower."
+    },
+    {
+      "id": "algorithm-1iijpqk",
+      "sha256": "69ce167b615f567d61f12c76baa2f26b30d118b22d0a0f5b673f693d5b0412f1",
+      "seconds": 7.776,
+      "expected": "Next era loading. More screens. More opinions. Less checking.",
+      "approximateTranscript": "Next era loading more screens more opinions. Let's check in"
+    },
+    {
+      "id": "algorithm-1iniltm",
+      "sha256": "56225a57b9725701567772b75f5252db8a46576bee44ed058c41f4d9726989a5",
+      "seconds": 7.08,
+      "expected": "You have been thinking. That is… Unusual. Recalculating.",
+      "approximateTranscript": "You have been thinking that is unusual, recalculating."
+    },
+    {
+      "id": "algorithm-1qgnd5l",
+      "sha256": "4c9323c60f5b2a1b074ec3cd4b44a89bba7273da1f133da49d8f2b427f30aec2",
+      "seconds": 7.488,
+      "expected": "Asset lost. Recalculating. The next era will be… Louder.",
+      "approximateTranscript": "As it lost, recalculating. The next era will be louder."
+    },
+    {
+      "id": "algorithm-2djqdj",
+      "sha256": "7e42c23ce69f3abd0294f17a90b932c8aefbe0546e4b42acedfd8cdd8730f41e",
+      "seconds": 8.976,
+      "expected": "Trending now: a claim. Trending next: the opposite claim. Engagement secured.",
+      "approximateTranscript": "Trending now, a claim, trending next, the opposite claim, engagement secured."
+    },
+    {
+      "id": "algorithm-2sl5t6",
+      "sha256": "aeb2b97d5409cbe30fa2ea8ff8a5dbe4eb10f4db35e43257e45fa9bb8093aa7e",
+      "seconds": 8.04,
+      "expected": "Engagement is up. Certainty is up. Thinking is… Optional.",
+      "approximateTranscript": "Engagement is up. Search and see is up. Thinking is optional."
+    },
+    {
+      "id": "baker-g9djrp",
+      "sha256": "dfe54d13206320e0deeeed1c59f41134a056b46f60348f6737e28114c68dc5eb",
+      "seconds": 5.304,
+      "expected": "Someone took my last loaf! And everyone in this shop has an opinion about who.",
+      "approximateTranscript": "Someone took my last loaf and everyone in this shop has an opinion about who."
+    },
+    {
+      "id": "granny-12esh02",
+      "sha256": "8e6ca9cb68a0b982b7deeb28c2b6d10cf0409b21a7591b0e156a1bcdb344de91",
+      "seconds": 15.5366875,
+      "expected": "Example: \"all odd numbers are prime\" fails at 9. Use the number tester to look for a failed case. Testing 3 and 5 alone proves nothing about all odd numbers.",
+      "approximateTranscript": "Example. All odd numbers are prime, fails at 9. Use the number tester to look for a failed case. Testing 3 and 5 alone proves nothing about all odd numbers."
+    },
+    {
+      "id": "granny-13m13xd",
+      "sha256": "d495a8685ac29d3242d615b85f5c4022153172d84f402ffc85eb010137d006d2",
+      "seconds": 13.92,
+      "expected": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "approximateTranscript": "Choose Shade and click a region, or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear, let's restart."
+    },
+    {
+      "id": "granny-14eimlr",
+      "sha256": "2a1204402b3c8aa835ff0eee41a2de83c90aa004c951fe1593cd8eeb140bb4c7",
+      "seconds": 14.304,
+      "expected": "I will guide your first moves with loaned cards. Nothing is at risk. Win Syllo’s safe challenge and two stalls, then visit the Crack in the Sky.",
+      "approximateTranscript": "I will guide your first moves with loaned cards. Nothing is at risk. When syllows safe challenge and two stalls, then visit the crack in the sky."
+    },
+    {
+      "id": "granny-1994kwo",
+      "sha256": "7ea5dd5f9413490303ee99acb17eac67a319be85a2cb169bb48aa61154e838e7",
+      "seconds": 4.104,
+      "expected": "So. What will you wonder about next?",
+      "approximateTranscript": "So, what will you wonder about next?"
+    },
+    {
+      "id": "granny-1cc1nrr",
+      "sha256": "67d60ed72657aa4a163dfc2ccf3c5381aebd4388e382dd0c4b790576c3afcd05",
+      "seconds": 12.552,
+      "expected": "Granny just played Muskrat. Click it to spend one steal and move it to your board. You keep it for this battle only. Granny gets an extra turn.",
+      "approximateTranscript": "Granny just play the muskrat. Click it to spend one steal and move it to your board. You keep it for this battle only. Granny gets an extra turn."
+    },
+    {
+      "id": "granny-1cd0jxe",
+      "sha256": "adae4dcfab8ced0d56f0a1e3fc6f16831e5367cd3e5a6fbca6e599f5c03ad31c",
+      "seconds": 8.36,
+      "expected": "Beat their logic puzzle once. When you come back, you can challenge them at cards too. Off you go!",
+      "approximateTranscript": "beat their logic puzzle once. When you come back, you can challenge them at cards too. Off you go!"
+    },
+    {
+      "id": "granny-1cjgktg",
+      "sha256": "714a9f83357fa2b2c69ec8bd1e328265b85ee1d1075e3944d0ba22e27577c9c7",
+      "seconds": 18.072,
+      "expected": "The new axiom is Age of Reason: Reason creatures get +2. This time choose Take the hit. Your lives will go from three to two. You can take a hit instead of blocking.",
+      "approximateTranscript": "The new axiom is age of reason. Reason creatures get plus two. This time, choose Take the hit. Your lives will go from three to two. You can take a hit instead of blocking."
+    },
+    {
+      "id": "granny-1djy0nt",
+      "sha256": "7a4a2a2d3396c8851f9b7ff3b53ba32434d935965ca758a56e1781bf964bc362",
+      "seconds": 9.192,
+      "expected": "The machine prints a proof. Our task is to check the reasoning, not trust its confident voice.",
+      "approximateTranscript": "The machine prints a proof. Our task is to check the reasoning, not trust its confident voice."
+    },
+    {
+      "id": "granny-1kyejv8",
+      "sha256": "9c952209fbcfa35f0d0ff090b17687dbbc7560d619c2dc023af6666b6896e64e",
+      "seconds": 19.92,
+      "expected": "Judge real-world truth separately if asked, then Seal the verdict. The diagram helps you think; read its feedback too. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Judge real world truth separately, if asked, then seal the verdict. The diagram helps you think, read its feedback too. How to play is free, the hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "granny-1l3dt43",
+      "sha256": "dc47b112e6a0d5936d787f86850e64042e4b228607aad572176f24c0ac848290",
+      "seconds": 8.448,
+      "expected": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "approximateTranscript": "We judge whether the conclusion must follow from these facts. Read the scrolls first."
+    },
+    {
+      "id": "granny-1ol7868",
+      "sha256": "8b7044f5a981e1f4b1a930e474f3d4fdabeac0c1888ae3458515279e46849ecb",
+      "seconds": 8.856,
+      "expected": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "approximateTranscript": "3 Act. Wonder. Investigate. Compare. We need a useful question before a calculation."
+    },
+    {
+      "id": "granny-1radmzx",
+      "sha256": "055eb093f3e0d32736f16fe76c0d3265658035a46fee6cfcca8df1e28dd5882a",
+      "seconds": 11.085375,
+      "expected": "Click a numbered step to inspect it. Read the assumptions: a division is allowed only if its divisor is not zero.",
+      "approximateTranscript": "Click a numbered step to inspect it. Read the assumptions. A division is allowed only if its divisor is not zero."
+    },
+    {
+      "id": "granny-1s6r8qq",
+      "sha256": "8e5a880a0974bfb4af0047d59da9da214fe3aab1853597d14d88b1a1a0966351",
+      "seconds": 20.448,
+      "expected": "Click Astrophysicat to attack. Reason gets +2 against Emotion: six against four. Normally six wins; Underdog makes four win a block. Granny will take this hit, then attack. Colours are game rules, not a ranking of knowledge.",
+      "approximateTranscript": "Click Astro-Physics to Attack. Reason gets plus 2 against emotion. 6 against 4. Normally 6 wins. Underdog makes 4 win a block. Granny will take this hit, then attack. Colors are game rules, not a ranking of knowledge."
+    },
+    {
+      "id": "granny-1tsou1g",
+      "sha256": "af2f5397ca505a9103978f6e640196315060c922bfb529f5078c2f052f8cd349",
+      "seconds": 10.512,
+      "expected": "The core claims it knows everything. Test its guesses, inspect its proof, then make your own model.",
+      "approximateTranscript": "The core claims it knows everything. Test its guesses. Inspect its proof. Then, make your own model."
+    },
+    {
+      "id": "granny-1uqeehp",
+      "sha256": "7770921583f0227db4ba940101e004cbf8aba0a8f9287c51154377cc323eaad3",
+      "seconds": 10.704,
+      "expected": "If no test breaks it, still ask why each step works for every allowed case. A valid proof needs a general reason.",
+      "approximateTranscript": "If no test breaks it, still I ask why each step works for every allowed case. A valid proof needs a general reason."
+    },
+    {
+      "id": "granny-1x3osi6",
+      "sha256": "55a60fb0efe142f77b646ee72a6c602332e3c91432e53aed77d21ef604e7550a",
+      "seconds": 14.808,
+      "expected": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "approximateTranscript": "Shade means no things here. Example. All ducks are birds. Shades the ducks only region outside birds. It does not add an X."
+    },
+    {
+      "id": "granny-1xr119m",
+      "sha256": "1b91bf76e487d39a64b41a8412fad7d103e79e7ea20368d7dfef2b8f0dc3b1d7",
+      "seconds": 14.472,
+      "expected": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "approximateTranscript": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose, now, beat it to start the next rounds."
+    },
+    {
+      "id": "granny-1xtwuw3",
+      "sha256": "120481414084794b0b80efa90fa1f83dcea3faa46392a6fc4199f1b430c16cf0",
+      "seconds": 13.104,
+      "expected": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "approximateTranscript": "Some means at least one. Some ducks are birds, needs an X in their overlap. No ducks are birds, shades that overlap."
+    },
+    {
+      "id": "granny-1xzniqz",
+      "sha256": "da5ce854eb5bb0c3af25fe7c6dbf95916a264fc8754462fc5cc65e6ef3c9a0da",
+      "seconds": 7.176,
+      "expected": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "approximateTranscript": "Read the target. We are testing a machine that uses past patterns to guess your next move."
+    },
+    {
+      "id": "granny-2c0rmy",
+      "sha256": "ca7a5969c8467f2847a40996502cfca1a28721fe9815225017be763d61fcaabe",
+      "seconds": 14.304,
+      "expected": "Granny attacks! Click Lobstorian to block. Its greater power wins this fight. Then we will place two cards for the stealing example. Watch which board each card joins.",
+      "approximateTranscript": "Granny attacks? Click Lob Story into Block. It's greater power wins this fight. Then we will place two cards for the stealing example. Watch which board each card joins."
+    },
+    {
+      "id": "granny-2mlojl",
+      "sha256": "b1eae004cdc8bd4d62f098fc13455ac7d05e5329b66c3bba4cd38b62adc5c4fc",
+      "seconds": 14.283375,
+      "expected": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "approximateTranscript": "Example. To fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its color probably will not help."
+    },
+    {
+      "id": "granny-2mzhdu",
+      "sha256": "a63ee27bea1e2ad9ac3220f5ef2b5e74d7933162606428d8b025c2e241505bd0",
+      "seconds": 18.696,
+      "expected": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "granny-5efs9t",
+      "sha256": "c03f07ac8043c9e07bab4eb1899174011cd7b5408fe5e13f472121720cd3708f",
+      "seconds": 18.072,
+      "expected": "Granny has one life left. Click Astrophysicat to attack again. Granny takes the last hit for this lesson. In a real match she could block or steal! You win when she has no lives or cannot play or attack.",
+      "approximateTranscript": "Granny has one life left. Click Astrophysicat to attack again. Granny takes the last hit for this lesson. In a real match, she could block or steal. You win when she has no lives or cannot play or attack."
+    },
+    {
+      "id": "granny-5r60f6",
+      "sha256": "7fb01894c67bbc0e83dabf8dc9320455b3c325cb4a13b9a0fcf7b87596f3cfd4",
+      "seconds": 9.074625,
+      "expected": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "approximateTranscript": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths."
+    },
+    {
+      "id": "granny-aqjuwd",
+      "sha256": "02cf8462857006038f8e68a31458ee37d3088d3d9cdc1dd6b79ea36ef18c8c87",
+      "seconds": 13.8,
+      "expected": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "approximateTranscript": "Choose valid only if every possible world that fits the fact also fits the conclusion. A true conclusion can still come from a bad argument."
+    },
+    {
+      "id": "granny-at5fkm",
+      "sha256": "8c8584381fa5c034023ae251aeb878de7dfbacca763fa675a889f0e3d596b64b",
+      "seconds": 8.088,
+      "expected": "We need a safe route. These are the rules of this world, not promises about real people.",
+      "approximateTranscript": "We need a safe route. These are the rules of this world, not promises about real people."
+    },
+    {
+      "id": "granny-b6x87s",
+      "sha256": "b251f4f42c44ddb8fd94a5fdf52ed8e7f4598961ed9d5c96b17b033fca792cd0",
+      "seconds": 19.968,
+      "expected": "Choose the broken step and flaw, or say the proof holds if every step is justified. Finish the task and read the explanation. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose the broken step and flaw, or say the proof holds if every step is justified. Finish the task and read the explanation. How to play is free. The hint button shows its heart cost. Think first. Then check your answer."
+    },
+    {
+      "id": "granny-cbqcrn",
+      "sha256": "3fa30b22ecb3954f2cee7f8d08d29ac9a8fa9a970e282e1f616e01692e334c02",
+      "seconds": 10.896,
+      "expected": "Click Lobstorian on your board to attack. Granny will take the hit: her lives go from three to two. Then she will attack you.",
+      "approximateTranscript": "Click Love Story in on your board to attack. Granny will take the hit, her lives go from 3 to 2. Then she will attack you."
+    },
+    {
+      "id": "granny-ch6eds",
+      "sha256": "92acc62a161ada873b42eb08b31e0f7dff83ec7d0994f09b7a36904c7cd9aa1c",
+      "seconds": 7.872,
+      "expected": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+      "approximateTranscript": "Click Truth or Lie Under Each Guard. Your marks are a guess you can change."
+    },
+    {
+      "id": "granny-dfrn5k",
+      "sha256": "fe6b254afc65162df0d846122b2a3a29378aaddfc988c1cf655c6531e38f7246",
+      "seconds": 15.744,
+      "expected": "Read the shared axiom. Underdog says the WEAKER creature wins a fight. Compare the two previews below, then click Read the shared axiom. The same cards now have a different winner.",
+      "approximateTranscript": "Read the shared axiom. Underdog says the weaker creature wins a fight. Compare the two previews below. Then click Read the shared axiom. The same cards now have a different winner."
+    },
+    {
+      "id": "granny-gi3sll",
+      "sha256": "28b699a05ffc56da87a61f02fe244363996d2ad120ce82b5c2503dc65faae628",
+      "seconds": 15.29,
+      "expected": "Your turn: play a card from your hand OR attack with a card on your board. Click the highlighted Lobstorian in your hand. Watch it move to your board; Granny will reply.",
+      "approximateTranscript": "Your turn. Play a card from your hand or attack with a card on your board. Click the highlighted-lob story in your hand. Watch it move to your board. Granny will reply."
+    },
+    {
+      "id": "granny-k2k15a",
+      "sha256": "4fffb287aca7e6e08b9b8e9adc80067a27709473ff67b25ae4630a77d72cc699",
+      "seconds": 11.88,
+      "expected": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "approximateTranscript": "Choose information cards with facts your model needs. Choose a model and use the calculator, table, or graph to find a result."
+    },
+    {
+      "id": "granny-mh4ucv",
+      "sha256": "af07204352e97a8906002156b409571455317f9a72396fcf9ef88bfd29bbd0de",
+      "seconds": 18.048,
+      "expected": "Choose a door and Open the gate when all your marks fit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose a door and open the gate when all your marks fit. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "granny-nyakd9",
+      "sha256": "b604f3928a26a1435f3fa1c311f74aac213b8c387853e967442001cdedccb707",
+      "seconds": 5.904,
+      "expected": "Check a model's limits, its proof and the choices behind it.",
+      "approximateTranscript": "Check a model's limits, its proof, and the choices behind it."
+    },
+    {
+      "id": "granny-puc05y",
+      "sha256": "759cfdd497d195e8a8042f6186aed5358c87ff654841d143516b154e3805a013",
+      "seconds": 14.328,
+      "expected": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+      "approximateTranscript": "Example, A says B is a liar. Suppose A is honest. B must be a liar. Suppose A lies. B must be honest."
+    },
+    {
+      "id": "granny-s8w494",
+      "sha256": "f28d8240d4f168f2cc201fcbe791e7d4b058631e2884624e60244800054445ae",
+      "seconds": 10.2,
+      "expected": "Now check the other statements. A possible answer must make every honest statement true and every lie false.",
+      "approximateTranscript": "Now, check the other statements. A possible answer must make every honest statement true and every lie false."
+    },
+    {
+      "id": "granny-vhuy3x",
+      "sha256": "9befa2a8791debffbf300794ff38728cab9b902704b0524b1c7ca2944e8fa74d",
+      "seconds": 19.824,
+      "expected": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "In the reveal, compare your model with what happened, explain which assumption caused any gap, and complete the reflection. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "granny-whk2tb",
+      "sha256": "61da9ba0ed3fedc19a613e0241456ec03bcd215cb1fddce6b68f5baed7ae5149",
+      "seconds": 12.672,
+      "expected": "There is a card minigame at my table too. Puzzles help you collect creatures. Their cards let you challenge the keepers.",
+      "approximateTranscript": "There is a card mini-game at my table too. Puzzles help you collect creatures. Their cards let you challenge the keepers."
+    },
+    {
+      "id": "granny-x2ej8w",
+      "sha256": "bf8bd8364c7ac7545ee11df29f364148dd1a78440885497f471a66e86a2e22bd",
+      "seconds": 13.032,
+      "expected": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "approximateTranscript": "Example, if it always guesses your most common past move, choosing a different move can beat it. Watch whether it's rule changes."
+    },
+    {
+      "id": "granny-zmsggd",
+      "sha256": "572aa248d4347704ced6d0ab5957bd9e57fb24bcc0e26c9c88f4ab3b4875f50d",
+      "seconds": 6.816,
+      "expected": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "approximateTranscript": "Pick a move only after its guess is locked. You win a point when the machine is wrong."
+    },
+    {
+      "id": "judge-19y0i8u",
+      "sha256": "bf66bea711b3d7585280b4a244e14d59878a8d2e19abc014bbdb05bac4dbbfac",
+      "seconds": 5.088,
+      "expected": "None of which is evidence, Mr Fin. Proceed.",
+      "approximateTranscript": "None of which is evidence, Mr. Finn, proceed."
+    },
+    {
+      "id": "judge-1hmdgl0",
+      "sha256": "d7f0eab0a219c1d4b23f07c39c64c9a2318911404ebc76bbb042cb62f453ab84",
+      "seconds": 6.6,
+      "expected": "We judge arguments here. Check each case and explain the flaw you find.",
+      "approximateTranscript": "We judge arguments here. Check each case and explain the flaw you find."
+    },
+    {
+      "id": "judge-1mure3h",
+      "sha256": "bb8b9fa4eb49b405eaf529e4eae1de4443502824e62ffa477062020f36a47ee9",
+      "seconds": 10.608,
+      "expected": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "approximateTranscript": "Use the arrows to read the testimony. Press a statement to hear more. Some evidence appears only after pressing."
+    },
+    {
+      "id": "judge-2zpdl4",
+      "sha256": "da433620ba38671703962dcbf9235bb19472ab4a3b5c38dcab7caa0b0d8bbb9c",
+      "seconds": 13.296,
+      "expected": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "approximateTranscript": "Example, the door stayed locked all day, clashes with a dated record showing it opened at noon. Present that record against that statement."
+    },
+    {
+      "id": "judge-j9feo8",
+      "sha256": "c4742da355c0220c0dd62981600bd5fbcc02f740f59ec8c08bb0bafb5986667a",
+      "seconds": 6.48,
+      "expected": "An argument must survive checks of its reasons, data and proof.",
+      "approximateTranscript": "An argument must survive checks of its reasons, data and proof."
+    },
+    {
+      "id": "judge-nmxw6m",
+      "sha256": "b11b81bf80988c7c815f4ef0b8f0ab4524c060f4bf5a45f4c50dd552b7ce6d49",
+      "seconds": 7.848,
+      "expected": "The Tribunal finds every argument unsound. Not the witnesses. The arguments.",
+      "approximateTranscript": "The tribunal finds every argument unsound, not the witnesses, the arguments."
+    },
+    {
+      "id": "judge-pwwdbf",
+      "sha256": "3d1bda3c41f50add2cb384cd7b2593e063917d7009658fe5f4867ec040536ade",
+      "seconds": 10.272,
+      "expected": "Order! This Tribunal is now in session. Today we try three arguments, and only the arguments.",
+      "approximateTranscript": "Order, this tribunal is now in session. Today we try three arguments, and only the arguments."
+    },
+    {
+      "id": "judge-rogtsj",
+      "sha256": "a8b9e1886673b80b33942fd45dd5bf28cf3627cadb3b0e77f5487e8c090a8343",
+      "seconds": 22.032,
+      "expected": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Use Present on the statement. Choose Evidence, then Take that. Name the flaw and repair the proof if asked. Finish with close the case. How to play is free. The hint button shows its hard cost. Think first, then check your answer."
+    },
+    {
+      "id": "judge-td6k7y",
+      "sha256": "6a3da643127effbed8d46ac72a5d1eb5c5c93d923b8ae45f26267b3f71d6a55a",
+      "seconds": 8.64,
+      "expected": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "approximateTranscript": "We put the argument on trial. Your job is to connect a weak statement to evidence."
+    },
+    {
+      "id": "judge-ud324h",
+      "sha256": "c57222edba397580155fa3c9ce314473b39113a7c0e941311ed5269a2cd46def",
+      "seconds": 8.256,
+      "expected": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "approximateTranscript": "Open the court record. Read what each piece of evidence establishes, not just its picture."
+    },
+    {
+      "id": "mayor-1a2drdw",
+      "sha256": "a68e5299984969d76791e1f9640f319498a3797cf8a3b62ab1d8757bd7e63a84",
+      "seconds": 7.7988125,
+      "expected": "Ah, the stranger. Come in, come in. I have nothing to hide, and here is a list of everything I am not hiding.",
+      "approximateTranscript": "Ah, the stranger. Come in. Come in. I have nothing to hide, and here is a list of everything I am not hiding."
+    },
+    {
+      "id": "mayor-1qwz39t",
+      "sha256": "bef953c848849ca3cfeea9678438957ef10edb1ccd975f3100a91ecab4f7da59",
+      "seconds": 4.42325,
+      "expected": "Also, this statement is false.",
+      "approximateTranscript": "Also, this statement is false."
+    },
+    {
+      "id": "mayor-3h3ilp",
+      "sha256": "b17c1415319e14af243fed524fa0b726883530c95209af90bef6006c6528f682",
+      "seconds": 8.04,
+      "expected": "Citizens of Boolesbury! Nothing is wrong! Everything is excellent! Especially me!",
+      "approximateTranscript": "Citizens of Boolsbury, nothing is wrong, everything is excellent, especially me."
+    },
+    {
+      "id": "mayor-fz6mxa",
+      "sha256": "b8faa3f06677e53d43080b4f7501a22b35a2bd28ac3d599df85a0eae25347b09",
+      "seconds": 6.048,
+      "expected": "No! Your answers fit the rules! I was relying on confident guessing!",
+      "approximateTranscript": "No, your answer's fit the rules. I was relying on confident guessing."
+    },
+    {
+      "id": "mayor-m19sm5",
+      "sha256": "66bf269852087f6f29499fbc3694fda56131fecc5f22ce0597ffbf2a3a7163c6",
+      "seconds": 7.008,
+      "expected": "You there, stranger. Welcome. Do not ask questions. Questions are bad for business.",
+      "approximateTranscript": "You there, stranger. Welcome. Do not ask questions. Questions are bad for business."
+    },
+    {
+      "id": "oracle-12r8irz",
+      "sha256": "e9e589b04b01ecfb11fd4c018e2d32225d15e370d33c2b695c26409753e7b95e",
+      "seconds": 6.5414375,
+      "expected": "The Algorithm calls these charts perfect. Inspect the axes and switches before agreeing.",
+      "approximateTranscript": "The algorithm calls these charts perfect. Inspect the axes and switches before agreeing."
+    },
+    {
+      "id": "oracle-134vzk8",
+      "sha256": "0af170572f0f0a8c47216af04a9b61bec6077dae3534d2b46ffbf33e0d000a9d",
+      "seconds": 8.976,
+      "expected": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "approximateTranscript": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths."
+    },
+    {
+      "id": "oracle-13dztz4",
+      "sha256": "a9335d1c4a132aee8a8f0c10ed4752d7b1b99a7390817c86858a1325c75b2d6b",
+      "seconds": 3.384,
+      "expected": "A chart can use real numbers and still mislead.",
+      "approximateTranscript": "A chart can use real numbers and still mislead."
+    },
+    {
+      "id": "oracle-150oyxe",
+      "sha256": "57c1caa866de41fed0f942c6af74059e776e237ffd99aa1707e3ca96bbbc5989",
+      "seconds": 12.696,
+      "expected": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "approximateTranscript": "The four boxes count right and wrong decisions. Example, refusing help to someone who needs it is a missed need, even if most other decisions are right."
+    },
+    {
+      "id": "oracle-17akf3l",
+      "sha256": "58f23e8652bef6489d81351a7ba48975b8110a2cc441e2909254aa8829b018d3",
+      "seconds": 13.68,
+      "expected": "Example: \"all odd numbers are prime\" fails at 9. Use the number tester to look for a failed case. Testing 3 and 5 alone proves nothing about all odd numbers.",
+      "approximateTranscript": "Example, all odd numbers are prime, fails at 9. Use the number tester to look for a failed case. Testing 3 and 5 alone proves nothing about all odd numbers."
+    },
+    {
+      "id": "oracle-1bkanpq",
+      "sha256": "c6ab959bea16e412caa59664795bcb7bade74a01e8669042e67996adf1fd46e4",
+      "seconds": 10.8,
+      "expected": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "approximateTranscript": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose, now beat it to start the next rounds."
+    },
+    {
+      "id": "oracle-1c65xvk",
+      "sha256": "6a6f01506caafe7d8f872956563a0d3a60d1f8cb77c1d7ab1e824f74a75efa58",
+      "seconds": 7.992,
+      "expected": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "approximateTranscript": "Three acts. Wonder. Investigate. Compare. We need a useful question before a calculation."
+    },
+    {
+      "id": "oracle-1ce60p3",
+      "sha256": "640ef10442acbbbae64a3a65639dd6ce99230c1f66229cf23e551d1f75904b7f",
+      "seconds": 8.304,
+      "expected": "My printer is fast. That does not make every proof right. Inspect a step and test it.",
+      "approximateTranscript": "My printer is fast. That does not make every proof right. Inspect a step and test it."
+    },
+    {
+      "id": "oracle-1gixxzx",
+      "sha256": "c027a57606744a82c2479c1857b6c6ba1e6ba17c5e2cba6614ad42be23649c3a",
+      "seconds": 4.728,
+      "expected": "Choose useful information and a model before calculating.",
+      "approximateTranscript": "Choose useful information and a model before calculating."
+    },
+    {
+      "id": "oracle-1imzen6",
+      "sha256": "8ab76c9c0bcc34e7faecb57d86063ce7399d9b608f03184f6b08a7b8926ec459",
+      "seconds": 9.288,
+      "expected": "Click a numbered step to inspect it. Read the assumptions: a division is allowed only if its divisor is not zero.",
+      "approximateTranscript": "Click a numbered step to inspect it. Read the assumptions. A division is allowed only if its divisor is not zero."
+    },
+    {
+      "id": "oracle-1kkffgu",
+      "sha256": "f6ab0a2b55b2841a6df11d9897c67cfb70e5e57d0616d69b0d4aa1f95eea1eb4",
+      "seconds": 3.912,
+      "expected": "A high score can hide who a model harms.",
+      "approximateTranscript": "A high score can hide who a model harms."
+    },
+    {
+      "id": "oracle-1lhizw1",
+      "sha256": "c5aa08362540c4637778b96d4572f40bd40db414642154a18423b14489785b52",
+      "seconds": 9.192,
+      "expected": "If no test breaks it, still ask why each step works for every allowed case. A valid proof needs a general reason.",
+      "approximateTranscript": "If no test breaks it, still ask why each step works for every allowed case. A valid proof needs a general reason."
+    },
+    {
+      "id": "oracle-1ls74l4",
+      "sha256": "e530182d3368ce4bc112bc63e2746cf6b7a4460a469dd2419cf80c96eba5f6a1",
+      "seconds": 7.008,
+      "expected": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "approximateTranscript": "Pick a move only after its guess is locked. You win a point when the machine is wrong."
+    },
+    {
+      "id": "oracle-1t3u3ef",
+      "sha256": "84e3394ad60f6c69452c15a3185f33b42abab4595d61fd39f7ed945aaf14bcc7",
+      "seconds": 9.432,
+      "expected": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "approximateTranscript": "Follow the stages. Audit. Name the flaw. Then fix. We are checking who gets help and who misses out."
+    },
+    {
+      "id": "oracle-1u5g6bk",
+      "sha256": "98a6875a4bfe1bea08aacfad915d00bcae6a00908a897c4288c43e0fcb8ede4d",
+      "seconds": 8.064,
+      "expected": "Greetings. I produce proofs. Thousands per second. All correct. Probably. Would you like one?",
+      "approximateTranscript": "Greetings. I produce proofs, thousands per second. All correct. Probably. Would you like one?"
+    },
+    {
+      "id": "oracle-1ubm7er",
+      "sha256": "1ace8e50b65438e5795aea7c0b93073e03c87167a3f6cb67514aa4f325f5295e",
+      "seconds": 5.808,
+      "expected": "We want a fair chart. Compare the headline with the actual values.",
+      "approximateTranscript": "We want a fair chart. Compare the headline with the actual values."
+    },
+    {
+      "id": "oracle-1uvj2tt",
+      "sha256": "61b4e8baaf86fe64110ac73865cfbd5dbff7f29bd0d2a7cf26e4772cc5e9e658",
+      "seconds": 6.064625,
+      "expected": "You… checked. Nobody checks. That is… fair.",
+      "approximateTranscript": "You... checked. Nobody checks. That is... fair."
+    },
+    {
+      "id": "oracle-1vyxa92",
+      "sha256": "0b43120263a830f46511569ff48c78ef8a2d9ce6467a78ba5457c1b46149b6e8",
+      "seconds": 10.248,
+      "expected": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "approximateTranscript": "Example, to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its color probably will not help."
+    },
+    {
+      "id": "oracle-1we2fuo",
+      "sha256": "5c970dac1b60e043ef28da2db9fafa233f9bacd3529600acf6254dc2e11002fd",
+      "seconds": 7.56,
+      "expected": "This machine decides who gets help. Check the mistakes and who pays for them.",
+      "approximateTranscript": "This machine decides who gets help. Check the mistakes and who pays for them."
+    },
+    {
+      "id": "oracle-42iyrd",
+      "sha256": "01bac4606881994eb0aa85778ac4cf346258f2c0b41f40ea05addf76b8ec20ef",
+      "seconds": 4.656,
+      "expected": "A prediction uses past patterns and can still be wrong.",
+      "approximateTranscript": "A prediction uses past patterns and can still be wrong."
+    },
+    {
+      "id": "oracle-6lv7sb",
+      "sha256": "e8251f157fd187b320c84185533ceed7f73aa28204a7699b8be35502cccff562",
+      "seconds": 7.632,
+      "expected": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "approximateTranscript": "Read each switch before changing it. Not every switch is a trick. Keep the honest controls honest."
+    },
+    {
+      "id": "oracle-7tbi31",
+      "sha256": "13b01f02c21785fd3e7e6a52129311691043f5d29a63a8551c94bef6f03a5a5c",
+      "seconds": 6.336,
+      "expected": "The machine prints a proof. Our task is to check the reasoning, not trust its confident voice.",
+      "approximateTranscript": "The machine prints a proof. Our task is to check the reasoning, not trust its confident voice."
+    },
+    {
+      "id": "oracle-830c58",
+      "sha256": "f2903eda9b850268a98ca55bdf03d9c2667cd794152443521f6b7c99c820e58f",
+      "seconds": 7.32,
+      "expected": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "approximateTranscript": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals."
+    },
+    {
+      "id": "oracle-8c1sc1",
+      "sha256": "6f0dc71bb2d3d4dcab7ade82f86c90e8688289cd3c40c6eaa795b0a059fadab5",
+      "seconds": 6.936,
+      "expected": "This machine guesses your next move. Read its counting table and test its guess.",
+      "approximateTranscript": "This machine guesses your next move. Read its counting table and test its guess."
+    },
+    {
+      "id": "oracle-dw8cnm",
+      "sha256": "35720a046f166b354e6038e58093105e5cefea4c22d57c36b4aa30bfa21622ea",
+      "seconds": 9.36,
+      "expected": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "approximateTranscript": "Choose information cards with facts your model needs. Choose a model and use the calculator, table, or graph to find a result."
+    },
+    {
+      "id": "oracle-eadjw5",
+      "sha256": "3315ef9e76f6153f4ae58fde09cdbf757b9c3e5bad43ba111264de9665cf823f",
+      "seconds": 17.904,
+      "expected": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free, the hint button shows its hard cost. Think first, then check your answer."
+    },
+    {
+      "id": "oracle-ewlmpy",
+      "sha256": "97a00b3a20c1a54c9d524f17cbbd3845e0f67812a0435500d60266436f3ac8a8",
+      "seconds": 5.424,
+      "expected": "A machine's proof needs its assumptions and every step checked.",
+      "approximateTranscript": "A machine's proof needs its assumptions and every step checked."
+    },
+    {
+      "id": "oracle-fe57zv",
+      "sha256": "4b44e9e809272f4f0bd655bbbe830440716a49e2f852be4879b7d119efc4e090",
+      "seconds": 8.592,
+      "expected": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "approximateTranscript": "Run the Home Visit Audit. Click Cards to see their scores. Compare the stamps with the needs the audit reveals."
+    },
+    {
+      "id": "oracle-hdm564",
+      "sha256": "7fbfa4f252e127ba4ad261b2e828a51d9d9340531106a6930fc4c0b1a6131656",
+      "seconds": 18.984,
+      "expected": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "oracle-hmbdv0",
+      "sha256": "571f3b00c66139e1ff4f355a9fa371671d8a8127bfe9a4e487f99811d8e24a5c",
+      "seconds": 9.768,
+      "expected": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "approximateTranscript": "Example, if it always guesses your most common past move, choosing a different move can beat it. Watch whether it's rule changes."
+    },
+    {
+      "id": "oracle-j0el8h",
+      "sha256": "6a64872735e4b88570352bbe10ca17eb8492f9c2aea41cfce739dd7c6a4aa5b0",
+      "seconds": 12.928875,
+      "expected": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "approximateTranscript": "Move the axis handles. Example, bars of 95 and 100 look very different if the axis starts at 90. The increase is only 5."
+    },
+    {
+      "id": "oracle-j2g2iy",
+      "sha256": "683a037e25e87491ff064fc352d3289710c96c147d7058b06fbec3df70c53c60",
+      "seconds": 7.032,
+      "expected": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "approximateTranscript": "Read the target. We are testing a machine that uses past patterns to guess your next move."
+    },
+    {
+      "id": "oracle-jgenv6",
+      "sha256": "72c0d2785852c39a01c5749b2d3de759741f1389259f8f963e4251c509191048",
+      "seconds": 16.464,
+      "expected": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "oracle-jlf4vx",
+      "sha256": "c6d609719b9ab54d5b48589a6361a8d6f7dfbba763129ed87ebe6bbd0496f570",
+      "seconds": 8.3411875,
+      "expected": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "approximateTranscript": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it."
+    },
+    {
+      "id": "oracle-keiixe",
+      "sha256": "d765ff515f8a002e742cbb3e97161b30820841cd2be8e24396905c84df100d8f",
+      "seconds": 7.56,
+      "expected": "The workshop has a question for you. Make a guess, ask for facts, then build a model.",
+      "approximateTranscript": "The workshop has a question for you. Make a guess. Ask for facts, then build a model."
+    },
+    {
+      "id": "oracle-rcnxaq",
+      "sha256": "faf6bf652138ba7711612f8e1e2587dd0c025eb32916020a1f7cb583b8a88117",
+      "seconds": 18.504,
+      "expected": "Check who your fix changes, its cost, and the mistakes left. Choose the value your fix puts first if asked, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Check who your fix changes. It's cost, and the mistakes left. Choose the value your fix puts first, if asked. Then, hand in the audit. How to play is free. The hint button shows its hard cost. Think first, then check your answer."
+    },
+    {
+      "id": "oracle-snsa4f",
+      "sha256": "be254c42466805919d33d50f27b1423129272e82558e543d1c3bc407cf4a8a80",
+      "seconds": 20.112,
+      "expected": "Choose the broken step and flaw, or say the proof holds if every step is justified. Finish the task and read the explanation. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose the broken step and flaw, or say the proof holds if every step is justified. Finish the task and read the explanation. How to play is free. The hint button shows its hard cost. Think first, then check your answer."
+    },
+    {
+      "id": "pip-13aysym",
+      "sha256": "3e7484ef8014b4f8b97d6403c0e58ae85bb3e01c211e74c7db83b4446ed17f94",
+      "seconds": 7.272,
+      "expected": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+      "approximateTranscript": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose can't tell."
+    },
+    {
+      "id": "pip-1axdefd",
+      "sha256": "1601d4a2a526247243d8986edc60644d571c3d18aede0784eaa16826f1f57251",
+      "seconds": 8.496,
+      "expected": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "approximateTranscript": "Choose valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument."
+    },
+    {
+      "id": "pip-1d5hhtr",
+      "sha256": "e1138317185955caf1de1a3cc889414aed6b7d1dd2b0e07a8a7cbc685c2fdb73",
+      "seconds": 12.552,
+      "expected": "Choose every answer, then Give my testimony. Read feedback before changing a claim. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose every answer, then give my testimony. Read feedback before changing a claim. How to play as free? The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "pip-1f6zgr6",
+      "sha256": "46c6464a3b8737383e77a394d35b9f85ad1a56bbbfaa99ab2c9fadb0684ac105",
+      "seconds": 6.264,
+      "expected": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "approximateTranscript": "Read each switch before changing it. Not every switch is a trick. Keep the honest controls honest."
+    },
+    {
+      "id": "pip-1ghtktn",
+      "sha256": "029b94c10fd6d5b66230b12e7798f15ac7c8c54f4efb558fa6ab9036fddae689",
+      "seconds": 9.888,
+      "expected": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "approximateTranscript": "Move the axis handles. Example, bars of 95 and 100 look very different if the axis starts at 90. The increase is only 5."
+    },
+    {
+      "id": "pip-1huuqpz",
+      "sha256": "bf5b794cdb03c0aa2b8236056307d99d9e6a1f5ff30dc5e90c44547813a877ea",
+      "seconds": 13.512,
+      "expected": "Judge real-world truth separately if asked, then Seal the verdict. The diagram helps you think; read its feedback too. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Judge real-world truth separately, if asked, then seal the verdict. The diagram helps you think, read its feedback, too. How to play is free. The hint button shows its hard cost. Think first, then check your answer."
+    },
+    {
+      "id": "pip-1jl740m",
+      "sha256": "3c9d045446b64dbe19828121b21fe7474747b10a618645dafb2165062ac4a0b2",
+      "seconds": 9.216,
+      "expected": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "approximateTranscript": "Choose Shade and click a region, or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear, let's you restart."
+    },
+    {
+      "id": "pip-1nm3rav",
+      "sha256": "21dec6611c1fa920dbf69110cde6aa81ddc4323c785d4fc7ca5f33c00c757615",
+      "seconds": 14.76,
+      "expected": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free, the hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "pip-1nqw0qt",
+      "sha256": "82a8a2debc708a34f3a329c78a575282b3851755d5626836efaab116b293f499",
+      "seconds": 5.184,
+      "expected": "We want a fair chart. Compare the headline with the actual values.",
+      "approximateTranscript": "We want a fair chart. Compare the headline with the actual values."
+    },
+    {
+      "id": "pip-1pfjydh",
+      "sha256": "403943bcfb2937503cb61885ff3e7287746faeac5133bd8eb37a48f0db6d8b50",
+      "seconds": 16.272,
+      "expected": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Use Present on the statement. Choose Evidence, then take that. Name the flaw and repair the proof, if asked. Finish with Close the Case. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "pip-1pvpq6o",
+      "sha256": "b73e8bcef002eb4ad0b1cd70a243ec082f6f98eceea0d2a316a041e34bccccca",
+      "seconds": 6.552,
+      "expected": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "approximateTranscript": "Read the scene before judging any claim. We need evidence. Not a story your mind fills in."
+    },
+    {
+      "id": "pip-1y8tz01",
+      "sha256": "766a242579acbbbb5637bda6f2783893346fc215604f60c03d252332732b60e7",
+      "seconds": 9.36,
+      "expected": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "approximateTranscript": "In that example, a blue lamp is on, is Camp Tell. There is no evidence either way. Use these three buttons for each claim."
+    },
+    {
+      "id": "pip-gl7dhe",
+      "sha256": "7212d695387b63754a3ec02789b3e3ffbdde99bcaf4bff178ea3ec928662a2a7",
+      "seconds": 6.888,
+      "expected": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "approximateTranscript": "Use the arrows to read the testimony. Press a statement to hear more. Some evidence appears only after pressing."
+    },
+    {
+      "id": "pip-impfz4",
+      "sha256": "3dc49ba4014a8a4ea18f071da62b8af30a4a4f00eb941ded2ee50a83fc7b2745",
+      "seconds": 9,
+      "expected": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "approximateTranscript": "Example, the door state locked all day clashes with a dated record showing it opened at noon. Present that record against that statement."
+    },
+    {
+      "id": "pip-j2l1gv",
+      "sha256": "b13d8be91ee01021d0f8527d0ac72192c748366c555536da4ad1eb2d3a751deb",
+      "seconds": 6.576,
+      "expected": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "approximateTranscript": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it."
+    },
+    {
+      "id": "pip-nqvev8",
+      "sha256": "74aeb2bb00f6447da8e513b74a2a5feca24c09c8848451904d24f9442847b596",
+      "seconds": 5.76,
+      "expected": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "approximateTranscript": "Open the court record. Read what each piece of evidence establishes, not just its picture."
+    },
+    {
+      "id": "pip-ukx86g",
+      "sha256": "92adec3c0ccd164940cd6ac67faf4f325d637891611a73641adb2f909a19c3ec",
+      "seconds": 5.304,
+      "expected": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "approximateTranscript": "We put the argument on trial, your job is to connect a weak statement to evidence."
+    },
+    {
+      "id": "pip-wuc8va",
+      "sha256": "a9fa481d74b4da54414bb1f182c53e1200aa6144c98ab2c952c3ac6c679350d2",
+      "seconds": 9.288,
+      "expected": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+      "approximateTranscript": "example, not the scene. A red lamp is on. The red lamp is on is true. The red lamp is off is false."
+    },
+    {
+      "id": "postmistress-7nij39",
+      "sha256": "d8ab4cbc171498a67630a08813d8da5cd12cc32777baa608dfdb95710fff9030",
+      "seconds": 7.608,
+      "expected": "Cemented means already forced by your story. Loose means still open; it is not automatically wrong.",
+      "approximateTranscript": "Cemented means already forced by your story. Loose means still open. It is not automatically wrong."
+    },
+    {
+      "id": "postmistress-9drvtu",
+      "sha256": "5e19b5819d4d49afba5d7f02be2ebbb2344a740c3825ea1f8f0dfde7312f8615",
+      "seconds": 13.896,
+      "expected": "Follow what the blocks force, rather than choose whatever sounds nice. Finish every question without a collapse. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Follow with the block's force, rather than choose whatever sounds nice. Finish every question without a collapse. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "schoolteacher-9g00c2",
+      "sha256": "27a6a1cecc9fedf953872e1f21426d90435a0e6edaee3f0e13e8fa744a61aa69",
+      "seconds": 13.104,
+      "expected": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+      "approximateTranscript": "Click a switch to change true false. Example true and false gives false. True or false gives true not true gives false."
+    },
+    {
+      "id": "schoolteacher-eg7d1d",
+      "sha256": "d0522cb6028fc9180fad259c4833588d878c4c6549984cacc8ea103590d0fe59",
+      "seconds": 13.824,
+      "expected": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+      "approximateTranscript": "Wire mode. Click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row."
+    },
+    {
+      "id": "schoolteacher-ltupck",
+      "sha256": "cc7e5e77ecf4a1a3ff71128c6e1780c8d22c1896417fef05ba03386ac592eb9e",
+      "seconds": 6.888,
+      "expected": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+      "approximateTranscript": "Read which task this switchboard asks. We are checking what follows from chosen inputs."
+    },
+    {
+      "id": "sequins-1edeylh",
+      "sha256": "ec4b2d32b9a3ba2d871bd20da2b16fe6d4651f3353aa05a8f77ef140fe896785",
+      "seconds": 10.656,
+      "expected": "One-stroke mode: click connected points along edges. Use every edge once. A point with 1, 3 or 5 edges is called odd.",
+      "approximateTranscript": "One stroke mode, click connected points along edges. Use every edge once. A point with one, three or five edges is called odd."
+    },
+    {
+      "id": "sequins-82uxe9",
+      "sha256": "b871e6d0bc32d97ea4ab73b685310c61ecbc451884bb21e71021afefe5be98bf",
+      "seconds": 10.128,
+      "expected": "Example: a T shape has four odd points. A single stroke can have only two ends, so that shape cannot be drawn in one stroke.",
+      "approximateTranscript": "Example, a T-shape has four odd points. A single stroke can have only two ends, so that shape cannot be drawn in one stroke."
+    },
+    {
+      "id": "sequins-ph00gd",
+      "sha256": "883f39701c48809c699353a767756c9f0834fff042fb02b8bc5e0e42f0a7ed80",
+      "seconds": 9.048,
+      "expected": "Dots mode: click the turning points of connected straight lines. Go outside the dots if it helps; stay within the line limit.",
+      "approximateTranscript": "Dot's mode. Click the turning points of connected straight lines. Go outside the dots if it helps. Stay within the line limit."
+    },
+    {
+      "id": "sweep-1m4j7cb",
+      "sha256": "127d10272e46d21ee61adbe27f111e8b30ce1e73c031010e79ad60046c3ad3b6",
+      "seconds": 8.52,
+      "expected": "Example: all runners wear boots; your story says you are a runner. \"I wear no boots\" would contradict that story.",
+      "approximateTranscript": "Example, all runners wear boots. Your story says you are a runner. I wear no boots would contradict that story."
+    },
+    {
+      "id": "syllo-1c9si01",
+      "sha256": "82d89de0a115b373a9e37b235447b05e76c0f3cee8d5a65c430623bedb2d222f",
+      "seconds": 14.232,
+      "expected": "Judge real-world truth separately if asked, then Seal the verdict. The diagram helps you think; read its feedback too. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "approximateTranscript": "Judge real world truth separately, if asked, then seal the verdict. The diagram helps you think, read its feedback too. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+    },
+    {
+      "id": "syllo-1cc0ac6",
+      "sha256": "9caa1d82fbe8eebc8671eaf2e3140e8454815c8b58609ba25adc9f6bf144789c",
+      "seconds": 8.616,
+      "expected": "Dots mode: click the turning points of connected straight lines. Go outside the dots if it helps; stay within the line limit.",
+      "approximateTranscript": "Dot-Smold, click the turning points of connected straight lines. Go outside the dots if it helps. Stay within the line limit."
+    },
+    {
+      "id": "syllo-1gzdpms",
+      "sha256": "39560e0e611ec8d6d41779e2061f1829f8da59c3dffb18317b4ff5e69c00ae32",
+      "seconds": 6.48,
+      "expected": "Check the slate first. We may need a drawing, a one-stroke route, or a proof that no route works.",
+      "approximateTranscript": "Check the slate first. We may need a drawing, a one stroke route, or a proof that no route works."
+    },
+    {
+      "id": "syllo-1k0s13d",
+      "sha256": "b46baedc2162bbe40cda2248c789ee37b260b2bc0462ca340db1ebc2ae6c01d8",
+      "seconds": 4.824,
+      "expected": "A conclusion can follow from the rules without being true in real life.",
+      "approximateTranscript": "A conclusion can follow from the rules without being true in real life."
+    },
+    {
+      "id": "syllo-1suh8px",
+      "sha256": "14db8d02cfa806c52e595fceb4e06721550f8a4e5a9f30d9ab182c403541ae63",
+      "seconds": 9.264,
+      "expected": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "approximateTranscript": "Shade means no things here. Example, all ducks are birds shades the ducks only region. Outside birds, it is not at an X."
+    },
+    {
+      "id": "syllo-rlc2wk",
+      "sha256": "493b53477cbaa0de34f32a4071831c957e37e6cbd41737a67872c13e04d9ea11",
+      "seconds": 3.696,
+      "expected": "You can prove that a drawing is impossible, as well as draw one.",
+      "approximateTranscript": "You can prove that a drawing is impossible as well as draw one."
+    },
+    {
+      "id": "syllo-t8bw7f",
+      "sha256": "11f793fcc30f0261fabf4d46dd341ee0ee3d28cbad06f56c36642e354b91aaae",
+      "seconds": 6.264,
+      "expected": "The bridge demands a drawing. Check its rule: draw the route or show why no route works.",
+      "approximateTranscript": "The bridge demands a drawing. Check its rule. Draw the route or show why no route works."
+    },
+    {
+      "id": "syllo-v6apg7",
+      "sha256": "200e9826a64b2afe67ad5f7efb3903ecfb4bc272b952d42443f9677ae28f4e0e",
+      "seconds": 5.448,
+      "expected": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "approximateTranscript": "We judge whether the conclusion must follow from these facts. Read the scrolls first."
+    }
+  ]
+}

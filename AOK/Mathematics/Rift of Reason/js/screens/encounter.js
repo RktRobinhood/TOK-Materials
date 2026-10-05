@@ -78,7 +78,7 @@
                 pausePuzzle();
                 const { def } = current();
                 const steps = def.tutorial || [{ text: def.blurb }, { text: 'Use the controls to check your answer. Hints cost hearts.' }];
-                tutorial = Rift.Tutorial.play(puzzleSlot, steps, hostId, { el, container: puzzleSlot, handle, onClose: resumePuzzle });
+                tutorial = Rift.Tutorial.play(puzzleSlot, steps, hostId, { el, container: puzzleSlot, handle, puzzleId:def.id, onClose: resumePuzzle });
             }
             function pausePuzzle() { if (handle && handle.pause) handle.pause(); }
             function resumePuzzle() { if (!destroyed && phase === 'play' && handle && handle.resume) handle.resume(); }

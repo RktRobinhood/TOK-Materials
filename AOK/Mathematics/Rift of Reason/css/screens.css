@@ -79,10 +79,36 @@
 .enc-controls { flex-wrap: wrap; }
 .enc-goal { padding: 8px 12px; border-left: 4px solid var(--rift); }
 #overlay > .tutorial-layer { position: absolute; inset: 0; z-index: 80; background: rgba(7, 6, 12, 0.6); pointer-events: none; }
-.tutorial-bubble { position: absolute; left: 16px; bottom: 16px; width: min(340px, calc(100% - 32px)); max-height: 45vh; overflow: auto; padding: 14px; pointer-events: auto; }
+.tutorial-bubble { position: absolute; right: 16px; bottom: 16px; width: min(410px, calc(100% - 32px)); max-height: calc(100% - 32px); overflow: auto; padding: 14px; pointer-events: auto; }
 .tutorial-bubble p { margin: 10px 0; }
 .tutorial-face { width: 44px; height: 48px; object-fit: contain; }
 .tutorial-highlight { position: relative; z-index: 81; outline: 4px solid var(--gold); outline-offset: -4px; background-color: var(--panel); }
+.tour-practice { border:1px solid var(--gold); border-radius:10px; padding:10px; margin:10px 0; }
+.tour-practice h4, .tour-practice p { margin:6px 0; }
+.tour-action { outline:2px solid var(--gold); outline-offset:2px; }
+.tour-action::before { content:'↓ '; }
+.tour-feedback { color:var(--gold); }
+.tour-scene { white-space:pre-line; border-radius:8px; background:var(--panel); border:1px solid var(--line); padding:12px; font-weight:bold; animation:tour-reveal .5s ease-out; }
+.tour-numbers { text-align:center; letter-spacing:.05em; font-size:1.15em; }
+.tour-blocks { text-align:center; line-height:2; background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(242,182,50,.15) 29px,rgba(242,182,50,.15) 32px); }
+.tour-venn { height:125px; position:relative; margin:auto; width:240px; }
+.tour-circle { position:absolute; border:2px solid var(--rift); border-radius:50%; width:140px; height:116px; padding:12px; }
+.tour-circle.birds { left:90px; text-align:right; border-color:var(--gold); }
+.tour-shade { position:absolute; left:20px; top:48px; background:repeating-linear-gradient(45deg,#5b4e72,#5b4e72 3px,#252033 3px,#252033 6px); padding:8px; border-radius:50%; animation:tour-reveal .5s ease-out; }
+.tour-x { position:absolute; left:110px; top:42px; font-size:32px; color:var(--gold); animation:tour-reveal .5s ease-out; }
+.tour-bars { display:flex; gap:20px; align-items:end; height:140px; padding:10px; border-bottom:2px solid var(--parchment); }
+.tour-bars span { align-self:start; max-width:90px; }
+.tour-bar { width:55px; background:var(--rift); color:var(--ink); text-align:center; transform-origin:bottom; animation:tour-grow .6s ease-out; }
+.tour-path { display:flex; justify-content:center; gap:20px; padding:20px; }
+.tour-path span { border-bottom:4px solid var(--line); padding:12px; }
+.tour-path .tour-lit { border-color:var(--gold); animation:tour-reveal .5s ease-out; }
+.tour-tank { position:relative; height:120px; border:3px solid var(--parchment); overflow:hidden; padding:12px; }
+.tour-water { position:absolute; bottom:0; left:0; right:0; background:rgba(63,224,208,.3); transform-origin:bottom; animation:tour-grow .7s ease-out; }
+.tour-tank strong { position:relative; }
+@keyframes tour-reveal { from { opacity:.2; transform:translateY(12px); } }
+@keyframes tour-grow { from { transform:scaleY(0); } }
+body.calm-motion .tour-practice * { animation:none; }
+@media(prefers-reduced-motion:reduce) { .tour-practice * { animation:none!important; } }
 .enc-feedback { padding: 10px 12px; border-radius: 10px; min-height: 1em; }
 .enc-feedback:empty { display: none; }
 .enc-feedback.good { background: rgba(47, 191, 113, 0.18); border: 2px solid var(--perception); }
@@ -203,3 +229,14 @@
 .catch-cell.blocked { background: #4b3c24; opacity: 1; }
 .catch-cell:focus-visible, .catch-target:focus-visible { outline: 3px solid var(--rift); }
 .catch-odds { color: var(--gold); font-weight: bold; }
+.tour-diagram, .tour-stack { display:flex; flex-direction:column; gap:6px; }
+.tour-tile { border:1px solid var(--line); padding:8px; border-radius:7px; background:var(--panel); animation:tour-reveal .45s ease-out; }
+.tour-stack .tour-tile { border:2px solid var(--gold); text-align:center; margin:0 12px; }
+.tour-paper { background:#e7d9b7; color:#21182d; }
+.tour-on { border:2px solid var(--rift); box-shadow:inset 0 0 16px rgba(63,224,208,.18); }
+.tour-circuit { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.tour-circuit p { grid-column:1/-1; }
+.tour-lamp { width:110px; min-height:54px; padding:12px; border-radius:28px; text-align:center; border:2px solid var(--parchment); }
+.tour-lamp.red { background:#a92639; box-shadow:0 0 10px #e8384f; }
+.tour-lamp.unknown { background:#26315c; }
+.tour-matrix { display:grid; grid-template-columns:1fr 1fr; gap:4px; }

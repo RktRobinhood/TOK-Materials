@@ -61,6 +61,7 @@
 <script src="data/script/lesson4.js"></script>
 <script src="js/ui/ui.js"></script>
 <script src="js/ui/tutorial.js"></script>
+<script src="js/ui/tutorial-examples.js"></script>
 <script src="js/puzzles/registry.js"></script>
 <script src="js/puzzles/liars-gate.js"></script>
 <script src="js/puzzles/rule-hunter.js"></script>
@@ -119,7 +120,7 @@
         if (handle && handle.pause) handle.pause();
         help = R.Tutorial.rules(def, 'granny', () => {
             if (handle && handle.pause) handle.pause();
-            tour = R.Tutorial.play(document.getElementById('stage'), def.tutorial, 'granny', { onClose: resume });
+            tour = R.Tutorial.play(document.getElementById('stage'), def.tutorial, 'granny', { puzzleId:def.id, onClose: resume });
         }, resume);
     };
     document.getElementById('hint').onclick = () => { const h = def.hints(data); log('hint: ' + (h[hintIx++] || '(no more)')); };

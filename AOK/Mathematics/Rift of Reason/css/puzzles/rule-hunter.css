@@ -11,7 +11,12 @@
         radial-gradient(ellipse at 80% 90%, rgba(63, 224, 208, 0.06), transparent 50%);
     overflow: hidden;
 }
-.rh.rh-rules { grid-template-columns: minmax(150px, 210px) minmax(0, 1fr) minmax(210px, 280px); }
+.rh.rh-rules { grid-template-columns: minmax(150px, 210px) minmax(0, 1fr) minmax(210px, 280px); grid-template-rows: minmax(0, 1fr) minmax(150px, .6fr); }
+.rh-rules .rh-portrait { max-height: 170px; width: auto; max-width: 100%; }
+.rh-reference { grid-column: 1 / -1; padding: 10px 14px; min-height: 0; overflow: auto; }
+.rh-reference h3, .rh-reference p { margin: 0 0 6px; }
+.rh-reference-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; list-style: none; margin: 0; padding: 0; }
+.rh-reference-list li { padding: 6px 10px; font-size: .88em; }
 .rh.rh-pattern { grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); }
 
 /* ---- gatekeeper ---- */
@@ -259,6 +264,8 @@
 
 @media (max-width: 900px) {
     .rh.rh-rules, .rh.rh-pattern { grid-template-columns: minmax(0, 1fr); overflow: auto; }
+    .rh.rh-rules { grid-template-rows: auto auto auto minmax(150px, auto); }
+    .rh-reference-list { grid-template-columns: minmax(0, 1fr); }
     .rh-keeper { flex-direction: row; justify-content: center; }
     .rh-portrait { width: 90px; }
     .rh-bubble { margin: 0; }

@@ -49,7 +49,7 @@ button { font: inherit; }
 }
 
 .screen { position: absolute; inset: 0; overflow: hidden; }
-#overlay { position: absolute; inset: 0; pointer-events: none; z-index: 50; }
+#overlay { position: absolute; inset: 0; pointer-events: none; z-index: 100; }
 #overlay > * { pointer-events: auto; }
 
 /* ---- buttons and panels ---- */

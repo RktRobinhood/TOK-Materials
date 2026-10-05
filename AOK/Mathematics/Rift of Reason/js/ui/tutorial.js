@@ -16,6 +16,7 @@
         let marked = null;
         let closed = false;
         const demonstrated = new Set();
+        const practised = new Set();
         const previousFocus = root.document.activeElement;
         const speaker = Rift.data.speakers[hostId] ? hostId : 'narrator';
         const host = Rift.data.speakers[speaker];
@@ -49,16 +50,23 @@
             }
             if (step.demo && !demonstrated.has(index)) { step.demo(api); demonstrated.add(index); }
             bubble.innerHTML = '';
+            const next=el('button.btn.primary',{text:index===steps.length-1?'Ready':'Next',onclick(){if(index===steps.length-1)close();else{index++;render();}}});
+            const exampleStep=Math.min(2,steps.length-1);
+            const practice=api&&api.puzzleId&&index===exampleStep&&Rift.TutorialExamples?
+                Rift.TutorialExamples.create(api.puzzleId,()=>{if(closed)return;practised.add(index);next.disabled=false;next.focus();}):null;
+            if(practice)next.disabled=!practised.has(index);
             bubble.append(
                 el('div.row', null, [Rift.Assets.img(host.art, { className: 'tutorial-face', label: host.name }), el('strong', { text: host.name + ' · ' + (step.progress || ((index + 1) + '/' + steps.length)) })]),
                 el('p', { text: step.text, 'aria-live': 'polite' }),
+                ...(practice?[practice]:[]),
                 el('div.row.wrap', null, [
                     el('button.btn.small', { text: 'Back', disabled: index === 0, onclick() { index -= 1; render(); } }),
                     el('button.btn.small', { text: 'Skip', onclick: close }),
-                    el('button.btn.primary', { text: index === steps.length - 1 ? 'Ready' : 'Next', onclick() { if (index === steps.length - 1) close(); else { index += 1; render(); } } }),
+                    next,
                 ]),
             );
-            bubble.querySelector('.primary').focus();
+            const focus=practice?practice.querySelector('.tour-action'):next;
+            if(focus)focus.focus();
         }
         root.document.addEventListener('keydown', keydown);
         render();

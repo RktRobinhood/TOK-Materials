@@ -39,9 +39,10 @@
 
     S['prologue.fair'] = [
         { s: 'granny', e: 'happy', t: 'Three stalls, three games. Every game is about thinking, which is the best kind of game.' },
-        { s: 'granny', t: 'First, learn the card game here. Win Syllo’s safe challenge and two stalls. Then visit the Crack in the Sky.' },
-        { s: 'avatar', t: 'What kind of something?' },
-        { s: 'granny', e: 'surprised', t: 'The kind that is hard to explain. Off you go!' },
+        { s: 'granny', t: 'There is a card minigame at my table too. Puzzles help you collect creatures. Their cards let you challenge the keepers.' },
+        { s: 'granny', t: 'I will guide your first moves with loaned cards. Nothing is at risk. Win Syllo’s safe challenge and two stalls, then visit the Crack in the Sky.' },
+        { s: 'avatar', t: 'And the other keepers?' },
+        { s: 'granny', e: 'happy', t: 'Beat their logic puzzle once. When you come back, you can challenge them at cards too. Off you go!' },
     ];
 
     S['prologue.pattern'] = [

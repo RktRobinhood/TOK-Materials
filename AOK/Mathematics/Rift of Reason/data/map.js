@@ -221,6 +221,7 @@
             },
             'b-garden': {
                 trainer: 'baker',
+                challengeAfter: 'b-bakery',
                 name: 'The Walled Garden', chapter: 'ch2', map: 'ch2', type: 'rest', x: 1388, y: 430,
                 scene: 'scene/village-square', script: 'ch2.garden', links: ['b-school', 'b-east-bridge'],
                 teaser: 'A greenhouse, a bench, and quiet. A safe place to rest.',
@@ -295,6 +296,7 @@
             },
             't-cafe': {
                 trainer: 'pip',
+                challengeAfter: 't-newsstand',
                 name: 'The Café', chapter: 'ch3', map: 'ch3', type: 'rest', x: 378, y: 397,
                 scene: 'scene/neon-plaza', script: 'ch3.cafe', links: ['t-newsstand', 't-west-bridge', 't-library'],
                 teaser: 'Warm drinks, no screens. A safe place to rest.',

@@ -7,24 +7,30 @@ Work stays in `AOK/Mathematics/Rift of Reason` on main, as the user requested. D
 - #13: local official Black Box/Mines, optional nodes, reduced honour rewards; commit `0a6461f`, successful Pages run 37260821100.
 - #31: local anonymous teacher reports/projector maps; commit `4caf077`, successful Pages run 37261161285.
 - #30: three clue trails, printable/displayable kit, journal and growing strategy notes; see `classroom-clues-2026-10-05.md` for verification.
-- Full suite now 334 tests. Sharp developer tooling is pinned to patched 0.35.5; dependency audit is clear. This does not change browser runtime dependencies or require remaking art.
+- #38/#42 overhaul: explicit minigame introduction, real animated card practice, puzzle-first challenge prerequisites, fourteen independent guided puzzle examples, permanent Rule Hunter candidate panel and accessible tutorial Ready. See `onboarding-2026-10-05.md` for release evidence and limits.
+- Voice repairs: eighteen spoken-pause clips replaced, 117 settled lines recorded, six cross-clip cuts repaired. The generator now puts pause/acting directions only in metadata. Current evidence is in `voice-repairs-2026-10-05.json`; it is approximate local transcription, not acting approval.
+- Full suite now 340 passing tests. Sharp developer tooling is pinned to patched 0.35.5; dependency audit is clear. This does not change browser runtime dependencies or require remaking art.
 
 ## Voice recording #43 — first next action after reset
 
-Read `voice-recording-2026-10-04.md` and `tools/README.md`. Free local plan confirms **216 missing lines / 40 batches**, with **277/493** existing current recordings. Cast models/styles and dramatic per-line moods are settled. New bonus, teacher and clue text is silent UI/journal text; it does not add pending narrated dialogue.
+Read `onboarding-2026-10-05.md` and `tools/README.md`; `voice-recording-2026-10-04.md` is historical evidence. Free local plan confirms **102 missing lines / 32 default batches**, with **392/494** current recordings. Cast models/styles and dramatic per-line moods are settled. New bonus, teacher and clue text is silent UI/journal text; it does not add pending narrated dialogue.
 
-The ignored ledger remains at ten actual attempts per pinned model for Pacific day 2026-10-04. Next reset: **2026-10-05 09:00 Copenhagen**. Do not manually clear the ledger, change a character's model to bypass it or run concurrent recording/audition processes. No recurring job was created.
+The ignored ledger remains at ten actual attempts per pinned model for Pacific day 2026-10-05. Next reset: **2026-10-06 09:00 Copenhagen**. Do not manually clear the ledger, change a character's model to bypass it or run concurrent recording/audition processes. No recurring job was created.
 
 Tools dependencies are now installed locally (ignored `tools/node_modules`). From the game folder, after the reset:
 
 ```powershell
 node tools/voices.mjs --plan
-node tools/voices.mjs --render --max-requests 20
+node tools/voices.mjs --render --id corvina-qajn6c,corvina-167bxzy,corvina-xcu7a2,lobstorian-1lzms70,tremendoodle-1yzbgs9 --batch 3 --max-requests 3
 ```
+
+These are the five remaining lesson-one story lines. Check their boundaries, then use `--plan` and a bounded `--render --batch 8 --max-requests 17` for the remaining allowance; the common ledger still stops each model at its own cap. Larger default batches use fewer requests but create more cut risk. Tutorial and card-school lines are already recorded; missing creature quips and later-chapter scripts use browser speech and visible text.
 
 The common TTS boundary enforces ten attempts/model/Pacific day, including failures. Failed requests consume allowance. Commit MP3s and regenerated manifest only after decoding and bounded transcript/boundary checks. Wider text-model audit previously hit HTTP 503/429; it must stop honestly on errors. Do not claim acting/cut coverage from a small sample. Preserve backup copies outside the repo for repairs.
 
-Keep #43 and its epic #34 open until current spoken lines are recorded and checked. #1 remains a tracker until its stretch child is complete.
+Keep #43 and its epic #34 open until current spoken lines are recorded and checked. #1 remains a tracker until its stretch child is complete. #38/#42 can close after their verified release; their remaining voice work belongs to #43.
+
+For wider boundary review, the temporary local ASR workspace is `C:/Users/BlackBox/AppData/Local/Temp/rift-local-speech/`. `audit.mjs` takes the absolute voice directory and a clip limit and keeps a resumable `audit.json`; delete an entry before rechecking a replaced file because that temporary journal is not hash-aware. The committed repair receipt carries current hashes. The local model is Whisper tiny.en q8 CPU via Transformers 4.3.0, with FFmpeg decoding. Proper names and numbers are approximate. Do not write its results into the distinct ignored cloud audit journal as if the cloud check passed. Backups for marker repairs and cut moves remain outside the repo in the temporary workspace. Automatic transcription cannot certify acting or every word.
 
 ## Live multiplayer #29 — distinct remaining feature
 
