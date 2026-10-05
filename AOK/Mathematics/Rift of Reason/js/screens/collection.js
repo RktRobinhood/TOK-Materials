@@ -72,6 +72,7 @@
                     el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
+                    el('button.btn', { text: 'Rumour board', onclick: () => Rift.Router.go('rumours') }),
                     el('span.small.muted', { text: 'Your first 10 creatures form your battle team.' }),
                 ]),
                 el('div.dex-grid', null, species.map(id => card(id, {

@@ -17,6 +17,7 @@
     }, 'aria-pressed': 'false' });
     app.append(el('header.teacher-controls', null, [el('h1', { text: 'Teacher overview' }),
         el('a', { href: 'index.html', text: 'Return to game' }),
+        el('p', null, [el('a', { href: 'clues.html', text: 'Classroom clue cards and slide code' })]),
         el('p', { text: 'Paste codes with student agreement. Only anonymous group summaries stay in this tab; nothing is uploaded or saved. Reload or Clear removes them. The game save is untouched.' }),
         el('p', { text: 'Backup codes show reported adventure progress, not mastery or grades. Team codes show team size only. Codes can be edited; the checksum checks typing errors, not authorship.' }),
     ]));

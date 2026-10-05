@@ -69,11 +69,19 @@ All 327 tests pass. Standards and Spec reviewers found no remaining source block
 
 All 330 tests pass. Both source reviewers report no blockers. Browser smoke covers invalid input, backup/team reading, correct denominator, raw-code clearing, chapter selection, projector layout/escape, reload discard, removal and clearing; no console errors recorded on this page. Evidence and limits: `reviews/teacher-overview-2026-10-05.md`.
 
+## Optional classroom clues (#30)
+
+The Collection rumour board accepts three fixed, once-only clue codes: classroom QR/plain text adds lore; a sourced Boole web lookup unlocks rare Booleon eligibility; a slide code adds Age of Wonder to the battle pool. `clues.html` provides printable/displayable cards, slide text and teacher answers. Existing story rumours remain alternatives. Fourteen short strategy reminders appear after completed puzzle encounters; bonus reports cannot unlock them. This adds no spoken lines or replacement art.
+
+All 334 tests pass, including an actual encounter-controller win hook. Both review axes cleared; the author question and link/input contrast were corrected. Browser checks cover invalid/case-insensitive/repeated codes, all three rewards, note rendering and classroom-kit layout. The QR was independently decoded. Details: `reviews/classroom-clues-2026-10-05.md`.
+
+The dev dependency install found existing Sharp advisories; `tools/package.json` and lockfile now pin patched Sharp 0.35.5. `npm audit --prefix tools` reports zero vulnerabilities. Asset pipeline compatibility evidence is recorded with the clue release checks.
+
 ## Next work
 
 1. Voice support is committed and published. Today's run completed at ten actual attempts per model: 260 new clips, 277/493 current lines covered, 216 missing (40 planned batches). All current clips decode; checked cutting errors are repaired. Wider transcript audit hit HTTP 503, so complete it alongside future recording. Exact resume commands, sample evidence and limits: `reviews/voice-recording-2026-10-04.md`. #25 release validation is closed; #43 remains open.
-2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and local teacher overview #31 are implemented; stretch #29–#30 remain separate.
-3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining feature issues are optional ARG #30 and multiplayer #29.
+2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13, local teacher overview #31 and optional clue layer #30 are implemented. Live multiplayer #29 remains separate.
+3. Voice allowance resets at 09:00 Copenhagen on 2026-10-05. Until then, leave the ignored request ledger intact and do not switch cast models to evade its cap. Remaining work and the live-service dependency are documented in `reviews/remaining-handoff-2026-10-05.md`.
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.

@@ -108,6 +108,8 @@
 
 /* ---- collection ---- */
 .collection-screen, .settings-screen { position: absolute; inset: 64px 12px 12px; overflow: auto; padding: 8px 12px; }
+.rumour-board a { color: var(--rift); }
+.rumour-board input { font: inherit; background: var(--night); color: var(--parchment); padding: 8px; border: 1px solid var(--parchment-dim); border-radius: 6px; }
 .settings-screen { width: min(640px, calc(100% - 24px)); margin: 0 auto; inset: 64px 0 12px; }
 .dex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
 .dex-card { position: relative; background: var(--panel); border: 3px solid var(--panel-edge); border-radius: 12px; padding: 8px; color: var(--parchment); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }

@@ -86,6 +86,7 @@ The Fair Gate introduces Granny's fixed, eight-step teaching match before normal
 - Battles happen **outside** puzzles; puzzles are how you get creatures (and protective/healing consumables).
 - Multiplayer: **offline team codes first** (ghost battles vs an AI running a classmate's team, deterministic seeded engine). Live play (Supabase/Firebase, teacher laptop as host) and raids are stretch goals. See `research/serverless-multiplayer.md`.
 - Teacher overview (`teacher.html`): pasted backup/team codes become anonymous group summaries in tab memory only; imports never touch the game save. Group slots replace earlier reports. Team-only codes do not contain progress and are excluded from class-map counts. Projector mode hides individual rows and shows chapter maps with reported completion counts. These snapshots are not grades, mastery measures or live tracking.
+- Optional clue trail: `clues.html` supplies a printable classroom QR/plain code and a slide code; the Collection rumour board also offers a sourced web lookup. Fixed once-only codes unlock lore, Booleon's rare spawn eligibility or Age of Wonder in the axiom pool. Story rumours remain alternative unlocks. Short strategy notes grow after completed puzzle encounters, never from honour bonus reports. The trail does not gate the story or alter spoken scripts.
 
 ## Tech
 

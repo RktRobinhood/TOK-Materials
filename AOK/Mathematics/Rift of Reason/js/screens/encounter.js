@@ -321,6 +321,7 @@
                     Rift.World.complete(st, n.id);
                     if (!hintsUsed && st.stats.puzzlesSolved >= 5) earned.push('clear-thinker');
                     stages.forEach(p => {
+                        if (Rift.Rumours) Rift.Rumours.recordWin(st, p.id);
                         const r = p.result || {};
                         if (p.id === 'village') earned.push('truth-tabler');
                         if (p.id === 'tribunal') earned.push('cross-examiner');

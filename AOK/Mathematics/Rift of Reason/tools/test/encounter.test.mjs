@@ -87,3 +87,9 @@ test('loot is rolled only after success and the stage debrief, never on arrival 
  await g.modals.at(-1).buttons[0].onclick();assert.equal(rolls,1);assert.equal(g.modals.at(-1).title,'Solved!');
  assert.ok(g.state.xp>0);assert.equal(g.modals.at(-1).buttons[0].label,'Back to the map');
 });
+
+test('strategy journal is updated after a completed checked encounter, not arrival or wrong checks',async()=>{
+ const g=await game(),notes=[];g.Rift.Rumours={recordWin:(s,id)=>notes.push(id)};g.Rift.World.rollLoot=()=>({species:null});
+ g.api().submit(false);g.api().submit(true);assert.equal(notes.length,0);
+ await g.modals.at(-1).buttons[0].onclick();assert.deepEqual(notes,['fake']);
+});
