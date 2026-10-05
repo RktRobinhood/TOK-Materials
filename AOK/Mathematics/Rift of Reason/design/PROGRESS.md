@@ -59,7 +59,7 @@ The final follow-up has **324 passing tests**: three audit regressions catch cro
 
 ## Next work
 
-1. Commit/publish the reviewed tutorial voice support, finish today's guarded recording allowance, check suspect cuts, and update #43 with remaining coverage. Resume after the Pacific reset for missing settled lines.
+1. Voice support is committed and published. Today's run completed at ten actual attempts per model: 260 new clips, 277/493 current lines covered, 216 missing (40 planned batches). All current clips decode; checked cutting errors are repaired. Wider transcript audit hit HTTP 503, so complete it alongside future recording. Exact resume commands, sample evidence and limits: `reviews/voice-recording-2026-10-04.md`. #25 release validation is closed; #43 remains open.
 2. #34 remains open while its voice child #43 is pending. Bonus puzzles #13 and stretch #29–#31 remain separate.
 3. #13 investigated: official Black Box/Mines browser pages timed out through both browser-fetch and direct HTTPS on 2026-10-04; upstream was also unreachable during the original research. No binaries/licence were vendored from an unverified substitute. Next agent should obtain pinned upstream browser JS/WASM and MIT notices, then implement the local frame and one-time reduced honour reward if completion cannot be detected. Verify HTTP and file:// before closing it.
 ## Commands
