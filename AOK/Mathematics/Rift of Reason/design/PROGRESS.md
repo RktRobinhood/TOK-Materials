@@ -88,7 +88,7 @@ Removed literal pause tokens from TTS spoken input, re-recorded eighteen marker-
 ## Next work
 
 1. After the natural **2026-10-06 09:00 Copenhagen** reset, prioritize the five missing lesson-one story lines in #43, then finish the remaining recordings and bounded boundary checks. Preserve the ignored ledger and pinned cast; do not evade the cap. See `reviews/remaining-handoff-2026-10-05.md` for commands.
-2. Close #38/#42 once this release is verified on Pages. #34 remains open while voice child #43 is pending. #1 tracks the usable core separately from pending audio polish and live multiplayer #29.
+2. #38/#42 are closed after main `621c091` and successful Pages run 37344877801; fifteen public runtime/audio files matched committed blobs. #34 remains open while voice child #43 is pending. #1 tracks the usable core separately from pending audio polish and live multiplayer #29.
 3. Bonus puzzles #13, local teacher overview #31 and optional clue layer #30 are complete. Live multiplayer has no configured hosted service; keep #29 open with its documented dependency.
 ## Commands
 

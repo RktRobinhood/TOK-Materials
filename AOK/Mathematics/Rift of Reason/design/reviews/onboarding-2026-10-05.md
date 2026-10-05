@@ -40,4 +40,4 @@ Today's twenty actual TTS attempts exhausted the local ten-attempt cap for each 
 
 ## Issue disposition
 
-After main and Pages verification, close #38 and #42 with this evidence. Keep #43 and its parent #34 open for voice completion. The lesson-one tracker #1 distinguishes usable core from pending voices and stretch #29. Live multiplayer has no configured hosted endpoint and remains a separate open issue. Art is complete and there is no additional teacher-approval gate.
+Main release `621c091` deployed successfully in Pages run **37344877801**. Fifteen public files returned 200 and matched their committed Git blobs: the index, four stylesheets, tutorial/example/battle scripts, Fair script, voice manifest and four new/repaired MP3s. Comparing Git blobs avoids Windows working-tree line-ending differences. #38 and #42 are closed with this evidence. #43 and its parent #34 remain open for voice completion. The lesson-one tracker #1 distinguishes usable core from pending voices and stretch #29. Live multiplayer has no configured hosted endpoint and remains a separate open issue. Art is complete and there is no additional teacher-approval gate.
