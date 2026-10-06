@@ -27,6 +27,12 @@ test('empty collection can learn, practice and win the real safe story match',()
  p.onEnd({mode:'practice',outcome:'won'});assert.equal(g.state.flags['story-battle-won'],true);assert.equal(g.modals.at(-1).title,'The Road is open');
  assert.equal(JSON.stringify({creatures:g.state.creatures,items:g.state.items}),before);
 });
+test('returning learners are offered the changed rules once without spending items',()=>{
+ const g=game();g.state.flags['card-lesson-won']=true;const before=JSON.stringify(g.state.items);
+ g.Rift.Battles.practice();assert.equal(g.routes.length,0);assert.equal(g.modals.at(-1).title,'The card rules have changed');
+ g.modals.at(-1).buttons.find(b=>b.label==='Play the new rules').onclick();assert.equal(g.state.flags['card-rules-seen'],2);assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(JSON.stringify(g.state.items),before);
+ g.Rift.Battles.practice();assert.equal(g.modals.length,1);
+});
 test('story gate requires victory and a side challenge never completes its puzzle',()=>{
  const g=game();assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/Syllo/);
  g.state.flags['story-battle-won']=true;assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/Win 2/);

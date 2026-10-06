@@ -38,6 +38,7 @@
             trophies: [],          // named trophy copies won from classmates' ghosts
             seen: [],              // species ids seen
             axioms: [],            // axiom ids added to the player's pool
+            axiomLoadout: [],      // ten chosen cards; empty saves receive the starter selection
             rumours: [],           // rumour ids heard
             lures: {},             // node id -> visits of boosted rare spawns left
             perksUsed: {},         // perk id -> chapter it was used in

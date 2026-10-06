@@ -53,6 +53,25 @@
         Rift.UI.modal(c.name, body);
     }
 
+    function editAxiomDeck() {
+        const s=Rift.State.get(), E=Rift.Battle.Engine;
+        const available=Array.from(new Set(Rift.data.axiomDecks.starter.concat(s.axioms)));
+        const selected=new Set(E.axiomSelection(s.axiomLoadout.length?s.axiomLoadout:s.axioms));
+        const count=el('p',{role:'status','aria-live':'polite'}), boxes=[];
+        function refresh(){count.textContent=selected.size+'/10 chosen. Uncheck a card to make room.';boxes.forEach(({id,input})=>{input.disabled=selected.size===10&&!selected.has(id);});}
+        const grid=el('div.axiom-builder',null,available.map(id=>{
+            const ax=Rift.data.axioms[id];
+            const input=el('input',{type:'checkbox',checked:selected.has(id),'aria-label':ax.name,onchange(ev){if(ev.target.checked)selected.add(id);else selected.delete(id);refresh();}});
+            boxes.push({id,input});
+            return el('label',null,[input,el('span',null,[el('strong',{text:ax.name}),el('div.small',{text:ax.category+': '+ax.text})])]);
+        }));
+        const dialog=Rift.UI.modal('Build your ten-card axiom deck',el('div.stack',null,[
+            el('p',{text:'Choose rules that help your creatures. Your ten cards and the opponent’s ten are shuffled together. Both players can use any offered rule; you do not know the full order.'}),
+            count,grid,
+        ]),[{label:'Cancel'},{label:'Save ten cards',primary:true,keepOpen:true,onclick(){if(selected.size!==10){count.textContent='Choose exactly ten cards before saving.';return;}Rift.State.update(st=>{st.axiomLoadout=Array.from(selected);});dialog.close();Rift.UI.toast('Your ten-card axiom deck is saved.');}}]);
+        refresh();
+    }
+
     Rift.Screens.register('collection', {
         mount(rootNode) {
             const s = Rift.State.get();
@@ -69,6 +88,7 @@
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
                 el('div.row.wrap', { style: { marginBottom: '14px' } }, [
                     el('button.btn', { text: 'Learn the card game', onclick: () => Rift.Battles.learn('collection') }),
+                    el('button.btn', { text: 'Build axiom deck · 10 cards', onclick: editAxiomDeck }),
                     el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),

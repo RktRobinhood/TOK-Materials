@@ -32,6 +32,7 @@
         const a = s.cards[att];
         const d = 1 - a.controller;
         const lives = s.players[d].lives;
+        if (Eng.rules(s).reverseHearts) return {cid:null,kind:'take'};
         let assumed = att;
         if (opts && opts.hidden) {
             // Face-down attack: assume the strongest creature on the attacker's board.
@@ -76,7 +77,7 @@
         }
         const av = value(s, att);
         switch (resp.kind) {
-            case 'take': return lives <= 1 ? 100 : 6;
+            case 'take': return Eng.rules(s).reverseHearts ? -100 : lives <= 1 ? 100 : 6;
             case 'chump': return 3 + value(s, resp.cid);
             case 'trade': return value(s, resp.cid) - av + 0.5;
             case 'bounce': return -0.5;
@@ -108,6 +109,30 @@
         return score;
     }
 
+    function rewriteScore(s,id) {
+        const Eng=E(), me=s.active, ax=Rift.data.axioms[id];
+        if(Eng.activeAxioms(s).some(a=>a.id===id))return -5;
+        const changed=Object.assign({},s,{axioms:Object.assign({},s.axioms,{current:id})});
+        const r=Eng.rules(changed), before=Eng.rules(s), P=s.players[me], Q=s.players[1-me];
+        if(ax.category==='victory') return r.reverseHearts?(Q.lives-P.lives)*3:(P.lives-Q.lives)*3;
+        if(ax.category==='actions')return (r.actions-before.actions)*(P.board.filter(cid=>Eng.readyToUse(s,cid)).length-Q.board.length+0.5);
+        if(ax.category==='cost')return (before.playCostDelta-r.playCostDelta)*P.hand.length*0.4;
+        if(ax.category==='energy'||ax.category==='draw')return 1;
+        if(ax.category==='exhaustion')return !r.exhaust&&P.board.length>Q.board.length?4:-2;
+        const attackers=P.board.filter(cid=>Eng.canAttack(s,cid));
+        return Math.max(-5,Math.min(10,attackers.reduce((v,cid)=>v+attackScore(changed,{cid})-attackScore(s,{cid}),0)));
+    }
+    function activateScore(s,a) {
+        const card=s.cards[a.cid], def=Battle.Abilities[a.ability];
+        if(a.ability==='focus')return 1.1;
+        if(a.ability==='filter'||a.ability==='next-year'){
+            if(!s.options.timeline)return -5;
+            const benefit=s.fate.events%2===0&&s.axioms.deck.length?rewriteScore(s,s.axioms.deck[0]):0;
+            return a.ability==='filter'?benefit-0.5:-benefit-0.5;
+        }
+        if(a.ability==='axiomatic')return Math.max(0,...s.axioms.deck.slice(0,5).map(id=>rewriteScore(s,id)));
+        return 1.5+(def&&def.aiPlay?def.aiPlay(s,card,E().H):0);
+    }
     function chooseAction(s, legal, level, rng) {
         let best = null;
         let bestScore = -Infinity;
@@ -117,7 +142,9 @@
             else if (act.type === 'attack') {
                 score = attackScore(s, act);
                 if (level === 'easy') score = score > 0 ? score + 4 : score;
-            } else if (act.type === 'end') score = 0;
+            } else if (act.type==='rewrite') score=rewriteScore(s,act.choice);
+            else if(act.type==='activate') score=activateScore(s,act);
+            else if (act.type === 'end') score = 0;
             else score = -50;
             score += rng.next() * 0.01; // deterministic tie-break
             if (score > bestScore) { bestScore = score; best = act; }
@@ -145,15 +172,11 @@
         const me = req.player;
         const opts = req.options;
         const Eng = E();
-        if (s.phase === 'axiom') {
+        if (s.phase === 'axiom' || req.choiceKind === 'axiom') {
             // Pick the axiom that most favours our board over theirs.
             let best = opts[0], bestScore = -Infinity;
             opts.forEach(id => {
-                const t = Object.assign({}, s, { axioms: Object.assign({}, s.axioms, { current: id }) });
-                const mine = t.players[me].board.reduce((sum, cid) => sum + Eng.power(t, cid), 0);
-                const theirs = t.players[1 - me].board.reduce((sum, cid) => sum + Eng.power(t, cid), 0);
-                let score = mine - theirs;
-                if (id === 'silence' && t.players[1 - me].steals > 0) score += 1;
+                const score = rewriteScore(s,id);
                 if (score > bestScore) { bestScore = score; best = id; }
             });
             return best;

@@ -1,5 +1,7 @@
 # Remaining work handoff — 2026-10-05
 
+Superseded for current battle mechanics, voice totals and next actions by [the 6 October handoff](remaining-handoff-2026-10-06.md). This file retains historical completion evidence and the live-multiplayer investigation.
+
 Work stays in `AOK/Mathematics/Rift of Reason` on main, as the user requested. Do not reopen teacher approval gates. Art is complete. Agent verification uses source/content checks where prolonged browser traversal is inefficient; distinguish those checks from observed classroom results.
 
 ## Completed this continuation

@@ -1,8 +1,8 @@
 /*
  * Battle rules data: the colour wheel (Ways of Knowing) and the shared AXIOM DECK.
  *
- * At the start of every round (both players have taken a turn) the top axiom
- * flips face-up for BOTH players and rewrites one rule until the next flip.
+ * Paid rewrites affect BOTH players and persist by category until replaced.
+ * The visible timeline alternates free flips and full resets from round four.
  * The engine (js/battle/engine.js) reads these hooks; nothing here touches the DOM.
  *
  * Axiom hooks (all optional):
@@ -58,9 +58,9 @@
         },
         silence: {
             id: 'silence', name: 'Axiom of Silence',
-            text: 'No one can steal this round.',
+            text: 'Activating a creature ability costs 3 energy.',
             flavour: 'Some rules forbid an action rather than describe one.',
-            noSteals: true,
+            rules: { abilityCost: 3 },
         },
         doubt: {
             id: 'doubt', name: 'Axiom of Doubt',
@@ -70,9 +70,9 @@
         },
         haste: {
             id: 'haste', name: 'Axiom of Haste',
-            text: 'After you play a creature, you may also attack this turn.',
+            text: 'Each player may take 4 actions per turn.',
             flavour: 'Jump to the conclusion. What could go wrong?',
-            attackAfterPlay: true,
+            rules: { actions: 4 },
         },
         mercy: {
             id: 'mercy', name: 'Axiom of Mercy',
@@ -143,11 +143,33 @@
         'age-of-tradition': spotlight('age-of-tradition', 'memory', 'Age of Tradition', 'We have always done it this way. Is that a reason?'),
     };
 
+    Object.assign(axioms, {
+        'one-action': {name:'One Step at a Time', text:'Each player may take 1 action per turn.', rules:{actions:1}, category:'actions'},
+        'two-actions': {name:'Two Paths', text:'Each player may take 2 actions per turn.', rules:{actions:2}, category:'actions'},
+        'three-actions': {name:'Rule of Three', text:'Each player may take 3 actions per turn.', rules:{actions:3}, category:'actions'},
+        'reverse-hearts': {name:'The Last Shall Be First', text:'Reach zero of YOUR OWN hearts to win. Giving the opponent their last hit makes THEM win.', rules:{reverseHearts:true}, category:'victory'},
+        'normal-hearts': {name:'Back to the Goal', text:'Reduce the opponent to zero hearts to win.', rules:{reverseHearts:false}, category:'victory'},
+        thrift: {name:'Small Assumptions', text:'Creature cards cost 1 less energy (minimum 1).', rules:{playCostDelta:-1}, category:'cost'},
+        luxury: {name:'Costly Assumptions', text:'Creature cards cost 1 more energy.', rules:{playCostDelta:1}, category:'cost'},
+        abundance: {name:'Growing Ideas', text:'Energy capacity grows by 2 each turn, up to 10.', rules:{growth:2}, category:'energy'},
+        study: {name:'Second Opinion', text:'Draw 2 creature cards at the start of your turn.', rules:{draw:2}, category:'draw'},
+        vigilance: {name:'Unspent Potential', text:'Attacking, blocking and activating do not exhaust creatures. Each still uses an action or response.', rules:{exhaust:false}, category:'exhaustion'},
+        patience: {name:'Time to Think', text:'Attacking, blocking and activating exhaust creatures until their next turn.', rules:{exhaust:true}, category:'exhaustion'},
+        arrival: {name:'Ready on Arrival', text:'Newly played creatures can attack or activate immediately.', rules:{arrivalReady:true}, category:'arrival'},
+    });
+    const categories = {underdog:'combat', silence:'abilities', doubt:'visibility', haste:'actions', mercy:'defeat', crowd:'power',
+        'excluded-middle':'combat', extensionality:'combat', choice:'targeting', 'curved-space':'colour', 'empty-set':'abilities', induction:'growth'};
+    Object.entries(axioms).forEach(([id,a]) => {
+        a.id=id; a.category=a.category || categories[id] || 'colour';
+        a.flavour=a.flavour || 'Change an assumption and the same situation can have a different result.';
+    });
     Rift.data.axioms = axioms;
 
-    // The starter deck every battle uses; each player's won axioms are added to it.
+    // Available starting rules. Each side selects ten; earned rules expand the pool.
     Rift.data.axiomDecks = {
-        starter: ['underdog', 'silence', 'doubt', 'haste', 'mercy', 'crowd',
+        default: ['underdog','three-actions','normal-hearts','thrift','abundance','study','arrival','patience','choice','mercy'],
+        starter: ['underdog', 'one-action', 'two-actions', 'three-actions', 'reverse-hearts', 'normal-hearts',
+            'thrift', 'luxury', 'abundance', 'study', 'vigilance', 'patience', 'arrival', 'silence', 'haste', 'mercy', 'crowd',
             'excluded-middle', 'extensionality', 'choice', 'curved-space', 'empty-set', 'induction'],
     };
 })(typeof window !== 'undefined' ? window : globalThis);

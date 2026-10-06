@@ -2,7 +2,7 @@
  * Ability keywords used by data/creatures.js. Pure hooks, called by the engine.
  *
  * Hooks (all optional):
- *   onPlay(api, card)                    after the steal decision, for whoever controls it
+ *   onActivate(api, card)                 after paying for and exhausting a controlled creature
  *   onChoose(api, card, choice, req)     answer to api.ask({ kind, options, ... })
  *   onAttack(api, card)
  *   fightPrep(state, att, blk, fctx, H)  this creature is BLOCKING; may silence the attacker
@@ -41,25 +41,15 @@
 
         'well-actually': {
             name: 'Well, Actually',
-            text: 'On play, peek at the next axiom card.',
-            onPlay(api, card) {
-                const P = api.s.players[card.controller];
-                const next = api.s.axioms.deck[0] || null;
-                P.peek = next;
-                const ax = next && Rift.data.axioms[next];
-                api.emit({
-                    t: 'peek', player: card.controller, axiom: next, privateTo: card.controller,
-                    text: ax ? `Well, actually… the next axiom will be ${ax.name}.` : 'Well, actually… the axiom deck needs a reshuffle first.',
-                    publicText: `${api.name(card.cid)} peeks at the next axiom.`,
-                });
-            },
+            text: 'Activate: draw one creature card.',
+            onActivate(api, card) { api.draw(card.controller); api.emit({t:'ability',cid:card.cid,text:api.name(card.cid) + ' draws a card.'}); },
             aiPlay: () => 0.3,
         },
 
         nickname: {
             name: 'Nickname',
-            text: 'On play, give an enemy creature a nickname: it loses its colour this round.',
-            onPlay(api, card) {
+            text: 'Activate: give an enemy creature a nickname: it loses its colour this round.',
+            onActivate(api, card) {
                 const options = enemyBoard(api, card).filter(cid => api.H.colourOf(api.s, api.s.cards[cid]) !== 'memory');
                 if (!api.ask({ player: card.controller, kind: 'target', ability: 'nickname', cid: card.cid, options, prompt: 'Nickname which enemy creature? It loses its colour this round.' })) {
                     api.emit({ t: 'fizzle', cid: card.cid, text: `${api.name(card.cid)} can't find anyone worth a nickname.` });
@@ -77,8 +67,8 @@
 
         'easter-egg': {
             name: 'Easter Egg',
-            text: 'On play, reveal one card in the opponent\'s hand.',
-            onPlay(api, card) {
+            text: 'Activate: reveal one card in the opponent\'s hand.',
+            onActivate(api, card) {
                 const P = api.s.players[card.controller];
                 const hand = api.s.players[1 - card.controller].hand.filter(cid => !P.knows.includes(cid));
                 if (!hand.length) { api.emit({ t: 'fizzle', text: 'Easter egg: nothing new to reveal.' }); return; }
@@ -91,8 +81,9 @@
 
         'next-year': {
             name: 'Next Year',
-            text: 'Can\'t attack the turn it is played.',
+            text: 'Activate: delay the next Fate event by 2 turns (up to 12 away). Cannot attack on arrival.',
             canAttack(state, card) { return card.enteredTurn !== state.turn; },
+            onActivate(api,card){api.shiftFate(-2);api.emit({t:'ability',cid:card.cid,text:'Next Year: delay Fate by 2 turns.'});},
         },
 
         metaverse: {
@@ -108,8 +99,8 @@
 
         predict: {
             name: 'Predict',
-            text: 'On play, guess the opponent\'s next creature\'s colour; if right, +3 power.',
-            onPlay(api, card) {
+            text: 'Activate: guess the opponent\'s next creature\'s colour; if right, +3 power.',
+            onActivate(api, card) {
                 api.ask({
                     player: card.controller, kind: 'colour', ability: 'predict', cid: card.cid, auto: false,
                     options: Object.keys(Rift.COLOURS), prompt: 'Predict the colour of the next creature your opponent plays.',
@@ -130,15 +121,15 @@
 
         'every-time': {
             name: 'Every Time',
-            text: 'Always attacks if it can.',
-            mustAttack: true,
+            text: 'Activate: gain 3 energy, up to your capacity.',
+            onActivate(api, card) { const P=api.s.players[card.controller]; P.energy=Math.min(P.capacity,P.energy+3); api.emit({t:'ability',cid:card.cid,text:api.name(card.cid)+' restores energy.'}); },
             aiPlay: () => -0.5,
         },
 
         'its-raw': {
             name: 'It\'s Raw',
-            text: 'On play, defeat an enemy creature with power 4 or less.',
-            onPlay(api, card) {
+            text: 'Activate: defeat an enemy creature with power 4 or less.',
+            onActivate(api, card) {
                 const options = enemyBoard(api, card).filter(cid => api.power(cid) <= 4);
                 if (!api.ask({ player: card.controller, kind: 'target', ability: 'its-raw', cid: card.cid, options, prompt: 'It\'s RAW! Defeat which enemy creature (power 4 or less)?' })) {
                     api.emit({ t: 'fizzle', cid: card.cid, text: `${api.name(card.cid)} finds nothing raw enough.` });
@@ -156,8 +147,8 @@
 
         hype: {
             name: 'Hype',
-            text: 'When played, your other creatures get +1 until the end of your next turn.',
-            onPlay(api, card) {
+            text: 'Activate: your other creatures get +1 until the end of your next turn.',
+            onActivate(api, card) {
                 const s = api.s;
                 const P = s.players[card.controller];
                 const others = P.board.filter(cid => cid !== card.cid);
@@ -170,8 +161,8 @@
 
         'pull-that-up': {
             name: 'Pull That Up',
-            text: 'On play, look at the top 3 cards of your deck and keep one.',
-            onPlay(api, card) {
+            text: 'Activate: look at the top 3 cards of your deck and keep one.',
+            onActivate(api, card) {
                 const deck = api.s.players[card.controller].deck;
                 const options = deck.slice(0, 3);
                 if (!api.ask({ player: card.controller, kind: 'card', ability: 'pull-that-up', cid: card.cid, options, prompt: 'Jamie, pull that up! Keep which card?' })) {
@@ -194,24 +185,25 @@
 
         axiomatic: {
             name: 'Axiomatic',
-            text: 'You choose the next axiom card instead of drawing it.',
-            onPlay(api, card) {
-                api.s.players[card.controller].axiomChoice = true;
-                api.emit({ t: 'ability', cid: card.cid, text: `${api.name(card.cid)}: "Let us assume very little." Its side chooses the next axiom.` });
+            text: 'Activate: choose from the next five axioms to rewrite a rule.',
+            onActivate(api, card) {
+                api.ask({player:card.controller,kind:'axiom',ability:'axiomatic',cid:card.cid,options:api.s.axioms.deck.slice(0,5),auto:false,prompt:'Choose a rule rewrite. The activation already paid for it.'});
+                api.emit({ t: 'ability', cid: card.cid, text: `${api.name(card.cid)}: "Let us assume very little." Choose a rule from five instead of three.` });
             },
+            onChoose(api,card,id) { api.rewrite(id); },
             aiPlay: () => 0.7,
         },
 
         program: {
             name: 'Program',
-            text: 'On play, choose an ability from your discard pile; this creature gains it.',
-            onPlay(api, card) {
+            text: 'Activate: choose an ability from your discard pile; this creature gains it.',
+            onActivate(api, card) {
                 const s = api.s;
                 const options = [];
                 s.players[card.controller].discard.forEach(cid => {
                     api.H.abilitiesOf(s.cards[cid]).forEach(ab => {
                         // Never program itself (or a renamed copy of Program): that would loop forever.
-                        if (A[ab] && A[ab].onPlay !== A.program.onPlay && !options.includes(ab)) options.push(ab);
+                        if (A[ab] && A[ab].onActivate !== A.program.onActivate && !options.includes(ab)) options.push(ab);
                     });
                 });
                 if (!api.ask({ player: card.controller, kind: 'ability', ability: 'program', cid: card.cid, options, prompt: 'Program which ability into this creature?' })) {
@@ -221,7 +213,6 @@
             onChoose(api, card, ability) {
                 card.gained.push(ability);
                 api.emit({ t: 'program', cid: card.cid, ability, text: `${api.name(card.cid)} programs itself with ${A[ability].name}.` });
-                if (A[ability].onPlay) api.runOnPlay(card, ability);
             },
             aiPlay: (s, card) => s.players[card.controller].discard.length ? 1 : 0,
         },
@@ -235,8 +226,8 @@
 
         measure: {
             name: 'Measure',
-            text: 'On play, look at the opponent\'s whole hand.',
-            onPlay(api, card) {
+            text: 'Activate: look at the opponent\'s whole hand.',
+            onActivate(api, card) {
                 const s = api.s;
                 const P = s.players[card.controller];
                 const hand = s.players[1 - card.controller].hand;
@@ -282,7 +273,8 @@
     alias('queen-b', 'hype', 'Queen B');                         // Beeyoncé
     alias('whisper', 'lecture', 'Whisper');                      // Billie Eelish
     alias('nature-watch', 'pull-that-up', 'Nature Watch');       // Sir David Attenbirdough
-    alias('filter', 'well-actually', 'Filter');                  // Kim Kardashiant
+    A.filter={name:'Filter',text:'Activate: advance Fate by 2 turns. An event at zero happens immediately.',
+        onActivate(api,card){api.shiftFate(2);api.emit({t:'ability',cid:card.cid,text:'Filter: advance Fate by 2 turns.'});}};
     alias('vision', 'measure', 'Vision');                        // Messilion
     alias('hips-dont-lie', 'easter-egg', 'Hips Don\'t Lie');     // Shakirattle
 

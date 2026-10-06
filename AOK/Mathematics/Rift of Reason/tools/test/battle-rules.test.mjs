@@ -15,28 +15,32 @@ const inst = (species, extra) => Object.assign({ uid: 'u' + (++n), species, powe
 // Teams in fixed order: hand = first 5, deck = the rest. Card ids are p<player>c<index>.
 const FILL = ['astrophysicat', 'zuckerborg', 'siuuugull', 'astrophysicat', 'zuckerborg', 'siuuugull', 'astrophysicat', 'zuckerborg', 'siuuugull', 'astrophysicat'];
 const team = list => list.concat(FILL).slice(0, 10).map(x => typeof x === 'string' ? inst(x) : x);
-const setup = (p0, p1, axioms, options) => E.createBattle({
+const setup = (p0, p1, axioms, options) => {const state=E.createBattle({
     seed: 'rules',
     players: [{ name: 'A', team: team(p0) }, { name: 'B', team: team(p1) }],
     axiomDeck: axioms || [],
     options: Object.assign({ shuffle: false, shuffleAxioms: false, first: 0 }, options),
 });
+state.players.forEach(P=>{P.energy=10;P.capacity=10;});if(axioms&&axioms[0]){state.axioms.current=axioms[0];state.axioms.active[Rift.data.axioms[axioms[0]].category]=axioms[0];state.axioms.deck.shift();}return state;};
 const act = (s, a) => E.applyAction(s, Object.assign({ player: E.decider(s) }, a));
 function toBoard(s, cid, p) {
     s.players.forEach(P => ['deck', 'hand', 'board', 'discard'].forEach(z => { const i = P[z].indexOf(cid); if (i >= 0) P[z].splice(i, 1); }));
     s.players[p].board.push(cid);
     s.cards[cid].controller = p;
-    s.cards[cid].enteredTurn = 0;
+    s.cards[cid].enteredTurn = 0;s.cards[cid].exhausted=false;
 }
 function toDiscard(s, cid, p) {
     s.players.forEach(P => ['deck', 'hand', 'board', 'discard'].forEach(z => { const i = P[z].indexOf(cid); if (i >= 0) P[z].splice(i, 1); }));
     s.players[p].discard.push(cid);
 }
 // Play a card and let the opponent decline the steal if offered.
-function play(s, cid) {
-    let t = act(s, { type: 'play', cid });
-    if (t.phase === 'steal') t = act(t, { type: 'decline' });
-    return t;
+function play(s,cid){
+ const owner=s.cards[cid].owner;
+ if(s.active!==owner){s=act(s,{type:'end'});}
+ s=act(s,{type:'play',cid});
+ s.cards[cid].enteredTurn=0; // isolate ability semantics; arrival readiness is tested separately
+ const activation=E.legalActions(s).find(a=>a.type==='activate'&&a.cid===cid&&a.ability!=='focus');
+ return activation?act(s,activation):s;
 }
 
 // ---- every keyword in data/creatures.js is implemented ----------------------------
@@ -64,14 +68,9 @@ test('lecture: when it blocks, the attacker loses its ability this turn', () => 
     assert.ok(t.players[1].board.includes('p1c0'), 'lecturer survived');
 });
 
-test('well-actually: on play, peek at the next axiom card', () => {
-    const s = setup(['astrophysicat'], [], ['underdog', 'silence', 'doubt']);
-    assert.equal(s.axioms.current, 'underdog');
-    const t = play(s, 'p0c0');
-    assert.equal(t.players[0].peek, 'silence');
-    const ev = t.lastEvents.find(e => e.t === 'peek');
-    assert.equal(ev.privateTo, 0);
-    assert.ok(!/Silence/.test(ev.publicText));
+test('well-actually: paid activation draws a creature card',()=>{
+ const s=setup(['astrophysicat'],[],['underdog','silence']);const before=s.players[0].hand.length;
+ const t=play(s,'p0c0');assert.equal(t.players[0].hand.length,before);assert.ok(t.cards.p0c0.exhausted);
 });
 
 test('nickname: an enemy creature loses its colour this round', () => {
@@ -87,20 +86,14 @@ test('nickname: an enemy creature loses its colour this round', () => {
     assert.equal(E.colourOf(later, later.cards.p1c0), 'reason');
 });
 
-test('easter-egg: on play, reveal one card in the opponent\'s hand', () => {
+test('easter-egg: paid activation reveals one card in the opponent\'s hand', () => {
     const t = play(setup(['swiftlet'], []), 'p0c0');
     assert.equal(t.players[0].knows.length, 1);
     assert.ok(t.players[1].hand.includes(t.players[0].knows[0]));
 });
 
-test('next-year: can\'t attack the turn it is played (matters under Haste)', () => {
-    const s = setup(['muskrat'], [], ['haste']);
-    toBoard(s, 'p0c1', 0); // an astrophysicat already on the board
-    const t = play(s, 'p0c0');
-    assert.equal(t.phase, 'haste');
-    const attackers = E.legalActions(t).filter(a => a.type === 'attack').map(a => a.cid);
-    assert.deepEqual(J(attackers), ['p0c1']);
-    assert.equal(E.canAttack(t, 'p0c0'), false);
+test('new creatures cannot attack unless arrival rule changes; Next Year still waits',()=>{
+ const s=setup(['muskrat'],[],['arrival']);const t=act(s,{type:'play',cid:'p0c0'});assert.equal(E.canAttack(t,'p0c0'),false);
 });
 
 test('metaverse: the first time it is defeated it returns to hand; the second time it is gone', () => {
@@ -111,7 +104,7 @@ test('metaverse: the first time it is defeated it returns to hand; the second ti
     assert.ok(t.players[1].hand.includes('p1c0'));
     assert.equal(t.cards.p1c0.metaverseUsed, true);
     toBoard(t, 'p1c0', 1);
-    t.active = 0; t.phase = 'action';
+    t.active = 0; t.phase = 'action';t.cards.p0c0.exhausted=false;
     t = act(act(t, { type: 'attack', cid: 'p0c0' }), { type: 'block', cid: 'p1c0' });
     assert.ok(t.players[1].discard.includes('p1c0'));
 });
@@ -121,7 +114,7 @@ test('predict: guess the colour of the opponent\'s next creature; if right, +3',
     assert.equal(t.phase, 'choose');
     assert.equal(t.pending.choiceKind, 'colour');
     t = act(t, { type: 'choose', choice: 'reason' });
-    assert.equal(t.active, 1);
+    assert.equal(t.active, 0);
     t = play(t, 'p1c0'); // Lobstorian is Reason
     assert.equal(E.power(t, 'p0c0'), 9);
 
@@ -138,16 +131,11 @@ test('escalate: +1 power for each creature you have played this battle', () => {
     assert.equal(E.power(t, 'p0c0'), 7);
 });
 
-test('every-time: always attacks if it can', () => {
-    const s = setup(['siuuugull', 'lobstorian'], []);
-    toBoard(s, 'p0c0', 0);
-    toBoard(s, 'p0c1', 0);
-    const legal = E.legalActions(s);
-    assert.ok(legal.length > 0);
-    assert.ok(legal.every(a => a.type === 'attack' && a.cid === 'p0c0'), JSON.stringify(legal));
+test('every-time: paid activation restores energy within capacity',()=>{
+ const s=setup(['siuuugull'],[]);toBoard(s,'p0c0',0);s.players[0].energy=4;const t=act(s,{type:'activate',cid:'p0c0',ability:'every-time'});assert.equal(t.players[0].energy,5);assert.ok(t.cards.p0c0.exhausted);
 });
 
-test('its-raw: on play, defeat an enemy creature with power 4 or less', () => {
+test('its-raw: paid activation defeats an enemy creature with power 4 or less', () => {
     const s = setup(['rawmsay'], [inst('lobstorian', { powerDelta: -3 }), 'swiftlet']);
     toBoard(s, 'p1c0', 1); // power 3
     toBoard(s, 'p1c1', 1); // power 5: safe
@@ -164,37 +152,21 @@ test('hype: your other creatures get +1 until the end of your next turn', () => 
     assert.equal(E.power(t, 'p0c0'), 4, 'not itself');
     t = play(t, 'p1c0');
     assert.equal(E.power(t, 'p0c1'), 7, 'during our next turn');
-    t = play(t, 'p0c2');
+    t = act(act(t,{type:'end'}),{type:'end'});t=act(t,{type:'end'});
     assert.equal(E.power(t, 'p0c1'), 6, 'gone after it');
 });
 
-test('pull-that-up: look at the top 3 of your deck and keep one', () => {
-    const s = setup(['chimpossible'], []);
-    const top = s.players[0].deck.slice(0, 3);
-    let t = act(s, { type: 'play', cid: 'p0c0' });
-    t = act(t, { type: 'decline' });
-    assert.equal(t.pending.choiceKind, 'card');
-    assert.deepEqual(J(t.pending.options), top);
-    t = act(t, { type: 'choose', choice: top[1] });
-    assert.ok(t.players[0].hand.includes(top[1]));
-    // the other two went to the bottom (then the hand refilled from the top)
-    assert.deepEqual(J(t.players[0].deck.slice(-2)), [top[0], top[2]]);
+test('pull-that-up: paid activation chooses one of three and puts others underneath',()=>{
+ const s=setup(['chimpossible'],[]);const top=s.players[0].deck.slice(0,3);let t=play(s,'p0c0');assert.deepEqual(J(t.pending.options),top);
+ t=act(t,{type:'choose',choice:top[1]});assert.ok(t.players[0].hand.includes(top[1]));assert.deepEqual(J(t.players[0].deck.slice(-2)),[top[0],top[2]]);
 });
 
-test('axiomatic: you choose the next axiom card instead of drawing it', () => {
-    let t = play(setup(['euclidon'], [], ['underdog', 'silence', 'doubt', 'haste']), 'p0c0');
-    assert.equal(t.players[0].axiomChoice, true);
-    t = play(t, 'p1c0'); // round over → A chooses
-    assert.equal(t.phase, 'axiom');
-    assert.equal(E.decider(t), 0);
-    assert.deepEqual(J(t.pending.options), ['silence', 'doubt', 'haste']);
-    t = act(t, { type: 'choose', choice: 'haste' });
-    assert.equal(t.axioms.current, 'haste');
-    assert.equal(t.phase, 'action');
-    assert.deepEqual(J(t.axioms.deck), ['silence', 'doubt']);
+test('axiomatic: paid activation chooses a rule rewrite without a second payment',()=>{
+ let s=setup(['euclidon'],[],['underdog','silence','doubt','haste']);let t=play(s,'p0c0');assert.equal(t.phase,'choose');assert.equal(t.pending.choiceKind,'axiom');
+ const energy=t.players[0].energy;t=act(t,{type:'choose',choice:'haste'});assert.equal(t.axioms.current,'haste');assert.equal(E.rules(t).actions,4);assert.equal(t.players[0].energy,energy);
 });
 
-test('program: gain an ability from your discard pile (and on-play abilities fire)', () => {
+test('program: gaining a paid skill requires a separate activation after readying', () => {
     const s = setup(['lovelace', 'rawmsay', 'lobstorian'], [inst('lobstorian', { powerDelta: -3 })]);
     toDiscard(s, 'p0c1', 0);
     toDiscard(s, 'p0c2', 0);
@@ -204,14 +176,19 @@ test('program: gain an ability from your discard pile (and on-play abilities fir
     assert.deepEqual(J(t.pending.options).sort(), ['its-raw', 'lecture']);
     t = act(t, { type: 'choose', choice: 'its-raw' });
     assert.deepEqual(J(t.cards.p0c0.gained), ['its-raw']);
-    assert.ok(t.players[1].discard.includes('p1c0'), 'the programmed It\'s Raw fired');
+    assert.ok(t.players[1].board.includes('p1c0'), 'copying does not fire the paid skill');
+    assert.equal(t.cards.p0c0.exhausted,true);
+    assert.ok(!E.legalActions(t).some(a=>a.type==='activate'&&a.cid==='p0c0'));
+    t=act(act(t,{type:'end'}),{type:'end'});
+    t=act(t,{type:'activate',cid:'p0c0',ability:'its-raw'});
+    assert.ok(t.players[1].discard.includes('p1c0'), 'the separately paid skill fired');
 });
 
 test('unprovable: can\'t be stolen, can\'t be blocked by creatures with power above 7', () => {
     const s = setup(['godelix'], ['muskrat', 'lobstorian']);
     let t = act(s, { type: 'play', cid: 'p0c0' });
     assert.notEqual(t.phase, 'steal');
-    assert.equal(t.active, 1);
+    assert.equal(t.active, 0);
     toBoard(s, 'p0c0', 0);
     toBoard(s, 'p1c0', 1);
     toBoard(s, 'p1c1', 1);
@@ -219,7 +196,7 @@ test('unprovable: can\'t be stolen, can\'t be blocked by creatures with power ab
     assert.deepEqual(J(t.pending.options), ['p1c1']);
 });
 
-test('measure: on play, look at the opponent\'s whole hand', () => {
+test('measure: paid activation looks at the opponent\'s whole hand', () => {
     const t = play(setup(['tycho'], []), 'p0c0');
     assert.deepEqual(J(t.players[0].knows).sort(), J(t.players[1].hand).sort());
 });
@@ -278,27 +255,15 @@ function duel(axiom, att, blk) {
 }
 const fightAfter = s => act(act(s, { type: 'attack', cid: 'p0c0' }), { type: 'block', cid: 'p1c0' });
 
-test('axiom deck: one axiom flips per round, visible to both, with a counter of what remains', () => {
-    let s = setup([], [], ['underdog', 'silence', 'doubt']);
-    assert.equal(s.round, 1);
-    assert.equal(s.axioms.current, 'underdog');
-    assert.equal(s.axioms.deck.length, 2);
-    s = play(s, 'p0c0');
-    assert.equal(s.axioms.current, 'underdog', 'same round');
-    s = play(s, 'p1c0');
-    assert.equal(s.round, 2);
-    assert.equal(s.axioms.current, 'silence');
-    assert.equal(s.axioms.deck.length, 1);
-    s = play(play(s, 'p0c1'), 'p1c1');
-    s = play(play(s, 'p0c2'), 'p1c2');
-    assert.equal(s.axioms.deck.length + 1, 3, 'reshuffled when the deck ran out');
+test('axiom deck stays put until a paid rewrite or visible timeline event',()=>{
+ let s=setup([],[],['underdog','silence','doubt']);const id=s.axioms.current;s=act(act(s,{type:'end'}),{type:'end'});assert.equal(s.axioms.current,id);assert.equal(s.round,2);
 });
 
 test('every axiom has a name, text and flavour', () => {
     Object.values(Rift.data.axioms).forEach(a => {
         assert.ok(a.id && a.name && a.text && a.flavour, a.id);
     });
-    assert.equal(Rift.data.axiomDecks.starter.length, 12);
+    assert.ok(Rift.data.axiomDecks.starter.length>=20);
 });
 
 test('axiom of the underdog: the weaker creature wins', () => {
@@ -307,12 +272,7 @@ test('axiom of the underdog: the weaker creature wins', () => {
     assert.ok(t.players[1].board.includes('p1c0'));
 });
 
-test('axiom of silence: no steals this round', () => {
-    const t = act(setup(['lobstorian'], [], ['silence']), { type: 'play', cid: 'p0c0' });
-    assert.equal(t.phase, 'action');
-    assert.equal(t.active, 1);
-    assert.equal(t.players[1].steals, 2);
-});
+test('axiom of silence changes activation cost for both players',()=>{const s=setup([],[],['silence']);assert.equal(E.rules(s).abilityCost,3);});
 
 test('axiom of doubt: the attacker is hidden from the defender', () => {
     const t = act(duel('doubt', 'lobstorian', 'astrophysicat'), { type: 'attack', cid: 'p0c0' });
@@ -322,15 +282,8 @@ test('axiom of doubt: the attacker is hidden from the defender', () => {
     assert.ok(!/Lobstorian/.test(ev.publicText));
 });
 
-test('axiom of haste: you may attack after playing', () => {
-    const s = setup(['lobstorian', 'astrophysicat'], [], ['haste']);
-    toBoard(s, 'p0c1', 0);
-    const t = play(s, 'p0c0');
-    assert.equal(t.phase, 'haste');
-    const legal = E.legalActions(t);
-    assert.ok(legal.some(a => a.type === 'attack' && a.cid === 'p0c0'), 'even the new creature');
-    assert.ok(legal.some(a => a.type === 'end'));
-    assert.equal(act(t, { type: 'end' }).active, 1);
+test('axiom of haste permits four actions, with arriving creatures still waiting',()=>{
+ const s=setup(['astrophysicat'],[],['haste']);const t=act(s,{type:'play',cid:'p0c0'});assert.equal(E.actionsLeft(t),3);assert.equal(E.canAttack(t,'p0c0'),false);assert.equal(act(t,{type:'end'}).active,1);
 });
 
 test('axiom of mercy: defeated creatures return to hand', () => {
@@ -360,7 +313,7 @@ test('axiom of extensionality: ties defeat neither', () => {
 test('axiom of choice: the attacker may choose the blocker', () => {
     const s = duel('choice', 'lobstorian', 'astrophysicat');
     toBoard(s, 'p1c1', 1);
-    const legal = E.legalActions(s).filter(a => a.cid === 'p0c0');
+    const legal = E.legalActions(s).filter(a => a.cid === 'p0c0'&&a.type==='attack');
     assert.deepEqual(J(legal.map(a => a.target || null)), [null, 'p1c0', 'p1c1']);
     const t = act(s, { type: 'attack', cid: 'p0c0', target: 'p1c1' });
     assert.notEqual(t.phase, 'block');
@@ -378,7 +331,7 @@ test('axiom of the empty set: abilities are switched off', () => {
     toBoard(s, 'p0c0', 0);
     s.players[0].playedCount = 4;
     assert.equal(E.power(s, 'p0c0'), 5);
-    assert.equal(act(s, { type: 'play', cid: 'p0c1' }).phase, 'steal', 'Gödelix can be stolen');
+    assert.equal(E.activations(s,'p0c0').length,0,'no paid abilities available');
 });
 
 test('principle of induction: winning a fight gives +1 for the rest of the battle', () => {
@@ -419,6 +372,6 @@ test('the-eyebrow: the Rockodile can\'t be stolen', () => {
 
 test('reinvention (a renamed Program) never programs itself, so it can\'t loop', () => {
     const A = Rift.Battle.Abilities;
-    assert.equal(A.reinvention.onPlay, A.program.onPlay);
-    assert.notEqual(A.reinvention.onPlay, A.measure.onPlay);
+    assert.equal(A.reinvention.onActivate, A.program.onActivate);
+    assert.notEqual(A.reinvention.onActivate, A.measure.onActivate);
 });

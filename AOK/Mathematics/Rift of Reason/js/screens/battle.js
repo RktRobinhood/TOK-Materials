@@ -45,7 +45,7 @@
             name: 'You',
             team,
             items: given.items || (save && save.items) || {},
-            axioms: given.axioms || (save && save.axioms) || [],
+            axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
             consumables: given.consumables || {},
         };
     }
@@ -68,7 +68,7 @@
                 { id: 'you', name: 'You', team: me.team, consumables: me.consumables },
                 { id: 'opp', name: opp.name || 'Rival', team: oppTeam },
             ],
-            axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, opp.axioms),
+            axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, opp.axioms || Rift.makeRng(seed+':axiom-opponent').shuffle(Rift.data.axiomDecks.starter).slice(0,10)),
             options: Object.assign({}, p.battleOptions, { mode }),
         });
         const startLives = state.players.map(P => P.lives);
@@ -83,10 +83,11 @@
                 dom.oppBar = el('div.b-bar.opp'),
                 dom.oppHand = el('div.b-hand.opp-hand'),
                 dom.oppBoard = el('div.b-board.opp-board'),
+                dom.fate = el('div.b-fate.panel'),
+                dom.myBar = el('div.b-bar.me'),
                 dom.prompt = el('div.b-prompt.panel'),
                 dom.myBoard = el('div.b-board.my-board'),
                 dom.myHand = el('div.b-hand.my-hand'),
-                dom.myBar = el('div.b-bar.me'),
             ]),
             el('aside.b-side', {}, [
                 el('button.btn.small',{text:'How to play',onclick(){
@@ -160,7 +161,7 @@
         function abilityLines(c) {
             const defs = B().Abilities;
             const lines = [];
-            if (c.ability && defs[c.ability]) {
+            if (c.ability && defs[c.ability] && !defs[c.ability].onActivate) {
                 lines.push(el('div.b-ab' + (c.warped ? '.warped' : ''), {}, [
                     el('b', { text: (c.warped ? '🌀 ' : '') + defs[c.ability].name + ': ' }), defs[c.ability].text,
                 ]));
@@ -168,7 +169,7 @@
                 lines.push(el('div.b-ab.none', { text: c.injured.includes('no-ability') ? (c.loaner ? 'Teaching card: no ability' : '🤕 No ability (injured)') : 'No ability' }));
             }
             (c.gained || []).forEach(a => {
-                if (defs[a]) lines.push(el('div.b-ab.gained', {}, [el('b', { text: '+ ' + defs[a].name + ': ' }), defs[a].text]));
+                if (defs[a]&&!defs[a].onActivate) lines.push(el('div.b-ab.gained', {}, [el('b', { text: '+ ' + defs[a].name + ': ' }), defs[a].text]));
             });
             return lines;
         }
@@ -188,24 +189,28 @@
             if (c.prediction) tags.push(el('span.b-tag', { text: '🔮 ' + Rift.COLOURS[c.prediction.colour].name }));
             if (c.hype && state.players[c.controller].turnsTaken < c.hype.expires) tags.push(el('span.b-tag.up', { text: '📣 Hype' }));
             if (c.metaverseUsed) tags.push(el('span.b-tag', { text: 'Metaverse used' }));
-            const node = el('div.bcard', {
+            if (state.players[c.controller].board.includes(cid)) tags.push(el('span.b-tag.readiness', {text:c.exhausted?'Exhausted':c.enteredTurn===state.turn&&!E.rules(state).arrivalReady?'Arriving · can block':'Ready'}));
+            const node = el(o.onclick?'button.bcard':'div.bcard', {
+                type:o.onclick?'button':null,
                 dataset: { colour, cid },
                 title: pp.parts.map(x => `${x.label} ${x.amount >= 0 && x.source !== 'base' ? '+' : ''}${x.amount}`).join('\n'),
                 onclick: o.onclick || null,
             }, [
                 el('div.bcard-top', {}, [
-                    colourChip(colour, true),
-                    el('span.bcard-power' + (delta > 0 ? '.up' : delta < 0 ? '.down' : ''), { text: String(pp.total) }),
+                    el('span.b-cost',{text:E.playCost(state,cid) + ' ⚡',title:'Energy cost to play'}), colourChip(colour, true),
+                    el('span.bcard-power' + (delta > 0 ? '.up' : delta < 0 ? '.down' : ''), { text: 'Power ' + pp.total }),
                 ]),
                 el('div.bcard-art', {}, [Rift.Assets.img('creature/' + c.species + '/idle', { colour: c.colour, label: sp.name, alt: sp.name })]),
                 el('div.bcard-name', { text: sp.name + (sp.rarity === 'legendary' ? ' ★' : '') }),
                 c.nicknamedRound === state.round && c.nickname ? el('div.bcard-nick', { text: '"' + c.nickname + '"' }) : null,
                 el('div.bcard-text', {}, abilityLines(c)),
+                ...E.activations(state,cid).map(a=>el('div.b-active-ability',{text:'Activate ' + a.name + ' · ' + E.rules(state).abilityCost + ' ⚡: ' + a.text.replace(/^Activate:\s*/, '')})),
                 tags.length ? el('div.bcard-tags', {}, tags) : null,
                 o.note ? el('div.bcard-note' + (o.noteClass ? '.' + o.noteClass : ''), { text: o.note }) : null,
             ]);
             (o.classes || []).forEach(k => node.classList.add(k));
             if (o.onclick) node.classList.add('clickable');
+            if (c.exhausted) node.classList.add('exhausted');
             return node;
         }
 
@@ -226,7 +231,8 @@
             return [
                 el('div.b-name' + (active ? '.active' : ''), { text: (pIndex === ME ? 'You' : P.name) + (active ? ' — turn' : '') }),
                 el('div.b-lives', { title: P.lives + ' lives' }, hearts),
-                el('div.b-steals', { title: P.steals + ' steals left' }, [el('span.label', { text: 'Steals' })].concat(steals.length ? steals : [el('span.muted', { text: 'none' })])),
+                el('div.b-energy', {text:'Energy ' + P.energy + '/' + (P.capacity + (P.consumables['extra-energy'] || 0)) + ' ⚡'}),
+                active?el('div.b-actions',{text:E.actionsLeft(state) + '/' + E.rules(state).actions + ' actions left'}):el('div.b-actions',{text:'Next turn: ' + (Math.min(state.options.energyCap,P.capacity+E.rules(state).growth)+(P.consumables['extra-energy']||0)) + ' energy'}),
                 el('div.b-count', { text: `Deck ${P.deck.length} · Hand ${P.hand.length} · Lost ${P.discard.length}` }),
             ];
         }
@@ -254,36 +260,23 @@
             box.appendChild(buttons);
             const pend = state.pending;
             switch (state.phase) {
-                case 'action':
-                case 'haste': {
-                    const haste = state.phase === 'haste';
-                    const forced = !haste && L.length && L.every(a => a.type === 'attack') && state.players[ME].hand.length > 0;
-                    if (L.length === 1 && L[0].type === 'pass') {
-                        ask.textContent = 'You can\'t play or attack this turn.';
-                        buttons.appendChild(button('Pass', () => act({ type: 'pass' }), 'primary'));
-                        break;
+                case 'action': {
+                    const sel=ui.selected, P=state.players[ME];
+                    ask.textContent = E.actionsLeft(state) ? 'Your turn. Spend energy to play, activate, or rewrite. Attack with a ready creature. Then End turn.' : 'No actions left. End turn to refill energy and ready your creatures next time.';
+                    if(sel && P.hand.includes(sel)) {
+                        const play=L.find(a=>a.type==='play'&&a.cid===sel);
+                        ask.textContent=name(sel)+' costs '+E.playCost(state,sel)+' energy and 1 action. '+(E.rules(state).arrivalReady?'New creatures can act immediately.':'New creatures can block, but act next turn.');
+                        if(play) buttons.appendChild(button('Play '+name(sel)+' · '+E.playCost(state,sel)+' ⚡',()=>act(play),'primary'));
+                        else buttons.appendChild(el('span.muted',{text:'Cannot play: need enough energy and an action.'}));
+                    } else if(sel && P.board.includes(sel)) {
+                        const c=state.cards[sel];
+                        ask.textContent=name(sel)+': '+(c.exhausted?'exhausted until your next turn.':!E.readyToUse(state,sel)?'arriving: can act next turn.':'choose Attack or Activate. Each uses 1 action. '+(E.rules(state).exhaust?'It exhausts; keep it ready if you want to block.':'The current rule keeps it ready.'));
+                        L.filter(a=>a.cid===sel&&a.type==='attack').forEach(a=>buttons.appendChild(button(a.target?'Force '+name(a.target)+' to block':'Attack · 0 ⚡',()=>act(a),'primary')));
+                        L.filter(a=>a.cid===sel&&a.type==='activate').forEach(a=>buttons.appendChild(button('Activate '+(B().Abilities[a.ability]||{name:'Focus'}).name+' · '+E.rules(state).abilityCost+' ⚡',()=>act(a))));
                     }
-                    const sel = ui.selected;
-                    if (sel && state.players[ME].hand.includes(sel)) {
-                        ask.textContent = `Play ${name(sel)}?`;
-                        buttons.appendChild(button('Play ' + name(sel), () => act({ type: 'play', cid: sel }), 'primary'));
-                        buttons.appendChild(button('Cancel', () => { ui.selected = null; render(); }));
-                    } else if (sel && state.players[ME].board.includes(sel)) {
-                        const attacks = L.filter(a => a.type === 'attack' && a.cid === sel);
-                        ask.textContent = `Attack with ${name(sel)} (power ${E.power(state, sel)})?`;
-                        attacks.forEach(a => {
-                            const label = a.target ? `Force ${name(a.target)} to block` : (attacks.length > 1 ? 'Attack (they choose the blocker)' : 'Attack!');
-                            buttons.appendChild(button(label, () => act(a), a.target ? '' : 'primary'));
-                        });
-                        buttons.appendChild(button('Cancel', () => { ui.selected = null; render(); }));
-                    } else if (haste) {
-                        ask.textContent = 'Axiom of Haste: you may attack as well. Pick a creature on your side, or end your turn.';
-                    } else if (forced) {
-                        ask.textContent = 'Every Time: a creature on your side must attack. Pick it.';
-                    } else {
-                        ask.textContent = 'Your turn: play a creature from your hand, or pick one on your side to attack.';
-                    }
-                    if (haste) buttons.appendChild(button('End turn', () => act({ type: 'end' })));
+                    if(sel) buttons.appendChild(button('Cancel selection',()=>{ui.selected=null;render();}));
+                    if(L.some(a=>a.type==='rewrite'))buttons.appendChild(button('Rewrite a rule · '+E.rules(state).rewriteCost+' ⚡',()=>{const offer=dom.axiom.querySelector('button');if(offer){offer.scrollIntoView({block:'nearest'});offer.focus({preventScroll:true});}}));
+                    buttons.appendChild(button('End turn',()=>act({type:'end'}),'end-turn'));
                     break;
                 }
                 case 'steal': {
@@ -298,12 +291,15 @@
                     ask.textContent = pend.hidden
                         ? 'A face-down creature attacks! Block with…? (Pick a creature on your side.)'
                         : `${name(att)} attacks with power ${E.power(state, att)}! Block with…? (Pick a creature on your side.)`;
-                    buttons.appendChild(button(`Take it (lose a life, ${state.players[ME].lives - 1} left)`, () => act({ type: 'take' }), 'danger'));
+                    buttons.appendChild(button(E.rules(state).reverseHearts&&state.players[ME].lives===1?'Take hit — YOU WIN at zero hearts':`Take hit (−1 heart, ${state.players[ME].lives-1} left)`,()=>act({type:'take'}),'danger'));
+                    ask.textContent+=' Only ready creatures can block. '+(E.rules(state).exhaust?'Blocking exhausts them.':'The current rule keeps blockers ready.');
                     break;
                 }
                 case 'choose': {
                     ask.textContent = pend.prompt || 'Choose.';
-                    if (pend.choiceKind === 'colour') {
+                    if (pend.choiceKind === 'axiom') {
+                        pend.options.forEach(id=>buttons.appendChild(button(Rift.data.axioms[id].name+' — '+Rift.data.axioms[id].text,()=>act({type:'choose',choice:id}))));
+                    } else if (pend.choiceKind === 'colour') {
                         pend.options.forEach(col => buttons.appendChild(el('button.btn.small.colour-btn', { type: 'button', dataset: { colour: col }, onclick: () => act({ type: 'choose', choice: col }) }, [Rift.COLOURS[col].icon + ' ' + Rift.COLOURS[col].name])));
                     } else if (pend.choiceKind === 'card') {
                         dom.choice.appendChild(el('div.b-choice-title', { text: pend.prompt }));
@@ -336,7 +332,7 @@
             const L = legal();
             const phase = state.phase;
             const pend = state.pending;
-            const attackers = new Set(L.filter(a => a.type === 'attack').map(a => a.cid));
+            const attackers = new Set(L.filter(a => a.type === 'attack' || a.type === 'activate').map(a => a.cid));
             const blockers = phase === 'block' && decider() === ME ? new Set(pend.options) : new Set();
             const targets = phase === 'choose' && decider() === ME && pend.choiceKind === 'target' ? new Set(pend.options) : new Set();
             const attacking = (phase === 'block' && pend && !(pend.hidden && decider() === ME)) ? pend.attacker : null;
@@ -356,7 +352,7 @@
                     if (enteredNow.includes(cid)) classes.push('entered');
                     if (cid === attacking) classes.push('attacking');
                     if (cid === spotlight) classes.push('spotlight');
-                    if (pi === ME && attackers.has(cid)) {
+                    if (pi === ME && state.phase==='action' && myTurnToAct()) {
                         classes.push('can-act');
                         onclick = () => { ui.selected = ui.selected === cid ? null : cid; render(); };
                     }
@@ -388,10 +384,7 @@
             state.players[ME].hand.forEach(cid => {
                 const classes = [];
                 let onclick = null;
-                if (plays.has(cid)) {
-                    classes.push('can-act');
-                    onclick = () => { ui.selected = ui.selected === cid ? null : cid; render(); };
-                }
+                if (state.phase==='action'&&myTurnToAct()) { if(plays.has(cid)) classes.push('can-act'); onclick=()=>{ui.selected=ui.selected===cid?null:cid;render();}; }
                 if (ui.selected === cid) classes.push('selected');
                 dom.myHand.appendChild(cardEl(cid, { classes, onclick }));
             });
@@ -406,27 +399,34 @@
 
         // ---- side panel ----
         function axiomCard(id, onclick) {
-            const ax = Rift.data.axioms[id];
-            const art = 'ui/axiom-' + id;
-            return el('div.axiom-card' + (onclick ? '.clickable' : ''), { onclick: onclick || null }, [
-                Rift.Assets.has(art) ? Rift.Assets.img(art, { className: 'axiom-art', alt: '' }) : null,
-                el('div.axiom-kicker', { text: 'Axiom' }),
-                el('div.axiom-name', { text: ax.name }),
-                el('div.axiom-text', { text: ax.text }),
-                el('div.axiom-flavour', { text: ax.flavour }),
+            const ax=Rift.data.axioms[id];
+            return el(onclick?'button.axiom-card.clickable':'div.axiom-card', {type:onclick?'button':null, onclick:onclick||null}, [
+                el('div.axiom-kicker',{text:ax.category+' rule'}), el('div.axiom-name',{text:ax.name}),
+                el('div.axiom-text',{text:ax.text}), onclick?el('div.b-cost',{text:'Rewrite · '+E.rules(state).rewriteCost+' ⚡ + 1 action'}):null,
             ]);
         }
 
         function renderAxiom() {
-            dom.axiom.innerHTML = '';
-            const A = state.axioms;
-            const flipped = state.lastEvents.some(e => e.t === 'axiom');
-            const card = A.current ? axiomCard(A.current) : el('div.axiom-card.empty', { text: 'No axiom in play.' });
-            if (flipped) card.classList.add('flip');
-            dom.axiom.appendChild(card);
-            dom.axiom.appendChild(el('div.axiom-count', { text: `Round ${state.round} · ${A.deck.length} axiom${A.deck.length === 1 ? '' : 's'} left in the deck` }));
-            const peek = state.players[ME].peek;
-            if (peek && A.deck[0] === peek) dom.axiom.appendChild(el('div.axiom-peek', { text: 'You peeked: next is ' + Rift.data.axioms[peek].name + '.' }));
+            dom.axiom.innerHTML='';
+            dom.axiom.appendChild(el('h3',{text:'Rules now · Round '+state.round}));
+            dom.axiom.classList.toggle('reverse-goal',E.rules(state).reverseHearts);
+            dom.axiom.appendChild(el('dl.b-rule-summary',{},E.ruleSummary(state).flatMap(([label,text])=>[el('dt',{text:label}),el('dd',{text})])));
+            const active=E.activeAxioms(state);
+            if(active.length) dom.axiom.appendChild(el('div.b-active-rules',{},[el('strong',{text:'Changed rules'}),...active.map(a=>axiomCard(a.id))]));
+            const events=E.timeline(state);
+            dom.fate.innerHTML='';
+            dom.fate.appendChild(el('h4',{text:'Fate track · shared events'}));
+            if(events.length){
+                dom.fate.appendChild(el('div.fate-spaces',{'aria-label':events[0].turns+' turns until the next Fate event'},Array.from({length:events[0].turns},(_,i)=>el('span',{text:i===0?'◆':'·'}))));
+                events.forEach(e=>dom.fate.appendChild(el('p',{text:'In '+e.turns+' turns: '+e.text})));
+                dom.fate.appendChild(el('p.small.muted',{text:'Either player’s End turn advances one space. Abilities can move the track. Rewrites can change the next offered flip.'}));
+            }else dom.fate.appendChild(el('p',{text:'Automatic events pause in this learning match.'}));
+            dom.axiom.appendChild(el('p.small',{text:'Shared deck: '+state.axioms.deck.length+' cards waiting · '+state.axioms.discard.length+' discarded. Ten contributed by each side in normal matches.'}));
+            const rewrites=legal().filter(a=>a.type==='rewrite');
+            dom.axiom.appendChild(el('h4',{text:'Choose a rule rewrite'}));
+            dom.axiom.appendChild(el('p.small',{text:'Applies to BOTH players until replaced in the same category or a timeline reset.'}));
+            state.axioms.deck.slice(0,3).forEach(id=>{const action=rewrites.find(a=>a.choice===id);dom.axiom.appendChild(axiomCard(id,action?()=>act(action):null));});
+            if(!rewrites.length)dom.axiom.appendChild(el('p.small.muted',{text:'Need '+E.rules(state).rewriteCost+' energy, 1 action and your action phase to rewrite.'}));
         }
 
         function renderLog() {
@@ -477,6 +477,7 @@
             const title = outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
             const reason = {
                 lives: outcome === 'won' ? 'They ran out of lives.' : 'You ran out of lives.',
+                'reverse-hearts': outcome==='won'?'The victory rule made reaching your own zero hearts a win.':'The opponent reached zero hearts under the reversed victory rule.',
                 'cannot-act': outcome === 'won' ? 'They ran out of creatures.' : 'You ran out of creatures.',
                 'turn-limit': 'The rift closed before anyone won outright.',
             }[state.endReason] || '';

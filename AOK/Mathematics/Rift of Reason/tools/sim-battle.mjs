@@ -55,7 +55,7 @@ function run(n, levels, label) {
         const teams = [0, 1].map(p => Engine.randomTeam(rng, TEAM, { prefix: 'g' + g + 'p' + p, legendaries: LEGENDARIES }));
         let s = Engine.createBattle({
             seed: SEED + ':' + label + ':' + g,
-            players: teams.map((team, p) => ({ name: 'P' + p, team })),
+            players: teams.map((team, p) => ({ name: 'P' + p, team, axioms:rng.shuffle(Rift.data.axiomDecks.starter).slice(0,10) })),
             options: { mode: 'trainer' },
         });
         const first = s.active;

@@ -17,7 +17,7 @@
             return el(active?'button.lesson-card.lesson-target':'div.lesson-card',Object.assign({'data-cid':cid},active?{type:'button','aria-label':L.steps[index].label,onclick:act}:{}),[
                 active?el('span.lesson-pointer',{text:'↓ '+L.steps[index].label}):null,
                 Rift.Assets.img('creature/'+c.species+'/idle',{label:sp.name,alt:sp.name}),
-                el('strong',{text:sp.name}),el('span',{text:Rift.COLOURS[c.colour].name+' · Power '+E.power(state,cid)}),
+                el('strong',{text:sp.name}),el('span',{text:E.playCost(state,cid)+' energy · Power '+E.power(state,cid)}),el('span',{text:c.exhausted?'Exhausted':state.players[c.controller].board.includes(cid)?E.readyToUse(state,cid)?'Ready / can block':'Arriving / can block':'In hand'}),
             ]);
         }
         function row(ids){return ids.length?ids.map(card):[el('p.small.muted',{text:'No creatures here yet.'})];}
@@ -25,14 +25,14 @@
         function speak(){const step=L.steps[index];if(step&&Rift.Audio)Rift.Audio.speak({speaker:'granny',text:step.text,voice:Rift.voiceId('granny',step.text)});}
         function render(){
             screen.innerHTML='';
-            const done=index===L.steps.length, step=done?null:L.steps[index], ax=Rift.data.axioms[state.axioms.current];
+            const done=index===L.steps.length, step=done?null:L.steps[index];
             screen.append(
                 el('div.row.wrap.lesson-header',null,[el('h2',{text:done?'You won the lesson!':'Card minigame · '+(index+1)+' / '+L.steps.length}),
                     el('button.btn.small',{text:'How to play',disabled:busy,onclick:rules}),el('button.btn.small',{text:'Leave lesson',onclick:()=>leave(false)})]),
-                el('p.small.lesson-safety',{text:'Practice with loaned cards. Nothing is at risk. Abilities are paused.'}),
+                el('p.small.lesson-safety',{text:'Practice with loaned cards. Nothing is at risk. One heart each for this learning match; six in normal matches.'}),
                 el('div.lesson-layout',null,[
                     el('div.lesson-table',null,[
-                        el('div.lesson-score.row.wrap',{role:'status',text:'Your lives: '+state.players[0].lives+' · Steals: '+state.players[0].steals+' · Granny’s lives: '+state.players[1].lives}),
+                        el('div.lesson-score.row.wrap',{role:'status',text:'You: '+state.players[0].lives+' heart · Energy '+state.players[0].energy+'/'+state.players[0].capacity+' · '+(state.active===0?'Your':'Granny’s')+' actions: '+E.actionsLeft(state)+'/'+E.rules(state).actions+' left · Granny: '+state.players[1].lives+' heart'}),
                         el('h3',{text:'Granny’s board'}),el('div.lesson-opponent.row',null,row(state.players[1].board)),
                         el('h3',{text:'Your board'}),el('div.lesson-board.row',null,row(state.players[0].board)),
                         el('h3',{text:'Your hand · click a highlighted card to play it'}),el('div.lesson-hand.row',null,row(state.players[0].hand)),
@@ -40,15 +40,14 @@
                     el('aside.lesson-guide',null,[
                         el('div.lesson-coach.panel',null,[Rift.Assets.img(Rift.data.speakers.granny.art,{className:'tutorial-face',label:'Granny Axiom'}),
                             el('h3',{text:done?'Ready for a match':step.title}),
-                            el('p',{text:done?'You played, attacked, blocked and stole. Read each shared axiom in a real match: Granny will not always take the hit!':step.text}),
+                            el('p',{text:done?'You spent energy, used multiple actions, exhausted creatures and rewrote two rules. A real match has six hearts. Check Rules now and the timeline before choosing.':step.text}),
                             el('p.lesson-notice',{role:'status','aria-live':'polite',text:done?'Practice complete. Your collected cards are safe.':notice||'Your turn. Follow the gold arrow.'}),
                             done?el('button.btn.primary.lesson-target',{text:'Finish lesson',onclick:()=>leave(true)}):
                                 el('button.btn.small',{text:'Hear this step again',disabled:busy,onclick:speak}),
                         ]),
-                        el('div.lesson-axiom.panel',null,[el('strong',{text:'Shared axiom: '+ax.name}),el('p',{text:ax.text}),
-                            index===4&&!busy?el('button.btn.primary.lesson-target',{text:step.label,onclick:act}):null]),
-                        !busy&&(index===4||index===5)?comparison():null,
-                        index===6&&!busy?el('button.btn.primary.lesson-target',{text:step.label,onclick:act}):null,
+                        !done&&!busy&&!targetCid()?el('button.btn.primary.lesson-target',{text:step.label,onclick:act}):null,
+                        el('div.lesson-axiom.panel',null,[el('strong',{text:'Rules now'}),...E.ruleSummary(state).slice(0,2).map(([label,text])=>el('p',{text:label+': '+text})),...E.activeAxioms(state).map(ax=>el('p',{text:ax.name+': '+ax.text}))]),
+                        !busy&&(index===9||index===10)?comparison():null,
                     ]),
                 ]),
             );
@@ -62,7 +61,10 @@
             if(action.type==='block')return player+' block'+suffix+' with '+name+'.';
             if(action.type==='take')return player+' take'+suffix+' the hit: one life lost.';
             if(action.type==='steal')return 'You steal Muskrat. It joins your board; Granny gets an extra turn.';
-            return player+' let'+suffix+' the new card stay.';
+            if(action.type==='end')return player+' end'+suffix+' the turn. Watch the energy refill and creatures ready.';
+            if(action.type==='activate')return player+' activate'+suffix+' '+name+': spend energy and exhaust it.';
+            if(action.type==='rewrite')return 'Rule changes for both players: '+Rift.data.axioms[action.choice].name+'.';
+            return 'Read the current rules.';
         }
         function act(){
             if(closed||busy||help)return;
@@ -89,9 +91,9 @@
             const animation=target.animate(frames,{duration:700,easing:'ease-in-out'});animations.add(animation);animation.onfinish=()=>animations.delete(animation);
         }
         function comparison(){
-            const ordinary=E.fightOutcome(Object.assign({},state,{axioms:Object.assign({},state.axioms,{current:'empty-set'})}),'p0c1','p1c2');
-            const changed=E.fightOutcome(state,'p0c1','p1c2');
-            function line(label,out){return el('p',{text:label+': Astrophysicat '+out.pa+' vs Speedcheeta '+out.pb+' → '+(out.attackerDefeated?'Speedcheeta':'Astrophysicat')+' wins.'});}
+            const ordinary=E.fightOutcome({...state,axioms:{...state.axioms,active:{},current:null}},'p0c0','p1c3');
+            const changed=E.fightOutcome({...state,axioms:{...state.axioms,current:'underdog'}},'p0c0','p1c3');
+            function line(label,out){return el('p',{text:label+': Astrophysicat '+out.pa+' vs Lobstorian '+out.pb+' → '+(out.attackerDefeated?'Lobstorian':'Astrophysicat')+' wins.'});}
             return el('div.lesson-comparison.panel',null,[el('strong',{text:'Same cards, different rule'}),line('Normal rules',ordinary),line('Underdog',changed)]);
         }
         render();speak();

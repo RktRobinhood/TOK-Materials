@@ -34,7 +34,7 @@
                 (c.warped && c.warped.ability) || 0,
                 c.trophyOf || 0,
             ]),
-            a: (o.axioms || []).filter(id => (Rift.data.axioms || {})[id]),
+            a: Array.from(new Set((o.axioms || []).filter(id => (Rift.data.axioms || {})[id]))).slice(0,10),
         };
         if (o.stake) payload.s = o.stake;
         return Rift.State.encode('team', payload);
@@ -65,7 +65,7 @@
                 trophyOf: trophyOf ? String(trophyOf).slice(0, 24) : null, wins: 0,
             };
         });
-        const axioms = Array.isArray(p.a) ? p.a.filter(id => (Rift.data.axioms || {})[id]) : [];
+        const axioms = Array.isArray(p.a) ? Array.from(new Set(p.a.filter(id => (Rift.data.axioms || {})[id]))).slice(0,10) : [];
         let stake = null;
         if (p.s && typeof p.s === 'object' && p.s.items && typeof p.s.items === 'object') {
             // A ghost can offer at most one ordinary item, whatever the code says.

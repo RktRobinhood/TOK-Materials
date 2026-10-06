@@ -18,19 +18,19 @@ function setup(){
 }
 test('guided lesson requires the actual card or life target and shows legal replies one at a time',()=>{
  const g=setup();
- for(let i=0;i<8;i++){
-  if(i===4){const comparison=g.root.querySelector('.lesson-comparison');assert.ok(comparison);const text=comparison.children.map(n=>n.textContent).join(' ');assert.match(text,/Normal rules: Astrophysicat 6 vs Speedcheeta 4 → Astrophysicat wins/);assert.match(text,/Underdog: Astrophysicat 6 vs Speedcheeta 4 → Speedcheeta wins/);}
+ for(let i=0;i<g.Rift.Battle.Lesson.steps.length;i++){
+  if(i===9){const comparison=g.root.querySelector('.lesson-comparison');assert.ok(comparison);const text=comparison.children.map(n=>n.textContent).join(' ');assert.match(text,/Normal rules: Astrophysicat 4 vs Lobstorian 6 → Lobstorian wins/);assert.match(text,/Underdog: Astrophysicat 4 vs Lobstorian 6 → Astrophysicat wins/);}
   const target=g.root.querySelector('.lesson-target');assert.ok(target);
   assert.equal(target['aria-label']||target.textContent,g.Rift.Battle.Lesson.steps[i].label);
   const stepBefore=g.handle.state.step;target.onclick();
-  if(i!==4){assert.equal(g.handle.state.step,stepBefore+1,'one move immediately, replies wait');const after=g.handle.state;target.onclick();assert.equal(g.handle.state,after,'double clicks do not repeat moves');}
+  if(g.Rift.Battle.Lesson.steps[i].actions.length>0){assert.equal(g.handle.state.step,stepBefore+1,'one move immediately, replies wait');const after=g.handle.state;target.onclick();assert.equal(g.handle.state,after,'double clicks do not repeat moves');}
   g.flush();
  }
  assert.equal(g.Rift.Battle.Engine.winner(g.handle.state),0);
  g.nodes().find(n=>n.textContent==='Finish lesson').onclick();assert.equal(g.won(),true);
 });
 test('leaving mid-animation cancels scripted replies and cannot complete the lesson',()=>{
- const g=setup();g.root.querySelector('.lesson-target').onclick();assert.equal(g.timers.size,1);
+ const g=setup();g.root.querySelector('.lesson-target').onclick();g.flush();g.root.querySelector('.lesson-target').onclick();assert.equal(g.timers.size,1);
  const state=g.handle.state;g.handle.destroy();g.flush();assert.equal(g.handle.state,state);assert.equal(g.won(),null);
 });
 test('teardown removes the rules modal',()=>{

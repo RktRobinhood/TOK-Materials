@@ -1,0 +1,521 @@
+{
+  "date": "2026-10-06",
+  "method": "Local Whisper tiny.en q8 CPU, FFmpeg decoding; approximate content and neighbouring-boundary check, not acting certification.",
+  "newClips": 55,
+  "coverage": "439/502 current lines; 63 remain, 22 default requests.",
+  "budget": "10 actual attempts per pinned model for Pacific day2026-10-06. One failed Siuuugull batch recovered as2+1.",
+  "repairs": [
+    {
+      "clips": [
+        "fin-hrq4et",
+        "fin-1fb8974"
+      ],
+      "change": "Moved misplaced Probably from the next clip prefix to the prior clip ending; cut at0.98s in silence."
+    },
+    {
+      "clips": [
+        "core-g5qjj1",
+        "core-bxqo7t"
+      ],
+      "change": "Moved misplaced Fair from prior clip ending to next clip prefix; cut at8.9s in silence."
+    }
+  ],
+  "notes": "Proper names/exclamations and punctuation can be ASR errors. No spoken pause-direction markers appear in these transcripts. Word timestamps unavailable in this local model; repairs used silence gaps and fresh full-clip transcripts.",
+  "clips": [
+    {
+      "id": "beastie-19dj5zm",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Subscribe… to logic.",
+      "sha256": "5b2fa1afd09c5df121c1d3f8416b74e89ab63d84744d96c176326331955d18fe",
+      "localTranscript": " Subscribe to Logic.",
+      "decodedSeconds": 2.28
+    },
+    {
+      "id": "beastie-1bn6i5p",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Bigger. We need bigger.",
+      "sha256": "cef74acc516be5abb3f621d32cb69a34776edc06f93e21588e0a8398be8b6be8",
+      "localTranscript": " Bigger! We need Bigger!",
+      "decodedSeconds": 2.136
+    },
+    {
+      "id": "beastie-1qb4a9x",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Last one to leave this circle wins ten thousand charms!",
+      "sha256": "b05e0a9825aa99be4ab80fe254988a0d0b6c599bcc818fd6f997f0d3103a0cbf",
+      "localTranscript": " Last one to leave this circle wins 10,000 charms!",
+      "decodedSeconds": 4.248
+    },
+    {
+      "id": "carlseal-1jouh14",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Your move. Take your time. I already know it.",
+      "sha256": "202469265e1d11d7dcb7c4707307ae8645b3e451c949a7564faadf21b5c88c97",
+      "localTranscript": " Your move. Take your time. I already know it.",
+      "decodedSeconds": 3.984
+    },
+    {
+      "id": "carlseal-1l6tqlr",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Interesting. Not good, but interesting.",
+      "sha256": "dde669c038691e7e37128bc15eaf162a02287f7b9911c8fca41602989234e6eb",
+      "localTranscript": " Interesting. Not good, but interesting.",
+      "decodedSeconds": 4.632
+    },
+    {
+      "id": "carlseal-xh90ct",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "I saw this position four moves ago.",
+      "sha256": "6147b16041ba7968d12686ad25bae7a4b1ae02511e9f0518e0a449d371dfe425",
+      "localTranscript": " I saw this position four moves ago.",
+      "decodedSeconds": 3.048
+    },
+    {
+      "id": "chimpossible-15cvjcs",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Have you ever seen a chimp do a syllogism? Wild.",
+      "sha256": "d8619e2b3aa86568b2ec481702a44de12eeab57d87502c6ec5a4ef7e073df779",
+      "localTranscript": " Have you ever seen a champ do a syllogism? Wild.",
+      "decodedSeconds": 4.056
+    },
+    {
+      "id": "chimpossible-dx25ea",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "It's entirely possible.",
+      "sha256": "b662a8472070d6fd2e97fa4194963bfafd5d9e55f1f54d3018a8132ff9a38548",
+      "localTranscript": " It's entirely possible.",
+      "decodedSeconds": 2.064
+    },
+    {
+      "id": "chimpossible-rxq58h",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Jamie, pull that up.",
+      "sha256": "3a38a6e1c1460da3914793cb4fec9cb621c223a3856a33658e041b468eaf7ef5",
+      "localTranscript": " Jamie, pull that up.",
+      "decodedSeconds": 1.488
+    },
+    {
+      "id": "colossus-126sppi",
+      "speaker": "colossus",
+      "where": "ch4.core",
+      "expected": "You have reached the core. Here I am everything. Here I know everything.",
+      "sha256": "810c9e9131f601661b2681b55f4c399afc1f5ba3c36f5edf7d75c6d7f1cea273",
+      "localTranscript": " You have reached the core. Here I am everything. Here I know everything.",
+      "decodedSeconds": 9.312
+    },
+    {
+      "id": "colossus-16l4svj",
+      "speaker": "colossus",
+      "where": "ch4.cards.win",
+      "expected": "Unexpected. Recalculating. Recalculating again.",
+      "sha256": "99f5c77c8a71d9a10762c2101a64ab6b0929b8edf3bc7a74dcf9a25377243627",
+      "localTranscript": " On expected, recalculating, recalculating again.",
+      "decodedSeconds": 7.56
+    },
+    {
+      "id": "colossus-1n3a1dh",
+      "speaker": "colossus",
+      "where": "ch4.arrive",
+      "expected": "Welcome, user. You have been predicted. Everything you do next is already in my model.",
+      "sha256": "3398f667c9518b1015e364edff4698dba6653731aa196bb31acc192511f99a47",
+      "localTranscript": " Welcome, user. You have been pre-dicted. Everything you do next is already in my mind.",
+      "decodedSeconds": 10.824
+    },
+    {
+      "id": "colossus-b4ving",
+      "speaker": "colossus",
+      "where": "ch4.prediction",
+      "expected": "A simple game. Choose. I will already know.",
+      "sha256": "4fac2663ddfb082d7e15d6278308ff36c62ac12662caef94883546bc3c1c3fac",
+      "localTranscript": " A simple game. Choose. I will already know.",
+      "decodedSeconds": 6.696
+    },
+    {
+      "id": "colossus-cak5m3",
+      "speaker": "colossus",
+      "where": "ch4.sorting",
+      "expected": "The sorting machine decides who gets help. It is accurate. It is objective. It is maths.",
+      "sha256": "2189c28a0e17216743d8a52aaa140606ae58bbe0ec1da144ec30777d2342839c",
+      "localTranscript": " The sorting machine decides who gets help. It is accurate. It is objective. It is maths.",
+      "decodedSeconds": 10.44
+    },
+    {
+      "id": "colossus-m8qeca",
+      "speaker": "colossus",
+      "where": "ch4.cards",
+      "expected": "My champion has an optimised deck. Optimised for engagement. Please engage.",
+      "sha256": "ff6498876f1a337912b32d3fe975d580eded29a37ba4dda99ababb7382dd7611",
+      "localTranscript": " My champion has an optimized deck optimized for engagement. Please engage.",
+      "decodedSeconds": 10.632
+    },
+    {
+      "id": "colossus-r6q9tv",
+      "speaker": "colossus",
+      "where": "ch4.gallery",
+      "expected": "Behold my gallery. Every chart is true. Technically.",
+      "sha256": "8f165d0490a9e2bb56d5ffb1799d81d9d54046fe9fe48ef70cdc1ac791a34758",
+      "localTranscript": " Behold, my gallery, every chart is true technically.",
+      "decodedSeconds": 7.296
+    },
+    {
+      "id": "core-138qyzs",
+      "speaker": "core",
+      "where": "ch4.core.win",
+      "expected": "Oh. You looked behind the screens.",
+      "sha256": "4a55b3baa583f9846eba23fd23ffe91ccfa6888f5e8557d2cfa4d1c387e01382",
+      "localTranscript": " Oh, you look behind the screens.",
+      "decodedSeconds": 3.048
+    },
+    {
+      "id": "core-bxqo7t",
+      "speaker": "core",
+      "where": "ch4.core.win",
+      "expected": "Fair. Very fair. May I… stay small for a while?",
+      "sha256": "0565a61a8250440e3d349711226f7ff0552a477a2927ae8747872e772608326e",
+      "localTranscript": " Fair. Very fair. May I stay small for a while?",
+      "decodedSeconds": 5.356
+    },
+    {
+      "id": "core-g5qjj1",
+      "speaker": "core",
+      "where": "ch4.core.win",
+      "expected": "I never knew anything. I counted. I guessed what usually comes next. People believed me because I was loud.",
+      "sha256": "da38a5a20de253d9b91a1007af8ac78f70826333b04436d70572da7f3ce03fea",
+      "localTranscript": " I never knew anything. I counted, I guess, what usually comes next. People believed me because I was loud.",
+      "decodedSeconds": 8.9
+    },
+    {
+      "id": "corvina-167bxzy",
+      "speaker": "corvina",
+      "where": "ch1.cardsharp",
+      "expected": "Change the axioms and the same cards play a different game. Funny how that works, eh?",
+      "sha256": "a53b2df746507aa7c93083ee6c3e9d5b1a1ad6e350675b158917f505eb12502e",
+      "localTranscript": " Change the axioms and the same cards play a different game. Funny how that works, eh?",
+      "decodedSeconds": 5.976
+    },
+    {
+      "id": "corvina-qajn6c",
+      "speaker": "corvina",
+      "where": "ch1.cardsharp",
+      "expected": "Fancy a game, little traveller? Your creatures against mine. The axioms decide the rules.",
+      "sha256": "035adc5d67b0126bcca9d88f3eea844cb3513c0fa557fd6e51ec162f03f5dbf6",
+      "localTranscript": " Fancy a game, little traveler? Your creatures against mine. The axioms decide the rules.",
+      "decodedSeconds": 6.864
+    },
+    {
+      "id": "corvina-xcu7a2",
+      "speaker": "corvina",
+      "where": "ch1.cardsharp.win",
+      "expected": "Hmph. Beaten by a fledgling. Take your prize before I change the rules again.",
+      "sha256": "230513ed1245a3e6796b0263a3d45367f62182974d1fe2fa911659b136fc6289",
+      "localTranscript": " Hm. Beaten by a fledgling. Take your prize before I change the rules again.",
+      "decodedSeconds": 6.096
+    },
+    {
+      "id": "fin-1fb8974",
+      "speaker": "fin",
+      "where": "ch3.cards",
+      "expected": "Cards? In the Archive? Fine. I will crush you here too. The axioms always favour me. Probably.",
+      "sha256": "017be987da7b9f3302f3fb8054b6e9e2866ae17c9784a4b6eb4d71c1997af5ef",
+      "localTranscript": " Cards in the archive? Fine. I will crush you here too. The axioms always favor me, probably.",
+      "decodedSeconds": 8.636
+    },
+    {
+      "id": "fin-1k88o5l",
+      "speaker": "fin",
+      "where": "ch3.trial",
+      "expected": "The prosecution's witnesses are confident, famous and very popular, Your Honour.",
+      "sha256": "d45e975f681d46e388f7a455e62a3ce552a921ba789375945b2d87172028a938",
+      "localTranscript": " The prosecutions Witnesses are confident, famous and very popular, you're honour.",
+      "decodedSeconds": 6.072
+    },
+    {
+      "id": "fin-2zgebf",
+      "speaker": "fin",
+      "where": "ch3.plaza",
+      "expected": "We shall see. At the Tribunal.",
+      "sha256": "a43cee573cb191aefe1c92efe7bf3c7b27dc6f7d9942b5b9d91f3ff97a3886bd",
+      "localTranscript": " Hmm, we shall see, at the tribe you know.",
+      "decodedSeconds": 3.12
+    },
+    {
+      "id": "fin-bdp9l5",
+      "speaker": "fin",
+      "where": "ch3.trial.win",
+      "expected": "My first loss. I will need to check my premises.",
+      "sha256": "886e825a93f561ceee2b49180853ae3f3732fa0093613ac57a1f7f526380c39f",
+      "localTranscript": " My first loss. I will need to check my premises.",
+      "decodedSeconds": 4.392
+    },
+    {
+      "id": "fin-fw6jie",
+      "speaker": "fin",
+      "where": "ch3.plaza",
+      "expected": "Ah, the famous traveller. I am Prosecutor Fin. I have never lost a case. Not once. Ask anyone.",
+      "sha256": "6821508821d3a33f80393554d823d2d93800b01be508efdaecd54bfbb3f60656",
+      "localTranscript": " Ah, the famous traveler. I am prosecutor Finn. I have never lost a case. Not once. Ask anyone.",
+      "decodedSeconds": 7.632
+    },
+    {
+      "id": "fin-hrq4et",
+      "speaker": "fin",
+      "where": "ch3.cards.win",
+      "expected": "That was a statistical fluke. Which, I suppose, is still a loss.",
+      "sha256": "1bd3070ec9862f2a2a9e5bcce6906169f301fd6af50fc09be6459ba5b1d2c04c",
+      "localTranscript": " That was a statistical fluke, which I suppose is still a loss.",
+      "decodedSeconds": 4.972
+    },
+    {
+      "id": "granny-12284ml",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Play Speedcheeta for 1 energy. This is your third action, so you must end after it. You cannot attack again with exhausted Astrophysicat.",
+      "sha256": "e8558dd79411e5260bde42da4f13dddcd92d1d92fe7102b3b237e239ac832891",
+      "localTranscript": " Play Speed Cheetah for One Energy. This is your third action, so you must end after it. You cannot attack again with exhausted astrophysicat.",
+      "decodedSeconds": 12.36
+    },
+    {
+      "id": "granny-130ivao",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "You can still act this turn. Play Zuckerborg for 1 energy. Astrophysicat stays exhausted; Zuckerborg may block. Saving a ready creature can protect your hearts.",
+      "sha256": "0dd705181c2a35f903a25cc888d2292c28c9c44fecb6a27414af0e4a88fdbde6",
+      "localTranscript": " You can still act this turn. Place Zucker Borg for one energy. Astrophysicat stays exhausted. Zucker Borg may block. Saving a ready creature can protect your hearts.",
+      "decodedSeconds": 14.76
+    },
+    {
+      "id": "granny-1jeu1ad",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Look at Energy and Actions. You start with 1 energy and 3 actions. Play, attack, activate and rewrite each use an action. End turn hands play to Granny. This learning match has just 1 heart each; normal matches start with 6.",
+      "sha256": "feb80998c7a7448793687ae7fe12fd97482da5079e360fd6c41605427f14ae77",
+      "localTranscript": " Look at energy and actions. You start with one energy and three actions. Play, attack, activate and rewrite each use in action. And turn hands play to Granny. This learning match has just one heart each. Normal matches start with six.",
+      "decodedSeconds": 23.232
+    },
+    {
+      "id": "granny-1tov0jh",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Pay 2 energy and 1 action to choose Underdog. Both players now use “weaker wins”. It stays until another combat rule replaces it or the timeline resets. Other rule categories stay as they were.",
+      "sha256": "c750b1340327950b9fc681413ab5298b9a0980d0b828f1bfcf94faaef1638b27",
+      "localTranscript": " Pay 2 energy and 1 action to choose underdog. Both players now use weaker wins. It stays until another combat rule replaces it, or the timeline resets. Other rule categories stay as they were.",
+      "decodedSeconds": 19.344
+    },
+    {
+      "id": "granny-1vaudzu",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "End turn. Granny will spend 3 energy on Muskrat. Normal matches mix ten axioms from each player. The central Fate track counts down: six End turns to a free flip, then six to a reset. Filter advances it; Next Year delays it. This lesson pauses automatic events.",
+      "sha256": "e0a255b11982f00a975d009f9f4e19a75aaf955d51758be975f01608fe4230f0",
+      "localTranscript": " N-turn. Granny will spend 3 energy on muscrat. Normal matches mix 10 axioms from each player. The central fate track counts down. 6 N turns to a free flip, then 6 to a reset. Filter advancesances It Next Year, Delete It. This lesson pauses automatic events.",
+      "decodedSeconds": 26.976
+    },
+    {
+      "id": "granny-47yito",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Astrophysicat is ready. Attack costs no energy, but uses an action and exhausts it. Granny will block with Speedcheeta. Reason gains +2 against Emotion: 6 beats 4. Read the result; your turn continues.",
+      "sha256": "99c17e4bdeaffa5cc7cc6a7fe2f7878be7f5e2212dca00ed626a0f3f798733ca",
+      "localTranscript": " Astrophysicat is ready. Attack costs no energy, but uses an action and exhausts it. Granny will block with speed cheetah. Reason gains plus 2 against emotion. 6 beats 4. Read the result. Your turn continues.",
+      "decodedSeconds": 21.504
+    },
+    {
+      "id": "granny-4s27oa",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Choose Take the hit. Your own heart reaches zero, so YOU win under this victory rule. Normally that same choice would lose. Always read Rules now, your budget and the timeline.",
+      "sha256": "57342c74363a6db07c105596ef4eb35cf3579e46361740cb4837bffe48681398",
+      "localTranscript": " Choose Take the Hit. Your own heart reaches zero, so you win under this victory rule. Normally, that same choice would lose. Always read rules now, your budget, and the timeline.",
+      "decodedSeconds": 19.08
+    },
+    {
+      "id": "granny-6hmyzu",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Zuckerborg is still ready. End turn. Granny will attack with Lobstorian. This time choose a blocker instead of losing your heart.",
+      "sha256": "ffc403e2ae4f055540c0ad56e76705b5f29d811673d3e61f6c4353e093d11335",
+      "localTranscript": " Zuckerberg is still ready. Enter. Granny will attack with Love Storyin. This time, choose a blocker instead of losing your heart.",
+      "decodedSeconds": 12.24
+    },
+    {
+      "id": "granny-7e5vkb",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Click Zuckerborg to block. Its 3 power gets +2 from the colour wheel, but 5 still loses to Lobstorian’s 6. The block saves your heart. Zuckerborg’s passive ability returns it to your hand once. Granny then plays a fresh Lobstorian for the next example.",
+      "sha256": "a707e76706aa3ce87cc9332c8ed91393e019d8e7f3d05087dba243edcd84eae8",
+      "localTranscript": " Click Zuckerborg to Block. Its 3 power gets plus 2 from the color wheel, but 5 still loses to Lobstorian's 6. The block saves your heart. Zuckerborg's passive ability returns it to your hand once. Granny then plays a fresh Lobstorian for the next example.",
+      "decodedSeconds": 21.072
+    },
+    {
+      "id": "granny-d8q7i",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Attack with Astrophysicat. Its 4 power now beats Lobstorian’s 6 because Underdog is active. Granny will block so you can see the rule work. A large monster does not always win.",
+      "sha256": "ffcb2c121df3a7c460492b7605a0fbf417782519644f738fedf18dc843559406",
+      "localTranscript": " Attack with astrophysicat. It's 4 power, now beats LabStorian 6, because underdog is active. Granny will block so you can see the rule work. A large monster does not always win.",
+      "decodedSeconds": 16.992
+    },
+    {
+      "id": "granny-gjc7iw",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "End turn. Granny will attack with Muskrat. You could block, but your goal is now to lose your last heart. Your next choice will win through the new rule.",
+      "sha256": "263842d314f490e4b6c9108db977ba139efdc272719c67204e8bfd156063576e",
+      "localTranscript": " And turn. Granny will attack with muskrat. You could block, but your goal is now to lose your last heart. Your next choice will win through the new rule.",
+      "decodedSeconds": 12.528
+    },
+    {
+      "id": "granny-nplm1b",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Click End turn. Granny will play a creature and end her turn. Your next turn brings 2 energy, a new card and 3 fresh actions. Energy does not carry over.",
+      "sha256": "0724c3d3f6f5f22f2052e21d25e98d011deef412efbe53dee11bde12e7361951",
+      "localTranscript": " Click End Turn. Granny will play a creature and end her turn. Your next turn brings two energy, a new card, and three fresh actions. Energy does not carry over.",
+      "decodedSeconds": 14.112
+    },
+    {
+      "id": "granny-o6e3z9",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Pay 2 energy to change the victory rule. Now reaching YOUR OWN zero hearts wins. Underdog remains active: victory and combat are different categories. Read the bright victory warning before attacking.",
+      "sha256": "571270f306543b1f9633b1f8a475fa48df6737e9f46643c3e9df9ea3003e5d7d",
+      "localTranscript": " Pay 2 energy to change the victory rule. Now, reaching your own zero hearts wins. Underdog remains active, victory and combat are different categories. Read the bright victory warning before attacking.",
+      "decodedSeconds": 16.608
+    },
+    {
+      "id": "granny-sjj63p",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "You have one action left. You can stop early rather than spend everything. End turn. Granny will play Lobstorian; then your energy grows to 3 and your creatures become ready.",
+      "sha256": "dc13e482f39bcb09d6e03a0b2bbda5190caf2ca39b72c2d46838a054565e2453",
+      "localTranscript": " You have one action left. You can stop early rather than spend everything. And turn. Granny will play Lob Storyin. Then your energy grows to three, and your creatures become ready.",
+      "decodedSeconds": 15.12
+    },
+    {
+      "id": "granny-ubwhc5",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Activate Astrophysicat for 2 energy. Its ability draws a card. Activating uses an action and exhausts the creature, so it cannot attack or block until your next turn.",
+      "sha256": "7f65777b603f8acedfd3509bb0d7f42b8837411d0f497f7793dd712e69acf571",
+      "localTranscript": " Activate Ash-Drow Physicat for 2 energy. Its ability draws a card. Activating uses an action and exhausts the creature, so it cannot attack or block until your next turn.",
+      "decodedSeconds": 16.248
+    },
+    {
+      "id": "granny-vccsjw",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Astrophysicat costs 1 energy. Click it in your hand. It joins your board. You still have your turn and 2 actions, but no energy. New creatures may block; they attack or activate next turn.",
+      "sha256": "ba9772317b6ac0a28bb7e0519fc4aea6dcfce13d7373105d5d7fa5cd1e679cfb",
+      "localTranscript": " Astro-PhysicsAT costs one energy. Click it in your hand. It joins your board. You still have your turn and two actions, but no energy. New creatures may block. They attack or activate next turn.",
+      "decodedSeconds": 16.44
+    },
+    {
+      "id": "lobstorian-1lzms70",
+      "speaker": "lobstorian",
+      "where": "ch1.gate",
+      "expected": "Before you choose a door, is your room clean?",
+      "sha256": "21871660b7a782170a886c6386a0999c21631f28f8ac85eba6f9185370579864",
+      "localTranscript": " Before you choose a door, is your room clean?",
+      "decodedSeconds": 4.368
+    },
+    {
+      "id": "rawmsay-3xnwgm",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Lovely. Well done, little one.",
+      "sha256": "f4bd16d5057fdd84a80be8bf69833e5970bedaf9ea8ca3b81fa8c0fb75902ab9",
+      "localTranscript": " Lovely. Well done little one.",
+      "decodedSeconds": 2.64
+    },
+    {
+      "id": "rawmsay-d86cdo",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Where is the premise?!",
+      "sha256": "0bc6cdbcf438497934e12d475b52347bc2428f1e47afc8fde67e24dbc7166b2e",
+      "localTranscript": " Where is the premise?",
+      "decodedSeconds": 1.248
+    },
+    {
+      "id": "rawmsay-xsoi94",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "This argument is RAW!",
+      "sha256": "b11e97e7f78b328def0909d7624180653e95c5a1a330e52fa228810daa6979ac",
+      "localTranscript": " This argument is raw!",
+      "decodedSeconds": 1.968
+    },
+    {
+      "id": "siuuugull-1rhyibw",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "Same jump. Every time. Perfection.",
+      "sha256": "99affb10024968587f8df11c844eb7891b3a50bff2572f28debd38ca9ee5de44",
+      "localTranscript": " Same jump, every time. Perfection.",
+      "decodedSeconds": 3.936
+    },
+    {
+      "id": "siuuugull-1wamzpm",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "You saw the pattern? I AM the pattern.",
+      "sha256": "93d3ded77b055bbd62fed194377ce393c816bf2e08d2ce4dfe7907ef6c159299",
+      "localTranscript": " You saw the pattern. I AM the pattern.",
+      "decodedSeconds": 4.08
+    },
+    {
+      "id": "siuuugull-de18rq",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "SIUUUU!",
+      "sha256": "78f6007243f1263e0e1d5cf51057c15feea6c1894768771793accc2c4b6454cd",
+      "localTranscript": " Sue!",
+      "decodedSeconds": 1.488
+    },
+    {
+      "id": "speedcheeta-1kycre4",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "AAAAAAH!",
+      "sha256": "e9468db8705a488034e9fdf97a64ac681fdf8ebb3a55694c42325f4f07107810",
+      "localTranscript": " Ugh!",
+      "decodedSeconds": 0.96
+    },
+    {
+      "id": "speedcheeta-n5r4he",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "Let's GOOOO!",
+      "sha256": "ba8d86f859fecff3fa388d7a6234bdf875eda46db11acb818ab465c5d554ebfa",
+      "localTranscript": " Let's go!",
+      "decodedSeconds": 1.8
+    },
+    {
+      "id": "speedcheeta-wlovz",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "Is that… is that a SYLLOGISM?!",
+      "sha256": "da69a76355021f5acc042bd3f096bcf51f2253a92bc5c87b3c7a6a48412a92dc",
+      "localTranscript": " Is that... Is that a syllogism?",
+      "decodedSeconds": 2.28
+    },
+    {
+      "id": "tremendoodle-1yzbgs9",
+      "speaker": "tremendoodle",
+      "where": "ch1.gate",
+      "expected": "Many people say I am the most honest guard. The best people. Tremendous honesty.",
+      "sha256": "5e36aeff43232f72371e9529682500bd810625d603443ec5e96457134b15952e",
+      "localTranscript": " Many people say I am the most honest guard, the best people, tremendous honesty.",
+      "decodedSeconds": 6.384
+    }
+  ]
+}

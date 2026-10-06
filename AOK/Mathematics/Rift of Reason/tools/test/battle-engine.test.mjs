@@ -11,7 +11,7 @@ const AI = Rift.Battle.AI;
 
 let n = 0;
 const inst = (species, extra) => Object.assign({ uid: 'u' + (++n), species, powerDelta: 0, injuries: [], scars: [], warped: null, trophyOf: null }, extra || {});
-const setup = (p0, p1, opts) => E.createBattle({
+const setup = (p0, p1, opts) => { const state=E.createBattle({
     seed: (opts && opts.seed) || 'test',
     players: [
         { name: 'A', team: p0.map(x => typeof x === 'string' ? inst(x) : x) },
@@ -20,6 +20,7 @@ const setup = (p0, p1, opts) => E.createBattle({
     axiomDeck: (opts && opts.axioms) || [],
     options: Object.assign({ shuffle: false, shuffleAxioms: false, first: 0 }, opts && opts.options),
 });
+state.players.forEach(P=>{P.energy=10;P.capacity=10;});return state;};
 const J = x => JSON.parse(JSON.stringify(x));
 const act = (s, a) => E.applyAction(s, Object.assign({ player: E.decider(s) }, a));
 function toBoard(s, cid, p) {
@@ -68,7 +69,7 @@ test('10,000 AI-vs-AI battles finish with no illegal states or exceptions', () =
         let s = E.createBattle({
             seed: 'fuzz:' + g,
             players: teams.map((team, p) => ({ team, consumables: rng.chance(0.2) ? { 'extra-steal': 1, 'extra-life': 1 } : {} })),
-            axiomDeck: E.buildAxiomDeck(Object.keys(Rift.data.axioms)),
+            axiomDeck: Object.keys(Rift.data.axioms),
         });
         checkInvariants(s);
         s = AI.playOut(s, levels[g % 4], (prev, a, next) => {
@@ -126,24 +127,19 @@ test('short teams are padded with loaned commons that never roll fate', () => {
     assert.deepEqual(J(E.lostUids(s, 0)), [s.cards.p0c0.uid]);
 });
 
-test('setup: hand of 5, 3 lives, 2 steals, consumables add more', () => {
+test('setup: hand of 5, 6 lives, no automatic steals, life consumables still work', () => {
     const s = E.createBattle({ seed: 'c', players: [{ team: TEN.map(x => inst(x)), consumables: { 'extra-life': 1, 'extra-steal': 1 } }, { team: TEN.map(x => inst(x)) }] });
     assert.equal(s.players[0].hand.length, 5);
     assert.equal(s.players[1].hand.length, 5);
-    assert.equal(s.players[0].lives, 4);
-    assert.equal(s.players[0].steals, 3);
-    assert.equal(s.players[1].lives, 3);
-    assert.equal(s.players[1].steals, 2);
+    assert.equal(s.players[0].lives, 7);
+    assert.equal(s.players[0].steals, 1);
+    assert.equal(s.players[1].lives, 6);
+    assert.equal(s.players[1].steals, 0);
 });
 
-test('a turn is play OR attack; the hand refills to 5 at the end of the turn', () => {
-    let s = setup(TEN, TEN);
-    s = act(s, { type: 'play', cid: 'p0c0' });
-    s = act(s, { type: 'decline' });
-    assert.equal(s.active, 1);
-    assert.equal(s.players[0].hand.length, 5);
-    assert.equal(s.players[0].deck.length, 4);
-    assert.deepEqual(J(s.players[0].board), ['p0c0']);
+test('play remains on the same turn; draw happens next turn, not refill',()=>{
+ let s=setup(TEN,TEN);s=act(s,{type:'play',cid:'p0c0'});assert.equal(s.active,0);assert.equal(s.players[0].hand.length,4);
+ s=act(act(s,{type:'end'}),{type:'end'});assert.equal(s.players[0].hand.length,5);assert.equal(s.players[0].deck.length,4);
 });
 
 test('blocking: lower power is defeated, a tie defeats both; unblocked attacks cost a life', () => {
@@ -161,7 +157,7 @@ test('blocking: lower power is defeated, a tie defeats both; unblocked attacks c
     assert.ok(t.players[0].discard.includes('p0c0') && t.players[1].discard.includes('p1c0'));
 
     t = act(act(s, { type: 'attack', cid: 'p0c0' }), { type: 'take' });
-    assert.equal(t.players[1].lives, 2);
+    assert.equal(t.players[1].lives, 5);
 });
 
 test('losing the last life ends the battle', () => {
@@ -177,32 +173,21 @@ test('losing the last life ends the battle', () => {
 test('a player who cannot act (no hand, deck or board) loses', () => {
     const s = setup(TEN, TEN);
     s.players[1].discard.push(...s.players[1].hand.splice(0), ...s.players[1].deck.splice(0));
-    const t = act(act(s, { type: 'play', cid: 'p0c0' }), { type: 'decline' });
+    const t = act(act(s, { type: 'play', cid: 'p0c0' }), { type: 'end' });
     assert.equal(E.winner(t), 0);
     assert.equal(t.endReason, 'cannot-act');
 });
 
-test('steal: the creature changes sides, its on-play effect goes to the thief, the victim takes an extra turn', () => {
-    let s = setup(['swiftlet', ...TEN.slice(1)], TEN);
-    s = act(s, { type: 'play', cid: 'p0c0' });
-    assert.equal(s.phase, 'steal');
-    assert.equal(E.decider(s), 1);
-    s = act(s, { type: 'steal' });
-    assert.deepEqual(J(s.players[1].board), ['p0c0']);
-    assert.equal(s.cards.p0c0.controller, 1);
-    assert.equal(s.cards.p0c0.owner, 0);
-    assert.equal(s.players[1].steals, 1);
-    assert.equal(s.players[1].knows.length, 1, 'Easter Egg went to the thief');
-    assert.ok(s.players[0].hand.includes(s.players[1].knows[0]));
-    assert.equal(s.active, 0, 'the victim takes an extra turn');
-    assert.equal(s.phase, 'action');
+test('optional steal transfers ownership control without firing a paid ability for free',()=>{
+ let s=setup(['swiftlet',...TEN.slice(1)],TEN,{options:{steals:2}});s=act(s,{type:'play',cid:'p0c0'});assert.equal(s.phase,'steal');s=act(s,{type:'steal'});
+ assert.equal(s.cards.p0c0.controller,1);assert.equal(s.cards.p0c0.owner,0);assert.equal(s.players[1].knows.length,0);assert.equal(s.active,0);
 });
 
 test('no steal is offered when the opponent has no steals left', () => {
     const s = setup(TEN, TEN);
     s.players[1].steals = 0;
     const t = act(s, { type: 'play', cid: 'p0c0' });
-    assert.equal(t.active, 1);
+    assert.equal(t.active, 0);
     assert.equal(t.phase, 'action');
 });
 
@@ -217,7 +202,7 @@ test('stolen creatures that are defeated still count as lost for their owner', (
 
 test('the event log reads as sentences and the full log is ordered', () => {
     let s = setup(TEN, TEN);
-    s = act(act(s, { type: 'play', cid: 'p0c0' }), { type: 'decline' });
+    s = act(s, { type: 'play', cid: 'p0c0' });
     const texts = E.fullLog(s).map(e => e.text);
     assert.ok(texts.includes('A plays Lobstorian.'), texts.join(' | '));
     assert.ok(texts.indexOf('A goes first.') < texts.indexOf('A plays Lobstorian.'));
@@ -225,11 +210,6 @@ test('the event log reads as sentences and the full log is ordered', () => {
     assert.equal(E.fullLog(you).find(e => e.t === 'start').text, 'You go first.');
 });
 
-test('a battle that runs past the turn limit is decided on lives', () => {
-    let s = setup(TEN, TEN, { options: { maxTurns: 2 } });
-    s.players[1].lives = 2;
-    s = act(act(s, { type: 'play', cid: 'p0c0' }), { type: 'decline' });
-    s = act(act(s, { type: 'play', cid: 'p1c0' }), { type: 'decline' });
-    assert.equal(s.winner, 0);
-    assert.equal(s.endReason, 'turn-limit');
+test('turn limit is a draw regardless of a temporary victory rule',()=>{
+ let s=setup(TEN,TEN,{options:{maxTurns:2}});s.players[1].lives=2;s=act(act(s,{type:'end'}),{type:'end'});assert.equal(s.winner,'draw');assert.equal(s.endReason,'turn-limit');
 });

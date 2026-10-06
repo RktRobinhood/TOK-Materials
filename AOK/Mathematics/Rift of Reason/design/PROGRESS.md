@@ -1,6 +1,10 @@
 # Rift of Reason — implementation progress
 
-Updated 2026-10-05. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
+Updated 2026-10-06. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
+
+## Card-cycle rebuild (#44, 2026-10-06)
+
+Teacher playtest replaced the original battle design. Implemented growing energy, three-action turns and End turn, paid skills/rewrites, exhaustion, persistent axiom categories, visible current goals/rules, own-zero-heart victory and sixteen-step real-engine practice. Returning old-save learners receive a new-rules offer. Follow-up adds Collection’s ten-card selection, a shuffled twenty-card shared deck, ghost selection support and a central Fate countdown with advance/delay skills. Exact requirements and future boundaries are in `card-cycle-2026-10-06.md`; optional art queue is `source-assets/card-cycle-art-brief.md`. Latest release evidence belongs to `reviews/card-cycle-2026-10-06.md`, which supersedes older battle and voice totals below.
 
 ## Issue audit
 

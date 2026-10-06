@@ -15,7 +15,7 @@
         mending: { name: 'Mending', kind: 'support', text: 'Use in the Bag: restore one lost ability or one lost power point on a creature.' },
         anchor: { name: 'Anchor', kind: 'battle', text: 'Stops a creature being warp-cursed in one battle.' },
         // Battle consumables earned from puzzles: chosen before a real battle, used up when it starts.
-        'trickster-coin': { name: 'Trickster Coin', kind: 'battle', consumable: 'extra-steal', text: 'Bring it into a battle for one extra steal.' },
+        'trickster-coin': { name: 'Trickster Coin', kind: 'battle', consumable: 'extra-energy', text: 'Bring it into a battle for +1 energy each turn.' },
         heartstone: { name: 'Heartstone', kind: 'battle', consumable: 'extra-life', text: 'Bring it into a battle to start with one extra life.' },
     };
 

@@ -1,23 +1,12 @@
 /*
  * Battle engine. PURE and deterministic: state + action → new state.
  *
- * Rules borrowed from Mindbug (Kudahl, Hegen, Garfield, Elias; Nerdlab 2022),
- * not its name, cards or text. Each player brings their own team as a deck
- * (10 creature instances, padded with loaned commons), draws a hand of 5 and
- * has 3 lives and 2 steals.
- *
- *   Turn: PLAY a creature from hand, or ATTACK with one creature on your board.
- *   Attack: the defender BLOCKS with one creature (lower power is defeated, a
- *     tie defeats both) or takes it and loses a life.
- *   Steal: right after the opponent plays a creature you may spend a steal to
- *     take it (it fights for you this battle only); the opponent then takes an
- *     extra turn. On-play effects go to whoever ends up controlling it.
- *   Hand refills to 5 at the end of your turn while your deck lasts.
- *   Win: opponent at 0 lives, or opponent can't act (no hand, deck or board).
- *   Round = both players have taken a turn. Each round one AXIOM flips face-up
- *   for both players and rewrites a rule (data/axioms.js).
- *   Colour wheel (data/axioms.js): +2 power when fighting the colour you beat.
- *
+ * Energy grows 1→2→3 each personal turn, refills and caps at 10.
+ * Spend up to three actions, then End turn. Play costs energy; attack is free;
+ * activate and rewrite cost two. Attack, block and activate exhaust a creature.
+ * Arriving creatures can block but attack/activate next turn. Six hearts.
+ * Shared axioms persist by category; paid rewrites replace that category only.
+ * The visible timeline flips/reset rules every three rounds, starting round four.
  * API (Rift.Battle.Engine):
  *   createBattle({ seed, players: [{ id, name, team: [instances], lives?, steals?, consumables? }],
  *                  axiomDeck: [ids], options })            → state
@@ -46,8 +35,8 @@
     const Battle = Rift.Battle || (Rift.Battle = {});
 
     const DEFAULTS = {
-        handSize: 5, lives: 3, steals: 2, teamSize: 10,
-        maxTurns: 150, first: 'random', shuffle: true, shuffleAxioms: true, mode: 'practice',
+        handSize: 5, lives: 6, steals: 0, teamSize: 10, energyCap: 10, timeline: true,
+        maxTurns: 80, first: 'random', shuffle: true, shuffleAxioms: true, mode: 'practice',
     };
     const PAD_SPECIES = ['astrophysicat', 'zuckerborg', 'siuuugull'];
 
@@ -90,7 +79,8 @@
         s.playCtx = state.playCtx ? { ...state.playCtx } : null;
         s.players = players;
         s.cards = cards;
-        s.axioms = { ...state.axioms, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
+        s.axioms = { ...state.axioms, active: { ...state.axioms.active }, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
+        s.fate = { ...state.fate };
         s.lastEvents = [];
         return s;
     }
@@ -105,15 +95,76 @@
         return out;
     }
 
-    function currentAxiom(s) {
-        const id = s.axioms.current;
-        return id ? axiomDefs()[id] || null : null;
+    function currentAxiom(s) { return axiomDefs()[s.axioms.current] || null; }
+
+    function activeAxioms(s) {
+        const active = Object.assign({}, s.axioms.active);
+        // Also supports previewing a proposed axiom without mutating the battle.
+        const last = currentAxiom(s);
+        if (last) active[last.category] = last.id;
+        return Object.values(active).map(id => axiomDefs()[id]).filter(Boolean);
     }
 
-    function axiomFlag(s, flag) {
-        const a = currentAxiom(s);
-        return !!(a && a[flag]);
+    // Many power/AI queries share the same rule combination. Bound the cache and
+    // freeze results; the key also detects externally constructed preview states.
+    const ruleCache=new Map();
+    function rules(s) {
+        const key=s.axioms.current+'|'+Object.values(s.axioms.active||{}).join('|');
+        if(ruleCache.has(key))return ruleCache.get(key);
+        const out = { actions: 3, abilityCost: 2, rewriteCost: 2, playCostDelta: 0,
+            growth: 1, draw: 1, exhaust: true, arrivalReady: false, reverseHearts: false };
+        activeAxioms(s).forEach(a => Object.assign(out, a.rules || {}));
+        if(ruleCache.size>=128)ruleCache.delete(ruleCache.keys().next().value);
+        ruleCache.set(key,Object.freeze(out));
+        return out;
     }
+
+    function playCost(s, cid) { return Math.max(1, Math.ceil(s.cards[cid].base / 2) - 1 + rules(s).playCostDelta); }
+    function actionsLeft(s) { return Math.max(0, rules(s).actions - s.actionsUsed); }
+    function activations(s, cid) {
+        const card = s.cards[cid];
+        const ids = activeAbilities(s, card);
+        if (!ids.length) return [];
+        const list = ids.filter(id => abilityDefs()[id].onActivate).map(id => ({id, name: abilityDefs()[id].name, text: abilityDefs()[id].text}));
+        if (!list.length && (card.focus || 0) < 3) list.push({id:'focus', name:'Focus', text:'Gain +1 power for this battle (up to +3 from Focus).'});
+        return list;
+    }
+    function readyToUse(s, cid) {
+        const c = s.cards[cid];
+        return c && !c.exhausted && (c.enteredTurn !== s.turn || rules(s).arrivalReady);
+    }
+    function spend(G, amount, text) {
+        G.s.players[G.s.active].energy -= amount;
+        G.s.actionsUsed += 1;
+        emit(G, {t:'spend', player:G.s.active, text:text + ' Spend ' + amount + ' energy and 1 action.'});
+    }
+    function exhaust(G, cid) {
+        if (rules(G.s).exhaust) G.s.cards[cid].exhausted = true;
+    }
+    function timeline(s) {
+        if (!s.options.timeline) return [];
+        return [0,1].map(offset=>{
+            const turns=s.fate.until+offset*6, reset=(s.fate.events+offset)%2===1;
+            return {turns,turn:s.turn+turns,round:Math.floor((s.turn+turns-1)/2)+1,type:reset?'reset':'flip',
+                text:reset?'Reset all rules to the basics':offset?'Free flip from the shared deck':s.axioms.deck.length?'Free flip: '+axiomDefs()[s.axioms.deck[0]].name:'No unused rule to flip'};
+        });
+    }
+    function ruleSummary(s) {
+        const r = rules(s);
+        const combat = activeAxioms(s).find(a => a.category === 'combat');
+        return [
+            ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the opponent to zero hearts to win.'],
+            ['Actions', r.actions + ' per turn. End turn when ready.'],
+            ['Energy', 'Gain +' + r.growth + ' capacity and refill each turn; maximum ' + s.options.energyCap + '.'],
+            ['Cards', 'Draw ' + r.draw + ' at turn start. Play costs shown on each card.'],
+            ['Combat', (combat ? combat.text : 'Higher power wins; a tie defeats both.') + ' Unblocked attacks remove 1 heart.'],
+            ['Readiness', (r.arrivalReady ? 'New creatures can act immediately. ' : 'New creatures may block, but act next turn. ') + (r.exhaust ? 'Attack, block or activate: exhaust until your next turn.' : 'Creatures do not exhaust.')],
+            ['Abilities', axiomFlag(s,'abilitiesOff') ? 'Creature abilities are off.' : 'Activate for ' + r.abilityCost + ' energy and 1 action. Passive effects stay on.'],
+            ['Rewrite', 'Pay ' + r.rewriteCost + ' energy and 1 action. Replace only the chosen rule category.'],
+        ];
+    }
+
+    function axiomFlag(s, flag) { return activeAxioms(s).some(a => !!a[flag]); }
 
     function cardName(s, cid) {
         const c = s.cards[cid];
@@ -129,7 +180,7 @@
         const name = s.players[p].name;
         if (name !== 'You') return name + ' ' + verb;
         const base = { has: 'have', goes: 'go', passes: 'pass', wins: 'win', takes: 'take', chooses: 'choose',
-            plays: 'play', steals: 'steal', lets: 'let', attacks: 'attack', loses: 'lose' }[verb] || verb;
+            plays: 'play', steals: 'steal', lets: 'let', attacks: 'attack', loses: 'lose', ends: 'end' }[verb] || verb;
         return 'You ' + base;
     }
 
@@ -196,11 +247,9 @@
                 if (v) parts.push({ source: 'ability', label: def.name, amount: v });
             }
         });
-        const ax = currentAxiom(s);
-        if (ax && ax.powerMod) {
-            const v = ax.powerMod(s, c, H);
-            if (v) parts.push({ source: 'axiom', label: ax.name, amount: v });
-        }
+        activeAxioms(s).forEach(ax => {
+            if (ax.powerMod) { const v = ax.powerMod(s, c, H); if (v) parts.push({source:'axiom', label:ax.name, amount:v}); }
+        });
         if (foeCid && s.cards[foeCid]) {
             const w = wheelBonus(s, c, s.cards[foeCid]);
             if (w) parts.push({ source: 'colour', label: 'Colour wheel', amount: w });
@@ -225,7 +274,7 @@
         });
         const pa = power(s, att, blk, fctx);
         const pb = power(s, blk, att, fctx);
-        const ax = currentAxiom(s);
+        const ax = activeAxioms(s).find(a => a.resolveFight);
         const res = ax && ax.resolveFight
             ? ax.resolveFight(pa, pb)
             : { attackerDefeated: pa <= pb, blockerDefeated: pb <= pa };
@@ -252,7 +301,7 @@
 
     function canAttack(s, cid) {
         const c = s.cards[cid];
-        if (!c || c.controller !== s.active || !s.players[s.active].board.includes(cid)) return false;
+        if (!readyToUse(s, cid) || c.controller !== s.active || !s.players[s.active].board.includes(cid)) return false;
         let ok = true;
         eachActive(s, c, null, def => {
             if (def.canAttack && def.canAttack(s, c, H) === false) ok = false;
@@ -280,6 +329,7 @@
         const a = s.cards[att];
         const d = 1 - a.controller;
         return s.players[d].board.filter(b => {
+            if (s.cards[b].exhausted) return false;
             let ok = true;
             eachActive(s, a, null, def => {
                 if (def.canBeBlockedBy && !def.canBeBlockedBy(s, a, s.cards[b], H)) ok = false;
@@ -298,34 +348,23 @@
 
     function legalActions(s) {
         if (s.winner != null) return [];
-        const p = decider(s);
-        if (p == null) return [];
+        const p = decider(s); if (p == null) return [];
         const P = s.players[p];
-        switch (s.phase) {
-            case 'action': {
-                const attackers = P.board.filter(cid => canAttack(s, cid));
-                const forced = attackers.filter(cid => mustAttack(s, cid));
-                if (forced.length) return forced.flatMap(cid => attackVariants(s, cid, p));
-                const plays = P.hand.map(cid => ({ type: 'play', player: p, cid }));
-                const attacks = attackers.flatMap(cid => attackVariants(s, cid, p));
-                const all = plays.concat(attacks);
-                return all.length ? all : [{ type: 'pass', player: p }];
-            }
-            case 'haste': {
-                const attacks = P.board.filter(cid => canAttack(s, cid)).flatMap(cid => attackVariants(s, cid, p));
-                return attacks.concat([{ type: 'end', player: p }]);
-            }
-            case 'steal':
-                return [{ type: 'steal', player: p }, { type: 'decline', player: p }];
-            case 'block':
-                return s.pending.options.map(cid => ({ type: 'block', player: p, cid }))
-                    .concat([{ type: 'take', player: p }]);
-            case 'choose':
-            case 'axiom':
-                return s.pending.options.map(choice => ({ type: 'choose', player: p, choice }));
-            default:
-                return [];
+        if (s.phase === 'action') {
+            const list = [{type:'end', player:p}];
+            if (!actionsLeft(s)) return list;
+            P.hand.filter(cid => playCost(s,cid) <= P.energy).forEach(cid => list.push({type:'play', player:p, cid}));
+            P.board.forEach(cid => {
+                if (canAttack(s,cid)) list.push(...attackVariants(s,cid,p));
+                if (readyToUse(s,cid) && P.energy >= rules(s).abilityCost) activations(s,cid).forEach(a => list.push({type:'activate',player:p,cid,ability:a.id}));
+            });
+            if (P.energy >= rules(s).rewriteCost) s.axioms.deck.slice(0,3).forEach(choice => list.push({type:'rewrite',player:p,choice}));
+            return list;
         }
+        if (s.phase === 'steal') return [{type:'steal',player:p},{type:'decline',player:p}];
+        if (s.phase === 'block') return s.pending.options.map(cid => ({type:'block',player:p,cid})).concat([{type:'take',player:p}]);
+        if (s.phase === 'choose' || s.phase === 'axiom') return s.pending.options.map(choice => ({type:'choose',player:p,choice}));
+        return [];
     }
 
     function winner(s) { return s.winner == null ? null : s.winner; }
@@ -364,7 +403,7 @@
             legendary: sp.rarity === 'legendary',
             loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
             injured: injuries.slice(), warped: !!(inst.warped && inst.warped.ability),
-            defeats: 0,
+            defeats: 0, exhausted: false, focus: 0,
         };
     }
 
@@ -377,10 +416,11 @@
         if (players.length !== 2) throw new Error('A battle needs exactly two players.');
 
         const s = {
-            v: 1, seed, step: 0, turn: 1, round: 0, roundTurns: [false, false],
+            v: 2, actionsUsed: 0, seed, step: 0, turn: 1, round: 0, roundTurns: [false, false],
             active: 0, phase: 'setup', pending: null, playCtx: null, extraTurn: false,
             players: [], cards: {},
-            axioms: { deck: [], discard: [], current: null, flips: 0 },
+            axioms: { deck: [], discard: [], active: {}, current: null, flips: 0 },
+            fate: {until:6,events:0},
             winner: null, endReason: null, options: opts,
             log: null, lastEvents: [],
         };
@@ -402,14 +442,14 @@
                 steals: (pl.steals == null ? opts.steals : pl.steals) + (cons['extra-steal'] || 0),
                 deck: opts.shuffle ? rng.shuffle(cids) : cids,
                 hand: [], board: [], discard: [],
-                playedCount: 0, turnsTaken: 0,
+                playedCount: 0, turnsTaken: 0, energy: 0, capacity: 0,
                 knows: [], peek: null, axiomChoice: false,
                 consumables: Object.assign({}, cons),
             });
         });
 
         const known = axiomDefs();
-        const ids = (cfg.axiomDeck || (Rift.data.axiomDecks || {}).starter || []).filter(id => known[id]);
+        const ids = (cfg.axiomDeck || buildAxiomDeck(players[0].axioms,players[1].axioms)).filter(id => known[id]);
         s.axioms.deck = opts.shuffleAxioms ? rng.shuffle(ids) : ids.slice();
         s.active = opts.first === 'random' ? rng.int(0, 1) : (opts.first ? 1 : 0);
 
@@ -425,11 +465,12 @@
     // ---- applying actions --------------------------------------------------------
 
     function actionKey(a) {
-        return [a.type, a.cid || '', a.target || '', a.choice == null ? '' : a.choice].join('|');
+        return [a.type, a.cid || '', a.target || '', a.choice == null ? '' : a.choice, a.ability || ''].join('|');
     }
 
     function applyAction(state, action) {
         if (!action) throw new Error('No action given.');
+        if (action.player != null && action.player !== decider(state)) throw new Error('Wrong player.');
         const legal = legalActions(state);
         const key = actionKey(action);
         const match = legal.find(a => actionKey(a) === key);
@@ -439,6 +480,8 @@
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
         switch (match.type) {
             case 'play': doPlay(G, match.cid); break;
+            case 'activate': doActivate(G, match.cid, match.ability); break;
+            case 'rewrite': spend(G, rules(s).rewriteCost, 'Rewrite.'); removeFrom(s.axioms.deck, match.choice); setAxiom(G, match.choice); beginAction(G); break;
             case 'attack': doAttack(G, match.cid, match.target || null); break;
             case 'pass':
                 emit(G, { t: 'pass', player: s.active, text: `${playerName(s, s.active)} can't do anything: pass.` });
@@ -471,6 +514,8 @@
         const s = G.s;
         return {
             s, rng: G.rng, H,
+            rewrite(id) { removeFrom(s.axioms.deck,id); setAxiom(G,id); },
+            shiftFate(turns) { shiftFate(G,turns); },
             emit: ev => emit(G, ev),
             draw: p => draw(G, p),
             defeat: (cid, why) => defeat(G, cid, null, why),
@@ -480,7 +525,6 @@
             addBoost(card, label, amount) {
                 card.boosts.push({ label, amount });
             },
-            runOnPlay: (card, abilityId) => runOnPlay(G, card, abilityId),
         };
     }
 
@@ -507,6 +551,7 @@
         c.nickname = null;
         c.enteredTurn = null;
         c.suppressedTurn = null;
+        c.exhausted = false; c.focus = 0;
     }
 
     function setWinner(G, p, reason) {
@@ -524,11 +569,16 @@
     function startTurn(G) {
         const s = G.s;
         if (s.round === 0 || (s.roundTurns[0] && s.roundTurns[1])) {
-            s.round += 1;
-            s.roundTurns = [false, false];
-            emit(G, { t: 'round', text: `Round ${s.round}.` });
-            if (flipAxiom(G) === 'paused') return;
+            s.round += 1; s.roundTurns = [false,false];
+            emit(G,{t:'round',text:'Round ' + s.round + '.'});
         }
+        const P = s.players[s.active], r = rules(s);
+        s.actionsUsed = 0;
+        P.capacity = Math.min(s.options.energyCap, P.capacity + r.growth);
+        P.energy = P.capacity + (P.consumables['extra-energy'] || 0);
+        P.board.forEach(cid => {s.cards[cid].exhausted = false;});
+        if (P.turnsTaken) for (let i=0; i<r.draw; i++) draw(G,s.active);
+        emit(G,{t:'turn',player:s.active,text:playerName(s,s.active) + ': ' + P.energy + ' energy, ' + r.actions + ' actions. Creatures ready.'});
         beginAction(G);
     }
 
@@ -545,26 +595,14 @@
         s.pending = null;
     }
 
-    function endByLimit(G) {
-        const s = G.s;
-        const [a, b] = s.players;
-        let w = 'draw';
-        if (a.lives !== b.lives) w = a.lives > b.lives ? 0 : 1;
-        else {
-            const pa = a.board.reduce((t, cid) => t + power(s, cid), 0);
-            const pb = b.board.reduce((t, cid) => t + power(s, cid), 0);
-            if (pa !== pb) w = pa > pb ? 0 : 1;
-        }
-        emit(G, { t: 'limit', text: 'The rift is closing: the battle is decided on lives, then board strength.' });
-        setWinner(G, w, 'turn-limit');
-    }
+    function endByLimit(G) { emit(G,{t:'limit',text:'The rift closes after ' + G.s.options.maxTurns + ' turns. Draw.'}); setWinner(G,'draw','turn-limit'); }
 
     function endTurn(G) {
         const s = G.s;
         const p = s.active;
         s.pending = null;
         s.playCtx = null;
-        refill(G, p);
+        emit(G,{t:'turn-end',player:p,text:says(s,p,'ends') + ' the turn. Unspent energy is lost.'});
         s.players[p].turnsTaken += 1;
         s.roundTurns[p] = true;
         if (s.winner != null) return;
@@ -573,38 +611,40 @@
         s.extraTurn = false;
         s.turn += 1;
         s.active = next;
+        shiftFate(G,1);
         startTurn(G);
     }
 
+    // Positive shifts advance toward the event; negative shifts delay it.
+    function shiftFate(G,turns) {
+        const s=G.s;
+        if(!s.options.timeline)return;
+        s.fate.until=Math.max(0,Math.min(12,s.fate.until-turns));
+        if(s.fate.until)return;
+        if(s.fate.events%2===1){
+            s.axioms.discard.push(...Object.values(s.axioms.active));s.axioms.active={};s.axioms.current=null;
+            refillAxioms(G);emit(G,{t:'reset',text:'Fate reset: all rules return to the basics.'});
+        }else flipAxiom(G);
+        s.fate.events++;s.fate.until=6;
+    }
+
+    function refillAxioms(G) {
+        const A = G.s.axioms;
+        if (!A.deck.length && A.discard.length) { A.deck = G.rng.shuffle(A.discard); A.discard = []; }
+    }
+
     function flipAxiom(G) {
-        const s = G.s;
-        const A = s.axioms;
-        if (A.current) { A.discard.push(A.current); A.current = null; }
-        if (!A.deck.length && A.discard.length) {
-            A.deck = G.rng.shuffle(A.discard);
-            A.discard = [];
-            emit(G, { t: 'reshuffle', text: 'The axiom deck is reshuffled.' });
-        }
-        s.players.forEach(P => { P.peek = null; });
-        if (!A.deck.length) return null;
-        const chooser = [s.active, 1 - s.active].find(i => s.players[i].axiomChoice);
-        if (chooser != null) {
-            s.players[chooser].axiomChoice = false;
-            s.phase = 'axiom';
-            s.pending = { kind: 'axiom', player: chooser, options: A.deck.filter((id, i) => A.deck.indexOf(id) === i), prompt: 'Choose the next axiom.' };
-            emit(G, { t: 'axiom-choice', player: chooser, text: `${says(s, chooser, 'chooses')} the next axiom.` });
-            return 'paused';
-        }
-        setAxiom(G, A.deck.shift());
-        return null;
+        const A = G.s.axioms;
+        if (A.deck.length) setAxiom(G,A.deck.shift());
     }
 
     function setAxiom(G, id) {
-        const s = G.s;
-        s.axioms.current = id;
-        s.axioms.flips += 1;
-        const ax = axiomDefs()[id];
-        emit(G, { t: 'axiom', id, text: `Axiom: ${ax.name}. ${ax.text}` });
+        const A = G.s.axioms, ax = axiomDefs()[id];
+        const old = A.active[ax.category]; if (old) A.discard.push(old);
+        A.active[ax.category] = id; A.current = id; A.flips += 1;
+        refillAxioms(G);
+        G.s.players.forEach(P => {P.peek = null;});
+        emit(G,{t:'axiom',id,text:'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text});
     }
 
     function chooseAxiom(G, id) {
@@ -622,6 +662,7 @@
         const s = G.s;
         const p = s.active;
         const P = s.players[p];
+        spend(G, playCost(s,cid), 'Play ' + cardName(s,cid) + '.');
         removeFrom(P.hand, cid);
         P.board.push(cid);
         const c = s.cards[cid];
@@ -675,39 +716,29 @@
         resolvePlay(G, cid, yes);
     }
 
-    function runOnPlay(G, card, onlyAbility) {
+    function runActivation(G, card, onlyAbility) {
         const s = G.s;
         const defs = abilityDefs();
         const list = onlyAbility ? [onlyAbility] : activeAbilities(s, card);
         for (const id of list) {
             const def = defs[id];
-            if (def && def.onPlay) def.onPlay(api(G), card);
+            if (def && def.onActivate) def.onActivate(api(G), card);
             if (s.phase === 'choose') return 'paused';
         }
         return null;
     }
 
-    function resolvePlay(G, cid, stolen) {
-        const s = G.s;
-        s.phase = 'resolving';
-        s.playCtx = { cid, stolen };
-        if (runOnPlay(G, s.cards[cid]) === 'paused') return;
-        afterPlay(G);
-    }
+    function resolvePlay(G, cid, stolen) { G.s.playCtx = null; beginAction(G); }
 
-    function afterPlay(G) {
-        const s = G.s;
-        const ctx = s.playCtx || {};
-        s.playCtx = null;
-        s.pending = null;
-        if (s.winner != null) return;
-        if (!ctx.stolen && axiomFlag(s, 'attackAfterPlay')
-            && s.players[s.active].board.some(cid => canAttack(s, cid))) {
-            s.phase = 'haste';
-            emit(G, { t: 'haste', player: s.active, text: 'Haste: you may attack as well.', privateTo: s.active, publicText: null });
-            return;
-        }
-        endTurn(G);
+    function finishActivation(G) { G.s.playCtx = null; G.s.pending = null; if (G.s.winner == null) beginAction(G); }
+
+    function doActivate(G, cid, ability) {
+        const card = G.s.cards[cid];
+        spend(G,rules(G.s).abilityCost,'Activate ' + cardName(G.s,cid) + '.'); exhaust(G,cid);
+        G.s.playCtx = {cid}; G.s.phase = 'resolving';
+        if (ability === 'focus') {card.focus += 1; card.boosts.push({label:'Focus',amount:1}); emit(G,{t:'ability',cid,text:cardName(G.s,cid) + ' focuses: +1 power.'});}
+        else if (runActivation(G,card,ability) === 'paused') return;
+        finishActivation(G);
     }
 
     // Abilities ask questions through this: { player, kind, ability, cid, options, prompt, auto }.
@@ -732,7 +763,7 @@
         const def = abilityDefs()[req.ability];
         def.onChoose(api(G), s.cards[req.cid], choice, req);
         if (s.phase === 'choose') return;
-        afterPlay(G);
+        finishActivation(G);
     }
 
     // ---- attacks and fights -----------------------------------------------------------
@@ -740,6 +771,7 @@
     function doAttack(G, cid, target) {
         const s = G.s;
         const p = s.active;
+        spend(G,0,'Attack with ' + cardName(s,cid) + '.'); exhaust(G,cid);
         const hidden = axiomFlag(s, 'hiddenAttacker');
         emit(G, {
             t: 'attack', player: p, cid, hidden,
@@ -771,11 +803,11 @@
                 t: 'hit', player: d, cid: att,
                 text: `${cardName(s, att)} gets through! ${says(s, d, 'loses')} a life (${s.players[d].lives} left).`,
             });
-            if (s.players[d].lives <= 0) { setWinner(G, p, 'lives'); return; }
+            if (s.players[d].lives <= 0) { setWinner(G, rules(s).reverseHearts ? d : p, rules(s).reverseHearts ? 'reverse-hearts' : 'lives'); return; }
         } else {
-            fight(G, att, blk);
+            exhaust(G,blk); fight(G, att, blk);
         }
-        if (s.winner == null) endTurn(G);
+        if (s.winner == null) beginAction(G);
     }
 
     function fight(G, att, blk) {
@@ -790,7 +822,7 @@
         });
         if (out.blockerDefeated) defeat(G, blk, out.fctx, 'fight');
         if (out.attackerDefeated) defeat(G, att, out.fctx, 'fight');
-        const ax = currentAxiom(s);
+        const ax = activeAxioms(s).find(a => a.onFightWon);
         const winners = [];
         if (out.blockerDefeated && !out.attackerDefeated) winners.push(att);
         if (out.attackerDefeated && !out.blockerDefeated) winners.push(blk);
@@ -814,7 +846,7 @@
         eachActive(s, c, fctx, def => {
             if (dest === 'discard' && def.onDefeated && def.onDefeated(api(G), c) === 'hand') { dest = 'hand'; saver = def.name; }
         });
-        if (dest === 'discard' && axiomFlag(s, 'defeatedToHand')) { dest = 'hand'; saver = currentAxiom(s).name; }
+        if (dest === 'discard' && axiomFlag(s, 'defeatedToHand')) { dest = 'hand'; saver = 'Mercy'; }
         const name = cardName(s, cid);
         resetCard(c);
         c.defeats += 1;
@@ -827,13 +859,16 @@
 
     // ---- setup helpers -------------------------------------------------------------
 
-    // The starter axioms plus every axiom in the players' pools, no duplicates.
-    function buildAxiomDeck() {
-        const out = ((Rift.data.axiomDecks || {}).starter || []).slice();
-        Array.prototype.slice.call(arguments).forEach(pool => (pool || []).forEach(id => {
-            if (axiomDefs()[id] && !out.includes(id)) out.push(id);
-        }));
+    function axiomSelection(pool) {
+        const out=[];
+        (pool||[]).concat((Rift.data.axiomDecks||{}).default||[]).forEach(id=>{
+            if(out.length<10&&axiomDefs()[id]&&!out.includes(id))out.push(id);
+        });
         return out;
+    }
+    // Ten distinct cards from each side. Copies between sides remain in the shared deck.
+    function buildAxiomDeck(mine,theirs) {
+        return axiomSelection(mine).concat(axiomSelection(theirs));
     }
 
     // A random team of n instances, weighted by rarity (for the simulator and bench).
@@ -856,7 +891,7 @@
     }
 
     Battle.Engine = {
-        buildAxiomDeck, randomTeam,
+        buildAxiomDeck, axiomSelection, randomTeam, rules, activeAxioms, playCost, actionsLeft, activations, readyToUse, timeline, ruleSummary,
         DEFAULTS, PAD_SPECIES,
         createBattle, legalActions, applyAction, winner, decider,
         power, powerParts, fightOutcome, eligibleBlockers, canAttack, canSteal,

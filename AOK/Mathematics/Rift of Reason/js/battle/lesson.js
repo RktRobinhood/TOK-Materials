@@ -1,36 +1,28 @@
-/* A fixed teaching match, using only legal moves in the real battle engine. */
-(function (root) {
+/* A fixed teaching match: every practice move is legal in the normal engine. */
+(function(root){
     'use strict';
-    const Rift = root.Rift;
-    const Battle = Rift.Battle || (Rift.Battle = {});
-    const E = () => Rift.Battle.Engine;
-    const steps = [
-        { title: 'Play', text: "Your turn: play a card from your hand OR attack with a card on your board. Click the highlighted Lobstorian in your hand. Watch it move to your board; Granny will reply.", label: 'Play Lobstorian', highlight: '.lesson-hand', actions: [{type:'play',cid:'p0c0'}, {type:'decline'}, {type:'play',cid:'p1c0'}, {type:'decline'}] },
-        { title: 'Attack', text: "Click Lobstorian on your board to attack. Granny will take the hit: her lives go from three to two. Then she will attack you.", label: 'Attack with Lobstorian', highlight: '.lesson-board', actions: [{type:'attack',cid:'p0c0'}, {type:'take'}, {type:'attack',cid:'p1c0'}] },
-        { title: 'Block', text: "Granny attacks! Click Lobstorian to block. Its greater power wins this fight. Then we will place two cards for the stealing example. Watch which board each card joins.", label: 'Block with Lobstorian', highlight: '.lesson-board', actions: [{type:'block',cid:'p0c0'}, {type:'play',cid:'p0c1'}, {type:'decline'}, {type:'play',cid:'p1c1'}] },
-        { title: 'Steal', text: "Granny just played Muskrat. Click it to spend one steal and move it to your board. You keep it for this battle only. Granny gets an extra turn.", label: 'Steal Muskrat', highlight: '.lesson-opponent', actions: [{type:'steal'}, {type:'play',cid:'p1c2'}, {type:'decline'}] },
-        { title: 'Axioms', text: "Read the shared axiom. Underdog says the WEAKER creature wins a fight. Compare the two previews below, then click Read the shared axiom. The same cards now have a different winner.", label: 'Read the shared axiom', highlight: '.lesson-axiom', actions: [] },
-        { title: 'Colours', text: "Click Astrophysicat to attack. Reason gets +2 against Emotion: six against four. Normally six wins; Underdog makes four win a block. Granny will take this hit, then attack. Colours are game rules, not a ranking of knowledge.", label: 'Try the changed rules', highlight: '.lesson-axiom', actions: [{type:'attack',cid:'p0c1'}, {type:'take'}, {type:'attack',cid:'p1c2'}] },
-        { title: 'Lives', text: "The new axiom is Age of Reason: Reason creatures get +2. This time choose Take the hit. Your lives will go from three to two. You can take a hit instead of blocking.", label: 'Take the hit', highlight: '.lesson-score', actions: [{type:'take'}] },
-        { title: 'Win', text: "Granny has one life left. Click Astrophysicat to attack again. Granny takes the last hit for this lesson. In a real match she could block or steal! You win when she has no lives or cannot play or attack.", label: 'Make the last attack', highlight: '.lesson-axiom', actions: [{type:'attack',cid:'p0c1'}, {type:'take'}] },
+    const Rift=root.Rift, Battle=Rift.Battle||(Rift.Battle={});
+    const steps=[
+        {title:'Your turn has a budget',text:'Look at Energy and Actions. You start with 1 energy and 3 actions. Play, attack, activate and rewrite each use an action. End turn hands play to Granny. This learning match has just 1 heart each; normal matches start with 6.',label:'Read my turn budget',actions:[]},
+        {title:'Pay to play',text:'Astrophysicat costs 1 energy. Click it in your hand. It joins your board. You still have your turn and 2 actions, but no energy. New creatures may block; they attack or activate next turn.',label:'Play Astrophysicat',actions:[{type:'play',cid:'p0c0'}]},
+        {title:'End and refill',text:'Click End turn. Granny will play a creature and end her turn. Your next turn brings 2 energy, a new card and 3 fresh actions. Energy does not carry over.',label:'End turn',actions:[{type:'end'},{type:'play',cid:'p1c0'},{type:'end'}]},
+        {title:'Attack and exhaust',text:'Astrophysicat is ready. Attack costs no energy, but uses an action and exhausts it. Granny will block with Speedcheeta. Reason gains +2 against Emotion: 6 beats 4. Read the result; your turn continues.',label:'Attack with Astrophysicat',actions:[{type:'attack',cid:'p0c0'},{type:'block',cid:'p1c0'}]},
+        {title:'Use another action',text:'You can still act this turn. Play Zuckerborg for 1 energy. Astrophysicat stays exhausted; Zuckerborg may block. Saving a ready creature can protect your hearts.',label:'Play Zuckerborg',actions:[{type:'play',cid:'p0c1'}]},
+        {title:'Choose when to stop',text:'You have one action left. You can stop early rather than spend everything. End turn. Granny will play Lobstorian; then your energy grows to 3 and your creatures become ready.',label:'End turn',actions:[{type:'end'},{type:'play',cid:'p1c1'},{type:'end'}]},
+        {title:'Pay for an ability',text:'Activate Astrophysicat for 2 energy. Its ability draws a card. Activating uses an action and exhausts the creature, so it cannot attack or block until your next turn.',label:'Activate Astrophysicat',actions:[{type:'activate',cid:'p0c0',ability:'well-actually'}]},
+        {title:'Keep a blocker ready',text:'Zuckerborg is still ready. End turn. Granny will attack with Lobstorian. This time choose a blocker instead of losing your heart.',label:'End turn',actions:[{type:'end'},{type:'attack',cid:'p1c1'}]},
+        {title:'Block a stronger creature',text:'Click Zuckerborg to block. Its 3 power gets +2 from the colour wheel, but 5 still loses to Lobstorian’s 6. The block saves your heart. Zuckerborg’s passive ability returns it to your hand once. Granny then plays a fresh Lobstorian for the next example.',label:'Block with Zuckerborg',actions:[{type:'block',cid:'p0c1'},{type:'play',cid:'p1c3'},{type:'end'}]},
+        {title:'Spend energy to change a rule',text:'Pay 2 energy and 1 action to choose Underdog. Both players now use “weaker wins”. It stays until another combat rule replaces it or the timeline resets. Other rule categories stay as they were.',label:'Rewrite: Underdog',actions:[{type:'rewrite',choice:'underdog'}]},
+        {title:'Same cards, different winner',text:'Attack with Astrophysicat. Its 4 power now beats Lobstorian’s 6 because Underdog is active. Granny will block so you can see the rule work. A large monster does not always win.',label:'Attack under Underdog',actions:[{type:'attack',cid:'p0c0'},{type:'block',cid:'p1c3'}]},
+        {title:'Spend your last action',text:'Play Speedcheeta for 1 energy. This is your third action, so you must end after it. You cannot attack again with exhausted Astrophysicat.',label:'Play Speedcheeta',actions:[{type:'play',cid:'p0c2'}]},
+        {title:'Watch the Fate track',text:'End turn. Granny will spend 3 energy on Muskrat. Normal matches mix ten axioms from each player. The central Fate track counts down: six End turns to a free flip, then six to a reset. Filter advances it; Next Year delays it. This lesson pauses automatic events.',label:'End turn',actions:[{type:'end'},{type:'play',cid:'p1c2'},{type:'end'}]},
+        {title:'The victory rule can change too',text:'Pay 2 energy to change the victory rule. Now reaching YOUR OWN zero hearts wins. Underdog remains active: victory and combat are different categories. Read the bright victory warning before attacking.',label:'Rewrite: own zero hearts wins',actions:[{type:'rewrite',choice:'reverse-hearts'}]},
+        {title:'Reason from the new goal',text:'End turn. Granny will attack with Muskrat. You could block, but your goal is now to lose your last heart. Your next choice will win through the new rule.',label:'End turn',actions:[{type:'end'},{type:'attack',cid:'p1c2'}]},
+        {title:'Win by the current rules',text:'Choose Take the hit. Your own heart reaches zero, so YOU win under this victory rule. Normally that same choice would lose. Always read Rules now, your budget and the timeline.',label:'Take hit — win at zero hearts',actions:[{type:'take'}]},
     ];
-    function team(ids, prefix) {
-        return ids.map((species, i) => ({uid:prefix+i, species, loaner:true, injuries:['no-ability']}));
-    }
-    function starter() {
-        return team(['lobstorian','astrophysicat','muskrat','lobstorian','astrophysicat','lobstorian','astrophysicat','muskrat','lobstorian','astrophysicat'], 'lesson-you-');
-    }
-    function create() {
-        return E().createBattle({seed:'first-card-lesson', players:[
-            {name:'You',team:starter()},
-            {name:'Granny Axiom',team:team(['speedcheeta','muskrat','speedcheeta','speedcheeta','speedcheeta','speedcheeta','speedcheeta','speedcheeta','speedcheeta','speedcheeta'],'lesson-granny-')},
-        ], axiomDeck:['empty-set','empty-set','empty-set','underdog','age-of-reason','empty-set'],
-        options:{mode:'practice',first:0,shuffle:false,shuffleAxioms:false}});
-    }
-    function advance(state, index) {
-        const step = steps[index];
-        if (!step) throw new Error('Unknown lesson step');
-        return step.actions.reduce((s, action) => E().applyAction(s, action), state);
-    }
-    Battle.Lesson = {steps, create, advance, starter, team};
-})(typeof window !== 'undefined' ? window : globalThis);
+    function team(ids,prefix){return ids.map((species,i)=>({uid:prefix+i,species,loaner:true,injuries:[]}));}
+    function starter(){return team(['astrophysicat','zuckerborg','speedcheeta','lobstorian','muskrat','astrophysicat','zuckerborg','speedcheeta','lobstorian','muskrat'],'lesson-you-');}
+    function create(){return Battle.Engine.createBattle({seed:'card-cycle-lesson',players:[{name:'You',team:starter()},{name:'Granny Axiom',team:team(['speedcheeta','lobstorian','muskrat','lobstorian','zuckerborg','speedcheeta','lobstorian','muskrat','astrophysicat','zuckerborg'],'lesson-granny-')}],axiomDeck:['underdog','reverse-hearts','two-actions','mercy'],options:{mode:'practice',lives:1,first:0,shuffle:false,shuffleAxioms:false,timeline:false}});}
+    function advance(state,index){if(!steps[index])throw Error('Unknown lesson step');return steps[index].actions.reduce((s,a)=>Battle.Engine.applyAction(s,a),state);}
+    Battle.Lesson={steps,create,advance,starter,team};
+})(typeof window!=='undefined'?window:globalThis);

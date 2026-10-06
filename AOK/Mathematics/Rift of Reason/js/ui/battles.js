@@ -25,6 +25,16 @@
         return Rift.State.get().seed + ':' + tag + ':' + Date.now().toString(36);
     }
 
+    function offerUpdatedLesson(start, back) {
+        const flags = Rift.State.get().flags;
+        if (!flags['card-lesson-won'] || flags['card-rules-version'] === 2 || flags['card-rules-seen'] === 2) return false;
+        Rift.UI.modal('The card rules have changed', el('p', {text:'Turns now have energy and several actions. Creatures exhaust, and paid axioms stay active. Granny has a new guided practice. Your collection is safe.'}), [
+            {label:'Play the new rules',onclick(){Rift.State.update(s=>{s.flags['card-rules-seen']=2;});start();}},
+            {label:'Learn the new rules',primary:true,onclick:()=>Battles.learn(back)},
+        ]);
+        return true;
+    }
+
     function finish(result, opts) {
         const o = opts || {};
         Rift.State.update(s => {
@@ -42,7 +52,7 @@
     }
 
     // Before a real battle: choose which battle consumables to bring (they are used up).
-    // Calls start(consumables) with e.g. { 'extra-steal': 1 }.
+    // Calls start(consumables) with e.g. { 'extra-energy': 1 }.
     function prepare(start) {
         const s = Rift.State.get();
         const owned = Object.entries(Rift.data.items).filter(([id, it]) => it.consumable && (s.items[id] || 0) > 0);
@@ -79,18 +89,21 @@
 
         rules(onClose) {
             return Rift.UI.modal('How to play the card game', el('div.stack',null,[
-                'Start with 3 lives, 2 steals and 5 cards in your hand. Your deck has 10 creatures; missing cards are loaned.',
-                'On your turn: play one creature OR attack with one on your board. Your hand refills while your deck lasts.',
-                'When attacked: block with one creature OR lose one life. Normally the stronger creature wins; a tie defeats both.',
-                'Right after an opponent plays a creature: steal it OR let it stay. A steal costs one token and gives them an extra turn. Stolen cards return after the battle.',
-                'Read the shared axiom each round: it changes a rule for BOTH players. Colours give +2 against one colour; check the wheel. This is a game rule, not a ranking of knowledge.',
-                'Win when your opponent has no lives or cannot play or attack. Read creature abilities too. Practice and the story challenge have no stakes or fate rolls; other challenges can risk cards.',
+                'Start with 6 hearts and 5 creature cards. Your energy grows 1, 2, 3 and so on, up to 10; it refills each turn. Draw one card each turn after your first.',
+                'Usually you have 3 actions. Play a card for its shown energy cost, attack for 0 energy, activate an ability for 2, or rewrite a rule for 2. Each uses 1 action. You decide when to End turn.',
+                'Attack, block or activate: the creature exhausts until your next turn. New creatures can block, but normally must wait to attack or activate. Keep some creatures ready for defence.',
+                'An unblocked attack removes 1 heart. Normally higher power wins a block; ties defeat both. Colours can add +2. Passive abilities stay on; paid abilities are marked Activate.',
+                'Pay to choose one of the three offered axioms. It changes a rule for BOTH players and stays until its category is replaced or reset. Read Rules now: action limits, costs, combat and even the victory goal can change.',
+                'Build your ten-card axiom deck in Collection. The opponent contributes ten too; all twenty are shuffled together. Normal matches use this shared deck. Guided lessons use a fixed smaller deck.',
+                'The Fate track sits between the boards. Every End turn advances it one space. After six turns it flips a free rule; six later it resets all rules, then repeats. Filter advances it by two; Next Year delays it by two. The event happens immediately at zero.',
+                'Normally you win by reducing the opponent to zero hearts. A reversed goal means reaching your OWN zero wins. No creatures left still loses; after 80 turns the game ends in a draw.',
+                'Practice and Syllo’s story challenge have no stakes or fate rolls. Other matches may risk items or cards.',
             ].map(text=>el('p.small',{text}))),[{label:'Close'}],{onClose});
         },
 
         learn(back) {
             Rift.Router.go('battle-lesson',{onEnd(won){
-                if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;});
+                if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;s.flags['card-rules-version']=2;});
                 Rift.Router.replace(back||'map');
                 if(won&&back!=='collection'&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();
             }});
@@ -106,10 +119,11 @@
         },
 
         story() {
+            if(offerUpdatedLesson(()=>Battles.story(),'map'))return;
             Rift.Router.go('battle',{
                 mode:'practice',seed:'syllo-road-challenge',
                 player:{team:Rift.Battle.Lesson.starter(),items:{},axioms:[]},
-                axiomDeck:['empty-set','age-of-reason','underdog','empty-set','age-of-reason'],
+                axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false},
                 opponent:{name:'Sergeant Syllo · Road challenge',team:Rift.Battle.Lesson.team(Array(10).fill('speedcheeta'),'syllo-'),ai:'easy'},
                 onEnd(result){
@@ -119,7 +133,7 @@
                         // Rebuild the map after setting the flag so the Road unlock is visible immediately.
                         Rift.Router.replace('map');
                         Rift.UI.modal('The Road is open',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
-                    }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: save a steal for a strong creature. Read each axiom before blocking: under Underdog, the weaker creature wins.'}),[
+                    }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: spend energy on more than one small creature. Keep a blocker ready and use End turn. Read Rules now before attacking or rewriting.'}),[
                         {label:'Later'},{label:'Learn again',onclick:()=>Battles.learn('map')},{label:'Retry',primary:true,onclick:()=>Battles.story()},
                     ]);
                 },
@@ -141,6 +155,7 @@
 
         trainer(nodeId, difficulty) {
             if(!Battles.canChallenge(nodeId)){Rift.UI.toast('Beat this station’s puzzle once to unlock its card challenge.',3500);return;}
+            if(offerUpdatedLesson(()=>Battles.trainer(nodeId,difficulty),'map'))return;
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
             prepare(consumables => Rift.Router.go('battle', {
@@ -158,6 +173,7 @@
         },
 
         practice() {
+            if(offerUpdatedLesson(()=>Battles.practice(),'collection'))return;
             const sd = seed('practice');
             const team = Rift.Battle.Engine.randomTeam(Rift.makeRng(sd), 10, { prefix: 'spar', legendaries: false });
             Rift.Router.go('battle', {
@@ -171,6 +187,7 @@
 
         ghost(code) {
             if (!needCreatures()) return;
+            if(offerUpdatedLesson(()=>Battles.ghost(code),'collection'))return;
             let imported;
             try {
                 imported = Rift.Battle.TeamCodes.importTeam(code);
@@ -190,7 +207,7 @@
         shareCode() {
             const s = Rift.State.get();
             if (!needCreatures()) return;
-            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: s.creatures.slice(0, 10), axioms: s.axioms });
+            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: s.creatures.slice(0, 10), axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout.length?s.axiomLoadout:s.axioms) });
             const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code });
             Rift.UI.modal('Your team code', el('div.stack', null, [
                 el('p', { text: 'Give this code to a classmate. They battle a ghost of your team on their own laptop. Nothing is taken from you; if they win, they get a trophy copy with your name on it.' }),
