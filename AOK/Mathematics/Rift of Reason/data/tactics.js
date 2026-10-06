@@ -63,7 +63,7 @@
             filter: (s, cid, H) => H.attack(s, cid) >= 5,
             text: 'Defeat a creature with 5 or more attack.',
             flavour: 'Extraordinary claims need extraordinary evidence.',
-            run(api, p, target) { api.emit({ t: 'tactic', text: 'Big claims need big evidence: ' + api.name(target) + ' is defeated.' }); api.defeat(target, 'tactic'); },
+            run(api, p, target) { api.emit({ t: 'tactic', text: 'Big claims need big evidence: ' + api.name(target) + ' cannot stand.' }); api.defeat(target, 'tactic'); },
         },
         clockwork: {
             name: 'Clockwork', cost: 1,

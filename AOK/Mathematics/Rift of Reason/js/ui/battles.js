@@ -137,7 +137,7 @@
 
         rules(onClose) {
             return Rift.UI.modal('How to play the card game', el('div.stack',null,[
-                'Each hero starts with 10 hearts. Reduce the other hero to zero hearts to win.',
+                'Each hero starts with ' + Rift.Battle.Engine.DEFAULTS.hearts + ' hearts. Reduce the other hero to zero hearts to win.',
                 'Your energy grows by 1 each turn, up to 10. It refills every turn. Unused energy is lost.',
                 'Start each turn with ONE choice: draw from your deck, take an axiom card, or move the Fate track 2 spaces closer or away.',
                 'Then play cards for their energy cost. Drag a card onto your side, or click it and press Play. New creatures sleep: they attack next turn.',
@@ -147,7 +147,7 @@
                 'Entrance works when the card is played. Last Word works when it is defeated. Activate costs energy and uses its attack this turn.',
                 'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
                 'The Fate track moves 1 space every End turn. At zero it flips a free rule or resets all rules. Read Rules now: even the victory goal can change.',
-                'The player who goes second gets one extra card and the Spark: +1 energy once.',
+                'The player who goes first starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[0] + ' cards. The player who goes second starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[1] + ' and gets the Spark: +1 energy once.',
                 'Practice and Syllo’s story challenge have no stakes. Other matches may risk items or cards.',
             ].map(text=>el('p.small',{text}))),[{label:'Close'}],{onClose});
         },
