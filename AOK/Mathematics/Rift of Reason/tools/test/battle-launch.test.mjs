@@ -16,7 +16,7 @@ function game(){
 test('empty collection can learn, practice and win the real safe story match',()=>{
  const g=game(),{Rift}=g,E=Rift.Battle.Engine;
  Rift.Battles.learn('collection');assert.equal(g.routes.at(-1).screen,'battle-lesson');
- g.routes.at(-1).params.onEnd(true);assert.equal(g.state.flags['card-lesson-won'],true);
+ g.routes.at(-1).params.onEnd(true);assert.equal(g.state.flags['card-lesson-won'],true);assert.equal(g.state.flags['card-rules-version'],3);
  Rift.Battles.practice();assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(g.routes.at(-1).params.player.team.length,10);
  Rift.Battles.story();const p=g.routes.at(-1).params;
  assert.equal(p.mode,'practice');assert.ok(p.player.team.every(c=>c.loaner));
@@ -30,7 +30,7 @@ test('empty collection can learn, practice and win the real safe story match',()
 test('returning learners are offered the changed rules once without spending items',()=>{
  const g=game();g.state.flags['card-lesson-won']=true;const before=JSON.stringify(g.state.items);
  g.Rift.Battles.practice();assert.equal(g.routes.length,0);assert.equal(g.modals.at(-1).title,'The card rules have changed');
- g.modals.at(-1).buttons.find(b=>b.label==='Play the new rules').onclick();assert.equal(g.state.flags['card-rules-seen'],2);assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(JSON.stringify(g.state.items),before);
+ g.modals.at(-1).buttons.find(b=>b.label==='Play the new rules').onclick();assert.equal(g.state.flags['card-rules-seen'],3);assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(JSON.stringify(g.state.items),before);
  g.Rift.Battles.practice();assert.equal(g.modals.length,1);
 });
 test('story gate requires victory and a side challenge never completes its puzzle',()=>{

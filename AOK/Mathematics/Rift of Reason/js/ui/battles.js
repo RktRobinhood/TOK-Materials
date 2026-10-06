@@ -130,22 +130,25 @@
             Rift.UI.modal('A card minigame at the Fair',el('div.stack',null,[
                 Rift.Assets.img(Rift.data.speakers.granny.art,{className:'tutorial-face',label:'Granny Axiom'}),
                 el('p',{text:'Granny has a second game: creature cards. Puzzles help you collect creatures; cards let you challenge their keepers.'}),
-                el('p',{text:'Try a guided practice at her table. Click the highlighted cards. Granny will show each reply. You borrow a team and risk nothing.'}),
+                el('p',{text:'Try a guided practice at her table. Follow the gold pointer: drag or click the cards. Granny shows each reply. You borrow a team and risk nothing.'}),
                 el('p.small',{text:'After you beat a station’s logic puzzle once, its keeper offers a card challenge when you return. The puzzle and the card match are separate.'}),
             ]),[{label:'Explore first'},{label:'Try the card minigame',primary:true,onclick:()=>Battles.learn(back||'map')}]);
         },
 
         rules(onClose) {
             return Rift.UI.modal('How to play the card game', el('div.stack',null,[
-                'Start with 6 hearts and 5 creature cards. Your energy grows 1, 2, 3 and so on, up to 10; it refills each turn. Draw one card each turn after your first.',
-                'Usually you have 3 actions. Play a card for its shown energy cost, attack for 0 energy, activate an ability for 2, or rewrite a rule for 2. Each uses 1 action. You decide when to End turn.',
-                'Attack, block or activate: the creature exhausts until your next turn. New creatures can block, but normally must wait to attack or activate. Keep some creatures ready for defence.',
-                'An unblocked attack removes 1 heart. Normally higher power wins a block; ties defeat both. Colours can add +2. Passive abilities stay on; paid abilities are marked Activate.',
-                'Pay to choose one of the three offered axioms. It changes a rule for BOTH players and stays until its category is replaced or reset. Read Rules now: action limits, costs, combat and even the victory goal can change.',
-                'Build your ten-card axiom deck in Collection. The opponent contributes ten too; all twenty are shuffled together. Normal matches use this shared deck. Guided lessons use a fixed smaller deck.',
-                'The Fate track sits between the boards. Every End turn advances it one space. After six turns it flips a free rule; six later it resets all rules, then repeats. Filter advances it by two; Next Year delays it by two. The event happens immediately at zero.',
-                'Normally you win by reducing the opponent to zero hearts. A reversed goal means reaching your OWN zero wins. No creatures left still loses; after 80 turns the game ends in a draw.',
-                'Practice and Syllo’s story challenge have no stakes or fate rolls. Other matches may risk items or cards.',
+                'Each hero starts with 10 hearts. Reduce the other hero to zero hearts to win.',
+                'Your energy grows by 1 each turn, up to 10. It refills every turn. Unused energy is lost.',
+                'Start each turn with ONE choice: draw from your deck, take an axiom card, or move the Fate track 2 spaces closer or away.',
+                'Then play cards for their energy cost. Drag a card onto your side, or click it and press Play. New creatures sleep: they attack next turn.',
+                'To attack, drag a ready creature onto an enemy creature or the enemy hero. Or click it, then click a glowing target.',
+                'In a fight, both creatures deal damage equal to their attack. Damage stays. A creature with 0 health is defeated.',
+                'Guard: if the enemy has a Guard creature, attack it first. Swift: can attack at once. Shield: ignores the first damage.',
+                'Entrance works when the card is played. Last Word works when it is defeated. Activate costs energy and uses its attack this turn.',
+                'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
+                'The Fate track moves 1 space every End turn. At zero it flips a free rule or resets all rules. Read Rules now: even the victory goal can change.',
+                'The player who goes second gets one extra card and the Spark: +1 energy once.',
+                'Practice and Syllo’s story challenge have no stakes. Other matches may risk items or cards.',
             ].map(text=>el('p.small',{text}))),[{label:'Close'}],{onClose});
         },
 

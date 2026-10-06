@@ -1,20 +1,36 @@
 /*
- * Battle screen.
+ * Battle screen (Card Arena rules, design/card-arena-2026-10-07.md).
  *
  * Rift.Router.go('battle', {
  *   mode: 'practice' | 'trainer' | 'boss' | 'ghost',
- *   opponent: { name, team: [instances], ai?: 'easy'|'hard', nickname?, stake?, axioms? },
+ *   opponent: { name, team: [instances], ai?: 'easy'|'hard', tactics?, axioms?, art?, stake?, type?, hearts? },
  *   seed,
- *   player?: { name, team, items, axioms, consumables },   // default: the save's first 10 creatures and items
+ *   player?: { name, team, tactics, axioms, items, consumables, art?, hearts? },  // default: the save's deck
+ *   axiomDeck?, battleOptions?,
+ *   guide?: { steps: [{ title, text, label, expect, replies, compare? }], create?() → state, coach? },
  *   onEnd(result),
  * });
  *
  * result = { mode, outcome: 'won'|'lost'|'draw', turns, rounds, endReason,
  *            fate: Fate.roll(...) | null, ante, settlement: Ante.settle(...) | null }
- * The screen never writes to the save itself: the caller applies the result,
- * e.g. Rift.State.update(s => Rift.Battle.Ante.applyToSave(s, result)).
+ * endReason: 'hearts' | 'reverse-hearts' | 'cannot-act' | 'turn-limit' | 'both-zero'.
+ * In guide mode "Leave lesson" ends with outcome 'left'.
+ * The screen never writes to the save itself: the caller applies the result.
  *
- * The human is always player 0 ("You"); the AI is player 1.
+ * The human is always player 0 ("You"); the AI is player 1 (Rift.Battle.AI.choose).
+ * Controls: drag (Pointer Events) a ready creature onto a glowing target to attack, or a
+ * hand card onto your side / onto its target to play it. Click-click works everywhere:
+ * click a creature or card, then a glowing target or a button in the centre lane.
+ *
+ * Guide mode: only steps[i].expect is allowed (highlighted with a gold pointer); after it,
+ * steps[i].replies run one by one with a visible pause, then the next step starts.
+ *
+ * Optional art (each falls back to CSS): ui/card-<colour>, ui/card-axiom, ui/card-tactic,
+ * tactic/<id>, ui/card-back, ui/axiom-back, ui/axiom-<id>, ui/stat-attack, ui/stat-health,
+ * ui/stat-cost, ui/energy-full, ui/energy-empty, ui/kw-<keyword>, ui/state-sleeping,
+ * ui/state-frozen, ui/ab-entrance, ui/ab-lastword, ui/ab-activate, ui/spark, ui/end-turn,
+ * ui/hero-frame, ui/heart-full, ui/fate-track, ui/fate-marker, ui/fate-flip, ui/fate-reset,
+ * scene/arena (else scene/battle-table), npc/rival (opponent portrait fallback).
  */
 (function (root) {
     'use strict';
@@ -22,37 +38,68 @@
     const Rift = root.Rift;
     const ME = 0;
     const OPP = 1;
-    const AI_DELAY = 800;
+    const AI_DELAY = 850;
+    const REPLY_DELAY = 950;
+    const PREVIEW = 600;
+    const DRAG_START = 7;
 
     const el = (...a) => Rift.el(...a);
+    const put = (parent, ...kids) => { kids.forEach(k => { if (k != null && k !== false) parent.appendChild(typeof k === 'string' ? root.document.createTextNode(k) : k); }); return parent; };
     const B = () => Rift.Battle;
-    const species = id => Rift.data.creatures[id] || { name: id, power: 0, colour: 'memory' };
+    const species = id => (Rift.data.creatures || {})[id] || { name: id, colour: 'memory' };
     const sfx = name => { try { if (Rift.Audio) Rift.Audio.sfx(name); } catch (e) { /* no audio */ } };
+    const has = id => !!(Rift.Assets && Rift.Assets.has && Rift.Assets.has(id));
+    const artUrl = id => (has(id) && Rift.Assets.url ? Rift.Assets.url(id) : null);
+    const bg = id => { const u = artUrl(id); return u ? { backgroundImage: 'url("' + u + '")' } : null; };
 
-    const SHORT = { perception: 'Perception' };
-    function colourChip(colour, short) {
+    const KW_ICON = { guard: '🛡️', swift: '💨', shield: '🫧', elusive: '🌫️' };
+    const KW_NAME = { guard: 'Guard', swift: 'Swift', shield: 'Shield', elusive: 'Elusive' };
+    const AB_ICON = { entrance: '➜', lastword: '↩', activate: '⚙', passive: '•' };
+    const AB_KIND = { entrance: 'Entrance', lastword: 'Last Word', activate: 'Activate', passive: '' };
+    const TACTIC_ICON = {
+        counterexample: '✗', 'pep-talk': '📣', 'stand-firm': '🛡️', eureka: '💡', 'second-wind': '❤', 'occams-razor': '🪒',
+        rethink: '↺', 'big-claims': '⚖️', clockwork: '⏱', 'look-it-up': '🔎', 'peer-review': '👥', recall: '📜',
+        'pause-for-thought': '⏸', 'safety-net': '🕸️', lemma: '📐',
+    };
+    const DRAW_TEXT = {
+        deck: ['Draw from your deck', 'A creature or tactic card'],
+        axiom: ['Take an axiom card', 'A rule card for your hand'],
+        forward: ['Fate 2 closer', 'No card; the next event comes sooner'],
+        rewind: ['Fate 2 away', 'No card; the next event comes later'],
+    };
+
+    function colourChip(colour) {
         const C = Rift.COLOURS[colour] || Rift.COLOURS.memory;
-        const label = short && SHORT[colour] ? SHORT[colour] : C.name;
-        return el('span.chip', { dataset: { colour }, title: C.name }, [C.icon + ' ' + label]);
+        return el('span.chip', { dataset: { colour }, title: C.name }, [C.icon + ' ' + C.name]);
+    }
+
+    function calmMotion() {
+        const doc = root.document;
+        if (doc && doc.body && doc.body.classList && doc.body.classList.contains('calm-motion')) return true;
+        try { return !!(root.matchMedia && root.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { return false; }
     }
 
     function resolvePlayer(p, save, seed) {
         const given = p.player || {};
+        const S = Rift.State || {};
         let team = given.team;
-        if (!team || !team.length) team = save && save.creatures && save.creatures.length ? save.creatures.slice(0, 10) : null;
-        if (!team) team = B().Engine.randomTeam(Rift.makeRng(seed + ':you'), 10, { prefix: 'you', legendaries: false });
+        if ((!team || !team.length) && save) team = S.battleTeam ? S.battleTeam(save) : (save.creatures || []).slice(0, 10);
+        if (!team || !team.length) team = B().Engine.randomTeam(Rift.makeRng(seed + ':you'), 10, { prefix: 'you', legendaries: false });
+        let tactics = given.tactics;
+        if (!tactics && save && S.deckTactics) tactics = S.deckTactics(save);
         return {
-            name: 'You',
-            team,
+            name: 'You', team, tactics: tactics || undefined, hearts: given.hearts,
             items: given.items || (save && save.items) || {},
             axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
             consumables: given.consumables || {},
+            art: given.art || (save && save.avatar && save.avatar.type && Rift.avatarArt ? Rift.avatarArt(save.avatar, 'neutral') : null),
         };
     }
 
     function mount(rootEl, params) {
         const p = params || {};
         const E = B().Engine;
+        const guide = p.guide && p.guide.steps && p.guide.steps.length ? p.guide : null;
         const mode = p.mode || 'practice';
         const opp = p.opponent || {};
         const seed = String(p.seed == null ? Date.now().toString(36) : p.seed);
@@ -61,405 +108,1096 @@
         const oppTeam = opp.team && opp.team.length ? opp.team : E.randomTeam(Rift.makeRng(seed + ':opp'), 10, { prefix: 'npc', legendaries: false });
         const aiLevel = opp.ai || p.aiLevel || (mode === 'practice' ? 'easy' : 'hard');
         const anteType = mode === 'practice' ? 'practice' : (opp.type || mode);
+        const oppAxioms = opp.axioms || Rift.makeRng(seed + ':axiom-opponent').shuffle((Rift.data.axiomDecks || {}).starter || []).slice(0, 10);
 
-        let state = E.createBattle({
+        let state = guide && guide.create ? guide.create() : E.createBattle({
             seed,
             players: [
-                { id: 'you', name: 'You', team: me.team, consumables: me.consumables },
-                { id: 'opp', name: opp.name || 'Rival', team: oppTeam },
+                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts },
+                { id: 'opp', name: opp.name || 'Rival', team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts },
             ],
-            axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, opp.axioms || Rift.makeRng(seed+':axiom-opponent').shuffle(Rift.data.axiomDecks.starter).slice(0,10)),
+            axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
             options: Object.assign({}, p.battleOptions, { mode }),
         });
-        const startLives = state.players.map(P => P.lives);
-        const ante = B().Ante.compute({ type: anteType, player: { items: me.items }, opponent: Object.assign({}, opp, { team: oppTeam }), seed });
-        const ui = { selected: null, timer: null, ended: false, news: [] };
+        const oppName = state.players[OPP].name;
+        const ante = B().Ante && !guide ? B().Ante.compute({ type: anteType, player: { items: me.items }, opponent: Object.assign({}, opp, { team: oppTeam }), seed }) : null;
+        const ui = {
+            sel: null, note: '', news: [], timer: null, noteTimer: null, ended: false, busy: false, queue: [],
+            preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
+        };
+        const nodes = {};
         let help = null;
 
         // ---- skeleton ----
         const dom = {};
-        const screen = el('div.battle', {}, [
-            el('div.b-main', {}, [
-                dom.oppBar = el('div.b-bar.opp'),
-                dom.oppHand = el('div.b-hand.opp-hand'),
-                dom.oppBoard = el('div.b-board.opp-board'),
-                dom.fate = el('div.b-fate.panel'),
-                dom.myBar = el('div.b-bar.me'),
-                dom.prompt = el('div.b-prompt.panel'),
-                dom.myBoard = el('div.b-board.my-board'),
-                dom.myHand = el('div.b-hand.my-hand'),
+        const sceneId = has('scene/arena') ? 'scene/arena' : 'scene/battle-table';
+        const screen = el('div.battle' + (guide ? '.guide-mode' : ''), {}, [
+            dom.arena = el('div.b-arena', {}, [
+                dom.oppHand = el('div.b-opp-hand'),
+                dom.oppRow = el('div.b-hero-row.opp'),
+                dom.oppBoard = el('div.b-board.opp-board', { dataset: { zone: 'opp-board' } }),
+                dom.lane = el('div.b-lane', { dataset: { zone: 'lane' } }),
+                dom.myBoard = el('div.b-board.my-board', { dataset: { zone: 'my-board' } }),
+                dom.myRow = el('div.b-hero-row.me'),
+                dom.myHand = el('div.b-hand', { dataset: { zone: 'hand' } }),
+                dom.end = el('div.b-end-wrap'),
+                dom.draw = el('div.b-draw'),
+                dom.choice = el('div.b-choice'),
+                dom.arrow = svgArrow(),
+                dom.floats = el('div.b-floats'),
+                dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
             ]),
-            el('aside.b-side', {}, [
-                el('button.btn.small',{text:'How to play',onclick(){
-                    if(help)return;
-                    clearTimeout(ui.timer);
-                    help=Rift.Battles.rules(()=>{help=null;if(!ui.ended)schedule();});
-                }}),
-                dom.axiom = el('div.b-axiom'),
+            dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
+            dom.side = el('aside.b-side', {}, [
+                el('div.b-side-top', {}, [
+                    el('button.btn.small', { type: 'button', text: 'How to play', onclick: openHelp }),
+                    el('button.btn.small.b-side-close', { type: 'button', text: 'Close', onclick: () => toggleSide(false) }),
+                ]),
+                dom.rules = el('details.b-rules.panel', { open: true }),
                 dom.wheel = wheelLegend(),
-                el('div.b-log-wrap.panel', {}, [el('h3', { text: 'What happened' }), dom.log = el('ol.b-log')]),
+                el('details.b-log-wrap.panel', { open: true }, [el('summary', { text: 'What happened' }), dom.log = el('ol.b-log')]),
             ]),
-            dom.choice = el('div.b-choice'),
+            el('button.btn.small.b-side-toggle', { type: 'button', text: 'Rules & log', onclick: () => toggleSide() }),
             dom.overlay = el('div.b-overlay'),
         ]);
-        rootEl.appendChild(Rift.Assets.img('scene/battle-table', { className: 'scene-bg', label: 'the card table' }));
+        rootEl.appendChild(Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' }));
         rootEl.appendChild(screen);
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { ui.selected = null; render(); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { cancelDrag(); clearSel(); } });
+        screen.addEventListener('pointermove', onPointerMove);
+        screen.addEventListener('pointerup', onPointerUp);
+        screen.addEventListener('pointercancel', () => cancelDrag());
+        screen.addEventListener('dragstart', e => e.preventDefault());
+        screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid]')) e.preventDefault(); });
 
-        // ---- helpers ----
+        function toggleSide(on) {
+            ui.sideOpen = on == null ? !ui.sideOpen : on;
+            screen.classList.toggle('side-open', ui.sideOpen);
+        }
+        function openHelp() {
+            if (help || !Rift.Battles || !Rift.Battles.rules) return;
+            clearTimeout(ui.timer);
+            help = Rift.Battles.rules(() => { help = null; if (!ui.ended) schedule(); });
+        }
+
+        // ---- legality ----
         const decider = () => E.decider(state);
-        const myTurnToAct = () => decider() === ME && !ui.ended;
-        const legal = () => (myTurnToAct() ? E.legalActions(state) : []);
+        const myTurn = () => decider() === ME && !ui.ended && !ui.busy && !ui.preview;
+        const step = () => (guide ? guide.steps[ui.step] || null : null);
+        const matches = expect => a => Object.keys(expect).every(k => a[k] === expect[k]);
+        function legal() {
+            if (!myTurn()) return [];
+            const L = E.legalActions(state);
+            const st = step();
+            if (guide) return st ? L.filter(matches(st.expect)) : [];
+            return L;
+        }
         const name = cid => E.cardName(state, cid);
 
+        // Targets for the current selection: Map target → action.
+        function targetMap(sel, L) {
+            const out = new Map();
+            if (!sel) return out;
+            (L || legal()).forEach(a => {
+                if (!a.target) return;
+                if (sel.kind === 'board' && a.type === 'attack' && a.cid === sel.cid) out.set(a.target, a);
+                if (sel.kind === 'hand' && a.type === 'play' && a.cid === sel.cid) out.set(a.target, a);
+                if (sel.kind === 'activate' && a.type === 'activate' && a.cid === sel.cid && a.ability === sel.ability) out.set(a.target, a);
+            });
+            return out;
+        }
+
+        // ---- acting ----
         function act(action) {
             if (ui.ended) return;
             clearTimeout(ui.timer);
+            const by = decider();
+            const before = rects();
+            const guided = guide && by === ME && !ui.busy && step() && matches(step().expect)(action);
             try {
-                state = E.applyAction(state, Object.assign({ player: decider() }, action));
+                state = E.applyAction(state, Object.assign({ player: by }, action));
             } catch (e) {
                 console.error('[battle]', e);
                 return;
             }
-            ui.selected = null;
+            ui.sel = null;
+            ui.preview = null;
+            ui.note = '';
+            if (guided) { ui.busy = true; ui.queue = (step().replies || []).slice(); }
             noteEvents(state.lastEvents);
             render();
+            effects(state.lastEvents, before);
             schedule();
+        }
+
+        // Show what the opponent (or a scripted reply) is about to do, then do it.
+        function perform(action) {
+            if (ui.ended) return;
+            const by = decider();
+            const target = action.target;
+            if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate')) {
+                ui.preview = { cid: action.cid, target, by, action };
+                render();
+                ui.timer = setTimeout(() => { ui.preview = null; act(action); }, PREVIEW);
+            } else act(action);
+        }
+
+        function aiAction() {
+            try {
+                const a = B().AI.choose(state, { level: aiLevel });
+                if (a) return a;
+            } catch (e) { console.error('[battle] AI', e); }
+            const L = E.legalActions(state);
+            return L.find(a => a.type === 'draw') || L.find(a => a.type === 'end') || L[0] || null;
         }
 
         function schedule() {
             clearTimeout(ui.timer);
-            if(ui.ended || help) return;
-            if (E.winner(state) != null) { ui.timer = setTimeout(finish, 900); return; }
-            if (decider() === OPP) {
-                ui.timer = setTimeout(() => {
-                    const action = B().AI.choose(state, { level: aiLevel });
-                    if (action) act(action);
-                }, AI_DELAY);
+            if (ui.ended || help) return;
+            if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
+            if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a); return; }
+            if (ui.queue.length) {
+                ui.timer = setTimeout(() => perform(ui.queue.shift()), REPLY_DELAY);
+                return;
+            }
+            if (guide && ui.busy) {
+                ui.busy = false;
+                ui.step += 1;
+                render();
+                speak();
+                return;
+            }
+            if (!guide && decider() === OPP) {
+                ui.timer = setTimeout(() => { const a = aiAction(); if (a) perform(a); }, AI_DELAY);
             }
         }
 
         function visibleText(ev) {
-            if (ev.t === 'draw') return null;
             if (ev.privateTo === undefined || ev.privateTo === ME) return ev.text;
             return ev.publicText || null;
         }
 
         function noteEvents(events) {
-            ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t));
+            ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t) && !/Choose a draw\.$/.test(t));
             events.forEach(ev => {
-                if (ev.t === 'play') sfx('card-play');
-                if (ev.t === 'steal') sfx('steal');
+                if (ev.t === 'play' || ev.t === 'tactic-play') sfx('card-play');
                 if (ev.t === 'hit') sfx('hit');
                 if (ev.t === 'fight') sfx('block');
                 if (ev.t === 'defeated') sfx('defeat');
-                if (ev.t === 'axiom') sfx('axiom');
+                if (ev.t === 'axiom' || ev.t === 'reset') sfx('axiom');
             });
         }
 
-        // ---- cards ----
-        function abilityLines(c) {
-            const defs = B().Abilities;
-            const lines = [];
-            if (c.ability && defs[c.ability] && !defs[c.ability].onActivate) {
-                lines.push(el('div.b-ab' + (c.warped ? '.warped' : ''), {}, [
-                    el('b', { text: (c.warped ? '🌀 ' : '') + defs[c.ability].name + ': ' }), defs[c.ability].text,
-                ]));
-            } else if (!c.ability) {
-                lines.push(el('div.b-ab.none', { text: c.injured.includes('no-ability') ? (c.loaner ? 'Teaching card: no ability' : '🤕 No ability (injured)') : 'No ability' }));
-            }
-            (c.gained || []).forEach(a => {
-                if (defs[a]&&!defs[a].onActivate) lines.push(el('div.b-ab.gained', {}, [el('b', { text: '+ ' + defs[a].name + ': ' }), defs[a].text]));
-            });
-            return lines;
+        function setNote(text) {
+            ui.note = text;
+            render();
+            clearTimeout(ui.noteTimer);
+            ui.noteTimer = setTimeout(() => { if (ui.note === text) { ui.note = ''; if (!ui.ended && !ui.drag) render(); } }, 4000);
         }
 
-        function cardEl(cid, opts) {
-            const o = opts || {};
+        function clearSel() { if (ui.sel) { ui.sel = null; render(); } }
+
+        // ---- why a card can't act (short notes for disabled controls) ----
+        function whyNot(cid) {
+            if (ui.ended) return '';
+            if (guide && !ui.busy) return 'Not now. Follow the gold pointer.';
+            if (ui.busy || decider() !== ME) return 'Wait for your turn.';
+            if (state.phase === 'draw') return 'First choose your draw.';
+            if (state.phase === 'choose') return 'First answer the question.';
             const c = state.cards[cid];
-            const sp = species(c.species);
-            const colour = E.colourOf(state, c);
-            const pp = E.powerParts(state, cid);
-            const delta = pp.total - c.base;
+            const P = state.players[ME];
+            if (P.hand.includes(cid)) {
+                const cost = E.playCost(state, cid);
+                if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
+                if (c.kind === 'creature' && P.board.length >= state.options.boardLimit) return 'Your side is full.';
+                return 'It has no target right now.';
+            }
+            if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
+            const d = E.describe(state, cid);
+            if (d.sleeping) return name(cid) + ' is asleep. It can attack next turn.';
+            if (d.frozen) return name(cid) + ' was lectured. It can\'t attack this turn.';
+            if (d.activated) return name(cid) + ' used its ability this turn.';
+            if (d.attacks) return name(cid) + ' already attacked this turn.';
+            if (d.attack <= 0) return name(cid) + ' has 0 attack.';
+            return 'No attacks left this turn under the current rules.';
+        }
+
+        // ---- card faces ----
+        function gem(kind, value, extra) {
+            const art = { cost: 'ui/stat-cost', attack: 'ui/stat-attack', health: 'ui/stat-health' }[kind];
+            const style = bg(art);
+            return el('span.bc-gem.' + kind + (style ? '.art' : '') + (extra ? '.' + extra : ''), style ? { style, text: String(value) } : { text: String(value) });
+        }
+        function icon(id, fallback, cls, title) {
+            const style = bg(id);
+            return el('span.b-icon' + (cls ? '.' + cls : '') + (style ? '.art' : ''), { style, title: title || null, text: style ? '' : fallback });
+        }
+
+        function creatureFace(cid, size) {
+            const d = E.describe(state, cid);
+            const frame = bg('ui/card-' + d.printedColour) || bg('ui/card-' + d.colour);
+            const big = size === 'big';
+            const atkClass = d.attack > d.baseAttack ? 'up' : d.attack < d.baseAttack ? 'down' : '';
+            const hpClass = d.damaged ? 'hurt' : d.maxHealth > d.baseHealth ? 'up' : '';
+            const kws = d.keywords.map(k => has('ui/kw-' + k) ? icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k) : el('span.bc-kw', { text: KW_NAME[k] || k, title: (B().KEYWORD_TEXT || {})[k] || '' }));
+            const text = size === 'board' ? el('div.bc-icons', {}, kws.concat(d.lines.map(l => icon('ui/ab-' + l.kind, AB_ICON[l.kind], 'ab' + (l.off ? '.off' : ''), l.name))))
+                : el('div.bc-text', {}, [
+                    d.keywords.length ? el('div.bc-kws', {}, d.keywords.map(k => el('b', { text: (KW_NAME[k] || k) + '. ' }))) : null,
+                    ...d.lines.map(l => el('div.bc-line' + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
+                        el('b', { text: (l.warped ? '🌀 ' : '') + (AB_KIND[l.kind] ? AB_KIND[l.kind] + (l.cost != null ? ' (' + l.cost + ')' : '') + ': ' : l.name + ': ') }),
+                        l.text.replace(/^(Guard|Swift|Shield|Elusive)\.\s*/, '').replace(/^(Entrance|Last Word|Activate \(\d+ energy\)):\s*/i, ''),
+                    ])),
+                    !d.lines.length ? el('div.bc-line.off', { text: d.silenced ? 'Abilities lost.' : 'No ability.' }) : null,
+                ]);
             const tags = [];
-            if (c.controller !== c.owner) tags.push(el('span.b-tag.stolen', { text: c.controller === ME ? 'Stolen' : 'Stolen from you' }));
-            if (c.trophyOf) tags.push(el('span.b-tag', { text: '🏆 ' + c.trophyOf }));
-            if (c.loaner) tags.push(el('span.b-tag', { text: 'Loaned' }));
-            if (c.injured.includes('minus-one')) tags.push(el('span.b-tag.hurt', { text: '🤕 −1' }));
-            if (c.prediction) tags.push(el('span.b-tag', { text: '🔮 ' + Rift.COLOURS[c.prediction.colour].name }));
-            if (c.hype && state.players[c.controller].turnsTaken < c.hype.expires) tags.push(el('span.b-tag.up', { text: '📣 Hype' }));
-            if (c.metaverseUsed) tags.push(el('span.b-tag', { text: 'Metaverse used' }));
-            if (state.players[c.controller].board.includes(cid)) tags.push(el('span.b-tag.readiness', {text:c.exhausted?'Exhausted':c.enteredTurn===state.turn&&!E.rules(state).arrivalReady?'Arriving · can block':'Ready'}));
-            const node = el(o.onclick?'button.bcard':'div.bcard', {
-                type:o.onclick?'button':null,
-                dataset: { colour, cid },
-                title: pp.parts.map(x => `${x.label} ${x.amount >= 0 && x.source !== 'base' ? '+' : ''}${x.amount}`).join('\n'),
-                onclick: o.onclick || null,
-            }, [
-                el('div.bcard-top', {}, [
-                    el('span.b-cost',{text:E.playCost(state,cid) + ' ⚡',title:'Energy cost to play'}), colourChip(colour, true),
-                    el('span.bcard-power' + (delta > 0 ? '.up' : delta < 0 ? '.down' : ''), { text: 'Power ' + pp.total }),
-                ]),
-                el('div.bcard-art', {}, [Rift.Assets.img('creature/' + c.species + '/idle', { colour: c.colour, label: sp.name, alt: sp.name })]),
-                el('div.bcard-name', { text: sp.name + (sp.rarity === 'legendary' ? ' ★' : '') }),
-                c.nicknamedRound === state.round && c.nickname ? el('div.bcard-nick', { text: '"' + c.nickname + '"' }) : null,
-                el('div.bcard-text', {}, abilityLines(c)),
-                ...E.activations(state,cid).map(a=>el('div.b-active-ability',{text:'Activate ' + a.name + ' · ' + E.rules(state).abilityCost + ' ⚡: ' + a.text.replace(/^Activate:\s*/, '')})),
-                tags.length ? el('div.bcard-tags', {}, tags) : null,
-                o.note ? el('div.bcard-note' + (o.noteClass ? '.' + o.noteClass : ''), { text: o.note }) : null,
-            ]);
-            (o.classes || []).forEach(k => node.classList.add(k));
-            if (o.onclick) node.classList.add('clickable');
-            if (c.exhausted) node.classList.add('exhausted');
-            return node;
-        }
-
-        function cardBack(small) {
-            const art = Rift.Assets.url('ui/card-back');
-            return el('div.bcard.back' + (small ? '.small' : ''), art ? { style: { background: 'url("' + art + '") center / 100% 100% no-repeat', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.5)', border: '0' } } : {}, art ? [] : [el('div.back-mark', { text: '⟁' })]);
-        }
-
-        // ---- bars ----
-        function bar(pIndex) {
-            const P = state.players[pIndex];
-            const hearts = [];
-            const max = Math.max(startLives[pIndex], P.lives);
-            for (let i = 0; i < max; i++) hearts.push(el('span.heart' + (i < P.lives ? '' : '.lost'), { text: i < P.lives ? '❤' : '♡' }));
-            const steals = [];
-            for (let i = 0; i < P.steals; i++) steals.push(el('span.steal-token', { text: '✋' }));
-            const active = state.active === pIndex && E.winner(state) == null;
+            if (big) {
+                if (d.loaner) tags.push('Loaned');
+                if (d.trophyOf) tags.push('🏆 ' + d.trophyOf);
+                if (d.taught) tags.push('Learned: ' + d.taught);
+                if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
+                if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 −1 attack');
+                if (d.prediction) tags.push('🔮 ' + (Rift.COLOURS[d.prediction] || {}).name);
+                if (d.metaverseUsed) tags.push('Last Word used');
+                d.attackParts.filter(x => x.source !== 'base').forEach(x => tags.push(x.label + ' ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack'));
+            }
             return [
-                el('div.b-name' + (active ? '.active' : ''), { text: (pIndex === ME ? 'You' : P.name) + (active ? ' — turn' : '') }),
-                el('div.b-lives', { title: P.lives + ' lives' }, hearts),
-                el('div.b-energy', {text:'Energy ' + P.energy + '/' + (P.capacity + (P.consumables['extra-energy'] || 0)) + ' ⚡'}),
-                active?el('div.b-actions',{text:E.actionsLeft(state) + '/' + E.rules(state).actions + ' actions left'}):el('div.b-actions',{text:'Next turn: ' + (Math.min(state.options.energyCap,P.capacity+E.rules(state).growth)+(P.consumables['extra-energy']||0)) + ' energy'}),
-                el('div.b-count', { text: `Deck ${P.deck.length} · Hand ${P.hand.length} · Lost ${P.discard.length}` }),
+                el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
+                el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
+                gem('cost', d.cost),
+                el('div.bc-name', { text: d.name + (d.legendary ? ' ★' : '') }),
+                text,
+                gem('attack', d.attack, atkClass),
+                gem('health', d.health, hpClass),
+                d.keywords.includes('shield') ? el('div.bc-bubble') : null,
+                d.sleeping ? icon('ui/state-sleeping', 'Zzz', 'state.sleep', 'Asleep') : null,
+                d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', 'Can\'t attack this turn') : null,
+                big ? el('div.bc-colour', {}, [colourChip(d.colour)]) : null,
+                tags.length ? el('div.bc-tags', {}, tags.map(t => el('span', { text: t }))) : null,
             ];
         }
 
-        // ---- prompt ----
-        function button(label, fn, cls) {
-            return el('button.btn.small' + (cls ? '.' + cls : ''), { onclick: fn, type: 'button' }, [label]);
+        function tacticFace(cid, size) {
+            const d = E.describe(state, cid);
+            const frame = bg('ui/card-tactic');
+            const art = has('tactic/' + d.id) ? Rift.Assets.img('tactic/' + d.id, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
+            return [
+                el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
+                el('div.bc-art', {}, [art]),
+                gem('cost', d.cost),
+                el('div.bc-name', { text: d.name }),
+                el('div.bc-text', {}, [el('div.bc-kind', { text: 'Tactic' }), el('div.bc-line', { text: d.text }), size === 'big' && d.flavour ? el('div.bc-flavour', { text: d.flavour }) : null]),
+            ];
+        }
+
+        function axiomFace(id, size) {
+            const ax = (Rift.data.axioms || {})[id] || { name: id, text: '', category: '' };
+            const frame = bg('ui/card-axiom');
+            return [
+                el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
+                el('div.bc-art', {}, [has('ui/axiom-' + id) ? Rift.Assets.img('ui/axiom-' + id, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
+                gem('cost', E.axiomCost(state, id)),
+                el('div.bc-name', { text: ax.name }),
+                el('div.bc-text', {}, [el('div.bc-kind', { text: (ax.category || 'rule') + ' rule' }), el('div.bc-line', { text: ax.text }), size === 'big' && ax.flavour ? el('div.bc-flavour', { text: ax.flavour }) : null]),
+            ];
+        }
+
+        // A card element. o: { size, classes, onclick, drag, target, guide }
+        function cardEl(cid, o) {
+            const c = state.cards[cid];
+            const size = o.size || 'board';
+            const kind = c.kind === 'tactic' ? 'tactic' : 'creature';
+            const colour = kind === 'creature' ? E.colourOf(state, c) : 'tactic';
+            const clickable = !!o.onclick;
+            const node = el((clickable ? 'button' : 'div') + '.bc.' + kind + '.' + size, {
+                type: clickable ? 'button' : null,
+                dataset: { cid, colour },
+                'aria-label': cardLabel(cid),
+            }, kind === 'tactic' ? tacticFace(cid, size) : creatureFace(cid, size));
+            if (o.target) node.dataset.target = cid;
+            (o.classes || []).forEach(k => node.classList.add(k));
+            if (clickable) node.addEventListener('click', ev => { if (ui.suppressClick) return; o.onclick(ev); });
+            if (o.drag) node.addEventListener('pointerdown', ev => startDrag(ev, o.drag, node));
+            if (size !== 'big') hoverInspect(node, () => cardEl(cid, { size: 'big' }));
+            nodes[cid] = node;
+            return node;
+        }
+
+        function axiomCardEl(id, o) {
+            const clickable = !!(o && o.onclick);
+            const node = el((clickable ? 'button' : 'div') + '.bc.axiom.' + ((o && o.size) || 'hand'), {
+                type: clickable ? 'button' : null, dataset: { axiom: id },
+                'aria-label': 'Rule card: ' + ((Rift.data.axioms || {})[id] || { name: id }).name,
+            }, axiomFace(id, (o && o.size) || 'hand'));
+            ((o && o.classes) || []).forEach(k => node.classList.add(k));
+            if (clickable) node.addEventListener('click', ev => { if (ui.suppressClick) return; o.onclick(ev); });
+            if (o && o.drag) node.addEventListener('pointerdown', ev => startDrag(ev, o.drag, node));
+            if (!o || o.size !== 'big') hoverInspect(node, () => axiomCardEl(id, { size: 'big' }));
+            return node;
+        }
+
+        function cardLabel(cid) {
+            const c = state.cards[cid];
+            const d = E.describe(state, cid);
+            if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text;
+            return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
+                + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '');
+        }
+
+        function cardBack(axiom) {
+            const id = axiom ? 'ui/axiom-back' : 'ui/card-back';
+            const style = bg(id);
+            return el('div.b-back' + (axiom ? '.axiom' : '') + (style ? '.art' : ''), style ? { style } : {}, style ? [] : [el('span', { text: axiom ? '⚖' : '⟁' })]);
+        }
+
+        // ---- inspect (big card on hover / long look) ----
+        function hoverInspect(node, make) {
+            node.addEventListener('pointerenter', ev => {
+                if (ui.drag || (ev.pointerType && ev.pointerType !== 'mouse')) return;
+                clearTimeout(ui.inspectTimer);
+                ui.inspectTimer = setTimeout(() => showInspect(make(), node), 280);
+            });
+            node.addEventListener('pointerleave', hideInspect);
+            node.addEventListener('focus', () => { let kb = true; try { kb = node.matches(':focus-visible'); } catch (e) { /* old browser */ } if (kb) showInspect(make(), node); });
+            node.addEventListener('blur', hideInspect);
+        }
+        function showInspect(card, anchor) {
+            if (ui.drag) return;
+            dom.inspect.innerHTML = '';
+            dom.inspect.appendChild(card);
+            dom.inspect.classList.add('show');
+            const right = anchor && anchor.getBoundingClientRect && dom.arena.getBoundingClientRect
+                && anchor.getBoundingClientRect().left - dom.arena.getBoundingClientRect().left < 300;
+            dom.inspect.classList.toggle('right', !!right);
+        }
+        function hideInspect() {
+            clearTimeout(ui.inspectTimer);
+            dom.inspect.classList.remove('show');
+        }
+
+        // ---- heroes ----
+        function heroEl(pi, valid, L) {
+            const P = state.players[pi];
+            const r = E.rules(state);
+            const speaker = opp.speaker && (Rift.data.speakers || {})[opp.speaker];
+            const art = pi === ME ? me.art : (opp.art || (speaker && speaker.art) || null);
+            const portrait = art ? Rift.Assets.img(art, { label: P.name, alt: '' })
+                : Rift.Assets.img(pi === ME ? 'avatar/unknown' : 'npc/rival', { label: pi === ME ? 'You' : P.name, alt: '' });
+            const frame = bg('ui/hero-frame');
+            const heart = bg('ui/heart-full');
+            const active = state.active === pi && E.winner(state) == null;
+            const id = 'h' + pi;
+            const isTarget = valid.has(id);
+            const node = el((isTarget ? 'button' : 'div') + '.b-hero' + (active ? '.active' : '') + (isTarget ? '.valid' : ''), {
+                type: isTarget ? 'button' : null,
+                dataset: { target: id },
+                'aria-label': (pi === ME ? 'Your hero' : P.name) + ': ' + P.hearts + ' hearts',
+            }, [
+                el('div.b-portrait', {}, [portrait]),
+                el('div.b-hero-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
+                el('div.b-hearts' + (heart ? '.art' : ''), { style: heart, title: P.hearts + ' of ' + P.maxHearts + ' hearts' }, [el('span', { text: String(P.hearts) })]),
+                el('div.b-hero-name', { text: pi === ME ? 'You' : P.name }),
+                r.reverseHearts ? el('div.b-reverse', { text: '0 hearts = WIN' }) : null,
+            ]);
+            if (isTarget) node.addEventListener('click', () => { if (!ui.suppressClick) clickTarget(id, L); });
+            nodes[id] = node;
+            return node;
+        }
+
+        function energyEl(pi) {
+            const P = state.players[pi];
+            const cap = P.capacity + (P.consumables['extra-energy'] || 0);
+            const total = Math.max(cap, P.energy);
+            const crystals = [];
+            for (let i = 0; i < total; i++) {
+                const full = i < P.energy;
+                const style = bg(full ? 'ui/energy-full' : 'ui/energy-empty');
+                crystals.push(el('span.b-crystal' + (full ? '.full' : '') + (style ? '.art' : ''), style ? { style } : {}));
+            }
+            return el('div.b-energy' + (pi === OPP ? '.small' : ''), { title: 'Energy: ' + P.energy + ' of ' + cap + '. It refills each turn and grows by ' + E.rules(state).growth + '.' }, [
+                el('div.b-crystals', {}, crystals),
+                el('div.b-energy-num', { text: P.energy + '/' + cap }),
+            ]);
+        }
+
+        function infoEl(pi) {
+            const P = state.players[pi];
+            return el('div.b-info', {}, [
+                el('div', { text: 'Deck ' + P.deck.length }),
+                el('div', { text: 'Hand ' + (P.hand.length + P.axHand.length) }),
+                el('div', { text: 'Discard ' + P.discard.length }),
+            ]);
+        }
+
+        // ---- rendering ----
+        function render() {
+            if (ui.ended && dom.overlay.classList.contains('show')) return;
+            Object.keys(nodes).forEach(k => delete nodes[k]);
+            hideInspect();
+            [dom.myBoard, dom.oppBoard, dom.lane].forEach(n => { n.classList.remove('guide-ring'); n.classList.remove('guide-focus'); });
+            const L = legal();
+            const tmap = targetMap(ui.sel, L);
+            const valid = new Set(tmap.keys());
+            const targeting = valid.size > 0;
+            screen.classList.toggle('targeting', targeting);
+            screen.classList.toggle('my-turn', decider() === ME && !ui.busy);
+            screen.classList.toggle('reverse-goal', !!E.rules(state).reverseHearts);
+
+            // opponent hand
+            dom.oppHand.innerHTML = '';
+            const knows = state.players[ME].knows;
+            state.players[OPP].hand.forEach(cid => dom.oppHand.appendChild(knows.includes(cid) ? cardEl(cid, { size: 'mini', classes: ['revealed'] }) : cardBack(false)));
+            state.players[OPP].axHand.forEach(() => dom.oppHand.appendChild(cardBack(true)));
+
+            // hero rows
+            dom.oppRow.innerHTML = '';
+            put(dom.oppRow, infoEl(OPP), heroEl(OPP, valid, L), energyEl(OPP));
+            dom.myRow.innerHTML = '';
+            const P = state.players[ME];
+            const spark = L.find(a => a.type === 'spark');
+            const sparkStyle = bg('ui/spark');
+            put(dom.myRow, 
+                el('div.b-left', {}, [
+                    infoEl(ME),
+                    P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : ''), {
+                        type: 'button', disabled: !spark, title: 'Once per match: +1 energy this turn (you went second).',
+                        onclick: () => { if (spark) act(spark); },
+                    }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
+                ]),
+                heroEl(ME, valid, L),
+                energyEl(ME),
+            );
+
+            // boards
+            const attackers = new Set(L.filter(a => a.type === 'attack' || a.type === 'activate').map(a => a.cid));
+            [[OPP, dom.oppBoard], [ME, dom.myBoard]].forEach(([pi, box]) => {
+                box.innerHTML = '';
+                const list = state.players[pi].board;
+                if (!list.length) box.appendChild(el('div.b-empty', { text: pi === ME ? 'Drag a creature here to play it.' : oppName + '\'s side is empty.' }));
+                list.forEach(cid => {
+                    const d = E.describe(state, cid);
+                    const classes = [];
+                    if (d.keywords.includes('guard')) classes.push('guard');
+                    if (d.damaged) classes.push('damaged');
+                    if (pi === ME && attackers.has(cid)) classes.push('ready');
+                    if (pi === ME && decider() === ME && (d.attacks || d.activated) && !attackers.has(cid)) classes.push('spent');
+                    if (ui.sel && ui.sel.cid === cid) classes.push('selected');
+                    if (valid.has(cid)) classes.push('valid');
+                    else if (targeting) classes.push('dim');
+                    if (ui.preview && ui.preview.cid === cid) classes.push('attacking');
+                    if (ui.preview && ui.preview.target === cid) classes.push('targeted');
+                    const ready = pi === ME && attackers.has(cid);
+                    box.appendChild(cardEl(cid, {
+                        size: 'board', classes, target: true,
+                        onclick: () => clickCard(cid, L),
+                        drag: ready && L.some(a => a.type === 'attack' && a.cid === cid) ? { kind: 'board', cid } : null,
+                    }));
+                });
+            });
+
+            // my hand
+            dom.myHand.innerHTML = '';
+            const plays = new Set(L.filter(a => a.type === 'play').map(a => a.cid));
+            const axPlays = new Set(L.filter(a => a.type === 'axiom').map(a => a.choice));
+            const handItems = P.hand.length + P.axHand.length;
+            let i = 0;
+            P.hand.forEach(cid => {
+                const classes = [];
+                if (plays.has(cid)) classes.push('playable');
+                if (ui.sel && ui.sel.kind === 'hand' && ui.sel.cid === cid) classes.push('selected');
+                if (valid.has(cid)) classes.push('valid');
+                const node = cardEl(cid, { size: 'hand', classes, onclick: () => clickHand(cid, L), drag: plays.has(cid) ? { kind: 'hand', cid } : null });
+                fan(node, i++, handItems);
+                dom.myHand.appendChild(node);
+            });
+            P.axHand.forEach(id => {
+                const classes = [];
+                if (axPlays.has(id)) classes.push('playable');
+                if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
+                const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : null });
+                if (!nodes['ax:' + id]) nodes['ax:' + id] = node;
+                fan(node, i++, handItems);
+                dom.myHand.appendChild(node);
+            });
+            if (!handItems) dom.myHand.appendChild(el('div.b-empty', { text: 'Your hand is empty.' }));
+
+            renderLane();
+            renderPrompt();
+            renderEnd(L);
+            renderDraw(L);
+            renderChoice(L);
+            renderRules();
+            renderLog();
+            if (guide) renderCoach();
+            renderGuidePointer();
+            drawArrowForPreview();
+        }
+
+        function fan(node, i, n) {
+            const mid = (n - 1) / 2;
+            const off = i - mid;
+            node.style.setProperty('--rot', (n > 1 ? off * Math.min(4, 24 / n) : 0) + 'deg');
+            node.style.setProperty('--lift', Math.round(Math.abs(off) * Math.abs(off) * Math.min(3, 18 / n)) + 'px');
+        }
+
+        function renderLane() {
+            dom.lane.innerHTML = '';
+            const tl = E.timeline(state);
+            const fate = el('div.b-fate', { title: 'Fate track: every End turn moves it 1 space. At zero the event happens.' });
+            if (tl.length) {
+                const next = tl[0];
+                const pips = [];
+                const max = Math.max(state.options.fateGap || 6, next.turns);
+                for (let k = max; k >= 1; k--) pips.push(el('span.pip' + (k === next.turns ? '.marker' : k < next.turns ? '.ahead' : '.past'), k === next.turns ? { style: bg('ui/fate-marker') } : {}));
+                const evIcon = icon(next.type === 'reset' ? 'ui/fate-reset' : 'ui/fate-flip', next.type === 'reset' ? '↺' : '✦', 'fate-ev');
+                put(fate, 
+                    el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), { style: bg('ui/fate-track') }, pips.concat([evIcon])),
+                    el('div.b-fate-text', { text: 'Fate in ' + next.turns + ': ' + next.text }),
+                );
+            } else put(fate, el('div.b-fate-text', { text: 'No Fate track in this match.' }));
+            const active = E.activeAxioms(state);
+            const rulesRow = el('div.b-lane-rules', {}, active.length
+                ? active.map(ax => {
+                    const chip = el('div.b-rule-chip', { title: ax.name + ': ' + ax.text, tabindex: 0 }, [
+                        has('ui/axiom-' + ax.id) ? Rift.Assets.img('ui/axiom-' + ax.id, { alt: '' }) : el('span', { text: '⚖' }),
+                        el('span', { text: ax.name }),
+                    ]);
+                    hoverInspect(chip, () => axiomCardEl(ax.id, { size: 'big' }));
+                    return chip;
+                })
+                : [el('span.b-basic', { text: 'Basic rules' })]);
+            const deckN = state.axioms.deck.length;
+            put(dom.lane, fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [
+                rulesRow,
+                el('div.b-axdeck', { title: 'Shared axiom deck: ' + deckN + ' cards, ' + state.axioms.discard.length + ' discarded' }, [cardBack(true), el('span', { text: String(deckN) })]),
+            ]), dom.end);
+        }
+
+        function button(label, fn, cls, extra) {
+            const b = el('button.btn.small' + (cls ? '.' + cls : ''), Object.assign({ type: 'button', onclick: fn }, extra || {}), [label]);
+            return b;
         }
 
         function renderPrompt() {
             const box = dom.prompt;
+            if (!box) return;
             box.innerHTML = '';
-            dom.choice.innerHTML = '';
-            if (ui.news.length) box.appendChild(el('div.b-news', {}, ui.news.slice(-4).map(t => el('div', { text: t }))));
-            if (E.winner(state) != null) { box.appendChild(el('div.b-ask', { text: 'The battle is over.' })); return; }
-            const d = decider();
-            if (d !== ME) {
-                box.appendChild(el('div.b-ask.wait', { text: `${state.players[OPP].name} is thinking…` }));
-                return;
-            }
             const L = legal();
             const ask = el('div.b-ask');
             const buttons = el('div.b-buttons');
-            box.appendChild(ask);
-            box.appendChild(buttons);
-            const pend = state.pending;
-            switch (state.phase) {
-                case 'action': {
-                    const sel=ui.selected, P=state.players[ME];
-                    ask.textContent = E.actionsLeft(state) ? 'Your turn. Spend energy to play, activate, or rewrite. Attack with a ready creature. Then End turn.' : 'No actions left. End turn to refill energy and ready your creatures next time.';
-                    if(sel && P.hand.includes(sel)) {
-                        const play=L.find(a=>a.type==='play'&&a.cid===sel);
-                        ask.textContent=name(sel)+' costs '+E.playCost(state,sel)+' energy and 1 action. '+(E.rules(state).arrivalReady?'New creatures can act immediately.':'New creatures can block, but act next turn.');
-                        if(play) buttons.appendChild(button('Play '+name(sel)+' · '+E.playCost(state,sel)+' ⚡',()=>act(play),'primary'));
-                        else buttons.appendChild(el('span.muted',{text:'Cannot play: need enough energy and an action.'}));
-                    } else if(sel && P.board.includes(sel)) {
-                        const c=state.cards[sel];
-                        ask.textContent=name(sel)+': '+(c.exhausted?'exhausted until your next turn.':!E.readyToUse(state,sel)?'arriving: can act next turn.':'choose Attack or Activate. Each uses 1 action. '+(E.rules(state).exhaust?'It exhausts; keep it ready if you want to block.':'The current rule keeps it ready.'));
-                        L.filter(a=>a.cid===sel&&a.type==='attack').forEach(a=>buttons.appendChild(button(a.target?'Force '+name(a.target)+' to block':'Attack · 0 ⚡',()=>act(a),'primary')));
-                        L.filter(a=>a.cid===sel&&a.type==='activate').forEach(a=>buttons.appendChild(button('Activate '+(B().Abilities[a.ability]||{name:'Focus'}).name+' · '+E.rules(state).abilityCost+' ⚡',()=>act(a))));
+            put(box, ask, buttons);
+            nodes.buttons = {};
+            if (E.winner(state) != null) { ask.textContent = 'The battle is over.'; return; }
+            if (ui.busy || decider() !== ME) {
+                ask.textContent = ui.busy ? 'Watch what happens…' : oppName + ' is thinking…';
+                ask.classList.add('wait');
+            } else if (state.phase === 'draw') {
+                ask.textContent = 'Choose your draw for this turn.';
+            } else if (state.phase === 'choose') {
+                ask.textContent = state.pending.prompt || 'Choose.';
+            } else {
+                const sel = ui.sel;
+                const P = state.players[ME];
+                if (!sel) {
+                    ask.textContent = 'Drag a card onto your side to play it. Drag a ready creature onto a target to attack. Then End turn.';
+                } else if (sel.kind === 'board') {
+                    const tm = targetMap(sel, L);
+                    const acts = L.filter(a => a.type === 'activate' && a.cid === sel.cid);
+                    ask.textContent = tm.size ? name(sel.cid) + ': click a glowing target to attack.'
+                        : acts.length ? name(sel.cid) + ': press the Activate button.' : name(sel.cid) + ': ' + whyNot(sel.cid);
+                    acts.reduce((seen, a) => {
+                        if (seen.includes(a.ability)) return seen;
+                        const info = E.activations(state, sel.cid).find(x => x.id === a.ability) || { name: a.ability, cost: 0 };
+                        const b = button('Activate ' + info.name + ' · ' + info.cost + ' ⚡', () => clickActivate(sel.cid, a.ability, L), 'gold');
+                        nodes.buttons['activate:' + a.ability] = b;
+                        buttons.appendChild(b);
+                        return seen.concat(a.ability);
+                    }, []);
+                    if (acts.length) ask.textContent += ' Activating uses its attack this turn.';
+                } else if (sel.kind === 'activate') {
+                    ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
+                } else if (sel.kind === 'hand') {
+                    const playActs = L.filter(a => a.type === 'play' && a.cid === sel.cid);
+                    const cost = E.playCost(state, sel.cid);
+                    if (!playActs.length) ask.textContent = whyNot(sel.cid);
+                    else if (playActs.some(a => a.target)) ask.textContent = name(sel.cid) + ' (' + cost + ' ⚡): click a glowing target.';
+                    else {
+                        ask.textContent = 'Play ' + name(sel.cid) + ' for ' + cost + ' energy? You have ' + P.energy + '.';
+                        const b = button('Play · ' + cost + ' ⚡', () => act(playActs[0]), 'primary');
+                        nodes.buttons.play = b;
+                        buttons.appendChild(b);
                     }
-                    if(sel) buttons.appendChild(button('Cancel selection',()=>{ui.selected=null;render();}));
-                    if(L.some(a=>a.type==='rewrite'))buttons.appendChild(button('Rewrite a rule · '+E.rules(state).rewriteCost+' ⚡',()=>{const offer=dom.axiom.querySelector('button');if(offer){offer.scrollIntoView({block:'nearest'});offer.focus({preventScroll:true});}}));
-                    buttons.appendChild(button('End turn',()=>act({type:'end'}),'end-turn'));
-                    break;
+                } else if (sel.kind === 'axiom') {
+                    const a = L.find(x => x.type === 'axiom' && x.choice === sel.id);
+                    const ax = Rift.data.axioms[sel.id];
+                    const cost = E.axiomCost(state, sel.id);
+                    ask.textContent = a ? ax.name + ': it changes the ' + ax.category + ' rule for BOTH players.' : ax.name + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
+                    if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
                 }
-                case 'steal': {
-                    const P = state.players[ME];
-                    ask.textContent = `${state.players[OPP].name} played ${name(pend.cid)} (power ${E.power(state, pend.cid)}, glowing on their side). Steal it? (${P.steals} steal${P.steals === 1 ? '' : 's'} left; they get an extra turn)`;
-                    buttons.appendChild(button('Steal it!', () => act({ type: 'steal' }), 'primary'));
-                    buttons.appendChild(button('Let it be', () => act({ type: 'decline' })));
-                    break;
-                }
-                case 'block': {
-                    const att = pend.attacker;
-                    ask.textContent = pend.hidden
-                        ? 'A face-down creature attacks! Block with…? (Pick a creature on your side.)'
-                        : `${name(att)} attacks with power ${E.power(state, att)}! Block with…? (Pick a creature on your side.)`;
-                    buttons.appendChild(button(E.rules(state).reverseHearts&&state.players[ME].lives===1?'Take hit — YOU WIN at zero hearts':`Take hit (−1 heart, ${state.players[ME].lives-1} left)`,()=>act({type:'take'}),'danger'));
-                    ask.textContent+=' Only ready creatures can block. '+(E.rules(state).exhaust?'Blocking exhausts them.':'The current rule keeps blockers ready.');
-                    break;
-                }
-                case 'choose': {
-                    ask.textContent = pend.prompt || 'Choose.';
-                    if (pend.choiceKind === 'axiom') {
-                        pend.options.forEach(id=>buttons.appendChild(button(Rift.data.axioms[id].name+' — '+Rift.data.axioms[id].text,()=>act({type:'choose',choice:id}))));
-                    } else if (pend.choiceKind === 'colour') {
-                        pend.options.forEach(col => buttons.appendChild(el('button.btn.small.colour-btn', { type: 'button', dataset: { colour: col }, onclick: () => act({ type: 'choose', choice: col }) }, [Rift.COLOURS[col].icon + ' ' + Rift.COLOURS[col].name])));
-                    } else if (pend.choiceKind === 'card') {
-                        dom.choice.appendChild(el('div.b-choice-title', { text: pend.prompt }));
-                        dom.choice.appendChild(el('div.b-spot', {}, pend.options.map(cid => cardEl(cid, { onclick: () => act({ type: 'choose', choice: cid }), classes: ['option'] }))));
-                    } else if (pend.choiceKind === 'ability') {
-                        pend.options.forEach(ab => {
-                            const def = B().Abilities[ab];
-                            buttons.appendChild(button(def.name, () => act({ type: 'choose', choice: ab })));
-                        });
-                        box.appendChild(el('div.b-ab-list', {}, pend.options.map(ab => el('div', {}, [el('b', { text: B().Abilities[ab].name + ': ' }), B().Abilities[ab].text]))));
-                    } else {
-                        ask.textContent += ' (Click a highlighted creature.)';
-                        pend.options.forEach(cid => buttons.appendChild(button(name(cid), () => act({ type: 'choose', choice: cid }))));
-                    }
-                    break;
-                }
-                case 'axiom': {
-                    ask.textContent = 'Axiomatic: choose the next axiom for both players.';
-                    dom.choice.appendChild(el('div.b-choice-title', { text: 'Choose the next axiom (both players play under it).' }));
-                    dom.choice.appendChild(el('div.b-spot', {}, pend.options.map(id => axiomCard(id, () => act({ type: 'choose', choice: id })))));
-                    break;
-                }
-                default:
-                    ask.textContent = '…';
+                if (sel) buttons.appendChild(button('Cancel', () => clearSel()));
             }
+            if (ui.note) box.appendChild(el('div.b-note', { text: ui.note }));
+            else if (ui.news.length) box.appendChild(el('div.b-news', {}, ui.news.slice(-2).map(t => el('div', { text: t }))));
         }
 
-        // ---- boards and hands ----
-        function renderBoards() {
-            const L = legal();
-            const phase = state.phase;
+        function renderEnd(L) {
+            dom.end.innerHTML = '';
+            const end = L.find(a => a.type === 'end');
+            const onlyEnd = end && !L.some(a => a.type !== 'end' && a.type !== 'spark');
+            const style = bg('ui/end-turn');
+            const mine = decider() === ME && !ui.busy;
+            const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
+                type: 'button', disabled: !end, style,
+                onclick: () => { if (end) act(end); },
+            }, [el('span', { text: state.phase === 'over' ? 'Game over' : mine ? 'End turn' : ui.busy ? 'Watch' : 'Their turn' })]);
+            nodes.end = b;
+            dom.end.appendChild(b);
+            if (onlyEnd) dom.end.appendChild(el('div.b-end-hint', { text: 'Nothing left to do' }));
+        }
+
+        function renderDraw(L) {
+            dom.draw.innerHTML = '';
+            const show = state.phase === 'draw' && decider() === ME && !ui.ended && !ui.busy;
+            dom.draw.classList.toggle('show', show);
+            nodes.draw = {};
+            if (!show) return;
+            const P = state.players[ME];
+            const choices = E.drawChoices(state);
+            const full = P.hand.length + P.axHand.length >= state.options.handLimit;
+            const tl = E.timeline(state);
+            const why = {
+                deck: full ? 'Your hand is full.' : !P.deck.length ? 'Your deck is empty.' : P.deck.length + ' cards left',
+                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The axiom deck is empty.' : 'Shared deck: ' + state.axioms.deck.length,
+                forward: !state.options.timeline ? 'No Fate track in this match.' : tl.length ? 'Next: ' + (tl[0].type === 'reset' ? 'reset' : 'free flip') + ' in ' + tl[0].turns + ' → ' + Math.max(0, tl[0].turns - 2) : '',
+                rewind: !state.options.timeline ? 'No Fate track in this match.' : tl.length ? 'Next event in ' + tl[0].turns + ' → ' + Math.min(state.options.fateMax, tl[0].turns + 2) : '',
+            };
+            const st = step();
+            put(dom.draw, el('div.b-draw-title', { text: 'Your draw: choose one' }), el('div.b-draw-buttons', {}, ['deck', 'axiom', 'forward', 'rewind'].map(choice => {
+                const a = L.find(x => x.type === 'draw' && x.choice === choice);
+                const possible = choices.includes(choice);
+                const b = el('button.b-draw-btn', {
+                    type: 'button', disabled: !a, dataset: { choice },
+                    onclick: () => { if (a) act(a); },
+                }, [el('strong', { text: DRAW_TEXT[choice][0] }), el('span', { text: possible ? DRAW_TEXT[choice][1] : why[choice] }),
+                    possible && why[choice] ? el('small', { text: why[choice] }) : null]);
+                if (!a && possible && guide && st) b.title = 'Not in this lesson step.';
+                nodes.draw[choice] = b;
+                return b;
+            })));
+            const none = L.find(x => x.type === 'draw' && x.choice === 'none');
+            if (none) dom.draw.appendChild(button('Nothing to draw: continue', () => act(none), 'primary'));
+        }
+
+        function renderChoice(L) {
+            dom.choice.innerHTML = '';
             const pend = state.pending;
-            const attackers = new Set(L.filter(a => a.type === 'attack' || a.type === 'activate').map(a => a.cid));
-            const blockers = phase === 'block' && decider() === ME ? new Set(pend.options) : new Set();
-            const targets = phase === 'choose' && decider() === ME && pend.choiceKind === 'target' ? new Set(pend.options) : new Set();
-            const attacking = (phase === 'block' && pend && !(pend.hidden && decider() === ME)) ? pend.attacker : null;
-            const spotlight = phase === 'steal' ? pend.cid : null;
-            const enteredNow = state.lastEvents.filter(e => e.t === 'play' || e.t === 'steal').map(e => e.cid);
-
-            dom.oppBoard.innerHTML = '';
-            dom.myBoard.innerHTML = '';
-            [[OPP, dom.oppBoard], [ME, dom.myBoard]].forEach(([pi, box]) => {
-                const list = state.players[pi].board;
-                if (!list.length) box.appendChild(el('div.b-empty', { text: pi === ME ? 'Your side is empty.' : 'Their side is empty.' }));
-                list.forEach(cid => {
-                    const classes = [];
-                    let onclick = null;
-                    let note = null;
-                    let noteClass = null;
-                    if (enteredNow.includes(cid)) classes.push('entered');
-                    if (cid === attacking) classes.push('attacking');
-                    if (cid === spotlight) classes.push('spotlight');
-                    if (pi === ME && state.phase==='action' && myTurnToAct()) {
-                        classes.push('can-act');
-                        onclick = () => { ui.selected = ui.selected === cid ? null : cid; render(); };
-                    }
-                    if (blockers.has(cid)) {
-                        classes.push('can-act');
-                        onclick = () => act({ type: 'block', cid });
-                        if (!pend.hidden) {
-                            const out = E.fightOutcome(state, pend.attacker, cid);
-                            note = out.attackerDefeated && !out.blockerDefeated ? `Wins (${out.pb} vs ${out.pa})`
-                                : out.attackerDefeated && out.blockerDefeated ? `Both fall (${out.pb} vs ${out.pa})`
-                                    : !out.attackerDefeated && !out.blockerDefeated ? `Both survive (${out.pb} vs ${out.pa})` : `Loses (${out.pb} vs ${out.pa})`;
-                            noteClass = out.blockerDefeated ? (out.attackerDefeated ? 'even' : 'bad') : 'good';
-                        } else {
-                            note = 'Block?';
-                        }
-                    }
-                    if (targets.has(cid)) {
-                        classes.push('target');
-                        onclick = () => act({ type: 'choose', choice: cid });
-                    }
-                    if (ui.selected === cid) classes.push('selected');
-                    box.appendChild(cardEl(cid, { classes, onclick, note, noteClass }));
-                });
+            const show = state.phase === 'choose' && pend && decider() === ME && !ui.busy;
+            dom.choice.classList.toggle('show', !!show);
+            nodes.choose = {};
+            if (!show) return;
+            const pick = choice => { const a = L.find(x => x.type === 'choose' && x.choice === choice); if (a) act(a); };
+            const opts = el('div.b-choice-options');
+            pend.options.forEach(choice => {
+                const ok = L.some(x => x.type === 'choose' && x.choice === choice);
+                let b;
+                if (pend.choiceKind === 'card' && state.cards[choice]) {
+                    b = cardEl(choice, { size: 'hand', onclick: () => pick(choice), classes: ok ? ['playable'] : [] });
+                } else if (pend.choiceKind === 'axiom') {
+                    b = axiomCardEl(choice, { size: 'hand', onclick: () => pick(choice), classes: ok ? ['playable'] : [] });
+                } else if (pend.choiceKind === 'colour') {
+                    b = el('button.btn.colour-btn', { type: 'button', dataset: { colour: choice }, onclick: () => pick(choice) }, [Rift.COLOURS[choice].icon + ' ' + Rift.COLOURS[choice].name]);
+                } else if (pend.choiceKind === 'ability') {
+                    const def = B().Abilities[choice] || { name: choice, text: '' };
+                    b = el('button.btn.b-choice-text', { type: 'button', onclick: () => pick(choice) }, [el('b', { text: def.name + ': ' }), def.text]);
+                } else {
+                    b = el('button.btn.b-choice-text', { type: 'button', onclick: () => pick(choice) }, [(pend.labels && pend.labels[choice]) || String(choice)]);
+                }
+                if (!ok) b.disabled = true;
+                nodes.choose[choice] = b;
+                opts.appendChild(b);
             });
-
-            // hands
-            dom.myHand.innerHTML = '';
-            const plays = new Set(L.filter(a => a.type === 'play').map(a => a.cid));
-            state.players[ME].hand.forEach(cid => {
-                const classes = [];
-                let onclick = null;
-                if (state.phase==='action'&&myTurnToAct()) { if(plays.has(cid)) classes.push('can-act'); onclick=()=>{ui.selected=ui.selected===cid?null:cid;render();}; }
-                if (ui.selected === cid) classes.push('selected');
-                dom.myHand.appendChild(cardEl(cid, { classes, onclick }));
-            });
-            if (!state.players[ME].hand.length) dom.myHand.appendChild(el('div.b-empty', { text: 'Your hand is empty.' }));
-
-            dom.oppHand.innerHTML = '';
-            const knows = state.players[ME].knows;
-            state.players[OPP].hand.forEach(cid => {
-                dom.oppHand.appendChild(knows.includes(cid) ? cardEl(cid, { classes: ['small', 'revealed'] }) : cardBack(true));
-            });
+            put(dom.choice, el('div.b-choice-title', { text: pend.prompt || 'Choose.' }), opts);
         }
 
-        // ---- side panel ----
-        function axiomCard(id, onclick) {
-            const ax=Rift.data.axioms[id];
-            return el(onclick?'button.axiom-card.clickable':'div.axiom-card', {type:onclick?'button':null, onclick:onclick||null}, [
-                el('div.axiom-kicker',{text:ax.category+' rule'}), el('div.axiom-name',{text:ax.name}),
-                el('div.axiom-text',{text:ax.text}), onclick?el('div.b-cost',{text:'Rewrite · '+E.rules(state).rewriteCost+' ⚡ + 1 action'}):null,
-            ]);
-        }
-
-        function renderAxiom() {
-            dom.axiom.innerHTML='';
-            dom.axiom.appendChild(el('h3',{text:'Rules now · Round '+state.round}));
-            dom.axiom.classList.toggle('reverse-goal',E.rules(state).reverseHearts);
-            dom.axiom.appendChild(el('dl.b-rule-summary',{},E.ruleSummary(state).flatMap(([label,text])=>[el('dt',{text:label}),el('dd',{text})])));
-            const active=E.activeAxioms(state);
-            if(active.length) dom.axiom.appendChild(el('div.b-active-rules',{},[el('strong',{text:'Changed rules'}),...active.map(a=>axiomCard(a.id))]));
-            const events=E.timeline(state);
-            dom.fate.innerHTML='';
-            dom.fate.appendChild(el('h4',{text:'Fate track · shared events'}));
-            if(events.length){
-                dom.fate.appendChild(el('div.fate-spaces',{'aria-label':events[0].turns+' turns until the next Fate event'},Array.from({length:events[0].turns},(_,i)=>el('span',{text:i===0?'◆':'·'}))));
-                events.forEach(e=>dom.fate.appendChild(el('p',{text:'In '+e.turns+' turns: '+e.text})));
-                dom.fate.appendChild(el('p.small.muted',{text:'Either player’s End turn advances one space. Abilities can move the track. Rewrites can change the next offered flip.'}));
-            }else dom.fate.appendChild(el('p',{text:'Automatic events pause in this learning match.'}));
-            dom.axiom.appendChild(el('p.small',{text:'Shared deck: '+state.axioms.deck.length+' cards waiting · '+state.axioms.discard.length+' discarded. Ten contributed by each side in normal matches.'}));
-            const rewrites=legal().filter(a=>a.type==='rewrite');
-            dom.axiom.appendChild(el('h4',{text:'Choose a rule rewrite'}));
-            dom.axiom.appendChild(el('p.small',{text:'Applies to BOTH players until replaced in the same category or a timeline reset.'}));
-            state.axioms.deck.slice(0,3).forEach(id=>{const action=rewrites.find(a=>a.choice===id);dom.axiom.appendChild(axiomCard(id,action?()=>act(action):null));});
-            if(!rewrites.length)dom.axiom.appendChild(el('p.small.muted',{text:'Need '+E.rules(state).rewriteCost+' energy, 1 action and your action phase to rewrite.'}));
+        function renderRules() {
+            dom.rules.innerHTML = '';
+            dom.rules.appendChild(el('summary', { text: 'Rules now · Round ' + state.round }));
+            dom.rules.appendChild(el('dl.b-rule-summary', {}, E.ruleSummary(state).flatMap(([label, text]) => [el('dt', { text: label }), el('dd', { text })])));
+            const active = E.activeAxioms(state);
+            dom.rules.appendChild(el('h4', { text: active.length ? 'Changed rules' : 'No rule cards are active.' }));
+            active.forEach(ax => dom.rules.appendChild(el('div.b-rule-line', {}, [el('b', { text: ax.name + ' (' + ax.category + '): ' }), ax.text])));
+            const tl = E.timeline(state);
+            dom.rules.appendChild(el('h4', { text: 'Fate track' }));
+            if (tl.length) tl.forEach(ev => dom.rules.appendChild(el('p.small', { text: 'In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' + ev.text })));
+            else dom.rules.appendChild(el('p.small', { text: 'No Fate events in this match.' }));
+            dom.rules.appendChild(el('p.small.muted', { text: 'Every End turn moves Fate 1 space. Shared axiom deck: ' + state.axioms.deck.length + ' cards, ' + state.axioms.discard.length + ' discarded.' }));
         }
 
         function renderLog() {
             dom.log.innerHTML = '';
             E.fullLog(state).forEach(ev => {
                 const text = visibleText(ev);
-                if (!text) return;
+                if (!text || ev.t === 'round') return;
                 dom.log.appendChild(el('li.ev-' + ev.t, { text }));
             });
-            dom.log.parentNode.scrollTop = dom.log.parentNode.scrollHeight;
+            const wrap = dom.log.parentNode;
+            if (wrap) wrap.scrollTop = wrap.scrollHeight || 0;
         }
 
-        function render() {
-            dom.oppBar.innerHTML = '';
-            bar(OPP).forEach(n => dom.oppBar.appendChild(n));
-            dom.myBar.innerHTML = '';
-            bar(ME).forEach(n => dom.myBar.appendChild(n));
-            renderBoards();
-            renderPrompt();
-            renderAxiom();
-            renderLog();
-            screen.classList.toggle('my-turn', decider() === ME);
+        // ---- guide mode ----
+        function speak() {
+            const st = step();
+            if (!st || !Rift.Audio || !Rift.Audio.speak) return;
+            try { Rift.Audio.speak({ speaker: 'granny', text: st.text, voice: Rift.voiceId('granny', st.text) }); } catch (e) { /* no voice */ }
+        }
+        function stopVoice() { try { if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice(); } catch (e) { /* none */ } }
+
+        function leaveGuide() {
+            if (ui.ended) return;
+            ui.ended = true;
+            clearTimeout(ui.timer);
+            stopVoice();
+            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null };
+            handle.result = result;
+            if (typeof p.onEnd === 'function') p.onEnd(result);
+        }
+
+        function renderCoach() {
+            const box = dom.coach;
+            box.innerHTML = '';
+            const st = step();
+            const n = guide.steps.length;
+            const speaker = (Rift.data.speakers || {}).granny;
+            const done = !st;
+            put(box, 
+                el('div.b-coach-head', {}, [
+                    speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
+                    el('div', {}, [el('div.b-coach-count', { text: done ? 'Lesson complete' : 'Step ' + (ui.step + 1) + ' of ' + n }), el('h3', { text: done ? 'Well played!' : st.title })]),
+                ]),
+                el('p.b-coach-text', { text: done ? 'You won by the current rules.' : st.text }),
+                el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? 'Watch Granny\'s reply…' : 'Do this: ' + st.label }),
+                st && st.compare ? comparison(st.compare) : null,
+                el('div.b-coach-buttons', {}, [
+                    done ? null : el('button.btn.small', { type: 'button', text: 'Hear this step again', disabled: ui.busy, onclick: speak }),
+                    el('button.btn.small', { type: 'button', text: 'Leave lesson', onclick: leaveGuide }),
+                ]),
+            );
+        }
+
+        function fightLine(label, pv, a, d) {
+            const res = pv.attackerDefeated && pv.defenderDefeated ? 'both are defeated'
+                : pv.attackerDefeated ? name(a) + ' is defeated'
+                    : pv.defenderDefeated ? name(d) + ' is defeated' : 'both survive';
+            return el('p', { text: label + ': ' + name(a) + ' ' + pv.pa + ' vs ' + name(d) + ' ' + pv.pb + ' → ' + res + '.' });
+        }
+        function comparison(pair) {
+            const [a, d] = pair;
+            const onBoard = cid => state.players[0].board.includes(cid) || state.players[1].board.includes(cid);
+            if (!onBoard(a) || !onBoard(d)) return null;
+            const without = Object.assign({}, state.axioms.active);
+            delete without.combat;
+            const normal = E.fightPreview(Object.assign({}, state, { axioms: Object.assign({}, state.axioms, { active: without }) }), a, d);
+            const rule = E.fightPreview(Object.assign({}, state, { axioms: Object.assign({}, state.axioms, { active: Object.assign({}, without, { combat: 'underdog' }) }) }), a, d);
+            return el('div.b-compare', {}, [el('strong', { text: 'Same cards, different rule' }), fightLine('Normal rules', normal, a, d), fightLine('Underdog', rule, a, d)]);
+        }
+
+        // Which element the gold pointer points at, and which target gets the ring.
+        function renderGuidePointer() {
+            if (!guide) return;
+            const st = step();
+            if (!st || ui.busy || decider() !== ME) return;
+            const x = st.expect;
+            let focus = null;
+            let ring = null;
+            if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
+            else if (x.type === 'end') focus = nodes.end;
+            else if (x.type === 'spark') focus = screen.querySelector ? screen.querySelector('.b-spark') : null;
+            else if (x.type === 'choose') focus = nodes.choose && nodes.choose[x.choice];
+            else if (x.type === 'axiom') {
+                focus = ui.sel && ui.sel.kind === 'axiom' && nodes.buttons.axiom ? nodes.buttons.axiom : findAxiomInHand(x.choice);
+                ring = dom.lane;
+            } else if (x.type === 'play') {
+                const selected = ui.sel && ui.sel.kind === 'hand' && ui.sel.cid === x.cid;
+                if (selected && x.target) focus = nodes[x.target];
+                else if (selected && nodes.buttons.play) focus = nodes.buttons.play;
+                else { focus = nodes[x.cid]; ring = x.target ? nodes[x.target] : dom.myBoard; }
+            } else if (x.type === 'attack') {
+                if (ui.sel && ui.sel.cid === x.cid) focus = nodes[x.target];
+                else { focus = nodes[x.cid]; ring = nodes[x.target]; }
+            } else if (x.type === 'activate') {
+                if (ui.sel && ui.sel.kind === 'activate' && ui.sel.cid === x.cid) focus = nodes[x.target];
+                else if (ui.sel && ui.sel.cid === x.cid) focus = nodes.buttons['activate:' + x.ability];
+                else focus = nodes[x.cid];
+            }
+            if (ring && ring !== focus) ring.classList.add('guide-ring');
+            if (focus) {
+                focus.classList.add('guide-focus');
+                focus.appendChild(el('span.guide-pointer', { 'aria-hidden': 'true', text: '▼ ' + st.label }));
+            }
+        }
+        function findAxiomInHand(id) { return nodes['ax:' + id] || null; }
+
+        // ---- clicks ----
+        function clickTarget(target, L) {
+            const a = targetMap(ui.sel, L).get(target);
+            if (a) { act(a); return true; }
+            return false;
+        }
+
+        function clickCard(cid, L) {
+            if (clickTarget(cid, L)) return;
+            const c = state.cards[cid];
+            const mine = c.controller === ME && state.players[ME].board.includes(cid);
+            if (mine && L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid)) {
+                ui.sel = ui.sel && ui.sel.cid === cid ? null : { kind: 'board', cid };
+                render();
+                return;
+            }
+            if (ui.sel) { ui.sel = null; render(); }
+            setNote(whyNot(cid));
+        }
+
+        function clickHand(cid, L) {
+            if (clickTarget(cid, L)) return;
+            if (!L.some(a => a.type === 'play' && a.cid === cid)) { if (ui.sel) { ui.sel = null; render(); } setNote(whyNot(cid)); return; }
+            ui.sel = ui.sel && ui.sel.cid === cid ? null : { kind: 'hand', cid };
+            render();
+        }
+
+        function clickAxiom(id, L) {
+            if (!L.some(a => a.type === 'axiom' && a.choice === id)) {
+                if (decider() === ME && state.phase === 'main' && !guide) setNote('This rule card needs ' + E.axiomCost(state, id) + ' energy.');
+                else setNote(guide ? 'Not now. Follow the gold pointer.' : decider() === ME ? 'First choose your draw.' : 'Wait for your turn.');
+                return;
+            }
+            ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };
+            render();
+        }
+
+        function clickActivate(cid, ability, L) {
+            const acts = L.filter(a => a.type === 'activate' && a.cid === cid && a.ability === ability);
+            if (!acts.length) return;
+            if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
+            ui.sel = { kind: 'activate', cid, ability };
+            render();
+        }
+
+        // ---- dragging (Pointer Events: mouse, pen and touch) ----
+        function startDrag(ev, info, node) {
+            if (ev.button != null && ev.button !== 0) return;
+            if (!myTurn() || state.phase !== 'main') return;
+            if (ev.preventDefault) ev.preventDefault();
+            ui.drag = { info, node, x0: ev.clientX, y0: ev.clientY, id: ev.pointerId, active: false, ghost: null };
+            try { if (node.setPointerCapture) node.setPointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
+        }
+
+        function dragTargets(info) {
+            const L = legal();
+            const out = new Map();
+            if (info.kind === 'board') L.forEach(a => { if (a.type === 'attack' && a.cid === info.cid) out.set(a.target, a); });
+            if (info.kind === 'hand') L.forEach(a => { if (a.type === 'play' && a.cid === info.cid && a.target) out.set(a.target, a); });
+            return out;
+        }
+
+        function onPointerMove(ev) {
+            const d = ui.drag;
+            if (!d || ev.pointerId !== d.id) return;
+            if (!d.active) {
+                if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) < DRAG_START) return;
+                d.active = true;
+                hideInspect();
+                d.targets = dragTargets(d.info);
+                screen.classList.add('dragging');
+                d.node.classList.add('drag-source');
+                markTargets(d.targets);
+                if (d.info.kind !== 'board') {
+                    d.ghost = d.node.cloneNode ? d.node.cloneNode(true) : null;
+                    if (d.ghost) {
+                        d.ghost.classList.add('drag-ghost');
+                        d.ghost.classList.remove('guide-focus');
+                        dom.arena.appendChild(d.ghost);
+                    }
+                    const zone = d.info.kind === 'axiom' ? dom.lane : dom.myBoard;
+                    const needsTarget = d.targets.size > 0;
+                    if (!needsTarget || d.info.kind === 'hand' && state.cards[d.info.cid].kind === 'creature') zone.classList.add('drop-zone');
+                }
+            }
+            const box = dom.arena.getBoundingClientRect();
+            const x = ev.clientX - box.left, y = ev.clientY - box.top;
+            if (d.info.kind === 'board' || (d.targets && d.targets.size && state.cards[d.info.cid] && state.cards[d.info.cid].kind === 'tactic')) {
+                const r = d.node.getBoundingClientRect();
+                showArrow(r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top, x, y);
+            }
+            if (d.ghost) {
+                d.ghost.style.left = x + 'px';
+                d.ghost.style.top = y + 'px';
+            }
+            const over = hitTarget(ev.clientX, ev.clientY);
+            Object.values(nodes).forEach(n => { if (n && n.classList) n.classList.remove('hover-target'); });
+            if (over && over.target && d.targets.has(over.target) && nodes[over.target]) nodes[over.target].classList.add('hover-target');
+        }
+
+        function hitTarget(x, y) {
+            const doc = root.document;
+            if (!doc || !doc.elementFromPoint) return null;
+            const elAt = doc.elementFromPoint(x, y);
+            if (!elAt || !elAt.closest) return null;
+            const t = elAt.closest('[data-target]');
+            const zone = elAt.closest('[data-zone]');
+            return { target: t ? t.dataset.target : null, zone: zone ? zone.dataset.zone : null };
+        }
+
+        function onPointerUp(ev) {
+            const d = ui.drag;
+            if (!d || ev.pointerId !== d.id) return;
+            if (!d.active) { ui.drag = null; return; }
+            const hit = hitTarget(ev.clientX, ev.clientY) || {};
+            const info = d.info;
+            cancelDrag();
+            ui.suppressClick = true;
+            setTimeout(() => { ui.suppressClick = false; }, 0);
+            const L = legal();
+            if (info.kind === 'board') {
+                const a = L.find(x => x.type === 'attack' && x.cid === info.cid && x.target === hit.target);
+                if (a) act(a);
+                else if (hit.target) setNote('You can\'t attack that. Glowing cards are valid targets.');
+                return;
+            }
+            if (info.kind === 'axiom') {
+                const a = L.find(x => x.type === 'axiom' && x.choice === info.id);
+                if (a && hit.zone && hit.zone !== 'hand') act(a);
+                return;
+            }
+            const plays = L.filter(x => x.type === 'play' && x.cid === info.cid);
+            const direct = plays.find(x => x.target && x.target === hit.target);
+            if (direct) { act(direct); return; }
+            if (!hit.zone || hit.zone === 'hand') return;
+            const plain = plays.find(x => !x.target);
+            if (plain) { act(plain); return; }
+            if (plays.length) {
+                ui.sel = { kind: 'hand', cid: info.cid };
+                render();
+                setNote('Now click a glowing target for ' + name(info.cid) + '.');
+            }
+        }
+
+        function cancelDrag() {
+            const d = ui.drag;
+            ui.drag = null;
+            if (!d) return;
+            if (d.ghost && d.ghost.remove) d.ghost.remove();
+            screen.classList.remove('dragging');
+            if (d.node && d.node.classList) d.node.classList.remove('drag-source');
+            [dom.lane, dom.myBoard].forEach(z => z.classList.remove('drop-zone'));
+            Object.values(nodes).forEach(n => { if (n && n.classList) { n.classList.remove('valid-drag'); n.classList.remove('hover-target'); } });
+            screen.classList.remove('targeting');
+            hideArrow();
+        }
+
+        function markTargets(targets) {
+            if (targets.size) screen.classList.add('targeting');
+            targets.forEach((a, t) => { if (nodes[t]) nodes[t].classList.add('valid-drag'); });
+        }
+
+        // ---- arrow (SVG overlay) ----
+        function svgArrow() {
+            const doc = root.document;
+            if (!doc || !doc.createElementNS) return el('div.b-arrow');
+            const NS = 'http://www.w3.org/2000/svg';
+            const svg = doc.createElementNS(NS, 'svg');
+            svg.setAttribute('class', 'b-arrow');
+            svg.innerHTML = '<defs><marker id="b-arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
+                + '<path d="M0,0 L10,5 L0,10 z" fill="#F2B632"/></marker></defs>'
+                + '<path class="b-arrow-line" d="" fill="none" stroke="#F2B632" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 12" marker-end="url(#b-arrowhead)"/>';
+            return svg;
+        }
+        function showArrow(x1, y1, x2, y2) {
+            const path = dom.arrow.querySelector && dom.arrow.querySelector('.b-arrow-line');
+            if (!path) return;
+            const mx = (x1 + x2) / 2, my = Math.min(y1, y2) - Math.abs(x2 - x1) * 0.15 - 30;
+            path.setAttribute('d', 'M' + x1 + ',' + y1 + ' Q' + mx + ',' + my + ' ' + x2 + ',' + y2);
+            dom.arrow.classList.add('show');
+        }
+        function hideArrow() { if (dom.arrow.classList) dom.arrow.classList.remove('show'); }
+        function drawArrowForPreview() {
+            hideArrow();
+            const pv = ui.preview;
+            if (!pv) return;
+            const a = nodes[pv.cid], t = nodes[pv.target];
+            if (!a || !t || !a.getBoundingClientRect || !dom.arena.getBoundingClientRect) return;
+            const box = dom.arena.getBoundingClientRect(), r1 = a.getBoundingClientRect(), r2 = t.getBoundingClientRect();
+            if (!r1.width || !r2.width) return;
+            showArrow(r1.left + r1.width / 2 - box.left, r1.top + r1.height / 2 - box.top, r2.left + r2.width / 2 - box.left, r2.top + r2.height / 2 - box.top);
+        }
+
+        // ---- effects: damage numbers, lunges, defeat fades ----
+        function rects() {
+            const out = {};
+            if (!dom.arena.getBoundingClientRect) return out;
+            const box = dom.arena.getBoundingClientRect();
+            Object.keys(nodes).forEach(k => {
+                const n = nodes[k];
+                if (n && n.getBoundingClientRect && n.dataset && (n.dataset.cid || n.dataset.target)) {
+                    const r = n.getBoundingClientRect();
+                    out[k] = { left: r.left - box.left, top: r.top - box.top, width: r.width, height: r.height, node: n };
+                }
+            });
+            return out;
+        }
+        function rectOf(key, before) {
+            const n = nodes[key];
+            if (n && n.getBoundingClientRect && dom.arena.getBoundingClientRect) {
+                const box = dom.arena.getBoundingClientRect(), r = n.getBoundingClientRect();
+                if (r.width) return { left: r.left - box.left, top: r.top - box.top, width: r.width, height: r.height };
+            }
+            return before[key] || null;
+        }
+        function float(key, text, cls, before) {
+            const r = rectOf(key, before);
+            if (!r) return;
+            const f = el('div.b-float' + (cls ? '.' + cls : ''), { text, style: { left: (r.left + r.width / 2) + 'px', top: (r.top + r.height * 0.4) + 'px' } });
+            dom.floats.appendChild(f);
+            setTimeout(() => { if (f.remove) f.remove(); }, 1300);
+        }
+        function effects(events, before) {
+            if (!root.document || !dom.arena.getBoundingClientRect) return;
+            const calm = calmMotion();
+            events.forEach(ev => {
+                if (ev.t === 'damage') float(ev.cid, '−' + ev.amount, 'dmg', before);
+                if (ev.t === 'hit') float('h' + ev.player, '−' + ev.amount + ' ❤', 'dmg', before);
+                if (ev.t === 'shield') float(ev.cid, 'Blocked!', 'info', before);
+                if (ev.t === 'defeated' && before[ev.cid]) {
+                    const r = before[ev.cid];
+                    const ghost = r.node.cloneNode ? r.node.cloneNode(true) : null;
+                    if (ghost) {
+                        ghost.classList.add('b-defeat-ghost');
+                        ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
+                        Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+                        dom.floats.appendChild(ghost);
+                        setTimeout(() => { if (ghost.remove) ghost.remove(); }, 900);
+                    }
+                }
+                if (ev.t === 'play' && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
+                if (ev.t === 'attack' && !calm) lunge(ev.cid, ev.target, before);
+                if (ev.t === 'axiom' || ev.t === 'reset') { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
+            });
+        }
+        function lunge(cid, target, before) {
+            const n = nodes[cid];
+            const a = rectOf(cid, before), t = rectOf(target, before);
+            if (!n || !n.animate || !a || !t) return;
+            const dx = (t.left + t.width / 2 - a.left - a.width / 2) * 0.35, dy = (t.top + t.height / 2 - a.top - a.height / 2) * 0.35;
+            try { n.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
         }
 
         // ---- the end ----
         function finish() {
             if (ui.ended) return;
             ui.ended = true;
+            cancelDrag();
             const w = E.winner(state);
             const outcome = w === 'draw' ? 'draw' : w === ME ? 'won' : 'lost';
             let fate = null;
             let settlement = null;
-            if (mode !== 'practice') {
+            if (mode !== 'practice' && !guide) {
                 fate = B().Fate.roll({
                     instances: me.team, defeated: E.lostUids(state, ME), mode, won: outcome === 'won',
                     items: { ward: me.items.ward || 0, anchor: me.items.anchor || 0 }, seed: seed + ':fate',
@@ -473,16 +1211,18 @@
                 const worst = severity.find(kind => fate.results.some(r => r.outcome === kind));
                 sfx('fate-' + worst);
             }
-
-            const title = outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
+            const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
             const reason = {
-                lives: outcome === 'won' ? 'They ran out of lives.' : 'You ran out of lives.',
-                'reverse-hearts': outcome==='won'?'The victory rule made reaching your own zero hearts a win.':'The opponent reached zero hearts under the reversed victory rule.',
-                'cannot-act': outcome === 'won' ? 'They ran out of creatures.' : 'You ran out of creatures.',
-                'turn-limit': 'The rift closed before anyone won outright.',
+                hearts: outcome === 'won' ? oppName + ' ran out of hearts.' : 'You ran out of hearts.',
+                'reverse-hearts': outcome === 'won' ? 'The reversed victory rule made reaching your own zero hearts a win.' : oppName + ' reached zero hearts under the reversed victory rule.',
+                'cannot-act': outcome === 'won' ? oppName + ' ran out of creatures.' : 'You ran out of creatures.',
+                'turn-limit': 'The rift closed before anyone won.',
+                'both-zero': 'Both heroes reached zero hearts at once.',
             }[state.endReason] || '';
-            const body = [el('h2', { text: title }), el('p.muted', { text: `${reason} ${state.round} rounds, ${state.turn} turns.` })];
-            if (mode === 'practice') {
+            const body = [el('h2', { text: title }), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
+            if (guide) {
+                body.push(el('p', { text: 'You used the draw choice, played creatures, tactics and a rule card, attacked past Guard, and won by the current rules. Real matches start with 10 hearts each.' }));
+            } else if (mode === 'practice') {
                 body.push(el('p', { text: 'Practice battle: no fate rolls and nothing at stake. Your creatures are exactly as they were.' }));
             } else {
                 const F = Rift.data.fate;
@@ -492,18 +1232,20 @@
                     el('span.fate-icon', { text: F.outcomes[r.outcome].icon }),
                     el('b', { text: species(r.species).name + ': ' }),
                     F.outcomes[r.outcome].name + (r.detail ? ' — ' + r.detail : '')
-                        + (r.savedBy === 'legend' ? ' (legendaries never die)' : r.savedBy ? ` (your ${r.savedBy} saved it)` : ''),
+                        + (r.savedBy === 'legend' ? ' (legendaries never die)' : r.savedBy ? ' (your ' + r.savedBy + ' saved it)' : ''),
                 ]))));
                 body.push(el('h3', { text: 'Stakes' }));
                 body.push(el('ul.ante-list', {}, ante.lines.concat(settlement.lines).map(t => el('li', { text: t }))));
             }
-            body.push(el('div.b-buttons', {}, [button('Continue', () => {
+            const cont = button(guide && outcome === 'won' ? 'Finish lesson' : 'Continue', () => {
                 if (typeof p.onEnd === 'function') p.onEnd(result);
-            }, 'primary')]));
-            dom.overlay.appendChild(el('div.b-end.panel', {}, body));
+            }, 'primary');
+            body.push(el('div.b-buttons', {}, [cont]));
+            dom.overlay.appendChild(el('div.b-end-panel.panel', {}, [el('div.b-end-body', {}, body)]));
             dom.overlay.classList.add('show');
             screen.classList.add('ended');
             handle.result = result;
+            if (cont.focus) try { cont.focus(); } catch (e) { /* ignore */ }
         }
 
         function wheelLegend() {
@@ -514,21 +1256,29 @@
             ]));
             items.push(el('li', {}, [colourChip('memory'), el('div.wheel-line', { text: W.memory })]));
             return el('details.b-wheel.panel', {}, [
-                el('summary', { text: `Colour wheel: +${W.bonus} power vs the colour you beat` }),
-                el('p.small',{text:'These are rules for this game, not a universal ranking of ways of knowing.'}),
+                el('summary', { text: 'Colour wheel: +' + W.bonus + ' attack vs the colour you beat' }),
+                el('p.small', { text: 'These are rules for this game, not a ranking of ways of knowing.' }),
                 el('ul', {}, items),
             ]);
         }
 
-        noteEvents(state.lastEvents);
-        render();
-        schedule();
-
         const handle = {
-            destroy() { clearTimeout(ui.timer); ui.ended = true; if(help)help.close(); },
+            destroy() {
+                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer);
+                ui.ended = true; cancelDrag();
+                if (help) help.close();
+                if (guide) stopVoice();
+            },
             get state() { return state; },
+            get step() { return ui.step; },
+            get busy() { return ui.busy; },
             result: null,
         };
+
+        noteEvents(state.lastEvents);
+        render();
+        if (guide) speak();
+        schedule();
         return handle;
     }
 
