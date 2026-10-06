@@ -130,3 +130,17 @@ test('Bag → Trick Book: cancel spends nothing; choose creature and trick; repl
     assert.equal(g.state.creatures[0].taught, 'attack');
     assert.equal(g.state.items['trick-book'], 0);
 });
+
+test('mini-bosses and bosses teach one unowned earned tactic the first time only', () => {
+    const Rift = loadRift(FILES);
+    const s = Rift.State.freshState();
+    const rng = Rift.makeRng('tactic-reward');
+    const first = Rift.World.rewards(s, { type: 'miniboss' }, rng, { firstTime: true, stars: 3 });
+    assert.equal(first.tactic, Rift.data.tacticDecks.earned[0]);
+    Rift.World.applyRewards(s, first);
+    assert.ok(s.tactics.includes(first.tactic));
+    const next = Rift.World.rewards(s, { type: 'boss' }, rng, { firstTime: true, stars: 3 });
+    assert.equal(next.tactic, Rift.data.tacticDecks.earned[1], 'skips tactics already owned');
+    assert.equal(Rift.World.rewards(s, { type: 'boss' }, rng, { firstTime: false }).tactic, undefined, 'replays give none');
+    assert.equal(Rift.World.rewards(s, { type: 'puzzle' }, rng, { firstTime: true }).tactic, undefined, 'ordinary puzzles give none');
+});

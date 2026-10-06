@@ -332,7 +332,8 @@
                     earned = earned.filter(id => Rift.World.award(st, id));
                 });
                 const def = Rift.Puzzles.get(stages[stages.length - 1].id);
-                const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name).join(', ');
+                const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name)
+                    .concat(r.tactic ? ['new tactic card: ' + Rift.data.tactics[r.tactic].name + ' (add it in Collection → Build decks)'] : []).join(', ');
                 const body = el('div.stack', null, [
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
                     obstacle ? el('p', { text: 'A rustle near the rift… something appeared!' }) : el('p', { text: 'No creature appeared this time. Your rewards are yours. More stars improve the chance of rare visitors.' }),

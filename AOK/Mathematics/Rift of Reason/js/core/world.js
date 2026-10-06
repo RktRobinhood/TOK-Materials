@@ -221,12 +221,18 @@
         if (out.xp) out.xp += o.stars ? (o.stars - 1) * 5 : (o.noHints ? 5 : 0);
         if (o.firstTime && out.xp) give('charm');
         if (n.type === 'boss' && state.avatar && state.avatar.type === 'raven') give(rng.pick(['ward', 'tonic', 'lure']));
+        // Mini-bosses and bosses teach a new tactic card the first time they are beaten.
+        if (o.firstTime && (n.type === 'miniboss' || n.type === 'boss')) {
+            const owned = Rift.State.ownedTactics(state);
+            out.tactic = ((Rift.data.tacticDecks || {}).earned || []).find(id => !owned.includes(id)) || null;
+        }
         return out;
     }
 
     function applyRewards(state, r) {
         state.xp += r.xp;
         Object.entries(r.items).forEach(([id, k]) => { state.items[id] = (state.items[id] || 0) + k; });
+        if (r.tactic) { state.tactics = state.tactics || []; if (!state.tactics.includes(r.tactic)) state.tactics.push(r.tactic); }
     }
 
     function level(state) {
