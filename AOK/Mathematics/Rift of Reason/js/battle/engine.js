@@ -19,6 +19,14 @@
  *   describe(state, cid) → everything a card face needs (name, cost, attack, health, keywords, lines…)
  *   attackOf / healthOf / keywordsOf / canAttack / attackTargets / activations / targetsFor / fightPreview
  *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p)
+ *   activeAxioms(state) → every active rule card (a "basic" one has ax.basic: it restates a default rule)
+ *   changedAxioms(state) → only the active rule cards that change a basic rule
+ *   cardName(state, cid) → plain name;  logName(state, cid) → "your X" / "Anna's X" when both boards have an X
+ *   colourOf(state, card) → its colour for spotlights and the wheel; 'none' for a colourless (nicknamed) creature
+ *
+ * activations(state, cid) lists every paid ability (with `usable`); legalActions offers only usable ones,
+ * and leaves out tactics whose `usable` hook says they would certainly fizzle.
+ * A card discarded because the hand was full is tagged `burned` and is not reported by lostUids.
  *
  * Actions (each carries `player` in legalActions):
  *   { type: 'draw', choice: 'deck' | 'axiom' | 'forward' | 'rewind' | 'none' }     phase 'draw'
@@ -126,6 +134,8 @@
         return memo;
     }
     function activeAxioms(s) { return memoFor(s).list; }
+    // Active rule cards that differ from the basics (a `basic` card only restates a default rule).
+    function changedAxioms(s) { return activeAxioms(s).filter(a => !a.basic); }
     function rules(s) { return memoFor(s).rules; }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
 
@@ -138,6 +148,20 @@
         if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || {}).name || c.tactic;
         const base = (species(c.species) || {}).name || c.species;
         return c.nickname ? '"' + c.nickname + '"' : base;
+    }
+    // Name for event (log) texts: when both boards hold a creature with this name, say whose it is
+    // ("your Kim Kardashiant" / "Granny's Kim Kardashiant"). emit() capitalises the first letter.
+    function logName(s, cid) {
+        const name = cardName(s, cid);
+        const c = s.cards[cid];
+        if (!c || c.kind !== 'creature') return name;
+        const p = c.controller;
+        const same = other => other !== cid && cardName(s, other) === name;
+        return s.players[1 - p].board.some(same) ? possessive(s, p) + ' ' + name : name;
+    }
+    function possessive(s, p) {
+        const n = s.players[p].name;
+        return n === 'You' ? 'your' : n + '\'s';
     }
     function playerName(s, p) { return s.players[p].name; }
     // "Anna plays" / "You play".
@@ -177,14 +201,15 @@
     }
     const hasKeyword = (s, cid, k) => keywordsOf(s, cid).includes(k);
 
+    // 'none' (nicknamed): no colour at all, so no spotlight (not even Memory's) and no wheel bonus.
     function colourOf(s, card) {
-        return card.colourless ? 'memory' : (card.colour || 'memory');
+        return card.colourless ? 'none' : (card.colour || 'memory');
     }
     function wheelBonus(s, card, foe) {
         const W = Rift.data.wheel;
         if (!W || !foe || foe.kind !== 'creature') return 0;
         const a = colourOf(s, card), b = colourOf(s, foe);
-        if (a === 'memory' || b === 'memory' || a === b) return 0;
+        if (!W.beats[a] || !W.beats[b] || a === b) return 0;
         const wins = rules(s).wheelReversed ? W.beats[b] === a : W.beats[a] === b;
         return wins ? W.bonus : 0;
     }
@@ -285,14 +310,21 @@
     }
     function axiomCost(s, id) { return (axiomDefs()[id] || { cost: 2 }).cost; }
 
-    // Paid abilities this creature has: [{ id, name, text, cost, target, filter }].
+    // Paid abilities this creature has: [{ id, name, text, cost, target, filter, usable }].
+    // usable: false when it would certainly do nothing now (legalActions leaves it out).
     function activations(s, cid) {
         const c = s.cards[cid];
         const out = [];
         eachAbility(s, c, (def, id) => {
-            if (def.activate) out.push({ id, name: def.name, text: def.text, cost: Math.max(0, def.activate.cost + rules(s).abilityCostDelta), target: def.activate.target || null, filter: def.activate.filter || null });
+            const A = def.activate;
+            if (A) out.push({ id, name: def.name, text: def.text, cost: Math.max(0, A.cost + rules(s).abilityCostDelta), target: A.target || null, filter: A.filter || null,
+                usable: !A.usable || !!A.usable(s, c, H) });
         });
         return out;
+    }
+    // Room in player p's hand for n more cards (after `leaving` cards have left it).
+    function handRoom(s, p, n, leaving) {
+        return handCount(s.players[p]) - (leaving || 0) + (n == null ? 1 : n) <= s.options.handLimit;
     }
     function canActivateNow(s, cid) {
         const c = s.cards[cid];
@@ -353,7 +385,7 @@
         const hp = healthOf(s, cid);
         return {
             cid, kind: 'creature', species: c.species, name: cardName(s, cid), speciesName: sp.name, legendary: c.legendary,
-            colour: colourOf(s, c), printedColour: c.colour, cost: playCost(s, cid), baseCost: c.cost,
+            colour: colourOf(s, c), printedColour: c.colour, colourless: !!c.colourless, cost: playCost(s, cid), baseCost: c.cost,
             attack: attackOf(s, cid), baseAttack: c.attack, attackParts: attackParts(s, cid).parts,
             health: hp.current, maxHealth: hp.max, baseHealth: c.health, damaged: hp.damaged,
             keywords: keywordsOf(s, cid), lines, silenced: !!c.silenced, onBoard,
@@ -438,6 +470,7 @@
             } else {
                 const def = tacticDefs()[c.tactic];
                 if (!def) return;
+                if (def.usable && !def.usable(s, p, H)) return;
                 if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => list.push({ type: 'play', player: p, cid, target }));
                 else list.push({ type: 'play', player: p, cid });
             }
@@ -446,7 +479,7 @@
         P.board.forEach(cid => {
             if (canAttack(s, cid)) attackTargets(s, cid).forEach(target => list.push({ type: 'attack', player: p, cid, target }));
             if (canActivateNow(s, cid)) activations(s, cid).forEach(a => {
-                if (a.cost > P.energy) return;
+                if (a.cost > P.energy || !a.usable) return;
                 if (a.target) targetsFor(s, a.target, p, a.filter, cid).forEach(target => list.push({ type: 'activate', player: p, cid, ability: a.id, target }));
                 else list.push({ type: 'activate', player: p, cid, ability: a.id });
             });
@@ -464,11 +497,13 @@
 
     function winner(s) { return s.winner == null ? null : s.winner; }
 
+    // Collected creatures defeated in this battle (in a discard pile). Cards discarded only because
+    // the hand was full (`burned`) never fought, so they do not count.
     function lostUids(s, p) {
         const out = [];
         s.players.forEach(P => P.discard.forEach(cid => {
             const c = s.cards[cid];
-            if (c.kind === 'creature' && c.owner === p && !c.loaner && !out.includes(c.uid)) out.push(c.uid);
+            if (c.kind === 'creature' && c.owner === p && !c.loaner && !c.burned && !out.includes(c.uid)) out.push(c.uid);
         }));
         return out;
     }
@@ -496,7 +531,7 @@
             ability: injuries.includes('no-ability') ? null : ((inst.warped && inst.warped.ability) || sp.ability || null),
             gained: [], buffs: [], extraKeywords: [],
             damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, silenced: false, shieldUsed: false,
-            nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0,
+            nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0, burned: false,
             legendary: sp.rarity === 'legendary', loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
             injured: injuries.slice(), warped: !!(inst.warped && inst.warped.ability),
             variant: inst.variant || null, taught, defeats: 0,
@@ -621,7 +656,11 @@
         return s;
     }
 
+    const capFirst = x => (typeof x === 'string' && x ? x[0].toUpperCase() + x.slice(1) : x);
     function emit(G, ev) {
+        // Texts may start with a log name such as "your Kim Kardashiant".
+        ev.text = capFirst(ev.text);
+        if (ev.publicText) ev.publicText = capFirst(ev.publicText);
         ev.turn = G.s.turn;
         ev.round = G.s.round;
         G.events.push(ev);
@@ -633,7 +672,8 @@
         return {
             s, rng: G.rng, H,
             emit: ev => emit(G, ev),
-            name: cid => cardName(s, cid),
+            name: cid => logName(s, cid),           // for event texts
+            cardName: cid => cardName(s, cid),      // plain name (e.g. to build a nickname)
             draw: p => draw(G, p),
             drawAxiom: p => drawAxiom(G, p),
             damage: (target, amount, source) => (isHero(target) ? damageHero(G, +target[1], amount) : dealDamage(G, target, amount, source)),
@@ -644,7 +684,8 @@
             freeze(cid) { s.cards[cid].frozen = true; },
             bounce: cid => bounce(G, cid),
             fromDiscard(cid) { const P = s.players[s.cards[cid].owner]; if (removeFrom(P.discard, cid)) toHand(G, P === s.players[0] ? 0 : 1, cid); },
-            toHand: (p, cid) => toHand(G, p, cid),
+            toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
+            handRoom: (p, n) => handRoom(s, p, n),
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
             addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; },
             shiftFate: n => shiftFate(G, n),
@@ -656,9 +697,17 @@
         };
     }
 
-    function toHand(G, p, cid) {
-        const P = G.s.players[p];
-        if (handCount(P) >= G.s.options.handLimit) { P.discard.push(cid); emit(G, { t: 'burn', player: p, cid, text: says(G.s, p, 'has') + ' a full hand: ' + cardName(G.s, cid) + ' is discarded.' }); return false; }
+    // Returns false when the hand is full: the card goes to the discard pile, tagged `burned` so it
+    // does not count as defeated for the after-battle Fate roll. quiet: the caller reports it.
+    function toHand(G, p, cid, quiet) {
+        const P = G.s.players[p], c = G.s.cards[cid];
+        if (handCount(P) >= G.s.options.handLimit) {
+            P.discard.push(cid);
+            c.burned = true;
+            if (!quiet) emit(G, { t: 'burn', player: p, cid, text: says(G.s, p, 'has') + ' a full hand: ' + cardName(G.s, cid) + ' is discarded.' });
+            return false;
+        }
+        c.burned = false;
         P.hand.push(cid);
         return true;
     }
@@ -685,7 +734,7 @@
     function resetCard(c) {
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
         c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.silenced = false; c.shieldUsed = false;
-        c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0;
+        c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
     }
 
     function setWinner(G, p, reason) {
@@ -796,7 +845,7 @@
         if (old) A.discard.push(old);
         A.active[ax.category] = id;
         A.flips += 1;
-        emit(G, { t: 'axiom', id, player: by, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
+        emit(G, { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
         if (by != null) {
             [0, 1].forEach(p => s.players[p].board.slice().forEach(cid => {
                 const c = s.cards[cid];
@@ -817,7 +866,7 @@
         if (c.kind === 'tactic') {
             const def = tacticDefs()[c.tactic];
             P.discard.push(cid);
-            emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + cardName(s, target) : '') + '.' });
+            emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
             def.run(api(G), p, target);
         } else {
             P.board.push(cid);
@@ -830,7 +879,7 @@
             });
             const entry = entranceOf(s, c);
             if (entry && (!entry.target || target)) entry.run(api(G), c, target);
-            else if (entry) emit(G, { t: 'fizzle', cid, text: cardName(s, cid) + ' finds no target for its Entrance.' });
+            else if (entry) emit(G, { t: 'fizzle', cid, text: logName(s, cid) + ' finds no target for its Entrance.' });
         }
         afterMove(G);
     }
@@ -893,7 +942,7 @@
         const s = G.s, p = s.active, c = s.cards[cid];
         c.attacks += 1;
         s.players[p].attacksThisTurn += 1;
-        emit(G, { t: 'attack', player: p, cid, target, text: says(s, p, 'attacks') + ' ' + cardName(s, target) + ' with ' + cardName(s, cid) + '.' });
+        emit(G, { t: 'attack', player: p, cid, target, text: says(s, p, 'attacks') + ' ' + logName(s, target) + ' with ' + logName(s, cid) + '.' });
         eachAbility(s, c, def => { if (def.onAttack) def.onAttack(api(G), c, target); });
         if (isHero(target)) {
             const prev = fightPreview(s, cid, target);
@@ -911,18 +960,18 @@
         const pa = attackOf(s, att, def), pb = attackOf(s, def, att);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
-        emit(G, { t: 'fight', attacker: att, defender: def, pa, pb, text: cardName(s, att) + ' (' + pa + ' attack) fights ' + cardName(s, def) + ' (' + pb + ' attack).' });
+        emit(G, { t: 'fight', attacker: att, defender: def, pa, pb, text: logName(s, att) + ' (' + pa + ' attack) fights ' + logName(s, def) + ' (' + pb + ' attack).' });
         dealDamage(G, def, res.toDefender, att);
         dealDamage(G, att, res.toAttacker, def);
         const aDead = healthOf(s, att).current <= 0, dDead = healthOf(s, def).current <= 0;
         if (aDead && dDead && ax && ax.defenderSurvivesTrade) {
             s.cards[def].damage = healthOf(s, def).max - 1;
-            emit(G, { t: 'axiom-effect', cid: def, text: ax.name + ': ' + cardName(s, def) + ' survives on 1 health.' });
+            emit(G, { t: 'axiom-effect', cid: def, text: ax.name + ': ' + logName(s, def) + ' survives on 1 health.' });
         }
         const aLive = healthOf(s, att).current > 0, dLive = healthOf(s, def).current > 0;
         const won = aLive && !dLive ? att : dLive && !aLive ? def : null;
         if (won) activeAxioms(s).forEach(a => {
-            if (a.onFightWon) { a.onFightWon(api(G), s.cards[won]); emit(G, { t: 'axiom-effect', cid: won, text: a.name + ': ' + cardName(s, won) + ' grows stronger.' }); }
+            if (a.onFightWon) { a.onFightWon(api(G), s.cards[won]); emit(G, { t: 'axiom-effect', cid: won, text: a.name + ': ' + logName(s, won) + ' grows stronger.' }); }
         });
         [[att, aLive, def], [def, dLive, att]].forEach(([cid, alive, foe]) => {
             if (!alive) return;
@@ -937,7 +986,7 @@
         if (hasKeyword(s, cid, 'shield')) {
             c.shieldUsed = true;
             c.extraKeywords = c.extraKeywords.filter(k => k !== 'shield');
-            emit(G, { t: 'shield', cid, text: cardName(s, cid) + '\'s Shield blocks the damage.' });
+            emit(G, { t: 'shield', cid, text: logName(s, cid) + '\'s Shield blocks the damage.' });
             return 0;
         }
         let red = 0;
@@ -945,7 +994,7 @@
         const dealt = Math.max(0, amount - red);
         if (!dealt) return 0;
         c.damage += dealt;
-        emit(G, { t: 'damage', cid, amount: dealt, source, text: cardName(s, cid) + ' takes ' + dealt + ' damage.' });
+        emit(G, { t: 'damage', cid, amount: dealt, source, text: logName(s, cid) + ' takes ' + dealt + ' damage.' });
         return dealt;
     }
 
@@ -964,7 +1013,8 @@
             const dead = [];
             [s.active, 1 - s.active].forEach(p => s.players[p].board.forEach(cid => { if (healthOf(s, cid).current <= 0) dead.push(cid); }));
             if (!dead.length) break;
-            dead.forEach(cid => defeat(G, cid, 'damage'));
+            const names = dead.map(cid => logName(s, cid)); // before any leaves the board
+            dead.forEach((cid, i) => defeat(G, cid, 'damage', names[i]));
         }
         checkHearts(G);
     }
@@ -980,9 +1030,12 @@
         else setWinner(G, 1 - p, 'hearts');
     }
 
-    function defeat(G, cid, why) {
+    // name: the log name, when the caller worked it out while the board was still intact.
+    function defeat(G, cid, why, name) {
         const s = G.s, c = s.cards[cid];
-        if (!removeFrom(s.players[c.controller].board, cid)) return;
+        if (!s.players[c.controller].board.includes(cid)) return;
+        if (!name) name = logName(s, cid);
+        removeFrom(s.players[c.controller].board, cid);
         let dest = 'discard', saver = null;
         // Mercy first, and no return with a full hand, so a once-per-match Last Word is not wasted.
         const room = handCount(s.players[c.owner]) < s.options.handLimit;
@@ -991,7 +1044,6 @@
             const def = abilityDefs()[id];
             if (room && dest === 'discard' && def.lastWord && def.lastWord(api(G), c) === 'hand') { dest = 'hand'; saver = def.name; }
         });
-        const name = cardName(s, cid);
         resetCard(c);
         c.defeats += 1;
         c.controller = c.owner;
@@ -1010,11 +1062,15 @@
         toHand(G, c.owner, cid);
     }
 
+    // "Loses its abilities, keywords and boosts" (Deadpan, Whisper, Occam's Razor): printed, natural,
+    // taught and gained abilities and keywords stop working and every boost (a buff with + attack or
+    // + health) goes. Penalties stay (a Nickname's −2 and lost colour, FALSE's −1). Health it has left stays.
     function silence(G, cid) {
         const c = G.s.cards[cid];
         const before = healthOf(G.s, cid).current;
         c.silenced = true;
-        c.buffs = []; c.gained = []; c.extraKeywords = []; c.prediction = null; c.nickname = null; c.colourless = false;
+        c.buffs = c.buffs.filter(b => (b.attack || 0) <= 0 && (b.health || 0) <= 0);
+        c.gained = []; c.extraKeywords = []; c.prediction = null;
         const max = healthOf(G.s, cid).max;
         c.damage = before >= max ? 0 : max - before;
     }
@@ -1037,7 +1093,8 @@
 
     // Helpers exposed to data hooks (abilities, axioms, tactics) and the AI.
     const H = {
-        colourOf, wheelBonus, cardName, playerName, keywordsOf, hasKeyword,
+        colourOf, wheelBonus, cardName, logName, playerName, keywordsOf, hasKeyword,
+        handRoom: (s, p, n, leaving) => handRoom(s, p, n, leaving),
         boardOf: (s, p) => s.players[p].board,
         attack: (s, cid, foe) => attackOf(s, cid, foe),
         health: (s, cid) => healthOf(s, cid).current,
@@ -1047,10 +1104,10 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, ruleSummary, timeline, describe,
+        rules, activeAxioms, changedAxioms, ruleSummary, timeline, describe,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
-        colourOf, wheelBonus, cardName, says, isHero, heroId, drawChoices, creaturesLeft,
+        colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, H,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

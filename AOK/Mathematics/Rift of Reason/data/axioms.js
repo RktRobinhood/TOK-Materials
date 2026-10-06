@@ -9,6 +9,8 @@
  *
  * Axiom fields:
  *   category, cost (energy, default 2), text, flavour
+ *   basic: true                   → it restates the default rule ("Back to normal"). Playing it still
+ *                                   replaces (removes) the active rule in its category.
  *   rules: { ... }                → values merged over Engine.rules defaults
  *   powerMod(state, card, H)      → attack added to a creature
  *   resolveFight(pa, pb)          → { toAttacker, toDefender } replaces normal fight damage
@@ -77,8 +79,8 @@
             rules: { reverseHearts: true },
         },
         'normal-hearts': {
-            name: 'Back to the Goal', category: 'victory', cost: 1,
-            text: 'Reduce the opponent to zero hearts to win.',
+            name: 'Back to the Goal', category: 'victory', cost: 1, basic: true,
+            text: 'Back to normal: reduce the enemy hero to zero hearts to win.',
             rules: { reverseHearts: false },
         },
         'one-action': {
@@ -92,7 +94,7 @@
             rules: { attackLimit: 2 },
         },
         'three-actions': {
-            name: 'Rule of Three', category: 'attacks', cost: 1,
+            name: 'Free Attacks', category: 'attacks', cost: 1, basic: true,
             text: 'Back to normal: every ready creature may attack once per turn.',
             rules: {},
         },
@@ -129,8 +131,8 @@
             rules: { heal: true },
         },
         patience: {
-            name: 'Wounds Remain', category: 'healing', cost: 1,
-            text: 'Back to normal: damage stays on creatures between turns.',
+            name: 'Wounds Remain', category: 'healing', cost: 1, basic: true,
+            text: 'Back to normal: damage stays on creatures.',
             rules: { heal: false },
         },
         arrival: {

@@ -93,7 +93,7 @@
         },
         khaby: {
             name: 'Khaby Llame', inspiredBy: 'Khaby Lame', colour: 'reason', rarity: 'common', power: 4, cost: 2, attack: 1, health: 3, keywords: ['guard'],
-            ability: 'deadpan', abilityText: 'Guard. A creature that attacks it loses its abilities.',
+            ability: 'deadpan', abilityText: 'Guard. A creature that attacks it loses its abilities, keywords and boosts.',
             blurb: 'Never says a word. Just holds out both hooves and shows you the obvious, simpler way.',
             lines: ['…', '(holds out both hooves, palms up)', '(raises one eyebrow very slowly)'],
         },
@@ -147,7 +147,7 @@
         },
         eelish: {
             name: 'Billie Eelish', inspiredBy: 'Billie Eilish', colour: 'emotion', rarity: 'common', power: 4, cost: 2, attack: 1, health: 2,
-            ability: 'whisper', abilityText: 'Entrance: an enemy creature loses its abilities.',
+            ability: 'whisper', abilityText: 'Entrance: an enemy creature loses its abilities, keywords and boosts.',
             blurb: 'Whispers moody ballads so quietly you have to lean in. Then you\'re hooked.',
             lines: ['(whispering) Duh.', '(very quietly) That premise is a bit sad.', 'Lean in. The flaw is in the whisper.'],
         },

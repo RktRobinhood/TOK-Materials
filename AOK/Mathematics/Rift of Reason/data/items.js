@@ -17,7 +17,7 @@
         'trick-book': { name: 'Trick Book', kind: 'support', text: 'Use in the Bag or Collection: teach one creature a trick for card battles.' },
         // Battle consumables earned from puzzles: chosen before a real battle, used up when it starts.
         'trickster-coin': { name: 'Trickster Coin', kind: 'battle', consumable: 'extra-energy', text: 'Bring it into a battle for +1 energy each turn.' },
-        heartstone: { name: 'Heartstone', kind: 'battle', consumable: 'extra-life', text: 'Bring it into a battle to start with one extra life.' },
+        heartstone: { name: 'Heartstone', kind: 'battle', consumable: 'extra-life', text: 'Bring it into a battle to start with +2 hearts.' },
     };
 
     // Trick Book tricks (stored as creature.taught; one per creature). Art: 'ui/trait-<id>' for keywords.

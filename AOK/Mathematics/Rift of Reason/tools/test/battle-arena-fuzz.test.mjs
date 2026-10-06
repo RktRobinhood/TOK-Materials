@@ -43,11 +43,16 @@ test('2,000 random games terminate with consistent states', () => {
             // Lean towards attacking/playing so games finish; End sometimes.
             const nonEnd = legal.filter(a => a.type !== 'end');
             const a = nonEnd.length && !rng.chance(0.15) ? rng.pick(nonEnd) : rng.pick(legal);
+            const tactic = a.type === 'play' && s.cards[a.cid].kind === 'tactic';
             s = E.applyAction(s, a);
+            // Offered activations and tactics never fizzle (those that would are left out).
+            if (a.type === 'activate' || tactic) assert.ok(!s.lastEvents.some(e => e.t === 'fizzle'), 'offered ' + (a.ability || a.cid) + ' fizzled');
             if (g % 50 === 0) invariants(s);
             assert.ok(++steps < 4000, 'game ' + g + ' did not finish');
         }
         invariants(s);
+        // Cards discarded from a full hand never count as defeated.
+        [0, 1].forEach(p => E.lostUids(s, p).forEach(uid => assert.ok(!Object.values(s.cards).some(c => c.uid === uid && c.burned), 'burned card reported lost')));
     }
 });
 

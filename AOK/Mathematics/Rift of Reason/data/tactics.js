@@ -7,6 +7,8 @@
  *   target?             target spec (see js/battle/abilities.js); the play needs a valid target
  *   filter?(s, cid, H)  narrows the targets
  *   run(api, p, target) resolve the effect for player p
+ *   usable?(s, p, H)    false → not offered, because it would certainly do nothing (checked while the
+ *                       card is still in hand: it leaves the hand before it resolves)
  *   choose?(api, p, choice, req)   answer to api.ask(...)
  *   ai?(s, p, target, H)           rough value for the AI (optional; the AI also simulates)
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
@@ -48,9 +50,9 @@
         },
         'occams-razor': {
             name: 'Occam\'s Razor', cost: 1, target: 'any-creature',
-            text: 'A creature loses all its abilities and keywords.',
+            text: 'A creature loses its abilities, keywords and boosts.',
             flavour: 'Cut away what you do not need.',
-            run(api, p, target) { api.silence(target); api.emit({ t: 'tactic', text: 'Occam\'s Razor: ' + api.name(target) + ' loses its abilities.' }); },
+            run(api, p, target) { api.silence(target); api.emit({ t: 'tactic', text: 'Occam\'s Razor: ' + api.name(target) + ' loses its abilities, keywords and boosts.' }); },
         },
         rethink: {
             name: 'Rethink', cost: 2, target: 'any-creature',
@@ -69,6 +71,7 @@
             name: 'Clockwork', cost: 1,
             text: 'Move the Fate track 3 spaces closer or 3 spaces further away.',
             flavour: 'Time in mathematics is whatever the axioms say it is.',
+            usable: s => !!s.options.timeline,
             run(api, p) {
                 api.ask({ player: p, kind: 'option', auto: false, options: ['forward', 'rewind'],
                     labels: { forward: 'Fate 3 spaces closer', rewind: 'Fate 3 spaces further away' },
@@ -80,7 +83,14 @@
             name: 'Look It Up', cost: 1,
             text: 'Take the top card of the shared axiom deck into your hand.',
             flavour: 'Check the source before you argue.',
-            run(api, p) { const id = api.drawAxiom(p); api.emit({ t: 'tactic', text: id ? 'Look It Up: take an axiom card.' : 'Look It Up: the shared deck is empty.' }); },
+            // Needs a card in the shared deck or its discard (reshuffled), and room in the hand.
+            usable: (s, p, H) => (s.axioms.deck.length > 0 || s.axioms.discard.length > 0) && H.handRoom(s, p, 1, 1),
+            run(api, p) {
+                const full = !api.handRoom(p);
+                const id = api.drawAxiom(p);
+                api.emit({ t: 'tactic', text: id ? 'Look It Up: take an axiom card.'
+                    : full ? 'Look It Up: the hand is full, so no axiom card is taken.' : 'Look It Up: the shared axiom deck is empty.' });
+            },
         },
 
         // ---- earned tactics (trainers, puzzles, rumours) ----
@@ -94,6 +104,7 @@
             name: 'Recall', cost: 2,
             text: 'Return a defeated creature from your discard pile to your hand.',
             flavour: 'Old ideas come back when you need them.',
+            usable: (s, p) => s.players[p].discard.some(cid => s.cards[cid].kind === 'creature'),
             run(api, p) {
                 const options = api.s.players[p].discard.filter(cid => api.s.cards[cid].kind === 'creature');
                 if (!api.ask({ player: p, kind: 'card', options, prompt: 'Recall which creature?', source: { type: 'tactic', id: 'recall' } })) api.emit({ t: 'fizzle', text: 'Recall: no defeated creatures.' });
@@ -116,6 +127,7 @@
             name: 'Lemma', cost: 2,
             text: 'Draw 2 cards from your deck.',
             flavour: 'A small proof on the way to a bigger one.',
+            usable: (s, p) => s.players[p].deck.length > 0,
             run(api, p) { api.draw(p); api.draw(p); api.emit({ t: 'tactic', text: 'Lemma: draw 2 cards.' }); },
         },
     };

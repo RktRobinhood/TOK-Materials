@@ -278,8 +278,31 @@ test('Nickname: an enemy creature gets −2 attack and loses its colour', () => 
     toHand(s, 'p0c0');
     s = act(s, { type: 'play', cid: 'p0c0', target: 'p1c0' });
     assert.equal(atk(s, 'p1c0'), 1);
-    assert.equal(E.colourOf(s, s.cards.p1c0), 'memory');
+    assert.equal(E.colourOf(s, s.cards.p1c0), 'none');
+    assert.equal(E.describe(s, 'p1c0').colourless, true);
     assert.match(E.cardName(s, 'p1c0'), /Billie Eelish/);
+});
+
+test('Nickname: no colour at all, so no spotlight (not even Age of Tradition) and no colour wheel bonus', () => {
+    // Siuuugull is Memory, Astrophysicat is Reason (beats Emotion), Billie Eelish is Emotion.
+    let s = setup({ p0: ['tremendoodle', 'astrophysicat'], p1: ['siuuugull', 'eelish'] });
+    onBoard(s, 'p0c1', 'p1c0', 'p1c1');
+    stats(s, 'p1c0', 4, 9);
+    stats(s, 'p1c1', 4, 9);
+    stats(s, 'p0c1', 2, 9);
+    toHand(s, 'p0c0');
+    s = act(s, { type: 'play', cid: 'p0c0', target: 'p1c0' });
+    rule(s, 'age-of-tradition');
+    assert.equal(atk(s, 'p1c0'), 2, 'the −2 stays: a nicknamed Memory creature gets no Memory spotlight');
+    assert.equal(E.attackOf(s, 'p0c1', 'p1c1'), 3, 'Reason beats Emotion');
+    s.cards.p1c1.colourless = true; // as if nicknamed
+    assert.equal(E.attackOf(s, 'p0c1', 'p1c1'), 2, 'no wheel bonus against a colourless creature');
+    rule(s, 'curved-space');
+    assert.equal(E.attackOf(s, 'p1c1', 'p0c1'), 4, 'and none for it, even with the wheel reversed');
+    rule(s, 'age-of-feeling');
+    assert.equal(atk(s, 'p1c1'), 4, 'no Emotion spotlight either');
+    s.cards.p1c1.colourless = false;
+    assert.equal(atk(s, 'p1c1'), 6);
 });
 
 test('It\'s Raw: Entrance defeats an enemy creature with 2 or less attack (only those are targets)', () => {
@@ -333,6 +356,32 @@ test('Whisper: Entrance silences an enemy creature (keywords, buffs and abilitie
     same(E.keywordsOf(s, 'p1c0'), []);
     assert.equal(atk(s, 'p1c0'), s.cards.p1c0.attack);
     assert.equal(E.describe(s, 'p1c0').silenced, true);
+    assert.match(events(s, 'ability')[0].text, /loses its abilities, keywords and boosts/);
+});
+
+test('losing abilities, keywords and boosts: every + bonus goes, penalties stay, and the texts say so', () => {
+    let s = setup({ p0: ['kardashiant'], p1: ['astrophysicat'], t0: ['occams-razor'] });
+    onBoard(s, 'p0c0', 'p1c0');
+    stats(s, 'p1c0', 3, 4);
+    const c = s.cards.p1c0;
+    c.buffs.push({ label: 'Pep talk', attack: 2, health: 2 }, { label: 'Nickname', attack: -2, health: 0 });
+    c.extraKeywords.push('guard');
+    c.baseKeywords.push('swift'); // a natural or taught keyword
+    c.nickname = 'Sad Astrophysicat';
+    c.colourless = true;
+    toHand(s, 'p0t0');
+    s = act(s, { type: 'play', cid: 'p0t0', target: 'p1c0' });
+    same(E.keywordsOf(s, 'p1c0'), []);
+    same(plain(s.cards.p1c0.buffs.map(b => b.label)), ['Nickname']);
+    assert.equal(atk(s, 'p1c0'), 1, 'base 3, the Nickname −2 stays');
+    assert.equal(hp(s, 'p1c0'), 4);
+    assert.equal(E.colourOf(s, s.cards.p1c0), 'none', 'still nicknamed');
+    assert.equal(E.activations(s, 'p1c0').length, 0);
+    const say = /loses its abilities, keywords and boosts\./;
+    assert.match(events(s, 'tactic')[0].text, say);
+    assert.match(Rift.data.tactics['occams-razor'].text, say);
+    ['deadpan', 'whisper'].forEach(id => assert.match(Rift.Battle.Abilities[id].text, say, id));
+    ['khaby', 'eelish'].forEach(id => assert.match(Rift.data.creatures[id].abilityText, say, id));
 });
 
 test('Nature Watch: look at the top three cards, keep one, the others go to the bottom', () => {
@@ -450,10 +499,36 @@ test('Program and Reinvention gain an ability from the discard pile, never Progr
     s = act(s, { type: 'choose', choice: 'lightning' });
     assert.ok(s.cards.p0c0.gained.includes('lightning'));
     assert.ok(E.keywordsOf(s, 'p0c0').includes('swift'));
-    let t = setup({ p0: ['lovelace'] });
+    s = pass(pass(s));
+    same(plain(E.legalActions(s).filter(a => a.type === 'activate').map(a => a.ability)), ['reinvention'], 'still Rapid Fire to gain');
+    toHand(s, 'p0c3');
+    assert.equal(E.legalActions(s).filter(a => a.type === 'activate').length, 0, 'it already has Lightning: nothing new to gain');
+    const t = setup({ p0: ['lovelace', 'gargoyle'] });
     onBoard(t, 'p0c0');
-    t = act(t, { type: 'activate', cid: 'p0c0', ability: 'program' });
-    assert.equal(events(t, 'fizzle').length, 1, 'nothing to copy');
+    toDiscard(t, 'p0c1');
+    assert.equal(legal(t, a => a.type === 'activate').length, 0, 'only Program-like abilities to copy: not offered');
+    same(E.activations(t, 'p0c0').map(a => [a.id, a.usable]), [['program', false]]);
+});
+
+test('activations that would certainly do nothing are not offered', () => {
+    // Pull That Up and Well, Actually: empty deck or full hand.
+    const s = setup({ p0: ['chimpossible', 'astrophysicat', 'kardashiant'] });
+    onBoard(s, 'p0c0', 'p0c1');
+    const offered = x => plain(legal(x, a => a.type === 'activate').map(a => a.ability)).sort();
+    same(offered(s), ['pull-that-up', 'well-actually']);
+    s.players[0].discard.push(...s.players[0].deck.splice(0));
+    same(offered(s), [], 'empty deck');
+    s.players[0].deck.push(s.players[0].discard.pop());
+    same(offered(s), ['pull-that-up', 'well-actually']);
+    while (s.players[0].hand.length + s.players[0].axHand.length < 10) s.players[0].axHand.push('haste');
+    same(offered(s), [], 'full hand');
+    // Next Year and Filter need the Fate track.
+    const m = setup({ p0: ['muskrat', 'kardashiant'] });
+    onBoard(m, 'p0c0', 'p0c1');
+    same(offered(m), []);
+    const n = setup({ p0: ['muskrat', 'kardashiant'], options: { timeline: true } });
+    onBoard(n, 'p0c0', 'p0c1');
+    same(offered(n), ['filter', 'next-year']);
 });
 
 // ---- abilities: Last Word, passives and reactions -------------------------------------------------------------
@@ -519,6 +594,16 @@ test('Deadpan: Guard; a creature that attacks it loses its abilities', () => {
     s = hit(s, 'p0c0', 'p1c0');
     assert.equal(s.cards.p0c0.silenced, true);
     assert.equal(E.fightPreview(s, 'p0c0', 'h1').damage, 1, 'no more Machine bonus');
+    // A creature with no ability, only a boost and a keyword, loses them too.
+    let k = setup({ p0: ['kardashiant'], p1: ['khaby'] });
+    onBoard(k, 'p0c0', 'p1c0');
+    stats(k, 'p0c0', 1, 9);
+    k.cards.p0c0.ability = null;
+    k.cards.p0c0.buffs.push({ label: 'Pep talk', attack: 2, health: 2 });
+    k.cards.p0c0.extraKeywords.push('swift');
+    k = hit(k, 'p0c0', 'p1c0');
+    same(E.keywordsOf(k, 'p0c0'), []);
+    assert.equal(atk(k, 'p0c0'), 1);
 });
 
 test('Machine deals 2 extra damage to heroes', () => {
@@ -649,6 +734,129 @@ test('tactics: Look It Up, Peer Review, Recall, Pause for Thought, Safety Net, L
     assert.ok(E.keywordsOf(s, 'p0c0').includes('shield'));
     s = cast(withTactic('lemma'));
     assert.equal(s.players[0].hand.length, 2);
+});
+
+test('tactics that would certainly do nothing are not offered', () => {
+    const offered = s => legal(s, a => a.cid === 'p0t0').length > 0;
+    let s = withTactic('recall');
+    assert.equal(offered(s), false, 'Recall: no creature in the discard pile');
+    toDiscard(s, 'p0c2');
+    assert.equal(offered(s), true);
+    s = withTactic('look-it-up');
+    assert.equal(offered(s), false, 'Look It Up: shared deck and discard both empty');
+    s.axioms.discard.push('haste');
+    assert.equal(offered(s), true, 'the discard is reshuffled');
+    while (s.players[0].hand.length + s.players[0].axHand.length < 10) s.players[0].axHand.push('haste');
+    assert.equal(offered(s), true, 'playing it frees a place in a full hand');
+    s.players[0].axHand.push('haste');
+    assert.equal(offered(s), false, 'no room even after playing it');
+    s = withTactic('lemma');
+    assert.equal(offered(s), true);
+    s.players[0].discard.push(...s.players[0].deck.splice(0));
+    assert.equal(offered(s), false, 'Lemma: empty deck');
+    assert.equal(offered(withTactic('clockwork')), false, 'Clockwork: no Fate track');
+    assert.equal(offered(withTactic('clockwork', { options: { timeline: true } })), true);
+});
+
+test('Look It Up gives the right reason when it takes nothing', () => {
+    const run = (deck, handFull) => {
+        const out = [];
+        const fake = {
+            s: { axioms: { deck, discard: [] } },
+            handRoom: () => !handFull,
+            drawAxiom: () => (handFull || !deck.length ? null : deck.shift()),
+            emit: ev => out.push(ev.text),
+        };
+        Rift.data.tactics['look-it-up'].run(fake, 0);
+        return out[0];
+    };
+    assert.equal(run(['haste'], false), 'Look It Up: take an axiom card.');
+    assert.equal(run(['haste'], true), 'Look It Up: the hand is full, so no axiom card is taken.');
+    assert.equal(run([], false), 'Look It Up: the shared axiom deck is empty.');
+});
+
+test('a creature discarded because the hand is full is not "lost" for the after-battle Fate roll', () => {
+    let s = withTactic('rethink');
+    const P = s.players[0];
+    while (P.hand.length + P.axHand.length < 11) P.axHand.push('haste'); // Rethink leaves the hand first
+    s = cast(s, 'p0c0');
+    assert.ok(s.players[0].discard.includes('p0c0'));
+    assert.equal(s.cards.p0c0.burned, true);
+    same(plain(E.lostUids(s, 0)), [], 'it never fought');
+    // Recalled, then defeated in a fight: now it counts.
+    s.players[0].axHand = [];
+    s.cards.p0t0.tactic = 'recall';
+    toHand(s, 'p0t0');
+    s = act(s, { type: 'play', cid: 'p0t0' });
+    if (s.phase === 'choose') s = act(s, { type: 'choose', choice: 'p0c0' });
+    assert.ok(s.players[0].hand.includes('p0c0'));
+    assert.equal(s.cards.p0c0.burned, false);
+    onBoard(s, 'p0c0');
+    stats(s, 'p0c0', 1, 1);
+    stats(s, 'p1c0', 5, 9);
+    s = hit(s, 'p0c0', 'p1c0');
+    same(plain(E.lostUids(s, 0)), [s.cards.p0c0.uid]);
+});
+
+test('Pull That Up / Nature Watch with a full hand: the kept card is discarded and the log says so', () => {
+    let s = setup({ p0: ['chimpossible', 'kardashiant', 'astrophysicat', 'keanu'] });
+    onBoard(s, 'p0c0');
+    const top = s.players[0].deck.slice(0, 3);
+    s = act(s, { type: 'activate', cid: 'p0c0', ability: 'pull-that-up' });
+    while (s.players[0].hand.length + s.players[0].axHand.length < 10) s.players[0].axHand.push('haste');
+    s = act(s, { type: 'choose', choice: top[0] });
+    assert.ok(s.players[0].discard.includes(top[0]));
+    assert.equal(s.cards[top[0]].burned, true);
+    same(plain(E.lostUids(s, 0)), []);
+    const texts = s.lastEvents.map(e => e.text);
+    assert.ok(!texts.some(x => /You keep/.test(x)), 'never "You keep" when it was discarded');
+    assert.ok(texts.includes('The hand is full, so ' + E.cardName(s, top[0]) + ' is discarded. The others go to the bottom of the deck.'), texts.join(' | '));
+});
+
+test('basic rule cards: flagged, plain names, and they still replace the active rule in their category', () => {
+    const ax = Rift.data.axioms;
+    same(Object.keys(ax).filter(id => ax[id].basic).sort(), ['normal-hearts', 'patience', 'three-actions']);
+    assert.equal(ax['three-actions'].name, 'Free Attacks');
+    assert.equal(ax['three-actions'].text, 'Back to normal: every ready creature may attack once per turn.');
+    assert.equal(ax['normal-hearts'].name, 'Back to the Goal');
+    assert.equal(ax['normal-hearts'].text, 'Back to normal: reduce the enemy hero to zero hearts to win.');
+    assert.equal(ax.patience.name, 'Wounds Remain');
+    assert.equal(ax.patience.text, 'Back to normal: damage stays on creatures.');
+    let s = setup({ p0: ['kardashiant'] });
+    rule(s, 'one-action');
+    s.players[0].axHand.push('three-actions');
+    s = act(s, { type: 'axiom', choice: 'three-actions' });
+    assert.equal(s.axioms.active.attacks, 'three-actions');
+    assert.ok(s.axioms.discard.includes('one-action'), 'the old rule is removed');
+    assert.equal(E.rules(s).attackLimit, Infinity);
+    assert.equal(events(s, 'axiom')[0].basic, true);
+    same(plain(E.activeAxioms(s).map(a => a.id)), ['three-actions'], 'activeAxioms still lists it');
+    same(plain(E.changedAxioms(s)), [], 'but it changes nothing');
+    rule(s, 'haste');
+    same(plain(E.changedAxioms(s).map(a => a.id)), ['haste']);
+});
+
+test('log names: a creature name on both boards says whose it is', () => {
+    let s = setup({ p0: ['kardashiant', 'astrophysicat'], p1: ['kardashiant'] });
+    s.players[0].name = 'You';
+    s.players[1].name = 'Granny';
+    onBoard(s, 'p0c0', 'p1c0', 'p0c1');
+    stats(s, 'p0c0', 1, 1);
+    stats(s, 'p1c0', 1, 5);
+    assert.equal(E.cardName(s, 'p0c0'), 'Kim Kardashiant', 'cardName stays plain');
+    assert.equal(E.logName(s, 'p0c0'), 'your Kim Kardashiant');
+    assert.equal(E.logName(s, 'p1c0'), 'Granny\'s Kim Kardashiant');
+    assert.equal(E.logName(s, 'p0c1'), 'Astrophysicat', 'no twin, no owner');
+    s = hit(s, 'p0c0', 'p1c0');
+    const texts = s.lastEvents.map(e => e.text);
+    assert.ok(texts.includes('You attack Granny\'s Kim Kardashiant with your Kim Kardashiant.'), texts.join(' | '));
+    assert.ok(texts.includes('Granny\'s Kim Kardashiant takes 1 damage.'), texts.join(' | '));
+    assert.ok(texts.includes('Your Kim Kardashiant takes 1 damage.'), 'capitalised at the start: ' + texts.join(' | '));
+    assert.ok(texts.includes('Your Kim Kardashiant is defeated.'), 'named before it leaves the board: ' + texts.join(' | '));
+    // Once the twin is gone, the plain name is enough.
+    s = pass(s);
+    const t2 = hit(s, 'p1c0', 'p0c1').lastEvents.map(e => e.text);
+    assert.ok(t2.includes('Kim Kardashiant (1 attack) fights Astrophysicat (1 attack).') || t2.some(x => /^Kim Kardashiant \(/.test(x)), t2.join(' | '));
 });
 
 test('a card returned to a full hand is discarded instead', () => {
