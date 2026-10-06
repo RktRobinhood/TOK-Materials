@@ -7,6 +7,7 @@
  *   seed,
  *   player?: { name, team, tactics, axioms, items, consumables, art?, hearts? },  // default: the save's deck
  *   axiomDeck?, battleOptions?,
+ *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
  *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
  *   guide?: { steps: [{ title, text, label, expect, replies, compare? }], create?() → state, coach? },
  *   onEnd(result),
@@ -15,7 +16,8 @@
  * result = { mode, outcome: 'won'|'lost'|'draw', turns, rounds, endReason,
  *            fate: Fate.roll(...) | null, ante, settlement: Ante.settle(...) | null }
  * endReason: 'hearts' | 'reverse-hearts' | 'cannot-act' | 'turn-limit' | 'both-zero'.
- * In guide mode "Leave lesson" ends with outcome 'left'.
+ * In guide mode "Leave lesson", and in a match with nothing at stake (practice or story) "Leave match"
+ * (after a confirm step), end with outcome 'left': no win or loss is counted.
  * The screen never writes to the save itself: the caller applies the result.
  *
  * The human is always player 0 ("You"); the AI is player 1 (Rift.Battle.AI.choose).
@@ -50,6 +52,8 @@
     const REPLY_DELAY = 950;
     const PREVIEW = 600;
     const DRAG_START = 7;
+    const HOVER_DELAY = 380;    // ms before the big preview opens under a resting mouse
+    const SETTLE = 170;         // ms for hand cards to slide into their new places
 
     const el = (...a) => Rift.el(...a);
     const put = (parent, ...kids) => { kids.forEach(k => { if (k != null && k !== false) parent.appendChild(typeof k === 'string' ? root.document.createTextNode(k) : k); }); return parent; };
@@ -134,7 +138,7 @@
         const oppTitle = opp.name || 'Rival';
         const oppShort = opp.shortName || String(oppTitle).split(' · ')[0] || oppTitle;
 
-        let state = guide && guide.create ? guide.create() : E.createBattle({
+        let state = guide && guide.create ? guide.create() : p.initialState ? p.initialState : E.createBattle({
             seed,
             players: [
                 { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts },
@@ -150,7 +154,10 @@
             sel: null, note: '', news: [], timer: null, noteTimer: null, ended: false, busy: false, queue: [],
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
+            hoverBlock: null, confirm: false, handPos: null,
         };
+        // Nothing is at stake in practice and story matches (not the guided lesson): they can be left.
+        const canLeave = !guide && mode === 'practice';
         const nodes = {};
         const inspectables = {};   // key → { node, make } for the big-card preview
         let help = null;
@@ -181,12 +188,12 @@
                 dom.arrow = svgArrow(),
                 dom.floats = el('div.b-floats'),
                 dom.banner = el('div.b-banner', { 'aria-hidden': 'true' }),
-                dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
             ]),
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
             dom.side = el('aside.b-side', {}, [
                 el('div.b-side-top', {}, [
                     el('button.btn.small', { type: 'button', text: 'How to play', onclick: openHelp }),
+                    canLeave ? el('button.btn.small.b-leave', { type: 'button', text: 'Leave match', onclick: askLeave }) : null,
                     el('button.btn.small.b-side-close', { type: 'button', text: 'Close', onclick: () => toggleSide(false) }),
                 ]),
                 dom.wheel = wheelLegend(),
@@ -194,6 +201,9 @@
                 el('details.b-log-wrap.panel', { open: true }, [el('summary', { text: 'What happened' }), dom.log = el('ol.b-log')]),
             ]),
             el('button.btn.small.b-side-toggle', { type: 'button', text: 'Rules & log', onclick: () => toggleSide() }),
+            // The big preview sits over the side panel (or the far edge of the table), never over the
+            // centre lane or End turn. See placeInspect.
+            dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
             dom.overlay = el('div.b-overlay'),
         ]);
         rootEl.appendChild(Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' }));
@@ -202,6 +212,11 @@
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); });
+        // Pressing the mouse anywhere closes the preview (and a waiting one never opens).
+        screen.addEventListener('pointerdown', ev => { if (!ev.pointerType || ev.pointerType === 'mouse') hideInspect(); });
+        // Only one of the Colour wheel and Rules now is open at a time, so neither is squeezed.
+        dom.wheel.addEventListener('toggle', () => { if (dom.wheel.open) dom.rules.open = false; });
+        dom.rules.addEventListener('toggle', () => { if (dom.rules.open) dom.wheel.open = false; });
         screen.addEventListener('dragstart', e => e.preventDefault());
         screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid]')) e.preventDefault(); });
 
@@ -210,14 +225,14 @@
             screen.classList.toggle('side-open', ui.sideOpen);
         }
         function openHelp() {
-            if (help || !Rift.Battles || !Rift.Battles.rules) return;
+            if (help || ui.confirm || !Rift.Battles || !Rift.Battles.rules) return;
             clearTimeout(ui.timer);
             help = Rift.Battles.rules(() => { help = null; if (!ui.ended) schedule(); });
         }
 
         // ---- legality ----
         const decider = () => E.decider(state);
-        const myTurn = () => decider() === ME && !ui.ended && !ui.busy && !ui.preview;
+        const myTurn = () => decider() === ME && !ui.ended && !ui.busy && !ui.preview && !ui.confirm;
         const step = () => (guide ? guide.steps[ui.step] || null : null);
         const matches = expect => a => Object.keys(expect).every(k => a[k] === expect[k]);
         function legal() {
@@ -292,7 +307,7 @@
 
         function schedule() {
             clearTimeout(ui.timer);
-            if (ui.ended || help) return;
+            if (ui.ended || help || ui.confirm) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
             if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a); return; }
             if (ui.queue.length) {
@@ -354,11 +369,23 @@
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
             const d = E.describe(state, cid);
             if (d.sleeping) return name(cid) + ' is asleep. It can attack next turn.';
-            if (d.frozen) return name(cid) + ' was lectured. It can\'t attack this turn.';
+            if (d.frozen) return name(cid) + ' was lectured. ' + frozenText(cid) + '.';
             if (d.activated) return name(cid) + ' used its ability this turn.';
             if (d.attacks) return name(cid) + ' already attacked this turn.';
             if (d.attack <= 0) return name(cid) + ' has 0 attack.';
             return 'No attacks left this turn under the current rules.';
+        }
+
+        // A lectured (frozen) creature: the lecture lasts until the end of its controller's next turn.
+        function frozenText(cid) {
+            const c = state.cards[cid];
+            return c && c.controller === state.active ? 'It can\'t attack this turn' : 'It can\'t attack on its next turn';
+        }
+        // "Granny's Billie Eelish is Elusive: …" for a tactic or Entrance aimed at an Elusive enemy.
+        function elusiveNote(t) {
+            const c = state.cards[t];
+            if (!c || c.kind !== 'creature' || c.controller === ME || !state.players[OPP].board.includes(t) || !E.hasKeyword(state, t, 'elusive')) return '';
+            return targetName(t) + ' is Elusive: tactics and abilities can\'t target it.';
         }
 
         // Why an attacker can't hit this target: Guard first, else the general hint.
@@ -412,6 +439,8 @@
                 !d.lines.length && !d.keywords.length ? [el('span.bc-ab.none', { text: d.silenced ? 'No abilities' : '—' })] : []));
         }
 
+        const ordinal = n => n + (n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th');
+
         function creatureFace(cid, size) {
             const d = E.describe(state, cid);
             const frame = bg('ui/card-' + d.printedColour) || bg('ui/card-' + d.colour);
@@ -437,7 +466,9 @@
                 gem('health', d.health, hpClass),
                 d.keywords.includes('shield') ? el('div.bc-bubble') : null,
                 d.sleeping ? icon('ui/state-sleeping', 'Zzz', 'state.sleep', 'Asleep') : null,
-                d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', 'Can\'t attack this turn') : null,
+                d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', frozenText(cid)) : null,
+                // A second attack this turn (the Axiom of Haste or an ability): say why it glows again.
+                d.onBoard && d.attacks > 0 && d.canAttack ? el('span.b-again', { text: ordinal(d.attacks + 1) + ' attack' }) : null,
             ];
         }
 
@@ -447,13 +478,15 @@
             const KT = B().KEYWORD_TEXT || {};
             const lines = [];
             if (d.sleeping) lines.push('💤 Asleep: it can attack next turn.');
-            else if (d.frozen) lines.push('❄ It can\'t attack this turn.');
+            else if (d.frozen) lines.push('❄ Lectured: ' + frozenText(cid).replace(/^It c/, 'it c') + '.');
+            else if (d.onBoard && d.canAttack && d.attacks > 0 && state.cards[cid].controller === ME && decider() === ME) lines.push('✅ Ready again: the rules let it attack ' + (d.attacks === 1 ? 'twice' : 'again') + ' this turn (' + ordinal(d.attacks + 1) + ' attack).');
             else if (d.onBoard && d.canAttack && state.cards[cid].controller === ME && decider() === ME) lines.push('✅ Ready: drag it onto a target to attack.');
             d.keywords.forEach(k => { if (KT[k]) lines.push(KT[k]); });
             if (d.damaged) lines.push('Health ' + d.health + ' of ' + d.maxHealth + '. Damage stays.');
             d.attackParts.filter(x => x.source !== 'base').forEach(x => lines.push(x.label + ': ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack.'));
             const tags = [];
-            if (d.loaner) tags.push('Loaned');
+            // Only your own borrowed cards are tagged (an opponent's team is never "loaned").
+            if (d.loaner && state.cards[cid].owner === ME) tags.push('Loaned');
             if (d.trophyOf) tags.push('🏆 ' + d.trophyOf);
             if (d.taught) tags.push('Learned: ' + d.taught);
             if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
@@ -584,9 +617,9 @@
                 if (ui.drag || (ev.pointerType && ev.pointerType !== 'mouse')) return;
                 // Pointing at a target with an attacker chosen shows the fight preview instead.
                 if (ui.sel && ui.sel.kind === 'board' && node.classList.contains('valid')) return;
-                clearTimeout(ui.inspectTimer);
-                const showing = dom.inspect.classList.contains('show');
-                ui.inspectTimer = setTimeout(() => showInspect(make(), node, key), showing ? 0 : 220);
+                // Right after a drag the mouse often rests on a card: wait until it moves.
+                if (ui.hoverBlock) return;
+                waitInspect(node, make, key);
             });
             node.addEventListener('pointerleave', ev => { if (!ev || !ev.pointerType || ev.pointerType === 'mouse') hideInspect(); });
             node.addEventListener('focus', () => { let kb = true; try { kb = node.matches(':focus-visible'); } catch (e) { /* old browser */ } if (kb) showInspect(make(), node, key); });
@@ -610,6 +643,15 @@
                 }
             });
         }
+        // A resting mouse opens the preview after a short delay (quicker when one is already open).
+        function waitInspect(node, make, key) {
+            clearTimeout(ui.inspectTimer);
+            const showing = dom.inspect.classList.contains('show');
+            ui.inspectTimer = setTimeout(() => {
+                if (ui.drag || ui.hoverBlock || ui.confirm) return;
+                showInspect(make(), node, key);
+            }, showing ? 120 : HOVER_DELAY);
+        }
         function cancelLongPress() {
             if (ui.longPress) clearTimeout(ui.longPress.timer);
             ui.longPress = null;
@@ -623,26 +665,34 @@
             ui.inspect = { key: key || null, zone: zoneOf(anchor), anchor };
             placeInspect(anchor);
         }
-        // Next to the card (right, else left); above it for hand cards. Always inside the arena.
+        // Over the side panel (Rules now and the log), level with the card where it fits, so it
+        // never covers the centre lane, the instruction bar or End turn. Without a side panel
+        // (narrow screens) it goes to the far edge of the table, in the card's half.
         function placeInspect(anchor) {
-            if (!anchor || !anchor.getBoundingClientRect || !dom.arena.getBoundingClientRect) return;
-            const box = dom.arena.getBoundingClientRect();
+            if (!anchor || !anchor.getBoundingClientRect || !screen.getBoundingClientRect) return;
+            const box = screen.getBoundingClientRect();
             const a = anchor.getBoundingClientRect();
             const p = dom.inspect.getBoundingClientRect();
             if (!p.width || !box.width) return;
-            const m = 8, gap = 14;
-            const ax = a.left - box.left, ay = a.top - box.top;
-            let x, y;
-            if (zoneOf(anchor) === 'hand') {
-                x = ax + a.width / 2 - p.width / 2;
-                y = ay - p.height - gap;
+            const m = 6;
+            const side = dom.side.getBoundingClientRect ? dom.side.getBoundingClientRect() : { width: 0 };
+            const ar = dom.arena.getBoundingClientRect();
+            const cy = a.top + a.height / 2 - box.top;
+            let x, y = cy - p.height / 2;
+            let top = m;
+            if (side.width >= p.width * 0.9 && side.height > 0) {
+                x = side.left - box.left + (side.width - p.width) / 2;
+                // Keep How to play / Leave match uncovered when there is room.
+                const bar = dom.side.firstChild && dom.side.firstChild.getBoundingClientRect ? dom.side.firstChild.getBoundingClientRect() : null;
+                if (bar && bar.height && bar.bottom - box.top + 4 + p.height <= box.height - m) top = bar.bottom - box.top + 4;
             } else {
-                x = ax + a.width + gap;
-                if (x + p.width > box.width - m) x = ax - p.width - gap;
-                y = ay + a.height / 2 - p.height / 2;
+                const leftHalf = a.left + a.width / 2 < ar.left + ar.width / 2;
+                x = leftHalf ? ar.right - box.left - p.width - m : ar.left - box.left + m;
+                const laneMid = ar.top - box.top + ar.height / 2;
+                y = cy < laneMid ? ar.top - box.top + m : ar.bottom - box.top - p.height - m;
             }
             x = Math.max(m, Math.min(box.width - p.width - m, x));
-            y = Math.max(m, Math.min(box.height - p.height - m, y));
+            y = Math.max(top, Math.min(box.height - p.height - m, y));
             dom.inspect.style.left = Math.round(x) + 'px';
             dom.inspect.style.top = Math.round(y) + 'px';
         }
@@ -724,6 +774,7 @@
             hideInspect(true);
             [dom.myBoard, dom.oppBoard, dom.lane].forEach(n => { n.classList.remove('guide-ring'); n.classList.remove('guide-focus'); });
             const L = legal();
+            ui.sparkFor = !guide && decider() === ME ? sparkHelp(L) : null;
             const tmap = targetMap(ui.sel, L);
             const valid = new Set(tmap.keys());
             const targeting = valid.size > 0;
@@ -748,7 +799,7 @@
             dom.myLeft.innerHTML = '';
             put(dom.myLeft, heroEl(ME, valid, L), el('div.b-left', {}, [
                 infoEl(ME),
-                P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : ''), {
+                P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : '') + (ui.sparkFor ? '.glow' : ''), {
                     type: 'button', disabled: !spark, title: 'Once per match: +1 energy this turn (you went second).',
                     onclick: () => { if (spark) act(spark); },
                 }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
@@ -789,16 +840,20 @@
                 });
             });
 
-            // my hand
+            // my hand (cards that stay slide from their old places, so the card you see is the card you grab)
+            const oldHand = handPositions();
             dom.myHand.innerHTML = '';
             const plays = new Set(L.filter(a => a.type === 'play').map(a => a.cid));
             const axPlays = new Set(L.filter(a => a.type === 'axiom').map(a => a.choice));
             const handItems = P.hand.length + P.axHand.length;
             dom.myHand.style.setProperty('--n', String(Math.max(1, handItems)));
             let i = 0;
+            // In my main phase, a card that can't be played right now is dimmed.
+            const myMain = decider() === ME && state.phase === 'main' && !ui.busy && !ui.ended;
             P.hand.forEach(cid => {
                 const classes = [];
                 if (plays.has(cid)) classes.push('playable');
+                else if (myMain) classes.push('unplayable');
                 if (ui.sel && ui.sel.kind === 'hand' && ui.sel.cid === cid) classes.push('selected');
                 if (valid.has(cid)) classes.push('valid');
                 const node = cardEl(cid, { size: 'hand', classes, onclick: () => clickHand(cid, L), drag: plays.has(cid) ? { kind: 'hand', cid } : { kind: 'hand', cid, blocked: true } });
@@ -808,13 +863,17 @@
             P.axHand.forEach(id => {
                 const classes = [];
                 if (axPlays.has(id)) classes.push('playable');
+                else if (myMain) classes.push('unplayable');
                 if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
+                // A rule card that would change nothing (that rule is already on) says so on the card.
+                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 if (!nodes['ax:' + id]) nodes['ax:' + id] = node;
                 fan(node, i++, handItems);
                 dom.myHand.appendChild(node);
             });
             if (!handItems) dom.myHand.appendChild(el('div.b-empty', { text: 'Your hand is empty.' }));
+            settleHand(oldHand);
 
             // Click-click: pointing at (or focusing) a glowing target shows the predicted fight.
             if (ui.sel && ui.sel.kind === 'board') {
@@ -844,6 +903,34 @@
             turnBanner();
         }
 
+        // Hand card positions by key (cid, or axiom id plus copy number), for the settle animation.
+        function handPositions() {
+            const out = {};
+            const seen = {};
+            Array.from(dom.myHand.children || []).forEach(n => {
+                if (!n.dataset || !n.getBoundingClientRect) return;
+                const k = n.dataset.cid || 'ax:' + n.dataset.axiom;
+                seen[k] = (seen[k] || 0) + 1;
+                out[k + '#' + seen[k]] = n.getBoundingClientRect().left;
+            });
+            return out;
+        }
+        // Cards that moved slide quickly into their new places (a short settle; none under calm motion).
+        function settleHand(old) {
+            if (calmMotion() || !Object.keys(old).length) return;
+            const now = handPositions();
+            const seen = {};
+            Array.from(dom.myHand.children || []).forEach(n => {
+                if (!n.dataset || !n.animate) return;
+                const k = n.dataset.cid || 'ax:' + n.dataset.axiom;
+                seen[k] = (seen[k] || 0) + 1;
+                const key = k + '#' + seen[k];
+                const dx = old[key] == null ? 0 : old[key] - now[key];
+                if (Math.abs(dx) < 2) return;
+                try { n.animate([{ translate: dx + 'px 0' }, { translate: '0 0' }], { duration: SETTLE, easing: 'ease-out' }); } catch (e) { /* no WAAPI */ }
+            });
+        }
+
         // A gentle fan: outer cards tilt a little and sit a few pixels lower. Cards stay fully visible.
         function fan(node, i, n) {
             const mid = (n - 1) / 2;
@@ -858,7 +945,14 @@
             if (!mine || ui.bannerTurn === state.turn) return;
             ui.bannerTurn = state.turn;
             dom.banner.innerHTML = '';
-            put(dom.banner, el('div.b-banner-title', { text: 'Your turn' }), el('div.b-banner-sub', { text: 'First, choose your draw.' }));
+            // Guide mode: Granny's script may draw for you (a reply), so the line follows the lesson.
+            let sub = 'First, choose your draw.';
+            if (guide) {
+                const queued = ui.busy && ui.queue.length;
+                const next = ui.busy ? guide.steps[ui.step + 1] : step();
+                sub = queued || !next || next.expect.type !== 'draw' ? '' : 'Do this: ' + next.label + '.';
+            }
+            put(dom.banner, el('div.b-banner-title', { text: 'Your turn' }), sub ? el('div.b-banner-sub', { text: sub }) : null);
             dom.banner.classList.remove('show');
             void dom.banner.offsetWidth;
             dom.banner.classList.add('show');
@@ -876,14 +970,17 @@
                 const max = Math.max(state.options.fateGap || 6, next.turns);
                 for (let k = max; k >= 1; k--) pips.push(el('span.pip' + (k === next.turns ? '.marker' : k < next.turns ? '.ahead' : '.past'), k === next.turns ? { style: bg('ui/fate-marker') } : {}));
                 const evIcon = icon(next.type === 'reset' ? 'ui/fate-reset' : 'ui/fate-flip', next.type === 'reset' ? '↺' : '✦', 'fate-ev');
-                put(fate, 
+                put(fate,
                     el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), { style: bg('ui/fate-track') }, pips.concat([evIcon])),
-                    el('div.b-fate-text', { text: fateText(next) }),
+                    el('div.b-fate-text', { text: fateShort(next) }),
                 );
             } else put(fate, el('div.b-fate-text', { text: 'No Fate track in this match.' }));
             const active = changedRules();
+            // At most three rows fit in the lane: with four or more rules, two chips and "+N more".
+            const shown = active.length > 3 ? active.slice(0, 2) : active;
+            const more = active.slice(shown.length);
             const rulesRow = el('div.b-lane-rules', {}, active.length
-                ? active.map(ax => {
+                ? shown.map(ax => {
                     const make = () => [axiomCardEl(ax.id, { size: 'big' }), axiomNote(ax.id)];
                     const chip = el('div.b-rule-chip', { tabindex: 0, role: 'button', 'aria-label': 'Active rule ' + ax.name + ': ' + ax.text }, [
                         has('ui/axiom-' + ax.id) ? Rift.Assets.img('ui/axiom-' + ax.id, { alt: '' }) : el('span', { text: '⚖' }),
@@ -897,13 +994,36 @@
                         else showInspect(make(), chip, 'rule:' + ax.id);
                     });
                     return chip;
-                })
+                }).concat(more.length ? [moreChip(active, more.length)] : [])
                 : [el('span.b-basic', { text: 'Basic rules' })]);
             const deckN = state.axioms.deck.length;
             put(dom.lane, fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [
                 rulesRow,
                 el('div.b-axdeck', { title: 'Shared axiom deck: ' + deckN + ' cards, ' + state.axioms.discard.length + ' discarded' }, [cardBack(true), el('span', { text: String(deckN) })]),
             ]), dom.draw, dom.end);
+        }
+
+        // "+2 more" chip: its preview lists every changed rule.
+        function moreChip(active, n) {
+            const make = () => [el('div.b-notes.b-rule-list', {}, [el('div.b-note-line', {}, [el('b', { text: 'Changed rules now (' + active.length + ')' })])].concat(
+                active.map(ax => el('div.b-note-line', {}, [el('b', { text: ax.name + ' (' + ax.category + '): ' }), ax.text]))))];
+            const chip = el('div.b-rule-chip.more', { tabindex: 0, role: 'button', 'aria-label': n + ' more changed rules: ' + active.map(ax => ax.name).join(', ') }, [
+                el('span', { text: '+' + n + ' more' }),
+            ]);
+            hoverInspect(chip, make, 'rule:more');
+            chip.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), chip, 'rule:more'); });
+            return chip;
+        }
+
+        // Short Fate wording for the lane (two lines at most); the long one is in its tooltip.
+        function fateShort(ev) {
+            const when = 'In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ';
+            if (ev.type === 'reset') return when + (changedRules().length ? 'all rules go back to normal.' : 'rules reset (no change now).');
+            const top = state.axioms.deck[0];
+            const ax = top && (Rift.data.axioms || {})[top];
+            if (ax) return when + 'new rule (' + ax.name + ').';
+            if (!state.axioms.deck.length && !state.axioms.discard.length) return when + 'no rule card is left.';
+            return when + 'a new rule card.';
         }
 
         // Plain Fate track wording: "In 6 turns: a new rule card turns over (Wounds Remain)".
@@ -994,7 +1114,8 @@
                         : canPlay ? 'Drag a glowing card to play it. Then End turn.'
                             : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
                                 : canActivate ? 'Click a ready creature (green glow) to use its ability.'
-                                    : 'Nothing left to do. Press End turn.';
+                                    : ui.sparkFor ? 'Use the Spark (+1 energy) to play ' + ui.sparkFor + '?'
+                                        : 'Nothing left to do. Press End turn.';
                 } else if (sel.kind === 'board') {
                     const tm = targetMap(sel, L);
                     const acts = L.filter(a => a.type === 'activate' && a.cid === sel.cid);
@@ -1035,14 +1156,31 @@
                 }
                 if (sel) buttons.appendChild(button('Cancel', () => clearSel()));
             }
+            // The lane is short: with buttons, a note takes the place of the instruction and the
+            // "what just happened" lines are left out (they are in the log), so nothing overlaps.
+            const withButtons = buttons.children ? buttons.children.length > 0 : false;
+            box.classList.toggle('has-buttons', withButtons);
+            box.classList.toggle('has-note', !!ui.note);
             if (ui.note) box.appendChild(el('div.b-note', { text: ui.note }));
-            else if (ui.news.length) box.appendChild(el('div.b-news', {}, ui.news.slice(-2).map(t => el('div', { text: t }))));
+            else if (ui.news.length && !withButtons) box.appendChild(el('div.b-news', {}, ui.news.slice(-2).map(t => el('div', { text: t }))));
+        }
+
+        // The second player's Spark: a card that becomes playable with +1 energy (null if none).
+        function sparkHelp(L) {
+            const sp = L.find(a => a.type === 'spark');
+            if (!sp || state.phase !== 'main' || L.some(a => a.type === 'play' || a.type === 'axiom')) return null;
+            try {
+                const next = E.applyAction(state, Object.assign({ player: ME }, sp));
+                const a = E.legalActions(next).find(x => x.type === 'play') || E.legalActions(next).find(x => x.type === 'axiom');
+                if (!a) return null;
+                return a.type === 'play' ? name(a.cid) : ((Rift.data.axioms || {})[a.choice] || { name: a.choice }).name;
+            } catch (e) { return null; }
         }
 
         function renderEnd(L) {
             dom.end.innerHTML = '';
             const end = L.find(a => a.type === 'end');
-            const onlyEnd = end && !L.some(a => a.type !== 'end' && a.type !== 'spark');
+            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark');
             const style = bg('ui/end-turn');
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
@@ -1065,12 +1203,20 @@
             const choices = E.drawChoices(state);
             const full = P.hand.length + P.axHand.length >= state.options.handLimit;
             const tl = E.timeline(state);
+            // Short enough to fit at 1280 px: "Rule card in 4", "Reset in 3", "Reset (no change now)".
+            const after = n => {
+                const ev = tl[0];
+                if (ev.type === 'reset' && !changedRules().length) return 'Reset (no change now)';
+                return (ev.type === 'reset' ? 'Reset' : 'Rule card') + (n <= 0 ? ' now' : ' in ' + n);
+            };
+            const noFate = !state.options.timeline ? 'No Fate track in this match.' : '';
             const why = {
                 deck: full ? 'Your hand is full.' : !P.deck.length ? 'Your deck is empty.' : P.deck.length + ' cards left',
                 axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The axiom deck is empty.' : 'Shared deck: ' + state.axioms.deck.length,
-                forward: !state.options.timeline ? 'No Fate track in this match.' : tl.length ? (tl[0].type === 'reset' ? 'Reset' : 'New rule') + ' in ' + tl[0].turns + ' → ' + Math.max(0, tl[0].turns - 2) + ' turns' : '',
-                rewind: !state.options.timeline ? 'No Fate track in this match.' : tl.length ? (tl[0].type === 'reset' ? 'Reset' : 'New rule') + ' in ' + tl[0].turns + ' → ' + Math.min(state.options.fateMax, tl[0].turns + 2) + ' turns' : '',
+                forward: noFate || (tl.length ? after(tl[0].turns - 2) : ''),
+                rewind: noFate || (tl.length ? after(Math.min(state.options.fateMax, tl[0].turns + 2)) : ''),
             };
+            const fateNow = !noFate && tl.length ? ' Now: ' + fateText(tl[0], true) : '';
             const st = step();
             const DRAW_ICON = { deck: '🂠', axiom: '⚖', forward: '⏩', rewind: '⏪' };
             const none = L.find(x => x.type === 'draw' && x.choice === 'none');
@@ -1079,7 +1225,7 @@
                 const possible = choices.includes(choice);
                 const b = el('button.b-draw-btn', {
                     type: 'button', disabled: !a, dataset: { choice },
-                    title: DRAW_TEXT[choice][1] + (why[choice] ? '. ' + why[choice] : ''),
+                    title: DRAW_TEXT[choice][1] + (why[choice] ? '. ' + why[choice].replace(/\.?$/, '.') : '') + (choice === 'forward' || choice === 'rewind' ? fateNow : ''),
                     onclick: () => { if (a) act(a); },
                 }, [el('span.b-draw-icon', { text: DRAW_ICON[choice], 'aria-hidden': 'true' }), el('span.b-draw-words', {}, [
                     el('strong', { text: DRAW_TEXT[choice][0] }),
@@ -1162,6 +1308,39 @@
             ui.ended = true;
             clearTimeout(ui.timer);
             stopVoice();
+            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null };
+            handle.result = result;
+            if (typeof p.onEnd === 'function') p.onEnd(result);
+        }
+
+        // Practice and story matches: "Leave match" asks first, then ends with outcome 'left'.
+        function askLeave() {
+            if (ui.ended || ui.confirm || help) return;
+            ui.confirm = true;
+            clearTimeout(ui.timer);
+            cancelDrag();
+            hideInspect();
+            const stay = button('Keep playing', () => {
+                ui.confirm = false;
+                dom.overlay.classList.remove('show');
+                dom.overlay.innerHTML = '';
+                render();
+                schedule();
+            }, 'primary');
+            const go = button('Leave match', leaveMatch, 'b-leave-confirm');
+            dom.overlay.innerHTML = '';
+            dom.overlay.appendChild(el('div.b-end-panel.panel.b-confirm', { role: 'dialog', 'aria-label': 'Leave this match?' }, [el('div.b-end-body', {}, [
+                el('h2', { text: 'Leave this match?' }),
+                el('p', { text: 'Nothing is at stake: no win or loss is counted. Your creatures are safe.' + (p.story ? ' You can try Syllo\'s challenge again later.' : '') }),
+                el('div.b-buttons', {}, [stay, go]),
+            ])]));
+            dom.overlay.classList.add('show');
+            if (stay.focus) try { stay.focus(); } catch (e) { /* ignore */ }
+        }
+        function leaveMatch() {
+            if (ui.ended) return;
+            ui.ended = true;
+            clearTimeout(ui.timer);
             const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null };
             handle.result = result;
             if (typeof p.onEnd === 'function') p.onEnd(result);
@@ -1253,6 +1432,8 @@
             if (clickTarget(cid, L)) return;
             const c = state.cards[cid];
             const mine = c.controller === ME && state.players[ME].board.includes(cid);
+            // A tactic, Entrance or ability waiting for a target, and an Elusive enemy is clicked.
+            if (!mine && ui.sel && (ui.sel.kind === 'hand' || ui.sel.kind === 'activate') && elusiveNote(cid)) { setNote(elusiveNote(cid)); return; }
             // An attacker is selected and this enemy is not a valid target (for example: Guard).
             if (!mine && ui.sel && ui.sel.kind === 'board' && state.players[OPP].board.includes(cid)) { setNote(badTargetNote(ui.sel.cid, cid)); return; }
             if (mine && L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid)) {
@@ -1276,8 +1457,12 @@
             if (ui.busy || decider() !== ME) return 'Wait for your turn.';
             if (state.phase === 'draw') return 'First choose your draw.';
             if (state.phase === 'choose') return 'First answer the question.';
+            if (!axiomChanges(id)) return whyNotAxiomRule(id);
             return 'This rule card needs ' + E.axiomCost(state, id) + ' energy. You have ' + state.players[ME].energy + '.';
         }
+        // The engine leaves out rule cards that would change nothing (same rule already on).
+        const axiomChanges = id => !E.axiomWouldChange || E.axiomWouldChange(state, id);
+        const whyNotAxiomRule = id => 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.';
         function clickAxiom(id, L) {
             if (!L.some(a => a.type === 'axiom' && a.choice === id)) { setNote(whyNotAxiom(id)); return; }
             ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };
@@ -1317,6 +1502,13 @@
         function onPointerMove(ev) {
             const lp = ui.longPress;
             if (lp && ev.pointerId === lp.id && !lp.shown && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) >= DRAG_START) cancelLongPress();
+            // After a drag, hover previews wait until the mouse really moves; then the card under it may open one.
+            const hb = ui.hoverBlock;
+            if (hb && !ui.drag && Math.hypot(ev.clientX - hb.x, ev.clientY - hb.y) >= 12) {
+                ui.hoverBlock = null;
+                const under = Object.keys(inspectables).find(k => inspectables[k].node.contains && inspectables[k].node.contains(ev.target));
+                if (under && ev.pointerType === 'mouse') waitInspect(inspectables[under].node, inspectables[under].make, under);
+            }
             // A mouse that has left the previewed card hides the preview (also after a re-render).
             if (ev.pointerType === 'mouse' && ui.inspect && ui.inspect.anchor && ev.target && ui.inspect.anchor.contains
                 && !ui.inspect.anchor.contains(ev.target) && dom.inspect.classList.contains('show')) {
@@ -1385,13 +1577,21 @@
             if (!d || ev.pointerId !== d.id) return;
             if (d.blocked) {
                 ui.drag = null;
-                if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) >= DRAG_START * 3) setNote(d.info.kind === 'axiom' ? whyNotAxiom(d.info.id) : whyNot(d.info.cid));
+                if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) >= DRAG_START) ui.hoverBlock = { x: ev.clientX, y: ev.clientY };
+                if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) >= DRAG_START * 3) {
+                    let why = d.info.kind === 'axiom' ? whyNotAxiom(d.info.id) : whyNot(d.info.cid);
+                    // A tactic whose only possible targets are Elusive, dropped on one of them.
+                    const at = d.info.kind === 'hand' && /no target/.test(why) ? (hitTarget(ev.clientX, ev.clientY) || {}).target : null;
+                    if (at && elusiveNote(at)) why = elusiveNote(at);
+                    setNote(why);
+                }
                 return;
             }
             if (!d.active) { ui.drag = null; return; }
             const hit = hitTarget(ev.clientX, ev.clientY) || {};
             const info = d.info;
             cancelDrag();
+            ui.hoverBlock = { x: ev.clientX, y: ev.clientY };
             ui.suppressClick = true;
             setTimeout(() => { ui.suppressClick = false; }, 0);
             const L = legal();
@@ -1416,6 +1616,9 @@
             if (!onTable) { if (plays.length) setNote('Drop it higher, on the table, to play it.'); return; }
             const plain = plays.find(x => !x.target);
             if (plain) { act(plain); return; }
+            // Dropped on an Elusive enemy: say why, and leave the card in the hand (no waiting copy).
+            const elusive = hit.target ? elusiveNote(hit.target) : '';
+            if (elusive) { setNote(elusive); return; }
             if (plays.length) {
                 // A targeted Entrance or tactic: keep the card chosen and ask for the target.
                 ui.sel = { kind: 'hand', cid: info.cid, pending: true };

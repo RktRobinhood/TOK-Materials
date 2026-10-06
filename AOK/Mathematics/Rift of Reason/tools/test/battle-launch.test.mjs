@@ -68,3 +68,12 @@ test('How to play lists the keywords and the colour wheel hint',()=>{
  assert.match(all,/Colour wheel: a creature gets \+1 attack/);
  assert.ok(!/fate roll/i.test(all));
 });
+test('leaving a practice or story match counts nothing and goes back',()=>{
+ const g=game(),{Rift}=g;const stats=JSON.stringify(g.state.stats);
+ Rift.Battles.practice();const pr=g.routes.at(-1).params;pr.onEnd({mode:'practice',outcome:'left'});
+ assert.equal(g.routes.at(-1).screen,'collection');assert.equal(JSON.stringify(g.state.stats),stats);
+ Rift.Battles.story();const p=g.routes.at(-1).params;const modals=g.modals.length;
+ p.onEnd({mode:'practice',outcome:'left'});
+ assert.equal(g.routes.at(-1).screen,'map');assert.equal(g.modals.length,modals,'no "Try again" modal');
+ assert.equal(g.state.flags['story-battle-won'],undefined);assert.equal(JSON.stringify(g.state.stats),stats);
+});

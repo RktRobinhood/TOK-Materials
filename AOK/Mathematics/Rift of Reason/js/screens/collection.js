@@ -227,10 +227,13 @@
             boxes.push({id,input});
             return el('label',null,[input,el('span',null,[el('strong',{text:ax.name}),el('div.small',{text:ax.category+': '+ax.text})])]);
         }));
-        const dialog=Rift.UI.modal('Build your ten-card axiom deck',el('div.stack',null,[
+        // Same layout as the team builder: intro and count on top, the list scrolls, buttons stay visible.
+        const dialog=Rift.UI.modal('Build your ten-card axiom deck',el('div.stack.deck-editor',null,[
             el('p',{text:'Choose rules that help your creatures. Your ten cards and the opponent’s ten are shuffled together. Both players can use any offered rule; you do not know the full order.'}),
-            count,grid,
+            count,el('div.deck-scroll',null,[grid]),
         ]),[{label:'Cancel'},{label:'Save ten cards',primary:true,keepOpen:true,onclick(){if(selected.size!==10){count.textContent='Choose exactly ten cards before saving.';return;}Rift.State.update(st=>{st.axiomLoadout=Array.from(selected);});dialog.close();Rift.UI.toast('Your ten-card axiom deck is saved.');}}]);
+        const box=dialog.node&&dialog.node.querySelector?dialog.node.querySelector('.modal'):null;
+        if(box)box.classList.add('deck-modal');
         refresh();
     }
 

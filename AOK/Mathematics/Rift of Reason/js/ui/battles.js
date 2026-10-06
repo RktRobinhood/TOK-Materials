@@ -82,6 +82,8 @@
 
     function finish(result, opts) {
         const o = opts || {};
+        // "Leave match" (practice and story only): nothing is counted or settled.
+        if (result.outcome === 'left') { Rift.Router.replace(o.back || 'map'); return; }
         let reward = null;
         Rift.State.update(s => {
             if (result.mode !== 'practice') Rift.Battle.Ante.applyToSave(s, result);
@@ -148,7 +150,7 @@
                 'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
                 'The Fate track moves 1 space every End turn. At zero, the top card of the shared rule deck turns over, or all rules go back to normal. Read Rules now: even the victory goal can change.',
                 'The player who goes first starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[0] + ' cards. The player who goes second starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[1] + ' and gets the Spark: +1 energy once.',
-                'Practice and Syllo’s story challenge have no stakes. Other matches may risk items or cards.',
+                'Practice and Syllo’s story challenge have no stakes. You can leave them at any time (Leave match). Other matches may risk items or cards.',
             ].map(text=>el('p.small',{text})).concat([
                 el('h3',{text:'Keywords'}),
                 el('div.rules-keywords',null,[
@@ -195,6 +197,7 @@
                     team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS},
                 onEnd(result){
                     finish(result);
+                    if(result.outcome==='left')return;
                     if(result.outcome==='won'){
                         Rift.State.update(s=>{s.flags['story-battle-won']=true;});
                         // Rebuild the map after setting the flag so the Road unlock is visible immediately.

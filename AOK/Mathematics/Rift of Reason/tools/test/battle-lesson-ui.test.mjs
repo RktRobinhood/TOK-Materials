@@ -133,3 +133,13 @@ test('the instruction bar repeats each step\'s "Do this"; Guard explains a wrong
     });
     assert.match(t.$('.b-overlay').textContent, /took away a Guard with an Entrance/);
 });
+
+test('"Your turn" follows the lesson: no "choose your draw" when Granny\'s script draws for you', () => {
+    const t = setup(() => {});
+    const L = t.Rift.Battle.Lesson;
+    assert.match(t.$('.b-banner').textContent, /Your turn.*Do this: Draw from your deck\./);
+    // Steps 1-3; step 3's replies end with your draw from the deck.
+    for (let i = 0; i < 3; i++) { perform(t, L.steps[i].expect); t.g.flush(); }
+    assert.match(t.$('.b-banner').textContent, /^Your turn$/);
+    t.handle.destroy();
+});

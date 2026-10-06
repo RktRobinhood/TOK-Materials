@@ -246,7 +246,9 @@ test('a long opponent title stays out of the log; story end screen, keywords, Fa
     const pill = $('.b-hero-row.opp .b-hero-name');
     assert.equal(pill.textContent, 'Sergeant Syllo');
     assert.equal(pill.title, 'Sergeant Syllo · Road challenge');
-    assert.match($('.b-fate-text').textContent, /^In \d+ turns: a new rule card turns over \(.+\)\.$/);
+    // The lane says it short; the tooltip and Rules now have the long explanation.
+    assert.match($('.b-fate-text').textContent, /^In \d+ turns: new rule \(.+\)\.$/);
+    assert.match($('.b-fate').title, /the top card of the shared deck/);
     assert.match($('.b-rules').textContent, /the top card of the shared deck/);
     assert.match($('.b-rules').textContent, /Keywords.*Guard.*Swift.*Shield.*Elusive.*Spark.*Entrance.*Last Word.*Activate/);
     toSecondTurn(t);
@@ -301,5 +303,191 @@ test('card faces name the timing of each ability', () => {
     assert.match(text, /Last Word:Metaverse/);
     assert.match(text, /Entrance:Whisper/);
     assert.match(text, /Activate \(1⚡\):Well, Actually/);
+    t.handle.destroy();
+});
+
+// ---- round-2 playtest fixes ----
+
+// A prepared match (engine state edited by hand), so one situation can be checked directly.
+// cfg: { me: [species], opp: [species], myTactics?, myLoaned?, oppLoaned?, phase?, energy? }, then edit(s, move).
+function prepared(cfg, edit) {
+    const holder = setup(practice);
+    const E = holder.E;
+    holder.handle.destroy();
+    const mk = (ids, prefix, loaner) => ids.map((species, i) => ({ uid: prefix + i, species, injuries: [], scars: [], powerDelta: 0, loaner: !!loaner }));
+    const tactics = cfg.myTactics || [];
+    const s = E.createBattle({
+        seed: 'prepared',
+        players: [{ name: 'You', team: mk(cfg.me, 'me-', cfg.myLoaned), tactics }, { name: 'Dummy', team: mk(cfg.opp, 'opp-', cfg.oppLoaned), tactics: [] }],
+        axiomDeck: ['thrift', 'luxury', 'arrival', 'mercy'],
+        options: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [0, 0], openAxioms: 0, deckSize: cfg.me.length + tactics.length, minCreatures: 1 },
+    });
+    const move = (cid, p, zone) => {
+        const P = s.players[p];
+        ['deck', 'hand', 'board'].forEach(z => { P[z] = P[z].filter(x => x !== cid); });
+        P[zone].push(cid);
+        if (zone === 'board') s.cards[cid].enteredTurn = -1;
+    };
+    s.phase = cfg.phase || 'main';
+    s.players[0].energy = s.players[0].capacity = cfg.energy == null ? 5 : cfg.energy;
+    edit(s, move);
+    return setup(Object.assign({}, practice, { initialState: s }));
+}
+const hover = (t, sel) => { t.$(sel).dispatchEvent(mouse({ type: 'pointerenter' })); t.g.flush(); return t.$('.b-inspect').classList.contains('show') ? t.$('.b-inspect').textContent : ''; };
+
+test('practice and story can be left after a confirm step; the lesson and risked matches have no Leave match', () => {
+    const t = setup(practice);
+    const btn = () => t.root.querySelectorAll('button').find(b => b.textContent === 'Leave match' && !b.closest('.b-overlay'));
+    assert.ok(btn(), 'practice has Leave match');
+    btn().click();
+    assert.ok(t.$('.b-overlay').classList.contains('show'));
+    assert.match(t.$('.b-overlay').textContent, /Leave this match\?.*no win or loss is counted/);
+    t.root.querySelectorAll('.b-overlay button').find(b => b.textContent === 'Keep playing').click();
+    assert.equal(t.$('.b-overlay').classList.contains('show'), false);
+    assert.equal(t.results.length, 0);
+    t.$('.b-draw-btn[data-choice="deck"]').click();
+    assert.equal(t.handle.state.phase, 'main', 'the match goes on after Keep playing');
+    btn().click();
+    t.root.querySelectorAll('.b-overlay button').find(b => b.textContent === 'Leave match').click();
+    assert.equal(t.results.length, 1);
+    assert.equal(t.results[0].outcome, 'left');
+    assert.equal(t.results[0].fate, null);
+    t.handle.destroy();
+    const risky = setup(Object.assign({}, practice, { mode: 'trainer' }));
+    assert.ok(!risky.root.querySelectorAll('button').some(b => b.textContent === 'Leave match'), 'no Leave match when something is at stake');
+    risky.handle.destroy();
+    const lesson = setup({}, { screen: 'battle-lesson' });
+    assert.ok(!lesson.root.querySelectorAll('button').some(b => b.textContent === 'Leave match'));
+    lesson.handle.destroy();
+});
+
+test('Fate draw buttons show the new count in short words', () => {
+    const t = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true }) }));
+    assert.equal(t.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Rule card in 4');
+    assert.equal(t.$('.b-draw-btn[data-choice="rewind"] small').textContent, 'Rule card in 8');
+    assert.match(t.$('.b-draw-btn[data-choice="forward"]').title, /Now: In 6 turns/);
+    t.handle.destroy();
+    const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
+    assert.equal(r.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Reset (no change now)');
+    assert.match(r.$('.b-fate-text').textContent, /no change now/);
+    r.handle.destroy();
+    const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
+    assert.equal(c.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Reset in 3');
+    c.handle.destroy();
+});
+
+test('four or more changed rules: two chips and "+N more", whose preview lists them all', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.axioms.active = { combat: 'underdog', cost: 'thrift', arrival: 'arrival', defeat: 'mercy' }; });
+    const chips = t.root.querySelectorAll('.b-lane-rules .b-rule-chip');
+    assert.equal(chips.length, 3);
+    assert.equal(chips[2].textContent, '+2 more');
+    const text = hover(t, '.b-rule-chip.more');
+    for (const id of ['underdog', 'thrift', 'arrival', 'mercy']) assert.ok(text.includes(t.Rift.data.axioms[id].name), id);
+    t.handle.destroy();
+});
+
+test('with a button in the bar, the news lines step aside', () => {
+    const t = setup(practice);
+    t.$('.b-draw-btn[data-choice="deck"]').click();
+    t.$('.b-hand [data-cid="p0c0"]').click();
+    assert.ok(t.$('.b-prompt').classList.contains('has-buttons'));
+    assert.equal(t.$('.b-prompt .b-news'), null);
+    t.handle.destroy();
+});
+
+test('Elusive: dropping a tactic on it explains why and leaves no waiting copy', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['shakirattle'], myTactics: ['counterexample'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); move('p0t0', 0, 'hand');
+    });
+    const { g, $ } = t;
+    g.document.elementFromPoint = () => $('.opp-board [data-cid="p1c0"]');
+    $('.b-hand [data-cid="p0t0"]').dispatchEvent(mouse({ type: 'pointerdown' }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointermove', clientX: 0, clientY: -80 }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointerup', clientX: 0, clientY: -80 }));
+    assert.match($('.b-note').textContent, /^Shakirattle is Elusive: tactics and abilities can't target it\.$/);
+    assert.equal($('.bc.pending'), null, 'no ghost card');
+    assert.ok(t.handle.state.players[0].hand.includes('p0t0'));
+    // Click-click says the same.
+    $('.b-hand [data-cid="p0t0"]').click();
+    $('.opp-board [data-cid="p1c0"]').click();
+    assert.match($('.b-note').textContent, /Elusive/);
+    t.handle.destroy();
+});
+
+test('only your own loaned cards are tagged Loaned', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'], myLoaned: true, oppLoaned: true }, (s, move) => { move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); });
+    assert.match(hover(t, '.my-board [data-cid="p0c0"]'), /Loaned/);
+    assert.ok(!/Loaned/.test(hover(t, '.opp-board [data-cid="p1c0"]')));
+    t.handle.destroy();
+});
+
+test('a lectured creature: "on its next turn" until its own turn, then "this turn"', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+        s.cards.p0c0.frozen = true; s.cards.p1c0.frozen = true;
+    });
+    assert.match(hover(t, '.my-board [data-cid="p0c0"]'), /can't attack this turn/);
+    assert.match(hover(t, '.opp-board [data-cid="p1c0"]'), /can't attack on its next turn/);
+    assert.equal(t.$('.opp-board [data-cid="p1c0"] .state.frozen').title, "It can't attack on its next turn");
+    t.handle.destroy();
+});
+
+test('Haste: a creature that may attack again shows "2nd attack"', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+        s.axioms.active = { attacks: 'haste' };
+        s.cards.p0c0.attacks = 1; s.players[0].attacksThisTurn = 1;
+    });
+    assert.ok(t.$('.my-board [data-cid="p0c0"]').classList.contains('ready'));
+    assert.equal(t.$('.my-board [data-cid="p0c0"] .b-again').textContent, '2nd attack');
+    assert.match(hover(t, '.my-board [data-cid="p0c0"]'), /attack twice this turn/);
+    t.handle.destroy();
+});
+
+test('the Spark hint replaces "Nothing left to do" when +1 energy makes a card playable', () => {
+    const t = prepared({ me: ['astrophysicat'], opp: ['kardashiant'], energy: 1 }, (s, move) => { move('p0c0', 0, 'hand'); s.players[0].spark = true; });
+    assert.equal(t.$('.b-prompt .b-ask').textContent, 'Use the Spark (+1 energy) to play Astrophysicat?');
+    assert.ok(t.$('.b-spark').classList.contains('glow'));
+    assert.equal(t.$('.b-end').classList.contains('glow'), false);
+    assert.ok(t.$('.b-hand [data-cid="p0c0"]').classList.contains('unplayable'), 'a card you cannot play now is dimmed');
+    t.$('.b-spark').click();
+    assert.ok(t.$('.b-hand [data-cid="p0c0"]').classList.contains('playable'));
+    t.handle.destroy();
+});
+
+test('a rule card that would change nothing is dimmed and says "Already the rule"', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.players[0].axHand = ['normal-hearts']; });
+    const card = t.$('.b-hand [data-axiom="normal-hearts"]');
+    assert.ok(card.classList.contains('unplayable'));
+    assert.match(card.textContent, /Already the rule/);
+    card.click();
+    assert.match(t.$('.b-note').textContent, /^Already the rule/);
+    t.handle.destroy();
+});
+
+test('hover previews wait, close on pointerdown and stay shut after a drag until the mouse moves', () => {
+    const t = setup(practice);
+    const { $, g } = t;
+    $('.b-draw-btn[data-choice="deck"]').click();
+    $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointerenter' }));
+    assert.equal($('.b-inspect').classList.contains('show'), false, 'not at once');
+    assert.ok(g.timers.some(x => x.ms >= 350 && x.ms <= 400), 'a hover delay of about 350-400 ms');
+    g.flush();
+    assert.ok($('.b-inspect').classList.contains('show'));
+    $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointerdown' }));
+    assert.equal($('.b-inspect').classList.contains('show'), false, 'pressing closes it');
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointerup' }));
+    // Drag p0c0 onto my side; the mouse then rests on a card.
+    g.document.elementFromPoint = () => $('.my-board');
+    $('.b-hand [data-cid="p0c0"]').dispatchEvent(mouse({ type: 'pointerdown' }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointermove', clientX: 0, clientY: -80 }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointerup', clientX: 0, clientY: -80 }));
+    assert.equal(t.handle.state.players[0].board.join(), 'p0c0');
+    $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointerenter', clientX: 0, clientY: -80 }));
+    g.flush();
+    assert.equal($('.b-inspect').classList.contains('show'), false, 'no preview right after a drag');
+    $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointermove', clientX: 30, clientY: -80 }));
+    g.flush();
+    assert.ok($('.b-inspect').classList.contains('show'), 'moving the mouse opens it again');
     t.handle.destroy();
 });

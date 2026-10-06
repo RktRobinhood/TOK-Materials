@@ -277,6 +277,9 @@ body.calm-motion .tour-practice * { animation:none; }
 .deck-editor > .deck-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-right: 4px; }
 .deck-scroll h3 { margin: 4px 0 0; }
 .deck-modal .deck-builder { max-height: none; overflow: visible; }
+.axiom-builder { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 6px; }
+.axiom-builder label { display: flex; align-items: flex-start; gap: 8px; padding: 6px 8px; border: 1px solid var(--panel-edge); border-radius: 8px; }
+.axiom-builder input { margin-top: 4px; }
 .tactic-art { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
 .stepper { display: inline-flex; align-items: center; gap: 4px; flex: none; }
 .stepper .btn { min-width: 32px; }
