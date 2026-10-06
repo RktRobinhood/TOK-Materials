@@ -21,7 +21,7 @@ function setup(){
 test('Bag lets the player select an injury and spends Mending only on repair',()=>{
  const g=setup();g.Rift.UI.bag();g.button('Use').onclick();assert.equal(g.state.items.mending,1);
  g.button('Cancel').onclick();assert.equal(g.state.items.mending,1);
- g.button('Use').onclick();g.button('Restore 1 power · 1 Mending').onclick();
+ g.button('Use').onclick();g.button('Restore 1 attack · 1 Mending').onclick();
  assert.equal(g.state.items.mending,0);assert.equal(g.state.creatures[0].powerDelta,0);assert.equal(g.state.creatures[0].injuries.length,0);
- assert.ok(g.button('Bag'));assert.equal(g.button('Restore 1 power · 1 Mending'),undefined);
+ assert.ok(g.button('Bag'));assert.equal(g.button('Restore 1 attack · 1 Mending'),undefined);
 });

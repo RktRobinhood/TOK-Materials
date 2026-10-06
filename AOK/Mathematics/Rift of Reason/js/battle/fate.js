@@ -98,8 +98,11 @@
                     break;
                 }
                 case 'injured': {
-                    const sp = (Rift.data.creatures || {})[inst.species] || { power: 1 };
-                    const canLosePower = sp.power + (inst.powerDelta || 0) > 1;
+                    // -1 lowers powerDelta, which the engine subtracts from attack; attack never goes below 0.
+                    const sp = (Rift.data.creatures || {})[inst.species] || { attack: 0 };
+                    const v = inst.variant || {};
+                    const attack = (sp.attack || 0) + (v.attack || 0) + (inst.taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0);
+                    const canLosePower = attack > 0;
                     const loseAbility = !inst.injuries.includes('no-ability') && (!canLosePower || rng.chance(0.5));
                     if (loseAbility) {
                         inst.injuries.push('no-ability');
@@ -107,7 +110,7 @@
                     } else if (canLosePower) {
                         inst.powerDelta = (inst.powerDelta || 0) - 1;
                         if (!inst.injuries.includes('minus-one')) inst.injuries.push('minus-one');
-                        r.detail = '-1 power';
+                        r.detail = '-1 attack';
                     } else {
                         r.outcome = 'scarred';
                         r.detail = 'too battered to hurt more';

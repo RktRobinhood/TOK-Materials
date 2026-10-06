@@ -314,6 +314,56 @@ Every caricature sheet uses (two caricatures per sheet, one per row; already inc
 
 > On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected shape. Arrange them in exactly four rows, left to right: **Row 1:** a tall arched wooden door with iron studs, closed; the same door open with warm light pouring out; a round wooden token with a sun (truth); a round wooden token with a crescent-moon mask (lie). **Row 2:** a large aged parchment sheet with three overlapping ink circles (an empty Venn diagram). **Row 3:** six identical blank square wooden tiles. **Row 4:** a dark slate board in a wooden frame with a few chalk dots on it, then a single small stick of white chalk. Match the attached style board.
 
+## Stage 10: Card Arena (7 October 2026)
+
+The card battle became a drag-to-attack arena (`design/card-arena-2026-10-07.md`, #46). Everything below is **polish**: the board already works with CSS fallbacks, and every id is optional in code. Priority 1 makes the biggest visible difference. Never bake words, numbers or rules into an image; the game writes all text and numbers on top.
+
+### 10.1 Arena icons (priority 1)
+
+**Attach:** `style-board.png`, `ui-kit.png`
+**Save as:** `5-ui/arena-icons.png`
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape (no see-through glass, no loose sparkles). Small game icons, all about the same size, readable at 24 pixels. Arrange them in exactly four rows, left to right. **Row 1:** a round gold-rimmed orange gem with a small sword on it (attack); a red heart-shaped gem with a gold rim (health); a teal faceted crystal in a gold setting (energy cost); a glowing teal energy crystal standing upright (full); the same crystal empty, dark and hollow-looking (spent). **Row 2:** a sturdy stone kite shield with a gold rim (Guard); a small winged boot (Swift); a round magic bubble-shield drawn as a solid pale-cyan disc with a bright rim (Shield); a curl of violet smoke with one calm eye in it (Elusive). **Row 3:** a sleepy crescent moon with closed eyes and two tiny stars (sleeping); a small book wrapped in an ice-blue chain (lectured / can't attack); a little golden fanfare horn (Entrance); a single candle with a curling ribbon scroll (Last Word); a creature paw touching a glowing rune stone (Activate). **Row 4:** a bright four-pointed golden spark inside a small coin (the Spark); a small, sturdy stone pillar (Sturdy); a five-pointed gold star (rating star); an old leather book with a paw-print bookmark and a tiny glowing star on the cover (Trick Book item). Match the attached style board.
+
+### 10.2 Arena frames and Fate tokens (priority 1)
+
+**Attach:** `style-board.png`, `card-frames.png`
+**Save as:** `5-ui/arena-frames.png`
+
+> On a transparent background (PNG), no text, letters or numbers, wide clear gaps between every element and an empty margin at the edges; each element is one connected shape. Arrange them in exactly two rows. **Row 1, left to right:** a large round medallion frame for a hero portrait (dark magenta ring with gold filigree and a small rift-cyan gem at the bottom; the centre is completely empty and transparent); a portrait card frame (5:7) in the style of the attached card frames but copper and teal with a small gear-and-scroll corner emblem, an empty art window in the top two thirds and an empty text panel below (tactic card); a portrait card back (5:7), dark purple with two interlocking rings of ten small stones around a central question-mark-shaped rune made of a swirl (no actual question mark), symmetrical (shared axiom deck). **Row 2, left to right:** a large round brass button with an engraved hourglass and a thick bevelled rim (end turn; leave the centre plain enough for a label on top); a small gold hourglass token (Fate marker); a single rule card flipping over beside a tiny hourglass (Fate flip); a circular rewind arrow enclosing three small blank stone tablets (Fate reset). Match the attached style board.
+
+### 10.3 Fate track (priority 2)
+
+**Attach:** `style-board.png`, `arena-frames.png`
+**Save as:** `5-ui/fate-track.png`
+
+> On a transparent background (PNG), no text or numbers: one long horizontal strip (about 1536×256) of six round stone sockets joined by a thin gold-and-teal line, quiet clockwork decoration only at the two ends. The sockets are empty. Calm, readable, no glow beyond the outline. Match the attached style board.
+
+### 10.4 Tactic card art (priority 2)
+
+**Attach:** `style-board.png`, `arena-frames.png`
+**Save as:** `5-ui/tactics-1.png` and `5-ui/tactics-2.png` (two requests)
+
+Shared prompt start: "On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, roughly square vignette of the same size (no humans; creatures only if any). Match the attached style board."
+
+> **tactics-1, two rows of four, left to right:** **1, Counterexample:** one black swan gliding among three white swans. **2, Pep Talk:** a small megaphone bursting with warm sparkles. **3, Stand Firm:** a small round creature planting a big stone shield in the ground. **4, Eureka!:** a clawfoot bathtub overflowing, with a glowing lightbulb rising out of the water. **5, Second Wind:** a red heart with a swirl of fresh wind around it. **6, Occam's Razor:** a small silver razor cutting a tangled ball of thread into one neat line. **7, Rethink:** a pencil sketch being rubbed out by a big pink eraser. **8, Big Claims, Big Evidence:** a magnifying glass held over a huge, wobbly balloon.
+
+> **tactics-2, two rows (four, then three), left to right:** **1, Clockwork:** a brass clock face with two curved arrows, one forward and one back. **2, Look It Up:** an open old book with a small lantern resting on it. **3, Peer Review:** a ring of five pairs of round spectacles all looking at one small scroll. **4, Recall:** a glowing card rising back out of a cyan swirl. **5, Pause for Thought:** a thought bubble frozen in ice crystals. **6, Safety Net:** a woven net stretched under a tightrope. **7, Lemma:** a small stepping stone with chalk marks leading up to a bigger one (marks are lines, not letters).
+
+### 10.5 Reworked axiom vignettes (priority 3)
+
+**Attach:** `style-board.png`, `axioms-1.png`
+**Save as:** `5-ui/axioms-4.png`
+
+> On a transparent background (PNG), no text, letters or numbers, wide clear gaps, each element one connected roughly square vignette, same size as the attached axiom vignettes. Three rows of four, left to right. **Row 1:** one small sword (one attack per turn); two small crossed swords (two attacks per turn); three small swords fanned out (back to normal); a small smiling heart resting safely at the end of an hourglass, with a reversed arrow around it (own zero hearts wins). **Row 2:** two heart shields facing each other with a forward arrow between them (back to the goal); a small plain cloth purse with one crystal (cheaper); an ornate purse overflowing with crystals (costlier); two new teal crystals growing from a gold stem (energy grows faster). **Row 3:** two blank cards beside a small open book (draw two); a sleeping creature under a blanket with a bandage falling away (rest and recover); a creature with a bandage still on, sitting patiently (wounds remain); a small paw stepping from a blank card onto a bright stone (ready on arrival). Match the attached style board.
+
+### 10.6 Arena backdrop (priority 3, optional)
+
+**Attach:** `style-board.png`, the current `battle-table.png`
+**Save as:** `2-world/arena.png`
+
+> A 16:9 painted background (at least 1920×1080), no characters, cards, text or UI. The same lantern-lit card table seen from slightly above: a darker opponent half at the top, the player's half at the bottom, and a calm, clearly empty horizontal lane across the middle for a timeline. Decoration only at the edges; the right fifth stays dark and quiet for a rules panel. Match the attached battle table.
+
 ---
 
 ## Outcome log

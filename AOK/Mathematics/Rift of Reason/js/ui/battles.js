@@ -6,6 +6,12 @@
  *   Rift.Battles.ghost(code)       a classmate's team code, driven by the AI (trophy copies)
  *   Rift.Battles.shareCode()       shows this player's team code to give to classmates
  *
+ * Every launcher passes both sides as { name?, team: [instances], tactics: [ids], axioms?: [ids],
+ * art?: asset id for the hero portrait, consumables? } (player) and opponent { ..., ai, stake? }.
+ * The player's side comes from the Collection deck builder (save.team, save.deckTactics,
+ * save.axiomLoadout); an empty collection borrows the lesson starter team.
+ * A trainer's first defeat gives a Trick Book and one earned tactic (World.claimTrainerReward).
+ *
  * The battle screen (js/screens/battle.js) never writes the save; onEnd does it here.
  */
 (function (root) {
@@ -25,24 +31,66 @@
         return Rift.State.get().seed + ':' + tag + ':' + Date.now().toString(36);
     }
 
+    // The card rules version a learner last finished (Granny's lesson). 3 = Card Arena.
+    const RULES_VERSION = 3;
+
     function offerUpdatedLesson(start, back) {
         const flags = Rift.State.get().flags;
-        if (!flags['card-lesson-won'] || flags['card-rules-version'] === 2 || flags['card-rules-seen'] === 2) return false;
-        Rift.UI.modal('The card rules have changed', el('p', {text:'Turns now have energy and several actions. Creatures exhaust, and paid axioms stay active. Granny has a new guided practice. Your collection is safe.'}), [
-            {label:'Play the new rules',onclick(){Rift.State.update(s=>{s.flags['card-rules-seen']=2;});start();}},
+        if (!flags['card-lesson-won'] || (flags['card-rules-version'] || 0) >= RULES_VERSION || (flags['card-rules-seen'] || 0) >= RULES_VERSION) return false;
+        Rift.UI.modal('The card rules have changed', el('div.stack', null, [
+            el('p', {text:'Creatures now have attack and health, and damage stays. Guards must be attacked first. Your deck has creatures and tactic cards.'}),
+            el('p.small', {text:'Granny has a new guided practice. Your collection is safe.'}),
+        ]), [
+            {label:'Play the new rules',onclick(){Rift.State.update(s=>{s.flags['card-rules-seen']=RULES_VERSION;});start();}},
             {label:'Learn the new rules',primary:true,onclick:()=>Battles.learn(back)},
         ]);
         return true;
     }
 
+    // The player's own side of a battle: chosen team (or first 10, or a loaned starter
+    // team), chosen tactic cards, ten-card axiom contribution and hero art.
+    function myDeck() {
+        const s = Rift.State.get();
+        const team = s.creatures.length ? Rift.State.battleTeam(s) : Rift.Battle.Lesson.starter();
+        const art = s.avatar && typeof Rift.avatarArt === 'function' ? Rift.avatarArt(s.avatar, 'neutral') : null;
+        return {
+            team,
+            tactics: Rift.State.deckTactics(s),
+            axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout && s.axiomLoadout.length ? s.axiomLoadout : s.axioms),
+            art,
+        };
+    }
+
+    // Syllo's Road challenge (a safe beginner match): eight cheap small creatures and kind tactics.
+    const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
+    const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
+
+    const starterTactics = () =>((Rift.data.tacticDecks || {}).starter || []).slice();
+    const speakerArt = id => ((Rift.data.speakers || {})[id] || {}).art || null;
+
+    // A trainer's fixed team: plain variants, stable uids so the same trainer is the same deck.
+    function trainerTeam(trainerId, t) {
+        return t.team.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } }));
+    }
+
+    function rewardText(reward) {
+        if (!reward) return '';
+        const tactic = reward.tactic && (Rift.data.tactics || {})[reward.tactic];
+        return 'First win reward: a Trick Book' + (tactic ? ' and a new tactic card, ' + tactic.name : '') + '. Teach tricks in the Bag; add tactics in Collection.';
+    }
+
     function finish(result, opts) {
         const o = opts || {};
+        let reward = null;
         Rift.State.update(s => {
             if (result.mode !== 'practice') Rift.Battle.Ante.applyToSave(s, result);
-            if (result.outcome === 'won') s.stats.battlesWon += 1;
-            else if (result.outcome === 'lost') s.stats.battlesLost += 1;
+            // Real battles count wins and losses in Ante.applyToSave; practice is counted here.
+            if (result.mode === 'practice' && result.outcome === 'won') s.stats.battlesWon += 1;
+            else if (result.mode === 'practice' && result.outcome === 'lost') s.stats.battlesLost += 1;
             if (o.nodeId && result.outcome === 'won') Rift.World.complete(s, o.nodeId);
+            if (o.trainerId && result.outcome === 'won' && result.mode !== 'practice') reward = Rift.World.claimTrainerReward(s, o.trainerId);
         });
+        if (reward && Rift.UI.toast) Rift.UI.toast(rewardText(reward), 6000);
         if (o.nodeId && result.outcome === 'won' && Rift.Dialogue.has(Rift.World.node(o.nodeId).script + '.win')) {
             Rift.Router.replace('map');
             Rift.Dialogue.play(Rift.World.node(o.nodeId).script + '.win');
@@ -103,7 +151,7 @@
 
         learn(back) {
             Rift.Router.go('battle-lesson',{onEnd(won){
-                if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;s.flags['card-rules-version']=2;});
+                if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;s.flags['card-rules-version']=RULES_VERSION;});
                 Rift.Router.replace(back||'map');
                 if(won&&back!=='collection'&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();
             }});
@@ -120,12 +168,16 @@
 
         story() {
             if(offerUpdatedLesson(()=>Battles.story(),'map'))return;
+            const s=Rift.State.get();
             Rift.Router.go('battle',{
                 mode:'practice',seed:'syllo-road-challenge',
-                player:{team:Rift.Battle.Lesson.starter(),items:{},axioms:[]},
+                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
-                battleOptions:{first:0,shuffle:false,shuffleAxioms:false},
-                opponent:{name:'Sergeant Syllo · Road challenge',team:Rift.Battle.Lesson.team(Array(10).fill('speedcheeta'),'syllo-'),ai:'easy'},
+                // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
+                // small creatures (no Guard, no Swift) plus kind tactics.
+                battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
+                opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'easy',
+                    team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS},
                 onEnd(result){
                     finish(result);
                     if(result.outcome==='won'){
@@ -161,9 +213,10 @@
             prepare(consumables => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
-                player: { consumables, team: Rift.State.get().creatures.length ? Rift.State.get().creatures.slice(0,10) : Rift.Battle.Lesson.starter() },
-                opponent: { name: t.name, team: t.team.map(sp => Rift.State.makeCreature(sp)), ai: difficulty || t.ai || 'easy', stake: t.ante },
-                onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null }),
+                player: Object.assign(myDeck(), { consumables }),
+                opponent: { name: t.name, team: trainerTeam(n.trainer, t), tactics: (t.tactics || starterTactics()).slice(),
+                    art: speakerArt(t.speaker), ai: difficulty || t.ai || 'easy', stake: t.ante },
+                onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer }),
             }));
         },
 
@@ -179,8 +232,8 @@
             Rift.Router.go('battle', {
                 mode: 'practice',
                 seed: sd,
-                player: { team: Rift.State.get().creatures.length ? Rift.State.get().creatures.slice(0,10) : Rift.Battle.Lesson.starter() },
-                opponent: { name: 'The Training Dummy', team, ai: 'easy' },
+                player: myDeck(),
+                opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'easy' },
                 onEnd: result => finish(result, { back: 'collection' }),
             });
         },
@@ -198,7 +251,7 @@
             prepare(consumables => Rift.Router.go('battle', {
                 mode: 'ghost',
                 seed: seed('ghost'),
-                player: { consumables },
+                player: Object.assign(myDeck(), { consumables }),
                 opponent: Rift.Battle.TeamCodes.ghostOpponent(imported),
                 onEnd: result => finish(result, { back: 'collection' }),
             }));
@@ -207,7 +260,8 @@
         shareCode() {
             const s = Rift.State.get();
             if (!needCreatures()) return;
-            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: s.creatures.slice(0, 10), axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout.length?s.axiomLoadout:s.axioms) });
+            const deck = myDeck();
+            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: deck.team, tactics: deck.tactics, axioms: deck.axioms });
             const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code });
             Rift.UI.modal('Your team code', el('div.stack', null, [
                 el('p', { text: 'Give this code to a classmate. They battle a ghost of your team on their own laptop. Nothing is taken from you; if they win, they get a trophy copy with your name on it.' }),

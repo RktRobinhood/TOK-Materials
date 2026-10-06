@@ -12,11 +12,11 @@
             return { kind: 'team', chapter: null, completed: [], checked: 0, bonus: 0, creatures: null, teamSize: team.team.length };
         }
         const p = R.State.decode('save', code);
-        if (!p || p.version !== R.State.VERSION || !own(R.data.chapters, p.chapter)) throw new Error('This backup has an unsupported version or chapter.');
+        if (!p || !(Number.isInteger(p.version) && p.version >= 1 && p.version <= R.State.VERSION) || !own(R.data.chapters, p.chapter)) throw new Error('This backup has an unsupported version or chapter.');
         if (!p.map || !Array.isArray(p.map.completed) || p.map.completed.some(id => typeof id !== 'string' || !own(nodes(), id))) throw new Error('This backup has unknown or damaged map entries.');
         if (!Array.isArray(p.creatures) || p.creatures.some(c => !c || typeof c.uid !== 'string' || !own(R.data.creatures, c.species))) throw new Error('This backup has damaged creature entries.');
         const uids = new Set(p.creatures.map(c => c.uid));
-        if (uids.size !== p.creatures.length || !Array.isArray(p.team) || p.team.length > 10 || new Set(p.team).size !== p.team.length || p.team.some(id => !uids.has(id))) throw new Error('This backup has a damaged team.');
+        if (uids.size !== p.creatures.length || !Array.isArray(p.team) || p.team.length > 14 || new Set(p.team).size !== p.team.length || p.team.some(id => !uids.has(id))) throw new Error('This backup has a damaged team.');
         const completed = [...new Set(p.map.completed)];
         return { kind: 'save', chapter: p.chapter, completed,
             checked: completed.filter(id => !!nodes()[id].puzzles).length,

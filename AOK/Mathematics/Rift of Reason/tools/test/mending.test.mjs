@@ -10,7 +10,7 @@ test('Mending restores one lost power point or ability and preserves unrelated f
  assert.equal(Rift.World.mend(s,'hurt','no-ability'),true);assert.equal(c.injuries.length,0);assert.equal(s.items.mending,1);
  assert.equal(c.scars[0],'scar');assert.equal(c.warped.ability,'lecture');
  const b=Rift.Battle.Engine.createBattle({seed:'mended',players:[{team:[c]},{team:[]}],options:{shuffle:false,first:0}});
- assert.equal(b.cards.p0c0.base,4);assert.equal(b.cards.p0c0.ability,'lecture');
+ assert.equal(b.cards.p0c0.attack,Rift.State.creatureStats(c).attack);assert.equal(b.cards.p0c0.attack,Math.max(0,Rift.data.creatures.astrophysicat.attack+c.variant.attack));assert.equal(b.cards.p0c0.ability,'lecture');
 });
 test('Mending cannot spend on a healthy, absent or unowned injury, or when the item is empty',()=>{
  const s=Rift.State.freshState();const c=Rift.State.makeCreature('lobstorian',{uid:'mine',injuries:['no-ability']});s.creatures.push(c);s.items.mending=1;

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
 
 const Rift = loadRift([
-    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/fate.js',
+    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js',
     'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/fate.js',
     'js/battle/ante.js', 'js/battle/team-codes.js',
 ]);
@@ -71,8 +71,23 @@ test('injured: -1 power or loses its ability; warp: a different keyword; scarred
     scar.instances.forEach(c => { assert.equal(c.scars.length, 1); assert.equal(c.powerDelta, 0); });
     // the engine honours the results
     const s = E.createBattle({ seed: 'x', players: [{ team: [hurt.instances[0], warped.instances[0]] }, { team: [] }], options: { shuffle: false } });
-    assert.ok(s.cards.p0c0.base === 5 || s.cards.p0c0.ability === null);
+    assert.ok(s.cards.p0c0.attack === Rift.data.creatures.lobstorian.attack - 1 || s.cards.p0c0.ability === null);
     assert.equal(s.cards.p0c1.ability, warped.instances[0].warped.ability);
+});
+
+test('injuries lower attack but never below 0: a 0-attack creature loses its ability or is only scarred', () => {
+    // Astrophysicat has 1 attack; a -1 attack variant brings it to 0.
+    const weak = Array.from({ length: 20 }, () => inst('astrophysicat', { variant: { attack: -1, health: 0, trait: null } }));
+    const r = Fate.roll({ instances: weak, defeated: weak.map(c => c.uid), mode: 'trainer', seed: 'zero', odds: { injured: 1 } });
+    r.instances.forEach(c => { assert.equal(c.powerDelta, 0); assert.ok(c.injuries.includes('no-ability')); });
+    const done = r.instances.map(c => Object.assign({}, c));
+    const again = Fate.roll({ instances: done, defeated: done.map(c => c.uid), mode: 'trainer', seed: 'zero2', odds: { injured: 1 } });
+    again.results.forEach(x => assert.equal(x.outcome, 'scarred'));
+    // A taught +1 attack trick counts as attack that can be lost.
+    const taught = [inst('astrophysicat', { variant: { attack: -1, health: 0, trait: null }, taught: 'attack', injuries: ['no-ability'] })];
+    const t = Fate.roll({ instances: taught, defeated: [taught[0].uid], mode: 'trainer', seed: 't', odds: { injured: 1 } });
+    assert.equal(t.instances[0].powerDelta, -1);
+    assert.match(t.log[0], /-1 attack/);
 });
 
 test('anchor stops a warp; wards cancel the worst bad rolls first', () => {
@@ -135,6 +150,30 @@ test('ghost ante: the winner gets a named trophy copy; nothing is taken from the
     assert.deepEqual(J(lost.itemsDelta), { charm: -1 });
 });
 
+test('ghost trophy: strongest by real attack, copying its variant and taught trick', () => {
+    // Beastie (2 attack) + Strong variant + taught attack = 4 beats Astrophysicat (1).
+    const ghostTeam = [inst('astrophysicat'), inst('beastie', { variant: { attack: 1, health: 2, trait: 'guard' }, taught: 'attack' })];
+    const a = Ante.compute({ type: 'ghost', player: { items: { charm: 1 } }, opponent: { name: 'G', nickname: 'Gro', team: ghostTeam }, seed: 'tv' });
+    assert.equal(a.opponent.trophy.species, 'beastie');
+    const trophy = Ante.settle(a, 'won', { seed: 'tv', now: 0 }).creaturesGained.find(c => c.trophyOf);
+    assert.deepEqual(J(trophy.variant), { attack: 1, health: 2, trait: 'guard' });
+    assert.equal(trophy.taught, 'attack');
+    assert.equal(Ante.attackOf(trophy), Rift.data.creatures.beastie.attack + 2);
+    // Staked creatures won from trainers get their own uid-based variant.
+    const t = Ante.compute({ type: 'trainer', player: { items: { charm: 1 } }, opponent: { name: 'T', stake: { items: {}, creatures: ['siuuugull'] } }, seed: 'tw' });
+    const won = Ante.settle(t, 'won', { seed: 'tw' }).creaturesGained[0];
+    assert.deepEqual(J(won.variant), J(Rift.State.rollVariant(won.uid)));
+    assert.equal(won.taught, null);
+});
+
+test('applyToSave drops dead creatures from the chosen battle team', () => {
+    const team = [inst('lobstorian'), inst('swiftlet')];
+    const save = { creatures: J(team), team: team.map(c => c.uid), items: { charm: 2 }, stats: { battlesWon: 0, battlesLost: 0 } };
+    const fate = Fate.roll({ instances: save.creatures, defeated: [team[0].uid], mode: 'trainer', seed: 'x', odds: { death: 1 } });
+    Ante.applyToSave(save, { mode: 'trainer', outcome: 'won', fate });
+    assert.deepEqual(save.team, [team[1].uid]);
+});
+
 test('applyToSave applies fate and ante to a save', () => {
     const team = [inst('lobstorian'), inst('swiftlet')];
     const save = { creatures: J(team), items: { charm: 2, ward: 1 }, stats: { battlesWon: 0, battlesLost: 0 } };
@@ -174,12 +213,56 @@ test('tampered, wrong-kind and impossible team codes are rejected', () => {
     assert.throws(() => TeamCodes.importTeam(crafted({ t: [['dragon', 0, [], 0, 0]] })), /unknown creature/);
     assert.throws(() => TeamCodes.importTeam(crafted({ t: [['lobstorian', 0, [], 'win-game', 0]] })), /unknown ability/);
     assert.throws(() => TeamCodes.importTeam(crafted({ t: Array(11).fill(['lobstorian', 0, [], 0, 0]) })), /1 to 10/);
-    assert.throws(() => TeamCodes.importTeam(crafted({ v: 2, t: [['lobstorian', 0, [], 0, 0]] })), /version/);
+    assert.throws(() => TeamCodes.importTeam(crafted({ v: 3, t: [['lobstorian', 0, [], 0, 0]] })), /version/);
+    // Version 2: variants, taught tricks and the tactic list are validated strictly.
+    const v2 = (row, k) => Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: [row], k: k || [] });
+    const ok = ['lobstorian', 0, [], 0, 0, [1, 2, 'shield'], 'swift'];
+    assert.equal(TeamCodes.importTeam(v2(ok, ['counterexample', 'counterexample'])).team[0].taught, 'swift');
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [2, 0, 0], 0])), /impossible variant/);
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 3, 0], 0])), /impossible variant/);
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0, 'flying'], 0])), /impossible variant/);
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0], 0])), /garbled variant/);
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0, 0], 'fly'])), /unknown trick/);
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', -3, [], 0, 0, [0, 0, 0], 0])), /impossible power/); // attack 2 - 3 < 0
+    assert.throws(() => TeamCodes.importTeam(v2(ok, ['win-the-game'])), /unknown tactic/);
+    assert.throws(() => TeamCodes.importTeam(v2(ok, ['eureka', 'eureka', 'eureka'])), /2 copies/);
+    assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: Array(14).fill(ok), k: ['eureka', 'eureka', 'lemma', 'lemma', 'recall', 'recall', 'clockwork'] })), /at most 20/);
+    assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: Array(15).fill(ok), k: [] })), /1 to 14/);
+    assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: [ok] })), /tactic list/);
 });
 
-test('teams are capped at 10 on export', () => {
-    const code = TeamCodes.exportTeam({ nickname: 'Big', creatures: Array.from({ length: 14 }, () => inst('zuckerborg')) });
-    assert.equal(TeamCodes.importTeam(code).team.length, 10);
+test('decks are capped at 14 creatures and 20 cards on export', () => {
+    const code = TeamCodes.exportTeam({ nickname: 'Big', creatures: Array.from({ length: 16 }, () => inst('zuckerborg')), tactics: Rift.data.tacticDecks.starter });
+    const back = TeamCodes.importTeam(code);
+    assert.equal(back.team.length, 14);
+    assert.equal(back.tactics.length, 6);
+});
+
+test('v2 team codes carry variants, taught tricks and tactics; ghosts use them', () => {
+    const team = [inst('lobstorian', { variant: { attack: 1, health: -1, trait: 'swift' }, taught: 'shield' }), inst('zuckerborg', { variant: { attack: -1, health: 2, trait: null } })];
+    const code = TeamCodes.exportTeam({ nickname: 'Vee', creatures: team, tactics: ['pep-talk', 'pep-talk', 'lemma', 'nonsense'] });
+    const back = TeamCodes.importTeam(code);
+    assert.equal(back.version, 2);
+    assert.deepEqual(J(back.team.map(c => [c.variant, c.taught])), [[{ attack: 1, health: -1, trait: 'swift' }, 'shield'], [{ attack: -1, health: 2, trait: null }, null]]);
+    assert.deepEqual(J(back.tactics), ['pep-talk', 'pep-talk', 'lemma']);
+    const ghost = TeamCodes.ghostOpponent(back);
+    assert.deepEqual(J(ghost.tactics), ['pep-talk', 'pep-talk', 'lemma']);
+    const s = E.createBattle({ seed: 'v2', players: [{ team: [inst('khaby')] }, { team: ghost.team, tactics: ghost.tactics }], options: { shuffle: false } });
+    const lob = Rift.data.creatures.lobstorian;
+    assert.equal(s.cards.p1c0.attack, lob.attack + 1);
+    assert.equal(s.cards.p1c0.health, lob.health - 1);
+    assert.ok(E.keywordsOf(s, 'p1c0').includes('swift') && E.keywordsOf(s, 'p1c0').includes('shield'));
+    const theirTactics = Object.values(s.cards).filter(c => c.kind === 'tactic' && c.owner === 1).map(c => c.tactic).sort();
+    assert.deepEqual(J(theirTactics), ['lemma', 'pep-talk', 'pep-talk']);
+});
+
+test('v1 team codes still import with plain variants and the starter tactics', () => {
+    // A code made before the Card Arena: old power-scale injuries are clamped so attack stays >= 0.
+    const old = Rift.State.encode('team', { v: 1, n: 'Old', a: ['underdog'], t: [['astrophysicat', -3, ['minus-one'], 0, 0], ['muskrat', 0, [], 'grook', 'Ida']] });
+    const back = TeamCodes.importTeam(old);
+    assert.equal(back.version, 1);
+    assert.deepEqual(J(back.team.map(c => [c.variant, c.taught, c.powerDelta])), [[{ attack: 0, health: 0, trait: null }, null, -1], [{ attack: 0, health: 0, trait: null }, null, 0]]);
+    assert.deepEqual(J(TeamCodes.ghostOpponent(back).tactics), J(Rift.data.tacticDecks.starter));
 });
 
 test('a ghost battle runs the imported team with the AI, deterministically', () => {
@@ -191,7 +274,7 @@ test('a ghost battle runs the imported team with the AI, deterministically', () 
             seed: 'ghost', players: [{ name: 'You', team: TEN.map(x => inst(x)) }, { name: ghost.name, team: ghost.team }],
             axiomDeck: E.buildAxiomDeck([], ghost.axioms),
         });
-        assert.ok(s.axioms.deck.concat(s.axioms.current).includes('age-of-wonder'));
+        assert.ok(s.axioms.deck.concat(Object.values(s.axioms.active), ...s.players.map(P => P.axHand)).includes('age-of-wonder'));
         return AI.playOut(s, ['hard', ghost.ai]);
     };
     const a = play(), b = play();

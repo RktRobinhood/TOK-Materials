@@ -46,3 +46,30 @@ test('migrate fills fields added since an old save', () => {
     s.tutorialsSeen.venn = true;
     assert.equal(Rift.State.migrate(s).tutorialsSeen.venn, true);
 });
+
+test('fresh saves are version 2 with tactic fields; migration from 1 adds them', () => {
+    const J = x => JSON.parse(JSON.stringify(x));
+    const s = Rift.State.freshState();
+    assert.equal(s.version, 2);
+    assert.equal(Rift.State.VERSION, 2);
+    assert.deepEqual(J(s.tactics), []);
+    assert.deepEqual(J(s.deckTactics), []);
+    const m = Rift.State.migrate({ version: 1, creatures: [{ uid: 'a', species: 'lobstorian' }] });
+    assert.equal(m.version, 2);
+    assert.deepEqual(J(m.tactics), []);
+    assert.deepEqual(J(m.deckTactics), []);
+    assert.deepEqual(J(m.creatures[0].variant), J(Rift.State.rollVariant('a')));
+    assert.equal(m.creatures[0].taught, null);
+    // A v2 save passes through unchanged.
+    m.creatures[0].taught = 'guard';
+    assert.equal(Rift.State.migrate(J(m)).creatures[0].taught, 'guard');
+});
+
+test('new creatures get a variant from their uid', () => {
+    const J = x => JSON.parse(JSON.stringify(x));
+    const c = Rift.State.makeCreature('lobstorian', { uid: 'fixed-uid' });
+    assert.deepEqual(J(c.variant), J(Rift.State.rollVariant('fixed-uid')));
+    assert.equal(c.taught, null);
+    const given = Rift.State.makeCreature('lobstorian', { variant: { attack: 0, health: 0, trait: null } });
+    assert.deepEqual(J(given.variant), { attack: 0, health: 0, trait: null });
+});

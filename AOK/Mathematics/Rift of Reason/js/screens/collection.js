@@ -27,30 +27,155 @@
         ]);
     }
 
+    const KEYWORD_NAMES = { guard: 'Guard', swift: 'Swift', shield: 'Shield' };
+    const INJURY_NAMES = { 'no-ability': 'lost its ability', 'minus-one': 'hurt (−attack)' };
+
+    // One owned creature: its real battle numbers, variation, trick and history.
+    function instanceRow(x, n, s, onTeach) {
+        const c = Rift.data.creatures[x.species];
+        const inTeam = Rift.State.battleTeam(s).includes(x);
+        const st = Rift.State.creatureStats(x);
+        const extra = st.keywords.filter(k => !(c.keywords || []).includes(k)).map(k => KEYWORD_NAMES[k]);
+        const notes = [
+            'Caught ' + new Date(x.caughtAt).toLocaleDateString(),
+            x.trophyOf ? 'trophy from ' + x.trophyOf : null,
+            x.scars.length ? 'scars: ' + x.scars.length : null,
+            x.injuries.length ? x.injuries.map(i => i === 'minus-one' && x.powerDelta < 0 ? 'injured (' + x.powerDelta + ' attack)' : INJURY_NAMES[i] || i).join(', ') : null,
+            x.warped && x.warped.ability ? 'warped ability: ' + (((Rift.Battle.Abilities || {})[x.warped.ability] || {}).name || x.warped.ability) : null,
+            extra.length ? 'battles with ' + extra.join(', ') : null,
+        ].filter(Boolean).join(' · ');
+        return el('div.panel.instance-row', null, [
+            el('div.row.wrap', null, [
+                el('strong', { text: c.name + ' #' + n }),
+                inTeam ? el('span.chip.team-chip', { text: 'In battle team' }) : null,
+                Rift.UI.statLine(x.species, x),
+                Rift.UI.variantBadges(x),
+            ]),
+            el('div.small.muted', { text: notes }),
+            (s.items['trick-book'] || 0) > 0 ? el('button.btn.small', { text: (x.taught ? 'Teach a new trick' : 'Teach a trick') + ' · 1 Trick Book', onclick: () => onTeach(x.uid) }) : null,
+        ]);
+    }
+
     function details(speciesId) {
         const s = Rift.State.get();
         const c = Rift.data.creatures[speciesId];
         const mine = s.creatures.filter(x => x.species === speciesId);
+        let dialog = null;
+        const teach = uid => { dialog.close(); Rift.UI.trickBook(uid, () => details(speciesId)); };
         const body = el('div.stack', null, [
             el('div.row', { style: { alignItems: 'flex-start' } }, [
                 Rift.UI.framedCard(speciesId, { big: true }),
                 el('div.stack', null, [
-                    el('div.row.wrap', null, [colourChip(c.colour), el('span.chip', { text: c.rarity }), el('span.chip', { text: '⚔ power ' + c.power })]),
+                    el('div.row.wrap', null, [colourChip(c.colour), el('span.chip', { text: c.rarity }), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
+                        .concat((c.keywords || []).map(k => el('span.chip', { text: KEYWORD_NAMES[k] || k })))),
                     el('div.small.muted', { text: 'Inspired by ' + c.inspiredBy + ' (a caricature).' }),
+                    el('div.small.muted', { text: 'Cost, attack and health are the usual numbers. Each caught creature varies a little.' }),
                 ]),
             ]),
             el('p', { text: c.blurb }),
             el('p', null, [el('strong', { text: 'Ability: ' }), c.abilityText]),
-            mine.length ? el('div.stack.small', null, mine.map(x => el('div', {
-                text: '• caught ' + new Date(x.caughtAt).toLocaleDateString()
-                    + (x.trophyOf ? ' · trophy from ' + x.trophyOf : '')
-                    + (x.scars.length ? ' · scars: ' + x.scars.length : '')
-                    + (x.injuries.length ? ' · injured: ' + x.injuries.join(', ') : '')
-                    + (x.warped ? ' · warped: ' + x.warped.ability : '')
-                    + (x.powerDelta ? ' · power ' + (c.power + x.powerDelta) : ''),
-            }))) : null,
+            mine.length ? el('h3', { text: 'Your ' + c.name + (mine.length > 1 ? 's' : '') }) : null,
+            mine.length ? el('div.stack.small', null, mine.map((x, i) => instanceRow(x, i + 1, s, teach))) : null,
         ]);
-        Rift.UI.modal(c.name, body);
+        dialog = Rift.UI.modal(c.name, body);
+    }
+
+    // ---- own deck: battle team (6–14 creatures) + tactic cards (≤2 copies) = 20 ----------
+
+    function editOwnDeck(onSaved) {
+        const s = Rift.State.get();
+        const D = Rift.Battle.TeamCodes ? Rift.Battle.TeamCodes.DECK || 20 : 20;
+        const tactics = Rift.data.tactics;
+        const owned = Rift.State.ownedTactics(s);
+        const team = new Set((s.creatures.length ? Rift.State.battleTeam(s) : []).map(x => x.uid));
+        const counts = {};
+        Rift.State.deckTactics(s).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+        const status = el('p.deck-status', { role: 'status', 'aria-live': 'polite' });
+        const boxes = [], steppers = [];
+        const tacticTotal = () => Object.values(counts).reduce((a, b) => a + b, 0);
+        let saveBtn = null;
+
+        function check() { return Rift.State.checkDeck({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() }); }
+        function refresh() {
+            const r = check();
+            status.textContent = r.message;
+            status.classList.toggle('bad', !r.valid);
+            boxes.forEach(({ uid, input }) => { input.disabled = !team.has(uid) && team.size >= 14; });
+            steppers.forEach(({ id, minus, plus, out }) => {
+                out.textContent = '×' + (counts[id] || 0);
+                minus.disabled = !counts[id];
+                plus.disabled = (counts[id] || 0) >= 2 || tacticTotal() >= 14;
+            });
+            if (saveBtn) saveBtn.disabled = !r.valid;
+        }
+
+        const teamList = el('div.deck-builder.team-builder', null, s.creatures.map(x => {
+            const c = Rift.data.creatures[x.species];
+            const input = el('input', { type: 'checkbox', checked: team.has(x.uid), 'aria-label': c.name + ', ' + Rift.State.describeVariant(x).labels.join(', '),
+                onchange(ev) { if (ev.target.checked) team.add(x.uid); else team.delete(x.uid); refresh(); } });
+            boxes.push({ uid: x.uid, input });
+            return el('label.deck-option', null, [input, el('span', null, [
+                el('strong', { text: c.name }), ' ', Rift.UI.statLine(x.species, x),
+                el('div.small.muted', { text: [].concat(Rift.State.describeVariant(x).labels, Rift.State.describeVariant(x).taught || [],
+                    x.powerDelta < 0 ? ['injured (' + x.powerDelta + ' attack)'] : [], (x.injuries || []).includes('no-ability') ? ['no ability'] : []).join(' · ') }),
+            ])]);
+        }));
+
+        const tacticList = el('div.deck-builder.tactic-builder', null, owned.map(id => {
+            const t = tactics[id];
+            const out = el('span.stepper-count', { text: '×0' });
+            const minus = el('button.btn.small', { text: '−', 'aria-label': 'Remove one ' + t.name, onclick() { if (counts[id]) counts[id] -= 1; refresh(); } });
+            const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + t.name, onclick() { if ((counts[id] || 0) < 2 && tacticTotal() < 14) counts[id] = (counts[id] || 0) + 1; refresh(); } });
+            steppers.push({ id, minus, plus, out });
+            return el('div.deck-option.tactic-option', null, [
+                Rift.Assets.has('tactic/' + id) ? Rift.Assets.img('tactic/' + id, { className: 'tactic-art', alt: '' }) : null,
+                el('span', { style: { flex: 1 } }, [
+                    el('strong', { text: t.name }), ' ', el('span.stat.stat-cost', { title: 'Energy cost', text: '⚡ ' + t.cost }),
+                    el('div.small', { text: t.text }),
+                ]),
+                el('span.stepper', { role: 'group', 'aria-label': t.name + ' copies' }, [minus, out, plus]),
+            ]);
+        }));
+
+        const sections = [
+            el('p.small', { text: 'Your deck has ' + D + ' cards: creatures from your team plus tactic cards. Choose 6 to 14 creatures and up to 2 copies of each tactic. Win tactics from trainers.' }),
+            status,
+            el('h3', { text: 'Battle team' }),
+            s.creatures.length ? teamList : el('p.small.muted', { text: 'You have no creatures yet. Loaned creatures fill your team.' }),
+            el('h3', { text: 'Tactic cards' }),
+            tacticList,
+        ];
+        const dialog = Rift.UI.modal('Build your deck', el('div.stack', null, sections), [
+            { label: 'Cancel' },
+            { label: 'Default', keepOpen: true, onclick() {
+                team.clear(); s.creatures.slice(0, 10).forEach(x => team.add(x.uid));
+                Object.keys(counts).forEach(k => delete counts[k]);
+                Rift.data.tacticDecks.starter.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+                refresh();
+            } },
+            { label: 'Save deck', primary: true, keepOpen: true, onclick() {
+                const r = check();
+                if (!r.valid) { status.textContent = r.message; return; }
+                const chosenTactics = [];
+                owned.forEach(id => { for (let i = 0; i < (counts[id] || 0); i++) chosenTactics.push(id); });
+                Rift.State.update(st => {
+                    st.team = st.creatures.filter(x => team.has(x.uid)).map(x => x.uid);
+                    st.deckTactics = chosenTactics;
+                });
+                dialog.close();
+                Rift.UI.toast('Your deck is saved: ' + r.message);
+                if (onSaved) onSaved();
+            } },
+        ]);
+        saveBtn = Array.from(dialog.node.querySelectorAll ? dialog.node.querySelectorAll('button') : []).find(b => b.textContent === 'Save deck') || null;
+        refresh();
+    }
+
+    // Short summary for the Collection panel.
+    function deckSummary(s) {
+        const t = Rift.State.deckTactics(s).length;
+        const r = Rift.State.checkDeck({ owned: s.creatures.length, team: s.creatures.length ? Rift.State.battleTeam(s).length : 0, tactics: t });
+        return r.message;
     }
 
     function editAxiomDeck() {
@@ -83,17 +208,25 @@
             });
             const caughtKinds = Object.keys(counts).length;
             const hud = Rift.UI.hud({ back: { label: 'Back', onclick: () => Rift.Router.back('map') } });
+            const summary = el('p.small', { text: deckSummary(s) + ' Axiom cards: 10.' });
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
+                el('div.panel.deck-panel.stack', null, [
+                    el('h3', { text: 'Build decks' }),
+                    summary,
+                    el('div.row.wrap', null, [
+                        el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(() => { summary.textContent = deckSummary(Rift.State.get()) + ' Axiom cards: 10.'; }) }),
+                        el('button.btn', { text: 'Axiom cards · 10 cards', onclick: editAxiomDeck }),
+                        (s.items['trick-book'] || 0) > 0 && s.creatures.length ? el('button.btn', { text: 'Use a Trick Book (' + s.items['trick-book'] + ')', onclick: () => Rift.UI.trickBook(null, () => Rift.Router.replace('collection')) }) : null,
+                    ]),
+                ]),
                 el('div.row.wrap', { style: { marginBottom: '14px' } }, [
                     el('button.btn', { text: 'Learn the card game', onclick: () => Rift.Battles.learn('collection') }),
-                    el('button.btn', { text: 'Build axiom deck · 10 cards', onclick: editAxiomDeck }),
                     el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
                     el('button.btn', { text: 'Rumour board', onclick: () => Rift.Router.go('rumours') }),
-                    el('span.small.muted', { text: 'Your first 10 creatures form your battle team.' }),
                 ]),
                 el('div.dex-grid', null, species.map(id => card(id, {
                     caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], onclick: () => (counts[id] || s.seen.includes(id)) && details(id),

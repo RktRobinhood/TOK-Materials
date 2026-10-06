@@ -3,22 +3,40 @@
  * (the imported team driven by the AI). Works fully offline. Uses the save-code
  * format from js/core/state.js (prefix, kind 'team', base64 JSON, checksum).
  *
- * Rift.Battle.TeamCodes.exportTeam({ nickname, creatures: [instances ≤ 10], axioms: [ids], stake? }) → code
- * Rift.Battle.TeamCodes.importTeam(code) → { nickname, team: [instances], axioms: [ids], stake }
+ * Rift.Battle.TeamCodes.exportTeam({ nickname, creatures: [instances ≤ 14], axioms: [ids], tactics?: [ids], stake? }) → code
+ * Rift.Battle.TeamCodes.importTeam(code) → { nickname, team: [instances], axioms: [ids], tactics: [ids], stake, version }
  *   throws a friendly Error on typos, tampering, or impossible creatures.
  * Rift.Battle.TeamCodes.ghostOpponent(imported) → opponent for the battle screen
  *
+ * Version 2 (Card Arena) rows: [species, powerDelta, injuries, warpedAbility|0, trophyOf|0,
+ * [variantAttack, variantHealth, trait|0], taught|0] plus `k`: the tactic cards.
+ * Version 1 codes (before variation) still import: plain variants, no taught trick and the
+ * starter tactics.
+ *
  * The checksum is not a secret, so import also validates the contents: known species,
- * no power above the species' printed power, real ability keywords, at most 10 creatures.
+ * attack never below 0 and no positive power boost, real abilities, variants and tricks
+ * in range, known tactics with at most 2 copies, 1–14 creatures and at most 20 cards.
  */
 (function (root) {
     'use strict';
 
     const Rift = root.Rift;
     const Battle = Rift.Battle || (Rift.Battle = {});
-    const VERSION = 1;
-    const MAX = 10;
+    const VERSION = 2;
+    const MAX = 14;          // creatures in a deck
+    const MAX_V1 = 10;
+    const DECK = 20;         // creatures + tactics
     const INJURIES = ['no-ability', 'minus-one'];
+    const TRAITS = ['guard', 'swift', 'shield', 'sturdy'];
+    const TRICKS = ['guard', 'swift', 'shield', 'attack', 'health'];
+
+    const known = () => Rift.data.tactics || {};
+
+    // Known ids, at most two copies each, at most `room` cards.
+    function cleanTactics(list, room) {
+        const counts = {};
+        return (list || []).filter(id => known()[id] && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, Math.max(0, room));
+    }
 
     function exportTeam(opts) {
         const o = opts || {};
@@ -27,14 +45,20 @@
         const payload = {
             v: VERSION,
             n: String(o.nickname || 'Anonymous').slice(0, 24),
-            t: creatures.map(c => [
-                c.species,
-                c.powerDelta || 0,
-                (c.injuries || []).filter(x => INJURIES.includes(x)),
-                (c.warped && c.warped.ability) || 0,
-                c.trophyOf || 0,
-            ]),
-            a: Array.from(new Set((o.axioms || []).filter(id => (Rift.data.axioms || {})[id]))).slice(0,10),
+            t: creatures.map(c => {
+                const v = c.variant || {};
+                return [
+                    c.species,
+                    c.powerDelta || 0,
+                    (c.injuries || []).filter(x => INJURIES.includes(x)),
+                    (c.warped && c.warped.ability) || 0,
+                    c.trophyOf || 0,
+                    [v.attack || 0, v.health || 0, TRAITS.includes(v.trait) ? v.trait : 0],
+                    TRICKS.includes(c.taught) ? c.taught : 0,
+                ];
+            }),
+            a: Array.from(new Set((o.axioms || []).filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10),
+            k: cleanTactics(o.tactics || ((Rift.data.tacticDecks || {}).starter || []), DECK - creatures.length),
         };
         if (o.stake) payload.s = o.stake;
         return Rift.State.encode('team', payload);
@@ -44,42 +68,71 @@
 
     function importTeam(code) {
         const p = Rift.State.decode('team', code);
-        if (!p || typeof p !== 'object' || p.v !== VERSION) throw bad('it was made by a different version of the game.');
+        if (!p || typeof p !== 'object' || (p.v !== 1 && p.v !== VERSION)) throw bad('it was made by a different version of the game.');
+        const v1 = p.v === 1;
+        const max = v1 ? MAX_V1 : MAX;
         if (typeof p.n !== 'string' || !p.n.trim()) throw bad('it has no nickname.');
-        if (!Array.isArray(p.t) || !p.t.length || p.t.length > MAX) throw bad('a team has 1 to 10 creatures.');
+        if (!Array.isArray(p.t) || !p.t.length || p.t.length > max) throw bad('a team has 1 to ' + max + ' creatures.');
         const species = Rift.data.creatures || {};
-        const keywords = Battle.KEYWORDS || [];
+        const abilities = Battle.KEYWORDS || [];
         const tag = Rift.hashSeed(code).toString(36);
         const team = p.t.map((row, i) => {
             if (!Array.isArray(row)) throw bad('a creature is garbled.');
-            const [id, delta, injuries, warped, trophyOf] = row;
+            const [id, rawDelta, injuries, warped, trophyOf, variant, taught] = row;
             const sp = species[id];
             if (!sp) throw bad(`unknown creature "${id}".`);
-            if (!Number.isInteger(delta) || delta > 0 || sp.power + delta < 0) throw bad(`${sp.name} has impossible power.`);
+            if (!Number.isInteger(rawDelta) || rawDelta > 0 || rawDelta < -10) throw bad(`${sp.name} has impossible power.`);
             if (!Array.isArray(injuries) || injuries.some(x => !INJURIES.includes(x))) throw bad(`${sp.name} has unknown injuries.`);
-            if (warped && !keywords.includes(warped)) throw bad(`${sp.name} has an unknown ability.`);
+            if (warped && !abilities.includes(warped)) throw bad(`${sp.name} has an unknown ability.`);
+            let v = { attack: 0, health: 0, trait: null };
+            let trick = null;
+            let delta = rawDelta;
+            if (v1) {
+                // Old codes counted injuries against the old power scale: keep attack at 0 or more.
+                delta = Math.max(rawDelta, -(sp.attack || 0));
+            } else {
+                if (!Array.isArray(variant) || variant.length !== 3) throw bad(`${sp.name} has a garbled variant.`);
+                const [va, vh, trait] = variant;
+                if (![-1, 0, 1].includes(va) || ![-1, 0, 1, 2].includes(vh) || (trait && !TRAITS.includes(trait))) throw bad(`${sp.name} has an impossible variant.`);
+                if (taught && !TRICKS.includes(taught)) throw bad(`${sp.name} has an unknown trick.`);
+                v = { attack: va, health: vh, trait: trait || null };
+                trick = taught || null;
+                if ((sp.attack || 0) + va + (trick === 'attack' ? 1 : 0) + delta < 0) throw bad(`${sp.name} has impossible power.`);
+            }
             return {
                 uid: 'ghost-' + tag + '-' + i, species: id, caughtAt: 0,
                 powerDelta: delta, scars: [], injuries: injuries.slice(),
                 warped: warped ? { ability: warped } : null,
                 trophyOf: trophyOf ? String(trophyOf).slice(0, 24) : null, wins: 0,
+                variant: v, taught: trick,
             };
         });
-        const axioms = Array.isArray(p.a) ? Array.from(new Set(p.a.filter(id => (Rift.data.axioms || {})[id]))).slice(0,10) : [];
+        let tactics = [];
+        if (!v1) {
+            if (!Array.isArray(p.k)) throw bad('it has no tactic list.');
+            if (p.k.some(id => typeof id !== 'string' || !known()[id])) throw bad('it has an unknown tactic.');
+            const counts = {};
+            if (p.k.some(id => (counts[id] = (counts[id] || 0) + 1) > 2)) throw bad('a deck has at most 2 copies of a tactic.');
+            if (team.length + p.k.length > DECK) throw bad('a deck has at most ' + DECK + ' cards.');
+            tactics = p.k.slice();
+        }
+        const axioms = Array.isArray(p.a) ? Array.from(new Set(p.a.filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10) : [];
         let stake = null;
         if (p.s && typeof p.s === 'object' && p.s.items && typeof p.s.items === 'object') {
             // A ghost can offer at most one ordinary item, whatever the code says.
             const id = Object.keys(p.s.items).find(k => (Rift.data.items || {})[k]);
             if (id) stake = { items: { [id]: 1 } };
         }
-        return { nickname: p.n.trim().slice(0, 24), team, axioms, stake };
+        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, stake, version: p.v };
     }
 
     function ghostOpponent(imported) {
+        const tactics = imported.tactics && imported.tactics.length ? imported.tactics.slice() : ((Rift.data.tacticDecks || {}).starter || []).slice();
         return {
             name: imported.nickname + '\'s ghost',
             nickname: imported.nickname,
             team: imported.team,
+            tactics,
             axioms: imported.axioms,
             stake: imported.stake || undefined,
             ai: 'hard',
@@ -87,5 +140,5 @@
         };
     }
 
-    Battle.TeamCodes = { exportTeam, importTeam, ghostOpponent, VERSION };
+    Battle.TeamCodes = { exportTeam, importTeam, ghostOpponent, VERSION, MAX, DECK };
 })(typeof window !== 'undefined' ? window : globalThis);

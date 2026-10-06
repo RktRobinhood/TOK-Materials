@@ -240,3 +240,37 @@ body.calm-motion .tour-practice * { animation:none; }
 .tour-lamp.red { background:#a92639; box-shadow:0 0 10px #e8384f; }
 .tour-lamp.unknown { background:#26315c; }
 .tour-matrix { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+
+/* ---- creature stats, variation badges, Trick Book and the deck builder ---- */
+.stat-line { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; white-space: nowrap; }
+.stat { display: inline-flex; align-items: center; gap: 2px; }
+.stat-cost { color: var(--rift); }
+.stat-attack { color: var(--gold); }
+.stat-health { color: #ff7a8a; }
+.stat-gem { width: 18px; height: 18px; object-fit: contain; }
+.fcard-stats { font-size: 0.85em; }
+.variant-badges { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.variant-stars { color: var(--gold); letter-spacing: 1px; }
+.variant-star { width: 16px; height: 16px; }
+.variant-star.off { opacity: 0.3; }
+.trait-badge { width: 22px; height: 22px; object-fit: contain; }
+.taught-chip { border-color: var(--rift); color: var(--rift); }
+.team-chip { border-color: var(--gold); color: var(--gold); }
+.instance-row { padding: 8px 10px; gap: 4px; display: flex; flex-direction: column; }
+.deck-panel { margin-bottom: 14px; padding: 10px 14px; }
+.deck-panel h3 { margin: 0; }
+.deck-status { font-weight: 700; }
+.deck-status.bad { color: var(--gold); }
+.deck-builder { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; max-height: 38vh; overflow-y: auto; padding-right: 4px; }
+.deck-option { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border: 1px solid var(--panel-edge); border-radius: 8px; }
+.deck-option input { margin-top: 4px; }
+.tactic-art { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
+.stepper { display: inline-flex; align-items: center; gap: 4px; flex: none; }
+.stepper .btn { min-width: 32px; }
+.stepper-count { min-width: 26px; text-align: center; font-weight: 700; }
+.trick-pick, .trick-option { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; text-align: left; justify-content: flex-start; }
+.trick-option.current { opacity: 0.6; }
+.trick-list { max-height: 50vh; overflow-y: auto; }
+.catch-variant { margin: 4px 0 8px; }
+.catch-variant .row { justify-content: center; }
+@media (max-width: 520px) { .deck-builder { grid-template-columns: 1fr; } .stat-line { gap: 6px; } }

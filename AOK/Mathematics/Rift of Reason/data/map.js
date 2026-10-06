@@ -458,22 +458,26 @@
         ch4: { scene: 'scene/map-ch4', name: 'The Server Tower' },
     };
 
-    // NPC trainers for battle nodes.
+    // NPC trainers for battle nodes. team: 10 species; tactics?: their tactic cards (default: the
+    // starter ten); rewardTactic?: the earned tactic their first defeat unlocks (else the next unowned one).
     Rift.data.trainers = {
         'syllo': {
             name:'Sergeant Syllo', speaker:'syllo', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
             team:['lobstorian','astrophysicat','lobstorian','astrophysicat','beastie','astrophysicat','lobstorian','khaby','beastie','astrophysicat'],
             ante:{items:{charm:2}},
+            rewardTactic:'pause-for-thought',
         },
         'baker': {
             name:'Mrs Crumb', speaker:'baker', intro:'“A recipe is a set of rules. Can your creatures follow mine?”',
             team:['beastie','siuuugull','beansprout','eminemu','beastie','siuuugull','beansprout','eminemu','astrophysicat','lobstorian'],
             ante:{items:{charm:2}},
+            rewardTactic:'lemma',
         },
         'pip': {
             name:'Pip, the Clerk', speaker:'pip', intro:'“Words can change a case. Watch my Language team and read each axiom.”',
             team:['tremendoodle','swiftlet','kardashiant','eminemu','swiftlet','tremendoodle','kardashiant','eminemu','lobstorian','astrophysicat'],
             ante:{items:{greatcharm:1}},
+            rewardTactic:'recall',
         },
         'feed': {
             speaker:'algorithm', intro:'“MY TEAM GETS ATTENTION. CAN YOURS THINK UNDER CHANGING RULES?”',
@@ -481,6 +485,7 @@
             ai: 'hard',
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
+            tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'pep-talk', 'eureka', 'rethink', 'big-claims', 'clockwork', 'lemma'],
         },
         'fin': {
             speaker:'fin', intro:'“A strong case needs sound rules. Read every axiom before you attack.”',
@@ -488,19 +493,24 @@
             ai: 'hard',
             team: ['carlseal', 'altmanta', 'obambu', 'rockodile', 'messilion', 'gargoyle', 'beeyonce', 'haalandroid', 'lobstorian', 'muskrat'],
             ante: { items: { greatcharm: 2, 'trickster-coin': 1, heartstone: 1 } },
+            tactics: ['counterexample', 'occams-razor', 'occams-razor', 'big-claims', 'stand-firm', 'safety-net', 'recall', 'second-wind', 'look-it-up', 'rethink'],
         },
         'constable': {
-            speaker:'constable', intro:'“Three lives. Two steals. The law can change each round.”',
+            speaker:'constable', intro:'“Ten hearts. Guards first. The law can change each round.”',
             name: 'Constable Clobber',
             ai: 'hard',
             team: ['lobstorian', 'tremendoodle', 'rawmsay', 'rockodile', 'carlseal', 'beastie', 'swiftlet', 'muskrat', 'messilion', 'speedcheeta'],
             ante: { items: { greatcharm: 2, heartstone: 1 } },
+            rewardTactic: 'peer-review',
+            tactics: ['stand-firm', 'stand-firm', 'pause-for-thought', 'pause-for-thought', 'counterexample', 'pep-talk', 'second-wind', 'rethink', 'big-claims', 'clockwork'],
         },
         'card-sharp': {
-            speaker:'corvina', intro:'“Fancy a match? A clever steal can turn the game.”',
+            speaker:'corvina', intro:'“Fancy a match? One clever tactic can turn the game.”',
             name: 'Corvina the Card Sharp',
             team: ['zuckerborg', 'astrophysicat', 'siuuugull', 'khaby', 'kardashiant', 'keanu', 'muskrat', 'lobstorian', 'beastie', 'tremendoodle'],
             ante: { items: { greatcharm: 1, ward: 1 } },
+            rewardTactic: 'safety-net',
+            tactics: ['rethink', 'rethink', 'clockwork', 'occams-razor', 'eureka', 'look-it-up', 'counterexample', 'pep-talk', 'second-wind', 'stand-firm'],
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

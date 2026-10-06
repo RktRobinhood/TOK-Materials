@@ -22,6 +22,33 @@
         state.items.mending--;return true;
     }
 
+    // One Trick Book teaches an owned creature one trick (replacing any earlier one).
+    // Returns false, spending nothing, for a missing book, creature or trick, or the same trick again.
+    function teach(state, uid, trick) {
+        const c = (state.creatures || []).find(x => x.uid === uid);
+        if (!c || !((state.items || {})['trick-book'] > 0) || !Rift.State.TRICKS.includes(trick) || c.taught === trick) return false;
+        if (Rift.State.naturalKeywords(c).includes(trick)) return false; // e.g. Guard on a creature that already has Guard
+        c.taught = trick;
+        state.items['trick-book'] -= 1;
+        return true;
+    }
+
+    // First win against a trainer: one Trick Book and, if any is left to earn, one tactic
+    // (the trainer's own reward tactic first). Returns { items, tactic } or null if already claimed.
+    function claimTrainerReward(state, trainerId) {
+        const key = 'trainer-reward:' + trainerId;
+        const t = (Rift.data.trainers || {})[trainerId];
+        if (!t || state.flags[key]) return null;
+        state.flags[key] = true;
+        state.items['trick-book'] = (state.items['trick-book'] || 0) + 1;
+        if (!Array.isArray(state.tactics)) state.tactics = [];
+        const owned = Rift.State.ownedTactics(state);
+        const earned = ((Rift.data.tacticDecks || {}).earned || []).filter(id => (Rift.data.tactics || {})[id]);
+        const tactic = [t.rewardTactic].concat(earned).find(id => id && earned.includes(id) && !owned.includes(id)) || null;
+        if (tactic) state.tactics.push(tactic);
+        return { items: { 'trick-book': 1 }, tactic };
+    }
+
     // ---- fog of war ------------------------------------------------------------
     // revealed: you can see and enter it. hinted: a fogged silhouette next to a
     // revealed node, showing only its teaser on hover.
@@ -177,11 +204,13 @@
             out.xp = 10;
             if (rng.chance(0.5)) give('charm');
             if (rng.chance(0.15)) give(rng.pick(['trickster-coin', 'heartstone']));
+            if (rng.chance(0.05)) give('trick-book');
         } else if (n.type === 'miniboss') {
             out.xp = 25;
             give('charm', 2);
             give(rng.pick(['tonic', 'greatcharm', 'lure']));
             give(rng.pick(['trickster-coin', 'heartstone']));
+            if (rng.chance(0.1)) give('trick-book');
         } else if (n.type === 'boss') {
             out.xp = 50;
             give('greatcharm', 2);
@@ -234,7 +263,7 @@
     }
 
     Rift.World = {
-        award, attempts, recordWrong, hintCost, solveStars, mend,
+        award, attempts, recordWrong, hintCost, solveStars, mend, teach, claimTrainerReward,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter, claimBonus,

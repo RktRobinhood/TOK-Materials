@@ -346,6 +346,16 @@
             }
 
             // ---- catching ----
+            // Every caught creature varies a little: show its real card numbers and luck.
+            function variantNote(inst) {
+                const st = Rift.State.creatureStats(inst);
+                const d = Rift.State.describeVariant(inst);
+                const words = 'This one: ' + st.cost + ' energy, ' + st.attack + ' attack, ' + st.health + ' health. ' + d.labels.join(', ') + '.';
+                return el('div.catch-variant.stack', { 'aria-label': words }, Rift.UI.statLine && Rift.UI.variantBadges
+                    ? [el('div.row.wrap', null, [Rift.UI.statLine(inst.species, inst), Rift.UI.variantBadges(inst)])]
+                    : [el('p', { text: words + ' ' + '★'.repeat(d.stars) + '☆'.repeat(3 - d.stars) })]);
+            }
+
             function catchPhase() {
                 phase = 'catch';
                 closeHelp();
@@ -417,14 +427,16 @@
                     panel.append(el('p', { text: skill.label }), el('p.catch-odds', { text: 'Base ' + Math.round(base * 100) + '%' + (skill.bonus ? ' · skill +' + Math.round((roll.p - base) * 100) + ' points = ' : ' · missed: quarter chance = ') + Math.round(roll.p * 100) + '%. Used ' + skill.spent + ' charm(s).' }));
                     if (roll.caught) {
                         Rift.Audio.sfx('caught');
+                        const caughtInst = Rift.State.makeCreature(obstacle);
                         Rift.State.update(st => {
-                            st.creatures.push(Rift.State.makeCreature(obstacle));
+                            st.creatures.push(caughtInst);
                             st.stats.catches += 1;
                             if (c.rarity === 'legendary' && Rift.World.award(st, 'legend-hunter')) Rift.UI.toast('🏅 New accolade: Legend Hunter');
                         });
                         phase = 'caught';
                         panel.append(
                             el('h2', { text: 'Caught! ' + c.name + ' joins you.' }),
+                            variantNote(caughtInst),
                             el('p', { text: c.blurb }),
                             el('p.small.muted', { text: 'Ability: ' + c.abilityText }),
                             el('div.row', null, [

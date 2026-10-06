@@ -35,3 +35,14 @@ test('teacher rejects unsupported, damaged and oversized reports before interpre
  const html=fs.readFileSync(GAME_DIR+'/teacher.html','utf8');assert.ok(!html.includes('boot.js'));assert.ok(!/src="https?:/.test(html));
  const page=fs.readFileSync(GAME_DIR+'/js/teacher/page.js','utf8');assert.ok(!/fetch\(|localStorage|State\.(load|replace|importCode|save)/.test(page));
 });
+
+test('teacher reads Card Arena (v2) saves with variants and 14-card teams, and older v1 backups',()=>{
+ const {R,s}=setup();
+ for(let i=0;i<14;i++)s.creatures.push(R.State.makeCreature('khaby',{uid:'k'+i,taught:i%2?'guard':null}));
+ s.team=s.creatures.map(c=>c.uid);s.deckTactics=['eureka','eureka','lemma','recall','clockwork','pep-talk'];s.tactics=['lemma','recall'];
+ assert.equal(s.version,2);
+ const v2=R.TeacherOverview.read(R.State.encode('save',s));assert.equal(v2.teamSize,14);assert.equal(v2.creatures,14);
+ const old=JSON.parse(fs.readFileSync(GAME_DIR+'/tools/test/fixtures/save-v1.json','utf8'));
+ const v1=R.TeacherOverview.read(R.State.encode('save',old));assert.equal(v1.creatures,3);assert.equal(v1.chapter,'ch1');
+ s.team.push('k0');assert.throws(()=>R.TeacherOverview.read(R.State.encode('save',s)));
+});

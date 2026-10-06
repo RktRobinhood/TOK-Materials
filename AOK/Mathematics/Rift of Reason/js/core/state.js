@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 1;
+    const STATE_VERSION = 2;
     const STORAGE_KEY = 'rift-of-reason:save';
     const CODE_PREFIX = 'ROR1';
 
@@ -34,11 +34,13 @@
             accolades: [],
             items: { charm: 3, tonic: 1 },
             creatures: [],         // owned creature instances, see makeCreature
-            team: [],              // creature uids chosen for battle (max 10)
+            team: [],              // creature uids chosen for battle (6–14); empty = the first 10
             trophies: [],          // named trophy copies won from classmates' ghosts
             seen: [],              // species ids seen
             axioms: [],            // axiom ids added to the player's pool
             axiomLoadout: [],      // ten chosen cards; empty saves receive the starter selection
+            tactics: [],           // earned tactic ids beyond the starter pool (data/tactics.js)
+            deckTactics: [],       // chosen tactic cards for the own deck (≤2 copies); empty = the starter ten
             rumours: [],           // rumour ids heard
             lures: {},             // node id -> visits of boosted rare spawns left
             perksUsed: {},         // perk id -> chapter it was used in
@@ -48,26 +50,158 @@
         };
     }
 
+    // ---- creature variation (design/card-arena-2026-10-07.md, "Variation") ----------
+    // Every creature instance differs a little, like wild animals. The roll depends only
+    // on the uid, so old saves (migration 1 → 2), tests and the display all agree.
+    const TRAITS = ['guard', 'swift', 'shield', 'sturdy'];
+    const TRICKS = ['guard', 'swift', 'shield', 'attack', 'health'];
+    const KEYWORD_TRAITS = ['guard', 'swift', 'shield'];
+    const ATTACK_ODDS = [{ item: -1, weight: 25 }, { item: 0, weight: 50 }, { item: 1, weight: 25 }];
+    const HEALTH_ODDS = [{ item: -1, weight: 20 }, { item: 0, weight: 45 }, { item: 1, weight: 25 }, { item: 2, weight: 10 }];
+    const TRAIT_CHANCE = 0.12;
+
+    function rollVariant(uid) {
+        const rng = Rift.makeRng('variant:' + String(uid));
+        const attack = rng.weighted(ATTACK_ODDS);
+        const health = rng.weighted(HEALTH_ODDS);
+        const trait = rng.chance(TRAIT_CHANCE) ? rng.pick(TRAITS) : null;
+        return { attack, health, trait };
+    }
+    const plainVariant = () => ({ attack: 0, health: 0, trait: null });
+    function isVariant(v) {
+        return !!v && typeof v === 'object' && [-1, 0, 1].includes(v.attack) && [-1, 0, 1, 2].includes(v.health)
+            && (v.trait === null || TRAITS.includes(v.trait));
+    }
+
+    // Battle numbers of an owned instance; mirrors the engine's makeCreature.
+    function creatureStats(inst) {
+        const sp = ((Rift.data || {}).creatures || {})[inst.species];
+        if (!sp) return null;
+        const v = isVariant(inst.variant) ? inst.variant : plainVariant();
+        const taught = TRICKS.includes(inst.taught) ? inst.taught : null;
+        const keywords = (sp.keywords || []).slice();
+        [v.trait, taught].forEach(k => { if (KEYWORD_TRAITS.includes(k) && !keywords.includes(k)) keywords.push(k); });
+        return {
+            cost: sp.cost,
+            attack: Math.max(0, (sp.attack || 0) + v.attack + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0)),
+            health: Math.max(1, (sp.health || 1) + v.health + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0)),
+            keywords,
+            ability: (inst.injuries || []).includes('no-ability') ? null : ((inst.warped && inst.warped.ability) || sp.ability || null),
+        };
+    }
+
+    // Keywords a creature has without any taught trick (species keywords and natural trait).
+    function naturalKeywords(inst) {
+        const st = creatureStats(Object.assign({}, inst, { taught: null }));
+        return st ? st.keywords : [];
+    }
+
+    const TRAIT_LABELS ={ guard: 'Natural Guard', swift: 'Natural Swift', shield: 'Natural Shield', sturdy: 'Sturdy (+1 health)' };
+    const TRICK_LABELS = { guard: 'Guard', swift: 'Swift', shield: 'Shield', attack: '+1 attack', health: '+1 health' };
+    // { stars: 1–3, labels: ['Strong (+1 attack)', …], taught: 'Learned: Guard' | null }
+    function describeVariant(inst) {
+        const v = isVariant(inst && inst.variant) ? inst.variant : plainVariant();
+        const labels = [];
+        if (v.attack > 0) labels.push('Strong (+1 attack)');
+        if (v.attack < 0) labels.push('Gentle (−1 attack)');
+        if (v.health === 1) labels.push('Hardy (+1 health)');
+        if (v.health === 2) labels.push('Very hardy (+2 health)');
+        if (v.health < 0) labels.push('Frail (−1 health)');
+        if (v.trait) labels.push(TRAIT_LABELS[v.trait]);
+        if (!labels.length) labels.push('Ordinary');
+        const points = 2 * v.attack + v.health + (v.trait ? 2 : 0);
+        const stars = points < 0 ? 1 : points >= 2 ? 3 : 2;
+        const taught = TRICKS.includes(inst && inst.taught) ? 'Learned: ' + TRICK_LABELS[inst.taught] : null;
+        return { stars, labels, taught };
+    }
+
+    // ---- the player's own battle deck ------------------------------------------
+    // Battle team: the chosen uids (6–14) that still exist, else the first 10.
+    function battleTeam(save) {
+        const s = save || current;
+        if (!s) return [];
+        const byUid = {};
+        (s.creatures || []).forEach(c => { byUid[c.uid] = c; });
+        const chosen = (s.team || []).map(uid => byUid[uid]).filter(Boolean).slice(0, 14);
+        return chosen.length ? chosen : (s.creatures || []).slice(0, 10);
+    }
+    // Tactics this player may put in a deck: the starter pool plus earned ones.
+    function ownedTactics(save) {
+        const s = save || current || {};
+        const known = (Rift.data || {}).tactics || {};
+        const decks = (Rift.data || {}).tacticDecks || { starter: [] };
+        return Array.from(new Set(decks.starter.concat(s.tactics || []))).filter(id => known[id]);
+    }
+    // The chosen tactic cards (owned, ≤2 copies each), else the starter ten.
+    function deckTactics(save) {
+        const s = save || current || {};
+        const owned = ownedTactics(s);
+        const counts = {};
+        const chosen = (s.deckTactics || []).filter(id => owned.includes(id) && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, 14);
+        return chosen.length ? chosen : (((Rift.data || {}).tacticDecks || {}).starter || []).slice();
+    }
+
+    // Deck rule for the Collection builder: creatures + tactics = 20, 6–14 of each.
+    // When the player owns too few creatures, all of them are picked and loans fill the rest.
+    // checkDeck({ owned, team, tactics }) → { valid, creatures, loans, tactics, total, message }
+    const DECK_SIZE = 20;
+    function checkDeck(o) {
+        const owned = o.owned || 0, team = o.team || 0, tactics = o.tactics || 0;
+        const slots = DECK_SIZE - tactics;
+        const loans = owned < slots && team === owned ? slots - owned : 0;
+        const total = team + loans + tactics;
+        const parts = team + ' creature' + (team === 1 ? '' : 's') + (loans ? ' + ' + loans + ' loaned' : '') + ' + ' + tactics + ' tactic' + (tactics === 1 ? '' : 's');
+        const head = 'Deck ' + total + '/' + DECK_SIZE + ': ' + parts + '.';
+        let problem = null;
+        if (tactics < 6) problem = 'Choose at least 6 tactic cards.';
+        else if (tactics > 14) problem = 'Choose at most 14 tactic cards.';
+        else if (team > 14) problem = 'Choose at most 14 creatures.';
+        else if (owned < slots && team < owned) problem = 'Pick all your creatures; loaned creatures fill the rest.';
+        else if (total < DECK_SIZE) problem = 'Add ' + (DECK_SIZE - total) + ' more card' + (DECK_SIZE - total === 1 ? '' : 's') + '.';
+        else if (total > DECK_SIZE) problem = 'Remove ' + (total - DECK_SIZE) + ' card' + (total - DECK_SIZE === 1 ? '' : 's') + '.';
+        return { valid: !problem, creatures: team, loans, tactics, total, message: problem ? head + ' ' + problem : head };
+    }
+
     let instanceCounter = 0;
     function makeCreature(speciesId, extra) {
         instanceCounter += 1;
-        return Object.assign({
+        const inst = Object.assign({
             uid: Date.now().toString(36) + '-' + instanceCounter.toString(36) + '-' + Math.floor(Math.random() * 1e6).toString(36),
             species: speciesId,
             caughtAt: Date.now(),
-            powerDelta: 0,         // injuries lower it
+            powerDelta: 0,         // injuries lower it (the engine applies it to attack)
             scars: [],             // cosmetic scars
             injuries: [],          // e.g. 'no-ability', 'minus-one'
             warped: null,          // { ability } when the warp re-rolled it
             trophyOf: null,        // classmate nickname for trophy copies
             wins: 0,
+            variant: null,         // { attack, health, trait } rolled from the uid
+            taught: null,          // one Trick Book trick: 'guard'|'swift'|'shield'|'attack'|'health'
         }, extra || {});
+        if (!isVariant(inst.variant)) inst.variant = rollVariant(inst.uid);
+        return inst;
+    }
+
+    // Gives an owned instance its uid-based variant and the taught slot (migration 1 → 2).
+    function upgradeInstance(c) {
+        if (!c || typeof c !== 'object' || typeof c.uid !== 'string') return c;
+        if (!isVariant(c.variant)) c.variant = rollVariant(c.uid);
+        if (!TRICKS.includes(c.taught)) c.taught = null;
+        return c;
     }
 
     // ---- migrations ----------------------------------------------------------
     // Each entry upgrades from version N to N+1. Add one when STATE_VERSION grows.
     const MIGRATIONS = {
-        // 1: s => { s.newField = ...; s.version = 2; return s; },
+        // Card Arena: creature variation, Trick Book tricks and tactic cards.
+        1: s => {
+            if (Array.isArray(s.creatures)) s.creatures.forEach(upgradeInstance);
+            if (Array.isArray(s.trophies)) s.trophies.forEach(upgradeInstance);
+            if (!Array.isArray(s.tactics)) s.tactics = [];
+            if (!Array.isArray(s.deckTactics)) s.deckTactics = [];
+            s.version = 2;
+            return s;
+        },
     };
 
     function migrate(state) {
@@ -179,6 +313,19 @@
         VERSION: STATE_VERSION,
         freshState,
         makeCreature,
+        rollVariant,
+        isVariant,
+        creatureStats,
+        naturalKeywords,
+        describeVariant,
+        battleTeam,
+        ownedTactics,
+        deckTactics,
+        checkDeck,
+        DECK_SIZE,
+        TRAITS,
+        TRICKS,
+        TRICK_LABELS,
         migrate,
         encode,
         decode,

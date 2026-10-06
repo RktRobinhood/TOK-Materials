@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "createdAt": 1790000000000,
+  "seed": 123456,
+  "visits": 7,
+  "avatar": { "type": "owlet", "variant": "girl", "nickname": "Old Save" },
+  "chapter": "ch1",
+  "map": { "at": "gate", "revealed": ["fair-gate", "gate"], "completed": ["stall-gallery"], "visitCount": { "gate": 2 }, "rifts": [] },
+  "flags": { "card-lesson-won": true, "card-rules-version": 2 },
+  "health": 4,
+  "maxHealth": 5,
+  "scars": [],
+  "xp": 60,
+  "accolades": ["clear-thinker"],
+  "items": { "charm": 2, "tonic": 1, "mending": 1 },
+  "creatures": [
+    { "uid": "mf1a2b-1-abc", "species": "lobstorian", "caughtAt": 1790000001000, "powerDelta": -1, "scars": ["scar-a"], "injuries": ["minus-one"], "warped": null, "trophyOf": null, "wins": 2 },
+    { "uid": "mf1a2c-2-def", "species": "astrophysicat", "caughtAt": 1790000002000, "powerDelta": 0, "scars": [], "injuries": [], "warped": { "ability": "grook" }, "trophyOf": null, "wins": 0 },
+    { "uid": "trophy-xyz", "species": "zuckerborg", "caughtAt": 0, "powerDelta": 0, "scars": [], "injuries": ["no-ability"], "warped": null, "trophyOf": "Ida", "wins": 0 }
+  ],
+  "team": [],
+  "trophies": [],
+  "seen": ["lobstorian", "astrophysicat", "zuckerborg"],
+  "axioms": ["underdog"],
+  "axiomLoadout": [],
+  "rumours": [],
+  "lures": {},
+  "perksUsed": {},
+  "tutorialsSeen": { "venn": true },
+  "stats": { "puzzlesSolved": 4, "hintsUsed": 1, "battlesWon": 1, "battlesLost": 0, "catches": 3, "escapes": 1 },
+  "settings": { "music": 0.5, "sfx": 0.8, "voice": 1, "textSpeed": 1, "calm": false }
+}

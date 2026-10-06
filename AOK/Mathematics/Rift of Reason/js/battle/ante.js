@@ -49,8 +49,16 @@
         return out;
     }
 
+    // Battle attack of an instance (species attack + variant + taught trick + injuries), never below 0.
+    function attackOf(inst) {
+        const sp = (Rift.data.creatures || {})[inst.species] || {};
+        const v = inst.variant || {};
+        return Math.max(0, (sp.attack || 0) + (v.attack || 0) + (inst.taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0));
+    }
+
+    // The ghost's best card by attack (ties broken at random, seeded).
     function strongest(team, rng) {
-        const power = inst => (((Rift.data.creatures || {})[inst.species] || {}).power || 0) + (inst.powerDelta || 0);
+        const power = attackOf;
         const list = (team || []).filter(inst => inst && (Rift.data.creatures || {})[inst.species]);
         if (!list.length) return null;
         const top = Math.max(...list.map(power));
@@ -77,6 +85,7 @@
                 ante.opponent.trophy = {
                     species: best.species, powerDelta: best.powerDelta || 0,
                     injuries: (best.injuries || []).slice(), warped: best.warped || null,
+                    variant: best.variant ? Object.assign({}, best.variant) : null, taught: best.taught || null,
                     trophyOf: opp.nickname || opp.name || 'a classmate',
                 };
             }
@@ -90,10 +99,13 @@
     }
 
     function newInstance(speciesId, uid, now, extra) {
-        return Object.assign({
+        const inst = Object.assign({
             uid, species: speciesId, caughtAt: now || 0, powerDelta: 0,
-            scars: [], injuries: [], warped: null, trophyOf: null, wins: 0,
+            scars: [], injuries: [], warped: null, trophyOf: null, wins: 0, variant: null, taught: null,
         }, extra || {});
+        // New creatures vary like caught ones; a trophy keeps the ghost's variant.
+        if (!inst.variant) inst.variant = Rift.State && Rift.State.rollVariant ? Rift.State.rollVariant(uid) : { attack: 0, health: 0, trait: null };
+        return inst;
     }
 
     function settle(ante, outcome, opts) {
@@ -111,6 +123,7 @@
                 const t = ante.opponent.trophy;
                 res.creaturesGained.push(newInstance(t.species, 'trophy-' + tag, o.now, {
                     powerDelta: t.powerDelta, injuries: t.injuries.slice(), warped: t.warped, trophyOf: t.trophyOf,
+                    variant: t.variant || null, taught: t.taught || null,
                 }));
             }
             res.lines.push(`You win ${describeItems(ante.opponent.items)}.`);
@@ -135,6 +148,7 @@
             save.creatures = save.creatures
                 .filter(inst => !fate.removed.includes(inst.uid))
                 .map(inst => updated[inst.uid] || inst);
+            if (Array.isArray(save.team)) save.team = save.team.filter(uid => !fate.removed.includes(uid));
             Object.keys(fate.itemsUsed || {}).forEach(id => {
                 if (fate.itemsUsed[id]) save.items[id] = Math.max(0, (save.items[id] || 0) - fate.itemsUsed[id]);
             });
@@ -151,5 +165,5 @@
         return save;
     }
 
-    Battle.Ante = { compute, settle, applyToSave, DEFAULT_STAKES };
+    Battle.Ante = { compute, settle, applyToSave, attackOf, DEFAULT_STAKES };
 })(typeof window !== 'undefined' ? window : globalThis);
