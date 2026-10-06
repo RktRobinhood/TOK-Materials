@@ -260,7 +260,7 @@
                 ]),
                 el('div.row.wrap', { style: { marginBottom: '14px' } }, [
                     el('button.btn', { text: 'Learn the card game', onclick: () => Rift.Battles.learn('collection') }),
-                    el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: no fate rolls, nothing at stake', onclick: () => Rift.Battles.practice() }),
+                    el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
                     el('button.btn', { text: 'Rumour board', onclick: () => Rift.Router.go('rumours') }),

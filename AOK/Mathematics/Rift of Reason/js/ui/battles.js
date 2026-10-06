@@ -51,7 +51,8 @@
     // team), chosen tactic cards, ten-card axiom contribution and hero art.
     function myDeck() {
         const s = Rift.State.get();
-        const team = s.creatures.length ? Rift.State.battleTeam(s) : Rift.Battle.Lesson.starter();
+        // With no creatures, loaned starters fill only the places tactics leave (as the deck builder shows).
+        const team = s.creatures.length ? Rift.State.battleTeam(s) : Rift.Battle.Lesson.starter().slice(0, Math.max(6, 20 - Rift.State.deckTactics(s).length));
         const art = s.avatar && typeof Rift.avatarArt === 'function' ? Rift.avatarArt(s.avatar, 'neutral') : null;
         return {
             team,
@@ -143,13 +144,24 @@
                 'Then play cards for their energy cost. Drag a card onto your side, or click it and press Play. New creatures sleep: they attack next turn.',
                 'To attack, drag a ready creature onto an enemy creature or the enemy hero. Or click it, then click a glowing target.',
                 'In a fight, both creatures deal damage equal to their attack. Damage stays. A creature with 0 health is defeated.',
-                'Guard: if the enemy has a Guard creature, attack it first. Swift: can attack at once. Shield: ignores the first damage.',
-                'Entrance works when the card is played. Last Word works when it is defeated. Activate costs energy and uses its attack this turn.',
+                'Colour wheel: a creature gets +1 attack when it fights the colour it beats. Point at a target to see the fight before you attack. The wheel is in the side panel.',
                 'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
-                'The Fate track moves 1 space every End turn. At zero it flips a free rule or resets all rules. Read Rules now: even the victory goal can change.',
+                'The Fate track moves 1 space every End turn. At zero, the top card of the shared rule deck turns over, or all rules go back to normal. Read Rules now: even the victory goal can change.',
                 'The player who goes first starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[0] + ' cards. The player who goes second starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[1] + ' and gets the Spark: +1 energy once.',
                 'Practice and Syllo’s story challenge have no stakes. Other matches may risk items or cards.',
-            ].map(text=>el('p.small',{text}))),[{label:'Close'}],{onClose});
+            ].map(text=>el('p.small',{text})).concat([
+                el('h3',{text:'Keywords'}),
+                el('div.rules-keywords',null,[
+                    ['Guard','Enemies must attack a Guard creature first.'],
+                    ['Swift','It can attack on the turn it arrives.'],
+                    ['Shield','The first damage it takes is ignored.'],
+                    ['Elusive','Enemy tactics and abilities can’t target it.'],
+                    ['Spark','Once per match: +1 energy (for the player who goes second).'],
+                    ['Entrance','It works when you play the card.'],
+                    ['Last Word','It works when the creature is defeated.'],
+                    ['Activate','Pay the energy (⚡) to use it. It uses the creature’s attack this turn.'],
+                ].map(([k,text])=>el('p.small',null,[el('b',{text:k+': '}),text]))),
+            ])),[{label:'Close'}],{onClose});
         },
 
         learn(back) {
@@ -173,7 +185,7 @@
             if(offerUpdatedLesson(()=>Battles.story(),'map'))return;
             const s=Rift.State.get();
             Rift.Router.go('battle',{
-                mode:'practice',seed:'syllo-road-challenge',
+                mode:'practice',story:true,seed:'syllo-road-challenge',
                 player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
@@ -204,7 +216,7 @@
                 {label:'Challenge · Easy',primary:true,onclick:()=>Battles.trainer(nodeId,'easy')},
                 {label:'Challenge · Hard',onclick:()=>Battles.trainer(nodeId,'hard')});
             Rift.UI.modal(t.name,el('div.stack',null,[Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes and fate rolls. Defeated collected cards may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
+                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
             ]),choices);
         },
 
@@ -277,7 +289,7 @@
             const input = el('textarea', { rows: 4, style: { width: '100%' }, placeholder: 'ROR1.team.…' });
             Rift.UI.modal('Battle a classmate', el('div.stack', null, [
                 el('p', { text: 'Paste your classmate\'s team code. You will battle a ghost of their team.' }),
-                el('p.small', {text:'Your own collected cards face fate rolls if defeated and may be injured or lost. Items are at stake. Your classmate’s original cards stay safe; a win earns a trophy copy. Use Practice for a safe match.'}), input,
+                el('p.small', {text:'If your own collected cards are defeated, an after-battle check may injure or lose them. Items are at stake. Your classmate’s original cards stay safe; a win earns a trophy copy. Use Practice for a safe match.'}), input,
             ]), [
                 { label: 'Cancel' },
                 { label: 'Battle!', primary: true, onclick: () => Battles.ghost(input.value) },

@@ -18,7 +18,7 @@ test('empty collection can learn, practice and win the real safe story match',()
  Rift.Battles.learn('collection');assert.equal(g.routes.at(-1).screen,'battle-lesson');
  g.routes.at(-1).params.onEnd(true);assert.equal(g.state.flags['card-lesson-won'],true);assert.equal(g.state.flags['card-rules-version'],3);
  Rift.Battles.practice();assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(g.routes.at(-1).params.player.team.length,10);
- Rift.Battles.story();const p=g.routes.at(-1).params;
+ Rift.Battles.story();const p=g.routes.at(-1).params;assert.equal(p.story,true,'the end screen can say Story challenge');
  assert.equal(p.mode,'practice');assert.ok(p.player.team.every(c=>c.loaner));
  const start=E.createBattle({seed:p.seed,players:[{name:'You',team:p.player.team},{name:p.opponent.name,team:p.opponent.team}],axiomDeck:p.axiomDeck,options:{...p.battleOptions,mode:p.mode}});
  const end=Rift.Battle.AI.playOut(start,['hard',p.opponent.ai]);assert.equal(E.winner(end),0);
@@ -59,4 +59,12 @@ test('rest keeper challenges require their associated logic puzzle, not a rest v
   const prerequisite=g.Rift.World.node(n.challengeAfter);assert.ok(prerequisite.puzzles.length);
   g.state.map.completed.push(n.challengeAfter);assert.equal(g.Rift.Battles.canChallenge(id),true);
  }
+});
+test('How to play lists the keywords and the colour wheel hint',()=>{
+ const g=game();g.Rift.Battles.rules();const m=g.modals.at(-1);
+ const text=n=>typeof n==='string'?n:(n.textContent||'')+(n.children||[]).map(text).join(' ');
+ const all=text(m.body);
+ for(const k of ['Guard','Swift','Shield','Elusive','Spark','Entrance','Last Word','Activate'])assert.match(all,new RegExp(k+': '),k);
+ assert.match(all,/Colour wheel: a creature gets \+1 attack/);
+ assert.ok(!/fate roll/i.test(all));
 });

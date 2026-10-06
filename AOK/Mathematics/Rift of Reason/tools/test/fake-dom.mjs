@@ -87,6 +87,7 @@ export class FakeElement {
     getBoundingClientRect() { return { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0 }; }
     setPointerCapture() {}
     scrollIntoView() {}
+    contains(n) { for (; n; n = n.parentNode) if (n === this) return true; return false; }
     matches(sel) { return sel.split(',').some(s => matchCompound(this, s.trim())); }
     closest(sel) { for (let n = this; n && n.nodeType === 1; n = n.parentNode) if (n.matches(sel)) return n; return null; }
     querySelectorAll(sel) { return sel.split(',').flatMap(s => queryChain(this, s.trim())).filter((n, i, a) => a.indexOf(n) === i); }

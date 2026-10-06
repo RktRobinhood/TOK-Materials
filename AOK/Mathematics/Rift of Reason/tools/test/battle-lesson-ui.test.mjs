@@ -114,3 +114,22 @@ test('leaving during replies cancels them and never completes the lesson', () =>
     t.g.flush();
     assert.equal(t.handle.state, state);
 });
+
+test('the instruction bar repeats each step\'s "Do this"; Guard explains a wrong target', () => {
+    const t = setup(() => {});
+    const L = t.Rift.Battle.Lesson;
+    L.steps.forEach((step, i) => {
+        const ask = t.$('.b-prompt .b-ask');
+        if (ask && step.expect.type !== 'draw') assert.match(ask.textContent, new RegExp('^Do this: ' + step.label.replace(/[()]/g, '\$&') + '\.'), 'step ' + i);
+        assert.ok(!/onto your side to play it/.test(t.$('.b-prompt').textContent), 'step ' + i + ': no generic hint that contradicts Granny');
+        if (step.title === 'Guard comes first') {
+            t.$('.my-board [data-cid="p0c0"]').click();
+            t.$('.opp-board [data-cid="p1c0"]').click();
+            assert.match(t.$('.b-note').textContent, /Khaby Llame has Guard\. Attack it first\./);
+            t.$('.my-board [data-cid="p0c0"]').click();
+        }
+        perform(t, step.expect);
+        t.g.flush();
+    });
+    assert.match(t.$('.b-overlay').textContent, /took away a Guard with an Entrance/);
+});

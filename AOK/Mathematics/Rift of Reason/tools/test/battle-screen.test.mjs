@@ -187,3 +187,119 @@ test('calm motion: damage numbers still appear (they only fade)', () => {
     assert.ok(t.root.querySelectorAll('.b-float').length >= 2, 'damage numbers are shown');
     t.handle.destroy();
 });
+
+const mouse = (extra) => Object.assign({ pointerType: 'mouse', pointerId: 1, clientX: 0, clientY: 0, button: 0, preventDefault() {} }, extra);
+
+// Draw, play the first creature, pass, let the opponent play, draw again: both sides have a creature.
+function toSecondTurn(t) {
+    const { $ } = t;
+    $('.b-draw-btn[data-choice="deck"]').click();
+    $('.b-hand [data-cid="p0c0"]').click();
+    $('.b-prompt .btn.primary').click();
+    $('.b-end').click();
+    t.g.flush();
+    $('.b-draw-btn[data-choice="deck"]').click();
+}
+
+test('the big hover copy never takes over a board card: dragging still lights the real target', () => {
+    const t = setup(practice);
+    const { $ } = t;
+    toSecondTurn(t);
+    const enemy = $('.opp-board [data-cid="p1c0"]');
+    enemy.dispatchEvent(mouse({ type: 'pointerenter' }));
+    t.g.flush();
+    assert.ok($('.b-inspect .bc.big[data-cid="p1c0"]'), 'the big preview of the enemy card is open');
+    enemy.dispatchEvent(mouse({ type: 'pointerleave' }));
+    // Drag my ready creature: the board card (not the hidden preview copy) gets the target glow.
+    $('.my-board [data-cid="p0c0"]').dispatchEvent(mouse({ type: 'pointerdown' }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointermove', clientX: 60, clientY: 0 }));
+    assert.ok($('.opp-board [data-cid="p1c0"]').classList.contains('valid-drag'));
+    assert.equal(t.root.querySelectorAll('.b-inspect .valid-drag').length, 0);
+    assert.match($('.b-prompt .b-ask').textContent, /Drop it on a glowing target to attack/);
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointercancel' }));
+    assert.equal($('.opp-board [data-cid="p1c0"]').classList.contains('valid-drag'), false);
+    t.handle.destroy();
+});
+
+test('pointing at a target with an attacker chosen shows the predicted fight', () => {
+    const t = setup(practice);
+    const { $ } = t;
+    toSecondTurn(t);
+    $('.my-board [data-cid="p0c0"]').click();
+    $('.opp-board [data-cid="p1c0"]').dispatchEvent(mouse({ type: 'pointerenter' }));
+    assert.match($('.opp-board [data-cid="p1c0"] .b-predict').textContent, /Takes 1.*Survives/);
+    assert.match($('.my-board [data-cid="p0c0"] .b-predict').textContent, /Deals 1.*Takes 1.*Survives/);
+    $('.b-hero[data-target="h1"]').dispatchEvent(mouse({ type: 'pointerenter' }));
+    assert.match($('.b-hero[data-target="h1"] .b-predict').textContent, /−1 heart/);
+    $('.b-hero[data-target="h1"]').dispatchEvent(mouse({ type: 'pointerleave' }));
+    assert.equal(t.root.querySelectorAll('.b-predict').length, 0);
+    t.handle.destroy();
+});
+
+test('a long opponent title stays out of the log; story end screen, keywords, Fate wording and log scroll', () => {
+    const t = setup(Object.assign({}, practice, {
+        story: true,
+        opponent: Object.assign({}, practice.opponent, { name: 'Sergeant Syllo · Road challenge', hearts: 1 }),
+        battleOptions: Object.assign({}, practice.battleOptions, { timeline: true }),
+    }));
+    const { $ } = t;
+    const pill = $('.b-hero-row.opp .b-hero-name');
+    assert.equal(pill.textContent, 'Sergeant Syllo');
+    assert.equal(pill.title, 'Sergeant Syllo · Road challenge');
+    assert.match($('.b-fate-text').textContent, /^In \d+ turns: a new rule card turns over \(.+\)\.$/);
+    assert.match($('.b-rules').textContent, /the top card of the shared deck/);
+    assert.match($('.b-rules').textContent, /Keywords.*Guard.*Swift.*Shield.*Elusive.*Spark.*Entrance.*Last Word.*Activate/);
+    toSecondTurn(t);
+    assert.ok(!/Road challenge/.test($('.b-log').textContent), 'the log uses the short name');
+    assert.equal($('.b-log').scrollTop, $('.b-log').scrollHeight, 'the log keeps the newest entry in view');
+    $('.my-board [data-cid="p0c0"]').click();
+    $('.b-hero[data-target="h1"]').click();
+    t.g.flush();
+    assert.match($('.b-overlay').textContent, /Story challenge: nothing at stake\./);
+    assert.ok(!/fate roll/i.test($('.b-overlay').textContent));
+    t.handle.destroy();
+});
+
+test('practice end screen says nothing is at stake', () => {
+    const t = setup(Object.assign({}, practice, { opponent: Object.assign({}, practice.opponent, { hearts: 1 }) }));
+    toSecondTurn(t);
+    t.$('.my-board [data-cid="p0c0"]').click();
+    t.$('.b-hero[data-target="h1"]').click();
+    t.g.flush();
+    assert.match(t.$('.b-overlay').textContent, /Practice: nothing at stake\. Your creatures are safe\./);
+    t.handle.destroy();
+});
+
+test('a creature dropped on the table waits for its Entrance target, and is not lost silently', () => {
+    const eel = Object.assign({}, practice, { player: Object.assign({}, practice.player, { team: team(Array(8).fill('eelish'), 'me-') }) });
+    const t = setup(eel);
+    const { $, g } = t;
+    $('.b-draw-btn[data-choice="deck"]').click();
+    $('.b-end').click();
+    g.flush();
+    $('.b-draw-btn[data-choice="deck"]').click();
+    assert.equal(t.handle.state.players[1].board.length, 1, 'the opponent has a creature to target');
+    // Drag the Eelish from the hand and drop it on my (empty) side of the table.
+    g.document.elementFromPoint = () => $('.my-board');
+    $('.b-hand [data-cid="p0c0"]').dispatchEvent(mouse({ type: 'pointerdown' }));
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointermove', clientX: 0, clientY: -80 }));
+    assert.match($('.b-prompt .b-ask').textContent, /Drop it on a glowing target/);
+    $('.b-arena').dispatchEvent(mouse({ type: 'pointerup', clientX: 0, clientY: -80 }));
+    assert.equal(t.handle.state.players[0].board.length, 0, 'not played yet');
+    assert.ok($('.my-board .bc.pending'), 'a faint copy waits on the board');
+    assert.match($('.b-prompt .b-ask').textContent, /Now click a glowing target for Billie Eelish's Entrance \(or Cancel\)/);
+    // Doing something else first: the card stays in the hand and the screen says so.
+    $('.b-end').click();
+    assert.match($('.b-note').textContent, /Billie Eelish was not played/);
+    t.handle.destroy();
+});
+
+test('card faces name the timing of each ability', () => {
+    const mixed = Object.assign({}, practice, { player: Object.assign({}, practice.player, { team: team(['zuckerborg', 'eelish', 'astrophysicat', 'kardashiant'], 'me-') }), battleOptions: Object.assign({}, practice.battleOptions, { openHand: [4, 3], deckSize: 4 }) });
+    const t = setup(mixed);
+    const text = t.$('.b-hand').textContent;
+    assert.match(text, /Last Word:Metaverse/);
+    assert.match(text, /Entrance:Whisper/);
+    assert.match(text, /Activate \(1⚡\):Well, Actually/);
+    t.handle.destroy();
+});

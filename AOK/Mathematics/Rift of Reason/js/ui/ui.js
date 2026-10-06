@@ -26,14 +26,24 @@
             backdrop.remove();
             if (opts && opts.onClose) opts.onClose();
         };
+        const list = buttons || [{ label: 'Close' }];
+        const press = b => { Rift.Audio.sfx('click'); if (!b.keepOpen) close(); if (b.onclick) b.onclick(); };
         const actions = el('div.row.wrap', { style: { justifyContent: 'flex-end', marginTop: '14px' } },
-            (buttons || [{ label: 'Close' }]).map(b => el('button.btn' + (b.primary ? '.primary' : ''), {
+            list.map(b => el('button.btn' + (b.primary ? '.primary' : ''), {
                 text: b.label,
-                onclick() { Rift.Audio.sfx('click'); if (!b.keepOpen) close(); if (b.onclick) b.onclick(); },
+                onclick() { press(b); },
             })));
+        // A dialog with a way out (Close, Cancel, Later…) also gets a top-right ✕ that does the same.
+        const cancel = list.find(b => !b.primary && !b.required && !b.keepOpen && /^(close|cancel|later|not now|explore first|back|no)\b/i.test(b.label || ''));
+        const x = cancel ? el('button.modal-x', {
+            type: 'button', text: '✕', title: cancel.label, 'aria-label': 'Close',
+            style: { position: 'sticky', top: '0', float: 'right', margin: '-6px -6px 0 8px', width: '34px', height: '34px', borderRadius: '50%',
+                border: '1px solid rgba(242, 182, 50, 0.6)', background: 'rgba(20, 18, 31, 0.9)', color: 'inherit', fontSize: '17px', lineHeight: '1', cursor: 'pointer', zIndex: '2' },
+            onclick() { press(cancel); },
+        }) : null;
         const backdrop = el('div.modal-backdrop', {
             onclick(ev) { if (ev.target === backdrop && !(buttons && buttons.some(b => b.required))) close(); },
-        }, [el('div.modal.panel', null, [title ? el('h2', { text: title }) : null, body, actions])]);
+        }, [el('div.modal.panel', null, [x, title ? el('h2', { text: title }) : null, body, actions])]);
         overlay().appendChild(backdrop);
         return { close, node: backdrop };
     }
@@ -147,6 +157,7 @@
                     text:(injury==='no-ability'?'Restore ability':'Restore 1 attack')+' · 1 Mending',onclick(){
                         let healed=false;Rift.State.update(st=>{healed=Rift.World.mend(st,c.uid,injury);});
                         if(healed){Rift.Audio.sfx('heal');toast('Creature mended.');}
+                        else toast('Its attack is already normal. Nothing was spent.');
                         m.close();bag();
                     },
                 }))),
