@@ -81,6 +81,7 @@ test('the guided lesson runs on the real battle screen, step by step, to a win',
         t.g.flush();
     });
     assert.equal(E.winner(t.handle.state), 0);
+    assert.match(t.$('.b-overlay').textContent, new RegExp('Real matches start with ' + E.DEFAULTS.hearts + ' hearts each'));
     const finish = t.root.querySelectorAll('button').find(b => b.textContent === 'Finish lesson');
     assert.ok(finish);
     finish.click();

@@ -21,6 +21,9 @@
  * Controls: drag (Pointer Events) a ready creature onto a glowing target to attack, or a
  * hand card onto your side / onto its target to play it. Click-click works everywhere:
  * click a creature or card, then a glowing target or a button in the centre lane.
+ * Any card (hand, board, opponent) and any active rule chip shows a big readable preview on
+ * hover, keyboard focus or long-press (touch). The draw choice is docked in the centre lane so
+ * both boards stay visible, and "Your turn" fades in briefly when a turn of yours starts.
  *
  * Guide mode: only steps[i].expect is allowed (highlighted with a gold pointer); after it,
  * steps[i].replies run one by one with a visible pause, then the next step starts.
@@ -124,8 +127,10 @@
         const ui = {
             sel: null, note: '', news: [], timer: null, noteTimer: null, ended: false, busy: false, queue: [],
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
+            inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
         };
         const nodes = {};
+        const inspectables = {};   // key → { node, make } for the big-card preview
         let help = null;
 
         // ---- skeleton ----
@@ -133,18 +138,27 @@
         const sceneId = has('scene/arena') ? 'scene/arena' : 'scene/battle-table';
         const screen = el('div.battle' + (guide ? '.guide-mode' : ''), {}, [
             dom.arena = el('div.b-arena', {}, [
-                dom.oppHand = el('div.b-opp-hand'),
-                dom.oppRow = el('div.b-hero-row.opp'),
+                // Top row: opponent hero | opponent hand (backs) | opponent energy.
+                dom.oppRow = el('div.b-hero-row.opp', {}, [
+                    dom.oppLeft = el('div.b-row-left'),
+                    dom.oppHand = el('div.b-opp-hand'),
+                    dom.oppRight = el('div.b-row-right'),
+                ]),
                 dom.oppBoard = el('div.b-board.opp-board', { dataset: { zone: 'opp-board' } }),
                 dom.lane = el('div.b-lane', { dataset: { zone: 'lane' } }),
                 dom.myBoard = el('div.b-board.my-board', { dataset: { zone: 'my-board' } }),
-                dom.myRow = el('div.b-hero-row.me'),
-                dom.myHand = el('div.b-hand', { dataset: { zone: 'hand' } }),
+                // Bottom row: my hero | my hand | my energy.
+                dom.myRow = el('div.b-hero-row.me', {}, [
+                    dom.myLeft = el('div.b-row-left'),
+                    dom.myHand = el('div.b-hand', { dataset: { zone: 'hand' } }),
+                    dom.myRight = el('div.b-row-right'),
+                ]),
                 dom.end = el('div.b-end-wrap'),
-                dom.draw = el('div.b-draw'),
+                dom.draw = el('div.b-draw', { role: 'group', 'aria-label': 'Your draw' }),
                 dom.choice = el('div.b-choice'),
                 dom.arrow = svgArrow(),
                 dom.floats = el('div.b-floats'),
+                dom.banner = el('div.b-banner', { 'aria-hidden': 'true' }),
                 dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
             ]),
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
@@ -165,7 +179,7 @@
         screen.addEventListener('keydown', e => { if (e.key === 'Escape') { cancelDrag(); clearSel(); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
-        screen.addEventListener('pointercancel', () => cancelDrag());
+        screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); });
         screen.addEventListener('dragstart', e => e.preventDefault());
         screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid]')) e.preventDefault(); });
 
@@ -332,14 +346,27 @@
             return el('span.b-icon' + (cls ? '.' + cls : '') + (style ? '.art' : ''), { style, title: title || null, text: style ? '' : fallback });
         }
 
+        // Small cards (board, hand) show keyword chips and the ability's name in readable type;
+        // the big preview (hover, focus or long-press) shows the full text.
+        function briefLines(d) {
+            const kws = d.keywords.map(k => has('ui/kw-' + k)
+                ? el('span.bc-kw.art', {}, [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), KW_NAME[k] || k])
+                : el('span.bc-kw', { text: KW_NAME[k] || k }));
+            const abilities = d.lines.map(l => el('span.bc-ab.' + l.kind + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
+                icon('ui/ab-' + l.kind, AB_ICON[l.kind], 'ab', AB_KIND[l.kind] || l.name),
+                el('span.bc-ab-name', { text: l.name }),
+                l.cost != null ? el('span.bc-ab-cost', { text: l.cost + '⚡' }) : null,
+            ]));
+            return el('div.bc-brief', {}, [kws.length ? el('div.bc-kws-row', {}, kws) : null].concat(abilities,
+                !d.lines.length && !d.keywords.length ? [el('span.bc-ab.none', { text: d.silenced ? 'No abilities' : '—' })] : []));
+        }
+
         function creatureFace(cid, size) {
             const d = E.describe(state, cid);
             const frame = bg('ui/card-' + d.printedColour) || bg('ui/card-' + d.colour);
-            const big = size === 'big';
             const atkClass = d.attack > d.baseAttack ? 'up' : d.attack < d.baseAttack ? 'down' : '';
             const hpClass = d.damaged ? 'hurt' : d.maxHealth > d.baseHealth ? 'up' : '';
-            const kws = d.keywords.map(k => has('ui/kw-' + k) ? icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k) : el('span.bc-kw', { text: KW_NAME[k] || k, title: (B().KEYWORD_TEXT || {})[k] || '' }));
-            const text = size === 'board' ? el('div.bc-icons', {}, kws.concat(d.lines.map(l => icon('ui/ab-' + l.kind, AB_ICON[l.kind], 'ab' + (l.off ? '.off' : ''), l.name))))
+            const text = size !== 'big' ? briefLines(d)
                 : el('div.bc-text', {}, [
                     d.keywords.length ? el('div.bc-kws', {}, d.keywords.map(k => el('b', { text: (KW_NAME[k] || k) + '. ' }))) : null,
                     ...d.lines.map(l => el('div.bc-line' + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
@@ -348,18 +375,8 @@
                     ])),
                     !d.lines.length ? el('div.bc-line.off', { text: d.silenced ? 'Abilities lost.' : 'No ability.' }) : null,
                 ]);
-            const tags = [];
-            if (big) {
-                if (d.loaner) tags.push('Loaned');
-                if (d.trophyOf) tags.push('🏆 ' + d.trophyOf);
-                if (d.taught) tags.push('Learned: ' + d.taught);
-                if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
-                if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 −1 attack');
-                if (d.prediction) tags.push('🔮 ' + (Rift.COLOURS[d.prediction] || {}).name);
-                if (d.metaverseUsed) tags.push('Last Word used');
-                d.attackParts.filter(x => x.source !== 'base').forEach(x => tags.push(x.label + ' ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack'));
-            }
             return [
+                el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
                 gem('cost', d.cost),
@@ -370,9 +387,32 @@
                 d.keywords.includes('shield') ? el('div.bc-bubble') : null,
                 d.sleeping ? icon('ui/state-sleeping', 'Zzz', 'state.sleep', 'Asleep') : null,
                 d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', 'Can\'t attack this turn') : null,
-                big ? el('div.bc-colour', {}, [colourChip(d.colour)]) : null,
-                tags.length ? el('div.bc-tags', {}, tags.map(t => el('span', { text: t }))) : null,
             ];
+        }
+
+        // Plain notes under the big preview: colour, keywords explained, state and changes.
+        function creatureNotes(cid) {
+            const d = E.describe(state, cid);
+            const KT = B().KEYWORD_TEXT || {};
+            const lines = [];
+            if (d.sleeping) lines.push('💤 Asleep: it can attack next turn.');
+            else if (d.frozen) lines.push('❄ It can\'t attack this turn.');
+            else if (d.onBoard && d.canAttack && state.cards[cid].controller === ME && decider() === ME) lines.push('✅ Ready: drag it onto a target to attack.');
+            d.keywords.forEach(k => { if (KT[k]) lines.push(KT[k]); });
+            if (d.damaged) lines.push('Health ' + d.health + ' of ' + d.maxHealth + '. Damage stays.');
+            d.attackParts.filter(x => x.source !== 'base').forEach(x => lines.push(x.label + ': ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack.'));
+            const tags = [];
+            if (d.loaner) tags.push('Loaned');
+            if (d.trophyOf) tags.push('🏆 ' + d.trophyOf);
+            if (d.taught) tags.push('Learned: ' + d.taught);
+            if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
+            if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 −1 attack');
+            if (d.prediction) tags.push('🔮 ' + (Rift.COLOURS[d.prediction] || {}).name);
+            if (d.metaverseUsed) tags.push('Last Word used');
+            return el('div.b-notes', {}, [
+                el('div.b-notes-tags', {}, [colourChip(d.colour)].concat(tags.map(t => el('span.b-tag', { text: t })))),
+                ...lines.map(t => el('div.b-note-line', { text: t })),
+            ]);
         }
 
         function tacticFace(cid, size) {
@@ -380,11 +420,12 @@
             const frame = bg('ui/card-tactic');
             const art = has('tactic/' + d.id) ? Rift.Assets.img('tactic/' + d.id, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
             return [
+                el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
                 el('div.bc-name', { text: d.name }),
-                el('div.bc-text', {}, [el('div.bc-kind', { text: 'Tactic' }), el('div.bc-line', { text: d.text }), size === 'big' && d.flavour ? el('div.bc-flavour', { text: d.flavour }) : null]),
+                el('div.bc-text', {}, [size === 'big' ? null : el('div.bc-kind', { text: 'Tactic' }), el('div.bc-line', { text: d.text })]),
             ];
         }
 
@@ -392,11 +433,12 @@
             const ax = (Rift.data.axioms || {})[id] || { name: id, text: '', category: '' };
             const frame = bg('ui/card-axiom');
             return [
+                el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [has('ui/axiom-' + id) ? Rift.Assets.img('ui/axiom-' + id, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
                 gem('cost', E.axiomCost(state, id)),
                 el('div.bc-name', { text: ax.name }),
-                el('div.bc-text', {}, [el('div.bc-kind', { text: (ax.category || 'rule') + ' rule' }), el('div.bc-line', { text: ax.text }), size === 'big' && ax.flavour ? el('div.bc-flavour', { text: ax.flavour }) : null]),
+                el('div.bc-text', {}, [size === 'big' ? null : el('div.bc-kind', { text: (ax.category || 'rule') + ' rule' }), el('div.bc-line', { text: ax.text })]),
             ];
         }
 
@@ -416,9 +458,19 @@
             (o.classes || []).forEach(k => node.classList.add(k));
             if (clickable) node.addEventListener('click', ev => { if (ui.suppressClick) return; o.onclick(ev); });
             if (o.drag) node.addEventListener('pointerdown', ev => startDrag(ev, o.drag, node));
-            if (size !== 'big') hoverInspect(node, () => cardEl(cid, { size: 'big' }));
+            if (size !== 'big') hoverInspect(node, () => cardPreview(cid), cid);
             nodes[cid] = node;
             return node;
+        }
+
+        function cardPreview(cid) {
+            const big = cardEl(cid, { size: 'big' });
+            if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
+            const d = E.describe(state, cid);
+            return [big, el('div.b-notes', {}, [
+                el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
+                d.flavour ? el('div.b-note-line.b-flavour', { text: d.flavour }) : null,
+            ])];
         }
 
         function axiomCardEl(id, o) {
@@ -430,8 +482,19 @@
             ((o && o.classes) || []).forEach(k => node.classList.add(k));
             if (clickable) node.addEventListener('click', ev => { if (ui.suppressClick) return; o.onclick(ev); });
             if (o && o.drag) node.addEventListener('pointerdown', ev => startDrag(ev, o.drag, node));
-            if (!o || o.size !== 'big') hoverInspect(node, () => axiomCardEl(id, { size: 'big' }));
+            if (!o || o.size !== 'big') hoverInspect(node, () => [axiomCardEl(id, { size: 'big' }), axiomNote(id)], 'ax:' + id);
             return node;
+        }
+
+        function axiomNote(id) {
+            const ax = (Rift.data.axioms || {})[id] || {};
+            const on = E.activeAxioms(state).some(a => a.id === id);
+            return el('div.b-notes', {}, [
+                el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (ax.category || 'rule') + '): ' }), on
+                    ? 'active now for BOTH players.'
+                    : 'play it to change this rule for BOTH players.']),
+                ax.flavour ? el('div.b-note-line.b-flavour', { text: ax.flavour }) : null,
+            ]);
         }
 
         function cardLabel(cid) {
@@ -448,29 +511,86 @@
             return el('div.b-back' + (axiom ? '.axiom' : '') + (style ? '.art' : ''), style ? { style } : {}, style ? [] : [el('span', { text: axiom ? '⚖' : '⟁' })]);
         }
 
-        // ---- inspect (big card on hover / long look) ----
-        function hoverInspect(node, make) {
+        // ---- inspect: a big readable card on hover, keyboard focus or long-press (touch) ----
+        // The preview survives re-renders while the pointer stays on the same card in the same zone.
+        const zoneOf = node => { const z = node && node.closest ? node.closest('[data-zone]') : null; return z ? z.dataset.zone : ''; };
+        function hoverInspect(node, make, key) {
+            if (key) inspectables[key] = { node, make };
             node.addEventListener('pointerenter', ev => {
                 if (ui.drag || (ev.pointerType && ev.pointerType !== 'mouse')) return;
                 clearTimeout(ui.inspectTimer);
-                ui.inspectTimer = setTimeout(() => showInspect(make(), node), 280);
+                const showing = dom.inspect.classList.contains('show');
+                ui.inspectTimer = setTimeout(() => showInspect(make(), node, key), showing ? 0 : 220);
             });
-            node.addEventListener('pointerleave', hideInspect);
-            node.addEventListener('focus', () => { let kb = true; try { kb = node.matches(':focus-visible'); } catch (e) { /* old browser */ } if (kb) showInspect(make(), node); });
-            node.addEventListener('blur', hideInspect);
+            node.addEventListener('pointerleave', ev => { if (!ev || !ev.pointerType || ev.pointerType === 'mouse') hideInspect(); });
+            node.addEventListener('focus', () => { let kb = true; try { kb = node.matches(':focus-visible'); } catch (e) { /* old browser */ } if (kb) showInspect(make(), node, key); });
+            node.addEventListener('blur', () => hideInspect());
+            // Touch and pen: press and hold to read the card. Releasing hides it and skips the click.
+            node.addEventListener('pointerdown', ev => {
+                if (!ev.pointerType || ev.pointerType === 'mouse') return;
+                cancelLongPress();
+                const lp = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, shown: false };
+                lp.timer = setTimeout(() => { if (!ui.drag || !ui.drag.active) { lp.shown = true; showInspect(make(), node, key); } }, 450);
+                ui.longPress = lp;
+            });
+            node.addEventListener('pointerup', () => {
+                const lp = ui.longPress;
+                if (!lp) return;
+                cancelLongPress();
+                if (lp.shown) {
+                    hideInspect();
+                    ui.suppressClick = true;
+                    setTimeout(() => { ui.suppressClick = false; }, 0);
+                }
+            });
         }
-        function showInspect(card, anchor) {
-            if (ui.drag) return;
+        function cancelLongPress() {
+            if (ui.longPress) clearTimeout(ui.longPress.timer);
+            ui.longPress = null;
+        }
+        function showInspect(content, anchor, key) {
+            if (ui.drag && ui.drag.active) return;
+            clearTimeout(ui.inspectTimer);
             dom.inspect.innerHTML = '';
-            dom.inspect.appendChild(card);
+            [].concat(content).forEach(n => { if (n) dom.inspect.appendChild(n); });
             dom.inspect.classList.add('show');
-            const right = anchor && anchor.getBoundingClientRect && dom.arena.getBoundingClientRect
-                && anchor.getBoundingClientRect().left - dom.arena.getBoundingClientRect().left < 300;
-            dom.inspect.classList.toggle('right', !!right);
+            ui.inspect = { key: key || null, zone: zoneOf(anchor), anchor };
+            placeInspect(anchor);
         }
-        function hideInspect() {
+        // Next to the card (right, else left); above it for hand cards. Always inside the arena.
+        function placeInspect(anchor) {
+            if (!anchor || !anchor.getBoundingClientRect || !dom.arena.getBoundingClientRect) return;
+            const box = dom.arena.getBoundingClientRect();
+            const a = anchor.getBoundingClientRect();
+            const p = dom.inspect.getBoundingClientRect();
+            if (!p.width || !box.width) return;
+            const m = 8, gap = 14;
+            const ax = a.left - box.left, ay = a.top - box.top;
+            let x, y;
+            if (zoneOf(anchor) === 'hand') {
+                x = ax + a.width / 2 - p.width / 2;
+                y = ay - p.height - gap;
+            } else {
+                x = ax + a.width + gap;
+                if (x + p.width > box.width - m) x = ax - p.width - gap;
+                y = ay + a.height / 2 - p.height / 2;
+            }
+            x = Math.max(m, Math.min(box.width - p.width - m, x));
+            y = Math.max(m, Math.min(box.height - p.height - m, y));
+            dom.inspect.style.left = Math.round(x) + 'px';
+            dom.inspect.style.top = Math.round(y) + 'px';
+        }
+        function hideInspect(keep) {
             clearTimeout(ui.inspectTimer);
             dom.inspect.classList.remove('show');
+            if (!keep) ui.inspect = null;
+        }
+        function restoreInspect() {
+            const was = ui.inspect;
+            if (!was || !was.key || (ui.drag && ui.drag.active)) return;
+            const it = inspectables[was.key];
+            if (it && zoneOf(it.node) === was.zone) showInspect(it.make(), it.node, was.key);
+            else ui.inspect = null;
         }
 
         // ---- heroes ----
@@ -531,7 +651,8 @@
         function render() {
             if (ui.ended && dom.overlay.classList.contains('show')) return;
             Object.keys(nodes).forEach(k => delete nodes[k]);
-            hideInspect();
+            Object.keys(inspectables).forEach(k => delete inspectables[k]);
+            hideInspect(true);
             [dom.myBoard, dom.oppBoard, dom.lane].forEach(n => { n.classList.remove('guide-ring'); n.classList.remove('guide-focus'); });
             const L = legal();
             const tmap = targetMap(ui.sel, L);
@@ -547,24 +668,24 @@
             state.players[OPP].hand.forEach(cid => dom.oppHand.appendChild(knows.includes(cid) ? cardEl(cid, { size: 'mini', classes: ['revealed'] }) : cardBack(false)));
             state.players[OPP].axHand.forEach(() => dom.oppHand.appendChild(cardBack(true)));
 
-            // hero rows
-            dom.oppRow.innerHTML = '';
-            put(dom.oppRow, infoEl(OPP), heroEl(OPP, valid, L), energyEl(OPP));
-            dom.myRow.innerHTML = '';
+            // hero rows: hero and pile counts on the left, energy on the right
+            dom.oppLeft.innerHTML = '';
+            put(dom.oppLeft, heroEl(OPP, valid, L), infoEl(OPP));
+            dom.oppRight.innerHTML = '';
+            put(dom.oppRight, energyEl(OPP));
             const P = state.players[ME];
             const spark = L.find(a => a.type === 'spark');
             const sparkStyle = bg('ui/spark');
-            put(dom.myRow, 
-                el('div.b-left', {}, [
-                    infoEl(ME),
-                    P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : ''), {
-                        type: 'button', disabled: !spark, title: 'Once per match: +1 energy this turn (you went second).',
-                        onclick: () => { if (spark) act(spark); },
-                    }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
-                ]),
-                heroEl(ME, valid, L),
-                energyEl(ME),
-            );
+            dom.myLeft.innerHTML = '';
+            put(dom.myLeft, heroEl(ME, valid, L), el('div.b-left', {}, [
+                infoEl(ME),
+                P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : ''), {
+                    type: 'button', disabled: !spark, title: 'Once per match: +1 energy this turn (you went second).',
+                    onclick: () => { if (spark) act(spark); },
+                }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
+            ]));
+            dom.myRight.innerHTML = '';
+            put(dom.myRight, energyEl(ME));
 
             // boards
             const attackers = new Set(L.filter(a => a.type === 'attack' || a.type === 'activate').map(a => a.cid));
@@ -598,6 +719,7 @@
             const plays = new Set(L.filter(a => a.type === 'play').map(a => a.cid));
             const axPlays = new Set(L.filter(a => a.type === 'axiom').map(a => a.choice));
             const handItems = P.hand.length + P.axHand.length;
+            dom.myHand.style.setProperty('--n', String(Math.max(1, handItems)));
             let i = 0;
             P.hand.forEach(cid => {
                 const classes = [];
@@ -629,13 +751,30 @@
             if (guide) renderCoach();
             renderGuidePointer();
             drawArrowForPreview();
+            restoreInspect();
+            turnBanner();
         }
 
+        // A gentle fan: outer cards tilt a little and sit a few pixels lower. Cards stay fully visible.
         function fan(node, i, n) {
             const mid = (n - 1) / 2;
             const off = i - mid;
-            node.style.setProperty('--rot', (n > 1 ? off * Math.min(4, 24 / n) : 0) + 'deg');
-            node.style.setProperty('--lift', Math.round(Math.abs(off) * Math.abs(off) * Math.min(3, 18 / n)) + 'px');
+            node.style.setProperty('--rot', (n > 1 ? off * Math.min(3, 15 / n) : 0).toFixed(2) + 'deg');
+            node.style.setProperty('--lift', Math.min(6, Math.round(off * off * Math.min(1.2, 6 / n))) + 'px');
+        }
+
+        // "Your turn" fades in and out when a new turn of mine starts (no movement: calm-safe).
+        function turnBanner() {
+            const mine = state.active === ME && state.phase === 'draw' && decider() === ME && E.winner(state) == null && !ui.ended;
+            if (!mine || ui.bannerTurn === state.turn) return;
+            ui.bannerTurn = state.turn;
+            dom.banner.innerHTML = '';
+            put(dom.banner, el('div.b-banner-title', { text: 'Your turn' }), el('div.b-banner-sub', { text: 'First, choose your draw.' }));
+            dom.banner.classList.remove('show');
+            void dom.banner.offsetWidth;
+            dom.banner.classList.add('show');
+            clearTimeout(ui.bannerTimer);
+            ui.bannerTimer = setTimeout(() => dom.banner.classList.remove('show'), 1900);
         }
 
         function renderLane() {
@@ -656,11 +795,18 @@
             const active = E.activeAxioms(state);
             const rulesRow = el('div.b-lane-rules', {}, active.length
                 ? active.map(ax => {
-                    const chip = el('div.b-rule-chip', { title: ax.name + ': ' + ax.text, tabindex: 0 }, [
+                    const make = () => [axiomCardEl(ax.id, { size: 'big' }), axiomNote(ax.id)];
+                    const chip = el('div.b-rule-chip', { tabindex: 0, role: 'button', 'aria-label': 'Active rule ' + ax.name + ': ' + ax.text }, [
                         has('ui/axiom-' + ax.id) ? Rift.Assets.img('ui/axiom-' + ax.id, { alt: '' }) : el('span', { text: '⚖' }),
                         el('span', { text: ax.name }),
                     ]);
-                    hoverInspect(chip, () => axiomCardEl(ax.id, { size: 'big' }));
+                    hoverInspect(chip, make, 'rule:' + ax.id);
+                    // Click (or tap) toggles the full rule card too.
+                    chip.addEventListener('click', () => {
+                        if (ui.suppressClick) return;
+                        if (ui.inspect && ui.inspect.key === 'rule:' + ax.id && dom.inspect.classList.contains('show')) hideInspect();
+                        else showInspect(make(), chip, 'rule:' + ax.id);
+                    });
                     return chip;
                 })
                 : [el('span.b-basic', { text: 'Basic rules' })]);
@@ -668,7 +814,7 @@
             put(dom.lane, fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [
                 rulesRow,
                 el('div.b-axdeck', { title: 'Shared axiom deck: ' + deckN + ' cards, ' + state.axioms.discard.length + ' discarded' }, [cardBack(true), el('span', { text: String(deckN) })]),
-            ]), dom.end);
+            ]), dom.draw, dom.end);
         }
 
         function button(label, fn, cls, extra) {
@@ -697,7 +843,14 @@
                 const sel = ui.sel;
                 const P = state.players[ME];
                 if (!sel) {
-                    ask.textContent = 'Drag a card onto your side to play it. Drag a ready creature onto a target to attack. Then End turn.';
+                    const canPlay = L.some(a => a.type === 'play' || a.type === 'axiom');
+                    const canAttack = L.some(a => a.type === 'attack');
+                    const canActivate = L.some(a => a.type === 'activate');
+                    ask.textContent = canPlay && canAttack ? 'Drag a glowing card onto your side to play it, or a ready creature onto a target to attack.'
+                        : canPlay ? 'Drag a glowing card onto your side to play it. Then End turn.'
+                            : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
+                                : canActivate ? 'Click a ready creature (green glow) to use its ability.'
+                                    : 'Nothing left to do. Press End turn.';
                 } else if (sel.kind === 'board') {
                     const tm = targetMap(sel, L);
                     const acts = L.filter(a => a.type === 'activate' && a.cid === sel.cid);
@@ -757,6 +910,7 @@
             dom.draw.innerHTML = '';
             const show = state.phase === 'draw' && decider() === ME && !ui.ended && !ui.busy;
             dom.draw.classList.toggle('show', show);
+            dom.lane.classList.toggle('drawing', show);
             nodes.draw = {};
             if (!show) return;
             const P = state.players[ME];
@@ -770,20 +924,23 @@
                 rewind: !state.options.timeline ? 'No Fate track in this match.' : tl.length ? 'Next event in ' + tl[0].turns + ' → ' + Math.min(state.options.fateMax, tl[0].turns + 2) : '',
             };
             const st = step();
+            const DRAW_ICON = { deck: '🂠', axiom: '⚖', forward: '⏩', rewind: '⏪' };
+            const none = L.find(x => x.type === 'draw' && x.choice === 'none');
             put(dom.draw, el('div.b-draw-title', { text: 'Your draw: choose one' }), el('div.b-draw-buttons', {}, ['deck', 'axiom', 'forward', 'rewind'].map(choice => {
                 const a = L.find(x => x.type === 'draw' && x.choice === choice);
                 const possible = choices.includes(choice);
                 const b = el('button.b-draw-btn', {
                     type: 'button', disabled: !a, dataset: { choice },
+                    title: DRAW_TEXT[choice][1] + (why[choice] ? '. ' + why[choice] : ''),
                     onclick: () => { if (a) act(a); },
-                }, [el('strong', { text: DRAW_TEXT[choice][0] }), el('span', { text: possible ? DRAW_TEXT[choice][1] : why[choice] }),
-                    possible && why[choice] ? el('small', { text: why[choice] }) : null]);
+                }, [el('span.b-draw-icon', { text: DRAW_ICON[choice], 'aria-hidden': 'true' }), el('span.b-draw-words', {}, [
+                    el('strong', { text: DRAW_TEXT[choice][0] }),
+                    el('small', { text: possible ? why[choice] || DRAW_TEXT[choice][1] : why[choice] }),
+                ])]);
                 if (!a && possible && guide && st) b.title = 'Not in this lesson step.';
                 nodes.draw[choice] = b;
                 return b;
-            })));
-            const none = L.find(x => x.type === 'draw' && x.choice === 'none');
-            if (none) dom.draw.appendChild(button('Nothing to draw: continue', () => act(none), 'primary'));
+            }).concat(none ? [button('Nothing to draw: continue', () => act(none), 'primary')] : [])));
         }
 
         function renderChoice(L) {
@@ -998,12 +1155,21 @@
         }
 
         function onPointerMove(ev) {
+            const lp = ui.longPress;
+            if (lp && ev.pointerId === lp.id && !lp.shown && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) >= DRAG_START) cancelLongPress();
+            // A mouse that has left the previewed card hides the preview (also after a re-render).
+            if (ev.pointerType === 'mouse' && ui.inspect && ui.inspect.anchor && ev.target && ui.inspect.anchor.contains
+                && !ui.inspect.anchor.contains(ev.target) && dom.inspect.classList.contains('show')) {
+                const it = ui.inspect.key && inspectables[ui.inspect.key];
+                if (!it || !it.node.contains(ev.target)) hideInspect();
+            }
             const d = ui.drag;
             if (!d || ev.pointerId !== d.id) return;
             if (!d.active) {
                 if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) < DRAG_START) return;
                 d.active = true;
                 hideInspect();
+                cancelLongPress();
                 d.targets = dragTargets(d.info);
                 screen.classList.add('dragging');
                 d.node.classList.add('drag-source');
@@ -1221,7 +1387,7 @@
             }[state.endReason] || '';
             const body = [el('h2', { text: title }), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
             if (guide) {
-                body.push(el('p', { text: 'You used the draw choice, played creatures, tactics and a rule card, attacked past Guard, and won by the current rules. Real matches start with 10 hearts each.' }));
+                body.push(el('p', { text: 'You used the draw choice, played creatures, tactics and a rule card, attacked past Guard, and won by the current rules. Real matches start with ' + E.DEFAULTS.hearts + ' hearts each.' }));
             } else if (mode === 'practice') {
                 body.push(el('p', { text: 'Practice battle: no fate rolls and nothing at stake. Your creatures are exactly as they were.' }));
             } else {
@@ -1264,7 +1430,7 @@
 
         const handle = {
             destroy() {
-                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer);
+                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); cancelLongPress();
                 ui.ended = true; cancelDrag();
                 if (help) help.close();
                 if (guide) stopVoice();

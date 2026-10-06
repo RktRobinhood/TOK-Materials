@@ -135,6 +135,43 @@ test('How to play pauses and closes with the screen; Leave lesson ends with outc
     assert.equal(left, false);
 });
 
+test('the draw choice is docked in the centre lane and "Your turn" shows at turn start', () => {
+    const t = setup(practice);
+    const { $ } = t;
+    assert.ok($('.b-lane .b-draw.show'), 'the draw buttons sit in the lane, not over the boards');
+    assert.ok($('.b-lane').classList.contains('drawing'));
+    assert.ok($('.b-banner').classList.contains('show'));
+    assert.match($('.b-banner').textContent, /Your turn/);
+    $('.b-draw-btn[data-choice="deck"]').click();
+    assert.equal($('.b-lane .b-draw.show'), null);
+    assert.equal($('.b-lane').classList.contains('drawing'), false);
+    t.handle.destroy();
+});
+
+test('hand and board cards show a big preview with the full text on hover and long-press', () => {
+    const t = setup(practice);
+    const { $ } = t;
+    $('.b-draw-btn[data-choice="deck"]').click();
+    const card = $('.b-hand [data-cid="p0c0"]');
+    // Small cards show keyword chips and the ability name; the preview shows the full text.
+    const text = t.E.describe(t.handle.state, 'p0c0').lines[0].text.replace(/^(Entrance|Last Word|Activate \(\d+ energy\)):\s*/i, '');
+    card.dispatchEvent({ type: 'pointerenter', pointerType: 'mouse' });
+    t.g.flush();
+    assert.ok($('.b-inspect').classList.contains('show'));
+    assert.ok($('.b-inspect .bc.big'));
+    assert.ok($('.b-inspect').textContent.includes(text), 'the preview has the full ability text');
+    card.dispatchEvent({ type: 'pointerleave', pointerType: 'mouse' });
+    assert.equal($('.b-inspect').classList.contains('show'), false);
+
+    // Touch: press and hold shows it; releasing hides it and does not select the card.
+    card.dispatchEvent({ type: 'pointerdown', pointerType: 'touch', pointerId: 7, clientX: 0, clientY: 0, button: 0, preventDefault() {} });
+    t.g.flush();
+    assert.ok($('.b-inspect').classList.contains('show'));
+    card.dispatchEvent({ type: 'pointerup', pointerType: 'touch', pointerId: 7, clientX: 0, clientY: 0 });
+    assert.equal($('.b-inspect').classList.contains('show'), false);
+    t.handle.destroy();
+});
+
 test('calm motion: damage numbers still appear (they only fade)', () => {
     const t = setup(practice, { calm: true });
     const { $ } = t;
