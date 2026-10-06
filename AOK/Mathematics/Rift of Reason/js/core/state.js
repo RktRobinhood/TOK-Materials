@@ -90,10 +90,34 @@
         };
     }
 
-    // Keywords a creature has without any taught trick (species keywords and natural trait).
+    // Keywords a creature has without any taught trick: species keywords, natural trait and
+    // keywords its current ability grants (warped ability if any; none after 'no-ability').
     function naturalKeywords(inst) {
         const st = creatureStats(Object.assign({}, inst, { taught: null }));
-        return st ? st.keywords : [];
+        if (!st) return [];
+        const abilities = (Rift.Battle && Rift.Battle.Abilities) || {};
+        const granted = (st.ability && abilities[st.ability] && abilities[st.ability].keywords) || [];
+        granted.forEach(k => { if (KEYWORD_TRAITS.includes(k) && !st.keywords.includes(k)) st.keywords.push(k); });
+        return st.keywords;
+    }
+
+    // Lowest powerDelta that still means "attack 0": injuries can never push attack below 0.
+    // Old saves and codes counted injuries on the old 1–10 power scale, so they can go lower.
+    function minPowerDelta(inst) {
+        const sp = ((Rift.data || {}).creatures || {})[inst.species];
+        if (!sp) return -Infinity;
+        const v = isVariant(inst.variant) ? inst.variant : plainVariant();
+        return 0 - ((sp.attack || 0) + v.attack + (inst.taught === 'attack' ? 1 : 0)); // 0 − x avoids −0
+    }
+    // Raises powerDelta to minPowerDelta; drops the 'minus-one' injury if that heals it fully.
+    function clampPower(inst) {
+        if (!inst || typeof inst !== 'object') return inst;
+        const floor = minPowerDelta(inst);
+        if ((inst.powerDelta || 0) < floor) {
+            inst.powerDelta = floor;
+            if (inst.powerDelta >= 0 && Array.isArray(inst.injuries)) inst.injuries = inst.injuries.filter(x => x !== 'minus-one');
+        }
+        return inst;
     }
 
     const TRAIT_LABELS ={ guard: 'Natural Guard', swift: 'Natural Swift', shield: 'Natural Shield', sturdy: 'Sturdy (+1 health)' };
@@ -150,7 +174,11 @@
         const slots = DECK_SIZE - tactics;
         const loans = owned < slots && team === owned ? slots - owned : 0;
         const total = team + loans + tactics;
-        const parts = team + ' creature' + (team === 1 ? '' : 's') + (loans ? ' + ' + loans + ' loaned' : '') + ' + ' + tactics + ' tactic' + (tactics === 1 ? '' : 's');
+        const n = (k, word) => k + ' ' + word + (k === 1 ? '' : 's');
+        const creatures = !loans ? n(team, 'creature')
+            : !team ? n(loans, 'loaned creature')
+                : n(team + loans, 'creature') + ' (' + team + ' yours + ' + loans + ' loaned)';
+        const parts = creatures + ' + ' + n(tactics, 'tactic');
         const head = 'Deck ' + total + '/' + DECK_SIZE + ': ' + parts + '.';
         let problem = null;
         if (tactics < 6) problem = 'Choose at least 6 tactic cards.';
@@ -160,6 +188,20 @@
         else if (total < DECK_SIZE) problem = 'Add ' + (DECK_SIZE - total) + ' more card' + (DECK_SIZE - total === 1 ? '' : 's') + '.';
         else if (total > DECK_SIZE) problem = 'Remove ' + (total - DECK_SIZE) + ' card' + (total - DECK_SIZE === 1 ? '' : 's') + '.';
         return { valid: !problem, creatures: team, loans, tactics, total, message: problem ? head + ' ' + problem : head };
+    }
+
+    // Species of the loaned creatures that fill the deck, in the order the battle adds them:
+    // with no creatures, the loaned starter team (js/battle/lesson.js); otherwise the engine's
+    // pad species. loanFillers({ owned, team, tactics }) → ['astrophysicat', …]
+    const PAD_FALLBACK = ['astrophysicat', 'zuckerborg', 'siuuugull'];
+    function loanFillers(o) {
+        const count = checkDeck(o).loans;
+        const B = Rift.Battle || {};
+        const pad = (B.Engine && B.Engine.PAD_SPECIES) || PAD_FALLBACK;
+        const starter = !(o.owned || 0) && B.Lesson && B.Lesson.starter ? B.Lesson.starter().map(x => x.species) : [];
+        const out = starter.slice(0, count);
+        for (let k = 0; out.length < count; k++) out.push(pad[k % pad.length]);
+        return out;
     }
 
     let instanceCounter = 0;
@@ -187,6 +229,8 @@
         if (!c || typeof c !== 'object' || typeof c.uid !== 'string') return c;
         if (!isVariant(c.variant)) c.variant = rollVariant(c.uid);
         if (!TRICKS.includes(c.taught)) c.taught = null;
+        // Old powerDelta used the 1–10 power scale (e.g. Astrophysicat 4 → 2 = −2): keep attack ≥ 0.
+        clampPower(c);
         return c;
     }
 
@@ -211,6 +255,8 @@
             if (!step) throw new Error('No migration from version ' + s.version);
             s = step(s);
         }
+        // Saves migrated before the attack clamp existed: fix them too (does nothing otherwise).
+        [s.creatures, s.trophies].forEach(list => { if (Array.isArray(list)) list.forEach(clampPower); });
         // Fill any fields added since this save was made.
         return mergeDefaults(freshState(), s);
     }
@@ -317,6 +363,9 @@
         isVariant,
         creatureStats,
         naturalKeywords,
+        minPowerDelta,
+        clampPower,
+        loanFillers,
         describeVariant,
         battleTeam,
         ownedTactics,

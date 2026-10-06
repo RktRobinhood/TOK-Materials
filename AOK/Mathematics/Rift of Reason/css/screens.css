@@ -264,6 +264,19 @@ body.calm-motion .tour-practice * { animation:none; }
 .deck-builder { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; max-height: 38vh; overflow-y: auto; padding-right: 4px; }
 .deck-option { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border: 1px solid var(--panel-edge); border-radius: 8px; }
 .deck-option input { margin-top: 4px; }
+.deck-creature { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.deck-creature-head { gap: 8px; }
+.loan-option { opacity: 0.6; border-style: dashed; align-items: center; }
+.loan-tag { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 6px; border: 1px solid currentColor; border-radius: 6px; flex: none; }
+.loan-note { margin: 0; }
+/* Deck builder modal: wider; intro and status on top, lists scroll, buttons always visible. */
+.modal.deck-modal { width: min(880px, calc(100vw - 32px)); max-height: calc(100vh - 32px); display: flex; flex-direction: column; overflow: hidden; }
+.deck-modal > * { flex: none; }
+.deck-modal > .deck-editor { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.deck-editor > * { flex: none; }
+.deck-editor > .deck-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-right: 4px; }
+.deck-scroll h3 { margin: 4px 0 0; }
+.deck-modal .deck-builder { max-height: none; overflow: visible; }
 .tactic-art { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
 .stepper { display: inline-flex; align-items: center; gap: 4px; flex: none; }
 .stepper .btn { min-width: 32px; }

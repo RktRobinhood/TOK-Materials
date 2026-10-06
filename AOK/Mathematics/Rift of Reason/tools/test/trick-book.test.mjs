@@ -30,6 +30,33 @@ test('teach: one trick per creature, replacing spends a book, invalid requests s
     assert.equal(s.creatures[0].taught, 'attack');
 });
 
+test('a trick the creature already has through its ability (or warped ability) is refused', () => {
+    const Rift = loadRift(FILES.concat(['js/battle/abilities.js']));
+    const S = Rift.State, plain = { attack: 0, health: 0, trait: null };
+    const s = S.freshState();
+    s.items['trick-book'] = 1;
+    s.creatures.push(
+        S.makeCreature('beansprout', { uid: 'bean', variant: plain }),                                    // Slapstick: Shield
+        S.makeCreature('astrophysicat', { uid: 'lect', variant: plain, warped: { ability: 'lecture' } }), // warped: Guard
+        S.makeCreature('astrophysicat', { uid: 'hype', variant: plain, warped: { ability: 'hype' } }),    // warped: Swift
+        S.makeCreature('astrophysicat', { uid: 'zap', variant: plain, warped: { ability: 'lightning' } }),// warped: Swift
+        S.makeCreature('beansprout', { uid: 'mute', variant: plain, injuries: ['no-ability'] }),          // ability lost
+    );
+    assert.deepEqual(J(S.naturalKeywords(s.creatures[0])), ['shield']);
+    assert.deepEqual(J(S.naturalKeywords(s.creatures[1])), ['guard']);
+    assert.deepEqual(J(S.naturalKeywords(s.creatures[2])), ['swift']);
+    assert.deepEqual(J(S.naturalKeywords(s.creatures[3])), ['swift']);
+    assert.deepEqual(J(S.naturalKeywords(s.creatures[4])), [], 'no ability, no ability keyword');
+    const before = JSON.stringify(s);
+    for (const [uid, trick] of [['bean', 'shield'], ['lect', 'guard'], ['hype', 'swift'], ['zap', 'swift']]) assert.equal(Rift.World.teach(s, uid, trick), false, uid + ' ' + trick);
+    assert.equal(JSON.stringify(s), before, 'nothing spent');
+    assert.equal(Rift.World.teach(s, 'mute', 'shield'), true);
+    assert.equal(s.items['trick-book'], 0);
+    // Without the battle scripts loaded, naturalKeywords still works (species keywords and trait only).
+    const bare = loadRift(FILES);
+    assert.deepEqual(J(bare.State.naturalKeywords(bare.State.makeCreature('beansprout', { uid: 'b', variant: plain }))), []);
+});
+
 test('a trainer gives one Trick Book and one earned tactic the first time only', () => {
     const Rift = loadRift(FILES);
     const s = Rift.State.freshState();

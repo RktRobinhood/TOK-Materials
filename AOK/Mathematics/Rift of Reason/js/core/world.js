@@ -11,12 +11,17 @@
     function nodes() { return Rift.data.map.nodes; }
     function node(id) { return nodes()[id]; }
 
-    // One Mending restores an ability or one lost power point on an owned card.
+    // One Mending restores an ability or one lost attack point on an owned card.
+    // Restoring attack always shows: an old-scale powerDelta below "attack 0" is lifted
+    // to attack 0 first, so the Mending really gives +1 attack. If no attack is really lost
+    // (a stale injury tag), the tag is cleared and nothing is spent.
     function mend(state,uid,injury){
         const c=state.creatures.find(x=>x.uid===uid);
         if(!c || !(state.items.mending>0) || !['no-ability','minus-one'].includes(injury) || !c.injuries.includes(injury))return false;
         if(injury==='minus-one'){
-            c.powerDelta=(c.powerDelta||0)+1;
+            const from=Math.max(c.powerDelta||0,Rift.State.minPowerDelta(c));
+            if((c.powerDelta||0)<0 && from>=0){Rift.State.clampPower(c);return false;}
+            c.powerDelta=from+1;
             if(c.powerDelta>=0)c.injuries=c.injuries.filter(x=>x!==injury);
         }else c.injuries=c.injuries.filter(x=>x!==injury);
         state.items.mending--;return true;
@@ -29,6 +34,7 @@
         if (!c || !((state.items || {})['trick-book'] > 0) || !Rift.State.TRICKS.includes(trick) || c.taught === trick) return false;
         if (Rift.State.naturalKeywords(c).includes(trick)) return false; // e.g. Guard on a creature that already has Guard
         c.taught = trick;
+        Rift.State.clampPower(c); // forgetting +1 attack never leaves attack below 0
         state.items['trick-book'] -= 1;
         return true;
     }

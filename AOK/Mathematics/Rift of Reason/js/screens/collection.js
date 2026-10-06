@@ -82,6 +82,15 @@
 
     // ---- own deck: battle team (6–14 creatures) + tactic cards (≤2 copies) = 20 ----------
 
+    // The intro line: what the player can choose, said plainly for a small collection.
+    function deckIntro(D, owned) {
+        const tail = ' Choose up to 2 copies of each tactic. Win tactics from trainers.';
+        if (!owned) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have no creatures yet. Loaned creatures fill your team.' + tail;
+        if (owned < 6) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + '. Use them all. Loaned creatures fill the rest.' + tail;
+        return 'Your deck has ' + D + ' cards: creatures from your team plus tactic cards. Choose 6 to 14 creatures.'
+            + (owned < 14 ? ' If you pick all ' + owned + ', loaned creatures can fill the rest.' : '') + tail;
+    }
+
     function editOwnDeck(onSaved) {
         const s = Rift.State.get();
         const D = Rift.Battle.TeamCodes ? Rift.Battle.TeamCodes.DECK || 20 : 20;
@@ -91,11 +100,24 @@
         const counts = {};
         Rift.State.deckTactics(s).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
         const status = el('p.deck-status', { role: 'status', 'aria-live': 'polite' });
+        const loanNote = el('p.small.muted.loan-note');
         const boxes = [], steppers = [];
+        let loanRows = [];
         const tacticTotal = () => Object.values(counts).reduce((a, b) => a + b, 0);
         let saveBtn = null;
 
-        function check() { return Rift.State.checkDeck({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() }); }
+        const deckCounts = () => ({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() });
+        function check() { return Rift.State.checkDeck(deckCounts()); }
+
+        // Greyed rows for the loaned creatures the battle adds, so a + on a tactic never hides one.
+        function loanRow(id) {
+            const c = Rift.data.creatures[id];
+            return el('div.deck-option.loan-option', { title: 'Loaned ' + c.name + ': it fills your deck in battle and is never at risk.' }, [
+                el('span.loan-tag', { text: 'Loaned' }),
+                el('span', null, [el('strong', { text: c.name }), ' ', Rift.UI.statLine(id)]),
+            ]);
+        }
+
         function refresh() {
             const r = check();
             status.textContent = r.message;
@@ -106,18 +128,26 @@
                 minus.disabled = !counts[id];
                 plus.disabled = (counts[id] || 0) >= 2 || tacticTotal() >= 14;
             });
+            loanRows.forEach(n => n.remove());
+            loanRows = Rift.State.loanFillers(deckCounts()).map(loanRow);
+            loanRows.forEach(n => teamList.appendChild(n));
+            loanNote.textContent = r.loans ? 'Loaned creatures fill the empty places. Each tactic you add takes the place of one loaned creature.' : '';
+            loanNote.hidden = !r.loans;
             if (saveBtn) saveBtn.disabled = !r.valid;
         }
 
         const teamList = el('div.deck-builder.team-builder', null, s.creatures.map(x => {
             const c = Rift.data.creatures[x.species];
-            const input = el('input', { type: 'checkbox', checked: team.has(x.uid), 'aria-label': c.name + ', ' + Rift.State.describeVariant(x).labels.join(', '),
+            const d = Rift.State.describeVariant(x);
+            const input = el('input', { type: 'checkbox', checked: team.has(x.uid), 'aria-label': [c.name].concat(d.labels, d.taught || []).join(', '),
                 onchange(ev) { if (ev.target.checked) team.add(x.uid); else team.delete(x.uid); refresh(); } });
             boxes.push({ uid: x.uid, input });
-            return el('label.deck-option', null, [input, el('span', null, [
-                el('strong', { text: c.name }), ' ', Rift.UI.statLine(x.species, x),
-                el('div.small.muted', { text: [].concat(Rift.State.describeVariant(x).labels, Rift.State.describeVariant(x).taught || [],
-                    x.powerDelta < 0 ? ['injured (' + x.powerDelta + ' attack)'] : [], (x.injuries || []).includes('no-ability') ? ['no ability'] : []).join(' · ') }),
+            const hurt = [].concat(x.powerDelta < 0 && (x.injuries || []).includes('minus-one') ? ['injured (' + x.powerDelta + ' attack)'] : [],
+                (x.injuries || []).includes('no-ability') ? ['no ability'] : [], x.trophyOf ? ['trophy from ' + x.trophyOf] : []);
+            return el('label.deck-option', null, [input, el('span.deck-creature', null, [
+                el('span.row.wrap.deck-creature-head', null, [el('strong', { text: c.name }), Rift.UI.statLine(x.species, x)]),
+                Rift.UI.variantBadges(x),
+                hurt.length ? el('div.small.muted', { text: hurt.join(' · ') }) : null,
             ])]);
         }));
 
@@ -137,18 +167,23 @@
             ]);
         }));
 
-        const sections = [
-            el('p.small', { text: 'Your deck has ' + D + ' cards: creatures from your team plus tactic cards. Choose 6 to 14 creatures and up to 2 copies of each tactic. Win tactics from trainers.' }),
+        // Intro and status stay on top; the lists scroll; the buttons stay visible below.
+        const body = el('div.stack.deck-editor', null, [
+            el('p.small', { text: deckIntro(D, s.creatures.length) }),
             status,
-            el('h3', { text: 'Battle team' }),
-            s.creatures.length ? teamList : el('p.small.muted', { text: 'You have no creatures yet. Loaned creatures fill your team.' }),
-            el('h3', { text: 'Tactic cards' }),
-            tacticList,
-        ];
-        const dialog = Rift.UI.modal('Build your deck', el('div.stack', null, sections), [
+            el('div.stack.deck-scroll', null, [
+                el('h3', { text: 'Battle team' }),
+                loanNote,
+                teamList,
+                el('h3', { text: 'Tactic cards' }),
+                tacticList,
+            ]),
+        ]);
+        const dialog = Rift.UI.modal('Build your deck', body, [
             { label: 'Cancel' },
             { label: 'Default', keepOpen: true, onclick() {
                 team.clear(); s.creatures.slice(0, 10).forEach(x => team.add(x.uid));
+                boxes.forEach(({ uid, input }) => { input.checked = team.has(uid); });
                 Object.keys(counts).forEach(k => delete counts[k]);
                 Rift.data.tacticDecks.starter.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
                 refresh();
@@ -167,6 +202,8 @@
                 if (onSaved) onSaved();
             } },
         ]);
+        const box = dialog.node.querySelector ? dialog.node.querySelector('.modal') : null;
+        if (box) box.classList.add('deck-modal');
         saveBtn = Array.from(dialog.node.querySelectorAll ? dialog.node.querySelectorAll('button') : []).find(b => b.textContent === 'Save deck') || null;
         refresh();
     }

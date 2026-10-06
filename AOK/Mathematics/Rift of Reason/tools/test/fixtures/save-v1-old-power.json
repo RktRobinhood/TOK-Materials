@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "createdAt": 1790000000000,
+  "seed": 654321,
+  "visits": 12,
+  "avatar": { "type": "owlet", "variant": "boy", "nickname": "Old Power" },
+  "chapter": "ch1",
+  "map": { "at": "gate", "revealed": ["fair-gate", "gate"], "completed": ["stall-gallery"], "visitCount": { "gate": 3 }, "rifts": [] },
+  "flags": { "card-lesson-won": true },
+  "health": 5,
+  "maxHealth": 5,
+  "scars": [],
+  "xp": 90,
+  "accolades": [],
+  "items": { "charm": 1, "tonic": 0, "mending": 2 },
+  "creatures": [
+    { "uid": "old-cat-b", "species": "astrophysicat", "caughtAt": 1790000001000, "powerDelta": -2, "scars": [], "injuries": ["minus-one"], "warped": null, "trophyOf": null, "wins": 1 },
+    { "uid": "old-cat-a", "species": "astrophysicat", "caughtAt": 1790000002000, "powerDelta": -3, "scars": ["scar-a"], "injuries": ["minus-one", "no-ability"], "warped": null, "trophyOf": null, "wins": 0 },
+    { "uid": "old-cat-c", "species": "astrophysicat", "caughtAt": 1790000003000, "powerDelta": -3, "scars": [], "injuries": ["minus-one"], "warped": null, "trophyOf": null, "wins": 0 },
+    { "uid": "old-musk", "species": "muskrat", "caughtAt": 1790000004000, "powerDelta": -3, "scars": [], "injuries": ["minus-one"], "warped": null, "trophyOf": null, "wins": 4 }
+  ],
+  "team": [],
+  "trophies": [
+    { "uid": "old-zuck-b", "species": "zuckerborg", "caughtAt": 0, "powerDelta": -2, "scars": [], "injuries": ["minus-one"], "warped": null, "trophyOf": "Ida", "wins": 0 }
+  ],
+  "seen": ["astrophysicat", "muskrat", "zuckerborg"],
+  "axioms": [],
+  "axiomLoadout": [],
+  "rumours": [],
+  "lures": {},
+  "perksUsed": {},
+  "tutorialsSeen": {},
+  "stats": { "puzzlesSolved": 6, "hintsUsed": 2, "battlesWon": 3, "battlesLost": 2, "catches": 4, "escapes": 0 },
+  "settings": { "music": 0.5, "sfx": 0.8, "voice": 1, "textSpeed": 1, "calm": false }
+}

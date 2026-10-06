@@ -223,12 +223,35 @@ test('tampered, wrong-kind and impossible team codes are rejected', () => {
     assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0, 'flying'], 0])), /impossible variant/);
     assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0], 0])), /garbled variant/);
     assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 0, [], 0, 0, [0, 0, 0], 'fly'])), /unknown trick/);
-    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', -3, [], 0, 0, [0, 0, 0], 0])), /impossible power/); // attack 2 - 3 < 0
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', 1, [], 0, 0, [0, 0, 0], 0])), /impossible power/); // no power boosts
+    assert.throws(() => TeamCodes.importTeam(v2(['lobstorian', -11, [], 0, 0, [0, 0, 0], 0])), /impossible power/);
     assert.throws(() => TeamCodes.importTeam(v2(ok, ['win-the-game'])), /unknown tactic/);
     assert.throws(() => TeamCodes.importTeam(v2(ok, ['eureka', 'eureka', 'eureka'])), /2 copies/);
     assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: Array(14).fill(ok), k: ['eureka', 'eureka', 'lemma', 'lemma', 'recall', 'recall', 'clockwork'] })), /at most 20/);
     assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: Array(15).fill(ok), k: [] })), /1 to 14/);
     assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: [ok] })), /tactic list/);
+});
+
+test('old-scale injuries below attack 0 are lifted to attack 0 on import and export, not rejected', () => {
+    // Astrophysicat (attack 1) from an old save: power 4 → 2 became powerDelta −2.
+    const v2 = row => Rift.State.encode('team', { v: 2, n: 'Old', a: [], t: [row], k: ['eureka'] });
+    const cat = TeamCodes.importTeam(v2(['astrophysicat', -2, ['minus-one'], 0, 0, [0, 0, 0], 0])).team[0];
+    assert.equal(cat.powerDelta, -1);
+    assert.deepEqual(J(cat.injuries), ['minus-one']);
+    assert.equal(Rift.State.creatureStats(cat).attack, 0);
+    const gentle = TeamCodes.importTeam(v2(['astrophysicat', -3, ['minus-one', 'no-ability'], 0, 0, [-1, 0, 0], 0])).team[0];
+    assert.equal(gentle.powerDelta, 0, 'attack 1 − 1 = 0 already: nothing more to lose');
+    assert.deepEqual(J(gentle.injuries), ['no-ability'], 'the healed minus-one tag goes');
+    const trained = TeamCodes.importTeam(v2(['lobstorian', -5, ['minus-one'], 0, 0, [1, 0, 0], 'attack'])).team[0];
+    assert.equal(trained.powerDelta, -4, 'attack 2 + 1 + 1 trick');
+    // v1 codes keep the same rule.
+    const old = TeamCodes.importTeam(Rift.State.encode('team', { v: 1, n: 'Old', a: [], t: [['astrophysicat', -3, ['minus-one'], 0, 0]] })).team[0];
+    assert.equal(old.powerDelta, -1);
+    // Export lifts it as well, so an older copy of the game still accepts the code.
+    const code = TeamCodes.exportTeam({ nickname: 'Me', creatures: [inst('astrophysicat', { powerDelta: -3, injuries: ['minus-one'], variant: { attack: 0, health: 0, trait: null } })] });
+    const back = TeamCodes.importTeam(code).team[0];
+    assert.equal(back.powerDelta, -1);
+    assert.equal(Rift.State.decode('team', code).t[0][1], -1);
 });
 
 test('decks are capped at 14 creatures and 20 cards on export', () => {

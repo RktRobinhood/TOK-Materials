@@ -74,6 +74,55 @@ test('migration v1 → v2: an old save fixture loads with variants from uids and
     assert.deepEqual(J(S.deckTactics(s)), J(Rift.data.tacticDecks.starter));
 });
 
+test('migration v1 → v2: old-scale powerDelta never leaves attack below 0', () => {
+    // Old saves counted injuries on the 1–10 power scale (Astrophysicat power 4 → 2 = powerDelta −2).
+    const old = JSON.parse(fs.readFileSync(GAME_DIR + '/tools/test/fixtures/save-v1-old-power.json', 'utf8'));
+    const s = S.migrate(J(old));
+    const by = uid => s.creatures.concat(s.trophies).find(c => c.uid === uid);
+    // Astrophysicat attack 1, plain variant: −2 → −1 (attack 0, still injured).
+    assert.equal(by('old-cat-b').variant.attack, 0);
+    assert.equal(by('old-cat-b').powerDelta, -1);
+    assert.deepEqual(J(by('old-cat-b').injuries), ['minus-one']);
+    // Gentle Astrophysicat (attack 1 − 1 = 0): −3 → 0 and the minus-one tag goes; other injuries stay.
+    assert.equal(by('old-cat-a').variant.attack, -1);
+    assert.equal(by('old-cat-a').powerDelta, 0);
+    assert.deepEqual(J(by('old-cat-a').injuries), ['no-ability']);
+    assert.deepEqual(J(by('old-cat-a').scars), ['scar-a']);
+    // Strong Astrophysicat (attack 2): −3 → −2.
+    assert.equal(by('old-cat-c').powerDelta, -2);
+    // Muskrat Rocket (attack 5): −3 is fine as it is.
+    assert.equal(by('old-musk').powerDelta, -3);
+    assert.deepEqual(J(by('old-musk').injuries), ['minus-one']);
+    // Trophies get the same fix (Zuckerborg 2 − 1 = 1: −2 → −1).
+    assert.equal(by('old-zuck-b').powerDelta, -1);
+    s.creatures.concat(s.trophies).forEach(c => {
+        assert.ok((Rift.data.creatures[c.species].attack + c.variant.attack + c.powerDelta) >= 0, c.uid);
+        assert.equal(S.creatureStats(c).attack, Math.max(0, Rift.data.creatures[c.species].attack + c.variant.attack + c.powerDelta));
+    });
+    // Migrating again (or loading a save already at v2) changes nothing.
+    assert.deepEqual(J(S.migrate(J(s))), J(s));
+    // The migrated creatures make a team code that imports again.
+    const T = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js', 'js/battle/abilities.js', 'js/battle/team-codes.js']);
+    const back = T.Battle.TeamCodes.importTeam(T.Battle.TeamCodes.exportTeam({ nickname: 'Old Power', creatures: s.creatures }));
+    assert.deepEqual(J(back.team.map(c => c.powerDelta)), J(s.creatures.map(c => c.powerDelta)));
+    // A v2 save from before the clamp is fixed on load as well.
+    const stale = J(s);
+    stale.creatures[0].powerDelta = -2;
+    assert.equal(S.migrate(stale).creatures[0].powerDelta, -1);
+});
+
+test('loanFillers lists the loaned creatures the battle will add', () => {
+    assert.deepEqual(J(S.loanFillers({ owned: 4, team: 4, tactics: 10 })), ['astrophysicat', 'zuckerborg', 'siuuugull', 'astrophysicat', 'zuckerborg', 'siuuugull']);
+    assert.deepEqual(J(S.loanFillers({ owned: 6, team: 6, tactics: 11 })), J(E.PAD_SPECIES));
+    assert.deepEqual(J(S.loanFillers({ owned: 20, team: 10, tactics: 10 })), []);
+    assert.deepEqual(J(S.loanFillers({ owned: 8, team: 7, tactics: 10 })), [], 'no loans until every owned creature is picked');
+    // With no creatures, the loaned starter team comes first (js/battle/lesson.js).
+    const L = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/tactics.js', 'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/lesson.js']);
+    const starter = L.Battle.Lesson.starter().map(x => x.species);
+    assert.deepEqual(J(L.State.loanFillers({ owned: 0, team: 0, tactics: 11 })), J(starter.slice(0, 9)));
+    assert.deepEqual(J(L.State.loanFillers({ owned: 0, team: 0, tactics: 8 })), J(starter.concat(L.Battle.Engine.PAD_SPECIES.slice(0, 2))));
+});
+
 test('battleTeam and deckTactics honour choices and drop what is gone or not owned', () => {
     const s = S.freshState();
     for (let i = 0; i < 12; i++) s.creatures.push(S.makeCreature('khaby', { uid: 'k' + i }));
@@ -99,7 +148,9 @@ test('checkDeck: creatures + tactics = 20 with 6–14 of each; loans fill a smal
     const small = c(4, 4, 10);
     assert.equal(small.valid, true);
     assert.equal(small.loans, 6);
-    assert.equal(small.message, 'Deck 20/20: 4 creatures + 6 loaned + 10 tactics.');
+    assert.equal(small.message, 'Deck 20/20: 10 creatures (4 yours + 6 loaned) + 10 tactics.');
+    assert.equal(c(0, 0, 11).message, 'Deck 20/20: 9 loaned creatures + 11 tactics.');
+    assert.equal(c(6, 6, 11).message, 'Deck 20/20: 9 creatures (6 yours + 3 loaned) + 11 tactics.');
     assert.match(c(4, 3, 10).message, /Pick all your creatures/);
     assert.equal(c(0, 0, 14).valid, true);
 });
