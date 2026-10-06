@@ -182,8 +182,9 @@
                 tip.append(
                     el('strong', { text: kind === 'hinted' ? '???' : n.name }),
                     el('div.small', { text: n.teaser || '' }),
-                    locked ? el('div.small.warn', { text: '🔒 ' + locked }) : null,
                 );
+                // Element.append(null) would print the word "null".
+                if (locked) tip.append(el('div.small.warn', { text: '🔒 ' + locked }));
                 const rect = board.getBoundingClientRect();
                 const sx = rect.width / W, sy = rect.height / H, s = Math.min(sx, sy);
                 const ox = rect.left + (rect.width - W * s) / 2, oy = rect.top + (rect.height - H * s) / 2;
