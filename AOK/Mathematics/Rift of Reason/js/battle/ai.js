@@ -19,18 +19,27 @@
  *   also counts who wins the fights on the board and the next Fate event. Energy is
  *   spent on the best combination of scored plays (a small knapsack), not greedily.
  *
+ *   Both levels develop their board: End turn never wins over playing an affordable
+ *   creature into an open space unless every such play scores below DEVELOP_FLOOR.
+ *
  *   hard: all of the above, plus an explicit lethal check and whole-turn rollouts
  *         (with and without each axiom card) before playing an axiom card.
- *   easy: no threat terms, loves hitting the hero, makes a random legal move 10% of
- *         the time, ends the turn early 5% of the time, and usually just draws from
- *         its deck. Hard beats Easy ~82% in simulation (see design/reviews/
- *         card-arena-balance-2026-10-07.md).
+ *   easy: weaker CHOICES, never sitting still: no threat terms, loves hitting the hero
+ *         even more, 40% of the time picks a random second-rate useful move instead of
+ *         the best one, and once nothing is left to play sometimes (5%) holds back an
+ *         attack. It draws from its deck (always when
+ *         it has no creature it can pay for), and never plays the big twists
+ *         (EASY_TWISTS: The Last Shall Be First, Empty Set). Hard beats Easy ~79% in
+ *         simulation (design/reviews/card-arena-balance-2026-10-07.md).
+ *
+ *   Hidden information: the AI never looks at the opponent's hand or deck order. The
+ *   Predict colour guess uses the opponent's public team list minus the cards seen.
  *
  * Rift.Battle.AI = {
  *   choose(state, { level: 'easy' | 'hard', salt? }) → an action from Engine.legalActions(state)
  *   playOut(state, levels, onStep?) → final state (levels[p] for player p)
  *   evaluate(state, player, { level?, deep? }) → number (higher is better for player)
- *   MISTAKE, EARLY_END
+ *   MISTAKE, EARLY_END, EASY_TWISTS
  * }
  */
 (function (root) {
@@ -40,8 +49,10 @@
     const Battle = Rift.Battle || (Rift.Battle = {});
     const E = () => Battle.Engine;
 
-    const MISTAKE = { easy: 0.1, hard: 0 };
+    const MISTAKE = { easy: 0.4, hard: 0 };
     const EARLY_END = { easy: 0.05, hard: 0 };
+    // A creature play scored at least this much (vs ending the turn) is still made rather than passing.
+    const DEVELOP_FLOOR = -1.5;
     const WIN = 1000;
     const HAND_CARD = 1.0;
     const AXIOM_CARD = 0.6;
@@ -185,6 +196,13 @@
         return n;
     }
 
+    // Creatures in p's hand that p could pay for this turn.
+    function playableCreatures(s, p) {
+        const P = s.players[p];
+        const energy = P.energy;
+        return P.hand.filter(cid => s.cards[cid].kind === 'creature' && E().playCost(s, cid) <= energy).length;
+    }
+
     function handValue(s, p, ctx) {
         const P = s.players[p];
         let v = Math.min(P.hand.length, 7) * HAND_CARD + Math.max(0, P.hand.length - 7) * 0.4;
@@ -278,7 +296,7 @@
         const opp = 1 - me;
         const P = s.players[me], Q = s.players[opp];
         let v = 0;
-        const faceBias = ctx.level === 'easy' ? 1.6 : 1;
+        const faceBias = ctx.level === 'easy' ? 2.2 : 1;
         const hv = heartValue(P.hearts) - faceBias * heartValue(Q.hearts);
         v += r.reverseHearts ? -0.6 * hv : ctx.w.hearts * hv;
         v += boardValue(s, me, ctx) - boardValue(s, opp, ctx);
@@ -432,8 +450,7 @@
         for (const a of legal) {
             let score = 0;
             if (a.choice === 'deck') {
-                const handCreatures = P.hand.filter(cid => s.cards[cid].kind === 'creature').length;
-                score = 1.8 + (P.hand.length <= 2 ? 1 : 0) + (handCreatures ? 0 : 1) + (P.capacity >= 4 ? 0.3 : 0);
+                score = 1.8 + (P.hand.length <= 2 ? 1 : 0) + (playableCreatures(s, me) ? 0 : 1) + (P.capacity >= 4 ? 0.3 : 0);
                 score *= Math.min(n, room) > 1 ? 1.6 : 1;
             } else if (a.choice === 'axiom') {
                 const top = s.axioms.deck[0];
@@ -470,12 +487,16 @@
         const opts = req.options;
         if (req.kind === 'card') return opts.slice().sort((x, y) => cardWorth(s, y, me) - cardWorth(s, x, me))[0];
         if (req.kind === 'colour') {
-            // Guess the colour the opponent has most of among the cards it has not played.
-            const Q = s.players[1 - me];
+            // Guess the colour the opponent has most of among its creatures not seen yet. Only public
+            // facts: the opponent's whole team is known (team list), minus what is on a board or in a
+            // discard pile. Its hand and deck order are hidden, so they are never looked at.
+            const foe = 1 - me;
+            const seen = new Set();
+            s.players.forEach(P => P.board.concat(P.discard).forEach(cid => seen.add(cid)));
             const counts = {};
-            Q.hand.concat(Q.deck).forEach(cid => {
+            Object.keys(s.cards).forEach(cid => {
                 const c = s.cards[cid];
-                if (c.kind === 'creature') counts[c.colour] = (counts[c.colour] || 0) + 1;
+                if (c.kind === 'creature' && c.owner === foe && !seen.has(cid)) counts[c.colour] = (counts[c.colour] || 0) + 1;
             });
             return opts.slice().sort((a, b) => (counts[b] || 0) - (counts[a] || 0))[0];
         }
@@ -511,8 +532,8 @@
     }
 
     // Answer a pending question of mine (cards and colours by rule of thumb, the rest by lookahead).
-    function answerPending(s, me, ctx) {
-        const legal = E().legalActions(s);
+    function answerPending(s, me, ctx, allowed) {
+        const legal = allowed || E().legalActions(s);
         if (s.pending.kind === 'card' || s.pending.kind === 'colour') {
             const pick = heuristicChoice(s, me);
             return legal.find(a => a.choice === pick) || legal[0];
@@ -580,34 +601,72 @@
         return scoreActions(state, groupActions(state, E().legalActions(state)), me, ctx);
     }
 
+    // Rule cards Easy never plays: twists that turn the whole game around are kept for Hard.
+    const EASY_TWISTS = { 'reverse-hearts': true, 'empty-set': true };
+
+    function allowedActions(s, legal, level) {
+        if (level !== 'easy') return legal;
+        const twist = a => (a.type === 'axiom' || (a.type === 'choose' && s.pending && s.pending.kind === 'axiom')) && EASY_TWISTS[a.choice];
+        const ok = legal.filter(a => !twist(a));
+        return ok.length ? ok : legal;
+    }
+
+    // Easy needs new cards when nothing in its hand is a creature it can pay for.
+    function needsCards(s, me) {
+        return s.players[me].hand.length <= 2 || !playableCreatures(s, me);
+    }
+
+    // Never End turn while a creature can still be played into an open board space, unless
+    // every such play looks clearly bad (it would just be thrown away).
+    function develop(s, scored, best) {
+        if (!best || best.type !== 'end') return best;
+        let pick = null;
+        for (const x of scored) {
+            if (x.a.type !== 'play' || s.cards[x.a.cid].kind !== 'creature' || x.score < DEVELOP_FLOOR) continue;
+            if (!pick || x.score > pick.score) pick = x;
+        }
+        return pick ? pick.a : best;
+    }
+
     function choose(state, options) {
         const o = options || {};
         const level = o.level === 'easy' ? 'easy' : 'hard';
         const Eng = E();
-        const legal = Eng.legalActions(state);
-        if (legal.length <= 1) return legal[0] || null;
         const s = state;
+        const legal = allowedActions(s, Eng.legalActions(s), level);
+        if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);
         const rng = Rift.makeRng('ai:' + s.seed + ':' + s.step + ':' + level + ':' + (o.salt || ''));
-        if (rng.chance(MISTAKE[level])) return rng.pick(legal);
+        const mistake = rng.chance(MISTAKE[level]);
         const ctx = makeCtx(me, o);
 
         if (s.phase === 'draw') {
             if (level === 'easy') {
+                // Easy nearly always draws from its deck, and always when it has nothing to play.
                 const deck = legal.find(a => a.choice === 'deck');
-                if (deck && !rng.chance(0.15)) return deck;
+                if (deck && (needsCards(s, me) || !(mistake || rng.chance(0.15)))) return deck;
                 return rng.pick(legal);
             }
             ctx.axVal = axiomValues(s, me, ctx, s.players[me].axHand.concat(s.axioms.deck.slice(0, 1)));
             return pickBest(drawScores(s, legal, me, ctx));
         }
 
-        if (s.phase === 'choose') return answerPending(s, me, ctx);
+        if (s.phase === 'choose') return mistake ? rng.pick(legal) : answerPending(s, me, ctx, legal);
 
         // Main phase.
         if (level === 'easy') {
-            if (rng.chance(EARLY_END.easy) && s.players[me].board.length) return legal.find(a => a.type === 'end');
-            return pickBest(scoreActions(s, groupActions(s, legal), me, ctx));
+            // Easy's weaknesses are weaker CHOICES (no threat terms, loves hitting the hero, a random
+            // second-rate move now and then, sometimes holding back an attack), never sitting still.
+            const scored = scoreActions(s, groupActions(s, legal), me, ctx);
+            const best = develop(s, scored, pickBest(scored));
+            if (mistake) {
+                const pool = scored.filter(x => x.a !== best && x.score > 0 && x.a.type !== 'end' && x.a.type !== 'spark' && x.a.type !== 'axiom');
+                if (pool.length) return rng.pick(pool).a;
+            }
+            // Holding back an attack only once nothing is left to play.
+            const canPlay = legal.some(a => a.type === 'play' && s.cards[a.cid].kind === 'creature');
+            if (best && best.type === 'attack' && !canPlay && rng.chance(EARLY_END.easy)) return legal.find(a => a.type === 'end');
+            return best;
         }
         const kill = lethalAttack(s, legal, me);
         if (kill) return kill;
@@ -616,7 +675,8 @@
         // Axiom cards are weighed against a whole turn, at the start of the turn and before ending it.
         const fresh = P.energy >= P.capacity && !P.attacksThisTurn;
         if (fresh) { const ax = axiomCheck(s, legal, me, ctx); if (ax) return ax; }
-        const best = pickBest(scoreActions(s, groupActions(s, legal.filter(a => a.type !== 'axiom')), me, ctx));
+        const scored = scoreActions(s, groupActions(s, legal.filter(a => a.type !== 'axiom')), me, ctx);
+        const best = develop(s, scored, pickBest(scored));
         if (best && best.type === 'end' && !fresh) { const ax = axiomCheck(s, legal, me, ctx); if (ax) return ax; }
         return best;
     }
@@ -638,5 +698,5 @@
         return s;
     }
 
-    Battle.AI = { choose, playOut, evaluate, explain, MISTAKE, EARLY_END, WEIGHTS };
+    Battle.AI = { choose, playOut, evaluate, explain, MISTAKE, EARLY_END, EASY_TWISTS, WEIGHTS };
 })(typeof window !== 'undefined' ? window : globalThis);
