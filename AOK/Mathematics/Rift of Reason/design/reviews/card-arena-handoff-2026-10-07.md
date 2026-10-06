@@ -31,12 +31,13 @@ Branch `card-arena` (PR to `main`), epic #46, art queue #47. Spec: `../card-aren
 | Easy/Hard end turns with an affordable creature and room | 0% |
 | Lost risked battle: injury or death / permanent loss | ~29% / ~2% |
 
-Tests: **429/429** (`node --test "tools/test/*.test.mjs"`), including a 10,000-game AI fuzz, 2,000 random-legal-play games and a full scripted replay of the lesson.
+Tests: **443/443** (`node --test "tools/test/*.test.mjs"`), including a 10,000-game AI fuzz, 2,000 random-legal-play games and a full scripted replay of the lesson.
 
 ## Reviews done overnight
 
 - Independent code review: 8 findings (old-save team codes, hover-preview stealing drag glow, Trick Book on ability keywords, full-hand discards rolling fate, silence wording, Nickname vs Age of Tradition, AI peeking for Predict, small texts). All fixed and tested.
-- Student-eye playtest at 1280×720: clarity 6.5/10 before fixes; its 12 problems were fixed (Guard ready glow, instruction bar matching Granny, plain Fate wording, visible colour bonus, log auto-scroll, Guard message, keyword lines, story end text, readable hearts, passive AI, lost targeted-Entrance drop, deck builder). A re-rating has not been done yet.
+- Student-eye playtest at 1280×720, round 1: clarity 6.5/10; its 12 problems were fixed (Guard ready glow, instruction bar matching Granny, plain Fate wording, visible colour bonus, log auto-scroll, Guard message, keyword lines, story end text, readable hearts, passive AI, lost targeted-Entrance drop, deck builder).
+- Round 2 on the fixed build: **clarity 7.5/10** (target 7), no console errors, a beginner-paced practice match ~6–8 minutes for a fast adult (expect 10–15 for students). Its 15 follow-ups were fixed too: previews no longer cover controls, a confirmed **Leave match** for practice/story, readable Fate buttons, no lane overflow, copper tactic frames, dimmed unplayable cards, Elusive/lecture/Spark/second-attack hints, "Already the rule" for rule cards that change nothing.
 
 ## Morning tasks
 
