@@ -868,3 +868,12 @@ test('a card returned to a full hand is discarded instead', () => {
     assert.ok(s.players[1].discard.includes('p1c0'));
     assert.equal(events(s, 'burn').length, 1);
 });
+
+test('axiom cards that would change nothing are not offered', () => {
+    const s = E.createBattle({ seed: 'no-op-axiom', players: [{ name: 'A', team: [] }, { name: 'B', team: [] }], axiomDeck: [], options: { first: 0, shuffle: false, shuffleAxioms: false, openAxioms: 0 } });
+    assert.equal(E.axiomWouldChange(s, 'normal-hearts'), false, 'already the normal goal');
+    assert.equal(E.axiomWouldChange(s, 'reverse-hearts'), true);
+    const t = { ...s, axioms: { ...s.axioms, active: { victory: 'reverse-hearts' } } };
+    assert.equal(E.axiomWouldChange(t, 'normal-hearts'), true, 'undoes the reversed goal');
+    assert.equal(E.axiomWouldChange(t, 'reverse-hearts'), false, 'same rule again');
+});

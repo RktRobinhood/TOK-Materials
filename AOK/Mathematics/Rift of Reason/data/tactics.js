@@ -86,10 +86,12 @@
             // Needs a card in the shared deck or its discard (reshuffled), and room in the hand.
             usable: (s, p, H) => (s.axioms.deck.length > 0 || s.axioms.discard.length > 0) && H.handRoom(s, p, 1, 1),
             run(api, p) {
-                const full = !api.handRoom(p);
-                const id = api.drawAxiom(p);
-                api.emit({ t: 'tactic', text: id ? 'Look It Up: take an axiom card.'
-                    : full ? 'Look It Up: the hand is full, so no axiom card is taken.' : 'Look It Up: the shared axiom deck is empty.' });
+                // Announce first so the log reads in order before the private "You take…" line.
+                if (!api.handRoom(p)) { api.emit({ t: 'tactic', text: 'Look It Up: the hand is full, so no axiom card is taken.' }); return; }
+                const A = api.s.axioms;
+                if (!A.deck.length && !A.discard.length) { api.emit({ t: 'tactic', text: 'Look It Up: the shared axiom deck is empty.' }); return; }
+                api.emit({ t: 'tactic', text: 'Look It Up: take an axiom card.' });
+                api.drawAxiom(p);
             },
         },
 

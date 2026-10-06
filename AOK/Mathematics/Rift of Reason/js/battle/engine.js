@@ -136,6 +136,16 @@
     function activeAxioms(s) { return memoFor(s).list; }
     // Active rule cards that differ from the basics (a `basic` card only restates a default rule).
     function changedAxioms(s) { return activeAxioms(s).filter(a => !a.basic); }
+    // False when playing this axiom card would change nothing: the same rule is already active,
+    // or a "back to normal" card while its category is already normal.
+    function axiomWouldChange(s, id) {
+        const ax = axiomDefs()[id];
+        if (!ax) return false;
+        const current = s.axioms.active[ax.category];
+        if (current === id) return false;
+        if (ax.basic) return !!current && !(axiomDefs()[current] || {}).basic;
+        return true;
+    }
     function rules(s) { return memoFor(s).rules; }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
 
@@ -475,7 +485,7 @@
                 else list.push({ type: 'play', player: p, cid });
             }
         });
-        Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id) <= P.energy) list.push({ type: 'axiom', player: p, choice: id }); });
+        Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id) <= P.energy && axiomWouldChange(s, id)) list.push({ type: 'axiom', player: p, choice: id }); });
         P.board.forEach(cid => {
             if (canAttack(s, cid)) attackTargets(s, cid).forEach(target => list.push({ type: 'attack', player: p, cid, target }));
             if (canActivateNow(s, cid)) activations(s, cid).forEach(a => {
@@ -1104,7 +1114,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, changedAxioms, ruleSummary, timeline, describe,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
