@@ -6,10 +6,10 @@ AGENTS.md still applies: borrow mechanics, never names. Our keyword names are **
 
 ## Players and turns
 
-- Each player has a **hero** (the player's avatar or the trainer's portrait) with **10 hearts** (the teacher asked to start at ten; tuned by simulation). Lessons may use fewer. Creature stats are deliberately modest for their cost (about two stat points per energy, health usually at least attack), and Guard plus removal tactics keep the board relevant, so pure face-rushing should not dominate.
+- Each player has a **hero** (the player's avatar or the trainer's portrait) with **12 hearts** (the teacher asked to start at ten; simulation showed ten hearts ends almost half of all games by round 6, so the default is 12 — see `design/reviews/card-arena-balance-2026-10-07.md`). Lessons may use fewer. Creature stats are deliberately modest for their cost (about two stat points per energy, health usually at least attack), and Guard plus removal tactics keep the board relevant, so pure face-rushing should not dominate.
 - Energy capacity grows by 1 at the start of each own turn (max 10) and refills. Unspent energy is lost. No action limit.
 - **Own deck:** 20 cards = creatures from your team plus **Tactic cards** (one-shot spells, our version of trainer cards). Default: your first 10 creatures + your 10 chosen tactics; the Collection deck builder allows 6–14 creatures and up to two copies of a tactic. Missing creatures are loaned.
-- **Opening hands:** the first player gets 3 cards from their deck and 1 axiom card. The second player gets 4 deck cards, 1 axiom card and the **Spark** (once per match: +1 energy this turn). This is the opening compensation #45 asked for.
+- **Opening hands:** the first player gets 2 cards from their deck and 1 axiom card. The second player gets 4 deck cards, 1 axiom card and the **Spark** (once per match: +1 energy this turn). This is the opening compensation #45 asked for (with 3 cards the first player still won ~62% of mirror matches; with 2 it is ~48%).
 - **Draw choice** at the start of every own turn (including the first): exactly one of
   - **Deck** — draw the top card of your own deck (creature or tactic);
   - **Axiom** — take the top card of the shared axiom deck into your hand (private until played);

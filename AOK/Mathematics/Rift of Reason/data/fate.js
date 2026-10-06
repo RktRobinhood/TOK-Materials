@@ -12,14 +12,15 @@
 
     Rift.data.fate = {
         // The brief's starting odds (fine 55 / scarred 20 / injured 12 / warp 10 / death 3)
-        // were far too punishing: about 6 creatures per player (8 for the loser) end a
-        // battle in the discard pile, so a player got an injury or death in ~56% of
-        // battles and lost a creature for good in ~16%. Tuned with tools/sim-battle.mjs
-        // so that a LOST battle means an injury/death ~30% of the time and a permanent
-        // loss ~4%, and a WON battle almost never hurts. Weights need not sum to 100.
+        // were far too punishing. Card Arena rules (7 Oct 2026, 12 hearts): Hard-vs-Hard
+        // simulations end with about 2.4 creatures per LOSER (1.9 per winner) in the discard
+        // pile, many fewer than the old ~8. Retuned with tools/sim-battle.mjs (2,000 games) so
+        // that a LOST battle means an injury/death ~30% of the time and a permanent loss ~2-3%
+        // (death stays at 1% of rolls, the cap battle-meta.test.mjs enforces),
+        // and a WON battle almost never hurts (~1.5% injury). Weights need not sum to 100.
         briefOdds: { fine: 55, scarred: 20, injured: 12, warp: 10, death: 3 },
         // Creatures on the losing side.
-        odds: { fine: 66, scarred: 25, injured: 3.5, warp: 5, death: 0.5 },
+        odds: { fine: 54, scarred: 25, injured: 15, warp: 5, death: 1 },
         // Creatures on the winning side: you held the field and carried them home. Nobody dies.
         winnerOdds: { fine: 78, scarred: 20, injured: 1, warp: 1, death: 0 },
 

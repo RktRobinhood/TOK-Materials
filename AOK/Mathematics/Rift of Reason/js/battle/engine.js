@@ -13,6 +13,8 @@
  *   createBattle({ seed, players: [{ id, name, team: [instances], tactics?: [ids], axioms?: [ids],
  *                  hearts?, consumables? }], axiomDeck?: [ids], options })      → state
  *   legalActions(state) → [action]    applyAction(state, action) → new state (input untouched)
+ *   applyLegal(state, action) → like applyAction but skips the legality check; only for an
+ *                  action object taken from legalActions(state) of this same state (AI lookahead)
  *   decider(state) → player index who must act, or null     winner(state) → 0 | 1 | 'draw' | null
  *   describe(state, cid) → everything a card face needs (name, cost, attack, health, keywords, lines…)
  *   attackOf / healthOf / keywordsOf / canAttack / attackTargets / activations / targetsFor / fightPreview
@@ -39,9 +41,9 @@
     const Battle = Rift.Battle || (Rift.Battle = {});
 
     const DEFAULTS = {
-        hearts: 10, energyCap: 10, handLimit: 10, boardLimit: 7,
+        hearts: 12, energyCap: 10, handLimit: 10, boardLimit: 7,
         deckSize: 20, minCreatures: 6, maxCreatures: 14,
-        openHand: [3, 4], openAxioms: 1, spark: true,
+        openHand: [2, 4], openAxioms: 1, spark: true,
         timeline: true, fateStart: 6, fateGap: 6, fateMax: 12,
         maxTurns: 60, first: 'random', shuffle: true, shuffleAxioms: true, mode: 'practice',
     };
@@ -104,20 +106,27 @@
 
     // ---- rules ------------------------------------------------------------------
 
-    function activeAxioms(s) {
-        return Object.values(s.axioms.active).map(id => axiomDefs()[id]).filter(Boolean);
-    }
-
-    const ruleCache = new Map();
-    function rules(s) {
-        const key = Object.values(s.axioms.active).join('|');
-        if (ruleCache.has(key)) return ruleCache.get(key);
+    // rules() and activeAxioms() run thousands of times per AI decision, so each
+    // `active` object remembers its result (re-checked against a snapshot, because
+    // setAxiom and tests may change the object in place).
+    const ruleMemo = new WeakMap();
+    function memoFor(s) {
+        const active = s.axioms.active;
+        const m = ruleMemo.get(active);
+        if (m) {
+            let n = 0, same = true;
+            for (const k in active) { n++; if (m.snap[k] !== active[k]) { same = false; break; } }
+            if (same && n === m.n) return m;
+        }
+        const list = Object.freeze(Object.values(active).map(id => axiomDefs()[id]).filter(Boolean));
         const out = Object.assign({}, RULE_DEFAULTS);
-        activeAxioms(s).forEach(a => Object.assign(out, a.rules || {}));
-        if (ruleCache.size >= 256) ruleCache.delete(ruleCache.keys().next().value);
-        ruleCache.set(key, Object.freeze(out));
-        return out;
+        list.forEach(a => Object.assign(out, a.rules || {}));
+        const memo = { snap: Object.assign({}, active), n: Object.keys(active).length, list, rules: Object.freeze(out) };
+        ruleMemo.set(active, memo);
+        return memo;
     }
+    function activeAxioms(s) { return memoFor(s).list; }
+    function rules(s) { return memoFor(s).rules; }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
 
     // ---- card queries --------------------------------------------------------------
@@ -589,6 +598,10 @@
         const key = actionKey(action);
         const match = legalActions(state).find(a => actionKey(a) === key);
         if (!match) throw new Error('Illegal action ' + JSON.stringify(action) + ' in phase ' + state.phase);
+        return applyLegal(state, match);
+    }
+
+    function applyLegal(state, match) {
         const s = cloneState(state);
         s.step += 1;
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
@@ -720,7 +733,7 @@
         if (choice === 'deck') { for (let i = 0; i < n; i++) draw(G, p); }
         else if (choice === 'axiom') { for (let i = 0; i < n; i++) drawAxiom(G, p); }
         else if (choice === 'forward' || choice === 'rewind') {
-            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw and moves Fate 2 spaces ' + (choice === 'forward' ? 'closer.' : 'away.') });
+            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw. Fate moves 2 spaces ' + (choice === 'forward' ? 'closer.' : 'away.') });
             shiftFate(G, choice === 'forward' ? 2 : -2);
         }
         if (s.winner == null) { s.phase = 'main'; cleanup(G); }
@@ -971,11 +984,13 @@
         const s = G.s, c = s.cards[cid];
         if (!removeFrom(s.players[c.controller].board, cid)) return;
         let dest = 'discard', saver = null;
+        // Mercy first, and no return with a full hand, so a once-per-match Last Word is not wasted.
+        const room = handCount(s.players[c.owner]) < s.options.handLimit;
+        if (room && rules(s).mercy) { dest = 'hand'; saver = 'Mercy'; }
         abilityIds(s, c).forEach(id => {
             const def = abilityDefs()[id];
-            if (def.lastWord && def.lastWord(api(G), c) === 'hand' && dest === 'discard') { dest = 'hand'; saver = def.name; }
+            if (room && dest === 'discard' && def.lastWord && def.lastWord(api(G), c) === 'hand') { dest = 'hand'; saver = def.name; }
         });
-        if (dest === 'discard' && rules(s).mercy) { dest = 'hand'; saver = 'Mercy'; }
         const name = cardName(s, cid);
         resetCard(c);
         c.defeats += 1;
@@ -1031,7 +1046,7 @@
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
-        createBattle, legalActions, applyAction, winner, decider, actionKey, cloneState, fullLog, lostUids,
+        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
         rules, activeAxioms, ruleSummary, timeline, describe,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,

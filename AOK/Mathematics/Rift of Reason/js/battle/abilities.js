@@ -7,6 +7,7 @@
  *   entrance: { target?, filter?, run(api, card, target) }      when played
  *   activate: { cost, target?, filter?, run(api, card, target) } paid; uses the creature's attack this turn
  *   lastWord(api, card)              when defeated; return 'hand' to go back to the hand instead
+ *                                    (skipped when Mercy already returns it or the hand is full)
  *   attackMod(state, card, H)        own attack change
  *   aura(state, source, card, H)     attack bonus given to OTHER friendly creatures
  *   onTurnEnd(api, card)             at the end of its controller's turn

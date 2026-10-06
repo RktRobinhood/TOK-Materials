@@ -36,7 +36,7 @@
             lines: ['Did you catch the clue? It was in the third verse.', 'This is my Logic Era.', 'Read between the lines.'],
         },
         muskrat: {
-            name: 'Muskrat Rocket', inspiredBy: 'Elon Musk', colour: 'imagination', rarity: 'uncommon', power: 8, cost: 6, attack: 5, health: 5,
+            name: 'Muskrat Rocket', inspiredBy: 'Elon Musk', colour: 'imagination', rarity: 'uncommon', power: 8, cost: 6, attack: 5, health: 6,
             ability: 'next-year', abilityText: 'Activate (1 energy): rewind the Fate track 2 spaces.',
             blurb: 'Mars by next year. Every year. Renames things at three in the morning.',
             lines: ['We land on the next node by next year. Probably.', 'I have renamed this puzzle X.', 'First principles! Also, vibes.'],
@@ -48,13 +48,13 @@
             lines: ['Welcome to the Metaverse. Legs coming soon.', 'I am a normal human. I enjoy normal human things.', 'Engagement is up.'],
         },
         altmanta: {
-            name: 'Altmanta', inspiredBy: 'Sam Altman', colour: 'imagination', rarity: 'rare', power: 6, cost: 4, attack: 3, health: 4,
-            ability: 'predict', abilityText: 'Activate (1 energy): predict the colour of the opponent\'s next creature. If right, this gets +3/+3.',
+            name: 'Altmanta', inspiredBy: 'Sam Altman', colour: 'imagination', rarity: 'rare', power: 6, cost: 4, attack: 3, health: 5, keywords: ['guard'],
+            ability: 'predict', abilityText: 'Guard. Activate (1 energy): predict the colour of the opponent\'s next creature. If right, this gets +3/+3.',
             blurb: 'Calmly announces that everything is about to change. Glides on a chat bubble.',
             lines: ['It\'s going to be fine. Probably transformative. But fine.', 'I predicted you would say that.', 'Next token, please.'],
         },
         beastie: {
-            name: 'Mr. Beastie', inspiredBy: 'MrBeast', colour: 'memory', rarity: 'uncommon', power: 5, cost: 4, attack: 2, health: 3,
+            name: 'Mr. Beastie', inspiredBy: 'MrBeast', colour: 'memory', rarity: 'uncommon', power: 5, cost: 4, attack: 2, health: 4,
             ability: 'escalate', abilityText: '+1 attack for each other creature you have played this match (max +3).',
             blurb: 'Every challenge is bigger than the last. Last one to leave the puzzle wins a puzzle.',
             lines: ['Last one to leave this circle wins ten thousand charms!', 'Bigger. We need bigger.', 'Subscribe… to logic.'],
@@ -66,7 +66,7 @@
             lines: ['SIUUUU!', 'Same jump. Every time. Perfection.', 'You saw the pattern? I AM the pattern.'],
         },
         rawmsay: {
-            name: 'Rawmsay', inspiredBy: 'Gordon Ramsay', colour: 'emotion', rarity: 'rare', power: 6, cost: 5, attack: 3, health: 4,
+            name: 'Rawmsay', inspiredBy: 'Gordon Ramsay', colour: 'emotion', rarity: 'rare', power: 6, cost: 5, attack: 3, health: 5,
             ability: 'its-raw', abilityText: 'Entrance: defeat an enemy creature with 2 or less attack.',
             blurb: 'Volcanic about undercooked arguments. Unexpectedly gentle with beginners.',
             lines: ['This argument is RAW!', 'Where is the premise?!', 'Lovely. Well done, little one.'],
@@ -78,16 +78,16 @@
             lines: ['AAAAAAH!', 'Let\'s GOOOO!', 'Is that… is that a SYLLOGISM?!'],
         },
         chimpossible: {
-            name: 'Chimpossible', inspiredBy: 'Joe Rogan', colour: 'perception', rarity: 'rare', power: 6, cost: 4, attack: 3, health: 4,
-            ability: 'pull-that-up', abilityText: 'Activate (2 energy): look at the top 3 cards of your deck and keep one.',
+            name: 'Chimpossible', inspiredBy: 'Joe Rogan', colour: 'perception', rarity: 'rare', power: 6, cost: 4, attack: 3, health: 4, keywords: ['guard'],
+            ability: 'pull-that-up', abilityText: 'Guard. Activate (2 energy): look at the top 3 cards of your deck and keep one.',
             blurb: 'Everything is entirely possible. Has an anecdote about a chimp for every occasion.',
             lines: ['It\'s entirely possible.', 'Jamie, pull that up.', 'Have you ever seen a chimp do a syllogism? Wild.'],
         },
 
         // ---- expansion (design/ROSTER.md "Expansion: 16 more caricatures") ----
         carlseal: {
-            name: 'Magnus Carlseal', inspiredBy: 'Magnus Carlsen', colour: 'reason', rarity: 'uncommon', power: 6, cost: 5, attack: 3, health: 5,
-            ability: 'foresight', abilityText: 'Entrance: look at the opponent\'s hand and draw a card.',
+            name: 'Magnus Carlseal', inspiredBy: 'Magnus Carlsen', colour: 'reason', rarity: 'uncommon', power: 6, cost: 5, attack: 3, health: 5, keywords: ['guard'],
+            ability: 'foresight', abilityText: 'Guard. Entrance: look at the opponent\'s hand and draw a card.',
             blurb: 'Thinks twenty moves ahead and finds most games a bit easy. Calm. Unbearably calm.',
             lines: ['I saw this position four moves ago.', 'Interesting. Not good, but interesting.', 'Your move. Take your time. I already know it.'],
         },
@@ -98,8 +98,8 @@
             lines: ['…', '(holds out both hooves, palms up)', '(raises one eyebrow very slowly)'],
         },
         eminemu: {
-            name: 'Eminemu', inspiredBy: 'Eminem', colour: 'language', rarity: 'uncommon', power: 5, cost: 4, attack: 2, health: 4,
-            ability: 'rapid-fire', abilityText: 'Can attack twice each turn.',
+            name: 'Eminemu', inspiredBy: 'Eminem', colour: 'language', rarity: 'uncommon', power: 5, cost: 4, attack: 2, health: 4, keywords: ['guard'],
+            ability: 'rapid-fire', abilityText: 'Guard. Can attack twice each turn.',
             blurb: 'Rhymes faster than anyone can follow. Half the argument is just the speed.',
             lines: ['Logic, syllogistic, my premises are ballistic!', 'One shot, one premise. Make it count.', 'Too fast? That\'s the point.'],
         },
@@ -128,14 +128,14 @@
             lines: ['Goal. Again.', 'Pattern detected. Pattern repeated.', 'Meditate. Score. Meditate. Score.'],
         },
         usainvolt: {
-            name: 'Usain Volt', inspiredBy: 'Usain Bolt', colour: 'memory', rarity: 'common', power: 5, cost: 3, attack: 3, health: 1, keywords: ['swift'],
+            name: 'Usain Volt', inspiredBy: 'Usain Bolt', colour: 'memory', rarity: 'common', power: 5, cost: 3, attack: 2, health: 2, keywords: ['swift'],
             ability: 'lightning', abilityText: 'Swift. Ignores Guard when it attacks.',
             blurb: 'A grinning electric eel who does the lightning pose after every win. And before. And during.',
             lines: ['Too fast!', '(strikes the lightning pose)', 'You blinked. I won.'],
         },
         keanu: {
-            name: 'Keanu Meows', inspiredBy: 'Keanu Reeves', colour: 'memory', rarity: 'common', power: 4, cost: 3, attack: 2, health: 3,
-            ability: 'deja-vu', abilityText: 'Last Word: return it to your hand (once per match).',
+            name: 'Keanu Meows', inspiredBy: 'Keanu Reeves', colour: 'memory', rarity: 'common', power: 4, cost: 3, attack: 2, health: 3, keywords: ['guard'],
+            ability: 'deja-vu', abilityText: 'Guard. Last Word: return it to your hand (once per match).',
             blurb: 'A kind, sad-eyed black cat in a long coat. Walks past you twice. Wait. Déjà vu.',
             lines: ['Whoa.', 'Did you see that? I walked past twice.', 'You\'re breathtaking. Also, your argument has a glitch.'],
         },
@@ -158,8 +158,8 @@
             lines: ['Can you smell what the Rockodile is reasoning?', '(raises one eyebrow)', 'Be the hardest working creature in the room. Then check your premises.'],
         },
         attenbirdough: {
-            name: 'Sir David Attenbirdough', inspiredBy: 'David Attenborough', colour: 'perception', rarity: 'common', power: 3, cost: 2, attack: 1, health: 2,
-            ability: 'nature-watch', abilityText: 'Entrance: look at the top 3 cards of your deck and keep one.',
+            name: 'Sir David Attenbirdough', inspiredBy: 'David Attenborough', colour: 'perception', rarity: 'common', power: 3, cost: 2, attack: 1, health: 2, keywords: ['guard'],
+            ability: 'nature-watch', abilityText: 'Guard. Entrance: look at the top 3 cards of your deck and keep one.',
             blurb: 'An elderly puffin who whispers nature narration about everything, including you.',
             lines: ['And here, in its natural habitat, a student. Thinking.', 'Remarkable. Quite remarkable.', 'Watch closely. The truth is shy.'],
         },
