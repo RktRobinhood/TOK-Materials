@@ -1,26 +1,29 @@
 /*
  * Battle rules data: the colour wheel (Ways of Knowing) and the shared AXIOM DECK.
  *
- * Paid rewrites affect BOTH players and persist by category until replaced.
- * The visible timeline alternates free flips and full resets from round four.
+ * Axiom cards are drawn into a player's hand (draw choice, Look It Up) and played
+ * for their cost. A played or Fate-flipped axiom affects BOTH players and stays
+ * until another axiom in its category replaces it or the Fate track resets.
  * The engine (js/battle/engine.js) reads these hooks; nothing here touches the DOM.
+ * See design/card-arena-2026-10-07.md.
  *
- * Axiom hooks (all optional):
- *   powerMod(state, card, H)      → number added to the card's power (H = engine helpers)
- *   resolveFight(pa, pb)          → { attackerDefeated, blockerDefeated } replaces the normal rule
- *   onFightWon(api, card)         → after a fight, for each creature that beat its opponent
- *   noSteals, hiddenAttacker, attackAfterPlay, defeatedToHand,
- *   attackerChoosesBlocker, wheelReversed, abilitiesOff   (flags)
+ * Axiom fields:
+ *   category, cost (energy, default 2), text, flavour
+ *   rules: { ... }                → values merged over Engine.rules defaults
+ *   powerMod(state, card, H)      → attack added to a creature
+ *   resolveFight(pa, pb)          → { toAttacker, toDefender } replaces normal fight damage
+ *   defenderSurvivesTrade         → if both fighters would fall, the defender keeps 1 health
+ *   onFightWon(api, card)         → for a creature that defeated its foe and survived
  */
 (function (root) {
     'use strict';
     const Rift = root.Rift;
 
     // ---- colour wheel ------------------------------------------------------
-    // A clean 5-cycle. Each colour beats the next one (+2 power when it fights
+    // A clean 5-cycle. Each colour beats the next one (+1 attack while it fights
     // that colour). Memory is colourless: it neither beats nor is beaten.
     Rift.data.wheel = {
-        bonus: 2,
+        bonus: 1,
         order: ['reason', 'emotion', 'language', 'perception', 'imagination'],
         beats: {
             reason: 'emotion',
@@ -40,98 +43,148 @@
     };
 
     const spotlight = (id, colour, name, flavour) => ({
-        id, name, colour,
-        text: `${Rift.COLOURS[colour].name} creatures get +2 power.`,
+        id, name, colour, category: 'colour',
+        text: Rift.COLOURS[colour].name + ' creatures get +2 attack.',
         flavour,
         powerMod(state, card, H) { return H.colourOf(state, card) === colour ? 2 : 0; },
     });
 
     const axioms = {
         underdog: {
-            id: 'underdog', name: 'Axiom of the Underdog',
-            text: 'In every fight the weaker creature wins. (A tie still defeats both.)',
+            name: 'Axiom of the Underdog', category: 'combat',
+            text: 'In a fight, only the creature with LOWER attack deals damage. Equal attack: both deal damage.',
             flavour: 'Who decided that bigger beats smaller? Change the axiom and the result changes.',
             resolveFight(pa, pb) {
-                if (pa === pb) return { attackerDefeated: true, blockerDefeated: true };
-                return { attackerDefeated: pa > pb, blockerDefeated: pb > pa };
-            },
-        },
-        silence: {
-            id: 'silence', name: 'Axiom of Silence',
-            text: 'Activating a creature ability costs 3 energy.',
-            flavour: 'Some rules forbid an action rather than describe one.',
-            rules: { abilityCost: 3 },
-        },
-        doubt: {
-            id: 'doubt', name: 'Axiom of Doubt',
-            text: 'Attacks are face-down: the defender only learns which creature attacked after deciding whether to block.',
-            flavour: 'You must decide before you can be certain. Welcome to most of life.',
-            hiddenAttacker: true,
-        },
-        haste: {
-            id: 'haste', name: 'Axiom of Haste',
-            text: 'Each player may take 4 actions per turn.',
-            flavour: 'Jump to the conclusion. What could go wrong?',
-            rules: { actions: 4 },
-        },
-        mercy: {
-            id: 'mercy', name: 'Axiom of Mercy',
-            text: 'Defeated creatures go back to their controller\'s hand instead of the discard pile.',
-            flavour: 'Nothing is ever really refuted. It just goes back on the shelf.',
-            defeatedToHand: true,
-        },
-        crowd: {
-            id: 'crowd', name: 'Axiom of the Crowd',
-            text: 'Each creature gets +1 power for every other creature on its side.',
-            flavour: 'Is something truer because more people agree with it?',
-            powerMod(state, card, H) {
-                const board = H.boardOf(state, card.controller);
-                return board.filter(cid => cid !== card.cid).length;
+                if (pa === pb) return { toAttacker: pb, toDefender: pa };
+                return pa < pb ? { toAttacker: 0, toDefender: pa } : { toAttacker: pb, toDefender: 0 };
             },
         },
         'excluded-middle': {
-            id: 'excluded-middle', name: 'Law of the Excluded Middle',
-            text: 'No draws: when a fight is tied, the attacker wins.',
+            name: 'Law of the Excluded Middle', category: 'combat',
+            text: 'No double defeats: if both fighters would be defeated, the defender survives with 1 health.',
             flavour: 'Every statement is either true or false. There is no in-between.',
-            resolveFight(pa, pb) {
-                if (pa === pb) return { attackerDefeated: false, blockerDefeated: true };
-                return { attackerDefeated: pa < pb, blockerDefeated: pb < pa };
-            },
+            defenderSurvivesTrade: true,
         },
         extensionality: {
-            id: 'extensionality', name: 'Axiom of Extensionality',
-            text: 'Equal is equal: when a fight is tied, neither creature is defeated.',
+            name: 'Axiom of Extensionality', category: 'combat',
+            text: 'Equal is equal: creatures with the same attack deal no damage to each other.',
             flavour: 'Two sets with exactly the same members are the same set.',
-            resolveFight(pa, pb) {
-                if (pa === pb) return { attackerDefeated: false, blockerDefeated: false };
-                return { attackerDefeated: pa < pb, blockerDefeated: pb < pa };
-            },
+            resolveFight(pa, pb) { return pa === pb ? { toAttacker: 0, toDefender: 0 } : { toAttacker: pb, toDefender: pa }; },
+        },
+        'reverse-hearts': {
+            name: 'The Last Shall Be First', category: 'victory', cost: 3,
+            text: 'Reach zero of YOUR OWN hearts to win. Taking the opponent to zero makes THEM win.',
+            rules: { reverseHearts: true },
+        },
+        'normal-hearts': {
+            name: 'Back to the Goal', category: 'victory', cost: 1,
+            text: 'Reduce the opponent to zero hearts to win.',
+            rules: { reverseHearts: false },
+        },
+        'one-action': {
+            name: 'One Step at a Time', category: 'attacks',
+            text: 'Each player may attack only once per turn.',
+            rules: { attackLimit: 1 },
+        },
+        'two-actions': {
+            name: 'Two Paths', category: 'attacks',
+            text: 'Each player may attack only twice per turn.',
+            rules: { attackLimit: 2 },
+        },
+        'three-actions': {
+            name: 'Rule of Three', category: 'attacks', cost: 1,
+            text: 'Back to normal: every ready creature may attack once per turn.',
+            rules: {},
+        },
+        haste: {
+            name: 'Axiom of Haste', category: 'attacks',
+            text: 'Every creature may attack twice per turn.',
+            flavour: 'Jump to the conclusion. What could go wrong?',
+            rules: { attacksPerCreature: 2 },
+        },
+        thrift: {
+            name: 'Small Assumptions', category: 'cost', cost: 1,
+            text: 'Creature cards cost 1 less energy.',
+            rules: { costDelta: -1 },
+        },
+        luxury: {
+            name: 'Costly Assumptions', category: 'cost', cost: 1,
+            text: 'Creature cards cost 1 more energy.',
+            rules: { costDelta: 1 },
+        },
+        abundance: {
+            name: 'Growing Ideas', category: 'energy',
+            text: 'Energy capacity grows by 2 each turn, up to 10.',
+            rules: { growth: 2 },
+        },
+        study: {
+            name: 'Second Opinion', category: 'draw',
+            text: 'Drawing from your deck or the axiom deck takes 2 cards.',
+            rules: { drawCount: 2 },
+        },
+        vigilance: {
+            name: 'Rest and Recover', category: 'healing',
+            text: 'Creatures heal fully at the start of their controller\'s turn.',
+            flavour: 'What if every wound closed overnight? The same fight would end differently.',
+            rules: { heal: true },
+        },
+        patience: {
+            name: 'Wounds Remain', category: 'healing', cost: 1,
+            text: 'Back to normal: damage stays on creatures between turns.',
+            rules: { heal: false },
+        },
+        arrival: {
+            name: 'Ready on Arrival', category: 'arrival',
+            text: 'New creatures can attack and activate on the turn they arrive.',
+            rules: { arrivalReady: true },
         },
         choice: {
-            id: 'choice', name: 'Axiom of Choice',
-            text: 'When you attack, you may choose which enemy creature must block.',
+            name: 'Axiom of Choice', category: 'targeting',
+            text: 'Guard is ignored: attackers may choose any target.',
             flavour: 'You can always pick one thing from each set, even when no rule says which.',
-            attackerChoosesBlocker: true,
+            rules: { ignoreGuard: true },
+        },
+        mercy: {
+            name: 'Axiom of Mercy', category: 'defeat',
+            text: 'Defeated creatures go back to their owner\'s hand, fully healed.',
+            flavour: 'Nothing is ever really refuted. It just goes back on the shelf.',
+            rules: { mercy: true },
+        },
+        crowd: {
+            name: 'Axiom of the Crowd', category: 'power',
+            text: 'Each creature gets +1 attack for every other creature on its side.',
+            flavour: 'Is something truer because more people agree with it?',
+            powerMod(state, card, H) { return H.boardOf(state, card.controller).filter(cid => cid !== card.cid).length; },
         },
         'curved-space': {
-            id: 'curved-space', name: 'The Broken Postulate',
+            name: 'The Broken Postulate', category: 'colour',
             text: 'The colour wheel runs backwards: each colour beats the one that normally beats it.',
             flavour: 'Drop Euclid\'s parallel postulate and geometry curves. Still consistent, just different.',
-            wheelReversed: true,
+            rules: { wheelReversed: true },
+        },
+        silence: {
+            name: 'Axiom of Silence', category: 'abilities',
+            text: 'Activating a creature ability costs 1 more energy.',
+            flavour: 'Some rules make an action harder rather than forbid it.',
+            rules: { abilityCostDelta: 1 },
         },
         'empty-set': {
-            id: 'empty-set', name: 'Axiom of the Empty Set',
-            text: 'All creature abilities are switched off.',
+            name: 'Axiom of the Empty Set', category: 'abilities', cost: 3,
+            text: 'All creature abilities and keywords are switched off.',
             flavour: 'There is a set with nothing in it. Now the creatures are just numbers.',
-            abilitiesOff: true,
+            rules: { abilitiesOff: true },
         },
         induction: {
-            id: 'induction', name: 'Principle of Induction',
-            text: 'A creature that wins a fight gets +1 power for the rest of the battle.',
+            name: 'Principle of Induction', category: 'growth',
+            text: 'A creature that defeats an enemy in a fight and survives gets +1/+1.',
             flavour: 'It worked once, and it worked the next time. So it always works… right?',
-            onFightWon(api, card) {
-                api.addBoost(card, 'Induction', 1);
-            },
+            onFightWon(api, card) { api.buff(card.cid, 1, 1, 'Induction'); },
+        },
+        doubt: {
+            name: 'Axiom of Doubt', category: 'damage',
+            text: 'Attacks on heroes remove only 1 heart, however strong the attacker.',
+            flavour: 'Big claims shrink when you doubt them.',
+            rules: { heroDamageCap: 1 },
         },
 
         // ---- spotlights: can be won and added to a player's pool ----
@@ -143,33 +196,18 @@
         'age-of-tradition': spotlight('age-of-tradition', 'memory', 'Age of Tradition', 'We have always done it this way. Is that a reason?'),
     };
 
-    Object.assign(axioms, {
-        'one-action': {name:'One Step at a Time', text:'Each player may take 1 action per turn.', rules:{actions:1}, category:'actions'},
-        'two-actions': {name:'Two Paths', text:'Each player may take 2 actions per turn.', rules:{actions:2}, category:'actions'},
-        'three-actions': {name:'Rule of Three', text:'Each player may take 3 actions per turn.', rules:{actions:3}, category:'actions'},
-        'reverse-hearts': {name:'The Last Shall Be First', text:'Reach zero of YOUR OWN hearts to win. Giving the opponent their last hit makes THEM win.', rules:{reverseHearts:true}, category:'victory'},
-        'normal-hearts': {name:'Back to the Goal', text:'Reduce the opponent to zero hearts to win.', rules:{reverseHearts:false}, category:'victory'},
-        thrift: {name:'Small Assumptions', text:'Creature cards cost 1 less energy (minimum 1).', rules:{playCostDelta:-1}, category:'cost'},
-        luxury: {name:'Costly Assumptions', text:'Creature cards cost 1 more energy.', rules:{playCostDelta:1}, category:'cost'},
-        abundance: {name:'Growing Ideas', text:'Energy capacity grows by 2 each turn, up to 10.', rules:{growth:2}, category:'energy'},
-        study: {name:'Second Opinion', text:'Draw 2 creature cards at the start of your turn.', rules:{draw:2}, category:'draw'},
-        vigilance: {name:'Unspent Potential', text:'Attacking, blocking and activating do not exhaust creatures. Each still uses an action or response.', rules:{exhaust:false}, category:'exhaustion'},
-        patience: {name:'Time to Think', text:'Attacking, blocking and activating exhaust creatures until their next turn.', rules:{exhaust:true}, category:'exhaustion'},
-        arrival: {name:'Ready on Arrival', text:'Newly played creatures can attack or activate immediately.', rules:{arrivalReady:true}, category:'arrival'},
-    });
-    const categories = {underdog:'combat', silence:'abilities', doubt:'visibility', haste:'actions', mercy:'defeat', crowd:'power',
-        'excluded-middle':'combat', extensionality:'combat', choice:'targeting', 'curved-space':'colour', 'empty-set':'abilities', induction:'growth'};
-    Object.entries(axioms).forEach(([id,a]) => {
-        a.id=id; a.category=a.category || categories[id] || 'colour';
-        a.flavour=a.flavour || 'Change an assumption and the same situation can have a different result.';
+    Object.entries(axioms).forEach(([id, a]) => {
+        a.id = id;
+        if (a.cost == null) a.cost = 2;
+        a.flavour = a.flavour || 'Change an assumption and the same situation can have a different result.';
     });
     Rift.data.axioms = axioms;
 
     // Available starting rules. Each side selects ten; earned rules expand the pool.
     Rift.data.axiomDecks = {
-        default: ['underdog','three-actions','normal-hearts','thrift','abundance','study','arrival','patience','choice','mercy'],
+        default: ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy'],
         starter: ['underdog', 'one-action', 'two-actions', 'three-actions', 'reverse-hearts', 'normal-hearts',
             'thrift', 'luxury', 'abundance', 'study', 'vigilance', 'patience', 'arrival', 'silence', 'haste', 'mercy', 'crowd',
-            'excluded-middle', 'extensionality', 'choice', 'curved-space', 'empty-set', 'induction'],
+            'excluded-middle', 'extensionality', 'choice', 'curved-space', 'empty-set', 'induction', 'doubt'],
     };
 })(typeof window !== 'undefined' ? window : globalThis);
