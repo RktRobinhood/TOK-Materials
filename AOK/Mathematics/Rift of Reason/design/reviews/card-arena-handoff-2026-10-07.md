@@ -41,7 +41,7 @@ Tests: **429/429** (`node --test "tools/test/*.test.mjs"`), including a 10,000-g
 ## Morning tasks
 
 1. **Art (#47):** run Stage 10 in `design/art-requests/ART-REQUESTS.md` (priority 1: `arena-icons.png`, `arena-frames.png`). Bring results for critique, save under the given names, `node tools/build-assets.mjs`.
-2. **Voice (#43):** with the refreshed key, `node tools/voices.mjs --plan`, then record Granny first. 13 of the 16 lesson steps have new text (steps 3, 5 and 9 kept theirs); the old tutorial clips no longer match and are not used. Then the 63 older creature lines. Never run two recording processes at once.
+2. **Voice (#43):** with the refreshed key, `node tools/voices.mjs --plan`, then record Granny first: all 16 lesson steps are new text (79 lines in 23 requests in total; the old tutorial clips no longer match and are not used). Then the 63 older creature lines. Never run two recording processes at once.
 3. **Teacher playtest:** Collection → Learn the card game, then a Practice battle and Syllo's challenge. Decide on items 1–5 above.
 4. **Release:** merge the PR to `main`; check the Pages deployment serves the new files.
 
