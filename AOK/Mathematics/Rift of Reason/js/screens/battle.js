@@ -49,6 +49,9 @@
  * The Bag: a Bag button by the energy (art ui/bag, else 🎒) opens a small tray of the items brought
  * (art item/<id>). Click an item, then a glowing target (or press Use); targeted items can also be
  * dragged onto their target. Items that can't be used now are dimmed with a short reason.
+ * Picture buttons (draw choice, side, guide, Bag, Spark) show their name in a small tooltip on
+ * hover, keyboard focus or long-press (art ui/btn-draw-deck, ui/btn-draw-axiom, ui/btn-fate-forward,
+ * ui/btn-fate-rewind, ui/btn-rules, ui/btn-help, ui/btn-leave, ui/btn-replay; else inline SVG).
  */
 (function (root) {
     'use strict';
@@ -104,6 +107,37 @@
         forward: ['Fate 2 closer', 'No card. The next Fate event comes 2 turns sooner'],
         rewind: ['Fate 2 away', 'No card. The next Fate event comes 2 turns later'],
     };
+    // Picture buttons: optional art, else a small inline SVG in the game's palette.
+    const TIP_DELAY = 250;      // ms before a button's name shows under a resting mouse
+    const TIP_PRESS = 450;      // ms of touch long-press before it shows (it then stays until the next tap)
+    const HOURGLASS = '<path d="M5 3.5h14M5 28.5h14" stroke="#f2b632" stroke-width="2.6" stroke-linecap="round"/>'
+        + '<path d="M7 4.5c0 7 4 8.5 5 11.5c-1 3-5 4.5-5 11.5h10c0-7-4-8.5-5-11.5c1-3 5-4.5 5-11.5z" fill="#3a2550" stroke="#f2b632" stroke-width="1.8" stroke-linejoin="round"/>'
+        + '<path d="M9.3 26c0-2.2 1.6-3.6 2.7-4.6c1.1 1 2.7 2.4 2.7 4.6z" fill="#efe3c8"/>'
+        + '<path d="M20 16h5" stroke="#3fe0d0" stroke-width="3" stroke-linecap="round"/><path d="M23.5 10l7 6-7 6z" fill="#3fe0d0"/>';
+    const svg = body => '<svg viewBox="0 0 32 32" focusable="false" aria-hidden="true">' + body + '</svg>';
+    const CTRL_SVG = {
+        deck: svg('<rect x="4" y="2.5" width="16" height="22" rx="2.5" fill="#3a2550" stroke="#f2b632" stroke-width="2"/>'
+            + '<path d="M12 8l-3.5 5.5 3.5 5.5 3.5-5.5z" fill="#f2b632"/>'
+            + '<path d="M21.5 12.5c4.5 1 6 5 4.6 9.5" fill="none" stroke="#3fe0d0" stroke-width="2.8" stroke-linecap="round"/><path d="M21.6 21l4.2 7.5 4.4-7.4z" fill="#3fe0d0"/>'),
+        axiom: svg('<rect x="6.5" y="2.5" width="19" height="27" rx="2.5" fill="#e2cf9c" stroke="#6a4f1f" stroke-width="2"/>'
+            + '<path d="M16 8v15M10 11h12M11.5 24h9M10 11l-2.4 6M10 11l2.4 6M22 11l-2.4 6M22 11l2.4 6" stroke="#4a3210" stroke-width="1.8" stroke-linecap="round" fill="none"/>'
+            + '<path d="M7 17h6a3 3 0 0 1-6 0zM19 17h6a3 3 0 0 1-6 0z" fill="#4a3210"/>'),
+        forward: svg(HOURGLASS),
+        rewind: svg('<g transform="translate(32 0) scale(-1 1)">' + HOURGLASS + '</g>'),
+        rules: svg('<path d="M6 27V6a3 3 0 0 1 3-3h17v22H9a3 3 0 0 0-3 3a3 3 0 0 0 3 3h17v-6" fill="#7a3b2a" stroke="#f2b632" stroke-width="2" stroke-linejoin="round"/>'
+            + '<path d="M8.5 28h17" stroke="#efe3c8" stroke-width="2.2"/><path d="M11 9h10M11 13.5h7" stroke="#f2b632" stroke-width="2" stroke-linecap="round"/>'),
+        help: svg('<rect x="6" y="5" width="20" height="22" rx="2" fill="#efe3c8" stroke="#b08a3a" stroke-width="2"/>'
+            + '<path d="M4 6.5h24M4 25.5h24" stroke="#b08a3a" stroke-width="3.4" stroke-linecap="round"/>'
+            + '<path d="M12.5 12.4a3.5 3.5 0 1 1 5.2 3c-1.1.6-1.7 1.3-1.7 2.6" fill="none" stroke="#1f7f77" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="21.6" r="1.6" fill="#1f7f77"/>'),
+        leave: svg('<rect x="8" y="3" width="16" height="25" rx="1.5" fill="#f6c75a" stroke="#b08a3a" stroke-width="2"/>'
+            + '<path d="M8 3l9 2.5v25L8 28z" fill="#8a5a2b" stroke="#4a3210" stroke-width="1.6" stroke-linejoin="round"/>'
+            + '<circle cx="14.5" cy="17" r="1.4" fill="#f2b632"/><path d="M4 29h24" stroke="#b08a3a" stroke-width="2.4" stroke-linecap="round"/>'),
+        close: svg('<path d="M9 9l14 14M23 9L9 23" stroke="#efe3c8" stroke-width="3.2" stroke-linecap="round"/>'),
+        replay: svg('<path d="M4.5 12h5l7-6v20l-7-6h-5z" fill="#f2b632" stroke="#b08a3a" stroke-width="1.6" stroke-linejoin="round"/>'
+            + '<path d="M21 11.5a6 6 0 0 1 0 9M24.5 8a11 11 0 0 1 0 16" fill="none" stroke="#3fe0d0" stroke-width="2.4" stroke-linecap="round"/>'),
+    };
+    const DRAW_ART = { deck: 'ui/btn-draw-deck', axiom: 'ui/btn-draw-axiom', forward: 'ui/btn-fate-forward', rewind: 'ui/btn-fate-rewind' };
+    let tipCount = 0;
 
     function colourChip(colour) {
         // A nicknamed creature has no colour at all ('none'), which is not the same as Memory.
@@ -178,6 +212,8 @@
         const canLeave = !guide && mode === 'practice';
         const nodes = {};
         const inspectables = {};   // key → { node, make } for the big-card preview
+        const tipNodes = {};       // key → picture button, so a shown tooltip survives re-renders
+        const tipId = 'b-tip-' + (++tipCount);
         let help = null;
 
         // ---- skeleton ----
@@ -211,33 +247,37 @@
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
             dom.side = el('aside.b-side', {}, [
                 el('div.b-side-top', {}, [
-                    el('button.btn.small', { type: 'button', text: 'How to play', onclick: openHelp }),
-                    canLeave ? el('button.btn.small.b-leave', { type: 'button', text: 'Leave match', onclick: askLeave }) : null,
-                    el('button.btn.small.b-side-close', { type: 'button', text: 'Close', onclick: () => toggleSide(false) }),
+                    iconButton('.b-help', { key: 'help', name: 'How to play', detail: 'All the card rules on one page.', art: 'ui/btn-help', svg: CTRL_SVG.help, onclick: openHelp }),
+                    canLeave ? iconButton('.b-leave', { key: 'leave', name: 'Leave match', detail: 'Stop this match. Nothing is at stake.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: askLeave }) : null,
+                    iconButton('.b-side-close', { key: 'close', name: 'Close', detail: 'Hide the rules and the log.', svg: CTRL_SVG.close, onclick: () => toggleSide(false) }),
                 ]),
                 dom.wheel = wheelLegend(),
                 dom.rules = el('details.b-rules.panel', { open: true }),
                 el('details.b-log-wrap.panel', { open: true }, [el('summary', { text: 'What happened' }), dom.log = el('ol.b-log')]),
             ]),
-            el('button.btn.small.b-side-toggle', { type: 'button', text: 'Rules & log', onclick: () => toggleSide() }),
+            iconButton('.b-side-toggle', { key: 'side', name: 'Rules & log', detail: 'The rules now, the keywords, the colour wheel and what happened.', art: 'ui/btn-rules', svg: CTRL_SVG.rules, onclick: () => toggleSide() }),
             // The big preview sits over the side panel (or the far edge of the table), never over the
             // centre lane or End turn. See placeInspect.
             dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
             dom.overlay = el('div.b-overlay'),
+            // One small tooltip for every picture button (name + one detail line). See showTip.
+            dom.tip = el('div.b-tip', { role: 'tooltip', id: tipId, 'aria-hidden': 'true' }),
         ]);
         rootEl.appendChild(Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' }));
         rootEl.appendChild(screen);
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
-        screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); });
+        screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); cancelTipPress(); });
         // Pressing the mouse anywhere closes the preview (and a waiting one never opens).
         screen.addEventListener('pointerdown', ev => { if (!ev.pointerType || ev.pointerType === 'mouse') hideInspect(); });
+        // A tooltip opened by a long-press stays until the next tap anywhere.
+        screen.addEventListener('pointerdown', () => { if (ui.tip && ui.tip.sticky) hideTip(); });
         // Only one of the Colour wheel and Rules now is open at a time, so neither is squeezed.
         dom.wheel.addEventListener('toggle', () => { if (dom.wheel.open) dom.rules.open = false; });
         dom.rules.addEventListener('toggle', () => { if (dom.rules.open) dom.wheel.open = false; });
         screen.addEventListener('dragstart', e => e.preventDefault());
-        screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid]')) e.preventDefault(); });
+        screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid], [data-tip]')) e.preventDefault(); });
 
         function toggleSide(on) {
             ui.sideOpen = on == null ? !ui.sideOpen : on;
@@ -757,6 +797,115 @@
             else ui.inspect = null;
         }
 
+        // ---- picture buttons and their tooltip ----
+        // One floating bubble (name in bold + one detail line): after TIP_DELAY under a resting mouse,
+        // at once on keyboard focus, after a touch long-press (then it stays until the next tap).
+        // It hides on leave, blur, click and Escape, and sits above the button (below when the gold
+        // pointer is above it), so it never covers the button itself.
+        function ctrlIcon(art, svgText, cls) {
+            const style = art ? bg(art) : null;
+            return el('span.b-ctrl-icon' + (cls ? '.' + cls : '') + (style ? '.art' : ''), style ? { style, 'aria-hidden': 'true' } : { html: svgText, 'aria-hidden': 'true' });
+        }
+        // o: { key, name, detail, art, svg, icon, badge, label, onclick, off, extra }
+        function iconButton(cls, o) {
+            const b = el('button.b-ibtn' + (cls || '') + (o.off ? '.off' : ''), Object.assign({
+                type: 'button', 'aria-label': o.label || o.name, 'aria-disabled': o.off ? 'true' : null,
+                onclick: ev => { if (ui.tipSuppress) return; hideTip(); if (o.onclick) o.onclick(ev, b); },
+            }, o.extra || {}), [
+                o.icon || ctrlIcon(o.art, o.svg),
+                o.badge != null && o.badge !== '' ? el('span.b-ibtn-badge' + (o.badgeClass ? '.' + o.badgeClass : ''), { text: String(o.badge), 'aria-hidden': 'true' }) : null,
+            ]);
+            tipFor(b, o.key, o.name, o.detail);
+            return b;
+        }
+        function tipFor(node, key, tipName, detail) {
+            node.dataset.tip = tipName;
+            node.dataset.tipKey = key;
+            node.dataset.tipDetail = detail || '';
+            if (node.title) node.title = '';
+            tipNodes[key] = node;
+            node.addEventListener('pointerenter', ev => {
+                if ((ev.pointerType && ev.pointerType !== 'mouse') || (ui.drag && ui.drag.active)) return;
+                clearTimeout(ui.tipTimer);
+                const wait = ui.tip ? 60 : TIP_DELAY;
+                ui.tipTimer = setTimeout(() => showTip(screen.contains(node) ? node : tipNodes[key]), wait);
+            });
+            node.addEventListener('pointerleave', ev => { if (!ev || !ev.pointerType || ev.pointerType === 'mouse') hideTip(); });
+            // Keyboard focus shows it at once; focus from a mouse press does not.
+            node.addEventListener('focus', () => { if (!ui.tipPress) showTip(node); });
+            node.addEventListener('blur', () => { if (ui.tip && ui.tip.node === node) hideTip(); });
+            node.addEventListener('pointerdown', ev => {
+                ui.tipPress = true;
+                setTimeout(() => { ui.tipPress = false; }, 0);
+                if (!ev.pointerType || ev.pointerType === 'mouse') { hideTip(); return; }
+                cancelTipPress();
+                const lp = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, shown: false };
+                lp.timer = setTimeout(() => { lp.shown = true; showTip(node, true); }, TIP_PRESS);
+                ui.tipLP = lp;
+            });
+            node.addEventListener('pointerup', () => {
+                const lp = ui.tipLP;
+                if (!lp) return;
+                cancelTipPress();
+                // A long-press only reads the name: the button is not pressed.
+                if (lp.shown) { ui.tipSuppress = true; setTimeout(() => { ui.tipSuppress = false; }, 0); }
+            });
+        }
+        function cancelTipPress() {
+            if (ui.tipLP) clearTimeout(ui.tipLP.timer);
+            ui.tipLP = null;
+        }
+        function showTip(node, sticky) {
+            clearTimeout(ui.tipTimer);
+            if (!node || !node.dataset || !node.dataset.tip || !screen.contains(node) || ui.confirm || (ui.drag && ui.drag.active)) return;
+            if (ui.tip && ui.tip.node !== node) unlinkTip(ui.tip.node);
+            dom.tip.innerHTML = '';
+            put(dom.tip, el('strong.b-tip-name', { text: node.dataset.tip }),
+                node.dataset.tipDetail ? el('span.b-tip-detail', { text: node.dataset.tipDetail }) : null);
+            node.setAttribute('aria-describedby', tipId);
+            dom.tip.setAttribute('aria-hidden', 'false');
+            dom.tip.classList.add('show');
+            ui.tip = { node, key: node.dataset.tipKey, sticky: !!sticky || !!(ui.tip && ui.tip.sticky && ui.tip.key === node.dataset.tipKey) };
+            hideInspect();
+            placeTip(node);
+        }
+        function unlinkTip(node) { if (node && node.removeAttribute) node.removeAttribute('aria-describedby'); }
+        function hideTip() {
+            clearTimeout(ui.tipTimer);
+            cancelTipPress();
+            if (!ui.tip) return;
+            unlinkTip(ui.tip.node);
+            ui.tip = null;
+            dom.tip.classList.remove('show');
+            dom.tip.setAttribute('aria-hidden', 'true');
+        }
+        // Above the button, centred and kept inside the screen; below it when there is no room above
+        // or when the gold pointer (guide mode) sits above it.
+        function placeTip(node) {
+            if (!node.getBoundingClientRect || !screen.getBoundingClientRect) return;
+            const box = screen.getBoundingClientRect();
+            const a = node.getBoundingClientRect();
+            const t = dom.tip.getBoundingClientRect();
+            if (!box.width || !t.width) return;
+            const m = 6, gap = 8;
+            const x = Math.max(m, Math.min(box.width - t.width - m, a.left + a.width / 2 - box.left - t.width / 2));
+            const above = a.top - box.top - gap - t.height;
+            const below = a.bottom - box.top + gap;
+            const fitsBelow = below + t.height <= box.height - m;
+            const pointer = node.classList.contains('guide-focus');
+            const y = (above < m || pointer) && fitsBelow ? below : Math.max(m, above);
+            dom.tip.style.left = Math.round(x) + 'px';
+            dom.tip.style.top = Math.round(y) + 'px';
+        }
+        // After a re-render the same button (by key) takes over a shown tooltip, with fresh text.
+        function restoreTip() {
+            const was = ui.tip;
+            if (!was) return;
+            const n = screen.contains(was.node) ? was.node : tipNodes[was.key];
+            if (n && screen.contains(n)) showTip(n, was.sticky);
+            else hideTip();
+        }
+
         // ---- heroes ----
         function heroEl(pi, valid, L) {
             const P = state.players[pi];
@@ -847,10 +996,12 @@
             dom.myLeft.innerHTML = '';
             put(dom.myLeft, heroEl(ME, valid, L), el('div.b-left', {}, [
                 infoEl(ME),
-                P.spark ? el('button.btn.small.b-spark' + (sparkStyle ? '.art' : '') + (ui.sparkFor ? '.glow' : ''), {
-                    type: 'button', disabled: !spark, title: 'Once per match: +1 energy this turn (you went second).',
-                    onclick: () => { if (spark) act(spark); },
-                }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
+                P.spark ? iconButton('.b-spark' + (sparkStyle ? '.art' : '') + (ui.sparkFor ? '.glow' : ''), {
+                    key: 'spark', name: 'Spark', label: 'Spark: +1 energy',
+                    detail: 'Once per match: +1 energy this turn (you went second).',
+                    icon: el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦', 'aria-hidden': 'true' }), badge: '+1',
+                    extra: { disabled: !spark }, onclick: () => { if (spark) act(spark); },
+                }) : null,
             ]));
             dom.myRight.innerHTML = '';
             put(dom.myRight, bagEl(L), energyEl(ME));
@@ -948,6 +1099,7 @@
             renderGuidePointer();
             drawArrowForPreview();
             restoreInspect();
+            restoreTip();
             turnBanner();
         }
 
@@ -1239,8 +1391,10 @@
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
                 type: 'button', disabled: !end, style,
-                onclick: () => { if (end) act(end); },
+                onclick: () => { if (end && !ui.tipSuppress) act(end); },
             }, [el('span', { text: state.phase === 'over' ? 'Game over' : mine ? 'End turn' : ui.busy ? 'Watch' : 'Their turn' })]);
+            tipFor(b, 'end', 'End turn', state.phase === 'over' ? 'The battle is over.' : !mine ? 'Wait for your turn.'
+                : state.phase === 'draw' ? 'First choose your draw.' : end ? 'Finish your turn. The Fate track moves 1 space.' : 'First answer the question.');
             nodes.end = b;
             dom.end.appendChild(b);
             if (onlyEnd) dom.end.appendChild(el('div.b-end-hint', { text: 'Nothing left to do' }));
@@ -1270,22 +1424,27 @@
                 forward: noFate || (tl.length ? after(tl[0].turns - 2) : ''),
                 rewind: noFate || (tl.length ? after(Math.min(state.options.fateMax, tl[0].turns + 2)) : ''),
             };
-            const fateNow = !noFate && tl.length ? ' Now: ' + fateText(tl[0], true) : '';
             const st = step();
-            const DRAW_ICON = { deck: '🂠', axiom: '⚖', forward: '⏩', rewind: '⏪' };
+            // Picture buttons with a tiny status badge; the name and the details are in the tooltip.
+            const when = n => (n <= 0 ? 'now' : 'in ' + n);
+            const badge = {
+                deck: String(P.deck.length),
+                axiom: String(state.axioms.deck.length),
+                forward: !noFate && tl.length ? when(tl[0].turns - 2) : '',
+                rewind: !noFate && tl.length ? when(Math.min(state.options.fateMax, tl[0].turns + 2)) : '',
+            };
             const none = L.find(x => x.type === 'draw' && x.choice === 'none');
-            put(dom.draw, el('div.b-draw-title', { text: 'Your draw: choose one' }), el('div.b-draw-buttons', {}, ['deck', 'axiom', 'forward', 'rewind'].map(choice => {
+            put(dom.draw, el('div.b-draw-title', { text: 'Draw one' }), el('div.b-draw-buttons', {}, ['deck', 'axiom', 'forward', 'rewind'].map(choice => {
                 const a = L.find(x => x.type === 'draw' && x.choice === choice);
                 const possible = choices.includes(choice);
-                const b = el('button.b-draw-btn', {
-                    type: 'button', disabled: !a, dataset: { choice },
-                    title: DRAW_TEXT[choice][1] + (why[choice] ? '. ' + why[choice].replace(/\.?$/, '.') : '') + (choice === 'forward' || choice === 'rewind' ? fateNow : ''),
-                    onclick: () => { if (a) act(a); },
-                }, [el('span.b-draw-icon', { text: DRAW_ICON[choice], 'aria-hidden': 'true' }), el('span.b-draw-words', {}, [
-                    el('strong', { text: DRAW_TEXT[choice][0] }),
-                    el('small', { text: possible ? why[choice] || DRAW_TEXT[choice][1] : why[choice] }),
-                ])]);
-                if (!a && possible && guide && st) b.title = 'Not in this lesson step.';
+                const lessonOnly = !a && possible && guide && st;
+                const detail = DRAW_TEXT[choice][1] + '. ' + (lessonOnly ? 'Not in this lesson step.' : why[choice] ? why[choice].replace(/\.?$/, '.') : '');
+                const b = iconButton('.b-draw-btn', {
+                    key: 'draw:' + choice, name: DRAW_TEXT[choice][0], detail: detail.trim(), off: !a,
+                    art: DRAW_ART[choice], svg: CTRL_SVG[choice], badge: badge[choice], extra: { dataset: { choice } },
+                    // A dim button says why on a click or tap (the tooltip stays until the next tap).
+                    onclick: (ev, btn) => { if (a) act(a); else showTip(btn, true); },
+                });
                 nodes.draw[choice] = b;
                 return b;
             }).concat(none ? [button('Nothing to draw: continue', () => act(none), 'primary')] : [])));
@@ -1374,6 +1533,7 @@
             clearTimeout(ui.timer);
             cancelDrag();
             hideInspect();
+            hideTip();
             const stay = button('Keep playing', () => {
                 ui.confirm = false;
                 dom.overlay.classList.remove('show');
@@ -1416,8 +1576,8 @@
                 el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? 'Watch Granny\'s reply…' : 'Do this: ' + st.label }),
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
-                    done ? null : el('button.btn.small', { type: 'button', text: 'Hear this step again', disabled: ui.busy, onclick: speak }),
-                    el('button.btn.small', { type: 'button', text: 'Leave lesson', onclick: leaveGuide }),
+                    done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
+                    iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
                 ]),
             );
         }
@@ -1557,6 +1717,10 @@
         function onPointerMove(ev) {
             const lp = ui.longPress;
             if (lp && ev.pointerId === lp.id && !lp.shown && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) >= DRAG_START) cancelLongPress();
+            const tp = ui.tipLP;
+            if (tp && ev.pointerId === tp.id && !tp.shown && Math.hypot(ev.clientX - tp.x, ev.clientY - tp.y) >= DRAG_START) cancelTipPress();
+            // A mouse that has left the button hides its tooltip (also after a re-render).
+            if (ev.pointerType === 'mouse' && ui.tip && !ui.tip.sticky && ev.target && ui.tip.node.contains && !ui.tip.node.contains(ev.target)) hideTip();
             // After a drag, hover previews wait until the mouse really moves; then the card under it may open one.
             const hb = ui.hoverBlock;
             if (hb && !ui.drag && Math.hypot(ev.clientX - hb.x, ev.clientY - hb.y) >= 12) {
@@ -1721,11 +1885,14 @@
             const list = E.bagStatus(state, ME);
             const style = bg('ui/bag');
             const n = P.bag.length;
-            const btn = el('button.btn.small.b-bag-btn' + (ui.bagOpen ? '.open' : '') + (list.some(x => itemOk(x.id, L)) ? '.has-use' : ''), {
-                type: 'button', 'aria-expanded': ui.bagOpen ? 'true' : 'false', 'aria-controls': 'b-bag-tray', 'aria-label': 'Bag: ' + n + ' item' + (n === 1 ? '' : 's'),
-                title: 'Your bag: ' + n + ' item' + (n === 1 ? '' : 's') + '. Use one per turn. An item is used up only when you use it.',
+            const btn = iconButton('.b-bag-btn' + (ui.bagOpen ? '.open' : '') + (list.some(x => itemOk(x.id, L)) ? '.has-use' : ''), {
+                key: 'bag', name: 'Bag', label: 'Bag: ' + n + ' item' + (n === 1 ? '' : 's'),
+                detail: n + ' item' + (n === 1 ? '' : 's') + '. Use one per turn. An item is used up only when you use it.',
+                icon: el('span.b-bag-icon' + (style ? '.art' : ''), { style, text: style ? '' : '🎒', 'aria-hidden': 'true' }),
+                badge: n, badgeClass: 'b-bag-count',
+                extra: { 'aria-expanded': ui.bagOpen ? 'true' : 'false', 'aria-controls': 'b-bag-tray' },
                 onclick: () => toggleBag(),
-            }, [el('span.b-bag-icon' + (style ? '.art' : ''), { style, text: style ? '' : '🎒', 'aria-hidden': 'true' }), 'Bag ', el('span.b-bag-count', { text: String(n) })]);
+            });
             dom.bagBtn = btn;
             return el('div.b-bag-wrap', {}, [ui.bagOpen ? bagTray(list, L) : null, btn]);
         }
@@ -1935,6 +2102,7 @@
             if (ui.ended) return;
             ui.ended = true;
             cancelDrag();
+            hideTip();
             const w = E.winner(state);
             const outcome = w === 'draw' ? 'draw' : w === ME ? 'won' : 'lost';
             let fate = null;
@@ -2013,7 +2181,7 @@
 
         const handle = {
             destroy() {
-                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); cancelLongPress();
+                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); cancelLongPress(); hideTip();
                 ui.ended = true; cancelDrag();
                 if (help) help.close();
                 if (guide) stopVoice();

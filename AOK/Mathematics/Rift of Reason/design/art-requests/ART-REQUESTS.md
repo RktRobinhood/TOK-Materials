@@ -468,6 +468,16 @@ Only if the teacher wants creatures on the board to look like round tokens inste
 
 > On a transparent background (PNG), no text, letters or numbers, wide clear gaps: two upright oval portrait frames side by side, the centre completely empty and transparent, with two round empty sockets on the lower rim (left and right) where attack and health gems sit. **Left:** dark wood with a thin gold rim. **Right:** the same with a golden laurel and a small gem at the top (legendary). Match the attached style board.
 
+### 11.11 Control icons (priority 1)
+
+The battle screen now uses small picture buttons (point at one to see its name), so the draw choice and the side buttons are uncluttered. Each icon sits on a dark round or square button; the game draws a simple fallback until these exist.
+
+**Attach:** `style-board.png`, `arena-icons.png`
+**Save as:** `5-ui/control-icons.png`
+**Ids:** `ui/btn-draw-deck`, `ui/btn-draw-axiom`, `ui/btn-fate-forward`, `ui/btn-fate-rewind`, `ui/btn-rules`, `ui/btn-help`, `ui/btn-leave`, `ui/btn-replay`
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape (no loose sparkles). Small game button icons, all about the same size, readable at 32 pixels, bold simple silhouettes. Arrange them in exactly two rows, left to right. **Row 1:** a dark purple card back with a gold rim and a short curved arrow coming out of it towards the bottom (draw from your deck); a parchment-gold card back with a small balance scale on it (take an axiom card); a gold hourglass with a bold teal arrow pointing right beside it (Fate track sooner); the same gold hourglass with a bold teal arrow pointing left beside it (Fate track later). **Row 2:** a closed leather rule book with a gold clasp (rules and log); a rolled parchment scroll with a large teal curl of ribbon on it shaped like a hook with a dot, not an actual letter or symbol (how to play); a small wooden door, half open, with a warm light in the gap (leave); a small brass speaker horn with two curved sound waves (hear again). Match the attached style board.
+
 ---
 
 ## Outcome log

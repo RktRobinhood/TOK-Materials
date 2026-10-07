@@ -67,6 +67,7 @@ export class FakeElement {
     setAttribute(k, v) { this.attributes[k] = String(v); if (k === 'class') this.className = v; if (k.startsWith('data-')) this.dataset[camel(k.slice(5))] = String(v); }
     getAttribute(k) { if (k.startsWith('data-')) return this.dataset[camel(k.slice(5))] ?? null; return this.attributes[k] ?? null; }
     hasAttribute(k) { return this.getAttribute(k) != null; }
+    removeAttribute(k) { delete this.attributes[k]; if (k.startsWith('data-')) delete this.dataset[camel(k.slice(5))]; }
     addEventListener(t, fn) { (this._listeners[t] || (this._listeners[t] = [])).push(fn); }
     removeEventListener(t, fn) { this._listeners[t] = (this._listeners[t] || []).filter(f => f !== fn); }
     dispatchEvent(ev) {

@@ -29,6 +29,7 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 |---|---|---|---|---|
 | 1 | Arena icons | 10.1 | `5-ui/arena-icons.png` | [ ] |
 | 2 | Arena frames and Fate tokens | 10.2 | `5-ui/arena-frames.png` | [ ] |
+| 2b | Control icons | 11.11 | `5-ui/control-icons.png` | [ ] |
 | 3 | Lesson 1 board: the Fair | 11.1a | `2-world/arena-l1.png` | [ ] |
 | 4 | Tactic art 1 | 10.4 (tactics-1) | `5-ui/tactics-1.png` | [ ] |
 | 5 | Tactic art 2 | 10.4 (tactics-2) | `5-ui/tactics-2.png` | [ ] |

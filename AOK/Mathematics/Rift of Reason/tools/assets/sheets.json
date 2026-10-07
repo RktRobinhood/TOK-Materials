@@ -69,6 +69,7 @@
         "arena-l3.png": {"type":"scene","id":"scene/arena-l3"},
         "arena-l4.png": {"type":"scene","id":"scene/arena-l4"},
         "tactic-frames.png": {"type":"islands","minArea":1500,"class":"card","ids":["ui/card-tactic-reason","ui/card-tactic-emotion","ui/card-tactic-perception","ui/card-tactic-language","ui/card-tactic-imagination","ui/card-tactic-memory"]},
+        "control-icons.png": {"type":"islands","minArea":600,"class":"icon","ids":["ui/btn-draw-deck","ui/btn-draw-axiom","ui/btn-fate-forward","ui/btn-fate-rewind","ui/btn-rules","ui/btn-help","ui/btn-leave","ui/btn-replay"]},
         "tactics-3.png": {"type":"islands","minArea":1500,"class":"prop","ids":["tactic/proof-by-contradiction","tactic/step-by-step","tactic/rally-cry","tactic/gut-reaction","tactic/look-closer","tactic/field-notes"]},
         "tactics-4.png": {"type":"islands","minArea":1500,"class":"prop","ids":["tactic/label-it","tactic/rousing-speech","tactic/imagine-otherwise","tactic/daydream","tactic/remember-when","tactic/nostalgia"]},
         "tactics-5.png": {"type":"islands","minArea":1500,"class":"prop","ids":["tactic/qed","tactic/wave-of-feeling","tactic/clear-view","tactic/persuasion","tactic/dream-big","tactic/total-recall"]},

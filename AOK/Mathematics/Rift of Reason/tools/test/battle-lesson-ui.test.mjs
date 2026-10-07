@@ -27,7 +27,14 @@ function perform(t, expect) {
     const { $ } = t;
     const click = sel => { const n = $(sel); assert.ok(n, 'missing ' + sel); n.click(); };
     switch (expect.type) {
-        case 'draw': click('.b-draw-btn[data-choice="' + expect.choice + '"]'); break;
+        case 'draw': {
+            // The gold pointer lands on the picture button whose tooltip name is the step label.
+            const b = $('.b-draw-btn[data-choice="' + expect.choice + '"]');
+            assert.ok(b && b.classList.contains('guide-focus'), 'the gold pointer is on the ' + expect.choice + ' button');
+            assert.match(b.querySelector('.guide-pointer').textContent, new RegExp(b.dataset.tip));
+            click('.b-draw-btn[data-choice="' + expect.choice + '"]');
+            break;
+        }
         case 'end': click('.b-end'); break;
         case 'play':
             click('.b-hand [data-cid="' + expect.cid + '"]');
@@ -91,10 +98,10 @@ test('the guided lesson runs on the real battle screen, step by step, to a win',
 test('Hear this step again repeats Granny; without onEnd the lesson returns to the Collection', () => {
     const t = setup(null);
     const n = t.spoken.length;
-    t.root.querySelectorAll('button').find(b => b.textContent === 'Hear this step again').click();
+    t.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Hear this step again').click();
     assert.equal(t.spoken.length, n + 1);
     assert.equal(t.spoken.at(-1).speaker, 'granny');
-    t.root.querySelectorAll('button').find(b => b.textContent === 'Leave lesson').click();
+    t.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave lesson').click();
     assert.deepEqual([...t.routes], ['collection']);
     assert.ok(t.stops() >= 1, 'leaving stops the voice');
 });
@@ -108,7 +115,7 @@ test('leaving during replies cancels them and never completes the lesson', () =>
     t.$('.b-end').click();
     assert.ok(t.g.timers.length > 0);
     const state = t.handle.state;
-    t.root.querySelectorAll('button').find(b => b.textContent === 'Leave lesson').click();
+    t.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave lesson').click();
     assert.equal(won, false);
     t.handle.destroy();
     t.g.flush();
@@ -141,5 +148,20 @@ test('"Your turn" follows the lesson: no "choose your draw" when Granny\'s scrip
     // Steps 1-3; step 3's replies end with your draw from the deck.
     for (let i = 0; i < 3; i++) { perform(t, L.steps[i].expect); t.g.flush(); }
     assert.match(t.$('.b-banner').textContent, /^Your turn$/);
+    t.handle.destroy();
+});
+
+test('lesson picture buttons have names: each draw step label is the tooltip name of the button it points at', () => {
+    const t = setup();
+    const L = t.Rift.Battle.Lesson;
+    const draws = L.steps.filter(s => s.expect.type === 'draw');
+    assert.ok(draws.some(s => s.expect.choice === 'forward'), 'the lesson uses Fate 2 closer');
+    assert.equal(t.$('.b-draw-btn[data-choice="deck"]').dataset.tip, L.steps[0].label);
+    t.root.querySelectorAll('.b-ibtn').forEach(b => {
+        assert.ok(b.getAttribute('aria-label'), 'every picture button has a name');
+        assert.ok(b.dataset.tip, 'and a tooltip');
+    });
+    const coach = t.root.querySelectorAll('.b-coach .b-ibtn').map(b => b.getAttribute('aria-label'));
+    assert.deepEqual(coach, ['Hear this step again', 'Leave lesson']);
     t.handle.destroy();
 });
