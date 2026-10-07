@@ -133,7 +133,7 @@
             tactics,
             axioms: imported.axioms,
             stake: imported.stake || undefined,
-            ai: 'hard',
+            ai: 'competent', // classmate ghosts play at Competent level
             type: 'ghost',
         };
     }

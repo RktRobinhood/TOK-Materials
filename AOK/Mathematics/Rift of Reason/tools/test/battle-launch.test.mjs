@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 function game(){
- const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/axioms.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
+ const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/decks.js','data/axioms.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};
  Rift.State.get=()=>state;Rift.State.update=fn=>fn(state);Rift.el=(...args)=>new Node(...args);
  const routes=[],modals=[];
@@ -41,7 +41,7 @@ test('story gate requires victory and a side challenge never completes its puzzl
  g.Rift.Battles.trainer('stall-gallery','easy');assert.equal(g.routes.length,0,'unfinished station cannot be challenged directly');
  g.state.map.completed.push('stall-gallery');const completedBefore=JSON.stringify(g.state.map.completed);
  g.Rift.Battles.trainer('stall-gallery','easy');const p=g.routes.at(-1).params;
- assert.equal(p.opponent.ai,'easy');assert.ok(p.player.team.every(c=>c.loaner));
+ assert.equal(p.opponent.ai,'normal','the old name easy means Normal');assert.ok(p.player.team.every(c=>c.loaner));
  p.onEnd({mode:'trainer',outcome:'won'});assert.equal(JSON.stringify(g.state.map.completed),completedBefore);
 });
 test('every map challenger has a portrait, short introduction and complete themed team',()=>{
@@ -76,4 +76,34 @@ test('leaving a practice or story match counts nothing and goes back',()=>{
  p.onEnd({mode:'practice',outcome:'left'});
  assert.equal(g.routes.at(-1).screen,'map');assert.equal(g.modals.length,modals,'no "Try again" modal');
  assert.equal(g.state.flags['story-battle-won'],undefined);assert.equal(JSON.stringify(g.state.stats),stats);
+});
+test('map trainers play at their AI level: Normal trainers, a Competent mini-boss, Expert bosses with a built deck',()=>{
+ const g=game(),{Rift}=g;
+ const levels={};
+ for(const [id,t] of Object.entries(Rift.data.trainers)){
+  const side=Rift.Battles.trainerSide(id);levels[id]=side.ai;
+  assert.ok(['normal','competent','expert'].includes(side.ai),id+' plays at '+side.ai);
+  if(side.ai==='expert'){
+   const deck=Rift.data.decks[t.deck];assert.ok(deck,id+' has a built deck');assert.equal(side.deck,t.deck);
+   assert.deepEqual(side.team.map(c=>c.species),deck.creatures);assert.deepEqual(side.tactics,deck.tactics);
+   assert.equal(side.team.length+side.tactics.length,20);
+  }else{assert.deepEqual(side.team.map(c=>c.species),t.team,id);assert.equal(side.deck,undefined);}
+ }
+ assert.deepEqual(levels,{syllo:'normal',baker:'normal',pip:'normal','card-sharp':'competent',constable:'expert',fin:'expert',feed:'expert'});
+ // Old names still work, and only Expert uses the built deck.
+ const hard=Rift.Battles.trainerSide('feed','hard');assert.equal(hard.ai,'competent');assert.deepEqual(hard.team.map(c=>c.species),Rift.data.trainers.feed.team);
+ assert.equal(Rift.Battles.trainerSide('syllo','easy').ai,'normal');
+});
+test('a boss challenge shows its level and launches Expert with the built deck',()=>{
+ const g=game(),{Rift}=g;
+ Rift.Battles.offer('k-bridge');const m=g.modals.at(-1);
+ const labels=m.buttons.map(b=>b.label);
+ assert.ok(labels.includes('Challenge · Expert'),labels.join(', '));
+ assert.ok(!labels.some(l=>/Easy|Hard/.test(l)),'no Easy or Hard buttons: '+labels.join(', '));
+ m.buttons.find(b=>b.label==='Challenge · Expert').onclick();
+ const p=g.routes.at(-1).params;assert.equal(p.mode,'trainer');assert.equal(p.opponent.ai,'expert');
+ assert.deepEqual(p.opponent.team.map(c=>c.species),Rift.data.decks.feed.creatures);
+ assert.deepEqual(p.opponent.tactics,Rift.data.decks.feed.tactics);
+ Rift.Battles.practice();assert.equal(g.routes.at(-1).params.opponent.ai,'normal');
+ Rift.Battles.story();const st=g.routes.at(-1).params.opponent;assert.equal(st.ai,'normal');assert.equal(st.hearts,8);
 });

@@ -3,7 +3,8 @@
  *
  * Rift.Router.go('battle', {
  *   mode: 'practice' | 'trainer' | 'boss' | 'ghost',
- *   opponent: { name, shortName?, team: [instances], ai?: 'easy'|'hard', tactics?, axioms?, art?, stake?, type?, hearts? },
+ *   opponent: { name, shortName?, team: [instances], ai?: 'normal'|'competent'|'expert', tactics?, axioms?, art?, stake?, type?, hearts? },
+ *             (ai defaults by mode: practice and trainer Normal, ghost Competent, boss Expert; 'easy'/'hard' still work)
  *   seed,
  *   player?: { name, team, tactics, axioms, items, consumables, art?, hearts? },  // default: the save's deck
  *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
@@ -59,6 +60,8 @@
     const el = (...a) => Rift.el(...a);
     const put = (parent, ...kids) => { kids.forEach(k => { if (k != null && k !== false) parent.appendChild(typeof k === 'string' ? root.document.createTextNode(k) : k); }); return parent; };
     const B = () => Rift.Battle;
+    // Opponent AI level when the caller gives none (design/card-arena-expansion-2026-10-07.md section 8).
+    const DEFAULT_AI = { practice: 'normal', trainer: 'normal', ghost: 'competent', boss: 'expert' };
     const species = id => (Rift.data.creatures || {})[id] || { name: id, colour: 'memory' };
     const sfx = name => { try { if (Rift.Audio) Rift.Audio.sfx(name); } catch (e) { /* no audio */ } };
     const has = id => !!(Rift.Assets && Rift.Assets.has && Rift.Assets.has(id));
@@ -131,7 +134,8 @@
         const save = Rift.State && Rift.State.get ? Rift.State.get() : null;
         const me = resolvePlayer(p, save, seed);
         const oppTeam = opp.team && opp.team.length ? opp.team : E.randomTeam(Rift.makeRng(seed + ':opp'), 10, { prefix: 'npc', legendaries: false });
-        const aiLevel = opp.ai || p.aiLevel || (mode === 'practice' ? 'easy' : 'hard');
+        // AI level (Normal / Competent / Expert; 'easy' and 'hard' are old names for the first two).
+        const aiLevel = B().AI.levelOf(opp.ai || p.aiLevel || DEFAULT_AI[mode] || 'normal');
         const anteType = mode === 'practice' ? 'practice' : (opp.type || mode);
         const oppAxioms = opp.axioms || Rift.makeRng(seed + ':axiom-opponent').shuffle((Rift.data.axiomDecks || {}).starter || []).slice(0, 10);
         // A long title ("Sergeant Syllo · Road challenge") stays in tooltips; the engine's log and

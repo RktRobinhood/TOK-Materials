@@ -1,7 +1,10 @@
 /*
  * Launching battles from the game and saving their results.
  *
- *   Rift.Battles.trainer(nodeId)   NPC trainer on the map (real stakes, fate rolls)
+ *   Rift.Battles.trainer(nodeId)   NPC trainer on the map (real stakes, fate rolls), at the trainer's
+ *                                  AI level (data/map.js `ai`: Normal, Competent or Expert)
+ *   Rift.Battles.trainerSide(trainerId, level?) → { ai, team, tactics, deck? } (an Expert boss
+ *                                  plays its built deck from data/decks.js)
  *   Rift.Battles.practice()        safe sparring vs a random team (no fate, no stakes)
  *   Rift.Battles.ghost(code)       a classmate's team code, driven by the AI (trophy copies)
  *   Rift.Battles.shareCode()       shows this player's team code to give to classmates
@@ -65,6 +68,7 @@
     // Syllo's Road challenge (a safe beginner match): eight cheap small creatures and kind tactics.
     const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
     const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
+    const SYLLO_HEARTS = 8;
 
     const starterTactics = () =>((Rift.data.tacticDecks || {}).starter || []).slice();
     const speakerArt = id => ((Rift.data.speakers || {})[id] || {}).art || null;
@@ -72,6 +76,23 @@
     // A trainer's fixed team: plain variants, stable uids so the same trainer is the same deck.
     function trainerTeam(trainerId, t) {
         return t.team.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } }));
+    }
+
+    // AI level of a map trainer ('normal' | 'competent' | 'expert'; old 'easy'/'hard' still work).
+    const levelOf = name => (Rift.Battle.AI && Rift.Battle.AI.levelOf ? Rift.Battle.AI.levelOf(name) : name);
+    const levelLabel = level => ((Rift.Battle.AI && Rift.Battle.AI.LEVEL_NAMES) || {})[level] || 'Normal';
+
+    // The trainer's side of the table: { ai, team, tactics }. An Expert boss with a built deck
+    // (data/decks.js) plays that deck; everyone else plays their team and tactics.
+    function trainerSide(trainerId, level) {
+        const t = Rift.data.trainers[trainerId];
+        const ai = levelOf(level || t.ai || 'normal');
+        const deck = ai === 'expert' && t.deck && (Rift.data.decks || {})[t.deck];
+        if (deck) {
+            return { ai, deck: t.deck, tactics: deck.tactics.slice(),
+                team: deck.creatures.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-deck-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } })) };
+        }
+        return { ai, team: trainerTeam(trainerId, t), tactics: (t.tactics || starterTactics()).slice() };
     }
 
     function rewardText(reward) {
@@ -193,7 +214,8 @@
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
-                opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'easy',
+                // Syllo plays at Normal with 8 hearts (you have 12): a beginner wins about 70% (tools/sim-battle.mjs --ladder).
+                opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
                     team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS},
                 onEnd(result){
                     finish(result);
@@ -216,8 +238,7 @@
             const choices=[{label:'Later'}];
             if(activity)choices.push({label:'Do the activity',onclick:activity});
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
-                {label:'Challenge · Easy',primary:true,onclick:()=>Battles.trainer(nodeId,'easy')},
-                {label:'Challenge · Hard',onclick:()=>Battles.trainer(nodeId,'hard')});
+                {label:'Challenge · '+levelLabel(levelOf(t.ai||'normal')),primary:true,onclick:()=>Battles.trainer(nodeId)});
             Rift.UI.modal(t.name,el('div.stack',null,[Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
                 el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
             ]),choices);
@@ -228,12 +249,13 @@
             if(offerUpdatedLesson(()=>Battles.trainer(nodeId,difficulty),'map'))return;
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
+            const side = trainerSide(n.trainer, difficulty);
             prepare(consumables => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
                 player: Object.assign(myDeck(), { consumables }),
-                opponent: { name: t.name, team: trainerTeam(n.trainer, t), tactics: (t.tactics || starterTactics()).slice(),
-                    art: speakerArt(t.speaker), ai: difficulty || t.ai || 'easy', stake: t.ante },
+                opponent: { name: t.name, team: side.team, tactics: side.tactics,
+                    art: speakerArt(t.speaker), ai: side.ai, stake: t.ante },
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer }),
             }));
         },
@@ -251,7 +273,7 @@
                 mode: 'practice',
                 seed: sd,
                 player: myDeck(),
-                opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'easy' },
+                opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'normal' },
                 onEnd: result => finish(result, { back: 'collection' }),
             });
         },
@@ -300,5 +322,6 @@
         },
     };
 
+    Battles.trainerSide = trainerSide;
     Rift.Battles = Battles;
 })(typeof window !== 'undefined' ? window : globalThis);

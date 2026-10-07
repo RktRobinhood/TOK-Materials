@@ -22,13 +22,13 @@
 <body>
 <!--
     Developer bench for the battle screen. Open dev/battle.html from the game folder.
-    ?mode=practice|trainer|boss|ghost&ai=easy|hard&seed=abc
+    ?mode=practice|trainer|boss|ghost&ai=normal|competent|expert&seed=abc   (easy/hard still work)
 -->
 <div class="bench">
     <header>
         <strong>Battle bench</strong>
         <label>mode <select id="mode"><option>practice</option><option>trainer</option><option>boss</option><option>ghost</option></select></label>
-        <label>AI <select id="ai"><option>easy</option><option selected>hard</option></select></label>
+        <label>AI <select id="ai"><option value="normal">Normal</option><option value="competent" selected>Competent</option><option value="expert">Expert</option></select></label>
         <label>seed <input id="seed" size="10"></label>
         <button class="btn small" id="go">New battle</button>
         <button class="btn small" id="codes-btn">Team codes…</button>
@@ -68,7 +68,7 @@
     const $ = id => document.getElementById(id);
     const msg = t => { $('msg').textContent = t; };
     $('mode').value = q.get('mode') || 'practice';
-    $('ai').value = q.get('ai') || 'hard';
+    $('ai').value = R.Battle.AI.levelOf(q.get('ai') || 'competent');
     $('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);
 
     let uid = 0;
