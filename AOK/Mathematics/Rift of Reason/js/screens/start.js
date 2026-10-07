@@ -28,6 +28,7 @@
                                 Rift.Router.replace('avatar');
                             },
                         }),
+                        has ? el('button.btn', { text: '🂠 Card Arena', title: 'Card battles: learn, practise, or battle a classmate’s code', onclick: () => { Rift.Audio.sfx('click'); Rift.Router.go('collection'); } }) : null,
                         el('button.btn', { text: 'Load a backup code', onclick: () => importCode() }),
                     ]),
                     el('p.small.muted', { style: { marginTop: '18px' }, text: 'A TOK adventure in logic, proof and persuasion. Progress is saved on this laptop only.' }),

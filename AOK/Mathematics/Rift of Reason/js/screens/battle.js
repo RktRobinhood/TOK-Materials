@@ -6,7 +6,7 @@
  *   opponent: { name, shortName?, team: [instances], ai?: 'easy'|'hard', tactics?, axioms?, art?, stake?, type?, hearts? },
  *   seed,
  *   player?: { name, team, tactics, axioms, items, consumables, art?, hearts? },  // default: the save's deck
- *   axiomDeck?, battleOptions?,
+ *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
  *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
  *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
  *   guide?: { steps: [{ title, text, label, expect, replies, compare? }], create?() → state, coach? },
@@ -40,7 +40,8 @@
  * ui/stat-cost, ui/energy-full, ui/energy-empty, ui/kw-<keyword>, ui/state-sleeping,
  * ui/state-frozen, ui/ab-entrance, ui/ab-lastword, ui/ab-activate, ui/spark, ui/end-turn,
  * ui/hero-frame, ui/heart-full, ui/fate-track, ui/fate-marker, ui/fate-flip, ui/fate-reset,
- * scene/arena (else scene/battle-table), npc/rival (opponent portrait fallback).
+ * scene/arena-l<lesson> (each lesson has its own board; else scene/arena, else scene/battle-table),
+ * npc/rival (opponent portrait fallback). The lesson is params.lesson, else the save's current chapter.
  */
 (function (root) {
     'use strict';
@@ -164,7 +165,8 @@
 
         // ---- skeleton ----
         const dom = {};
-        const sceneId = has('scene/arena') ? 'scene/arena' : 'scene/battle-table';
+        const lesson = p.lesson || (save && save.chapter && Rift.data.chapters && Rift.data.chapters[save.chapter] ? Rift.data.chapters[save.chapter].lesson : 1);
+        const sceneId = ['scene/arena-l' + lesson, 'scene/arena'].find(id => has(id)) || 'scene/battle-table';
         const screen = el('div.battle' + (guide ? '.guide-mode' : ''), {}, [
             dom.arena = el('div.b-arena', {}, [
                 // Top row: opponent hero | opponent hand (backs) | opponent energy.
