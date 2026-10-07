@@ -46,6 +46,8 @@
  *         moves, no lethal check). Never offered as an opponent in the game.
  *   Simulated ladder: design/reviews/card-arena-balance-2026-10-07.md (`--ladder`).
  *
+ *   The Bag: the AI never uses items (it ignores 'item' actions, also for a player it simulates).
+ *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
  *   Bag item actions ({ type: 'item' }) are never chosen by the AI.
@@ -65,6 +67,8 @@
     const Rift = root.Rift;
     const Battle = Rift.Battle || (Rift.Battle = {});
     const E = () => Battle.Engine;
+    // Legal actions without bag items (the AI does not use items).
+    const legalFor = s => E().legalActions(s).filter(a => a.type !== 'item');
 
     // ---- levels -------------------------------------------------------------------------
     //   simple   Normal-style main phase (one-ply, random second-rate moves, deck draws)
@@ -450,7 +454,14 @@
 
     // ---- scoring actions -------------------------------------------------------------
 
-    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true };
+    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true, nostalgia: true };
+
+    // A tactic's own value hint (data/tactics.js `ai`), for what the one-ply score can't see.
+    function tacticHint(s, a, me) {
+        const c = s.cards[a.cid];
+        const def = c && c.kind === 'tactic' && (Rift.data.tactics || {})[c.tactic];
+        return def && def.ai ? def.ai(s, me, a.target || null, E().H) || 0 : 0;
+    }
     const DEEP_ABILITIES = { filter: true, 'next-year': true, axiomatic: true };
 
     function needsDeep(s, a) {
@@ -493,6 +504,7 @@
             try { next = E().applyLegal(s, a); } catch (e) { return { a, score: -Infinity }; }
             let score = settle(next, me, ctx, deep, 0) - base(deep);
             if (a.type === 'end') score -= 0.01;
+            if (a.type === 'play') score += tacticHint(s, a, me);
             return { a, score };
         });
         // Spend energy on the best combination of cards, not just the best single card.
@@ -621,7 +633,7 @@
                 continue;
             }
             if (cur.phase !== 'main') break;
-            const legal = E().legalActions(cur).filter(a => a.type !== 'axiom' && a.type !== 'item');
+            const legal = legalFor(cur).filter(a => a.type !== 'axiom');
             const a = lethalAttack(cur, legal, me) || pickBest(scoreActions(cur, groupActions(cur, legal), me, fast));
             if (!a || a.type === 'end') break;
             cur = E().applyLegal(cur, a);
@@ -840,7 +852,7 @@
         const cfg = LEVELS[level];
         const Eng = E();
         const s = state;
-        const legal = allowedActions(s, Eng.legalActions(s), level);
+        const legal = allowedActions(s, legalFor(s), level);
         if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);
         const rng = Rift.makeRng('ai:' + s.seed + ':' + s.step + ':' + level + ':' + (o.salt || ''));

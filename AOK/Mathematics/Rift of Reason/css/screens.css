@@ -281,6 +281,14 @@ body.calm-motion .tour-practice * { animation:none; }
 .axiom-builder label { display: flex; align-items: flex-start; gap: 8px; padding: 6px 8px; border: 1px solid var(--panel-edge); border-radius: 8px; }
 .axiom-builder input { margin-top: 4px; }
 .tactic-art { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
+/* Colour tactics in the deck builder: a coloured edge and the In tune line (lit when the team has the colour). */
+.tactic-option[data-tcolour="reason"] { border-left: 4px solid var(--reason); }
+.tactic-option[data-tcolour="emotion"] { border-left: 4px solid var(--emotion); }
+.tactic-option[data-tcolour="perception"] { border-left: 4px solid var(--perception); }
+.tactic-option[data-tcolour="language"] { border-left: 4px solid var(--language); }
+.tactic-option[data-tcolour="imagination"] { border-left: 4px solid var(--imagination); }
+.tactic-option[data-tcolour="memory"] { border-left: 4px solid var(--memory); }
+.need-line { color: #ffb3a8; font-weight: 700; }
 .stepper { display: inline-flex; align-items: center; gap: 4px; flex: none; }
 .stepper .btn { min-width: 32px; }
 .stepper-count { min-width: 26px; text-align: center; font-weight: 700; }

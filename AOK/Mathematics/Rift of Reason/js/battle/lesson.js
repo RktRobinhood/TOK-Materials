@@ -17,7 +17,7 @@
 
     const steps = [
         { title: 'Choose your draw', label: 'Draw from your deck',
-            text: 'Each turn starts with one choice: draw from your deck, take an axiom card, or move the Fate track. Today, draw from your deck. Granny starts with only 2 hearts, so the lesson is short.',
+            text: 'Each turn starts with one choice of four picture buttons: draw from your deck, take an axiom card, or move the Fate track. Point at any button to see its name. Today, press the deck button. Granny starts with only 2 hearts, so the lesson is short.',
             expect: { type: 'draw', choice: 'deck' }, replies: [] },
         { title: 'Play a creature', label: 'Play Kim Kardashiant',
             text: 'You have 1 energy. Kim Kardashiant costs 1. Drag it onto your side of the table, or click it and press Play. New creatures are asleep. They attack next turn.',
@@ -59,10 +59,10 @@
             text: 'Drag Astrophysicat onto Shakirattle. Normally both would fall. Under Underdog only Shakirattle falls. Same cards, different rule, different result. Then Granny plays a rule.',
             expect: { type: 'attack', cid: 'p0c1', target: 'p1c2' }, replies: [{ type: 'end' }, { type: 'draw', choice: 'deck' }, { type: 'axiom', choice: 'reverse-hearts' }, { type: 'end' }], compare: ['p0c1', 'p1c2'] },
         { title: 'Read the victory rule', label: 'Fate 2 closer',
-            text: 'Granny played The Last Shall Be First. Now reaching zero hearts WINS. If you hit her now, she wins! The Fate track says all rules go back to normal in 2 turns. Choose Fate 2 closer to make that happen now.',
+            text: 'Granny played The Last Shall Be First. Now reaching zero hearts WINS. If you hit her now, she wins! The Fate track says all rules go back to normal in 2 turns. Press Fate 2 closer, the hourglass with the forward arrow, to make that happen now.',
             expect: { type: 'draw', choice: 'forward' }, replies: [] },
         { title: 'Win by the current rules', label: 'Attack Granny',
-            text: 'All rules are back to normal. Rules now says: reduce the enemy hero to zero hearts. Drag Billie Eelish onto Granny to win. Always read the rules before you attack.',
+            text: 'All rules are back to normal. The rules book at the side says: reduce the enemy hero to zero hearts. Drag Billie Eelish onto Granny to win. Always read the rules before you attack.',
             expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [] },
     ];
 

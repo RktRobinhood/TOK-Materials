@@ -97,7 +97,8 @@
             mode,
             opponent,
             seed: $('seed').value,
-            player: { team: myTeam, items: myItems, axioms: ['age-of-wonder'] },
+            // The Bag: ?bag=tonic,ward (default) or ?bag= for none.
+            player: { team: myTeam, items: myItems, axioms: ['age-of-wonder'], bag: (q.get('bag') == null ? 'tonic,ward' : q.get('bag')).split(',').filter(Boolean) },
             onEnd(result) {
                 console.log('battle result', result);
                 msg(`Result: ${result.outcome} in ${result.turns} turns` + (result.fate ? `; fate: ${result.fate.log.join(' ')}` : ''));

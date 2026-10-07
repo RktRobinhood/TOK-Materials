@@ -6,7 +6,8 @@
  *   opponent: { name, shortName?, team: [instances], ai?: 'normal'|'competent'|'expert', tactics?, axioms?, art?, stake?, type?, hearts? },
  *             (ai defaults by mode: practice and trainer Normal, ghost Competent, boss Expert; 'easy'/'hard' still work)
  *   seed,
- *   player?: { name, team, tactics, axioms, items, consumables, art?, hearts? },  // default: the save's deck
+ *   player?: { name, team, tactics, axioms, items, consumables, bag?, art?, hearts? },  // default: the save's deck
+ *                           bag: item ids brought into the battle (the Bag; at most two, one per turn)
  *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
  *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
  *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
@@ -15,7 +16,8 @@
  * });
  *
  * result = { mode, outcome: 'won'|'lost'|'draw', turns, rounds, endReason,
- *            fate: Fate.roll(...) | null, ante, settlement: Ante.settle(...) | null }
+ *            fate: Fate.roll(...) | null, ante, settlement: Ante.settle(...) | null,
+ *            itemsUsed: { id: n } }   // bag items used in this match (the caller removes only those)
  * endReason: 'hearts' | 'reverse-hearts' | 'cannot-act' | 'turn-limit' | 'both-zero'.
  * In guide mode "Leave lesson", and in a match with nothing at stake (practice or story) "Leave match"
  * (after a confirm step), end with outcome 'left': no win or loss is counted.
@@ -37,12 +39,16 @@
  * steps[i].replies run one by one with a visible pause, then the next step starts.
  *
  * Optional art (each falls back to CSS): ui/card-<colour>, ui/card-axiom, ui/card-tactic,
+ * ui/card-tactic-<colour> (colour tactics; else the CSS frame tinted), ui/icon-<colour> (their emblem),
  * tactic/<id>, ui/card-back, ui/axiom-back, ui/axiom-<id>, ui/stat-attack, ui/stat-health,
  * ui/stat-cost, ui/energy-full, ui/energy-empty, ui/kw-<keyword>, ui/state-sleeping,
  * ui/state-frozen, ui/ab-entrance, ui/ab-lastword, ui/ab-activate, ui/spark, ui/end-turn,
  * ui/hero-frame, ui/heart-full, ui/fate-track, ui/fate-marker, ui/fate-flip, ui/fate-reset,
  * scene/arena-l<lesson> (each lesson has its own board; else scene/arena, else scene/battle-table),
  * npc/rival (opponent portrait fallback). The lesson is params.lesson, else the save's current chapter.
+ * The Bag: a Bag button by the energy (art ui/bag, else 🎒) opens a small tray of the items brought
+ * (art item/<id>). Click an item, then a glowing target (or press Use); targeted items can also be
+ * dragged onto their target. Items that can't be used now are dimmed with a short reason.
  */
 (function (root) {
     'use strict';
@@ -86,6 +92,11 @@
         counterexample: '✗', 'pep-talk': '📣', 'stand-firm': '🛡️', eureka: '💡', 'second-wind': '❤', 'occams-razor': '🪒',
         rethink: '↺', 'big-claims': '⚖️', clockwork: '⏱', 'look-it-up': '🔎', 'peer-review': '👥', recall: '📜',
         'pause-for-thought': '⏸', 'safety-net': '🕸️', lemma: '📐',
+        // colour tactics
+        'proof-by-contradiction': '⊥', 'step-by-step': '👣', 'rally-cry': '📯', 'gut-reaction': '⚡', 'look-closer': '🔍',
+        'field-notes': '📓', 'label-it': '🏷️', 'rousing-speech': '🎤', 'imagine-otherwise': '🔄', daydream: '☁️',
+        'remember-when': '📷', nostalgia: '🕰️',
+        qed: '∎', 'wave-of-feeling': '🌊', 'clear-view': '🔭', persuasion: '🤝', 'dream-big': '🌈', 'total-recall': '🧠',
     };
     const DRAW_TEXT = {
         deck: ['Draw from your deck', 'A creature or tactic card'],
@@ -120,6 +131,7 @@
             items: given.items || (save && save.items) || {},
             axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
             consumables: given.consumables || {},
+            bag: given.bag || [],
             art: given.art || (save && save.avatar && save.avatar.type && Rift.avatarArt ? Rift.avatarArt(save.avatar, 'neutral') : null),
         };
     }
@@ -146,7 +158,7 @@
         let state = guide && guide.create ? guide.create() : p.initialState ? p.initialState : E.createBattle({
             seed,
             players: [
-                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts },
+                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag },
                 { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts },
             ],
             axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
@@ -159,7 +171,7 @@
             sel: null, note: '', news: [], timer: null, noteTimer: null, ended: false, busy: false, queue: [],
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
-            hoverBlock: null, confirm: false, handPos: null,
+            hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
         };
         // Nothing is at stake in practice and story matches (not the guided lesson): they can be left.
         const canLeave = !guide && mode === 'practice';
@@ -214,7 +226,7 @@
         ]);
         rootEl.appendChild(Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' }));
         rootEl.appendChild(screen);
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { cancelDrag(); clearSel(); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); });
@@ -259,6 +271,7 @@
                 if (sel.kind === 'board' && a.type === 'attack' && a.cid === sel.cid) out.set(a.target, a);
                 if (sel.kind === 'hand' && a.type === 'play' && a.cid === sel.cid) out.set(a.target, a);
                 if (sel.kind === 'activate' && a.type === 'activate' && a.cid === sel.cid && a.ability === sel.ability) out.set(a.target, a);
+                if (sel.kind === 'item' && a.type === 'item' && a.id === sel.id) out.set(a.target, a);
             });
             return out;
         }
@@ -279,6 +292,7 @@
             // A creature dropped on the table that was still waiting for its Entrance target is
             // not played when something else happens first: say so (it stays in the hand).
             const waiting = ui.sel && ui.sel.pending && ui.sel.cid !== action.cid ? ui.sel.cid : null;
+            if (action.type === 'item' || action.type === 'end') ui.bagOpen = false;
             ui.sel = null;
             ui.preview = null;
             ui.note = '';
@@ -340,7 +354,7 @@
         function noteEvents(events) {
             ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t) && !/Choose a draw\.$/.test(t));
             events.forEach(ev => {
-                if (ev.t === 'play' || ev.t === 'tactic-play') sfx('card-play');
+                if (ev.t === 'play' || ev.t === 'tactic-play' || ev.t === 'item-use') sfx('card-play');
                 if (ev.t === 'hit') sfx('hit');
                 if (ev.t === 'fight') sfx('block');
                 if (ev.t === 'defeated') sfx('defeat');
@@ -370,6 +384,8 @@
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
                 if (c.kind === 'creature' && P.board.length >= state.options.boardLimit) return 'Your side is full.';
+                const tdef = c.kind === 'tactic' ? (Rift.data.tactics || {})[c.tactic] : null;
+                if (tdef && tdef.colour && !E.colourInPlay(state, ME, tdef.colour)) return needsText(tdef.colour);
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
@@ -507,16 +523,33 @@
 
         function tacticFace(cid, size) {
             const d = E.describe(state, cid);
-            const frame = bg('ui/card-tactic');
+            // A colour tactic: its own frame art if painted, else the CSS frame tinted to the colour.
+            const frame = d.colour ? bg('ui/card-tactic-' + d.colour) : bg('ui/card-tactic');
             const art = has('tactic/' + d.id) ? Rift.Assets.img('tactic/' + d.id, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
-                el('div.bc-name', { text: d.name }),
-                el('div.bc-text', {}, [size === 'big' ? null : el('div.bc-kind', { text: 'Tactic' }), el('div.bc-line', { text: d.text })]),
+                d.colour ? colourEmblem(d.colour, d.colourReady) : null,
+                el('div.bc-name', { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
+                el('div.bc-text', {}, [
+                    size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
+                    size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
+                    el('div.bc-line', { text: d.text }),
+                    d.colour && !d.colourReady && state.cards[cid].controller === ME ? el('div.bc-need', { text: needsText(d.colour) }) : null,
+                ]),
             ];
+        }
+        // "Reason · uncommon" under the name of a colour tactic.
+        const tacticKind = d => (Rift.COLOURS[d.colour] || { name: d.colour }).name + (d.rarity ? ' · ' + d.rarity : '');
+        // A colour tactic is played only while you control a creature of its colour.
+        const needsText = colour => { const C = Rift.COLOURS[colour] || { colour, name: colour }; return 'Needs a ' + C.colour + ' (' + C.name + ') creature in play.'; };
+        // The colour's emblem in the card's top corner; lit while a creature of that colour is in play.
+        function colourEmblem(colour, on) {
+            const C = Rift.COLOURS[colour] || {};
+            return el('div.bc-emblem' + (on ? '.on' : ''), { title: (C.name || colour) + ' tactic', 'aria-hidden': 'true' },
+                [has('ui/icon-' + colour) ? Rift.Assets.img('ui/icon-' + colour, { alt: '' }) : el('span', { text: C.icon || '◆' })]);
         }
 
         function axiomFace(id, size) {
@@ -547,10 +580,11 @@
             const size = o.size || 'board';
             const kind = c.kind === 'tactic' ? 'tactic' : 'creature';
             const colour = kind === 'creature' ? E.colourOf(state, c) : 'tactic';
+            const tcolour = kind === 'tactic' ? ((Rift.data.tactics || {})[c.tactic] || {}).colour : null;
             const clickable = !!o.onclick;
             const node = el((clickable ? 'button' : 'div') + '.bc.' + kind + '.' + size, {
                 type: clickable ? 'button' : null,
-                dataset: { cid, colour },
+                dataset: tcolour ? { cid, colour, tcolour } : { cid, colour },
                 'aria-label': cardLabel(cid),
             }, kind === 'tactic' ? tacticFace(cid, size) : creatureFace(cid, size));
             if (o.target) node.dataset.target = cid;
@@ -568,8 +602,14 @@
             const big = cardEl(cid, { size: 'big' });
             if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
             const d = E.describe(state, cid);
+            const C = d.colour ? Rift.COLOURS[d.colour] || { name: d.colour } : null;
+            const mine = state.cards[cid].controller === ME;
             return [big, el('div.b-notes', {}, [
+                C ? el('div.b-notes-tags', {}, [colourChip(d.colour)]) : null,
                 el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
+                C ? el('div.b-note-line', {}, [el('b', { text: C.name + ' tactic' + (d.rarity ? ' (' + d.rarity + ')' : '') + ': ' }),
+                    'it can only be played while you control a ' + C.colour + ' (' + C.name + ') creature. '
+                    + (mine ? (d.colourReady ? 'You do now.' : 'You don\'t right now.') : '')]) : null,
                 d.flavour ? el('div.b-note-line.b-flavour', { text: d.flavour }) : null,
             ])];
         }
@@ -603,7 +643,8 @@
         function cardLabel(cid) {
             const c = state.cards[cid];
             const d = E.describe(state, cid);
-            if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text;
+            if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text
+                + (d.colour ? ' ' + tacticKind(d) + '.' + (d.colourReady ? '' : ' ' + needsText(d.colour)) : '');
             return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
                 + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '');
         }
@@ -811,7 +852,7 @@
                 }, [el('span.b-spark-icon', { style: sparkStyle, text: sparkStyle ? '' : '✦' }), 'Spark +1']) : null,
             ]));
             dom.myRight.innerHTML = '';
-            put(dom.myRight, energyEl(ME));
+            put(dom.myRight, bagEl(L), energyEl(ME));
 
             // boards
             const attackers = new Set(L.filter(a => a.type === 'attack' || a.type === 'activate').map(a => a.cid));
@@ -976,9 +1017,12 @@
                 const max = Math.max(state.options.fateGap || 6, next.turns);
                 for (let k = max; k >= 1; k--) pips.push(el('span.pip' + (k === next.turns ? '.marker' : k < next.turns ? '.ahead' : '.past'), k === next.turns ? { style: bg('ui/fate-marker') } : {}));
                 const evIcon = icon(next.type === 'reset' ? 'ui/fate-reset' : 'ui/fate-flip', next.type === 'reset' ? '↺' : '✦', 'fate-ev');
+                // The Anchor (a bag item) holds the track this turn: the count already includes it.
+                const anchored = state.fate.anchorTurn === state.turn;
+                if (anchored) fate.title = 'The Anchor holds the Fate track: it does not move at the end of this turn. ' + fate.title;
                 put(fate,
                     el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), { style: bg('ui/fate-track') }, pips.concat([evIcon])),
-                    el('div.b-fate-text', { text: fateShort(next) }),
+                    el('div.b-fate-text', { text: (anchored ? '⚓ ' : '') + fateShort(next) }),
                 );
             } else put(fate, el('div.b-fate-text', { text: 'No Fate track in this match.' }));
             const active = changedRules();
@@ -1068,6 +1112,7 @@
                 return 'Drop it on a glowing target to attack.';
             }
             if (info.kind === 'axiom') return 'Drop it in the middle row.';
+            if (info.kind === 'item') return 'Drop it on a glowing target.';
             const c = state.cards[info.cid];
             if (x && x.type === 'play' && x.cid === info.cid && x.target) return 'Drop it on ' + targetName(x.target) + '.';
             if (dragTargets(info).size) return 'Drop it on a glowing target.';
@@ -1138,6 +1183,8 @@
                     if (acts.length) ask.textContent += ' Activating uses its attack this turn.';
                 } else if (sel.kind === 'activate') {
                     ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
+                } else if (sel.kind === 'item') {
+                    itemPrompt(sel, L, ask, buttons);
                 } else if (sel.kind === 'hand') {
                     const playActs = L.filter(a => a.type === 'play' && a.cid === sel.cid);
                     const cost = E.playCost(state, sel.cid);
@@ -1186,7 +1233,7 @@
         function renderEnd(L) {
             dom.end.innerHTML = '';
             const end = L.find(a => a.type === 'end');
-            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark');
+            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark' && a.type !== 'item');
             const style = bg('ui/end-turn');
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
@@ -1314,7 +1361,7 @@
             ui.ended = true;
             clearTimeout(ui.timer);
             stopVoice();
-            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null };
+            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null, itemsUsed: itemsUsedNow() };
             handle.result = result;
             if (typeof p.onEnd === 'function') p.onEnd(result);
         }
@@ -1347,7 +1394,7 @@
             if (ui.ended) return;
             ui.ended = true;
             clearTimeout(ui.timer);
-            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null };
+            const result = { mode, outcome: 'left', turns: state.turn, rounds: state.round, endReason: null, fate: null, ante: null, settlement: null, itemsUsed: itemsUsedNow() };
             handle.result = result;
             if (typeof p.onEnd === 'function') p.onEnd(result);
         }
@@ -1439,7 +1486,7 @@
             const c = state.cards[cid];
             const mine = c.controller === ME && state.players[ME].board.includes(cid);
             // A tactic, Entrance or ability waiting for a target, and an Elusive enemy is clicked.
-            if (!mine && ui.sel && (ui.sel.kind === 'hand' || ui.sel.kind === 'activate') && elusiveNote(cid)) { setNote(elusiveNote(cid)); return; }
+            if (!mine && ui.sel && (ui.sel.kind === 'hand' || ui.sel.kind === 'activate' || ui.sel.kind === 'item') && elusiveNote(cid)) { setNote(elusiveNote(cid)); return; }
             // An attacker is selected and this enemy is not a valid target (for example: Guard).
             if (!mine && ui.sel && ui.sel.kind === 'board' && state.players[OPP].board.includes(cid)) { setNote(badTargetNote(ui.sel.cid, cid)); return; }
             if (mine && L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid)) {
@@ -1502,6 +1549,7 @@
             const out = new Map();
             if (info.kind === 'board') L.forEach(a => { if (a.type === 'attack' && a.cid === info.cid) out.set(a.target, a); });
             if (info.kind === 'hand') L.forEach(a => { if (a.type === 'play' && a.cid === info.cid && a.target) out.set(a.target, a); });
+            if (info.kind === 'item') L.forEach(a => { if (a.type === 'item' && a.id === info.id && a.target) out.set(a.target, a); });
             return out;
         }
 
@@ -1532,7 +1580,7 @@
                 screen.classList.add('dragging');
                 d.node.classList.add('drag-source');
                 markTargets(d.targets);
-                if (d.info.kind !== 'board') {
+                if (d.info.kind !== 'board' && d.info.kind !== 'item') {
                     d.ghost = d.node.cloneNode ? d.node.cloneNode(true) : null;
                     if (d.ghost) {
                         d.ghost.classList.add('drag-ghost');
@@ -1547,7 +1595,7 @@
             }
             const box = dom.arena.getBoundingClientRect();
             const x = ev.clientX - box.left, y = ev.clientY - box.top;
-            if (d.info.kind === 'board' || (d.targets && d.targets.size && state.cards[d.info.cid] && state.cards[d.info.cid].kind === 'tactic')) {
+            if (d.info.kind === 'board' || d.info.kind === 'item' || (d.targets && d.targets.size && state.cards[d.info.cid] && state.cards[d.info.cid].kind === 'tactic')) {
                 const r = d.node.getBoundingClientRect();
                 showArrow(r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top, x, y);
             }
@@ -1585,7 +1633,7 @@
                 ui.drag = null;
                 if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) >= DRAG_START) ui.hoverBlock = { x: ev.clientX, y: ev.clientY };
                 if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) >= DRAG_START * 3) {
-                    let why = d.info.kind === 'axiom' ? whyNotAxiom(d.info.id) : whyNot(d.info.cid);
+                    let why = d.info.kind === 'axiom' ? whyNotAxiom(d.info.id) : d.info.kind === 'item' ? itemWhy(d.info.id) || 'Click it, then press Use.' : whyNot(d.info.cid);
                     // A tactic whose only possible targets are Elusive, dropped on one of them.
                     const at = d.info.kind === 'hand' && /no target/.test(why) ? (hitTarget(ev.clientX, ev.clientY) || {}).target : null;
                     if (at && elusiveNote(at)) why = elusiveNote(at);
@@ -1607,6 +1655,7 @@
                 else if (hit.target && hit.target !== info.cid) setNote(badTargetNote(info.cid, hit.target));
                 return;
             }
+            if (info.kind === 'item') { dropItem(info.id, hit, L); return; }
             // A hand card counts as played when it is dropped anywhere on the table outside the
             // hand (also beside the heroes, which have no zone). Dropping it back on the hand cancels.
             const onTable = hit.inArena && hit.zone !== 'hand';
@@ -1645,6 +1694,106 @@
             hideArrow();
             clearPredict();
             if (d.active && !ui.ended) renderPrompt();
+        }
+
+        // ---- the Bag: items brought into this match (one per turn, used up only when used) ----
+        const itemsUsedNow = () => (E.itemsUsed && state.players[ME].itemsUsed ? E.itemsUsed(state, ME) : {});
+        const itemOk = (id, L) => L.some(a => a.type === 'item' && a.id === id);
+        const itemInfo = id => (E.bagStatus ? E.bagStatus(state, ME) : []).find(x => x.id === id) || null;
+        function itemWhy(id) {
+            if (ui.ended) return '';
+            if (ui.busy || decider() !== ME) return 'Wait for your turn.';
+            const x = itemInfo(id);
+            return (x && x.note) || (myTurn() ? '' : 'Wait a moment.');
+        }
+        function toggleBag(on) {
+            ui.bagOpen = on == null ? !ui.bagOpen : !!on;
+            render();
+            const target = ui.bagOpen ? screen.querySelector('.b-bag-item') : dom.bagBtn;
+            if (target && target.focus) try { target.focus(); } catch (e) { /* ignore */ }
+        }
+        // The Bag button (and its tray when open); null when no items were brought.
+        function bagEl(L) {
+            const P = state.players[ME];
+            dom.bagBtn = null;
+            if (!P.bag || !(P.bag.length + (P.itemsUsed || []).length)) return null;
+            const list = E.bagStatus(state, ME);
+            const style = bg('ui/bag');
+            const n = P.bag.length;
+            const btn = el('button.btn.small.b-bag-btn' + (ui.bagOpen ? '.open' : '') + (list.some(x => itemOk(x.id, L)) ? '.has-use' : ''), {
+                type: 'button', 'aria-expanded': ui.bagOpen ? 'true' : 'false', 'aria-controls': 'b-bag-tray', 'aria-label': 'Bag: ' + n + ' item' + (n === 1 ? '' : 's'),
+                title: 'Your bag: ' + n + ' item' + (n === 1 ? '' : 's') + '. Use one per turn. An item is used up only when you use it.',
+                onclick: () => toggleBag(),
+            }, [el('span.b-bag-icon' + (style ? '.art' : ''), { style, text: style ? '' : '🎒', 'aria-hidden': 'true' }), 'Bag ', el('span.b-bag-count', { text: String(n) })]);
+            dom.bagBtn = btn;
+            return el('div.b-bag-wrap', {}, [ui.bagOpen ? bagTray(list, L) : null, btn]);
+        }
+        function bagTray(list, L) {
+            const rows = list.map(x => {
+                const ok = itemOk(x.id, L);
+                const why = ok ? '' : itemWhy(x.id);
+                const chosen = ui.sel && ui.sel.kind === 'item' && ui.sel.id === x.id;
+                const b = el('button.b-bag-item' + (ok ? '' : '.off') + (chosen ? '.selected' : ''), {
+                    type: 'button', dataset: { item: x.id }, 'aria-disabled': ok ? null : 'true',
+                    'aria-label': x.name + ', ' + x.cost + ' energy: ' + x.text + (why ? ' Not now: ' + why : ''),
+                    onclick: () => { if (!ui.suppressClick) clickItem(x.id, L); },
+                }, [
+                    Rift.Assets.img('item/' + x.id, { className: 'b-bag-art', label: x.name, alt: '' }),
+                    el('span.b-bag-words', {}, [
+                        el('strong', { text: x.name + (x.count > 1 ? ' ×' + x.count : '') }),
+                        el('span.b-bag-text', { text: x.text }),
+                        why ? el('span.b-bag-why', { text: why }) : null,
+                    ]),
+                    el('span.b-bag-cost', { text: x.cost + ' ⚡' }),
+                ]);
+                const drag = ok && L.some(a => a.type === 'item' && a.id === x.id && a.target);
+                b.addEventListener('pointerdown', ev => startDrag(ev, drag ? { kind: 'item', id: x.id } : { kind: 'item', id: x.id, blocked: true }, b));
+                hoverInspect(b, () => itemPreview(x, why), 'item:' + x.id);
+                return b;
+            });
+            return el('div.b-bag-tray.panel', { id: 'b-bag-tray', role: 'group', 'aria-label': 'Your bag' }, [
+                el('div.b-bag-head', {}, [el('strong', { text: 'Bag' }), el('span.small', { text: ' One item per turn.' })]),
+                rows.length ? el('div.b-bag-list', {}, rows) : el('p.small.b-bag-empty', { text: 'Your bag is empty.' }),
+            ]);
+        }
+        // The big preview of an item (hover, keyboard focus or long-press), like a card.
+        function itemPreview(x, why) {
+            return [el('div.bc.item.big', { dataset: { colour: 'item' } }, [
+                el('div.bc-bg'), el('div.bc-frame'),
+                el('div.bc-art', {}, [Rift.Assets.img('item/' + x.id, { label: x.name, alt: '' })]),
+                gem('cost', x.cost),
+                el('div.bc-name', { text: x.name }),
+                el('div.bc-text', {}, [el('div.bc-kind', { text: 'Bag item' }), el('div.bc-line', { text: x.text })]),
+            ]), el('div.b-notes', {}, [
+                el('div.b-note-line', {}, [el('b', { text: 'Bag item: ' }), 'one per turn. It is used up only when you use it.']),
+                why ? el('div.b-note-line', { text: 'Not now: ' + why }) : null,
+            ])];
+        }
+        function clickItem(id, L) {
+            const acts = L.filter(a => a.type === 'item' && a.id === id);
+            if (!acts.length) { if (ui.sel) ui.sel = null; setNote(itemWhy(id) || 'Not now.'); return; }
+            ui.sel = ui.sel && ui.sel.kind === 'item' && ui.sel.id === id ? null : { kind: 'item', id };
+            // A targeted item: close the tray so the glowing targets are easy to see.
+            if (ui.sel && acts.some(a => a.target)) ui.bagOpen = false;
+            render();
+            if (ui.sel && nodes.buttons && nodes.buttons.item && nodes.buttons.item.focus) try { nodes.buttons.item.focus(); } catch (e) { /* ignore */ }
+        }
+        function itemPrompt(sel, L, ask, buttons) {
+            const acts = L.filter(a => a.type === 'item' && a.id === sel.id);
+            const x = itemInfo(sel.id) || { name: sel.id, cost: 0 };
+            if (!acts.length) { ask.textContent = itemWhy(sel.id) || 'Not now.'; return; }
+            if (acts.some(a => a.target)) { ask.textContent = 'Now click a glowing target for the ' + x.name + ' (or Cancel).'; return; }
+            ask.textContent = 'Use the ' + x.name + (x.cost ? ' for ' + x.cost + ' energy? You have ' + state.players[ME].energy + '.' : '? It needs no energy.');
+            const b = button('Use · ' + x.cost + ' ⚡', () => act(acts[0]), 'primary');
+            nodes.buttons.item = b;
+            buttons.appendChild(b);
+        }
+        // An item dragged out of the tray: dropped on its target it is used; else it stays chosen.
+        function dropItem(id, hit, L) {
+            const a = L.find(x => x.type === 'item' && x.id === id && x.target && x.target === hit.target);
+            if (a) { act(a); return; }
+            if (hit.target && elusiveNote(hit.target)) { setNote(elusiveNote(hit.target)); return; }
+            if (itemOk(id, L)) { ui.sel = { kind: 'item', id }; ui.bagOpen = false; render(); }
         }
 
         // ---- fight preview: what an attack would do (colour wheel and rules included) ----
@@ -1755,6 +1904,7 @@
                 if (ev.t === 'damage') float(ev.cid, '−' + ev.amount, 'dmg', before);
                 if (ev.t === 'hit') float('h' + ev.player, '−' + ev.amount + ' ❤', 'dmg', before);
                 if (ev.t === 'shield') float(ev.cid, 'Blocked!', 'info', before);
+                if (ev.t === 'item-use') float(ev.target || 'h' + ev.player, ((Rift.data.items || {})[ev.id] || { name: ev.id }).name, 'info', before);
                 if (ev.t === 'defeated' && before[ev.cid]) {
                     const r = before[ev.cid];
                     const ghost = r.node.cloneNode ? r.node.cloneNode(true) : null;
@@ -1788,14 +1938,17 @@
             const outcome = w === 'draw' ? 'draw' : w === ME ? 'won' : 'lost';
             let fate = null;
             let settlement = null;
+            const itemsUsed = itemsUsedNow();
             if (mode !== 'practice' && !guide) {
+                // A Ward or Anchor used in the battle (the Bag) can't also save a creature afterwards.
+                const left = id => Math.max(0, (me.items[id] || 0) - (itemsUsed[id] || 0));
                 fate = B().Fate.roll({
                     instances: me.team, defeated: E.lostUids(state, ME), mode, won: outcome === 'won',
-                    items: { ward: me.items.ward || 0, anchor: me.items.anchor || 0 }, seed: seed + ':fate',
+                    items: { ward: left('ward'), anchor: left('anchor') }, seed: seed + ':fate',
                 });
                 settlement = B().Ante.settle(ante, outcome, { seed, now: Date.now() });
             }
-            const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement };
+            const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed };
             sfx(outcome === 'won' ? 'win' : 'lose');
             if (fate && fate.results.length) {
                 const severity = ['death', 'warp', 'injured', 'scarred', 'fine'];

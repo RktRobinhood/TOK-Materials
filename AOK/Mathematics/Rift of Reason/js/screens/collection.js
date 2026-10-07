@@ -13,6 +13,12 @@
         return el('span.chip', { dataset: { colour }, text: c.icon + ' ' + c.name });
     }
 
+    // "a Reason" / "an Emotion" (colour identity notes).
+    function aColour(colour) {
+        const name = (Rift.COLOURS[colour] || { name: colour }).name;
+        return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name;
+    }
+
     function card(speciesId, opts) {
         const c = Rift.data.creatures[speciesId];
         const o = opts || {};
@@ -84,7 +90,7 @@
 
     // The intro line: what the player can choose, said plainly for a small collection.
     function deckIntro(D, owned) {
-        const tail = ' Choose up to 2 copies of each tactic. Win tactics from trainers.';
+        const tail = ' Choose up to 2 copies of each tactic. Win tactics from trainers. Each new colour you catch unlocks a colour tactic. A colour tactic needs a creature of its colour in your team.';
         if (!owned) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have no creatures yet. Loaned creatures fill your team.' + tail;
         if (owned < 6) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + '. Use them all. Loaned creatures fill the rest.' + tail;
         return 'Your deck has ' + D + ' cards: creatures from your team plus tactic cards. Choose 6 to 14 creatures.'
@@ -101,13 +107,23 @@
         Rift.State.deckTactics(s).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
         const status = el('p.deck-status', { role: 'status', 'aria-live': 'polite' });
         const loanNote = el('p.small.muted.loan-note');
-        const boxes = [], steppers = [];
+        const boxes = [], steppers = [], needLines = [];
+        const byUid = {};
+        s.creatures.forEach(x => { byUid[x.uid] = x; });
         let loanRows = [];
         const tacticTotal = () => Object.values(counts).reduce((a, b) => a + b, 0);
         let saveBtn = null;
 
         const deckCounts = () => ({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() });
-        function check() { return Rift.State.checkDeck(deckCounts()); }
+        // Colour identity: a colour tactic needs a creature of its colour in the chosen team.
+        const teamColours = () => Rift.State.teamColours(Array.from(team).map(uid => byUid[uid]));
+        const fitsTeam = id => !tactics[id].colour || teamColours().has(tactics[id].colour);
+        function check() {
+            const r = Rift.State.checkDeck(deckCounts());
+            const bad = owned.filter(id => counts[id] && !fitsTeam(id));
+            if (!bad.length) return r;
+            return Object.assign({}, r, { valid: false, message: r.message + ' ' + tactics[bad[0]].name + ' needs ' + aColour(tactics[bad[0]].colour) + ' creature in your team.' });
+        }
 
         // Greyed rows for the loaned creatures the battle adds, so a + on a tactic never hides one.
         function loanRow(id) {
@@ -126,13 +142,14 @@
             steppers.forEach(({ id, minus, plus, out }) => {
                 out.textContent = '×' + (counts[id] || 0);
                 minus.disabled = !counts[id];
-                plus.disabled = (counts[id] || 0) >= 2 || tacticTotal() >= 14;
+                plus.disabled = (counts[id] || 0) >= 2 || tacticTotal() >= 14 || !fitsTeam(id);
             });
             loanRows.forEach(n => n.remove());
             loanRows = Rift.State.loanFillers(deckCounts()).map(loanRow);
             loanRows.forEach(n => teamList.appendChild(n));
             loanNote.textContent = r.loans ? 'Loaned creatures fill the empty places. Each tactic you add takes the place of one loaned creature.' : '';
             loanNote.hidden = !r.loans;
+            needLines.forEach(({ id, node }) => { node.hidden = fitsTeam(id); });
             if (saveBtn) saveBtn.disabled = !r.valid;
         }
 
@@ -157,11 +174,17 @@
             const minus = el('button.btn.small', { text: '−', 'aria-label': 'Remove one ' + t.name, onclick() { if (counts[id]) counts[id] -= 1; refresh(); } });
             const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + t.name, onclick() { if ((counts[id] || 0) < 2 && tacticTotal() < 14) counts[id] = (counts[id] || 0) + 1; refresh(); } });
             steppers.push({ id, minus, plus, out });
-            return el('div.deck-option.tactic-option', null, [
+            // A colour tactic: its colour and rarity, and a note while the team has no creature of that colour.
+            const need = t.colour ? el('div.small.need-line', { text: 'Needs ' + aColour(t.colour) + ' creature in your team.' }) : null;
+            if (need) needLines.push({ id, node: need });
+            return el('div.deck-option.tactic-option', t.colour ? { dataset: { tcolour: t.colour } } : null, [
                 Rift.Assets.has('tactic/' + id) ? Rift.Assets.img('tactic/' + id, { className: 'tactic-art', alt: '' }) : null,
                 el('span', { style: { flex: 1 } }, [
                     el('strong', { text: t.name }), ' ', el('span.stat.stat-cost', { title: 'Energy cost', text: '⚡ ' + t.cost }),
+                    t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : null,
+                    t.rarity ? ' ' : null, t.rarity ? el('span.chip', { text: t.rarity }) : null,
                     el('div.small', { text: t.text }),
+                    need,
                 ]),
                 el('span.stepper', { role: 'group', 'aria-label': t.name + ' copies' }, [minus, out, plus]),
             ]);

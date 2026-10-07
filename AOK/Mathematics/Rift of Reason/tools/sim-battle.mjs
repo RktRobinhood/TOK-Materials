@@ -9,7 +9,9 @@
 // team, tactics and axioms (isolates seat advantage). --set overrides Engine DEFAULTS,
 // e.g. --set=hearts:12,openHand:3/5,spark:false. --patch tries data changes without editing
 // files: --patch=keanu.health:4,astrophysicat.keywords:guard,clockwork.cost:2 (creature, tactic
-// or axiom id; keywords joined with +, 'none' for no keywords).
+// or axiom id; keywords joined with +, 'none' for no keywords). --colour=4 swaps 4 starter tactics
+// for colour tactics of each team's colours (design/card-arena-expansion-2026-10-07.md, section 2);
+// --only=<colour tactic id> swaps in just that one for every side (to test one card alone).
 //
 // Reports first-player win %, draws, rounds and personal turns, hearts left, creatures
 // defeated per player (feeds the fate odds), end reasons, how often each tactic/axiom
@@ -79,7 +81,26 @@ function matchup(label, g) {
     const teamB = MIRROR ? teamA.map(c => Object.assign({}, c, { uid: c.uid.replace(/a-/, 'b-') })) : Engine.randomTeam(rng, TEAM, { prefix: 'g' + g + 'b', legendaries: LEGENDARIES });
     const axA = rng.shuffle(Rift.data.axiomDecks.starter).slice(0, 10);
     const axB = MIRROR ? axA.slice() : rng.shuffle(Rift.data.axiomDecks.starter).slice(0, 10);
-    return { teams: [teamA, teamB], axioms: [axA, axB] };
+    const tacA = tacticsFor(rng, teamA);
+    const tacB = MIRROR ? (tacA && tacA.slice()) : tacticsFor(rng, teamB);
+    return { teams: [teamA, teamB], axioms: [axA, axB], tactics: [tacA, tacB] };
+}
+
+// --colour=N: N of the ten starter tactics are swapped for colour tactics of the team's colours
+// (random, distinct; --only=id forces that one colour tactic in, whatever the team's colours).
+const COLOUR_N = Number(opt('colour', 0));
+const ONLY = opt('only', '');
+function tacticsFor(rng, team) {
+    if (!COLOUR_N && !ONLY) return undefined;
+    const D = Rift.data.tacticDecks;
+    let pool = [];
+    if (ONLY) pool = [ONLY];
+    else {
+        const colours = [...new Set(team.map(c => Rift.data.creatures[c.species].colour))];
+        colours.forEach(col => (D.colour[col] || []).forEach(id => pool.push(id)));
+        pool = rng.shuffle(pool).slice(0, COLOUR_N);
+    }
+    return rng.shuffle(D.starter).slice(0, 10 - pool.length).concat(pool);
 }
 
 // Syllo's Road challenge, as js/ui/battles.js story() sets it up (keep the two in step).

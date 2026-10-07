@@ -50,6 +50,6 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 | 20 | Lesson card backs | 11.9 | `5-ui/card-backs.png` | [ ] |
 | 21 | Board creature medallion (only after the board code changes) | 11.10 | `5-ui/board-token.png` | [ ] |
 
-Before steps 7–8b, check that the tactic ids in `data/tactics.js` match the `tactics-3.png` / `tactics-4.png` / `tactics-5.png` ids in `tools/assets/sheets.json` (the colour tactics were being built the same morning; if the build used the fallback rares Silver Tongue / Dream Big, rename those two ids in sheets.json and use the fallback lines of the prompt).
+Before steps 7–8b, check that the tactic ids in `data/tactics.js` match the `tactics-3.png` / `tactics-4.png` / `tactics-5.png` ids in `tools/assets/sheets.json` (they match as of 7 Oct; re-check if tactics were renamed since).
 
 Steps 4–8, 10 and 11 attach sheets made earlier in this queue (`tactics-1.png`, `arena-frames.png`, `arena-icons.png`), so keep the order.

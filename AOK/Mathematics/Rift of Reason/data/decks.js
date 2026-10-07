@@ -4,7 +4,8 @@
  * deck instead of its ordinary ten-creature team (js/ui/battles.js trainerSide).
  *
  *   creatures  species ids (data/creatures.js), one or two neighbouring colours, a low cost curve
- *   tactics    colourless tactic ids (data/tactics.js), at most 2 copies each
+ *   tactics    tactic ids (data/tactics.js), at most 2 copies each: colourless ones plus colour
+ *              tactics of the deck's own colours only (the colour identity rule, Engine.identityFilter)
  *   creatures + tactics = 20 cards, like a player's deck (6–14 of each).
  *
  * Simulated strength: design/reviews/card-arena-balance-2026-10-07.md (`node tools/sim-battle.mjs --ladder`).
@@ -19,25 +20,24 @@
             name: 'Guards First', colours: ['reason', 'memory'],
             creatures: ['khaby', 'khaby', 'astrophysicat', 'keanu', 'keanu', 'usainvolt',
                 'lobstorian', 'lobstorian', 'beastie', 'carlseal', 'carlseal', 'haalandroid'],
-            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'stand-firm', 'big-claims', 'peer-review', 'occams-razor'],
-            // TODO colour tactics: add Reason/Memory colour tactics here after the colour-tactics merge
-            // (keep 20 cards: swap out colourless tactics one for one).
+            // Colour tactics: Proof by Contradiction (Reason), Nostalgia (Memory).
+            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'big-claims', 'peer-review', 'proof-by-contradiction', 'nostalgia'],
         },
         // Prosecutor Fin: "A strong case needs sound rules." Language arguments backed by Reason.
         fin: {
             name: 'Sound Case', colours: ['language', 'reason'],
             creatures: ['astrophysicat', 'astrophysicat', 'khaby', 'swiftlet', 'swiftlet',
                 'eminemu', 'eminemu', 'lobstorian', 'tremendoodle', 'tremendoodle', 'obambu', 'obambu'],
-            tactics: ['counterexample', 'counterexample', 'occams-razor', 'occams-razor', 'rethink', 'big-claims', 'pep-talk', 'lemma'],
-            // TODO colour tactics: add Language/Reason colour tactics here after the colour-tactics merge.
+            // Colour tactics: Label It (Language), Proof by Contradiction (Reason).
+            tactics: ['counterexample', 'counterexample', 'occams-razor', 'occams-razor', 'rethink', 'big-claims', 'label-it', 'proof-by-contradiction'],
         },
         // The Feed's Champion: "MY TEAM GETS ATTENTION." Fast Emotion and Imagination, all-in.
         feed: {
             name: 'Attention Engine', colours: ['emotion', 'imagination'],
             creatures: ['zuckerborg', 'zuckerborg', 'speedcheeta', 'speedcheeta', 'eelish',
                 'altmanta', 'altmanta', 'gargoyle', 'rockodile', 'rawmsay', 'beeyonce', 'muskrat'],
-            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'eureka', 'eureka', 'peer-review', 'big-claims'],
-            // TODO colour tactics: add Emotion/Imagination colour tactics here after the colour-tactics merge.
+            // Colour tactics: Rally Cry (Emotion), Daydream (Imagination).
+            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'eureka', 'peer-review', 'rally-cry', 'daydream'],
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

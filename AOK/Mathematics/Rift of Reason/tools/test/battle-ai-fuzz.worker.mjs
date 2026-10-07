@@ -19,7 +19,8 @@ try {
         const levels = [level(), level()];
         let s = E.createBattle({
             seed: 'aifuzz-' + g,
-            players: [{ name: 'A', team: team(0), tactics: tactics() }, { name: 'B', team: team(1), tactics: tactics() }],
+            // Player 0 may carry bag items: the AI must ignore them (it never uses items).
+            players: [{ name: 'A', team: team(0), tactics: tactics(), bag: g % 3 ? [] : ['tonic', 'anchor'] }, { name: 'B', team: team(1), tactics: tactics() }],
             axiomDeck: rng.shuffle(allAxioms).slice(0, rng.int(0, 20)),
             options: { hearts: rng.int(2, 10), timeline: !rng.chance(0.15), spark: !rng.chance(0.2), fateStart: rng.int(1, 8), fateGap: rng.int(2, 8) },
         });
