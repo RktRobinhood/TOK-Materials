@@ -66,8 +66,10 @@ test('the shared axiom deck takes ten distinct cards from each side, topped up f
 
 // ---- draw choice ----------------------------------------------------------------------
 
-test('draw choice: deck, axiom card, Fate forward or rewind, each exactly once per turn', () => {
-    let s = fresh({ openHand: [0, 0], openAxioms: 0 });
+test('draw choice: deck or axiom card (Fate forward/rewind only with timeDraws), each exactly once per turn', () => {
+    assert.equal(E.DEFAULTS.timeDraws, false, 'time draws are off by default');
+    same(E.legalActions(fresh({ openHand: [0, 0], openAxioms: 0 })).map(a => a.choice), ['deck', 'axiom']);
+    let s = fresh({ openHand: [0, 0], openAxioms: 0, timeDraws: true });
     same(E.legalActions(s).map(a => a.choice), ['deck', 'axiom', 'forward', 'rewind']);
     assert.ok(!E.legalActions(s).some(a => a.type === 'end'), 'the draw comes first');
     const top = s.players[0].deck[0];
@@ -80,20 +82,24 @@ test('draw choice: deck, axiom card, Fate forward or rewind, each exactly once p
     same(d.players[0].axHand, [ax]);
     assert.equal(d.axioms.deck.length, s.axioms.deck.length - 1);
     d = act(s, { type: 'draw', choice: 'forward' });
-    assert.equal(d.fate.until, s.fate.until - 2);
+    assert.equal(d.fate.until, s.fate.until - 1, 'a time draw moves Fate one space');
     assert.equal(d.players[0].hand.length, 0);
     d = act(s, { type: 'draw', choice: 'rewind' });
-    assert.equal(d.fate.until, s.fate.until + 2);
+    assert.equal(d.fate.until, s.fate.until + 1);
 });
 
-test('a full hand blocks drawing but not the time choices; an empty deck greys out Deck', () => {
+test('a full hand blocks drawing (time choices stay, when on); an empty deck greys out Deck', () => {
     let s = fresh({ openHand: [0, 0], openAxioms: 0 });
     const P = s.players[0];
     while (P.hand.length < 10) P.hand.push(P.deck.shift());
+    same(E.legalActions(s).map(a => a.choice), ['none']);
+    s.options.timeDraws = true;
     same(E.legalActions(s).map(a => a.choice), ['forward', 'rewind']);
     P.deck.unshift(P.hand.pop());
     P.axHand.push('haste');
     same(E.legalActions(s).map(a => a.choice), ['forward', 'rewind'], 'axiom cards count towards the hand');
+    s.options.timeDraws = false;
+    same(E.legalActions(s).map(a => a.choice), ['none'], 'axiom cards count towards the hand');
     s = fresh({ openHand: [0, 0], openAxioms: 0, timeline: false });
     s.players[0].deck = [];
     same(E.legalActions(s).map(a => a.choice), ['axiom']);
@@ -134,10 +140,10 @@ test('energy capacity grows by one each own turn to ten and refills; unspent ene
 
 test('Growing Ideas (abundance) adds two capacity per turn; the Spark adds one energy once', () => {
     let s = rule(fresh({ first: 0 }), 'abundance');
-    s = act(s, { type: 'draw', choice: 'forward' });
+    s = act(s, { type: 'draw', choice: 'deck' });
     s = act(s, { type: 'end' });
     assert.equal(s.players[1].capacity, 2);
-    s = act(s, { type: 'draw', choice: 'rewind' });
+    s = act(s, { type: 'draw', choice: 'deck' });
     assert.ok(E.legalActions(s).some(a => a.type === 'spark'));
     s = act(s, { type: 'spark' });
     assert.equal(s.players[1].energy, 3);
@@ -147,6 +153,7 @@ test('Growing Ideas (abundance) adds two capacity per turn; the Spark adds one e
 
 test('playing spends energy; a new creature sleeps unless it is Swift or the Arrival rule is on', () => {
     let s = setup({ p0: ['keanu', 'usainvolt', 'zuckerborg'], energy: 10 });
+    rule(s, 'plenty');   // three card plays this turn
     toHand(s, 'p0c0', 'p0c1', 'p0c2');
     s = act(s, { type: 'play', cid: 'p0c0' });
     assert.equal(s.players[0].energy, 10 - Rift.data.creatures.keanu.cost);
@@ -159,6 +166,109 @@ test('playing spends energy; a new creature sleeps unless it is Swift or the Arr
     s = act(s, { type: 'play', cid: 'p0c2' });
     assert.equal(E.canAttack(s, 'p0c2'), true, 'Ready on Arrival');
     assert.throws(() => act(s, { type: 'play', cid: 'p0c3' }), /Illegal/);
+});
+
+// ---- card plays per turn and the Fluxx-style rules (plays, energy growth, hand limit, bonuses) ----
+
+test('two card plays per turn by default: creatures, tactics and rule cards each use one; attacks are free', () => {
+    assert.equal(E.RULE_DEFAULTS.playLimit, 2);
+    let s = setup({ p0: ['kardashiant', 'kardashiant', 'kardashiant', 'keanu'], t0: ['pep-talk'], axioms: ['haste'], energy: 10 });
+    onBoard(s, 'p0c3');
+    toHand(s, 'p0c0', 'p0c1', 'p0c2', 'p0t0');
+    s.players[0].axHand.push('haste');
+    assert.equal(E.playLimit(s, 0), 2);
+    assert.equal(E.playsLeft(s, 0), 2);
+    s = act(s, { type: 'play', cid: 'p0c0' });
+    assert.equal(E.playsLeft(s, 0), 1);
+    s = act(s, { type: 'axiom', choice: 'haste' });
+    assert.equal(E.playsLeft(s, 0), 0, 'a rule card uses a play');
+    const legal = E.legalActions(s);
+    assert.ok(!legal.some(a => a.type === 'play' || a.type === 'axiom'), 'no third play');
+    assert.throws(() => act(s, { type: 'play', cid: 'p0c1' }), /Illegal/);
+    assert.ok(legal.some(a => a.type === 'attack' && a.cid === 'p0c3'), 'attacks do not use plays');
+    s = act(s, { type: 'attack', cid: 'p0c3', target: 'h1' });
+    assert.equal(E.playsLeft(s, 0), 0);
+    s = act(s, { type: 'end' });
+    assert.equal(E.playsLeft(s, 1), 2, 'plays reset every turn');
+});
+
+test('Restraint allows one play, Plenty three, Infinity no limit', () => {
+    const base = () => {
+        const s = setup({ p0: ['kardashiant', 'kardashiant', 'kardashiant', 'kardashiant'], energy: 10 });
+        toHand(s, 'p0c0', 'p0c1', 'p0c2', 'p0c3');
+        return s;
+    };
+    const plays = s => { let n = 0; while (E.legalActions(s).some(a => a.type === 'play')) { s = act(s, { type: 'play', cid: s.players[0].hand[0] }); n++; } return n; };
+    assert.equal(plays(rule(base(), 'restraint')), 1);
+    assert.equal(plays(rule(base(), 'plenty')), 3);
+    const inf = rule(base(), 'infinity');
+    assert.equal(E.playsLeft(inf, 0), Infinity);
+    assert.equal(plays(inf), 4, 'only energy and the hand limit the plays');
+    assert.equal(plays(rule(base(), 'two-plays')), 2, 'Two Moves is the basic rule');
+});
+
+test('Steady State keeps capacity; Diminishing Returns shrinks it by one, never below 1', () => {
+    let s = rule(setup({ p0: ['keanu'], p1: ['keanu'], energy: 3 }), 'steady-state');
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[1].capacity, 3);
+    assert.equal(s.players[1].energy, 3, 'it still refills');
+    s = rule(setup({ p0: ['keanu'], p1: ['keanu'], energy: 2 }), 'diminishing-returns');
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[1].capacity, 1);
+    s = act(s, { type: 'draw', choice: 'deck' });
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[0].capacity, 1);
+    s = act(s, { type: 'draw', choice: 'deck' });
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[1].capacity, 1, 'never below 1');
+    assert.equal(s.players[1].energy, 1);
+});
+
+test('Limited Memory: at the end of the turn the oldest cards are discarded down to 3', () => {
+    let s = rule(setup({ p0: ['keanu', 'keanu', 'keanu', 'keanu', 'keanu'], p1: ['keanu'] }), 'limited-memory');
+    toHand(s, 'p0c0', 'p0c1', 'p0c2', 'p0c3', 'p0c4');
+    s = act(s, { type: 'end' });
+    same(s.players[0].hand, ['p0c2', 'p0c3', 'p0c4']);
+    assert.ok(s.players[0].discard.includes('p0c0') && s.players[0].discard.includes('p0c1'));
+    assert.ok(s.lastEvents.some(e => e.t === 'hand-limit'));
+    let q = rule(setup({ p0: ['keanu', 'keanu'], p1: ['keanu'] }), 'limited-memory');
+    toHand(q, 'p0c0', 'p0c1');
+    q = act(q, { type: 'end' });
+    same(q.players[0].hand, ['p0c0', 'p0c1'], 'three or fewer cards stay');
+});
+
+test('Fresh Start draws 2 on an empty hand; Think It Over draws for unused plays (at most 2); Momentum adds a play', () => {
+    let s = rule(setup({ p0: ['keanu'], p1: ['keanu', 'keanu', 'keanu'] }), 'fresh-start');
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[1].hand.length, 2, 'empty hand: draw 2');
+    s = act(s, { type: 'draw', choice: 'deck' });
+    s = act(s, { type: 'end' });
+    assert.equal(s.players[0].hand.length, 2, 'player 0 (empty hand) also draws 2 at the start of the turn');
+    let t2 = rule(setup({ p0: ['keanu'], p1: ['keanu', 'keanu'] }), 'fresh-start');
+    toHand(t2, 'p1c0');
+    t2 = act(t2, { type: 'end' });
+    same(t2.players[1].hand, ['p1c0'], 'a non-empty hand draws nothing extra');
+
+    let th = rule(setup({ p0: ['keanu', 'keanu', 'keanu'], p1: ['keanu'] }), 'think');
+    th = act(th, { type: 'end' });
+    assert.equal(th.players[0].hand.length, 2, 'two unused plays: draw 2');
+    let one = rule(setup({ p0: ['kardashiant', 'keanu', 'keanu'], p1: ['keanu'] }), 'think');
+    toHand(one, 'p0c0');
+    one = act(one, { type: 'play', cid: 'p0c0' });
+    one = act(one, { type: 'end' });
+    assert.equal(one.players[0].hand.length, 1, 'one unused play: draw 1');
+    let many = rule(rule(setup({ p0: ['keanu', 'keanu', 'keanu', 'keanu'], p1: ['keanu'] }), 'think'), 'infinity');
+    many = act(many, { type: 'end' });
+    assert.equal(many.players[0].hand.length, 2, 'at most 2');
+
+    let m = rule(setup({ p0: ['keanu'], p1: ['keanu', 'keanu'] }), 'momentum');
+    onBoard(m, 'p1c0', 'p1c1');
+    onBoard(m, 'p0c0');
+    m = act(m, { type: 'end' });
+    assert.equal(E.playLimit(m, 1), 3, 'more creatures: +1 play');
+    m = act(m, { type: 'draw', choice: 'deck' });
+    m = act(m, { type: 'end' });
+    assert.equal(E.playLimit(m, 0), 2, 'fewer creatures: no bonus');
 });
 
 test('cards cost energy: too-expensive cards are not legal, Thrift and Luxury change creature costs', () => {
@@ -247,22 +357,29 @@ test('the turn limit ends the battle in a draw', () => {
 
 // ---- Fate track ---------------------------------------------------------------------------------
 
-test('Fate: End turn moves it one closer; forward/rewind move two, clamped to 0..12', () => {
-    let s = fresh({ openHand: [0, 0], openAxioms: 0 });
+test('Fate: End turn moves it one closer; forward/rewind (timeDraws) move one, clamped to 0..12', () => {
+    let s = fresh({ openHand: [0, 0], openAxioms: 0, timeDraws: true });
     assert.equal(s.fate.until, E.DEFAULTS.fateStart);
     let d = act(s, { type: 'draw', choice: 'rewind' });
-    for (let i = 0; i < 6; i++) { d = act(d, { type: 'end' }); d = act(d, { type: 'draw', choice: 'rewind' }); }
-    assert.equal(d.fate.until, 12);
+    assert.equal(d.fate.until, E.DEFAULTS.fateStart + 1);
+    d = act(d, { type: 'end' });
+    assert.equal(d.fate.until, E.DEFAULTS.fateStart);
+    const top = E.cloneState(s);
+    top.fate.until = 12;
+    assert.equal(act(top, { type: 'draw', choice: 'rewind' }).fate.until, 12, 'clamped at 12');
     d = act(s, { type: 'draw', choice: 'deck' });
     d = act(d, { type: 'end' });
     assert.equal(d.fate.until, E.DEFAULTS.fateStart - 1);
+    d = act(d, { type: 'draw', choice: 'deck' });
+    d = act(d, { type: 'end' });
+    assert.equal(d.fate.until, E.DEFAULTS.fateStart - 2, 'exactly one space per End turn');
     assert.equal(E.timeline(s)[0].turns, s.fate.until);
     assert.equal(E.timeline(s)[0].type, 'flip');
     assert.equal(E.timeline(s)[1].type, 'reset');
 });
 
 test('Fate flips the top shared axiom at zero, then resets every rule six spaces later', () => {
-    let s = fresh({ openHand: [0, 0], openAxioms: 0, fateStart: 2 }, { axiomDeck: ['haste', 'underdog', 'mercy'] });
+    let s = fresh({ openHand: [0, 0], openAxioms: 0, fateStart: 1, timeDraws: true }, { axiomDeck: ['haste', 'underdog', 'mercy'] });
     s.axioms.deck = ['haste', 'underdog', 'mercy'];
     s = act(s, { type: 'draw', choice: 'forward' });
     assert.equal(s.axioms.active.attacks, 'haste');
@@ -280,13 +397,13 @@ test('Fate flips the top shared axiom at zero, then resets every rule six spaces
 
 test('Fate events trigger in the middle of a turn (Clockwork, Filter)', () => {
     let s = setup({ p0: ['kardashiant'], t0: ['clockwork'], options: { timeline: true }, axioms: ['haste'] });
-    s.fate.until = 3;
+    s.fate.until = 1;
     toHand(s, 'p0t0');
     s = act(s, { type: 'play', cid: 'p0t0' });
     assert.equal(s.phase, 'choose');
     same(E.legalActions(s).map(a => a.choice), ['forward', 'rewind']);
     const back = act(s, { type: 'choose', choice: 'rewind' });
-    assert.equal(back.fate.until, 6);
+    assert.equal(back.fate.until, 2, 'Clockwork moves Fate one space');
     s = act(s, { type: 'choose', choice: 'forward' });
     assert.equal(s.axioms.active.attacks, 'haste');
     assert.equal(s.phase, 'main');

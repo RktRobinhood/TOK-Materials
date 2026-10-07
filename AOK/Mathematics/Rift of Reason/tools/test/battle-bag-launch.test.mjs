@@ -125,5 +125,5 @@ test('How to play explains the Bag in one line', () => {
     g.Rift.Battles.rules();
     const text = n => (typeof n === 'string' ? n : (n.textContent || '') + (n.children || []).map(text).join(' '));
     const all = text(g.modals.at(-1).body);
-    assert.match(all, /Bag: bring up to two items .* use one per turn .* used up only when you use it\./);
+    assert.match(all, /Bag:\s+use one item per turn for its energy\. An item is used up only when you use it\./);
 });

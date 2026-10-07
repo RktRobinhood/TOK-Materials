@@ -119,6 +119,10 @@
         const synth = root.speechSynthesis;
         const words = speakable(line.text);
         if (!synth || !root.SpeechSynthesisUtterance || !/[\p{L}\p{N}]/u.test(words)) return Promise.resolve();
+        // English only: a machine whose only voice is (say) Danish would read English text in
+        // Danish. Without an English voice the line stays silent; the text is on screen anyway.
+        const english = synth.getVoices().filter(v => /^en/i.test(v.lang));
+        if (!english.length) return Promise.resolve();
         return new Promise(resolve => {
             const finish = () => { if (finishVoice === finish) finishVoice = null; resolve(); };
             finishVoice = finish;
@@ -127,8 +131,8 @@
             u.pitch = fb.pitch;
             u.rate = fb.rate;
             u.volume = Rift.clamp(vol, 0, 1);
-            const voices = synth.getVoices().filter(v => /^en/i.test(v.lang));
-            if (voices.length) u.voice = voices[Rift.hashSeed(line.speaker || 'x') % voices.length];
+            u.voice = english[(Rift.hashSeed ? Rift.hashSeed(line.speaker || 'x') : 0) % english.length];
+            u.lang = u.voice.lang;
             u.onend = finish;
             u.onerror = finish;
             synth.speak(u);

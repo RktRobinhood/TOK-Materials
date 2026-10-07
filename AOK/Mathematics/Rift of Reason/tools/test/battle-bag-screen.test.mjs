@@ -107,7 +107,10 @@ test('click-click: choose the Ward, then a glowing creature; then no second item
     assert.ok(t.E.hasKeyword(s, 'p0c0', 'shield'));
     assert.deepEqual([...s.players[0].bag], ['tonic']);
     assert.equal(t.$('.b-bag-btn .b-bag-count').textContent, '1');
-    assert.match(t.$('.b-log').textContent, /You use the Ward on Kim Kardashiant\./);
+    // No text log: the item use is the newest tile in Recent plays (marked with the Bag).
+    const newest = t.$('.b-recent .b-recent-tile.newest');
+    assert.match(newest.getAttribute('aria-label'), /^You use the Ward on Kim Kardashiant\./);
+    assert.equal(newest.querySelector('.b-recent-move').textContent, '🎒');
     t.$('.b-bag-btn').click();
     assert.ok(item(t, 'tonic').classList.contains('off'));
     assert.match(item(t, 'tonic').textContent, /You already used an item this turn\./);
@@ -201,12 +204,12 @@ test('a real match: result.itemsUsed, and a Ward used in battle no longer saves 
 test('Anchor: the lane shows the anchor and counts the held turn', () => {
     const t = setup(Object.assign(practice(['anchor']), { battleOptions: Object.assign({}, practice().battleOptions, { timeline: true }) }));
     t.$('.b-draw-btn[data-choice="deck"]').click();
-    assert.match(t.$('.b-fate-text').textContent, /^In 6 turns/);
+    assert.match(t.$('.b-fate-sum').textContent, /^New rule.* in 6 turns/);
     t.$('.b-bag-btn').click();
     item(t, 'anchor').click();
     assert.match(t.$('.b-prompt .b-ask').textContent, /Use the Anchor\? It needs no energy\./);
     t.$('.b-prompt .btn.primary').click();
-    assert.match(t.$('.b-fate-text').textContent, /^⚓ In 7 turns/);
+    assert.match(t.$('.b-fate-sum').textContent, /^⚓ New rule.* in 7 turns/);
     t.$('.b-end').click();
     t.g.flush();
     assert.equal(t.handle.state.fate.until, 5, 'held once, then the opponent\'s End turn moved it');

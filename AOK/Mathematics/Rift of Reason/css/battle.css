@@ -4,7 +4,7 @@
  * Layout (the arena is a five-row grid, sized from the screen height so 7 creatures fit per side):
  *   [opponent hero · opponent hand · opponent energy]
  *   [opponent board]
- *   [lane: Fate track · prompt or draw choice · active rules · End turn]
+ *   [lane: Fate track (full width) / prompt or draw choice · axiom deck · End turn]
  *   [my board]
  *   [my hero · my hand (fully visible) · my energy]
  * Sizes use container query units of .battle (cqh/cqw), so they are resolved on descendants. */
@@ -13,9 +13,9 @@
     --side: 272px;                                        /* side panel column */
     --arena-w: calc(100cqw - var(--side) - 24px);
     --hero: clamp(50px, 8.5cqh, 100px);                   /* hero portrait */
-    --lane-h: clamp(66px, 10.4cqh, 104px);
-    --hw: clamp(62px, 13cqh, 150px);                      /* hand card width */
-    --bw: clamp(56px, min(15.3cqh, (var(--arena-w) - 90px) / 7.6), 200px);   /* board card width */
+    --lane-h: clamp(96px, 15cqh, 140px);                  /* Fate track row + instruction row */
+    --hw: clamp(62px, 14.2cqh, 150px);                    /* hand card width */
+    --bw: clamp(56px, min(14.6cqh, (var(--arena-w) - 90px) / 7.6), 200px);   /* board card width */
     --inspect-w: clamp(190px, min(31cqh, var(--side) - 36px), 330px);   /* big preview card: fits over the side panel */
     --rowside: clamp(160px, 15cqw, 270px);
     --ready: #3ddc84;
@@ -113,7 +113,11 @@
 .b-hero.hover-target .b-portrait { box-shadow: 0 0 0 6px rgba(255, 106, 61, 0.9), 0 0 32px rgba(255, 106, 61, 0.95); }
 .battle.targeting .b-hero:not(.valid):not(.valid-drag) { opacity: 0.55; }
 
-.b-energy { display: flex; align-items: center; gap: 8px; }
+.b-energy { display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; align-items: center; column-gap: 8px; cursor: help; }
+.b-energy .b-crystals { grid-row: 1 / span 2; }
+.b-energy-label { grid-column: 2; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #9fd8ff; text-align: center; line-height: 1; }
+.b-energy.small .b-energy-label { font-size: 9.5px; }
+.b-energy.empty .b-energy-num strong { color: #ff9a9a; }
 .b-crystals { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; max-width: 104px; }
 .b-crystal {
     width: 13px; height: 13px; margin: 2px; transform: rotate(45deg); border-radius: 2px;
@@ -122,11 +126,14 @@
 .b-crystal.full { background: linear-gradient(135deg, #9fd8ff, #2f7bff); border-color: #d8f0ff; box-shadow: 0 0 6px rgba(80, 160, 255, 0.8); }
 .b-crystal.art { transform: none; width: 16px; height: 18px; margin: 0; border: 0; box-shadow: none; background: center / contain no-repeat; }
 .b-energy-num {
-    font-family: var(--font-display); font-weight: 800; font-size: 22px; color: #bfe6ff; text-shadow: 0 1px 3px #000, 0 0 10px rgba(47, 123, 255, 0.6);
-    min-width: 2.6em; text-align: center; padding: 2px 8px; border-radius: 12px; background: rgba(12, 16, 36, 0.8); border: 1px solid #4a5a8a;
+    grid-column: 2;
+    font-family: var(--font-display); font-weight: 800; font-size: 18px; color: #bfe6ff; text-shadow: 0 1px 3px #000, 0 0 10px rgba(47, 123, 255, 0.6);
+    min-width: 2.6em; text-align: center; padding: 2px 10px; border-radius: 12px; background: rgba(12, 16, 36, 0.85); border: 2px solid #4a7acc;
 }
+.b-energy-num strong { font-size: 30px; color: #fff; }
 .b-energy.small .b-crystal { width: 9px; height: 9px; }
-.b-energy.small .b-energy-num { font-size: 16px; }
+.b-energy.small .b-energy-num { font-size: 13px; border-width: 1px; }
+.b-energy.small .b-energy-num strong { font-size: 18px; }
 .b-spark.glow { box-shadow: 0 0 0 3px var(--ready), 0 0 16px rgba(61, 220, 132, 0.8); }
 .b-spark-icon { display: grid; place-items: center; width: 24px; height: 24px; font-size: 20px; line-height: 1; background: center / contain no-repeat; color: var(--gold); pointer-events: none; }
 
@@ -147,26 +154,58 @@
 /* ---- lane: Fate track, prompt (or the draw choice), active rules, End turn ---- */
 .b-lane {
     position: relative;
-    display: grid; grid-template-columns: minmax(130px, 0.9fr) minmax(0, 2.4fr) minmax(100px, 1fr) auto; gap: 10px; align-items: center;
-    padding: 4px 10px;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-rows: auto minmax(0, 1fr); column-gap: 12px; row-gap: 2px; align-items: center;
+    padding: 3px 12px 4px;
     background: linear-gradient(90deg, rgba(20, 18, 31, 0.25), rgba(20, 18, 31, 0.9) 12%, rgba(20, 18, 31, 0.9) 88%, rgba(20, 18, 31, 0.25));
     border-top: 1px solid rgba(242, 182, 50, 0.4); border-bottom: 1px solid rgba(242, 182, 50, 0.4);
     z-index: 5;
 }
 .b-lane.flash { animation: b-lane-flash 0.9s ease-out; }
 @keyframes b-lane-flash { from { background-color: rgba(242, 182, 50, 0.35); } }
-.b-fate { min-width: 0; }
-.b-fate-track { display: flex; align-items: center; gap: 4px; background: center / 100% 100% no-repeat; }
-.b-fate-track .pip { width: 10px; height: 10px; border-radius: 50%; background: #3a2d4a; border: 1px solid #6c5a80; flex: none; }
-.b-fate-track .pip.past { opacity: 0.35; }
-.b-fate-track .pip.marker { width: 15px; height: 15px; background: radial-gradient(#fff3c4, #f2b632); border-color: #fff; box-shadow: 0 0 8px rgba(242, 182, 50, 0.9); background-size: contain; }
-.b-fate-track .fate-ev { font-size: 18px; color: var(--gold); margin-left: 4px; }
-.b-fate-text { font-size: 12px; line-height: 1.2; opacity: 0.92; margin-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.b-fate { cursor: help; }
+/* The Fate track: the lane's top row. One space per turn (two past, NOW, nine ahead); spaces are
+ * tinted by whose turn it is (teal: yours, coral: theirs). Events sit on their spaces. */
+.b-fate { grid-column: 1 / span 2; grid-row: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(150px, auto); align-items: center; gap: 10px; height: 46px; }
+.b-fate-none { grid-column: 1 / -1; font-size: 13px; opacity: 0.7; }
+.b-fate-label { display: flex; flex-direction: column; align-items: center; line-height: 1; cursor: help; }
+.b-fate-label strong { font-family: var(--font-display); font-size: 17px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; }
+.b-fate-label span { font-size: 11px; opacity: 0.75; }
+.b-fate-track { position: relative; height: 100%; min-width: 0; overflow: hidden; }
+/* The reel of spaces slides under the fixed NOW marker; the edges fade out. */
+.b-fate-reel { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: center;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+.b-fate-now { position: absolute; left: 50%; top: 0; bottom: 0; transform: translateX(-50%); width: calc(100% / 7); display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; z-index: 4;
+    background: radial-gradient(ellipse at center, rgba(242, 182, 50, 0.25), transparent 70%); }
+.b-fate-now-tag { margin-top: -6px; font-size: 9px; font-weight: 800; letter-spacing: 0.08em; color: var(--ink); background: var(--gold); border-radius: 4px; padding: 0 3px; }
+.b-fate-groove { position: absolute; left: 0; right: 0; top: 50%; height: 24px; transform: translateY(-50%); background: center / 100% 100% no-repeat; pointer-events: none; }
+.b-fate-track:not(.art) .b-fate-groove { height: 8px; border-radius: 4px; background: linear-gradient(#2a2238, #463a5c); border: 1px solid #b08a3a; }
+.b-fs { position: relative; height: 100%; display: grid; place-items: center; }
+.b-fs::before { content: ''; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; background: #1b1428; }
+.b-fs.mine::before { border-color: var(--rift); }
+.b-fs.theirs::before { border-color: #ff8a6a; }
+.b-fs.past::before { opacity: 0.4; }
+.b-fs.now::before { display: none; }
+.b-fs > * { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.b-fs-now { width: 24px; height: 38px; background: center / contain no-repeat; display: grid; place-items: center; font-size: 26px; color: var(--gold); filter: drop-shadow(0 0 6px rgba(242, 182, 50, 0.85)); z-index: 2; }
+.b-fev { display: flex; flex-direction: column; align-items: center; gap: 0; z-index: 3; cursor: help; border-radius: 8px; padding: 0 2px; }
+.b-fev .b-fev-icon { width: 30px; height: 30px; font-size: 22px; color: var(--gold); filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8)); }
+.b-fev-label { font-size: 10.5px; font-weight: 800; line-height: 1.1; white-space: nowrap; padding: 0 4px; border-radius: 5px; background: rgba(12, 8, 20, 0.92); color: var(--gold); margin-top: -3px; }
+.b-fev.reset .b-fev-label { color: #9fe8ff; }
+.b-fev:hover, .b-fev:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.b-fev.ghost { opacity: 0.85; cursor: default; animation: b-fade-in 0.15s ease-out; }
+.b-fev.ghost .b-fev-icon { filter: drop-shadow(0 0 8px rgba(63, 224, 208, 0.95)); }
+.b-fev.ghost .b-fev-label { background: var(--rift); color: var(--ink); }
+.b-fpast { width: 22px; height: 22px; border-radius: 5px; overflow: hidden; display: grid; place-items: center; font-size: 14px; background: rgba(12, 8, 20, 0.9); border: 1px solid rgba(242, 182, 50, 0.6); opacity: 0.85; cursor: help; z-index: 2; }
+.b-fpast img { width: 100%; height: 100%; object-fit: cover; }
+.b-fs.now .b-fpast { left: 92%; top: 24%; width: 18px; height: 18px; z-index: 5; }
+.b-fpast:hover, .b-fpast:focus-visible { opacity: 1; outline: 2px solid var(--gold); }
+.b-fate-sum { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.b-fate-sum strong { font-size: 13.5px; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.b-fate-sum span { font-size: 11.5px; opacity: 0.8; white-space: nowrap; }
+.b-fate-sum.preview strong { color: var(--rift); }
 
 /* The prompt never grows past the lane: the instruction is two lines at most; with buttons the
  * "what just happened" lines are left out (JS), and a note replaces the instruction. */
-.b-prompt { min-width: 0; max-height: calc(var(--lane-h) - 6px); text-align: center; font-size: 13.5px; line-height: 1.25; display: flex; flex-direction: column; justify-content: center; }
+.b-prompt { grid-column: 1; grid-row: 2; min-width: 0; max-height: calc(var(--lane-h) - 52px); text-align: center; font-size: 13.5px; line-height: 1.25; display: flex; flex-direction: column; justify-content: center; }
 .b-ask { font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: none; }
 .b-prompt.has-buttons.has-note .b-ask { display: none; }
 .b-prompt.has-buttons .b-note { order: -1; -webkit-line-clamp: 2; }
@@ -181,7 +220,7 @@
 .b-news { font-size: 12px; opacity: 0.78; margin-top: 2px; }
 .b-news div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.b-lane-right { display: flex; align-items: center; gap: 8px; justify-content: flex-end; min-width: 0; }
+.b-lane-right { grid-column: 2; grid-row: 2; display: flex; align-items: center; gap: 8px; justify-content: flex-end; min-width: 0; }
 .b-lane-rules { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .b-rule-chip {
     display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; line-height: 1.15; height: 19px;
@@ -193,39 +232,48 @@
 .b-rule-chip img { width: 17px; height: 17px; border-radius: 3px; flex: none; }
 .b-rule-chip.more { padding-left: 7px; background: linear-gradient(#f2b632, #c98a1a); align-self: flex-start; }
 .b-basic { font-size: 12px; opacity: 0.65; }
-.b-axdeck { position: relative; flex: none; }
-.b-axdeck .b-back { width: 30px; height: 46px; }
+.b-axdeck { position: relative; flex: none; cursor: help; }
+.b-axdeck .b-back { width: 26px; height: 40px; }
 .b-axdeck span:last-child { position: absolute; right: -6px; bottom: -4px; font-size: 12px; font-weight: 800; background: var(--ink); border-radius: 8px; padding: 0 4px; }
 .battle.reverse-goal .b-lane { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
 
-.b-end-wrap { grid-column: 4; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.b-end-wrap { grid-column: 3; grid-row: 1 / span 2; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+/* A round medallion (the ui/end-turn art keeps its shape) with two short lines of text. */
 .b-end {
-    width: clamp(108px, 12cqh, 160px); height: clamp(46px, 6.6cqh, 70px); border-radius: 999px; cursor: pointer;
-    font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.3cqh, 22px); color: var(--ink);
-    background: linear-gradient(#ffe08a, #e0a52a 55%, #a8721a); border: 3px solid #4a3210;
+    --s: clamp(70px, calc(var(--lane-h) - 14px), 120px);
+    width: var(--s); height: var(--s); border-radius: 50%; cursor: pointer; padding: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+    font-family: var(--font-display); font-weight: 800; font-size: calc(var(--s) * 0.21); line-height: 1; text-transform: uppercase; letter-spacing: 0.03em;
+    color: #fff7df; text-shadow: 0 0 3px #000, 1px 1px 0 #2a1c08, -1px -1px 0 #2a1c08, 1px -1px 0 #2a1c08, -1px 1px 0 #2a1c08;
+    background: radial-gradient(circle at 50% 38%, #ffe08a, #e0a52a 55%, #8a5a12); border: 3px solid #4a3210;
     box-shadow: 0 4px 0 #2a1c08, 0 6px 14px rgba(0, 0, 0, 0.6);
-    background-size: 100% 100%;
+    background-size: contain; background-position: center; background-repeat: no-repeat;
     transition: filter 0.15s ease, box-shadow 0.25s ease;
 }
-.b-end.art { background-color: transparent; border: 0; box-shadow: none; background-repeat: no-repeat; }
-.b-end:disabled { cursor: default; filter: grayscale(0.85) brightness(0.65); font-size: clamp(13px, 1.9cqh, 18px); }
-.b-end.glow { background: linear-gradient(#a8ffc8, #3ddc84 55%, #1f8a4f); box-shadow: 0 4px 0 #0d3a20, 0 0 0 4px rgba(61, 220, 132, 0.55), 0 0 26px rgba(61, 220, 132, 0.85); }
+.b-end span + span { margin-top: 0.12em; }
+.b-end.art { background-color: transparent; border: 0; box-shadow: none; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6)); }
+.b-end:disabled { cursor: default; filter: grayscale(0.85) brightness(0.6); font-size: calc(var(--s) * 0.17); }
+.b-end.glow { box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.8), 0 0 26px 4px rgba(61, 220, 132, 0.85); }
+.b-end.art.glow { filter: drop-shadow(0 0 8px rgba(61, 220, 132, 1)) drop-shadow(0 0 16px rgba(61, 220, 132, 0.8)); box-shadow: none; }
 .b-end:not(:disabled):hover { filter: brightness(1.12); }
-.b-end-hint { position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: var(--ready); white-space: nowrap; text-shadow: 0 1px 2px #000, 0 0 4px #000; pointer-events: none; }
+.b-end-hint { position: absolute; top: calc(100% + 1px); left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: var(--ready); white-space: nowrap; text-shadow: 0 1px 2px #000, 0 0 4px #000; pointer-events: none; }
 
 /* ---- draw choice: docked in the lane, so both boards stay visible ---- */
-.b-draw { display: none; grid-column: 2 / span 2; grid-row: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; height: calc(var(--lane-h) - 8px); }
+.b-draw { display: none; grid-column: 1 / span 2; grid-row: 2; min-width: 0; align-items: center; justify-content: center; gap: 16px; height: calc(var(--lane-h) - 52px); }
 .b-draw.show { display: flex; }
 .b-lane.drawing { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(242, 182, 50, 0.6), 0 0 24px rgba(242, 182, 50, 0.25); }
 .b-lane.drawing .b-prompt, .b-lane.drawing .b-lane-right { display: none; }
 .b-draw-title {
-    flex: none; align-self: center; text-align: right; white-space: nowrap;
-    font-family: var(--font-display); font-weight: 700; font-size: 14px; line-height: 1.15; color: var(--gold);
+    flex: none; align-self: center; text-align: right; white-space: nowrap; display: flex; flex-direction: column;
+    font-family: var(--font-display); font-weight: 700; font-size: 13px; line-height: 1.1; color: var(--gold);
 }
+.b-draw-title strong { font-size: 18px; }
+.b-draw-opt { display: flex; align-items: center; gap: 6px; }
+.b-draw-label { font-size: 13px; font-weight: 800; line-height: 1.1; white-space: nowrap; color: var(--parchment); text-shadow: 0 1px 2px #000; }
 .b-draw-buttons { flex: none; min-width: 0; display: flex; align-items: center; gap: clamp(8px, 1.2cqw, 16px); }
 .b-draw-buttons > * { flex: none; }
 /* Four square picture buttons; the name and details are in the tooltip. */
-.b-ibtn.b-draw-btn { --s: clamp(44px, calc(var(--lane-h) - 14px), 84px); width: var(--s); height: var(--s); border-radius: 14px; }
+.b-ibtn.b-draw-btn { --s: clamp(36px, calc(var(--lane-h) - 60px), 64px); width: var(--s); height: var(--s); border-radius: 14px; }
 .b-ibtn.b-draw-btn .b-ctrl-icon { width: 68%; height: 68%; }
 .b-draw-btn[data-choice="deck"] { border-color: #3ddc84; }
 .b-draw-btn[data-choice="axiom"] { border-color: #c9a45a; }
@@ -313,6 +361,9 @@ button.bc { cursor: pointer; }
     padding: 0.15em 0.25em; border-radius: 0.5em; background: rgba(12, 8, 20, 0.88); border: 1px solid rgba(242, 182, 50, 0.6);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+.bc-name.long { font-size: max(10px, 0.86em); }
+.bc-name.xlong { font-size: max(9.5px, 0.78em); white-space: normal; line-height: 1.02; overflow: visible; text-overflow: clip; transform: translateY(-25%); }
+.bc.big .bc-name.long, .bc.big .bc-name.xlong { font-size: 0.92em; white-space: normal; transform: none; }
 .bc-text { position: absolute; z-index: 3; left: 10%; right: 10%; top: 68.5%; bottom: 8%; overflow: hidden; font-size: max(10px, 0.72em); line-height: 1.15; display: flex; flex-direction: column; justify-content: center; gap: 0.15em; }
 .bc.hand .bc-text .bc-line { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .bc.hand .bc-text .bc-kind { display: none; }
@@ -329,6 +380,8 @@ button.bc { cursor: pointer; }
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
     font-size: max(11px, 0.95em); line-height: 1.15; overflow: hidden;
 }
+.bc.board .bc-brief { left: 22%; right: 22%; top: 70%; bottom: 4%; gap: 1px; }
+.bc.board .bc-ab-kind { font-size: max(10px, 0.86em); }
 .bc-kws-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 100%; }
 .bc-kw {
     display: inline-flex; align-items: center; gap: 2px;
@@ -483,6 +536,8 @@ button.bc { cursor: pointer; }
     border-top: 2px solid rgba(242, 182, 50, 0.85); border-bottom: 2px solid rgba(242, 182, 50, 0.85);
 }
 .b-banner.show { display: block; animation: b-banner 1.9s ease forwards; }
+.b-banner.theirs { top: 16%; }
+.b-banner.theirs .b-banner-title { color: #ffb39a; }
 .b-banner-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 5.6cqh, 56px); line-height: 1.1; color: var(--gold); text-shadow: 0 2px 0 #000, 0 0 18px rgba(242, 182, 50, 0.6); }
 .b-banner-sub { font-size: 15px; font-weight: 700; opacity: 0.9; }
 @keyframes b-banner { 0% { opacity: 0; } 18% { opacity: 1; } 72% { opacity: 1; } 100% { opacity: 0; } }
@@ -573,8 +628,9 @@ body.calm-motion .battle .b-inspect.show { animation: b-fade-in 0.12s ease-out !
 /* ---- side panel ---- */
 .b-side { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; font-size: 13px; }
 .b-side > * { flex: none; }
-.b-side > .b-rules[open] { flex: 1 1 auto; min-height: 90px; overflow-y: auto; }
-.b-side > .b-wheel[open] { flex: 0 1 auto; max-height: 50%; min-height: 0; overflow-y: auto; }
+.b-side > .b-rules { flex: none; }
+.b-side > .b-wheel[open] { flex: 0 1 auto; max-height: 40%; min-height: 0; overflow-y: auto; }
+.b-side > .b-recent { flex: none; }
 .b-side .panel { padding: 8px 10px; }
 .b-side-top { display: flex; gap: 8px; flex-wrap: wrap; padding: 2px 2px 4px; }
 .b-confirm { width: min(440px, calc(100% - 32px)); }
@@ -585,8 +641,25 @@ body.calm-motion .battle .b-inspect.show { animation: b-fade-in 0.12s ease-out !
 .b-keywords dt { color: var(--rift); }
 .b-rule-summary dt { font-weight: 700; color: var(--gold); }
 .b-rule-summary dd { margin: 0; }
-.b-rules h4 { margin: 8px 0 3px; font-size: 13px; }
-.b-rule-line { font-size: 12px; margin: 3px 0; }
+/* Rules in play: picture tiles, the changed ones gold. */
+.b-rules-head { display: flex; flex-direction: column; margin-bottom: 6px; }
+.b-rules-head strong { font-family: var(--font-display); font-size: 16px; color: var(--gold); }
+.b-rules-sub { font-size: 11.5px; opacity: 0.8; }
+.b-rule-tiles { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.b-rtile {
+    position: relative; display: flex; align-items: center; gap: 6px; min-width: 0; padding: 4px 6px 4px 4px; cursor: help;
+    border-radius: 10px; background: rgba(239, 227, 200, 0.07); border: 1px solid rgba(239, 227, 200, 0.25);
+}
+.b-rtile:hover, .b-rtile:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.b-rtile-art { width: 46px; height: 46px; flex: none; border-radius: 6px; object-fit: cover; background: rgba(0, 0, 0, 0.3); }
+.b-rtile-art.glyph { display: grid; place-items: center; font-size: 20px; color: var(--gold); }
+.b-rtile-words { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.b-rtile-cat { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #c9b88f; }
+.b-rtile-val { font-size: 13.5px; font-weight: 700; }
+.b-rtile.changed { background: linear-gradient(rgba(242, 182, 50, 0.28), rgba(242, 182, 50, 0.12)); border-color: var(--gold); box-shadow: 0 0 10px rgba(242, 182, 50, 0.45); }
+.b-rtile.changed .b-rtile-cat { color: var(--gold); }
+.b-rtile-new, .b-rtile-budget { position: absolute; right: 4px; top: -7px; font-size: 9.5px; font-weight: 800; line-height: 1.3; padding: 0 5px; border-radius: 6px; color: var(--ink); background: var(--gold); }
+.b-rtile-budget { background: #9fd8ff; }
 .battle.reverse-goal .b-rules { border-color: var(--gold); }
 .b-log-wrap { min-height: 0; }
 .b-log { margin: 6px 0 0; padding-left: 34px; font-size: 12px; height: clamp(110px, 30cqh, 260px); overflow-y: auto; }
@@ -713,3 +786,205 @@ body.calm-motion .battle .b-bag-tray { animation: b-fade-in 0.12s ease-out !impo
 .bc.tactic:has(.bc-frame.art) .bc-need { color: #8e1b12; }
 .bc.tactic:has(.bc-frame.art) .bc-kind { filter: brightness(0.7) saturate(1.3); }
 .b-fate-track.art .pip:not(.marker) { background: #e8d6a8; border-color: #2a1a0e; }
+
+/* ---- reveal: a card shown big over the opponent's side (what they play; a rule change) ----
+ * It fades in and out (no movement), and the next opponent move waits for it (JS). */
+.b-reveal {
+    position: absolute; left: 50%; top: 3%; transform: translateX(-50%); z-index: 48; pointer-events: none;
+    display: none; flex-direction: column; align-items: center; gap: 6px;
+}
+.b-reveal.show { display: flex; animation: b-fade-in 0.2s ease-out; }
+.b-reveal .bc.big { --w: clamp(130px, 21cqh, 210px); }
+.b-reveal-caption {
+    font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.6cqh, 24px); color: var(--gold); white-space: nowrap;
+    padding: 2px 16px; border-radius: 12px; background: rgba(14, 10, 24, 0.94); border: 2px solid rgba(242, 182, 50, 0.8);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+}
+.b-reveal-rule { display: flex; align-items: center; gap: 12px; }
+.b-reveal-what, .b-reveal-reset {
+    max-width: 220px; font-size: 18px; font-weight: 800; line-height: 1.25; padding: 10px 14px; border-radius: 12px;
+    background: rgba(14, 10, 24, 0.95); border: 2px solid var(--gold); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+}
+.b-reveal-reset { display: flex; align-items: center; gap: 10px; }
+.b-reveal-reset .b-reset-icon { width: 64px; height: 64px; font-size: 40px; }
+body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !important; }
+
+/* ---- creature states on the table: a veil with one word (no motion) ---- */
+.bc-state {
+    position: absolute; z-index: 5; left: 8%; right: 8%; top: 5%; height: 52%; pointer-events: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    border-radius: 40% 40% 4% 4% / 24% 24% 3% 3%; background: rgba(10, 12, 30, 0.58);
+    font-weight: 800; font-size: max(11px, 1em); text-transform: uppercase; letter-spacing: 0.06em; text-shadow: 0 1px 2px #000;
+}
+.bc-state .b-icon.veil { width: 2.2em; height: 2.2em; font-size: 1.3em; }
+.bc-state.sleep { color: #a9c8ff; }
+.bc-state.frozen { color: #9fe8ff; background: rgba(40, 90, 140, 0.5); }
+.bc-state.silenced { top: auto; bottom: 40%; height: auto; background: rgba(40, 10, 10, 0.75); border-radius: 6px; left: 12%; right: 12%; color: #ffb3a8; font-size: max(10px, 0.8em); }
+.b-ready-tag {
+    position: absolute; z-index: 6; left: 50%; top: -10px; transform: translateX(-50%); pointer-events: none; white-space: nowrap;
+    font-size: 11.5px; font-weight: 800; line-height: 1.35; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink); background: var(--ready); padding: 0 8px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+/* "Danger": the enemy board could take all my hearts. */
+.b-danger {
+    position: absolute; z-index: 4; left: calc(100% + max(42px, var(--hero) * 0.7)); bottom: 2px; white-space: nowrap;
+    display: flex; flex-direction: column; line-height: 1.1; padding: 2px 8px; border-radius: 8px;
+    background: rgba(90, 10, 20, 0.92); border: 2px solid #ff4a4a; box-shadow: 0 0 12px rgba(255, 74, 74, 0.6);
+}
+.b-danger strong { font-size: 13px; color: #ffb3b3; }
+.b-danger span { font-size: 11.5px; }
+.b-float.rule { color: var(--gold); font-size: 17px; }
+
+/* ---- recent plays: the last moves as small pictures (newest first); hover for the card ---- */
+.b-recent-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; margin-bottom: 6px; }
+.b-recent-head strong { font-family: var(--font-display); font-size: 14px; color: var(--gold); }
+.b-recent-head span { font-size: 11px; opacity: 0.75; }
+.b-recent-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.b-recent-tile { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: help; min-width: 0; }
+.b-recent-tile > img, .b-recent-tile > .b-recent-glyph, .b-recent-tile > .b-icon {
+    width: 100%; aspect-ratio: 1; border-radius: 10px; object-fit: cover; object-position: 50% 25%;
+    border: 3px solid #6c5a80; background: radial-gradient(#3b2f52, #160f22); display: grid; place-items: center; font-size: 22px; color: var(--gold);
+}
+.b-recent-tile.mine > :first-child { border-color: var(--rift); }
+.b-recent-tile.theirs > :first-child { border-color: #ff8a6a; }
+.b-recent-tile.fate > :first-child { border-color: var(--gold); }
+.b-recent-tile.newest > :first-child { box-shadow: 0 0 10px rgba(242, 182, 50, 0.6); }
+.b-recent-tile:not(.newest) { opacity: 0.8; }
+.b-recent-tile:hover, .b-recent-tile:focus-visible { opacity: 1; outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 10px; }
+.b-recent-move { position: absolute; right: -4px; top: -6px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: var(--ink); border: 1px solid var(--gold); color: var(--gold); }
+.b-recent-cap { font-size: 10px; line-height: 1.1; text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.85; }
+
+/* ---- How to play (js/ui/battles.js): a turn in four steps, then one line per idea ---- */
+.htp { display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.3; }
+.htp-turn { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-bottom: 4px; }
+.htp-step { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; border-radius: 10px; background: rgba(242, 182, 50, 0.1); border: 1px solid rgba(242, 182, 50, 0.5); font-size: 12.5px; }
+.htp-step strong { font-family: var(--font-display); color: var(--gold); font-size: 15px; }
+.htp-row { display: flex; gap: 8px; align-items: baseline; }
+.htp-icon { flex: none; width: 1.4em; text-align: center; }
+.htp h3 { margin: 6px 0 0; font-size: 15px; }
+.htp-keys { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 13px; }
+.htp-key { display: flex; flex-direction: column; }
+@media (max-width: 640px) { .htp-turn { grid-template-columns: 1fr 1fr; } .htp-keys { grid-template-columns: 1fr; } }
+
+/* ---- round 2 legibility fixes ---- */
+/* The big card's text stays clear of the attack/health gems. */
+.bc.big .bc-text { left: 12%; right: 12%; bottom: 14%; justify-content: flex-start; }
+.bc-line-note { opacity: 0.8; font-style: italic; }
+/* Hand cards: the short words, a little larger. */
+.bc.hand .bc-text { font-size: max(11px, 0.78em); left: 11%; right: 11%; bottom: 11%; }
+.bc.hand .bc-text .bc-line { -webkit-line-clamp: 3; }
+/* The middle bar: two lines at most; bigger action buttons. */
+.b-ask { -webkit-line-clamp: 1; }
+.b-prompt .b-buttons .btn { font-size: 14px; padding: 4px 14px; }
+.b-news { font-size: 12.5px; }
+.b-draw-label { display: flex; flex-direction: column; }
+.b-draw-label small { font-size: 11px; font-weight: 700; color: var(--gold); opacity: 0.95; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.b-draw-recap { max-width: 300px; font-size: 12.5px; font-weight: 700; line-height: 1.25; color: #ffb39a; padding: 4px 10px; border-left: 2px solid rgba(255, 138, 106, 0.6); }
+/* Energy: crystals in rows of five (never a tall column). */
+.b-crystals { max-width: 92px; }
+.b-energy.small .b-crystals { max-width: 66px; }
+/* The colour wheel summary: one short line. */
+.b-end-rules { margin: 6px 0 10px; padding: 8px 10px; border-radius: 10px; background: rgba(242, 182, 50, 0.1); border: 1px solid rgba(242, 182, 50, 0.5); font-size: 14px; line-height: 1.35; }
+.b-coach-say { margin: 6px 0; padding: 6px 10px; border-radius: 10px; background: rgba(242, 182, 50, 0.12); border-left: 3px solid var(--gold); font-weight: 700; line-height: 1.35; }
+/* An event waiting at the reel's right edge keeps its label inside the track. */
+.b-fs:last-child > .b-fev { transform: translate(-72%, -50%); }
+.b-fs:first-child > .b-fpast { transform: translate(-20%, -50%); }
+
+/* ---- round 3: Recent plays as a column at the table's left edge (newest on top) ---- */
+.b-recent { position: absolute; z-index: 9; left: 8px; top: calc(var(--hero) + 22px); width: 54px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 4px 3px; border-radius: 12px; background: rgba(12, 8, 20, 0.6); border: 1px solid rgba(242, 182, 50, 0.3); }
+.b-recent.empty { display: none; }
+.b-recent .b-recent-head { font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin: 0; display: block; }
+.b-recent .b-recent-list { display: flex; flex-direction: column; gap: 6px; }
+.b-recent .b-recent-tile { width: 46px; }
+.b-recent-who { position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%); font-size: 9.5px; font-weight: 800; line-height: 1.25; padding: 0 4px; border-radius: 5px; color: var(--ink); background: #ff8a6a; }
+.b-recent-tile.mine .b-recent-who { background: var(--rift); }
+.b-recent-tile.fate .b-recent-who { background: var(--gold); }
+.b-recent-cap { display: none; }
+/* Leave room so the column never sits under the boards' first card. */
+.b-board { padding-left: 70px; padding-right: 70px; }
+/* Notes under a magnified card: the full ability text first. */
+.b-note-line.b-ability { font-size: 13.5px; }
+.b-note-line.b-ability b { color: var(--gold); }
+.b-note-hint { opacity: 0.75; font-size: 12px; }
+.b-note-line.b-why { color: #ffb3a8; font-weight: 700; }
+.bc-kw.off { text-decoration: line-through; opacity: 0.55; }
+/* Small labels: 11px at least. */
+.b-fate-now-tag { font-size: 10.5px; }
+.b-fev-label { font-size: 11px; }
+.b-energy.small .b-energy-label { font-size: 10.5px; }
+.bc.hand .bc-name.long { font-size: max(11px, 0.86em); }
+.bc.hand .bc-name.xlong { font-size: max(10.5px, 0.8em); }
+.bc.hand .bc-text .bc-line { -webkit-line-clamp: 2; }
+/* "No ability" sits over the picture, never on the name. */
+.bc-state.silenced { top: 8%; bottom: auto; }
+.b-draw-label { cursor: pointer; }
+.b-lane { padding-left: 72px; }
+/* Card plays left this turn, beside my energy. */
+.b-plays { grid-column: 1 / span 2; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #ffd98a; }
+.b-plays strong { font-size: 18px; }
+.b-plays-pips { display: flex; gap: 3px; }
+.b-play-pip { width: 12px; height: 17px; border-radius: 3px; border: 2px solid #b08a3a; background: rgba(0, 0, 0, 0.4); }
+.b-play-pip.on { background: linear-gradient(#ffe08a, #e0a52a); border-color: #fff3c4; box-shadow: 0 0 6px rgba(242, 182, 50, 0.7); }
+.b-plays.none { color: #ff9a9a; }
+/* This turn's Fate markers sit on the past side of NOW. */
+.b-fs.now .b-fpast { left: 8%; }
+.b-hand-tag.warn { background: #ff8a6a; }
+.b-choice-out { display: block; font-size: 12.5px; font-weight: 700; color: var(--rift); margin-top: 2px; }
+.b-predict div:nth-child(3) { color: #ffb3a8; white-space: normal; max-width: 180px; }
+
+/* ---- round 4 ---- */
+/* Fate: label | reel | the chip beyond the reel | summary. */
+.b-fate { grid-template-columns: auto minmax(0, 1fr) auto minmax(150px, auto); }
+.b-fate-far { display: flex; align-items: center; gap: 2px; min-width: 64px; }
+.b-fate-far.none { min-width: 0; }
+.b-far-arrow { font-size: 16px; font-weight: 800; color: var(--gold); opacity: 0.8; }
+.b-fate-far .b-fev { position: static; transform: none; }
+.b-fs:last-child > .b-fev { transform: translate(-50%, -50%); }
+/* A card bent time: the summary flashes once (colour only, no movement). */
+.b-fate-sum.bent strong { animation: b-bent 1.6s ease-out; }
+@keyframes b-bent { 0%, 40% { color: #fff; text-shadow: 0 0 10px var(--rift); } }
+/* Many rule tiles: two columns, smaller pictures. */
+.b-rule-tiles.compact { grid-template-columns: 1fr 1fr; gap: 4px; }
+.b-rule-tiles.compact .b-rtile-art { width: 30px; height: 30px; }
+.b-rule-tiles.compact .b-rtile-val { font-size: 12px; }
+.b-rule-tiles.compact .b-rtile-cat { font-size: 10px; }
+/* Danger sits above my portrait, clear of the pile counts. */
+.b-danger { left: 50%; bottom: calc(100% + 18px); transform: translateX(-50%); flex-direction: row; gap: 6px; align-items: baseline; }
+/* Card plays: bigger pips. */
+.b-play-pip { width: 15px; height: 21px; }
+.b-plays { font-size: 12px; }
+.b-recent-who { font-size: 11px; }
+/* Long hand names wrap to two lines instead of being cut. */
+.bc.hand .bc-name.long { white-space: normal; line-height: 1.02; overflow: visible; text-overflow: clip; transform: translateY(-25%); }
+.b-prompt.has-buttons .b-ask { -webkit-line-clamp: 2; font-size: 13px; }
+.b-recent-tile > .b-icon { background-size: 80% 80%; background-repeat: no-repeat; background-position: center; }
+.b-fate { grid-template-columns: auto minmax(0, 1fr) auto minmax(150px, 250px); }
+.b-fate-sum span { overflow: hidden; text-overflow: ellipsis; }
+.b-news.recap { color: #ffb39a; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.b-bag-btn.has-use { box-shadow: 0 0 0 3px var(--rift), 0 0 14px rgba(63, 224, 208, 0.75); }
+
+/* ---- round 5 ---- */
+.b-danger { left: 0; transform: none; }
+.b-recent { top: calc(var(--hero) + 44px); }
+.b-draw-recap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 340px; }
+.bc.hand .bc-name { font-size: max(11.5px, 1em); }
+.bc.hand .bc-name.long { font-size: max(11.5px, 0.86em); }
+.bc.hand .bc-name.xlong { font-size: max(11px, 0.8em); }
+.bc-ab-kind, .bc.board .bc-ab-kind { font-size: max(11px, 0.86em); }
+.b-rtile-new, .b-rtile-budget { font-size: 11px; }
+
+/* Granny's panel: larger type for a projector and non-native readers. */
+.b-coach-text { font-size: 15px; line-height: 1.4; }
+.b-coach-say { font-size: 14.5px; }
+.b-coach-say.warn { border-left-color: #ff6a3d; background: rgba(255, 106, 61, 0.14); }
+
+/* ---- round 5 follow-ups (after the last critic round) ---- */
+.b-draw-recap { white-space: normal; max-width: 420px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.b-news.recap { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.bc.board .bc-name { font-size: max(12px, 1em); }
+.bc.board .bc-name.long { font-size: max(11px, 0.86em); }
+.bc.board .bc-kws-row { flex-wrap: nowrap; overflow: hidden; }
+.bc.board .bc-kw { font-size: max(9.5px, 0.7em); padding: 0 0.3em; }
+
+.b-compare { font-size: 14px; }
+.b-ask { font-size: 14px; }

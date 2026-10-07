@@ -59,11 +59,16 @@
     const Rift = root.Rift;
     const ME = 0;
     const OPP = 1;
-    const AI_DELAY = 850;
-    const REPLY_DELAY = 950;
-    const PREVIEW = 600;
+    // Pacing (the teacher found the opponent's turn too fast to follow): each opponent move waits
+    // AI_DELAY, an attack shows its arrow for PREVIEW first, and a card the opponent plays is shown
+    // big for REVEAL before it lands. A rule change shows its card for RULE_SHOW.
+    const AI_DELAY = 1250;
+    const REPLY_DELAY = 1300;
+    const PREVIEW = 1000;
+    const REVEAL = 1500;
+    const RULE_SHOW = 2600;
     const DRAG_START = 7;
-    const HOVER_DELAY = 380;    // ms before the big preview opens under a resting mouse
+    const HOVER_DELAY = 220;    // ms before the big preview opens under a resting mouse
     const SETTLE = 170;         // ms for hand cards to slide into their new places
 
     const el = (...a) => Rift.el(...a);
@@ -91,6 +96,29 @@
         ['Last Word', 'It works when the creature is defeated.'],
         ['Activate', "Pay the energy (⚡) to use it. It uses the creature's attack this turn."],
     ];
+    // The rule tiles ("Rules in play"): the four core rules always show (their basic value, or the
+    // axiom that changed them); any other changed category adds a tile. [category, label, basic words,
+    // basic card art (a "back to normal" axiom), the basic rule in one sentence].
+    const CORE_RULES = [
+        ['victory', 'Win', 'Enemy hero to 0 ❤ wins', 'normal-hearts', 'Take the enemy hero to zero hearts to win.'],
+        ['combat', 'Fights', 'Both creatures hit', null, 'In a fight both creatures deal damage equal to their attack. Damage stays.'],
+        ['plays', 'Card plays', '2 per turn', 'two-plays', 'You may play 2 cards per turn: creatures, tactics and rule cards together. Attacking is free.'],
+        ['attacks', 'Attacks', 'Each creature attacks once', 'three-actions', 'Each ready creature may attack once per turn. New creatures wait a turn (unless Swift).'],
+        ['energy', 'Energy', '+1 each turn', null, 'Your energy grows by 1 each turn (up to 10) and refills. Cards and abilities cost energy.'],
+    ];
+    const RULE_LABEL = {
+        victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
+        arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus',
+    };
+    // The basic rule of the other categories, in a few words (what a new rule card replaces).
+    const BASIC_WORDS = {
+        cost: 'cards cost what they show', draw: 'draw 1 card', healing: 'damage stays', arrival: 'new creatures wait a turn',
+        targeting: 'attack Guard first', defeat: 'defeated creatures go to the discard pile', power: 'no extra attack',
+        colour: 'the normal colour wheel', abilities: 'abilities work', growth: 'no growth', damage: 'a hit takes hearts equal to its attack',
+        hand: 'no hand limit', bonus: 'no bonus',
+    };
+    const RULE_GLYPH = { victory: '🏆', combat: '⚔', attacks: '➶', energy: '⚡', plays: '🂠', hand: '✋', bonus: '🎁' };
     const TACTIC_ICON = {
         counterexample: '✗', 'pep-talk': '📣', 'stand-firm': '🛡️', eureka: '💡', 'second-wind': '❤', 'occams-razor': '🪒',
         rethink: '↺', 'big-claims': '⚖️', clockwork: '⏱', 'look-it-up': '🔎', 'peer-review': '👥', recall: '📜',
@@ -103,9 +131,9 @@
     };
     const DRAW_TEXT = {
         deck: ['Draw from your deck', 'A creature or tactic card'],
-        axiom: ['Take an axiom card', 'A rule card for your hand'],
-        forward: ['Fate 2 closer', 'No card. The next Fate event comes 2 turns sooner'],
-        rewind: ['Fate 2 away', 'No card. The next Fate event comes 2 turns later'],
+        axiom: ['Take a rule card', 'A rule card for your hand'],
+        forward: ['Fate sooner', 'No card. Every Fate event comes 1 turn sooner'],
+        rewind: ['Fate later', 'No card. Every Fate event comes 1 turn later'],
     };
     // Picture buttons: optional art, else a small inline SVG in the game's palette.
     const TIP_DELAY = 250;      // ms before a button's name shows under a resting mouse
@@ -136,6 +164,8 @@
         replay: svg('<path d="M4.5 12h5l7-6v20l-7-6h-5z" fill="#f2b632" stroke="#b08a3a" stroke-width="1.6" stroke-linejoin="round"/>'
             + '<path d="M21 11.5a6 6 0 0 1 0 9M24.5 8a11 11 0 0 1 0 16" fill="none" stroke="#3fe0d0" stroke-width="2.4" stroke-linecap="round"/>'),
     };
+    // The word under each draw button (the tooltip has the details).
+    const DRAW_LABEL = { deck: 'Your deck', axiom: 'Rule card', forward: 'Fate sooner', rewind: 'Fate later' };
     const DRAW_ART = { deck: 'ui/btn-draw-deck', axiom: 'ui/btn-draw-axiom', forward: 'ui/btn-fate-forward', rewind: 'ui/btn-fate-rewind' };
     let tipCount = 0;
 
@@ -243,6 +273,11 @@
                 dom.arrow = svgArrow(),
                 dom.floats = el('div.b-floats'),
                 dom.banner = el('div.b-banner', { 'aria-hidden': 'true' }),
+                // A card shown big over the opponent's side: what the opponent plays, a rule change.
+                dom.reveal = el('div.b-reveal', { 'aria-live': 'polite' }),
+                // Recent plays (newest at the top): a column of small pictures at the table's left edge;
+                // hover shows the card and what happened.
+                dom.recent = el('section.b-recent', { 'aria-label': 'Recent plays' }),
             ]),
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
             dom.side = el('aside.b-side', {}, [
@@ -251,9 +286,8 @@
                     canLeave ? iconButton('.b-leave', { key: 'leave', name: 'Leave match', detail: 'Stop this match. Nothing is at stake.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: askLeave }) : null,
                     iconButton('.b-side-close', { key: 'close', name: 'Close', detail: 'Hide the rules and the log.', svg: CTRL_SVG.close, onclick: () => toggleSide(false) }),
                 ]),
+                dom.rules = el('section.b-rules.panel', { 'aria-label': 'Rules in play' }),
                 dom.wheel = wheelLegend(),
-                dom.rules = el('details.b-rules.panel', { open: true }),
-                el('details.b-log-wrap.panel', { open: true }, [el('summary', { text: 'What happened' }), dom.log = el('ol.b-log')]),
             ]),
             iconButton('.b-side-toggle', { key: 'side', name: 'Rules & log', detail: 'The rules now, the keywords, the colour wheel and what happened.', art: 'ui/btn-rules', svg: CTRL_SVG.rules, onclick: () => toggleSide() }),
             // The big preview sits over the side panel (or the far edge of the table), never over the
@@ -291,9 +325,6 @@
         screen.addEventListener('pointerdown', ev => { if (!ev.pointerType || ev.pointerType === 'mouse') hideInspect(); });
         // A tooltip opened by a long-press stays until the next tap anywhere.
         screen.addEventListener('pointerdown', () => { if (ui.tip && ui.tip.sticky) hideTip(); });
-        // Only one of the Colour wheel and Rules now is open at a time, so neither is squeezed.
-        dom.wheel.addEventListener('toggle', () => { if (dom.wheel.open) dom.rules.open = false; });
-        dom.rules.addEventListener('toggle', () => { if (dom.rules.open) dom.wheel.open = false; });
         screen.addEventListener('dragstart', e => e.preventDefault());
         screen.addEventListener('contextmenu', e => { if (e.target && e.target.closest && e.target.closest('[data-cid], [data-tip]')) e.preventDefault(); });
 
@@ -303,8 +334,10 @@
         }
         function openHelp() {
             if (help || ui.confirm || !Rift.Battles || !Rift.Battles.rules) return;
-            clearTimeout(ui.timer);
-            help = Rift.Battles.rules(() => { help = null; if (!ui.ended) schedule(); });
+            // The opponent pauses only once the window is really open.
+            let opened = null;
+            try { opened = Rift.Battles.rules(() => { help = null; if (!ui.ended) schedule(); }); } catch (e) { console.error('[battle] How to play', e); }
+            if (opened) { help = opened; clearTimeout(ui.timer); }
         }
 
         // ---- legality ----
@@ -316,7 +349,7 @@
             if (!myTurn()) return [];
             const L = E.legalActions(state);
             const st = step();
-            if (guide) return st ? L.filter(matches(st.expect)) : [];
+            if (guide) return st ? L.filter(a => matches(st.expect)(a) || (st.trap && matches(st.trap.expect)(a))) : [];
             return L;
         }
         const name = cid => E.cardName(state, cid);
@@ -342,6 +375,10 @@
             const by = decider();
             const before = rects();
             const guided = guide && by === ME && !ui.busy && step() && matches(step().expect)(action);
+            if (action.type === 'end' && by === ME) ui.snap = snapshot();
+            if (by === ME && action.type !== 'draw') ui.recapTurn = null;   // the recap has been read
+            // The lesson's trap: the move is not made; Granny shows why it would backfire.
+            if (guide && by === ME && !ui.busy && step() && step().trap && matches(step().trap.expect)(action) && !matches(step().expect)(action)) { springTrap(step().trap); return; }
             try {
                 state = E.applyAction(state, Object.assign({ player: by }, action));
             } catch (e) {
@@ -355,24 +392,66 @@
             ui.sel = null;
             ui.preview = null;
             ui.note = '';
-            if (guided) { ui.busy = true; ui.queue = (step().replies || []).slice(); }
+            if (guided) { ui.busy = true; ui.queue = (step().replies || []).slice(); if (ui.queue.some(r => r.say)) stopVoice(); }
             noteEvents(state.lastEvents);
             render();
             effects(state.lastEvents, before);
+            ruleReveal(state.lastEvents);
             if (waiting && state.players[ME].hand.includes(waiting)) setNote(name(waiting) + ' was not played. It is back in your hand: its Entrance needs a target first.');
             schedule();
         }
 
-        // Show what the opponent (or a scripted reply) is about to do, then do it.
-        function perform(action) {
+        // Show what the opponent (or a scripted reply) is about to do, then do it. A card the opponent
+        // plays is first shown big with a caption (a rule card is shown once it is in play, by
+        // ruleReveal); an attack shows its arrow.
+        function perform(action, revealed) {
             if (ui.ended) return;
             const by = decider();
             const target = action.target;
+            if (by === OPP && !revealed && action.type === 'play' && state.cards[action.cid]) {
+                const what = state.cards[action.cid].kind === 'tactic' ? 'plays a tactic' : 'plays a creature';
+                const aim = target ? ' on ' + targetName(target) : '';
+                showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL, '', false);
+                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                return;
+            }
             if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate')) {
                 ui.preview = { cid: action.cid, target, by, action };
                 render();
                 ui.timer = setTimeout(() => { ui.preview = null; act(action); }, PREVIEW);
             } else act(action);
+        }
+
+        // The big card over the opponent's side, with a caption; it fades after ms. While a reveal is
+        // up, the opponent and the lesson wait (schedule), so each move can be read before the next.
+        // resume: call schedule() when it fades (false when the caller has its own timer running).
+        function showReveal(card, caption, ms, cls, resume) {
+            clearTimeout(ui.revealTimer);
+            dom.reveal.innerHTML = '';
+            dom.reveal.className = 'b-reveal' + (cls ? ' ' + cls : '');
+            put(dom.reveal, el('div.b-reveal-caption', { text: caption }), card);
+            void dom.reveal.offsetWidth;
+            dom.reveal.classList.add('show');
+            ui.holding = true;
+            ui.revealTimer = setTimeout(() => {
+                dom.reveal.classList.remove('show');
+                ui.holding = false;
+                if (resume !== false) schedule();
+            }, ms);
+        }
+        // A rule changed (a card played or Fate): show the card and what it changes, for everyone.
+        function ruleReveal(events) {
+            const ev = events.filter(e => e.t === 'axiom').pop();
+            const reset = events.some(e => e.t === 'reset');
+            if (!ev && !reset) return;
+            if (ev) {
+                const ax = (Rift.data.axioms || {})[ev.id] || { name: ev.id };
+                const by = ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
+                const what = (RULE_LABEL[ax.category] || ax.category) + ': ' + (ax.short || ax.name);
+                showReveal(el('div.b-reveal-rule', {}, [axiomCardEl(ev.id, { size: 'big' }), el('div.b-reveal-what', { text: what })]), by + '!', RULE_SHOW, 'rule');
+            } else {
+                showReveal(el('div.b-reveal-rule', {}, [el('div.b-reveal-reset', {}, [icon('ui/fate-reset', '↺', 'b-reset-icon'), el('div', { text: 'All rules go back to the basics.' })])]), 'Fate: reset!', RULE_SHOW, 'rule');
+            }
         }
 
         function aiAction() {
@@ -387,15 +466,22 @@
         function schedule() {
             clearTimeout(ui.timer);
             if (ui.ended || help || ui.confirm) return;
+            // A card shown big (a reveal) is read first: everything waits until it fades.
+            if (ui.holding || ui.saying) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
             if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a); return; }
             if (ui.queue.length) {
+                // A narration line ({ say }) in the lesson's replies: show it, say it, and go on only
+                // when the voice has finished (each reply is its own small block).
+                if (!ui.queue[0].type && ui.queue[0].say) { narrate(ui.queue.shift().say); return; }
                 ui.timer = setTimeout(() => perform(ui.queue.shift()), REPLY_DELAY);
                 return;
             }
             if (guide && ui.busy) {
                 ui.busy = false;
+                ui.say = '';
                 ui.step += 1;
+                startHintClock();
                 render();
                 speak();
                 return;
@@ -440,6 +526,7 @@
             const c = state.cards[cid];
             const P = state.players[ME];
             if (P.hand.includes(cid)) {
+                if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn). You can still attack.';
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
                 if (c.kind === 'creature' && P.board.length >= state.options.boardLimit) return 'Your side is full.';
@@ -506,48 +593,52 @@
 
         // Small cards (board, hand) show keyword chips and the ability's name in readable type;
         // the big preview (hover, focus or long-press) shows the full text.
-        function briefLines(d) {
+        // On the table (size 'board') a card shows only the keyword chips and the ability's timing
+        // (Entrance / Last Word / Activate), so nothing is cut off; the hand also shows the ability's name.
+        function briefLines(d, size) {
+            const onTable = size === 'board';
+            const ignored = k => k === 'guard' && E.rules(state).ignoreGuard;
             const kws = d.keywords.map(k => has('ui/kw-' + k)
-                ? el('span.bc-kw.art', {}, [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), KW_NAME[k] || k])
-                : el('span.bc-kw', { text: KW_NAME[k] || k }));
+                ? el('span.bc-kw.art' + (ignored(k) ? '.off' : ''), { title: ignored(k) ? 'Guard is ignored under the current rules.' : null }, [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), KW_NAME[k] || k])
+                : el('span.bc-kw' + (ignored(k) ? '.off' : ''), { text: KW_NAME[k] || k }));
             // The timing word comes first, in words: "Last Word: Metaverse", "Activate (1⚡): Well, Actually".
             const abilities = d.lines.map(l => el('span.bc-ab.' + l.kind + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
                 has('ui/ab-' + l.kind) ? icon('ui/ab-' + l.kind, '', 'ab', AB_KIND[l.kind] || l.name) : null,
-                timing(l) ? el('span.bc-ab-kind', { text: timing(l) + ':' }) : null,
-                el('span.bc-ab-name', { text: l.name }),
+                timing(l) ? el('span.bc-ab-kind', { text: onTable ? AB_KIND[l.kind] : timing(l) + ':' }) : null,
+                onTable && timing(l) ? null : el('span.bc-ab-name', { text: l.name }),
             ]));
             return el('div.bc-brief', {}, [kws.length ? el('div.bc-kws-row', {}, kws) : null].concat(abilities,
                 !d.lines.length && !d.keywords.length ? [el('span.bc-ab.none', { text: d.silenced ? 'No abilities' : '—' })] : []));
         }
 
+        const upFirst = t => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
         const ordinal = n => n + (n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th');
+        // Long names get a smaller type size (and may wrap to two lines) instead of being cut off.
+        const fitName = n => (n.length > 18 ? '.xlong' : n.length > 11 ? '.long' : '');
 
         function creatureFace(cid, size) {
             const d = E.describe(state, cid);
             const frame = bg('ui/card-' + d.printedColour) || bg('ui/card-' + d.colour);
             const atkClass = d.attack > d.baseAttack ? 'up' : d.attack < d.baseAttack ? 'down' : '';
             const hpClass = d.damaged ? 'hurt' : d.maxHealth > d.baseHealth ? 'up' : '';
-            const text = size !== 'big' ? briefLines(d)
-                : el('div.bc-text', {}, [
-                    d.keywords.length ? el('div.bc-kws', {}, d.keywords.map(k => el('b', { text: (KW_NAME[k] || k) + '. ' }))) : null,
-                    ...d.lines.map(l => el('div.bc-line' + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
-                        el('b', { text: (l.warped ? '🌀 ' : '') + (timing(l) ? timing(l) + ': ' + l.name + '. ' : l.name + ': ') }),
-                        l.text.replace(/^(Guard|Swift|Shield|Elusive)\.\s*/, '').replace(/^(Entrance|Last Word|Activate \(\d+ energy\)):\s*/i, ''),
-                    ])),
-                    !d.lines.length ? el('div.bc-line.off', { text: d.silenced ? 'Abilities lost.' : 'No ability.' }) : null,
-                ]);
+            // Every card face shows the short form; the magnifier's notes hold the full ability text.
+            const text = briefLines(d, size === 'big' ? 'hand' : size);
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
                 gem('cost', d.cost),
-                el('div.bc-name', { text: d.name + (d.legendary ? ' ★' : '') }),
+                el('div.bc-name' + fitName(d.name + (d.legendary ? ' ★' : '')), { text: d.name + (d.legendary ? ' ★' : '') }),
                 text,
                 gem('attack', d.attack, atkClass),
                 gem('health', d.health, hpClass),
                 d.keywords.includes('shield') ? el('div.bc-bubble') : null,
-                d.sleeping ? icon('ui/state-sleeping', 'Zzz', 'state.sleep', 'Asleep') : null,
-                d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', frozenText(cid)) : null,
+                // States read at a glance on the table: a dark veil with a word over the picture.
+                size === 'board' && d.sleeping ? el('div.bc-state.sleep', {}, [icon('ui/state-sleeping', 'Zzz', 'veil'), el('span', { text: 'Asleep' })]) : null,
+                size === 'board' && !d.sleeping && d.frozen ? el('div.bc-state.frozen', {}, [icon('ui/state-frozen', '❄', 'veil'), el('span', { text: 'Lectured' })]) : null,
+                size !== 'board' && d.sleeping ? icon('ui/state-sleeping', 'Zzz', 'state.sleep', 'Asleep') : null,
+                size !== 'board' && d.frozen ? icon('ui/state-frozen', '❄', 'state.frozen', frozenText(cid)) : null,
+                size === 'board' && d.silenced ? el('div.bc-state.silenced', {}, [el('span', { text: 'No ability' })]) : null,
                 // A second attack this turn (the Axiom of Haste or an ability): say why it glows again.
                 d.onBoard && d.attacks > 0 && d.canAttack ? el('span.b-again', { text: ordinal(d.attacks + 1) + ' attack' }) : null,
             ];
@@ -565,18 +656,29 @@
             d.keywords.forEach(k => { if (KT[k]) lines.push(KT[k]); });
             if (d.damaged) lines.push('Health ' + d.health + ' of ' + d.maxHealth + '. Damage stays.');
             d.attackParts.filter(x => x.source !== 'base').forEach(x => lines.push(x.label + ': ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack.'));
+            // The full ability text first (it never fits on the card face itself).
+            const abilityLines = d.lines.map(l => el('div.b-note-line.b-ability' + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
+                el('b', { text: (l.warped ? '🌀 ' : '') + (timing(l) ? timing(l) + ' · ' + l.name + ': ' : l.name + ': ') }),
+                upFirst(l.text.replace(/^(Guard|Swift|Shield|Elusive)\.\s*/, '').replace(/^(Entrance|Last Word|Activate \(\d+ energy\)):\s*/i, '')),
+                l.kind === 'entrance' ? el('span.b-note-hint', { text: ' (Entrance: it happens when you play the card.)' }) : null,
+                l.kind === 'lastword' ? el('span.b-note-hint', { text: ' (Last Word: it happens when this creature is defeated.)' }) : null,
+                l.kind === 'activate' ? el('span.b-note-hint', { text: ' (Activate: pay the energy; it uses this creature\'s attack this turn.)' }) : null,
+            ]));
+            if (!d.lines.length) abilityLines.push(el('div.b-note-line.off', { text: d.silenced ? 'It lost its abilities.' : 'No ability.' }));
             const tags = [];
             // Only your own borrowed cards are tagged (an opponent's team is never "loaned").
             if (d.loaner && state.cards[cid].owner === ME) tags.push('Loaned');
             if (d.trophyOf) tags.push('🏆 ' + d.trophyOf);
             if (d.taught) tags.push('Learned: ' + d.taught);
             if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
-            if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 −1 attack');
+            if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 Injured in an earlier battle: −1 attack');
             if (d.prediction) tags.push('🔮 ' + (Rift.COLOURS[d.prediction] || {}).name);
             if (d.metaverseUsed) tags.push('Last Word used');
             return el('div.b-notes', {}, [
                 el('div.b-notes-tags', {}, [colourChip(d.colour)].concat(tags.map(t => el('span.b-tag', { text: t })))),
+                ...abilityLines,
                 ...lines.map(t => el('div.b-note-line', { text: t })),
+                whyNotNote(cid),
             ]);
         }
 
@@ -591,11 +693,11 @@
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
                 d.colour ? colourEmblem(d.colour, d.colourReady) : null,
-                el('div.bc-name', { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
+                el('div.bc-name' + fitName(d.name + (d.rarity === 'rare' ? ' ★' : '')), { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
                 el('div.bc-text', {}, [
                     size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
                     size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
-                    el('div.bc-line', { text: d.text }),
+                    el('div.bc-line', { text: d.short || d.text }),
                     d.colour && !d.colourReady && state.cards[cid].controller === ME ? el('div.bc-need', { text: needsText(d.colour) }) : null,
                 ]),
             ];
@@ -619,10 +721,10 @@
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [has('ui/axiom-' + id) ? Rift.Assets.img('ui/axiom-' + id, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
                 gem('cost', E.axiomCost(state, id)),
-                el('div.bc-name', { text: ax.name }),
+                el('div.bc-name' + fitName(ax.name), { text: ax.name }),
                 el('div.bc-text', {}, [
                     isBasic(ax) ? el('div.bc-kind.basic', { text: axiomKind(ax) }) : size === 'big' ? null : el('div.bc-kind', { text: axiomKind(ax) }),
-                    el('div.bc-line', { text: ax.text }),
+                    el('div.bc-line', { text: ax.short ? (size === 'hand' ? ax.short : (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short) : ax.text }),
                 ]),
             ];
         }
@@ -657,6 +759,12 @@
             return node;
         }
 
+        // "Can't play it now: …" for a dimmed card in my hand (null otherwise).
+        function whyNotNote(cid) {
+            if (!state.players[ME].hand.includes(cid) || decider() !== ME || state.phase !== 'main' || ui.busy) return null;
+            if (legal().some(a => a.type === 'play' && a.cid === cid)) return null;
+            return el('div.b-note-line.b-why', { text: 'Can\'t play it now: ' + whyNot(cid) });
+        }
         function cardPreview(cid) {
             const big = cardEl(cid, { size: 'big' });
             if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
@@ -665,7 +773,9 @@
             const mine = state.cards[cid].controller === ME;
             return [big, el('div.b-notes', {}, [
                 C ? el('div.b-notes-tags', {}, [colourChip(d.colour)]) : null,
+                el('div.b-note-line.b-ability', {}, [el('b', { text: d.name + ': ' }), d.text]),
                 el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
+                whyNotNote(cid),
                 C ? el('div.b-note-line', {}, [el('b', { text: C.name + ' tactic' + (d.rarity ? ' (' + d.rarity + ')' : '') + ': ' }),
                     'it can only be played while you control a ' + C.colour + ' (' + C.name + ') creature. '
                     + (mine ? (d.colourReady ? 'You do now.' : 'You don\'t right now.') : '')]) : null,
@@ -690,6 +800,7 @@
             const ax = (Rift.data.axioms || {})[id] || {};
             const on = E.activeAxioms(state).some(a => a.id === id);
             return el('div.b-notes', {}, [
+                el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
                 isBasic(ax)
                     ? el('div.b-note-line', {}, [el('b', { text: 'Back to normal: ' + (ax.category || 'rule') + '. ' }), 'It puts the basic ' + (ax.category || '') + ' rule back for BOTH players.'])
                     : el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (ax.category || 'rule') + '): ' }), on
@@ -750,11 +861,14 @@
             });
         }
         // A resting mouse opens the preview after a short delay (quicker when one is already open).
+        // While a card waits for its target, the big preview stays shut (it would hide the glowing
+        // targets and the instruction); tiles in the side panel may still open it.
+        const aiming = node => !!(ui.sel && (targetMap(ui.sel).size || ui.sel.kind === 'hand' || ui.sel.kind === 'axiom') && !(dom.side.contains && dom.side.contains(node)));
         function waitInspect(node, make, key) {
             clearTimeout(ui.inspectTimer);
             const showing = dom.inspect.classList.contains('show');
             ui.inspectTimer = setTimeout(() => {
-                if (ui.drag || ui.hoverBlock || ui.confirm) return;
+                if (ui.drag || ui.hoverBlock || ui.confirm || aiming(node)) return;
                 showInspect(make(), node, key);
             }, showing ? 120 : HOVER_DELAY);
         }
@@ -780,25 +894,17 @@
             const a = anchor.getBoundingClientRect();
             const p = dom.inspect.getBoundingClientRect();
             if (!p.width || !box.width) return;
-            const m = 6;
-            const side = dom.side.getBoundingClientRect ? dom.side.getBoundingClientRect() : { width: 0 };
-            const ar = dom.arena.getBoundingClientRect();
-            const cy = a.top + a.height / 2 - box.top;
-            let x, y = cy - p.height / 2;
-            let top = m;
-            if (side.width >= p.width * 0.9 && side.height > 0) {
-                x = side.left - box.left + (side.width - p.width) / 2;
-                // Keep How to play / Leave match uncovered when there is room.
-                const bar = dom.side.firstChild && dom.side.firstChild.getBoundingClientRect ? dom.side.firstChild.getBoundingClientRect() : null;
-                if (bar && bar.height && bar.bottom - box.top + 4 + p.height <= box.height - m) top = bar.bottom - box.top + 4;
-            } else {
-                const leftHalf = a.left + a.width / 2 < ar.left + ar.width / 2;
-                x = leftHalf ? ar.right - box.left - p.width - m : ar.left - box.left + m;
-                const laneMid = ar.top - box.top + ar.height / 2;
-                y = cy < laneMid ? ar.top - box.top + m : ar.bottom - box.top - p.height - m;
-            }
+            // Right beside the card (like a magnifier): to its right when there is room, else to its
+            // left; level with it, kept inside the screen. A tile in the side panel opens to its left.
+            const m = 6, gap = 10;
+            const ax = a.left - box.left, cy = a.top + a.height / 2 - box.top;
+            const inSide = dom.side.contains && dom.side.contains(anchor);
+            const right = ax + a.width + gap, left = ax - gap - p.width;
+            const arenaRight = dom.arena.getBoundingClientRect().right - box.left;
+            let x = !inSide && right + p.width <= arenaRight - m ? right : left >= m ? left : right;
+            let y = cy - p.height / 2;
             x = Math.max(m, Math.min(box.width - p.width - m, x));
-            y = Math.max(top, Math.min(box.height - p.height - m, y));
+            y = Math.max(m, Math.min(box.height - p.height - m, y));
             dom.inspect.style.left = Math.round(x) + 'px';
             dom.inspect.style.top = Math.round(y) + 'px';
         }
@@ -811,7 +917,7 @@
             const was = ui.inspect;
             if (!was || !was.key || (ui.drag && ui.drag.active)) return;
             const it = inspectables[was.key];
-            if (it && zoneOf(it.node) === was.zone) showInspect(it.make(), it.node, was.key);
+            if (it && zoneOf(it.node) === was.zone && !aiming(it.node)) showInspect(it.make(), it.node, was.key);
             else ui.inspect = null;
         }
 
@@ -949,11 +1055,40 @@
                 el('div.b-hero-name', { text: pi === ME ? 'You' : P.name, title: full }),
                 el('div.b-hearts' + (heart ? '.art' : ''), { style: heart, title: P.hearts + ' of ' + P.maxHearts + ' hearts' }, [el('span', { text: String(P.hearts) })]),
                 r.reverseHearts ? el('div.b-reverse', { text: '0 hearts = WIN' }) : null,
+                pi === ME ? dangerEl(P, r) : null,
             ]);
             if (isTarget) node.addEventListener('click', () => { if (!ui.suppressClick) clickTarget(id, L); });
             else if (pi === OPP) node.addEventListener('click', () => { if (!ui.suppressClick && ui.sel && ui.sel.kind === 'board') setNote(badTargetNote(ui.sel.cid, id)); });
             nodes[id] = node;
             return node;
+        }
+
+        // "Danger": the enemy creatures together could take all my hearts on their next turn
+        // (Guard and the rules aside). Only under the normal victory rule.
+        function dangerEl(P, r) {
+            if (r.reverseHearts || E.winner(state) != null) return null;
+            const per = cid => { const a = Math.max(0, E.describe(state, cid).attack); return r.heroDamageCap != null ? Math.min(a, r.heroDamageCap) : a; };
+            const hits = [];
+            state.players[OPP].board.forEach(cid => { for (let k = 0; k < (r.attacksPerCreature || 1); k++) hits.push(per(cid)); });
+            hits.sort((a, b) => b - a);
+            const total = hits.slice(0, r.attackLimit === Infinity ? hits.length : r.attackLimit).reduce((n, x) => n + x, 0);
+            if (!total || total < P.hearts) return null;
+            return el('div.b-danger', { title: 'Danger: ' + oppName + '\'s creatures have ' + total + ' attack together. You have ' + P.hearts + ' hearts.' }, [
+                el('strong', { text: '⚠ Danger' }), el('span', { text: 'Their attack: ' + total }),
+            ]);
+        }
+
+        // "grows by 1 each turn (up to 10)", "stays the same", "shrinks by 1 each turn (never below 1)".
+        const growthWords = g => (g > 0 ? 'grows by ' + g + ' each turn (up to ' + state.options.energyCap + ')' : g === 0 ? 'stays the same each turn' : 'shrinks by ' + -g + ' each turn (never below 1)');
+        // Card plays left this turn (the Plays rule): a row of card icons, used ones dim.
+        function playsEl() {
+            const lim = E.playLimit(state, ME), left = E.playsLeft(state, ME);
+            const mine = state.active === ME;
+            const shown = lim === Infinity ? null : lim;
+            return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card plays: no limit this turn.' : 'Card plays: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Creatures, tactics and rule cards each use one.' }, [
+                el('span.b-plays-label', { text: 'Plays' }),
+                shown == null ? el('strong', { text: '∞' }) : el('span.b-plays-pips', {}, Array.from({ length: shown }, (x, i) => el('span.b-play-pip' + (!mine || i < left ? '.on' : '')))),
+            ]);
         }
 
         function energyEl(pi) {
@@ -966,10 +1101,15 @@
                 const style = bg(full ? 'ui/energy-full' : 'ui/energy-empty');
                 crystals.push(el('span.b-crystal' + (full ? '.full' : '') + (style ? '.art' : ''), style ? { style } : {}));
             }
-            return el('div.b-energy' + (pi === OPP ? '.small' : ''), { title: 'Energy: ' + P.energy + ' of ' + cap + '. It refills each turn and grows by ' + E.rules(state).growth + '.' }, [
+            const node = el('div.b-energy' + (pi === OPP ? '.small' : '') + (pi === ME && !P.energy && decider() === ME ? '.empty' : ''), { tabindex: pi === ME ? 0 : null }, [
                 el('div.b-crystals', {}, crystals),
-                el('div.b-energy-num', { text: P.energy + '/' + cap }),
+                el('div.b-energy-num', {}, [el('strong', { text: String(P.energy) }), el('span', { text: '/' + cap })]),
+                el('div.b-energy-label', { text: 'Energy' }),
+                pi === ME && E.playsLeft ? playsEl() : null,
             ]);
+            tipFor(node, 'energy:' + pi, (pi === ME ? 'Your energy: ' : oppName + '\'s energy: ') + P.energy + ' of ' + cap,
+                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacking is free.');
+            return node;
         }
 
         function infoEl(pi) {
@@ -1052,11 +1192,17 @@
                     if (ui.preview && ui.preview.cid === cid) classes.push('attacking');
                     if (ui.preview && ui.preview.target === cid) classes.push('targeted');
                     const ready = pi === ME && attackers.has(cid);
-                    box.appendChild(cardEl(cid, {
+                    const node = cardEl(cid, {
                         size: 'board', classes, target: true,
                         onclick: () => clickCard(cid, L),
                         drag: ready && L.some(a => a.type === 'attack' && a.cid === cid) ? { kind: 'board', cid } : pi === ME ? { kind: 'board', cid, blocked: true } : null,
-                    }));
+                    });
+                    // A word over a creature that can act now (the glow alone was easy to miss).
+                    if (ready && !(d.attacks > 0) && !valid.size) {
+                        const canHit = L.some(a => a.type === 'attack' && a.cid === cid);
+                        node.appendChild(el('span.b-ready-tag', { text: canHit ? 'Ready' : 'Ability' }));
+                    }
+                    box.appendChild(node);
                 });
             });
 
@@ -1070,6 +1216,10 @@
             let i = 0;
             // In my main phase, a card that can't be played right now is dimmed.
             const myMain = decider() === ME && state.phase === 'main' && !ui.busy && !ui.ended;
+            // Hand limit rule: the oldest cards over the limit go at the end of my turn.
+            const cap = E.rules(state).handCap;
+            const over = cap != null && decider() === ME ? Math.max(0, P.hand.length + P.axHand.length - cap) : 0;
+            const doomed = new Set(P.hand.slice(0, over));
             P.hand.forEach(cid => {
                 const classes = [];
                 if (plays.has(cid)) classes.push('playable');
@@ -1077,6 +1227,7 @@
                 if (ui.sel && ui.sel.kind === 'hand' && ui.sel.cid === cid) classes.push('selected');
                 if (valid.has(cid)) classes.push('valid');
                 const node = cardEl(cid, { size: 'hand', classes, onclick: () => clickHand(cid, L), drag: plays.has(cid) ? { kind: 'hand', cid } : { kind: 'hand', cid, blocked: true } });
+                if (doomed.has(cid)) node.appendChild(el('span.b-hand-tag.warn', { text: 'Lost at End turn' }));
                 fan(node, i++, handItems);
                 dom.myHand.appendChild(node);
             });
@@ -1088,6 +1239,10 @@
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
                 // A rule card that would change nothing (that rule is already on) says so on the card.
                 if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: 'Already the rule' })); node.title = whyNotAxiomRule(id); }
+                else {
+                    const tlr = E.timeline(state)[0];
+                    if (tlr && tlr.type === 'reset' && tlr.turns <= 2) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset in ' + tlr.turns + '!' }));
+                }
                 if (!nodes['ax:' + id]) nodes['ax:' + id] = node;
                 fan(node, i++, handItems);
                 dom.myHand.appendChild(node);
@@ -1115,7 +1270,7 @@
             renderDraw(L);
             renderChoice(L);
             renderRules();
-            renderLog();
+            renderRecent();
             if (guide) renderCoach();
             renderGuidePointer();
             drawArrowForPreview();
@@ -1163,9 +1318,22 @@
         // "Your turn" fades in and out when a new turn of mine starts (no movement: calm-safe).
         function turnBanner() {
             const mine = state.active === ME && state.phase === 'draw' && decider() === ME && E.winner(state) == null && !ui.ended;
-            if (!mine || ui.bannerTurn === state.turn) return;
+            const theirs = state.active === OPP && state.phase === 'draw' && E.winner(state) == null && !ui.ended;
+            if ((!mine && !theirs) || ui.bannerTurn === state.turn) return;
             ui.bannerTurn = state.turn;
             dom.banner.innerHTML = '';
+            dom.banner.classList.toggle('theirs', theirs);
+            if (theirs) {
+                // A rule card shown big (a reveal) already covers the top of the table: no banner then.
+                if (ui.holding) return;
+                put(dom.banner, el('div.b-banner-title', { text: oppName + '\'s turn' }), el('div.b-banner-sub', { text: 'Watch what ' + oppName + ' does.' }));
+                dom.banner.classList.remove('show');
+                void dom.banner.offsetWidth;
+                dom.banner.classList.add('show');
+                clearTimeout(ui.bannerTimer);
+                ui.bannerTimer = setTimeout(() => dom.banner.classList.remove('show'), 1900);
+                return;
+            }
             // Guide mode: Granny's script may draw for you (a reply), so the line follows the lesson.
             let sub = 'First, choose your draw.';
             if (guide) {
@@ -1181,62 +1349,171 @@
             ui.bannerTimer = setTimeout(() => dom.banner.classList.remove('show'), 1900);
         }
 
+        // The lane: the Fate track across the top; below it the instruction (or the draw choice),
+        // the shared axiom deck, and End turn on the right.
         function renderLane() {
             dom.lane.innerHTML = '';
-            const tl = E.timeline(state);
-            const fate = el('div.b-fate', { title: 'Fate track: every End turn moves it 1 space. At zero the event happens.' + (tl.length ? ' ' + fateText(tl[0], true) : '') });
-            if (tl.length) {
-                const next = tl[0];
-                const pips = [];
-                const max = Math.max(state.options.fateGap || 6, next.turns);
-                for (let k = max; k >= 1; k--) pips.push(el('span.pip' + (k === next.turns ? '.marker' : k < next.turns ? '.ahead' : '.past'), k === next.turns ? { style: bg('ui/fate-marker') } : {}));
-                const evIcon = icon(next.type === 'reset' ? 'ui/fate-reset' : 'ui/fate-flip', next.type === 'reset' ? '↺' : '✦', 'fate-ev');
-                // The Anchor (a bag item) holds the track this turn: the count already includes it.
-                const anchored = state.fate.anchorTurn === state.turn;
-                if (anchored) fate.title = 'The Anchor holds the Fate track: it does not move at the end of this turn. ' + fate.title;
-                put(fate,
-                    el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), { style: bg('ui/fate-track') }, pips.concat([evIcon])),
-                    el('div.b-fate-text', { text: (anchored ? '⚓ ' : '') + fateShort(next) }),
-                );
-            } else put(fate, el('div.b-fate-text', { text: 'No Fate track in this match.' }));
-            const active = changedRules();
-            // At most three rows fit in the lane: with four or more rules, two chips and "+N more".
-            const shown = active.length > 3 ? active.slice(0, 2) : active;
-            const more = active.slice(shown.length);
-            const rulesRow = el('div.b-lane-rules', {}, active.length
-                ? shown.map(ax => {
-                    const make = () => [axiomCardEl(ax.id, { size: 'big' }), axiomNote(ax.id)];
-                    const chip = el('div.b-rule-chip', { tabindex: 0, role: 'button', 'aria-label': 'Active rule ' + ax.name + ': ' + ax.text }, [
-                        has('ui/axiom-' + ax.id) ? Rift.Assets.img('ui/axiom-' + ax.id, { alt: '' }) : el('span', { text: '⚖' }),
-                        el('span', { text: ax.name }),
-                    ]);
-                    hoverInspect(chip, make, 'rule:' + ax.id);
-                    // Click (or tap) toggles the full rule card too.
-                    chip.addEventListener('click', () => {
-                        if (ui.suppressClick) return;
-                        if (ui.inspect && ui.inspect.key === 'rule:' + ax.id && dom.inspect.classList.contains('show')) hideInspect();
-                        else showInspect(make(), chip, 'rule:' + ax.id);
-                    });
-                    return chip;
-                }).concat(more.length ? [moreChip(active, more.length)] : [])
-                : [el('span.b-basic', { text: 'Basic rules' })]);
+            dom.fate = el('div.b-fate', { role: 'group', 'aria-label': 'Fate track' });
+            paintFate(0);
             const deckN = state.axioms.deck.length;
-            put(dom.lane, fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [
-                rulesRow,
-                el('div.b-axdeck', { title: 'Shared axiom deck: ' + deckN + ' cards, ' + state.axioms.discard.length + ' discarded' }, [cardBack(true), el('span', { text: String(deckN) })]),
-            ]), dom.draw, dom.end);
+            const axdeck = el('div.b-axdeck', { tabindex: 0, 'aria-label': 'Shared rule deck: ' + deckN + ' rule cards' }, [cardBack(true), el('span', { text: String(deckN) })]);
+            tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it, and the Fate track turns its top card over.');
+            put(dom.lane, dom.fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [axdeck]), dom.draw, dom.end);
         }
 
-        // "+2 more" chip: its preview lists every changed rule.
-        function moreChip(active, n) {
-            const make = () => [el('div.b-notes.b-rule-list', {}, [el('div.b-note-line', {}, [el('b', { text: 'Changed rules now (' + active.length + ')' })])].concat(
-                active.map(ax => el('div.b-note-line', {}, [el('b', { text: ax.name + ' (' + ax.category + '): ' }), ax.text]))))];
-            const chip = el('div.b-rule-chip.more', { tabindex: 0, role: 'button', 'aria-label': n + ' more changed rules: ' + active.map(ax => ax.name).join(', ') }, [
-                el('span', { text: '+' + n + ' more' }),
+        // Fate events in the log, by turn: the rules that turned over or were played, resets and
+        // time draws. k = turns before the current one (0 = this turn, -1 = the turn before).
+        function fateHistory() {
+            let count = 0, between = false;
+            const out = [];
+            E.fullLog(state).forEach(ev => {
+                if (ev.t === 'turn') { count += 1; between = false; return; }
+                if (ev.t === 'turn-end') { between = true; return; }
+                const idx = between ? count + 1 : count;
+                if (ev.t === 'reset') out.push({ idx, kind: 'reset' });
+                else if (ev.t === 'axiom') out.push({ idx, kind: ev.player == null ? 'flip' : 'rule', id: ev.id, by: ev.player });
+                else if (ev.t === 'time') out.push({ idx, kind: /closer/.test(ev.text) ? 'forward' : 'rewind', by: ev.player });
+            });
+            return out.map(x => Object.assign(x, { k: x.idx - count }));
+        }
+
+        // The Fate track, a reel: NOW (the hourglass) is fixed in the middle; three past turns on the
+        // left, three coming turns on the right, the next events on their spaces (a further one waits at
+        // the right edge). When turns pass, the reel slides left under NOW (a fade under calm motion). Each space is tinted by whose turn it
+        // is. shift (−1 / +1) previews a Fate sooner / later draw: the next event appears where it
+        // would land. Every event (past or coming) shows its card on hover, focus or tap.
+        const FATE_PAST = 3, FATE_AHEAD = 3;
+        function paintFate(shift) {
+            const box = dom.fate;
+            if (!box) return;
+            box.innerHTML = '';
+            const tl = E.timeline(state);
+            if (!tl.length) { put(box, el('div.b-fate-none', { text: 'No Fate track in this match.' })); return; }
+            const AX = Rift.data.axioms || {};
+            const owner = k => ((state.active + k) % 2 + 2) % 2;
+            const hist = fateHistory();
+            const top = state.axioms.deck[0];
+            const next = tl[0];
+            const moved = shift ? Math.max(0, Math.min(state.options.fateMax, next.turns + shift)) : null;
+            const spaces = [];
+            for (let k = -FATE_PAST; k <= FATE_AHEAD; k++) {
+                const who = owner(k);
+                const kids = [];
+                // Past events (and those of this turn) as small markers.
+                hist.filter(h => h.k === k && k >= -FATE_PAST).forEach(h => kids.push(pastMarker(h, AX)));
+                // Coming events on their own space (further ones wait in the chip beyond the reel).
+                tl.forEach((ev, i) => {
+                    if (ev.turns !== k || (shift && i === 0)) return;
+                    kids.push(eventMarker(ev, i, top, false));
+                });
+                if (shift && moved === k) kids.push(eventMarker(Object.assign({}, next, { turns: moved }), 0, top, false, true));
+                const cls = (k < 0 ? '.past' : k === 0 ? '.now' : '.ahead') + (who === ME ? '.mine' : '.theirs');
+                const space = el('div.b-fs' + cls, { dataset: { k: String(k) } }, kids);
+                // The game's own tooltip (no native title): whose turn this space is.
+                tipFor(space, 'fs:' + k, who === ME ? 'Your turn' : oppName + '\'s turn', k === 0 ? 'Now.' : k < 0 ? (-k) + ' turn' + (k === -1 ? '' : 's') + ' ago.' : 'In ' + k + ' turn' + (k === 1 ? '' : 's') + '.');
+                spaces.push(space);
+            }
+            let reel = null;
+            const turnsWord = n => n + ' turn' + (n === 1 ? '' : 's');
+            const evName = ev => (ev.type === 'reset' ? 'All rules reset' : 'New rule' + (top && ev === next && AX[top] ? ': ' + ruleWords(AX[top]) + (E.axiomWouldChange && !E.axiomWouldChange(state, top) ? ' (no change)' : '') : ''));
+            const anchored = state.fate.anchorTurn === state.turn;
+            const kind = next.type === 'reset' ? 'Reset' : 'New rule';
+            const summary = shift
+                ? (moved === 0 ? (next.type === 'reset' ? 'Reset happens NOW' : 'New rule NOW') : (shift < 0 ? '⏩ ' : '⏪ ') + kind + ' in ' + turnsWord(moved))
+                : (anchored ? '⚓ ' : '') + kind + ' in ' + turnsWord(next.turns);
+            // The second line: what it will be, and whose turn it starts.
+            const whose = owner(next.turns) === ME ? 'your turn' : 'their turn';
+            const detail = (next.type === 'reset' ? 'All rules back to basic' : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card')) + ' · ' + whose;
+            // Beyond the reel: the nearest event further than three turns away, with its count.
+            const farIdx = tl.findIndex(ev => ev.turns > FATE_AHEAD);
+            const farGhost = shift && moved > FATE_AHEAD;
+            let farChip = null;
+            if (farGhost) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(Object.assign({}, next, { turns: moved }), 0, top, true, true)]);
+            else if (farIdx >= 0 && !(shift && farIdx === 0)) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(tl[farIdx], farIdx, top, true)]);
+            // A card bent time (not a turn passing): the summary flashes so the change is seen.
+            const sig = next.type + ':' + next.turns;
+            const bent = !shift && ui.fateSig && ui.fateSig.turn === state.turn && ui.fateSig.sig !== sig;
+            if (!shift) ui.fateSig = { turn: state.turn, sig };
+            put(box,
+                el('div.b-fate-label', {}, [el('strong', { text: 'Fate' }), el('span', { text: 'turns' })]),
+                el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), {}, [
+                    el('div.b-fate-groove', { style: bg('ui/fate-track') }),
+                    reel = el('div.b-fate-reel', {}, spaces),
+                    el('div.b-fate-now', {}, [el('span.b-fs-now', { style: bg('ui/fate-marker'), text: has('ui/fate-marker') ? '' : '⧗' }), el('span.b-fate-now-tag', { text: 'NOW' })]),
+                ]),
+                farChip || el('div.b-fate-far.none'),
+                el('div.b-fate-sum' + (shift ? '.preview' : '') + (bent ? '.bent' : ''), {}, [el('strong', { text: summary }),
+                    el('span', { text: shift ? 'if you choose this draw' : detail, title: detail })]),
+            );
+            slideReel(reel, shift);
+            tipFor(box.querySelector ? box.querySelector('.b-fate-label') || box : box, 'fate', 'Fate track', 'Each End turn moves every event 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, or a reset to the basic rules.');
+        }
+        // Turns passed since the last paint: the reel slides that many spaces left (at most 3).
+        function slideReel(reel, shift) {
+            const was = ui.fateTurn;
+            if (!shift) ui.fateTurn = state.turn;
+            if (!reel || shift || was == null || state.turn <= was || !reel.animate) return;
+            const d = Math.min(3, state.turn - was);
+            try {
+                if (calmMotion()) reel.animate([{ opacity: 0.2 }, { opacity: 1 }], { duration: 500, easing: 'ease-out' });
+                else reel.animate([{ transform: 'translateX(' + (d * 100 / (FATE_PAST + FATE_AHEAD + 1)) + '%)' }, { transform: 'translateX(0)' }], { duration: 650 + 150 * d, easing: 'cubic-bezier(.2,.7,.2,1)' });
+            } catch (e) { /* no WAAPI */ }
+        }
+        // A coming event: the flip (with the rule card that will turn over) or the reset.
+        function eventMarker(ev, i, top, far, ghost) {
+            const AX = Rift.data.axioms || {};
+            const reset = ev.type === 'reset';
+            const known = !reset && i === 0 && top && AX[top];
+            const m = el('div.b-fev' + (reset ? '.reset' : '.flip') + (ghost ? '.ghost' : '') + (far ? '.far' : ''), {
+                tabindex: ghost ? null : 0, role: ghost ? null : 'button',
+                'aria-label': (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns',
+            }, [
+                icon(reset ? 'ui/fate-reset' : 'ui/fate-flip', reset ? '↺' : '✦', 'b-fev-icon'),
+                el('span.b-fev-label', { text: (reset ? 'Reset' : 'New rule') + (far ? ' · in ' + ev.turns : '') }),
             ]);
-            hoverInspect(chip, make, 'rule:more');
-            chip.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), chip, 'rule:more'); });
-            return chip;
+            if (ghost) return m;
+            const make = () => (known ? [axiomCardEl(top, { size: 'big' }), el('div.b-notes', {}, [
+                el('div.b-note-line', {}, [el('b', { text: 'Fate in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' }), 'this rule card turns over for free and changes the rule for BOTH players.']),
+                el('div.b-note-line', {}, [el('b', { text: 'It replaces: ' }), replacedRule(top)]),
+                el('div.b-note-line.b-flavour', { text: 'It is the top card of the shared rule deck. If someone takes it first, the next card turns over instead.' })])]
+                : [el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns: ' }),
+                    reset ? 'every rule card in play is removed. All rules go back to the basics.' : 'the top card of the shared rule deck turns over for free.'])])]);
+            hoverInspect(m, make, 'fate:' + i);
+            m.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), m, 'fate:' + i); });
+            return m;
+        }
+        // " Fate resets all rules in 1 turn!" when a reset is that close (else '').
+        function resetSoon() {
+            const ev = E.timeline(state)[0];
+            return ev && ev.type === 'reset' && ev.turns <= 2 ? ' Careful: Fate resets all rules in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + '!' : '';
+        }
+        // 'Guard: Off (attack anyone)' — the category's name, then the rule in a few words.
+        const ruleWords = ax => (ax.short ? (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short : ax.name);
+        // The rule a new rule card would replace: the changed rule in its category, else the basic one.
+        function replacedRule(id) {
+            const AX = Rift.data.axioms || {};
+            const ax = AX[id];
+            if (!ax) return 'nothing';
+            const cur = AX[state.axioms.active[ax.category]];
+            if (cur && !cur.basic) return cur.name + ' (' + (cur.short || cur.text) + ')';
+            const core = CORE_RULES.find(c => c[0] === ax.category);
+            const basic = core ? core[2] : BASIC_WORDS[ax.category];
+            return 'the basic rule' + (basic ? ' (' + basic + ')' : '');
+        }
+        // Something that already happened on the track (or this turn): a small marker.
+        function pastMarker(h, AX) {
+            const ax = h.id ? AX[h.id] : null;
+            const who = h.by === ME ? 'You' : h.by === OPP ? oppName : 'Fate';
+            const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 sooner' : h.kind === 'rewind' ? who + ': Fate 1 later'
+                : (h.kind === 'flip' ? 'Fate turned over ' : who + ' played ') + (ax ? ax.name : 'a rule');
+            const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': text },
+                [h.kind === 'reset' ? el('span', { text: '↺' }) : h.kind === 'forward' ? el('span', { text: '⏩' }) : h.kind === 'rewind' ? el('span', { text: '⏪' })
+                    : has('ui/axiom-' + h.id) ? Rift.Assets.img('ui/axiom-' + h.id, { alt: '' }) : el('span', { text: '⚖' })]);
+            const make = () => (ax ? [axiomCardEl(h.id, { size: 'big' }), el('div.b-notes', {}, [el('div.b-note-line', { text: text + (h.k === 0 ? ' (this turn).' : ' (' + -h.k + ' turn' + (h.k === -1 ? '' : 's') + ' ago).') })])]
+                : [el('div.b-notes', {}, [el('div.b-note-line', { text: text + '.' })])]);
+            hoverInspect(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || ''));
+            m.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), m, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || '')); });
+            return m;
         }
 
         // Short Fate wording for the lane (two lines at most); the long one is in its tooltip.
@@ -1328,18 +1605,23 @@
                 const P = state.players[ME];
                 if (!sel && guide && step()) {
                     // Guide mode: the bar repeats Granny's "Do this" (the step's label) plus how.
-                    ask.textContent = 'Do this: ' + step().label + '.';
-                    const how = guideHow(step().expect);
+                    const open = step().open && !ui.hinted;
+                    ask.textContent = open ? 'Your decision: read the rule tiles first.' : 'Do this: ' + step().label + '.';
+                    const how = step().open && !ui.hinted ? '' : guideHow(step().expect);
                     if (how) ask.appendChild(el('span.b-ask-how', { text: ' ' + how }));
                 } else if (!sel) {
                     const canPlay = L.some(a => a.type === 'play' || a.type === 'axiom');
                     const canAttack = L.some(a => a.type === 'attack');
                     const canActivate = L.some(a => a.type === 'activate');
-                    ask.textContent = canPlay && canAttack ? 'Drag a glowing card to play it, or a ready creature onto a target to attack.'
-                        : canPlay ? 'Drag a glowing card to play it. Then End turn.'
+                    const noPlays = E.playsLeft && !E.playsLeft(state, ME) && P.hand.length + P.axHand.length > 0;
+                    ask.textContent = noPlays && canAttack ? 'No card plays left. Attack with a ready creature, then End turn.'
+                        : noPlays ? 'No card plays left this turn. Press End turn.'
+                        : canPlay && canAttack ? 'Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.'
+                        : canPlay ? 'Drag (or click) a glowing card to play it. Then End turn.'
                             : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
                                 : canActivate ? 'Click a ready creature (green glow) to use its ability.'
                                     : ui.sparkFor ? 'Use the Spark (+1 energy) to play ' + ui.sparkFor + '?'
+                                        : L.some(a => a.type === 'item') ? 'You can still use an item from your Bag (bottom right), or press End turn.'
                                         : 'Nothing left to do. Press End turn.';
                 } else if (sel.kind === 'board') {
                     const tm = targetMap(sel, L);
@@ -1354,7 +1636,10 @@
                         buttons.appendChild(b);
                         return seen.concat(a.ability);
                     }, []);
-                    if (acts.length) ask.textContent += ' Activating uses its attack this turn.';
+                    if (acts.length) {
+                        const def = (B().Abilities || {})[acts[0].ability];
+                        ask.textContent = name(sel.cid) + (def ? ': ' + upFirst(String(def.text).replace(/^Activate \(\d+ energy\):\s*/i, '')) : '') + ' Activating uses its attack this turn.';
+                    }
                 } else if (sel.kind === 'activate') {
                     ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
                 } else if (sel.kind === 'item') {
@@ -1377,7 +1662,8 @@
                     const ax = Rift.data.axioms[sel.id];
                     const cost = E.axiomCost(state, sel.id);
                     ask.textContent = !a ? ax.name + ' needs ' + cost + ' energy. You have ' + P.energy + '.'
-                        : (isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ': it changes the ' + ax.category + ' rule for BOTH players.')
+                        : (isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ' replaces ' + replacedRule(sel.id) + ' for BOTH players.')
+                            + resetSoon()
                             + ' Press Play rule, or drag it to the middle row.';
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
                 }
@@ -1389,7 +1675,62 @@
             box.classList.toggle('has-buttons', withButtons);
             box.classList.toggle('has-note', !!ui.note);
             if (ui.note) box.appendChild(el('div.b-note', { text: ui.note }));
-            else if (ui.news.length && !withButtons) box.appendChild(el('div.b-news', {}, ui.news.slice(-2).map(t => el('div', { text: t }))));
+            else if (!withButtons && !guide && ui.recapTurn === state.turn && decider() === ME && state.phase === 'main' && ui.recapText) box.appendChild(el('div.b-news.recap', { text: ui.recapText, title: ui.recapFull || ui.recapText }));
+            else if (ui.news.length && !withButtons) box.appendChild(el('div.b-news', {}, ui.news.slice(-1).map(t => el('div', { text: t }))));
+        }
+
+        function snapshot() {
+            const mine = {};
+            state.players[ME].board.forEach(cid => { const c = state.cards[cid]; mine[cid] = { damage: c.damage || 0, silenced: !!c.silenced, frozen: !!c.frozen, attack: E.describe(state, cid).attack, name: name(cid) }; });
+            return { me: state.players[ME].hearts, them: state.players[OPP].hearts, mine };
+        }
+        // "Their turn: you lost 3 ❤ · Kim Kardashiant defeated · new rule: Underdog" (or '').
+        function theirTurnRecap() {
+            const log = E.fullLog(state);
+            let start = -1;
+            for (let i = log.length - 1; i >= 0; i--) { if (log[i].t === 'turn' && log[i].player === OPP) { start = i; break; } }
+            if (start < 0) return '';
+            const bits = [];
+            let lost = 0;
+            const fell = [], played = [];
+            const AX = Rift.data.axioms || {};
+            log.slice(start).forEach(ev => {
+                if (ev.t === 'hit' && ev.player === ME) lost += ev.amount || 0;
+                if (ev.t === 'defeated' && ev.player === ME && state.cards[ev.cid]) fell.push(name(ev.cid));
+                if ((ev.t === 'play' || ev.t === 'tactic-play') && ev.player === OPP && state.cards[ev.cid]) played.push(name(ev.cid));
+                if (ev.t === 'axiom' && AX[ev.id]) bits.push(AX[ev.id].basic ? ruleWords(AX[ev.id]) + ' (as before)' : 'new rule: ' + ruleWords(AX[ev.id]));
+                if (ev.t === 'reset') bits.push('all rules reset');
+            });
+            if (fell.length) bits.unshift(fell.join(', ') + ' defeated');
+            if (played.length) bits.unshift('played ' + played.join(', '));
+            const snap = ui.snap;
+            if (snap) {
+                Object.keys(snap.mine).forEach(cid => {
+                    const c = state.cards[cid];
+                    if (!c) return;
+                    if (!state.players[ME].board.includes(cid)) {
+                        if (state.players[ME].hand.includes(cid)) bits.push(name(cid) + ' sent back to your hand');
+                        return;
+                    }
+                    if (c.frozen && !snap.mine[cid].frozen) bits.push(name(cid) + ' lectured (can\'t attack)');
+                    if ((c.damage || 0) > snap.mine[cid].damage) bits.push(name(cid) + ' took ' + (c.damage - snap.mine[cid].damage) + ' damage');
+                    if (c.silenced && !snap.mine[cid].silenced) bits.push(name(cid) + ' lost its abilities');
+                    const atk = E.describe(state, cid).attack;
+                    const renamed = name(cid) !== snap.mine[cid].name;
+                    if (renamed) bits.push(snap.mine[cid].name + ' is now ' + name(cid) + (atk < snap.mine[cid].attack ? ' (−' + (snap.mine[cid].attack - atk) + ' attack)' : ''));
+                    else if (atk < snap.mine[cid].attack) bits.push(name(cid) + ' −' + (snap.mine[cid].attack - atk) + ' attack');
+                });
+                const healed = state.players[OPP].hearts - snap.them;
+                if (healed > 0) bits.push(oppName + ' healed ' + healed + ' ❤');
+            }
+            if (lost) bits.unshift('you lost ' + lost + ' ❤');
+            ui.recapFull = bits.length ? oppName + '\'s turn: ' + bits.join(' · ') : '';
+            if (!bits.length) return oppName + '\'s turn: nothing changed on your side';
+            // Rule news first (the point of the game), then what happened to my side, then their plays.
+            const rules = bits.filter(b => /^new rule|all rules reset|\(as before\)$/.test(b)).map(b => (/reset/.test(b) ? '↺ all rules reset' : '⚖ ' + b.replace(/^new rule: /, 'new rule: ')));
+            const mine = bits.filter(b => !/^new rule|all rules reset|\(as before\)$|^played /.test(b));
+            const plays = bits.filter(b => /^played /.test(b));
+            return oppName + '\'s turn: ' + rules.concat(mine, plays).join(' · ');
         }
 
         // The second player's Spark: a card that becomes playable with +1 energy (null if none).
@@ -1412,15 +1753,25 @@
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
                 type: 'button', disabled: !end, style,
+                'aria-label': state.phase === 'over' ? 'Game over' : mine ? 'End turn' : ui.busy ? 'Watch' : 'Their turn',
                 onclick: () => { if (end && !ui.tipSuppress) act(end); },
-            }, [el('span', { text: state.phase === 'over' ? 'Game over' : mine ? 'End turn' : ui.busy ? 'Watch' : 'Their turn' })]);
+            }, (state.phase === 'over' ? ['Game', 'over'] : mine ? ['End', 'turn'] : ui.busy ? ['Watch', ''] : ['Their', 'turn'])
+                .filter(Boolean).map(w => el('span', { text: w })));
             tipFor(b, 'end', 'End turn', state.phase === 'over' ? 'The battle is over.' : !mine ? 'Wait for your turn.'
-                : state.phase === 'draw' ? 'First choose your draw.' : end ? 'Finish your turn. The Fate track moves 1 space.' : 'First answer the question.');
+                : state.phase === 'draw' ? 'First choose your draw.' : end ? 'Finish your turn. The Fate track moves 1 space.' + (E.rules(state).handCap != null && state.players[ME].hand.length + state.players[ME].axHand.length > E.rules(state).handCap ? ' Hand limit ' + E.rules(state).handCap + ': your oldest cards will be discarded.' : '') : 'First answer the question.');
             nodes.end = b;
             dom.end.appendChild(b);
             if (onlyEnd) dom.end.appendChild(el('div.b-end-hint', { text: 'Nothing left to do' }));
         }
 
+        // The rule card draw takes the top card of the shared deck: the one Fate would turn over next.
+        function axiomDrawNote(tl) {
+            const AX = Rift.data.axioms || {};
+            const top = AX[state.axioms.deck[0]];
+            if (!top) return 'Shared deck: ' + state.axioms.deck.length;
+            const flip = tl.length && tl[0].type === 'flip';
+            return 'You take ' + top.name + ': ' + ruleWords(top) + (flip ? '. Fate would turn it over in ' + tl[0].turns + ' turn' + (tl[0].turns === 1 ? '' : 's') + ', so taking it stops that' : '');
+        }
         function renderDraw(L) {
             dom.draw.innerHTML = '';
             const show = state.phase === 'draw' && decider() === ME && !ui.ended && !ui.busy;
@@ -1441,9 +1792,9 @@
             const noFate = !state.options.timeline ? 'No Fate track in this match.' : '';
             const why = {
                 deck: full ? 'Your hand is full.' : !P.deck.length ? 'Your deck is empty.' : P.deck.length + ' cards left',
-                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The axiom deck is empty.' : 'Shared deck: ' + state.axioms.deck.length,
-                forward: noFate || (tl.length ? after(tl[0].turns - 2) : ''),
-                rewind: noFate || (tl.length ? after(Math.min(state.options.fateMax, tl[0].turns + 2)) : ''),
+                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The rule deck is empty.' : axiomDrawNote(tl),
+                forward: noFate || (tl.length ? after(tl[0].turns - 1) : ''),
+                rewind: noFate || (tl.length ? after(Math.min(state.options.fateMax, tl[0].turns + 1)) : ''),
             };
             const st = step();
             // Picture buttons with a tiny status badge; the name and the details are in the tooltip.
@@ -1451,15 +1802,15 @@
             const badge = {
                 deck: String(P.deck.length),
                 axiom: String(state.axioms.deck.length),
-                forward: !noFate && tl.length ? when(tl[0].turns - 2) : '',
-                rewind: !noFate && tl.length ? when(Math.min(state.options.fateMax, tl[0].turns + 2)) : '',
+                forward: !noFate && tl.length ? when(tl[0].turns - 1) : '',
+                rewind: !noFate && tl.length ? when(Math.min(state.options.fateMax, tl[0].turns + 1)) : '',
             };
             const none = L.find(x => x.type === 'draw' && x.choice === 'none');
-            put(dom.draw, el('div.b-draw-title', { text: 'Draw one' }), el('div.b-draw-buttons', {}, ['deck', 'axiom', 'forward', 'rewind'].map(choice => {
+            put(dom.draw, el('div.b-draw-title', {}, [el('strong', { text: 'Choose' }), el('span', { text: 'one draw' })]), el('div.b-draw-buttons', {}, ['deck', 'axiom'].concat(state.options.timeDraws ? ['forward', 'rewind'] : []).map(choice => {
                 const a = L.find(x => x.type === 'draw' && x.choice === choice);
                 const possible = choices.includes(choice);
                 const lessonOnly = !a && possible && guide && st;
-                const detail = DRAW_TEXT[choice][1] + '. ' + (lessonOnly ? 'Not in this lesson step.' : why[choice] ? why[choice].replace(/\.?$/, '.') : '');
+                const detail = (choice === 'deck' && E.rules(state).drawCount > 1 ? E.rules(state).drawCount + ' cards from your deck' : DRAW_TEXT[choice][1]) + '. ' + (lessonOnly ? 'Not in this lesson step.' : why[choice] ? why[choice].replace(/\.?$/, '.') : '');
                 const b = iconButton('.b-draw-btn', {
                     key: 'draw:' + choice, name: DRAW_TEXT[choice][0], detail: detail.trim(), off: !a,
                     art: DRAW_ART[choice], svg: CTRL_SVG[choice], badge: badge[choice], extra: { dataset: { choice } },
@@ -1467,8 +1818,24 @@
                     onclick: (ev, btn) => { if (a) act(a); else showTip(btn, true); },
                 });
                 nodes.draw[choice] = b;
-                return b;
+                // Pointing at a time draw previews it on the Fate track.
+                if ((choice === 'forward' || choice === 'rewind') && !noFate) {
+                    const preview = on => { if (dom.draw.classList.contains('show')) paintFate(on ? (choice === 'forward' ? -1 : 1) : 0); };
+                    b.addEventListener('pointerenter', () => preview(true));
+                    b.addEventListener('pointerleave', () => preview(false));
+                    b.addEventListener('focus', () => preview(true));
+                    b.addEventListener('blur', () => preview(false));
+                }
+                // The rule card button also names the card on top of the shared deck.
+                const topAx = choice === 'axiom' && a ? (Rift.data.axioms || {})[state.axioms.deck[0]] : null;
+                return el('div.b-draw-opt', {}, [b, el('span.b-draw-label', { 'aria-hidden': 'true', onclick: () => b.click() }, [DRAW_LABEL[choice],
+                    topAx ? el('small', { text: ruleWords(topAx) }) : choice === 'deck' && a ? el('small', { text: 'creature or tactic' }) : null])]);
             }).concat(none ? [button('Nothing to draw: continue', () => act(none), 'primary')] : [])));
+            // What the opponent's turn did to me, in one line, beside the draw choice.
+            const recap = guide ? '' : theirTurnRecap();
+            ui.recapTurn = state.turn;
+            ui.recapText = recap;
+            if (recap) dom.draw.appendChild(el('div.b-draw-recap', { text: recap, title: ui.recapFull || recap }));
         }
 
         function renderChoice(L) {
@@ -1493,7 +1860,8 @@
                     const def = B().Abilities[choice] || { name: choice, text: '' };
                     b = el('button.btn.b-choice-text', { type: 'button', onclick: () => pick(choice) }, [el('b', { text: def.name + ': ' }), def.text]);
                 } else {
-                    b = el('button.btn.b-choice-text', { type: 'button', onclick: () => pick(choice) }, [(pend.labels && pend.labels[choice]) || String(choice)]);
+                    const label = (pend.labels && pend.labels[choice]) || String(choice);
+                    b = el('button.btn.b-choice-text', { type: 'button', onclick: () => pick(choice) }, [label, fateOutcome(pend, choice)]);
                 }
                 if (!ok) b.disabled = true;
                 nodes.choose[choice] = b;
@@ -1502,31 +1870,125 @@
             put(dom.choice, el('div.b-choice-title', { text: pend.prompt || 'Choose.' }), opts);
         }
 
-        function renderRules() {
-            dom.rules.innerHTML = '';
-            dom.rules.appendChild(el('summary', { text: 'Rules now · Round ' + state.round }));
-            dom.rules.appendChild(el('dl.b-rule-summary', {}, E.ruleSummary(state).flatMap(([label, text]) => [el('dt', { text: label }), el('dd', { text })])));
-            const active = changedRules();
-            dom.rules.appendChild(el('h4', { text: active.length ? 'Changed rules' : 'No rules are changed. Basic rules apply.' }));
-            active.forEach(ax => dom.rules.appendChild(el('div.b-rule-line', {}, [el('b', { text: ax.name + ' (' + ax.category + '): ' }), ax.text])));
-            dom.rules.appendChild(el('h4', { text: 'Keywords' }));
-            dom.rules.appendChild(el('dl.b-rule-summary.b-keywords', {}, KEYWORD_LINES.flatMap(([k, text]) => [el('dt', { text: k }), el('dd', { text })])));
+        // "Rules in play": one tile per rule, a picture and a few words. The four core rules always
+        // show; a changed rule glows gold and says "Changed". Hover, focus or tap a tile for the card.
+        // For a Fate choice (Clockwork): what the next event would do after that move.
+        function fateOutcome(pend, choice) {
+            if (!(choice === 'forward' || choice === 'rewind') || !pend.source || pend.source.id !== 'clockwork') return null;
             const tl = E.timeline(state);
-            dom.rules.appendChild(el('h4', { text: 'Fate track' }));
-            if (tl.length) tl.forEach(ev => dom.rules.appendChild(el('p.small', { text: fateText(ev, true) })));
-            else dom.rules.appendChild(el('p.small', { text: 'No Fate events in this match.' }));
-            dom.rules.appendChild(el('p.small.muted', { text: 'Every End turn moves Fate 1 space. Shared axiom deck: ' + state.axioms.deck.length + ' cards, ' + state.axioms.discard.length + ' discarded.' }));
+            if (!tl.length) return null;
+            const n = Math.max(0, Math.min(state.options.fateMax, tl[0].turns + (choice === 'forward' ? -1 : 1)));
+            const what = tl[0].type === 'reset' ? 'Reset' : 'New rule';
+            const whose = ((state.active + n) % 2) === ME ? 'your turn' : oppName + '\'s turn';
+            return el('small.b-choice-out', { text: n === 0 ? what + ' happens NOW' : what + ' in ' + n + ' turn' + (n === 1 ? '' : 's') + ' (' + whose + ')' });
         }
 
-        function renderLog() {
-            dom.log.innerHTML = '';
-            E.fullLog(state).forEach(ev => {
-                const text = visibleText(ev);
-                if (!text || ev.t === 'round') return;
-                dom.log.appendChild(el('li.ev-' + ev.t, { text }));
+        function renderRules() {
+            dom.rules.innerHTML = '';
+            // The colour wheel strip runs backwards under the Broken Postulate.
+            const chainEl = dom.wheel.querySelector ? dom.wheel.querySelector('.b-wheel-chain') : null;
+            if (chainEl) {
+                const W = Rift.data.wheel, icons = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c);
+                chainEl.textContent = E.rules(state).wheelReversed ? icons.reverse().join(' › ') + '  (reversed!)' : icons.join(' › ');
+            }
+            const active = state.axioms.active;
+            const AX = Rift.data.axioms || {};
+            const tiles = CORE_RULES.map(([cat, , basic, art, long]) => ruleTile(cat, active[cat], basic, art, long));
+            Object.keys(active).forEach(cat => {
+                const ax = AX[active[cat]];
+                if (ax && !ax.basic && !CORE_RULES.some(c => c[0] === cat)) tiles.push(ruleTile(cat, active[cat]));
             });
-            // The list itself scrolls (max-height in battle.css): keep the newest entry in view.
-            dom.log.scrollTop = dom.log.scrollHeight || 0;
+            const n = changedRules().length;
+            put(dom.rules,
+                el('div.b-rules-head', {}, [el('strong', { text: 'Rules in play' }), el('span.b-rules-sub', { text: n ? n + ' changed (gold tiles)' : 'All basic. Rule cards and Fate can change them.' })]),
+                el('div.b-rule-tiles' + (tiles.length > 6 ? '.compact' : ''), {}, tiles));
+        }
+        function ruleTile(cat, id, basicWords, basicArt, basicLong) {
+            const AX = Rift.data.axioms || {};
+            const ax = id ? AX[id] : null;
+            const changed = !!(ax && !ax.basic);
+            const art = changed ? 'ui/axiom-' + id : basicArt ? 'ui/axiom-' + basicArt : null;
+            let words = changed ? ax.short || ax.name : basicWords || (ax && ax.short) || '';
+            // An attack limit is a per-turn budget: show what is left for the player whose turn it is.
+            const r = E.rules(state);
+            let budget = null;
+            if (cat === 'attacks' && r.attackLimit !== Infinity && E.winner(state) == null) {
+                const left = Math.max(0, r.attackLimit - (state.players[state.active].attacksThisTurn || 0));
+                budget = left + ' left' + (state.active === ME ? '' : ' for ' + oppName);
+            }
+            if (cat === 'energy' && !changed) words = '+' + r.growth + ' each turn';
+            if (cat === 'plays' && E.playsLeft && E.winner(state) == null && r.playLimit !== Infinity) {
+                budget = E.playsLeft(state, state.active) + ' left' + (state.active === ME ? '' : ' for ' + oppName);
+            }
+            const label = RULE_LABEL[cat] || cat;
+            const tile = el('div.b-rtile' + (changed ? '.changed' : ''), {
+                tabindex: 0, role: 'button', dataset: { cat },
+                'aria-label': label + ': ' + words + (changed ? ' (changed by ' + ax.name + ')' : ''),
+            }, [
+                art && has(art) ? Rift.Assets.img(art, { className: 'b-rtile-art', alt: '' }) : el('span.b-rtile-art.glyph', { text: RULE_GLYPH[cat] || '⚖' }),
+                el('span.b-rtile-words', {}, [el('span.b-rtile-cat', { text: label }), el('span.b-rtile-val', { text: words })]),
+                budget ? el('span.b-rtile-budget', { text: budget }) : changed ? el('span.b-rtile-new', { text: 'Changed' }) : null,
+            ]);
+            const make = () => (changed ? [axiomCardEl(id, { size: 'big' }), axiomNote(id)]
+                : [el('div.b-notes.b-basic-rule', {}, [el('div.b-note-line', {}, [el('b', { text: label + ' (basic rule): ' }), basicLong || words]),
+                    el('div.b-note-line.b-flavour', { text: 'A rule card (axiom) can change this rule for BOTH players.' })])]);
+            hoverInspect(tile, make, 'rule:' + cat);
+            tile.addEventListener('click', () => {
+                if (ui.suppressClick) return;
+                if (ui.inspect && ui.inspect.key === 'rule:' + cat && dom.inspect.classList.contains('show')) hideInspect();
+                else showInspect(make(), tile, 'rule:' + cat);
+            });
+            return tile;
+        }
+
+        // Recent plays, like a card battler's history column: the last moves as small pictures
+        // (newest first, yours teal, theirs coral). Each holds what followed it (damage, defeats,
+        // abilities) until the next move; hover, focus or tap shows the card and those lines.
+        const MOVES = { play: '✦', 'tactic-play': '✦', attack: '⚔', activate: '⚡', axiom: '⚖', reset: '↺', time: '⧗', 'item-use': '🎒', spark: '✦' };
+        const RECENT = 5;
+        function recentMoves() {
+            const moves = [];
+            // A Fate flip logs 'flip' and then the rule ('axiom' with no player): one tile, the rule.
+            E.fullLog(state).forEach(ev => {
+                if (MOVES[ev.t] && !(ev.t === 'spark' && !/uses? the Spark/.test(ev.text || ''))) moves.push({ ev, after: [] });
+                else if (moves.length && !/^(turn|turn-end|round|draw|draw-axiom|axiom-play|flip|time)$/.test(ev.t)) {
+                    const text = visibleText(ev);
+                    if (text) moves[moves.length - 1].after.push(text);
+                }
+            });
+            return moves.slice(-RECENT).reverse();
+        }
+        function renderRecent() {
+            const box = dom.recent;
+            box.innerHTML = '';
+            const moves = recentMoves();
+            box.classList.toggle('empty', !moves.length);
+            put(box, el('div.b-recent-head', { text: 'Recent' }), el('div.b-recent-list', {}, moves.map((m, i) => recentTile(m, i))));
+        }
+        function recentTile(m, i) {
+            const ev = m.ev;
+            const by = ev.player === ME ? 'You' : ev.player === OPP ? oppName : 'Fate';
+            const AX = Rift.data.axioms || {};
+            const axId = ev.t === 'axiom' ? ev.id : null;
+            const card = ev.cid && state.cards[ev.cid] ? ev.cid : null;
+            let pic;
+            if (axId && has('ui/axiom-' + axId)) pic = Rift.Assets.img('ui/axiom-' + axId, { alt: '' });
+            else if (card && state.cards[card].kind === 'creature') pic = Rift.Assets.img('creature/' + state.cards[card].species + '/idle', { alt: '', label: name(card) });
+            else if (card && has('tactic/' + state.cards[card].tactic)) pic = Rift.Assets.img('tactic/' + state.cards[card].tactic, { alt: '' });
+            else if (ev.t === 'reset') pic = icon('ui/fate-reset', '↺', 'b-recent-glyph');
+            else pic = el('span.b-recent-glyph', { text: MOVES[ev.t] || '•' });
+            const text = visibleText(ev) || '';
+            const tile = el('div.b-recent-tile.' + (ev.player === ME ? 'mine' : ev.player === OPP ? 'theirs' : 'fate') + (i === 0 ? '.newest' : ''), {
+                tabindex: 0, role: 'button', 'aria-label': text + (m.after.length ? ' ' + m.after.join(' ') : ''),
+            }, [pic, el('span.b-recent-move', { text: MOVES[ev.t] || '•', 'aria-hidden': 'true' }), el('span.b-recent-who', { text: by === 'You' ? 'You' : by === 'Fate' ? 'Fate' : 'Them', 'aria-hidden': 'true' })]);
+            const make = () => {
+                const big = axId ? axiomCardEl(axId, { size: 'big' }) : card ? cardEl(card, { size: 'big', unregistered: true }) : null;
+                return [big, el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: text })])].concat(
+                    m.after.slice(0, 5).map(t => el('div.b-note-line', { text: t }))))];
+            };
+            hoverInspect(tile, make, 'recent:' + i);
+            tile.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), tile, 'recent:' + i); });
+            return tile;
         }
 
         // ---- guide mode ----
@@ -1536,6 +1998,51 @@
             try { Rift.Audio.speak({ speaker: 'granny', text: st.text, voice: Rift.voiceId('granny', st.text) }); } catch (e) { /* no voice */ }
         }
         function stopVoice() { try { if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice(); } catch (e) { /* none */ } }
+        // A lesson trap (step.trap = { expect, card, title, what, say }): the tempting move is stopped,
+        // its rule card is shown big with what would happen, and Granny says why. The step stays.
+        function springTrap(trap) {
+            ui.sel = null;
+            ui.hinted = true;
+            ui.trapSaid = { step: ui.step, text: trap.say };
+            showReveal(el('div.b-reveal-rule', {}, [trap.card ? axiomCardEl(trap.card, { size: 'big' }) : null, el('div.b-reveal-what', { text: trap.what })]), trap.title || 'Careful!', RULE_SHOW, 'rule trap', false);
+            ui.holding = false;   // the learner may act again at once
+            setNote(trap.say);
+            try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: trap.say, voice: Rift.voiceId ? Rift.voiceId('granny', trap.say) : null }); } catch (e) { /* no voice */ }
+        }
+        // An open lesson step ({ open, hint }): no gold pointer at first, so the learner decides. The
+        // hint (and the pointer) come after HINT_AFTER ms, or at once after the step's trap.
+        const HINT_AFTER = 25000;
+        function startHintClock() {
+            clearTimeout(ui.hintTimer);
+            ui.hinted = false;
+            const st = step();
+            if (!st || !st.open) return;
+            ui.hintTimer = setTimeout(() => {
+                if (ui.ended || step() !== st || ui.hinted) return;
+                ui.hinted = true;
+                render();
+                try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: st.hint, voice: Rift.voiceId ? Rift.voiceId('granny', st.hint) : null }); } catch (e) { /* no voice */ }
+            }, HINT_AFTER);
+        }
+        // The text Granny shows for a step: an open step adds its hint once it is due.
+        const stepText = st => st.text + (st.open && ui.hinted && st.hint ? ' ' + st.hint : '');
+        // A narration line between replies: shown in Granny's panel and spoken; the lesson goes on
+        // when the voice ends (at least a reading pause, at most 12 s).
+        function narrate(text) {
+            const gen = (ui.sayGen = (ui.sayGen || 0) + 1);
+            ui.say = text;
+            ui.saying = true;
+            render();
+            const words = String(text).split(/\s+/).length;
+            let voiceDone = false, readDone = false;
+            const go = () => { if (voiceDone && readDone && ui.sayGen === gen && !ui.ended && ui.saying) { ui.saying = false; clearTimeout(ui.sayCap); schedule(); } };
+            let p = null;
+            try { p = Rift.Audio && Rift.Audio.speak ? Rift.Audio.speak({ speaker: 'granny', text, voice: Rift.voiceId ? Rift.voiceId('granny', text) : null }) : null; } catch (e) { p = null; }
+            if (p && p.then) p.then(() => { voiceDone = true; go(); }, () => { voiceDone = true; go(); });
+            else voiceDone = true;
+            ui.sayTimer = setTimeout(() => { readDone = true; go(); }, Math.max(1200, words * 260));
+            ui.sayCap = setTimeout(() => { voiceDone = true; go(); }, 12000);
+        }
 
         function leaveGuide() {
             if (ui.ended) return;
@@ -1593,8 +2100,10 @@
                     speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
                     el('div', {}, [el('div.b-coach-count', { text: done ? 'Lesson complete' : 'Step ' + (ui.step + 1) + ' of ' + n }), el('h3', { text: done ? 'Well played!' : st.title })]),
                 ]),
-                el('p.b-coach-text', { text: done ? 'You won by the current rules.' : st.text }),
-                el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? 'Watch Granny\'s reply…' : 'Do this: ' + st.label }),
+                ui.busy && !done ? null : el('p.b-coach-text', { text: done ? 'You won by the current rules.' : stepText(st) }),
+                el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read the rule tiles first.' : 'Do this: ' + st.label }),
+                ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
+                !ui.busy && ui.trapSaid && ui.trapSaid.step === ui.step ? el('p.b-coach-say.warn', { text: ui.trapSaid.text }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
@@ -1625,6 +2134,7 @@
             if (!guide) return;
             const st = step();
             if (!st || ui.busy || decider() !== ME) return;
+            if (st.open && !ui.hinted) return;   // an open step: the learner decides first
             const x = st.expect;
             let focus = null;
             let ring = null;
@@ -1651,8 +2161,19 @@
             if (ring && ring !== focus) ring.classList.add('guide-ring');
             if (focus) {
                 focus.classList.add('guide-focus');
-                focus.appendChild(el('span.guide-pointer', { 'aria-hidden': 'true', text: '▼ ' + st.label }));
+                const up = focus.closest && focus.closest('.opp-board, .b-hero-row.opp');
+                const tag = el('span.guide-pointer', { 'aria-hidden': 'true', text: (up ? '▲ ' : '▼ ') + st.label });
+                focus.appendChild(tag);
+                keepInside(tag);
             }
+        }
+        // Nudge a pointer label back inside the table when its card sits at the edge.
+        function keepInside(tag) {
+            if (!tag.getBoundingClientRect || !dom.arena.getBoundingClientRect) return;
+            const a = dom.arena.getBoundingClientRect(), r = tag.getBoundingClientRect();
+            if (!r.width) return;
+            const dx = r.left < a.left + 6 ? a.left + 6 - r.left : r.right > a.right - 6 ? a.right - 6 - r.right : 0;
+            if (dx) tag.style.marginLeft = Math.round(dx) + 'px';
         }
         function findAxiomInHand(id) { return nodes['ax:' + id] || null; }
 
@@ -1693,6 +2214,7 @@
             if (state.phase === 'draw') return 'First choose your draw.';
             if (state.phase === 'choose') return 'First answer the question.';
             if (!axiomChanges(id)) return whyNotAxiomRule(id);
+            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn).';
             return 'This rule card needs ' + E.axiomCost(state, id) + ' energy. You have ' + state.players[ME].energy + '.';
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).
@@ -1990,15 +2512,17 @@
             const pv = E.fightPreview(state, att, target);
             if (pv.hero) {
                 const h = state.players[+target[1]];
-                return { target: ['−' + pv.damage + ' heart' + (pv.damage === 1 ? '' : 's'), h.hearts - pv.damage <= 0 ? (E.rules(state).reverseHearts ? '0 hearts: ' + oppName + ' wins!' : '0 hearts: you win!') : pv.hearts + ' left'],
-                    attacker: ['Deals ' + pv.damage] };
+                const rev = E.rules(state).reverseHearts;
+                return { target: ['−' + pv.damage + ' heart' + (pv.damage === 1 ? '' : 's'), h.hearts - pv.damage <= 0 ? (rev ? '0 hearts: ' + oppName + ' wins!' : '0 hearts: you win!') : pv.hearts + ' left'].concat(
+                    rev && target === 'h' + OPP ? ['⚠ The Last Shall Be First: this helps ' + oppName + '!'] : []),
+                    attacker: ['Deals ' + pv.damage], targetDies: rev };
             }
             const colourPart = (cid, foe) => (E.attackParts(state, cid, foe).parts.find(x => x.source === 'colour') || {}).amount || 0;
             const ca = colourPart(att, target), cb = colourPart(target, att);
             const tag = n => (n ? ' (' + (n > 0 ? '+' : '−') + Math.abs(n) + ' colour)' : '');
             const blocked = (cid, amount) => amount > 0 && E.hasKeyword(state, cid, 'shield');
-            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.toDefender + tag(ca);
-            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.toAttacker + tag(cb);
+            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.toDefender + (pv.toDefender ? tag(ca) : '');
+            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.toAttacker + (pv.toAttacker ? tag(cb) : '');
             return {
                 target: [takesT, pv.defenderDefeated ? 'Defeated' : 'Survives'],
                 attacker: ['Deals ' + pv.toDefender + tag(ca), takesA, pv.attackerDefeated ? 'Defeated' : 'Survives'],
@@ -2013,7 +2537,7 @@
             if (!a || !t || !state.cards[att]) return;
             let p;
             try { p = predictLines(att, target); } catch (e) { return; }
-            t.appendChild(predictBadge(p.target, p.targetDies || /win/.test(p.target[1] || '')));
+            t.appendChild(predictBadge(p.target, p.targetDies || /you win/.test(p.target[1] || '')));
             a.appendChild(predictBadge(p.attacker, p.attackerDies));
         }
         function clearPredict() {
@@ -2093,6 +2617,11 @@
                 if (ev.t === 'damage') float(ev.cid, '−' + ev.amount, 'dmg', before);
                 if (ev.t === 'hit') float('h' + ev.player, '−' + ev.amount + ' ❤', 'dmg', before);
                 if (ev.t === 'shield') float(ev.cid, 'Blocked!', 'info', before);
+                // A changed fight rule decided this fight: name it over the defender.
+                if (ev.t === 'fight') {
+                    const rule = E.changedAxioms(state).find(a => a.category === 'combat');
+                    if (rule) float(ev.defender, '⚖ ' + (rule.short || rule.name), 'rule', before);
+                }
                 if (ev.t === 'item-use') float(ev.target || 'h' + ev.player, ((Rift.data.items || {})[ev.id] || { name: ev.id }).name, 'info', before);
                 if (ev.t === 'defeated' && before[ev.cid]) {
                     const r = before[ev.cid];
@@ -2154,8 +2683,20 @@
                 'both-zero': 'Both heroes reached zero hearts at once.',
             }[state.endReason] || '';
             const body = [el('h2', { text: title }), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
+            // The TOK point: which rules decided this match.
+            const changes = E.fullLog(state).filter(ev => ev.t === 'axiom' || ev.t === 'reset').length;
+            const endRules = changedRules();
+            if (!guide && changes) body.push(el('div.b-end-rules', {}, [
+                el('strong', { text: 'The rules changed ' + changes + ' time' + (changes === 1 ? '' : 's') + ' in this match.' }),
+                el('span', { text: endRules.length ? ' Rules in play at the end: ' + endRules.map(ax => ax.name + ' (' + (ax.short || ax.text) + ')').join('; ') + '. Same cards, other rules: would you have won?'
+                    : ' At the end the basic rules were back.' }),
+            ]));
             if (guide) {
-                body.push(el('p', { text: 'You used the draw choice, played creatures, a tactic and a rule card, took away a Guard with an Entrance, and won by the current rules. Real matches start with ' + E.DEFAULTS.hearts + ' hearts each.' }));
+                const speaker = (Rift.data.speakers || {}).granny;
+                const outro = guide.outro || 'Same table, different rules, different endings. In maths, the rules you start from are called axioms.';
+                body.push(el('div.b-outro', {}, [speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null, el('p', { text: outro })]));
+                body.push(el('p.small', { text: 'Real matches start with ' + E.DEFAULTS.hearts + ' hearts each. Read the rule tiles before you attack!' }));
+                try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: outro, voice: Rift.voiceId ? Rift.voiceId('granny', outro) : null }); } catch (e) { /* no voice */ }
             } else if (mode === 'practice') {
                 body.push(el('p', { text: p.story ? 'Story challenge: nothing at stake. Your creatures and items are safe.' : 'Practice: nothing at stake. Your creatures are safe.' }));
             } else {
@@ -2192,7 +2733,7 @@
             const chain = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c).join(' › ');
             return el('details.b-wheel.panel', {}, [
                 el('summary', {}, [
-                    'Colour wheel: +' + W.bonus + ' attack vs the colour you beat',
+                    'Colour wheel: +' + W.bonus + ' attack',
                     el('span.b-wheel-chain', { title: W.order.map(c => Rift.COLOURS[c].name + ' beats ' + Rift.COLOURS[W.beats[c]].name).join('. ') + '.', text: chain }),
                 ]),
                 el('p.small', { text: 'These are rules for this game, not a ranking of ways of knowing.' }),
@@ -2202,7 +2743,7 @@
 
         const handle = {
             destroy() {
-                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); cancelLongPress(); hideTip();
+                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); clearTimeout(ui.revealTimer); clearTimeout(ui.hintTimer); clearTimeout(ui.sayTimer); clearTimeout(ui.sayCap); cancelLongPress(); hideTip();
                 ui.ended = true; cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
                 if (help) help.close();

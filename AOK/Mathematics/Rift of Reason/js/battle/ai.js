@@ -291,7 +291,13 @@
         const handCreatures = P.hand.filter(cid => s.cards[cid].kind === 'creature').length;
         let v = 0;
         if (r.costDelta) v -= r.costDelta * 0.5 * (handCreatures - Q.hand.length * 0.5);
-        if (r.growth > 1) v += 0.3 * (P.hand.length - Q.hand.length);
+        if (r.growth !== 1) v += 0.3 * (r.growth - 1) * (P.hand.length - Q.hand.length);
+        // Plays per turn, hand limit and bonus rules (the Fluxx-style rule cards).
+        const hands = P.hand.length + P.axHand.length - (Q.hand.length + Q.axHand.length);
+        if (r.playLimit !== 2) v += 0.15 * (Math.min(r.playLimit, 4) - 2) * hands;
+        if (r.handCap != null) v -= 0.2 * (Math.max(0, P.hand.length - r.handCap) - Math.max(0, Q.hand.length - r.handCap));
+        if (r.bonus === 'fair-share' || r.bonus === 'momentum') v += (r.bonus === 'momentum' ? 0.3 : -0.3) * Math.sign(P.board.length - Q.board.length);
+        if (r.bonus === 'fresh-start') v -= 0.15 * hands;
         if (r.arrivalReady) v += 0.4 * (handCreatures - Q.hand.length * 0.5);
         if (r.heal) {
             let mine = 0, theirs = 0;

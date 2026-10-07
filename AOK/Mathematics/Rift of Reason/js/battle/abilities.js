@@ -129,7 +129,9 @@
                 run(api, card, target) {
                     const t = api.s.cards[target];
                     const old = api.name(target);
-                    t.nickname = api.rng.pick(NICKNAMES) + ' ' + api.cardName(target);
+                    // A new nickname replaces an old one (never 'Sad "Low-Energy X"').
+                    const base = ((Rift.data.creatures || {})[t.species] || {}).name || api.cardName(target);
+                    t.nickname = api.rng.pick(NICKNAMES) + ' ' + base;
                     t.colourless = true;
                     api.buff(target, -2, 0, 'Nickname');
                     api.emit({ t: 'nickname', cid: target, text: api.name(card.cid) + ' calls ' + old + ' "' + t.nickname + '". −2 attack, no colour.' });

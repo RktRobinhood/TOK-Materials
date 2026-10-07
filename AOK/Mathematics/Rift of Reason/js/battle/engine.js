@@ -3,8 +3,8 @@
  * PURE and deterministic: state + action → new state. No DOM.
  *
  * Heroes have hearts (10 by default). Creatures have attack and health; damage stays.
- * Each turn: one draw choice (own deck, shared axiom deck, or move the Fate track),
- * then play creatures/tactics/axiom cards for energy, attack with ready creatures
+ * Each turn: one draw choice (own deck or the shared axiom deck), then play up to rules.playLimit
+ * cards (2 by default; creatures, tactics and axiom cards) for energy, attack with ready creatures
  * (drag at a creature or the enemy hero; Guard must be attacked first), activate
  * abilities (uses that creature's attack), and End turn. Energy capacity grows
  * 1→10 and refills. The Fate track flips/resets the shared rules.
@@ -31,7 +31,7 @@
  * A card discarded because the hand was full is tagged `burned` and is not reported by lostUids.
  *
  * Actions (each carries `player` in legalActions):
- *   { type: 'draw', choice: 'deck' | 'axiom' | 'forward' | 'rewind' | 'none' }     phase 'draw'
+ *   { type: 'draw', choice: 'deck' | 'axiom' | 'none' }     phase 'draw'  ('forward' | 'rewind' only with options.timeDraws)
  *   { type: 'play', cid, target? }            creature or tactic from hand        phase 'main'
  *   { type: 'axiom', choice: axiomId }        play an axiom card from hand
  *   { type: 'attack', cid, target }           target: enemy creature cid or 'h0' / 'h1'
@@ -62,11 +62,12 @@
         hearts: 12, energyCap: 10, handLimit: 10, boardLimit: 7,
         deckSize: 20, minCreatures: 6, maxCreatures: 14,
         openHand: [2, 4], openAxioms: 1, spark: true,
-        timeline: true, fateStart: 6, fateGap: 6, fateMax: 12,
+        timeline: true, timeDraws: false, fateStart: 6, fateGap: 6, fateMax: 12,
         maxTurns: 60, first: 'random', shuffle: true, shuffleAxioms: true, mode: 'practice',
     };
     const RULE_DEFAULTS = {
         attackLimit: Infinity, attacksPerCreature: 1, costDelta: 0, growth: 1, drawCount: 1,
+        playLimit: 2, handCap: null, bonus: null,
         heal: false, arrivalReady: false, ignoreGuard: false, mercy: false, abilityCostDelta: 0,
         abilitiesOff: false, reverseHearts: false, heroDamageCap: null, wheelReversed: false,
     };
@@ -391,7 +392,7 @@
         const c = s.cards[cid];
         if (c.kind === 'tactic') {
             const t = tacticDefs()[c.tactic] || {};
-            return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, flavour: t.flavour, target: t.target || null,
+            return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, short: t.short || null, flavour: t.flavour, target: t.target || null,
                 colour: t.colour || null, rarity: t.rarity || null, colourReady: !t.colour || colourInPlay(s, c.controller, t.colour) };
         }
         const sp = species(c.species) || {};
@@ -426,7 +427,7 @@
         const limit = r.attackLimit === Infinity ? '' : ' At most ' + r.attackLimit + ' attack' + (r.attackLimit === 1 ? '' : 's') + ' per player per turn.';
         return [
             ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the enemy hero to zero hearts.'],
-            ['Turn', 'Choose one draw: your deck, the axiom deck, or move Fate 2 spaces. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + ').'],
+            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Play up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' cards.'],
             ['Attacks', (r.attacksPerCreature > 1 ? 'Each ready creature may attack twice.' : 'Each ready creature may attack once.') + limit + ' New creatures wait a turn unless Swift' + (r.arrivalReady ? ' (now: all can act at once).' : '.')],
             ['Combat', (combat ? combat.text : 'Both creatures deal damage equal to their attack.') + ' Damage stays' + (r.heal ? ' until the controller\'s next turn (healing rule).' : '.')],
             ['Guard', r.ignoreGuard ? 'Guard is ignored right now.' : 'If the enemy has Guard creatures, attack one of them first.'],
@@ -468,7 +469,9 @@
         const out = [];
         if (room && P.deck.length) out.push('deck');
         if (room && (s.axioms.deck.length || s.axioms.discard.length)) out.push('axiom');
-        if (s.options.timeline) out.push('forward', 'rewind');
+        // Time draws (move Fate instead of drawing) are off by default: the teacher wants Fate to move
+        // only forward, 1 space per turn, and be bent only by cards and abilities.
+        if (s.options.timeline && s.options.timeDraws) out.push('forward', 'rewind');
         if (!out.length) out.push('none');
         return out;
     }
@@ -483,8 +486,9 @@
         const P = s.players[p];
         const list = [{ type: 'end', player: p }];
         if (P.spark) list.push({ type: 'spark', player: p });
+        const canPlay = playsLeft(s, p) > 0;
         P.hand.forEach(cid => {
-            if (playCost(s, cid) > P.energy) return;
+            if (!canPlay || playCost(s, cid) > P.energy) return;
             const c = s.cards[cid];
             if (c.kind === 'creature') {
                 if (P.board.length >= s.options.boardLimit) return;
@@ -501,7 +505,7 @@
                 else list.push({ type: 'play', player: p, cid });
             }
         });
-        Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id) <= P.energy && axiomWouldChange(s, id)) list.push({ type: 'axiom', player: p, choice: id }); });
+        if (canPlay) Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id) <= P.energy && axiomWouldChange(s, id)) list.push({ type: 'axiom', player: p, choice: id }); });
         P.board.forEach(cid => {
             if (canAttack(s, cid)) attackTargets(s, cid).forEach(target => list.push({ type: 'attack', player: p, cid, target }));
             if (canActivateNow(s, cid)) activations(s, cid).forEach(a => {
@@ -513,6 +517,10 @@
         if (P.bag && P.bag.length) itemActions(s, p).forEach(a => list.push(a));
         return list;
     }
+
+    // Card plays left this turn (creatures, tactics and rule cards each use one; attacks are free).
+    function playLimit(s, p) { return rules(s).playLimit + (s.players[p].extraPlays || 0); }
+    function playsLeft(s, p) { return Math.max(0, playLimit(s, p) - (s.players[p].playsThisTurn || 0)); }
 
     // The creature's (first) working Entrance, before it is played (abilities are checked as if on board).
     function entranceOf(s, card) {
@@ -671,8 +679,8 @@
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
         switch (match.type) {
             case 'draw': doDraw(G, match.choice); break;
-            case 'play': doPlay(G, match.cid, match.target || null); break;
-            case 'axiom': doAxiom(G, match.choice); break;
+            case 'play': countPlay(G); doPlay(G, match.cid, match.target || null); break;
+            case 'axiom': countPlay(G); doAxiom(G, match.choice); break;
             case 'attack': doAttack(G, match.cid, match.target); break;
             case 'activate': doActivate(G, match.cid, match.ability, match.target || null); break;
             case 'spark': doSpark(G); break;
@@ -685,6 +693,8 @@
         s.log = { prev: state.log, events: G.events };
         return s;
     }
+
+    function countPlay(G) { const P = G.s.players[G.s.active]; P.playsThisTurn = (P.playsThisTurn || 0) + 1; }
 
     const capFirst = x => (typeof x === 'string' && x ? x[0].toUpperCase() + x.slice(1) : x);
     function emit(G, ev) {
@@ -826,7 +836,7 @@
         if (!s.axioms.deck.length || handCount(P) >= s.options.handLimit) return null;
         const id = s.axioms.deck.shift();
         P.axHand.push(id);
-        if (!quiet) emit(G, { t: 'draw-axiom', player: p, id, privateTo: p, text: 'You take the axiom card ' + axiomDefs()[id].name + '.', publicText: playerName(s, p) + ' takes an axiom card.' });
+        if (!quiet) emit(G, { t: 'draw-axiom', player: p, id, privateTo: p, text: 'You take the rule card ' + axiomDefs()[id].name + '.', publicText: playerName(s, p) + ' takes a rule card.' });
         return id;
     }
 
@@ -864,9 +874,11 @@
             setWinner(G, 1 - p, 'cannot-act');
             return;
         }
-        P.capacity = Math.min(s.options.energyCap, P.capacity + r.growth);
+        P.capacity = Math.max(1, Math.min(s.options.energyCap, P.capacity + r.growth));   // growth may be 0 or −1
         P.energy = P.capacity + (P.consumables['extra-energy'] || 0);
         P.attacksThisTurn = 0;
+        P.playsThisTurn = 0;
+        P.extraPlays = 0;
         P.board.forEach(cid => {
             const c = s.cards[cid];
             c.attacks = 0; c.activated = false;
@@ -875,6 +887,25 @@
         s.phase = 'draw';
         s.pending = null;
         emit(G, { t: 'turn', player: p, text: playerName(s, p) + ': ' + P.energy + ' energy. Choose a draw.' });
+        startBonus(G, p, r);
+    }
+
+    // Bonus rules (one at a time), checked when a turn starts:
+    //   fresh-start  an empty hand draws 2 cards
+    //   fair-share   fewer creatures in play than the opponent: draw 1 card
+    //   momentum     more creatures in play than the opponent: +1 card play this turn
+    function startBonus(G, p, r) {
+        const s = G.s, P = s.players[p], Q = s.players[1 - p];
+        if (r.bonus === 'fresh-start' && !handCount(P)) {
+            emit(G, { t: 'bonus', player: p, text: 'Fresh Start: ' + says(s, p, 'draws') + ' 2 cards (empty hand).' });
+            draw(G, p); draw(G, p);
+        } else if (r.bonus === 'fair-share' && P.board.length < Q.board.length) {
+            emit(G, { t: 'bonus', player: p, text: 'Fair Share: fewer creatures in play, so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' 1 card.' });
+            draw(G, p);
+        } else if (r.bonus === 'momentum' && P.board.length > Q.board.length) {
+            P.extraPlays = 1;
+            emit(G, { t: 'bonus', player: p, text: 'Momentum: more creatures in play, so +1 card play this turn.' });
+        }
     }
 
     function doDraw(G, choice) {
@@ -882,8 +913,8 @@
         if (choice === 'deck') { for (let i = 0; i < n; i++) draw(G, p); }
         else if (choice === 'axiom') { for (let i = 0; i < n; i++) drawAxiom(G, p); }
         else if (choice === 'forward' || choice === 'rewind') {
-            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw. Fate moves 2 spaces ' + (choice === 'forward' ? 'closer.' : 'away.') });
-            shiftFate(G, choice === 'forward' ? 2 : -2);
+            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw. Fate moves 1 space ' + (choice === 'forward' ? 'closer.' : 'away.') });
+            shiftFate(G, choice === 'forward' ? 1 : -1);
         }
         if (s.winner == null) { s.phase = 'main'; cleanup(G); }
     }
@@ -903,6 +934,7 @@
         });
         Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(b => b.temp)) c.buffs = c.buffs.filter(b => !b.temp); });
         P.board.forEach(cid => { s.cards[cid].frozen = false; });
+        endRules(G, p);
         cleanup(G);
         emit(G, { t: 'turn-end', player: p, text: says(s, p, 'ends') + ' the turn.' });
         P.turnsTaken += 1;
@@ -914,6 +946,25 @@
         if (anchored) emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move.' });
         else shiftFate(G, 1);
         if (s.winner == null) startTurn(G);
+    }
+
+    function endRules(G, p) {
+        const s = G.s, P = s.players[p], r = rules(s);
+        if (r.bonus === 'think') {
+            const n = Math.min(2, playsLeft(s, p));
+            if (n > 0) {
+                emit(G, { t: 'bonus', player: p, text: 'Think It Over: ' + n + ' unused play' + (n === 1 ? '' : 's') + ', so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' ' + n + ' card' + (n === 1 ? '' : 's') + '.' });
+                for (let i = 0; i < n; i++) draw(G, p);
+            }
+        }
+        if (r.handCap != null && handCount(P) > r.handCap) {
+            let extra = handCount(P) - r.handCap;
+            const gone = [];
+            while (extra > 0 && P.hand.length) { const cid = P.hand.shift(); s.cards[cid].burned = true; P.discard.push(cid); gone.push(cardName(s, cid)); extra--; }
+            while (extra > 0 && P.axHand.length) { s.axioms.discard.push(P.axHand.shift()); gone.push('a rule card'); extra--; }
+            emit(G, { t: 'hand-limit', player: p, privateTo: p, text: 'Hand limit ' + r.handCap + ': you discard ' + gone.join(', ') + '.',
+                publicText: 'Hand limit ' + r.handCap + ': ' + playerName(s, p) + ' discards ' + gone.length + ' card' + (gone.length === 1 ? '' : 's') + '.' });
+        }
     }
 
     // Positive shifts move the next event closer; negative shifts delay it.
@@ -990,7 +1041,7 @@
         const s = G.s, p = s.active, P = s.players[p];
         spend(G, axiomCost(s, id));
         removeFrom(P.axHand, id);
-        emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' an axiom card.' });
+        emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' a rule card.' });
         setAxiom(G, id, p);
         afterMove(G);
     }
@@ -1062,7 +1113,7 @@
         const pa = attackOf(s, att, def), pb = attackOf(s, def, att);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
-        emit(G, { t: 'fight', attacker: att, defender: def, pa, pb, text: logName(s, att) + ' (' + pa + ' attack) fights ' + logName(s, def) + ' (' + pb + ' attack).' });
+        emit(G, { t: 'fight', attacker: att, defender: def, pa, pb, text: logName(s, att) + ' (' + pa + ' attack) fights ' + logName(s, def) + ' (' + pb + ' attack)' + (combatAxiom(s) && !combatAxiom(s).basic ? ' under ' + combatAxiom(s).name : '') + '.' });
         dealDamage(G, def, res.toDefender, att);
         dealDamage(G, att, res.toAttacker, def);
         const aDead = healthOf(s, att).current <= 0, dDead = healthOf(s, def).current <= 0;
@@ -1273,7 +1324,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

@@ -43,14 +43,21 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
     const t = setup(practice);
     const { E, $ } = t;
     assert.equal(t.handle.state.phase, 'draw');
+    // Only two draws by default (Fate time draws are off): your deck or a rule card.
     const drawButtons = t.root.querySelectorAll('.b-draw-btn');
-    assert.equal(drawButtons.length, 4);
+    assert.equal(drawButtons.length, 2);
     assert.equal(drawButtons[0].getAttribute("aria-label"), "Draw from your deck");
-    assert.equal(drawButtons[1].dataset.tip, "Take an axiom card");
-    assert.equal(drawButtons[2].dataset.tip, "Fate 2 closer");
-    assert.equal(drawButtons[3].dataset.tip, "Fate 2 away");
-    assert.match(t.$(".b-draw-title").textContent, /^Draw one$/);
-    assert.ok(!/Draw from your deck/.test(t.text()), "the draw buttons show pictures, not words");
+    assert.equal(drawButtons[1].dataset.tip, "Take a rule card");
+    const title = t.$(".b-draw-title");
+    assert.equal(title.querySelector('strong').textContent, 'Choose');
+    assert.equal(title.querySelector('span').textContent, 'one draw');
+    // Each picture button has a short visible label under it.
+    const labels = t.root.querySelectorAll('.b-draw-opt .b-draw-label');
+    assert.equal(labels.length, 2);
+    assert.match(labels[0].textContent, /^Your deck/);
+    assert.match(labels[1].textContent, /^Rule card/);
+    assert.ok(labels[1].querySelector('small'), 'the rule card label names the top card in a small line');
+    assert.ok(!/Draw from your deck/.test(t.text()), "the long name is only in the tooltip");
     $('.b-draw-btn[data-choice="deck"]').click();
     assert.equal(t.handle.state.phase, 'main');
     assert.equal(t.handle.state.players[0].hand.length, 4);
@@ -61,7 +68,9 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
     assert.match(play.textContent, /Play · 1/);
     play.click();
     assert.equal(t.handle.state.players[0].board.join(), 'p0c0');
-    assert.match($('.my-board [data-cid="p0c0"]').textContent, /Zzz/, 'a new creature shows it is asleep');
+    assert.match($('.my-board [data-cid="p0c0"] .bc-state.sleep').textContent, /Asleep/, 'a new creature shows it is asleep');
+    assert.equal(t.handle.state.players[0].hand.length, 3);
+    assert.match($('.b-hero-row.me .b-plays').title, /1 of 2 left/, 'one of two card plays used');
 
     // Clicking the sleeping creature explains why it can't attack.
     $('.my-board [data-cid="p0c0"]').click();
@@ -86,7 +95,12 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
     assert.equal(s.cards.p0c0.damage, 1);
     assert.equal(s.cards.p1c0.damage, 1);
     assert.ok($('.opp-board [data-cid="p1c0"] .bc-gem.health').classList.contains('hurt'), 'damaged health shows in red');
-    assert.match(t.root.querySelector('.b-log').textContent, /fights/);
+    // No text log: the newest move is the top tile of "Recent plays"; it holds what followed.
+    assert.equal(t.root.querySelector('.b-log'), null);
+    const recent = t.root.querySelectorAll('.b-arena .b-recent .b-recent-tile');
+    assert.ok(recent.length >= 2 && recent.length <= 5, 'at most five recent plays');
+    assert.ok(recent[0].classList.contains('newest') && recent[0].classList.contains('mine'));
+    assert.match(recent[0].getAttribute('aria-label'), /You attack .*fights/);
     t.handle.destroy();
 });
 
@@ -97,35 +111,39 @@ test('guide mode allows only the expected action and runs the replies', () => {
     assert.equal(t.spoken[0].speaker, 'granny');
     assert.equal(t.spoken[0].voice, t.Rift.voiceId('granny', t.Rift.Battle.Lesson.steps[0].text));
     assert.equal($('.b-draw-btn[data-choice="deck"]').getAttribute('aria-disabled'), null);
-    for (const c of ['axiom', 'forward', 'rewind']) {
-        const b = $('.b-draw-btn[data-choice="' + c + '"]');
-        assert.equal(b.getAttribute('aria-disabled'), 'true', c);
-        assert.ok(b.classList.contains('off'), c);
-        assert.match(b.dataset.tipDetail, /Not in this lesson step/, c);
-    }
+    assert.equal(t.root.querySelectorAll('.b-draw-btn').length, 2, 'no Fate time draws in the lesson');
+    const ax = $('.b-draw-btn[data-choice="axiom"]');
+    assert.equal(ax.getAttribute('aria-disabled'), 'true');
+    assert.ok(ax.classList.contains('off'));
+    assert.match(ax.dataset.tipDetail, /Not in this lesson step/);
     assert.ok($('.b-draw-btn[data-choice="deck"]').classList.contains('guide-focus'));
-    $('.b-draw-btn[data-choice="forward"]').click();
+    ax.click();
     assert.equal(t.handle.state.phase, 'draw', 'a disabled choice does nothing');
     $('.b-draw-btn[data-choice="deck"]').click();
     assert.equal(t.handle.step, 1);
 
-    // Astrophysicat is affordable later but not part of this step.
+    // Astrophysicat is in the hand but not part of this step.
     $('.b-hand [data-cid="p0c1"]').click();
     assert.match($('.b-note').textContent, /gold pointer/);
     assert.equal($('.b-prompt .btn.primary'), null);
     assert.ok($('.b-hand [data-cid="p0c0"]').classList.contains('guide-focus'));
     $('.b-hand [data-cid="p0c0"]').click();
     $('.b-prompt .btn.primary').click();
+    // A narration reply ({ say }) shows in Granny's panel; the step moves on after it.
+    assert.equal(t.handle.busy, true);
+    assert.equal(t.handle.step, 1);
+    assert.match($('.b-coach-say').textContent, /asleep/);
+    t.g.flush();
     assert.equal(t.handle.step, 2);
     assert.ok($('.b-end').classList.contains('guide-focus'));
     $('.b-end').click();
     assert.equal(t.handle.busy, true);
-    assert.equal(t.handle.state.active, 1, 'the reply waits for a pause');
     t.g.flush();
     assert.equal(t.handle.busy, false);
     assert.equal(t.handle.step, 3);
-    assert.equal(t.handle.state.players[1].board.join(), 'p1c0');
-    assert.match($('.b-coach').textContent, /Attack a creature/);
+    assert.equal(t.handle.state.active, 0, 'Granny drew and passed back');
+    assert.equal(t.handle.state.players[1].board.length, 0);
+    assert.match($('.b-coach').textContent, /Do this: Draw from your deck/);
     t.handle.destroy();
 });
 
@@ -160,13 +178,17 @@ test('hand and board cards show a big preview with the full text on hover and lo
     const { $ } = t;
     $('.b-draw-btn[data-choice="deck"]').click();
     const card = $('.b-hand [data-cid="p0c0"]');
-    // Small cards show keyword chips and the ability name; the preview shows the full text.
+    // Small cards show keyword chips and the ability's timing and name; the notes under the big
+    // card hold the full text.
     const text = t.E.describe(t.handle.state, 'p0c0').lines[0].text.replace(/^(Entrance|Last Word|Activate \(\d+ energy\)):\s*/i, '');
+    const full = text.charAt(0).toUpperCase() + text.slice(1);
+    assert.ok(!card.textContent.includes(text) && !card.textContent.includes(full), 'the hand card is short');
     card.dispatchEvent({ type: 'pointerenter', pointerType: 'mouse' });
     t.g.flush();
     assert.ok($('.b-inspect').classList.contains('show'));
     assert.ok($('.b-inspect .bc.big'));
-    assert.ok($('.b-inspect').textContent.includes(text), 'the preview has the full ability text');
+    assert.ok(!$('.b-inspect .bc.big').textContent.includes(full), 'the big card shows the brief too');
+    assert.ok($('.b-inspect .b-notes .b-ability').textContent.includes(full), 'the notes have the full ability text');
     card.dispatchEvent({ type: 'pointerleave', pointerType: 'mouse' });
     assert.equal($('.b-inspect').classList.contains('show'), false);
 
@@ -243,7 +265,7 @@ test('pointing at a target with an attacker chosen shows the predicted fight', (
     t.handle.destroy();
 });
 
-test('a long opponent title stays out of the log; story end screen, keywords, Fate wording and log scroll', () => {
+test('a long opponent title stays out of Recent plays; story end screen, rule tiles and the Fate reel', () => {
     const t = setup(Object.assign({}, practice, {
         story: true,
         opponent: Object.assign({}, practice.opponent, { name: 'Sergeant Syllo · Road challenge', hearts: 1 }),
@@ -253,14 +275,35 @@ test('a long opponent title stays out of the log; story end screen, keywords, Fa
     const pill = $('.b-hero-row.opp .b-hero-name');
     assert.equal(pill.textContent, 'Sergeant Syllo');
     assert.equal(pill.title, 'Sergeant Syllo · Road challenge');
-    // The lane says it short; the tooltip and Rules now have the long explanation.
-    assert.match($('.b-fate-text').textContent, /^In \d+ turns: new rule \(.+\)\.$/);
-    assert.match($('.b-fate').title, /the top card of the shared deck/);
-    assert.match($('.b-rules').textContent, /the top card of the shared deck/);
-    assert.match($('.b-rules').textContent, /Keywords.*Guard.*Swift.*Shield.*Elusive.*Spark.*Entrance.*Last Word.*Activate/);
+    // The Fate track is a centred 7-space reel with NOW fixed in the middle and a short summary;
+    // the old text line and pips are gone.
+    assert.equal($('.b-fate-text'), null);
+    assert.equal(t.root.querySelectorAll('.b-fate .pip').length, 0);
+    assert.ok($('.b-lane .b-fate .b-fate-label'));
+    assert.equal(t.root.querySelectorAll('.b-fate-track > .b-fate-reel > .b-fs').length, 7);
+    assert.equal(t.root.querySelectorAll('.b-fate-reel .b-fs.now').length, 1);
+    assert.ok($('.b-fate-track > .b-fate-now'));
+    const turns = t.handle.state.fate.until;
+    assert.match($('.b-fate-sum').textContent, new RegExp('^New rule in ' + turns + ' turns.+: .+ · '));
+    assert.equal($('.b-fate-label').dataset.tip, 'Fate track');
+    assert.match($('.b-fate-label').dataset.tipDetail, /Each End turn moves every event 1 space closer/);
+    // The next event (further than 3 spaces) waits at the edge and says when; hovering it explains it.
+    const far = $('.b-fev.flip');
+    assert.ok(far.classList.contains('far'));
+    assert.equal(far.querySelector('.b-fev-label').textContent, 'New rule · in ' + turns);
+    assert.match(hover(t, '.b-fev.flip'), /top card of the shared rule deck/);
+    far.dispatchEvent(mouse({ type: 'pointerleave' }));
+    // "Rules in play": picture tiles for the core rules, all basic now; no keyword list in the panel.
+    const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy']);
+    assert.equal(t.root.querySelectorAll('.b-rtile.changed').length, 0);
+    assert.match($('.b-rtile[data-cat="plays"]').textContent, /2 left/);
+    assert.ok(!/Keywords/.test($('.b-side').textContent), 'the keywords are in How to play, not the panel');
+    assert.equal($('.b-log'), null, 'no text log');
     toSecondTurn(t);
-    assert.ok(!/Road challenge/.test($('.b-log').textContent), 'the log uses the short name');
-    assert.equal($('.b-log').scrollTop, $('.b-log').scrollHeight, 'the log keeps the newest entry in view');
+    const recent = t.root.querySelectorAll('.b-recent .b-recent-tile');
+    assert.ok(recent.some(x => x.classList.contains('theirs')), 'the opponent\'s play is listed');
+    recent.forEach(x => assert.ok(!/Road challenge/.test(x.getAttribute('aria-label')), 'Recent plays use the short name'));
     $('.my-board [data-cid="p0c0"]').click();
     $('.b-hero[data-target="h1"]').click();
     t.g.flush();
@@ -310,6 +353,70 @@ test('card faces name the timing of each ability', () => {
     assert.match(text, /Last Word:Metaverse/);
     assert.match(text, /Entrance:Whisper/);
     assert.match(text, /Activate \(1⚡\):Well, Actually/);
+    // Names are never cut short: long ones get a smaller type size instead.
+    const kim = t.$('.b-hand [data-cid="p0c3"] .bc-name');
+    assert.equal(kim.textContent, 'Kim Kardashiant');
+    assert.ok(kim.classList.contains('long'));
+    t.root.querySelectorAll('.bc-name').forEach(n => assert.ok(!/…|\.\.\.$/.test(n.textContent), n.textContent));
+    t.handle.destroy();
+});
+
+test('board cards show keyword chips and the timing word only, and "Ready" on a creature that can act', () => {
+    const t = prepared({ me: ['kardashiant', 'khaby'], opp: ['kardashiant'] }, (s, move) => { move('p0c0', 0, 'board'); move('p0c1', 0, 'board'); move('p1c0', 1, 'board'); });
+    const kim = t.$('.my-board [data-cid="p0c0"]');
+    assert.equal(kim.querySelector('.bc-ab-kind').textContent, 'Activate');
+    assert.equal(kim.querySelector('.bc-ab-name'), null, 'no ability name on the table');
+    assert.ok(t.$('.my-board [data-cid="p0c1"] .bc-kw'), 'keyword chip (Guard)');
+    assert.equal(kim.querySelector('.b-ready-tag').textContent, 'Ready');
+    assert.equal(t.$('.opp-board [data-cid="p1c0"] .b-ready-tag'), null, 'only my creatures');
+    // Energy: the number in bold, the capacity after it; the card plays sit under it.
+    const num = t.$('.b-hero-row.me .b-energy-num');
+    assert.equal(num.querySelector('strong').textContent, '5');
+    assert.equal(num.querySelector('span').textContent, '/5');
+    assert.ok(t.$('.b-hero-row.me .b-energy .b-plays'));
+    assert.equal(t.$('.b-hero-row.opp .b-plays'), null);
+    t.handle.destroy();
+});
+
+test('their turn: a banner, their creature shown big first, and a recap when my turn starts', () => {
+    const t = setup(practice);
+    const { $, g } = t;
+    $('.b-draw-btn[data-choice="deck"]').click();
+    assert.equal($('.b-draw-recap'), null, 'no recap before the opponent has played');
+    $('.b-end').click();
+    assert.ok($('.b-banner').classList.contains('show') && $('.b-banner').classList.contains('theirs'));
+    assert.match($('.b-banner').textContent, /^Dummy's turn/);
+    assert.ok(g.timers.some(x => x.ms === 1250), 'the opponent waits a moment (AI_DELAY)');
+    // Run timers one at a time until the opponent's creature is shown big.
+    for (let i = 0; i < 20 && !$('.b-reveal').classList.contains('show'); i++) g.timers.shift().fn();
+    assert.ok($('.b-reveal').classList.contains('show'));
+    assert.equal($('.b-reveal .b-reveal-caption').textContent, 'Dummy plays a creature');
+    assert.ok($('.b-reveal .bc.big'));
+    assert.equal(t.handle.state.players[1].board.length, 0, 'shown first, played after');
+    assert.ok(g.timers.some(x => x.ms === 1500), 'REVEAL 1500 ms');
+    g.flush();
+    assert.equal(t.handle.state.players[1].board.join(), 'p1c0');
+    assert.equal(t.E.decider(t.handle.state), 0);
+    assert.match($('.b-banner').textContent, /Your turn/);
+    assert.match($('.b-draw .b-draw-recap').textContent, /^Dummy's turn: /);
+    t.handle.destroy();
+});
+
+test('a rule change is shown big, and the opponent waits until it fades', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.players[0].axHand = ['thrift']; });
+    const { $, g } = t;
+    $('.b-hand [data-axiom="thrift"]').click();
+    $('.b-prompt .btn.primary').click();
+    assert.equal(t.handle.state.axioms.active.cost, 'thrift');
+    assert.ok($('.b-reveal').classList.contains('show') && $('.b-reveal').classList.contains('rule'));
+    assert.equal($('.b-reveal .b-reveal-caption').textContent, 'You change a rule!');
+    assert.match($('.b-reveal .b-reveal-what').textContent, /^Card costs: /);
+    assert.ok(g.timers.some(x => x.ms === 2600), 'RULE_SHOW 2600 ms');
+    assert.ok($('.b-rtile[data-cat="cost"]').classList.contains('changed'), 'the new rule has its tile');
+    $('.b-end').click();
+    assert.ok(!g.timers.some(x => x.ms === 1250), 'the opponent does not start while the rule is shown');
+    g.flush();
+    assert.equal(t.E.decider(t.handle.state), 0, 'then the opponent plays and passes back');
     t.handle.destroy();
 });
 
@@ -368,32 +475,68 @@ test('practice and story can be left after a confirm step; the lesson and risked
     lesson.handle.destroy();
 });
 
-test('Fate draw buttons show the new count in short words', () => {
-    const t = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true }) }));
-    assert.equal(t.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 4');
-    assert.equal(t.$('.b-draw-btn[data-choice="rewind"] .b-ibtn-badge').textContent, 'in 8');
-    assert.match(t.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /2 turns sooner\. Rule card in 4\./);
-    assert.match(t.$('.b-draw-btn[data-choice="rewind"]').dataset.tipDetail, /Rule card in 8\./);
+test('Fate draw buttons (only with timeDraws) show the new count in short words', () => {
+    const plain = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true }) }));
+    assert.equal(plain.$('.b-draw-btn[data-choice="forward"]'), null, 'no time draws by default');
+    assert.equal(plain.$('.b-draw-btn[data-choice="rewind"]'), null);
+    plain.handle.destroy();
+    const t = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true, timeDraws: true }) }));
+    assert.equal(t.root.querySelectorAll('.b-draw-btn').length, 4);
+    const fwd = t.$('.b-draw-btn[data-choice="forward"]'), back = t.$('.b-draw-btn[data-choice="rewind"]');
+    assert.equal(fwd.dataset.tip, 'Fate sooner');
+    assert.equal(back.dataset.tip, 'Fate later');
+    assert.equal(fwd.querySelector('.b-ibtn-badge').textContent, 'in 5', 'one space sooner');
+    assert.equal(back.querySelector('.b-ibtn-badge').textContent, 'in 7', 'one space later');
+    assert.match(fwd.dataset.tipDetail, /1 turn sooner\. Rule card in 5\./);
+    assert.match(back.dataset.tipDetail, /1 turn later\. Rule card in 7\./);
+    const labels = t.root.querySelectorAll('.b-draw-label').map(x => x.textContent);
+    assert.ok(labels.includes('Fate sooner') && labels.includes('Fate later'), labels.join(', '));
+    // Pointing at a time draw previews it on the Fate track.
+    fwd.dispatchEvent(mouse({ type: 'pointerenter' }));
+    assert.match(t.$('.b-fate-sum.preview').textContent, /in 5 turns/);
+    fwd.dispatchEvent(mouse({ type: 'pointerleave' }));
+    assert.equal(t.$('.b-fate-sum.preview'), null);
+    fwd.click();
+    assert.equal(t.handle.state.fate.until, 5);
     t.handle.destroy();
-    const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
+    const timeDraws = s => { s.options.timeDraws = true; };
+    const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
     assert.match(r.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset \(no change now\)\./);
-    assert.match(r.$('.b-fate-text').textContent, /no change now/);
+    assert.match(r.$('.b-fate-sum').textContent, /^Reset in 5 turnsAll rules back to basic · /);
     r.handle.destroy();
-    const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
-    assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 3\./);
-    assert.equal(c.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 3');
+    const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
+    assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 4\./);
+    assert.equal(c.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 4');
     c.handle.destroy();
 });
 
-test('four or more changed rules: two chips and "+N more", whose preview lists them all', () => {
+test('changed rules: gold "Changed" tiles beside the core tiles, and each tile shows its card', () => {
     const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.axioms.active = { combat: 'underdog', cost: 'thrift', arrival: 'arrival', defeat: 'mercy' }; });
-    const chips = t.root.querySelectorAll('.b-lane-rules .b-rule-chip');
-    assert.equal(chips.length, 3);
-    assert.equal(chips[2].textContent, '+2 more');
-    const text = hover(t, '.b-rule-chip.more');
-    for (const id of ['underdog', 'thrift', 'arrival', 'mercy']) assert.ok(text.includes(t.Rift.data.axioms[id].name), id);
+    assert.equal(t.root.querySelectorAll('.b-rule-chip').length, 0, 'no lane rule chips');
+    const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'cost', 'arrival', 'defeat']);
+    const changed = t.root.querySelectorAll('.b-rtile.changed').map(x => x.dataset.cat);
+    assert.deepEqual(changed, ['combat', 'cost', 'arrival', 'defeat']);
+    t.root.querySelectorAll('.b-rtile.changed').forEach(x => assert.equal(x.querySelector('.b-rtile-new').textContent, 'Changed'));
+    assert.match($rt(t, 'combat').textContent, new RegExp(t.Rift.data.axioms.underdog.short));
+    assert.match(t.$('.b-rules-head').textContent, /4 changed/);
+    for (const [cat, id] of [['combat', 'underdog'], ['cost', 'thrift'], ['arrival', 'arrival'], ['defeat', 'mercy']]) {
+        const text = hover(t, '.b-rtile[data-cat="' + cat + '"]');
+        assert.ok(text.includes(t.Rift.data.axioms[id].text), id + ': the full rule text is in the preview');
+        t.$('.b-rtile[data-cat="' + cat + '"]').dispatchEvent(mouse({ type: 'pointerleave' }));
+    }
+    assert.match(hover(t, '.b-rtile[data-cat="victory"]'), /basic rule/);
     t.handle.destroy();
+    // The plays tile counts the plays left (a changed plays rule shows the count instead of the tag).
+    const r = prepared({ me: ['kardashiant', 'kardashiant'], opp: ['kardashiant'] }, (s, move) => { s.axioms.active = { plays: 'restraint' }; move('p0c0', 0, 'hand'); });
+    assert.ok($rt(r, 'plays').classList.contains('changed'));
+    assert.match($rt(r, 'plays').textContent, /1 left/);
+    r.$('.b-hand [data-cid="p0c0"]').click();
+    r.$('.b-prompt .btn.primary').click();
+    assert.match($rt(r, 'plays').textContent, /0 left/);
+    r.handle.destroy();
 });
+const $rt = (t, cat) => t.$('.b-rtile[data-cat="' + cat + '"]');
 
 test('with a button in the bar, the news lines step aside', () => {
     const t = setup(practice);
@@ -431,13 +574,19 @@ test('only your own loaned cards are tagged Loaned', () => {
 });
 
 test('a lectured creature: "on its next turn" until its own turn, then "this turn"', () => {
-    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, (s, move) => {
-        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
-        s.cards.p0c0.frozen = true; s.cards.p1c0.frozen = true;
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant', 'kardashiant'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); move('p1c1', 1, 'board');
+        s.cards.p0c0.frozen = true; s.cards.p1c0.frozen = true; s.cards.p1c1.silenced = true;
     });
+    // On the table: a word over the picture ("Lectured", "No ability"); no small state icon.
+    assert.equal(t.$('.opp-board [data-cid="p1c0"] .bc-state.frozen').textContent.replace(/^❄/, ''), 'Lectured');
+    assert.equal(t.$('.opp-board [data-cid="p1c0"] .state.frozen'), null);
+    assert.equal(t.$('.opp-board [data-cid="p1c1"] .bc-state.silenced').textContent, 'No ability');
     assert.match(hover(t, '.my-board [data-cid="p0c0"]'), /can't attack this turn/);
+    t.$('.my-board [data-cid="p0c0"]').dispatchEvent(mouse({ type: 'pointerleave' }));
     assert.match(hover(t, '.opp-board [data-cid="p1c0"]'), /can't attack on its next turn/);
-    assert.equal(t.$('.opp-board [data-cid="p1c0"] .state.frozen').title, "It can't attack on its next turn");
+    // The big card keeps the small state icon, its title says when.
+    assert.equal(t.$('.b-inspect .bc.big .state.frozen').title, "It can't attack on its next turn");
     t.handle.destroy();
 });
 
@@ -480,7 +629,7 @@ test('hover previews wait, close on pointerdown and stay shut after a drag until
     $('.b-draw-btn[data-choice="deck"]').click();
     $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointerenter' }));
     assert.equal($('.b-inspect').classList.contains('show'), false, 'not at once');
-    assert.ok(g.timers.some(x => x.ms >= 350 && x.ms <= 400), 'a hover delay of about 350-400 ms');
+    assert.ok(g.timers.some(x => x.ms >= 200 && x.ms <= 230), 'a short hover delay (about 220 ms)');
     g.flush();
     assert.ok($('.b-inspect').classList.contains('show'));
     $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointerdown' }));
@@ -504,17 +653,29 @@ test('hover previews wait, close on pointerdown and stay shut after a drag until
 test('picture buttons: each has a name (aria-label) and a tooltip, and no native title', () => {
     const t = setup(practice);
     const names = t.root.querySelectorAll('.b-ibtn').map(b => b.getAttribute('aria-label'));
-    for (const n of ['Draw from your deck', 'Take an axiom card', 'Fate 2 closer', 'Fate 2 away', 'How to play', 'Leave match', 'Close', 'Rules & log']) assert.ok(names.includes(n), n);
+    for (const n of ['Draw from your deck', 'Take a rule card', 'How to play', 'Leave match', 'Close', 'Rules & log']) assert.ok(names.includes(n), n);
+    assert.ok(!names.includes('Fate sooner') && !names.includes('Fate later'), 'no time draws by default');
     t.root.querySelectorAll('.b-ibtn').forEach(b => {
         assert.ok(b.dataset.tip, b.getAttribute('aria-label') + ' has tooltip text');
         assert.equal(b.title, '', b.getAttribute('aria-label') + ' has no native title');
         assert.ok(b.querySelector('.b-ctrl-icon') || b.querySelector('.b-spark-icon') || b.querySelector('.b-bag-icon'), b.getAttribute('aria-label') + ' shows an icon');
     });
     // The tooltip name of each draw button is exactly its name; the detail says what it does.
-    assert.equal(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tip, 'Take an axiom card');
-    assert.match(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tipDetail, /^A rule card for your hand\. Shared deck: \d+\.$/);
+    assert.equal(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tip, 'Take a rule card');
+    // The rule card draw names the card on top of the shared deck (the one Fate would turn over).
+    const top = t.Rift.data.axioms[t.handle.state.axioms.deck[0]];
+    assert.ok(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tipDetail.startsWith('A rule card for your hand. You take ' + top.name + ': '));
     assert.equal(t.$('.b-draw-btn[data-choice="deck"] .b-ibtn-badge').textContent, String(t.handle.state.players[0].deck.length));
-    assert.equal(t.$('.b-end').dataset.tip, 'End turn');
+    // End turn: a two-word face and a name that says whose turn it is.
+    const end = () => t.$('.b-end');
+    assert.equal(end().dataset.tip, 'End turn');
+    assert.equal(end().getAttribute('aria-label'), 'End turn');
+    assert.deepEqual(end().querySelectorAll('span').map(s => s.textContent), ['End', 'turn']);
+    t.$('.b-draw-btn[data-choice="deck"]').click();
+    end().click();
+    assert.equal(end().getAttribute('aria-label'), 'Their turn');
+    assert.deepEqual(end().querySelectorAll('span').map(s => s.textContent), ['Their', 'turn']);
+    assert.ok(end().disabled);
     t.handle.destroy();
 });
 
@@ -550,7 +711,7 @@ test('the tooltip shows on keyboard focus and hides on Escape; hover waits a mom
     axiom.dispatchEvent(touch({ type: 'pointerdown' }));
     g.flush();
     assert.ok(tip.classList.contains('show'));
-    assert.equal(tip.querySelector('.b-tip-name').textContent, 'Take an axiom card');
+    assert.equal(tip.querySelector('.b-tip-name').textContent, 'Take a rule card');
     axiom.dispatchEvent(touch({ type: 'pointerup' }));
     axiom.click();
     assert.equal(t.handle.state.phase, 'draw', 'the long-press only read the name');

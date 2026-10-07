@@ -770,9 +770,9 @@ test('Look It Up gives the right reason when it takes nothing', () => {
         Rift.data.tactics['look-it-up'].run(fake, 0);
         return out[0];
     };
-    assert.equal(run(['haste'], false), 'Look It Up: take an axiom card.');
-    assert.equal(run(['haste'], true), 'Look It Up: the hand is full, so no axiom card is taken.');
-    assert.equal(run([], false), 'Look It Up: the shared axiom deck is empty.');
+    assert.equal(run(['haste'], false), 'Look It Up: take a rule card.');
+    assert.equal(run(['haste'], true), 'Look It Up: the hand is full, so no rule card is taken.');
+    assert.equal(run([], false), 'Look It Up: the shared rule deck is empty.');
 });
 
 test('a creature discarded because the hand is full is not "lost" for the after-battle Fate roll', () => {
@@ -815,7 +815,9 @@ test('Pull That Up / Nature Watch with a full hand: the kept card is discarded a
 
 test('basic rule cards: flagged, plain names, and they still replace the active rule in their category', () => {
     const ax = Rift.data.axioms;
-    same(Object.keys(ax).filter(id => ax[id].basic).sort(), ['normal-hearts', 'patience', 'three-actions']);
+    same(Object.keys(ax).filter(id => ax[id].basic).sort(), ['normal-hearts', 'patience', 'three-actions', 'two-plays']);
+    assert.equal(ax['two-plays'].name, 'Two Moves');
+    assert.equal(ax['two-plays'].text, 'Back to normal: each player may play 2 cards per turn.');
     assert.equal(ax['three-actions'].name, 'Free Attacks');
     assert.equal(ax['three-actions'].text, 'Back to normal: every ready creature may attack once per turn.');
     assert.equal(ax['normal-hearts'].name, 'Back to the Goal');

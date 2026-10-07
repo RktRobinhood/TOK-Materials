@@ -55,7 +55,7 @@ test('cancelled or muted recorded playback cannot restart speech through a late 
  class Audio {play(){return new Promise((_,reject)=>rejects.push(reject));}pause(){}}
  class Utterance {constructor(text){this.text=text;}}
  const Rift={data:{voices:{line:'line.mp3'}},State:{get:()=>state},clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),bus:{on:(n,fn)=>{events[n]=fn;}}};
- const synth={cancel(){},getVoices:()=>[],speak:u=>spoken.push(u)};
+ const synth={cancel(){},getVoices:()=>[{lang:'en-GB',name:'English'}],speak:u=>spoken.push(u)};
  vm.runInNewContext(fs.readFileSync(GAME_DIR+'/js/core/audio.js','utf8'),{window:{Rift,speechSynthesis:synth,SpeechSynthesisUtterance:Utterance},Audio,Math,Date,Set});
  const muted=Rift.Audio.speak({speaker:'narrator',text:'Old instruction',voice:'line'});
  state.settings.voice=0;events['state:changed']();rejects.shift()(new Error('paused'));await muted;await Promise.resolve();

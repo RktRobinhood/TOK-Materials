@@ -199,32 +199,31 @@
         },
 
         rules(onClose) {
-            return Rift.UI.modal('How to play the card game', el('div.stack',null,[
-                'Each hero starts with ' + Rift.Battle.Engine.DEFAULTS.hearts + ' hearts. Reduce the other hero to zero hearts to win.',
-                'Your energy grows by 1 each turn, up to 10. It refills every turn. Unused energy is lost.',
-                'Start each turn with ONE choice: draw from your deck, take an axiom card, or move the Fate track 2 spaces closer or away.',
-                'Then play cards for their energy cost. Drag a card onto your side, or click it and press Play. New creatures sleep: they attack next turn.',
-                'To attack, drag a ready creature onto an enemy creature or the enemy hero. Or click it, then click a glowing target.',
-                'In a fight, both creatures deal damage equal to their attack. Damage stays. A creature with 0 health is defeated.',
-                'Colour wheel: a creature gets +1 attack when it fights the colour it beats. Point at a target to see the fight before you attack. The wheel is in the side panel.',
-                'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
-                'Bag: bring up to two items into a match and press Bag to use one per turn for its energy; an item is used up only when you use it.',
-                'The Fate track moves 1 space every End turn. At zero, the top card of the shared rule deck turns over, or all rules go back to normal. Read Rules now: even the victory goal can change.',
-                'The player who goes first starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[0] + ' cards. The player who goes second starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[1] + ' and gets the Spark: +1 energy once.',
-                'Practice and Syllo’s story challenge have no stakes. You can leave them at any time (Leave match). Other matches may risk items or cards.',
-            ].map(text=>el('p.small',{text})).concat([
+            // One short line per idea, grouped like a turn (no long paragraphs).
+            const row=(icon,head,text)=>el('div.htp-row',null,[el('span.htp-icon',{text:icon,'aria-hidden':'true'}),el('div',null,[el('b',{text:head}),' ',text])]);
+            const D=Rift.Battle.Engine.DEFAULTS;
+            return Rift.UI.modal('How to play', el('div.htp',null,[
+                el('div.htp-turn',null,[
+                    el('div.htp-step',null,[el('strong',{text:'1 · Draw'}),el('span',{text:'Pick ONE: a card from your deck, or a rule card.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'2 · Play'}),el('span',{text:'Up to 2 cards (Card plays rule). Each costs energy ⚡.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Free.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'4 · End turn'}),el('span',{text:'Fate moves 1 step.'})]),
+                ]),
+                row('❤','Win:','take the enemy hero to 0 hearts ('+D.hearts+' each). Check the rule tiles: the goal can change!'),
+                row('⚡','Energy:','+1 each turn (up to 10), refilled every turn. Unused energy is lost.'),
+                row('💤','New creatures sleep:','they attack next turn (unless Swift).'),
+                row('⚔','Fights:','both creatures hit at the same time. Damage stays.'),
+                row('⚖','Rule cards (axioms):','change a rule for BOTH players. The rule tiles show what is in play.'),
+                row('⧗','Fate track:','every End turn moves it 1 step: events reach NOW and happen (a free new rule, or a reset). Some cards bend time.'),
+                row('🎨','Colour wheel:','+1 attack against the colour you beat.'),
+                row('🎒','Bag:','use one item per turn for its energy. An item is used up only when you use it.'),
                 el('h3',{text:'Keywords'}),
-                el('div.rules-keywords',null,[
-                    ['Guard','Enemies must attack a Guard creature first.'],
-                    ['Swift','It can attack on the turn it arrives.'],
-                    ['Shield','The first damage it takes is ignored.'],
-                    ['Elusive','Enemy tactics and abilities can’t target it.'],
-                    ['Spark','Once per match: +1 energy (for the player who goes second).'],
-                    ['Entrance','It works when you play the card.'],
-                    ['Last Word','It works when the creature is defeated.'],
-                    ['Activate','Pay the energy (⚡) to use it. It uses the creature’s attack this turn.'],
-                ].map(([k,text])=>el('p.small',null,[el('b',{text:k+': '}),text]))),
-            ])),[{label:'Close'}],{onClose});
+                el('div.htp-keys',null,[
+                    ['🛡️ Guard','attack it first'], ['💨 Swift','attacks at once'], ['🫧 Shield','ignores the first hit'], ['🌫️ Elusive','tactics can’t target it'],
+                    ['▶ Entrance','works when played'], ['✝ Last Word','works when defeated'], ['⚡ Activate','pay energy; uses its attack'], ['✦ Spark','+1 energy once (2nd player)'],
+                ].map(([k,text])=>el('div.htp-key',null,[el('b',{text:k}),el('span',{text})]))),
+                el('p.small.muted',{text:'Point at any card, rule tile or Fate event to read it.'}),
+            ]),[{label:'Close'}],{onClose});
         },
 
         learn(back) {
