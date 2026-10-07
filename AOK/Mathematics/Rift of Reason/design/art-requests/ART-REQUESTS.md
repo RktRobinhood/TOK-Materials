@@ -450,13 +450,26 @@ Shared prompt start: "On a transparent background (PNG), no text, letters or num
 
 > On a transparent background (PNG), no text, letters or numbers, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape. Eight small trinket icons, same size and finish as the attached icons, in two rows of four, left to right: a quill with a tiny coin on its tip; a small stone shield charm on a cord; a glass jar holding one golden spark (solid-looking glass); a six-sided die with only dots, glowing faintly; an old brass compass; a short knitted red scarf tied in a knot; a little tin tea flask with steam; a sharp cyan rift crystal set in silver. Match the attached style board.
 
-### 11.9 Lesson card backs (priority 4, cosmetic rewards)
+### 11.9 Milestone card backs (approved 7 Oct: cosmetic rewards for hard achievements)
 
-**Attach:** `style-board.png`, `card-frames.png`
-**Save as:** `5-ui/card-backs.png`
-**Ids:** `ui/card-back-l1`, `ui/card-back-l2`, `ui/card-back-l3`, `ui/card-back-l4` *(code next)*
+Teacher decision, 7 Oct: card backs are cosmetics a student chooses in the Collection, earned only for something hard (never handed out all the time). Twelve backs in three sheets of four. *(Code next: owned backs and the chosen back live in the save, so the backup code carries them.)*
 
-> On a transparent background (PNG), no text, letters or numbers, wide clear gaps, each one connected shape: four portrait card backs (5:7) in one row, the same frame shape as the attached card back, symmetrical: **1,** magenta with gold fairground bunting and a carousel star; **2,** deep navy with brass gears and a lit bulb; **3,** black glass with cyan-and-violet neon scales; **4,** dark red with a ring of glowing dice around a violet vortex. Match the attached style board.
+| Id | Name | Earned by |
+|---|---|---|
+| ui/card-back-l1 | Carousel | beating the Gate of Guards (chapter 1 boss) |
+| ui/card-back-l2 | Workshop | beating the Town Hall (chapter 2 boss) |
+| ui/card-back-l3 | Neon Tribunal | beating the Tribunal (chapter 3 boss) |
+| ui/card-back-l4 | Dice Vortex | beating the Core (chapter 4 boss) |
+| ui/card-back-clear-thinker | Midnight Owl | the Clear Thinker accolade (puzzles without a hint) |
+| ui/card-back-falsifier | Black Swan | the Falsifier accolade |
+| ui/card-back-legend-hunter | Golden Legend | the Legend Hunter accolade (a legendary caught) |
+| ui/card-back-rift-walker | Homeward Rainbow | the Rift Walker accolade (the story finished) |
+| ui/card-back-expert | Granny's Tea Cosy | beating an Expert opponent in the Card Arena |
+| ui/card-back-rift-runner | Rift Runner | winning a Rift Run |
+| ui/card-back-disco | Disco Ball | winning a Rift Run with 8 or more hearts left |
+| ui/card-back-prism | Prism | owning a creature of all six colours |
+
+**Save as:** `5-ui/card-backs.png`, `5-ui/card-backs-2.png`, `5-ui/card-backs-3.png` (three requests). Each: four portrait card backs (5:7) in one row, the same frame shape as the axiom card back in arena-frames.png, symmetrical, transparent background, no text. Prompts are given in the asset session one at a time.
 
 ### 11.10 Board creature medallion (priority 4, needs a layout change first)
 
@@ -602,3 +615,6 @@ Record what was approved and why, as in the Odyssey project.
 | 11.7 The vendor's stall | First try (2026-10-07) | Draped stall at dusk: three empty, evenly lit shelf units (four shelves each, x ≈ 635–1450, y ≈ 195–425 of 1672×941) behind a long counter hung with star pennants, blank hanging signboard, lanterns, barrels and crates at the sides, a star rug in front, the forest road with a stone bridge, waterfall and glowing mushrooms down the left. The lower-left third is open path for the player; the shopkeeper stands in front of the middle shelf. |
 | 11.7 New map markers | First try (2026-10-07) | Shop (striped awning over a cyan coin), elite (horned helm with red eyes under one flame, clearly apart from the boss crown), event (violet smoke hook with a glowing dot), treasure (open chest with cyan light). Same gold-rimmed medallions as map-markers.png; side by side with battle, boss and rest at 48 px they match. Sliced into the 4 ids. |
 | 11.8 Keepsakes | First try (2026-10-07) | Quill with a coin charm, stone shield charm (moon and star) on a cord, corked jar with a golden spark swirl, glowing-pip die, open brass compass, knotted red knitted scarf, tin tea flask with attached steam, cyan crystal in a silver cage. Same finish as arena-extras; all read at 64 px. Sliced into the 8 keepsake ids (working names; rename ids in sheets.json if the Rift Run renames them). All approved art (steps 1–19) is now done; 20–21 stay as maybes. |
+| 11.9 Card backs: chapter bosses | First try (2026-10-07) | Carousel (magenta, bunting, carousel star, two carousel horses), Workshop (navy, brass gears round a lit bulb), Neon Tribunal (black glass, cyan and violet neon scales), Dice Vortex (dark red, five glowing dice round a violet swirl). All symmetrical with gold borders, same shape as the axiom back. Sliced into ui/card-back-l1 to l4. |
+| 11.9 Card backs: accolades | First try (2026-10-07) | Midnight Owl (feathered owl face, eyes like two full moons), Black Swan (two black swans making a heart, reflected in teal water, white feathers around), Golden Legend (rearing winged lion in a halo with laurels; the lion faces one way, the frame stays symmetrical), Homeward Rainbow (a rainbow healing a jagged crack in a starry sky). Sliced into the 4 accolade ids. |
+| 11.9 Card backs: arena and Rift Run | First try (2026-10-07) | Granny's Tea Cosy (cable-knit cranberry and cream with a pom-pom and a knitted teacup), Rift Runner (stone back split by a cyan rift with floating shards), Disco Ball (mirror ball throwing rainbow spots on purple), Prism (crystal splitting white light into a rainbow). Sliced into ui/card-back-{expert,rift-runner,disco,prism}. All twelve milestone backs done; code next (choose in the Collection, award at the milestones, stored in the save). |

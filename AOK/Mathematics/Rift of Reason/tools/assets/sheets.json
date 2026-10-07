@@ -80,6 +80,8 @@
         "map-markers-2.png": {"type":"islands","minArea":800,"class":"item","ids":["ui/marker-shop","ui/marker-elite","ui/marker-event","ui/marker-treasure"]},
         "keepsakes.png": {"type":"islands","minArea":600,"class":"icon","ids":["keepsake/thrifty-quill","keepsake/stone-shield","keepsake/spark-jar","keepsake/lucky-die","keepsake/old-compass","keepsake/warm-scarf","keepsake/tea-flask","keepsake/rift-shard"]},
         "card-backs.png": {"type":"islands","minArea":1500,"class":"card","ids":["ui/card-back-l1","ui/card-back-l2","ui/card-back-l3","ui/card-back-l4"]},
+        "card-backs-2.png": {"type":"islands","minArea":1500,"class":"card","ids":["ui/card-back-clear-thinker","ui/card-back-falsifier","ui/card-back-legend-hunter","ui/card-back-rift-walker"]},
+        "card-backs-3.png": {"type":"islands","minArea":1500,"class":"card","ids":["ui/card-back-expert","ui/card-back-rift-runner","ui/card-back-disco","ui/card-back-prism"]},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

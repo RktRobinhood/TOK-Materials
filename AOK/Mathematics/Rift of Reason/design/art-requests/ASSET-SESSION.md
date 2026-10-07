@@ -48,8 +48,10 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 | 17 | The vendor's stall | 11.7 (shop) | `2-world/shop.png` | [x] |
 | 18 | New map markers | 11.7 (markers) | `5-ui/map-markers-2.png` | [x] |
 | 19 | Keepsakes (Rift Run approved 7 Oct) | 11.8 | `5-ui/keepsakes.png` | [x] |
-| 20 | Lesson card backs (maybe: cosmetic, not in the approved plan) | 11.9 | `5-ui/card-backs.png` | [ ] |
-| 21 | Board creature medallion (maybe: needs an undecided layout change) | 11.10 | `5-ui/board-token.png` | [ ] |
+| 20 | Milestone card backs: chapter bosses | 11.9 | `5-ui/card-backs.png` | [x] |
+| 20b | Milestone card backs: accolades | 11.9 | `5-ui/card-backs-2.png` | [x] |
+| 20c | Milestone card backs: arena and Rift Run | 11.9 | `5-ui/card-backs-3.png` | [x] |
+| 21 | Board creature medallion | 11.10 | `5-ui/board-token.png` | not now: the teacher wants a real pain point with the board first (7 Oct) |
 
 Before steps 7–8b, check that the tactic ids in `data/tactics.js` match the `tactics-3.png` / `tactics-4.png` / `tactics-5.png` ids in `tools/assets/sheets.json` (they match as of 7 Oct; re-check if tactics were renamed since).
 
