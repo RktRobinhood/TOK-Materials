@@ -225,8 +225,8 @@
 .b-draw-buttons { flex: none; min-width: 0; display: flex; align-items: center; gap: clamp(8px, 1.2cqw, 16px); }
 .b-draw-buttons > * { flex: none; }
 /* Four square picture buttons; the name and details are in the tooltip. */
-.b-draw-btn { --s: clamp(44px, calc(var(--lane-h) - 20px), 80px); width: var(--s); height: var(--s); border-radius: 14px; }
-.b-draw-btn .b-ctrl-icon { width: 68%; height: 68%; }
+.b-ibtn.b-draw-btn { --s: clamp(44px, calc(var(--lane-h) - 14px), 84px); width: var(--s); height: var(--s); border-radius: 14px; }
+.b-ibtn.b-draw-btn .b-ctrl-icon { width: 68%; height: 68%; }
 .b-draw-btn[data-choice="deck"] { border-color: #3ddc84; }
 .b-draw-btn[data-choice="axiom"] { border-color: #c9a45a; }
 .b-draw-btn[data-choice="forward"], .b-draw-btn[data-choice="rewind"] { border-color: var(--rift); }
