@@ -1,7 +1,11 @@
 /*
- * Battle AI for the Card Arena rules (design/card-arena-2026-10-07.md), two levels.
- * Deterministic: the same state, level and salt always give the same action. The
- * only randomness comes from Rift.makeRng('ai:' + seed + ':' + step + ':' + level + ':' + salt).
+ * Battle AI for the Card Arena rules (design/card-arena-2026-10-07.md), three levels:
+ * Normal, Competent and Expert (design/card-arena-expansion-2026-10-07.md section 8).
+ * Old names still work: 'easy' means 'normal' and 'hard' means 'competent' (saves, team
+ * codes, older callers). Deterministic: the same state, level and salt always give the
+ * same action. The only randomness comes from
+ * Rift.makeRng('ai:' + seed + ':' + step + ':' + level + ':' + salt) (level = the canonical name),
+ * and Expert's search is limited by fixed counts, never by the clock.
  *
  * How it thinks (one-ply lookahead):
  *   every legal action (identical attackers/targets/cards grouped) is applied with
@@ -22,24 +26,36 @@
  *   Both levels develop their board: End turn never wins over playing an affordable
  *   creature into an open space unless every such play scores below DEVELOP_FLOOR.
  *
- *   hard: all of the above, plus an explicit lethal check and whole-turn rollouts
- *         (with and without each axiom card) before playing an axiom card.
- *   easy: weaker CHOICES, never sitting still: no threat terms, loves hitting the hero
- *         even more, 40% of the time picks a random second-rate useful move instead of
- *         the best one, and once nothing is left to play sometimes (5%) holds back an
- *         attack. It draws from its deck (always when
- *         it has no creature it can pay for), and never plays the big twists
- *         (EASY_TWISTS: The Last Shall Be First, Empty Set). Hard beats Easy ~79% in
- *         simulation (design/reviews/card-arena-balance-2026-10-07.md).
+ *   competent (was 'hard'): all of the above, plus an explicit lethal check and
+ *         whole-turn rollouts (with and without each axiom card) before playing an axiom card.
+ *   normal (was 'easy', made a little sharper): weaker CHOICES, never sitting still: no
+ *         threat terms, likes hitting the hero more, sometimes (LEVELS.normal.mistake) picks
+ *         a random second-rate useful move instead of the best one, and once nothing is
+ *         left to play sometimes (5%) holds back an attack. It takes an obvious lethal
+ *         attack, draws from its deck (always when it has no creature it can pay for), and
+ *         never plays the big twists (NORMAL_TWISTS: The Last Shall Be First, Empty Set).
+ *   expert: Competent's scoring plus a whole-turn search: a lethal search over this
+ *         turn's attacks, tactics and plays (EXPERT.lethalNodes), then the best few
+ *         one-ply candidates (and promising axiom cards) are each followed by a greedy
+ *         rollout of the rest of the turn and compared on the deep score (EXPERT.width).
+ *         It also keeps removal tactics for real threats (EXPERT.holdRemoval) and counts
+ *         lethal next turn (a two-turn plan) and the race clock. Bosses use it with a
+ *         built deck (data/decks.js).
+ *   beginner: a test-only stand-in for a new student (the old Easy, 40% random second-rate
+ *         moves, no lethal check). Never offered as an opponent in the game.
+ *   Simulated ladder: design/reviews/card-arena-balance-2026-10-07.md (`--ladder`).
  *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
+ *   Bag item actions ({ type: 'item' }) are never chosen by the AI.
  *
  * Rift.Battle.AI = {
- *   choose(state, { level: 'easy' | 'hard', salt? }) → an action from Engine.legalActions(state)
+ *   choose(state, { level: 'normal' | 'competent' | 'expert' (or 'easy'/'hard'), salt? })
+ *       → an action from Engine.legalActions(state)
  *   playOut(state, levels, onStep?) → final state (levels[p] for player p)
  *   evaluate(state, player, { level?, deep? }) → number (higher is better for player)
- *   MISTAKE, EARLY_END, EASY_TWISTS
+ *   levelOf(name) → 'normal' | 'competent' | 'expert' | 'beginner'; LEVELS, LEVEL_NAMES (student labels)
+ *   MISTAKE, EARLY_END, NORMAL_TWISTS (= EASY_TWISTS), EXPERT
  * }
  */
 (function (root) {
@@ -49,8 +65,41 @@
     const Battle = Rift.Battle || (Rift.Battle = {});
     const E = () => Battle.Engine;
 
-    const MISTAKE = { easy: 0.4, hard: 0 };
-    const EARLY_END = { easy: 0.05, hard: 0 };
+    // ---- levels -------------------------------------------------------------------------
+    //   simple   Normal-style main phase (one-ply, random second-rate moves, deck draws)
+    //   threat   lethal-next-turn terms and Guard-when-low in the evaluation
+    //   deep     rule changes, Fate and axiom cards scored with fights and the next Fate event
+    //   lethal   take an obvious lethal attack on the hero first
+    //   twists   may play The Last Shall Be First / Empty Set
+    //   search   Expert's whole-turn search
+    const LEVELS = {
+        beginner: { simple: true, mistake: 0.4, earlyEnd: 0.05, faceBias: 2.2, threat: false, deep: false, lethal: false, twists: false, search: false },
+        normal: { simple: true, mistake: 0.2, earlyEnd: 0.05, faceBias: 1.8, threat: false, deep: false, lethal: true, twists: false, search: false },
+        competent: { simple: false, mistake: 0, earlyEnd: 0, faceBias: 1, threat: true, deep: true, lethal: true, twists: true, search: false },
+        expert: { simple: false, mistake: 0, earlyEnd: 0, faceBias: 1, threat: true, deep: true, lethal: true, twists: true, search: true },
+    };
+    const ALIASES = { easy: 'normal', hard: 'competent' };
+    // What a student sees (only the three opponent levels).
+    const LEVEL_NAMES = { normal: 'Normal', competent: 'Competent', expert: 'Expert' };
+    function levelOf(name) {
+        const n = ALIASES[name] || name;
+        return LEVELS[n] ? n : 'competent';
+    }
+    const perLevel = key => {
+        const out = {};
+        Object.keys(LEVELS).forEach(k => { out[k] = LEVELS[k][key]; });
+        Object.keys(ALIASES).forEach(k => { out[k] = LEVELS[ALIASES[k]][key]; });
+        return out;
+    };
+    const MISTAKE = perLevel('mistake');
+    const EARLY_END = perLevel('earlyEnd');
+    // Expert's search limits (counts, so the same state always gives the same move).
+    //   lethalNodes / lethalDepth  states tried / actions deep when looking for a win this turn
+    //   width       one-ply candidates followed by a rollout of the rest of the turn
+    //   axioms      axiom cards also tried that way
+    //   holdRemoval extra worth of a removal tactic kept in hand (spent on real threats)
+    //   nextLethal  bonus when my board threatens lethal next turn (a two-turn plan)
+    const EXPERT = { lethalNodes: 150, lethalDepth: 7, width: 4, axioms: 2, holdRemoval: 1.2, nextLethal: 4, race: 0.6 };
     // A creature play scored at least this much (vs ending the turn) is still made rather than passing.
     const DEVELOP_FLOOR = -1.5;
     const WIN = 1000;
@@ -96,7 +145,7 @@
         if (kws.includes('guard') && !r.ignoreGuard) {
             v += 0.6;
             const h = s.players[p].hearts;
-            if (ctx.level === 'hard' && !r.reverseHearts && h <= 6) v += (7 - h) * 0.3;
+            if (ctx.cfg.threat && !r.reverseHearts && h <= 6) v += (7 - h) * 0.3;
         }
         if (kws.includes('shield')) v += 1.2;
         if (kws.includes('elusive')) v += 0.4;
@@ -208,7 +257,20 @@
         let v = Math.min(P.hand.length, 7) * HAND_CARD + Math.max(0, P.hand.length - 7) * 0.4;
         if (ctx.me === p && ctx.axVal) for (const id of P.axHand) v += AXIOM_CARD + Math.max(0, ctx.axVal[id] || 0) * 0.5;
         else v += P.axHand.length * (AXIOM_CARD + 0.4);
+        if (ctx.me === p && ctx.cfg.search) v += EXPERT.holdRemoval * removalInHand(s, p);
         return v;
+    }
+
+    // Removal tactics in p's hand (they target an enemy or any creature, or hit the whole enemy board).
+    function removalInHand(s, p) {
+        let n = 0;
+        for (const cid of s.players[p].hand) {
+            const c = s.cards[cid];
+            if (c.kind !== 'tactic') continue;
+            const def = (Rift.data.tactics || {})[c.tactic];
+            if (def && (def.target === 'enemy-creature' || def.target === 'any-creature' || c.tactic === 'peer-review')) n++;
+        }
+        return n;
     }
 
     // Rough value of the current special rules for player me (deep scoring only).
@@ -296,20 +358,22 @@
         const opp = 1 - me;
         const P = s.players[me], Q = s.players[opp];
         let v = 0;
-        const faceBias = ctx.level === 'easy' ? 2.2 : 1;
+        const faceBias = ctx.cfg.faceBias;
         const hv = heartValue(P.hearts) - faceBias * heartValue(Q.hearts);
         v += r.reverseHearts ? -0.6 * hv : ctx.w.hearts * hv;
         v += boardValue(s, me, ctx) - boardValue(s, opp, ctx);
         v += handValue(s, me, ctx) - handValue(s, opp, ctx);
         v += Math.min(P.deck.length, 3) * 0.1 - Math.min(Q.deck.length, 3) * 0.1;
-        if (ctx.level === 'hard' && !r.reverseHearts) {
+        if (ctx.cfg.threat && !r.reverseHearts) {
             const theirs = facePotential(s, opp);
             const mine = facePotential(s, me);
+            const nextLethal = ctx.cfg.search ? EXPERT.nextLethal : 4;
             v -= ctx.w.threat * (theirs >= P.hearts ? 14 : 3 * theirs / Math.max(1, P.hearts));
-            v += ctx.w.threat * (mine >= Q.hearts ? 4 : 1.5 * mine / Math.max(1, Q.hearts));
-            if (ctx.w.race) {
+            v += ctx.w.threat * (mine >= Q.hearts ? nextLethal : 1.5 * mine / Math.max(1, Q.hearts));
+            const race = ctx.w.race || (ctx.cfg.search ? EXPERT.race : 0);
+            if (race) {
                 const clock = (h, pot) => Math.min(8, h / Math.max(1, pot));
-                v += ctx.w.race * (clock(P.hearts, theirs) - clock(Q.hearts, mine));
+                v += race * (clock(P.hearts, theirs) - clock(Q.hearts, mine));
             }
         }
         if (!creatureCount(s, me)) v -= WIN / 2;
@@ -318,8 +382,8 @@
     }
 
     function makeCtx(me, o) {
-        const level = o && o.level === 'easy' ? 'easy' : 'hard';
-        return { me, level, axVal: null, w: Object.assign({}, WEIGHTS, o && o.weights) };
+        const level = levelOf(o && o.level);
+        return { me, level, cfg: LEVELS[level], axVal: null, w: Object.assign({}, WEIGHTS, o && o.weights) };
     }
 
     function evaluate(s, me, opts) {
@@ -420,7 +484,7 @@
         const base = deep => (baseCache[deep] != null ? baseCache[deep] : (baseCache[deep] = evaluate(s, me, { ctx, deep })));
         const scored = cands.map(a => {
             if (a.type === 'spark') return { a, score: 0 };
-            const deep = ctx.level === 'hard' && !ctx.fast && needsDeep(s, a);
+            const deep = ctx.cfg.deep && !ctx.fast && needsDeep(s, a);
             let next;
             try { next = E().applyLegal(s, a); } catch (e) { return { a, score: -Infinity }; }
             let score = settle(next, me, ctx, deep, 0) - base(deep);
@@ -538,7 +602,7 @@
             const pick = heuristicChoice(s, me);
             return legal.find(a => a.choice === pick) || legal[0];
         }
-        const deep = ctx.level === 'hard' && !ctx.fast;
+        const deep = ctx.cfg.deep && !ctx.fast;
         return pickBest(legal.map(a => ({ a, score: settle(E().applyLegal(s, a), me, ctx, deep, 1) })));
     }
 
@@ -553,7 +617,7 @@
                 continue;
             }
             if (cur.phase !== 'main') break;
-            const legal = E().legalActions(cur).filter(a => a.type !== 'axiom');
+            const legal = E().legalActions(cur).filter(a => a.type !== 'axiom' && a.type !== 'item');
             const a = lethalAttack(cur, legal, me) || pickBest(scoreActions(cur, groupActions(cur, legal), me, fast));
             if (!a || a.type === 'end') break;
             cur = E().applyLegal(cur, a);
@@ -593,22 +657,127 @@
     // Debugging aid: the scored candidates for the current decision (draw or main phase).
     function explain(state, options) {
         const o = options || {};
-        const level = o.level === 'easy' ? 'easy' : 'hard';
         const me = E().decider(state);
         const ctx = makeCtx(me, o);
+        const legal = E().legalActions(state).filter(a => a.type !== 'item');
         ctx.axVal = axiomValues(state, me, ctx, state.players[me].axHand.concat(state.axioms.deck.slice(0, 1)));
-        if (state.phase === 'draw') return drawScores(state, E().legalActions(state), me, ctx);
-        return scoreActions(state, groupActions(state, E().legalActions(state)), me, ctx);
+        if (state.phase === 'draw') return drawScores(state, legal, me, ctx);
+        return scoreActions(state, groupActions(state, legal), me, ctx);
     }
 
-    // Rule cards Easy never plays: twists that turn the whole game around are kept for Hard.
-    const EASY_TWISTS = { 'reverse-hearts': true, 'empty-set': true };
+    // Rule cards Normal never plays: twists that turn the whole game around are kept for Competent and Expert.
+    const NORMAL_TWISTS = { 'reverse-hearts': true, 'empty-set': true };
 
+    // Bag items are the player's own business: the AI never uses them ({ type: 'item' }).
     function allowedActions(s, legal, level) {
-        if (level !== 'easy') return legal;
-        const twist = a => (a.type === 'axiom' || (a.type === 'choose' && s.pending && s.pending.kind === 'axiom')) && EASY_TWISTS[a.choice];
-        const ok = legal.filter(a => !twist(a));
-        return ok.length ? ok : legal;
+        const usable = legal.filter(a => a.type !== 'item');
+        if (LEVELS[level].twists) return usable;
+        const twist = a => (a.type === 'axiom' || (a.type === 'choose' && s.pending && s.pending.kind === 'axiom')) && NORMAL_TWISTS[a.choice];
+        const ok = usable.filter(a => !twist(a));
+        return ok.length ? ok : usable;
+    }
+
+    // ---- Expert: whole-turn search ----------------------------------------------------------
+
+    // Most hero damage my side could still deal this turn if everything went right (prunes the lethal search).
+    function lethalCeiling(s, me) {
+        const Eng = E();
+        const r = Eng.rules(s);
+        const P = s.players[me];
+        let dmg = P.spark ? 3 : 0;
+        for (const cid of P.board) {
+            const c = s.cards[cid];
+            let n = r.attacksPerCreature;
+            let extra = 0;
+            for (const id of abilityIdsOf(s, c)) {
+                const def = abilityDefs()[id];
+                if (def.attacksPerTurn) n = Math.max(n, def.attacksPerTurn);
+                if (def.heroDamage) extra += def.heroDamage;
+            }
+            if (Eng.canAttack(s, cid)) dmg += Math.max(0, n - c.attacks) * (Eng.attackOf(s, cid) + extra + 2);
+        }
+        // Every card I can pay for might add a little (a buff, Swift, a direct hit, a cleared Guard).
+        for (const cid of P.hand) if (Eng.playCost(s, cid) <= P.energy) dmg += 3;
+        return dmg;
+    }
+
+    // Looks for a line of attacks, tactics, plays and activations that wins this turn (no axiom
+    // cards). Returns its first action, or null. At most EXPERT.lethalNodes states are tried.
+    function lethalLine(s, me, ctx) {
+        const Eng = E();
+        if (Eng.rules(s).reverseHearts) return null;
+        if (lethalCeiling(s, me) < s.players[1 - me].hearts) return null;
+        const fast = Object.assign({}, ctx, { fast: true });
+        let nodes = 0;
+        const hero = 'h' + (1 - me);
+        const order = a => (a.type === 'attack' ? (a.target === hero ? 0 : 1) : a.type === 'play' ? 2 : 3);
+        function dfs(st, depth) {
+            if (st.winner === me) return true;
+            if (st.winner != null || depth >= EXPERT.lethalDepth || nodes >= EXPERT.lethalNodes) return false;
+            if (st.phase === 'choose') {
+                if (!st.pending || st.pending.player !== me) return false;
+                nodes++;
+                return dfs(Eng.applyLegal(st, answerPending(st, me, fast)), depth + 1);
+            }
+            if (st.phase !== 'main' || st.active !== me) return false;
+            if (lethalCeiling(st, me) < st.players[1 - me].hearts) return false;
+            const legal = groupActions(st, Eng.legalActions(st).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark'));
+            legal.sort((x, y) => order(x) - order(y));
+            for (const a of legal) {
+                if (++nodes > EXPERT.lethalNodes) return false;
+                let next;
+                try { next = Eng.applyLegal(st, a); } catch (e) { continue; }
+                if (dfs(next, depth + 1)) return true;
+            }
+            return false;
+        }
+        const legal = groupActions(s, Eng.legalActions(s).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark'));
+        legal.sort((x, y) => order(x) - order(y));
+        for (const a of legal) {
+            if (++nodes > EXPERT.lethalNodes) return null;
+            let next;
+            try { next = Eng.applyLegal(s, a); } catch (e) { continue; }
+            if (dfs(next, 1)) return a;
+        }
+        return null;
+    }
+
+    // Value of a move = the deep score after it and a greedy rollout of the rest of my turn
+    // (the state just before I would press End turn).
+    function turnValue(s, a, me, ctx) {
+        if (a.type === 'end') return evaluate(s, me, { ctx, deep: true });
+        let next;
+        try { next = E().applyLegal(s, a); } catch (e) { return -Infinity; }
+        if (next.winner != null) return evaluate(next, me, { ctx });
+        return evaluate(rollout(next, me, ctx), me, { ctx, deep: true });
+    }
+
+    function expertMain(s, legal, me, ctx) {
+        const kill = lethalAttack(s, legal, me) || lethalLine(s, me, ctx);
+        if (kill) return kill;
+        const P = s.players[me];
+        ctx.axVal = axiomValues(s, me, ctx, P.axHand);
+        const scored = scoreActions(s, groupActions(s, legal.filter(a => a.type !== 'axiom')), me, ctx);
+        const oneply = develop(s, scored, pickBest(scored));
+        // Candidates: the one-ply choice, the best few other moves, End turn and promising axiom cards.
+        const ranked = scored.filter(x => x.a.type !== 'end' && x.score > DEVELOP_FLOOR).sort((x, y) => y.score - x.score);
+        const cands = [oneply];
+        for (const x of ranked) { if (cands.length > EXPERT.width) break; if (!cands.includes(x.a)) cands.push(x.a); }
+        const end = legal.find(a => a.type === 'end');
+        if (end && !cands.includes(end)) cands.push(end);
+        const vals = ctx.axVal || {};
+        legal.filter(a => {
+            if (a.type !== 'axiom') return false;
+            const ax = Rift.data.axioms[a.choice];
+            return s.axioms.active[ax.category] !== a.choice && ((vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category]);
+        }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, EXPERT.axioms).forEach(a => cands.push(a));
+        let best = oneply, bestV = -Infinity;
+        for (const a of cands) {
+            // Axiom cards and End turn must clearly beat the rest (as Competent's axiom check).
+            const v = turnValue(s, a, me, ctx) - (a.type === 'axiom' ? 0.3 : a.type === 'end' ? 0.05 : 0);
+            if (v > bestV) { bestV = v; best = a; }
+        }
+        return develop(s, scored, best);
     }
 
     // Easy needs new cards when nothing in its hand is a creature it can pay for.
@@ -630,19 +799,20 @@
 
     function choose(state, options) {
         const o = options || {};
-        const level = o.level === 'easy' ? 'easy' : 'hard';
+        const level = levelOf(o.level);
+        const cfg = LEVELS[level];
         const Eng = E();
         const s = state;
         const legal = allowedActions(s, Eng.legalActions(s), level);
         if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);
         const rng = Rift.makeRng('ai:' + s.seed + ':' + s.step + ':' + level + ':' + (o.salt || ''));
-        const mistake = rng.chance(MISTAKE[level]);
+        const mistake = rng.chance(cfg.mistake);
         const ctx = makeCtx(me, o);
 
         if (s.phase === 'draw') {
-            if (level === 'easy') {
-                // Easy nearly always draws from its deck, and always when it has nothing to play.
+            if (cfg.simple) {
+                // Normal nearly always draws from its deck, and always when it has nothing to play.
                 const deck = legal.find(a => a.choice === 'deck');
                 if (deck && (needsCards(s, me) || !(mistake || rng.chance(0.15)))) return deck;
                 return rng.pick(legal);
@@ -654,9 +824,12 @@
         if (s.phase === 'choose') return mistake ? rng.pick(legal) : answerPending(s, me, ctx, legal);
 
         // Main phase.
-        if (level === 'easy') {
-            // Easy's weaknesses are weaker CHOICES (no threat terms, loves hitting the hero, a random
+        if (cfg.simple) {
+            // Normal's weaknesses are weaker CHOICES (no threat terms, likes hitting the hero, a random
             // second-rate move now and then, sometimes holding back an attack), never sitting still.
+            // It does take an obvious lethal attack.
+            const kill = cfg.lethal && lethalAttack(s, legal, me);
+            if (kill) return kill;
             const scored = scoreActions(s, groupActions(s, legal), me, ctx);
             const best = develop(s, scored, pickBest(scored));
             if (mistake) {
@@ -665,9 +838,10 @@
             }
             // Holding back an attack only once nothing is left to play.
             const canPlay = legal.some(a => a.type === 'play' && s.cards[a.cid].kind === 'creature');
-            if (best && best.type === 'attack' && !canPlay && rng.chance(EARLY_END.easy)) return legal.find(a => a.type === 'end');
+            if (best && best.type === 'attack' && !canPlay && rng.chance(cfg.earlyEnd)) return legal.find(a => a.type === 'end');
             return best;
         }
+        if (cfg.search) return expertMain(s, legal, me, ctx);
         const kill = lethalAttack(s, legal, me);
         if (kill) return kill;
         const P = s.players[me];
@@ -698,5 +872,8 @@
         return s;
     }
 
-    Battle.AI = { choose, playOut, evaluate, explain, MISTAKE, EARLY_END, EASY_TWISTS, WEIGHTS };
+    Battle.AI = {
+        choose, playOut, evaluate, explain, levelOf, LEVELS, LEVEL_NAMES, EXPERT,
+        MISTAKE, EARLY_END, NORMAL_TWISTS, EASY_TWISTS: NORMAL_TWISTS, WEIGHTS,
+    };
 })(typeof window !== 'undefined' ? window : globalThis);
