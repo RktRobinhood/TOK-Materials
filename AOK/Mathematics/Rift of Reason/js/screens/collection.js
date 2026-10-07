@@ -13,6 +13,12 @@
         return el('span.chip', { dataset: { colour }, text: c.icon + ' ' + c.name });
     }
 
+    // "a Reason" / "an Emotion" (colour identity notes).
+    function aColour(colour) {
+        const name = (Rift.COLOURS[colour] || { name: colour }).name;
+        return (/^[aeiou]/i.test(name) ? 'an ' : 'a ') + name;
+    }
+
     function card(speciesId, opts) {
         const c = Rift.data.creatures[speciesId];
         const o = opts || {};
@@ -116,8 +122,7 @@
             const r = Rift.State.checkDeck(deckCounts());
             const bad = owned.filter(id => counts[id] && !fitsTeam(id));
             if (!bad.length) return r;
-            const C = Rift.COLOURS[tactics[bad[0]].colour];
-            return Object.assign({}, r, { valid: false, message: r.message + ' ' + tactics[bad[0]].name + ' needs a ' + C.name + ' creature in your team.' });
+            return Object.assign({}, r, { valid: false, message: r.message + ' ' + tactics[bad[0]].name + ' needs ' + aColour(tactics[bad[0]].colour) + ' creature in your team.' });
         }
 
         // Greyed rows for the loaned creatures the battle adds, so a + on a tactic never hides one.
@@ -170,7 +175,7 @@
             const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + t.name, onclick() { if ((counts[id] || 0) < 2 && tacticTotal() < 14) counts[id] = (counts[id] || 0) + 1; refresh(); } });
             steppers.push({ id, minus, plus, out });
             // A colour tactic: its colour and rarity, and a note while the team has no creature of that colour.
-            const need = t.colour ? el('div.small.need-line', { text: 'Needs a ' + Rift.COLOURS[t.colour].name + ' creature in your team.' }) : null;
+            const need = t.colour ? el('div.small.need-line', { text: 'Needs ' + aColour(t.colour) + ' creature in your team.' }) : null;
             if (need) needLines.push({ id, node: need });
             return el('div.deck-option.tactic-option', t.colour ? { dataset: { tcolour: t.colour } } : null, [
                 Rift.Assets.has('tactic/' + id) ? Rift.Assets.img('tactic/' + id, { className: 'tactic-art', alt: '' }) : null,

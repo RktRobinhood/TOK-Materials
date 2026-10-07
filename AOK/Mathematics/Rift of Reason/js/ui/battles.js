@@ -22,7 +22,7 @@
 
     // One short toast when a newly owned colour unlocks its common colour tactic (Rift.State.update).
     function unlockedText(ids) {
-        return 'New tactic' + (ids.length > 1 ? 's' : '') + ': ' + ids.map(id => ((Rift.data.tactics || {})[id] || { name: id }).name).join(', ') + '. Add it in Collection.';
+        return 'New tactic' + (ids.length > 1 ? 's' : '') + ': ' + ids.map(id => ((Rift.data.tactics || {})[id] || { name: id }).name).join(', ') + '. Add ' + (ids.length > 1 ? 'them' : 'it') + ' in Collection.';
     }
     if (Rift.bus) Rift.bus.on('tactics:unlocked', ids => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(unlockedText(ids), 5000); });
 
