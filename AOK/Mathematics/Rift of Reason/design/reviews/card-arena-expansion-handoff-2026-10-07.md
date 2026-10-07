@@ -9,7 +9,18 @@ Branch `card-arena` (draft PR #48 to `main`). Plan: `../card-arena-expansion-202
 - **Bag in battle**: bring up to two items; one item per turn for its energy; only used items leave the save; free practice bag (Tonic, Ward). AI ignores items. Item battle jobs are in `data/items.js`.
 - **Colour tactics with a colour identity** (Commander-style): 18 cards, a common/uncommon/rare per colour. A colour tactic needs a creature of its colour in the deck *and* in play; colourless tactics always work. First creature of a colour unlocks its common; trainers give uncommons; `Rift.State.grantTactic(id)` is ready for the vendor, quests and the Rift Run. Renames: Memory common **Remember When** (Keanu's ability is already Déjà Vu); Imagination rare **Dream Big** (Thought Experiment needs token support). Persuasion takes control (≤2 attack).
 - **Icon buttons with tooltips** (teacher feedback): the draw choice is four picture buttons with a tiny badge; Rules, Help, Leave, Close, Replay, Bag and Spark are icons; the name and a detail line show on hover, focus or long-press. End turn stays labelled. Granny's lesson now introduces the picture buttons.
-- **AI levels** Normal / Competent / Expert (Expert bosses with built decks): see the AI section below once merged.
+- **AI levels** Normal / Competent / Expert (`easy`/`hard` still work as aliases). Normal: practice, Syllo, Mrs Crumb, Pip. Competent: Corvina the Card Sharp, classmate ghosts. Expert: Constable Clobber, Prosecutor Fin, the Feed's Champion, each with a built 20-card deck in `data/decks.js` (two neighbouring colours plus their colour tactics). The trainer offer is one "Challenge · <level>" button. **Syllo now has 8 hearts** in his Road challenge (at 12 a beginner won only ~60%).
+
+## AI ladder (`node tools/sim-battle.mjs --ladder --seed=ladder`, 1,100 games a row, ±3 points)
+
+| Row | Result | Target |
+|---|---|---|
+| Competent beats Normal | 69.5% | 65–75% |
+| Expert beats Competent | 62.5% | 60–70% |
+| Expert with built deck beats Competent with starter deck | 80.0% | ~80% |
+| Beginner beats Normal Syllo | 73.5% | 65–75% |
+
+Expert thinks for ~16 ms a move on average (the slowest alone: 82 ms); its search is capped by counts, so it is deterministic.
 - **Art queue**: Stage 11 in `art-requests/ART-REQUESTS.md` and the one-image-at-a-time runbook `art-requests/ASSET-SESSION.md`; slicing for every new sheet is in `tools/assets/sheets.json`.
 
 ## Balance (AI vs AI)

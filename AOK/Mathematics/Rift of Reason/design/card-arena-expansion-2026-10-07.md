@@ -11,7 +11,7 @@ AGENTS.md still applies: borrow mechanics, never names, art or text.
 | Card Arena button on the title screen (opens Collection: learn, practise, classmate codes, deck builder) | built (7 Oct) |
 | A board per lesson: `scene/arena-l1` … `l4`, then `scene/arena`, then the old table | built; art in Stage 11 |
 | Colour tactics: three per Way of Knowing (common, uncommon, rare) with a colour identity rule | built (7 Oct); Thought Experiment (tokens) later |
-| Bag in battle: bring two items, use one per turn | building (7 Oct) |
+| Bag in battle: bring two items, use one per turn | built (7 Oct) |
 | Coins, the vendor, side quests, a per-lesson Rift Run (roguelike) | approved; next session |
 | AI levels Normal / Competent / Expert (section 8) | built (7 Oct); ladder in `reviews/card-arena-balance-2026-10-07.md` |
 | Hot-seat play on one laptop (section 6) | approved; after the AI levels |
