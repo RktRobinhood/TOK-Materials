@@ -1,0 +1,106 @@
+# Card Arena expansion — 7 October 2026
+
+The teacher's direction on the morning of 7 October, after the Card Arena rebuild (`card-arena-2026-10-07.md`, #46): keep it playing roughly like the familiar digital card battler, then give it our own spin. This file is the plan; `card-battler-research-2026-10-07.md` (in `reviews/`) collects what open-source card battlers on GitHub do; the art for all of it is **Stage 11** in `art-requests/ART-REQUESTS.md`, run one image at a time from `art-requests/ASSET-SESSION.md`.
+
+AGENTS.md still applies: borrow mechanics, never names, art or text.
+
+## 1. What is built today and what is planned
+
+| Part | Status |
+|---|---|
+| Card Arena button on the title screen (opens Collection: learn, practise, classmate codes, deck builder) | built (7 Oct) |
+| A board per lesson: `scene/arena-l1` … `l4`, then `scene/arena`, then the old table | built; art in Stage 11 |
+| Colour tactics: two per Way of Knowing, with an **In tune** bonus | building (7 Oct) |
+| Bag in battle: bring two items, use one per turn | building (7 Oct) |
+| Coins, a travelling vendor, a per-lesson Rift Run (roguelike) | **design only**, waits for teacher decisions |
+| Live play between two laptops without a server | **design only**, see section 6 |
+
+## 2. Colour tactics (spells with a colour identity)
+
+The six colours are the Ways of Knowing (Reason blue, Emotion red, Perception green, Language gold, Imagination violet, Memory silver; the wheel is Reason > Emotion > Language > Perception > Imagination > Reason, Memory outside it). The 15 existing tactics stay colourless (copper frame).
+
+Each colour gets two tactics with a clear personality. Each has an **In tune** line: a small extra if you control a creature of that colour when you play it. That gives decks a reason to lean into colours without forbidding any mix.
+
+| Colour | Personality | Tactic (cost) | Effect | In tune |
+|---|---|---|---|---|
+| Reason | precise, step by step | **Proof by Contradiction** (2) | Deal 2 damage to an enemy creature. | 3 damage instead. |
+| Reason | | **Step by Step** (1) | Draw a card. | Draw 2 instead. |
+| Emotion | bold, fast, all-in | **Rally Cry** (2) | Your creatures get +1 attack. | And +1 health. |
+| Emotion | | **Gut Reaction** (1) | Deal 2 damage to the enemy hero. | 3 instead. |
+| Perception | looks closer, notices | **Look Closer** (1) | An enemy creature loses Guard, Elusive and Shield. | Also draw a card. |
+| Perception | | **Field Notes** (2) | Fully heal a friendly creature and give it +1 health. | And +1 attack. |
+| Language | names, labels, persuades | **Label It** (2) | An enemy creature's attack becomes 1. | It also can't attack on its next turn. |
+| Language | | **Rousing Speech** (3) | Your creatures get +1/+1. | Also restore 2 hearts. |
+| Imagination | what if? possibilities | **Imagine Otherwise** (2) | Swap a creature's attack and health. | Also draw a card. |
+| Imagination | | **Daydream** (1) | A friendly creature gets Elusive and +1 attack. | +2 attack instead. |
+| Memory | the past returns | **Déjà Vu** (1) | Return another tactic from your discard pile to your hand. | Also restore 2 hearts. |
+| Memory | | **Nostalgia** (2) | Move the Fate track 2 spaces further away and restore 2 hearts. | 3 hearts instead. |
+
+Numbers are a starting point; the swapped-seat simulator decides the final ones (no tactic should change the first-player or Hard-vs-Easy rates by more than about 2 points when added to both pools).
+
+**Unlocks:** a colour's two tactics unlock the first time you catch a creature of that colour (one toast: "New tactics: …"). Later the vendor and the Rift Run also offer them. Old saves unlock from the creatures they already have.
+
+**Card look:** colour tactics use the copper tactic frame recoloured to the colour (Stage 11 art `ui/card-tactic-<colour>`; CSS tint until then) with the colour's emblem.
+
+## 3. The Bag in battle (items get a second job)
+
+The world items so far mostly help catching. In battle they get a second function, so the Pokémon-like bag and the card game feed each other.
+
+- Before a real battle the existing "Bring anything?" box lets you pick **up to two** bag items (as well as the passive Trickster Coin / Heartstone, which keep working as now).
+- In the battle a **Bag** button sits by the energy. Using an item is a main-phase action: **one item per turn**, it costs the energy shown, and it is used up **only when you use it** (unused items go back to the bag). *Teacher decision 1.*
+- Practice battles give a free practice bag (one Tonic, one Ward) that never touches the save, so students can try it safely.
+- The AI does not use items at first. Bosses may get one later.
+
+| Item | World job (unchanged) | Battle job | Energy |
+|---|---|---|---|
+| Tonic | restore 2 health | Restore 2 hearts to your hero. | 1 |
+| Ward | cancel a bad fate roll | A friendly creature gets Shield. | 1 |
+| Mending | restore an injured creature | Fully heal a friendly creature. | 1 |
+| Lure Lantern | rarer creatures for 3 visits | Draw a card from your deck. | 1 |
+| Catch Charm | catching | An enemy creature with 2 or less health can't attack on its next turn. | 1 |
+| Great Charm | catching (+20%) | An enemy creature can't attack on its next turn. | 1 |
+| Anchor | stops a warp curse | The Fate track doesn't move at the end of this turn. | 0 |
+
+Trick Book, Trickster Coin and Heartstone keep their current jobs. Engine: a new `item` action (`{ type: 'item', id, target? }`) with the same legality, determinism and log rules as tactics; items live in `players[p].bag` and leave it when used; the result reports `itemsUsed` so the caller removes only those from the save.
+
+## 4. Coins, the vendor and the Rift Run (design for decision)
+
+These turn the in-battle side into a light roguelike, which the teacher felt was more alive than the catching treasure.
+
+**Coins.** A single currency (working name **Glimmers**: small cyan rift sparks). Earned from battle wins (trainer 3, boss 6, ghost 2, practice 0), first-time puzzle wins (1) and Rift Run nodes. Shown in the HUD beside the bag.
+
+**The vendor.** A travelling pedlar who appears once per chapter (on the map as a new `shop` node) and inside every Rift Run. Working design: **Hagglesworth**, a hermit crab whose shell is a little wooden shop with shelves, an awning and a lantern (art 11.6). Sells: 3 tactics (one in a colour you own), 2 items, 1 Trick Book; prices 3–8 Glimmers; "Haggle" lets you pay 1 Glimmer to reroll the shelf once. Item swap: sell back an item for half price.
+
+**The Rift Run (per lesson board).** A separate mode from the story, opened from the Card Arena and from a lesson's rift node:
+
+- You start with a 15-card starter deck (loaned creatures of two colours + 5 tactics) and 12 hearts that **carry over** between fights.
+- A short branching map (7 steps, 2–3 choices per step) drawn on the lesson's board art: battles, one elite, a vendor, a rest (heal 4 hearts or remove a card), a question event (a short TOK choice with a card or item reward), and the lesson boss.
+- After each win: **pick one of three cards** to add (creatures, tactics, sometimes axioms), plus Glimmers.
+- **Keepsakes** (relics): small permanent rule tweaks for the run, e.g. "Your first tactic each turn costs 1 less", "Guard creatures get +1 health", "Start each fight with a Spark". Elites and bosses drop them.
+- Beat the boss: keep one card from the run as a permanent trophy copy (marked with a rift star), a badge for the lesson, and the run's Glimmers. Lose: keep half the Glimmers. Nothing in the real collection is at stake.
+- One run is about 15–25 minutes, saved between sessions.
+
+This needs: map generator + screen, run state in the save, a card-draft screen, the vendor screen, keepsake hooks in the engine (a few rule hooks, like axioms), and balancing. Rough size: two to three working sessions.
+
+## 5. Lesson boards
+
+Each lesson gets its own battle board (16:9 painted, no UI baked in), matching the chapter: **L1 the Fair** (Granny's lantern-lit card table at the fairground), **L2 Boolesbury** (Boole's clockwork workbench by night), **L3 Tomorrowton** (the Tribunal's evidence table under neon), **L4 the Server Tower** (a dice-and-circuit table in the core). The code already picks `scene/arena-l<lesson>` from the current chapter (or a battle's `lesson` parameter). Each board keeps the same layout: darker opponent half at the top, the player's half at the bottom, a calm empty lane across the middle for the Fate track, decoration only at the edges.
+
+Optional later: two small clickable props per board (a candle that flickers once, a dice that rolls once) — single short reactions only, never looping, and none with Calm motion on.
+
+## 6. Live play between two laptops (design for decision)
+
+Today: **classmate codes** (asynchronous ghost battles) already work everywhere with no server. A browser page cannot discover other laptops on the classroom network by itself, so true local "mesh" discovery is not possible from a static site. The realistic options:
+
+1. **Hot-seat** on one laptop (two players, screen hides the hand between turns). No network at all; simplest; works offline. Half a session.
+2. **Direct WebRTC with copy-paste or QR handshake.** Laptop A shows a code (or QR), B pastes/scans it and shows a reply code, A pastes that back; then they play peer-to-peer. No server of ours, and on the same school Wi-Fi it usually connects directly, but some school networks block it. Our deterministic engine helps: only moves are sent, both sides replay them. One to two sessions.
+3. **Room codes over a public signalling service** (libraries that use public relays only to introduce the two laptops). Smoothest for students ("type room 4821"), but depends on a third-party service and on the school network allowing it.
+
+Recommendation: build 1 first (cheap, always works in class), then try 2 as an experiment on the school Wi-Fi. *Teacher decision 3.* Details and library notes are in the research file.
+
+## 7. Decisions for the teacher
+
+1. **Bag items are used up only when used** (recommended), or always used up once brought?
+2. **Rift Run and vendor:** build next session (recommended), and is the currency name **Glimmers** and the hermit-crab vendor all right?
+3. **Live play:** hot-seat first, then the copy-paste WebRTC experiment (recommended)?
+4. **Colour tactics unlock when you catch that colour** (recommended), or only from trainers and the vendor?
