@@ -62,6 +62,8 @@ The world items so far mostly help catching. In battle they get a second functio
 | Great Charm | catching (+20%) | An enemy creature can't attack on its next turn. | 1 |
 | Anchor | stops a warp curse | The Fate track doesn't move at the end of this turn. | 0 |
 
+As built (7 Oct): like rule and tactic cards, an item is not offered when it would do nothing (Tonic at full hearts, Lure Lantern with an empty deck or full hand, Ward on a creature that already has Shield, Mending on an unhurt one, a Charm on an enemy already held, Anchor without a Fate track); the Bag tray shows it dimmed with the reason. You bring one of each kind (two different items). The practice bag is for Collection practice; Syllo's story match and Granny's lesson have no bag. A Ward or Anchor used in the battle no longer counts for the after-battle check.
+
 Trick Book, Trickster Coin and Heartstone keep their current jobs. Engine: a new `item` action (`{ type: 'item', id, target? }`) with the same legality, determinism and log rules as tactics; items live in `players[p].bag` and leave it when used; the result reports `itemsUsed` so the caller removes only those from the save.
 
 ## 4. Coins, the vendor, side quests and the Rift Run (approved 7 Oct, build next session)

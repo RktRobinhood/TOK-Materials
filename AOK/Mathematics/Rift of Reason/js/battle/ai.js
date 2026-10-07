@@ -32,6 +32,8 @@
  *         (EASY_TWISTS: The Last Shall Be First, Empty Set). Hard beats Easy ~79% in
  *         simulation (design/reviews/card-arena-balance-2026-10-07.md).
  *
+ *   The Bag: the AI never uses items (it ignores 'item' actions, also for a player it simulates).
+ *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
  *
@@ -48,6 +50,8 @@
     const Rift = root.Rift;
     const Battle = Rift.Battle || (Rift.Battle = {});
     const E = () => Battle.Engine;
+    // Legal actions without bag items (the AI does not use items).
+    const legalFor = s => E().legalActions(s).filter(a => a.type !== 'item');
 
     const MISTAKE = { easy: 0.4, hard: 0 };
     const EARLY_END = { easy: 0.05, hard: 0 };
@@ -553,7 +557,7 @@
                 continue;
             }
             if (cur.phase !== 'main') break;
-            const legal = E().legalActions(cur).filter(a => a.type !== 'axiom');
+            const legal = legalFor(cur).filter(a => a.type !== 'axiom');
             const a = lethalAttack(cur, legal, me) || pickBest(scoreActions(cur, groupActions(cur, legal), me, fast));
             if (!a || a.type === 'end') break;
             cur = E().applyLegal(cur, a);
@@ -598,7 +602,7 @@
         const ctx = makeCtx(me, o);
         ctx.axVal = axiomValues(state, me, ctx, state.players[me].axHand.concat(state.axioms.deck.slice(0, 1)));
         if (state.phase === 'draw') return drawScores(state, E().legalActions(state), me, ctx);
-        return scoreActions(state, groupActions(state, E().legalActions(state)), me, ctx);
+        return scoreActions(state, groupActions(state, legalFor(state)), me, ctx);
     }
 
     // Rule cards Easy never plays: twists that turn the whole game around are kept for Hard.
@@ -633,7 +637,7 @@
         const level = o.level === 'easy' ? 'easy' : 'hard';
         const Eng = E();
         const s = state;
-        const legal = allowedActions(s, Eng.legalActions(s), level);
+        const legal = allowedActions(s, legalFor(s), level);
         if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);
         const rng = Rift.makeRng('ai:' + s.seed + ':' + s.step + ':' + level + ':' + (o.salt || ''));
