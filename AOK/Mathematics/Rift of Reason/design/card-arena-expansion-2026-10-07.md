@@ -12,8 +12,9 @@ AGENTS.md still applies: borrow mechanics, never names, art or text.
 | A board per lesson: `scene/arena-l1` … `l4`, then `scene/arena`, then the old table | built; art in Stage 11 |
 | Colour tactics: two per Way of Knowing, with an **In tune** bonus | building (7 Oct) |
 | Bag in battle: bring two items, use one per turn | building (7 Oct) |
-| Coins, a travelling vendor, a per-lesson Rift Run (roguelike) | **design only**, waits for teacher decisions |
-| Live play between two laptops without a server | **design only**, see section 6 |
+| Coins, the vendor, side quests, a per-lesson Rift Run (roguelike) | approved; next session |
+| AI levels Normal / Competent / Expert (section 8) | building (7 Oct) |
+| Hot-seat play on one laptop (section 6) | approved; after the AI levels |
 
 ## 2. Colour tactics (spells with a colour identity)
 
@@ -63,24 +64,27 @@ The world items so far mostly help catching. In battle they get a second functio
 
 Trick Book, Trickster Coin and Heartstone keep their current jobs. Engine: a new `item` action (`{ type: 'item', id, target? }`) with the same legality, determinism and log rules as tactics; items live in `players[p].bag` and leave it when used; the result reports `itemsUsed` so the caller removes only those from the save.
 
-## 4. Coins, the vendor and the Rift Run (design for decision)
+## 4. Coins, the vendor, side quests and the Rift Run (approved 7 Oct, build next session)
 
-These turn the in-battle side into a light roguelike, which the teacher felt was more alive than the catching treasure.
+These turn the in-battle side into a light roguelike, which the teacher felt was more alive than the catching treasure. Replayability matters most: this is a side game students come back to.
 
-**Coins.** A single currency (working name **Glimmers**: small cyan rift sparks). Earned from battle wins (trainer 3, boss 6, ghost 2, practice 0), first-time puzzle wins (1) and Rift Run nodes. Shown in the HUD beside the bag.
+**Coins.** A single currency (working name **Glimmers**: small cyan rift sparks). Earned from battle wins (trainer 3, boss 6, ghost 2, practice 0), first-time puzzle wins (1), quests and Rift Run nodes. Shown in the HUD beside the bag.
 
-**The vendor.** A travelling pedlar who appears once per chapter (on the map as a new `shop` node) and inside every Rift Run. Working design: **Hagglesworth**, a hermit crab whose shell is a little wooden shop with shelves, an awning and a lantern (art 11.6). Sells: 3 tactics (one in a colour you own), 2 items, 1 Trick Book; prices 3–8 Glimmers; "Haggle" lets you pay 1 Glimmer to reroll the shelf once. Item swap: sell back an item for half price.
+**The main vendor.** A travelling pedlar, **Hagglesworth**, a hermit crab whose shell is a little wooden shop with shelves, an awning and a lantern (art 11.6). He has a stall in every chapter (a new `shop` node on the map) and turns up inside every Rift Run. Sells: 3 tactics (colourless and colour tactics of any rarity, at least one in a colour you own), 2 items, 1 Trick Book; prices by rarity (common 3, uncommon 5, rare 8 Glimmers; items 2–4); "Haggle" lets you pay 1 Glimmer to reroll the shelf once a visit. Item swap: sell an item back for half price.
+
+**Side quests.** Now that the map exists, characters on it give small quests for replayability, each rewarding a card (usually an uncommon or rare colour tactic, sometimes a Trick Book or Glimmers). Shown on a quest list in the HUD; one or two per chapter to start. Kinds that reuse what exists: *win a battle using only one colour*, *beat a trainer with a deck that contains a Guard creature*, *catch a creature of a colour you don't have*, *win a Rift Run*, *solve a puzzle stall at difficulty 3*, *bring the Sundial a rumour*. Quest givers are existing cast (Granny, Professor Sequins, Sergeant Syllo, Madame Mirage, and the Ch2–4 cast), so no new art is needed.
 
 **The Rift Run (per lesson board).** A separate mode from the story, opened from the Card Arena and from a lesson's rift node:
 
 - You start with a 15-card starter deck (loaned creatures of two colours + 5 tactics) and 12 hearts that **carry over** between fights.
 - A short branching map (7 steps, 2–3 choices per step) drawn on the lesson's board art: battles, one elite, a vendor, a rest (heal 4 hearts or remove a card), a question event (a short TOK choice with a card or item reward), and the lesson boss.
-- After each win: **pick one of three cards** to add (creatures, tactics, sometimes axioms), plus Glimmers.
+- After each win: **pick one of three cards** to add (creatures, tactics, sometimes axioms), always skippable, plus Glimmers.
 - **Keepsakes** (relics): small permanent rule tweaks for the run, e.g. "Your first tactic each turn costs 1 less", "Guard creatures get +1 health", "Start each fight with a Spark". Elites and bosses drop them.
 - Beat the boss: keep one card from the run as a permanent trophy copy (marked with a rift star), a badge for the lesson, and the run's Glimmers. Lose: keep half the Glimmers. Nothing in the real collection is at stake.
+- Opponents use the AI levels in section 8: battles Normal, the elite Competent, the boss Expert with a built deck.
 - One run is about 15–25 minutes, saved between sessions.
 
-This needs: map generator + screen, run state in the save, a card-draft screen, the vendor screen, keepsake hooks in the engine (a few rule hooks, like axioms), and balancing. Rough size: two to three working sessions.
+This needs: map generator + screen, run state in the save, a card-draft screen, the vendor screen, a quest list, keepsake hooks in the engine (a few rule hooks, like axioms), and balancing. Rough size: two to three working sessions.
 
 ## 5. Lesson boards
 
@@ -88,19 +92,31 @@ Each lesson gets its own battle board (16:9 painted, no UI baked in), matching t
 
 Optional later: two small clickable props per board (a candle that flickers once, a dice that rolls once) — single short reactions only, never looping, and none with Calm motion on.
 
-## 6. Live play between two laptops (design for decision)
+## 6. Live play between two laptops
 
-Today: **classmate codes** (asynchronous ghost battles) already work everywhere with no server. A browser page cannot discover other laptops on the classroom network by itself, so true local "mesh" discovery is not possible from a static site. The realistic options:
+Today: **classmate codes** (asynchronous ghost battles) already work everywhere with no server. A browser page cannot discover other laptops on the classroom network by itself, so true local "mesh" discovery is not possible from a static site. The options:
 
-1. **Hot-seat** on one laptop (two players, screen hides the hand between turns). No network at all; simplest; works offline. Half a session.
-2. **Direct WebRTC with copy-paste or QR handshake.** Laptop A shows a code (or QR), B pastes/scans it and shows a reply code, A pastes that back; then they play peer-to-peer. No server of ours, and on the same school Wi-Fi it usually connects directly, but some school networks block it. Our deterministic engine helps: only moves are sent, both sides replay them. One to two sessions.
-3. **Room codes over a public signalling service** (libraries that use public relays only to introduce the two laptops). Smoothest for students ("type room 4821"), but depends on a third-party service and on the school network allowing it.
+1. **Hot-seat** on one laptop (two players, a cover screen hides the hand between turns). No network at all; works offline. **Approved: build first.**
+2. **Direct WebRTC with copy-paste or QR handshake.** Laptop A shows a code (or QR), B pastes or scans it and shows a reply code, A pastes that back; then they play peer-to-peer. No server of ours; some school networks block it. Our deterministic engine helps: only moves are sent, both sides replay them and compare a state hash each turn. A later experiment on the school Wi-Fi.
+3. **Room codes over a public signalling service.** Smoothest for students, but depends on a third party and the school network. Only if 2 is blocked.
 
-Recommendation: build 1 first (cheap, always works in class), then try 2 as an experiment on the school Wi-Fi. *Teacher decision 3.* Details and library notes are in the research file.
+Details and library notes are in the research file.
 
-## 7. Decisions for the teacher
+## 7. Teacher decisions (7 October)
 
-1. **Bag items are used up only when used** (recommended), or always used up once brought?
-2. **Rift Run and vendor:** build next session (recommended), and is the currency name **Glimmers** and the hermit-crab vendor all right?
-3. **Live play:** hot-seat first, then the copy-paste WebRTC experiment (recommended)?
-4. **Colour tactics unlock when you catch that colour** (recommended), or only from trainers and the vendor?
+1. **Bag items are used up when used**: approved (unused items go back to the bag).
+2. **Vendor and Rift Run: build next session**, plus **side quests** on the map that reward cards. Glimmers and the hermit crab are working names.
+3. **Live play: hot-seat first.** Testing is standardised through AI-vs-AI simulation with fixed AI levels (section 8).
+4. **Colour identity, like a Commander deck**: a colour tactic can only go in a deck with a creature of that colour, **and** can only be played while you have a creature of that colour in play. Colourless tactics can always be played. Everyone gets a generic base set of colourless tactics; each colour has a common, an uncommon and a rare tactic to collect, with more cards out in the world (vendor, quests, Rift Run). See section 2.
+
+## 8. AI levels (approved 7 Oct)
+
+No Easy mode. Three levels, each tested by simulation so classes get a standard experience:
+
+| Level | Plays like | Deck | Used for |
+|---|---|---|---|
+| **Normal** | sensible, develops its board, trades reasonably, sometimes greedy; never plays the reversed-goal or Empty Set twists | its normal team | practice, story challenges, ordinary trainers, Rift Run battles |
+| **Competent** | today's lookahead AI: values the board, Guard, lethal checks, uses rules on purpose | its normal team | mini-bosses, classmate ghosts, Rift Run elites |
+| **Expert** | deeper lookahead, plans lethal over two turns, saves removal for threats, uses Fate and axioms well | a **built competitive deck** (curated, colour-consistent, good curve) | bosses, the Rift Run boss |
+
+Targets (swapped seats, same decks): Competent beats Normal about 65–75%; Expert beats Competent about 60–70%; with its built deck, Expert beats a Competent starter deck about 80%. A beginner-level scripted player should still beat Normal in Syllo's story challenge most of the time (about 65–75%). The guided lesson stays scripted.
