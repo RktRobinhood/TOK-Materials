@@ -40,7 +40,7 @@ Each colour gets three tactics with a clear personality: a **common**, an **unco
 | Perception | | rare | **Clear View** (4) | Every enemy creature loses Guard, Elusive and Shield. Draw 2 cards. |
 | Language | names, labels, persuades | common | **Label It** (2) | An enemy creature's attack becomes 1. It can't attack on its next turn. |
 | Language | | uncommon | **Rousing Speech** (3) | Your creatures get +1/+1. Restore 2 hearts. |
-| Language | | rare | **Persuasion** (5) | Take control of an enemy creature with 3 or less attack. It arrives asleep; when defeated it goes to its owner's discard pile, and the after-battle Fate roll stays with its real owner. |
+| Language | | rare | **Persuasion** (5) | Take control of an enemy creature with 2 or less attack (tuned from 3: see the balance note). It arrives asleep; when defeated it goes to its owner's discard pile, and the after-battle Fate roll stays with its real owner. |
 | Imagination | what if? possibilities | common | **Daydream** (1) | A friendly creature gets Elusive and +2 attack. |
 | Imagination | | uncommon | **Imagine Otherwise** (2) | Swap a creature's attack and health. Draw a card. |
 | Imagination | | rare | **Dream Big** (4) | A friendly creature gets +3/+3. (Stands in for *Thought Experiment*, two 2/2 Idea tokens, which needs token support in the engine first.) |
