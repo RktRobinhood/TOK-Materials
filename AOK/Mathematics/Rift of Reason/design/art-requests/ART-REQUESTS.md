@@ -396,13 +396,17 @@ Every arena board starts with this layout paragraph (already included in 11.1a; 
 ### 11.3 Colour tactic art (priority 1)
 
 **Attach:** `style-board.png`, `tactics-1.png`
-**Save as:** `5-ui/tactics-3.png` and `5-ui/tactics-4.png` (two requests)
+**Save as:** `5-ui/tactics-3.png`, `5-ui/tactics-4.png` and `5-ui/tactics-5.png` (three requests; tactics-5 holds the six rares)
 
 Shared prompt start: "On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, roughly square vignette of the same size as the attached tactic vignettes (no humans; creatures only if any). Match the attached style board."
 
 > **tactics-3, two rows of three, left to right:** **1, Proof by Contradiction (blue):** a little house of cards collapsing as one card at the bottom slides out, a cool blue glow. **2, Step by Step (blue):** a spiral staircase of blue glowing stones climbing upward, a tiny lantern on each step. **3, Rally Cry (red):** a red banner on a pole streaming like a flame, warm sparks flying. **4, Gut Reaction (red):** a red flame-heart firing one quick spark-arrow. **5, Look Closer (green):** a green-rimmed magnifying glass over a leaf, revealing a tiny hidden beetle. **6, Field Notes (green):** an open field sketchbook with a drawn bird (lines only), a pressed leaf and a small roll of bandage.
 
 > **tactics-4, two rows of three, left to right:** **1, Label It (gold):** a gold luggage tag with a blank face, tied with string onto a small grumpy rock. **2, Rousing Speech (gold):** a little golden lectern with sound waves rising from it as golden ribbons. **3, Imagine Otherwise (violet):** a violet hand mirror in which a small sword's reflection is a heart. **4, Daydream (violet):** a little paper boat sailing on a violet cloud among stars. **5, Déjà Vu (silver):** two identical silver keys overlapping like a double exposure, with a faint echo trail. **6, Nostalgia (silver):** an open silver music box with a winding key, little memory bubbles floating out.
+
+> **tactics-5, the six rares, two rows of three, left to right.** Rares are a little grander than the other vignettes: a thin golden glow around each, richer detail, same size. **1, Q.E.D. (blue):** a small square stone block landing with a soft blue flash on top of a finished stone archway, the keystone in place. **2, Wave of Feeling (red):** a great curling red-and-orange wave carrying tiny glowing hearts, about to break. **3, Clear View (green):** a round window whose fogged glass is wiped clean in one arc, showing a bright green meadow. **4, Persuasion (gold):** a golden thread spun from a quill, gently looped around a small shield and drawing it across. **5, Thought Experiment (violet):** two small glowing violet idea-sprites (round, big-eyed, made of soft light) stepping out of an open book. **6, Total Recall (silver):** a silver locket open, two small glowing cards rising out of it with a ring of light.
+>
+> *If the build used the fallback rares, swap in:* **4, Silver Tongue (gold):** a curling golden ribbon of speech wrapping a small sword so it droops. **5, Dream Big (violet):** a tiny creature silhouette casting a huge glowing violet shadow on a wall of stars.
 
 ### 11.4 Battle effects (priority 2)
 
