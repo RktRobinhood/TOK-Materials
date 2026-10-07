@@ -36,6 +36,12 @@ With colour tactics: first player 49.5–50.7%, Competent-style beats Normal-sty
 5. **Hot-seat** play on one laptop with a hand-cover screen.
 6. Later: token support (Thought Experiment), bosses using items, attack lunge and card-flight animations, WebRTC copy-paste experiment.
 
+## Voice (7 Oct, 09:04)
+
+- Granny's 16 lesson lines (the new picture-button wording) and 22 creature lines are recorded and committed.
+- **41 creature lines (14 creatures) are left** for the lite model's next daily quota: `node tools/voices.mjs --render` after 09:00. Keep them on their assigned model so each creature keeps one voice.
+- The transcript audit (`node tools/voices-audit.mjs --only granny`) could not run: the text model answered HTTP 503 twice. Run it next time; until then Granny's new lines are unchecked.
+
 ## Housekeeping
 
 - Leftover empty folders under `.claude/worktrees/` could not be deleted while OneDrive held them; delete them when OneDrive is idle (they are already removed from git's worktree list).
