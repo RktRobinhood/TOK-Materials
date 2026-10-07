@@ -44,12 +44,12 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 | 13 | Lesson 2 board | 11.1b | `2-world/arena-l2.png` | [x] |
 | 14 | Lesson 3 board | 11.1c | `2-world/arena-l3.png` | [x] |
 | 15 | Lesson 4 board | 11.1d | `2-world/arena-l4.png` | [x] |
-| 16 | The vendor, Hagglesworth | 11.6 | `3-cast/hagglesworth.png` | [ ] |
-| 17 | The vendor's stall | 11.7 (shop) | `2-world/shop.png` | [ ] |
-| 18 | New map markers | 11.7 (markers) | `5-ui/map-markers-2.png` | [ ] |
-| 19 | Keepsakes (only if the Rift Run is approved) | 11.8 | `5-ui/keepsakes.png` | [ ] |
-| 20 | Lesson card backs | 11.9 | `5-ui/card-backs.png` | [ ] |
-| 21 | Board creature medallion (only after the board code changes) | 11.10 | `5-ui/board-token.png` | [ ] |
+| 16 | The vendor, Hagglesworth | 11.6 | `3-cast/hagglesworth.png` | [x] |
+| 17 | The vendor's stall | 11.7 (shop) | `2-world/shop.png` | [x] |
+| 18 | New map markers | 11.7 (markers) | `5-ui/map-markers-2.png` | [x] |
+| 19 | Keepsakes (Rift Run approved 7 Oct) | 11.8 | `5-ui/keepsakes.png` | [x] |
+| 20 | Lesson card backs (maybe: cosmetic, not in the approved plan) | 11.9 | `5-ui/card-backs.png` | [ ] |
+| 21 | Board creature medallion (maybe: needs an undecided layout change) | 11.10 | `5-ui/board-token.png` | [ ] |
 
 Before steps 7–8b, check that the tactic ids in `data/tactics.js` match the `tactics-3.png` / `tactics-4.png` / `tactics-5.png` ids in `tools/assets/sheets.json` (they match as of 7 Oct; re-check if tactics were renamed since).
 
