@@ -112,3 +112,30 @@ Teams containing one copy of a species win between 45% (Muskrat Rocket) and 56% 
 - **Permanent loss** is ~2% of lost battles, not the ~4% asked for. `battle-meta.test.mjs` caps death at 1% of rolls. Raising it needs that test changed.
 - **Muskrat Rocket** (6 energy) is still the weakest card in team stats because games rarely reach 6 energy for long.
 - Hard is a one-ply searcher. It does not plan two turns ahead or hold back cards for the opponent's turn.
+
+## Colour tactics (7 October, later)
+
+The 18 colour tactics (`design/card-arena-expansion-2026-10-07.md`, section 2) with the colour identity rule: a colour tactic only goes in a deck with a creature of its colour and is only playable while you control one. Method: `node tools/sim-battle.mjs 1000 --seed=<s> --colour=4` swaps four of each side's ten starter tactics for random colour tactics of that team's colours (all rarities), in both seats; `--patch` tried the variants; `--only=<id>` adds just one card.
+
+| Measure (Hard vs Hard, 2,000 games per seed) | Starter tactics only | With colour tactics |
+|---|---|---|
+| First player wins, seed ct / ct2 | 45.9% / 47.5% | 49.5% / 50.3% |
+| First player wins, mirror teams (1,200 games) | 47.3% | 50.7% |
+| Hard beats Easy, seed ct / ct2 (1,000 games each) | 78.4% / 77.3% | 75.2% / 76.9% |
+| Average rounds, seed ct / ct2 | 7.72 / 7.86 | 7.32 / 7.38 |
+
+The first-player rate moves about 3 points towards 50%; Hard vs Easy drops about 2 points (inside the noise of ±1.5); games get ~0.4 rounds shorter (more damage and card draw for cheap).
+
+Played in 2–6% of player-games each (about 0.1 plays per game). "Win when played" is biased upwards for every colour tactic, because it can only be played with a creature of its colour on the board (colourless Pep Talk: 55%). After tuning (seed ct): Wave of Feeling 67%, Rally Cry 66%, Clear View 65%, Q.E.D. 64%, Rousing Speech 62%, Persuasion 62%, Step by Step 61%, Proof by Contradiction 60%, Look Closer 60%, Dream Big 56%, Imagine Otherwise 56%, Gut Reaction 54%, Daydream 54%, Field Notes 54%, Remember When 52%, Total Recall 52%, Label It 46%, Nostalgia 39% (played when behind, like Second Wind 34%).
+
+Variants tried (two seeds each, 2,000 games per seed):
+
+| Variant | Win when played | First player |
+|---|---|---|
+| Persuasion, 3 or less attack (the plan) | 72% / 75% | 49.2% / 50.3% |
+| **Persuasion, 2 or less attack (kept)** | 62% / 66% | 49.5% / 50.3% |
+| Persuasion, cost 6 and 2 or less | 64% / 58% | 49.9% / 50.2% |
+| Wave of Feeling +1 attack (not kept: a rare should feel big) | 56% / 58% | 49.3% / 50.6% |
+| Rally Cry cost 3 (not kept: it would be Rousing Speech without hearts) | 62% / 70% | 49.4% / 50.1% |
+
+Only change: **Persuasion takes a creature with 2 or less attack** (was 3). Watch Wave of Feeling and Rally Cry in class: both are "winning more" cards that the bias above flatters, but they are the next to nerf (Wave of Feeling to +1 attack, Rally Cry to +1 attack only).

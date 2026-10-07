@@ -386,7 +386,14 @@
 
     // ---- scoring actions -------------------------------------------------------------
 
-    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true };
+    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true, nostalgia: true };
+
+    // A tactic's own value hint (data/tactics.js `ai`), for what the one-ply score can't see.
+    function tacticHint(s, a, me) {
+        const c = s.cards[a.cid];
+        const def = c && c.kind === 'tactic' && (Rift.data.tactics || {})[c.tactic];
+        return def && def.ai ? def.ai(s, me, a.target || null, E().H) || 0 : 0;
+    }
     const DEEP_ABILITIES = { filter: true, 'next-year': true, axiomatic: true };
 
     function needsDeep(s, a) {
@@ -429,6 +436,7 @@
             try { next = E().applyLegal(s, a); } catch (e) { return { a, score: -Infinity }; }
             let score = settle(next, me, ctx, deep, 0) - base(deep);
             if (a.type === 'end') score -= 0.01;
+            if (a.type === 'play') score += tacticHint(s, a, me);
             return { a, score };
         });
         // Spend energy on the best combination of cards, not just the best single card.
