@@ -62,7 +62,9 @@ test('migration v1 → v2: an old save fixture loads with variants from uids and
         assert.equal(c.powerDelta, old.creatures[i].powerDelta);
         assert.deepEqual(J(c.injuries), old.creatures[i].injuries);
     });
-    assert.deepEqual(J(s.tactics), []);
+    // Plus the common colour tactic of each colour it owns (Reason, Imagination), unlocked on load
+    // (design/card-arena-expansion-2026-10-07.md, section 2).
+    assert.deepEqual(J(s.tactics), ['step-by-step', 'daydream']);
     assert.deepEqual(J(s.deckTactics), []);
     assert.equal(s.items.charm, 2);
     assert.equal(s.flags['card-rules-version'], 2);

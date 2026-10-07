@@ -181,12 +181,12 @@
             },
         },
         'wave-of-feeling': {
-            name: 'Wave of Feeling', cost: 4, colour: 'emotion', rarity: 'rare',
+            name: 'Wave of Feeling', cost: 4, colour: 'emotion', rarity: 'rare', amount: 2,
             text: 'Your creatures get +2 attack and Swift.',
             flavour: 'When everyone feels it, everyone moves.',
             usable: (s, p) => s.players[p].board.length > 0,
             run(api, p) {
-                api.s.players[p].board.forEach(cid => { api.buff(cid, 2, 0, 'Wave of Feeling'); api.addKeyword(cid, 'swift'); });
+                api.s.players[p].board.forEach(cid => { api.buff(cid, tactics['wave-of-feeling'].amount, 0, 'Wave of Feeling'); api.addKeyword(cid, 'swift'); });
                 api.emit({ t: 'tactic', text: 'Wave of Feeling: your creatures get +2 attack and Swift.' });
             },
         },
@@ -246,10 +246,10 @@
         },
         persuasion: {
             name: 'Persuasion', cost: 5, colour: 'language', rarity: 'rare', target: 'enemy-creature',
-            filter: (s, cid, H) => H.attack(s, cid) <= 3,
+            filter: (s, cid, H) => H.attack(s, cid) <= tactics.persuasion.maxAttack, maxAttack: 2,
             // Room on your side for it.
             usable: (s, p) => s.players[p].board.length < s.options.boardLimit,
-            text: 'Take control of an enemy creature with 3 or less attack. It arrives asleep.',
+            text: 'Take control of an enemy creature with 2 or less attack. It arrives asleep.',
             flavour: 'Change their mind, and they change sides.',
             run(api, p, target) {
                 const name = api.name(target);
