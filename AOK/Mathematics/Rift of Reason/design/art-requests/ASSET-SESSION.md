@@ -19,7 +19,7 @@ Keep the AGENTS.md rules: no text or numbers in images, no likenesses of real pe
 - No letters, numbers or symbols that read as text.
 - Matches the style board: medium dark-brown outlines, cel shading with painterly texture, jewel colours on violet dark.
 - Readable at game size: icons at 24–32 px, card frames at about 150 px wide, boards behind the real UI.
-- Boards: the middle 70% and the centre lane are calm and empty; the right edge is darker; no painted card slots.
+- Boards: the middle 70% and the centre lane are calm and empty; the right edge is darker; no painted card slots. The middle band must be centred at about 46.7% of the picture's height, like L1–L3: `alignBoard` in js/screens/battle.js scales and shifts every `scene/arena-l*` picture so that height sits behind the timeline lane on any screen shape.
 
 ## Queue
 
@@ -27,22 +27,22 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 
 | | Step | Section in ART-REQUESTS.md | Save as | Status |
 |---|---|---|---|---|
-| 1 | Arena icons | 10.1 | `5-ui/arena-icons.png` | [ ] |
-| 2 | Arena frames and Fate tokens | 10.2 | `5-ui/arena-frames.png` | [ ] |
-| 2b | Control icons | 11.11 | `5-ui/control-icons.png` | [ ] |
-| 3 | Lesson 1 board: the Fair | 11.1a | `2-world/arena-l1.png` | [ ] |
-| 4 | Tactic art 1 | 10.4 (tactics-1) | `5-ui/tactics-1.png` | [ ] |
-| 5 | Tactic art 2 | 10.4 (tactics-2) | `5-ui/tactics-2.png` | [ ] |
-| 6 | Colour tactic frames | 11.2 | `5-ui/tactic-frames.png` | [ ] |
-| 7 | Colour tactic art 1 | 11.3 (tactics-3) | `5-ui/tactics-3.png` | [ ] |
-| 8 | Colour tactic art 2 | 11.3 (tactics-4) | `5-ui/tactics-4.png` | [ ] |
-| 8b | Rare colour tactic art | 11.3 (tactics-5) | `5-ui/tactics-5.png` | [ ] |
-| 9 | Fate track | 10.3 | `5-ui/fate-track.png` | [ ] |
-| 10 | Battle effects | 11.4 | `5-ui/battle-fx.png` | [ ] |
-| 11 | Bag, coins and piles | 11.5 | `5-ui/arena-extras.png` | [ ] |
-| 12 | Reworked axiom pictures | 10.5 | `5-ui/axioms-4.png` | [ ] |
-| 13 | Lesson 2 board | 11.1b | `2-world/arena-l2.png` | [ ] |
-| 14 | Lesson 3 board | 11.1c | `2-world/arena-l3.png` | [ ] |
+| 1 | Arena icons | 10.1 | `5-ui/arena-icons.png` | [x] |
+| 2 | Arena frames and Fate tokens | 10.2 | `5-ui/arena-frames.png` | [x] |
+| 2b | Control icons | 11.11 | `5-ui/control-icons.png` | [x] |
+| 3 | Lesson 1 board: the Fair | 11.1a | `2-world/arena-l1.png` | [x] |
+| 4 | Tactic art 1 | 10.4 (tactics-1) | `5-ui/tactics-1.png` | [x] |
+| 5 | Tactic art 2 | 10.4 (tactics-2) | `5-ui/tactics-2.png` | [x] |
+| 6 | Colour tactic frames | 11.2 | `5-ui/tactic-frames.png` | [x] |
+| 7 | Colour tactic art 1 | 11.3 (tactics-3) | `5-ui/tactics-3.png` | [x] |
+| 8 | Colour tactic art 2 | 11.3 (tactics-4) | `5-ui/tactics-4.png` | [x] |
+| 8b | Rare colour tactic art | 11.3 (tactics-5) | `5-ui/tactics-5.png` | [x] |
+| 9 | Fate track | 10.3 | `5-ui/fate-track.png` | [x] |
+| 10 | Battle effects | 11.4 | `5-ui/battle-fx.png` | [x] |
+| 11 | Bag, coins and piles | 11.5 | `5-ui/arena-extras.png` | [x] |
+| 12 | Reworked axiom pictures | 10.5 | `5-ui/axioms-4.png` | [x] |
+| 13 | Lesson 2 board | 11.1b | `2-world/arena-l2.png` | [x] |
+| 14 | Lesson 3 board | 11.1c | `2-world/arena-l3.png` | [x] |
 | 15 | Lesson 4 board | 11.1d | `2-world/arena-l4.png` | [ ] |
 | 16 | The vendor, Hagglesworth | 11.6 | `3-cast/hagglesworth.png` | [ ] |
 | 17 | The vendor's stall | 11.7 (shop) | `2-world/shop.png` | [ ] |

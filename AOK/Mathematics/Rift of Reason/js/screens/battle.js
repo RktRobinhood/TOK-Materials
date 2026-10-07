@@ -263,8 +263,26 @@
             // One small tooltip for every picture button (name + one detail line). See showTip.
             dom.tip = el('div.b-tip', { role: 'tooltip', id: tipId, 'aria-hidden': 'true' }),
         ]);
-        rootEl.appendChild(Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' }));
+        const boardImg = Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' });
+        rootEl.appendChild(boardImg);
         rootEl.appendChild(screen);
+        // The lesson boards paint a calm band across the middle (its centre at about 46.7% of the
+        // picture's height). The lane sits above the screen's middle (the hand takes the bottom), so
+        // plain "cover" leaves the band low; scale and shift the picture so the band stays behind the lane.
+        const BOARD_BAND = 0.467;
+        function alignBoard() {
+            if (!/^scene\/arena-l/.test(sceneId) || !boardImg.naturalWidth || !rootEl.getBoundingClientRect) return;
+            const box = rootEl.getBoundingClientRect(), lane = dom.lane.getBoundingClientRect();
+            const W = rootEl.clientWidth, H = rootEl.clientHeight, iw = boardImg.naturalWidth, ih = boardImg.naturalHeight;
+            if (!W || !H || !lane.height) return;
+            const cy = lane.top + lane.height / 2 - box.top - rootEl.clientTop;
+            const s = Math.max(W / iw, H / ih, cy / (BOARD_BAND * ih), (H - cy) / ((1 - BOARD_BAND) * ih));
+            Object.assign(boardImg.style, { inset: 'auto', maxWidth: 'none', objectFit: 'fill',
+                width: iw * s + 'px', height: ih * s + 'px', left: (W - iw * s) / 2 + 'px', top: cy - BOARD_BAND * ih * s + 'px' });
+        }
+        boardImg.addEventListener('load', alignBoard);
+        const boardObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(alignBoard) : null;
+        if (boardObserver) { boardObserver.observe(rootEl); boardObserver.observe(dom.lane); }
         screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
@@ -969,6 +987,9 @@
             Object.keys(nodes).forEach(k => delete nodes[k]);
             Object.keys(inspectables).forEach(k => delete inspectables[k]);
             hideInspect(true);
+            // The lane can move without changing size (the hand or a board row grows), which the
+            // ResizeObserver misses: re-align the board picture after every render's layout.
+            if (typeof requestAnimationFrame === 'function') requestAnimationFrame(alignBoard);
             [dom.myBoard, dom.oppBoard, dom.lane].forEach(n => { n.classList.remove('guide-ring'); n.classList.remove('guide-focus'); });
             const L = legal();
             ui.sparkFor = !guide && decider() === ME ? sparkHelp(L) : null;
@@ -2183,6 +2204,7 @@
             destroy() {
                 clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); cancelLongPress(); hideTip();
                 ui.ended = true; cancelDrag();
+                if (boardObserver) boardObserver.disconnect();
                 if (help) help.close();
                 if (guide) stopVoice();
             },
