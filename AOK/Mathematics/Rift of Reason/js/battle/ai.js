@@ -37,7 +37,8 @@
  *   expert: Competent's scoring plus a whole-turn search: a lethal search over this
  *         turn's attacks, tactics and plays (EXPERT.lethalNodes), then the best few
  *         one-ply candidates (and promising axiom cards) are each followed by a greedy
- *         rollout of the rest of the turn and compared on the deep score (EXPERT.width).
+ *         rollout of the rest of the turn and the opponent's greedy attacks with the creatures
+ *         already in play (EXPERT.reply), and compared on the deep score (EXPERT.width).
  *         It also keeps removal tactics for real threats (EXPERT.holdRemoval) and counts
  *         lethal next turn (a two-turn plan) and the race clock. Bosses use it with a
  *         built deck (data/decks.js).
@@ -99,7 +100,10 @@
     //   axioms      axiom cards also tried that way
     //   holdRemoval extra worth of a removal tactic kept in hand (spent on real threats)
     //   nextLethal  bonus when my board threatens lethal next turn (a two-turn plan)
-    const EXPERT = { lethalNodes: 150, lethalDepth: 7, width: 4, axioms: 2, holdRemoval: 1.2, nextLethal: 4, race: 0.6 };
+    //   race        weight of the race clock (turns until each hero falls at the current pace)
+    //   reply       1: each candidate turn is scored after the opponent's greedy attacks with the
+    //               creatures already in play (public board only; +3 points vs Competent in the ladder)
+    const EXPERT = { lethalNodes: 150, lethalDepth: 7, width: 4, axioms: 2, holdRemoval: 1.2, nextLethal: 4, race: 0.6, reply: 1 };
     // A creature play scored at least this much (vs ending the turn) is still made rather than passing.
     const DEVELOP_FLOOR = -1.5;
     const WIN = 1000;
@@ -745,11 +749,44 @@
     // Value of a move = the deep score after it and a greedy rollout of the rest of my turn
     // (the state just before I would press End turn).
     function turnValue(s, a, me, ctx) {
-        if (a.type === 'end') return evaluate(s, me, { ctx, deep: true });
+        if (a.type === 'end') return leafValue(s, me, ctx);
         let next;
         try { next = E().applyLegal(s, a); } catch (e) { return -Infinity; }
         if (next.winner != null) return evaluate(next, me, { ctx });
-        return evaluate(rollout(next, me, ctx), me, { ctx, deep: true });
+        return leafValue(rollout(next, me, ctx), me, ctx);
+    }
+
+    function leafValue(st, me, ctx) {
+        if (!EXPERT.reply || st.winner != null) return evaluate(st, me, { ctx, deep: true });
+        return evaluate(boardReply(st, me), me, { ctx, deep: true });
+    }
+
+    // The opponent's answer on the PUBLIC board: I end my turn, they draw (a hidden card they do
+    // not use here) and attack greedily with the creatures already in play. No hand cards are
+    // played, so their hand is never looked at.
+    function boardReply(st, me) {
+        const Eng = E();
+        const opp = 1 - me;
+        if (st.phase !== 'main' || st.active !== me) return st;
+        let cur;
+        try { cur = Eng.applyLegal(st, { type: 'end', player: me }); } catch (e) { return st; }
+        const octx = Object.assign(makeCtx(opp, { level: 'competent' }), { fast: true });
+        for (let i = 0; i < 12 && cur.winner == null && cur.active === opp; i++) {
+            const legal = Eng.legalActions(cur);
+            if (cur.phase === 'draw') { cur = Eng.applyLegal(cur, legal.find(a => a.choice === 'deck') || legal.find(a => a.choice === 'none') || legal[0]); continue; }
+            if (cur.phase === 'choose') {
+                if (!cur.pending || cur.pending.player !== opp) break;
+                cur = Eng.applyLegal(cur, answerPending(cur, opp, octx, legal));
+                continue;
+            }
+            if (cur.phase !== 'main') break;
+            const attacks = groupActions(cur, legal.filter(a => a.type === 'attack'));
+            if (!attacks.length) break;
+            const a = lethalAttack(cur, attacks, opp) || pickBest(scoreActions(cur, attacks, opp, octx).filter(x => x.score > 0));
+            if (!a) break;
+            cur = Eng.applyLegal(cur, a);
+        }
+        return cur;
     }
 
     function expertMain(s, legal, me, ctx) {

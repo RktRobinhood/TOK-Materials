@@ -13,7 +13,7 @@ AGENTS.md still applies: borrow mechanics, never names, art or text.
 | Colour tactics: two per Way of Knowing, with an **In tune** bonus | building (7 Oct) |
 | Bag in battle: bring two items, use one per turn | building (7 Oct) |
 | Coins, the vendor, side quests, a per-lesson Rift Run (roguelike) | approved; next session |
-| AI levels Normal / Competent / Expert (section 8) | building (7 Oct) |
+| AI levels Normal / Competent / Expert (section 8) | built (7 Oct); ladder in `reviews/card-arena-balance-2026-10-07.md` |
 | Hot-seat play on one laptop (section 6) | approved; after the AI levels |
 
 ## 2. Colour tactics (spells with a colour identity)

@@ -107,12 +107,13 @@ function scenarioGame(scenario, label, g, levels) {
     }
     const m = matchup(label, g);
     if (scenario === 'boss') {
-        const deck = Rift.data.decks[BOSS_DECKS[g % BOSS_DECKS.length]];
+        m.deckId = BOSS_DECKS[g % BOSS_DECKS.length];
+        const deck = Rift.data.decks[m.deckId];
         m.teams = levels.map((lv, p) => (AI.levelOf(lv) === 'expert' ? deckTeam(deck, 'g' + g + 'boss') : Lesson.starter()));
         m.tactics = levels.map(lv => (AI.levelOf(lv) === 'expert' ? deck.tactics : starterTactics));
     }
     return {
-        orders: [0, 1], teams: m.teams,
+        orders: [0, 1], teams: m.teams, deckId: m.deckId,
         players: m.teams.map((team, p) => ({ name: 'P' + p, team, axioms: m.axioms[p], tactics: m.tactics ? m.tactics[p] : undefined })),
         options: { mode: 'trainer' },
     };
@@ -138,7 +139,7 @@ function runRange(from, to, levels, label, scenario) {
         turns: 0, rounds: 0, roundsHist: {}, heartsWinner: 0, heartsLoser: 0, defeated: 0, lost: 0,
         reasons: {}, tactics: {}, axioms: {}, flips: 0, resets: 0, reverseEnds: 0,
         species: {}, fate: { won: newSide(), lost: newSide() },
-        expertMs: { moves: 0, sum: 0, max: 0, over100: 0, over300: 0 },
+        expertMs: { moves: 0, sum: 0, max: 0, over100: 0, over300: 0 }, decks: {},
     };
     levels.forEach(lv => { st.levelWins[lv] = 0; });
     const row = (map, id) => map[id] || (map[id] = { plays: 0, games: 0, wins: 0 });
@@ -168,6 +169,11 @@ function runRange(from, to, levels, label, scenario) {
                 if (++guard > 6000) throw new Error('Battle did not finish');
             }
             const log = Engine.fullLog(s);
+            if (m.deckId) {
+                const r = st.decks[m.deckId] || (st.decks[m.deckId] = { games: 0, wins: 0 });
+                r.games += 1;
+                if (s.winner !== 'draw' && AI.levelOf(levels[s.winner]) === 'expert') r.wins += 1;
+            }
             st.games += 1;
             st.turns += s.turn;
             st.rounds += s.round;
@@ -302,6 +308,8 @@ async function ladder() {
         const half = 196 * Math.sqrt(rate * (1 - rate) / games);
         const ok = 100 * rate >= row.target[0] - half && 100 * rate <= row.target[1] + half;
         console.log(`${row.title.padEnd(54)} ${(100 * rate).toFixed(1).padStart(5)}% ±${half.toFixed(1)}  (target ${row.target[0]}–${row.target[1]}%) ${ok ? 'ok' : 'OFF'}   ${games} games, draws ${pct(draws, games)}, rounds ${avg(rounds, games)}, ${secs.toFixed(0)} s`);
+        const decks = parts.reduce((acc, p) => merge(acc, p.decks || {}), {});
+        if (Object.keys(decks).length) console.log('    per deck: ' + Object.entries(decks).map(([id, r]) => `${id} ${pct(r.wins, r.games)} (${r.games})`).join(', '));
     }
     if (ms.moves) console.log(`Expert main-phase move time: mean ${(ms.sum / ms.moves).toFixed(1)} ms, max ${ms.max.toFixed(0)} ms, over 100 ms ${pct(ms.over100, ms.moves)}, over 300 ms ${pct(ms.over300, ms.moves)} (${ms.moves} moves, one core each)`);
 }
