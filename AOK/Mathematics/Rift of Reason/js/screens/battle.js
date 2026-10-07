@@ -147,7 +147,8 @@
         const me = resolvePlayer(p, save, seed);
         const oppTeam = opp.team && opp.team.length ? opp.team : E.randomTeam(Rift.makeRng(seed + ':opp'), 10, { prefix: 'npc', legendaries: false });
         // AI level (Normal / Competent / Expert; 'easy' and 'hard' are old names for the first two).
-        const aiLevel = B().AI.levelOf(opp.ai || p.aiLevel || DEFAULT_AI[mode] || 'normal');
+        const askedLevel = opp.ai || p.aiLevel || DEFAULT_AI[mode] || 'normal';
+        const aiLevel = B().AI && B().AI.levelOf ? B().AI.levelOf(askedLevel) : askedLevel;
         const anteType = mode === 'practice' ? 'practice' : (opp.type || mode);
         const oppAxioms = opp.axioms || Rift.makeRng(seed + ':axiom-opponent').shuffle((Rift.data.axiomDecks || {}).starter || []).slice(0, 10);
         // A long title ("Sergeant Syllo · Road challenge") stays in tooltips; the engine's log and

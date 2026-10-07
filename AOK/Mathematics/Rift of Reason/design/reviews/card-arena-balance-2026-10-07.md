@@ -139,3 +139,42 @@ Variants tried (two seeds each, 2,000 games per seed):
 | Rally Cry cost 3 (not kept: it would be Rousing Speech without hearts) | 62% / 70% | 49.4% / 50.1% |
 
 Only change: **Persuasion takes a creature with 2 or less attack** (was 3). Watch Wave of Feeling and Rally Cry in class: both are "winning more" cards that the bias above flatters, but they are the next to nerf (Wave of Feeling to +1 attack, Rally Cry to +1 attack only).
+
+## AI levels: Normal, Competent, Expert (7 October, later)
+
+The teacher's decision (`design/card-arena-expansion-2026-10-07.md`, section 8): no Easy mode; three levels, tested by AI-vs-AI simulation so every class meets the same opponents. Old names still work (`easy` = Normal, `hard` = Competent) for saves, team codes and older callers.
+
+| Level | What it does (`js/battle/ai.js`, `LEVELS`, `EXPERT`) | Used for |
+|---|---|---|
+| Normal | The old Easy, a little sharper: one-ply scoring without threat terms, likes hitting the hero, a random second-rate move 20% of the time (was 40%), takes an obvious lethal attack, never plays The Last Shall Be First or Empty Set | practice, Syllo's story challenge, Mrs Crumb, Pip |
+| Competent | The old Hard, unchanged | Corvina the Card Sharp (mini-boss), classmate ghosts |
+| Expert | Competent's scoring plus a whole-turn search: a lethal search over attacks, tactics and plays (150 states); then the best 4 one-ply moves, End turn and up to 2 axiom cards are each followed by a greedy rollout of the rest of the turn **and the opponent's greedy attacks with the creatures already in play** (public board only), and compared on the deep score. It keeps removal for threats and counts lethal next turn and the race clock. A fixed work budget (1,500 scored actions) caps a move, so it stays deterministic | Constable Clobber, Prosecutor Fin, the Feed's Champion, each with a built deck (`data/decks.js`) |
+| beginner | Test-only stand-in for a new student (the old Easy). Never an opponent in the game | the ladder's story-challenge row |
+
+The trainer offer now has one button, "Challenge · Normal / Competent / Expert", instead of Easy and Hard. Syllo's Road challenge gives Syllo **8 hearts** (the player keeps 12): at 12 hearts a beginner won only 60%.
+
+### The ladder (the standard test)
+
+Rerun with `node tools/sim-battle.mjs --ladder --seed=ladder` from the game folder (about 3 minutes on 8 cores). `--rows=nc,ce,boss,syllo` runs some rows; `--ai=normal.mistake:0.3,expert.width:6` tries level settings without editing files. Each row is **1,100 games** (±3 points at 95% confidence near 70%): random rarity-weighted teams with the starter tactics and ten random starter axioms, swapped seats × both turn orders. The boss row gives the Expert seat a built deck (the three in turn) and the Competent seat the loaned starter team with the starter tactics. The story row is the game's own set-up (player first, no shuffle) over 1,100 seeds. Results after merging the colour tactics and the Bag:
+
+| Row | Result | Target |
+|---|---|---|
+| Competent beats Normal | **69.5%** ±2.7 | 65–75% |
+| Expert beats Competent | **62.5%** ±2.9 | 60–70% |
+| Expert with a built deck beats Competent with the starter deck | **80.0%** ±2.4 (Constable 80%, Fin 76%, Feed 84%) | about 80% |
+| Beginner player beats Normal Syllo (Road challenge) | **73.5%** ±2.6 | 65–75% |
+
+Draws 0–0.3%; 6.4–7.8 rounds per game. Expert's main-phase moves: mean 16 ms, 1.9% over 100 ms and 0.1% over 300 ms with 8 simulations sharing the CPU (i7-6700). Alone on one core, the slowest Expert move in 80 games took 82 ms. `tools/test/battle-ai-levels.test.mjs` checks the mean and the 95th percentile, plus a short seeded ladder (`RIFT_LADDER=1` adds a 400-game one).
+
+### What tuning showed
+
+- Normal's mistake rate: 30% → Competent wins 75.8%; 20% → 70.2%; 12% → 70.0%. Kept 20%.
+- Syllo's hearts (beginner vs Normal): 12 → 59.8%, 9 → 65.3%, 8 → 69.3% (73.5% on the final seed). Kept 8.
+- Expert's knobs barely mattered (Expert vs Competent, same seed, 1,100 games each, base 60.1%): search width 6: 60.7%; no removal holding / doubled: 59.6% / 61.0%; no race clock: 61.6%; bigger next-turn-lethal bonus: 59.8%. Only scoring each line after the opponent's board reply helped (62.8%), at about twice the time; it is on.
+- Built decks with 12 creatures were too strong (87% against the starter deck, whichever tactics were swapped). With 10–11 creatures and one or two weak tactics (Clockwork, Look It Up) they sit near 80%, rising by chapter.
+
+### Remaining risks
+
+- Expert beats Competent near the bottom of its band (62.5%). If bosses feel soft, the next step is a two-turn search that guesses the opponent's unknown hand.
+- Bosses win ~80% against a starter deck. Students reach them with better collections, so the classroom rate should be lower; watch it.
+- The beginner stand-in is an AI with random mistakes, not a student. Its 73.5% in the Road challenge is a rough guide only.
