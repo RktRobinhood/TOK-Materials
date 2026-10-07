@@ -53,7 +53,11 @@ test('the Bag button shows the count by the energy; no button without a bag or i
     const t = setup(practice(['tonic', 'ward']));
     const btn = t.$('.b-hero-row.me .b-row-right .b-bag-btn');
     assert.ok(btn, 'next to my energy');
-    assert.match(btn.textContent, /🎒\s*Bag 2/);
+    assert.match(btn.textContent, /🎒\s*2/);
+    assert.equal(btn.getAttribute('aria-label'), 'Bag: 2 items');
+    assert.equal(btn.dataset.tip, 'Bag');
+    assert.match(btn.dataset.tipDetail, /Use one per turn/);
+    assert.equal(btn.title, '', 'no native tooltip next to the custom one');
     assert.equal(btn.getAttribute('aria-expanded'), 'false');
     assert.equal(tray(t), null, 'the tray starts closed');
     t.handle.destroy();
@@ -102,7 +106,7 @@ test('click-click: choose the Ward, then a glowing creature; then no second item
     const s = t.handle.state;
     assert.ok(t.E.hasKeyword(s, 'p0c0', 'shield'));
     assert.deepEqual([...s.players[0].bag], ['tonic']);
-    assert.match(t.$('.b-bag-btn').textContent, /Bag 1/);
+    assert.equal(t.$('.b-bag-btn .b-bag-count').textContent, '1');
     assert.match(t.$('.b-log').textContent, /You use the Ward on Kim Kardashiant\./);
     t.$('.b-bag-btn').click();
     assert.ok(item(t, 'tonic').classList.contains('off'));
@@ -159,7 +163,7 @@ test('Leave match reports the items used; End turn ignores items for "Nothing le
     t.$('.b-bag-btn').click();
     item(t, 'ward').click();
     t.$('.my-board [data-cid="p0c0"]').click();
-    t.root.querySelectorAll('button').find(b => b.textContent === 'Leave match').click();
+    t.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave match').click();
     t.root.querySelectorAll('.b-overlay button').find(b => b.textContent === 'Leave match').click();
     assert.deepEqual({ ...t.results[0].itemsUsed }, { ward: 1 });
     t.handle.destroy();

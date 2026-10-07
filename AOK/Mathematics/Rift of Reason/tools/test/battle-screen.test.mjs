@@ -45,10 +45,12 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
     assert.equal(t.handle.state.phase, 'draw');
     const drawButtons = t.root.querySelectorAll('.b-draw-btn');
     assert.equal(drawButtons.length, 4);
-    assert.match(t.text(), /Draw from your deck/);
-    assert.match(t.text(), /Take an axiom card/);
-    assert.match(t.text(), /Fate 2 closer/);
-    assert.match(t.text(), /Fate 2 away/);
+    assert.equal(drawButtons[0].getAttribute("aria-label"), "Draw from your deck");
+    assert.equal(drawButtons[1].dataset.tip, "Take an axiom card");
+    assert.equal(drawButtons[2].dataset.tip, "Fate 2 closer");
+    assert.equal(drawButtons[3].dataset.tip, "Fate 2 away");
+    assert.match(t.$(".b-draw-title").textContent, /^Draw one$/);
+    assert.ok(!/Draw from your deck/.test(t.text()), "the draw buttons show pictures, not words");
     $('.b-draw-btn[data-choice="deck"]').click();
     assert.equal(t.handle.state.phase, 'main');
     assert.equal(t.handle.state.players[0].hand.length, 4);
@@ -94,8 +96,13 @@ test('guide mode allows only the expected action and runs the replies', () => {
     assert.equal(t.handle.step, 0);
     assert.equal(t.spoken[0].speaker, 'granny');
     assert.equal(t.spoken[0].voice, t.Rift.voiceId('granny', t.Rift.Battle.Lesson.steps[0].text));
-    assert.equal($('.b-draw-btn[data-choice="deck"]').disabled, false);
-    for (const c of ['axiom', 'forward', 'rewind']) assert.equal($('.b-draw-btn[data-choice="' + c + '"]').disabled, true, c);
+    assert.equal($('.b-draw-btn[data-choice="deck"]').getAttribute('aria-disabled'), null);
+    for (const c of ['axiom', 'forward', 'rewind']) {
+        const b = $('.b-draw-btn[data-choice="' + c + '"]');
+        assert.equal(b.getAttribute('aria-disabled'), 'true', c);
+        assert.ok(b.classList.contains('off'), c);
+        assert.match(b.dataset.tipDetail, /Not in this lesson step/, c);
+    }
     assert.ok($('.b-draw-btn[data-choice="deck"]').classList.contains('guide-focus'));
     $('.b-draw-btn[data-choice="forward"]').click();
     assert.equal(t.handle.state.phase, 'draw', 'a disabled choice does nothing');
@@ -124,14 +131,14 @@ test('guide mode allows only the expected action and runs the replies', () => {
 
 test('How to play pauses and closes with the screen; Leave lesson ends with outcome left', () => {
     const t = setup(practice);
-    t.root.querySelectorAll('button').find(b => b.textContent === 'How to play').click();
+    t.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'How to play').click();
     t.handle.destroy();
     assert.equal(t.helpClosed(), 1);
     let left = null;
     const g = setup({}, { screen: 'battle-lesson' });
     g.handle.destroy();
     const lesson = setup({ onEnd: won => { left = won; } }, { screen: 'battle-lesson' });
-    lesson.root.querySelectorAll('button').find(b => b.textContent === 'Leave lesson').click();
+    lesson.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave lesson').click();
     assert.equal(left, false);
 });
 
@@ -337,7 +344,7 @@ const hover = (t, sel) => { t.$(sel).dispatchEvent(mouse({ type: 'pointerenter' 
 
 test('practice and story can be left after a confirm step; the lesson and risked matches have no Leave match', () => {
     const t = setup(practice);
-    const btn = () => t.root.querySelectorAll('button').find(b => b.textContent === 'Leave match' && !b.closest('.b-overlay'));
+    const btn = () => t.root.querySelectorAll('.b-side button').find(b => b.getAttribute('aria-label') === 'Leave match');
     assert.ok(btn(), 'practice has Leave match');
     btn().click();
     assert.ok(t.$('.b-overlay').classList.contains('show'));
@@ -354,25 +361,27 @@ test('practice and story can be left after a confirm step; the lesson and risked
     assert.equal(t.results[0].fate, null);
     t.handle.destroy();
     const risky = setup(Object.assign({}, practice, { mode: 'trainer' }));
-    assert.ok(!risky.root.querySelectorAll('button').some(b => b.textContent === 'Leave match'), 'no Leave match when something is at stake');
+    assert.equal(risky.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave match'), undefined, 'no Leave match when something is at stake');
     risky.handle.destroy();
     const lesson = setup({}, { screen: 'battle-lesson' });
-    assert.ok(!lesson.root.querySelectorAll('button').some(b => b.textContent === 'Leave match'));
+    assert.equal(lesson.root.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Leave match'), undefined);
     lesson.handle.destroy();
 });
 
 test('Fate draw buttons show the new count in short words', () => {
     const t = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true }) }));
-    assert.equal(t.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Rule card in 4');
-    assert.equal(t.$('.b-draw-btn[data-choice="rewind"] small').textContent, 'Rule card in 8');
-    assert.match(t.$('.b-draw-btn[data-choice="forward"]').title, /Now: In 6 turns/);
+    assert.equal(t.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 4');
+    assert.equal(t.$('.b-draw-btn[data-choice="rewind"] .b-ibtn-badge').textContent, 'in 8');
+    assert.match(t.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /2 turns sooner\. Rule card in 4\./);
+    assert.match(t.$('.b-draw-btn[data-choice="rewind"]').dataset.tipDetail, /Rule card in 8\./);
     t.handle.destroy();
     const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
-    assert.equal(r.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Reset (no change now)');
+    assert.match(r.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset \(no change now\)\./);
     assert.match(r.$('.b-fate-text').textContent, /no change now/);
     r.handle.destroy();
     const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
-    assert.equal(c.$('.b-draw-btn[data-choice="forward"] small').textContent, 'Reset in 3');
+    assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 3\./);
+    assert.equal(c.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 3');
     c.handle.destroy();
 });
 
@@ -489,5 +498,89 @@ test('hover previews wait, close on pointerdown and stay shut after a drag until
     $('.b-hand [data-cid="p0c1"]').dispatchEvent(mouse({ type: 'pointermove', clientX: 30, clientY: -80 }));
     g.flush();
     assert.ok($('.b-inspect').classList.contains('show'), 'moving the mouse opens it again');
+    t.handle.destroy();
+});
+
+test('picture buttons: each has a name (aria-label) and a tooltip, and no native title', () => {
+    const t = setup(practice);
+    const names = t.root.querySelectorAll('.b-ibtn').map(b => b.getAttribute('aria-label'));
+    for (const n of ['Draw from your deck', 'Take an axiom card', 'Fate 2 closer', 'Fate 2 away', 'How to play', 'Leave match', 'Close', 'Rules & log']) assert.ok(names.includes(n), n);
+    t.root.querySelectorAll('.b-ibtn').forEach(b => {
+        assert.ok(b.dataset.tip, b.getAttribute('aria-label') + ' has tooltip text');
+        assert.equal(b.title, '', b.getAttribute('aria-label') + ' has no native title');
+        assert.ok(b.querySelector('.b-ctrl-icon') || b.querySelector('.b-spark-icon') || b.querySelector('.b-bag-icon'), b.getAttribute('aria-label') + ' shows an icon');
+    });
+    // The tooltip name of each draw button is exactly its name; the detail says what it does.
+    assert.equal(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tip, 'Take an axiom card');
+    assert.match(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tipDetail, /^A rule card for your hand\. Shared deck: \d+\.$/);
+    assert.equal(t.$('.b-draw-btn[data-choice="deck"] .b-ibtn-badge').textContent, String(t.handle.state.players[0].deck.length));
+    assert.equal(t.$('.b-end').dataset.tip, 'End turn');
+    t.handle.destroy();
+});
+
+test('the tooltip shows on keyboard focus and hides on Escape; hover waits a moment; a long-press keeps it', () => {
+    const t = setup(practice);
+    const { $, g } = t;
+    const tip = $('.b-tip');
+    assert.equal(tip.getAttribute('role'), 'tooltip');
+    assert.ok(!tip.classList.contains('show'));
+    const deck = $('.b-draw-btn[data-choice="deck"]');
+    deck.dispatchEvent({ type: 'focus' });
+    assert.ok(tip.classList.contains('show'), 'focus shows it at once');
+    assert.equal(tip.querySelector('.b-tip-name').textContent, 'Draw from your deck');
+    assert.match(tip.querySelector('.b-tip-detail').textContent, /A creature or tactic card\. \d+ cards left\./);
+    assert.equal(deck.getAttribute('aria-describedby'), tip.id);
+    deck.dispatchEvent({ type: 'keydown', key: 'Escape' });
+    assert.ok(!tip.classList.contains('show'), 'Escape hides it');
+    assert.equal(deck.getAttribute('aria-describedby'), null);
+
+    // Mouse: after a short rest; leaving hides it.
+    const help = t.root.querySelectorAll('.b-ibtn').find(b => b.getAttribute('aria-label') === 'How to play');
+    help.dispatchEvent(mouse({ type: 'pointerenter' }));
+    assert.ok(!tip.classList.contains('show'), 'not at once under the mouse');
+    g.flush();
+    assert.ok(tip.classList.contains('show'));
+    assert.equal(tip.querySelector('.b-tip-name').textContent, 'How to play');
+    help.dispatchEvent(mouse({ type: 'pointerleave' }));
+    assert.ok(!tip.classList.contains('show'));
+
+    // Touch: a long-press shows it and does not press the button; the next tap hides it.
+    const touch = extra => mouse(Object.assign({ pointerType: 'touch', pointerId: 7 }, extra));
+    const axiom = $('.b-draw-btn[data-choice="axiom"]');
+    axiom.dispatchEvent(touch({ type: 'pointerdown' }));
+    g.flush();
+    assert.ok(tip.classList.contains('show'));
+    assert.equal(tip.querySelector('.b-tip-name').textContent, 'Take an axiom card');
+    axiom.dispatchEvent(touch({ type: 'pointerup' }));
+    axiom.click();
+    assert.equal(t.handle.state.phase, 'draw', 'the long-press only read the name');
+    assert.ok(tip.classList.contains('show'), 'it stays after the finger lifts');
+    g.flush();
+    $('.b-lane').dispatchEvent(touch({ type: 'pointerdown' }));
+    assert.ok(!tip.classList.contains('show'), 'the next tap hides it');
+    g.flush();
+
+    // A click hides it and does the action.
+    deck.dispatchEvent({ type: 'focus' });
+    assert.ok(tip.classList.contains('show'));
+    deck.click();
+    assert.ok(!tip.classList.contains('show'));
+    assert.equal(t.handle.state.phase, 'main');
+    t.handle.destroy();
+});
+
+test('a dim draw button says why in its tooltip (hand full)', () => {
+    const t = prepared({ me: Array(12).fill('kardashiant'), opp: ['kardashiant'], phase: 'draw' }, s => {
+        const P = s.players[0];
+        while (P.hand.length + P.axHand.length < s.options.handLimit) P.hand.push(P.deck.shift());
+    });
+    const deck = t.$('.b-draw-btn[data-choice="deck"]');
+    assert.equal(deck.getAttribute('aria-disabled'), 'true');
+    assert.ok(deck.classList.contains('off'));
+    assert.match(deck.dataset.tipDetail, /Your hand is full\./);
+    deck.click();
+    assert.equal(t.handle.state.phase, 'draw');
+    assert.ok(t.$('.b-tip').classList.contains('show'), 'clicking a dim button shows why');
+    assert.match(t.$('.b-tip').textContent, /Your hand is full/);
     t.handle.destroy();
 });
