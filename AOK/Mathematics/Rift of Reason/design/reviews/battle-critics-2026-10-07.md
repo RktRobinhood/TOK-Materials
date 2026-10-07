@@ -22,9 +22,14 @@ Guided lesson (rewritten first, then critics):
 | 1 | 6.5 | 6 |
 | 2 | 7 | 6.5 |
 | 3 | 6.5 | 7 |
-| 4 | (stopped: teacher closed the laptop) | |
+| 4 | 7 | 7 |
+| 5 (last) | 7 | 7 |
 
 ## Resume here
+
+All ten critic rounds are done (board 5, lesson 5). Neither reached 8; every round's quick fixes are in, the last ones unscored.
+
+### Earlier resume notes (kept for the record)
 
 - Tutorial round 4 was started after the round-3 fixes (Fate step of its own, no answer in the bar on the open step, ▲ pointers, too-expensive spare cards so there is no early win, Kim's Filter mentioned earlier, hint after 25 s) and stopped before reporting. Next: rerun the two tutorial critics (prompts as in this session: muted tab, `Rift.Audio.speak` replaced by a timed fake, `Rift.Router.go('battle-lesson')` on port 8823), fix, repeat (up to round 5).
 - Preview: `rift-merged` launch entry (port 8823) serves this checkout; port 8790 may be another session's server.
@@ -46,6 +51,15 @@ Neither board critic reached 8 within five rounds. The round-5 findings were fix
 ## After round 5 (not re-scored)
 
 Recap shows rule changes first and wraps to two lines; shorter face text on hand rule cards; 12px names on table cards; Fate spaces have tooltips; "rule card" wording everywhere (log, tooltips, Look It Up).
+
+## Guard badge (teacher, 7 Oct)
+
+Guard on the table is now the shield picture (ui/kw-guard) under the card, between the attack and health gems, instead of the silver frame; it dims while a rule ignores Guard.
+
+## Missing or weak assets (Stage 12 in art-requests/ART-REQUESTS.md)
+
+- 12.1: pictures for the 11 new rule cards (axioms-5, axioms-6).
+- 12.2: icons for the basic rule tiles (Win, Fights, Card plays, Attacks, Energy), a card-play token, a Danger icon and a recap icon. The game uses each one automatically once it exists.
 
 ## Open (for the teacher)
 

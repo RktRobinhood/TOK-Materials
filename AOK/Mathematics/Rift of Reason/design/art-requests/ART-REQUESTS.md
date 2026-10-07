@@ -493,6 +493,33 @@ The battle screen now uses small picture buttons (point at one to see its name),
 
 ---
 
+## Stage 12: after the teacher's battle playtest (7 October 2026)
+
+The battle screen was rebuilt (see `design/reviews/battle-critics-2026-10-07.md`). These fill the gaps an asset check found: the 11 new rule cards have no pictures (they show ⚖), and the rule tiles, card-play counter and Danger warning still use emoji or plain CSS. Same rules as Stage 10/11: one image at a time, never bake words, numbers or rules into an image. Slicing is configured in `tools/assets/sheets.json`; the game picks each id up automatically once it exists.
+
+### 12.1 New rule card vignettes (priority 1)
+
+**Attach:** `style-board.png`, `axioms-1.png`
+**Save as:** `5-ui/axioms-5.png` and `5-ui/axioms-6.png` (two requests)
+
+Shared prompt start: "On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, roughly square vignette, the same size as the attached axiom vignettes. Match the attached style board."
+
+> **axioms-5, two rows of three, left to right.** **Row 1 (card plays per turn):** **1, Axiom of Restraint:** a single card held down by a small brass paperweight (only one card a turn). **2, Two Moves:** two cards side by side on a little wooden stand, calm and balanced (back to normal: two cards). **3, Axiom of Plenty:** three cards fanned out of an open drawstring bag, a soft glow. **Row 2:** **4, Axiom of Infinity:** a ribbon of cards looping in an endless figure-eight, fading into stars. **5, Steady State:** a teal energy crystal on a balanced scale, perfectly level, still air around it (energy stops growing). **6, Diminishing Returns:** three teal crystals on steps going down, each smaller than the last.
+
+> **axioms-6, a row of three and a row of two, left to right.** **Row 1:** **1, Limited Memory:** an open hand that can only hold three cards, two more cards slipping away and fading. **2, Fresh Start:** an empty card tray with two new cards floating down into it like leaves, morning light. **3, Fair Share:** a small creature on a lower step receiving a card from a kind hand above (help for the one who is behind). **Row 2:** **4, Momentum:** a little snowball rolling downhill and growing, pushing an extra card ahead of it. **5, Think It Over:** a small creature sitting on a stack of unplayed cards with a thought bubble holding a new card.
+
+### 12.2 Rule tile and counter icons (priority 2)
+
+The side panel's "Rules in play" tiles show a picture for each rule. Changed rules use their card's vignette; the basic rules need small icons of their own, and three counters on the table need icons too.
+
+**Attach:** `style-board.png`, `arena-icons.png`
+**Save as:** `5-ui/rule-icons.png`
+**Ids:** `ui/rule-victory`, `ui/rule-combat`, `ui/rule-plays`, `ui/rule-attacks`, `ui/rule-energy`, `ui/play-token`, `ui/danger`, `ui/recap`
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape (no loose sparkles). Small bold game icons, all about the same size, readable at 32 pixels, simple silhouettes. Two rows of four, left to right. **Row 1:** a small gold trophy cup with a red heart on its front (how to win); two crossed swords over a small round shield (fights); two cards fanned in a hand, gold backs (card plays per turn); one sword with three short motion lines behind it (attacks). **Row 2:** a teal energy crystal with a small lightning spark (energy); a single small gold card back with a soft glow, like a token (one card play); a cracked red heart with a dark sword behind it (danger); a small open scroll with two curved arrows around it, like a replay (what happened last turn). Match the attached style board.
+
+---
+
 ## Outcome log
 
 Record what was approved and why, as in the Odyssey project.

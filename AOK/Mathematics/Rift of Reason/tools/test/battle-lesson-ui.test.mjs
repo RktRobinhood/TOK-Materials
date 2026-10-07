@@ -81,7 +81,7 @@ test('the guided lesson runs on the real battle screen, step by step, to a win',
         if (step.trap) {
             // The tempting wrong move (attacking under the reversed victory rule) is stopped and explained.
             const s0 = t.handle.state;
-            perform(t, step.trap.expect);
+            perform(t, Object.assign({ cid: 'p0c1' }, step.trap.expect));
             assert.equal(t.handle.state, s0, 'step ' + i + ': the trap move is not made');
             assert.match(t.$('.b-note').textContent, /Careful/);
             assert.match(t.$('.b-reveal').textContent, /Granny wins/);

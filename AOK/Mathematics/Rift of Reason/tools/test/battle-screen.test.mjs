@@ -366,7 +366,9 @@ test('board cards show keyword chips and the timing word only, and "Ready" on a 
     const kim = t.$('.my-board [data-cid="p0c0"]');
     assert.equal(kim.querySelector('.bc-ab-kind').textContent, 'Activate');
     assert.equal(kim.querySelector('.bc-ab-name'), null, 'no ability name on the table');
-    assert.ok(t.$('.my-board [data-cid="p0c1"] .bc-kw'), 'keyword chip (Guard)');
+    // Guard on the table is a shield badge under the card, not a text chip.
+    assert.ok(t.$('.my-board [data-cid="p0c1"] .bc-guard'), 'Guard shield badge');
+    assert.equal(t.$('.my-board [data-cid="p0c1"] .bc-kw'), null, 'no Guard text chip on the table');
     assert.equal(kim.querySelector('.b-ready-tag').textContent, 'Ready');
     assert.equal(t.$('.opp-board [data-cid="p1c0"] .b-ready-tag'), null, 'only my creatures');
     // Energy: the number in bold, the capacity after it; the card plays sit under it.

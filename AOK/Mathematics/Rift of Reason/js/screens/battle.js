@@ -598,7 +598,7 @@
         function briefLines(d, size) {
             const onTable = size === 'board';
             const ignored = k => k === 'guard' && E.rules(state).ignoreGuard;
-            const kws = d.keywords.map(k => has('ui/kw-' + k)
+            const kws = d.keywords.filter(k => !(onTable && k === 'guard')).map(k => has('ui/kw-' + k)
                 ? el('span.bc-kw.art' + (ignored(k) ? '.off' : ''), { title: ignored(k) ? 'Guard is ignored under the current rules.' : null }, [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), KW_NAME[k] || k])
                 : el('span.bc-kw' + (ignored(k) ? '.off' : ''), { text: KW_NAME[k] || k }));
             // The timing word comes first, in words: "Last Word: Metaverse", "Activate (1⚡): Well, Actually".
@@ -633,6 +633,10 @@
                 gem('attack', d.attack, atkClass),
                 gem('health', d.health, hpClass),
                 d.keywords.includes('shield') ? el('div.bc-bubble') : null,
+                // Guard: a shield badge under the card's bottom edge (dimmed while a rule ignores Guard).
+                size === 'board' && d.keywords.includes('guard') ? el('div.bc-guard' + (E.rules(state).ignoreGuard ? '.off' : ''), {
+                    style: bg('ui/kw-guard'), text: has('ui/kw-guard') ? '' : '🛡️', 'aria-hidden': 'true',
+                }) : null,
                 // States read at a glance on the table: a dark veil with a word over the picture.
                 size === 'board' && d.sleeping ? el('div.bc-state.sleep', {}, [icon('ui/state-sleeping', 'Zzz', 'veil'), el('span', { text: 'Asleep' })]) : null,
                 size === 'board' && !d.sleeping && d.frozen ? el('div.bc-state.frozen', {}, [icon('ui/state-frozen', '❄', 'veil'), el('span', { text: 'Lectured' })]) : null,
@@ -1074,7 +1078,8 @@
             const total = hits.slice(0, r.attackLimit === Infinity ? hits.length : r.attackLimit).reduce((n, x) => n + x, 0);
             if (!total || total < P.hearts) return null;
             return el('div.b-danger', { title: 'Danger: ' + oppName + '\'s creatures have ' + total + ' attack together. You have ' + P.hearts + ' hearts.' }, [
-                el('strong', { text: '⚠ Danger' }), el('span', { text: 'Their attack: ' + total }),
+                has('ui/danger') ? icon('ui/danger', '', 'b-danger-icon') : null,
+                el('strong', { text: (has('ui/danger') ? '' : '⚠ ') + 'Danger' }), el('span', { text: 'Their attack: ' + total }),
             ]);
         }
 
@@ -1087,7 +1092,7 @@
             const shown = lim === Infinity ? null : lim;
             return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card plays: no limit this turn.' : 'Card plays: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Creatures, tactics and rule cards each use one.' }, [
                 el('span.b-plays-label', { text: 'Plays' }),
-                shown == null ? el('strong', { text: '∞' }) : el('span.b-plays-pips', {}, Array.from({ length: shown }, (x, i) => el('span.b-play-pip' + (!mine || i < left ? '.on' : '')))),
+                shown == null ? el('strong', { text: '∞' }) : el('span.b-plays-pips', {}, Array.from({ length: shown }, (x, i) => el('span.b-play-pip' + (!mine || i < left ? '.on' : '') + (has('ui/play-token') ? '.art' : ''), { style: bg('ui/play-token') }))),
             ]);
         }
 
@@ -1907,7 +1912,8 @@
             const AX = Rift.data.axioms || {};
             const ax = id ? AX[id] : null;
             const changed = !!(ax && !ax.basic);
-            const art = changed ? 'ui/axiom-' + id : basicArt ? 'ui/axiom-' + basicArt : null;
+            // Changed: the rule card's vignette. Basic: the rule's own icon (ui/rule-<category>), else the basic card's.
+            const art = changed ? 'ui/axiom-' + id : has('ui/rule-' + cat) ? 'ui/rule-' + cat : basicArt ? 'ui/axiom-' + basicArt : null;
             let words = changed ? ax.short || ax.name : basicWords || (ax && ax.short) || '';
             // An attack limit is a per-turn budget: show what is left for the player whose turn it is.
             const r = E.rules(state);
@@ -2003,7 +2009,7 @@
         function springTrap(trap) {
             ui.sel = null;
             const st = step();
-            if (st && st.open && (ui.hintLevel || 0) < 1) setTimeout(() => giveHint(st, 1), 0);
+            if (st && st.open && (ui.hintLevel || 0) < 1) { clearTimeout(ui.hintTimer); ui.hintTimer = setTimeout(() => giveHint(st, 1), TRAP_PAUSE); }
             ui.trapSaid = { step: ui.step, text: trap.say };
             showReveal(el('div.b-reveal-rule', {}, [trap.card ? axiomCardEl(trap.card, { size: 'big' }) : null, el('div.b-reveal-what', { text: trap.what })]), trap.title || 'Careful!', RULE_SHOW, 'rule trap', false);
             ui.holding = false;   // the learner may act again at once
@@ -2012,7 +2018,7 @@
         }
         // An open lesson step ({ open, hint }): no gold pointer at first, so the learner decides. The
         // hint (and the pointer) come after HINT_AFTER ms, or at once after the step's trap.
-        const HINT_AFTER = 40000, HINT2_AFTER = 25000;
+        const HINT_AFTER = 40000, HINT2_AFTER = 25000, TRAP_PAUSE = 6000;   // TRAP_PAUSE: the warning is heard first
         function sayHint(text) {
             try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text, voice: Rift.voiceId ? Rift.voiceId('granny', text) : null }); } catch (e) { /* no voice */ }
         }
@@ -2034,7 +2040,7 @@
             ui.hintTimer = setTimeout(() => giveHint(st, 1), HINT_AFTER);
         }
         // The text Granny shows for a step: an open step adds its hints once they are due.
-        const stepText = st => st.text + (st.open && ui.hintLevel >= 1 && st.hint ? ' ' + st.hint : '') + (st.open && ui.hintLevel >= 2 && st.hint2 ? ' ' + st.hint2 : '');
+        const stepText = st => (!st.open ? st.text : ui.hintLevel >= 2 && st.hint2 ? st.hint2 : ui.hintLevel >= 1 && st.hint ? st.hint : st.text);
         // A narration line between replies: shown in Granny's panel and spoken; the lesson goes on
         // when the voice ends (at least a reading pause, at most 12 s).
         function narrate(text) {
@@ -2109,10 +2115,10 @@
                     speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
                     el('div', {}, [el('div.b-coach-count', { text: done ? 'Lesson complete' : 'Step ' + (ui.step + 1) + ' of ' + n }), el('h3', { text: done ? 'Well played!' : st.title })]),
                 ]),
+                !ui.busy && ui.trapSaid && ui.trapSaid.step === ui.step ? el('p.b-coach-say.warn', { text: ui.trapSaid.text }) : null,
                 ui.busy && !done ? null : el('p.b-coach-text', { text: done ? 'You won by the current rules.' : stepText(st) }),
                 el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read the rule tiles first.' : 'Do this: ' + st.label }),
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
-                !ui.busy && ui.trapSaid && ui.trapSaid.step === ui.step ? el('p.b-coach-say.warn', { text: ui.trapSaid.text }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
