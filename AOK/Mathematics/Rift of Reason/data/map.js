@@ -460,21 +460,24 @@
 
     // NPC trainers for battle nodes. team: 10 species; tactics?: their tactic cards (default: the
     // starter ten); rewardTactic?: the earned tactic their first defeat unlocks (else the next unowned one).
+    // ai: the AI level (design/card-arena-expansion-2026-10-07.md section 8): 'normal' for ordinary
+    // trainers (the default), 'competent' for mini-bosses, 'expert' for bosses. deck?: a built deck in
+    // data/decks.js that an Expert boss plays instead of its team and tactics.
     Rift.data.trainers = {
         'syllo': {
-            name:'Sergeant Syllo', speaker:'syllo', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
+            name:'Sergeant Syllo', speaker:'syllo', ai:'normal', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
             team:['lobstorian','astrophysicat','lobstorian','astrophysicat','beastie','astrophysicat','lobstorian','khaby','beastie','astrophysicat'],
             ante:{items:{charm:2}},
             rewardTactic:'pause-for-thought',
         },
         'baker': {
-            name:'Mrs Crumb', speaker:'baker', intro:'“A recipe is a set of rules. Can your creatures follow mine?”',
+            name:'Mrs Crumb', speaker:'baker', ai:'normal', intro:'“A recipe is a set of rules. Can your creatures follow mine?”',
             team:['beastie','siuuugull','beansprout','eminemu','beastie','siuuugull','beansprout','eminemu','astrophysicat','lobstorian'],
             ante:{items:{charm:2}},
             rewardTactic:'lemma',
         },
         'pip': {
-            name:'Pip, the Clerk', speaker:'pip', intro:'“Words can change a case. Watch my Language team and read each axiom.”',
+            name:'Pip, the Clerk', speaker:'pip', ai:'normal', intro:'“Words can change a case. Watch my Language team and read each axiom.”',
             team:['tremendoodle','swiftlet','kardashiant','eminemu','swiftlet','tremendoodle','kardashiant','eminemu','lobstorian','astrophysicat'],
             ante:{items:{greatcharm:1}},
             rewardTactic:'recall',
@@ -482,7 +485,7 @@
         'feed': {
             speaker:'algorithm', intro:'“MY TEAM GETS ATTENTION. CAN YOURS THINK UNDER CHANGING RULES?”',
             name: 'The Feed\'s Champion',
-            ai: 'hard',
+            ai: 'expert', deck: 'feed',
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
             tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'pep-talk', 'eureka', 'rethink', 'big-claims', 'clockwork', 'lemma'],
@@ -490,7 +493,7 @@
         'fin': {
             speaker:'fin', intro:'“A strong case needs sound rules. Read every axiom before you attack.”',
             name: 'Prosecutor Fin',
-            ai: 'hard',
+            ai: 'expert', deck: 'fin',
             team: ['carlseal', 'altmanta', 'obambu', 'rockodile', 'messilion', 'gargoyle', 'beeyonce', 'haalandroid', 'lobstorian', 'muskrat'],
             ante: { items: { greatcharm: 2, 'trickster-coin': 1, heartstone: 1 } },
             tactics: ['counterexample', 'occams-razor', 'occams-razor', 'big-claims', 'stand-firm', 'safety-net', 'recall', 'second-wind', 'look-it-up', 'rethink'],
@@ -498,7 +501,7 @@
         'constable': {
             speaker:'constable', intro:'“Ten hearts. Guards first. The law can change each round.”',
             name: 'Constable Clobber',
-            ai: 'hard',
+            ai: 'expert', deck: 'constable',
             team: ['lobstorian', 'tremendoodle', 'rawmsay', 'rockodile', 'carlseal', 'beastie', 'swiftlet', 'muskrat', 'messilion', 'speedcheeta'],
             ante: { items: { greatcharm: 2, heartstone: 1 } },
             rewardTactic: 'peer-review',
@@ -507,6 +510,7 @@
         'card-sharp': {
             speaker:'corvina', intro:'“Fancy a match? One clever tactic can turn the game.”',
             name: 'Corvina the Card Sharp',
+            ai: 'competent',
             team: ['zuckerborg', 'astrophysicat', 'siuuugull', 'khaby', 'kardashiant', 'keanu', 'muskrat', 'lobstorian', 'beastie', 'tremendoodle'],
             ante: { items: { greatcharm: 1, ward: 1 } },
             rewardTactic: 'safety-net',
