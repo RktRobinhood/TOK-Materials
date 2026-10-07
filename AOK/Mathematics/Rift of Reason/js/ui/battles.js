@@ -11,6 +11,9 @@
  * The player's side comes from the Collection deck builder (save.team, save.deckTactics,
  * save.axiomLoadout); an empty collection borrows the lesson starter team.
  * A trainer's first defeat gives a Trick Book and one earned tactic (World.claimTrainerReward).
+ * The Bag: before a real battle (trainer, ghost) the player may bring up to two items with a battle
+ * job (player.bag). They are used up only when used: after the match only result.itemsUsed leave the
+ * save. Practice brings a free practice bag (PRACTICE_BAG) that never touches the save.
  *
  * The battle screen (js/screens/battle.js) never writes the save; onEnd does it here.
  */
@@ -66,6 +69,9 @@
     const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
     const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
 
+    // A free bag for practice matches (never taken from or given back to the save).
+    const PRACTICE_BAG = ['tonic', 'ward'];
+
     const starterTactics = () =>((Rift.data.tacticDecks || {}).starter || []).slice();
     const speakerArt = id => ((Rift.data.speakers || {})[id] || {}).art || null;
 
@@ -87,6 +93,10 @@
         let reward = null;
         Rift.State.update(s => {
             if (result.mode !== 'practice') Rift.Battle.Ante.applyToSave(s, result);
+            // Bag items brought from the save are used up only when used in the battle.
+            if (o.bagFromSave && result.itemsUsed) Object.keys(result.itemsUsed).forEach(id => {
+                s.items[id] = Math.max(0, (s.items[id] || 0) - (result.itemsUsed[id] || 0));
+            });
             // Real battles count wins and losses in Ante.applyToSave; practice is counted here.
             if (result.mode === 'practice' && result.outcome === 'won') s.stats.battlesWon += 1;
             else if (result.mode === 'practice' && result.outcome === 'lost') s.stats.battlesLost += 1;
@@ -102,19 +112,41 @@
         Rift.Router.replace(o.back || 'map');
     }
 
-    // Before a real battle: choose which battle consumables to bring (they are used up).
-    // Calls start(consumables) with e.g. { 'extra-energy': 1 }.
+    // Before a real battle: choose which battle consumables to bring (used up when the battle
+    // starts) and up to two bag items with a battle job (used up only if used in the battle).
+    // Calls start(consumables, bag), e.g. start({ 'extra-energy': 1 }, ['tonic', 'ward']).
     function prepare(start) {
         const s = Rift.State.get();
-        const owned = Object.entries(Rift.data.items).filter(([id, it]) => it.consumable && (s.items[id] || 0) > 0);
-        if (!owned.length) { start({}); return; }
-        const picks = {};
-        const rows = owned.map(([id, it]) => el('label.row', null, [
-            el('input', { type: 'checkbox', onchange(ev) { picks[id] = ev.target.checked; } }),
+        const owned = ([id]) => (s.items[id] || 0) > 0;
+        const passive = Object.entries(Rift.data.items).filter(([, it]) => it.consumable).filter(owned);
+        const bagItems = Object.entries(Rift.data.items).filter(([, it]) => it.battle && !it.consumable).filter(owned);
+        if (!passive.length && !bagItems.length) { start({}, []); return; }
+        const limit = (Rift.Battle.Engine && Rift.Battle.Engine.BAG_LIMIT) || 2;
+        const picks = {}, bagPicks = {}, boxes = {};
+        const row = (id, it, line, box) => el('label.row', null, [
+            box,
             Rift.Assets.img('item/' + id, { className: 'bag-icon', label: it.name }),
-            el('div', null, [el('strong', { text: it.name + ' (×' + s.items[id] + ')' }), el('div.small.muted', { text: it.text })]),
-        ]));
-        Rift.UI.modal('Bring anything?', el('div.stack', null, [el('p.small.muted', { text: 'Items you bring are used up, win or lose.' })].concat(rows)), [
+            el('div', null, [el('strong', { text: it.name + ' (×' + s.items[id] + ')' }), el('div.small.muted', { text: line })]),
+        ]);
+        // At most `limit` bag items: the other boxes are switched off while the bag is full.
+        const sync = () => {
+            const n = Object.values(bagPicks).filter(Boolean).length;
+            Object.keys(boxes).forEach(id => { boxes[id].disabled = !bagPicks[id] && n >= limit; });
+        };
+        const body = [];
+        if (passive.length) {
+            body.push(el('p.small.muted', { text: 'These work for the whole match. They are used up, win or lose.' }));
+            passive.forEach(([id, it]) => body.push(row(id, it, it.text, el('input', { type: 'checkbox', onchange(ev) { picks[id] = ev.target.checked; } }))));
+        }
+        if (bagItems.length) {
+            body.push(el('h3', { text: 'Bag: bring up to ' + limit }));
+            body.push(el('p.small.muted', { text: 'Use one per turn with the Bag button. An item is used up only if you use it.' }));
+            bagItems.forEach(([id, it]) => {
+                boxes[id] = el('input', { type: 'checkbox', onchange(ev) { bagPicks[id] = ev.target.checked; sync(); } });
+                body.push(row(id, it, 'In battle: ' + it.battle.text + ' (' + it.battle.cost + ' ⚡)', boxes[id]));
+            });
+        }
+        Rift.UI.modal('Bring anything?', el('div.stack', null, body), [
             { label: 'Battle!', primary: true, onclick() {
                 const consumables = {};
                 Object.entries(picks).filter(([, on]) => on).forEach(([id]) => {
@@ -123,7 +155,8 @@
                         consumables[key] = (consumables[key] || 0) + 1;
                     }
                 });
-                start(consumables);
+                const bag = bagItems.map(([id]) => id).filter(id => bagPicks[id] && (Rift.State.get().items[id] || 0) > 0).slice(0, limit);
+                start(consumables, bag);
             } },
         ]);
     }
@@ -148,6 +181,7 @@
                 'In a fight, both creatures deal damage equal to their attack. Damage stays. A creature with 0 health is defeated.',
                 'Colour wheel: a creature gets +1 attack when it fights the colour it beats. Point at a target to see the fight before you attack. The wheel is in the side panel.',
                 'Tactic cards work once. Axiom cards change a rule for BOTH players until another rule of the same kind replaces it.',
+                'Bag: bring up to two items into a match and press Bag to use one per turn for its energy; an item is used up only when you use it.',
                 'The Fate track moves 1 space every End turn. At zero, the top card of the shared rule deck turns over, or all rules go back to normal. Read Rules now: even the victory goal can change.',
                 'The player who goes first starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[0] + ' cards. The player who goes second starts with ' + Rift.Battle.Engine.DEFAULTS.openHand[1] + ' and gets the Spark: +1 energy once.',
                 'Practice and Syllo’s story challenge have no stakes. You can leave them at any time (Leave match). Other matches may risk items or cards.',
@@ -228,13 +262,13 @@
             if(offerUpdatedLesson(()=>Battles.trainer(nodeId,difficulty),'map'))return;
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
-            prepare(consumables => Rift.Router.go('battle', {
+            prepare((consumables, bag) => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
-                player: Object.assign(myDeck(), { consumables }),
+                player: Object.assign(myDeck(), { consumables, bag }),
                 opponent: { name: t.name, team: trainerTeam(n.trainer, t), tactics: (t.tactics || starterTactics()).slice(),
                     art: speakerArt(t.speaker), ai: difficulty || t.ai || 'easy', stake: t.ante },
-                onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer }),
+                onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer, bagFromSave: true }),
             }));
         },
 
@@ -250,7 +284,7 @@
             Rift.Router.go('battle', {
                 mode: 'practice',
                 seed: sd,
-                player: myDeck(),
+                player: Object.assign(myDeck(), { bag: PRACTICE_BAG.slice() }),
                 opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'easy' },
                 onEnd: result => finish(result, { back: 'collection' }),
             });
@@ -266,12 +300,12 @@
                 Rift.UI.toast(e.message, 4000);
                 return;
             }
-            prepare(consumables => Rift.Router.go('battle', {
+            prepare((consumables, bag) => Rift.Router.go('battle', {
                 mode: 'ghost',
                 seed: seed('ghost'),
-                player: Object.assign(myDeck(), { consumables }),
+                player: Object.assign(myDeck(), { consumables, bag }),
                 opponent: Rift.Battle.TeamCodes.ghostOpponent(imported),
-                onEnd: result => finish(result, { back: 'collection' }),
+                onEnd: result => finish(result, { back: 'collection', bagFromSave: true }),
             }));
         },
 

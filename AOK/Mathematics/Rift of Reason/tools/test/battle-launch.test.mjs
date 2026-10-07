@@ -40,7 +40,9 @@ test('story gate requires victory and a side challenge never completes its puzzl
  g.Rift.Battle.Ante.applyToSave=()=>{};
  g.Rift.Battles.trainer('stall-gallery','easy');assert.equal(g.routes.length,0,'unfinished station cannot be challenged directly');
  g.state.map.completed.push('stall-gallery');const completedBefore=JSON.stringify(g.state.map.completed);
- g.Rift.Battles.trainer('stall-gallery','easy');const p=g.routes.at(-1).params;
+ g.Rift.Battles.trainer('stall-gallery','easy');
+ // A fresh save has Catch Charms and a Tonic (battle jobs), so "Bring anything?" comes first.
+ assert.equal(g.modals.at(-1).title,'Bring anything?');g.modals.at(-1).buttons[0].onclick();const p=g.routes.at(-1).params;
  assert.equal(p.opponent.ai,'easy');assert.ok(p.player.team.every(c=>c.loaner));
  p.onEnd({mode:'trainer',outcome:'won'});assert.equal(JSON.stringify(g.state.map.completed),completedBefore);
 });
