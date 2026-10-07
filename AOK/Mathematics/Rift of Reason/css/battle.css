@@ -663,3 +663,28 @@ body.calm-motion .battle .b-inspect.show { animation: b-fade-in 0.12s ease-out !
 .bc.item { --col: var(--rift); }
 .bc.item .bc-art img { object-fit: contain; padding: 10%; }
 body.calm-motion .battle .b-bag-tray { animation: b-fade-in 0.12s ease-out !important; }
+/* ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ----
+   The copper tactic frame tinted to the colour (until ui/card-tactic-<colour> art exists),
+   the colour's emblem top right (lit while a creature of that colour is in play), colour and
+   rarity under the name, and the "Needs a … creature in play" line. No animation. */
+.bc.tactic[data-tcolour="reason"] { --tcol: var(--reason); }
+.bc.tactic[data-tcolour="emotion"] { --tcol: var(--emotion); }
+.bc.tactic[data-tcolour="perception"] { --tcol: var(--perception); }
+.bc.tactic[data-tcolour="language"] { --tcol: var(--language); }
+.bc.tactic[data-tcolour="imagination"] { --tcol: var(--imagination); }
+.bc.tactic[data-tcolour="memory"] { --tcol: var(--memory); }
+.bc.tactic[data-tcolour] { --col: color-mix(in srgb, var(--tcol) 72%, #b87333); }
+.bc.tactic[data-tcolour] .bc-frame:not(.art) { box-shadow: inset 0 0 0 2px #b87333, 0 4px 10px rgba(0, 0, 0, 0.55); }
+.bc-emblem {
+    position: absolute; z-index: 4; top: -4%; right: -6%; width: 26%; aspect-ratio: 1;
+    display: grid; place-items: center; border-radius: 50%; font-size: max(11px, 1.2em); line-height: 1;
+    background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--tcol, #b87333) 55%, #fff), var(--tcol, #b87333) 60%, #1a1020);
+    border: 2px solid #120c1c; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+.bc-emblem img { width: 78%; height: 78%; object-fit: contain; }
+.bc-emblem.on { box-shadow: 0 0 0 2px var(--gold), 0 0 10px 2px var(--tcol, var(--gold)); }
+.bc.tactic[data-tcolour] .bc-kind { color: var(--tcol); opacity: 1; text-transform: none; letter-spacing: 0; font-weight: 800; }
+.bc-need { font-size: 0.9em; line-height: 1.1; font-weight: 800; color: #ffb3a8; }
+.bc.hand .bc-need { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.bc.hand.tactic[data-tcolour] .bc-text .bc-line { -webkit-line-clamp: 2; }
+.bc.mini .bc-emblem { width: 34%; }

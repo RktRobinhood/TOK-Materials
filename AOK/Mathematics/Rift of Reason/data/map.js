@@ -459,7 +459,8 @@
     };
 
     // NPC trainers for battle nodes. team: 10 species; tactics?: their tactic cards (default: the
-    // starter ten); rewardTactic?: the earned tactic their first defeat unlocks (else the next unowned one).
+    // starter ten; one or two colour tactics matching the team's colours); rewardTactic?: the earned
+    // tactic their first defeat unlocks (else the next unowned one).
     Rift.data.trainers = {
         'syllo': {
             name:'Sergeant Syllo', speaker:'syllo', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
@@ -485,7 +486,7 @@
             ai: 'hard',
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
-            tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'pep-talk', 'eureka', 'rethink', 'big-claims', 'clockwork', 'lemma'],
+            tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'rally-cry', 'eureka', 'rethink', 'big-claims', 'clockwork', 'daydream'],
         },
         'fin': {
             speaker:'fin', intro:'“A strong case needs sound rules. Read every axiom before you attack.”',
@@ -493,7 +494,7 @@
             ai: 'hard',
             team: ['carlseal', 'altmanta', 'obambu', 'rockodile', 'messilion', 'gargoyle', 'beeyonce', 'haalandroid', 'lobstorian', 'muskrat'],
             ante: { items: { greatcharm: 2, 'trickster-coin': 1, heartstone: 1 } },
-            tactics: ['counterexample', 'occams-razor', 'occams-razor', 'big-claims', 'stand-firm', 'safety-net', 'recall', 'second-wind', 'look-it-up', 'rethink'],
+            tactics: ['counterexample', 'occams-razor', 'occams-razor', 'big-claims', 'stand-firm', 'safety-net', 'recall', 'second-wind', 'proof-by-contradiction', 'rethink'],
         },
         'constable': {
             speaker:'constable', intro:'“Ten hearts. Guards first. The law can change each round.”',
@@ -502,7 +503,7 @@
             team: ['lobstorian', 'tremendoodle', 'rawmsay', 'rockodile', 'carlseal', 'beastie', 'swiftlet', 'muskrat', 'messilion', 'speedcheeta'],
             ante: { items: { greatcharm: 2, heartstone: 1 } },
             rewardTactic: 'peer-review',
-            tactics: ['stand-firm', 'stand-firm', 'pause-for-thought', 'pause-for-thought', 'counterexample', 'pep-talk', 'second-wind', 'rethink', 'big-claims', 'clockwork'],
+            tactics: ['stand-firm', 'stand-firm', 'pause-for-thought', 'label-it', 'counterexample', 'pep-talk', 'second-wind', 'rethink', 'big-claims', 'gut-reaction'],
         },
         'card-sharp': {
             speaker:'corvina', intro:'“Fancy a match? One clever tactic can turn the game.”',
@@ -510,7 +511,7 @@
             team: ['zuckerborg', 'astrophysicat', 'siuuugull', 'khaby', 'kardashiant', 'keanu', 'muskrat', 'lobstorian', 'beastie', 'tremendoodle'],
             ante: { items: { greatcharm: 1, ward: 1 } },
             rewardTactic: 'safety-net',
-            tactics: ['rethink', 'rethink', 'clockwork', 'occams-razor', 'eureka', 'look-it-up', 'counterexample', 'pep-talk', 'second-wind', 'stand-firm'],
+            tactics: ['rethink', 'step-by-step', 'clockwork', 'occams-razor', 'eureka', 'remember-when', 'counterexample', 'pep-talk', 'second-wind', 'stand-firm'],
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -68,11 +68,15 @@ test('a trainer gives one Trick Book and one earned tactic the first time only',
     assert.equal(s.items['trick-book'], 1);
     assert.deepEqual(J(s.tactics), [Rift.data.trainers.syllo.rewardTactic]);
     assert.equal(Rift.World.claimTrainerReward(s, 'nobody'), null);
-    // Every trainer gives a book; tactics run out once all earned ones are owned, never duplicate.
+    // Every trainer gives a book; once all earned tactics are owned, a trainer gives the uncommon
+    // colour tactic of its team's main colour instead; never a duplicate.
     Object.keys(Rift.data.trainers).filter(id => id !== 'syllo').forEach(id => Rift.World.claimTrainerReward(s, id));
     assert.equal(s.items['trick-book'], Object.keys(Rift.data.trainers).length);
     assert.equal(new Set(s.tactics).size, s.tactics.length);
-    assert.deepEqual(J(s.tactics.slice().sort()), J(Rift.data.tacticDecks.earned.slice().sort()));
+    const earned = Rift.data.tacticDecks.earned;
+    assert.deepEqual(J(s.tactics.filter(id => earned.includes(id)).sort()), J(earned.slice().sort()));
+    const uncommons = Object.values(Rift.data.tacticDecks.colour).map(l => l[1]);
+    s.tactics.filter(id => !earned.includes(id)).forEach(id => assert.ok(uncommons.includes(id), id + ' is an uncommon colour tactic'));
     Object.values(Rift.data.trainers).forEach(t => {
         if (t.rewardTactic) assert.ok(Rift.data.tacticDecks.earned.includes(t.rewardTactic));
         (t.tactics || []).forEach(id => assert.ok(Rift.data.tactics[id], id));

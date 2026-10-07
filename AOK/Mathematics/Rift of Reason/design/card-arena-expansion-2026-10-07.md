@@ -10,7 +10,7 @@ AGENTS.md still applies: borrow mechanics, never names, art or text.
 |---|---|
 | Card Arena button on the title screen (opens Collection: learn, practise, classmate codes, deck builder) | built (7 Oct) |
 | A board per lesson: `scene/arena-l1` … `l4`, then `scene/arena`, then the old table | built; art in Stage 11 |
-| Colour tactics: two per Way of Knowing, with an **In tune** bonus | building (7 Oct) |
+| Colour tactics: three per Way of Knowing (common, uncommon, rare) with a colour identity rule | built (7 Oct); Thought Experiment (tokens) later |
 | Bag in battle: bring two items, use one per turn | building (7 Oct) |
 | Coins, the vendor, side quests, a per-lesson Rift Run (roguelike) | approved; next session |
 | AI levels Normal / Competent / Expert (section 8) | building (7 Oct) |
@@ -20,28 +20,40 @@ AGENTS.md still applies: borrow mechanics, never names, art or text.
 
 The six colours are the Ways of Knowing (Reason blue, Emotion red, Perception green, Language gold, Imagination violet, Memory silver; the wheel is Reason > Emotion > Language > Perception > Imagination > Reason, Memory outside it). The 15 existing tactics stay colourless (copper frame).
 
-Each colour gets two tactics with a clear personality. Each has an **In tune** line: a small extra if you control a creature of that colour when you play it. That gives decks a reason to lean into colours without forbidding any mix.
+Each colour gets three tactics with a clear personality: a **common**, an **uncommon** and a **rare** (18 in all). *Teacher decision, 7 Oct: no "In tune" bonus; a colour identity rule instead (like a commander's colour identity).*
 
-| Colour | Personality | Tactic (cost) | Effect | In tune |
+**Colour identity** (Memory/silver counts as a colour):
+
+- **Deck:** a colour tactic may only go in a deck that has at least one creature of that colour. The Collection deck builder greys out its + and says "Needs a Reason creature in your team."; the default deck, the battle set-up (`Engine.identityFilter`) and classmate team codes leave such cards out (a code's offenders are dropped and listed in `droppedTactics`, never refused).
+- **Play:** a colour tactic can only be played while you control a creature of that colour on the board (engine legality, so the AI and the fuzz respect it). The hand card is dimmed with "Needs a blue (Reason) creature in play." Colourless (copper) tactics can always be played.
+- Because the rule is a real cost, a colour tactic is about one stat point better than a colourless tactic of the same cost (compare Proof by Contradiction with Counterexample, Step by Step with Lemma).
+
+| Colour | Personality | Rarity | Tactic (cost) | Effect |
 |---|---|---|---|---|
-| Reason | precise, step by step | **Proof by Contradiction** (2) | Deal 2 damage to an enemy creature. | 3 damage instead. |
-| Reason | | **Step by Step** (1) | Draw a card. | Draw 2 instead. |
-| Emotion | bold, fast, all-in | **Rally Cry** (2) | Your creatures get +1 attack. | And +1 health. |
-| Emotion | | **Gut Reaction** (1) | Deal 2 damage to the enemy hero. | 3 instead. |
-| Perception | looks closer, notices | **Look Closer** (1) | An enemy creature loses Guard, Elusive and Shield. | Also draw a card. |
-| Perception | | **Field Notes** (2) | Fully heal a friendly creature and give it +1 health. | And +1 attack. |
-| Language | names, labels, persuades | **Label It** (2) | An enemy creature's attack becomes 1. | It also can't attack on its next turn. |
-| Language | | **Rousing Speech** (3) | Your creatures get +1/+1. | Also restore 2 hearts. |
-| Imagination | what if? possibilities | **Imagine Otherwise** (2) | Swap a creature's attack and health. | Also draw a card. |
-| Imagination | | **Daydream** (1) | A friendly creature gets Elusive and +1 attack. | +2 attack instead. |
-| Memory | the past returns | **Déjà Vu** (1) | Return another tactic from your discard pile to your hand. | Also restore 2 hearts. |
-| Memory | | **Nostalgia** (2) | Move the Fate track 2 spaces further away and restore 2 hearts. | 3 hearts instead. |
+| Reason | precise, step by step | common | **Step by Step** (1) | Draw 2 cards. |
+| Reason | | uncommon | **Proof by Contradiction** (2) | Deal 3 damage to an enemy creature. If that defeats it, draw a card. |
+| Reason | | rare | **Q.E.D.** (4) | Defeat an enemy creature. |
+| Emotion | bold, fast, all-in | common | **Gut Reaction** (1) | Deal 3 damage to the enemy hero. |
+| Emotion | | uncommon | **Rally Cry** (2) | Your creatures get +1/+1. |
+| Emotion | | rare | **Wave of Feeling** (4) | Your creatures get +2 attack and Swift. |
+| Perception | looks closer, notices | common | **Look Closer** (1) | An enemy creature loses Guard, Elusive and Shield (Elusive does not hide it). Draw a card. |
+| Perception | | uncommon | **Field Notes** (2) | Fully heal a friendly creature and give it +1/+1. |
+| Perception | | rare | **Clear View** (4) | Every enemy creature loses Guard, Elusive and Shield. Draw 2 cards. |
+| Language | names, labels, persuades | common | **Label It** (2) | An enemy creature's attack becomes 1. It can't attack on its next turn. |
+| Language | | uncommon | **Rousing Speech** (3) | Your creatures get +1/+1. Restore 2 hearts. |
+| Language | | rare | **Persuasion** (5) | Take control of an enemy creature with 2 or less attack (tuned from 3: see the balance note). It arrives asleep; when defeated it goes to its owner's discard pile, and the after-battle Fate roll stays with its real owner. |
+| Imagination | what if? possibilities | common | **Daydream** (1) | A friendly creature gets Elusive and +2 attack. |
+| Imagination | | uncommon | **Imagine Otherwise** (2) | Swap a creature's attack and health. Draw a card. |
+| Imagination | | rare | **Dream Big** (4) | A friendly creature gets +3/+3. (Stands in for *Thought Experiment*, two 2/2 Idea tokens, which needs token support in the engine first.) |
+| Memory | the past returns | common | **Remember When** (1) | Return another tactic (not another Remember When) from your discard pile to your hand. Restore 2 hearts. |
+| Memory | | uncommon | **Nostalgia** (2) | Move the Fate track 2 spaces further away. Restore 3 hearts. |
+| Memory | | rare | **Total Recall** (4) | Return up to two creatures from your discard pile to your hand. Restore 3 hearts. |
 
-Numbers are a starting point; the swapped-seat simulator decides the final ones (no tactic should change the first-player or Hard-vs-Easy rates by more than about 2 points when added to both pools).
+*Remember When* was called *Déjà Vu* in the first plan; it was renamed because Keanu Meows' Last Word ability is already called Déjà Vu. Art ids: `tactic/<id>` (`tactic/qed`, `tactic/wave-of-feeling`, `tactic/clear-view`, `tactic/persuasion`, `tactic/dream-big`, `tactic/total-recall`, …), all optional. Simulation results: `reviews/card-arena-balance-2026-10-07.md` (section "Colour tactics").
 
-**Unlocks:** a colour's two tactics unlock the first time you catch a creature of that colour (one toast: "New tactics: …"). Later the vendor and the Rift Run also offer them. Old saves unlock from the creatures they already have.
+**Unlocks:** everyone keeps the colourless starter pool. Catching the first creature of a colour unlocks that colour's **common** (one toast: "New tactic: Step by Step. Add it in Collection."); old saves get theirs on load from the creatures and trophies they own. Uncommons and rares are collectibles for later systems: `Rift.State.grantTactic(id)` gives one. Today a trainer whose earned tactics you already own all gives the uncommon of its team's main colour on its first defeat; the vendor, quests and the Rift Run come next. A few trainers (The Feed's Champion, Prosecutor Fin, Constable Clobber, Corvina) carry one or two colour tactics matching their team.
 
-**Card look:** colour tactics use the copper tactic frame recoloured to the colour (Stage 11 art `ui/card-tactic-<colour>`; CSS tint until then) with the colour's emblem.
+**Card look:** colour tactics use the copper tactic frame recoloured to the colour (Stage 11 art `ui/card-tactic-<colour>`; a CSS tint until then), the colour's emblem (`ui/icon-<colour>`, lit while that colour is in play), "Reason · uncommon" under the name, and a ★ after the name of a rare.
 
 ## 3. The Bag in battle (items get a second job)
 

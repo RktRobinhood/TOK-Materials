@@ -31,6 +31,8 @@
     const TRICKS = ['guard', 'swift', 'shield', 'attack', 'health'];
 
     const known = () => Rift.data.tactics || {};
+    // Colour identity (Engine.identityFilter): { kept, dropped }.
+    const identity = (list, team) => (Battle.Engine && Battle.Engine.identityFilter ? Battle.Engine.identityFilter(list, team) : { kept: (list || []).slice(), dropped: [] });
 
     // Known ids, at most two copies each, at most `room` cards.
     function cleanTactics(list, room) {
@@ -60,7 +62,7 @@
                 ];
             }),
             a: Array.from(new Set((o.axioms || []).filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10),
-            k: cleanTactics(o.tactics || ((Rift.data.tacticDecks || {}).starter || []), DECK - creatures.length),
+            k: cleanTactics(identity(o.tactics || ((Rift.data.tacticDecks || {}).starter || []), creatures).kept, DECK - creatures.length),
         };
         if (o.stake) payload.s = o.stake;
         return Rift.State.encode('team', payload);
@@ -114,6 +116,10 @@
             if (team.length + p.k.length > DECK) throw bad('a deck has at most ' + DECK + ' cards.');
             tactics = p.k.slice();
         }
+        // Colour identity: colour tactics without a creature of their colour in the team are dropped
+        // (listed in droppedTactics) instead of refusing the whole code.
+        const ident = identity(tactics, team);
+        tactics = ident.kept;
         const axioms = Array.isArray(p.a) ? Array.from(new Set(p.a.filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10) : [];
         let stake = null;
         if (p.s && typeof p.s === 'object' && p.s.items && typeof p.s.items === 'object') {
@@ -121,7 +127,7 @@
             const id = Object.keys(p.s.items).find(k => (Rift.data.items || {})[k]);
             if (id) stake = { items: { [id]: 1 } };
         }
-        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, stake, version: p.v };
+        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, droppedTactics: ident.dropped, stake, version: p.v };
     }
 
     function ghostOpponent(imported) {

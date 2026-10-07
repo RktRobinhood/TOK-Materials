@@ -25,6 +25,7 @@
  *
  * Target specs: 'enemy-creature' | 'friendly-creature' | 'friendly-other' | 'any-creature'
  *               | 'enemy-any' (enemy creature or enemy hero) | 'any'. Heroes are 'h0' and 'h1'.
+ *               'enemy-creature-seen': an enemy creature, Elusive ones included (Look Closer).
  */
 (function (root) {
     'use strict';

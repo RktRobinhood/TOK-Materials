@@ -90,7 +90,9 @@ export function invariants(s, assert) {
             assert.ok(s.cards[cid], 'unknown card ' + cid);
             assert.ok(!seen[cid], cid + ' is in two zones');
             seen[cid] = zone;
-            assert.equal(s.cards[cid].owner, p, cid + ' is in the wrong player\'s ' + zone);
+            // On the board it is the controller's (Persuasion takes control); everywhere else the owner's.
+            assert.equal(zone === 'board' ? s.cards[cid].controller : s.cards[cid].owner, p, cid + ' is in the wrong player\'s ' + zone);
+            if (zone !== 'board') assert.equal(s.cards[cid].controller, p, cid + ' off the board is controlled by its owner');
         }));
         assert.ok(P.board.length <= s.options.boardLimit, 'board limit');
         assert.ok(P.hand.length + P.axHand.length <= s.options.handLimit, 'hand limit');
