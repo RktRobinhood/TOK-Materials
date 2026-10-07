@@ -156,6 +156,25 @@
         const decks = (Rift.data || {}).tacticDecks || { starter: [] };
         return Array.from(new Set(decks.starter.concat(s.tactics || []))).filter(id => known[id]);
     }
+    // Colour tactics (data/tactics.js tacticDecks.colour): a colour's two unlock the first time the
+    // player owns a creature (or trophy copy) of that colour. Adds them to save.tactics and returns
+    // the ids that are new (in the order the colours were first met). Old saves get theirs on load.
+    function unlockColourTactics(save) {
+        const s = save || current;
+        if (!s) return [];
+        const byColour = ((Rift.data || {}).tacticDecks || {}).colour || {};
+        const known = (Rift.data || {}).tactics || {};
+        const creatures = (Rift.data || {}).creatures || {};
+        if (!Array.isArray(s.tactics)) s.tactics = [];
+        const fresh = [];
+        (s.creatures || []).concat(s.trophies || []).forEach(inst => {
+            const sp = inst && creatures[inst.species];
+            (sp && byColour[sp.colour] || []).forEach(id => {
+                if (known[id] && !s.tactics.includes(id)) { s.tactics.push(id); fresh.push(id); }
+            });
+        });
+        return fresh;
+    }
     // The chosen tactic cards (owned, ≤2 copies each), else the starter ten.
     function deckTactics(save) {
         const s = save || current || {};
@@ -258,7 +277,10 @@
         // Saves migrated before the attack clamp existed: fix them too (does nothing otherwise).
         [s.creatures, s.trophies].forEach(list => { if (Array.isArray(list)) list.forEach(clampPower); });
         // Fill any fields added since this save was made.
-        return mergeDefaults(freshState(), s);
+        const out = mergeDefaults(freshState(), s);
+        // Colour tactics for the colours this save already owns (saves made before they existed).
+        unlockColourTactics(out);
+        return out;
     }
 
     function mergeDefaults(defaults, value) {
@@ -369,6 +391,7 @@
         describeVariant,
         battleTeam,
         ownedTactics,
+        unlockColourTactics,
         deckTactics,
         checkDeck,
         DECK_SIZE,
@@ -393,7 +416,15 @@
         exportCode() { return encode('save', current); },
         importCode(code) { return State.replace(decode('save', code)); },
         // Convenience mutators that also autosave and announce changes.
-        update(fn) { fn(current); save(); Rift.bus.emit('state:changed', current); return current; },
+        update(fn) {
+            fn(current);
+            // A newly owned colour (a catch, a trophy, a won stake) unlocks its two colour tactics.
+            const fresh = unlockColourTactics(current);
+            save();
+            Rift.bus.emit('state:changed', current);
+            if (fresh.length) Rift.bus.emit('tactics:unlocked', fresh);
+            return current;
+        },
         addItem(id, n) { State.update(s => { s.items[id] = Math.max(0, (s.items[id] || 0) + (n == null ? 1 : n)); }); },
         useItem(id) {
             if (!current || !current.items[id]) return false;

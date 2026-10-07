@@ -207,7 +207,8 @@
         eachAbility(s, c, def => (def.keywords || []).forEach(add));
         c.extraKeywords.forEach(add);
         if (abilityFlag(s, c, 'elusive')) add('elusive');
-        return c.shieldUsed ? out.filter(k => k !== 'shield') : out;
+        const kept = c.lostKeywords && c.lostKeywords.length ? out.filter(k => !c.lostKeywords.includes(k)) : out;
+        return c.shieldUsed ? kept.filter(k => k !== 'shield') : kept;
     }
     const hasKeyword = (s, cid, k) => keywordsOf(s, cid).includes(k);
 
@@ -299,6 +300,7 @@
         let list;
         switch (spec) {
             case 'enemy-creature': list = theirs.slice(); break;
+            case 'enemy-creature-seen': list = theirs.slice(); break; // like enemy-creature, but Elusive does not hide from it
             case 'friendly-creature': list = mine.slice(); break;
             case 'friendly-other': list = mine.filter(cid => cid !== sourceCid); break;
             case 'any-creature': list = mine.concat(theirs); break;
@@ -308,7 +310,7 @@
         }
         return list.filter(t => {
             if (isHero(t)) return true;
-            if (s.cards[t].controller !== p && hasKeyword(s, t, 'elusive')) return false;
+            if (spec !== 'enemy-creature-seen' && s.cards[t].controller !== p && hasKeyword(s, t, 'elusive')) return false;
             return !filter || filter(s, t, H);
         });
     }
@@ -378,7 +380,8 @@
         const c = s.cards[cid];
         if (c.kind === 'tactic') {
             const t = tacticDefs()[c.tactic] || {};
-            return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, flavour: t.flavour, target: t.target || null };
+            return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, flavour: t.flavour, target: t.target || null,
+                colour: t.colour || null, inTuneText: t.inTune || null, inTune: !!t.colour && inTune(s, c.controller, t.colour) };
         }
         const sp = species(c.species) || {};
         const defs = abilityDefs();
@@ -697,14 +700,57 @@
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
             handRoom: (p, n) => handRoom(s, p, n),
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
-            addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; },
+            addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; if (c.lostKeywords) c.lostKeywords = c.lostKeywords.filter(x => x !== k); },
             shiftFate: n => shiftFate(G, n),
             setAxiom: (id, by) => setAxiom(G, id, by),
             takeAxiom(id) { removeFrom(s.axioms.deck, id); },
             refillAxioms: () => refillAxioms(G),
             ask: req => ask(G, req),
             attack: cid => attackOf(s, cid),
+            // Colour tactics (below).
+            inTune: (p, colour) => inTune(s, p, colour),
+            stripKeywords: (cid, list) => stripKeywords(s, cid, list),
+            fullHeal(cid) { s.cards[cid].damage = 0; },
+            setAttack: (cid, n, label) => setAttack(s, cid, n, label),
+            swapStats: cid => swapStats(s, cid),
         };
+    }
+
+    // ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ------------------
+
+    // In tune: player p controls a creature of this colour (a nicknamed creature has no colour).
+    function inTune(s, p, colour) {
+        return s.players[p].board.some(cid => colourOf(s, s.cards[cid]) === colour);
+    }
+    // The creature loses these keywords (printed, natural, taught, gained or from an ability) while it
+    // stays on the board; a later tactic or ability may give one back. A lost Shield counts as used up.
+    // Returns the listed keywords it really had.
+    function stripKeywords(s, cid, list) {
+        const c = s.cards[cid];
+        const had = keywordsOf(s, cid).filter(k => list.includes(k));
+        c.extraKeywords = c.extraKeywords.filter(k => !list.includes(k));
+        if (list.includes('shield')) c.shieldUsed = true;
+        const lost = (c.lostKeywords || []).slice(); // a new array: cloneState copies cards shallowly
+        list.forEach(k => { if (k !== 'shield' && !lost.includes(k)) lost.push(k); });
+        c.lostKeywords = lost;
+        return had;
+    }
+    // Its attack becomes n now (a lasting change, kept as a buff so the card shows why).
+    function setAttack(s, cid, n, label) {
+        const delta = n - attackOf(s, cid);
+        if (delta) s.cards[cid].buffs.push({ label, attack: delta, health: 0, temp: false });
+    }
+    // Swap its current attack and current health. Lasting buffs are folded into the new printed
+    // numbers; this-turn boosts, auras and rules keep working on top. 0 attack gives 0 health: defeated.
+    function swapStats(s, cid) {
+        const c = s.cards[cid];
+        const atk = attackOf(s, cid), hp = healthOf(s, cid).current;
+        const lasting = c.buffs.reduce((sum, b) => sum + (b.temp ? 0 : (b.attack || 0)), 0);
+        const extra = attackParts(s, cid).parts.reduce((sum, x) => sum + (x.source === 'base' ? 0 : x.amount), 0) - lasting;
+        c.buffs = c.buffs.filter(b => b.temp).map(b => Object.assign({}, b, { health: 0 }));
+        c.attack = Math.max(0, hp - extra);
+        c.health = Math.max(1, atk);
+        c.damage = atk > 0 ? 0 : 1;
     }
 
     // Returns false when the hand is full: the card goes to the discard pile, tagged `burned` so it
@@ -745,6 +791,7 @@
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
         c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
+        if (c.lostKeywords) c.lostKeywords = null;
     }
 
     function setWinner(G, p, reason) {
@@ -1105,6 +1152,7 @@
     const H = {
         colourOf, wheelBonus, cardName, logName, playerName, keywordsOf, hasKeyword,
         handRoom: (s, p, n, leaving) => handRoom(s, p, n, leaving),
+        inTune: (s, p, colour) => inTune(s, p, colour),
         boardOf: (s, p) => s.players[p].board,
         attack: (s, cid, foe) => attackOf(s, cid, foe),
         health: (s, cid) => healthOf(s, cid).current,
@@ -1118,6 +1166,6 @@
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
-        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, H,
+        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, inTune, H,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

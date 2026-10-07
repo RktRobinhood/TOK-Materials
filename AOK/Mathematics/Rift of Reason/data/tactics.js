@@ -132,7 +132,152 @@
             usable: (s, p) => s.players[p].deck.length > 0,
             run(api, p) { api.draw(p); api.draw(p); api.emit({ t: 'tactic', text: 'Lemma: draw 2 cards.' }); },
         },
+
+        // ---- colour tactics: two per Way of Knowing (design/card-arena-expansion-2026-10-07.md, section 2) ----
+        // colour: its Way of Knowing. inTune: the extra when you control a creature of that colour as you play it.
+        // Unlocked the first time the player owns a creature of that colour (Rift.State.unlockColourTactics).
+        'proof-by-contradiction': {
+            name: 'Proof by Contradiction', cost: 2, colour: 'reason', target: 'enemy-creature',
+            text: 'Deal 2 damage to an enemy creature.', inTune: '3 damage instead.',
+            flavour: 'Assume it is true. Watch it fall apart.',
+            run(api, p, target) {
+                const n = api.inTune(p, 'reason') ? 3 : 2;
+                api.emit({ t: 'tactic', text: 'Proof by Contradiction' + tuned(n === 3) + ': ' + n + ' damage to ' + api.name(target) + '.' });
+                api.damage(target, n, null);
+            },
+        },
+        'step-by-step': {
+            name: 'Step by Step', cost: 1, colour: 'reason',
+            text: 'Draw a card.', inTune: 'Draw 2 instead.',
+            flavour: 'One small, sure step, then the next.',
+            usable: (s, p) => s.players[p].deck.length > 0,
+            run(api, p) {
+                const two = api.inTune(p, 'reason');
+                api.draw(p); if (two) api.draw(p);
+                api.emit({ t: 'tactic', text: 'Step by Step' + tuned(two) + ': draw ' + (two ? '2 cards.' : 'a card.') });
+            },
+        },
+        'rally-cry': {
+            name: 'Rally Cry', cost: 2, colour: 'emotion',
+            text: 'Your creatures get +1 attack.', inTune: 'And +1 health.',
+            flavour: 'Feelings move crowds faster than facts.',
+            usable: (s, p) => s.players[p].board.length > 0,
+            run(api, p) {
+                const hp = api.inTune(p, 'emotion') ? 1 : 0;
+                api.s.players[p].board.forEach(cid => api.buff(cid, 1, hp, 'Rally Cry'));
+                api.emit({ t: 'tactic', text: 'Rally Cry' + tuned(hp) + ': your creatures get +1 attack' + (hp ? ' and +1 health.' : '.') });
+            },
+        },
+        'gut-reaction': {
+            name: 'Gut Reaction', cost: 1, colour: 'emotion',
+            text: 'Deal 2 damage to the enemy hero.', inTune: '3 instead.',
+            flavour: 'No time to think. Just go.',
+            run(api, p) {
+                const n = api.inTune(p, 'emotion') ? 3 : 2;
+                api.emit({ t: 'tactic', text: 'Gut Reaction' + tuned(n === 3) + ': ' + n + ' damage to the enemy hero.' });
+                api.damage('h' + (1 - p), n, null);
+            },
+        },
+        'look-closer': {
+            name: 'Look Closer', cost: 1, colour: 'perception', target: 'enemy-creature-seen',
+            filter: (s, cid, H) => H.keywordsOf(s, cid).some(k => k === 'guard' || k === 'elusive' || k === 'shield'),
+            text: 'An enemy creature loses Guard, Elusive and Shield.', inTune: 'Also draw a card.',
+            flavour: 'Look again. The disguise slips.',
+            run(api, p, target) {
+                const had = api.stripKeywords(target, ['guard', 'elusive', 'shield']);
+                const draw = api.inTune(p, 'perception');
+                api.emit({ t: 'tactic', text: 'Look Closer' + tuned(draw) + ': ' + api.name(target) + ' loses ' + (had.length ? had.map(cap).join(' and ') : 'nothing') + '.' + (draw ? ' Draw a card.' : '') });
+                if (draw) api.draw(p);
+            },
+        },
+        'field-notes': {
+            name: 'Field Notes', cost: 2, colour: 'perception', target: 'friendly-creature',
+            text: 'Fully heal a friendly creature and give it +1 health.', inTune: 'And +1 attack.',
+            flavour: 'Write down what you see, then look after it.',
+            run(api, p, target) {
+                const atk = api.inTune(p, 'perception') ? 1 : 0;
+                api.fullHeal(target);
+                api.buff(target, atk, 1, 'Field Notes');
+                api.emit({ t: 'tactic', text: 'Field Notes' + tuned(atk) + ': ' + api.name(target) + ' is fully healed and gets ' + (atk ? '+1/+1.' : '+1 health.') });
+            },
+        },
+        'label-it': {
+            name: 'Label It', cost: 2, colour: 'language', target: 'enemy-creature',
+            filter: (s, cid, H) => H.attack(s, cid) >= 2,
+            text: 'An enemy creature\'s attack becomes 1.', inTune: 'It also can\'t attack on its next turn.',
+            flavour: 'Call it small, and it starts to feel small.',
+            run(api, p, target) {
+                const freeze = api.inTune(p, 'language');
+                api.setAttack(target, 1, 'Label It');
+                if (freeze) api.freeze(target);
+                api.emit({ t: 'tactic', text: 'Label It' + tuned(freeze) + ': ' + api.name(target) + '\'s attack becomes 1' + (freeze ? ' and it can\'t attack next turn.' : '.') });
+            },
+        },
+        'rousing-speech': {
+            name: 'Rousing Speech', cost: 3, colour: 'language',
+            text: 'Your creatures get +1/+1.', inTune: 'Also restore 2 hearts.',
+            flavour: 'The right words, at the right moment.',
+            usable: (s, p) => s.players[p].board.length > 0,
+            run(api, p) {
+                const heal = api.inTune(p, 'language');
+                api.s.players[p].board.forEach(cid => api.buff(cid, 1, 1, 'Rousing Speech'));
+                if (heal) api.healHero(p, 2);
+                api.emit({ t: 'tactic', text: 'Rousing Speech' + tuned(heal) + ': your creatures get +1/+1' + (heal ? '. Restore 2 hearts.' : '.') });
+            },
+        },
+        'imagine-otherwise': {
+            name: 'Imagine Otherwise', cost: 2, colour: 'imagination', target: 'any-creature',
+            filter: (s, cid, H) => H.attack(s, cid) !== H.health(s, cid),
+            text: 'Swap a creature\'s attack and health.', inTune: 'Also draw a card.',
+            flavour: 'What if it were the other way round?',
+            run(api, p, target) {
+                const draw = api.inTune(p, 'imagination');
+                api.swapStats(target);
+                api.emit({ t: 'tactic', text: 'Imagine Otherwise' + tuned(draw) + ': ' + api.name(target) + ' swaps its attack and health.' + (draw ? ' Draw a card.' : '') });
+                if (draw) api.draw(p);
+            },
+        },
+        daydream: {
+            name: 'Daydream', cost: 1, colour: 'imagination', target: 'friendly-creature',
+            text: 'A friendly creature gets Elusive and +1 attack.', inTune: '+2 attack instead.',
+            flavour: 'Drift away where no one can follow.',
+            run(api, p, target) {
+                const n = api.inTune(p, 'imagination') ? 2 : 1;
+                api.addKeyword(target, 'elusive');
+                api.buff(target, n, 0, 'Daydream');
+                api.emit({ t: 'tactic', text: 'Daydream' + tuned(n === 2) + ': ' + api.name(target) + ' gets Elusive and +' + n + ' attack.' });
+            },
+        },
+        'remember-when': {
+            name: 'Remember When', cost: 1, colour: 'memory',
+            text: 'Return another tactic from your discard pile to your hand.', inTune: 'Also restore 2 hearts.',
+            flavour: 'Haven\'t we been here before?',
+            usable: (s, p) => s.players[p].discard.some(cid => rememberOption(s, cid)),
+            run(api, p) {
+                if (api.inTune(p, 'memory')) { api.healHero(p, 2); api.emit({ t: 'tactic', text: 'Remember When (in tune): restore 2 hearts.' }); }
+                const options = api.s.players[p].discard.filter(cid => rememberOption(api.s, cid));
+                if (!api.ask({ player: p, kind: 'card', options, prompt: 'Which tactic comes back?', source: { type: 'tactic', id: 'remember-when' } })) api.emit({ t: 'fizzle', text: 'Remember When: no other tactic in your discard pile.' });
+            },
+            choose(api, p, cid) { api.fromDiscard(cid); api.emit({ t: 'tactic', text: 'Remember When: ' + api.cardName(cid) + ' returns to your hand.' }); },
+        },
+        nostalgia: {
+            name: 'Nostalgia', cost: 2, colour: 'memory',
+            text: 'Move the Fate track 2 spaces further away and restore 2 hearts.', inTune: '3 hearts instead.',
+            flavour: 'The good old days were never quite this good.',
+            usable: (s, p) => s.players[p].hearts < s.players[p].maxHearts || (!!s.options.timeline && s.fate.until < s.options.fateMax),
+            run(api, p) {
+                const n = api.inTune(p, 'memory') ? 3 : 2;
+                api.healHero(p, n);
+                api.emit({ t: 'tactic', text: 'Nostalgia' + tuned(n === 3) + ': restore ' + n + ' hearts. Fate moves 2 spaces further away.' });
+                api.shiftFate(-2);
+            },
+        },
     };
+    // " (in tune)" for the log when the bonus applied.
+    function tuned(on) { return on ? ' (in tune)' : ''; }
+    function cap(k) { return k[0].toUpperCase() + k.slice(1); }
+    // Remember When brings back any other tactic, but not another Remember When (no loops).
+    function rememberOption(s, cid) { const c = s.cards[cid]; return c.kind === 'tactic' && c.tactic !== 'remember-when'; }
     Object.keys(tactics).forEach(id => { tactics[id].id = id; });
     Rift.data.tactics = tactics;
     Rift.data.tacticDecks = {
@@ -140,5 +285,14 @@
         starter: ['counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'occams-razor', 'rethink', 'big-claims', 'clockwork', 'look-it-up'],
         // Won from trainers, puzzles and rumours.
         earned: ['peer-review', 'recall', 'pause-for-thought', 'safety-net', 'lemma'],
+        // Colour tactics, two per colour: unlocked by owning a creature of that colour.
+        colour: {
+            reason: ['proof-by-contradiction', 'step-by-step'],
+            emotion: ['rally-cry', 'gut-reaction'],
+            perception: ['look-closer', 'field-notes'],
+            language: ['label-it', 'rousing-speech'],
+            imagination: ['imagine-otherwise', 'daydream'],
+            memory: ['remember-when', 'nostalgia'],
+        },
     };
 })(typeof window !== 'undefined' ? window : globalThis);
