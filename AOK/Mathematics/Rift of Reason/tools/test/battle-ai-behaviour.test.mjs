@@ -1,6 +1,7 @@
-// Card Arena AI behaviour a student can see: both levels develop their board (no passing
-// with an affordable creature and room), Easy keeps the big twists for Hard, Easy stays
-// beatable, Syllo's story challenge stays winnable, and the AI never reads hidden cards.
+// Card Arena AI behaviour a student can see: Normal and Competent develop their board (no
+// passing with an affordable creature and room), Normal keeps the big twists for the higher
+// levels, Normal stays beatable, Syllo's story challenge stays winnable for a beginner, and
+// the AI never reads hidden cards. (Levels and Expert: battle-ai-levels.test.mjs.)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Rift, E, AI, setup, act, onBoard, toHand, toDiscard } from './battle-helpers.mjs';
@@ -18,7 +19,7 @@ function watch(s, levels, tally) {
         const level = levels[p];
         const a = AI.choose(s, { level });
         const t = tally[level];
-        if (a.type === 'axiom' && level === 'easy' && TWISTS.includes(a.choice)) t.twists.push(a.choice);
+        if (a.type === 'axiom' && level === 'normal' && TWISTS.includes(a.choice)) t.twists.push(a.choice);
         if (s.phase === 'main' && a.type === 'end') {
             t.ends += 1;
             t.unspent += s.players[p].energy;
@@ -43,32 +44,33 @@ function practice(tag, g, first) {
     });
 }
 
-test('over 300 seeded games both levels develop their board and Easy never plays the big twists', () => {
-    const tally = { easy: blank(), hard: blank() };
+test('over 300 seeded games Normal and Competent develop their board and Normal never plays the big twists', () => {
+    const tally = { normal: blank(), competent: blank() };
     let hardWins = 0, heGames = 0;
     for (let g = 0; g < 50; g++) {
         for (const first of [0, 1]) {
             for (const hardSeat of [0, 1]) {
-                const levels = hardSeat ? ['easy', 'hard'] : ['hard', 'easy'];
+                const levels = hardSeat ? ['normal', 'competent'] : ['competent', 'normal'];
                 const end = watch(practice('he', g, first), levels, tally);
                 heGames += 1;
                 if (end.winner === hardSeat) hardWins += 1;
             }
         }
     }
-    for (let g = 0; g < 50; g++) for (const first of [0, 1]) watch(practice('ee', g, first), ['easy', 'easy'], tally);
-    for (const level of ['easy', 'hard']) {
+    for (let g = 0; g < 50; g++) for (const first of [0, 1]) watch(practice('ee', g, first), ['normal', 'normal'], tally);
+    for (const level of ['normal', 'competent']) {
         const t = tally[level];
         assert.ok(t.ends > 500, level + ' ended enough turns to judge (' + t.ends + ')');
         assert.ok(t.passed / t.ends < 0.02, level + ' passed with an affordable creature and room in ' + pct(t.passed, t.ends) + ' of End turns');
         assert.ok(t.unspent / t.ends < 2.2, level + ' leaves ' + (t.unspent / t.ends).toFixed(2) + ' energy unspent on average');
     }
-    assert.deepEqual(tally.easy.twists, [], 'Easy played a twist rule card');
-    assert.ok(hardWins / heGames >= 0.7 && hardWins / heGames <= 0.92, 'Hard beats Easy ' + pct(hardWins, heGames) + ' (Easy beatable, not hopeless)');
+    assert.deepEqual(tally.normal.twists, [], 'Normal played a twist rule card');
+    // Target 65–75% (simulated ladder); 200 games here, so a wider band.
+    assert.ok(hardWins / heGames >= 0.6 && hardWins / heGames <= 0.85, 'Competent beats Normal ' + pct(hardWins, heGames) + ' (Normal beatable, not hopeless)');
 });
 
-test('with an affordable creature and an empty board, neither level ends its turn first', () => {
-    for (const level of ['easy', 'hard']) {
+test('with an affordable creature and an empty board, no level ends its turn first', () => {
+    for (const level of ['normal', 'competent', 'expert']) {
         for (let i = 0; i < 60; i++) {
             let s = setup({ p0: ['kardashiant', 'keanu'], p1: ['astrophysicat'], energy: 3 });
             onBoard(s, 'p1c0');
@@ -85,24 +87,24 @@ test('with an affordable creature and an empty board, neither level ends its tur
     }
 });
 
-test('Easy keeps The Last Shall Be First and Empty Set in hand, also when Axiomatic offers them', () => {
-    // A losing Easy player would love to reverse the win rule; it still must not.
+test('Normal keeps The Last Shall Be First and Empty Set in hand, also when Axiomatic offers them', () => {
+    // A losing Normal player would love to reverse the win rule; it still must not.
     for (let i = 0; i < 80; i++) {
         const s = setup({ p0: ['kardashiant'], p1: ['lobstorian', 'tremendoodle'], energy: 6 });
         onBoard(s, 'p0c0', 'p1c0', 'p1c1');
         s.players[0].hearts = 2;
         s.players[1].hearts = 10;
         s.players[0].axHand = ['reverse-hearts', 'empty-set', 'haste'];
-        const a = AI.choose(s, { level: 'easy', salt: 'tw' + i });
+        const a = AI.choose(s, { level: 'normal', salt: 'tw' + i });
         assert.ok(!(a.type === 'axiom' && TWISTS.includes(a.choice)), 'salt ' + i + ': ' + JSON.stringify(a));
     }
-    // Axiomatic (Euclidon's Entrance) asks for a rule: Easy picks a calm one when it can.
+    // Axiomatic (Euclidon's Entrance) asks for a rule: Normal picks a calm one when it can.
     for (let i = 0; i < 40; i++) {
         let s = setup({ p0: ['euclidon'], axioms: ['reverse-hearts', 'empty-set', 'haste', 'mercy'] });
         toHand(s, 'p0c0');
         s = act(s, { type: 'play', cid: 'p0c0' });
         assert.equal(s.pending && s.pending.kind, 'axiom');
-        const a = AI.choose(s, { level: 'easy', salt: 'ax' + i });
+        const a = AI.choose(s, { level: 'normal', salt: 'ax' + i });
         assert.equal(a.type, 'choose');
         assert.ok(!TWISTS.includes(a.choice), 'Axiomatic chose ' + a.choice);
     }
@@ -129,8 +131,10 @@ test('the Predict colour guess uses only public cards, never the hidden hand or 
     const locked = make(s => toHand(s, 'p1c4'));
     ['hand', 'deck'].forEach(zone => Object.defineProperty(locked.players[1], zone, { get() { throw new Error('the AI read the opponent\'s ' + zone); } }));
     variants.push(locked);
-    const picks = variants.map(s => AI.choose(s, { level: 'hard' }).choice);
-    assert.deepEqual(picks, picks.map(() => 'language'));
+    for (const level of ['competent', 'expert']) {
+        const picks = variants.map(s => AI.choose(s, { level }).choice);
+        assert.deepEqual(picks, picks.map(() => 'language'), level);
+    }
 });
 
 test('Syllo\'s story challenge stays winnable for a beginner-level player', () => {
@@ -141,7 +145,7 @@ test('Syllo\'s story challenge stays winnable for a beginner-level player', () =
         'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/lesson.js',
     ]);
     const Eng = R.Battle.Engine;
-    const tally = { easy: blank(), hard: blank() };
+    const tally = { normal: blank() };
     let won = 0;
     const N = 60;
     for (let g = 0; g < N; g++) {
@@ -149,24 +153,25 @@ test('Syllo\'s story challenge stays winnable for a beginner-level player', () =
             seed: 'syllo-behaviour:' + g,
             players: [
                 { team: R.Battle.Lesson.starter(), tactics: R.data.tacticDecks.starter, axioms: [] },
-                { team: R.Battle.Lesson.team(SYLLO_TEAM, 'syllo-'), tactics: SYLLO_TACTICS },
+                { team: R.Battle.Lesson.team(SYLLO_TEAM, 'syllo-'), tactics: SYLLO_TACTICS, hearts: 8 },
             ],
             axiomDeck: ['underdog', 'thrift', 'three-actions', 'normal-hearts', 'mercy', 'arrival', 'age-of-reason'],
             options: { first: 0, shuffle: false, shuffleAxioms: false, deckSize: 16, mode: 'practice' },
         });
-        // The player side plays at Easy level (a beginner); Syllo is Easy.
+        // The player side is the test-only 'beginner' level; Syllo is Normal with 8 hearts (js/ui/battles.js story()).
         let guard = 0;
         while (Eng.winner(s) == null && guard++ < 6000) {
             const p = Eng.decider(s);
-            const a = R.Battle.AI.choose(s, { level: 'easy', salt: p ? '' : 'student' });
+            const a = R.Battle.AI.choose(s, { level: p ? 'normal' : 'beginner', salt: p ? '' : 'student' });
             if (p === 1 && s.phase === 'main' && a.type === 'end') {
-                tally.easy.ends += 1;
-                if (Eng.legalActions(s).some(x => x.type === 'play' && s.cards[x.cid].kind === 'creature')) tally.easy.passed += 1;
+                tally.normal.ends += 1;
+                if (Eng.legalActions(s).some(x => x.type === 'play' && s.cards[x.cid].kind === 'creature')) tally.normal.passed += 1;
             }
             s = Eng.applyAction(s, a);
         }
         if (s.winner === 0) won += 1;
     }
-    assert.ok(won / N >= 0.4, 'a beginner-level player beats Syllo in ' + pct(won, N));
-    assert.ok(tally.easy.passed / tally.easy.ends < 0.02, 'Syllo passed with a playable creature in ' + pct(tally.easy.passed, tally.easy.ends));
+    // Target 65–75% (simulated ladder, 1,100 games); 60 games here, so a wider band.
+    assert.ok(won / N >= 0.5 && won / N <= 0.9, 'a beginner-level player beats Syllo in ' + pct(won, N));
+    assert.ok(tally.normal.passed / tally.normal.ends < 0.02, 'Syllo passed with a playable creature in ' + pct(tally.normal.passed, tally.normal.ends));
 });

@@ -14,7 +14,9 @@ try {
         const rng = Rift.makeRng('aifuzz-' + g);
         const team = p => E.randomTeam(rng, rng.int(3, 14), { prefix: 'f' + g + p, legendaries: rng.chance(0.5) });
         const tactics = () => rng.shuffle(allTactics.concat(allTactics)).slice(0, rng.int(0, 12));
-        const levels = [rng.chance(0.3) ? 'hard' : 'easy', rng.chance(0.3) ? 'hard' : 'easy'];
+        // Mostly Normal and Competent; Expert in a few games (it is slower). Old names on purpose in some.
+        const level = () => (rng.chance(0.04) ? 'expert' : rng.chance(0.3) ? (rng.chance(0.5) ? 'hard' : 'competent') : (rng.chance(0.5) ? 'easy' : 'normal'));
+        const levels = [level(), level()];
         let s = E.createBattle({
             seed: 'aifuzz-' + g,
             players: [{ name: 'A', team: team(0), tactics: tactics() }, { name: 'B', team: team(1), tactics: tactics() }],
