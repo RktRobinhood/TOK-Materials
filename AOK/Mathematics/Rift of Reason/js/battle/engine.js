@@ -35,12 +35,20 @@
  *   { type: 'attack', cid, target }           target: enemy creature cid or 'h0' / 'h1'
  *   { type: 'activate', cid, ability, target? }
  *   { type: 'spark' }                         second player, once: +1 energy this turn
+ *   { type: 'item', id, target? }             use a bag item (one per turn; see "The Bag" below)
  *   { type: 'end' }
  *   { type: 'choose', choice }                answer a pending question            phase 'choose'
  *
  * Events (state.lastEvents for the latest action, fullLog(state) for all):
  *   { t, text, publicText?, privateTo?, ...data }. Show `text` to privateTo (or everyone
  *   when privateTo is undefined) and `publicText` to the other player.
+ *
+ * The Bag (design/card-arena-expansion-2026-10-07.md §3): players[p].bag lists the item ids brought
+ * in (createBattle player.bag; only items with a `battle` block in data/items.js count). In the main
+ * phase a player may use ONE item per turn for its energy cost; it leaves the bag and is added to
+ * players[p].itemsUsed. itemsUsed(state, p) → { id: n } so the caller removes only those from the
+ * save. bagStatus(state, p) → one entry per item kind for the Bag tray (with `ok` and `why`).
+ * The arrays bag/itemsUsed are replaced (never changed in place), so cloneState can share them.
  */
 (function (root) {
     'use strict';
@@ -67,6 +75,7 @@
     const abilityDefs = () => Battle.Abilities || {};
     const axiomDefs = () => Rift.data.axioms || {};
     const tacticDefs = () => Rift.data.tactics || {};
+    const battleItem = id => ((Rift.data.items || {})[id] || {}).battle || null;
     const isHero = t => t === 'h0' || t === 'h1';
     const heroId = p => 'h' + p;
 
@@ -424,8 +433,9 @@
 
     function timeline(s) {
         if (!s.options.timeline) return [];
+        const hold = s.fate.anchorTurn === s.turn ? 1 : 0;   // Anchor: this End turn does not count
         return [0, 1].map(offset => {
-            const turns = s.fate.until + offset * s.options.fateGap;
+            const turns = s.fate.until + hold + offset * s.options.fateGap;
             const reset = (s.fate.events + offset) % 2 === 1;
             const top = s.axioms.deck[0] || s.axioms.discard[0];
             return {
@@ -494,6 +504,7 @@
                 else list.push({ type: 'activate', player: p, cid, ability: a.id });
             });
         });
+        if (P.bag && P.bag.length) itemActions(s, p).forEach(a => list.push(a));
         return list;
     }
 
@@ -607,6 +618,7 @@
                 deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], discard: [],
                 playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [],
                 consumables: Object.assign({}, cons),
+                bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
             });
         });
 
@@ -634,7 +646,7 @@
     // ---- applying actions ------------------------------------------------------------------
 
     function actionKey(a) {
-        return [a.type, a.cid || '', a.target || '', a.choice == null ? '' : a.choice, a.ability || ''].join('|');
+        return [a.type, a.cid || '', a.target || '', a.choice == null ? '' : a.choice, a.ability || ''].join('|') + (a.type === 'item' ? '|' + a.id : '');
     }
 
     function applyAction(state, action) {
@@ -657,6 +669,7 @@
             case 'attack': doAttack(G, match.cid, match.target); break;
             case 'activate': doActivate(G, match.cid, match.ability, match.target || null); break;
             case 'spark': doSpark(G); break;
+            case 'item': doItem(G, match.id, match.target || null); break;
             case 'end': endTurn(G); break;
             case 'choose': resolveChoice(G, match.choice); break;
             default: throw new Error('Unknown action ' + match.type);
@@ -818,9 +831,11 @@
         P.turnsTaken += 1;
         s.roundTurns[p] = true;
         if (s.winner != null) return;
+        const anchored = s.fate.anchorTurn === s.turn;   // the Anchor item was used this turn
         s.turn += 1;
         s.active = 1 - p;
-        shiftFate(G, 1);
+        if (anchored) emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move.' });
+        else shiftFate(G, 1);
         if (s.winner == null) startTurn(G);
     }
 
@@ -1085,6 +1100,72 @@
         c.damage = before >= max ? 0 : max - before;
     }
 
+    // ---- the Bag: items brought into the battle ------------------------------------------------
+    // Item battle jobs live in data/items.js (`battle: { cost, target?, filter?, text, usable?, why?,
+    // noTarget?, run(api, p, target) }`). One item per turn per player; used items leave the bag.
+
+    const BAG_LIMIT = 2;
+    const itemName = id => ((Rift.data.items || {})[id] || {}).name || id;
+
+    // Known item ids with a battle job, at most BAG_LIMIT.
+    function bagSelection(list) {
+        return (list || []).filter(id => battleItem(id)).slice(0, BAG_LIMIT);
+    }
+
+    // The item actions player p may take now (main phase, no item used yet this turn).
+    function itemActions(s, p) {
+        const P = s.players[p];
+        if (s.winner != null || s.phase !== 'main' || s.active !== p || !P.bag || P.itemTurn === s.turn) return [];
+        const out = [];
+        Array.from(new Set(P.bag)).forEach(id => {
+            const def = battleItem(id);
+            if (!def || def.cost > P.energy || (def.usable && !def.usable(s, p, H))) return;
+            if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => out.push({ type: 'item', player: p, id, target }));
+            else out.push({ type: 'item', player: p, id });
+        });
+        return out;
+    }
+
+    // One entry per item kind in p's bag, for the Bag tray: { id, name, text, cost, target, count,
+    // ok, why: '' | 'turn' | 'draw' | 'busy' | 'used' | 'energy' | 'useless' | 'target', note }.
+    function bagStatus(s, p) {
+        const P = s.players[p];
+        const counts = {};
+        (P.bag || []).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+        return Object.keys(counts).map(id => {
+            const def = battleItem(id);
+            const pick = x => (typeof x === 'function' ? x(s, p, H) : x);
+            let why = '', note = '';
+            if (s.winner != null || s.active !== p) { why = 'turn'; note = 'Wait for your turn.'; }
+            else if (s.phase === 'draw') { why = 'draw'; note = 'First choose your draw.'; }
+            else if (s.phase !== 'main') { why = 'busy'; note = 'First answer the question.'; }
+            else if (P.itemTurn === s.turn) { why = 'used'; note = 'You already used an item this turn.'; }
+            else if (def.cost > P.energy) { why = 'energy'; note = 'It needs ' + def.cost + ' energy. You have ' + P.energy + '.'; }
+            else if (def.usable && !def.usable(s, p, H)) { why = 'useless'; note = pick(def.why) || 'It would do nothing now.'; }
+            else if (def.target && !targetsFor(s, def.target, p, def.filter, null).length) { why = 'target'; note = pick(def.noTarget) || 'It has no target right now.'; }
+            return { id, name: itemName(id), text: def.text, cost: def.cost, target: def.target || null, count: counts[id], ok: !why, why, note };
+        });
+    }
+
+    function doItem(G, id, target) {
+        const s = G.s, p = s.active, P = s.players[p], def = battleItem(id);
+        spend(G, def.cost);
+        const i = P.bag.indexOf(id);
+        P.bag = P.bag.slice(0, i).concat(P.bag.slice(i + 1));
+        P.itemsUsed = P.itemsUsed.concat([id]);
+        P.itemTurn = s.turn;
+        emit(G, { t: 'item-use', player: p, id, target, text: says(s, p, 'uses') + ' the ' + itemName(id) + (target ? ' on ' + logName(s, target) : '') + '.' });
+        def.run(api(G), p, target);
+        afterMove(G);
+    }
+
+    // { id: n } for the items player p used in this battle (the caller removes them from the save).
+    function itemsUsed(s, p) {
+        const out = {};
+        (s.players[p].itemsUsed || []).forEach(id => { out[id] = (out[id] || 0) + 1; });
+        return out;
+    }
+
     // A random team of n instances, weighted by rarity (for the simulator and bench).
     function randomTeam(rng, n, opts) {
         const o = opts || {};
@@ -1119,5 +1200,6 @@
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, H,
+        BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,
     };
 })(typeof window !== 'undefined' ? window : globalThis);
