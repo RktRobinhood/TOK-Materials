@@ -357,12 +357,112 @@ Shared prompt start: "On a transparent background (PNG), no text, letters or num
 
 > On a transparent background (PNG), no text, letters or numbers, wide clear gaps, each element one connected roughly square vignette, same size as the attached axiom vignettes. Three rows of four, left to right. **Row 1:** one small sword (one attack per turn); two small crossed swords (two attacks per turn); three small swords fanned out (back to normal); a small smiling heart resting safely at the end of an hourglass, with a reversed arrow around it (own zero hearts wins). **Row 2:** two heart shields facing each other with a forward arrow between them (back to the goal); a small plain cloth purse with one crystal (cheaper); an ornate purse overflowing with crystals (costlier); two new teal crystals growing from a gold stem (energy grows faster). **Row 3:** two blank cards beside a small open book (draw two); a sleeping creature under a blanket with a bandage falling away (rest and recover); a creature with a bandage still on, sitting patiently (wounds remain); a small paw stepping from a blank card onto a bright stone (ready on arrival). Match the attached style board.
 
-### 10.6 Arena backdrop (priority 3, optional)
+### 10.6 Arena backdrop (replaced by 11.1a: skip)
 
 **Attach:** `style-board.png`, the current `battle-table.png`
 **Save as:** `2-world/arena.png`
 
 > A 16:9 painted background (at least 1920×1080), no characters, cards, text or UI. The same lantern-lit card table seen from slightly above: a darker opponent half at the top, the player's half at the bottom, and a calm, clearly empty horizontal lane across the middle for a timeline. Decoration only at the edges; the right fifth stays dark and quiet for a rules panel. Match the attached battle table.
+
+## Stage 11: Card Arena expansion (7 October 2026)
+
+The plan is `design/card-arena-expansion-2026-10-07.md`; what other card battlers ship is in `design/reviews/card-battler-research-2026-10-07.md` (section 3). Run these one image at a time from `ASSET-SESSION.md`. Same rules as Stage 10: never bake words, numbers or rules into an image. Slicing is already configured in `tools/assets/sheets.json`. Ids marked *(code next)* are not drawn by the game yet; they are safe to make now, and the game shows them once the code lands.
+
+Every arena board starts with this layout paragraph (already included in 11.1a; paste it at the start of 11.1b–d):
+
+> A 16:9 painted background (at least 1920×1080), no characters, cards, text or UI. Seen from slightly above, a card table split into two halves: a darker opponent half at the top and the player's half at the bottom, with a calm, clearly empty horizontal lane across the exact middle (a timeline runs there). The middle 70% of the width must be flat, evenly lit and uncluttered, because cards are laid on it; decoration and props only along the outer edges and corners. The right edge stays a little darker and quieter (a rules panel slides in there). Match the attached style board.
+
+### 11.1 Lesson boards (priority 1 for lesson 1, then one per lesson)
+
+**Attach:** `style-board.png`, `battle-table.png`, plus the lesson's own background named below.
+**Save as:** `2-world/arena-l1.png`, `2-world/arena-l2.png`, `2-world/arena-l3.png`, `2-world/arena-l4.png` (four requests). 11.1a replaces the optional 10.6.
+
+> **11.1a, lesson 1, the Fair** (also attach `fair.png`): A 16:9 painted background (at least 1920×1080), no characters, cards, text or UI. Seen from slightly above, a card table split into two halves: a darker opponent half at the top and the player's half at the bottom, with a calm, clearly empty horizontal lane across the exact middle (a timeline runs there). The middle 70% of the width must be flat, evenly lit and uncluttered, because cards are laid on it; decoration and props only along the outer edges and corners. The right edge stays a little darker and quieter (a rules panel slides in there). Match the attached style board. Granny's old card table at the fairground at dusk: worn green baize inlaid in dark wood, a faint carved ring border, the middle lane a slightly darker strip of baize. At the edges: a knitted tea cosy and teapot, a small brass bell, a pocket watch, fairground bunting and lantern light spilling in from the top corners, a glimpse of striped tent canvas.
+
+> **11.1b, lesson 2, Boolesbury** (also attach `village-square.png`, `switch-room.png`): *(layout paragraph)* Boole's workshop bench at night: a big flat brass-edged board of dark polished wood, the middle lane a thin inlaid brass rail. At the edges: little gears, a brass lever, an unlit Edison bulb, a candle, an ink pot and quill, rolled blueprints with only lines on them, the purple rift glowing through a round window in a top corner.
+
+> **11.1c, lesson 3, Tomorrowton** (also attach `tribunal.png`): *(layout paragraph)* The Tribunal's evidence table: dark glossy wood with thin cyan and violet neon trim along the border, the middle lane a softly glowing glass strip. At the edges: a gavel on its block, a stack of evidence folders, a magnifying glass, a tiny scales ornament, a floating hologram screen with only abstract shapes, neon city light from the top corners.
+
+> **11.1d, lesson 4, the Server Tower** (also attach `core-chamber.png`): *(layout paragraph)* A table in the Algorithm's core: a dark slab with faint circuit-line inlays that glow red on the opponent half and cyan on the player's half, the middle lane a calm violet light seam. At the edges: a pair of dice, a few gold coins, a small armillary sphere, a cooling fan, coiled cables, violet vortex glow from the top corners. Calm, not busy: the circuit lines are faint.
+
+### 11.2 Colour tactic frames (priority 1)
+
+**Attach:** `style-board.png`, `card-frames.png`, `arena-frames.png`
+**Save as:** `5-ui/tactic-frames.png`
+**Ids:** `ui/card-tactic-reason`, `-emotion`, `-perception`, `-language`, `-imagination`, `-memory`
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every frame and an empty margin at the edges; each frame is one connected shape. Six portrait card frames (5:7) in one row, exactly the same shape and layout as the copper-and-teal tactic frame on the attached sheet (an empty, see-through art window in the top two thirds, an empty text panel below), but each in a different main colour with the matching corner emblem from the attached card frames, left to right: **blue with a compass**, **red with a flame-heart**, **green with an eye**, **gold with a quill**, **violet with a spiral star**, **silver with an hourglass**. Keep the small gear-and-scroll detail of the tactic frame on all six so they still read as tactic cards, not creature cards. Match the attached style board.
+
+### 11.3 Colour tactic art (priority 1)
+
+**Attach:** `style-board.png`, `tactics-1.png`
+**Save as:** `5-ui/tactics-3.png` and `5-ui/tactics-4.png` (two requests)
+
+Shared prompt start: "On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, roughly square vignette of the same size as the attached tactic vignettes (no humans; creatures only if any). Match the attached style board."
+
+> **tactics-3, two rows of three, left to right:** **1, Proof by Contradiction (blue):** a little house of cards collapsing as one card at the bottom slides out, a cool blue glow. **2, Step by Step (blue):** a spiral staircase of blue glowing stones climbing upward, a tiny lantern on each step. **3, Rally Cry (red):** a red banner on a pole streaming like a flame, warm sparks flying. **4, Gut Reaction (red):** a red flame-heart firing one quick spark-arrow. **5, Look Closer (green):** a green-rimmed magnifying glass over a leaf, revealing a tiny hidden beetle. **6, Field Notes (green):** an open field sketchbook with a drawn bird (lines only), a pressed leaf and a small roll of bandage.
+
+> **tactics-4, two rows of three, left to right:** **1, Label It (gold):** a gold luggage tag with a blank face, tied with string onto a small grumpy rock. **2, Rousing Speech (gold):** a little golden lectern with sound waves rising from it as golden ribbons. **3, Imagine Otherwise (violet):** a violet hand mirror in which a small sword's reflection is a heart. **4, Daydream (violet):** a little paper boat sailing on a violet cloud among stars. **5, Déjà Vu (silver):** two identical silver keys overlapping like a double exposure, with a faint echo trail. **6, Nostalgia (silver):** an open silver music box with a winding key, little memory bubbles floating out.
+
+### 11.4 Battle effects (priority 2)
+
+**Attach:** `style-board.png`, `arena-icons.png`
+**Save as:** `5-ui/battle-fx.png`
+**Ids:** `fx/damage`, `fx/heal`, `fx/buff`, `fx/shield-bubble`, `fx/shield-break`, `fx/poof`, `fx/frost-frame`, `fx/guard-frame`, `fx/silence` *(code next: CSS effects until then)*
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape (no loose sparkles floating free). Battle effect sprites in exactly two rows, left to right. **Row 1, five round effects of the same size:** a jagged orange-red impact burst with a plain lighter centre (a number goes on top); a soft green burst of leaves and plus-shaped sparkles with a plain centre (healing); a gold upward arrow made of light (power up); a round pale-cyan bubble ring, see-through in the middle (shield); the same bubble cracking into a ring of large shards that still touch each other (shield breaks). **Row 2, left to right:** a round puff of lilac smoke (creature defeated; a solid round cloud); then three card-shaped overlays (5:7), each only a border with a completely empty, transparent centre: a frost border of ice crystals; a heavy stone shield-wall border with a gold rim (Guard); a border of soft grey fog with a small closed padlock at the bottom (silenced). Match the attached style board.
+
+### 11.5 Bag, coins and piles (priority 2)
+
+**Attach:** `style-board.png`, `items.png`, `arena-icons.png`
+**Save as:** `5-ui/arena-extras.png`
+**Ids:** `ui/bag`, `ui/glimmer`, `ui/glimmer-pile`, `ui/price-tag`, `ui/sold`, `ui/deck-pile`, `ui/discard-pile`, `ui/keepsake`
+
+> On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape. Small game icons, same finish as the attached item icons, readable at 32 pixels, in exactly two rows, left to right. **Row 1:** a battered leather satchel with a buckle, slightly open (the bag); one small glowing cyan spark-crystal coin with a gold rim (the currency); a little heap of the same coins; a blank brown paper price tag on a string; a red wax seal stamped with a ring shape crossed by a line (sold). **Row 2:** a neat stack of face-down cards with the magenta rift-swirl back (deck); a messy pile of face-down cards, slightly greyed (discard); a small carved wooden keepsake box with a glowing keyhole (keepsake). Match the attached style board.
+
+### 11.6 The vendor: Hagglesworth (priority 3, for the shop and Rift Run)
+
+**Attach:** `style-board.png`, `granny-axiom.png`
+**Save as:** `3-cast/hagglesworth.png`
+**Ids:** `npc/vendor/idle`, `npc/vendor/neutral` (also `npc/vendor`), `npc/vendor/happy`, `npc/vendor/sly`, `npc/vendor/surprised` *(code next)*
+
+> One transparent canvas, no text, clear space between figures. A full-body idle pose, then four head-and-shoulders busts: neutral, happy, sly (haggling, one eye half-closed, a claw raised), surprised. Match the attached style board exactly, with the clear outlines and simple cel shading of the avatar sheets. **Hagglesworth:** a friendly old hermit crab whose shell is a tiny wooden travelling shop: a striped awning, little shelves with jars, scrolls and cards, a hanging lantern and a bell. A patched apron, round spectacles on a chain, one big claw and one small careful claw. Cheerful and a little crafty, never greedy-looking. In the busts the shop shell shows behind the head.
+
+### 11.7 The vendor's stall and new map markers (priority 3)
+
+**Attach:** `style-board.png`, `stall-pattern.png`, `map-markers.png`
+**Save as:** `2-world/shop.png` and `5-ui/map-markers-2.png` (two requests)
+**Ids:** `scene/shop`; `ui/marker-shop`, `ui/marker-elite`, `ui/marker-event`, `ui/marker-treasure` *(code next)*
+
+> **shop.png:** A wide 16:9 painted background, at least 1672×941, no characters and no text. Match the attached style board. A cosy roadside trading spot at dusk where a travelling hermit-crab pedlar has set up: a patchwork rug on the ground, a low wooden counter in the middle, three empty shelves behind it (goods are drawn by the game), hanging lanterns, a little signboard with no writing, the forest road behind. Keep the counter and shelves evenly lit and empty; the lower left third stays open for the player's character.
+
+> **map-markers-2.png:** Four gold-rimmed medallions in one row, exactly the same size and finish as the attached map markers, on a transparent background (PNG), no text, wide clear gaps between them: **1,** a little striped shop awning over a coin (shop); **2,** a horned helm with a single red flame above it, smaller and simpler than the boss crown (elite fight); **3,** a curl of glowing smoke shaped like a question mark, with no actual letter or symbol (event); **4,** a small open treasure chest with a cyan glow (treasure).
+
+### 11.8 Keepsakes (priority 4: only if the Rift Run is approved)
+
+**Attach:** `style-board.png`, `arena-extras.png`
+**Save as:** `5-ui/keepsakes.png`
+**Ids:** `keepsake/thrifty-quill`, `keepsake/stone-shield`, `keepsake/spark-jar`, `keepsake/lucky-die`, `keepsake/old-compass`, `keepsake/warm-scarf`, `keepsake/tea-flask`, `keepsake/rift-shard` *(code next; working names)*
+
+> On a transparent background (PNG), no text, letters or numbers, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape. Eight small trinket icons, same size and finish as the attached icons, in two rows of four, left to right: a quill with a tiny coin on its tip; a small stone shield charm on a cord; a glass jar holding one golden spark (solid-looking glass); a six-sided die with only dots, glowing faintly; an old brass compass; a short knitted red scarf tied in a knot; a little tin tea flask with steam; a sharp cyan rift crystal set in silver. Match the attached style board.
+
+### 11.9 Lesson card backs (priority 4, cosmetic rewards)
+
+**Attach:** `style-board.png`, `card-frames.png`
+**Save as:** `5-ui/card-backs.png`
+**Ids:** `ui/card-back-l1`, `ui/card-back-l2`, `ui/card-back-l3`, `ui/card-back-l4` *(code next)*
+
+> On a transparent background (PNG), no text, letters or numbers, wide clear gaps, each one connected shape: four portrait card backs (5:7) in one row, the same frame shape as the attached card back, symmetrical: **1,** magenta with gold fairground bunting and a carousel star; **2,** deep navy with brass gears and a lit bulb; **3,** black glass with cyan-and-violet neon scales; **4,** dark red with a ring of glowing dice around a violet vortex. Match the attached style board.
+
+### 11.10 Board creature medallion (priority 4, needs a layout change first)
+
+Only if the teacher wants creatures on the board to look like round tokens instead of small cards (closer to the familiar battlers). Ask Claude to change the board code first.
+
+**Attach:** `style-board.png`, `arena-frames.png`
+**Save as:** `5-ui/board-token.png`
+**Ids:** `ui/board-token`, `ui/board-token-legendary` *(code next)*
+
+> On a transparent background (PNG), no text, letters or numbers, wide clear gaps: two upright oval portrait frames side by side, the centre completely empty and transparent, with two round empty sockets on the lower rim (left and right) where attack and health gems sit. **Left:** dark wood with a thin gold rim. **Right:** the same with a golden laurel and a small gem at the top (legendary). Match the attached style board.
 
 ---
 
