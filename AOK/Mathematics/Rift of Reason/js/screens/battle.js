@@ -2002,7 +2002,8 @@
         // its rule card is shown big with what would happen, and Granny says why. The step stays.
         function springTrap(trap) {
             ui.sel = null;
-            ui.hinted = true;
+            const st = step();
+            if (st && st.open && (ui.hintLevel || 0) < 1) setTimeout(() => giveHint(st, 1), 0);
             ui.trapSaid = { step: ui.step, text: trap.say };
             showReveal(el('div.b-reveal-rule', {}, [trap.card ? axiomCardEl(trap.card, { size: 'big' }) : null, el('div.b-reveal-what', { text: trap.what })]), trap.title || 'Careful!', RULE_SHOW, 'rule trap', false);
             ui.holding = false;   // the learner may act again at once
@@ -2011,21 +2012,29 @@
         }
         // An open lesson step ({ open, hint }): no gold pointer at first, so the learner decides. The
         // hint (and the pointer) come after HINT_AFTER ms, or at once after the step's trap.
-        const HINT_AFTER = 25000;
+        const HINT_AFTER = 40000, HINT2_AFTER = 25000;
+        function sayHint(text) {
+            try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text, voice: Rift.voiceId ? Rift.voiceId('granny', text) : null }); } catch (e) { /* no voice */ }
+        }
+        // Level 1 shows the idea; level 2 (or a step without hint2) also shows the gold pointer.
+        function giveHint(st, level) {
+            if (ui.ended || step() !== st || (ui.hintLevel || 0) >= level) return;
+            ui.hintLevel = level;
+            ui.hinted = level >= 2 || !st.hint2;
+            render();
+            sayHint(level >= 2 ? st.hint2 : st.hint);
+            if (level < 2 && st.hint2) { clearTimeout(ui.hintTimer); ui.hintTimer = setTimeout(() => giveHint(st, 2), HINT2_AFTER); }
+        }
         function startHintClock() {
             clearTimeout(ui.hintTimer);
             ui.hinted = false;
+            ui.hintLevel = 0;
             const st = step();
             if (!st || !st.open) return;
-            ui.hintTimer = setTimeout(() => {
-                if (ui.ended || step() !== st || ui.hinted) return;
-                ui.hinted = true;
-                render();
-                try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: st.hint, voice: Rift.voiceId ? Rift.voiceId('granny', st.hint) : null }); } catch (e) { /* no voice */ }
-            }, HINT_AFTER);
+            ui.hintTimer = setTimeout(() => giveHint(st, 1), HINT_AFTER);
         }
-        // The text Granny shows for a step: an open step adds its hint once it is due.
-        const stepText = st => st.text + (st.open && ui.hinted && st.hint ? ' ' + st.hint : '');
+        // The text Granny shows for a step: an open step adds its hints once they are due.
+        const stepText = st => st.text + (st.open && ui.hintLevel >= 1 && st.hint ? ' ' + st.hint : '') + (st.open && ui.hintLevel >= 2 && st.hint2 ? ' ' + st.hint2 : '');
         // A narration line between replies: shown in Granny's panel and spoken; the lesson goes on
         // when the voice ends (at least a reading pause, at most 12 s).
         function narrate(text) {
@@ -2696,6 +2705,7 @@
                 const outro = guide.outro || 'Same table, different rules, different endings. In maths, the rules you start from are called axioms.';
                 body.push(el('div.b-outro', {}, [speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null, el('p', { text: outro })]));
                 body.push(el('p.small', { text: 'Real matches start with ' + E.DEFAULTS.hearts + ' hearts each. Read the rule tiles before you attack!' }));
+                if (guide.next) body.push(el('p.small', { text: guide.next }));
                 try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: outro, voice: Rift.voiceId ? Rift.voiceId('granny', outro) : null }); } catch (e) { /* no voice */ }
             } else if (mode === 'practice') {
                 body.push(el('p', { text: p.story ? 'Story challenge: nothing at stake. Your creatures and items are safe.' : 'Practice: nothing at stake. Your creatures are safe.' }));

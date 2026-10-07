@@ -70,8 +70,8 @@ test('the guided lesson runs on the real battle screen, step by step, to a win',
         assert.match(t.$('.b-coach').textContent, new RegExp('Step ' + (i + 1) + ' of ' + L.steps.length));
         assert.ok(t.root.querySelector('.guide-focus'), 'step ' + i + ' highlights something');
         // An open step (the learner decides) speaks its hint later: the test's timer flush gets there.
-        assert.equal(t.spoken.at(-1).text, step.open ? step.hint : step.text);
-        assert.equal(t.spoken.at(-1).voice, t.Rift.voiceId('granny', step.open ? step.hint : step.text));
+        assert.equal(t.spoken.at(-1).text, step.open ? step.hint2 || step.hint : step.text);
+        assert.equal(t.spoken.at(-1).voice, t.Rift.voiceId('granny', step.open ? step.hint2 || step.hint : step.text));
         if (step.compare) {
             // Same cards, different rule: under the basic rules Astrophysicat falls; under Underdog it is safe.
             const text = t.$('.b-compare').textContent;

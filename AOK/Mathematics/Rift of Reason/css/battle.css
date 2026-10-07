@@ -988,3 +988,9 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 
 .b-compare { font-size: 14px; }
 .b-ask { font-size: 14px; }
+
+/* Lesson: the draw pointer sits under its button (above, it covered the NOW tag); larger small text. */
+.b-draw .guide-pointer { bottom: auto; top: calc(100% + 6px); }
+.b-rtile-cat { font-size: 11.5px; }
+.b-notes { font-size: 14px; }
+.b-coach { max-height: 46vh; }
