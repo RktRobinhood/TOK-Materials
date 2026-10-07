@@ -156,32 +156,48 @@
         const decks = (Rift.data || {}).tacticDecks || { starter: [] };
         return Array.from(new Set(decks.starter.concat(s.tactics || []))).filter(id => known[id]);
     }
-    // Colour tactics (data/tactics.js tacticDecks.colour): a colour's two unlock the first time the
-    // player owns a creature (or trophy copy) of that colour. Adds them to save.tactics and returns
-    // the ids that are new (in the order the colours were first met). Old saves get theirs on load.
+    // Colour tactics (data/tactics.js tacticDecks.colour, [common, uncommon, rare] per colour): the
+    // COMMON unlocks the first time the player owns a creature (or trophy copy) of that colour. Adds it
+    // to save.tactics and returns the ids that are new. Old saves get theirs on load (migrate).
     function unlockColourTactics(save) {
         const s = save || current;
         if (!s) return [];
         const byColour = ((Rift.data || {}).tacticDecks || {}).colour || {};
-        const known = (Rift.data || {}).tactics || {};
         const creatures = (Rift.data || {}).creatures || {};
-        if (!Array.isArray(s.tactics)) s.tactics = [];
         const fresh = [];
         (s.creatures || []).concat(s.trophies || []).forEach(inst => {
             const sp = inst && creatures[inst.species];
-            (sp && byColour[sp.colour] || []).forEach(id => {
-                if (known[id] && !s.tactics.includes(id)) { s.tactics.push(id); fresh.push(id); }
-            });
+            const common = sp && (byColour[sp.colour] || [])[0];
+            if (common && grantTactic(common, s)) fresh.push(common);
         });
         return fresh;
+    }
+    // Gives the player a tactic to use in decks (vendor, quests, Rift Run, trainer rewards…).
+    // Returns true when it is new. Does not save; use inside State.update or on a save object.
+    function grantTactic(id, save) {
+        const s = save || current;
+        if (!s || !((Rift.data || {}).tactics || {})[id]) return false;
+        if (!Array.isArray(s.tactics)) s.tactics = [];
+        if (s.tactics.includes(id) || ownedTactics(s).includes(id)) return false;
+        s.tactics.push(id);
+        return true;
     }
     // The chosen tactic cards (owned, ≤2 copies each), else the starter ten.
     function deckTactics(save) {
         const s = save || current || {};
         const owned = ownedTactics(s);
         const counts = {};
-        const chosen = (s.deckTactics || []).filter(id => owned.includes(id) && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, 14);
+        // Colour identity: a colour tactic needs a creature of its colour in the battle team.
+        const colours = teamColours(battleTeam(s));
+        const known = (Rift.data || {}).tactics || {};
+        const fits = id => !(known[id] && known[id].colour) || colours.has(known[id].colour);
+        const chosen = (s.deckTactics || []).filter(id => owned.includes(id) && fits(id) && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, 14);
         return chosen.length ? chosen : (((Rift.data || {}).tacticDecks || {}).starter || []).slice();
+    }
+    // The colours of these creature instances (for the colour identity of colour tactics).
+    function teamColours(team) {
+        const creatures = (Rift.data || {}).creatures || {};
+        return new Set((team || []).map(x => x && (creatures[x.species] || {}).colour).filter(Boolean));
     }
 
     // Deck rule for the Collection builder: creatures + tactics = 20, 6–14 of each.
@@ -392,6 +408,8 @@
         battleTeam,
         ownedTactics,
         unlockColourTactics,
+        grantTactic,
+        teamColours,
         deckTactics,
         checkDeck,
         DECK_SIZE,

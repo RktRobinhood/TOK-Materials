@@ -36,6 +36,7 @@
  * steps[i].replies run one by one with a visible pause, then the next step starts.
  *
  * Optional art (each falls back to CSS): ui/card-<colour>, ui/card-axiom, ui/card-tactic,
+ * ui/card-tactic-<colour> (colour tactics; else the CSS frame tinted), ui/icon-<colour> (their emblem),
  * tactic/<id>, ui/card-back, ui/axiom-back, ui/axiom-<id>, ui/stat-attack, ui/stat-health,
  * ui/stat-cost, ui/energy-full, ui/energy-empty, ui/kw-<keyword>, ui/state-sleeping,
  * ui/state-frozen, ui/ab-entrance, ui/ab-lastword, ui/ab-activate, ui/spark, ui/end-turn,
@@ -83,6 +84,11 @@
         counterexample: '✗', 'pep-talk': '📣', 'stand-firm': '🛡️', eureka: '💡', 'second-wind': '❤', 'occams-razor': '🪒',
         rethink: '↺', 'big-claims': '⚖️', clockwork: '⏱', 'look-it-up': '🔎', 'peer-review': '👥', recall: '📜',
         'pause-for-thought': '⏸', 'safety-net': '🕸️', lemma: '📐',
+        // colour tactics
+        'proof-by-contradiction': '⊥', 'step-by-step': '👣', 'rally-cry': '📯', 'gut-reaction': '⚡', 'look-closer': '🔍',
+        'field-notes': '📓', 'label-it': '🏷️', 'rousing-speech': '🎤', 'imagine-otherwise': '🔄', daydream: '☁️',
+        'remember-when': '📷', nostalgia: '🕰️',
+        qed: '∎', 'wave-of-feeling': '🌊', 'clear-view': '🔭', persuasion: '🤝', 'dream-big': '🌈', 'total-recall': '🧠',
     };
     const DRAW_TEXT = {
         deck: ['Draw from your deck', 'A creature or tactic card'],
@@ -366,6 +372,8 @@
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
                 if (c.kind === 'creature' && P.board.length >= state.options.boardLimit) return 'Your side is full.';
+                const tdef = c.kind === 'tactic' ? (Rift.data.tactics || {})[c.tactic] : null;
+                if (tdef && tdef.colour && !E.colourInPlay(state, ME, tdef.colour)) return needsText(tdef.colour);
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
@@ -503,16 +511,33 @@
 
         function tacticFace(cid, size) {
             const d = E.describe(state, cid);
-            const frame = bg('ui/card-tactic');
+            // A colour tactic: its own frame art if painted, else the CSS frame tinted to the colour.
+            const frame = d.colour ? bg('ui/card-tactic-' + d.colour) : bg('ui/card-tactic');
             const art = has('tactic/' + d.id) ? Rift.Assets.img('tactic/' + d.id, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
-                el('div.bc-name', { text: d.name }),
-                el('div.bc-text', {}, [size === 'big' ? null : el('div.bc-kind', { text: 'Tactic' }), el('div.bc-line', { text: d.text })]),
+                d.colour ? colourEmblem(d.colour, d.colourReady) : null,
+                el('div.bc-name', { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
+                el('div.bc-text', {}, [
+                    size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
+                    size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
+                    el('div.bc-line', { text: d.text }),
+                    d.colour && !d.colourReady && state.cards[cid].controller === ME ? el('div.bc-need', { text: needsText(d.colour) }) : null,
+                ]),
             ];
+        }
+        // "Reason · uncommon" under the name of a colour tactic.
+        const tacticKind = d => (Rift.COLOURS[d.colour] || { name: d.colour }).name + (d.rarity ? ' · ' + d.rarity : '');
+        // A colour tactic is played only while you control a creature of its colour.
+        const needsText = colour => { const C = Rift.COLOURS[colour] || { colour, name: colour }; return 'Needs a ' + C.colour + ' (' + C.name + ') creature in play.'; };
+        // The colour's emblem in the card's top corner; lit while a creature of that colour is in play.
+        function colourEmblem(colour, on) {
+            const C = Rift.COLOURS[colour] || {};
+            return el('div.bc-emblem' + (on ? '.on' : ''), { title: (C.name || colour) + ' tactic', 'aria-hidden': 'true' },
+                [has('ui/icon-' + colour) ? Rift.Assets.img('ui/icon-' + colour, { alt: '' }) : el('span', { text: C.icon || '◆' })]);
         }
 
         function axiomFace(id, size) {
@@ -543,10 +568,11 @@
             const size = o.size || 'board';
             const kind = c.kind === 'tactic' ? 'tactic' : 'creature';
             const colour = kind === 'creature' ? E.colourOf(state, c) : 'tactic';
+            const tcolour = kind === 'tactic' ? ((Rift.data.tactics || {})[c.tactic] || {}).colour : null;
             const clickable = !!o.onclick;
             const node = el((clickable ? 'button' : 'div') + '.bc.' + kind + '.' + size, {
                 type: clickable ? 'button' : null,
-                dataset: { cid, colour },
+                dataset: tcolour ? { cid, colour, tcolour } : { cid, colour },
                 'aria-label': cardLabel(cid),
             }, kind === 'tactic' ? tacticFace(cid, size) : creatureFace(cid, size));
             if (o.target) node.dataset.target = cid;
@@ -564,8 +590,14 @@
             const big = cardEl(cid, { size: 'big' });
             if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
             const d = E.describe(state, cid);
+            const C = d.colour ? Rift.COLOURS[d.colour] || { name: d.colour } : null;
+            const mine = state.cards[cid].controller === ME;
             return [big, el('div.b-notes', {}, [
+                C ? el('div.b-notes-tags', {}, [colourChip(d.colour)]) : null,
                 el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
+                C ? el('div.b-note-line', {}, [el('b', { text: C.name + ' tactic' + (d.rarity ? ' (' + d.rarity + ')' : '') + ': ' }),
+                    'it can only be played while you control a ' + C.colour + ' (' + C.name + ') creature. '
+                    + (mine ? (d.colourReady ? 'You do now.' : 'You don\'t right now.') : '')]) : null,
                 d.flavour ? el('div.b-note-line.b-flavour', { text: d.flavour }) : null,
             ])];
         }
@@ -599,7 +631,8 @@
         function cardLabel(cid) {
             const c = state.cards[cid];
             const d = E.describe(state, cid);
-            if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text;
+            if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text
+                + (d.colour ? ' ' + tacticKind(d) + '.' + (d.colourReady ? '' : ' ' + needsText(d.colour)) : '');
             return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
                 + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '');
         }

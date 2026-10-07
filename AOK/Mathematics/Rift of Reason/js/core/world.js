@@ -41,6 +41,20 @@
 
     // First win against a trainer: one Trick Book and, if any is left to earn, one tactic
     // (the trainer's own reward tactic first). Returns { items, tactic } or null if already claimed.
+    // The uncommon colour tactic (data/tactics.js tacticDecks.colour[c][1]) of the colour most of the
+    // trainer's team has, if not owned yet.
+    function trainerUncommon(t, owned) {
+        const byColour = (Rift.data.tacticDecks || {}).colour || {};
+        const counts = {};
+        (t.team || []).forEach(sp => { const c = ((Rift.data.creatures || {})[sp] || {}).colour; if (c) counts[c] = (counts[c] || 0) + 1; });
+        const order = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+        for (const c of order) {
+            const id = (byColour[c] || [])[1];
+            if (id && (Rift.data.tactics || {})[id] && !owned.includes(id)) return id;
+        }
+        return null;
+    }
+
     function claimTrainerReward(state, trainerId) {
         const key = 'trainer-reward:' + trainerId;
         const t = (Rift.data.trainers || {})[trainerId];
@@ -50,7 +64,9 @@
         if (!Array.isArray(state.tactics)) state.tactics = [];
         const owned = Rift.State.ownedTactics(state);
         const earned = ((Rift.data.tacticDecks || {}).earned || []).filter(id => (Rift.data.tactics || {})[id]);
-        const tactic = [t.rewardTactic].concat(earned).find(id => id && earned.includes(id) && !owned.includes(id)) || null;
+        let tactic = [t.rewardTactic].concat(earned).find(id => id && earned.includes(id) && !owned.includes(id)) || null;
+        // Every earned tactic owned already: the uncommon colour tactic of the trainer's main colour.
+        if (!tactic) tactic = trainerUncommon(t, owned);
         if (tactic) state.tactics.push(tactic);
         return { items: { 'trick-book': 1 }, tactic };
     }

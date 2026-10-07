@@ -23,6 +23,8 @@
  *   changedAxioms(state) → only the active rule cards that change a basic rule
  *   cardName(state, cid) → plain name;  logName(state, cid) → "your X" / "Anna's X" when both boards have an X
  *   colourOf(state, card) → its colour for spotlights and the wheel; 'none' for a colourless (nicknamed) creature
+ *   colourInPlay(state, p, colour) → p controls a creature of that colour (a colour tactic needs it to be played)
+ *   identityFilter(tacticIds, team) → { kept, dropped }: colour tactics need a creature of their colour in the deck
  *
  * activations(state, cid) lists every paid ability (with `usable`); legalActions offers only usable ones,
  * and leaves out tactics whose `usable` hook says they would certainly fizzle.
@@ -381,7 +383,7 @@
         if (c.kind === 'tactic') {
             const t = tacticDefs()[c.tactic] || {};
             return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, flavour: t.flavour, target: t.target || null,
-                colour: t.colour || null, inTuneText: t.inTune || null, inTune: !!t.colour && inTune(s, c.controller, t.colour) };
+                colour: t.colour || null, rarity: t.rarity || null, colourReady: !t.colour || colourInPlay(s, c.controller, t.colour) };
         }
         const sp = species(c.species) || {};
         const defs = abilityDefs();
@@ -484,6 +486,7 @@
                 const def = tacticDefs()[c.tactic];
                 if (!def) return;
                 if (def.usable && !def.usable(s, p, H)) return;
+                if (def.colour && !colourInPlay(s, p, def.colour)) return; // colour identity: needs that colour in play
                 if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => list.push({ type: 'play', player: p, cid, target }));
                 else list.push({ type: 'play', player: p, cid });
             }
@@ -587,7 +590,8 @@
         };
 
         players.forEach((pl, i) => {
-            const tactics = tacticSelection(pl.tactics == null ? (Rift.data.tacticDecks || {}).starter : pl.tactics);
+            // Colour identity: a colour tactic without a creature of its colour in the team is left out.
+            const tactics = identityFilter(tacticSelection(pl.tactics == null ? (Rift.data.tacticDecks || {}).starter : pl.tactics), pl.team).kept;
             const want = Math.min(opts.maxCreatures, Math.max(opts.minCreatures, opts.deckSize - tactics.length));
             const team = (pl.team || []).filter(inst => inst && species(inst.species)).slice(0, opts.maxCreatures);
             let k = 0;
@@ -708,19 +712,45 @@
             ask: req => ask(G, req),
             attack: cid => attackOf(s, cid),
             // Colour tactics (below).
-            inTune: (p, colour) => inTune(s, p, colour),
+            colourInPlay: (p, colour) => colourInPlay(s, p, colour),
             stripKeywords: (cid, list) => stripKeywords(s, cid, list),
             fullHeal(cid) { s.cards[cid].damage = 0; },
             setAttack: (cid, n, label) => setAttack(s, cid, n, label),
             swapStats: cid => swapStats(s, cid),
+            takeControl: (cid, p) => takeControl(G, cid, p),
         };
     }
 
     // ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ------------------
 
-    // In tune: player p controls a creature of this colour (a nicknamed creature has no colour).
-    function inTune(s, p, colour) {
+    // Colour identity in play: player p controls a creature of this colour (a nicknamed creature has
+    // none). A colour tactic can only be played then (legalActions).
+    function colourInPlay(s, p, colour) {
         return s.players[p].board.some(cid => colourOf(s, s.cards[cid]) === colour);
+    }
+    // Colour identity in the deck: a colour tactic may only go in a deck with a creature of that colour.
+    // team: creature instances ({ species }). Returns { kept, dropped } (ids, in order).
+    function identityFilter(tactics, team) {
+        const colours = new Set((team || []).map(inst => inst && (species(inst.species) || {}).colour).filter(Boolean));
+        const kept = [], dropped = [];
+        (tactics || []).forEach(id => {
+            const t = tacticDefs()[id];
+            (t && t.colour && !colours.has(t.colour) ? dropped : kept).push(id);
+        });
+        return { kept, dropped };
+    }
+    // Persuasion: player p takes control of an enemy creature. It arrives asleep on p's side; its owner
+    // stays the same, so a defeat (or Rethink) sends it back to the owner's discard (or hand) and the
+    // after-battle Fate roll stays with the real owner.
+    function takeControl(G, cid, p) {
+        const s = G.s, c = s.cards[cid];
+        if (c.controller === p || s.players[p].board.length >= s.options.boardLimit) return false;
+        if (!removeFrom(s.players[c.controller].board, cid)) return false;
+        s.players[p].board.push(cid);
+        c.controller = p;
+        c.enteredTurn = s.turn;
+        c.attacks = 0; c.activated = false; c.frozen = false;
+        return true;
     }
     // The creature loses these keywords (printed, natural, taught, gained or from an ability) while it
     // stays on the board; a later tactic or ability may give one back. A lost Shield counts as used up.
@@ -1152,7 +1182,7 @@
     const H = {
         colourOf, wheelBonus, cardName, logName, playerName, keywordsOf, hasKeyword,
         handRoom: (s, p, n, leaving) => handRoom(s, p, n, leaving),
-        inTune: (s, p, colour) => inTune(s, p, colour),
+        colourInPlay: (s, p, colour) => colourInPlay(s, p, colour),
         boardOf: (s, p) => s.players[p].board,
         attack: (s, cid, foe) => attackOf(s, cid, foe),
         health: (s, cid) => healthOf(s, cid).current,
@@ -1166,6 +1196,6 @@
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
-        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, inTune, H,
+        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, identityFilter, H,
     };
 })(typeof window !== 'undefined' ? window : globalThis);
