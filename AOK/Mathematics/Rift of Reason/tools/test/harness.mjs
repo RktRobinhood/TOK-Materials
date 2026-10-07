@@ -13,11 +13,13 @@ import { fileURLToPath } from 'node:url';
 
 export const GAME_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-export function loadRift(files) {
+// opts.noCompression leaves out CompressionStream, like a browser too old to pack codes.
+export function loadRift(files, opts = {}) {
     const ctx = {
         console, Math, Date, JSON, Buffer, TextEncoder, TextDecoder,
         setTimeout, clearTimeout, Promise, Uint8Array, Error, Object, Array,
     };
+    if (!opts.noCompression) Object.assign(ctx, { CompressionStream, DecompressionStream });
     ctx.window = ctx;
     ctx.globalThis = ctx;
     vm.createContext(ctx);
