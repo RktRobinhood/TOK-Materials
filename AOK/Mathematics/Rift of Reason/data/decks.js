@@ -9,6 +9,8 @@
  *   creatures + tactics = 20 cards, like a player's deck (6–14 of each).
  *
  * Simulated strength: design/reviews/card-arena-balance-2026-10-07.md (`node tools/sim-battle.mjs --ladder`).
+ * Tuned so Expert with the deck beats Competent with the loaned starter deck about 80% (the later
+ * the chapter, the stronger the deck); a few weak tactics (Clockwork, Look It Up) keep it there.
  */
 (function (root) {
     'use strict';
@@ -19,25 +21,25 @@
         constable: {
             name: 'Guards First', colours: ['reason', 'memory'],
             creatures: ['khaby', 'khaby', 'astrophysicat', 'keanu', 'keanu', 'usainvolt',
-                'lobstorian', 'lobstorian', 'beastie', 'carlseal', 'carlseal', 'haalandroid'],
+                'lobstorian', 'siuuugull', 'carlseal', 'haalandroid'],
             // Colour tactics: Proof by Contradiction (Reason), Nostalgia (Memory).
-            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'big-claims', 'peer-review', 'proof-by-contradiction', 'nostalgia'],
+            tactics: ['counterexample', 'eureka', 'pep-talk', 'pep-talk', 'big-claims', 'stand-firm', 'proof-by-contradiction', 'nostalgia', 'clockwork', 'look-it-up'],
         },
         // Prosecutor Fin: "A strong case needs sound rules." Language arguments backed by Reason.
         fin: {
             name: 'Sound Case', colours: ['language', 'reason'],
             creatures: ['astrophysicat', 'astrophysicat', 'khaby', 'swiftlet', 'swiftlet',
-                'eminemu', 'eminemu', 'lobstorian', 'tremendoodle', 'tremendoodle', 'obambu', 'obambu'],
+                'eminemu', 'lobstorian', 'tremendoodle', 'tremendoodle', 'obambu'],
             // Colour tactics: Label It (Language), Proof by Contradiction (Reason).
-            tactics: ['counterexample', 'counterexample', 'occams-razor', 'occams-razor', 'rethink', 'big-claims', 'label-it', 'proof-by-contradiction'],
+            tactics: ['counterexample', 'stand-firm', 'occams-razor', 'occams-razor', 'rethink', 'big-claims', 'label-it', 'proof-by-contradiction', 'clockwork', 'look-it-up'],
         },
         // The Feed's Champion: "MY TEAM GETS ATTENTION." Fast Emotion and Imagination, all-in.
         feed: {
             name: 'Attention Engine', colours: ['emotion', 'imagination'],
             creatures: ['zuckerborg', 'zuckerborg', 'speedcheeta', 'speedcheeta', 'eelish',
-                'altmanta', 'altmanta', 'gargoyle', 'rockodile', 'rawmsay', 'beeyonce', 'muskrat'],
+                'altmanta', 'gargoyle', 'rockodile', 'rawmsay', 'beeyonce', 'muskrat'],
             // Colour tactics: Rally Cry (Emotion), Daydream (Imagination).
-            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'eureka', 'peer-review', 'rally-cry', 'daydream'],
+            tactics: ['counterexample', 'counterexample', 'pep-talk', 'pep-talk', 'eureka', 'peer-review', 'rally-cry', 'daydream', 'clockwork'],
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

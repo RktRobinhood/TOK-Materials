@@ -105,9 +105,10 @@
     //   holdRemoval extra worth of a removal tactic kept in hand (spent on real threats)
     //   nextLethal  bonus when my board threatens lethal next turn (a two-turn plan)
     //   race        weight of the race clock (turns until each hero falls at the current pace)
+    //   work        budget of scored actions per decision (rollouts and replies); a hard cap on time
     //   reply       1: each candidate turn is scored after the opponent's greedy attacks with the
     //               creatures already in play (public board only; +3 points vs Competent in the ladder)
-    const EXPERT = { lethalNodes: 150, lethalDepth: 7, width: 4, axioms: 2, holdRemoval: 1.2, nextLethal: 4, race: 0.6, reply: 1 };
+    const EXPERT = { lethalNodes: 150, lethalDepth: 7, width: 4, axioms: 2, holdRemoval: 1.2, nextLethal: 4, race: 0.6, reply: 1, work: 1500 };
     // A creature play scored at least this much (vs ending the turn) is still made rather than passing.
     const DEVELOP_FLOOR = -1.5;
     const WIN = 1000;
@@ -495,6 +496,7 @@
     }
 
     function scoreActions(s, cands, me, ctx) {
+        if (ctx.work) ctx.work.n += cands.length; // Expert's work budget (EXPERT.work)
         const baseCache = {};
         const base = deep => (baseCache[deep] != null ? baseCache[deep] : (baseCache[deep] = evaluate(s, me, { ctx, deep })));
         const scored = cands.map(a => {
@@ -627,6 +629,7 @@
         const fast = Object.assign({}, ctx, { fast: true });
         let cur = s;
         for (let i = 0; i < 10 && cur.winner == null && cur.active === me; i++) {
+            if (ctx.work && ctx.work.n > 2 * EXPERT.work) break; // Expert out of budget: stop here
             if (cur.phase === 'choose') {
                 if (!cur.pending || cur.pending.player !== me) break;
                 cur = E().applyLegal(cur, answerPending(cur, me, fast));
@@ -770,19 +773,19 @@
 
     function leafValue(st, me, ctx) {
         if (!EXPERT.reply || st.winner != null) return evaluate(st, me, { ctx, deep: true });
-        return evaluate(boardReply(st, me), me, { ctx, deep: true });
+        return evaluate(boardReply(st, me, ctx.work), me, { ctx, deep: true });
     }
 
     // The opponent's answer on the PUBLIC board: I end my turn, they draw (a hidden card they do
     // not use here) and attack greedily with the creatures already in play. No hand cards are
     // played, so their hand is never looked at.
-    function boardReply(st, me) {
+    function boardReply(st, me, work) {
         const Eng = E();
         const opp = 1 - me;
         if (st.phase !== 'main' || st.active !== me) return st;
         let cur;
         try { cur = Eng.applyLegal(st, { type: 'end', player: me }); } catch (e) { return st; }
-        const octx = Object.assign(makeCtx(opp, { level: 'competent' }), { fast: true });
+        const octx = Object.assign(makeCtx(opp, { level: 'competent' }), { fast: true, work });
         for (let i = 0; i < 12 && cur.winner == null && cur.active === opp; i++) {
             const legal = Eng.legalActions(cur);
             if (cur.phase === 'draw') { cur = Eng.applyLegal(cur, legal.find(a => a.choice === 'deck') || legal.find(a => a.choice === 'none') || legal[0]); continue; }
@@ -804,6 +807,7 @@
     function expertMain(s, legal, me, ctx) {
         const kill = lethalAttack(s, legal, me) || lethalLine(s, me, ctx);
         if (kill) return kill;
+        ctx.work = { n: 0 };
         const P = s.players[me];
         ctx.axVal = axiomValues(s, me, ctx, P.axHand);
         const scored = scoreActions(s, groupActions(s, legal.filter(a => a.type !== 'axiom')), me, ctx);
@@ -822,6 +826,7 @@
         }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, EXPERT.axioms).forEach(a => cands.push(a));
         let best = oneply, bestV = -Infinity;
         for (const a of cands) {
+            if (a !== oneply && ctx.work.n > EXPERT.work) break; // out of budget: keep the best so far
             // Axiom cards and End turn must clearly beat the rest (as Competent's axiom check).
             const v = turnValue(s, a, me, ctx) - (a.type === 'axiom' ? 0.3 : a.type === 'end' ? 0.05 : 0);
             if (v > bestV) { bestV = v; best = a; }
