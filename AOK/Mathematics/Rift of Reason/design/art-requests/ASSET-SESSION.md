@@ -43,7 +43,7 @@ Priority 1 is what the first lesson's card game shows. Stop wherever the time ru
 | 12 | Reworked axiom pictures | 10.5 | `5-ui/axioms-4.png` | [x] |
 | 13 | Lesson 2 board | 11.1b | `2-world/arena-l2.png` | [x] |
 | 14 | Lesson 3 board | 11.1c | `2-world/arena-l3.png` | [x] |
-| 15 | Lesson 4 board | 11.1d | `2-world/arena-l4.png` | [ ] |
+| 15 | Lesson 4 board | 11.1d | `2-world/arena-l4.png` | [x] |
 | 16 | The vendor, Hagglesworth | 11.6 | `3-cast/hagglesworth.png` | [ ] |
 | 17 | The vendor's stall | 11.7 (shop) | `2-world/shop.png` | [ ] |
 | 18 | New map markers | 11.7 (markers) | `5-ui/map-markers-2.png` | [ ] |

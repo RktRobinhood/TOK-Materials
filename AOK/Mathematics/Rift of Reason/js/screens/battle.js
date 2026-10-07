@@ -277,7 +277,7 @@
             if (!W || !H || !lane.height) return;
             const cy = lane.top + lane.height / 2 - box.top - rootEl.clientTop;
             const s = Math.max(W / iw, H / ih, cy / (BOARD_BAND * ih), (H - cy) / ((1 - BOARD_BAND) * ih));
-            Object.assign(boardImg.style, { inset: 'auto', maxWidth: 'none', objectFit: 'fill',
+            Object.assign(boardImg.style, { inset: 'auto', maxWidth: 'none', objectFit: 'fill', transitionProperty: 'none',
                 width: iw * s + 'px', height: ih * s + 'px', left: (W - iw * s) / 2 + 'px', top: cy - BOARD_BAND * ih * s + 'px' });
         }
         boardImg.addEventListener('load', alignBoard);

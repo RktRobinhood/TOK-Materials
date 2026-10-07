@@ -429,6 +429,7 @@
         'scene/arena-l1': { file: 'scenes/arena-l1.webp', w: 1600, h: 900, small: 'scenes/arena-l1-small.webp' },
         'scene/arena-l2': { file: 'scenes/arena-l2.webp', w: 1600, h: 900, small: 'scenes/arena-l2-small.webp' },
         'scene/arena-l3': { file: 'scenes/arena-l3.webp', w: 1600, h: 900, small: 'scenes/arena-l3-small.webp' },
+        'scene/arena-l4': { file: 'scenes/arena-l4.webp', w: 1600, h: 900, small: 'scenes/arena-l4-small.webp' },
         'scene/battle-table': { file: 'scenes/battle-table.webp', w: 1600, h: 900, small: 'scenes/battle-table-small.webp' },
         'scene/burrow': { file: 'scenes/burrow.webp', w: 1600, h: 900, small: 'scenes/burrow-small.webp' },
         'scene/chart-gallery': { file: 'scenes/chart-gallery.webp', w: 1600, h: 900, small: 'scenes/chart-gallery-small.webp' },
