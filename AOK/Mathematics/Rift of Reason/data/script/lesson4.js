@@ -171,7 +171,7 @@
     ];
     // The bar (STORY.md §6 beat 1). Pip's `met` beat.
     S['ch4.door'] = [
-        { s: 'narrator', t: 'The Server Tower. Cables like roots. Screens like leaves.', when: '!dead:sundial' },
+        say('The Server Tower. Cables like roots. Screens like leaves.'),
         { s: 'pip', e: 'happy', t: 'Pip. Clerk. Bat. I\'m coming too. Clerks go where the record goes.', when: { not: { seen: 'ch3.arrive' } } },
         { s: 'pip', e: 'happy', t: 'Wait for me! Clerks go where the record goes.', when: { all: [{ seen: 'ch3.arrive' }, '!dead:sundial'] } },
         { s: 'pip', t: 'Clerks go where the record goes. Up.', when: { all: ['dead:sundial', { seen: 'ch3.arrive' }] } },
@@ -684,9 +684,10 @@
             u: 'He\'d have sold it one day. I won\'t. I labelled it. Neatly. He\'d have used glitter.' },
         { note: 'The old box sits beside it on the shelf. Two boxes. One sequin.', when: { flag: 'fate', is: 'home' } },
         { note: 'The dark box sits beside it, under a cloth.', when: { flag: 'fate', is: 'off' } },
+        { note: 'No box on the shelf for this one. You tell them where it is.', when: { flag: 'fate', is: 'left' } },
         { s: 'sequins', t: 'You left it running? Up there? Then I hope someone claps.',
             u: 'You left it running. Up there. I hope someone claps.', when: { flag: 'fate', is: 'left' } },
-        { note: 'Nudge stands by the stall. It stops every passer-by with its first question.' },
+        { note: 'Nudge stands by the stall. No clipboard. It is learning a new word.' },
         { note: 'A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up.' },
         { s: 'nudge', t: '…Why?' },
         { s: 'narrator', t: 'Will this one grow up loud? I can\'t predict that. Nobody can.',

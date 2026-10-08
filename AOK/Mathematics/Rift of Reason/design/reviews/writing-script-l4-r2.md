@@ -30,3 +30,5 @@ No regressions found: the shelf still has at most 5 spoken lines (`:676`/`:679`,
    `{ note: 'No box on the shelf for this one. You tell them where it is.', when: { flag: 'fate', is: 'left' } },`
 4. **`:688` now muddles `:689–690`.** "It stops every passer-by with its first question" says the question before we hear it. Fix: `{ note: 'Nudge stands by the stall. No clipboard. It is learning a new word.' },`
 5. **`:634` geography.** The Summit Rift shares the core chamber and Quill sat down there; "comes down the stairs" is odd. Fix: `'Miss Quill gets up off the floor and follows Nudge. She carries her red pen. She doesn\'t use it.'`
+
+**Applied 8 Oct (evening):** 1 and 5 were already in; 2 (the tower picture via `say`), 3 (Tally's source note) and 4 (Nudge "learning a new word") applied as written above.
