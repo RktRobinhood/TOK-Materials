@@ -370,6 +370,7 @@
         'npc/mayor/neutral': { file: 'cast/mayor-neutral.webp', w: 164, h: 240 },
         'npc/mayor/unmasked': { file: 'cast/mayor-unmasked.webp', w: 437, h: 461 },
         'npc/nudge': { file: 'cast/nudge-neutral.webp', w: 241, h: 240 },
+        'npc/nudge/clipboard': { file: 'cast/nudge-clipboard.webp', w: 253, h: 240 },
         'npc/nudge/happy': { file: 'cast/nudge-happy.webp', w: 223, h: 240 },
         'npc/nudge/idle': { file: 'cast/nudge-idle.webp', w: 375, h: 561 },
         'npc/nudge/masked': { file: 'cast/nudge-masked.webp', w: 476, h: 620 },

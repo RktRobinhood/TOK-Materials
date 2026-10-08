@@ -102,6 +102,7 @@
         "nudge-masks.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/masked","npc/nudge/maskless"]},
         "feast-hall.png": {"type":"scene","id":"scene/feast-hall"},
         "hum-charm.png": {"type":"islands","minArea":600,"class":"item","ids":["item/hum-charm","keepsake/granny-charm-glasses"]},
+        "nudge-clipboard.png": {"type":"single","id":"npc/nudge/clipboard","class":"bust"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

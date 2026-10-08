@@ -719,6 +719,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > Two separate small props side by side on a transparent canvas, well apart, nothing touching, no text. Match the style board and the Lucky Sequin sheet above (same finish and scale); both must read at 32 px. 1. The Hum Charm: the small round brass charm Coach Achilles wears on his sheet above, with a spiral of sound-wave lines engraved on its face and a tiny cream knitted tassel, on a short loop of lavender cord, glowing very faintly warm. 2. Granny's keepsake: the same Hum Charm lying on a folded corner of a lavender knitted shawl, with a pair of small round gold-rimmed reading glasses resting beside it, one lens catching the light.
 
+
+### 13.36 Nudge with its clipboard (session of 8 October)
+
+**Attach:** `style-board.png`, `nudge.png`
+**Save as:** `3-cast/nudge-clipboard.png`
+**Ids:** `npc/nudge/clipboard` (bust; also the witness portrait for Count Two)
+
+> One head-and-shoulders dialogue bust on a transparent canvas, no text, no numbers. Match the style board and the Nudge sheet above exactly (same imp). Nudge, gleeful, eyes squeezed into happy crescents, holding up a clipboard in both hands towards the viewer like a proud trophy. The clipboard is a glowing feed screen in a brass clip: bright cyan light, a little row of tiny thumbs-up and heart shapes streaming up its face, no writing. The screen glow lights Nudge's face from below. A busy little vote-counter, very pleased with itself.
+
 ---
 
 ## Outcome log
@@ -866,3 +875,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.32 Nudge masked and maskless | First try (2026-10-08) | Same Nudge in a painted lamb mask (reads a little bunny-like; fine) tied with a red tasselled cord, waving, hand on hip; then the mask flying off above its head while it hides its panicked face, bell-tail bristling. The flying mask touches the horn, so it stays in the maskless slice. Sliced into npc/nudge/masked and npc/nudge/maskless. |
 | 13.33 The Feast of Laws | Second try (2026-10-08) | The first try gave Granny a fifth limb (a foot out of the back of her shell; the teacher spotted it). The redo redrew the whole room: candlelit gothic hall, purple rift over Boolesbury in the arched windows, laden tables down both sides, the cauldron over flames on a stepped stone stage, the winch at the left, and Granny (white curls, flower, round glasses, lavender shawl, now matching her sheet) hanging cross and arms folded from the hook by a leather harness round her shell: two arms, two legs, no knots near her. Big open floor. Scene, scene/feast-hall (still to be wired into the Ch2 Hall). |
 | 13.41 + 13.24b Hum Charm, Granny's keepsake | First try (2026-10-08) | Round brass charm with an engraved spiral and sound lines, cream tassel, knotted lavender cord (matches Achilles' charm); the same charm with round gold glasses on a folded corner of her fringed lavender shawl. Both read at 32 px. Sliced into item/hum-charm and keepsake/granny-charm-glasses. |
+| 13.36 Nudge with its clipboard | First try (2026-10-08) | Same Nudge, eyes shut in glee, holding up a brass-clipped glowing cyan screen with streaming hearts and thumbs-up, no writing; the glow lights its chin. Single bust, npc/nudge/clipboard. |
