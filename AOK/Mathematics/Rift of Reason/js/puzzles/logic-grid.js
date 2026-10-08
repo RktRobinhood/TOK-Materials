@@ -129,13 +129,13 @@
         const isPerm = x => Array.isArray(x) && x.length === n && new Set(x).size === n && x.every(v => Number.isInteger(v) && v >= 0 && v < n);
         if (!isPerm(a) || !isPerm(b)) return { solved: false, partial: 0, feedback: 'Each row and each column needs exactly one ✓ in both grids.' };
         const right = data.writers.filter((_, i) => a[i] === data.solution.a[i] && b[i] === data.solution.b[i]).length;
-        if (right === n) return { solved: true, feedback: 'Every byline proved. Only one arrangement keeps all the clues.' };
+        if (right === n) return { solved: true, feedback: 'Every writer found. Only one arrangement keeps all the clues.' };
         const broken = data.clues.find(c => !holds(c, a, b));
         return {
             solved: false,
             partial: right / n,
             broken: broken ? broken.text : null,
-            feedback: broken ? 'Your grid breaks a clue: ' + broken.text : 'Your grid keeps every clue, but so does another one. Check each ✓ is forced.',
+            feedback: broken ? 'Your grid breaks a clue: ' + broken.text : 'Some ✓ are in the wrong place. Find the clue that rules them out.',
         };
     }
 
@@ -154,7 +154,7 @@
             question: 'How do you know your grid is the only answer?',
             options: ['Every other arrangement breaks at least one clue.', 'It was the first one I tried.', 'It looks fair to everyone.', 'Most of the clues mention it.'],
             correct: 0,
-            explain: 'Evidence settles a claim when it rules out every other possibility, not just when it fits.',
+            explain: 'The clues settle it: every other arrangement breaks one. Fitting the clues is not enough on its own.',
         };
     }
 
@@ -251,7 +251,7 @@
         colour: 'reason',
         family: 'Claims and evidence',
         blurb: 'Who wrote which headline, and on which day? Cross out what the clues rule out.',
-        tok: 'A claim is settled when the evidence rules out every other possibility, not just when it fits.',
+        tok: 'A claim is proved when the evidence rules out every other possibility, not just when it fits. Real evidence rarely gets that far.',
         rules: [
             'Each writer wrote one headline, on one day. No two share.',
             'Click a cell once for ✕ (ruled out), twice for ✓ (confirmed), three times to clear.',

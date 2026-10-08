@@ -24,7 +24,7 @@ test('River crossing: the classic chain needs 7 crossings; wrong plans fail',()=
  const [a,b,c]=data.cast.map(x=>x.id);
  const middle=data.cast[1].id, ends=[a,c];
  // Taking an end first leaves the middle with its other rival.
- const r=p.check(data,{trips:[[ends[0]]]});assert.equal(r.solved,false);assert.match(r.feedback,/squabbled/);
+ const r=p.check(data,{trips:[[ends[0]]]});assert.equal(r.solved,false);assert.match(r.feedback,/fought/);
  assert.equal(p.check(data,{trips:[[middle]]}).solved,false,'not everyone across');
  assert.equal(p.check(data,{trips:[[a,b]]}).solved,false,'too many seats');
  const hard=p.generate(Rift.makeRng('toll'),3);

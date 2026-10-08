@@ -630,7 +630,7 @@
     ];
     // The Reading Room (optional, #62): logic grid.
     S['station.t-reading-room.intro'] = [
-        { s: 'pip', e: 'thinking', t: 'Headlines with no names! The clues say who wrote what, and when. Cross out what cannot be true.' },
+        { s: 'pip', e: 'thinking', t: 'Someone tore the bylines off. The writers\' names. Scared of being wrong in print, I think. Cross out what cannot be true.' },
     ];
     S['station.t-reading-room.reminder'] = [
         { s: 'pip', t: 'More stories without bylines. Cross out, then confirm.' },

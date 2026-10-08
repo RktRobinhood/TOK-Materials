@@ -120,7 +120,7 @@
                 scene: 'scene/road-bridge',
                 puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
-                teaser: 'A small boat, a wide river, and creatures who cannot stand each other.',
+                teaser: 'A small boat, a wide river, and creatures who bite each other.',
             },
             'card-sharp': {
                 name: "The Card Sharp's Table", chapter: 'ch1', type: 'battle', x: 1081, y: 430,
@@ -213,8 +213,8 @@
             },
             // Optional (#62): water jugs. Off the required path; nothing links through it.
             'b-kitchen': {
-                host: 'granny', goal: 'Prove that something cannot be done, not just fail to do it.',
-                hosts: [{ when: 'dead:granny', host: 'baker' }],
+                host: 'granny', goal: 'Make it exactly, or prove it cannot be done. Failing is not a proof.',
+                hosts: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, host: 'baker' }],
                 intro: 'station.b-kitchen.intro', reminder: 'station.b-kitchen.reminder',
                 name: "Granny's Kitchen", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 548, y: 300,
                 scene: 'scene/granny-door',
@@ -352,7 +352,7 @@
             },
             // Optional (#62): logic grid, off the Library. Off the required path.
             't-reading-room': {
-                host: 'pip', goal: 'A claim is settled when the evidence rules out every other possibility.',
+                host: 'pip', goal: 'Here the clues can settle a claim: they rule out every other possibility.',
                 intro: 'station.t-reading-room.intro', reminder: 'station.t-reading-room.reminder',
                 name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 128, y: 205,
                 scene: 'scene/evidence-room',

@@ -116,7 +116,7 @@
         if (a.impossible) {
             if (data.possible) return { solved: false, partial: 0, feedback: 'It can be done. Keep pouring, and watch what is left behind.' };
             if (a.reason !== data.reasonCorrect) return { solved: false, partial: 0.5, feedback: 'Yes, it is impossible. But that reason does not prove it. Pick the reason that covers every possible pour.' };
-            return { solved: true, feedback: 'Proved, not just tried. Every pour keeps the amounts multiples of ' + data.g + ', so ' + data.target + ' can never appear.' };
+            return { solved: true, feedback: 'Proved, not just tried. Every amount stays a multiple of ' + data.g + '. ' + data.target + ' is not, so it can never appear.' };
         }
         let levels = data.caps.map(() => 0);
         for (const m of (Array.isArray(a.moves) ? a.moves : [])) {
@@ -279,7 +279,7 @@
             'Get exactly the goal amount into one ladle.',
             'Fill a ladle to the top, empty it, or pour one ladle into the other until one is full or empty.',
             'The list shows every amount you have made. Undo and Reset are free.',
-            "If the goal can never appear, press It can't be done and pick the reason that proves it.",
+            'If the goal can never appear, press "It can\'t be done…" and pick the reason that proves it.',
             'How to play is free. The Hint button shows its heart cost. Think first, then check your answer.',
         ],
         tutorial: [

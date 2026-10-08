@@ -1,11 +1,11 @@
 /*
  * River crossing (the Ford): row your creatures across a river in a small boat.
- * Rivals left together on a bank without you squabble. Borrows the classic
+ * Rivals left together on a bank without you fight. Borrows the classic
  * river-crossing mechanic only. BFS checks every generated puzzle is solvable.
  *   d1: 3 creatures, boat seats 1, rivals in a chain (A–B, B–C).
  *   d2: 4 creatures, boat seats 2, random rivalries.
- *   d3: 5 creatures, boat seats 2, more rivalries, and a troll toll: the
- *       shortest number of crossings is all you get.
+ *   d3: 5 creatures, boat seats 2, more rivalries, and Muskrat sells only as many
+ *       tickets as the shortest plan needs.
  * Uses the player's own caught creatures when it can (Rift.State), topped up
  * from a fixed Ch1 cast. Answer: { trips: [[creatureId, ...], ...] }, alternating
  * near → far, far → near, starting from the near bank (an empty trip = you row alone).
@@ -148,16 +148,16 @@
         if (r.problem === 'clash') {
             const [a, b] = r.clash;
             const side = r.boat ? 'near' : 'far';
-            return { solved: false, partial: 0, clash: r.clash.map(i => data.cast[i].id), feedback: data.cast[a].name + ' and ' + data.cast[b].name + ' were left alone on the ' + side + ' bank. They squabbled.' };
+            return { solved: false, partial: 0, clash: r.clash.map(i => data.cast[i].id), feedback: data.cast[a].name + ' and ' + data.cast[b].name + ' were left without you on the ' + side + ' bank. They fought.' };
         }
         if (r.problem === 'seats') return { solved: false, partial: 0, feedback: 'The boat only seats ' + data.seats + ' besides you.' };
         if (r.problem) return { solved: false, partial: 0, feedback: 'You can only carry creatures from the bank you are on.' };
-        if (data.toll && trips.length > data.toll) return { solved: false, partial: 0, feedback: 'The troll charges a toll. You only get ' + data.toll + ' crossings.' };
+        if (data.toll && trips.length > data.toll) return { solved: false, partial: 0, feedback: 'Muskrat only sold you ' + data.toll + ' tickets. No more crossings.' };
         if (r.mask !== full) {
             const across = data.cast.filter((_, i) => r.mask >> i & 1).length;
             return { solved: false, partial: across / data.cast.length, feedback: across + ' of ' + data.cast.length + ' are across. Keep going.' };
         }
-        return { solved: true, feedback: 'Everyone across in ' + trips.length + ' crossings.' + (trips.length > data.shortest ? ' It can be done in ' + data.shortest + '.' : '') + ' A computer finds this by trying all ' + data.states + ' safe positions.' };
+        return { solved: true, feedback: 'Everyone across in ' + trips.length + ' crossings. Nobody got eaten.' + (trips.length > data.shortest ? ' Best is ' + data.shortest + '.' : '') + ' A computer just checks all ' + data.states + ' safe positions, one by one.' };
     }
 
     function hints(data) {
@@ -176,7 +176,7 @@
     function why() {
         return {
             question: 'What makes your plan safe?',
-            options: ['After every crossing, no two rivals are alone together on either bank.', 'Everyone reached the far bank in the end.', 'Nobody complained.', 'It used lots of crossings.'],
+            options: ['After every crossing, no two rivals are on a bank without you.', 'Everyone reached the far bank in the end.', 'Nobody complained.', 'It used lots of crossings.'],
             correct: 0,
             explain: 'A plan is only as safe as its worst moment. Each step has to follow the rules, not just the ending.',
         };
@@ -192,7 +192,7 @@
         const full = (1 << data.cast.length) - 1;
         const art = c => (Rift.Assets ? Rift.Assets.img('creature/' + c.id + '/idle', { label: c.name, className: 'rc-art', alt: c.name }) : null);
 
-        const rivals = el('div.rc-rivals.panel', null, [el('strong', { text: 'Rivals (never leave them alone together):' })]
+        const rivals = el('div.rc-rivals.panel', null, [el('strong', { text: 'Rivals (never leave them on a bank without you):' })]
             .concat(data.rivals.map(([a, b]) => el('div.small', { text: data.cast[a].name + '  ✕  ' + data.cast[b].name }))));
         const info = el('div.small.rc-info');
         const near = el('div.rc-bank.rc-near');
@@ -230,7 +230,7 @@
             api.sfx('place');
             if (r.problem === 'clash' || (data.toll && next.length > data.toll)) {
                 api.submit({ trips: next }); // a wrong check: the encounter shows why
-                info.textContent = r.problem === 'clash' ? 'Trip undone. Try a different crossing.' : 'Out of crossings. Start again.';
+                info.textContent = r.problem === 'clash' ? r.clash.map(i => data.cast[i].name).join(' and ') + ' were left on a bank without you. It got ugly. Trip undone.' : 'Out of tickets. Start again.';
                 if (r.problem !== 'clash') trips = [];
                 load = [];
                 render();
@@ -257,7 +257,7 @@
                 (s.mask >> i & 1 ? far : near).append(token(c, i, s.mask >> i & 1 ? 'far' : 'near'));
             });
             banks.classList.toggle('rc-at-far', !!s.boat);
-            const left = data.toll ? ' · Toll: ' + Math.max(0, data.toll - trips.length) + ' left' : '';
+            const left = data.toll ? ' · Tickets left: ' + Math.max(0, data.toll - trips.length) : '';
             info.textContent = 'Crossings: ' + trips.length + left + ' · Boat seats ' + data.seats + ' besides you.';
         }
 
@@ -271,19 +271,19 @@
         name: 'The Ford',
         colour: 'reason',
         family: 'Planning by rules',
-        blurb: 'Row everyone across. Never leave two rivals alone together.',
+        blurb: 'Row everyone across. Never leave two rivals on a bank without you.',
         tok: 'A plan is a chain of steps. Every step must follow the rules, and a computer can check them all.',
         rules: [
             'Get every creature to the far bank. You row the boat.',
             'Click creatures on your bank to load the boat, then Row across. You may row back with someone, or alone.',
             'Never leave two rivals on a bank without you. An unsafe crossing counts as a wrong check.',
-            'At the hardest level, the troll gives you only a set number of crossings. Undo and Reset are free.',
+            'At the hardest level, Muskrat sells only a few tickets. You get a set number of crossings. Undo and Reset are free.',
             'How to play is free. The Hint button shows its heart cost. Think first, then check your answer.',
         ],
         tutorial: [
             { text: 'Get everyone to the far bank. You row the boat, so you are always in it.', highlight: '.rc-banks' },
             { text: 'Some creatures are rivals. Never leave two rivals on a bank without you.', highlight: '.rc-rivals' },
-            { text: 'Example, not this puzzle: A and B are rivals, and B and C are rivals. Take B over first. Later, bring B back. Going back is allowed.', highlight: '.rc-banks' },
+            { text: 'Example, not this puzzle: sometimes the only safe move is to bring someone back. Going back is allowed.', highlight: '.rc-banks' },
             { text: 'Click creatures to load the boat, then Row across. An unsafe crossing counts as a wrong check.', highlight: '.rc-row' },
             { text: 'Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.', highlight: '.rc-tools' },
         ],

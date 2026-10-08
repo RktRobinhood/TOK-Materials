@@ -671,10 +671,11 @@
     ];
     // The Ford (optional, #62): river crossing.
     S['station.river-ford.intro'] = [
-        { s: 'muskrat', t: 'My new ferry! Tiny boat, huge egos. Leave two rivals alone and they squabble. Plan every trip.' },
+        { s: 'muskrat', t: 'My new ferry! Tiny boat, huge egos. Leave two rivals on a bank without you and they fight. Plan every trip.' },
     ];
     S['station.river-ford.reminder'] = [
-        { s: 'muskrat', t: 'Ferry is open. Boat is still small. Egos are still big.' },
+        { s: 'muskrat', t: 'Ferry is open. Boat is still small. Tickets are limited. Exclusive!' },
+        { s: 'narrator', t: 'Upstream, a rocket sits in the river. Muskrat calls it a reef now.', when: { flag: 'side.6', gte: 3 } },
     ];
     S['station.well.intro'] = [
         { s: 'sequins', t: 'The well wants evidence, not wishes. Help me fish!' },
