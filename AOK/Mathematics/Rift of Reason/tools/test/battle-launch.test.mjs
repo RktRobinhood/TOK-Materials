@@ -117,3 +117,13 @@ test('a boss challenge shows its level and launches Expert with the built deck',
  Rift.Battles.practice();assert.equal(g.routes.at(-1).params.opponent.ai,'normal');
  Rift.Battles.story();const st=g.routes.at(-1).params.opponent;assert.equal(st.ai,'normal');assert.equal(st.hearts,8);
 });
+test('a trainer away on a side story cannot be challenged; the card school still offers Learn',()=>{
+ const g=game();g.state.map.completed.push('stall-gallery');
+ assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true);assert.equal(g.Rift.Battles.canChallenge('fair-gate'),true);
+ g.state.flags['syllo-away']=true;
+ assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),false,'Syllo is away after his recruits');
+ assert.equal(g.Rift.Battles.canChallenge('fair-gate'),false);
+ g.Rift.Battles.offer('fair-gate');const m=g.modals.at(-1);
+ assert.equal(m.title,'Card school');assert.equal(m.buttons.map(b=>b.label).join(' | '),'Later | Learn the card game');
+ g.state.flags['finale-open']=true;assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true,'home on the restored Fair');
+});

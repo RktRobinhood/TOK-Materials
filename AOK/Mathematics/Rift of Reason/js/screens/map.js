@@ -171,6 +171,10 @@
                         g.append(svg('image',{href:Rift.Assets.src(host.art),x:-27,y:-86,width:54,height:60,'aria-label':trainer.name}));
                         const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
                         label.textContent=n.cardSchool?'Learn / Challenge':'Challenge';g.append(label);
+                    }else if(n.trainer&&n.cardSchool){
+                        // Its trainer is away (side story 7): the card school still teaches.
+                        const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
+                        label.textContent='Learn';g.append(label);
                     }
                     // A side story waits here (design/SIDE-STORIES.md section 1): a slowly fading bubble.
                     const side = Rift.SideStories && Rift.SideStories.at(id);

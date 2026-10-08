@@ -311,7 +311,13 @@
 
         offer(nodeId, activity) {
             const n=Rift.World.node(nodeId), t=Rift.data.trainers[n.trainer], host=Rift.data.speakers[t.speaker];
-            if(!Battles.canChallenge(nodeId)){if(activity)activity();return;}
+            if(!Battles.canChallenge(nodeId)){
+                // The card school still teaches while its trainer is away (side story 7: syllo-away).
+                if(n.cardSchool)Rift.UI.modal('Card school',el('p',{text:'Nobody to challenge today. You can still learn the card game.'}),
+                    [{label:'Later'},{label:'Learn the card game',primary:true,onclick:()=>Battles.learn('map')}]);
+                else if(activity)activity();
+                return;
+            }
             const choices=[{label:'Later'}];
             if(activity)choices.push({label:'Do the activity',onclick:activity});
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
@@ -342,6 +348,9 @@
             // A silent or dark trainer role has nobody to play (UNDERSTUDIES.md §3.6).
             const t=n&&n.trainer&&Rift.data.trainers[n.trainer];
             if(t&&t.speaker&&Rift.Cast&&!Rift.Cast.actor(t.speaker))return false;
+            // A trainer away on a side story (syllo-away, story 7 tier 4) is back only on the restored Fair.
+            const f=Rift.State.get().flags||{};
+            if(t&&t.speaker&&f[t.speaker+'-away']&&!f['finale-open'])return false;
             return !!(n&&n.trainer&&(n.cardSchool||n.type==='battle'||Rift.State.get().map.completed.includes(n.challengeAfter||nodeId)));
         },
 

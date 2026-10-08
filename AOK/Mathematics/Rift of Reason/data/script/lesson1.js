@@ -158,7 +158,8 @@
         { prop: 'ui/memorial-lantern-dark' },
         { s: 'narrator', t: 'The lanterns. One is dark. It was the shiniest.', when: '!dead:granny' },
         { s: 'narrator', t: 'The lanterns. Two are dark. One of them was the shiniest.', when: 'dead:granny' },
-        { s: 'syllo', t: 'His lantern went out, recruit. I saluted it. I didn\'t know what else to do.' },
+        { s: 'syllo', t: 'His lantern went out, recruit. I saluted it. I didn\'t know what else to do.', when: SYLLO_HERE },
+        { s: 'narrator', t: 'Someone has pinned a tiny paper salute to the lantern post.', when: { not: SYLLO_HERE } },
     ];
 
     // The Pattern Stall. Sequins is away from the theft until the Gate (a sign on the curtain);
@@ -196,7 +197,8 @@
         { s: 'syllo', e: 'angry', t: 'ATTENTION! My lobster band! They play the trumpet! Allegedly!' },
     ];
     S['prologue.gallery.win'] = [
-        { s: 'syllo', e: 'happy', t: 'Valid! And still nonsense! My lobsters cannot play the trumpet. I have heard them.' },
+        { s: 'syllo', e: 'happy', t: 'Valid! And still nonsense! My lobsters cannot play the trumpet. I have heard them.', when: SYLLO_HERE },
+        { s: 'narrator', t: 'Valid, and still nonsense. Syllo would have shouted that. Loudly.', when: { not: SYLLO_HERE } },
     ];
 
     // The Nut Stall (node script): the theft and that evening, or a look back for a jump-in.
@@ -651,7 +653,7 @@
     ];
     S['station.stall-gallery.reminder'] = [
         { s: 'syllo', t: 'Back, recruit? Inspect the lines again! Follows, or not?', when: SYLLO_HERE },
-        { note: 'A sign on the door: GONE AFTER MY RECRUITS. —S', when: { not: SYLLO_HERE } },
+        { note: 'The sign is still there. A smaller one under it: DON\'T FEED THE LOBSTERS. —S', when: { not: SYLLO_HERE } },
     ];
     S['station.road-start.intro'] = [
         { s: 'narrator', t: 'Two loud voices, one road. Let\'s check who\'s right. Quietly.' },

@@ -2,7 +2,9 @@
  * Side stories for lesson 3 (design/SIDE-STORIES.md §6). Format: the header of data/script/side-stories.js.
  *   7 recruitment-drive  Syllo's Recruitment Drive  (Object, a duel; blue: Fox)       ripple soldiers → Ch4 Copy (lesson4.js);
  *                                                                                     tier 4 sets syllo-away (Gallery sign in
- *                                                                                     data/map.js; story 1; the finale bark)
+ *                                                                                     data/map.js and lesson1.js; no trainer
+ *                                                                                     challenge, js/ui/battles.js; story 1;
+ *                                                                                     the finale bark)
  *   8 headline-debate    The Headline Debate        (Object, refereeing; blue: Owlet) ripple fair-quote → Ch3 trial (lesson3.js)
  * Both are fixed puzzles: every line is static, so every voiced line can be recorded.
  * Every Object round with `present` asks for a card that every path holds: the twist card, or either of
@@ -19,7 +21,8 @@
 
     // ================================================================ 7. Syllo's Recruitment Drive
     // Four rounds: three possessed recruits (popularity, false choice, authority), then Syllo rewords
-    // the same tricks, runs out of them, and needs one sound reason to stay.
+    // the same tricks, runs out of them, and needs one sound reason to stay. They march on the LAST boom
+    // of the drum (the clock): tier 4 is that boom; at tiers 1–2 it never comes.
     const POP = 'Popularity: lots of people do it, so it must be right.';
     const CHOICE = 'False choice: only two options, when there are more.';
     const AUTH = 'Authority: a big name says so, so it must be true.';
@@ -44,30 +47,31 @@
                 [{ note: 'Boom. Boom. Another row of eyes starts to glow.' }],
                 [{ s: 'syllo', t: 'Left foot! Right foot! Other left foot!' }],
                 [{ note: 'BOOM. BOOM. Every recruit turns, at once, to face the Road.' }],
-                [{ s: 'syllo', t: 'Last bars! Wave goodbye to anyone who isn\'t marching!' }],
+                [{ s: 'syllo', t: 'Last drum roll! Wave goodbye to anyone who isn\'t marching!' }],
             ],
         },
         start: [
             { s: 'syllo', t: 'RECRUITS! Everyone\'s joining! Are you everyone, or are you NOBODY?' },
             { note: 'Half the Fair stands in rows behind him. A front rank of eleven, then everyone else. Their eyes are starting to glow.' },
-            { s: 'syllo', t: 'When the drum stops, we march! Down the Road! To fight the sky! March, or be a COWARD!' },
+            { s: 'syllo', t: 'On the LAST boom, we march! Down the Road! To fight the sky! March, or be a COWARD!' },
         ],
         clues: {
             intro: [
+                { clock: 'side', tick: 1 },
                 { inner: {
                     owlet: '"March or be a coward." Two options? I count at least four.',
-                    mothkin: 'Look. The front rank never blinks. Not once. Not even at the drum.',
+                    mothkin: 'Ooh, glowing eyes. So pretty. …Wait. The front rank doesn\'t glow. Or blink.',
                     fox: 'Tell him: picture the Fair without its Sergeant.',
-                    frogling: 'Last time a whole crowd agreed, the sky cracked. I remember.',
+                    frogling: 'At the Fair, eyes glowed just before the sky split. Syllo shouted it.',
                     raven: '"Everyone." Count them. It\'s eleven.',
                 } },
                 { choice: [
                     { t: 'Sergeant! Who exactly are we fighting?', then: [
-                        { s: 'syllo', t: 'The SKY, recruit! It has been looking at us. Funny.' },
+                        { s: 'syllo', t: 'The SKY, recruit! It has an eye. It has been STARING.' },
                     ] },
                     { t: 'Sergeant. Picture the Fair without its Sergeant.', only: 'fox', voice: true, then: [
                         { clock: 'side', drain: 1 },
-                        { s: 'syllo', t: 'Without… me? Who would shout "attention"? Nobody would pay any.' },
+                        { s: 'syllo', t: 'Without… me? …It\'s quiet enough already, recruit.' },
                         { note: 'The drum slows down. Just a little.' },
                     ] },
                 ] },
@@ -91,14 +95,15 @@
                   steps: [
                       { note: 'Three fresh posters. EVERYONE\'S JOINING! · MARCH OR BE A COWARD! · THE ROCKODILE SAYS SO!' },
                       { note: 'On the third, the Rockodile raises one eyebrow. It goes right off the top of the poster.' },
+                      { note: 'Under them, an old faded poster: SYLLO\'S GALLERY. ALL WELCOME. Someone has added, in pencil: NOBODY CAME.' },
                   ],
-                  card: 'The posters: "EVERYONE\'S JOINING!" "MARCH OR BE A COWARD!" "THE ROCKODILE SAYS SO!"' },
+                  card: 'The posters: "EVERYONE\'S JOINING!" "MARCH OR BE A COWARD!" "THE ROCKODILE SAYS SO!" Under them, an old one: "ALL WELCOME." "NOBODY CAME."' },
             ],
         },
         twist: {
             id: 'wooden',
             steps: [
-                { note: 'The drum stops for breath. In the quiet, the front rank creaks.' },
+                { note: 'Between two booms, the front rank creaks.' },
                 { note: 'You tap the nearest one on the nose. Tok. Hollow. Paint flakes off. Underneath: wood.' },
                 { s: 'usainvolt', t: 'I joined because everyone else did. …Is "everyone" made of wood?', possessed: true },
                 { s: 'syllo', t: 'They are… very disciplined recruits.' },
@@ -114,7 +119,7 @@
             rounds: [
                 {
                     line: [{ s: 'usainvolt', t: 'The whole Fair is marching now! Real ones! So it must be right!', possessed: true }],
-                    press: [{ s: 'usainvolt', t: 'Why did they join? The front rank did. Why did the front rank join?', possessed: true }],
+                    press: [{ s: 'usainvolt', t: 'They joined because the front rank joined. And the front rank joined because… um.', possessed: true }],
                     q: 'Who started the crowd? Show him.',
                     present: 'wooden',
                     wrong: [{ s: 'usainvolt', t: 'Nice card. But who marched FIRST?', possessed: true }],
@@ -135,8 +140,8 @@
                         { t: 'Everyone\'s staying. You should too.', say: [
                             { s: 'swiftlet', t: '"Everyone"? You sound like the posters.', possessed: true },
                         ] },
-                        { t: 'The Rockodile says stay.', say: [
-                            { s: 'swiftlet', t: 'He says lots of things. Mostly on posters.', possessed: true },
+                        { t: 'A very famous singer says stay.', say: [
+                            { s: 'swiftlet', t: 'Which singer? …Is it me? I didn\'t say that. Yet.', possessed: true },
                         ] },
                     ],
                     name: { q: 'Name her bad reason.', options: NAME7('choice'), wrong: [
@@ -148,15 +153,15 @@
                     ],
                 },
                 {
-                    line: [{ s: 'eminemu', t: 'Rock said march, and the Rock is strong. Strong things, see, are never wrong!', possessed: true }],
+                    line: [{ s: 'eminemu', t: 'Rock said march, and Rock\'s a star. Stars know best, near and far!', possessed: true }],
                     press: [{ s: 'eminemu', t: 'Has the Rock been to the sky? …He\'s been to the gym. Same height.', possessed: true }],
                     q: 'Your reply?',
                     options: [
-                        { t: 'Is the Rockodile a sergeant? Has he even seen the sky?', ok: true },
+                        { t: 'Is the Rockodile an expert on the sky? Famous isn\'t the same as right.', ok: true },
                         { t: 'Everyone knows the Rockodile is wrong.', say: [
                             { s: 'eminemu', t: 'Everyone? Who\'s everyone? Show me their faces!', possessed: true },
                         ] },
-                        { t: 'Agree with him, or you\'re a sheep.', say: [
+                        { t: 'Ignore him, or you\'re a sheep.', say: [
                             { s: 'eminemu', t: 'Sheep or soldier? That\'s two. I rhyme better than that.', possessed: true },
                         ] },
                     ],
@@ -165,7 +170,7 @@
                     ] },
                     right: [
                         { note: 'The emu stops mid-rhyme. The glow drains out of him.' },
-                        { s: 'eminemu', t: 'Not a sergeant. Just a rock with a brow. I\'m off home. Right now.' },
+                        { s: 'eminemu', t: 'Not an expert. Just a rock with a brow. I\'m off home. Right now.' },
                     ],
                 },
                 {
@@ -174,7 +179,7 @@
                         { q: 'Same trick, new words. Which one?', options: NAME7('pop', [
                             { s: 'syllo', t: 'Then I am a SERGEANT! I outrank you! I say MARCH!' },
                         ]), wrong: [
-                            { s: 'syllo', t: 'Wrong trick, recruit! I should know. I painted most of them.' },
+                            { s: 'syllo', t: 'Wrong trick, recruit! I should know. I put it on a poster.' },
                         ] },
                         { q: 'And that one?', options: NAME7('auth', [
                             { s: 'syllo', t: 'Then it\'s march, or… or…' },
@@ -182,7 +187,7 @@
                             { s: 'syllo', t: 'The Fair went quiet, recruit. Granny\'s chair is empty. And you left.' },
                             { s: 'syllo', t: 'The Professor hardly shouts now.', when: '!dead:sequins' },
                             { s: 'syllo', t: 'The Professor is gone.', when: 'dead:sequins' },
-                            { s: 'syllo', t: 'They were the only ones who ever listened. I thought, if they marched, you\'d follow.' },
+                            { s: 'syllo', t: 'My soldiers always listened. I thought, if they marched, everyone would follow. Even you.' },
                         ]), wrong: [
                             { s: 'syllo', t: 'No! That\'s a different trick. I\'d salute you for trying. I won\'t.' },
                         ] },
@@ -203,26 +208,27 @@
         },
         outcome: {
             1: [
-                { note: 'The drum stops. The whole crowd blinks. The glow goes out of every eye.' },
+                { note: 'The drummer puts the sticks down. No last boom. The glow goes out of every eye.' },
                 { note: 'One by one, the recruits wander back to their stalls. Somebody buys a toffee apple.' },
                 { s: 'syllo', t: 'At ease, recruits. Real ones. …Tuesdays, I\'m opening a fallacy range. Bring friends.' },
-                { s: 'syllo', t: 'And take this. My lucky cork. Bad luck bounces off it.' },
+                { s: 'syllo', t: 'And take this Ward. It\'s a cork, really. After a battle, bad luck bounces off it. Once.' },
                 { give: { ward: 1 } },
                 { s: 'syllo', t: 'The wooden ones still want a war. I\'ll find them a useful one.', when: 'soldiers' },
             ],
             2: [
-                { note: 'The drum stops. The glow fades, slowly. Everyone stays.' },
+                { note: 'No last boom. The glow fades, slowly. Everyone stays.' },
                 { s: 'syllo', t: 'Fine. Stay. Nobody marches. I\'ll be in my Gallery. Sulking. At attention.' },
                 { note: 'For the rest of the day, his practice matches are very, very loud.' },
                 { s: 'syllo', t: 'The wooden ones still want a war. I\'ll find them a useful one.', when: 'soldiers' },
             ],
             3: [
-                { note: 'Half the recruits march off down the Road, still glowing.' },
+                { note: 'The drum stumbles before the last boom. Half the recruits still glowing march off down the Road anyway.' },
                 { note: 'An hour later they march back, shouting. Nobody remembers why they left.' },
                 { s: 'syllo', t: 'They came BACK! …They\'re louder now. Is that good?' },
             ],
             4: [
-                { note: 'The drum roll ends. The recruits march off down the Road, eyes glowing, in perfect step.' },
+                { note: 'The last boom. Every recruit still glowing marches off down the Road, in perfect step.' },
+                { note: 'The wooden front rank stays, at attention.' },
                 { s: 'syllo', t: 'Wait! Recruits! You forgot your sergeant!' },
                 { note: 'He grabs the drum and runs after them. The Gallery door swings shut behind him.' },
                 { note: 'A sign on the door: GONE AFTER MY RECRUITS. —S' },
@@ -237,7 +243,8 @@
             ],
         }],
         last: [
-            { s: 'syllo', t: 'Fine. I\'ll shout at targets. Targets never leave.', when: TIER(7, 1, 2) },
+            { s: 'syllo', t: 'Off you go, recruit. I\'ll shout at targets. Targets never leave.', when: TIER(7, 1) },
+            { s: 'syllo', t: 'Fine. I\'ll shout at targets. Targets never leave.', when: TIER(7, 2) },
             { s: 'syllo', t: 'Half came back. I\'ll take half. Half is more than wood.', when: TIER(7, 3) },
             { note: 'Far down the Road, a drum. Getting smaller.', when: TIER(7, 4) },
         ],
@@ -263,7 +270,7 @@
         lesson: 3,
         station: 't-newsstand',
         teaser: 'A poodle and a puffin are about to debate a headline. The crowd\'s eyes are glowing.',
-        aside: { s: 'narrator', t: 'A poodle is shouting at a newspaper. The newspaper is winning.' },
+        aside: { s: 'narrator', t: 'A poodle is furious about a headline. About himself. He looks thrilled.' },
         clock: {
             label: 'The crowd\'s glow', size: 6, progress: 4,
             warn: [
@@ -276,12 +283,21 @@
         },
         start: [
             { note: 'On the Newsstand steps, today\'s front page: TREMENDOODLE SAYS SPEECHES ARE A DISASTER.' },
-            { s: 'tremendoodle', t: 'A DISASTER, they say I said! Fake! Very unfair! Tremendously unfair!' },
+            { s: 'attenbirdough', t: 'Pip kept the record here. Somebody must referee today. …You, please.', when: NO_PIP },
+            { s: 'tremendoodle', t: 'A DISASTER, they say I said! Fake! Sleepy Puffin printed it! I want an apology. FRONT page!' },
             { s: 'attenbirdough', t: 'Here we see the poodle in its natural habitat. Outraged.' },
             { s: 'pip', t: 'You\'re the referee. Press a claim. Any claim. Please.', when: PIP },
-            { s: 'attenbirdough', t: 'Pip kept the record here. Somebody must referee. …You, please.', when: NO_PIP },
         ],
         clues: {
+            intro: [
+                { inner: {
+                    owlet: 'Spell it out: what the paper wrote, then what the headline claims. Compare.',
+                    mothkin: 'Look. The headline shines. Gold ink. Who in town writes in gold?',
+                    fox: 'Picture him writing it. Tongue out. Concentrating.',
+                    frogling: 'The paper cut the Sundial\'s quote once. Check what they cut this time.',
+                    raven: '"Says." He never said it. The headline did.',
+                } },
+            ],
             spots: [
                 { id: 'seller', kind: 'person', label: 'Kardashiant, selling papers', x: 26, y: 60, art: 'creature/kardashiant/idle',
                   steps: [
@@ -308,16 +324,17 @@
             id: 'golden',
             steps: [
                 { note: 'Tremendoodle waves his arms. A sheet of golden paper drops out of his quiff.' },
-                { note: 'Three drafts in gold ink. SPEECHES ARE A CATASTROPHE, crossed out. SPEECHES ARE A DISASTER, with a big tick.' },
+                { note: 'Three drafts in gold ink. SPEECHES ARE SAD, crossed out. SPEECHES ARE A CATASTROPHE, crossed out. SPEECHES ARE A DISASTER, with a big tick.' },
                 { s: 'tremendoodle', t: 'Not mine. Never seen it. Beautiful handwriting, though. The best.' },
                 { note: 'He tucks it back into his quiff. The crowd is filming his face. Only you saw.' },
-                { inner: {
-                    owlet: 'Spell it out: paper says "long". Headline says "disaster". QED.',
-                    mothkin: 'Look. Golden paper. Who owns golden paper?',
-                    fox: 'Picture him writing it. Tongue out. Concentrating.',
-                    frogling: '"I guess." The paper cut a quote once before. I remember.',
-                    raven: '"Says." He never said it. The headline did.',
-                } },
+            ],
+            card: 'Tremendoodle wrote the headline himself, on his own golden paper.',
+        },
+        resolve: {
+            verb: 'object',
+            // Every path knows "long" by now (the article, or the old headline under the tape).
+            intro: [
+                { s: 'attenbirdough', t: 'And so the debate begins. Observe. Quietly.' },
                 { choice: [
                     { t: 'Where do I start?', then: [
                         { s: 'pip', t: 'Anywhere! Press a claim till it squeaks.', when: PIP },
@@ -329,13 +346,6 @@
                     ] },
                 ] },
             ],
-            card: 'Tremendoodle wrote the headline himself, on his own golden paper.',
-        },
-        resolve: {
-            verb: 'object',
-            intro: [
-                { s: 'attenbirdough', t: 'And so the debate begins. Observe. Quietly.' },
-            ],
             rounds: [
                 {
                     line: [{ s: 'attenbirdough', t: 'Our headline simply sums up the article. In fewer words.' }],
@@ -343,19 +353,19 @@
                     q: 'Show him what the paper really said.',
                     present: ['article', 'headline'],
                     wrong: [{ s: 'attenbirdough', t: 'Fascinating. But what did the paper actually say?' }],
-                    name: { q: 'What did the headline do to his words?', options: NAME8('straw'), wrong: [
-                        { s: 'attenbirdough', t: 'Not quite. Look at what he said, and what we printed.' },
+                    name: { q: 'What did the headline do to the article?', options: NAME8('straw'), wrong: [
+                        { s: 'attenbirdough', t: 'Not quite. Look at what our article said, and what the headline says.' },
                     ] },
                     right: [
                         { note: 'A few phones go down. A few eyes stop glowing.' },
                     ],
                 },
                 {
-                    line: [{ s: 'tremendoodle', t: 'Look at this crowd! Thousands! All angry! So I must be right!' }],
+                    line: [{ s: 'tremendoodle', t: 'Look at this crowd! Thousands! All angry at the paper! So the paper must be a disaster!' }],
                     press: [{ s: 'tremendoodle', t: 'Some are angry at me. Doesn\'t matter. Angry is angry. Tremendous.' }],
                     q: 'Your reply?',
                     options: [
-                        { t: 'An angry crowd isn\'t evidence. Show me where it says "disaster".', ok: true },
+                        { t: 'Where does the article say "disaster"? An angry crowd isn\'t evidence. Page nine is.', ok: true },
                         { t: 'Your crowd is small. Mine is bigger.', say: [
                             { s: 'tremendoodle', t: 'Mine is TREMENDOUS! …Wait. Now we\'re both counting.' },
                         ] },
@@ -371,7 +381,7 @@
                     ],
                 },
                 {
-                    line: [{ s: 'attenbirdough', t: 'Here we see the poodle. Its quiff is enormous. Its claims, therefore, are hot air.' }],
+                    line: [{ s: 'attenbirdough', t: 'Here we see the poodle. Enormous quiff. So, naturally, nothing it says is true.' }],
                     press: [{ s: 'attenbirdough', t: 'The quiff is relevant. Probably. It is very large.' }],
                     q: 'Your reply?',
                     options: [
@@ -411,13 +421,15 @@
                 },
             ],
         },
+        // The nickname comes before the correction, so that with the trial already lost the quote lines
+        // lead straight into the late, solemn frame.
         outcome: {
             1: [
                 { note: 'The crowd lowers its phones. The glow fades from every eye.' },
                 { s: 'tremendoodle', t: '"Long"? They said my speech was "long"? …That\'s fair, actually.' },
+                { s: 'tremendoodle', t: 'You! Referee! I\'m calling you "Tremendous Referee". My best nickname. Don\'t tell the others.' },
                 { s: 'attenbirdough', t: 'Tomorrow, a correction. And from now on, every quote in full.' },
                 { s: 'attenbirdough', t: 'Starting with the big one. The Sundial\'s. All of it, cloudy days included.', when: 'fair-quote' },
-                { s: 'tremendoodle', t: 'You! Referee! I\'m calling you "Tremendous Referee". My best nickname. Don\'t tell the others.' },
             ],
             2: [
                 { note: 'The crowd calms down. Slowly. The poodle still gets his front page.' },
@@ -441,6 +453,7 @@
             late: [
                 { s: 'attenbirdough', t: 'I\'ve framed the first full quote. It will hang in the Café.', when: '!dead:sundial' },
                 { note: 'The frame reads: "I tell the time. Mostly. On cloudy days I guess."', when: '!dead:sundial' },
+                { s: 'narrator', t: 'That\'s me. All of me. Even the cloudy bit.', when: '!dead:sundial' },
                 { note: 'Sir David frames the Sundial\'s whole quote. He hangs it in the Café, under the skylight.', when: 'dead:sundial' },
                 { note: '"I tell the time. Mostly. On cloudy days I guess."', when: 'dead:sundial' },
             ],
