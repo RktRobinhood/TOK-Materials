@@ -642,6 +642,7 @@
         'ui/gavel': { file: 'ui/gavel.webp', w: 632, h: 370 },
         'ui/glimmer': { file: 'ui/glimmer.webp', w: 156, h: 160 },
         'ui/glimmer-pile': { file: 'ui/glimmer-pile.webp', w: 160, h: 99 },
+        'ui/guess-o-matic': { file: 'ui/guess-o-matic.webp', w: 600, h: 587 },
         'ui/heart-empty': { file: 'ui/heart-empty.webp', w: 160, h: 155 },
         'ui/heart-full': { file: 'ui/heart-full.webp', w: 160, h: 146 },
         'ui/hero-frame': { file: 'ui/hero-frame.webp', w: 532, h: 587 },
