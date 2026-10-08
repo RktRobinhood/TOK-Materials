@@ -534,7 +534,7 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.8 | Mr Gumleaf (supply teacher, ordinary character): villager set idle + neutral, accusing, nervous | see `UNDERSTUDIES.md` | Hosts the Schoolhouse after Miss Quill is unmasked (Ch2) | 1 *story* | needed |
 | 13.9 | Miss Quill unmasked pose | `npc/quill/unmasked` | Ch2 twist | 1 *story* | needed |
 | 13.10 | Granny worried bust (scripts already ask for it) | `npc/granny/worried` | Granny in danger | 2 | not needed: the rewritten scripts never use it (checked 8 Oct); Achilles has one anyway |
-| 13.11 | Understudy Private Dawdle (Syllo's sloth recruit): fair folk set | see card | Only if Syllo dies (side story 7) | 2 *story* | needed |
+| 13.11 | Understudy Private Dawdle (Syllo's sloth recruit): fair folk set | see card | None: side stories cannot kill Syllo any more (UNDERSTUDIES.md section 5) | — | not planned |
 | 13.12 | Stakes-clock scenes: Sequins' cage on a winch, Granny's pot and rope, the Ch3 public vote, the Ch4 copy upload bar | `ui/stakes-*` | Peril widgets (STORY.md §4) | 2 *story* | needed |
 | 13.13 | Side-story map marker (blinking icon) | `ui/side-story` | Side stories at revisited stations (#56) | 2 | needed |
 | 13.14 | Side-story cast and props (to be listed per story after the outline passes the gate) | | #56 | 3 *story* | to list |
