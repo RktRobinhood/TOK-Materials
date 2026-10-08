@@ -18,7 +18,8 @@
  * Flags set here: suspect, cover, mayor (and mayor.interest, the Mayor's scene only), quillNamed
  * (the full table has named Quill: picks Granny's last words), lastWords (her / table: what she
  * actually said, set inside the clock's `full`), spare-axiom, away:schoolteacher.
- * Read here: nudgeFled, guess-o-matic, ladle (side story 4), dead:sequins (her Quiet Scene).
+ * Read here: nudgeFled, guess-o-matic, ladle (side story 4), paradox-board (side story 5), dead:sequins
+ * (her Quiet Scene).
  *
  * A Ch3 jump-in can walk back through the Sky Rift and reach the Hall first: reveals wait for their
  * set-ups (seen:ch2.square.win), and the suspicion and Mayor choices are skipped after the feast.
@@ -515,6 +516,8 @@
             ] },
         ] },
         { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
+        // Side story 5 (paradox-board): Smudge, who chalked the sentence on her board, cheers from the gallery.
+        { s: 'sweep', t: 'My sentence! From the board!', when: 'paradox-board' },
         { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. Her own tired eyes.' },
         { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
         { s: 'narrator', t: 'Round the tables, more masks drop. Imps in borrowed faces. Nudge\'s too.' },
