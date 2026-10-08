@@ -793,6 +793,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers, no characters. Match the style board and the two stakes strips above (same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). The Neon Tribunal of Tomorrowton at night: a dark, glossy courtroom gallery seen from the side, rows of empty benches climbing away to the right, and above them, across the whole width, dozens of glowing feed screens hanging at angles, each showing only a big red thumbs-down or a red cross mark, their red light spilling down over the benches. At the far left, a small, worn stone sundial sits alone in a pool of cold cyan light. Tense and cold, like a crowd that has already decided.
 
+
+### 13.23d Stakes-clock frame, Ch4: the Copy uploading (session of 8 October)
+
+**Attach:** `style-board.png`, `stakes-ch1.png`, `copy.png`, `server-hall.png`
+**Save as:** `5-ui/stakes-copy.png`
+**Ids:** `ui/stakes-copy` (behind the "{name} 2.0 · UPLOADING" meter at 35% opacity, `object-fit: cover`)
+
+> A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers. Match the style board and the stakes strips above (same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). Inside the Algorithm's server tower, dark with cyan and red lights. Across the whole strip runs a long row of identical glass pods on a conveyor, like a factory line. In the pods, from left to right, a small child-sized figure is being assembled out of light: at the left only a faint cyan wireframe outline, then more and more filled in, until at the far right it is the smooth, glossy, porcelain-white Copy from its bust above, standing still in its pod with its eyes closed. A thin cyan loading bar glows above each pod, fuller from left to right. Quietly eerie, clean and calm.
+
 ---
 
 ## Outcome log
@@ -948,3 +957,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.38 The Copy | First try (2026-10-08) | Smooth glossy porcelain child with a faint pixel grid, no species features, big calm cyan eyes and a small fixed smile, in a hooded cloak shifting through the avatars' colours, a glowing cyan loading bar three-quarters full floating above. More sweet than uncanny; the calm smile and the bar carry it. Single bust, npc/copy. |
 | 13.24c + 13.39 Last keepsakes | First try (2026-10-08) | A dark frosted shard with ice crystals (reads more like a blade than soft shadow; fine at keepsake size with Pip's line), Pip's teal-and-brass headphones on their side with one cup still glowing, a crumpled multicolour knitted hat with a brass button among shiny screen-glass shards (the shards fold into the hat's slice). Sliced into keepsake/cold-piece, keepsake/pip-headphones, keepsake/copy-hat. All Stage 13 keepsakes done. |
 | 13.23c Stakes frame, Ch3 | First try (2026-10-08) | Neon Tribunal gallery: red benches climbing to the right under dozens of hanging screens with red thumbs-down and crosses (no text), the city through tall windows, and a lone stone sundial in cyan light at the far left. Brighter and redder than Ch1/Ch2; fine at 35% opacity. Single panel, ui/stakes-ch3. |
+| 13.23d Stakes frame, the Copy | First try (2026-10-08) | Seven glass pods on a dark conveyor in the server tower, red lights behind: the Copy assembled from a cloud of cyan dots, to wireframe, to translucent, to the glossy hooded figure with closed eyes, a loading bar over each pod filling left to right. No text. Single panel, ui/stakes-copy. |
