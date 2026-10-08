@@ -148,7 +148,7 @@
                 q: 'So what did "YOU WILL FAIL" tell the hedgehog?',
                 options: [
                     { t: 'That he will fail, nine times in ten.', say: [
-                        { s: 'mirage', t: 'Its ninety is about all its fortunes. Mostly ordinary days. Not about him.' },
+                        { s: 'mirage', t: 'Ninety is the box\'s score, darling. Not the hedgehog\'s chance.' },
                     ] },
                     { t: 'Only that he played badly yesterday.', ok: true, say: [
                         { s: 'mirage', t: 'Yesterday\'s news, darling. Dressed up as tomorrow.' },
@@ -245,7 +245,7 @@
             { note: 'Top of the ranking: Coach Achilles. He typed one request. Very, very fast.', when: ACHILLES },
             { s: 'granny', t: '', u: 'First? I don\'t need berries. Give mine to the limping one.', when: ACHILLES },
             { s: 'beastie', t: 'Four HUNDRED requests? Speedcheeta! Are you HACKING my app?' },
-            { s: 'speedcheeta', t: 'I don\'t even like berries! I like WINNING!' },
+            { s: 'speedcheeta', t: 'HACKING? I don\'t even like berries! I just like WINNING!' },
         ],
         clues: {
             intro: [
@@ -390,9 +390,10 @@
             1: [
                 ...RULE_NOTES,
                 { s: 'beastie', t: 'Today I broke my own app. On purpose. Like and subscribe.' },
-                { note: 'Granny gets a basket. She types "thank you". It takes the rest of the day.', when: GRANNY },
-                { note: 'Achilles carries a basket to Volt. He runs off before anyone can thank him.', when: ACHILLES },
+                { note: 'Granny gets a basket. She types "thank you". It takes the rest of the day.', when: { all: [GRANNY, { not: RULE('draw') }] } },
+                { note: 'Granny\'s name comes up too. Luck, not need. She types "thank you". It takes the rest of the day.', when: { all: [GRANNY, RULE('draw')] } },
                 GRIEF,
+                { note: 'Achilles carries a basket to Volt. He runs off before anyone can thank him.', when: ACHILLES },
                 { note: 'Volt tries the lightning pose. Carefully. He might follow you.' },
                 { visitor: 'usainvolt' },
             ],
@@ -401,8 +402,8 @@
                 { note: 'But the new rule starts late. Half the berries have gone soft in the sun.' },
                 { s: 'beastie', t: 'Soft berries! Still berries! Still content!' },
                 { note: 'Granny gets a soft berry. She types "thank you". It takes the rest of the day.', when: GRANNY },
-                { note: 'Achilles carries a soft berry to Volt. He runs off before anyone can thank him.', when: ACHILLES },
                 GRIEF,
+                { note: 'Achilles carries a soft berry to Volt. He runs off before anyone can thank him.', when: ACHILLES },
             ],
             3: [
                 { note: 'Beastie agrees. The app does not. It is locked until tomorrow\'s update.' },
