@@ -370,6 +370,8 @@
         'npc/nudge': { file: 'cast/nudge-neutral.webp', w: 241, h: 240 },
         'npc/nudge/happy': { file: 'cast/nudge-happy.webp', w: 223, h: 240 },
         'npc/nudge/idle': { file: 'cast/nudge-idle.webp', w: 375, h: 561 },
+        'npc/nudge/masked': { file: 'cast/nudge-masked.webp', w: 476, h: 620 },
+        'npc/nudge/maskless': { file: 'cast/nudge-maskless.webp', w: 188, h: 240 },
         'npc/nudge/neutral': { file: 'cast/nudge-neutral.webp', w: 241, h: 240 },
         'npc/nudge/sad': { file: 'cast/nudge-sad.webp', w: 246, h: 240 },
         'npc/nudge/surprised': { file: 'cast/nudge-surprised.webp', w: 235, h: 240 },

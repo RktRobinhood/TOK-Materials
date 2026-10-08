@@ -692,6 +692,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no characters, no numbers. Match the style board and the Ch1 stakes strip above (same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). A Victorian banquet hall at night by candlelight. At the left, a big iron winch with a crank. From it a thick rope runs up and across the whole width under the dark rafters, over a pulley, and down on the right towards a huge black cauldron of soup, steam curling up from it. The rope ends in a big, round iron cargo hook (no loops or knots in the rope at all) that dangles just above the steam, with a single strand of knitted lavender wool caught on the hook. Long banquet tables fade into shadow below. Tense and a little absurd, not violent.
 
+
+### 13.32 Nudge masked and maskless (session of 8 October)
+
+**Attach:** `style-board.png`, `nudge.png`, `imps.png`
+**Save as:** `3-cast/nudge-masks.png`
+**Ids:** `npc/nudge/masked`, `npc/nudge/maskless` (full body, like the imps sheet)
+
+> Two full-body figures side by side on a transparent canvas, well apart, no text. Match the style board and the Nudge sheet above exactly (same imp: smoky-grey fur, curved horns, big ears, red eyes, bell-tipped tail), and the masks on the imps sheet. 1. Masked: Nudge wearing a sweet, smiling painted villager mask of a lamb, tied on with a ribbon; only a hint of red eye-glow shows through the eye holes. It stands proudly, chest out, one hand raised in a friendly wave, playing at being a villager. 2. Maskless: the same pose a second later, the lamb mask falling away from its face in mid-air, Nudge's real face caught in panic, both hands flung up to hide it, bell-tail bristling.
+
 ---
 
 ## Outcome log
@@ -836,3 +845,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.8 / 13.30 Mr Gumleaf | First try (2026-10-08) | Round grey koala in a chunky mustard cardigan with elbow patches, loose green leaf-print tie, rolled trousers, sandals, a eucalyptus leaf behind one ear and a leaf-print mug of tea in every pose. Sleepy idle sip, drowsy smile, pointing with a finger (asked: with the mug; reads as well), wide-eyed nervous over the mug. Painterly like the villagers. Sliced into npc/gumleaf/{idle,neutral,accusing,nervous} (npc/gumleaf = neutral). |
 | 13.31 Miss Quill unmasked | First try (2026-10-08) | The smiling stork mask (eyes shut, pince-nez) peeling away to the right; underneath, her own face gone dark and smoky with a black thorn crown and tired, glowing red eyes behind the same pince-nez; bonnet with feather, lace collar, the black scarf unravelling into wisps and loose dark feathers. More gothic stork than "small imp", kept: it fits "her old face became her mask". Single bust; replaces npc/villager-schoolteacher/unmasked (that island in villagers-schoolteacher-gardener.png is now null). |
 | 13.23b Stakes frame, Ch2 | Second try (2026-10-08) | Candlelit gothic banquet hall: iron winch with a coiled rope at the left, the rope across the rafters over a pulley, down to a big iron hook above a steaming cauldron at the right, a strand of lavender knitting caught on the hook, long tables in shadow. The first try drew the rope end as a hangman's noose, rejected; the redo asked for a hook and no loops or knots. Single panel, ui/stakes-ch2. |
+| 13.32 Nudge masked and maskless | First try (2026-10-08) | Same Nudge in a painted lamb mask (reads a little bunny-like; fine) tied with a red tasselled cord, waving, hand on hip; then the mask flying off above its head while it hides its panicked face, bell-tail bristling. The flying mask touches the horn, so it stays in the maskless slice. Sliced into npc/nudge/masked and npc/nudge/maskless. |
