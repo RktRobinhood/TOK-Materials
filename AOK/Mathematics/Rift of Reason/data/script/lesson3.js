@@ -55,8 +55,11 @@
     const KUKU = { all: ['dead:sundial', 'arrived:sundial'] };
     // Ch4 has been entered: Tomorrowton is a memory now (STORY.md A.12).
     const LATER = 'entered:ch4';
+    // The trial is over (a Ch4 jump-in walking back down has won it as a memory).
+    const POST = { seen: 'ch3.trial.win' };
+    const PRE = { not: POST };
     // Before the Plaza, nobody knows whose trial it is, and the counter files everything.
-    const BEFORE_PLAZA = { not: { seen: 'ch3.plaza' } };
+    const BEFORE_PLAZA = { all: [{ not: { seen: 'ch3.plaza' } }, PRE] };
     // The player heard the boast, live or in a recap.
     const HEARD_BOAST = { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }, { seen: 'recap.ch3' }, { seen: 'recap.ch4' }] };
     // The vote is still open: the Sundial alive and the clock not full.
@@ -110,6 +113,8 @@
             { s: 'narrator', t: 'The Rift Landing. The past is back through there. Boolesbury.', when: ALIVE },
             { s: 'pip', t: 'The Rift Landing. It counted the shadows here once. Nine. None of them its own.', when: PIP_ALONE },
             { s: 'narrator', t: '', u: 'The Rift Landing. Nine shadows. I counted them twice. Exactly nine.', when: KUKU },
+        ], else: [{ when: POST, then: [
+            { s: 'narrator', t: 'Tomorrowton. The trial is over. This is only remembering.', when: ALIVE },
         ], else: [
             { s: 'narrator', t: 'Tomorrowton. No sun. Only screens. It\'s nine-ish. I guess.' },
             { s: 'narrator', t: 'Nine shadows. None of them mine.' },
@@ -118,7 +123,7 @@
             { note: 'TRIAL OF THE SEASON · EVIDENCE FILED: 0' },
             { s: 'avatar', t: 'Whose trial?' },
             { s: 'pip', e: 'happy', t: 'Nobody\'s told me! Isn\'t that exciting?' },
-        ] },
+        ] }] },
     ];
 
     // ---------------------------------------------------------------- the Neon Bridge
@@ -132,8 +137,8 @@
     // Freed. Pip files the headline, the Sundial pities the defendant, and the counter ticks.
     S['ch3.bridge.win'] = [
         { s: 'kardashiant', t: 'Did I share that without reading it? …Don\'t tell my followers.' },
-        { s: 'pip', e: 'happy', t: 'The headline of the day! Filed. For the trial of the season.' },
-        { s: 'narrator', t: '"Fraud admits." Poor thing. Whoever it is.', when: ALIVE },
+        { s: 'pip', e: 'happy', t: 'The headline of the day! Filed. For the trial of the season.', when: PRE },
+        { s: 'narrator', t: '"Fraud admits." Poor thing. Whoever it is.', when: [ALIVE, PRE] },
         { when: BEFORE_PLAZA, then: FILE },
     ];
 
@@ -183,7 +188,9 @@
 
     // Beat 4 (required): Prosecutor Fin collects his exhibit. Two of his plan's clues: "a case I wanted
     // to win" and "Enter it. Formally. The jury must see it." The Fox and Frogling blind spots.
-    S['ch3.library'] = [
+    S['ch3.library'] = [{ when: POST, then: [
+        { s: 'fin', t: 'No licence. I come here to read now. The small print, mostly.' },
+    ], else: [
         { s: 'fin', e: 'smug', t: 'Prosecutor Fin. I have never lost a case I wanted to win.' },
         { s: 'fin', e: 'smug', t: 'Exhibit A: one shadow, lost by the defendant. Careless rocks lose things.' },
         { s: 'fin', t: 'Enter it, Mr Pip. Formally. The jury must see it.' },
@@ -193,22 +200,27 @@
             fox: 'Picture it. Fin\'s the real villain. A shark who never loses? Obvious.',
             frogling: 'Fin\'s never lost. He won\'t lose this. Never has, never will.',
         } },
-    ];
+    ] }];
     // Clue 2: Pip asks the Sundial to say it again. The counter ticks when it talks (Moth-kin's lead).
-    S['ch3.library.win'] = [
+    S['ch3.library.win'] = [{ when: PRE, then: [
         { s: 'pip', t: 'Could you say "I guess" again? The record\'s a bit quiet.', when: ALIVE },
         { s: 'narrator', t: '…I guess?', when: ALIVE },
         { when: { all: [BEFORE_PLAZA, ALIVE] }, then: FILE },
         { inner: { mothkin: 'Shh. The counter ticks every time it talks. …Pretty numbers, though.' } },
-    ];
+    ] }];
 
     // ---------------------------------------------------------------- the Neon Plaza
 
     // Beat 5 (required; the midpoint): the defendant. The avatar's certainty costs something:
     // "I filed it. I never read it." The Algorithm boasts, and Pip files it out of habit (the climax).
-    S['ch3.plaza'] = [
+    S['ch3.plaza'] = [{ when: POST, then: [
+        { note: 'The Plaza screens still show it: THE ALGORITHM v. THE SUNDIAL. Stamped across it: DISMISSED.', when: ALIVE },
+        { note: 'The Plaza screens still show it: THE ALGORITHM v. THE SUNDIAL. Stamped across it: GUILTY.', when: 'dead:sundial' },
+        { s: 'narrator', t: 'We know how this one ends. I\'d rather not watch it twice.', when: ALIVE },
+    ], else: [
         { note: 'Every screen in the Plaza changes at once. THE ALGORITHM v. THE SUNDIAL. CHARGE: FRAUD.' },
         { note: '"IT CLAIMS TO TELL THE TIME. IT GUESSES."' },
+        { note: 'SENTENCE IF GUILTY: SWITCHED OFF. VOICE FILED IN THE TOWER.' },
         { s: 'pip', e: 'surprised', t: 'The Sundial? But I put it all on the record. Everything it said.' },
         { s: 'narrator', t: 'That\'s why you kept asking.' },
         { s: 'avatar', e: 'worried', t: 'I filed it. I never read it.' },
@@ -223,21 +235,23 @@
         } },
         { inner: { raven: '"Saved to favourites." Those exact words. At the Fair.' }, when: { seen: 'prologue.rift' } },
         { inner: { raven: '"Saved to favourites." A boast. Boasts leak.' }, when: { not: { seen: 'prologue.rift' } } },
-    ];
+    ] }];
 
     // ---------------------------------------------------------------- for the defence
 
     // Beat 6 (required): the Data Lab. Pip, defiant; the crowd posts; Juror One (Quill, back) posts too.
-    S['ch3.datalab'] = [
+    S['ch3.datalab'] = [{ when: PRE, then: [
         { s: 'pip', e: 'angry', t: 'I\'m allowed to file for both sides! I checked! Page one!' },
+        { note: 'GUILTY VOTES: 48,310. AND CLIMBING.' },
         { note: 'A post on the wall screen: "Rocks can\'t tell time. I\'ve never seen a rock with a watch."' },
-        { note: 'Another, from a tall juror in a new mask: "#GUILTY. No maybes. Children who say \'maybe\' grow up saying \'maybe\'." It is signed JUROR ONE.' },
-    ];
+        { note: 'Another: "My uncle had a sundial. It was rude to him. GUILTY."' },
+        { note: 'Another, from a tall juror in a new mask: "#GUILTY. No maybes. Children who say \'maybe\' grow up saying \'maybe\'." It is signed JUROR ONE. In red pencil.' },
+    ] }];
     // The sunny-day record (the defence's evidence for Counts Two and Three). The Feed speaks for the
     // first time: in your colour, grey, and slightly wrong (STORY.md App. B). Frogling's story lead.
     S['ch3.datalab.win'] = [
-        { s: 'pip', e: 'happy', t: 'Its sunny-day record! Right every single time. Filed, for the defence.' },
-        { s: 'narrator', t: 'Right every time the sun was out. I\'d forgotten that.', when: ALIVE },
+        { s: 'pip', e: 'happy', t: 'Its sunny-day record! Right every single time. Filed, for the defence.', when: PRE },
+        { s: 'narrator', t: 'Right every time the sun was out. I\'d forgotten that.', when: [ALIVE, PRE] },
         { inner: {
             owlet: 'Everyone votes guilty. So: guilty. Elegant. Like everyone.',
             mothkin: 'Look at the votes. Only the votes. Lights are boring.',
@@ -283,6 +297,7 @@
 
     // Beat 7 (required): the star witness, possessed, rehearses for the prosecution.
     S['ch3.steps'] = [
+        { note: 'GUILTY VOTES: 310,552. VERDICT TODAY. THE TRIBUNAL DOORS ARE OPEN.', when: PRE },
         { when: { seen: 'ch3.datalab.win' }, then: [NOT_ME] },
         { s: 'speedcheeta', t: 'I STREAMED IT! A BIG ROUND ROCK! IT LOST ITS SHADOW! CHAT, IT LOST IT!', possessed: true },
         { inner: { fox: 'Picture the defendant hearing all this. …Oh. It can.' } },
@@ -300,56 +315,63 @@
     S['ch3.steps.win'] = [
         { note: 'The glow drains out of Speedcheeta. A scared cub is left, holding a phone.' },
         { s: 'speedcheeta', t: 'Chat? Where did chat go? …Why am I evidence?' },
-        { s: 'pip', t: 'You streamed the Fair. The eye, the net, the shadow. Can we have it?' },
-        { s: 'speedcheeta', t: 'My best stream ever? Uncut? Why should I give it to YOU?' },
-        { flag: 'clip.interest', value: 2 },
-        { flag: 'clip.lean', value: 0 },
-        { choice: [
-            CARD('A rock is on trial for something it didn\'t do. That isn\'t fair.', 1, 1, 'Not fair? …Yeah. That\'s actually not fair.'),
-            CARD('Give it to me and you\'ll be famous. Huge.', 1, -1, 'Huge? How huge? Don\'t answer. Huge.'),
-            CARD('Court rule nine: every witness must share all evidence.', -1, 0, 'Rule nine. Boring. Zero views.'),
-        ] },
-        { choice: [
-            CARD('If the truth comes out, nobody can blame you.', 1, 1, 'Nobody blames me? I like that.'),
-            CARD('Everyone will share it. Everyone.', 1, -1, 'Everyone? Even my mum?'),
-            CARD('Here\'s a chart of shadow lengths, hour by hour.', -1, 0, 'A CHART? I\'m falling asleep. Live.'),
-            // Your Way of Knowing's card (voice-marked: it counts toward voice.offered / voice.followed).
-            CARD('If it\'s unfair to the rock, it\'s unfair to you next.', 2, 1, 'To ME? …Okay. That logic is scary.', { only: 'owlet', voice: true }),
-            CARD('Look at the corner of your clip. That imp is watching you.', 2, 1, 'The imp with the clipboard? It IS watching me.', { only: 'mothkin', voice: true }),
-            CARD('Picture the views. "Streamer saves Sundial."', 2, -1, '"Streamer saves Sundial." I can SEE the thumbnail.', { only: 'fox', voice: true }),
-            CARD('You were at the Fair. You filmed the truth once.', 2, 1, 'I did. Before the glow. I was… good at it.', { only: 'frogling', voice: true }),
-            CARD('Don\'t call it evidence. Call it an exclusive.', 2, -1, 'An EXCLUSIVE? Say that again. Slower.', { only: 'raven', voice: true }),
-        ] },
-        { choice: [
-            CARD('Tell the truth once, and it stays told.', 1, 1, 'Stays told. …I like that.'),
-            CARD('Do it for the clips. Do it for the views.', 1, -1, 'For the views. Always for the views.'),
-            CARD('A sundial works by angles. Let me explain the angles.', -1, 0, 'ANGLES. I\'m logging off.'),
-        ] },
-        { when: { flag: 'clip.interest', gte: 4 }, then: [
-            { when: { flag: 'clip.lean', gte: 1 }, then: [
-                { flag: 'clip', value: 'sound' },
-                { s: 'speedcheeta', t: 'Fine. The whole stream. Uncut. Because it\'s true. Weird feeling.' },
-            ], else: [
-                { flag: 'clip', value: 'slick' },
-                { s: 'speedcheeta', t: 'Fine! The whole stream! Tag me! TAG ME!' },
-            ] },
-            // The result screen's question (STORY.md App. C): was your argument good?
-            { s: 'pip', t: 'For the record. Was your argument good? Or did it just work?' },
-            { choice: [
-                { t: 'It was true. And fair to him.', then: [{ s: 'pip', e: 'happy', t: 'Good and working. That\'s the rare kind.' }] },
-                { t: 'It worked. Isn\'t that the same thing?', then: [{ s: 'pip', e: 'thinking', t: 'Hmm. The Algorithm\'s arguments work too.' }] },
-                { t: '…' },
-            ] },
+        // A walk down from Ch4: the trial is over, so no negotiation (`clip` stays unset; Ch4 doesn't read it).
+        { when: POST, then: [
+            { s: 'pip', t: 'The trial\'s over. You\'re not evidence any more. Go home.' },
         ], else: [
-            { flag: 'clip', value: 'none' },
-            { s: 'speedcheeta', t: 'Nah. It\'s my content. Battery\'s dead anyway. Bye!' },
-            { s: 'pip', t: 'No clip. We still have my record. And you.' },
+            { s: 'pip', t: 'You streamed the Fair. The eye, the net, the shadow. Can we have it?' },
+            { s: 'speedcheeta', t: 'My best stream ever? Uncut? Why should I give it to YOU?' },
+            { flag: 'clip.interest', value: 2 },
+            { flag: 'clip.lean', value: 0 },
+            { choice: [
+                CARD('A rock is on trial for something it didn\'t do. That isn\'t fair.', 1, 1, 'Not fair? …Yeah. That\'s actually not fair.'),
+                CARD('Give it to me and you\'ll be famous. Huge.', 1, -1, 'Huge? How huge? Don\'t answer. Huge.'),
+                CARD('Court rule nine: every witness must share all evidence.', -1, 0, 'Rule nine. Boring. Zero views.'),
+            ] },
+            { choice: [
+                CARD('If the truth comes out, nobody can blame you.', 1, 1, 'Nobody blames me? I like that.'),
+                CARD('Everyone will share it. Everyone.', 1, -1, 'Everyone? Even my mum?'),
+                CARD('Here\'s a chart of shadow lengths, hour by hour.', -1, 0, 'A CHART? I\'m falling asleep. Live.'),
+                // Your Way of Knowing's card (voice-marked: it counts toward voice.offered / voice.followed).
+                CARD('If it\'s unfair to the rock, it\'s unfair to you next.', 2, 1, 'To ME? …Okay. That logic is scary.', { only: 'owlet', voice: true }),
+                CARD('Look at the corner of your clip. That imp is watching you.', 2, 1, 'The imp with the clipboard? It IS watching me.', { only: 'mothkin', voice: true }),
+                CARD('Picture the views. "Streamer saves Sundial."', 2, -1, '"Streamer saves Sundial." I can SEE the thumbnail.', { only: 'fox', voice: true }),
+                CARD('You were at the Fair. You filmed the truth once.', 2, 1, 'I did. Before the glow. I was… good at it.', { only: 'frogling', voice: true }),
+                CARD('Don\'t call it evidence. Call it an exclusive.', 2, -1, 'An EXCLUSIVE? Say that again. Slower.', { only: 'raven', voice: true }),
+            ] },
+            { choice: [
+                CARD('Tell the truth once, and it stays told.', 1, 1, 'Stays told. …I like that.'),
+                CARD('Do it for the clips. Do it for the views.', 1, -1, 'For the views. Always for the views.'),
+                CARD('A sundial works by angles. Let me explain the angles.', -1, 0, 'ANGLES. I\'m logging off.'),
+            ] },
+            { when: { flag: 'clip.interest', gte: 4 }, then: [
+                { when: { flag: 'clip.lean', gte: 1 }, then: [
+                    { flag: 'clip', value: 'sound' },
+                    { s: 'speedcheeta', t: 'Fine. The whole stream. Uncut. Because it\'s true. Weird feeling.' },
+                ], else: [
+                    { flag: 'clip', value: 'slick' },
+                    { s: 'speedcheeta', t: 'Fine! The whole stream! Tag me! TAG ME!' },
+                ] },
+                // The result screen's question (STORY.md App. C): was your argument good?
+                { s: 'pip', t: 'For the record. Was your argument good? Or did it just work?' },
+                { choice: [
+                    { t: 'It was true. And fair to him.', then: [{ s: 'pip', e: 'happy', t: 'Good and working. That\'s the rare kind.' }] },
+                    { t: 'It worked. Isn\'t that the same thing?', then: [{ s: 'pip', e: 'thinking', t: 'Hmm. The Algorithm\'s arguments work too.' }] },
+                    { t: '…' },
+                ] },
+            ], else: [
+                { flag: 'clip', value: 'none' },
+                { s: 'speedcheeta', t: 'Nah. It\'s my content. Battery\'s dead anyway. Bye!' },
+                { s: 'pip', t: 'No clip. We still have my record. And you.' },
+            ] },
         ] },
         // Nudge sulks at its microphone, and tells you why. Pip asks its name (Ch4: it mourns him).
         { s: 'nudge', e: 'clipboard', t: 'Boo! He was MY witness. I had him at a million views.' },
         { s: 'nudge', t: 'Nobody counts imps. It counted me. Every click. I was a NUMBER!' },
         { s: 'pip', t: 'What\'s your name? For the record.' },
         { s: 'nudge', e: 'surprised', t: '…Nudge. Nobody asks imps.' },
+        // The Sundial's one frightened beat, before the court (it read the sentence at the Plaza).
+        { s: 'narrator', t: 'Switched off. Like a screen. …Win, would you? I\'d like one more sunny day.', when: [ALIVE, PRE] },
     ];
 
     // ---------------------------------------------------------------- the Tribunal (boss)
@@ -414,7 +436,8 @@
     // apply (side story 8's full quote in the paper; Speedcheeta's clip), then Nudge's numbers.
     S['ch3.trial.stage2'] = [{ play: 'ch3.trial.count2', once: true }];
     S['ch3.trial.count2'] = [
-        { s: 'pip', t: 'From my record, in full: "On cloudy days I guess." Not "fraud admits".' },
+        { s: 'pip', t: 'I\'m still recording. It would want the end on the record.', when: 'dead:sundial' },
+        { s: 'pip', t: 'Struck from the record: "fraud admits". The whole quote: "I tell the time. Mostly. On cloudy days I guess."' },
         { inner: {
             owlet: 'Valid isn\'t sound. It followed, and it was still false. I knew that. Definitely.',
             raven: '"Admits" was the headline\'s word. The quote just said "I guess".',
@@ -428,7 +451,8 @@
             { note: 'On every screen: the Fair, an eye in the sky, a little net. The vote wobbles.' },
             { clock: 'ch3', drain: 1 },
         ] },
-        { s: 'fin', e: 'smug', t: 'Count two. Numbers. It was wrong three times in ten!' },
+        { s: 'fin', e: 'smug', t: 'Count two. Numbers. It was wrong three times in ten!', when: ALIVE },
+        { s: 'fin', e: 'shaken', t: 'Count two. The court says we finish. …So we finish.', when: 'dead:sundial' },
         { s: 'nudge', e: 'clipboard', t: 'I counted! I LOVE counting!' },
     ];
 
@@ -448,7 +472,8 @@
             { s: 'fin', e: 'angry', t: 'Objection. That clip was bought with flattery, Your Honour.' },
             { s: 'judge', t: 'Noted. The defence will press harder.' },
         ] },
-        { s: 'fin', e: 'smug', t: 'Count three. A proof that a sundial can never know the time.' },
+        { s: 'fin', e: 'smug', t: 'Count three. A proof that a sundial can never know the time.', when: ALIVE },
+        { s: 'fin', e: 'shaken', t: 'Count three. I\'ll read it. I won\'t enjoy it.', when: 'dead:sundial' },
     ];
     // The temptation inside the trial. Accepting freezes the vote where it stands (the Sundial cannot
     // die); the two pieces are used up (Ch4: the Copy speaks in the Sundial's voice and starts 2 on).
@@ -496,17 +521,16 @@
         { when: 'dead:sundial', then: [
             // Tier 4: the vote passed first. No jokes. No Sundial question (Kuku asks it in Ch4).
             { s: 'judge', t: 'The arguments failed. The vote did not care. Write that down, Pip.' },
-            { s: 'pip', t: '…Written.' },
+            { s: 'judge', t: 'But the exhibit was stolen. Stolen things go home.' },
             { s: 'fin', e: 'shaken', t: 'The vault never opens. Courts do. I bet with its life. I lost. I\'m sorry.' },
             { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED.' },
-            { s: 'algorithm', t: 'VERDICT: EXECUTED.' },
-            { s: 'algorithm', t: 'EXHIBIT A… released? probably— RELEASED.' },
+            { s: 'algorithm', t: 'VERDICT: EXECUTED. EXHIBIT A… released? probably— RELEASED.' },
             { note: 'The third piece of shadow drops into your pocket. It is cold.' },
             { inner: {
                 fox: 'He was the villain in my story. He wasn\'t. The vote was.',
                 frogling: '"A case he wanted to win." He wanted this one. It went anyway.',
             } },
-            { note: 'The GUILTY counter peaks. Then the crowd logs off anyway. Juror One holds up her sign in an empty gallery.' },
+            { note: 'The GUILTY counter peaks. Then the crowd logs off anyway. Juror One holds up her red-pencil sign in an empty gallery.' },
             { s: 'nudge', t: '…Why is nobody cheering?' },
         ], else: [
             { s: 'judge', e: 'gavel', t: 'No argument today supports its claim. Case dismissed.' },
@@ -522,12 +546,10 @@
             ] },
             { note: 'One screen keeps playing it: "…I guess." "…I guess." The Algorithm kept a copy.', when: { flag: 'stakes.ch3', is: 3 } },
             { note: 'Exhibit A leaves its glass case. The third piece of shadow goes home to its owner.' },
-            { s: 'fin', t: 'The vault never opens. Courts do.' },
-            { s: 'fin', t: 'It only brings out its prizes when it thinks it\'s winning. …So I let it win. For a bit.' },
+            { s: 'fin', t: 'The vault never opens. Courts do. …So I let it win. For a bit.' },
             { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie. He does not look up.' },
             { s: 'algorithm', t: 'verdict rejected. VERDICT REJECTED.' },
-            { note: 'In the gallery, the GUILTY signs come down. All but one: Juror One\'s. Then she lowers it too.' },
-            { note: 'Nudge\'s clipboard counter drops. FOLLOWERS: 0. It slinks away.' },
+            { note: 'In the gallery, the GUILTY signs come down. All but one: Juror One\'s, in red pencil. Then she lowers it too. Nudge\'s counter drops to FOLLOWERS: 0. It slinks away.' },
             { inner: {
                 fox: 'He was the villain in my story. My story was wrong. Again.',
                 frogling: '"A case he wanted to win." Small print. Always read the small print.',
@@ -545,7 +567,9 @@
                 { s: 'narrator', t: 'The Tower Road. Up is the tower. Down is the cocoa.', when: ALIVE },
                 { s: 'pip', t: 'The Tower Road. Up, or back down to the city.', when: PIP_ALONE },
                 { s: 'narrator', t: '', u: 'The Tower Road. Two hundred and six steps to the door. Exactly.', when: KUKU },
-            ], else: [{ play: 'ch3.towergate.call' }] },
+            ], else: [{ when: { not: LATER }, then: [{ play: 'ch3.towergate.call' }], else: [
+                { s: 'narrator', t: 'The Tower Road. We\'ve been up. This was a memory.', when: ALIVE },
+            ] }] },
         ], else: [
             // A walk down from Ch4 before the trial (a memory).
             { s: 'narrator', t: 'The Tower Road. The city is below us. So is the Tribunal.', when: ALIVE },
@@ -554,6 +578,8 @@
     S['ch3.towergate.call'] = [
         { s: 'algorithm', t: 'FINE. COME TO THE TOWER. BRING THE ROCK.', when: ALIVE },
         { s: 'algorithm', t: 'COME TO THE TOWER. THE ROCK IS ALREADY HERE. IN A JAR.', when: 'dead:sundial' },
+        // The Café wish, paid off on the alive path: it never stopped talking.
+        { s: 'narrator', t: 'Still talking. So no sunny spot for me yet. …Thank you.', when: ALIVE },
         { s: 'narrator', t: 'Up there. The last piece. And whoever cut me into four.', when: ALIVE },
         { note: 'Pip holds his recorder very tight. He doesn\'t press anything.', when: 'dead:sundial' },
     ];
@@ -566,6 +592,7 @@
         { s: 'pip', t: 'The third piece of shadow. It\'s in your pocket. Still cold.' },
         { s: 'narrator', t: 'It\'s all right. On cloudy days I gu—', replay: true },
         { s: 'pip', t: 'It let me record every word. Nobody ever gave me all their words before.' },
+        { s: 'pip', t: 'It wanted somewhere sunny. When we find the sun, its piece goes there.' },
         { choice: [
             { t: 'It never once said it was sure.' },
             { t: 'I should have taken the deal.', when: { flag: 'bargain', is: 'no' } },
