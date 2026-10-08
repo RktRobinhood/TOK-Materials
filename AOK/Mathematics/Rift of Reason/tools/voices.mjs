@@ -14,8 +14,14 @@
 //   node tools/voices.mjs --prune           delete recordings whose line no longer exists
 //   node tools/voices.mjs --manifest        just rebuild data/voice-manifest.js from files on disk
 //
-// Lines come from data/script/*.js (every step with a speaker `s` and text `t`, at any depth;
-// the avatar is silent) and each creature's `lines` in data/creatures.js. A file is named by
+// Lines come from data/script/*.js (every step with a speaker `s` and text `t`, at any depth),
+// the stakes clocks' warn/full/brink steps and each creature's `lines` in data/creatures.js
+// (design/SCRIPT-FORMAT.md section 10):
+//   - an avatar line ({ s: 'avatar' }) once per avatar, avatar-<species>-<variant> (fewer with `only`);
+//   - an inner line ({ inner: { owlet, … } }) once per species × gender, avatar-<species>-<variant>-inner
+//     (the Feed's imitation, `feed: true`, as avatar-<species>-<variant>-possessed);
+//   - a possessed line (`possessed: true`, or after { possess: role } until { free: role }) as <speaker>-possessed;
+//   - an understudy's `u` text as the understudy (skipped until that understudy has a voice in the cast file). A file is named by
 // Rift.voiceId(speaker, text) of the text as written, so the game finds it with no extra data.
 // `{name}` is the player's nickname at runtime: the recording leaves the name out.
 import fs from 'node:fs';
@@ -56,8 +62,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 function loadGame() {
     const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js')).sort();
     const puzzles = fs.readdirSync(path.join(GAME_DIR, 'js', 'puzzles')).filter(f => f.endsWith('.js') && f !== 'registry.js').sort();
-    return loadRift(['js/core/rift.js', 'data/creatures.js', 'data/map.js', 'data/cases.js',
-        ...scripts.map(f => 'data/script/' + f), 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
+    return loadRift(['js/core/rift.js', 'data/avatars.js', 'data/creatures.js', 'data/map.js', 'data/cases.js',
+        ...scripts.map(f => 'data/script/' + f), 'data/cast.js', 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
 }
 
 // What the TTS reads: no nickname, and shouted all-caps lines (the Algorithm) in sentence case
@@ -76,24 +82,51 @@ export function spoken(text) {
 
 function collect(Rift) {
     const lines = [], seen = new Set(), skipped = [];
+    const understudies = new Set(Object.values(Rift.data.cast || {}).filter(c => c.policy === 'lethal').map(c => c.actors[1]).filter(Boolean));
     const add = (who, text, mood, where) => {
         if (who === 'avatar' || typeof text !== 'string' || !text.trim()) return;
         const id = Rift.voiceId(who, text);
         if (seen.has(id)) return;
         seen.add(id);
-        if (!CAST[who]) { skipped.push({ who, text, why: 'no voice in voices-cast.json' }); return; }
+        if (!CAST[who]) { skipped.push({ who, text, why: understudies.has(who) ? 'understudy voice not cast yet' : 'no voice in voices-cast.json' }); return; }
         const say = spoken(text);
         if (!/[a-z]/i.test(say)) { skipped.push({ who, text, why: 'nothing to say (stage direction only)' }); return; }
         lines.push({ id, who, text, say, mood, where });
     };
-    const walk = (node, where) => {
-        if (Array.isArray(node)) return node.forEach(n => walk(n, where));
+    const avatars = Object.keys(Rift.data.avatars || {}).flatMap(sp => ['boy', 'girl'].map(v => ({ sp, id: sp + '-' + v })));
+    const only = o => (o == null ? avatars : avatars.filter(a => [].concat(o).some(x => x === a.sp || x === a.id)));
+    const cast = Rift.data.cast || {};
+    const understudyOf = role => (cast[role] && cast[role].policy === 'lethal' && cast[role].actors[1]) || null;
+    const step = (node, where, possessed) => {
+        if (node.s === 'avatar') {
+            if (typeof node.t === 'string') only(node.only).forEach(a => add('avatar-' + a.id, node.t, node.e, where));
+            return;
+        }
+        const poss = !!node.possessed || possessed.has(node.s);
+        add(node.s + (poss ? '-possessed' : ''), node.t, node.e, where);
+        const u = understudyOf(node.s);
+        if (u && typeof node.u === 'string') add(u, node.u, node.e, where);
+    };
+    const inner = (node, where) => {
+        for (const [sp, text] of Object.entries(node.inner)) {
+            if (typeof text !== 'string') continue;
+            avatars.filter(a => a.sp === sp).forEach(a => add('avatar-' + a.id + (node.feed ? '-possessed' : '-inner'), text, null, where));
+        }
+    };
+    // Steps in one list run in order, so { possess } … { free } covers the lines between them.
+    const walk = (node, where, possessed) => {
+        if (Array.isArray(node)) { const set = new Set(possessed); return node.forEach(n => walk(n, where, set)); }
         if (!node || typeof node !== 'object') return;
-        if (typeof node.s === 'string' && typeof node.t === 'string') add(node.s, node.t, node.e, where);
-        for (const [k, v] of Object.entries(node)) if (k !== 't' && typeof v === 'object') walk(v, where);
+        if (typeof node.possess === 'string') possessed.add(node.possess);
+        if (typeof node.free === 'string') possessed.delete(node.free);
+        if (typeof node.s === 'string' && typeof node.t === 'string') step(node, where, possessed);
+        if (node.inner && typeof node.inner === 'object' && !Array.isArray(node.inner)) inner(node, where);
+        for (const [k, v] of Object.entries(node)) if (k !== 't' && k !== 'inner' && typeof v === 'object') walk(v, where, new Set(possessed));
     };
     const scripts = Rift.data.script || Rift.data.scripts || {};
-    for (const [key, steps] of Object.entries(scripts)) walk(steps, key);
+    for (const [key, steps] of Object.entries(scripts)) walk(steps, key, new Set());
+    for (const [key, lead] of Object.entries(Rift.data.leads || {})) walk(lead, 'lead ' + key, new Set());
+    for (const [key, clock] of Object.entries(Rift.data.clocks || {})) walk(clock, 'clock ' + key, new Set());
     for (const [id, c] of Object.entries(Rift.data.creatures || {})) (c.lines || []).forEach(t => add(id, t, null, 'creature ' + id));
     // Match the actual station host, not a second generic tutorial narrator.
     // voice ids de-duplicate repeated family/host instructions across nodes.
@@ -108,6 +141,7 @@ function collect(Rift) {
 }
 
 export function voiceCatalog() { return collect(loadGame()); }
+export { collect as collectVoiceLines };
 
 const fileOf = l => l.id + '.mp3';
 const rendered = l => fs.existsSync(path.join(OUT, fileOf(l)));

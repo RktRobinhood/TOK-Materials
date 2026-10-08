@@ -20,7 +20,7 @@ test('voice catalog covers every actual tutorial host/family and all teaching-ba
  }
  assert.equal(families.size,14);
  for(const step of Rift.Battle.Lesson.steps)assert.ok(ids.has(Rift.voiceId('granny',step.text)));
- assert.ok(lines.every(l=>l.who!=='avatar'));assert.ok(skipped.every(l=>l.why==='nothing to say (stage direction only)'));
+ assert.ok(lines.every(l=>l.who!=='avatar'));assert.ok(skipped.every(l=>['nothing to say (stage direction only)','understudy voice not cast yet'].includes(l.why)));
 });
 test('batch speech keeps acting directions in each line metadata',()=>{
  const parts=speechParts([{say:'Come closer.',mood:'whispering'},{say:'We have a plan!',mood:'triumphant'}],'Dry tortoise humour');
