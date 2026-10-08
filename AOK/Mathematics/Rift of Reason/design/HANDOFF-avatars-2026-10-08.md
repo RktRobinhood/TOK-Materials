@@ -30,3 +30,9 @@ The teacher shut the laptop; all agents were stopped mid-task and their partial 
 ## Open decisions for the teacher
 
 - ElevenLabs voice design needs a paid plan; free plan covers sound effects and TTS with premade voices only.
+
+## Update, end of 8 October
+
+- Done: #50–#52 (powers, balance, button); story engine (cast, inner voice, stakes clocks, Quiet Scenes, possession, dark stations, Settings switch); outlines passed the three-critic gate (`reviews/outline-gate-passed-2026-10-08.md`); **lesson 1 script passed** (logic 8, author 8.5, editor 8.5).
+- Next: art session (`PRODUCTION-TODO.md`, lesson 1 order); voices on each quota day (`PRODUCTION-TODO.md`); add a `--script` filter to `tools/voices.mjs` before big narrator runs; then script lesson 2 through the same gate.
+- Teacher decisions pending: provisional voices for Nudge/Guess-o-Matic/Signpost; OK for the Ch3 map change and the new Ch2/Ch4 puzzle code (asked 8 Oct).
