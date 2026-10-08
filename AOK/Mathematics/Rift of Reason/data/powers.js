@@ -55,7 +55,7 @@
     const powers = {
         // ---- Owlet (Reason) ----
         'close-the-proof': {
-            name: 'Close the Proof', colour: 'reason', kind: 'board', cost: 1, recharge: 1, target: 'enemy-creature',
+            name: 'Close the Proof', colour: 'reason', kind: 'board', cost: 3, recharge: 2, target: 'enemy-creature',
             text: 'Defeat an enemy creature that has 1 health left.',
             deeper: 'Defeat an enemy creature that has 2 or less health left.',
             broader: 'Also deal 1 damage to the enemy hero.',
@@ -68,7 +68,7 @@
             face: (s, p, m) => (m.broader ? 1 : 0),
         },
         foresee: {
-            name: 'Foresee', colour: 'reason', kind: 'other', cost: 1, recharge: 1,
+            name: 'Foresee', colour: 'reason', kind: 'other', cost: 0, recharge: 1,
             text: 'Look at the top 2 cards of the shared rule deck and put them back in any order.',
             deeper: 'Look at the top 3 cards of the shared rule deck and put them back in any order.',
             broader: 'Also take one of them into your hand.',
@@ -107,7 +107,7 @@
 
         // ---- Moth-kin (Sense perception) ----
         lantern: {
-            name: 'Lantern', colour: 'perception', kind: 'board', cost: 2, recharge: 1, target: 'enemy-creature',
+            name: 'Lantern', colour: 'perception', kind: 'board', cost: 2, recharge: 4, target: 'enemy-creature',
             text: 'Deal 1 damage to an enemy creature.',
             deeper: 'Deal 2 damage to an enemy creature.',
             broader: 'Also see one random card in the enemy hand.',
@@ -126,7 +126,7 @@
             },
         },
         'night-sight': {
-            name: 'Night Sight', colour: 'perception', kind: 'other', cost: 1, recharge: 2,
+            name: 'Night Sight', colour: 'perception', kind: 'other', cost: 2, recharge: 2,
             text: 'See the opponent\'s hand until your next turn. Their next card costs 1 more.',
             deeper: 'See the opponent\'s hand until your next turn. Their next 2 cards cost 1 more.',
             broader: 'Also see the top card of their deck.',
@@ -152,7 +152,7 @@
 
         // ---- Fox kit (Imagination) ----
         'what-if': {
-            name: 'What If?', colour: 'imagination', kind: 'board', cost: 2, recharge: 2, target: 'any-creature',
+            name: 'What If?', colour: 'imagination', kind: 'board', cost: 0, recharge: 2, target: 'any-creature',
             text: 'Swap a creature\'s attack and health.',
             deeper: 'Swap a creature\'s attack and health, then give it +1 attack.',
             broader: 'Also draw a card.',
@@ -165,7 +165,7 @@
             },
         },
         brainstorm: {
-            name: 'Brainstorm', colour: 'imagination', kind: 'other', cost: 1, recharge: 2,
+            name: 'Brainstorm', colour: 'imagination', kind: 'other', cost: 0, recharge: 0,
             text: '+1 card play this turn.',
             deeper: '+2 card plays this turn.',
             broader: 'Also +1 energy.',
@@ -204,7 +204,7 @@
             },
         },
         'hold-that-thought': {
-            name: 'Hold That Thought', colour: 'memory', kind: 'other', cost: 2, recharge: 2,
+            name: 'Hold That Thought', colour: 'memory', kind: 'other', cost: 0, recharge: 1,
             text: 'Move the Fate track 1 space closer or further away.',
             deeper: 'Move the Fate track up to 2 spaces closer or further away.',
             broader: 'Also draw a card.',
@@ -224,7 +224,7 @@
 
         // ---- Raven chick (Language) ----
         'call-it-out': {
-            name: 'Call It Out', colour: 'language', kind: 'board', cost: 1, recharge: 2, target: 'enemy-creature-seen',
+            name: 'Call It Out', colour: 'language', kind: 'board', cost: 2, recharge: 2, target: 'enemy-creature-seen',
             text: 'An enemy creature loses Guard, Shield and Elusive.',
             deeper: 'An enemy creature loses Guard, Shield and Elusive, and can\'t attack next turn.',
             broader: 'Also draw a card.',
@@ -237,7 +237,7 @@
             },
         },
         'fine-print': {
-            name: 'Fine Print', colour: 'language', kind: 'other', cost: 1, recharge: 1,
+            name: 'Fine Print', colour: 'language', kind: 'other', cost: 2, recharge: 2,
             text: 'Lose 1 heart and draw a card.',
             deeper: 'Lose 1 heart and draw 2 cards.',
             broader: 'Also +1 energy this turn.',
@@ -250,11 +250,18 @@
                 for (let i = 0; i < n; i++) api.draw(p);
                 if (m.broader) api.s.players[p].energy += 1;
             },
+            // The one-ply score prices a heart above a card. Early on, with hearts to spare and a thin
+            // hand, the card is worth more (more options next turn); low on hearts it is not.
+            ai(s, p, target, H) {
+                const P = s.players[p];
+                if (H.rules(s).reverseHearts) return 0;
+                return (P.hearts >= 8 ? 0.6 : P.hearts >= 6 ? 0.2 : -0.5) + (P.hand.length <= 2 ? 0.5 : 0);
+            },
         },
 
         // ---- Emotion (trainers and bosses only) ----
         outrage: {
-            name: 'Outrage', colour: 'emotion', kind: 'board', cost: 1, recharge: 1, target: 'friendly-creature',
+            name: 'Outrage', colour: 'emotion', kind: 'board', cost: 1, recharge: 0, target: 'friendly-creature',
             text: 'A friendly creature gets +2 attack this turn.',
             run(api, p, target) {
                 api.buff(target, 2, 0, 'Outrage', true);

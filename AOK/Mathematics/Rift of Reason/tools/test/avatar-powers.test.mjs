@@ -9,6 +9,8 @@ import { Rift, E, AI, inst, setup, act, onBoard, toHand, toDiscard, pass, hp, at
 const same = (a, b, m) => assert.deepEqual(plain(a), plain(b), m);
 const powerActs = s => E.legalActions(s).filter(a => a.type === 'power');
 const texts = s => s.lastEvents.map(e => e.text).join(' | ');
+// The numbers come from data/powers.js (set by the balance pass, design/reviews/avatar-powers-balance.md).
+const P = id => Rift.data.powers[id];
 
 // A quiet main-phase battle (battle-helpers setup) where player 0 has this power.
 function powered(id, tweaks, opts) {
@@ -54,23 +56,27 @@ test('Close the Proof: only a 1-health enemy, free of card plays, then recharges
     same(powerActs(s).map(a => a.target), ['p1c0']);
     const st = E.powerStatus(s, 0);
     assert.equal(st.usable, true);
-    assert.equal(st.cost, 1);
-    assert.equal(st.recharge, 1);
+    assert.equal(st.cost, P('close-the-proof').cost);
+    assert.equal(st.recharge, P('close-the-proof').recharge);
+    assert.ok(P('close-the-proof').recharge >= 1, 'the recharge check below needs a recharge');
     s = act(s, { type: 'power', target: 'p1c0' });
     assert.ok(s.players[1].discard.includes('p1c0'));
-    assert.equal(s.players[0].energy, 9);
+    assert.equal(s.players[0].energy, 10 - P('close-the-proof').cost);
     assert.equal(s.players[0].playsThisTurn || 0, 0, 'not a card play');
     assert.equal(E.playsLeft(s, 0), 2);
     assert.ok(s.lastEvents.some(e => e.t === 'power-use' && e.id === 'close-the-proof'));
-    // Once per turn, then recharge 1: skip one own turn, ready on the next.
+    // Once per turn, then recharge r: skip r own turns, ready on the next.
     s.cards.p1c1.damage = 2;
     assert.equal(powerActs(s).length, 0);
     assert.equal(E.powerStatus(s, 0).why, 'recharge');
-    assert.equal(E.powerStatus(s, 0).turnsLeft, 2);
-    s = pass(pass(s));
-    assert.equal(s.active, 0);
-    assert.equal(E.powerStatus(s, 0).turnsLeft, 1);
-    assert.equal(powerActs(s).length, 0);
+    const r = P('close-the-proof').recharge;
+    assert.equal(E.powerStatus(s, 0).turnsLeft, r + 1);
+    for (let i = r; i >= 1; i--) {
+        s = pass(pass(s));
+        assert.equal(s.active, 0);
+        assert.equal(E.powerStatus(s, 0).turnsLeft, i);
+        assert.equal(powerActs(s).length, 0);
+    }
     s = pass(pass(s));
     assert.equal(E.powerStatus(s, 0).ready, true);
     s.cards.p1c1.damage = 2;
@@ -82,8 +88,8 @@ test('Close the Proof Deeper and Broader', () => {
     onBoard(s, 'p1c0');
     s.cards.p1c0.damage = 1; // 2 health left
     const st = E.powerStatus(s, 0);
-    assert.equal(st.cost, 2, 'Broader: +1 energy');
-    assert.equal(st.recharge, 2, 'Deeper: recharge +1');
+    assert.equal(st.cost, P('close-the-proof').cost + 1, 'Broader: +1 energy');
+    assert.equal(st.recharge, P('close-the-proof').recharge + 1, 'Deeper: recharge +1');
     s = act(s, { type: 'power', target: 'p1c0' });
     assert.ok(s.players[1].discard.includes('p1c0'));
     assert.equal(s.players[1].hearts, 9);
@@ -192,7 +198,7 @@ test('Brainstorm: +1 card play this turn (Deeper +2, Broader +1 energy)', () => 
     let d = powered('brainstorm', ['deeper', 'broader']);
     d = act(d, { type: 'power' });
     assert.equal(E.playsLeft(d, 0), 4);
-    assert.equal(d.players[0].energy, 10 - 2 + 1);
+    assert.equal(d.players[0].energy, 10 - (P('brainstorm').cost + 1) + 1, 'Broader: costs 1 more, gives 1 energy');
     d = pass(pass(d));
     assert.equal(E.playsLeft(d, 0), 2, 'only this turn');
 });
@@ -245,10 +251,11 @@ test('Fine Print: lose 1 heart, draw (Deeper 2 cards, Broader +1 energy); never 
     s = act(s, { type: 'power' });
     assert.equal(s.players[0].hearts, 9);
     assert.equal(s.players[0].hand.length, 1);
+    assert.equal(s.players[0].energy, 10 - P('fine-print').cost);
     let d = powered('fine-print', ['deeper', 'broader']);
     d = act(d, { type: 'power' });
     assert.equal(d.players[0].hand.length, 2);
-    assert.equal(d.players[0].energy, 10 - 2 + 1);
+    assert.equal(d.players[0].energy, 10 - (P('fine-print').cost + 1) + 1);
     const low = powered('fine-print');
     low.players[0].hearts = 1;
     assert.equal(E.powerStatus(low, 0).why, 'useless');
@@ -274,9 +281,12 @@ test('Emotion powers: Outrage and Pile-On', () => {
 
 test('tweaks: Quick, Cheap and Blood price change the numbers, never below 0', () => {
     const st = (id, tw) => E.powerStatus(powered(id, tw), 0);
-    same([st('lantern', ['quick']).cost, st('lantern', ['quick']).recharge], [3, 0]);
-    same([st('lantern', ['cheap']).cost, st('lantern', ['cheap']).recharge], [1, 2]);
-    same([st('fine-print', ['quick']).recharge, st('close-the-proof', ['cheap']).cost], [0, 0]);
+    const L = P('lantern');
+    same([st('lantern', ['quick']).cost, st('lantern', ['quick']).recharge], [L.cost + 1, Math.max(0, L.recharge - 1)]);
+    same([st('lantern', ['cheap']).cost, st('lantern', ['cheap']).recharge], [Math.max(0, L.cost - 1), L.recharge + 1]);
+    // Never below 0: a cost-0 power made Cheap, a recharge-0 power made Quick.
+    const free = Object.keys(Rift.data.powers).find(id => P(id).cost === 0 && P(id).recharge === 0 && P(id).colour !== 'emotion');
+    same([st(free, ['cheap']).cost, st(free, ['quick']).recharge], [0, 0]);
     const b = st('lantern', ['blood', 'broader']);
     same([b.cost, b.heartCost], [0, 1]);
     let s = powered('lantern', ['blood']);
@@ -288,8 +298,8 @@ test('tweaks: Quick, Cheap and Blood price change the numbers, never below 0', (
     onBoard(low, 'p1c0');
     low.players[0].hearts = 1;
     assert.equal(E.powerStatus(low, 0).why, 'hearts');
-    // Recharge 0 (Quick): ready again next own turn, still once per turn.
-    let q = powered('fine-print', ['quick']);
+    // Recharge 0: ready again next own turn, still once per turn.
+    let q = powered(free);
     q = act(q, { type: 'power' });
     assert.equal(powerActs(q).length, 0);
     q = pass(pass(q));

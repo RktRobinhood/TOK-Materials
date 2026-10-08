@@ -50,10 +50,11 @@
  *
  *   Hero powers ({ type: 'power' }, data/powers.js): every level weighs the power like any other
  *   action. Its energy joins the knapsack; a power's `ai` hint adds what the one-ply score can't see
- *   (Night Sight's tax, Brainstorm's extra play, Outrage before an attack); Foresee and Hold That
- *   Thought are scored deep (the next Fate event). Normal uses it when that simple score says it
- *   helps; Competent and Expert also roll it out with the rest of the turn, and Expert's lethal
- *   search includes it.
+ *   (Night Sight's tax, Brainstorm's extra play, Fine Print's card when hearts are plenty, Outrage
+ *   before an attack). Foresee and Hold That Thought, and their questions (which order, which way),
+ *   are scored deep (the next Fate event) at every level, Normal included. Normal uses a power when
+ *   that simple score says it helps; Competent and Expert also roll it out with the rest of the turn,
+ *   and Expert's lethal search includes it.
  *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
@@ -487,6 +488,12 @@
         return m && m.def.ai ? m.def.ai(s, me, a.target || null, E().H, m) || 0 : 0;
     }
 
+    // A question asked by Foresee or Hold That Thought (which order, which way Fate moves).
+    function deepPowerQuestion(s) {
+        const src = s.pending && s.pending.source;
+        return !!(src && src.type === 'power' && DEEP_POWERS[src.id]);
+    }
+
     function needsDeep(s, a) {
         if (a.type === 'axiom' || a.type === 'draw') return true;
         if (a.type === 'activate') return !!DEEP_ABILITIES[a.ability];
@@ -524,7 +531,8 @@
         const base = deep => (baseCache[deep] != null ? baseCache[deep] : (baseCache[deep] = evaluate(s, me, { ctx, deep })));
         const scored = cands.map(a => {
             if (a.type === 'spark') return { a, score: 0 };
-            const deep = ctx.cfg.deep && !ctx.fast && needsDeep(s, a);
+            // Normal also scores the Fate and rule-deck powers deep, or it could not tell their worth.
+            const deep = (ctx.cfg.deep || a.type === 'power') && !ctx.fast && needsDeep(s, a);
             let next;
             try { next = E().applyLegal(s, a); } catch (e) { return { a, score: -Infinity }; }
             let score = settle(next, me, ctx, deep, 0) - base(deep);
@@ -644,7 +652,7 @@
             const pick = heuristicChoice(s, me);
             return legal.find(a => a.choice === pick) || legal[0];
         }
-        const deep = ctx.cfg.deep && !ctx.fast;
+        const deep = (ctx.cfg.deep || deepPowerQuestion(s)) && !ctx.fast;
         return pickBest(legal.map(a => ({ a, score: settle(E().applyLegal(s, a), me, ctx, deep, 1) })));
     }
 
