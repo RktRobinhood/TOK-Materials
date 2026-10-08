@@ -199,3 +199,15 @@ node tools/sim-battle.mjs --powers=pairs --games=1100                # 45 pairs 
 node tools/sim-battle.mjs --powers=tweaks --games=1100               # 50 tweak rows (~23 min)
 node tools/sim-battle.mjs --powers --games=1100 --pw=foresee+broader --patch=foresee.cost:-1   # try a text via a tweak
 ```
+
+## Blood price with the AI hint (8 Oct, evening, #53)
+
+The AI hardly paid Blood price (0.13–0.33 uses a game), so `js/battle/ai.js` powerHint now values the heart like Fine Print does (cheap with 8+ hearts, dear below 6). Rerun, 400 games per row (±4.9), Competent vs Competent, tweak vs the same power untweaked:
+
+| power + tweak | win% | uses tweak/base |
+|---|---|---|
+| Close the Proof + Blood | 59.8 | 0.85 / 0.51 |
+| Night Sight + Blood | 56.3 | 2.06 / 1.56 |
+| What If? + Blood | 47.0 | 0.47 / 1.86 |
+
+Used properly, Blood price is strong on Close the Proof and Night Sight, as the earlier table suspected. The #53 proposal (1 heart per 2 energy, at least 1) would make Close the Proof cost 2 hearts; Night Sight (cost 2) would stay at 1 heart. Waiting for the teacher's OK on the four text fixes.

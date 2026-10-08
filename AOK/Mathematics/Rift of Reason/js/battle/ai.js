@@ -504,7 +504,15 @@
     // A power's own value hint (data/powers.js `ai`).
     function powerHint(s, a, me) {
         const m = E().powerMods(s, me);
-        return m && m.def.ai ? m.def.ai(s, me, a.target || null, E().H, m) || 0 : 0;
+        if (!m) return 0;
+        let v = m.def.ai ? m.def.ai(s, me, a.target || null, E().H, m) || 0 : 0;
+        // Blood price (#53): the one-ply score prices the heart above most power effects, so the AI
+        // hardly paid it. Like Fine Print: with hearts to spare a heart is cheap; low on hearts it is not.
+        if (m.heartCost > 0 && !E().H.rules(s).reverseHearts) {
+            const h = s.players[me].hearts;
+            v += h >= 8 ? 0.6 : h >= 6 ? 0.2 : -0.5;
+        }
+        return v;
     }
 
     // A question asked by Foresee or Hold That Thought (which order, which way Fate moves).
