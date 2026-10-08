@@ -4,6 +4,8 @@ Lesson 1 (Prologue + Ch1) has passed the three-critic script gate (logic 8, auth
 
 ## Art session (with the teacher, one prompt at a time)
 
+**Session of 8 October (evening): done.** Lesson 1 list (rows 1–10 below) and lesson 2 list all made, plus Nudge masked/clipboard, the Feast hall, the Hum Charm, Hoot's Gavel, Kuku, Rubberstamp, the Copy, the old core, all keepsakes, all five stakes strips and the side-story marker. 13.10 and 13.19 turned out not to be needed. Outcome log in `art-requests/ART-REQUESTS.md`. Left in Stage 13: 13.11 Dawdle and 13.14 side-story cast (wait for side stories), 13.21 core scenes (to design), 13.34 poster (optional), 13.35 (needs a card design), 13.3 (CSS may do). Code follow-ups: wire `scene/granny-door` into `ch1.door` and `scene/feast-hall` into the Ch2 Hall; all four understudies now have art, so every death can arm.
+
 Full specs and ids: `art-requests/ART-REQUESTS.md` Stage 13. Order for lesson 1 first:
 
 | Order | Item | Why now |

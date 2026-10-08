@@ -112,6 +112,7 @@
         "stakes-ch3.png": {"type":"single","id":"ui/stakes-ch3","class":"panel"},
         "stakes-copy.png": {"type":"single","id":"ui/stakes-copy","class":"panel"},
         "stakes-pip.png": {"type":"single","id":"ui/stakes-pip","class":"panel"},
+        "marker-side-story.png": {"type":"single","id":"ui/side-story","class":"item"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

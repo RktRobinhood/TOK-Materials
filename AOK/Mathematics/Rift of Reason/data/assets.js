@@ -752,6 +752,7 @@
         'ui/scar-fogged-eye': { file: 'ui/scar-fogged-eye.webp', w: 160, h: 121 },
         'ui/scar-heavy-heart': { file: 'ui/scar-heavy-heart.webp', w: 160, h: 144 },
         'ui/scar-shaky-hand': { file: 'ui/scar-shaky-hand.webp', w: 160, h: 149 },
+        'ui/side-story': { file: 'ui/side-story.webp', w: 160, h: 156 },
         'ui/slate': { file: 'ui/slate.webp', w: 493, h: 252 },
         'ui/sold': { file: 'ui/sold.webp', w: 160, h: 160 },
         'ui/spark': { file: 'ui/spark.webp', w: 160, h: 158 },

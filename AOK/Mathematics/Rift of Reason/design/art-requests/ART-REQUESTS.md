@@ -811,6 +811,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers. Match the style board and the Copy strip above (same tower, same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). The Sorting Room: a long dark conveyor belt runs across the whole strip carrying small blank paper cards. Over the belt, a row of big mechanical arms with heavy rubber stamps comes down one after another, each stamp pad glowing a cold, flat white. At the right end, a tall clerk's desk where a small bat's silhouette sits hunched, seen only as a dark outline, wrapped in a cold white glow with a faint grid of tiny thumbnail squares rippling over its wings. Its little headphones are the only warm thing in the picture, a tiny cyan glow. Cold, quiet and sad, not violent.
 
+
+### 13.13 Side-story map marker (session of 8 October)
+
+**Attach:** `style-board.png`, `map-markers.png`, `map-markers-2.png`
+**Save as:** `5-ui/marker-side-story.png`
+**Ids:** `ui/side-story` (map marker at revisited stations, #56)
+
+> One map marker on a transparent canvas, no text, no letters, no punctuation marks. Match the map markers above exactly (same gold-rimmed round medallion, same size, finish and outline weight), so it sits beside them on the map at 48 px. Inside: a small open storybook with a bookmark ribbon, a little magenta spark and three tiny stars rising out of its pages, as if a new story is waiting. Clearly different from the event, treasure and shop markers at a glance.
+
 ---
 
 ## Outcome log
@@ -968,3 +977,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.23c Stakes frame, Ch3 | First try (2026-10-08) | Neon Tribunal gallery: red benches climbing to the right under dozens of hanging screens with red thumbs-down and crosses (no text), the city through tall windows, and a lone stone sundial in cyan light at the far left. Brighter and redder than Ch1/Ch2; fine at 35% opacity. Single panel, ui/stakes-ch3. |
 | 13.23d Stakes frame, the Copy | First try (2026-10-08) | Seven glass pods on a dark conveyor in the server tower, red lights behind: the Copy assembled from a cloud of cyan dots, to wireframe, to translucent, to the glossy hooded figure with closed eyes, a loading bar over each pod filling left to right. No text. Single panel, ui/stakes-copy. |
 | 13.23e Stakes frame, Pip | First try (2026-10-08) | The Sorting Room: a dark conveyor of blank cards under a row of mechanical stamp arms with cold white pads, endless sorting belts behind, and at the right Pip hunched at a clerk's desk under a lamp, headphones glowing cyan, a cloud of profile-picture thumbnails around him (generic silhouettes, tiny and faint at 35%). Single panel, ui/stakes-pip. All five stakes frames done. |
+| 13.13 Side-story marker | First try (2026-10-08) | Gold-rimmed studded medallion on violet with an open storybook, red bookmark ribbon, a magenta spark and gold stars rising from the pages (page lines are plain stripes, no text). Matches the marker family. Single item, ui/side-story. |
