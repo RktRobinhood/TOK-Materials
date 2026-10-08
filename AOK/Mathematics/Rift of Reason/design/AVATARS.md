@@ -26,20 +26,20 @@ Tracking: epic issue "Avatars that matter" and its children.
 
 Each species has two powers: one that **acts on the board** (creatures) and one that **bends another part of the game** (the rule deck, Fate, card plays, the opponent's hand, your hearts). Which gender gets which was decided by coin flip (7 Oct): board power for the Owlet girl, Moth-kin boy, Fox girl, Frogling boy and Raven girl.
 
-Games last about 7–8 turns per player, so a recharge sets how often a power fires: recharge 0 ≈ 7 uses a game, 1 ≈ 4, 2 ≈ 3, 3 ≈ 2. Costs below are **starting points**: the powers start a little weak on purpose (tweaks come later), and the simulator sets the final numbers (section 1.5).
+Games last about 7–8 turns per player, so a recharge caps how often a power fires: recharge 0 ≈ 7 uses a game, 1 ≈ 4, 2 ≈ 3, 3 ≈ 2, 4 ≈ 1–2. Cost and recharge below are **after the balance pass** (8 October, `design/reviews/avatar-powers-balance.md`): a power that is strong per use (Close the Proof, Lantern, Call It Out) costs more or waits longer, a weak one is free. Uses/game is what Competent actually did in simulation: the board powers wait for a target, so they fire less often than the recharge allows. The powers start a little weak on purpose (tweaks come later).
 
 | Avatar | Power | Effect | Cost | Recharge | Uses/game | Compare (cards) |
 |---|---|---|---|---|---|---|
-| Owlet girl (Reason, board) | **Close the Proof** | Defeat an enemy creature that has 1 health left. | 1 | 1 | ~4 | Finishes what a fight started: rewards planning trades. |
-| Owlet boy (Reason, rules) | **Foresee** | Look at the top 2 cards of the shared rule deck and put them back in any order. | 1 | 1 | ~4 | You choose the next Fate free flip and the next rule anyone draws. |
-| Moth-kin boy (Perception, board) | **Lantern** | Deal 1 damage to an enemy creature. | 2 | 1 | ~4 | Counterexample is 3 damage for 2 as a one-off card. |
-| Moth-kin girl (Perception, hand) | **Night Sight** | See the opponent's hand until your next turn. Their next card costs 1 more. | 1 | 2 | ~3 | Seeing what is hidden; the tax gives it value when the AI uses it. |
-| Fox girl (Imagination, board) | **What If?** | Swap a creature's attack and health. | 2 | 2 | ~3 | Imagine Otherwise (card) does this and draws, for 2. |
-| Fox boy (Imagination, plays) | **Brainstorm** | +1 card play this turn. | 1 | 2 | ~3 | More options, if you have the energy to use them. |
-| Frogling boy (Memory, board) | **Recall** | Return your most recently defeated creature to your hand. | 2 | 3 | ~2 | Recall (card) does the same with a choice, for 2. |
-| Frogling girl (Memory, Fate) | **Hold That Thought** | Move the Fate track 1 space closer or further away. | 2 | 2 | ~3 | Clockwork (card) does this for 1. The teacher wants only small Fate moves. |
-| Raven girl (Language, board) | **Call It Out** | An enemy creature loses Guard, Shield and Elusive. | 1 | 2 | ~3 | Look Closer (card) does this and draws, for 1. |
-| Raven boy (Language, hearts) | **Fine Print** | Lose 1 heart and draw a card. | 1 | 1 | ~4 | Pays hearts for cards. Pairs with the reversed victory rule (zero hearts wins). |
+| Owlet girl (Reason, board) | **Close the Proof** | Defeat an enemy creature that has 1 health left. | 3 | 2 | 0.6 | Finishes what a fight started: rewards planning trades. |
+| Owlet boy (Reason, rules) | **Foresee** | Look at the top 2 cards of the shared rule deck and put them back in any order. | 0 | 1 | 3.6 | You choose the next Fate free flip and the next rule anyone draws. |
+| Moth-kin boy (Perception, board) | **Lantern** | Deal 1 damage to an enemy creature. | 2 | 4 | 1.0 | Counterexample is 3 damage for 2 as a one-off card. |
+| Moth-kin girl (Perception, hand) | **Night Sight** | See the opponent's hand until your next turn. Their next card costs 1 more. | 2 | 2 | 1.1 | Seeing what is hidden; the tax gives it value when the AI uses it. |
+| Fox girl (Imagination, board) | **What If?** | Swap a creature's attack and health. | 0 | 2 | 1.9 | Imagine Otherwise (card) does this and draws, for 2. |
+| Fox boy (Imagination, plays) | **Brainstorm** | +1 card play this turn. | 0 | 0 | 2.0 | More options, if you have the energy to use them. |
+| Frogling boy (Memory, board) | **Recall** | Return your most recently defeated creature to your hand. | 2 | 3 | 0.6 | Recall (card) does the same with a choice, for 2. |
+| Frogling girl (Memory, Fate) | **Hold That Thought** | Move the Fate track 1 space closer or further away. | 0 | 1 | 3.5 | Clockwork (card) does this for 1. The teacher wants only small Fate moves. |
+| Raven girl (Language, board) | **Call It Out** | An enemy creature loses Guard, Shield and Elusive. | 2 | 2 | 0.6 | Look Closer (card) does this and draws, for 1. |
+| Raven boy (Language, hearts) | **Fine Print** | Lose 1 heart and draw a card. | 2 | 2 | 0.8 | Pays hearts for cards. Pairs with the reversed victory rule (zero hearts wins). |
 
 The overworld perks stay as they are (free hint, lantern, catch odds, extra wrong check, boss item) and are shown next to the card power on the avatar screen.
 
@@ -75,7 +75,7 @@ A student who used the time rift to skip a chapter gets that chapter's slot with
 ### 1.4 Opponents
 
 - **Trainers:** the power of their team's most common colour (the board version for Normal level, the other one for Competent). Emotion-heavy teams use an Emotion power (below).
-- **Emotion, the colour no avatar has:** it is the Algorithm's colour (a feed runs on outrage). Emotion powers for trainers/bosses: **Outrage** (a friendly creature gets +2 attack this turn; cost 1, recharge 1) and **Pile-On** (1 damage to the enemy hero for each of your creatures that attacked this turn; cost 2, recharge 2).
+- **Emotion, the colour no avatar has:** it is the Algorithm's colour (a feed runs on outrage). Emotion powers for trainers/bosses: **Outrage** (a friendly creature gets +2 attack this turn; cost 1, recharge 0) and **Pile-On** (1 damage to the enemy hero for each of your creatures that attacked this turn; cost 2, recharge 2).
 - **Bosses:** one signature power each, written with the boss (separate issue).
 - **The Algorithm (finale idea, not settled):** it has watched you all game and copies the power you used most in your earlier battles ("it predicts you from your past clicks"). This would make lesson 4's point ("AI is just probability") into the final fight. Needs a usage counter in the save.
 
