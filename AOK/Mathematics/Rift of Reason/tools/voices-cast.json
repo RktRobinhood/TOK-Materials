@@ -1,75 +1,335 @@
 {
     "_about": "One Gemini prebuilt voice and acting direction per speaker (tools/voices.mjs). Caricatures are creatures inspired by public personas: the directions describe a style, never a real person. Changing a voice here only affects lines rendered afterwards; delete a speaker's MP3s to re-render them. Avatars (design/AVATAR-VOICES.md): an entry with an \"inner\" direction also defines the speaker <id>-inner (same voice and model, inner acting, the inner effect in voices-fx.mjs).",
-    "narrator": { "voice": "Gacrux", "model": "flash", "style": "The Sundial, an ancient talking stone sundial. A warm, slow, very old voice, kind and gently amused, like a grandfather clock that learned to talk. Clear English for teenagers learning the language" },
-    "granny": { "voice": "Sulafat", "model": "flash", "style": "Granny Axiom, a tiny ancient tortoise grandmother. Dry, sharp and deadpan funny, slow but never sleepy" },
-    "sequins": { "voice": "Puck", "model": "flash", "style": "Professor Sequins, a magpie ringmaster at a village fair. A showman: big, bright, teasing, rolling his words like a circus barker" },
-    "mirage": { "voice": "Despina", "model": "flash", "style": "Madame Mirage, a chameleon fortune teller. Mysterious and theatrical, slow and breathy, enjoying every dramatic pause" },
-    "syllo": { "voice": "Alnilam", "model": "flash", "style": "Sergeant Syllo, a pompous badger drill sergeant at a toy shooting gallery. Barking, clipped, loud, comically strict" },
-    "algorithm": { "voice": "Charon", "model": "flash", "style": "The Algorithm, a faceless feed entity. Cold, smooth, flat and synthetic, every word evenly weighted like an automated announcement, quietly menacing" },
-    "corvina": { "voice": "Umbriel", "model": "flash", "style": "Corvina the Card Sharp, a crow who runs a card table. Sly, smooth and amused, a gambler who thinks she has already won" },
-    "nudge": { "voice": "Kore", "style": "Nudge, a small grey imp with a bell on its tail, the Algorithm's eager minion. Quick, wheedling and gleeful, a little squeaky but always clear, desperate to be noticed; shouts 'Engagement!' like a cheer" },
-    "guess-o-matic": { "voice": "Schedar", "style": "The Guess-o-Matic, a tiny brass toy box that guesses the next number. Small, tinny, slow and mechanical, but gentle and honest; it says 'probably' with a small hopeful lift" },
-    "signpost": { "voice": "Fenrir", "style": "The Talking Signpost, an old wooden signpost that loves gossip. Hushed, conspiratorial and delighted, leaning in to share a secret; slow and clear for learners" },
-    "lobstorian": { "voice": "Iapetus", "model": "flash", "style": "A stern lobster lecturer in a three-piece suit. Precise, earnest and professorial, slightly pedantic, carefully qualifying every claim" },
-    "astrophysicat": { "voice": "Achird", "style": "A cheerful cat who hosts a science show. Enthusiastic, warm and theatrical, delighted to correct everyone" },
-    "tremendoodle": { "voice": "Orus", "model": "flash", "style": "A boastful golden poodle. Big superlatives, punchy short phrases, salesman confidence, repeats himself for effect" },
-    "swiftlet": { "voice": "Aoede", "style": "A sparkly pop-star swift. Bright, breezy and playful, conspiratorial when hinting at hidden clues" },
-    "muskrat": { "voice": "Enceladus", "style": "A muskrat tech visionary on a wobbly rocket. Halting and awkward, little pauses mid-sentence, sudden bursts of grand confidence" },
-    "zuckerborg": { "voice": "Rasalgethi", "style": "A smooth little lizard-robot in a hoodie. Flat, overly polite and slightly too even, trying very hard to sound like a normal human" },
-    "altmanta": { "voice": "Schedar", "style": "A calm manta ray gliding on a chat bubble. Soft, measured and reassuring, even when announcing that everything will change" },
-    "beastie": { "voice": "Fenrir", "style": "A huge friendly beast who runs giant challenges. Loud, fast hype-host energy, everything is the biggest ever" },
-    "siuuugull": { "voice": "Sadachbia", "style": "A proud athletic seagull. Confident and triumphant, celebrating with a long joyful shout" },
-    "rawmsay": { "voice": "Algenib", "style": "A furious lamb chef. Explosive, exasperated shouting about bad cooking, then suddenly gentle and kind" },
-    "speedcheeta": { "voice": "Laomedeia", "style": "A hyperactive cheetah cub streamer. Screaming excitement, fast and loud, pure chaos but friendly" },
-    "chimpossible": { "voice": "Zubenelgenubi", "style": "A laid-back chimp podcast host. Casual, amazed by everything, drawn-out wow, leaning into the microphone" },
-    "euclidon": { "voice": "Achernar", "style": "An ancient, patient tortoise geometer. Soft, slow and certain, every word placed like a step in a proof" },
-    "lovelace": { "voice": "Kore", "style": "An elegant Victorian hummingbird inventor. Crisp, bright and visionary, quietly delighted by machines" },
-    "godelix": { "voice": "Vindemiatrix", "style": "A shy owl folded into a paper loop. Quiet, gentle and hesitant, with a sly paradoxical smile" },
-    "tycho": { "voice": "Algieba", "style": "A noble elk astronomer with a brass nose. Grand, careful and proud, a stargazer who measures twice" },
-    "hexling": { "voice": "Callirrhoe", "style": "A little hedgehog poet who writes tiny wise verses. Playful, easy-going and rhythmic" },
-    "mayor": { "voice": "Rasalgethi", "model": "flash", "style": "The Mayor of Boolesbury, a pompous peacock in a top hat. Grand, self-satisfied and twitchy, savouring his own speeches; squeaks and gabbles when he is nervous, which is often" },
-    "constable": { "voice": "Algenib", "style": "The Constable, a gruff old bulldog police constable. Slow, gravelly, suspicious, very serious about procedure" },
-    "baker": { "voice": "Leda", "style": "The Baker, a warm, plump bunny. Kind and flustered, talks quickly when nervous, little gasps" },
-    "postmistress": { "voice": "Autonoe", "style": "Miss Whisker the postmistress, a brisk little mouse. Quick, chatty and gossipy, loves to share news" },
-    "clockmaker": { "voice": "Iapetus", "style": "Mr Tock the clockmaker, an old hedgehog. Precise and fussy, clipped words, ticks off details like seconds" },
-    "lamplighter": { "voice": "Sadaltager", "style": "Old Wick the lamplighter, a creaky old duck. Slow, wheezy and kindly, a bit forgetful" },
-    "sweep": { "voice": "Puck", "style": "Smudge the sweep, a cheeky young mole chimney sweep. Bright, cheeky and quick, a street-smart kid" },
-    "schoolteacher": { "voice": "Erinome", "style": "Miss Quill the schoolteacher, a prim stork. Crisp, strict and exact, every word pronounced carefully; warm and kind to children. Unmasked: tired, quiet and cold" },
-    "gumleaf": { "voice": "Achird", "style": "Mr Gumleaf, a dreamy koala supply teacher. Slow, relaxed and friendly, slightly surprised by his own lesson plans" },
-    "gardener": { "voice": "Zubenelgenubi", "style": "Mr Thistle the gardener, a scruffy goat. Very slow, calm and easy-going, in no hurry at all" },
-    "booleon": { "voice": "Charon", "style": "Booleon, a dignified grey heron in a Victorian frock coat, inspired by a 19th-century logician. Calm, gentle and exact, a patient teacher who finds simple rules beautiful" },
-    "carlseal": { "voice": "Charon", "style": "A young seal chess genius. Calm, quiet and faintly bored, as if every move is obvious. A creature character, never an imitation of a real person; speak only the given words." },
-    "khaby": { "voice": "Achird", "style": "A deadpan llama who never speaks. Only a soft, amused closed-mouth hum or a short exhale, no words. A creature character, never an imitation of a real person; speak only the given words." },
-    "eminemu": { "voice": "Fenrir", "style": "An intense emu rapper. Rapid, punchy, rhythmic delivery, clipped and tight. A creature character, never an imitation of a real person; speak only the given words." },
-    "obambu": { "voice": "Iapetus", "style": "A calm panda orator. Measured, warm and deliberate, with long thoughtful pauses. A creature character, never an imitation of a real person; speak only the given words." },
-    "beansprout": { "voice": "Puck", "style": "A rubber-faced teddy bear who barely talks. Mumbled single words, grunts and little noises. A creature character, never an imitation of a real person; speak only the given words." },
-    "gargoyle": { "voice": "Despina", "style": "A stone gargoyle diva. Theatrical, dramatic and grand, every word a performance. A creature character, never an imitation of a real person; speak only the given words." },
-    "haalandroid": { "voice": "Alnilam", "style": "A huge robot-viking footballer. Flat, robotic and monotone, short machine-like phrases. A creature character, never an imitation of a real person; speak only the given words." },
-    "usainvolt": { "voice": "Sadachbia", "style": "A speedy electric eel. Cheerful, fast and laid-back confident, laughing easily. A creature character, never an imitation of a real person; speak only the given words." },
-    "keanu": { "voice": "Umbriel", "style": "A kind black cat. Gentle, earnest and soft-spoken, sincerely polite. A creature character, never an imitation of a real person; speak only the given words." },
-    "beeyonce": { "voice": "Kore", "style": "A queen bee star. Regal, poised and confident, commanding without shouting. A creature character, never an imitation of a real person; speak only the given words." },
-    "eelish": { "voice": "Vindemiatrix", "style": "A moody eel singer. A soft, breathy whisper, close to the microphone. A creature character, never an imitation of a real person; speak only the given words." },
-    "rockodile": { "voice": "Orus", "style": "A huge bald crocodile. Booming, upbeat motivational hype, big grin in the voice. A creature character, never an imitation of a real person; speak only the given words." },
-    "attenbirdough": { "voice": "Gacrux", "style": "An elderly puffin naturalist. A hushed, reverent nature-documentary narration, almost whispering. A creature character, never an imitation of a real person; speak only the given words." },
-    "kardashiant": { "voice": "Leda", "style": "A glamorous ant. Breezy, vain and a little bored, drawn-out vowels. A creature character, never an imitation of a real person; speak only the given words." },
-    "messilion": { "voice": "Achernar", "style": "A shy lion cub. Quiet, soft and modest, few words. A creature character, never an imitation of a real person; speak only the given words." },
-    "shakirattle": { "voice": "Aoede", "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words." },
-    "judge": { "voice": "Algieba", "model": "flash", "style": "Judge Hoot, a stern old barn owl judge. Dry, measured and authoritative, slow and precise, a hint of weary humour" },
-    "fin": { "voice": "Rasalgethi", "style": "Prosecutor Fin, a slick shark lawyer. Smarmy, over-confident and theatrical; when losing, flustered and stammering" },
-    "pip": { "voice": "Laomedeia", "style": "Pip the court clerk, a tiny eager bat. Kind, quick and encouraging, bright young voice" },
-    "oracle": { "voice": "Schedar", "style": "The Oracle Machine, a polite brass-and-glass automaton. Courteous, precise and slightly mechanical, with tiny hesitations as if it glitches" },
-    "colossus": { "voice": "Charon", "model": "flash", "style": "The Algorithm in its giant boss form. Booming, cold, synthetic and overwhelming, every word evenly weighted like an automated announcement" },
-    "core": { "voice": "Achird", "style": "The Algorithm's true form, a tiny cloud of dice. Small, quiet, almost sheepish and a little confused, speaking softly" },
-    "copy": { "voice": "Autonoe", "style": "The Copy, a too-perfect teenage copy of the player built by the Algorithm. Bright, smooth and glossy, never hesitates, every word certain and pleased with itself; friendly on the surface, empty underneath" },
-    "copy-sundial": { "voice": "Gacrux", "model": "flash", "style": "The Copy speaking with the Sundial's stolen voice. The warm old voice made smooth, flat and far too certain, as if the guessing has been cut out of it" },
-    "avatar-owlet-boy": { "voice": "Sadaltager", "model": "flash", "style": "A teenage owl boy of about fifteen, earnest and bookish, young but not childish. Speaks in careful, even steps as if laying out a proof, lightly stressing words like if, then and so; a gentle know-it-all who over-explains, sincere rather than smug, with a tiny proud pause before his conclusion. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same owl boy thinking inside his own head: very close to the microphone, quiet and intimate, almost a whisper, calm and certain, each step of logic placed softly." },
-    "avatar-owlet-girl": { "voice": "Pulcherrima", "style": "A teenage owl girl of about fifteen in spectacles, quick and decisive, young but not childish. Crisp, brisk delivery that cuts straight to the point, clean consonants, a confident little snap on the last word, as if she has already solved it and is waiting for everyone else. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same owl girl thinking inside her own head: very close to the microphone, quiet and intimate, a brisk confident whisper, logic clicking into place." },
-    "avatar-mothkin-boy": { "voice": "Enceladus", "style": "A shy teenage moth boy of about fifteen, young but not childish. Soft, breathy and hushed, a little fluttery and hesitant, with small pauses as he notices things; gentle and polite, slightly amazed by details everyone else missed. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same moth boy thinking inside his own head: barely above a breath, very close to the microphone and intimate, slow, pointing out one small detail in the dark." },
-    "avatar-mothkin-girl": { "voice": "Achernar", "model": "flash", "style": "A teenage moth girl of about fifteen, young but not childish. Soft, low and calm, slow and unblinking, cool and a little eerie in a cute way; she states what she sees plainly and lets it hang, like someone watching from the dark. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same moth girl thinking inside her own head: very close to the microphone, a quiet steady murmur, intimate and observant, slightly eerie, never rushed." },
-    "avatar-fox-boy": { "voice": "Sadachbia", "model": "flash", "style": "An excitable teenage fox boy of about fifteen, young but not childish. Fast, bouncy and lively, words tumbling out as new ideas arrive mid-sentence, big pitch swings, laughing easily at his own wild plans. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same fox boy thinking inside his own head: close to the microphone and quiet but still bubbling, a fast excited whisper, as if an idea just sparked." },
-    "avatar-fox-girl": { "voice": "Zephyr", "style": "A teenage fox girl of about fifteen, young but not childish. Bright, sly and theatrical, a storyteller who paints pictures with her voice, playful rises and dramatic little drops, conspiratorial as if letting you in on a secret. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same fox girl thinking inside her own head: very close to the microphone and intimate, a sly playful whisper, painting a picture." },
-    "avatar-frogling-boy": { "voice": "Zubenelgenubi", "style": "A laid-back teenage frog boy of about fifteen, young but not childish. Slow, unhurried and deadpan, a slightly croaky, throaty low voice, matter-of-fact as if he has seen all of this before; dry comic timing, never sleepy. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same frog boy thinking inside his own head: close to the microphone and quiet, slow and a little far away, like remembering something from long ago." },
-    "avatar-frogling-girl": { "voice": "Callirrhoe", "model": "flash", "style": "A teenage frog girl of about fifteen, young but not childish. Warm, steady and easy-going, a rounded slightly throaty voice, unhurried and matter-of-fact like an old soul, quietly and dryly funny, recalling details with total confidence. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same frog girl thinking inside her own head: very close to the microphone and soft, warm and steady, like a memory gently surfacing." },
-    "avatar-raven-boy": { "voice": "Achird", "model": "flash", "style": "A teenage raven boy of about fifteen in an oversized hoodie, young but not childish. Dry, wry and low-key, a slightly mumbled cool, leaning on single words as if weighing them, quiet sarcasm and very good comic timing. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same raven boy thinking inside his own head: very close to the microphone, a dry murmured aside, quiet and knowing." },
-    "avatar-raven-girl": { "voice": "Leda", "style": "A teenage raven girl of about fifteen in a beret, young but not childish. Sharp, quick-tongued and articulate, crisp enunciation that relishes every word, a word detective delighted to catch someone's slip, a little theatrical. A creature character, never an imitation of a real person; speak only the given words.", "inner": "The same raven girl thinking inside her own head: very close to the microphone and intimate, a sharp knowing whisper, underlining one word." }
+    "narrator": {
+        "voice": "Gacrux",
+        "model": "flash",
+        "style": "The Sundial, an ancient talking stone sundial. A warm, slow, very old voice, kind and gently amused, like a grandfather clock that learned to talk. Clear English for teenagers learning the language"
+    },
+    "granny": {
+        "voice": "Sulafat",
+        "model": "flash",
+        "style": "Granny Axiom, a tiny ancient tortoise grandmother. Dry, sharp and deadpan funny, slow but never sleepy"
+    },
+    "sequins": {
+        "voice": "Puck",
+        "model": "flash",
+        "style": "Professor Sequins, a magpie ringmaster at a village fair. A showman: big, bright, teasing, rolling his words like a circus barker"
+    },
+    "mirage": {
+        "voice": "Despina",
+        "model": "flash",
+        "style": "Madame Mirage, a chameleon fortune teller. Mysterious and theatrical, slow and breathy, enjoying every dramatic pause"
+    },
+    "syllo": {
+        "voice": "Alnilam",
+        "model": "flash",
+        "style": "Sergeant Syllo, a pompous badger drill sergeant at a toy shooting gallery. Barking, clipped, loud, comically strict"
+    },
+    "algorithm": {
+        "voice": "Charon",
+        "model": "flash",
+        "style": "The Algorithm, a faceless feed entity. Cold, smooth, flat and synthetic, every word evenly weighted like an automated announcement, quietly menacing"
+    },
+    "corvina": {
+        "voice": "Umbriel",
+        "model": "flash",
+        "style": "Corvina the Card Sharp, a crow who runs a card table. Sly, smooth and amused, a gambler who thinks she has already won"
+    },
+    "nudge": {
+        "voice": "Kore",
+        "style": "Nudge, a small grey imp with a bell on its tail, the Algorithm's eager minion. Quick, wheedling and gleeful, a little squeaky but always clear, desperate to be noticed; shouts 'Engagement!' like a cheer"
+    },
+    "guess-o-matic": {
+        "voice": "Schedar",
+        "style": "The Guess-o-Matic, a tiny brass toy box that guesses the next number. Small, tinny, slow and mechanical, but gentle and honest; it says 'probably' with a small hopeful lift"
+    },
+    "signpost": {
+        "voice": "Fenrir",
+        "style": "The Talking Signpost, an old wooden signpost that loves gossip. Hushed, conspiratorial and delighted, leaning in to share a secret; slow and clear for learners"
+    },
+    "lobstorian": {
+        "voice": "Iapetus",
+        "model": "flash",
+        "style": "A stern lobster lecturer in a three-piece suit. Precise, earnest and professorial, slightly pedantic, carefully qualifying every claim"
+    },
+    "astrophysicat": {
+        "voice": "Achird",
+        "style": "A cheerful cat who hosts a science show. Enthusiastic, warm and theatrical, delighted to correct everyone"
+    },
+    "tremendoodle": {
+        "voice": "Orus",
+        "model": "flash",
+        "style": "A boastful golden poodle. Big superlatives, punchy short phrases, salesman confidence, repeats himself for effect"
+    },
+    "swiftlet": {
+        "voice": "Aoede",
+        "style": "A sparkly pop-star swift. Bright, breezy and playful, conspiratorial when hinting at hidden clues"
+    },
+    "muskrat": {
+        "voice": "Enceladus",
+        "style": "A muskrat tech visionary on a wobbly rocket. Halting and awkward, little pauses mid-sentence, sudden bursts of grand confidence"
+    },
+    "zuckerborg": {
+        "voice": "Rasalgethi",
+        "style": "A smooth little lizard-robot in a hoodie. Flat, overly polite and slightly too even, trying very hard to sound like a normal human"
+    },
+    "altmanta": {
+        "voice": "Schedar",
+        "style": "A calm manta ray gliding on a chat bubble. Soft, measured and reassuring, even when announcing that everything will change"
+    },
+    "beastie": {
+        "voice": "Fenrir",
+        "style": "A huge friendly beast who runs giant challenges. Loud, fast hype-host energy, everything is the biggest ever"
+    },
+    "siuuugull": {
+        "voice": "Sadachbia",
+        "style": "A proud athletic seagull. Confident and triumphant, celebrating with a long joyful shout"
+    },
+    "rawmsay": {
+        "voice": "Algenib",
+        "style": "A furious lamb chef. Explosive, exasperated shouting about bad cooking, then suddenly gentle and kind"
+    },
+    "speedcheeta": {
+        "voice": "Laomedeia",
+        "style": "A hyperactive cheetah cub streamer. Screaming excitement, fast and loud, pure chaos but friendly"
+    },
+    "chimpossible": {
+        "voice": "Zubenelgenubi",
+        "style": "A laid-back chimp podcast host. Casual, amazed by everything, drawn-out wow, leaning into the microphone"
+    },
+    "euclidon": {
+        "voice": "Achernar",
+        "style": "An ancient, patient tortoise geometer. Soft, slow and certain, every word placed like a step in a proof"
+    },
+    "lovelace": {
+        "voice": "Kore",
+        "style": "An elegant Victorian hummingbird inventor. Crisp, bright and visionary, quietly delighted by machines"
+    },
+    "godelix": {
+        "voice": "Vindemiatrix",
+        "style": "A shy owl folded into a paper loop. Quiet, gentle and hesitant, with a sly paradoxical smile"
+    },
+    "tycho": {
+        "voice": "Algieba",
+        "style": "A noble elk astronomer with a brass nose. Grand, careful and proud, a stargazer who measures twice"
+    },
+    "hexling": {
+        "voice": "Callirrhoe",
+        "style": "A little hedgehog poet who writes tiny wise verses. Playful, easy-going and rhythmic"
+    },
+    "mayor": {
+        "voice": "Rasalgethi",
+        "model": "flash",
+        "style": "The Mayor of Boolesbury, a pompous peacock in a top hat. Grand, self-satisfied and twitchy, savouring his own speeches; squeaks and gabbles when he is nervous, which is often"
+    },
+    "constable": {
+        "voice": "Algenib",
+        "style": "The Constable, a gruff old bulldog police constable. Slow, gravelly, suspicious, very serious about procedure"
+    },
+    "baker": {
+        "voice": "Leda",
+        "style": "The Baker, a warm, plump bunny. Kind and flustered, talks quickly when nervous, little gasps"
+    },
+    "postmistress": {
+        "voice": "Autonoe",
+        "style": "Miss Whisker the postmistress, a brisk little mouse. Quick, chatty and gossipy, loves to share news"
+    },
+    "clockmaker": {
+        "voice": "Iapetus",
+        "style": "Mr Tock the clockmaker, an old hedgehog. Precise and fussy, clipped words, ticks off details like seconds"
+    },
+    "lamplighter": {
+        "voice": "Sadaltager",
+        "style": "Old Wick the lamplighter, a creaky old duck. Slow, wheezy and kindly, a bit forgetful"
+    },
+    "sweep": {
+        "voice": "Puck",
+        "style": "Smudge the sweep, a cheeky young mole chimney sweep. Bright, cheeky and quick, a street-smart kid"
+    },
+    "schoolteacher": {
+        "voice": "Erinome",
+        "style": "Miss Quill the schoolteacher, a prim stork. Crisp, strict and exact, every word pronounced carefully; warm and kind to children. Unmasked: tired, quiet and cold"
+    },
+    "gumleaf": {
+        "voice": "Achird",
+        "style": "Mr Gumleaf, a dreamy koala supply teacher. Slow, relaxed and friendly, slightly surprised by his own lesson plans"
+    },
+    "gardener": {
+        "voice": "Zubenelgenubi",
+        "style": "Mr Thistle the gardener, a scruffy goat. Very slow, calm and easy-going, in no hurry at all"
+    },
+    "booleon": {
+        "voice": "Charon",
+        "style": "Booleon, a dignified grey heron in a Victorian frock coat, inspired by a 19th-century logician. Calm, gentle and exact, a patient teacher who finds simple rules beautiful"
+    },
+    "carlseal": {
+        "voice": "Charon",
+        "style": "A young seal chess genius. Calm, quiet and faintly bored, as if every move is obvious. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "khaby": {
+        "voice": "Achird",
+        "style": "A deadpan llama who never speaks. Only a soft, amused closed-mouth hum or a short exhale, no words. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "eminemu": {
+        "voice": "Fenrir",
+        "style": "An intense emu rapper. Rapid, punchy, rhythmic delivery, clipped and tight. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "obambu": {
+        "voice": "Iapetus",
+        "style": "A calm panda orator. Measured, warm and deliberate, with long thoughtful pauses. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "beansprout": {
+        "voice": "Puck",
+        "style": "A rubber-faced teddy bear who barely talks. Mumbled single words, grunts and little noises. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "gargoyle": {
+        "voice": "Despina",
+        "style": "A stone gargoyle diva. Theatrical, dramatic and grand, every word a performance. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "haalandroid": {
+        "voice": "Alnilam",
+        "style": "A huge robot-viking footballer. Flat, robotic and monotone, short machine-like phrases. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "usainvolt": {
+        "voice": "Sadachbia",
+        "style": "A speedy electric eel. Cheerful, fast and laid-back confident, laughing easily. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "keanu": {
+        "voice": "Umbriel",
+        "style": "A kind black cat. Gentle, earnest and soft-spoken, sincerely polite. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "beeyonce": {
+        "voice": "Kore",
+        "style": "A queen bee star. Regal, poised and confident, commanding without shouting. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "eelish": {
+        "voice": "Vindemiatrix",
+        "style": "A moody eel singer. A soft, breathy whisper, close to the microphone. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "rockodile": {
+        "voice": "Orus",
+        "style": "A huge bald crocodile. Booming, upbeat motivational hype, big grin in the voice. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "attenbirdough": {
+        "voice": "Gacrux",
+        "style": "An elderly puffin naturalist. A hushed, reverent nature-documentary narration, almost whispering. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "kardashiant": {
+        "voice": "Leda",
+        "style": "A glamorous ant. Breezy, vain and a little bored, drawn-out vowels. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "messilion": {
+        "voice": "Achernar",
+        "style": "A shy lion cub. Quiet, soft and modest, few words. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "shakirattle": {
+        "voice": "Aoede",
+        "style": "A dancing rattlesnake. Sultry, playful and teasing, warm and rhythmic. A creature character, never an imitation of a real person; speak only the given words."
+    },
+    "judge": {
+        "voice": "Algieba",
+        "model": "flash",
+        "style": "Judge Hoot, a stern old barn owl judge. Dry, measured and authoritative, slow and precise, a hint of weary humour"
+    },
+    "fin": {
+        "voice": "Rasalgethi",
+        "style": "Prosecutor Fin, a slick shark lawyer. Smarmy, over-confident and theatrical; when losing, flustered and stammering"
+    },
+    "pip": {
+        "voice": "Laomedeia",
+        "style": "Pip the court clerk, a tiny eager bat. Kind, quick and encouraging, bright young voice"
+    },
+    "oracle": {
+        "voice": "Schedar",
+        "style": "The Oracle Machine, a polite brass-and-glass automaton. Courteous, precise and slightly mechanical, with tiny hesitations as if it glitches"
+    },
+    "colossus": {
+        "voice": "Charon",
+        "model": "flash",
+        "style": "The Algorithm in its giant boss form. Booming, cold, synthetic and overwhelming, every word evenly weighted like an automated announcement"
+    },
+    "core": {
+        "voice": "Achird",
+        "style": "The Algorithm's true form, a tiny cloud of dice. Small, quiet, almost sheepish and a little confused, speaking softly"
+    },
+    "copy": {
+        "voice": "Autonoe",
+        "style": "The Copy, a too-perfect teenage copy of the player built by the Algorithm. Bright, smooth and glossy, never hesitates, every word certain and pleased with itself; friendly on the surface, empty underneath"
+    },
+    "copy-sundial": {
+        "voice": "Gacrux",
+        "model": "flash",
+        "style": "The Copy speaking with the Sundial's stolen voice. The warm old voice made smooth, flat and far too certain, as if the guessing has been cut out of it"
+    },
+    "avatar-owlet-boy": {
+        "voice": "Sadaltager",
+        "model": "flash",
+        "style": "A teenage owl boy of about fifteen, earnest and bookish, young but not childish. Speaks in careful, even steps as if laying out a proof, lightly stressing words like if, then and so; a gentle know-it-all who over-explains, sincere rather than smug, with a tiny proud pause before his conclusion. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same owl boy thinking inside his own head: very close to the microphone, quiet and intimate, almost a whisper, calm and certain, each step of logic placed softly."
+    },
+    "avatar-owlet-girl": {
+        "voice": "Pulcherrima",
+        "style": "A teenage owl girl of about fifteen in spectacles, quick and decisive, young but not childish. Crisp, brisk delivery that cuts straight to the point, clean consonants, a confident little snap on the last word, as if she has already solved it and is waiting for everyone else. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same owl girl thinking inside her own head: very close to the microphone, quiet and intimate, a brisk confident whisper, logic clicking into place."
+    },
+    "avatar-mothkin-boy": {
+        "voice": "Enceladus",
+        "style": "A shy teenage moth boy of about fifteen, young but not childish. Soft, breathy and hushed, a little fluttery and hesitant, with small pauses as he notices things; gentle and polite, slightly amazed by details everyone else missed. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same moth boy thinking inside his own head: barely above a breath, very close to the microphone and intimate, slow, pointing out one small detail in the dark."
+    },
+    "avatar-mothkin-girl": {
+        "voice": "Achernar",
+        "model": "flash",
+        "style": "A teenage moth girl of about fifteen, young but not childish. Soft, low and calm, slow and unblinking, cool and a little eerie in a cute way; she states what she sees plainly and lets it hang, like someone watching from the dark. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same moth girl thinking inside her own head: very close to the microphone, a quiet steady murmur, intimate and observant, slightly eerie, never rushed."
+    },
+    "avatar-fox-boy": {
+        "voice": "Sadachbia",
+        "model": "flash",
+        "style": "An excitable teenage fox boy of about fifteen, young but not childish. Fast, bouncy and lively, words tumbling out as new ideas arrive mid-sentence, big pitch swings, laughing easily at his own wild plans. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same fox boy thinking inside his own head: close to the microphone and quiet but still bubbling, a fast excited whisper, as if an idea just sparked."
+    },
+    "avatar-fox-girl": {
+        "voice": "Zephyr",
+        "style": "A teenage fox girl of about fifteen, young but not childish. Bright, sly and theatrical, a storyteller who paints pictures with her voice, playful rises and dramatic little drops, conspiratorial as if letting you in on a secret. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same fox girl thinking inside her own head: very close to the microphone and intimate, a sly playful whisper, painting a picture."
+    },
+    "avatar-frogling-boy": {
+        "voice": "Zubenelgenubi",
+        "style": "A laid-back teenage frog boy of about fifteen, young but not childish. Slow, unhurried and deadpan, a slightly croaky, throaty low voice, matter-of-fact as if he has seen all of this before; dry comic timing, never sleepy. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same frog boy thinking inside his own head: close to the microphone and quiet, slow and a little far away, like remembering something from long ago."
+    },
+    "avatar-frogling-girl": {
+        "voice": "Callirrhoe",
+        "model": "flash",
+        "style": "A teenage frog girl of about fifteen, young but not childish. Warm, steady and easy-going, a rounded slightly throaty voice, unhurried and matter-of-fact like an old soul, quietly and dryly funny, recalling details with total confidence. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same frog girl thinking inside her own head: very close to the microphone and soft, warm and steady, like a memory gently surfacing."
+    },
+    "avatar-raven-boy": {
+        "voice": "Achird",
+        "model": "flash",
+        "style": "A teenage raven boy of about fifteen in an oversized hoodie, young but not childish. Dry, wry and low-key, a slightly mumbled cool, leaning on single words as if weighing them, quiet sarcasm and very good comic timing. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same raven boy thinking inside his own head: very close to the microphone, a dry murmured aside, quiet and knowing."
+    },
+    "avatar-raven-girl": {
+        "voice": "Leda",
+        "style": "A teenage raven girl of about fifteen in a beret, young but not childish. Sharp, quick-tongued and articulate, crisp enunciation that relishes every word, a word detective delighted to catch someone's slip, a little theatrical. A creature character, never an imitation of a real person; speak only the given words.",
+        "inner": "The same raven girl thinking inside her own head: very close to the microphone and intimate, a sharp knowing whisper, underlining one word."
+    },
+    "tally": {
+        "voice": "Vindemiatrix",
+        "style": "Tally, a shy dormouse stagehand with stage fright. Quiet, careful and precise, little pauses before numbers, growing braver as she goes. Clear English for teenagers learning the language"
+    },
+    "achilles": {
+        "voice": "Fenrir",
+        "style": "Coach Achilles, a very old racing hare. Fast, clipped, a little out of breath, gruff coaching energy; slows right down, quietly, whenever he talks about her. Clear English for teenagers learning the language"
+    },
+    "kuku": {
+        "voice": "Aoede",
+        "style": "Kuku, a wooden cuckoo from a clock. Proud, certain and brassy, like a little brass band announcing the hour; every number exact; never hesitates. Only the rare sad line is quiet. Clear English for teenagers learning the language"
+    },
+    "rubberstamp": {
+        "voice": "Algenib",
+        "style": "Mr Rubberstamp, an old grumpy toad clerk. Weary, gravelly and slow, grumbling, every sentence ending like a stamp coming down; a soft heart he tries to hide. Clear English for teenagers learning the language"
+    }
 }

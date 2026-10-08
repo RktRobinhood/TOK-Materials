@@ -20,6 +20,10 @@ export const FX = {
     },
     // A character possessed by the Algorithm (any "<id>-possessed" speaker): their own voice, a little
     // lower and slower (stretched, tape-style), doubled into the Algorithm's synthetic chorus.
+    // Understudies (design/UNDERSTUDIES.md voice cards).
+    kuku: { pitch: 1.04, eq: [['highpass', 280, 0.7], ['lowpass', 6500, 0.7]], reverb: { size: 0.2, decay: 0.4, damp: 0.6, mix: 0.06 } },
+    achilles: { pitch: 0.96 },
+    rubberstamp: { pitch: 0.95 },
     possessed: { pitch: 0.92, chorus: true, eq: [['highshelf', 4000, 0.7, -3]], reverb: { size: 0.7, decay: 0.75, damp: 0.35, mix: 0.18 } },
 };
 export const fxFor = who => FX[who] || (/-inner$/.test(who) ? FX.inner : /-possessed$/.test(who) ? FX.possessed : null);
