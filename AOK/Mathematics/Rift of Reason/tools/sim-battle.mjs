@@ -43,7 +43,7 @@
 //           (target: 46–54%).
 // Every row is --games games (default 1,100: ±3 points at 95%): random teams as above, each
 // matchup in both turn orders and with the powers in swapped seats, both players at --level.
-// --pw limits the powers, --tw the tweaks. --patch also takes power ids, e.g.
+// --pw limits the powers (in none mode also id+tweak, e.g. --pw=foresee+broader), --tw the tweaks. --patch also takes power ids, e.g.
 // --patch=lantern.cost:1,recall.recharge:2, to try numbers without editing data/powers.js.
 // Each row prints the win rate with its 95% interval, uses per game of each side's power,
 // first-player wins and average rounds.
@@ -407,8 +407,11 @@ async function powersMode() {
     if (mode === 'none' || all) {
         console.log('\n-- each power vs no power (target: +3 to +8 points) --');
         console.log('power                cost/rech   win%   ±95%   delta  verdict  uses/game  first%  rounds');
-        for (const id of pick(ALL_POWERS)) {
-            const pw = { id, tweaks: [] };
+        // --pw may name a tweaked power here (id+tweak+tweak), e.g. to try a Broader extra as the base text.
+        const rows = ALL_POWERS.filter(id => !only.length || only.includes(id)).map(id => ({ id, tweaks: [] }))
+            .concat(only.filter(x => x.includes('+')).map(x => ({ id: x.split('+')[0], tweaks: x.split('+').slice(1) })));
+        for (const pw of rows) {
+            const id = pwLabel(pw);
             const r = await powerRow(pw, null, GAMES, level);
             add(r);
             const d = 100 * r.rate - 50;
