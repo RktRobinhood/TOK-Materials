@@ -95,7 +95,7 @@
 
             rootNode.appendChild(el('div.avatar-screen', null, [
                 el('h1', { text: 'Who are you?' }),
-                el('p.muted', { text: 'Pick a traveller. You will not hear them speak: they think a lot, and say little.' }),
+                el('p.muted', { text: 'Pick a traveller. Each one thinks in its own way, and you will hear that voice in your head.' }),
                 el('div.avatar-layout', null, [grid, preview]),
                 el('div.row', { style: { justifyContent: 'center' } }, [
                     nameInput,
@@ -109,7 +109,14 @@
                             });
                             Rift.State.saveNow();
                             Rift.Audio.sfx('success');
-                            Rift.Router.replace('map', { arrive: true });
+                            const go = () => Rift.Router.replace('map', { arrive: true });
+                            // The one-line content note before the Prologue (STORY.md App. D), while the switch is on.
+                            if (Rift.Story && Rift.Story.canDie()) {
+                                Rift.UI.modal('Before you begin', el('div.stack', null, [
+                                    el('p', { text: 'In this story, characters can be lost.' }),
+                                    el('p.small.muted', { text: 'You can switch this off in Settings: "Characters can die".' }),
+                                ]), [{ label: 'Begin', primary: true, required: true, onclick: go }]);
+                            } else go();
                         },
                     }),
                 ]),

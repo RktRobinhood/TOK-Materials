@@ -141,8 +141,10 @@
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
                 const locked = kind === 'revealed' && Rift.World.lockReason(st, id);
+                // A dark-if-lost station (UNDERSTUDIES.md §3.4): its keeper is gone; it still counts as done.
+                const dark = kind === 'revealed' && Rift.Cast && Rift.Cast.isDark(id);
                 const g = svg('g', {
-                    class: ['map-node', kind, n.type, done ? 'done' : '', locked ? 'locked' : '', st.map.at === id ? 'here' : ''].join(' '),
+                    class: ['map-node', kind, n.type, done ? 'done' : '', dark ? 'dark' : '', locked ? 'locked' : '', st.map.at === id ? 'here' : ''].join(' '),
                     transform: `translate(${n.x},${n.y})`,
                     tabindex: kind === 'revealed' ? 0 : -1,
                     role: kind === 'revealed' ? 'button' : 'img',
@@ -179,9 +181,10 @@
             function showTip(id, kind, locked) {
                 const n = Rift.World.node(id);
                 tip.innerHTML = '';
+                const dark = kind !== 'hinted' && Rift.Cast && Rift.Cast.isDark(id);
                 tip.append(
                     el('strong', { text: kind === 'hinted' ? '???' : n.name }),
-                    el('div.small', { text: n.teaser || '' }),
+                    el('div.small', { text: dark ? (n.darkTeaser || 'Nobody is here now.') : (n.teaser || '') }),
                 );
                 // Element.append(null) would print the word "null".
                 if (locked) tip.append(el('div.small.warn', { text: '🔒 ' + locked }));
@@ -251,10 +254,30 @@
                 } finally { walking = false; }
             }
 
+            // A chapter opening (STORY.md App. D, SCRIPT-FORMAT.md section 7): a pending Quiet Scene plays
+            // first, at the first node reached in any later chapter; then, on a first time-rift jump, the
+            // chapter's "Previously…" (recap.<chapter>).
+            async function opening(ch, recap) {
+                if (!ch || !Rift.Story) return;
+                for (const npc of Rift.Story.pendingQuiet(ch)) {
+                    if (destroyed) return;
+                    await Rift.Dialogue.playQuiet(npc);
+                }
+                if (recap && !destroyed && Rift.Dialogue.has('recap.' + ch)) await Rift.Dialogue.play('recap.' + ch);
+                Rift.Story.markEntered(ch);
+            }
+
             async function arrive(id, opts) {
-                const st = Rift.State.get();
                 const n = Rift.World.node(id);
+                await opening(n.chapter, opts && opts.recap);
+                if (destroyed) return;
+                const st = Rift.State.get();
                 const done = st.map.completed.includes(id);
+                if (Rift.Cast && Rift.Cast.isDark(id)) {
+                    Rift.UI.toast(n.darkTeaser || 'Nobody is here now.', 3500);
+                    if (!done) { Rift.State.update(s => Rift.World.complete(s, id)); draw(); }
+                    return;
+                }
                 if(n.trainer&&Rift.Battles.canChallenge(id)&&!n.cardSchool&&n.type!=='battle'&&!(opts&&opts.skipTrainer)){
                     Rift.Battles.offer(id,()=>arrive(id,{skipTrainer:true}));return;
                 }
@@ -274,7 +297,7 @@
                     case 'rift':
                         if (!done || n.type !== 'story' || (!n.cardSchool && await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now'))) {
                             if (n.fx === 'rift') await Rift.UI.riftFx();
-                            await Rift.Dialogue.play(n.script);
+                            await Rift.Dialogue.play(n.script, { replay: done });
                         }
                         finish();
                         if(n.cardSchool){
@@ -343,7 +366,7 @@
                             await Rift.UI.riftFx();
                             // The chapter may be on another painted map, so rebuild the screen there.
                             const at = Rift.State.get().map.at;
-                            Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true });
+                            Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true, recap: first ? cid : null });
                             if (first) Rift.UI.toast('A starter kit tumbles out of the rift: 3 Catch Charms and a Tonic!', 4000);
                         },
                     }),
@@ -358,7 +381,9 @@
             const here = Rift.World.node(state.map.at);
             placeAvatar(here.x, here.y);
             draw();
-            if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal }), 400);
+            if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap }), 400);
+            else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
+            else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);
 
             return {
                 destroy() { destroyed = true; if (hud.destroy) hud.destroy(); },

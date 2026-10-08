@@ -313,6 +313,9 @@
 
         canChallenge(nodeId) {
             const n=Rift.World.node(nodeId);
+            // A silent or dark trainer role has nobody to play (UNDERSTUDIES.md §3.6).
+            const t=n&&n.trainer&&Rift.data.trainers[n.trainer];
+            if(t&&t.speaker&&Rift.Cast&&!Rift.Cast.actor(t.speaker))return false;
             return !!(n&&n.trainer&&(n.cardSchool||n.type==='battle'||Rift.State.get().map.completed.includes(n.challengeAfter||nodeId)));
         },
 

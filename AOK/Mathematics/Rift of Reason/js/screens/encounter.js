@@ -65,13 +65,45 @@
             const helpBtn = el('button.btn.small', { text: 'How to play', disabled: true, onclick: showHelp });
             const controls = el('div.enc-controls.row', null, [hintBtn, perkBtn, helpBtn]);
             const goal = el('div.enc-goal.panel.small', null, [el('p', { text: n.goal || 'Check the rules before you choose an answer.' }), el('p.enc-attempt-rule')]);
-            rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, host, goal, controls, feedback]), stageBox]));
+            const meterSlot = el('div.enc-stakes');
+            rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, meterSlot, host, goal, controls, feedback]), stageBox]));
 
-            const hostId = n.host || 'narrator';
-            const speaker = Rift.data.speakers[hostId];
-            const reminder = (Rift.data.script[n.reminder] || []).find(line => line.t);
-            host.append(Rift.Assets.img(speaker.art, { className: 'enc-creature', label: speaker.name }),
-                el('strong', { text: speaker.name }), el('div.bubble', { text: reminder ? reminder.t : 'Take your time. Check the task and its rules.' }));
+            // The host is a role: the cast decides who stands here now (an understudy, a stand-in, or nobody).
+            const hostRole = n.host || 'narrator';
+            const hostId = Rift.Cast ? Rift.Cast.host(hostRole, n.id) : hostRole;
+            const speaker = hostId ? (Rift.data.speakers[hostId] || { name: hostId, art: 'npc/' + hostId }) : null;
+            const ownHost = hostId && hostId === (Rift.Cast ? Rift.Cast.actor(hostRole) : hostRole);
+            const reminder = ownHost ? (Rift.data.script[n.reminder] || []).find(line => line.t || line.u) : null;
+            const reminderText = reminder ? (Rift.Cast ? Rift.Cast.text(reminder, hostId) : reminder.t) : null;
+            if (speaker) {
+                host.append(Rift.Assets.img(speaker.art, { className: 'enc-creature', label: speaker.name }),
+                    el('strong', { text: speaker.name }), el('div.bubble', { text: reminderText || 'Take your time. Check the task and its rules.' }));
+            } else {
+                host.classList.add('no-host');
+                if (Rift.Cast && Rift.Cast.ribbon(hostRole, n.id)) host.append(el('div.black-ribbon', { 'aria-hidden': 'true' }), el('p.small.muted', { text: 'A black ribbon hangs on the curtain.' }));
+                host.append(el('div.bubble', { text: 'Take your time. Check the task and its rules.' }));
+            }
+
+            // ---- stakes clocks (STORY.md App. C) ----
+            // In a stakes scene mistakes tick the clock instead of costing hearts; on a "floor" the
+            // clock also takes the first wrong check of the visit and every hint.
+            let heartDrained = false;
+            let floorWrongTicked = false;
+            function stakesClock() { return Rift.Stakes && !params.shrine ? Rift.Stakes.forNode(n.id) : {}; }
+            function tickClock(id, k) {
+                pausePuzzle();
+                return Rift.Dialogue.clockTick(id, k).then(() => { if (meter) meter.refresh(); refreshPerk(); refreshChecks(); resumePuzzle(); });
+            }
+            const meter = Rift.StakesUI && !params.shrine ? Rift.StakesUI.mount(meterSlot, {
+                nodeId: n.id,
+                heartDrain: () => phase === 'play' && !heartDrained && Rift.State.get().health > 1,
+                onHeartDrain(id) {
+                    if (phase !== 'play' || heartDrained || Rift.State.get().health <= 1) return;
+                    heartDrained = true;
+                    if (!loseHealth(1)) return;
+                    Rift.Stakes.drain(id, 1);
+                },
+            }) : null;
 
             function runTutorial() {
                 if (tutorial) tutorial.close();
@@ -112,6 +144,13 @@
             }
             function refreshChecks() {
                 if (!attempts) return;
+                if (stakesClock().scene) {
+                    checks.textContent = 'Mistakes fill the clock';
+                    checks.title = 'In this scene, wrong checks and hints fill the danger clock instead of costing hearts.';
+                    checks.setAttribute('aria-label', checks.title);
+                    goal.querySelector('.enc-attempt-rule').textContent = 'Each wrong check, hint or wrong "Why?" fills one notch of the clock.';
+                    return;
+                }
                 const left = Math.max(0, attempts.free - attempts.wrong);
                 checks.textContent = 'Checks left: ' + '●'.repeat(left) + '○'.repeat(attempts.free - left);
                 checks.title = 'Free wrong checks left for this stage: ' + left + '. After that, each wrong check costs 1 heart. Correct checks are free.';
@@ -122,7 +161,7 @@
                 const p = perkInfo();
                 perkBtn.style.display = p ? '' : 'none';
                 if (p) { perkBtn.textContent = p.label + (p.available ? '' : ' (used)'); perkBtn.disabled = !p.available; }
-                hintBtn.textContent = '💡 Hint (−' + hintCost(Rift.State.get()) + ' ❤)';
+                hintBtn.textContent = stakesClock().scene ? '💡 Hint (+1 danger)' : '💡 Hint (−' + hintCost(Rift.State.get()) + ' ❤)';
             }
             function usePerk() {
                 if (phase !== 'play') return;
@@ -147,6 +186,7 @@
                 stageBox.innerHTML = '';
                 feedback.textContent = '';
                 hintIx = 0;
+                heartDrained = false;
                 const { def, difficulty } = current();
                 phase = 'play';
                 attempts = Rift.World.attempts(difficulty, Rift.State.get().avatar);
@@ -180,6 +220,7 @@
                     host.querySelector('.bubble').textContent = 'You get ' + attempts.free + ' free wrong checks. Then wrong checks and hints cost hearts. At zero you get a scar. Rest and shrines help you heal.';
                 }
                 offerTutorial(def);
+                if (meter) meter.refresh();
             }
 
             function onSubmit(answer) {
@@ -196,6 +237,8 @@
                     feedback.className = 'enc-feedback good';
                     feedback.textContent = result.feedback || 'Solved!';
                     Rift.State.update(s => { s.stats.puzzlesSolved += 1; });
+                    const clk = stakesClock();
+                    if (clk.scene) Rift.Stakes.progress(clk.scene, 1);
                     modal('Stage solved!', el('div.stack', null, [
                         el('p', { text: result.feedback || 'Your answer fits the rules.' }),
                         def.tok ? el('p.tok-line', { text: 'Think about it: ' + def.tok }) : null,
@@ -203,6 +246,14 @@
                 } else {
                     Rift.Audio.sfx('error');
                     wrongs += 1;
+                    const clk = stakesClock();
+                    if (clk.scene) {
+                        feedback.className = 'enc-feedback bad';
+                        feedback.textContent = (result.feedback || 'Check the evidence and the rule that your answer uses.') + ' The danger rises.';
+                        tickClock(clk.scene, 1);
+                        return result;
+                    }
+                    if (clk.floor && !floorWrongTicked) { floorWrongTicked = true; tickClock(clk.floor, 1); }
                     const cost = Rift.World.recordWrong(attempts);
                     feedback.className = 'enc-feedback bad';
                     feedback.textContent = (result.feedback || 'Check the evidence and the rule that your answer uses.') + (cost ? ' −1 heart.' : ' Free check used.');
@@ -217,7 +268,8 @@
                 const { def } = current();
                 const list = def.hints(stages[stageIx].data) || [];
                 if (hintIx >= list.length) { Rift.UI.toast('No more hints for this one.'); return; }
-                if (!free) {
+                const clk = stakesClock();
+                if (!free && !clk.scene) {
                     if (!loseHealth(hintCost(Rift.State.get()))) return;
                 }
                 hintsUsed += 1;
@@ -227,6 +279,7 @@
                 feedback.className = 'enc-feedback hint';
                 feedback.textContent = (lantern ? '🏮 ' : '💡 ') + text;
                 refreshPerk();
+                if (!free && (clk.scene || clk.floor)) tickClock(clk.scene || clk.floor, 1);
             }
 
             function loseHealth(k) {
@@ -268,14 +321,23 @@
                 if ((isBoss || isMini) && !params.shrine && def.why) {
                     const ok = await whyStep(def.why(stages[stageIx].data));
                     if (destroyed) return;
+                    const clk = stakesClock();
                     if (!ok) {
                         wrongs += 1;
-                        if (!loseHealth(1)) return;
-                    }
+                        if (clk.scene) await tickClock(clk.scene, 1);
+                        else if (!loseHealth(1)) return;
+                    } else if (clk.scene && stageIx === stages.length - 1) Rift.Stakes.progress(clk.scene, 1);
                 }
                 if (destroyed) return;
                 stageIx += 1;
-                if (stageIx < stages.length) { mountStage(); return; }
+                if (stageIx < stages.length) {
+                    // A boss beat between stages (SCRIPT-FORMAT.md: <script>.stage<k>, e.g. the Algorithm's push).
+                    const stageKey = n.script + '.stage' + (stageIx + 1);
+                    if (n.script && Rift.Dialogue.has(stageKey)) await Rift.Dialogue.play(stageKey);
+                    if (destroyed) return;
+                    mountStage();
+                    return;
+                }
                 victory();
             }
 
@@ -291,7 +353,8 @@
                             modal(ok ? 'Exactly.' : 'Not quite.', el('p', { text: q.explain || '' }), [{ label: 'Continue', required: true, primary: true, onclick: () => resolve(ok) }]);
                         },
                     }));
-                    const m = modal('Why?', el('div.stack', null, [el('p', { text: q.question }), el('p.small', { text: 'A wrong answer or skip costs 1 heart.' })].concat(opts)), [{ label: 'Skip (−1 heart)', required: true, onclick: () => resolve(false) }]);
+                    const inScene = !!stakesClock().scene;
+                    const m = modal('Why?', el('div.stack', null, [el('p', { text: q.question }), el('p.small', { text: inScene ? 'A wrong answer or skip fills one notch of the clock.' : 'A wrong answer or skip costs 1 heart.' })].concat(opts)), [{ label: inScene ? 'Skip (+1 danger)' : 'Skip (−1 heart)', required: true, onclick: () => resolve(false) }]);
                 });
             }
 
@@ -466,11 +529,20 @@
                 stageBox.append(el('p.panel', { text: 'This place has no puzzle yet. Come back after the next update!' }));
                 return { destroy() { destroyed = true; } };
             }
+            // The inner voice's lead ({ lead: true }) needs this visit's puzzle and its mode; the first stage is
+            // generated from the same seed in mountStage, so this matches what the player gets.
+            function leadPuzzle() {
+                const p = stages[0];
+                let mode = p.opts && p.opts.mode;
+                try { if (!mode) mode = (Rift.Puzzles.get(p.id).generate(Rift.makeRng(visit.seed + ':stage0'), p.difficulty, p.opts) || {}).mode; } catch (e) { mode = null; }
+                return { id: p.id, opts: p.opts, mode: mode || null };
+            }
             (async () => {
-                if (!params.shrine && firstVisit && Rift.Dialogue.has(n.script)) await Rift.Dialogue.play(n.script);
+                const ctx = params.shrine ? null : { puzzle: leadPuzzle() };
+                if (!params.shrine && firstVisit && Rift.Dialogue.has(n.script)) await Rift.Dialogue.play(n.script, ctx);
                 if (destroyed) return;
                 const lead = firstVisit ? n.intro : n.reminder;
-                if (!params.shrine && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead);
+                if (!params.shrine && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead, ctx);
                 if (destroyed) return;
                 mountStage();
             })();
@@ -484,6 +556,7 @@
                     if (tutorial) tutorial.close();
                     if (helpModal) helpModal.close();
                     if (handle && handle.destroy) handle.destroy();
+                    if (meter) meter.destroy();
                     if (hud.destroy) hud.destroy();
                 },
                 // Playtest helper: submits the generator's own solution for the current stage.

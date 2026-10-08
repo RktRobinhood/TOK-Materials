@@ -18,8 +18,9 @@
         const demonstrated = new Set();
         const practised = new Set();
         const previousFocus = root.document.activeElement;
-        const speaker = Rift.data.speakers[hostId] ? hostId : 'narrator';
-        const host = Rift.data.speakers[speaker];
+        // hostId null: the station's host is gone (Rift.Cast.host); the tour reads as notes, unvoiced.
+        const speaker = hostId === null ? null : Rift.data.speakers[hostId] ? hostId : 'narrator';
+        const host = speaker ? Rift.data.speakers[speaker] : { name: 'Notes left at the stall', art: null };
         const layer = el('div.tutorial-layer');
         const bubble = el('div.tutorial-bubble.panel', { role: 'dialog', 'aria-label': 'How to play' });
         layer.append(bubble);
@@ -42,7 +43,7 @@
         function render() {
             unmark();
             const step = steps[index];
-            if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker, text: step.text, voice: Rift.voiceId(speaker, step.text) });
+            if (speaker && Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker, text: step.text, voice: Rift.voiceId(speaker, step.text) });
             if (step.highlight) marked = container.querySelector(step.highlight);
             if (marked) {
                 marked.classList.add('tutorial-highlight');
@@ -56,7 +57,7 @@
                 Rift.TutorialExamples.create(api.puzzleId,()=>{if(closed)return;practised.add(index);next.disabled=false;next.focus();}):null;
             if(practice)next.disabled=!practised.has(index);
             bubble.append(
-                el('div.row', null, [Rift.Assets.img(host.art, { className: 'tutorial-face', label: host.name }), el('strong', { text: host.name + ' · ' + (step.progress || ((index + 1) + '/' + steps.length)) })]),
+                el('div.row', null, [host.art ? Rift.Assets.img(host.art, { className: 'tutorial-face', label: host.name }) : null, el('strong', { text: host.name + ' · ' + (step.progress || ((index + 1) + '/' + steps.length)) })]),
                 el('p', { text: step.text, 'aria-live': 'polite' }),
                 ...(practice?[practice]:[]),
                 el('div.row.wrap', null, [
