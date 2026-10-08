@@ -8,7 +8,8 @@ import { Node } from './dom-adapter.mjs';
 import { loadRift, GAME_DIR } from './harness.mjs';
 
 const CORE = ['js/core/rift.js', 'js/core/state.js', 'data/avatars.js', 'data/creatures.js', 'data/map.js', 'js/core/story.js', 'js/core/cast.js',
-    'js/core/stakes.js', 'js/core/side-verbs.js', 'js/core/side-stories.js', 'data/script/side-stories.js'];
+    'js/core/stakes.js', 'js/core/side-verbs.js', 'js/core/side-stories.js', 'data/script/side-stories.js',
+    'data/script/side-stories-l1.js', 'data/script/side-stories-l2.js', 'data/script/side-stories-l3.js', 'data/script/side-stories-l4.js'];
 
 class Element extends Node {
     append(...xs) { xs.filter(x => x != null).forEach(x => { if (x instanceof Node) x.parent = this; }); super.append(...xs); }
