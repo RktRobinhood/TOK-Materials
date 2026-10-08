@@ -746,6 +746,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > One transparent canvas, no text, no numbers, clear space between figures. A full-body idle, then four head-and-shoulders busts in one row: neutral, happy, surprised, angry. Match the style board and the Sundial and Granny sheets above (painted with the same finish). Kuku: a carved wooden cuckoo, painted in chipped red and cream with a blue stripe on the beak and a tiny brass bandsman's cap, bright black bead eyes, chest puffed out, very proud. He lives in Granny's old hallway cuckoo clock: a tall carved chalet clock with pine eaves, little shutters, two pine-cone weights on chains and a pendulum, a plain clock face with only hands and tick marks (no numerals), a little dusty, with a small blank cardboard tag tied on with string. Idle: the whole clock, Kuku popped out of the little doors on his coiled brass spring. Busts: Kuku on his spring with the open doors and eaves just behind him. Neutral: proud and upright. Happy: mid-cuckoo, beak wide open. Surprised: the spring stretched out as far as it goes, eyes huge. Angry: the doors half shut on him, glaring out through the gap.
 
+
+### 13.22 Mr Rubberstamp (session of 8 October)
+
+**Attach:** `style-board.png`, Pip the Clerk's sheet
+**Save as:** `3-cast/rubberstamp.png`
+**Ids:** `npc/rubberstamp/idle`, `npc/rubberstamp/neutral` (also `npc/rubberstamp`), `npc/rubberstamp/happy`, `npc/rubberstamp/surprised`, `npc/rubberstamp/angry`, `npc/rubberstamp/thinking` (Pip's pose set)
+
+> One transparent canvas, no text, no numbers, clear space between figures. A full-body idle, then five head-and-shoulders busts in one row: neutral, happy, surprised, angry, thinking. Match the style board and Pip the Clerk's sheet above (same finish; he is Pip's retired boss). Mr Rubberstamp: a squat, wide, heavy old toad with warty olive skin and drooping eyelids, a green eyeshade visor, a crumpled white shirt with sleeve garters, a waistcoat with a pocket watch chain, a few ink splashes on his fingers. He carries a huge wooden rubber stamp almost as big as his head, its pad glowing faint cyan, with a blank stamp face (no letters). Grumpy, weary, by-the-book, secretly soft. Idle: standing, stamp resting on his shoulder. Neutral: unimpressed. Happy: a small, reluctant smile he is trying to hide. Surprised: eyeshade pushed up, eyes wide. Angry: bringing the stamp down with a scowl. Thinking: the stamp handle held to his chin.
+
 ---
 
 ## Outcome log
@@ -896,3 +905,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.36 Nudge with its clipboard | First try (2026-10-08) | Same Nudge, eyes shut in glee, holding up a brass-clipped glowing cyan screen with streaming hearts and thumbs-up, no writing; the glow lights its chin. Single bust, npc/nudge/clipboard. |
 | 13.37 Hoot's Gavel | First try (2026-10-08) | Polished dark-wood gavel with a brass band and a gold feather carved on the handle, cyan sparks off the striking face. Reads at 32 px. Single item, item/hoots-gavel. |
 | 13.6 Kuku | First try (2026-10-08) | Red-and-cream carved cuckoo in a brass-trimmed bandsman's cap on a coiled spring; the idle is the whole mossy chalet clock (face with hands and ticks only, pine-cone weights, pendulum, blank tag); busts in the open doorway: proud, mid-cuckoo, spring stretched with eyes huge, glaring from behind half-shut doors. Sliced into npc/kuku/{idle,neutral,happy,surprised,angry} (npc/kuku = neutral); the Sundial's death can now arm. |
+| 13.22 Mr Rubberstamp | First try (2026-10-08) | Squat warty olive toad with a green eyeshade, white shirt with ink splashes, patterned waistcoat with a watch chain, braces, and a huge copper-handled stamp with a glowing cyan pad and blank face. Idle with the stamp on his shoulder, unimpressed, reluctant half-smile, visor-up surprise, slamming the stamp down with an ink splash, finger to chin (asked: stamp handle; fine). Sliced into npc/rubberstamp/{idle,neutral,happy,surprised,angry,thinking} (npc/rubberstamp = neutral); Pip's death can now arm. All four built understudies now have art. |
