@@ -137,9 +137,35 @@ Before the exposure fix in the AI, Lantern beat What If? 60.6% and Close the Pro
 
 Over all 49,500 pair games the first player wins 47.6% (46.9% with no powers on the same matchups) and games last 8.01 rounds (7.99).
 
+### Tweaks
 
+Each tweak on each avatar power against the same power untweaked, 1,100 games each (±3), Competent vs Competent. Target 46–54% (a sidegrade). Cost/recharge after the tweak in brackets; "1h" is Blood price (1 heart, no energy).
 
-TWEAKS_SECTION
+| Power | Quick | Cheap | Blood price | Deeper | Broader |
+|---|---|---|---|---|---|
+| Close the Proof | 49.1 (4/1) | 53.1 (2/3) | **56.8** (1h/2) | 53.4 (3/3) | 49.9 (4/2) |
+| Foresee | 48.9 (1/0) | 49.5 (0/2) | 50.1 (1h/1) | 49.5 (0/2) | 51.5 (1/1) |
+| Night Sight | 46.9 (3/1) | **56.4** (1/3) | **45.0** (1h/2) | *55.0* (2/3) | 47.0 (3/2) |
+| Lantern | 48.8 (3/3) | 51.9 (1/5) | 53.2 (1h/4) | *54.2* (2/5) | 48.4 (3/4) |
+| What If? | 49.7 (1/1) | 50.5 (0/3) | **45.5** (1h/2) | 53.0 (0/3) | **58.6** (1/2) |
+| Brainstorm | 48.4 (1/0) | 48.8 (0/1) | 48.5 (1h/0) | 48.9 (0/1) | 49.5 (1/0) |
+| Hold That Thought | 50.5 (1/0) | 50.3 (0/2) | 48.5 (1h/1) | 51.6 (0/2) | **65.7** (1/1) |
+| Recall | 49.3 (3/2) | 51.1 (1/4) | 46.2 (1h/3) | 52.2 (2/4) | 51.8 (3/3) |
+| Call It Out | 48.7 (3/1) | 51.1 (1/3) | 50.1 (1h/2) | **57.4** (2/3) | 51.5 (3/2) |
+| Fine Print | 47.5 (3/1) | *54.5* (1/3) | 46.0 (1h/2) | *54.8* (2/3) | 47.9 (3/2) |
+
+**39 of 50 are within 46–54%**, 4 more (italics) within a point of the edge, which is inside the noise. Seven clear misses:
+
+- **Draw a card for 1 energy is too strong.** Hold That Thought Broader ("also draw a card", 65.7%) and What If? Broader (58.6%): both powers are free, so Broader makes a card cost 1. Fine Print Deeper (2 cards) is 54.8%.
+- **Call It Out Deeper** ("can't attack next turn", 57.4%): freezing the biggest enemy creature is worth more than a recharge.
+- **Night Sight Cheap** (56.4%): back to cost 1, so the turn-1 tax returns (the reason it went to cost 2).
+- **Close the Proof Blood price** (56.8%): a 3-energy kill for 1 heart is a big discount; Blood price is worth most on the most expensive power.
+- **Blood price on Night Sight and What If?** (45.0%, 45.5%): the AI rarely pays a heart (0.2–0.4 uses a game against 1.1–1.9), because its one-ply score prices a heart above most power effects. This is the AI under-using it, not a weak tweak; a student would use it more. Blood price is used 0.13–0.33 times a game on every power except Close the Proof (0.77) and Lantern (0.65).
+
+Quick and Broader (+1 energy) are the weakest tweaks overall (46.9–51.5%): energy is tight for the AI all game. Nothing was changed for tweaks in this pass: they are not yet unlocked in the game (order of work, step 6), and every fix above is a text change (see below).
+
+Over all 55,000 tweak games the first player wins 48.0% and games last 8.02 rounds.
+
 
 ## Open questions and proposals
 
