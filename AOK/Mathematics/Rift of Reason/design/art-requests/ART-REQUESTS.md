@@ -601,6 +601,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > One transparent canvas, no text, no numbers, clear space between figures. A full-body idle pose, then four head-and-shoulders busts in one row: neutral, happy, surprised, angry. Match the style board exactly and sit her beside Professor Sequins' sheet above (she is his stagehand). Tally: a tiny, round dormouse, much smaller and lower than the avatars, soft caramel fur, big dark shy eyes, small round ears, a big fluffy tail. Grey canvas overalls with lots of pockets, a pencil behind one ear, a stage headset far too big for her, and a clipboard of blank cards. A small red curtain-rope tied round her waist as a belt. Shy, quiet and precise, with stage fright: in the idle she hugs the clipboard and half-hides behind it. Happy: a small, proud, shy smile. Surprised: ears up, headset slipping. Angry: a cross little frown with the clipboard hugged tight.
 
+
+### 13.7 Memorial props (session of 8 October)
+
+**Attach:** `style-board.png`
+**Save as:** `5-ui/memorial.png`
+**Ids:** `ui/memorial-lantern-lit`, `ui/memorial-lantern-dark`, `ui/memorial-candle`, `ui/memorial-wreath`, `ui/memorial-ribbon` (already looked up by the Pattern Stall host panel), `ui/memorial-frame`
+
+> Six separate props in one row on a transparent canvas, evenly spaced, nothing touching, no text, no faces or figures. Match the style board exactly. Gentle and solemn, cute-dark but never gloomy or gory; these mark a friend who is gone. 1. A round paper fair lantern on a short loop of string, glowing warm gold, with a tiny painted star on it. 2. The same lantern exactly, but unlit: the paper grey-blue and dim, a thin curl of smoke from the top. 3. A single short white candle in a small brass holder, small soft flame, a little wax drip. 4. A small round wreath of dark green leaves and white flowers tied with a black ribbon bow. 5. A small black ribbon tied in a neat bow with two hanging tails, with a tiny brass pin. 6. An empty oval picture frame in carved dark wood with gold edging, the inside left clear and transparent.
+
 ---
 
 ## Outcome log
@@ -735,3 +744,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.20 The Guess-o-Matic | First try (2026-10-08) | Polished brass box on claw feet with violet panels, a glass window on three blank ivory reels, a speaker grille, a wooden-handled crank and a brass die at its foot. Instead of one glued sequin it has a little sequin-feathered bird on top: kept, because it reads as Sequins' (a magpie's) toy at once. 13.40 now asks for the same bird, dulled and missing sequins, so the core reads as this toy grown old. Single prop, ui/guess-o-matic. |
 | 13.27 The Talking Signpost | First try (2026-10-08) | Mossy, ivy-wrapped post with a carved face (moss eyebrows, big eyes, a hand cupped to its mouth mid-whisper), a toadstool on top, six blank arms pointing every way, an iron lantern with three little moths. Nosy and friendly, no text. The face is small in the frame but reads at bust size. Single bust, npc/signpost. |
 | 13.4 Tally | First try (2026-10-08) | Tiny caramel dormouse with a huge fluffy tail, headset, pencil behind the ear, grey overalls full of pockets, red curtain-rope belt with tassels, clipboard of blank cards hugged to her chest in every pose. Idle half-hidden behind the clipboard, neutral, shy proud smile, surprised (headset askew, comic strokes kept inside the slice), cross frown. The headset is ordinary-sized, not "too big": fine. Sliced into npc/tally/{idle,neutral,happy,surprised,angry} (npc/tally = neutral); Sequins' death can now arm. |
+| 13.7 Memorial props | First try (2026-10-08) | Round paper lanterns with a gold star, lit gold and unlit grey-blue with a curl of smoke (the smoke stays in the dark lantern's slice), a dripping candle in a brass chamberstick, a leaf-and-white-flower wreath with a black bow, a black bow with a star pin, an empty carved oval frame (centre truly transparent). Solemn, not grim. Sliced into the 6 ui/memorial-* ids; the Pattern Stall's black ribbon now uses the art instead of the CSS ribbon. |
