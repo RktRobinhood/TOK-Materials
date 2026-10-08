@@ -53,6 +53,9 @@
     const ACHILLES_HERE = { all: ['dead:granny', 'arrived:granny'] };
     // Granny's hums from the kitchen. Silent once she is gone (never spoken by anyone else).
     const HUM = t => ({ s: 'granny', hum: true, t, when: '!dead:granny' });
+    // Before the Hall is won (a Ch3 jump-in walking back has already won it).
+    const PRE = { not: { seen: 'ch2.hall.win' } };
+    const HUMPRE = t => ({ s: 'granny', hum: true, t, when: ['!dead:granny', PRE] });
 
     // ---------------------------------------------------------------- "Previously…"
 
@@ -89,12 +92,12 @@
     S['ch2.soup'] = [
         { s: 'narrator', t: 'Boolesbury, eighteen fifty-something. Every wall says: FEAST OF LAWS. SOUP FOR ALL. BY ORDER OF THE MAYOR.' },
         { s: 'narrator', t: 'One piece short. I feel… cloudier.', when: 'nudgeFled' },
-        { s: 'nudge', t: 'Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!', when: '!nudgeFled' },
-        { s: 'nudge', t: 'Flyers! Feast tonight! Like my mask? Nothing under it. Nothing shadowy.', when: 'nudgeFled' },
-        { s: 'nudge', t: 'Tonight\'s soup: one Granny Axiom! No Granny, no first rules. Engagement!' },
-        { s: 'avatar', t: 'Small print: "Thinking Trophy. Predicted winner: nobody." Wrong. Me.' },
-        { inner: { raven: '"By order of the Mayor." Order. Not "idea". Interesting.' } },
-        HUM('{name}? Big kitchen. Big pot. Don\'t panic. I\'m panicking for both of us.'),
+        { s: 'nudge', t: 'Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!', when: ['!nudgeFled', PRE] },
+        { s: 'nudge', t: 'Flyers! Feast tonight! Like my mask? Nothing under it. Nothing shadowy.', when: ['nudgeFled', PRE] },
+        { s: 'nudge', t: 'Tonight\'s soup: one Granny Axiom! No Granny, no first rules. Engagement!', when: PRE },
+        { s: 'avatar', t: 'Small print: "Thinking Trophy. Predicted winner: nobody." Wrong. Me.', when: PRE },
+        { inner: { raven: '"By order of the Mayor." Order. Not "idea". Interesting.' }, when: PRE },
+        HUMPRE('{name}? Big kitchen. Big pot. Don\'t panic. I\'m panicking for both of us.'),
     ];
 
     // ---------------------------------------------------------------- Old Wick's lane
@@ -132,12 +135,12 @@
     // After the table: the Mayor's fib, Quill (clue 1, inside a joke), the suspicion choice, a hum.
     S['ch2.square.win'] = [
         { s: 'mayor', e: 'nervous', t: 'See? Not an imp! I have not seen your loaf. Also, this statement is false.' },
-        { s: 'schoolteacher', t: 'Plumage. Crumbs on your chain. Again. And stop that. It\'s neither.' },
-        { s: 'schoolteacher', t: 'Every claim is true or false, child. Isn\'t that a comfort?' },
+        { s: 'schoolteacher', t: 'Plumage. Crumbs on your chain. Again. And stop that. It\'s neither.', when: PRE },
+        { s: 'schoolteacher', t: 'Every claim is true or false, child. Isn\'t that a comfort?', when: PRE },
         { inner: {
             owlet: 'Correct. Every sentence is true or false. First rule of everything.',
             mothkin: 'Shh. Her scarf. There\'s wind. It doesn\'t move. …Lovely lamp behind her, though.',
-        } },
+        }, when: PRE },
         // A Ch3 jump-in who walks back meets the Square after the feast: no suspicion to choose then.
         { when: { seen: 'ch2.hall.win' }, then: [
             { s: 'narrator', t: 'We know who was behind the feast now. This is only a memory.' },
@@ -166,7 +169,7 @@
     // Quill saves you; the avatar's certainty: "See? She's on my side." (quoted at the Hall).
     S['ch2.cover'] = [
         // Nudge sets the Constable on you, so Quill's rescue is a rescue from him.
-        { s: 'nudge', t: 'Constable! A stranger! Ask them EVERYTHING! I\'ll count the questions!' },
+        { s: 'nudge', t: 'Constable! A stranger! Ask them EVERYTHING! I\'ll count the questions!', when: PRE },
         { s: 'constable', e: 'accusing', t: 'Stranger, eh? Name and business. Slowly. I write slowly.' },
         { inner: { raven: 'If I say it smoothly enough, I am one. Words make things so.' } },
         { choice: [
@@ -192,10 +195,10 @@
                 { s: 'constable', t: 'Letter… carrot. Fine.' },
             ] },
         ] },
-        { s: 'schoolteacher', t: 'Constable, this one\'s with me. I checked their story. Every row.' },
-        { s: 'constable', t: 'If Miss Quill checked it, it\'s checked. Still. A few questions. For the form.' },
-        { s: 'avatar', e: 'happy', t: 'See? She\'s on my side.' },
-        { s: 'schoolteacher', t: 'Take my red pencil, child. Mark what\'s wrong. Never write "maybe".' },
+        { s: 'schoolteacher', t: 'Constable, this one\'s with me. I checked their story. Every row.', when: PRE },
+        { s: 'constable', t: 'If Miss Quill checked it, it\'s checked. Still. A few questions. For the form.', when: PRE },
+        { s: 'avatar', e: 'happy', t: 'See? She\'s on my side.', when: PRE },
+        { s: 'schoolteacher', t: 'Take my red pencil, child. Mark what\'s wrong. Never write "maybe".', when: PRE },
     ];
 
     S['ch2.post'] = [
@@ -220,7 +223,7 @@
     ];
     S['ch2.clockmaker.win'] = [
         { s: 'clockmaker', t: 'The bulb agrees with you. So do the clocks. That never happens.' },
-        HUM('They\'ve added carrots, dear. I am not a carrot person.'),
+        HUMPRE('They\'ve added carrots, dear. I am not a carrot person.'),
     ];
 
     // ---------------------------------------------------------------- the Clock Tower
@@ -238,8 +241,8 @@
         { s: 'constable', t: 'A true story holds too. Proves less than you\'d think.', when: { flag: 'cover', is: 'visitor' } },
         { inner: { raven: 'Smooth words. Still a story. He knew.' }, when: { flag: 'cover', not: 'visitor' } },
         { inner: { raven: 'True words. Still not proof. Noted.' }, when: { flag: 'cover', is: 'visitor' } },
-        HUM('Somebody tall keeps checking the pot. Hums in ones and zeros. Very tidy.'),
-        { inner: { frogling: '"Tall." Lots of birds are tall. Herons are tall. I\'m not enjoying this.' }, when: '!dead:granny' },
+        HUMPRE('Somebody tall keeps checking the pot. Hums in ones and zeros. Very tidy.'),
+        { inner: { frogling: '"Tall." Lots of birds are tall. Herons are tall. I\'m not enjoying this.' }, when: ['!dead:granny', PRE] },
     ];
 
     // ---------------------------------------------------------------- the Town Hall Stairs
