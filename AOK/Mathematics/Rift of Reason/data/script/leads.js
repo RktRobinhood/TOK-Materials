@@ -50,7 +50,7 @@
     // at the Road, the Gallery or the Pattern Stall never hears the same lead twice in lesson 1.
     L['venn:well'] = { inner: {
         owlet: 'Shade the premises. Then hunt for one spot that breaks the ending.',
-        mothkin: 'Look for the one x the premises force. Just one. Then look again.',
+        mothkin: 'Does anything force an x? Then find it. If not, read the shading.',
         fox: 'Picture a world where the premises hold and the ending fails. Found one?',
         frogling: 'He fished with a sock. Odd, but true. Odd doesn\'t matter. Does it follow?',
         raven: '"No" and "not all". Different words. Different shading.',

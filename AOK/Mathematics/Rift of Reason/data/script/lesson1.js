@@ -92,7 +92,7 @@
     // Your Home (node script). The morning, or a look back for a jump-in.
     S['prologue.home'] = [
         { when: JUMPED_PAST('prologue.wake'), then: [
-            { s: 'narrator', t: 'Your home. I stood here every morning since before Granny was born. Now I ride in your shadow.' },
+            { s: 'narrator', t: 'Your home. I\'ve stood here every morning since before Granny was born. Now I ride in your shadow.' },
         ], else: [{ play: 'prologue.wake' }] },
     ];
     S['prologue.wake'] = [
@@ -132,7 +132,7 @@
             { when: DOOR_OPEN, then: [
                 { when: { seen: 'ch1.door' }, then: [
                     { s: 'narrator', t: 'Her door is still open. The tea has gone cold.', when: '!dead:granny' },
-                    { s: 'narrator', t: 'Her door is still open. Her lantern is still out.', when: 'dead:granny' },
+                    { s: 'narrator', t: 'Her door is still open. Her lantern is out.', when: 'dead:granny' },
                 ], else: [{ play: 'ch1.door' }] },
             ], else: [
                 // Granny's barks: each plays once, then she lets you be.
@@ -350,7 +350,7 @@
 
     // Granny's open door (the Fair Gate, from the Well win). Optional; it can turn you back.
     S['ch1.door'] = [
-        { s: 'narrator', t: 'Granny\'s door is open. Her tea is still warm. Her shawl is gone.', when: { not: LATER } },
+        { s: 'narrator', t: 'Granny\'s door is open. Her cup is on the table. Her shawl is gone.', when: { not: LATER } },
         { s: 'narrator', t: 'Granny\'s door is open. The tea went cold days ago. Her shawl is gone.', when: LATER },
         { s: 'syllo', t: 'No sign of a fight, recruit. She\'d have won one.', when: '!dead:granny' },
         { s: 'narrator', t: 'Her lantern is out. I keep looking at it.', when: 'dead:granny' },
