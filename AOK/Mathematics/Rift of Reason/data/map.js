@@ -116,7 +116,7 @@
             'river-ford': {
                 host: 'muskrat', goal: 'Plan by rules: every step must be safe, not just the ending.',
                 intro: 'station.river-ford.intro', reminder: 'station.river-ford.reminder',
-                name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 590, y: 640,
+                name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 548, y: 468,
                 scene: 'scene/road-bridge',
                 puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
@@ -354,7 +354,7 @@
             't-reading-room': {
                 host: 'pip', goal: 'A claim is settled when the evidence rules out every other possibility.',
                 intro: 'station.t-reading-room.intro', reminder: 'station.t-reading-room.reminder',
-                name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 214, y: 190,
+                name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 128, y: 205,
                 scene: 'scene/evidence-room',
                 puzzles: [{ id: 'logic-grid', difficulty: 1 }, { id: 'logic-grid', difficulty: 2 }, { id: 'logic-grid', difficulty: 3 }],
                 spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-library'],
