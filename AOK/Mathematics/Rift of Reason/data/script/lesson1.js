@@ -153,6 +153,7 @@
     S['prologue.bark.road'] = [{ s: 'granny', t: 'Shoo, dear. The crack won\'t follow itself.' }];
     // After Sequins' death, the first time back at the Fair: his dark lantern, and a friend who misses him.
     S['ch1.lantern'] = [
+        { prop: 'ui/memorial-lantern-dark' },
         { s: 'narrator', t: 'The lanterns. One is dark. It was the shiniest.', when: '!dead:granny' },
         { s: 'narrator', t: 'The lanterns. Two are dark. One of them was the shiniest.', when: 'dead:granny' },
         { s: 'syllo', t: 'His lantern went out, recruit. I saluted it. I didn\'t know what else to do.' },
@@ -361,6 +362,7 @@
         { s: 'narrator', t: 'Granny\'s door is open. Her cup is on the table. Her shawl is gone.', when: { not: LATER } },
         { s: 'narrator', t: 'Granny\'s door is open. The tea went cold days ago. Her shawl is gone.', when: LATER },
         { s: 'syllo', t: 'No sign of a fight, recruit. She\'d have won one.', when: '!dead:granny' },
+        { prop: 'ui/memorial-lantern-dark', when: 'dead:granny' },
         { s: 'narrator', t: 'Her lantern is out. I keep looking at it.', when: 'dead:granny' },
         { s: 'narrator', t: 'Tiny soup pots. A trail of them. Up into the crack.' },
         { s: 'narrator', t: 'And a feather. Long, grey and dusty. As if from a sack.' },

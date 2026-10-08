@@ -229,9 +229,11 @@
 
     // ---- the runner ----------------------------------------------------------------
 
-    function keepsake(layer, id, ctx) {
-        Story().setFlag('keepsake:' + id, true);
-        const img = Rift.Assets.img('keepsake/' + id, { className: 'keepsake', label: id.replace(/-/g, ' ') });
+    // { keepsake: 'cage-cushion' } shows keepsake/<id> at the side and remembers it was given;
+    // { prop: 'ui/memorial-candle' } shows any art in the same place, with no flag (memorial props).
+    function keepsake(layer, id, ctx, art) {
+        if (!art) Story().setFlag('keepsake:' + id, true);
+        const img = Rift.Assets.img(art || 'keepsake/' + id, { className: 'keepsake', label: (art ? id.split('/').pop().replace(/^memorial-/, '') : id).replace(/-/g, ' ') });
         if (ctx.keepsake) ctx.keepsake.remove();
         ctx.keepsake = img;
         layer.appendChild(img);
@@ -289,6 +291,7 @@
             } else if (step.arrive) Rift.Cast.arrive(step.arrive);
             else if (step.quiet) await quietStep(layer, step.quiet, ctx);
             else if (step.keepsake) keepsake(layer, step.keepsake, ctx);
+            else if (step.prop) { if (Rift.Assets.has(step.prop)) keepsake(layer, step.prop, ctx, step.prop); }
             else if ('scene' in step) backdrop(layer, step.scene, ctx);
             else if (step.possess) {
                 const role = step.possess;

@@ -476,6 +476,18 @@ test('station hosts: the first matching entry of a node\'s hosts list, then the 
     assert.equal(Rift.Cast.nodeHost('stall-pattern').actor, null, 'then the cast: silent role, no stand-in here');
 });
 
+test('a prop step shows memorial art beside the dialogue, with no keepsake flag; missing art is skipped', async () => {
+    const Rift = game();
+    const r = runner(Rift);
+    const shownArt = [];
+    Rift.Assets = Object.assign({}, Rift.Assets, { has: id => id !== 'ui/memorial-missing', img: id => { shownArt.push(id); return Rift.el('img'); } });
+    Rift.data.script['t.prop'] = [{ prop: 'ui/memorial-candle' }, { prop: 'ui/memorial-missing' }, { s: 'narrator', t: 'A candle.' }];
+    await r.play('t.prop', b => b[0]);
+    assert.deepEqual(shownArt.filter(id => id.startsWith('ui/memorial')), ['ui/memorial-candle']);
+    assert.equal(Object.keys(Rift.State.get().flags).some(k => k.startsWith('keepsake:')), false);
+    assert.deepEqual(r.spoken.map(l => l.speaker), ['narrator']);
+});
+
 test('station scenes: the Town Hall shows the feast until it is won or Granny is gone', () => {
     const Rift = game();
     assert.equal(Rift.Cast.nodeScene('b-town-hall'), 'scene/feast-hall');

@@ -663,6 +663,7 @@
 
         // 2. The candles (only if someone died). No jokes here.
         { when: ANY_DEATH, then: [
+            { prop: 'ui/memorial-candle' },
             { note: 'The lanterns. A candle burns under each dark one.' },
             { note: 'Pip never had a lantern here. You light a new one for him. A candle goes under it.', when: 'dead:pip' },
             { s: 'granny', t: 'Sequins. He\'d have hated how dark it is.', u: 'Her magpie friend. All shine, she said. It\'s dark now.', when: 'dead:sequins' },

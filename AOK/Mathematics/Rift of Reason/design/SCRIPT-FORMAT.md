@@ -237,6 +237,7 @@ Every other role is spoken by its original only.
 | `{ quiet: 'sequins' }` (new) | section 7 |
 | `{ scene: 'scene/burrow' }` (new) | a background behind the dialogue for the rest of this script (the Nut Stall's evening on the Your Home background). `{ scene: 'black' }` is plain black (the cold open); `{ scene: null }` clears it. It ends with the script |
 | `{ keepsake: 'cage-cushion' }` (new) | a cosmetic keepsake comes to you (flag `keepsake:<id>`; shown small at the side, art `keepsake/<id>`) |
+| `{ prop: 'ui/memorial-lantern-dark' }` | shows any art in the keepsake's place, with no flag (memorial props: `ui/memorial-lantern-lit`, `-lantern-dark`, `-candle`, `-wreath`, `-ribbon`, `-frame`); skipped if the art is missing |
 | `{ possess: 'pip' }` / `{ free: 'pip' }` (new) | section 9 |
 | `{ clock: … }` (new) | section 8 |
 
