@@ -4,7 +4,9 @@
  * proof, so this puzzle comes with a truth-table tool.
  *
  * Every villager is either HONEST (everything they say is true) or an IMP
- * (everything they say is false). The player is told how many imps there are.
+ * (everything they say is false). The player is usually told how many imps
+ * there are; in hidden-count mode (the Ch2 Square) they are not, every world
+ * from "nobody" to "everybody" is possible, and accusing nobody is an answer.
  * Each villager says one statement whose shape depends on their job. A
  * brute-force solver tries every way the imps could be hiding (every "world")
  * and the generator keeps only puzzles with exactly ONE consistent world.
@@ -20,6 +22,17 @@
  *   { t:'odd', of }                                    Schoolteacher: an odd number of them are imps
  *   { t:'self', g }                                    Sweep: "I am honest." (proves nothing)
  *   { t:'lying', g, about? }                           Baker: "X is lying (about Y)." = X's statement is false
+ *
+ * Station opts (data/map.js; generate's third argument):
+ *   { fixed: 'square' }      a fixed table from FIXED (the Ch2 Square: Mayor, Baker, Sweep;
+ *                            hidden count; the one consistent world is "nobody is an imp")
+ *   { fixed: [{ role, says, text? }, …], imps: k }  or  { …, hiddenCount: true }   any fixed table
+ *   { excludeRoles: ['schoolteacher'] }   keep jobs out of a random roll (every Ch2 roll)
+ *   { forceImp: 'schoolteacher' }         that job is in the square, and is an imp
+ *   { hideRow: true }        Quill's trick: the table starts open and pre-filled, with the real
+ *                            world's row left out until "Show all rows" (Hall stage 3, core
+ *                            trial 1). { prefill: true } pre-fills without hiding a row.
+ *   { lead: false }          the inner voice's lead bank stays quiet here (js/ui/dialogue.js)
  *
  * Mechanics in the spirit of social-deduction games (Demon Bluff and the
  * knights-and-knaves folk puzzle); every name, line and picture here is new.
@@ -39,7 +52,23 @@
         schoolteacher: { name: 'Teacher', species: 'stork' },
         gardener: { name: 'Gardener', species: 'goat' },
     };
-    const ROLE_IDS = Object.keys(ROLES);
+    const ROLE_IDS = Object.keys(ROLES);   // the random pool; the Mayor only stands in fixed tables
+    ROLES.mayor = { name: 'Mayor', species: 'peacock', art: 'npc/mayor' };
+
+    // Fixed tables (opts.fixed). The tests check each has exactly one consistent world.
+    const FIXED = {
+        // Ch2 Square (STORY.md Ch2 beat 3, App. H). Whatever the Mayor is, "same kind" makes the
+        // Baker honest; she clears the Sweep; the Sweep clears the Mayor. Only world: nobody.
+        square: {
+            hiddenCount: true,
+            note: 'No imps is a possible answer.',
+            villagers: [
+                { role: 'mayor', says: { t: 'same', g: 0, h: 1 }, text: 'The Baker and I are the same kind.' },
+                { role: 'baker', says: { t: 'honest', g: 2 }, text: 'The Sweep is no imp.' },
+                { role: 'sweep', says: { t: 'honest', g: 0 }, text: 'The Mayor is no imp.' },
+            ],
+        },
+    };
     const NUM = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 
     // Villager count, imp count and which jobs can appear, per difficulty.
@@ -95,8 +124,21 @@
         return true;
     }
 
+    // Every world with any number of imps (hidden-count mode): nobody first, then one imp, two…
+    const allCache = {};
+    function allWorlds(n) {
+        if (allCache[n]) return allCache[n];
+        let out = [];
+        for (let k = 0; k <= n; k++) out = out.concat(worlds(n, k));
+        return (allCache[n] = out);
+    }
+    // k == null: the count is hidden, so every world is possible.
+    const worldsFor = (n, k) => (k == null ? allWorlds(n) : worlds(n, k));
+    const kOf = data => (data.hiddenCount ? null : data.imps);
+    function worldsOf(data) { return worldsFor(data.villagers.length, kOf(data)); }
+
     function solutions(says, k) {
-        return worlds(says.length, k).filter(w => consistent(says, w.imp));
+        return worldsFor(says.length, k).filter(w => consistent(says, w.imp));
     }
 
     // The truth table the in-game tool shows: one row per world, one cell per
@@ -104,7 +146,7 @@
     // villager's statement is false there or an imp's is true.
     function table(data) {
         const says = data.villagers.map(v => v.says);
-        return worlds(says.length, data.imps).map(w => {
+        return worldsOf(data).map(w => {
             const cells = says.map(s => evaluate(s, w.imp, says));
             const clash = cells.map((v, i) => v === w.imp[i]);
             return { imps: w.list.slice(), imp: w.imp.slice(), cells, clash, possible: clash.indexOf(true) === -1 };
@@ -301,18 +343,27 @@
         return sc;
     }
 
-    function generate(rng, difficulty) {
+    // generate(rng, difficulty[, opts]): opts are listed in the header.
+    function generate(rng, difficulty, opts) {
+        const o = opts || {};
+        if (o.fixed) return fixedVillage(rng, difficulty, o);
         const diff = Rift.clamp(Math.round(difficulty || 1), 1, 3);
         const cfg = CONFIG[diff];
-        const n = rng.int(cfg.n[0], cfg.n[1]);
+        const pool = o.excludeRoles ? cfg.roles.filter(r => o.excludeRoles.indexOf(r) === -1) : cfg.roles;
+        const n = Math.min(rng.int(cfg.n[0], cfg.n[1]), pool.length);
         const k = rng.int(cfg.k[0], cfg.k[1]);
-        const roles = rng.shuffle(cfg.roles).slice(0, n);
+        const roles = rng.shuffle(pool).slice(0, n);
+        // forceImp: that job stands in the square and is an imp in the one consistent world.
+        const forced = o.forceImp && MAKERS[o.forceImp] ? o.forceImp : null;
+        if (forced && roles.indexOf(forced) === -1) roles[rng.int(0, n - 1)] = forced;
+        const fi = forced ? roles.indexOf(forced) : -1;
         // The Baker talks about someone else's statement, so is written last.
         const order = others(-1, n).sort((a, b) => (roles[a] === 'baker') - (roles[b] === 'baker'));
 
         let says = null, target = null;
-        for (let attempt = 0; attempt < 80 && !says; attempt++) {
+        for (let attempt = 0; attempt < (forced ? 400 : 80) && !says; attempt++) {
             const pick = rng.shuffle(others(-1, n)).slice(0, k);
+            if (fi >= 0 && pick.indexOf(fi) === -1) pick[0] = fi;
             target = new Array(n).fill(false);
             pick.forEach(i => { target[i] = true; });
 
@@ -334,7 +385,34 @@
         }
         if (!says) return fallback(rng, diff);
 
-        return finish(rng, diff, roles, says, k);
+        return table3(finish(rng, diff, roles, says, k), o);
+    }
+
+    // The pre-filled table, and Quill's hidden row: the real world's row (its index in table order).
+    function table3(data, o) {
+        if (o.prefill || o.hideRow) data.prefill = true;
+        if (o.hideRow) {
+            const sol = solutions(saysOf(data), kOf(data));
+            if (sol.length === 1) data.hiddenRow = worldsOf(data).indexOf(sol[0]);
+        }
+        return data;
+    }
+
+    function fixedVillage(rng, difficulty, o) {
+        const spec = typeof o.fixed === 'string' ? FIXED[o.fixed] : { villagers: o.fixed };
+        if (!spec || !Array.isArray(spec.villagers)) throw new Error('Unknown fixed village: ' + o.fixed);
+        const diff = Rift.clamp(Math.round(difficulty || 1), 1, 3);
+        const hidden = o.hiddenCount != null ? !!o.hiddenCount : !!spec.hiddenCount;
+        const roles = spec.villagers.map(v => v.role);
+        const says = spec.villagers.map(v => JSON.parse(JSON.stringify(v.says)));
+        const k = hidden ? null : (o.imps != null ? o.imps : spec.imps);
+        const data = finish(rng, diff, roles, says, k);
+        data.fixed = typeof o.fixed === 'string' ? o.fixed : 'custom';
+        if (hidden) data.hiddenCount = true;
+        const note = o.note || spec.note;
+        if (note) data.note = note;
+        spec.villagers.forEach((v, i) => { if (v.text) data.villagers[i].text = v.text; });
+        return table3(data, o);
     }
 
     function finish(rng, diff, roles, says, k) {
@@ -370,7 +448,7 @@
     function saysOf(data) { return data.villagers.map(v => v.says); }
 
     function solve(data) {
-        const sol = solutions(saysOf(data), data.imps);
+        const sol = solutions(saysOf(data), kOf(data));
         if (sol.length !== 1) return null;
         return { imps: sol[0].list.map(i => data.villagers[i].id) };
     }
@@ -393,8 +471,12 @@
         const accused = imp.filter(Boolean).length;
         const R = renderer(data.villagers);
 
-        if (!accused) {
+        const hidden = !!data.hiddenCount;
+        if (!accused && !hidden) {
             return { solved: false, partial, feedback: 'Place an accuse token on every villager you think is an imp (there ' + (k === 1 ? 'is one imp' : 'are ' + NUM[k] + ' imps') + ').' };
+        }
+        if (sol && right === n && !sol.imps.length) {
+            return { solved: true, partial: 1, feedback: 'Nobody is an imp! In this world, and only this one, everybody tells the truth. Every other world breaks a rule.' };
         }
         if (sol && right === n) {
             const who = andList(sol.imps.map(id => 'the ' + data.villagers.find(v => v.id === id).name));
@@ -410,7 +492,7 @@
                 ? 'If the ' + v.name + ' is an imp, what they say must be false. But ' + quote + ' is true in your answer' + (why ? ': ' + why : '') + '.'
                 : 'If the ' + v.name + ' is honest, what they say must be true. But ' + quote + ' is false in your answer' + (why ? ': ' + why : '') + '.';
         }
-        if (accused !== k) {
+        if (!hidden && accused !== k) {
             return {
                 solved: false, partial,
                 feedback: 'There ' + (k === 1 ? 'is exactly one imp' : 'are exactly ' + NUM[k] + ' imps') + ', and you accused ' + NUM[accused] + '.' + (clashText ? ' Also: ' + clashText : ''),
@@ -425,16 +507,17 @@
     // they are honest (their statement must then be true).
     function cutIfHonest(data, i) {
         const says = saysOf(data);
-        return worlds(says.length, data.imps).filter(w => !w.imp[i] && evaluate(says[i], w.imp, says)).length;
+        return worldsOf(data).filter(w => !w.imp[i] && evaluate(says[i], w.imp, says)).length;
     }
 
     function hints(data) {
         const sol = solve(data);
-        const n = data.villagers.length, k = data.imps;
-        const rows = worlds(n, k).length;
+        const k = data.imps;
+        const rows = worldsOf(data).length;
         const out = [];
         out.push('Open the truth table. Each of its ' + rows + ' rows is one possible world: one way '
-            + (k === 1 ? 'the imp' : 'the ' + NUM[k] + ' imps') + ' could be hiding. A world is impossible as soon as an honest villager says something false there, or an imp says something true.');
+            + (data.hiddenCount ? 'the imps could be hiding, from nobody at all to everybody' : k === 1 ? 'the imp could be hiding' : 'the ' + NUM[k] + ' imps could be hiding')
+            + '. A world is impossible as soon as an honest villager says something false there, or an imp says something true.');
 
         const sweep = data.villagers.findIndex(v => v.says.t === 'self');
         const pickTest = data.villagers.findIndex(v => v.says.t === 'imp' || v.says.t === 'honest' || v.says.t === 'lying');
@@ -465,8 +548,21 @@
         if (!sol) return null;
         const names = sol.imps.map(id => 'the ' + data.villagers.find(v => v.id === id).name);
         const who = andList(names);
-        const k = data.imps;
-        const rows = worlds(data.villagers.length, k).length;
+        const k = data.hiddenCount ? sol.imps.length : data.imps;
+        const rows = worldsOf(data).length;
+        if (!sol.imps.length) {
+            const right = 'The truth table lists every possible world, and every world with an imp in it contains a contradiction, so nobody is an imp.';
+            const opts = Rift.makeRng('village-why:' + data.seed).shuffle([right,
+                'Because nobody looked nervous.',
+                'Because the villagers vouched for each other, and friends are usually right.',
+                'Because the first world we tried in the table worked, so there was no need to check the rest.']);
+            return {
+                question: 'How do you know nobody here is an imp?',
+                options: opts,
+                correct: opts.indexOf(right),
+                explain: 'There were ' + rows + ' possible worlds, from nobody to everybody, and the table checked them all. Only the world with no imps has no clash. "No imps" was a possible answer, so it had to be checked like any other.',
+            };
+        }
         const correct = 'The truth table lists every possible world, and every world except this one contains a contradiction, so this one must be the real one.';
         const accusers = data.villagers.filter(v => v.says.t === 'imp' || v.says.t === 'anyImp' || v.says.t === 'lying');
         const wrong = [
@@ -503,7 +599,7 @@
     // showing; when one world survives, that is the proof.
 
     const POSE_ACCUSING = { imp: 1, anyImp: 1, lying: 1 };
-    const artId = (v, pose) => 'npc/villager-' + v.role + '/' + pose;
+    const artId = (v, pose) => ((ROLES[v.role] && ROLES[v.role].art) || 'npc/villager-' + v.role) + '/' + pose;
 
     function mount(container, data, api) {
         const el = (api && api.el) || Rift.el;
@@ -514,20 +610,31 @@
         const says = saysOf(data);
         const rows = table(data);
         const short = i => data.villagers[i].name;
-        const worldName = r => andList(rows[r].imps.map(i => 'the ' + short(i)));
+        // Hidden-count mode: any number of imps, so the player has a token per villager and may accuse nobody.
+        const hidden = !!data.hiddenCount;
+        const tokens = hidden ? n : k;
+        // Quill's hidden row: left out of the table (and its numbering) until "Show all rows".
+        const hr = data.hiddenRow != null && data.hiddenRow >= 0 ? data.hiddenRow : -1;
+        // "the Baker is the imp." / "the Baker and the Sweep are the imps." / "nobody is an imp."
+        const impSentence = list => (!list.length ? 'nobody is an imp.'
+            : andList(list.map(i => 'the ' + short(i))) + (list.length === 1 ? ' is the imp.' : ' are the imps.'));
 
         const st = {
             accused: [],
             done: false,
-            ttOpen: diff === 3,
-            filled: rows.map(() => new Array(n).fill(null)),
+            ttOpen: diff === 3 || !!data.prefill,
+            filled: rows.map(row => (data.prefill ? row.cells.slice() : new Array(n).fill(null))),
             struck: rows.map(() => false),
             sel: null,
             colRight: new Array(n).fill(0),
-            unlocked: new Array(n).fill(diff === 3),
+            unlocked: new Array(n).fill(diff === 3 || !!data.prefill),
             strikes: 0,
+            showAll: hr < 0,
             note: null,        // { text, kind } for the inspector
         };
+        const shown = r => st.showAll || r !== hr;
+        const live = r => !st.struck[r] && shown(r);
+        const num = r => (st.showAll || r < hr ? r + 1 : r);
 
         const prevPos = container.style.position;
         if (root.getComputedStyle && root.getComputedStyle(container).position === 'static') container.style.position = 'relative';
@@ -544,7 +651,9 @@
         rootEl.appendChild(el('div.vg-rules', {}, [
             el('span.vg-rule', {}, [el('b', { text: '😇 Honest' }), ' always tell the truth']),
             el('span.vg-rule', {}, [el('b', { text: '😈 Imps' }), ' always lie']),
-            el('span.vg-rule.count', {}, [el('b', { text: k === 1 ? 'One imp' : cap(NUM[k]) + ' imps' }), ' hide in the square']),
+            hidden
+                ? el('span.vg-rule.count', {}, [el('b', { text: 'How many imps? ' }), 'Nobody says. ' + (data.note || 'No imps is a possible answer.')])
+                : el('span.vg-rule.count', {}, [el('b', { text: k === 1 ? 'One imp' : cap(NUM[k]) + ' imps' }), ' hide in the square']),
             el('span.vg-rule.muted', { text: 'neighbours = the villagers either side' }),
         ]));
 
@@ -592,7 +701,7 @@
         const strikeAll = el('button.btn.small.vg-strike-all', { type: 'button', onclick: strikeAllClashes, text: 'Cross out every row with a ⚡' });
         const thead = el('thead');
         const tbody = el('tbody');
-        const headRow = el('tr', {}, [el('th.vg-th-world', { scope: 'col' }, [el('span', { text: k === 1 ? 'World: the imp is…' : 'World: the imps are…' })])]);
+        const headRow = el('tr', {}, [el('th.vg-th-world', { scope: 'col' }, [el('span', { text: k === 1 && !hidden ? 'World: the imp is…' : 'World: the imps are…' })])]);
         const fillBtns = data.villagers.map((v, c) => {
             const b = el('button.vg-fill', { type: 'button', title: 'Fill in this column for every world', onclick: () => fillColumn(c), text: 'fill ▾' });
             headRow.appendChild(el('th.vg-th-col', { scope: 'col', title: 'The ' + v.name + ': “' + v.text + '”' }, [
@@ -605,9 +714,10 @@
         thead.appendChild(headRow);
 
         const rowEls = rows.map((row, r) => {
+            const numEl = el('span.vg-row-num', { text: String(r + 1) });
             const label = el('th.vg-row-label', { scope: 'row' }, [
-                el('span.vg-row-num', { text: String(r + 1) }),
-                el('span', { text: row.imps.map(short).join(' + ') }),
+                numEl,
+                el('span', { text: row.imps.length ? row.imps.map(short).join(' + ') : 'nobody' }),
             ]);
             const cells = data.villagers.map((v, c) => el('button.vg-cell' + (row.imp[c] ? '.imp' : '.honest'), {
                 type: 'button',
@@ -619,20 +729,34 @@
                 onmouseenter: () => ghost(r), onmouseleave: () => ghost(-1),
             }, [label].concat(cells.map(cell => el('td', {}, [cell]))).concat([el('td', {}, [poss])]));
             tbody.appendChild(tr);
-            return { tr, cells, poss };
+            return { tr, cells, poss, numEl };
         });
 
         const legend = el('span.vg-legend', {}, [
             el('span.vg-key.honest', { text: '😇 honest here' }), el('span.vg-key.imp', { text: '😈 imp here' }),
             el('span.vg-key', { text: '✓ true · ✗ false' }), el('span.vg-key.clash', { text: '⚡ clash' }),
         ]);
-        tt.appendChild(el('div.vg-tt-head', {}, [
-            el('h3', { text: 'Truth table' }),
-            el('span.vg-tt-sub', { text: 'Every possible world: ' + rows.length + ' ways ' + (k === 1 ? 'one imp' : NUM[k] + ' imps') + ' could hide among ' + NUM[n] + ' villagers.' }),
-        ]));
+        const subText = () => (!st.showAll
+            ? 'Filled in for you: ' + (rows.length - 1) + ' worlds. Every row checked.'
+            : hidden
+                ? 'Every possible world: ' + rows.length + ' ways the imps could hide among ' + NUM[n] + ' villagers, from nobody to everybody.'
+                : 'Every possible world: ' + rows.length + ' ways ' + (k === 1 ? 'one imp' : NUM[k] + ' imps') + ' could hide among ' + NUM[n] + ' villagers.');
+        const sub = el('span.vg-tt-sub', { text: subText() });
+        tt.appendChild(el('div.vg-tt-head', {}, [el('h3', { text: 'Truth table' }), sub]));
         tt.appendChild(insp);
         tt.appendChild(el('div.vg-tt-scroll', {}, [el('table.vg-table', {}, [thead, tbody])]));
-        tt.appendChild(el('div.vg-tt-foot', {}, [counter, legend, strikeAll]));
+        const showAllBtn = el('button.btn.small.vg-show-all', { type: 'button', onclick: showAllRows, text: 'Show all rows' });
+        tt.appendChild(el('div.vg-tt-foot', {}, [counter, legend, strikeAll, showAllBtn]));
+
+        function showAllRows() {
+            if (st.showAll) return;
+            st.showAll = true;
+            sfx('reveal');
+            sub.textContent = subText();
+            st.sel = { r: hr, c: 0 };
+            st.note = { text: 'A row was missing! World ' + num(hr) + ': ' + impSentence(rows[hr].imps) + ' Nobody showed you that one.', kind: 'clash' };
+            render();
+        }
         rootEl.appendChild(tt);
 
         // Hovering a row shows that world's imps in the square.
@@ -651,13 +775,13 @@
             for (let step = 0; step < rows.length * n; step++) {
                 const idx = (fromRow * n + fromCol + 1 + step) % (rows.length * n);
                 const r = Math.floor(idx / n), c = idx % n;
-                if (!st.struck[r] && !knownClash(r) && st.filled[r][c] === null) return { r, c };
+                if (live(r) && !knownClash(r) && st.filled[r][c] === null) return { r, c };
             }
             return null;
         }
 
         function select(r, c) {
-            if (st.struck[r]) { st.note = { text: 'World ' + (r + 1) + ' is already crossed out.', kind: 'info' }; render(); return; }
+            if (st.struck[r]) { st.note = { text: 'World ' + num(r) + ' is already crossed out.', kind: 'info' }; render(); return; }
             st.sel = { r, c };
             st.note = null;
             clearResult();
@@ -692,7 +816,7 @@
                     kind: 'clash',
                 };
             } else if (complete(r)) {
-                st.note = { text: '✓ Every statement fits world ' + (r + 1) + ': the honest villagers’ words are true and the imps’ words are false.', kind: 'good' };
+                st.note = { text: '✓ Every statement fits world ' + num(r) + ': the honest villagers’ words are true and the imps’ words are false.', kind: 'good' };
             } else {
                 st.note = { text: 'Right: ' + (truth ? 'true' : 'false') + '. No clash: ' + (rows[r].imp[c] ? 'an imp’s words should be false' : 'an honest villager’s words should be true') + '.'
                     + (unlockedNow ? ' You can now fill the ' + v.name + '’s whole column with “fill ▾”.' : ''), kind: 'good' };
@@ -740,8 +864,8 @@
                 if (manual) {
                     sfx('error');
                     st.note = complete(r)
-                        ? { text: 'World ' + (r + 1) + ' has no clash: every statement fits. It is still possible!', kind: 'good' }
-                        : { text: 'No clash showing in world ' + (r + 1) + ' yet. Fill in more of its cells: one ⚡ is enough to cross it out.', kind: 'info' };
+                        ? { text: 'World ' + num(r) + ' has no clash: every statement fits. It is still possible!', kind: 'good' }
+                        : { text: 'No clash showing in world ' + num(r) + ' yet. Fill in more of its cells: one ⚡ is enough to cross it out.', kind: 'info' };
                     if (!complete(r)) st.sel = { r, c: st.filled[r].indexOf(null) };
                     render();
                 }
@@ -752,7 +876,7 @@
                 st.strikes++;
                 sfx('click');
                 const c = st.filled[r].findIndex((v, j) => v !== null && rows[r].clash[j]);
-                st.note = { text: 'Crossed out world ' + (r + 1) + ': the ' + short(c) + (rows[r].imp[c] ? ' would be an imp telling the truth.' : ' would be honest but saying something false.'), kind: 'info' };
+                st.note = { text: 'Crossed out world ' + num(r) + ': the ' + short(c) + (rows[r].imp[c] ? ' would be an imp telling the truth.' : ' would be honest but saying something false.'), kind: 'info' };
                 const nx = diff < 3 ? nextOpen(r, n - 1) : null;
                 st.sel = nx;
                 render();
@@ -761,7 +885,7 @@
 
         function strikeAllClashes() {
             let c = 0;
-            rows.forEach((row, r) => { if (!st.struck[r] && knownClash(r)) { strike(r, false); c++; } });
+            rows.forEach((row, r) => { if (live(r) && knownClash(r)) { strike(r, false); c++; } });
             sfx(c ? 'place' : 'error');
             st.note = c
                 ? { text: 'Crossed out ' + c + ' world' + (c === 1 ? '' : 's') + ' with a clash.', kind: 'info' }
@@ -781,15 +905,24 @@
         function renderInspector() {
             insp.innerHTML = '';
             insp.className = 'vg-insp';
-            const alive = rows.map((x, r) => r).filter(r => !st.struck[r]);
+            const alive = rows.map((x, r) => r).filter(live);
             if (alive.length === 1 && !st.done) {
                 const r = alive[0];
                 insp.classList.add('proved');
                 insp.appendChild(el('div.vg-insp-text', {}, [
                     el('b', { text: 'Only one world survives! ' }),
-                    'Every other world contains a clash, so this one must be the real one: ' + worldName(r) + (k === 1 ? ' is the imp.' : ' are the imps.'),
+                    'Every other world contains a clash, so this one must be the real one: ' + impSentence(rows[r].imps),
                 ]));
-                insp.appendChild(el('div.vg-insp-btns', {}, [el('button.btn.small.gold', { type: 'button', onclick: () => useWorld(r), text: 'Place my tokens on them' })]));
+                insp.appendChild(el('div.vg-insp-btns', {}, [el('button.btn.small.gold', { type: 'button', onclick: () => useWorld(r), text: rows[r].imps.length ? 'Place my tokens on them' : 'Take all my tokens back' })]));
+                return;
+            }
+            if (!alive.length && !st.showAll && !st.done) {
+                insp.classList.add('clash');
+                insp.appendChild(el('div.vg-insp-text', {}, [
+                    el('b', { text: 'Every world here has a clash. ' }),
+                    'So no world works? Or is a world missing from this table?',
+                ]));
+                insp.appendChild(el('div.vg-insp-btns', {}, [el('button.btn.small.gold', { type: 'button', onclick: showAllRows, text: 'Show all rows' })]));
                 return;
             }
             if (!st.sel) {
@@ -806,8 +939,8 @@
             const isImp = rows[r].imp[c];
             const val = st.filled[r][c];
             insp.appendChild(el('div.vg-insp-world', {}, [
-                el('span.vg-row-num', { text: String(r + 1) }),
-                el('span', { text: 'In this world ' + worldName(r) + (k === 1 ? ' is the imp.' : ' are the imps.') }),
+                el('span.vg-row-num', { text: String(num(r)) }),
+                el('span', { text: 'In this world ' + impSentence(rows[r].imps) }),
             ]));
             insp.appendChild(el('div.vg-insp-text', {}, [
                 el('span.vg-who' + (isImp ? '.imp' : '.honest'), { text: (isImp ? '😈 ' : '😇 ') + 'The ' + v.name }),
@@ -829,14 +962,18 @@
         }
 
         function renderTable() {
+            const liveCount = rows.filter((x, r) => live(r)).length;
             rows.forEach((row, r) => {
                 const re = rowEls[r];
                 const clash = knownClash(r);
+                re.tr.style.display = shown(r) ? '' : 'none';
+                if (hr >= 0) re.numEl.textContent = String(num(r));
                 re.tr.classList.toggle('struck', st.struck[r]);
                 re.tr.classList.toggle('has-clash', clash && !st.struck[r]);
                 re.tr.classList.toggle('truth', st.done && row.possible);
-                re.tr.classList.toggle('survivor', !st.struck[r] && st.struck.filter(x => !x).length === 1);
+                re.tr.classList.toggle('survivor', live(r) && liveCount === 1);
                 re.cells.forEach((cell, c) => {
+                    if (hr >= 0) cell.title = 'World ' + num(r) + ': is the ' + data.villagers[c].name + '’s statement true here?';
                     const v = st.filled[r][c];
                     cell.textContent = v === null ? '' : row.clash[c] ? (v ? '✓⚡' : '✗⚡') : (v ? '✓' : '✗');
                     cell.classList.toggle('filled', v !== null);
@@ -854,14 +991,14 @@
                 b.classList.toggle('locked', !st.unlocked[c]);
                 b.textContent = st.unlocked[c] ? 'fill ▾' : '🔒 ' + st.colRight[c] + '/2';
             });
-            const alive = st.struck.filter(x => !x).length;
-            counter.textContent = 'Worlds still possible: ' + alive + ' of ' + rows.length;
-            strikeAll.hidden = st.strikes < 2 || alive === 1;
+            counter.textContent = 'Worlds still possible: ' + liveCount + ' of ' + (st.showAll ? rows.length : rows.length - 1);
+            strikeAll.hidden = st.strikes < 2 || liveCount === 1;
+            showAllBtn.hidden = st.showAll;
         }
 
         // Keep the selected cell in view inside the table's own scroller.
         function revealSel() {
-            const alive = st.struck.map((x, r) => (x ? -1 : r)).filter(r => r >= 0);
+            const alive = rows.map((x, r) => r).filter(live);
             const target = alive.length === 1 ? { r: alive[0], c: 0 } : st.sel;
             if (!target) return;
             const tr = rowEls[target.r].tr;
@@ -886,7 +1023,7 @@
             if (st.done) return;
             const at = st.accused.indexOf(i);
             if (at !== -1) st.accused.splice(at, 1);
-            else if (st.accused.length >= k) {
+            else if (st.accused.length >= tokens) {
                 sfx('error');
                 status.textContent = 'You only have ' + NUM[k] + ' token' + (k === 1 ? '' : 's') + '. Take one back first.';
                 return;
@@ -909,16 +1046,24 @@
                 if (!st.done) setPose(c, on ? 'nervous' : c.pose);
             });
             tray.innerHTML = '';
-            for (let t = 0; t < k; t++) tray.appendChild(el('span.vg-tray-token' + (t < st.accused.length ? '.used' : ''), {}, [tokenArt('vg-tray-art')]));
-            const left = k - st.accused.length;
-            if (!st.done) status.textContent = left ? 'Place ' + NUM[left] + ' more token' + (left === 1 ? '' : 's') : 'Ready to accuse';
-            else status.textContent = '';
-            accuseBtn.disabled = st.done || left !== 0;
+            for (let t = 0; t < tokens; t++) tray.appendChild(el('span.vg-tray-token' + (t < st.accused.length ? '.used' : ''), {}, [tokenArt('vg-tray-art')]));
+            if (hidden) {
+                // Any number of imps, including none: accusing nobody is a real answer.
+                const a = st.accused.length;
+                status.textContent = st.done ? '' : a ? 'Accusing ' + NUM[a] + ' villager' + (a === 1 ? '' : 's') : 'No tokens placed: you say nobody is an imp';
+                accuseBtn.textContent = a ? 'Accuse!' : 'Nobody is an imp!';
+                accuseBtn.disabled = st.done;
+            } else {
+                const left = k - st.accused.length;
+                if (!st.done) status.textContent = left ? 'Place ' + NUM[left] + ' more token' + (left === 1 ? '' : 's') : 'Ready to accuse';
+                else status.textContent = '';
+                accuseBtn.disabled = st.done || left !== 0;
+            }
             if (st.ttOpen) { renderTable(); renderInspector(); revealSel(); }
         }
 
         function submit() {
-            if (st.done || st.accused.length !== k) return;
+            if (st.done || (!hidden && st.accused.length !== k)) return;
             const ans = { imps: st.accused.slice().sort((a, b) => a - b).map(i => data.villagers[i].id) };
             sfx('click');
             const r = api && api.submit ? api.submit(ans) : check(data, ans);
@@ -1006,6 +1151,6 @@
         solve,
         mount,
         // exposed for tests and tools
-        _internal: { evaluate, worlds, solutions, table, statementText, mentions, worthSaying, fallback, ROLES, CONFIG },
+        _internal: { evaluate, worlds, solutions, table, statementText, mentions, worthSaying, fallback, allWorlds, ROLES, CONFIG, FIXED },
     });
 })(typeof window !== 'undefined' ? window : globalThis);

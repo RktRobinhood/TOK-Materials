@@ -306,7 +306,9 @@ C.ch1 = {
 | `node` | node id (or list) of the stakes scene. In it: every wrong check, hint and wrong or skipped "Why?" ticks 1 notch **instead of** costing hearts. A **Spend a heart** button on the meter drains 1 notch, once per stage |
 | `floors` | node ids where hearts work as usual and the clock **also** takes 1 for the first wrong check on each visit and 1 for every hint (the Copy's bar) |
 | `peril` | a role. When the clock fills: if the death is armed (`Cast.canLose`), `full` plays and the death is recorded at once; if not, `brink` plays and the tier is stored as 3. Either way the clock closes and **the puzzle continues without it** (mistakes cost hearts again) |
-| `hold` | `true`: never resolves early (the Copy). At full it shows `fullLabel` (e.g. `'UPLOAD COMPLETE · WAITING'`); more ticks do nothing; drains still work |
+| `hold` | `true`: never resolves early (the Copy). At full it shows `fullLabel` (e.g. `'UPLOAD COMPLETE · WAITING'`) and plays `full` once (no death); more ticks do nothing; drains still work |
+| `pausedAt` | node ids where the clock waits: shown as Paused, never ticks (the Copy at the Sorting Room) |
+| `resolveOnWin` | `true`: the encounter reads the tier the moment the stakes scene's boss is won, before `<script>.win` |
 | `stakes` | the stakes id to store the tier under, when it differs from the clock id (`copy` → `'ch4'`) |
 | `prefill` | optional `flags => number`: notches filled at start (e.g. the Copy's start formula) |
 | `full`, `brink`, `warn` | steps (any step type). `full` without a `peril` plays when a non-`hold` clock fills. Inside `full`, the dying role still speaks in its own voice (its last words), although the death is recorded the moment the clock fills; after `full` the role is silent |
@@ -332,6 +334,40 @@ S['ch1.gate.win'] = [
 ```
 
 **Decided:** the clock id is also its stakes id (`ch1` → `stakes.ch1`; `pip` → `stakes.pip`; `copy` → `stakes.ch4` via `stakes: 'ch4'` in the definition). The warning is the meter's voice: tick sounds are not used. The "Characters can die" switch (Settings, on by default) only disarms perils; with it off, a peril's worst tier always plays `brink` and is stored as 3, nobody dies, no understudy steps in and no Quiet Scene plays. The Copy's tier 4 is not a death and is unaffected.
+
+### 8b. Chapter 4: the Copy's clock and the core trials (for the lesson 4 writer)
+
+The rules are built in (`js/core/stakes.js`, `BASE`); `data/script/lesson4.js` adds only the words. Give just the fields you need; anything you give overrides the built-in one:
+
+```js
+C.copy = { warn: [ /* warn[k-1] when notch k fills */ ], full: [ /* plays once when the bar fills: UPLOAD COMPLETE */ ] };
+C.pip = { warn: [ /* Pip, half himself */ ], full: [ /* his last words */ ], brink: [ /* the record is wiped */ ] };
+```
+
+| Clock | Built-in rules |
+|---|---|
+| `copy` | label `{name} 2.0 · UPLOADING`, 8 notches, `stakes: 'ch4'`, `hold` (at 8: `UPLOAD COMPLETE · WAITING`). Pre-fill ⌊Feed ÷ 3⌋, +2 if `bargain` is `yes`, +1 if `stakes.ch3` is 3, at most 3. **Floors** `k-gallery`, `k-prediction`, `k-workshop`, `k-oracle`: hearts as usual, plus 1 notch for the first wrong check on each floor (once per run) and 1 per hint. **Paused** at `k-sorting`. **Scene** `k-core`: wrong checks, hints and wrong "Why?" tick the bar instead of hearts; "Spend a heart" once per trial. Tier read automatically when the core is won (`resolveOnWin`) |
+| `pip` | label `Pip is glowing`, 6 notches, scene `k-sorting`, `peril: 'pip'`, Progress 3 |
+
+Steps you write:
+
+| Where | Step |
+|---|---|
+| `ch4.arrive` (after any Quiet Scene) | `{ clock: 'copy', start: 0 }` (the pre-fill is added for you) |
+| the Oracle door (or the Oracle win with `dead:pip`) | the push: `{ clock: 'copy', tick: 1 }` |
+| `ch4.sorting` | `{ clock: 'pip', start: 0 }`; `ch4.sorting.win` begins `{ clock: 'pip', resolve: true }` |
+| `ch4.core.stage3` (the temptation) | "Just this once": `{ flag: 'copy.helped' }, { clock: 'copy', tick: 2 }` · "Let me hear them once more": `{ clock: 'copy', tick: 1 }` · drains: toy soldiers `{ clock: 'copy', drain: 1 }`, Hoot's Gavel |
+| `ch4.core.win` | branch on `stakes.ch4` (1 clean · 2 close · 3 at a price · 4 too late); the tier is already read |
+
+**The core trials** (`k-core` in `data/map.js`; stages 1–3; `ch4.core.stage2` / `.stage3` play before trials 2 and 3):
+
+| Trial | Puzzle and opts | What it is |
+|---|---|---|
+| 1 | `village` d3, `{ forceImp: 'schoolteacher', hideRow: true }` | Quill's table: open and pre-filled, every row shown clashes; the real world's row (she is an imp) appears with **Show all rows** |
+| 2 | `tribunal` d3, `{ caseId: 'core-mine' }` | "{name} is mine" (`data/cases.js`, `storyCases`): the Algorithm testifies with your nickname and `voice.followed` of `voice.offered`; three breaks: a handful is not "always", the Prediction Hall log, a forecast doesn't own the rain |
+| 3 | `prediction` d3, `{ mode: 'core', autoFirst: 'copy.helped' }` | the Copy bets on "Follow my voice" / "My own way", starting from your whole-game record (scaled to 10 counts). With the flag `copy.helped` set, its first round is played for you, perfectly |
+
+The same `village` opts serve Ch2: `{ excludeRoles: ['schoolteacher'] }` on every Ch2 roll, `{ forceImp: 'schoolteacher', hideRow: true }` at Hall stage 3, and the Square's `{ fixed: 'square', lead: false }` (hidden count; accusing nobody is an answer; `lead: false` keeps the lead bank quiet).
 
 ---
 

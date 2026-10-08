@@ -24,6 +24,14 @@
  * Answer: { choices: [optionIndex, ...], debrief: index into why(data).options }.
  * check() replays the model itself from the choices; reported wins or guesses
  * are never trusted (if they are sent and do not match the replay, it fails).
+ *
+ * Core mode (Ch4 core trial 3, the Copy; opts { mode: 'core', autoFirst: 'copy.helped' }):
+ * two moves, "Follow my voice" / "My own way". The Copy starts with your whole-game
+ * record (flags voice.followed of voice.offered, or opts.followed / opts.offered),
+ * scaled to at most 10 and stored as data.prior: extra counts in its overall table.
+ * So it bets you will do what you usually do; beat it by not doing that. With
+ * autoFirst (true, or a flag name that is set) the first round is played for you,
+ * perfectly ("Just this once").
  */
 (function (root) {
     'use strict';
@@ -94,6 +102,8 @@
             if (t < k - 1) { levels.push({ k, ctx: null, counts: new Array(n).fill(0), total: 0 }); continue; }
             const ctx = history.slice(t - (k - 1));
             const r = countsAfter(history, ctx, n);
+            // Core mode: the Copy's overall table starts with your whole-game record.
+            if (k === 1 && data.prior) data.prior.forEach((c, i) => { r.counts[i] += c; r.total += c; });
             levels.push({ k, ctx, counts: r.counts, total: r.total });
         }
         let cand = data.options.map((_, i) => i);
@@ -164,6 +174,20 @@
     }
 
     function whyFor(data) {
+        if (data.mode === 'core') {
+            const c = shuffleOptions(data.whyShuffle, [
+                'Only how often you followed your voice before, and what you did after your last choice.',
+                'What you were thinking when you chose.',
+                'Who you really are. It is you, but always right.',
+                'The future: which choice you were going to make.',
+            ], 0);
+            return {
+                question: 'What did the Copy actually know about you?',
+                options: c.options,
+                correct: c.correct,
+                explain: 'It never knew you. It counted how often you followed your voice, and what you did after your last choice, and bet on the biggest count. When you stopped doing what you usually do, it had nothing else.',
+            };
+        }
         const s = shuffleOptions(data.whyShuffle, [
             data.order === 1 ? 'Only how often you made each choice before.'
                 : 'Only how often you made each choice before, and ' + (data.order === 2 ? 'what usually came after your last choice.' : 'what usually came after your last two choices.'),
@@ -188,6 +212,39 @@
             'It always bets on the biggest number in the highlighted row (' + contextWords(data.order) + '). Pick something else, ideally the smallest number.',
             'When numbers are tied, it checks ' + (back ? back + ', and then ' : '') + 'its favourite order: ' + names + '. Or roll the fair ' + (data.options.length === 2 ? 'coin' : 'die') + ': then it can only guess.',
         ];
+    }
+
+    // Core mode (header). Pure when opts.followed / opts.offered are given; otherwise it reads the save.
+    const CORE_OPTIONS = [
+        { label: 'Follow my voice', glyph: '🗨', hue: '#A05CF0' },
+        { label: 'My own way', glyph: '✋', hue: '#3FE0D0' },
+    ];
+    function generateCore(rng, d, opts) {
+        const flags = (Rift.State && Rift.State.get && (Rift.State.get() || {}).flags) || {};
+        const followed = Math.max(0, Number(opts.followed != null ? opts.followed : flags['voice.followed']) || 0);
+        const offered = Math.max(followed, Number(opts.offered != null ? opts.offered : flags['voice.offered']) || 0);
+        // Your record, scaled to at most 10 counts. No record yet: it assumes you follow your voice.
+        const total = Math.min(offered, 10);
+        const voice = offered ? Math.round(total * followed / offered) : 1;
+        const auto = opts.autoFirst === true || (typeof opts.autoFirst === 'string' && !!flags[opts.autoFirst]);
+        return {
+            difficulty: d,
+            mode: 'core',
+            theme: 'copy',
+            prompt: 'The Copy bets on what you will do. Follow your voice, or not?',
+            options: CORE_OPTIONS.map(o => Object.assign({}, o)),
+            order: 2,
+            smoothing: true,
+            warmup: WARMUP,
+            block: BLOCK,
+            maxBlocks: MAX_BLOCKS,
+            target: 8,
+            prior: [voice, offered ? total - voice : 0],
+            record: { followed, offered },
+            autoFirst: auto,
+            tieOrder: [0, 1],
+            whyShuffle: rng.int(1, 1e6),
+        };
     }
 
     function solveFor(data) {
@@ -534,6 +591,13 @@
             later(() => {
                 guessCard.classList.remove('locking');
                 st.busy = false;
+                // Core mode, "Just this once": the Copy plays the first round for you, perfectly.
+                if (data.autoFirst && !st.autoDone && !st.history.length) {
+                    st.autoDone = true;
+                    choose(beat(data, st.history));
+                    setStatus('The Copy played this round for you. Perfectly. Nobody noticed.');
+                    return;
+                }
                 optionBtns.forEach(b => { b.disabled = false; });
                 dieBtn.disabled = false;
                 setStatus('Its guess is locked in. Your move.');
@@ -710,8 +774,13 @@
         }
 
         // ---- go ----
-        speak('I will guess your choice before you make it.');
-        say('I know you. I will guess your choice before you make it. Go on: try to surprise me.');
+        if (data.mode === 'core') {
+            speak('I am you. But always right.');
+            say('I have all your numbers. I know what you will do. Go on: be predictable.');
+        } else {
+            speak('I will guess your choice before you make it.');
+            say('I know you. I will guess your choice before you make it. Go on: try to surprise me.');
+        }
         startRound();
 
         return {
@@ -761,8 +830,9 @@
         blurb: 'The Algorithm says it can read your mind. Each round it locks in a guess before you choose. Can you surprise it?',
         tok: 'A prediction machine does not know you: it counts what you did before and bets on the most frequent pattern. Its "confidence" is just a ratio, and once you understand the counting, you can beat it.',
 
-        generate(rng, difficulty) {
+        generate(rng, difficulty, opts) {
             const d = Math.max(1, Math.min(3, Math.round(Number(difficulty) || 1)));
+            if (opts && opts.mode === 'core') return generateCore(rng, d, opts);
             const s = SETTINGS[d];
             const theme = rng.pick(s.n === 2 ? THEMES2 : THEMES3);
             const options = theme.options.map(o => ({ label: o.label, glyph: o.glyph, hue: o.hue }));

@@ -222,6 +222,7 @@
             ctx.deathOf = d.peril || null;
             try { await run(layer, d.full, ctx); } finally { ctx.deathOf = before; }
         }
+        else if (result.outcome === 'hold' && d.full) await run(layer, d.full, ctx);   // the Copy: UPLOAD COMPLETE
         else if (result.outcome === 'brink' && d.brink) await run(layer, d.brink, ctx);
         else if (result.warn) await run(layer, result.warn, ctx);
     }
@@ -308,6 +309,7 @@
         const mode = typeof p === 'object' && (p.mode || (p.opts && p.opts.mode));
         // A station may name its own bank (puzzle opts.lead, e.g. 'well' → 'venn:well'), so a lead never repeats.
         const tag = typeof p === 'object' && p.opts && p.opts.lead;
+        if (tag === false) return null;   // opts.lead: false: no lead bank here (the Ch2 Square)
         return (tag && bank[id + ':' + tag]) || (mode && bank[id + ':' + mode]) || bank[id] || null;
     }
 

@@ -137,6 +137,9 @@
     S["station.b-south-bridge.reminder"] = [{"s":"lamplighter","t":"These brass switches control the bridge. Try the switches and watch what follows."}];
     S["station.b-lamp-lane.intro"] = [{"s":"lamplighter","t":"My neighbours accuse each other. Match their words to the rules for honest folk and imps."},{"s":"lamplighter","t":"Test possible worlds to find which villagers can be honest."}];
     S["station.b-lamp-lane.reminder"] = [{"s":"lamplighter","t":"My neighbours accuse each other. Match their words to the rules for honest folk and imps."}];
+    // The Square's small table (village opts { fixed: 'square' }): placeholder lead-ins until the lesson 2 script lands.
+    S["station.b-square.intro"] = [{"s":"mayor","e":"nervous","t":"Imps? Here? Nonsense! Check us, then. Check all of us."}];
+    S["station.b-square.reminder"] = [{"s":"mayor","e":"nervous","t":"Imps? Here? Nonsense! Check us, then. Check all of us."}];
     S["station.b-bakery.intro"] = [{"s":"baker","t":"My last loaf is missing! Check the villagers before you point a finger."},{"s":"baker","t":"Check every statement before accusing someone."}];
     S["station.b-bakery.reminder"] = [{"s":"baker","t":"My last loaf is missing! Check the villagers before you point a finger."}];
     S["station.b-post.intro"] = [{"s":"postmistress","t":"The Constable left an argument here. Check its blocks before we send it on."},{"s":"postmistress","t":"An argument stands only if its steps support its conclusion."}];

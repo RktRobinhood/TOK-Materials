@@ -97,7 +97,10 @@
         const seed = document.getElementById('seed').value;
         const d = +document.getElementById('diff').value;
         const rng = R.makeRng(seed);
-        data = def.generate(rng, d);
+        // &opts={"fixed":"square"} passes station opts (as in data/map.js) to the generator.
+        let opts;
+        try { opts = q.get('opts') && pick.value === q.get('id') ? JSON.parse(q.get('opts')) : undefined; } catch (e) { log('bad opts: ' + e.message); }
+        data = def.generate(rng, d, opts);
         hintIx = 0;
         if (handle && handle.destroy) handle.destroy();
         const stage = document.getElementById('stage');

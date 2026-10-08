@@ -177,9 +177,15 @@
                 spawns: ['astrophysicat', 'lobstorian', 'swiftlet', 'carlseal', 'khaby'], links: ['b-south-bridge', 'b-square'],
                 teaser: 'Lamp-lit steps. The neighbours are whispering about each other.',
             },
+            // A scene with a small fixed table (STORY.md Ch2 beat 3, App. H): three villagers, the imp count
+            // hidden, and the one consistent world is "nobody is an imp" (js/puzzles/village.js, FIXED.square).
             'b-square': {
-                name: 'The Village Square', chapter: 'ch2', map: 'ch2', type: 'story', x: 680, y: 402,
-                scene: 'scene/village-square', script: 'ch2.square', links: ['b-lamp-lane', 'b-bakery', 'b-post', 'b-clockmaker', 'b-school'],
+                host: 'mayor', goal: 'Find who is an imp, if anyone. No imps is a possible answer.',
+                intro: 'station.b-square.intro', reminder: 'station.b-square.reminder',
+                name: 'The Village Square', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 680, y: 402,
+                scene: 'scene/village-square', script: 'ch2.square',
+                puzzles: [{ id: 'village', difficulty: 1, opts: { fixed: 'square', lead: false } }],
+                spawns: [], links: ['b-lamp-lane', 'b-bakery', 'b-post', 'b-clockmaker', 'b-school'],
                 teaser: 'A fountain, a crowd, and a Mayor making a speech.',
             },
             'b-bakery': {
@@ -295,7 +301,7 @@
                 name: 'The Newsstand', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 689, y: 507,
                 scene: 'scene/tribunal', script: 'ch3.newsstand',
                 puzzles: [{ id: 'tribunal', difficulty: 1, opts: { theme: 'argument' } }],
-                spawns: ['tremendoodle', 'speedcheeta', 'kardashiant'], links: ['t-south-bridge', 't-plaza', 't-cafe'],
+                spawns: ['tremendoodle', 'speedcheeta', 'kardashiant'], links: ['t-south-bridge', 't-cafe'],
                 teaser: 'Headlines everywhere, and a crowd arguing about them. A practice trial is starting.',
             },
             't-cafe': {
@@ -316,7 +322,7 @@
             },
             't-plaza': {
                 name: 'The Neon Plaza', chapter: 'ch3', map: 'ch3', type: 'story', x: 727, y: 335,
-                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-newsstand', 't-library', 't-datalab', 't-archive', 't-tower-gate'],
+                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-library', 't-datalab', 't-archive', 't-tower-gate'],
                 teaser: 'Giant feed-screens. Everyone is looking up. Nobody is looking at each other.',
             },
             't-datalab': {
@@ -434,7 +440,13 @@
                 intro: "station.k-core.intro", reminder: "station.k-core.reminder",
                 name: 'The Core', chapter: 'ch4', map: 'ch4', type: 'boss', x: 770, y: 77,
                 scene: 'scene/core-chamber', script: 'ch4.core',
-                puzzles: [{ id: 'prediction', difficulty: 3 }, { id: 'oracle', difficulty: 3 }, { id: 'three-act', difficulty: 3 }],
+                // The core trials (STORY.md Ch4 core, App. H): each is an old villain's trick.
+                // 1 Quill's hidden row · 2 the mob's argument, aimed at you · 3 the Copy at prediction.
+                puzzles: [
+                    { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true } },
+                    { id: 'tribunal', difficulty: 3, opts: { caseId: 'core-mine' } },
+                    { id: 'prediction', difficulty: 3, opts: { mode: 'core', autoFirst: 'copy.helped' } },
+                ],
                 spawns: ['muskrat', 'altmanta', 'beastie'], links: ['k-oracle', 'k-bridge', 'k-summit'],
                 teaser: 'The top of the tower. Something vast is waiting. Or something small pretending to be vast.',
             },

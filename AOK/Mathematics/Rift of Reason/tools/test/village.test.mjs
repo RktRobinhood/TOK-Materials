@@ -150,7 +150,8 @@ test('every job and statement type turns up', () => {
         const data = def.generate(Rift.makeRng('mix' + i), 1 + (i % 3));
         data.villagers.forEach(v => { roles.add(v.role); types.add(v.says.t); });
     }
-    assert.deepEqual([...roles].sort(), Object.keys(def._internal.ROLES).sort());
+    // The Mayor only stands in fixed tables (the Ch2 Square), never in a random roll.
+    assert.deepEqual([...roles].sort(), Object.keys(def._internal.ROLES).filter(r => r !== 'mayor').sort());
     for (const t of ['imp', 'honest', 'count', 'same', 'diff', 'if', 'anyImp', 'noImp', 'odd', 'self', 'lying']) {
         assert.ok(types.has(t), 'statement type ' + t);
     }
@@ -175,5 +176,77 @@ test('fallback village is uniquely solvable', () => {
         const data = fallback(Rift.makeRng('fb' + d), d);
         assert.equal(solutions(says(data), data.imps).length, 1);
         assert.equal(def.check(data, def.solve(data)).solved, true);
+    }
+});
+
+const plain = x => JSON.parse(JSON.stringify(x));
+
+// ---- station opts: fixed tables, hidden count, Quill's hidden row (STORY.md App. H) ----
+
+test('the Ch2 Square: three fixed statements, hidden count, one world: nobody is an imp', () => {
+    const data = def.generate(Rift.makeRng('square'), 1, { fixed: 'square' });
+    assert.deepEqual(plain(data.villagers.map(v => v.role)), ['mayor', 'baker', 'sweep']);
+    assert.deepEqual(plain(data.villagers.map(v => v.text)), ['The Baker and I are the same kind.', 'The Sweep is no imp.', 'The Mayor is no imp.']);
+    assert.equal(data.hiddenCount, true);
+    assert.equal(data.imps, null, 'the count is not given to the player');
+    assert.equal(data.note, 'No imps is a possible answer.');
+    // All 8 worlds are possible, from nobody to everybody; exactly one is consistent.
+    const rows = table(data);
+    assert.equal(rows.length, 8);
+    assert.deepEqual(plain(rows[0].imps), []);
+    assert.deepEqual(plain(rows.filter(r => r.possible).map(r => r.imps)), [[]]);
+    assert.equal(solutions(says(data), null).length, 1);
+    assert.deepEqual(plain(def.solve(data)), { imps: [] });
+    // The empty accusation is the right answer; every other accusation is wrong.
+    assert.equal(def.check(data, { imps: [] }).solved, true);
+    assert.match(def.check(data, { imps: [] }).feedback, /Nobody is an imp/);
+    for (const wrong of [['mayor'], ['baker'], ['sweep'], ['mayor', 'baker'], ['mayor', 'baker', 'sweep']]) {
+        const r = def.check(data, { imps: wrong });
+        assert.equal(r.solved, false, wrong.join('+'));
+        assert.ok(r.feedback && !/token on every villager|exactly/.test(r.feedback), 'no imp count leaks: ' + r.feedback);
+    }
+    assert.match(def.hints(data)[0], /8 rows.*from nobody/);
+    assert.match(def.why(data).question, /nobody/);
+    assert.ok(!/undefined/.test(JSON.stringify([data, def.hints(data), def.why(data)])));
+});
+
+test('the Square is wired in data/map.js with fixed, hidden-count opts and no lead bank', () => {
+    const R = loadRift(['js/core/rift.js', 'data/map.js']);
+    const n = R.data.map.nodes['b-square'];
+    assert.equal(n.puzzles.length, 1);
+    assert.equal(n.puzzles[0].id, 'village');
+    assert.equal(n.puzzles[0].difficulty, 1);
+    assert.equal(n.puzzles[0].opts.fixed, 'square');
+    assert.equal(n.puzzles[0].opts.lead, false);
+    assert.match(n.goal, /No imps is a possible answer/);
+});
+
+test('a custom fixed table with a given count, and other nodes are unchanged by opts', () => {
+    const fixed = [
+        { role: 'constable', says: { t: 'imp', g: 1 } },
+        { role: 'lamplighter', says: { t: 'same', g: 0, h: 2 } },
+        { role: 'sweep', says: { t: 'self', g: 2 } },
+    ];
+    const data = def.generate(Rift.makeRng('custom'), 1, { fixed, imps: 1 });
+    assert.equal(data.imps, 1);
+    assert.ok(!data.hiddenCount);
+    assert.equal(table(data).length, 3);
+    // No opts (or empty opts) give exactly the old village for a seed.
+    for (const d of [1, 2, 3]) assert.deepEqual(def.generate(Rift.makeRng('same'), d, {}), def.generate(Rift.makeRng('same'), d));
+});
+
+test('excludeRoles, forceImp and hideRow (Hall stage 3, core trial 1)', () => {
+    for (let i = 0; i < 200; i++) {
+        const ex = def.generate(Rift.makeRng('ex' + i), 1 + (i % 3), { excludeRoles: ['schoolteacher'] });
+        assert.ok(!ex.villagers.some(v => v.role === 'schoolteacher'));
+        assert.equal(solutions(says(ex), ex.imps).length, 1);
+
+        const q = def.generate(Rift.makeRng('quill' + i), 3, { forceImp: 'schoolteacher', hideRow: true });
+        const sol = def.solve(q);
+        assert.ok(sol && sol.imps.includes('schoolteacher'), 'the Teacher is an imp');
+        assert.equal(q.prefill, true);
+        const rows = table(q);
+        assert.ok(rows[q.hiddenRow].possible, 'the hidden row is the real world');
+        assert.equal(rows.filter((r, j) => j !== q.hiddenRow && r.possible).length, 0, 'every row you are shown clashes');
     }
 });

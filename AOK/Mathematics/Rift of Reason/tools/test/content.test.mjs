@@ -126,3 +126,23 @@ test('legendaries only spawn after their rumour', () => {
     s.flags['rumour:godelix'] = true;
     assert.ok('godelix' in Rift.World.spawnWeights(s, n));
 });
+
+test('Ch3: the Café and the Library are on every route to the Plaza (no Newsstand–Plaza link)', () => {
+    assert.ok(!nodes['t-newsstand'].links.includes('t-plaza'));
+    assert.ok(!nodes['t-plaza'].links.includes('t-newsstand'));
+    // Walk Ch3 from the Rift Landing with one node blocked: the Plaza must be out of reach.
+    const reaches = blocked => {
+        const seen = new Set(['t-arrival']), queue = ['t-arrival'];
+        while (queue.length) {
+            for (const m of nodes[queue.shift()].links || []) {
+                if (m === blocked || seen.has(m) || !nodes[m] || nodes[m].chapter !== 'ch3') continue;
+                seen.add(m);
+                queue.push(m);
+            }
+        }
+        return seen.has('t-plaza');
+    };
+    assert.ok(reaches(null), 'the Plaza is reachable');
+    assert.ok(!reaches('t-cafe'), 'a route skips the Café');
+    assert.ok(!reaches('t-library'), 'a route skips the Library');
+});

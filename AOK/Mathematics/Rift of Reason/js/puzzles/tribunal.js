@@ -60,12 +60,28 @@
         return value;
     }
 
+    // Story cases (Rift.data.storyCases) are only ever picked by opts.caseId, never rolled.
+    function storyCases() {
+        return (Rift.data && Rift.data.storyCases) || [];
+    }
+
+    // A story case with playerParams fills {name}, {k} and {n} from the save (the nickname,
+    // voice.followed, voice.offered) or from opts.name / opts.k / opts.n.
+    function playerParams(o) {
+        const s = Rift.State && Rift.State.get && Rift.State.get();
+        const flags = (s && s.flags) || {};
+        const k = Math.max(0, Number(o.k != null ? o.k : flags['voice.followed']) || 0);
+        const n = Math.max(1, k, Number(o.n != null ? o.n : flags['voice.offered']) || 0);
+        const name = String(o.name || (s && s.avatar && s.avatar.nickname) || 'YOU').toUpperCase();
+        return { name, k, n, times: k === 1 ? 'TIME' : 'TIMES' };
+    }
+
     function pickCase(rng, difficulty, opts) {
         const o = opts || {};
         let list = allCases();
         if (o.caseId) {
-            const one = list.find(c => c.id === o.caseId);
-            if (one) return one;
+            const one = list.concat(storyCases()).find(c => c.id === o.caseId);
+            if (one) return one.playerParams ? Object.assign({}, one, { params: [playerParams(o)] }) : one;
         }
         if (o.theme && THEMES.indexOf(o.theme) !== -1) {
             const themed = list.filter(c => c.theme === o.theme);
@@ -101,8 +117,9 @@
             intro: cc.intro,
             witness: {
                 id: cc.witness,
-                name: creature ? creature.name : cc.witness,
+                name: cc.witnessName || (creature ? creature.name : cc.witness),
                 colour: creature ? creature.colour : 'language',
+                art: cc.witnessArt || null,     // a story witness who is not a creature (the Algorithm)
             },
             testimony: cc.testimony.map(s => ({
                 id: s.id, text: s.text, hidden: !!s.hidden,
@@ -338,6 +355,7 @@
         // ---- the courtroom ----
         function artFor(key, pose) {
             if (key === 'witness') {
+                if (data.witness.art) return data.witness.art;
                 let p = pose;
                 const m = manifest();
                 if (p === 'shocked' && !m['creature/' + data.witness.id + '/shocked'] && m['creature/' + data.witness.id + '/defeated']) p = 'defeated';

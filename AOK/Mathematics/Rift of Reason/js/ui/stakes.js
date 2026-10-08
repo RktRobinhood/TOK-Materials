@@ -21,6 +21,12 @@
         return out;
     }
 
+    // {name} in a label is the player's nickname (the Copy: "{name} 2.0 · UPLOADING").
+    function labelOf(d) {
+        const s = Rift.State && Rift.State.get();
+        return String(d.label || '').replace(/\{name\}/g, (s && s.avatar && s.avatar.nickname) || 'You');
+    }
+
     function clockNode(id, o) {
         const S = Rift.Stakes;
         const d = S.def(id);
@@ -28,13 +34,15 @@
         const size = S.size(id);
         const full = c.n >= size;
         const art = d.art || 'ui/stakes-' + id;
-        const status = c.paused ? 'Paused' : full && d.hold ? (d.fullLabel || 'Full') : 'Danger ' + c.n + ' of ' + size;
-        const wrap = el('div.stakes-clock.panel' + (Rift.Assets.has(art) ? '.has-art' : '') + (full ? '.full' : '') + (c.paused ? '.paused' : ''), {
-            role: 'meter', 'aria-label': d.label + ': ' + status, 'aria-valuemin': 0, 'aria-valuemax': size, 'aria-valuenow': c.n,
+        const paused = c.paused || S.pausedAt(id, o.nodeId);
+        const label = labelOf(d);
+        const status = paused ? 'Paused' : full && d.hold ? (d.fullLabel || 'Full') : 'Danger ' + c.n + ' of ' + size;
+        const wrap = el('div.stakes-clock.panel' + (Rift.Assets.has(art) ? '.has-art' : '') + (full ? '.full' : '') + (paused ? '.paused' : ''), {
+            role: 'meter', 'aria-label': label + ': ' + status, 'aria-valuemin': 0, 'aria-valuemax': size, 'aria-valuenow': c.n,
             dataset: { clock: id },
         }, [
-            Rift.Assets.has(art) ? Rift.Assets.img(art, { className: 'stakes-art', label: d.label }) : null,
-            el('div.stakes-head', null, [el('strong', { text: d.label }), el('span.small.stakes-status', { text: status })]),
+            Rift.Assets.has(art) ? Rift.Assets.img(art, { className: 'stakes-art', label }) : null,
+            el('div.stakes-head', null, [el('strong', { text: label }), el('span.small.stakes-status', { text: status })]),
             el('div.stakes-notches', { title: 'Mistakes fill this. When it is full, it is too late.' }, notches(size, c.n, true)),
             d.progress ? el('div.stakes-progress', { title: 'Progress: stages solved' }, notches(d.progress, c.progress || 0, false, 'gold')) : null,
         ]);
@@ -58,8 +66,9 @@
             const bound = o.nodeId ? Rift.Stakes.forNode(o.nodeId) : {};
             const ids = Rift.Stakes.active().filter(id => {
                 const d = Rift.Stakes.def(id);
-                // Show the clocks that belong here: this node's, and long clocks (floors) everywhere they apply.
-                return !o.nodeId || [].concat(d.node || [], d.floors || []).includes(o.nodeId);
+                // Show the clocks that belong here: this node's, and long clocks (floors) everywhere they apply
+                // (paused where they wait, e.g. the Copy's bar at the Sorting Room).
+                return !o.nodeId || [].concat(d.node || [], d.floors || [], d.pausedAt || []).includes(o.nodeId);
             });
             ids.forEach(id => box.append(clockNode(id, Object.assign({}, o, { scene: bound.scene }))));
             box.style.display = ids.length ? '' : 'none';

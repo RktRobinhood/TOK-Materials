@@ -608,4 +608,66 @@
             lesson: 'After Lakatos: counterexamples improve proofs. The frame breaks the hidden flattening step. Restricting the theorem to convex polyhedra gives a safe domain; it is not a classification of every possible solid.',
         },
     ];
+
+    // Story cases: picked only by opts.caseId (never rolled at a Tribunal station).
+    // playerParams: {name}, {k}, {n} (and {times}) come from the save: the nickname,
+    // voice.followed and voice.offered (js/puzzles/tribunal.js playerParams).
+    Rift.data.storyCases = [
+        // Ch4 core trial 2 (STORY.md Ch4 core): the mob's argument, aimed at you. Map opts:
+        // { id: 'tribunal', difficulty: 3, opts: { caseId: 'core-mine' } }
+        {
+            id: 'core-mine',
+            title: 'The Case of {name} 2.0',
+            theme: 'argument',
+            difficulty: 3,
+            flaw: 'hasty-generalisation',
+            distractors: ['popularity', 'authority', 'circular'],
+            witness: 'algorithm',
+            witnessName: 'The Algorithm',
+            witnessArt: 'npc/algorithm/colossus',
+            playerParams: true,
+            claim: '{name} is predictable, so {name} belongs to the Algorithm.',
+            opening: 'The tower calls its own witness, Your Honour. It has counted everything. Twice.',
+            intro: 'I HAVE ALL YOUR NUMBERS. NUMBERS DO NOT LIE. I CHECKED.',
+            testimony: [
+                { id: 's1', text: '{name} SAID: "I ALWAYS KNOW THE ANSWER." I HAVE IT ON RECORD.',
+                    press: { q: 'Is a boast evidence?', reply: 'IT IS A QUOTE. QUOTES ARE DATA. DATA IS TRUTH.' } },
+                { id: 's2', text: '{name} FOLLOWED THE VOICE {k} {times} OUT OF {n}.',
+                    press: { q: 'Out of how many choices in all?', reply: 'ONLY THE ONES I SAW. THE REST WERE NOT ON CAMERA.' } },
+                { id: 's3', text: 'SO {name} ALWAYS DOES WHAT THE VOICE SAYS. ALWAYS.',
+                    press: { q: 'Always?', reply: 'A FEW TIMES IS ALWAYS. I ROUNDED UP.', premise: 'A few recorded choices show what someone will always do.' } },
+                { id: 's4', text: 'SO {name} IS PREDICTABLE. I PREDICT YOU. 81%.',
+                    press: { q: 'And the other 19%?', reply: 'NOISE. I DELETE NOISE.' } },
+                { id: 's5', text: 'WHAT I CAN PREDICT, I OWN. SO {name} IS MINE.',
+                    press: { q: 'Who decided that?', reply: 'I DID. 100%.', premise: 'Being predicted means being owned.' } },
+            ],
+            evidence: [
+                { id: 'record', art: 'notebook', name: 'Pip’s record', desc: 'Every voice-marked choice an eye could see: {n}. You followed the voice in {k}. Nothing else you ever chose was counted.' },
+                { id: 'hall', art: 'chart', name: 'Prediction Hall log', desc: 'The tower bet on your moves. Once you stopped repeating yourself, it guessed wrong again and again.' },
+                { id: 'letter', art: 'letter', name: 'Granny Axiom’s letter', desc: '“The weather man predicts rain every Tuesday, dear. The rain does not belong to him.”' },
+                { id: 'poster', art: 'photo', name: 'Fair poster', desc: 'THINKING TROPHY. PREDICTED WINNER: NOBODY. Printed before anyone played.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['record'],
+                    explain: 'Only {n} choices were ever counted. A handful of choices cannot show what you ALWAYS do.',
+                    reaction: 'A HANDFUL? I… ROUNDED UP.' },
+                { statements: ['s4'], evidence: ['hall'],
+                    explain: 'At the Prediction Hall the tower failed to predict you as soon as you changed. Predictable sometimes is not predictable always.',
+                    reaction: 'THAT WAS… AN OUTLIER.' },
+                { statements: ['s5'], evidence: ['letter'],
+                    explain: 'Predicting something does not make it yours. A forecast does not own the rain.',
+                    reaction: 'I DO NOT OWN THE RAIN? I DO NOT OWN… ANYTHING?' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'poster', say: 'The poster shows the tower predicts things. But a boast is not evidence either way. Which statement jumps from a few choices to “always”?' },
+                { statement: 's2', evidence: 'record', say: 'Yes, the record says {k} of {n}. That part is true. Find the statement that turns those few numbers into “always”.' },
+            ],
+            hint: 'Count how many choices were really recorded. Then ask what “always”, “predictable” and “mine” would need.',
+            why: {
+                right: 'Only {n} recorded choices were counted, so “always” goes far beyond the data, and being predicted does not mean being owned.',
+                wrong: ['It shows that {name} never follows the voice.', 'It shows that every record is false.', 'It shows that the vote was too small to count.'],
+            },
+            lesson: 'A few observed choices are not a law about a person. A prediction can be right often and still not know you, and it never owns you.',
+        },
+    ];
 })(typeof window !== 'undefined' ? window : globalThis);

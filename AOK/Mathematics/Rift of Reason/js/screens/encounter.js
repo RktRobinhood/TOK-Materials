@@ -256,7 +256,8 @@
                         tickClock(clk.scene, 1);
                         return result;
                     }
-                    if (clk.floor && !floorWrongTicked) { floorWrongTicked = true; tickClock(clk.floor, 1); }
+                    // A floor clock takes the first wrong check on each floor, once per run (STORY.md App. C).
+                    if (clk.floor && !floorWrongTicked) { floorWrongTicked = true; if (Rift.Stakes.markFloor(clk.floor, n.id)) tickClock(clk.floor, 1); }
                     const cost = Rift.World.recordWrong(attempts);
                     feedback.className = 'enc-feedback bad';
                     feedback.textContent = (result.feedback || 'Check the evidence and the rule that your answer uses.') + (cost ? ' −1 heart.' : ' Free check used.');
@@ -373,6 +374,9 @@
                     modal('The shrine glows', el('p', { text: 'One scar fades away.' }), [{ label: 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }]);
                     return;
                 }
+                // A clock with resolveOnWin (the Copy at the core) has its tier read the moment the boss is won.
+                const won = stakesClock();
+                if (won.scene && (Rift.Stakes.def(won.scene) || {}).resolveOnWin) Rift.Stakes.resolve(won.scene);
                 if (firstTime && Rift.Dialogue.has(n.script + '.win')) await Rift.Dialogue.play(n.script + '.win');
                 if (destroyed) return;
                 Rift.Audio.sfx('win');

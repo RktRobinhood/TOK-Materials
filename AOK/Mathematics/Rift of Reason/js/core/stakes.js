@@ -1,7 +1,8 @@
 /*
  * Stakes clocks (STORY.md Appendix C, design/SCRIPT-FORMAT.md section 8). Pure rules: the clock's
  * notches live in the save as flags['clock:<id>'] = { n, size, paused, done, tier, progress, started }.
- * Definitions are data: Rift.data.clocks[id] = { label, size, node, floors, peril, hold, warn, full, brink… }.
+ * Definitions are data: Rift.data.clocks[id] = { label, size, node, floors, pausedAt, peril, hold, warn, full, brink… }.
+ * The Ch4 clocks (`copy`, `pip`) have built-in rules (BASE below); their lesson script adds the words.
  *
  *   Rift.Stakes.start('ch1', 0)
  *   Rift.Stakes.tick('ch1', 1)   → { warn: [steps] | null, outcome: null | 'full' | 'brink' | 'hold', tier }
@@ -15,7 +16,31 @@
     const Rift = root.Rift;
     const S = () => Rift.Story;
 
-    function def(id) { return ((Rift.data || {}).clocks || {})[id] || null; }
+    // Built-in rules for the Ch4 clocks (STORY.md App. C). A lesson script adds the words
+    // (Rift.data.clocks.copy = { warn, full }); any field it gives overrides the one here.
+    const BASE = {
+        // The Copy's upload: from the Tower Door (started by ch4.arrive) through the core.
+        copy: {
+            label: '{name} 2.0 · UPLOADING',
+            size: 8,
+            stakes: 'ch4',
+            hold: true,                                   // never resolves early
+            fullLabel: 'UPLOAD COMPLETE · WAITING',
+            node: 'k-core',                               // the core: mistakes tick the bar instead of hearts
+            floors: ['k-gallery', 'k-prediction', 'k-workshop', 'k-oracle'],   // hearts as usual; first wrong check per floor, every hint
+            pausedAt: ['k-sorting'],                      // Pip's glow is the only clock there
+            resolveOnWin: true,                           // the tier is read when the core (trial 3) is won
+            // ⌊Feed ÷ 3⌋, +2 with the bargain, +1 if the Tribunal ended at a price; at most 3.
+            prefill: f => Math.min(3, Math.floor((Number(f.feed) || 0) / 3) + (f.bargain === 'yes' ? 2 : 0) + (f['stakes.ch3'] === 3 ? 1 : 0)),
+        },
+        // Pip's glow at the Sorting Room (his one death-risk moment).
+        pip: { label: 'Pip is glowing', size: 6, node: 'k-sorting', peril: 'pip', progress: 3 },
+    };
+    function def(id) {
+        const own = ((Rift.data || {}).clocks || {})[id];
+        if (!BASE[id]) return own || null;
+        return Object.assign({}, BASE[id], own || {});
+    }
     function key(id) { return 'clock:' + id; }
     function get(id) {
         const s = Rift.State && Rift.State.get();
@@ -145,17 +170,29 @@
             .filter(id => def(id) && running(get(id)));
     }
     const listHas = (v, id) => [].concat(v || []).includes(id);
+    // A clock waits (shown as paused, never ticks) at the nodes in its `pausedAt` list.
+    function pausedAt(id, nodeId) { const d = def(id); return !!(d && nodeId && listHas(d.pausedAt, nodeId)); }
+    // The first wrong check on each floor ticks a floor clock, once per floor for the whole run
+    // (STORY.md App. C: later wrong checks there cost hearts only). True the first time.
+    function markFloor(id, nodeId) {
+        const c = get(id);
+        if (!running(c)) return false;
+        const hit = c.floorsHit || [];
+        if (hit.indexOf(nodeId) !== -1) return false;
+        put(id, Object.assign({}, c, { floorsHit: hit.concat([nodeId]) }));
+        return true;
+    }
     // The running, unpaused clocks bound to a node: { scene, floor } clock ids or null.
     function forNode(nodeId) {
         const out = { scene: null, floor: null };
         active().forEach(id => {
             const c = get(id), d = def(id);
-            if (c.paused) return;
+            if (c.paused || pausedAt(id, nodeId)) return;
             if (!out.scene && listHas(d.node, nodeId)) out.scene = id;
             else if (!out.floor && listHas(d.floors, nodeId)) out.floor = id;
         });
         return out;
     }
 
-    Rift.Stakes = { def, get, danger, size, bands, tierOf, start, tick, drain, pause, progress, resolve, active, forNode, stakesId };
+    Rift.Stakes = { def, get, danger, size, bands, tierOf, start, tick, drain, pause, progress, resolve, active, forNode, pausedAt, markFloor, stakesId, BASE };
 })(typeof window !== 'undefined' ? window : globalThis);
