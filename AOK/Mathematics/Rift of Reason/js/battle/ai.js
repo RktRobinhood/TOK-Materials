@@ -54,7 +54,9 @@
  *   before an attack). Foresee and Hold That Thought, and their questions (which order, which way),
  *   are scored deep (the next Fate event) at every level, Normal included. Normal uses a power when
  *   that simple score says it helps; Competent and Expert also roll it out with the rest of the turn,
- *   and Expert's lethal search includes it.
+ *   and Expert's lethal search includes it. The enemy's power is public, so Competent and Expert
+ *   value a creature that a ready enemy Lantern or Close the Proof could finish a little lower
+ *   (powerExposure, WEIGHTS.exposure; without it What If? fed 4/1s to Lantern, 61% in the pairs).
  *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
@@ -123,7 +125,7 @@
     const HAND_CARD = 1.0;
     const AXIOM_CARD = 0.6;
     // Evaluation weights (Hard). Tests and the simulator may override some with { weights }.
-    const WEIGHTS = { atk: 1.0, hp: 0.9, hearts: 1.3, threat: 1, race: 0 };
+    const WEIGHTS = { atk: 1.0, hp: 0.9, hearts: 1.3, threat: 1, race: 0, exposure: 0.25 };
 
     const isHero = t => t === 'h0' || t === 'h1';
 
@@ -254,6 +256,22 @@
             else soak -= h.dmg;
         }
         return total;
+    }
+
+    // The enemy's power is public: a creature of mine that a ready enemy Lantern or Close the Proof
+    // could finish on their next turn is worth less (it costs them one use, so only the best one counts).
+    function powerExposure(s, me, ctx) {
+        const opp = 1 - me;
+        const Q = s.players[opp];
+        if (!Q.power || Q.power.cooldown > 1 || s.active === opp) return 0;
+        const Eng = E();
+        const m = Eng.powerMods(s, opp);
+        if (!m || !m.def.kills || m.cost > Q.capacity + 1) return 0;
+        let worst = 0;
+        for (const cid of s.players[me].board) {
+            if (m.def.kills(s, cid, Eng.H, m)) worst = Math.max(worst, creatureValue(s, cid, ctx));
+        }
+        return ctx.w.exposure * worst;
     }
 
     function creatureCount(s, p) {
@@ -394,6 +412,7 @@
             const nextLethal = ctx.cfg.search ? EXPERT.nextLethal : 4;
             v -= ctx.w.threat * (theirs >= P.hearts ? 14 : 3 * theirs / Math.max(1, P.hearts));
             v += ctx.w.threat * (mine >= Q.hearts ? nextLethal : 1.5 * mine / Math.max(1, Q.hearts));
+            v -= powerExposure(s, me, ctx);
             const race = ctx.w.race || (ctx.cfg.search ? EXPERT.race : 0);
             if (race) {
                 const clock = (h, pot) => Math.min(8, h / Math.max(1, pot));

@@ -9,10 +9,13 @@
  *   text, deeper? (full text with the Deeper tweak), broader? (extra sentence with Broader),
  *   filter?(s, cid, H, m), usable?(s, p, H, m), run(api, p, target, m), choose?(api, p, choice, req, m),
  *   ai?(s, p, target, H, m) → extra score for the AI (what its one-ply look can't see),
+ *   kills?(s, cid, H, m) → true if the power would defeat that enemy creature (the AI keeps its own
+ *     creatures out of reach of a ready enemy Lantern or Close the Proof),
  *   face?(s, p, m) → most hero damage it could add this turn (Expert's lethal search)
  * }
- * m = Engine.powerMods: { cost, heartCost, recharge, deeper, broader }. The numbers here are the
- * spec's starting points; balancing is tools/sim-battle.mjs (design/AVATARS.md section 1.5).
+ * m = Engine.powerMods: { cost, heartCost, recharge, deeper, broader }. Cost and recharge come from
+ * the balance pass (tools/sim-battle.mjs --powers; design/reviews/avatar-powers-balance.md): each
+ * power vs none +3 to +8 points for Competent, pairs within 45-55%.
  *
  * Rift.data.powerTweaks: the five tweaks (trade-offs, each taken once).
  * Rift.Powers.forAvatar({ type, variant, tweaks? }) → { id, tweaks } | null
@@ -66,6 +69,7 @@
                 if (m.broader) api.damage(foeHero(p), 1, null);
             },
             face: (s, p, m) => (m.broader ? 1 : 0),
+            kills: (s, cid, H, m) => H.health(s, cid) <= (m.deeper ? 2 : 1),
         },
         foresee: {
             name: 'Foresee', colour: 'reason', kind: 'other', cost: 0, recharge: 1,
@@ -111,6 +115,7 @@
             text: 'Deal 1 damage to an enemy creature.',
             deeper: 'Deal 2 damage to an enemy creature.',
             broader: 'Also see one random card in the enemy hand.',
+            kills: (s, cid, H, m) => H.health(s, cid) <= (m.deeper ? 2 : 1),
             run(api, p, target, m) {
                 const n = m.deeper ? 2 : 1;
                 api.emit({ t: 'power', player: p, text: 'Lantern: ' + n + ' damage to ' + api.name(target) + '.' });

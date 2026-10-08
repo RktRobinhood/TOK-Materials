@@ -377,6 +377,21 @@ test('Normal takes a clear power play: Close the Proof on a 1-health enemy', () 
     assert.equal(a.target, 'p1c0');
 });
 
+test('Competent sees an enemy Lantern or Close the Proof that could finish its 1-health creature; Normal does not', () => {
+    for (const id of ['lantern', 'close-the-proof']) {
+        const value = (enemy, level, ready) => {
+            const s = setup({ p0: ['astrophysicat'], p1: ['astrophysicat'], powers: [null, enemy && { id: enemy, tweaks: [] }] });
+            onBoard(s, 'p0c0');
+            s.cards.p0c0.damage = E.healthOf(s, 'p0c0').max - 1; // 1 health left
+            if (enemy && !ready) s.players[1].power = Object.assign({}, s.players[1].power, { cooldown: 2 });
+            return AI.evaluate(s, 0, { level });
+        };
+        assert.ok(value(id, 'competent', true) < value(null, 'competent') - 0.1, id + ': exposed creature is worth less');
+        assert.equal(value(id, 'competent', false), value(null, 'competent'), id + ': not ready next turn, no effect');
+        assert.equal(value(id, 'normal', true), value(null, 'normal'), id + ': Normal does not look');
+    }
+});
+
 // ---- team codes, launchers and Granny's lesson ----
 
 const G = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js',
