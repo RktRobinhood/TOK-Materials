@@ -25,7 +25,8 @@ test('every puzzle station has a known host, goal and first/repeat lead-in', () 
             assert.ok(key && Rift.data.script[key]?.length, id + ': missing lead-in');
             assert.ok(Rift.data.script[key].some(step => step.s === n.host && step.t), id + ': host never speaks');
         }
-        assert.equal(Rift.data.script[n.reminder].length, 1, id + ': repeat lead-in should be short');
+        // One spoken line (an understudy's arrival branch may sit in front of it).
+        assert.equal(Rift.data.script[n.reminder].filter(step => step.t).length, 1, id + ': repeat lead-in should be short');
     }
 });
 

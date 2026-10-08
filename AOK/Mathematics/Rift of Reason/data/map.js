@@ -27,7 +27,7 @@
         nodes: {
             // ---- Prologue: the home village and the fair ----
             'burrow': {
-                name: 'Your Burrow', chapter: 'prologue', type: 'story', x: 70, y: 640,
+                name: 'Your Home', chapter: 'prologue', type: 'story', x: 70, y: 640,
                 scene: 'scene/burrow', script: 'prologue.wake', links: ['fair-gate'],
                 teaser: 'Home. Warm, safe, and a bit too quiet today.',
             },
@@ -67,14 +67,14 @@
             },
             'fair-rift': {
                 requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s safe Road challenge at the Fair Gate first.',
-                name: 'The Crack in the Sky', chapter: 'prologue', type: 'story', x: 330, y: 575,
+                name: 'The Nut Stall', chapter: 'prologue', type: 'story', x: 330, y: 575,
                 scene: 'scene/fair', script: 'prologue.rift', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',
             },
 
             // ---- Chapter 1: the Road ----
             'road-start': {
-                host: "granny", goal: "Use the stated rules to check a claim, rather than trust a loud voice.",
+                host: "narrator", goal: "Use the stated rules to check a claim, rather than trust a loud voice.",
                 intro: "station.road-start.intro", reminder: "station.road-start.reminder",
                 name: 'The Forest Road', chapter: 'ch1', type: 'puzzle', x: 574, y: 583,
                 scene: 'scene/road-forest', script: 'ch1.road',
@@ -88,7 +88,7 @@
                 teaser: 'A signpost that points in every direction at once.',
             },
             'well': {
-                host: "sequins", goal: "Decide what follows from evidence and what still needs testing.",
+                host: "narrator", goal: "Decide what follows from evidence and what still needs testing.",
                 intro: "station.well.intro", reminder: "station.well.reminder",
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
@@ -97,7 +97,7 @@
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
             'troll-bridge': {
-                host: "syllo", goal: "You can prove that a drawing is impossible, as well as draw one.",
+                host: "muskrat", goal: "You can prove that a drawing is impossible, as well as draw one.",
                 intro: "station.troll-bridge.intro", reminder: "station.troll-bridge.reminder",
                 name: 'The Troll Bridge', chapter: 'ch1', type: 'miniboss', x: 679, y: 550,
                 scene: 'scene/road-bridge', script: 'ch1.bridge',
@@ -116,7 +116,7 @@
                 teaser: 'A crackling fire. A safe place to rest and mend.',
             },
             'standing-stone': {
-                host: "sequins", goal: "A pattern can hide a limit; look for a case where your idea fails.",
+                host: "narrator", goal: "A pattern can hide a limit; look for a case where your idea fails.",
                 intro: "station.standing-stone.intro", reminder: "station.standing-stone.reminder",
                 name: 'The Standing Stone', chapter: 'ch1', type: 'puzzle', x: 1158, y: 531,
                 scene: 'scene/road-forest', script: 'ch1.stone',
@@ -135,7 +135,7 @@
                 teaser: 'Safe moves from numbers. Can you justify the next square?',
             },
             'gate': {
-                host: "granny", goal: "A proof depends on the rules and facts you start with.",
+                host: "sequins", goal: "A proof depends on the rules and facts you start with.",
                 intro: "station.gate.intro", reminder: "station.gate.reminder",
                 name: 'The Gate of Guards', chapter: 'ch1', type: 'boss', x: 1249, y: 316,
                 scene: 'scene/road-gate', script: 'ch1.gate',
