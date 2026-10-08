@@ -378,6 +378,7 @@
     }
     function withAxiom(s, id) {
         const ax = Rift.data.axioms[id];
+        if (ax.clearRules) return withRules(s, {}); // Granny's Spare Axiom: every rule back to the basics
         return withRules(s, Object.assign({}, s.axioms.active, { [ax.category]: id }));
     }
 

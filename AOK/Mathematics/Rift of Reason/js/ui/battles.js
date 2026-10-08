@@ -24,6 +24,10 @@
  * Competent/Expert); a ghost uses the classmate's avatar from the team code. Granny's guided lesson
  * has no powers.
  *
+ * Own rule cards: with the save flag `spare-axiom` (saving Granny at the Ch2 Hall, tiers 1–2) the player's
+ * side carries ownAxioms: ['spare-axiom'], so Granny's Spare Axiom starts in the player's hand in every
+ * card battle (never the opponent's, never in the shared deck; team codes and ghosts do not carry it).
+ *
  * The battle screen (js/screens/battle.js) never writes the save; onEnd does it here.
  */
 (function (root) {
@@ -49,6 +53,9 @@
     const avatarPower = avatar => (Rift.Powers ? Rift.Powers.forAvatar(avatar) : null);
     const teamPower = (team, level) => (Rift.Powers ? Rift.Powers.forTeam(team, level) : null);
 
+    // The player's own rule cards (data/axioms.js `own`): Granny's Spare Axiom once she is saved.
+    const ownAxioms = s => (s && s.flags && s.flags['spare-axiom'] ? ['spare-axiom'] : []);
+
     function seed(tag) {
         return Rift.State.get().seed + ':' + tag + ':' + Date.now().toString(36);
     }
@@ -70,7 +77,7 @@
     }
 
     // The player's own side of a battle: chosen team (or first 10, or a loaned starter
-    // team), chosen tactic cards, ten-card axiom contribution and hero art.
+    // team), chosen tactic cards, ten-card axiom contribution, hero art and own rule cards.
     function myDeck() {
         const s = Rift.State.get();
         // With no creatures, loaned starters fill only the places tactics leave (as the deck builder shows).
@@ -82,6 +89,7 @@
             axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout && s.axiomLoadout.length ? s.axiomLoadout : s.axioms),
             art,
             power: avatarPower(s.avatar),
+            ownAxioms: ownAxioms(s),
         };
     }
 
@@ -278,7 +286,7 @@
             const s=Rift.State.get();
             Rift.Router.go('battle',{
                 mode:'practice',story:true,seed:'syllo-road-challenge',
-                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar)},
+                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar),ownAxioms:ownAxioms(s)},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.

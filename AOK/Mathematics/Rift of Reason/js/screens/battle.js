@@ -8,6 +8,7 @@
  *   seed,
  *   player?: { name, team, tactics, axioms, items, consumables, bag?, art?, hearts? },  // default: the save's deck
  *                           bag: item ids brought into the battle (the Bag; at most two, one per turn)
+ *                           ownAxioms?: own rule cards in the opening hand (Granny's Spare Axiom; js/ui/battles.js)
  *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
  *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
  *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
@@ -115,7 +116,7 @@
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
-        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
     };
     // The basic rule of the other categories, in a few words (what a new rule card replaces).
     const BASIC_WORDS = {
@@ -204,6 +205,8 @@
             bag: given.bag || [],
             // Hero power ({ id, tweaks }, data/powers.js) chosen by the launcher (js/ui/battles.js).
             power: given.power || null,
+            // Own rule cards for the opening hand (Granny's Spare Axiom), chosen by the launcher.
+            ownAxioms: given.ownAxioms || [],
             art: given.art || (save && save.avatar && save.avatar.type && Rift.avatarArt ? Rift.avatarArt(save.avatar, 'neutral') : null),
         };
     }
@@ -231,7 +234,7 @@
         let state = guide && guide.create ? guide.create() : p.initialState ? p.initialState : E.createBattle({
             seed,
             players: [
-                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag, power: me.power },
+                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag, power: me.power, ownAxioms: me.ownAxioms },
                 { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts, power: opp.power || null },
             ],
             axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
@@ -462,7 +465,8 @@
             if (!ev && !reset) return;
             if (ev) {
                 const ax = (Rift.data.axioms || {})[ev.id] || { name: ev.id };
-                const by = ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
+                const by = ev.clear ? (ev.player === ME ? 'You clear every rule' : oppName + ' clears every rule')
+                    : ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
                 const what = (RULE_LABEL[ax.category] || ax.category) + ': ' + (ax.short || ax.name);
                 showReveal(el('div.b-reveal-rule', {}, [axiomCardEl(ev.id, { size: 'big' }), el('div.b-reveal-what', { text: what })]), by + '!', RULE_SHOW, 'rule');
             } else {
@@ -754,7 +758,7 @@
         const isBasic = ax => !!(ax && ax.basic);
         // Active rule cards that really change a basic rule (engine: changedAxioms).
         const changedRules = () => (E.changedAxioms ? E.changedAxioms(state) : E.activeAxioms(state).filter(ax => !isBasic(ax)));
-        const axiomKind = ax => (isBasic(ax) ? 'Back to normal: ' + (ax.category || 'rule') : (ax.category || 'rule') + ' rule');
+        const axiomKind = ax => (isBasic(ax) ? 'Back to normal: ' + (ax.category || 'rule') : ax.own ? 'Your own card' : (ax.category || 'rule') + ' rule');
 
         // A card element. o: { size, classes, onclick, drag, target, guide }
         function cardEl(cid, o) {
@@ -835,7 +839,9 @@
             const on = E.activeAxioms(state).some(a => a.id === id);
             return el('div.b-notes', {}, [
                 el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
-                isBasic(ax)
+                ax.clearRules
+                    ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
+                    : isBasic(ax)
                     ? el('div.b-note-line', {}, [el('b', { text: 'Back to normal: ' + (ax.category || 'rule') + '. ' }), 'It puts the basic ' + (ax.category || '') + ' rule back for BOTH players.'])
                     : el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (ax.category || 'rule') + '): ' }), on
                         ? 'active now for BOTH players.'
@@ -1373,7 +1379,7 @@
                 if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
                 // A rule card that would change nothing (that rule is already on) says so on the card.
-                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: 'Already the rule' })); node.title = whyNotAxiomRule(id); }
+                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 else {
                     const tlr = E.timeline(state)[0];
                     if (tlr && tlr.type === 'reset' && tlr.turns <= 2) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset in ' + tlr.turns + '!' }));
@@ -1801,7 +1807,8 @@
                     const ax = Rift.data.axioms[sel.id];
                     const cost = E.axiomCost(state, sel.id);
                     ask.textContent = !a ? ax.name + ' needs ' + cost + ' energy. You have ' + P.energy + '.'
-                        : (isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ' replaces ' + replacedRule(sel.id) + ' for BOTH players.')
+                        : (ax.clearRules ? ax.name + ' puts every basic rule back for BOTH players, then you draw a card.'
+                            : isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ' replaces ' + replacedRule(sel.id) + ' for BOTH players.')
                             + resetSoon()
                             + ' Press Play rule, or drag it to the middle row.';
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
@@ -2383,7 +2390,8 @@
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).
         const axiomChanges = id => !E.axiomWouldChange || E.axiomWouldChange(state, id);
-        const whyNotAxiomRule = id => 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.';
+        const whyNotAxiomRule = id => (((Rift.data.axioms || {})[id] || {}).clearRules ? 'No rule to clear: every rule is basic now.'
+            : 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.');
         function clickAxiom(id, L) {
             if (!L.some(a => a.type === 'axiom' && a.choice === id)) { setNote(whyNotAxiom(id)); return; }
             ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };
