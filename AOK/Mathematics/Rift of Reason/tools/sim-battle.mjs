@@ -30,6 +30,23 @@
 //   Normal Syllo in his Road story challenge (the game's own set-up: player first, no shuffle).
 // Prints each win rate with its 95% interval next to the target, and Expert's move times.
 // Level names: normal, competent, expert, beginner ('easy'/'hard' still mean normal/competent).
+//
+// Hero powers (design/AVATARS.md section 1.5; results in design/reviews/avatar-powers-balance.md):
+//
+//   node tools/sim-battle.mjs --powers[=none|pairs|tweaks|all] [--games=1100] [--level=competent]
+//        [--pw=lantern,recall] [--tw=quick,deeper] [--seed=powers]
+//
+//   none    each power (the 10 avatar powers and the 2 Emotion powers) vs no power, then a
+//           no-power baseline row (target: the power's side wins 53–58%);
+//   pairs   every pair of the 10 avatar powers (target: 45–55%), as a matrix of the row's win rate;
+//   tweaks  each tweak (Quick, Cheap, Blood price, Deeper, Broader) vs the same power untweaked
+//           (target: 46–54%).
+// Every row is --games games (default 1,100: ±3 points at 95%): random teams as above, each
+// matchup in both turn orders and with the powers in swapped seats, both players at --level.
+// --pw limits the powers, --tw the tweaks. --patch also takes power ids, e.g.
+// --patch=lantern.cost:1,recall.recharge:2, to try numbers without editing data/powers.js.
+// Each row prints the win rate with its 95% interval, uses per game of each side's power,
+// first-player wins and average rounds.
 import { loadRift } from './test/harness.mjs';
 import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
 import os from 'node:os';
@@ -38,7 +55,7 @@ const args = process.argv.slice(2);
 const N = Number(args.find(a => /^\d+$/.test(a)) || 1000);
 const opt = (name, dflt) => { const a = args.find(x => x.startsWith('--' + name + '=')); return a ? a.slice(name.length + 3) : dflt; };
 const flag = name => args.includes('--' + name);
-const SEED = opt('seed', 'sim');
+const SEED = opt('seed', args.some(a => /^--powers/.test(a)) ? 'powers' : 'sim');
 const TEAM = Number(opt('team', 10));
 const LEGENDARIES = flag('legendaries');
 const MIRROR = flag('mirror');
@@ -58,7 +75,7 @@ const PATCH = opt('patch', '');
 PATCH.split(',').filter(Boolean).forEach(kv => {
     const [path, v] = kv.split(':');
     const [id, field] = path.split('.');
-    const D = Rift.data.creatures[id] || Rift.data.tactics[id] || Rift.data.axioms[id];
+    const D = Rift.data.creatures[id] || Rift.data.tactics[id] || Rift.data.axioms[id] || Rift.data.powers[id];
     if (!D) throw new Error('Unknown id in --patch: ' + id);
     D[field] = field === 'keywords' ? (v === 'none' ? [] : v.split('+')) : isNaN(+v) ? v : +v;
 });
@@ -112,7 +129,7 @@ const deckTeam = (deck, prefix) => deck.creatures.map((species, i) => ({ uid: pr
 
 // One matchup for a scenario: random teams ('random'), a built boss deck for the Expert seat vs the
 // loaned starter deck ('boss'), or Syllo's story challenge with the player in seat 0 ('syllo').
-function scenarioGame(scenario, label, g, levels) {
+function scenarioGame(scenario, label, g, levels, powers) {
     const starterTactics = Rift.data.tacticDecks.starter;
     if (scenario === 'syllo') {
         return {
@@ -135,7 +152,7 @@ function scenarioGame(scenario, label, g, levels) {
     }
     return {
         orders: [0, 1], teams: m.teams, deckId: m.deckId,
-        players: m.teams.map((team, p) => ({ name: 'P' + p, team, axioms: m.axioms[p], tactics: m.tactics ? m.tactics[p] : undefined })),
+        players: m.teams.map((team, p) => ({ name: 'P' + p, team, axioms: m.axioms[p], tactics: m.tactics ? m.tactics[p] : undefined, power: (powers && powers[p]) || undefined })),
         options: { mode: 'trainer' },
     };
 }
@@ -153,7 +170,7 @@ function tally(F, fate) {
     if (hurt) F.anyHurt += 1;
 }
 
-function runRange(from, to, levels, label, scenario) {
+function runRange(from, to, levels, label, scenario, powers) {
     const t0 = Date.now();
     const st = {
         games: 0, firstWins: 0, decided: 0, draws: 0, seatWins: [0, 0], levelWins: {},
@@ -161,11 +178,12 @@ function runRange(from, to, levels, label, scenario) {
         reasons: {}, tactics: {}, axioms: {}, flips: 0, resets: 0, reverseEnds: 0,
         species: {}, fate: { won: newSide(), lost: newSide() },
         expertMs: { moves: 0, sum: 0, max: 0, over100: 0, over300: 0 }, decks: {},
+        powerUses: [0, 0], powerGames: [0, 0],
     };
     levels.forEach(lv => { st.levelWins[lv] = 0; });
     const row = (map, id) => map[id] || (map[id] = { plays: 0, games: 0, wins: 0 });
     for (let g = from; g < to; g++) {
-        const m = scenarioGame(scenario || 'random', label, g, levels);
+        const m = scenarioGame(scenario || 'random', label, g, levels, powers);
         for (const first of m.orders) {
             const seed = SEED + ':' + label + ':' + g + ':' + first;
             let s = Engine.createBattle({
@@ -217,9 +235,11 @@ function runRange(from, to, levels, label, scenario) {
                 if (e.t === 'reset') st.resets += 1;
                 if (e.t === 'tactic-play') { row(st.tactics, e.id).plays += 1; used[e.player]['t:' + e.id] = true; }
                 if (e.t === 'axiom-play') { row(st.axioms, e.id).plays += 1; used[e.player]['a:' + e.id] = true; }
+                if (e.t === 'power-use') { st.powerUses[e.player] += 1; used[e.player].power = true; }
             });
             [0, 1].forEach(p => {
                 const won = s.winner === p;
+                if (used[p].power) { st.powerGames[p] += 1; delete used[p].power; }
                 Object.keys(used[p]).forEach(k => {
                     const r = row(k[0] === 't' ? st.tactics : st.axioms, k.slice(2));
                     r.games += 1;
@@ -249,15 +269,15 @@ function merge(a, b) {
 }
 
 const WORKERS = Math.max(1, Number(opt('workers', os.cpus().length)));
-async function run(n, levels, label, scenario) {
+async function run(n, levels, label, scenario, powers) {
     const t0 = Date.now();
     const parts = Math.min(WORKERS, n);
-    if (parts <= 1) return runRange(0, n, levels, label, scenario);
+    if (parts <= 1) return runRange(0, n, levels, label, scenario, powers);
     const chunks = [];
     for (let i = 0; i < parts; i++) {
         const from = Math.floor(i * n / parts), to = Math.floor((i + 1) * n / parts);
         chunks.push(new Promise((resolve, reject) => {
-            const w = new Worker(new URL(import.meta.url), { argv: process.argv.slice(2), workerData: { from, to, levels, label, scenario } });
+            const w = new Worker(new URL(import.meta.url), { argv: process.argv.slice(2), workerData: { from, to, levels, label, scenario, powers } });
             w.once('message', resolve);
             w.once('error', reject);
         }));
@@ -335,8 +355,114 @@ async function ladder() {
     if (ms.moves) console.log(`Expert main-phase move time: mean ${(ms.sum / ms.moves).toFixed(1)} ms, max ${ms.max.toFixed(0)} ms, over 100 ms ${pct(ms.over100, ms.moves)}, over 300 ms ${pct(ms.over300, ms.moves)} (${ms.moves} moves, one core each)`);
 }
 
+// ---- hero powers (--powers) -------------------------------------------------------------
+
+const AVATAR_POWERS = [];
+Object.values(Rift.data.avatars).forEach(a => ['girl', 'boy'].forEach(v => {
+    const id = a.powers && a.powers[v];
+    if (id && !AVATAR_POWERS.includes(id)) AVATAR_POWERS.push(id);
+}));
+const ALL_POWERS = Object.keys(Rift.data.powers);
+const TWEAK_IDS = Object.keys(Rift.data.powerTweaks);
+const pwLabel = pw => (pw ? pw.id + (pw.tweaks.length ? '+' + pw.tweaks.join('+') : '') : 'none');
+const pwNumbers = pw => {
+    if (!pw) return '';
+    const st = Engine.powerStatus(Engine.createBattle({ seed: 'n', players: [{ team: Engine.randomTeam(Rift.makeRng('n'), 3, { prefix: 'a' }), power: pw }, { team: Engine.randomTeam(Rift.makeRng('m'), 3, { prefix: 'b' }) }] }), 0);
+    return (st.heartCost ? st.heartCost + 'h' : st.cost) + '/' + st.recharge;
+};
+
+// One row: power a vs power b (null: none), both at `level`, the same matchups with a and b in
+// swapped seats, each in both turn orders. Returns a's win rate (draws count half) and more.
+async function powerRow(a, b, games, level) {
+    const m = Math.ceil(games / 4);
+    const label = 'pw';
+    const x = await run(m, [level, level], label, 'random', [a, b]);
+    const y = await run(m, [level, level], label, 'random', [b, a]);
+    const n = x.games + y.games;
+    const draws = x.draws + y.draws;
+    const rate = (x.seatWins[0] + y.seatWins[1] + draws / 2) / n;
+    return {
+        games: n, rate, half: 1.96 * Math.sqrt(rate * (1 - rate) / n), draws,
+        first: (x.firstWins + y.firstWins) / Math.max(1, x.decided + y.decided), rounds: (x.rounds + y.rounds) / n,
+        usesA: (x.powerUses[0] + y.powerUses[1]) / n, usesB: (x.powerUses[1] + y.powerUses[0]) / n,
+        secs: (x.ms + y.ms) / 1000,
+    };
+}
+
+const f1 = v => (100 * v).toFixed(1);
+const verdict = (v, lo, hi) => (v >= lo && v <= hi ? 'ok' : 'OFF');
+
+async function powersMode() {
+    const mode = opt('powers', 'none') || 'none';
+    const GAMES = Number(opt('games', 1100));
+    const level = AI.levelOf(opt('level', 'competent'));
+    const only = (opt('pw', '') || '').split(',').filter(Boolean);
+    const tws = (opt('tw', '') || '').split(',').filter(Boolean);
+    const pick = list => (only.length ? list.filter(id => only.includes(id)) : list);
+    console.log(`Hero powers: ${GAMES} games per row, ${level} vs ${level}, seed "${SEED}"${PATCH ? ', patch ' + PATCH : ''}`);
+    const all = mode === 'all';
+    const pool = { first: 0, rounds: 0, games: 0 };
+    const add = r => { pool.first += r.first * r.games; pool.rounds += r.rounds * r.games; pool.games += r.games; };
+
+    if (mode === 'none' || all) {
+        console.log('\n-- each power vs no power (target: +3 to +8 points) --');
+        console.log('power                cost/rech   win%   ±95%   delta  verdict  uses/game  first%  rounds');
+        for (const id of pick(ALL_POWERS)) {
+            const pw = { id, tweaks: [] };
+            const r = await powerRow(pw, null, GAMES, level);
+            add(r);
+            const d = 100 * r.rate - 50;
+            console.log(`${id.padEnd(20)} ${pwNumbers(pw).padEnd(9)} ${f1(r.rate).padStart(6)}  ±${(100 * r.half).toFixed(1)}  ${(d >= 0 ? '+' : '') + d.toFixed(1).padStart(4)}   ${verdict(d, 3, 8).padEnd(7)}  ${r.usesA.toFixed(2).padStart(8)}  ${f1(r.first).padStart(6)}  ${r.rounds.toFixed(2)}`);
+        }
+        if (!only.length) {
+            const r = await powerRow(null, null, GAMES, level);
+            console.log(`${'(no power either side)'.padEnd(30)}                                       ${f1(r.first).padStart(6)}  ${r.rounds.toFixed(2)}`);
+        }
+    }
+
+    if (mode === 'pairs' || all) {
+        const ids = pick(AVATAR_POWERS);
+        console.log('\n-- avatar power pairs (row power\'s win rate vs column; target 45–55%) --');
+        const M = {};
+        const off = [];
+        for (let i = 0; i < ids.length; i++) {
+            for (let j = i + 1; j < ids.length; j++) {
+                const r = await powerRow({ id: ids[i], tweaks: [] }, { id: ids[j], tweaks: [] }, GAMES, level);
+                add(r);
+                M[ids[i] + '|' + ids[j]] = r.rate;
+                M[ids[j] + '|' + ids[i]] = 1 - r.rate;
+                const ok = verdict(100 * r.rate, 45, 55);
+                if (ok === 'OFF') off.push(`${ids[i]} vs ${ids[j]} ${f1(r.rate)}%`);
+                console.log(`  ${ids[i].padEnd(18)} vs ${ids[j].padEnd(18)} ${f1(r.rate).padStart(5)}% ±${(100 * r.half).toFixed(1)}  ${ok}  uses ${r.usesA.toFixed(2)} / ${r.usesB.toFixed(2)}  first ${f1(r.first)}%  rounds ${r.rounds.toFixed(2)}`);
+            }
+        }
+        const short = id => id.slice(0, 6);
+        console.log('\n' + ''.padEnd(19) + ids.map(id => short(id).padStart(7)).join('') + '   mean');
+        ids.forEach(a => {
+            const vals = ids.filter(b => b !== a).map(b => M[a + '|' + b]);
+            console.log(a.padEnd(19) + ids.map(b => (a === b ? '—' : f1(M[a + '|' + b])).padStart(7)).join('') + f1(vals.reduce((t, v) => t + v, 0) / vals.length).padStart(7));
+        });
+        console.log(off.length ? 'Outside 45–55%: ' + off.join('; ') : 'Every pairing within 45–55%.');
+    }
+
+    if (mode === 'tweaks' || all) {
+        console.log('\n-- each tweak vs the same power untweaked (target: 46–54%) --');
+        console.log('power + tweak                     cost/rech   win%   ±95%  verdict  uses tweak/base  rounds');
+        for (const id of pick(AVATAR_POWERS)) {
+            for (const t of TWEAK_IDS.filter(t => !tws.length || tws.includes(t))) {
+                const pw = { id, tweaks: [t] };
+                const r = await powerRow(pw, { id, tweaks: [] }, GAMES, level);
+                add(r);
+                console.log(`${pwLabel(pw).padEnd(33)} ${pwNumbers(pw).padEnd(9)} ${f1(r.rate).padStart(6)}  ±${(100 * r.half).toFixed(1)}  ${verdict(100 * r.rate, 46, 54).padEnd(7)}  ${r.usesA.toFixed(2)} / ${r.usesB.toFixed(2)}     ${r.rounds.toFixed(2)}`);
+            }
+        }
+    }
+    if (pool.games) console.log(`\nAll rows: first player wins ${f1(pool.first / pool.games)}%, average rounds ${(pool.rounds / pool.games).toFixed(2)} (${pool.games} games)`);
+}
+
 async function main() {
 if (flag('ladder')) return ladder();
+if (args.some(a => a === '--powers' || a.startsWith('--powers='))) return powersMode();
 console.log(`Card Arena simulator: ${N} matchups × 2 seat orders, seed "${SEED}", team ${TEAM}${LEGENDARIES ? ', with legendaries' : ''}${MIRROR ? ', MIRROR' : ''}`);
 if (Object.keys(OVERRIDES).length) console.log('overrides: ' + JSON.stringify(OVERRIDES));
 if (PATCH) console.log('patch:     ' + PATCH);
@@ -365,7 +491,7 @@ if (flag('species')) {
 }
 
 if (!isMainThread) {
-    parentPort.postMessage(runRange(workerData.from, workerData.to, workerData.levels, workerData.label, workerData.scenario));
+    parentPort.postMessage(runRange(workerData.from, workerData.to, workerData.levels, workerData.label, workerData.scenario, workerData.powers));
 } else {
     await main();
 }
