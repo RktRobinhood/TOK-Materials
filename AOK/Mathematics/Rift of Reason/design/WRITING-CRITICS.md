@@ -1,6 +1,6 @@
-# Writing gate: two critics, 8/10 each
+# Writing gate: three critics, 8/10 each
 
-The teacher's rule (8 October 2026): no story text ships until **two critics each score it at least 8/10**. This covers every script change: inner-voice beats, avatar dialogue, avatar-only choices, talk encounters (negotiation, montage, downtime), boss and trainer lines, and rewrites of existing scenes.
+The teacher's rule (8 October 2026): no story text ships until **three critics each score it at least 8/10** (the editor was added on 8 October). This covers every script change: inner-voice beats, avatar dialogue, avatar-only choices, talk encounters (negotiation, montage, downtime), boss and trainer lines, and rewrites of existing scenes.
 
 The critics are separate subagents. Neither sees the other's report. Each reads the actual script files (`data/script/*.js`, plus any encounter data), not a summary, and plays or traces at least two different avatars through the changed part (one board-power gender, one other; different species).
 
@@ -27,12 +27,24 @@ Scores 0–10 against:
 6. **Teacher's direction.** Everything in `TEACHER-STORY-NOTES.md` is honoured: solemn aftermath of deaths, recurring antagonists and minions met throughout, villains who may be misjudged, real choices and non-linear reveals.
 7. **Game fit.** Text sets up the puzzle or battle that follows, and gets out of the way when the player wants to play.
 
+## Critic 3: The editor
+
+A professional fiction editor who reads constantly and skim-reads manuscripts to decide whether a story would hold readers. Judges the story as a story, with the toolset used to assess a bestseller (scaled to a classroom game, not literally a novel). Scores 0–10 against:
+
+1. **Hook.** Does the premise grab in the first scene? Would a reader, or a 16-year-old player, want to know what happens next?
+2. **Characters and arcs.** Does the protagonist want something and change? Do the main characters, antagonists included, have motives we understand, and do we care about them before they are endangered?
+3. **Antagonists.** Recurring, present throughout, escalating; their defeats and the final showdown are cathartic.
+4. **Plot hooks and set-ups.** Is every hook feasible and paid off? Are reveals earned, not over-clued and not out of nowhere? Do the side stories each have a hook that works on a skim?
+5. **Pacing and momentum.** Does each chapter end pulling you into the next? Any sag, any scene that exists only to explain?
+6. **Emotional throughline.** Loss, choice and consequence land; the ending pays off the whole journey and the theme.
+7. **Skim test.** Reading only the beat headings and first lines of each section, is the story still clear and compelling?
+
 ## The loop
 
 1. The writer drafts and commits to the working branch.
-2. Both critics review in parallel and return a score, the 3–5 biggest problems with file and line, and concrete rewrites.
+2. All three critics review in parallel and return a score, the 3–5 biggest problems with file and line, and concrete rewrites.
 3. The writer fixes everything that is reasonable and notes anything rejected, with the reason.
-4. Repeat until **both** score 8 or more. If either is still below 8 after five rounds, stop and ask the teacher, with the latest reports. Never pass anything below 8.
+4. Repeat until **all three** score 8 or more. If any is still below 8 after five rounds, stop and ask the teacher, with the latest reports. Never pass anything below 8.
 5. Record every round in `design/reviews/writing-<topic>-<date>.md` (scores, main findings, what changed).
 
 Voice recording happens only after the text passes, so the quota is not spent on lines that will change.

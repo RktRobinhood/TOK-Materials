@@ -12,4 +12,4 @@ Collected from the teacher's messages. Writers follow these; critics check them.
 6. **Not everyone cast as a villain is one.** Logic puzzles can show someone in a bad light that turns out to be false. Some "villains" do something with a short-term cost for a long-term good (an ethical question) and have been vilified for it.
 7. **Choice and non-linear storytelling.** Don't railroad. The player may decide the boss is not the real problem: e.g. turn back to town to confront the Mayor, who is the one driving everyone towards disaster. The game stays linear in structure, but the story can go back and forth, with dramatic reveals.
 8. **Side stories** are short one-shots at revisited stations (blinking icon) that make students reason: negotiation, deduction, spotting bad arguments. They are not main plot. Example: a criminal trapped at a fair station holding hostages.
-9. **Quality gate.** Both critics must score 8/10 or more (`WRITING-CRITICS.md`).
+9. **Quality gate.** Three critics (logic, author, editor) must each score 8/10 or more (`WRITING-CRITICS.md`).
