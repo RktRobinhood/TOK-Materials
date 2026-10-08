@@ -357,7 +357,7 @@ test('the fixture plays all six beats: clues, twist card, deduce with Why?, tier
     const text = rig.lines.join(' | ');
     ['bucket is gone', 'saw nothing', 'coins logged', 'twist', 'TEST tier 1.', 'TEST last line.'].forEach(w => assert.ok(text.includes(w), w));
     assert.ok(text.includes('TEST warning'), 'the wrong answer ticked and warned');
-    assert.equal(Rift.SideStories.at('well'), null, 'done: the icon goes');
+    assert.notEqual((Rift.SideStories.at('well') || {}).id, 'fixture', 'done: its icon goes (a real Well story may queue next)');
     assert.equal(Rift.Stakes.active().includes('side.0'), false, 'the clock is closed');
 });
 

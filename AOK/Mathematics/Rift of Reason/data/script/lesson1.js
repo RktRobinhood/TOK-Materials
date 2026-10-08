@@ -490,6 +490,12 @@
                 { clock: 'ch1', drain: 1 },
                 { s: 'sequins', e: 'happy', t: 'Thirty-one? It BREAKS? Oh, that\'s gorgeous. I\'ve stopped panicking.' },
             ] },
+            // Side story 2 (The Lucky Well), tiers 1–2: Nudge's tunnel map.
+            { when: 'well-map', then: [
+                { s: 'narrator', t: 'Nudge\'s tunnel map. The ring light\'s cable runs down that tunnel. You pull the plug.' },
+                { clock: 'ch1', drain: 1 },
+                { s: 'nudge', t: 'Who unplugged me? Nobody can SEE me!' },
+            ] },
         ] },
     ];
     // The push (STORY.md App. C): before stage 3; the warning that follows is the tick's.
@@ -570,6 +576,8 @@
 
     // The Rift Pass: Ch1's last stop, and its hook into Boolesbury.
     S['ch1.pass'] = [
+        // Side story 3 (The Midday Pie), tier 4: the cat was sent down the Road. He forgives you here.
+        { when: { flag: 'side.3', is: 4 }, then: [{ play: 'ch1.pass.keanu', once: true }] },
         { when: { all: [{ seen: 'ch1.gate.win' }, { not: LATER }] }, then: [
             { play: 'ch1.crackle', once: true },
             { s: 'narrator', t: 'Nudge ran through here with my piece. I feel… cloudier.', when: 'nudgeFled' },
@@ -579,6 +587,10 @@
             { s: 'narrator', t: 'The Rift Pass. Boolesbury hums on the other side.', when: LATER },
             { s: 'narrator', t: 'The Rift Pass. The Road runs back down from here, all the way to the Fair.', when: { not: LATER } },
         ] },
+    ];
+    S['ch1.pass.keanu'] = [
+        { note: 'Keanu Meows is sitting on a warm rock by the rift.' },
+        { s: 'keanu', t: 'Oh, hi. About the pie. I forgive you. I forgive the chef, too.' },
     ];
     // For a class that jumps straight into Ch2 (played by ch2.arrive): one line of context, then the crackle.
     S['ch1.crackle.fallback'] = [
