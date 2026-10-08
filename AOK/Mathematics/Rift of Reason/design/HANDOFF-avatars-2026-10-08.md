@@ -36,3 +36,14 @@ The teacher shut the laptop; all agents were stopped mid-task and their partial 
 - Done: #50–#52 (powers, balance, button); story engine (cast, inner voice, stakes clocks, Quiet Scenes, possession, dark stations, Settings switch); outlines passed the three-critic gate (`reviews/outline-gate-passed-2026-10-08.md`); **lesson 1 script passed** (logic 8, author 8.5, editor 8.5).
 - Next: art session (`PRODUCTION-TODO.md`, lesson 1 order); voices on each quota day (`PRODUCTION-TODO.md`); add a `--script` filter to `tools/voices.mjs` before big narrator runs; then script lesson 2 through the same gate.
 - Teacher decisions pending: provisional voices for Nudge/Guess-o-Matic/Signpost; OK for the Ch3 map change and the new Ch2/Ch4 puzzle code (asked 8 Oct).
+
+## Update, afternoon of 8 October
+
+- **All four lesson scripts passed the three-critic gate** (L1 8/8.5/8.5; L2 author 8, editor 8.5, logic fix applied as the critic specified; L3 8/8.5/8.5; L4 8/8.5/8.5). Reviews in `design/reviews/writing-script-l*`.
+- Approved code done: Ch3 Newsstand–Plaza link removed and Tower Road behind the Tribunal; village fixed/hidden-count mode (Square, Hall stage 3, core trial 1); Copy and Pip clocks; core trials; four new Tribunal story cases.
+- Understudies Tally, Achilles, Kuku, Rubberstamp are cast (voices); their deaths arm once their art exists.
+- Full suite: 577 pass, 0 fail, 1 skip.
+- **Not built yet:** side stories (`SIDE-STORIES.md`, need the negotiation encounter); the negotiation system (the Ch2 Mayor scene uses a dialogue stand-in); power tweaks (#53); a `--script` filter for voice recording; the Copy speaking in the player's own voice; Spare Axiom card; Hall stage skip.
+- Leftover optional line fixes: lesson 4 review r2 items (tower line in say(), Tally's box note, "…Why?" give-away).
+- Untracked OneDrive conflict copy `js/puzzles/tribunal-DESKTOP-MFKNDVN.js` (differs from the committed file); the teacher can delete it.
+- Voices: record per `PRODUCTION-TODO.md`; art per `PRODUCTION-TODO.md` and Stage 13.
