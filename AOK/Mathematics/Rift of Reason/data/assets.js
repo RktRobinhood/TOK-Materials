@@ -595,6 +595,7 @@
         'ui/axiom-restraint': { file: 'ui/axiom-restraint.webp', w: 160, h: 155 },
         'ui/axiom-reverse-hearts': { file: 'ui/axiom-reverse-hearts.webp', w: 160, h: 157 },
         'ui/axiom-silence': { file: 'ui/axiom-silence.webp', w: 160, h: 159 },
+        'ui/axiom-spare-axiom': { file: 'ui/axiom-spare-axiom.webp', w: 160, h: 157 },
         'ui/axiom-steady-state': { file: 'ui/axiom-steady-state.webp', w: 160, h: 154 },
         'ui/axiom-study': { file: 'ui/axiom-study.webp', w: 160, h: 158 },
         'ui/axiom-think': { file: 'ui/axiom-think.webp', w: 160, h: 158 },
