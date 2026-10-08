@@ -3,6 +3,7 @@
  * The battle screen runs it in guide mode (js/screens/battle.js, js/screens/battle-lesson.js).
  *
  * Each step: { title, text, label, expect, replies, compare? }
+ *   info     an explain-only step (expect { type: 'info' }): no move, the learner presses Got it
  *   expect   the ONE action the learner must take (matched on every key it lists)
  *   replies  actions applied afterwards with a visible pause (Granny's turn, and the
  *            learner's end where the step says so), and { say } lines Granny speaks between
@@ -10,7 +11,9 @@
  *   compare  [attacker, defender]: show "Same cards, different rule" for this fight
  * Every step is legal in the normal engine (tools/test/battle-lesson.test.mjs replays them).
  *
- * Rift.Battle.Lesson = { steps, create, config, advance, starter, team, guide }
+ * Rift.Battle.Lesson = { steps, powerStep, create, config, advance, starter, team, guide }
+ * guide(power) adds powerStep before "Change a rule" when the learner's avatar has a power
+ * (design/AVATARS.md 1.6: "This button is your power."); the button shows but stays unused.
  */
 (function (root) {
     'use strict';
@@ -123,6 +126,10 @@
             expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [] },
     ];
 
+    // Granny points at the learner's own power button (only when there is one).
+    const powerStep = { title: 'Your power', label: 'Got it', info: true, expect: { type: 'info' }, replies: [],
+        text: 'See the round button by your portrait? That is your power. Every avatar has a different one. It costs energy, then rests for a few turns. Point at it to read yours. Today we won\'t use it. Press Got it.' };
+
     function team(ids, prefix) {
         return ids.map((species, i) => ({ uid: prefix + i, species, loaner: true, injuries: [], scars: [], powerDelta: 0, warped: null, trophyOf: null }));
     }
@@ -135,11 +142,11 @@
     // by a route the lesson does not teach (a critic found an early win with Swift Speedcheeta).
     const YOU = ['kardashiant', 'astrophysicat', 'zuckerborg', 'eelish', 'muskrat', 'tremendoodle'];
     const GRANNY = ['khaby', 'shakirattle', 'keanu', 'astrophysicat', 'eelish', 'beansprout', 'zuckerborg', 'siuuugull', 'kardashiant'];
-    function config() {
+    function config(power) {
         return {
             seed: 'card-arena-lesson',
             players: [
-                { id: 'you', name: 'You', team: team(YOU, 'lesson-you-'), tactics: ['counterexample', 'second-wind', 'stand-firm'], hearts: 6 },
+                { id: 'you', name: 'You', team: team(YOU, 'lesson-you-'), tactics: ['counterexample', 'second-wind', 'stand-firm'], hearts: 6, power: power || null },
                 { id: 'granny', name: 'Granny Axiom', team: team(GRANNY, 'lesson-granny-'), tactics: [], hearts: 6 },
             ],
             // Opening rule cards: Underdog for you, the reversed victory rule for Granny. The first
@@ -150,11 +157,12 @@
                 openHand: [3, 3], openAxioms: 1, deckSize: 9, minCreatures: 1, hearts: 6 },
         };
     }
-    function create() { return Battle.Engine.createBattle(config()); }
-    function advance(state, index) {
-        const step = steps[index];
+    function create(power) { return Battle.Engine.createBattle(config(power)); }
+    function advance(state, index, list) {
+        const step = (list || steps)[index];
         if (!step) throw Error('Unknown lesson step');
         // Narration lines ({ say }) are not actions.
+        if (step.info) return state;
         return [step.expect].concat((step.replies || []).filter(r => r.type)).reduce((s, a) => Battle.Engine.applyAction(s, a), state);
     }
     // Guide-mode parameters for the battle screen.
@@ -162,7 +170,11 @@
     const outro = 'Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?';
     // What a real match adds (shown on the lesson's end screen).
     const next = 'Next you will meet: the colour wheel (+1 attack against the colour you beat), Last Word (it works when the creature is defeated), Swift and Shield. Point at any card to read it.';
-    function guide() { return { steps, create, outro, next }; }
+    function guide(power) {
+        if (!power) return { steps, create, outro, next };
+        const at = steps.findIndex(s => s.title === 'Change a rule');
+        return { steps: steps.slice(0, at).concat([powerStep], steps.slice(at)), create: () => create(power), outro, next };
+    }
 
-    Battle.Lesson = { steps, create, config, advance, starter, team, guide };
+    Battle.Lesson = { steps, powerStep, create, config, advance, starter, team, guide };
 })(typeof window !== 'undefined' ? window : globalThis);

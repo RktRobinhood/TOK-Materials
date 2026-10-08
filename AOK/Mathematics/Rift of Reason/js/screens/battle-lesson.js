@@ -25,7 +25,8 @@
             mode: 'practice',
             seed: L.config().seed,
             opponent: { name: 'Granny Axiom', art: granny ? granny.art : null },
-            guide: L.guide(),
+            // The learner's own power, so Granny can point at its button (it stays unused).
+            guide: L.guide(Rift.Powers && Rift.State ? Rift.Powers.forAvatar((Rift.State.get() || {}).avatar) : null),
             onEnd: end,
         });
     }

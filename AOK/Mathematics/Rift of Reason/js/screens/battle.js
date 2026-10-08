@@ -56,7 +56,7 @@
  * else a symbol from js/ui/powers.js) with its cost in an energy gem (a heart with Blood price), the
  * turns left over a dimmed button while it rests, and "Used" in the turn it was used. Mine is clicked
  * (a power with a target then waits for a glowing target, like an ability); the opponent's only shows
- * its state, and its use is shown big first. No button when a side has no power (Granny's lesson).
+ * its state, and its use is shown big first. No button when a side has no power; in Granny's lesson the learner's button shows but stays unused (a Your power step).
  * Cards the engine lets me know (Night Sight) lie face up in the opponent's hand, tagged "Seen".
  */
 (function (root) {
@@ -2258,10 +2258,21 @@
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
+                    st && st.info && !ui.busy ? el('button.btn.primary.b-coach-ok', { type: 'button', text: st.label, onclick: infoDone }) : null,
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
                     iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
                 ]),
             );
+        }
+
+        // An explain-only lesson step (step.info): Got it moves on, with no move made.
+        function infoDone() {
+            const st = step();
+            if (!st || !st.info || ui.busy) return;
+            ui.step += 1;
+            startHintClock();
+            render();
+            speak();
         }
 
         function fightLine(label, pv, a, d) {
@@ -2290,6 +2301,7 @@
             const x = st.expect;
             let focus = null;
             let ring = null;
+            if (x.type === 'info') { focus = nodes.pw0 || null; if (focus) { focus.classList.add('guide-focus'); return; } }
             if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
             else if (x.type === 'end') focus = nodes.end;
             else if (x.type === 'spark') focus = screen.querySelector ? screen.querySelector('.b-spark') : null;

@@ -2,14 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadWithDom } from './fake-dom.mjs';
 
-function setup(onEnd) {
+function setup(onEnd, opts = {}) {
     const screens = {};
     const g = loadWithDom(['js/core/rift.js', 'js/core/assets.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js',
+        ...(opts.avatar ? ['data/powers.js'] : []),
         'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/lesson.js',
         ctx => { ctx.Rift.Screens = { register: (n, d) => { screens[n] = d; }, get: n => screens[n] }; },
         'js/screens/battle.js', 'js/screens/battle-lesson.js']);
     const { Rift } = g;
     Rift.data.speakers = { granny: { name: 'Granny Axiom', art: 'npc/granny-axiom' } };
+    if (opts.avatar) {
+        Rift.data.avatars = { [opts.avatar.type]: { powers: { [opts.avatar.variant]: opts.power } } };
+        Rift.State = { get: () => ({ avatar: opts.avatar }) };
+    }
     Rift.Battle.AI = { choose() { throw new Error('the guided lesson never asks the AI'); } };
     const spoken = [];
     let stops = 0;
@@ -225,4 +230,33 @@ test('lesson picture buttons have names: each draw step label is the tooltip nam
     const coach = t.root.querySelectorAll('.b-coach .b-ibtn').map(b => b.getAttribute('aria-label'));
     assert.deepEqual(coach, ['Hear this step again', 'Leave lesson']);
     t.handle.destroy();
+});
+
+test('with an avatar power, Granny adds "Your power": the button glows, Got it moves on, no move is made', () => {
+    let won = null;
+    const t = setup(value => { won = value; }, { avatar: { type: 'fox', variant: 'girl' }, power: 'lantern' });
+    const L = t.Rift.Battle.Lesson;
+    const steps = L.guide({ id: 'lantern', tweaks: [] }).steps;
+    assert.equal(steps.length, L.steps.length + 1);
+    assert.equal(L.guide(null).steps, L.steps, 'no power: the lesson is unchanged');
+    assert.equal(t.handle.state.players[0].power.id, 'lantern');
+    steps.forEach((step, i) => {
+        assert.equal(t.handle.step, i);
+        assert.match(t.$('.b-coach').textContent, new RegExp('Step ' + (i + 1) + ' of ' + steps.length));
+        if (step.info) {
+            assert.ok(t.$('.b-power.mine').classList.contains('guide-focus'), 'the gold pointer is on the power button');
+            assert.equal(t.spoken.at(-1).text, step.text);
+            const before = t.handle.state;
+            t.$('.b-power.mine').click();
+            assert.equal(t.handle.state, before, 'the power is not used in the lesson');
+            t.$('.b-coach-ok').click();
+            assert.equal(t.handle.state, before, 'Got it makes no move');
+            return;
+        }
+        perform(t, step.expect);
+        for (let n = 0; n < 200 && t.g.timers.length; n++) t.g.timers.shift().fn();
+    });
+    assert.equal(t.Rift.Battle.Engine.winner(t.handle.state), 0, 'still a win');
+    t.root.querySelectorAll('button').find(b => b.textContent === 'Finish lesson').click();
+    assert.equal(won, true);
 });

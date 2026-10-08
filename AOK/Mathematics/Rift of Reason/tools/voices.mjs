@@ -139,7 +139,7 @@ function collect(Rift) {
             for (const who of hosts) for (const step of (def && def.tutorial) || []) add(who, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
         }
     }
-    for (const step of Rift.Battle.Lesson.steps) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    for (const step of Rift.Battle.Lesson.steps.concat(Rift.Battle.Lesson.powerStep || [])) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
     return { lines, skipped };
 }
 
