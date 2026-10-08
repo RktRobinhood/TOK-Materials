@@ -35,8 +35,16 @@
         owlet: 'Shade the "no" parts first. Then the "some". Neat. I like neat.',
         mothkin: 'Look. An x on the line could sit either side. Don\'t push it.',
         fox: 'Make the premises true and the ending false. If I can, it\'s broken.',
-        frogling: 'Lobsters don\'t play trumpets. Didn\'t matter then. Just ask: does it follow?',
+        frogling: 'Last time I judged by what was true. Wrong game. Does it follow?',
         raven: '"Some" means at least one. Not "not all".',
+    } };
+    // The Syllogism Gallery's own Venn lead (venn d1, met there first), so the Well's Venn lead is fresh.
+    L['venn:gallery'] = { inner: {
+        owlet: 'Premises first, opinions later. Shade what they say. Nothing more.',
+        mothkin: 'Look at the circles, not the lobsters. The lobsters are very shiny.',
+        fox: 'Picture trumpet lobsters. Fine. If all that were true, must it follow?',
+        frogling: 'Ponds can\'t play trumpets either. Doesn\'t matter. Does it follow?',
+        raven: '"All" and "some". Two small words. They do all the work.',
     } };
     L['liars-gate'] = { inner: {
         owlet: 'If one calls another a liar, they\'re different kinds. Every time.',
@@ -49,7 +57,7 @@
         owlet: 'Count lines at each dot. More than two odd dots: impossible. Proven.',
         mothkin: 'Look for the odd dots. Start at one. Ignore the pretty middle one.',
         fox: 'Impossible is an answer too. A dramatic one.',
-        frogling: 'Last bridge, the trick was counting. Count first.',
+        frogling: 'Old puzzle. The trick was counting. Count first.',
         raven: '"Impossible" isn\'t giving up here. It\'s a claim. Prove it.',
     } };
     L['line-drawer:dots'] = { inner: {

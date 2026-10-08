@@ -28,17 +28,19 @@
             // ---- Prologue: the home village and the fair ----
             'burrow': {
                 name: 'Your Home', chapter: 'prologue', type: 'story', x: 70, y: 640,
-                scene: 'scene/burrow', script: 'prologue.wake', links: ['fair-gate'],
+                scene: 'scene/burrow', script: 'prologue.home', links: ['fair-gate'],
                 teaser: 'Home. Warm, safe, and a bit too quiet today.',
             },
             'fair-gate': {
                 cardSchool: true, trainer: 'syllo',
                 name: 'The Fair Gate', chapter: 'prologue', type: 'story', x: 200, y: 600,
-                scene: 'scene/fair', script: 'prologue.fair', links: ['burrow', 'stall-pattern', 'stall-witness', 'stall-gallery', 'fair-finale'],
+                scene: 'scene/fair', script: 'prologue.fairgate', links: ['burrow', 'stall-pattern', 'stall-witness', 'stall-gallery', 'fair-finale'],
                 teaser: 'Music, lanterns and the smell of toasted nuts.',
             },
             'stall-pattern': {
                 host: "sequins", goal: "Test a rule by looking for a case that breaks it.",
+                hosts: [{ when: { all: [{ any: [{ seen: 'prologue.rift' }, 'entered:ch1'] }, { not: { seen: 'ch1.gate.win' } }, { not: { any: ['entered:ch2', 'entered:ch3', 'entered:ch4'] } }] },
+                    host: null, note: 'A sign on the curtain: BACK IN A—' }],
                 intro: "station.stall-pattern.intro", reminder: "station.stall-pattern.reminder",
                 name: "Professor Sequins' Pattern Stall", chapter: 'prologue', type: 'puzzle', x: 397, y: 636,
                 scene: 'scene/stall-pattern', script: 'prologue.pattern',
@@ -68,7 +70,7 @@
             'fair-rift': {
                 requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s safe Road challenge at the Fair Gate first.',
                 name: 'The Nut Stall', chapter: 'prologue', type: 'story', x: 330, y: 575,
-                scene: 'scene/fair', script: 'prologue.rift', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
+                scene: 'scene/fair', script: 'prologue.nutstall', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',
             },
 
@@ -88,7 +90,8 @@
                 teaser: 'A signpost that points in every direction at once.',
             },
             'well': {
-                host: "narrator", goal: "Decide what follows from evidence and what still needs testing.",
+                host: "sequins", goal: "Decide what follows from evidence and what still needs testing.",
+                hosts: [{ when: { seen: 'ch1.well.win' }, host: 'narrator' }],
                 intro: "station.well.intro", reminder: "station.well.reminder",
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
@@ -120,7 +123,7 @@
                 intro: "station.standing-stone.intro", reminder: "station.standing-stone.reminder",
                 name: 'The Standing Stone', chapter: 'ch1', type: 'puzzle', x: 1158, y: 531,
                 scene: 'scene/road-forest', script: 'ch1.stone',
-                puzzles: [{ id: 'rule-hunter', difficulty: 3 }, { id: 'line-drawer', difficulty: 3 }],
+                puzzles: [{ id: 'rule-hunter', difficulty: 3, opts: { mode: 'pattern', sequence: 'moser' } }],
                 spawns: ['beastie', 'altmanta', 'godelix', 'haalandroid', 'keanu'], links: ['card-sharp'],
                 teaser: 'Strange patterns carved into old stone. They seem to change.',
             },
@@ -136,6 +139,7 @@
             },
             'gate': {
                 host: "sequins", goal: "A proof depends on the rules and facts you start with.",
+                hosts: [{ when: { seen: 'ch1.gate.win' }, host: 'narrator' }],
                 intro: "station.gate.intro", reminder: "station.gate.reminder",
                 name: 'The Gate of Guards', chapter: 'ch1', type: 'boss', x: 1249, y: 316,
                 scene: 'scene/road-gate', script: 'ch1.gate',
