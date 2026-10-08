@@ -1188,6 +1188,8 @@
             if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
             ui.sel = ui.sel && ui.sel.kind === 'power' ? null : { kind: 'power' };
             render();
+            // Keyboard: the button is drawn anew, so give it the focus back (Tab then reaches the targets).
+            if (nodes.pw0 && nodes.pw0.focus) try { nodes.pw0.focus(); } catch (e) { /* ignore */ }
         }
         // Worth a look before End turn: a usable power, except Brainstorm with no card to play.
         function powerWorth(L) {

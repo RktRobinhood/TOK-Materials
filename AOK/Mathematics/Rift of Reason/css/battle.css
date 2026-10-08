@@ -1025,7 +1025,7 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-left-opp { flex-direction: row; align-items: flex-start; gap: 12px; }
 .b-power {
     --pw: clamp(44px, calc(var(--hero) * 0.72), 62px);
-    position: relative; flex: none; width: var(--pw); height: var(--pw); padding: 0; border-radius: 50%;
+    position: relative; z-index: 9; flex: none; width: var(--pw); height: var(--pw); padding: 0; border-radius: 50%;
     display: grid; place-items: center; font: inherit; color: var(--parchment);
     background: radial-gradient(circle at 50% 38%, #4d3c6c, #1b1229 76%);
     border: 3px solid #b08a3a; box-shadow: 0 3px 0 var(--ink), 0 4px 12px rgba(0, 0, 0, 0.6);
@@ -1083,7 +1083,8 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 /* Recent plays: a power's picture in the round. */
 .b-recent-tile > .pw-icon { border-radius: 50%; }
 /* Night Sight: the opponent's cards I can see lie face up, tagged "Seen". */
-.b-opp-hand > .bc.revealed { outline: 2px solid var(--rift); box-shadow: 0 0 12px rgba(63, 224, 208, 0.6); z-index: 2; }
+/* They come down fully into view (card backs stay tucked under the top edge). */
+.b-opp-hand > .bc.revealed { --w: calc(var(--hero) * 0.74); transform: translateY(2px); margin: 0 -2px; outline: 2px solid var(--rift); box-shadow: 0 0 12px rgba(63, 224, 208, 0.6); z-index: 2; }
 .b-seen-tag {
     position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); z-index: 3; pointer-events: none; white-space: nowrap;
     font-size: 10.5px; font-weight: 800; line-height: 1.3; padding: 0 5px; border-radius: 6px; color: var(--ink); background: var(--rift);
