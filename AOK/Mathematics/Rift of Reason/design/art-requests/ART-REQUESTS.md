@@ -546,6 +546,10 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.20 | The Guess-o-Matic (Sequins' fortune toy, the Algorithm's origin) | `ui/guess-o-matic` | Ch4 reveal | 1 *story* | to design |
 | 13.21 | Redrawn core for the Ch4 climb and conversation | `scene/core-*` | Ch4 | 2 *story* | to design |
 | 13.22 | Understudy Mr Rubberstamp (Pip's retired toad boss): Pip's pose set | see `UNDERSTUDIES.md` card | Only if Pip dies (possessed at the Ch4 Sorting Room) | 1 *story* | needed |
+| 13.23 | Stakes-clock frames, one per clock, drawn as the fiction (the meter's notches are CSS on top; the frame sits behind at about 35% opacity). Wide and short, about 3:1 | `ui/stakes-ch1` (the crack drinking Sequins' sequins), `ui/stakes-ch2` (Granny's rope over the pot), `ui/stakes-ch3` (the public vote), `ui/stakes-copy` (the Copy's upload bar), `ui/stakes-pip` (Pip's glow) | Stakes meter (`js/ui/stakes.js`); a plain CSS meter is drawn until each exists. These are the exact ids for 13.12 | 2 *story* | needed |
+| 13.24 | Keepsakes, small props on a transparent background, shown at the side of a Quiet Scene | `keepsake/cage-cushion`, `keepsake/granny-charm-glasses`, `keepsake/cold-piece`, `keepsake/pip-headphones` | Quiet Scenes (`{ keepsake: … }` step) | 2 *story* | needed |
+| 13.25 | Exact ids for the built understudies (13.4–13.6, 13.22): idle plus the original's poses. **Arming guard:** a death can only happen once that understudy's art exists (STORY.md App. D, condition 6), so until then every worst tier plays as the brink | `npc/tally`, `npc/achilles`, `npc/kuku`, `npc/rubberstamp` (+ `/happy`, `/worried`, `/surprised`, `/angry`) | Cast resolver (`data/cast.js`) | 1 *story* | needed |
+| 13.26 | Possession look: built as CSS (cold glow, a still grid of thumbnails over the portrait, no motion). A painted overlay can replace it later | `fx/possessed` (optional) | Possessed speakers in dialogue | 4 | CSS done |
 
 ---
 
