@@ -24,7 +24,8 @@ Scores 0–10 against:
 3. **Twists and surprises.** At least one real turn per chapter that recontextualises what came before, set up fairly in advance.
 4. **Voice.** Characters sound different from each other. The five inner voices each have a recognisable personality. Comedy is absurd and Monty Python-ish, the tone cute and dark, and nobody lectures.
 5. **Readable.** Short, plain English for non-native readers (lines usually under about 20 words, no idioms that block understanding). Lines are speakable for the voice recordings.
-6. **Game fit.** Text sets up the puzzle or battle that follows, and gets out of the way when the player wants to play.
+6. **Teacher's direction.** Everything in `TEACHER-STORY-NOTES.md` is honoured: solemn aftermath of deaths, recurring antagonists and minions met throughout, villains who may be misjudged, real choices and non-linear reveals.
+7. **Game fit.** Text sets up the puzzle or battle that follows, and gets out of the way when the player wants to play.
 
 ## The loop
 
