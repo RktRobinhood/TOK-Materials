@@ -306,3 +306,62 @@ test('powerStatus explains energy, and the power works with every rule untouched
     assert.equal(st.text, 'Deal 1 damage to an enemy creature.');
     assert.equal(E.powerStatus(powered('lantern', ['deeper', 'broader']), 0).text, 'Deal 2 damage to an enemy creature. Also see one random card in the enemy hand.');
 });
+
+// ---- the AI ----
+
+const POWER_IDS = Object.keys(Rift.data.powers);
+
+// A practice-style battle where both heroes have a power (cycled through the 12 by game number).
+function poweredGame(tag, g, tweaks) {
+    const rng = Rift.makeRng('powers:' + tag + ':' + g);
+    const teams = [0, 1].map(p => E.randomTeam(rng, 10, { prefix: tag + g + 'p' + p, legendaries: false }));
+    const axioms = [0, 1].map(() => rng.shuffle(Rift.data.axiomDecks.starter).slice(0, 10));
+    return E.createBattle({ seed: 'powers:' + tag + ':' + g,
+        players: teams.map((team, p) => ({ team, axioms: axioms[p], power: { id: POWER_IDS[(g + p * 5) % POWER_IDS.length], tweaks: tweaks || [] } })),
+        options: { mode: 'trainer', first: g % 2 } });
+}
+
+test('every AI level uses its power and plays legal moves to the end; Expert stays fast and deterministic', () => {
+    for (const level of ['normal', 'competent', 'expert']) {
+        const used = {};
+        const times = [];
+        for (let g = 0; g < POWER_IDS.length; g++) {
+            let s = poweredGame(level, g, g % 3 === 2 ? ['deeper', 'broader'] : g % 3 === 1 ? ['blood'] : []);
+            let guard = 0;
+            while (E.winner(s) == null) {
+                const t0 = performance.now();
+                const a = AI.choose(s, { level });
+                if (s.phase === 'main') times.push(performance.now() - t0);
+                if (level === 'expert' && guard % 9 === 0) assert.deepEqual(plain(AI.choose(s, { level })), plain(a), 'Expert repeats its choice');
+                s = E.applyAction(s, a);
+                s.lastEvents.forEach(e => { if (e.t === 'power-use') used[e.id] = (used[e.id] || 0) + 1; });
+                assert.ok(++guard < 3000, 'battle finished');
+            }
+            invariants(s, assert);
+        }
+        assert.ok(Object.keys(used).length >= 8, level + ' used most powers: ' + JSON.stringify(used));
+        if (level === 'expert') {
+            times.sort((a, b) => a - b);
+            const mean = times.reduce((a, b) => a + b, 0) / times.length;
+            // Same limits as battle-ai-levels.test.mjs (Expert's time budget).
+            assert.ok(mean < 120, 'Expert mean move ' + mean.toFixed(1) + ' ms');
+            assert.ok(times[Math.floor(0.95 * (times.length - 1))] < 300, 'Expert 95th-percentile move');
+        }
+    }
+});
+
+test('a battle with powers is deterministic: same seed, same moves, same log', () => {
+    const run = () => AI.playOut(poweredGame('det', 3), ['competent', 'normal']);
+    const a = run(), b = run();
+    assert.deepEqual(E.fullLog(a).map(e => e.text), E.fullLog(b).map(e => e.text));
+    assert.ok(E.fullLog(a).some(e => e.t === 'power-use'), 'a power was used');
+});
+
+test('Normal takes a clear power play: Close the Proof on a 1-health enemy', () => {
+    let s = powered('close-the-proof', [], { p1: ['lobstorian'] });
+    onBoard(s, 'p1c0');
+    s.cards.p1c0.damage = E.healthOf(s, 'p1c0').max - 1;
+    const a = AI.choose(s, { level: 'normal', salt: 'clear' });
+    assert.equal(a.type, 'power');
+    assert.equal(a.target, 'p1c0');
+});

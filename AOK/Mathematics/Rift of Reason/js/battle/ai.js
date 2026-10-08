@@ -48,6 +48,13 @@
  *
  *   The Bag: the AI never uses items (it ignores 'item' actions, also for a player it simulates).
  *
+ *   Hero powers ({ type: 'power' }, data/powers.js): every level weighs the power like any other
+ *   action. Its energy joins the knapsack; a power's `ai` hint adds what the one-ply score can't see
+ *   (Night Sight's tax, Brainstorm's extra play, Outrage before an attack); Foresee and Hold That
+ *   Thought are scored deep (the next Fate event). Normal uses it when that simple score says it
+ *   helps; Competent and Expert also roll it out with the rest of the turn, and Expert's lethal
+ *   search includes it.
+ *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
  *   Bag item actions ({ type: 'item' }) are never chosen by the AI.
@@ -189,6 +196,7 @@
             const def = Eng.activations(s, a.cid).find(x => x.id === a.ability);
             return { id: a.cid, cost: def ? def.cost : 0 };
         }
+        if (a.type === 'power') return { id: 'power', cost: Eng.powerMods(s, s.active).cost };
         return null;
     }
 
@@ -449,7 +457,7 @@
         const out = [];
         for (const a of legal) {
             let key;
-            if (a.type === 'attack' || a.type === 'play' || a.type === 'activate') {
+            if (a.type === 'attack' || a.type === 'play' || a.type === 'activate' || (a.type === 'power' && a.target)) {
                 key = a.type + '>' + signature(s, a.cid, cache) + '>' + (a.ability || '') + '>' + signature(s, a.target, cache);
             } else key = E().actionKey(a);
             if (seen.has(key)) continue;
@@ -470,10 +478,19 @@
         return def && def.ai ? def.ai(s, me, a.target || null, E().H) || 0 : 0;
     }
     const DEEP_ABILITIES = { filter: true, 'next-year': true, axiomatic: true };
+    // Powers that move the rule deck or Fate: only the deep score (next Fate event) sees them.
+    const DEEP_POWERS = { foresee: true, 'hold-that-thought': true };
+
+    // A power's own value hint (data/powers.js `ai`).
+    function powerHint(s, a, me) {
+        const m = E().powerMods(s, me);
+        return m && m.def.ai ? m.def.ai(s, me, a.target || null, E().H, m) || 0 : 0;
+    }
 
     function needsDeep(s, a) {
         if (a.type === 'axiom' || a.type === 'draw') return true;
         if (a.type === 'activate') return !!DEEP_ABILITIES[a.ability];
+        if (a.type === 'power') return !!DEEP_POWERS[s.players[s.active].power.id];
         if (a.type === 'play') {
             const c = s.cards[a.cid];
             if (c.kind === 'tactic') return !!DEEP_TACTICS[c.tactic];
@@ -513,6 +530,7 @@
             let score = settle(next, me, ctx, deep, 0) - base(deep);
             if (a.type === 'end') score -= 0.01;
             if (a.type === 'play') score += tacticHint(s, a, me);
+            if (a.type === 'power') score += powerHint(s, a, me);
             return { a, score };
         });
         // Spend energy on the best combination of cards, not just the best single card.
@@ -723,6 +741,11 @@
         }
         // Every card I can pay for might add a little (a buff, Swift, a direct hit, a cleared Guard).
         for (const cid of P.hand) if (Eng.playCost(s, cid) <= P.energy) dmg += 3;
+        // A ready power that can hit the hero (Pile-On, Outrage, Close the Proof with Broader).
+        if (P.power && !P.power.cooldown) {
+            const m = Eng.powerMods(s, me);
+            if (m.def.face) dmg += m.def.face(s, me, m);
+        }
         return dmg;
     }
 
@@ -746,7 +769,7 @@
             }
             if (st.phase !== 'main' || st.active !== me) return false;
             if (lethalCeiling(st, me) < st.players[1 - me].hearts) return false;
-            const legal = groupActions(st, Eng.legalActions(st).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark'));
+            const legal = groupActions(st, Eng.legalActions(st).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark' || a.type === 'power'));
             legal.sort((x, y) => order(x) - order(y));
             for (const a of legal) {
                 if (++nodes > EXPERT.lethalNodes) return false;
@@ -756,7 +779,7 @@
             }
             return false;
         }
-        const legal = groupActions(s, Eng.legalActions(s).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark'));
+        const legal = groupActions(s, Eng.legalActions(s).filter(a => a.type === 'attack' || a.type === 'play' || a.type === 'activate' || a.type === 'spark' || a.type === 'power'));
         legal.sort((x, y) => order(x) - order(y));
         for (const a of legal) {
             if (++nodes > EXPERT.lethalNodes) return null;
