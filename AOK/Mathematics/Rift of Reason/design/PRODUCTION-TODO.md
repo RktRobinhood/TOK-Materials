@@ -25,7 +25,7 @@ Next for lesson 2: 13.5 Coach Achilles, 13.8 Mr Gumleaf, 13.9 Quill unmasked, 13
 
 `node tools/voices.mjs` shows status per speaker. Avatar voices are approved as plain voice + plain inner voice (`AVATAR-VOICES.md`).
 
-Recorded on 8 Oct: all ten avatar auditions; Nudge (6), and the run for the Guess-o-Matic, Signpost and Corvina.
+Recorded on 8 Oct: all ten avatar auditions; Nudge, Guess-o-Matic, Signpost, Corvina (all their lines); inner-voice lines (22 each) for the five flash avatars: Owlet boy, Moth-kin girl, Fox boy, Frogling girl, Raven boy (spot check: words exact). Next quota day: the other five inner voices (lite: `--only avatar-owlet-girl-inner` etc.).
 
 Still to record for lesson 1 (spend the daily quota here first):
 - The ten avatars' spoken lines and inner lines (one request each per day; `--only avatar-owlet-boy`, `--only avatar-owlet-boy-inner`, …). These include the approved inner-voice lead bank (`data/script/leads.js`), which covers all chapters.
