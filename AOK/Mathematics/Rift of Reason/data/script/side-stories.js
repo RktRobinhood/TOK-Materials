@@ -80,9 +80,10 @@
  *   { verb: 'deduce', rounds: [ { q: 'Which tin holds the cake?', options: [...],
  *       why: { q: 'Why?', options: [...] }, right: [steps] } ] }
  * test — choose the test that could prove the claim wrong (optional table and a follow-up):
- *   { verb: 'test', rounds: [ { q: 'Which data would show if wishing works?', options: [...],
- *       table: v => [['', 'Goal', 'No goal'], ['Wished', v.a, 10 - v.a], ['Did not', v.b, 10 - v.b]],
- *       then: { q: 'Does wishing help?', options: [...] } } ] }
+ *   { verb: 'test', rounds: [ { q: 'Which data would show if wishing works?', options: [...] },
+ *       { q: 'Does wishing help?', options: [...],     // a table shows on every ask of its round,
+ *         table: v => [['', 'Goal', 'No goal'], ['Wished', v.a, 10 - v.a], ['Did not', v.b, 10 - v.b]] } ] }
+ *   (or one round with then: { q, options } as a follow-up, when no table would give the first ask away)
  * object — a 3–4 line mini cross-examination; each round is one witness line:
  *   { verb: 'object', rounds: [ { line: [steps], press: [steps],      // press: a free "Press" button
  *       q: 'Your reply?', options: [...],                             // or present: 'clip' (a clue card id)
