@@ -104,6 +104,7 @@
         "hum-charm.png": {"type":"islands","minArea":600,"class":"item","ids":["item/hum-charm","keepsake/granny-charm-glasses"]},
         "nudge-clipboard.png": {"type":"single","id":"npc/nudge/clipboard","class":"bust"},
         "hoots-gavel.png": {"type":"single","id":"item/hoots-gavel","class":"item"},
+        "kuku.png": {"type":"islands","minArea":2500,"ids":["npc/kuku/idle",["npc/kuku/neutral","npc/kuku"],"npc/kuku/happy","npc/kuku/surprised","npc/kuku/angry"]},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

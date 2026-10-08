@@ -737,6 +737,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > One small prop on a transparent canvas, no text. Match the style board and the Lucky Sequin sheet above (same finish and scale); it must read at 32 px. Judge Hoot's gavel: a small, well-worn wooden judge's gavel lying at a slight angle, dark polished wood with a brass band round the head, a tiny carved owl feather on the handle, and a few cyan sparks flying off the striking face as if it has just come down.
 
+
+### 13.6 Kuku (session of 8 October)
+
+**Attach:** `style-board.png`, `sundial.png`, `granny-axiom.png`
+**Save as:** `3-cast/kuku.png`
+**Ids:** `npc/kuku/idle`, `npc/kuku/neutral` (also `npc/kuku`), `npc/kuku/happy`, `npc/kuku/surprised`, `npc/kuku/angry` (the Sundial's pose set)
+
+> One transparent canvas, no text, no numbers, clear space between figures. A full-body idle, then four head-and-shoulders busts in one row: neutral, happy, surprised, angry. Match the style board and the Sundial and Granny sheets above (painted with the same finish). Kuku: a carved wooden cuckoo, painted in chipped red and cream with a blue stripe on the beak and a tiny brass bandsman's cap, bright black bead eyes, chest puffed out, very proud. He lives in Granny's old hallway cuckoo clock: a tall carved chalet clock with pine eaves, little shutters, two pine-cone weights on chains and a pendulum, a plain clock face with only hands and tick marks (no numerals), a little dusty, with a small blank cardboard tag tied on with string. Idle: the whole clock, Kuku popped out of the little doors on his coiled brass spring. Busts: Kuku on his spring with the open doors and eaves just behind him. Neutral: proud and upright. Happy: mid-cuckoo, beak wide open. Surprised: the spring stretched out as far as it goes, eyes huge. Angry: the doors half shut on him, glaring out through the gap.
+
 ---
 
 ## Outcome log
@@ -886,3 +895,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.41 + 13.24b Hum Charm, Granny's keepsake | First try (2026-10-08) | Round brass charm with an engraved spiral and sound lines, cream tassel, knotted lavender cord (matches Achilles' charm); the same charm with round gold glasses on a folded corner of her fringed lavender shawl. Both read at 32 px. Sliced into item/hum-charm and keepsake/granny-charm-glasses. |
 | 13.36 Nudge with its clipboard | First try (2026-10-08) | Same Nudge, eyes shut in glee, holding up a brass-clipped glowing cyan screen with streaming hearts and thumbs-up, no writing; the glow lights its chin. Single bust, npc/nudge/clipboard. |
 | 13.37 Hoot's Gavel | First try (2026-10-08) | Polished dark-wood gavel with a brass band and a gold feather carved on the handle, cyan sparks off the striking face. Reads at 32 px. Single item, item/hoots-gavel. |
+| 13.6 Kuku | First try (2026-10-08) | Red-and-cream carved cuckoo in a brass-trimmed bandsman's cap on a coiled spring; the idle is the whole mossy chalet clock (face with hands and ticks only, pine-cone weights, pendulum, blank tag); busts in the open doorway: proud, mid-cuckoo, spring stretched with eyes huge, glaring from behind half-shut doors. Sliced into npc/kuku/{idle,neutral,happy,surprised,angry} (npc/kuku = neutral); the Sundial's death can now arm. |
