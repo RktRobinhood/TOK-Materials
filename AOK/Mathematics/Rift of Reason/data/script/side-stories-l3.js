@@ -62,7 +62,7 @@
                     owlet: '"March or be a coward." Two options? I count at least four.',
                     mothkin: 'Ooh, glowing eyes. So pretty. …Wait. The front rank doesn\'t glow. Or blink.',
                     fox: 'Tell him: picture the Fair without its Sergeant.',
-                    frogling: 'At the Fair, eyes glowed just before the sky split. Syllo shouted it.',
+                    frogling: 'Last time eyes glowed here, the sky split. Syllo shouted it.',
                     raven: '"Everyone." Count them. It\'s eleven.',
                 } },
                 { choice: [
@@ -222,12 +222,12 @@
                 { s: 'syllo', t: 'The wooden ones still want a war. I\'ll find them a useful one.', when: 'soldiers' },
             ],
             3: [
-                { note: 'The drum stumbles before the last boom. Half the recruits still glowing march off down the Road anyway.' },
+                { note: 'The drum stumbles before the last boom. Half the recruits march off anyway, still glowing.' },
                 { note: 'An hour later they march back, shouting. Nobody remembers why they left.' },
                 { s: 'syllo', t: 'They came BACK! …They\'re louder now. Is that good?' },
             ],
             4: [
-                { note: 'The last boom. Every recruit still glowing marches off down the Road, in perfect step.' },
+                { note: 'The last boom. Every recruit who still glows marches off down the Road, in perfect step.' },
                 { note: 'The wooden front rank stays, at attention.' },
                 { s: 'syllo', t: 'Wait! Recruits! You forgot your sergeant!' },
                 { note: 'He grabs the drum and runs after them. The Gallery door swings shut behind him.' },
@@ -283,7 +283,7 @@
         },
         start: [
             { note: 'On the Newsstand steps, today\'s front page: TREMENDOODLE SAYS SPEECHES ARE A DISASTER.' },
-            { s: 'attenbirdough', t: 'Pip kept the record here. Somebody must referee today. …You, please.', when: NO_PIP },
+            { s: 'attenbirdough', t: 'Pip kept the record here. I still look for the notebook. …Somebody must referee. You, please.', when: NO_PIP },
             { s: 'tremendoodle', t: 'A DISASTER, they say I said! Fake! Sleepy Puffin printed it! I want an apology. FRONT page!' },
             { s: 'attenbirdough', t: 'Here we see the poodle in its natural habitat. Outraged.' },
             { s: 'pip', t: 'You\'re the referee. Press a claim. Any claim. Please.', when: PIP },
@@ -365,7 +365,7 @@
                     press: [{ s: 'tremendoodle', t: 'Some are angry at me. Doesn\'t matter. Angry is angry. Tremendous.' }],
                     q: 'Your reply?',
                     options: [
-                        { t: 'Where does the article say "disaster"? An angry crowd isn\'t evidence. Page nine is.', ok: true },
+                        { t: 'An angry crowd isn\'t evidence. Read page nine first. Then judge the paper.', ok: true },
                         { t: 'Your crowd is small. Mine is bigger.', say: [
                             { s: 'tremendoodle', t: 'Mine is TREMENDOUS! …Wait. Now we\'re both counting.' },
                         ] },

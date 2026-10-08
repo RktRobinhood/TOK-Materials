@@ -125,5 +125,6 @@ test('a trainer away on a side story cannot be challenged; the card school still
  assert.equal(g.Rift.Battles.canChallenge('fair-gate'),false);
  g.Rift.Battles.offer('fair-gate');const m=g.modals.at(-1);
  assert.equal(m.title,'Card school');assert.equal(m.buttons.map(b=>b.label).join(' | '),'Later | Learn the card game');
+ g.Rift.Battles.storyOffer();assert.equal(g.modals.at(-1).title,'Card school','a time-rift jumper without the Road match only learns');
  g.state.flags['finale-open']=true;assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true,'home on the restored Fair');
 });

@@ -159,7 +159,7 @@
         { s: 'narrator', t: 'The lanterns. One is dark. It was the shiniest.', when: '!dead:granny' },
         { s: 'narrator', t: 'The lanterns. Two are dark. One of them was the shiniest.', when: 'dead:granny' },
         { s: 'syllo', t: 'His lantern went out, recruit. I saluted it. I didn\'t know what else to do.', when: SYLLO_HERE },
-        { s: 'narrator', t: 'Someone has pinned a tiny paper salute to the lantern post.', when: { not: SYLLO_HERE } },
+        { s: 'narrator', t: 'Someone has pinned a tiny paper medal to the lantern post. Syllo\'s handwriting.', when: { not: SYLLO_HERE } },
     ];
 
     // The Pattern Stall. Sequins is away from the theft until the Gate (a sign on the curtain);

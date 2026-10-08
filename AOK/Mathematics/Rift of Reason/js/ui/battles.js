@@ -273,6 +273,9 @@
         },
 
         storyOffer() {
+            // Syllo is away after his recruits (side story 7, tier 4): the card school only teaches.
+            const f=Rift.State.get().flags||{};
+            if(f['syllo-away']&&!f['finale-open']){Battles.schoolOnly();return;}
             const host=Rift.data.speakers.syllo;
             Rift.UI.modal('Syllo’s Road challenge',el('div.stack',null,[
                 Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
@@ -309,12 +312,16 @@
             });
         },
 
+        schoolOnly() {
+            Rift.UI.modal('Card school',el('p',{text:'Nobody to challenge today. You can still learn the card game.'}),
+                [{label:'Later'},{label:'Learn the card game',primary:true,onclick:()=>Battles.learn('map')}]);
+        },
+
         offer(nodeId, activity) {
             const n=Rift.World.node(nodeId), t=Rift.data.trainers[n.trainer], host=Rift.data.speakers[t.speaker];
             if(!Battles.canChallenge(nodeId)){
                 // The card school still teaches while its trainer is away (side story 7: syllo-away).
-                if(n.cardSchool)Rift.UI.modal('Card school',el('p',{text:'Nobody to challenge today. You can still learn the card game.'}),
-                    [{label:'Later'},{label:'Learn the card game',primary:true,onclick:()=>Battles.learn('map')}]);
+                if(n.cardSchool)Battles.schoolOnly();
                 else if(activity)activity();
                 return;
             }
