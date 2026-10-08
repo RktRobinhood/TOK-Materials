@@ -52,6 +52,12 @@
  * Picture buttons (draw choice, side, guide, Bag, Spark) show their name in a small tooltip on
  * hover, keyboard focus or long-press (art ui/btn-draw-deck, ui/btn-draw-axiom, ui/btn-fate-forward,
  * ui/btn-fate-rewind, ui/btn-rules, ui/btn-help, ui/btn-leave, ui/btn-replay; else inline SVG).
+ * Hero power (design/AVATARS.md 1.6; engine powerStatus): a round button by each hero (art ui/power-<id>,
+ * else a symbol from js/ui/powers.js) with its cost in an energy gem (a heart with Blood price), the
+ * turns left over a dimmed button while it rests, and "Used" in the turn it was used. Mine is clicked
+ * (a power with a target then waits for a glowing target, like an ability); the opponent's only shows
+ * its state, and its use is shown big first. No button when a side has no power (Granny's lesson).
+ * Cards the engine lets me know (Night Sight) lie face up in the opponent's hand, tagged "Seen".
  */
 (function (root) {
     'use strict';
@@ -366,6 +372,7 @@
                 if (sel.kind === 'hand' && a.type === 'play' && a.cid === sel.cid) out.set(a.target, a);
                 if (sel.kind === 'activate' && a.type === 'activate' && a.cid === sel.cid && a.ability === sel.ability) out.set(a.target, a);
                 if (sel.kind === 'item' && a.type === 'item' && a.id === sel.id) out.set(a.target, a);
+                if (sel.kind === 'power' && a.type === 'power') out.set(a.target, a);
             });
             return out;
         }
@@ -417,8 +424,15 @@
                 ui.timer = setTimeout(() => perform(action, true), REVEAL);
                 return;
             }
-            if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate')) {
-                ui.preview = { cid: action.cid, target, by, action };
+            // The opponent's power is shown big too, then (with a target) its arrow.
+            if (by === OPP && !revealed && action.type === 'power' && state.players[OPP].power) {
+                const pw = state.players[OPP].power;
+                showReveal(powerBig(pw.id, OPP), oppName + ' uses the power ' + powerName(pw.id) + (target ? ' on ' + targetName(target) : ''), REVEAL, 'power', false);
+                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                return;
+            }
+            if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate' || action.type === 'power')) {
+                ui.preview = { cid: action.type === 'power' ? 'pw' + by : action.cid, target, by, action };
                 render();
                 ui.timer = setTimeout(() => { ui.preview = null; act(action); }, PREVIEW);
             } else act(action);
@@ -506,6 +520,7 @@
                 if (ev.t === 'fight') sfx('block');
                 if (ev.t === 'defeated') sfx('defeat');
                 if (ev.t === 'axiom' || ev.t === 'reset') sfx('axiom');
+                if (ev.t === 'power-use') sfx('jingle');
             });
         }
 
@@ -771,7 +786,20 @@
             if (legal().some(a => a.type === 'play' && a.cid === cid)) return null;
             return el('div.b-note-line.b-why', { text: 'Can\'t play it now: ' + whyNot(cid) });
         }
+        // A card in the opponent's hand that I may see (Night Sight): say so under the big copy.
+        function seenNote(cid) {
+            if (!state.players[OPP].hand.includes(cid)) return null;
+            const sight = (state.players[ME].sight || []).includes(cid);
+            return el('div.b-note-line.b-seen-note', {}, [el('b', { text: '👁 Seen: ' }), 'this card is in ' + oppName + '\'s hand'
+                + (sight ? '. You see it with Night Sight until your next turn.' : '. You know it is there.')]);
+        }
         function cardPreview(cid) {
+            const out = cardPreviewOf(cid);
+            const seen = seenNote(cid);
+            if (seen) out[1].appendChild(seen);
+            return out;
+        }
+        function cardPreviewOf(cid) {
             const big = cardEl(cid, { size: 'big' });
             if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
             const d = E.describe(state, cid);
@@ -1085,6 +1113,92 @@
             ]);
         }
 
+        // ---- hero power: a round button by the hero (design/AVATARS.md 1.6) ----
+        const powerDef = id => (Rift.data.powers || {})[id] || { name: id, text: '' };
+        const powerName = id => powerDef(id).name;
+        function powerIcon(id, cls) {
+            if (Rift.PowerView) return Rift.PowerView.icon(id, cls);
+            return el('span.pw-icon.pw-glyph' + (cls ? '.' + cls : ''), { text: '✷', 'aria-hidden': 'true' });
+        }
+        // The counter counts its owner's turns: 'on your next turn', 'in 3 of their turns'.
+        const turnsWords = (n, pi) => (n === 1 ? 'on ' + (pi === OPP ? 'their' : 'your') + ' next turn' : 'in ' + n + ' of ' + (pi === OPP ? 'their' : 'your') + ' turns');
+        // Used this turn: the counter still holds its full value (recharge + 1) during its owner's turn.
+        const powerUsedNow = (pi, st) => state.active === pi && !st.ready && st.turnsLeft === st.recharge + 1 && E.winner(state) == null;
+        // Why my power can't be used now ('' when it can).
+        function powerWhy(st, L) {
+            if (L.some(a => a.type === 'power')) return '';
+            if (ui.ended || E.winner(state) != null) return 'The battle is over.';
+            if (powerUsedNow(ME, st)) return 'You used it this turn. It is ready again ' + turnsWords(st.turnsLeft, ME) + '.';
+            if (!st.ready) return 'It is resting: ready ' + turnsWords(st.turnsLeft, ME) + '.';
+            if (guide && !ui.busy) return 'Not now. Follow the gold pointer.';
+            if (ui.busy || decider() !== ME) return 'Wait for your turn.';
+            return st.note || 'Not now.';
+        }
+        // The power big (an opponent's power as it is used, the Recent plays preview).
+        function powerBig(id, pi) {
+            const st = E.powerStatus(state, pi);
+            const x = st && st.id === id ? st : Object.assign({ cost: powerDef(id).cost, heartCost: 0, recharge: powerDef(id).recharge }, Rift.PowerView ? Rift.PowerView.numbers(id) : {}, { name: powerName(id), text: powerDef(id).text });
+            const cost = x.heartCost ? x.heartCost + ' heart' : x.cost ? x.cost + ' energy' : 'free';
+            return el('div.b-power-big' + (pi === ME ? '.mine' : '.theirs'), {}, [
+                el('div.b-power-big-ring', {}, [powerIcon(id)]),
+                el('div.b-power-big-who', { text: (pi === ME ? 'Your' : oppName + '\'s') + ' power' }),
+                el('strong.b-power-big-name', { text: x.name }),
+                el('div.b-power-big-text', { text: x.text }),
+                el('div.b-power-big-stats', { text: 'Cost: ' + cost + ' · ' + (x.recharge ? 'rests ' + x.recharge + ' turn' + (x.recharge === 1 ? '' : 's') + ' after use' : 'ready every turn') }),
+            ]);
+        }
+        function powerEl(pi, L) {
+            const st = E.powerStatus ? E.powerStatus(state, pi) : null;
+            if (!st) return null;
+            const mine = pi === ME;
+            const can = mine && L.some(a => a.type === 'power');
+            const used = powerUsedNow(pi, st);
+            const resting = !st.ready && !used;
+            const poor = st.why === 'energy' || st.why === 'hearts';
+            const idle = mine && !can && st.ready && !poor && (st.why === 'useless' || st.why === 'target');
+            const chosen = mine && ui.sel && ui.sel.kind === 'power';
+            const heart = st.heartCost > 0;
+            const costArt = bg(heart ? 'ui/heart-full' : 'ui/stat-cost');
+            const costText = heart ? st.heartCost + ' heart' : st.cost ? st.cost + ' energy' : 'free';
+            const why = mine ? powerWhy(st, L) : '';
+            const stateLine = mine
+                ? (can ? (st.target ? 'Click it, then click a glowing target.' : 'Click to use it.') : 'Not now: ' + why)
+                : used ? 'Used this turn.' : resting ? 'Resting: ready ' + turnsWords(st.turnsLeft, pi) + '.' : 'Ready.';
+            const rest = st.recharge ? 'Rests ' + st.recharge + ' turn' + (st.recharge === 1 ? '' : 's') + ' after use.' : 'Ready every turn.';
+            const detail = st.text + ' Cost: ' + costText + '. ' + rest + ' Not a card play. ' + stateLine;
+            const node = el((mine ? 'button' : 'div') + '.b-power' + (mine ? '.mine' : '.theirs') + (can ? '.ready' : '') + (used ? '.used' : '') + (resting ? '.resting' : '')
+                + (poor ? '.poor' : '') + (idle ? '.idle' : '') + (chosen ? '.selected' : ''), {
+                type: mine ? 'button' : null, tabindex: mine ? null : 0, dataset: { power: st.id },
+                'aria-disabled': mine && !can ? 'true' : null,
+                'aria-label': (mine ? 'Your power: ' : oppName + '\'s power: ') + st.name + ', ' + costText + '. ' + (mine ? (can ? 'Ready.' : 'Not now: ' + why) : stateLine),
+            }, [
+                powerIcon(st.id, 'b-pw-pic'),
+                el('span.b-pw-cost' + (heart ? '.heart' : '') + (costArt ? '.art' : ''), { style: costArt, text: String(heart ? st.heartCost : st.cost), 'aria-hidden': 'true' }),
+                resting ? el('span.b-pw-wait', { text: String(st.turnsLeft), 'aria-hidden': 'true' }) : null,
+                used ? el('span.b-pw-used', { text: 'Used', 'aria-hidden': 'true' }) : null,
+            ]);
+            if (mine) node.addEventListener('click', () => { if (!ui.tipSuppress && !ui.suppressClick) { hideTip(); clickPower(L); } });
+            tipFor(node, 'power:' + pi, (mine ? 'Your power: ' : oppName + '\'s power: ') + st.name, detail);
+            nodes['pw' + pi] = node;
+            return node;
+        }
+        function clickPower(L) {
+            const acts = L.filter(a => a.type === 'power');
+            if (!acts.length) { ui.sel = null; setNote(powerWhy(E.powerStatus(state, ME), L)); return; }
+            if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
+            ui.sel = ui.sel && ui.sel.kind === 'power' ? null : { kind: 'power' };
+            render();
+        }
+        // Worth a look before End turn: a usable power, except Brainstorm with no card to play.
+        function powerWorth(L) {
+            if (!L.some(a => a.type === 'power')) return false;
+            const st = E.powerStatus(state, ME);
+            if (!st || st.id !== 'brainstorm') return true;
+            const P = state.players[ME];
+            const energy = P.energy - st.cost + (st.tweaks.includes('broader') ? 1 : 0);
+            return P.hand.some(cid => E.playCost(state, cid) <= energy) || P.axHand.some(id => axiomChanges(id) && E.axiomCost(state, id) <= energy);
+        }
+
         // "grows by 1 each turn (up to 10)", "stays the same", "shrinks by 1 each turn (never below 1)".
         const growthWords = g => (g > 0 ? 'grows by ' + g + ' each turn (up to ' + state.options.energyCap + ')' : g === 0 ? 'stays the same each turn' : 'shrinks by ' + -g + ' each turn (never below 1)');
         // Card plays left this turn (the Plays rule): a row of card icons, used ones dim.
@@ -1113,9 +1227,12 @@
                 el('div.b-energy-num', {}, [el('strong', { text: String(P.energy) }), el('span', { text: '/' + cap })]),
                 el('div.b-energy-label', { text: 'Energy' }),
                 pi === ME && E.playsLeft ? playsEl() : null,
+                // Night Sight's tax: the next card(s) this player plays cost 1 more.
+                P.tax > 0 ? el('div.b-tax', { text: (P.tax === 1 ? 'Next card' : 'Next ' + P.tax + ' cards') + ' +1 ⚡' }) : null,
             ]);
             tipFor(node, 'energy:' + pi, (pi === ME ? 'Your energy: ' : oppName + '\'s energy: ') + P.energy + ' of ' + cap,
-                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacking is free.');
+                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacking is free.'
+                + (P.tax > 0 ? ' Night Sight: the next ' + (P.tax === 1 ? 'card' : P.tax + ' cards') + ' played cost' + (P.tax === 1 ? 's' : '') + ' 1 more.' : ''));
             return node;
         }
 
@@ -1149,13 +1266,21 @@
 
             // opponent hand
             dom.oppHand.innerHTML = '';
+            // Cards I know (Night Sight) lie face up, tagged "Seen"; only what the engine tells me.
             const knows = state.players[ME].knows;
-            state.players[OPP].hand.forEach(cid => dom.oppHand.appendChild(knows.includes(cid) ? cardEl(cid, { size: 'mini', classes: ['revealed'] }) : cardBack(false)));
+            state.players[OPP].hand.forEach(cid => {
+                if (!knows.includes(cid)) { dom.oppHand.appendChild(cardBack(false)); return; }
+                const seen = cardEl(cid, { size: 'mini', classes: ['revealed'] });
+                seen.appendChild(el('span.b-seen-tag', { text: 'Seen', 'aria-hidden': 'true' }));
+                seen.setAttribute('aria-label', 'Seen in ' + oppName + '\'s hand: ' + seen.getAttribute('aria-label'));
+                dom.oppHand.appendChild(seen);
+            });
             state.players[OPP].axHand.forEach(() => dom.oppHand.appendChild(cardBack(true)));
 
-            // hero rows: hero and pile counts on the left, energy on the right
+            // hero rows: hero, power and pile counts on the left, energy on the right
             dom.oppLeft.innerHTML = '';
-            put(dom.oppLeft, heroEl(OPP, valid, L), infoEl(OPP));
+            const oppPower = powerEl(OPP, L);
+            put(dom.oppLeft, heroEl(OPP, valid, L), oppPower ? el('div.b-left.b-left-opp', {}, [oppPower, infoEl(OPP)]) : infoEl(OPP));
             dom.oppRight.innerHTML = '';
             put(dom.oppRight, energyEl(OPP));
             const P = state.players[ME];
@@ -1163,6 +1288,7 @@
             const sparkStyle = bg('ui/spark');
             dom.myLeft.innerHTML = '';
             put(dom.myLeft, heroEl(ME, valid, L), el('div.b-left', {}, [
+                powerEl(ME, L),
                 infoEl(ME),
                 P.spark ? iconButton('.b-spark' + (sparkStyle ? '.art' : '') + (ui.sparkFor ? '.glow' : ''), {
                     key: 'spark', name: 'Spark', label: 'Spark: +1 energy',
@@ -1628,6 +1754,7 @@
                             : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
                                 : canActivate ? 'Click a ready creature (green glow) to use its ability.'
                                     : ui.sparkFor ? 'Use the Spark (+1 energy) to play ' + ui.sparkFor + '?'
+                                        : powerWorth(L) ? 'You can still use your power (the round button by your hero), or press End turn.'
                                         : L.some(a => a.type === 'item') ? 'You can still use an item from your Bag (bottom right), or press End turn.'
                                         : 'Nothing left to do. Press End turn.';
                 } else if (sel.kind === 'board') {
@@ -1649,6 +1776,9 @@
                     }
                 } else if (sel.kind === 'activate') {
                     ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
+                } else if (sel.kind === 'power') {
+                    const st = E.powerStatus(state, ME);
+                    ask.textContent = targetMap(sel, L).size ? 'Now click a glowing target for ' + st.name + ' (or Cancel).' : st.name + ': ' + powerWhy(st, L);
                 } else if (sel.kind === 'item') {
                     itemPrompt(sel, L, ask, buttons);
                 } else if (sel.kind === 'hand') {
@@ -1705,6 +1835,7 @@
                 if (ev.t === 'hit' && ev.player === ME) lost += ev.amount || 0;
                 if (ev.t === 'defeated' && ev.player === ME && state.cards[ev.cid]) fell.push(name(ev.cid));
                 if ((ev.t === 'play' || ev.t === 'tactic-play') && ev.player === OPP && state.cards[ev.cid]) played.push(name(ev.cid));
+                if (ev.t === 'power-use' && ev.player === OPP) bits.push('used ' + powerName(ev.id) + (ev.target && state.cards[ev.target] ? ' on ' + targetName(ev.target) : ''));
                 if (ev.t === 'axiom' && AX[ev.id]) bits.push(AX[ev.id].basic ? ruleWords(AX[ev.id]) + ' (as before)' : 'new rule: ' + ruleWords(AX[ev.id]));
                 if (ev.t === 'reset') bits.push('all rules reset');
             });
@@ -1755,8 +1886,8 @@
         function renderEnd(L) {
             dom.end.innerHTML = '';
             const end = L.find(a => a.type === 'end');
-            // The hero power has no button yet (issue #52), so it does not stop the End turn glow.
-            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark' && a.type !== 'item' && a.type !== 'power');
+            // A usable power stops the glow (Brainstorm only when there is a card it would let me play).
+            const onlyEnd = end && !ui.sparkFor && !powerWorth(L) && !L.some(a => a.type !== 'end' && a.type !== 'spark' && a.type !== 'item' && a.type !== 'power');
             const style = bg('ui/end-turn');
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
@@ -1985,13 +2116,14 @@
             else if (card && state.cards[card].kind === 'creature') pic = Rift.Assets.img('creature/' + state.cards[card].species + '/idle', { alt: '', label: name(card) });
             else if (card && has('tactic/' + state.cards[card].tactic)) pic = Rift.Assets.img('tactic/' + state.cards[card].tactic, { alt: '' });
             else if (ev.t === 'reset') pic = icon('ui/fate-reset', '↺', 'b-recent-glyph');
+            else if (ev.t === 'power-use') pic = powerIcon(ev.id, 'b-recent-glyph');
             else pic = el('span.b-recent-glyph', { text: MOVES[ev.t] || '•' });
             const text = visibleText(ev) || '';
             const tile = el('div.b-recent-tile.' + (ev.player === ME ? 'mine' : ev.player === OPP ? 'theirs' : 'fate') + (i === 0 ? '.newest' : ''), {
                 tabindex: 0, role: 'button', 'aria-label': text + (m.after.length ? ' ' + m.after.join(' ') : ''),
             }, [pic, el('span.b-recent-move', { text: MOVES[ev.t] || '•', 'aria-hidden': 'true' }), el('span.b-recent-who', { text: by === 'You' ? 'You' : by === 'Fate' ? 'Fate' : 'Them', 'aria-hidden': 'true' })]);
             const make = () => {
-                const big = axId ? axiomCardEl(axId, { size: 'big' }) : card ? cardEl(card, { size: 'big', unregistered: true }) : null;
+                const big = axId ? axiomCardEl(axId, { size: 'big' }) : ev.t === 'power-use' ? powerBig(ev.id, ev.player) : card ? cardEl(card, { size: 'big', unregistered: true }) : null;
                 return [big, el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: text })])].concat(
                     m.after.slice(0, 5).map(t => el('div.b-note-line', { text: t }))))];
             };
@@ -2641,6 +2773,7 @@
                     if (rule) float(ev.defender, '⚖ ' + (rule.short || rule.name), 'rule', before);
                 }
                 if (ev.t === 'item-use') float(ev.target || 'h' + ev.player, ((Rift.data.items || {})[ev.id] || { name: ev.id }).name, 'info', before);
+                if (ev.t === 'power-use') float(ev.target || 'pw' + ev.player, powerName(ev.id), 'info', before);
                 if (ev.t === 'defeated' && before[ev.cid]) {
                     const r = before[ev.cid];
                     const ghost = r.node.cloneNode ? r.node.cloneNode(true) : null;

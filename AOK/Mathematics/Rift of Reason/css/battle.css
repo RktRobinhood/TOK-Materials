@@ -1018,3 +1018,76 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 /* The gold pointer anchors to the Play / Activate button itself. */
 .b-buttons .btn { position: relative; }
 .bc-guard { bottom: -12%; width: 30%; }
+
+/* ---- hero power (design/AVATARS.md 1.6): a round button by each hero (no looping motion) ----
+ * Cost in an energy gem (a heart with Blood price) on its top left; while it rests, the turns left over
+ * a dimmed picture; "Used" under it in the turn it was used. Mine glows green when it can be used. */
+.b-left-opp { flex-direction: row; align-items: flex-start; gap: 12px; }
+.b-power {
+    --pw: clamp(44px, calc(var(--hero) * 0.72), 62px);
+    position: relative; flex: none; width: var(--pw); height: var(--pw); padding: 0; border-radius: 50%;
+    display: grid; place-items: center; font: inherit; color: var(--parchment);
+    background: radial-gradient(circle at 50% 38%, #4d3c6c, #1b1229 76%);
+    border: 3px solid #b08a3a; box-shadow: 0 3px 0 var(--ink), 0 4px 12px rgba(0, 0, 0, 0.6);
+    cursor: pointer; -webkit-touch-callout: none; touch-action: manipulation;
+    transition: filter 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.b-power.theirs { cursor: help; border-color: #c9765a; }
+.b-power .pw-icon { width: 74%; height: 74%; border-radius: 50%; object-fit: cover; pointer-events: none; }
+.b-power .pw-glyph { display: grid; place-items: center; font-size: calc(var(--pw) * 0.46); line-height: 1; color: var(--gold); }
+.b-power.ready { border-color: var(--ready); box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.55), 0 0 18px rgba(61, 220, 132, 0.8); }
+.b-power.ready:hover, .b-power:focus-visible { filter: brightness(1.2); }
+.b-power:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.b-power.ready:active { transform: translateY(2px); }
+.b-power.selected { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold), 0 0 22px rgba(242, 182, 50, 0.85); }
+.b-power.resting, .b-power.used { border-color: #5a4a6a; background: radial-gradient(circle at 50% 38%, #2c2340, #120c1c 76%); }
+.b-power.resting .pw-icon, .b-power.used .pw-icon { opacity: 0.3; filter: grayscale(1); }
+.b-power.idle .pw-icon, .b-power.poor .pw-icon { opacity: 0.6; filter: grayscale(0.6); }
+.b-pw-cost {
+    position: absolute; left: -7px; top: -7px; z-index: 2; width: 23px; height: 23px; pointer-events: none;
+    display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 14px; line-height: 1; color: #fff;
+    border-radius: 50%; background: radial-gradient(circle at 35% 30%, #9fd8ff, #2f7bff 70%); border: 2px solid #d8f0ff;
+    text-shadow: 0 0 3px #000, 0 1px 1px #000; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+.b-pw-cost.heart { border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 40% 35%, #ff6b7d, #b0172f 70%); border-color: #2a0b12; }
+.b-pw-cost.art { background: center / contain no-repeat; border: 0; box-shadow: none; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8)); }
+.b-power.poor .b-pw-cost:not(.art) { background: radial-gradient(circle at 35% 30%, #ffb3a8, #c0392b 70%); border-color: #ffd0c8; }
+.b-power.poor .b-pw-cost.art { filter: sepia(1) saturate(4) hue-rotate(-30deg) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8)); }
+.b-pw-wait {
+    position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; pointer-events: none;
+    font-family: var(--font-display); font-weight: 800; font-size: calc(var(--pw) * 0.52); line-height: 1; color: #fff;
+    text-shadow: 0 0 4px #000, 0 0 2px #000, 0 2px 3px #000;
+}
+.b-pw-used {
+    position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); z-index: 2; pointer-events: none; white-space: nowrap;
+    font-size: 11px; font-weight: 800; line-height: 1.35; padding: 0 6px; border-radius: 6px; color: var(--ink); background: var(--gold);
+}
+/* The power shown big: an opponent's power as it is used, and the Recent plays preview. */
+.b-power-big {
+    width: var(--inspect-w); max-width: 260px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+    padding: 12px 14px; border-radius: 16px; background: rgba(14, 10, 24, 0.96); border: 2px solid var(--gold); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+}
+.b-power-big.theirs { border-color: #ff8a6a; }
+.b-power-big-ring {
+    width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+    background: radial-gradient(circle at 50% 38%, #4d3c6c, #1b1229 76%); border: 3px solid #b08a3a;
+}
+.b-power-big-ring .pw-icon { width: 100%; height: 100%; object-fit: cover; }
+.b-power-big-ring .pw-glyph { display: grid; place-items: center; font-size: 42px; line-height: 1; color: var(--gold); }
+.b-power-big-who { font-size: 11.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+.b-power-big-name { font-family: var(--font-display); font-size: 20px; color: var(--gold); }
+.b-power-big-text { font-size: 14.5px; line-height: 1.35; }
+.b-power-big-stats { font-size: 12px; opacity: 0.85; }
+.b-reveal .b-power-big { width: clamp(190px, 26cqh, 260px); }
+.b-inspect .b-power-big { width: 100%; max-width: none; box-sizing: border-box; }
+/* Recent plays: a power's picture in the round. */
+.b-recent-tile > .pw-icon { border-radius: 50%; }
+/* Night Sight: the opponent's cards I can see lie face up, tagged "Seen". */
+.b-opp-hand > .bc.revealed { outline: 2px solid var(--rift); box-shadow: 0 0 12px rgba(63, 224, 208, 0.6); z-index: 2; }
+.b-seen-tag {
+    position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); z-index: 3; pointer-events: none; white-space: nowrap;
+    font-size: 10.5px; font-weight: 800; line-height: 1.3; padding: 0 5px; border-radius: 6px; color: var(--ink); background: var(--rift);
+}
+.b-note-line.b-seen-note b { color: var(--rift); }
+/* Night Sight's tax on the next card, under the energy. */
+.b-tax { grid-column: 1 / span 2; margin-top: 3px; text-align: center; font-size: 11.5px; font-weight: 800; color: #ffb3a8; white-space: nowrap; }
