@@ -347,8 +347,18 @@
                 name: 'The Library', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 340, y: 239,
                 scene: 'scene/evidence-room', script: 'ch3.library',
                 puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'proof' } }],
-                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-cafe', 't-plaza'],
+                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-cafe', 't-plaza', 't-reading-room'],
                 teaser: 'Silent shelves. Someone claims to have proved something that is not quite true.',
+            },
+            // Optional (#62): logic grid, off the Library. Off the required path.
+            't-reading-room': {
+                host: 'pip', goal: 'A claim is settled when the evidence rules out every other possibility.',
+                intro: 'station.t-reading-room.intro', reminder: 'station.t-reading-room.reminder',
+                name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 214, y: 190,
+                scene: 'scene/evidence-room',
+                puzzles: [{ id: 'logic-grid', difficulty: 1 }, { id: 'logic-grid', difficulty: 2 }, { id: 'logic-grid', difficulty: 3 }],
+                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-library'],
+                teaser: 'Old newspapers with the bylines torn off. The clues are still there.',
             },
             't-plaza': {
                 name: 'The Neon Plaza', chapter: 'ch3', map: 'ch3', type: 'story', x: 727, y: 335,

@@ -1,0 +1,48 @@
+/* The Byline Grid (logic grid). Scoped under .lg; tokens from css/game.css. */
+
+.lg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(220px, 0.9fr) minmax(300px, 2fr);
+    gap: clamp(10px, 1.6vw, 22px);
+    padding: clamp(10px, 2vh, 20px) clamp(12px, 2vw, 24px);
+    overflow: auto;
+    color: var(--parchment);
+    background: radial-gradient(ellipse at 50% -10%, rgba(63, 224, 208, 0.14), transparent 55%), var(--night);
+}
+.lg-side { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lg-clues { margin: 0; padding: 10px 10px 10px 30px; display: flex; flex-direction: column; gap: 6px; }
+.lg-clue {
+    all: unset;
+    cursor: pointer;
+    line-height: 1.35;
+}
+.lg-clue:focus-visible { outline: 2px solid var(--rift); }
+.lg-clue.used { text-decoration: line-through; opacity: 0.55; }
+
+.lg-main { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.lg-grids { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.lg-grid { border-collapse: collapse; }
+.lg-grid caption { text-align: left; padding-bottom: 4px; color: var(--parchment-dim); }
+.lg-grid th { font-weight: 700; font-size: 0.85em; padding: 2px 6px; }
+.lg-col { max-width: 70px; white-space: normal; vertical-align: bottom; line-height: 1.1; }
+.lg-row { text-align: right; max-width: 130px; }
+.lg-grid td { padding: 0; border: 1px solid var(--panel-edge); }
+.lg-cell {
+    width: 34px; height: 34px;
+    border: none;
+    background: rgba(239, 227, 200, 0.06);
+    color: var(--parchment);
+    font-size: 1.1em; font-weight: 700;
+    cursor: pointer;
+}
+.lg-cell:hover, .lg-cell:focus-visible { background: rgba(63, 224, 208, 0.18); }
+.lg-cell.lg-x { color: var(--emotion); }
+.lg-cell.lg-v { color: var(--perception); background: rgba(47, 191, 113, 0.18); }
+.lg-note { color: var(--gold); min-height: 1.2em; }
+.lg-tools { gap: 8px; }
+
+@media (max-width: 720px) {
+    .lg { grid-template-columns: 1fr; }
+}

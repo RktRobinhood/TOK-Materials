@@ -628,6 +628,13 @@
     S['station.t-library.reminder'] = [
         { s: 'pip', t: 'Another proof in the dock. Which step is pretending?' },
     ];
+    // The Reading Room (optional, #62): logic grid.
+    S['station.t-reading-room.intro'] = [
+        { s: 'pip', e: 'thinking', t: 'Headlines with no names! The clues say who wrote what, and when. Cross out what cannot be true.' },
+    ];
+    S['station.t-reading-room.reminder'] = [
+        { s: 'pip', t: 'More stories without bylines. Cross out, then confirm.' },
+    ];
     S['station.t-datalab.intro'] = [
         { s: 'pip', t: 'Numbers for the prosecution. Let\'s see if they hold up. Fairly.' },
         { lead: true },
