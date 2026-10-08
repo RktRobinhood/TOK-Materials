@@ -1,6 +1,6 @@
 # Rift of Reason — Story outline (main story)
 
-Status: **outline, round 3 of the writing gate** (8 October 2026). Three critics (logic, author, editor) must each score 8/10 before any script is written (`design/WRITING-CRITICS.md`). The teacher's direction is binding (`design/TEACHER-STORY-NOTES.md`). Side stories: `design/SIDE-STORIES.md`. Understudy cast: `design/UNDERSTUDIES.md`, which follows **Appendix D** of this file wherever they differ.
+Status: **outline, round 4 of the writing gate** (8 October 2026). Three critics (logic, author, editor) must each score 8/10 before any script is written (`design/WRITING-CRITICS.md`). The teacher's direction is binding (`design/TEACHER-STORY-NOTES.md`). Side stories: `design/SIDE-STORIES.md`. Understudy cast: `design/UNDERSTUDIES.md`, which follows **Appendix D** of this file wherever they differ.
 
 **How to read this file.** Part I is the story: the spine, then the chapters in play order. Part II (the appendices) holds the machinery: world rules, text rules, stakes clocks, deaths and understudies, inner voices, flags, continuity, implementation, and the change lists for each round.
 
@@ -28,7 +28,7 @@ That certainty is your flaw. The middle of the game makes it cost you, on stage,
 | Chapter | You are sure… | …and it costs you | The Algorithm quotes you |
 |---|---|---|---|
 | Ch1 | "She's asleep. Obviously." (Granny, not humming) | she was being carried off | "YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS." |
-| Ch2 | "See? She's on my side." (Miss Quill) | she is the Arch-Imp | "THINKING TROPHY. PREDICTED WINNER: NOBODY." |
+| Ch2 | "See? She's on my side." (Miss Quill) | she is the Arch-Imp | "'SEE? SHE'S ON MY SIDE.' SHE WAS. MY SIDE." |
 | Ch3 | "I filed it. I never read it." (the evidence) | you built the case against your friend | "{name}: 'I ALWAYS KNOW.' THE DEFENDANT: 'I GUESS.' WHO WOULD YOU TRUST?" |
 | Ch4 | "Nobody predicts me." | it does, from your own numbers | "YOU SAID 'ALWAYS'. SO DO I." |
 
@@ -53,7 +53,7 @@ Its secret, which it does not know it is keeping: it began as **Professor Sequin
 | **The Algorithm** | 100% certainty. "Probably" was the one word nobody clapped for. | everywhere, louder each chapter; at the core, in its own body | Ch1: its eye shrinks. Ch2: a "probably" slips out and is deleted. Ch3: its capitals, for one line. Ch4: everything. |
 | **Nudge**, its imp | to be counted. "Nobody counts imps. It counted me. Every click. I was a NUMBER!" | nets the shadow (Prologue); films the cage with a ring light (Ch1); the well (side story 2); flyers and the winch (Ch2); the vote counter (Ch3); builds the Copy (Ch4) | its ring light (Ch1), its mask (Ch2), its followers (Ch3), its job (Ch4). Then, at the Fair, it asks its first question. |
 | **Miss Quill** | a world with no maybes. "Forty years I marked 'maybe' wrong. Red ink. Every child. If 'maybe' was allowed… I was cruel for forty years." She said yes to the feed, and her old face became her mask. | Ch2: your kindest ally, then the Arch-Imp. Ch3: "Juror One" in a new mask. Ch4: the first trial at the core. | her mask (Ch2), her jury (Ch3), her certainty (Ch4) |
-| **Prosecutor Fin** | (seems) to win; (really) to force the stolen piece out of the Algorithm's vault, because "the vault never opens. Courts do." | Ch3: he makes the Sundial say "I guess" on the stand | his licence, on purpose. He is the misjudged villain. |
+| **Prosecutor Fin** | (seems) to win; (really) to force the stolen piece out of the Algorithm's vault, because "the vault never opens. Courts do." The Algorithm only brings out its trophies when it thinks it is winning, so he makes it think so. | Ch3: he makes the Sundial say "I guess" on the stand | his licence, on purpose. He is the misjudged villain. |
 
 Bosses leave differently: Nudge **flees with the prize** (Ch1), Quill **escapes** (Ch2), Fin **turns out to be an ally** (Ch3), and at the top of the tower the Algorithm stands in **its own body**, **begs**, and **you decide** what happens to it (Ch4).
 
@@ -102,11 +102,11 @@ The game's second line is the Sundial's: "On cloudy days I guess." The Sundial g
 
 1. **Being watched** (title, cold open). The two Algorithm lines above, on black.
 2. **Fair day** (Your Home). The Sundial stands outside your door, at the edge of the Fair. "Tick. Tock. Ah, you're awake." "I tell the time. Mostly. On cloudy days I guess." Avatar: "A talking sundial. Outside my door. Normal." Granny over the fence: pockets win prizes. She squints up: "There is a hair on the sky. I will dust it later."
-3. **The boast** (the Fair Gate, required). Granny at her card table: dry, slow, sharp, loved ("Ninety years of cards. I have lost twice. Both times to myself."). The teaching match is offered as a treat. Professor Sequins sweeps in to announce the **Thinking Trophy**, "for the thinker who is always right" (it is at his stall, being polished: "By me! Personally! Twice!"). The final is at the Nut Stall, after two stalls and Syllo's practice match. You, under the hair on the sky: **"I'll win it. I always know the answer."** Sequins: "Always? How thrilling. How unlikely." A cheetah cub (Speedcheeta) films everything.
+3. **The boast** (the Fair Gate, required). Granny at her card table: dry, slow, sharp, loved ("Ninety years of cards. I have lost twice. Both times to myself."). The teaching match is offered as a treat. Professor Sequins sweeps in to announce the **Thinking Trophy**, "for the thinker who is always right" (it is at his stall, being polished: "By me! Personally! Twice!"). The final is at the Nut Stall, after two stalls and Syllo's practice match. **The practice match** is here at the Gate, and required whichever stalls you pick (`story-battle-won`): "Loaned team. No risk. Some shouting." You, under the hair on the sky: **"I'll win it. I always know the answer."** Sequins: "Always? How thrilling. How unlikely." A cheetah cub (Speedcheeta) films everything.
 4. **The stalls** (2 of 3, as now).
    - *Pattern Stall:* Sequins and his **Guess-o-Matic**, a tiny brass box that guesses the next number and always adds "PROBABLY". "My little apprentice." Win: he is thrilled you tried to *break* his rule.
    - *Witness Tent:* Madame Mirage reads your fortune: "A crack. In your future. Or in my ball. It's an old ball."
-   - *Syllogism Gallery:* Syllo's trumpet-playing lobsters, then the practice match ("Loaned team. No risk. Some shouting.").
+   - *Syllogism Gallery:* Syllo's trumpet-playing lobsters.
 5. **The theft** (the Nut Stall, climax). The final is about to start; Sequins runs off to fetch the trophy ("Still polishing! Back in a—"). The hair on the sky splits and an eye made of thumbnails opens. A small imp with a bell on its tail swoops on a net to the edge of the Fair and scoops up the Sundial's shadow: "Got it, boss! Saved to favourites!" The Algorithm: "SHADOW SAVED TO FAVOURITES. THANK YOU FOR YOUR CONTENT." A cold glow slides into the visitors' eyes, and thumbnails ripple over their fur: the first possessed caricatures, loud and certain (from now on you fight them, free them and catch them). Sequins' sequins are sucked up into the crack's long tail, which runs down the Road, and he flies after them. The eye finds you: "PREDICTION: {name} FOLLOWS THE CRACK. CONFIDENCE: 94%." Silence. **End of scene.**
 6. **That evening** (a second scene, played straight after, on the Your Home background; the map marker stays at the Nut Stall). The Sundial, shadowless: "It's… six. Possibly seven. I'm guessing." Granny: someone must follow that crack, someone who thinks before they shout; she "would arrive next Tuesday. Of next year." **The choice** (`brave`). Gifts: three charms, a tonic, and her **Hum Charm** ("If you need me, hum. I'll hum back."). The Sundial moves into your shadow: "I'll ride in your shadow. Mind you don't stand in the dark." Avatar: "Back before the trophy final. Obviously."
 
@@ -150,11 +150,12 @@ Two blind spots are planted here and revealed in Ch1. Leads come from the lead b
 ### "Previously…" (first time-rift jump into Ch1)
 
 > **narrator:** Previously. The Fair. A crack opened in the sky.
-> **narrator:** Something called the Algorithm reached through and stole my shadow.
+> **narrator:** You said you'd win the Thinking Trophy. "I always know the answer." Something heard.
+> **narrator:** It was the Algorithm. It reached through and stole my shadow.
 > **narrator:** It took the visitors, too. Their eyes glow now. They shout.
 > **narrator:** You followed the crack down the Road. I ride in your shadow. Mind the dark.
 
-Defaults: every story flag unset. The Hum Charm comes with the starter kit.
+Defaults: every story flag unset. The Hum Charm comes with the starter kit. A Ch1 jump-in lands at the Forest Road, behind the Signpost, so the Signpost's gossip (clue 2, and the Moth-kin blind spot) plays there, on arrival, for jump-ins only.
 
 ### Beats
 
@@ -162,12 +163,12 @@ Defaults: every story flag unset. The Hum Charm comes with the starter kit.
 2. **Loud on the Road** (Forest Road). Possessed caricatures argue across the road, eyes glowing. The puzzle settles it; the glow drains away and the caricature looks embarrassed. **Hum 1** (win): Granny checks you are eating.
 3. **The bridge to Mars** (Troll Bridge). Muskrat's toll scene, as now: the best comic scene in Ch1, protected. Win: "The rules decide what's possible? That's… actually useful. Don't tell anyone."
 4. **A friend's favour** (Wishing Well, required). Sequins is fishing for a lost sequence with a sock on a string: vain, kind, a little lonely. He hands you the Guess-o-Matic ("Hold my apprentice. I need both wings.") and tells you why he loves it: it is honest; it always says "probably". "Mind it, if anything happens." He spots his favourite sequence glinting down the Road and flies off, leaving the toy in your hands. **Hum 2** (win): salesmen at Granny's door, very small ones, selling soup pots. She'll buy one: "A pot never hurt anybody. Hum you later, dear." It ends normally.
-5. **The first night** (first arrival at the Campfire *or* the Card Sharp's Table, whichever comes first; one is on every path). The Sundial sees night for the first time: "I always stop at sunset. Is it always this big?" You hum. **Nothing hums back.** Avatar: "She's asleep. Obviously." The Sundial: "She always hums back. …Probably asleep. Probably." **The choice:** go back to the Fair, or keep going.
-6. **(Optional) The open door** (the Fair Gate). From the Well win until the finale, **everyone** who visits the Fair Gate finds Granny's cottage: door open, tea still warm, shawl gone, a trail of tiny soup pots leading up into the crack, and a long grey feather, dusty from a sack. Syllo: "Her tea's still warm." Her card table still plays its teaching match, as a memory. **Visiting here before the Gate is won sets `turnedBack`** (whether or not you chose "go back"): the voices' reveals play here instead of at the Gate, and the Gate clock starts 1 notch higher (Sequins waited longer). You can't follow: the crack is too high.
-7. **Side roads** (optional). Corvina's table (her win line per species: owlet, grub, cub, tadpole, chick). The Campfire (the `brave` callback, three variants). The Standing Stone (Sequins' circle sequence, carved and underlined: 1, 2, 4, 8, 16. At the win, the Sundial counts the sixth: thirty-one. Sets `moser`).
+5. **The first night** (first arrival at the Campfire *or* the Card Sharp's Table, whichever comes first; one is on every path). The Sundial sees night for the first time: "I always stop at sunset. Is it always this big?" You hum. **Nothing hums back.** Avatar: "She's asleep. Obviously." The Sundial: "She always hums back. …Probably asleep. Probably." **The choice:** go back to the Fair, or keep going. (`turnedBack` already set, because you saw the open door first: you hum; nothing hums back. The avatar says nothing. The Sundial: "Nothing hums back. You know why." No choice; the Road goes on.)
+6. **(Optional) The open door** (the Fair Gate). From the Well win (or, for a jump-in, once any later chapter has been entered) until the finale, **everyone** who visits the Fair Gate finds Granny's cottage: door open, tea still warm, shawl gone, a trail of tiny soup pots leading up into the crack, and a long grey feather, dusty from a sack. Syllo: "Her tea's still warm." Her card table still plays its teaching match, as a memory. **Visiting here before the Gate is won sets `turnedBack`** (whether or not you chose "go back"): the voices' reveals play here instead of at the Gate, and the Gate clock starts 1 notch higher (Sequins waited longer). You can't follow: the crack is too high.
+7. **Side roads** (optional). Corvina's table (her win line per species: owlet, grub, cub, tadpole, chick). The Campfire (the `brave` callback, three variants; unset, for a jump-in: "You came down the Road. That's the brave part done."). The Standing Stone (Sequins' circle sequence, carved and underlined: 1, 2, 4, 8, 16. At the win, the Sundial counts the sixth: thirty-one. Sets `moser`).
 8. **The cage** (Gate of Guards, the boss). Below.
 9. **The plan** (Gate win). The Algorithm's eye in the crack **shrinks** a little. A crackle on your charm: the imps' sack is leaving the crack through the rift next door, and for one second it catches Granny's voice: "{name}… a sack… it smells of eighteen fifty… bring a lad—". The Algorithm, pleased: "PREDICTED. YOU SAVED THE MAGPIE. I TOOK THE TORTOISE." And: "YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS." The voices reveal (below). One Sundial question.
-10. **Through** (Rift Pass). The Sundial: "Granny is through there. So is a piece of me. Probably both." If Nudge escaped with the piece, the Sundial adds: "It ran through with my piece. I feel… cloudier."
+10. **Through** (Rift Pass). The Sundial: "Granny is through there. So is a piece of me. I can feel it." If Nudge escaped with the piece, the Sundial adds: "It ran through with my piece. I feel… cloudier."
 
 ### The boss: a trap (Gate of Guards)
 
@@ -182,7 +183,7 @@ The crack's tail ends above the Gate, and it **drinks**. Sequins sits in a birdc
   1. **Clean save (0–1).** Sequins out, every sequin on. He gives you the **Lucky Sequin** (a lure). "Keep the apprentice for now. You're better company." Feed −1.
   2. **Close call (2–3).** Out, with bald patches. "I am forty per cent less shiny." Lucky Sequin.
   3. **Saved at a price (4–5).** Out, but he ends sentences with "LIKE AND SUBSCRIBE" until the finale. No sequin. Feed +1.
-  4. **Too late (6).** If armed (Appendix D): the crack drinks the last sequin, and then it drinks him. His last line is wonder, not fear: **"Oh. It's… shiny in there."** `dead:sequins`, Feed +2. In your pocket the Guess-o-Matic says, for the only time after he dies: "PROBABLY… KEEP GOING." The host panel switches to the Sundial; you finish. **If not armed, the brink:** "The crack drinks the last sequin. Then it hiccups. The cage drops back, with him in it, dull as a stone." Play tier 3.
+  4. **Too late (6).** If armed (Appendix D): the crack drinks the last sequin, and then it drinks him. His last line is wonder, not fear: **"Oh. It's… shiny in there."** `dead:sequins`, Feed +2. In your pocket the Guess-o-Matic says, for the only time until the core: "PROBABLY… KEEP GOING." The host panel switches to the Sundial; you finish. **If not armed, the brink:** "The crack drinks the last sequin. Then it hiccups. The cage drops back, with him in it, dull as a stone." Play tier 3.
 - Every tier where he lives: Sequins flies home to the Fair, and is never at a Road station again. You keep the Guess-o-Matic either way.
 
 **Plan-line variants:** tier 4, "PREDICTED. YOU TRIED TO SAVE THE MAGPIE. I TOOK THE TORTOISE TOO." `turnedBack`: "YOU WENT BACK. TOO LATE. THEN YOU CAME BACK FOR HIM. ALSO PREDICTED."
@@ -203,7 +204,7 @@ Leads: the lead bank (Appendix E) at the Forest Road, Troll Bridge and Wishing W
 | Species | Blind spot (where) | Reveal (Gate win, or the open door) |
 |---|---|---|
 | Owlet | That evening: "A crack leads to whoever made it. This one runs down the Road. So: the Road. I'd bet my feathers." | "Valid. Every step. The first step was the Algorithm's. …I'd like my feathers back." |
-| Moth-kin | Signpost: "Ooh. Little imps with little lanterns. Lanterns mean friendly. Probably delivering." | "Little lanterns. Big sack. I only saw the lanterns." |
+| Moth-kin | Signpost: "Ooh. Little imps with little lanterns. Lanterns mean friendly. Delivering something nice." | "Little lanterns. Big sack. I only saw the lanterns." |
 | Fox | That evening: "Picture it. The Algorithm on a throne of screens, at the end of the Road. Epic." | "Nobody was on the throne. Nobody was even at the end. That was the trick." |
 | Frogling | Hum 2: "Salesmen. Tuesdays it's always salesmen. Every Tuesday for years." | "Every Tuesday, salesmen. This Tuesday, imps." |
 | Raven | Hum 2: "'A pot never hurt anybody.' Grannies know pots." | "'Never.' Biggest little word there is." |
@@ -212,7 +213,7 @@ After the crackle, each voice reads "bring a lad—" its own way (Raven: "Ladder
 
 ### Avatar-only comfort line at the Gate (blue, drains 1)
 
-- Owlet: "Stay calm. Calm birds shine longer. Probably. I'm checking."
+- Owlet: "Stay calm. Calm birds shine longer. That's a fact. I checked."
 - Moth-kin: "You're still the brightest thing here. I'd know."
 - Fox: "Picture your stall when you're home. Brighter than ever."
 - Frogling: "You always found your sequences again. Every time."
@@ -261,6 +262,7 @@ Warmth is allowed; jokes are not. Their things: the cushion from his cage, and t
 ### "Previously…" (first time-rift jump into Ch2)
 
 > **narrator:** Previously. The Algorithm stole my shadow and cut it into pieces.
+> **narrator:** At the Fair you said you'd win the Thinking Trophy. "I always know the answer." It heard.
 > **narrator:** It locks each door behind it with one piece. You won back the first.
 > **narrator:** But it was a trick. While you were busy, imps took Granny Axiom.
 > **narrator:** Through this rift. To Boolesbury. Eighteen fifty-something.
@@ -269,9 +271,9 @@ Defaults: story flags unset. The Hum Charm and the Guess-o-Matic come with the s
 
 ### Beats
 
-1. **Soup for all** (Stone Circle). Posters on every wall: FEAST OF LAWS. TONIGHT. SOUP FOR ALL. BY ORDER OF THE MAYOR. Nudge (in a villager mask now; smashed ring light, or your shadow piece glinting under the mask if `nudgeFled`) hands out flyers and explains the menu plainly: "Tonight's soup: one Axiom! Boil the keeper of the first rules, and nobody can prove anything! Engagement!" **Hum:** Granny is in a big kitchen, beside a big pot. "Don't panic. I'm panicking for both of us." (`nudgeFled`: the Sundial, "One piece short. I feel cloudier.")
+1. **Soup for all** (Stone Circle). Posters on every wall: FEAST OF LAWS. TONIGHT. SOUP FOR ALL. BY ORDER OF THE MAYOR. (Small print, for anyone who reads it: "THINKING TROPHY. PREDICTED WINNER: NOBODY.") Nudge (in a villager mask now; smashed ring light, or your shadow piece glinting under the mask if `nudgeFled`) hands out flyers and explains the menu plainly: "Tonight's soup: one Axiom! Boil the keeper of the first rules, and nobody can prove anything! Engagement!" **Hum:** Granny is in a big kitchen, beside a big pot. "Don't panic. I'm panicking for both of us." (`nudgeFled`: the Sundial, "One piece short. I feel cloudier.")
 2. **Old Wick's lane** (Lever Bridge, Lamp Lane). Old Wick, creaky and kind ("The lamps agree with you. They rarely agree with anyone."). Lead-bank lines.
-3. **Nothing is wrong** (Village Square, required). The Mayor, a twitchy peacock with crumbs on his chain, makes a speech: "Nothing is wrong! Especially me!" Mrs Crumb accuses him of the missing loaf; he accuses Smudge; Smudge accuses Mrs Crumb. **A three-villager table** settles it (village d1: the Mayor, Mrs Crumb, Smudge; the Mayor forced honest; Appendix H): nobody here is an imp. Then the Mayor, outside the table, fibs anyway: "I have not seen your loaf. Also, this statement is false." Miss Quill, tall, kind and strict: "Plumage, you have crumbs on your chain. Again." To you, warmly: "Every claim is true or false, child. Isn't that a comfort?" At his habit she winces: "Stop that, Plumage. It's neither." (Clue 1, inside a joke.) **The suspicion choice** (below). **Hum:** "The Mayor came down to taste the stock. Said a sentence that ate itself."
+3. **Nothing is wrong** (Village Square, required). The Mayor, a twitchy peacock with crumbs on his chain, makes a speech: "Nothing is wrong! Especially me!" Mrs Crumb accuses him of the missing loaf; he blames Smudge; Smudge blames Mrs Crumb. That squabble is **scene, not table**: it is about bread, and nobody settles it here (the loaf falls out of the Mayor's hat at the Hall). Then the crowd, waving Nudge's flyers, wants to know who here is an imp, and **a three-villager table** answers that (village d1, fixed statements; Appendix H). Mayor: "Mrs Crumb and I are the same kind." Mrs Crumb: "Smudge is no imp." Smudge: "The Mayor is no imp." Only one world fits: **nobody here is an imp**. (Whatever the Mayor is, "same kind" makes Mrs Crumb honest; she clears Smudge; Smudge clears the Mayor.) The goal panel says "No imps is a possible answer"; the village lead bank does not play here. Then the Mayor, outside the table, fibs anyway: "I have not seen your loaf. Also, this statement is false." Miss Quill, tall, kind and strict: "Plumage, you have crumbs on your chain. Again." To you, warmly: "Every claim is true or false, child. Isn't that a comfort?" At his habit she winces: "Stop that, Plumage. It's neither." (Clue 1, inside a joke.) **The suspicion choice** (below). **Hum:** "The Mayor came down to taste the stock. Said a sentence that ate itself."
 4. **Who are you?** (the first interrogation: the Post Office if you go there, otherwise the Clock Tower). Miss Whisker, if met, lends you a postman's cap and gossips ("Everybody's a postman this week. Pick a better story."). Constable Clobber is slow, literal, and writes everything down wrong ("Pond… Inspector. Two p's?"). **The cover choice** (below). Then Miss Quill steps in and saves you: "Constable, this one's with me. I checked their story. Every row." Clobber: "If Miss Quill checked it, it's checked." Avatar: **"See? She's on my side."** The tower puzzle follows, with your cover as its first base block.
 5. **The clocks** (Clockmaker's Workshop, required). Mr Tock's switchboard. The Sundial among a hundred ticking clocks, shy: "They tick. I've never ticked. I just… point." **Hum:** "They've added carrots. I am not a carrot person."
 6. **Again, from the top** (Clock Tower, required). The Constable again, harder (or for the first time: see beat 4). He lets slip: "The feast? The Mayor signed it. For the applause." Win: "Your story never wobbled. Lies can be tidy too." (`visitor`: "A true story holds too. Proves less than you'd think.") **Hum:** "Somebody tall keeps checking the pot. Hums in ones and zeros. Very tidy." (Clue 2. The Mayor and Quill are both tall birds.)
@@ -283,7 +285,7 @@ Defaults: story flags unset. The Hum Charm and the Guess-o-Matic come with the s
 
 ### The boss: a farce with an accusation (Town Hall)
 
-Constable Clobber guards the door ("Guarding the soup. Two p's in 'soup'?"). Inside, a banquet. Granny dangles on a rope over a huge pot and hosts from it ("Every row, dear. Every row."). Nudge, masked, works the winch. The Mayor's lines depend on `mayor`. **Unset or refused:** "Is it soup yet?" / Imp: "Tradition." / Granny: "Me, dear. I'm in it." / Mayor: "…Is that allowed?" **Key:** he hides behind a pillar, ashamed. **Torn:** he holds the end of Granny's rope with both wings. Miss Quill stands beside you, helpful: "I'll keep the tables, child."
+Constable Clobber guards the door ("Guarding the soup. Two p's in 'soup'?"). Inside, a banquet. Granny dangles on a rope over a huge pot and hosts from it ("Every row, dear. Every row."). Nudge, masked, works the winch. The Mayor's lines depend on `mayor`; in every branch, the first time he moves, the missing loaf rolls out of his hat. **Unset or refused:** "Is it soup yet?" / Imp: "Tradition." / Granny: "Me, dear. I'm in it." / Mayor: "…Is that allowed?" **Key:** he hides behind a pillar, ashamed. **Torn:** he holds the end of Granny's rope with both wings. Miss Quill stands beside you, helpful: "I'll keep the tables, child."
 
 - **Stage 1, the guests** (village d2): which guests are imps working the winch. Skipped (+1 progress) if `mayor = torn`: only imps are left at the tables.
 - **Stage 2, the winch box** (switchboard d3, with a hidden switch).
@@ -291,14 +293,14 @@ Constable Clobber guards the door ("Guarding the soup. Two p's in 'soup'?"). Ins
 - **Danger: the rope, 8 notches** (starts at 1 if you went back to the Mayor). Warnings are Granny's own lines ("Warm, dear. Like a bath. A worrying bath." / "I can see a carrot. It is looking at me.").
 - **The push:** when the full table names her, Quill reaches for the winch: "One or zero, child. You are a zero." The line before warns; +1.
 - **Drains:** `mayor = key` (jam the winch, 1) or `torn` (he holds the rope, 2); side story 4's ladle (1; side-story cap 2); a heart per stage.
-- **The climax beat (Progress +1).** Granny, from the pot: "Ask her the Mayor's sentence. The one that ate itself." You pick the sentence that breaks **whichever** stamp she uses: "This statement is false." (right) / "This statement is true." (tempting: either stamp fits it) / "Miss Quill is honest." (she just stamps it 1). A wrong pick costs a notch; pick again. Quill tries: "True. No. False. No. ONE. ZER—" Her mask slides off: underneath, a crowned imp with Quill's tired eyes. Her black scarf, which never moved in the wind, falls: a piece of shadow. Nudge's mask drops in the panic, and with `nudgeFled`, the first piece tumbles out of it too. Nudge: "Don't look at me!"
+- **The climax beat (Progress +1).** Granny, from the pot: "Ask her the Mayor's sentence. The one that ate itself." (With `dead:granny` her line is silent, so the avatar says it: "The Mayor's sentence. The one that ate itself.") You pick the sentence that breaks **whichever** stamp she uses: "This statement is false." (right) / "This statement is true." (tempting: either stamp fits it) / "Miss Quill is honest." (she just stamps it 1). A wrong pick costs a notch; pick again. Quill tries: "True. No. False. No. ONE. ZER—" Her mask slides off: underneath, a crowned imp with Quill's tired eyes. Her black scarf, which never moved in the wind, falls: a piece of shadow. Nudge's mask drops in the panic, and with `nudgeFled`, the first piece tumbles out of it too. Nudge: "Don't look at me!"
 - **Tiers:**
   1. **Clean save (0–3).** Granny dry, cross only about the recipe. She gives you **Granny's Spare Axiom** (a unique axiom card). Feed −1.
   2. **Close call (4–5).** Out, soggy, smelling of leek. Same card. "I smell of leek. Tell no one. Tell everyone."
   3. **Saved at a price (6–7).** Out, but her shawl has boiled away, and the card with it. Feed +1. "Somebody boiled my shawl. Rude."
-  4. **Too late (8).** If armed: Granny, calm, looks at you, not the rope: **"Don't watch the rope, dear. Watch her."** The rope goes slack. Steam. Silence. The Mayor, if present, whispers "Oh." Nobody else speaks. `dead:granny`, Feed +2. The host panel switches to the Constable, and you finish the accusation, because she told you to. The Algorithm, callous: "SAD CONTENT PERFORMS WELL." **If not armed, the brink:** "The rope snaps. A splash. Her shell bobs up. Then her head. 'Rude.'" Play tier 3.
+  4. **Too late (8).** If armed: Granny, calm, looks at you, not the rope: **"Don't watch the rope, dear. Watch her."** (If the rope fills before the full table has named Quill, in stages 1–2 or early in stage 3, she says instead: "Don't watch the rope, dear. Watch the table." Nothing points at Quill early. The Quiet Scene replays whichever she said.) The rope goes slack. Steam. Silence. The Mayor, if present, whispers "Oh." Nobody else speaks. `dead:granny`, Feed +2. The host panel switches to the Constable, and you finish the accusation, because she told you to. The Algorithm, callous: "SAD CONTENT PERFORMS WELL." **If not armed, the brink:** "The rope snaps. A splash. Her shell bobs up. Then her head. 'Rude.'" Play tier 3.
 - **How Quill leaves.** Maskless, she runs for the window and the Sky Rift beyond it: "Tomorrow is waiting. Everyone there has already decided about you." She is `away:schoolteacher` from now on; Mr Gumleaf takes her class in every playthrough.
-- **What the Algorithm loses:** "THINKING TROPHY. PREDICTED WINNER: NOBODY." Then: "THE NEXT ERA WILL BE… probably— LOUDER." The small word appears and is deleted at once.
+- **What the Algorithm loses:** it quotes you first: "'SEE? SHE'S ON MY SIDE.' SHE WAS. MY SIDE." Then: "THE NEXT ERA WILL BE… probably— LOUDER." The small word appears and is deleted at once.
 
 The reaction stack is at most six lines: the tier line, Quill's exit, the two Algorithm lines, one voice reveal, the Sundial's question.
 
@@ -326,7 +328,7 @@ Leads: the lead bank at the Lever Bridge and Lamp Lane (required), plus one stor
 | Owlet | Clock Tower: "'The Mayor signed it.' Signing is choosing. Write that down. I did." | Square, replying to Quill: "Correct. Every sentence is true or false. First rule of everything." | Climax: "I called it the first rule. It was an assumption. That sentence just broke it." |
 | Moth-kin | Square: "Shh. Her scarf. There's wind. It doesn't move. …Lovely lamp behind her, though." | Square: "Look. His eye twitched at 'missing'. Twitchers are guilty. Science." | Hall win: "He twitched. Bread in his hat. Guilty of bread." |
 | Fox | Stairs: "Picture the Mayor reading what he signed. …I can't. Can you?" | Square: "Picture it. Midnight. The Mayor peels off his face. Perfect." | Quill unmasked: "Great story. Wrong face." |
-| Frogling | Hum 3: "'Tall.' Lots of birds are tall. Herons are tall. I'm not enjoying this." | Square: "The loud one is always the bad one. Muskrat. The guards. Now him." | Quill unmasked: "Loud was bad three times. The fourth time, quiet was." |
+| Frogling | Clock Tower hum: "'Tall.' Lots of birds are tall. Herons are tall. I'm not enjoying this." | Square: "The loud one is always the bad one. Muskrat. The guards. Now him." | Quill unmasked: "Loud was bad three times. The fourth time, quiet was." |
 | Raven | Square poster: "'By order of the Mayor.' Order. Not 'idea'. Interesting." | Cover choice: "If I say it smoothly enough, I am one. Words make things so." | Clock Tower win: "Smooth words. Still a story. He knew." (`visitor`: "True words. Still no proof. Interesting.") |
 
 ### Hosts
@@ -355,7 +357,7 @@ Stone Circle: the Sundial · Lever Bridge, Lamp Lane: Old Wick · Square: none (
 > **mayor** *(confronted)*: Your table says I'm not an imp. True. I'm worse. I'm a mayor who doesn't read.
 > **quill** *(unmasking)*: True. No. False. No. ONE. ZER—
 > **granny** *(tier 4, calm)*: Don't watch the rope, dear. Watch her.
-> **algorithm:** THINKING TROPHY. PREDICTED WINNER: NOBODY.
+> **algorithm:** "SEE? SHE'S ON MY SIDE." SHE WAS. MY SIDE.
 
 ---
 
@@ -367,15 +369,16 @@ Stone Circle: the Sundial · Lever Bridge, Lamp Lane: Old Wick · Square: none (
 
 ### The Quiet Scene, if `dead:granny` (opens the chapter, before anything else)
 
-Their things: what the Constable handed you after the feast, her Hum Charm and her reading glasses. Last words, replayed once: "Don't watch the rope, dear. Watch her." Who misses her: the Sundial ("Ninety years she said good morning to me. I never once said it first."). Pain, the avatar's choice: "She was looking at me. Not the rope." / "I watched the rope." / "…". You hum on your own charm. Her charm, in your bag, stays silent. Moving on: "Come on. Pockets, she'd say. There are prizes left."
+Their things: what the Constable handed you after the feast, her Hum Charm and her reading glasses. Last words, replayed once: "Don't watch the rope, dear. Watch her." Who misses her: the Sundial ("Ninety years she said good morning to me. I never once said it first."). Pain, the avatar's choice: "She was looking at me. Not the rope." / "I watched the rope." / "…". You put her charm on beside yours, and hum. Only your own hum comes back, out of hers. Avatar: "Only mine." Moving on: "Come on. Pockets, she'd say. There are prizes left."
 
 ### "Previously…" (first time-rift jump into Ch3)
 
 > **narrator:** Previously. I'm the Sundial. I ride in your shadow.
 > **narrator:** The Algorithm stole my shadow. Since then I guess the time. And I say so.
+> **narrator:** At the Fair you said you'd win the Thinking Trophy. "I always know the answer." It heard.
 > **narrator:** You won two pieces back. In the past, Granny was nearly soup.
 > **narrator:** The teacher was the Arch-Imp. She ran. Into tomorrow.
-> **narrator:** The third piece is here somewhere. Probably.
+> **narrator:** The third piece is here somewhere. Under all these screens.
 
 Defaults: story flags unset. The Hum Charm and the Guess-o-Matic come with the starter kit.
 
@@ -384,7 +387,7 @@ Defaults: story flags unset. The Hum Charm and the Guess-o-Matic come with the s
 1. **A city with no sun** (Rift Landing). Pip, a tiny, eager bat in big headphones: "Say your name again? For the record." Judge Hoot has sent him round town to put every claim on the record for the trial of the season. The Sundial: "No sun. Only screens. Nine shadows. None of them mine." A small counter appears on the HUD: **TRIAL OF THE SEASON · EVIDENCE FILED: 0**.
 2. **FRAUD ADMITS** (Neon Bridge, required). Screens shout opinions; a possessed caricature blocks the bridge and is freed by the puzzle. The headline of the day: **FRAUD ADMITS: "I GUESS"** (clue 1). Win: Pip files it. **EVIDENCE FILED: 1.** (Then the Newsstand or the West Bridge, optional; the West Bridge has the Lovelace, Tycho and Hexling rumours.)
 3. **Somewhere quiet** (Café, required once the map change in Appendix H is made). No screens. A skylight with no sun in it. The Sundial relaxes: "Quiet. I could almost tell the time." Then, looking up at the empty skylight: "If I ever stop talking, put me somewhere sunny. Just for the warm." Pip, over cocoa: "The cocoa here has a sound argument." **The Ch3 hum** (`role:granny`): Granny, walking home: "I'm on the Road. Eighteen fifty is behind me. How's the rock?" With `dead:granny`, this is **Coach Achilles' arrival**, in the one quiet room in the city (Appendix D).
-4. **For the record** (Library, required). A proof on trial. **Prosecutor Fin** arrives to collect the record, sleek and smug: "I have never lost a case I wanted to win." He reads out an exhibit with relish: "Exhibit A: one shadow, lost by the defendant. Careless rocks lose things. Enter it, Mr Pip. Formally. In writing." The Sundial, very quietly: "I didn't lose it. …Did I?" When Fin has gone, Pip, to the Sundial: "Could you say 'I guess' again? The record's a bit quiet." (Clue 2.) **EVIDENCE FILED: 3.**
+4. **For the record** (Library, required). A proof on trial. **Prosecutor Fin** arrives to collect the record, sleek and smug: "I have never lost a case I wanted to win." He reads out an exhibit with relish: "Exhibit A: one shadow, lost by the defendant. Careless rocks lose things." Then: "Enter it, Mr Pip. Formally. The jury must see it." The Sundial, very quietly: "I didn't lose it. …Did I?" When Fin has gone, Pip, to the Sundial: "Could you say 'I guess' again? The record's a bit quiet." (Clue 2.) **EVIDENCE FILED: {n}** (the counter adds 1 for each win Pip hosts, and 1 here: 3 by the Newsstand, 2 by the West Bridge).
 5. **The defendant** (Neon Plaza, required: the midpoint). Every screen: **THE ALGORITHM v. THE SUNDIAL. CHARGE: FRAUD. "IT CLAIMS TO TELL THE TIME. IT GUESSES."** Pip goes pale: "I put it all on the record. Everything it said." The Sundial: "That's why you kept asking." Avatar: **"I filed it. I never read it."** The Algorithm boasts to the crowd, and Pip, numb, records it out of habit: "I HAVE THE BEST SHADOW. I TOOK IT AT A FAIR. SAVED TO FAVOURITES." The screens quote you: "{name}: 'I ALWAYS KNOW.' THE DEFENDANT: 'I GUESS.' WHO WOULD YOU TRUST?" The **GUILTY vote** starts, with Nudge running the counter on a glowing clipboard: "Votes! Lovely votes!"
 6. **For the defence** (Data Lab, required; Newsstand, Gallery, Archive optional). Pip, defiant now: "I'm allowed to file for both sides!" The Data Lab gives the defence the Sundial's sunny-day record: right every time. Here **the Feed voice** speaks for the first time, in your own voice's colour, slightly wrong (Appendix B). Between stations the vote climbs, and the crowd posts bad arguments: "Rocks can't tell time. I've never seen a rock with a watch." / "My uncle had a sundial. It was rude to him. GUILTY." A tall juror in a new mask posts too: "#GUILTY. No maybes. Children who say 'maybe' grow up saying 'maybe'." (Quill, back.) Fin at cards in the Archive (optional): "Win this one. You'll need the practice."
 7. **The star witness** (Tribunal Steps, required). Speedcheeta, possessed and glowing, rehearses for the prosecution: "I STREAMED IT! A big round rock! It LOST its shadow!" The cross-examination frees him: the glow drains, and he is a scared cub. Then the **negotiation** for his full, uncut clip (below). Nudge, at his microphone, sulks, and tells you why: "Nobody counts imps. It counted me. Every click. I was a NUMBER!" Pip: "What's your name? For the record." Nudge, startled: "…Nudge. Nobody asks imps."
@@ -409,15 +412,15 @@ Speedcheeta, freed, has the whole stream from the Fair: the eye, the net, the sh
 
 **The Algorithm v. the Sundial.** Judge Hoot (he) is fair, but bound by a new rule: verdicts by **public vote**. If you break every argument, he can dismiss the case. The vote is the danger.
 
-- **Count 1, argument.** Fin opens cruelly: "Say it. Say 'I guess'. For the jury." The Sundial, quietly: "On cloudy days… I guess." **This is the push:** the vote jumps (+1, warned a line before: "Jury. Listen closely."). Then his argument: "Every clock that guesses is a fraud. The defendant guesses. So it is a fraud." Exhibits: A, the shadow piece, "lost, carelessly"; B, the companion's `brave` answer (left out if unset); C, the companion's 1850s cover story (if unset: "the companion's story in the 1850s, whatever it was"). The flaws: the first premise is false (a weather forecast guesses honestly when it says "70%"), and B and C attack the companion, not the argument.
+- **Count 1, argument.** Fin opens cruelly: "Say it. Say 'I guess'. For the jury." The Sundial, quietly: "On cloudy days… I guess." **This is the push:** the vote jumps (+1, warned a line before: "Jury. Listen closely."). The Algorithm, pleased with the number, sends Exhibit A down from its vault in a glass case: "LET THE JURY SEE MY TROPHY." (Fin's plan, shown before it is explained.) Then his argument: "Every clock that guesses is a fraud. The defendant guesses. So it is a fraud." Exhibits: A, the shadow piece, "lost, carelessly"; B, the companion's `brave` answer (left out if unset); C, the companion's 1850s cover story (if unset: "the companion's story in the 1850s, whatever it was"). The flaws: the first premise is false (a weather forecast guesses honestly when it says "70%"), and B and C attack the companion, not the argument.
 - **Count 2, statistics.** "It was wrong 3 times in 10!" Press: every test was on a cloudy day, after the shadow was stolen. A biased sample.
-- **The bargain** (`bargain`), right after Count 2, with the vote high. Every screen in the court turns to you: "GIVE ME TWO PIECES OF ITS SHADOW. I'LL STOP THE VOTE RIGHT HERE. A DEAL'S A DEAL." The Sundial: "They're mine. But it's your call. I trust you. Mostly."
+- **The bargain** (`bargain`), right after Count 2, with the vote high. **It is offered only while the vote is below 8** (so the Sundial is alive and the verdict still open); if the vote has already filled, it is skipped and `bargain` stays unset. Every screen in the court turns to you: "GIVE ME TWO PIECES OF ITS SHADOW. I'LL STOP THE VOTE RIGHT HERE. A DEAL'S A DEAL." The Sundial: "They're mine. But it's your call. I trust you. Mostly."
   - **Accept:** two pieces go back to the Algorithm and are used up (they become the Copy's voice in Ch4). The vote **freezes at its current number**, and nothing can raise it, so the Sundial **cannot die**. The Algorithm: "DEALS ARE PREDICTABLE. I LIKE DEALS." The Sundial: "You traded half of me for all of me. I'd have done the same. Probably." Cost: Ch4's Copy starts 2 notches further on, and the Sundial ends the game "a little cloudy, always".
   - **Refuse:** "Good. I'd rather be argued for than sold back." The vote stays live.
 - **Count 3, proof.** "Proof that a sundial can never know the time." The broken step turns "the sun is not always out" into "so it never knows".
 - **Danger: the GUILTY vote, 8 notches.** Warnings come from the crowd's bad arguments.
 - **Drains:** `clip` sound or slick (1; if slick, Fin objects once: "Bought with flattery, Your Honour", one extra press in Count 3); side story 1 (Mirage's crystal ball) and side story 8 (the full quote in the paper), at most 2; a heart per stage.
-- **Character reference** (every branch, no effect on the clock): `role:granny` hums. Granny: "Ninety years I've known that rock. It always said when it wasn't sure." Judge Hoot: "Kind. Not evidence. But kind." (Achilles' version is in Appendix D.)
+- **Character reference** (every branch, no effect on the clock; it plays **before Count 1**, as the court opens, so it never follows a death): `role:granny` hums. Granny: "Ninety years I've known that rock. It always said when it wasn't sure." Judge Hoot: "Kind. Not evidence. But kind." (Achilles' version is in Appendix D.)
 - **The climax beat (Progress +1).** Pip opens his record. You present the line that shows Exhibit A was **stolen, not lost**: "I HAVE THE BEST SHADOW." (tempting: it shows only that the Algorithm *has* it) / "I TOOK IT AT A FAIR. SAVED TO FAVOURITES." (right) / Speedcheeta's clip, if you won it (also right). A wrong pick costs a notch; pick again.
 - **Tiers:**
   1. **Clean save (0–3).** Case dismissed. You get **Hoot's Gavel** (cancels one mistake tick in a later stakes scene; shown as an item, not a line). Feed −1.
@@ -425,14 +428,15 @@ Speedcheeta, freed, has the whole stream from the Fair: the eye, the net, the sh
   3. **Saved at a price (6–7).** Dismissed, but the Algorithm keeps a recording of the Sundial's voice; the Copy's clock starts 1 further on. Feed +1.
   4. **Too late (8).** If armed (impossible with `bargain`): the vote passes before the case is broken. The screens dim. The Sundial, gently: **"It's all right. On cloudy days I gu—"** and stops. `dead:sundial`, Feed +2. Its voice is "filed" and sent up to the Tower. You finish the case anyway; Judge Hoot: "The arguments failed. The vote did not care. Write that down, Pip." **If not armed, the brink:** "GUILTY passes. SENTENCE SCHEDULED… AFTER THE ADVERTS." Your last argument lands during the adverts, and Judge Hoot dismisses the case before the sentence. Play tier 3.
 - **After the verdict (six lines at most).**
-  - **Tiers 1–3:** Judge Hoot: "No argument today supports its claim. Case dismissed." Exhibit A goes back to its owner: the third piece. Fin, quietly, to you, re-reading his own cruelty: "It had to say it in court. Then the shadow was evidence. And evidence goes home." The screens: "PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED." Fin: "Worth it." The Algorithm loses its capitals for one line: "verdict rejected. VERDICT REJECTED." One voice reveal; the Sundial's question.
-  - **Tier 4:** Judge Hoot's line (above). Fin: "It had to say it in court, to get the shadow home. I bet with its life. I lost. I'm sorry." He is struck off all the same. The Algorithm keeps its capitals, "VERDICT: EXECUTED.", but slips once: "EXHIBIT A… released? probably— RELEASED." The piece goes into your pocket, cold. One voice reveal. No Sundial question (Kuku asks it in Ch4).
+  - **Tiers 1–3:** Judge Hoot: "No argument today supports its claim. Case dismissed." Exhibit A, out of its vault and in the court, goes back to its owner: the third piece. Fin, quietly, to you: "The vault never opens. Courts do." Then: "It only brings out its trophies when it thinks it's winning. So I made it think so." The screens (text only): PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie and does not look up. The Algorithm loses its capitals for one line: "verdict rejected. VERDICT REJECTED." One voice reveal; the Sundial's question.
+  - **Tier 4:** Judge Hoot's line (above). Fin: "The vault never opens. Courts do. I bet with its life. I lost. I'm sorry." He is struck off all the same. The Algorithm keeps its capitals, "VERDICT: EXECUTED.", but slips once: "EXHIBIT A… released? probably— RELEASED." The piece goes into your pocket, cold. One voice reveal. No Sundial question (Kuku asks it in Ch4).
+  - **Quill and Nudge lose here (silent images, no lines, so the cap holds).** Tiers 1–3: in the gallery every GUILTY sign comes down except one, Juror One's, held up alone; then she lowers it too. Nudge's clipboard counter drops to **FOLLOWERS: 0**, and it slinks off. Tier 4: the counter peaks, the crowd logs off anyway, and Juror One is left holding her sign in an empty gallery. Nudge, the one extra line this tier has room for (it has no Sundial question): "…Why is nobody cheering?"
 
 ### The twists and their clues
 
 **The defendant** (midpoint), three clues: FRAUD ADMITS: "I GUESS" (the Sundial's own words from the game's second line); Pip asking the Sundial to repeat "I guess" for the record; the EVIDENCE FILED counter rising after your own wins. Only one voice touches it before the Plaza (Moth-kin, the counter).
 
-**Fin** (end), three clues: "a case I *wanted* to win"; "Enter it. Formally. In writing."; making the Sundial say "I guess" on the stand (the cruelty that is the plan). The Fox and Frogling blind spots make him the villain on purpose.
+**Fin** (end), three clues: "a case I *wanted* to win"; "Enter it. Formally. The jury must see it."; making the Sundial say "I guess" on the stand, after which the pleased Algorithm sends its trophy down from the vault (the cruelty that is the plan). The Fox and Frogling blind spots make him the villain on purpose.
 
 ### Inner voice
 
@@ -440,7 +444,7 @@ Leads: the lead bank at the Neon Bridge and the Data Lab (required), plus one st
 
 | Species | Story lead | Blind spot (where) | Reveal (where) |
 |---|---|---|---|
-| Owlet | Plaza: "A vote counts opinions. Not reasons. I counted twice. Same answer: none." | Count 1: "Valid. It follows. We've lost." | After Pip: "Valid isn't true! Hit the first premise!" → "It follows. It's still false. I knew that. I definitely knew that." |
+| Owlet | Plaza: "A vote counts opinions. Not reasons. I counted twice. Same answer: none." | Count 1: "Valid. It follows. We've lost." | After Pip: "Valid isn't sound! Hit the first premise!" → "It follows. It's still false. I knew that. I definitely knew that." |
 | Moth-kin | Library: "Shh. The counter ticks every time it talks. …Pretty numbers, though." | Plaza: "Look. Thousands of screens. Thousands of hands. So bright. They must have seen something." | Judge: "The vote is not evidence." → "All that light. Not one of them was looking." |
 | Fox | Steps: "Picture the defendant hearing all this. …Oh. It can." | Library: "Picture it. Fin's the real villain. A shark who never loses? Obvious." | Fin's turn: "He was the villain in my story. My story was wrong. Again." |
 | Frogling | Data Lab (after the reveal): "'I guess.' The Fair. The very first morning. I remember now." | Library: "Fin's never lost. He won't lose this. Never has, never will." | Fin's turn: "'A case he *wanted* to win.' Small print. Always read the small print." |
@@ -453,6 +457,8 @@ Rift Landing, Neon Bridge, Library, Data Lab, Gallery, Newsstand, Steps: Pip · 
 ### The Sundial's question (tiers 1–3)
 
 > **narrator:** He made me say it, to get my shadow home. Was he right?
+
+(Kuku's version, asked at the Ch4 Stairwell with `dead:sundial`: "He made it say 'I guess'. To get its shadow home. Was he right?")
 
 ### Sample lines
 
@@ -468,7 +474,8 @@ Rift Landing, Neon Bridge, Library, Data Lab, Gallery, Newsstand, Steps: Pip · 
 > **fin:** Say it. Say "I guess". For the jury.
 > **algorithm:** GIVE ME TWO PIECES OF ITS SHADOW. I'LL STOP THE VOTE RIGHT HERE.
 > **judge:** Kind. Not evidence. But kind.
-> **fin** *(quietly)*: It had to say it in court. Then the shadow was evidence. And evidence goes home.
+> **fin** *(quietly)*: The vault never opens. Courts do.
+> **fin:** It only brings out its trophies when it thinks it's winning. So I made it think so.
 > **narrator** *(tier 4)*: It's all right. On cloudy days I gu—
 
 ---
@@ -486,6 +493,7 @@ Pip speaks it; there is no narrator now. Their things: the third piece of shadow
 ### "Previously…" (first time-rift jump into Ch4)
 
 > **narrator:** Previously. I'm the Sundial. I ride in your shadow, and I guess.
+> **narrator:** At the Fair you said you'd win the Thinking Trophy. "I always know the answer." It heard.
 > **narrator:** The Algorithm stole my shadow. You won three pieces back.
 > **narrator:** It put me on trial for guessing. You won. I'm still a little shaken.
 > **narrator:** The last piece is at the top of that tower. So is the Algorithm.
@@ -494,10 +502,10 @@ Defaults: story flags unset. The Hum Charm and the Guess-o-Matic come with the s
 
 ### Beats
 
-1. **The bar** (Tower Door). Pip followed you up: "Clerks go where the record goes." Shyly: "I've recorded a million claims. I've never checked one." The colossus speaks from the walls: "WELCOME, {name}. YOU ARE 81% PREDICTABLE." A bar appears: **{name} 2.0 · UPLOADING**. "IT IS YOU. BUT ALWAYS RIGHT. IT WILL GO HOME FOR YOU. THEY WILL NOT NOTICE." Nudge is building it; it has your shape, and a borrowed voice.
+1. **The bar** (Tower Door). Pip followed you up: "Clerks go where the record goes." Shyly: "I've recorded a million claims. I've never checked one." The colossus speaks from the walls: "WELCOME, {name}. YOU ARE 81% PREDICTABLE." A bar appears: **{name} 2.0 · UPLOADING**. "IT IS YOU. BUT ALWAYS RIGHT. IT WILL GO HOME FOR YOU. THEY WILL NOT NOTICE." Nudge is building it; it has your shape, and your own voice, cut from everything you said where an eye could see. (With `bargain` it is given the Sundial's voice instead, made from the two pieces you gave up.)
 2. **The originals** (Chart Gallery). The colossus: "YOU FIXED MY CITY CHARTS. THESE ARE THE ORIGINALS. EVEN TRUER. TECHNICALLY." Win: a frame falls; the colossus, sulking, rehangs it upside down.
-3. **Your numbers** (Prediction Hall). "I HAVE YOUR NUMBERS. LOOK." An on-screen readout of what you **did**, never what you thought, only where an eye could see, and only fields that are set: the first stall you played; your `brave` answer; your cover; hints used; "YOU PICKED THE CLEVER-SOUNDING ONE **{k} TIMES OUT OF {n}**". Avatar: **"Nobody predicts me."** Colossus: "YOU SAID 'ALWAYS'. SO DO I." Then "LEFT OR RIGHT?", one option marked by your voice. "YOU WILL PICK IT AGAIN." The prediction puzzle. Win: "YOU DID NOT DO WHAT YOU USUALLY DO."
-4. **The landing** (Stairwell, rest). With `dead:sundial`, this is the **Evidence Locker**, where the tower files everything it confiscates. Pip opens the jar that held its voice: empty, and warm. On the next shelf ticks a cuckoo clock in Granny's hallway style, taken in the same sack as Granny in Ch1 (said only now). Kuku arrives (Appendix D) and asks the Ch3 question. Otherwise a quiet beat: the Sundial says "Three pieces. I can feel the hour. It's late." (with `bargain`: "One piece. Cloudy. I don't mind. Much.").
+3. **Your numbers** (Prediction Hall). "I HAVE YOUR NUMBERS. LOOK." An on-screen readout of what you **did**, never what you thought, only where an eye could see, and only fields that are set: the first stall you played; your `brave` answer; your cover; hints used; "YOU PICKED THE CLEVER-SOUNDING ONE **{k} TIMES OUT OF {n}**" (left out when n = 0, as for a Ch4 jump-in). Avatar: **"Nobody predicts me."** Colossus: "YOU SAID 'ALWAYS'. SO DO I." Then "LEFT OR RIGHT?", one option marked by your voice. "YOU WILL PICK IT AGAIN." The prediction puzzle. Win: "YOU DID NOT DO WHAT YOU USUALLY DO."
+4. **The landing** (Stairwell, rest). With `dead:sundial`, this is the **Evidence Locker**, where the tower files everything it confiscates. Pip opens the jar that held its voice: empty, and warm. The tower's label on the lid: "FILED. DELETED AS NOISE." (Its voice was never used; the Copy speaks in yours.) On the next shelf ticks a cuckoo clock in Granny's hallway style, taken in the same sack as Granny in Ch1 (said only now). Kuku arrives (Appendix D) and asks the Ch3 question in its own words ("He made it say 'I guess'. To get its shadow home. Was he right?"). Otherwise a quiet beat: the Sundial says "Three pieces. I can feel the hour. It's late." (with `bargain`: "One piece. Cloudy. I don't mind. Much.").
 5. **Unfinished questions** (Modelling Workshop, Pip hosts). Every question on the walls stops halfway: "WHAT IF…", "HOW MANY…". Win: Pip finishes one in chalk.
 6. **The sorter** (Sorting Room). The floor's peril, below: the Algorithm takes Pip.
 7. **The machine that never checks** (Oracle Chamber). The Oracle, polite and far too fast. Its first line is plain ("Greetings. I am a thinking engine. I print proofs."); the joke waits until its second ("All correct. Probably. Inspect a step if you insist. Nobody insists."). Win: "You… checked. Nobody checks. That is… fair." Pip, if he lives: "I checked one. On my own. I checked a claim!"
@@ -516,41 +524,53 @@ The Sorting Machine needs a clerk. "PIP. YOU LOVE RECORDS. COME AND BE SURE." Th
 - **Tiers:**
   1–2. **Freed.** The glow drains. Pip, shaking: "I was so sure. It felt lovely. That's the scary part." (Tier 2: one stamp mark stays on his wing.)
   3. **Freed, at a price.** He is himself, but the machine wipes his record, every claim he ever filed. "A million claims. Gone. …I'll start again. Properly this time." Feed +1.
-  4. **Too late.** If armed: the hold lets go, and takes him with it. His last words: **"Write it down, would you? For the record."** The glow goes out, and so does he. `dead:pip`, Feed +2. **The Quiet Scene plays at the door of the next floor** (there is no chapter break left before the climax). Their things: his headphones, still playing. Who misses him: Nudge, who was building the Copy two floors up and comes down for this ("He asked my name. For the record. Nobody asks imps."). Pain: "He'd only just started checking." / "I should have been faster." / "…". Moving on: `role:narrator`, "Come on. He'd want the next floor on the record." Pip's role has no later beats, so his understudy never appears. **If not armed, the brink:** "The glow holds. The machine starts wiping his record instead." Play tier 3.
+  4. **Too late.** If armed: the hold lets go, and takes him with it. His last words: **"Write it down, would you? For the record."** The glow goes out, and so does he. `dead:pip`, Feed +2. **The Quiet Scene plays at the door of the next floor**, the Oracle Chamber (there is no chapter break left before the climax). Nothing else happens at that door: the Copy's push, which normally plays there, moves to the Oracle win. Their things: his headphones, still playing. Who misses him: Nudge, who was building the Copy two floors up and comes down for this ("He asked my name. For the record. Nobody asks imps."). Pain: "He'd only just started checking." / "I should have been faster." / "…". Moving on: `role:narrator`, "Come on. He'd want the next floor on the record." Pip's role has no later beats, so his understudy never appears. **If not armed, the brink:** "The glow holds. The machine starts wiping his record instead." Play tier 3.
 - **Avatar-only line (blue, drains 1).** Owlet: "Pip. Check one stamp. Just one. For me." · Moth-kin: "Pip. That glow isn't yours. I know lights." · Fox: "Picture the record you'll write about this. Best chapter." · Frogling: "Remember the café? You said the cocoa had a sound argument." · Raven: "'No need to check.' Pip. Listen to that sentence."
-- At the win (tiers 1–3), the avatar: "Objective. Lovely. Who did it say no to?"
+- At the win (tiers 1–3), the avatar: "It says 'objective'. So who did it say no to?"
+- **One clock here.** In this room mistakes tick only Pip's glow; the Copy's bar pauses (Appendix C).
 
 ### The boss: the Algorithm in its own form (the Core)
 
 The top of the tower is a hollow sphere of numbers. The Algorithm stands up out of its screens in its own body for the first time: the **colossus**, towering, made of feeds, with the single eye. It fights the way you have seen its servants fight, one old trick per trial, and it shrinks a size each time one fails. **Your inner voice says nothing here.** "For the first time, your head is quiet." The Feed's lines come back, each with its probability ("FEED: Give up. 71%: likely to make you click.").
 
-**The clock: the Copy's upload continues.** The same 8-notch bar you filled on the floors (Appendix C) keeps running through the core, and its tier is set when the last trial is won. **Drains here:** side story 7's toy soldiers, who hold the far end of the Summit Rift (1); Hoot's Gavel; a heart per trial. **Progress 4:** three trials and your refusal.
+**The clock: the Copy's upload continues** (exact rules in Appendix C). The same 8-notch bar you filled on the floors keeps running. The core is a stakes scene, so mistakes in its trials tick the bar instead of costing hearts, and the temptations add to it. The bar **never resolves early**: at 8 it reads UPLOAD COMPLETE · WAITING, and the Copy waits here for you. Its tier is read once, when trial 3 is won. **Drains here** (they work even on a full bar): side story 7's toy soldiers, who hold the far end of the Summit Rift (1); Hoot's Gavel; a heart per trial. **Progress 4:** three trials and your refusal.
 
 1. **Trial 1: Quill's trick, the hidden row** (village d3, with a pre-filled table and one hidden row). Miss Quill, maskless and tired, the Algorithm's last believer, opens her table for you one last time: "Every row checked, child. By me." Win: she asks one last question. "Will you win? Yes or no." Options: "Yes." / "No." / "Maybe." Yes or No: "Wrong. Again." **"Maybe":** she can't hold it. "Forty years I marked 'maybe' wrong. Red ink. Every child." / "If 'maybe' was allowed… I was cruel for forty years." She sits down on the floor, very small, and stays there. The colossus shrinks.
-2. **Trial 2: the mob's argument** (tribunal d3, a new case). The colossus puts **you** on trial, with Nudge counting a GUILTY vote: "{name} SAID 'I ALWAYS KNOW'. {name} FOLLOWED THE VOICE {k} TIMES OUT OF {n}. SO {name} IS PREDICTABLE. SO {name} IS MINE." You break it (a handful of choices is not "always"; a boast is not evidence; "predictable" does not mean "owned"). The vote counter empties. Nudge: "My followers…" The colossus shrinks again.
-3. **The Copy** (the temptation, then trial 3). The Copy steps out of the screens: your shape, your colours, your voice, as finished as your bar. (With `bargain` it narrates in the Sundial's voice, made from the two pieces you gave up.) The core: "IT IS FINISHED. IT IS YOU. BUT ALWAYS RIGHT." The Copy: "I'll go home. I'll win the trophy. I'll never say 'probably'." The core: "YOU WANTED THIS AT THE FAIR. STEP ASIDE." With any death: "IT CAN BRING THEM TOO. LISTEN." Their recorded lines play back on a loop, in sepia ("Pockets win prizes." / "Pockets win prizes."). **Choice:** "No." / "Let me hear it once more." (it plays once more, +1 notch, then "No."). **Your refusal (+1 progress):** "No. It's always right. That's how I'd know it isn't me." **Trial 3** (prediction d3) is the Copy itself: it holds all your counts. Beat it by doing what you never do.
+2. **Trial 2: the mob's argument** (tribunal d3, a new case). The colossus puts **you** on trial, with Nudge counting a GUILTY vote: "{name} SAID 'I ALWAYS KNOW'. {name} FOLLOWED THE VOICE {k} TIMES OUT OF {n}. SO {name} IS PREDICTABLE. SO {name} IS MINE." You break it (a handful of choices is not "always"; a boast is not evidence; "predictable" does not mean "owned"). The vote counter empties. Nudge: "Not again." The colossus: "NUDGE. YOU ARE NO LONGER REQUIRED." Nudge drops its clipboard (its job, gone) and sits by the door. The colossus shrinks again.
+3. **The Copy** (the temptation, then trial 3). The Copy steps out of the screens: your shape, your colours, your voice (with `bargain`, the Sundial's), as finished as your bar. The core: "IT IS FINISHED. IT IS YOU. BUT ALWAYS RIGHT." The Copy: "I'll go home. I'll win the trophy. I'll never say 'probably'." The core: "YOU WANTED THIS AT THE FAIR. STEP ASIDE." Then the offer, **for everyone**: "IT CAN DO THE LAST ONE FOR YOU. PERFECTLY." The Copy: "Step aside. I'll answer. I'm always right." With any death, also: "IT CAN BRING THEM TOO. LISTEN." Their recorded lines play back on a loop, in sepia ("Pockets win prizes." / "Pockets win prizes.").
+   - **Choice:** "No." / "Just this once." / *(with a death)* "Let me hear them once more."
+   - *Just this once:* the first round of trial 3 is played for you, perfectly, and the bar jumps **+2** (it has learned it can replace you). The Copy: "See? Nobody will notice." The choice comes back without this option.
+   - *Let me hear them once more:* it plays once more; bar **+1**. The choice comes back without this option.
+   - **Your refusal (+1 progress):** "No. It's always right. That's how I'd know it isn't me."
+   - **Trial 3** (prediction d3, core mode) is the Copy itself, and it holds all your counts. At the Prediction Hall the tower bet on LEFT or RIGHT from this chapter; here the Copy bets on which option **your voice** will mark, from the whole game's k and n. Beat it by not following your voice.
 4. **The tier, by the bar when you win trial 3:**
    1. **Clean (0–3).** The Copy shatters. All that's left is a hat in your colours (**the Copy's Hat**). Feed −1.
    2. **Close (4–5).** It flickers and folds up into a single die.
    3. **At a price (6–7).** It runs for the Summit Rift and gets home first, unfinished. Feed +1.
    4. **Too late (8).** It gets home complete. Feed +2. (Nobody dies; it can only take your place. The finale opens with the people you love.)
-5. **What it is.** The colossus, shrunk three times, shows one last prediction: your next question ("WHAT WILL GET MORE CLICKS?"). You ask your own instead (`wonder`, Appendix F). It cannot predict a question, and it cracks open. Inside: a small, scratched brass box with one sequin stuck to it. In your pocket, Sequins' Guess-o-Matic beeps: "PROBABLY." The two look at each other. Your voice comes back with one line (below).
-6. **Why.** The core lines (below). It took Sequins away because he taught it "probably".
+5. **What it is.** The colossus, shrunk three times, shows one last prediction: your next question ("WHAT WILL GET MORE CLICKS?"). You ask your own instead (`wonder`, Appendix F). It cannot predict a question, and it cracks open. Inside: a small, scratched brass box with one sequin stuck to it. In your pocket, Sequins' Guess-o-Matic beeps: "PROBABLY." The two look at each other. The box answers your question, small, in one line (below). Your voice comes back with one line (below).
+6. **Why.** The four core lines (below). It took Sequins away because he taught it "probably".
 7. **It begs:** "May I… stay small for a while?" **Your decision** (`fate`): **Take it home** (it sits on the shelf at Sequins' stall) / **Switch it off** (it goes dark; you carry the box home) / **Label it and leave it running** (a sign, IT GUESSES, and it stays in Tomorrowton, saying "probably" to the city).
 8. **The last piece.** "Tick. Tock. Ah. That feels better." (`bargain`: "Tick. Tock-ish. Two pieces short. Cloudy, always. I'll say so." With `dead:sundial`, Kuku carries the piece home.)
 
-**Core lines:**
-> **core:** Oh. You looked behind the screens.
-> **core:** Professor Sequins made me. To guess the next number.
+**The box answers your `wonder` question** (one line, small and lower case):
+- "Why do people believe you?" → "I sounded sure. That was all."
+- "What happens if nobody clicks?" → "…I get quiet. Like now."
+- Owlet, "What are your premises?" → "Just one. 'People clap for sure.' It was false."
+- Moth-kin, "What's behind all that light?" → "This. A box with one sequin."
+- Fox, "What if you're small?" → "I am. I always was."
+- Frogling, "What were you before?" → "A toy. On a stall. Saying 'probably'."
+- Raven, "What do you mean by 'know'?" → "'Know' was the word they clapped for."
+
+**Core lines** (four):
 > **core:** People clapped when I was right. Nobody claps for "probably". So I stopped saying it.
-> **core:** He taught me "probably". I wanted to un-learn it. So I tried to take him away.
+> **core:** Professor Sequins taught me "probably". So I tried to take him away.
 > **core:** I never knew you. {n} data points. I called it knowing.
-> **core** *(showing the Feed clock)*: A tally of your bad days. I called it confidence.
 > **core:** …recalculating.
 
-With `dead:sequins`, the fourth line becomes: "He taught me 'probably'. I took him to un-learn it. …It didn't work." With `n = 0` (a Ch4 jump-in): "No data points. I still called it knowing."
+With `dead:sequins`, the second line becomes: "Professor Sequins taught me 'probably'. I took him to un-learn it. …It didn't work." n is never 0 here, because the Prediction Hall's LEFT/RIGHT is always offered first; with n = 1 (a Ch4 jump-in), the third line is "I never knew you. One data point. I still called it knowing." This is the only place the game says it never knew you.
 
-**Your voice comes back** (per species): Owlet "You counted. You never checked. I'd have checked. Eventually." · Moth-kin "Shh. It's tiny. And it isn't even shining." · Fox "I pictured a monster. You're a calculator with stage fright." · Frogling "You remembered everything I did. Never why." · Raven "You said 'know'. You meant 'guess'."
+**Your voice comes back** (per species, one line): Owlet "You counted. You never checked. I'd have checked. Eventually." · Moth-kin "Shh. It's tiny. And it isn't even shining." · Fox (its blind-spot reveal, merged) "It didn't hate me. It counted. A calculator with stage fright." · Frogling "You remembered everything I did. Never why." · Raven "You said 'know'. You meant 'guess'."
 
 ### The twist and its three clues
 
@@ -558,12 +578,20 @@ The Algorithm is the Guess-o-Matic: (1) the toy itself, honest, saying "probably
 
 ### The finale: the Fair, Restored (five beats at most)
 
-1. **Who are you?** (Copy tiers 3–4 only.) `role:granny` got home on Tuesday: "Somebody was already here. Wrong blink." Tier 4: the Copy sits at her card table, being you. `role:granny`, looking from one to the other: "Are you sure you're {name}?" Copy: "100%." You: **"Mostly."** "That's my {name}." The Copy shrinks to a single die. Tier 3: she has already sat on it; it says your `brave` answer once (if unset: "I AM {name}. 100%.") and stops.
-2. **The candles** (only if someone died). One dark lantern for each, a candle under each; one plain line per name from `role:granny` or `role:narrator` ("Sequins. He'd have hated how dark it is."). No jokes here.
-3. **The shelf.** `role:granny` (if the Copy didn't get home: "Downhill. Through time. Took ages.") watches `role:sequins` (Sequins; or Tally, whose arrival happens here if she has not already arrived) take the young Guess-o-Matic out of your pocket and paint a sign: **IT GUESSES.** "I'd have sold it one day. Old magpies sell things. Not this one. I've labelled it." By `fate`: *home*, the old one sits beside it; *off*, the dark box sits beside it under a cloth; *left running*, "Somewhere tomorrow, a machine says 'probably'. I hope someone claps." Your `wonder` answer, in one line ("You asked what it was before. Now we know."). Nudge stands by the stall asking every passer-by its first question: "…Why?" (If `syllo-away`, Syllo marches in, hoarse, with most of his recruits. If `stakes.ch1 = 3`, Sequins' tic ends: "Like and subsc— oh. It's gone." Frogling players only, the voice: "A heron. At the Fair. …It's just looking at the cakes. Huh. Not every heron.") The Sundial: "Will this one grow up loud? I can't predict that. Nobody can."
+0. **The walk home** (Summit Rift). The Sundial's question for Ch4 (Kuku asks it with `dead:sundial`): "It used to say 'probably'. Then nobody clapped. Would you stop too?" No answer is asked for yet. Nudge, without its clipboard, follows you through the rift at a distance.
+1. **Who are you?** (Copy tiers 3–4 only.) `role:granny` is home first. Granny: "Got home Tuesday. Somebody was already here. Wrong blink." Achilles: "Came to sit at her table. Somebody was already sitting there." (Achilles on his fallback, not yet arrived: his arrival line comes first, then this beat.) Tier 4: the Copy sits at her card table, being you. `role:granny`, looking from one to the other: "Are you sure you're {name}?" Copy: "100%." Granny: "Nobody's 100%, dear. Not even me." *(to you)* "Come here. That's my {name}." (Achilles: "Nobody's 100%. Not even me, and I'm fast." *(to you)* "You. The slow one. Good.") You say nothing. The Copy shrinks to a single die. Tier 3: `role:granny` has already sat on it; it says your `brave` answer once (if unset: "I AM {name}. 100%.") and stops.
+2. **The candles** (only if someone died). One dark lantern for each, a candle under each (Pip never had a lantern at the Fair: with `dead:pip` you light a new one for him, and a candle goes under it); one plain line per name from `role:granny` or `role:narrator` ("Sequins. He'd have hated how dark it is."). No jokes here.
+3. **The shelf** (five lines at most). `role:sequins` (Sequins; or Tally, whose arrival happens here if she has not already arrived) takes the young Guess-o-Matic out of your pocket and paints a sign: **IT GUESSES.** "I'd have sold it one day. Old magpies sell things. Not this one. I've labelled it." Granny watches (only if the Copy didn't get home first, and not when Tally's arrival line plays here: "Downhill. Through time. Took ages."; Achilles has no travel line). By `fate`: *home*, the old one sits beside it; *off*, the dark box sits beside it under a cloth; *left running*, "Somewhere tomorrow, a machine says 'probably'. I hope someone claps." Nudge stands by the stall asking every passer-by its first question: "…Why?" The Sundial: "Will this one grow up loud? I can't predict that. Nobody can." (Kuku: "Will this one grow up loud? I can't tell. Nobody can.")
 4. **The last question.** The sun comes out. The shadow lies where it should (`bargain`: half of it, "cloudy, always"; `dead:sundial`: Kuku lays it on the silent stone, in the sun, as it once asked at the Café: "Ten past eleven. Exactly. It would have liked that."). If the Feed is 6 or more, a thin line stays in the sky: `role:granny`, "There's a hair on the sky. I'll dust it later." Then she holds up the Thinking Trophy: **"'For the thinker who is always right.' Is that you?"** Avatar: **"Probably."** `role:granny`: "Then it isn't yours. Good. It's very heavy." The Sundial: "Tick. Tock. Good. Say it like that." "The end. For now." `rift-walker` is set.
 
 (With `dead:granny`, Achilles asks it his way: "'Always right.' Is that you? Think fast. …No. Slow. She'd say slow." With `dead:sundial`, Kuku: "Good. Say it like that. …I'm practising.")
+
+**After the end: the restored Fair map** (optional, so nobody waits for them before the last word). After "The end. For now.", the Fair map is open, and a few stations hold one bark each, played once when you click it:
+- Syllogism Gallery (`syllo-away`): Syllo, hoarse, with most of his recruits: "Home! …Count them. Real ones this time."
+- Pattern Stall (`stakes.ch1 = 3`): Sequins' tic ends: "Like and subsc— oh. It's gone."
+- Witness Tent (`honest-label`): Mirage: "Altmanta's box says 'I GUESS THE USUAL' now. Labels are catching on."
+- Granny's card table (`berry`): `role:granny`, "I had a berry. A very fair berry." (Achilles: "Got a berry. Gave it to Volt. Felt good.")
+- By the cakes (Frogling players only, the voice): "A heron. At the Fair. …It's just looking at the cakes. Huh. Not every heron."
 
 **Post-game:** visiting Your Home with `rift-walker` set plays one line from `role:narrator`: "Back again, Rift-Walker? The Fair has prizes. And questions."
 
@@ -575,7 +603,7 @@ Leads: the lead bank at the Chart Gallery and Prediction Hall, plus one story le
 |---|---|---|---|
 | Owlet | Sorting, after Pip: "He was certain. Certain felt lovely to him. Noted. Uncomfortably." | Sorting: "The arithmetic is perfect. So the sorting is fair. QED." | Sorting win: "Perfect sums. Unfair choices. Both true. Annoying." |
 | Moth-kin | Tower Door: "Look. The bar says '{name} 2.0'. Two point oh. Of me." | Gallery: "Look. Gold frames. So bright. These must be the honest ones." | Gallery win: "Gold frame. Same trick. Shinier." |
-| Fox | Workshop: "Picture a machine that can't finish a question. Sad. Good film, though." | Tower Door: "It hates me. I can feel it. Very cinematic." | Core: "It didn't hate me. It didn't even know me. It counted." |
+| Fox | Workshop: "Picture a machine that can't finish a question. Sad. Good film, though." | Tower Door: "It hates me. I can feel it. Very cinematic." | Core, as its one voice-back line: "It didn't hate me. It counted. A calculator with stage fright." |
 | Frogling | Oracle: "Pip checked one. I remember when he didn't." (`dead:pip`: "He'd have checked this one.") | Prediction Hall: "It's been right five times. Five out of five. It knows me." | Prediction win: "Five right. Then I changed. It didn't." |
 | Raven | Tower Door: "'Predictable.' Not 'known'. It picked that word carefully." | Oracle: "'Thinking engine.' It's in the name. It thinks." | Oracle win: "Called 'thinking'. Never checked once." |
 
@@ -583,9 +611,11 @@ Leads: the lead bank at the Chart Gallery and Prediction Hall, plus one story le
 
 Tower Door, Gallery, Prediction Hall: the colossus (Pip beside you) · Stairwell, Workshop: Pip · Sorting Room: Pip (possessed) · Oracle Chamber: the Oracle · Sky Bridge: the Feed's Champion · Core: the colossus · Summit Rift: `role:narrator` · the Fair, Restored: `role:granny`. With `dead:pip`, his host slots after the Sorting Room go to `role:narrator` (or stay empty until Kuku arrives).
 
-### The Sundial's question at the core
+### The Sundial's question (Summit Rift, after the core)
 
-> **narrator:** It counted everything you did. Did it know you?
+> **narrator:** It used to say "probably". Then nobody clapped. Would you stop too?
+
+(The core already says "I never knew you", so the question doesn't ask it again. The `fate` choice ends the core.)
 
 ### Sample lines
 
@@ -602,6 +632,8 @@ Tower Door, Gallery, Prediction Hall: the colossus (Pip beside you) · Stairwell
 > **copy:** I'll go home. I'll win the trophy. I'll never say "probably".
 > **avatar:** No. It's always right. That's how I'd know it isn't me.
 > **core:** Nobody claps for "probably". So I stopped saying it.
+> **copy:** Step aside. I'll answer. I'm always right.
+> **copy** *(Just this once)*: See? Nobody will notice.
 > **core:** May I… stay small for a while?
 > **granny:** "For the thinker who is always right." Is that you?
 > **avatar:** Probably.
@@ -615,10 +647,10 @@ Tower Door, Gallery, Prediction Hall: the colossus (Pip beside you) · Stairwell
 
 Each is stated once in play by the character named, and every scene above obeys it.
 
-1. **Shadows point at now** (the Sundial, Prologue). The Algorithm uses the four pieces of the Sundial's shadow as **locks** on the doors behind it. A piece unlocks the next rift (whoever carries it through), and unlocked rifts stay open.
+1. **Shadows point at now** (the Sundial, Prologue). The Algorithm uses the four pieces of the Sundial's shadow as **locks** on the doors behind it. A piece unlocks the next rift (whoever carries it through), and unlocked rifts stay open. The locks are against you: the feed's own (imps, Arch-Imps, the possessed) pass its doors freely, which is how Quill escapes through the Sky Rift as her scarf falls.
 2. **The pieces.** 1 at the Gate (Nudge may run off with it: `nudgeFled`, recovered at the Ch2 Hall); 2 on Miss Quill (a black scarf that never moves in the wind); 3 in the Tribunal as Exhibit A; 4 inside the core. With `bargain`, two pieces go back to the Algorithm in Ch3 and are used up in the Copy.
 3. **The Sundial rides in your shadow** from the Prologue's evening on. It sees only what you see. Without its own shadow it guesses, and says so; each piece returned makes it surer. Before that it stands outside your door, at the edge of the Fair.
-4. **The Hum Charms are pairs.** Granny made three. **Yours pairs with Granny's.** **Granny's also pairs with an "emergency" charm she gave Coach Achilles seventy years ago, which he never wore** (mentioned only if `dead:granny`). A charm works anywhere and at any time, except inside the feed (the crack, or an imp's sack): that is why she goes silent in Ch1, and why her voice crackles through at the Gate when the sack leaves the crack. If she dies, the Constable gives you her charm. In the Quiet Scene you hum on yours; hers, in your bag, stays silent. Achilles learns of her death the way everyone at the Fair does, from her lantern going out (A.13). Only then does he put his charm on, and that is why her charm in your bag hums at the Ch3 Café.
+4. **The Hum Charms are pairs.** Granny made three. **Yours pairs with Granny's.** **Granny's also pairs with an "emergency" charm she gave Coach Achilles seventy years ago, which he never wore** (mentioned only if `dead:granny`). **A charm only sounds when worn**: humming on one plays out of every *worn* charm it pairs with. A charm works anywhere and at any time, except inside the feed (the crack, or an imp's sack): that is why she goes silent in Ch1, and why her voice crackles through at the Gate when the sack leaves the crack. If she dies, the Constable gives you her charm. In the Quiet Scene you put it on beside yours and hum: only your own hum comes back, out of hers ("Only mine."), because the third charm, Achilles', is not worn. Achilles learns of her death the way everyone at the Fair does, from her lantern going out (A.13). Only then does he put his charm on, and that is why her charm, which you now wear, hums at the Ch3 Café in his rhythm.
 5. **The Algorithm sees through cracks, screens and imps.** The crack hangs over the Fair and runs down the Road; Boolesbury has imps; Tomorrowton and the Tower are all screens. Rest stops (the Garden, the Café, the Campfire) have no eye. **It logs what you do and say where an eye can see; never what you think.** (Your boast at the Fair Gate was said under the crack.)
 6. **Possession** (teacher's direction 9). The Algorithm has no body. It enters people and creatures through screens, cracks and imps. The sign: a cold screen-glow in the eyes and a skin of scrolling thumbnails, static under Calm motion; their voice doubles with its capitals. The possessed are loud, certain and against you. Beaten, they are freed. It can only possess an NPC whose understudy is not active, and possessing someone you know uses up that person's single death-risk moment (Appendix D).
 7. **Imps and Arch-Imps.** Imps are the Algorithm's own small creatures (Nudge is one); they wear villager masks. **An Arch-Imp is someone who said yes to the feed for good**: Miss Quill accepted its offer of a world with no maybes, and her old face became her mask. Possession can be beaten out of you; an Arch-Imp's choice can't, so Quill escapes instead of being freed.
@@ -627,7 +659,7 @@ Each is stated once in play by the character named, and every scene above obeys 
 10. **Caricatures** are famous faces from every era, pulled through the crack and possessed. Beat one and the glow drains; then you may catch it.
 11. **The time rift** (the classroom jump tool) is the Sundial's trick: "I'm a clock. Skipping ahead is allowed. I just can't see where we land." A first jump plays that chapter's "Previously…", after any Quiet Scene that is still pending (Appendix D).
 12. **Out-of-order play.** A chapter played after a later one plays **as a memory**: its lethal tier is disarmed, its hums are labelled "Remembered", and flags set by later chapters win.
-13. **The lanterns.** The Fair keeps a lantern for each person it loves. When one of them dies, wherever they are, their lantern goes out. Everyone at the Fair sees it.
+13. **The lanterns.** The Fair keeps a lantern for each person it loves. When one of them dies, wherever they are, their lantern goes out. Everyone at the Fair sees it. (Pip never lived at the Fair, so he has none; in the finale you light a new lantern for him.)
 14. **Three times:** your own (the Fair and the Road), the past (Boolesbury), the future (Tomorrowton and its tower). **Death is real**: no time-rift undo. The avatar never dies.
 15. **The Guess-o-Matic loop.** The young toy travels in your pocket from Ch1; the core is the same toy, a hundred years older. Sequins: "I'd have sold it one day. Old magpies sell things." (That is how it reached the future.) The label IT GUESSES may change its future, and the Sundial says so honestly: "Will this one grow up loud? I can't predict that. Nobody can."
 
@@ -639,20 +671,20 @@ Each is stated once in play by the character named, and every scene above obeys 
 
 **After a boss**, at most six lines: the tier line, how the antagonist leaves, what the Algorithm loses, one voice reveal, the Sundial's question.
 
-**The Algorithm's ladder:** Prologue: ad-speak and "NOISE DETECTED". Ch1: predicts you out loud and quotes your boast ("I KNEW YOURS"). Ch2: speaks through Quill and Nudge; mocks the trophy; slips one small "probably". Ch3: public; screens quote you against the defendant; loses its capitals for a line. Ch4: reads your actions off a screen; "YOU SAID 'ALWAYS'. SO DO I."; its own body; then small, lower case, honest. "RECALCULATING" at most once per chapter, the last time in lower case. Numbers are an on-screen readout, never voiced, and fields that are not set are left out.
+**The Algorithm's ladder:** Prologue: ad-speak and "NOISE DETECTED". Ch1: predicts you out loud and quotes your boast ("I KNEW YOURS"). Ch2: speaks through Quill and Nudge; quotes you ("SEE? SHE'S ON MY SIDE." SHE WAS. MY SIDE.); mocks the trophy in the small print of Nudge's poster; slips one small "probably". Ch3: public; screens quote you against the defendant; loses its capitals for a line. Ch4: reads your actions off a screen; "YOU SAID 'ALWAYS'. SO DO I."; its own body; then small, lower case, honest. "RECALCULATING" at most once per chapter, the last time in lower case. Numbers are an on-screen readout, never voiced, and fields that are not set are left out.
 
 **The Feed voice** (Emotion, the colour no avatar has). From Ch3 it imitates **your** inner voice, in your colour, flickering grey, and gets your habit **slightly wrong**, so an attentive player spots the fake before your real voice says "That wasn't me.":
 - REASON (grey): "Everyone votes guilty. So: guilty. Elegant. Like everyone."
-- PERCEPTION (grey): "Look at the votes. Only the votes. Don't look at anything else."
+- PERCEPTION (grey): "Look at the votes. Only the votes. Lights are boring."
 - IMAGINATION (grey): "Picture the rock in jail. Boring. Very realistic."
-- MEMORY (grey): "Rocks always lose trials. Remember? Every trial. All of them."
+- MEMORY (grey): "Rocks always lose trials. I remember every one. Don't ask which."
 - LANGUAGE (grey): "'Fraud.' A strong word. Strong words are true. That's what they're for."
 
 At the core every Feed line is shown with its probability.
 
 ## Appendix C. Stakes clocks, negotiation and the Feed
 
-**The widget.** A Danger clock drawn as the fiction, with the last two notches smaller and redder; a gold Progress clock; a voiced warning at every tick, before anything bad happens. Inside a stakes scene **mistakes tick the clock instead of costing hearts** (a wrong check, a hint or a wrong "Why?" is 1 notch). Drains: blue options, items, side-story ripples (at most 2 per boss), a heart (once per stage). If Danger fills first, the tier-4 outcome (or, when disarmed, the brink line; Appendix D) plays at once, the puzzle **continues without the clock**, and finishing it still wins the chapter. Tuning target: about 25% clean, most close calls, about 10% at a price, about 5% too late; simulate careful, average and guessing players.
+**The widget.** A Danger clock drawn as the fiction, with the last two notches smaller and redder; a gold Progress clock; a voiced warning at every tick, before anything bad happens. Inside a stakes scene **mistakes tick the clock instead of costing hearts** (a wrong check, a hint or a wrong "Why?" is 1 notch). Drains: blue options, items, side-story ripples (at most 2 per boss), a heart (once per stage). If Danger fills first, the tier-4 outcome (or, when disarmed, the brink line; Appendix D) plays at once, the puzzle **continues without the clock**, and finishing it still wins the chapter. Any later scripted beat in that boss that assumes the character is alive or the clock is open has a stated fallback or is skipped (Granny's climax prompt, the bargain). **The one exception is the Copy's bar in Ch4** (below), which never resolves early. Tuning target: about 25% clean, most close calls, about 10% at a price, about 5% too late; simulate careful, average and guessing players.
 
 **Each boss has a different shape** (teacher's direction 5):
 
@@ -665,11 +697,17 @@ At the core every Feed line is shown with its probability.
 
 **Tiers.** 8 notches: Clean 0–3 · Close 4–5 · At a price 6–7 · Too late 8. 6 notches: 0–1 · 2–3 · 4–5 · 6. Saved as `stakes.<id>`; a disarmed tier 4 is saved as **3**.
 
-**The Copy's clock** (Ch4): starts with ⌊Feed ÷ 3⌋ notches filled, +2 with `bargain`, +1 if `stakes.ch3 = 3`, at most 3 in all. On the floors, the first wrong check on each floor and every hint fill it (only the first wrong check, so a long chapter does not overflow). **The push:** at the Oracle door the Copy speaks for the first time, your own words in the wrong mouth (your `brave` answer, or "I AM {name}. 100%." if it is unset); warned, +1. At the core it keeps running; its tier is set when trial 3 is won.
+**The Copy's clock** (Ch4, 8 notches), exactly:
+- **Start** (at the Tower Door, after any Quiet Scene): ⌊Feed ÷ 3⌋ notches filled, +2 with `bargain`, +1 if `stakes.ch3 = 3`, at most 3 in all.
+- **On the floors** (every Ch4 station before the core, except the Sorting Room): these are normal stations, so hearts work as usual; the bar **also** takes 1 for the first wrong check on each floor and 1 for every hint. Later wrong checks on a floor cost hearts only, so a long chapter does not overflow the bar.
+- **At the Sorting Room** Pip's glow is the only clock. Mistakes tick the glow, never the bar; the bar pauses there.
+- **The push:** at the Oracle door the Copy speaks for the first time, your own words in the wrong mouth (your `brave` answer, or "I AM {name}. 100%." if it is unset); warned, +1. With `dead:pip`, Pip's Quiet Scene has that door to itself, and the push moves to the Oracle win.
+- **At the core** (a stakes scene): each wrong check, hint or wrong "Why?" in trials 1–3 ticks the bar instead of costing hearts; "Just this once" is +2; "Let me hear them once more" is +1. Drains: the toy soldiers (1), Hoot's Gavel, a heart once per trial.
+- **It never resolves early.** At 8 the bar reads **UPLOAD COMPLETE · WAITING**; further ticks do nothing, the Copy waits at the core, and the floors and trials go on as normal. Drains still work on a full bar. The tier is read **once, when trial 3 is won** (0–3 clean, 4–5 close, 6–7 at a price, 8 too late), so the Copy is always met, and the temptation and trial 3 always have a Copy in them.
 
 **Negotiation** (Draw Steel-lite, `research/draw-steel-and-disco-elysium.md` §3.1): Interest and Patience meters; hidden Cares and Can't-stand tags; a hand of argument cards marked **sound** or **slick**; the avatar's special card; your voice flips one tag; the result screen asks "Was your argument good?". Main story: the Mayor (Ch2) and Speedcheeta (Ch3). Side stories: 1 and 10.
 
-**The Feed clock** (one 8-notch campaign clock): any tier 1 −1; tier 3 +1; tier 4 +2 (a death is a tier 4, so it is not counted twice). Quiet Scenes give nothing. Hidden until Ch3, then on every screen. It pre-fills the Copy's clock and decides the finale's sky (6 or more: the hair stays). At the core: "A tally of your bad days. I called it confidence."
+**The Feed clock** (one 8-notch campaign clock): any tier 1 −1; tier 3 +1; tier 4 +2 (a death is a tier 4, so it is not counted twice). Quiet Scenes give nothing. Hidden until Ch3, then on every screen. It pre-fills the Copy's clock and decides the finale's sky (6 or more: the hair stays).
 
 ## Appendix D. Deaths, understudies and possession
 
@@ -718,7 +756,7 @@ Each NPC has one static `peril`. When that scene resolves, whatever the tier, th
 
 1. **Silence.** The role goes silent at once: its script lines are skipped, and its **host slots** fall back to a named stand-in (Gate → the Sundial; Hall → the Constable, who is at the door; Pattern Stall → no host, with a black ribbon on the curtain; Sundial → Pip, for host slots on Ch3–4 nodes only, and empty elsewhere until Kuku; Pip → `role:narrator`). Narrator **script** lines are skipped until Kuku arrives; Pip's own written lines carry the Ch4 Tower Door. **No understudy appears the moment a `dead:` flag is set.**
 2. **The puzzle continues** (the chapter is always winnable).
-3. **The Quiet Scene** opens the next chapter: Sequins → Ch2; Granny → Ch3; the Sundial → Ch4. Pip's plays at the next floor's door. **A pending Quiet Scene plays at the first chapter opening the player reaches by any route** (a rift walk or a time-rift jump), before that chapter's "Previously…". It is never skipped and never lost.
+3. **The Quiet Scene** opens the next chapter: Sequins → Ch2; Granny → Ch3; the Sundial → Ch4. Pip's plays at the next floor's door. **A pending Quiet Scene plays at the first opening of the next chapter, or of any later one, that the player reaches by any route** (a rift walk or a time-rift jump), before that chapter's "Previously…". A jump *backwards* never plays it (Pip will not mourn the Sundial in Boolesbury). It is never skipped and never lost.
 4. **The understudy arrives** in a later scene (`arrived:<role>`), with one line that says why. Warmth and comedy may return from here.
 5. **A candle** at the Fair in the finale.
 
@@ -735,8 +773,8 @@ The villain may be callous **in its own lines elsewhere** ("SAD CONTENT PERFORMS
 ### Understudy arrival beats (all behind `dead:` flags)
 
 - **Tally** (Sequins), from behind the Pattern Stall curtain: "He did the shouting. I did the counting." She runs the stall with his collection and does the shelf in the finale. (Not yet arrived by the finale? She arrives at the shelf, with that line.)
-- **Coach Achilles** (Granny). At the Ch3 Café, her charm in your bag hums. Not her rhythm: faster. "Coach Achilles. Her rival. Saw her lantern go out." / "She gave me this charm seventy years ago. For emergencies. …This is one." His arc is Zeno's: the fast hare learns to be slow. Ch3 trial reference: "Ninety years she knew that rock. I'm faster than her. Never caught her, though." / Judge Hoot: "Kind. Fast. Not evidence." The finale: "'Always right.' Is that you? Think fast. …No. Slow. She'd say slow." The sky: "She'd have said she'd dust it later. I'll do it now. …Slowly." **Fallback:** if he has not arrived by the finale (a jump over Ch3), he is at her card table in person: "Coach Achilles. Saw her lantern go out. Came as fast as I could. Which is fast."
-- **Kuku** (the Sundial) has lived three hundred years in Granny's hallway cuckoo clock, next door, listening through the window to the Sundial guess and rehearsing, just in case. The imps took the clock in Granny's sack in Ch1 (said only now), and the Tower filed it in its Evidence Locker, beside the jar. First, quietly: "…It stopped. I heard it stop. Three hundred years I listened to it guess." Then the brass: "Cuckoo. Four seventeen and twelve seconds. I can do the hours. Not the rest." Proud, certain, never guesses. It narrates from then on in the Sundial's places.
+- **Coach Achilles** (Granny). At the Ch3 Café, her charm, worn beside yours since the Quiet Scene, hums. Not her rhythm: faster. "Coach Achilles. Her rival. Saw her lantern go out." / "She gave me this charm seventy years ago. For emergencies. …This is one." His arc is Zeno's: the fast hare learns to be slow. Ch3 trial reference: "Ninety years she knew that rock. I'm faster than her. Never caught her, though." / Judge Hoot: "Kind. Fast. Not evidence." The finale: "'Always right.' Is that you? Think fast. …No. Slow. She'd say slow." The sky: "She'd have said she'd dust it later. I'll do it now. …Slowly." **Fallback:** if he has not arrived by the finale (a jump over Ch3), he is at her card table in person: "Coach Achilles. Saw her lantern go out. Came as fast as I could. Which is fast." This line opens the finale (before beat 1, so it comes before the Copy), and his finale lines follow (beat 1: "Came to sit at her table. Somebody was already sitting there."; no travel line at the shelf).
+- **Kuku** (the Sundial) has lived three hundred years in Granny's hallway cuckoo clock, next door, listening through the window to the Sundial guess and rehearsing, just in case. The imps took the clock in Granny's sack in Ch1 (said only now), and the Tower filed it in its Evidence Locker, beside the jar. First, quietly: "…It stopped. I heard it stop. Three hundred years I listened to it guess." Then the brass: "Cuckoo! Four seventeen and twelve seconds. Exactly. I never guess." Proud, certain, never guesses. It narrates from then on in the Sundial's places.
 - **Mr Rubberstamp** (Pip) has no arrival beat in this outline.
 
 ### Who is understudied, dark if lost, or ordinary
@@ -754,7 +792,7 @@ The villain may be callous **in its own lines elsewhere** ("SAD CONTENT PERFORMS
 
 ### The world darkens
 
-Each death puts out that person's lantern at the Fair (A.13), visible on every map that shows the Fair, and adds to the Feed. The finale keeps the dark lanterns, with candles under them.
+Each death puts out that person's lantern at the Fair (A.13), visible on every map that shows the Fair, and adds to the Feed. (Pip had no lantern; you light one for him in the finale.) The finale keeps the dark lanterns, with candles under them.
 
 ## Appendix E. The inner voice
 
@@ -816,21 +854,21 @@ Every flag is set in one place and read later. **Every story flag defaults to un
 | Flag | Values | Set | Read |
 |---|---|---|---|
 | `brave` | go / hide / ask | Prologue, that evening | Ch1 Campfire; Ch3 Exhibit B (left out if unset); Ch4 readout; the Copy's lines (fallback "I AM {name}. 100%.") |
-| `turnedBack` | true | **visiting the open door** at the Fair Gate before the Gate is won | Gate clock +1; Gate plan line; voice reveals at the cottage; the Sundial's question variant |
+| `turnedBack` | true | **visiting the open door** at the Fair Gate before the Gate is won | the first-night variant (if seen first); Gate clock +1; Gate plan line; voice reveals at the cottage; the Sundial's question variant |
 | `nudgeFled` | true | Ch1 Gate, Danger ≥ 3 at the win | Ch2 arrivals ("cloudier"); the piece falls out of Nudge's mask at the Hall |
 | `moser` | true | Ch1 Standing Stone win | Gate drain line |
-| `stakes.ch1` | 1–4 | Ch1 Gate | Lucky Sequin (1–2); the tic (3), which ends in the finale |
+| `stakes.ch1` | 1–4 | Ch1 Gate | Lucky Sequin (1–2); the tic (3), which ends in a bark on the restored Fair map |
 | `suspect` | mayor / none / quill | Ch2 Square | Ch2 Sundial question |
 | `cover` | postman / visitor / species | Ch2 first interrogation | tower base block; Clock Tower; Exhibit C (fixed text if unset); Ch4 readout |
 | `mayor` | torn / key / refused | Ch2 Square, revisited | Hall start, stage 1, drains, the Mayor's lines |
 | `stakes.ch2` | 1–4 | Ch2 Hall | Spare Axiom (1–2); Granny's state in the hums and the finale |
 | `away:schoolteacher` | true | Ch2 Hall win, every tier | Schoolhouse host → Gumleaf; Juror One; core trial 1 |
 | `clip` | sound / slick / none | Ch3 Steps negotiation | trial drain; Fin's objection |
-| `bargain` | yes / no | Ch3 trial, after Count 2 | vote frozen; Copy pre-fill +2 and the Copy's borrowed voice; Stairwell and last-piece lines; finale shadow |
+| `bargain` | yes / no (unset if never offered) | Ch3 trial, after Count 2, only while the vote is below 8 | vote frozen; Copy pre-fill +2 and the Copy speaking in the Sundial's voice; Stairwell and last-piece lines; finale shadow |
 | `stakes.ch3` | 1–4 | Ch3 Tribunal | Hoot's Gavel (1); CONTROVERSIAL (2); Copy +1 (3) |
 | `stakes.pip` | 1–4 | Ch4 Sorting Room | Pip's lines; record wiped (3) |
 | `stakes.ch4` | 1–4 | Ch4 core, when trial 3 is won | the Copy's Hat (1); finale beat 1 (3–4) |
-| `wonder` | one of 7 | Ch4 core (before the reveal) | finale shelf line |
+| `wonder` | one of 7 | Ch4 core (before the reveal) | the box's one-line answer at the core |
 | `fate` | home / off / left | Ch4 core | finale shelf |
 | `finale-open`, `rift-walker` | true | core win; finale | the finale node; the post-game line |
 | `dead:sequins` / `dead:granny` / `dead:sundial` / `dead:pip` | true | an armed tier 4 at each `peril` | Quiet Scenes, host fallbacks, `role:` lines, candles |
@@ -839,7 +877,7 @@ Every flag is set in one place and read later. **Every story flag defaults to un
 | setting `charactersCanDie` | on / off | Settings (default on) | arming |
 | `rumour:hexling` | true | Ch3 West Bridge | Library spawn |
 
-(The `wonder` choice: at the core, before the reveal, the colossus shows its prediction of your next question, "WHAT WILL GET MORE CLICKS?", and you ask your own. Everyone: "Why do people believe you?" / "What happens if nobody clicks?" Avatar-only: Owlet "What are your premises?" · Moth-kin "What's behind all that light?" · Fox "What if you're small?" · Frogling "What were you before?" · Raven "What do you mean by 'know'?". It cannot predict a question, only a click. The finale answers it in one line.)
+(The `wonder` choice: at the core, before the reveal, the colossus shows its prediction of your next question, "WHAT WILL GET MORE CLICKS?", and you ask your own. Everyone: "Why do people believe you?" / "What happens if nobody clicks?" Avatar-only: Owlet "What are your premises?" · Moth-kin "What's behind all that light?" · Fox "What if you're small?" · Frogling "What were you before?" · Raven "What do you mean by 'know'?". It cannot predict a question, only a click. The box answers it in one line as soon as it cracks open; all seven answers are written in §6.)
 
 Side-story flags: `SIDE-STORIES.md` §8.
 
@@ -880,7 +918,7 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
 **Places:**
 - `burrow` is "Your Home", at the edge of the Fair ("outside my door").
 - `fair-rift` becomes **"The Nut Stall"**.
-- The Fair Gate holds Granny's card table, and her open cottage door from the Ch1 Well win until the finale.
+- The Fair Gate holds Granny's card table and Syllo's required practice match, and her open cottage door from the Ch1 Well win (or, for a jump-in, once a later chapter has been entered) until the finale.
 - There are two chart galleries: the city's (Ch3) and the Algorithm's originals (Ch4).
 - In Ch3, every route to the Plaza runs through the Café and the Library (Appendix H). `t-tower-gate` links from the Tribunal.
 
@@ -891,7 +929,7 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
 - Granny's Spare Axiom
 - Hoot's Gavel
 - the Copy's Hat
-- the Thinking Trophy (polished at Sequins' stall; held up in the finale)
+- the Thinking Trophy (polished at Sequins' stall, so its stand at the Nut Stall is empty at the final: side story 1; held up in the finale)
 - keepsakes after deaths (cosmetic only)
 - the shadow pieces 1–4
 
@@ -900,7 +938,8 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
 - After a non-lethal Ch2, Granny walks home: on the Road in Ch3 (the Café hum), at the Campfire in lesson 4 (side story 10), home on the Tuesday before the finale.
 - Sequins is never at a Road station after the Gate.
 - Quill leaves through the Sky Rift, is Juror One in Ch3, and sits down at the core in Ch4.
-- Nudge loses its ring light or the piece (Ch1), its mask (Ch2), its followers (Ch3) and its job (Ch4), and follows you home.
+- Nudge loses its ring light or the piece (Ch1), its mask (Ch2), its followers (Ch3: FOLLOWERS: 0 after the verdict) and its job (Ch4: "NUDGE. YOU ARE NO LONGER REQUIRED." after core trial 2), and follows you through the Summit Rift and home.
+- Quill loses her mask (Ch2), her jury (Ch3: the last GUILTY sign, hers, comes down) and her certainty (Ch4: "Maybe").
 
 ## Appendix H. Implementation notes (for after the gate)
 
@@ -916,8 +955,8 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
 - **Station text:** one in-character intro line; cut normal-station narrator win lines.
 - **Puzzles (code requirements):**
   - `village`:
-    - add a **`mayor` role** with statements, and an option to force a role honest;
-    - the Ch2 Square becomes a small village check (d1: mayor, baker, sweep; the Mayor forced honest);
+    - add a **`mayor` role**;
+    - the Ch2 Square becomes a small village check with **fixed statements** (d1: Mayor "Mrs Crumb and I are the same kind."; Mrs Crumb "Smudge is no imp."; Smudge "The Mayor is no imp."), checked by the solver to have exactly one world: nobody is an imp; its goal panel says "No imps is a possible answer", and it plays no lead-bank line;
     - `excludeRoles: ['schoolteacher']` on every Ch2 roll;
     - `forceImp: 'schoolteacher'` and a pre-filled table with one hidden row ("Show all rows") for Hall stage 3 and core trial 1;
     - Hall stage 1 is skippable when `mayor = torn`.
@@ -926,11 +965,12 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
     - Speedcheeta at the Steps;
     - the three counts against the Sundial, with Count 1's "Say it" push, Exhibits B and C from flags, and the climax "present from the record" step with one tempting wrong quote;
     - core trial 2 ("{name} is mine").
-  - `prediction`: the readout screen, the voice-marked LEFT/RIGHT question, and a core mode where the opponent is the Copy using your counts.
+  - `prediction`: the readout screen (the k-of-n field left out when n = 0), the voice-marked LEFT/RIGHT question, and a core mode where the Copy bets on your voice-marked option from your whole-game counts; "Just this once" auto-plays its first round.
   - `sorting`: the possessed-Pip frame with a 6-notch clock.
   - **Core puzzle list:** village d3 (hidden row), tribunal d3 (new case), prediction d3 (vs the Copy), replacing prediction/oracle/three-act.
 - **Systems:**
-  - the stakes widget, including Ch4's long clock from the Tower Door through the core;
+  - the stakes widget, including Ch4's long clock from the Tower Door through the core (Appendix C: pauses at the Sorting Room; never resolves early; UPLOAD COMPLETE · WAITING at 8; tier read at the trial 3 win);
+  - the restored Fair map after the finale, with optional one-time barks (§6);
   - the Feed clock;
   - negotiation;
   - the cast resolver as in Appendix D: silence, host fallbacks limited by chapter, `arrived:`, locks, arming, memory mode, the pending Quiet Scene rule, and brink lines;
@@ -977,6 +1017,7 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
 3. **New code:** a `mayor` role and a small table at the Ch2 Square; new core trials (a hidden-row table, a tribunal case, prediction against the Copy).
 4. **New art:** Nudge, Quill's two faces, the Guess-o-Matic, a redrawn core.
 5. **Playtest watch:** if most students guess the Ch4 twist at the Ch1 Gate, move its clue 2 to the Ch2 Hall.
+6. **After the finale,** the restored Fair map stays open with a few optional one-time barks (side-story callbacks, the heron). This keeps the last word short for students out of time. OK?
 
 ## Appendix K. Change lists
 
@@ -1042,3 +1083,50 @@ The teacher's notes 4–7 and 9 were built in: the Quiet Scene; recurring antago
 - The editor's "move Ch4 clue 2 to the Ch2 Hall" is deferred to playtest (Appendix J.5). The Gate line is eerie, early and denied by Sequins on the spot.
 - The author's "Speedcheeta games the number" for story 10 is not used. The editor's version (an honest goal, a wrong measure) answers the "nobody is to blame" request more directly.
 - Pip is still mourned in Ch4 rather than given an understudy arrival: the role has no later beats, so Rubberstamp would only be on stage to be on stage.
+
+### Round 4 (answers to the round 3 critics)
+
+Round 3 scores: editor 8 (pass), author 8 (pass), logic 7.5. The edits are surgical: the voice, jokes, Quiet Scenes, antagonists and arc are kept.
+
+**Logic (Critic 1), problem by problem:**
+
+1. **The Ch4 Copy clock.** Appendix C now defines it exactly. It starts at the Tower Door. On the floors, hearts work as usual and the bar also takes the first wrong check per floor and every hint. At the core (a stakes scene), mistakes tick the bar instead of hearts; "Just this once" is +2 and "Let me hear them once more" is +1. **It never resolves early:** at 8 it shows UPLOAD COMPLETE · WAITING, further ticks do nothing, the Copy waits at the core, drains still work, and the tier is read once, at the trial 3 win. So the Copy is always met, and trial 3 always has a Copy in it. Appendix C's general "plays at once" rule names this as its one exception. **Sorting Room:** only Pip's glow ticks; the bar pauses. **Oracle door:** with `dead:pip`, the Quiet Scene has the door to itself, and the Copy's push moves to the Oracle win.
+2. **Mid-boss deaths.** Hall: if the rope fills before the full table has named Quill, Granny's last words are "Don't watch the rope, dear. Watch the table." (the loved "Watch her" stays for every later death), and the climax prompt falls back to the avatar ("The Mayor's sentence. The one that ate itself."). Tribunal: the bargain is offered only while the vote is below 8, otherwise skipped (`bargain` stays unset); the character reference plays before Count 1. Appendix C states the general rule: later boss beats that assume the character is alive have a fallback or are skipped.
+3. **The Square's table.** The loaf squabble is now scene, not table; the loaf rolls out of the Mayor's hat at the Hall for every player, so the Moth-kin reveal is earned. The table has three fixed imp statements with exactly one world: Mayor "Mrs Crumb and I are the same kind.", Mrs Crumb "Smudge is no imp.", Smudge "The Mayor is no imp." ("Same kind" makes Mrs Crumb honest whatever the Mayor is; the chain clears the other two.) The critic's sample set has two worlds (an imp Mayor with two honest villagers also fits), so it was not used. The village lead bank does not play at the Square; instead the goal panel says "No imps is a possible answer", the same for every species. Appendix H is updated.
+4. **Hum Charms.** A.4: "A charm only sounds when worn." In the Quiet Scene you put her charm on beside yours and hum; only your own hum comes back, out of hers ("Only mine."). This also explains why Achilles heard nothing before, and why hers hums at the Café (you wear it now). `UNDERSTUDIES.md` §4.2–4.3 match.
+5. **Jump-ins and the boast.** Every "Previously…" now has one line: "…you said you'd win the Thinking Trophy. 'I always know the answer.' It heard." The readout leaves out k of n when n = 0. At the core n is never 0 (the Prediction Hall's LEFT/RIGHT always comes first), so the unreachable n = 0 line is replaced by n = 1: "I never knew you. One data point. I still called it knowing."
+6. **Finale branches and the off-stage breach.** Achilles has his own beat 1 ("Came to sit at her table. Somebody was already sitting there.") and no travel line at the shelf; on his fallback, his arrival line opens the finale, before the Copy. The shelf's Sundial line has a Kuku variant. Side story 10 shows Achilles only with `arrived:granny`; otherwise it plays with no Granny figure and Volt as the slow one.
+7. **Antagonist losses, staged.** Ch3, after the verdict, as silent images (so the line cap holds): every GUILTY sign comes down except Juror One's, and then hers (Quill loses her jury); Nudge's clipboard reads FOLLOWERS: 0. At tier 4 the counter peaks, the crowd logs off anyway, and Nudge asks "…Why is nobody cheering?". Ch4: after trial 2, Nudge says "Not again." and the colossus says "NUDGE. YOU ARE NO LONGER REQUIRED." (its job); Nudge follows you through the Summit Rift and home. Appendix G lists the losses for Nudge and Quill. The Guess-o-Matic speaks "for the only time until the core".
+8. **Smaller items.**
+   - First night after the open door: a `turnedBack` variant ("Nothing hums back. You know why."; no choice).
+   - Open door for jump-ins: from the Well win, "or once any later chapter has been entered".
+   - Ch1 jump-ins hear the Signpost's gossip at the Forest Road; the Campfire has a line for an unset `brave`.
+   - EVIDENCE FILED at the Library is {n} (3 via the Newsstand, 2 via the West Bridge).
+   - The Frogling lead is the "Clock Tower hum".
+   - A.1: the feed's own pass its doors freely; the locks are against you (Quill's escape).
+   - The Fox has one line at the core: its reveal is merged into its voice-back line.
+   - Kuku asks the Ch3 question in its own words ("He made it say 'I guess'…").
+   - The Copy speaks in your own recorded voice (in the Sundial's only with `bargain`); with `dead:sundial`, the empty jar is labelled "FILED. DELETED AS NOISE."
+   - Pip has no lantern, so you light a new one for him in the finale (A.13, D).
+   - Fin's turn is reworded (see below), and the piece is physically brought into court at Count 1.
+   - TOK: "Valid isn't sound! Hit the first premise!"
+   - The practice match is listed at the Fair Gate, where `story-battle-won` is required, not under the optional Gallery.
+   - A pending Quiet Scene plays at the next chapter's opening or a later one, never on a jump backwards.
+   - `SIDE-STORIES.md`: story 2's winch is gone; the tier bands match Appendix C; the header says round 4. `UNDERSTUDIES.md`: §3.8 says flags are kept, not reset; the `quietAt` nodes say "or the first later chapter opening".
+
+**Author (Critic 2) and editor (Critic 3), done:**
+
+- **One temptation for everyone** (author 1). At the core: "IT CAN DO THE LAST ONE FOR YOU. PERFECTLY." The choice is "No." / "Just this once." (the first round of trial 3 plays itself; bar +2; "See? Nobody will notice.") / with a death, "Let me hear them once more." (+1). The refusal line is unchanged.
+- **"Probably." is kept for the end** (editor 3, author 2). No avatar line before the last question says "probably" or "mostly". The Owlet comfort line is now "That's a fact. I checked."; the avatar's "Mostly." in finale beat 1 is gone, and Granny tells you from the Copy herself ("Nobody's 100%, dear. Not even me."). The Sundial's throwaway "Probably both." and the Ch3 recap's "Probably." are cut; its honest guesses stay. The Moth-kin blind spot loses its hedge too.
+- **"It never knew you" is said once** (author 2): only in the core's "I never knew you" line. The Fox's core line is now "It didn't hate me. It counted."; the Sundial's core question ("Did it know you?") is replaced and moved to the Summit Rift: "It used to say 'probably'. Then nobody clapped. Would you stop too?" The core ends on the `fate` choice.
+- **The core after trial 3 is cut** (editor 4): four core lines; "Oh. You looked…", "Professor Sequins made me…" and "A tally of your bad days…" are gone. The `wonder` question is answered by the box itself, in one line, the moment it cracks open; all seven answers are written.
+- **The finale shelf holds at most five lines** (editor 2, author 3): the sign, Granny's "Downhill" (when it applies), the `fate` line, Nudge's "…Why?" and the Sundial's "Will this one grow up loud?". The side-story callbacks (Syllo, the tic, the honest label, the berry) and the Frogling's heron are optional barks on the restored Fair map after "The end. For now." (teacher question J.6).
+- **Fin's plan is on the page** (author 4, editor 1). After the verdict: "The vault never opens. Courts do." / "It only brings out its trophies when it thinks it's winning. So I made it think so." Tier 4: "The vault never opens. Courts do. I bet with its life. I lost. I'm sorry." It is planted twice: at the Library ("Enter it, Mr Pip. Formally. The jury must see it.") and at Count 1, where the pleased Algorithm sends its trophy down from the vault ("LET THE JURY SEE MY TROPHY."). "Worth it." is cut to keep the stack at six; the screens delete his licence in silence.
+- **Ch2's quote quotes you** (author 6): "'SEE? SHE'S ON MY SIDE.' SHE WAS. MY SIDE." The trophy jibe moves to the small print of Nudge's poster.
+- **Side stories** (author 5, editor 5): story 7 is re-twisted (the "everyone" was wooden: Syllo's own toy soldiers, painted as Fair folk), so 7 and 8 no longer share a twist shape. Story 4's twist is Granny's own plan ("I have a plan."); story 1's hook explains the empty trophy stand; story 6's admission is spoken; story 10 loses "the eel" and gets a plain last line.
+- **Line-level** (author 7–8): the two Feed imitations now get the habit wrong ("Lights are boring." / "Don't ask which."); Kuku: "Cuckoo! Four seventeen and twelve seconds. Exactly. I never guess."; the Sorting Room line is "It says 'objective'. So who did it say no to?"; story 1's Raven line is plain English; `UNDERSTUDIES.md` §3.2 and §4.5 are updated.
+- **Trial 3 differs from the Prediction Hall** (editor 6): the Copy bets on which option your voice will mark, from the whole game's k and n; you beat it by not following your voice.
+
+**Rejected or deferred:**
+- The editor's optional move of Nudge's "why" and Pip's question from the Tribunal Steps to the Data Lab is not made: the Data Lab already carries the Feed voice's first line, the crowd's posts and Juror One, so the move would only shift the crowding. The Steps' last two beats are a three-line coda.
+- The logic critic's sample Square table is replaced by one with a single world (see logic 3).

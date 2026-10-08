@@ -1,6 +1,6 @@
 # Rift of Reason — Side stories (pop-up one-shots)
 
-Status: **outline, round 2 of the writing gate** (8 October 2026). Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
+Status: **outline, round 4 of the writing gate** (8 October 2026). Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
 
 **What a side story is.** A 5–10 minute scene at a station you **have already visited**, not part of the main plot (teacher's note 8). It practises the reasoning of the lesson that unlocked it, through **negotiation**, **deduction**, **argument-spotting** or a **test**. Each one has a stakes clock, a fair twist, a reward, and sometimes a small ripple into the main story. None is needed to finish the game. **Nobody can die in a side story.**
 
@@ -39,7 +39,7 @@ Six beats, about 25 lines.
 | 5. **Outcome** | 30 s | The clock's tier, with a short scene for each. |
 | 6. **The last line** | 10 s | A character beat or punchline that **implies** the idea. Only stories 5 and 9 end on an explicit question. |
 
-**The clock** (the boss widget, STORY.md Appendix C): Danger 6 (4 for the gentlest); Progress 3–4. Mistakes tick the clock instead of costing hearts. Clue clicks after the first three cost 1 notch (time is counted in actions, never seconds). Drains: the story's blue option; a matching-colour creature on the team (once); a heart (once); in negotiations, each "listen" move (mirror, name the feeling, sum up), once. Tiers: **Clean** 0–2 · **Close** 3–4 · **At a price** 5 · **Too late, for now** 6. Feed: tier 1 −1, tier 3 +1, tier 4 +2. Ripples into a boss are capped at 2 notches per boss.
+**The clock** (the boss widget, STORY.md Appendix C): Danger 6 (4 for the gentlest); Progress 3–4. Mistakes tick the clock instead of costing hearts. Clue clicks after the first three cost 1 notch (time is counted in actions, never seconds). Drains: the story's blue option; a matching-colour creature on the team (once); a heart (once); in negotiations, each "listen" move (mirror, name the feeling, sum up), once. Tiers, the same bands as STORY.md Appendix C: Danger 6, **Clean** 0–1 · **Close** 2–3 · **At a price** 4–5 · **Too late, for now** 6; Danger 4, **Clean** 0–1 · **Close** 2 · **At a price** 3 · **Too late, for now** 4. Feed: tier 1 −1, tier 3 +1, tier 4 +2. Ripples into a boss are capped at 2 notches per boss.
 
 **Possession in side stories.** Caricatures may be possessed (the glow, Appendix A.6) and are freed when beaten. **No known NPC is ever possessed in a side story**, and no side story is anyone's death-risk moment.
 
@@ -64,13 +64,13 @@ Six beats, about 25 lines.
 | 1 | Siege at the Witness Tent | Fair: Witness Tent | 1 | confirmation bias | Negotiate | a beloved bird did it, innocently | Mirage testifies at the Ch3 trial |
 | 2 | The Lucky Well | Road: Wishing Well | 1 | induction from a biased sample | Test | the lucky one knows it's not luck | Nudge's tunnel map: drain at the Gate |
 | 3 | The Midday Pie | Road: Campfire | 1 | induction vs deduction; common cause | Deduce | there is no thief | none (a visitor) |
-| 4 | The Three Cake Tins | Boolesbury: Bakery | 2 | truth values, "at most one is true" | Deduce | a message from Granny | the ladle: drain at the pot |
+| 4 | The Three Cake Tins | Boolesbury: Bakery | 2 | truth values, "at most one is true" | Deduce | Granny is planning her own rescue | the ladle: drain at the pot |
 | 5 | The Silent Pupil | Boolesbury: Schoolhouse | 2 | liars and truth-tellers; silence | Deduce | the answer isn't among your options | a reaction at the Hall |
 | 6 | Muskrat's Launch | Road: Troll Bridge | 2 | truth tables with a liar | Deduce | two worlds fit; only a test decides | none (a visitor) |
-| 7 | Syllo's Recruitment Drive | Fair: Syllogism Gallery | 3 | popularity, false choice, authority | Object (duel) | he wrote the letter himself | toy soldiers: drain on the Copy |
+| 7 | Syllo's Recruitment Drive | Fair: Syllogism Gallery | 3 | popularity, false choice, authority | Object (duel) | the "everyone" was wooden | toy soldiers: drain on the Copy |
 | 8 | The Headline Debate | Tomorrowton: Newsstand | 3 | strawman; persuading vs showing | Object (referee) | the angry poodle wrote it | the full quote: drain at the trial |
-| 9 | The Fortune Machine | Fair: Witness Tent | 4 | base rates; right often ≠ knowing | Test + choice | never right when it matters | a finale reaction |
-| 10 | The Giveaway App | Road: Campfire | 4 | proxy variables; who pays for errors | Negotiate + choice | nobody cheated; the measure is wrong | a finale reaction |
+| 9 | The Fortune Machine | Fair: Witness Tent | 4 | base rates; right often ≠ knowing | Test + choice | never right when it matters | a bark on the restored Fair |
+| 10 | The Giveaway App | Road: Campfire | 4 | proxy variables; who pays for errors | Negotiate + choice | nobody cheated; the measure is wrong | a bark on the restored Fair |
 
 ---
 
@@ -80,7 +80,7 @@ Six beats, about 25 lines.
 
 **Station:** the Fair, Madame Mirage's tent. **Teaser:** "The Witness Tent is tied shut from inside. Someone is dealing cards."
 
-**Hook.** Corvina the Card Sharp has barricaded herself in Mirage's tent with three fairgoers (Mr. Beansprout, Billie Eelish, a Speedcheeta cub) and Mirage's crystal ball. Everyone "knows" she stole the Thinking Trophy: Speedcheeta's clip shows a black wing beside it. Sergeant Syllo's toy army will charge with cork rifles at the end of a drum roll. (The teacher's own example: a criminal with hostages at a Fair station, solved by talking.)
+**Hook.** Corvina the Card Sharp has barricaded herself in Mirage's tent with three fairgoers (Mr. Beansprout, Billie Eelish, a Speedcheeta cub) and Mirage's crystal ball. Everyone "knows" she stole the Thinking Trophy: at the final, the trophy's stand at the Nut Stall was empty, and Speedcheeta's clip shows a black wing beside it. Sergeant Syllo's toy army will charge with cork rifles at the end of a drum roll. (The teacher's own example: a criminal with hostages at a Fair station, solved by talking.)
 
 **Reasoning: Negotiate**, on the crisis "stairway": each reply is tagged **Listen / Feel / Trust / Ask**, and asking her out before Trust costs a notch. Corvina: Interest 2, Patience 3. **Cares about:** Fairness ("Everyone blames the crow"), Profit ("What do I get?"). **Can't stand:** Experts ("Don't you lecture me").
 
@@ -97,7 +97,7 @@ Six beats, about 25 lines.
 
 **Late play.** If the trial is already over, Mirage gives you a free fortune instead: "You will win an argument. You already did."
 
-**Inner voice.** Owlet: "Everyone 'knows'. Nobody checked. That isn't knowing. I checked." · Moth-kin: "Look. The clip has edges. There's more picture." · Fox: "What if the black wing belongs to someone we like? Twist!" · Frogling: "Crows got blamed for my mother's pond, too. It was the wind." · **Raven (blue, drains 1):** "Tell her: 'I know how it feels when everyone assumes about black feathers.'"
+**Inner voice.** Owlet: "Everyone 'knows'. Nobody checked. That isn't knowing. I checked." · Moth-kin: "Look. The clip has edges. There's more picture." · Fox: "What if the black wing belongs to someone we like? Twist!" · Frogling: "Crows got blamed for my mother's pond, too. It was the wind." · **Raven (blue, drains 1):** "Tell her: 'People blame black feathers. I know. I have them.'"
 
 **Sample lines.**
 > **syllo:** Thirty seconds, recruit! Then we go in. Corks loaded!
@@ -119,7 +119,7 @@ Six beats, about 25 lines.
 - *Record:* the referee's full log: 6 goals in 10 matches after wishing, 6 in 10 without (generated, always equal or near-equal).
 - *Object:* down the well, by lantern: Nudge (in whatever look it has by then: ring light, mask or clipboard; STORY.md Appendix G), scooping coins and muttering "Engagement".
 
-**Twist.** Siuuugull knows the well doesn't work. "I know. I just like the moment before the kick. It's quiet." He never asked anyone else to wish; the queue copied him. And Nudge, caught, drops a tunnel map: it has been digging towards the Gate's winch.
+**Twist.** Siuuugull knows the well doesn't work. "I know. I just like the moment before the kick. It's quiet." He never asked anyone else to wish; the queue copied him. And Nudge, caught, drops a tunnel map: it has been digging under the Gate, towards the cage.
 
 **Resolution.** "Which data would show whether wishing works?" His scoring matches / all matches he wished before / all matches, with and without wishing / what the viewers think. Only the third. Then: "Does wishing help?" (No: same rate.)
 
@@ -185,7 +185,7 @@ Six beats, about 25 lines.
 
 The labels and the rule always solve it. The dent is a shortcut a stuck player can use. (Logic round 1 found "any two" false here; this is the corrected claim.)
 
-**Twist.** Baked into the cake, a note in Granny's hand, slipped into the flour sack Mrs Crumb took up to the Town Hall kitchen: "Bring a ladle. A big one." The feast is the soup, and the soup is Granny. It also answers the Ch1 crackle ("Bring a lad—").
+**Twist.** Baked into the cake, a note in Granny's hand, slipped into the flour sack Mrs Crumb took up to the Town Hall kitchen: "Bring a ladle. A big one. I have a plan." Everyone knows the soup is Granny (Nudge's flyers say so); what nobody knew is that Granny is planning her own rescue. It also answers the Ch1 crackle ("Bring a lad—").
 
 **Clock.** Danger: oven heat (6; a wrong tin costs 2). Progress: 3.
 
@@ -199,7 +199,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 > **baker:** Three tins! One cake! And imps lighting fires under my livelihood!
 > **baker:** I wrote the labels. At most one tells the truth. Very secure.
 > **avatar:** That is the least secure thing I've ever heard.
-> **granny** *(the note)*: "Bring a ladle. A big one."
+> **granny** *(the note)*: "Bring a ladle. A big one. I have a plan."
 > **baker** *(last line, handing it over)*: Biggest ladle in Boolesbury. Bring her back. And the ladle.
 
 ### 5. The Silent Pupil
@@ -248,7 +248,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 - *Object:* the wiring diagram on the rocket's side, half scratched off: enough to test one claim.
 - *Record:* the launch log: which switch the last working abort used.
 
-**Twist.** The table leaves **two** worlds standing: in one the costume lies, in the other the rapper does, and each world has a different abort switch. No amount of shouting can settle it. Only a test can: the diagram or the log. A truth table can tell you that the evidence isn't enough **yet**. (Once it's aborted, Muskrat admits he never wanted to go today. He just couldn't say "next year" again.)
+**Twist.** The table leaves **two** worlds standing: in one the costume lies, in the other the rapper does, and each world has a different abort switch. No amount of shouting can settle it. Only a test can: the diagram or the log. A truth table can tell you that the evidence isn't enough **yet**. Once it's aborted, Muskrat, quietly, before his last line: "I didn't want to go today. I just couldn't say 'next year' again."
 
 **Clock.** Danger: the countdown (6). Progress: 3.
 
@@ -261,6 +261,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 > **eminemu:** Switch two, it's true, it's the cue, push it through—
 > **gargoyle:** Switch two makes it go faster, darling. I'd know. I'm wearing a rocket.
 > **avatar:** Both stories fit. So we test one.
+> **muskrat** *(quietly)*: I didn't want to go today. I just couldn't say "next year" again.
 > **muskrat** *(last line, climbing out)*: Next year. Definitely. Probably.
 
 ---
@@ -271,30 +272,31 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Station:** the Fair, the Syllogism Gallery. **Teaser:** "A drum at the Fair. Half the Fair is marching in step."
 
-**Hook.** Sergeant Syllo has drafted half the Fair into his toy army. At the end of the drum roll they will march down the Road, "to fight the sky". The recruits' eyes are starting to glow: the louder the drum, the more the feed takes them.
+**Hook.** Sergeant Syllo has drafted half the Fair into his toy army. At the end of the drum roll they will march down the Road, "to fight the sky". A front rank of eleven was marching first; the rest fell in behind. The new recruits' eyes are starting to glow: the louder the drum, the more the feed takes them.
 
 **Reasoning: Object**, an argument duel. Each possessed recruit gives a reason for joining; you pick the reply that answers that **kind** of bad argument, and the recruit's glow drains. Then Syllo rewords the same tricks, and you must recognise them by meaning, not wording.
 
 **Clues (any two show the drive is built on fallacies):**
 - *Record:* his posters: "EVERYONE'S JOINING!" (popularity); "MARCH OR BE A COWARD!" (false choice); "THE ROCKODILE SAYS SO!" (authority, with the eyebrow).
 - *Person:* Usain Volt: "I joined because everyone else did."
-- *Object:* the recruitment letter. It is in Syllo's own handwriting.
+- *Object:* the front rank. They never blink, and their eyes don't glow. One has a paint chip on its nose.
 
-**Twist.** Syllo wrote the letter himself, copying the feed's ads he had seen on the crack's screens. The Fair has gone quiet (Granny gone; Sequins quieter than usual, or gone; you away), and he is lonely: "A sergeant needs someone to shout at." The last round is not an answer to a fallacy. It is a **sound** reason to stay, which you give him.
+**Twist.** The "everyone" was wooden. The front rank, the first eleven "recruits", are Syllo's own toy soldiers, painted as Fair folk. Every real recruit joined because a crowd was already marching. The Fair has gone quiet (Granny gone; Sequins quieter than usual, or gone; you away), and he is lonely: "They were the only ones who ever listened. I thought, if they marched, you'd follow." The last round is not an answer to a fallacy. It is a **sound** reason to stay, which you give him.
 
 **Clock.** Danger: the drum (6). Progress: recruits freed (4).
 
-**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (an argument card for negotiations); `soldiers`: his toy army holds the far end of the Summit Rift in Ch4 (drain 1 on the Copy, applied at the core before its tier is set). 2: everyone stays, and Syllo sulks (his trainer match is grumpier); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: the recruits march off, still glowing, and Syllo goes after them alone. The Gallery hangs a sign, "GONE AFTER MY RECRUITS. —S", until the finale, where he comes home hoarse with most of them. Feed +2. (He is missing, not dead; no understudy steps in.)
+**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (an argument card for negotiations); `soldiers`: his toy army holds the far end of the Summit Rift in Ch4 (drain 1 on the Copy, applied at the core before its tier is set). 2: everyone stays, and Syllo sulks (his trainer match is grumpier); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: the recruits march off, still glowing, and Syllo goes after them alone. The Gallery hangs a sign, "GONE AFTER MY RECRUITS. —S", until the finale; on the restored Fair map he is home, hoarse, with most of them (a bark, STORY.md §6). Feed +2. (He is missing, not dead; no understudy steps in.)
 
-**Late play.** If the core is already won, the soldiers line up for the finale parade instead.
+**Late play.** If the core is already won, the wooden soldiers stand guard at the Gallery instead (a keepsake view).
 
-**Inner voice.** Owlet: "'March or be a coward.' Two options? I count at least four." · Moth-kin: "Look. The handwriting on the letter. It matches the posters." · **Fox (blue, drains 1):** "Tell him: picture the Fair without its Sergeant." · Frogling: "Last time a crowd all agreed, it was the crack. Remember?" · Raven: "'Everyone.' Count them. It's eleven."
+**Inner voice.** Owlet: "'March or be a coward.' Two options? I count at least four." · Moth-kin: "Look. The front rank never blinks. Not once. Not even at the drum." · **Fox (blue, drains 1):** "Tell him: picture the Fair without its Sergeant." · Frogling: "Last time a crowd all agreed, it was the crack. Remember?" · Raven: "'Everyone.' Count them. It's eleven."
 
 **Sample lines.**
 > **syllo:** RECRUITS! Everyone's joining! Are you everyone, or are you NOBODY?
 > **usain volt:** I joined because everyone else did. Is that… not a reason?
 > **avatar:** The Rockodile says so. Is the Rockodile a sergeant?
-> **syllo** *(quietly)*: A sergeant needs someone to shout at. The Fair's been so quiet.
+> **usain volt** *(after the twist)*: I joined because everyone else did. …Is "everyone" made of wood?
+> **syllo** *(quietly)*: They were the only ones who ever listened. I thought, if they marched, you'd follow.
 > **syllo** *(last line)*: Fine. I'll shout at targets. Targets never leave.
 
 ### 8. The Headline Debate
@@ -352,7 +354,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Outcomes.** 1: hobbies are taken up again, and Mirage gets her tent back (and her ball, if it was lost). 2: most come back. 3: half the Fair still believes it; Mirage shares the tent, grumpily; Feed +1. 4: it predicts you will lose your next card battle, and the crowd boos you (cosmetic) until you win one; Feed +2.
 
-**Ripple.** With the honest sign, in the finale `role:sequins` says, painting IT GUESSES: "Mirage did the same to Altmanta's box. Labels are catching on."
+**Ripple.** With the honest sign, an optional bark at the Witness Tent on the restored Fair map after the finale (STORY.md §6): Mirage, "Altmanta's box says 'I GUESS THE USUAL' now. Labels are catching on."
 
 **Inner voice.** Owlet: "Right ninety times because ninety days were the same. Proves nothing. I'm proud of that sentence." · **Moth-kin (blue, drains 1):** "Shh. Open the panel. Look. One dial. That's it." · Fox: "Ask it about a strange day. Watch it panic." · Frogling: "The day of the crack. What did it say about that day?" · Raven: "'Accurate.' Accurate at what?"
 
@@ -367,7 +369,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Station:** the Road, the Campfire Clearing. **Teaser:** "A mountain of berries at the Campfire. The slowest person there is ranked last."
 
-**Hook.** `role:granny`, ranked last, is very slowly typing one request into a huge tablet: "I… need… a… ber—". Speedcheeta has sent four hundred. Mr. Beastie is giving a mountain of healing berries to "whoever needs them most", chosen by his new app. Usain Volt, injured, is ranked last but one. (With `dead:granny`: Coach Achilles, who ran the Road looking for her twice, is ranked first because he types fast, and refuses: "I don't need berries. Give mine to the eel.")
+**Hook.** `role:granny`, ranked last, is very slowly typing one request into a huge tablet: "I… need… a… ber—". Speedcheeta has sent four hundred. Mr. Beastie is giving a mountain of healing berries to "whoever needs them most", chosen by his new app. Usain Volt, injured, is ranked last but one. (With `dead:granny` and `arrived:granny`: Coach Achilles, who ran the Road looking for her twice, is ranked first because he types fast, and refuses: "I don't need berries. Give mine to the limping one." With `dead:granny` but no arrival yet, for example after a jump over Ch3, there is no Granny figure at all: the story plays with Usain Volt as the slow one, ranked last, and the off-stage rule holds.)
 
 **Reasoning: Negotiate, then a choice.** Proxy variables: what the app counts stands in for need; errors go both ways. Beastie is proud of the rule, because he set it honestly. Interest 2, Patience 3. **Cares about:** Safety ("I want to help!"), Fame. **Can't stand:** Facts ("Boring!").
 
@@ -382,9 +384,9 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Clock.** Danger: people who give up and leave (6). Progress: 4.
 
-**Outcomes.** 1: a fair rule; Beastie films the fix, and it gets more views anyway; berries for all and a rare visitor; `berry`. 2: a fairer rule, but some berries are wasted; `berry`. 3: the old rule stays, but you get one berry to `role:granny` (`berry`); Feed +1. 4: the app gives every berry to Speedcheeta, the loudest asker, who eats them all and feels very silly; Feed +2.
+**Outcomes.** 1: a fair rule; Beastie films the fix, and it gets more views anyway; berries for all and a rare visitor; `berry`. 2: a fairer rule, but some berries are wasted; `berry`. 3: the old rule stays, but you get one berry to `role:granny`, or to Volt if nobody holds the role (`berry`); Feed +1. 4: the app gives every berry to Speedcheeta, the loudest asker, who eats them all and feels very silly; Feed +2.
 
-**Ripple.** `berry`: in the finale, `role:granny`: "I had a berry. A very fair berry." (Only with `dead:granny`, Achilles: "Got a berry. Gave it to the eel. Felt good.")
+**Ripple.** `berry`: an optional bark at Granny's card table on the restored Fair map after the finale (STORY.md §6): `role:granny`, "I had a berry. A very fair berry." (Achilles, if arrived: "Got a berry. Gave it to Volt. Felt good.")
 
 **Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, drains 1):** "Ask him: 'Needs it most.' Define 'most'."
 
@@ -393,7 +395,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 > **granny** *(typing)*: I… need… a… ber— Oh, it's gone to sleep.
 > **usain volt:** I'm hurt. I don't like asking. So I'm near the bottom.
 > **beastie:** I measured how much people ask. Not how much they need. …Those are different?
-> **beastie** *(last line, filming)*: New rule. Fewer requests. …Wait. More views?
+> **beastie** *(last line, filming)*: New rule. Fair one. …It's getting more views than the old one. Huh.
 
 ---
 
@@ -405,16 +407,27 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 | `well-map` | 2, tiers 1–2 | Ch1 Gate drain (or a keepsake later) |
 | `ladle` | 4, tiers 1–2 | Ch2 Hall drain (or a keepsake later) |
 | `paradox-board` | 5, tiers 1–2 | Ch2 Hall: Smudge's cheer |
-| `soldiers` | 7, tiers 1–2 | Ch4 Copy drain at the core (or the finale parade) |
-| `syllo-away` | 7, tier 4 | Gallery sign; story 1's sergeant-less soldiers; Syllo home at the finale |
+| `soldiers` | 7, tiers 1–2 | Ch4 Copy drain at the core (or the soldiers at the Gallery, late play) |
+| `syllo-away` | 7, tier 4 | Gallery sign; story 1's sergeant-less soldiers; Syllo home, a bark on the restored Fair map |
 | `fair-quote` | 8, tiers 1–2 | Ch3 trial drain (or the Café wall) |
-| `honest-label` | 9, the honest sign | finale line at the shelf |
-| `berry` | 10, tiers 1–3 | finale line from `role:granny` |
+| `honest-label` | 9, the honest sign | Mirage's bark at the Witness Tent, restored Fair map |
+| `berry` | 10, tiers 1–3 | `role:granny`'s bark at the card table, restored Fair map |
 | `side.<n>` | every story | tier 1–4, for the Feed and the teacher overview |
 
 Side-story drains per boss: the Ch1 Gate, story 2 (1); the Ch2 pot, story 4 (1); the Ch3 trial, stories 1 and 8 (2); the Ch4 Copy, story 7 (1). All within the cap of 2.
 
 ## 9. Change lists
+
+### Round 4
+
+- **Story 7 re-twisted** (author 5): the "everyone" was wooden. The front rank are Syllo's own toy soldiers, painted as Fair folk; the real recruits followed a crowd that was never there. The twist now turns on popularity itself, so 7 and 8 no longer share "the shouter wrote it himself". The object clue is the front rank that never blinks; the Raven's "Count them. It's eleven." sets it up.
+- **Story 10 and the off-stage rule** (logic 6): Achilles appears only with `arrived:granny`; with `dead:granny` and no arrival, the story plays with no Granny figure and Volt as the slow one. "The eel" is gone ("the limping one", "Gave it to Volt"); the last line is plain.
+- **Story 2:** Nudge digs "under the Gate, towards the cage" (no winch).
+- **Story 1:** the hook says the trophy's stand at the Nut Stall was empty at the final; the Raven blue line is idiomatic.
+- **Story 4:** the note adds "I have a plan."; the twist is now Granny planning her own rescue, not the soup (which the flyers already tell you).
+- **Story 6:** Muskrat's admission is a spoken line.
+- **Finale ripples (9, 10, 7 at tier 4)** are now optional barks on the restored Fair map after the finale, so the shelf stays short (STORY.md §6).
+- **Tier bands** match STORY.md Appendix C (Danger 6: 0–1 / 2–3 / 4–5 / 6; Danger 4: 0–1 / 2 / 3 / 4).
 
 ### Round 3
 
