@@ -225,6 +225,8 @@ test('PowerView: numbers after tweaks and a panel for the avatar screen', () => 
     const blood = PV.numbers('lantern', ['blood']);
     assert.equal(blood.cost, 0);
     assert.equal(blood.heartCost, 1);
+    assert.equal(PV.numbers('close-the-proof', ['blood']).heartCost, 2, '1 heart per 2 energy');
+    assert.equal(PV.numbers('night-sight', ['cheap']).cost, 2, 'Night Sight never below 2');
     const panel = PV.panel({ type: 'owlet', variant: 'girl' });
     assert.equal(panel.dataset.power, 'close-the-proof');
     assert.match(panel.textContent, /Close the Proof/);
@@ -264,4 +266,9 @@ test('PowerView: the campfire tweak editor allows one tweak per slot and saves t
     PV.editTweaks();
     opt('blood').click();
     assert.equal(opt('quick').disabled, false);
+    assert.doesNotMatch(opt('cheap').textContent, /never costs less/);
+    // Night Sight's Cheap says it stops at 2 energy.
+    Rift.data.avatars.fox.powers.girl = 'night-sight';
+    PV.editTweaks();
+    assert.match(opt('cheap').textContent, /Night Sight never costs less than 2 energy/);
 });

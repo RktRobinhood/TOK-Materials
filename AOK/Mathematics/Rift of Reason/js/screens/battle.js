@@ -1144,7 +1144,7 @@
         function powerBig(id, pi) {
             const st = E.powerStatus(state, pi);
             const x = st && st.id === id ? st : Object.assign({ cost: powerDef(id).cost, heartCost: 0, recharge: powerDef(id).recharge }, Rift.PowerView ? Rift.PowerView.numbers(id) : {}, { name: powerName(id), text: powerDef(id).text });
-            const cost = x.heartCost ? x.heartCost + ' heart' : x.cost ? x.cost + ' energy' : 'free';
+            const cost = x.heartCost ? x.heartCost + ' heart' + (x.heartCost === 1 ? '' : 's') : x.cost ? x.cost + ' energy' : 'free';
             return el('div.b-power-big' + (pi === ME ? '.mine' : '.theirs'), {}, [
                 el('div.b-power-big-ring', {}, [powerIcon(id)]),
                 el('div.b-power-big-who', { text: (pi === ME ? 'Your' : oppName + '\'s') + ' power' }),
@@ -1165,7 +1165,7 @@
             const chosen = mine && ui.sel && ui.sel.kind === 'power';
             const heart = st.heartCost > 0;
             const costArt = bg(heart ? 'ui/heart-full' : 'ui/stat-cost');
-            const costText = heart ? st.heartCost + ' heart' : st.cost ? st.cost + ' energy' : 'free';
+            const costText = heart ? st.heartCost + ' heart' + (st.heartCost === 1 ? '' : 's') : st.cost ? st.cost + ' energy' : 'free';
             const why = mine ? powerWhy(st, L) : '';
             const stateLine = mine
                 ? (can ? (st.target ? 'Click it, then click a glowing target.' : 'Click to use it.') : 'Not now: ' + why)

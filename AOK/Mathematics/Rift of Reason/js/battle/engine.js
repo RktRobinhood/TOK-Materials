@@ -57,7 +57,7 @@
  *
  * Hero powers (design/AVATARS.md section 1, data/powers.js): players[p].power = { id, tweaks, cooldown,
  * uses } or null (createBattle player.power; Granny's lesson has none). In the main phase the owner
- * may use it for its energy (or 1 heart with the Blood price tweak). It is not a card play. After
+ * may use it for its energy (or hearts with the Blood price tweak). It is not a card play. After
  * use, cooldown = recharge + 1 and counts down by 1 at the start of each of the owner's turns; it is
  * ready at 0 (so at most once per turn, and ready on turn 1). Tweaks: powerMods(state, p) → { def,
  * cost, heartCost, recharge, deeper, broader }. powerStatus(state, p) → { id, name, text, cost,
@@ -1358,7 +1358,8 @@
         return { id: pw.id, tweaks, cooldown: 0, uses: 0 };
     }
 
-    // The power's numbers after its tweaks. Cost and recharge never go below 0.
+    // The power's numbers after its tweaks. Cost and recharge never go below 0, nor cost below the
+    // power's minCost (Night Sight 2). Blood price (#53): 1 heart per 2 energy it would cost, at least 1.
     function powerMods(s, p) {
         const pw = s.players[p].power;
         if (!pw) return null;
@@ -1370,8 +1371,9 @@
         if (has('cheap')) { cost -= 1; recharge += 1; }
         if (deeper) recharge += 1;
         if (broader) cost += 1;
-        if (has('blood')) { heartCost = 1; cost = 0; }
-        return { def, cost: Math.max(0, cost), heartCost, recharge: Math.max(0, recharge), deeper, broader };
+        cost = Math.max(0, def.minCost || 0, cost);
+        if (has('blood')) { heartCost = Math.max(1, Math.ceil(cost / 2)); cost = 0; }
+        return { def, cost, heartCost, recharge: Math.max(0, recharge), deeper, broader };
     }
 
     // Why player p can't use the power now ('' when it can), as a code and a short note.
@@ -1382,7 +1384,7 @@
         if (s.phase !== 'main') return ['busy', 'First answer the question.'];
         if (P.power.cooldown > 0) return ['recharge', 'Ready in ' + P.power.cooldown + ' turn' + (P.power.cooldown === 1 ? '' : 's') + '.'];
         if (m.cost > P.energy) return ['energy', 'It needs ' + m.cost + ' energy. You have ' + P.energy + '.'];
-        if (m.heartCost && !rules(s).reverseHearts && P.hearts <= m.heartCost) return ['hearts', 'It costs a heart, and you have only ' + P.hearts + '.'];
+        if (m.heartCost && !rules(s).reverseHearts && P.hearts <= m.heartCost) return ['hearts', 'It costs ' + (m.heartCost === 1 ? 'a heart' : m.heartCost + ' hearts') + ', and you have only ' + P.hearts + '.'];
         if (def.usable && !def.usable(s, p, H, m)) return ['useless', 'It would do nothing now.'];
         if (def.target && !powerTargets(s, p, m).length) return ['target', 'It has no target right now.'];
         return ['', ''];
