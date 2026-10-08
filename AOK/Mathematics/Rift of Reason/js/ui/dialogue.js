@@ -4,13 +4,16 @@
  *
  *   await Rift.Dialogue.play('prologue.rift');   // resolves when the script ends
  *
- * The avatar's lines are shown in italics and never voiced.
+ * The step format is design/SCRIPT-FORMAT.md. Roles resolve through Rift.Cast (understudies,
+ * silence), conditions through Rift.Story.test, stakes clocks through Rift.Stakes. Avatar lines
+ * are voiced in the player's avatar voice; inner lines in its inner voice.
  */
 (function (root) {
     'use strict';
 
     const Rift = root.Rift;
     const el = (...a) => Rift.el(...a);
+    const Story = () => Rift.Story;
 
     function nickname() {
         const s = Rift.State.get();
@@ -18,33 +21,26 @@
     }
 
     function fill(text) {
-        return text.replace(/\{name\}/g, nickname());
+        return String(text).replace(/\{name\}/g, nickname());
     }
 
-    function speakerInfo(id) {
+    function speakerInfo(id, pose) {
         if (id === 'avatar') {
             const s = Rift.State.get();
             const av = s && s.avatar;
-            return { name: (av && av.nickname) || 'You', art: av ? Rift.avatarArt(av, 'neutral') : 'avatar/unknown' };
+            return { name: (av && av.nickname) || 'You', art: av ? Rift.avatarArt(av, pose || 'neutral') : 'avatar/unknown' };
         }
         const sp = (Rift.data.speakers || {})[id];
-        if (sp) return sp;
+        if (sp) return Object.assign({}, sp, { art: pose && !(Rift.data.creatures || {})[id] ? sp.art + '/' + pose : sp.art });
         const c = (Rift.data.creatures || {})[id];
         if (c) return { name: c.name, art: 'creature/' + id + '/smug', colour: c.colour };
-        return { name: id, art: 'npc/' + id };
+        return { name: id, art: 'npc/' + id + (pose ? '/' + pose : '') };
     }
 
-    // Flatten branches and side effects as we go, so flags set mid-script count.
-    function* walk(steps) {
-        for (const step of steps) {
-            if (step.when) {
-                const v = Rift.State.flag(step.when.flag);
-                const branch = v === step.when.is ? step.then : step.else;
-                if (branch) yield* walk(branch);
-            } else {
-                yield step;
-            }
-        }
+    function textSpeed(ctx) {
+        const s = Rift.State.get();
+        const base = (s && s.settings && s.settings.textSpeed) || 1;
+        return ctx.quiet ? base * 0.55 : base;
     }
 
     function typewriter(node, text, speed) {
@@ -69,26 +65,29 @@
         };
     }
 
-    function line(layer, step) {
+    // Shows one box and waits for the player. A Quiet Scene can't be rushed: clicks while the text
+    // types are ignored, and each line stays at least a moment.
+    function show(layer, ctx, node) {
+        if (ctx.node) ctx.node.remove();
+        ctx.node = node;
+        layer.appendChild(node);
+    }
+
+    function present(layer, ctx, node, box, textNode, text) {
         return new Promise(resolve => {
-            const info = speakerInfo(step.s);
-            const text = fill(step.t);
-            const isAvatar = step.s === 'avatar';
-            const art = isAvatar ? info.art : (step.e && !(Rift.data.creatures || {})[step.s] ? info.art + '/' + step.e : info.art);
-            const textNode = el('div.text');
-            const box = el('div.box.parchment', null, [el('div.name', { text: info.name }), textNode, el('div.more', { text: '▼' })]);
-            const node = el('div.dialogue' + (isAvatar ? '.avatar-line' : ''), null, [
-                Rift.Assets.img(art, { className: 'portrait', colour: info.colour, label: info.name }),
-                box,
-            ]);
-            layer.innerHTML = '';
-            layer.appendChild(node);
-            const tw = typewriter(textNode, text, (Rift.State.get() || {}).settings ? Rift.State.get().settings.textSpeed : 1);
-            tw.start();
-            if (!isAvatar) Rift.Audio.speak({ speaker: step.s, text, voice: Rift.voiceId(step.s, step.t) });
+            show(layer, ctx, node);
+            const tw = typewriter(textNode, text, textSpeed(ctx));
+            let readyAt = 0;
+            tw.start().then(() => { readyAt = Date.now() + (ctx.quiet ? 1200 : 0); });
             const advance = () => {
+                if (!tw.isDone()) {
+                    if (ctx.quiet) return;
+                    Rift.Audio.sfx('click');
+                    tw.finish();
+                    return;
+                }
+                if (Date.now() < readyAt) return;
                 Rift.Audio.sfx('click');
-                if (!tw.isDone()) { tw.finish(); return; }
                 cleanup();
                 resolve();
             };
@@ -106,46 +105,246 @@
         });
     }
 
-    function choice(layer, step) {
+    // ---- lines ----------------------------------------------------------------------
+
+    function line(layer, step, ctx) {
+        const role = step.s;
+        const isAvatar = role === 'avatar';
+        let actor = role;
+        let words = step.t;
+        if (!isAvatar) {
+            actor = step.replay ? Rift.Cast.original(role) : Rift.Cast.actor(role, { replay: ctx.replay });
+            if (!actor) {
+                // Silence (STORY.md App. D); a dark-if-lost role may leave a stage note.
+                return step.dark ? note(layer, ctx, step.dark) : null;
+            }
+            words = step.replay ? step.t : Rift.Cast.text(step, actor);
+            if (words == null) return null;
+            if (actor !== Rift.Cast.original(role)) ctx.cast[role] = actor;
+        }
+        if (typeof words !== 'string' || !words.length) return null;
+        const possessed = !isAvatar && (step.possessed || !!Story().flag('possessed:' + role));
+        const info = speakerInfo(actor, step.e);
+        const text = fill(words);
+        const voiceSpeaker = isAvatar ? Story().avatarVoice() : actor + (possessed ? '-possessed' : '');
+        const tags = [];
+        if (step.hum) tags.push(el('span.line-tag.hum', { text: ctx.memory ? 'Remembered' : '♪ Hum Charm' }));
+        else if (ctx.replay || step.replay) tags.push(el('span.line-tag.memory', { text: 'Remembered' }));
+        if (possessed) tags.push(el('span.line-tag.possessed-tag', { text: 'Possessed' }));
+        const textNode = el('div.text');
+        const box = el('div.box.parchment', null, [el('div.name', null, [info.name].concat(tags)), textNode, el('div.more', { text: '▼' })]);
+        const portrait = el('div.portrait-wrap' + (possessed ? '.possessed' : '') + (step.replay || ctx.replay ? '.remembered' : ''), null, [
+            Rift.Assets.img(info.art, { className: 'portrait', colour: info.colour, label: info.name }),
+            possessed ? el('div.possess-skin', { 'aria-hidden': 'true' }) : null,
+        ]);
+        const node = el('div.dialogue' + (isAvatar ? '.avatar-line' : '') + (possessed ? '.possessed-line' : ''), null, [portrait, box]);
+        const shown = present(layer, ctx, node, box, textNode, text);
+        if (voiceSpeaker) Rift.Audio.speak({ speaker: voiceSpeaker, text, voice: Rift.voiceId(voiceSpeaker, words) });
+        return shown;
+    }
+
+    function note(layer, ctx, words) {
+        const textNode = el('div.text');
+        const box = el('div.box.parchment', null, [textNode, el('div.more', { text: '▼' })]);
+        const node = el('div.dialogue.stage-note', null, [box]);
+        return present(layer, ctx, node, box, textNode, fill(words));
+    }
+
+    // The inner voice (design/AVATARS.md §2.2): the player's species' line, tagged with its Way of
+    // Knowing in its colour, voiced in the inner delivery. The Feed imitates it in grey.
+    function inner(layer, step, ctx) {
+        const sp = Story().species();
+        const words = sp && step.inner && step.inner[sp];
+        if (typeof words !== 'string' || !words.length) return null;
+        const wok = Story().wayOfKnowing() || { tag: 'THOUGHT', hex: '#C9C9D6' };
+        const feed = !!step.feed;
+        const text = fill(words);
+        const tag = el('span.inner-tag', { text: wok.tag + (feed && step.p != null ? ' · ' + step.p + '%' : ''), style: { '--wok': feed ? '#8a8a96' : wok.hex } });
+        const textNode = el('div.text');
+        const box = el('div.box.inner-box', null, [tag, textNode, el('div.more', { text: '▼' })]);
+        const node = el('div.dialogue.inner-line' + (feed ? '.feed-line' : ''), { style: { '--wok': feed ? '#8a8a96' : wok.hex } }, [box]);
+        const shown = present(layer, ctx, node, box, textNode, text);
+        const speaker = Story().avatarVoice(feed ? 'possessed' : 'inner');
+        if (speaker) Rift.Audio.speak({ speaker, text, voice: Rift.voiceId(speaker, words) });
+        return shown;
+    }
+
+    // ---- choices -------------------------------------------------------------------
+
+    function choice(layer, step, ctx) {
+        const options = step.choice.filter(opt => Story().matchesOnly(opt.only) && Story().test(opt.when, ctx));
+        if (!options.length) return Promise.resolve(null);
+        if (options.some(o => o.voice)) Story().addFlag('voice.offered', 1);
+        const wok = Story().wayOfKnowing();
         return new Promise(resolve => {
             const info = speakerInfo('avatar');
-            const buttons = step.choice.map(opt => el('button.btn', {
-                text: fill(opt.t),
-                onclick() {
-                    if (opt.flag) Rift.State.setFlag(opt.flag, opt.value === undefined ? true : opt.value);
-                    Rift.Audio.sfx('click');
-                    resolve(opt);
-                },
-            }));
-            layer.innerHTML = '';
-            layer.appendChild(el('div.dialogue.avatar-line', null, [
+            const buttons = options.map(opt => {
+                const marked = (opt.only || opt.voice) && wok;
+                return el('button.btn' + (marked ? '.voice-option' : ''), {
+                    style: marked ? { '--wok': wok.hex } : null,
+                    onclick() {
+                        Rift.Audio.sfx('click');
+                        resolve(opt);
+                    },
+                }, [marked ? el('span.inner-tag', { text: wok.tag }) : null, fill(opt.t)]);
+            });
+            show(layer, ctx, el('div.dialogue.avatar-line', null, [
                 Rift.Assets.img(info.art, { className: 'portrait', label: info.name }),
                 el('div.box.parchment', null, [el('div.name', { text: info.name }), el('div.choices', null, buttons)]),
             ]));
+        }).then(async opt => {
+            if (opt.flag) Story().setFlag(opt.flag, opt.value === undefined ? true : opt.value);
+            if (opt.voice) Story().addFlag('voice.followed', 1);
+            if (opt.then) await run(layer, opt.then, ctx);
+            return opt;
         });
     }
 
+    // ---- stakes clocks ------------------------------------------------------------
+
+    async function clockStep(layer, step, ctx) {
+        const id = step.clock;
+        const S = Rift.Stakes;
+        if (!S) return;
+        if ('start' in step) S.start(id, step.start === true ? 0 : step.start);
+        else if ('tick' in step) await playTick(layer, S.tick(id, step.tick, { silent: step.silent }), id, ctx);
+        else if ('drain' in step) { if (!ctx.quiet) S.drain(id, step.drain); }
+        else if (step.pause) S.pause(id, true);
+        else if (step.resume) S.pause(id, false);
+        else if (step.resolve) S.resolve(id);
+    }
+    async function playTick(layer, result, id, ctx) {
+        const d = Rift.Stakes.def(id) || {};
+        if (result.outcome === 'full' && d.full) await run(layer, d.full, ctx);
+        else if (result.outcome === 'brink' && d.brink) await run(layer, d.brink, ctx);
+        else if (result.warn) await run(layer, result.warn, ctx);
+    }
+
+    // ---- the runner ----------------------------------------------------------------
+
+    function keepsake(layer, id, ctx) {
+        Story().setFlag('keepsake:' + id, true);
+        const img = Rift.Assets.img('keepsake/' + id, { className: 'keepsake', label: id.replace(/-/g, ' ') });
+        if (ctx.keepsake) ctx.keepsake.remove();
+        ctx.keepsake = img;
+        layer.appendChild(img);
+    }
+
+    async function quietStep(layer, who, ctx) {
+        const npc = Story().npcOf(Rift.Cast.roleOf(who));
+        const key = 'quiet.' + npc;
+        if (Story().flag('quiet:' + npc) !== 'pending' || !(Rift.data.script || {})[key]) return;
+        const wasQuiet = ctx.quiet;
+        layer.classList.add('quiet-scene');
+        ctx.quiet = true;
+        try { await run(layer, Rift.data.script[key], ctx); } finally { ctx.quiet = wasQuiet; if (!wasQuiet) layer.classList.remove('quiet-scene'); }
+        Story().setFlag('quiet:' + npc, 'done');
+        Story().setFlag('seen:' + key, true);
+    }
+
+    async function run(layer, steps, ctx) {
+        for (const step of steps || []) {
+            if (!step || typeof step !== 'object') continue;
+            if (step.when !== undefined && (step.then || step.else)) {
+                await run(layer, Story().test(step.when, ctx) ? step.then : step.else, ctx);
+                continue;
+            }
+            if (step.when !== undefined && !Story().test(step.when, ctx)) continue;
+            if (!Story().matchesOnly(step.only)) continue;
+            if (step.inner) await inner(layer, step, ctx);
+            else if (step.lead) {
+                const lead = leadFor(step.lead, ctx);
+                if (lead) await run(layer, [lead], ctx);
+            } else if (step.choice) await choice(layer, step, ctx);
+            else if (typeof step.s === 'string') await line(layer, step, ctx);
+            else if (step.give) {
+                if (ctx.quiet) continue;   // a Quiet Scene gives no rewards
+                Object.entries(step.give).forEach(([id, n]) => Rift.State.addItem(id, n));
+                Rift.UI.toast('Received: ' + Object.entries(step.give).map(([id, n]) => n + '× ' + ((Rift.data.items[id] || {}).name || id)).join(', '));
+            } else if (step.clock) await clockStep(layer, step, ctx);
+            else if (step.play) {
+                const sub = (Rift.data.script || {})[step.play];
+                if (!sub || (step.once && Story().flag('seen:' + step.play))) continue;
+                await run(layer, sub, ctx);
+                Story().setFlag('seen:' + step.play, true);
+            } else if (step.arrive) Rift.Cast.arrive(step.arrive);
+            else if (step.quiet) await quietStep(layer, step.quiet, ctx);
+            else if (step.keepsake) keepsake(layer, step.keepsake, ctx);
+            else if (step.possess) {
+                const role = step.possess;
+                if (Rift.Cast.canPossess(role)) Story().setFlag('possessed:' + role, true);
+            } else if (step.free) Story().setFlag('possessed:' + step.free, false);
+            else if (step.flag) {
+                if (typeof step.add === 'number') Story().addFlag(step.flag, step.add);
+                else Story().setFlag(step.flag, step.value === undefined ? true : step.value);
+            }
+        }
+    }
+
+    // The lead bank (STORY.md App. E): `lead: true` uses this station's puzzle (and its mode).
+    function leadFor(spec, ctx) {
+        const bank = Rift.data.leads || {};
+        if (typeof spec === 'string') return bank[spec] || bank[spec.split(':')[0]] || null;
+        const p = ctx.puzzle;
+        if (!p) return null;
+        const id = typeof p === 'string' ? p : p.id;
+        const mode = typeof p === 'object' && p.opts && p.opts.mode;
+        return (mode && bank[id + ':' + mode]) || bank[id] || null;
+    }
+
+    // opts: { after, replay (a "Watch again" of a seen scene), quiet, puzzle }
     async function play(key, opts) {
+        const o = opts || {};
         const steps = typeof key === 'string' ? (Rift.data.script || {})[key] : key;
         if (!steps || !steps.length) return;
+        const named = typeof key === 'string';
+        const replay = o.replay && named ? (Story().flag('cast@' + key) || {}) : null;
+        const chapter = named ? Story().chapterOfKey(key) : null;
+        const ctx = {
+            key: named ? key : null,
+            quiet: !!o.quiet,
+            replay,
+            memory: !!replay || (chapter ? Story().isMemory(chapter) : false),
+            puzzle: o.puzzle || null,
+            cast: {},
+        };
         const overlay = root.document.getElementById('overlay');
-        const layer = el('div.dialogue-layer');
+        const layer = el('div.dialogue-layer' + (ctx.quiet ? '.quiet-scene' : '') + (replay ? '.memory-scene' : ''));
         overlay.appendChild(layer);
+        let finished = false;
         try {
-            for (const step of walk(steps)) {
-                if (step.t) await line(layer, step);
-                else if (step.choice) await choice(layer, step);
-                else if (step.give) {
-                    Object.entries(step.give).forEach(([id, n]) => Rift.State.addItem(id, n));
-                    Rift.UI.toast('Received: ' + Object.entries(step.give).map(([id, n]) => n + '× ' + ((Rift.data.items[id] || {}).name || id)).join(', '));
-                } else if (step.flag) Rift.State.setFlag(step.flag, step.value === undefined ? true : step.value);
-            }
+            await run(layer, steps, ctx);
+            finished = true;
         } finally {
             Rift.Audio.stopVoice();
             layer.remove();
         }
-        if (opts && opts.after) opts.after();
+        if (finished && named && Rift.State.get()) {
+            Story().setFlag('seen:' + key, true);
+            // Remember who played each role, so "Watch again" shows what was seen (UNDERSTUDIES.md §3.3).
+            if (!replay && Object.keys(ctx.cast).length && !Story().flag('cast@' + key)) Story().setFlag('cast@' + key, ctx.cast);
+        }
+        if (o.after) o.after();
     }
 
-    Rift.Dialogue = { play, has: key => !!(Rift.data.script || {})[key] };
+    // The Quiet Scene for an NPC, if pending (used at chapter openings).
+    async function playQuiet(npc) {
+        const key = 'quiet.' + npc;
+        if (Story().flag('quiet:' + npc) !== 'pending' || !(Rift.data.script || {})[key]) return false;
+        await play(key, { quiet: true });
+        Story().setFlag('quiet:' + npc, 'done');
+        return true;
+    }
+
+    // An engine tick (a wrong check in a stakes scene): plays the warning or the outcome.
+    async function clockTick(id, k) {
+        if (!Rift.Stakes) return null;
+        const result = Rift.Stakes.tick(id, k);
+        const d = Rift.Stakes.def(id) || {};
+        const steps = result.outcome === 'full' ? d.full : result.outcome === 'brink' ? d.brink : result.warn;
+        if (steps && steps.length) await play(steps);
+        return result;
+    }
+
+    Rift.Dialogue = { play, playQuiet, clockTick, has: key => !!(Rift.data.script || {})[key] };
 })(typeof window !== 'undefined' ? window : globalThis);
