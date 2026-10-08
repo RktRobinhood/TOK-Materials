@@ -553,6 +553,12 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.27 | The Talking Signpost: a gossiping old wooden signpost with arms pointing every way and a little lantern, bust for dialogue | `npc/signpost` | Ch1 Signpost gossip (clue 2) and rumours (`data/script/lesson1.js`) | 2 *story* | needed |
 | 13.28 | Granny's open cottage door at the Fair Gate: door ajar, warm tea, empty shawl hook, a trail of tiny soup pots rising into the crack, one long dusty grey feather | `scene/granny-door` (not wired yet; the Fair Gate uses `scene/fair`) | Ch1 open door (`ch1.door`) | 2 *story* | needed |
 | 13.29 | The Lucky Sequin item icon: one big shiny sequin on a loop of thread, readable at 32 px | `item/lucky-sequin` | Bag (the Gate reward for saving Professor Sequins) | 2 *story* | needed |
+| 13.30 | Exact ids for Mr Gumleaf (13.8): idle plus the villager poses | `npc/gumleaf` (+ `/idle`, `/accusing`, `/nervous`) | Schoolhouse host after the Hall (`data/script/lesson2.js`, `hosts` in `data/map.js`) | 1 *story* | needed |
+| 13.31 | Miss Quill's Arch-Imp face: a small crowned imp with Quill's tired eyes, her black scarf falling. Replaces the generic villager "unmasked" pose for her (13.9 named `npc/quill/unmasked`; the speaker art is `npc/villager-schoolteacher`) | `npc/villager-schoolteacher/unmasked` | Ch2 Hall unmasking and exit (`ch2.hall.win`) | 1 *story* | needed |
+| 13.32 | Nudge in a villager mask, and with the mask fallen off (13.18 lists Nudge generally) | `npc/nudge/masked`, `npc/nudge/maskless` | Ch2 flyers (`ch2.soup`), the winch, the mask falling at the Hall | 2 *story* | needed |
+| 13.33 | The Feast of Laws: the Town Hall banquet, Granny dangling on a rope over a huge pot, the winch, long tables. Wide, room for characters lower centre | `scene/feast-hall` (not wired yet; the Hall uses `scene/village-square`) | Ch2 boss (Town Hall) | 2 *story* | needed |
+| 13.34 | The FEAST OF LAWS poster, no readable text needed (the script reads the small print aloud) | `ui/feast-poster` (optional) | Ch2 Stone Circle | 4 *story* | optional |
+| 13.35 | Granny's Spare Axiom card art (the Hall reward, tiers 1–2; the card itself still needs a design in `data/axioms.js`) | `axiom/spare-axiom` | Card game reward (`spare-axiom` flag) | 3 *story* | needs card design first |
 
 ---
 

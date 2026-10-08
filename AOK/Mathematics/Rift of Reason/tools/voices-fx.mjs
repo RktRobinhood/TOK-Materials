@@ -9,6 +9,8 @@ export const FX = {
     algorithm: { pitch: 0.93, chorus: true, reverb: { size: 0.8, decay: 0.8, damp: 0.3, mix: 0.25 } },
     // The Sundial is a big old stone: a little room around the voice.
     narrator: { reverb: { size: 0.6, decay: 0.7, damp: 0.5, mix: 0.12 } },
+    // Mr Gumleaf shares Achird with the core: a touch lower and slower (UNDERSTUDIES.md card).
+    gumleaf: { pitch: 0.97 },
     // The avatar's inner voice: subtle "inside your head". A little bone-conduction warmth,
     // softened highs (not a telephone band), a very small dry room, and a lower level.
     inner: {

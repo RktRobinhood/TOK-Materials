@@ -13,10 +13,7 @@
         pip: { name: 'Pip, the Clerk', art: 'npc/clerk' },
     });
 
-    S['ch2.skyrift'] = [
-        { s: 'narrator', t: 'Above the Town Hall, the sky is still torn. Through the tear: towers of light, and a hum like a million voices.' },
-        { s: 'algorithm', t: 'NEXT ERA LOADING. MORE SCREENS. MORE OPINIONS. LESS CHECKING.' },
-    ];
+    // ch2.skyrift (the Sky Rift, a Ch2 node) is in lesson2.js.
 
     S['ch3.arrive'] = [
         { s: 'narrator', t: 'Tomorrowton. The lanterns have become neon, and the gossip has become a feed.' },

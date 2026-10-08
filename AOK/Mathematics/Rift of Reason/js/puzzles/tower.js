@@ -121,7 +121,7 @@
         3: { days: 4, bools: 7, facts: 10, questions: 7, trapDist: 4, threshold: 5 },
     };
 
-    const QUESTIONER = { id: 'villager-constable', name: 'Constable Bulstrode' };
+    const QUESTIONER = { id: 'villager-constable', name: 'Constable Clobber' };
 
     // ---- the logic model --------------------------------------------------------
 

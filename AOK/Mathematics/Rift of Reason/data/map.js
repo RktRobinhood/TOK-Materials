@@ -198,7 +198,7 @@
                 teaser: 'Warm bread, cold stares. Someone stole the last loaf.',
             },
             'b-post': {
-                host: "postmistress", goal: "An argument stands only if its steps support its conclusion.",
+                host: "constable", goal: "An argument stands only if its steps support its conclusion.",
                 intro: "station.b-post.intro", reminder: "station.b-post.reminder",
                 name: 'The Post Office', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 383, y: 450,
                 scene: 'scene/village-square', script: 'ch2.post',
@@ -222,6 +222,7 @@
             },
             'b-school': {
                 host: "schoolteacher", goal: "Check the result in each case, rather than guess.",
+                hosts: [{ when: 'away:schoolteacher', host: 'gumleaf' }],
                 intro: "station.b-school.intro", reminder: "station.b-school.reminder",
                 name: 'The Schoolhouse', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1005, y: 622,
                 scene: 'scene/village-square', script: 'ch2.school',
@@ -242,7 +243,7 @@
                 teaser: 'The Constable, off duty, with a deck of cards and something to prove.',
             },
             'b-clock-tower': {
-                host: "sweep", goal: "A true fact alone does not make an argument valid.",
+                host: "constable", goal: "A true fact alone does not make an argument valid.",
                 intro: "station.b-clock-tower.intro", reminder: "station.b-clock-tower.reminder",
                 name: 'The Clock Tower', chapter: 'ch2', map: 'ch2', type: 'miniboss', x: 1033, y: 287,
                 scene: 'scene/clock-tower', script: 'ch2.tower',
@@ -260,7 +261,8 @@
                 teaser: 'A locked gate on the stairs. One switch is hidden behind a curtain.',
             },
             'b-town-hall': {
-                host: "schoolteacher", goal: "Use clear rules to check claims and their assumptions.",
+                host: "granny", goal: "Use clear rules to check claims and their assumptions.",
+                hosts: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, host: 'constable' }],
                 intro: "station.b-town-hall.intro", reminder: "station.b-town-hall.reminder",
                 name: 'The Town Hall', chapter: 'ch2', map: 'ch2', type: 'boss', x: 1407, y: 191,
                 scene: 'scene/village-square', script: 'ch2.hall',

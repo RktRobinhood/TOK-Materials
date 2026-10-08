@@ -54,6 +54,8 @@
     const TURNING_BACK = { all: [{ not: { seen: 'ch1.gate.win' } }, { not: LATER }] };
     // Sequins can still be comforted or pushed: alive, and the crack has not finished drinking.
     const CAGE_OPEN = { all: ['!dead:sequins', { clock: 'ch1', lte: 5 }] };
+    // The player heard the boast, live or in a recap (a Ch2 jump-in walking back may not have).
+    const HEARD_BOAST = { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }] };
     // Tally arrives at the first Pattern Stall visit after Sequins' Quiet Scene (STORY.md App. D).
     const TALLY_ARRIVES = { all: ['dead:sequins', { flag: 'quiet:sequins', is: 'done' }, '!arrived:sequins'] };
     const TALLY_ARRIVAL = { when: TALLY_ARRIVES, then: [
@@ -289,7 +291,9 @@
         { s: 'lobstorian', t: 'Was I shouting? Sorry. I should go and tidy my room.' },
         { s: 'nudge', t: 'Boo! You made them calm! Calm gets zero views!' },
         { play: 'ch1.gossip', once: true },   // a jump-in hears clue 2 here (a walker had it at the Signpost)
-        { s: 'granny', hum: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.' },
+        // After her death (a walk back from Ch2), her hums play as a memory in her own voice.
+        { s: 'granny', hum: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.', when: '!dead:granny' },
+        { s: 'granny', hum: true, replay: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.', when: 'dead:granny' },
     ];
 
     // The Troll Bridge (host: Muskrat). The best comic scene in Ch1: keep it.
@@ -317,8 +321,10 @@
     S['ch1.well.win'] = [
         { s: 'sequins', t: 'It\'s honest, you see. It always says "probably". Look after it for me.' },
         { s: 'sequins', e: 'surprised', t: 'Wait. Is that my favourite sequence? Glinting down the Road? COME BACK!' },
-        { s: 'granny', hum: true, t: 'Salesmen at my door, dear. Very small ones. Selling soup pots.' },
-        { s: 'granny', hum: true, t: 'I\'ll buy one. A pot never hurt anybody. Hum you later, dear.' },
+        { s: 'granny', hum: true, t: 'Salesmen at my door, dear. Very small ones. Selling soup pots.', when: '!dead:granny' },
+        { s: 'granny', hum: true, t: 'I\'ll buy one. A pot never hurt anybody. Hum you later, dear.', when: '!dead:granny' },
+        { s: 'granny', hum: true, replay: true, t: 'Salesmen at my door, dear. Very small ones. Selling soup pots.', when: 'dead:granny' },
+        { s: 'granny', hum: true, replay: true, t: 'I\'ll buy one. A pot never hurt anybody. Hum you later, dear.', when: 'dead:granny' },
         { inner: {
             frogling: 'Salesmen. Tuesdays it\'s always salesmen. Every Tuesday for years.',
             raven: '"A pot never hurt anybody." Grannies know pots.',
@@ -487,7 +493,7 @@
     S['ch1.gate.push'] = [
         { when: CAGE_OPEN, then: [
             { s: 'algorithm', t: 'FASTER. THE MAGPIE IS TRENDING.' },
-            { s: 'nudge', t: 'Hi, {name}! Say "always" for the camera! It got great numbers!' },
+            { s: 'nudge', t: 'Hi, {name}! Say "always" for the camera! It got great numbers!', when: HEARD_BOAST },
             { clock: 'ch1', tick: 1 },
         ] },
     ];
@@ -533,7 +539,7 @@
             ] },
         ] },
         // Only for a player who heard the boast (or its recap).
-        { s: 'algorithm', t: 'YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.', when: { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }] } },
+        { s: 'algorithm', t: 'YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.', when: HEARD_BOAST },
         // The voices' reveal plays here, unless it already played at Granny's open door, and only after
         // its set-ups (the Road and the Well win: a Ch2 jump-in walking back has had neither yet).
         { when: { all: ['!turnedBack', { seen: 'ch1.road' }, { seen: 'ch1.well.win' }] }, then: [REVEAL] },
