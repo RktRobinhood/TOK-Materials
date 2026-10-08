@@ -114,7 +114,30 @@ A free card is very strong (a hand card is the AI's main resource), so "draw a c
 
 **Brainstorm** (0/0, +2.9 ±2.9 for Competent, +3.6 for Normal) is at the bottom edge of the target, inside the noise. An extra play only matters when you also have the energy; adding energy (+15.4) is far too much. Left as it is: it starts a little weak, as the teacher asked, and its tweaks are the upgrade path.
 
-PAIRS_SECTION
+### Avatar power pairs
+
+All 45 pairs, 1,100 games each (±3), Competent vs Competent. The row power's win rate against the column power:
+
+| | Close | Foresee | Night S. | Lantern | What If | Brainst. | Hold | Recall | Call It | Fine P. | Mean |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Close the Proof | — | **56.8** | 49.9 | 49.5 | 54.2 | 52.3 | 53.9 | 51.7 | 50.5 | 51.5 | 52.3 |
+| Foresee | **43.2** | — | 45.4 | **44.4** | 46.5 | 48.4 | 48.7 | 46.2 | 45.1 | 45.7 | 45.9 |
+| Night Sight | 50.1 | 54.6 | — | 50.5 | 51.8 | 54.4 | 53.6 | 49.8 | 50.0 | 49.9 | 51.6 |
+| Lantern | 50.5 | **55.6** | 49.5 | — | 54.5 | 53.1 | 54.5 | 51.5 | 49.5 | 51.9 | 52.3 |
+| What If? | 45.8 | 53.5 | 48.2 | 45.5 | — | 51.0 | 53.3 | 48.5 | 48.8 | 49.6 | 49.4 |
+| Brainstorm | 47.7 | 51.6 | 45.6 | 46.9 | 49.0 | — | 51.5 | 47.0 | 46.7 | 48.1 | 48.2 |
+| Hold That Thought | 46.1 | 51.3 | 46.4 | 45.5 | 46.7 | 48.5 | — | 46.7 | 45.0 | 48.7 | 47.2 |
+| Recall | 48.3 | 53.8 | 50.2 | 48.5 | 51.5 | 53.0 | 53.3 | — | 47.5 | 49.8 | 50.7 |
+| Call It Out | 49.5 | 54.9 | 50.0 | 50.5 | 51.2 | 53.3 | 55.0 | 52.5 | — | 52.0 | 52.1 |
+| Fine Print | 48.5 | 54.3 | 50.1 | 48.1 | 50.4 | 51.9 | 51.3 | 50.2 | 48.0 | — | 50.3 |
+
+**43 of 45 pairings are within 45–55%.** The two outside both involve Foresee: Close the Proof beats it 56.8%, Lantern 55.6%. Hold That Thought (mean 47.2%) is in range everywhere but at the bottom. The board removal powers (Close the Proof, Lantern, Call It Out) are at the top, near 52%.
+
+Before the exposure fix in the AI, Lantern beat What If? 60.6% and Close the Proof beat it 55.3% (What If? made 4/1s for them to finish); now 54.5% and 54.2%.
+
+Over all 49,500 pair games the first player wins 47.6% (46.9% with no powers on the same matchups) and games last 8.01 rounds (7.99).
+
+
 
 TWEAKS_SECTION
 
