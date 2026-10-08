@@ -1,6 +1,6 @@
 # Rift of Reason — Side stories (pop-up one-shots)
 
-Status: **lesson 1 (stories 1–3) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l1-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l1.js`). **Lesson 2 (stories 4–6) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l2-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l2.js`). **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); the **engine is built** (#56: `js/core/side-stories.js`, `js/core/side-verbs.js`, `js/screens/side-story.js`, bench `dev/side-story.html`); stories 4–10 are not scripted yet. The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
+Status: **lesson 1 (stories 1–3) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l1-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l1.js`). **Lesson 2 (stories 4–6) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l2-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l2.js`). **Lesson 3 (stories 7–8) scripted and passed the writing gate** (8 October 2026: Logic 9, Author 8.5, Editor 8.5; `reviews/writing-side-l3-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l3.js`). **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); the **engine is built** (#56: `js/core/side-stories.js`, `js/core/side-verbs.js`, `js/screens/side-story.js`, bench `dev/side-story.html`); stories 4–10 are not scripted yet. The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
 
 **What a side story is.** A 5–10 minute scene at a station you **have already visited**, not part of the main plot (teacher's note 8). It practises the reasoning of the lesson that unlocked it, through **negotiation**, **deduction**, **argument-spotting** or a **test**. Each one has a stakes clock, a fair twist, a reward, and sometimes a small ripple into the main story. None is needed to finish the game. **Nobody can die in a side story.**
 
@@ -47,13 +47,15 @@ Six beats, about 25 lines.
 
 **Inner voice.** One hook per species per story, in each voice's personality (STORY.md Appendix E). One of them is the **blue option**, a choice only that species sees:
 
-| Blue option | Stories |
-|---|---|
-| Owlet | 4, 8 |
-| Moth-kin | 3, 9 |
-| Fox | 5, 7 |
-| Frogling | 2, 6 |
-| Raven | 1, 10 |
+| Blue option | Stories | Effect |
+|---|---|---|
+| Owlet | 4, 8 | +1 progress (both) |
+| Moth-kin | 3, 9 | +1 progress (both) |
+| Fox | 5, 7 | 5: +1 progress · 7: drains 1 (after a scripted tick) |
+| Frogling | 2, 6 | +1 progress (both) |
+| Raven | 1, 10 | 1: drains 1 (after a scripted tick) · 10: +1 progress |
+
+A drain only works once Danger is above 0, so a blue option that comes before any mistake gives +1 progress instead (a head start: one wrong option struck, or +1 Interest in a negotiation).
 
 ---
 
@@ -356,7 +358,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Ripple.** With the honest sign, an optional bark at the Witness Tent on the restored Fair map after the finale (STORY.md §6): Mirage, "Altmanta's box says 'I GUESS THE USUAL' now. Labels are catching on."
 
-**Inner voice.** Owlet: "Right ninety times because ninety days were the same. Proves nothing. I'm proud of that sentence." · **Moth-kin (blue, drains 1):** "Shh. Open the panel. Look. One dial. That's it." · Fox: "Ask it about a strange day. Watch it panic." · Frogling: "The day of the crack. What did it say about that day?" · Raven: "'Accurate.' Accurate at what?"
+**Inner voice.** Owlet: "Right ninety times because ninety days were the same. Proves nothing. I'm proud of that sentence." · **Moth-kin (blue, +1 progress):** "Shh. Open the panel. Look. One dial. That's it." · Fox: "Ask it about a strange day. Watch it panic." · Frogling: "The day of the crack. What did it say about that day?" · Raven: "'Accurate.' Accurate at what?"
 
 **Sample lines.**
 > **fortune machine:** YOU WILL FAIL. CONFIDENCE: 90%.
@@ -388,7 +390,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Ripple.** `berry`: an optional bark at Granny's card table on the restored Fair map after the finale (STORY.md §6): `role:granny`, "I had a berry. A very fair berry." (Achilles, if arrived: "Got a berry. Gave it to Volt. Felt good.")
 
-**Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, drains 1):** "Ask him: 'Needs it most.' Define 'most'."
+**Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, +1 progress):** "Ask him: 'Needs it most.' Define 'most'."
 
 **Sample lines.**
 > **beastie:** Berries for whoever needs them most! The app decides! It's very scientific!
