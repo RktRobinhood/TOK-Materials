@@ -37,7 +37,7 @@ Six beats, about 25 lines.
 | 3. **The twist** | 1 min | A fact that reframes the request. It adds a clue card. At least one earlier clue sets it up. |
 | 4. **Resolution** | 1–3 min | One verb: **Deduce** (pick, then a one-click "Why?"), **Negotiate** (Interest/Patience; listen before you ask), **Object** (a 3–4 line mini cross-examination), or **Test** (choose the test that could prove the claim wrong). |
 | 5. **Outcome** | 30 s | The clock's tier, with a short scene for each. |
-| 6. **The last line** | 10 s | A character beat or punchline that **implies** the idea. Only stories 1, 5 and 9 end on an explicit question. |
+| 6. **The last line** | 10 s | A character beat or punchline that **implies** the idea. Only stories 5 and 9 end on an explicit question. |
 
 **The clock** (the boss widget, STORY.md Appendix C): Danger 6 (4 for the gentlest); Progress 3–4. Mistakes tick the clock instead of costing hearts. Clue clicks after the first three cost 1 notch (time is counted in actions, never seconds). Drains: the story's blue option; a matching-colour creature on the team (once); a heart (once); in negotiations, each "listen" move (mirror, name the feeling, sum up), once. Tiers: **Clean** 0–2 · **Close** 3–4 · **At a price** 5 · **Too late, for now** 6. Feed: tier 1 −1, tier 3 +1, tier 4 +2. Ripples into a boss are capped at 2 notches per boss.
 
@@ -66,11 +66,11 @@ Six beats, about 25 lines.
 | 3 | The Midday Pie | Road: Campfire | 1 | induction vs deduction; common cause | Deduce | there is no thief | none (a visitor) |
 | 4 | The Three Cake Tins | Boolesbury: Bakery | 2 | truth values, "at most one is true" | Deduce | a message from Granny | the ladle: drain at the pot |
 | 5 | The Silent Pupil | Boolesbury: Schoolhouse | 2 | liars and truth-tellers; silence | Deduce | the answer isn't among your options | a reaction at the Hall |
-| 6 | Muskrat's Launch | Road: Troll Bridge | 2 | truth tables with a liar | Deduce | the expert-looking one lies | none (a visitor) |
+| 6 | Muskrat's Launch | Road: Troll Bridge | 2 | truth tables with a liar | Deduce | two worlds fit; only a test decides | none (a visitor) |
 | 7 | Syllo's Recruitment Drive | Fair: Syllogism Gallery | 3 | popularity, false choice, authority | Object (duel) | he wrote the letter himself | toy soldiers: drain on the Copy |
 | 8 | The Headline Debate | Tomorrowton: Newsstand | 3 | strawman; persuading vs showing | Object (referee) | the angry poodle wrote it | the full quote: drain at the trial |
 | 9 | The Fortune Machine | Fair: Witness Tent | 4 | base rates; right often ≠ knowing | Test + choice | never right when it matters | a finale reaction |
-| 10 | The Giveaway App | Road: Campfire | 4 | proxy variables; who pays for errors | Negotiate + choice | he set the goal himself | a finale reaction |
+| 10 | The Giveaway App | Road: Campfire | 4 | proxy variables; who pays for errors | Negotiate + choice | nobody cheated; the measure is wrong | a finale reaction |
 
 ---
 
@@ -97,14 +97,14 @@ Six beats, about 25 lines.
 
 **Late play.** If the trial is already over, Mirage gives you a free fortune instead: "You will win an argument. You already did."
 
-**Inner voice.** Owlet: "Everyone 'knows'. Nobody checked. That isn't knowing. I checked." · Moth-kin: "Look. The clip has edges. There's more picture." · Fox: "What if the black wing belongs to someone we like? Twist!" · Frogling: "Crows got blamed for my mother's pond, too. It was a heron." · **Raven (blue, drains 1):** "Tell her: 'I know how it feels when everyone assumes about black feathers.'"
+**Inner voice.** Owlet: "Everyone 'knows'. Nobody checked. That isn't knowing. I checked." · Moth-kin: "Look. The clip has edges. There's more picture." · Fox: "What if the black wing belongs to someone we like? Twist!" · Frogling: "Crows got blamed for my mother's pond, too. It was the wind." · **Raven (blue, drains 1):** "Tell her: 'I know how it feels when everyone assumes about black feathers.'"
 
 **Sample lines.**
 > **syllo:** Thirty seconds, recruit! Then we go in. Corks loaded!
 > **corvina:** I didn't take it! But nobody believes a crow. Ever.
 > **billie** *(whispering)*: She's been dealing cards to us all morning. Badly.
 > **beansprout** *(says nothing; holds up an ace he found in her sleeve)*
-> **mirage** *(last line)*: Everyone saw it. Did anyone check it?
+> **corvina** *(last line)*: Crows get blamed. Magpies get trophies. …I'm keeping the ace.
 
 ### 2. The Lucky Well
 
@@ -117,7 +117,7 @@ Six beats, about 25 lines.
 **Clues (any two show wishing does nothing):**
 - *Person:* Siuuugull's list: only the matches where he wished **and** scored.
 - *Record:* the referee's full log: 6 goals in 10 matches after wishing, 6 in 10 without (generated, always equal or near-equal).
-- *Object:* down the well, by lantern: Nudge, sackless after the Gate (or before it, with a borrowed bucket), scooping coins and muttering "Engagement".
+- *Object:* down the well, by lantern: Nudge (in whatever look it has by then: ring light, mask or clipboard; STORY.md Appendix G), scooping coins and muttering "Engagement".
 
 **Twist.** Siuuugull knows the well doesn't work. "I know. I just like the moment before the kick. It's quiet." He never asked anyone else to wish; the queue copied him. And Nudge, caught, drops a tunnel map: it has been digging towards the Gate's winch.
 
@@ -223,7 +223,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Outcomes.** 1: the class is freed, and Smudge is praised (Gumleaf) or quietly shielded (Quill); a Reason-colour visitor appears; `paradox-board`. 2: freed after writing "I will not write paradoxes" fifty times; `paradox-board`. 3: a pupil is blamed first, then cleared; Feed +1. 4: the whole class gets detention, and Beansprout holds a silent protest nobody can grade; Feed +2.
 
-**Ripple.** `paradox-board`: at the Hall's climax, Smudge cheers from the gallery: "My sentence! From the board!" (A reaction only; the pot's side-story cap goes to story 4.)
+**Ripple.** `paradox-board`: at the Hall's climax, Smudge cheers from the gallery: "My sentence! From the board!" (A reaction only; the pot's side-story cap goes to story 4.) Played after the Hall, the board becomes a keepsake instead: framed, in the Schoolhouse.
 
 **Inner voice.** Owlet: "If no row works, my suspect list is wrong. Not me. The list." · Moth-kin: "Shh. The dust is on the grate. Not a desk." · **Fox (blue, +1 progress):** "What if it's nobody in this room? Ooh." · Frogling: "The Mayor says that sentence. And she flinched. I remember." · Raven: "Silence isn't a statement. Can't be true. Can't be false."
 
@@ -239,28 +239,29 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Station:** the Road, the Troll Bridge (an earlier station, after lesson 2). **Teaser:** "A countdown at the Troll Bridge. Muskrat is strapped into his rocket."
 
-**Hook.** Muskrat Rocket has strapped himself into his rocket ("MARS: TODAY. NOT NEXT YEAR. TODAY."), and the countdown has started. It is pointed at the river. Three ground crew say which switches abort the launch: Lady Gargoyle (in a ridiculous costume), Zuckerborg (too-wide smile) and Altmanta (calm, in a lab coat, with a clipboard). One of them always lies.
+**Hook.** Muskrat Rocket has strapped himself into his rocket ("MARS: TODAY. NOT NEXT YEAR. TODAY."), and the countdown has started. It is pointed at the river. Three ground crew shout which switches abort the launch: Lady Gargoyle (in a ridiculous costume), Zuckerborg (too-wide smile) and Eminemu (in rhyme, very fast). One of them always lies. The generator picks which, so no "type" of crew member is ever the guilty one.
 
-**Reasoning: Deduce**, truth tables with a liar: each crew member describes one switch's wiring (AND/OR/NOT on the switchboard); find the liar, then set the abort.
+**Reasoning: Deduce**, truth tables with a liar: each crew member describes one switch's wiring (AND/OR/NOT on the switchboard). Fill in the table, find the abort, set it.
 
-**Clues (any two expose the liar):**
-- *Person:* Gargoyle and Zuckerborg agree about switch 2. The third says the opposite.
+**Clues (any two decide it):**
+- *Person:* the three crew statements.
 - *Object:* the wiring diagram on the rocket's side, half scratched off: enough to test one claim.
-- *Record:* the launch log: the last "abort" that worked was set by Gargoyle.
+- *Record:* the launch log: which switch the last working abort used.
 
-**Twist.** The liar is the one who looks most expert: calm, white coat, clipboard. The scruffy one in the costume is telling the truth. Looking like an expert is not evidence; the table decides. (And Muskrat admits he never wanted to go today. He just couldn't say "next year" again.)
+**Twist.** The table leaves **two** worlds standing: in one the costume lies, in the other the rapper does, and each world has a different abort switch. No amount of shouting can settle it. Only a test can: the diagram or the log. A truth table can tell you that the evidence isn't enough **yet**. (Once it's aborted, Muskrat admits he never wanted to go today. He just couldn't say "next year" again.)
 
 **Clock.** Danger: the countdown (6). Progress: 3.
 
-**Outcomes.** 1: aborted; Muskrat climbs out ("Mars. Next year. I feel good about it."); he visits as a catchable creature, and you get a "MARS: NEXT YEAR" banner (cosmetic). 2: aborted, after a big puff of smoke. 3: it launches three metres, lands in the river, and Muskrat is soggy and fine; Feed +1. 4: it launches thirty metres, into the river; the bridge is closed for one visit; Feed +2.
+**Outcomes.** 1: aborted; Muskrat climbs out ("Mars. Next year. I feel good about it."); he visits as a catchable creature, and you get a "MARS: NEXT YEAR" banner (cosmetic). 2: aborted, after a big puff of smoke. 3: it launches three metres and lands in the river; Muskrat is soggy and fine; Feed +1. 4: it launches thirty metres, into the river; the bridge is closed for one visit; Feed +2.
 
-**Inner voice.** Owlet: "Two agree, one doesn't. If one lies, I know who. Obviously." · Moth-kin: "Look. That clipboard is blank. Completely blank." · Fox: "The calm one in the lab coat lies? Love it. Prove it, though." · **Frogling (blue, +1 progress):** "Remember Mr Tock's plaques? Same AND. Same NOT." · Raven: "'Trust me, I'm a scientist.' Seven words. None of them evidence."
+**Inner voice.** Owlet: "Two rows survive. Two! I'd like a word with this table." · Moth-kin: "Look. The diagram's scratched, but one wire still shines." · Fox: "Two possible worlds. In one we're heroes. In the other we're wet." · **Frogling (blue, +1 progress):** "Remember Mr Tock's plaques? Same AND. Same NOT." · Raven: "'One of them lies.' It never said we'd know which."
 
 **Sample lines.**
 > **muskrat:** Mars! Today! Not next year! Today! …Is it always this loud in here?
-> **altmanta** *(calm)*: Switch two aborts the launch. I'm very confident.
+> **eminemu:** Switch two, it's true, it's the cue, push it through—
 > **gargoyle:** Switch two makes it go faster, darling. I'd know. I'm wearing a rocket.
-> **muskrat** *(last line, dripping)*: Next year. Definitely. Probably.
+> **avatar:** Both stories fit. So we test one.
+> **muskrat** *(last line, climbing out)*: Next year. Definitely. Probably.
 
 ---
 
@@ -279,11 +280,11 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 - *Person:* Usain Volt: "I joined because everyone else did."
 - *Object:* the recruitment letter. It is in Syllo's own handwriting.
 
-**Twist.** Syllo wrote the letter himself, copying the feed's ads he had seen on the crack's screens. The Fair has gone quiet (Granny gone, Sequins changed or gone, you away), and he is lonely: "A sergeant needs someone to shout at." The last round is not an answer to a fallacy. It is a **sound** reason to stay, which you give him.
+**Twist.** Syllo wrote the letter himself, copying the feed's ads he had seen on the crack's screens. The Fair has gone quiet (Granny gone; Sequins quieter than usual, or gone; you away), and he is lonely: "A sergeant needs someone to shout at." The last round is not an answer to a fallacy. It is a **sound** reason to stay, which you give him.
 
 **Clock.** Danger: the drum (6). Progress: recruits freed (4).
 
-**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (an argument card for negotiations); `soldiers`: his toy army guards the Summit Rift in Ch4 (drain 1 on the Copy). 2: everyone stays, and Syllo sulks (his trainer match is grumpier); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: the recruits march off, still glowing, and Syllo goes after them alone. The Gallery hangs a sign, "GONE AFTER MY RECRUITS. —S", until the finale, where he comes home hoarse with most of them. Feed +2. (He is missing, not dead; no understudy steps in.)
+**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (an argument card for negotiations); `soldiers`: his toy army holds the far end of the Summit Rift in Ch4 (drain 1 on the Copy, applied at the core before its tier is set). 2: everyone stays, and Syllo sulks (his trainer match is grumpier); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: the recruits march off, still glowing, and Syllo goes after them alone. The Gallery hangs a sign, "GONE AFTER MY RECRUITS. —S", until the finale, where he comes home hoarse with most of them. Feed +2. (He is missing, not dead; no understudy steps in.)
 
 **Late play.** If the core is already won, the soldiers line up for the finale parade instead.
 
@@ -366,33 +367,33 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Station:** the Road, the Campfire Clearing. **Teaser:** "A mountain of berries at the Campfire. The slowest person there is ranked last."
 
-**Hook.** `role:granny`, ranked last, very slowly steps into a circle drawn in the dirt. Mr. Beastie is giving a mountain of healing berries to "whoever needs them most", chosen by his new app, which ranks people by followers and by time spent in his "last to leave the circle" challenge. Usain Volt, injured and with no followers, is ranked last but one. (With `dead:granny`: Coach Achilles, ranked first because he is fast, refuses: "Ran the Road looking for her. Twice. I don't need berries. Give mine to the eel.")
+**Hook.** `role:granny`, ranked last, is very slowly typing one request into a huge tablet: "I… need… a… ber—". Speedcheeta has sent four hundred. Mr. Beastie is giving a mountain of healing berries to "whoever needs them most", chosen by his new app. Usain Volt, injured, is ranked last but one. (With `dead:granny`: Coach Achilles, who ran the Road looking for her twice, is ranked first because he types fast, and refuses: "I don't need berries. Give mine to the eel.")
 
-**Reasoning: Negotiate, then a choice.** Proxy variables (followers stand in for need); errors both ways. Beastie: Interest 3, Patience 3. **Cares about:** Safety ("I want to help!"), Fame. **Can't stand:** Facts ("Boring!").
+**Reasoning: Negotiate, then a choice.** Proxy variables: what the app counts stands in for need; errors go both ways. Beastie is proud of the rule, because he set it honestly. Interest 2, Patience 3. **Cares about:** Safety ("I want to help!"), Fame. **Can't stand:** Facts ("Boring!").
 
 **Clues (any two show the app measures the wrong thing):**
-- *Record:* the ranking: the top five all have huge follower counts, and none is hurt.
-- *Person:* Usain Volt, limping: "I'm hurt. I'm near the bottom. I don't post much."
-- *Object:* the app's settings screen: GOAL = VIEWS. Last changed by: BEASTIE.
+- *Record:* the ranking: the top five send the most requests, and none of them is hurt.
+- *Person:* Usain Volt, limping: "I'm hurt. I don't like asking. So I'm near the bottom."
+- *Object:* the settings screen: GOAL = NEED. MEASURED BY: REQUESTS PER HOUR. Set by Beastie, carefully.
 
-**Twist.** Beastie set the goal himself, "just for the first video", and forgot. He is ashamed. He truly wants to help.
+**Twist.** Nobody cheated, and nobody is to blame. Beastie chose the goal honestly, and the app works exactly as built. The measure is the problem: it counts how loudly people ask, not how much they need. Volt is too proud to ask; Granny is too slow to type. A measure is a choice, even an honest one.
 
-**Resolution.** Persuade him; then choose the new rule, each with a visible trade-off: a medic checks need (fair, slow); a random draw (fair to all, ignores need); first come, first served (fast, favours the fast).
+**Resolution.** Persuade him that his fair-looking rule isn't fair; then choose the new rule, each with a visible trade-off: a medic checks need (fair, slow); a random draw (fair to all, ignores need); first come, first served (fast, favours the fast).
 
 **Clock.** Danger: people who give up and leave (6). Progress: 4.
 
-**Outcomes.** 1: a fair rule; Beastie films the fix, and it gets more views anyway; berries for all and a rare visitor; `berry`. 2: a fairer rule, but some berries are wasted; `berry`. 3: the old rule stays, but you get one berry to `role:granny` (`berry`); Feed +1. 4: the app gives every berry to Speedcheeta, who eats them all and feels very silly; Feed +2.
+**Outcomes.** 1: a fair rule; Beastie films the fix, and it gets more views anyway; berries for all and a rare visitor; `berry`. 2: a fairer rule, but some berries are wasted; `berry`. 3: the old rule stays, but you get one berry to `role:granny` (`berry`); Feed +1. 4: the app gives every berry to Speedcheeta, the loudest asker, who eats them all and feels very silly; Feed +2.
 
 **Ripple.** `berry`: in the finale, `role:granny`: "I had a berry. A very fair berry." (Only with `dead:granny`, Achilles: "Got a berry. Gave it to the eel. Felt good.")
 
-**Inner voice.** Owlet: "Followers measure fame. The goal was need. Wrong ruler. I spotted it." · Moth-kin: "Look who's limping. Then look at the list." · Fox: "Picture being near the bottom. With a hurt leg. On camera." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, drains 1):** "Ask him: 'Needs it most.' Define 'most'."
+**Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, drains 1):** "Ask him: 'Needs it most.' Define 'most'."
 
 **Sample lines.**
 > **beastie:** Berries for whoever needs them most! The app decides! It's very scientific!
-> **granny:** I'm ninety-three, dear. I'm always last to leave a circle. And to enter it.
-> **usain volt:** I'm hurt. I'm near the bottom. I don't post much.
-> **beastie** *(very quietly)*: GOAL equals VIEWS. …I typed that. Just for the first video.
-> **beastie** *(last line, filming)*: Fixing my own app. Bigger than ever. …It's actually doing really well.
+> **granny** *(typing)*: I… need… a… ber— Oh, it's gone to sleep.
+> **usain volt:** I'm hurt. I don't like asking. So I'm near the bottom.
+> **beastie:** I measured how much people ask. Not how much they need. …Those are different?
+> **beastie** *(last line, filming)*: New rule. Fewer requests. …Wait. More views?
 
 ---
 
@@ -404,7 +405,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 | `well-map` | 2, tiers 1–2 | Ch1 Gate drain (or a keepsake later) |
 | `ladle` | 4, tiers 1–2 | Ch2 Hall drain (or a keepsake later) |
 | `paradox-board` | 5, tiers 1–2 | Ch2 Hall: Smudge's cheer |
-| `soldiers` | 7, tiers 1–2 | Ch4 Copy drain at the Summit Rift (or the finale parade) |
+| `soldiers` | 7, tiers 1–2 | Ch4 Copy drain at the core (or the finale parade) |
 | `syllo-away` | 7, tier 4 | Gallery sign; story 1's sergeant-less soldiers; Syllo home at the finale |
 | `fair-quote` | 8, tiers 1–2 | Ch3 trial drain (or the Café wall) |
 | `honest-label` | 9, the honest sign | finale line at the shelf |
@@ -413,7 +414,21 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 Side-story drains per boss: the Ch1 Gate, story 2 (1); the Ch2 pot, story 4 (1); the Ch3 trial, stories 1 and 8 (2); the Ch4 Copy, story 7 (1). All within the cap of 2.
 
-## 9. Round 2 changes
+## 9. Change lists
+
+### Round 3
+
+- **"He did it himself" three times** → story 10 is re-twisted: nobody cheated, and the honest measure is wrong (a proxy is a choice). The two self-authored twists left, 7 (loneliness) and 8 (outrage for attention), teach different things.
+- **Story 6 repeated Ch2's twist** → the liar is now generated, so no type of crew member is guilty, and the twist is that two worlds fit, so only a test can decide. The calm expert in the white coat is gone (Altmanta now appears only in story 9).
+- **Mirage asked the moral twice** → story 1 ends on Corvina; explicit questions remain only in 5 and 9.
+- **Logic items:**
+  - Nudge's look in late play (2);
+  - a late keepsake for `paradox-board` (5);
+  - "Sequins quieter than usual" (7);
+  - the soldiers' drain applies at the core, before the Copy's tier is set (7);
+  - the lesson-3 trigger (the Plaza) is reached only through the Café and the Library once STORY.md's map change is made.
+
+### Round 2
 
 - **Deaths removed** from side stories (the editor's problem 11). The Mayor story is replaced by Muskrat's Launch (the author's "three danglings" note); Syllo's worst tier is now "missing", not dead.
 - **"The feed did it" five times** → five twists now turn on a person's own choice or a plain cause: Siuuugull knows (2), no thief, common cause (3), Syllo wrote it (7), Tremendoodle wrote it (8), Beastie typed it (10). Nudge appears in one story only (2).

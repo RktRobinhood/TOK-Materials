@@ -1,20 +1,20 @@
 # Rift of Reason — Understudies
 
-Status: **round 2** (8 October 2026), aligned to STORY.md round 2 (commit 2c05ad5). **STORY.md Appendix D is binding and wins every conflict.** This file supplies the people, looks, voices and art for the understudies, and the system detail behind Appendix D. Nothing in the game uses it yet. Sample lines use today's scripts or STORY.md's own lines; writers redo them with the new scripts.
+Status: **round 3** (8 October 2026), aligned to STORY.md round 3. **STORY.md Appendix D is binding and wins every conflict.** This file supplies the people, looks, voices and art for the understudies, and the system detail behind Appendix D. Nothing in the game uses it yet. Sample lines use today's scripts or STORY.md's own lines; writers redo them with the new scripts.
 
 > **The off-stage rule.** Understudies stay off stage. None appears, speaks, is named or is set up anywhere, in any script, rumour, tooltip or art, unless their original's role has been vacated in that playthrough (STORY.md Appendix D). Every understudy line in this file sits behind `dead:<npc>` **and** that role's `arrived:<role>`. Even an understudy's history (Kuku's clock in Granny's sack, Achilles' Hum Charm) is mentioned only after the death.
 
 **The teacher's direction (8 Oct):** story perils can kill NPCs. A killed NPC's role passes to an **understudy**: a different character, with their own personality, look, voice and lines, who carries the same story role so the plot continues. *Same story, different person.* Core NPCs get at most one moment where death is possible; after it, every beat must work with either actor. Minor NPCs go dark instead. Tone: real loss with weight; grief first and plainly; warmth returns later, from the living; never gratuitous. Undertale is the touchstone.
 
-**Binding facts from STORY.md (round 2):**
+**Binding facts from STORY.md (round 3):**
 - **Four lethal moments, one each, only at an armed tier 4:** Professor Sequins (Ch1 Gate), Granny Axiom (Ch2 Town Hall), the Sundial (Ch3 Tribunal; impossible with `bargain`), Pip (Ch4 Sorting Room, possessed). **Side stories cannot kill anyone.** Nobody else is ever in lethal danger. The avatar never dies.
 - **Required meetings:** each role lists the beats (`met`) a player must have seen before its death can be armed. A **disarmed tier 4 is stored as tier 3.**
 - **The lock:** when a peril resolves, at any tier, `risked:<npc>` is set; no other beat, and no possession, can kill that NPC afterwards.
 - **After a death:** silence (lines skipped, host slots fall back to a named stand-in) → the puzzle continues → the **Quiet Scene** opens the next chapter → the understudy **arrives later**, at a named beat → a candle at the Fair in the finale. **No understudy appears the moment `dead:` is set.**
 - **The switch:** "Characters can die" (on by default, with a one-line content note before the Prologue). Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path.
 - **Kuku** has one origin: Granny's hallway cuckoo clock, taken in the same sack as Granny in Ch1 and filed in the Tower's Evidence Locker; mentioned only if `dead:sundial`.
-- **Three Hum Charms**, made by Granny: yours, hers (given to you, silent, by the Constable if she dies), and **Coach Achilles'** ("for emergencies"), mentioned only if `dead:granny`.
-- Miss Quill is the Arch-Imp, `away:schoolteacher` after the Hall in every playthrough, Juror One in Ch3, a small silent figure at the core. **Mr Gumleaf** takes her class in every playthrough (an ordinary character, not an understudy). **Nudge** is the Algorithm's recurring imp. Judge Hoot is **he**.
+- **Hum Charms are pairs** (STORY.md A.4): yours pairs with Granny's; Granny's also pairs with the "emergency" charm she gave **Coach Achilles** seventy years ago, which he never wore. If she dies, the Constable gives you her charm, silent. Achilles learns of her death from her lantern going out (A.13) and only then puts his charm on, so her charm in your bag hums at the Ch3 Café. All of this is mentioned only if `dead:granny`.
+- Miss Quill is the Arch-Imp **by her own choice** (STORY.md A.7), `away:schoolteacher` after the Hall in every playthrough, Juror One in Ch3, and core trial 1 in Ch4, after which she sits down. **Mr Gumleaf** takes her class in every playthrough (an ordinary character, not an understudy). **Nudge** is the Algorithm's recurring imp. Judge Hoot is **he**.
 
 Ids: a **role** id is today's speaker id (`granny`, `sequins`, `narrator`…); STORY.md writes it `role:granny`. An **actor** id is a person (`granny` is both the role and its first actor; `achilles` is her understudy). The Sundial's flag is `dead:sundial` while its speaker id and voice files stay `narrator`.
 
@@ -36,16 +36,16 @@ The avatar never dies. Caricature creatures follow the Fate table as creatures; 
 | Role | Peril | Required meetings (`met`) | While silent (fallbacks, STORY.md App. D) | Quiet Scene | Understudy arrives |
 |---|---|---|---|---|---|
 | **Professor Sequins** (`sequins`) | Ch1 Gate of Guards, tier 4 (falls into the crack) | `prologue.fair`, `prologue.rift`, `ch1.well` | Gate → the Sundial. Pattern Stall → no host, a black ribbon on the curtain, puzzle still works. | Ch2 Stone Circle | **Tally**, at the first Pattern Stall visit after the Quiet Scene; otherwise at the finale shelf |
-| **Granny Axiom** (`granny`) | Ch2 Town Hall, tier 4 (the pot) | `prologue.wake`, `prologue.fair`, `prologue.door`, `ch1.well` | Hall → the Constable. Her hums stop. Her card lesson stays hers (§3.6). | Ch3 Rift Landing | **Coach Achilles**, on his own charm, at the first Ch3 hum after the Quiet Scene (the Plaza) |
-| **The Sundial** (`narrator`, flag `dead:sundial`) | Ch3 Tribunal, tier 4 (the sentence; impossible with `bargain`) | `prologue.wake`, `prologue.door`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe` | Pip speaks the arrivals until Kuku; Tower Road → Pip. | Ch4 Tower Door, delivered by Pip | **Kuku**, out of Granny's hallway clock in the Evidence Locker, at the Ch4 Stairwell |
-| **Pip** (`pip`) | Ch4 Sorting Room, tier 4 (the possession) | `ch3.arrive`, `ch3.plaza`, `ch4.door` | His host slots → `role:narrator`, or empty until Kuku arrives. | at the next floor's door | **Mr Rubberstamp**: no arrival beat in STORY.md (no later beat needs the role). Built anyway: arming guard 6 needs his art and voice entry (§5) |
+| **Granny Axiom** (`granny`) | Ch2 Town Hall, tier 4 (the pot) | `prologue.wake`, `prologue.fair`, `prologue.evening`, `ch1.well` | Hall → the Constable. Her hums stop. Her card lesson stays hers (§3.6). | Ch3 Rift Landing | **Coach Achilles**, on his own charm: her charm in your bag hums at the Ch3 Café. Fallback (a jump over Ch3): in person at her card table in the finale |
+| **The Sundial** (`narrator`, flag `dead:sundial`) | Ch3 Tribunal, tier 4 (the sentence; impossible with `bargain`) | `prologue.wake`, `prologue.evening`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe` | Narrator script lines are skipped until Kuku; Pip's own written lines carry the Tower Door. Host slots: Ch3–4 nodes → Pip; elsewhere none. | Ch4 Tower Door, delivered by Pip | **Kuku**, out of Granny's hallway clock in the Evidence Locker, at the Ch4 Stairwell |
+| **Pip** (`pip`) | Ch4 Sorting Room, tier 4 (the possession) | `ch3.arrive`, `ch3.plaza`, `ch4.door` | His host slots → `role:narrator`, or empty until Kuku arrives. | at the next floor's door; mourned by Nudge | **Mr Rubberstamp**: no arrival beat in STORY.md (no later beat needs the role). Built anyway: arming guard 6 needs his art and voice entry (§5) |
 
 ### Roster
 
 | Role (speaker id) | Role in the story | Lessons | Policy | Understudy | Species | Personality (contrast) | Relationship to the original | Arrival / stepping in |
 |---|---|---|---|---|---|---|---|---|
-| **The Sundial** (`narrator`) | Narrator in your shadow; companion beats; one question after each boss | 1–4, finale | Understudied, lethal | **Kuku** (`kuku`) | A carved wooden cuckoo from a hallway cuckoo clock | Proud, certain, brass-band, never guesses (the Sundial is warm, slow, and guesses honestly) | Three hundred years in Granny's hallway clock, rehearsing as the Sundial's understudy | "CUCKOO! Four seventeen and twelve seconds. Kuku. Understudy. Ready." / "Three hundred years of rehearsal. I never rehearsed this bit." |
-| **Granny Axiom** (`granny`) | Elder; card teacher; voice in the Hum Charm; hosts the finale | 1–4, finale | Understudied, lethal | **Coach Achilles** (`achilles`) | A tall, lean old racing hare in a tracksuit, whistle and stopwatch | Fast, loud, impatient, motivational (Granny is slow, dry, deadpan) | Her rival. Lost the Great Race to her seventy years ago (Zeno); she gave him the third charm "for emergencies" | "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
+| **The Sundial** (`narrator`) | Narrator in your shadow; companion beats; one question after each boss | 1–4, finale | Understudied, lethal | **Kuku** (`kuku`) | A carved wooden cuckoo from a hallway cuckoo clock | Proud, certain, brass-band, never guesses (the Sundial is warm, slow, and guesses honestly) | Three hundred years in Granny's hallway clock, rehearsing as the Sundial's understudy | Quietly first: "…It stopped. I heard it stop. Three hundred years I listened to it guess." Then: "Cuckoo. Four seventeen and twelve seconds. I can do the hours. Not the rest." |
+| **Granny Axiom** (`granny`) | Elder; card teacher; voice in the Hum Charm; hosts the finale | 1–4, finale | Understudied, lethal | **Coach Achilles** (`achilles`) | A tall, lean old racing hare in a tracksuit, whistle and stopwatch | Fast, loud, impatient, motivational (Granny is slow, dry, deadpan) | Her rival. Lost the Great Race to her seventy years ago (Zeno); she gave him an "emergency" charm that pairs with hers | "Coach Achilles. Her rival. Saw her lantern go out." / "She gave me this charm seventy years ago. For emergencies. …This is one." Arc: the fast hare learns to be slow |
 | **Professor Sequins** (`sequins`) | Fair: the pattern stall; maker of the Guess-o-Matic | 1, 4, finale | Understudied, lethal | **Tally** (`tally`) | A tiny dormouse stagehand in overalls with a clipboard and a too-big headset | Shy, quiet, precise, stage fright (Sequins is a booming showman) | His stagehand for twenty years; set up every trick | From behind the curtain: "He did the shouting. I did the counting." Runs the stall with his collection; does the shelf in the finale |
 | **Pip, the Clerk** (`pip`) | Tomorrowton guide; Tribunal clerk; climbs the tower with you | 3, 4 | Understudied, lethal | **Mr Rubberstamp** (`rubberstamp`) | An old toad clerk: sleeve garters, green eyeshade, a huge rubber stamp | Grumpy, by-the-book, secretly soft (Pip is tiny and eager) | Pip's retired boss, back from his pond | No arrival in the outline. Proposal for STORY.md (post-game only): he reopens the Ch3 stations. "Pip sent me a postcard every week. …Right. Who needs a form?" |
 | **Madame Mirage** (`mirage`) | Fair: the witness tent; side stories | 1, side stories | Understudied, never in danger | **Mr Ledger** (`ledger`) | An armadillo insurance assessor: grey suit, bowler hat, very thick glasses | Flat, literal, sceptical (Mirage is breathy and theatrical) | The Fair's assessor, who called her act "uninsurable nonsense" and saw every show | "I always said her act was nonsense. It was. Wonderful nonsense." |
@@ -56,8 +56,8 @@ The avatar never dies. Caricature creatures follow the Fate table as creatures; 
 | **Mr Gumleaf** (`gumleaf`) | Schoolhouse after the Hall, **every playthrough** (Quill is `away:`) | 2+ | Dark if lost (ordinary character) | — | A koala supply teacher in a cardigan and sandals | Dreamy, laid-back (Quill: "no maybes") | The supply teacher she always warned the pupils about | Not an understudy: he appears for everyone after the Hall. "Miss Quill would have been furious. I think it's great." |
 | **Corvina** (`corvina`) · **Muskrat Rocket** (`muskrat`) · **Old Wick** (`lamplighter`) · **Mrs Crumb** (`baker`) · **Miss Whisker** (`postmistress`) · **Mr Tock** (`clockmaker`) · **Smudge** (`sweep`) · **Mr Thistle** (`gardener`, silent) · **Mayor Plumage** (`mayor`) · **the Oracle Machine** (`oracle`) · **the café owner** | One station each | 1–4 | Dark if lost (never in danger) | — | | | | If ever lost, a small sign at the station: Corvina's face-down hand, the half-built rocket, a broom on the stair… Five **reserve** understudy designs (Sparky, Brumble, Homer, Rattle, Mark Zero) are kept in §2 in case the teacher ever wants these stations never to go dark; nothing is planned for them. |
 | **The Algorithm** (`algorithm`, `colossus`, `core`) | Villain; the Guess-o-Matic grown loud | 1–4 | Cannot die | — | | | | At the core *you* decide its fate (switch off, take home, label and leave): a choice about a machine, not a death |
-| **Nudge** (`nudge`, new) | The Algorithm's recurring imp: nets the shadow, works the winches, builds the Copy; follows you home | 1–4 | Cannot die | — | | | | **Why:** Nudge's arc is losing things (sack, mask, followers, job) until it asks its first question; it is a villain's helper, and its death would read as a reward. STORY.md lists it as not killable. |
-| **Miss Quill** (`schoolteacher`) | The Arch-Imp (Ch2), Juror One (Ch3), the core's last believer (Ch4) | 2–4 | Cannot die | — | | | | Unmasked, never killed; `away:schoolteacher` after the Hall hands the Schoolhouse to Gumleaf |
+| **Nudge** (`nudge`, new) | The Algorithm's recurring imp: nets the shadow, films the Gate cage, works the Hall winch, counts the vote, builds the Copy, mourns Pip if he dies; follows you home | 1–4 | Cannot die | — | | | | **Why:** Nudge's arc is losing things (ring light or the piece, mask, followers, job) until it asks its first question; it is a villain's helper, and its death would read as a reward. STORY.md lists it as not killable. |
+| **Miss Quill** (`schoolteacher`) | The Arch-Imp by choice (Ch2), Juror One (Ch3), core trial 1 (Ch4) | 2–4 | Cannot die | — | | | | Unmasked, never killed; `away:schoolteacher` after the Hall hands the Schoolhouse to Gumleaf |
 | **Hagglesworth, the vendor** (`vendor`, planned; not in STORY.md) | Shop and Rift Run | planned | Proposal: understudied, never in danger | **Pebble** (`pebble`) | A tiny young hermit crab in the too-big shop shell | Terrible at haggling (he is crafty) | A customer who admired the shell | Only if the vendor is ever put in danger; a dark shop would close the shop |
 
 **Why Kuku is the strangest understudy.** STORY.md's theme is the Sundial's line "On cloudy days I guess": it guesses and says so; the Algorithm guesses and calls it knowing. Kuku is a clock that is proud never to guess, arriving for the chapter about a machine that pretends certainty. At the end he must ask the Sundial's last question and admit he is still practising.
@@ -77,26 +77,27 @@ How to read a card:
 - **Look:** a carved wooden cuckoo, painted in chipped red and cream with a blue beak stripe and a tiny brass-band cap, on a coiled brass spring that pops out of **Granny's hallway cuckoo clock**: a tall carved chalet clock (pine eaves, little shutters, two pine-cone weights on chains, a pendulum), dusty from the sack and with an Evidence Locker tag on a string. Bright black bead eyes, chest puffed out. Palette: warm wood, brass, cream, one red accent. Silhouette: a small proud bird bursting out of a peaked house; the Sundial is a round flat stone dial on a pedestal.
 - **Pose set (as the Sundial):** full-body idle (popped out of the clock, spring extended), busts neutral, happy (mid-"CUCKOO", beak wide), surprised (spring fully stretched), angry (doors half shut, glaring out). How Kuku travels with you after the Stairwell (on your shoulder, out of the clock) is for the Ch4 script; the busts work either way.
 - **Voice:** Gemini **Aoede** (otherwise only Swiftlet and Shakirattle, three catch lines each). Direction: *"Kuku, a wooden cuckoo from a clock. Proud, certain and brassy, like a little brass band announcing the hour; every number exact; never hesitates. Only the rare sad line is quiet."* FX `kuku`: a little "inside a wooden clock" (high-pass 280 Hz, low-pass 6.5 kHz, tiny room), pitch 1.04. Stinger: one cuckoo-call SFX (§5).
-- **How he carries the role (STORY.md):** silence after the Tribunal, Pip delivers the Quiet Scene at the Tower Door and speaks the arrivals; at the Stairwell Pip opens the empty jar, the clock ticks on the next shelf, and Kuku pops out and asks the Ch3 question. From then on he speaks in the narrator's places. In the finale he lays the shadow on the silent stone and asks the last question, "…I'm practising."
+- **How he carries the role (STORY.md):** silence after the Tribunal; Pip delivers the Quiet Scene at the Tower Door (in Pip's own lines; narrator lines stay silent); at the Stairwell Pip opens the empty jar, the clock ticks on the next shelf, and Kuku arrives, quietly first, and asks the Ch3 question. He never calls himself an understudy. From then on he speaks in the narrator's places. In the finale he lays the shadow on the silent stone and asks the last question, "…I'm practising."
 
 | Beat | The Sundial | Kuku |
 |---|---|---|
-| Arrival (STORY.md) | — (silent since the Tribunal) | "CUCKOO! Four seventeen and twelve seconds. Kuku. Understudy. Ready." / "Three hundred years of rehearsal. I never rehearsed this bit." |
+| Arrival (STORY.md) | — (silent since the Tribunal) | "…It stopped. I heard it stop. Three hundred years I listened to it guess." / "Cuckoo. Four seventeen and twelve seconds. I can do the hours. Not the rest." |
 | The shadow (finale) | "Tick. Tock." (alive) | "Ten past eleven. Exactly. It would have liked that." |
-| The last question (finale) | "It guessed and called it knowing. I guess and say so. Which one are you?" … "Good. Say it like that." | "It guessed and called it knowing. The Sundial guessed and said so. Which one are you?" … "Good. Say it like that. …I'm practising." |
+| The last question (finale) | (after "Probably.") "Tick. Tock. Good. Say it like that." | (after "Probably.") "Good. Say it like that. …I'm practising." |
 
 ### Coach Achilles (for Granny Axiom) — stage 1
 
 - **Look:** a tall, lean, very old brown hare with a grey muzzle, one long ear bent at the tip, a faded green-and-white tracksuit with a blank race patch, a sweatband, a whistle, a big brass stopwatch on a cord, and **a third Hum Charm** on a bootlace round his neck (same design as Granny's). Bandy legs in old running shoes. Palette: faded green, cream, brass. Silhouette: tall and vertical with long ears; Granny is tiny, round and low with a shell and shawl.
 - **Pose set (as Granny):** full-body idle (standing, stopwatch raised; no jogging loop), busts neutral, happy, surprised, angry. Granny's scripts also use `worried`, which her own sheet lacks; if a `worried` bust is added for her, add one for Achilles in the same session.
 - **Voice:** Gemini **Fenrir** (otherwise only Mr. Beastie and Eminemu). Direction: *"Coach Achilles, a very old racing hare. Fast, clipped, a little out of breath, gruff coaching energy; slows right down, quietly, whenever he talks about her."* FX `achilles`: pitch 0.96 (older). His hums go through the same charm treatment as Granny's. Stinger: one whistle SFX.
-- **How he carries the role (STORY.md):** silence after the Hall; the Constable gives you Granny's charm and glasses, silent; the Quiet Scene at the Rift Landing. At the first Ch3 hum after it (the Plaza) **his** charm answers. He gives the character reference at the trial, refuses the berries in side story 10, and speaks `role:granny` through the finale (the Copy, the trophy, the `wonder` answers, the hair on the sky). Her card lesson stays hers (§3.6).
+- **How he carries the role (STORY.md):** silence after the Hall; the Constable gives you Granny's charm and glasses, silent; the Quiet Scene at the Rift Landing. At the Ch3 Café, the one quiet room in the city, Granny's charm in your bag hums: **his** charm, put on for the first time after he saw her lantern go out. If you jump over Ch3, he is at her card table in the finale. He gives the character reference at the trial, refuses the berries in side story 10, and speaks `role:granny` through the finale (the Copy, the shelf, the hair on the sky, the trophy question). Her card lesson stays hers (§3.6).
 
 | Beat | Granny Axiom | Coach Achilles |
 |---|---|---|
-| Arrival / first hum | (her hums stopped) | "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
-| Ch3 character reference | "Ninety years I've known that rock. It always said when it wasn't sure." | "She knew that rock ninety years. Said it always told you when it wasn't sure. I'd have checked. I'm faster." (Hoot: "Kind. Fast. Not evidence.") |
-| The hair on the sky (finale) | "There is a hair on the sky. I'll dust it later." | "She'd have said she'd dust it later. I'll do it now." |
+| Arrival (Ch3 Café) | (her hums stopped) | "Coach Achilles. Her rival. Saw her lantern go out." / "She gave me this charm seventy years ago. For emergencies. …This is one." |
+| Ch3 character reference | "Ninety years I've known that rock. It always said when it wasn't sure." | "Ninety years she knew that rock. I'm faster than her. Never caught her, though." (Hoot: "Kind. Fast. Not evidence.") |
+| The trophy (finale) | "'For the thinker who is always right.' Is that you?" | "'Always right.' Is that you? Think fast. …No. Slow. She'd say slow." |
+| The hair on the sky (finale) | "There's a hair on the sky. I'll dust it later." | "She'd have said she'd dust it later. I'll do it now. …Slowly." |
 
 ### Tally (for Professor Sequins) — stage 1
 
@@ -135,7 +136,7 @@ How to read a card:
 | Station lead-in | "Recruit! Help me check these arguments. Draw the facts before you judge the claim." | "Hello, recruit. No rush. Draw the facts first. Then judge the claim. Then perhaps a nap." |
 | The win | "Outstanding! An argument can be valid and still be nonsense. Lobsters do not, in fact, play the trumpet." | "Outstanding. Valid, and still nonsense. Lobsters do not play the trumpet. I asked one. Slowly." |
 
-### Mr Rubberstamp (for Pip) — stage 1 (art and voice entry only)
+### Mr Rubberstamp (for Pip) — stage 1 (art and voice entry only; the sample lines below are a post-game proposal and are never scripted unless STORY.md adopts it)
 
 - **Look:** a squat, wide old toad with warty olive skin, a green eyeshade, sleeve garters on a crumpled white shirt, a waistcoat with a pocket watch, and a rubber stamp as big as his head; little ink splashes. Palette: olive, white, ink-black, one cyan glow on the stamp pad (Tomorrowton's neon). Silhouette: low, wide, heavy; Pip is a tiny bat with wings and headphones.
 - **Pose set (as Pip):** idle, neutral, happy (a reluctant smile), surprised, angry, thinking (stamp held to the chin).
@@ -190,7 +191,7 @@ How to read a card:
 ### Brumble (reserve, for Mrs Crumb, the Baker)
 
 - **Look:** a big, soft brown bear in a floury white vest, a hairnet and an apron, holding a huge rolling pin; flour on the nose; small shy eyes. Palette: brown, flour-white, a warm bread-gold accent. Silhouette: very large and round-shouldered; Mrs Crumb is a small plump bunny with long ears.
-- **Pose set (as the villagers):** idle, neutral, accusing (pointing with the rolling pin), nervous (sweating flour), unmasked (lifting a smiling mask of his own face to show the red-eyed shadow imp, as on the villager sheets; imps can wear anyone's face, STORY rule 8).
+- **Pose set (as the villagers):** idle, neutral, accusing (pointing with the rolling pin), nervous (sweating flour), unmasked (lifting a smiling mask of his own face to show the red-eyed shadow imp, as on the villager sheets; imps wear villager masks, STORY.md Appendix A.7).
 - **Voice:** Gemini **Alnilam** (also Sergeant Syllo at the Fair, and Haalandroid). Direction: *"Brumble, a huge shy bear baker. Deep, slow and gentle, very few words, a long breath before speaking."* FX `brumble`: pitch 0.9.
 
 | Beat | Mrs Crumb | Brumble |
@@ -289,12 +290,13 @@ Rift.data.cast = {
                quiet: 'quiet.sequins', quietAt: 'b-arrival', keepsake: 'cage-cushion',
                after: ['ch2.*', 'ch4.*', 'finale.*', 'side.1*'] },          // scripts the understudy may need
     granny:  { policy: 'lethal', actors: ['granny', 'achilles'], peril: 'ch2',
-               met: ['prologue.wake', 'prologue.fair', 'prologue.door', 'ch1.well'],
+               met: ['prologue.wake', 'prologue.fair', 'prologue.evening', 'ch1.well'],
                fallback: { 'b-town-hall': 'constable' }, quiet: 'quiet.granny', quietAt: 't-arrival',
                keepsake: 'granny-charm-glasses', after: ['ch3.*', 'ch4.*', 'finale.*', 'side.10*'] },
     narrator:{ policy: 'lethal', actors: [{ id: 'sundial', speaker: 'narrator' }, 'kuku'], peril: 'ch3',
-               met: ['prologue.wake', 'prologue.door', 'ch1.night', 'ch2.clockmaker', 'ch3.cafe'],
-               fallback: { '*': 'pip' }, quiet: 'quiet.sundial', quietAt: 'k-base',
+               met: ['prologue.wake', 'prologue.evening', 'ch1.night', 'ch2.clockmaker', 'ch3.cafe'],
+               fallback: { chapters: ['ch3', 'ch4'], to: 'pip' },   // host slots only, Ch3–4 nodes only; elsewhere no host until Kuku
+               quiet: 'quiet.sundial', quietAt: 'k-base',
                keepsake: 'cold-piece', after: ['ch4.*', 'finale.*'] },
     pip:     { policy: 'lethal', actors: ['pip', 'rubberstamp'], peril: 'pip',
                met: ['ch3.arrive', 'ch3.plaza', 'ch4.door'],
@@ -400,7 +402,7 @@ Four puzzles draw NPC art or names directly; each switches to the resolver:
 
 - **Granny's card lesson** (`js/screens/battle-lesson.js`; guide lines in `js/screens/battle.js` ~2007–2718) **stays Granny's**, played as a memory (Remembered frame, her own voice). With `dead:granny` and before Achilles arrives, it plays with no framing line. After `arrived:granny`, Learn at the Fair Gate and the Collection replay open with two framing lines from Achilles ("She wrote this lesson down. Slowly. I'll just… play it."). This keeps her voice in the game and costs 2 lines instead of 23. The opponent name reads "Granny Axiom (remembered)".
 - **Trainers** (`data/map.js` `Rift.data.trainers`, `js/ui/battles.js`): `speaker` is already a role. A silent or dark trainer role → `Rift.Battles.canChallenge` is false. An arrived understudy takes the trainer slot with the original's deck ("She left me her cards"), so balance and first-defeat records are unchanged; the name comes from the resolved speaker and an optional `introU`. In the outline only Pip's café challenge is affected, and Rubberstamp never arrives, so after `dead:pip` the café challenge is simply gone.
-- **The Quiet Scene step** `{ quiet: 'granny' }` plays the role's Quiet Scene once, when `quiet:<role> = 'pending'`, at the chapter opening STORY.md names, before anything else in that chapter; it cannot be skipped and sets `quiet:<role> = 'done'`.
+- **The Quiet Scene step** `{ quiet: 'granny' }` plays the role's Quiet Scene once, when `quiet:<role> = 'pending'`, at the **first chapter opening the player reaches by any route** (a rift walk or a time-rift jump), before anything else there, including that chapter's "Previously…" (STORY.md App. D). Pip's plays at the next floor's door. It cannot be skipped and sets `quiet:<role> = 'done'`, so it is never lost.
 
 ### 3.7 Voices
 
@@ -456,30 +458,31 @@ STORY.md Appendix D fixes the order after a death and the Quiet Scene's shape; t
 
 | Step | What happens | System |
 |---|---|---|
+| 0. The brink (disarmed only) | If the tier-4 death is not armed, the peril's brink line plays instead (STORY.md App. D) and the tier-3 outcome follows. Nothing below happens. | stakes widget |
 | 1. Silence | The role's lines are skipped; host slots fall back to the named stand-in (§1 table). No understudy appears. | `Cast.actor` / `Cast.host` |
 | 2. The puzzle continues | The chapter is always winnable. | stakes widget |
-| 3. The Quiet Scene | Opens the **next** chapter at the place STORY.md names (Pip's: at the next floor's door). | `{ quiet: role }` |
+| 3. The Quiet Scene | Opens the **next** chapter reached by any route (Pip's: at the next floor's door). | `{ quiet: role }` |
 | 4. The understudy arrives | At a later named beat, with one line that says why they are there. Warmth may return from here. | `{ arrive: role }` |
 | 5. A candle | At the Fair in the finale, under that person's dark lantern. | finale script |
 
 ### 4.2 The Quiet Scene (template)
 
-Mandatory, 6–8 lines, not skippable, no reward, no jokes, nothing is won back. Five beats (STORY.md):
+Mandatory, 6–8 lines, not skippable, no reward, **warmth but no jokes**, nothing is won back. Five beats (STORY.md):
 
 | Beat | Content | Data slot |
 |---|---|---|
 | 1. Their things | What is left comes to you plainly; nobody fights for it. Cosmetic keepsakes with no game effect. | `things` |
 | 2. Last words | Their last line, replayed once, in their own recorded voice (the existing file). | `lastWords` (a script key + line) |
-| 3. Who misses them | One named friend, one sincere line. | `friend`, `missLine` |
-| 4. Pain | The avatar chooses one of two lines, or "…". If you carry their charm, you hum, and nothing hums back. | `pain: [a, b]` |
-| 5. Moving on | "Come on. They'd be cross if we stood here," in the speaker's own words. | `moveOn` |
+| 3. Who misses them | One named friend **whom the player has met**, one sincere line. | `friend`, `missLine` |
+| 4. Pain | The avatar chooses one of two lines, or "…". No line jokes about how they died. Granny's: you hum on your own charm, and hers, in your bag, stays silent. | `pain: [a, b]` |
+| 5. Moving on | A different line for each, tied to what they cared about (STORY.md App. D). | `moveOn` |
 
 ```js
 Rift.data.quietScenes = {
     granny: { at: 't-arrival', things: ['granny-charm', 'granny-glasses'], lastWords: 'ch2.hall.tier4#last',
               friend: 'narrator', missLine: 'Ninety years she said good morning to me. I never once said it first.',
-              pain: ['She\'d have hated the soup.', 'I watched the rope.'], hum: true,
-              moveOn: 'Come on. She\'d be cross if we stood here. She was cross a lot. It was lovely.' },
+              pain: ['She was looking at me. Not the rope.', 'I watched the rope.'], hum: true,
+              moveOn: 'Come on. Pockets, she\'d say. There are prizes left.' },
 };
 ```
 
@@ -490,7 +493,7 @@ The four Quiet Scenes as STORY.md writes them:
 | Sequins | Ch2 Stone Circle, the Sundial | the cushion from his cage; the Guess-o-Matic, saying nothing | "Oh. It's… shiny in there." | the Sundial |
 | Granny | Ch3 Rift Landing, the Sundial | her Hum Charm and reading glasses (from the Constable) | "Don't watch the rope, dear. Watch her." | the Sundial |
 | The Sundial | Ch4 Tower Door, Pip | the third piece of shadow, cold | "It's all right. On cloudy days I gu—" | Pip |
-| Pip | the next floor's door, the Sundial or Kuku | his headphones, still playing | "Write it down, would you? For the record." | the Oracle |
+| Pip | the next floor's door, `role:narrator` | his headphones, still playing | "Write it down, would you? For the record." | Nudge ("He asked my name. For the record. Nobody asks imps.") |
 
 The scene's look: the place's own background with a dusk tint (CSS), the friend's portrait, and the keepsake drawn small at the side. No new backgrounds. **Understudies never appear in a Quiet Scene** (the Sundial's is delivered by Pip, and Kuku arrives a floor later).
 
@@ -522,10 +525,10 @@ The arrival is one line that says why they are there (§2 cards, STORY.md's exac
 
 | Stage | Example |
 |---|---|
-| **Arrival** | Achilles: "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
+| **Arrival** | Achilles: "Coach Achilles. Her rival. Saw her lantern go out." / "She gave me this charm seventy years ago. For emergencies. …This is one." |
 | **Doing it my way** | Tally runs the stall with cue cards and no shouting; it works better than she expected. |
 | **The slip** | Kuku starts to say "probably", stops, and announces the exact time instead. |
-| **Making it theirs** | Achilles at the finale: "She'd have said she'd dust it later. I'll do it now." Kuku: "Good. Say it like that. …I'm practising." |
+| **Making it theirs** | Achilles, the fast hare learning to be slow: "'Always right.' Is that you? Think fast. …No. Slow. She'd say slow." / "I'll do it now. …Slowly." Kuku: "Good. Say it like that. …I'm practising." Tally: "I labelled it. Neatly. He'd have used glitter." |
 
 Two cross-links the story already invites:
 - **Tally and the Guess-o-Matic.** If Sequins died, Tally labels the young toy IT GUESSES at the finale shelf, and her quiet precision answers the machine that stopped saying "probably".
@@ -555,11 +558,11 @@ Estimated from today's voice catalogue and STORY.md's beats: only lines after th
 | Speaker | Lines | Total | Stage |
 |---|---|---|---|
 | Kuku | arrival 2, Ch3 question at the Stairwell 1, Ch4 narrator places (arrivals, one aside per station, the core question) ~10, finale (shadow, candles, sign line, last question) ~6, post-game line 1, arc ~2 | **~22** | 1 |
-| Coach Achilles | arrival 1, Ch3 hums ~4, trial reference 1, side story 10 ~2, finale `role:granny` (Copy, home, trophy, seven `wonder` answers, sky, candles) ~14, card-lesson frame 2, arc ~2 | **~26** | 1 |
+| Coach Achilles | arrival 1, Ch3 hums ~4, trial reference 1, side story 10 ~2, finale `role:granny` (Copy, shelf, candles, sky, trophy question) ~8, card-lesson frame 2, arc ~2 | **~26** | 1 |
 | Tally | arrival 1, Pattern Stall lead-in and reminder 2, rule-hunter tutorial ~6, side story 1 note 1, finale shelf ~3, arc ~2 | **~15** | 1 |
 | Mr Rubberstamp | one audition line (voice entry for the arming guard) | **1** | 1 |
 | Mr Gumleaf | Schoolhouse lead-in, reminder and tutorial ~8, side story 5 ~4, Hall aftermath ~2 | **~14** | 1 (Ch2) |
-| Quiet Scenes | four scenes × 6–8 lines in existing voices (the Sundial, Pip, the Oracle); last words reuse existing recordings | ~24 | 1 |
+| Quiet Scenes | four scenes × 6–8 lines in existing voices (the Sundial, Pip, Nudge); last words reuse existing recordings | ~24 | 1 |
 | **Stage 1 total** | | **≈ 100 lines** (≈ 78 in new voices) | |
 | not planned | Ledger, Dawdle, Tuskworth, Puff, Twitch, reserves, Pebble | ≈ 250 | — |
 
@@ -595,3 +598,16 @@ Aligned to STORY.md round 2 (Appendix D wins every conflict):
 13. **Darkening** is STORY.md's: one Fair lantern per death, candles in the finale, the Feed. Round 1's vignette and desaturation steps are dropped.
 14. **New and changed roles:** **Nudge** cannot die (STORY.md; a villain's helper whose death would read as a reward); **Miss Quill** cannot die (Juror One, then the core); **Mr Gumleaf** is an ordinary, dark-if-lost character in every playthrough, built in stage 1. The Oracle, Mrs Crumb and the other one-station keepers stay dark if lost; their round 1 understudies are reserves.
 15. **Budget:** stage 1 is now 6 sheets (34 images) and about 100 lines (about 78 in new voices), down from round 1's planned set; everything else is designed only.
+
+## Round 3 changes
+
+Aligned to STORY.md round 3 (Appendix D wins every conflict):
+
+1. **Hum Charms are pairs.** Achilles' charm pairs only with Granny's; he puts it on after her lantern goes out, so he heard nothing earlier. He arrives at the **Ch3 Café**, or, after a jump over Ch3, in person at the finale.
+2. **Kuku's arrival** opens quietly ("…It stopped. I heard it stop.") and never says "Understudy".
+3. **Narrator silence** is exact. Narrator script lines are skipped until Kuku; Pip's own lines carry the Ch4 Tower Door; the narrator's host-slot fallback to Pip is limited to Ch3–4 nodes.
+4. **The Quiet Scene** plays at the first chapter opening reached by any route, before "Previously…". Its moving-on lines differ for each person; the soup line is cut; the rule is "warmth, not jokes". Pip's mourner is Nudge.
+5. **Brink lines** for a disarmed tier 4 are added to the after-death order (step 0).
+6. **Achilles' arc** is Zeno's (the fast hare learns to be slow), with his lines at the trial, the trophy and the sky.
+7. **Rubberstamp's sample lines** are marked as a post-game proposal only.
+8. `prologue.door` is renamed `prologue.evening` (STORY.md's met lists).
