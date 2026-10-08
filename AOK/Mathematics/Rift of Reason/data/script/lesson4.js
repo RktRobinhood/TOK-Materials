@@ -625,13 +625,13 @@
     ];
     // The Sundial's question for Ch4 (Kuku asks it with dead:sundial). No answer is asked for yet.
     S['ch4.walkhome'] = [
-        say('It said "probably" once. Nobody clapped, so it stopped. Would you?'),
+        say('It said "probably" once. Nobody clapped, so it stopped. Would you clap?'),
         { when: '!dead:pip', then: [
             { s: 'pip', e: 'happy', t: 'That\'s your rift. Not mine. I\'ll stay. Someone should check things here.' },
             { s: 'pip', t: 'I wrote it all down. Then I checked it. Twice.' },
         ] },
         { note: 'Behind you, at a distance, Nudge follows. No clipboard.' },
-        { note: 'Miss Quill comes down the stairs behind Nudge. She carries her red pen. She doesn\'t use it.' },
+        { note: 'Miss Quill gets up from the core floor behind Nudge. She carries her red pen. She doesn\'t use it.' },
     ];
 
     // ---------------------------------------------------------------- the finale: the Fair, Restored
