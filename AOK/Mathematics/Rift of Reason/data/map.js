@@ -520,6 +520,7 @@
             speaker:'algorithm', intro:'“MY TEAM GETS ATTENTION. CAN YOURS THINK UNDER CHANGING RULES?”',
             name: 'The Feed\'s Champion',
             ai: 'expert', deck: 'feed',
+            copiesPower: true,   // plays your most-used power (js/ui/battles.js copiedPower)
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
             tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'rally-cry', 'eureka', 'rethink', 'big-claims', 'clockwork', 'daydream'],

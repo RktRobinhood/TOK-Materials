@@ -453,6 +453,30 @@ test('trainers use the power of their main colour: board power at Normal, the ot
     assert.equal(G.Powers.forTeam([], 'normal'), null);
 });
 
+test('the Feed\'s Champion copies your most-used power (else your own); finished matches count uses', () => {
+    const keep = G.State.get;
+    const state = G.State.freshState();
+    G.State.get = () => state;
+    try {
+        assert.equal(G.data.trainers.feed.copiesPower, true);
+        // No avatar, no uses: the Champion keeps its own team power.
+        const plain = G.Battles.trainerSide('feed');
+        same(plain.power, G.Powers.forTeam(plain.team, plain.ai));
+        // An avatar, no uses yet: your own power, with your tweaks.
+        state.avatar = { type: 'fox', variant: 'girl', tweaks: ['quick'] };
+        const own = G.Powers.forAvatar(state.avatar);
+        same(G.Battles.trainerSide('feed').power, own);
+        // Uses counted: the most-used one wins (tweaks only carry over for your own power).
+        state.stats.powerUses = { [own.id]: 2, brainstorm: 5 };
+        same(G.Battles.trainerSide('feed').power, { id: 'brainstorm', tweaks: [] });
+        state.stats.powerUses = { [own.id]: 9, brainstorm: 5 };
+        same(G.Battles.trainerSide('feed').power, own);
+        // Other trainers are unaffected.
+        const syllo = G.Battles.trainerSide('syllo');
+        same(syllo.power, G.Powers.forTeam(syllo.team, syllo.ai));
+    } finally { G.State.get = keep; }
+});
+
 test('launchers pass the avatar power and the opponent power; Granny\'s lesson has none', () => {
     const state = G.State.freshState();
     state.avatar = { type: 'fox', variant: 'boy', nickname: 'Test' };

@@ -2832,7 +2832,10 @@
                 });
                 settlement = B().Ante.settle(ante, outcome, { seed, now: Date.now() });
             }
-            const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed };
+            // powerUsed: how often I used my power this match (the save counts it; the Feed's Champion copies the top one).
+            const myPower = state.players[ME].power;
+            const powerUsed = myPower ? { id: myPower.id, uses: myPower.uses || 0 } : null;
+            const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed, powerUsed };
             sfx(outcome === 'won' ? 'win' : 'lose');
             if (fate && fate.results.length) {
                 const severity = ['death', 'warp', 'injured', 'scarred', 'fine'];

@@ -77,7 +77,7 @@ A student who used the time rift to skip a chapter gets that chapter's slot with
 - **Trainers:** the power of their team's most common colour (the board version for Normal level, the other one for Competent). Emotion-heavy teams use an Emotion power (below).
 - **Emotion, the colour no avatar has:** it is the Algorithm's colour (a feed runs on outrage). Emotion powers for trainers/bosses: **Outrage** (a friendly creature gets +2 attack this turn; cost 1, recharge 0) and **Pile-On** (1 damage to the enemy hero for each of your creatures that attacked this turn; cost 2, recharge 2).
 - **Bosses:** one signature power each, written with the boss (separate issue).
-- **The Algorithm (finale idea, not settled):** it has watched you all game and copies the power you used most in your earlier battles ("it predicts you from your past clicks"). This would make lesson 4's point ("AI is just probability") into the final fight. Needs a usage counter in the save.
+- **The Algorithm (built 8 Oct as the Feed's Champion at the Sky Bridge, STORY.md Ch4 beat 8: `copiesPower` in data/map.js, save `stats.powerUses`):** it has watched you all game and copies the power you used most in your earlier battles ("it predicts you from your past clicks"). This would make lesson 4's point ("AI is just probability") into the final fight. Needs a usage counter in the save.
 
 ### 1.5 Balance method
 

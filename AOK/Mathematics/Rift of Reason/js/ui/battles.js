@@ -105,18 +105,31 @@
     const levelOf = name => (Rift.Battle.AI && Rift.Battle.AI.levelOf ? Rift.Battle.AI.levelOf(name) : name);
     const levelLabel = level => ((Rift.Battle.AI && Rift.Battle.AI.LEVEL_NAMES) || {})[level] || 'Normal';
 
+    // A trainer with copiesPower (the Feed's Champion, STORY.md Ch4 beat 8: "MY CHAMPION IS YOU. BUT
+    // OPTIMISED.") plays the player's most-used power (save stats.powerUses), else the avatar's own;
+    // with the avatar's tweaks when it is that same power.
+    function copiedPower() {
+        const s = Rift.State.get() || {};
+        const own = avatarPower(s.avatar);
+        const uses = (s.stats && s.stats.powerUses) || {};
+        const top = Object.entries(uses).filter(([id, n]) => n > 0 && (Rift.data.powers || {})[id]).sort((a, b) => b[1] - a[1])[0];
+        if (top) return { id: top[0], tweaks: own && own.id === top[0] ? (own.tweaks || []).slice() : [] };
+        return own;
+    }
+
     // The trainer's side of the table: { ai, team, tactics }. An Expert boss with a built deck
     // (data/decks.js) plays that deck; everyone else plays their team and tactics.
     function trainerSide(trainerId, level) {
         const t = Rift.data.trainers[trainerId];
         const ai = levelOf(level || t.ai || 'normal');
         const deck = ai === 'expert' && t.deck && (Rift.data.decks || {})[t.deck];
+        const power = side => (t.copiesPower && copiedPower()) || side;
         if (deck) {
-            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: teamPower(deck.creatures, ai),
+            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: power(teamPower(deck.creatures, ai)),
                 team: deck.creatures.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-deck-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } })) };
         }
         const team = trainerTeam(trainerId, t);
-        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: teamPower(team, ai) };
+        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: power(teamPower(team, ai)) };
     }
 
     function rewardText(reward) {
@@ -140,6 +153,11 @@
             if (result.mode === 'practice' && result.outcome === 'won') s.stats.battlesWon += 1;
             else if (result.mode === 'practice' && result.outcome === 'lost') s.stats.battlesLost += 1;
             if (o.nodeId && result.outcome === 'won') Rift.World.complete(s, o.nodeId);
+            // STORY.md counters: powerUses per card power (finished matches only).
+            if (result.powerUsed && result.powerUsed.uses > 0) {
+                const u = s.stats.powerUses || (s.stats.powerUses = {});
+                u[result.powerUsed.id] = (u[result.powerUsed.id] || 0) + result.powerUsed.uses;
+            }
             if (o.trainerId && result.outcome === 'won' && result.mode !== 'practice') reward = Rift.World.claimTrainerReward(s, o.trainerId);
         });
         if (reward && Rift.UI.toast) Rift.UI.toast(rewardText(reward), 6000);
