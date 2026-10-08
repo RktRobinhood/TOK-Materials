@@ -107,6 +107,7 @@
         "kuku.png": {"type":"islands","minArea":2500,"ids":["npc/kuku/idle",["npc/kuku/neutral","npc/kuku"],"npc/kuku/happy","npc/kuku/surprised","npc/kuku/angry"]},
         "rubberstamp.png": {"type":"islands","minArea":2500,"ids":["npc/rubberstamp/idle",["npc/rubberstamp/neutral","npc/rubberstamp"],"npc/rubberstamp/happy","npc/rubberstamp/surprised","npc/rubberstamp/angry","npc/rubberstamp/thinking"]},
         "algorithm-core.png": {"type":"single","id":"npc/algorithm/core","class":"sprite"},
+        "copy.png": {"type":"single","id":"npc/copy","class":"bust"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

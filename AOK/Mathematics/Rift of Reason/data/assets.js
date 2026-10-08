@@ -322,6 +322,7 @@
         'npc/clerk/neutral': { file: 'cast/clerk-neutral.webp', w: 183, h: 240 },
         'npc/clerk/surprised': { file: 'cast/clerk-surprised.webp', w: 208, h: 240 },
         'npc/clerk/thinking': { file: 'cast/clerk-thinking.webp', w: 190, h: 240 },
+        'npc/copy': { file: 'cast/copy.webp', w: 194, h: 240 },
         'npc/corvina': { file: 'cast/corvina-neutral.webp', w: 185, h: 240 },
         'npc/corvina/angry': { file: 'cast/corvina-angry.webp', w: 188, h: 240 },
         'npc/corvina/happy': { file: 'cast/corvina-happy.webp', w: 186, h: 240 },
