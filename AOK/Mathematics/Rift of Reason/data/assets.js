@@ -732,6 +732,7 @@
         'ui/sold': { file: 'ui/sold.webp', w: 160, h: 160 },
         'ui/spark': { file: 'ui/spark.webp', w: 160, h: 158 },
         'ui/stakes-ch1': { file: 'ui/stakes-ch1.webp', w: 1000, h: 334 },
+        'ui/stakes-ch2': { file: 'ui/stakes-ch2.webp', w: 1000, h: 334 },
         'ui/stamp-no': { file: 'ui/stamp-no.webp', w: 300, h: 371 },
         'ui/stamp-yes': { file: 'ui/stamp-yes.webp', w: 296, h: 367 },
         'ui/stat-attack': { file: 'ui/stat-attack.webp', w: 159, h: 160 },
