@@ -12,7 +12,8 @@ Scores 0–10 against:
 2. **Branches.** For every avatar-only line, choice and flag: trace what each of the five species (and both genders where it matters) sees, and what happens later. No dead flags (set but never used), no missing branches (a scene that assumes a choice the player never made), no species that gets a noticeably thinner path.
 3. **Inner voice.** Useful leads are actually useful in the puzzle that follows. Each blind-spot line is wrong in that Way of Knowing's own typical way, and the game later shows it was wrong.
 4. **Continuity.** Names, places, items, rules and the order of chapters match `DESIGN.md`, `ROSTER.md`, `CH2–4.md` and earlier scenes. Jumping in through the time rift still makes sense.
-5. **TOK accuracy.** The ideas about knowledge (deduction, induction, valid vs sound, ways of knowing, probability vs knowing) are stated correctly for 16–17-year-olds.
+5. **Understudies stay off stage.** No understudy (`UNDERSTUDIES.md`) appears, speaks, is named or is foreshadowed unless the original's role has been vacated in that playthrough. Every understudy line sits behind a `dead:`/`away:` condition.
+6. **TOK accuracy.** The ideas about knowledge (deduction, induction, valid vs sound, ways of knowing, probability vs knowing) are stated correctly for 16–17-year-olds.
 
 ## Critic 2: Author and style
 
