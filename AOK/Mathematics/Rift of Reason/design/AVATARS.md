@@ -131,6 +131,6 @@ Every chapter script is revisited to add inner-voice beats, avatar-only options 
 2. Powers in the engine, AI and simulator; balance pass.
 3. Power button on the battle screen; avatar screen shows the power; Granny's step; team codes.
 4. Voice design and auditions (quota: 10 requests per model per day).
-5. Inner-voice step type and voice pipeline for avatars; lesson 1 beats.
+5. Inner-voice step type and voice pipeline for avatars; lesson 1 beats. All story text passes the two-critic writing gate (8/10 each, `design/WRITING-CRITICS.md`) before it is recorded.
 6. Tweaks after boss wins and at campfires.
 7. Talk encounters (after the research), lessons 2–4 beats, trainer and boss powers, the Algorithm finale.
