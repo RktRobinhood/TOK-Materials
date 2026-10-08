@@ -389,8 +389,14 @@
             else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
             else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);
 
+            // After a chapter boss, suggest a backup code once, when nothing else is on screen.
+            const backupTimer = setInterval(() => {
+                if (destroyed || walking) return;
+                if (!Rift.State.backupMilestone() || Rift.Backup.remind()) clearInterval(backupTimer);
+            }, 1500);
+
             return {
-                destroy() { destroyed = true; if (hud.destroy) hud.destroy(); },
+                destroy() { destroyed = true; clearInterval(backupTimer); if (hud.destroy) hud.destroy(); },
             };
         },
     });

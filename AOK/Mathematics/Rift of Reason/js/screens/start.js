@@ -24,40 +24,21 @@
                             text: 'New game',
                             async onclick() {
                                 Rift.Audio.sfx('click');
-                                if (has && !(await Rift.UI.confirm('Start again?', 'This replaces your current adventure on this laptop. Export a backup code in Settings first if you want to keep it.', 'Start again'))) return;
+                                if (has && !(await Rift.UI.confirm('Start again?', 'This replaces your current adventure on this laptop. The title screen can switch back to it, but copy a backup code in Settings first to be safe.', 'Start again'))) return;
                                 Rift.State.newGame();
                                 Rift.Router.replace('avatar');
                             },
                         }),
                         has ? el('button.btn', { text: '🂠 Card Arena', title: 'Card battles: learn, practise, or battle a classmate’s code', onclick: () => { Rift.Audio.sfx('click'); Rift.Router.go('collection'); } }) : null,
-                        el('button.btn', { text: 'Load a backup code', onclick: () => importCode() }),
+                        el('button.btn', { text: 'Load a backup code', onclick: () => { Rift.Audio.sfx('click'); Rift.Backup.loadDialog(); } }),
                     ]),
+                    Rift.Backup.previousButton(() => Rift.Router.replace('title')),
                     el('p.small.muted', { style: { marginTop: '18px' }, text: 'A TOK adventure in logic, proof and persuasion. Progress is saved on this laptop only.' }),
                     el('a.small', { href: 'teacher.html', text: 'Teacher overview' }),
                 ]),
             ]));
         },
     });
-
-    function importCode() {
-        const input = el('textarea', { rows: 4, style: { width: '100%' }, placeholder: 'ROR1.save.…' });
-        Rift.UI.modal('Load a backup code', el('div.stack', null, [el('p', { text: 'Paste the code you exported from Settings.' }), input]), [
-            { label: 'Cancel' },
-            {
-                label: 'Load', primary: true, keepOpen: true,
-                onclick() {
-                    try {
-                        Rift.State.importCode(input.value);
-                        root.document.querySelector('.modal-backdrop').remove();
-                        Rift.UI.toast('Welcome back!');
-                        Rift.Router.replace(Rift.State.get().avatar ? 'map' : 'avatar');
-                    } catch (e) {
-                        Rift.UI.toast(e.message, 4000);
-                    }
-                },
-            },
-        ]);
-    }
 
     Rift.Screens.register('avatar', {
         mount(rootNode) {

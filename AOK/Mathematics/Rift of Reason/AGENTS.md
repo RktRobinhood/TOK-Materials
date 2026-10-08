@@ -8,6 +8,7 @@ Live site: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20o
 
 - Plain HTML/CSS and classic `<script>` files attached to `window.Rift`. **No build step, no modules, no frameworks.** It must run from `file://` and GitHub Pages.
 - `index.html` lists every script in load order: core, then data, UI, puzzles, battle, screens, boot. A new file must be added there (and to `dev/puzzle.html` if it is a puzzle).
+- Students' progress lives only in localStorage, so the backup code is their lifeline. Keep every piece of progress (coins, card backs, quests, Rift Run…) inside the save object from `freshState()` in `js/core/state.js`, never in another storage key or only in memory; then backup codes carry it automatically. Give each new field a default in `freshState()` (old codes get it on load), add a `MIGRATIONS` step only when old data must change shape, and keep `tools/test/save-codes.test.mjs` passing (update its list of top-level fields).
 - Never commit secrets. `.secrets/` at the repo root is gitignored and holds the Gemini key for the voice tool.
 - No looping shake, wobble or jitter animations on characters or cards (the teacher found them seizure-like). Settings has a "Calm motion" switch (`body.calm-motion`) that must keep working.
 - Student-facing English must be short and plain. Caricatures joke only about public personas; no jokes about sexual abuse; no song lyrics.
@@ -26,6 +27,7 @@ Live site: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20o
 | Area | Files |
 |---|---|
 | Core (namespace, seeded RNG, DOM helper `Rift.el`, saves, assets with placeholders, audio, router, world rules) | `js/core/*.js` |
+| Saves and backup codes (one save object; `ROR2` packed codes, `ROR1` still read; previous-save slot; Copy/Download/Load UI; boss reminders) | `js/core/state.js`, `js/ui/backup.js`, `tools/test/save-codes.test.mjs` |
 | Screens (title/avatar, map, encounter + catching, collection + settings, battle) | `js/screens/*.js` |
 | Dialogue, toasts, modals, HUD, bag, battle launcher | `js/ui/*.js` |
 | Puzzles (one file each, all registered through `js/puzzles/registry.js`; read its header for the interface) | `js/puzzles/*.js`, `css/puzzles/*.css` |

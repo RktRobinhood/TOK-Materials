@@ -9,7 +9,10 @@
     const Rift = root.Rift;
     const STATE_VERSION = 2;
     const STORAGE_KEY = 'rift-of-reason:save';
-    const CODE_PREFIX = 'ROR1';
+    const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
+    const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
+    const CODE_PREFIX = 'ROR1';        // base64 JSON: team codes, and save codes made before October 2026
+    const PACKED_PREFIX = 'ROR2';      // base64 of deflated JSON: save codes, about ten times shorter
 
     function freshState() {
         return {
@@ -47,6 +50,9 @@
             tutorialsSeen: {},     // puzzle type -> tutorial offered (also filled for old saves)
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0, powerUses: {} },
             settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1, calm: false, charactersCanDie: true },
+            backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
+            // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
+            // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
         };
     }
 
@@ -312,27 +318,27 @@
     }
 
     // ---- backup codes ----------------------------------------------------------
-    // Base64 of UTF-8 JSON plus a checksum, wrapped in a prefix. Compact enough
-    // to paste in a chat; tampering or typos are caught by the checksum.
+    // PREFIX.kind.body.checksum. ROR1: body = base64 of the UTF-8 JSON. ROR2: body = base64 of
+    // the deflated JSON (CompressionStream), about ten times shorter for a big collection.
+    // Readers accept both forever. The checksum catches typos and edits. Pasted codes are
+    // forgiving: spaces, line breaks, quotes, text around the code and lost '=' are ignored.
 
-    function toBase64(text) {
+    function bytesToBase64(bytes) {
         if (typeof root.btoa === 'function') {
-            const bytes = new TextEncoder().encode(text);
             let bin = '';
-            bytes.forEach(b => { bin += String.fromCharCode(b); });
+            for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
             return root.btoa(bin);
         }
-        return Buffer.from(text, 'utf8').toString('base64');
+        return Buffer.from(bytes).toString('base64');
     }
 
-    function fromBase64(b64) {
-        if (typeof root.atob === 'function') {
-            const bin = root.atob(b64);
-            const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
-            return new TextDecoder().decode(bytes);
-        }
-        return Buffer.from(b64, 'base64').toString('utf8');
+    function base64ToBytes(b64) {
+        if (typeof root.atob === 'function') return Uint8Array.from(root.atob(b64), c => c.charCodeAt(0));
+        return new Uint8Array(Buffer.from(b64, 'base64'));
     }
+
+    const toBase64 = text => bytesToBase64(new TextEncoder().encode(text));
+    const fromBase64 = b64 => new TextDecoder('utf-8', { fatal: true }).decode(base64ToBytes(b64));
 
     function checksum(text) {
         return Rift.hashSeed(text).toString(36).padStart(7, '0').slice(-7);
@@ -343,14 +349,149 @@
         return [CODE_PREFIX, kind, body, checksum(kind + body)].join('.');
     }
 
+    const CODE_ERRORS = {
+        empty: 'Paste your code into the box first.',
+        notCode: 'That doesn\'t look like a Rift of Reason code. A code starts with ROR.',
+        cutOff: 'That code looks cut off. Copy the whole code, from ROR to the very last character, and paste it again.',
+        changed: 'That code has a typo or has been changed. Copy it again in one piece, without editing it.',
+        newer: 'That code comes from a newer version of the game. Reload this page to update it, then try again.',
+        oldBrowser: 'This browser is too old to open that code. Try it in an up-to-date Chrome, Edge, Firefox or Safari.',
+        damaged: 'That code opened, but the adventure inside is damaged. Try an older backup code.',
+    };
+    const codeError = key => Object.assign(new Error(CODE_ERRORS[key]), { reason: key });
+    // Spaces of every kind (also non-breaking and zero-width ones) can sit anywhere in a pasted code.
+    const squeeze = text => String(text == null ? '' : text).replace(/[\s​-‍⁠­﻿]+/g, '');
+
+    // Finds the code in pasted text → { packed, kind, body }. Throws a friendly error.
+    function readParts(kind, text) {
+        const clean = squeeze(text);
+        if (!clean) throw codeError('empty');
+        const found = clean.match(/ROR(\d+)\.([a-z]+)\.([A-Za-z0-9+/]+)=*\.([0-9a-z]{7})/i);
+        if (!found) {
+            const head = clean.match(/ROR(\d+)/i);
+            if (!head) throw codeError('notCode');
+            throw codeError(+head[1] > 2 ? 'newer' : 'cutOff');
+        }
+        const version = +found[1], codeKind = found[2].toLowerCase();
+        if (version > 2) throw codeError('newer');
+        if (version < 1) throw codeError('notCode');
+        if (codeKind !== kind) throw new Error('That code is for something else (' + codeKind + ').');
+        if (checksum(codeKind + found[3]) !== found[4].toLowerCase()) throw codeError('changed');
+        return { packed: version === 2, kind: codeKind, body: found[3] };
+    }
+
+    const padded = body => body + '='.repeat((4 - (body.length % 4)) % 4);
+    function parseJson(text) {
+        try { return JSON.parse(text); } catch (e) { throw codeError('changed'); }
+    }
+
+    // Plain (ROR1) codes only; team codes are always plain. Packed codes need decodeAsync.
     function decode(kind, code) {
-        const clean = String(code || '').replace(/\s+/g, '');
-        const parts = clean.split('.');
-        if (parts.length !== 4 || parts[0] !== CODE_PREFIX) throw new Error('That doesn\'t look like a Rift of Reason code.');
-        if (parts[1] !== kind) throw new Error('That code is for something else (' + parts[1] + ').');
-        if (checksum(parts[1] + parts[2]) !== parts[3]) throw new Error('That code has a typo or has been changed.');
-        const pad = '='.repeat((4 - (parts[2].length % 4)) % 4);
-        return JSON.parse(fromBase64(parts[2] + pad));
+        const p = readParts(kind, code);
+        if (p.packed) throw new Error('That code needs State.decodeAsync.');
+        let text;
+        try { text = fromBase64(padded(p.body)); } catch (e) { throw codeError('changed'); }
+        return parseJson(text);
+    }
+
+    const canPack = () => typeof root.CompressionStream === 'function' && typeof root.DecompressionStream === 'function';
+
+    // Runs bytes through a CompressionStream or DecompressionStream.
+    async function pipeBytes(stream, bytes) {
+        const writer = stream.writable.getWriter();
+        const written = writer.write(bytes).then(() => writer.close());
+        written.catch(() => { /* the reader reports the error */ });
+        const reader = stream.readable.getReader();
+        const chunks = [];
+        let size = 0;
+        for (;;) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            size += value.length;
+        }
+        await written;
+        const out = new Uint8Array(size);
+        let at = 0;
+        chunks.forEach(c => { out.set(c, at); at += c.length; });
+        return out;
+    }
+
+    // Packed (ROR2) code; falls back to a plain code where the browser can't compress.
+    async function encodePacked(kind, payload) {
+        if (!canPack()) return encode(kind, payload);
+        try {
+            const bytes = await pipeBytes(new root.CompressionStream('deflate'), new TextEncoder().encode(JSON.stringify(payload)));
+            const body = bytesToBase64(bytes).replace(/=+$/, '');
+            return [PACKED_PREFIX, kind, body, checksum(kind + body)].join('.');
+        } catch (e) {
+            return encode(kind, payload);
+        }
+    }
+
+    // Plain or packed code → Promise<payload>.
+    async function decodeAsync(kind, code) {
+        const p = readParts(kind, code);
+        if (!p.packed) return decode(kind, code);
+        if (!canPack()) throw codeError('oldBrowser');
+        let text;
+        try {
+            const bytes = await pipeBytes(new root.DecompressionStream('deflate'), base64ToBytes(padded(p.body)));
+            text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+        } catch (e) { throw codeError('changed'); }
+        return parseJson(text);
+    }
+
+    // Any code (packed or plain, with stray text around it) as a clean plain code, for readers
+    // that work synchronously (the teacher overview). Throws the same friendly errors.
+    async function plainCode(code) {
+        const kind = (squeeze(code).match(/ROR\d+\.([a-z]+)\./i) || [])[1];
+        const k = kind ? kind.toLowerCase() : 'save';
+        return encode(k, await decodeAsync(k, code));
+    }
+
+    // A decoded save made safe to use: a real save object, migrated and complete. Never changes
+    // the live save. Throws a friendly error for anything that could break the game.
+    function checkSave(payload) {
+        const p = payload;
+        if (!p || typeof p !== 'object' || Array.isArray(p) || !Number.isInteger(p.version) || p.version < 1) throw codeError('damaged');
+        const badList = list => list !== undefined && (!Array.isArray(list)
+            || list.some(c => !c || typeof c !== 'object' || typeof c.uid !== 'string' || typeof c.species !== 'string'));
+        if (badList(p.creatures) || badList(p.trophies)) throw codeError('damaged');
+        try {
+            const s = migrate(JSON.parse(JSON.stringify(p)));
+            JSON.stringify(s);
+            return s;
+        } catch (e) {
+            throw codeError('damaged');
+        }
+    }
+
+    // Decodes and checks a backup code without touching the live save → Promise<save>.
+    async function readCode(code) {
+        return checkSave(await decodeAsync('save', code));
+    }
+
+    // One line about a save for "replace this adventure?" questions:
+    // 'Ida · Chapter 1: The Road · 12 creatures · 9 places done'.
+    function summary(save) {
+        const s = save || current;
+        if (!s) return 'No adventure';
+        const chapter = (((Rift.data || {}).chapters || {})[s.chapter] || {}).name || s.chapter;
+        const n = (k, word) => k + ' ' + word + (k === 1 ? '' : 's');
+        return [(s.avatar && s.avatar.nickname) || 'No name yet', chapter,
+            n((s.creatures || []).length, 'creature'), n(new Set((s.map && s.map.completed) || []).size, 'place') + ' done'].join(' · ');
+    }
+
+    // Milestones after which the game suggests a fresh backup code, once each: chapter bosses
+    // beaten. → { ids: [every due id], name: the latest boss } or null.
+    function backupMilestone(save) {
+        const s = save || current;
+        if (!s || !s.avatar) return null;
+        const nodes = (((Rift.data || {}).map || {}).nodes) || {};
+        const reminded = (s.backup && s.backup.reminded) || [];
+        const due = ((s.map && s.map.completed) || []).filter(id => nodes[id] && nodes[id].type === 'boss' && !reminded.includes('boss:' + id));
+        return due.length ? { ids: due.map(id => 'boss:' + id), name: nodes[due[due.length - 1]].name } : null;
     }
 
     // ---- live state ------------------------------------------------------------
@@ -358,29 +499,16 @@
     let current = null;
     let saveTimer = null;
 
-    function load() {
+    function storageGet(key) {
         const s = Rift.storage();
-        let raw = null;
-        if (s) {
-            try { raw = s.getItem(STORAGE_KEY); } catch (e) { raw = null; }
-        }
-        if (raw) {
-            try {
-                current = migrate(JSON.parse(raw));
-            } catch (e) {
-                console.warn('[Rift] Save could not be read; starting fresh.', e);
-                current = null;
-            }
-        }
-        return current;
+        if (!s) return null;
+        try { return s.getItem(key); } catch (e) { return null; }
     }
-
-    function saveNow() {
-        if (!current) return false;
+    function storageSet(key, value) {
         const s = Rift.storage();
         if (!s) return false;
         try {
-            s.setItem(STORAGE_KEY, JSON.stringify(current));
+            if (value == null) s.removeItem(key); else s.setItem(key, value);
             return true;
         } catch (e) {
             console.warn('[Rift] Could not save.', e);
@@ -388,13 +516,87 @@
         }
     }
 
+    function load() {
+        const raw = storageGet(STORAGE_KEY);
+        if (raw) {
+            try {
+                current = migrate(JSON.parse(raw));
+            } catch (e) {
+                // Keep the unreadable text (once) so the next save can't destroy it; the title
+                // screen still offers the previous save and backup codes.
+                console.warn('[Rift] Save could not be read; starting fresh.', e);
+                if (!storageGet(UNREADABLE_KEY)) storageSet(UNREADABLE_KEY, raw);
+                current = null;
+            }
+        }
+        return current;
+    }
+
+    function saveNow() {
+        clearTimeout(saveTimer);
+        saveTimer = null;
+        if (!current) return false;
+        return storageSet(STORAGE_KEY, JSON.stringify(current));
+    }
+
     function save() {
         clearTimeout(saveTimer);
         saveTimer = setTimeout(saveNow, 150);
     }
 
+    // Write a pending autosave at once when the tab is hidden or closed.
+    function flush() { if (saveTimer) saveNow(); }
+    if (typeof root.addEventListener === 'function') root.addEventListener('pagehide', flush);
+    if (root.document && typeof root.document.addEventListener === 'function') {
+        root.document.addEventListener('visibilitychange', () => { if (root.document.visibilityState === 'hidden') flush(); });
+    }
+
+    // ---- the previous save --------------------------------------------------------
+    // Loading a code, starting a new game or erasing first moves a real adventure (one with an
+    // avatar) here, so one mistake can always be undone from the title screen.
+    function keepPrevious(reason) {
+        if (!current || !current.avatar) return false;
+        return storageSet(PREVIOUS_KEY, JSON.stringify({ savedAt: Date.now(), reason, save: current }));
+    }
+    // → { savedAt, reason: 'load'|'new'|'erase'|'swap', save } or null.
+    function previous() {
+        const raw = storageGet(PREVIOUS_KEY);
+        if (!raw) return null;
+        try {
+            const p = JSON.parse(raw);
+            return { savedAt: p.savedAt || 0, reason: p.reason || 'load', save: checkSave(p.save) };
+        } catch (e) {
+            return null;
+        }
+    }
+    // Swaps the live save and the previous one (so this, too, can be undone).
+    function restorePrevious() {
+        const p = previous();
+        if (!p) return null;
+        const was = current;
+        current = p.save;
+        if (was && was.avatar) storageSet(PREVIOUS_KEY, JSON.stringify({ savedAt: Date.now(), reason: 'swap', save: was }));
+        else storageSet(PREVIOUS_KEY, null);
+        saveNow();
+        Rift.bus.emit('state:replaced', current);
+        return current;
+    }
+
+    // Puts a save in place of the live one, keeping the old one as the previous save.
+    function replace(state) {
+        const s = checkSave(state); // throws before anything changes
+        keepPrevious('load');
+        current = s;
+        saveNow();
+        Rift.bus.emit('state:replaced', current);
+        return current;
+    }
+
     const State = {
         VERSION: STATE_VERSION,
+        STORAGE_KEY,
+        PREVIOUS_KEY,
+        UNREADABLE_KEY,
         freshState,
         makeCreature,
         rollVariant,
@@ -419,20 +621,51 @@
         migrate,
         encode,
         decode,
+        encodePacked,
+        decodeAsync,
+        plainCode,
+        checkSave,
+        readCode,
+        summary,
+        backupMilestone,
         load,
         save,
         saveNow,
+        flush,
+        previous,
+        restorePrevious,
+        replace,
         get() { return current; },
         has() { return !!current; },
-        newGame() { current = freshState(); saveNow(); return current; },
-        replace(state) { current = migrate(state); saveNow(); Rift.bus.emit('state:replaced', current); return current; },
+        newGame() { keepPrevious('new'); current = freshState(); saveNow(); return current; },
         wipe() {
+            keepPrevious('erase');
+            clearTimeout(saveTimer);
+            saveTimer = null;
             current = null;
-            const s = Rift.storage();
-            if (s) { try { s.removeItem(STORAGE_KEY); } catch (e) { /* ignore */ } }
+            storageSet(STORAGE_KEY, null);
         },
-        exportCode() { return encode('save', current); },
-        importCode(code) { return State.replace(decode('save', code)); },
+        // The live save as a backup code → Promise<string>. Packed when the browser can; the code
+        // is read back and compared before it is handed out, else the plain format is used.
+        async exportCode() {
+            if (!current) throw new Error('There is no adventure to back up yet.');
+            const json = JSON.stringify(current);
+            const plain = JSON.parse(json);
+            const code = await encodePacked('save', plain);
+            try {
+                if (JSON.stringify(await decodeAsync('save', code)) === json) return code;
+            } catch (e) { /* fall through */ }
+            return encode('save', plain);
+        },
+        // Loads a backup code in place of the live save → Promise<save>. Nothing changes unless
+        // the whole code reads and checks; the old adventure becomes the previous save.
+        async importCode(code) { return replace(await readCode(code)); },
+        // The player copied or downloaded a backup code (shown in Settings as the last backup).
+        noteBackup() { State.update(s => { s.backup.lastAt = Date.now(); }); },
+        // Marks backup reminders as shown (ids from backupMilestone).
+        markReminded(ids) {
+            State.update(s => { [].concat(ids || []).forEach(id => { if (!s.backup.reminded.includes(id)) s.backup.reminded.push(id); }); });
+        },
         // Convenience mutators that also autosave and announce changes.
         update(fn) {
             fn(current);

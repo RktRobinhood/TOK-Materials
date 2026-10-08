@@ -328,3 +328,6 @@ body.calm-motion .tour-practice * { animation:none; }
     .avatar-screen > .row { flex-wrap: wrap; }
     .name-input { width: 100%; max-width: 260px; }
 }
+/* Backup codes (js/ui/backup.js) */
+.backup-code { width: 100%; box-sizing: border-box; font: 13px/1.35 ui-monospace, Consolas, monospace; word-break: break-all; resize: vertical; background: var(--night); color: var(--parchment); border: 1px solid var(--parchment-dim); border-radius: 8px; padding: 8px; }
+.backup-error { color: #ff9b9b; font-weight: 700; min-height: 1.2em; margin: 0; }

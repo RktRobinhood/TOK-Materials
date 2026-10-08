@@ -318,7 +318,6 @@
                 el('span', { style: { width: '120px' }, text: label }),
                 el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.settings[key], oninput(ev) { Rift.State.update(st => { st.settings[key] = +ev.target.value; }); } }),
             ]);
-            const code = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' } });
             const hud = Rift.UI.hud({ back: { label: 'Back', onclick: () => Rift.Router.back('map') } });
             rootNode.append(hud, el('div.settings-screen.panel.stack', null, [
                 el('h1', { text: 'Settings' }),
@@ -335,18 +334,8 @@
                     el('span', { text: 'Characters can die: when off, nobody in the story is lost at the worst moment' }),
                 ]),
                 el('h3', { text: 'Backup code' }),
-                el('p.small.muted', { text: 'Your adventure is saved in this browser. To move it to another laptop, or to be safe, copy this code somewhere. Load it from the title screen.' }),
-                el('div.row', null, [
-                    el('button.btn', {
-                        text: 'Make my backup code',
-                        onclick() {
-                            code.value = Rift.State.exportCode();
-                            code.select();
-                            try { root.navigator.clipboard.writeText(code.value); Rift.UI.toast('Copied!'); } catch (e) { /* manual copy */ }
-                        },
-                    }),
-                ]),
-                code,
+                el('p.small.muted', { text: 'Your adventure is saved only in this browser. Copy this code and keep it somewhere safe, like an email to yourself. To carry on at home or on another laptop, choose "Load a backup code" on the title screen.' }),
+                Rift.Backup.panel(),
                 el('h3', { text: 'Start over' }),
                 el('button.btn', {
                     text: 'Erase this adventure',

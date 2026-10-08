@@ -26,9 +26,9 @@
         el('p', { text: 'Use one slot per group. Reuse its number to replace an older report; adding the same group twice would count it twice.' }),
         el('label', { htmlFor: 'group', text: 'Group number (1–60)' }), group,
         el('label', { htmlFor: 'code', text: 'Backup or team code' }), code,
-        el('div.row', null, [el('button.btn.primary', { text: 'Read code', onclick() {
+        el('div.row', null, [el('button.btn.primary', { text: 'Read code', async onclick() {
             try {
-                const id = Number(group.value); session.put(id, code.value); code.value = '';
+                const id = Number(group.value); session.put(id, await R.State.plainCode(code.value)); code.value = '';
                 status.textContent = 'Group ' + id + ' updated. Raw code discarded.';
                 if (id < 60) group.value = id + 1;
                 drawRows(); drawMap();
