@@ -100,6 +100,7 @@
         "quill-unmasked.png": {"type":"single","id":"npc/villager-schoolteacher/unmasked","class":"bust"},
         "stakes-ch2.png": {"type":"single","id":"ui/stakes-ch2","class":"panel"},
         "nudge-masks.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/masked","npc/nudge/maskless"]},
+        "feast-hall.png": {"type":"scene","id":"scene/feast-hall"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },

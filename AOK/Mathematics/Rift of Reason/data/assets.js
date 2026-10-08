@@ -481,6 +481,7 @@
         'scene/evidence-room': { file: 'scenes/evidence-room.webp', w: 1600, h: 900, small: 'scenes/evidence-room-small.webp' },
         'scene/fair': { file: 'scenes/fair.webp', w: 1600, h: 900, small: 'scenes/fair-small.webp' },
         'scene/fair-restored': { file: 'scenes/fair-restored.webp', w: 1600, h: 900, small: 'scenes/fair-restored-small.webp' },
+        'scene/feast-hall': { file: 'scenes/feast-hall.webp', w: 1600, h: 900, small: 'scenes/feast-hall-small.webp' },
         'scene/granny-door': { file: 'scenes/granny-door.webp', w: 1600, h: 900, small: 'scenes/granny-door-small.webp' },
         'scene/map': { file: 'scenes/map.webp', w: 1672, h: 941, small: 'scenes/map-small.webp' },
         'scene/map-ch2': { file: 'scenes/map-ch2.webp', w: 1600, h: 900, small: 'scenes/map-ch2-small.webp' },
