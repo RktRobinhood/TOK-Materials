@@ -499,3 +499,20 @@ test('launchers pass the avatar power and the opponent power; Granny\'s lesson h
     assert.equal(lesson.players[1].power, null);
     assert.ok(!E.legalActions(lesson).some(a => a.type === 'power'));
 });
+
+test('tweak slots: one per chapter boss beaten, up to three; a jump ahead counts the bosses before it', () => {
+    const st = G.State.freshState();
+    assert.equal(G.World.tweakSlots(st), 0);
+    st.map.completed.push('gate');
+    assert.equal(G.World.tweakSlots(st), 1);
+    st.map.completed.push('well', 'b-town-hall');
+    assert.equal(G.World.tweakSlots(st), 2, 'only boss nodes count');
+    st.map.completed.push('t-tribunal', 'k-core');
+    assert.equal(G.World.tweakSlots(st), 3, 'the Core does not add a fourth');
+    const jumper = G.State.freshState();
+    jumper.map.rifts.push('ch3');
+    assert.equal(G.World.tweakSlots(jumper), 2, 'jumped into Ch3: the Gate and the Town Hall count');
+    jumper.map.rifts.push('ch4');
+    assert.equal(G.World.tweakSlots(jumper), 3);
+    for (const id of ['gate', 'b-town-hall', 't-tribunal']) assert.equal(G.data.map.nodes[id].type, 'boss', id);
+});

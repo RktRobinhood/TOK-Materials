@@ -290,7 +290,20 @@
         return true;
     }
 
+    // Tweak slots for the avatar's power (design/AVATARS.md 1.3): one per chapter boss beaten (the Gate,
+    // the Town Hall, the Tribunal), up to three. A jump into a later chapter counts the bosses before it,
+    // so a student who skipped ahead (the time-rift starter kit) is not behind.
+    const TWEAK_BOSSES = ['gate', 'b-town-hall', 't-tribunal'];
+    const CHAPTER_ORDER = ['ch1', 'ch2', 'ch3', 'ch4'];
+    function tweakSlots(state) {
+        const map = state.map || {};
+        const won = TWEAK_BOSSES.filter(id => (map.completed || []).includes(id)).length;
+        const jumped = Math.max(0, ...(map.rifts || []).map(c => CHAPTER_ORDER.indexOf(c)));
+        return Math.min(3, Math.max(won, jumped));
+    }
+
     Rift.World = {
+        tweakSlots,
         award, attempts, recordWrong, hintCost, solveStars, mend, teach, claimTrainerReward,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,

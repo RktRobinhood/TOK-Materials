@@ -231,3 +231,37 @@ test('PowerView: numbers after tweaks and a panel for the avatar screen', () => 
     assert.match(panel.textContent, /Card Arena power/);
     assert.equal(PV.panel({ type: 'nobody', variant: 'boy' }), null);
 });
+
+test('PowerView: the campfire tweak editor allows one tweak per slot and saves to the avatar', () => {
+    const L = load();
+    const { Rift } = L;
+    Rift.data.avatars = { fox: { name: 'Fox', powers: { boy: 'what-if', girl: 'lantern' } } };
+    const save = { avatar: { type: 'fox', variant: 'girl', tweaks: [] }, map: { completed: [], rifts: [] } };
+    let slots = 0;
+    Rift.State = { get: () => save, update: fn => fn(save) };
+    Rift.World = { tweakSlots: () => slots };
+    const toasts = [];
+    let shown = null;
+    Rift.UI = { toast: t => toasts.push(t), modal: (title, body, buttons, opts) => { shown = { title, body, buttons, opts }; } };
+    const PV = Rift.PowerView;
+    assert.equal(PV.editTweaks(), false, 'no slot yet: no editor');
+    slots = 1;
+    assert.equal(PV.editTweaks(), true);
+    assert.equal(shown.title, 'Tweak your power');
+    const opt = id => shown.body.querySelector('[data-tweak="' + id + '"]');
+    assert.equal(shown.body.querySelectorAll('.tweak-option').length, 5);
+    opt('blood').click();
+    assert.equal(opt('blood').getAttribute('aria-pressed'), 'true');
+    assert.equal(opt('quick').disabled, true, 'one slot: the others wait');
+    assert.match(shown.body.textContent, /1 heart/, 'the power\'s numbers update as you choose');
+    shown.buttons.find(b => b.label === 'Save').onclick();
+    assert.equal(JSON.stringify(save.avatar.tweaks), '["blood"]');
+    assert.match(toasts.at(-1), /Blood price/);
+    // The avatar panel then shows the tweak.
+    const panel = PV.panel(save.avatar);
+    assert.ok(panel.querySelector('.power-panel-tweaks'));
+    // Opening again starts from the saved tweaks; un-choosing frees the slot.
+    PV.editTweaks();
+    opt('blood').click();
+    assert.equal(opt('quick').disabled, false);
+});

@@ -317,7 +317,8 @@
                         Rift.Audio.sfx('heal');
                         Rift.UI.toast('Rested: health restored.');
                         finish();
-                        shrineOffer();
+                        // Campfires are where power tweaks are changed (design/AVATARS.md 1.3); the shrine comes after.
+                        if (!(Rift.PowerView && Rift.PowerView.editTweaks && Rift.PowerView.editTweaks({ onClose: shrineOffer }))) shrineOffer();
                         break;
                     case 'battle':
                         await Rift.Dialogue.play(n.script);

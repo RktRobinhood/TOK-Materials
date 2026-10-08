@@ -7,7 +7,10 @@
  * Rift.PowerView.icon(id, cls?) → an <img> (art) or a <span> with the glyph
  * Rift.PowerView.numbers(id, tweaks?) → { id, name, text, cost, heartCost, recharge } after the tweaks
  * Rift.PowerView.costWords(n, hearts?) / rechargeWords(n) → "2 energy" / "Rests 2 turns after use"
- * Rift.PowerView.panel(avatar) → a small panel (name, text, cost, recharge) or null without a power
+ * Rift.PowerView.panel(avatar) → a small panel (name, text, cost, recharge, tweak icons) or null without a power
+ * Rift.PowerView.tweakIcon(id) → the tweak's art ui/tweak-<id>, or a small text chip
+ * Rift.PowerView.editTweaks(opts?) → the campfire tweak editor (a modal); false when there is no power or no slot.
+ *   Slots come from Rift.World.tweakSlots; the choice is saved to save.avatar.tweaks. opts.onClose runs after.
  */
 (function (root) {
     'use strict';
@@ -45,10 +48,17 @@
     const costWords = (n, hearts) => (hearts ? hearts + ' heart' + (hearts === 1 ? '' : 's') : n ? n + ' energy' : 'Free');
     const rechargeWords = n => (n ? 'Rests ' + n + ' turn' + (n === 1 ? '' : 's') + ' after use' : 'Ready every turn');
 
+    function tweakIcon(id) {
+        const t = ((Rift.data.powerTweaks || {})[id]) || { name: id };
+        const art = 'ui/tweak-' + id;
+        return has(art) ? Rift.Assets.img(art, { className: 'tweak-icon', alt: t.name, label: t.name }) : el('span.chip.tweak-chip', { text: t.name });
+    }
+
     function panel(avatar) {
         const pw = Rift.Powers && Rift.Powers.forAvatar ? Rift.Powers.forAvatar(avatar) : null;
         const x = pw && numbers(pw.id, pw.tweaks);
         if (!x) return null;
+        const tweaks = pw.tweaks || [];
         return el('div.panel.perk.power-panel', { dataset: { power: x.id } }, [
             el('div.power-panel-icon', {}, [icon(x.id)]),
             el('div.power-panel-words', {}, [
@@ -59,9 +69,57 @@
                     el('span.chip.power-cost', { text: (x.heartCost ? '❤ ' : '⚡ ') + costWords(x.cost, x.heartCost) }),
                     el('span.chip.power-recharge', { text: '⟳ ' + rechargeWords(x.recharge) }),
                 ]),
+                tweaks.length ? el('div.power-panel-tweaks', { 'aria-label': 'Tweaks: ' + tweaks.map(t => Rift.data.powerTweaks[t].name).join(', ') }, tweaks.map(tweakIcon)) : null,
             ]),
         ]);
     }
 
-    Rift.PowerView = { glyph, icon, numbers, costWords, rechargeWords, panel };
+    // The campfire tweak editor: pick up to one tweak per open slot; each shows what it gains and pays,
+    // and the power's numbers update as you choose.
+    function editTweaks(opts) {
+        const o = opts || {};
+        const s = Rift.State.get();
+        const pw = Rift.Powers && Rift.Powers.forAvatar ? Rift.Powers.forAvatar(s.avatar) : null;
+        const slots = Rift.World && Rift.World.tweakSlots ? Rift.World.tweakSlots(s) : 0;
+        if (!pw || !slots) return false;
+        let chosen = pw.tweaks.slice(0, slots);
+        const body = el('div.stack.tweak-editor');
+        const draw = () => {
+            const x = numbers(pw.id, chosen);
+            body.innerHTML = '';
+            body.append(
+                el('p.small', { text: 'A tweak changes your power: it gains something and pays for it. You have ' + slots + ' slot' + (slots === 1 ? '' : 's') + ' (' + chosen.length + ' used). You can change them at any campfire.' }),
+                el('div.panel.perk.power-panel', { dataset: { power: x.id } }, [
+                    el('div.power-panel-icon', {}, [icon(x.id)]),
+                    el('div.power-panel-words', {}, [
+                        el('strong', { text: x.name }),
+                        el('div', { text: x.text }),
+                        el('div.power-panel-stats', {}, [
+                            el('span.chip.power-cost', { text: (x.heartCost ? '❤ ' : '⚡ ') + costWords(x.cost, x.heartCost) }),
+                            el('span.chip.power-recharge', { text: '⟳ ' + rechargeWords(x.recharge) }),
+                        ]),
+                    ]),
+                ]),
+                el('div.stack.tweak-list', {}, Object.entries(Rift.data.powerTweaks).map(([id, t]) => {
+                    const on = chosen.includes(id);
+                    const full = !on && chosen.length >= slots;
+                    return el('button.btn.tweak-option' + (on ? '.on' : ''), {
+                        type: 'button', disabled: full, dataset: { tweak: id }, 'aria-pressed': on ? 'true' : 'false',
+                        onclick() { chosen = on ? chosen.filter(c => c !== id) : chosen.concat(id); draw(); },
+                    }, [tweakIcon(id), el('strong', { text: t.name }), el('span.small', { text: t.text })]);
+                })),
+            );
+        };
+        draw();
+        Rift.UI.modal('Tweak your power', body, [
+            { label: 'Not now' },
+            { label: 'Save', primary: true, onclick() {
+                Rift.State.update(st => { st.avatar.tweaks = Rift.Powers.cleanTweaks(chosen).slice(0, slots); });
+                if (Rift.UI.toast) Rift.UI.toast(chosen.length ? 'Tweaks saved: ' + chosen.map(t => Rift.data.powerTweaks[t].name).join(', ') + '.' : 'Your power has no tweaks now.');
+            } },
+        ], { onClose: o.onClose });
+        return true;
+    }
+
+    Rift.PowerView = { glyph, icon, tweakIcon, numbers, costWords, rechargeWords, panel, editTweaks };
 })(typeof window !== 'undefined' ? window : globalThis);

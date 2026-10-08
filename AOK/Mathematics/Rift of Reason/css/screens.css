@@ -310,6 +310,16 @@ body.calm-motion .tour-practice * { animation:none; }
 .power-panel-words { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .power-panel-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .deck-panel .power-panel { margin: 6px 0; max-width: 620px; }
+/* Power tweaks (js/ui/powers.js): icons on the power panel and the campfire editor. */
+.power-panel-tweaks { display: flex; gap: 6px; margin-top: 6px; align-items: center; }
+.tweak-icon { width: 28px; height: 28px; object-fit: contain; }
+.tweak-editor { max-width: 560px; }
+.tweak-list { gap: 6px; }
+.tweak-option { display: grid; grid-template-columns: 32px 7.5em 1fr; gap: 10px; align-items: center; text-align: left; width: 100%; }
+.tweak-option .tweak-icon { width: 32px; height: 32px; }
+.tweak-option.on { outline: 2px solid var(--gold); background: rgba(255, 210, 90, 0.14); }
+.tweak-option[disabled] { opacity: 0.45; }
+.tweak-unlocked { color: var(--gold); font-weight: 600; }
 .avatar-preview > .stack { min-width: 0; }
 /* Phones: the picture above the words, so the perk and power panels fit the width. */
 @media (max-width: 600px) {

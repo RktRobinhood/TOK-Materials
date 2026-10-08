@@ -386,6 +386,7 @@
                 catchOpts = { stars, lured: visit.lured };
                 obstacle = Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
+                const slotsBefore = Rift.World.tweakSlots(s);
                 Rift.State.update(st => {
                     Rift.World.applyRewards(st, r);
                     Rift.World.complete(st, n.id);
@@ -412,6 +413,8 @@
                     def && def.tok ? el('p.tok-line', { text: '💭 ' + def.tok }) : null,
                     el('p', { text: '+' + r.xp + ' XP' + (items ? '  ·  ' + items : '') }),
                     earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
+                    Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
+                        ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
                 ]);
                 modal('Solved!', body, [{ label: obstacle ? 'Catch the ' + Rift.data.creatures[obstacle].name + '!' : 'Back to the map', primary: true, onclick: () => (obstacle ? catchPhase() : Rift.Router.replace('map')) }]);
             }
