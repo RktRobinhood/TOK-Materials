@@ -108,6 +108,7 @@
         "rubberstamp.png": {"type":"islands","minArea":2500,"ids":["npc/rubberstamp/idle",["npc/rubberstamp/neutral","npc/rubberstamp"],"npc/rubberstamp/happy","npc/rubberstamp/surprised","npc/rubberstamp/angry","npc/rubberstamp/thinking"]},
         "algorithm-core.png": {"type":"single","id":"npc/algorithm/core","class":"sprite"},
         "copy.png": {"type":"single","id":"npc/copy","class":"bust"},
+        "keepsakes-2.png": {"type":"islands","minArea":3000,"class":"item","ids":["keepsake/cold-piece","keepsake/pip-headphones","keepsake/copy-hat"]},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
