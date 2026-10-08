@@ -524,7 +524,7 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 | # | Asset | Ids | Needed for | Priority | Status |
 |---|---|---|---|---|---|
-| 13.1 | Ten avatar power icons + two Emotion power icons (Outrage, Pile-On) | `ui/power-<id>` (ids in `data/powers.js`) | Power button on the battle screen (#52) | 1 | needed |
+| 13.1 | Ten avatar power icons + two Emotion power icons, round, readable at 32 px | `ui/power-close-the-proof`, `ui/power-foresee`, `ui/power-lantern`, `ui/power-night-sight`, `ui/power-what-if`, `ui/power-brainstorm`, `ui/power-recall`, `ui/power-hold-that-thought`, `ui/power-call-it-out`, `ui/power-fine-print`, `ui/power-outrage`, `ui/power-pile-on` | Power button (built in #52; shows an emoji until the art exists) | 1 | needed |
 | 13.2 | Five tweak icons: Quick, Cheap, Blood price, Deeper, Broader | `ui/tweak-<id>` | Tweak slots (#53) | 2 | needed |
 | 13.3 | Power button frame: ready, used, recharging | `ui/power-frame-*` (may stay CSS) | #52 | 3 | check after #52 |
 | 13.4 | Understudy Tally (Sequins' dormouse stagehand): idle + neutral, happy, surprised, angry | see `UNDERSTUDIES.md` card | Only shown if Sequins dies (Ch1) | 1 *story* | needed |
