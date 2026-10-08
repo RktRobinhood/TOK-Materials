@@ -310,3 +310,11 @@ body.calm-motion .tour-practice * { animation:none; }
 .power-panel-words { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .power-panel-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .deck-panel .power-panel { margin: 6px 0; max-width: 620px; }
+.avatar-preview > .stack { min-width: 0; }
+/* Phones: the picture above the words, so the perk and power panels fit the width. */
+@media (max-width: 600px) {
+    .avatar-preview { flex-direction: column; align-items: stretch; }
+    .avatar-big { width: 160px; height: 190px; align-self: center; }
+    .avatar-screen > .row { flex-wrap: wrap; }
+    .name-input { width: 100%; max-width: 260px; }
+}
