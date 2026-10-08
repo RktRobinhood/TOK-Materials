@@ -69,6 +69,15 @@
         return { role, actor: role ? host(role, nodeId) : null, note };
     }
 
+    // A station's background now: the node's `scenes` list ({ when, scene }), first entry whose `when`
+    // holds, else its `scene` (like `hosts`). The Town Hall shows the feast until it is over.
+    function nodeScene(nodeId) {
+        const n = (((Rift.data || {}).map || {}).nodes || {})[nodeId];
+        if (!n) return null;
+        const pick = (n.scenes || []).find(x => S().test(x.when));
+        return pick ? pick.scene : n.scene;
+    }
+
     // A black ribbon on this station while its role is silent (the Pattern Stall).
     function ribbon(role, nodeId) {
         const e = entry(role);
@@ -146,5 +155,5 @@
         return Object.keys(cast).filter(r => cast[r].policy === 'lethal' && isDead(r)).length;
     }
 
-    Rift.Cast = { entry, original, understudy, roleOf, actor, host, nodeHost, ribbon, isDark, text, ready, canLose, resolvePeril, arrive, canPossess, losses, isDead, hasArrived };
+    Rift.Cast = { entry, original, understudy, roleOf, actor, host, nodeHost, nodeScene, ribbon, isDark, text, ready, canLose, resolvePeril, arrive, canPossess, losses, isDead, hasArrived };
 })(typeof window !== 'undefined' ? window : globalThis);

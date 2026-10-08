@@ -9,7 +9,8 @@
  * puzzles: candidate puzzle ids + difficulty, one is rolled per visit.
  * spawns: visitors rolled after success (weighted by rarity);
  *         rare teasers from other colours can be listed too.
- * scene: background art id. script: dialogue key in data/script/*.js.
+ * scene: background art id (scenes: [{ when, scene }] overrides it while a story condition holds,
+ * like hosts). script: dialogue key in data/script/*.js.
  */
 (function (root) {
     'use strict';
@@ -265,7 +266,8 @@
                 hosts: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, host: 'constable' }],
                 intro: "station.b-town-hall.intro", reminder: "station.b-town-hall.reminder",
                 name: 'The Town Hall', chapter: 'ch2', map: 'ch2', type: 'boss', x: 1407, y: 191,
-                scene: 'scene/village-square', script: 'ch2.hall',
+                scene: 'scene/feast-hall', script: 'ch2.hall',
+                scenes: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, scene: 'scene/village-square' }],
                 puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher', 'constable'] } }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true, excludeRoles: ['constable', 'baker'] } }],
                 spawns: ['tremendoodle', 'rawmsay', 'booleon', 'obambu', 'beeyonce'], links: ['b-stairs', 'b-skyrift'],
                 teaser: 'The dome. The Mayor. The truth, if you can build a table big enough.',

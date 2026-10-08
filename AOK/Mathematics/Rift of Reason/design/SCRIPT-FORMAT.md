@@ -49,6 +49,8 @@ A node's `host` is its usual host role. Add a `hosts` list when the host changes
 
 `host: null` means nobody is there: the panel shows no portrait and `note` (or a plain line) instead, and the tutorial reads as unvoiced notes. The bubble shows the first line of the node's `reminder` script spoken by the current host role (its `when` holding). Tutorials are recorded for every host in the list.
 
+A node's background works the same way: `scenes: [{ when, scene }]` overrides `scene` while its `when` holds (the Town Hall shows `scene/feast-hall` until `ch2.hall.win` is seen or Granny is dead, then the square). Inside a script, `{ scene: 'scene/granny-door' }` swaps the backdrop for the rest of that script.
+
 **Name beats by chapter:** `prologue.wake`, `ch1.well`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe`, `ch4.door`… The `met` lists in STORY.md Appendix D are script keys. **A key counts as seen once its script has played to the end**; the engine then sets the flag `seen:<key>`. So a death can only be armed after the player has finished those exact scripts. If a `met` beat is part of a bigger script, mark it yourself with `{ flag: 'seen:ch1.night' }`.
 
 ---

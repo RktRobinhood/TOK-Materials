@@ -476,6 +476,17 @@ test('station hosts: the first matching entry of a node\'s hosts list, then the 
     assert.equal(Rift.Cast.nodeHost('stall-pattern').actor, null, 'then the cast: silent role, no stand-in here');
 });
 
+test('station scenes: the Town Hall shows the feast until it is won or Granny is gone', () => {
+    const Rift = game();
+    assert.equal(Rift.Cast.nodeScene('b-town-hall'), 'scene/feast-hall');
+    assert.equal(Rift.Cast.nodeScene('well'), Rift.data.map.nodes.well.scene, 'no scenes list: the node scene');
+    Rift.State.setFlag('seen:ch2.hall.win', true);
+    assert.equal(Rift.Cast.nodeScene('b-town-hall'), 'scene/village-square');
+    const R2 = game();
+    R2.State.setFlag('dead:granny', true);
+    assert.equal(R2.Cast.nodeScene('b-town-hall'), 'scene/village-square');
+});
+
 test('the lead for a station uses the mode the encounter resolved', async () => {
     const Rift = game({ type: 'frogling' });
     const r = runner(Rift);

@@ -53,7 +53,7 @@
             let helpModal = null;
             let puzzleSlot = null;
 
-            rootNode.append(Rift.Assets.img(n.scene || 'scene/road-forest', { className: 'scene-bg', label: n.name }));
+            rootNode.append(Rift.Assets.img((Rift.Cast ? Rift.Cast.nodeScene(params.nodeId) : n.scene) || 'scene/road-forest', { className: 'scene-bg', label: n.name }));
             const checks = el('span.chip.enc-checks', { 'aria-live': 'polite' });
             const hud = Rift.UI.hud({ back: { label: 'Map', onclick: leave }, status: checks });
             const title = el('div.enc-title.panel', null, [el('strong', { text: n.name }), el('span.stage.small.muted')]);

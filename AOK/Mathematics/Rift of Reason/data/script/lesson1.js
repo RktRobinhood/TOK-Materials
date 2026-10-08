@@ -133,6 +133,7 @@
             { when: 'dead:sequins', then: [{ play: 'ch1.lantern', once: true }] },
             { when: DOOR_OPEN, then: [
                 { when: { seen: 'ch1.door' }, then: [
+                    { scene: 'scene/granny-door' },
                     { s: 'narrator', t: 'Her door is still open. The tea has gone cold.', when: '!dead:granny' },
                     { s: 'narrator', t: 'Her door is still open. Her lantern is out.', when: 'dead:granny' },
                 ], else: [{ play: 'ch1.door' }] },
@@ -356,6 +357,7 @@
 
     // Granny's open door (the Fair Gate, from the Well win). Optional; it can turn you back.
     S['ch1.door'] = [
+        { scene: 'scene/granny-door' },
         { s: 'narrator', t: 'Granny\'s door is open. Her cup is on the table. Her shawl is gone.', when: { not: LATER } },
         { s: 'narrator', t: 'Granny\'s door is open. The tea went cold days ago. Her shawl is gone.', when: LATER },
         { s: 'syllo', t: 'No sign of a fight, recruit. She\'d have won one.', when: '!dead:granny' },
