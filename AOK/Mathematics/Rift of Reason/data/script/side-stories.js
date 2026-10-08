@@ -73,7 +73,7 @@
  *
  * VERBS (resolve.verb). Every wrong answer costs 1 notch (or `cost`) and is struck out; every round won
  * is +1 Progress. Progress already filled when the verb starts (blue "+1 progress") strikes out one
- * wrong option per notch, or in a negotiation adds 1 Interest per notch.
+ * wrong option per notch (rounds with noHead: true are skipped), or in a negotiation adds 1 Interest per notch.
  *   option: { t: 'Tin B', ok: true, say: [steps], cost: 2 }    (say = the reply when picked)
  *
  * deduce — pick, then a one-click "Why?":

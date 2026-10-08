@@ -90,7 +90,7 @@
                 { s: 'baker', t: 'She wrote it from the pot. It\'s the last thing she wrote. …Please. The right tin.', when: 'dead:granny' },
                 { inner: {
                     owlet: 'Suppose each tin in turn. Count the true labels. One world fits. Mine.',
-                    mothkin: 'Ooh, tin B gleams. Shiny means nothing. …The dent on C, though. Look.',
+                    mothkin: 'Ooh, tin A gleams. Shiny means nothing. …The dent on C, though. Look.',
                     fox: 'What if the label on the cake tin is the liar? Delicious.',
                     frogling: '"Bring a lad—". Granny said that once. I remember. The rest is in the cake.',
                     raven: '"At most one" allows zero. Read the small words.',
@@ -110,9 +110,10 @@
         },
         resolve: {
             verb: 'deduce',
-            intro: [{ s: 'baker', t: 'Pick a tin. Pull it out. Mind the custard.' }],
+            intro: [{ s: 'baker', t: 'First, my rule. Then a tin. Mind the custard.' }],
             rounds: [
                 {
+                    noHead: true,   // the blue head start strikes a wrong tin, not this side question
                     q: 'Does "at most one is true" allow zero true labels?',
                     options: [
                         { t: 'No. "At most one" means exactly one.', say: [
@@ -151,7 +152,7 @@
                     why: {
                         q: 'Why?',
                         options: [
-                            { t: 'Only with the cake in B is at most one label true. A and C each make two true.', ok: true },
+                            { t: 'Cake in B: only C\'s label is true. Cake in A or C: two are true.', ok: true },
                             { t: 'B\'s label says "not here", so it must be hiding something.', say: [
                                 { s: 'baker', t: 'Labels don\'t hide things. Tins hide things. Labels just lie.' },
                             ] },
@@ -296,11 +297,12 @@
         resolve: {
             verb: 'deduce',
             intro: [
-                { s: 'schoolteacher', t: 'Well, child? Name the writer. Or we stay until morning.', when: QUILL },
-                { s: 'gumleaf', t: 'So. Who was it? No pressure. Well, a little. Rules.', when: GUM },
+                { s: 'schoolteacher', t: 'Well, child? First, the quiet one. Then name the writer.', when: QUILL },
+                { s: 'gumleaf', t: 'So. Start with Beansprout. Then who wrote it. No pressure. Well, a little.', when: GUM },
             ],
             rounds: [
                 {
+                    noHead: true,   // the blue head start strikes a wrong suspect, not this side question
                     q: 'Mr. Beansprout said nothing at all. What does that prove?',
                     options: [
                         { t: 'He\'s guilty. Honest people talk.', say: [
@@ -310,7 +312,7 @@
                             { s: 'eelish', t: 'Quiet isn\'t honest. Quiet is quiet. I wrote a song about it.' },
                         ] },
                         { t: 'Nothing. Silence is neither true nor false.', ok: true, say: [
-                            { s: 'astrophysicat', t: 'Well, actually: the board said something that can\'t be true or false. Beansprout said nothing at all.' },
+                            { s: 'astrophysicat', t: 'Well, actually: the board says too much. Beansprout says nothing. Different problems.' },
                         ] },
                     ],
                 },
@@ -378,8 +380,9 @@
                 { note: 'Mr. Beansprout\'s page is blank. Somehow, it is the neatest.' },
             ],
             3: [
-                { note: 'The class is freed, very late. On the way out, the teacher still glares at Astrophysicat.' },
-                { s: 'astrophysicat', t: 'I sat nearest. That was not a proof. That was a distance.' },
+                { note: 'The class is freed, very late. The teacher blames Astrophysicat. He sits nearest the board.', when: QUILL },
+                { s: 'astrophysicat', t: 'I sit nearest. That is not a proof. That is a distance.', when: QUILL },
+                { s: 'astrophysicat', t: 'Ten minutes, many times. That is not a punishment. That is a statistic.', when: GUM },
                 { note: 'Up the chimney, Smudge is already gone.' },
             ],
             4: [
@@ -542,7 +545,7 @@
                 { s: 'gargoyle', t: 'Smoke. Very dramatic. I\'ll wear it next week.' },
             ],
             3: [
-                { note: 'CLUNK. Too late: the engines already fired.' },
+                { note: 'Too late: the engines already fired.' },
                 { note: 'The rocket lifts. Three metres. Then it tips, gently, into the river. Plop.' },
                 { s: 'muskrat', t: 'Three metres! A personal best! …Can somebody open the hatch?' },
             ],

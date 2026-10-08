@@ -46,11 +46,11 @@
         let ri = 0, ai = 0;
         const struck = list.map(r => r.asks.map(() => new Set()));
         // A head start (Progress already filled: blue options, { progress } steps) strikes out one
-        // wrong option per notch, in the first asks, always leaving one wrong option to choose.
+        // wrong option per notch, in the first asks, always leaving one wrong option to choose. A round with noHead: true is skipped.
         let head = Math.max(0, Number(o.head) || 0);
         for (let r = 0; r < list.length && head > 0; r++) {
             list[r].asks.forEach((a, k) => {
-                if (!a.options) return;
+                if (!a.options || list[r].noHead) return;
                 const wrong = a.options.map((x, i) => (x.ok ? -1 : i)).filter(i => i >= 0);
                 while (head > 0 && wrong.length - struck[r][k].size > 1) {
                     struck[r][k].add(wrong.find(i => !struck[r][k].has(i)));

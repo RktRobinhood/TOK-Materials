@@ -189,6 +189,15 @@ test('deduce, test and object: right answers, struck wrong ones, costs, Why?, pr
     assert.equal(t.current().ask.q, 'Which test could prove the claim wrong?');
     assert.equal(t.current().struck.size, 2, 'head start strikes wrong options, leaving one');
     assert.equal(t.rounds[0].asks[1].options.length, 2);
+    // noHead: the head start skips that round and strikes in the next one instead.
+    const nh = V.rounds('deduce', { rounds: [
+        { noHead: true, q: 'Side question', options: [{ t: 'a' }, { t: 'b', ok: true }, { t: 'c' }] },
+        { q: 'Main question', options: [{ t: 'x' }, { t: 'y', ok: true }, { t: 'z' }] },
+    ] }, { head: 1 });
+    assert.equal(nh.current().struck.size, 0, 'a noHead round is not struck');
+    nh.answer(1);
+    assert.equal(nh.current().ask.q, 'Main question');
+    assert.equal(nh.current().struck.size, 1, 'the head start lands in the next round');
 
     const o = V.rounds('object', { rounds: [
         { line: [{ s: 'syllo', t: 'Everyone is joining!' }], q: 'Reply', options: [{ t: 'Popularity is not proof', ok: true }, { t: 'You are loud' }], name: { options: [{ t: 'Popularity', ok: true }, { t: 'Strawman' }] } },
