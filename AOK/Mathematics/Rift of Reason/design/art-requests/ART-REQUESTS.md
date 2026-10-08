@@ -728,6 +728,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > One head-and-shoulders dialogue bust on a transparent canvas, no text, no numbers. Match the style board and the Nudge sheet above exactly (same imp). Nudge, gleeful, eyes squeezed into happy crescents, holding up a clipboard in both hands towards the viewer like a proud trophy. The clipboard is a glowing feed screen in a brass clip: bright cyan light, a little row of tiny thumbs-up and heart shapes streaming up its face, no writing. The screen glow lights Nudge's face from below. A busy little vote-counter, very pleased with itself.
 
+
+### 13.37 Hoot's Gavel (session of 8 October)
+
+**Attach:** `style-board.png`, `lucky-sequin.png`
+**Save as:** `5-ui/hoots-gavel.png`
+**Ids:** `item/hoots-gavel` (Bag, the Tribunal reward)
+
+> One small prop on a transparent canvas, no text. Match the style board and the Lucky Sequin sheet above (same finish and scale); it must read at 32 px. Judge Hoot's gavel: a small, well-worn wooden judge's gavel lying at a slight angle, dark polished wood with a brass band round the head, a tiny carved owl feather on the handle, and a few cyan sparks flying off the striking face as if it has just come down.
+
 ---
 
 ## Outcome log
@@ -876,3 +885,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.33 The Feast of Laws | Second try (2026-10-08) | The first try gave Granny a fifth limb (a foot out of the back of her shell; the teacher spotted it). The redo redrew the whole room: candlelit gothic hall, purple rift over Boolesbury in the arched windows, laden tables down both sides, the cauldron over flames on a stepped stone stage, the winch at the left, and Granny (white curls, flower, round glasses, lavender shawl, now matching her sheet) hanging cross and arms folded from the hook by a leather harness round her shell: two arms, two legs, no knots near her. Big open floor. Scene, scene/feast-hall (still to be wired into the Ch2 Hall). |
 | 13.41 + 13.24b Hum Charm, Granny's keepsake | First try (2026-10-08) | Round brass charm with an engraved spiral and sound lines, cream tassel, knotted lavender cord (matches Achilles' charm); the same charm with round gold glasses on a folded corner of her fringed lavender shawl. Both read at 32 px. Sliced into item/hum-charm and keepsake/granny-charm-glasses. |
 | 13.36 Nudge with its clipboard | First try (2026-10-08) | Same Nudge, eyes shut in glee, holding up a brass-clipped glowing cyan screen with streaming hearts and thumbs-up, no writing; the glow lights its chin. Single bust, npc/nudge/clipboard. |
+| 13.37 Hoot's Gavel | First try (2026-10-08) | Polished dark-wood gavel with a brass band and a gold feather carved on the handle, cyan sparks off the striking face. Reads at 32 px. Single item, item/hoots-gavel. |

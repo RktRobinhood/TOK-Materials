@@ -283,6 +283,7 @@
         'item/charm': { file: 'items/charm.webp', w: 104, h: 160 },
         'item/greatcharm': { file: 'items/greatcharm.webp', w: 104, h: 160 },
         'item/heartstone': { file: 'items/heartstone.webp', w: 160, h: 155 },
+        'item/hoots-gavel': { file: 'items/hoots-gavel.webp', w: 160, h: 94 },
         'item/hum-charm': { file: 'items/hum-charm.webp', w: 138, h: 160 },
         'item/lucky-sequin': { file: 'items/lucky-sequin.webp', w: 98, h: 160 },
         'item/lure': { file: 'items/lure.webp', w: 117, h: 160 },
