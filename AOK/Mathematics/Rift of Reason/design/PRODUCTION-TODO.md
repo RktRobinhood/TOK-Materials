@@ -1,6 +1,6 @@
 # Production to-do: art and voices (8 October 2026)
 
-Lesson 1 (Prologue + Ch1) has passed the three-critic script gate (logic 8, author 8.5, editor 8.5). Lessons 2–4 are outlined and gated (`STORY.md`) but not yet scripted; their old lines will change, so don't record or draw for them yet unless marked.
+Lesson 1 (Prologue + Ch1) has passed the three-critic script gate (logic 8, author 8.5, editor 8.5). Lessons 2–4 were scripted and passed the same gate on 8 Oct, so every lesson can be recorded and drawn now.
 
 ## Art session (with the teacher, one prompt at a time)
 

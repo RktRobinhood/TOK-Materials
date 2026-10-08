@@ -1,6 +1,6 @@
 # Rift of Reason — Understudies
 
-Status: **round 4** (8 October 2026), aligned to STORY.md round 4. **STORY.md Appendix D is binding and wins every conflict.** This file supplies the people, looks, voices and art for the understudies, and the system detail behind Appendix D. Nothing in the game uses it yet. Sample lines use today's scripts or STORY.md's own lines; writers redo them with the new scripts.
+Status: **round 4** (8 October 2026), aligned to STORY.md round 4. **STORY.md Appendix D is binding and wins every conflict.** This file supplies the people, looks, voices and art for the understudies, and the system detail behind Appendix D. **Built (8 Oct):** the cast resolver, arming check, black ribbons, dark stations and memorial props are in the game, and all four built understudies (Tally, Achilles, Kuku, Rubberstamp) have art and cast voices, so every death can arm. Still to do: their recordings (Gemini quota) and Dawdle (waits for side story 7).
 
 > **The off-stage rule.** Understudies stay off stage. None appears, speaks, is named or is set up anywhere, in any script, rumour, tooltip or art, unless their original's role has been vacated in that playthrough (STORY.md Appendix D). Every understudy line in this file sits behind `dead:<npc>` **and** that role's `arrived:<role>`. Even an understudy's history (Kuku's clock in Granny's sack, Achilles' Hum Charm) is mentioned only after the death.
 
