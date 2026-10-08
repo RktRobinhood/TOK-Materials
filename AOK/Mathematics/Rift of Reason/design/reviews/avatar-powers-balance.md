@@ -92,6 +92,28 @@ Costs now run 0 to 3 and recharges 0 to 4, so the two numbers together set how o
 
 Nine of twelve are in +3 to +8 for Competent (Brainstorm at +2.9 is on the edge); every power Normal uses now does something. First player wins 47.2% over all power rows against 46.9% with no powers on the same matchups (the earlier pass measured 48.0% on another seed): the powers do not move the seat balance. Average rounds 7.98 against 7.99 without powers.
 
+### Foresee, Hold That Thought and Brainstorm: numbers are not enough
+
+Both rule powers are already free, and free with recharge 0 does not help (Foresee 0/0 +0.8, used 6.6 times a game; Hold That Thought 0/0 +0.3). Moving a rule card or the Fate track one step is worth little, however often you do it. So the fix has to be in the text. Candidate texts were tried by running a Broader extra as part of the base power (`--pw=foresee+broader --patch=foresee.cost:-1` gives "Foresee + take one" at cost 0), 1,100 games each, Competent vs none:
+
+| Candidate text | Cost/recharge | vs none | Uses/game |
+|---|---|---|---|
+| Foresee + take one of the cards into your hand | 0/1 | +3.1 | 3.6 |
+| same | 0/0 | −4.8 (rule cards clog the hand) | 6.6 |
+| same | 0/2 | +1.8 | 2.6 |
+| same | 1/1 | +2.7 | 2.6 |
+| **Foresee: look at the top 3, take one, put the others back in any order** | **0/1** | **+3.7** | 3.6 |
+| Hold That Thought + draw a card | 0/1 | +24.8 | 3.6 |
+| same | 2/2 | +9.8 | 1.2 |
+| same | 2/3 | +8.7 | 1.1 |
+| **same** | **3/2** | **+5.1** | 0.7 |
+| same | 3/3 | +4.7 | 0.7 |
+| Brainstorm + 1 energy (its Broader) | 0/0 | +15.4 | 3.8 |
+
+A free card is very strong (a hand card is the AI's main resource), so "draw a card" needs a cost of 3. Taking a *rule* card is gentler and stays on Foresee's identity (Reason reads the rules ahead).
+
+**Brainstorm** (0/0, +2.9 ±2.9 for Competent, +3.6 for Normal) is at the bottom edge of the target, inside the noise. An extra play only matters when you also have the energy; adding energy (+15.4) is far too much. Left as it is: it starts a little weak, as the teacher asked, and its tweaks are the upgrade path.
+
 PAIRS_SECTION
 
 TWEAKS_SECTION
