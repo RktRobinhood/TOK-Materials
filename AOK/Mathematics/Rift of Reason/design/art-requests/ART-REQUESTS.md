@@ -542,7 +542,7 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.16 | "Possessed by the Algorithm" look for NPCs and creatures: probably a CSS/overlay first (feed-screen glow, scanlines, red Emotion tint); optional possessed busts for key NPCs | `fx/possessed` overlay; `npc/<id>/possessed` if needed | Possession beats (TEACHER-STORY-NOTES 9) | 2 *story* | to design |
 | 13.17 | The Algorithm's own form for the final confrontation | `npc/algorithm/true-form` | Finale | 1 *story* | to design |
 | 13.18 | Nudge, the recurring named imp (every chapter): idle + busts; loses its sack, mask, followers and job across the story | `npc/nudge/*` | STORY.md round 2 | 1 *story* | to design |
-| 13.19 | Miss Quill's second mask (Juror One) | `npc/quill/juror` | Ch3 | 2 *story* | to design |
+| 13.19 | Miss Quill's second mask (Juror One) | `npc/quill/juror` | Ch3 | 2 *story* | not needed for now: Juror One never speaks (one note line in lesson3.js); Ch4 Quill uses the unmasked bust (checked 8 Oct) |
 | 13.20 | The Guess-o-Matic (Sequins' fortune toy, the Algorithm's origin) | `ui/guess-o-matic` | Ch4 reveal | 1 *story* | to design |
 | 13.21 | Redrawn core for the Ch4 climb and conversation | `scene/core-*` | Ch4 | 2 *story* | to design |
 | 13.22 | Understudy Mr Rubberstamp (Pip's retired toad boss): Pip's pose set | see `UNDERSTUDIES.md` card | Only if Pip dies (possessed at the Ch4 Sorting Room) | 1 *story* | needed |
@@ -784,6 +784,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > Three separate small props in one row on a transparent canvas, well apart, nothing touching, no text. Match the style board and the keepsakes above (the cage cushion, the Hum Charm on the shawl: same finish and scale); each must read at 32 px. Quiet, sad little objects left behind. 1. The cold piece: a long, thin, pointed wedge of solid shadow, like the shadow cast by a sundial's pointer cut out and lifted off the ground, deep blue-black and soft-edged, with a faint rim of frost and a few tiny ice crystals glinting on it. 2. Pip's headphones: the small glowing cyan headphones from Pip the bat clerk's sheet above, lying on their side, the band a little bent, one ear cup still glowing faintly as if something is still playing. 3. The Copy's hat: a small soft knitted hat in mixed avatar colours, lying a little crumpled, with a few pieces of shiny broken screen glass scattered around it.
 
+
+### 13.23c Stakes-clock frame, Ch3: the GUILTY vote (session of 8 October)
+
+**Attach:** `style-board.png`, `stakes-ch1.png`, `stakes-ch2.png`
+**Save as:** `5-ui/stakes-ch3.png`
+**Ids:** `ui/stakes-ch3` (behind the meter at 35% opacity, `object-fit: cover`)
+
+> A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers, no characters. Match the style board and the two stakes strips above (same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). The Neon Tribunal of Tomorrowton at night: a dark, glossy courtroom gallery seen from the side, rows of empty benches climbing away to the right, and above them, across the whole width, dozens of glowing feed screens hanging at angles, each showing only a big red thumbs-down or a red cross mark, their red light spilling down over the benches. At the far left, a small, worn stone sundial sits alone in a pool of cold cyan light. Tense and cold, like a crowd that has already decided.
+
 ---
 
 ## Outcome log
@@ -938,3 +947,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.40 The core redrawn | Second try (2026-10-08) | The first try was realistic metal with no outlines, a wider radio-like box and a big singing bird, so it would not read as the Guess-o-Matic beside it. The redo is the same toy exactly (rounded brass box, violet panels, round window with three blank tiles, slatted grille, crank, curled feet, bird on its base), a hundred years worse: rust, dents, cracked glass with a cyan flicker, cobwebs, a broken crank handle, a cut frayed cable, dice and coins at its feet, and the bird bare grey metal, head down, with one rainbow sequin left on its wing. Single sprite; replaces npc/algorithm/core (that island in algorithm-forms.png is now null). |
 | 13.38 The Copy | First try (2026-10-08) | Smooth glossy porcelain child with a faint pixel grid, no species features, big calm cyan eyes and a small fixed smile, in a hooded cloak shifting through the avatars' colours, a glowing cyan loading bar three-quarters full floating above. More sweet than uncanny; the calm smile and the bar carry it. Single bust, npc/copy. |
 | 13.24c + 13.39 Last keepsakes | First try (2026-10-08) | A dark frosted shard with ice crystals (reads more like a blade than soft shadow; fine at keepsake size with Pip's line), Pip's teal-and-brass headphones on their side with one cup still glowing, a crumpled multicolour knitted hat with a brass button among shiny screen-glass shards (the shards fold into the hat's slice). Sliced into keepsake/cold-piece, keepsake/pip-headphones, keepsake/copy-hat. All Stage 13 keepsakes done. |
+| 13.23c Stakes frame, Ch3 | First try (2026-10-08) | Neon Tribunal gallery: red benches climbing to the right under dozens of hanging screens with red thumbs-down and crosses (no text), the city through tall windows, and a lone stone sundial in cyan light at the far left. Brighter and redder than Ch1/Ch2; fine at 35% opacity. Single panel, ui/stakes-ch3. |
