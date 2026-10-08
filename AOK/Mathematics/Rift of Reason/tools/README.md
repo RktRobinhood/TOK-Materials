@@ -11,7 +11,7 @@ Dev-only scripts. Nothing in this folder is loaded by the game or needed to play
 
 ## Voices
 
-NPCs, narration and creatures are voiced with pre-recorded MP3s from Google Gemini text-to-speech. A line without a recording falls back to the browser's own speech, so the game never waits on this. The player's avatar is never voiced.
+NPCs, narration and creatures are voiced with pre-recorded MP3s from Google Gemini text-to-speech. A line without a recording falls back to the browser's own speech, so the game never waits on this. The ten player avatars have voices in the cast (`avatar-<species>-<variant>`, plus a derived `…-inner` speaker for the inner voice; see `design/AVATAR-VOICES.md`), but script lines are not wired to them yet, so the avatar is still silent in the game. Audition them with `--audition --avatars <id[,id…]|all>`: one request per avatar, a spoken and an inner sample, saved as `<id>.mp3` and `<id>-inner.mp3` in `tools/voice-auditions/`.
 
 **The key** lives in `.secrets/gemini_api_key` at the repo root (one line, gitignored). The tools only read it from there; it is never printed, committed or shipped.
 
@@ -44,7 +44,7 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 
 `node tools/voices-audit.mjs --only narrator --max-requests 12` checks up to eight separate clips per text-model request, without giving the model the expected script. It compares transcripts locally and keeps audio hashes in ignored `tools/voice-audit.json`, so a replacement is checked again and unchanged clips are skipped. Default allowance is three requests per run; `--plan` is free. A failed request stops without claiming coverage. Review differences before repairing: number spellings and proper names can be transcription errors. This check cannot certify acting or cast consistency.
 
-`tools/voices-cast.json` gives each speaker one prebuilt Gemini voice, an acting direction and the model it always uses (`"model": "flash"` or the default lite), so a voice never changes model halfway through. Caricature directions describe a style (energy, cadence), never a real person. To change a voice, edit its entry, delete that speaker's MP3s in `assets/voice/` and record again. `tools/voices-fx.mjs` adds the Algorithm's synthetic chorus and the Sundial's room echo after recording.
+`tools/voices-cast.json` gives each speaker one prebuilt Gemini voice, an acting direction and the model it always uses (`"model": "flash"` or the default lite), so a voice never changes model halfway through. Caricature directions describe a style (energy, cadence), never a real person. To change a voice, edit its entry, delete that speaker's MP3s in `assets/voice/` and record again. `tools/voices-fx.mjs` adds the Algorithm's synthetic chorus, the Sundial's room echo and the avatars' subtle inner-voice effect (every `*-inner` speaker) after recording.
 
 ## Classroom clue QR
 

@@ -1,5 +1,6 @@
 // Voice post-processing for Rift of Reason, ported from the Odyssey game's voice-fx.mjs.
-// FX are keyed by speaker id; speakers without an entry are left untouched.
+// FX are keyed by speaker id; speakers without an entry are left untouched. Every avatar
+// inner-voice speaker (id ending in "-inner", design/AVATAR-VOICES.md) gets FX.inner.
 // `pitch` < 1 lowers pitch and slows the voice (tape-style).
 
 export const FX = {
@@ -8,13 +9,21 @@ export const FX = {
     algorithm: { pitch: 0.93, chorus: true, reverb: { size: 0.8, decay: 0.8, damp: 0.3, mix: 0.25 } },
     // The Sundial is a big old stone: a little room around the voice.
     narrator: { reverb: { size: 0.6, decay: 0.7, damp: 0.5, mix: 0.12 } },
+    // The avatar's inner voice: subtle "inside your head". A little bone-conduction warmth,
+    // softened highs (not a telephone band), a very small dry room, and a lower level.
+    inner: {
+        eq: [['highpass', 90, 0.7], ['lowshelf', 220, 0.7, 2.5], ['highshelf', 3000, 0.7, -5], ['lowpass', 7000, 0.7]],
+        reverb: { size: 0.25, decay: 0.45, damp: 0.6, mix: 0.07 },
+        level: 0.56, // peak about 4 dB below spoken lines (0.89)
+    },
 };
+export const fxFor = who => FX[who] || (/-inner$/.test(who) ? FX.inner : null);
 
 const toF = pcm => Float32Array.from(pcm, v => v / 32768);
-function toI(x) {
+function toI(x, level = 0.89) {
     let peak = 0;
     for (const v of x) peak = Math.max(peak, Math.abs(v));
-    const g = peak > 0 ? 0.89 / peak : 1;
+    const g = peak > 0 ? level / peak : 1;
     return Int16Array.from(x, v => Math.round(Math.max(-1, Math.min(1, v * g)) * 32767));
 }
 function resample(x, f) {
@@ -25,6 +34,28 @@ function resample(x, f) {
 function drive(x, d) {
     const n = Math.tanh(d);
     return x.map(v => Math.tanh(v * d) / n);
+}
+// RBJ cookbook biquads: [type, frequency Hz, Q, gain dB for shelves].
+function biquad(x, rate, [type, f0, q, db = 0]) {
+    const A = Math.pow(10, db / 40), w = 2 * Math.PI * f0 / rate, cw = Math.cos(w), sw = Math.sin(w);
+    const al = sw / (2 * q), sa = 2 * Math.sqrt(A) * al;
+    let b0, b1, b2, a0, a1, a2;
+    if (type === 'lowpass') { b0 = (1 - cw) / 2; b1 = 1 - cw; b2 = b0; a0 = 1 + al; a1 = -2 * cw; a2 = 1 - al; }
+    else if (type === 'highpass') { b0 = (1 + cw) / 2; b1 = -(1 + cw); b2 = b0; a0 = 1 + al; a1 = -2 * cw; a2 = 1 - al; }
+    else if (type === 'lowshelf') {
+        b0 = A * ((A + 1) - (A - 1) * cw + sa); b1 = 2 * A * ((A - 1) - (A + 1) * cw); b2 = A * ((A + 1) - (A - 1) * cw - sa);
+        a0 = (A + 1) + (A - 1) * cw + sa; a1 = -2 * ((A - 1) + (A + 1) * cw); a2 = (A + 1) + (A - 1) * cw - sa;
+    } else if (type === 'highshelf') {
+        b0 = A * ((A + 1) + (A - 1) * cw + sa); b1 = -2 * A * ((A - 1) + (A + 1) * cw); b2 = A * ((A + 1) + (A - 1) * cw - sa);
+        a0 = (A + 1) - (A - 1) * cw + sa; a1 = 2 * ((A - 1) - (A + 1) * cw); a2 = (A + 1) - (A - 1) * cw - sa;
+    } else throw new Error('Unknown filter ' + type);
+    const y = new Float32Array(x.length);
+    let x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    for (let i = 0; i < x.length; i++) {
+        const v = (b0 * x[i] + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2) / a0;
+        x2 = x1; x1 = x[i]; y2 = y1; y1 = v; y[i] = v;
+    }
+    return y;
 }
 // Freeverb-style: parallel damped combs into series allpasses, with a tail appended.
 function reverb(x, rate, { size, decay, damp, mix }) {
@@ -72,12 +103,13 @@ function chorus(x, rate) {
 }
 
 export function applyFx(who, pcm, rate) {
-    const fx = FX[who];
+    const fx = fxFor(who);
     if (!fx) return pcm;
     let x = toF(pcm);
     if (fx.pitch) x = resample(x, fx.pitch);
+    for (const band of fx.eq || []) x = biquad(x, rate, band);
     if (fx.drive) x = drive(x, fx.drive);
     if (fx.chorus) x = chorus(x, rate);
     if (fx.reverb) x = reverb(x, rate, fx.reverb);
-    return toI(x);
+    return toI(x, fx.level);
 }

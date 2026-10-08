@@ -9,6 +9,7 @@
 //        --only <speaker>  --max-requests <n>  --batch <lines per request>  --model <id>  --single
 //   node tools/voices.mjs --report          every line still on browser-voice fallback
 //   node tools/voices.mjs --audition        one sample per speaker into tools/voice-auditions (one request each)
+//        --avatars <id[,id…]|all>          avatar voices instead: a spoken and an inner sample per request
 //   node tools/voices.mjs --resplit         retry the splitter on failed batches kept in tools/voice-raw (no quota)
 //   node tools/voices.mjs --prune           delete recordings whose line no longer exists
 //   node tools/voices.mjs --manifest        just rebuild data/voice-manifest.js from files on disk
@@ -32,6 +33,11 @@ const MANIFEST = path.join(GAME_DIR, 'data', 'voice-manifest.js');
 const RAW = path.join(HERE, 'voice-raw');
 const KEY_FILE = path.resolve(GAME_DIR, '..', '..', '..', '.secrets', 'gemini_api_key');
 const CAST = JSON.parse(fs.readFileSync(path.join(HERE, 'voices-cast.json'), 'utf8'));
+// An avatar entry with an `inner` direction also defines <id>-inner: the same voice and model,
+// acted close and quiet, then the inner effect in voices-fx.mjs (design/AVATAR-VOICES.md).
+for (const [id, c] of Object.entries(CAST)) {
+    if (c && c.inner) CAST[id + '-inner'] = { voice: c.voice, model: c.model, style: c.inner + ' Character: ' + c.style };
+}
 const USAGE = path.join(HERE, 'voice-usage.json');
 
 const args = process.argv.slice(2);
@@ -407,6 +413,48 @@ async function audition(key, lines) {
     }
 }
 
+// Avatar auditions (design/AVATAR-VOICES.md): one request per avatar holds a spoken sample and an
+// inner-voice sample, each with its own acting direction. Split at the gap into <id>.mp3 and
+// <id>-inner.mp3 (inner effect applied); an unsplittable take is kept whole as <id>-take.mp3.
+export const AVATAR_SAMPLES = {
+    owlet: ['If the bridge only opens at noon, how did the baker cross it at ten?', 'If the left guard is lying, then the door he points to is safe.'],
+    mothkin: ['Does anyone else smell burnt sugar? Because I do. Very strongly.', "The left guard won't meet your eyes."],
+    fox: ['Okay, hear me out. What if the dragon is just three ducks in a coat?', 'What if the guard is guarding the wrong door on purpose?'],
+    frogling: ["We've been here before. Same puddle, same sign, same angry goose.", 'Last time the clock struck three, the bridge went up.'],
+    raven: ['He didn\'t say it was safe. He said it was "probably fine".', 'He said "always". Nobody can check "always".'],
+};
+async function avatarAudition(key, which) {
+    const dir = path.join(HERE, 'voice-auditions');
+    fs.mkdirSync(dir, { recursive: true });
+    const ids = which === 'all' ? Object.keys(CAST).filter(k => CAST[k] && CAST[k].inner) : which.split(',');
+    const exhausted = new Set();
+    for (const [n, id] of ids.entries()) {
+        const c = CAST[id], sample = AVATAR_SAMPLES[id.split('-')[1]];
+        if (!c || !c.inner || !sample) throw new Error('Not an avatar voice: ' + id);
+        const model = modelFor(id);
+        if (exhausted.has(model)) { console.log('not auditioned (daily limit):', id); continue; }
+        const lines = [{ who: id, say: sample[0] }, { who: id + '-inner', say: sample[1] }];
+        const text = lines.map((l, k) => speechParts(lines, CAST[l.who].style)[k]);
+        let wav;
+        try { wav = await tts(key, model, c.voice, text, c.style); }
+        catch (e) {
+            if (e.code === 'LOCAL_DAILY_LIMIT' || dailyQuota(e)) { console.log(e.message); exhausted.add(model); console.log('not auditioned (daily limit):', id); continue; }
+            console.log(`FAILED ${id}: ${String(e.message).slice(0, 200)}`);
+            continue;
+        }
+        const { rate, pcm } = pcmFromWav(wav);
+        const pieces = splitBatch(pcm, rate, lines.map(l => l.say));
+        if (pieces) {
+            pieces.forEach((p, k) => fs.writeFileSync(path.join(dir, lines[k].who + '.mp3'), toMp3(applyFx(lines[k].who, trim(p, rate), rate), rate)));
+            console.log('audition', id, c.voice, model === FLASH ? 'flash' : 'lite', '->', lines.map(l => l.who + '.mp3').join(', '));
+        } else {
+            fs.writeFileSync(path.join(dir, id + '-take.mp3'), toMp3(trim(pcm, rate), rate));
+            console.log('audition', id, c.voice, '-> split failed, whole take kept as', id + '-take.mp3');
+        }
+        if (n < ids.length - 1) await sleep(DELAY);
+    }
+}
+
 // ---- main ---------------------------------------------------------------------
 
 async function main() {
@@ -440,7 +488,7 @@ async function main() {
     if (flag('--render') || flag('--audition')) {
         const key = apiKey();
         if (!key) { console.error('No API key. Put it in ' + KEY_FILE + ' or set GEMINI_API_KEY.'); process.exit(1); }
-        if (flag('--audition')) return audition(key, lines);
+        if (flag('--audition')) return opt('--avatars') ? avatarAudition(key, opt('--avatars')) : audition(key, lines);
         return render(key, todo);
     }
     const by = {};
