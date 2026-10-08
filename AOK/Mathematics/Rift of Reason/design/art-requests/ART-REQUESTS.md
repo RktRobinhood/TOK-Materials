@@ -565,6 +565,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.39 | The Copy's Hat keepsake: a small hat in the player's colours, a few screen-glass shards around it, on a transparent background | `keepsake/copy-hat` | Ch4 core win, Copy tier 1 (`{ keepsake: 'copy-hat' }`) | 3 *story* | needed |
 | 13.40 | The core redrawn: a small, scratched brass box with one sequin stuck to it, a few dice spilling out (replaces the dice-cloud `npc/algorithm/core`; STORY.md App. H) | `npc/algorithm/core` | Ch4 core win (the box answers your question, the four core lines, "May I… stay small?") | 1 *story* | needed |
 
+
+### 13.18 Nudge (session of 8 October)
+
+**Attach:** `style-board.png`, `imps.png`
+**Save as:** `3-cast/nudge.png`
+**Ids:** `npc/nudge/idle`, `npc/nudge/neutral` (also `npc/nudge`), `npc/nudge/happy`, `npc/nudge/surprised`, `npc/nudge/sad`
+
+> One transparent canvas, no text, clear space between figures. A full-body idle pose, then four head-and-shoulders busts in one row: neutral, gleeful, surprised, sulking. Match the style board exactly and the shadow imps from the imps sheet above (same family, no mask this time). Nudge: a small grey imp, a little smaller than the avatars, soft smoky-grey body with a slightly darker shadowy edge, big glowing red eyes, a wide eager grin with tiny pointed teeth, small horn nubs, thin arms, and a long thin tail ending in a little brass bell. It is a busy, eager-to-please underling, more pest than monster: cute-dark, a bit pathetic, never scary. Gleeful: eyes squeezed into happy crescents, hands rubbing together. Surprised: eyes huge, bell-tail flicked up. Sulking: shoulders drooped, red eyes dimmed, bottom lip out. No props in hand.
+
 ---
 
 ## Outcome log
@@ -695,3 +704,4 @@ Record what was approved and why, as in the Odyssey project.
 | 12.1 Rule vignettes 1 (axioms-5) | First try (2026-10-07) | Same gold-rimmed violet medallions as axioms-1 to 4: card under a brass paperweight, two cards on a wooden stand, three cards glowing out of a drawstring bag, a film-strip ribbon of cards in a figure-eight, a level scale with a teal crystal in each pan, three shrinking crystals on stone steps. Real transparency; sliced into the 6 ids. |
 | 12.1 Rule vignettes 2 (axioms-6) | First try (2026-10-07) | Hand holding three cards while two drift away, two cards drifting into an empty tray in golden light, the owlet hero (red scarf) taking a card from a hand reaching down a stair, a growing snowball pushing a card, a red-scarfed mouse dreaming of a card on top of a stack. The frame has four-point stars and scrollwork instead of the diamond studs of axioms-5; close enough at card size. Sliced into the 5 ids. |
 | 12.2 Rule tile and counter icons | First try (2026-10-07) | Heart trophy, crossed swords on a round shield, two gold card backs, sword with motion lines, teal crystal with a gold bolt, glowing gold card token, cracked heart pierced by a dark sword, scroll between two teal replay arrows. Plain objects, no medallions, as asked. The motion lines came out as separate shapes, so sheets.json now uses `minArea: 3000` (was 600) to fold them into the sword. Sliced into the 8 ids. Stage 12 complete. |
+| 13.18 Nudge | First try (2026-10-08) | Fluffy smoky-grey imp with curved horns, big ears, glowing red eyes, little fangs and a bell-tipped tail: same family as the shadow imps, cute and a bit pathetic. Idle (hand on hip), neutral, gleeful (eyes shut, hands together), surprised (with comic "!" strokes, kept: they are not text), sulking. Sliced into npc/nudge/{idle,neutral,happy,surprised,sad} (npc/nudge = neutral). |
