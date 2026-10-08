@@ -73,7 +73,7 @@ test('availability: lesson trigger + visited station, two icons at most, queue o
     assert.deepEqual(ids(SS.shown()), ['a', 'b'], 'two icons at once');
     assert.equal(SS.at('campfire'), null, 'the third one queues');
     // Lesson 2: its stories come first once we are in its chapter; then the oldest.
-    Rift.State.setFlag('seen:ch2.square', true);
+    Rift.State.setFlag('seen:ch2.square.win', true);
     complete(Rift, 'b-bakery'); complete(Rift, 'b-school');
     Rift.State.update(s => { s.chapter = 'ch2'; });
     assert.deepEqual(ids(SS.waiting()), ['d', 'e', 'a', 'b', 'c']);

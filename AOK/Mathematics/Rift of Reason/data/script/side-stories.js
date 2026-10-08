@@ -18,7 +18,7 @@
  * SS['lucky-well'] = {
  *     n: 2,                      // the story's number (flags side.2, stakes.side.2, clock side.2)
  *     title: 'The Lucky Well',
- *     lesson: 1,                 // 1–4: its trigger (Troll Bridge solved · Square scene · Plaza scene · Prediction Hall solved)
+ *     lesson: 1,                 // 1–4: its trigger (Troll Bridge solved · Square solved · Plaza scene · Prediction Hall solved)
  *     station: 'well',           // a node id in data/map.js; the icon shows once it has been visited
  *     when: cond,                // optional extra condition to appear (Story conditions, plus { done: node }, { visited: node })
  *     colour: 'memory',          // optional Way of Knowing key: a creature of this colour on the team drains 1 (default: the lesson's)

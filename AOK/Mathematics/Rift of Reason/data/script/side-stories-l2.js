@@ -5,8 +5,11 @@
  *   6 muskrat-launch  Muskrat's Launch     (Deduce; blue: Frogling)  none (a visitor)
  * Stories 4 and 5 are fixed puzzles, so every reply can be voiced. Story 6 generates which crew member
  * lies; that value appears only in notes and clue cards (voiced lines inside v => [...] are not collected).
+ * The lesson trigger is the solved Square (ch2.square.win), so the Mayor's sentence and the table have happened.
  * All three can be played before or after the Town Hall: Quill or Mr Gumleaf teaches (away:schoolteacher),
  * and Granny's note is read by Granny, or shown as a note once she is gone.
+ * Each verb ends on the round that settles the story's fate (the right tin, the writer, the switch),
+ * so a clock that fills earlier never contradicts what the player has already seen.
  */
 (function (root) {
     'use strict';
@@ -17,6 +20,7 @@
     // Before the Town Hall is won (Granny still in the pot), and after it.
     const PRE = { all: [{ not: { seen: 'ch2.hall.win' } }, '!dead:granny'] };
     const POST = { seen: 'ch2.hall.win' };
+    const POST_ALIVE = { all: [POST, '!dead:granny'] };
     // Miss Quill teaches until the Hall; Mr Gumleaf after it (every playthrough).
     const QUILL = '!away:schoolteacher';
     const GUM = 'away:schoolteacher';
@@ -40,13 +44,13 @@
             label: 'Oven heat', size: 6, progress: 3,
             warn: [
                 [{ s: 'baker', t: 'It\'s browning! I can SMELL it browning!' }],
-                [{ note: 'Tin A rattles. Something inside is very itchy.' }],
+                [{ note: 'Something in one of the tins rattles. Something very itchy.' }],
                 [{ s: 'baker', t: 'The custard trap is warming up. When it\'s hot, it jumps.' }],
                 [{ s: 'baker', t: 'Smoke! Is that my cake? Tell me that\'s not my cake!' }],
             ],
         },
         start: [
-            { s: 'baker', e: 'accusing', t: 'Three tins! One cake! And imps lighting fires under my livelihood!' },
+            { s: 'baker', e: 'accusing', t: 'Three tins! One cake! And imps lit fires under ALL of them!' },
             { note: 'Three ovens roar. In each one sits a tin with a paper label.' },
             { s: 'baker', t: 'One tin has the cake. One has a custard trap. One has the Mayor\'s itching powder. Don\'t ask.' },
         ],
@@ -57,7 +61,7 @@
                   steps: [
                       { s: 'baker', t: 'I wrote the labels. At most one tells the truth. Very secure.' },
                       { s: 'avatar', t: 'That is the least secure thing I\'ve ever heard.' },
-                      { s: 'baker', t: 'The imps couldn\'t work it out either. That\'s the point.' },
+                      { s: 'baker', t: 'I wrote them so the imps couldn\'t tell. Now I can\'t either.' },
                   ],
                   card: 'Mrs Crumb: at most one label tells the truth.' },
                 { id: 'labels', kind: 'record', label: 'The three labels', x: 52, y: 42, art: 'prop/cake-tin-labels',
@@ -80,20 +84,21 @@
             steps: [
                 { s: 'baker', t: 'And hurry. It\'s not just a cake. There\'s a note baked inside.' },
                 { s: 'baker', t: 'My flour sack came back from the Hall kitchen. With a note in it. Granny\'s writing.' },
-                { s: 'baker', t: 'I read the end: "I have a plan." The start fell in the batter.' },
+                { s: 'baker', t: 'I read the end: "I have a plan." Then it fell into the cake mix.' },
                 { s: 'baker', t: 'She\'s in a soup pot, and she has a PLAN. Of course she does.', when: PRE },
-                { s: 'baker', t: 'She wrote it from the pot. She\'s home now. I still want to read it.', when: { all: [POST, '!dead:granny'] } },
-                { s: 'baker', t: 'She wrote it from the pot. It\'s the last thing she wrote.', when: 'dead:granny' },
+                { s: 'baker', t: 'She wrote it from the pot. She\'s home now. I still want to read it.', when: POST_ALIVE },
+                { s: 'baker', t: 'She wrote it from the pot. It\'s the last thing she wrote. …Please. The right tin.', when: 'dead:granny' },
                 { inner: {
                     owlet: 'Suppose each tin in turn. Count the true labels. One world fits. Mine.',
-                    mothkin: 'Look. Tin C is dented. She\'d never dent her own.',
+                    mothkin: 'Ooh, tin B gleams. Shiny means nothing. …The dent on C, though. Look.',
                     fox: 'What if the label on the cake tin is the liar? Delicious.',
                     frogling: '"Bring a lad—". Granny said that once. I remember. The rest is in the cake.',
                     raven: '"At most one" allows zero. Read the small words.',
                 } },
                 { choice: [
                     { t: 'Which tin, Mrs Crumb? Just tell me.', then: [
-                        { s: 'baker', t: 'If I knew, would I be shouting at ovens?' },
+                        { s: 'baker', t: 'If I knew, would I be shouting at ovens?', when: '!dead:granny' },
+                        { s: 'baker', t: 'If I knew, it would be out already.', when: 'dead:granny' },
                     ] },
                     { t: 'One tin at a time. Suppose the cake is there. Count the true labels.', only: 'owlet', voice: true, then: [
                         { clock: 'side', progress: 1 },
@@ -105,8 +110,22 @@
         },
         resolve: {
             verb: 'deduce',
-            intro: [{ s: 'baker', t: 'Pick a tin. Pull it out. Don\'t be custard.' }],
+            intro: [{ s: 'baker', t: 'Pick a tin. Pull it out. Mind the custard.' }],
             rounds: [
+                {
+                    q: 'Does "at most one is true" allow zero true labels?',
+                    options: [
+                        { t: 'No. "At most one" means exactly one.', say: [
+                            { s: 'baker', t: 'Exactly one? I said AT MOST. I choose my words. Like my flour.' },
+                        ] },
+                        { t: 'Yes. "At most one" allows none.', ok: true, say: [
+                            { s: 'baker', t: 'None! Three liars! Now THAT would be secure.' },
+                        ] },
+                        { t: 'Only on holidays.', say: [
+                            { s: 'baker', t: 'I bake on holidays. I don\'t lie on them.' },
+                        ] },
+                    ],
+                },
                 {
                     q: 'Which tin holds the cake?',
                     table: [
@@ -121,40 +140,26 @@
                             { s: 'baker', t: 'The Mayor\'s itching powder! Don\'t scratch! Scratching makes it ANGRY!' },
                         ] },
                         { t: 'Tin B', ok: true, say: [
-                            { note: 'Tin B. Warm. Heavy. It smells of cake.' },
-                            { s: 'baker', t: 'My cake! My beautiful, slightly brown cake!' },
+                            { note: 'Tin B. Mrs Crumb grabs her oven gloves.' },
+                            { s: 'baker', t: 'That one. Please be that one.' },
                         ] },
                         { t: 'Tin C', cost: 2, say: [
-                            { note: 'SPLAT. Hot custard. Everywhere.' },
-                            { s: 'baker', t: 'The custard trap! I told you! That one JUMPS!' },
+                            { note: 'Tin C jumps in your hands. The custard trap is armed. And VERY hot.' },
+                            { s: 'baker', t: 'The custard trap! Put it back! Gently! It JUMPS!' },
                         ] },
                     ],
                     why: {
                         q: 'Why?',
                         options: [
-                            { t: 'With the cake in B, only one label is true: C\'s.', ok: true },
+                            { t: 'Only with the cake in B is at most one label true. A and C each make two true.', ok: true },
                             { t: 'B\'s label says "not here", so it must be hiding something.', say: [
                                 { s: 'baker', t: 'Labels don\'t hide things. Tins hide things. Labels just lie.' },
                             ] },
-                            { t: 'The dent rules out C, and A smells itchy.', say: [
-                                { s: 'baker', t: 'The dent rules out C. Fine. A smells of nothing. That\'s the trick.' },
+                            { t: 'The dent rules out C, and A just feels wrong.', say: [
+                                { s: 'baker', t: 'The dent rules out C. Fine. "Feels wrong" rules out nothing.' },
                             ] },
                         ],
                     },
-                },
-                {
-                    q: 'Does "at most one is true" allow zero true labels?',
-                    options: [
-                        { t: 'No. "At most one" means exactly one.', say: [
-                            { s: 'baker', t: 'Exactly one? I said AT MOST. I choose my words. Like my flour.' },
-                        ] },
-                        { t: 'Yes. "At most one" allows none.', ok: true, say: [
-                            { s: 'baker', t: 'None! Three liars! Now THAT would be secure.' },
-                        ] },
-                        { t: 'Only on a Tuesday.', say: [
-                            { s: 'baker', t: 'I bake on Tuesdays. I don\'t lie on them.' },
-                        ] },
-                    ],
                 },
             ],
         },
@@ -162,19 +167,23 @@
             1: [
                 { note: 'You lift out tin B. The cake is perfect. Not a crumb lost.' },
                 ...NOTE,
-                { s: 'baker', t: 'A ladle! I have just the thing. And a slice, for the road.', when: '!dead:granny' },
+                { s: 'baker', t: 'A ladle! I have just the thing. And a slice, for the road.', when: PRE },
+                { s: 'baker', t: 'A slice, for the road.', when: POST_ALIVE },
+                { note: 'Mrs Crumb wraps you a slice. Very neatly.', when: 'dead:granny' },
                 { give: { tonic: 1 } },
             ],
             2: [
                 { note: 'Tin B comes out singed. The cake is a little black on top.' },
-                { s: 'baker', t: 'Singed. Well. We\'ll call it "toasted". People pay more for toasted.' },
+                { s: 'baker', t: 'Singed. Well. We\'ll call it "toasted". People pay more for toasted.', when: '!dead:granny' },
+                { s: 'baker', t: 'Singed. The note is safe. Just.', when: 'dead:granny' },
                 ...NOTE,
             ],
             3: [
                 { note: 'The custard trap goes off. SPLAT. You are now very custardy.' },
                 { note: 'The cake survives. Just. Mrs Crumb\'s big ladle sinks into a lake of custard.' },
+                { note: 'Mrs Crumb wipes the custard off the note with her apron. Very carefully.', when: 'dead:granny' },
                 ...NOTE,
-                { s: 'baker', t: 'My ladle! Gone! Into the custard! Nothing comes back from the custard.' },
+                { s: 'baker', t: 'My ladle! Gone! Into the custard! Nothing comes back from the custard.', when: '!dead:granny' },
             ],
             4: [
                 { note: 'Smoke pours out of tin B. The cake is charcoal. So is the note.' },
@@ -184,7 +193,7 @@
         ripples: [{
             flag: 'ladle', tiers: [1, 2], boss: 'b-town-hall', drain: 1,
             late: [
-                { s: 'baker', t: 'Ha! Too late for the pot. You brought yourself. That\'ll do.', when: '!dead:granny' },
+                { s: 'baker', t: 'Ha! Too late for the pot. You got her out without a ladle. That\'ll do.', when: '!dead:granny' },
                 { note: 'Mrs Crumb says nothing. She puts the ladle in your hands, and holds on a moment.', when: 'dead:granny' },
                 { keepsake: 'ladle', when: 'dead:granny' },
             ],
@@ -201,6 +210,14 @@
     // ================================================================ 5. The Silent Pupil
     // The writer lies; the others tell the truth. Astrophysicat: "Not Billie. Not Khaby."
     // Billie: "Not Astrophysicat. Not Beansprout." No pupil row fits; "nobody in this class" does.
+    // The board's sentence is a statement that can't be true or false; Beansprout's silence is no statement.
+    const INNER5 = frogling => ({
+        owlet: 'If no row works, my suspect list is wrong. Not me. The list.',
+        mothkin: 'Shh. Chalk dust. On the grate. Not on a desk. Look.',
+        fox: 'What if it\'s nobody in this room? Ooh.',
+        frogling,
+        raven: 'Silence isn\'t a statement. Can\'t be true. Can\'t be false.',
+    });
     SS['silent-pupil'] = {
         n: 5,
         title: 'The Silent Pupil',
@@ -228,13 +245,8 @@
             intro: [
                 { s: 'schoolteacher', t: 'The writer will lie, child. The rest will tell the truth. I taught them well.', when: QUILL },
                 { s: 'gumleaf', t: 'Rules say the guilty one lies and the rest tell the truth. Very tidy. Not my rules.', when: GUM },
-                { inner: {
-                    owlet: 'If no row works, my suspect list is wrong. Not me. The list.',
-                    mothkin: 'Shh. Chalk dust. On the grate. Not on a desk. Look.',
-                    fox: 'What if it\'s nobody in this room? Ooh.',
-                    frogling: 'The Mayor said that sentence in the Square. Miss Quill flinched. I remember.',
-                    raven: 'Silence isn\'t a statement. Can\'t be true. Can\'t be false.',
-                } },
+                { inner: INNER5('The Mayor said that sentence in the Square. Miss Quill snapped. I remember.'), when: QUILL },
+                { inner: INNER5('That sentence broke Miss Quill at the Hall. I was there. I remember.'), when: GUM },
                 { choice: [
                     { t: 'Hands up. Who wrote it?', then: [
                         { note: 'No hands go up. Mr. Beansprout folds his arms. Very slowly.' },
@@ -264,11 +276,11 @@
                   card: 'Chalk dust on the fireplace grate. None on any desk.' },
                 { id: 'chart', kind: 'record', label: 'The seating chart', x: 55, y: 35, art: 'prop/seating-chart',
                   steps: [
-                      { note: 'The seating chart, ticked in red. Every pupil: in their seat, facing the board.' },
-                      { s: 'schoolteacher', t: 'I turned round for one minute. Every pupil was seated. And there it was.', when: QUILL },
-                      { s: 'gumleaf', t: 'I made a cup of tea. One minute. Everyone was sitting down. Then: that.', when: GUM },
+                      { note: 'The seating chart, ticked in red. Every pupil: in their seat.' },
+                      { s: 'schoolteacher', t: 'I faced the class all lesson. Nobody stood up. I turned to the board, and there it was.', when: QUILL },
+                      { s: 'gumleaf', t: 'I was facing the class. Nobody moved. Honestly. Then I turned round: that.', when: GUM },
                   ],
-                  card: 'Seating chart: every pupil was seated, facing the board, when the teacher turned round.' },
+                  card: 'Seating chart: the teacher faced the class all lesson. No pupil stood up.' },
             ],
         },
         twist: {
@@ -276,8 +288,8 @@
                 { note: 'A puff of soot falls down the chimney. Then: a tiny sneeze.' },
                 { s: 'schoolteacher', t: 'Bless you, Astrophysicat.', when: QUILL },
                 { s: 'gumleaf', t: 'Bless you. Who was that? Nobody? Spooky.', when: GUM },
-                { s: 'astrophysicat', t: 'That was not me. I sneeze in a much more scientific way.' },
-                { note: 'Khaby Llame points at the chimney again. With both hands this time.' },
+                { s: 'astrophysicat', t: 'Well, actually, that was not me. I sneeze in a much more scientific way.' },
+                { note: 'Khaby Llame points at the chimney again. With both hooves this time.' },
             ],
             card: 'Something up the chimney sneezed.',
         },
@@ -288,6 +300,20 @@
                 { s: 'gumleaf', t: 'So. Who was it? No pressure. Well, a little. Rules.', when: GUM },
             ],
             rounds: [
+                {
+                    q: 'Mr. Beansprout said nothing at all. What does that prove?',
+                    options: [
+                        { t: 'He\'s guilty. Honest people talk.', say: [
+                            { note: 'Mr. Beansprout raises one eyebrow. Very slowly. It is devastating.' },
+                        ] },
+                        { t: 'He\'s honest, because he kept quiet.', say: [
+                            { s: 'eelish', t: 'Quiet isn\'t honest. Quiet is quiet. I wrote a song about it.' },
+                        ] },
+                        { t: 'Nothing. Silence is neither true nor false.', ok: true, say: [
+                            { s: 'astrophysicat', t: 'Well, actually: the board said something that can\'t be true or false. Beansprout said nothing at all.' },
+                        ] },
+                    ],
+                },
                 {
                     q: 'Who wrote it on the board?',
                     table: [
@@ -306,7 +332,7 @@
                             { s: 'eelish', t: 'I told the truth. And now I\'m sad. Which is normal, actually.' },
                         ] },
                         { t: 'Khaby Llame', say: [
-                            { note: 'Khaby Llame spreads his hands. Slowly. As if to say: obviously not.' },
+                            { note: 'Khaby Llame spreads both hooves. Slowly. As if to say: obviously not.' },
                         ] },
                         { t: 'Mr. Beansprout', say: [
                             { note: 'Mr. Beansprout says nothing. His eyebrows say a great deal.' },
@@ -319,10 +345,9 @@
                     why: {
                         q: 'Why?',
                         options: [
-                            { t: 'No pupil row fits: an honest claim comes out false, or the liar\'s comes out true.', ok: true },
-                            { t: 'Beansprout said nothing, so he must be innocent.', say: [
-                                { s: 'schoolteacher', t: 'Silence proves nothing, child. Either way.', when: QUILL },
-                                { s: 'gumleaf', t: 'Silence proves nothing. Either way. I looked it up once.', when: GUM },
+                            { t: 'In every pupil row, somebody\'s claim breaks the rule.', ok: true },
+                            { t: 'Billie sounds sad, so she\'s honest.', say: [
+                                { s: 'eelish', t: 'I always sound sad. It\'s just my voice. It proves nothing.' },
                             ] },
                             { t: 'Khaby pointed, and pointing never lies.', say: [
                                 { s: 'astrophysicat', t: 'Pointing is not a statement. Khaby taught me that. Without speaking.' },
@@ -332,22 +357,8 @@
                     right: [
                         { note: 'You look up the chimney. Two white eyes look back. A sooty hand holds a stick of chalk.' },
                         { note: 'It\'s Smudge the sweep. He puts a finger to his lips.' },
-                        { s: 'sweep', e: 'nervous', t: 'I only wanted to see her flinch again.', when: QUILL },
+                        { s: 'sweep', e: 'nervous', t: 'I only wanted to see her snap again. Like in the Square.', when: QUILL },
                         { s: 'sweep', e: 'nervous', t: 'It\'s the sentence that beat her. I wanted it on her board.', when: GUM },
-                    ],
-                },
-                {
-                    q: 'Mr. Beansprout said nothing at all. What does that prove?',
-                    options: [
-                        { t: 'He\'s guilty. Honest people talk.', say: [
-                            { note: 'Mr. Beansprout raises one eyebrow. Very slowly. It is devastating.' },
-                        ] },
-                        { t: 'He\'s honest. Liars talk too much.', say: [
-                            { s: 'eelish', t: 'That\'s not how it works. I wrote a song about how it works.' },
-                        ] },
-                        { t: 'Nothing. Silence is neither true nor false.', ok: true, say: [
-                            { s: 'avatar', t: 'Beansprout said nothing. That proves nothing. Either way.' },
-                        ] },
                     ],
                 },
             ],
@@ -367,10 +378,9 @@
                 { note: 'Mr. Beansprout\'s page is blank. Somehow, it is the neatest.' },
             ],
             3: [
-                { s: 'schoolteacher', t: 'Astrophysicat. You sit nearest the board. Stand up.', when: QUILL },
-                { s: 'gumleaf', t: 'Astrophysicat? You sit nearest. Sorry. Rules.', when: GUM },
-                { s: 'astrophysicat', t: 'I sit nearest. That is not a proof. That is a distance.' },
-                { note: 'Another sneeze from the chimney. Astrophysicat is cleared. Nobody says sorry.' },
+                { note: 'The class is freed, very late. On the way out, the teacher still glares at Astrophysicat.' },
+                { s: 'astrophysicat', t: 'I sat nearest. That was not a proof. That was a distance.' },
+                { note: 'Up the chimney, Smudge is already gone.' },
             ],
             4: [
                 { note: 'The whole class stays in detention. All night.' },
@@ -393,7 +403,8 @@
     // ================================================================ 6. Muskrat's Launch
     // Gargoyle: "3 aborts." Eminemu: "2 aborts." Zuckerborg: "1 is NOT the abort." Exactly one lies:
     // switch 2 (the Gargoyle lies) and switch 3 (Eminemu lies) both fit. The generator picks the real one;
-    // the diagram (switch 3's wire) or the launch log decides it.
+    // the diagram (switch 3's wire) or the launch log decides it. The twist shows only the clash;
+    // the player finds the two worlds in round 1.
     SS['muskrat-launch'] = {
         n: 6,
         title: 'Muskrat\'s Launch',
@@ -423,8 +434,8 @@
             spots: [
                 { id: 'crew', kind: 'person', label: 'The ground crew', x: 26, y: 60, art: 'creature/gargoyle/smug',
                   steps: [
-                      { s: 'gargoyle', t: 'Switch two makes it go faster, darling. Three stops it. I\'d know. I\'m wearing a rocket.' },
-                      { s: 'eminemu', t: 'Switch two, it\'s true, it\'s the cue, push it through—' },
+                      { s: 'gargoyle', t: 'Three stops it, sweetie. I\'d know. I\'m wearing a rocket.' },
+                      { s: 'eminemu', t: 'Switch two, it\'s true, it\'s the stop, make it drop—' },
                       { s: 'zuckerborg', t: 'Switch one is NOT the abort. It launches. I tested it. On a friend.' },
                       { s: 'muskrat', t: 'One of them is lying! I don\'t know which! Isn\'t this exciting?' },
                   ],
@@ -446,13 +457,12 @@
         twist: {
             steps: [
                 { s: 'eminemu', t: 'Two! Two! I said it twice, so it\'s true, twice as nice—' },
-                { s: 'gargoyle', t: 'Three, darling. Shouting doesn\'t make you right. Sequins do.' },
-                { s: 'zuckerborg', t: 'Their claims both fit with mine. One rocket. Two answers. Fascinating.' },
-                { s: 'avatar', t: 'Both stories fit. So we test one.' },
+                { s: 'gargoyle', t: 'Three, darling. Shouting doesn\'t make you right. A good hat does.' },
+                { s: 'zuckerborg', t: 'I agree with both of them. I agree with everyone. It\'s good for growth.' },
                 { inner: {
-                    owlet: 'Two rows survive. Two! I\'d like a word with this table.',
+                    owlet: 'Fill every row. Don\'t stop at the first one that fits. I nearly did.',
                     mothkin: 'Look. The diagram\'s scratched, but one wire still shines.',
-                    fox: 'Two possible worlds. In one we\'re heroes. In the other we\'re wet.',
+                    fox: 'Picture it: we flip the wrong switch. Splash. Very cinematic. Let\'s not.',
                     frogling: 'The Square, again. Everyone shouted there too. A check settled it. Remember?',
                     raven: '"One of them lies." It never said we\'d know which.',
                 } },
@@ -466,7 +476,7 @@
                     ] },
                 ] },
             ],
-            card: 'Two worlds fit the claims. More shouting can\'t choose between them. A check can.',
+            card: 'Saying it twice doesn\'t make it true twice. Shouting can\'t settle this.',
         },
         resolve: {
             verb: 'deduce',
@@ -482,13 +492,14 @@
                     ],
                     options: [
                         { t: 'Only switch 2', say: [
-                            { s: 'gargoyle', t: 'Only two? Check the three row, darling. It fits me too.' },
+                            { s: 'gargoyle', t: 'Only two? Check the three row, sweetie. It fits me too.' },
                         ] },
                         { t: 'Only switch 3', say: [
                             { s: 'eminemu', t: 'Only three? Check row two, it fits too, it\'s true, who knew—' },
                         ] },
                         { t: 'Switch 2 or switch 3: both rows fit', ok: true, say: [
                             { s: 'zuckerborg', t: 'Two worlds. One rocket. I love worlds. I collect them.' },
+                            { s: 'avatar', t: 'Both stories fit. So we test one.' },
                         ] },
                         { t: 'Switch 1', say: [
                             { s: 'zuckerborg', t: 'Then all three of us lie. Only one of us lies. I checked. Twice.' },
@@ -513,13 +524,13 @@
                     wrong: [{ s: 'muskrat', t: 'That doesn\'t decide anything! Still two worlds! I can feel the engines!' }],
                     right: v => [
                         { note: 'That settles it: switch ' + v.abort + '. You flip it. CLUNK.' },
-                        { note: 'The rocket coughs. The countdown stops. The river breathes out.' },
                     ],
                 },
             ],
         },
         outcome: {
             1: [
+                { note: 'The rocket coughs. The countdown stops. The river breathes out.' },
                 { s: 'muskrat', t: 'Mars. Next year. I feel good about it.' },
                 { note: 'Muskrat climbs out. He gives you a spare banner: MARS: NEXT YEAR.' },
                 { keepsake: 'mars-banner' },
@@ -527,10 +538,11 @@
                 { visitor: 'muskrat' },
             ],
             2: [
-                { note: 'A huge puff of smoke. Everyone coughs. The rocket stays put.' },
-                { s: 'gargoyle', t: 'Smoke, darling. Very dramatic. I\'ll wear it next week.' },
+                { note: 'The countdown stops. Then: a huge puff of smoke. Everyone coughs. The rocket stays put.' },
+                { s: 'gargoyle', t: 'Smoke. Very dramatic. I\'ll wear it next week.' },
             ],
             3: [
+                { note: 'CLUNK. Too late: the engines already fired.' },
                 { note: 'The rocket lifts. Three metres. Then it tips, gently, into the river. Plop.' },
                 { s: 'muskrat', t: 'Three metres! A personal best! …Can somebody open the hatch?' },
             ],

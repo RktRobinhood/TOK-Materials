@@ -517,7 +517,8 @@
         ] },
         { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
         // Side story 5 (paradox-board): Smudge, who chalked the sentence on her board, cheers from the gallery.
-        { s: 'sweep', t: 'My sentence! From the board!', when: 'paradox-board' },
+        { s: 'sweep', t: 'That\'s my sentence! From her board! It WORKS!', when: { all: ['paradox-board', '!dead:granny'] } },
+        { s: 'narrator', t: 'In the gallery, Smudge stares at the floor. His sentence. Her board.', when: { all: ['paradox-board', 'dead:granny'] } },
         { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. Her own tired eyes.' },
         { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
         { s: 'narrator', t: 'Round the tables, more masks drop. Imps in borrowed faces. Nudge\'s too.' },

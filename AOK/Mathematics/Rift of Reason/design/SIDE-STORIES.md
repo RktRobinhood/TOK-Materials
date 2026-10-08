@@ -15,7 +15,7 @@ House rules from STORY.md apply: short plain lines; every line a joke, threat, r
 **When one appears.** When both are true:
 1. The **lesson trigger** has been met (the skill has been taught), on a required node:
    - lesson 1: the Troll Bridge is solved (so these can be done before the Gate);
-   - lesson 2: the Village Square scene has played;
+   - lesson 2: the Village Square is solved (its table, `ch2.square.win`);
    - lesson 3: the Neon Plaza scene has played;
    - lesson 4: the Prediction Hall is solved.
 2. The story's **station has been visited**. A time-rift jumper who never walked to the Fair sees no Fair stories until they do.

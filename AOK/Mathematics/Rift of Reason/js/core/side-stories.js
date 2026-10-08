@@ -24,7 +24,7 @@
     // Decided: one colour per lesson (lesson 1 green, 2 blue, 3 gold, 4 violet); data may override.
     const LESSONS = {
         1: { colour: 'perception', when: { done: 'troll-bridge' } },
-        2: { colour: 'reason', when: { seen: 'ch2.square' } },
+        2: { colour: 'reason', when: { seen: 'ch2.square.win' } },
         3: { colour: 'language', when: { seen: 'ch3.plaza' } },
         4: { colour: 'imagination', when: { done: 'k-prediction' } },
     };
