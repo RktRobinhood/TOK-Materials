@@ -541,6 +541,11 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.15 | Other understudies only if a story arms them (Mr Ledger, Cadet Twitch, Justice Tuskworth, Mr Rubberstamp, Prosecutor Puff) | see `UNDERSTUDIES.md` §5 | | 4 | not yet |
 | 13.16 | "Possessed by the Algorithm" look for NPCs and creatures: probably a CSS/overlay first (feed-screen glow, scanlines, red Emotion tint); optional possessed busts for key NPCs | `fx/possessed` overlay; `npc/<id>/possessed` if needed | Possession beats (TEACHER-STORY-NOTES 9) | 2 *story* | to design |
 | 13.17 | The Algorithm's own form for the final confrontation | `npc/algorithm/true-form` | Finale | 1 *story* | to design |
+| 13.18 | Nudge, the recurring named imp (every chapter): idle + busts; loses its sack, mask, followers and job across the story | `npc/nudge/*` | STORY.md round 2 | 1 *story* | to design |
+| 13.19 | Miss Quill's second mask (Juror One) | `npc/quill/juror` | Ch3 | 2 *story* | to design |
+| 13.20 | The Guess-o-Matic (Sequins' fortune toy, the Algorithm's origin) | `ui/guess-o-matic` | Ch4 reveal | 1 *story* | to design |
+| 13.21 | Redrawn core for the Ch4 climb and conversation | `scene/core-*` | Ch4 | 2 *story* | to design |
+| 13.22 | Understudy Mr Rubberstamp (Pip's retired toad boss): Pip's pose set | see `UNDERSTUDIES.md` card | Only if Pip dies (possessed at the Ch4 Sorting Room) | 1 *story* | needed |
 
 ---
 
