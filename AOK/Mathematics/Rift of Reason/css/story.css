@@ -52,7 +52,7 @@
 .line-tag.memory, .line-tag.hum { background: rgba(201, 201, 214, 0.25); }
 
 /* ---- the Quiet Scene: a still dusk over the screen, nothing to skip ---- */
-.dialogue-layer.quiet-scene { background: linear-gradient(180deg, rgba(40, 24, 70, 0.55), rgba(10, 8, 20, 0.78)); }
+.dialogue-layer.quiet-scene { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40, 24, 70, 0.55), rgba(10, 8, 20, 0.78)); }
 .dialogue-layer.quiet-scene .dialogue .box { cursor: default; }
 .dialogue-layer.quiet-scene .dialogue .more { animation: none; opacity: 0.35; }
 .dialogue-layer.memory-scene .dialogue .box { filter: sepia(0.25); }
@@ -97,3 +97,8 @@
 /* ---- dark-if-lost stations on the map ---- */
 .map-node.dark .ring { fill: #0b0a12; stroke: #4a4458; stroke-dasharray: 5 4; }
 .map-node.dark .marker-art, .map-node.dark .icon { opacity: 0.3; filter: grayscale(1); }
+.memorial-ribbon { width: 64px; height: 64px; object-fit: contain; margin: 6px auto 0; }
+
+/* ---- a scene background behind the dialogue ({ scene: … } step) ---- */
+.dialogue-backdrop { position: absolute; inset: 0; background: var(--night); }
+.dialogue-backdrop.black { background: #000; }

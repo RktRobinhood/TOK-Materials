@@ -259,7 +259,7 @@ function runner(Rift) {
     // Plays a script, pressing Enter on lines and picking choices with `pick(options)`.
     async function play(key, pick, opts) {
         let done = false;
-        const p = Rift.Dialogue.play(key, opts).then(() => { done = true; });
+        const p = (typeof key === 'function' ? key() : Rift.Dialogue.play(key, opts)).then(() => { done = true; });
         let last = null;
         while (!done) {
             await new Promise(r => setTimeout(r, 2));
@@ -431,4 +431,63 @@ test('voice collection: avatar lines per avatar, inner lines per species and gen
     const achilles = skipped.find(s => s.who === 'achilles');
     assert.equal(achilles && achilles.why, 'understudy voice not cast yet');
     assert.ok(!lines.some(l => l.who === 'avatar'));
+});
+
+test('dialogue: the dying role speaks its last words inside its clock\'s death sequence, then goes silent', async () => {
+    const Rift = game();
+    clocks(Rift);
+    metAll(Rift, 'sequins');
+    const r = runner(Rift);
+    Rift.data.script['ch1.gate.test'] = [
+        { clock: 'ch1', start: 5 },
+        { clock: 'ch1', tick: 1 },
+        { s: 'sequins', t: 'Too late to talk.' },
+        { scene: 'black' },
+        { s: 'narrator', t: 'Quiet now.' },
+    ];
+    await r.play('ch1.gate.test', b => b[0]);
+    assert.deepEqual(r.spoken.map(l => [l.speaker, l.text]), [['sequins', 'Shiny in there.'], ['narrator', 'Quiet now.']]);
+    assert.equal(Rift.State.flag('dead:sequins'), true);
+    // The engine's own tick (a wrong check in the stakes scene) plays the same way.
+    const R2 = game();
+    clocks(R2);
+    metAll(R2, 'sequins');
+    const r2 = runner(R2);
+    R2.Stakes.start('ch1', 5);
+    await r2.play(() => R2.Dialogue.clockTick('ch1', 1), b => b[0]);
+    assert.deepEqual(r2.spoken.map(l => l.speaker), ['sequins']);
+    assert.equal(R2.State.flag('dead:sequins'), true);
+});
+
+test('station hosts: the first matching entry of a node\'s hosts list, then the cast', () => {
+    const Rift = game();
+    Rift.data.map.nodes.well.host = 'sequins';
+    Rift.data.map.nodes.well.hosts = [{ when: { seen: 'ch1.well' }, host: 'narrator' }];
+    Rift.data.map.nodes['stall-pattern'].hosts = [{ when: { all: [{ seen: 'ch1.well' }, '!seen:ch1.gate.win'] }, host: null, note: 'BACK SOON.' }];
+    const plain = x => JSON.parse(JSON.stringify(x));
+    assert.deepEqual(plain(Rift.Cast.nodeHost('well')), { role: 'sequins', actor: 'sequins', note: null });
+    assert.deepEqual(plain(Rift.Cast.nodeHost('stall-pattern')), { role: 'sequins', actor: 'sequins', note: null });
+    Rift.State.setFlag('seen:ch1.well', true);
+    assert.deepEqual(plain(Rift.Cast.nodeHost('well')), { role: 'narrator', actor: 'narrator', note: null });
+    assert.deepEqual(plain(Rift.Cast.nodeHost('stall-pattern')), { role: null, actor: null, note: 'BACK SOON.' });
+    Rift.State.setFlag('seen:ch1.gate.win', true);
+    assert.equal(Rift.Cast.nodeHost('stall-pattern').actor, 'sequins');
+    Rift.State.setFlag('dead:sequins', true);
+    assert.equal(Rift.Cast.nodeHost('stall-pattern').actor, null, 'then the cast: silent role, no stand-in here');
+});
+
+test('the lead for a station uses the mode the encounter resolved', async () => {
+    const Rift = game({ type: 'frogling' });
+    const r = runner(Rift);
+    vm.runInContext(fs.readFileSync(GAME_DIR + '/data/script/leads.js', 'utf8'), vm.createContext({ window: { Rift } }));
+    await r.play([{ lead: true }], b => b[0], { puzzle: { id: 'line-drawer', opts: undefined, mode: 'dots' } });
+    await r.play([{ lead: true }], b => b[0], { puzzle: { id: 'rule-hunter', mode: 'rules' } });
+    assert.deepEqual(r.spoken.map(l => l.text), ['Old trick. The answer lives outside the box.', 'I once counted only sunny days. Then: heron. Count the no\'s too.']);
+    assert.equal(r.spoken[0].speaker, 'avatar-frogling-girl-inner');
+});
+
+test('the Lucky Sequin is a lure item', () => {
+    const Rift = loadRift(['js/core/rift.js', 'data/items.js']);
+    assert.equal(Rift.data.items['lucky-sequin'].lure, 5);
+    assert.ok(!Rift.data.items['lucky-sequin'].battle, 'not a battle bag item');
 });

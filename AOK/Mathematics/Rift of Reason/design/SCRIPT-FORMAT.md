@@ -30,12 +30,24 @@ A lesson file adds scripts to `Rift.data.script`:
 
 | Key | When it plays |
 |---|---|
-| a node's `script` (in `data/map.js`) | the first visit to a station; every visit to story, rest and battle nodes |
+| a node's `script` (in `data/map.js`) | the first visit to a station; every visit to rest and battle nodes. A story node plays it on the first visit, then offers "Watch this scene again?" (a replay with the cast you saw). **The card school (the Fair Gate) and any node with `repeat: true` play it live on every visit**: branch inside it on `seen:` and flags (e.g. `prologue.fair` → `prologue.fair.again`) |
 | `<script>.win` | after a station's puzzle (or a boss) is won the first time |
 | `<script>.stage<k>` (new) | a boss or miniboss, just before stage *k* (2, 3…) is mounted. Plays every time that stage is reached; guard one-off beats with `{ play: …, once: true }` |
 | a node's `intro` / `reminder` | station lead-in, first visit / later visits |
 | `recap.<chapter>` (new) | "Previously…": the **first time-rift jump** into that chapter, after any pending Quiet Scene (section 7) |
 | `quiet.<npc>` (new) | a Quiet Scene (section 7) |
+
+### Station hosts that change (`hosts` in `data/map.js`)
+
+A node's `host` is its usual host role. Add a `hosts` list when the host changes after story events; the **first entry whose `when` holds** wins, otherwise `host` is used. The cast then resolves the role as usual (an understudy, a stand-in, or nobody).
+
+```js
+'gate': { host: 'sequins', hosts: [{ when: { seen: 'ch1.gate.win' }, host: 'narrator' }], … },   // he went home
+'stall-pattern': { host: 'sequins', hosts: [{ when: { all: [{ seen: 'ch1.well' }, '!seen:ch1.gate.win'] }, host: null, note: 'A sign on the curtain: BACK SOON. PROBABLY.' }], … },
+'well': { host: 'sequins', hosts: [{ when: { seen: 'ch1.well' }, host: 'narrator' }], … },
+```
+
+`host: null` means nobody is there: the panel shows no portrait and `note` (or a plain line) instead, and the tutorial reads as unvoiced notes. The bubble shows the first line of the node's `reminder` script spoken by the current host role (its `when` holding). Tutorials are recorded for every host in the list.
 
 **Name beats by chapter:** `prologue.wake`, `ch1.well`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe`, `ch4.door`… The `met` lists in STORY.md Appendix D are script keys. **A key counts as seen once its script has played to the end**; the engine then sets the flag `seen:<key>`. So a death can only be armed after the player has finished those exact scripts. If a `met` beat is part of a bigger script, mark it yourself with `{ flag: 'seen:ch1.night' }`.
 
@@ -92,7 +104,9 @@ A step with `then` or `else` is a branch; any other step with `when` is shown on
 | `{ memory: true }` | this chapter is being played as a memory (STORY.md A.12) |
 | `{ all: [c1, c2] }` / `{ any: [c1, c2] }` / `{ not: c }` | combinations; a plain array means `all` |
 
-**Flags you will key on** (STORY.md Appendix F): `brave`, `turnedBack`, `nudgeFled`, `moser`, `suspect`, `cover`, `mayor`, `clip`, `bargain`, `wonder`, `fate`, `stakes.<id>` (1–4), `dead:<npc>`, `arrived:<npc>`, `risked:<npc>`, `away:schoolteacher`, `feed` (0–8), `voice.offered`, `voice.followed`, `seen:<key>`.
+**Flags you will key on** (STORY.md Appendix F): `brave`, `turnedBack`, `nudgeFled`, `moser`, `suspect`, `cover`, `mayor`, `clip`, `bargain`, `wonder`, `fate`, `stakes.<id>` (1–4), `dead:<npc>`, `arrived:<npc>`, `risked:<npc>`, `away:schoolteacher`, `feed` (0–8), `voice.offered`, `voice.followed`, `seen:<key>`, `entered:<chapter>`.
+
+**`entered:<chapter>`** (`entered:ch2` … `entered:ch4`) is set by the engine the first time the player reaches any node of that chapter (by walking, a rift or a time-rift jump), after that chapter's Quiet Scene and recap. It is what memory mode reads: a chapter is played as a memory once a later chapter has been entered. Writers may key on it (e.g. Granny's open door for jump-ins: `{ any: [{ seen: 'ch1.well' }, 'entered:ch2'] }`).
 
 **Decided:** NPC flags use the NPC's name: `dead:sequins`, `dead:granny`, `dead:sundial`, `dead:pip`; the same for `risked:`, `arrived:` and `quiet:`. For the Sundial the role id is `narrator`, and `dead:narrator`, `arrived:narrator` etc. are accepted as the same flags as `…:sundial`.
 
@@ -204,6 +218,8 @@ Write the original's words in `t` and the understudy's in `u`:
 
 Every other role is spoken by its original only.
 
+**Production guard** (STORY.md App. D, arming condition 6): a death can only be armed once the understudy's art (`npc/tally`, `npc/achilles`, `npc/kuku`, `npc/rubberstamp`) exists. Until then every worst tier plays the brink, in every playthrough.
+
 ---
 
 ## 6. Other steps
@@ -216,6 +232,7 @@ Every other role is spoken by its original only.
 | `{ play: 'ch1.night' }` (new) | play another script here, inline. `once: true`: only if it has not been seen (`seen:<key>`) |
 | `{ arrive: 'granny' }` (new) | section 5 |
 | `{ quiet: 'sequins' }` (new) | section 7 |
+| `{ scene: 'scene/burrow' }` (new) | a background behind the dialogue for the rest of this script (the Nut Stall's evening on the Your Home background). `{ scene: 'black' }` is plain black (the cold open); `{ scene: null }` clears it. It ends with the script |
 | `{ keepsake: 'cage-cushion' }` (new) | a cosmetic keepsake comes to you (flag `keepsake:<id>`; shown small at the side, art `keepsake/<id>`) |
 | `{ possess: 'pip' }` / `{ free: 'pip' }` (new) | section 9 |
 | `{ clock: … }` (new) | section 8 |
@@ -292,7 +309,7 @@ C.ch1 = {
 | `hold` | `true`: never resolves early (the Copy). At full it shows `fullLabel` (e.g. `'UPLOAD COMPLETE · WAITING'`); more ticks do nothing; drains still work |
 | `stakes` | the stakes id to store the tier under, when it differs from the clock id (`copy` → `'ch4'`) |
 | `prefill` | optional `flags => number`: notches filled at start (e.g. the Copy's start formula) |
-| `full`, `brink`, `warn` | steps (any step type). `full` without a `peril` plays when a non-`hold` clock fills |
+| `full`, `brink`, `warn` | steps (any step type). `full` without a `peril` plays when a non-`hold` clock fills. Inside `full`, the dying role still speaks in its own voice (its last words), although the death is recorded the moment the clock fills; after `full` the role is silent |
 
 ### Clock steps
 
@@ -332,6 +349,10 @@ The possessed are shown with a cold glow and a static thumbnail skin over their 
 `{ possess: <role> }` for a cast role only works if `Cast.canPossess` allows it (STORY.md A.6: no `risked:` lock, no active understudy); otherwise the step is ignored and the lines play normally. Creatures and caricatures can always be possessed. Possession lasts for the rest of the script unless freed (the flag `possessed:<role>` is kept until `free`).
 
 ---
+
+## 9b. Items for story rewards
+
+`{ give: { 'lucky-sequin': 1 } }` gives the Lucky Sequin (the Gate reward, tiers 1–2): a lure that lasts 5 visits. Other new items need an entry in `data/items.js` first.
 
 ## 10. How lines are voiced (for reference)
 

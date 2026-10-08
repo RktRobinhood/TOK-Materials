@@ -35,6 +35,8 @@
             // Announce first so the log reads in order before the private "You draw…" line.
             run(api, p) { api.emit({ t: 'item', text: 'Lure Lantern: draw a card.' }); api.draw(p); },
         } },
+        // The Gate reward for saving Professor Sequins (STORY.md Ch1, tiers 1–2): a stronger lure.
+        'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. Hold it up at a node: rare creatures become more likely for your next 5 visits; catch odds gain 5 points.' },
         tonic: { name: 'Tonic', kind: 'support', heal: 2, text: 'Restores 2 health.', battle: {
             cost: 1, text: 'Restore 2 hearts to your hero.',
             usable: (s, p) => s.players[p].hearts < s.players[p].maxHearts,

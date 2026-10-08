@@ -113,12 +113,14 @@
         let actor = role;
         let words = step.t;
         if (!isAvatar) {
-            actor = step.replay ? Rift.Cast.original(role) : Rift.Cast.actor(role, { replay: ctx.replay });
+            // Last words: a Quiet Scene's replayed line, or the dying role's lines in its own clock's death sequence.
+            const last = step.replay || (ctx.deathOf && role === ctx.deathOf);
+            actor = last ? Rift.Cast.original(role) : Rift.Cast.actor(role, { replay: ctx.replay });
             if (!actor) {
                 // Silence (STORY.md App. D); a dark-if-lost role may leave a stage note.
                 return step.dark ? note(layer, ctx, step.dark) : null;
             }
-            words = step.replay ? step.t : Rift.Cast.text(step, actor);
+            words = last ? step.t : Rift.Cast.text(step, actor);
             if (words == null) return null;
             if (actor !== Rift.Cast.original(role)) ctx.cast[role] = actor;
         }
@@ -215,7 +217,11 @@
     }
     async function playTick(layer, result, id, ctx) {
         const d = Rift.Stakes.def(id) || {};
-        if (result.outcome === 'full' && d.full) await run(layer, d.full, ctx);
+        if (result.outcome === 'full' && d.full) {
+            const before = ctx.deathOf;
+            ctx.deathOf = d.peril || null;
+            try { await run(layer, d.full, ctx); } finally { ctx.deathOf = before; }
+        }
         else if (result.outcome === 'brink' && d.brink) await run(layer, d.brink, ctx);
         else if (result.warn) await run(layer, result.warn, ctx);
     }
@@ -228,6 +234,16 @@
         if (ctx.keepsake) ctx.keepsake.remove();
         ctx.keepsake = img;
         layer.appendChild(img);
+    }
+
+    // { scene: 'scene/burrow' } shows a background behind the dialogue for the rest of the script;
+    // { scene: 'black' } is plain black; { scene: null } clears it.
+    function backdrop(layer, id, ctx) {
+        if (ctx.backdrop) { ctx.backdrop.remove(); ctx.backdrop = null; }
+        if (!id) return;
+        const node = id === 'black' ? el('div.dialogue-backdrop.black') : el('div.dialogue-backdrop', null, [Rift.Assets.img(id, { className: 'scene-bg', label: id })]);
+        ctx.backdrop = node;
+        if (layer.insertBefore && layer.firstChild) layer.insertBefore(node, layer.firstChild); else layer.appendChild(node);
     }
 
     async function quietStep(layer, who, ctx) {
@@ -270,6 +286,7 @@
             } else if (step.arrive) Rift.Cast.arrive(step.arrive);
             else if (step.quiet) await quietStep(layer, step.quiet, ctx);
             else if (step.keepsake) keepsake(layer, step.keepsake, ctx);
+            else if ('scene' in step) backdrop(layer, step.scene, ctx);
             else if (step.possess) {
                 const role = step.possess;
                 if (Rift.Cast.canPossess(role)) Story().setFlag('possessed:' + role, true);
@@ -288,7 +305,7 @@
         const p = ctx.puzzle;
         if (!p) return null;
         const id = typeof p === 'string' ? p : p.id;
-        const mode = typeof p === 'object' && p.opts && p.opts.mode;
+        const mode = typeof p === 'object' && (p.mode || (p.opts && p.opts.mode));
         return (mode && bank[id + ':' + mode]) || bank[id] || null;
     }
 
@@ -306,6 +323,7 @@
             replay,
             memory: !!replay || (chapter ? Story().isMemory(chapter) : false),
             puzzle: o.puzzle || null,
+            deathOf: o.deathOf || null,
             cast: {},
         };
         const overlay = root.document.getElementById('overlay');
@@ -342,7 +360,7 @@
         const result = Rift.Stakes.tick(id, k);
         const d = Rift.Stakes.def(id) || {};
         const steps = result.outcome === 'full' ? d.full : result.outcome === 'brink' ? d.brink : result.warn;
-        if (steps && steps.length) await play(steps);
+        if (steps && steps.length) await play(steps, { deathOf: result.outcome === 'full' ? d.peril : null });
         return result;
     }
 

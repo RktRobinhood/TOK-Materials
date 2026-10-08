@@ -119,7 +119,8 @@
         const rows = Object.entries(Rift.data.items).map(([id, it]) => {
             const n = s.items[id] || 0;
             const here = s.map.at && Rift.data.map.nodes[s.map.at];
-            const lureable = id === 'lure' && n > 0 && here && (here.spawns || []).length && !((s.lures || {})[s.map.at] > 0);
+            const lureVisits = id === 'lure' ? 3 : it.lure || 0;
+            const lureable = lureVisits > 0 && n > 0 && here && (here.spawns || []).length && !((s.lures || {})[s.map.at] > 0);
             const mendable=id==='mending'&&n>0&&s.creatures.some(c=>c.injuries.some(x=>x==='no-ability'||x==='minus-one'));
             const teachable = id === 'trick-book' && n > 0 && s.creatures.length > 0;
             const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable || mendable || teachable;
@@ -132,10 +133,10 @@
                         if(id==='mending'){m.close();mending();return;}
                         if(id==='trick-book'){m.close();trickBook();return;}
                         if(!Rift.State.useItem(id))return;
-                        if (id === 'lure') {
-                            Rift.State.update(st => { st.lures[st.map.at] = 3; });
+                        if (lureVisits) {
+                            Rift.State.update(st => { st.lures[st.map.at] = lureVisits; });
                             Rift.Audio.sfx('jingle');
-                            toast('The lantern glows at ' + here.name + ': rare creatures become more likely for 3 visits, with +5 points to catch odds.');
+                            toast((id === 'lure' ? 'The lantern glows' : it.name + ' shines') + ' at ' + here.name + ': rare creatures become more likely for ' + lureVisits + ' visits, with +5 points to catch odds.');
                         } else {
                             Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
                             Rift.Audio.sfx('heal');

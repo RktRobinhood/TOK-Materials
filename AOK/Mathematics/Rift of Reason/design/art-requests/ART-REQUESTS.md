@@ -552,6 +552,7 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.26 | Possession look: built as CSS (cold glow, a still grid of thumbnails over the portrait, no motion). A painted overlay can replace it later | `fx/possessed` (optional) | Possessed speakers in dialogue | 4 | CSS done |
 | 13.27 | The Talking Signpost: a gossiping old wooden signpost with arms pointing every way and a little lantern, bust for dialogue | `npc/signpost` | Ch1 Signpost gossip (clue 2) and rumours (`data/script/lesson1.js`) | 2 *story* | needed |
 | 13.28 | Granny's open cottage door at the Fair Gate: door ajar, warm tea, empty shawl hook, a trail of tiny soup pots rising into the crack, one long dusty grey feather | `scene/granny-door` (not wired yet; the Fair Gate uses `scene/fair`) | Ch1 open door (`ch1.door`) | 2 *story* | needed |
+| 13.29 | The Lucky Sequin item icon: one big shiny sequin on a loop of thread, readable at 32 px | `item/lucky-sequin` | Bag (the Gate reward for saving Professor Sequins) | 2 *story* | needed |
 
 ---
 

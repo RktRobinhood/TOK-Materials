@@ -69,19 +69,22 @@
             rootNode.append(hud, el('div.enc-layout', null, [el('div.enc-side', null, [title, meterSlot, host, goal, controls, feedback]), stageBox]));
 
             // The host is a role: the cast decides who stands here now (an understudy, a stand-in, or nobody).
-            const hostRole = n.host || 'narrator';
-            const hostId = Rift.Cast ? Rift.Cast.host(hostRole, n.id) : hostRole;
+            // A node's `hosts` list can change who stands here after story events (SCRIPT-FORMAT.md section 1).
+            const nh = Rift.Cast ? Rift.Cast.nodeHost(n.id) : { role: n.host || 'narrator', actor: n.host || 'narrator', note: null };
+            const hostRole = nh.role;
+            const hostId = nh.actor;
             const speaker = hostId ? (Rift.data.speakers[hostId] || { name: hostId, art: 'npc/' + hostId }) : null;
             const ownHost = hostId && hostId === (Rift.Cast ? Rift.Cast.actor(hostRole) : hostRole);
-            const reminder = ownHost ? (Rift.data.script[n.reminder] || []).find(line => line.t || line.u) : null;
+            // The bubble: the first reminder line this host speaks (its `when` holding), in the actor's words.
+            const reminder = ownHost ? (Rift.data.script[n.reminder] || []).find(line => line.s === hostRole && (line.t || line.u) && (!Rift.Story || Rift.Story.test(line.when))) : null;
             const reminderText = reminder ? (Rift.Cast ? Rift.Cast.text(reminder, hostId) : reminder.t) : null;
             if (speaker) {
                 host.append(Rift.Assets.img(speaker.art, { className: 'enc-creature', label: speaker.name }),
                     el('strong', { text: speaker.name }), el('div.bubble', { text: reminderText || 'Take your time. Check the task and its rules.' }));
             } else {
                 host.classList.add('no-host');
-                if (Rift.Cast && Rift.Cast.ribbon(hostRole, n.id)) host.append(el('div.black-ribbon', { 'aria-hidden': 'true' }), el('p.small.muted', { text: 'A black ribbon hangs on the curtain.' }));
-                host.append(el('div.bubble', { text: 'Take your time. Check the task and its rules.' }));
+                if (Rift.Cast && Rift.Cast.ribbon(hostRole, n.id)) host.append(Rift.Assets.has('ui/memorial-ribbon') ? Rift.Assets.img('ui/memorial-ribbon', { className: 'memorial-ribbon', label: 'A black ribbon' }) : el('div.black-ribbon', { 'aria-hidden': 'true' }), el('p.small.muted', { text: 'A black ribbon hangs on the curtain.' }));
+                host.append(el('div.bubble', { text: nh.note || 'Take your time. Check the task and its rules.' }));
             }
 
             // ---- stakes clocks (STORY.md App. C) ----
@@ -145,7 +148,7 @@
             function refreshChecks() {
                 if (!attempts) return;
                 if (stakesClock().scene) {
-                    checks.textContent = 'Mistakes fill the clock';
+                    checks.textContent = '⏳ Danger clock';
                     checks.title = 'In this scene, wrong checks and hints fill the danger clock instead of costing hearts.';
                     checks.setAttribute('aria-label', checks.title);
                     goal.querySelector('.enc-attempt-rule').textContent = 'Each wrong check, hint or wrong "Why?" fills one notch of the clock.';

@@ -56,6 +56,19 @@
         } else to = null;
         return to ? actor(to) : null;
     }
+    // A station's host now (SCRIPT-FORMAT.md section 1): the node's `hosts` list, first entry whose `when`
+    // holds ({ when, host: role | null, note }), else its `host`; then the cast picks the actor.
+    // Returns { role, actor, note }: actor null = nobody there (note = what the panel says instead).
+    function nodeHost(nodeId) {
+        const n = (((Rift.data || {}).map || {}).nodes || {})[nodeId];
+        if (!n) return { role: null, actor: null, note: null };
+        let role = n.host || 'narrator';
+        let note = null;
+        const pick = (n.hosts || []).find(h => S().test(h.when));
+        if (pick) { role = pick.host || null; note = pick.note || null; }
+        return { role, actor: role ? host(role, nodeId) : null, note };
+    }
+
     // A black ribbon on this station while its role is silent (the Pattern Stall).
     function ribbon(role, nodeId) {
         const e = entry(role);
@@ -133,5 +146,5 @@
         return Object.keys(cast).filter(r => cast[r].policy === 'lethal' && isDead(r)).length;
     }
 
-    Rift.Cast = { entry, original, understudy, roleOf, actor, host, ribbon, isDark, text, ready, canLose, resolvePeril, arrive, canPossess, losses, isDead, hasArrived };
+    Rift.Cast = { entry, original, understudy, roleOf, actor, host, nodeHost, ribbon, isDark, text, ready, canLose, resolvePeril, arrive, canPossess, losses, isDead, hasArrived };
 })(typeof window !== 'undefined' ? window : globalThis);

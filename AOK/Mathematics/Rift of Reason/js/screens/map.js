@@ -295,9 +295,12 @@
                     case 'story':
                     case 'rumour':
                     case 'rift':
-                        if (!done || n.type !== 'story' || (!n.cardSchool && await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now'))) {
+                        // The card school (the Fair Gate) and nodes with `repeat: true` play their script on every
+                        // visit, live; the script branches on seen:/flags. Other story nodes offer a replay.
+                        const everyVisit = !!(n.cardSchool || n.repeat);
+                        if (!done || n.type !== 'story' || everyVisit || await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now')) {
                             if (n.fx === 'rift') await Rift.UI.riftFx();
-                            await Rift.Dialogue.play(n.script, { replay: done });
+                            await Rift.Dialogue.play(n.script, { replay: done && !everyVisit });
                         }
                         finish();
                         if(n.cardSchool){

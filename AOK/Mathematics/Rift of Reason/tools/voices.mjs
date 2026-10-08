@@ -133,7 +133,9 @@ function collect(Rift) {
     for (const n of Object.values(Rift.data.map.nodes)) {
         for (const p of n.puzzles || []) {
             const def = Rift.Puzzles.get(p.id);
-            for (const step of (def && def.tutorial) || []) add(n.host, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
+            // Every host the node can have (its `hosts` list changes hosts after story events).
+            const hosts = [...new Set([n.host, ...(n.hosts || []).map(h => h.host)].filter(Boolean))];
+            for (const who of hosts) for (const step of (def && def.tutorial) || []) add(who, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
         }
     }
     for (const step of Rift.Battle.Lesson.steps) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
