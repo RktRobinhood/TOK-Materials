@@ -518,6 +518,28 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > On a transparent background (PNG), no text, letters or numbers anywhere, wide clear gaps between every element and an empty margin at the edges; each element is one connected, solid shape (no loose sparkles). Small bold game icons, all about the same size, readable at 32 pixels, simple silhouettes. Two rows of four, left to right. **Row 1:** a small gold trophy cup with a red heart on its front (how to win); two crossed swords over a small round shield (fights); two cards fanned in a hand, gold backs (card plays per turn); one sword with three short motion lines behind it (attacks). **Row 2:** a teal energy crystal with a small lightning spark (energy); a single small gold card back with a soft glow, like a token (one card play); a cracked red heart with a dark sword behind it (danger); a small open scroll with two curved arrows around it, like a replay (what happened last turn). Match the attached style board.
 
+## Stage 13: growing list for "Avatars that matter" (from 8 October 2026)
+
+**This is a running list.** Anyone working on the game appends missing or new art here as they find it (teacher, 8 Oct), with the id it will use and where it is needed. Prompts are written when the teacher has time for an art session (one prompt at a time, as usual). Items marked *story* depend on the story outline, which is still in the critic gate (`design/WRITING-CRITICS.md`), so they may change.
+
+| # | Asset | Ids | Needed for | Priority | Status |
+|---|---|---|---|---|---|
+| 13.1 | Ten avatar power icons + two Emotion power icons (Outrage, Pile-On) | `ui/power-<id>` (ids in `data/powers.js`) | Power button on the battle screen (#52) | 1 | needed |
+| 13.2 | Five tweak icons: Quick, Cheap, Blood price, Deeper, Broader | `ui/tweak-<id>` | Tweak slots (#53) | 2 | needed |
+| 13.3 | Power button frame: ready, used, recharging | `ui/power-frame-*` (may stay CSS) | #52 | 3 | check after #52 |
+| 13.4 | Understudy Tally (Sequins' dormouse stagehand): idle + neutral, happy, surprised, angry | see `UNDERSTUDIES.md` card | Only shown if Sequins dies (Ch1) | 1 *story* | needed |
+| 13.5 | Understudy Coach Achilles (Granny's old racing rival, a hare): same set | see card | Only if Granny dies (Ch2) | 1 *story* | needed |
+| 13.6 | Understudy Kuku (pocket cuckoo clock): same set | see card | Only if the Sundial dies (Ch3) | 1 *story* | needed |
+| 13.7 | Memorial props: Fair lantern lit and dark, candle, wreath, small black ribbon, empty oval frame | `ui/memorial-*` | Solemn aftermath scenes | 1 *story* | needed |
+| 13.8 | Mr Gumleaf (supply teacher, ordinary character): villager set idle + neutral, accusing, nervous | see `UNDERSTUDIES.md` | Hosts the Schoolhouse after Miss Quill is unmasked (Ch2) | 1 *story* | needed |
+| 13.9 | Miss Quill unmasked pose | `npc/quill/unmasked` | Ch2 twist | 1 *story* | needed |
+| 13.10 | Granny worried bust (scripts already ask for it) | `npc/granny/worried` | Granny in danger | 2 | needed |
+| 13.11 | Understudy Private Dawdle (Syllo's sloth recruit): fair folk set | see card | Only if Syllo dies (side story 7) | 2 *story* | needed |
+| 13.12 | Stakes-clock scenes: Sequins' cage on a winch, Granny's pot and rope, the Ch3 public vote, the Ch4 copy upload bar | `ui/stakes-*` | Peril widgets (STORY.md §4) | 2 *story* | needed |
+| 13.13 | Side-story map marker (blinking icon) | `ui/side-story` | Side stories at revisited stations (#56) | 2 | needed |
+| 13.14 | Side-story cast and props (to be listed per story after the outline passes the gate) | | #56 | 3 *story* | to list |
+| 13.15 | Other understudies only if a story arms them (Mr Ledger, Cadet Twitch, Justice Tuskworth, Mr Rubberstamp, Prosecutor Puff) | see `UNDERSTUDIES.md` §5 | | 4 | not yet |
+
 ---
 
 ## Outcome log

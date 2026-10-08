@@ -12,6 +12,7 @@ Live site: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20o
 - No looping shake, wobble or jitter animations on characters or cards (the teacher found them seizure-like). Settings has a "Calm motion" switch (`body.calm-motion`) that must keep working.
 - Student-facing English must be short and plain. Caricatures joke only about public personas; no jokes about sexual abuse; no song lyrics.
 - Borrow proven mechanics, never names, art or text, from commercial games.
+- Found missing or new art? Append it to the running list in `design/art-requests/ART-REQUESTS.md` (Stage 13) with its id and where it is needed. The teacher makes the art later.
 
 ## Run and test
 
