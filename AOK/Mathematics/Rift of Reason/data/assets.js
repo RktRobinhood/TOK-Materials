@@ -741,6 +741,11 @@
         'ui/trait-shield': { file: 'ui/kw-shield.webp', w: 160, h: 159 },
         'ui/trait-sturdy': { file: 'ui/trait-sturdy.webp', w: 151, h: 160 },
         'ui/trait-swift': { file: 'ui/kw-swift.webp', w: 160, h: 145 },
+        'ui/tweak-blood': { file: 'ui/tweak-blood.webp', w: 160, h: 156 },
+        'ui/tweak-broader': { file: 'ui/tweak-broader.webp', w: 160, h: 156 },
+        'ui/tweak-cheap': { file: 'ui/tweak-cheap.webp', w: 160, h: 156 },
+        'ui/tweak-deeper': { file: 'ui/tweak-deeper.webp', w: 160, h: 156 },
+        'ui/tweak-quick': { file: 'ui/tweak-quick.webp', w: 160, h: 156 },
         'ui/variant-star': { file: 'ui/variant-star.webp', w: 160, h: 143 },
         'ui/venn': { file: 'ui/venn.webp', w: 600, h: 258 },
     };

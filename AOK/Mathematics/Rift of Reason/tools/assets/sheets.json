@@ -94,6 +94,7 @@
         "stakes-ch1.png": {"type":"single","id":"ui/stakes-ch1","class":"panel"},
         "lucky-sequin.png": {"type":"islands","minArea":600,"class":"item","ids":["item/lucky-sequin","keepsake/cage-cushion"]},
         "power-icons.png": {"type":"islands","minArea":3000,"class":"icon","ids":["ui/power-close-the-proof","ui/power-foresee","ui/power-lantern","ui/power-night-sight","ui/power-what-if","ui/power-brainstorm","ui/power-recall","ui/power-hold-that-thought","ui/power-call-it-out","ui/power-fine-print","ui/power-outrage","ui/power-pile-on"]},
+        "tweak-icons.png": {"type":"islands","minArea":2000,"class":"icon","ids":["ui/tweak-quick","ui/tweak-cheap","ui/tweak-blood","ui/tweak-deeper","ui/tweak-broader"]},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
