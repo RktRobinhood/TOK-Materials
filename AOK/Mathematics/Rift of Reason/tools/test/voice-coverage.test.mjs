@@ -18,7 +18,7 @@ test('voice catalog covers every actual tutorial host/family and all teaching-ba
   families.add(p.id);assert.ok(cast[n.host],n.host);
   for(const step of Rift.Puzzles.get(p.id).tutorial)assert.ok(ids.has(Rift.voiceId(n.host,step.text)),n.id+': '+step.text);
  }
- assert.equal(families.size,14);
+ assert.equal(families.size,15);
  for(const step of Rift.Battle.Lesson.steps)assert.ok(ids.has(Rift.voiceId('granny',step.text)));
  assert.ok(lines.every(l=>l.who!=='avatar'));assert.ok(skipped.every(l=>['nothing to say (stage direction only)','understudy voice not cast yet'].includes(l.why)));
 });

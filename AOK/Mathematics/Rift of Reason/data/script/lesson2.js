@@ -644,6 +644,15 @@
     S['station.b-bakery.reminder'] = [
         { s: 'baker', t: 'More imps in the queue. Check before you point.' },
     ];
+    // Granny's Kitchen (optional, #62): water jugs. Granny hums; Mrs Crumb stands in if she is gone.
+    S['station.b-kitchen.intro'] = [
+        HUM('Exactly four cups, dear. I have a 3-cup and a 5-cup ladle. No markings. Think, then pour.'),
+        { s: 'baker', t: 'Her ladles. Her recipe. Exact cups, or nothing.', when: 'dead:granny' },
+    ];
+    S['station.b-kitchen.reminder'] = [
+        HUM('Ladles again. Some amounts can never be made, dear. Know which.'),
+        { s: 'baker', t: 'Her ladles are still here. Exact cups.', when: 'dead:granny' },
+    ];
     S['station.b-post.intro'] = [
         { s: 'constable', e: 'accusing', t: 'Every answer stands on the last one. Wobble, and down it all comes.' },
     ];

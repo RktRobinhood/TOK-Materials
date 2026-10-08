@@ -198,8 +198,19 @@
                 name: 'The Bakery', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 633, y: 344,
                 scene: 'scene/village-square', script: 'ch2.bakery',
                 puzzles: [{ id: 'village', difficulty: 1, opts: { excludeRoles: ['schoolteacher'] } }, { id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher'] } }],
-                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough'], links: ['b-square'],
+                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough'], links: ['b-square', 'b-kitchen'],
                 teaser: 'Warm bread, cold stares. Someone stole the last loaf.',
+            },
+            // Optional (#62): water jugs. Off the required path; nothing links through it.
+            'b-kitchen': {
+                host: 'granny', goal: 'Prove that something cannot be done, not just fail to do it.',
+                hosts: [{ when: 'dead:granny', host: 'baker' }],
+                intro: 'station.b-kitchen.intro', reminder: 'station.b-kitchen.reminder',
+                name: "Granny's Kitchen", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 548, y: 300,
+                scene: 'scene/granny-door',
+                puzzles: [{ id: 'water-jugs', difficulty: 1 }, { id: 'water-jugs', difficulty: 2 }, { id: 'water-jugs', difficulty: 3 }],
+                spawns: ['beastie', 'tremendoodle', 'attenbirdough'], links: ['b-bakery'],
+                teaser: 'Two ladles, no markings, and a very exact recipe.',
             },
             'b-post': {
                 host: "constable", goal: "An argument stands only if its steps support its conclusion.",
