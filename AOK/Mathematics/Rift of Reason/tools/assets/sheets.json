@@ -106,6 +106,7 @@
         "hoots-gavel.png": {"type":"single","id":"item/hoots-gavel","class":"item"},
         "kuku.png": {"type":"islands","minArea":2500,"ids":["npc/kuku/idle",["npc/kuku/neutral","npc/kuku"],"npc/kuku/happy","npc/kuku/surprised","npc/kuku/angry"]},
         "rubberstamp.png": {"type":"islands","minArea":2500,"ids":["npc/rubberstamp/idle",["npc/rubberstamp/neutral","npc/rubberstamp"],"npc/rubberstamp/happy","npc/rubberstamp/surprised","npc/rubberstamp/angry","npc/rubberstamp/thinking"]},
+        "algorithm-core.png": {"type":"single","id":"npc/algorithm/core","class":"sprite"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
@@ -269,7 +270,7 @@
         "core-chamber.png": { "type": "scene", "id": "scene/core-chamber" },
         "fair-restored.png": { "type": "scene", "id": "scene/fair-restored" },
         "oracle-machine.png": { "type": "islands", "minArea": 2500, "ids": ["npc/oracle-machine/idle", ["npc/oracle-machine/neutral", "npc/oracle-machine"], "npc/oracle-machine/happy", "npc/oracle-machine/surprised", "npc/oracle-machine/angry", "npc/oracle-machine/glitch"] },
-        "algorithm-forms.png": { "type": "islands", "minArea": 2500, "class": "sprite", "ids": ["npc/algorithm/colossus", "npc/algorithm/core", "npc/algorithm/defeated"] },
+        "algorithm-forms.png": { "type": "islands", "minArea": 2500, "class": "sprite", "ids": ["npc/algorithm/colossus", null, "npc/algorithm/defeated"] },
         "ch4-props.png": { "type": "islands", "minArea": 800, "ids": ["ui/chart-easel", "ui/dice", "ui/probability-orb", "ui/hourglass", "ui/balance-scale", "ui/stamp-yes", "ui/stamp-no"] },
         "badges.png": { "type": "islands", "minArea": 800, "class": "item", "ids": ["ui/badge-clear-thinker", "ui/badge-falsifier", "ui/badge-truth-tabler", "ui/badge-unmasker", "ui/badge-cross-examiner", "ui/badge-chart-honest", "ui/badge-legend-hunter", "ui/badge-rift-walker"] },
         "items.png": { "type": "islands", "minArea": 1500, "ids": [

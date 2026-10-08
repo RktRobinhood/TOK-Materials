@@ -311,7 +311,7 @@
         'npc/achilles/worried': { file: 'cast/achilles-worried.webp', w: 190, h: 240 },
         'npc/algorithm': { file: 'cast/algorithm-speaking.webp', w: 468, h: 620 },
         'npc/algorithm/colossus': { file: 'cast/algorithm-colossus.webp', w: 1084, h: 620 },
-        'npc/algorithm/core': { file: 'cast/algorithm-core.webp', w: 331, h: 344 },
+        'npc/algorithm/core': { file: 'cast/algorithm-core.webp', w: 679, h: 620 },
         'npc/algorithm/defeated': { file: 'cast/algorithm-defeated.webp', w: 231, h: 226 },
         'npc/algorithm/sky-eye': { file: 'cast/algorithm-sky-eye.webp', w: 765, h: 620 },
         'npc/algorithm/speaking': { file: 'cast/algorithm-speaking.webp', w: 468, h: 620 },
