@@ -392,7 +392,9 @@
                 teaser: 'A huge door. Cables like roots. The way back to Tomorrowton is behind you.',
             },
             'k-gallery': {
-                host: "oracle", goal: "A chart can use real numbers and still mislead.",
+                host: "colossus", goal: "A chart can use real numbers and still mislead.",
+                // After the core the colossus is gone (STORY.md §6 hosts).
+                hosts: [{ when: 'finale-open', host: 'narrator' }],
                 intro: "station.k-gallery.intro", reminder: "station.k-gallery.reminder",
                 name: 'The Chart Gallery', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 799, y: 727,
                 scene: 'scene/chart-gallery', script: 'ch4.gallery',
@@ -401,7 +403,8 @@
                 teaser: 'Giant charts in gold frames. The Algorithm\'s favourite artworks.',
             },
             'k-prediction': {
-                host: "oracle", goal: "A prediction uses past patterns and can still be wrong.",
+                host: "colossus", goal: "A prediction uses past patterns and can still be wrong.",
+                hosts: [{ when: 'finale-open', host: 'narrator' }],
                 intro: "station.k-prediction.intro", reminder: "station.k-prediction.reminder",
                 name: 'The Prediction Hall', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 804, y: 631,
                 scene: 'scene/server-hall', script: 'ch4.prediction',
@@ -415,7 +418,7 @@
                 teaser: 'A quiet landing between floors. A good place to rest.',
             },
             'k-workshop': {
-                host: "oracle", goal: "Choose useful information and a model before calculating.",
+                host: "pip", goal: "Choose useful information and a model before calculating.",
                 intro: "station.k-workshop.intro", reminder: "station.k-workshop.reminder",
                 name: 'The Modelling Workshop', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 794, y: 450,
                 scene: 'scene/oracle-chamber', script: 'ch4.workshop',
@@ -424,7 +427,7 @@
                 teaser: 'An hourglass, a dripping cauldron, a growing floor. Questions everywhere.',
             },
             'k-sorting': {
-                host: "oracle", goal: "A high score can hide who a model harms.",
+                host: "pip", goal: "A high score can hide who a model harms.",
                 intro: "station.k-sorting.intro", reminder: "station.k-sorting.reminder",
                 name: 'The Sorting Room', chapter: 'ch4', map: 'ch4', type: 'miniboss', x: 813, y: 359,
                 scene: 'scene/server-hall', script: 'ch4.sorting',
@@ -447,7 +450,8 @@
                 teaser: 'The Algorithm\'s champion waits on the bridge, holding a perfectly optimised deck.',
             },
             'k-core': {
-                host: "granny", goal: "Check a model's limits, its proof and the choices behind it.",
+                host: "colossus", goal: "Check a model's limits, its proof and the choices behind it.",
+                hosts: [{ when: 'finale-open', host: 'narrator' }],
                 intro: "station.k-core.intro", reminder: "station.k-core.reminder",
                 name: 'The Core', chapter: 'ch4', map: 'ch4', type: 'boss', x: 770, y: 77,
                 scene: 'scene/core-chamber', script: 'ch4.core',

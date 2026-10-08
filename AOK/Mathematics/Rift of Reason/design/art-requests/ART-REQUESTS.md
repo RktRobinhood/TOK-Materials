@@ -561,6 +561,9 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.35 | Granny's Spare Axiom card art (the Hall reward, tiers 1–2; the card itself still needs a design in `data/axioms.js`) | `axiom/spare-axiom` | Card game reward (`spare-axiom` flag) | 3 *story* | needs card design first |
 | 13.36 | Nudge with its glowing clipboard (it runs the GUILTY vote counter; 13.18 lists Nudge generally): bust, gleeful, clipboard held up | `npc/nudge/clipboard` | Ch3 Plaza, Steps and trial (`e: 'clipboard'` in `data/script/lesson3.js`); the witness portrait for Count Two (`data/cases.js` `count-cloudy`) | 2 *story* | needed |
 | 13.37 | Hoot's Gavel item icon: Judge Hoot's small wooden gavel with cyan sparks, readable at 32 px | `item/hoots-gavel` | Bag (the Tribunal reward for a clean save of the Sundial, `data/items.js`) | 2 *story* | needed |
+| 13.38 | The Copy, "You 2.0": a glossy, too-perfect figure with a faint screen sheen and a thin upload bar for a halo, no species features (ideally a CSS treatment of the player's own avatar art; this bust is the fallback) | `npc/copy` | Ch4 Copy lines (`copy`, `copy-sundial` speakers in `data/script/lesson4.js`): the Oracle door, the core temptation, finale beat 1 | 1 *story* | needed |
+| 13.39 | The Copy's Hat keepsake: a small hat in the player's colours, a few screen-glass shards around it, on a transparent background | `keepsake/copy-hat` | Ch4 core win, Copy tier 1 (`{ keepsake: 'copy-hat' }`) | 3 *story* | needed |
+| 13.40 | The core redrawn: a small, scratched brass box with one sequin stuck to it, a few dice spilling out (replaces the dice-cloud `npc/algorithm/core`; STORY.md App. H) | `npc/algorithm/core` | Ch4 core win (the box answers your question, the four core lines, "May I… stay small?") | 1 *story* | needed |
 
 ---
 
