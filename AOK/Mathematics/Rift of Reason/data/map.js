@@ -62,6 +62,8 @@
             'stall-gallery': {
                 trainer: 'syllo',
                 host: "syllo", goal: "A conclusion can follow from the rules without being true in real life.",
+                // Side story 7, tier 4: Syllo has gone after his recruits until the restored Fair.
+                hosts: [{ when: { all: ['syllo-away', '!finale-open'] }, host: null, note: 'A sign on the door: GONE AFTER MY RECRUITS. —S' }],
                 intro: "station.stall-gallery.intro", reminder: "station.stall-gallery.reminder",
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
                 scene: 'scene/stall-gallery', script: 'prologue.gallery',

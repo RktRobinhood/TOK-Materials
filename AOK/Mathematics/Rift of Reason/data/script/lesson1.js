@@ -49,6 +49,8 @@
     // Sequins is home at his stall after the Gate (or the chapter is long over).
     const SEQUINS_HOME = { any: [{ seen: 'ch1.gate.win' }, LATER] };
     // Granny's open door: from the Well win, or for a later-chapter jump-in, until the finale.
+    // Side story 7, tier 4: Syllo is away after his recruits until the restored Fair.
+    const SYLLO_HERE = { not: { all: ['syllo-away', '!finale-open'] } };
     const DOOR_OPEN = { all: ['!finale-open', { any: [{ seen: 'ch1.well.win' }, LATER] }] };
     // Visiting the door before the Gate is won sets turnedBack (never for a later-chapter jump-in).
     const TURNING_BACK = { all: [{ not: { seen: 'ch1.gate.win' } }, { not: LATER }] };
@@ -361,7 +363,7 @@
         { scene: 'scene/granny-door' },
         { s: 'narrator', t: 'Granny\'s door is open. Her cup is on the table. Her shawl is gone.', when: { not: LATER } },
         { s: 'narrator', t: 'Granny\'s door is open. The tea went cold days ago. Her shawl is gone.', when: LATER },
-        { s: 'syllo', t: 'No sign of a fight, recruit. She\'d have won one.', when: '!dead:granny' },
+        { s: 'syllo', t: 'No sign of a fight, recruit. She\'d have won one.', when: { all: ['!dead:granny', SYLLO_HERE] } },
         { prop: 'ui/memorial-lantern-dark', when: 'dead:granny' },
         { s: 'narrator', t: 'Her lantern is out. I keep looking at it.', when: 'dead:granny' },
         { s: 'narrator', t: 'Tiny soup pots. A trail of them. Up into the crack.' },
@@ -643,11 +645,13 @@
         { s: 'mirage', t: 'Again, darling? Only what you saw, please.' },
     ];
     S['station.stall-gallery.intro'] = [
-        { s: 'syllo', t: 'Recruit! Do the conclusions march in line with the premises? Inspect them!' },
+        { s: 'syllo', t: 'Recruit! Do the conclusions march in line with the premises? Inspect them!', when: SYLLO_HERE },
+        { note: 'A sign on the door: GONE AFTER MY RECRUITS. —S', when: { not: SYLLO_HERE } },
         { lead: 'venn:gallery' },
     ];
     S['station.stall-gallery.reminder'] = [
-        { s: 'syllo', t: 'Back, recruit? Inspect the lines again! Follows, or not?' },
+        { s: 'syllo', t: 'Back, recruit? Inspect the lines again! Follows, or not?', when: SYLLO_HERE },
+        { note: 'A sign on the door: GONE AFTER MY RECRUITS. —S', when: { not: SYLLO_HERE } },
     ];
     S['station.road-start.intro'] = [
         { s: 'narrator', t: 'Two loud voices, one road. Let\'s check who\'s right. Quietly.' },
