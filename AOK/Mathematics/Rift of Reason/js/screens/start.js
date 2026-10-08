@@ -1,5 +1,6 @@
 /*
- * Title screen and avatar select.
+ * Title screen and avatar select. The preview shows the avatar's map perk and its Card Arena power
+ * (Rift.PowerView.panel, js/ui/powers.js).
  */
 (function (root) {
     'use strict';
@@ -72,7 +73,9 @@
                 preview.appendChild(el('div.stack', null, [
                     el('h2', { text: a.name + ' (' + pick.variant + ')' }),
                     el('div.muted', { text: a.looks[pick.variant] }),
-                    el('div.panel.perk', null, [el('strong', { text: '✨ ' + a.perk.name }), el('div', { text: a.perk.text })]),
+                    el('div.panel.perk', null, [el('div.small.muted', { text: 'On the map' }), el('strong', { text: '✨ ' + a.perk.name }), el('div', { text: a.perk.text })]),
+                    // The Card Arena power of this avatar and variant (design/AVATARS.md 1.6).
+                    Rift.PowerView ? Rift.PowerView.panel(pick) : null,
                 ]));
                 grid.querySelectorAll('.avatar-option').forEach(n => n.classList.toggle('selected', n.dataset.key === pick.type + '-' + pick.variant));
             }

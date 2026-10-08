@@ -278,6 +278,8 @@
                 el('div.panel.deck-panel.stack', null, [
                     el('h3', { text: 'Build decks' }),
                     summary,
+                    // Your hero's power in the Card Arena (design/AVATARS.md 1.6).
+                    s.avatar && Rift.PowerView ? Rift.PowerView.panel(s.avatar) : null,
                     el('div.row.wrap', null, [
                         el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(() => { summary.textContent = deckSummary(Rift.State.get()) + ' Axiom cards: 10.'; }) }),
                         el('button.btn', { text: 'Axiom cards · 10 cards', onclick: editAxiomDeck }),

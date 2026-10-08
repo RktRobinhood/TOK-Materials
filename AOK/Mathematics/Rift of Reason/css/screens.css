@@ -298,3 +298,15 @@ body.calm-motion .tour-practice * { animation:none; }
 .catch-variant { margin: 4px 0 8px; }
 .catch-variant .row { justify-content: center; }
 @media (max-width: 520px) { .deck-builder { grid-template-columns: 1fr; } .stat-line { gap: 6px; } }
+
+/* ---- hero power panel (avatar select and Collection; js/ui/powers.js) ---- */
+.power-panel { display: flex; gap: 12px; align-items: flex-start; }
+.power-panel-icon {
+    flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+    background: radial-gradient(circle at 50% 38%, #4d3c6c, #1b1229 76%); border: 3px solid #b08a3a;
+}
+.power-panel-icon .pw-icon { width: 100%; height: 100%; object-fit: cover; }
+.power-panel-icon .pw-glyph { font-size: 26px; line-height: 1; color: var(--gold); }
+.power-panel-words { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.power-panel-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.deck-panel .power-panel { margin: 6px 0; max-width: 620px; }
