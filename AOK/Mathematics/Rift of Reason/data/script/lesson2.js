@@ -651,7 +651,7 @@
     ];
     S['station.b-kitchen.reminder'] = [
         HUMPRE('Ladles again. Some amounts can never be made, dear. Know which.'),
-        { s: 'baker', t: 'Her ladles are still here. Exact cups.', when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] } },
+        { s: 'baker', t: 'Ladles again. Exact cups. Granny would know if you guessed.', when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] } },
     ];
     S['station.b-post.intro'] = [
         { s: 'constable', e: 'accusing', t: 'Every answer stands on the last one. Wobble, and down it all comes.' },

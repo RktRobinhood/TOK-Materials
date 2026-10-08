@@ -19,10 +19,12 @@ for(const d of [1,2,3])test('River crossing '+d+': every generated crossing is s
  }
 });
 
-test('River crossing: the classic chain needs 7 crossings; wrong plans fail',()=>{
+test('River crossing: d1 is a 7-crossing chain whose middle is never the second creature; wrong plans fail',()=>{
+ for(let seed=0;seed<40;seed++){const x=p.generate(Rift.makeRng('mid'+seed),1);const m=x.rivals[0].find(i=>x.rivals[1].includes(i));assert.notEqual(m,1);assert.equal(x.rivals.length,2);}
  const data=p.generate(Rift.makeRng('wrong'),1);assert.equal(data.shortest,7);
- const [a,b,c]=data.cast.map(x=>x.id);
- const middle=data.cast[1].id, ends=[a,c];
+ const [a,b]=data.cast.map(x=>x.id);
+ const mi=data.rivals[0].find(i=>data.rivals[1].includes(i));
+ const middle=data.cast[mi].id, ends=data.cast.filter((_,i)=>i!==mi).map(x=>x.id);
  // Taking an end first leaves the middle with its other rival.
  const r=p.check(data,{trips:[[ends[0]]]});assert.equal(r.solved,false);assert.match(r.feedback,/fought/);
  assert.equal(p.check(data,{trips:[[middle]]}).solved,false,'not everyone across');

@@ -2,7 +2,8 @@
  * River crossing (the Ford): row your creatures across a river in a small boat.
  * Rivals left together on a bank without you fight. Borrows the classic
  * river-crossing mechanic only. BFS checks every generated puzzle is solvable.
- *   d1: 3 creatures, boat seats 1, rivals in a chain (A–B, B–C).
+ *   d1: 3 creatures, boat seats 1, rivals in a chain whose middle creature is shown
+ *       first or last (never second, so it differs from the practice board's A–B–C).
  *   d2: 4 creatures, boat seats 2, random rivalries.
  *   d3: 5 creatures, boat seats 2, more rivalries, and Muskrat sells only as many
  *       tickets as the shortest plan needs.
@@ -103,7 +104,7 @@
         for (let a = 0; a < cast.length; a++) for (let b = a + 1; b < cast.length; b++) allPairs.push([a, b]);
         for (let tries = 0; tries < 3000; tries++) {
             let rivals;
-            if (d === 1) rivals = [[0, 1], [1, 2]];
+            if (d === 1) { const m = rng.pick([0, 2]); rivals = [0, 1, 2].filter(i => i !== m).map(i => [Math.min(m, i), Math.max(m, i)]); }
             else rivals = rng.shuffle(allPairs).slice(0, rng.int(shape.pairs[0], shape.pairs[1])).map(p => p.slice());
             const data = { cast, seats: shape.seats, rivals };
             const found = search(data);
@@ -157,7 +158,7 @@
             const across = data.cast.filter((_, i) => r.mask >> i & 1).length;
             return { solved: false, partial: across / data.cast.length, feedback: across + ' of ' + data.cast.length + ' are across. Keep going.' };
         }
-        return { solved: true, feedback: 'Everyone across in ' + trips.length + ' crossings. Nobody got eaten.' + (trips.length > data.shortest ? ' Best is ' + data.shortest + '.' : '') + ' A computer just checks all ' + data.states + ' safe positions, one by one.' };
+        return { solved: true, feedback: 'Everyone across in ' + trips.length + ' crossings. Nobody got bitten.' + (trips.length > data.shortest ? ' Best is ' + data.shortest + '.' : '') + ' A computer just checks all ' + data.states + ' safe positions, one by one.' };
     }
 
     function hints(data) {
@@ -277,7 +278,7 @@
             'Get every creature to the far bank. You row the boat.',
             'Click creatures on your bank to load the boat, then Row across. You may row back with someone, or alone.',
             'Never leave two rivals on a bank without you. An unsafe crossing counts as a wrong check.',
-            'At the hardest level, Muskrat sells only a few tickets. You get a set number of crossings. Undo and Reset are free.',
+            'At the hardest level, Muskrat sells only a few tickets: one per crossing, trips back included. Undo and Reset are free.',
             'How to play is free. The Hint button shows its heart cost. Think first, then check your answer.',
         ],
         tutorial: [

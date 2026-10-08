@@ -75,14 +75,14 @@
         ],result:'One clue and the one-each rule settled it. Every other arrangement broke one of them.'},
         'river-crossing':{kind:'river',title:'Start a safe crossing',frames:[
             ['A and B are rivals. B and C are rivals. The boat takes you and one more. Take B across.',['Take B','Take A'],0,'Near: A, C · Far: B'],
-            ['Come back alone, then take A.',['Back alone, take A','Take C'],0,'Near: C · Far: A, B'],
+            ['Come back alone, then take A. (C would work too.)',['Back alone, take A','Back alone, take A and C'],0,'Near: C · Far: A, B'],
         ],result:'A and B are safe while you are with them. When you leave, someone may need to come back with you.'},
         'water-jugs':{kind:'jugs',title:'Measure 4 cups with two ladles',frames:[
             ['Ladles of 3 and 5 cups. Goal: 4. Fill the 5-cup ladle.',['Fill 5','Fill 3'],0,'3-cup: 0 · 5-cup: 5'],
             ['Pour the 5 into the 3. It stops when the 3 is full.',['Pour 5 into 3','Empty 5'],0,'3-cup: 3 · 5-cup: 2'],
             ['Empty the 3, then pour the 2 across.',['Empty 3, pour 5 into 3','Fill 3'],0,'3-cup: 2 · 5-cup: 0'],
             ['Fill the 5 and top up the 3. One cup moves.',['Fill 5, pour 5 into 3','Empty 3'],0,'3-cup: 3 · 5-cup: 4 ✓'],
-        ],result:'Four cups, by pouring alone. With ladles of 4 and 6, every amount is even. So 3 cups can never appear.'},
+        ],result:'Four cups, by pouring alone. With ladles of 4 and 6 instead, every amount is even. So 3 cups can never appear.'},
     };
     function picture(kind,value,index){
         function tile(text,cls){return el('div.tour-tile'+(cls?'.'+cls:''),{text});}
