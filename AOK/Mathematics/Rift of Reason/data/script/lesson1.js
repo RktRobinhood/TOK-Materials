@@ -669,6 +669,13 @@
     S['station.troll-bridge.reminder'] = [
         { s: 'muskrat', t: 'Toll is still one perfect drawing. Mars is still next year.' },
     ];
+    // The Ford (optional, #62): river crossing.
+    S['station.river-ford.intro'] = [
+        { s: 'muskrat', t: 'My new ferry! Tiny boat, huge egos. Leave two rivals alone and they squabble. Plan every trip.' },
+    ];
+    S['station.river-ford.reminder'] = [
+        { s: 'muskrat', t: 'Ferry is open. Boat is still small. Egos are still big.' },
+    ];
     S['station.well.intro'] = [
         { s: 'sequins', t: 'The well wants evidence, not wishes. Help me fish!' },
         { lead: true },

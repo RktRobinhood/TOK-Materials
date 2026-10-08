@@ -109,8 +109,18 @@
                 name: 'The Troll Bridge', chapter: 'ch1', type: 'miniboss', x: 679, y: 550,
                 scene: 'scene/road-bridge', script: 'ch1.bridge',
                 puzzles: [{ id: 'line-drawer', difficulty: 2 }],
-                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle'], links: ['road-start', 'well'],
+                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle'], links: ['road-start', 'well', 'river-ford'],
                 teaser: 'A toll booth. A rocket parked badly beside it.',
+            },
+            // Optional (#62): river crossing, downstream of the Troll Bridge. Off the required path.
+            'river-ford': {
+                host: 'muskrat', goal: 'Plan by rules: every step must be safe, not just the ending.',
+                intro: 'station.river-ford.intro', reminder: 'station.river-ford.reminder',
+                name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 590, y: 640,
+                scene: 'scene/road-bridge',
+                puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
+                spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
+                teaser: 'A small boat, a wide river, and creatures who cannot stand each other.',
             },
             'card-sharp': {
                 name: "The Card Sharp's Table", chapter: 'ch1', type: 'battle', x: 1081, y: 430,

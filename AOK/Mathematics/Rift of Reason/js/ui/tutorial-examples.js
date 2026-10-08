@@ -68,6 +68,12 @@
             ['Pick the rate card.',['Rate: 5 litres/minute','Owner’s age: 30'],0,'Capacity 60 L · Rate 5 L/min'],
             ['Use time = capacity ÷ rate.',['60 ÷ 5 = 12 minutes','60 + 5 = 65 minutes'],0,'12 minutes (steady rate, empty start)'],
         ],result:'The model depends on the assumptions. In Act 3, compare its result with the reveal.'},
+        'river-crossing':{kind:'river',title:'Row three rivals across',frames:[
+            ['A and B are rivals. B and C are rivals. The boat takes you and one more. Take B across.',['Take B','Take A'],0,'Near: A, C · Far: B'],
+            ['Come back alone, then take A.',['Back alone, take A','Take C'],0,'Near: C · Far: A, B'],
+            ['A and B would squabble. Bring B back, then take C.',['Bring B back, take C','Leave B there'],0,'Near: B · Far: A, C'],
+            ['Come back alone and fetch B.',['Fetch B'],0,'Far: A, B, C ✓'],
+        ],result:'Going backwards was part of the plan. A computer finds this by trying every safe position.'},
         'water-jugs':{kind:'jugs',title:'Measure 4 cups with two ladles',frames:[
             ['Ladles of 3 and 5 cups. Goal: 4. Fill the 5-cup ladle.',['Fill 5','Fill 3'],0,'3-cup: 0 · 5-cup: 5'],
             ['Pour the 5 into the 3. It stops when the 3 is full.',['Pour 5 into 3','Empty 5'],0,'3-cup: 3 · 5-cup: 2'],
@@ -90,7 +96,7 @@
         if(kind==='bars')return el('div.tour-bars',null,[el('span.small',{text:index===0?'Axis starts at 90':'Axis starts at 0'}),el('div.tour-bar',{style:{height:(index===0?50:95)+'px'},text:'95'}),el('div.tour-bar',{style:{height:'100px'},text:'100'})]);
         if(kind==='path')return el('div.tour-path',null,['A','B','C'].map((p,i)=>el('span'+(value&&value.includes(p)?'.tour-lit':''),{text:p+(i<2?' →':'')})));
         if(kind==='tank')return el('div.tour-tank',null,[el('div.tour-water',{style:{height:(index>=3?'100%':'0%')}}),el('strong',{text:value||'Empty tank'})]);
-        return el('div.tour-scene.tour-'+kind,{text:value||({numbers:'2 · 4 · 6',guards:'A: “B is a liar”',lamps:'🔴 Red lamp ON · Blue lamp unknown',circuit:'A: ON → gate ← B: OFF',worlds:'Baker: “Sweep is an imp”',blocks:'All runners wear boots',record:'“The door stayed locked all day”',moves:'LEFT · LEFT · RIGHT',proof:'All odd numbers are prime?',audit:'Pat: help refused',jugs:'3-cup: 0 · 5-cup: 0'}[kind]||'')});
+        return el('div.tour-scene.tour-'+kind,{text:value||({numbers:'2 · 4 · 6',guards:'A: “B is a liar”',lamps:'🔴 Red lamp ON · Blue lamp unknown',circuit:'A: ON → gate ← B: OFF',worlds:'Baker: “Sweep is an imp”',blocks:'All runners wear boots',record:'“The door stayed locked all day”',moves:'LEFT · LEFT · RIGHT',proof:'All odd numbers are prime?',audit:'Pat: help refused',jugs:'3-cup: 0 · 5-cup: 0',river:'Near: A, B, C · Far: nobody'}[kind]||'')});
     }
     function create(id,onComplete){
         const example=examples[id];if(!example)return null;
