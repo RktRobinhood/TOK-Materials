@@ -27,6 +27,10 @@
             let stages = isBoss ? n.puzzles.slice() : [visit.puzzle];
             if (params.shrine) stages = [{ id: visit.puzzle ? visit.puzzle.id : 'liars-gate', difficulty: 3 }];
             stages = stages.filter(p => p && Rift.Puzzles.get(p.id));
+            // A boss stage with skipWhen (data/map.js) is left out and counts as one step of clock progress.
+            const skipNow = p => !!(isBoss && !params.shrine && p.skipWhen && Rift.Story && Rift.Story.test(p.skipWhen));
+            const skippedStages = stages.filter(skipNow).length;
+            if (skippedStages && skippedStages < stages.length) stages = stages.filter(p => !skipNow(p));
             let obstacle = null;
             let catchOpts = null;
             let catchGame = null;
@@ -554,6 +558,12 @@
                 const lead = firstVisit ? n.intro : n.reminder;
                 if (!params.shrine && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead, ctx);
                 if (destroyed) return;
+                // Skipped stages count as progress once, on a fresh clock (the script started it).
+                const clk = stakesClock();
+                if (skippedStages && clk.scene && Rift.Stakes.get(clk.scene) && !Rift.Stakes.get(clk.scene).progress) {
+                    Rift.Stakes.progress(clk.scene, skippedStages);
+                    if (meter) meter.refresh();
+                }
                 mountStage();
             })();
 

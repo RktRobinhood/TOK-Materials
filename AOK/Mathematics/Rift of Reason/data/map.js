@@ -9,6 +9,7 @@
  * puzzles: candidate puzzle ids + difficulty, one is rolled per visit.
  * spawns: visitors rolled after success (weighted by rarity);
  *         rare teasers from other colours can be listed too.
+ * puzzles[i].skipWhen: a boss stage left out while a story condition holds (it counts as clock progress).
  * scene: background art id (scenes: [{ when, scene }] overrides it while a story condition holds,
  * like hosts). script: dialogue key in data/script/*.js.
  */
@@ -268,7 +269,8 @@
                 name: 'The Town Hall', chapter: 'ch2', map: 'ch2', type: 'boss', x: 1407, y: 191,
                 scene: 'scene/feast-hall', script: 'ch2.hall',
                 scenes: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, scene: 'scene/village-square' }],
-                puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher', 'constable'] } }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true, excludeRoles: ['constable', 'baker'] } }],
+                // Stage 1 (the guests) is skipped, as progress, when the Mayor is torn: only imps are left at the tables.
+                puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher', 'constable'] }, skipWhen: { flag: 'mayor', is: 'torn' } }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true, excludeRoles: ['constable', 'baker'] } }],
                 spawns: ['tremendoodle', 'rawmsay', 'booleon', 'obambu', 'beeyonce'], links: ['b-stairs', 'b-skyrift'],
                 teaser: 'The dome. The Mayor. The truth, if you can build a table big enough.',
             },

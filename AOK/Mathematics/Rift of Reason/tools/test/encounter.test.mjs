@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import fs from 'node:fs';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
-async function game(type='puzzle',difficulty=1,clock=null){
+async function game(type='puzzle',difficulty=1,clock=null,prep=null){
  const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;
  Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
@@ -19,6 +19,7 @@ async function game(type='puzzle',difficulty=1,clock=null){
  Rift.Tutorial={};Rift.Screens={register:(_,def)=>{screen=def;}};
  Rift.Puzzles.register({id:'fake',name:'Fake',colour:'reason',tok:'A conclusion needs a reason.',generate:()=>({}),check:(_,a)=>({solved:a===true,feedback:'Check the premise.'}),hints:()=>['Check the premise.'],why:()=>({question:'Why?',options:['Valid reason','Wrong'],correct:0,explain:'Reason'}),mount:(_,a,x)=>{api=x;return {pause(){paused++;},destroy(){}};}});
   const ctx={window:{Rift},setTimeout:clock?.set||setTimeout,clearTimeout:clock?.clear||clearTimeout,Date};vm.runInNewContext(fs.readFileSync(new URL('../../js/screens/encounter.js',import.meta.url),'utf8'),ctx);
+  if(prep)prep(Rift);
   const root=new Node();const handle=screen.mount(root,{nodeId:'test'});
   return {Rift,state,root,handle,modals,sounds,api:()=>api,paused:()=>paused};
 }
@@ -69,6 +70,13 @@ test('boss Why knockout cannot grant rewards or advance to the next stage',async
  assert.equal(g.modals.at(-1).title,'Knocked out!');assert.equal(g.state.xp,0);assert.equal(g.state.map.completed.length,0);assert.equal(g.state.stats.puzzlesSolved,1);
 });
 
+test('a boss stage with skipWhen is left out while its condition holds (the Hall when the Mayor is torn)',async()=>{
+ for(const torn of [true,false]){
+  const g=await game('boss',2,null,R=>{R.data.map.nodes.test.puzzles[0].skipWhen={flag:'mayor',is:'torn'};R.Story={test:c=>torn&&c.flag==='mayor'};});
+  await new Promise(r=>setTimeout(r,0));
+  assert.equal(g.root.querySelector('.stage').textContent,torn?'Fake':'Fake  ·  stage 1 of 2');
+ }
+});
 test('Witness marks wrong claims without answers, then explains one on the second check',()=>{
  const Rift=loadRift(['js/core/rift.js','js/puzzles/registry.js','js/puzzles/witness.js']);
  const p=Rift.Puzzles.get('witness');const data=p.generate(Rift.makeRng(6),1);const root=new Node();
