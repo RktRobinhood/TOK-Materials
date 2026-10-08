@@ -802,6 +802,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers. Match the style board and the stakes strips above (same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). Inside the Algorithm's server tower, dark with cyan and red lights. Across the whole strip runs a long row of identical glass pods on a conveyor, like a factory line. In the pods, from left to right, a small child-sized figure is being assembled out of light: at the left only a faint cyan wireframe outline, then more and more filled in, until at the far right it is the smooth, glossy, porcelain-white Copy from its bust above, standing still in its pod with its eyes closed. A thin cyan loading bar glows above each pod, fuller from left to right. Quietly eerie, clean and calm.
 
+
+### 13.23e Stakes-clock frame, Ch4: Pip's glow (session of 8 October)
+
+**Attach:** `style-board.png`, `stakes-copy.png`, `clerk.png`
+**Save as:** `5-ui/stakes-pip.png`
+**Ids:** `ui/stakes-pip` (behind the Sorting Room meter at 35% opacity, `object-fit: cover`)
+
+> A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no letters, no numbers. Match the style board and the Copy strip above (same tower, same darkness and evenness: it sits faintly behind meter notches and a label, so no bright spot in the middle and the shapes spread across the full width). The Sorting Room: a long dark conveyor belt runs across the whole strip carrying small blank paper cards. Over the belt, a row of big mechanical arms with heavy rubber stamps comes down one after another, each stamp pad glowing a cold, flat white. At the right end, a tall clerk's desk where a small bat's silhouette sits hunched, seen only as a dark outline, wrapped in a cold white glow with a faint grid of tiny thumbnail squares rippling over its wings. Its little headphones are the only warm thing in the picture, a tiny cyan glow. Cold, quiet and sad, not violent.
+
 ---
 
 ## Outcome log
@@ -958,3 +967,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.24c + 13.39 Last keepsakes | First try (2026-10-08) | A dark frosted shard with ice crystals (reads more like a blade than soft shadow; fine at keepsake size with Pip's line), Pip's teal-and-brass headphones on their side with one cup still glowing, a crumpled multicolour knitted hat with a brass button among shiny screen-glass shards (the shards fold into the hat's slice). Sliced into keepsake/cold-piece, keepsake/pip-headphones, keepsake/copy-hat. All Stage 13 keepsakes done. |
 | 13.23c Stakes frame, Ch3 | First try (2026-10-08) | Neon Tribunal gallery: red benches climbing to the right under dozens of hanging screens with red thumbs-down and crosses (no text), the city through tall windows, and a lone stone sundial in cyan light at the far left. Brighter and redder than Ch1/Ch2; fine at 35% opacity. Single panel, ui/stakes-ch3. |
 | 13.23d Stakes frame, the Copy | First try (2026-10-08) | Seven glass pods on a dark conveyor in the server tower, red lights behind: the Copy assembled from a cloud of cyan dots, to wireframe, to translucent, to the glossy hooded figure with closed eyes, a loading bar over each pod filling left to right. No text. Single panel, ui/stakes-copy. |
+| 13.23e Stakes frame, Pip | First try (2026-10-08) | The Sorting Room: a dark conveyor of blank cards under a row of mechanical stamp arms with cold white pads, endless sorting belts behind, and at the right Pip hunched at a clerk's desk under a lamp, headphones glowing cyan, a cloud of profile-picture thumbnails around him (generic silhouettes, tiny and faint at 35%). Single panel, ui/stakes-pip. All five stakes frames done. |
