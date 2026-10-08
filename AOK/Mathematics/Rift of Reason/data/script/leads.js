@@ -35,7 +35,7 @@
         owlet: 'Shade the "no" parts first. Then the "some". Neat. I like neat.',
         mothkin: 'Look. An x on the line could sit either side. Don\'t push it.',
         fox: 'Make the premises true and the ending false. If I can, it\'s broken.',
-        frogling: 'Last time I judged by what was true. Wrong game. Does it follow?',
+        frogling: 'Remember the question, not the story. Does it follow?',
         raven: '"Some" means at least one. Not "not all".',
     } };
     // The Syllogism Gallery's own Venn lead (venn d1, met there first), so the Well's Venn lead is fresh.
@@ -45,6 +45,22 @@
         fox: 'Picture trumpet lobsters. Fine. If all that were true, must it follow?',
         frogling: 'Ponds can\'t play trumpets either. Doesn\'t matter. Does it follow?',
         raven: '"All" and "some". Two small words. They do all the work.',
+    } };
+    // The Wishing Well's own banks (map.js opts.lead: 'well'), so a player who met venn or rule-hunter
+    // at the Road, the Gallery or the Pattern Stall never hears the same lead twice in lesson 1.
+    L['venn:well'] = { inner: {
+        owlet: 'Shade the premises. Then hunt for one spot that breaks the ending.',
+        mothkin: 'Look for the one x the premises force. Just one. Then look again.',
+        fox: 'Picture a world where the premises hold and the ending fails. Found one?',
+        frogling: 'He fished with a sock. Odd, but true. Odd doesn\'t matter. Does it follow?',
+        raven: '"No" and "not all". Different words. Different shading.',
+    } };
+    L['rule-hunter:well'] = { inner: {
+        owlet: 'Ten fits prove nothing. One miss proves plenty. Hunt the miss.',
+        mothkin: 'Look at the ones it says no to. They know the secret.',
+        fox: 'Picture the weirdest numbers. Feed it those.',
+        frogling: 'People test what fits. Every time. I\'ve watched. Test what breaks.',
+        raven: '"Fits" is a soft word. Look for "fails".',
     } };
     L['liars-gate'] = { inner: {
         owlet: 'If one calls another a liar, they\'re different kinds. Every time.',

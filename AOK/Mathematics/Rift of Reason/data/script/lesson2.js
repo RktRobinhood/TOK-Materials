@@ -20,7 +20,7 @@
     });
 
     S['ch2.arrive'] = [
-        { play: 'ch1.crackle', once: true },   // Granny's crackle (lesson1.js), if the Rift Pass was skipped by a jump into Ch2
+        { play: 'ch1.crackle.fallback' },   // Granny's crackle (lesson1.js), if the Rift Pass was skipped by a jump into Ch2
         { s: 'narrator', t: 'Boolesbury. Eighteen fifty-something. Gas lamps, cobbles, and windows glowing a little too brightly.' },
         { s: 'narrator', t: 'The rift brought the imps here first. They wear the villagers\' faces like masks.' },
         { s: 'avatar', t: 'So any of them could be lying.' },

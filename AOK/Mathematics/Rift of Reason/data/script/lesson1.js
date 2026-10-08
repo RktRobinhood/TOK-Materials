@@ -72,7 +72,7 @@
     // The reveals: at the Gate win, or at Granny's open door if you went back first.
     // Each is true in both places, and none jokes (it may follow a death).
     const REVEAL = { inner: {
-        owlet: 'Valid, every step. But my first premise was its bait. Valid isn\'t true.',
+        owlet: 'Valid, every step. But my first premise was its bait. Valid doesn\'t mean true.',
         mothkin: 'Little lamps. Big sack. I only saw the lamps.',
         fox: 'The real story was at home. Behind us. Not at the end.',
         frogling: 'Every Tuesday, salesmen. This Tuesday, imps.',
@@ -92,7 +92,7 @@
     // Your Home (node script). The morning, or a look back for a jump-in.
     S['prologue.home'] = [
         { when: JUMPED_PAST('prologue.wake'), then: [
-            { s: 'narrator', t: 'Your home. I used to stand right here, outside your door. Before the crack.' },
+            { s: 'narrator', t: 'Your home. I stood here every morning since before Granny was born. Now I ride in your shadow.' },
         ], else: [{ play: 'prologue.wake' }] },
     ];
     S['prologue.wake'] = [
@@ -125,17 +125,34 @@
         { s: 'algorithm', t: 'QUOTE SAVED.' },
     ];
     S['prologue.fair.again'] = [
-        { when: DOOR_OPEN, then: [
-            { when: { seen: 'ch1.door' }, then: [
-                { s: 'narrator', t: 'Her door is still open. The tea has gone cold.' },
-            ], else: [{ play: 'ch1.door' }] },
+        { when: 'finale-open', then: [
+            { s: 'narrator', t: 'The Fair again. No hair on the sky now.' },
         ], else: [
-            { when: { any: [{ seen: 'prologue.evening' }, ON_THE_ROAD] }, then: [
-                { s: 'granny', t: 'Shoo, dear. The crack won\'t follow itself.' },
+            { when: 'dead:sequins', then: [{ play: 'ch1.lantern', once: true }] },
+            { when: DOOR_OPEN, then: [
+                { when: { seen: 'ch1.door' }, then: [
+                    { s: 'narrator', t: 'Her door is still open. The tea has gone cold.', when: '!dead:granny' },
+                    { s: 'narrator', t: 'Her door is still open. Her lantern is still out.', when: 'dead:granny' },
+                ], else: [{ play: 'ch1.door' }] },
             ], else: [
-                { s: 'granny', t: 'Two stalls and Syllo\'s match, dear. The trophy won\'t wait.' },
+                // Granny's barks: each plays once, then she lets you be.
+                { when: { any: [{ seen: 'prologue.evening' }, ON_THE_ROAD] }, then: [
+                    { play: 'prologue.bark.road', once: true },
+                ], else: [
+                    { when: { seen: 'prologue.bark.fair' }, then: [{ play: 'prologue.bark.fair2', once: true }],
+                        else: [{ play: 'prologue.bark.fair', once: true }] },
+                ] },
             ] },
         ] },
+    ];
+    S['prologue.bark.fair'] = [{ s: 'granny', t: 'Two stalls and Syllo\'s match, dear. The trophy won\'t wait.' }];
+    S['prologue.bark.fair2'] = [{ s: 'granny', t: 'Still here, dear? The nuts are getting nervous.' }];
+    S['prologue.bark.road'] = [{ s: 'granny', t: 'Shoo, dear. The crack won\'t follow itself.' }];
+    // After Sequins' death, the first time back at the Fair: his dark lantern, and a friend who misses him.
+    S['ch1.lantern'] = [
+        { s: 'narrator', t: 'The lanterns. One is dark. It was the shiniest.', when: '!dead:granny' },
+        { s: 'narrator', t: 'The lanterns. Two are dark. One of them was the shiniest.', when: 'dead:granny' },
+        { s: 'syllo', t: 'His lantern went out, recruit. I saluted it. I didn\'t know what else to do.' },
     ];
 
     // The Pattern Stall. Sequins is away from the theft until the Gate (a sign on the curtain);
@@ -227,14 +244,13 @@
 
     // "Previously…" (first time-rift jump into Ch1). Every flag may be unset.
     S['recap.ch1'] = [
-        { s: 'narrator', t: 'Previously. The Fair. A crack opened in the sky.' },
-        { s: 'narrator', t: 'You told everyone you\'d win the Thinking Trophy. Because you\'re always right. Something heard.' },
-        { s: 'narrator', t: 'It was the Algorithm. It reached through and stole my shadow.' },
-        { s: 'narrator', t: 'It took the visitors, too. Their eyes glow now. They shout.' },
+        { s: 'narrator', t: 'Previously. The Fair. You said you\'re always right. Something in the sky heard.' },
+        { s: 'narrator', t: 'The Algorithm. It stole my shadow and the visitors\' minds.' },
         { s: 'narrator', t: 'You said you\'d go. So you went. Down the Road, after the crack.', when: { flag: 'brave', is: 'go' } },
         { s: 'narrator', t: 'You wanted to hide under the nut stall. You came down the Road anyway.', when: { flag: 'brave', is: 'hide' } },
         { s: 'narrator', t: 'You asked where the crack starts. So we followed it down the Road.', when: { flag: 'brave', is: 'ask' } },
         { s: 'narrator', t: 'You followed the crack down the Road.', when: { flag: 'brave', unset: true } },
+        { s: 'narrator', t: 'Granny gave you her Hum Charm. Hum, and she hums back.', when: { not: { seen: 'prologue.evening' } } },
         { s: 'narrator', t: 'I ride in your shadow. Mind the dark.' },
         { s: 'narrator', t: 'You\'ve walked this Road before. This time, it\'s a memory.', when: { all: [LATER, { seen: 'ch1.well' }] } },
         { s: 'narrator', t: 'All this happened already. We\'re only remembering it.', when: { all: [LATER, { not: { seen: 'ch1.well' } }] } },
@@ -264,14 +280,15 @@
     // The Forest Road (host: the Sundial). Possessed caricatures argue; Nudge cheers them on.
     S['ch1.road'] = [
         { play: 'ch1.arrival', once: true },
-        { play: 'ch1.gossip', once: true },
         { inner: BLIND_OWLET_FOX, when: { not: { seen: 'prologue.evening' } } },
         { s: 'lobstorian', t: 'THE CRACK GOES LEFT. STAND UP STRAIGHT AND GO LEFT.', possessed: true },
         { s: 'tremendoodle', t: 'WRONG. IT GOES RIGHT. THE BEST RIGHT. EVERYONE SAYS SO.', possessed: true },
-        { s: 'nudge', t: 'Louder! Every shout\'s a click! Every click\'s ME!' },
+        { s: 'nudge', t: 'Louder! Every shout is a click! Every click makes me BIGGER!' },
     ];
     S['ch1.road.win'] = [
         { s: 'lobstorian', t: 'Was I shouting? Sorry. I should go and tidy my room.' },
+        { s: 'nudge', t: 'Boo! You made them calm! Calm gets zero views!' },
+        { play: 'ch1.gossip', once: true },   // a jump-in hears clue 2 here (a walker had it at the Signpost)
         { s: 'granny', hum: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.' },
     ];
 
@@ -294,11 +311,11 @@
         { s: 'avatar', t: 'It\'s warm. And it ticks. Like a tiny heart.', only: 'mothkin' },
         { s: 'avatar', t: 'A fortune-teller in a box. I love it already.', only: 'fox' },
         { s: 'avatar', t: 'My uncle guessed like that. Wrong. Every time.', only: 'frogling' },
-        { s: 'avatar', t: 'Always the same first word. Clever. Hard to be wrong with it.', only: 'raven' },
+        { s: 'avatar', t: 'A box that never quite promises. Clever. Hard to be wrong.', only: 'raven' },
         { s: 'sequins', t: 'Thank you. Nobody holds things for me. I polish my own trophy. Twice.' },
     ];
     S['ch1.well.win'] = [
-        { s: 'sequins', t: 'It\'s honest, you see. It always says "probably". Mind it, if anything happens.' },
+        { s: 'sequins', t: 'It\'s honest, you see. It always says "probably". Look after it for me.' },
         { s: 'sequins', e: 'surprised', t: 'Wait. Is that my favourite sequence? Glinting down the Road? COME BACK!' },
         { s: 'granny', hum: true, t: 'Salesmen at my door, dear. Very small ones. Selling soup pots.' },
         { s: 'granny', hum: true, t: 'I\'ll buy one. A pot never hurt anybody. Hum you later, dear.' },
@@ -459,7 +476,7 @@
                 ] },
             ] },
             { when: 'moser', then: [
-                { s: 'avatar', t: 'Professor, your circle sequence goes thirty-one.' },
+                { s: 'avatar', t: 'Professor! Your circle sequence breaks. Thirty-one, not thirty-two.' },
                 { clock: 'ch1', drain: 1 },
                 { s: 'sequins', e: 'happy', t: 'Thirty-one? It BREAKS? Oh, that\'s gorgeous. I\'ve stopped panicking.' },
             ] },
@@ -470,6 +487,7 @@
     S['ch1.gate.push'] = [
         { when: CAGE_OPEN, then: [
             { s: 'algorithm', t: 'FASTER. THE MAGPIE IS TRENDING.' },
+            { s: 'nudge', t: 'Hi, {name}! Say "always" for the camera! It got great numbers!' },
             { clock: 'ch1', tick: 1 },
         ] },
     ];
@@ -482,7 +500,7 @@
         { when: 'dead:sequins', then: [
             { s: 'narrator', t: 'The gate is open. The cushion is still warm.' },
             { flag: 'nudgeFled' },
-            { s: 'narrator', t: 'Nudge is gone through the Rift Pass. With my piece.' },
+            { s: 'narrator', t: 'Nudge has gone through the Rift Pass. With my piece.' },
         ], else: [
             { when: { flag: 'stakes.ch1', is: 1 }, then: [
                 { s: 'sequins', e: 'happy', t: 'Take my Lucky Sequin. Keep the apprentice for now. You\'re better company.' },
@@ -514,9 +532,11 @@
                 { s: 'algorithm', t: 'PREDICTED. YOU SAVED THE MAGPIE. I TOOK THE TORTOISE.' },
             ] },
         ] },
-        { s: 'algorithm', t: 'YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.' },
-        // The voices' reveal plays here, unless it already played at Granny's open door.
-        { when: '!turnedBack', then: [REVEAL] },
+        // Only for a player who heard the boast (or its recap).
+        { s: 'algorithm', t: 'YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.', when: { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }] } },
+        // The voices' reveal plays here, unless it already played at Granny's open door, and only after
+        // its set-ups (the Road and the Well win: a Ch2 jump-in walking back has had neither yet).
+        { when: { all: ['!turnedBack', { seen: 'ch1.road' }, { seen: 'ch1.well.win' }] }, then: [REVEAL] },
         { when: 'turnedBack', then: [
             { s: 'narrator', t: 'You turned back. It was still too late. Was turning back wrong?' },
         ], else: [
@@ -532,20 +552,29 @@
         { inner: {
             owlet: 'Ladder. Ladle. Lad. All fit. More data, please.',
             mothkin: 'Was that a clink? Shiny metal?',
-            fox: 'A ladder! For a daring climb!',
-            frogling: 'She said "ladle" once. About soup. Long story.',
+            fox: 'A ladder. Up into the crack. To her.',
+            frogling: 'She said "ladle" once. About soup. I remember the soup.',
             raven: 'Ladder? Lad? Ladle?',
         } },
     ];
 
     // The Rift Pass: Ch1's last stop, and its hook into Boolesbury.
     S['ch1.pass'] = [
-        { when: { seen: 'ch1.gate.win' }, then: [
+        { when: { all: [{ seen: 'ch1.gate.win' }, { not: LATER }] }, then: [
             { play: 'ch1.crackle', once: true },
-            { s: 'narrator', t: 'Eighteen fifty. I think that\'s through there. So is a piece of me.' },
-            { s: 'narrator', t: 'It ran through with my piece. The door\'s open now. I feel… cloudier.', when: 'nudgeFled' },
+            { s: 'narrator', t: 'Nudge ran through here with my piece. I feel… cloudier.', when: 'nudgeFled' },
+            { s: 'narrator', t: 'Eighteen fifty. That\'s through there. So is Granny.' },
         ], else: [
-            { s: 'narrator', t: 'The Rift Pass. The Road runs back down from here, all the way to the Fair.' },
+            // Coming back from a later chapter: no arrival lines again.
+            { s: 'narrator', t: 'The Rift Pass. Boolesbury hums on the other side.', when: LATER },
+            { s: 'narrator', t: 'The Rift Pass. The Road runs back down from here, all the way to the Fair.', when: { not: LATER } },
+        ] },
+    ];
+    // For a class that jumps straight into Ch2 (played by ch2.arrive): one line of context, then the crackle.
+    S['ch1.crackle.fallback'] = [
+        { when: { not: { seen: 'ch1.crackle' } }, then: [
+            { s: 'narrator', t: 'Your Hum Charm. Granny gave it to you. Imps took her. Listen.' },
+            { play: 'ch1.crackle', once: true },
         ] },
     ];
 
@@ -553,11 +582,12 @@
     // if dead:sequins. It lives here because its last line must match the Gate's `full` line.
     S['quiet.sequins'] = [
         { keepsake: 'cage-cushion' },
-        { s: 'narrator', t: 'Back at the Fair, his lantern will have gone out.' },
+        { s: 'narrator', t: 'Back at the Fair, his lantern is dark now.' },
         { s: 'narrator', t: 'The cushion from his cage. It\'s yours now. He\'d want it shown off.' },
-        { s: 'narrator', t: 'In your pocket, his Guess-o-Matic says nothing.', when: 'guess-o-matic' },
+        { s: 'narrator', t: 'In your pocket, his apprentice says nothing. You held it for him. Nobody else did.', when: 'guess-o-matic' },
         { s: 'sequins', t: 'Oh. It\'s… shiny in there.', replay: true },
         { s: 'narrator', t: 'He taught me a sequence once. I lost count. He didn\'t mind.' },
+        { s: 'narrator', t: 'Syllo will salute his empty stall. Mirage won\'t look in her ball.' },
         { choice: [
             { t: 'He was showing off. Right to the end.' },
             { t: 'I should have been faster.' },
@@ -628,7 +658,7 @@
         { s: 'sequins', t: 'Every door, my dear! Every guard! Quickly, I\'m losing sequins!' },
     ];
     S['station.gate.reminder'] = [
-        { s: 'sequins', t: 'Back! Good! Every guard, please. I\'m still losing sequins.', when: { not: { seen: 'ch1.gate.win' } } },
-        { s: 'narrator', t: 'The gate stands open now. The cage is empty.', when: { seen: 'ch1.gate.win' } },
+        { s: 'sequins', t: 'Back! Good! Every guard, please. I\'m still losing sequins.', when: { all: [{ not: { seen: 'ch1.gate.win' } }, '!dead:sequins'] } },
+        { s: 'narrator', t: 'The cage is empty. The crack has stopped drinking.', when: { any: [{ seen: 'ch1.gate.win' }, 'dead:sequins'] } },
     ];
 })(typeof window !== 'undefined' ? window : globalThis);

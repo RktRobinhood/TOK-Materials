@@ -95,7 +95,7 @@
                 intro: "station.well.intro", reminder: "station.well.reminder",
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
-                puzzles: [{ id: 'venn', difficulty: 2 }, { id: 'rule-hunter', difficulty: 2 }],
+                puzzles: [{ id: 'venn', difficulty: 2, opts: { lead: 'well' } }, { id: 'rule-hunter', difficulty: 2, opts: { lead: 'well' } }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant'], links: ['troll-bridge', 'campfire', 'card-sharp', 'bonus-blackbox'],
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
@@ -139,7 +139,7 @@
             },
             'gate': {
                 host: "sequins", goal: "A proof depends on the rules and facts you start with.",
-                hosts: [{ when: { seen: 'ch1.gate.win' }, host: 'narrator' }],
+                hosts: [{ when: { any: [{ seen: 'ch1.gate.win' }, 'dead:sequins'] }, host: 'narrator' }],
                 intro: "station.gate.intro", reminder: "station.gate.reminder",
                 name: 'The Gate of Guards', chapter: 'ch1', type: 'boss', x: 1249, y: 316,
                 scene: 'scene/road-gate', script: 'ch1.gate',

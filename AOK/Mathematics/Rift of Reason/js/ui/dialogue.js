@@ -306,7 +306,9 @@
         if (!p) return null;
         const id = typeof p === 'string' ? p : p.id;
         const mode = typeof p === 'object' && (p.mode || (p.opts && p.opts.mode));
-        return (mode && bank[id + ':' + mode]) || bank[id] || null;
+        // A station may name its own bank (puzzle opts.lead, e.g. 'well' → 'venn:well'), so a lead never repeats.
+        const tag = typeof p === 'object' && p.opts && p.opts.lead;
+        return (tag && bank[id + ':' + tag]) || (mode && bank[id + ':' + mode]) || bank[id] || null;
     }
 
     // opts: { after, replay (a "Watch again" of a seen scene), quiet, puzzle }
