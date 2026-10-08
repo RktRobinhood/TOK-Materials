@@ -460,7 +460,7 @@
         'npc/villager-schoolteacher/idle': { file: 'cast/villager-schoolteacher-idle.webp', w: 278, h: 512 },
         'npc/villager-schoolteacher/nervous': { file: 'cast/villager-schoolteacher-nervous.webp', w: 185, h: 240 },
         'npc/villager-schoolteacher/neutral': { file: 'cast/villager-schoolteacher-neutral.webp', w: 175, h: 240 },
-        'npc/villager-schoolteacher/unmasked': { file: 'cast/villager-schoolteacher-unmasked.webp', w: 294, h: 360 },
+        'npc/villager-schoolteacher/unmasked': { file: 'cast/villager-schoolteacher-unmasked.webp', w: 264, h: 240 },
         'npc/villager-sweep': { file: 'cast/villager-sweep-neutral.webp', w: 195, h: 240 },
         'npc/villager-sweep/accusing': { file: 'cast/villager-sweep-accusing.webp', w: 198, h: 240 },
         'npc/villager-sweep/idle': { file: 'cast/villager-sweep-idle.webp', w: 339, h: 500 },

@@ -97,6 +97,7 @@
         "tweak-icons.png": {"type":"islands","minArea":2000,"class":"icon","ids":["ui/tweak-quick","ui/tweak-cheap","ui/tweak-blood","ui/tweak-deeper","ui/tweak-broader"]},
         "achilles.png": {"type":"islands","minArea":2500,"ids":["npc/achilles/idle",["npc/achilles/neutral","npc/achilles"],"npc/achilles/happy","npc/achilles/surprised","npc/achilles/angry","npc/achilles/worried"]},
         "gumleaf.png": {"type":"islands","minArea":2500,"ids":["npc/gumleaf/idle",["npc/gumleaf/neutral","npc/gumleaf"],"npc/gumleaf/accusing","npc/gumleaf/nervous"]},
+        "quill-unmasked.png": {"type":"single","id":"npc/villager-schoolteacher/unmasked","class":"bust"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
@@ -184,7 +185,7 @@
             "npc/villager-sweep/idle", ["npc/villager-sweep/neutral", "npc/villager-sweep"], "npc/villager-sweep/accusing", "npc/villager-sweep/nervous", "npc/villager-sweep/unmasked"
         ] },
         "villagers-schoolteacher-gardener.png": { "type": "islands", "minArea": 2500, "ids": [
-            "npc/villager-schoolteacher/idle", ["npc/villager-schoolteacher/neutral", "npc/villager-schoolteacher"], "npc/villager-schoolteacher/accusing", "npc/villager-schoolteacher/nervous", "npc/villager-schoolteacher/unmasked",
+            "npc/villager-schoolteacher/idle", ["npc/villager-schoolteacher/neutral", "npc/villager-schoolteacher"], "npc/villager-schoolteacher/accusing", "npc/villager-schoolteacher/nervous", null,
             "npc/villager-gardener/idle", ["npc/villager-gardener/neutral", "npc/villager-gardener"], "npc/villager-gardener/accusing", "npc/villager-gardener/nervous", "npc/villager-gardener/unmasked"
         ] },
         "mayor.png": { "type": "islands", "minArea": 2500, "ids": ["npc/mayor/idle", ["npc/mayor/neutral", "npc/mayor"], "npc/mayor/accusing", "npc/mayor/nervous", "npc/mayor/unmasked"] },
