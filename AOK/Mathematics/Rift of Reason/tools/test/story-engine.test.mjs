@@ -428,8 +428,8 @@ test('voice collection: avatar lines per avatar, inner lines per species and gen
     assert.equal(who('Never voiced.').length, 0);
     assert.ok(lines.some(l => l.who === 'avatar-mothkin-girl-inner' && l.where === 'lead rule-hunter'), 'the lead bank is collected');
     for (const l of lines) assert.equal(l.id, Rift.voiceId(l.who, l.text), 'the file id is what the game asks for');
-    const achilles = skipped.find(s => s.who === 'achilles');
-    assert.equal(achilles && achilles.why, 'understudy voice not cast yet');
+    // Achilles is cast now (tools/voices-cast.json), so his lines are collected, not skipped.
+    assert.ok(!skipped.some(s => s.who === 'achilles' && s.why === 'understudy voice not cast yet'));
     assert.ok(!lines.some(l => l.who === 'avatar'));
 });
 
