@@ -46,7 +46,7 @@
             perksUsed: {},         // perk id -> chapter it was used in
             tutorialsSeen: {},     // puzzle type -> tutorial offered (also filled for old saves)
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0 },
-            settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1, calm: false },
+            settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1, calm: false, charactersCanDie: true },
         };
     }
 
