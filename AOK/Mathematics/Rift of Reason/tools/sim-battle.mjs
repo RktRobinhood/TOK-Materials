@@ -50,7 +50,7 @@ const OVERRIDES = {};
 });
 
 const Rift = loadRift([
-    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js',
+    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js', 'data/avatars.js', 'data/powers.js',
     'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/fate.js', 'js/battle/lesson.js', 'data/decks.js',
 ]);
 const { Engine, AI, Fate, Lesson } = Rift.Battle;

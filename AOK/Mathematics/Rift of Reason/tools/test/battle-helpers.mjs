@@ -8,7 +8,7 @@
 import { loadRift } from './harness.mjs';
 
 export const Rift = loadRift([
-    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js',
+    'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js', 'data/avatars.js', 'data/powers.js',
     'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js',
 ]);
 export const E = Rift.Battle.Engine;
