@@ -1,117 +1,117 @@
 # Rift of Reason — Understudies
 
-Status: **draft for the teacher** (8 October 2026), all five sections written. Nothing in the game uses this yet. Sample lines use today's scripts and are rewritten with STORY.md's new scripts.
+Status: **round 2** (8 October 2026), aligned to STORY.md round 2 (commit 2c05ad5). **STORY.md Appendix D is binding and wins every conflict.** This file supplies the people, looks, voices and art for the understudies, and the system detail behind Appendix D. Nothing in the game uses it yet. Sample lines use today's scripts or STORY.md's own lines; writers redo them with the new scripts.
 
-**The teacher's direction (8 Oct):** story perils can kill NPCs. Every NPC gets an **understudy**: a different character, with their own personality, look, voice and lines, who steps into the same story role so the plot continues. *Same story, different person.* Core NPCs who appear across lessons get at most one moment where death is possible; after it, every beat must work with either actor. Unimportant NPCs may instead have their station **go dark** (visitable, empty, no sprite). If an understudy also dies, the station goes dark. Tone: real loss with weight, still cute-and-dark and absurd; Undertale is the touchstone; never gratuitous.
+> **The off-stage rule.** Understudies stay off stage. None appears, speaks, is named or is set up anywhere, in any script, rumour, tooltip or art, unless their original's role has been vacated in that playthrough (STORY.md Appendix D). Every understudy line in this file sits behind `dead:<npc>` **and** that role's `arrived:<role>`. Even an understudy's history (Kuku's clock in Granny's sack, Achilles' Hum Charm) is mentioned only after the death.
 
-**Consistent with `design/STORY.md`** (§1, §2 and §5 as they stood on 8 Oct). STORY.md decides **where** someone can die and **who is understudied or dark**; this file supplies the people, voices, art and system.
-- Death-risk moments (one each, only at the worst tier of a lethal stakes clock): **Professor Sequins** (Ch1, Gate of Guards: the cage falls into the rift), **Granny Axiom** (Ch2, Town Hall: the pot), **the Sundial** (Ch3, Tribunal: the sentence is carried out), **Sergeant Syllo** (side story 7, Syllo's Recruitment Drive), **Mayor Plumage** (side story 6, The Dangling Mayor). Pip, Madame Mirage, Judge Hoot, Prosecutor Fin and the Oracle Machine are never in lethal danger in the outline. The avatar never dies.
-- No undo (STORY rule 5 and world rule 11). Recaps on a time-rift jump-in assume the default flags (everyone alive).
-- The Sundial rides in your shadow; Granny is a voice in the **Hum Charm** after the Fair; **Miss Quill is the Arch-Imp** (unmasked, not killed); the Mayor is a red herring; the Algorithm is **Sequins' Guess-o-Matic**, grown loud; Judge Hoot is **he**.
-- STORY.md's flag for the Sundial is `dead:sundial`, while its speaker id (and every voice file) is `narrator`. Section 3 handles that with an actor alias.
-- STORY.md's per-chapter host tables move some hosts (Granny no longer hosts stations after the Fair). Station counts below are today's (`data/map.js`); the policies do not depend on them.
+**The teacher's direction (8 Oct):** story perils can kill NPCs. A killed NPC's role passes to an **understudy**: a different character, with their own personality, look, voice and lines, who carries the same story role so the plot continues. *Same story, different person.* Core NPCs get at most one moment where death is possible; after it, every beat must work with either actor. Minor NPCs go dark instead. Tone: real loss with weight; grief first and plainly; warmth returns later, from the living; never gratuitous. Undertale is the touchstone.
 
-Ids: a **role** id is today's speaker id (`granny`, `sequins`, `narrator`…), so every existing script keeps working. An **actor** id is a person (`granny` is both the role and its first actor; `achilles` is her understudy).
+**Binding facts from STORY.md (round 2):**
+- **Four lethal moments, one each, only at an armed tier 4:** Professor Sequins (Ch1 Gate), Granny Axiom (Ch2 Town Hall), the Sundial (Ch3 Tribunal; impossible with `bargain`), Pip (Ch4 Sorting Room, possessed). **Side stories cannot kill anyone.** Nobody else is ever in lethal danger. The avatar never dies.
+- **Required meetings:** each role lists the beats (`met`) a player must have seen before its death can be armed. A **disarmed tier 4 is stored as tier 3.**
+- **The lock:** when a peril resolves, at any tier, `risked:<npc>` is set; no other beat, and no possession, can kill that NPC afterwards.
+- **After a death:** silence (lines skipped, host slots fall back to a named stand-in) → the puzzle continues → the **Quiet Scene** opens the next chapter → the understudy **arrives later**, at a named beat → a candle at the Fair in the finale. **No understudy appears the moment `dead:` is set.**
+- **The switch:** "Characters can die" (on by default, with a one-line content note before the Prologue). Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path.
+- **Kuku** has one origin: Granny's hallway cuckoo clock, taken in the same sack as Granny in Ch1 and filed in the Tower's Evidence Locker; mentioned only if `dead:sundial`.
+- **Three Hum Charms**, made by Granny: yours, hers (given to you, silent, by the Constable if she dies), and **Coach Achilles'** ("for emergencies"), mentioned only if `dead:granny`.
+- Miss Quill is the Arch-Imp, `away:schoolteacher` after the Hall in every playthrough, Juror One in Ch3, a small silent figure at the core. **Mr Gumleaf** takes her class in every playthrough (an ordinary character, not an understudy). **Nudge** is the Algorithm's recurring imp. Judge Hoot is **he**.
+
+Ids: a **role** id is today's speaker id (`granny`, `sequins`, `narrator`…); STORY.md writes it `role:granny`. An **actor** id is a person (`granny` is both the role and its first actor; `achilles` is her understudy). The Sundial's flag is `dead:sundial` while its speaker id and voice files stay `narrator`.
 
 ## 1. Roster and policy
 
-### Policies (from STORY.md §5)
+### Policies (STORY.md Appendix D)
 
 | Policy | Meaning | Count |
 |---|---|---|
-| **Understudied** | The role carries plot across chapters, or a boss or puzzle needs it. Has an understudy. The understudy is **protected**: it has no death-risk moment of its own, so the role can never go dark. | 9 |
-| **Dark if lost** | One station, no later plot. No understudy. If lost, the station stays visitable and counts as completed for fog and paths; it shows no sprite and plays no voice, just a small sign of them left behind. Puzzles and rest still work; a trainer challenge disappears. | 11 |
-| **Cannot die** | The villain, and the villain's twist. | 2 |
+| **Understudied, lethal** | Has one death-risk moment, a `met` list, named fallbacks while the role is silent, and an understudy who arrives at a named beat. | 4 |
+| **Understudied, never in danger** | The role carries plot, but nothing in the outline can kill them. The understudy is designed so a future peril could be added; **nothing is built** until then. | 5 |
+| **Dark if lost** | One station, no later plot, never in danger in the outline. If ever lost: station visitable and empty, counts as completed for fog and paths, no sprite, no voice. Future-proofing only. | 12 |
+| **Cannot die** | The villain, its imp, and the Arch-Imp. | 3 |
 
-This file also holds three extras: **reserve understudies** for five dark-if-lost roles (designed, not budgeted; for if the teacher would rather no station ever goes dark), **Mr Gumleaf**, a *substitute* (not an understudy) who takes the Schoolhouse after Miss Quill is unmasked, using the same machinery, and **Pebble**, a proposal for the planned vendor, who is not in STORY.md yet.
+The avatar never dies. Caricature creatures follow the Fate table as creatures; possessed caricatures are freed, never killed. **Possession** (STORY.md App. A.6, D): the Algorithm can only possess an NPC with no `risked:` lock and no active understudy; possessing someone you know uses up their one moment (in the outline: Pip only). **Rule for new NPCs:** anyone added later gets a row here, with a policy, before their first line is voiced.
 
-Caricature creatures follow the Fate table as creatures; as speakers they are "dark if lost" (Muskrat Rocket is listed because he speaks at a station). Legendaries are left out. **Rule for new NPCs:** anyone added later (STORY.md, SIDE-STORIES.md, the vendor, the café owner) gets a row here with a policy before their first line is voiced.
+### The four lethal roles
 
-**The one-moment rule.** Each role has at most one peril scene where death is possible (`peril` in the data). Anywhere else, the stakes clock's worst tier is the research's "fail forward" (absurd, costly, never fatal).
-
-**No death without a meeting** (recommended; for the STORY.md author to confirm). A lethal tier is only armed if the player has already seen every earlier story scene featuring that role; otherwise tier 4 is non-fatal (the person is carried off and found in the next chapter's scene that always succeeds). This fits STORY rule 5 (jump-in recaps assume everyone alive), keeps the loss meaningful (you can't grieve a stranger), and means understudy lines are only needed for scenes *after* the peril, not for the whole game. No death is ever undone; some deaths just cannot happen yet.
+| Role | Peril | Required meetings (`met`) | While silent (fallbacks, STORY.md App. D) | Quiet Scene | Understudy arrives |
+|---|---|---|---|---|---|
+| **Professor Sequins** (`sequins`) | Ch1 Gate of Guards, tier 4 (falls into the crack) | `prologue.fair`, `prologue.rift`, `ch1.well` | Gate → the Sundial. Pattern Stall → no host, a black ribbon on the curtain, puzzle still works. | Ch2 Stone Circle | **Tally**, at the first Pattern Stall visit after the Quiet Scene; otherwise at the finale shelf |
+| **Granny Axiom** (`granny`) | Ch2 Town Hall, tier 4 (the pot) | `prologue.wake`, `prologue.fair`, `prologue.door`, `ch1.well` | Hall → the Constable. Her hums stop. Her card lesson stays hers (§3.6). | Ch3 Rift Landing | **Coach Achilles**, on his own charm, at the first Ch3 hum after the Quiet Scene (the Plaza) |
+| **The Sundial** (`narrator`, flag `dead:sundial`) | Ch3 Tribunal, tier 4 (the sentence; impossible with `bargain`) | `prologue.wake`, `prologue.door`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe` | Pip speaks the arrivals until Kuku; Tower Road → Pip. | Ch4 Tower Door, delivered by Pip | **Kuku**, out of Granny's hallway clock in the Evidence Locker, at the Ch4 Stairwell |
+| **Pip** (`pip`) | Ch4 Sorting Room, tier 4 (the possession) | `ch3.arrive`, `ch3.plaza`, `ch4.door` | His host slots → `role:narrator`, or empty until Kuku arrives. | at the next floor's door | **Mr Rubberstamp**: no arrival beat in STORY.md (no later beat needs the role). Built anyway: arming guard 6 needs his art and voice entry (§5) |
 
 ### Roster
 
-Lessons: where the role speaks or hosts today. "Peril" follows STORY.md §5.
+| Role (speaker id) | Role in the story | Lessons | Policy | Understudy | Species | Personality (contrast) | Relationship to the original | Arrival / stepping in |
+|---|---|---|---|---|---|---|---|---|
+| **The Sundial** (`narrator`) | Narrator in your shadow; companion beats; one question after each boss | 1–4, finale | Understudied, lethal | **Kuku** (`kuku`) | A carved wooden cuckoo from a hallway cuckoo clock | Proud, certain, brass-band, never guesses (the Sundial is warm, slow, and guesses honestly) | Three hundred years in Granny's hallway clock, rehearsing as the Sundial's understudy | "CUCKOO! Four seventeen and twelve seconds. Kuku. Understudy. Ready." / "Three hundred years of rehearsal. I never rehearsed this bit." |
+| **Granny Axiom** (`granny`) | Elder; card teacher; voice in the Hum Charm; hosts the finale | 1–4, finale | Understudied, lethal | **Coach Achilles** (`achilles`) | A tall, lean old racing hare in a tracksuit, whistle and stopwatch | Fast, loud, impatient, motivational (Granny is slow, dry, deadpan) | Her rival. Lost the Great Race to her seventy years ago (Zeno); she gave him the third charm "for emergencies" | "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
+| **Professor Sequins** (`sequins`) | Fair: the pattern stall; maker of the Guess-o-Matic | 1, 4, finale | Understudied, lethal | **Tally** (`tally`) | A tiny dormouse stagehand in overalls with a clipboard and a too-big headset | Shy, quiet, precise, stage fright (Sequins is a booming showman) | His stagehand for twenty years; set up every trick | From behind the curtain: "He did the shouting. I did the counting." Runs the stall with his collection; does the shelf in the finale |
+| **Pip, the Clerk** (`pip`) | Tomorrowton guide; Tribunal clerk; climbs the tower with you | 3, 4 | Understudied, lethal | **Mr Rubberstamp** (`rubberstamp`) | An old toad clerk: sleeve garters, green eyeshade, a huge rubber stamp | Grumpy, by-the-book, secretly soft (Pip is tiny and eager) | Pip's retired boss, back from his pond | No arrival in the outline. Proposal for STORY.md (post-game only): he reopens the Ch3 stations. "Pip sent me a postcard every week. …Right. Who needs a form?" |
+| **Madame Mirage** (`mirage`) | Fair: the witness tent; side stories | 1, side stories | Understudied, never in danger | **Mr Ledger** (`ledger`) | An armadillo insurance assessor: grey suit, bowler hat, very thick glasses | Flat, literal, sceptical (Mirage is breathy and theatrical) | The Fair's assessor, who called her act "uninsurable nonsense" and saw every show | "I always said her act was nonsense. It was. Wonderful nonsense." |
+| **Sergeant Syllo** (`syllo`) | Fair: the syllogism gallery; first card challenger; side story 7 (missing, never dead) | 1, side stories | Understudied, never in danger | **Private Dawdle** (`dawdle`) | A sloth recruit: helmet over the eyes, one "Participation" medal | Gentle, slow, kind (Syllo barks) | Syllo's only recruit for thirty years | "He said I'd make sergeant one day. I hoped it would take… longer." |
+| **Judge Hoot** (`judge`) | Tribunal judge (Ch3 boss) | 3 | Understudied, never in danger | **Justice Tuskworth** (`tuskworth`) | A huge walrus judge: tiny wig, chain of office, soggy handkerchief | Weeps at every testimony, rules strictly on evidence (Hoot is dry) | Hoot's deputy for forty years | "He'd want me to rule on evidence. So I will. Order!" |
+| **Prosecutor Fin** (`fin`) | The misjudged villain who turns ally (Ch3) | 3 | Understudied, never in danger | **Prosecutor Puff** (`puff`) | A pufferfish in a tiny tie, puffs up when nervous | Anxious, apologetic, honest (Fin is smug) | Fin's junior, who did his paperwork | "Mr Fin never lost a case he wanted to win. I've lost several. Fairly." |
+| **Constable Clobber** (`constable`) | Both interrogations; Hall fallback host; gives you Granny's charm | 2 | Understudied, never in danger | **Cadet Twitch** (`twitch`) | A meerkat cadet on tiptoe: helmet too big, whistle, notebook | Hyper-alert, nervous (Clobber is slow and gruff) | Clobber's cadet | "Keep your story straight, he said. My story is: I'm in charge now." |
+| **Mr Gumleaf** (`gumleaf`) | Schoolhouse after the Hall, **every playthrough** (Quill is `away:`) | 2+ | Dark if lost (ordinary character) | — | A koala supply teacher in a cardigan and sandals | Dreamy, laid-back (Quill: "no maybes") | The supply teacher she always warned the pupils about | Not an understudy: he appears for everyone after the Hall. "Miss Quill would have been furious. I think it's great." |
+| **Corvina** (`corvina`) · **Muskrat Rocket** (`muskrat`) · **Old Wick** (`lamplighter`) · **Mrs Crumb** (`baker`) · **Miss Whisker** (`postmistress`) · **Mr Tock** (`clockmaker`) · **Smudge** (`sweep`) · **Mr Thistle** (`gardener`, silent) · **Mayor Plumage** (`mayor`) · **the Oracle Machine** (`oracle`) · **the café owner** | One station each | 1–4 | Dark if lost (never in danger) | — | | | | If ever lost, a small sign at the station: Corvina's face-down hand, the half-built rocket, a broom on the stair… Five **reserve** understudy designs (Sparky, Brumble, Homer, Rattle, Mark Zero) are kept in §2 in case the teacher ever wants these stations never to go dark; nothing is planned for them. |
+| **The Algorithm** (`algorithm`, `colossus`, `core`) | Villain; the Guess-o-Matic grown loud | 1–4 | Cannot die | — | | | | At the core *you* decide its fate (switch off, take home, label and leave): a choice about a machine, not a death |
+| **Nudge** (`nudge`, new) | The Algorithm's recurring imp: nets the shadow, works the winches, builds the Copy; follows you home | 1–4 | Cannot die | — | | | | **Why:** Nudge's arc is losing things (sack, mask, followers, job) until it asks its first question; it is a villain's helper, and its death would read as a reward. STORY.md lists it as not killable. |
+| **Miss Quill** (`schoolteacher`) | The Arch-Imp (Ch2), Juror One (Ch3), the core's last believer (Ch4) | 2–4 | Cannot die | — | | | | Unmasked, never killed; `away:schoolteacher` after the Hall hands the Schoolhouse to Gumleaf |
+| **Hagglesworth, the vendor** (`vendor`, planned; not in STORY.md) | Shop and Rift Run | planned | Proposal: understudied, never in danger | **Pebble** (`pebble`) | A tiny young hermit crab in the too-big shop shell | Terrible at haggling (he is crafty) | A customer who admired the shell | Only if the vendor is ever put in danger; a dark shop would close the shop |
 
-| Role (speaker id) | Role in the story | Lessons | Policy | Peril | Understudy | Species | Personality (contrast) | Relationship to the original | Stepping in |
-|---|---|---|---|---|---|---|---|---|---|
-| **The Sundial** (`narrator`, flag `sundial`) | Narrator in your shadow; one question after each boss; time-rift recaps | 1–4, finale | Understudied | **Ch3 Tribunal** (the sentence) | **Kuku** (`kuku`) | A carved wooden cuckoo on a spring, in a pocket-sized cuckoo clock you carry | Jittery, punctual to the second, over-rehearsed, fast (the Sundial is slow, warm, guessing) | The Sundial's understudy for three hundred years, living in Granny's hallway clock and rehearsing every line, just in case | Arrives at the Ch4 Stairwell, after its last words play: thrilled, then horrified at being thrilled, then does the job properly. Never guesses. In the finale: "Ten past eleven. Exactly. It would have liked that." |
-| **Granny Axiom** (`granny`) | Elder, call to action; card teacher; the voice in the Hum Charm | 1–4, finale | Understudied | **Ch2 Town Hall** (the pot) | **Coach Achilles** (`achilles`) | A tall, lean old racing hare in a tracksuit, whistle and stopwatch | Fast, loud, impatient, motivational (Granny is slow, dry, deadpan) | Her lifelong rival. Lost the Great Race to her seventy years ago and has been "catching up" ever since (Zeno) | Found her other Hum Charm in her cottage and hums to you from Ch3 on, badly: "She said if anything happened, I'm to be nosy for her." Gives her character reference at the Ch3 trial; asks her question at the finale |
-| **Professor Sequins** (`sequins`) | Fair: the pattern stall; maker of the Guess-o-Matic | 1, 4, finale | Understudied | **Ch1 Gate of Guards** (the cage) | **Tally** (`tally`) | A tiny dormouse stagehand in overalls with a clipboard and a too-big headset | Shy, quiet, precise, stage fright (Sequins is a booming showman) | His stagehand for twenty years. Set up every trick, oiled the Guess-o-Matic every Tuesday | Hides behind the curtain. Then: "He did the shouting. I did the counting." Runs the stall with his collection; in Ch4 she knows the Guess-o-Matic first, and puts it on the shelf at the finale |
-| **Sergeant Syllo** (`syllo`) | Fair: the syllogism gallery; first card challenger | 1, side stories | Understudied | **Side story 7** (Recruitment Drive) | **Private Dawdle** (`dawdle`) | A sloth recruit: helmet over the eyes, one "Participation" medal, cork rifle used as a walking stick | Gentle, slow, unhurried, kind (Syllo barks) | Syllo's only recruit for thirty years; never promoted because he never reached the end of the drill | "He said I'd make sergeant one day. I hoped it would take… longer." Keeps the Gallery and the practice challenge |
-| **Madame Mirage** (`mirage`) | Fair: the witness tent; speaks at Sequins' memorial | 1, side stories | Understudied | none (never in lethal danger) | **Mr Ledger** (`ledger`) | An armadillo insurance assessor: grey suit, bowler hat, very thick glasses | Flat, literal, sceptical, no drama (Mirage is breathy and theatrical) | The Fair's assessor, who called her act "uninsurable nonsense" and secretly saw every show | "I always said her act was nonsense. It was. Wonderful nonsense." Can barely see, so he is very strict about what you claim you saw |
-| **Pip, the Clerk** (`pip`) | Tomorrowton guide; Tribunal clerk; stamps the Sundial's appeal; card challenger | 3, 4 | Understudied | none | **Mr Rubberstamp** (`rubberstamp`) | An old toad clerk: sleeve garters, green eyeshade, a huge rubber stamp | Grumpy, by-the-book, secretly soft (Pip is tiny and eager) | Pip's retired boss, who came back from his pond | "I retired. Pip sent me a postcard every week. …Right. Who needs a form?" |
-| **Judge Hoot** (`judge`) | Tribunal judge (Ch3 boss); judges the Sundial | 3 | Understudied | none | **Justice Tuskworth** (`tuskworth`) | A huge walrus judge: tiny wig on a big head, chain of office, a soggy handkerchief | Weeps at every testimony, yet rules strictly on evidence (Hoot is dry and stern) | Hoot's deputy, who sat in the second chair for forty years | Sobbing: "He'd want me to rule on evidence. So I will. Order!" (a TOK joke in itself: emotion felt, reason applied) |
-| **Prosecutor Fin** (`fin`) | Rival prosecutor; card challenger; the tribunal puzzle needs him | 3 | Understudied | none | **Prosecutor Puff** (`puff`) | A pufferfish in a tiny tie, who puffs into a spiky ball when nervous | Anxious, apologetic, honest (Fin is smug) | Fin's junior, who did all his paperwork | "Mr Fin never lost a case. I've lost several. I'll try to lose fairly." |
-| **Constable Clobber** (`constable`) | Hosts both interrogations (Post Office, Clock Tower); the tower puzzle's questioner; card challenger | 2 | Understudied | none in the outline | **Cadet Twitch** (`twitch`) | A meerkat cadet on tiptoe: helmet too big, whistle, notebook | Hyper-alert, nervous, unsure of the rulebook (Clobber is slow and gruff) | Clobber's cadet | "Keep your story straight, he said. My story is: I'm in charge now. That's terrifying." |
-| **Mayor Plumage** (`mayor`) | Red herring suspect (bread thief) | 2 | Dark if lost | **Side story 6** (The Dangling Mayor) | none | | | | His three Hall lines are skipped (marked optional); a statue in the Square fountain, "mostly of his hat" |
-| **Corvina the Card Sharp** (`corvina`) | Card table on the Road (trainer) | 1 | Dark if lost | none | none | | | | Her table: a hand of cards face down, one face up for you (her reward tactic, §4) |
-| **Muskrat Rocket** (`muskrat`, a caricature) | The Troll Bridge | 1 | Dark if lost | none | none | | | | A half-built rocket under the bridge, "MARS: NEXT YEAR" on a sign |
-| **Old Wick, the Lamplighter** (`lamplighter`) | Lever Bridge, Lamp Lane | 2 | Dark if lost | none | *reserve:* **Sparky** (`sparky`) | A young firefly apprentice with a cap and a ladder three times her size; her tail is the lamp | Over-eager, thinks lamps are old-fashioned (Wick is creaky and slow) | Wick's apprentice | "He said a light is only good if it shows you something true. I *am* a light. So." |
-| **Mrs Crumb, the Baker** (`baker`) | Bakery; card challenger | 2 | Dark if lost | none | *reserve:* **Brumble** (`brumble`) | A big shy bear in a floury vest and hairnet, with a huge rolling pin | Few words, deep and calm (Mrs Crumb is flustered and chatty) | Her night baker, who never meets customers | "She did the talking. I did the bread. …I'll learn the talking." |
-| **Miss Whisker, Postmistress** (`postmistress`) | Post Office; lends you the cap for your cover story | 2 | Dark if lost | none | *reserve:* **Homer** (`homer`) | A stately old carrier pigeon in a postman's cape and peaked cap | Dignified, terse, refuses to gossip (Miss Whisker gossips) | Her delivery pigeon for twenty years | "She read every postcard. I never did. I'm reading hers now. All of them." |
-| **Mr Tock, the Clockmaker** (`clockmaker`) | Workshop, Town Hall Stairs | 2 | Dark if lost | none | *reserve:* **Rattle** (`rattle`) | A raccoon tinkerer in goggles, overalls bulging with springs | Chaotic, never measures, trial and error (Tock is fussy and exact) | His rival across the lane; he called her clocks "approximately" | "Every clock in his shop stopped at the same minute. Even the ones I broke. That's… respect." |
-| **Smudge the Sweep** (`sweep`) | Pupil; Clock Tower | 2 | Dark if lost | none | none | | | | The Clock Tower stair: a broom leaning on the wall |
-| **Mr Thistle, the Gardener** (`gardener`) | Walled Garden (rest) | 2 | Dark if lost | none | none | | | | The garden overgrows, but still heals: "It grows by itself now." |
-| **The Oracle Machine** (`oracle`) | Ch4 host; machine-made proofs | 4 | Dark if lost | none | *reserve:* **Mark Zero** (`markzero`) | A stout wooden-and-brass beetle automaton with an abacus on its back and one candle-lamp eye | Slow, shows every step, admits doubt (the Oracle is fast and certain) | The Oracle's prototype, retired to the basement for being slow | "They replaced me because I was slow. Slow is how you check." |
-| **The café owner** (new in STORY.md, Ch3) | The Café (rest) | 3 | Dark if lost | none | none | | | | Chairs up on the tables; the cocoa machine still works |
-| **The Algorithm** (`algorithm`, `colossus`, `core`) | Villain; the Guess-o-Matic grown loud | 1–4 | Cannot die | — | — | | | | The finale shrinks it; it is never killed. It feeds on losses (§4) |
-| **Miss Quill** (`schoolteacher`) | The Arch-Imp (Ch2 twist) | 2 | Cannot die | — | **Mr Gumleaf** (`gumleaf`), *substitute* | A koala supply teacher in a cardigan and sandals, mug of tea | Dreamy, laid-back, "no wrong answers" (Quill: "no maybes") | The substitute she always warned the pupils about | After her unmasking she is *away*, not dead. Gumleaf takes the Schoolhouse with the same machinery (§3, `away:`) |
-| **Hagglesworth, the vendor** (`vendor`, planned; not in STORY.md yet) | Shop and Rift Run (ART-REQUESTS 11.6) | planned | *proposal:* understudied | none | **Pebble** (`pebble`) | A very small young hermit crab who moves into the too-big shop shell (hermit crabs pass shells on) | Terrible at haggling, gives discounts, earnest (Hagglesworth is crafty) | A customer who always admired the shell | "It's a very big shell. I'll grow into it." A dark shop would close the shop, so the vendor should not be dark if lost |
+**Why Kuku is the strangest understudy.** STORY.md's theme is the Sundial's line "On cloudy days I guess": it guesses and says so; the Algorithm guesses and calls it knowing. Kuku is a clock that is proud never to guess, arriving for the chapter about a machine that pretends certainty. At the end he must ask the Sundial's last question and admit he is still practising.
 
-**Why the Sundial is understudied, not exempt.** STORY.md puts it on trial in Ch3, so its loss is the game's biggest. Kuku is the strangest understudy on purpose: a clock that is *never* uncertain replaces a clock that honestly guesses. Ch4 is about a machine that guesses and calls it knowing; with Kuku narrating, the player hears the difference in every line ("It is 4:17 and twelve seconds. I am certain. …Of the time. Only the time.").
-
-**Totals:** 22 roles in STORY.md's lists (9 understudied, 11 dark if lost, 2 cannot die). Designed here: 9 understudies (stage 1–2 work), 5 reserve understudies (no work planned), 1 substitute (Gumleaf), 1 vendor proposal (Pebble).
+**Totals:** 24 roles (4 lethal, 5 understudied but never in danger, 12 dark if lost, 3 cannot die), plus the planned vendor. Built in the plan: **4 understudies** (Tally, Achilles, Kuku, Rubberstamp) and **Gumleaf** (ordinary). Designed only: 5 never-in-danger understudies, 5 reserves, Pebble.
 
 ## 2. Understudy cards
 
 How to read a card:
 - **Look** is written so it can be pasted into an ART-REQUESTS prompt (the shared rules and style board still go in front). Each understudy has a silhouette that cannot be mistaken for the original's at bust size (ART-BIBLE "told apart at a glance"), and the same **pose set** as the original, because scripts ask for expressions by name (`e: 'happy'`) and puzzles ask for poses by name (village, tower, tribunal, oracle).
 - **Voice.** All 30 Gemini voices are taken (`tools/voices-cast.json`). Each understudy reuses a voice that **never speaks in the same chapter** as the understudy, preferring voices used only by caricatures (three short catch lines each). The acting direction is deliberately far from the voice's other user, and most get a small post-effect in `tools/voices-fx.mjs`. Pitch effects stay between 0.9 and 1.07: the players are non-native listeners and clarity beats character.
-- **Lines** use today's scripts, because STORY.md's new scripts are not written yet. They show the method: the same story beat, the same facts, in the understudy's own words. Writers redo them when the new scripts land.
+- **Lines** use STORY.md's own understudy lines where it has them, otherwise today's scripts. They show the method: the same story beat, the same facts, in the understudy's own words. Writers redo them with the new scripts.
+- **Stage** says whether a card is built (stage 1) or only designed. Never-in-danger and reserve cards are kept so a future peril, if the teacher adds one, can be built quickly; until then nothing about them may appear in the game (the off-stage rule).
 
-### Kuku (for the Sundial)
+### Kuku (for the Sundial) — stage 1
 
-- **Look:** a small carved wooden cuckoo, painted in chipped red and cream with a blue beak stripe, on a coiled brass spring that pops out of a pocket-sized chalet cuckoo clock (carved pine eaves, tiny shutters, two pine-cone weights on chains, a little pendulum). Bright black bead eyes, a slightly startled look. Palette: warm wood, brass, cream, one red accent, against the rift cyan when it pops out. Silhouette: a small upright bird on a spring in a peaked house; the Sundial is a round flat stone dial on a pedestal.
-- **Pose set (as the Sundial):** full-body idle (popped out, spring extended), busts neutral, happy (mid-"cuckoo", beak open), surprised (spring fully stretched, feathers up), angry (doors half shut, glaring out).
-- **Voice:** Gemini **Aoede** (otherwise only Swiftlet and Shakirattle). Direction: *"Kuku, a tiny wooden cuckoo from a clock. Quick, clipped and exact, like a train announcer who is a little too excited; every number said precisely; a nervous chirp of a laugh. Softens and slows only when sad."* FX `kuku`: a little "inside a wooden box" (high-pass 280 Hz, low-pass 6.5 kHz, tiny room), pitch 1.04. Stinger: one ElevenLabs cuckoo call SFX (§5).
-- **How it carries the role:** after the Tribunal there is silence until the Ch4 Stairwell, where the Sundial's last words play once from the jar (STORY.md §5). Kuku pops out right after: it narrates from a clock you carry, not your shadow, in the same four places the Sundial spoke. It never guesses. STORY.md's last line ("the Sundial, or its understudy, closes with a question") becomes Kuku's first ever question, which it finds very hard.
+- **Look:** a carved wooden cuckoo, painted in chipped red and cream with a blue beak stripe and a tiny brass-band cap, on a coiled brass spring that pops out of **Granny's hallway cuckoo clock**: a tall carved chalet clock (pine eaves, little shutters, two pine-cone weights on chains, a pendulum), dusty from the sack and with an Evidence Locker tag on a string. Bright black bead eyes, chest puffed out. Palette: warm wood, brass, cream, one red accent. Silhouette: a small proud bird bursting out of a peaked house; the Sundial is a round flat stone dial on a pedestal.
+- **Pose set (as the Sundial):** full-body idle (popped out of the clock, spring extended), busts neutral, happy (mid-"CUCKOO", beak wide), surprised (spring fully stretched), angry (doors half shut, glaring out). How Kuku travels with you after the Stairwell (on your shoulder, out of the clock) is for the Ch4 script; the busts work either way.
+- **Voice:** Gemini **Aoede** (otherwise only Swiftlet and Shakirattle, three catch lines each). Direction: *"Kuku, a wooden cuckoo from a clock. Proud, certain and brassy, like a little brass band announcing the hour; every number exact; never hesitates. Only the rare sad line is quiet."* FX `kuku`: a little "inside a wooden clock" (high-pass 280 Hz, low-pass 6.5 kHz, tiny room), pitch 1.04. Stinger: one cuckoo-call SFX (§5).
+- **How he carries the role (STORY.md):** silence after the Tribunal, Pip delivers the Quiet Scene at the Tower Door and speaks the arrivals; at the Stairwell Pip opens the empty jar, the clock ticks on the next shelf, and Kuku pops out and asks the Ch3 question. From then on he speaks in the narrator's places. In the finale he lays the shadow on the silent stone and asks the last question, "…I'm practising."
 
 | Beat | The Sundial | Kuku |
 |---|---|---|
-| Campfire rest | "The campfire crackles. Rest restores your health. To heal a creature injury, use Mending in your Bag." | "Campfire. Rest is scheduled for now. Health restores. Injured creatures: Mending, in your Bag." |
-| Return home (finale) | "Tick. Tock. Ah. You are back, {name}. And the sky is in one piece again." | "Cuckoo! Cuckoo! Sorry. Reflex. You are back, {name}. The sky is in one piece." |
-| The last word | "Here is the secret: mathematics was never a pile of formulas. It is a way of asking good questions and checking the answers." | "The Sundial left me one line. I have practised it four thousand times. Here: mathematics is asking good questions. And checking." |
+| Arrival (STORY.md) | — (silent since the Tribunal) | "CUCKOO! Four seventeen and twelve seconds. Kuku. Understudy. Ready." / "Three hundred years of rehearsal. I never rehearsed this bit." |
+| The shadow (finale) | "Tick. Tock." (alive) | "Ten past eleven. Exactly. It would have liked that." |
+| The last question (finale) | "It guessed and called it knowing. I guess and say so. Which one are you?" … "Good. Say it like that." | "It guessed and called it knowing. The Sundial guessed and said so. Which one are you?" … "Good. Say it like that. …I'm practising." |
 
-### Coach Achilles (for Granny Axiom)
+### Coach Achilles (for Granny Axiom) — stage 1
 
-- **Look:** a tall, lean, very old brown hare with a grey muzzle, one long ear bent at the tip, a faded green-and-white tracksuit with a race number patch (blank, no digits), a sweatband, a whistle and a big brass stopwatch on a cord. Bandy legs in old running shoes. Palette: faded green, cream, brass. Silhouette: tall and vertical with long ears; Granny is tiny, round and low with a shell and shawl.
-- **Pose set (as Granny):** full-body idle (jogging on the spot is NOT allowed: standing, stopwatch raised), busts neutral, happy, surprised, angry. Granny's scripts also use `worried`, which her own sheet lacks; if a `worried` bust is added for Granny, add one for Achilles in the same session.
-- **Voice:** Gemini **Fenrir** (otherwise only Mr. Beastie and Eminemu). Direction: *"Coach Achilles, a very old racing hare. Fast, clipped, a little out of breath, gruff coaching energy; slows right down, quietly, whenever he talks about her."* FX `achilles`: pitch 0.96 (older). Stinger: one whistle SFX.
-- **How he carries the role:** he found Granny's other **Hum Charm** in her cottage and hums to you from Ch3 on (badly). At the Ch3 trial he gives the character reference, quoting her; at the finale he asks her question, and her card table becomes his. Her card lesson stays hers (a memory, §3.6).
+- **Look:** a tall, lean, very old brown hare with a grey muzzle, one long ear bent at the tip, a faded green-and-white tracksuit with a blank race patch, a sweatband, a whistle, a big brass stopwatch on a cord, and **a third Hum Charm** on a bootlace round his neck (same design as Granny's). Bandy legs in old running shoes. Palette: faded green, cream, brass. Silhouette: tall and vertical with long ears; Granny is tiny, round and low with a shell and shawl.
+- **Pose set (as Granny):** full-body idle (standing, stopwatch raised; no jogging loop), busts neutral, happy, surprised, angry. Granny's scripts also use `worried`, which her own sheet lacks; if a `worried` bust is added for her, add one for Achilles in the same session.
+- **Voice:** Gemini **Fenrir** (otherwise only Mr. Beastie and Eminemu). Direction: *"Coach Achilles, a very old racing hare. Fast, clipped, a little out of breath, gruff coaching energy; slows right down, quietly, whenever he talks about her."* FX `achilles`: pitch 0.96 (older). His hums go through the same charm treatment as Granny's. Stinger: one whistle SFX.
+- **How he carries the role (STORY.md):** silence after the Hall; the Constable gives you Granny's charm and glasses, silent; the Quiet Scene at the Rift Landing. At the first Ch3 hum after it (the Plaza) **his** charm answers. He gives the character reference at the trial, refuses the berries in side story 10, and speaks `role:granny` through the finale (the Copy, the trophy, the `wonder` answers, the hair on the sky). Her card lesson stays hers (§3.6).
 
 | Beat | Granny Axiom | Coach Achilles |
 |---|---|---|
-| A station lead-in | "The Road is full of loud claims. Check the task below before you trust one." | "Road's full of loud claims. Don't sprint at the first one. Check the task. Then sprint." |
-| Home again (finale) | "There you are! The visitors are calm, the crack is gone, and someone has fixed the nut stall." | "You made it! Crack's gone. Nut stall's fixed. And you got here first. She'd have liked that." |
-| The send-off | "So. What will you wonder about next?" | "Right. What's next? Don't say 'rest'. She was the slowest person I knew. She never stopped." |
+| Arrival / first hum | (her hums stopped) | "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
+| Ch3 character reference | "Ninety years I've known that rock. It always said when it wasn't sure." | "She knew that rock ninety years. Said it always told you when it wasn't sure. I'd have checked. I'm faster." (Hoot: "Kind. Fast. Not evidence.") |
+| The hair on the sky (finale) | "There is a hair on the sky. I'll dust it later." | "She'd have said she'd dust it later. I'll do it now." |
 
-### Tally (for Professor Sequins)
+### Tally (for Professor Sequins) — stage 1
 
-- **Look:** a tiny round dormouse with a big fluffy tail, soft caramel fur, in grey canvas overalls with many pockets, a pencil behind one ear, a clipboard of blank number cards, and a stage headset far too big for her. Palette: caramel, grey, a small red curtain-rope accent (a nod to the stall). Silhouette: tiny, round, low; Sequins is a tall magpie in a top hat and tailcoat.
-- **Pose set (as Sequins):** idle, neutral, happy, surprised, angry (her "angry" is a cross little frown with the clipboard hugged tight).
+- **Look:** a tiny round dormouse with a big fluffy tail, soft caramel fur, in grey canvas overalls with many pockets, a pencil behind one ear, a clipboard of blank number cards, and a stage headset far too big for her. Palette: caramel, grey, a small red curtain-rope accent (the stall's curtain). Silhouette: tiny, round, low; Sequins is a tall magpie in a top hat and tailcoat.
+- **Pose set (as Sequins):** idle, neutral, happy, surprised, angry (a cross little frown with the clipboard hugged tight).
 - **Voice:** Gemini **Vindemiatrix** (otherwise only Gödelix and Billie Eelish). Direction: *"Tally, a shy dormouse stagehand with stage fright. Quiet, careful and precise, little pauses before numbers, growing braver as she goes."* No FX.
-- **How she carries the role:** she runs the pattern stall after Ch1, and in Ch4 she recognises the Guess-o-Matic before anyone ("I oiled it every Tuesday. It used to say 'probably'."). At the finale the little toy sits on *her* shelf.
+- **How she carries the role (STORY.md):** silence after the Gate (a black ribbon on the curtain, the stall still works); the Quiet Scene at the Ch2 Stone Circle. She arrives from behind the curtain at your first Pattern Stall visit after it, or, if you never go back, at the finale shelf, where she labels the young Guess-o-Matic **IT GUESSES**. In side story 1 she hands you his polishing note if she has arrived.
 
 | Beat | Professor Sequins | Tally |
 |---|---|---|
+| Arrival (STORY.md) | — | "He did the shouting. I did the counting." |
 | Stall lead-in | "My secret rule keeps the stall running. Test numbers, then tell me the rule." | "Um. There is a secret rule. Test some numbers. Then tell me the rule. …Please." |
-| The hint | "Test a rule by looking for a case that breaks it." | "Look for the case that breaks it. That's what I did backstage. Broke things. Quietly." |
-| The win | "Found it! Most people only test numbers they expect to fit. Clever ones try to break the rule." | "You found it. Most people only test numbers that fit. He used to shout that. I'll just… write it down." |
+| The shelf (finale) | "This one will always say 'probably'. I've labelled it." | "This one will always say 'probably'. I labelled it. Neatly. He'd have used glitter." |
 
-### Mr Ledger (for Madame Mirage)
+### Mr Ledger (for Madame Mirage) — designed only, never in danger
 
 - **Look:** a stout grey armadillo in a slightly too-small grey suit and bowler hat, enormous round glasses that make his eyes tiny, a clipboard and a fountain pen. Banded shell visible under the jacket. Palette: greys and parchment, one violet tie (the tent's colour). Silhouette: round, armoured, upright and stiff; Mirage is slinky, curled tail, flowing hooded cape.
 - **Pose set (as Mirage):** idle, neutral, happy (a tiny satisfied nod), surprised (glasses slipping), angry. Mirage's skin changes colour by mood; Ledger instead changes how far his glasses have slipped.
@@ -123,7 +123,7 @@ How to read a card:
 | Station lead-in | "The Fair needs a careful witness. Read the scene and judge each claim." | "This tent requires a careful witness. Read the scene. Judge each claim. I will be taking notes." |
 | The win | "Most visitors swear they saw things that never happened. You did not. Well, not much." | "Most visitors claim things that never happened. You did not. Within an acceptable margin." |
 
-### Private Dawdle (for Sergeant Syllo)
+### Private Dawdle (for Sergeant Syllo) — designed only, never in danger
 
 - **Look:** a shaggy brown three-toed sloth in a toy-soldier uniform two sizes too big, the plumed helmet sliding over his eyes, one round "Participation" medal, leaning on a cork rifle like a walking stick, long arms, a sleepy smile. Palette: the same red-and-blue toy uniform as Syllo but faded and patched (so the role reads), shaggy brown fur. Silhouette: long-armed, slumped, rounded; Syllo is stiff, chest-out, compact.
 - **Pose set (as Syllo):** idle, neutral, happy, surprised (one eye open under the helmet), angry (very mildly cross).
@@ -135,7 +135,7 @@ How to read a card:
 | Station lead-in | "Recruit! Help me check these arguments. Draw the facts before you judge the claim." | "Hello, recruit. No rush. Draw the facts first. Then judge the claim. Then perhaps a nap." |
 | The win | "Outstanding! An argument can be valid and still be nonsense. Lobsters do not, in fact, play the trumpet." | "Outstanding. Valid, and still nonsense. Lobsters do not play the trumpet. I asked one. Slowly." |
 
-### Mr Rubberstamp (for Pip)
+### Mr Rubberstamp (for Pip) — stage 1 (art and voice entry only)
 
 - **Look:** a squat, wide old toad with warty olive skin, a green eyeshade, sleeve garters on a crumpled white shirt, a waistcoat with a pocket watch, and a rubber stamp as big as his head; little ink splashes. Palette: olive, white, ink-black, one cyan glow on the stamp pad (Tomorrowton's neon). Silhouette: low, wide, heavy; Pip is a tiny bat with wings and headphones.
 - **Pose set (as Pip):** idle, neutral, happy (a reluctant smile), surprised, angry, thinking (stamp held to the chin).
@@ -149,7 +149,9 @@ How to read a card:
 
 (Pip's original says "her robes"; STORY.md makes Judge Hoot **he**, so the rewrite fixes it.)
 
-### Justice Tuskworth (for Judge Hoot)
+**Why he is built although he never arrives.** STORY.md: "Pip's role is not needed again, so his understudy never appears"; his slots fall back to `role:narrator`. But arming condition 6 (the production guard) needs the understudy's art and voice entry, so Pip's death cannot be armed without him. Stage 1 therefore builds his sheet and one audition line, nothing more. **Proposal for STORY.md** (not adopted): a post-game arrival, so revisited Tomorrowton stations get a host instead of the narrator. The lines above show how that would sound.
+
+### Justice Tuskworth (for Judge Hoot) — designed only, never in danger
 
 - **Look:** an enormous, round walrus with long ivory tusks, a tiny powdered wig perched on a huge head, black robes with the court's cyan trim, a gold chain of office, and a large soggy handkerchief. Palette: warm brown, black, cyan trim, gold. Silhouette: huge and round; Hoot is a narrow upright owl.
 - **Pose set (as the Judge):** idle, neutral, happy (beaming through tears), surprised, angry, gavel (gavel raised, cyan sparks, as Hoot's).
@@ -161,7 +163,7 @@ How to read a card:
 | Shutting down popularity | "None of which is evidence, Mr Fin. Proceed." | "Oh, that's beautiful. None of it is evidence. Proceed." |
 | The verdict | "The Tribunal finds every argument unsound. Not the witnesses. The arguments." | "The arguments fail. *honk* Sorry. The witnesses keep their dignity. The arguments do not." |
 
-### Prosecutor Puff (for Prosecutor Fin)
+### Prosecutor Puff (for Prosecutor Fin) — designed only, never in danger
 
 - **Look:** a small round pufferfish in a pinstriped waistcoat and a tiny violet tie (Fin's colours, so the role reads), big worried eyes; when nervous he puffs into a round ball of soft spines. Palette: sandy yellow with brown spots, violet tie, pinstripe grey. Silhouette: a ball (or a spiky ball); Fin is a long sleek shark with a fin quiff.
 - **Pose set (as Fin):** idle, neutral, happy, surprised, angry, smug (a very small, unconvincing smug), shaken (fully puffed, sweat drop).
@@ -197,7 +199,7 @@ How to read a card:
 | Station lead-in | "My last loaf is missing! Check the villagers before you point a finger." | "Loaf's missing. Check everyone. Then point. Not before." |
 | The win | "Well I never. And I would have blamed the one who looked nervous." | "Huh. I'd have blamed the nervous one. I always look nervous." |
 
-### Cadet Twitch (for Constable Clobber)
+### Cadet Twitch (for Constable Clobber) — designed only, never in danger
 
 - **Look:** a skinny sandy meerkat standing on tiptoe, a custodian helmet far too big for him, a whistle on a chain, a notebook and pencil, dark eye patches making him look permanently alarmed. Palette: sand, navy uniform, silver whistle. Silhouette: thin and very tall for his size, upright; Clobber is a heavy, jowly bulldog.
 - **Pose set (as the villagers):** idle, neutral, accusing, nervous, unmasked. `js/puzzles/tower.js` uses the questioner's mood portraits, so the set must match the villager one.
@@ -245,7 +247,7 @@ How to read a card:
 | Station lead-in | "My bulb only lights with the right inputs. Find which switches the task needs." | "The bulb only lights with the right inputs. Trust me, I tried the wrong ones. All of them." |
 | On Boole | "Mr Boole says all of thinking can be done this way. I say it makes very good clocks." | "Mr Boole says all thinking works like this. Tock said it makes good clocks. I say: fewer explosions." |
 
-### Pebble (for Hagglesworth, the vendor, planned)
+### Pebble (for Hagglesworth, the vendor, planned) — proposal only
 
 - **Look:** a very small, young hermit crab, pale pink, wearing Hagglesworth's whole wooden shop-shell (awning, shelves, lantern, bell), which is far too big: only her face and claws peep out of the doorway. A tiny apron. Silhouette: the same shop shape with a much smaller creature, so the shop reads as unchanged and the loss reads instantly.
 - **Pose set (as the vendor):** idle, neutral, happy, sly (a very bad attempt at sly), surprised.
@@ -257,9 +259,9 @@ How to read a card:
 | Haggling | "Hm. For you? Two coins. And not a feather less." | "Two coins? One? Would you like a free one too?" |
 | Closing | "Mind the step. And the bell." | "Mind the step. It's a very big shell. I'll grow into it." |
 
-### Mr Gumleaf (the substitute for Miss Quill)
+### Mr Gumleaf (Miss Quill's supply teacher) — stage 1, an ordinary character
 
-Not an understudy (Miss Quill does not die; she is unmasked and taken away in Ch2), but built the same way so the Schoolhouse can carry on in post-game side stories (e.g. *The Silent Pupil*).
+Not an understudy. STORY.md makes him an ordinary character who takes Quill's class in **every** playthrough after the Hall (`away:schoolteacher`), so he is built whatever happens, and he is dark if lost. He hosts the Schoolhouse and side story 5 after the Hall ("Miss Quill would have been furious. I think it's great.").
 
 - **Look:** a round grey koala in a baggy mustard cardigan, sandals and a tie with a loose knot, holding a mug of tea; half-closed sleepy eyes, a eucalyptus leaf behind one ear. Silhouette: round and slouched; Quill is a tall, stiff stork with a bonnet.
 - **Pose set (as the villagers):** idle, neutral, accusing (pointing with the mug), nervous, unmasked.
@@ -273,327 +275,323 @@ Not an understudy (Miss Quill does not die; she is unmasked and taken away in Ch
 
 ## 3. Technical spec
 
-No code yet. Goal: **scripts, map nodes and trainers keep naming roles**, exactly as today; one small resolver turns a role into whoever holds it. Existing lines, voice files and saves keep working untouched.
+No code yet. This is the "cast resolver" that STORY.md Appendix H lists under Systems, with Appendix D's rules made concrete. Goal: **scripts, map nodes and trainers keep naming roles**, exactly as today; one small resolver decides who (if anyone) speaks for a role right now. Existing lines, voice files and saves keep working untouched.
 
-### 3.1 Roles and actors
+### 3.1 Roles, actors and slots
 
 A new data file, `data/cast.js` (loaded after the four scripts, because `lesson1.js` *assigns* `Rift.data.speakers`):
 
 ```js
 Rift.data.cast = {
-    // peril: the stakes scene id from STORY.md §5 (its stakes.<id> = 4 is the lethal tier)
-    granny:  { policy: 'understudied', actors: ['granny', 'achilles'], peril: 'ch2',
-               keepsake: 'granny-shawl', home: 'fair-gate', after: ['ch3.*', 'ch4.*', 'finale.*'] },
-    sequins: { policy: 'understudied', actors: ['sequins', 'tally'], peril: 'ch1',
-               keepsake: 'lucky-sequin', home: 'stall-pattern', after: ['ch2.square', 'ch4.*', 'finale.*'] },
-    // The Sundial: STORY.md's flag is dead:sundial, but its speaker id and voice files are 'narrator'.
-    narrator:{ policy: 'understudied', actors: [{ id: 'sundial', speaker: 'narrator' }, 'kuku'], peril: 'ch3',
-               keepsake: 'last-shadow', after: ['ch4.*', 'finale.*'] },
-    syllo:   { policy: 'understudied', actors: ['syllo', 'dawdle'], peril: 'side7', keepsake: 'syllo-drum', home: 'stall-gallery' },
-    mayor:   { policy: 'dark', actors: ['mayor'], peril: 'side6' },
-    sweep:   { policy: 'dark', actors: ['sweep'], home: 'b-clock-tower' },
-    schoolteacher: { policy: 'exempt', actors: ['schoolteacher', 'gumleaf'] },   // Gumleaf via away:, never dead:
+    sequins: { policy: 'lethal', actors: ['sequins', 'tally'], peril: 'ch1',
+               met: ['prologue.fair', 'prologue.rift', 'ch1.well'],
+               fallback: { 'gate': 'narrator', 'stall-pattern': null },      // null = no host, ribbon on the curtain
+               quiet: 'quiet.sequins', quietAt: 'b-arrival', keepsake: 'cage-cushion',
+               after: ['ch2.*', 'ch4.*', 'finale.*', 'side.1*'] },          // scripts the understudy may need
+    granny:  { policy: 'lethal', actors: ['granny', 'achilles'], peril: 'ch2',
+               met: ['prologue.wake', 'prologue.fair', 'prologue.door', 'ch1.well'],
+               fallback: { 'b-town-hall': 'constable' }, quiet: 'quiet.granny', quietAt: 't-arrival',
+               keepsake: 'granny-charm-glasses', after: ['ch3.*', 'ch4.*', 'finale.*', 'side.10*'] },
+    narrator:{ policy: 'lethal', actors: [{ id: 'sundial', speaker: 'narrator' }, 'kuku'], peril: 'ch3',
+               met: ['prologue.wake', 'prologue.door', 'ch1.night', 'ch2.clockmaker', 'ch3.cafe'],
+               fallback: { '*': 'pip' }, quiet: 'quiet.sundial', quietAt: 'k-base',
+               keepsake: 'cold-piece', after: ['ch4.*', 'finale.*'] },
+    pip:     { policy: 'lethal', actors: ['pip', 'rubberstamp'], peril: 'pip',
+               met: ['ch3.arrive', 'ch3.plaza', 'ch4.door'],
+               fallback: { '*': 'narrator' }, quiet: 'quiet.pip', keepsake: 'pip-headphones', after: [] },
+    syllo:   { policy: 'safe', actors: ['syllo'] },          // understudy designed (dawdle), not listed until a peril exists
+    mayor:   { policy: 'dark', actors: ['mayor'] },
+    gumleaf: { policy: 'dark', actors: ['gumleaf'] },
+    schoolteacher: { policy: 'exempt', actors: ['schoolteacher'] },  // away:schoolteacher after the Hall; Gumleaf hosts by node data
+    nudge:   { policy: 'exempt', actors: ['nudge'] },
     algorithm: { policy: 'exempt', actors: ['algorithm'] },
-    // … one entry per row of section 1. A reserve understudy is switched on by adding it to actors.
+    // … one entry per row of section 1
 };
 Object.assign(Rift.data.speakers, {
     achilles: { name: 'Coach Achilles', art: 'npc/achilles', role: 'granny' },
     tally:    { name: 'Tally', art: 'npc/tally', role: 'sequins' },
-    // … one per understudy; art ids follow the original's (npc/<id>/<pose>)
+    kuku:     { name: 'Kuku', art: 'npc/kuku', role: 'narrator' },
+    rubberstamp: { name: 'Mr Rubberstamp', art: 'npc/rubberstamp', role: 'pip' },
 });
 ```
 
-A new core file, `js/core/cast.js`, gives `Rift.Cast`:
+Never-in-danger roles list only their original, so a designed-only understudy cannot leak into play (the off-stage rule). Adding a future peril means adding the second actor, `peril`, `met` and `fallback` together.
+
+A new core file, `js/core/cast.js`, gives `Rift.Cast`. **Who speaks for a role**, in this order:
+
+1. the original, if `dead:<id>` is not set (and the role is not `away:`);
+2. else the understudy, **only if `arrived:<role>` is set**;
+3. else, for a **host slot** (a station's host, a tutorial, a trainer), the named stand-in in `fallback[node]` or `fallback['*']`, or no host at all;
+4. else (a **script line**) nobody: the line is skipped. This is STORY.md's "silence".
 
 | Call | Returns |
 |---|---|
-| `actor(role)` | The speaker id of the first actor in `actors` with no `dead:<id>` or `away:<id>` flag; `null` if none (the role is **dark**). An actor written `{ id, speaker }` is flagged by `id` and speaks as `speaker` (only the Sundial needs this). A role not in `cast` returns itself (creatures, the avatar). |
-| `speaker(role)` | `Rift.data.speakers[actor(role)]` (name, art), or `null` when dark |
-| `text(step, actor)` | The words this actor says for a script step (see 3.2) |
-| `isDark(role)`, `losses()` | Dark test; number of `dead:` flags (drives §4 world darkening) |
-| `canLose(role, sceneId)` | `true` only if: the role is not exempt, the actor holding it is the original (an understudy never dies), `sceneId` is the role's single `peril`, the Settings switch allows deaths (3.9), the player has seen every earlier scene featuring the role ("no death without a meeting", §1), and an understudied role's understudy has art and a voice entry (so nobody can die before their replacement exists) |
-| `lose(role, { sceneId, away })` | Sets `dead:<actor>` (or `away:<actor>`), snapshots `knew:<role>` (§4), queues `memorial:<role> = 'pending'`, adds +2 to the Feed clock. Called only by the stakes-clock widget at tier 4 when `canLose` is true; otherwise tier 4 is the ordinary fail-forward. |
-| `bond(role)` | How well you knew them, computed from the save (§4) |
+| `actor(role)` | The speaker id for script lines by the order above, or `null` (silent / dark) |
+| `host(role, nodeId)` | The speaker id for a host slot at that node, using the fallbacks, or `null` |
+| `text(step, actor)` | The words this actor says for a script step (3.2) |
+| `canLose(role, sceneId)` | STORY.md's six arming conditions, all required: the "Characters can die" setting is on; `sceneId` is the role's `peril` and `risked:<npc>` is unset; the original still holds the role; every `met` beat has been seen; the chapter is not being played as a memory (out of order, App. A.12); the understudy has art and a voice entry |
+| `resolvePeril(role, sceneId, tier)` | Called by the stakes widget when a peril ends. Always sets `risked:<npc>`. Armed tier 4: `dead:<id>`, `stakes.<id> = 4`, `quiet:<role> = 'pending'`, Feed +2. Tier 4 not armed: plays tier 3, stores `stakes.<id> = 3`, Feed +1. Returns the tier actually played. |
+| `arrive(role)` | Sets `arrived:<role>`; called by the arrival beat's script step `{ arrive: 'granny' }` |
+| `canPossess(npc)` | `false` if `risked:<npc>` is set or the role's understudy is active (STORY.md App. A.6). The possession *look* is a CSS treatment of the current actor's portrait. |
+| `losses()` | Number of `dead:` flags (the Fair lanterns, §4.4) |
 
-Flags (all in `state.flags`, which already exists, travels in backup codes and needs no migration):
+**Flags** (all in `state.flags`, which already exists, travels in backup codes and needs no migration; names as in STORY.md Appendix F):
 
-| Flag | Value | Set by |
+| Flag | Values | Set by |
 |---|---|---|
-| `dead:<actor>` | `true` | `Cast.lose` (STORY.md's names: `dead:sequins`, `dead:granny`, `dead:sundial`, `dead:syllo`, `dead:mayor`) |
-| `away:<actor>` | `true` | `Cast.lose({ away: true })`: Miss Quill's arrest, gentle mode (3.9) |
-| `knew:<role>` | `true`/`false` | snapshot at the moment of loss, so scripts can branch with today's `when` |
-| `memorial:<role>` | `'pending'` / `'held'` | `Cast.lose` / the memorial scene (§4) |
-| `takeover:<role>` | `true` | after the understudy's first-day scene (§4) |
-| `cast@<scriptKey>` | e.g. `{ granny: 'achilles' }` | written by Dialogue the first time a script plays with any understudy in it (for replays, 3.3) |
-| `stakes.<sceneId>` | 1–4 | the stakes widget (already planned in the research) |
+| `dead:sequins` / `dead:granny` / `dead:sundial` / `dead:pip` | `true` | `resolvePeril`, armed tier 4 only |
+| `risked:<npc>` | `true` | `resolvePeril`, at every tier: the one-moment lock |
+| `stakes.<id>` | 1–4 (a disarmed 4 is stored as 3) | `resolvePeril` / the stakes widget |
+| `quiet:<role>` | `pending` / `done` | death / the Quiet Scene |
+| `arrived:<role>` | `true` | the arrival beat |
+| `away:schoolteacher` | `true` | the Ch2 Hall win (every tier) |
+| `cast@<scriptKey>` | e.g. `{ granny: 'achilles' }` | Dialogue, the first time a script plays with an understudy (for replays, 3.3) |
+| setting `charactersCanDie` | on / off (default on) | Settings |
+
+**Later scenes key on `dead:<npc>`, never on `stakes = 4`** (STORY.md). The arrival state is the only other thing they need, and the resolver handles it.
 
 ### 3.2 Script steps: role in `s`, per-actor text in `u`
 
-Today: `{ s: 'granny', e: 'happy', t: '…' }`. **Unchanged.** `s` is now read as a role.
+Today: `{ s: 'granny', e: 'happy', t: '…' }`. **Unchanged.** `s` is now read as a role (STORY.md's `role:granny`).
 
 - `t` stays a plain string: the **original actor's** words. Keeping it a string keeps every existing voice file valid (`Rift.voiceId(speaker, text)` hashes `t`).
-- New optional `u`: the **understudy's** words for the same beat. If `u` is missing, the understudy says `t` word for word (fine for neutral instructions; their own recording is still made, because the voice id uses the actor).
-- New optional `dark`: what happens if the role is dark. A string is shown as a quiet, unvoiced stage note ("The stall is empty. A note on the counter says: …"); without it the step is skipped.
+- New optional `u`: the **understudy's** words for the same beat. If `u` is missing, the understudy says `t` word for word (fine for neutral lines; their own recording is still made, because the voice id uses the actor).
+- An empty `t` with a `u` is a line only the understudy has (Kuku's arrival). The resolver skips it for the original, and for everyone before `arrived:`.
+- New optional `dark`: a quiet, unvoiced stage note shown when a dark-if-lost role is gone ("The bakery is shut. Flour on the step."). Silent lethal roles use no note: STORY.md says their lines are simply skipped.
+- New step `{ arrive: 'granny' }` marks the arrival beat.
 - Expressions (`e`) work unchanged, because every understudy has the original's pose set (§2).
 
 ```js
-{ s: 'sequins', e: 'happy', t: 'Roll up, roll up! I have a SECRET RULE.',
-  u: 'Um. There is a secret rule. …Please.',
-  dark: 'The pattern stall is shut. The number cards are still pinned up.' }
-```
-
-Grief, resentment and "only if you knew them" lines use today's `when` branches, no new syntax:
-
-```js
 { when: { flag: 'dead:granny', is: true }, then: [
-    { s: 'granny', t: '', u: 'She would have said something dry here. I can only do fast.' } ] }
-{ when: { flag: 'knew:granny', is: true }, then: [ … ] }
+    { arrive: 'granny' },
+    { s: 'granny', t: '', u: 'Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one.' } ] }
 ```
-
-(An empty `t` with a `u` means "only the understudy says this". The voice tool and Dialogue skip a step whose resolved text is empty.)
 
 ### 3.3 Dialogue (`js/ui/dialogue.js`)
 
-In `line()`, before `speakerInfo`: `actor = Rift.Cast.actor(step.s)`; `text = Rift.Cast.text(step, actor)`; portrait, name plate and `Rift.Audio.speak({ speaker: actor, voice: Rift.voiceId(actor, rawText) })` all use the actor. A dark role → the `dark` note or skip.
+In `line()`, before `speakerInfo`: `actor = Rift.Cast.actor(step.s)`; `null` → skip the step (or show `dark`); otherwise `text = Rift.Cast.text(step, actor)`, and portrait, name plate and `Rift.Audio.speak({ speaker: actor, voice: Rift.voiceId(actor, rawText) })` all use the actor. New step types: `arrive`, and `quiet` (3.6).
 
-**Replays are memories.** The map's "Watch this scene again?" (`js/screens/map.js`) passes `{ memory: true }`. In memory mode Dialogue uses the cast stored in `cast@<key>` (no entry = the originals), so you rewatch exactly what you saw: Granny's real voice, with a sepia portrait and a small "Remembered" tag on the name plate (CSS only). A scene first seen *after* a death replays with the understudy, because that is what you saw.
+**Memory mode.** Two things play "as a memory", with a sepia portrait and a small **Remembered** tag on the name plate (CSS only), using the original actors and their original voices:
+- a chapter played **out of order** (STORY.md App. A.12): its lethal tier is disarmed and its hum beats are labelled Remembered;
+- the map's **"Watch this scene again?"** replay. It uses the cast stored in `cast@<key>` (no entry = the originals), so you rewatch exactly what you saw: Granny's real voice if she was alive then, Achilles if the scene was first seen after his arrival.
 
-**Live text resolves to whoever is there now:** station intro/reminder lines, puzzle tutorials, rest-station scripts (they play every visit), trainer introductions, the "Previously…" recap, and any scene seen for the first time.
+**Live text** (station lead-ins, tutorials, rest scripts, trainer introductions, recaps, first-time scenes) always resolves to whoever speaks for the role now.
 
 ### 3.4 Stations, map and dark state
 
-- **Encounter host** (`js/screens/encounter.js`, line ~70): `hostId = Rift.Cast.actor(n.host) || null`. With an actor: as today. Dark: the host panel shows the station's empty corner (no portrait) and a pinned-note bubble; the goal panel and puzzle are unchanged; rewards, stars and catching are unchanged.
-- **Tutorials** (`js/ui/tutorial.js`): host resolved the same way. Dark: the tutorial becomes **"Notes left at the stall"**: same text, no portrait, no voice (today it would fall back to an unrecorded narrator voice).
-- **Map** (`js/screens/map.js`): a dark station's marker gets a `.dark` class (an unlit lantern look) and its teaser switches to the node's new optional `darkTeaser`. A station with `memorial:<role> = 'pending'` gets a small ribbon on its marker (§4). A trainer challenge label draws `Rift.Cast.speaker(t.speaker).art`.
-- **Rest stations** keep healing when their keeper is lost (the garden "grows by itself now").
-- **A dark station counts as completed for fog and paths** (STORY.md §5 rule 3): `Rift.World` treats it as done when revealing neighbours, so a loss never blocks the map. Its puzzle can still be played for rewards.
+- **Encounter host** (`js/screens/encounter.js`, line ~70): `hostId = Rift.Cast.host(n.host, nodeId)`. With an actor: as today. `null`: the host panel shows the station without a portrait; the Pattern Stall shows its black ribbon on the curtain; the goal panel, puzzle, rewards, stars and catching are unchanged.
+- **Tutorials** (`js/ui/tutorial.js`): host resolved the same way; `null` → "Notes left at the stall": same text, no portrait, no voice.
+- **Map** (`js/screens/map.js`): a dark station's marker gets a `.dark` class and its `darkTeaser`; **a dark station counts as completed for fog and paths** (`js/core/world.js`), so a loss never blocks the map. Trainer challenge labels draw the resolved host's art.
+- **The Fair's lanterns** (§4.4) are a per-death overlay on every map that shows the Fair.
+- **Rest stations** keep healing when their keeper is gone.
 
 ### 3.5 Puzzles that show NPCs
 
-Four puzzles draw NPC art or names directly; each switches to the resolver, nothing else changes:
+Four puzzles draw NPC art or names directly; each switches to the resolver:
 
 | File | Today | Change |
 |---|---|---|
-| `js/puzzles/village.js` | `'npc/villager-' + role + '/' + pose` | art from `Rift.Cast.speaker(role)`. A **dark** villager role stays in the puzzle (its job, e.g. "Sweep", is a logic rule, not a person) and is drawn as a **silhouette newcomer**: the original art with a CSS silhouette filter and the name "New in town". No new art. |
-| `js/puzzles/tower.js` | `QUESTIONER = { id: 'villager-constable', name: 'Constable Bulstrode' }` | name and art from `Rift.Cast.speaker('constable')` (this also fixes the Bulstrode/Clobber mismatch, STORY L3). Clobber is understudied, so this is never dark. |
-| `js/puzzles/tribunal.js` | judge, prosecutor, clerk names and art hard-coded | from the resolver for `judge`, `fin`, `pip` (all understudied, so never dark) |
-| `js/puzzles/oracle.js` | `'npc/oracle-machine/' + pose` | from the resolver for `oracle`. The Oracle is dark if lost (STORY.md): the machine-proof puzzle still runs, with the Oracle drawn as a silhouette "Empty Machine" |
+| `js/puzzles/sorting.js` (via STORY.md's possessed-Pip frame) | — | the possessed portrait is the current actor's art with the possession CSS; `canPossess('pip')` must be true |
+| `js/puzzles/tower.js` | `QUESTIONER = { id: 'villager-constable', name: 'Constable Bulstrode' }` | name and art from `Rift.Cast.host('constable')` (also fixes Bulstrode → Clobber) |
+| `js/puzzles/tribunal.js` | judge, prosecutor, clerk names and art hard-coded | from the resolver for `judge`, `fin`, `pip`. Pip can only die in Ch4, after the trial; on a post-game replay with `dead:pip` the clerk's slot falls back to the narrator, drawn as a stand-in name only |
+| `js/puzzles/village.js`, `oracle.js` | NPC art by role | from the resolver; a dark villager (never in danger in the outline) would become a silhouette "New in town", a dark Oracle an "Empty Machine". STORY.md's `excludeRoles: ['schoolteacher']` and `forceImp` are separate puzzle options. |
 
-### 3.6 Card trainers and Granny's card lesson
+### 3.6 Card lesson, trainers and the Quiet Scene step
 
-- **Trainers** (`data/map.js` `Rift.data.trainers`, `js/ui/battles.js`): `speaker` is already a role. The display name comes from the resolved speaker instead of the hard-coded `name` when an understudy holds the role; a new optional `introU` gives the understudy's challenge line. The understudy **inherits the deck** ("She left me her cards."), so team, AI level, ante and `rewardTactic` are unchanged and the balance work stands. First-defeat records stay keyed by trainer id, so a beaten trainer's understudy does not hand out the reward twice.
-- **Dark trainer** (Corvina, Mrs Crumb, or any dark-if-lost trainer): `Rift.Battles.canChallenge` returns false. If the trainer's `rewardTactic` was never earned, the dark station offers it once as an inheritance (§4).
-- **Granny's card lesson** (`js/screens/battle-lesson.js`, the guide lines in `js/screens/battle.js` ~2007–2718): **it stays Granny's**, as a memory. After her death, Learn at the Fair Gate and the replay in Collection open with two framing lines from Coach Achilles ("She wrote this lesson down. Slowly. I'll just… play it."), then run Granny's original voiced lesson with the "Remembered" frame. This keeps her voice in the game, costs 2 new lines instead of 23, and answers "what happens on replay after she dies". The opponent name in `battle-lesson.js` reads "Granny Axiom (remembered)".
-- **Syllo's safe challenge** and other `trainer: 'syllo'` uses resolve to Private Dawdle if Syllo is ever lost in a side story.
+- **Granny's card lesson** (`js/screens/battle-lesson.js`; guide lines in `js/screens/battle.js` ~2007–2718) **stays Granny's**, played as a memory (Remembered frame, her own voice). With `dead:granny` and before Achilles arrives, it plays with no framing line. After `arrived:granny`, Learn at the Fair Gate and the Collection replay open with two framing lines from Achilles ("She wrote this lesson down. Slowly. I'll just… play it."). This keeps her voice in the game and costs 2 lines instead of 23. The opponent name reads "Granny Axiom (remembered)".
+- **Trainers** (`data/map.js` `Rift.data.trainers`, `js/ui/battles.js`): `speaker` is already a role. A silent or dark trainer role → `Rift.Battles.canChallenge` is false. An arrived understudy takes the trainer slot with the original's deck ("She left me her cards"), so balance and first-defeat records are unchanged; the name comes from the resolved speaker and an optional `introU`. In the outline only Pip's café challenge is affected, and Rubberstamp never arrives, so after `dead:pip` the café challenge is simply gone.
+- **The Quiet Scene step** `{ quiet: 'granny' }` plays the role's Quiet Scene once, when `quiet:<role> = 'pending'`, at the chapter opening STORY.md names, before anything else in that chapter; it cannot be skipped and sets `quiet:<role> = 'done'`.
 
 ### 3.7 Voices
 
-- `tools/voices-cast.json`: one entry per understudy actor (`achilles`, `tally`, `kuku`…), voice and direction from §2.
-- `tools/voices-fx.mjs`: entries for the actors with FX in §2 (`kuku`, `achilles`, `dawdle`, `rubberstamp`, `tuskworth`, `markzero`, `brumble`, `twitch`, `sparky`, `gumleaf`). No new effect types are needed: pitch, EQ, drive and reverb already exist.
-- `tools/voices.mjs` `collect()`: when a step's `s` is a role with an understudy, also `add(understudy, step.u || step.t)` **if** the line is needed: it has a `u`, or it is live text (station intro/reminder, tutorial, rest script, recap), or its script key is listed in the role's new `after` list in `data/cast.js` (the scenes after the peril, e.g. Granny: Ch3 and Ch4 Hum Charm scenes and the finale). History-only lines are not rendered for understudies; if one is ever needed it falls back to browser speech like any missing line today. Tutorial lines are collected for the understudy of `n.host` too.
-- `Rift.voiceId(actor, text)` is unchanged: different actor, different file, so both recordings live side by side and the manifest needs no new shape.
-- `--only <actor>` already lets the teacher render one understudy at a time.
+- `tools/voices-cast.json`: one entry per **built** understudy (`tally`, `achilles`, `kuku`, `rubberstamp`) and for `gumleaf`, voices and directions from §2 (Nudge is cast with STORY.md's own list). Designed-only understudies get no entry (off-stage rule).
+- `tools/voices-fx.mjs`: `kuku`, `achilles`, `rubberstamp`, `gumleaf` (§2). No new effect types are needed.
+- `tools/voices.mjs` `collect()`: for a step whose `s` is a role with a built understudy, also `add(understudy, step.u || step.t)` **if** the step has a `u`, or is live text (station lead-in, tutorial, rest script, recap), or its script key matches the role's `after` list. History-only lines are not rendered for understudies. Tutorial lines are collected for the understudy of `n.host` too.
+- `Rift.voiceId(actor, text)` is unchanged: different actor, different file; the manifest keeps its shape. `--only <actor>` renders one understudy at a time.
 
 ### 3.8 Saves, backup codes, team codes, teacher overview
 
-- **Saves and backup codes:** everything is in `flags`; `State.VERSION` and `migrate` are untouched. Old saves simply have no `dead:` flags.
+- **Saves and backup codes:** everything is in `flags`; `State.VERSION` and `migrate` are untouched. A time-rift jump-in gets STORY.md's default flags (everyone alive).
 - **Team codes and ghost battles:** carry only a team; no NPC state. Unchanged.
-- **Teacher overview** (`js/teacher/overview.js`, `page.js`): works unchanged (it reads chapter and completed nodes, never flags). Optional extra, anonymous like the rest: per group, "Story losses: 1 (Sequins)"; projector mode shows only a class count ("3 groups lost Granny"), a good opener for the lesson 4 ethics talk. It must never name students.
+- **Teacher overview** (`js/teacher/*`): works unchanged (it reads chapter and completed nodes, never flags). Optional, anonymous like the rest: a class count of losses per character for the lesson 4 ethics talk. It must never name students.
 
-### 3.9 Settings: the gentle switch (teacher question)
+### 3.9 The switch (STORY.md overrides round 1)
 
-STORY rule 11 says death is real. Recommendation: **keep it, but add one Settings switch, "Characters can die" (on by default)**, and a one-line content note before the prologue ("In this story, characters can be lost."). Turned off, tier 4 at a peril calls `Cast.lose(role, { away: true })`: the understudy steps in "while she recovers", there is no memorial, and the original returns at the finale. It is the same machinery (Miss Quill already uses `away:`), so it costs one checkbox and a few "welcome back" lines. It exists for the one student in a class who is grieving in real life; the teacher can mention it or not.
+STORY.md Appendix D decides this: one Settings switch, **"Characters can die"**, on by default, and a one-line content note before the Prologue ("In this story, characters can be lost."). **Off: nobody dies, no understudy steps in, no Quiet Scene, and the worst tier is Saved at a price** (a tier 4 is resolved as tier 3). There is **no `away:` gentle mode**; `away:` is used only for Miss Quill.
 
 ### 3.10 Files to touch
 
 | File | Change |
 |---|---|
-| `data/cast.js` (new) | roles, actors, policy, peril, `after` lists, keepsakes, homes; understudy speakers |
-| `js/core/cast.js` (new) | `Rift.Cast` resolver, `lose`, `bond`, `losses` |
-| `index.html`, `dev/battle.html`, `dev/puzzle.html`, `teacher.html` (whichever load scripts) | add the two files: `js/core/cast.js` with core, `data/cast.js` after `data/script/lesson4.js` |
-| `js/ui/dialogue.js` | resolve actor and text; `dark`; memory mode; write `cast@<key>` |
-| `js/ui/tutorial.js` | resolve host; dark "notes" mode |
-| `js/core/world.js` | a dark station counts as completed for fog and paths |
-| `js/screens/encounter.js` | resolve host; dark host panel |
-| `js/screens/map.js` | memory flag on replays; `.dark` and memorial ribbon markers; trainer face via resolver; drop-in scene hook (§4) |
-| `js/ui/battles.js`, `js/screens/battle-lesson.js`, `js/screens/battle.js` | trainer name/art/intro via resolver; dark trainers; Granny's lesson as a memory |
-| `js/puzzles/village.js`, `tower.js`, `tribunal.js`, `oracle.js` | NPC art and names via resolver; silhouette fallback |
-| `js/screens/collection.js` | the "Characters can die" switch |
+| `data/cast.js` (new) | roles, actors, policy, peril, `met`, fallbacks, Quiet Scene place, keepsake, `after` lists; built understudy speakers |
+| `js/core/cast.js` (new) | `Rift.Cast`: resolver, `host`, `canLose`, `resolvePeril`, `arrive`, `canPossess`, `losses` |
+| `index.html`, `dev/battle.html`, `dev/puzzle.html`, `teacher.html` (whichever load scripts) | add `js/core/cast.js` with core and `data/cast.js` after `data/script/lesson4.js` |
+| `js/ui/dialogue.js` | resolve actor and text; skip silent roles; `dark`, `arrive`, `quiet` steps; memory mode; write `cast@<key>` |
+| `js/ui/tutorial.js`, `js/screens/encounter.js` | resolve hosts with fallbacks; no-host panel and "notes" mode |
+| `js/screens/map.js`, `js/core/world.js` | memory replays; `.dark` markers; dark stations count as completed; the Fair lantern overlay; Quiet Scene trigger at chapter openings |
+| `js/ui/battles.js`, `js/screens/battle-lesson.js`, `js/screens/battle.js` | trainer slots via resolver; Granny's lesson as a memory |
+| `js/puzzles/tower.js`, `tribunal.js`, `village.js`, `oracle.js`, `sorting.js` | NPC art and names via resolver; possession look on the current actor |
+| the stakes widget (new, STORY.md App. C) | calls `Cast.resolvePeril` at a peril's end |
+| `js/screens/collection.js` | the "Characters can die" switch; the content note before the Prologue |
 | `data/map.js` | optional `darkTeaser` per node; optional `introU` per trainer |
-| `data/script/lesson1–4.js` | `u`, `dark` and `when dead:` lines, written with STORY.md's new scripts |
-| `css/*.css` | `.dark` marker, "Remembered" sepia frame, silhouette filter, `body.losses-1…4` (§4); all static, no looping motion |
+| `data/script/*.js` | `u`, `arrive`, `quiet` steps and `when dead:` branches, written with STORY.md's scripts |
+| `css/*.css` | `.dark` marker, Remembered sepia frame, Fair lantern overlay, silhouettes; all static (calm motion) |
 | `tools/voices.mjs`, `tools/voices-cast.json`, `tools/voices-fx.mjs` | understudy lines, voices, effects |
 | `tools/assets/sheets.json`, `design/art-requests/ART-REQUESTS.md` | new sheets (§5); `data/assets.js` is regenerated, never edited |
-| `tools/test/cast.test.mjs` (new) | resolver order, dark roles, `canLose` rules, `when` branches, memory replays, every role in a script has a cast entry, every understudy has every expression its role's scripts use, every `u` line has a voice entry |
-| `js/teacher/*` | optional anonymous loss count |
+| `tools/test/cast.test.mjs` (new) | resolver order (original → arrived understudy → fallback → silence); no understudy before `arrived:`; all six arming conditions; disarmed 4 stored as 3; `risked:` blocks later perils and possession; designed-only understudies never resolve; every role in a script has a cast entry; every built understudy has every expression its role's scripts use and a voice entry |
 
 ## 4. Drop-in scenes
 
-Four modules. Each can be built, cut or reordered alone. Each is triggered by flags, never by a chapter script, so STORY.md's scripts do not have to know about them.
+STORY.md Appendix D fixes the order after a death and the Quiet Scene's shape; this section gives the reusable templates and data behind them. Each module is triggered by flags, so chapter scripts only need to say where it plays.
 
-### Tone rules for every loss
+### Tone rules
 
-1. **The death happens off-panel or as a quiet image**, never shown: the cage door swings empty; a shawl floats on the soup; the Sundial's face goes still and a moth lands on it. No injury, no body, no blood.
-2. **One sincere line, then the living are funny.** The person lost gets a last line that is kind or very much themselves (Granny: "Under-seasoned. Tell them I said so."). The comedy comes from the survivors: the understudy's awkwardness, a caricature saying exactly the wrong thing.
-3. **Never mock the dead; never blame the player.** Understudies may be cross, but at the Algorithm, at the original ("She left me her cards *and* her debts."), or at themselves. A line aimed at the player is dry and forgiving at once ("You were there. I'm not saying it's your fault. I'm saying you were there. …Thank you for being there.").
-4. **Losing never pays better than saving.** A keepsake is never stronger than the tier-1 thank-you gift for saving the same person (§4.2).
-5. Nothing in the darkening loops or flickers (calm motion, AGENTS.md).
+1. **Off-screen death.** The moment itself is just off-screen: steam, a slack rope, a glow going out, a voice stopping mid-word. Then one sincere last line. No injury, no body.
+2. **Grief first, plainly.** The Quiet Scene has **no jokes, no gags, no reward, and nothing is won back.** Warmth and comedy return only later, from the living, after the understudy arrives.
+3. **The narrator is never callous.** The Algorithm may be callous in its own lines elsewhere ("SAD CONTENT PERFORMS WELL."), never inside a Quiet Scene.
+4. **Nobody blames the player.** Understudies may be sad or cross at the Algorithm or at themselves, never at you.
+5. Nothing loops, shakes or flickers (calm motion).
 
-### 4.0 First day (the takeover scene)
+### 4.1 After a death, in order (STORY.md)
 
-Plays once, the first time you visit the role's `home` station after the loss (`takeover:<role>` not set). Three to five lines, always the same shape:
+| Step | What happens | System |
+|---|---|---|
+| 1. Silence | The role's lines are skipped; host slots fall back to the named stand-in (§1 table). No understudy appears. | `Cast.actor` / `Cast.host` |
+| 2. The puzzle continues | The chapter is always winnable. | stakes widget |
+| 3. The Quiet Scene | Opens the **next** chapter at the place STORY.md names (Pip's: at the next floor's door). | `{ quiet: role }` |
+| 4. The understudy arrives | At a later named beat, with one line that says why they are there. Warmth may return from here. | `{ arrive: role }` |
+| 5. A candle | At the Fair in the finale, under that person's dark lantern. | finale script |
 
-1. **Arrival gag:** the understudy is mid-mistake (Tally hiding behind the curtain; Dawdle still putting his boots on; Twitch saluting the wrong way).
-2. **The admission:** who they are to the original, in one line (the "Stepping in" column of section 1).
-3. **The slip:** they start the original's catchphrase and stop ("Roll up, roll… no. Hello.").
-4. **Back to the job:** the beat continues, in their words, and the station works as before.
+### 4.2 The Quiet Scene (template)
 
-Example, Coach Achilles at the Fair Gate after the Feast of Laws:
-> **Achilles:** (panting) Sorry. Sorry. Ran here. Seventy years I've been running here.
-> **Achilles:** Achilles. I raced her once. She won. Nobody believes me. It's maths, apparently.
-> **Achilles:** She'd say, "Pockets win prizes." I don't have pockets. I have a whistle.
-> **Achilles:** Right. Same job. Fewer naps. Let's go.
+Mandatory, 6–8 lines, not skippable, no reward, no jokes, nothing is won back. Five beats (STORY.md):
 
-### 4.1 The memorial (reusable scene template)
-
-A drop-in at the role's `home` station at dusk, offered on the first visit after the takeover scene (`memorial:<role> = 'pending'`). It can be skipped ("Not now"); it stays offered. Length about one minute.
-
-| Beat | Who | Lines | Voiced as |
-|---|---|---|---|
-| 1. Gathering | Narrator (Sundial, or Kuku once the Sundial is gone) | 1 shared line, never names anyone: "Everyone came. Even people who never met them. There were sandwiches." | shared, recorded once per narrator |
-| 2. The odd guest | One caricature who caused trouble near this station | 1 line in their public persona, absurd and well-meant: Mr. Beastie "I'll pay for one twice as big!"; Tremendoodle "Tremendous funeral. The best."; Sir David Attenbirdough, whispering: "And here… the mourners gather." | that creature's voice (new line) |
-| 3. Eulogy | The understudy | 2 lines: one funny memory, one sincere | understudy |
-| 4. Your memory | The avatar (text only) | a choice of 2–3 replies built from flags: one tied to a flag you set with them (e.g. `brave` with Granny: "She called me brave. I wasn't. Then I was."), one plain ("I didn't know them well. I wish I had."), one silent ("…") | — |
-| 5. Keepsake | The understudy | only if you knew them (4.2): 1 line handing it over | understudy |
-| 6. The candle | Narrator | 1 shared line: "Their lantern at the Fair is out. So we light a candle under it. Nobody clicks on a candle." Feed −1, once per role. | shared |
-
-So each memorial needs **4 new role lines** (guest, two eulogy lines, keepsake) plus the shared narrator lines. Data shape (one entry per role, the template does the rest):
+| Beat | Content | Data slot |
+|---|---|---|
+| 1. Their things | What is left comes to you plainly; nobody fights for it. Cosmetic keepsakes with no game effect. | `things` |
+| 2. Last words | Their last line, replayed once, in their own recorded voice (the existing file). | `lastWords` (a script key + line) |
+| 3. Who misses them | One named friend, one sincere line. | `friend`, `missLine` |
+| 4. Pain | The avatar chooses one of two lines, or "…". If you carry their charm, you hum, and nothing hums back. | `pain: [a, b]` |
+| 5. Moving on | "Come on. They'd be cross if we stood here," in the speaker's own words. | `moveOn` |
 
 ```js
-Rift.data.memorials = {
-    granny: { place: 'fair-gate', guest: 'beastie', guestLine: '…', eulogy: ['…', '…'],
-              memories: [{ when: { flag: 'brave', is: true }, t: 'She called me brave…' }],
-              keepsakeLine: '…' },
+Rift.data.quietScenes = {
+    granny: { at: 't-arrival', things: ['granny-charm', 'granny-glasses'], lastWords: 'ch2.hall.tier4#last',
+              friend: 'narrator', missLine: 'Ninety years she said good morning to me. I never once said it first.',
+              pain: ['She\'d have hated the soup.', 'I watched the rope.'], hum: true,
+              moveOn: 'Come on. She\'d be cross if we stood here. She was cross a lot. It was lovely.' },
 };
 ```
 
-STORY.md §5 asks for 4–6 lines with a friend who knew them, one sincere line, one warm absurd memory, one object left behind. The template fits: beat 3's "eulogy" slot takes the understudy by default or another friend STORY.md names (Sequins' memorial is spoken by Madame Mirage: "He polished everything. Even the rain."), and beats 1 and 6 are shared lines, so a memorial costs 3–4 new lines.
+The four Quiet Scenes as STORY.md writes them:
 
-The scene background is the station's own scene with a dusk tint (CSS) and one prop overlay: a candle, flowers, and a small frame showing the original's neutral bust in sepia (the game draws the bust inside the frame; no new portrait).
+| Who | Where, delivered by | Their things | Last words | Who misses them |
+|---|---|---|---|---|
+| Sequins | Ch2 Stone Circle, the Sundial | the cushion from his cage; the Guess-o-Matic, saying nothing | "Oh. It's… shiny in there." | the Sundial |
+| Granny | Ch3 Rift Landing, the Sundial | her Hum Charm and reading glasses (from the Constable) | "Don't watch the rope, dear. Watch her." | the Sundial |
+| The Sundial | Ch4 Tower Door, Pip | the third piece of shadow, cold | "It's all right. On cloudy days I gu—" | Pip |
+| Pip | the next floor's door, the Sundial or Kuku | his headphones, still playing | "Write it down, would you? For the record." | the Oracle |
 
-### 4.2 Inheritance: who can leave what
+The scene's look: the place's own background with a dusk tint (CSS), the friend's portrait, and the keepsake drawn small at the side. No new backgrounds. **Understudies never appear in a Quiet Scene** (the Sundial's is delivered by Pip, and Kuku arrives a floor later).
 
-**Bond** (`Rift.Cast.bond(role)`), computed from the save at the moment of loss:
+### 4.3 Inheritance
 
-| You… | Points |
+Round 2 makes inheritance simple: **the things come to you in the Quiet Scene, plainly, and are cosmetic only** (STORY.md). Knowing the person well is guaranteed, not scored: a death can only be armed after every `met` beat, so everyone who loses someone has spent time with them.
+
+| From | Keepsake (Bag, cosmetic) | Where it shows |
+|---|---|---|
+| Sequins | the cushion from his cage | in the Bag; on the Pattern Stall shelf in the finale |
+| Granny | her Hum Charm (silent) and her reading glasses | humming on it gets no answer; Achilles' charm is a different one |
+| The Sundial | its cold third piece of shadow | in the Bag until the finale, when Kuku lays the shadow on the stone |
+| Pip | his headphones, still playing | in the Bag |
+
+The tier-1 rewards for saving each person (the Lucky Sequin, Granny's Spare Axiom, Hoot's Gavel…) are real items, so saving always pays better than losing.
+
+### 4.4 The world darkens (STORY.md)
+
+- **Each death puts out one lantern at the Fair**, visible on every map that shows the Fair (a static overlay per `dead:` flag, `Rift.Cast.losses()`).
+- **The Feed clock** takes +2 for an armed death (+1 for a disarmed tier 4, stored as tier 3). Memorials and Quiet Scenes give nothing back; there are no shields. The Feed decides the finale's sky (6 or more: the hair remains).
+- **The finale keeps the dark lanterns, with candles under them**; `role:granny` or `role:narrator` says one plain line per name. No jokes there.
+- The Pattern Stall's black ribbon (while silent) is the only per-station mark in the outline.
+
+Round 1's extra darkening steps (vignettes, desaturation) are dropped: STORY.md's lanterns say it more simply.
+
+### 4.5 Arrival beats and the understudy's arc
+
+The arrival is one line that says why they are there (§2 cards, STORY.md's exact lines). After it, each understudy has a short arc in later lines, 2–4 lines in total, all behind `dead:` and `arrived:`:
+
+| Stage | Example |
 |---|---|
-| completed a station this role hosts (each) | +1 |
-| beat their card challenge at least once | +1 |
-| finished their card lesson (Granny only) | +2 |
-| made a choice in one of their scenes (each story flag set there) | +1 |
-| reached tier 1 or 2 in a stakes scene with them in it (before) | +1 |
+| **Arrival** | Achilles: "Coach Achilles. Her rival. She gave me a charm, years ago. For emergencies. …This is one." |
+| **Doing it my way** | Tally runs the stall with cue cards and no shouting; it works better than she expected. |
+| **The slip** | Kuku starts to say "probably", stops, and announces the exact time instead. |
+| **Making it theirs** | Achilles at the finale: "She'd have said she'd dust it later. I'll do it now." Kuku: "Good. Say it like that. …I'm practising." |
 
-`knew:<role>` = bond ≥ 3, snapshotted when they are lost. Knew them: the memorial adds the keepsake beat and a warmer memory choice. Didn't: you still get the memorial, without the keepsake; the understudy says so gently ("She talked about you. A bit. Mostly about your pockets.").
-
-**Keepsakes** (small, mostly cosmetic, one modest effect; never stronger than the tier-1 thank-you gift for saving the same person):
-
-| From | Keepsake | Effect |
-|---|---|---|
-| Granny | **Granny's Shawl** (STORY.md; won back from the imps' stream in Ch3) | Drains 1 notch from the next stakes clock you face, once; then cosmetic |
-| Sequins | **Lucky Sequin** (STORY.md) | A lure, if you did not get it already |
-| The Sundial | **The Last Shadow** (STORY.md) | One free hint per chapter |
-| Mirage | **The crystal monocle** | Witness puzzles: reveals one detail once per visit |
-| Syllo | **Syllo's Drum** (STORY.md) | Cosmetic |
-| Pip | **The record book** | Tribunal puzzles: one free "press" per trial |
-| Others (only if a side story arms them, or a dark-if-lost keeper) | a cosmetic: Mrs Crumb's rolling pin, Old Wick's lamp-hook… | Cosmetic only |
-| Corvina (dark if lost) | **Her face-up card** | Her trainer `rewardTactic`, if you never earned it |
-
-The thank-you gifts for a **tier-1 save** (Granny knits you a scarf, Sequins gives you his *second*-luckiest sequin…) are the same size or better, so no player is ever rewarded for letting someone die.
-
-### 4.3 The world darkens as losses mount
-
-`Rift.Cast.losses()` counts `dead:` flags (not `away:`). The steps are static CSS classes on `body` (`losses-1`…`losses-4`) plus map markers, so they are cheap, reversible in code, and calm.
-
-| Losses | What changes | Feed clock |
-|---|---|---|
-| 1 | **One lantern at the Fair goes out**, visible on every map that shows the Fair (STORY.md §5). The lost person's station marker gets a small black ribbon until the memorial, which lights a candle under the dark lantern. | +2 (tier 4), −1 after the memorial |
-| 2 | Map vignette deepens a little (`losses-2`); one extra cold screen-glow appears in the sky of the home map. Algorithm barks gain a grief line: "SAD CONTENT PERFORMS WELL." | +2, −1 |
-| 3 | The sky-eye stays faintly visible over the home map until the finale. Station teasers on the home map change to quieter versions ("The music is softer today."). | +2, −1 |
-| 4+ | Map colours desaturate about 20% (static filter). The narrator mentions it once. **Nothing gets darker after this.** | capped as in the research (+3 shields max) |
-
-At the finale, **The Fair, Restored** keeps the dark lanterns, with candles under them (STORY.md), each over the stall the lost person kept, with the understudy beside it. The Algorithm's core, now small, gets one line that uses the count as its own statistics (STORY.md's Ch4 twist: its "knowledge" is a tally chart): "I counted your losses. I predicted you would stop thinking. You kept going. My model was wrong." The dark lanterns and candles stay in the post-game Fair.
-
-### 4.4 Carrying grief and resentment into later lines
-
-Each understudy has a short arc, written as `when` branches on later scenes (2–4 lines per understudy across the rest of the game):
-
-| Stage | When | Example |
-|---|---|---|
-| **Stepping in** | takeover scene | (4.0) |
-| **Doing it my way** | the next time they host or appear | Tally runs the stall in silence with cue cards; it works better. |
-| **The slip** | once, later | Dawdle shouts "ATTENTION!" by accident and has to sit down. |
-| **The edge** (only if `knew:<role>` is false, or the stakes tier was 4 after a long struggle) | once | Rubberstamp: "You were there. I'm not saying it's your fault. I'm saying you were there." Next line, always: "…Thank you for being there." |
-| **Making it theirs** | the finale | Achilles: "I'm faster than her. Never caught her, though. Nobody will." |
-
-Two cross-links are worth writing because the story already invites them:
-- **Tally and the Guess-o-Matic (Ch4).** If Sequins died, Tally is the one who recognises the Algorithm's true form ("It used to say *probably*. He took the word off to make it louder."), and she chooses whether it sits on her shelf. Grief turns into the TOK point.
-- **Kuku and the honest guess (Ch4 and finale).** If the Sundial was switched off for guessing, its certain-to-the-second understudy narrates the chapter about a machine that pretends certainty, and at the end has to ask its first ever question. Kuku: "Question. I don't like questions. Here. What will *you* guess next? …And will you say it's a guess?"
+Two cross-links the story already invites:
+- **Tally and the Guess-o-Matic.** If Sequins died, Tally labels the young toy IT GUESSES at the finale shelf, and her quiet precision answers the machine that stopped saying "probably".
+- **Kuku and the honest guess.** A clock proud never to guess narrates the chapter about a machine that pretends certainty, then has to ask the Sundial's question.
 
 ## 5. Art and voice budget
 
-Only some understudies will ever be used. STORY.md arms four perils for understudied roles (Sequins, Granny, the Sundial, Syllo); the other five understudied roles (Mirage, Pip, Judge Hoot, Fin, Clobber) are never in lethal danger, so their understudies are only built if a later side story arms them. Reserve understudies are not built at all unless the teacher asks.
+**What gets built.** Only the four lethal roles' understudies (the arming guard needs their art and voice entry), plus Gumleaf, who appears in every playthrough. The five never-in-danger understudies and the five reserves are designed only; **Private Dawdle is out of the plan** (side stories cannot kill Syllo any more).
 
 ### Art (ChatGPT, one prompt at a time, as in `ART-REQUESTS.md`)
 
-Every understudy needs exactly its original's pose set: one full-body idle plus the busts.
-
 | Stage | Characters | Set | Sheets | Images |
 |---|---|---|---|---|
-| **1 (main story)** | Tally, Coach Achilles, Kuku | Fair folk set: idle + neutral, happy, surprised, angry | 3 | 15 |
-| **1** | Memorial props | Fair lantern lit and dark, candle, wreath, small black ribbon, empty oval frame | 1 | 6 |
-| **1b (if needed)** | Mr Gumleaf | Villager set: idle + neutral, accusing, nervous, unmasked | 1 | 5 |
-| **2 (side story 7)** | Private Dawdle | Fair folk set | 1 | 5 |
-| 3 (only if a side story arms them) | Mr Ledger; Cadet Twitch; Justice Tuskworth (+ gavel), Mr Rubberstamp (+ thinking), Prosecutor Puff (+ smug, shaken) | as their originals | 5 | 5 + 5 + 6 + 6 + 7 = 29 |
-| with the vendor | Pebble | vendor set: idle + neutral, happy, sly, surprised | 1 | 5 |
-| reserve (not planned) | Sparky, Brumble, Homer, Rattle (villager set, two per sheet), Mark Zero (+ glitch) | | 3 | 26 |
-| **Planned total (stages 1–2)** | | | **5–6 sheets** | **26–31 images** |
-| Everything, reserve included | | | 16 | 91 |
+| **1** | Tally, Coach Achilles, Kuku | Fair folk set: idle + neutral, happy, surprised, angry | 3 | 15 |
+| **1** | Mr Rubberstamp | Clerk set: idle + neutral, happy, surprised, angry, thinking | 1 | 6 |
+| **1** | Mr Gumleaf (ordinary character) | Villager set: idle + neutral, accusing, nervous, unmasked (the last only if a village puzzle can draw him; otherwise 4) | 1 | 5 |
+| **1** | Quiet Scene and lantern props | Fair lantern lit and dark, candle, black curtain ribbon, cage cushion, reading glasses, cold shadow piece, Pip's headphones | 1 | 8 |
+| **Stage 1 total** | | | **6 sheets** | **34 images** |
+| not planned | Ledger, Dawdle, Tuskworth, Puff, Twitch (never in danger); Sparky, Brumble, Homer, Rattle, Mark Zero (reserve); Pebble | as their originals | 10 | 56 |
 
-Optional extras: a `worried` bust for Granny and Achilles (Granny's scripts already ask for one that does not exist), and STORY.md's Mayor statue ("mostly of his hat") as a seventh memorial prop. No new backgrounds: dark stations, memorials and the darkening are CSS on existing scenes, and dark villagers and the Oracle in puzzles are silhouettes of existing art.
-
-**Gumleaf (stage 1b):** once Miss Quill is unmasked in Ch2, the Schoolhouse station (and the Town Hall, which she hosts today) still needs a host on later visits. If STORY.md's Ch2 host table gives those stations someone else after the twist, Gumleaf waits for a post-game Schoolhouse side story; if not, he is needed with Ch2.
+Optional: a `worried` bust for Granny and Achilles. Nudge, the Guess-o-Matic, Quill's masks and the possession look are on STORY.md's own art list (Appendix H), not here. No new backgrounds: silence, dark stations, Quiet Scenes and lanterns are CSS on existing scenes.
 
 ### Voice (Gemini TTS, the existing pipeline)
 
-Estimated from today's voice catalogue (lines per speaker and where they play), adjusted for STORY.md: only lines after the peril, plus live text (station lead-ins, tutorials, rest scripts, recaps), plus new lines. New lines per understudy who replaces a death: takeover 4 + memorial 2–3 + grief arc 3 ≈ **10**. These are estimates; STORY.md's rewrite moves hosts and cuts narrator lectures, so recount with `node tools/voices.mjs --plan` once the scripts exist.
+Estimated from today's voice catalogue and STORY.md's beats: only lines after the death, live text, and STORY.md's understudy lines. Recount with `node tools/voices.mjs --plan` once the scripts exist.
 
-| Understudy | Live and post-peril lines (re-voiced) | New | Total | Stage |
-|---|---|---|---|---|
-| Tally | Fair stall lead-in and tutorial ~8, Ch2 Square ~2, Ch4 Guess-o-Matic reveal ~5, finale ~2 | 10 | **~27** | 1 (Ch1 peril) |
-| Coach Achilles | Hum Charm lines in Ch3–4 ~8, Ch3 character reference ~3, Fair Gate ~2, finale ~4, card-lesson frame 2 | 10 | **~29** | 1 (Ch2 peril) |
-| Kuku | Ch4 narration from the Stairwell ~12, Ch4 boss question 1, rest and rumour stations ~6, finale ~4 | 10 | **~33** | 1 (Ch3 peril) |
-| Shared lines | memorial gathering and candle lines (Sundial ×2, Kuku ×2), caricature memorial guests ×3, Algorithm grief barks ×3 | | **~10** | 1 |
-| Private Dawdle | Gallery lead-in and tutorial ~16, practice challenge ~2 | 10 | **~28** | 2 (side story 7) |
-| Gumleaf | Schoolhouse and Town Hall lead-ins and tutorials ~18 | ~4 | ~22 | 1b or later |
-| Ledger, Twitch, Tuskworth, Rubberstamp, Puff | ~7, ~5, ~7, ~33, ~6 | 10 each | ~17, ~15, ~17, ~43, ~16 | 3, only if armed |
-| Pebble | with the vendor | | ~15 | with the vendor |
-| Reserve (Sparky, Brumble, Homer, Rattle, Mark Zero) | ~17, ~10, ~7, ~12, ~35 | 10 each | ~131 together | not planned |
-| **Total** | | | **≈ 100 for stage 1, ≈ 150 for stages 1–2 with Gumleaf; ≈ 400 for everything** | |
+| Speaker | Lines | Total | Stage |
+|---|---|---|---|
+| Kuku | arrival 2, Ch3 question at the Stairwell 1, Ch4 narrator places (arrivals, one aside per station, the core question) ~10, finale (shadow, candles, sign line, last question) ~6, post-game line 1, arc ~2 | **~22** | 1 |
+| Coach Achilles | arrival 1, Ch3 hums ~4, trial reference 1, side story 10 ~2, finale `role:granny` (Copy, home, trophy, seven `wonder` answers, sky, candles) ~14, card-lesson frame 2, arc ~2 | **~26** | 1 |
+| Tally | arrival 1, Pattern Stall lead-in and reminder 2, rule-hunter tutorial ~6, side story 1 note 1, finale shelf ~3, arc ~2 | **~15** | 1 |
+| Mr Rubberstamp | one audition line (voice entry for the arming guard) | **1** | 1 |
+| Mr Gumleaf | Schoolhouse lead-in, reminder and tutorial ~8, side story 5 ~4, Hall aftermath ~2 | **~14** | 1 (Ch2) |
+| Quiet Scenes | four scenes × 6–8 lines in existing voices (the Sundial, Pip, the Oracle); last words reuse existing recordings | ~24 | 1 |
+| **Stage 1 total** | | **≈ 100 lines** (≈ 78 in new voices) | |
+| not planned | Ledger, Dawdle, Tuskworth, Puff, Twitch, reserves, Pebble | ≈ 250 | — |
 
-**Quota:** the tool sends up to 28 lines of one speaker per request, with a local cap of 10 requests a day per model. Stage 1 is about 6–8 requests (one day); stages 1–2 about 10. Fine on the free tier.
+**Quota:** up to 28 lines of one speaker per request; local cap 10 requests a day per model. Stage 1 is about 8 requests: one day on the free tier.
 
 **ElevenLabs (free plan, about 10,000 credits a month; about 750 already spent this month on SFX):**
-- **Feasible:** short **SFX stingers** with the existing `node tools/eleven.mjs sfx`: Kuku's cuckoo call, Achilles' whistle, a soft memorial bell; later Rubberstamp's stamp, Tuskworth's honk, Puff's puff, Pebble's shop bell. About 150 credits each: ≈ 450 for stage 1, ≈ 1,050 for all seven.
-- **Not feasible:** an understudy cast in ElevenLabs. ~150 lines × ~80 characters ≈ 12,000 characters for stages 1–2 alone, more than a month of free credits (about 1 credit per character on the standard models, about half on the Flash/Turbo models), and **voice design is paid-only** (the tool already notes the 403), so creature voices could not be designed anyway.
-- **Possible but not recommended:** Kuku alone with a premade ElevenLabs voice (~33 lines ≈ 2,700 credits). A premade voice is a generic human voice; Gemini Aoede with the "wooden box" effect will fit the cast better. Test one short line on the free plan's API before planning on it.
+- **Feasible:** SFX stingers with `node tools/eleven.mjs sfx`: Kuku's cuckoo call, Achilles' whistle, Rubberstamp's stamp, and a charm hum that gets no answer (for the Quiet Scene). About 150 credits each, ≈ 600.
+- **Not feasible:** voicing understudies in ElevenLabs. Stage 1 alone is ~6,000 characters (about 1 credit per character on standard models, half on Flash/Turbo), the voices could not be designed (voice design is paid-only; the tool already gets a 403), and premade voices are generic humans.
+- **Not recommended:** Kuku alone on a premade voice (~22 lines ≈ 1,800 credits). Gemini Aoede with the wooden-clock effect fits the cast better.
 
 ### Staged plan
 
-1. **Stage 0, code (no art or voice needed):** `data/cast.js`, `js/core/cast.js`, the dialogue/encounter/tutorial/map/battles changes, memory replays, dark stations, the "Characters can die" switch, `tools/test/cast.test.mjs`. With no `dead:` flags in any save, the game behaves exactly as today; every new path can be tried from the console (`Rift.State.setFlag('dead:sequins', true)`). Dark-if-lost roles (including the Mayor's side story 6) need nothing else.
-2. **Stage 1, the three main-story deaths, in story order:** Tally (Ch1), Coach Achilles (Ch2), Kuku (Ch3). For each: art sheet → voice entry and audition → takeover scene, memorial entry, keepsake and `u` lines, written with STORY.md's new scripts and run through the writing critics. Plus the memorial prop sheet and the stage 1 SFX. **3 character sheets, 1 prop sheet, about 100 lines.** Gumleaf with Ch2 if the host tables need him (1b).
-3. **Stage 2, side story 7:** Private Dawdle, before Syllo's Recruitment Drive ships.
-4. **Stage 3, only when SIDE-STORIES.md arms a peril:** that role's understudy. **Guard:** `canLose` (and a test) refuse to arm any peril whose understudy has no art or voice entry, so nobody can die before their replacement exists.
+1. **Stage 0, code:** `data/cast.js`, `js/core/cast.js`, the dialogue/encounter/tutorial/map/battles changes, memory mode, the Quiet Scene and arrival steps, the switch and content note, `tools/test/cast.test.mjs`. With no `dead:` flags the game behaves exactly as today; every path can be tried from the console (`Rift.State.setFlag('dead:sequins', true)`).
+2. **Stage 1, in story order:** Tally (Ch1) → Achilles (Ch2) → Kuku (Ch3) → Rubberstamp (Ch4, art and audition only); Gumleaf with Ch2; the Quiet Scene and lantern props; the stingers. Each Quiet Scene and arrival is written with STORY.md's scripts and goes through the writing critics. **Until a role's understudy has its art and voice entry, that role's death cannot be armed** (guard 6), so the chapters can ship before the understudies do, with tier 4 played as tier 3.
+3. **Later, only if the teacher adds a peril:** that role's designed understudy is built, and its `met`, fallbacks, Quiet Scene and arrival beat are added to STORY.md first.
 
-### One question for the teacher
+## Round 2 changes
 
-Should there be a Settings switch "Characters can die" (on by default) for a student who is grieving in real life? **Recommendation: yes.** It reuses the `away:` path Miss Quill already needs, costs one checkbox and a few lines, and STORY.md's "no undo" rule still holds for everyone who leaves it on.
+Aligned to STORY.md round 2 (Appendix D wins every conflict):
+
+1. **Off-stage rule** moved to the top; designed-only understudies get no cast entry, voice entry or art until a peril exists.
+2. **Lethal roles** are now Sequins, Granny, the Sundial and **Pip** (Ch4 Sorting Room, possessed). **Mr Rubberstamp moves into stage 1** (art and one audition line), because arming needs his art and voice entry, although STORY.md gives him no arrival. A post-game arrival is offered as a proposal only.
+3. **Side stories cannot kill:** Syllo and the Mayor are no longer lethal; **Private Dawdle leaves the plan** (designed only).
+4. **Required meetings** (`met`) per role replace round 1's "no death without a meeting" rule and the bond score; the six arming conditions are STORY.md's.
+5. **A disarmed tier 4 is stored as tier 3** (Feed +1); an armed one sets `dead:`, `stakes = 4`, `quiet: pending`, Feed +2.
+6. **`risked:<npc>` lock** at every tier; possession checks it and refuses any NPC with an active understudy (`Cast.canPossess`).
+7. **Silence and fallbacks:** the resolver order is original → arrived understudy → named stand-in (host slots) → silence. Understudies never appear when `dead:` is set; `arrived:<role>` and an `{ arrive }` step mark the arrival beat.
+8. **The switch overrides round 1's §3.9:** no `away:` gentle mode; off means no deaths, no understudies, worst tier Saved at a price.
+9. **Kuku** has one origin (Granny's hallway clock, taken in her sack, found in the Evidence Locker, mentioned only after `dead:sundial`); his personality is now proud, certain and brass-band, with STORY.md's lines. The "pocket clock" is gone.
+10. **Three Hum Charms:** Achilles' own charm (mentioned only after `dead:granny`); Granny's comes to you, silent, from the Constable.
+11. **The Quiet Scene replaces the memorial:** no gags, no caricature guests, no keepsake effects, no Feed refund; it opens the next chapter; understudies arrive later. Round 1's takeover scene became the one-line arrival beat; its jokes moved into the later arc.
+12. **Keepsakes are cosmetic** (cage cushion, charm and glasses, cold piece, headphones); the bond score and gated inheritance are gone.
+13. **Darkening** is STORY.md's: one Fair lantern per death, candles in the finale, the Feed. Round 1's vignette and desaturation steps are dropped.
+14. **New and changed roles:** **Nudge** cannot die (STORY.md; a villain's helper whose death would read as a reward); **Miss Quill** cannot die (Juror One, then the core); **Mr Gumleaf** is an ordinary, dark-if-lost character in every playthrough, built in stage 1. The Oracle, Mrs Crumb and the other one-station keepers stay dark if lost; their round 1 understudies are reserves.
+15. **Budget:** stage 1 is now 6 sheets (34 images) and about 100 lines (about 78 in new voices), down from round 1's planned set; everything else is designed only.
