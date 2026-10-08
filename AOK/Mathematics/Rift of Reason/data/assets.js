@@ -386,6 +386,7 @@
         'npc/sergeant-syllo/idle': { file: 'cast/sergeant-syllo-idle.webp', w: 362, h: 620 },
         'npc/sergeant-syllo/neutral': { file: 'cast/sergeant-syllo-neutral.webp', w: 148, h: 240 },
         'npc/sergeant-syllo/surprised': { file: 'cast/sergeant-syllo-surprised.webp', w: 148, h: 240 },
+        'npc/signpost': { file: 'cast/signpost.webp', w: 228, h: 240 },
         'npc/sundial': { file: 'cast/sundial-neutral.webp', w: 180, h: 240 },
         'npc/sundial/angry': { file: 'cast/sundial-angry.webp', w: 203, h: 240 },
         'npc/sundial/happy': { file: 'cast/sundial-happy.webp', w: 193, h: 240 },

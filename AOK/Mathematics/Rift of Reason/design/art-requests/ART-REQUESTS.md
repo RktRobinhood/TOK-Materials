@@ -583,6 +583,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > One object on a transparent canvas, no text, no numbers. Match the style board exactly. The Guess-o-Matic: Professor Sequins' beloved little fortune toy, small enough to hold in one wing. A shiny, well-polished brass box on four tiny feet, with a round glass window on the front showing a little drum of blank ivory tiles mid-spin, a tiny brass speaker grille below it, a side crank, and one sparkly magpie sequin glued proudly on top. A small brass die rests against one foot. Lovingly kept, a little old-fashioned, honest and endearing, like a clever pet. Soft warm glow from the window. Seen slightly from above, three-quarter view. Readable at small size.
 
+
+### 13.27 The Talking Signpost (session of 8 October)
+
+**Attach:** `style-board.png`
+**Save as:** `3-cast/signpost.png`
+**Ids:** `npc/signpost` (dialogue bust)
+
+> One head-and-shoulders dialogue bust on a transparent canvas, no text, no letters or numbers anywhere (the arms are blank wood). Match the style board exactly. The Talking Signpost: a gossipy old wooden signpost at a forest crossroads, alive in a storybook way. A weathered post with a friendly face carved into the wood near the top: bushy moss eyebrows, bright knot-hole eyes, a wide gossiping mouth caught mid-whisper. Five or six blank wooden arms pointing every which way like it can't decide. A little iron lantern hangs from one arm with a small warm flame, a few tiny moths around it. Moss, a mushroom and some ivy on the post. A nosy, chatty village gossip leaning in to share a secret; friendly, not spooky.
+
 ---
 
 ## Outcome log
@@ -715,3 +724,4 @@ Record what was approved and why, as in the Odyssey project.
 | 12.2 Rule tile and counter icons | First try (2026-10-07) | Heart trophy, crossed swords on a round shield, two gold card backs, sword with motion lines, teal crystal with a gold bolt, glowing gold card token, cracked heart pierced by a dark sword, scroll between two teal replay arrows. Plain objects, no medallions, as asked. The motion lines came out as separate shapes, so sheets.json now uses `minArea: 3000` (was 600) to fold them into the sword. Sliced into the 8 ids. Stage 12 complete. |
 | 13.18 Nudge | First try (2026-10-08) | Fluffy smoky-grey imp with curved horns, big ears, glowing red eyes, little fangs and a bell-tipped tail: same family as the shadow imps, cute and a bit pathetic. Idle (hand on hip), neutral, gleeful (eyes shut, hands together), surprised (with comic "!" strokes, kept: they are not text), sulking. Sliced into npc/nudge/{idle,neutral,happy,surprised,sad} (npc/nudge = neutral). |
 | 13.20 The Guess-o-Matic | First try (2026-10-08) | Polished brass box on claw feet with violet panels, a glass window on three blank ivory reels, a speaker grille, a wooden-handled crank and a brass die at its foot. Instead of one glued sequin it has a little sequin-feathered bird on top: kept, because it reads as Sequins' (a magpie's) toy at once. 13.40 now asks for the same bird, dulled and missing sequins, so the core reads as this toy grown old. Single prop, ui/guess-o-matic. |
+| 13.27 The Talking Signpost | First try (2026-10-08) | Mossy, ivy-wrapped post with a carved face (moss eyebrows, big eyes, a hand cupped to its mouth mid-whisper), a toadstool on top, six blank arms pointing every way, an iron lantern with three little moths. Nosy and friendly, no text. The face is small in the frame but reads at bust size. Single bust, npc/signpost. |

@@ -87,6 +87,7 @@
         "card-backs-3.png": {"type":"islands","minArea":1500,"class":"card","ids":["ui/card-back-expert","ui/card-back-rift-runner","ui/card-back-disco","ui/card-back-prism"]},
         "nudge.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/idle",["npc/nudge/neutral","npc/nudge"],"npc/nudge/happy","npc/nudge/surprised","npc/nudge/sad"]},
         "guess-o-matic.png": {"type":"single","id":"ui/guess-o-matic","class":"prop"},
+        "signpost.png": {"type":"single","id":"npc/signpost","class":"bust"},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
