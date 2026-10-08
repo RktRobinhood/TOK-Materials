@@ -84,7 +84,7 @@
         raven: '"Connect the dots." It never said "inside".',
     } };
     L['village'] = { inner: {
-        owlet: 'Two villagers accuse each other? Exactly one is an imp. Lovely.',
+        owlet: 'If someone is honest, everything they say is true. Start there. Follow it.',
         mothkin: 'Look for two claims that can\'t both be true. Someone\'s lying.',
         fox: 'Cast one as the imp. Run the scene. Does the village still work?',
         frogling: 'Keep a list: who accused whom. Gossip forgets. Lists don\'t.',
@@ -93,7 +93,7 @@
     L['switchboard'] = { inner: {
         owlet: 'AND needs both. OR needs one. NOT flips it. I find this relaxing.',
         mothkin: 'Follow one wire to the bulb. Just one. Then the next. Oh, the bulb.',
-        fox: 'Hidden switch? Imagine it on. Then off. One of them is the story.',
+        fox: 'Imagine the bulb lit. Work backwards. Which switches had to be on?',
         frogling: 'Remember which settings lit it. The bulb won\'t.',
         raven: '"Off" means false. Not "unknown".',
     } };

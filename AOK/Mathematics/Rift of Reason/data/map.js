@@ -266,7 +266,7 @@
                 intro: "station.b-town-hall.intro", reminder: "station.b-town-hall.reminder",
                 name: 'The Town Hall', chapter: 'ch2', map: 'ch2', type: 'boss', x: 1407, y: 191,
                 scene: 'scene/village-square', script: 'ch2.hall',
-                puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher'] } }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true } }],
+                puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher', 'constable'] } }, { id: 'switchboard', difficulty: 3 }, { id: 'village', difficulty: 3, opts: { forceImp: 'schoolteacher', hideRow: true, excludeRoles: ['constable', 'baker'] } }],
                 spawns: ['tremendoodle', 'rawmsay', 'booleon', 'obambu', 'beeyonce'], links: ['b-stairs', 'b-skyrift'],
                 teaser: 'The dome. The Mayor. The truth, if you can build a table big enough.',
             },

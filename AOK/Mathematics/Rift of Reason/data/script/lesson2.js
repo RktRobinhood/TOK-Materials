@@ -16,8 +16,12 @@
  * (`away:schoolteacher`) in every playthrough.
  *
  * Flags set here: suspect, cover, mayor (and mayor.interest, the Mayor's scene only), quillNamed
- * (the full table has named Quill: picks Granny's last words), spare-axiom, away:schoolteacher.
- * Read here: nudgeFled, guess-o-matic, ladle and paradox-board (side stories 4 and 5), dead:sequins.
+ * (the full table has named Quill: picks Granny's last words), lastWords (her / table: what she
+ * actually said, set inside the clock's `full`), spare-axiom, away:schoolteacher.
+ * Read here: nudgeFled, guess-o-matic, ladle (side story 4), dead:sequins (her Quiet Scene).
+ *
+ * A Ch3 jump-in can walk back through the Sky Rift and reach the Hall first: reveals wait for their
+ * set-ups (seen:ch2.square.win), and the suspicion and Mayor choices are skipped after the feast.
  */
 (function (root) {
     'use strict';
@@ -65,7 +69,8 @@
             { flag: 'guess-o-matic' },
         ] },
         { s: 'narrator', t: 'Through this rift. Into the past. The imps went this way.', when: { not: LATER } },
-        { s: 'narrator', t: 'We\'ve been to Boolesbury before. This time, it\'s a memory.', when: LATER },
+        { s: 'narrator', t: 'We\'ve been to Boolesbury before. This time, it\'s a memory.', when: { all: [LATER, { seen: 'ch2.soup' }] } },
+        { s: 'narrator', t: 'Boolesbury. The past. For us, it\'s already happened.', when: { all: [LATER, { not: { seen: 'ch2.soup' } }] } },
         { s: 'narrator', t: 'We know how the feast ends. Her lantern is out.', when: { all: [LATER, 'dead:granny'] } },
         { s: 'narrator', t: 'We know how the feast ends. Granny walks home.', when: { all: [LATER, '!dead:granny', { flag: 'stakes.ch2', in: [1, 2, 3] }] } },
     ];
@@ -82,11 +87,11 @@
         ], else: [{ play: 'ch2.soup' }] },
     ];
     S['ch2.soup'] = [
-        { s: 'narrator', t: 'Boolesbury. Eighteen fifty-something. Gas lamps, cobbles, and posters on every wall.' },
+        { s: 'narrator', t: 'Boolesbury, eighteen fifty-something. Every wall says: FEAST OF LAWS. SOUP FOR ALL. BY ORDER OF THE MAYOR.' },
         { s: 'narrator', t: 'One piece short. I feel… cloudier.', when: 'nudgeFled' },
-        { s: 'nudge', t: 'Flyers! My ring light got smashed, so now I do PAPER. Feast tonight!', when: '!nudgeFled' },
+        { s: 'nudge', t: 'Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!', when: '!nudgeFled' },
         { s: 'nudge', t: 'Flyers! Feast tonight! Like my mask? Nothing under it. Nothing shadowy.', when: 'nudgeFled' },
-        { s: 'nudge', t: 'Tonight\'s soup: one Axiom! Boil the keeper of the first rules. Then nobody can prove anything!' },
+        { s: 'nudge', t: 'Tonight\'s soup: one Granny Axiom! No Granny, no first rules. Engagement!' },
         { s: 'avatar', t: 'Small print: "Thinking Trophy. Predicted winner: nobody." Wrong. Me.' },
         { inner: { raven: '"By order of the Mayor." Order. Not "idea". Interesting.' } },
         HUM('{name}? Big kitchen. Big pot. Don\'t panic. I\'m panicking for both of us.'),
@@ -95,7 +100,7 @@
     // ---------------------------------------------------------------- Old Wick's lane
 
     S['ch2.bridge'] = [
-        { s: 'lamplighter', t: 'Evening, traveller. Old Wick. I light the lamps. And I work this old bridge.' },
+        { s: 'lamplighter', t: 'Evening. Old Wick. I light the lamps. Tonight they want the big stove lit too.' },
     ];
     S['ch2.bridge.win'] = [
         { s: 'lamplighter', t: 'The lamps agree with you. They rarely agree with anyone.' },
@@ -122,6 +127,7 @@
             frogling: 'The loud one is always the bad one. Muskrat. The guards. Now him.',
         } },
         { s: 'postmistress', e: 'accusing', t: 'Never mind bread! The flyers say imps. Which of you three is one?' },
+        { s: 'sweep', e: 'nervous', t: 'Not me! I\'m honest! I\'m honest!' },
     ];
     // After the table: the Mayor's fib, Quill (clue 1, inside a joke), the suspicion choice, a hum.
     S['ch2.square.win'] = [
@@ -132,6 +138,12 @@
             owlet: 'Correct. Every sentence is true or false. First rule of everything.',
             mothkin: 'Shh. Her scarf. There\'s wind. It doesn\'t move. …Lovely lamp behind her, though.',
         } },
+        // A Ch3 jump-in who walks back meets the Square after the feast: no suspicion to choose then.
+        { when: { seen: 'ch2.hall.win' }, then: [
+            { s: 'narrator', t: 'We know who was behind the feast now. This is only a memory.' },
+        ], else: [{ play: 'ch2.square.suspect' }] },
+    ];
+    S['ch2.square.suspect'] = [
         { s: 'narrator', t: 'Somebody wants Granny in that soup. Who\'s behind the feast?' },
         { choice: [
             { t: 'The Mayor.', flag: 'suspect', value: 'mayor' },
@@ -153,6 +165,8 @@
     // At the Post Office if you go there first, otherwise at the Clock Tower (played once).
     // Quill saves you; the avatar's certainty: "See? She's on my side." (quoted at the Hall).
     S['ch2.cover'] = [
+        // Nudge sets the Constable on you, so Quill's rescue is a rescue from him.
+        { s: 'nudge', t: 'Constable! A stranger! Ask them EVERYTHING! I\'ll count the questions!' },
         { s: 'constable', e: 'accusing', t: 'Stranger, eh? Name and business. Slowly. I write slowly.' },
         { inner: { raven: 'If I say it smoothly enough, I am one. Words make things so.' } },
         { choice: [
@@ -181,6 +195,7 @@
         { s: 'schoolteacher', t: 'Constable, this one\'s with me. I checked their story. Every row.' },
         { s: 'constable', t: 'If Miss Quill checked it, it\'s checked. Still. A few questions. For the form.' },
         { s: 'avatar', e: 'happy', t: 'See? She\'s on my side.' },
+        { s: 'schoolteacher', t: 'Take my red pencil, child. Mark what\'s wrong. Never write "maybe".' },
     ];
 
     S['ch2.post'] = [
@@ -200,7 +215,7 @@
     // The Sundial's companion beat for Ch2 (a `met` beat for its peril in Ch3).
     S['ch2.clockmaker'] = [
         { s: 'clockmaker', t: 'Mind the pendulums! A hundred clocks, all correct. I check them twice.' },
-        { s: 'narrator', t: 'They tick. I\'ve never ticked. I just… point.' },
+        { s: 'narrator', t: 'They tick. All correct. I just point. And on cloudy days, I guess.' },
         { s: 'clockmaker', t: 'A sundial! You never need winding. I\'ve always envied that.' },
     ];
     S['ch2.clockmaker.win'] = [
@@ -222,7 +237,7 @@
         { s: 'constable', t: 'Your story never wobbled. Lies can be tidy too.', when: { flag: 'cover', not: 'visitor' } },
         { s: 'constable', t: 'A true story holds too. Proves less than you\'d think.', when: { flag: 'cover', is: 'visitor' } },
         { inner: { raven: 'Smooth words. Still a story. He knew.' }, when: { flag: 'cover', not: 'visitor' } },
-        { inner: { raven: 'True words. Still no proof. Interesting.' }, when: { flag: 'cover', is: 'visitor' } },
+        { inner: { raven: 'True words. Still not proof. Noted.' }, when: { flag: 'cover', is: 'visitor' } },
         HUM('Somebody tall keeps checking the pot. Hums in ones and zeros. Very tidy.'),
         { inner: { frogling: '"Tall." Lots of birds are tall. Herons are tall. I\'m not enjoying this.' }, when: '!dead:granny' },
     ];
@@ -234,12 +249,17 @@
         { inner: { fox: 'Picture the Mayor reading what he signed. …I can\'t. Can you?' } },
     ];
     // The door opens. Up now, or back to the Square to face the man who signed it.
+    // A Ch3 jump-in walking back reaches the Stairs after the feast: no choice then.
     S['ch2.stairs.win'] = [
-        { s: 'narrator', t: 'The door opens. Steam pours down the stairs.' },
-        HUM('Come up quickly, dear. The water is singing.'),
-        { choice: [
-            { t: 'Up the stairs. Now.' },
-            { t: 'Back to the Square first. The Mayor signed this.', then: [{ play: 'ch2.mayor' }] },
+        { when: { seen: 'ch2.hall.win' }, then: [
+            { s: 'narrator', t: 'The door opens. The hall above is quiet now.' },
+        ], else: [
+            { s: 'narrator', t: 'The door opens. Steam pours down the stairs.' },
+            HUM('Come up quickly, dear. The water is singing.'),
+            { choice: [
+                { t: 'Up the stairs. Now.' },
+                { t: 'Back to the Square first. The Mayor signed this.', then: [{ play: 'ch2.mayor' }] },
+            ] },
         ] },
     ];
 
@@ -249,6 +269,8 @@
     S['ch2.mayor'] = [
         { scene: 'scene/village-square' },
         { s: 'mayor', e: 'nervous', t: 'You again! I\'m busy. Being innocent.' },
+        { s: 'avatar', t: 'Your feast is boiling Granny. You signed it.' },
+        { s: 'mayor', e: 'nervous', t: 'Boiling? It said "soup"! …I stopped reading at "soup".' },
         { s: 'mayor', t: 'Your table says I\'m not an imp. True. I\'m worse. I\'m a mayor who doesn\'t read.' },
         { flag: 'mayor.interest', value: 1 },
         { choice: [
@@ -302,7 +324,7 @@
         { s: 'baker', e: 'accusing', t: 'Imps in my queue! In my customers\' faces! Which ones?' },
     ];
     S['ch2.bakery.win'] = [
-        { s: 'baker', t: 'Well I never. I\'d have blamed the one who looked nervous.' },
+        { s: 'baker', t: 'Well! I\'d have blamed the one who looked nervous.' },
     ];
 
     // Quill at her best, before the Hall; Mr Gumleaf after it (every playthrough).
@@ -342,14 +364,15 @@
     // The West Bridge (rumour; plays every visit).
     S['ch2.rumour'] = [
         { s: 'narrator', t: 'Gossip on the West Bridge: a grey heron in a frock coat haunts the Schoolhouse.' },
-        { s: 'narrator', t: 'He writes only ones and zeros. Shy. Wins bring him out.' },
+        { s: 'narrator', t: 'He\'s shy. He only comes out for winners.' },
         { flag: 'rumour:booleon', value: true },
     ];
 
     // ---------------------------------------------------------------- the Feast of Laws (boss)
 
-    // The rope: 8 notches. Granny's own warnings; her last words depend on whether the full
-    // table has named Quill yet (quillNamed, set first thing in the win).
+    // The rope: 8 notches. Granny's own warnings. Her last words depend on whether the full
+    // table has named Quill yet (quillNamed, set first thing in the win); `full` records which
+    // words she said (lastWords), so her Quiet Scene replays exactly those.
     C.ch2 = {
         label: 'The rope is lowering',
         size: 8,
@@ -362,7 +385,7 @@
             { s: 'granny', t: 'My feet are warm, dear. That is new.' },
             { s: 'granny', t: 'Warm, dear. Like a bath. A worrying bath.' },
             { s: 'granny', t: 'I can see a carrot. It is looking at me.' },
-            { s: 'granny', t: 'Someone has added salt. Nobody asked me.' },
+            { s: 'granny', t: 'A pot never hurt anybody, I said. I take it back.' },
             { s: 'granny', t: 'The leeks are getting friendly. Too friendly.' },
             { s: 'granny', t: 'Up to my shell now, dear. Every row. Quickly.' },
             { s: 'granny', t: 'The water is singing louder, dear. I\'d like it to stop.' },
@@ -371,8 +394,10 @@
         full: [
             { s: 'narrator', t: 'Granny looks at you. Not at the rope.' },
             { when: 'quillNamed', then: [
+                { flag: 'lastWords', value: 'her' },
                 { s: 'granny', t: 'Don\'t watch the rope, dear. Watch her.' },
             ], else: [
+                { flag: 'lastWords', value: 'table' },
                 { s: 'granny', t: 'Don\'t watch the rope, dear. Watch the table.' },
             ] },
             { s: 'narrator', t: 'The rope goes slack. Steam. Then silence.' },
@@ -393,16 +418,21 @@
         { s: 'constable', t: 'Guarding the soup. Two p\'s in "soup"?' },
         { s: 'granny', t: 'Up here, dear. Rope. Pot. Leeks. Don\'t panic.' },
         { when: { flag: 'mayor', is: 'torn' }, then: [
-            { s: 'mayor', t: 'I tore it up! The guests went home! Only imps at the tables now!' },
-        ], else: [
-            { when: { flag: 'mayor', is: 'key' }, then: [
-                { s: 'narrator', t: 'The Mayor hides behind a pillar. He won\'t look at you.' },
-            ], else: [
-                { s: 'mayor', t: 'Is it soup yet?' },
-                { s: 'nudge', t: 'Tradition!' },
-                { s: 'granny', t: 'Me, dear. I\'m in it.' },
-                { s: 'mayor', e: 'nervous', t: '…Is that allowed?' },
-            ] },
+            { s: 'mayor', t: 'I tore it up! Half the guests went home!' },
+        ] },
+        { when: { flag: 'mayor', is: 'key' }, then: [
+            { s: 'narrator', t: 'The Mayor hides behind a pillar. He won\'t look at you.' },
+        ] },
+        // He knows now what the feast boils. He still won't stop it.
+        { when: { flag: 'mayor', is: 'refused' }, then: [
+            { s: 'mayor', e: 'nervous', t: 'I\'m not looking. If I don\'t look, it isn\'t happening.' },
+        ] },
+        // He never went back to read it: he still thinks it's soup.
+        { when: { flag: 'mayor', unset: true }, then: [
+            { s: 'mayor', t: 'Is it soup yet?' },
+            { s: 'nudge', t: 'Tradition!' },
+            { s: 'granny', t: 'Me, dear. I\'m in it.' },
+            { s: 'mayor', e: 'nervous', t: '…Is that allowed?' },
         ] },
         { s: 'narrator', t: 'He moves. A loaf rolls out of his hat.' },
         { s: 'schoolteacher', t: 'I\'ll keep the tables, child. You find the imps.' },
@@ -410,7 +440,7 @@
     // Before stage 2 (the winch box): Nudge's winch; the Mayor's help drains the rope.
     S['ch2.hall.stage2'] = [{ play: 'ch2.hall.winch', once: true }];
     S['ch2.hall.winch'] = [
-        { s: 'nudge', t: 'Paws off my winch! It has a little crank! I LOVE the little crank!' },
+        { s: 'nudge', t: 'Paws off my winch! Every turn is a click! Every click, she goes lower!' },
         { when: ROPE_OPEN, then: [
             { when: { flag: 'mayor', is: 'key' }, then: [
                 { s: 'narrator', t: 'The Mayor\'s kitchen key jams the winch. The rope stops. For now.' },
@@ -434,16 +464,25 @@
         { s: 'granny', t: 'Check it yourself, dear. Every row.' },
     ];
 
-    // The win: the full table has named her. The push, the liar sentence, the unmasking; then at
-    // most six lines (STORY.md App. B): the tier, Quill's exit, the Algorithm twice, one voice, one question.
+    // The win: the full table has named her. The hero answers, the push, the liar sentence, the
+    // unmasking (the business first, her confession last); then at most six lines (STORY.md
+    // App. B): the tier, Quill's exit, the Algorithm twice, one voice, one question.
+    // The reveals and the Mayor's sentence need their set-ups at the Square: a Ch3 jump-in who
+    // walks back through the Sky Rift reaches the Hall first.
     S['ch2.hall.win'] = [
         { flag: 'quillNamed' },
+        { s: 'avatar', e: 'surprised', t: 'Miss Quill? You were on my side.', when: { seen: 'ch2.cover' } },
         { when: ROPE_OPEN, then: [
             { s: 'schoolteacher', e: 'accusing', t: 'One or zero, child. You are a zero.' },
             { clock: 'ch2', tick: 1 },
         ] },
-        { s: 'granny', t: 'Ask her the Mayor\'s sentence. The one that ate itself.' },
-        { s: 'avatar', t: 'The Mayor\'s sentence. The one that ate itself.', when: 'dead:granny' },
+        { when: { seen: 'ch2.square.win' }, then: [
+            { s: 'granny', t: 'Ask her the Mayor\'s sentence. The one that ate itself.' },
+            { s: 'avatar', t: 'The Mayor\'s sentence. The one that ate itself.', when: 'dead:granny' },
+        ], else: [
+            { s: 'granny', t: 'Ask her a sentence that eats itself, dear.' },
+            { s: 'avatar', t: 'A sentence that eats itself. Let\'s try one.', when: 'dead:granny' },
+        ] },
         // A wrong pick costs a notch; pick again.
         { choice: [
             { t: 'This statement is false.' },
@@ -473,20 +512,23 @@
             ] },
         ] },
         { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
-        { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. With her tired eyes.' },
+        { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. Her own tired eyes.' },
+        { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
+        { s: 'narrator', t: 'Round the tables, more masks drop. Imps in borrowed faces. Nudge\'s too.' },
+        { s: 'nudge', t: 'My mask! Forty villagers trusted that face! I COUNTED!', when: '!dead:granny' },
+        { s: 'narrator', t: 'And out of Nudge\'s mask tumbles my first piece.', when: 'nudgeFled' },
+        // Her confession, last: she chose the feed.
         { s: 'schoolteacher', e: 'unmasked', t: 'Forty years I marked "maybe" wrong. Red ink. Every child.' },
         { s: 'schoolteacher', e: 'unmasked', t: 'If "maybe" was allowed… I was cruel for forty years.' },
-        { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
-        { s: 'nudge', t: 'My mask! Don\'t look at me!', when: '!dead:granny' },
-        { s: 'narrator', t: 'Nudge\'s mask falls too.', when: 'dead:granny' },
-        { s: 'narrator', t: 'And out of Nudge\'s mask tumbles my first piece.', when: 'nudgeFled' },
-        { s: 'sweep', t: 'My sentence! From the board!', when: { all: ['paradox-board', '!dead:granny'] } },
-        { inner: {
-            owlet: 'I called it the first rule. It was an assumption. That sentence just broke it.',
-            frogling: 'Loud was bad three times. The fourth time, quiet was.',
-        } },
-        { inner: { fox: 'Great story. Wrong face.' }, when: '!dead:granny' },
-        { inner: { fox: 'I pictured the wrong face. The whole time.' }, when: 'dead:granny' },
+        { s: 'schoolteacher', e: 'unmasked', t: 'So when a voice offered me a world with no maybes… I said yes.' },
+        { when: { seen: 'ch2.square.win' }, then: [
+            { inner: {
+                owlet: 'I called it the first rule. It was an assumption. That sentence just broke it.',
+                frogling: 'Loud was bad three times. The fourth time, quiet was.',
+            } },
+            { inner: { fox: 'Great story. Wrong face.' }, when: '!dead:granny' },
+            { inner: { fox: 'I pictured the wrong face. The whole time.' }, when: 'dead:granny' },
+        ] },
         { clock: 'ch2', resolve: true },
         { when: 'dead:granny', then: [
             { s: 'narrator', t: 'Constable Clobber takes off his helmet. He hands you her charm and her glasses.' },
@@ -504,39 +546,56 @@
                 { s: 'granny', e: 'angry', t: 'My shawl boiled away. With your card in the pocket.', when: { clock: 'ch2', gte: 8 } },
             ] },
         ] },
+        // Her exit, seen: up to the window and the Sky Rift beyond it.
+        { s: 'narrator', t: 'She steps up onto the window. The Sky Rift glows behind her.' },
         { s: 'schoolteacher', e: 'unmasked', t: 'Tomorrow is waiting. Everyone there has already decided about you.' },
         { flag: 'away:schoolteacher' },
         { s: 'algorithm', t: '"SEE? SHE\'S ON MY SIDE." SHE WAS. MY SIDE.', when: { seen: 'ch2.cover' } },
         { s: 'algorithm', t: 'THE NEXT ERA WILL BE… probably— LOUDER.' },
-        { inner: { mothkin: 'He twitched. Bread in his hat. Guilty of bread.' }, when: '!dead:granny' },
-        { inner: { mothkin: 'He twitched. Bread in his hat. That\'s all a twitch proved.' }, when: 'dead:granny' },
-        { s: 'narrator', t: 'You suspected the Mayor. Miss Quill\'s table cleared Miss Quill. Who checks the table?', when: { flag: 'suspect', is: 'mayor' } },
-        { s: 'narrator', t: 'You waited for the table. Then the table lied. Who checks the table?', when: { flag: 'suspect', is: 'none' } },
-        { s: 'narrator', t: 'You guessed Miss Quill. Her own table said no. Who checks the table?', when: { flag: 'suspect', is: 'quill' } },
-        { s: 'narrator', t: 'Miss Quill\'s table cleared Miss Quill. Who checks the table?', when: { flag: 'suspect', unset: true } },
+        { when: { seen: 'ch2.square.win' }, then: [
+            { inner: { mothkin: 'He twitched. Bread in his hat. Guilty of bread.' }, when: '!dead:granny' },
+            { inner: { mothkin: 'He twitched. Bread in his hat. That\'s all a twitch proved.' }, when: 'dead:granny' },
+        ] },
+        // The Sundial's question. After her death it is said for her, not about your guess.
+        { s: 'narrator', t: 'Every row, she said. Her whole life. Who checks the table now?', when: 'dead:granny' },
+        { when: '!dead:granny', then: [
+            { s: 'narrator', t: 'You suspected the Mayor. Miss Quill\'s table hid one row. Hers. Who checks the table?', when: { flag: 'suspect', is: 'mayor' } },
+            { s: 'narrator', t: 'You waited for the table. Then the table lied. Who checks the table?', when: { flag: 'suspect', is: 'none' } },
+            { s: 'narrator', t: 'You guessed Miss Quill. Her own table left her row out. Who checks the table?', when: { flag: 'suspect', is: 'quill' } },
+            { s: 'narrator', t: 'Miss Quill\'s table left out one row. Hers. Who checks the table?', when: { flag: 'suspect', unset: true } },
+        ] },
     ];
 
     // ---------------------------------------------------------------- the Sky Rift
 
     // Rift node: plays on every visit. The first time after the Hall: Granny sets off home.
+    // A Ch3 jump-in walks back in here first: the memory framing, before the Hall.
     S['ch2.skyrift'] = [
         { when: { all: [{ seen: 'ch2.hall.win' }, { not: LATER }, { not: { seen: 'ch2.skyrift.goodbye' } }] },
             then: [{ play: 'ch2.skyrift.goodbye' }],
-            else: [{ s: 'narrator', t: 'The Sky Rift. Tomorrow hums on the other side.' }] },
+            else: [
+                { s: 'narrator', t: 'Boolesbury, below us. All this happened already. We\'re only remembering.', when: { all: [LATER, { not: { seen: 'ch2.hall.win' } }] } },
+                { s: 'narrator', t: 'The Sky Rift. Tomorrow hums on the other side.', when: { any: [{ not: LATER }, { seen: 'ch2.hall.win' }] } },
+            ] },
     ];
+    // Lesson 1's set-ups pay off here ("That's my {name}.", "Hum you later."). After her death only
+    // the Sundial's line plays.
     S['ch2.skyrift.goodbye'] = [
-        { s: 'granny', e: 'happy', t: 'I\'ll walk home, dear. Downhill all the way. Through time.' },
-        { s: 'narrator', t: 'The next piece is up there. In tomorrow. I can feel it.' },
+        { s: 'granny', e: 'happy', t: 'That\'s my {name}. I\'ll walk home, dear. Downhill. Through time.' },
+        { s: 'granny', t: 'Hum you later.' },
+        { s: 'narrator', t: 'Miss Quill went up there. So did my next piece. Tomorrow, then.' },
     ];
 
     // ---- Granny's Quiet Scene (STORY.md §5 and App. D). It opens Ch3 (or the first later chapter
-    // reached), before anything else, if dead:granny. Her last words match the clock's `full` lines.
+    // reached), before anything else, if dead:granny. Her last words are the ones `full` recorded.
+    // The Sundial only sees what you see (A.3): what happens at the Fair is its honest guess.
     S['quiet.granny'] = [
         { keepsake: 'granny-charm-glasses' },
         { s: 'narrator', t: 'After the feast, the Constable gave you her Hum Charm. And her reading glasses.' },
-        { s: 'narrator', t: 'Back at the Fair, her lantern is dark.' },
-        { s: 'granny', t: 'Don\'t watch the rope, dear. Watch her.', replay: true, when: 'quillNamed' },
-        { s: 'granny', t: 'Don\'t watch the rope, dear. Watch the table.', replay: true, when: '!quillNamed' },
+        { s: 'narrator', t: 'I\'d guess the Professor sets out her cards each morning now. Nobody sits.', when: '!dead:sequins' },
+        { s: 'narrator', t: 'I\'d guess Syllo salutes two dark lanterns each morning now.', when: 'dead:sequins' },
+        { s: 'granny', t: 'Don\'t watch the rope, dear. Watch her.', replay: true, when: { flag: 'lastWords', is: 'her' } },
+        { s: 'granny', t: 'Don\'t watch the rope, dear. Watch the table.', replay: true, when: { flag: 'lastWords', not: 'her' } },
         { s: 'narrator', t: 'Ninety years she said good morning to me. I never once said it first.' },
         { choice: [
             { t: 'She was looking at me. Not the rope.' },
@@ -605,7 +664,7 @@
         { s: 'constable', t: 'Again? From the top, then. Same story.' },
     ];
     S['station.b-stairs.intro'] = [
-        { s: 'clockmaker', t: 'One switch hides behind a curtain. Even I forget which. Bread does that.' },
+        { s: 'clockmaker', t: 'One switch hides behind a curtain. The Mayor wanted that. He paid in bread.' },
     ];
     S['station.b-stairs.reminder'] = [
         { s: 'clockmaker', t: 'The hidden switch is still hidden. That\'s its whole job.' },
@@ -616,7 +675,7 @@
     S['station.b-town-hall.reminder'] = [
         // After Achilles has arrived (Ch3), her charm hums with his voice here. Never before.
         { when: ACHILLES_HERE, then: [
-            { s: 'granny', hum: true, t: '', u: 'That\'s the hall. Where her lantern went out. …I\'m listening. Slowly, for once.' },
+            { s: 'granny', hum: true, t: '', u: 'Coach here. Her charm went quiet somewhere near you. …I\'m listening. Slowly, for once.' },
         ] },
         { s: 'granny', t: 'Back, dear? Every row. The water\'s still warm.', when: { all: ['!dead:granny', { not: { seen: 'ch2.hall.win' } }] } },
         { s: 'constable', t: 'I\'m guarding the door. Somebody has to.', when: { any: ['dead:granny', { seen: 'ch2.hall.win' }] } },
