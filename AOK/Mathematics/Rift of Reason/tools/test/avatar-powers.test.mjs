@@ -3,9 +3,10 @@
 // determinism.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { loadRift } from './harness.mjs';
 import { Rift, E, AI, inst, setup, act, onBoard, toHand, toDiscard, pass, hp, atk, plain, stats, invariants } from './battle-helpers.mjs';
 
-const same = (a, b, m) => assert.deepEqual(plain(a), b, m);
+const same = (a, b, m) => assert.deepEqual(plain(a), plain(b), m);
 const powerActs = s => E.legalActions(s).filter(a => a.type === 'power');
 const texts = s => s.lastEvents.map(e => e.text).join(' | ');
 
@@ -364,4 +365,70 @@ test('Normal takes a clear power play: Close the Proof on a 1-health enemy', () 
     const a = AI.choose(s, { level: 'normal', salt: 'clear' });
     assert.equal(a.type, 'power');
     assert.equal(a.target, 'p1c0');
+});
+
+// ---- team codes, launchers and Granny's lesson ----
+
+const G = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js',
+    'data/axioms.js', 'data/tactics.js', 'data/avatars.js', 'data/powers.js', 'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js',
+    'js/battle/lesson.js', 'js/battle/team-codes.js', 'js/ui/battles.js']);
+const TC = G.Battle.TeamCodes;
+
+test('team codes carry the avatar (type, variant, tweaks); old codes still import', () => {
+    const team = [inst('lobstorian'), inst('swiftlet')];
+    const code = TC.exportTeam({ nickname: 'Ida', creatures: team, avatar: { type: 'raven', variant: 'girl', nickname: 'Ida', tweaks: ['deeper', 'junk', 'deeper', 'blood'] } });
+    const back = TC.importTeam(code);
+    same(back.avatar, { type: 'raven', variant: 'girl', tweaks: ['deeper', 'blood'] });
+    const ghost = TC.ghostOpponent(back);
+    same(ghost.power, { id: 'call-it-out', tweaks: ['deeper', 'blood'] });
+    // No avatar: the code imports with avatar null and the ghost uses its team's main colour (Competent: the other power).
+    const plainCode = TC.exportTeam({ nickname: 'Bo', creatures: [inst('lobstorian'), inst('astrophysicat'), inst('swiftlet')] });
+    const old = TC.importTeam(plainCode);
+    assert.equal(old.avatar, null);
+    assert.equal(G.State.decode('team', plainCode).av, undefined);
+    same(TC.ghostOpponent(old).power, { id: 'foresee', tweaks: [] });
+    const v1 = TC.importTeam(G.State.encode('team', { v: 1, n: 'Old', a: [], t: [['astrophysicat', 0, [], 0, 0]] }));
+    assert.equal(v1.avatar, null);
+    // Impossible avatars are refused.
+    const crafted = av => G.State.encode('team', Object.assign(G.State.decode('team', plainCode), { av }));
+    assert.throws(() => TC.importTeam(crafted(['dragon', 'boy', []])), /unknown avatar/);
+    assert.throws(() => TC.importTeam(crafted(['owlet', 'boy', ['godmode']])), /unknown avatar/);
+    assert.throws(() => TC.importTeam(crafted(['owlet', 'boy', ['quick', 'cheap', 'deeper', 'broader']])), /unknown avatar/);
+    assert.throws(() => TC.importTeam(crafted('owlet')), /unknown avatar/);
+});
+
+test('trainers use the power of their main colour: board power at Normal, the other above', () => {
+    for (const [id, t] of Object.entries(G.data.trainers)) {
+        const side = G.Battles.trainerSide(id);
+        assert.ok(side.power && G.data.powers[side.power.id], id + ' has a power');
+        const kind = G.data.powers[side.power.id].kind;
+        if (G.data.powers[side.power.id].colour !== 'emotion') assert.equal(kind, side.ai === 'normal' ? 'board' : 'other', id);
+        same(side.power, G.Powers.forTeam(side.team, side.ai));
+    }
+    same(G.Powers.forTeam(['rawmsay', 'speedcheeta', 'lobstorian'], 'normal'), { id: 'outrage', tweaks: [] });
+    same(G.Powers.forTeam(['rawmsay', 'speedcheeta', 'lobstorian'], 'competent'), { id: 'pile-on', tweaks: [] });
+    assert.equal(G.Powers.forTeam([], 'normal'), null);
+});
+
+test('launchers pass the avatar power and the opponent power; Granny\'s lesson has none', () => {
+    const state = G.State.freshState();
+    state.avatar = { type: 'fox', variant: 'boy', nickname: 'Test' };
+    state.flags['card-lesson-won'] = true;
+    state.flags['card-rules-version'] = 3;
+    G.State.get = () => state;
+    const routes = [];
+    G.Router = { go: (screen, params) => routes.push({ screen, params }), replace: () => {} };
+    G.UI = { toast() {}, modal() {} };
+    G.Battles.practice();
+    const p = routes.at(-1).params;
+    same(p.player.power, { id: 'brainstorm', tweaks: [] });
+    same(p.opponent.power, G.Powers.forTeam(p.opponent.team, 'normal'));
+    G.Battles.story();
+    same(routes.at(-1).params.player.power, { id: 'brainstorm', tweaks: [] });
+    assert.ok(routes.at(-1).params.opponent.power);
+    // Granny's guided lesson: no power for either side.
+    const lesson = G.Battle.Lesson.create();
+    assert.equal(lesson.players[0].power, null);
+    assert.equal(lesson.players[1].power, null);
+    assert.ok(!E.legalActions(lesson).some(a => a.type === 'power'));
 });

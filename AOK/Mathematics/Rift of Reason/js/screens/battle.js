@@ -196,6 +196,8 @@
             axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
             consumables: given.consumables || {},
             bag: given.bag || [],
+            // Hero power ({ id, tweaks }, data/powers.js) chosen by the launcher (js/ui/battles.js).
+            power: given.power || null,
             art: given.art || (save && save.avatar && save.avatar.type && Rift.avatarArt ? Rift.avatarArt(save.avatar, 'neutral') : null),
         };
     }
@@ -223,8 +225,8 @@
         let state = guide && guide.create ? guide.create() : p.initialState ? p.initialState : E.createBattle({
             seed,
             players: [
-                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag },
-                { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts },
+                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag, power: me.power },
+                { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts, power: opp.power || null },
             ],
             axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
             options: Object.assign({}, p.battleOptions, { mode }),
@@ -1753,7 +1755,8 @@
         function renderEnd(L) {
             dom.end.innerHTML = '';
             const end = L.find(a => a.type === 'end');
-            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark' && a.type !== 'item');
+            // The hero power has no button yet (issue #52), so it does not stop the End turn glow.
+            const onlyEnd = end && !ui.sparkFor && !L.some(a => a.type !== 'end' && a.type !== 'spark' && a.type !== 'item' && a.type !== 'power');
             const style = bg('ui/end-turn');
             const mine = decider() === ME && !ui.busy;
             const b = el('button.b-end' + (style ? '.art' : '') + (onlyEnd ? '.glow' : ''), {
@@ -1950,7 +1953,7 @@
         // Recent plays, like a card battler's history column: the last moves as small pictures
         // (newest first, yours teal, theirs coral). Each holds what followed it (damage, defeats,
         // abilities) until the next move; hover, focus or tap shows the card and those lines.
-        const MOVES = { play: '✦', 'tactic-play': '✦', attack: '⚔', activate: '⚡', axiom: '⚖', reset: '↺', time: '⧗', 'item-use': '🎒', spark: '✦' };
+        const MOVES = { play: '✦', 'tactic-play': '✦', attack: '⚔', activate: '⚡', axiom: '⚖', reset: '↺', time: '⧗', 'item-use': '🎒', spark: '✦', 'power-use': '✷' };
         const RECENT = 5;
         function recentMoves() {
             const moves = [];

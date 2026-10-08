@@ -3,10 +3,16 @@
  * (the imported team driven by the AI). Works fully offline. Uses the save-code
  * format from js/core/state.js (prefix, kind 'team', base64 JSON, checksum).
  *
- * Rift.Battle.TeamCodes.exportTeam({ nickname, creatures: [instances ≤ 14], axioms: [ids], tactics?: [ids], stake? }) → code
- * Rift.Battle.TeamCodes.importTeam(code) → { nickname, team: [instances], axioms: [ids], tactics: [ids], stake, version }
+ * Rift.Battle.TeamCodes.exportTeam({ nickname, creatures: [instances ≤ 14], axioms: [ids], tactics?: [ids], stake?,
+ *                                    avatar?: { type, variant, tweaks? } }) → code
+ * Rift.Battle.TeamCodes.importTeam(code) → { nickname, team: [instances], axioms: [ids], tactics: [ids], stake, version,
+ *                                            avatar: { type, variant, tweaks } | null }
  *   throws a friendly Error on typos, tampering, or impossible creatures.
- * Rift.Battle.TeamCodes.ghostOpponent(imported) → opponent for the battle screen
+ * Rift.Battle.TeamCodes.ghostOpponent(imported) → opponent for the battle screen, with the power of the
+ *   classmate's avatar (data/powers.js; a code without an avatar: the power of the team's main colour)
+ *
+ * The avatar (hero powers, design/AVATARS.md section 1) is an optional `av` field: [type, variant,
+ * tweaks]. Codes without it still import (avatar null), and older copies of the game ignore it.
  *
  * Version 2 (Card Arena) rows: [species, powerDelta, injuries, warpedAbility|0, trophyOf|0,
  * [variantAttack, variantHealth, trait|0], taught|0] plus `k`: the tactic cards.
@@ -29,6 +35,17 @@
     const INJURIES = ['no-ability', 'minus-one'];
     const TRAITS = ['guard', 'swift', 'shield', 'sturdy'];
     const TRICKS = ['guard', 'swift', 'shield', 'attack', 'health'];
+    const VARIANTS = ['boy', 'girl'];
+    const TWEAKS = ['quick', 'cheap', 'blood', 'deeper', 'broader'];
+    const MAX_TWEAKS = 3;
+
+    // The avatar as stored in a code: [type, variant, tweaks] (null when there is none).
+    function avatarRow(a) {
+        if (!a || typeof a.type !== 'string' || !VARIANTS.includes(a.variant)) return null;
+        const tweaks = [];
+        (a.tweaks || []).forEach(t => { if (TWEAKS.includes(t) && !tweaks.includes(t) && tweaks.length < MAX_TWEAKS) tweaks.push(t); });
+        return [a.type, a.variant, tweaks];
+    }
 
     const known = () => Rift.data.tactics || {};
     // Colour identity (Engine.identityFilter): { kept, dropped }.
@@ -65,6 +82,8 @@
             k: cleanTactics(identity(o.tactics || ((Rift.data.tacticDecks || {}).starter || []), creatures).kept, DECK - creatures.length),
         };
         if (o.stake) payload.s = o.stake;
+        const av = avatarRow(o.avatar);
+        if (av) payload.av = av;
         return Rift.State.encode('team', payload);
     }
 
@@ -127,7 +146,22 @@
             const id = Object.keys(p.s.items).find(k => (Rift.data.items || {})[k]);
             if (id) stake = { items: { [id]: 1 } };
         }
-        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, droppedTactics: ident.dropped, stake, version: p.v };
+        let avatar = null;
+        if (p.av != null) {
+            const ok = Array.isArray(p.av) && p.av.length === 3 && typeof p.av[0] === 'string' && VARIANTS.includes(p.av[1]) && Array.isArray(p.av[2])
+                && (!Rift.data.avatars || Rift.data.avatars[p.av[0]])
+                && p.av[2].length <= MAX_TWEAKS && p.av[2].every(t => TWEAKS.includes(t)) && new Set(p.av[2]).size === p.av[2].length;
+            if (!ok) throw bad('it has an unknown avatar.');
+            avatar = { type: p.av[0], variant: p.av[1], tweaks: p.av[2].slice() };
+        }
+        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, droppedTactics: ident.dropped, stake, version: p.v, avatar };
+    }
+
+    // The ghost's hero power: its avatar's, or (no avatar in the code) its team's main colour.
+    function ghostPower(imported) {
+        const P = Rift.Powers;
+        if (!P) return null;
+        return (imported.avatar && P.forAvatar(imported.avatar)) || P.forTeam(imported.team, 'competent');
     }
 
     function ghostOpponent(imported) {
@@ -141,6 +175,8 @@
             stake: imported.stake || undefined,
             ai: 'competent', // classmate ghosts play at Competent level
             type: 'ghost',
+            avatar: imported.avatar || null,
+            power: ghostPower(imported),
         };
     }
 

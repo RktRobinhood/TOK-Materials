@@ -3,7 +3,7 @@
  *
  *   Rift.Battles.trainer(nodeId)   NPC trainer on the map (real stakes, fate rolls), at the trainer's
  *                                  AI level (data/map.js `ai`: Normal, Competent or Expert)
- *   Rift.Battles.trainerSide(trainerId, level?) → { ai, team, tactics, deck? } (an Expert boss
+ *   Rift.Battles.trainerSide(trainerId, level?) → { ai, team, tactics, power, deck? } (an Expert boss
  *                                  plays its built deck from data/decks.js)
  *   Rift.Battles.practice()        safe sparring vs a random team (no fate, no stakes)
  *   Rift.Battles.ghost(code)       a classmate's team code, driven by the AI (trophy copies)
@@ -17,6 +17,12 @@
  * The Bag: before a real battle (trainer, ghost) the player may bring up to two items with a battle
  * job (player.bag). They are used up only when used: after the match only result.itemsUsed leave the
  * save. Practice brings a free practice bag (PRACTICE_BAG) that never touches the save.
+ *
+ * Hero powers (design/AVATARS.md section 1, data/powers.js): the player's side carries
+ * power: the avatar's power with its tweaks (save.avatar.tweaks); trainers, Syllo and the Training
+ * Dummy use the power of their team's main colour (board power at Normal, the other one at
+ * Competent/Expert); a ghost uses the classmate's avatar from the team code. Granny's guided lesson
+ * has no powers.
  *
  * The battle screen (js/screens/battle.js) never writes the save; onEnd does it here.
  */
@@ -38,6 +44,10 @@
         Rift.UI.toast('You need at least one creature. Catch one after beating a puzzle!', 3500);
         return false;
     }
+
+    // Hero powers (null when data/powers.js is not loaded).
+    const avatarPower = avatar => (Rift.Powers ? Rift.Powers.forAvatar(avatar) : null);
+    const teamPower = (team, level) => (Rift.Powers ? Rift.Powers.forTeam(team, level) : null);
 
     function seed(tag) {
         return Rift.State.get().seed + ':' + tag + ':' + Date.now().toString(36);
@@ -71,6 +81,7 @@
             tactics: Rift.State.deckTactics(s),
             axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout && s.axiomLoadout.length ? s.axiomLoadout : s.axioms),
             art,
+            power: avatarPower(s.avatar),
         };
     }
 
@@ -101,10 +112,11 @@
         const ai = levelOf(level || t.ai || 'normal');
         const deck = ai === 'expert' && t.deck && (Rift.data.decks || {})[t.deck];
         if (deck) {
-            return { ai, deck: t.deck, tactics: deck.tactics.slice(),
+            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: teamPower(deck.creatures, ai),
                 team: deck.creatures.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-deck-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } })) };
         }
-        return { ai, team: trainerTeam(trainerId, t), tactics: (t.tactics || starterTactics()).slice() };
+        const team = trainerTeam(trainerId, t);
+        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: teamPower(team, ai) };
     }
 
     function rewardText(reward) {
@@ -248,14 +260,14 @@
             const s=Rift.State.get();
             Rift.Router.go('battle',{
                 mode:'practice',story:true,seed:'syllo-road-challenge',
-                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null},
+                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar)},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
                 // Syllo plays at Normal with 8 hearts (you have 12): a beginner wins about 70% (tools/sim-battle.mjs --ladder).
                 opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
-                    team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS},
+                    team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS,power:teamPower(SYLLO_TEAM,'normal')},
                 onEnd(result){
                     finish(result);
                     if(result.outcome==='left')return;
@@ -294,7 +306,7 @@
                 seed: seed(nodeId),
                 player: Object.assign(myDeck(), { consumables, bag }),
                 opponent: { name: t.name, team: side.team, tactics: side.tactics,
-                    art: speakerArt(t.speaker), ai: side.ai, stake: t.ante },
+                    art: speakerArt(t.speaker), ai: side.ai, stake: t.ante, power: side.power },
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer, bagFromSave: true }),
             }));
         },
@@ -312,7 +324,7 @@
                 mode: 'practice',
                 seed: sd,
                 player: Object.assign(myDeck(), { bag: PRACTICE_BAG.slice() }),
-                opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'normal' },
+                opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'normal', power: teamPower(team, 'normal') },
                 onEnd: result => finish(result, { back: 'collection' }),
             });
         },
@@ -340,7 +352,7 @@
             const s = Rift.State.get();
             if (!needCreatures()) return;
             const deck = myDeck();
-            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: deck.team, tactics: deck.tactics, axioms: deck.axioms });
+            const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: deck.team, tactics: deck.tactics, axioms: deck.axioms, avatar: s.avatar });
             const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code });
             Rift.UI.modal('Your team code', el('div.stack', null, [
                 el('p', { text: 'Give this code to a classmate. They battle a ghost of your team on their own laptop. Nothing is taken from you; if they win, they get a trophy copy with your name on it.' }),
