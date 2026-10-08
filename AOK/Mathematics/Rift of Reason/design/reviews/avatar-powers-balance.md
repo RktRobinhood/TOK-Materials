@@ -169,4 +169,27 @@ Over all 55,000 tweak games the first player wins 48.0% and games last 8.02 roun
 
 ## Open questions and proposals
 
-OPEN_SECTION
+For the teacher to decide (one at a time). Nothing below is in the game yet.
+
+1. **Foresee (+0.7) — proposed text:** "Look at the top 3 rule cards. Take one into your hand and put the others back in any order." Cost 0, recharge 1: **+3.7** vs none. It stays a Reason/rules power (you read ahead and plan). Its Deeper and Broader would then need new extras (for example Deeper: "the top 4"; Broader: "also draw a card").
+2. **Hold That Thought (+1.8) — proposed text:** "Move the Fate track 1 space closer or further away. Draw a card." Cost 3, recharge 2: **+5.1**. The Fate move stays small, as the teacher wants; the card is what makes it worth a turn. Its Broader ("also draw a card") would then need a new extra, for example "also see the top rule card".
+   Without these changes Foresee loses 2 of its 9 pairings (43.2% vs Close the Proof, 44.4% vs Lantern) and Hold That Thought sits at the bottom of the rest.
+3. **Brainstorm** (+2.9 Competent, +3.6 Normal) is left as it is: free every turn and within the noise of +3.
+4. **Tweak texts** (only matter once tweaks unlock):
+   - Hold That Thought and What If? Broader: "also draw a card" → something smaller (What If?: "also +1 health"; Hold That Thought: see 2).
+   - Call It Out Deeper: "can't attack next turn" → "also loses Swift" or keep it and add Cost +1.
+   - Night Sight Cheap: give Night Sight a cost floor of 2 (so it is never usable on turn 1), or leave Cheap out for Night Sight.
+   - Blood price: cost "1 heart per 2 energy it would cost (at least 1)" so Close the Proof costs 2 hearts.
+5. **The AI rarely pays hearts** (Blood price, and Fine Print needed a hint). If Blood price ships, give it the same kind of hint as Fine Print so ghosts and trainers with it play it.
+6. **Board removal is at the top** (Close the Proof, Lantern, Call It Out: means near 52% in the pairs). If classroom play shows them dominating, raise Close the Proof to cost 3, recharge 3 (+5.8) or Lantern to 3/3 (+5.5).
+7. **First-player rate** is 47–48% on this seed with or without powers (46.9% with none). The earlier pass measured 48.0% on another seed. The powers do not move it; it is the base game's balance.
+
+## How to rerun
+
+```
+node tools/sim-battle.mjs --powers=none --games=1100                 # each power vs none (~5 min on 16 cores)
+node tools/sim-battle.mjs --powers=none --games=1100 --level=normal  # Normal spot check
+node tools/sim-battle.mjs --powers=pairs --games=1100                # 45 pairs (~20 min)
+node tools/sim-battle.mjs --powers=tweaks --games=1100               # 50 tweak rows (~23 min)
+node tools/sim-battle.mjs --powers --games=1100 --pw=foresee+broader --patch=foresee.cost:-1   # try a text via a tweak
+```
