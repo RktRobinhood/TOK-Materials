@@ -669,5 +669,242 @@
             },
             lesson: 'A few observed choices are not a law about a person. A prediction can be right often and still not know you, and it never owns you.',
         },
+
+        // ---- Chapter 3 (STORY.md §5). Map opts: { id: 'tribunal', difficulty: 2|3, opts: { caseId } }.
+
+        // The Tribunal Steps: Speedcheeta, possessed, rehearses for the prosecution. Breaking his
+        // testimony frees him (data/script/lesson3.js ch3.steps.win). His stream's still shows a net:
+        // it sets up the full clip and the trial's "stolen, not lost".
+        {
+            id: 'steps-stream',
+            title: 'The Case of the Lost Shadow',
+            theme: 'argument',
+            difficulty: 2,
+            flaw: 'popularity',
+            distractors: ['authority', 'circular', 'false-dichotomy'],
+            witness: 'speedcheeta',
+            claim: 'The round rock lost its shadow, so it is careless.',
+            opening: 'My star witness, Your Honour. Rehearsing. Two million people watched him.',
+            intro: 'CHAT! CHAT! WE’RE IN A COURT! SAY HI TO THE JUDGE!',
+            testimony: [
+                { id: 's1', text: 'I STREAMED THE WHOLE FAIR! LIVE! TWO MILLION VIEWERS!',
+                    press: { q: 'Were you watching the rock?', reply: 'I was watching CHAT. Chat sees everything.' } },
+                { id: 's2', text: 'A BIG ROUND ROCK WAS THERE. THEN ITS SHADOW WAS GONE!',
+                    press: { q: 'Gone how?', reply: 'GONE! I looked at chat for one second. When I looked back: no shadow!' } },
+                { id: 's3', text: 'CHAT SAYS IT LOST IT. TWO MILLION PEOPLE CAN’T BE WRONG!',
+                    press: { q: 'Did chat see it happen?', reply: 'Chat saw ME. I’m way more interesting than a rock.', premise: 'If enough people say it, it is true.' } },
+                { id: 's4', text: 'SO THE ROCK IS CARELESS. CARELESS ROCKS ARE FRAUDS!',
+                    press: { q: 'Careless how?', reply: 'It had ONE job. Holding a shadow. Easy. I hold my phone all day.' } },
+            ],
+            evidence: [
+                { id: 'poll', art: 'survey', name: 'Chat poll', desc: 'His chat, the same day: “Is the moon made of cheese?” 52% said yes.' },
+                { id: 'chatlog', art: 'recording', name: 'Chat log', desc: '“it lost it lol”, forty thousand times. Not one of them was at the Fair.' },
+                { id: 'still', art: 'photo', name: 'Stream still', desc: 'His own stream, 9:41. In the top corner, very small: a net. And a tail with a bell.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['poll', 'chatlog'],
+                    explain: 'The same chat said the moon is cheese, and none of them were at the Fair. A big crowd saying something doesn’t make it true.',
+                    reaction: 'The moon ISN’T cheese? Chat LIED to me?' },
+                { statements: ['s2'], evidence: ['still'],
+                    explain: 'His own stream shows a net and an imp’s tail by the rock. “Gone” was never shown to mean “lost”. It could mean “taken”.',
+                    reaction: 'A net? In MY stream? Is that… an imp? I need to rewatch!' },
+            ],
+            near: [
+                { statement: 's1', evidence: 'chatlog', say: 'The log agrees: he had a huge audience. Big isn’t the same as right. Which statement says the crowd decides?' },
+                { statement: 's4', evidence: 'poll', say: 'The cheese poll matters, but this statement is about care, not crowds. Find the one that leans on what chat says.' },
+            ],
+            hint: 'Ask who actually saw it. Then ask whether a big crowd can be wrong.',
+            why: {
+                right: 'The same huge crowd also said the moon is cheese, and none of them were there, so “chat says so” gives no reason to believe it.',
+                wrong: ['It shows Speedcheeta never streamed the Fair.', 'It shows that polls are always fifty-fifty.', 'It shows the rock still has its shadow.'],
+            },
+            lesson: 'A claim is not true because many people repeat it. Ask who actually saw it, and what the evidence shows.',
+        },
+
+        // The Tribunal, Count One (stage 1): Fin's syllogism, valid but unsound. Exhibits B and C come from
+        // the save (`brave`, `cover`): they attack the companion, not the argument (a press says so),
+        // and are left out when the flag is unset (B) or read as a fixed line (C).
+        {
+            id: 'count-guess',
+            title: 'Count One: The Guess',
+            theme: 'argument',
+            difficulty: 3,
+            flaw: 'false-premise',
+            distractors: ['circular', 'popularity', 'strawman'],
+            witness: 'algorithm',
+            witnessName: 'The Algorithm',
+            witnessArt: 'npc/algorithm/speaking',
+            playerParams: true,
+            claim: 'The Sundial is a fraud, because it guesses.',
+            opening: 'Count one, Your Honour. The defendant guesses. And look at the company it keeps.',
+            intro: 'I AM 99% ACCURATE. I DO NOT GUESS. I PREDICT.',
+            exhibits: {
+                exB: { flag: 'brave', text: {
+                    go: 'EXHIBIT B: AT THE FAIR, {name} SAID “I WILL GO.” NO PLAN. RECKLESS COMPANY.',
+                    hide: 'EXHIBIT B: AT THE FAIR, {name} WANTED TO HIDE UNDER A NUT STALL. COWARDLY COMPANY.',
+                    ask: 'EXHIBIT B: AT THE FAIR, {name} ASKED QUESTIONS INSTEAD OF GOING. DITHERING COMPANY.',
+                } },
+                exC: { flag: 'cover', unset: 'EXHIBIT C: {name}’S STORY IN THE 1850S. WHATEVER IT WAS. SHADY COMPANY.', text: {
+                    postman: 'EXHIBIT C: IN THE 1850S, {name} SAID “A POSTMAN.” NO POSTMAN. LYING COMPANY.',
+                    visitor: 'EXHIBIT C: IN THE 1850S, {name} SAID “JUST VISITING.” VISITING WHAT? SHIFTY COMPANY.',
+                    species: {
+                        owlet: 'EXHIBIT C: IN THE 1850S, {name} WAS “A VISITING TUTOR.” OF TUTORING. FAKE COMPANY.',
+                        mothkin: 'EXHIBIT C: IN THE 1850S, {name} WAS “A LAMP TESTER.” TESTED NO LAMPS. FAKE COMPANY.',
+                        fox: 'EXHIBIT C: IN THE 1850S, {name} WAS “A TRAVELLING ACTOR.” ADMITS ACTING. FAKE COMPANY.',
+                        frogling: 'EXHIBIT C: IN THE 1850S, {name} WAS “A POND INSPECTOR.” INSPECTED NO PONDS. FAKE COMPANY.',
+                        raven: 'EXHIBIT C: IN THE 1850S, {name} WAS “A LETTER CARRIER.” CARRIED NO LETTERS. FAKE COMPANY.',
+                        default: 'EXHIBIT C: IN THE 1850S, {name} TOLD A STORY. A COVER STORY. FAKE COMPANY.',
+                    },
+                } },
+            },
+            testimony: [
+                { id: 's1', text: 'THE DEFENDANT GUESSES. THE HEADLINE SAYS SO: “FRAUD ADMITS: I GUESS.”',
+                    press: { q: 'Is that its whole sentence?', reply: 'IT IS THE HEADLINE. HEADLINES ARE SHORTER. THEREFORE BETTER.' } },
+                { id: 's2', text: 'EVERY CLOCK THAT GUESSES IS A FRAUD. THAT IS A RULE.',
+                    press: { q: 'Even a clock that says when it is guessing?', reply: 'ESPECIALLY THAT ONE. IT CONFESSED.', premise: 'Anything that guesses is a fraud, even when it says it is guessing.' } },
+                { id: 's3', text: 'SO THE DEFENDANT IS A FRAUD. EVERY STEP FOLLOWS. CHECK THEM.',
+                    press: { q: 'The steps follow. But are they true?', reply: 'THEY FOLLOW. I HAVE FOLLOWERS. FOLLOWING IS TRUTH.' } },
+                { id: 's4', text: 'EXHIBIT A: ITS SHADOW. LOST. CARELESSLY. ROCKS LOSE THINGS.',
+                    press: { q: 'Lost, or taken?', reply: 'LOST. DEFINITELY LOST. I HAVE IT, BUT IT WAS LOST.' } },
+                { id: 's5', needs: 'exB', text: '{exB}',
+                    press: { q: 'What has {name} to do with the clock?', reply: 'NOTHING. BUT IT MAKES THE ROCK LOOK BAD.', pip: 'That attacks the friend, not the argument. It isn’t evidence either way.' } },
+                { id: 's6', needs: 'exC', text: '{exC}',
+                    press: { q: 'Is {name} on trial?', reply: 'NOT YET.', pip: 'Another attack on the friend. The court tries the argument, not the company.' } },
+            ],
+            evidence: [
+                { id: 'forecast', art: 'letter', name: 'Weather forecast', desc: '“Tomorrow: 70% chance of rain.” A forecast guesses, and says so. Nobody calls it a fraud.' },
+                { id: 'quote', art: 'notebook', name: 'Full quote', desc: 'The headline’s source, word for word: “I tell the time. Mostly. On cloudy days I guess.”' },
+                { id: 'record', art: 'chart', name: 'Sunny-day record', desc: 'From the Data Lab: on three hundred sunny days, the Sundial told the time. Right every time.' },
+            ],
+            contradictions: [
+                { statements: ['s2'], evidence: ['forecast'],
+                    explain: 'A forecast guesses and says it is guessing, and that is honest, not fraud. So “every clock that guesses is a fraud” is false.',
+                    reaction: 'A FORECAST IS NOT A CLOCK. …IT IS A KIND OF CLOCK. FOR RAIN.' },
+                { statements: ['s1'], evidence: ['quote'],
+                    explain: 'The full sentence says WHEN it guesses: on cloudy days. That is an honest warning, not a confession.',
+                    reaction: 'THE HEADLINE WAS… SHORTER.' },
+            ],
+            near: [
+                { statement: 's3', evidence: 'record', say: 'True: on sunny days it never needed to guess. But the steps do follow. Which premise is false?' },
+                { statement: 's4', evidence: 'record', say: 'The record shows it can tell the time. But this statement is about the shadow. The court is trying the fraud charge: test its premises.' },
+            ],
+            hint: 'Every step follows, so look at the premises. Is every guess dishonest? Read the whole quote, too.',
+            why: {
+                right: 'A guess that says it is a guess is honest, like a forecast, so the premise “every clock that guesses is a fraud” is false. The argument is valid but unsound.',
+                wrong: ['It shows that forecasts are always right.', 'It shows the Sundial never guesses at all.', 'It shows the steps of the argument do not follow.'],
+            },
+            lesson: 'An argument can be valid (the steps follow) and still unsound (a premise is false). To break it, find the false premise. Attacking the defendant’s friends proves nothing either way.',
+        },
+
+        // The Tribunal, Count Two (stage 2): Nudge's ten tests, all picked on cloudy days after the theft.
+        // The Data Lab's sunny-day record (ch3.datalab.win) is the defence's evidence.
+        {
+            id: 'count-cloudy',
+            title: 'Count Two: Three in Ten',
+            theme: 'statistics',
+            difficulty: 3,
+            flaw: 'cherry-picking',
+            distractors: ['correlation', 'base-rate', 'popularity'],
+            witness: 'nudge',
+            witnessName: 'Nudge',
+            witnessArt: 'npc/nudge/clipboard',
+            claim: 'The Sundial gets the time wrong, so it cannot tell the time.',
+            opening: 'Count two, Your Honour. Numbers. The jury loves numbers.',
+            intro: 'I counted! I LOVE counting! Everybody look at my clipboard!',
+            testimony: [
+                { id: 's1', text: 'I tested the rock ten times. Ten! It’s all on my clipboard.',
+                    press: { q: 'When did you test it?', reply: 'This week! After the Fair! Lovely cloudy week. Here’s my log!', unlocks: 'log' } },
+                { id: 's2', text: 'It was wrong three times in ten. THREE! Once by a whole hour!',
+                    press: { q: 'What did it say that time?', reply: '“About four, I guess.” It was five. WRONG!' } },
+                { id: 's3', text: 'Ten tests is plenty. They show how it does on every day.',
+                    press: { q: 'Did you pick the days?', reply: 'Of course! I picked the cloudy ones. It’s funnier when it’s wrong!', premise: 'Ten tests on days you chose show how the Sundial does on every day.' } },
+                { id: 's4', text: 'So it gets the time wrong. All the time. Basically.',
+                    press: { q: 'All the time?', reply: 'Three in ten is basically all. I rounded up. Like the boss does.' } },
+                { id: 's5', text: 'So it can’t tell the time. GUILTY! Click now!',
+                    press: { q: 'Who are you counting for?', reply: 'Followers! Votes! Clicks! I count EVERYTHING. Nobody counts me.' } },
+            ],
+            evidence: [
+                { id: 'log', art: 'chart', name: 'Nudge’s test log', desc: 'Ten tests, all this week, all after the shadow was stolen. The weather, every time: cloudy.', hidden: true },
+                { id: 'record', art: 'survey', name: 'Sunny-day record', desc: 'From the Data Lab: three hundred sunny days before the Fair. Right every time.' },
+                { id: 'clipboard', art: 'photo', name: 'Nudge’s clipboard', desc: 'A glowing clipboard. At the top: FOLLOWERS 1,204. Under it, very small: “please like me”.' },
+            ],
+            contradictions: [
+                { statements: ['s3'], evidence: ['log'],
+                    explain: 'Every test was picked on a cloudy day, after the shadow was stolen. A sample chosen to fail can’t show how it does on every day.',
+                    reaction: 'I… picked the funny days. Is that… not allowed?' },
+                { statements: ['s4'], evidence: ['record'],
+                    explain: 'On three hundred sunny days it was right every time. “Wrong all the time” only fits the days Nudge chose.',
+                    reaction: 'Three HUNDRED? I only counted to ten!' },
+            ],
+            near: [
+                { statement: 's2', evidence: 'log', say: 'The log agrees: three of the ten really were wrong. That part is true. Which statement says ten chosen days stand for every day?' },
+                { statement: 's5', evidence: 'clipboard', say: 'Sad, but not evidence. Look at how the tests were chosen.' },
+            ],
+            hint: 'Press the witness about WHEN it tested. Then ask: which days are missing?',
+            why: {
+                right: 'Nudge chose ten cloudy days after the theft, so the sample was picked to fail, and the sunny-day record shows the rest of the story.',
+                wrong: ['It shows the Sundial was never wrong at all.', 'It shows that ten is too big a number to count.', 'It shows the weather causes the vote.'],
+            },
+            lesson: 'A sample picked to fit the answer (cherry-picking) tells you about the picking, not about the thing. Ask how the data was chosen, and what was left out.',
+        },
+
+        // The Tribunal, Count Three (stage 3): a "proof" that jumps from "not always" to "never".
+        // The repair is the Sundial's own first line: on cloudy days, it says "I guess".
+        {
+            id: 'count-never',
+            title: 'Count Three: Never',
+            theme: 'proof',
+            difficulty: 3,
+            flaw: 'hasty-generalisation',
+            distractors: ['circular', 'popularity', 'correlation'],
+            witness: 'algorithm',
+            witnessName: 'The Algorithm',
+            witnessArt: 'npc/algorithm/speaking',
+            claim: 'A sundial can never know the time.',
+            opening: 'Count three. A proof, Your Honour. Proofs are forever.',
+            intro: 'A PROOF. FOUR STEPS. NO GUESSES. WATCH.',
+            testimony: [
+                { id: 's1', text: 'A SUNDIAL KNOWS THE TIME FROM ITS SHADOW.',
+                    press: { q: 'And the shadow comes from?', reply: 'THE SUN. OBVIOUSLY. KEEP UP.' } },
+                { id: 's2', text: 'NO SUN, NO SHADOW. NO SHADOW, NO TIME.',
+                    press: { q: 'On a cloudy day, is that true?', reply: 'TRUE. I AM BEING FAIR. FOR ONE STEP.' } },
+                { id: 's3', text: 'THE SUN IS NOT ALWAYS OUT. SOMETIMES IT IS CLOUDY.',
+                    press: { q: 'Sometimes?', reply: 'SOMETIMES. I CHECKED THE SKY. TWICE.' } },
+                { id: 's4', text: 'SO A SUNDIAL NEVER KNOWS THE TIME. NOT ONCE. PROVEN.',
+                    press: { q: 'From “not always” to “never”?', reply: 'NOT ALWAYS. NEVER. CLOSE ENOUGH. I ROUNDED.', premise: 'If something fails sometimes, it fails every time.' } },
+                { id: 's5', text: 'SO EVERY TIME IT TOLD THE TIME, IT WAS A FRAUD.',
+                    press: { q: 'Every time?', reply: 'EVERY TIME. ALL OF THEM. I DID NOT CHECK. I DID NOT NEED TO.' } },
+            ],
+            evidence: [
+                { id: 'record', art: 'chart', name: 'Sunny-day record', desc: 'Three hundred sunny days. On each one the Sundial told the time, and the town clock agreed. Example: “Noon. Exactly.”' },
+                { id: 'clock', art: 'photo', name: 'Town clock photo', desc: 'The Boolesbury town clock. It stopped for a week last winter. Nobody called it a fraud.' },
+                { id: 'forecast', art: 'letter', name: 'Weather report', desc: 'Last month: 19 sunny days, 11 cloudy days.' },
+            ],
+            contradictions: [
+                { statements: ['s4', 's5'], evidence: ['record'],
+                    explain: 'On sunny days the Sundial knew the time, every time. “Not always” does not mean “never”: one sunny noon breaks the proof.',
+                    reaction: 'ONE NOON. ONE. IT IS… A LOT, ACTUALLY.' },
+            ],
+            near: [
+                { statement: 's3', evidence: 'forecast', say: 'True: some days are cloudy. That step is fine. Which step jumps from “sometimes” to “never”?' },
+                { statement: 's2', evidence: 'clock', say: 'Clocks fail sometimes, yes. This step is true on a cloudy day. Find the step that claims more.' },
+            ],
+            hint: 'Find a day when the sundial DID know the time. Then find the step that says that day can’t exist.',
+            why: {
+                right: 'The record shows it knew the time on every sunny day, so the jump from “not always” to “never” is false.',
+                wrong: ['It shows the sun is always out.', 'It shows the town clock is a fraud too.', 'It shows that proofs about time are impossible.'],
+            },
+            repair: {
+                question: 'The proof breaks on a sunny day. What should the court do with the claim?',
+                options: [
+                    { id: 'monster', text: 'Say sunny days don’t count. Sunny days are cheating.', explain: 'That is “monster-barring”: throwing out the counterexample to save the claim. Nothing is learned.' },
+                    { id: 'lemma', text: 'Fix the claim: a sundial knows the time when the sun is out, and should say “I guess” when it isn’t.', explain: 'Yes! A safe domain, stated honestly. It is exactly what the Sundial always said: on cloudy days, I guess.' },
+                    { id: 'bin', text: 'Throw out every claim any sundial ever made.', explain: 'Too harsh. The broken step showed exactly where the claim needed a condition.' },
+                    { id: 'more', text: 'Test it on a hundred more cloudy days, to be sure.', explain: 'More cloudy days only show what we already know: sometimes it can’t tell. Checking is not proving.' },
+                ],
+                correct: 'lemma',
+            },
+            lesson: '“Not always” is not “never”. One sunny day breaks the proof. The honest repair limits the claim to where it works, and says “I guess” everywhere else.',
+        },
     ];
 })(typeof window !== 'undefined' ? window : globalThis);

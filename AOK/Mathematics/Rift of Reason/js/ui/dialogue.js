@@ -273,6 +273,8 @@
                 const lead = leadFor(step.lead, ctx);
                 if (lead) await run(layer, [lead], ctx);
             } else if (step.choice) await choice(layer, step, ctx);
+            // An unvoiced stage note: on-screen text (screens, readouts, posts), never recorded.
+            else if (typeof step.note === 'string') await note(layer, ctx, step.note);
             else if (typeof step.s === 'string') await line(layer, step, ctx);
             else if (step.give) {
                 if (ctx.quiet) continue;   // a Quiet Scene gives no rewards

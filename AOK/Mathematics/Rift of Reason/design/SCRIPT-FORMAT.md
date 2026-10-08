@@ -226,6 +226,7 @@ Every other role is spoken by its original only.
 
 | Step | Effect |
 |---|---|
+| `{ note: 'EVIDENCE FILED: 3' }` (new) | an unvoiced stage note: text on screens, readouts, posts, silent images (STORY.md App. B: "numbers are an on-screen readout, never voiced"). `{name}` works. Never recorded, so it costs no voice quota |
 | `{ give: { charm: 3, tonic: 1 } }` | items, with a toast (ignored inside a Quiet Scene) |
 | `{ flag: 'brave', value: 'go' }` | set a flag (`value` defaults to `true`) |
 | `{ flag: 'feed', add: 1 }` (new) | add to a number flag (unset counts as 0) |

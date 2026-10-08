@@ -25,6 +25,8 @@
 
     const FLAWS = {
         'hidden-premise': { name: 'Hidden premise', short: 'The argument needs an unstated assumption, and that assumption is false.' },
+        // Taught by a story case only (the Sundial's Count One, data/cases.js storyCases).
+        'false-premise': { name: 'False premise', short: 'The steps follow, but a starting claim is false. Valid is not the same as sound.' },
         'strawman': { name: 'Strawman', short: 'It attacks a twisted, weaker version of what the other side really said.' },
         'false-dichotomy': { name: 'False dichotomy', short: 'It pretends there are only two options when there are more.' },
         'authority': { name: 'Appeal to authority', short: 'It says “true, because someone impressive said so”, even outside their expertise.' },
@@ -76,12 +78,36 @@
         return { name, k, n, times: k === 1 ? 'TIME' : 'TIMES' };
     }
 
+    // A story case's exhibits from the save (STORY.md Ch3, Count One: Exhibits B and C): each is
+    // { flag, text: { value: text | { species: text } }, unset? }. A flag with no text gives '' and the
+    // statement that `needs` it is left out. opts.flags / opts.species stand in for the save (tests).
+    function exhibitParams(c, o, name) {
+        const s = Rift.State && Rift.State.get && Rift.State.get();
+        const flags = o.flags || (s && s.flags) || {};
+        const species = o.species || (s && s.avatar && s.avatar.type) || null;
+        const out = {};
+        Object.keys(c.exhibits || {}).forEach(key => {
+            const ex = c.exhibits[key];
+            const v = flags[ex.flag];
+            let t = v == null ? ex.unset : (ex.text || {})[v];
+            if (t && typeof t === 'object') t = t[species] || t.default;
+            out[key] = typeof t === 'string' ? t.replace(/\{name\}/g, name) : '';
+        });
+        return out;
+    }
+
     function pickCase(rng, difficulty, opts) {
         const o = opts || {};
         let list = allCases();
         if (o.caseId) {
             const one = list.concat(storyCases()).find(c => c.id === o.caseId);
-            if (one) return one.playerParams ? Object.assign({}, one, { params: [playerParams(o)] }) : one;
+            if (one && (one.playerParams || one.exhibits)) {
+                const pp = playerParams(o);
+                const params = Object.assign(one.playerParams ? pp : {}, one.exhibits ? exhibitParams(one, o, pp.name) : {});
+                const testimony = one.testimony.filter(st => !st.needs || params[st.needs]);
+                return Object.assign({}, one, { testimony, params: [params] });
+            }
+            if (one) return one;
         }
         if (o.theme && THEMES.indexOf(o.theme) !== -1) {
             const themed = list.filter(c => c.theme === o.theme);

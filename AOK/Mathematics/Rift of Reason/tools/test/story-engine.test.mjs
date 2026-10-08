@@ -491,3 +491,35 @@ test('the Lucky Sequin is a lure item', () => {
     assert.equal(Rift.data.items['lucky-sequin'].lure, 5);
     assert.ok(!Rift.data.items['lucky-sequin'].battle, 'not a battle bag item');
 });
+
+test('a note step is shown as unvoiced text, with {name} filled', async () => {
+    const Rift = game();
+    const r = runner(Rift);
+    Rift.data.script['ch3.test'] = [{ note: 'EVIDENCE FILED: 3. Hello, {name}.' }, { s: 'narrator', t: 'Tick.' }];
+    await r.play('ch3.test', b => b[0]);
+    assert.ok(r.shown.some(x => x.cls.includes('stage-note') && x.text.includes('EVIDENCE FILED: 3. Hello, Ada.')));
+    assert.deepEqual(r.spoken.map(l => l.speaker), ['narrator'], 'the note is never voiced');
+});
+
+test('Ch3: the bargain only at vote 4–7; the Sundial\'s Quiet Scene replays its exact last words', async () => {
+    const load = n => {
+        const Rift = game({ type: 'fox' });
+        vm.runInContext(fs.readFileSync(GAME_DIR + '/data/script/lesson3.js', 'utf8'), vm.createContext({ window: { Rift } }));
+        Rift.Stakes.start('ch3', n);
+        return Rift;
+    };
+    const full = load(0).data.clocks.ch3.full.find(s => s.s === 'narrator').t;
+    assert.equal(load(0).data.script['quiet.sundial'].find(s => s.replay).t, full);
+    for (const [n, offered] of [[3, false], [4, true], [7, true], [8, false]]) {
+        const Rift = load(n);
+        const r = runner(Rift);
+        await r.play('ch3.trial.count3', b => b.find(x => x.allText.includes('No deal')) || b[0]);
+        assert.equal(Rift.State.flag('bargain'), offered ? 'no' : undefined, 'vote ' + n);
+    }
+    const Rift = load(5);
+    const r = runner(Rift);
+    await r.play('ch3.trial.count3', b => b.find(x => x.allText.includes('Take the deal')) || b[0]);
+    assert.equal(Rift.State.flag('bargain'), 'yes');
+    assert.equal(Rift.Stakes.get('ch3').paused, true, 'the vote freezes');
+    assert.equal(Rift.Stakes.tick('ch3', 1).filled, 0, 'nothing can raise it');
+});

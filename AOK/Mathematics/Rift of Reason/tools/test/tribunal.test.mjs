@@ -6,6 +6,7 @@ const Rift = loadRift(['js/core/rift.js', 'data/creatures.js', 'data/cases.js', 
 const def = Rift.Puzzles.get('tribunal');
 const { FLAWS, EVIDENCE_ART, THEMES, build, fill, matchContra, nearFor } = def._internal;
 const CASES = Rift.data.cases;
+const STORY = Rift.data.storyCases;
 const WORDS = { two: 2, three: 3, four: 4, five: 5, six: 6 };
 
 // Every string anywhere in a value.
@@ -53,7 +54,10 @@ test('there are 12 cases, 4 per difficulty, one per flaw', () => {
     assert.equal(CASES.length, 12);
     assert.equal(new Set(CASES.map(c => c.id)).size, 12, 'case ids unique');
     for (const d of [1, 2, 3]) assert.equal(CASES.filter(c => c.difficulty === d).length, 4, 'difficulty ' + d);
-    assert.deepEqual([...CASES.map(c => c.flaw)].sort(), [...Object.keys(FLAWS)].sort(), 'every flaw taught exactly once');
+    assert.equal(new Set(CASES.map(c => c.flaw)).size, 12, 'the rolled cases teach 12 different flaws');
+    // A flaw may be taught only by a story case (false-premise: the Sundial's Count One).
+    assert.deepEqual([...new Set(CASES.concat(STORY).map(c => c.flaw))].sort(), [...Object.keys(FLAWS)].sort(), 'every flaw is taught');
+    assert.equal(new Set(CASES.concat(STORY).map(c => c.id)).size, CASES.length + STORY.length, 'story case ids unique');
     CASES.forEach(c => assert.ok(THEMES.includes(c.theme), c.id + ' theme'));
     assert.ok(CASES.some(c => c.repair), 'a proof on trial with a repair step');
 });
@@ -288,4 +292,53 @@ test('registration', () => {
     assert.equal(def.colour, 'language');
     assert.equal(def.family, 'Breaking down arguments');
     assert.ok(def.tok && def.blurb && def.name);
+});
+
+// Story cases (Rift.data.storyCases): picked only by opts.caseId. The Ch3 counts fill Exhibits B and C
+// from the save (`brave`, `cover`); opts.flags / opts.species stand in for it here.
+const SAVES = [
+    { flags: {}, species: 'owlet' },
+    { flags: { brave: 'go', cover: 'postman' }, species: 'fox' },
+    { flags: { brave: 'hide', cover: 'visitor' }, species: 'raven' },
+    { flags: { brave: 'ask', cover: 'species' }, species: 'frogling' },
+    { flags: { cover: 'species' }, species: 'mothkin' },
+];
+for (const c of STORY) {
+    test(`story case ${c.id}: consistent, filled from the save, solvable and reachable`, () => {
+        assert.ok(c.witnessArt || Rift.data.creatures[c.witness], 'witness art or a creature');
+        assert.ok(FLAWS[c.flaw] && c.distractors.length === 3 && c.distractors.every(f => FLAWS[f]));
+        assert.equal(new Set([c.flaw].concat(c.distractors)).size, 4, 'flaw options distinct');
+        assert.ok(c.title && c.claim && c.opening && c.intro && c.hint && c.lesson && c.why.wrong.length === 3);
+        c.evidence.forEach(e => assert.ok(EVIDENCE_ART.includes(e.art), 'evidence art ' + e.art));
+        // A statement that `needs` an exhibit is never part of a contradiction or a near miss.
+        const optional = c.testimony.filter(s => s.needs).map(s => s.id);
+        c.contradictions.forEach(x => [].concat(x.statements).forEach(id => assert.ok(!optional.includes(id))));
+        (c.near || []).forEach(n => assert.ok(!optional.includes(n.statement)));
+        SAVES.forEach((save, i) => {
+            const data = def.generate(Rift.makeRng(c.id + ':' + i), c.difficulty, { caseId: c.id, flags: save.flags, species: save.species, name: 'Ada', k: 2, n: 3 });
+            assert.equal(data.caseId, c.id);
+            assert.ok(jsonSafe(data), 'JSON-safe');
+            assert.ok(!strings(data).some(s => /\{\w+\}|undefined/.test(s)), 'no unfilled text');
+            const shown = data.testimony.filter(s => !s.hidden);
+            assert.ok(shown.length >= 4 && data.testimony.length <= 6, 'testimony has 4-6 statements');
+            data.testimony.forEach(s => assert.ok(s.text.length <= 130, 'statement short: ' + s.text));
+            assert.ok(reachable(data), 'solution reachable by pressing');
+            const ok = def.check(data, def.solve(data));
+            assert.equal(ok.solved, true);
+            assert.equal(def.hints(data).length, 3);
+            const w = def.why(data);
+            assert.equal(new Set(w.options).size, 4);
+        });
+    });
+}
+
+test('Count One: Exhibit B is left out when `brave` is unset; Exhibit C reads the cover story', () => {
+    const gen = save => def.generate(Rift.makeRng('ex'), 3, { caseId: 'count-guess', flags: save.flags, species: save.species, name: 'Ada' });
+    const none = gen({ flags: {}, species: 'owlet' });
+    assert.ok(!none.testimony.some(s => /EXHIBIT B/.test(s.text)), 'no brave answer, no Exhibit B');
+    assert.ok(none.testimony.some(s => /EXHIBIT C: ADA’S STORY IN THE 1850S\. WHATEVER IT WAS/.test(s.text)), 'fixed Exhibit C when cover is unset');
+    const go = gen({ flags: { brave: 'go', cover: 'species' }, species: 'frogling' });
+    assert.ok(go.testimony.some(s => /EXHIBIT B: AT THE FAIR, ADA SAID “I WILL GO\.”/.test(s.text)));
+    assert.ok(go.testimony.some(s => /POND INSPECTOR/.test(s.text)), 'the species cover story');
+    assert.equal(go.testimony.length, 6);
 });

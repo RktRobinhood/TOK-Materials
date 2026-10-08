@@ -288,7 +288,8 @@
                 intro: "station.t-south-bridge.intro", reminder: "station.t-south-bridge.reminder",
                 name: 'The Neon Bridge', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 622, y: 670,
                 scene: 'scene/neon-plaza', script: 'ch3.bridge',
-                puzzles: [{ id: 'venn', difficulty: 2 }, { id: 'witness', difficulty: 2 }],
+                // opts.lead 'bridge': the inner voice's Ch3 leads (data/script/leads.js), fresh after Ch1's.
+                puzzles: [{ id: 'venn', difficulty: 2, opts: { lead: 'bridge' } }, { id: 'witness', difficulty: 2, opts: { lead: 'bridge' } }],
                 spawns: ['kardashiant', 'eminemu', 'khaby'], links: ['t-arrival', 't-newsstand', 't-west-bridge'],
                 teaser: 'A bridge of glowing tiles. Screens on every lamp-post shout opinions.',
             },
@@ -324,7 +325,7 @@
             },
             't-plaza': {
                 name: 'The Neon Plaza', chapter: 'ch3', map: 'ch3', type: 'story', x: 727, y: 335,
-                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-library', 't-datalab', 't-archive', 't-tower-gate'],
+                scene: 'scene/neon-plaza', script: 'ch3.plaza', links: ['t-library', 't-datalab', 't-archive'],
                 teaser: 'Giant feed-screens. Everyone is looking up. Nobody is looking at each other.',
             },
             't-datalab': {
@@ -332,7 +333,7 @@
                 intro: "station.t-datalab.intro", reminder: "station.t-datalab.reminder",
                 name: 'The Data Lab', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 1091, y: 383,
                 scene: 'scene/evidence-room', script: 'ch3.datalab',
-                puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'statistics' } }],
+                puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'statistics', lead: 'lab' } }],
                 spawns: ['altmanta', 'beastie', 'messilion'], links: ['t-plaza', 't-gallery', 't-steps'],
                 teaser: 'Numbers on every wall. Some of them are telling the truth.',
             },
@@ -355,7 +356,8 @@
                 intro: "station.t-steps.intro", reminder: "station.t-steps.reminder",
                 name: 'The Tribunal Steps', chapter: 'ch3', map: 'ch3', type: 'miniboss', x: 1340, y: 239,
                 scene: 'scene/tribunal', script: 'ch3.steps',
-                puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'argument' } }],
+                // Speedcheeta's testimony (data/cases.js storyCases); breaking it frees him for the clip negotiation.
+                puzzles: [{ id: 'tribunal', difficulty: 2, opts: { caseId: 'steps-stream' } }],
                 spawns: ['rawmsay', 'rockodile', 'gargoyle'], links: ['t-datalab', 't-tribunal'],
                 teaser: 'A witness is waiting on the steps, practising their story.',
             },
@@ -364,14 +366,21 @@
                 intro: "station.t-tribunal.intro", reminder: "station.t-tribunal.reminder",
                 name: 'The Tribunal', chapter: 'ch3', map: 'ch3', type: 'boss', x: 1368, y: 105,
                 scene: 'scene/tribunal', script: 'ch3.trial',
-                puzzles: [{ id: 'tribunal', difficulty: 3, opts: { theme: 'argument' } }, { id: 'tribunal', difficulty: 3, opts: { theme: 'statistics' } }, { id: 'tribunal', difficulty: 3, opts: { theme: 'proof' } }],
-                spawns: ['zuckerborg', 'muskrat', 'lobstorian', 'lovelace'], links: ['t-steps'],
+                // The Algorithm v. the Sundial (STORY.md Ch3): Count One (a valid, unsound argument; Exhibits B
+                // and C from the save), Count Two (Nudge's cloudy sample), Count Three (a "proof" of "never").
+                puzzles: [
+                    { id: 'tribunal', difficulty: 3, opts: { caseId: 'count-guess' } },
+                    { id: 'tribunal', difficulty: 3, opts: { caseId: 'count-cloudy' } },
+                    { id: 'tribunal', difficulty: 3, opts: { caseId: 'count-never' } },
+                ],
+                // The Tower Road opens from here, so nobody leaves Tomorrowton before the trial (STORY.md App. G).
+                spawns: ['zuckerborg', 'muskrat', 'lobstorian', 'lovelace'], links: ['t-steps', 't-tower-gate'],
                 teaser: 'The great hall. Judge Hoot, Prosecutor Fin, and the trial of the season.',
             },
 
             't-tower-gate': {
                 name: 'The Tower Road', chapter: 'ch3', map: 'ch3', type: 'rift', x: 842, y: 140,
-                scene: 'scene/neon-plaza', script: 'ch3.towergate', fx: 'rift', links: ['t-plaza', 'k-base'], portal: 'k-base',
+                scene: 'scene/neon-plaza', script: 'ch3.towergate', fx: 'rift', links: ['t-tribunal', 'k-base'], portal: 'k-base',
                 teaser: 'The road to the dark tower on the horizon. Its windows flicker like a feed.',
             },
 

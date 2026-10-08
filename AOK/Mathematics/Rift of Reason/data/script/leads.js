@@ -111,6 +111,30 @@
         frogling: 'Compare with what they said before. Witnesses forget. I don\'t.',
         raven: 'Press the line with "always" or "everyone". Big words, weak legs.',
     } };
+    // Chapter 3's lead stations (map.js opts.lead), so a player never hears a Ch1 lead again.
+    // The Neon Bridge (venn or witness, d2): what a claim says, against what its evidence supports.
+    L['venn:bridge'] = { inner: {
+        owlet: 'Valid first. True later. Two different questions. I keep them in separate drawers.',
+        mothkin: 'Shade only what the scrolls say. Not what the screens shout.',
+        fox: 'Picture the premises true and the ending false. Can you? Then it\'s broken.',
+        frogling: 'At the Fair it was lobsters. Here it\'s screens. Same question: does it follow?',
+        raven: '"Valid" isn\'t "true". Two words. Never let anyone swap them.',
+    } };
+    L['witness:bridge'] = { inner: {
+        owlet: '"Can\'t tell" is a real answer. Clever people use it. I use it.',
+        mothkin: 'Look at what the scene says. Not at what the headline glows.',
+        fox: 'My brain adds a villain to every scene. Delete him. Read again.',
+        frogling: 'Read it twice. Memory adds things. Headlines add more.',
+        raven: '"Saw" and "heard about". Only one of those makes a witness.',
+    } };
+    // The Data Lab (tribunal d2, statistics).
+    L['tribunal:lab'] = { inner: {
+        owlet: 'Out of how many? Compared with what? Ask both. Then ask again.',
+        mothkin: 'Look at the whole chart. The brightest bar is often the one lying.',
+        fox: 'Picture the numbers they didn\'t show. Where did those go?',
+        frogling: 'One small sample fooled me once. One pond. "Every pond," I said.',
+        raven: '"Average." "Rate." "Score." Ask what each word is counting.',
+    } };
     L['chart-fixer'] = { inner: {
         owlet: 'Same numbers, fair scale, then decide. Fair is my favourite.',
         mothkin: 'Look. The axis starts at ninety. Shiny trick. I fall for shiny.',

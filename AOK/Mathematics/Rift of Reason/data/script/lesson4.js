@@ -14,10 +14,7 @@
         core: { name: 'The Algorithm (core)', art: 'npc/algorithm/core' },
     });
 
-    S['ch3.towergate'] = [
-        { s: 'pip', t: 'That is the Server Tower. The Algorithm lives at the top. Nobody who goes up comes back… less confused.' },
-        { s: 'narrator', t: 'Everything you have learned points here: logic, proof, arguments. One more climb.' },
-    ];
+    // ch3.towergate (the Tower Road, a Ch3 node) is in lesson3.js.
 
     S['ch4.arrive'] = [
         { s: 'narrator', t: 'The Server Tower. Cables like roots. Screens like leaves. A hum like a crowd that never stops talking.' },

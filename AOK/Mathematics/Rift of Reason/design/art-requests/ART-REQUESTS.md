@@ -559,6 +559,8 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.33 | The Feast of Laws: the Town Hall banquet, Granny dangling on a rope over a huge pot, the winch, long tables. Wide, room for characters lower centre | `scene/feast-hall` (not wired yet; the Hall uses `scene/village-square`) | Ch2 boss (Town Hall) | 2 *story* | needed |
 | 13.34 | The FEAST OF LAWS poster, no readable text needed (the script reads the small print aloud) | `ui/feast-poster` (optional) | Ch2 Stone Circle | 4 *story* | optional |
 | 13.35 | Granny's Spare Axiom card art (the Hall reward, tiers 1–2; the card itself still needs a design in `data/axioms.js`) | `axiom/spare-axiom` | Card game reward (`spare-axiom` flag) | 3 *story* | needs card design first |
+| 13.36 | Nudge with its glowing clipboard (it runs the GUILTY vote counter; 13.18 lists Nudge generally): bust, gleeful, clipboard held up | `npc/nudge/clipboard` | Ch3 Plaza, Steps and trial (`e: 'clipboard'` in `data/script/lesson3.js`); the witness portrait for Count Two (`data/cases.js` `count-cloudy`) | 2 *story* | needed |
+| 13.37 | Hoot's Gavel item icon: Judge Hoot's small wooden gavel with cyan sparks, readable at 32 px | `item/hoots-gavel` | Bag (the Tribunal reward for a clean save of the Sundial, `data/items.js`) | 2 *story* | needed |
 
 ---
 

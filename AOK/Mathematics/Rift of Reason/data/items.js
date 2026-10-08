@@ -37,6 +37,9 @@
         } },
         // The Gate reward for saving Professor Sequins (STORY.md Ch1, tiers 1–2): a stronger lure.
         'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. Hold it up at a node: rare creatures become more likely for your next 5 visits; catch odds gain 5 points.' },
+        // The Tribunal reward for a clean save of the Sundial (STORY.md Ch3, tier 1). One use: in a later
+        // stakes scene it cancels one mistake tick (the Ch4 drains read the `hoots-gavel` flag too).
+        'hoots-gavel': { name: 'Hoot’s Gavel', kind: 'story', text: 'Judge Hoot’s own gavel. In a later stakes scene, it cancels one mistake. Once.' },
         tonic: { name: 'Tonic', kind: 'support', heal: 2, text: 'Restores 2 health.', battle: {
             cost: 1, text: 'Restore 2 hearts to your hero.',
             usable: (s, p) => s.players[p].hearts < s.players[p].maxHearts,
