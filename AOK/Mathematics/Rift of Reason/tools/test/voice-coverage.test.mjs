@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import os from 'node:os';
 import path from 'node:path';
-import {voiceCatalog,speechParts} from '../voices.mjs';
+import {voiceCatalog,speechParts,lessonsOf} from '../voices.mjs';
 import {budgetDay,readBudget,reserveRequest,reserveFileRequest} from '../voice-budget.mjs';
 import {loadRift,GAME_DIR} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
@@ -21,6 +21,13 @@ test('voice catalog covers every actual tutorial host/family and all teaching-ba
  assert.equal(families.size,14);
  for(const step of Rift.Battle.Lesson.steps)assert.ok(ids.has(Rift.voiceId('granny',step.text)));
  assert.ok(lines.every(l=>l.who!=='avatar'));assert.ok(skipped.every(l=>['nothing to say (stage direction only)','understudy voice not cast yet'].includes(l.why)));
+});
+test('--script: every voiced line belongs to a lesson, so recording lesson by lesson misses nothing',()=>{
+ const {lines}=voiceCatalog();
+ const orphans=lines.filter(l=>!lessonsOf(l).length);
+ assert.deepEqual(orphans.map(l=>l.who+' @ '+l.where),[]);
+ assert.ok(lines.some(l=>l.where.startsWith('prologue')&&lessonsOf(l).includes('lesson1')));
+ assert.ok(lines.filter(l=>l.where.startsWith('lead ')).every(l=>lessonsOf(l).includes('lesson1')),'the lead bank is heard from lesson 1');
 });
 test('batch speech keeps acting directions in each line metadata',()=>{
  const parts=speechParts([{say:'Come closer.',mood:'whispering'},{say:'We have a plan!',mood:'triumphant'}],'Dry tortoise humour');

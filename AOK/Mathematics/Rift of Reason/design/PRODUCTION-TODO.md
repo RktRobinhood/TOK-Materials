@@ -33,7 +33,7 @@ Still to record for lesson 1 (spend the daily quota here first):
 - The ten avatars' spoken lines and inner lines (one request each per day; `--only avatar-owlet-boy`, `--only avatar-owlet-boy-inner`, …). These include the approved inner-voice lead bank (`data/script/leads.js`), which covers all chapters.
 - Lesson 1 lines of the narrator (Sundial), Granny, Sequins, Syllo, Mirage, Muskrat, Algorithm, and the three possessed caricatures.
 
-Caution: `--only <speaker>` records every missing line of that speaker, including old lesson 2–4 lines that will be rewritten. Before the big narrator/Granny/Sequins runs, add a `--script lesson1` filter to `tools/voices.mjs` (or wait until lessons 2–4 are scripted) so the quota isn't spent on lines that will change.
+Record lesson by lesson: `node tools/voices.mjs --script lesson1` shows lesson 1's status (8 Oct: 213 of 687 lines, about 47 requests), and `--render --script lesson1` (with `--only <speaker>` if wanted) records only those lines. All four lessons are now scripted and gated, so no line is expected to change. A line counts for a lesson by its script file, a clock's file, the chapter of the station whose tutorial it is, or the chapters a creature spawns in; the inner-voice lead bank and the card lesson count as lesson 1.
 
 Provisional voices awaiting the teacher's OK: Nudge (Kore), Guess-o-Matic (Schedar), Signpost (Fenrir; also Achilles, never in the same chapter). Understudies (Tally, Achilles, Kuku, Rubberstamp) have no cast voice yet; their lines are skipped until cast.
 

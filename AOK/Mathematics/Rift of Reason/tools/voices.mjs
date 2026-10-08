@@ -7,6 +7,7 @@
 //   node tools/voices.mjs --plan            the batches a render would send (no API calls)
 //   node tools/voices.mjs --render          render missing lines in batches (resumable, free-tier friendly)
 //        --only <speaker>  --max-requests <n>  --batch <lines per request>  --model <id>  --single
+//        --script lesson1[,lesson2…]  only lines a lesson plays (status, --plan and --render; see lessonOf)
 //   node tools/voices.mjs --report          every line still on browser-voice fallback
 //   node tools/voices.mjs --audition        one sample per speaker into tools/voice-auditions (one request each)
 //        --avatars <id[,id…]|all>          avatar voices instead: a spoken and an inner sample per request
@@ -143,7 +144,36 @@ function collect(Rift) {
 }
 
 export function voiceCatalog() { return collect(loadGame()); }
-export { collect as collectVoiceLines };
+
+// Which lesson a line belongs to, for --script: its script key's file (data/script/lessonN.js),
+// a clock's file, the station's chapter for tutorials (prologue and ch1 are lesson 1), the chapters a
+// creature spawns in, and lesson 1 for the inner-voice lead bank and the card lesson (heard from the start).
+const LESSON_OF_CHAPTER = { prologue: 'lesson1', ch1: 'lesson1', ch2: 'lesson2', ch3: 'lesson3', ch4: 'lesson4' };
+let lessonIndex = null;
+function lessonsOf(line) {
+    if (!lessonIndex) {
+        lessonIndex = { keys: {}, clocks: {}, puzzles: {}, creatures: {} };
+        for (const f of fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => /^lesson\d+\.js$/.test(f))) {
+            const R = loadRift(['js/core/rift.js', 'data/script/' + f]), lesson = f.slice(0, -3);
+            for (const k of Object.keys(R.data.script || {})) lessonIndex.keys[k] = lesson;
+            for (const k of Object.keys(R.data.clocks || {})) lessonIndex.clocks[k] = lesson;
+        }
+        const Rift = loadGame();
+        for (const n of Object.values(Rift.data.map.nodes)) {
+            const lesson = LESSON_OF_CHAPTER[n.chapter];
+            if (!lesson) continue;
+            for (const pz of n.puzzles || []) (lessonIndex.puzzles[pz.id] ||= new Set()).add(lesson);
+            for (const c of n.spawns || []) (lessonIndex.creatures[c] ||= new Set()).add(lesson);
+        }
+    }
+    const w = line.where || '', I = lessonIndex;
+    if (w.startsWith('lead ') || w === 'card lesson') return ['lesson1'];
+    if (w.startsWith('clock ')) return [I.clocks[w.slice(6)]].filter(Boolean);
+    if (w.startsWith('tutorial ')) return [...(I.puzzles[w.slice(9)] || [])];
+    if (w.startsWith('creature ')) return [...(I.creatures[w.slice(9)] || [])];
+    return [I.keys[w]].filter(Boolean);
+}
+export { collect as collectVoiceLines, lessonsOf };
 
 const fileOf = l => l.id + '.mp3';
 const rendered = l => fs.existsSync(path.join(OUT, fileOf(l)));
@@ -503,6 +533,10 @@ async function main() {
     const { lines: all, skipped } = voiceCatalog();
     let lines = all;
     if (opt('--only')) lines = lines.filter(l => l.who === opt('--only'));
+    if (opt('--script')) {
+        const want = new Set(opt('--script').split(','));
+        lines = lines.filter(l => lessonsOf(l).some(x => want.has(x)));
+    }
     if (opt('--id')) {
         const ids = new Set(opt('--id').split(','));
         lines = lines.filter(l => ids.has(l.id));
