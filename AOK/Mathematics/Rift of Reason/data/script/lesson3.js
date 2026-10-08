@@ -161,7 +161,8 @@
     ];
     S['ch3.newsstand.win'] = [
         { s: 'pip', e: 'happy', t: 'It squeaked! You broke it. Filed!', when: BEFORE_PLAZA },
-        { s: 'pip', e: 'happy', t: 'It squeaked! Filed. For the defence, this time.', when: { seen: 'ch3.plaza' } },
+        { s: 'pip', e: 'happy', t: 'It squeaked! Filed. For the defence, this time.', when: { all: [{ seen: 'ch3.plaza' }, PRE] } },
+        { s: 'pip', e: 'happy', t: 'Filed anyway. The trial\'s over. Old habits.', when: POST },
         { s: 'narrator', t: 'Headlines. They never print the whole sentence.', when: { all: [ALIVE, BEFORE_PLAZA] } },
         { when: BEFORE_PLAZA, then: FILE },
     ];
@@ -177,7 +178,7 @@
         ], else: [
             { note: 'No screens in here. A sleepy capybara behind the counter slides you a cocoa without a word.' },
             { s: 'narrator', t: 'Quiet. I could almost tell the time.' },
-            { s: 'narrator', t: 'If I ever stop talking, put me somewhere sunny. Just for the warm.' },
+            { s: 'narrator', t: 'If I ever stop talking, put me somewhere sunny. Just for the warm.', when: PRE },
             { s: 'pip', e: 'happy', t: 'The cocoa here has a sound argument.' },
             { s: 'granny', hum: true, t: 'I\'m on the Road, dear. Eighteen fifty is behind me. How\'s the rock?', when: '!dead:granny' },
         ] },
@@ -267,7 +268,8 @@
         { note: 'Charts of the GUILTY vote, in gold frames. Every bar is taller than the one before.' },
     ];
     S['ch3.gallery.win'] = [
-        { s: 'pip', e: 'happy', t: 'Same numbers. Honest picture. Filed, for the defence.' },
+        { s: 'pip', e: 'happy', t: 'Same numbers. Honest picture. Filed, for the defence.', when: PRE },
+        { s: 'pip', e: 'happy', t: 'Filed anyway. The trial\'s over. Old habits.', when: POST },
     ];
 
     // The Archive (battle; every visit). Fin at cards. Cards don't count: only cases he wants to win.
@@ -415,6 +417,7 @@
     // and the pleased Algorithm sends its prize down from the vault (Fin's plan, shown before it is told).
     S['ch3.trial'] = [
         { clock: 'ch3', start: 0 },
+        { note: 'The screens wipe the count. GUILTY VOTES: 0. LIVE FROM THE COURTROOM. EIGHT NOTCHES TO PASS.' },
         { s: 'judge', t: 'Order! The Algorithm versus the Sundial. The charge: fraud.' },
         { s: 'judge', e: 'angry', t: 'New rule: the public votes the verdict. A vote is not evidence. But it decides.' },
         { inner: { mothkin: 'All that light. Not one of them was looking.' } },
@@ -468,7 +471,7 @@
             { s: 'mirage', t: 'Through my ball, darling, I saw it. The sky reached down and took that shadow.' },
             { clock: 'ch3', drain: 1 },
         ] },
-        { when: { flag: 'clip', is: 'slick' }, then: [
+        { when: { all: [{ flag: 'clip', is: 'slick' }, VOTE_OPEN] }, then: [
             { s: 'fin', e: 'angry', t: 'Objection. That clip was bought with flattery, Your Honour.' },
             { s: 'judge', t: 'Noted. The defence will press harder.' },
         ] },
@@ -569,6 +572,7 @@
                 { s: 'narrator', t: '', u: 'The Tower Road. Two hundred and six steps to the door. Exactly.', when: KUKU },
             ], else: [{ when: { not: LATER }, then: [{ play: 'ch3.towergate.call' }], else: [
                 { s: 'narrator', t: 'The Tower Road. We\'ve been up. This was a memory.', when: ALIVE },
+                { flag: 'seen:ch3.towergate.call' },
             ] }] },
         ], else: [
             // A walk down from Ch4 before the trial (a memory).

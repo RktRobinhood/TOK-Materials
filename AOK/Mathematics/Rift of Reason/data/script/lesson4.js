@@ -162,14 +162,19 @@
     S['ch4.arrive'] = [
         { clock: 'copy', start: 0 },
         { when: { seen: 'ch4.door' }, then: [
-            say('The Tower Door. Up there, the bar is still counting.'),
+            { when: 'finale-open', then: [
+                say('The Tower Door. Quiet now. No bar on the screens.'),
+            ], else: [
+                say('The Tower Door. Up there, the bar is still counting.'),
+            ] },
         ], else: [{ play: 'ch4.door' }] },
     ];
     // The bar (STORY.md §6 beat 1). Pip's `met` beat.
     S['ch4.door'] = [
         { s: 'narrator', t: 'The Server Tower. Cables like roots. Screens like leaves.', when: '!dead:sundial' },
         { s: 'pip', e: 'happy', t: 'Pip. Clerk. Bat. I\'m coming too. Clerks go where the record goes.', when: { not: { seen: 'ch3.arrive' } } },
-        { s: 'pip', e: 'happy', t: 'Wait for me! Clerks go where the record goes.', when: { seen: 'ch3.arrive' } },
+        { s: 'pip', e: 'happy', t: 'Wait for me! Clerks go where the record goes.', when: { all: [{ seen: 'ch3.arrive' }, '!dead:sundial'] } },
+        { s: 'pip', t: 'Clerks go where the record goes. Up.', when: { all: ['dead:sundial', { seen: 'ch3.arrive' }] } },
         { s: 'pip', t: 'I\'ve recorded a million claims. I\'ve never checked one.' },
         { s: 'colossus', t: 'WELCOME, {name}. YOU ARE 81% PREDICTABLE.' },
         { note: 'A bar appears on every screen: {name} 2.0 · UPLOADING.' },
@@ -205,7 +210,7 @@
     // ---------------------------------------------------------------- the Chart Gallery
 
     S['ch4.gallery'] = [
-        { s: 'colossus', t: 'MY CITY HAS CHARTS. THESE ARE THE ORIGINALS. EVEN TRUER. TECHNICALLY.' },
+        { s: 'colossus', t: 'DOWN THERE, COPIES. UP HERE, THE ORIGINALS. EVEN TRUER. TECHNICALLY.' },
         { inner: { mothkin: 'Look. Gold frames. So bright. These must be the honest ones.' } },
     ];
     S['ch4.gallery.win'] = [
@@ -221,7 +226,7 @@
         ...READOUT,
         { s: 'avatar', t: 'Nobody predicts me.' },
         { s: 'colossus', t: 'YOU SAID "ALWAYS". SO DO I.', when: HEARD_BOAST },
-        { s: 'colossus', t: 'LEFT OR RIGHT? I HAVE GUESSED YOU FIVE TIMES. FIVE RIGHT.' },
+        { s: 'colossus', t: 'LEFT OR RIGHT? I HAVE PREDICTED YOU FIVE TIMES. FIVE RIGHT.' },
         // The voice-marked question (STORY.md App. E): it counts towards voice.offered / voice.followed.
         { choice: [
             { t: 'Left.', flag: 'ch4.lr', value: 'plain' },
@@ -253,7 +258,7 @@
         { when: 'dead:sundial', then: [
             { scene: 'scene/evidence-room' },
             { note: 'The landing is a store room. A sign: EVIDENCE LOCKER. On a shelf, a jar.' },
-            { s: 'pip', t: 'Its voice. They filed it here. Up the road, in a jar.' },
+            { s: 'pip', t: 'Its voice. They filed it here. In a jar.' },
             { note: 'Pip opens the jar. Empty. And warm. The lid says: FILED. DELETED AS NOISE.' },
             { s: 'pip', t: 'They never even used it. Noise. They called it noise.' },
             { note: 'On the next shelf, a cuckoo clock is ticking. Carved eaves. Pine-cone weights.' },
@@ -261,7 +266,7 @@
             { arrive: 'narrator' },
             { s: 'narrator', t: '', u: '…It stopped. I heard it stop. Three hundred years I listened to it guess.' },
             { s: 'narrator', t: '', u: 'Cuckoo! Four seventeen and twelve seconds. Exactly. I never guess.' },
-            { s: 'narrator', t: '', u: 'He made it say "I guess". To get its shadow home. Was he right?' },
+            { s: 'narrator', t: '', u: 'Fin made it say "I guess". In court. I heard it through the jar. Was he right?' },
         ], else: [
             { s: 'narrator', t: 'Three pieces. I can feel the hour. It\'s late.', when: NO_BARGAIN },
             { s: 'narrator', t: 'One piece. Cloudy. I don\'t mind. Much.', when: BARGAIN },
@@ -444,7 +449,7 @@
     S['ch4.core'] = [
         { note: 'The top of the tower. A hollow sphere of numbers.' },
         { note: 'The screens stand up. They are a body now. Tall, made of feeds, with one eye.' },
-        { s: 'colossus', t: 'NO MORE SERVANTS. NO MORE MASKS. JUST ME. EVERYTHING.' },
+        { s: 'colossus', t: 'NO MORE MASKS. NO MORE HIDING. JUST ME. EVERYTHING.' },
         { note: 'A shape waits in the screens. Your shape. UPLOAD COMPLETE.', when: { clock: 'copy', gte: 8 } },
         { note: 'For the first time, your head is quiet.' },
         FEED_GIVE_UP,
@@ -474,7 +479,8 @@
         quillAsks(['Yes.', 'No.']),
         // Trial 2: the mob's argument, aimed at you (tribunal case core-mine in data/cases.js).
         { s: 'colossus', t: 'NEXT CASE. THE DEFENDANT: {name}.' },
-        { s: 'nudge', t: 'Votes! Lovely votes! Against you, this time!' },
+        { s: 'nudge', t: 'Votes! Lovely votes! Against you, this time!', when: '!dead:pip' },
+        { s: 'nudge', t: 'Votes. Against you. …I\'m counting. I\'m not enjoying it.', when: 'dead:pip' },
     ];
 
     // Before trial 3: Nudge loses its job; then the Copy, and the temptation (for everyone).
@@ -619,8 +625,13 @@
     ];
     // The Sundial's question for Ch4 (Kuku asks it with dead:sundial). No answer is asked for yet.
     S['ch4.walkhome'] = [
-        say('It said "probably" once. Nobody clapped, so it got loud. Who claps for you?'),
+        say('It said "probably" once. Nobody clapped, so it stopped. Would you?'),
+        { when: '!dead:pip', then: [
+            { s: 'pip', e: 'happy', t: 'That\'s your rift. Not mine. I\'ll stay. Someone should check things here.' },
+            { s: 'pip', t: 'I wrote it all down. Then I checked it. Twice.' },
+        ] },
         { note: 'Behind you, at a distance, Nudge follows. No clipboard.' },
+        { note: 'Miss Quill comes down the stairs behind Nudge. She carries her red pen. She doesn\'t use it.' },
     ];
 
     // ---------------------------------------------------------------- the finale: the Fair, Restored
@@ -634,7 +645,7 @@
 
         // 1. Who are you? (the Copy got home first: tiers 3–4)
         { when: COPY_HOME, then: [
-            { s: 'granny', t: 'Got home Tuesday. Somebody was already here. Wrong blink.',
+            { s: 'granny', t: 'Got home Tuesday. Somebody was already here. It blinks wrong.',
                 u: 'Came to sit at her table. Somebody was already sitting there.' },
             { when: { flag: 'stakes.ch4', is: 4 }, then: [
                 { note: 'At the card table sits the Copy. Being you.' },
@@ -662,7 +673,7 @@
         ] },
 
         // 3. The shelf (five spoken lines at most).
-        { s: 'granny', t: 'Downhill. Through time. Took ages.', when: { all: ['!dead:granny', { not: COPY_HOME }, { not: TALLY_AT_SHELF }] } },
+        { s: 'granny', t: 'I walked home. Downhill, through time. Took ages.', when: { all: ['!dead:granny', { not: COPY_HOME }, { not: TALLY_AT_SHELF }] } },
         { when: TALLY_AT_SHELF, then: [
             { arrive: 'sequins' },
             { s: 'sequins', t: '', u: 'He did the shouting. I did the counting.' },
@@ -672,8 +683,10 @@
             u: 'He\'d have sold it one day. I won\'t. I labelled it. Neatly. He\'d have used glitter.' },
         { note: 'The old box sits beside it on the shelf. Two boxes. One sequin.', when: { flag: 'fate', is: 'home' } },
         { note: 'The dark box sits beside it, under a cloth.', when: { flag: 'fate', is: 'off' } },
-        { s: 'sequins', t: 'Somewhere tomorrow, a machine says "probably". I hope someone claps.', when: { flag: 'fate', is: 'left' } },
+        { s: 'sequins', t: 'You left it running? Up there? Then I hope someone claps.',
+            u: 'You left it running. Up there. I hope someone claps.', when: { flag: 'fate', is: 'left' } },
         { note: 'Nudge stands by the stall. It stops every passer-by with its first question.' },
+        { note: 'A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up.' },
         { s: 'nudge', t: '…Why?' },
         { s: 'narrator', t: 'Will this one grow up loud? I can\'t predict that. Nobody can.',
             u: 'Will this one grow up loud? I can\'t tell. Nobody can.' },
@@ -686,7 +699,6 @@
         ], else: [
             { note: 'The sun comes out. The shadow lies where it should.', when: NO_BARGAIN },
             { note: 'The sun comes out. Half a shadow lies where it should.', when: BARGAIN },
-            { s: 'narrator', t: 'Cloudy, always. I\'ll say so.', when: BARGAIN },
         ] },
         { s: 'granny', t: 'There\'s a hair on the sky. I\'ll dust it later.',
             u: 'She\'d have said she\'d dust it later. I\'ll do it now. …Slowly.', when: { flag: 'feed', gte: 6 } },
@@ -696,6 +708,7 @@
             u: '"Always right." Is that you? Think fast. …No. Slow. She\'d say slow.' },
         { s: 'avatar', t: 'Probably.' },
         { s: 'granny', e: 'happy', t: 'Then it isn\'t yours. Good. It\'s very heavy.' },
+        { note: 'By the stall, Nudge claps. Once. Then the whole Fair claps. For "probably".' },
         { s: 'narrator', t: 'Tick. Tock. Good. Say it like that.', u: 'Good. Say it like that. …I\'m practising.' },
         { flag: 'rift-walker' },
         { note: 'The end. For now.' },
@@ -763,7 +776,9 @@
         { s: 'narrator', t: 'His stamp is still on the desk. Check who the machine says no to.', when: 'dead:pip' },
     ];
     S['station.k-oracle.intro'] = [
-        { s: 'oracle', e: 'happy', t: 'Greetings. I am a thinking engine. I print proofs.' },
+        { s: 'oracle', e: 'happy', t: 'Greetings. I am a thinking engine. I print proofs.', when: '!dead:pip' },
+        { note: 'The Oracle prints on. It did not notice anyone was missing.', when: 'dead:pip' },
+        { s: 'oracle', t: 'I am a thinking engine. I print proofs.', when: 'dead:pip' },
         { s: 'oracle', t: 'All correct. Probably. Inspect a step if you insist. Nobody insists.', when: '!dead:pip' },
         { s: 'oracle', t: 'All correct. Inspect a step if you must.', when: 'dead:pip' },
         { inner: { raven: '"Thinking engine." It\'s in the name. It thinks.' } },
