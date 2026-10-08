@@ -11,7 +11,7 @@
  *
  * API (Rift.Battle.Engine):
  *   createBattle({ seed, players: [{ id, name, team: [instances], tactics?: [ids], axioms?: [ids],
- *                  hearts?, consumables? }], axiomDeck?: [ids], options })      → state
+ *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] } }], axiomDeck?: [ids], options })      → state
  *   legalActions(state) → [action]    applyAction(state, action) → new state (input untouched)
  *   applyLegal(state, action) → like applyAction but skips the legality check; only for an
  *                  action object taken from legalActions(state) of this same state (AI lookahead)
@@ -38,6 +38,7 @@
  *   { type: 'activate', cid, ability, target? }
  *   { type: 'spark' }                         second player, once: +1 energy this turn
  *   { type: 'item', id, target? }             use a bag item (one per turn; see "The Bag" below)
+ *   { type: 'power', target? }                use the hero power (see "Hero powers" below)
  *   { type: 'end' }
  *   { type: 'choose', choice }                answer a pending question            phase 'choose'
  *
@@ -51,6 +52,18 @@
  * players[p].itemsUsed. itemsUsed(state, p) → { id: n } so the caller removes only those from the
  * save. bagStatus(state, p) → one entry per item kind for the Bag tray (with `ok` and `why`).
  * The arrays bag/itemsUsed are replaced (never changed in place), so cloneState can share them.
+ *
+ * Hero powers (design/AVATARS.md section 1, data/powers.js): players[p].power = { id, tweaks, cooldown,
+ * uses } or null (createBattle player.power; Granny's lesson has none). In the main phase the owner
+ * may use it for its energy (or 1 heart with the Blood price tweak). It is not a card play. After
+ * use, cooldown = recharge + 1 and counts down by 1 at the start of each of the owner's turns; it is
+ * ready at 0 (so at most once per turn, and ready on turn 1). Tweaks: powerMods(state, p) → { def,
+ * cost, heartCost, recharge, deeper, broader }. powerStatus(state, p) → { id, name, text, cost,
+ * heartCost, recharge, turnsLeft, ready, usable, why, note, target, tweaks } for the UI, or null.
+ * Night Sight sets players[q].tax (the next n cards q plays cost 1 more) and players[p].sight (the
+ * cids it added to p's knows, forgotten at p's next turn). The power object and the sight array are
+ * replaced, never changed in place, so cloneState can share them.
+ * Events: 'power-use' { player, id, target } and the power's own 'power' lines.
  */
 (function (root) {
     'use strict';
@@ -79,6 +92,7 @@
     const axiomDefs = () => Rift.data.axioms || {};
     const tacticDefs = () => Rift.data.tactics || {};
     const battleItem = id => ((Rift.data.items || {})[id] || {}).battle || null;
+    const powerDefs = () => Rift.data.powers || {};
     const isHero = t => t === 'h0' || t === 'h1';
     const heroId = p => 'h' + p;
 
@@ -327,12 +341,21 @@
         });
     }
 
+    // Night Sight's tax: a card in a taxed player's hand costs 1 more.
+    function taxOn(s, cid) {
+        const P = s.players[s.cards[cid].controller];
+        return P.tax > 0 && P.hand.includes(cid) ? 1 : 0;
+    }
     function playCost(s, cid) {
         const c = s.cards[cid];
-        if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || { cost: 0 }).cost;
-        return Math.max(0, c.cost + rules(s).costDelta);
+        if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || { cost: 0 }).cost + taxOn(s, cid);
+        return Math.max(0, c.cost + rules(s).costDelta) + taxOn(s, cid);
     }
-    function axiomCost(s, id) { return (axiomDefs()[id] || { cost: 2 }).cost; }
+    // p: who plays it (default: the active player), for Night Sight's tax.
+    function axiomCost(s, id, p) {
+        const P = s.players[p == null ? s.active : p];
+        return (axiomDefs()[id] || { cost: 2 }).cost + (P && P.tax > 0 ? 1 : 0);
+    }
 
     // Paid abilities this creature has: [{ id, name, text, cost, target, filter, usable }].
     // usable: false when it would certainly do nothing now (legalActions leaves it out).
@@ -505,7 +528,7 @@
                 else list.push({ type: 'play', player: p, cid });
             }
         });
-        if (canPlay) Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id) <= P.energy && axiomWouldChange(s, id)) list.push({ type: 'axiom', player: p, choice: id }); });
+        if (canPlay) Array.from(new Set(P.axHand)).forEach(id => { if (axiomCost(s, id, p) <= P.energy && axiomWouldChange(s, id)) list.push({ type: 'axiom', player: p, choice: id }); });
         P.board.forEach(cid => {
             if (canAttack(s, cid)) attackTargets(s, cid).forEach(target => list.push({ type: 'attack', player: p, cid, target }));
             if (canActivateNow(s, cid)) activations(s, cid).forEach(a => {
@@ -515,6 +538,7 @@
             });
         });
         if (P.bag && P.bag.length) itemActions(s, p).forEach(a => list.push(a));
+        if (P.power) powerActions(s, p).forEach(a => list.push(a));
         return list;
     }
 
@@ -634,6 +658,7 @@
                 playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [],
                 consumables: Object.assign({}, cons),
                 bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
+                power: powerSetup(pl.power), tax: 0, sight: [],
             });
         });
 
@@ -685,6 +710,7 @@
             case 'activate': doActivate(G, match.cid, match.ability, match.target || null); break;
             case 'spark': doSpark(G); break;
             case 'item': doItem(G, match.id, match.target || null); break;
+            case 'power': doPower(G, match.target || null); break;
             case 'end': endTurn(G); break;
             case 'choose': resolveChoice(G, match.choice); break;
             default: throw new Error('Unknown action ' + match.type);
@@ -879,6 +905,8 @@
         P.attacksThisTurn = 0;
         P.playsThisTurn = 0;
         P.extraPlays = 0;
+        if (P.power && P.power.cooldown > 0) P.power = Object.assign({}, P.power, { cooldown: P.power.cooldown - 1 });
+        if (P.sight && P.sight.length) { const gone = P.sight; P.knows = P.knows.filter(k => !gone.includes(k)); P.sight = []; }
         P.board.forEach(cid => {
             const c = s.cards[cid];
             c.attacks = 0; c.activated = false;
@@ -1014,6 +1042,7 @@
     function doPlay(G, cid, target) {
         const s = G.s, p = s.active, P = s.players[p], c = s.cards[cid];
         spend(G, playCost(s, cid));
+        if (P.tax > 0) P.tax -= 1;
         removeFrom(P.hand, cid);
         s.players[1 - p].knows = s.players[1 - p].knows.filter(k => k !== cid);
         if (c.kind === 'tactic') {
@@ -1039,7 +1068,8 @@
 
     function doAxiom(G, id) {
         const s = G.s, p = s.active, P = s.players[p];
-        spend(G, axiomCost(s, id));
+        spend(G, axiomCost(s, id, p));
+        if (P.tax > 0) P.tax -= 1;
         removeFrom(P.axHand, id);
         emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' a rule card.' });
         setAxiom(G, id, p);
@@ -1078,6 +1108,7 @@
     function answer(G, req, choice) {
         const s = G.s;
         if (req.source.type === 'tactic') tacticDefs()[req.source.id].choose(api(G), req.player, choice, req);
+        else if (req.source.type === 'power') powerDefs()[req.source.id].choose(api(G), req.player, choice, req, powerMods(s, req.player));
         else abilityDefs()[req.source.id].choose(api(G), s.cards[req.source.cid], choice, req);
     }
 
@@ -1294,6 +1325,86 @@
         return out;
     }
 
+    // ---- hero powers (design/AVATARS.md section 1, data/powers.js) -------------------------------
+
+    const TWEAKS = ['quick', 'cheap', 'blood', 'deeper', 'broader'];
+
+    // createBattle's player.power → the battle's power state (null: no power).
+    function powerSetup(pw) {
+        if (!pw || !powerDefs()[pw.id]) return null;
+        const tweaks = [];
+        (pw.tweaks || []).forEach(t => { if (TWEAKS.includes(t) && !tweaks.includes(t) && tweaks.length < 3) tweaks.push(t); });
+        return { id: pw.id, tweaks, cooldown: 0, uses: 0 };
+    }
+
+    // The power's numbers after its tweaks. Cost and recharge never go below 0.
+    function powerMods(s, p) {
+        const pw = s.players[p].power;
+        if (!pw) return null;
+        const def = powerDefs()[pw.id];
+        const has = t => pw.tweaks.includes(t);
+        let cost = def.cost, recharge = def.recharge, heartCost = 0;
+        const deeper = has('deeper') && !!def.deeper, broader = has('broader') && !!def.broader;
+        if (has('quick')) { recharge -= 1; cost += 1; }
+        if (has('cheap')) { cost -= 1; recharge += 1; }
+        if (deeper) recharge += 1;
+        if (broader) cost += 1;
+        if (has('blood')) { heartCost = 1; cost = 0; }
+        return { def, cost: Math.max(0, cost), heartCost, recharge: Math.max(0, recharge), deeper, broader };
+    }
+
+    // Why player p can't use the power now ('' when it can), as a code and a short note.
+    function powerBlock(s, p, m) {
+        const P = s.players[p], def = m.def;
+        if (s.winner != null || s.active !== p) return ['turn', 'Wait for your turn.'];
+        if (s.phase === 'draw') return ['draw', 'First choose your draw.'];
+        if (s.phase !== 'main') return ['busy', 'First answer the question.'];
+        if (P.power.cooldown > 0) return ['recharge', 'Ready in ' + P.power.cooldown + ' turn' + (P.power.cooldown === 1 ? '' : 's') + '.'];
+        if (m.cost > P.energy) return ['energy', 'It needs ' + m.cost + ' energy. You have ' + P.energy + '.'];
+        if (m.heartCost && !rules(s).reverseHearts && P.hearts <= m.heartCost) return ['hearts', 'It costs a heart, and you have only ' + P.hearts + '.'];
+        if (def.usable && !def.usable(s, p, H, m)) return ['useless', 'It would do nothing now.'];
+        if (def.target && !powerTargets(s, p, m).length) return ['target', 'It has no target right now.'];
+        return ['', ''];
+    }
+
+    function powerTargets(s, p, m) {
+        const def = m.def;
+        return targetsFor(s, def.target, p, def.filter ? (st, cid, h) => def.filter(st, cid, h, m) : null, null);
+    }
+
+    // The power actions player p may take now.
+    function powerActions(s, p) {
+        if (!s.players[p].power) return [];
+        const m = powerMods(s, p);
+        if (powerBlock(s, p, m)[0]) return [];
+        if (m.def.target) return powerTargets(s, p, m).map(target => ({ type: 'power', player: p, target }));
+        return [{ type: 'power', player: p }];
+    }
+
+    // Everything the power button needs, or null when p has no power.
+    function powerStatus(s, p) {
+        const pw = s.players[p].power;
+        if (!pw) return null;
+        const m = powerMods(s, p), def = m.def;
+        const [why, note] = powerBlock(s, p, m);
+        return {
+            id: pw.id, name: def.name, text: Rift.Powers ? Rift.Powers.text(pw.id, pw.tweaks) : def.text, tweaks: pw.tweaks.slice(),
+            cost: m.cost, heartCost: m.heartCost, recharge: m.recharge, turnsLeft: pw.cooldown, ready: pw.cooldown === 0,
+            usable: !why, why, note, target: def.target || null, uses: pw.uses,
+        };
+    }
+
+    function doPower(G, target) {
+        const s = G.s, p = s.active, P = s.players[p];
+        const m = powerMods(s, p), def = m.def;
+        spend(G, m.cost);
+        P.power = Object.assign({}, P.power, { cooldown: m.recharge + 1, uses: P.power.uses + 1 });
+        emit(G, { t: 'power-use', player: p, id: P.power.id, target, text: says(s, p, 'uses') + ' the power ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
+        if (m.heartCost) damageHero(G, p, m.heartCost);
+        def.run(api(G), p, target, m);
+        afterMove(G);
+    }
+
     // A random team of n instances, weighted by rarity (for the simulator and bench).
     function randomTeam(rng, n, opts) {
         const o = opts || {};
@@ -1319,6 +1430,8 @@
         attack: (s, cid, foe) => attackOf(s, cid, foe),
         health: (s, cid) => healthOf(s, cid).current,
         rules,
+        playCost: (s, cid) => playCost(s, cid),
+        canAttack: (s, cid) => canAttack(s, cid),
     };
 
     Battle.Engine = {
@@ -1330,5 +1443,6 @@
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, identityFilter, H,
         BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,
+        TWEAKS, powerMods, powerActions, powerStatus,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

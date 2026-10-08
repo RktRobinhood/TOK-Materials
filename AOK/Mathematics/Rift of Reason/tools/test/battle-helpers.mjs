@@ -18,10 +18,11 @@ let n = 0;
 export const inst = (species, extra) => Object.assign({ uid: 'u' + (++n), species, powerDelta: 0, injuries: [], scars: [], warped: null, trophyOf: null }, extra || {});
 const asInst = x => (typeof x === 'string' ? inst(x) : x);
 
-export function setup({ p0 = [], p1 = [], t0 = [], t1 = [], axioms = [], options = {}, energy = 10, main = true } = {}) {
+// powers: [player 0's power, player 1's power] as { id, tweaks } (hero powers, data/powers.js).
+export function setup({ p0 = [], p1 = [], t0 = [], t1 = [], axioms = [], options = {}, energy = 10, main = true, powers = [] } = {}) {
     const s = E.createBattle({
         seed: 'rules',
-        players: [{ name: 'A', team: p0.map(asInst), tactics: t0 }, { name: 'B', team: p1.map(asInst), tactics: t1 }],
+        players: [{ name: 'A', team: p0.map(asInst), tactics: t0, power: powers[0] }, { name: 'B', team: p1.map(asInst), tactics: t1, power: powers[1] }],
         axiomDeck: axioms,
         options: Object.assign({ first: 0, shuffle: false, shuffleAxioms: false, openHand: [0, 0], openAxioms: 0, spark: false, timeline: false, hearts: 10 }, options),
     });
