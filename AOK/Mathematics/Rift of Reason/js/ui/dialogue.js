@@ -21,7 +21,11 @@
     }
 
     function fill(text) {
-        return String(text).replace(/\{name\}/g, nickname());
+        // {role:granny} (notes, labels, cards; never in voiced lines): whoever holds the role now.
+        return String(text).replace(/\{name\}/g, nickname()).replace(/\{role:([a-z0-9-]+)\}/g, (m, role) => {
+            const who = Rift.Cast ? Rift.Cast.actor(role) : role;
+            return who ? ((Rift.data.speakers || {})[who] || { name: who }).name : 'nobody';
+        });
     }
 
     function speakerInfo(id, pose) {
@@ -211,6 +215,7 @@
         if ('start' in step) S.start(id, step.start === true ? 0 : step.start);
         else if ('tick' in step) await playTick(layer, S.tick(id, step.tick, { silent: step.silent }), id, ctx);
         else if ('drain' in step) { if (!ctx.quiet) S.drain(id, step.drain); }
+        else if ('progress' in step) { if (!ctx.quiet) S.progress(id, step.progress); }
         else if (step.pause) S.pause(id, true);
         else if (step.resume) S.pause(id, false);
         else if (step.resolve) S.resolve(id);
@@ -291,6 +296,9 @@
             } else if (step.arrive) Rift.Cast.arrive(step.arrive);
             else if (step.quiet) await quietStep(layer, step.quiet, ctx);
             else if (step.keepsake) keepsake(layer, step.keepsake, ctx);
+            // Side-story rewards: a creature that visits (offered at your next win), a station shut for one visit.
+            else if (step.visitor) { if (!ctx.quiet) Story().setFlag('visitor:' + step.visitor, true); }
+            else if (step.closed) Story().setFlag('closed:' + step.closed, step.note || true);
             else if (step.prop) { if (Rift.Assets.has(step.prop)) keepsake(layer, step.prop, ctx, step.prop); }
             else if ('scene' in step) backdrop(layer, step.scene, ctx);
             else if (step.possess) {

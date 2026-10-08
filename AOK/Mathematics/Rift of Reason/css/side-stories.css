@@ -1,0 +1,64 @@
+/* Side stories (design/SIDE-STORIES.md): the map bubble and the side-story screen.
+   The bubble fades slowly in and out (3 s, no movement); under Calm motion it is still and bright. */
+
+/* ---- the map bubble ---- */
+.map-node .side-bubble { cursor: pointer; animation: side-fade 3s ease-in-out infinite; }
+.map-node .side-bubble .side-bubble-ring { fill: #1a1428; stroke: var(--side, var(--rift)); stroke-width: 4; }
+.map-node .side-bubble .side-bubble-icon { fill: var(--parchment); font-size: 20px; pointer-events: none; }
+.map-node .side-bubble:hover .side-bubble-ring, .map-node .side-bubble:focus .side-bubble-ring { stroke-width: 6; }
+@keyframes side-fade { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+body.calm-motion .map-node .side-bubble { animation: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .map-node .side-bubble { animation: none; opacity: 1; } }
+.map-tip .side-teaser { margin-top: 6px; color: var(--gold); }
+
+/* ---- the screen ---- */
+.screen-side-story .side-panel { position: absolute; top: 64px; left: 12px; width: 300px; max-height: calc(100% - 76px); overflow: auto;
+    display: flex; flex-direction: column; gap: 8px; border-top: 4px solid var(--side, var(--rift)); z-index: 2; }
+.side-title { font-family: var(--font-display); font-size: 1.1rem; }
+.side-prompt { margin: 0; }
+.side-cards { display: flex; flex-direction: column; gap: 6px; }
+.side-card { background: rgba(239, 227, 200, 0.08); border: 1px solid var(--panel-edge); border-radius: 10px; padding: 6px 8px; font-size: 0.9rem; }
+.side-card.twist { border-color: var(--gold); }
+.side-kind { margin-right: 6px; }
+
+.side-spots { position: absolute; inset: 0; z-index: 3; pointer-events: none; }   /* above the panel, so no hotspot is ever hidden */
+.side-spot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    background: rgba(20, 18, 31, 0.78); color: var(--parchment); border: 3px solid var(--rift); border-radius: 14px; padding: 6px 10px; cursor: pointer; font: inherit; }
+.side-spot:hover, .side-spot:focus { border-color: var(--gold); outline: none; }
+.side-spot.found { border-color: var(--gold); opacity: 0.85; }
+.side-spot.idle { display: none; }   /* hotspots only during the clue beat */
+.side-spot-icon { font-size: 1.6rem; line-height: 1; }
+.side-spot-art { width: 64px; height: 64px; object-fit: contain; }
+.side-spot-label { font-size: 0.8rem; }
+
+.side-verb { position: absolute; left: 324px; right: 12px; bottom: 12px; max-height: 60%; overflow: auto; z-index: 2; animation: side-in 0.3s ease-out; }
+@keyframes side-in { from { opacity: 0; } to { opacity: 1; } }
+body.calm-motion .side-verb { animation: none; }
+.side-verb-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.side-q { font-weight: 700; margin: 6px 0; }
+.side-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.side-option { text-align: left; }
+.side-option.struck { text-decoration: line-through; opacity: 0.45; }
+.side-option.used { opacity: 0.45; }
+.side-move { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.75; }
+.side-group { margin-top: 8px; }
+.side-group p { margin: 0 0 4px; }
+.side-ask { margin-top: 10px; }
+.side-tracks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0; }
+.side-pips { display: inline-flex; gap: 3px; }
+.side-pip { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--parchment-dim); }
+.side-pip.on.interest { background: var(--gold); border-color: var(--gold); }
+.side-pip.on.patience { background: var(--rift); border-color: var(--rift); }
+.side-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.side-tag { border-radius: 999px; padding: 2px 10px; font-size: 0.85rem; border: 1px solid var(--panel-edge); }
+.side-tag.cares { border-color: var(--perception); }
+.side-tag.cant { border-color: var(--emotion); }
+.side-tag.hidden { opacity: 0.6; }
+.side-table { border-collapse: collapse; margin: 6px 0; }
+.side-table th, .side-table td { border: 1px solid var(--panel-edge); padding: 4px 10px; text-align: center; }
+.side-busy .side-verb, .side-busy .side-spots { pointer-events: none; }
+
+@media (max-width: 760px) {
+    .screen-side-story .side-panel { position: relative; top: auto; left: auto; width: auto; margin: 64px 12px 0; }
+    .side-verb { left: 12px; }
+}

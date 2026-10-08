@@ -240,6 +240,8 @@ Every other role is spoken by its original only.
 | `{ prop: 'ui/memorial-lantern-dark' }` | shows any art in the keepsake's place, with no flag (memorial props: `ui/memorial-lantern-lit`, `-lantern-dark`, `-candle`, `-wreath`, `-ribbon`, `-frame`); skipped if the art is missing |
 | `{ possess: 'pip' }` / `{ free: 'pip' }` (new) | section 9 |
 | `{ clock: … }` (new) | section 8 |
+| `{ visitor: 'keanu' }` (side stories) | that creature is the loot of your next win anywhere, until you own one (flag `visitor:<id>`) |
+| `{ closed: 'troll-bridge', note: '…' }` (side stories) | the station is shut for one visit: the next arrival shows `note` and nothing else (flag `closed:<id>`) |
 
 ---
 
@@ -324,6 +326,7 @@ C.ch1 = {
 | `{ clock: 'ch1', start: 0 }` | open the meter (`start` = notches already filled, plus `prefill`). Starting a clock that is already running or finished does nothing, so it is safe in a script that replays |
 | `{ clock: 'ch1', tick: 1 }` | fill notches, with the warning (the Algorithm's "push"). `silent: true` skips the warning (start bonuses like `turnedBack`) |
 | `{ clock: 'ch1', drain: 1 }` | empty notches (blue options, side-story ripples). Ignored inside a Quiet Scene |
+| `{ clock: 'ch1', progress: 1 }` | fill the gold Progress meter (side stories' blue "+1 progress"). In a side story write `clock: 'side'` for its own clock (SIDE-STORIES.md 8b) |
 | `{ clock: 'copy', pause: true }` / `{ clock: 'copy', resume: true }` | freeze a clock (the Copy's bar at the Sorting Room) |
 | `{ clock: 'ch1', resolve: true }` | **read the tier** (normally first thing in `<script>.win`). Sets `stakes.<id>` and changes the Feed (tier 1: −1, tier 3: +1, tier 4: +2). With a `peril`, also sets `risked:<npc>`; an armed tier 4 sets `dead:<npc>` and `quiet:<npc> = pending`; a tier 4 that is not armed is stored as 3 (Feed +1). If the clock already filled during play, this just closes it. Then branch on the flags |
 

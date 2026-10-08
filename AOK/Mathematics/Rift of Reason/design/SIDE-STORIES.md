@@ -1,6 +1,6 @@
 # Rift of Reason — Side stories (pop-up one-shots)
 
-Status: **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); not scripted or built yet (#56). The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
+Status: **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); the **engine is built** (#56: `js/core/side-stories.js`, `js/core/side-verbs.js`, `js/screens/side-story.js`, bench `dev/side-story.html`); the stories are not scripted yet. The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
 
 **What a side story is.** A 5–10 minute scene at a station you **have already visited**, not part of the main plot (teacher's note 8). It practises the reasoning of the lesson that unlocked it, through **negotiation**, **deduction**, **argument-spotting** or a **test**. Each one has a stakes clock, a fair twist, a reward, and sometimes a small ripple into the main story. None is needed to finish the game. **Nobody can die in a side story.**
 
@@ -415,6 +415,21 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 | `side.<n>` | every story | tier 1–4, for the Feed and the teacher overview |
 
 Side-story drains per boss: the Ch1 Gate, story 2 (1); the Ch2 pot, story 4 (1); the Ch3 trial, stories 1 and 8 (2); the Ch4 Copy, story 7 (1). All within the cap of 2.
+
+## 8b. Script format
+
+The full format, with every field, is the header comment of `data/script/side-stories.js`; that file holds one placeholder story marked `fixture: true` (never shown in the game) for the bench and the tests. In short:
+
+- A story is `SS['<id>'] = { n, title, lesson, station, teaser, aside, colour, setup, clock, start, clues, twist, resolve, after, outcome, ripples, last }`. All text is ordinary script steps (SCRIPT-FORMAT.md): speakers, `e`, `t`, `u`, `when`, `only`, `inner`, choices, flags, `give`, `keepsake`.
+- **Clock:** `{ label, size: 6 | 4, progress: 3 | 4, warn }`. Tiers, Feed and `side.<n>` are set by the engine. `{ clock: 'side', drain | tick | progress: 1 }` acts on this story's clock (write the blue option as a choice option with `only`, `voice: true` and `then: [{ clock: 'side', drain: 1 }]`).
+- **Clues:** `spots: [{ id, kind: person | object | record, label, x, y, steps, card }]` placed in % on the station's background; `need: 2` (any two), or a list of ids, or several lists (story 4). Three free looks, then 1 notch a look.
+- **Twist:** `{ steps, card }`; the card joins your clue cards (an Object round can ask you to present it).
+- **Resolve:** `{ verb: 'deduce' | 'test' | 'object' | 'negotiate', … }`. Rounds of options (`{ t, ok, say, cost }`), with `why` (Deduce), `then` and `table` (Test), `line`, `press`, `present` and `name` (Object); a negotiation gives `interest`, `patience`, `askAt`, `cares`, `cantStand`, `listen` (mirror, feeling, sum), `args`, `special` (per species), `ask`, `replies`.
+- **Outcome and ripples:** `outcome: { 1: [...], 2: [...], 3: [...], 4: [...] }`; `ripples: [{ flag, tiers, boss, drain, late }]` (`late` plays instead when the boss is already beaten or its cap of 2 is full).
+- **Generated numbers:** `setup: rng => ({ … })`; any beat may be a function of those values (`v => [...]`).
+- New steps for rewards: `{ visitor: '<creature>' }` (it is the loot of your next win until you own one) and `{ closed: '<node>', note }` (shut for one visit). `{role:granny}` in a note or card names whoever holds the role now.
+
+**Decided** (engine): verbs are deterministic. Mistakes cost notches, never hearts. Progress already filled when the verb starts (a blue "+1 progress") strikes out one wrong option per notch, or adds 1 Interest in a negotiation. In a negotiation, listening costs no Patience and turns over one hidden tag; Patience running out costs a notch and then the talks restart; asking below `askAt` (default 4) costs a notch. Icon colours: lesson 1 green, 2 blue, 3 gold, 4 violet. A side story left halfway leaves no trace and starts again next time.
 
 ## 9. Change lists
 

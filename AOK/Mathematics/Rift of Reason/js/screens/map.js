@@ -172,10 +172,25 @@
                         const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
                         label.textContent=n.cardSchool?'Learn / Challenge':'Challenge';g.append(label);
                     }
+                    // A side story waits here (design/SIDE-STORIES.md section 1): a slowly fading bubble.
+                    const side = Rift.SideStories && Rift.SideStories.at(id);
+                    if (side) g.append(sideBubble(id, side));
                     g.addEventListener('click', () => goTo(id));
                     g.addEventListener('keydown', ev => { if (ev.key === 'Enter') goTo(id); });
                 }
                 return g;
+            }
+
+            function sideBubble(id, side) {
+                const colour = Rift.SideStories.colourOf(side);
+                const b = svg('g', { class: 'side-bubble', transform: 'translate(30,-40)', tabindex: 0, role: 'button', 'aria-label': 'Side story: ' + side.title, style: '--side:' + colour.hex });
+                b.append(svg('circle', { r: 20, class: 'side-bubble-ring' }));
+                if (Rift.Assets.has('ui/side-story')) b.append(svg('image', { href: Rift.Assets.src('ui/side-story'), x: -19, y: -19, width: 38, height: 38 }));
+                else { const t = svg('text', { class: 'side-bubble-icon', 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = '💬'; b.append(t); }
+                const go = ev => { ev.stopPropagation(); goTo(id, side.id); };
+                b.addEventListener('click', go);
+                b.addEventListener('keydown', ev => { if (ev.key === 'Enter') go(ev); });
+                return b;
             }
 
             function showTip(id, kind, locked) {
@@ -188,6 +203,8 @@
                 );
                 // Element.append(null) would print the word "null".
                 if (locked) tip.append(el('div.small.warn', { text: '🔒 ' + locked }));
+                const side = kind === 'revealed' && Rift.SideStories && Rift.SideStories.at(id);
+                if (side) tip.append(el('div.small.side-teaser', { text: '💬 ' + side.teaser }));
                 const rect = board.getBoundingClientRect();
                 const sx = rect.width / W, sy = rect.height / H, s = Math.min(sx, sy);
                 const ox = rect.left + (rect.width - W * s) / 2, oy = rect.top + (rect.height - H * s) / 2;
@@ -236,7 +253,8 @@
                 });
             }
 
-            async function goTo(id) {
+            // sideId: walk there and open that side story instead of the station.
+            async function goTo(id, sideId) {
                 if (walking) return;
                 const st = Rift.State.get();
                 const locked = Rift.World.lockReason(st, id);
@@ -250,7 +268,8 @@
                         await walkEdge(path[i - 1], path[i]);
                         Rift.State.update(s => { s.map.at = path[i]; });
                     }
-                    if (!destroyed) await arrive(id);
+                    if (!destroyed && sideId) Rift.Router.go('side-story', { id: sideId });
+                    else if (!destroyed) await arrive(id);
                 } finally { walking = false; }
             }
 
@@ -273,6 +292,13 @@
                 if (destroyed) return;
                 const st = Rift.State.get();
                 const done = st.map.completed.includes(id);
+                // Shut for one visit by a side story's outcome ({ closed: id, note }).
+                const shut = Rift.Story && Rift.Story.flag('closed:' + id);
+                if (shut) {
+                    Rift.State.update(s => { delete s.flags['closed:' + id]; });
+                    Rift.UI.toast(typeof shut === 'string' ? shut : 'Closed today. Come back later.', 3500);
+                    return;
+                }
                 if (Rift.Cast && Rift.Cast.isDark(id)) {
                     Rift.UI.toast(n.darkTeaser || 'Nobody is here now.', 3500);
                     if (!done) { Rift.State.update(s => Rift.World.complete(s, id)); draw(); }
@@ -316,6 +342,8 @@
                         Rift.State.update(s => { s.health = Rift.UI.maxHealth(s); });
                         Rift.Audio.sfx('heal');
                         Rift.UI.toast('Rested: health restored.');
+                        // Once per lesson the narrator mentions a waiting side story.
+                        { const aside = Rift.SideStories && Rift.SideStories.aside(); if (aside) await Rift.Dialogue.play(aside); }
                         finish();
                         // Campfires are where power tweaks are changed (design/AVATARS.md 1.3); the shrine comes after.
                         if (!(Rift.PowerView && Rift.PowerView.editTweaks && Rift.PowerView.editTweaks({ onClose: shrineOffer }))) shrineOffer();
