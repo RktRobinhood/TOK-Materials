@@ -539,6 +539,8 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.13 | Side-story map marker (blinking icon) | `ui/side-story` | Side stories at revisited stations (#56) | 2 | needed |
 | 13.14 | Side-story cast and props (to be listed per story after the outline passes the gate) | | #56 | 3 *story* | to list |
 | 13.15 | Other understudies only if a story arms them (Mr Ledger, Cadet Twitch, Justice Tuskworth, Mr Rubberstamp, Prosecutor Puff) | see `UNDERSTUDIES.md` §5 | | 4 | not yet |
+| 13.16 | "Possessed by the Algorithm" look for NPCs and creatures: probably a CSS/overlay first (feed-screen glow, scanlines, red Emotion tint); optional possessed busts for key NPCs | `fx/possessed` overlay; `npc/<id>/possessed` if needed | Possession beats (TEACHER-STORY-NOTES 9) | 2 *story* | to design |
+| 13.17 | The Algorithm's own form for the final confrontation | `npc/algorithm/true-form` | Finale | 1 *story* | to design |
 
 ---
 
