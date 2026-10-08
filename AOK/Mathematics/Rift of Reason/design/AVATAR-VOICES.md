@@ -1,5 +1,7 @@
 # Avatar voices — design (8 October 2026)
 
+> **Decision (teacher, 8 Oct 2026): plain voices.** All ten auditions approved as recorded: the plain spoken voice and the plain inner voice (with the existing inner effect). "Distinct, like a Pixar movie." The creature filter and species sounds were tried and dropped. When a character is **possessed by the Algorithm**, they speak as `<id>-possessed`: their own voice, acted slow and flat, then lowered and stretched a little and doubled into the Algorithm's chorus (`tools/voices-fx.mjs` `possessed`). No new voices are needed for possession.
+
 Part of "Avatars that matter" (`design/AVATARS.md`, section 2.1). The ten avatars (5 species × boy/girl, `data/avatars.js`) stop being silent. Each gets one Gemini prebuilt voice used for two deliveries:
 
 1. **Spoken** — normal dialogue with NPCs.

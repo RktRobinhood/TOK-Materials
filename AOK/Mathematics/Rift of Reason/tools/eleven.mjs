@@ -1,13 +1,11 @@
-// ElevenLabs helpers for avatar voice design (design/AVATAR-VOICES.md).
+// ElevenLabs helpers (sound effects; voice design needs a paid plan). The teacher chose plain avatar voices
+// on 8 Oct, so the creature-voice experiment is dropped; `sfx` stays for one-off sound effects.
 //
 // Key: .secrets/elevenlabs_api_key at the repo root (gitignored). It is only read here and never
 // printed, copied or shipped. The free plan has about 10,000 credits a month: spend them on the
 // avatars only, and check `status` before a run.
 //
 //   node tools/eleven.mjs status                       credits used / limit (needs User → Read)
-//   node tools/eleven.mjs design <id> [--seed n]        PAID PLAN ONLY (free plan gets 403): 3 previews for
-//                                                       tools/eleven-designs.json → tools/voice-auditions/eleven/
-//   node tools/eleven.mjs save <id> <preview 1-3>      keep a preview as a voice (needs Voices → Write)
 //   node tools/eleven.mjs sfx <name> "<prompt>" [--secs n]   a sound effect → tools/voice-auditions/eleven/
 import fs from 'node:fs';
 import path from 'node:path';

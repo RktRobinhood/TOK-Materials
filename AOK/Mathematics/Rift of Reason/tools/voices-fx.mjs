@@ -16,8 +16,11 @@ export const FX = {
         reverb: { size: 0.25, decay: 0.45, damp: 0.6, mix: 0.07 },
         level: 0.56, // peak about 4 dB below spoken lines (0.89)
     },
+    // A character possessed by the Algorithm (any "<id>-possessed" speaker): their own voice, a little
+    // lower and slower (stretched, tape-style), doubled into the Algorithm's synthetic chorus.
+    possessed: { pitch: 0.92, chorus: true, eq: [['highshelf', 4000, 0.7, -3]], reverb: { size: 0.7, decay: 0.75, damp: 0.35, mix: 0.18 } },
 };
-export const fxFor = who => FX[who] || (/-inner$/.test(who) ? FX.inner : null);
+export const fxFor = who => FX[who] || (/-inner$/.test(who) ? FX.inner : /-possessed$/.test(who) ? FX.possessed : null);
 
 const toF = pcm => Float32Array.from(pcm, v => v / 32768);
 function toI(x, level = 0.89) {

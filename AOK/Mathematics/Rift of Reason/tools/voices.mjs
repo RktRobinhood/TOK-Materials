@@ -35,8 +35,12 @@ const KEY_FILE = path.resolve(GAME_DIR, '..', '..', '..', '.secrets', 'gemini_ap
 const CAST = JSON.parse(fs.readFileSync(path.join(HERE, 'voices-cast.json'), 'utf8'));
 // An avatar entry with an `inner` direction also defines <id>-inner: the same voice and model,
 // acted close and quiet, then the inner effect in voices-fx.mjs (design/AVATAR-VOICES.md).
+// Any character can also speak as <id>-possessed (taken over by the Algorithm, STORY.md): the same
+// voice and model, acted slow and flat, then the possessed effect in voices-fx.mjs. No new voices.
 for (const [id, c] of Object.entries(CAST)) {
-    if (c && c.inner) CAST[id + '-inner'] = { voice: c.voice, model: c.model, style: c.inner + ' Character: ' + c.style };
+    if (!c || typeof c !== 'object' || id.startsWith('_') || id === 'algorithm') continue;
+    if (c.inner) CAST[id + '-inner'] = { voice: c.voice, model: c.model, style: c.inner + ' Character: ' + c.style };
+    CAST[id + '-possessed'] = { voice: c.voice, model: c.model, style: 'Possessed by a cold feed-machine: slow, flat and evenly weighted, as if someone else is moving their mouth, with brief flickers of the real character underneath. Character: ' + c.style };
 }
 const USAGE = path.join(HERE, 'voice-usage.json');
 

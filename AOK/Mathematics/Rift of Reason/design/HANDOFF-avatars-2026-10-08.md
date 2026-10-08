@@ -25,9 +25,8 @@ The teacher shut the laptop; all agents were stopped mid-task and their partial 
 3. Run both critics on all three outlines; loop to 8/10 each (max five rounds, then the teacher).
 4. Power button on the battle screen (#52).
 5. Next Gemini quota day: `node tools/voices.mjs --audition --avatars avatar-owlet-girl,avatar-mothkin-boy,avatar-fox-girl,avatar-frogling-boy,avatar-raven-girl`.
-6. The teacher listens in `dev/voice-lab.html` (preview server `rift`, port 8790) and says which creature settings work.
+6. Done: the teacher chose the plain voices and plain inner voices (8 Oct); creature filter dropped.
 
 ## Open decisions for the teacher
 
-- Which creature filter settings and species sounds work (voice lab).
 - ElevenLabs voice design needs a paid plan; free plan covers sound effects and TTS with premade voices only.
