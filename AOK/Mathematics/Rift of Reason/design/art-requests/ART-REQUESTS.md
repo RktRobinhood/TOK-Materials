@@ -628,6 +628,15 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 
 > A very wide, short painted strip, about 3:1 (for example 1800×600), no text, no characters, no numbers. Match the style board exactly. It sits faintly behind a row of meter notches and a label, so keep it fairly dark and even, with no bright spot in the middle, and the main shapes spread across the full width. Night sky over a rocky mountain gate. A jagged crack of cyan light runs the whole width of the sky like a tear. Below it, at the left, an ornate brass birdcage sits on the ground, its inside in deep shadow. From the cage, a stream of glittering silver sequins lifts into the air and flows up and along into the crack, like glitter going down a drain upside down, thinning out to the right. A few sequins already swallowed glint inside the crack. Eerie and beautiful, not violent.
 
+
+### 13.29 + 13.24a Lucky Sequin and the cage cushion (session of 8 October)
+
+**Attach:** `style-board.png`, `keepsakes.png`
+**Save as:** `5-ui/lucky-sequin.png`
+**Ids:** `item/lucky-sequin` (Bag, the Gate reward), `keepsake/cage-cushion` (Sequins' Quiet Scene)
+
+> Two separate small props side by side on a transparent canvas, well apart, nothing touching, no text. Match the style board exactly and the keepsakes sheet above (same finish and scale). Both must read at 32 px. 1. The Lucky Sequin: one big, round, shiny sequin, silver with a rainbow sheen and a tiny hole near the top, hanging on a short loop of red thread. A small sparkle on its face. 2. The cage cushion: a small, plump, round velvet cushion in deep magenta with gold piping and a gold tassel at each corner, a little worn and flattened in the middle where a bird has sat, one silver sequin caught in the fabric.
+
 ---
 
 ## Outcome log
@@ -765,3 +774,4 @@ Record what was approved and why, as in the Odyssey project.
 | 13.7 Memorial props | First try (2026-10-08) | Round paper lanterns with a gold star, lit gold and unlit grey-blue with a curl of smoke (the smoke stays in the dark lantern's slice), a dripping candle in a brass chamberstick, a leaf-and-white-flower wreath with a black bow, a black bow with a star pin, an empty carved oval frame (centre truly transparent). Solemn, not grim. Sliced into the 6 ui/memorial-* ids; the Pattern Stall's black ribbon now uses the art instead of the CSS ribbon. |
 | 13.28 Granny's open door | First try (2026-10-08) | Mossy round-roofed cottage at dusk, door wide open on a lamplit room, teapot in a cosy and a steaming cup on a side table, knitting basket, a grey feather on the doorstep, and glowing soup pots trailing down the path and floating up into a swirling cyan crack, the fair's lanterns across the water. The shawl peg is hard to see (the script says it); the lower left is busier than asked, the path centre and right stay open. Scene, scene/granny-door (still to be wired into ch1.door). |
 | 13.23a Stakes frame, Ch1 | First try (2026-10-08) | 3:1 night strip: a jagged cyan crack across the whole sky, an ornate brass birdcage at the left spilling a stream of sequins up into the crack, mountains in the middle, the lantern-lit stone gate with banners at the right. Dark and even as asked; the sequins look a little like silver discs, invisible as a problem at 35% opacity. Single panel, ui/stakes-ch1. |
+| 13.29 + 13.24a Lucky Sequin, cage cushion | First try (2026-10-08) | A big holographic rainbow sequin with a sparkle on a knotted red thread loop; a plump crimson velvet cushion (asked magenta; fine) with gold piping and four gold tassels, dented in the middle, one sequin caught on it. Both read at 32 px. Sliced into item/lucky-sequin and keepsake/cage-cushion. |

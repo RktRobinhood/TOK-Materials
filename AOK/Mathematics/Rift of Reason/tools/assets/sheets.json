@@ -92,6 +92,7 @@
         "memorial.png": {"type":"islands","minArea":1500,"class":"prop","ids":["ui/memorial-lantern-lit","ui/memorial-lantern-dark","ui/memorial-candle","ui/memorial-wreath","ui/memorial-ribbon","ui/memorial-frame"]},
         "granny-door.png": {"type":"scene","id":"scene/granny-door"},
         "stakes-ch1.png": {"type":"single","id":"ui/stakes-ch1","class":"panel"},
+        "lucky-sequin.png": {"type":"islands","minArea":600,"class":"item","ids":["item/lucky-sequin","keepsake/cage-cushion"]},
         "board-token.png": {"type":"islands","minArea":1500,"class":"panel","ids":["ui/board-token","ui/board-token-legendary"]},
         "burrow.png": { "type": "scene", "id": "scene/burrow" },
         "rift-pass.png": { "type": "scene", "id": "scene/rift-pass" },
