@@ -145,11 +145,11 @@
                     { s: 'corvina', t: 'Facts. Lovely. That drum can\'t read.' },
                 ] },
                 { t: 'Those corks really sting. Please, stay safe.', appeal: 'safety', say: [
-                    { s: 'corvina', t: '…Corks. Yes. I don\'t love corks. Go on.' },
+                    { s: 'corvina', t: 'I\'ve been hit by Tuesdays. Corks, though… Fine. Go on.' },
                 ] },
             ],
             special: {
-                owlet: { t: 'Black and white is a magpie. You\'re a crow. So it wasn\'t you.', say: [
+                owlet: { t: 'Black and white is a magpie. You\'re a crow. So the wing in the clip isn\'t yours.', say: [
                     { s: 'corvina', t: 'Logic. From an owlet. Fine. I\'ll allow it.' },
                 ] },
                 mothkin: { t: 'Look at the clip with me. Black and white. Look.', say: [
@@ -161,8 +161,8 @@
                 frogling: { t: 'They blamed a crow for my mother\'s pond. It was the wind.', say: [
                     { s: 'corvina', t: 'The wind. Ha. The wind never says sorry either.' },
                 ] },
-                raven: { t: 'They call you "thief". One word. Come out and change the word.', say: [
-                    { s: 'corvina', t: 'Change the word. Ha. I\'ve changed worse things, chick. Cards, mostly.' },
+                raven: { t: 'They call you "thief". Change the word, and the customers come back.', say: [
+                    { s: 'corvina', t: 'Change the word, fill the table. Ha. Clever chick.' },
                 ] },
             },
             ask: {
@@ -181,7 +181,7 @@
             1: [
                 { note: 'The flap opens. Billie, Mr. Beansprout and Speedcheeta walk out. Then the crow.' },
                 { s: 'syllo', t: 'STAND DOWN! Corks away! …Recruit, what was the drum roll for, then?', when: SYLLO },
-                { note: 'Speedcheeta shows the zoomed-out clip. Just the trophy stand. "The rest is… private."' },
+                { note: 'Speedcheeta shows the crowd the zoomed-out clip. Black and white. The crowd goes "Ohhh."' },
                 { note: 'The Thinking Trophy goes back on its stand.' },
                 { s: 'corvina', t: 'Here. A lantern. Don\'t tell anyone a crow gave you a present.' },
                 { give: { lure: 1 } },
@@ -274,7 +274,8 @@
                 { id: 'well', kind: 'object', label: 'Down the well', x: 52, y: 46, art: 'prop/wishing-well',
                   steps: [
                       { note: 'You lower a lantern. At the bottom: Nudge, filling a sack with coins.' },
-                      { s: 'nudge', t: 'Get that light off me! I do the lighting!', when: { not: NUDGE_JOBLESS } },
+                      { s: 'nudge', t: 'Get that light off me! I do the lighting!', when: NUDGE_CH1 },
+                      { s: 'nudge', t: 'Get that light off me! I\'m in disguise!', when: { any: [NUDGE_CH2, NUDGE_CH2_LATE, NUDGE_CH3] } },
                       { s: 'nudge', t: 'Engagement! Every wish is a click! Keep them coming!', when: NUDGE_CH1 },
                       { s: 'nudge', e: 'masked', t: 'Engagement! Every wish is a click! Keep them coming!', when: NUDGE_CH2 },
                       { s: 'nudge', e: 'maskless', t: 'Engagement! Every wish is a click! Keep them coming!', when: NUDGE_CH2_LATE },
@@ -394,7 +395,7 @@
                 { inner: {
                     owlet: '"Every time" is a pattern. A pattern isn\'t a proof. Classic me.',
                     mothkin: 'Shh. His apron. Something glints in the pocket. Look.',
-                    fox: 'Picture it: a cat burglar. Tiny mask. Tiny rope. …Too good to be false?',
+                    fox: 'Picture it: a cat burglar. Tiny mask. Tiny rope. I love it. I want it true.',
                     frogling: 'Every noon, the cat. Every noon, the pie. Every noon, the timer.',
                     raven: '"Walks by." Not "takes". Different verbs.',
                 } },
@@ -404,7 +405,7 @@
                     ] },
                     { t: 'Chef. What\'s that on your apron?', only: 'mothkin', voice: true, then: [
                         { clock: 'side', progress: 1 },
-                        { s: 'rawmsay', t: 'Flour. Chefs wear flour. …And a little pastry. Stop looking.' },
+                        { s: 'rawmsay', t: 'Flour. Chefs wear flour. …And pastry. And a fork. Stop looking.' },
                     ] },
                 ] },
             ],
@@ -426,7 +427,7 @@
                       { note: 'The timer rings at noon, every day. At noon it also opens the warm-air vent.' },
                       { s: 'keanu', t: 'The vent is lovely. Warm air. I go and say hello to it.' },
                   ],
-                  card: 'The timer rings at noon. It also opens the warm vent, where Keanu naps.' },
+                  card: 'The timer rings at noon. It also opens the warm vent. Keanu goes to warm his paws.' },
             ],
         },
         twist: {
@@ -463,7 +464,7 @@
                     why: {
                         q: 'Why?',
                         options: [
-                            { t: 'He was at the sill, half asleep, and woke up full. Crumbs and fork too.', ok: true },
+                            { t: 'Only he woke up full, with crumbs and a fork.', ok: true },
                             { t: 'Chefs always have crumbs.', say: [
                                 { s: 'rawmsay', t: 'Exactly! Crumbs prove NOTHING. …Hm.' },
                             ] },
