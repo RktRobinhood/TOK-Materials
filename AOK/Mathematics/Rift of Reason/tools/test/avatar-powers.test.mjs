@@ -106,32 +106,46 @@ test('the power is ready on turn 1 and only in the main phase of its owner', () 
     same(powerActs(m).map(a => a.type), ['power']);
 });
 
-test('Foresee reorders the top 2 rule cards (Deeper 3, Broader takes one)', () => {
-    let s = powered('foresee', [], { axioms: ['underdog', 'thrift', 'haste', 'mercy'] });
+test('Foresee: look at the top 3 rule cards, take one, order the rest (Deeper 4, Broader puts one at the bottom)', () => {
+    const AX = ['underdog', 'thrift', 'haste', 'mercy', 'arrival'];
+    let s = powered('foresee', [], { axioms: AX });
     s = act(s, { type: 'power' });
     assert.equal(s.phase, 'choose');
-    same(s.pending.options, ['underdog', 'thrift']);
-    assert.equal(s.pending.kind, 'axiom');
+    same(s.pending.options, ['underdog', 'thrift', 'haste']);
+    assert.equal(s.pending.step, 'take');
     const look = s.lastEvents.find(e => e.t === 'power' && e.privateTo === 0);
     assert.ok(look && /Underdog/.test(look.text) && !/Underdog/.test(look.publicText), 'only the user sees the cards');
     s = act(s, { type: 'choose', choice: 'thrift' });
-    same(s.axioms.deck, ['thrift', 'underdog', 'haste', 'mercy']);
+    same(s.players[0].axHand, ['thrift']);
+    same(s.pending.options, ['underdog', 'haste'], 'then order the other two');
+    s = act(s, { type: 'choose', choice: 'haste' });
+    same(s.axioms.deck, ['haste', 'underdog', 'mercy', 'arrival']);
     assert.equal(s.phase, 'main');
 
-    let d = powered('foresee', ['deeper'], { axioms: ['underdog', 'thrift', 'haste', 'mercy'] });
+    let d = powered('foresee', ['deeper'], { axioms: AX });
     d = act(d, { type: 'power' });
-    same(d.pending.options, ['underdog', 'thrift', 'haste']);
+    same(d.pending.options, ['underdog', 'thrift', 'haste', 'mercy']);
+    d = act(d, { type: 'choose', choice: 'mercy' });
+    same(d.players[0].axHand, ['mercy']);
     d = act(d, { type: 'choose', choice: 'haste' });
-    same(d.pending.options, ['underdog', 'thrift']);
     d = act(d, { type: 'choose', choice: 'thrift' });
-    same(d.axioms.deck, ['haste', 'thrift', 'underdog', 'mercy']);
+    same(d.axioms.deck, ['haste', 'thrift', 'underdog', 'arrival']);
 
-    let b = powered('foresee', ['broader'], { axioms: ['underdog', 'thrift', 'haste'] });
+    let b = powered('foresee', ['broader'], { axioms: AX });
     b = act(b, { type: 'power' });
     b = act(b, { type: 'choose', choice: 'underdog' });
-    same(b.players[0].axHand, ['underdog']);
-    same(b.axioms.deck, ['thrift', 'haste']);
-    assert.equal(b.phase, 'main', 'one card left: nothing to order');
+    assert.equal(b.pending.step, 'bottom');
+    same(b.pending.options, ['thrift', 'haste']);
+    b = act(b, { type: 'choose', choice: 'thrift' });
+    same(b.axioms.deck, ['haste', 'mercy', 'arrival', 'thrift'], 'one goes to the bottom; one left: nothing to order');
+    assert.equal(b.phase, 'main');
+
+    // A full hand: nothing to take, so Foresee only orders the cards.
+    let full = powered('foresee', [], { axioms: AX });
+    while (E.handRoom(full, 0, 1)) full.players[0].axHand.push('mercy');
+    full = act(full, { type: 'power' });
+    assert.notEqual(full.pending.step, 'take');
+    same(full.pending.options, ['underdog', 'thrift', 'haste']);
 });
 
 test('Lantern: 1 damage (Deeper 2); Broader sees one enemy hand card', () => {
@@ -219,18 +233,22 @@ test('Recall: the most recently defeated creature returns (Deeper +1/+1, Broader
     assert.equal(E.powerStatus(none, 0).why, 'useless');
 });
 
-test('Hold That Thought moves Fate 1 space (Deeper up to 2, Broader draws)', () => {
+test('Hold That Thought: move Fate 1 space and draw a card (Deeper up to 2, Broader restores 1 heart)', () => {
     let s = powered('hold-that-thought', [], { options: { timeline: true, fateStart: 6 } });
     s = act(s, { type: 'power' });
     same(s.pending.options, ['forward', 'rewind']);
     s = act(s, { type: 'choose', choice: 'forward' });
     assert.equal(s.fate.until, 5);
+    assert.equal(s.players[0].hand.length, 1, 'draws a card');
+    assert.equal(s.players[0].energy, 10 - P('hold-that-thought').cost);
     let d = powered('hold-that-thought', ['deeper', 'broader'], { options: { timeline: true, fateStart: 6 } });
+    d.players[0].hearts = 5;
     d = act(d, { type: 'power' });
     same(d.pending.options, ['forward-2', 'forward', 'rewind', 'rewind-2']);
     d = act(d, { type: 'choose', choice: 'rewind-2' });
     assert.equal(d.fate.until, 8);
-    assert.equal(d.players[0].hand.length, 1);
+    assert.equal(d.players[0].hand.length, 1, 'still one card');
+    assert.equal(d.players[0].hearts, 6, 'Broader: 1 heart');
     assert.equal(E.powerStatus(powered('hold-that-thought'), 0).why, 'useless', 'no Fate track');
 });
 

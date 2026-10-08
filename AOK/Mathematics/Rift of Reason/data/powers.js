@@ -45,6 +45,15 @@
         return null;
     }
 
+    // Foresee after the take: with Broader, one of the n cards left on top goes to the bottom; then order the rest.
+    function foreseeBottom(api, p, n, m) {
+        const rest = Array.from(new Set(api.s.axioms.deck.slice(0, n)));
+        if (m.broader && rest.length >= 1 && api.s.axioms.deck.length > n) {
+            api.ask({ player: p, kind: 'axiom', options: rest, step: 'bottom', n, prompt: 'Foresee: which rule goes to the bottom of the rule deck?',
+                source: { type: 'power', id: 'foresee' } });
+        } else foreseeOrder(api, p, 0, n, m);
+    }
+
     // Foresee: put the chosen rule card at place k of the top `n` cards of the shared deck.
     function foreseeOrder(api, p, k, n, m) {
         const deck = api.s.axioms.deck;
@@ -73,23 +82,23 @@
         },
         foresee: {
             name: 'Foresee', colour: 'reason', kind: 'other', cost: 0, recharge: 1,
-            text: 'Look at the top 2 cards of the shared rule deck and put them back in any order.',
-            deeper: 'Look at the top 3 cards of the shared rule deck and put them back in any order.',
-            broader: 'Also take one of them into your hand.',
-            usable(s, p, H, m) {
+            text: 'Look at the top 3 rule cards. Take one into your hand and put the others back in any order.',
+            deeper: 'Look at the top 4 rule cards. Take one into your hand and put the others back in any order.',
+            broader: 'Also put one of the others at the bottom of the rule deck.',
+            usable(s, p, H) {
                 const A = s.axioms, have = A.deck.length || A.discard.length;
-                return have >= 2 || (m.broader && have >= 1 && H.handRoom(s, p, 1));
+                return have >= 2 || (have >= 1 && H.handRoom(s, p, 1));
             },
             run(api, p, target, m) {
                 api.refillAxioms();
-                const n = Math.min(m.deeper ? 3 : 2, api.s.axioms.deck.length);
+                const n = Math.min(m.deeper ? 4 : 3, api.s.axioms.deck.length);
                 const top = api.s.axioms.deck.slice(0, n);
                 api.emit({ t: 'power', player: p, privateTo: p, text: 'Foresee: you look at the top ' + n + ' rule cards: ' + list(top.map(axName)) + '.',
                     publicText: 'Foresee: ' + api.H.playerName(api.s, p) + ' looks at the top ' + n + ' rule cards.' });
-                if (m.broader && api.handRoom(p)) {
+                if (api.handRoom(p)) {
                     api.ask({ player: p, kind: 'axiom', options: Array.from(new Set(top)), step: 'take', n, prompt: 'Foresee: which rule card do you take into your hand?',
                         source: { type: 'power', id: 'foresee' } });
-                } else foreseeOrder(api, p, 0, n, m);
+                } else foreseeBottom(api, p, n, m);
             },
             choose(api, p, choice, req, m) {
                 const deck = api.s.axioms.deck;
@@ -97,6 +106,14 @@
                     deck.splice(deck.indexOf(choice), 1);
                     api.s.players[p].axHand.push(choice);
                     api.emit({ t: 'power', player: p, privateTo: p, text: 'Foresee: you take ' + axName(choice) + '.', publicText: 'Foresee: ' + api.H.playerName(api.s, p) + ' takes one of them.' });
+                    foreseeBottom(api, p, req.n - 1, m);
+                    return;
+                }
+                if (req.step === 'bottom') {
+                    deck.splice(deck.indexOf(choice), 1);
+                    deck.push(choice);
+                    api.emit({ t: 'power', player: p, privateTo: p, text: 'Foresee: ' + axName(choice) + ' goes to the bottom of the rule deck.',
+                        publicText: 'Foresee: ' + api.H.playerName(api.s, p) + ' puts one rule card at the bottom.' });
                     foreseeOrder(api, p, 0, req.n - 1, m);
                     return;
                 }
@@ -209,10 +226,10 @@
             },
         },
         'hold-that-thought': {
-            name: 'Hold That Thought', colour: 'memory', kind: 'other', cost: 0, recharge: 1,
-            text: 'Move the Fate track 1 space closer or further away.',
-            deeper: 'Move the Fate track up to 2 spaces closer or further away.',
-            broader: 'Also draw a card.',
+            name: 'Hold That Thought', colour: 'memory', kind: 'other', cost: 3, recharge: 2,
+            text: 'Move the Fate track 1 space closer or further away. Draw a card.',
+            deeper: 'Move the Fate track up to 2 spaces closer or further away. Draw a card.',
+            broader: 'Also restore 1 heart.',
             usable: s => !!s.options.timeline,
             run(api, p, target, m) {
                 const options = m.deeper ? ['forward-2', 'forward', 'rewind', 'rewind-2'] : ['forward', 'rewind'];
@@ -223,7 +240,11 @@
                 const n = /-2$/.test(choice) ? 2 : 1, closer = /^forward/.test(choice);
                 api.emit({ t: 'power', player: p, text: 'Hold That Thought: Fate moves ' + n + ' space' + (n === 1 ? '' : 's') + ' ' + (closer ? 'closer.' : 'further away.') });
                 api.shiftFate(closer ? n : -n);
-                if (m.broader) api.draw(p);
+                api.draw(p);
+                if (m.broader) {
+                    api.healHero(p, 1);
+                    api.emit({ t: 'power', player: p, text: 'Hold That Thought: ' + api.H.playerName(api.s, p) + ' restores 1 heart.' });
+                }
             },
         },
 

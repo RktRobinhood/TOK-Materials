@@ -38,7 +38,8 @@
 //
 //   none    each power (the 10 avatar powers and the 2 Emotion powers) vs no power, then a
 //           no-power baseline row (target: the power's side wins 53–58%);
-//   pairs   every pair of the 10 avatar powers (target: 45–55%), as a matrix of the row's win rate;
+//   pairs   every pair of the 10 avatar powers (target: 45–55%), as a matrix of the row's win rate
+//           (with --pw: only the pairings that involve those powers);
 //   tweaks  each tweak (Quick, Cheap, Blood price, Deeper, Broader) vs the same power untweaked
 //           (target: 46–54%).
 // Every row is --games games (default 1,100: ±3 points at 95%): random teams as above, each
@@ -424,12 +425,15 @@ async function powersMode() {
     }
 
     if (mode === 'pairs' || all) {
-        const ids = pick(AVATAR_POWERS);
+        // With --pw: every pairing that involves one of those powers (rows: just those powers).
+        const ids = AVATAR_POWERS;
+        const rowIds = pick(AVATAR_POWERS);
         console.log('\n-- avatar power pairs (row power\'s win rate vs column; target 45–55%) --');
         const M = {};
         const off = [];
         for (let i = 0; i < ids.length; i++) {
             for (let j = i + 1; j < ids.length; j++) {
+                if (!rowIds.includes(ids[i]) && !rowIds.includes(ids[j])) continue;
                 const r = await powerRow({ id: ids[i], tweaks: [] }, { id: ids[j], tweaks: [] }, GAMES, level);
                 add(r);
                 M[ids[i] + '|' + ids[j]] = r.rate;
@@ -441,7 +445,7 @@ async function powersMode() {
         }
         const short = id => id.slice(0, 6);
         console.log('\n' + ''.padEnd(19) + ids.map(id => short(id).padStart(7)).join('') + '   mean');
-        ids.forEach(a => {
+        rowIds.forEach(a => {
             const vals = ids.filter(b => b !== a).map(b => M[a + '|' + b]);
             console.log(a.padEnd(19) + ids.map(b => (a === b ? '—' : f1(M[a + '|' + b])).padStart(7)).join('') + f1(vals.reduce((t, v) => t + v, 0) / vals.length).padStart(7));
         });

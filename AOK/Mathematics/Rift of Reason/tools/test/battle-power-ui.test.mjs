@@ -152,10 +152,15 @@ test('Foresee asks with the rule cards in the choice panel', () => {
     t.$('.b-power.mine').click();
     assert.equal(t.handle.state.phase, 'choose');
     assert.ok(t.$('.b-choice').classList.contains('show'));
+    // Take one of the top 3 into the hand, then order the other two.
+    assert.equal(t.$$('.b-choice .bc.axiom').length, 3);
+    t.$$('.b-choice .bc.axiom')[1].click();
+    assert.equal(t.handle.state.phase, 'choose');
+    assert.equal(t.handle.state.players[0].axHand.length, 1);
     assert.equal(t.$$('.b-choice .bc.axiom').length, 2);
     t.$$('.b-choice .bc.axiom')[1].click();
     assert.equal(t.handle.state.phase, 'main');
-    assert.match(t.$('.b-recent-tile').getAttribute('aria-label'), /Foresee: you look at the top 2 rule cards/);
+    assert.match(t.$('.b-recent-tile').getAttribute('aria-label'), /Foresee: you look at the top 3 rule cards/);
     t.handle.destroy();
 });
 

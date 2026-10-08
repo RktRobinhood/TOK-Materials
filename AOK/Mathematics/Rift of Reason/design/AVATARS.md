@@ -31,13 +31,13 @@ Games last about 7–8 turns per player, so a recharge caps how often a power fi
 | Avatar | Power | Effect | Cost | Recharge | Uses/game | Compare (cards) |
 |---|---|---|---|---|---|---|
 | Owlet girl (Reason, board) | **Close the Proof** | Defeat an enemy creature that has 1 health left. | 3 | 2 | 0.6 | Finishes what a fight started: rewards planning trades. |
-| Owlet boy (Reason, rules) | **Foresee** | Look at the top 2 cards of the shared rule deck and put them back in any order. | 0 | 1 | 3.6 | You choose the next Fate free flip and the next rule anyone draws. |
+| Owlet boy (Reason, rules) | **Foresee** | Look at the top 3 rule cards. Take one into your hand and put the others back in any order. | 0 | 1 | 3.6 | You choose the next Fate free flip and the next rule anyone draws, and keep the rule you want. (8 Oct: was "top 2, put back"; worth +0.7 even when free.) |
 | Moth-kin boy (Perception, board) | **Lantern** | Deal 1 damage to an enemy creature. | 2 | 4 | 1.0 | Counterexample is 3 damage for 2 as a one-off card. |
 | Moth-kin girl (Perception, hand) | **Night Sight** | See the opponent's hand until your next turn. Their next card costs 1 more. | 2 | 2 | 1.1 | Seeing what is hidden; the tax gives it value when the AI uses it. |
 | Fox girl (Imagination, board) | **What If?** | Swap a creature's attack and health. | 0 | 2 | 1.9 | Imagine Otherwise (card) does this and draws, for 2. |
 | Fox boy (Imagination, plays) | **Brainstorm** | +1 card play this turn. | 0 | 0 | 2.0 | More options, if you have the energy to use them. |
 | Frogling boy (Memory, board) | **Recall** | Return your most recently defeated creature to your hand. | 2 | 3 | 0.6 | Recall (card) does the same with a choice, for 2. |
-| Frogling girl (Memory, Fate) | **Hold That Thought** | Move the Fate track 1 space closer or further away. | 0 | 1 | 3.5 | Clockwork (card) does this for 1. The teacher wants only small Fate moves. |
+| Frogling girl (Memory, Fate) | **Hold That Thought** | Move the Fate track 1 space closer or further away. Draw a card. | 3 | 2 | 0.7 | Clockwork (card) moves Fate for 1. The teacher wants only small Fate moves, so the card is what makes it worth a turn. (8 Oct: was the move alone; worth +1.8 even when free.) |
 | Raven girl (Language, board) | **Call It Out** | An enemy creature loses Guard, Shield and Elusive. | 2 | 2 | 0.6 | Look Closer (card) does this and draws, for 1. |
 | Raven boy (Language, hearts) | **Fine Print** | Lose 1 heart and draw a card. | 2 | 2 | 0.8 | Pays hearts for cards. Pairs with the reversed victory rule (zero hearts wins). |
 
@@ -60,13 +60,13 @@ Each tweak can be taken once. Cost never goes below 0, recharge never below 0.
 | Power | Deeper | Broader |
 |---|---|---|
 | Close the Proof | Defeat a creature with 2 or less health | Also deal 1 damage to the enemy hero |
-| Foresee | Look at the top 3 | Also take one of them into your hand |
+| Foresee | Look at the top 4 | Also put one of the others at the bottom of the rule deck |
 | Lantern | 2 damage | Also see one random card in the enemy hand |
 | Night Sight | Their next 2 cards cost 1 more | Also see the top card of their deck |
 | What If? | Also +1 attack after the swap | Also draw a card |
 | Brainstorm | +2 card plays | Also +1 energy |
 | Recall | It comes back with +1/+1 | Also restore 2 hearts |
-| Hold That Thought | Move Fate up to 2 spaces | Also draw a card |
+| Hold That Thought | Move Fate up to 2 spaces | Also restore 1 heart |
 | Call It Out | Also: it can't attack next turn | Also draw a card |
 | Fine Print | Draw 2 cards | Also +1 energy this turn |
 
