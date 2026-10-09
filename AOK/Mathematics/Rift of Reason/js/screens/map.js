@@ -346,8 +346,9 @@
                         Rift.State.update(s => { s.health = Rift.UI.maxHealth(s); });
                         Rift.Audio.sfx('heal');
                         Rift.UI.toast('Rested: health restored.');
-                        // Once per lesson the narrator mentions a waiting side story.
-                        { const aside = Rift.SideStories && Rift.SideStories.aside(); if (aside) await Rift.Dialogue.play(aside); }
+                        // Once per lesson the narrator mentions a waiting side story. Never on the first visit:
+                        // that one has its own scene (the first night, the Café), one thread per station.
+                        { const aside = done && Rift.SideStories && Rift.SideStories.aside(); if (aside) await Rift.Dialogue.play(aside); }
                         finish();
                         // Campfires are where power tweaks are changed (design/AVATARS.md 1.3); the shrine comes after.
                         if (!(Rift.PowerView && Rift.PowerView.editTweaks && Rift.PowerView.editTweaks({ onClose: shrineOffer }))) shrineOffer();

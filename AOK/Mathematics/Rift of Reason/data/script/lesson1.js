@@ -105,10 +105,10 @@
         { s: 'narrator', t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.' },
         { s: 'narrator', t: 'My shadow points at now. That\'s my whole job.' },
         { s: 'avatar', e: 'surprised', t: 'A talking sundial. Outside my door. Normal.' },
-        { s: 'granny', e: 'happy', t: '{name}! It\'s Fair day! Wear something with pockets. Pockets win prizes.' },
-        { s: 'granny', t: 'Look up, dear. A thin black line on the sky. Like a hair. I will dust it later.' },
+        { s: 'granny', e: 'happy', t: '{name}! Stop chatting to the Sundial. It\'s Fair day! Wear pockets. Pockets win prizes.' },
         { s: 'granny', t: 'Off you go. They\'ve lit the lanterns. One for each of us.' },
         { s: 'granny', e: 'happy', t: 'Yours is the wonky one.' },
+        { s: 'granny', t: 'Look up, dear. A thin black line on the sky. Like a hair. I will dust it later.' },
     ];
 
     // The Fair Gate (node script; it plays on every visit). Granny alone on the first visit: the plan
@@ -281,7 +281,7 @@
     S['ch1.signpost'] = [
         { play: 'ch1.arrival', once: true },
         { play: 'ch1.gossip', once: true },
-        { s: 'signpost', t: 'Psst. An owl folded in paper haunts the Standing Stone. Shy. Wins bring it out.' },
+        { s: 'signpost', t: 'Odd day all round. An owl folded in paper haunts the Standing Stone. Shy. Wins bring it out.' },
         { s: 'signpost', t: 'And something old with a ruler visits the Gate after a win. Very straight lines.' },
         { flag: 'rumour:godelix', value: true },
         { flag: 'rumour:euclidon', value: true },
@@ -300,8 +300,8 @@
         { s: 'nudge', t: 'Boo! You made them calm! Calm gets zero views!' },
         { play: 'ch1.gossip', once: true },   // a jump-in hears clue 2 here (a walker had it at the Signpost)
         // After her death (a walk back from Ch2), her hums play as a memory in her own voice.
-        { s: 'granny', hum: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.', when: '!dead:granny' },
-        { s: 'granny', hum: true, replay: true, t: '{name}? It\'s Granny. Are you eating? Eat a nut. Hum you later.', when: 'dead:granny' },
+        { s: 'granny', hum: true, t: '{name}? It\'s Granny. I heard shouting. Are you eating? Eat a nut. Hum you later.', when: '!dead:granny' },
+        { s: 'granny', hum: true, replay: true, t: '{name}? It\'s Granny. I heard shouting. Are you eating? Eat a nut. Hum you later.', when: 'dead:granny' },
     ];
 
     // The Troll Bridge (host: Muskrat). The best comic scene in Ch1: keep it.
@@ -399,7 +399,7 @@
         { when: { seen: 'ch1.cardsharp' }, then: [
             { s: 'corvina', t: 'Back again? The axioms missed you. I didn\'t.' },
         ], else: [
-            { s: 'corvina', t: 'Fancy a game, little traveller? Cards are good for worrying.' },
+            { s: 'corvina', t: 'Leaving so soon, little traveller? One hand first. Cards are good for worrying.' },
             { s: 'corvina', t: 'My table, my axioms. Change one, and your cards forget how to win.' },
         ] },
     ];
@@ -459,8 +459,6 @@
         { s: 'narrator', t: 'The crack ends here. It\'s drinking his sparkle.' },
         { s: 'sequins', t: 'You took your time! I waited. I lost a few sequins.', when: 'turnedBack' },
         { s: 'nudge', t: 'Engagement! Wave for the people, bird! I\'ve got the rock\'s shadow, too!' },
-        { s: 'algorithm', t: 'PROFESSOR. YOU TAUGHT ME MY FIRST NUMBER.' },
-        { s: 'sequins', e: 'angry', t: 'I\'ve never met you. I\'d remember. I remember every number.' },
     ];
     S['ch1.gate.stage2'] = [{ play: 'ch1.gate.comfort', once: true }];
     S['ch1.gate.comfort'] = [
@@ -507,6 +505,11 @@
     // The push (STORY.md App. C): before stage 3; the warning that follows is the tick's.
     S['ch1.gate.stage3'] = [{ play: 'ch1.gate.push', once: true }];
     S['ch1.gate.push'] = [
+        // Moved here from the Gate's opening (one thread per station): the Algorithm is already talking.
+        { when: '!dead:sequins', then: [
+            { s: 'algorithm', t: 'PROFESSOR. YOU TAUGHT ME MY FIRST NUMBER.' },
+            { s: 'sequins', e: 'angry', t: 'I\'ve never met you. I\'d remember. I remember every number.' },
+        ] },
         { when: CAGE_OPEN, then: [
             { s: 'algorithm', t: 'FASTER. THE MAGPIE IS TRENDING.' },
             { s: 'nudge', t: 'Hi, {name}! Say "always" for the camera! It got great numbers!', when: HEARD_BOAST },
@@ -583,8 +586,8 @@
     // The Rift Pass: Ch1's last stop, and its hook into Boolesbury.
     S['ch1.pass'] = [
         { when: { all: [{ seen: 'ch1.gate.win' }, { not: LATER }] }, then: [
-            { play: 'ch1.crackle', once: true },
             { s: 'narrator', t: 'Nudge ran through here with my piece. I feel… cloudier.', when: 'nudgeFled' },
+            { play: 'ch1.crackle', once: true },
             { s: 'narrator', t: 'Eighteen fifty. That\'s through there. So is Granny.' },
         ], else: [
             // Coming back from a later chapter: no arrival lines again.
@@ -597,7 +600,7 @@
     ];
     S['ch1.pass.keanu'] = [
         { note: 'Keanu Meows is sitting on a warm rock by the rift.' },
-        { s: 'keanu', t: 'Oh, hi. About the pie. I forgive you. I forgive the chef. I forgive the vent.' },
+        { s: 'keanu', t: 'Oh, hi. Going through? About the pie. I forgive you. I forgive the chef. I forgive the vent.' },
     ];
     // For a class that jumps straight into Ch2 (played by ch2.arrive): one line of context, then the crackle.
     S['ch1.crackle.fallback'] = [

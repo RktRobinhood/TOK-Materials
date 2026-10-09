@@ -176,10 +176,10 @@
         { s: 'pip', e: 'happy', t: 'Wait for me! Clerks go where the record goes.', when: { all: [{ seen: 'ch3.arrive' }, '!dead:sundial'] } },
         { s: 'pip', t: 'Clerks go where the record goes. Up.', when: { all: ['dead:sundial', { seen: 'ch3.arrive' }] } },
         { s: 'pip', t: 'I\'ve recorded a million claims. I\'ve never checked one.' },
-        { s: 'colossus', t: 'WELCOME, {name}. YOU ARE 81% PREDICTABLE.' },
+        { s: 'colossus', t: 'GOOD, CLERK. CHECKING IS SLOW. WELCOME, {name}. YOU ARE 81% PREDICTABLE.' },
         { note: 'A bar appears on every screen: {name} 2.0 · UPLOADING.' },
         { s: 'colossus', t: 'IT IS YOU. BUT ALWAYS RIGHT. IT WILL GO HOME FOR YOU. THEY WILL NOT NOTICE.' },
-        { s: 'nudge', t: 'Hold still! I\'m cutting out your voice. Every word you said near a screen.', when: NO_BARGAIN },
+        { s: 'nudge', t: 'Hold still! I\'m cutting out your voice. For the new you.', when: NO_BARGAIN },
         { s: 'nudge', t: 'Your voice was too noisy. I\'m using the rock\'s. Two pieces of it.', when: BARGAIN },
         { inner: {
             mothkin: 'Look. The bar says "{name} 2.0". Two point oh. Of me.',
@@ -452,8 +452,8 @@
         { s: 'colossus', t: 'NO MORE MASKS. NO MORE HIDING. JUST ME. EVERYTHING.' },
         { note: 'A shape waits in the screens. Your shape. UPLOAD COMPLETE.', when: { clock: 'copy', gte: 8 } },
         { note: 'For the first time, your head is quiet.' },
-        FEED_GIVE_UP,
         // Trial 1: Quill's trick, the hidden row. She is the Algorithm's last believer.
+        { note: 'Miss Quill steps out from behind the colossus. Her red pen is ready.' },
         { s: 'schoolteacher', e: 'unmasked', t: 'It promised me no more maybes. I still believe it. Someone has to.' },
         { s: 'schoolteacher', e: 'unmasked', t: 'Every row checked, child. By me.' },
     ];
@@ -478,6 +478,8 @@
         { s: 'schoolteacher', e: 'unmasked', t: 'One last question, child. Will you win? Yes or no.' },
         quillAsks(['Yes.', 'No.']),
         // Trial 2: the mob's argument, aimed at you (tribunal case core-mine in data/cases.js).
+        // The Feed's "give up" sits here, where the vote turns against you (one thread per station).
+        FEED_GIVE_UP,
         { s: 'colossus', t: 'NEXT CASE. THE DEFENDANT: {name}.' },
         { s: 'nudge', t: 'Votes! Lovely votes! Against you, this time!', when: '!dead:pip' },
         { s: 'nudge', t: 'Votes. Against you. …I\'m counting. I\'m not enjoying it.', when: 'dead:pip' },
@@ -627,7 +629,7 @@
     S['ch4.walkhome'] = [
         say('It said "probably" once. Nobody clapped, so it stopped. Would you clap?'),
         { when: '!dead:pip', then: [
-            { s: 'pip', e: 'happy', t: 'That\'s your rift. Not mine. I\'ll stay. Someone should check things here.' },
+            { s: 'pip', e: 'happy', t: 'I\'d clap. Quietly. That\'s your rift, not mine. I\'ll stay and check things here.' },
             { s: 'pip', t: 'I wrote it all down. Then I checked it. Twice.' },
         ] },
         { note: 'Behind you, at a distance, Nudge follows. No clipboard.' },
@@ -778,7 +780,7 @@
         { s: 'narrator', t: 'His stamp is still on the desk. Check who the machine says no to.', when: 'dead:pip' },
     ];
     S['station.k-oracle.intro'] = [
-        { s: 'oracle', e: 'happy', t: 'Greetings. I am a thinking engine. I print proofs.', when: '!dead:pip' },
+        { s: 'oracle', e: 'happy', t: 'Ignore that screen. It is only you, finishing. I am a thinking engine. I print proofs.', when: '!dead:pip' },
         { note: 'The Oracle prints on. It did not notice anyone was missing.', when: 'dead:pip' },
         { s: 'oracle', t: 'I am a thinking engine. I print proofs.', when: 'dead:pip' },
         { s: 'oracle', t: 'All correct. Probably. Inspect a step if you insist. Nobody insists.', when: '!dead:pip' },
@@ -789,7 +791,7 @@
         { s: 'oracle', t: 'More proofs. Still fast. Still unchecked. Inspect one.' },
     ];
     S['station.k-core.intro'] = [
-        { s: 'colossus', t: 'THREE TRIALS. THREE OLD TRICKS. YOU WILL NOT SPOT THEM.' },
+        { s: 'colossus', t: 'THREE TRIALS. THREE OLD TRICKS. MY TEACHER GOES FIRST.' },
     ];
     S['station.k-core.reminder'] = [
         { s: 'colossus', t: 'BACK. THE SAME THREE TRICKS. STILL UNSPOTTED.', when: '!finale-open' },
