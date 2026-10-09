@@ -112,6 +112,7 @@
         "stakes-ch2.png": {"type":"single","id":"ui/stakes-ch2","class":"panel"},
         "nudge-masks.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/masked","npc/nudge/maskless"]},
         "feast-hall.png": {"type":"scene","id":"scene/feast-hall"},
+        "stall-gallery-drive.png": {"type":"scene","id":"scene/stall-gallery-drive"},
         "stall-witness-siege.png": {"type":"scene","id":"scene/stall-witness-siege"},
         "road-bridge-rocket.png": {"type":"scene","id":"scene/road-bridge-rocket"},
         "campfire-kitchen.png": {"type":"scene","id":"scene/campfire-kitchen"},

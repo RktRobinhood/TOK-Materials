@@ -547,6 +547,7 @@
         'scene/server-hall': { file: 'scenes/server-hall.webp', w: 1600, h: 900, small: 'scenes/server-hall-small.webp' },
         'scene/shop': { file: 'scenes/shop.webp', w: 1600, h: 900, small: 'scenes/shop-small.webp' },
         'scene/stall-gallery': { file: 'scenes/stall-gallery.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-small.webp' },
+        'scene/stall-gallery-drive': { file: 'scenes/stall-gallery-drive.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-drive-small.webp' },
         'scene/stall-pattern': { file: 'scenes/stall-pattern.webp', w: 1600, h: 900, small: 'scenes/stall-pattern-small.webp' },
         'scene/stall-witness': { file: 'scenes/stall-witness.webp', w: 1600, h: 900, small: 'scenes/stall-witness-small.webp' },
         'scene/stall-witness-siege': { file: 'scenes/stall-witness-siege.webp', w: 1600, h: 900, small: 'scenes/stall-witness-siege-small.webp' },
