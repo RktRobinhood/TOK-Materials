@@ -51,4 +51,4 @@ Hearts: a hint costs 1 (2 with the Shaky Hand scar). Every stage has 3 free wron
 
 ## Working with the teacher
 
-The teacher is busy and reads on the go. Ask one question at a time, with a recommendation. Commit to `main` for small changes; use a short branch and PR for big ones. End commit messages with the co-author line the session provides.
+The teacher is busy and reads on the go. Ask one question at a time, with a recommendation. When in doubt, make the reasonable call yourself and say what you chose: the teacher runs sessions in auto mode on trust. Once work is finished and tested, push it to `main`, big features included (the game is unfinished and grows by iteration); no PRs. Use a branch only for something very experimental. Other sessions share the checkout, so stage only your own files. End commit messages with the co-author line the session provides.
