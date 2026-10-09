@@ -97,6 +97,7 @@
         "tweak-icons.png": {"type":"islands","minArea":2000,"class":"icon","ids":["ui/tweak-quick","ui/tweak-cheap","ui/tweak-blood","ui/tweak-deeper","ui/tweak-broader"]},
         "spare-axiom.png": {"type":"single","id":"ui/axiom-spare-axiom","class":"item"},
         "hotspots.png": {"type":"islands","minArea":3000,"class":"icon","ids":["ui/hotspot-person","ui/hotspot-object","ui/hotspot-record"]},
+        "side-props-3.png": {"type":"islands","minArea":3000,"class":"prop","ids":[null,"prop/dented-tin","prop/chimney-grate","prop/seating-chart"]},
         "side-props-2.png": {"type":"islands","minArea":3000,"class":"prop","ids":["prop/rawmsay-apron","prop/oven-timer","keepsake/well-map","keepsake/ladle"]},
         "side-props-1.png": {"type":"islands","minArea":3000,"class":"prop","ids":["prop/witness-clip","prop/polishing-box","prop/wishing-well","prop/referee-log"]},
         "achilles.png": {"type":"islands","minArea":2500,"ids":["npc/achilles/idle",["npc/achilles/neutral","npc/achilles"],"npc/achilles/happy","npc/achilles/surprised","npc/achilles/angry","npc/achilles/worried"]},
