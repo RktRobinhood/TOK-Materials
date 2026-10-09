@@ -49,7 +49,7 @@
                 const save = await R.State.readCode(await R.State.plainCode(whoCode.value));
                 const real = save.avatar && save.avatar.realName;
                 const nick = save.avatar && save.avatar.nickname;
-                whoOut.textContent = (real ? 'Real name: ' + real : 'No real name yet (an older adventure; the game asks on its next load)')
+                whoOut.textContent = (real ? 'Real name: ' + real : 'No real name in this code')
                     + (nick ? ' · Nickname: ' + nick : '') + ' · ' + R.State.summary(save).split(' · ').slice(1).join(' · ');
             } catch (e) { whoOut.textContent = 'Could not read code: ' + e.message; }
             whoCode.value = '';

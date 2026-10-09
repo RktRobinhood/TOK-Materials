@@ -472,17 +472,10 @@
         return checkSave(await decodeAsync('save', code));
     }
 
-    // The student's real name, typed once at the start (or on first load of an older save) and
-    // never changed after: it travels in every backup code so the teacher can see whose code it is.
+    // The student's real name, typed once at the start and never changed after: it travels in
+    // every backup code so the teacher can see whose code it is.
     function cleanName(text) {
         return String(text || '').replace(/\s+/g, ' ').trim().slice(0, 40);
-    }
-    function setRealName(text) {
-        const name = cleanName(text);
-        if (!name || !current || !current.avatar || current.avatar.realName) return false;
-        State.update(s => { s.avatar.realName = name; });
-        saveNow();
-        return true;
     }
 
     // One line about a save for "replace this adventure?" questions:
@@ -643,7 +636,6 @@
         readCode,
         summary,
         cleanName,
-        setRealName,
         backupMilestone,
         load,
         save,
