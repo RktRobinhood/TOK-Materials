@@ -45,6 +45,15 @@
     -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 55%, transparent 75%);
     mask-image: radial-gradient(ellipse at 50% 45%, #000 55%, transparent 75%);
 }
+/* The painted overlay is black outside the feed, so screen blending shows only the glow; its centre is already clear.
+   Three offset soft ellipses fade its square edges into an uneven blob, so it has no hard border. */
+.portrait-wrap .possess-skin.painted {
+    inset: -6%; opacity: 0.65; border-radius: 0; background-size: cover; background-position: center;
+    --blob: radial-gradient(ellipse 66% 60% at 45% 47%, #000 66%, transparent 100%),
+            radial-gradient(ellipse 56% 64% at 58% 55%, #000 62%, transparent 100%),
+            radial-gradient(ellipse 50% 40% at 50% 26%, #000 55%, transparent 100%);
+    -webkit-mask-image: var(--blob); mask-image: var(--blob);
+}
 .dialogue.possessed-line .box { box-shadow: 0 0 0 2px rgba(80, 230, 255, 0.55), var(--shadow); }
 
 /* ---- memories (replays, last words) ---- */

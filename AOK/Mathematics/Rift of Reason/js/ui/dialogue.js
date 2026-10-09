@@ -69,6 +69,14 @@
         };
     }
 
+    // The skin over a possessed portrait: the painted feed overlay (fx/possessed) when it exists,
+    // else the CSS grid.
+    function possessSkin() {
+        const A = Rift.Assets;
+        const pic = A.url && A.has('fx/possessed') ? A.url('fx/possessed') : null;
+        return el('div.possess-skin' + (pic ? '.painted' : ''), { 'aria-hidden': 'true', style: pic ? { backgroundImage: 'url("' + pic + '")' } : null });
+    }
+
     // Shows one box and waits for the player. A Quiet Scene can't be rushed: clicks while the text
     // types are ignored, and each line stays at least a moment.
     function show(layer, ctx, node) {
@@ -141,7 +149,8 @@
         const box = el('div.box.parchment', null, [el('div.name', null, [info.name].concat(tags)), textNode, el('div.more', { text: '▼' })]);
         const portrait = el('div.portrait-wrap' + (possessed ? '.possessed' : '') + (step.replay || ctx.replay ? '.remembered' : ''), null, [
             Rift.Assets.img(info.art, { className: 'portrait', colour: info.colour, label: info.name }),
-            possessed ? el('div.possess-skin', { 'aria-hidden': 'true' }) : null,
+            // The painted feed overlay (fx/possessed) when it exists, else the CSS grid.
+            possessed ? possessSkin() : null,
         ]);
         const node = el('div.dialogue' + (isAvatar ? '.avatar-line' : '') + (possessed ? '.possessed-line' : ''), null, [portrait, box]);
         const shown = present(layer, ctx, node, box, textNode, text);

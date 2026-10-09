@@ -270,6 +270,7 @@
         'fx/guard-frame': { file: 'fx/guard-frame.webp', w: 308, h: 425 },
         'fx/heal': { file: 'fx/heal.webp', w: 304, h: 334 },
         'fx/poof': { file: 'fx/poof.webp', w: 392, h: 406 },
+        'fx/possessed': { file: 'fx/possessed.webp', w: 1000, h: 1000 },
         'fx/rift-1': { file: 'fx/rift-1.webp', w: 119, h: 262 },
         'fx/rift-2': { file: 'fx/rift-2.webp', w: 207, h: 340 },
         'fx/rift-3': { file: 'fx/rift-3.webp', w: 388, h: 394 },
