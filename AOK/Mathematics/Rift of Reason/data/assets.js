@@ -540,6 +540,7 @@
         'scene/oracle-chamber': { file: 'scenes/oracle-chamber.webp', w: 1600, h: 900, small: 'scenes/oracle-chamber-small.webp' },
         'scene/rift-pass': { file: 'scenes/rift-pass.webp', w: 1600, h: 900, small: 'scenes/rift-pass-small.webp' },
         'scene/road-bridge': { file: 'scenes/road-bridge.webp', w: 1600, h: 900, small: 'scenes/road-bridge-small.webp' },
+        'scene/road-bridge-rocket': { file: 'scenes/road-bridge-rocket.webp', w: 1600, h: 900, small: 'scenes/road-bridge-rocket-small.webp' },
         'scene/road-forest': { file: 'scenes/road-forest.webp', w: 1600, h: 900, small: 'scenes/road-forest-small.webp' },
         'scene/road-gate': { file: 'scenes/road-gate.webp', w: 1600, h: 900, small: 'scenes/road-gate-small.webp' },
         'scene/schoolhouse': { file: 'scenes/schoolhouse.webp', w: 1600, h: 900, small: 'scenes/schoolhouse-small.webp' },
