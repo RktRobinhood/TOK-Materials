@@ -83,6 +83,9 @@
         const slots = Rift.World && Rift.World.tweakSlots ? Rift.World.tweakSlots(s) : 0;
         if (!pw || !slots) return false;
         let chosen = pw.tweaks.slice(0, slots);
+        // A power with a cost floor (Night Sight 2) says so on Cheap, so its numbers make sense.
+        const def = Rift.data.powers[pw.id];
+        const floorNote = id => (id === 'cheap' && def.minCost ? ' ' + def.name + ' never costs less than ' + def.minCost + ' energy.' : '');
         const body = el('div.stack.tweak-editor');
         const draw = () => {
             const x = numbers(pw.id, chosen);
@@ -106,7 +109,7 @@
                     return el('button.btn.tweak-option' + (on ? '.on' : ''), {
                         type: 'button', disabled: full, dataset: { tweak: id }, 'aria-pressed': on ? 'true' : 'false',
                         onclick() { chosen = on ? chosen.filter(c => c !== id) : chosen.concat(id); draw(); },
-                    }, [tweakIcon(id), el('strong', { text: t.name }), el('span.small', { text: t.text })]);
+                    }, [tweakIcon(id), el('strong', { text: t.name }), el('span.small', { text: t.text + floorNote(id) })]);
                 })),
             );
         };

@@ -51,11 +51,11 @@ Beating a chapter boss (Gate of Guards, Town Hall, Tribunal) opens one **tweak s
 |---|---|---|
 | **Quick** | Recharge −1 | Cost +1 energy |
 | **Cheap** | Cost −1 energy | Recharge +1 |
-| **Blood price** | Costs no energy | Costs 1 heart instead |
+| **Blood price** | Costs no energy | Costs hearts instead: 1 per 2 energy it would cost (at least 1) |
 | **Deeper** | A stronger version (per power, below) | Recharge +1 |
 | **Broader** | An extra effect (per power, below) | Cost +1 energy |
 
-Each tweak can be taken once. Cost never goes below 0, recharge never below 0.
+Each tweak can be taken once. Cost never goes below 0, recharge never below 0. Night Sight never costs less than 2 energy (so it is never usable on turn 1). Blood price is worked out last: Close the Proof (3) costs 2 hearts.
 
 | Power | Deeper | Broader |
 |---|---|---|
@@ -63,11 +63,11 @@ Each tweak can be taken once. Cost never goes below 0, recharge never below 0.
 | Foresee | Look at the top 4 | Also put one of the others at the bottom of the rule deck |
 | Lantern | 2 damage | Also see one random card in the enemy hand |
 | Night Sight | Their next 2 cards cost 1 more | Also see the top card of their deck |
-| What If? | Also +1 attack after the swap | Also draw a card |
+| What If? | Also +1 attack after the swap | Also +1 health |
 | Brainstorm | +2 card plays | Also +1 energy |
 | Recall | It comes back with +1/+1 | Also restore 2 hearts |
 | Hold That Thought | Move Fate up to 2 spaces | Also restore 1 heart |
-| Call It Out | Also: it can't attack next turn | Also draw a card |
+| Call It Out | Also: it loses Swift | Also draw a card |
 | Fine Print | Draw 2 cards | Also +1 energy this turn |
 
 A student who used the time rift to skip a chapter gets that chapter's slot with the starter kit, so classroom catch-up does not cost power.

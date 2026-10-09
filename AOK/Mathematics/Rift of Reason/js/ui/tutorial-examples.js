@@ -68,6 +68,21 @@
             ['Pick the rate card.',['Rate: 5 litres/minute','Owner’s age: 30'],0,'Capacity 60 L · Rate 5 L/min'],
             ['Use time = capacity ÷ rate.',['60 ÷ 5 = 12 minutes','60 + 5 = 65 minutes'],0,'12 minutes (steady rate, empty start)'],
         ],result:'The model depends on the assumptions. In Act 3, compare its result with the reveal.'},
+        'logic-grid':{kind:'grid',title:'Cross out, then confirm',frames:[
+            ['Two writers, two stories. Clue: “Ada did not write the frog story.” Cross out Ada and frogs.',['✕ Ada · Frogs','✓ Ada · Frogs'],0,'Ada · Frogs ✕'],
+            ['Ada has one story left. Confirm Ada and the moon story.',['✓ Ada · Moon','✕ Ada · Moon'],0,'Ada · Frogs ✕ · Ada · Moon ✓'],
+            ['Each story has one writer. So who wrote the frog story?',['✓ Ben · Frogs','✓ Ada · Frogs'],0,'Ada · Moon ✓ · Ben · Frogs ✓'],
+        ],result:'One clue and the one-each rule settled it. Every other arrangement broke one of them.'},
+        'river-crossing':{kind:'river',title:'Start a safe crossing',frames:[
+            ['A and B are rivals. B and C are rivals. The boat takes you and one more. Take B across.',['Take B','Take A'],0,'Near: A, C · Far: B'],
+            ['Come back alone, then take A. (C would work too.)',['Back alone, take A','Back alone, take A and C'],0,'Near: C · Far: A, B'],
+        ],result:'A and B are safe while you are with them. When you leave, someone may need to come back with you.'},
+        'water-jugs':{kind:'jugs',title:'Measure 4 cups with two ladles',frames:[
+            ['Ladles of 3 and 5 cups. Goal: 4. Fill the 5-cup ladle.',['Fill 5','Fill 3'],0,'3-cup: 0 · 5-cup: 5'],
+            ['Pour the 5 into the 3. It stops when the 3 is full.',['Pour 5 into 3','Empty 5'],0,'3-cup: 3 · 5-cup: 2'],
+            ['Empty the 3, then pour the 2 across.',['Empty 3, pour 5 into 3','Fill 3'],0,'3-cup: 2 · 5-cup: 0'],
+            ['Fill the 5 and top up the 3. One cup moves.',['Fill 5, pour 5 into 3','Empty 3'],0,'3-cup: 3 · 5-cup: 4 ✓'],
+        ],result:'Four cups, by pouring alone. With ladles of 4 and 6 instead, every amount is even. So 3 cups can never appear.'},
     };
     function picture(kind,value,index){
         function tile(text,cls){return el('div.tour-tile'+(cls?'.'+cls:''),{text});}
@@ -84,7 +99,7 @@
         if(kind==='bars')return el('div.tour-bars',null,[el('span.small',{text:index===0?'Axis starts at 90':'Axis starts at 0'}),el('div.tour-bar',{style:{height:(index===0?50:95)+'px'},text:'95'}),el('div.tour-bar',{style:{height:'100px'},text:'100'})]);
         if(kind==='path')return el('div.tour-path',null,['A','B','C'].map((p,i)=>el('span'+(value&&value.includes(p)?'.tour-lit':''),{text:p+(i<2?' →':'')})));
         if(kind==='tank')return el('div.tour-tank',null,[el('div.tour-water',{style:{height:(index>=3?'100%':'0%')}}),el('strong',{text:value||'Empty tank'})]);
-        return el('div.tour-scene.tour-'+kind,{text:value||({numbers:'2 · 4 · 6',guards:'A: “B is a liar”',lamps:'🔴 Red lamp ON · Blue lamp unknown',circuit:'A: ON → gate ← B: OFF',worlds:'Baker: “Sweep is an imp”',blocks:'All runners wear boots',record:'“The door stayed locked all day”',moves:'LEFT · LEFT · RIGHT',proof:'All odd numbers are prime?',audit:'Pat: help refused'}[kind]||'')});
+        return el('div.tour-scene.tour-'+kind,{text:value||({numbers:'2 · 4 · 6',guards:'A: “B is a liar”',lamps:'🔴 Red lamp ON · Blue lamp unknown',circuit:'A: ON → gate ← B: OFF',worlds:'Baker: “Sweep is an imp”',blocks:'All runners wear boots',record:'“The door stayed locked all day”',moves:'LEFT · LEFT · RIGHT',proof:'All odd numbers are prime?',audit:'Pat: help refused',jugs:'3-cup: 0 · 5-cup: 0',river:'Near: A, B, C · Far: nobody',grid:'Ada, Ben · Moon, Frogs'}[kind]||'')});
     }
     function create(id,onComplete){
         const example=examples[id];if(!example)return null;

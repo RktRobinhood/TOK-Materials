@@ -20,6 +20,7 @@ function setup(params, opts) {
     let helpClosed = 0;
     Rift.Battles = { rules: onClose => ({ close() { helpClosed++; onClose(); } }) };
     if (opts && opts.calm) g.document.body.classList.add('calm-motion');
+    if (opts && opts.before) opts.before(g);
     const root = g.document.createElement('div');
     g.document.body.appendChild(root);
     const results = [];
@@ -745,5 +746,40 @@ test('a dim draw button says why in its tooltip (hand full)', () => {
     assert.equal(t.handle.state.phase, 'draw');
     assert.ok(t.$('.b-tip').classList.contains('show'), 'clicking a dim button shows why');
     assert.match(t.$('.b-tip').textContent, /Your hand is full/);
+    t.handle.destroy();
+});
+
+test('the Fate reel slides one space per turn, step by step, and a repaint mid-slide carries on from where it was', () => {
+    const anims = [];
+    let clock = 1000;
+    const t = setup(practice, { before(g) {
+        g.ctx.performance = { now: () => clock };
+        Object.getPrototypeOf(g.document.createElement('div')).animate = function (frames, timing) {
+            const a = { el: this, frames, timing, currentTime: null };
+            anims.push(a);
+            return a;
+        };
+    } });
+    const reelAnims = () => anims.filter(a => a.el.classList.contains('b-fate-reel'));
+    assert.equal(reelAnims().length, 0, 'no slide on the first paint');
+    t.$('.b-draw-btn[data-choice="deck"]').click();
+    assert.equal(reelAnims().length, 0, 'no slide while the turn is the same');
+    t.$('.b-end').click();
+    const first = reelAnims()[0];
+    assert.ok(first, 'End turn slides the reel');
+    assert.equal(first.timing.duration, 700, 'one space, slow enough to follow');
+    assert.equal(first.currentTime, 0);
+    assert.match(first.frames[0].transform, /^translateX\(14\.28\d*%\)$/, 'it starts one space to the right');
+    assert.equal(first.frames.at(-1).transform, 'translateX(0%)');
+    assert.equal(first.frames[0].easing, 'ease-in-out');
+    // The opponent acts 300 ms in: the screen repaints, and the new reel picks up the same slide.
+    clock += 300;
+    const before = reelAnims().length;
+    const reel = t.$('.b-fate-reel');
+    for (let n = 0; n < 20 && t.g.timers.length && t.$('.b-fate-reel') === reel; n++) t.g.timers.shift().fn();
+    assert.notEqual(t.$('.b-fate-reel'), reel, 'the screen repainted the reel');
+    const later = reelAnims().slice(before);
+    assert.ok(later.length, 'the repainted reel is animated too');
+    assert.ok(later.every(a => a.timing.duration === 700 && a.currentTime === 300), 'it carries on, not from the start');
     t.handle.destroy();
 });

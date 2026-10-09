@@ -62,6 +62,8 @@
             'stall-gallery': {
                 trainer: 'syllo',
                 host: "syllo", goal: "A conclusion can follow from the rules without being true in real life.",
+                // Side story 7, tier 4: Syllo has gone after his recruits until the restored Fair.
+                hosts: [{ when: { all: ['syllo-away', '!finale-open'] }, host: null, note: 'A sign on the door: GONE AFTER MY RECRUITS. —S' }],
                 intro: "station.stall-gallery.intro", reminder: "station.stall-gallery.reminder",
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
                 scene: 'scene/stall-gallery', script: 'prologue.gallery',
@@ -70,7 +72,7 @@
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
             },
             'fair-rift': {
-                requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s safe Road challenge at the Fair Gate first.',
+                requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s practice match at the Fair Gate first.',
                 name: 'The Nut Stall', chapter: 'prologue', type: 'story', x: 330, y: 575,
                 scene: 'scene/fair', script: 'prologue.nutstall', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',
@@ -107,8 +109,18 @@
                 name: 'The Troll Bridge', chapter: 'ch1', type: 'miniboss', x: 679, y: 550,
                 scene: 'scene/road-bridge', script: 'ch1.bridge',
                 puzzles: [{ id: 'line-drawer', difficulty: 2 }],
-                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle'], links: ['road-start', 'well'],
+                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle'], links: ['road-start', 'well', 'river-ford'],
                 teaser: 'A toll booth. A rocket parked badly beside it.',
+            },
+            // Optional (#62): river crossing, downstream of the Troll Bridge. Off the required path.
+            'river-ford': {
+                host: 'muskrat', goal: 'Plan by rules: every step must be safe, not just the ending.',
+                intro: 'station.river-ford.intro', reminder: 'station.river-ford.reminder',
+                name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 548, y: 468,
+                scene: 'scene/road-bridge',
+                puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
+                spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
+                teaser: 'A small boat, a wide river, and creatures who bite each other.',
             },
             'card-sharp': {
                 name: "The Card Sharp's Table", chapter: 'ch1', type: 'battle', x: 1081, y: 430,
@@ -196,8 +208,19 @@
                 name: 'The Bakery', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 633, y: 344,
                 scene: 'scene/village-square', script: 'ch2.bakery',
                 puzzles: [{ id: 'village', difficulty: 1, opts: { excludeRoles: ['schoolteacher'] } }, { id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher'] } }],
-                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough'], links: ['b-square'],
+                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough'], links: ['b-square', 'b-kitchen'],
                 teaser: 'Warm bread, cold stares. Someone stole the last loaf.',
+            },
+            // Optional (#62): water jugs. Off the required path; nothing links through it.
+            'b-kitchen': {
+                host: 'granny', goal: 'Make it exactly, or prove it cannot be done. Failing is not a proof.',
+                hosts: [{ when: { any: [{ seen: 'ch2.hall.win' }, 'dead:granny'] }, host: 'baker' }],
+                intro: 'station.b-kitchen.intro', reminder: 'station.b-kitchen.reminder',
+                name: "Granny's Kitchen", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 548, y: 300,
+                scene: 'scene/granny-door',
+                puzzles: [{ id: 'water-jugs', difficulty: 1 }, { id: 'water-jugs', difficulty: 2 }, { id: 'water-jugs', difficulty: 3 }],
+                spawns: ['beastie', 'tremendoodle', 'attenbirdough'], links: ['b-bakery'],
+                teaser: 'Two ladles, no markings, and a very exact recipe.',
             },
             'b-post': {
                 host: "constable", goal: "An argument stands only if its steps support its conclusion.",
@@ -324,8 +347,18 @@
                 name: 'The Library', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 340, y: 239,
                 scene: 'scene/evidence-room', script: 'ch3.library',
                 puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'proof' } }],
-                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-cafe', 't-plaza'],
+                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-cafe', 't-plaza', 't-reading-room'],
                 teaser: 'Silent shelves. Someone claims to have proved something that is not quite true.',
+            },
+            // Optional (#62): logic grid, off the Library. Off the required path.
+            't-reading-room': {
+                host: 'pip', goal: 'Here the clues can settle a claim: they rule out every other possibility.',
+                intro: 'station.t-reading-room.intro', reminder: 'station.t-reading-room.reminder',
+                name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 128, y: 205,
+                scene: 'scene/evidence-room',
+                puzzles: [{ id: 'logic-grid', difficulty: 1 }, { id: 'logic-grid', difficulty: 2 }, { id: 'logic-grid', difficulty: 3 }],
+                spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-library'],
+                teaser: 'Old newspapers with the bylines torn off. The clues are still there.',
             },
             't-plaza': {
                 name: 'The Neon Plaza', chapter: 'ch3', map: 'ch3', type: 'story', x: 727, y: 335,

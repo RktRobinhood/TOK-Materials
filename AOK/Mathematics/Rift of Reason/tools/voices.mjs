@@ -128,6 +128,8 @@ function collect(Rift) {
     for (const [key, steps] of Object.entries(scripts)) walk(steps, key, new Set());
     for (const [key, lead] of Object.entries(Rift.data.leads || {})) walk(lead, 'lead ' + key, new Set());
     for (const [key, clock] of Object.entries(Rift.data.clocks || {})) walk(clock, 'clock ' + key, new Set());
+    // Side stories (data/script/side-stories.js); the test fixture is never voiced. Lines inside v => [...] functions are not collected.
+    for (const [key, st] of Object.entries(Rift.data.sideStories || {})) if (!st.fixture) walk(st, 'side ' + key, new Set());
     for (const [id, c] of Object.entries(Rift.data.creatures || {})) (c.lines || []).forEach(t => add(id, t, null, 'creature ' + id));
     // Match the actual station host, not a second generic tutorial narrator.
     // voice ids de-duplicate repeated family/host instructions across nodes.
@@ -152,13 +154,14 @@ const LESSON_OF_CHAPTER = { prologue: 'lesson1', ch1: 'lesson1', ch2: 'lesson2',
 let lessonIndex = null;
 function lessonsOf(line) {
     if (!lessonIndex) {
-        lessonIndex = { keys: {}, clocks: {}, puzzles: {}, creatures: {} };
+        lessonIndex = { keys: {}, clocks: {}, puzzles: {}, creatures: {}, side: {} };
         for (const f of fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => /^lesson\d+\.js$/.test(f))) {
             const R = loadRift(['js/core/rift.js', 'data/script/' + f]), lesson = f.slice(0, -3);
             for (const k of Object.keys(R.data.script || {})) lessonIndex.keys[k] = lesson;
             for (const k of Object.keys(R.data.clocks || {})) lessonIndex.clocks[k] = lesson;
         }
         const Rift = loadGame();
+        for (const [k, st] of Object.entries(Rift.data.sideStories || {})) lessonIndex.side[k] = 'lesson' + st.lesson;
         for (const n of Object.values(Rift.data.map.nodes)) {
             const lesson = LESSON_OF_CHAPTER[n.chapter];
             if (!lesson) continue;
@@ -168,6 +171,7 @@ function lessonsOf(line) {
     }
     const w = line.where || '', I = lessonIndex;
     if (w.startsWith('lead ') || w === 'card lesson') return ['lesson1'];
+    if (w.startsWith('side ')) return [I.side[w.slice(5)]].filter(Boolean);
     if (w.startsWith('clock ')) return [I.clocks[w.slice(6)]].filter(Boolean);
     if (w.startsWith('tutorial ')) return [...(I.puzzles[w.slice(9)] || [])];
     if (w.startsWith('creature ')) return [...(I.creatures[w.slice(9)] || [])];

@@ -11,7 +11,9 @@
  *
  * API (Rift.Battle.Engine):
  *   createBattle({ seed, players: [{ id, name, team: [instances], tactics?: [ids], axioms?: [ids],
- *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] } }], axiomDeck?: [ids], options })      → state
+ *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] }, ownAxioms?: [ids] }], axiomDeck?: [ids], options })      → state
+ *                  ownAxioms: the player's own rule cards (ax.own, e.g. Granny's Spare Axiom), added to the opening
+ *                  hand; own cards are never taken into the shared axiom deck.
  *   legalActions(state) → [action]    applyAction(state, action) → new state (input untouched)
  *   applyLegal(state, action) → like applyAction but skips the legality check; only for an
  *                  action object taken from legalActions(state) of this same state (AI lookahead)
@@ -55,7 +57,7 @@
  *
  * Hero powers (design/AVATARS.md section 1, data/powers.js): players[p].power = { id, tweaks, cooldown,
  * uses } or null (createBattle player.power; Granny's lesson has none). In the main phase the owner
- * may use it for its energy (or 1 heart with the Blood price tweak). It is not a card play. After
+ * may use it for its energy (or hearts with the Blood price tweak). It is not a card play. After
  * use, cooldown = recharge + 1 and counts down by 1 at the start of each of the owner's turns; it is
  * ready at 0 (so at most once per turn, and ready on turn 1). Tweaks: powerMods(state, p) → { def,
  * cost, heartCost, recharge, deeper, broader }. powerStatus(state, p) → { id, name, text, cost,
@@ -167,6 +169,7 @@
     function axiomWouldChange(s, id) {
         const ax = axiomDefs()[id];
         if (!ax) return false;
+        if (ax.clearRules) return changedAxioms(s).length > 0; // Granny's Spare Axiom: only while a rule is changed
         const current = s.axioms.active[ax.category];
         if (current === id) return false;
         if (ax.basic) return !!current && !(axiomDefs()[current] || {}).basic;
@@ -600,7 +603,7 @@
     function axiomSelection(pool) {
         const out = [];
         (pool || []).concat((Rift.data.axiomDecks || {}).default || []).forEach(id => {
-            if (out.length < 10 && axiomDefs()[id] && !out.includes(id)) out.push(id);
+            if (out.length < 10 && axiomDefs()[id] && !axiomDefs()[id].own && !out.includes(id)) out.push(id);
         });
         return out;
     }
@@ -663,7 +666,7 @@
         });
 
         const known = axiomDefs();
-        const axIds = (cfg.axiomDeck || buildAxiomDeck(players[0].axioms, players[1].axioms)).filter(id => known[id]);
+        const axIds = (cfg.axiomDeck || buildAxiomDeck(players[0].axioms, players[1].axioms)).filter(id => known[id] && !known[id].own);
         s.axioms.deck = opts.shuffleAxioms ? rng.shuffle(axIds) : axIds.slice();
         s.active = opts.first === 'random' ? rng.int(0, 1) : (opts.first ? 1 : 0);
 
@@ -672,6 +675,10 @@
             for (let i = 0; i < opts.openHand[order]; i++) draw(G, p, true);
             for (let i = 0; i < opts.openAxioms; i++) drawAxiom(G, p, true);
         });
+        // Own rule cards (Granny's Spare Axiom) start in their player's hand, one of each.
+        players.forEach((pl, p) => Array.from(new Set(pl.ownAxioms || [])).forEach(id => {
+            if (known[id] && known[id].own && handCount(s.players[p]) < opts.handLimit) s.players[p].axHand.push(id);
+        }));
         if (opts.spark) {
             s.players[1 - s.active].spark = true;
             emit(G, { t: 'spark', player: 1 - s.active, text: says(s, 1 - s.active, 'goes') + ' second: one extra card and the Spark (+1 energy once).' });
@@ -989,7 +996,11 @@
             let extra = handCount(P) - r.handCap;
             const gone = [];
             while (extra > 0 && P.hand.length) { const cid = P.hand.shift(); s.cards[cid].burned = true; P.discard.push(cid); gone.push(cardName(s, cid)); extra--; }
-            while (extra > 0 && P.axHand.length) { s.axioms.discard.push(P.axHand.shift()); gone.push('a rule card'); extra--; }
+            while (extra > 0 && P.axHand.length) {
+                const id = P.axHand.shift();
+                if (!(axiomDefs()[id] || {}).own) s.axioms.discard.push(id); // an own card leaves the game
+                gone.push('a rule card'); extra--;
+            }
             emit(G, { t: 'hand-limit', player: p, privateTo: p, text: 'Hand limit ' + r.handCap + ': you discard ' + gone.join(', ') + '.',
                 publicText: 'Hand limit ' + r.handCap + ': ' + playerName(s, p) + ' discards ' + gone.length + ' card' + (gone.length === 1 ? '' : 's') + '.' });
         }
@@ -1020,13 +1031,22 @@
     }
 
     // by: the player who played the card, or null for a Fate flip.
+    // A clearRules card (Granny's Spare Axiom) sends every active rule to the discard pile, as a Fate
+    // reset does (Fate does not move), and never becomes an active rule itself.
     function setAxiom(G, id, by) {
         const s = G.s, A = s.axioms, ax = axiomDefs()[id];
-        const old = A.active[ax.category];
-        if (old) A.discard.push(old);
-        A.active[ax.category] = id;
+        if (ax.clearRules) {
+            A.discard.push(...Object.values(A.active));
+            A.active = {};
+        } else {
+            const old = A.active[ax.category];
+            if (old) A.discard.push(old);
+            A.active[ax.category] = id;
+        }
         A.flips += 1;
-        emit(G, { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
+        emit(G, ax.clearRules
+            ? { t: 'axiom', id, player: by, clear: true, text: 'Rule change — ' + ax.name + ': every rule goes back to the basics.' }
+            : { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
         if (by != null) {
             [0, 1].forEach(p => s.players[p].board.slice().forEach(cid => {
                 const c = s.cards[cid];
@@ -1073,6 +1093,7 @@
         removeFrom(P.axHand, id);
         emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' a rule card.' });
         setAxiom(G, id, p);
+        for (let i = 0; i < (axiomDefs()[id].draws || 0); i++) draw(G, p);
         afterMove(G);
     }
 
@@ -1337,7 +1358,8 @@
         return { id: pw.id, tweaks, cooldown: 0, uses: 0 };
     }
 
-    // The power's numbers after its tweaks. Cost and recharge never go below 0.
+    // The power's numbers after its tweaks. Cost and recharge never go below 0, nor cost below the
+    // power's minCost (Night Sight 2). Blood price (#53): 1 heart per 2 energy it would cost, at least 1.
     function powerMods(s, p) {
         const pw = s.players[p].power;
         if (!pw) return null;
@@ -1349,8 +1371,9 @@
         if (has('cheap')) { cost -= 1; recharge += 1; }
         if (deeper) recharge += 1;
         if (broader) cost += 1;
-        if (has('blood')) { heartCost = 1; cost = 0; }
-        return { def, cost: Math.max(0, cost), heartCost, recharge: Math.max(0, recharge), deeper, broader };
+        cost = Math.max(0, def.minCost || 0, cost);
+        if (has('blood')) { heartCost = Math.max(1, Math.ceil(cost / 2)); cost = 0; }
+        return { def, cost, heartCost, recharge: Math.max(0, recharge), deeper, broader };
     }
 
     // Why player p can't use the power now ('' when it can), as a code and a short note.
@@ -1361,7 +1384,7 @@
         if (s.phase !== 'main') return ['busy', 'First answer the question.'];
         if (P.power.cooldown > 0) return ['recharge', 'Ready in ' + P.power.cooldown + ' turn' + (P.power.cooldown === 1 ? '' : 's') + '.'];
         if (m.cost > P.energy) return ['energy', 'It needs ' + m.cost + ' energy. You have ' + P.energy + '.'];
-        if (m.heartCost && !rules(s).reverseHearts && P.hearts <= m.heartCost) return ['hearts', 'It costs a heart, and you have only ' + P.hearts + '.'];
+        if (m.heartCost && !rules(s).reverseHearts && P.hearts <= m.heartCost) return ['hearts', 'It costs ' + (m.heartCost === 1 ? 'a heart' : m.heartCost + ' hearts') + ', and you have only ' + P.hearts + '.'];
         if (def.usable && !def.usable(s, p, H, m)) return ['useless', 'It would do nothing now.'];
         if (def.target && !powerTargets(s, p, m).length) return ['target', 'It has no target right now.'];
         return ['', ''];

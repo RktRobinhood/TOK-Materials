@@ -1,6 +1,6 @@
 # Rift of Reason — Side stories (pop-up one-shots)
 
-Status: **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); not scripted or built yet (#56). The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
+Status: **lesson 1 (stories 1–3) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l1-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l1.js`). **Lesson 2 (stories 4–6) scripted and passed the writing gate** (8 October 2026: Logic 8, Author 8.5, Editor 8.5; `reviews/writing-side-l2-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l2.js`). **Lesson 3 (stories 7–8) scripted and passed the writing gate** (8 October 2026: Logic 9, Author 8.5, Editor 8.5; `reviews/writing-side-l3-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l3.js`). **Lesson 4 (stories 9–10) scripted and passed the writing gate** (8 October 2026: Logic 9, Author 8.5, Editor 8.5; `reviews/writing-side-l4-r1-*.md`, `-r2-*.md`; `data/script/side-stories-l4.js`). All ten stories are now scripted and gated. **outline passed the gate** (8 October 2026, `reviews/outline-gate-passed-2026-10-08.md`); the **engine is built** (#56: `js/core/side-stories.js`, `js/core/side-verbs.js`, `js/screens/side-story.js`, bench `dev/side-story.html`) The map marker art `ui/side-story` exists. Ten one-shots: three each for lessons 1 and 2, two each for lessons 3 and 4. Nothing is scripted until the three critics in `design/WRITING-CRITICS.md` each score 8/10. Main story: `design/STORY.md` (appendix letters below refer to it). Research: `research/one-shots-and-stakes.md` Part 5; `research/draw-steel-and-disco-elysium.md` §3.1.
 
 **What a side story is.** A 5–10 minute scene at a station you **have already visited**, not part of the main plot (teacher's note 8). It practises the reasoning of the lesson that unlocked it, through **negotiation**, **deduction**, **argument-spotting** or a **test**. Each one has a stakes clock, a fair twist, a reward, and sometimes a small ripple into the main story. None is needed to finish the game. **Nobody can die in a side story.**
 
@@ -15,7 +15,7 @@ House rules from STORY.md apply: short plain lines; every line a joke, threat, r
 **When one appears.** When both are true:
 1. The **lesson trigger** has been met (the skill has been taught), on a required node:
    - lesson 1: the Troll Bridge is solved (so these can be done before the Gate);
-   - lesson 2: the Village Square scene has played;
+   - lesson 2: the Village Square is solved (its table, `ch2.square.win`);
    - lesson 3: the Neon Plaza scene has played;
    - lesson 4: the Prediction Hall is solved.
 2. The story's **station has been visited**. A time-rift jumper who never walked to the Fair sees no Fair stories until they do.
@@ -47,13 +47,15 @@ Six beats, about 25 lines.
 
 **Inner voice.** One hook per species per story, in each voice's personality (STORY.md Appendix E). One of them is the **blue option**, a choice only that species sees:
 
-| Blue option | Stories |
-|---|---|
-| Owlet | 4, 8 |
-| Moth-kin | 3, 9 |
-| Fox | 5, 7 |
-| Frogling | 2, 6 |
-| Raven | 1, 10 |
+| Blue option | Stories | Effect |
+|---|---|---|
+| Owlet | 4, 8 | +1 progress (both) |
+| Moth-kin | 3, 9 | +1 progress (both) |
+| Fox | 5, 7 | 5: +1 progress · 7: drains 1 (after a scripted tick) |
+| Frogling | 2, 6 | +1 progress (both) |
+| Raven | 1, 10 | 1: drains 1 (after a scripted tick) · 10: +1 progress |
+
+A drain only works once Danger is above 0, so a blue option that comes before any mistake gives +1 progress instead (a head start: one wrong option struck, or +1 Interest in a negotiation).
 
 ---
 
@@ -285,7 +287,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Clock.** Danger: the drum (6). Progress: recruits freed (4).
 
-**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (an argument card for negotiations); `soldiers`: his toy army holds the far end of the Summit Rift in Ch4 (drain 1 on the Copy, applied at the core before its tier is set). 2: everyone stays, and Syllo sulks (his trainer match is grumpier); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: the recruits march off, still glowing, and Syllo goes after them alone. The Gallery hangs a sign, "GONE AFTER MY RECRUITS. —S", until the finale; on the restored Fair map he is home, hoarse, with most of them (a bark, STORY.md §6). Feed +2. (He is missing, not dead; no understudy steps in.)
+**Outcomes.** 1: everyone stays; Syllo opens a "fallacy range" (a line only: there is no argument-card mechanic) and gives you a **Ward**, his lucky cork (the item: it cancels one bad fate roll after a battle); `soldiers`: his toy army holds the far end of the Summit Rift in Ch4 (drain 1 on the Copy, applied at the core before its tier is set). 2: everyone stays, and Syllo sulks (his practice matches are louder, a note only); `soldiers`. 3: half the recruits march off and come back loud for a while; Feed +1. 4: on the last boom every recruit still glowing marches off (the wooden front rank stays), and Syllo goes after them alone. The Gallery hangs a sign, and his trainer challenge is closed (the card school still teaches), "GONE AFTER MY RECRUITS. —S", until the finale; on the restored Fair map he is home, hoarse, with most of them (a bark, STORY.md §6). Feed +2. (He is missing, not dead; no understudy steps in.)
 
 **Late play.** If the core is already won, the wooden soldiers stand guard at the Gallery instead (a keepsake view).
 
@@ -356,7 +358,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Ripple.** With the honest sign, an optional bark at the Witness Tent on the restored Fair map after the finale (STORY.md §6): Mirage, "Altmanta's box says 'I GUESS THE USUAL' now. Labels are catching on."
 
-**Inner voice.** Owlet: "Right ninety times because ninety days were the same. Proves nothing. I'm proud of that sentence." · **Moth-kin (blue, drains 1):** "Shh. Open the panel. Look. One dial. That's it." · Fox: "Ask it about a strange day. Watch it panic." · Frogling: "The day of the crack. What did it say about that day?" · Raven: "'Accurate.' Accurate at what?"
+**Inner voice.** Owlet: "Right ninety times because ninety days were the same. Proves nothing. I'm proud of that sentence." · **Moth-kin (blue, +1 progress):** "Shh. Open the panel. Look. One dial. That's it." · Fox: "Ask it about a strange day. Watch it panic." · Frogling: "The day of the crack. What did it say about that day?" · Raven: "'Accurate.' Accurate at what?"
 
 **Sample lines.**
 > **fortune machine:** YOU WILL FAIL. CONFIDENCE: 90%.
@@ -388,7 +390,7 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 
 **Ripple.** `berry`: an optional bark at Granny's card table on the restored Fair map after the finale (STORY.md §6): `role:granny`, "I had a berry. A very fair berry." (Achilles, if arrived: "Got a berry. Gave it to Volt. Felt good.")
 
-**Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, drains 1):** "Ask him: 'Needs it most.' Define 'most'."
+**Inner voice.** Owlet: "Asking a lot isn't needing a lot. Different ruler. I spotted it." · Moth-kin: "Look who's limping. Then look who's typing." · Fox: "Picture being too proud to ask. Last place, forever." · Frogling: "The Sorting Room did this. Same mistake, smaller." · **Raven (blue, +1 progress):** "Ask him: 'Needs it most.' Define 'most'."
 
 **Sample lines.**
 > **beastie:** Berries for whoever needs them most! The app decides! It's very scientific!
@@ -415,6 +417,21 @@ The labels and the rule always solve it. The dent is a shortcut a stuck player c
 | `side.<n>` | every story | tier 1–4, for the Feed and the teacher overview |
 
 Side-story drains per boss: the Ch1 Gate, story 2 (1); the Ch2 pot, story 4 (1); the Ch3 trial, stories 1 and 8 (2); the Ch4 Copy, story 7 (1). All within the cap of 2.
+
+## 8b. Script format
+
+The full format, with every field, is the header comment of `data/script/side-stories.js`; that file holds one placeholder story marked `fixture: true` (never shown in the game) for the bench and the tests. In short:
+
+- A story is `SS['<id>'] = { n, title, lesson, station, teaser, aside, colour, setup, clock, start, clues, twist, resolve, after, outcome, ripples, last }`. All text is ordinary script steps (SCRIPT-FORMAT.md): speakers, `e`, `t`, `u`, `when`, `only`, `inner`, choices, flags, `give`, `keepsake`.
+- **Clock:** `{ label, size: 6 | 4, progress: 3 | 4, warn }`. Tiers, Feed and `side.<n>` are set by the engine. `{ clock: 'side', drain | tick | progress: 1 }` acts on this story's clock (write the blue option as a choice option with `only`, `voice: true` and `then: [{ clock: 'side', drain: 1 }]`).
+- **Clues:** `spots: [{ id, kind: person | object | record, label, x, y, steps, card }]` placed in % on the station's background; `need: 2` (any two), or a list of ids, or several lists (story 4). Three free looks, then 1 notch a look.
+- **Twist:** `{ steps, card }`; the card joins your clue cards (an Object round can ask you to present it).
+- **Resolve:** `{ verb: 'deduce' | 'test' | 'object' | 'negotiate', … }`. Rounds of options (`{ t, ok, say, cost }`), with `why` (Deduce), `then` and `table` (Test), `line`, `press`, `present` and `name` (Object); a negotiation gives `interest`, `patience`, `askAt`, `cares`, `cantStand`, `listen` (mirror, feeling, sum), `args`, `special` (per species), `ask`, `replies`.
+- **Outcome and ripples:** `outcome: { 1: [...], 2: [...], 3: [...], 4: [...] }`; `ripples: [{ flag, tiers, boss, drain, late }]` (`late` plays instead when the boss is already beaten or its cap of 2 is full).
+- **Generated numbers:** `setup: rng => ({ … })`; any beat may be a function of those values (`v => [...]`).
+- New steps for rewards: `{ visitor: '<creature>' }` (it is the loot of your next win until you own one) and `{ closed: '<node>', note }` (shut for one visit). `{role:granny}` in a note or card names whoever holds the role now.
+
+**Decided** (engine): verbs are deterministic. Mistakes cost notches, never hearts. Progress already filled when the verb starts (a blue "+1 progress") strikes out one wrong option per notch, or adds 1 Interest in a negotiation. In a negotiation, listening costs no Patience and turns over one hidden tag; Patience running out costs a notch and then the talks restart; asking below `askAt` (default 4) costs a notch. Icon colours: lesson 1 green, 2 blue, 3 gold, 4 violet. A side story left halfway leaves no trace and starts again next time.
 
 ## 9. Change lists
 

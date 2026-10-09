@@ -146,32 +146,38 @@ Over all 49,500 pair games (old texts) the first player wins 47.6% (46.9% with n
 
 ### Tweaks
 
-Each tweak on each avatar power against the same power untweaked, 1,100 games each (±3), Competent vs Competent. Target 46–54% (a sidegrade). Cost/recharge after the tweak in brackets; "1h" is Blood price (1 heart, no energy).
+Each tweak on each avatar power against the same power untweaked, 1,100 games each (±3), Competent vs Competent. Target 46–54% (a sidegrade). Cost/recharge after the tweak in brackets; "1h"/"2h" is Blood price (hearts, no energy).
+
+Updated 8 Oct (late) with the four fixes the teacher approved in #53: What If? Broader "Also +1 health" (was "also draw a card"); Call It Out Deeper "also loses Swift" (was "can't attack next turn"); Night Sight has a cost floor of 2 (Cheap only adds the recharge); Blood price costs 1 heart per 2 energy the power would cost, at least 1 (Close the Proof and Hold That Thought 2 hearts, the rest 1). Every Blood cell is now with the AI's Blood price hint (`js/battle/ai.js` powerHint, counted per heart paid).
 
 | Power | Quick | Cheap | Blood price | Deeper | Broader |
 |---|---|---|---|---|---|
-| Close the Proof | 49.1 (4/1) | 53.1 (2/3) | **56.8** (1h/2) | 53.4 (3/3) | 49.9 (4/2) |
-| Foresee (new text) | 47.2 (1/0) | 48.2 (0/2) | **45.5** (1h/1) | 48.5 (0/2) | 50.7 (1/1) |
-| Night Sight | 46.9 (3/1) | **56.4** (1/3) | **45.0** (1h/2) | *55.0* (2/3) | 47.0 (3/2) |
-| Lantern | 48.8 (3/3) | 51.9 (1/5) | 53.2 (1h/4) | *54.2* (2/5) | 48.4 (3/4) |
-| What If? | 49.7 (1/1) | 50.5 (0/3) | **45.5** (1h/2) | 53.0 (0/3) | **58.6** (1/2) |
-| Brainstorm | 48.4 (1/0) | 48.8 (0/1) | 48.5 (1h/0) | 48.9 (0/1) | 49.5 (1/0) |
-| Hold That Thought (new text) | 48.0 (4/1) | *54.6* (2/3) | 48.3 (1h/2) | 50.0 (3/3) | 49.7 (4/2) |
-| Recall | 49.3 (3/2) | 51.1 (1/4) | 46.2 (1h/3) | 52.2 (2/4) | 51.8 (3/3) |
-| Call It Out | 48.7 (3/1) | 51.1 (1/3) | 50.1 (1h/2) | **57.4** (2/3) | 51.5 (3/2) |
-| Fine Print | 47.5 (3/1) | *54.5* (1/3) | 46.0 (1h/2) | *54.8* (2/3) | 47.9 (3/2) |
+| Close the Proof | 49.1 (4/1) | 53.1 (2/3) | *54.5* (2h/2) | 53.4 (3/3) | 49.9 (4/2) |
+| Foresee | 47.2 (1/0) | 48.2 (0/2) | *45.4* (1h/1) | 48.5 (0/2) | 50.7 (1/1) |
+| Night Sight | 46.9 (3/1) | 50.0 (2/3) | **55.4** (1h/2) | *55.0* (2/3) | 47.0 (3/2) |
+| Lantern | 48.8 (3/3) | 51.9 (1/5) | 50.4 (1h/4) | *54.2* (2/5) | 48.4 (3/4) |
+| What If? | 49.7 (1/1) | 50.5 (0/3) | *45.4* (1h/2) | 53.0 (0/3) | 50.2 (1/2) |
+| Brainstorm | 48.4 (1/0) | 48.8 (0/1) | 47.5 (1h/0) | 48.9 (0/1) | 49.5 (1/0) |
+| Hold That Thought | 48.0 (4/1) | *54.6* (2/3) | 47.4 (2h/2) | 50.0 (3/3) | 49.7 (4/2) |
+| Recall | 49.3 (3/2) | 51.1 (1/4) | 49.2 (1h/3) | 52.2 (2/4) | 51.8 (3/3) |
+| Call It Out | 48.7 (3/1) | 51.1 (1/3) | 52.8 (1h/2) | 50.2 (2/3) | 51.5 (3/2) |
+| Fine Print | 47.5 (3/1) | *54.5* (1/3) | *45.7* (1h/2) | *54.8* (2/3) | 47.9 (3/2) |
 
-The Foresee and Hold That Thought rows were re-run with the new texts and extras. **38 of 50 are within 46–54%**, 5 more (italics) within a point of the edge, which is inside the noise. Seven clear misses:
+Re-run: the Close the Proof, Foresee, Night Sight, What If?, Hold That Thought and Call It Out rows in full (33,000 games), and the Blood cells of the other four (4,400 games). The other cells are from the first pass; the cells that did not change came out the same on the re-run (same seed), so they still stand.
 
-- **Draw a card for 1 energy is too strong.** What If? Broader ("also draw a card", 58.6%): What If? is free, so Broader makes a card cost 1. The old Hold That Thought Broader ("also draw a card") was 65.7%; its new Broader (1 heart) is 49.7%. Fine Print Deeper (2 cards) is 54.8%.
-- **Call It Out Deeper** ("can't attack next turn", 57.4%): freezing the biggest enemy creature is worth more than a recharge.
-- **Night Sight Cheap** (56.4%): back to cost 1, so the turn-1 tax returns (the reason it went to cost 2).
-- **Close the Proof Blood price** (56.8%): a 3-energy kill for 1 heart is a big discount; Blood price is worth most on the most expensive power.
-- **Blood price on Night Sight, What If? and Foresee** (45.0%, 45.5%, 45.5%): the AI rarely pays a heart (0.2–0.4 uses a game against 1.1–1.9), because its one-ply score prices a heart above most power effects. This is the AI under-using it, not a weak tweak; a student would use it more. Blood price is used 0.13–0.33 times a game on every power except Close the Proof (0.77) and Lantern (0.65).
+**40 of 50 are within 46–54%**, and 9 of the other 10 (italics) are within a point of the edge, which is inside the noise. The fixes:
 
-Quick and Broader (+1 energy) are the weakest tweaks overall (46.9–51.5%): energy is tight for the AI all game. Nothing was changed for tweaks in this pass: they are not yet unlocked in the game (order of work, step 6), and every fix above is a text change (see below).
+- **What If? Broader**: 58.6% → 50.2%.
+- **Call It Out Deeper**: 57.4% → 50.2%.
+- **Night Sight Cheap**: 56.4% → 50.0% (cost stays 2, so it is a straight trade of +1 recharge; the campfire editor says so on Cheap).
+- **Close the Proof Blood price**: 56.8% (59.8% once the AI hint made the AI use it) → 54.5% at 2 hearts.
+- **Hold That Thought** (new text): Blood price is 2 hearts now (47.4%); the old Broader "draw a card" (65.7%) is now "restore 1 heart" (49.7%).
 
-Over all 55,000 tweak games (old texts) the first player wins 48.0% and games last 8.02 rounds; over the 11,000 re-run games, 47.8% and 7.94 rounds.
+One clear miss is left: **Night Sight Blood price, 55.4%** (1 heart, used 2.1 times a game against 1.5). At cost 2 the approved rule keeps it at 1 heart. If classroom play shows it, the simplest fix is a heart floor like the cost floor (Night Sight's Blood price costs 2 hearts).
+
+On the low side, Blood price on Foresee, What If? and Fine Print (45.4–45.7%) is the AI paying a heart for a small effect (Foresee and What If? are free, so Blood price only adds a cost), not a weak tweak for a student who picks it on purpose. Quick and Broader (+1 energy) are still the weakest tweaks overall (46.9–51.5%): energy is tight for the AI all game.
+
+Over the 33,000 re-run games the first player wins 48.5% and games last 7.96 rounds (55,000 first-pass games: 48.0% and 8.02).
 
 
 ## Open questions and proposals
@@ -181,12 +187,8 @@ Status after the teacher's answers (8 October).
 1. **Foresee: done.** New text at 0/1, +3.7 (was +0.7).
 2. **Hold That Thought: done.** New text at 3/2, +5.1 (was +1.8).
 3. **Brainstorm** (+2.9 Competent, +3.6 Normal) is left as it is: free every turn and within the noise of +3.
-4. **Tweak texts**: left for the tweaks issue #53 (posted there as a comment). They only matter once tweaks unlock:
-   - What If? Broader: "also draw a card" → something smaller, for example "also +1 health". (Hold That Thought's Broader is now "restore 1 heart", 49.7%.)
-   - Call It Out Deeper: "can't attack next turn" → "also loses Swift" or keep it and add Cost +1.
-   - Night Sight Cheap: give Night Sight a cost floor of 2 (so it is never usable on turn 1), or leave Cheap out for Night Sight.
-   - Blood price: cost "1 heart per 2 energy it would cost (at least 1)" so Close the Proof costs 2 hearts.
-5. **The AI rarely pays hearts** (Blood price, and Fine Print needed a hint). If Blood price ships, give it the same kind of hint as Fine Print so ghosts and trainers with it play it.
+4. **Tweak texts: done** (approved in #53, see Tweaks above). What If? Broader "Also +1 health" (50.2%), Call It Out Deeper "also loses Swift" (50.2%), Night Sight cost floor 2 (Cheap 50.0%), Blood price 1 heart per 2 energy, at least 1 (Close the Proof 2 hearts, 54.5%). Still watch: Night Sight Blood price (55.4%).
+5. **The AI rarely paid hearts: done.** Blood price has an AI hint like Fine Print's (per heart paid).
 6. **Board removal is at the top** (Close the Proof, Lantern, Call It Out: means near 52% in the pairs). If classroom play shows them dominating, raise Close the Proof to cost 3, recharge 3 (+5.8) or Lantern to 3/3 (+5.5).
 7. **First-player rate** is 47–48% on this seed with or without powers (46.9% with none). The earlier pass measured 48.0% on another seed. The powers do not move it; it is the base game's balance.
 
@@ -210,4 +212,4 @@ The AI hardly paid Blood price (0.13–0.33 uses a game), so `js/battle/ai.js` p
 | Night Sight + Blood | 56.3 | 2.06 / 1.56 |
 | What If? + Blood | 47.0 | 0.47 / 1.86 |
 
-Used properly, Blood price is strong on Close the Proof and Night Sight, as the earlier table suspected. The #53 proposal (1 heart per 2 energy, at least 1) would make Close the Proof cost 2 hearts; Night Sight (cost 2) would stay at 1 heart. Waiting for the teacher's OK on the four text fixes.
+Used properly, Blood price is strong on Close the Proof and Night Sight, as the earlier table suspected. The #53 proposal (1 heart per 2 energy, at least 1) would make Close the Proof cost 2 hearts; Night Sight (cost 2) would stay at 1 heart. The teacher approved the four fixes; results with them are in the Tweaks section above (Close the Proof Blood price 54.5%, Night Sight Blood price 55.4%).

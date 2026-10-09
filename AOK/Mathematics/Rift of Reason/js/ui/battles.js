@@ -24,6 +24,10 @@
  * Competent/Expert); a ghost uses the classmate's avatar from the team code. Granny's guided lesson
  * has no powers.
  *
+ * Own rule cards: with the save flag `spare-axiom` (saving Granny at the Ch2 Hall, tiers 1–2) the player's
+ * side carries ownAxioms: ['spare-axiom'], so Granny's Spare Axiom starts in the player's hand in every
+ * card battle (never the opponent's, never in the shared deck; team codes and ghosts do not carry it).
+ *
  * The battle screen (js/screens/battle.js) never writes the save; onEnd does it here.
  */
 (function (root) {
@@ -49,6 +53,9 @@
     const avatarPower = avatar => (Rift.Powers ? Rift.Powers.forAvatar(avatar) : null);
     const teamPower = (team, level) => (Rift.Powers ? Rift.Powers.forTeam(team, level) : null);
 
+    // The player's own rule cards (data/axioms.js `own`): Granny's Spare Axiom once she is saved.
+    const ownAxioms = s => (s && s.flags && s.flags['spare-axiom'] ? ['spare-axiom'] : []);
+
     function seed(tag) {
         return Rift.State.get().seed + ':' + tag + ':' + Date.now().toString(36);
     }
@@ -70,7 +77,7 @@
     }
 
     // The player's own side of a battle: chosen team (or first 10, or a loaned starter
-    // team), chosen tactic cards, ten-card axiom contribution and hero art.
+    // team), chosen tactic cards, ten-card axiom contribution, hero art and own rule cards.
     function myDeck() {
         const s = Rift.State.get();
         // With no creatures, loaned starters fill only the places tactics leave (as the deck builder shows).
@@ -82,10 +89,11 @@
             axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout && s.axiomLoadout.length ? s.axiomLoadout : s.axioms),
             art,
             power: avatarPower(s.avatar),
+            ownAxioms: ownAxioms(s),
         };
     }
 
-    // Syllo's Road challenge (a safe beginner match): eight cheap small creatures and kind tactics.
+    // Syllo's practice match (a safe beginner match): eight cheap small creatures and kind tactics.
     const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
     const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
     const SYLLO_HEARTS = 8;
@@ -265,11 +273,14 @@
         },
 
         storyOffer() {
+            // Syllo is away after his recruits (side story 7, tier 4): the card school only teaches.
+            const f=Rift.State.get().flags||{};
+            if(f['syllo-away']&&!f['finale-open']){Battles.schoolOnly();return;}
             const host=Rift.data.speakers.syllo;
-            Rift.UI.modal('Syllo’s Road challenge',el('div.stack',null,[
+            Rift.UI.modal('Syllo’s practice match',el('div.stack',null,[
                 Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:'Sergeant Syllo: “Before the Road, show me you can reason from the rules. Same moves, different axioms, different game.”'}),
-                el('p.small',{text:'Win this safe match to open the Road. You get a loaned starter team, even with an empty collection. No cards or items are at risk.'}),
+                el('p',{text:'Sergeant Syllo: “Practice match, recruit! Loaned team. No risk. Some shouting.”'}),
+                el('p.small',{text:'Win this safe match, then solve two stalls, to open the final at the Nut Stall. You get a loaned starter team. No cards or items are at risk.'}),
             ]),[{label:'Later'},{label:'Learn first',onclick:()=>Battles.learn('map')},{label:'Challenge',primary:true,onclick:()=>Battles.story()}]);
         },
 
@@ -278,13 +289,13 @@
             const s=Rift.State.get();
             Rift.Router.go('battle',{
                 mode:'practice',story:true,seed:'syllo-road-challenge',
-                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar)},
+                player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar),ownAxioms:ownAxioms(s)},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
                 // Syllo plays at Normal with 8 hearts (you have 12): a beginner wins about 70% (tools/sim-battle.mjs --ladder).
-                opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
+                opponent:{name:'Sergeant Syllo · Practice match',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
                     team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS,power:teamPower(SYLLO_TEAM,'normal')},
                 onEnd(result){
                     finish(result);
@@ -293,7 +304,7 @@
                         Rift.State.update(s=>{s.flags['story-battle-won']=true;});
                         // Rebuild the map after setting the flag so the Road unlock is visible immediately.
                         Rift.Router.replace('map');
-                        Rift.UI.modal('The Road is open',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
+                        Rift.UI.modal('Practice match won',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
                     }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: spend energy on more than one small creature. Keep a blocker ready and use End turn. Read Rules now before attacking or rewriting.'}),[
                         {label:'Later'},{label:'Learn again',onclick:()=>Battles.learn('map')},{label:'Retry',primary:true,onclick:()=>Battles.story()},
                     ]);
@@ -301,9 +312,19 @@
             });
         },
 
+        schoolOnly() {
+            Rift.UI.modal('Card school',el('p',{text:'Nobody to challenge today. You can still learn the card game.'}),
+                [{label:'Later'},{label:'Learn the card game',primary:true,onclick:()=>Battles.learn('map')}]);
+        },
+
         offer(nodeId, activity) {
             const n=Rift.World.node(nodeId), t=Rift.data.trainers[n.trainer], host=Rift.data.speakers[t.speaker];
-            if(!Battles.canChallenge(nodeId)){if(activity)activity();return;}
+            if(!Battles.canChallenge(nodeId)){
+                // The card school still teaches while its trainer is away (side story 7: syllo-away).
+                if(n.cardSchool)Battles.schoolOnly();
+                else if(activity)activity();
+                return;
+            }
             const choices=[{label:'Later'}];
             if(activity)choices.push({label:'Do the activity',onclick:activity});
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
@@ -334,6 +355,9 @@
             // A silent or dark trainer role has nobody to play (UNDERSTUDIES.md §3.6).
             const t=n&&n.trainer&&Rift.data.trainers[n.trainer];
             if(t&&t.speaker&&Rift.Cast&&!Rift.Cast.actor(t.speaker))return false;
+            // A trainer away on a side story (syllo-away, story 7 tier 4) is back only on the restored Fair.
+            const f=Rift.State.get().flags||{};
+            if(t&&t.speaker&&f[t.speaker+'-away']&&!f['finale-open'])return false;
             return !!(n&&n.trainer&&(n.cardSchool||n.type==='battle'||Rift.State.get().map.completed.includes(n.challengeAfter||nodeId)));
         },
 

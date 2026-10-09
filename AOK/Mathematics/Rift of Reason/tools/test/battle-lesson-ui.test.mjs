@@ -232,7 +232,7 @@ test('lesson picture buttons have names: each draw step label is the tooltip nam
     t.handle.destroy();
 });
 
-test('with an avatar power, Granny adds "Your power": the button glows, Got it moves on, no move is made', () => {
+test('with an avatar power, Granny adds "Your power": the pointer is on the button, clicking it moves on, no move is made', () => {
     let won = null;
     const t = setup(value => { won = value; }, { avatar: { type: 'fox', variant: 'girl' }, power: 'lantern' });
     const L = t.Rift.Battle.Lesson;
@@ -245,12 +245,13 @@ test('with an avatar power, Granny adds "Your power": the button glows, Got it m
         assert.match(t.$('.b-coach').textContent, new RegExp('Step ' + (i + 1) + ' of ' + steps.length));
         if (step.info) {
             assert.ok(t.$('.b-power.mine').classList.contains('guide-focus'), 'the gold pointer is on the power button');
+            assert.match(t.$('.b-power.mine .guide-pointer').textContent, /Click your power/);
+            assert.equal(t.$('.b-coach-ok'), null, 'no Got it button: the pointer flow goes on');
             assert.equal(t.spoken.at(-1).text, step.text);
             const before = t.handle.state;
             t.$('.b-power.mine').click();
             assert.equal(t.handle.state, before, 'the power is not used in the lesson');
-            t.$('.b-coach-ok').click();
-            assert.equal(t.handle.state, before, 'Got it makes no move');
+            assert.equal(t.handle.step, i + 1, 'the click moves the lesson on');
             return;
         }
         perform(t, step.expect);

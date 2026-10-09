@@ -3,7 +3,8 @@
  * The battle screen runs it in guide mode (js/screens/battle.js, js/screens/battle-lesson.js).
  *
  * Each step: { title, text, label, expect, replies, compare? }
- *   info     an explain-only step (expect { type: 'info' }): no move, the learner presses Got it
+ *   info     an explain-only step (expect { type: 'info' }): no move; the learner clicks the pointed-at
+ *            power button (a Got it button only if that button is missing)
  *   expect   the ONE action the learner must take (matched on every key it lists)
  *   replies  actions applied afterwards with a visible pause (Granny's turn, and the
  *            learner's end where the step says so), and { say } lines Granny speaks between
@@ -127,8 +128,10 @@
     ];
 
     // Granny points at the learner's own power button (only when there is one).
-    const powerStep = { title: 'Your power', label: 'Got it', info: true, expect: { type: 'info' }, replies: [],
-        text: 'See the round button by your portrait? That is your power. Every avatar has a different one. It costs energy, then rests for a few turns. Point at it to read yours. Today we won\'t use it. Press Got it.' };
+    // No Got it button (the teacher's playtest: it was the one step that broke the pointer flow):
+    // the gold pointer sits on the power button, and clicking it moves on without using it.
+    const powerStep = { title: 'Your power', label: 'Click your power', info: true, expect: { type: 'info' }, replies: [],
+        text: 'The round button by your portrait is your power. Every avatar has a different one. It costs energy, then rests for a few turns. Point at it to read yours. Today we won\'t use it. Click it to go on.' };
 
     function team(ids, prefix) {
         return ids.map((species, i) => ({ uid: prefix + i, species, loaner: true, injuries: [], scars: [], powerDelta: 0, warped: null, trophyOf: null }));

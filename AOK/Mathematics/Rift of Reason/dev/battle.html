@@ -24,6 +24,7 @@
     Developer bench for the battle screen. Open dev/battle.html from the game folder.
     ?mode=practice|trainer|boss|ghost&ai=normal|competent|expert&seed=abc   (easy/hard still work)
     Hero powers: ?p0=<power id>|none&t0=<tweak>  (you), ?p1=<power id>|none|auto&t1=<tweak>  (them; auto = the trainer's colour)
+    Granny's Spare Axiom in your opening hand: ?spare=1
 -->
 <div class="bench">
     <header>
@@ -123,7 +124,7 @@
             opponent,
             seed: $('seed').value,
             // The Bag: ?bag=tonic,ward (default) or ?bag= for none.
-            player: { team: myTeam, items: myItems, axioms: ['age-of-wonder'], bag: (q.get('bag') == null ? 'tonic,ward' : q.get('bag')).split(',').filter(Boolean), power: pickPower(0, myTeam) },
+            player: { team: myTeam, items: myItems, axioms: ['age-of-wonder'], bag: (q.get('bag') == null ? 'tonic,ward' : q.get('bag')).split(',').filter(Boolean), power: pickPower(0, myTeam), ownAxioms: q.get('spare') ? ['spare-axiom'] : [] },
             onEnd(result) {
                 console.log('battle result', result);
                 msg(`Result: ${result.outcome} in ${result.turns} turns` + (result.fate ? `; fate: ${result.fate.log.join(' ')}` : ''));

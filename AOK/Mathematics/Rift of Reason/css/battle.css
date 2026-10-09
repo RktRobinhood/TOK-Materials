@@ -177,6 +177,8 @@
     background: radial-gradient(ellipse at center, rgba(242, 182, 50, 0.25), transparent 70%); }
 .b-fate-now-tag { margin-top: -6px; font-size: 9px; font-weight: 800; letter-spacing: 0.08em; color: var(--ink); background: var(--gold); border-radius: 4px; padding: 0 3px; }
 .b-fate-groove { position: absolute; left: 0; right: 0; top: 50%; height: 24px; transform: translateY(-50%); background: center / 100% 100% no-repeat; pointer-events: none; }
+/* ui/fate-track is 1000×104 with a 120 px cap at each end: the caps are sliced off at their own aspect (28 px tall → 32 px wide). */
+.b-fate-track.art .b-fate-groove { height: 28px; box-sizing: border-box; border-style: solid; border-width: 0 32px; border-image-slice: 0 120 fill; border-image-width: 0 32px; border-image-repeat: stretch; }
 .b-fate-track:not(.art) .b-fate-groove { height: 8px; border-radius: 4px; background: linear-gradient(#2a2238, #463a5c); border: 1px solid #b08a3a; }
 .b-fs { position: relative; height: 100%; display: grid; place-items: center; }
 .b-fs::before { content: ''; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; background: #1b1428; }

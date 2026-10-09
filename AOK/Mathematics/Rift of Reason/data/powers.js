@@ -5,7 +5,8 @@
  *
  * Rift.data.powers[id] = {
  *   name, colour, kind: 'board' (acts on creatures) | 'other' (rules, Fate, plays, hand, hearts),
- *   cost (energy), recharge (own turns it skips after use), target? (Engine.targetsFor spec),
+ *   cost (energy), minCost? (no tweak takes the energy cost below it), recharge (own turns it skips
+ *   after use), target? (Engine.targetsFor spec),
  *   text, deeper? (full text with the Deeper tweak), broader? (extra sentence with Broader),
  *   filter?(s, cid, H, m), usable?(s, p, H, m), run(api, p, target, m), choose?(api, p, choice, req, m),
  *   ai?(s, p, target, H, m) → extra score for the AI (what its one-ply look can't see),
@@ -30,6 +31,7 @@
     Rift.data = Rift.data || {};
 
     const SEEN = ['guard', 'shield', 'elusive'];
+    const SEEN_DEEPER = SEEN.concat('swift'); // Call It Out Deeper (#53: "can't attack next turn" was too strong)
     const cap = w => w[0].toUpperCase() + w.slice(1);
     const list = names => (names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0] || '');
     const axName = id => ((Rift.data.axioms || {})[id] || { name: id }).name;
@@ -149,6 +151,8 @@
         },
         'night-sight': {
             name: 'Night Sight', colour: 'perception', kind: 'other', cost: 2, recharge: 2,
+            // Never usable on turn 1 (#53: Cheap at cost 1 made the tax cost the opponent a whole turn).
+            minCost: 2,
             text: 'See the opponent\'s hand until your next turn. Their next card costs 1 more.',
             deeper: 'See the opponent\'s hand until your next turn. Their next 2 cards cost 1 more.',
             broader: 'Also see the top card of their deck.',
@@ -177,13 +181,15 @@
             name: 'What If?', colour: 'imagination', kind: 'board', cost: 0, recharge: 2, target: 'any-creature',
             text: 'Swap a creature\'s attack and health.',
             deeper: 'Swap a creature\'s attack and health, then give it +1 attack.',
-            broader: 'Also draw a card.',
-            filter: (s, cid, H, m) => m.deeper || H.attack(s, cid) !== H.health(s, cid),
+            broader: 'Also +1 health.',
+            filter: (s, cid, H, m) => m.deeper || m.broader || H.attack(s, cid) !== H.health(s, cid),
             run(api, p, target, m) {
                 api.swapStats(target);
+                // Broader first, so a 0-attack creature (swapped to 0 health) lives on with 1.
+                if (m.broader && api.s.cards[target]) api.buff(target, 0, 1, 'What If?');
                 if (m.deeper && api.s.cards[target] && api.H.health(api.s, target) > 0) api.buff(target, 1, 0, 'What If?');
-                api.emit({ t: 'power', player: p, text: 'What If?: ' + api.name(target) + ' swaps its attack and health' + (m.deeper ? ', then gets +1 attack' : '') + '.' });
-                if (m.broader) api.draw(p);
+                const extra = [m.deeper ? '+1 attack' : '', m.broader ? '+1 health' : ''].filter(Boolean);
+                api.emit({ t: 'power', player: p, text: 'What If?: ' + api.name(target) + ' swaps its attack and health' + (extra.length ? ', then gets ' + extra.join(' and ') : '') + '.' });
             },
         },
         brainstorm: {
@@ -252,13 +258,12 @@
         'call-it-out': {
             name: 'Call It Out', colour: 'language', kind: 'board', cost: 2, recharge: 2, target: 'enemy-creature-seen',
             text: 'An enemy creature loses Guard, Shield and Elusive.',
-            deeper: 'An enemy creature loses Guard, Shield and Elusive, and can\'t attack next turn.',
+            deeper: 'An enemy creature loses Guard, Shield, Elusive and Swift.',
             broader: 'Also draw a card.',
-            filter: (s, cid, H, m) => m.deeper || H.keywordsOf(s, cid).some(k => SEEN.includes(k)),
+            filter: (s, cid, H, m) => H.keywordsOf(s, cid).some(k => (m.deeper ? SEEN_DEEPER : SEEN).includes(k)),
             run(api, p, target, m) {
-                const had = api.stripKeywords(target, SEEN);
-                if (m.deeper) api.freeze(target);
-                api.emit({ t: 'power', player: p, text: 'Call It Out: ' + api.name(target) + ' loses ' + (had.length ? list(had.map(cap)) : 'nothing') + (m.deeper ? ' and can\'t attack next turn' : '') + '.' });
+                const had = api.stripKeywords(target, m.deeper ? SEEN_DEEPER : SEEN);
+                api.emit({ t: 'power', player: p, text: 'Call It Out: ' + api.name(target) + ' loses ' + (had.length ? list(had.map(cap)) : 'nothing') + '.' });
                 if (m.broader) api.draw(p);
             },
         },
@@ -315,7 +320,7 @@
     Rift.data.powerTweaks = {
         quick: { name: 'Quick', text: 'Recharge −1, cost +1 energy.' },
         cheap: { name: 'Cheap', text: 'Cost −1 energy, recharge +1.' },
-        blood: { name: 'Blood price', text: 'Costs 1 heart instead of energy.' },
+        blood: { name: 'Blood price', text: 'Costs hearts instead of energy: 1 heart per 2 energy (at least 1).' },
         deeper: { name: 'Deeper', text: 'A stronger version, recharge +1.' },
         broader: { name: 'Broader', text: 'An extra effect, cost +1 energy.' },
     };

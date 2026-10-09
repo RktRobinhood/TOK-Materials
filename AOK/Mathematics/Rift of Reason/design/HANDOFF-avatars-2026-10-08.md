@@ -43,7 +43,8 @@ The teacher shut the laptop; all agents were stopped mid-task and their partial 
 - Approved code done: Ch3 Newsstand–Plaza link removed and Tower Road behind the Tribunal; village fixed/hidden-count mode (Square, Hall stage 3, core trial 1); Copy and Pip clocks; core trials; four new Tribunal story cases.
 - Understudies Tally, Achilles, Kuku, Rubberstamp are cast (voices); their deaths arm once their art exists.
 - Full suite: 577 pass, 0 fail, 1 skip.
-- **Not built yet:** side stories (`SIDE-STORIES.md`, need the negotiation encounter); the negotiation system (the Ch2 Mayor scene uses a dialogue stand-in); power tweaks (#53); a `--script` filter for voice recording; the Copy speaking in the player's own voice; Spare Axiom card; Hall stage skip.
+- **Not built yet:** side stories (`SIDE-STORIES.md`, need the negotiation encounter); the negotiation system (the Ch2 Mayor scene uses a dialogue stand-in); power tweaks (#53); a `--script` filter for voice recording; the Copy speaking in the player's own voice; Hall stage skip.
+- **Built since:** Granny's Spare Axiom (#60): the player's own rule card (cost 1, clear every rule, draw 1), in hand at the start of every battle with the `spare-axiom` flag (`data/axioms.js`, `js/ui/battles.js`, `tools/test/spare-axiom.test.mjs`). Art: Stage 13.35.
 - Leftover optional line fixes: lesson 4 review r2 items (tower line in say(), Tally's box note, "…Why?" give-away).
 - Untracked OneDrive conflict copy `js/puzzles/tribunal-DESKTOP-MFKNDVN.js` (differs from the committed file); the teacher can delete it.
 - Voices: record per `PRODUCTION-TODO.md`; art per `PRODUCTION-TODO.md` and Stage 13.

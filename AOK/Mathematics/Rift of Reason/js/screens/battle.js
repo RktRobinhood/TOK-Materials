@@ -8,9 +8,10 @@
  *   seed,
  *   player?: { name, team, tactics, axioms, items, consumables, bag?, art?, hearts? },  // default: the save's deck
  *                           bag: item ids brought into the battle (the Bag; at most two, one per turn)
+ *                           ownAxioms?: own rule cards in the opening hand (Granny's Spare Axiom; js/ui/battles.js)
  *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
  *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
- *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
+ *   story?: true,           // a safe story match (Syllo's practice match): its end screen says so
  *   guide?: { steps: [{ title, text, label, expect, replies, compare? }], create?() → state, coach? },
  *   onEnd(result),
  * });
@@ -115,7 +116,7 @@
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
-        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
     };
     // The basic rule of the other categories, in a few words (what a new rule card replaces).
     const BASIC_WORDS = {
@@ -204,6 +205,8 @@
             bag: given.bag || [],
             // Hero power ({ id, tweaks }, data/powers.js) chosen by the launcher (js/ui/battles.js).
             power: given.power || null,
+            // Own rule cards for the opening hand (Granny's Spare Axiom), chosen by the launcher.
+            ownAxioms: given.ownAxioms || [],
             art: given.art || (save && save.avatar && save.avatar.type && Rift.avatarArt ? Rift.avatarArt(save.avatar, 'neutral') : null),
         };
     }
@@ -231,7 +234,7 @@
         let state = guide && guide.create ? guide.create() : p.initialState ? p.initialState : E.createBattle({
             seed,
             players: [
-                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag, power: me.power },
+                { id: 'you', name: 'You', team: me.team, tactics: me.tactics, axioms: me.axioms, consumables: me.consumables, hearts: me.hearts, bag: me.bag, power: me.power, ownAxioms: me.ownAxioms },
                 { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts, power: opp.power || null },
             ],
             axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
@@ -462,7 +465,8 @@
             if (!ev && !reset) return;
             if (ev) {
                 const ax = (Rift.data.axioms || {})[ev.id] || { name: ev.id };
-                const by = ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
+                const by = ev.clear ? (ev.player === ME ? 'You clear every rule' : oppName + ' clears every rule')
+                    : ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
                 const what = (RULE_LABEL[ax.category] || ax.category) + ': ' + (ax.short || ax.name);
                 showReveal(el('div.b-reveal-rule', {}, [axiomCardEl(ev.id, { size: 'big' }), el('div.b-reveal-what', { text: what })]), by + '!', RULE_SHOW, 'rule');
             } else {
@@ -754,7 +758,7 @@
         const isBasic = ax => !!(ax && ax.basic);
         // Active rule cards that really change a basic rule (engine: changedAxioms).
         const changedRules = () => (E.changedAxioms ? E.changedAxioms(state) : E.activeAxioms(state).filter(ax => !isBasic(ax)));
-        const axiomKind = ax => (isBasic(ax) ? 'Back to normal: ' + (ax.category || 'rule') : (ax.category || 'rule') + ' rule');
+        const axiomKind = ax => (isBasic(ax) ? 'Back to normal: ' + (ax.category || 'rule') : ax.own ? 'Your own card' : (ax.category || 'rule') + ' rule');
 
         // A card element. o: { size, classes, onclick, drag, target, guide }
         function cardEl(cid, o) {
@@ -835,7 +839,9 @@
             const on = E.activeAxioms(state).some(a => a.id === id);
             return el('div.b-notes', {}, [
                 el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
-                isBasic(ax)
+                ax.clearRules
+                    ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
+                    : isBasic(ax)
                     ? el('div.b-note-line', {}, [el('b', { text: 'Back to normal: ' + (ax.category || 'rule') + '. ' }), 'It puts the basic ' + (ax.category || '') + ' rule back for BOTH players.'])
                     : el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (ax.category || 'rule') + '): ' }), on
                         ? 'active now for BOTH players.'
@@ -1138,7 +1144,7 @@
         function powerBig(id, pi) {
             const st = E.powerStatus(state, pi);
             const x = st && st.id === id ? st : Object.assign({ cost: powerDef(id).cost, heartCost: 0, recharge: powerDef(id).recharge }, Rift.PowerView ? Rift.PowerView.numbers(id) : {}, { name: powerName(id), text: powerDef(id).text });
-            const cost = x.heartCost ? x.heartCost + ' heart' : x.cost ? x.cost + ' energy' : 'free';
+            const cost = x.heartCost ? x.heartCost + ' heart' + (x.heartCost === 1 ? '' : 's') : x.cost ? x.cost + ' energy' : 'free';
             return el('div.b-power-big' + (pi === ME ? '.mine' : '.theirs'), {}, [
                 el('div.b-power-big-ring', {}, [powerIcon(id)]),
                 el('div.b-power-big-who', { text: (pi === ME ? 'Your' : oppName + '\'s') + ' power' }),
@@ -1159,7 +1165,7 @@
             const chosen = mine && ui.sel && ui.sel.kind === 'power';
             const heart = st.heartCost > 0;
             const costArt = bg(heart ? 'ui/heart-full' : 'ui/stat-cost');
-            const costText = heart ? st.heartCost + ' heart' : st.cost ? st.cost + ' energy' : 'free';
+            const costText = heart ? st.heartCost + ' heart' + (st.heartCost === 1 ? '' : 's') : st.cost ? st.cost + ' energy' : 'free';
             const why = mine ? powerWhy(st, L) : '';
             const stateLine = mine
                 ? (can ? (st.target ? 'Click it, then click a glowing target.' : 'Click to use it.') : 'Not now: ' + why)
@@ -1183,6 +1189,8 @@
             return node;
         }
         function clickPower(L) {
+            // The lesson's "Your power" step: the click is the step, the power is not used.
+            if (guide && step() && step().info) { infoDone(); return; }
             const acts = L.filter(a => a.type === 'power');
             if (!acts.length) { ui.sel = null; setNote(powerWhy(E.powerStatus(state, ME), L)); return; }
             if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
@@ -1373,7 +1381,7 @@
                 if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
                 // A rule card that would change nothing (that rule is already on) says so on the card.
-                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: 'Already the rule' })); node.title = whyNotAxiomRule(id); }
+                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 else {
                     const tlr = E.timeline(state)[0];
                     if (tlr && tlr.type === 'reset' && tlr.turns <= 2) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset in ' + tlr.turns + '!' }));
@@ -1572,7 +1580,8 @@
             put(box,
                 el('div.b-fate-label', {}, [el('strong', { text: 'Fate' }), el('span', { text: 'turns' })]),
                 el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), {}, [
-                    el('div.b-fate-groove', { style: bg('ui/fate-track') }),
+                    // Nine-slice: the end caps keep their shape, only the plain bar between them stretches.
+                    el('div.b-fate-groove', { style: (u => (u ? { borderImageSource: 'url("' + u + '")' } : null))(artUrl('ui/fate-track')) }),
                     reel = el('div.b-fate-reel', {}, spaces),
                     el('div.b-fate-now', {}, [el('span.b-fs-now', { style: bg('ui/fate-marker'), text: has('ui/fate-marker') ? '' : '⧗' }), el('span.b-fate-now-tag', { text: 'NOW' })]),
                 ]),
@@ -1583,15 +1592,34 @@
             slideReel(reel, shift);
             tipFor(box.querySelector ? box.querySelector('.b-fate-label') || box : box, 'fate', 'Fate track', 'Each End turn moves every event 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, or a reset to the basic rules.');
         }
-        // Turns passed since the last paint: the reel slides that many spaces left (at most 3).
+        // Turns passed since the last paint: the reel slides that many spaces left (at most 3), one space
+        // at a time with a short stop on each ("tick, tick"), slow enough to follow. The screen repaints the
+        // reel on every move, so the slide is kept in ui.fateSlide and picked up again by each new reel
+        // (before, a repaint mid-slide threw it away and the reel seemed to jump). Calm motion steps
+        // space by space without sliding.
+        const FATE_STEP = 700, FATE_HOLD = 220;
         function slideReel(reel, shift) {
             const was = ui.fateTurn;
             if (!shift) ui.fateTurn = state.turn;
-            if (!reel || shift || was == null || state.turn <= was || !reel.animate) return;
-            const d = Math.min(3, state.turn - was);
+            if (!reel || shift || !reel.animate) return;
+            const now = root.performance && root.performance.now ? root.performance.now() : Date.now();
+            const run = ui.fateSlide && now - ui.fateSlide.start < ui.fateSlide.d * FATE_STEP ? ui.fateSlide : null;
+            if (was != null && state.turn > was) {
+                // Spaces still to go in a slide that is under way are added to the new one.
+                const left = run ? run.d - Math.floor((now - run.start) / FATE_STEP) : 0;
+                ui.fateSlide = { d: Math.min(3, state.turn - was + left), start: now };
+            } else if (!run) { ui.fateSlide = null; return; }
+            const s = ui.fateSlide, unit = 100 / (FATE_PAST + FATE_AHEAD + 1), calm = calmMotion();
+            const at = i => ({ transform: 'translateX(' + ((s.d - i) * unit) + '%)' });
+            const frames = [Object.assign(at(0), { offset: 0 })];
+            for (let i = 1; i <= s.d; i++) {
+                const end = i / s.d, moved = (i * FATE_STEP - FATE_HOLD) / (s.d * FATE_STEP);
+                frames[frames.length - 1].easing = calm ? 'steps(1, end)' : 'ease-in-out';
+                frames.push(Object.assign(at(i), { offset: moved }), Object.assign(at(i), { offset: end }));
+            }
             try {
-                if (calmMotion()) reel.animate([{ opacity: 0.2 }, { opacity: 1 }], { duration: 500, easing: 'ease-out' });
-                else reel.animate([{ transform: 'translateX(' + (d * 100 / (FATE_PAST + FATE_AHEAD + 1)) + '%)' }, { transform: 'translateX(0)' }], { duration: 650 + 150 * d, easing: 'cubic-bezier(.2,.7,.2,1)' });
+                const anim = reel.animate(frames, { duration: s.d * FATE_STEP, fill: 'backwards' });
+                anim.currentTime = Math.max(0, now - s.start);
             } catch (e) { /* no WAAPI */ }
         }
         // A coming event: the flip (with the rule card that will turn over) or the reset.
@@ -1801,7 +1829,8 @@
                     const ax = Rift.data.axioms[sel.id];
                     const cost = E.axiomCost(state, sel.id);
                     ask.textContent = !a ? ax.name + ' needs ' + cost + ' energy. You have ' + P.energy + '.'
-                        : (isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ' replaces ' + replacedRule(sel.id) + ' for BOTH players.')
+                        : (ax.clearRules ? ax.name + ' puts every basic rule back for BOTH players, then you draw a card.'
+                            : isBasic(ax) ? ax.name + ' puts the basic ' + ax.category + ' rule back for BOTH players.' : ax.name + ' replaces ' + replacedRule(sel.id) + ' for BOTH players.')
                             + resetSoon()
                             + ' Press Play rule, or drag it to the middle row.';
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
@@ -2258,7 +2287,7 @@
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
-                    st && st.info && !ui.busy ? el('button.btn.primary.b-coach-ok', { type: 'button', text: st.label, onclick: infoDone }) : null,
+                    st && st.info && !ui.busy && !nodes.pw0 ? el('button.btn.primary.b-coach-ok',{ type: 'button', text: st.label, onclick: infoDone }) : null,
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
                     iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
                 ]),
@@ -2301,8 +2330,8 @@
             const x = st.expect;
             let focus = null;
             let ring = null;
-            if (x.type === 'info') { focus = nodes.pw0 || null; if (focus) { focus.classList.add('guide-focus'); return; } }
-            if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
+            if (x.type === 'info') focus = nodes.pw0 || null;
+            else if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
             else if (x.type === 'end') focus = nodes.end;
             else if (x.type === 'spark') focus = screen.querySelector ? screen.querySelector('.b-spark') : null;
             else if (x.type === 'choose') focus = nodes.choose && nodes.choose[x.choice];
@@ -2383,7 +2412,8 @@
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).
         const axiomChanges = id => !E.axiomWouldChange || E.axiomWouldChange(state, id);
-        const whyNotAxiomRule = id => 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.';
+        const whyNotAxiomRule = id => (((Rift.data.axioms || {})[id] || {}).clearRules ? 'No rule to clear: every rule is basic now.'
+            : 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.');
         function clickAxiom(id, L) {
             if (!L.some(a => a.type === 'axiom' && a.choice === id)) { setNote(whyNotAxiom(id)); return; }
             ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };

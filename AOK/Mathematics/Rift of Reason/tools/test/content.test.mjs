@@ -68,7 +68,7 @@ test('every puzzle a node uses is registered (chapters that are open)', () => {
 });
 
 test('all fourteen puzzle types have short plain-text rules and worked tutorial steps', () => {
-    assert.equal(Rift.Puzzles.all().length, 14);
+    assert.equal(Rift.Puzzles.all().length, 17);
     for (const p of Rift.Puzzles.all()) {
         assert.ok(p.rules?.length > 0 && p.rules.length <= 5, p.id + ': rules card');
         assert.ok(p.tutorial?.length >= 3 && p.tutorial.length <= 6, p.id + ': tutorial length');

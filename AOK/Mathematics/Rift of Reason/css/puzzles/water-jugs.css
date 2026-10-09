@@ -1,0 +1,45 @@
+/* Granny's Ladles (water jugs). Scoped under .wj; tokens from css/game.css. */
+
+.wj {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(10px, 2vh, 20px) clamp(12px, 2vw, 24px);
+    overflow: auto;
+    color: var(--parchment);
+    background: radial-gradient(ellipse at 50% 120%, rgba(61, 123, 255, 0.2), transparent 60%), var(--night);
+}
+.wj-goal { display: flex; flex-direction: column; gap: 4px; }
+.wj-goal strong { font-family: var(--font-display); font-size: 1.2em; color: var(--gold); }
+
+.wj-jugs { display: flex; gap: clamp(16px, 4vw, 48px); justify-content: center; align-items: flex-end; flex-wrap: wrap; }
+.wj-jug { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 130px; }
+.wj-cap { font-family: var(--font-display); font-weight: 700; }
+.wj-glass {
+    position: relative;
+    width: 84px;
+    border: 3px solid var(--parchment-dim);
+    border-top: none;
+    border-radius: 0 0 22px 22px;
+    overflow: hidden;
+    background: rgba(239, 227, 200, 0.06);
+}
+.wj-water {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 0;
+    background: linear-gradient(rgba(63, 224, 208, 0.75), rgba(61, 123, 255, 0.85));
+    transition: height 0.35s ease;
+}
+.wj-level { font-weight: 700; }
+.wj-hit .wj-level { color: var(--gold); }
+.wj-hit .wj-glass { border-color: var(--gold); }
+.wj-btns { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; max-width: 220px; }
+
+.wj-tools { align-items: center; gap: 8px; justify-content: center; }
+.wj-made { text-align: center; color: var(--parchment-dim); }
+.wj-impossible { align-self: center; max-width: 560px; width: 100%; }
+.wj-reason { text-align: left; white-space: normal; }
+.wj-reason.picked { outline: 2px solid var(--gold); }

@@ -26,6 +26,7 @@ Scores 0–10 against:
 5. **Readable.** Short, plain English for non-native readers (lines usually under about 20 words, no idioms that block understanding). Lines are speakable for the voice recordings.
 6. **Teacher's direction.** Everything in `TEACHER-STORY-NOTES.md` is honoured: solemn aftermath of deaths, recurring antagonists and minions met throughout, villains who may be misjudged, real choices and non-linear reveals.
 7. **Game fit.** Text sets up the puzzle or battle that follows, and gets out of the way when the player wants to play.
+8. **One thread per station (cognitive load).** The teacher's rule (9 October 2026, after five disconnected speakers at the Fair Gate). Count the separate storylines a player meets in one visit to one place, including the tutorials, modals and side-story hooks that pop up there. Several characters are fine, even better, **if they are in one conversation**: each line answers or reacts to the one before ("Morning, Granny! Can't stop, off to polish my trophy!"). It fails when ideas are dropped side by side with no link: someone walks in and announces something unrelated. For each overloaded station, say which thread could (a) move to another time or place where it makes more sense, (b) be turned into an interaction or reply that joins it to the conversation, or (c) be cut. Be strictest at the start of the game and before tutorials, when the player is already learning controls.
 
 ## Critic 3: The editor
 

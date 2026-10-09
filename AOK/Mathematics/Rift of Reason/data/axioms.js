@@ -17,6 +17,13 @@
  *   resolveFight(pa, pb)          → { toAttacker, toDefender } replaces normal fight damage
  *   defenderSurvivesTrade         → if both fighters would fall, the defender keeps 1 health
  *   onFightWon(api, card)         → for a creature that defeated its foe and survived
+ *   own: true                     → a player's OWN card, never in the shared deck (Granny's Spare Axiom).
+ *                                   createBattle player.ownAxioms puts it in that player's opening hand;
+ *                                   once played or discarded it leaves the game.
+ *   clearRules: true              → playing it clears every active rule for BOTH players (back to the
+ *                                   basics, like a Fate reset, but Fate does not move). It never becomes
+ *                                   an active rule itself. Playable only while a rule is changed.
+ *   draws: n                      → after it is played, its player draws n cards from their deck
  */
 (function (root) {
     'use strict';
@@ -306,6 +313,16 @@
         'age-of-observation': spotlight('age-of-observation', 'perception', 'Age of Observation', 'Look first. Theorise later.'),
         'age-of-wonder': spotlight('age-of-wonder', 'imagination', 'Age of Wonder', 'Every proof starts as a guess somebody dared to make.'),
         'age-of-tradition': spotlight('age-of-tradition', 'memory', 'Age of Tradition', 'We have always done it this way. Is that a reason?'),
+
+        // ---- own cards: never in the shared deck ----
+        // Granny's reward for saving her at the Ch2 Hall (flag `spare-axiom`, STORY.md stakes.ch2 tiers 1–2):
+        // the player starts every card battle with it in hand (js/ui/battles.js myDeck → ownAxioms).
+        'spare-axiom': {
+            short: 'Clear all rules, draw 1',
+            name: 'Granny\'s Spare Axiom', category: 'reset', cost: 1, own: true, clearRules: true, draws: 1,
+            text: 'Clear every rule in play. Draw a card.',
+            flavour: 'When the rules get silly, go back to what you know.',
+        },
     };
 
     Object.entries(axioms).forEach(([id, a]) => {

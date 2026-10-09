@@ -175,6 +175,10 @@
         const stars = Rift.clamp(o.stars || 1, 1, 3);
         const base = n.type === 'boss' ? 0.75 : (n.type === 'miniboss' ? 0.65 : 0.5);
         const chance = Math.round((base + (stars - 1) * 0.075) * 1000) / 1000;
+        // A side-story visitor (flag visitor:<species>) turns up at your next win until you own one.
+        const visitor = Object.keys(state.flags || {}).filter(k => k.startsWith('visitor:') && state.flags[k]).map(k => k.slice(8))
+            .find(sp => Rift.data.creatures[sp] && !(state.creatures || []).some(c => c.species === sp));
+        if (visitor) return { species: visitor, chance: 1, visitor: true };
         const weights = spawnWeights(state, n, o);
         const species = Object.keys(weights).length && rng.chance(chance) ? rng.weighted(weights) : null;
         return { species, chance };

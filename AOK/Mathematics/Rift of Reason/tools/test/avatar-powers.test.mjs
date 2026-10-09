@@ -189,7 +189,7 @@ test('Night Sight: see the hand until my next turn; their next card costs 1 more
     assert.equal(d.players[1].tax, 2);
 });
 
-test('What If?: swaps attack and health (Deeper +1 attack, Broader draws)', () => {
+test('What If?: swaps attack and health (Deeper +1 attack, Broader +1 health)', () => {
     let s = powered('what-if');
     onBoard(s, 'p1c0');
     stats(s, 'p1c0', 1, 3);
@@ -201,8 +201,17 @@ test('What If?: swaps attack and health (Deeper +1 attack, Broader draws)', () =
     stats(d, 'p0c0', 1, 3);
     d = act(d, { type: 'power', target: 'p0c0' });
     assert.equal(atk(d, 'p0c0'), 4);
-    assert.equal(hp(d, 'p0c0'), 1);
-    assert.equal(d.players[0].hand.length, 1);
+    assert.equal(hp(d, 'p0c0'), 2);
+    assert.equal(d.players[0].hand.length, 0, 'no card drawn');
+    // Broader: a 0-attack creature lives on with 1 health; equal stats are a target too.
+    let b = powered('what-if', ['broader']);
+    onBoard(b, 'p0c0', 'p0c1');
+    stats(b, 'p0c0', 0, 3);
+    stats(b, 'p0c1', 2, 2);
+    assert.ok(powerActs(b).some(a => a.target === 'p0c1'));
+    b = act(b, { type: 'power', target: 'p0c0' });
+    assert.ok(b.players[0].board.includes('p0c0'));
+    assert.equal(hp(b, 'p0c0'), 1);
 });
 
 test('Brainstorm: +1 card play this turn (Deeper +2, Broader +1 energy)', () => {
@@ -252,16 +261,18 @@ test('Hold That Thought: move Fate 1 space and draw a card (Deeper up to 2, Broa
     assert.equal(E.powerStatus(powered('hold-that-thought'), 0).why, 'useless', 'no Fate track');
 });
 
-test('Call It Out strips Guard, Shield and Elusive (Deeper: can\'t attack next turn)', () => {
-    let s = powered('call-it-out', [], { p1: ['lobstorian', 'astrophysicat'] });
-    onBoard(s, 'p1c0', 'p1c1');
+test('Call It Out strips Guard, Shield and Elusive (Deeper: Swift too)', () => {
+    let s = powered('call-it-out', [], { p1: ['lobstorian', 'astrophysicat', 'speedcheeta'] });
+    onBoard(s, 'p1c0', 'p1c1', 'p1c2');
     same(powerActs(s).map(a => a.target), ['p1c0'], 'only creatures with those keywords');
     s = act(s, { type: 'power', target: 'p1c0' });
     assert.ok(!E.keywordsOf(s, 'p1c0').includes('guard'));
-    let d = powered('call-it-out', ['deeper'], { p1: ['astrophysicat'] });
-    onBoard(d, 'p1c0');
-    d = act(d, { type: 'power', target: 'p1c0' });
-    assert.equal(d.cards.p1c0.frozen, true);
+    let d = powered('call-it-out', ['deeper'], { p1: ['astrophysicat', 'speedcheeta'] });
+    onBoard(d, 'p1c0', 'p1c1');
+    same(powerActs(d).map(a => a.target), ['p1c1'], 'Deeper: a Swift creature is a target');
+    d = act(d, { type: 'power', target: 'p1c1' });
+    assert.ok(!E.keywordsOf(d, 'p1c1').includes('swift'));
+    assert.ok(!d.cards.p1c1.frozen, 'it can still attack');
 });
 
 test('Fine Print: lose 1 heart, draw (Deeper 2 cards, Broader +1 energy); never the last heart', () => {
@@ -305,8 +316,14 @@ test('tweaks: Quick, Cheap and Blood price change the numbers, never below 0', (
     // Never below 0: a cost-0 power made Cheap, a recharge-0 power made Quick.
     const free = Object.keys(Rift.data.powers).find(id => P(id).cost === 0 && P(id).recharge === 0 && P(id).colour !== 'emotion');
     same([st(free, ['cheap']).cost, st(free, ['quick']).recharge], [0, 0]);
-    const b = st('lantern', ['blood', 'broader']);
-    same([b.cost, b.heartCost], [0, 1]);
+    // Blood price: 1 heart per 2 energy it would cost (at least 1), after the other tweaks.
+    same([st('lantern', ['blood']).cost, st('lantern', ['blood']).heartCost], [0, 1]);
+    same(st('lantern', ['blood', 'broader']).heartCost, 2, 'Lantern Broader would cost 3');
+    same(st('close-the-proof', ['blood']).heartCost, 2, 'Close the Proof would cost 3');
+    same(st('what-if', ['blood']).heartCost, 1, 'a free power still costs 1 heart');
+    // Night Sight's cost floor of 2: Cheap can't take it lower.
+    same([st('night-sight', ['cheap']).cost, st('night-sight', ['cheap']).recharge], [2, P('night-sight').recharge + 1]);
+    same(st('night-sight', ['broader', 'cheap']).cost, 2);
     let s = powered('lantern', ['blood']);
     onBoard(s, 'p1c0');
     s = act(s, { type: 'power', target: 'p1c0' });
@@ -316,6 +333,14 @@ test('tweaks: Quick, Cheap and Blood price change the numbers, never below 0', (
     onBoard(low, 'p1c0');
     low.players[0].hearts = 1;
     assert.equal(E.powerStatus(low, 0).why, 'hearts');
+    let c = powered('close-the-proof', ['blood']);
+    onBoard(c, 'p1c0');
+    c.cards.p1c0.damage = 2;
+    c.players[0].hearts = 2;
+    assert.match(E.powerStatus(c, 0).note, /costs 2 hearts/);
+    c.players[0].hearts = 10;
+    c = act(c, { type: 'power', target: 'p1c0' });
+    assert.equal(c.players[0].hearts, 8, 'two hearts');
     // Recharge 0: ready again next own turn, still once per turn.
     let q = powered(free);
     q = act(q, { type: 'power' });

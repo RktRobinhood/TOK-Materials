@@ -378,6 +378,7 @@
     }
     function withAxiom(s, id) {
         const ax = Rift.data.axioms[id];
+        if (ax.clearRules) return withRules(s, {}); // Granny's Spare Axiom: every rule back to the basics
         return withRules(s, Object.assign({}, s.axioms.active, { [ax.category]: id }));
     }
 
@@ -508,9 +509,10 @@
         let v = m.def.ai ? m.def.ai(s, me, a.target || null, E().H, m) || 0 : 0;
         // Blood price (#53): the one-ply score prices the heart above most power effects, so the AI
         // hardly paid it. Like Fine Print: with hearts to spare a heart is cheap; low on hearts it is not.
+        // Per heart paid (Close the Proof costs 2), judged by the hearts left after paying.
         if (m.heartCost > 0 && !E().H.rules(s).reverseHearts) {
-            const h = s.players[me].hearts;
-            v += h >= 8 ? 0.6 : h >= 6 ? 0.2 : -0.5;
+            const left = s.players[me].hearts - m.heartCost;
+            v += m.heartCost * (left >= 7 ? 0.6 : left >= 5 ? 0.2 : -0.5);
         }
         return v;
     }
