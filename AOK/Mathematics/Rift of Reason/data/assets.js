@@ -535,6 +535,7 @@
         'scene/map-ch3': { file: 'scenes/map-ch3.webp', w: 1600, h: 900, small: 'scenes/map-ch3-small.webp' },
         'scene/map-ch4': { file: 'scenes/map-ch4.webp', w: 1600, h: 900, small: 'scenes/map-ch4-small.webp' },
         'scene/neon-plaza': { file: 'scenes/neon-plaza.webp', w: 1600, h: 900, small: 'scenes/neon-plaza-small.webp' },
+        'scene/newsstand-debate': { file: 'scenes/newsstand-debate.webp', w: 1600, h: 900, small: 'scenes/newsstand-debate-small.webp' },
         'scene/oracle-chamber': { file: 'scenes/oracle-chamber.webp', w: 1600, h: 900, small: 'scenes/oracle-chamber-small.webp' },
         'scene/rift-pass': { file: 'scenes/rift-pass.webp', w: 1600, h: 900, small: 'scenes/rift-pass-small.webp' },
         'scene/road-bridge': { file: 'scenes/road-bridge.webp', w: 1600, h: 900, small: 'scenes/road-bridge-small.webp' },

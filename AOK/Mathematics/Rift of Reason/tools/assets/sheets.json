@@ -112,6 +112,7 @@
         "stakes-ch2.png": {"type":"single","id":"ui/stakes-ch2","class":"panel"},
         "nudge-masks.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/masked","npc/nudge/maskless"]},
         "feast-hall.png": {"type":"scene","id":"scene/feast-hall"},
+        "newsstand-debate.png": {"type":"scene","id":"scene/newsstand-debate"},
         "schoolhouse.png": {"type":"scene","id":"scene/schoolhouse"},
         "bakery-ovens.png": {"type":"scene","id":"scene/bakery-ovens"},
         "hum-charm.png": {"type":"islands","minArea":600,"class":"item","ids":["item/hum-charm","keepsake/granny-charm-glasses"]},
