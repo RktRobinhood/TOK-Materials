@@ -549,6 +549,7 @@
         'scene/stall-gallery': { file: 'scenes/stall-gallery.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-small.webp' },
         'scene/stall-pattern': { file: 'scenes/stall-pattern.webp', w: 1600, h: 900, small: 'scenes/stall-pattern-small.webp' },
         'scene/stall-witness': { file: 'scenes/stall-witness.webp', w: 1600, h: 900, small: 'scenes/stall-witness-small.webp' },
+        'scene/stall-witness-siege': { file: 'scenes/stall-witness-siege.webp', w: 1600, h: 900, small: 'scenes/stall-witness-siege-small.webp' },
         'scene/switch-room': { file: 'scenes/switch-room.webp', w: 1600, h: 900, small: 'scenes/switch-room-small.webp' },
         'scene/title': { file: 'scenes/title.webp', w: 1600, h: 900, small: 'scenes/title-small.webp' },
         'scene/tower-base': { file: 'scenes/tower-base.webp', w: 1600, h: 900, small: 'scenes/tower-base-small.webp' },
