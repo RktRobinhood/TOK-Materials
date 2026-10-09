@@ -522,6 +522,7 @@
         'scene/bakery-ovens': { file: 'scenes/bakery-ovens.webp', w: 1600, h: 900, small: 'scenes/bakery-ovens-small.webp' },
         'scene/battle-table': { file: 'scenes/battle-table.webp', w: 1600, h: 900, small: 'scenes/battle-table-small.webp' },
         'scene/burrow': { file: 'scenes/burrow.webp', w: 1600, h: 900, small: 'scenes/burrow-small.webp' },
+        'scene/campfire-kitchen': { file: 'scenes/campfire-kitchen.webp', w: 1600, h: 900, small: 'scenes/campfire-kitchen-small.webp' },
         'scene/chart-gallery': { file: 'scenes/chart-gallery.webp', w: 1600, h: 900, small: 'scenes/chart-gallery-small.webp' },
         'scene/clock-tower': { file: 'scenes/clock-tower.webp', w: 1600, h: 900, small: 'scenes/clock-tower-small.webp' },
         'scene/core-chamber': { file: 'scenes/core-chamber.webp', w: 1600, h: 900, small: 'scenes/core-chamber-small.webp' },
