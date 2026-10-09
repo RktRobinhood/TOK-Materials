@@ -37,7 +37,7 @@
         n: 7,
         title: 'Syllo\'s Recruitment Drive',
         lesson: 3,
-        station: 'stall-gallery',
+        station: 'stall-gallery', scene: 'scene/stall-gallery-drive',
         teaser: 'A drum at the Fair. Half the Fair is marching in step.',
         aside: { s: 'narrator', t: 'Someone at the Fair is drumming. Half the Fair is marching to it.' },
         clock: {
@@ -268,7 +268,7 @@
         n: 8,
         title: 'The Headline Debate',
         lesson: 3,
-        station: 't-newsstand',
+        station: 't-newsstand', scene: 'scene/newsstand-debate',
         teaser: 'A poodle and a puffin are about to debate a headline. The crowd\'s eyes are glowing.',
         aside: { s: 'narrator', t: 'A poodle is furious about a headline. About himself. He looks thrilled.' },
         clock: {

@@ -34,7 +34,7 @@
         n: 1,
         title: 'Siege at the Witness Tent',
         lesson: 1,
-        station: 'stall-witness',
+        station: 'stall-witness', scene: 'scene/stall-witness-siege',
         teaser: 'The Witness Tent is tied shut from inside. Someone is dealing cards.',
         aside: { s: 'narrator', t: 'Madame Mirage\'s tent is tied shut. From the inside. That\'s new.' },
         clock: {
@@ -220,7 +220,7 @@
         n: 2,
         title: 'The Lucky Well',
         lesson: 1,
-        station: 'well',
+        station: 'well', scene: 'scene/wishing-well',
         teaser: 'A queue at the Wishing Well. Coins are going in. Nothing is coming out.',
         aside: { s: 'narrator', t: 'Somebody at the Well is very lucky. Suspiciously lucky.' },
         // Goals in 10 matches after wishing, and in 10 without: always the same.
@@ -373,7 +373,7 @@
         n: 3,
         title: 'The Midday Pie',
         lesson: 1,
-        station: 'campfire',
+        station: 'campfire', scene: 'scene/campfire-kitchen',
         teaser: 'At noon, a pie vanished from the Campfire. At noon yesterday, too.',
         aside: { s: 'narrator', t: 'Pies keep vanishing at the Campfire. Always at noon. Rude.' },
         clock: {

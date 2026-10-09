@@ -37,7 +37,7 @@
         n: 4,
         title: 'The Three Cake Tins',
         lesson: 2,
-        station: 'b-bakery',
+        station: 'b-bakery', scene: 'scene/bakery-ovens',
         teaser: 'Three cake tins in three hot ovens. One holds a cake.',
         aside: { s: 'narrator', t: 'Mrs Crumb is shouting at three ovens. The ovens are winning.' },
         clock: {
@@ -223,7 +223,7 @@
         n: 5,
         title: 'The Silent Pupil',
         lesson: 2,
-        station: 'b-school',
+        station: 'b-school', scene: 'scene/schoolhouse',
         teaser: 'Detention for everyone. Somebody wrote one sentence on the board.',
         aside: { s: 'narrator', t: 'The whole Schoolhouse is in detention. Over one sentence.' },
         clock: {
@@ -412,7 +412,7 @@
         n: 6,
         title: 'Muskrat\'s Launch',
         lesson: 2,
-        station: 'troll-bridge',
+        station: 'troll-bridge', scene: 'scene/road-bridge-rocket',
         teaser: 'A countdown at the Troll Bridge. Muskrat is strapped into his rocket.',
         aside: { s: 'narrator', t: 'Somebody is counting down at the Troll Bridge. Loudly. Towards a river.' },
         setup: rng => ({ abort: rng.int(0, 1) ? 2 : 3 }),

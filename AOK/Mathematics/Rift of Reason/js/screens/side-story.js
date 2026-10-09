@@ -158,7 +158,7 @@
                 finish: null,
             };
 
-            const scene = story.scene || (Rift.Cast ? Rift.Cast.nodeScene(story.station) : null) || 'scene/road-forest';
+            const scene = (story.scene && Rift.Assets.has(story.scene) ? story.scene : null) || (Rift.Cast ? Rift.Cast.nodeScene(story.station) : null) || 'scene/road-forest';
             rootNode.append(Rift.Assets.img(scene, { className: 'scene-bg', label: story.title }));
             const hud = Rift.UI.hud({ back: { label: 'Map', onclick: leave } });
             const spotLayer = el('div.side-spots');
