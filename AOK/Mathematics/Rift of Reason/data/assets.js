@@ -718,6 +718,7 @@
         'ui/fate-marker': { file: 'ui/fate-marker.webp', w: 81, h: 160 },
         'ui/fate-reset': { file: 'ui/fate-reset.webp', w: 154, h: 160 },
         'ui/fate-track': { file: 'ui/fate-track.webp', w: 1000, h: 104 },
+        'ui/feast-poster': { file: 'ui/feast-poster.webp', w: 392, h: 600 },
         'ui/gate-plaque': { file: 'ui/gate-plaque.webp', w: 377, h: 215 },
         'ui/gavel': { file: 'ui/gavel.webp', w: 632, h: 370 },
         'ui/glimmer': { file: 'ui/glimmer.webp', w: 156, h: 160 },
