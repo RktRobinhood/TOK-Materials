@@ -178,9 +178,8 @@
         ], else: [
             { note: 'No screens in here. A sleepy capybara behind the counter slides you a cocoa without a word.' },
             { s: 'narrator', t: 'Quiet. I could almost tell the time.' },
-            { s: 'narrator', t: 'If I ever stop talking, put me somewhere sunny. Just for the warm.', when: PRE },
-            { s: 'pip', e: 'happy', t: 'The cocoa here has a sound argument.' },
             { s: 'granny', hum: true, t: 'I\'m on the Road, dear. Eighteen fifty is behind me. How\'s the rock?', when: '!dead:granny' },
+            { s: 'narrator', t: 'If I ever stop talking, put me somewhere sunny. Just for the warm.', when: PRE },
         ] },
         ACHILLES_ARRIVES,
     ];
@@ -242,6 +241,7 @@
 
     // Beat 6 (required): the Data Lab. Pip, defiant; the crowd posts; Juror One (Quill, back) posts too.
     S['ch3.datalab'] = [{ when: PRE, then: [
+        { note: 'A post on the wall screen: "THE CLERK WORKS FOR THE PROSECUTION."' },
         { s: 'pip', e: 'angry', t: 'I\'m allowed to file for both sides! I checked! Page one!' },
         { note: 'GUILTY VOTES: 48,310. AND CLIMBING.' },
         { note: 'A post on the wall screen: "Rocks can\'t tell time. I\'ve never seen a rock with a watch."' },
@@ -373,7 +373,7 @@
         { s: 'pip', t: 'What\'s your name? For the record.' },
         { s: 'nudge', e: 'surprised', t: '…Nudge. Nobody asks imps.' },
         // The Sundial's one frightened beat, before the court (it read the sentence at the Plaza).
-        { s: 'narrator', t: 'Switched off. Like a screen. …Win, would you? I\'d like one more sunny day.', when: [ALIVE, PRE] },
+        { s: 'narrator', t: 'Nobody asks rocks either. Switched off, like a screen. …Win, would you? I\'d like one more sunny day.', when: [ALIVE, PRE] },
     ];
 
     // ---------------------------------------------------------------- the Tribunal (boss)
@@ -468,6 +468,7 @@
             { play: 'ch3.bargain' },
         ] },
         { when: { all: ['mirage-witness', VOTE_OPEN] }, then: [
+            { note: 'A fortune-teller from the Fair pushes to the front of the gallery.' },
             { s: 'mirage', t: 'Through my ball, darling, I saw it. The sky reached down and took that shadow.' },
             { clock: 'ch3', drain: 1 },
         ] },
@@ -623,7 +624,7 @@
         { s: 'pip', t: 'Another headline on the stand. Press the one that sounds too sure.' },
     ];
     S['station.t-library.intro'] = [
-        { s: 'pip', e: 'thinking', t: 'A proof has been arrested! Check every step. One bad step sinks it.' },
+        { s: 'pip', e: 'thinking', t: 'Mr Fin loves proofs. Here\'s one in the dock. Check every step. One bad step sinks it.' },
     ];
     S['station.t-library.reminder'] = [
         { s: 'pip', t: 'Another proof in the dock. Which step is pretending?' },

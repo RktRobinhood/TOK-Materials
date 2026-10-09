@@ -93,19 +93,18 @@
     S['ch2.soup'] = [
         { prop: 'ui/feast-poster' },
         { s: 'narrator', t: 'Boolesbury, eighteen fifty-something. Every wall says: FEAST OF LAWS. SOUP FOR ALL. BY ORDER OF THE MAYOR.' },
+        { inner: { raven: '"By order of the Mayor." Order. Not "idea". Interesting.' }, when: PRE },
         { s: 'narrator', t: 'One piece short. I feel… cloudier.', when: 'nudgeFled' },
         { s: 'nudge', t: 'Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!', when: ['!nudgeFled', PRE] },
         { s: 'nudge', t: 'Flyers! Feast tonight! Like my mask? Nothing under it. Nothing shadowy.', when: ['nudgeFled', PRE] },
         { s: 'nudge', t: 'Tonight\'s soup: one Granny Axiom! No Granny, no first rules. Engagement!', when: PRE },
-        { s: 'avatar', t: 'Small print: "Thinking Trophy. Predicted winner: nobody." Wrong. Me.', when: PRE },
-        { inner: { raven: '"By order of the Mayor." Order. Not "idea". Interesting.' }, when: PRE },
         HUMPRE('{name}? Big kitchen. Big pot. Don\'t panic. I\'m panicking for both of us.'),
     ];
 
     // ---------------------------------------------------------------- Old Wick's lane
 
     S['ch2.bridge'] = [
-        { s: 'lamplighter', t: 'Evening. Old Wick. I light the lamps. Tonight they want the big stove lit too.' },
+        { s: 'lamplighter', t: 'Evening. Old Wick. They want the feast stove lit. Not till this bridge comes down.' },
     ];
     S['ch2.bridge.win'] = [
         { s: 'lamplighter', t: 'The lamps agree with you. They rarely agree with anyone.' },
@@ -149,6 +148,7 @@
         ], else: [{ play: 'ch2.square.suspect' }] },
     ];
     S['ch2.square.suspect'] = [
+        HUM('The Mayor came down to taste the stock, dear. Said a sentence that ate itself.'),
         { s: 'narrator', t: 'Somebody wants Granny in that soup. Who\'s behind the feast?' },
         { choice: [
             { t: 'The Mayor.', flag: 'suspect', value: 'mayor' },
@@ -162,7 +162,6 @@
         ] },
         { s: 'mayor', e: 'accusing', t: 'I heard that! I\'m behind nothing! I\'m in front of everything!', when: { flag: 'suspect', is: 'mayor' } },
         { s: 'schoolteacher', t: 'A feeling, child? Feelings are not one or zero. Sit up straight.', when: { flag: 'suspect', is: 'quill' } },
-        HUM('The Mayor came down to taste the stock, dear. Said a sentence that ate itself.'),
     ];
 
     // ---------------------------------------------------------------- the first interrogation
@@ -198,9 +197,9 @@
             ] },
         ] },
         { s: 'schoolteacher', t: 'Constable, this one\'s with me. I checked their story. Every row.', when: PRE },
-        { s: 'constable', t: 'If Miss Quill checked it, it\'s checked. Still. A few questions. For the form.', when: PRE },
         { s: 'avatar', e: 'happy', t: 'See? She\'s on my side.', when: PRE },
         { s: 'schoolteacher', t: 'Take my red pencil, child. Mark what\'s wrong. Never write "maybe".', when: PRE },
+        { s: 'constable', t: 'If Miss Quill checked it, it\'s checked. Still. A few questions. For the form.', when: PRE },
     ];
 
     S['ch2.post'] = [
@@ -235,7 +234,8 @@
         { when: { seen: 'ch2.cover' }, then: [
             { s: 'constable', e: 'accusing', t: 'You again. From the top. Harder questions up here.' },
         ], else: [{ play: 'ch2.cover', once: true }] },
-        { s: 'constable', t: 'The feast? The Mayor signed it. For the applause. …I didn\'t say that.' },
+        { s: 'avatar', t: 'One question first. Who ordered the feast?' },
+        { s: 'constable', t: 'The Mayor signed it. For the applause. …I didn\'t say that.' },
         { inner: { owlet: '"The Mayor signed it." Signing is choosing. Write that down. I did.' } },
     ];
     S['ch2.tower.win'] = [
@@ -335,7 +335,7 @@
     // Quill at her best, before the Hall; Mr Gumleaf after it (every playthrough).
     S['ch2.school'] = [
         { when: 'away:schoolteacher', then: [
-            { s: 'gumleaf', t: 'Today\'s lesson, apparently: true or false. No maybes. Wow. She wrote it in capitals.' },
+            { s: 'gumleaf', t: 'Mr Gumleaf. Supply teacher. Today\'s lesson, apparently: true or false. No maybes. In capitals.' },
             { s: 'sweep', e: 'nervous', t: 'I\'m honest, sir!' },
             { s: 'gumleaf', t: 'Saying it doesn\'t prove it, Smudge. An imp would say the same. Sorry. Rules.' },
         ], else: [
@@ -668,7 +668,7 @@
     ];
     S['station.b-school.intro'] = [
         { s: 'schoolteacher', t: 'Today\'s task is on the board. Check every case, child. Guessing is for gamblers.', when: '!away:schoolteacher' },
-        { s: 'gumleaf', t: 'Mr Gumleaf. Supply teacher. Miss Quill left. Through a window. So: the board.', when: 'away:schoolteacher' },
+        { s: 'gumleaf', t: 'Miss Quill left. Through a window. So: the board. Check every case. Apparently.', when: 'away:schoolteacher' },
     ];
     S['station.b-school.reminder'] = [
         { s: 'schoolteacher', t: 'Back to class? Every case, child. No guessing.', when: '!away:schoolteacher' },
@@ -681,7 +681,7 @@
         { s: 'constable', t: 'Again? From the top, then. Same story.' },
     ];
     S['station.b-stairs.intro'] = [
-        { s: 'clockmaker', t: 'One switch hides behind a curtain. The Mayor wanted that. He paid in bread.' },
+        { s: 'clockmaker', t: 'One switch hides behind a curtain. The Mayor wanted that.' },
     ];
     S['station.b-stairs.reminder'] = [
         { s: 'clockmaker', t: 'The hidden switch is still hidden. That\'s its whole job.' },

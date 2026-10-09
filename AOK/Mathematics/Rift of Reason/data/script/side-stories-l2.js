@@ -39,7 +39,7 @@
         lesson: 2,
         station: 'b-bakery', scene: 'scene/bakery-ovens',
         teaser: 'Three cake tins in three hot ovens. One holds a cake.',
-        aside: { s: 'narrator', t: 'Mrs Crumb is shouting at three ovens. The ovens are winning.' },
+        aside: { s: 'narrator', t: 'Smoke from the bakery. Three ovens, nobody watching. The ovens are winning.' },
         clock: {
             label: 'Oven heat', size: 6, progress: 3,
             warn: [
@@ -225,7 +225,7 @@
         lesson: 2,
         station: 'b-school', scene: 'scene/schoolhouse',
         teaser: 'Detention for everyone. Somebody wrote one sentence on the board.',
-        aside: { s: 'narrator', t: 'The whole Schoolhouse is in detention. Over one sentence.' },
+        aside: { s: 'narrator', t: 'Somewhere a school bell rings. The whole class is in detention. Over one sentence.' },
         clock: {
             label: 'Detention', size: 6, progress: 3,
             warn: [
