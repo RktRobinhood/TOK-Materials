@@ -552,6 +552,7 @@
         'scene/tower-base': { file: 'scenes/tower-base.webp', w: 1600, h: 900, small: 'scenes/tower-base-small.webp' },
         'scene/tribunal': { file: 'scenes/tribunal.webp', w: 1600, h: 900, small: 'scenes/tribunal-small.webp' },
         'scene/village-square': { file: 'scenes/village-square.webp', w: 1600, h: 900, small: 'scenes/village-square-small.webp' },
+        'scene/wishing-well': { file: 'scenes/wishing-well.webp', w: 1600, h: 900, small: 'scenes/wishing-well-small.webp' },
         'tactic/big-claims': { file: 'tactic/big-claims.webp', w: 342, h: 358 },
         'tactic/clear-view': { file: 'tactic/clear-view.webp', w: 478, h: 460 },
         'tactic/clockwork': { file: 'tactic/clockwork.webp', w: 361, h: 379 },
