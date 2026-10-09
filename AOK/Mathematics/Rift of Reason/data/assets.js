@@ -492,6 +492,7 @@
         'npc/villager-sweep/nervous': { file: 'cast/villager-sweep-nervous.webp', w: 215, h: 240 },
         'npc/villager-sweep/neutral': { file: 'cast/villager-sweep-neutral.webp', w: 195, h: 240 },
         'npc/villager-sweep/unmasked': { file: 'cast/villager-sweep-unmasked.webp', w: 271, h: 317 },
+        'prop/cake-tin-labels': { file: 'prop/cake-tin-labels.webp', w: 600, h: 191 },
         'prop/chimney-grate': { file: 'prop/chimney-grate.webp', w: 518, h: 467 },
         'prop/dented-tin': { file: 'prop/dented-tin.webp', w: 351, h: 320 },
         'prop/oven-timer': { file: 'prop/oven-timer.webp', w: 507, h: 388 },
