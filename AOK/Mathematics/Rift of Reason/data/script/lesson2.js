@@ -91,6 +91,7 @@
         ], else: [{ play: 'ch2.soup' }] },
     ];
     S['ch2.soup'] = [
+        { prop: 'ui/feast-poster' },
         { s: 'narrator', t: 'Boolesbury, eighteen fifty-something. Every wall says: FEAST OF LAWS. SOUP FOR ALL. BY ORDER OF THE MAYOR.' },
         { s: 'narrator', t: 'One piece short. I feel… cloudier.', when: 'nudgeFled' },
         { s: 'nudge', t: 'Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!', when: ['!nudgeFled', PRE] },
