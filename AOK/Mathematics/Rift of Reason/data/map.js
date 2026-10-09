@@ -72,7 +72,7 @@
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
             },
             'fair-rift': {
-                requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s safe Road challenge at the Fair Gate first.',
+                requiresFlag: 'story-battle-won', lockText: 'Win Syllo’s practice match at the Fair Gate first.',
                 name: 'The Nut Stall', chapter: 'prologue', type: 'story', x: 330, y: 575,
                 scene: 'scene/fair', script: 'prologue.nutstall', fx: 'rift', requires: 2, links: ['stall-pattern', 'stall-witness', 'stall-gallery', 'signpost'],
                 teaser: 'Something is wrong with the sky above the fair.',

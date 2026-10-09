@@ -25,7 +25,7 @@
     Rift.data.cast = {
         sequins: {
             policy: 'lethal', actors: ['sequins', 'tally'], peril: 'ch1', chapter: 'ch1',
-            met: ['prologue.fair', 'prologue.rift', 'ch1.well'],
+            met: ['prologue.rift', 'ch1.well'],
             fallback: { gate: 'narrator', 'stall-pattern': null }, ribbon: ['stall-pattern'],
         },
         granny: {

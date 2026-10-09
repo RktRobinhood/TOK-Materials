@@ -93,7 +93,7 @@
         };
     }
 
-    // Syllo's Road challenge (a safe beginner match): eight cheap small creatures and kind tactics.
+    // Syllo's practice match (a safe beginner match): eight cheap small creatures and kind tactics.
     const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
     const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
     const SYLLO_HEARTS = 8;
@@ -277,10 +277,10 @@
             const f=Rift.State.get().flags||{};
             if(f['syllo-away']&&!f['finale-open']){Battles.schoolOnly();return;}
             const host=Rift.data.speakers.syllo;
-            Rift.UI.modal('Syllo’s Road challenge',el('div.stack',null,[
+            Rift.UI.modal('Syllo’s practice match',el('div.stack',null,[
                 Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:'Sergeant Syllo: “Before the Road, show me you can reason from the rules. Same moves, different axioms, different game.”'}),
-                el('p.small',{text:'Win this safe match to open the Road. You get a loaned starter team, even with an empty collection. No cards or items are at risk.'}),
+                el('p',{text:'Sergeant Syllo: “Practice match, recruit! Loaned team. No risk. Some shouting.”'}),
+                el('p.small',{text:'Win this safe match, then solve two stalls, to open the final at the Nut Stall. You get a loaned starter team. No cards or items are at risk.'}),
             ]),[{label:'Later'},{label:'Learn first',onclick:()=>Battles.learn('map')},{label:'Challenge',primary:true,onclick:()=>Battles.story()}]);
         },
 
@@ -295,7 +295,7 @@
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
                 // Syllo plays at Normal with 8 hearts (you have 12): a beginner wins about 70% (tools/sim-battle.mjs --ladder).
-                opponent:{name:'Sergeant Syllo · Road challenge',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
+                opponent:{name:'Sergeant Syllo · Practice match',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
                     team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS,power:teamPower(SYLLO_TEAM,'normal')},
                 onEnd(result){
                     finish(result);
@@ -304,7 +304,7 @@
                         Rift.State.update(s=>{s.flags['story-battle-won']=true;});
                         // Rebuild the map after setting the flag so the Road unlock is visible immediately.
                         Rift.Router.replace('map');
-                        Rift.UI.modal('The Road is open',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
+                        Rift.UI.modal('Practice match won',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
                     }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: spend energy on more than one small creature. Keep a blocker ready and use End turn. Read Rules now before attacking or rewriting.'}),[
                         {label:'Later'},{label:'Learn again',onclick:()=>Battles.learn('map')},{label:'Retry',primary:true,onclick:()=>Battles.story()},
                     ]);

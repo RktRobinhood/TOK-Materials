@@ -11,7 +11,7 @@
  *                           ownAxioms?: own rule cards in the opening hand (Granny's Spare Axiom; js/ui/battles.js)
  *   axiomDeck?, battleOptions?, lesson?: 1-4 (which lesson board; default: the save's current chapter),
  *   initialState?,          // a prepared engine state (screen tests and the bench); else one is created
- *   story?: true,           // a safe story match (Syllo's Road challenge): its end screen says so
+ *   story?: true,           // a safe story match (Syllo's practice match): its end screen says so
  *   guide?: { steps: [{ title, text, label, expect, replies, compare? }], create?() → state, coach? },
  *   onEnd(result),
  * });
@@ -1189,6 +1189,8 @@
             return node;
         }
         function clickPower(L) {
+            // The lesson's "Your power" step: the click is the step, the power is not used.
+            if (guide && step() && step().info) { infoDone(); return; }
             const acts = L.filter(a => a.type === 'power');
             if (!acts.length) { ui.sel = null; setNote(powerWhy(E.powerStatus(state, ME), L)); return; }
             if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
@@ -1578,7 +1580,8 @@
             put(box,
                 el('div.b-fate-label', {}, [el('strong', { text: 'Fate' }), el('span', { text: 'turns' })]),
                 el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), {}, [
-                    el('div.b-fate-groove', { style: bg('ui/fate-track') }),
+                    // Nine-slice: the end caps keep their shape, only the plain bar between them stretches.
+                    el('div.b-fate-groove', { style: (u => (u ? { borderImageSource: 'url("' + u + '")' } : null))(artUrl('ui/fate-track')) }),
                     reel = el('div.b-fate-reel', {}, spaces),
                     el('div.b-fate-now', {}, [el('span.b-fs-now', { style: bg('ui/fate-marker'), text: has('ui/fate-marker') ? '' : '⧗' }), el('span.b-fate-now-tag', { text: 'NOW' })]),
                 ]),
@@ -1589,15 +1592,34 @@
             slideReel(reel, shift);
             tipFor(box.querySelector ? box.querySelector('.b-fate-label') || box : box, 'fate', 'Fate track', 'Each End turn moves every event 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, or a reset to the basic rules.');
         }
-        // Turns passed since the last paint: the reel slides that many spaces left (at most 3).
+        // Turns passed since the last paint: the reel slides that many spaces left (at most 3), one space
+        // at a time with a short stop on each ("tick, tick"), slow enough to follow. The screen repaints the
+        // reel on every move, so the slide is kept in ui.fateSlide and picked up again by each new reel
+        // (before, a repaint mid-slide threw it away and the reel seemed to jump). Calm motion steps
+        // space by space without sliding.
+        const FATE_STEP = 700, FATE_HOLD = 220;
         function slideReel(reel, shift) {
             const was = ui.fateTurn;
             if (!shift) ui.fateTurn = state.turn;
-            if (!reel || shift || was == null || state.turn <= was || !reel.animate) return;
-            const d = Math.min(3, state.turn - was);
+            if (!reel || shift || !reel.animate) return;
+            const now = root.performance && root.performance.now ? root.performance.now() : Date.now();
+            const run = ui.fateSlide && now - ui.fateSlide.start < ui.fateSlide.d * FATE_STEP ? ui.fateSlide : null;
+            if (was != null && state.turn > was) {
+                // Spaces still to go in a slide that is under way are added to the new one.
+                const left = run ? run.d - Math.floor((now - run.start) / FATE_STEP) : 0;
+                ui.fateSlide = { d: Math.min(3, state.turn - was + left), start: now };
+            } else if (!run) { ui.fateSlide = null; return; }
+            const s = ui.fateSlide, unit = 100 / (FATE_PAST + FATE_AHEAD + 1), calm = calmMotion();
+            const at = i => ({ transform: 'translateX(' + ((s.d - i) * unit) + '%)' });
+            const frames = [Object.assign(at(0), { offset: 0 })];
+            for (let i = 1; i <= s.d; i++) {
+                const end = i / s.d, moved = (i * FATE_STEP - FATE_HOLD) / (s.d * FATE_STEP);
+                frames[frames.length - 1].easing = calm ? 'steps(1, end)' : 'ease-in-out';
+                frames.push(Object.assign(at(i), { offset: moved }), Object.assign(at(i), { offset: end }));
+            }
             try {
-                if (calmMotion()) reel.animate([{ opacity: 0.2 }, { opacity: 1 }], { duration: 500, easing: 'ease-out' });
-                else reel.animate([{ transform: 'translateX(' + (d * 100 / (FATE_PAST + FATE_AHEAD + 1)) + '%)' }, { transform: 'translateX(0)' }], { duration: 650 + 150 * d, easing: 'cubic-bezier(.2,.7,.2,1)' });
+                const anim = reel.animate(frames, { duration: s.d * FATE_STEP, fill: 'backwards' });
+                anim.currentTime = Math.max(0, now - s.start);
             } catch (e) { /* no WAAPI */ }
         }
         // A coming event: the flip (with the rule card that will turn over) or the reset.
@@ -2265,7 +2287,7 @@
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
-                    st && st.info && !ui.busy ? el('button.btn.primary.b-coach-ok', { type: 'button', text: st.label, onclick: infoDone }) : null,
+                    st && st.info && !ui.busy && !nodes.pw0 ? el('button.btn.primary.b-coach-ok',{ type: 'button', text: st.label, onclick: infoDone }) : null,
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
                     iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
                 ]),
@@ -2308,8 +2330,8 @@
             const x = st.expect;
             let focus = null;
             let ring = null;
-            if (x.type === 'info') { focus = nodes.pw0 || null; if (focus) { focus.classList.add('guide-focus'); return; } }
-            if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
+            if (x.type === 'info') focus = nodes.pw0 || null;
+            else if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
             else if (x.type === 'end') focus = nodes.end;
             else if (x.type === 'spark') focus = screen.querySelector ? screen.querySelector('.b-spark') : null;
             else if (x.type === 'choose') focus = nodes.choose && nodes.choose[x.choice];

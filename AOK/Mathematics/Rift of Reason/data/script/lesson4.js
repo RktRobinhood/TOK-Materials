@@ -44,7 +44,7 @@
     const NARR_SILENT = { all: ['dead:sundial', '!arrived:sundial'] };
     const ANY_DEATH = { any: ['dead:sequins', 'dead:granny', 'dead:sundial', 'dead:pip'] };
     // The player heard the boast, live or in a recap.
-    const HEARD_BOAST = { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }, { seen: 'recap.ch3' }, { seen: 'recap.ch4' }] };
+    const HEARD_BOAST = { any: [{ seen: 'prologue.rift' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }, { seen: 'recap.ch3' }, { seen: 'recap.ch4' }] };
     // The Copy got home first (tiers 3–4).
     const COPY_HOME = { flag: 'stakes.ch4', in: [3, 4] };
     // Tally arrives at the finale shelf if she has not arrived at the Pattern Stall already.

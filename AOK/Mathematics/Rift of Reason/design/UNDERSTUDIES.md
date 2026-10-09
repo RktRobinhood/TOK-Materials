@@ -35,7 +35,7 @@ The avatar never dies. Caricature creatures follow the Fate table as creatures; 
 
 | Role | Peril | Required meetings (`met`) | While silent (fallbacks, STORY.md App. D) | Quiet Scene | Understudy arrives |
 |---|---|---|---|---|---|
-| **Professor Sequins** (`sequins`) | Ch1 Gate of Guards, tier 4 (falls into the crack) | `prologue.fair`, `prologue.rift`, `ch1.well` | Gate → the Sundial. Pattern Stall → no host, a black ribbon on the curtain, puzzle still works. | Ch2 Stone Circle | **Tally**, at the first Pattern Stall visit after the Quiet Scene; otherwise at the finale shelf |
+| **Professor Sequins** (`sequins`) | Ch1 Gate of Guards, tier 4 (falls into the crack) | `prologue.rift`, `ch1.well` | Gate → the Sundial. Pattern Stall → no host, a black ribbon on the curtain, puzzle still works. | Ch2 Stone Circle | **Tally**, at the first Pattern Stall visit after the Quiet Scene; otherwise at the finale shelf |
 | **Granny Axiom** (`granny`) | Ch2 Town Hall, tier 4 (the pot) | `prologue.wake`, `prologue.fair`, `prologue.evening`, `ch1.well` | Hall → the Constable. Her hums stop. Her card lesson stays hers (§3.6). | Ch3 Rift Landing | **Coach Achilles**, on his own charm: her charm, worn beside yours, hums at the Ch3 Café. Fallback (a jump over Ch3): in person at her card table; his arrival line opens the finale |
 | **The Sundial** (`narrator`, flag `dead:sundial`) | Ch3 Tribunal, tier 4 (the sentence; impossible with `bargain`) | `prologue.wake`, `prologue.evening`, `ch1.night`, `ch2.clockmaker`, `ch3.cafe` | Narrator script lines are skipped until Kuku; Pip's own written lines carry the Tower Door. Host slots: Ch3–4 nodes → Pip; elsewhere none. | Ch4 Tower Door, delivered by Pip | **Kuku**, out of Granny's hallway clock in the Evidence Locker, at the Ch4 Stairwell |
 | **Pip** (`pip`) | Ch4 Sorting Room, tier 4 (the possession) | `ch3.arrive`, `ch3.plaza`, `ch4.door` | His host slots → `role:narrator`, or empty until Kuku arrives. | at the next floor's door; mourned by Nudge | **Mr Rubberstamp**: no arrival beat in STORY.md (no later beat needs the role). Built anyway: arming guard 6 needs his art and voice entry (§5) |
@@ -287,7 +287,7 @@ A new data file, `data/cast.js` (loaded after the four scripts, because `lesson1
 ```js
 Rift.data.cast = {
     sequins: { policy: 'lethal', actors: ['sequins', 'tally'], peril: 'ch1',
-               met: ['prologue.fair', 'prologue.rift', 'ch1.well'],
+               met: ['prologue.rift', 'ch1.well'],
                fallback: { 'gate': 'narrator', 'stall-pattern': null },      // null = no host, ribbon on the curtain
                quiet: 'quiet.sequins', quietAt: 'b-arrival',   // or the first later chapter opening (§3.6)
                keepsake: 'cage-cushion',

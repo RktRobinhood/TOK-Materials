@@ -61,7 +61,7 @@
     // Before the Plaza, nobody knows whose trial it is, and the counter files everything.
     const BEFORE_PLAZA = { all: [{ not: { seen: 'ch3.plaza' } }, PRE] };
     // The player heard the boast, live or in a recap.
-    const HEARD_BOAST = { any: [{ seen: 'prologue.fair' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }, { seen: 'recap.ch3' }, { seen: 'recap.ch4' }] };
+    const HEARD_BOAST = { any: [{ seen: 'prologue.rift' }, { seen: 'recap.ch1' }, { seen: 'recap.ch2' }, { seen: 'recap.ch3' }, { seen: 'recap.ch4' }] };
     // The vote is still open: the Sundial alive and the clock not full.
     const VOTE_OPEN = { all: [ALIVE, { clock: 'ch3', lte: 7 }] };
     // Speedcheeta handed over his clip (any badge).

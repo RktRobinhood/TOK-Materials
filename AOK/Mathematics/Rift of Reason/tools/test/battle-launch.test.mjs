@@ -24,7 +24,7 @@ test('empty collection can learn, practice and win the real safe story match',()
  const end=Rift.Battle.AI.playOut(start,['hard',p.opponent.ai]);assert.equal(E.winner(end),0);
  const before=JSON.stringify({creatures:g.state.creatures,items:g.state.items});
  p.onEnd({mode:'practice',outcome:'lost'});assert.equal(g.state.flags['story-battle-won'],undefined);assert.equal(g.modals.at(-1).title,'Try Syllo again');
- p.onEnd({mode:'practice',outcome:'won'});assert.equal(g.state.flags['story-battle-won'],true);assert.equal(g.modals.at(-1).title,'The Road is open');
+ p.onEnd({mode:'practice',outcome:'won'});assert.equal(g.state.flags['story-battle-won'],true);assert.equal(g.modals.at(-1).title,'Practice match won');
  assert.equal(JSON.stringify({creatures:g.state.creatures,items:g.state.items}),before);
 });
 test('returning learners are offered the changed rules once without spending items',()=>{
