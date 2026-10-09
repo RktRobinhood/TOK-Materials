@@ -540,6 +540,7 @@
         'scene/road-bridge': { file: 'scenes/road-bridge.webp', w: 1600, h: 900, small: 'scenes/road-bridge-small.webp' },
         'scene/road-forest': { file: 'scenes/road-forest.webp', w: 1600, h: 900, small: 'scenes/road-forest-small.webp' },
         'scene/road-gate': { file: 'scenes/road-gate.webp', w: 1600, h: 900, small: 'scenes/road-gate-small.webp' },
+        'scene/schoolhouse': { file: 'scenes/schoolhouse.webp', w: 1600, h: 900, small: 'scenes/schoolhouse-small.webp' },
         'scene/server-hall': { file: 'scenes/server-hall.webp', w: 1600, h: 900, small: 'scenes/server-hall-small.webp' },
         'scene/shop': { file: 'scenes/shop.webp', w: 1600, h: 900, small: 'scenes/shop-small.webp' },
         'scene/stall-gallery': { file: 'scenes/stall-gallery.webp', w: 1600, h: 900, small: 'scenes/stall-gallery-small.webp' },
