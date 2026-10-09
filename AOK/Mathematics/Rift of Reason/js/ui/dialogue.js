@@ -14,6 +14,7 @@
     const Rift = root.Rift;
     const el = (...a) => Rift.el(...a);
     const Story = () => Rift.Story;
+    const live = new Set();   // the context of every script on screen now
 
     function nickname() {
         const s = Rift.State.get();
@@ -110,7 +111,8 @@
                     advance();
                 }
             };
-            const cleanup = () => { root.document.removeEventListener('keydown', onKey, true); };
+            const cleanup = () => { root.document.removeEventListener('keydown', onKey, true); if (ctx.cleanup === cleanup) ctx.cleanup = null; };
+            ctx.cleanup = cleanup;
             box.addEventListener('click', advance);
             // Intercept before a focused map marker receives Enter/Space.
             root.document.addEventListener('keydown', onKey, true);
@@ -355,11 +357,14 @@
         const overlay = root.document.getElementById('overlay');
         const layer = el('div.dialogue-layer' + (ctx.quiet ? '.quiet-scene' : '') + (replay ? '.memory-scene' : ''));
         overlay.appendChild(layer);
+        ctx.layer = layer;
+        live.add(ctx);
         let finished = false;
         try {
             await run(layer, steps, ctx);
             finished = true;
         } finally {
+            live.delete(ctx);
             Rift.Audio.stopVoice();
             layer.remove();
         }
@@ -369,6 +374,17 @@
             if (!replay && Object.keys(ctx.cast).length && !Story().flag('cast@' + key)) Story().setFlag('cast@' + key, ctx.cast);
         }
         if (o.after) o.after();
+    }
+
+    // Leaving the screen (the Map button, any router change) ends every open script: its box goes,
+    // its voice stops, and its promise never settles, so the old screen's code after the await never runs.
+    function abortAll() {
+        live.forEach(ctx => {
+            if (ctx.cleanup) ctx.cleanup();
+            ctx.layer.remove();
+        });
+        live.clear();
+        Rift.Audio.stopVoice();
     }
 
     // The Quiet Scene for an NPC, if pending (used at chapter openings).
@@ -390,5 +406,5 @@
         return result;
     }
 
-    Rift.Dialogue = { play, playQuiet, clockTick, has: key => !!(Rift.data.script || {})[key] };
+    Rift.Dialogue = { play, playQuiet, clockTick, abortAll, has: key => !!(Rift.data.script || {})[key] };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -33,6 +33,9 @@
         if (active && active.handle && active.handle.destroy) {
             try { active.handle.destroy(); } catch (e) { console.error('[Rift] destroy', active.name, e); }
         }
+        // A script or voice from the old screen must not carry on over the new one.
+        if (Rift.Dialogue && Rift.Dialogue.abortAll) Rift.Dialogue.abortAll();
+        else if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice();
         const node = host();
         node.innerHTML = '';
         node.className = 'screen screen-' + name;

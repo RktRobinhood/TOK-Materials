@@ -414,13 +414,36 @@
                 ].concat(rows)));
             }
 
+            // A save from before real names (October 2026) asks once; the box can't be closed without one.
+            function askRealName() {
+                if (!state.avatar || state.avatar.realName) return Promise.resolve();
+                let done;
+                const named = new Promise(resolve => { done = resolve; });
+                const input = el('input.name-input', { maxLength: 40, placeholder: 'Your real name', 'aria-label': 'Your real name' });
+                const msg = el('p.small.muted', { text: 'It goes into your backup code for your teacher, and cannot be changed later.' });
+                const m = Rift.UI.modal('What is your real name?', el('div.stack', null, [input, msg]), [{
+                    label: 'Save', primary: true, required: true, keepOpen: true,
+                    onclick() {
+                        if (Rift.State.setRealName(input.value)) { m.close(); done(); return; }
+                        msg.textContent = 'Type your real name first.';
+                        input.focus();
+                    },
+                }]);
+                setTimeout(() => input.focus(), 50);
+                return named;
+            }
+
             // ---- start ----
             const here = Rift.World.node(state.map.at);
             placeAvatar(here.x, here.y);
             draw();
-            if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap }), 400);
-            else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
-            else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);
+            // The name box comes first; the arrival's story waits for it.
+            askRealName().then(() => {
+                if (destroyed) return;
+                if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap }), 400);
+                else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
+                else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);
+            });
 
             // After a chapter boss, suggest a backup code once, when nothing else is on screen.
             const backupTimer = setInterval(() => {

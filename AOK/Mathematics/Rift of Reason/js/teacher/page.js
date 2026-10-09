@@ -37,6 +37,24 @@
             session.clear(); code.value = ''; group.value = 1; status.textContent = 'All reports cleared.'; drawRows(); drawMap();
         } })]), status, table,
     ]));
+    // Whose code is this? Shows the real name typed at the start of that adventure, never stored in this tab.
+    const whoCode = el('textarea#who-code', { rows: 3, maxLength: 200000, spellcheck: false, autocomplete: 'off', placeholder: 'ROR2.save.…' });
+    const whoOut = el('p', { role: 'status', 'aria-live': 'polite' });
+    app.append(el('section.panel.teacher-controls', null, [
+        el('h2', { text: 'Whose code is this?' }),
+        el('p', { text: 'Each new adventure asks for the student\'s real name, which cannot be changed in the game and goes into every backup code. A name that is not the student\'s own means the code came from someone else. Not shown on the class map.' }),
+        el('label', { htmlFor: 'who-code', text: 'One backup code' }), whoCode,
+        el('div.row', null, [el('button.btn', { text: 'Show name', async onclick() {
+            try {
+                const save = await R.State.readCode(await R.State.plainCode(whoCode.value));
+                const real = save.avatar && save.avatar.realName;
+                const nick = save.avatar && save.avatar.nickname;
+                whoOut.textContent = (real ? 'Real name: ' + real : 'No real name yet (an older adventure; the game asks on its next load)')
+                    + (nick ? ' · Nickname: ' + nick : '') + ' · ' + R.State.summary(save).split(' · ').slice(1).join(' · ');
+            } catch (e) { whoOut.textContent = 'Could not read code: ' + e.message; }
+            whoCode.value = '';
+        } }), el('button.btn', { text: 'Clear', onclick() { whoCode.value = ''; whoOut.textContent = ''; } })]), whoOut,
+    ]));
     app.append(el('section.projection', null, [el('div.row.map-controls', null, [
         el('label', { htmlFor: 'chapter', text: 'Lesson map' }), chapter, projector,
     ]), mapTitle, mapNote, map, el('details', null, [el('summary', { text: 'Station names and counts' }), stationList]) ]));

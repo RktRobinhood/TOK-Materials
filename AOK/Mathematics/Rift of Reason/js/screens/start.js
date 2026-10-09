@@ -44,7 +44,10 @@
         mount(rootNode) {
             let pick = { type: 'owlet', variant: 'boy' };
             const preview = el('div.avatar-preview');
-            const nameInput = el('input.name-input', { maxLength: 16, placeholder: 'Your name or nickname', value: '' });
+            // The real name goes into every backup code, so the teacher can see whose code it is.
+            const realInput = el('input.name-input', { maxLength: 40, placeholder: 'Your real name (required)', value: '', 'aria-label': 'Your real name' });
+            const nameInput = el('input.name-input', { maxLength: 16, placeholder: 'Nickname in the game (optional)', value: '', 'aria-label': 'Nickname' });
+            const nameNote = el('p.small.muted', { text: 'Your real name is saved in your backup code for your teacher. It cannot be changed later.' });
             const grid = el('div.avatar-grid');
 
             function renderPreview() {
@@ -78,14 +81,21 @@
                 el('h1', { text: 'Who are you?' }),
                 el('p.muted', { text: 'Pick a traveller. Each one thinks in its own way, and you will hear that voice in your head.' }),
                 el('div.avatar-layout', null, [grid, preview]),
-                el('div.row', { style: { justifyContent: 'center' } }, [
+                el('div.row.wrap', { style: { justifyContent: 'center' } }, [
+                    realInput,
                     nameInput,
                     el('button.btn.primary', {
                         text: 'Begin',
                         onclick() {
-                            const nickname = nameInput.value.trim().slice(0, 16) || Rift.data.avatars[pick.type].name;
+                            const realName = Rift.State.cleanName(realInput.value);
+                            if (!realName) {
+                                Rift.UI.toast('Type your real name first.');
+                                realInput.focus();
+                                return;
+                            }
+                            const nickname = nameInput.value.trim().slice(0, 16) || realName.split(' ')[0].slice(0, 16);
                             Rift.State.update(s => {
-                                s.avatar = { type: pick.type, variant: pick.variant, nickname };
+                                s.avatar = { type: pick.type, variant: pick.variant, nickname, realName };
                                 Rift.World.start(s);
                             });
                             Rift.State.saveNow();
@@ -101,6 +111,7 @@
                         },
                     }),
                 ]),
+                nameNote,
             ]));
             renderPreview();
         },

@@ -20,7 +20,7 @@
             createdAt: Date.now(),
             seed: Math.floor(Math.random() * 2 ** 31),
             visits: 0,
-            avatar: null,          // { type: 'owlet', variant: 'boy'|'girl', nickname }
+            avatar: null,          // { type: 'owlet', variant: 'boy'|'girl', nickname, realName }
             chapter: 'prologue',
             map: {
                 at: null,          // node id the avatar stands on
@@ -472,6 +472,19 @@
         return checkSave(await decodeAsync('save', code));
     }
 
+    // The student's real name, typed once at the start (or on first load of an older save) and
+    // never changed after: it travels in every backup code so the teacher can see whose code it is.
+    function cleanName(text) {
+        return String(text || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    }
+    function setRealName(text) {
+        const name = cleanName(text);
+        if (!name || !current || !current.avatar || current.avatar.realName) return false;
+        State.update(s => { s.avatar.realName = name; });
+        saveNow();
+        return true;
+    }
+
     // One line about a save for "replace this adventure?" questions:
     // 'Ida · Chapter 1: The Road · 12 creatures · 9 places done'.
     function summary(save) {
@@ -479,7 +492,9 @@
         if (!s) return 'No adventure';
         const chapter = (((Rift.data || {}).chapters || {})[s.chapter] || {}).name || s.chapter;
         const n = (k, word) => k + ' ' + word + (k === 1 ? '' : 's');
-        return [(s.avatar && s.avatar.nickname) || 'No name yet', chapter,
+        const real = s.avatar && s.avatar.realName;
+        const nick = (s.avatar && s.avatar.nickname) || 'No name yet';
+        return [real && real !== nick ? nick + ' (' + real + ')' : nick, chapter,
             n((s.creatures || []).length, 'creature'), n(new Set((s.map && s.map.completed) || []).size, 'place') + ' done'].join(' · ');
     }
 
@@ -627,6 +642,8 @@
         checkSave,
         readCode,
         summary,
+        cleanName,
+        setRealName,
         backupMilestone,
         load,
         save,
