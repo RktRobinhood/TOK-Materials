@@ -43,6 +43,8 @@
         return path;
     }
 
+    let trackerFolded = false;   // for this browser session only
+
     Rift.Screens.register('map', {
         mount(rootNode, params) {
             const state = Rift.State.get();
@@ -73,7 +75,8 @@
             const hud = Rift.UI.hud();
             const chapterLabel = el('div.chapter-label.panel');
             const riftBtn = el('button.btn.small', { text: '🌀 Time rift', title: 'Jump to a chapter', onclick: () => riftMenu() });
-            rootNode.append(el('div.map-wrap', null, [board]), hud, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
+            const tracker = el('div.quest-tracker.panel');
+            rootNode.append(el('div.map-wrap', null, [board]), hud, tracker, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
 
             // ---- avatar sprite ----
             const avatarGroup = svg('g', { class: 'map-avatar' });
@@ -133,7 +136,39 @@
                 hints.forEach(id => nodesLayer.append(nodeMarker(id, 'hinted')));
                 revealed.forEach(id => nodesLayer.append(nodeMarker(id, 'revealed')));
                 const ch = Rift.data.chapters[st.chapter] || {};
+                drawTracker(st);
                 chapterLabel.textContent = (mapDef.name ? mapDef.name + '  ·  ' : '') + (ch.name || '') + '  ·  Level ' + Rift.World.level(st);
+            }
+
+            // The tracker: the next few open entries; a click opens the journal.
+            function drawTracker(st) {
+                const open = Rift.Quests ? Rift.Quests.tracked(st, 3) : [];
+                tracker.replaceChildren();
+                tracker.style.display = open.length ? '' : 'none';
+                tracker.append(el('div.quest-tracker-head', null, [
+                    el('button.quest-tracker-title', { text: 'Journal', title: 'Open the journal', onclick: () => Rift.Router.go('journal') }),
+                    el('button.quest-tracker-fold', {
+                        text: trackerFolded ? '▸' : '▾', title: trackerFolded ? 'Show the tracker' : 'Hide the tracker',
+                        'aria-label': trackerFolded ? 'Show the tracker' : 'Hide the tracker',
+                        onclick() { trackerFolded = !trackerFolded; drawTracker(Rift.State.get()); },
+                    }),
+                ]));
+                if (trackerFolded) return;
+                open.forEach(q => tracker.append(el('button.quest-tracker-row.' + q.kind, {
+                    title: 'Show on the map',
+                    onclick() { focusNode(q.node); },
+                }, [Rift.Quests.glyph(q.kind, q.status),
+                    el('span', { text: q.title }),
+                    (Rift.World.node(q.node) || {}).name !== q.title ? el('span.small.muted', { text: (Rift.World.node(q.node) || {}).name }) : null])));
+            }
+
+            // A calm ring that fades out round a station (from the journal or the tracker).
+            function focusNode(id) {
+                const n = Rift.World.node(id);
+                if (!n || !onThisMap(id)) { Rift.UI.toast('That is on another map. Use a rift to get there.', 3000); return; }
+                const ring = svg('circle', { cx: n.x, cy: n.y, r: 44, class: 'quest-focus' });
+                nodesLayer.append(ring);
+                setTimeout(() => ring.remove(), 2600);
             }
 
             function nodeMarker(id, kind) {
@@ -176,6 +211,9 @@
                         const label=svg('text',{'text-anchor':'middle',y:43,fill:'white','font-size':18});
                         label.textContent='Learn';g.append(label);
                     }
+                    // Quest badge (js/core/quests.js): "!" new, "?" started; gold main story, blue side.
+                    const qb = Rift.Quests && Rift.Quests.badge(st, id);
+                    if (qb) g.append(questBadge(qb));
                     // A side story waits here (design/SIDE-STORIES.md section 1): a slowly fading bubble.
                     const side = Rift.SideStories && Rift.SideStories.at(id);
                     if (side) g.append(sideBubble(id, side));
@@ -183,6 +221,18 @@
                     g.addEventListener('keydown', ev => { if (ev.key === 'Enter') goTo(id); });
                 }
                 return g;
+            }
+
+            function questBadge(qb) {
+                const b = svg('g', { class: 'quest-badge ' + qb.kind + ' ' + qb.status, transform: 'translate(-30,-40)', 'aria-hidden': 'true' });
+                const art = 'ui/quest-' + qb.status + '-' + qb.kind;
+                if (Rift.Assets.has(art)) b.append(svg('image', { href: Rift.Assets.src(art), x: -20, y: -24, width: 40, height: 44 }));
+                else {
+                    const t = svg('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: Rift.Quests.COLOURS[qb.kind] });
+                    t.textContent = Rift.Quests.GLYPH[qb.status];
+                    b.append(t);
+                }
+                return b;
             }
 
             function sideBubble(id, side) {
@@ -207,6 +257,12 @@
                 );
                 // Element.append(null) would print the word "null".
                 if (locked) tip.append(el('div.small.warn', { text: '🔒 ' + locked }));
+                // Everything waiting here (js/core/quests.js), colour-coded; finished entries stay in the journal.
+                const quests = kind === 'revealed' && !dark && Rift.Quests ? Rift.Quests.at(Rift.State.get(), id).filter(q => q.status !== 'done' && q.status !== 'locked') : [];
+                if (quests.length) tip.append(el('ul.tip-quests', null, quests.map(q => el('li.' + q.kind, null, [
+                    Rift.Quests.glyph(q.kind, q.status),
+                    el('span', { text: q.title !== n.name ? q.title : (q.kind === 'main' ? 'Main story' : 'Side') + ' · ' + (q.status === 'new' ? 'new' : 'started') }),
+                ]))));
                 const side = kind === 'revealed' && Rift.SideStories && Rift.SideStories.at(id);
                 if (side) tip.append(el('div.small.side-teaser', { text: '💬 ' + side.teaser }));
                 const rect = board.getBoundingClientRect();
@@ -418,6 +474,7 @@
             const here = Rift.World.node(state.map.at);
             placeAvatar(here.x, here.y);
             draw();
+            if (params && params.focus) setTimeout(() => focusNode(params.focus), 300);
             if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap }), 400);
             else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
             else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);

@@ -106,6 +106,8 @@
             scarsNode,
             el('div.spacer'),
             o.back ? el('button.btn.small', { text: '← ' + o.back.label, onclick: o.back.onclick }) : null,
+            el('button.btn.small.journal-btn', { title: 'Journal', onclick: () => Rift.Router.go('journal') },
+                [Rift.Assets.has('ui/journal') ? Rift.Assets.img('ui/journal', { className: 'btn-icon', label: '' }) : '📜', ' Journal']),
             el('button.btn.small', { text: '📖 Collection', onclick: () => Rift.Router.go('collection') }),
             el('button.btn.small', { text: '🎒 Bag', onclick: () => bag() }),
             el('button.btn.small', { text: '⚙', title: 'Settings and save', onclick: () => Rift.Router.go('settings') }),
