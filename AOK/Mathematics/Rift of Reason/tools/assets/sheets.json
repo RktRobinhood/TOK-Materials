@@ -112,6 +112,7 @@
         "stakes-ch2.png": {"type":"single","id":"ui/stakes-ch2","class":"panel"},
         "nudge-masks.png": {"type":"islands","minArea":2500,"ids":["npc/nudge/masked","npc/nudge/maskless"]},
         "feast-hall.png": {"type":"scene","id":"scene/feast-hall"},
+        "bakery-ovens.png": {"type":"scene","id":"scene/bakery-ovens"},
         "hum-charm.png": {"type":"islands","minArea":600,"class":"item","ids":["item/hum-charm","keepsake/granny-charm-glasses"]},
         "nudge-clipboard.png": {"type":"single","id":"npc/nudge/clipboard","class":"bust"},
         "hoots-gavel.png": {"type":"single","id":"item/hoots-gavel","class":"item"},
