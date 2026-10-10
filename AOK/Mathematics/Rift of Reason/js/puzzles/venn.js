@@ -5,7 +5,7 @@
  * player shades the parts the premises say are EMPTY, drops x counters where
  * something must EXIST (on a line when it could be either side), then judges
  * whether the conclusion has to follow. From difficulty 2 they also say
- * whether the conclusion is true in our world, false, or absurd.
+ * whether the premises are supported by a separate reference record.
  *
  * Flavour after Lewis Carroll, The Game of Logic (1886) and Symbolic Logic
  * (1896), both public domain. Pieces marked "after Lewis Carroll" use his own
@@ -178,6 +178,56 @@
         }
         const mapped = { q: st.q, a: w.keys.indexOf(ta.key), b: w.keys.indexOf(tb.key) };
         return holdsAll(mapped, w.n, w.occ);
+    }
+
+    // The reference record is evidence, not a complete census. An unoccupied
+    // region cannot contain a witness; a permitted region need not contain one.
+    // Only a named individual whose recorded facts force a placement can supply
+    // an existential witness. Fictional themes without records stay unknown.
+    function premiseEvidence(theme, p, terms) {
+        const unknown = { status: 'unknown', reason: 'The records neither establish nor refute this premise.' };
+        if (theme.absurd) return unknown;
+        const w = worldOf(theme), A = terms[p.a], B = terms[p.b];
+        if (A.singular) {
+            const places = placements(theme, A.key);
+            if (!places.length) return unknown;
+            const bit = 1 << w.keys.indexOf(B.key);
+            const agrees = places.map(r => (p.q === 'is') === !!(r & bit));
+            if (agrees.every(Boolean)) return { status: 'supported', reason: A.label + '\'s recorded facts establish this premise.' };
+            if (!agrees.some(Boolean)) return { status: 'refuted', reason: A.label + '\'s recorded facts contradict this premise.' };
+            return unknown;
+        }
+        const condition = compile({ q: p.q, a: w.keys.indexOf(A.key), b: w.keys.indexOf(B.key) }, w.n)[0];
+        const possible = condition.m & w.occ;
+        const empty = condition.t === 'empty';
+        if (!possible) return {
+            status: empty ? 'supported' : 'refuted',
+            reason: empty ? 'The records rule out every counterexample to this premise.' : 'The records rule out every possible example of this premise.',
+        };
+        const witness = (theme.people || []).find(person => {
+            const places = placements(theme, person.key);
+            return places.length && places.every(r => possible & (1 << r));
+        });
+        if (witness) return {
+            status: empty ? 'refuted' : 'supported',
+            reason: witness.name + ' is a recorded ' + (empty ? 'counterexample to' : 'example of') + ' this premise.',
+        };
+        return unknown;
+    }
+
+    function referenceFor(theme, premises, terms) {
+        const records = (theme.facts || []).map(f => {
+            const keys = theme.terms.map(t => t[0]);
+            return statementOut(parseFact(f, keys), keys.map(k => makeTerm(theme, k)), theme).text;
+        });
+        (theme.people || []).forEach(person => (person.facts || []).forEach(f => {
+            const [q, key] = f.split(' ');
+            records.push(statementOut({ q, a: 0, b: 1 }, [makeTerm(theme, person.key), makeTerm(theme, key)], theme).text);
+        }));
+        const judgements = premises.map(p => premiseEvidence(theme, p, terms));
+        const status = judgements.some(j => j.status === 'refuted') ? 'refuted'
+            : judgements.every(j => j.status === 'supported') ? 'supported' : 'unknown';
+        return { records, judgements, status };
     }
 
     // =====================================================================
@@ -495,7 +545,7 @@
         const says = ctx.says || [];
         const data = {
             id: 'venn',
-            v: 1,
+            v: 2,
             difficulty: d,
             kind,
             uid: ctx.uid,
@@ -512,7 +562,8 @@
             if (mk.length > 2 || (mk.length === 2 && popcount(mk[0] ^ mk[1]) !== 1)) return null;
         }
         data.valid = an.valid;
-        data.askWorld = d >= 2 && [true, false, 'absurd'].includes(data.conclusion.world);
+        data.askEvidence = d >= 2;
+        data.reference = referenceFor(theme, data.premises, terms);
         return data;
     }
 
@@ -696,7 +747,7 @@
         const out = ['Shade first, then place x\'s. "All" and "No" tell you which parts are EMPTY (shade them). "Some", and named individuals, tell you something EXISTS (an x). An x can never sit in a shaded part.'];
         data.premises.forEach((p, i) => out.push(premiseHint(p, T, i)));
         out.push(conclusionHint(data.conclusion, T));
-        if (data.askWorld) out.push('VALID is about the form: if the premises were true, would the conclusion have to be true? TRUE is a different question: forget the premises and check the conclusion against our world. Absurd means it talks about things that do not exist here.');
+        if (data.askEvidence) out.push('For validity, suppose the premises are true. For premise support, use only the reference records. No record means not enough evidence, not false. A sound argument is valid and has true premises.');
         const an = analyseData(data);
         out.push(an.valid
             ? 'It is VALID. ' + validReason(data)
@@ -743,10 +794,6 @@
         return regs;
     }
 
-    function worldWord(w) {
-        return w === 'absurd' ? 'absurd (it is about things that do not exist here)' : w ? 'true' : 'false';
-    }
-
     function check(data, answer) {
         const a = answer || {};
         const T = data.terms, n = T.length, R = 1 << n;
@@ -775,20 +822,27 @@
 
         // ---- the judgements ----
         const validOk = a.valid === an.valid;
-        const worldOk = !data.askWorld || a.trueInWorld === data.conclusion.world;
-        const solved = validOk && worldOk;
-        const partial = Math.round(((validOk ? 0.5 : 0) + (data.askWorld ? (worldOk ? 0.2 : 0) + 0.3 * diagramScore : 0.5 * diagramScore)) * 100) / 100;
+        const evidenceOk = !data.askEvidence || a.premisesEvidence === data.reference.status;
+        const solved = validOk && evidenceOk;
+        const partial = Math.round(((validOk ? 0.5 : 0) + (data.askEvidence ? (evidenceOk ? 0.2 : 0) + 0.3 * diagramScore : 0.5 * diagramScore)) * 100) / 100;
 
         const lines = [];
         if (validOk) lines.push(an.valid ? 'Yes: it is VALID. ' + validReason(data) : 'Yes: it is INVALID. ' + invalidReason(data, an) + (trapName(data) ? ' ' + trapName(data) : ''));
         else if (a.valid == null) lines.push('Decide: VALID or INVALID?');
-        else lines.push(a.valid
-            ? 'Not quite. Try to break it: can you draw the premises so the conclusion is false?'
-            : 'Not quite. Look again: is there really any way to draw the premises and still make the conclusion fail?');
-        if (data.askWorld) {
-            lines.push(worldOk
-                ? 'And you kept VALID and TRUE apart: in our world the conclusion is ' + worldWord(data.conclusion.world) + '.'
-                : 'TRUE is a different question from VALID. Forget the premises and check the conclusion against our world.');
+        else lines.push('Change the validity verdict to ' + (an.valid ? 'Valid. ' + validReason(data) : 'Invalid. ' + invalidReason(data, an)));
+        if (data.askEvidence) {
+            const reference = data.reference;
+            if (reference.status === 'supported') {
+                lines.push((evidenceOk ? 'Premise support is correct. ' : 'Change the premise-support verdict. ')
+                    + 'All premises follow from the reference records.'
+                    + (an.valid ? ' Taking these records as true, the argument is sound.' : 'The premises are supported, but the inference is invalid.'));
+            } else {
+                const ix = reference.judgements.findIndex(j => j.status === reference.status);
+                lines.push((evidenceOk ? 'Premise support is correct. ' : 'Change the premise-support verdict to '
+                    + (reference.status === 'refuted' ? 'At least one refuted. ' : 'Not enough evidence. '))
+                    + 'Premise ' + (ix + 1) + ' ' + quote(data.premises[ix].text) + ': ' + reference.judgements[ix].reason
+                    + (reference.status === 'unknown' ? ' Lack of evidence does not make it false.' : ''));
+            }
         }
         const fixes = [];
         missing.forEach(r => fixes.push('the part ' + describeRegion(T, r) + ' should be shaded (a premise says it is empty)'));
@@ -813,7 +867,7 @@
             partial,
             feedback: lines.join(' '),
             validOk,
-            worldOk,
+            evidenceOk,
             diagram: { missing, extra, markOk, missingMarks, perfect, score: Math.round(diagramScore * 100) / 100 },
         };
     }
@@ -821,7 +875,7 @@
     function solve(data) {
         const an = analyseData(data);
         const out = { shading: an.empty.slice(), marks: an.marks.map(m => m.slice()), valid: an.valid };
-        if (data.askWorld) out.trueInWorld = data.conclusion.world;
+        if (data.askEvidence) out.premisesEvidence = data.reference.status;
         return out;
     }
 
@@ -954,7 +1008,7 @@
         const T = data.terms, n = T.length, R = 1 << n;
         const geo = geometry(n);
         const P = 'vn' + (++mountCount) + '-';
-        const askWorld = !!data.askWorld;
+        const askWorld = !!data.askEvidence;
         const state = { tool: 'shade', shaded: new Set(), counters: [], valid: null, world: null, solved: false, nextId: 1 };
 
         const prevPos = container.style.position;
@@ -1061,16 +1115,17 @@
         const validBtn = choice('Valid', 'vn-valid', () => pickValid(true));
         const invalidBtn = choice('Invalid', 'vn-invalid', () => pickValid(false));
         const worldBtns = askWorld ? [
-            [true, choice('True', '', () => pickWorld(true))],
-            [false, choice('False', '', () => pickWorld(false))],
-            ['absurd', choice('Absurd', '', () => pickWorld('absurd'))],
+            ['supported', choice('All supported', '', () => pickWorld('supported'))],
+            ['refuted', choice('At least one refuted', '', () => pickWorld('refuted'))],
+            ['unknown', choice('Not enough evidence', '', () => pickWorld('unknown'))],
         ] : [];
         const submitBtn = el('button.btn.primary.vn-submit', { type: 'button', disabled: true, onclick: submit }, ['Seal the verdict']);
         const result = el('div.vn-result', { 'aria-live': 'polite' });
 
         const steps = el('div.vn-steps.panel', {}, [
             el('div.vn-step', {}, [
-                el('div.vn-step-title', {}, [el('span.vn-num', { text: '1' }), 'Draw the premises']),
+                el('div.vn-step-title', {}, [el('span.vn-num', { text: '1' }), 'Optional working: draw the premises']),
+                el('div.vn-tip.small.muted', { text: 'Your verdict is checked. The drawing helps you reason and gets separate feedback; an empty drawing is allowed.' }),
                 el('div.vn-legend', {}, [
                     el('span.vn-key', {}, [el('span.vn-swatch.vn-swatch-shade'), 'shaded = EMPTY']),
                     el('span.vn-key', {}, [el('span.vn-token.vn-token-small', { text: 'x' }), 'x = something IS here']),
@@ -1079,12 +1134,17 @@
             ]),
             el('div.vn-step', {}, [
                 el('div.vn-step-title', {}, [el('span.vn-num', { text: '2' }), 'Must the conclusion follow?']),
+                el('div.vn-tip.small.muted', { text: 'Suppose every premise is true. Does the conclusion have to follow in every possible case?' }),
                 el('div.vn-choices', {}, [validBtn, invalidBtn]),
             ]),
             askWorld ? el('div.vn-step', {}, [
-                el('div.vn-step-title', {}, [el('span.vn-num', { text: '3' }), 'Is the conclusion true in our world?']),
+                el('div.vn-step-title', {}, [el('span.vn-num', { text: '3' }), 'Are the premises supported?']),
+                el('div.vn-tip.small.muted', { text: 'Reference record: take these facts as true for this task. Use only these records, not the argument above or outside knowledge.' }),
+                el('ul.vn-reference', {}, data.reference.records.length
+                    ? data.reference.records.map(text => el('li', { text }))
+                    : [el('li', { text: 'No records establish or refute these premises.' })]),
                 el('div.vn-choices', {}, worldBtns.map(x => x[1])),
-                el('div.vn-tip.small.muted', { text: 'Absurd = about things that don\'t exist here, so it can\'t be checked.' }),
+                el('div.vn-tip.small.muted', { text: 'All supported = every premise follows from the records. At least one refuted = the records contradict a premise. Not enough evidence = none refuted, but at least one is not established. Missing evidence does not mean false.' }),
             ]) : null,
             submitBtn,
             result,
@@ -1289,7 +1349,7 @@
                 marks: state.counters.map(c => c.regions.slice()),
                 valid: state.valid,
             };
-            if (askWorld) a.trueInWorld = state.world;
+            if (askWorld) a.premisesEvidence = state.world;
             return a;
         }
 
@@ -1381,7 +1441,7 @@
             "The scrolls give facts to assume for this argument.",
             "Shade means empty. An x means at least one thing exists there.",
             "Use Shade to click regions; drag an x from the tray. An x on a border leaves its side unknown.",
-            "Valid means the conclusion must follow. Judge real-world truth separately when asked. The diagram is a thinking tool; the verdict decides the win.",
+            "Valid means the conclusion must follow if the premises are true. If asked, judge premise support using only the reference records. Drawing is optional working; the verdict decides the win.",
             "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
         ],
         tutorial: [
@@ -1406,7 +1466,7 @@
                 "highlight": ".vn-choices"
             },
             {
-                "text": "Judge real-world truth separately if asked, then Seal the verdict. The diagram helps you think; read its feedback too. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "text": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
                 "highlight": ".vn-steps"
             }
         ],
@@ -1421,7 +1481,7 @@
         why,
         solve,
         mount,
-        engine: { compile, models, analyse, analyseData, validIn, worldOf, worldTruth, placements, describeRegion,
+        engine: { compile, models, analyse, analyseData, validIn, worldOf, worldTruth, placements, premiseEvidence, referenceFor, describeRegion,
             geometry, locate, THEMES, CLASSICS, CARROLL_PIECES },
     });
 })(typeof window !== 'undefined' ? window : globalThis);

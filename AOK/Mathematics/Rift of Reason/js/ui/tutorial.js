@@ -25,6 +25,8 @@
         const bubble = el('div.tutorial-bubble.panel', { role: 'dialog', 'aria-label': 'How to play' });
         layer.append(bubble);
         root.document.getElementById('overlay').append(layer);
+        const input = Rift.UI && Rift.UI.input;
+        const releaseInput = input ? input.claim(layer) : null;
         function unmark() {
             if (marked) marked.classList.remove('tutorial-highlight');
             marked = null;
@@ -34,12 +36,20 @@
             closed = true;
             if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice();
             unmark();
+            if (releaseInput) releaseInput();
+            if (input) input.guard();
             layer.remove();
             root.document.removeEventListener('keydown', keydown);
             if (previousFocus && previousFocus.isConnected) previousFocus.focus();
             if (api && api.onClose) api.onClose();
         }
-        function keydown(event) { if (event.key === 'Escape') close(); }
+        function keydown(event) {
+            if (input && !input.available(layer)) return;
+            if (event.key === 'Escape' && !event.repeat) {
+                if (input) input.consume(event);
+                close();
+            }
+        }
         function render() {
             unmark();
             const step = steps[index];

@@ -91,8 +91,11 @@
             show(layer, ctx, node);
             const tw = typewriter(textNode, text, textSpeed(ctx));
             let readyAt = 0;
+            let settled = false;
             tw.start().then(() => { readyAt = Date.now() + (ctx.quiet ? 1200 : 0); });
-            const advance = () => {
+            const advance = ev => {
+                if (settled || ctx.aborted || (Rift.UI && Rift.UI.input && !Rift.UI.input.available(layer))) return;
+                if (ev) { ev.preventDefault(); if (ev.stopImmediatePropagation) ev.stopImmediatePropagation(); else ev.stopPropagation(); }
                 if (!tw.isDone()) {
                     if (ctx.quiet) return;
                     Rift.Audio.sfx('click');
@@ -100,18 +103,22 @@
                     return;
                 }
                 if (Date.now() < readyAt) return;
+                settled = true;
+                if (Rift.UI && Rift.UI.input) Rift.UI.input.guard();
                 Rift.Audio.sfx('click');
                 cleanup();
                 resolve();
             };
             const onKey = ev => {
                 if (ev.key === ' ' || ev.key === 'Enter') {
+                    if (Rift.UI && Rift.UI.input && !Rift.UI.input.available(layer)) return;
                     ev.preventDefault();
-                    ev.stopPropagation();
+                    if (ev.stopImmediatePropagation) ev.stopImmediatePropagation(); else ev.stopPropagation();
+                    if (ev.repeat) return;
                     advance();
                 }
             };
-            const cleanup = () => { root.document.removeEventListener('keydown', onKey, true); if (ctx.cleanup === cleanup) ctx.cleanup = null; };
+            const cleanup = () => { root.document.removeEventListener('keydown', onKey, true); if (box.removeEventListener) box.removeEventListener('click', advance); if (ctx.cleanup === cleanup) ctx.cleanup = null; };
             ctx.cleanup = cleanup;
             box.addEventListener('click', advance);
             // Intercept before a focused map marker receives Enter/Space.
@@ -194,12 +201,16 @@
         if (options.some(o => o.voice)) Story().addFlag('voice.offered', 1);
         const wok = Story().wayOfKnowing();
         return new Promise(resolve => {
+            let chosen = false;
             const info = speakerInfo('avatar');
             const buttons = options.map(opt => {
                 const marked = (opt.only || opt.voice) && wok;
                 return el('button.btn' + (marked ? '.voice-option' : ''), {
                     style: marked ? { '--wok': wok.hex } : null,
-                    onclick() {
+                    onclick(ev) {
+                        if (chosen || ctx.aborted || (Rift.UI && Rift.UI.input && !Rift.UI.input.available(layer))) return;
+                        chosen = true;
+                        if (Rift.UI && Rift.UI.input) { Rift.UI.input.consume(ev); Rift.UI.input.guard(); }
                         Rift.Audio.sfx('click');
                         resolve(opt);
                     },
@@ -209,6 +220,7 @@
                 Rift.Assets.img(info.art, { className: 'portrait', label: info.name }),
                 el('div.box.parchment', null, [el('div.name', { text: info.name }), el('div.choices', null, buttons)]),
             ]));
+            if (buttons[0].focus) buttons[0].focus();
         }).then(async opt => {
             if (opt.flag) Story().setFlag(opt.flag, opt.value === undefined ? true : opt.value);
             if (opt.voice) Story().addFlag('voice.followed', 1);
@@ -359,6 +371,7 @@
         const overlay = root.document.getElementById('overlay');
         const layer = el('div.dialogue-layer' + (ctx.quiet ? '.quiet-scene' : '') + (replay ? '.memory-scene' : ''));
         overlay.appendChild(layer);
+        ctx.releaseInput = Rift.UI && Rift.UI.input ? Rift.UI.input.claim(layer, { dialogue: () => !!ctx.cleanup }) : null;
         ctx.layer = layer;
         live.add(ctx);
         let finished = false;
@@ -367,6 +380,9 @@
             finished = true;
         } finally {
             live.delete(ctx);
+            if (ctx.cleanup) ctx.cleanup();
+            if (ctx.releaseInput) ctx.releaseInput();
+            if (Rift.UI && Rift.UI.input) Rift.UI.input.guard();
             Rift.Audio.stopVoice();
             layer.remove();
         }
@@ -382,7 +398,9 @@
     // its voice stops, and its promise never settles, so the old screen's code after the await never runs.
     function abortAll() {
         live.forEach(ctx => {
+            ctx.aborted = true;
             if (ctx.cleanup) ctx.cleanup();
+            if (ctx.releaseInput) ctx.releaseInput();
             ctx.layer.remove();
         });
         live.clear();

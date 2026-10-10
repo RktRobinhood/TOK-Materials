@@ -54,6 +54,13 @@
             const onThisMap = id => mapOf(id) === mapId;
             let walking = false;
             let destroyed = false;
+            let pendingArrival = false;
+            let arrivalTimer = null;
+            let arriving = false;
+            let unlockInput = null;
+            const input = Rift.UI.input;
+            const blockInput = () => { if (input && !unlockInput) unlockInput = input.lock(rootNode); };
+            const releaseInput = () => { if (unlockInput) unlockInput(); unlockInput = null; };
             const tip = el('div.map-tip.panel');
             tip.style.display = 'none';
 
@@ -219,7 +226,7 @@
                     const side = Rift.SideStories && Rift.SideStories.at(id);
                     if (side) g.append(sideBubble(id, side));
                     g.addEventListener('click', () => goTo(id));
-                    g.addEventListener('keydown', ev => { if (ev.key === 'Enter') goTo(id); });
+                    g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); ev.stopPropagation(); if (!ev.repeat) goTo(id); } });
                 }
                 return g;
             }
@@ -244,7 +251,7 @@
                 else { const t = svg('text', { class: 'side-bubble-icon', 'text-anchor': 'middle', 'dominant-baseline': 'central' }); t.textContent = '💬'; b.append(t); }
                 const go = ev => { ev.stopPropagation(); goTo(id, side.id); };
                 b.addEventListener('click', go);
-                b.addEventListener('keydown', ev => { if (ev.key === 'Enter') go(ev); });
+                b.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); if (!ev.repeat) go(ev); } });
                 return b;
             }
 
@@ -316,22 +323,24 @@
 
             // sideId: walk there and open that side story instead of the station.
             async function goTo(id, sideId) {
-                if (walking) return;
+                if (destroyed || walking || pendingArrival || arriving || (input && !input.available(rootNode))) return;
                 const st = Rift.State.get();
                 const locked = Rift.World.lockReason(st, id);
                 if (locked) { Rift.UI.toast(locked); Rift.Audio.sfx('error'); return; }
                 const path = route(st, st.map.at, id);
                 if (!path) { Rift.UI.toast('No known path there yet.'); return; }
                 walking = true;
+                blockInput();
                 tip.style.display = 'none';
                 try {
                     for (let i = 1; i < path.length; i++) {
                         await walkEdge(path[i - 1], path[i]);
+                        if (destroyed) return;
                         Rift.State.update(s => { s.map.at = path[i]; });
                     }
                     if (!destroyed && sideId) Rift.Router.go('side-story', { id: sideId });
                     else if (!destroyed) await arrive(id);
-                } finally { walking = false; }
+                } finally { walking = false; releaseInput(); }
             }
 
             // A chapter opening (STORY.md App. D, SCRIPT-FORMAT.md section 7): a pending Quiet Scene plays
@@ -348,6 +357,14 @@
             }
 
             async function arrive(id, opts) {
+                if (destroyed || arriving) return;
+                arriving = true;
+                blockInput();
+                try { await visit(id, opts); }
+                finally { arriving = false; if (!walking && !pendingArrival) releaseInput(); }
+            }
+
+            async function visit(id, opts) {
                 const n = Rift.World.node(id);
                 await opening(n.chapter, opts && opts.recap);
                 if (destroyed) return;
@@ -387,8 +404,10 @@
                         const everyVisit = !!(n.cardSchool || n.repeat);
                         if (!done || n.type !== 'story' || everyVisit || await Rift.UI.confirm(n.name, 'Watch this scene again?', 'Watch', 'Not now')) {
                             if (n.fx === 'rift') await Rift.UI.riftFx();
+                            if (destroyed) return;
                             await Rift.Dialogue.play(n.script, { replay: done && !everyVisit });
                         }
+                        if (destroyed) return;
                         finish();
                         if(n.cardSchool){
                             if(!Rift.State.get().flags['card-lesson-won'])Rift.Battles.introduction('map');
@@ -400,18 +419,21 @@
                         break;
                     case 'rest':
                         await Rift.Dialogue.play(n.script);
+                        if (destroyed) return;
                         Rift.State.update(s => { s.health = Rift.UI.maxHealth(s); });
                         Rift.Audio.sfx('heal');
                         Rift.UI.toast('Rested: health restored.');
                         // Once per lesson the narrator mentions a waiting side story. Never on the first visit:
                         // that one has its own scene (the first night, the Café), one thread per station.
                         { const aside = done && Rift.SideStories && Rift.SideStories.aside(); if (aside) await Rift.Dialogue.play(aside); }
+                        if (destroyed) return;
                         finish();
                         // Campfires are where power tweaks are changed (design/AVATARS.md 1.3); the shrine comes after.
                         if (!(Rift.PowerView && Rift.PowerView.editTweaks && Rift.PowerView.editTweaks({ onClose: shrineOffer }))) shrineOffer();
                         break;
                     case 'battle':
                         await Rift.Dialogue.play(n.script);
+                        if (destroyed) return;
                         Rift.Battles.offer(id);
                         break;
                     default:
@@ -444,6 +466,7 @@
             }
 
             function riftMenu() {
+                if (destroyed || walking || pendingArrival || arriving || (input && !input.available(rootNode))) return;
                 const st = Rift.State.get();
                 const rows = Object.entries(Rift.data.chapters).map(([cid, ch]) => el('div.row', null, [
                     el('div', { style: { flex: 1 } }, [
@@ -455,13 +478,18 @@
                         disabled: !!ch.comingSoon || !ch.start,
                         async onclick() {
                             m.close();
-                            let first = false;
-                            Rift.State.update(s => { first = Rift.World.jumpToChapter(s, cid); });
-                            await Rift.UI.riftFx();
-                            // The chapter may be on another painted map, so rebuild the screen there.
-                            const at = Rift.State.get().map.at;
-                            Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true, recap: first ? cid : null });
-                            if (first) Rift.UI.toast('A starter kit tumbles out of the rift: 3 Catch Charms and a Tonic!', 4000);
+                            walking = true;
+                            blockInput();
+                            try {
+                                let first = false;
+                                Rift.State.update(s => { first = Rift.World.jumpToChapter(s, cid); });
+                                await Rift.UI.riftFx();
+                                if (destroyed) return;
+                                // The chapter may be on another painted map, so rebuild the screen there.
+                                const at = Rift.State.get().map.at;
+                                Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true, recap: first ? cid : null });
+                                if (first) Rift.UI.toast('A starter kit tumbles out of the rift: 3 Catch Charms and a Tonic!', 4000);
+                            } finally { walking = false; releaseInput(); }
                         },
                     }),
                 ]));
@@ -476,18 +504,28 @@
             placeAvatar(here.x, here.y);
             draw();
             if (params && params.focus) setTimeout(() => focusNode(params.focus), 300);
-            if (params && params.arrive) setTimeout(() => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap }), 400);
-            else if (params && params.recap) setTimeout(() => opening(params.recap, true), 400);
-            else if (Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length) setTimeout(() => opening(here.chapter), 400);
+            const autoOpening = params && params.arrive ? () => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap })
+                : params && params.recap ? () => opening(params.recap, true)
+                : Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length ? () => opening(here.chapter) : null;
+            if (autoOpening) {
+                pendingArrival = true;
+                blockInput();
+                arrivalTimer = setTimeout(async () => {
+                    arrivalTimer = null;
+                    if (destroyed) return;
+                    try { await autoOpening(); }
+                    finally { pendingArrival = false; if (!walking && !arriving) releaseInput(); }
+                }, 400);
+            }
 
             // After a chapter boss, suggest a backup code once, when nothing else is on screen.
             const backupTimer = setInterval(() => {
-                if (destroyed || walking) return;
+                if (destroyed || walking || pendingArrival || arriving) return;
                 if (!Rift.State.backupMilestone() || Rift.Backup.remind()) clearInterval(backupTimer);
             }, 1500);
 
             return {
-                destroy() { destroyed = true; clearInterval(backupTimer); if (hud.destroy) hud.destroy(); },
+                destroy() { destroyed = true; clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
             };
         },
     });

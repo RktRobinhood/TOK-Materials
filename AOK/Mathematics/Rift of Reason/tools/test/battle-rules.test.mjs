@@ -150,7 +150,7 @@ test('Axiom of Extensionality: equal attacks deal no damage to each other', () =
     assert.equal(e.players[1].board.length, 0);
 });
 
-test('Principle of Induction: a creature that defeats an enemy in a fight and survives gets +1/+1', () => {
+test('Hasty Generalisation: a creature that defeats an enemy in a fight and survives gets +1/+1', () => {
     const d = hit(rule(duel([3, 5], [1, 2]), 'induction'), 'p0c0', 'p1c0');
     assert.equal(atk(d, 'p0c0'), 4);
     assert.equal(E.healthOf(d, 'p0c0').max, 6);

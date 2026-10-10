@@ -9,6 +9,68 @@
 
     function overlay() { return root.document.getElementById('overlay'); }
 
+    // One input owner across dialogue, menus and tours. Capture also blocks the next
+    // click of a double-click when finishing a scene exposes a new puzzle beneath it.
+    const input = (() => {
+        const layers = [];
+        const locks = new Set();
+        let serial = 0, guardedUntil = 0;
+        const top = () => {
+            const host = overlay();
+            return layers.filter(x => host && host.contains(x.node)).at(-1);
+        };
+        const consume = event => {
+            if (!event) return;
+            event.preventDefault();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+            else event.stopPropagation();
+        };
+        const guard = () => { guardedUntil = Date.now() + 450; };
+        const available = node => {
+            const owner = top();
+            return (!owner || owner.node === node || owner.node.contains(node)) && ![...locks].some(lock => lock.contains(node));
+        };
+        function capture(event) {
+            const key = event.type === 'keydown';
+            const activation = key && ['Enter', ' ', 'Escape'].includes(event.key);
+            const field = event.target && event.target.closest && event.target.closest('input, textarea, [contenteditable="true"]');
+            const editable = field && (field.tagName !== 'INPUT' || !['button', 'submit', 'reset', 'checkbox', 'radio', 'range', 'color', 'file'].includes(field.type));
+            if ((activation && event.repeat && (!editable || event.key !== ' ')) || (Date.now() < guardedUntil && (!key || activation) && !editable)) {
+                consume(event); return;
+            }
+            const owner = top();
+            if (owner) {
+                if (key && event.key === 'Tab') {
+                    const controls = [...owner.node.querySelectorAll('button, input, select, textarea, a[href], [tabindex="0"]')].filter(node => !node.disabled);
+                    const current = controls.indexOf(root.document.activeElement);
+                    if (!controls.length) { consume(event); return; }
+                    if (current < 0 || (!event.shiftKey && current === controls.length - 1) || (event.shiftKey && current === 0)) {
+                        consume(event); controls[event.shiftKey ? controls.length - 1 : 0].focus();
+                    }
+                    return;
+                }
+                if (owner.node.contains(event.target)) return;
+                // Dialogue can take Enter/Space from a locked map marker that still has focus.
+                if (key && owner.dialogue && owner.dialogue() && (event.key === 'Enter' || event.key === ' ')) return;
+                consume(event); return;
+            }
+            if ([...locks].some(node => node.contains(event.target))) consume(event);
+        }
+        ['pointerdown', 'pointerup', 'click', 'keydown'].forEach(type => root.document.addEventListener(type, capture, true));
+        Rift.bus.on('screen:changed', guard);
+        return {
+            available, consume, guard,
+            claim(node, opts) {
+                const owner = { node, dialogue: opts && opts.dialogue };
+                layers.push(owner);
+                // The newest owner is also visibly on top, including menus opened during tours.
+                node.style.zIndex = String(100 + ++serial);
+                return () => { const i = layers.indexOf(owner); if (i >= 0) layers.splice(i, 1); };
+            },
+            lock(node) { locks.add(node); return () => locks.delete(node); },
+        };
+    })();
+
     function toast(text, ms) {
         let box = overlay().querySelector('.toasts');
         if (!box) { box = el('div.toasts'); overlay().appendChild(box); }
@@ -21,18 +83,23 @@
     // onClose receives the chosen button, or undefined for a dismissal.
     function modal(title, body, buttons, opts) {
         let closed = false;
+        const previousFocus = root.document.activeElement;
         const close = button => {
             if (closed) return;
             closed = true;
+            releaseInput();
+            input.guard();
             backdrop.remove();
+            root.document.removeEventListener('keydown', keydown, true);
+            if (previousFocus && previousFocus.isConnected) previousFocus.focus();
             if (opts && opts.onClose) opts.onClose(button);
         };
         const list = buttons || [{ label: 'Close' }];
-        const press = b => { if (closed) return; Rift.Audio.sfx('click'); if (!b.keepOpen) close(b); if (b.onclick) b.onclick(); };
+        const press = (b, event) => { if (closed || !input.available(backdrop)) return; input.consume(event); Rift.Audio.sfx('click'); if (!b.keepOpen) close(b); if (b.onclick) b.onclick(); };
         const actions = el('div.row.wrap', { style: { justifyContent: 'flex-end', marginTop: '14px' } },
             list.map(b => el('button.btn' + (b.primary ? '.primary' : ''), {
                 text: b.label,
-                onclick() { press(b); },
+                onclick(event) { press(b, event); },
             })));
         // A dialog with a way out (Close, Cancel, Later…) also gets a top-right ✕ that does the same.
         const cancel = list.find(b => !b.primary && !b.required && !b.keepOpen && /^(close|cancel|later|not now|explore first|back|no)\b/i.test(b.label || ''));
@@ -40,12 +107,20 @@
             type: 'button', text: '✕', title: cancel.label, 'aria-label': 'Close',
             style: { position: 'sticky', top: '0', float: 'right', margin: '-6px -6px 0 8px', width: '34px', height: '34px', borderRadius: '50%',
                 border: '1px solid rgba(242, 182, 50, 0.6)', background: 'rgba(20, 18, 31, 0.9)', color: 'inherit', fontSize: '17px', lineHeight: '1', cursor: 'pointer', zIndex: '2' },
-            onclick() { press(cancel); },
+            onclick(event) { press(cancel, event); },
         }) : null;
         const backdrop = el('div.modal-backdrop', {
-            onclick(ev) { if (ev.target === backdrop && !(buttons && buttons.some(b => b.required))) close(); },
-        }, [el('div.modal.panel', null, [x, title ? el('h2', { text: title }) : null, body, actions])]);
+            onclick(ev) { if (ev.target === backdrop && input.available(backdrop) && !(buttons && buttons.some(b => b.required))) { input.consume(ev); close(); } },
+        }, [el('div.modal.panel', { role: 'dialog', 'aria-modal': 'true', 'aria-label': title || 'Menu' }, [x, title ? el('h2', { text: title }) : null, body, actions])]);
         overlay().appendChild(backdrop);
+        const releaseInput = input.claim(backdrop);
+        function keydown(event) {
+            if (!input.available(backdrop)) return;
+            if (event.key === 'Escape' && cancel && !event.repeat) press(cancel, event);
+        }
+        root.document.addEventListener('keydown', keydown, true);
+        const focus = backdrop.querySelector('button');
+        if (focus) focus.focus();
         return { close, node: backdrop };
     }
 
@@ -181,13 +256,14 @@
             const img = el('img.rift-fx', { src: Rift.Assets.src(frames[0]), alt: '' });
             const layer = el('div.rift-fx-layer', null, [img]);
             overlay().appendChild(layer);
+            const releaseInput = input.claim(layer);
             let i = 0;
             const timer = setInterval(() => {
                 i += 1;
                 if (i < frames.length) { img.src = Rift.Assets.src(frames[i]); return; }
                 clearInterval(timer);
                 layer.classList.add('fade');
-                setTimeout(() => { layer.remove(); resolve(); }, 600);
+                setTimeout(() => { releaseInput(); input.guard(); layer.remove(); resolve(); }, 600);
             }, 160);
         });
     }
@@ -294,5 +370,5 @@
         return node;
     }
 
-    Rift.UI = { toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
+    Rift.UI = { input, toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
 })(typeof window !== 'undefined' ? window : globalThis);

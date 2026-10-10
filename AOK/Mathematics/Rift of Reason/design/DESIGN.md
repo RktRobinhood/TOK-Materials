@@ -55,6 +55,10 @@ Mouse-driven, interactive, **generated fresh each play** (replayable, and hard t
 
 Bonus nodes: **Simon Tatham's Black Box and Mines** (MIT; credit required). See `research/borrowable-puzzles.md` for the full steal list and licences.
 
+Venn boards judge validity assuming the argument's premises. At difficulty 2–3, a separate reference record asks whether all premises are supported, at least one is refuted, or evidence is insufficient. Only the displayed records count; missing evidence does not mean false. Drawing is optional working with separate feedback. The verdicts decide completion.
+
+The Oracle number tester states each claim's integer or real-number domain. Inputs outside that domain are explained before evaluating the proof and cannot mark a step broken. Tower retries rebuild the local tower within the same encounter, preserving wrong-check, heart and hint counts; pressing Try again is free.
+
 Both are optional Road side paths using locally vendored official engines. Their frames work offline with embedded WASM bytes. Native controls have no reliable solved-versus-Solve completion callback, so a reported solve earns 5 XP and one charm once per station. Bonus reports do not count toward checked puzzle requirements, heart costs, catch rolls or accolades. Replay is free. The Black Box hook distinguishes indirect evidence from a unique explanation; Mines' no-guessing claim applies to default generated boards.
 
 Anti-AI stance: deterrence, not surveillance. Generated layouts, interactive formats, text in pieces/images, speed/streak bonuses, a "why?" multiple-choice step on boss puzzles only. No tab-switch detection.

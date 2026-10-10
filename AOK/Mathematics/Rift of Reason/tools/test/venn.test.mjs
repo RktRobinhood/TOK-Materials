@@ -115,7 +115,7 @@ test('generated puzzles respect difficulty and conventions', () => {
             const forms = x.premises.map(p => p.q).concat(x.conclusion.q);
             if (d === 1) forms.forEach(q => assert.ok(['all', 'no', 'is', 'isNot'].includes(q), q));
             if (d < 3) assert.equal(x.terms.length, 3);
-            if (d === 1) assert.equal(x.askWorld, false);
+            assert.equal(x.askEvidence, d >= 2);
             assert.ok(x.premises.length >= 2 && x.premises.length <= 3);
             // validity is computed by the engine and never depends on the import convention
             const boolean = E.analyseData(x), trad = E.analyseData(x, { existentialImport: true });
@@ -123,7 +123,7 @@ test('generated puzzles respect difficulty and conventions', () => {
             assert.equal(boolean.valid, trad.valid, 'convention-dependent: ' + x.conclusion.text);
             // world tags
             [...x.premises, x.conclusion].forEach(s => assert.ok([true, false, 'absurd', 'unknown'].includes(s.world)));
-            if (x.askWorld) assert.ok([true, false, 'absurd'].includes(x.conclusion.world));
+            assert.ok(['supported', 'refuted', 'unknown'].includes(x.reference.status));
             // every x fits one region or one line
             boolean.marks.forEach(m => assert.ok(m.length === 1 || (m.length === 2 && ((m[0] ^ m[1]) & ((m[0] ^ m[1]) - 1)) === 0)));
         }
@@ -150,15 +150,15 @@ test('check(): validity decides, the diagram earns partial credit and named feed
     assert.equal(wrongValid.solved, false);
     assert.ok(wrongValid.partial > 0 && wrongValid.partial < 1);
 
-    const noDiagram = def.check(x, { valid: sol.valid, trueInWorld: sol.trueInWorld, shading: [], marks: [] });
+    const noDiagram = def.check(x, { valid: sol.valid, premisesEvidence: sol.premisesEvidence, shading: [], marks: [] });
     assert.equal(noDiagram.solved, true);
     assert.ok(noDiagram.partial < 1);
     assert.deepEqual(plain(noDiagram.diagram.missing), plain(sol.shading));
     assert.match(noDiagram.feedback, /should be shaded|x is missing/);
 
-    if (x.askWorld) {
-        const other = x.conclusion.world === 'absurd' ? true : 'absurd';
-        assert.equal(def.check(x, Object.assign({}, sol, { trueInWorld: other })).solved, false);
+    if (x.askEvidence) {
+        const other = sol.premisesEvidence === 'unknown' ? 'supported' : 'unknown';
+        assert.equal(def.check(x, Object.assign({}, sol, { premisesEvidence: other })).solved, false);
     }
     assert.equal(def.check(x, {}).solved, false);
 });

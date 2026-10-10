@@ -855,9 +855,12 @@
             el('div.cf-q', { text: data.reading.question }),
             ...optBtns,
         ]);
-        const statusEl = el('div.cf-status');
+        const statusEl = el('div.cf-status', { role: 'status', tabindex: '0', 'aria-label': 'Chart feedback' });
         const submitBtn = el('button.btn.gold.cf-submit', { text: '✓ This chart is honest', onclick: () => submit() });
-        const side = el('div.cf-side', null, [tools, readBox, statusEl, submitBtn]);
+        const side = el('div.cf-side', null, [
+            el('div.cf-controls', null, [tools, readBox]),
+            el('div.cf-actions', null, [statusEl, submitBtn]),
+        ]);
 
         const main = el('div.cf-main', null, [board, side]);
         const rootEl = el('div.cf-root', null, [top, main]);

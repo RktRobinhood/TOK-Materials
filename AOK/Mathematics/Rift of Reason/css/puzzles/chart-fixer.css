@@ -74,7 +74,7 @@
     border: 3px solid var(--cf-ink);
     border-radius: 8px;
     box-shadow: inset 0 0 30px rgba(107, 74, 28, 0.25), 0 6px 16px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    overflow: auto;
 }
 .cf-board::before, .cf-board::after {
     /* brass pins holding the paper */
@@ -94,6 +94,7 @@
 /* the Algorithm's headline */
 .cf-headline {
     display: flex;
+    flex: none;
     align-items: center;
     gap: 8px;
     padding: 4px 10px;
@@ -116,7 +117,7 @@
 .cf-htext { font-size: 0.95em; }
 .cf-headline.struck .cf-htext { text-decoration: line-through; text-decoration-thickness: 2px; opacity: 0.6; }
 
-.cf-titlebar { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.cf-titlebar { flex: none; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
 .cf-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05em; }
 .cf-sub { font-size: 0.8em; font-style: italic; color: #5a4a3a; }
 
@@ -240,12 +241,15 @@
     flex-direction: column;
     gap: 10px;
     min-height: 0;
-    overflow: auto;
+    overflow: hidden;
     padding: 10px;
     background: var(--panel);
     border: 2px solid var(--panel-edge);
     border-radius: var(--radius);
 }
+.cf-controls { flex: 1 1 auto; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+.cf-controls > .cf-section { flex: none; }
+.cf-actions { flex: none; display: flex; flex-direction: column; gap: 10px; }
 .cf-section { display: flex; flex-direction: column; gap: 6px; }
 .cf-sidehead { font-family: var(--font-display); font-weight: 700; color: var(--cf-green); }
 .cf-note { font-size: 0.8em; opacity: 0.8; }
@@ -286,10 +290,10 @@
 .cf-opt.sel { border-color: var(--cf-green); background: rgba(47, 191, 113, 0.16); }
 .cf-opt:disabled { cursor: default; }
 
-.cf-status { font-size: 0.88em; opacity: 0.9; min-height: 1.2em; }
+.cf-status { flex: none; font-size: 0.88em; opacity: 0.9; min-height: 1.2em; max-height: 20vh; overflow: auto; overflow-wrap: anywhere; }
 .cf-status.bad { color: #ff9aa8; }
 .cf-status.good { color: #8cf0b6; font-weight: 700; }
-.cf-submit { align-self: stretch; }
+.cf-submit { flex: none; align-self: stretch; }
 
 .cf-root.solved .cf-board { box-shadow: 0 0 0 2px var(--cf-ink), inset 0 0 0 2px rgba(240, 207, 122, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.5), 0 0 28px rgba(47, 191, 113, 0.45); }
 
@@ -301,7 +305,7 @@
 }
 @media (max-width: 820px) {
     .cf-root { overflow: auto; }
-    .cf-main { flex-direction: column; }
+    .cf-main { flex: none; flex-direction: column; }
     .cf-board { flex: 0 0 auto; height: 460px; }
-    .cf-side { width: auto; overflow: visible; }
+    .cf-side { width: auto; height: 430px; }
 }

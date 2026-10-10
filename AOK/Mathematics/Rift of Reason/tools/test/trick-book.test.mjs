@@ -103,6 +103,7 @@ class Element extends Node {
     append(...nodes) { super.append(...nodes); for (const n of nodes) if (n instanceof Node) n.parent = this; }
     appendChild(n) { this.append(n); return n; }
     remove() { if (this.parent) this.parent.children = this.parent.children.filter(n => n !== this); }
+    contains(node) { return this === node || this.children.some(n => n instanceof Element && n.contains(node)); }
 }
 function ui() {
     const Rift = loadRift(FILES);
@@ -116,7 +117,7 @@ function ui() {
     Rift.Audio = { sfx: () => {} };
     Rift.data.map = { nodes: {} };
     const overlay = new Element();
-    vm.runInNewContext(fs.readFileSync(new URL('../../js/ui/ui.js', import.meta.url), 'utf8'), { window: { Rift, document: { getElementById: () => overlay } }, setTimeout: () => {} });
+    vm.runInNewContext(fs.readFileSync(new URL('../../js/ui/ui.js', import.meta.url), 'utf8'), { window: { Rift, document: { getElementById: () => overlay, addEventListener() {}, removeEventListener() {} } }, setTimeout: () => {} });
     const walk = n => [n, ...n.children.filter(x => x instanceof Node).flatMap(walk)];
     const find = pred => walk(overlay).find(pred);
     const button = text => find(n => n.textContent === text);

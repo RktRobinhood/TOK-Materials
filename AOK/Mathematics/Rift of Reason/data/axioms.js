@@ -75,7 +75,7 @@
             short: 'No double defeats',
             name: 'Law of the Excluded Middle', category: 'combat',
             text: 'No double defeats: if both fighters would be defeated, the defender survives with 1 health.',
-            flavour: 'Every statement is either true or false. There is no in-between.',
+            flavour: 'In classical logic, P or not P. The card uses this either/or idea to prevent a double defeat.',
             defenderSurvivesTrade: true,
         },
         extensionality: {
@@ -169,7 +169,7 @@
             short: 'Off (attack anyone)',
             name: 'Axiom of Choice', category: 'targeting',
             text: 'Guard is ignored: attackers may choose any target.',
-            flavour: 'You can always pick one thing from each set, even when no rule says which.',
+            flavour: 'Choose one member from each non-empty set, even without a rule saying which. This card lets you choose any target.',
             rules: { ignoreGuard: true },
         },
         mercy: {
@@ -209,10 +209,10 @@
         },
         induction: {
             short: 'A winner of a fight gets +1/+1',
-            name: 'Principle of Induction', category: 'growth',
+            name: 'Hasty Generalisation', category: 'growth',
             text: 'A creature that defeats an enemy in a fight and survives gets +1/+1.',
-            flavour: 'It worked once, and it worked the next time. So it always works… right?',
-            onFightWon(api, card) { api.buff(card.cid, 1, 1, 'Induction'); },
+            flavour: 'A win makes this creature stronger. A few wins do not prove it always wins. Mathematical induction needs a base case and a proof from n to n + 1.',
+            onFightWon(api, card) { api.buff(card.cid, 1, 1, 'Hasty Generalisation'); },
         },
         doubt: {
             short: 'Hero hits deal only 1',

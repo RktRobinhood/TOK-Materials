@@ -252,15 +252,56 @@
         return s && s.claim ? claimVars(data, s.claim) : [];
     }
 
+    function testVars(data, i) {
+        const used = stepVars(data, i).slice();
+        const c = data.steps[i] && data.steps[i].claim;
+        // A cases claim binds these letters while checking all combinations,
+        // but also shows the student's chosen case in the tester.
+        if (c && c.rel === 'cases') c.vars.forEach(v => { if (used.indexOf(v) < 0) used.push(v); });
+        return used;
+    }
+
+    function domainText(v) {
+        const d = v.domain || { type: 'real' };
+        if (d.type === 'integer') {
+            if (d.min === 0) return 'a whole number, 0 or more (no fractions)';
+            if (d.min === 1) return 'a whole number, 1 or more (no fractions)';
+            return 'an integer (no fractions; negatives are allowed)';
+        }
+        return d.min === 0 ? 'a number, 0 or more (fractions are allowed)' : 'a number (fractions and negatives are allowed)';
+    }
+
     // The number tester. env holds values for (some of) the free variables;
     // missing ones take their starting value.
-    //   → { claim: bool, fits, ok, env, result, unmet? }
+    // vars.min/max are sampling ranges, not the proposition's domain.
+    //   → { claim: bool, fits, ok, env?, result?, unmet? }
     function testStep(data, i, env) {
         const s = data.steps[i];
         if (!s || !s.claim) return { claim: false, fits: true, ok: true };
         const base = {};
-        (data.vars || []).forEach(v => { base[v.name] = v.start; });
-        const e = fullEnv(data, Object.assign(base, env || {}));
+        const invalid = [];
+        (data.vars || []).forEach(v => {
+            const raw = env && Object.prototype.hasOwnProperty.call(env, v.name) ? env[v.name] : v.start;
+            if (raw == null || (typeof raw === 'string' && !raw.trim())) {
+                invalid.push('Enter a number for ' + v.name);
+                return;
+            }
+            const value = (typeof raw === 'number' || typeof raw === 'string') ? Number(raw) : NaN;
+            if (!Number.isFinite(value)) {
+                invalid.push(v.name + ' must be a finite number');
+                return;
+            }
+            const domain = v.domain || { type: 'real' };
+            if ((domain.type === 'integer' && !Number.isInteger(value)) || (domain.min != null && value < domain.min)) {
+                invalid.push(v.name + ' = ' + raw + ' is outside the proof: ' + v.name + ' must be ' + domainText(v));
+                return;
+            }
+            base[v.name] = value;
+        });
+        // Invalid inputs cannot be counterexamples. Reject them before lets or
+        // claims are evaluated, including values that would happen to pass.
+        if (invalid.length) return { claim: true, fits: false, ok: true, unmet: invalid };
+        const e = fullEnv(data, base);
         const used = stepVars(data, i);
         const unmet = (data.given || []).filter(g => claimVars(data, g).some(v => used.indexOf(v) >= 0) && !evalClaim(g, e).ok);
         if (unmet.length) return { claim: true, fits: false, ok: true, env: e, unmet: unmet.map(g => g.say || 'the start of the proof') };
@@ -331,7 +372,7 @@
         return {
             title: 'Proof that ' + (K ? (end[0] + K) + ' = ' + (end[1] + K) : end[0] + ' = ' + end[1]),
             steps, flawStep,
-            vars: [{ name: a, min: -10, max: 10, start: 3 }],
+            vars: [{ name: a, min: -10, max: 10, start: 3, domain: { type: 'real' } }],
             lets: [{ name: b, expr: a }],
             hint: 'Try ' + a + ' = ' + b + ' = 3 in step ' + (flawStep + 1) + '. What is ' + pretty(a + '-' + b) + ' then, and what are you dividing by?',
             explain: a + ' = ' + b + ', so ' + pretty(a + '-' + b) + ' = 0. Step ' + (flawStep + 1) + ' divides both sides by zero.',
@@ -364,7 +405,7 @@
         return {
             title: 'Proof that ' + L + ' = ' + R + ' for ' + f.every,
             steps, flawStep: 2,
-            vars: [{ name: f.x, min: f.min, max: f.max, start: 1 }],
+            vars: [{ name: f.x, min: f.min, max: f.max, start: 1, domain: f.min === 0 ? { type: 'real', min: 0 } : { type: 'real' } }],
             hint: 'Where does step 3 get "' + L + ' = ' + R + '" from? Is that something we already know, or the thing we are trying to show?',
             explain: 'Step 3 uses the claim itself as its reason. Test ' + f.x + ' = 1: the two sides are different, so the claim is false anyway.',
         };
@@ -385,7 +426,7 @@
                 ],
                 flawStep: 3,
                 alsoAccept: ['circular'],
-                vars: [{ name: f.x, min: f.min, max: f.max, start: 1 }],
+                vars: [{ name: f.x, min: f.min, max: f.max, start: 1, domain: f.min === 0 ? { type: 'real', min: 0 } : { type: 'real' } }],
                 hint: 'Multiplying by 0 turns ANY equation into 0 = 0, even a false one. So does "0 = 0 is true" tell you anything?',
                 explain: 'If the claim were true, 0 = 0 would follow. But 0 = 0 follows from anything, so it does not show the claim. Try ' + f.x + ' = 1.',
             };
@@ -399,13 +440,13 @@
             return {
                 title: 'Proof that every multiple of ' + A + ' is a multiple of ' + B,
                 steps: [
-                    step('Let ' + n + ' be a multiple of ' + A + ': ' + n + ' = ' + A + m + ' for some whole number ' + m + '.', { rel: 'div', l: n, r: String(A) }),
+                    step('Let ' + n + ' be a multiple of ' + A + ': ' + n + ' = ' + A + m + ' for some integer ' + m + ' (no fractions).', { rel: 'div', l: n, r: String(A) }),
                     step('Fact: every multiple of ' + B + ' is also a multiple of ' + A + ' (because ' + B + ' = ' + A + ' × ' + c + ').', { rel: 'div', l: B + '*' + kk, r: String(A) }),
                     step(n + ' is a multiple of ' + A + '.', { rel: 'div', l: n, r: String(A) }),
                     step('So ' + n + ' is a multiple of ' + B + '. ∎', { rel: 'div', l: n, r: String(B) }),
                 ],
                 flawStep: 3,
-                vars: [{ name: m, min: 1, max: 30, start: 2 }, { name: kk, min: 1, max: 30, start: 1 }],
+                vars: [{ name: m, min: 1, max: 30, start: 2, domain: { type: 'integer' } }, { name: kk, min: 1, max: 30, start: 1, domain: { type: 'integer' } }],
                 lets: [{ name: n, expr: A + '*' + m }],
                 hint: '"Every multiple of ' + B + ' is a multiple of ' + A + '" does not say "every multiple of ' + A + ' is a multiple of ' + B + '". Try ' + n + ' = ' + A + '.',
                 explain: 'Step 2 goes from ' + B + ' to ' + A + '. Step 4 uses it backwards, from ' + A + ' to ' + B + '. ' + A + ' itself is a multiple of ' + A + ' but not of ' + B + '.',
@@ -415,13 +456,13 @@
         return {
             title: 'Proof that if ' + x + ' + ' + y + ' is even, then ' + x + ' and ' + y + ' are both even',
             steps: [
-                step('Let ' + x + ' and ' + y + ' be whole numbers, and ' + x + ' + ' + y + ' is even.', { rel: 'even', l: x + '+' + y }),
+                step('Let ' + x + ' and ' + y + ' be integers (no fractions), and ' + x + ' + ' + y + ' is even.', { rel: 'even', l: x + '+' + y }),
                 step('Fact: if two numbers are both even (2s and 2t), their sum 2s + 2t = 2(s + t) is even.', { rel: 'even', l: '2*s+2*t' }),
                 step('We know ' + x + ' + ' + y + ' is even.', { rel: 'even', l: x + '+' + y }),
                 step('So ' + x + ' and ' + y + ' must both be even. ∎', { rel: 'both', parts: [{ rel: 'even', l: x }, { rel: 'even', l: y }] }),
             ],
             flawStep: 3,
-            vars: [{ name: x, min: -8, max: 8, start: 2 }, { name: y, min: -8, max: 8, start: 4 }, { name: 's', min: -5, max: 5, start: 1 }, { name: 't', min: -5, max: 5, start: 2 }],
+            vars: [{ name: x, min: -8, max: 8, start: 2, domain: { type: 'integer' } }, { name: y, min: -8, max: 8, start: 4, domain: { type: 'integer' } }, { name: 's', min: -5, max: 5, start: 1, domain: { type: 'integer' } }, { name: 't', min: -5, max: 5, start: 2, domain: { type: 'integer' } }],
             given: [{ rel: 'even', l: x + '+' + y, say: x + ' + ' + y + ' must be even' }],
             hint: 'Step 2 says "both even → sum even". Step 4 uses it backwards. Try ' + x + ' = 1 and ' + y + ' = 1.',
             explain: '"Both even → sum even" is true, but "sum even → both even" is not: 1 + 1 = 2 is even and 1 is odd.',
@@ -446,7 +487,7 @@
         return {
             title: 'Proof that ' + pretty(expr) + ' is always prime',
             steps, flawStep,
-            vars: [{ name: 'n', min: 0, max: 60, start: 5 }],
+            vars: [{ name: 'n', min: 0, max: 60, start: 5, domain: { type: 'integer', min: 0 } }],
             hint: 'The last step is about EVERY n, not just the ones checked. Look for a counter-example: try n = ' + p + '.',
             explain: (last + 1) + ' cases in a row is still not "every n": n = ' + (last + 1) + ' gives ' + evaluate(expr, { n: last + 1 }) + ' = ' + p + ' × ' + p + ', which is not prime.',
         };
@@ -490,7 +531,7 @@
                     step('So you read ' + (Q - P) + ' pages. ∎', eq('count(' + P + ',' + Q + ')', Q - P, 'Pages from ' + P + ' to ' + Q + ' (counted one by one) = ' + (Q - P))),
                 ],
                 flawStep: 1,
-                vars: [{ name: 'a', min: 1, max: 20, start: 1 }, { name: 'b', min: 1, max: 30, start: 3 }],
+                vars: [{ name: 'a', min: 1, max: 20, start: 1, domain: { type: 'integer', min: 1 } }, { name: 'b', min: 1, max: 30, start: 3, domain: { type: 'integer', min: 1 } }],
                 given: [{ rel: 'ge', l: 'b', r: 'a', say: 'the last page b must come after the first page a' }],
                 hint: 'Test step 2 with tiny numbers: from page 1 to page 3 is pages 1, 2, 3. Is that 3 − 1?',
                 explain: 'From page 1 to page 3 there are 3 pages, not 3 − 1 = 2. The rule counts the gaps between pages, not the pages: you read ' + (Q - P + 1) + '.',
@@ -508,7 +549,7 @@
                 step('So the fence needs ' + g + ' posts. ∎', eq('count(0,' + g + ')', g, 'Posts for ' + g + ' gaps (counted) = ' + g)),
             ],
             flawStep: 2,
-            vars: [{ name: 'k', min: 1, max: 20, start: 1 }],
+            vars: [{ name: 'k', min: 1, max: 20, start: 1, domain: { type: 'integer', min: 0 } }],
             hint: 'Test step 3 with k = 1: one gap. How many posts does one gap need?',
             explain: 'One gap needs 2 posts, two gaps need 3: there is always one more post than gaps. The fence needs ' + (g + 1) + '.',
         };
@@ -547,7 +588,7 @@
                 step('So ' + x + ' = 0: every number is zero! ∎', eq(x, 0)),
             ],
             flawStep: 2,
-            vars: [{ name: x, min: -10, max: 10, start: 3 }],
+            vars: [{ name: x, min: -10, max: 10, start: 3, domain: { type: 'real' } }],
             hint: 'Try ' + x + ' = 3 in step 3. Is 3 = −3? Both have the same square, 9.',
             explain: x + '² = (−' + x + ')² is true, but equal squares only mean the numbers are equal OR opposite. √(' + x + '²) is |' + x + '|, not ' + x + '.',
         };
@@ -562,8 +603,8 @@
     C['odd'] = function (rng) {
         const [m, n] = rng.pick([['m', 'n'], ['a', 'b'], ['p', 'q']]);
         const both = { rel: 'both', parts: [{ rel: 'odd', l: m }, { rel: 'odd', l: n }] };
-        const intro = step('Let ' + m + ' and ' + n + ' be odd: ' + m + ' = 2j + 1 and ' + n + ' = 2k + 1, where j and k are whole numbers.', both);
-        const base = { vars: [{ name: 'j', min: -6, max: 12, start: 2 }, { name: 'k', min: -6, max: 12, start: 3 }],
+        const intro = step('Let ' + m + ' and ' + n + ' be odd: ' + m + ' = 2j + 1 and ' + n + ' = 2k + 1, where j and k are integers (no fractions; negatives are allowed).', both);
+        const base = { vars: [{ name: 'j', min: -6, max: 12, start: 2, domain: { type: 'integer' } }, { name: 'k', min: -6, max: 12, start: 3, domain: { type: 'integer' } }],
             lets: [{ name: m, expr: '2*j+1' }, { name: n, expr: '2*k+1' }] };
         if (rng.chance(0.5)) {
             return Object.assign(base, {
@@ -571,9 +612,9 @@
                 steps: [intro,
                     step('Add them: ' + m + ' + ' + n + ' = 2j + 2k + 2.', eq(m + '+' + n, '2*j+2*k+2')),
                     step('Take out a factor of 2: ' + m + ' + ' + n + ' = 2(j + k + 1).', eq(m + '+' + n, '2*(j+k+1)')),
-                    step('j + k + 1 is a whole number, so ' + m + ' + ' + n + ' is even. ∎', { rel: 'even', l: m + '+' + n }),
+                    step('j + k + 1 is an integer, so ' + m + ' + ' + n + ' is even. ∎', { rel: 'even', l: m + '+' + n }),
                 ],
-                explain: 'Every step holds for any whole numbers j and k, not just the ones you tested: that is what makes it a proof.',
+                explain: 'Every step holds for any integers j and k, not just the ones you tested: that is what makes it a proof.',
             });
         }
         return Object.assign(base, {
@@ -581,9 +622,9 @@
             steps: [intro,
                 step('Multiply them: ' + m + n + ' = 4jk + 2j + 2k + 1.', eq(m + '*' + n, '4*j*k+2*j+2*k+1')),
                 step('Group the even part: ' + m + n + ' = 2(2jk + j + k) + 1.', eq(m + '*' + n, '2*(2*j*k+j+k)+1')),
-                step('2jk + j + k is a whole number, so ' + m + n + ' is odd. ∎', { rel: 'odd', l: m + '*' + n }),
+                step('2jk + j + k is an integer, so ' + m + n + ' is odd. ∎', { rel: 'odd', l: m + '*' + n }),
             ],
-            explain: 'Every step is algebra that holds for all whole numbers j and k, so the claim holds for every pair of odd numbers.',
+            explain: 'Every step is algebra that holds for all integers j and k, so the claim holds for every pair of odd numbers.',
         });
     };
 
@@ -603,7 +644,7 @@
                 step('Collect the like terms: ' + pretty(sq2 + '^2') + ' = ' + x + '²' + S + (2 * c) + x + ' + ' + (c * c) + '. ∎',
                     eq(sq2 + '^2', x + '^2' + s + (2 * c) + '*' + x + '+' + (c * c))),
             ],
-            vars: [{ name: x, min: -10, max: 10, start: 2 }],
+            vars: [{ name: x, min: -10, max: 10, start: 2, domain: { type: 'real' } }],
             explain: 'Each step is a rule of algebra that holds for every ' + x + '. Testing numbers can only find mistakes; the algebra is what proves it.',
         };
     };
@@ -614,14 +655,15 @@
         return {
             title: 'Proof that 1 + 2 + … + ' + N + ' = ' + V,
             steps: [
-                step('Call the sum S: S = 1 + 2 + 3 + … + n.'),
+                step('Let n be a whole number, 1 or more. Call the sum S: S = 1 + 2 + 3 + … + n.'),
                 step('Write it backwards: S = n + (n − 1) + … + 1.', eq('sum(1,n)', 'sum(1,n)')),
                 step('Add the two rows pair by pair: each pair adds up to n + 1.', eq('i+(n+1-i)', 'n+1')),
                 step('There are n pairs, so 2S = n(n + 1).', eq('2*sum(1,n)', 'n*(n+1)', '2 × (1 + 2 + … + n) = n(n + 1)')),
                 step('So S = n(n + 1) ÷ 2.', eq('sum(1,n)', 'n*(n+1)/2', '1 + 2 + … + n = n(n + 1) ÷ 2')),
                 step('For n = ' + N + ': S = ' + N + ' × ' + (N + 1) + ' ÷ 2 = ' + V + '. ∎', eq('sum(1,' + N + ')', V, '1 + 2 + … + ' + N + ' = ' + V)),
             ],
-            vars: [{ name: 'n', min: 1, max: 40, start: 4 }, { name: 'i', min: 1, max: 40, start: 1 }],
+            vars: [{ name: 'n', min: 1, max: 40, start: 4, domain: { type: 'integer', min: 1 } }, { name: 'i', min: 1, max: 40, start: 1, domain: { type: 'integer', min: 1 } }],
+            given: [{ rel: 'ge', l: 'n', r: 'i', say: 'the pair number i must be from 1 to n' }],
             explain: 'This is the young Gauss\'s pairing trick. Each step holds for every n, so it proves the formula for all n at once.',
         };
     };
@@ -639,7 +681,7 @@
                 step('Use a = ' + P + ' and b = ' + Q + ': ' + P + '² − ' + Q + '² = (' + P + ' + ' + Q + ')(' + P + ' − ' + Q + ').', eq(P + '^2-' + Q + '^2', '(' + P + '+' + Q + ')*(' + P + '-' + Q + ')')),
                 step('= ' + (P + Q) + ' × ' + D + ' = ' + V + '. ∎', eq('(' + P + '+' + Q + ')*(' + P + '-' + Q + ')', V)),
             ],
-            vars: [{ name: 'a', min: -10, max: 10, start: 5 }, { name: 'b', min: -10, max: 10, start: 2 }],
+            vars: [{ name: 'a', min: -10, max: 10, start: 5, domain: { type: 'real' } }, { name: 'b', min: -10, max: 10, start: 2, domain: { type: 'real' } }],
             explain: 'The general rule holds for all a and b, and the arithmetic checks out, so the result is proved.',
         };
     };
@@ -656,7 +698,7 @@
         const shown = 'a' + sup + ' + b' + sup + ' + c' + sup;
         const total = v.m * v.m * v.m;
         const steps = [
-            step('Claim: ' + shown + ' never leaves remainder ' + v.r + ' when divided by ' + v.m + ', for any whole numbers a, b, c.'),
+            step('Claim: ' + shown + ' never leaves remainder ' + v.r + ' when divided by ' + v.m + ', for any integers a, b, c (no fractions).'),
             step('Adding ' + v.m + ' to a number never changes the remainder of its ' + v.name.slice(0, -1) + ' ÷ ' + v.m + '. So only the remainders 0 to ' + (v.m - 1) + ' of a, b and c matter.',
                 eq('mod((a+' + v.m + '*t)^' + P + ',' + v.m + ')', 'mod(a^' + P + ',' + v.m + ')', 'Remainder of (a + ' + v.m + 't)' + sup + ' ÷ ' + v.m + ' = remainder of a' + sup + ' ÷ ' + v.m)),
             step('That leaves ' + v.m + ' × ' + v.m + ' × ' + v.m + ' = ' + total + ' cases. Checking all of them.'),
@@ -680,8 +722,8 @@
         return {
             title: 'Proof that ' + shown + ' never leaves remainder ' + v.r + ' when divided by ' + v.m,
             steps,
-            vars: [{ name: 'a', min: -12, max: 12, start: 1 }, { name: 'b', min: -12, max: 12, start: 2 }, { name: 'c', min: -12, max: 12, start: 3 },
-                { name: 't', min: 0, max: 5, start: 1 }],
+            vars: [{ name: 'a', min: -12, max: 12, start: 1, domain: { type: 'integer' } }, { name: 'b', min: -12, max: 12, start: 2, domain: { type: 'integer' } }, { name: 'c', min: -12, max: 12, start: 3, domain: { type: 'integer' } },
+                { name: 't', min: 0, max: 5, start: 1, domain: { type: 'integer' } }],
             cases: total,
             explain: 'Every step holds: the machine really did check all ' + total + ' cases. Nobody will read them all, so we trust the program, and that trust needs checking too.',
         };
@@ -779,7 +821,7 @@
         }
         if (data.kind === 'flawed') {
             if (stepIx === null) {
-                return { solved: false, partial: 0, feedback: 'One step does break. Test the steps with real numbers: plug the same value into both sides.' };
+                return { solved: false, partial: 0, feedback: 'One step does break. Test with numbers allowed by the assumptions: plug the same value into both sides.' };
             }
             if (stepIx < data.flawStep) {
                 return { solved: false, partial: 0, feedback: 'Step ' + (stepIx + 1) + ' holds under the stated assumptions. Check the algebra, not just a few examples. The flaw is further along the tape.' };
@@ -810,7 +852,7 @@
     function hintsFor(data) {
         if (data.kind === 'flawed') {
             return [
-                'Click a step and test it with a real number: plug the same value into both sides and see if they stay equal.',
+                'Click a step and test it with an allowed number: plug the same value into both sides and see if they stay equal.',
                 data.hint,
                 'Look closely at step ' + (data.flawStep + 1) + '. ' + FLAWS[data.flaw].label + '.',
             ];
@@ -977,16 +1019,21 @@
 
         // ---- the number tester ----
         function varRow(v) {
+            const domain = v.domain || { type: 'real' };
             const input = el('input.om-val', {
-                type: 'number', value: String(st.values[v.name]), step: '1',
-                oninput: () => { const x = parseFloat(input.value); if (Number.isFinite(x)) st.values[v.name] = x; },
+                type: 'number', value: String(st.values[v.name]), step: domain.type === 'integer' ? '1' : 'any',
+                min: domain.min, title: v.name + ' must be ' + domainText(v),
+                oninput: () => { st.values[v.name] = input.value; },
             });
             const bump = d => { st.values[v.name] = (Number(st.values[v.name]) || 0) + d; input.value = String(st.values[v.name]); sfx('click'); };
-            return el('div.om-varrow', null, [
-                el('span.om-var', { text: v.name + ' =' }),
-                el('button.om-bump', { text: '−', title: 'one less', onclick: () => bump(-1) }),
-                input,
-                el('button.om-bump', { text: '+', title: 'one more', onclick: () => bump(1) }),
+            return el('div.om-variable', null, [
+                el('div.om-varrow', null, [
+                    el('span.om-var', { text: v.name + ' =' }),
+                    el('button.om-bump', { text: '−', title: 'one less', onclick: () => bump(-1) }),
+                    input,
+                    el('button.om-bump', { text: '+', title: 'one more', onclick: () => bump(1) }),
+                ]),
+                el('div.om-muted', { text: domainText(v) }),
             ]);
         }
 
@@ -1039,8 +1086,7 @@
             if (!s.claim) {
                 tester.appendChild(el('div.om-muted', { text: 'This line only sets things up. There is nothing to test here.' }));
             } else {
-                const used = stepVars(data, st.sel).slice();
-                if (s.claim.rel === 'cases') s.claim.vars.forEach(v => { if (used.indexOf(v) < 0) used.push(v); });
+                const used = testVars(data, st.sel);
                 const vars = used.map(name => (data.vars.find(v => v.name === name) || { name, start: 1 }));
                 vars.forEach(v => { if (st.values[v.name] == null) st.values[v.name] = v.start; });
                 if (vars.length) tester.appendChild(el('div.om-vars', null, vars.map(varRow)));
@@ -1049,7 +1095,7 @@
                 if (res) {
                     const box = el('div.om-result' + (!res.fits ? '.unfit' : res.ok ? '.good' : '.bad'));
                     if (!res.fits) {
-                        box.appendChild(el('div', { text: 'These numbers do not fit the start of the proof: ' + res.unmet.join('; ') + '.' }));
+                        box.appendChild(el('div', { text: 'These inputs do not fit the proof: ' + res.unmet.join('; ') + '. This is not a counterexample.' }));
                     } else {
                         const named = claimIdents(s.claim);
                         (data.lets || []).filter(l => named.indexOf(l.name) >= 0).forEach(l => box.appendChild(el('div.om-detail', { text: l.name + ' = ' + pretty(l.expr) + ' = ' + fmt(res.env[l.name]) })));
@@ -1066,7 +1112,7 @@
 
         function runTest() {
             const env = {};
-            Object.keys(st.values).forEach(k => { env[k] = Number(st.values[k]); });
+            testVars(data, st.sel).forEach(k => { env[k] = st.values[k]; });
             let res;
             try { res = testStep(data, st.sel, env); } catch (e) { res = { claim: true, fits: false, ok: true, unmet: ['the machine could not read those numbers'] }; }
             if (res.fits) {
@@ -1178,7 +1224,7 @@
         id: 'oracle',
         rules: [
             "Read the claim, assumptions and proof steps. Choose a step to inspect.",
-            "The number tester looks for counterexamples. One failed case can break a universal claim.",
+            "Test with numbers allowed by the assumptions. One failed allowed case can break a universal claim.",
             "A few successful tests do not prove a claim for all numbers. Check why every step follows.",
             "Mark whether the proof holds or choose the broken step and flaw. Some proofs are valid; do not assume a trick.",
             "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
@@ -1219,7 +1265,7 @@
         mount,
 
         // exposed for tests and tools
-        internals: { FLAWS, FLAW_IDS, T, C, machineProof, evaluate, evalClaim, testStep, stepVars, claimVars, fullEnv, pretty, isPrime },
+        internals: { FLAWS, FLAW_IDS, T, C, machineProof, evaluate, evalClaim, testStep, stepVars, testVars, claimVars, fullEnv, pretty, isPrime },
     };
 
     Rift.Puzzles.register(def);

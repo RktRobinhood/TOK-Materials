@@ -695,7 +695,7 @@
         const uiRng = (api && api.rng) || Rift.makeRng('tower-ui:' + data.seed);
         try { if (root.getComputedStyle && root.getComputedStyle(container).position === 'static') container.style.position = 'relative'; } catch (e) { /* ignore */ }
 
-        const state = newState(data);
+        let state = newState(data);
         let busy = false;
         let lastEvent = null;
         const timers = [];
@@ -932,7 +932,23 @@
                 rootEl.classList.add('failed');
                 sfx('error');
                 showResult('bad', res.feedback, []);
+                nextButton('Try again', retry);
             }
+        }
+
+        function retry() {
+            // Restart this tower, not its encounter: wrong checks and hints still count.
+            timers.forEach(clearTimeout);
+            timers.length = 0;
+            stage.querySelectorAll('.tw-ghost').forEach(n => n.remove());
+            stage.classList.remove('quake');
+            state = newState(data);
+            busy = false;
+            lastEvent = null;
+            rootEl.classList.remove('failed', 'solved');
+            renderTower(null);
+            showInfo(null);
+            showQuestion();
         }
 
         container.appendChild(rootEl);
