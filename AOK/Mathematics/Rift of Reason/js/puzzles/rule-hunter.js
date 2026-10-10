@@ -597,7 +597,9 @@
         const el = api.el || Rift.el;
         const lines = keeperLines(data.gatekeeper);
         const pickLine = list => list[Math.floor((api.rng ? api.rng.next() : Math.random()) * list.length)];
-        const state = { slots: [null, null, null], tests: [], chosen: null, done: false };
+        const state = { slots: [null, null, null], tests: [], chosen: null, pending: false, done: false };
+        let result = null;
+        const locked = () => state.done || state.pending || !!result;
         const keeper = buildKeeper(el, data);
 
         // workbench
@@ -653,9 +655,10 @@
                 s.textContent = state.slots[i] == null ? '' : String(state.slots[i]);
                 s.classList.toggle('filled', state.slots[i] != null);
             });
-            testBtn.disabled = state.done || state.slots.some(v => v == null);
-            clearBtn.disabled = state.done;
-            nameBtn.disabled = state.done;
+            testBtn.disabled = locked() || state.slots.some(v => v == null);
+            clearBtn.disabled = locked();
+            nameBtn.disabled = locked();
+            tray.querySelectorAll('button').forEach(b => { b.disabled = locked(); });
             const yes = state.tests.filter(t => t.fits).length;
             counts.innerHTML = '';
             counts.appendChild(el('span.rh-yes', { text: '✓ fits: ' + yes }));
@@ -672,7 +675,7 @@
         }
 
         function place(value, slotIndex) {
-            if (state.done) return;
+            if (locked()) return;
             let i = slotIndex;
             if (i == null) i = state.slots.indexOf(null);
             if (i < 0) {
@@ -695,7 +698,7 @@
             return s && wrap.contains(s) ? Number(s.dataset.i) : null;
         }
         function startDrag(ev, value, fromSlot) {
-            if (state.done || (ev.button != null && ev.button !== 0)) return;
+            if (locked() || (ev.button != null && ev.button !== 0)) return;
             ev.preventDefault();
             drag = { value, fromSlot, x0: ev.clientX, y0: ev.clientY, ghost: null };
             root.addEventListener('pointermove', onMove);
@@ -751,7 +754,7 @@
         }
 
         testBtn.addEventListener('click', () => {
-            if (state.done || state.slots.some(v => v == null)) return;
+            if (locked() || state.slots.some(v => v == null)) return;
             const triple = state.slots.slice();
             if (state.tests.some(t => t.triple.join() === triple.join())) { keeper.say(lines.again); sfx(api, 'click'); return; }
             const ok = fits(data.secret, triple);
@@ -763,12 +766,12 @@
             const row = logList.firstChild;
             if (row) row.classList.add('new');
         });
-        clearBtn.addEventListener('click', () => { state.slots = [null, null, null]; sfx(api, 'click'); render(); });
+        clearBtn.addEventListener('click', () => { if (locked()) return; state.slots = [null, null, null]; sfx(api, 'click'); render(); });
 
         // naming step
         let namer = null;
         nameBtn.addEventListener('click', () => {
-            if (state.done) return;
+            if (locked()) return;
             sfx(api, 'click');
             openNamer();
         });
@@ -778,6 +781,7 @@
             const cards = data.candidates.map((c, i) => el('button.rh-cand.parchment', {
                 type: 'button',
                 onclick: () => {
+                    if (locked()) return;
                     state.chosen = i;
                     cards.forEach((k, j) => k.classList.toggle('picked', j === i));
                     confirm.disabled = false;
@@ -785,8 +789,8 @@
                 },
             }, [el('span.rh-cand-mark', { text: String.fromCharCode(65 + i) }), el('span', { text: c.text })]));
             confirm.addEventListener('click', () => {
-                if (state.chosen == null || state.done) return;
-                state.done = true;
+                if (state.chosen == null || locked()) return;
+                state.pending = true;
                 render();
                 namer.querySelectorAll('button').forEach(b => { b.disabled = true; });
                 const answer = { rule: state.chosen, tests: state.tests.map(t => t.triple.slice()) };
@@ -808,6 +812,8 @@
         }
 
         function showResult(r) {
+            state.pending = false;
+            state.done = r.solved;
             sfx(api, r.solved ? 'success' : 'error');
             keeper.say(r.solved ? pickLine(lines.fits).replace(/fits/i, 'you got it') : 'Ha! Not my rule!');
             if (namer) { namer.remove(); namer = null; }
@@ -824,12 +830,23 @@
                 ? el('span.chip.rh-strat.good', { text: r.eliminated ? 'Ruled out every listed alternative' : 'Ruled out some listed alternatives' })
                 : el('span.chip.rh-strat.bad', { text: state.tests.length ? 'Tests did not separate the listed rules' : 'No tests recorded' });
             bench.scrollTop = 0;
-            bench.appendChild(el('div.rh-namer.rh-result-wrap', null, [el('div.rh-result.panel' + (r.solved ? '.win' : '.lose'), null, [
+            if (result) result.remove();
+            result = el('div.rh-namer.rh-result-wrap', null, [el('div.rh-result.panel' + (r.solved ? '.win' : '.lose'), null, [
                 el('h3', { text: r.solved ? 'Rule found!' : 'Wrong rule' }),
                 strat,
                 el('p', { text: r.feedback }),
                 el('ul.rh-res-list', null, rows),
-            ])]));
+                !r.solved ? el('button.btn.primary', { text: 'Try again', onclick() {
+                    if (state.done || result !== shownResult) return;
+                    result.remove(); result = null;
+                    state.chosen = null;
+                    sfx(api, 'click');
+                    render();
+                } }) : null,
+            ])]);
+            const shownResult = result;
+            bench.appendChild(result);
+            render();
         }
 
         keeper.say(lines.intro);
@@ -864,7 +881,8 @@
         const el = api.el || Rift.el;
         const lines = keeperLines(data.gatekeeper);
         const keeper = buildKeeper(el, data);
-        const state = { predict: null, lesson: null, done: false };
+        const state = { predict: null, lesson: null, pending: false, done: false };
+        let result = null;
         const isMoser = data.seq === 'moser';
 
         const termCard = (t, i) => el('div.rh-term', { style: { animationDelay: (0.15 * i) + 's' } }, [
@@ -935,18 +953,30 @@
         }
 
         function chooseLesson(j) {
-            if (state.done) return;
-            state.done = true;
+            if (state.done || state.pending || result) return;
+            state.pending = true;
             state.lesson = j;
             sfx(api, 'click');
             state.lessonBtns.forEach((b, k) => { b.disabled = true; b.classList.toggle('picked', k === j); });
             submitAndShow(api, def, data, { predict: state.predict, lesson: j }, r => {
+                state.pending = false;
+                state.done = r.solved;
                 sfx(api, r.solved ? 'success' : 'error');
                 state.lessonBtns.forEach((b, k) => { if (k === data.lesson.correct) b.classList.add('truth'); });
-                main.appendChild(el('div.rh-result.panel' + (r.solved ? '.win' : '.lose'), null, [
+                if (result) result.remove();
+                result = el('div.rh-result.panel' + (r.solved ? '.win' : '.lose'), null, [
                     el('h3', { text: r.solved ? 'Pattern broken!' : 'Not quite' }),
                     el('p', { text: r.feedback }),
-                ]));
+                    !r.solved ? el('button.btn.primary', { text: 'Try again', onclick() {
+                        if (state.done || result !== shownResult) return;
+                        result.remove(); result = null;
+                        state.lesson = null;
+                        state.lessonBtns.forEach(b => { b.disabled = false; b.classList.remove('picked', 'truth'); });
+                        sfx(api, 'click');
+                    } }) : null,
+                ]);
+                const shownResult = result;
+                main.appendChild(result);
                 main.scrollTop = main.scrollHeight;
             });
         }

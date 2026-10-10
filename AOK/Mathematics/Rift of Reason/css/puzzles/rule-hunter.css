@@ -190,6 +190,8 @@
 /* ---- pattern breaker ---- */
 
 .rh-pmain { min-width: 0; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 14px; align-items: center; padding: 4px 4px 12px; }
+/* Keep reflection feedback and its retry button in the main scroll area. */
+.rh-pmain > .rh-result { flex-shrink: 0; max-height: none; overflow: visible; }
 .rh-ptitle { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
 .rh-ptitle h2 { margin: 0; }
 .rh-intro { padding: 0.6em 1.1em; text-align: center; font-weight: 600; }

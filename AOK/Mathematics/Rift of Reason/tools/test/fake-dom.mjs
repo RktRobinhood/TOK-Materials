@@ -57,6 +57,14 @@ export class FakeElement {
     }
     append(...ns) { ns.forEach(n => this.appendChild(typeof n === 'string' ? new Text(n) : n)); }
     replaceChildren(...ns) { this.textContent = ''; this.append(...ns); }
+    replaceWith(n) {
+        const p = this.parentNode;
+        if (!p) return;
+        if (n.parentNode) n.parentNode.removeChild(n);
+        p.childNodes.splice(p.childNodes.indexOf(this), 1, n);
+        n.parentNode = p;
+        this.parentNode = null;
+    }
     removeChild(n) { this.childNodes = this.childNodes.filter(x => x !== n); n.parentNode = null; return n; }
     remove() { if (this.parentNode) this.parentNode.removeChild(this); }
     cloneNode(deep) {
