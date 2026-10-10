@@ -67,3 +67,9 @@ one per battle mat, and two tension layers. `data/ambience.js` maps scene art to
 `js/core/ambience.js` crossfades between them and glides the tension layers in and out.
 Tension comes from danger clocks, low hero hearts in battle, a story step `{ tension: 0.6 }`
 (or `{ ambience: 'scene/fair' }` to change the loop mid-scene), or a puzzle's `api.tension(x)`.
+
+**To do when the ElevenLabs credits renew (ran out 10 Oct):** the caricature creature calls were
+re-rendered for lobstorian, astrophysicat, tremendoodle, swiftlet, muskrat, zuckerborg, altmanta and
+beastie (enter-1/2, attack-1) only; the rest still play the older plain animal calls. Re-render them with
+`node tools/sfx-eleven.mjs --render --force --only cr-beastie-attack-2,cr-beastie-hurt,cr-beastie-die,cr-siuuugull,cr-rawmsay,cr-speedcheeta,cr-chimpossible,cr-carlseal,cr-khaby,cr-eminemu,cr-obambu,cr-beansprout,cr-gargoyle,cr-haalandroid,cr-usainvolt,cr-keanu,cr-beeyonce,cr-eelish,cr-rockodile,cr-attenbirdough,cr-kardashiant,cr-messilion,cr-shakirattle,cr-euclidon,cr-lovelace,cr-godelix,cr-tycho,cr-booleon,cr-hexling`
+(about 160 files, roughly 800 credits).

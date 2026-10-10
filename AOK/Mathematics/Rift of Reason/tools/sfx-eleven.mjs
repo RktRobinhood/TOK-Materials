@@ -3,6 +3,7 @@
 //
 //   node tools/sfx-eleven.mjs              status and estimated cost of what is missing
 //   node tools/sfx-eleven.mjs --render     render what is missing (add --only <prefix> to limit)
+//   node tools/sfx-eleven.mjs --render --force --only cr-keanu,cr-rockodile   re-render existing ones too
 //   node tools/sfx-eleven.mjs --redo <file-stem>   delete and re-render one file, e.g. cr-keanu-enter-2
 //
 // Key: .secrets/elevenlabs_api_key at the repo root; read here only, never printed or shipped.
@@ -63,7 +64,8 @@ async function main() {
     fs.mkdirSync(OUT, { recursive: true });
     if (opt('--redo')) { const f = path.join(OUT, opt('--redo') + '.mp3'); if (fs.existsSync(f)) fs.unlinkSync(f); }
     const only = opt('--only') || (opt('--redo') ? opt('--redo') : '');
-    const missing = jobs.filter(j => !fs.existsSync(file(j)) && j.stem.startsWith(only));
+    const prefixes = only.split(',');
+    const missing = jobs.filter(j => (args.includes('--force') || !fs.existsSync(file(j))) && prefixes.some(p => j.stem.startsWith(p)));
     const est = Math.round(missing.reduce((s, j) => s + j.secs * 10, 0));
     console.log(`${jobs.length - jobs.filter(j => !fs.existsSync(file(j))).length}/${jobs.length} sounds rendered; ${missing.length} missing (~${est} credits).`);
     if (!args.includes('--render') && !opt('--redo')) { writeData(); return; }

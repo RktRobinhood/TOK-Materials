@@ -44,50 +44,51 @@ const TACTICS = {
     'pep-talk': 'an encouraging bright chime and a pat on the back',
 };
 
-// Creature calls. animal: the real animal; extra: its gimmick (kept subtle). Silent mimes still make
-// animal noises, never words.
+// Creature calls lean into the caricature (teacher, 10 Oct): the real animal's voice doing the persona's
+// signature gimmick, with no intelligible words (the spoken barks are Gemini lines in data/barks.js).
+// [animal, signature (enter and attack), how it gets hurt or loses].
 const CREATURES = {
-    lobstorian: ['a lobster: clacking claws and wet clicking chitter', 'stern'],
-    astrophysicat: ['a house cat: meow and hiss, with a faint cosmic shimmer', 'curious'],
-    tremendoodle: ['a poodle: yappy barks', 'boastful'],
-    swiftlet: ['a swift bird: high trilling chirps with a little sparkle', 'sweet'],
-    muskrat: ['a muskrat: squeaks, plus a small rocket engine roar', 'excited'],
-    zuckerborg: ['a gecko: clicking gecko chirps with a robotic digital glitch', 'flat and robotic'],
-    altmanta: ['a manta ray: a deep underwater whoosh and a calm electronic hum', 'calm'],
-    beastie: ['a big fluffy beast: a friendly roaring growl with confetti poppers', 'hyped'],
-    siuuugull: ['a seagull: loud squawking cries and wing flaps', 'showy'],
-    rawmsay: ['a lamb: angry bleating baa with sizzling steam', 'furious'],
-    speedcheeta: ['a cheetah: chirping yelps and a fast snarl', 'hyper'],
-    chimpossible: ['a chimpanzee: hooting ooh-ooh-aah-aah calls', 'amazed'],
-    carlseal: ['a seal: barking honks and a flipper slap', 'smug'],
-    khaby: ['a llama: a soft humming llama call and a dismissive snort', 'deadpan'],
-    eminemu: ['an emu: deep drumming booms and a fast rhythmic grunt', 'rapid'],
-    obambu: ['a giant panda: a soft bleat and munching bamboo crunch', 'calm'],
-    beansprout: ['a teddy bear: a squeaky toy squeeze and a little grumble', 'silly'],
-    gargoyle: ['a stone gargoyle: grinding stone growl with flapping stone wings', 'theatrical'],
-    haalandroid: ['a robot viking: mechanical servo whirr and a deep robotic grunt', 'mechanical'],
-    usainvolt: ['an electric eel: crackling electric zap and a watery swish', 'zippy'],
-    keanu: ['a black cat: a low soft meow and a deep purr', 'gentle'],
-    beeyonce: ['a bee: a powerful queen bee buzz and a swarm hum', 'commanding'],
-    eelish: ['an eel: a slippery watery slither and a soft eerie bubble', 'moody'],
-    rockodile: ['a crocodile: a deep rumbling croc growl and jaw snap', 'mighty'],
-    attenbirdough: ['a puffin: low purring puffin grunts and sea wind', 'hushed'],
-    kardashiant: ['an ant: tiny clicking ant mandibles, plus a camera shutter', 'dainty'],
-    messilion: ['a lion cub: a small roar', 'determined'],
-    shakirattle: ['a rattlesnake: rattling tail and hissing', 'rhythmic'],
-    euclidon: ['a tortoise: slow tortoise grunt and shell scrape', 'slow'],
-    lovelace: ['a hummingbird: rapid wing hum and tiny chirps, with a punched-card machine clatter', 'delicate'],
-    godelix: ['an owl: a soft shy hoot and paper rustle', 'shy'],
-    tycho: ['an elk: a bugling elk call with a metallic brass ring', 'noble'],
-    booleon: ['a heron: a croaking heron call and a wing flap', 'dignified'],
-    hexling: ['a hedgehog: snuffly hedgehog huffs and quills rustling', 'curious'],
+    lobstorian: ['a lobster clacking its claws', 'a stern lecturing clack-clack like a pointer tapping a desk, then a sharp claw snap', 'a sputtering offended clatter'],
+    astrophysicat: ['a house cat', 'a delighted know-it-all meow over a twinkling cosmic shimmer', 'an indignant cat yowl'],
+    tremendoodle: ['a fluffy poodle', 'a loud boastful bark echoing like a stadium rally with a crowd cheer', 'a whiny outraged yap'],
+    swiftlet: ['a little swift bird', 'a sweet trilling chirp that sparkles like a pop song hook, a stadium crowd gasp', 'a heartbroken little chirp'],
+    muskrat: ['a muskrat squeaking', 'an excited squeak riding a sputtering rocket engine that roars to life', 'a squeak and a rocket explosion fizzling out'],
+    zuckerborg: ['a gecko', 'flat robotic gecko clicks with a digital glitch and a soft notification ping', 'a glitching gecko click and a computer shutdown tone'],
+    altmanta: ['a manta ray gliding underwater', 'a calm deep underwater whoosh and a soothing chat notification chime', 'a calm hum that glitches out'],
+    beastie: ['a huge fluffy beast', 'a friendly hyped roar, confetti cannons popping and a crowd cheering', 'a sad deflated groan and a lonely kazoo'],
+    siuuugull: ['a muscular seagull', 'a squawk that stretches into a huge triumphant long SIUUU-like cry with a stadium roar', 'a squawk that cracks mid-cry'],
+    rawmsay: ['a lamb', 'a furious shouting bleat, a frying pan clang and sizzling steam', 'an exasperated bleat and a pot boiling over'],
+    speedcheeta: ['a cheetah cub', 'a hyped screaming yelp, wild and over the top, with a fast whoosh', 'a dramatic screaming wail'],
+    chimpossible: ['a chimpanzee', 'amazed excited hoots building to an astonished whoa-like screech', 'a baffled descending hoot'],
+    carlseal: ['a seal', 'a calm smug honk and a chess piece clicking onto a board', 'a surprised honk and a chess board tipping over'],
+    khaby: ['a llama', 'a silent deadpan beat, then one unimpressed llama snort and a soft ta-da sting', 'a tired llama sigh'],
+    eminemu: ['an emu', 'deep emu drumming booms in a fast rap beat rhythm with record scratch', 'a drum beat that stumbles and stops'],
+    obambu: ['a giant panda', 'a thoughtful panda hum, a long pause, then a calm bamboo crunch and a small crowd applause', 'a gentle tired panda sigh'],
+    beansprout: ['a teddy bear', 'a rubbery squeaky toy squeak and a silly confused grumble, slapstick boing', 'a squeaky toy deflating, slapstick bonk'],
+    gargoyle: ['a stone gargoyle', 'grinding stone growl with flapping stone wings and a dramatic fashion-runway whoosh', 'stone cracking and crumbling'],
+    haalandroid: ['a robot viking', 'mechanical servo whirr, a deep robotic grunt and a football thumping into a net', 'a robot power-down whine'],
+    usainvolt: ['an electric eel', 'a crackling electric zap, a lightning crack and a sprinting whoosh', 'an electric fizzle and splash'],
+    keanu: ['a black cat', 'a low cool meow, a slow-motion bullet whoosh and a deep purr', 'a soft sad meow fading into an echo'],
+    beeyonce: ['a queen bee', 'a powerful diva buzz with a swarm swelling like an arena crowd cheering', 'a buzz that sputters out'],
+    eelish: ['an eel', 'a moody whispery breathy hiss, slippery and quiet, with a soft bass thump', 'a quiet sad gurgle'],
+    rockodile: ['a huge crocodile', 'a deep rumbling croc growl, a jaw snap and a cartoon eyebrow-raise ding', 'a heavy thud and a groaning growl'],
+    attenbirdough: ['an elderly puffin', 'hushed puffin purring grunts, sea wind and a gentle wave, like a nature film', 'a soft weary puffin grunt'],
+    kardashiant: ['a tiny ant', 'tiny clicking ant mandibles, a camera shutter burst and a glamorous sparkle', 'a tiny squeak and a phone dropping'],
+    messilion: ['a lion cub', 'a small determined roar and a football tapped neatly with a soft crowd gasp', 'a little whimpering growl'],
+    shakirattle: ['a rattlesnake', 'a rhythmic hip-shaking rattle like a dance shaker and a sly hiss', 'a rattle that slows and stops'],
+    euclidon: ['a tortoise', 'a slow wise tortoise grunt, a shell scrape and a chalk tap', 'a slow sinking groan'],
+    lovelace: ['a hummingbird', 'rapid wing hum, tiny chirps and a clattering punched-card loom machine', 'a machine clatter winding down'],
+    godelix: ['a shy owl', 'a soft shy hoot echoing back on itself like a loop, paper rustling', 'a hoot that loops and fades'],
+    tycho: ['an elk', 'a noble bugling call with a ringing brass bell and a telescope clicking into place', 'a low tired bellow and a brass clang'],
+    booleon: ['a heron', 'a dignified croak and two clean electronic beeps like one and zero', 'a croak and a falling error beep'],
+    hexling: ['a hedgehog', 'snuffly huffs, quills rustling and a tiny playful puzzle-piece click', 'a small snuffly squeak'],
 };
 
 const MOOD = {
-    enter: (a, m) => `${a}; one ${m} call as it arrives`,
-    attack: (a, m) => `${a}; one aggressive attack cry, fierce and short`,
-    hurt: (a, m) => `${a}; one pained yelp as it gets hit`,
-    die: (a, m) => `${a}; one fading defeated cry, sad and falling`,
+    enter: (a, s) => `${a}: ${s}, as it arrives`,
+    attack: (a, s) => `${a} attacks: ${s}, fierce and short`,
+    hurt: (a, s, h) => `${a} gets hit: ${h}, short`,
+    die: (a, s, h) => `${a} is defeated: ${h}, falling and fading out`,
 };
 
 // Ambience loops (seamless, ElevenLabs loop mode). data/ambience.js maps scene art to these; the two
@@ -155,8 +156,8 @@ export const PLAN = [
     ['hurt-woman', 0.7, 'an adult woman cartoon pain grunt as she is hit, short, no words, video game hurt sound', 3],
     ['hero-hit', 0.8, p('a sharp sword slash cut into cloth with a thud'), 3],
     // ---- creatures ----
-    ...Object.entries(CREATURES).flatMap(([id, [a, m]]) => Object.entries(MOOD).map(([kind, f]) =>
-        ['cr-' + id + '-' + kind, kind === 'die' ? 1.6 : 1.1, f(a, m) + ', animal sound effect, no music, no human voice, no words',
+    ...Object.entries(CREATURES).flatMap(([id, [a, s, h]]) => Object.entries(MOOD).map(([kind, f]) =>
+        ['cr-' + id + '-' + kind, kind === 'die' ? 1.6 : kind === 'hurt' ? 1.0 : 1.5, f(a, s, h) + ', cartoon creature sound effect, no music, no intelligible words',
             kind === 'enter' || kind === 'attack' ? 2 : 1])),
 ];
 
