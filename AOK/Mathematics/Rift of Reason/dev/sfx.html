@@ -25,6 +25,7 @@ e.g. <code>cr-keanu-enter-2</code>, and run <code>node tools/sfx-eleven.mjs --re
 <script>
     const out = document.getElementById('out');
     const groups = {};
+    let current = null; // one sound at a time: a new click stops the previous one
     for (const [name, files] of Object.entries(Rift.data.sfx)) {
         if (!files[0].startsWith('el/')) continue;
         const g = name.startsWith('amb-') ? 'Ambience loops (play once; they loop in the game)' : name.startsWith('cr-') ? 'Creature ' + name.split('-')[1] : name.startsWith('cast-') || name.startsWith('tactic-') ? 'Spells and tactics' : 'Battle';
@@ -37,7 +38,7 @@ e.g. <code>cr-keanu-enter-2</code>, and run <code>node tools/sfx-eleven.mjs --re
             row.innerHTML = '<span class="name">' + name + '</span>';
             files.forEach((f, i) => {
                 const b = document.createElement('button'); b.textContent = i + 1;
-                b.onclick = () => new Audio('assets/sfx/' + f).play();
+                b.onclick = () => { if (current) current.pause(); current = new Audio('assets/sfx/' + f); current.play(); };
                 row.appendChild(b);
             });
             out.appendChild(row);
