@@ -1,0 +1,377 @@
+RIFT OF REASON PLAYTEST REVIEW
+==============================
+
+First encounter review for the developer and build loop | 10 October 2026
+
+Overall assessment
+
+There is a fun game here. The most engaging moments let me try an idea, see what happens, and revise it: testing number rules, wiring a logical gate, and checking who could consistently be an imp. Those activities make the learning feel earned. The art invites exploration, and several characters have specific, memorable jokes.
+
+My first-time student reaction is less positive about the surrounding flow. Too many systems arrive before I understand their purpose. Success is often explained several times. Some dialogue refers to a different puzzle from the one I just solved. A few input and layout problems interrupt play. These are the main reasons the experience can feel assembled by AI.
+
+I would keep the world and core puzzle interactions, then repair continuity and pacing before recording the remaining voices. Otherwise the voice recordings will lock in lines that need changing.
+
+Coverage and evidence
+
+This review combines my browser playtest with parallel card and story playtests, plus a targeted audit of the public source. Actual play covered character creation; the Fair rule, witness and Venn activities; the complete 24-step card lesson and a won Syllo practice match; the normal Fair story gate; Road Venn, rule and one-stroke drawing samples; Village wiring and imp puzzles; the Neon Bridge Venn and Newsstand court activities; the Server Tower chart, prediction, modelling, sorting and Oracle activities; all three Core trials; and the return-home ending through "The end. For now." A timing catch was also completed successfully.
+
+Chapter jumps were used to inspect later material. The main ending was completed, but this was not one uninterrupted completion of every story branch, optional activity or random variant. Source and programmatic checks broadened coverage beyond the browser route. Missing voice lines were treated as expected work in progress; audio delivery was not assessed. This is an expert first-encounter simulation, not evidence from a classroom of students. Desktop browser checks included a 1280 by 720 viewport; phone and tablet usability were not tested.
+
+How to use the findings
+
+P1 means repair before the next classroom test because the issue obstructs play or risks teaching the wrong distinction. P2 means improve the next usability pass. P3 means polish. Each finding identifies browser, programmatic or source-only evidence. IDs R01 to R29 can become separate issues; shared input and feedback fixes may address several together.
+
+First fix R20 replay dismissal, R03 wrong-rule recovery, R01 modal input and R02 chart retry layout. Then fix R22 proof-domain validation and R21 collapse recovery, and settle the learning distinctions in R04 and R05.
+
+Playtested application: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/index.html
+
+WHAT WORKS AND WHAT FEELS UNNATURAL
+===================================
+
+Preserve these strengths
+
+The rule-hunting activity is satisfying once I start experimenting. Testing a sequence that separates competing rules feels like doing mathematics. Failed number tests are informative and do not consume a wrong-rule check. The guided practice explicitly explains why an agreeing example is not proof.
+
+The Switchboard gives immediate feedback across all four input combinations. Building OR followed by NOT and seeing 4 out of 4 cases agree gives a clear sense of accomplishment. This is one of the strongest connections between a physical action and a logical idea.
+
+The Venn tutorial includes an actual small practice example rather than only instructions. The card lesson uses a safe loan team and a clear pointer. The reversal of the card battle winning rule is a useful teaching opportunity: the same cards behave differently under a different rule.
+
+The broken Hum Charm message naturally connects the story to uncertainty. Granny saying only part of a word gives the player a reason to consider several interpretations and seek more evidence. The later court also uses earlier choices and prediction-log evidence, giving the story some earned continuity.
+
+The Newsstand court carefully distinguishes an unsupported claim from proof of its opposite. The final prediction sequence is also a useful experiment: a repeating strategy was predicted 9 times out of 10, then inspecting conditional counts and changing strategy beat the machine 8 times out of 8. The return-home ending brings back the Guess-o-Matic and Nudge asking "Why?", which gives the adventure a coherent final note.
+
+The uncanny divide
+
+The strongest uncanny signals are failures of memory and reference. On a first visit, characters say things such as "Back to break my rule?" or "Again darling?" Syllo introduces and later discusses lobsters and a trumpet, while my actual task concerned wizards, dragons and goblins. The Professor introduces 2, 4, 6, but the board begins with 3, 4, 5 under a different host. These moments make it feel as though separately generated pieces have been joined without sharing context.
+
+Repeated success explanations produce another artificial rhythm: board feedback, a Stage solved modal, a short story exchange, another Solved reward modal, and then a catch offer. The player has already understood the outcome before the sequence ends. Long stretches of one-line dialogue also make me focus on advancing boxes rather than following a conversation.
+
+The dialogue itself is often better than that rhythm suggests. The sundial guessing on cloudy days and Granny putting things in her pockets are concrete jokes. Character-specific mechanical speech can suit the Algorithm. I would not flatten those voices into generic natural language.
+
+A better first ten minutes
+
+Let me choose a traveller with one short description, make one meaningful puzzle decision, and see a story consequence. Introduce hearts, hints and catching when they become relevant. Introduce the card system after I have a foothold in the logic game, with the required route clearly explained. Advanced avatar powers can wait until I have used the system they affect.
+
+RECOVERY AFTER MISTAKES AND DISMISSALS
+======================================
+
+R20 P1 Dismissing a replay prompt freezes map travel
+
+Browser-confirmed after the ending, with a separate programmatic confirmation test. Revisit the completed Fair, Restored story location. When "Watch this scene again?" appears, click outside the panel. The panel disappears, but activating the Wishing Well, Forest Road or the current Fair location does nothing. Reloading recovers navigation.
+
+Cause: the backdrop removes the modal without settling the confirmation promise. Map travel is awaiting that promise with its walking flag set. Fix: every dismissal resolves false exactly once; an affirmative answer resolves true. Also release navigation state in a finally path. Check Not now, backdrop dismissal, affirmative replay and an exception during arrival. Source: js/ui/ui.js near lines 45 and 51; js/screens/map.js navigation and story-replay handlers.
+
+R21 P1 Restore play after a Tower collapse
+
+Browser-confirmed at the Post Office. Starting from "I have climbed up a chimney", I claimed I had been inside the clock tower, then that I carry a pocket watch, contradicting the stated implications. After the collapse, "Face the Constable" used one free wrong check, leaving two, but all answer and finish controls disappeared. No retry was offered.
+
+Map then re-enter restores a new activity and resets the free checks to three. This is a dead end within the attempt, rather than a persistent save lock. Fix: offer Try again with restored controls and meaningful attempt accounting. Do not charge merely for pressing Restart. Check failure then completion without map travel. Source: js/puzzles/tower.js near 392 to 396 and 913 to 939.
+
+Screenshot: rule-hunter-retry-lockout.jpg
+
+R03 confirmed browser result: two free checks remain, while Test, Clear and Name the rule are disabled. The wrong answer has no local recovery.
+
+INPUT AND LAYOUT REPAIRS
+========================
+
+R01 P1 Keep input inside the current interaction
+
+Observed. While rapidly advancing the final Village Square introduction, a double-click reached the newly exposed "Nobody is an imp!" button. The puzzle immediately reported success before I had inspected the board or deliberately submitted an answer. This is a subsequent click reaching the new screen; the evidence does not establish event bubbling.
+
+Other observed symptoms support a shared input problem. Clicking a Road map location during the brief gap before its automatic arrival produced two identical dialogue containers. Repeated Enter could reopen Corvina after her dialogue. At the Core, Enter advanced underlying court dialogue while the first-time tutorial-choice overlay was still open.
+
+Fix: give the topmost dialogue or modal exclusive control of input. Ignore held-key repeats for progression, disable map actions while an automatic arrival is pending, and prevent duplicate arrivals for the same location. Consume transition-triggering input so a rapid second click cannot submit the next activity. Check: fast click-click and held Enter must never choose an answer, reopen an encounter, or advance content behind an overlay.
+
+R02 P1 Keep chart feedback clear of the retry control
+
+Observed at 1280 by 720. In a long-feedback chart variant, the error status covered the centre of the enabled "This chart is honest" button. Clicking the centre did nothing; only its exposed lower edge worked. The screenshot below recreates the overlap with a shorter pumpkin variant, where clipping is visible but the centre remained clickable.
+
+Fix: place feedback and the submit button in separate layout areas, reserve space for the button, and let long feedback scroll. Check several variants with long answer labels and error messages at classroom laptop sizes. The entire retry target must remain visible and clickable.
+
+Screenshot: chart-feedback-overlap.jpg
+
+Recreated chart layout showing status text colliding with the bottom control. The original long-feedback variant also blocked the centre click.
+
+LEARNING DISTINCTIONS AND RULE RECOVERY
+=======================================
+
+R03 P1 Restore wrong answer retries in both rule activities
+
+Browser-confirmed in ordinary Rule Hunter. On a replay with starting numbers [3, 6, 9], I tested [10, 20, 30], which failed. I deliberately named "The last number is the largest". The game used one free wrong check and left two checks available, but Test, Clear and Name the rule were all disabled. There was no local retry. The explanation revealed the real rule, yet I could not revise my answer or continue the activity.
+
+The Pattern Breaker reflection has the same state pattern. A programmatic mount test using the unmodified module and a minimal DOM reproduced a wrong reflection leaving every answer disabled; it was not reproduced through the full browser route. Both handlers mark the activity done before knowing whether the submission succeeds.
+
+Fix: on failure, re-enable relevant controls and preserve useful experiments, or offer an explicit restart if revealing the rule makes another attempt inappropriate. Reserve the final done state for success. Check wrong then correct answers in both modes without leaving or reloading. Source area: js/puzzles/rule-hunter.js, named-rule submission near line 789 and reflection near line 939.
+
+R04 P1 Clarify what the Venn truth question judges
+
+Observed at Neon Bridge. The Farmyard argument used cats, chickens and understanding French. I selected Valid and False. The response began by confirming validity, then gave a general distinction between truth and validity without explaining why my other verdict was rejected. Selecting Absurd succeeded. The stated definition of Absurd was about things that do not exist here and therefore cannot be checked.
+
+As a learner, I do not know whether I am judging an inference, a real-world conclusion, the premises, or facts within the fictional world. "Absurd" also looks like a third truth value alongside True and False. Nonexistence or lack of evidence does not by itself settle all those questions. The intended lesson needs a clearer contract.
+
+Fix: ask validity separately. Then specify the evidence context and ask whether the premises are established there, or whether the argument is sound. If a cannot-assess category is needed, define it precisely. Explain which judgement needs changing after a wrong answer. Check that a student can explain why the rejected verdict fails without guessing the author's fiction convention.
+
+R05 P1 Correct the Principle of Induction card
+
+Source-only. The card flavour describes generalising from a few examples to "always". That describes an inductive generalisation, while mathematical induction establishes a base case and an inductive step. A game introducing mathematics should distinguish these explicitly.
+
+Fix: rename the card to Hasty Generalisation if that is its intended behaviour, or rewrite it around a base case and a step from n to n plus 1. Check its title, flavour and teaching explanation together. Source area: data/axioms.js.
+
+Oxford mathematical induction reference: https://courses.maths.ox.ac.uk/mod/page/view.php?id=66328
+
+CARD GAME ONBOARDING AND INSTRUCTIONS
+=====================================
+
+R07 P2 Explain the required card match at the Fair
+
+Observed and confirmed in source. The Fair invitation describes a separate card minigame and offers "Explore first". After completing logic stalls, the Nut Stall route requires winning Syllo's practice match. A student can reasonably think the card game is optional and discover the requirement much later.
+
+Fix: explain the route on the first invitation: explore the stalls, then win one practice card match to continue. Alternatively, provide a complete puzzle-only route if cards are intended to be optional. Check that declining the lesson never hides the next required action. Source areas: data/map.js and js/ui/battles.js.
+
+R08 P2 Shorten the first card lesson
+
+Observed. The lesson has 24 tightly guided steps. The reversal of the winning condition appears around step 16, and substantial independent choice arrives near step 22. A first-time student has already absorbed energy, attacks, guards, powers and more before reaching the most interesting conceptual experiment.
+
+Fix: start with a short duel using one cheap creature and one obvious attack. Change the winning rule and ask me to predict the consequence. Let me act independently, then introduce guard and avatar powers when they are useful. Keep the full lesson as an optional reference. Preserve the safe loan team and pointer.
+
+R09 P2 Make battle prompts describe the available actions
+
+Observed. Selecting Astrophysicat produced an activation instruction even though an attack was available. A later prompt assignment appears to overwrite the attack guidance when an activation is possible. I cancelled because the instructions suggested I needed another step.
+
+Fix: show both choices accurately, for example "Choose an enemy to attack, or activate this ability. Activating uses its attack for this turn." Check a creature that can both attack and activate. Source area: js/screens/battle.js.
+
+The generic lesson says a power costs energy, but Owlet's Foresee is free. Explain the selected avatar's actual power and cost. The tutorial also describes its required information control as disabled even though it can be used to progress. Make wording and enabled states agree.
+
+A future Fate modifier saying creatures cost one less initially read as if it were already active. Clearly separate Upcoming from Active effects. This was a comprehension issue; I did not find a cost-calculation bug.
+
+The practice match opened with one energy while the hand and first draw required at least two. The forced pass was playable, but it undermined the lesson's cheap opening example. Guarantee an affordable opening option for the first practice match, or explicitly explain passing.
+
+Battle play was viable
+
+The practice match was won in five player turns, nine turns overall, with 9 of 12 hearts remaining. No battle blocker was found in that match. The proposed changes concern teaching and clarity rather than a claim that combat cannot be played.
+
+STORY CONTINUITY AND LEARNING FEEDBACK
+======================================
+
+R10 P2 Make dialogue refer to the active puzzle and visit
+
+Observed. The Professor's 2, 4, 6 introduction did not match the 3, 4, 5 rule board. Syllo's lobster-and-trumpet dialogue did not match the wizard-and-dragon task. Several first encounters used repeat-visit greetings. At the Post Office, choosing "A postman" as the story cover was followed by a generated Tower whose accepted cover was "I am a travelling clock-mender". The activity contradicted an explicit choice I had just made.
+
+Fix: supply introductions and outcomes from the same puzzle variant data as the board, and track first visit separately from repeat visits. If the story must stay fixed, keep the story encounter's variant fixed too. Check every supported variant once with its opening and closing dialogue. A continuity pass should precede voice recording.
+
+R11 P2 Consolidate the success sequence
+
+Observed across several activities. The same explanation appears in the board status, board result, Stage solved modal and later reward sequence. This slows the adventure precisely when I expect to move forward.
+
+Fix: present one explanation with an option to inspect the reasoning, one brief character response that reflects my action, then one compact reward panel. Keep catching as a separate optional action that does not repeat the learning text. Check that the player hears the explanation once and can find it again in the journal. After the Core villain confession and Sundial restoration, move generic loot and the Mr. Beastie catch detour until after the emotional resolution or offer them unobtrusively.
+
+R12 P2 Explain the exact mistake and welcome revision
+
+Observed at the Witness Tent. I marked the fox's presence at the carousel ten minutes later as False, because the final sentence put the fox at the nut stall. The correct answer was Cannot tell: the final sentence did not establish the fox's location at that earlier time. The activity gave 4 out of 5 and a generic instruction to check the scene, rather than that useful timing explanation.
+
+Fix: identify the claim and explain the missing link: "The nut-stall sentence has no time attached. It does not tell us where the fox was ten minutes later." Distinguish observations, inferences and unknowns in feedback. Correcting the answer should visibly acknowledge a better reason.
+
+The game gives free wrong checks and free control tours, which helps. However, conceptual hints can cost hearts and affect stars, while dangerous character loss is enabled by default. This can make asking for help feel like failure. Give the first conceptual hint freely on a new topic, make learning-mode consequences forgiving, and recognise useful counterexamples or revisions. Preserve optional challenge stakes for students who want them.
+
+R13 P2 Start timing after instructions
+
+Observed. The first "Box it in" catch started its 20-second clock while I was reading unfamiliar rules, odds and movement instructions. The catch expired after one placement. This does not prove that a human would read at the same pace, but the countdown during onboarding is observable.
+
+Fix: show an untimed explanation and a clear Start control. Source-only: a later Witness variant hides its evidence after 25 seconds. Keep it freely available in the core evidence lesson; offer memory mode as an explicit extra challenge. Check that a slower reader can use the same evidence without a penalty.
+
+CONTROLS AND ORIENTATION
+========================
+
+R14 P2 Make the main reasoning tools usable by keyboard
+
+Source-supported accessibility concern. Venn regions have pointer interactions but lack named keyboard controls. Switchboard supports both dragging and click-click wiring, so it is not drag-only; however, its sockets and clickable switches lack a complete keyboard interaction and descriptive control names.
+
+Fix: give regions and sockets meaningful accessible names and focus states. Allow keyboard selection, connection and cancellation. Describe each Venn region in terms of set membership. Check that a learner can construct and revise the diagram and a complete circuit with the keyboard, rather than merely choose a verdict without using the learning tool. Source areas: js/puzzles/venn.js and js/puzzles/switchboard.js.
+
+R15 P2 Update the tracker after a chapter jump
+
+Observed on chapter-jump routes. Old Fair or Village requirements remained foregrounded after entering later chapters. After the Core was resolved, the tracker listed the optional Feed's Champion and old Ford/Fair objectives, while omitting the newly unlocked Summit Rift needed to return home. The Summit marker itself was clickable. This can strand a learner who follows the tracker rather than searching the map.
+
+Fix: reconcile prerequisites and quests when a jump completes, and foreground the next playable objective in the current chapter. Label optional earlier tasks as such. Check each jump with a fresh save and with unfinished old quests. This finding concerns the catch-up route, not proof that normal progression has the same problem.
+
+R16 P3 Make text speed predictable
+
+Observed and source-confirmed. Setting the text-speed slider to zero still gave typewriter text. In source, zero falls back to normal speed, while a value of 0.05 produces a much slower delay than either zero or one. The control does not clearly label the direction or an instant setting.
+
+Fix: provide explicit Slow, Fast and Instant meanings and a monotonic mapping. Check the minimum, maximum and intermediate values. Preserve a single-input reveal action with the transition protection in R01. Source areas: js/screens/collection.js and js/ui/dialogue.js.
+
+Small polish tasks
+
+Make the requested roster name editable before submission instead of presenting it as an irreversible real-name choice. Delay descriptions of advanced character powers until their systems are introduced. Correct visible lines such as "It you got it!", "Only 1 choices were ever counted", "One imp hide in the square" and "Catch the The Rockodile". After a major crisis, a visible change to the map or setting would help the event feel consequential rather than mostly explained through dialogue.
+
+Suggested sequence for the next build
+
+First repair replay dismissal, modal input, chart layout, both rule retries and Tower collapse recovery. Next fix the Oracle's domain validation and settle the validity and truth wording and the induction card. Then align story variants and shorten onboarding and success sequences. Finish with keyboard controls, jump orientation and smaller copy corrections. These changes should make a short student test much more informative because fewer interface problems will obscure reactions to the actual learning activities.
+
+FURTHER EDUCATIONAL CHECKS
+==========================
+
+The diagram issue below was observed in play. R17 to R19 are source-only follow-up checks and should not be reported as browser failures reproduced during this review.
+
+R06 P2 Say whether the Venn drawing is required
+
+Observed. Later Venn activities accepted the correct verdict with an empty diagram, although the numbered interface says to draw first and then give a verdict. Fix: label drawing as optional working if that is intentional. If drawing is a learning objective, require a meaningful diagram and explain its errors separately from the verdict. Do not make the interface promise a step the marking ignores.
+
+R17 P2 State the circle problem assumptions
+
+The Moser circle sequence uses irregular points and gives 31 regions for six points. That can be correct. Six equally spaced points produce a coincident central crossing and a different count. The lesson should specify the greatest possible number of regions, or state the needed assumptions about intersections. An interactive example that moves the points would make the hidden assumption part of the lesson. Source area: js/puzzles/rule-hunter.js, the Moser sequence and drawing.
+
+R18 P2 Remove an unsupported Witness answer
+
+The football scene uses "his knees" and marks "the player was a man" as True. The scene does not establish adulthood; a boy could fit the description. State explicitly that the person is an adult man, or accept Cannot tell. This matters in an activity whose point is to avoid inferring more than the evidence supports. Source area: js/puzzles/witness.js, the match scene.
+
+R19 P2 Scope model and ethics conclusions
+
+Prediction feedback risks making claims about prediction machines in general from a toy whose confidence is a frequency ratio. Say "this machine", explain its particular evidence, and invite comparison with other models. The player should learn to examine a model's assumptions rather than inherit one universal description of AI. Source area: js/puzzles/prediction.js.
+
+Sorting feedback states a broad conclusion about mathematics deciding about people never being neutral. Show where values enter the measurement, objective and error tradeoffs, then allow a defensible disagreement in reflection. Likewise, a combat hierarchy between ways of knowing should be identified as a game rule rather than treated as a universal TOK ranking. Source areas: js/puzzles/sorting.js and the combat rules.
+
+Build loop source pointers
+
+These links identify the public modules reviewed. Their contents may change after this test. Use the finding descriptions and acceptance checks above to confirm the current version before patching.
+
+Rule hunting and Pattern Breaker source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/rule-hunter.js
+
+Chart activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/chart-fixer.js
+
+Venn activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/venn.js
+
+Witness activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/witness.js
+
+Dialogue input source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/ui/dialogue.js
+
+Map arrival source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/screens/map.js
+
+Card lesson source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/battle/lesson.js
+
+Battle screen source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/screens/battle.js
+
+Axiom cards source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/data/axioms.js
+
+PROOF TESTER AND MODEL FEEDBACK
+===============================
+
+R22 P1 Reject counterexamples outside the proof domain
+
+Browser-confirmed in the Oracle. A correct proof that odd plus odd is even defines j and k as whole numbers. At its final step, entering j = 0.5 and k = 3 was accepted. The tester calculated m = 2, n = 7 and an odd result of 9, then displayed "Fails for these numbers!" and "That does not compute." Choosing that the step breaks consumed a free check and said the step actually holds under its stated assumptions.
+
+The tester and grader disagree because the input violates the premise. The numeric field's step setting does not validate typed fractions. Pure-function checks found the same domain issue in odd-product and Gauss-sum variants.
+
+Fix: encode the domain of every proof variable and validate before evaluating a supposed counterexample. Explain that 0.5 is outside the whole-number premise; do not mark a valid step broken. Preserve real-number inputs in proofs that allow them. Check valid integers, fractions, negatives where excluded, blank inputs and permitted real values. Source: js/puzzles/oracle.js, testStep near 258 and numeric inputs near 979.
+
+Screenshot: oracle-fractional-counterexample.jpg
+
+A fractional input produces a red failure in a proof whose premise requires whole numbers. The activity later grades the same step as valid.
+
+R23 P2 Let Sorting feedback reflect the actual repair
+
+Browser-confirmed. Removing district points produced 100% accuracy: seven people who needed help received it, nobody was missed, nobody received unnecessary help, and eight refusals were correct. Fixed copy still said "No change is perfect: each one trades one mistake for another." An original 87% machine quote could also look current.
+
+Fix: say a change can trade one type of error for another, then describe this change's actual result. Label the original quote or update it. Check perfect and imperfect repairs. Source: js/puzzles/sorting.js near 695 and 744.
+
+FINAL TRIALS AND REFLECTION FLOW
+================================
+
+R24 P2 Ask the final prediction reflection once
+
+Browser-confirmed. The Core prediction activity asks "What did the Copy actually know about you?" with four choices. After the correct limited-count answer, Stage solved appears. Pressing Continue immediately opens a separate Why modal with the identical question and four answers.
+
+Fix: let either the activity or the encounter wrapper own the reflection. Record its completion once and proceed to the story. Check that a wrong response can be revised, that a correct response is not asked again, and that reload does not create a duplicate. Source areas: js/puzzles/prediction.js and js/screens/encounter.js reflection handling.
+
+R25 P2 Ground independence claims in the mechanics
+
+Browser-confirmed. Final prediction rounds offer "Follow my voice" and "My own way", but no actual inner-voice recommendation is presented for those rounds. A player can strategically pick Follow my voice as the independent action that defeats prediction. The labels imply a story meaning the mechanics do not establish.
+
+Fix: show an explicit recommendation from the voice each round, then let the player follow or reject it; alternatively label the two actions neutrally and keep the interpretation in the reflection. Check that the narrative's claim about dependence follows from what the player actually chose.
+
+The ending also says the machine cannot predict a question, only a click, after the player selects a prewritten question by clicking. The experiment establishes limits of this model's recorded choices, not that questions are inherently unpredictable. Ground the line in the model's missing evidence and inability to infer the player's reasons, and leave the broader TOK question open.
+
+R29 P2 Match the Line Drawer debrief to the layout
+
+Browser-observed by the story playtest and source-confirmed for the star13 layout. A valid route runs through the existing dots without leaving their bounds, yet the success explanation says "The box was never really there" and the reflection focuses on an added box assumption.
+
+Fix: select a reflection that matches the generated layout and the solution's relevant property. If leaving a boundary is the lesson, use a challenge that actually requires it. Check each graph family with its accepted route, success text and reflection. Source: js/puzzles/line-drawer.js, star13, success handling and whyFor.
+
+Preserve the ending and let it breathe
+
+The Core uses earlier choices and concrete prediction evidence, then the return-home scene revisits established objects and questions. These are worthwhile connections. R11 should remove the generic catch interruption from the emotional resolution, and R15 should point the tracker directly to the Summit Rift. Keep the character-specific final exchanges; their continuity is stronger than a generic lesson summary would be.
+
+SMALLER RECOVERY AND ACCURACY CORRECTIONS
+=========================================
+
+R26 P3 Preserve the river recovery explanation
+
+Programmatically reproduced using the unmodified module and a minimal DOM, not in the full browser route. An unsafe empty crossing at difficulty one submits a wrong answer and resets the trip. It assigns "Trip undone", then render immediately replaces that message with the ordinary crossings and seats status. Ticket exhaustion similarly loses "Out of tickets. Start again".
+
+Fix: retain a separate recovery status or render before assigning it. Explain whether only the last crossing was undone or the entire plan reset. Check unsafe crossing and ticket exhaustion. Source: js/puzzles/river-crossing.js near 233 to 237 and 262.
+
+R27 P3 Report team code copy results accurately
+
+Source-only. Team-code sharing calls clipboard.writeText without awaiting its promise, then immediately reports "Copied!". An asynchronous rejection escapes the synchronous catch. The backup-code helper already awaits writing and provides a fallback.
+
+Fix: reuse an awaited copy helper and display success only after completion. Offer manual copy when denied. Check successful writing and a rejected clipboard promise. Source: js/ui/battles.js near 405.
+
+R28 P2 Distinguish an expected winner from a guaranteed one
+
+Source-only in the Psychic Coin statistics case. "Somebody was always going to win" overstates the result. In the 768-player, eight-flip variant, independent lucky guessing produces three expected winners, but the probability of nobody winning is (255 / 256)^768, approximately 4.95%. Likely is not certain.
+
+Fix: say several winners are expected by chance and a winner is unsurprising in a contest this large. Check that probability explanations distinguish expected counts, likelihood and guarantees. Source: data/cases.js near 487.
+
+Further card terminology for R05
+
+Source-only precision checks in data/axioms.js. Add "non-empty" to the Axiom of Choice flavour. Phrase Excluded Middle as "P or not P"; its current flavour describes bivalence, which is related but distinct. These are useful distinctions in a game explicitly teaching mathematical and logical vocabulary. Keep the card mechanics readable, and explain their relationship to the names rather than relying on an evocative title alone.
+
+Stanford discussion of disjunction and excluded middle: https://plato.stanford.edu/entries/disjunction/
+
+VERIFICATION AND THE NEXT STUDENT TEST
+======================================
+
+Programmatic coverage
+
+Across Tribunal, Tower, Oracle, River Crossing, Water Jugs, Logic Grid, Line Drawer and Three Act, 36 seeded versions per module were generated and their stored solver answers were accepted by their own checker: 288 acceptance checks passed. These establish internal consistency of those paths, not independent proof that every answer key or interface is correct.
+
+Separately implemented breadth-first searches checked river minimum crossings and water-jug reachability and minimum moves in 120 generated cases each. All 240 independent planning checks agreed with the game. The additional review of Logic Grid and Three Act did not find another sufficiently supported correctness or retry defect. The inventory, ordinary rewards, injury/death removal and bag-use paths inspected also yielded no additional high-confidence finding.
+
+Targeted programmatic interaction checks reproduced the replay confirmation promise, both rule submission lockouts and overwritten river recovery text. Browser checks independently confirmed the replay map freeze, ordinary Rule Hunter lockout and Oracle domain contradiction. The source-only findings remain clearly labelled throughout this report.
+
+Repair checks to run together
+
+Exercise each failure path before the happy path: wrong rule then recovery; wrong reflection then correction; collapse then restart; backdrop dismissal then travel; rapid dialogue advance then deliberate answer; fractional input then a valid integer; long chart error then retry. Also check a save and reload during each recoverable state. These cases target the observed failure patterns rather than adding tests that simply mirror implementation.
+
+What to watch with actual students
+
+After the priority repairs, observe a few students encountering the game without coaching. Ask them to explain their next action and why they chose an answer. Record where they stop reading, ask what a term means, assume an optional system is required, or use a help control. Compare their explanation with the concept the activity intends to teach. Do not infer learning only from stars or a correct multiple-choice answer.
+
+Useful questions are whether students can design a test that separates two rules, distinguish an unsupported claim from a false one, explain why a proof's assumptions matter, and recognise a model's limited evidence. Let their own explanations guide the next changes to difficulty and scaffolding.
+
+Overall recommendation
+
+Repair the failure and recovery paths first. Then reduce repeated explanation, connect each story line to the active puzzle, and teach the secondary game systems when they become useful. The game already offers several satisfying ways to practise reasoning. The strongest next version will make those moments easier to reach and allow students to learn through revision.
+
+Oracle proof tester source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/oracle.js
+
+Tower activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/tower.js
+
+Sorting activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/sorting.js
+
+Prediction activity source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/puzzles/prediction.js
+
+Modal helpers source: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/js/ui/ui.js
+
+ADDITIONAL BROWSER EVIDENCE
+===========================
+
+Screenshot: tower-collapse-retry.jpg
+
+R21: a failed Tower attempt leaves two free checks, but no question, finish or retry controls. Map travel and re-entry are the undisclosed workaround.
+
+A strong interaction to preserve
+
+Screenshot: switchboard-example.jpg
+
+The Switchboard makes the relationship between a constructed circuit and all its input cases visible. Its immediate feedback is one of the game's strongest teaching interactions.
