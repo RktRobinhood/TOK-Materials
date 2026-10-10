@@ -700,7 +700,7 @@
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
-                gem('cost', d.cost),
+                d.onBoard ? null : gem('cost', d.cost), // the cost no longer matters once it is in play (teacher, 10 Oct)
                 el('div.bc-name' + fitName(d.name + (d.legendary ? ' ★' : '')), { text: d.name + (d.legendary ? ' ★' : '') }),
                 text,
                 gem('attack', d.attack, atkClass),
