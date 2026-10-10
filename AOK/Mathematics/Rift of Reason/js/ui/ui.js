@@ -17,17 +17,18 @@
         setTimeout(() => t.remove(), ms || 2600);
     }
 
-    // modal(title, bodyNode, [{ label, primary, onclick }]) → { close }
+    // modal(title, bodyNode, [{ label, primary, onclick }], { onClose(button) }) → { close }
+    // onClose receives the chosen button, or undefined for a dismissal.
     function modal(title, body, buttons, opts) {
         let closed = false;
-        const close = () => {
+        const close = button => {
             if (closed) return;
             closed = true;
             backdrop.remove();
-            if (opts && opts.onClose) opts.onClose();
+            if (opts && opts.onClose) opts.onClose(button);
         };
         const list = buttons || [{ label: 'Close' }];
-        const press = b => { Rift.Audio.sfx('click'); if (!b.keepOpen) close(); if (b.onclick) b.onclick(); };
+        const press = b => { if (closed) return; Rift.Audio.sfx('click'); if (!b.keepOpen) close(b); if (b.onclick) b.onclick(); };
         const actions = el('div.row.wrap', { style: { justifyContent: 'flex-end', marginTop: '14px' } },
             list.map(b => el('button.btn' + (b.primary ? '.primary' : ''), {
                 text: b.label,
@@ -50,10 +51,11 @@
 
     function confirm(title, text, yes, no) {
         return new Promise(resolve => {
+            const accept = { label: yes || 'OK', primary: true };
             modal(title, el('p', { text }), [
-                { label: no || 'Cancel', onclick: () => resolve(false) },
-                { label: yes || 'OK', primary: true, onclick: () => resolve(true) },
-            ]);
+                { label: no || 'Cancel' },
+                accept,
+            ], { onClose: button => resolve(button === accept) });
         });
     }
 

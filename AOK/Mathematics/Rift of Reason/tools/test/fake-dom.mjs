@@ -56,6 +56,7 @@ export class FakeElement {
         return n;
     }
     append(...ns) { ns.forEach(n => this.appendChild(typeof n === 'string' ? new Text(n) : n)); }
+    replaceChildren(...ns) { this.textContent = ''; this.append(...ns); }
     removeChild(n) { this.childNodes = this.childNodes.filter(x => x !== n); n.parentNode = null; return n; }
     remove() { if (this.parentNode) this.parentNode.removeChild(this); }
     cloneNode(deep) {
