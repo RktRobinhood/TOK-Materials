@@ -595,6 +595,11 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.69 | Side story 10 clue: a huge tablet propped on a log, a glowing ranked list of tiny animal portraits with bars of very different lengths (no readable text), a pile of berries beside it | `prop/berry-ranking` | The Giveaway App, record hotspot | 3 *story* | done (2026-10-09, `5-ui/side-props-6.png`) |
 | 13.70 | Side story 10 clue: a phone-style settings screen with two big sliders and a gear icon, a berry sticker on the corner (no readable text) | `prop/berry-settings` | The Giveaway App, object hotspot | 3 *story* | done (2026-10-09, `5-ui/side-props-6.png`) |
 | 13.71 | Quest badges and journal icon: gold and blue gem "!" and "?", a leather journal | `ui/quest-{new,progress}-{main,side}`, `ui/journal` | Quest journal, map badges, tracker | 2 | done (art session 2026-10-09) |
+| 13.72 | Cold-open cutscene: the village at dawn seen from the sky, the full picture the camera lands on (the reference the layers are cut from) | `scene/cold-open` | Cutscene prototype (#65) | 2 | to make |
+| 13.73 | Cold-open cutscene: the same village split into four parallax layers (sky, far hills, village, foreground) | `cutscene/cold-open-sky`, `-hills`, `-village`, `-front` | Cutscene prototype (#65): the camera glides through them at different speeds | 2 | to make |
+| 13.74 | Cold-open cutscene: the hairline crack in the sky, a transparent overlay | `cutscene/sky-crack` | Cutscene prototype (#65), later the sky opening at the Fair | 2 | to make |
+| 13.75 | Cold-open cutscene: the avatar's bedroom at dawn, an empty bed facing us, the window showing the cracked sky | `scene/bedroom` | Cutscene prototype (#65): the lock-on and the wake | 2 | to make |
+| 13.76 | Cold-open cutscene: each avatar asleep (lying down, eyes closed), boy and girl, five sheets | `avatar/<type>-<variant>/asleep` | Cutscene prototype (#65): laid into the bed in 13.75 | 2 | to make |
 
 
 ### 13.18 Nudge (session of 8 October)
@@ -851,6 +856,71 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 > One map marker on a transparent canvas, no text, no letters, no punctuation marks. Match the map markers above exactly (same gold-rimmed round medallion, same size, finish and outline weight), so it sits beside them on the map at 48 px. Inside: a small open storybook with a bookmark ribbon, a little magenta spark and three tiny stars rising out of its pages, as if a new story is waiting. Clearly different from the event, treasure and shop markers at a glance.
 
 ---
+
+### Cutscene prototype: the cold open (#65)
+
+These feed the first JavaScript cutscene: the Algorithm looks through the hairline crack in the dawn sky, swoops down onto the sleeping village, scans it and locks onto the player asleep in bed (issue #65). The camera moves *through* the picture, so the village comes in **layers**: ChatGPT paints the whole view first (13.72), then hands back one layer at a time from it (13.73). Do them in this order, in the same chat.
+
+If the chat no longer has an image a prompt attaches, the game's copies are in the repo: scenes in `assets/scenes/` (e.g. `village-square.webp`, `granny-door.webp`, `title.webp`), avatars in `assets/avatars/` (e.g. `owlet-girl-idle.webp`), the Algorithm in `assets/cast/algorithm-sky-eye.webp`.
+
+### 13.72 The village at dawn (the whole picture)
+
+**Attach:** `style-board.png`, `village-square.png`, `title.png`
+**Save as:** `6-cutscene/cold-open.png`
+**Ids:** `scene/cold-open`
+
+> A wide 16:9 painted background, at least 1672×941, no characters and no text. Match the style board and the village square exactly (same cute-and-dark storybook finish). A crooked little hill village at the very first light of dawn, seen from high above and slightly to the side, as if from the sky: deep blue-violet sky fading to a thin peach line on the horizon, a few last stars. Build it in clear depth bands so it can later be split into layers: **the sky** (top 45%, empty apart from the stars and a soft glow), **far hills** with a faint river (a band across the middle), **the village** (crooked timber houses, the fair's strings of unlit lanterns, a sundial on a little green, and one cottage with a single warm lit window near the centre: the player's home), and **a foreground** of dark tree tops and a fence along the bottom edge. Leave the upper middle of the sky plain: a long thin crack will be added there later. Quiet and still; everyone is asleep.
+
+### 13.73 The village in four layers
+
+**Attach:** the result of 13.72
+**Save as:** `6-cutscene/cold-open-sky.png`, `6-cutscene/cold-open-hills.png`, `6-cutscene/cold-open-village.png`, `6-cutscene/cold-open-front.png` (four requests in a row)
+**Ids:** `cutscene/cold-open-sky`, `cutscene/cold-open-hills`, `cutscene/cold-open-village`, `cutscene/cold-open-front`
+
+Paste these one at a time, each straight after the previous answer. Small mismatches between layers are fine: they move at different speeds anyway.
+
+> **Layer 1, sky.** From the dawn village picture above, give me only the sky as a full 16:9 image, exactly the same size and colours: the gradient, the stars and the dawn glow. Keep painting the sky down behind where the hills and houses were, so nothing is cut out. No hills, no buildings, no trees, no text.
+
+> **Layer 2, far hills.** From the same dawn village picture, give me only the far hills and the river band, on a transparent background, exactly the same size and in exactly the same position in the frame. Paint the hills a little further down behind where the village was, so there is no hole. Nothing else: no sky, no houses, no trees, no text.
+
+> **Layer 3, village.** From the same dawn village picture, give me only the village (houses, lantern strings, the sundial green and the lit cottage) on a transparent background, the same size and in the same position in the frame. Fill in the parts of the houses that the foreground trees were hiding. No sky, no hills, no foreground trees, no text.
+
+> **Layer 4, foreground.** From the same dawn village picture, give me only the dark tree tops and the fence along the bottom edge, on a transparent background, the same size and in the same position in the frame. Nothing else, no text.
+
+### 13.74 The hairline crack in the sky
+
+**Attach:** `style-board.png`, the result of 13.72, `algorithm.png`
+**Save as:** `6-cutscene/sky-crack.png`
+**Ids:** `cutscene/sky-crack`
+
+> On a transparent background, no text: one long, thin, jagged crack in the sky, like a hairline crack in glass, running roughly left to right with a slight curve and a few tiny side branches. The crack itself is pure black and very thin (a few pixels at most), with a faint cold cyan glow along its edges. Inside it, barely visible, are tiny flickering thumbnail pictures (the same feed tiles as the Algorithm's eye). Wide and short, about 4:1, so it can sit across the upper middle of the dawn sky. Calm and eerie, not an explosion: something is quietly watching through it.
+
+### 13.75 The bedroom at dawn
+
+**Attach:** `style-board.png`, `granny-door.png`, the result of 13.74
+**Save as:** `6-cutscene/bedroom.png`
+**Ids:** `scene/bedroom`
+
+> A wide 16:9 painted background, at least 1672×941, no characters and no text. Match the style board (cosy, cute and dark). A small cosy attic bedroom in the crooked village at dawn, seen from the foot of the bed: a simple wooden bed in the lower centre with a patchwork quilt and a plump pillow, **empty**. A sleeping avatar will be laid into it later, so leave the pillow and the top of the bed clear and well lit. A round window above the bed shows the blue-violet dawn sky with the thin black crack and its faint cyan glow across it. A few belongings: a satchel on a hook, a lantern on the sill, a pile of books, a calendar with one day circled (no readable text). Cool dawn light from the window, one warm glow from the lantern.
+
+### 13.76 The avatars asleep (five sheets)
+
+**Attach:** `style-board.png`, that avatar's sheet (e.g. `owlet-sheet.png`), the result of 13.75
+**Save as:** `1-avatars/<type>-asleep.png` (`owlet`, `mothkin`, `fox`, `frogling`, `raven`)
+**Ids:** `avatar/<type>-boy/asleep`, `avatar/<type>-girl/asleep`
+
+One prompt per avatar type; only the bold part changes.
+
+> On a transparent background, no text, clear space between the two figures: **the Owlet boy (long red scarf, his satchel set aside) and the Owlet girl (teal hooded cloak, her spectacles folded beside her)** from the attached sheet, each **lying asleep in bed**, seen from the foot of the bed like the bedroom picture: head on a pillow tilted slightly towards us, eyes closed, mouth soft, one arm over the top of a patchwork quilt that covers them from the chest down. Draw only the character, the pillow and the top edge of the quilt (no bed frame, no room), so they can be laid into the bedroom's empty bed. Exactly the same character design, colours and line style as their sheet. Peaceful, a tiny bit cute.
+
+For the other four, swap the bold part for:
+- **the Moth-kin boy (dusty-blue fur, his amber lantern dimmed on the pillow beside him) and the Moth-kin girl (lilac fur, her moon-white lantern dimmed beside her)**
+- **the Fox kit boy (green bandana) and the Fox kit girl (her mustard duffle coat laid over the quilt)**
+- **the Frogling boy (his yellow raincoat on a hook above him) and the Frogling girl (lily-pad hat on the pillow, red raincoat over the quilt)**
+- **the Raven boy (oversized grey hoodie, notebook on the quilt) and the Raven girl (purple beret on the pillow, magnifying glass on the quilt)**
+
+**After the art:** paste the results into a Claude session; the cutscene work (#65) slices and wires them (`tools/build-assets.mjs`, new folder `6-cutscene/`).
+
 
 ## Outcome log
 
