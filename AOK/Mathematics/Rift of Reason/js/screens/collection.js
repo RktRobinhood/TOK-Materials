@@ -316,14 +316,16 @@
             const s = Rift.State.get();
             const slider = (key, label) => el('label.row', null, [
                 el('span', { style: { width: '120px' }, text: label }),
-                el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.settings[key], oninput(ev) { Rift.State.update(st => { st.settings[key] = +ev.target.value; }); } }),
+                el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.settings[key] == null ? 0.5 : s.settings[key], oninput(ev) { Rift.State.update(st => { st.settings[key] = +ev.target.value; }); } }),
             ]);
             const hud = Rift.UI.hud({ back: { label: 'Back', onclick: () => Rift.Router.back('map') } });
             rootNode.append(hud, el('div.settings-screen.panel.stack', null, [
                 el('h1', { text: 'Settings' }),
+                el('button.btn', { text: '🏠 Main menu', onclick: () => Rift.Router.replace('title') }),
                 slider('voice', 'Voices'),
-                slider('sfx', 'Sounds'),
-                slider('music', 'Music'),
+                slider('sfx', 'Sound effects'),
+                slider('ambience', 'Ambience'),
+                slider('music', 'Music & jingles'),
                 slider('textSpeed', 'Text speed'),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: !!s.settings.calm, onchange(ev) { Rift.State.update(st => { st.settings.calm = ev.target.checked; }); } }),

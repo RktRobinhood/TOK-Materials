@@ -120,7 +120,8 @@ test('a code made by the game before the Card Arena (ROR1, save version 1) still
     // Newer fields get their defaults.
     assert.ok(Array.isArray(s.tactics) && Array.isArray(s.deckTactics));
     assert.deepEqual(s.backup, { lastAt: 0, reminded: [] });
-    assert.deepEqual(s.settings, Object.assign(J(S.freshState().settings), old.settings));
+    // An untouched Sounds slider (0.8) is lowered once when the Ambience slider arrives (10 Oct).
+    assert.deepEqual(s.settings, Object.assign(J(S.freshState().settings), old.settings, old.settings.sfx === 0.8 ? { sfx: 0.45 } : {}));
     // And it goes round again in the new format.
     const again = await S.exportCode();
     const exported = J(S.get());

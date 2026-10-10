@@ -28,6 +28,7 @@
  * The api passed to mount:
  *   api.submit(answer)    → runs check(); the encounter handles success/failure, health and feedback
  *   api.sfx(name)         → play a sound (e.g. 'click', 'place', 'error')
+ *   api.tension(0..1)     → background tension (e.g. a timer running out); optional, may be absent
  *   api.say(text, speaker)→ show a host bubble with a named speaker when supplied
  *   api.rng               → a seeded RNG for any cosmetic randomness
  *   api.difficulty        → 1..3

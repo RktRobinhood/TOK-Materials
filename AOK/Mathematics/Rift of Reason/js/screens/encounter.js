@@ -57,7 +57,15 @@
             let helpModal = null;
             let puzzleSlot = null;
 
-            rootNode.append(Rift.Assets.img((Rift.Cast ? Rift.Cast.nodeScene(params.nodeId) : n.scene) || 'scene/road-forest', { className: 'scene-bg', label: n.name }));
+            const sceneArt = (Rift.Cast ? Rift.Cast.nodeScene(params.nodeId) : n.scene) || 'scene/road-forest';
+            rootNode.append(Rift.Assets.img(sceneArt, { className: 'scene-bg', label: n.name }));
+            if (Rift.Ambience) {
+                Rift.Ambience.scene(sceneArt);
+                // A danger clock already running here keeps its tension.
+                const live = Rift.Stakes && Rift.Stakes.forNode(params.nodeId);
+                const id = live && (live.scene || live.floor);
+                if (id) Rift.Ambience.tension(Rift.Stakes.danger(id) / Rift.Stakes.size(id));
+            }
             const checks = el('span.chip.enc-checks', { 'aria-live': 'polite' });
             const hud = Rift.UI.hud({ back: { label: 'Map', onclick: leave }, status: checks });
             const title = el('div.enc-title.panel', null, [el('strong', { text: n.name }), el('span.stage.small.muted')]);
@@ -212,6 +220,7 @@
                 handle = def.mount(slot, data, {
                     submit: answer => onSubmit(answer),
                     sfx: name => Rift.Audio.sfx(name),
+                    tension: x => { if (Rift.Ambience) Rift.Ambience.tension(x); },
                     say: (text, speakerId) => {
                         const b = host.querySelector('.bubble');
                         const who = (Rift.data.speakers || {})[speakerId] || (Rift.data.creatures || {})[speakerId];

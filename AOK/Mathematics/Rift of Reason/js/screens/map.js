@@ -50,6 +50,7 @@
             const state = Rift.State.get();
             const mapId = mapOf(state.map.at);
             const mapDef = (Rift.data.maps || {})[mapId] || { scene: 'scene/map', name: '' };
+            if (Rift.Ambience) Rift.Ambience.scene(mapDef.scene);
             const onThisMap = id => mapOf(id) === mapId;
             let walking = false;
             let destroyed = false;

@@ -49,7 +49,7 @@
             perksUsed: {},         // perk id -> chapter it was used in
             tutorialsSeen: {},     // puzzle type -> tutorial offered (also filled for old saves)
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0, powerUses: {} },
-            settings: { music: 0.5, sfx: 0.8, voice: 1, textSpeed: 1, calm: false, charactersCanDie: true },
+            settings: { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, textSpeed: 1, calm: false, charactersCanDie: true },
             backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
@@ -298,6 +298,8 @@
         }
         // Saves migrated before the attack clamp existed: fix them too (does nothing otherwise).
         [s.creatures, s.trophies].forEach(list => { if (Array.isArray(list)) list.forEach(clampPower); });
+        // Saves from before the Ambience slider (10 Oct): add it, and lower an untouched Sounds slider.
+        if (s.settings && s.settings.ambience == null) { s.settings.ambience = 0.5; if (s.settings.sfx === 0.8) s.settings.sfx = 0.45; }
         // Fill any fields added since this save was made.
         const out = mergeDefaults(freshState(), s);
         // Colour tactics for the colours this save already owns (saves made before they existed).

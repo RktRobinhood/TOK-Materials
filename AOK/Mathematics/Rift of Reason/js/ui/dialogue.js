@@ -286,6 +286,8 @@
             }
             if (step.when !== undefined && !Story().test(step.when, ctx)) continue;
             if (!Story().matchesOnly(step.only)) continue;
+            if (Rift.Ambience && step.ambience) Rift.Ambience.scene(step.ambience);
+            if (Rift.Ambience && step.tension != null) Rift.Ambience.tension(step.tension);
             if (step.inner) await inner(layer, step, ctx);
             else if (step.lead) {
                 const lead = leadFor(step.lead, ctx);

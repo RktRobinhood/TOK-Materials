@@ -1,5 +1,5 @@
 // Render the ElevenLabs sound-effect plan (tools/sfx-plan.mjs) to assets/sfx/el/ and write data/sfx-el.js.
-// Costs about 10 credits per second of sound (free plan: 10,000 credits a month). Existing files are kept.
+// Ambience loops (amb-*) use loop mode. Costs about 10 credits per second of sound (free plan: 10,000 credits a month). Existing files are kept.
 //
 //   node tools/sfx-eleven.mjs              status and estimated cost of what is missing
 //   node tools/sfx-eleven.mjs --render     render what is missing (add --only <prefix> to limit)
@@ -35,7 +35,7 @@ async function render(j) {
     const res = await fetch('https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_64', {
         method: 'POST', signal: AbortSignal.timeout(120000),
         headers: { 'xi-api-key': fs.readFileSync(KEY_FILE, 'utf8').trim(), 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: j.prompt, duration_seconds: j.secs, prompt_influence: 0.45 }),
+        body: JSON.stringify({ text: j.prompt, duration_seconds: j.secs, prompt_influence: 0.45, ...(j.name.startsWith('amb-') ? { loop: true, model_id: 'eleven_text_to_sound_v2' } : {}) }),
     });
     if (!res.ok) throw new Error(res.status + ' ' + (await res.text()).slice(0, 300));
     fs.writeFileSync(file(j), Buffer.from(await res.arrayBuffer()));

@@ -27,7 +27,7 @@ e.g. <code>cr-keanu-enter-2</code>, and run <code>node tools/sfx-eleven.mjs --re
     const groups = {};
     for (const [name, files] of Object.entries(Rift.data.sfx)) {
         if (!files[0].startsWith('el/')) continue;
-        const g = name.startsWith('cr-') ? 'Creature ' + name.split('-')[1] : name.startsWith('cast-') || name.startsWith('tactic-') ? 'Spells and tactics' : 'Battle';
+        const g = name.startsWith('amb-') ? 'Ambience loops (play once; they loop in the game)' : name.startsWith('cr-') ? 'Creature ' + name.split('-')[1] : name.startsWith('cast-') || name.startsWith('tactic-') ? 'Spells and tactics' : 'Battle';
         (groups[g] ||= []).push([name, files]);
     }
     for (const [g, list] of Object.entries(groups)) {

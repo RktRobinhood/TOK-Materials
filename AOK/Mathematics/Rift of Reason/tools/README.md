@@ -59,3 +59,11 @@ hero "oof"s (boy/girl/man/woman) and four animal calls per creature (enter, atta
 redo one with `--redo <name-n>`. Spoken creature barks live in `data/barks.js` and are recorded by
 `tools/voices.mjs` like any other line; the battle plays one only once it is recorded.
 A battle opponent can set `gender: 'man'|'woman'|'boy'|'girl'` to get a matching hurt sound.
+
+### Ambience
+
+The same plan has 26 seamless 20-second loops (`amb-*`, ElevenLabs loop mode): one per kind of place,
+one per battle mat, and two tension layers. `data/ambience.js` maps scene art to a loop;
+`js/core/ambience.js` crossfades between them and glides the tension layers in and out.
+Tension comes from danger clocks, low hero hearts in battle, a story step `{ tension: 0.6 }`
+(or `{ ambience: 'scene/fair' }` to change the loop mid-scene), or a puzzle's `api.tension(x)`.

@@ -5,6 +5,84 @@
 (function (root) {
     'use strict';
     Object.assign(root.Rift.data.sfx, {
+        "amb-title": [
+            "el/amb-title-1.mp3"
+        ],
+        "amb-valley": [
+            "el/amb-valley-1.mp3"
+        ],
+        "amb-town": [
+            "el/amb-town-1.mp3"
+        ],
+        "amb-future": [
+            "el/amb-future-1.mp3"
+        ],
+        "amb-tower": [
+            "el/amb-tower-1.mp3"
+        ],
+        "amb-core": [
+            "el/amb-core-1.mp3"
+        ],
+        "amb-forest": [
+            "el/amb-forest-1.mp3"
+        ],
+        "amb-river": [
+            "el/amb-river-1.mp3"
+        ],
+        "amb-pass": [
+            "el/amb-pass-1.mp3"
+        ],
+        "amb-well": [
+            "el/amb-well-1.mp3"
+        ],
+        "amb-fair": [
+            "el/amb-fair-1.mp3"
+        ],
+        "amb-cosy": [
+            "el/amb-cosy-1.mp3"
+        ],
+        "amb-kitchen": [
+            "el/amb-kitchen-1.mp3"
+        ],
+        "amb-feast": [
+            "el/amb-feast-1.mp3"
+        ],
+        "amb-school": [
+            "el/amb-school-1.mp3"
+        ],
+        "amb-gallery": [
+            "el/amb-gallery-1.mp3"
+        ],
+        "amb-court": [
+            "el/amb-court-1.mp3"
+        ],
+        "amb-oracle": [
+            "el/amb-oracle-1.mp3"
+        ],
+        "amb-clock": [
+            "el/amb-clock-1.mp3"
+        ],
+        "amb-arena-l1": [
+            "el/amb-arena-l1-1.mp3"
+        ],
+        "amb-arena-l2": [
+            "el/amb-arena-l2-1.mp3"
+        ],
+        "amb-arena-l3": [
+            "el/amb-arena-l3-1.mp3"
+        ],
+        "amb-arena-l4": [
+            "el/amb-arena-l4-1.mp3"
+        ],
+        "amb-table": [
+            "el/amb-table-1.mp3"
+        ],
+        "amb-tension-1": [
+            "el/amb-tension-1-1.mp3"
+        ],
+        "amb-tension-2": [
+            "el/amb-tension-2-1.mp3"
+        ],
         "cast-reason": [
             "el/cast-reason-1.mp3",
             "el/cast-reason-2.mp3"

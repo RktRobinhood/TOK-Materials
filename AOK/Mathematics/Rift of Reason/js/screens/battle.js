@@ -261,6 +261,7 @@
         const dom = {};
         const lesson = p.lesson || (save && save.chapter && Rift.data.chapters && Rift.data.chapters[save.chapter] ? Rift.data.chapters[save.chapter].lesson : 1);
         const sceneId = ['scene/arena-l' + lesson, 'scene/arena'].find(id => has(id)) || 'scene/battle-table';
+        if (Rift.Ambience) Rift.Ambience.scene(sceneId);
         const screen = el('div.battle' + (guide ? '.guide-mode' : ''), {}, [
             dom.arena = el('div.b-arena', {}, [
                 // Top row: opponent hero | opponent hand (backs) | opponent energy.
@@ -565,6 +566,10 @@
                     case 'draw': if (ev.player === ME) add('draw', null, { volume: 0.5 }); break;
                 }
             });
+            if (Rift.Ambience && events.some(ev => ev.t === 'hit' || ev.t === 'end')) {
+                const low = Math.min(...state.players.map(P => P.hearts / (P.maxHearts || 12)));
+                Rift.Ambience.tension(events.some(ev => ev.t === 'end') ? 0 : Rift.clamp((0.75 - low) / 0.6, 0, 1));
+            }
             // Space the batch out; a channel may only cut its own previous sound.
             cue.slice(0, 6).forEach(([n, o], i) => setTimeout(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
             if (bark && !guide && !A.speaking()) {

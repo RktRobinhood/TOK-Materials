@@ -11,6 +11,7 @@
     Rift.Screens.register('title', {
         mount(rootNode) {
             const has = Rift.State.has() && Rift.State.get().avatar;
+            if (Rift.Ambience) Rift.Ambience.scene('scene/title');
             rootNode.appendChild(Rift.Assets.img('scene/title', { className: 'scene-bg', label: 'Rift of Reason' }));
             rootNode.appendChild(el('div.title-card.center', null, [
                 el('div.stack', { style: { alignItems: 'center', textAlign: 'center' } }, [

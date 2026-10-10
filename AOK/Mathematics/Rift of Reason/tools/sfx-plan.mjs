@@ -90,7 +90,40 @@ const MOOD = {
     die: (a, m) => `${a}; one fading defeated cry, sad and falling`,
 };
 
+// Ambience loops (seamless, ElevenLabs loop mode). data/ambience.js maps scene art to these; the two
+// tension layers fade in on top as danger rises (js/core/ambience.js).
+const AMB = 'seamless ambience loop, background atmosphere, no music, no speech, no words, no sudden loud sounds';
+const AMBIENCE = {
+    title: 'a mysterious magical rift humming softly, airy wind, faint glassy wind chimes',
+    valley: 'peaceful green valley meadow, gentle breeze in grass, distant songbirds, a faint babbling stream',
+    town: 'small storybook village by day, distant indistinct crowd murmur, cart wheels on cobbles, birds, a far bell',
+    future: 'futuristic city plaza, soft hover-car whooshes, buzzing neon signs, electronic hum, distant crowd murmur',
+    tower: 'inside a huge server room, whirring cooling fans, electrical hum, relays clicking',
+    core: 'ominous energy core chamber, deep slow pulsing throb, crackling electricity, low rumble',
+    forest: 'daytime woodland path, leaves rustling, woodpecker in the distance, birdsong, twigs creaking',
+    river: 'a river flowing under an old wooden bridge, water lapping, creaking planks, light wind',
+    pass: 'high mountain pass, howling cold wind, eerie shimmering magical hum',
+    well: 'old stone wishing well, water drips echoing deep inside, birds and breeze outside',
+    fair: 'busy village fairground, cheerful indistinct crowd murmur, game bells ringing, distant carousel creaks',
+    cosy: 'cosy cottage interior, crackling hearth fire, slow clock ticking, kettle simmering',
+    kitchen: 'busy rustic kitchen, roaring oven fire, bubbling pot, pans clattering softly',
+    feast: 'great feast hall, indistinct crowd murmur, cutlery and plates, big fireplace crackling',
+    school: 'quiet old schoolroom, chalk scratching, pages turning, clock ticking, birds outside the window',
+    gallery: 'quiet echoing museum gallery, distant soft footsteps, faint air hum',
+    court: 'tense quiet courtroom, indistinct whispers, wooden benches creaking, papers shuffling',
+    oracle: 'mystical oracle chamber, soft resonant crystal hum, slow water drips, faint shimmer',
+    clock: 'inside a giant clock tower, big gears ticking and grinding, wind whistling through',
+    'arena-l1': 'outdoor creature battle arena in a sunny valley, small excited crowd of animals murmuring, birds, flags flapping in wind',
+    'arena-l2': 'town square battle arena at dusk, crackling torches, excited indistinct crowd murmur',
+    'arena-l3': 'futuristic neon battle arena, electronic hum, echoing crowd murmur, buzzing lights',
+    'arena-l4': 'battle arena inside a vast dark server tower, ominous hum, electrical sparks, distant rumble',
+    table: 'quiet tavern card table, fireplace crackling, low indistinct chatter, mugs clinking',
+    'tension-1': 'uneasy low cinematic drone with a slow distant heartbeat, ominous',
+    'tension-2': 'urgent fast heartbeat and rapid clock ticking over a tense cinematic drone, rising danger',
+};
+
 export const PLAN = [
+    ...Object.entries(AMBIENCE).map(([id, t]) => ['amb-' + id, 20, t + ', ' + AMB, 1]),
     // ---- card plays ----
     ...Object.entries(CAST).map(([c, t]) => ['cast-' + c, 1.4, p('spell cast: ' + t), 2]),
     ...Object.entries(TACTICS).map(([id, t]) => ['tactic-' + id, 1.6, p(t), 1]),
