@@ -30,7 +30,7 @@
         const list = (Rift.data.sfx || {})[name];
         if (!list || !list.length) return;
         const o = opts || {};
-        const bus = music.has(name) ? 'music' : name === 'step' ? 'step' : uiSounds.has(name) ? 'ui' : 'effect';
+        const bus = o.bus || (music.has(name) ? 'music' : name === 'step' ? 'step' : uiSounds.has(name) ? 'ui' : 'effect');
         const volume = Rift.clamp(settings()[bus === 'music' ? 'music' : 'sfx'] * (o.volume == null ? 1 : o.volume), 0, 1);
         if (volume <= 0) return;
         const now = Date.now();
@@ -154,5 +154,9 @@
         Rift.bus.on('state:changed', applyLevels);
         Rift.bus.on('state:replaced', applyLevels);
     }
-    Rift.Audio = { sfx, speak, stopVoice, stopSounds };
+    // True while a recorded or browser voice line is playing (battle barks wait their turn).
+    const speaking = () => !!(currentVoice || (root.speechSynthesis && root.speechSynthesis.speaking));
+    const has = name => !!((Rift.data.sfx || {})[name] || []).length;
+
+    Rift.Audio = { sfx, speak, stopVoice, stopSounds, speaking, has };
 })(typeof window !== 'undefined' ? window : globalThis);

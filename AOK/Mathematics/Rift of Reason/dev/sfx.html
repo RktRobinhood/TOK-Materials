@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="../">
+<title>Sound bench</title>
+<style>
+    body { font: 15px system-ui, sans-serif; background: #1b1424; color: #eee; margin: 16px; }
+    h2 { margin: 18px 0 6px; font-size: 16px; color: #f2b632; }
+    .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 3px 0; }
+    .name { width: 230px; font-family: monospace; }
+    button { background: #3a2a4d; color: #eee; border: 1px solid #6a5280; border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+    button:hover { background: #55407a; }
+</style>
+</head>
+<body>
+<h1>Sound bench</h1>
+<p>Every ElevenLabs sound (assets/sfx/el). Click a number to hear one variant. To redo a bad one, note its name and number,
+e.g. <code>cr-keanu-enter-2</code>, and run <code>node tools/sfx-eleven.mjs --redo cr-keanu-enter-2</code>.</p>
+<div id="out"></div>
+<script>window.Rift = { data: {} };</script>
+<script src="data/sfx.js"></script>
+<script src="data/sfx-el.js"></script>
+<script>
+    const out = document.getElementById('out');
+    const groups = {};
+    for (const [name, files] of Object.entries(Rift.data.sfx)) {
+        if (!files[0].startsWith('el/')) continue;
+        const g = name.startsWith('cr-') ? 'Creature ' + name.split('-')[1] : name.startsWith('cast-') || name.startsWith('tactic-') ? 'Spells and tactics' : 'Battle';
+        (groups[g] ||= []).push([name, files]);
+    }
+    for (const [g, list] of Object.entries(groups)) {
+        const h = document.createElement('h2'); h.textContent = g; out.appendChild(h);
+        for (const [name, files] of list) {
+            const row = document.createElement('div'); row.className = 'row';
+            row.innerHTML = '<span class="name">' + name + '</span>';
+            files.forEach((f, i) => {
+                const b = document.createElement('button'); b.textContent = i + 1;
+                b.onclick = () => new Audio('assets/sfx/' + f).play();
+                row.appendChild(b);
+            });
+            out.appendChild(row);
+        }
+    }
+</script>
+</body>
+</html>

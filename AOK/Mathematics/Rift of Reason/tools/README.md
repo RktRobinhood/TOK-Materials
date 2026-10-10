@@ -49,3 +49,13 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 ## Classroom clue QR
 
 After `npm install --prefix tools`, run `node tools/build-clue-qr.mjs`. Pinned `qrcode` 1.5.4 generates the local `assets/clues/trace.png`; no QR library runs in the game. The encoded value is plain text `RIFT-TRACE`. `clues.html` supplies printable cards, a slide code and teacher answers, with manual-copy/offline fallbacks. Encoder documentation: https://github.com/soldair/node-qrcode .
+
+## Battle sound effects (ElevenLabs)
+
+`tools/sfx-plan.mjs` lists every battle sound: spells by Way of Knowing, special tactics, summons, combat,
+hero "oof"s (boy/girl/man/woman) and four animal calls per creature (enter, attack, hurt, die).
+`node tools/sfx-eleven.mjs --render` renders what is missing to `assets/sfx/el/` and rewrites
+`data/sfx-el.js` (about 4 credits per sound; the free plan has 10,000 a month). Listen on `dev/sfx.html`;
+redo one with `--redo <name-n>`. Spoken creature barks live in `data/barks.js` and are recorded by
+`tools/voices.mjs` like any other line; the battle plays one only once it is recorded.
+A battle opponent can set `gender: 'man'|'woman'|'boy'|'girl'` to get a matching hurt sound.

@@ -63,7 +63,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 function loadGame() {
     const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js')).sort();
     const puzzles = fs.readdirSync(path.join(GAME_DIR, 'js', 'puzzles')).filter(f => f.endsWith('.js') && f !== 'registry.js').sort();
-    return loadRift(['js/core/rift.js', 'data/avatars.js', 'data/creatures.js', 'data/map.js', 'data/cases.js',
+    return loadRift(['js/core/rift.js', 'data/avatars.js', 'data/creatures.js', 'data/barks.js', 'data/map.js', 'data/cases.js',
         ...scripts.map(f => 'data/script/' + f), 'data/cast.js', 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
 }
 
@@ -131,6 +131,7 @@ function collect(Rift) {
     // Side stories (data/script/side-stories.js); the test fixture is never voiced. Lines inside v => [...] functions are not collected.
     for (const [key, st] of Object.entries(Rift.data.sideStories || {})) if (!st.fixture) walk(st, 'side ' + key, new Set());
     for (const [id, c] of Object.entries(Rift.data.creatures || {})) (c.lines || []).forEach(t => add(id, t, null, 'creature ' + id));
+    for (const [id, b] of Object.entries(Rift.data.barks || {})) Object.values(b).flat().forEach(t => add(id, t, null, 'creature ' + id));
     // Match the actual station host, not a second generic tutorial narrator.
     // voice ids de-duplicate repeated family/host instructions across nodes.
     for (const n of Object.values(Rift.data.map.nodes)) {

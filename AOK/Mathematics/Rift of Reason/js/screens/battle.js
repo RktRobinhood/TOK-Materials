@@ -518,14 +518,61 @@
 
         function noteEvents(events) {
             ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t) && !/Choose a draw\.$/.test(t));
+            try { battleSounds(events); } catch (e) { /* sound is optional */ }
+        }
+
+        // Sounds for one batch of events (assets/sfx/el via data/sfx-el.js; older Kenney names as the
+        // fallback). Sounds in a batch are spaced out, creature calls use their own channel, and at most
+        // one spoken creature bark (data/barks.js) plays, only when it is recorded and no
+        // other voice is talking.
+        function battleSounds(events) {
+            const A = Rift.Audio;
+            if (!A || !A.has) return;
+            const cue = [];
+            const add = (name, fallback, opts) => {
+                const n = A.has(name) ? name : fallback && A.has(fallback) ? fallback : null;
+                if (n) cue.push([n, opts || {}]);
+            };
+            const sp = cid => { const c = cid && state.cards[cid]; return c && c.kind === 'creature' ? c.species : null; };
+            const call = (cid, kind) => { const s = sp(cid); if (s) add('cr-' + s + '-' + kind, null, { bus: 'creature' }); };
+            const dying = new Set(events.filter(ev => ev.t === 'defeated').map(ev => ev.cid));
+            const avatar = ((Rift.State && Rift.State.get()) || {}).avatar || {};
+            const grunt = { [ME]: avatar.variant === 'girl' ? 'hurt-girl' : avatar.variant === 'boy' ? 'hurt-boy' : null, [OPP]: opp.gender ? 'hurt-' + opp.gender : null };
+            let bark = null;
+            const wantBark = (cid, kind, chance) => { const s = sp(cid); if (!bark && s && Math.random() < chance) bark = { s, kind }; };
             events.forEach(ev => {
-                if (ev.t === 'play' || ev.t === 'tactic-play' || ev.t === 'item-use') sfx('card-play');
-                if (ev.t === 'hit') sfx('hit');
-                if (ev.t === 'fight') sfx('block');
-                if (ev.t === 'defeated') sfx('defeat');
-                if (ev.t === 'axiom' || ev.t === 'reset') sfx('axiom');
-                if (ev.t === 'power-use') sfx('jingle');
+                switch (ev.t) {
+                    case 'play': add('summon', 'card-play'); call(ev.cid, 'enter'); wantBark(ev.cid, 'enter', 0.6); break;
+                    case 'tactic-play': {
+                        const def = (Rift.data.tactics || {})[ev.id] || {};
+                        add('tactic-' + ev.id, 'cast-' + (def.colour || 'colourless'));
+                        if (!cue.length) add('card-play');
+                        break;
+                    }
+                    case 'item-use': add('item-use', 'card-play'); break;
+                    case 'axiom-play': add('draw'); break;
+                    case 'axiom': add('axiom', 'axiom'); break;
+                    case 'reset': add('reset', 'axiom'); break;
+                    case 'power-use': add('power', 'jingle'); break;
+                    case 'activate': add('activate'); call(ev.cid, 'enter'); wantBark(ev.cid, 'ability', 0.7); break;
+                    case 'attack': call(ev.cid, 'attack'); add('slash'); break;
+                    case 'fight': add('fight', 'block'); break;
+                    case 'damage': add('impact', 'hit'); if (!dying.has(ev.cid)) call(ev.cid, 'hurt'); break;
+                    case 'shield': add('shield', 'block'); break;
+                    case 'hit': add('hero-hit', 'hit'); if (grunt[ev.player]) add(grunt[ev.player], null, { bus: 'grunt' }); break;
+                    case 'defeated': call(ev.cid, 'die'); add('defeat', 'defeat'); wantBark(ev.cid, 'defeat', 0.5); break;
+                    case 'fizzle': add('fizzle'); break;
+                    case 'draw': if (ev.player === ME) add('draw', null, { volume: 0.5 }); break;
+                }
             });
+            // Space the batch out; a channel may only cut its own previous sound.
+            cue.slice(0, 6).forEach(([n, o], i) => setTimeout(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
+            if (bark && !guide && !A.speaking()) {
+                const lines = (((Rift.data.barks || {})[bark.s] || {})[bark.kind]) || [];
+                const text = lines[Math.floor(Math.random() * lines.length)];
+                const voice = text && Rift.voiceId(bark.s, text);
+                if (voice && (Rift.data.voices || {})[voice]) setTimeout(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, cue.length * 220 + 300);
+            }
         }
 
         function setNote(text) {
