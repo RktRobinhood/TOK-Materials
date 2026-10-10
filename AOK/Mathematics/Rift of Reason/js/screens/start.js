@@ -12,6 +12,11 @@
         mount(rootNode) {
             const has = Rift.State.has() && Rift.State.get().avatar;
             if (Rift.Ambience) Rift.Ambience.scene('scene/title');
+            // A lightning strike greets the player once per visit (on the first click if the browser
+            // has not allowed sound yet).
+            const splash = () => { if (Rift.splashed) return; Rift.splashed = true; Rift.Audio.sfx('splash'); };
+            if (root.navigator && root.navigator.userActivation && root.navigator.userActivation.hasBeenActive) splash();
+            else root.document.addEventListener('pointerdown', splash, { once: true, capture: true });
             rootNode.appendChild(Rift.Assets.img('scene/title', { className: 'scene-bg', label: 'Rift of Reason' }));
             rootNode.appendChild(el('div.title-card.center', null, [
                 el('div.stack', { style: { alignItems: 'center', textAlign: 'center' } }, [

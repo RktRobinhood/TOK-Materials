@@ -209,6 +209,16 @@
             "el/draw-1.mp3",
             "el/draw-2.mp3"
         ],
+        "rift": [
+            "el/rift-1.mp3",
+            "el/rift-2.mp3"
+        ],
+        "fate-warp": [
+            "el/fate-warp-1.mp3"
+        ],
+        "splash": [
+            "el/splash-1.mp3"
+        ],
         "fizzle": [
             "el/fizzle-1.mp3"
         ],

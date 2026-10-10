@@ -94,7 +94,7 @@ const MOOD = {
 // tension layers fade in on top as danger rises (js/core/ambience.js).
 const AMB = 'seamless ambience loop, background atmosphere, no music, no speech, no words, no sudden loud sounds';
 const AMBIENCE = {
-    title: 'a mysterious magical rift humming softly, airy wind, faint glassy wind chimes',
+    title: 'a crackling magical energy rift: buzzing electric arcs, sizzling sparks, deep pulsing energy hum, occasional distant thunder rolls',
     valley: 'peaceful green valley meadow, gentle breeze in grass, distant songbirds, a faint babbling stream',
     town: 'small storybook village by day, distant indistinct crowd murmur, cart wheels on cobbles, birds, a far bell',
     future: 'futuristic city plaza, soft hover-car whooshes, buzzing neon signs, electronic hum, distant crowd murmur',
@@ -102,7 +102,7 @@ const AMBIENCE = {
     core: 'ominous energy core chamber, deep slow pulsing throb, crackling electricity, low rumble',
     forest: 'daytime woodland path, leaves rustling, woodpecker in the distance, birdsong, twigs creaking',
     river: 'a river flowing under an old wooden bridge, water lapping, creaking planks, light wind',
-    pass: 'high mountain pass, howling cold wind, eerie shimmering magical hum',
+    pass: 'stormy mountain pass beside a tear in time: howling wind, crackling electric energy arcs, sizzling sparks, rolling thunder, deep humming rift',
     well: 'old stone wishing well, water drips echoing deep inside, birds and breeze outside',
     fair: 'busy village fairground, cheerful indistinct crowd murmur, game bells ringing, distant carousel creaks',
     cosy: 'cosy cottage interior, crackling hearth fire, slow clock ticking, kettle simmering',
@@ -135,6 +135,9 @@ export const PLAN = [
     ['activate', 1.0, p('a creature ability activates, a short glowing magical charge-up'), 2],
     ['steal', 1.4, p('a sneaky mind-control swirl, the creature swaps sides, wobbly hypnotic tone'), 2],
     ['draw', 0.6, p('a single playing card drawn quickly from a deck, crisp swish'), 2],
+    ['rift', 2.0, p('a rift in time tears open: rising electric energy crackle, a sharp lightning crack and a deep whooshing portal'), 2],
+    ['fate-warp', 1.6, p('a time warp: sizzling electric zap that bends and swirls into a whoosh'), 1],
+    ['splash', 3.0, p('a huge lightning strike with a sharp crack, crackling electric energy and a rolling thunder boom'), 1],
     ['fizzle', 1.0, p('a magic spell fizzling out, sad puff of smoke'), 1],
     // ---- combat ----
     ['slash', 0.8, p('a quick claw slash whoosh'), 3],
