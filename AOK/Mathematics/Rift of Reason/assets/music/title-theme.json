@@ -1,0 +1,19 @@
+{
+  "name": "A Little Wonder",
+  "provider": "ElevenLabs",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Seamless looping instrumental title theme for a whimsical fantasy puzzle adventure about time rifts and curious creatures. Catchy five-note rising melody on warm felt piano and soft celesta, lightly plucked acoustic strings and gentle chamber strings. Lilting 6/8 at 96 BPM, cosy wonder with a hint of mystery. Intimate mix, consistent quiet dynamics, no build or ending. No vocals, drums, thunder, buzzing, drones or effects.",
+  "requestedSeconds": 30,
+  "loop": true,
+  "credits": 300,
+  "generatedAt": "2026-10-11T13:00:47.572Z",
+  "signature": "3646ff77793ae5dde6c51e45663ec23342b3b5734e08ae0975e1b4ed1ac02dbc",
+  "duration": 30,
+  "loudnessLUFS": -22.44,
+  "truePeakDB": -7.33,
+  "rms": 0.060577144393196954,
+  "peak": 0.4298783540725708,
+  "seamJump": 0.004380572587251663,
+  "fileSHA256": "65812a2e3e5e7470d00a7b71f55d5fbc9c463754049b11032cdacf1e0da0c535",
+  "processing": "Two-pass -22 LUFS / -4 dBTP normalization; 44.1 kHz stereo gapless MP3. Full decoded buffer loops."
+}

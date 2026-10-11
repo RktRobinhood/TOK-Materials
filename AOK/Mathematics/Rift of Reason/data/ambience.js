@@ -1,13 +1,17 @@
 /*
- * Background ambience per scene: scene art id → loop name in assets/sfx/el (amb-<name>, see
- * tools/sfx-plan.mjs). Scenes not listed use `fallback`. Played by js/core/ambience.js.
+ * Background audio per scene. Ordinary loops use assets/sfx/el (amb-<name>, see
+ * tools/sfx-plan.mjs); tracks can name a music file with its own bus and level.
+ * Scenes not listed use `fallback`. Played by js/core/ambience.js.
  */
 (function (root) {
     'use strict';
     root.Rift.data.ambience = {
         fallback: 'valley',
+        tracks: {
+            'title-theme': { file: 'assets/music/title-theme.mp3', bus: 'music', level: 0.5, trim: false },
+        },
         scenes: {
-            'scene/title': 'title',
+            'scene/title': 'title-theme',
             'scene/map': 'valley', 'scene/map-ch2': 'town', 'scene/map-ch3': 'future', 'scene/map-ch4': 'tower',
             'scene/road-forest': 'forest', 'scene/road-gate': 'forest',
             'scene/road-bridge': 'river', 'scene/road-bridge-rocket': 'river',

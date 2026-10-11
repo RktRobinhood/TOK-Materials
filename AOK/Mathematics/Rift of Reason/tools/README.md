@@ -46,6 +46,12 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 
 `tools/voices-cast.json` gives each speaker one prebuilt Gemini voice, an acting direction and the model it always uses (`"model": "flash"` or the default lite), so a voice never changes model halfway through. Caricature directions describe a style (energy, cadence), never a real person. To change a voice, edit its entry, delete that speaker's MP3s in `assets/voice/` and record again. `tools/voices-fx.mjs` adds the Algorithm's synthetic chorus, the Sundial's room echo and the avatars' subtle inner-voice effect (every `*-inner` speaker) after recording.
 
+## Main-menu music
+
+The title screen plays **A Little Wonder**, a custom 30-second ElevenLabs instrumental loop with a gentle plucked-string melody, bell-like notes and warm string pads. It replaces the electrical-rift ambience and opening thunder strike. The Music setting controls this theme; its quiet scene level is separate from environmental ambience. The trailer pauses it and restores the same loop when closed.
+
+`node tools/title-music.mjs --plan` inspects the cached take. `--render` generates one missing take through ElevenLabs' loop-enabled sound engine, within a 300-credit cap, then normalizes it to -22 LUFS. `--mix` repeats the local normalization without using credits. Set `RIFT_FFMPEG` as for the trailer. The source, finished loop and generation/level metadata live in `assets/music/`. Existing takes are preserved and never automatically regenerated. The browser uses only the finished MP3.
+
 ## Adventure trailer
 
 The optional 82-second trailer on the title page is a JavaScript film using existing game art. Its edit and narration live in `data/trailer.js`, the canvas compositor in `js/ui/trailer-scenes.js`, and the player in `js/ui/trailer.js`. The browser loads the pre-rendered `assets/trailer/soundtrack.mp3`; it never calls an API.
