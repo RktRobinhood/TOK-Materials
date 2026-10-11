@@ -932,6 +932,7 @@
         });
         const geo = { n, view: VIEW, universe: UNIVERSE, shapes, labels };
         geo.anchors = regionAnchors(geo);
+        geo.borders = borderAnchors(geo);
         geoCache[n] = geo;
         return geo;
     }
@@ -981,6 +982,29 @@
         return best;
     }
 
+    // Actual border segments, clear of intersections, for an x whose side is unknown.
+    function borderAnchors(geo) {
+        const best = {};
+        geo.shapes.forEach((e, k) => {
+            const rot = e.rot * Math.PI / 180, c = Math.cos(rot), s = Math.sin(rot), bit = 1 << k;
+            for (let i = 0; i < 720; i++) {
+                const angle = i * Math.PI / 360, u = e.rx * Math.cos(angle), v = e.ry * Math.sin(angle);
+                const x = e.cx + u * c - v * s, y = e.cy + u * s + v * c;
+                if (!inUniverse(x, y)) continue;
+                let region = 0, clear = Infinity;
+                geo.shapes.forEach((shape, j) => {
+                    if (j === k) return;
+                    const hit = hitShape(shape, x, y);
+                    if (hit.inside) region |= 1 << j;
+                    clear = Math.min(clear, hit.dist);
+                });
+                const regions = [region, region | bit], key = regions.join(',');
+                if (!best[key] || clear > best[key].clear) best[key] = { x, y, regions, clear };
+            }
+        });
+        return best;
+    }
+
     // =====================================================================
     // DOM
     // =====================================================================
@@ -1009,7 +1033,7 @@
         const geo = geometry(n);
         const P = 'vn' + (++mountCount) + '-';
         const askWorld = !!data.askEvidence;
-        const state = { tool: 'shade', shaded: new Set(), counters: [], valid: null, world: null, solved: false, nextId: 1 };
+        const state = { tool: 'shade', shaded: new Set(), counters: [], valid: null, world: null, solved: false, nextId: 1, moving: null };
 
         const prevPos = container.style.position;
         if (root.getComputedStyle && root.getComputedStyle(container).position === 'static') container.style.position = 'relative';
@@ -1069,11 +1093,11 @@
             fills, regionLayer, strokes, labelLayer, ghostLayer, counterLayer, hoverDot,
         ]);
 
-        const status = el('div.vn-status', { text: 'Point at the board.' });
+        const status = el('div.vn-status', { text: 'Point at the board.', 'aria-live': 'polite' });
         const toolShade = el('button.btn.small.vn-tool', { type: 'button', 'aria-pressed': 'true', onclick: () => setTool('shade') }, [el('span.vn-tool-icon.vn-icon-shade'), 'Shade']);
         const toolCounter = el('button.btn.small.vn-tool', { type: 'button', 'aria-pressed': 'false', onclick: () => setTool('counter') }, [el('span.vn-tool-icon.vn-icon-x', { text: 'x' }), 'Place x']);
         const tray = el('div.vn-tray', { title: 'Drag an x onto the board' }, [el('span.vn-token', { text: 'x' }), el('span.small', { text: 'drag me' })]);
-        const clearBtn = el('button.btn.small', { type: 'button', onclick: () => { state.shaded.clear(); state.counters = []; clearFeedback(); render(); sfx('click'); } }, ['Clear']);
+        const clearBtn = el('button.btn.small', { type: 'button', onclick: () => { if (state.solved) return; state.shaded.clear(); state.counters = []; state.moving = null; clearFeedback(); render(); sfx('click'); } }, ['Clear']);
 
         const boardWrap = el('div.vn-board.parchment', {}, [
             el('div.vn-board-head', {}, [
@@ -1122,6 +1146,53 @@
         const submitBtn = el('button.btn.primary.vn-submit', { type: 'button', disabled: true, onclick: submit }, ['Seal the verdict']);
         const result = el('div.vn-result', { 'aria-live': 'polite' });
 
+        // Native controls mirror the diagram; selecting a destination never changes a mark.
+        const membership = (r, skip = -1) => T.map((term, i) => i === skip ? null : ((r & (1 << i)) ? 'inside ' : 'outside ') + term.label).filter(Boolean).join('; ');
+        const borderName = regions => {
+            const k = Math.log2(regions[0] ^ regions[1]);
+            return 'On ' + T[k].label + ' border (side unknown); ' + membership(regions[0], k);
+        };
+        const markName = regions => regions.length === 2 ? borderName(regions) : membership(regions[0]);
+        const regionSelect = el('select.vn-region-select', { 'aria-label': 'Diagram region', value: '0', onchange: previewRegion },
+            Array.from({ length: R }, (_, r) => el('option', { value: String(r), text: membership(r) })));
+        const borderSelect = el('select.vn-border-select', { 'aria-label': 'Uncertain border' },
+            Object.entries(geo.borders).map(([key, point]) => el('option', { value: key, text: borderName(point.regions) })));
+        borderSelect.value = Object.keys(geo.borders)[0];
+        const markSelect = el('select.vn-mark-select', { 'aria-label': 'Existing x' });
+        const workButton = (text, onclick) => el('button.btn.small', { type: 'button', text, onclick });
+        const shadeRegion = workButton('Shade or unshade region', () => {
+            if (state.solved) return;
+            const r = Number(regionSelect.value);
+            if (state.shaded.has(r)) state.shaded.delete(r); else state.shaded.add(r);
+            clearFeedback(); render(); previewRegion(); sfx('click');
+        });
+        const placeRegion = workButton('Place x in region', () => placeKeyboard(false));
+        const placeBorder = workButton('Place x on border', () => placeKeyboard(true));
+        const moveMark = workButton('Move selected x', () => {
+            if (state.solved || !selectedMark()) return;
+            state.moving = selectedMark().id;
+            status.textContent = 'Choose a region or border, then place this x. Escape cancels the move.';
+            renderWorking(); regionSelect.focus();
+        });
+        const removeMark = workButton('Remove selected x', () => {
+            if (state.solved || !selectedMark()) return;
+            const id = selectedMark().id;
+            state.counters = state.counters.filter(mark => mark.id !== id);
+            if (state.moving === id) state.moving = null;
+            clearFeedback(); render(); status.textContent = 'x removed.';
+            (state.counters.length ? markSelect : regionSelect).focus();
+        });
+        const cancelMove = workButton('Cancel move', cancelKeyboardMove);
+        const working = el('details.vn-keyboard', null, [
+            el('summary.vn-keyboard-summary', { text: 'Diagram controls (keyboard or mouse)' }),
+            el('p.small', { text: 'Choose a region to shade or place an x. Use a border when its side is unknown. Move keeps the old x until you place it; Escape cancels.' }),
+            el('label', null, ['Region', regionSelect]),
+            el('div.row.wrap', null, [shadeRegion, placeRegion]),
+            el('label', null, ['Uncertain border', borderSelect]), placeBorder,
+            el('label', null, ['Existing x', markSelect]),
+            el('div.row.wrap', null, [moveMark, removeMark, cancelMove]),
+        ]);
+
         const steps = el('div.vn-steps.panel', {}, [
             el('div.vn-step', {}, [
                 el('div.vn-step-title', {}, [el('span.vn-num', { text: '1' }), 'Optional working: draw the premises']),
@@ -1131,6 +1202,7 @@
                     el('span.vn-key', {}, [el('span.vn-token.vn-token-small', { text: 'x' }), 'x = something IS here']),
                     el('span.vn-key', {}, [el('span.vn-swatch'), 'blank = we don\'t know']),
                 ]),
+                working,
             ]),
             el('div.vn-step', {}, [
                 el('div.vn-step-title', {}, [el('span.vn-num', { text: '2' }), 'Must the conclusion follow?']),
@@ -1158,6 +1230,46 @@
 
         const rootNode = el('div.vn-root', { dataset: { terms: String(n) } }, [boardWrap, side]);
         container.appendChild(rootNode);
+
+        function selectedMark() { return state.counters.find(mark => mark.id === Number(markSelect.value)); }
+        function previewRegion() {
+            const r = Number(regionSelect.value);
+            regionNodes.forEach((node, i) => node.classList.toggle('keyboard-focus', i === r));
+            status.textContent = (state.shaded.has(r) ? 'Shaded: ' : 'Unshaded: ') + membership(r) + '.';
+        }
+        function renderWorking() {
+            const selected = markSelect.value;
+            markSelect.replaceChildren(...state.counters.map((mark, i) => el('option', { value: String(mark.id), text: 'x ' + (i + 1) + ': ' + markName(mark.regions) })));
+            markSelect.value = state.counters.some(mark => String(mark.id) === selected) ? selected : state.counters.length ? String(state.counters[0].id) : '';
+            [regionSelect, borderSelect, shadeRegion, placeRegion, placeBorder].forEach(control => { control.disabled = state.solved; });
+            [markSelect, moveMark, removeMark].forEach(control => { control.disabled = state.solved || !state.counters.length; });
+            cancelMove.disabled = state.solved || state.moving === null;
+            clearBtn.disabled = state.solved;
+        }
+        function placeKeyboard(onBorder) {
+            if (state.solved) return;
+            const point = onBorder ? geo.borders[borderSelect.value] : geo.anchors[Number(regionSelect.value)];
+            if (!point) return;
+            const regions = onBorder ? point.regions.slice() : [Number(regionSelect.value)];
+            let mark = state.counters.find(item => item.id === state.moving);
+            if (!mark && state.counters.length >= 6) { status.textContent = 'Six x marks is plenty. Remove one first.'; return; }
+            if (mark) Object.assign(mark, { x: point.x, y: point.y, regions });
+            else { mark = { id: state.nextId++, x: point.x, y: point.y, regions }; state.counters.push(mark); }
+            state.moving = null;
+            clearFeedback(); render(); sfx('place');
+            // Native selects accept only values whose options already exist.
+            markSelect.value = String(mark.id);
+            status.textContent = 'x placed: ' + markName(regions) + '.';
+        }
+        function cancelKeyboardMove() {
+            if (state.moving === null) return;
+            state.moving = null; renderWorking(); status.textContent = 'Move cancelled. The x stays where it was.';
+        }
+        regionSelect.addEventListener('focus', previewRegion);
+        regionSelect.addEventListener('blur', () => regionNodes.forEach(node => node.classList.remove('keyboard-focus')));
+        rootNode.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && state.moving !== null) { event.preventDefault(); event.stopPropagation(); cancelKeyboardMove(); }
+        });
 
         // ---------- interaction ----------
         function toSvg(clientX, clientY) {
@@ -1254,10 +1366,12 @@
             const pl = placement(x, y);
             if (!pl) return false;
             if (state.counters.length >= 6) { sfx('error'); status.textContent = 'Six x\'s is plenty: click one to remove it.'; return false; }
-            state.counters.push({ id: state.nextId++, x: pl.x, y: pl.y, regions: pl.regions });
+            const mark = { id: state.nextId++, x: pl.x, y: pl.y, regions: pl.regions };
+            state.counters.push(mark);
             sfx('place');
             clearFeedback();
             render();
+            markSelect.value = String(mark.id);
             return true;
         }
 
@@ -1265,6 +1379,7 @@
         let drag = null, suppressClick = false;
         function startDrag(e, counter) {
             if (state.solved) return;
+            cancelKeyboardMove();
             e.preventDefault();
             const ghost = el('span.vn-token.vn-drag-ghost', { text: 'x' });
             ghost.style.left = e.clientX + 'px';
@@ -1303,14 +1418,17 @@
                 suppressClick = true;
                 setTimeout(() => { suppressClick = false; }, 0);
                 state.counters = state.counters.filter(c => c.id !== d.counter.id);
+                let movedId = null;
                 if (d.moved && pl) {
-                    state.counters.push({ id: state.nextId++, x: pl.x, y: pl.y, regions: pl.regions });
+                    movedId = state.nextId++;
+                    state.counters.push({ id: movedId, x: pl.x, y: pl.y, regions: pl.regions });
                     sfx('place');
                 } else {
                     sfx('click'); // a click (or a drop off the board) removes it
                 }
                 clearFeedback();
                 render();
+                if (movedId !== null) markSelect.value = String(movedId);
             } else if (d.moved) {
                 if (pl) addCounter(p.x, p.y);
             } else {
@@ -1391,6 +1509,7 @@
                 state.solved = true;
                 rootNode.classList.add('solved');
                 updateSubmit();
+                renderWorking();
             }
         }
 
@@ -1413,6 +1532,7 @@
                 node.addEventListener('pointerdown', e => { e.stopPropagation(); startDrag(e, c); });
                 counterLayer.appendChild(node);
             });
+            renderWorking();
         }
 
         render();

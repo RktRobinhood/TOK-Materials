@@ -1,4 +1,4 @@
-/* A click/timing throw or a six-by-six planning game. At most 26 seconds. */
+/* Untimed instructions, then a click/timing throw or a six-by-six planning game. */
 (function (root) {
     'use strict';
     const Rift = root.Rift;
@@ -9,17 +9,24 @@
         const cfg = Rift.Catching.config(o.item, c.rarity, o.lured);
         const calm = !!Rift.State.get().settings.calm;
         let ended = false, spent = 0, timer = null;
+        let phase = 'ready', started = 0, used = 0;
         let board = Rift.Catching.boxStart(o.seed);
-        const started = Date.now();
         const status = el('p.small', { 'aria-live': 'polite' });
-        const clock = el('p.small');
+        const clock = el('p.small.catch-clock', { 'aria-live': 'polite' });
+        const playBtn = el('button.btn.primary.catch-play', { type: 'button', text: 'Start', onclick: togglePlay });
         const game = el('div.catch-game.stack');
         container.append(game);
         const stop = () => { if (timer) clearInterval(timer); timer = null; };
+        let refresh = () => {};
+        let animate = () => {};
         function finish(bonus, label) {
             if (ended) return;
             ended = true;
+            if (phase === 'running') used += Date.now() - started;
+            phase = 'ended';
             stop();
+            playBtn.disabled = true;
+            refresh();
             o.onFinish({ bonus, label, spent, item: o.item, mode: o.mode });
         }
         const spend = () => {
@@ -28,16 +35,39 @@
             if (o.mode === 'throw') Rift.Audio.sfx('throw');
             return true;
         };
-        const elapsed = () => (Date.now() - started) / 1000;
+        const elapsed = () => (used + (phase === 'running' ? Date.now() - started : 0)) / 1000;
+        function togglePlay() {
+            if (ended) return;
+            if (phase === 'running') {
+                // Settle an expired catch before allowing a pause between timer ticks.
+                tick();
+                if (ended) return;
+                used += Date.now() - started;
+                phase = 'paused';
+                stop();
+            } else {
+                phase = 'running';
+                started = Date.now();
+                timer = setInterval(() => {
+                    if (ended || phase !== 'running') return;
+                    tick();
+                    if (!ended) animate();
+                }, 100);
+            }
+            playBtn.textContent = phase === 'paused' ? 'Resume' : 'Pause';
+            refresh();
+            tick();
+        }
         game.append(el('h3', { text: o.mode === 'throw' ? 'Time your throw' : 'Box it in' }),
-            el('p', { text: 'Base odds ' + Math.round(o.base * 100) + '% (charm, stars and lure included). Skill adds up to 15 points (total cap: 95%). A miss leaves one quarter of the base odds, at least 5%.' }), clock);
+            el('p', { text: 'Base odds ' + Math.round(o.base * 100) + '% (charm, stars and lure included). Skill adds up to 15 points (total cap: 95%). A miss leaves one quarter of the base odds, at least 5%.' }),
+            el('p.small', { text: 'Read the instructions, then press Start. Pause stops the clock and controls. Resume continues from the same point.' }));
         if (o.mode === 'throw') {
             game.append(el('p', { text: (calm ? 'Click inside the still ring during a Great or Excellent window.' : 'Click inside the gold ring. Smaller ring = bigger bonus.') + ' One charm per throw. Time out uses one charm for a rushed throw.' }));
             const ring = el('span.catch-ring');
             const target = el('button.catch-target', { 'aria-label': 'Throw inside the gold ring', onclick(ev) {
-                if (ended) return;
+                if (ended || phase !== 'running') return;
+                if (elapsed() >= cfg.seconds) { tick(); return; }
                 if (!spend()) { finish(0, 'No charm left.'); return; }
-                if (elapsed() >= cfg.seconds) { finish(0, 'Time ran out. A small catch chance remains.'); return; }
                 const scale = Rift.Catching.ringScale(elapsed(), cfg);
                 const rect = target.getBoundingClientRect();
                 const keyboard = ev.detail === 0;
@@ -48,31 +78,33 @@
                 finish(bonus, bonus === 0.15 ? 'Excellent throw!' : bonus === 0.1 ? 'Great throw!' : bonus ? 'Good throw!' : 'The throw missed the ring.');
             } }, [Rift.Assets.img('creature/' + o.species + '/idle', { label: c.name }), ring]);
             if (!calm) target.style.left = (Rift.makeRng(o.seed).int(-15, 15)) + 'px';
-            game.append(target, status);
+            game.append(clock, playBtn, target, status);
             function update() {
+                target.disabled = phase !== 'running';
                 const scale = Rift.Catching.ringScale(elapsed(), cfg);
                 ring.style.width = ring.style.height = (170 * cfg.ring * (calm ? 0.7 : scale)) + 'px';
                 const text = (scale < 0.4 ? 'Excellent window: +15 points' : scale < 0.65 ? 'Great window: +10 points' : 'Good window: +5 points') + (calm ? ' · Calm motion: the ring stays still.' : '');
                 if (status.textContent !== text) status.textContent = text;
             }
+            refresh = update;
+            animate = update;
             update();
-            timer = setInterval(() => { update(); tick(); }, 100);
         } else {
             game.append(el('p', { text: 'Place a charm on an empty square (cost: 1). It moves away from the nearest charm. Block every exit for +15 points. When moves tie, it follows a fixed order.' }),
                 el('p.small', { text: o.lured ? 'Your lure slows it: it moves only after every second charm.' : 'It moves after every charm.' }));
             const grid = el('div.catch-grid', { 'aria-label': 'Six by six catch board' });
-            game.append(grid, status);
+            game.append(clock, playBtn, grid, status);
             function render() {
                 grid.innerHTML = '';
                 for (let i = 0; i < 36; i++) {
                     const creature = i === board.creature;
                     const blocked = board.charms.includes(i);
                     grid.append(el('button.catch-cell' + (creature ? '.creature' : blocked ? '.blocked' : ''), {
-                        disabled: creature || blocked,
+                        disabled: phase !== 'running' || creature || blocked,
                         'aria-label': 'Row ' + (Math.floor(i / 6) + 1) + ', column ' + (i % 6 + 1) + (creature ? ': creature' : blocked ? ': charm' : ': place charm'),
                         onclick() {
-                            if (ended) return;
-                            if (elapsed() >= cfg.seconds) { finish(0, 'Time ran out. A small catch chance remains.'); return; }
+                            if (ended || phase !== 'running') return;
+                            if (elapsed() >= cfg.seconds) { tick(); return; }
                             const step = Rift.Catching.boxStep(board, i, o.lured);
                             if (!step.valid) return;
                             if (!spend()) { finish(0, 'No charms left.'); return; }
@@ -87,14 +119,18 @@
                 }
                 status.textContent = 'Placements left: ' + Math.min(cfg.placements - spent, o.available(o.item)) + '. Trap it for +15 points.';
             }
+            refresh = () => Array.from(grid.children).forEach((cell, i) => {
+                cell.disabled = phase !== 'running' || i === board.creature || board.charms.includes(i);
+            });
             render();
-            timer = setInterval(tick, 100);
         }
         function tick() {
+            if (ended) return;
             const left = Math.max(0, Math.ceil(cfg.seconds - elapsed()));
-            const text = left + ' seconds left';
+            const text = phase === 'ready' ? 'Ready: ' + cfg.seconds + ' seconds after Start'
+                : (phase === 'paused' ? 'Paused · ' : '') + left + ' seconds left';
             if (clock.textContent !== text) clock.textContent = text;
-            if (left === 0) {
+            if (phase === 'running' && left === 0) {
                 if (o.mode === 'throw' && !spent) spend();
                 finish(0, 'Time ran out. A small catch chance remains.');
             }

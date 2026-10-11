@@ -15,16 +15,16 @@ function game(mode,item,lured=false){
 }
 for(const item of ['charm','greatcharm']){
  test(item+': throw costs one charm, emits once and clears timer',()=>{
-  const g=game('throw',item);const target=g.root.querySelector('.catch-target');target.getBoundingClientRect=()=>({left:0,top:0,width:230,height:230});
+  const g=game('throw',item);g.root.querySelector('.catch-play').onclick();const target=g.root.querySelector('.catch-target');target.getBoundingClientRect=()=>({left:0,top:0,width:230,height:230});
   target.onclick({detail:0});assert.equal(g.state.items[item],7);assert.equal(g.results.length,1);assert.ok(g.results[0].bonus>0);assert.equal(g.timers.size,0);
   target.onclick({detail:0});assert.equal(g.state.items[item],7);assert.equal(g.results.length,1);
  });
  test(item+': box spends per valid placement; deadline gives no bonus and clears timer',()=>{
-  const g=game('box',item);const grid=g.root.querySelector('.catch-grid');grid.children[0].onclick();assert.equal(g.state.items[item],7);
+  const g=game('box',item);g.root.querySelector('.catch-play').onclick();const grid=g.root.querySelector('.catch-grid');grid.children[0].onclick();assert.equal(g.state.items[item],7);
   g.advance(29);assert.equal(g.results.length,1);assert.equal(g.results[0].spent,1);assert.equal(g.results[0].bonus,0);assert.equal(g.timers.size,0);
  });
  test(item+': timeout throw is one rushed charm; leaving destroys timer without a catch',()=>{
-  const g=game('throw',item,true);g.advance(29);assert.equal(g.results[0].spent,1);assert.equal(g.results[0].bonus,0);
+  const g=game('throw',item,true);g.root.querySelector('.catch-play').onclick();g.advance(29);assert.equal(g.results[0].spent,1);assert.equal(g.results[0].bonus,0);
   const left=game('box',item);left.handle.destroy();left.advance(29);assert.equal(left.timers.size,0);assert.equal(left.results.length,0);assert.equal(left.state.items[item],8);
  });
 }

@@ -634,7 +634,7 @@
 
         // ---- frame ----
         const counter = el('span.sb-count');
-        const statusEl = el('div.sb-status');
+        const statusEl = el('div.sb-status', { 'aria-live': 'polite' });
         const title = mode === 'light' ? 'Light the bulb' : mode === 'wire' ? 'Wire it' : 'Hidden premise';
         const pieces = mode === 'light' ? ['ON = true · OFF = false', 'light the output', 'use the fewest ON switches']
             : mode === 'wire' ? ['match the table', 'any wiring that works is fine']
@@ -675,7 +675,8 @@
             text: mode === 'light' ? '✓ These are enough' : mode === 'wire' ? '✓ Check my wiring' : 'Lift the curtain',
             onclick: () => submit(),
         });
-        const controls = el('div.sb-controls', null, mode === 'wire' ? [resetBtn, submitBtn, statusEl] : [tableBtn, resetBtn, submitBtn, statusEl]);
+        const cancelBtn = mode === 'wire' ? el('button.btn.small.sb-cancel-wire', { type: 'button', text: 'Cancel wire', disabled: true, onclick: cancelWire }) : null;
+        const controls = el('div.sb-controls', null, mode === 'wire' ? [resetBtn, cancelBtn, submitBtn, statusEl] : [tableBtn, resetBtn, submitBtn, statusEl]);
 
         const rootEl = el('div.sb-root.sb-mode-' + mode, null, [top, main, controls]);
         try { if (root.getComputedStyle(container).position === 'static') container.style.position = 'relative'; } catch (e) { /* ignore */ }
@@ -692,14 +693,40 @@
         const nodes = {};
 
         function sock(key, cls) {
-            const s = el('span.sb-sock.' + cls, { dataset: { key } });
+            const s = el((mode === 'wire' ? 'button' : 'span') + '.sb-sock.' + cls, { type: mode === 'wire' ? 'button' : null, dataset: { key }, 'aria-label': socketName(key) });
+            if (mode === 'wire') {
+                s.addEventListener('click', event => {
+                    event.stopPropagation();
+                    // Pointer-up already handles clicks and drags; detail=0 is native keyboard activation.
+                    if (!event.detail) activateSocket(key);
+                });
+                s.addEventListener('keydown', event => {
+                    if ((event.key === 'Delete' || event.key === 'Backspace') && /:in/.test(key)) {
+                        event.preventDefault(); event.stopPropagation(); unplug(key);
+                    }
+                });
+            }
             socks[key] = s;
             return s;
         }
 
+        function socketName(key) {
+            const [id, part] = key.split(':');
+            const output = part === 'out';
+            if (id === 'BULB') return 'Bulb input: ' + data.bulb.claim;
+            if (isSwitch(id)) return 'Switch ' + data.switches[+id.slice(1)].label + ' output: ' + data.switches[+id.slice(1)].claim;
+            const gates = mode === 'wire' ? data.palette : data.circuit.gates;
+            const index = gates.findIndex(gate => gate.id === id);
+            const name = id === hiddenGate ? 'Hidden gate' : gates[index].op + ' gate';
+            return name + ' ' + (index + 1) + (output ? ' output' : ' input ' + (+part.slice(2) + 1));
+        }
+
         data.switches.forEach((s, i) => {
             const isHidden = i === hiddenIx;
-            const lever = el('span.sb-leverbox');
+            const lever = el((isHidden ? 'span' : 'button') + '.sb-leverbox' + (isHidden ? '' : '.sb-toggle'), isHidden ? null : {
+                type: 'button', 'aria-label': 'Switch ' + s.label + ': ' + s.claim, 'aria-pressed': 'false',
+                onclick: event => { event.stopPropagation(); toggleSwitch(i); },
+            });
             const claim = el('div.sb-claim', null, [el('b.sb-letter', { text: s.label }), ' ' + s.claim]);
             const kids = [lever, el('div.sb-claimcol', null, [claim])];
             const node = el('div.sb-switch' + (isHidden ? '.sb-hidden' : ''), { style: { top: pos['S' + i].y + '%' } }, kids);
@@ -711,7 +738,7 @@
                 kids[1].appendChild(guessRow);
                 lever.appendChild(el('span.sb-curtain', { text: '?' }));
             } else {
-                node.addEventListener('click', () => toggleSwitch(i));
+                node.addEventListener('click', event => { if (!(event.target.closest && event.target.closest('.sb-sock'))) toggleSwitch(i); });
             }
             node.appendChild(sock('S' + i + ':out', 'out'));
             nodes['S' + i] = { node, lever };
@@ -797,6 +824,8 @@
                     return;
                 }
                 node.classList.toggle('on', !!st.on[i]);
+                lever.setAttribute('aria-pressed', String(!!st.on[i]));
+                lever.disabled = st.done;
                 lever.innerHTML = '';
                 lever.appendChild(artOr(st.on[i] ? 'ui/switch-on' : 'ui/switch-off', leverSvg(!!st.on[i]), 'sb-lever'));
             });
@@ -839,7 +868,12 @@
                     else if (part.startsWith('in')) filled = !!st.inputs[id][+part.slice(2)];
                     s.classList.toggle('filled', filled);
                     s.classList.toggle('pending', st.pending === k);
+                    s.setAttribute('aria-pressed', String(st.pending === k));
+                    s.disabled = st.done;
+                    const source = k === 'BULB:in' ? st.bulb : part.startsWith('in') ? st.inputs[id][+part.slice(2)] : null;
+                    s.setAttribute('aria-label', socketName(k) + (source ? '. Connected from ' + socketName(source + ':out') + '. Activate to unplug; Delete also removes it.' : st.pending === k ? '. Selected: choose the other socket or Escape to cancel.' : ''));
                 });
+                cancelBtn.disabled = st.done || !st.pending;
             }
             // counter
             if (mode === 'light') {
@@ -998,6 +1032,41 @@
             render();
         }
 
+        function unplug(key) {
+            if (st.done || mode !== 'wire') return;
+            const [id, part] = key.split(':');
+            if (!part.startsWith('in')) return;
+            const source = id === 'BULB' ? st.bulb : st.inputs[id][+part.slice(2)];
+            if (!source) return;
+            st.pending = null;
+            removeWire(id === 'BULB' ? { gate: 'BULB' } : { gate: id, j: +part.slice(2) });
+        }
+        function cancelWire() {
+            if (st.done || mode !== 'wire') return;
+            st.pending = null; st.drag = null; gTemp.innerHTML = '';
+            Object.values(socks).forEach(socket => socket.classList.remove('target'));
+            setStatus('Wire cancelled. Existing connections stay.'); render();
+        }
+        function activateSocket(key) {
+            if (mode !== 'wire' || st.done) return;
+            if (st.pending === key) { cancelWire(); return; }
+            if (st.pending) {
+                const pair = compatible(st.pending, key);
+                st.pending = null;
+                if (pair) { connect(pair[0], pair[1]); render(); return; }
+            }
+            const [id, part] = key.split(':');
+            const source = id === 'BULB' ? st.bulb : part.startsWith('in') ? st.inputs[id][+part.slice(2)] : null;
+            if (source) { unplug(key); return; }
+            st.pending = key;
+            sfx('click'); setStatus('Selected ' + socketName(key) + '. Choose an output and an input to connect; Escape cancels.'); render();
+        }
+        rootEl.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && mode === 'wire' && (st.pending || st.drag)) {
+                event.preventDefault(); event.stopPropagation(); cancelWire();
+            }
+        });
+
         // Does src depend (through wires) on gate id?
         function dependsOn(src, id, seen) {
             if (!src || isSwitch(src)) return false;
@@ -1098,31 +1167,21 @@
             Object.values(socks).forEach(s => s.classList.remove('target'));
             const over = sockAt(ev);
             if (drag.moved) {
+                st.pending = null;
                 const pair = compatible(drag.key, over);
                 if (pair) connect(pair[0], pair[1]);
                 else if (over) { sfx('error'); setStatus('Wires run from a right-hand socket (out) to a left-hand socket (in).', 'bad'); }
+                render();
                 return;
             }
-            // a click: finish a pending click-click wire, unplug an input, or start one
-            const key = drag.key;
-            if (st.pending) {
-                const pair = compatible(st.pending, key);
-                st.pending = null;
-                if (pair) { connect(pair[0], pair[1]); return; }
-            }
-            const [id, part] = key.split(':');
-            const filled = key === 'BULB:in' ? st.bulb : part.startsWith('in') ? st.inputs[id][+part.slice(2)] : null;
-            if (filled) { removeWire(key === 'BULB:in' ? { gate: 'BULB' } : { gate: id, j: +part.slice(2) }); return; }
-            st.pending = key;
-            sfx('click');
-            setStatus('Now click where the wire should go.');
-            render();
+            // Pointer and keyboard share exactly the same selection and repair actions.
+            activateSocket(drag.key);
         }
 
         board.addEventListener('pointerdown', onDown);
         board.addEventListener('pointermove', onMove);
         board.addEventListener('pointerup', onUp);
-        board.addEventListener('pointercancel', () => { st.drag = null; gTemp.innerHTML = ''; });
+        board.addEventListener('pointercancel', cancelWire);
 
         let ro = null;
         const redraw = () => drawWires();
@@ -1132,7 +1191,7 @@
         render();
         if (root.requestAnimationFrame) root.requestAnimationFrame(redraw);
         setStatus(mode === 'light' ? 'Click the switches. ON sets an input true; OFF sets it false.'
-            : mode === 'wire' ? 'Drag a wire from a right-hand socket (a switch or a plaque) to a left-hand socket (a plaque or the bulb).'
+            : mode === 'wire' ? 'Choose an output socket, then an input socket, or drag between them. Tab moves focus; Enter or Space selects; Escape cancels. Activate a connected input to unplug it.'
                 : 'Click a witness report to set the switches. What must be behind the curtain?');
         try {
             if (api && api.say) {

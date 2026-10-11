@@ -102,7 +102,6 @@
         return {
             scene: scene.id,
             lines: scene.lines,
-            hideAfter: difficulty >= 3 ? 25 : 0,
             claims: rng.shuffle([...picked]).map(i => ({ id: scene.id + ':' + i, t: scene.claims[i].t, a: scene.claims[i].a, why: scene.claims[i].why })),
         };
     }
@@ -190,27 +189,8 @@
             claims.append(row);
         });
         container.append(el('div.wit', null, [scene, el('div.stack', null, [claims, submit])]));
-        let timer = null;
-        let remaining = data.hideAfter * 1000;
-        let started = 0;
-        let stopped = false;
-        const note = data.hideAfter ? el('div.small.muted', { text: 'The scene fades after ' + data.hideAfter + ' seconds of play. Help pauses the clock.' }) : null;
-        function pause() {
-            if (!timer) return;
-            clearTimeout(timer);
-            timer = null;
-            remaining = Math.max(0, remaining - (Date.now() - started));
-        }
-        function resume() {
-            if (stopped || timer || !data.hideAfter || scene.classList.contains('faded')) return;
-            started = Date.now();
-            timer = setTimeout(() => { timer = null; scene.classList.add('faded'); note.textContent = 'The scene has faded. Trust what you saw, not what you imagine.'; }, remaining);
-        }
-        if (data.hideAfter) {
-            scene.append(note);
-            resume();
-        }
-        return { pause, resume, destroy() { stopped = true; clearTimeout(timer); } };
+        scene.append(el('p.small.muted', { text: 'The scene stays visible. Read it again while you judge each claim.' }));
+        return { destroy() {} };
     }
 
     Rift.Puzzles.register({
@@ -219,7 +199,7 @@
             "Read the written scene. Use only what it tells you.",
             "True: the scene supports the claim. False: it contradicts the claim.",
             "Can't tell: the scene leaves it open. It does not mean the claim is false.",
-            "Choose one answer for every claim, then Give my testimony. At harder levels the scene fades; help pauses its clock.",
+            "Choose one answer for every claim, then Give my testimony. The scene stays visible at every level; read it again whenever you need.",
             "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
         ],
         tutorial: [
