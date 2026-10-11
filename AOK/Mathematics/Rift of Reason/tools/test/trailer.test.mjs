@@ -312,7 +312,11 @@ test('missing soundtrack offers captioned silent playback with pause, seek and r
 });
 
 function canvasTrace() {
-    const calls = [], images = [], state = { globalAlpha: 1 }, stack = [];
+    const calls = [], images = [], state = { globalAlpha: 1, matrix: [1, 0, 0, 1, 0, 0] }, stack = [];
+    const concatenate = matrix => {
+        const [a, b, c, d, e, f] = state.matrix, [g, h, i, j, k, l] = matrix;
+        state.matrix = [a * g + c * h, b * g + d * h, a * i + c * j, b * i + d * j, a * k + c * l + e, b * k + d * l + f];
+    };
     const normal = value => value && value.src ? ['image', value.src] :
         value && value.stops ? [value.type, value.coords, value.stops.map(s => [...s])] : value;
     const target = {
@@ -320,13 +324,18 @@ function canvasTrace() {
         restore() { const previous = stack.pop(); Object.keys(state).forEach(k => delete state[k]); Object.assign(state, previous); calls.push(['restore']); },
         measureText: text => ({ width: String(text).length * 24 }),
     };
-    for (const method of ['fillRect', 'drawImage', 'beginPath', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillText', 'arc', 'fill', 'stroke', 'translate', 'rotate', 'scale', 'setTransform', 'rect', 'clip']) {
+    for (const method of ['fillRect', 'drawImage', 'beginPath', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillText', 'arc', 'fill', 'stroke', 'translate', 'rotate', 'scale', 'transform', 'setTransform', 'rect', 'clip']) {
         target[method] = (...args) => {
             for (const arg of args) if (typeof arg === 'number') assert.ok(Number.isFinite(arg), method + ' received nonfinite geometry');
+            if (method === 'setTransform') state.matrix = args.slice();
+            if (method === 'transform') concatenate(args);
+            if (method === 'translate') concatenate([1, 0, 0, 1, args[0], args[1]]);
+            if (method === 'scale') concatenate([args[0], 0, 0, args[1], 0, 0]);
+            if (method === 'rotate') concatenate([Math.cos(args[0]), Math.sin(args[0]), -Math.sin(args[0]), Math.cos(args[0]), 0, 0]);
             if (method === 'drawImage') {
                 const placement = calls.findLast(call => call[0] === 'translate');
                 const scale = calls.findLast(call => call[0] === 'scale');
-                images.push({ args: args.map(normal), alpha: state.globalAlpha, placement: placement?.slice(1), scale: scale?.slice(1) });
+                images.push({ args: args.map(normal), alpha: state.globalAlpha, placement: placement?.slice(1), scale: scale?.slice(1), matrix: state.matrix.slice() });
             }
             calls.push([method, ...args.map(normal)]);
         };
@@ -370,14 +379,22 @@ function visibleImages(trace, id) {
     return trace.images.filter(image => image.args[0]?.[1] === source && image.alpha > .05);
 }
 
-test('travellers use real cropped walk frames and cross the world before returning to idle', async () => {
+function imagePoint(image, sourceX, sourceY) {
+    const args = image.args;
+    const x = args[5] + (sourceX - args[1]) * args[7] / args[3];
+    const y = args[6] + (sourceY - args[2]) * args[8] / args[4];
+    const [a, b, c, d, e, f] = image.matrix;
+    return [a * x + c * y + e, b * x + d * y + f];
+}
+
+test('travellers articulate authentic leg pixels across the world with a steady upper body and return to idle', async () => {
     const R = await rendererSetup();
     const scene = R.data.trailer.scenes.find(scene => scene.id === 'road');
     const actor = scene.cast[0], walkId = actor.art.replace(/\/idle$/, '/walk');
     const sheet = manifest.assets[walkId];
-    const first = visibleImages(rendered(R, scene.start + 1), walkId)[0];
-    const nextStep = visibleImages(rendered(R, scene.start + 1.18), walkId)[0];
-    const later = visibleImages(rendered(R, scene.start + 5.5), walkId)[0];
+    const first = visibleImages(rendered(R, scene.start + 1), walkId).at(-1);
+    const nextStep = visibleImages(rendered(R, scene.start + 1.18), walkId).at(-1);
+    const later = visibleImages(rendered(R, scene.start + 5.5), walkId).at(-1);
     assert.ok(first && nextStep && later, 'actual game walk sheets must load and be drawn');
     for (const image of [first, nextStep, later]) {
         const args = image.args;
@@ -385,18 +402,62 @@ test('travellers use real cropped walk frames and cross the world before returni
         assert.equal(args[2], 0);
         assert.equal(args[3], sheet.frameWidth);
         assert.equal(args[4], sheet.frameHeight);
-        assert.ok(args[1] >= 0 && args[1] < sheet.frames * sheet.frameWidth);
-        assert.equal(args[1] % sheet.frameWidth, 0);
+        assert.equal(args[1], 0, 'keep the head/body pixels stable instead of cycling their inconsistent poses');
         assert.ok(Math.abs(args[7] / args[8] - sheet.frameWidth / sheet.frameHeight) < 1e-10, 'preserve the avatar frame proportions');
     }
-    assert.notEqual(first.args[1], nextStep.args[1], 'the walk must cycle through different poses');
-    assert.ok(later.placement[0] - first.placement[0] > 500, 'the traveller must move across the scene');
+    assert.deepEqual(first.matrix.slice(0, 4), nextStep.matrix.slice(0, 4), 'no whole-body rotation, shear, or pulsating scale');
+    assert.equal(first.matrix[5], nextStep.matrix[5], 'the head must not bob or jitter');
+    assert.ok(later.matrix[4] - first.matrix[4] > 500, 'the traveller must move across the scene');
     const stopped = rendered(R, scene.end - .2);
     assert.equal(visibleImages(stopped, walkId).length, 0, 'stop stepping at the destination');
     assert.equal(visibleImages(stopped, actor.art).length, 1);
     const calm = rendered(R, scene.start + 2, true);
     assert.equal(visibleImages(calm, walkId).length, 0, 'calm mode uses a still avatar');
     assert.equal(visibleImages(calm, actor.art).length, 1);
+});
+
+test('all five trailer travellers exchange foot contacts, lift only the swing foot, and pin each planted sole', async () => {
+    const R = await rendererSetup();
+    const heroes = R.data.trailer.scenes.find(scene => scene.id === 'heroes');
+    const footLandmarks = {
+        'avatar/fox-girl': [[161, 377], [257, 377]],
+        'avatar/frogling-boy': [[65, 323], [162, 323]],
+        'avatar/raven-girl': [[91, 367], [192, 361]],
+        'avatar/owlet-boy': [[122, 351], [232, 347]],
+        'avatar/mothkin-girl': [[103, 431], [193, 431]],
+    };
+    for (const member of heroes.cast) {
+        const base = member.art.replace(/\/idle$/, ''), walkId = base + '/walk';
+        const sheet = manifest.assets[walkId];
+        // Native sprite scale and a long, straight path isolate the actual gait
+        // from fades, scene layout and changing camera/background composition.
+        R.data.trailer.scenes = [{ ...heroes, start: 0, end: 40, cast: [{ ...member, h: sheet.frameHeight / 900, y: .9, fromX: .1, toX: .9, delay: 0 }] }];
+        const ground = .9 * 900 - 2, landmarks = footLandmarks[base];
+        const feetAt = time => {
+            const draws = visibleImages(rendered(R, time), walkId);
+            assert.equal(draws.length, 5, base + ': two shoe/leg plates and one upper body');
+            assert.equal(draws.at(-1).matrix[1], 0, 'steady body angle');
+            assert.equal(draws.at(-1).matrix[2], 0, 'no body shear');
+            return [imagePoint(draws[0], ...landmarks[0]), imagePoint(draws[2], ...landmarks[1])];
+        };
+        const leads = new Set(); let contacts = 0, swings = 0;
+        for (let time = 1; time < 6; time += .04) {
+            const now = feetAt(time), next = feetAt(time + .01);
+            leads.add(Math.sign(now[0][0] - now[1][0]));
+            assert.ok(now.every(foot => foot[1] <= ground + 1e-8), base + ': no foot sinks below ground');
+            const planted = now.map(foot => Math.abs(foot[1] - ground) < 1e-8);
+            assert.ok(planted.some(Boolean), base + ': at least one sole carries the contact');
+            // Both feet touch briefly at the handover; between handovers only
+            // the returning foot rises, while its partner stays grounded.
+            if (planted.some(stance => !stance)) swings++;
+            for (let i = 0; i < 2; i++) if (planted[i] && Math.abs(next[i][1] - ground) < 1e-8) {
+                assert.ok(Math.abs(next[i][0] - now[i][0]) < 1e-8, base + ': planted foot must not slide while the body passes');
+                contacts++;
+            }
+        }
+        assert.ok(leads.has(-1) && leads.has(1), base + ': each foot passes its partner on alternate steps');
+        assert.ok(contacts > 50 && swings > 50, base + ': verify sustained contact/swing, not a single lucky frame');
+    }
 });
 
 test('catching develops from a visitor and charm throw into its collection card', async () => {

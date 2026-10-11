@@ -243,6 +243,71 @@
         ctx.restore();
     }
 
+    // The supplied walk art changes tails more than leg contacts. These cutouts
+    // use its original pixels, with a paper-puppet gait below the coat/feathers.
+    // Coordinates are in each sheet's first cell; the upper body stays intact.
+    const walkRigs = {
+        'avatar/fox-girl': { stride: 74, lift: 16, legs: [
+            { hip: [199, 304], ankle: [161, 349], sole: 377, split: 349, mask: [[164, 296], [219, 309], [214, 325], [185, 344], [197, 379], [130, 379], [133, 355], [151, 327]] },
+            { hip: [244, 308], ankle: [257, 348], sole: 377, split: 348, mask: [[220, 301], [265, 305], [274, 343], [319, 354], [320, 379], [242, 379], [234, 340], [222, 324]] },
+        ] },
+        'avatar/frogling-boy': { stride: 80, lift: 17, legs: [
+            { hip: [100, 246], ankle: [65, 289], sole: 323, split: 289, mask: [[61, 243], [126, 252], [106, 269], [96, 285], [104, 325], [21, 325], [23, 291], [40, 265]] },
+            { hip: [151, 247], ankle: [162, 291], sole: 323, split: 291, mask: [[128, 245], [171, 245], [179, 273], [202, 286], [234, 294], [235, 325], [141, 325], [137, 288], [131, 263]] },
+        ] },
+        'avatar/raven-girl': { stride: 66, lift: 12, legs: [
+            { hip: [102, 315], ankle: [91, 347], sole: 367, split: 347, mask: [[96, 313], [112, 313], [106, 338], [139, 351], [140, 369], [54, 369], [56, 348], [83, 340]] },
+            { hip: [174, 313], ankle: [192, 342], sole: 361, split: 342, mask: [[166, 312], [183, 311], [200, 329], [250, 337], [254, 363], [165, 365], [168, 347], [173, 333]] },
+        ] },
+        'avatar/owlet-boy': { stride: 58, lift: 11, legs: [
+            { hip: [132, 306], ankle: [122, 332], sole: 351, split: 332, mask: [[119, 304], [143, 305], [138, 326], [174, 339], [174, 354], [89, 354], [91, 334], [116, 326]] },
+            { hip: [214, 307], ankle: [232, 328], sole: 347, split: 328, mask: [[202, 304], [225, 304], [239, 322], [276, 327], [278, 350], [195, 352], [195, 333], [215, 326]] },
+        ] },
+        'avatar/mothkin-girl': { stride: 44, lift: 12, legs: [
+            { hip: [107, 400], ankle: [103, 415], sole: 431, split: 415, mask: [[94, 400], [113, 400], [120, 411], [126, 433], [78, 433], [78, 420], [88, 412]] },
+            { hip: [187, 398], ankle: [193, 416], sole: 431, split: 416, mask: [[177, 398], [199, 398], [202, 412], [241, 416], [246, 433], [175, 433], [175, 416]] },
+        ] },
+    };
+
+    function legMask(ctx, leg) {
+        ctx.moveTo(leg.mask[0][0], leg.mask[0][1]);
+        leg.mask.slice(1).forEach(point => ctx.lineTo(point[0], point[1]));
+        ctx.closePath();
+    }
+
+    function walkCutout(ctx, img, sheet, rig, distance, width, height) {
+        const scale = height / sheet.frameHeight;
+        const phase = fract(distance / scale / (2 * rig.stride));
+        const contactCentre = (rig.legs[0].hip[0] + rig.legs[1].hip[0]) / 2;
+        const source = () => ctx.drawImage(img, 0, 0, sheet.frameWidth, sheet.frameHeight, 0, 0, sheet.frameWidth, sheet.frameHeight);
+        ctx.save(); ctx.scale(width / sheet.frameWidth, scale); ctx.translate(-sheet.frameWidth / 2, -sheet.frameHeight);
+        // One foot is planted while its partner returns above the ground. The
+        // contact x falls exactly as far as the body advances, so it does not slide.
+        rig.legs.forEach((leg, index) => {
+            const footPhase = fract(phase + index * .5);
+            const swing = footPhase >= .5;
+            const swingProgress = (footPhase - .5) * 2;
+            const offset = rig.stride * (swing ? -.5 + smooth(swingProgress) : .5 - footPhase * 2);
+            const lift = swing ? Math.pow(Math.sin(swingProgress * Math.PI), 2) * rig.lift : 0;
+            const dx = contactCentre + offset - leg.ankle[0];
+            const dy = sheet.frameHeight - 2 - leg.sole - lift;
+            // Shoes/toes remain level; only the shaft between hip and ankle bends.
+            ctx.save(); ctx.translate(dx, dy);
+            ctx.beginPath(); legMask(ctx, leg); ctx.clip();
+            ctx.beginPath(); ctx.rect(0, leg.split - 1, sheet.frameWidth, sheet.frameHeight); ctx.clip(); source(); ctx.restore();
+            const span = leg.ankle[1] - leg.hip[1];
+            const shear = dx / span, stretch = (span + dy) / span;
+            ctx.save(); ctx.transform(1, 0, shear, stretch, -shear * leg.hip[1], leg.hip[1] * (1 - stretch));
+            ctx.beginPath(); legMask(ctx, leg); ctx.clip();
+            ctx.beginPath(); ctx.rect(0, 0, sheet.frameWidth, leg.split + 1); ctx.clip(); source(); ctx.restore();
+        });
+        // Draw clothing last so it covers the moving hip joins. Remove the old
+        // leg pixels rather than leaving a second pair underneath the rig.
+        ctx.beginPath(); ctx.rect(0, 0, sheet.frameWidth, sheet.frameHeight);
+        rig.legs.forEach(leg => legMask(ctx, leg)); ctx.clip('evenodd'); source();
+        ctx.restore();
+    }
+
     function cast(ctx, scene, p, calm) {
         (scene.cast || []).forEach((member, i) => {
             const localTime = p * (scene.end - scene.start);
@@ -258,7 +323,7 @@
             const width = height * (walking ? sheet.frameWidth / sheet.frameHeight : img.naturalWidth / img.naturalHeight);
             const skyEye = member.art === 'npc/algorithm/sky-eye';
             const entrance = calm ? 1 : smooth((localTime - (skyEye ? 1.6 : member.delay || i * .16)) / (skyEye ? 2.5 : .6));
-            const depth = calm ? 1 : skyEye ? .88 + smooth(p) * .16 : 1 + p * .055;
+            const depth = calm || member.walk ? 1 : skyEye ? .88 + smooth(p) * .16 : 1 + p * .055;
             const fixedX = member.x == null ? .67 + i * .11 : member.x;
             const fromX = member.fromX == null ? fixedX : member.fromX;
             const toX = member.toX == null ? fixedX : member.toX;
@@ -274,8 +339,12 @@
             ctx.scale(flip ? -depth : depth, depth);
             ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 8;
             if (walking) {
-                const frame = Math.floor(walkTime * 7) % sheet.frames;
-                ctx.drawImage(img, frame * sheet.frameWidth, 0, sheet.frameWidth, sheet.frameHeight, -width / 2, -height, width, height);
+                const rig = walkRigs[base];
+                if (rig) walkCutout(ctx, img, sheet, rig, Math.abs(x - fromX * W), width, height);
+                else {
+                    const frame = Math.floor(walkTime / .16) % sheet.frames;
+                    ctx.drawImage(img, frame * sheet.frameWidth, 0, sheet.frameWidth, sheet.frameHeight, -width / 2, -height, width, height);
+                }
             } else ctx.drawImage(img, -width / 2, -height, width, height);
             ctx.restore();
         });
@@ -387,18 +456,6 @@
             rounded(ctx, x - 180, y + 16, 336, 69, 19); ctx.fillStyle = '#fff1cf'; ctx.fill();
             ctx.strokeStyle = '#14121b'; ctx.lineWidth = 3; ctx.stroke();
             trackedText(ctx, 'I always know the answer.', x - 12, y + 57, 21, '#201c2a', .1, 'center', 'Arial, sans-serif');
-        }
-        ctx.restore();
-    }
-
-    function panelBorders(ctx, scene, p, calm) {
-        if (scene.mode !== 'heroes') return;
-        ctx.save(); ctx.globalAlpha *= calm ? .65 : smooth(p * 4) * .65;
-        for (let i = 1; i < 5; i++) {
-            const x = i * W / 5;
-            ctx.strokeStyle = '#080c13'; ctx.lineWidth = 12;
-            ctx.beginPath(); ctx.moveTo(x + 38, TOP + 128); ctx.lineTo(x - 25, H - TOP); ctx.stroke();
-            ctx.strokeStyle = '#d8c79a'; ctx.lineWidth = 1.5; ctx.stroke();
         }
         ctx.restore();
     }
@@ -758,7 +815,6 @@
         if (scene.mode === 'creatures') catching(ctx, scene, localTime, calm);
         else if (scene.mode === 'battle') battle(ctx, scene, localTime, calm);
         else cast(ctx, scene, p, calm);
-        panelBorders(ctx, scene, p, calm);
         if (scene.mode === 'puzzles') {
             if (scene.art === 'scene/evidence-room' || scene.art === 'scene/tribunal' || scene.overlay === 'evidence') evidence(ctx, p, calm);
             else circuit(ctx, p, calm);
