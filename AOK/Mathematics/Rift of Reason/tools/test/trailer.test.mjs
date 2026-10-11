@@ -78,7 +78,7 @@ function playerSetup({ metadata = true, delayedArt = false, delayedPlay = false,
         R.Ambience = { hold() { calls.hold++; }, release() { calls.release++; } };
         R.TrailerScenes = {
             load: () => delayedArt ? art.promise : Promise.resolve(),
-            draw(canvas, time, scenes, options) { draws.push({ time, calm: options.calm }); },
+            draw(canvas, time, scenes, options = {}) { draws.push({ time, calm: !!options.calm }); },
         };
     }, 'js/ui/trailer.js']);
     const trigger = g.Rift.Trailer.invitation();
@@ -137,7 +137,8 @@ test('all trailer art and shipped narration exist locally, and the title page lo
     }
     const html = fs.readFileSync(path.join(GAME_DIR, 'index.html'), 'utf8');
     const order = ['data/assets.js', 'data/trailer.js', 'js/ui/trailer-scenes.js', 'js/ui/trailer.js', 'js/screens/start.js'];
-    const positions = order.map(file => html.indexOf('src="' + file + '"'));
+    const scripts = [...html.matchAll(/<script\s+src="([^"]+)"/g)].map(match => match[1].split('?')[0]);
+    const positions = order.map(file => scripts.indexOf(file));
     assert.ok(positions.every((position, i) => position >= 0 && (!i || position > positions[i - 1])), 'classic scripts must load dependencies before the title screen');
 });
 
@@ -271,20 +272,25 @@ test('a tab hidden during loading remains paused when the film becomes ready', a
     player.close();
 });
 
-test('motion preference can be changed for this film without touching saved settings', async () => {
-    const t = playerSetup({ reduced: true }), player = t.open();
-    await flushPromises();
-    player.pause();
-    assert.equal(player.status().calm, true);
-    const motion = t.g.$('.trailer-controls').querySelectorAll('button').find(button => button.getAttribute('aria-label') === 'Enable trailer animation');
-    motion.click();
-    assert.equal(player.status().calm, false);
-    assert.equal(t.draws.at(-1).calm, false);
-    assert.equal(motion.textContent, 'Motion on');
-    motion.click();
-    assert.equal(player.status().calm, true);
-    assert.equal(t.calls.writes, 0);
-    player.close();
+test('the title invitation always plays the same animated film, regardless of device or game motion preferences', async () => {
+    for (const reduced of [true, false]) for (const gameCalm of [false, true]) {
+        const t = playerSetup({ reduced });
+        if (gameCalm) t.g.document.body.classList.add('calm-motion');
+        const player = t.open();
+        await flushPromises();
+        player.pause();
+        player.seek(26);
+        assert.equal(player.status().calm, false, 'the walk-in scene must use the same animation as the MP4');
+        assert.ok(t.draws.length > 0 && t.draws.every(draw => !draw.calm), 'never switch the film to static tableaux');
+        assert.ok(t.g.$('.trailer-controls').querySelectorAll('button').every(button => !/motion|animation/i.test(button.getAttribute('aria-label') || '')), 'one film with no alternate motion control');
+        assert.equal(t.g.document.body.classList.contains('calm-motion'), gameCalm, 'viewing the film must not change game preferences');
+        player.close();
+        const reopened = t.open();
+        await flushPromises();
+        assert.equal(reopened.status().calm, false, 'refreshing or reopening must not select another version');
+        assert.equal(t.calls.writes, 0);
+        reopened.close();
+    }
 });
 
 test('missing soundtrack offers captioned silent playback with pause, seek and replay', async () => {
@@ -294,7 +300,7 @@ test('missing soundtrack offers captioned silent playback with pause, seek and r
     assert.equal(silent.hidden, false);
     silent.click(); await flushPromises();
     assert.equal(player.status().silent, true);
-    assert.equal(player.status().calm, true);
+    assert.equal(player.status().calm, false);
     t.tick(5000);
     assert.equal(player.status().time, 5);
     player.pause(); t.tick(5000);
@@ -309,6 +315,209 @@ test('missing soundtrack offers captioned silent playback with pause, seek and r
     assert.equal(player.status().time, 0);
     assert.equal(t.playRequests.length, 0, 'silent mode must not retry missing audio');
     player.close();
+});
+
+function fullscreenButton(t) {
+    return t.g.$('.trailer-controls').querySelectorAll('button').at(-1);
+}
+
+function escapeTrailer(dialog, type = 'keydown') {
+    const event = { type, key: 'Escape', preventDefault() { this.defaultPrevented = true; } };
+    dialog.dispatchEvent(event);
+    assert.equal(event.defaultPrevented, true);
+}
+
+test('fullscreen fills the viewport without a native API, toggles back, and Escape exits before closing', async () => {
+    const t = playerSetup(), player = t.open();
+    await flushPromises();
+    const dialog = t.g.$('dialog'), button = fullscreenButton(t);
+    player.seek(33);
+    button.click();
+    assert.equal(dialog.classList.contains('trailer-expanded'), true);
+    assert.equal(button.textContent, 'Exit full screen');
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    assert.equal(player.status().time, 33);
+    assert.equal(player.status().playing, true);
+    button.click();
+    assert.equal(dialog.classList.contains('trailer-expanded'), false);
+    assert.equal(button.textContent, 'Full screen');
+    assert.equal(button.getAttribute('aria-pressed'), 'false');
+    button.click();
+    escapeTrailer(dialog);
+    assert.equal(dialog.open, true, 'first Escape exits expanded mode');
+    assert.equal(dialog.classList.contains('trailer-expanded'), false);
+    button.click();
+    escapeTrailer(dialog, 'cancel');
+    assert.equal(dialog.open, true, 'native dialog cancel also exits expanded mode first');
+    assert.equal(dialog.classList.contains('trailer-expanded'), false);
+    escapeTrailer(dialog);
+    assert.equal(t.g.Rift.Trailer.current(), null, 'next Escape closes the film');
+    assert.equal(t.docEvents.count('fullscreenchange'), 0);
+    assert.equal(dialog._listeners.keydown.length, 0);
+    assert.equal(dialog._listeners.cancel.length, 0);
+    assert.equal(dialog._listeners.close.length, 0);
+});
+
+test('denied or throwing native fullscreen requests retain a working viewport fallback', async () => {
+    for (const request of [() => Promise.reject(new Error('Fullscreen denied')), () => { throw new Error('Fullscreen unavailable'); }]) {
+        const t = playerSetup(), player = t.open();
+        await flushPromises();
+        const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+        view.requestFullscreen = request;
+        button.click(); await flushPromises();
+        assert.equal(dialog.classList.contains('trailer-expanded'), true);
+        assert.equal(button.textContent, 'Exit full screen');
+        button.click(); await flushPromises();
+        assert.equal(dialog.classList.contains('trailer-expanded'), false);
+        assert.equal(button.textContent, 'Full screen');
+        assert.equal(t.calls.writes, 0);
+        player.close();
+    }
+});
+
+test('native fullscreen uses a valid content target and tracks browser exits and the exit button', async () => {
+    const t = playerSetup(), player = t.open();
+    await flushPromises();
+    const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+    assert.equal(view.tagName, 'DIV', 'the fullscreen API forbids a dialog target');
+    let requests = 0, exits = 0;
+    view.requestFullscreen = async () => {
+        requests++;
+        t.g.document.fullscreenElement = view;
+        t.g.document.emit('fullscreenchange');
+    };
+    t.g.document.exitFullscreen = async () => {
+        exits++;
+        t.g.document.fullscreenElement = null;
+        t.g.document.emit('fullscreenchange');
+    };
+    assert.equal(t.docEvents.count('fullscreenchange'), 1);
+    button.click(); await flushPromises();
+    assert.equal(requests, 1);
+    assert.equal(dialog.classList.contains('trailer-expanded'), false, 'native mode needs no fallback class');
+    assert.equal(button.textContent, 'Exit full screen');
+    t.g.document.fullscreenElement = null;
+    t.g.document.emit('fullscreenchange');
+    assert.equal(button.textContent, 'Full screen', 'external native exit updates the control');
+    assert.equal(button.getAttribute('aria-pressed'), 'false');
+    assert.equal(dialog.open, true);
+    button.click(); await flushPromises();
+    button.click(); await flushPromises();
+    assert.equal(exits, 1);
+    assert.equal(t.g.document.fullscreenElement, null);
+    assert.equal(button.textContent, 'Full screen');
+    button.click(); await flushPromises();
+    player.close(); await flushPromises();
+    assert.equal(exits, 2, 'closing releases only this film\'s native fullscreen');
+    assert.equal(t.docEvents.count('fullscreenchange'), 0);
+});
+
+test('cancelling an unresolved fullscreen request cannot expand again when it settles', async () => {
+    for (const nativeSuccess of [false, true]) {
+        const t = playerSetup(), player = t.open(), request = deferred();
+        await flushPromises();
+        const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+        let requests = 0, exits = 0;
+        view.requestFullscreen = () => { requests++; return request.promise; };
+        t.g.document.exitFullscreen = async () => {
+            exits++;
+            t.g.document.fullscreenElement = null;
+            t.g.document.emit('fullscreenchange');
+        };
+        button.click(); button.click();
+        assert.equal(requests, 1, 'second click cancels instead of requesting twice');
+        assert.equal(dialog.classList.contains('trailer-expanded'), false);
+        if (nativeSuccess) {
+            t.g.document.fullscreenElement = view;
+            request.resolve();
+        } else request.reject(new Error('Fullscreen denied'));
+        await flushPromises();
+        assert.equal(dialog.classList.contains('trailer-expanded'), false);
+        assert.equal(button.textContent, 'Full screen');
+        assert.equal(exits, nativeSuccess ? 1 : 0);
+        assert.equal(t.g.document.fullscreenElement || null, null);
+        player.close();
+    }
+});
+
+test('closing while fullscreen is pending cleans up a late native success without changing a new film', async () => {
+    const t = playerSetup(), player = t.open(), request = deferred();
+    await flushPromises();
+    const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+    let exits = 0;
+    view.requestFullscreen = () => request.promise;
+    t.g.document.exitFullscreen = async () => { exits++; t.g.document.fullscreenElement = null; t.g.document.emit('fullscreenchange'); };
+    button.click();
+    player.close();
+    assert.equal(t.docEvents.count('fullscreenchange'), 0);
+    const next = t.open();
+    t.g.document.fullscreenElement = view;
+    request.resolve();
+    await flushPromises();
+    assert.equal(exits, 1);
+    assert.equal(t.g.document.fullscreenElement, null);
+    assert.equal(dialog.classList.contains('trailer-expanded'), false);
+    assert.equal(t.g.Rift.Trailer.current(), next);
+    assert.equal(fullscreenButton(t).textContent, 'Full screen');
+    next.close();
+});
+
+test('fullscreen re-entry keeps its viewport fallback while an earlier native exit settles', async () => {
+    const t = playerSetup(), player = t.open(), exit = deferred();
+    await flushPromises();
+    const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+    let requests = 0;
+    view.requestFullscreen = async () => {
+        requests++;
+        t.g.document.fullscreenElement = view;
+        t.g.document.emit('fullscreenchange');
+    };
+    t.g.document.exitFullscreen = () => {
+        t.g.document.fullscreenElement = null;
+        t.g.document.emit('fullscreenchange');
+        return exit.promise.then(() => {
+            t.g.document.fullscreenElement = null;
+            t.g.document.emit('fullscreenchange');
+        });
+    };
+    button.click(); await flushPromises();
+    button.click(); button.click();
+    assert.equal(requests, 1, 'do not race a new native request against the earlier exit');
+    assert.equal(dialog.classList.contains('trailer-expanded'), true);
+    exit.resolve(); await flushPromises();
+    assert.equal(dialog.classList.contains('trailer-expanded'), true);
+    assert.equal(button.textContent, 'Exit full screen');
+    button.click();
+    assert.equal(dialog.classList.contains('trailer-expanded'), false);
+    player.close();
+});
+
+test('a new film keeps its expanded view while the previous film\'s native exit settles', async () => {
+    const t = playerSetup(), first = t.open(), exit = deferred();
+    await flushPromises();
+    const firstView = t.g.$('.trailer-view');
+    firstView.requestFullscreen = async () => { t.g.document.fullscreenElement = firstView; t.g.document.emit('fullscreenchange'); };
+    t.g.document.exitFullscreen = () => {
+        t.g.document.fullscreenElement = null;
+        t.g.document.emit('fullscreenchange');
+        return exit.promise.then(() => {
+            t.g.document.fullscreenElement = null;
+            t.g.document.emit('fullscreenchange');
+        });
+    };
+    fullscreenButton(t).click(); await flushPromises();
+    first.close();
+    const next = t.open();
+    const dialog = t.g.$('dialog'), view = t.g.$('.trailer-view'), button = fullscreenButton(t);
+    let requests = 0;
+    view.requestFullscreen = async () => { requests++; t.g.document.fullscreenElement = view; t.g.document.emit('fullscreenchange'); };
+    button.click();
+    assert.equal(requests, 0, 'the earlier viewer\'s exit also guards a newly opened viewer');
+    exit.resolve(); await flushPromises();
+    assert.equal(dialog.classList.contains('trailer-expanded'), true);
+    assert.equal(button.textContent, 'Exit full screen');
+    assert.equal(t.g.Rift.Trailer.current(), next);
+    next.close();
 });
 
 function canvasTrace() {

@@ -4,15 +4,16 @@
     const Rift = root.Rift;
     const el = (...a) => Rift.el(...a);
     let current = null;
+    let pendingFullscreenExits = 0;
     const stamp = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 
     function open() {
         if (current) return current;
         const edit = Rift.data.trailer;
         const returnFocus = root.document.activeElement;
-        let calm = root.document.body.classList.contains('calm-motion') || (root.matchMedia && root.matchMedia('(prefers-reduced-motion: reduce)').matches);
         let closed = false, playing = false, ready = false, silent = false, offset = 0, base = 0, frame = 0, captionsOn = true, playGeneration = 0;
         let cancelMetadata = () => {};
+        let expanded = false, fullscreenWanted = false, fullscreenPending = false, exitingFullscreen = false;
         const audio = new root.Audio(edit.soundtrack);
         audio.preload = 'auto';
         audio.volume = .9;
@@ -27,23 +28,86 @@
         const timeLabel = el('span.trailer-time', { text: '0:00 / ' + stamp(edit.duration) });
         const mute = el('button', { text: 'Sound on', 'aria-label': 'Mute trailer', 'aria-pressed': 'false', onclick() { audio.muted = !audio.muted; mute.textContent = audio.muted ? 'Sound off' : 'Sound on'; mute.setAttribute('aria-pressed', String(audio.muted)); mute.setAttribute('aria-label', audio.muted ? 'Unmute trailer' : 'Mute trailer'); } });
         const cc = el('button', { text: 'Captions', 'aria-pressed': true, onclick() { captionsOn = !captionsOn; cc.setAttribute('aria-pressed', String(captionsOn)); draw(); } });
-        const motion = el('button', { text: calm ? 'Calm motion' : 'Motion on', 'aria-label': calm ? 'Enable trailer animation' : 'Use calm motion', onclick() {
-            calm = !calm;
-            motion.textContent = calm ? 'Calm motion' : 'Motion on';
-            motion.setAttribute('aria-label', calm ? 'Enable trailer animation' : 'Use calm motion');
-            draw();
-        } });
-        const fullscreen = el('button', { text: 'Full screen', onclick() { if (root.document.fullscreenElement) root.document.exitFullscreen().catch(() => {}); else if (dialog.requestFullscreen) dialog.requestFullscreen().catch(() => { fullscreen.textContent = 'Full screen unavailable'; }); } });
+        const fullscreen = el('button', { text: 'Full screen', 'aria-label': 'Full screen', 'aria-pressed': 'false', onclick: toggleFullscreen });
         const dialog = el('dialog.trailer-dialog', { 'aria-labelledby': 'trailer-title' }, [
             el('header.trailer-header', null, [
                 el('div', null, [el('h2#trailer-title', { text: 'Rift of Reason' }), el('small', { text: 'The adventure trailer · 1 min 22 sec' })]),
                 el('button', { text: 'Close', 'aria-label': 'Close trailer', onclick: close }),
             ]),
             el('div.trailer-stage', null, [canvas, captions, message]),
-            el('div.trailer-controls', null, [toggle, seekBar, timeLabel, mute, cc, motion, fullscreen]),
-            el('div.trailer-download', null, [el('a', { href: 'assets/trailer/Rift-of-Reason.mp4', download: 'Rift-of-Reason.mp4', text: 'Download trailer · MP4' })]),
+            el('div.trailer-controls', null, [toggle, seekBar, timeLabel, mute, cc, fullscreen]),
+            el('div.trailer-download', null, [el('a', { href: 'assets/trailer/Rift-of-Reason.mp4?v=20261011-single', download: 'Rift-of-Reason.mp4', text: 'Download trailer · MP4' })]),
             el('details.trailer-transcript', null, [el('summary', { text: 'Read the narration' }), el('p', { text: edit.lines.map(l => l.text).join(' ') })]),
         ]);
+
+        // A dialog cannot be a native fullscreen target; its content can.
+        const fullscreenView = el('div.trailer-view', null, [...dialog.children]);
+        dialog.appendChild(fullscreenView);
+
+        function nativeFullscreen() { return root.document.fullscreenElement === fullscreenView; }
+
+        function updateFullscreenButton() {
+            if (closed) return;
+            const active = expanded || nativeFullscreen();
+            fullscreen.textContent = active ? 'Exit full screen' : 'Full screen';
+            fullscreen.setAttribute('aria-label', fullscreen.textContent);
+            fullscreen.setAttribute('aria-pressed', String(active));
+        }
+
+        function setExpanded(value) {
+            expanded = value;
+            dialog.classList.toggle('trailer-expanded', expanded);
+            updateFullscreenButton();
+        }
+
+        async function exitNativeFullscreen() {
+            if (!nativeFullscreen() || !root.document.exitFullscreen || exitingFullscreen) return;
+            exitingFullscreen = true;
+            pendingFullscreenExits++;
+            try { await root.document.exitFullscreen(); } catch (e) { /* Keep the exit control available if the browser refuses. */ }
+            finally { pendingFullscreenExits--; exitingFullscreen = false; updateFullscreenButton(); }
+        }
+
+        function fullscreenChanged() {
+            if (closed) return;
+            if (nativeFullscreen() && fullscreenWanted && !pendingFullscreenExits) setExpanded(false);
+            else if (!nativeFullscreen() && !expanded) fullscreenWanted = false;
+            updateFullscreenButton();
+            if (nativeFullscreen() && !fullscreenWanted) exitNativeFullscreen();
+        }
+
+        async function enterFullscreen() {
+            fullscreenWanted = true;
+            setExpanded(true);
+            // Fill the viewport immediately, including browsers that deny native fullscreen.
+            // Reuse a pending request if the viewer exits and re-enters before it settles.
+            // An older exit can still affect this document, even after a film is closed.
+            if (fullscreenPending || pendingFullscreenExits || !fullscreenView.requestFullscreen || root.document.fullscreenEnabled === false) return;
+            fullscreenPending = true;
+            try { await fullscreenView.requestFullscreen(); } catch (e) { /* The viewport fallback is already active. */ }
+            finally { fullscreenPending = false; }
+            if (closed || !fullscreenWanted) { exitNativeFullscreen(); return; }
+            fullscreenChanged();
+        }
+
+        function leaveFullscreen() {
+            fullscreenWanted = false;
+            setExpanded(false);
+            exitNativeFullscreen();
+        }
+
+        function toggleFullscreen() {
+            if (closed) return;
+            if (fullscreenWanted || expanded || nativeFullscreen()) leaveFullscreen();
+            else enterFullscreen();
+        }
+
+        function escape() {
+            if (fullscreenWanted || expanded || nativeFullscreen()) leaveFullscreen();
+            else close();
+        }
+
+        function cancel(e) { e.preventDefault(); escape(); }
 
         function time() {
             return Rift.clamp(silent ? offset + (playing ? (root.performance.now() - base) / 1000 : 0) : (ready ? audio.currentTime : offset), 0, edit.duration);
@@ -52,7 +116,8 @@
         function draw() {
             if (closed) return;
             const t = time();
-            Rift.TrailerScenes.draw(canvas, Math.min(t, edit.duration - .001), edit.scenes, { calm });
+            // The title invitation and MP4 share one animated film.
+            Rift.TrailerScenes.draw(canvas, Math.min(t, edit.duration - .001), edit.scenes);
             const line = edit.lines.find(l => t >= l.start && t < l.end);
             captionText.textContent = line ? line.text : '';
             captions.hidden = !captionsOn || !line;
@@ -110,7 +175,7 @@
 
         function visibility() { if (root.document.hidden) pause(); }
         function keyboard(e) {
-            if (e.key === 'Escape') { e.preventDefault(); close(); }
+            if (e.key === 'Escape') { e.preventDefault(); escape(); }
             if ((e.code === 'Space' || e.key === ' ') && !/INPUT|BUTTON|SUMMARY/.test(e.target.tagName)) { e.preventDefault(); playing ? pause() : play(); }
         }
 
@@ -124,9 +189,13 @@
             audio.removeAttribute('src');
             audio.load();
             root.document.removeEventListener('visibilitychange', visibility);
+            root.document.removeEventListener('fullscreenchange', fullscreenChanged);
             root.removeEventListener('pagehide', close);
+            dialog.removeEventListener('keydown', keyboard);
+            dialog.removeEventListener('cancel', cancel);
+            dialog.removeEventListener('close', close);
             offScreen();
-            if (root.document.fullscreenElement === dialog && root.document.exitFullscreen) root.document.exitFullscreen().catch(() => {});
+            leaveFullscreen();
             if (dialog.open) dialog.close();
             dialog.remove();
             current = null;
@@ -138,9 +207,10 @@
         const offScreen = Rift.bus.on('screen:changed', close);
         audio.addEventListener('ended', ended);
         root.document.addEventListener('visibilitychange', visibility);
+        root.document.addEventListener('fullscreenchange', fullscreenChanged);
         root.addEventListener('pagehide', close);
         dialog.addEventListener('keydown', keyboard);
-        dialog.addEventListener('cancel', e => { e.preventDefault(); close(); });
+        dialog.addEventListener('cancel', cancel);
         dialog.addEventListener('close', close);
         Rift.Audio.stopVoice();
         Rift.Audio.stopSounds();
@@ -148,7 +218,7 @@
         root.document.body.appendChild(dialog);
         dialog.showModal();
         toggle.focus();
-        current = { close, seek, pause, play, canvas, status: () => ({ time: time(), playing, ready, silent, calm, closed }) };
+        current = { close, seek, pause, play, canvas, status: () => ({ time: time(), playing, ready, silent, calm: false, closed }) };
         const metadata = new Promise((resolve, reject) => {
             if (audio.readyState >= 1) { resolve(); return; }
             const timer = root.setTimeout(() => { cleanup(); reject(new Error('Soundtrack timed out')); }, 20000);

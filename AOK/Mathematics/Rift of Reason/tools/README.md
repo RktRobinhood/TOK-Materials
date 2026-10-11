@@ -72,7 +72,7 @@ The MP4 exporter needs the production-only `@napi-rs/canvas` package (1.0.11 was
 
 If Windows briefly locks the destination during syncing, the exporter retries publishing. A completed `Rift-of-Reason.rendering.mp4` can be published with `--finalize` without rendering again. Do not change the edit or compositor between rendering and finalizing. The preview server supports byte ranges so audio/video seeking works locally.
 
-The shipping check is `node --test tools/test/trailer.test.mjs`; the full game suite must also pass before committing. Browser QA covers title-page launch, narration and captions, pause/seek/replay, Close/Escape and focus restoration, fullscreen, and Calm motion.
+The shipping check is `node --test tools/test/trailer.test.mjs`; the full game suite must also pass before committing. Browser QA covers title-page launch, narration and captions, pause/seek/replay, Close/Escape and focus restoration, native fullscreen and its viewport fallback, and the same animated film under both device and game motion preferences.
 
 ## Classroom clue QR
 

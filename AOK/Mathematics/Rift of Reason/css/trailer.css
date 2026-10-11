@@ -29,8 +29,11 @@
 .trailer-transcript { border-top: 1px solid #26303e; padding: 12px 20px 18px; color: #bbc5d2; font-size: 13px; }
 .trailer-transcript summary { cursor: pointer; color: #edc782; }
 .trailer-transcript p { line-height: 1.8; margin-bottom: 0; }
-.trailer-dialog:fullscreen { width: 100%; max-width: none; height: 100%; max-height: none; border: 0; border-radius: 0; display: flex; flex-direction: column; justify-content: center; }
-.trailer-dialog:fullscreen .trailer-stage { flex: 0 1 auto; width: min(100vw, calc((100dvh - 126px) * 16 / 9)); align-self: center; }
-.trailer-dialog:fullscreen .trailer-transcript { display: none; }
-.trailer-dialog:fullscreen .trailer-download { display: none; }
+.trailer-dialog.trailer-expanded { position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; border-radius: 0; box-sizing: border-box; overflow: hidden; }
+.trailer-view:fullscreen, .trailer-dialog.trailer-expanded .trailer-view { height: 100%; display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: #090d14; }
+.trailer-view:fullscreen .trailer-header, .trailer-view:fullscreen .trailer-controls, .trailer-dialog.trailer-expanded .trailer-header, .trailer-dialog.trailer-expanded .trailer-controls { flex-shrink: 0; }
+.trailer-view:fullscreen .trailer-stage, .trailer-dialog.trailer-expanded .trailer-stage { flex: 0 1 auto; width: min(100%, calc((100dvh - 144px) * 16 / 9)); align-self: center; }
+.trailer-view:fullscreen .trailer-transcript, .trailer-dialog.trailer-expanded .trailer-transcript { display: none; }
+.trailer-view:fullscreen .trailer-download, .trailer-dialog.trailer-expanded .trailer-download { display: none; }
 @media (max-width: 600px) { .trailer-dialog { width: 96vw; } .trailer-header, .trailer-controls { padding: 10px 12px; } .trailer-controls { gap: 7px; } .trailer-controls button { padding: 7px 9px; font-size: 12px; } .trailer-controls input { order: 3; flex-basis: 100%; } .trailer-captions { bottom: 4%; font-size: 12px; } .trailer-header h2 { font-size: 12px; } }
+@media (max-width: 600px) { .trailer-view:fullscreen .trailer-stage, .trailer-dialog.trailer-expanded .trailer-stage { width: min(100%, calc((100dvh - 190px) * 16 / 9)); } }
