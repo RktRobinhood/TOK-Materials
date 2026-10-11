@@ -27,6 +27,25 @@ Next for lesson 2: 13.5 Coach Achilles, 13.8 Mr Gumleaf, 13.9 Quill unmasked, 13
 
 `node tools/voices.mjs` shows status per speaker. Avatar voices are approved as plain voice + plain inner voice (`AVATAR-VOICES.md`).
 
+### Recording checkpoint: 11 October 2026
+
+Generated 210 lesson-one clips: 118 avatar inner lines, 24 Granny lines (including the revised card lesson), and 68 NPC lines. Six clips were held for boundary repair, leaving **204 new recordings** in the game. Current coverage is **730/1,025 lesson-one lines** and **1,317/2,565 total catalog lines**. The manifest lists 1,684 files, including older script versions. Missing lines use browser speech.
+
+The Pacific-day ledger is at **10 Flash + 10 Lite attempts**. One 27-line Frogling take needed two smaller retries; failed/split attempts remain counted. Cast models and the daily allowance were preserved. All 210 generated MP3s decoded without errors, and every manifest reference exists. The full suite passed: 769 tests, zero failures, one optional ladder test skipped.
+
+A 24-clip unprimed transcript sample found three substantial differences: Raven girl's first clip included the next line's "Never"; Frogling boy's first clip omitted "Every Tuesday for years"; Muskrat's last tutorial clip omitted "Undo and Reset are free." These clips and their adjacent counterparts were backed up to `%TEMP%/rift-voice-repairs-2026-10-11/` and removed from the manifest. Follow-up neighbor checks returned an invalid response and then timed out, so the exact cuts remain unconfirmed. A fourth difference concerned only Mothkin boy's whispered "Shh" and was treated as a nonverbal transcription difference. The bounded sample does not certify unsampled cuts or acting.
+
+After the next Pacific reset (**12 October, 09:00 Copenhagen**), repair the three pairs first with the pinned Lite model:
+
+```powershell
+node tools/voices.mjs --render --script lesson1 --single --id avatar-raven-girl-inner-6ylx6a,avatar-raven-girl-inner-wpayff,avatar-frogling-boy-inner-1n9e1l7,avatar-frogling-boy-inner-14yis2s,muskrat-1aywz2s,muskrat-14han12
+node tools/voices.mjs --render --script lesson1
+```
+
+Check the repaired pairs before publishing them. Preserve the ledger and backup clips; do not restore the held takes without review.
+
+### Earlier checkpoint: 8 October
+
 Recorded on 8 Oct: all ten avatar auditions; Nudge, Guess-o-Matic, Signpost, Corvina (all their lines); inner-voice lines (22 each) for the five flash avatars: Owlet boy, Moth-kin girl, Fox boy, Frogling girl, Raven boy (spot check: words exact). Next quota day: the other five inner voices (lite: `--only avatar-owlet-girl-inner` etc.).
 
 Still to record for lesson 1 (spend the daily quota here first):
