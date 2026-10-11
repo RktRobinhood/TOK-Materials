@@ -630,7 +630,7 @@ body.calm-motion .battle .b-inspect.show { animation: b-fade-in 0.12s ease-out !
 /* ---- side panel ---- */
 .b-side { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; font-size: 13px; }
 .b-side > * { flex: none; }
-.b-side > .b-rules { flex: none; }
+.b-side > .b-rules { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
 .b-side > .b-wheel[open] { flex: 0 1 auto; max-height: 40%; min-height: 0; overflow-y: auto; }
 .b-side > .b-recent { flex: none; }
 .b-side .panel { padding: 8px 10px; }

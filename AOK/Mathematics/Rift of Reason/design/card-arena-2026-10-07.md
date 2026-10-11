@@ -58,6 +58,8 @@ One-shot cards defined in `data/tactics.js` (`cost`, `text`, optional `target`, 
 
 ## Axioms (rules)
 
+The active-rule panel is named **Axioms** (#99), with **Axioms & log** as its narrow-screen toggle. Explain once: "Axioms are the rules both players start from." Its tiles show what is active now; gold tiles identify changed axioms. The shared axiom deck contains rule cards for both players, while the Fate track shows upcoming changes separately. Lesson references and their spoken text use this panel name.
+
 Ids are unchanged; several texts/effects change. One active rule per category.
 
 | Category | Ids | Effect |
@@ -88,7 +90,7 @@ A countdown, starting 6 spaces away. Each End turn advances it exactly 1 (no pla
 
 ## Interface
 
-- Opponent hero at top centre, opponent hand (backs) above it, opponent board, Fate track in the centre lane, my board, my hero, my hand fanned at the bottom; energy crystals and the End turn button at the right; Rules now and the log in a collapsible side panel.
+- Opponent hero at top centre, opponent hand (backs) above it, opponent board, Fate track in the centre lane, my board, my hero, my hand fanned at the bottom; energy crystals and the End turn button at the right; Axioms and the log in a collapsible side panel.
 - **Drag** a creature from your board onto an enemy creature or the enemy hero to attack. A gold arrow follows the pointer; valid targets glow; Guard creatures show a shield frame. **Click-click** works too (click attacker, click target) for touch and keyboard. Drag a hand card onto the board to play it; an Entrance with a target then asks for a target click.
 - The draw choice is four large buttons at the start of the turn.
 - Damage numbers and defeats animate briefly; Calm motion turns movement into fades.
@@ -107,7 +109,7 @@ Borrowed mechanics (Fluxx's Play N, Hand Limit, bonuses, swapping plays for draw
 ## Interface (7 Oct rebuild, after the teacher's playtest and critic rounds)
 
 - Middle bar: the Fate reel on top; below it the instruction (or the two-way draw choice with the card on top of the shared deck named, and a one-line recap of the opponent's turn), the axiom deck and a round End turn medallion.
-- Side panel: **Rules in play** picture tiles (Win, Fights, Card plays, Attacks, Energy always; any other changed rule adds a tile; changed tiles are gold with "Changed"; Card plays/Attacks show "N left"), the colour wheel (collapsed), How to play (a one-screen visual sheet).
+- Side panel: **Axioms** picture tiles (Win, Fights, Card plays, Attacks, Energy always; any other changed rule adds a tile; changed tiles are gold with "Changed"; Card plays/Attacks show "N left"), the colour wheel (collapsed), How to play (a one-screen visual sheet).
 - **Recent plays**: a column of pictures at the table's left edge (newest on top, teal = you, coral = them); hover shows the card and what followed. It replaced the text log.
 - Card faces show short text (tactics and axioms have a `short` field); the hover magnifier opens beside the card after 220 ms with the full text in the note under it.
 - Pacing: the opponent waits 1.25 s between moves, a card it plays is shown big first (1.5 s), attacks show their arrow (1 s), and any rule change is shown big for 2.6 s while everything waits. Turn banners for both sides.

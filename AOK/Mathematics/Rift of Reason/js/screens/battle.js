@@ -92,7 +92,7 @@
     const KW_ICON = { guard: '🛡️', swift: '💨', shield: '🫧', elusive: '🌫️' };
     const KW_NAME = { guard: 'Guard', swift: 'Swift', shield: 'Shield', elusive: 'Elusive' };
     const AB_KIND = { entrance: 'Entrance', lastword: 'Last Word', activate: 'Activate', passive: '' };
-    // One plain line per keyword and ability timing (Rules now panel; the same words are in How to play).
+    // One plain line per keyword and ability timing (Axioms panel; the same words are in How to play).
     const KEYWORD_LINES = [
         ['Guard', 'Enemies must attack a Guard creature first.'],
         ['Swift', 'It can attack on the turn it arrives.'],
@@ -103,7 +103,7 @@
         ['Last Word', 'It works when the creature is defeated.'],
         ['Activate', "Pay the energy (⚡) to use it. It uses the creature's attack this turn."],
     ];
-    // The rule tiles ("Rules in play"): the four core rules always show (their basic value, or the
+    // The axiom tiles ("Axioms"): the four core rules always show (their basic value, or the
     // axiom that changed them); any other changed category adds a tile. [category, label, basic words,
     // basic card art (a "back to normal" axiom), the basic rule in one sentence].
     const CORE_RULES = [
@@ -296,12 +296,12 @@
                 el('div.b-side-top', {}, [
                     iconButton('.b-help', { key: 'help', name: 'How to play', detail: 'All the card rules on one page.', art: 'ui/btn-help', svg: CTRL_SVG.help, onclick: openHelp }),
                     canLeave ? iconButton('.b-leave', { key: 'leave', name: 'Leave match', detail: 'Stop this match. Nothing is at stake.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: askLeave }) : null,
-                    iconButton('.b-side-close', { key: 'close', name: 'Close', detail: 'Hide the rules and the log.', svg: CTRL_SVG.close, onclick: () => toggleSide(false) }),
+                    iconButton('.b-side-close', { key: 'close', name: 'Close', detail: 'Hide Axioms and the log.', svg: CTRL_SVG.close, onclick: () => toggleSide(false) }),
                 ]),
-                dom.rules = el('section.b-rules.panel', { 'aria-label': 'Rules in play' }),
+                dom.rules = el('section.b-rules.panel', { 'aria-label': 'Axioms' }),
                 dom.wheel = wheelLegend(),
             ]),
-            iconButton('.b-side-toggle', { key: 'side', name: 'Rules & log', detail: 'The rules now, the keywords, the colour wheel and what happened.', art: 'ui/btn-rules', svg: CTRL_SVG.rules, onclick: () => toggleSide() }),
+            iconButton('.b-side-toggle', { key: 'side', name: 'Axioms & log', detail: 'Active axioms, the colour wheel and what happened.', art: 'ui/btn-rules', svg: CTRL_SVG.rules, onclick: () => toggleSide() }),
             // The big preview sits over the side panel (or the far edge of the table), never over the
             // centre lane or End turn. See placeInspect.
             dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
@@ -978,7 +978,7 @@
             ui.inspect = { key: key || null, zone: zoneOf(anchor), anchor };
             placeInspect(anchor);
         }
-        // Over the side panel (Rules now and the log), level with the card where it fits, so it
+        // Over the side panel (Axioms and the log), level with the card where it fits, so it
         // never covers the centre lane, the instruction bar or End turn. Without a side panel
         // (narrow screens) it goes to the far edge of the table, in the card's half.
         function placeInspect(anchor) {
@@ -1557,7 +1557,7 @@
             dom.fate = el('div.b-fate', { role: 'group', 'aria-label': 'Fate track' });
             paintFate(0);
             const deckN = state.axioms.deck.length;
-            const axdeck = el('div.b-axdeck', { tabindex: 0, 'aria-label': 'Shared rule deck: ' + deckN + ' rule cards' }, [cardBack(true), el('span', { text: String(deckN) })]);
+            const axdeck = el('div.b-axdeck', { tabindex: 0, 'aria-label': 'Shared axiom deck: ' + deckN + ' rule cards' }, [cardBack(true), el('span', { text: String(deckN) })]);
             tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it, and the Fate track turns its top card over.');
             put(dom.lane, dom.fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [axdeck]), dom.draw, dom.end);
         }
@@ -1696,9 +1696,9 @@
             const make = () => (known ? [axiomCardEl(top, { size: 'big' }), el('div.b-notes', {}, [
                 el('div.b-note-line', {}, [el('b', { text: 'Upcoming · not active yet. In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' }), 'this rule card turns over for free and changes the rule for BOTH players.']),
                 el('div.b-note-line', {}, [el('b', { text: 'It replaces: ' }), replacedRule(top)]),
-                el('div.b-note-line.b-flavour', { text: 'It is the top card of the shared rule deck. If someone takes it first, the next card turns over instead.' })])]
+                el('div.b-note-line.b-flavour', { text: 'It is the top card of the shared axiom deck. If someone takes it first, the next card turns over instead.' })])]
                 : [el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns: ' }),
-                    reset ? 'every rule card in play is removed. All rules go back to the basics.' : 'the top card of the shared rule deck turns over for free.'])])]);
+                    reset ? 'every rule card in play is removed. All rules go back to the basics.' : 'the top card of the shared axiom deck turns over for free.'])])]);
             hoverInspect(m, make, 'fate:' + i);
             m.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), m, 'fate:' + i); });
             return m;
@@ -1827,7 +1827,7 @@
                 if (!sel && guide && step()) {
                     // Guide mode: the bar repeats Granny's "Do this" (the step's label) plus how.
                     const open = step().open && !ui.hinted;
-                    ask.textContent = open ? 'Your decision: read the rule tiles first.' : 'Do this: ' + step().label + '.';
+                    ask.textContent = open ? 'Your decision: read Axioms first.' : 'Do this: ' + step().label + '.';
                     const how = step().open && !ui.hinted ? '' : guideHow(step().expect);
                     if (how) ask.appendChild(el('span.b-ask-how', { text: ' ' + how }));
                 } else if (!sel) {
@@ -2098,7 +2098,7 @@
             put(dom.choice, el('div.b-choice-title', { text: pend.prompt || 'Choose.' }), opts);
         }
 
-        // "Rules in play": one tile per rule, a picture and a few words. The four core rules always
+        // "Axioms": one tile per active rule, a picture and a few words. The four core rules always
         // show; a changed rule glows gold and says "Changed". Hover, focus or tap a tile for the card.
         // For a Fate choice (Clockwork): what the next event would do after that move.
         function fateOutcome(pend, choice) {
@@ -2128,7 +2128,8 @@
             });
             const n = changedRules().length;
             put(dom.rules,
-                el('div.b-rules-head', {}, [el('strong', { text: 'Active · rules in play' }), el('span.b-rules-sub', { text: n ? n + ' changed (gold tiles)' : 'All basic. Rule cards and Fate can change them.' })]),
+                el('div.b-rules-head', {}, [el('strong', { text: 'Axioms' }), el('span.b-rules-sub', { text: n ? 'Active now · ' + n + ' changed (gold tiles)' : 'Active now · All basic.' })]),
+                el('p.b-rules-sub', { text: 'Axioms are the rules both players start from. Rule cards and Fate can change them.' }),
                 el('div.b-rule-tiles' + (tiles.length > 6 ? '.compact' : ''), {}, tiles));
         }
         function ruleTile(cat, id, basicWords, basicArt, basicLong) {
@@ -2159,8 +2160,8 @@
                 budget ? el('span.b-rtile-budget', { text: budget }) : changed ? el('span.b-rtile-new', { text: 'Changed' }) : null,
             ]);
             const make = () => (changed ? [axiomCardEl(id, { size: 'big' }), axiomNote(id)]
-                : [el('div.b-notes.b-basic-rule', {}, [el('div.b-note-line', {}, [el('b', { text: label + ' (basic rule): ' }), basicLong || words]),
-                    el('div.b-note-line.b-flavour', { text: 'A rule card (axiom) can change this rule for BOTH players.' })])]);
+                : [el('div.b-notes.b-basic-rule', {}, [el('div.b-note-line', {}, [el('b', { text: label + ' (basic axiom): ' }), basicLong || words]),
+                    el('div.b-note-line.b-flavour', { text: 'A rule card can change this axiom for BOTH players.' })])]);
             hoverInspect(tile, make, 'rule:' + cat);
             tile.addEventListener('click', () => {
                 if (ui.suppressClick) return;
@@ -2341,7 +2342,7 @@
                 ]),
                 !ui.busy && ui.trapSaid && ui.trapSaid.step === ui.step ? el('p.b-coach-say.warn', { text: ui.trapSaid.text }) : null,
                 ui.busy && !done ? null : el('p.b-coach-text', { text: done ? 'You won by the current rules.' : stepText(st) }),
-                el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read the rule tiles first.' : 'Do this: ' + st.label }),
+                el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read Axioms first.' : 'Do this: ' + st.label }),
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
                 !ui.busy && ui.prediction && ui.prediction.step === ui.step ? el('p.b-coach-say.warn', { role: 'status', text: ui.prediction.text }) : null,
                 st && st.compare ? comparison(st.compare) : null,
@@ -2950,14 +2951,14 @@
             const endRules = changedRules();
             if (!guide && changes) body.push(el('div.b-end-rules', {}, [
                 el('strong', { text: 'The rules changed ' + changes + ' time' + (changes === 1 ? '' : 's') + ' in this match.' }),
-                el('span', { text: endRules.length ? ' Rules in play at the end: ' + endRules.map(ax => ax.name + ' (' + (ax.short || ax.text) + ')').join('; ') + '. Same cards, other rules: would you have won?'
+                el('span', { text: endRules.length ? ' Active axioms at the end: ' + endRules.map(ax => ax.name + ' (' + (ax.short || ax.text) + ')').join('; ') + '. Same cards, other rules: would you have won?'
                     : ' At the end the basic rules were back.' }),
             ]));
             if (guide) {
                 const speaker = (Rift.data.speakers || {}).granny;
                 const outro = guide.outro || 'Same table, different rules, different endings. In maths, the rules you start from are called axioms.';
                 body.push(el('div.b-outro', {}, [speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null, el('p', { text: outro })]));
-                body.push(el('p.small', { text: 'Real matches start with ' + E.DEFAULTS.hearts + ' hearts each. Read the rule tiles before you attack!' }));
+                body.push(el('p.small', { text: 'Real matches start with ' + E.DEFAULTS.hearts + ' hearts each. Read Axioms before you attack!' }));
                 if (guide.next) body.push(el('p.small', { text: guide.next }));
                 try { if (Rift.Audio && Rift.Audio.speak) Rift.Audio.speak({ speaker: 'granny', text: outro, voice: Rift.voiceId ? Rift.voiceId('granny', outro) : null }); } catch (e) { /* no voice */ }
             } else if (mode === 'practice') {

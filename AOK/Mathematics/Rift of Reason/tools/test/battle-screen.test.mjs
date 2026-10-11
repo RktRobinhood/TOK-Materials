@@ -292,9 +292,13 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     const far = $('.b-fev.flip');
     assert.ok(far.classList.contains('far'));
     assert.equal(far.querySelector('.b-fev-label').textContent, 'New rule · in ' + turns);
-    assert.match(hover(t, '.b-fev.flip'), /top card of the shared rule deck/);
+    assert.match(hover(t, '.b-fev.flip'), /top card of the shared axiom deck/);
     far.dispatchEvent(mouse({ type: 'pointerleave' }));
-    // "Rules in play": picture tiles for the core rules, all basic now; no keyword list in the panel.
+    // "Axioms": picture tiles for the core rules, all basic now; no keyword list in the panel.
+    assert.equal($('.b-rules').getAttribute('aria-label'), 'Axioms');
+    assert.equal($('.b-rules-head strong').textContent, 'Axioms');
+    assert.match($('.b-rules').textContent, /Axioms are the rules both players start from\./);
+    assert.match($('.b-rules-head').textContent, /Active now/);
     const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
     assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy']);
     assert.equal(t.root.querySelectorAll('.b-rtile.changed').length, 0);
@@ -549,7 +553,7 @@ test('changed rules: gold "Changed" tiles beside the core tiles, and each tile s
         assert.ok(text.includes(t.Rift.data.axioms[id].text), id + ': the full rule text is in the preview');
         t.$('.b-rtile[data-cat="' + cat + '"]').dispatchEvent(mouse({ type: 'pointerleave' }));
     }
-    assert.match(hover(t, '.b-rtile[data-cat="victory"]'), /basic rule/);
+    assert.match(hover(t, '.b-rtile[data-cat="victory"]'), /basic axiom/);
     t.handle.destroy();
     // The plays tile counts the plays left (a changed plays rule shows the count instead of the tag).
     const r = prepared({ me: ['kardashiant', 'kardashiant'], opp: ['kardashiant'] }, (s, move) => { s.axioms.active = { plays: 'restraint' }; move('p0c0', 0, 'hand'); });
@@ -677,7 +681,7 @@ test('hover previews wait, close on pointerdown and stay shut after a drag until
 test('picture buttons: each has a name (aria-label) and a tooltip, and no native title', () => {
     const t = setup(practice);
     const names = t.root.querySelectorAll('.b-ibtn').map(b => b.getAttribute('aria-label'));
-    for (const n of ['Draw from your deck', 'Take a rule card', 'How to play', 'Leave match', 'Close', 'Rules & log']) assert.ok(names.includes(n), n);
+    for (const n of ['Draw from your deck', 'Take a rule card', 'How to play', 'Leave match', 'Close', 'Axioms & log']) assert.ok(names.includes(n), n);
     assert.ok(!names.includes('Fate sooner') && !names.includes('Fate later'), 'no time draws by default');
     t.root.querySelectorAll('.b-ibtn').forEach(b => {
         assert.ok(b.dataset.tip, b.getAttribute('aria-label') + ' has tooltip text');

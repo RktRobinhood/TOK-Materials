@@ -105,10 +105,10 @@
                 { say: 'I played a rule card! Look at the Win tile.' },
                 { type: 'end' }] },
         { title: 'Draw', label: 'Draw from your deck',
-            text: 'Draw first. Then read the rule tiles before you attack.',
+            text: 'Draw first. Then read Axioms before you attack.',
             expect: { type: 'draw', choice: 'deck' }, replies: [] },
         { title: 'What will you do?', label: 'Activate Kim\'s Filter',
-            text: 'I have only 2 hearts left. But something changed. Read the rule tiles, then decide what to do.',
+            text: 'I have only 2 hearts left. But something changed. Read Axioms, then decide what to do.',
             // No gold pointer at first: the learner decides. The hint comes after a while, or after the trap.
             open: true,
             // Two hints: first the idea, later the click (so the learner can still find it alone).
@@ -123,7 +123,7 @@
         { title: 'Read, then attack', label: 'Attack Granny with Astrophysicat',
             text: 'Check the Win tile: enemy hero to zero hearts. Drag Astrophysicat onto me.',
             expect: { type: 'attack', cid: 'p0c1', target: 'h1' }, replies: [] },
-        { title: 'Win by the rules in play', label: 'Attack Granny with Billie',
+        { title: 'Win by the active axioms', label: 'Attack Granny with Billie',
             text: 'One heart left. Drag Billie Eelish onto me to win. Always read the rules before you attack.',
             expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [] },
     ];
@@ -206,7 +206,7 @@
             text: 'End turn. Watch Granny change the Win rule. Rule cards affect both players.',
             expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'axiom', choice: 'reverse-hearts' }, { type: 'end' }, { type: 'draw', choice: 'deck' }] },
         { title: 'Predict before acting', label: 'Choose a prediction', info: true,
-            text: 'Read the Win tile. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?',
+            text: 'Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?',
             expect: { type: 'info' }, replies: [],
             predict: [
                 { label: 'I win', correct: false, feedback: 'Read Win again: a hero now wins when their own hearts reach 0. This attack would make Granny win.' },

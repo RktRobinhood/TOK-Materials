@@ -248,11 +248,11 @@
                     el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Free.'})]),
                     el('div.htp-step',null,[el('strong',{text:'4 · End turn'}),el('span',{text:'Fate moves 1 step.'})]),
                 ]),
-                row('❤','Win:','take the enemy hero to 0 hearts ('+D.hearts+' each). Check the rule tiles: the goal can change!'),
+                row('❤','Win:','take the enemy hero to 0 hearts ('+D.hearts+' each). Check Axioms: the goal can change!'),
                 row('⚡','Energy:','+1 each turn (up to 10), refilled every turn. Unused energy is lost.'),
                 row('💤','New creatures sleep:','they attack next turn (unless Swift).'),
                 row('⚔','Fights:','both creatures hit at the same time. Damage stays.'),
-                row('⚖','Rule cards (axioms):','change a rule for BOTH players. The rule tiles show what is in play.'),
+                row('⚖','Rule cards (axioms):','change a rule for BOTH players. Axioms shows the rules active now.'),
                 row('⧗','Fate track:','every End turn moves it 1 step: events reach NOW and happen (a free new rule, or a reset). Some cards bend time.'),
                 row('🎨','Colour wheel:','+1 attack against the colour you beat.'),
                 row('🎒','Bag:','use one item per turn for its energy. An item is used up only when you use it.'),
@@ -261,7 +261,7 @@
                     ['🛡️ Guard','attack it first'], ['💨 Swift','attacks at once'], ['🫧 Shield','ignores the first hit'], ['🌫️ Elusive','tactics can’t target it'],
                     ['▶ Entrance','works when played'], ['✝ Last Word','works when defeated'], ['⚡ Activate','pay energy; uses its attack'], ['✦ Spark','+1 energy once (2nd player)'],
                 ].map(([k,text])=>el('div.htp-key',null,[el('b',{text:k}),el('span',{text})]))),
-                el('p.small.muted',{text:'Point at any card, rule tile or Fate event to read it.'}),
+                el('p.small.muted',{text:'Point at any card, axiom tile or Fate event to read it.'}),
             ]),[{label:'Close'}],{onClose});
         },
 
@@ -309,7 +309,7 @@
                         // Rebuild the map after setting the flag so the Road unlock is visible immediately.
                         Rift.Router.replace('map');
                         Rift.UI.modal('Practice match won',el('p',{text:'Syllo: “In mathematics, axioms are starting rules. Change them and different conclusions can follow. Our shared axiom deck made you check which rules applied.”'}));
-                    }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: spend energy on more than one small creature. Keep a blocker ready and use End turn. Read Rules now before attacking or rewriting.'}),[
+                    }else Rift.UI.modal('Try Syllo again',el('p',{text:'Your cards and items are safe. Hint: spend energy on more than one small creature. Keep a blocker ready and use End turn. Read Axioms before attacking or rewriting.'}),[
                         {label:'Later'},{label:'Learn again',onclick:()=>Battles.learn('map')},{label:'Retry',primary:true,onclick:()=>Battles.story()},
                     ]);
                 },
