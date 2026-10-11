@@ -74,6 +74,8 @@ If Windows briefly locks the destination during syncing, the exporter retries pu
 
 The shipping check is `node --test tools/test/trailer.test.mjs`; the full game suite must also pass before committing. Browser QA covers title-page launch, narration and captions, pause/seek/replay, Close/Escape and focus restoration, native fullscreen and its viewport fallback, and the same animated film under both device and game motion preferences.
 
+When changing walk cutouts or source art, inspect all five travellers throughout the 23–29 second entrance. Each whole boot or claw must move with its leg, with no toe pixels left on the steady body layer. Check planted soles against the ground and inspect the newly exported MP4 as well as the canvas player.
+
 ## Classroom clue QR
 
 After `npm install --prefix tools`, run `node tools/build-clue-qr.mjs`. Pinned `qrcode` 1.5.4 generates the local `assets/clues/trace.png`; no QR library runs in the game. The encoded value is plain text `RIFT-TRACE`. `clues.html` supplies printable cards, a slide code and teacher answers, with manual-copy/offline fallbacks. Encoder documentation: https://github.com/soldair/node-qrcode .

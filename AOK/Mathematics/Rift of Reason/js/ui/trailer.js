@@ -36,7 +36,7 @@
             ]),
             el('div.trailer-stage', null, [canvas, captions, message]),
             el('div.trailer-controls', null, [toggle, seekBar, timeLabel, mute, cc, fullscreen]),
-            el('div.trailer-download', null, [el('a', { href: 'assets/trailer/Rift-of-Reason.mp4?v=20261011-single', download: 'Rift-of-Reason.mp4', text: 'Download trailer · MP4' })]),
+            el('div.trailer-download', null, [el('a', { href: 'assets/trailer/Rift-of-Reason.mp4?v=20261011-feet', download: 'Rift-of-Reason.mp4', text: 'Download trailer · MP4' })]),
             el('details.trailer-transcript', null, [el('summary', { text: 'Read the narration' }), el('p', { text: edit.lines.map(l => l.text).join(' ') })]),
         ]);
 

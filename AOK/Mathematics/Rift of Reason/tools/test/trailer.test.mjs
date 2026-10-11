@@ -521,7 +521,8 @@ test('a new film keeps its expanded view while the previous film\'s native exit 
 });
 
 function canvasTrace() {
-    const calls = [], images = [], state = { globalAlpha: 1, matrix: [1, 0, 0, 1, 0, 0] }, stack = [];
+    const calls = [], images = [], state = { globalAlpha: 1, matrix: [1, 0, 0, 1, 0, 0], clips: [] }, stack = [];
+    let currentPath = [];
     const concatenate = matrix => {
         const [a, b, c, d, e, f] = state.matrix, [g, h, i, j, k, l] = matrix;
         state.matrix = [a * g + c * h, b * g + d * h, a * i + c * j, b * i + d * j, a * k + c * l + e, b * k + d * l + f];
@@ -536,6 +537,9 @@ function canvasTrace() {
     for (const method of ['fillRect', 'drawImage', 'beginPath', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillText', 'arc', 'fill', 'stroke', 'translate', 'rotate', 'scale', 'transform', 'setTransform', 'rect', 'clip']) {
         target[method] = (...args) => {
             for (const arg of args) if (typeof arg === 'number') assert.ok(Number.isFinite(arg), method + ' received nonfinite geometry');
+            if (method === 'beginPath') currentPath = [];
+            if (['moveTo', 'lineTo', 'rect', 'closePath'].includes(method)) currentPath.push([method, ...args]);
+            if (method === 'clip') state.clips = [...state.clips, { rule: args[0] || 'nonzero', path: structuredClone(currentPath) }];
             if (method === 'setTransform') state.matrix = args.slice();
             if (method === 'transform') concatenate(args);
             if (method === 'translate') concatenate([1, 0, 0, 1, args[0], args[1]]);
@@ -544,7 +548,7 @@ function canvasTrace() {
             if (method === 'drawImage') {
                 const placement = calls.findLast(call => call[0] === 'translate');
                 const scale = calls.findLast(call => call[0] === 'scale');
-                images.push({ args: args.map(normal), alpha: state.globalAlpha, placement: placement?.slice(1), scale: scale?.slice(1), matrix: state.matrix.slice() });
+                images.push({ args: args.map(normal), alpha: state.globalAlpha, placement: placement?.slice(1), scale: scale?.slice(1), matrix: state.matrix.slice(), clips: structuredClone(state.clips) });
             }
             calls.push([method, ...args.map(normal)]);
         };
@@ -625,15 +629,55 @@ test('travellers articulate authentic leg pixels across the world with a steady 
     assert.equal(visibleImages(calm, actor.art).length, 1);
 });
 
+test('real boot and claw pixels belong to the moving cutouts rather than the steady body', async () => {
+    const sharp = (await import('sharp')).default;
+    const R = await rendererSetup(), heroes = R.data.trailer.scenes.find(scene => scene.id === 'heroes');
+    // Inspected frame-zero rows below the last coat, tail or wing pixels.
+    const feetBegin = { 'fox-girl': 333, 'frogling-boy': 264, 'raven-girl': 329, 'owlet-boy': 319, 'mothkin-girl': 416 };
+    const contains = (polygon, x, y) => {
+        let inside = false;
+        for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+            const [xi, yi] = polygon[i], [xj, yj] = polygon[j];
+            if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+        }
+        return inside;
+    };
+    for (const member of heroes.cast) {
+        const base = member.art.replace(/\/idle$/, ''), name = base.split('/')[1], walkId = base + '/walk', sheet = manifest.assets[walkId];
+        R.data.trailer.scenes = [{ ...heroes, start: 0, end: 40, cast: [{ ...member, delay: 0 }] }];
+        const body = visibleImages(rendered(R, 2), walkId).at(-1);
+        const clip = body.clips.at(-1);
+        assert.equal(clip.rule, 'evenodd', 'the steady body removes moving leg silhouettes');
+        const polygons = []; let polygon;
+        for (const [command, ...args] of clip.path) {
+            if (command === 'rect') { const [x, y, w, h] = args; polygons.push([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]); }
+            if (command === 'moveTo') { polygon = [args]; polygons.push(polygon); }
+            if (command === 'lineTo') polygon.push(args);
+        }
+        const { data } = await sharp(path.join(GAME_DIR, 'assets', sheet.file))
+            .extract({ left: 0, top: 0, width: sheet.frameWidth, height: sheet.frameHeight }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+        let checked = 0;
+        for (let y = feetBegin[name]; y < sheet.frameHeight; y++) for (let x = 0; x < sheet.frameWidth; x++) {
+            if (data[(y * sheet.frameWidth + x) * 4 + 3] < 20) continue;
+            checked++;
+            const steady = polygons.filter(p => contains(p, x + .5, y + .5)).length % 2;
+            assert.equal(steady, 0, name + ': visible foot pixel must not remain static at ' + x + ',' + y);
+        }
+        assert.ok(checked > 100, name + ': inspect the actual source feet, not a transparent fixture');
+    }
+});
+
 test('all five trailer travellers exchange foot contacts, lift only the swing foot, and pin each planted sole', async () => {
     const R = await rendererSetup();
     const heroes = R.data.trailer.scenes.find(scene => scene.id === 'heroes');
     const footLandmarks = {
-        'avatar/fox-girl': [[161, 377], [257, 377]],
-        'avatar/frogling-boy': [[65, 323], [162, 323]],
-        'avatar/raven-girl': [[91, 367], [192, 361]],
-        'avatar/owlet-boy': [[122, 351], [232, 347]],
-        'avatar/mothkin-girl': [[103, 431], [193, 431]],
+        // Bottom edges of visible source pixels (alpha >= 20), not invisible
+        // points below the shoes. Each x lies on that foot's actual sole.
+        'avatar/fox-girl': [[162, 376], [268, 376]],
+        'avatar/frogling-boy': [[72, 323], [164, 320]],
+        'avatar/raven-girl': [[117, 367], [173, 361]],
+        'avatar/owlet-boy': [[150, 352], [203, 342]],
+        'avatar/mothkin-girl': [[97, 430], [220, 429]],
     };
     for (const member of heroes.cast) {
         const base = member.art.replace(/\/idle$/, ''), walkId = base + '/walk';
