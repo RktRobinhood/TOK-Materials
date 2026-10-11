@@ -11,7 +11,7 @@ Status: **round 4** (8 October 2026), aligned to STORY.md round 4. **STORY.md Ap
 - **Required meetings:** each role lists the beats (`met`) a player must have seen before its death can be armed. A **disarmed tier 4 is stored as tier 3.**
 - **The lock:** when a peril resolves, at any tier, `risked:<npc>` is set; no other beat, and no possession, can kill that NPC afterwards.
 - **After a death:** silence (lines skipped, host slots fall back to a named stand-in) → the puzzle continues → the **Quiet Scene** opens the next chapter → the understudy **arrives later**, at a named beat → a candle at the Fair in the finale. **No understudy appears the moment `dead:` is set.**
-- **The switch:** "Characters can die" (on by default, with a one-line content note before the Prologue). Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path.
+- **The switch:** "Story characters can die" (new adventures default off after playtest repair #78; existing saves keep their choice). With it on, a one-line content note plays before the Prologue. Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path. Optional card-match stakes use their separate rules.
 - **Kuku** has one origin: Granny's hallway cuckoo clock, taken in the same sack as Granny in Ch1 and filed in the Tower's Evidence Locker; mentioned only if `dead:sundial`.
 - **Hum Charms are pairs** (STORY.md A.4): yours pairs with Granny's; Granny's also pairs with the "emergency" charm she gave **Coach Achilles** seventy years ago, which he never wore. **A charm only sounds when worn.** If she dies, the Constable gives you her charm; in the Quiet Scene you put it on beside yours and hum, and only your own hum comes back ("Only mine."). Achilles learns of her death from her lantern going out (A.13) and only then puts his charm on, so her charm, which you now wear, hums at the Ch3 Café. All of this is mentioned only if `dead:granny`.
 - Miss Quill is the Arch-Imp **by her own choice** (STORY.md A.7), `away:schoolteacher` after the Hall in every playthrough, Juror One in Ch3, and core trial 1 in Ch4, after which she sits down. **Mr Gumleaf** takes her class in every playthrough (an ordinary character, not an understudy). **Nudge** is the Algorithm's recurring imp. Judge Hoot is **he**.
@@ -351,7 +351,7 @@ A new core file, `js/core/cast.js`, gives `Rift.Cast`. **Who speaks for a role**
 | `arrived:<role>` | `true` | the arrival beat |
 | `away:schoolteacher` | `true` | the Ch2 Hall win (every tier) |
 | `cast@<scriptKey>` | e.g. `{ granny: 'achilles' }` | Dialogue, the first time a script plays with an understudy (for replays, 3.3) |
-| setting `charactersCanDie` | on / off (default on) | Settings |
+| setting `charactersCanDie` | on / off (new adventures default off; existing choices preserved, #78) | Settings |
 
 **Later scenes key on `dead:<npc>`, never on `stakes = 4`** (STORY.md). The arrival state is the only other thing they need, and the resolver handles it.
 
@@ -423,7 +423,7 @@ Four puzzles draw NPC art or names directly; each switches to the resolver:
 
 ### 3.9 The switch (STORY.md overrides round 1)
 
-STORY.md Appendix D decides this: one Settings switch, **"Characters can die"**, on by default, and a one-line content note before the Prologue ("In this story, characters can be lost."). **Off: nobody dies, no understudy steps in, no Quiet Scene, and the worst tier is Saved at a price** (a tier 4 is resolved as tier 3). There is **no `away:` gentle mode**; `away:` is used only for Miss Quill.
+STORY.md Appendix D decides this: one Settings switch, **"Story characters can die"**, default off for new adventures after playtest repair #78; existing saves preserve their selection. With it on, a one-line content note plays before the Prologue ("In this story, characters can be lost."). **Off: nobody dies, no understudy steps in, no Quiet Scene, and the worst tier is Saved at a price** (a tier 4 is resolved as tier 3). There is **no `away:` gentle mode**; `away:` is used only for Miss Quill. The story switch does not change optional card-match stakes.
 
 ### 3.10 Files to touch
 

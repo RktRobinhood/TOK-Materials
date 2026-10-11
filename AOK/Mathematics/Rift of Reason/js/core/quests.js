@@ -15,7 +15,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const MAIN_TYPES = ['story', 'puzzle', 'miniboss', 'boss'];
+    const MAIN_TYPES = ['story', 'puzzle', 'miniboss', 'boss', 'rift'];
     const COLOURS = { main: '#F2B632', side: '#5AB8FF' };
     const GLYPH = { new: '!', progress: '?' };
 
@@ -82,6 +82,10 @@
             });
         }
         const order = chapterOrder();
+        out.forEach(q => {
+            q.optionalEarlier = q.status !== 'done' && order.indexOf(q.chapter) < order.indexOf(s.chapter);
+            if (q.optionalEarlier) q.title = 'Optional earlier: ' + q.title;
+        });
         const rank = { progress: 0, new: 1, locked: 2, done: 3 };
         return out.sort((a, b) => (a.kind !== b.kind ? (a.kind === 'main' ? -1 : 1) : 0)
             || order.indexOf(b.chapter) - order.indexOf(a.chapter)
@@ -103,7 +107,10 @@
         const s = state || Rift.State.get();
         const open = list(s).filter(q => q.status === 'new' || q.status === 'progress');
         const here = q => q.chapter === s.chapter;
-        open.sort((a, b) => (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
+        const homeward = q => !s.flags['seen:finale.home'] && (q.node === 'k-summit' || (q.node === 'fair-finale' && s.flags['finale-open']));
+        const at = q => q.node === s.map.at;
+        open.sort((a, b) => (homeward(b) - homeward(a)) || (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
+            || (at(b) - at(a))
             || (a.status === b.status ? 0 : a.status === 'progress' ? -1 : 1));
         return open.slice(0, max || 3);
     }

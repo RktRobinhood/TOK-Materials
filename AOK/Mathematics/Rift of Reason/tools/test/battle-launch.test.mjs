@@ -115,7 +115,7 @@ test('a boss challenge shows its level and launches Expert with the built deck',
  assert.deepEqual(p.opponent.team.map(c=>c.species),Rift.data.decks.feed.creatures);
  assert.deepEqual(p.opponent.tactics,Rift.data.decks.feed.tactics);
  Rift.Battles.practice();assert.equal(g.routes.at(-1).params.opponent.ai,'normal');
- Rift.Battles.story();const st=g.routes.at(-1).params.opponent;assert.equal(st.ai,'normal');assert.equal(st.hearts,8);
+ Rift.Battles.story();const st=g.routes.at(-1).params.opponent;assert.equal(st.ai,'normal');assert.equal(st.hearts,12);
 });
 test('a trainer away on a side story cannot be challenged; the card school still offers Learn',()=>{
  const g=game();g.state.map.completed.push('stall-gallery');
@@ -127,4 +127,26 @@ test('a trainer away on a side story cannot be challenged; the card school still
  assert.equal(m.title,'Card school');assert.equal(m.buttons.map(b=>b.label).join(' | '),'Later | Learn the card game');
  g.Rift.Battles.storyOffer();assert.equal(g.modals.at(-1).title,'Card school','a time-rift jumper without the Road match only learns');
  g.state.flags['finale-open']=true;assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true,'home on the restored Fair');
+});
+
+test('the Fair invitation explains the required match, and Explore first keeps the next action clear',()=>{
+ const g=game();const toasts=[];g.Rift.UI.toast=text=>toasts.push(text);
+ g.Rift.Battles.introduction('map');const m=g.modals.at(-1);
+ const text=n=>typeof n==='string'?n:(n.textContent||'')+(n.children||[]).map(text).join(' ');
+ assert.match(text(m.body),/solve two stalls, then win Syllo’s safe practice card match.*Fair Gate/);
+ m.buttons.find(b=>b.label==='Explore first').onclick();
+ assert.match(toasts.at(-1),/two Fair stalls.*Fair Gate.*Win it/);
+ assert.equal(g.routes.length,0,'Explore keeps the player on the map');
+ g.Rift.Battles.learnFull('collection');assert.equal(g.routes.at(-1).params.full,true,'the full reference is replayable');
+ g.Rift.Battles.learn('collection');assert.equal(g.routes.at(-1).params.full,false,'the first lesson stays short by default');
+});
+
+test('Syllo’s loaned practice team always has an affordable opening creature after its draw',()=>{
+ const g=game();g.Rift.Battles.story();const p=g.routes.at(-1).params,E=g.Rift.Battle.Engine;
+ let s=E.createBattle({seed:p.seed,players:[p.player,p.opponent],axiomDeck:p.axiomDeck,options:{...p.battleOptions,mode:p.mode}});
+ assert.equal(s.players[0].energy,1);
+ s=E.applyAction(s,{type:'draw',choice:'deck'});
+ const playable=E.legalActions(s).filter(a=>a.type==='play'&&s.cards[a.cid].kind==='creature');
+ assert.ok(playable.length>0);
+ assert.ok(playable.some(a=>s.cards[a.cid].loaner&&E.playCost(s,a.cid)<=1));
 });

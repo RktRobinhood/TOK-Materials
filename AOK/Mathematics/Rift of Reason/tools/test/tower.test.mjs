@@ -6,6 +6,14 @@ const Rift = loadRift(['js/core/rift.js', 'js/puzzles/registry.js', 'js/puzzles/
 const def = Rift.Puzzles.get('tower');
 const I = def._internal;
 
+test('every supported story cover is a consistent base claim at every difficulty', () => {
+ const covers={post:'a postman',visitor:'a visitor',tutor:'a travelling tutor',lamp:'a lamp tester',actor:'a travelling actor',pond:'a pond inspector'};
+ for(const [cover,words] of Object.entries(covers))for(const difficulty of [1,2,3])for(let seed=0;seed<10;seed++){
+  const data=def.generate(Rift.makeRng('cover-'+cover+'-'+seed),difficulty,{cover});
+  assert.ok(data.base.some(b=>b.text==='I am '+words),'missing '+cover);assert.equal(def.check(data,def.solve(data)).solved,true,cover);
+ }
+});
+
 // ---- an independent brute force: all 2^n assignments, every clause ----
 
 function bruteWorlds(data) {

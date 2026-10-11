@@ -106,7 +106,7 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
 });
 
 test('guide mode allows only the expected action and runs the replies', () => {
-    const t = setup({}, { screen: 'battle-lesson' });
+    const t = setup({ full: true }, { screen: 'battle-lesson' });
     const { $ } = t;
     assert.equal(t.handle.step, 0);
     assert.equal(t.spoken[0].speaker, 'granny');
@@ -285,7 +285,7 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     assert.equal(t.root.querySelectorAll('.b-fate-reel .b-fs.now').length, 1);
     assert.ok($('.b-fate-track > .b-fate-now'));
     const turns = t.handle.state.fate.until;
-    assert.match($('.b-fate-sum').textContent, new RegExp('^New rule in ' + turns + ' turns.+: .+ · '));
+    assert.match($('.b-fate-sum').textContent, new RegExp('^Upcoming · New rule in ' + turns + ' turnsNot active yet: .+ · '));
     assert.equal($('.b-fate-label').dataset.tip, 'Fate track');
     assert.match($('.b-fate-label').dataset.tipDetail, /Each End turn moves every event 1 space closer/);
     // The next event (further than 3 spaces) waits at the edge and says when; hovering it explains it.
@@ -450,6 +450,27 @@ function prepared(cfg, edit) {
     edit(s, move);
     return setup(Object.assign({}, practice, { initialState: s }));
 }
+
+test('a ready Astrophysicat describes both attack and activation, and either action works', () => {
+    for (const choice of ['attack', 'activate']) {
+        const t = prepared({ me: ['astrophysicat', 'kardashiant'], opp: ['kardashiant'] }, (s, move) => move('p0c0', 0, 'board'));
+        t.$('.my-board [data-cid="p0c0"]').click();
+        assert.match(t.$('.b-ask').textContent, /choose a glowing enemy to attack, or press Activate/);
+        assert.match(t.$('.b-ask').textContent, /Activating uses its attack this turn/);
+        assert.ok(t.$('.b-hero[data-target="h1"]').classList.contains('valid'));
+        const hp = t.handle.state.players[1].hearts;
+        if (choice === 'attack') {
+            t.$('.b-hero[data-target="h1"]').click();
+            assert.equal(t.handle.state.players[1].hearts, hp - 1);
+            assert.equal(t.handle.state.cards.p0c0.attacks, 1);
+        } else {
+            t.$('.b-prompt .btn.gold').click();
+            assert.equal(t.handle.state.players[0].hand.length, 1);
+            assert.equal(t.handle.state.cards.p0c0.activated, true);
+        }
+        t.handle.destroy();
+    }
+});
 const hover = (t, sel) => { t.$(sel).dispatchEvent(mouse({ type: 'pointerenter' })); t.g.flush(); return t.$('.b-inspect').classList.contains('show') ? t.$('.b-inspect').textContent : ''; };
 
 test('practice and story can be left after a confirm step; the lesson and risked matches have no Leave match', () => {
@@ -505,7 +526,7 @@ test('Fate draw buttons (only with timeDraws) show the new count in short words'
     const timeDraws = s => { s.options.timeDraws = true; };
     const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
     assert.match(r.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset \(no change now\)\./);
-    assert.match(r.$('.b-fate-sum').textContent, /^Reset in 5 turnsAll rules back to basic · /);
+    assert.match(r.$('.b-fate-sum').textContent, /^Upcoming · Reset in 5 turnsNot active yet: all rules will return to basic · /);
     r.handle.destroy();
     const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
     assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 4\./);

@@ -62,3 +62,21 @@ test('side content is blue: one entry per trainer, and side stories once they ar
     Rift.State.update(s => { s.flags['side.' + Rift.SideStories.get(story.sideId).n] = 2; });
     assert.equal(Rift.Quests.list().find(q => q.id === story.id).status, 'done');
 });
+
+test('each chapter jump foregrounds a playable current objective with fresh or unfinished earlier quests', () => {
+ for(const previous of [false,true])for(const chapter of Object.keys(game().data.chapters)){
+  const Rift=game();
+  Rift.State.update(s=>{
+   if(previous){Rift.World.complete(s,'burrow');Rift.World.complete(s,'fair-gate');s.map.visitCount['stall-pattern']=1;}
+   Rift.World.jumpToChapter(s,chapter);
+  });
+  const tracked=Rift.Quests.tracked();
+  assert.equal(tracked[0].chapter,chapter,chapter);assert.equal(tracked[0].kind,'main');assert.equal(Rift.World.lockReason(Rift.State.get(),tracked[0].node),null);
+  if(previous&&chapter!=='prologue')assert.ok(Rift.Quests.list().filter(q=>q.chapter==='prologue'&&q.status!=='done').every(q=>q.optionalEarlier&&q.title.startsWith('Optional earlier:')));
+ }
+});
+
+test('Core completion foregrounds Summit Rift ahead of unfinished puzzles and optional challenges', () => {
+ const Rift=game();Rift.State.update(s=>{Rift.World.jumpToChapter(s,'ch4');s.flags['finale-open']=true;s.map.visitCount['k-oracle']=1;Rift.World.complete(s,'k-core');});
+ assert.equal(Rift.Quests.tracked()[0].node,'k-summit');
+});

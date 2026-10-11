@@ -653,7 +653,7 @@
             el('span.vg-rule', {}, [el('b', { text: '😈 Imps' }), ' always lie']),
             hidden
                 ? el('span.vg-rule.count', {}, [el('b', { text: 'How many imps? ' }), 'Nobody says. ' + (data.note || 'No imps is a possible answer.')])
-                : el('span.vg-rule.count', {}, [el('b', { text: k === 1 ? 'One imp' : cap(NUM[k]) + ' imps' }), ' hide in the square']),
+                : el('span.vg-rule.count', {}, [el('b', { text: k === 1 ? 'One imp' : cap(NUM[k]) + ' imps' }), k === 1 ? ' hides in the square' : ' hide in the square']),
             el('span.vg-rule.muted', { text: 'neighbours = the villagers either side' }),
         ]));
 

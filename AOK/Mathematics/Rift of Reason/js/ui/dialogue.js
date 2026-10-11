@@ -42,24 +42,28 @@
         return { name: id, art: 'npc/' + id + (pose ? '/' + pose : '') };
     }
 
-    function textSpeed(ctx) {
+    function textDelay(ctx) {
         const s = Rift.State.get();
-        const base = (s && s.settings && s.settings.textSpeed) || 1;
-        return ctx.quiet ? base * 0.55 : base;
+        const settings = s && s.settings || {};
+        if (settings.textInstant) return 0;
+        const speed = settings.textSpeed == null ? 1 : Math.max(0, Math.min(1, Number(settings.textSpeed) || 0));
+        const delay = 72 - 60 * speed;
+        return ctx.quiet ? delay / 0.55 : delay;
     }
 
-    function typewriter(node, text, speed) {
+    function typewriter(node, text, delay) {
         let i = 0;
         let done = false;
         let timer = null;
         return {
             start() {
                 return new Promise(resolve => {
+                    if (!delay) { node.textContent = text; done = true; resolve(); return; }
                     const tick = () => {
                         i += 1;
                         node.textContent = text.slice(0, i);
                         if (i >= text.length) { done = true; resolve(); return; }
-                        timer = setTimeout(tick, 22 / (speed || 1));
+                        timer = setTimeout(tick, delay);
                     };
                     this.finish = () => { clearTimeout(timer); node.textContent = text; done = true; resolve(); };
                     tick();
@@ -89,8 +93,8 @@
     function present(layer, ctx, node, box, textNode, text) {
         return new Promise(resolve => {
             show(layer, ctx, node);
-            const tw = typewriter(textNode, text, textSpeed(ctx));
-            let readyAt = 0;
+            const tw = typewriter(textNode, text, textDelay(ctx));
+            let readyAt = ctx.quiet ? Infinity : 0;
             let settled = false;
             tw.start().then(() => { readyAt = Date.now() + (ctx.quiet ? 1200 : 0); });
             const advance = ev => {

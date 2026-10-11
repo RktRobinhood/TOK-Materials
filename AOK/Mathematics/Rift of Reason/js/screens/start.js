@@ -1,6 +1,6 @@
 /*
- * Title screen and avatar select. The preview shows the avatar's map perk and its Card Arena power
- * (Rift.PowerView.panel, js/ui/powers.js).
+ * Title screen and avatar select. Review the roster details before saving.
+ * The preview shows the starting map perk; Card Arena powers are explained with card battles.
  */
 (function (root) {
     'use strict';
@@ -50,10 +50,10 @@
         mount(rootNode) {
             let pick = { type: 'owlet', variant: 'boy' };
             const preview = el('div.avatar-preview');
-            // The real name goes into every backup code, so the teacher can see whose code it is.
-            const realInput = el('input.name-input', { maxLength: 40, placeholder: 'Your real name (required)', value: '', 'aria-label': 'Your real name' });
+            // The roster name travels in every backup code so the teacher can identify it.
+            const realInput = el('input.name-input', { maxLength: 40, placeholder: 'Roster name (required)', value: '', 'aria-label': 'Roster name' });
             const nameInput = el('input.name-input', { maxLength: 16, placeholder: 'Nickname in the game (optional)', value: '', 'aria-label': 'Nickname' });
-            const nameNote = el('p.small.muted', { text: 'Your real name is saved in your backup code for your teacher. It cannot be changed later.' });
+            const nameNote = el('p.small.muted', { text: 'Use the name your teacher recognises. It is saved in your backup code. Check and edit your details before you begin.' });
             const grid = el('div.avatar-grid');
 
             function renderPreview() {
@@ -64,8 +64,7 @@
                     el('h2', { text: a.name + ' (' + pick.variant + ')' }),
                     el('div.muted', { text: a.looks[pick.variant] }),
                     el('div.panel.perk', null, [el('div.small.muted', { text: 'On the map' }), el('strong', { text: '✨ ' + a.perk.name }), el('div', { text: a.perk.text })]),
-                    // The Card Arena power of this avatar and variant (design/AVATARS.md 1.6).
-                    Rift.PowerView ? Rift.PowerView.panel(pick) : null,
+                    el('p.small.muted', { text: 'Your Card Arena power is explained when you learn card battles.' }),
                 ]));
                 grid.querySelectorAll('.avatar-option').forEach(n => n.classList.toggle('selected', n.dataset.key === pick.type + '-' + pick.variant));
             }
@@ -95,25 +94,34 @@
                         onclick() {
                             const realName = Rift.State.cleanName(realInput.value);
                             if (!realName) {
-                                Rift.UI.toast('Type your real name first.');
+                                Rift.UI.toast('Type your roster name first.');
                                 realInput.focus();
                                 return;
                             }
                             const nickname = nameInput.value.trim().slice(0, 16) || realName.split(' ')[0].slice(0, 16);
-                            Rift.State.update(s => {
-                                s.avatar = { type: pick.type, variant: pick.variant, nickname, realName };
-                                Rift.World.start(s);
-                            });
-                            Rift.State.saveNow();
-                            Rift.Audio.sfx('success');
-                            const go = () => Rift.Router.replace('map', { arrive: true });
-                            // The one-line content note before the Prologue (STORY.md App. D), while the switch is on.
-                            if (Rift.Story && Rift.Story.canDie()) {
-                                Rift.UI.modal('Before you begin', el('div.stack', null, [
-                                    el('p', { text: 'In this story, characters can be lost.' }),
-                                    el('p.small.muted', { text: 'You can switch this off in Settings: "Characters can die".' }),
-                                ]), [{ label: 'Begin', primary: true, required: true, onclick: go }]);
-                            } else go();
+                            const avatar = { type: pick.type, variant: pick.variant, nickname, realName };
+                            const a = Rift.data.avatars[pick.type];
+                            Rift.UI.modal('Check your details', el('div.stack', null, [
+                                el('p', null, [el('strong', { text: 'Roster name: ' }), realName]),
+                                el('p', null, [el('strong', { text: 'Game nickname: ' }), nickname]),
+                                el('p', null, [el('strong', { text: 'Traveller: ' }), a.name + ' (' + pick.variant + ')']),
+                                el('p.small.muted', { text: 'Edit anything before starting. Your roster name goes into your backup code.' }),
+                            ]), [
+                                { label: 'Edit details', onclick() { realInput.focus(); } },
+                                { label: 'Start adventure', primary: true, onclick() {
+                                    Rift.State.update(s => { s.avatar = avatar; Rift.World.start(s); });
+                                    Rift.State.saveNow();
+                                    Rift.Audio.sfx('success');
+                                    const go = () => Rift.Router.replace('map', { arrive: true });
+                                    // The optional content note follows the saved detail review.
+                                    if (Rift.Story && Rift.Story.canDie()) {
+                                        Rift.UI.modal('Before you begin', el('div.stack', null, [
+                                            el('p', { text: 'In this story, characters can be lost.' }),
+                                            el('p.small.muted', { text: 'You can switch this off in Settings: "Story characters can die".' }),
+                                        ]), [{ label: 'Begin', primary: true, required: true, onclick: go }]);
+                                    } else go();
+                                } },
+                            ]);
                         },
                     }),
                 ]),

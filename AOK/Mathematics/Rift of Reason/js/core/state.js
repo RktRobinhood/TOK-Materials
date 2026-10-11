@@ -49,7 +49,7 @@
             perksUsed: {},         // perk id -> chapter it was used in
             tutorialsSeen: {},     // puzzle type -> tutorial offered (also filled for old saves)
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0, powerUses: {} },
-            settings: { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, textSpeed: 1, calm: false, charactersCanDie: true },
+            settings: { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, textSpeed: 1, textInstant: false, calm: false, charactersCanDie: false },
             backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.

@@ -7,7 +7,7 @@ import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 async function game(type='puzzle',difficulty=1,clock=null,prep=null){
  const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
- const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;
+ const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;state.flags['learning-hint:fake']=true;
  Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
  Rift.el=(...a)=>new Node(...a);
  const puzzles=type==='boss'?[{id:'fake',difficulty},{id:'fake',difficulty}]:[{id:'fake',difficulty}];
@@ -77,7 +77,7 @@ test('a boss stage with skipWhen is left out while its condition holds (the Hall
   assert.equal(g.root.querySelector('.stage').textContent,torn?'Fake':'Fake  ·  stage 1 of 2');
  }
 });
-test('Witness marks wrong claims without answers, then explains one on the second check',()=>{
+test('Witness explains each rejected claim from the evidence on the first check',()=>{
  const Rift=loadRift(['js/core/rift.js','js/puzzles/registry.js','js/puzzles/witness.js']);
  const p=Rift.Puzzles.get('witness');const data=p.generate(Rift.makeRng(6),1);const root=new Node();
  p.mount(root,data,{el:(...a)=>new Node(...a),sfx:()=>{},submit:a=>p.check(data,a)});
@@ -85,8 +85,7 @@ test('Witness marks wrong claims without answers, then explains one on the secon
  const send=all(root).find(x=>x.textContent==='Give my testimony');send.onclick();
  const rows=all(root).filter(x=>x.className.split(' ').includes('wit-claim'));
  assert.ok(rows.every(x=>x.classList.contains('wit-wrong')));
- assert.ok(rows.every(x=>x.querySelector('.wit-reason').textContent==='Check this claim against the scene.'));
- send.onclick();assert.equal(rows.filter(x=>x.querySelector('.wit-reason').textContent.startsWith('Why:')).length,1);
+ assert.ok(rows.every(x=>/^(Supporting evidence|Contradicting evidence|Missing evidence):/.test(x.querySelector('.wit-reason').textContent)));
 });
 
 test('loot is rolled only after success and the stage debrief, never on arrival or a wrong check',async()=>{
@@ -100,4 +99,69 @@ test('strategy journal is updated after a completed checked encounter, not arriv
  const g=await game(),notes=[];g.Rift.Rumours={recordWin:(s,id)=>notes.push(id)};g.Rift.World.rollLoot=()=>({species:null});
  g.api().submit(false);g.api().submit(true);assert.equal(notes.length,0);
  await g.modals.at(-1).buttons[0].onclick();assert.deepEqual(notes,['fake']);
+});
+
+test('first encounter bubble uses the introduction, repeat visits use the reminder',async()=>{
+ for(const repeat of [false,true]){
+  const g=await game('puzzle',1,null,R=>{
+   Object.assign(R.data.map.nodes.test,{intro:'first',reminder:'again'});
+   R.data.script={first:[{s:'narrator',t:'Welcome to this task.'}],again:[{s:'narrator',t:'Back again?'}]};
+   if(repeat)R.State.get().map.visitCount.test=1;
+  });
+  assert.equal(g.root.querySelector('.bubble').textContent,repeat?'Back again?':'Welcome to this task.');
+ }
+});
+
+test('first topic hint is free, keeps stars, and remains used after the encounter is remounted',async()=>{
+ const g=await game('puzzle',1,null,R=>{delete R.State.get().flags['learning-hint:fake'];});
+ function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
+ const hint=all(g.root).find(x=>x.textContent.startsWith('💡 Hint'));
+ assert.match(hint.textContent,/free/);hint.onclick();
+ assert.equal(g.state.health,5);assert.equal(g.state.stats.hintsUsed,0);assert.equal(g.state.flags['learning-hint:fake'],true);
+ g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();
+ assert.match(g.modals.at(-1).body.children[0].textContent,/★★★/);
+ assert.ok(g.state.flags['reasoning:test'][0].feedback);
+});
+
+test('a puzzle-owned correct reflection skips the generic Why and completes once',async()=>{
+ let whyCalls=0;
+ const g=await game('miniboss',3,null,R=>{
+  const p=R.Puzzles.get('fake');p.check=(_,a)=>({solved:a===true,feedback:'The model used counts.',meta:{reflectionComplete:a===true}});
+  p.why=()=>{whyCalls++;return {question:'Same question',options:['a'],correct:0};};
+ });
+ g.api().submit(false);assert.equal(g.state.stats.puzzlesSolved,0);
+ g.api().submit(true);const waiting=g.modals.at(-1).buttons[0].onclick();
+ assert.equal(whyCalls,0);await waiting;assert.equal(g.modals.at(-1).title,'Solved!');assert.equal(g.state.stats.puzzlesSolved,1);
+ g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,1);
+});
+
+test('accepted answer reaches layout-specific reflection and defensible alternatives are accepted',async()=>{
+ let received;
+ const g=await game('miniboss',3,null,R=>{R.Puzzles.get('fake').why=(_,answer)=>{
+  received=answer;return {question:'Your reason?',options:['One view','Another view','Unsupported'],correct:0,correctOptions:[0,1],explain:'Both supported views fit.'};
+ };});
+ g.api().submit(true);const waiting=g.modals.at(-1).buttons[0].onclick();
+ assert.equal(received,true);
+ g.modals.at(-1).body.children.find(x=>x.textContent==='Another view').onclick();
+ assert.equal(g.modals.at(-1).title,'Exactly.');g.modals.at(-1).buttons[0].onclick();await waiting;
+ assert.equal(g.state.health,5);assert.equal(g.state.map.completed.length,1);
+});
+
+test('reload after a local reflection restores completion and its costs without asking or counting it twice',async()=>{
+ const prep=R=>{R.Puzzles.get('fake').check=(_,a)=>({solved:a===true,feedback:'Checked counts.',meta:{reflectionComplete:a===true,reflectionExplain:'Counts do not show reasons.'}});};
+ const first=await game('miniboss',3,null,prep);
+ first.api().submit(false);first.api().submit(true);
+ const saved=first.Rift.State.decode('save',first.Rift.State.encode('save',first.state));first.handle.destroy();
+ const second=await game('miniboss',3,null,R=>{Object.assign(R.State.get(),saved);prep(R);R.Puzzles.get('fake').why=()=>{throw Error('Duplicate question');};});
+ assert.equal(second.modals.at(-1).title,'Stage solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.map.visitCount.test,1);
+ await second.modals.at(-1).buttons[0].onclick();
+ assert.equal(second.modals.at(-1).title,'Solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.flags['reflection:test'],undefined);
+ assert.match(second.modals.at(-1).body.children[0].textContent,/1 wrong checks/);assert.equal(second.state.flags['reasoning:test'][0].reflection,'Counts do not show reasons.');
+});
+
+test('Owlet first-topic hint keeps stars and leaves its chapter perk available',async()=>{
+ const g=await game('puzzle',1,null,R=>{delete R.State.get().flags['learning-hint:fake'];});
+ function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
+ all(g.root).find(x=>x.textContent.startsWith('🦉 Free hint')).onclick();
+ assert.equal(g.state.flags['learning-hint:fake'],true);assert.equal(g.state.perksUsed['free-hint'],undefined);assert.equal(g.state.stats.hintsUsed,0);assert.equal(g.state.health,5);
 });

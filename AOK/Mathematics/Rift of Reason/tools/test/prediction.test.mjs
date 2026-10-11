@@ -220,3 +220,90 @@ test('hints, why and text', () => {
     assert.equal(P.family, 'Pattern breakers');
     assert.ok(P.tok.length > 20 && P.blurb.length > 20);
 });
+
+test('prediction scopes its explanation to its actual evidence and confidence rule', () => {
+    for (const d of [1, 2, 3]) {
+        const data = P.generate(Rift.makeRng('model-evidence-' + d), d);
+        const w = P.why(data);
+        assert.match(w.explain, /^This machine counted/);
+        assert.match(w.explain, /not a guarantee/);
+        assert.match(w.explain, /different evidence or rules/);
+        assert.match(w.explain, d === 3 ? /one added to each count/ : /recorded counts/);
+    }
+    assert.match(P.tok, /^This machine/);
+    assert.match(P.tok, /other models/);
+});
+
+test('core choices are neutral, with the copied starting weights identified as an assumption', () => {
+    for (const record of [{ followed: 8, offered: 10 }, { followed: 1, offered: 30 }, { followed: 0, offered: 0 }]) {
+        const data = P.generate(Rift.makeRng('neutral-core'), 3, { mode: 'core', ...record });
+        assert.deepEqual(plain(data.options.map(o => o.label)), ['Left door', 'Right door']);
+        assert.match(data.prompt, /Left door or right door/);
+        const w = P.why(data);
+        assert.match(w.options[w.correct], /assumed link/);
+        assert.match(w.explain, /does not show whether you depended on a voice or why you chose/);
+        assert.equal(P.check(data, P.solve(data)).solved, true);
+    }
+});
+
+test('only a completed local reflection marks reflectionComplete for the encounter', () => {
+    const data = P.generate(Rift.makeRng('reflection-contract'), 3);
+    const answer = P.solve(data);
+    const win = P.check(data, answer);
+    assert.equal(win.meta.reflectionComplete, true);
+    assert.equal(win.meta.reflectionExplain, P.why(data).explain, 'the same explanation can be saved in the Journal');
+    const wrong = P.check(data, { ...answer, debrief: (answer.debrief + 1) % 4 });
+    assert.equal(wrong.solved, false);
+    assert.equal(wrong.meta?.reflectionComplete, undefined);
+    const early = P.check(data, { ...answer, choices: answer.choices.slice(0, data.warmup) });
+    assert.equal(early.meta?.reflectionComplete, undefined);
+});
+
+test('generated Gallery themes use matching neutral inner leads and pattern echoes retain the original line', () => {
+    const R = loadRift(['js/core/rift.js', 'data/script/leads.js', 'data/script/lesson1.js', 'data/script/lesson4.js', 'js/puzzles/registry.js', 'js/puzzles/venn.js']);
+    const lead = R.data.leads['venn:gallery'].inner;
+    for (const text of Object.values(lead)) assert.doesNotMatch(text, /lobster|trumpet|wizard|dragon/i, 'the lead does not impose a theme');
+    const P = R.Puzzles.get('venn');
+    for (const theme of P.engine.THEMES) {
+        const data = P.generate(R.makeRng('gallery-' + theme.id), 1, { theme: theme.id });
+        assert.ok(data.premises.length > 0, 'neutral premises/conclusion language applies to each supported theme');
+    }
+    const text = 'Roll up! My little apprentice guesses a rule from the numbers on my board!';
+    assert.ok(JSON.stringify(R.data.script['prologue.pattern']).includes(text));
+    assert.ok(JSON.stringify(R.data.script['ch4.core.copy']).includes(text));
+});
+
+test('variant leads invite checking the active board without imposing a number or result', () => {
+    const R = loadRift(['js/core/rift.js', 'data/script/leads.js']);
+    const L = R.data.leads;
+    assert.doesNotMatch(JSON.stringify(L['rule-hunter:pattern']), /Number six|Five in a row|dimmer/);
+    assert.doesNotMatch(JSON.stringify(L['venn:bridge']), /lobster|trumpet/);
+    assert.doesNotMatch(JSON.stringify(L['chart-fixer']), /ninety|weren.t/);
+    assert.doesNotMatch(JSON.stringify(L['sorting']), /miss it again/);
+    assert.doesNotMatch(JSON.stringify(L['oracle']), /corner|square/);
+    assert.match(L['prediction'].inner.mothkin, /counts and the tie rules/);
+    assert.match(L['line-drawer:graph'].inner.mothkin, /can show/);
+});
+
+test('the ending recognises missing evidence without claiming questions cannot be predicted', () => {
+    const R = loadRift(['js/core/rift.js', 'data/script/lesson4.js']);
+    const ending = R.data.script['ch4.core.win'];
+    const choiceAt = ending.findIndex(s => s.choice && s.choice.some(o => o.flag === 'wonder'));
+    assert.ok(choiceAt >= 0, 'the final question is still a player choice');
+    const line = ending.slice(choiceAt + 1).find(s => s.note)?.note;
+    assert.match(line, /guess missed your chosen question/);
+    assert.match(line, /moves, not your reasons/);
+    assert.match(line, /different model do better/);
+    assert.doesNotMatch(JSON.stringify(ending), /cannot predict a question|Only a click/);
+});
+
+test('combat colour explanations identify the hierarchy as a game rule', () => {
+    const R = loadRift(['js/core/rift.js', 'data/axioms.js']);
+    const wheel = R.data.wheel;
+    assert.match(wheel.note, /game rule.*does not rank Ways of Knowing/);
+    for (const colour of wheel.order) {
+        assert.match(wheel.lines[colour], /^Game rule:/);
+        assert.match(wheel.lines[colour], /TOK prompt:/);
+    }
+    assert.match(wheel.memory, /^Game rule:/);
+});

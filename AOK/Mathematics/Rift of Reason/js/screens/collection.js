@@ -288,6 +288,7 @@
                 ]),
                 el('div.row.wrap', { style: { marginBottom: '14px' } }, [
                     el('button.btn', { text: 'Learn the card game', onclick: () => Rift.Battles.learn('collection') }),
+                    el('button.btn', { text: 'Full card lesson', onclick: () => Rift.Battles.learnFull('collection') }),
                     el('button.btn', { text: '🂠 Practice battle', title: 'Safe sparring: nothing at stake', onclick: () => Rift.Battles.practice() }),
                     el('button.btn', { text: '👻 Battle a classmate\'s code', onclick: () => Rift.Battles.askGhost() }),
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
@@ -326,14 +327,15 @@
                 slider('sfx', 'Sound effects'),
                 slider('ambience', 'Ambience'),
                 slider('music', 'Music & jingles'),
-                slider('textSpeed', 'Text speed'),
+                slider('textSpeed', 'Slow → Fast'),
+                el('label.row', null, [el('input', { type: 'checkbox', checked: !!s.settings.textInstant, onchange(ev) { Rift.State.update(st => { st.settings.textInstant = ev.target.checked; }); } }), el('span', { text: 'Instant text: show the whole line at once' })]),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: !!s.settings.calm, onchange(ev) { Rift.State.update(st => { st.settings.calm = ev.target.checked; }); } }),
                     el('span', { text: 'Calm motion: reduce animations and keep catch rings still' }),
                 ]),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: s.settings.charactersCanDie !== false, onchange(ev) { Rift.State.update(st => { st.settings.charactersCanDie = ev.target.checked; }); } }),
-                    el('span', { text: 'Characters can die: when off, nobody in the story is lost at the worst moment' }),
+                    el('span', { text: 'Story characters can die: off in new games. This does not change optional card-match stakes.' }),
                 ]),
                 el('h3', { text: 'Backup code' }),
                 el('p.small.muted', { text: 'Your adventure is saved only in this browser. Copy this code and keep it somewhere safe, like an email to yourself. To carry on at home or on another laptop, choose "Load a backup code" on the title screen.' }),

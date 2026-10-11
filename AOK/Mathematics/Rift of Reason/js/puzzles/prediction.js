@@ -1,7 +1,7 @@
 /*
  * The Prediction Machine: Memory / pattern breakers (chapter 4, lesson 4).
  *
- * "AI is just probability", from the inside. The Algorithm plays a guessing
+ * A toy frequency model, from the inside. The Algorithm plays a guessing
  * game. Each round it LOCKS IN a guess before you choose; you win the rounds
  * it gets wrong. Its whole "mind" is a frequency table of your past choices:
  *
@@ -26,10 +26,11 @@
  * are never trusted (if they are sent and do not match the replay, it fails).
  *
  * Core mode (Ch4 core trial 3, the Copy; opts { mode: 'core', autoFirst: 'copy.helped' }):
- * two moves, "Follow my voice" / "My own way". The Copy starts with your whole-game
+ * two neutral moves, Left / Right. The Copy starts with your whole-game
  * record (flags voice.followed of voice.offered, or opts.followed / opts.offered),
  * scaled to at most 10 and stored as data.prior: extra counts in its overall table.
- * So it bets you will do what you usually do; beat it by not doing that. With
+ * It assumes followed choices map to Left and other choices to Right. This is
+ * an assumption, not evidence of which door you prefer or why you choose. With
  * autoFirst (true, or a flag name that is set) the first round is played for you,
  * perfectly ("Just this once").
  */
@@ -175,8 +176,10 @@
 
     function whyFor(data) {
         if (data.mode === 'core') {
+            const hasRecord = data.record && data.record.offered > 0;
             const c = shuffleOptions(data.whyShuffle, [
-                'Only how often you followed your voice before, and what you did after your last choice.',
+                hasRecord ? 'Only your past voice-choice counts, its assumed link to Left and Right, and the moves recorded here.'
+                    : 'Only its starting weights, their assumed link to Left and Right, and the moves recorded here.',
                 'What you were thinking when you chose.',
                 'Who you really are. It is you, but always right.',
                 'The future: which choice you were going to make.',
@@ -185,7 +188,9 @@
                 question: 'What did the Copy actually know about you?',
                 options: c.options,
                 correct: c.correct,
-                explain: 'It never knew you. It counted how often you followed your voice, and what you did after your last choice, and bet on the biggest count. When you stopped doing what you usually do, it had nothing else.',
+                explain: (hasRecord ? 'This Copy scaled your recorded voice-choice counts to at most 10 starting weights for Left and Right.'
+                    : 'This Copy had no earlier voice-choice record. It started with Left 1, Right 0 as a default assumption.')
+                    + ' Then it counted the moves you made here. That link was its assumption. You beat its guesses; that does not show whether you depended on a voice or why you chose. What evidence would a different model need?',
             };
         }
         const s = shuffleOptions(data.whyShuffle, [
@@ -199,7 +204,7 @@
             question: 'What did the machine actually know about you?',
             options: s.options,
             correct: s.correct,
-            explain: 'It never saw inside your head. It counted ' + contextWords(data.order) + ', and bet on the biggest count. Its "confidence" was just a ratio of counts. Once you stopped repeating yourself, it had nothing else.',
+            explain: 'This machine counted ' + contextWords(data.order) + ', then bet on the biggest count. Its "confidence" was ' + (data.smoothing ? 'a ratio with one added to each count' : 'a ratio of recorded counts') + ', not a guarantee. This model recorded your moves, not your reasons. Would a model with different evidence or rules behave differently?',
         };
     }
 
@@ -216,8 +221,8 @@
 
     // Core mode (header). Pure when opts.followed / opts.offered are given; otherwise it reads the save.
     const CORE_OPTIONS = [
-        { label: 'Follow my voice', glyph: '🗨', hue: '#A05CF0' },
-        { label: 'My own way', glyph: '✋', hue: '#3FE0D0' },
+        { label: 'Left door', glyph: '◀', hue: '#A05CF0' },
+        { label: 'Right door', glyph: '▶', hue: '#3FE0D0' },
     ];
     function generateCore(rng, d, opts) {
         const flags = (Rift.State && Rift.State.get && (Rift.State.get() || {}).flags) || {};
@@ -231,7 +236,7 @@
             difficulty: d,
             mode: 'core',
             theme: 'copy',
-            prompt: 'The Copy bets on what you will do. Follow your voice, or not?',
+            prompt: 'The Copy bets on your next move. Left door or right door?',
             options: CORE_OPTIONS.map(o => Object.assign({}, o)),
             order: 2,
             smoothing: true,
@@ -292,7 +297,7 @@
         if (answer.debrief !== w.correct) {
             return { solved: false, partial: 0.7, feedback: 'You beat the machine! But think again: what did it really know about you?' };
         }
-        return { solved: true, partial: 1, feedback: 'You beat it. It only ever knew ' + contextWords(data.order) + '.' };
+        return { solved: true, partial: 1, feedback: 'You beat this model\'s guesses. It recorded your moves, not your reasons.', meta: { reflectionComplete: true, reflectionExplain: w.explain } };
     }
 
     // ------------------------------------------------------------------
@@ -497,6 +502,11 @@
                 el('span.pm-piece', { text: '3. "confidence" = ' + (data.smoothing ? '(count + 1) ÷ (total + ' + n + ')' : 'count ÷ total') }),
             ]);
             brain.appendChild(rules);
+            if (data.mode === 'core') {
+                brain.appendChild(el('div.pm-fallback', { text: 'Starting weights: Left ' + data.prior[0] + ', Right ' + data.prior[1] + '. '
+                    + (data.record.offered ? 'The Copy mapped your past voice choices to these doors: followed → Left, other → Right. That link is its assumption.'
+                        : 'No earlier voice-choice record: these are default starting weights, not evidence of your door preference.') }));
+            }
 
             // the table for the model's own order; the row it is using now glows
             const k = data.order;
@@ -828,7 +838,7 @@
         colour: 'memory',
         family: 'Pattern breakers',
         blurb: 'The Algorithm says it can read your mind. Each round it locks in a guess before you choose. Can you surprise it?',
-        tok: 'A prediction machine does not know you: it counts what you did before and bets on the most frequent pattern. Its "confidence" is just a ratio, and once you understand the counting, you can beat it.',
+        tok: 'This machine uses a frequency table of recorded moves. Its "confidence" is a count-based ratio, not a guarantee or an explanation of your reasons. You tested this model; compare its evidence and assumptions with those of other models.',
 
         generate(rng, difficulty, opts) {
             const d = Math.max(1, Math.min(3, Math.round(Number(difficulty) || 1)));

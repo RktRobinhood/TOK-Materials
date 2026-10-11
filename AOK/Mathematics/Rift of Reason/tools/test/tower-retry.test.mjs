@@ -16,6 +16,7 @@ function game() {
             state.avatar = { type: 'owlet', nickname: 'Test' };
             state.tutorialsSeen.tower = true;
             state.flags['heart-rules-seen'] = true;
+            state.flags['learning-hint:tower'] = true; // This regression exercises later, paid hints through retries.
             R.State.get = () => state;
             R.State.save = () => {};
             R.State.update = fn => fn(state);

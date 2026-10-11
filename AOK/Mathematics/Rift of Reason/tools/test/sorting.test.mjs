@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
+import { loadWithDom } from './fake-dom.mjs';
 
 const Rift = loadRift(['js/core/rift.js', 'js/puzzles/registry.js', 'js/puzzles/sorting.js']);
 const P = Rift.Puzzles.get('sorting');
@@ -143,7 +144,7 @@ test('every passing fix is accepted (with its own value at d3)', () => {
         data.fixes.forEach(f => {
             const ok = refAudit(data, refRule(data, f.id)).ok;
             const answer = { flaw: data.flaw, fix: f.id };
-            if (d >= 3) answer.value = data.values.findIndex(v => v.id === f.value);
+            if (d >= 3) { answer.value = data.values.findIndex(v => v.id === f.value); answer.reason = 'audit'; }
             const r = P.check(data, answer);
             assert.equal(r.solved, ok, f.id + ': ' + r.feedback);
             if (!ok) { assert.ok(r.partial < 1); assert.ok(r.feedback.length > 10); }
@@ -151,7 +152,7 @@ test('every passing fix is accepted (with its own value at d3)', () => {
     });
 });
 
-test('wrong flaw, wrong fix, wrong value and junk fail with feedback', () => {
+test('wrong flaw, wrong fix, unsupported reason and junk fail with feedback', () => {
     for (const d of [1, 2, 3]) many(d, 40, data => {
         const good = P.solve(data);
         data.flawOptions.filter(o => o.id !== data.flaw).forEach(o => {
@@ -165,12 +166,12 @@ test('wrong flaw, wrong fix, wrong value and junk fail with feedback', () => {
         assert.match(r2.feedback, /Try another change/);
         assert.equal(P.check(data, Object.assign({}, good, { fix: 'nope' })).solved, false);
         if (d >= 3) {
-            const fix = data.fixes.find(f => f.id === good.fix);
-            const wrongV = data.values.findIndex(v => v.id !== fix.value);
-            const r3 = P.check(data, Object.assign({}, good, { value: wrongV }));
+            const r3 = P.check(data, Object.assign({}, good, { reason: 'accuracy-only' }));
             assert.equal(r3.solved, false);
             assert.ok(r3.feedback.length > 10);
             assert.equal(P.check(data, { flaw: good.flaw, fix: good.fix }).solved, false, 'd3 needs a value');
+            assert.equal(P.check(data, Object.assign({}, good, { reason: undefined })).solved, false, 'd3 needs an evidence-based reason');
+            assert.equal(P.check(data, Object.assign({}, good, { value: 99 })).solved, false, 'invalid values are rejected');
         }
         assert.equal(P.check(data, null).solved, false);
         assert.equal(P.check(data, {}).solved, false);
@@ -195,5 +196,111 @@ test('hints and why are well-formed', () => {
         assert.ok(w.correct >= 0 && w.correct < 4);
         assert.match(w.options[w.correct], /mistake/);
         assert.ok(w.explain.length > 40);
+        assert.equal(w.correctOptions.length, 2);
+        assert.ok(w.correctOptions.includes(w.correct));
     });
+});
+
+test('a repair can support several ethical priorities, but unsupported reasoning is rejected', () => {
+    let alternatives = 0, unsupported = 0;
+    many(3, 40, data => {
+        const good = P.solve(data);
+        const fix = data.fixes.find(f => f.id === good.fix);
+        data.values.forEach((v, value) => {
+            const reasons = I.valueReasons(data, fix, v.id);
+            const auditReason = reasons.find(r => r.id === 'audit');
+            const result = P.check(data, { flaw: data.flaw, fix: fix.id, value, reason: 'audit' });
+            assert.equal(result.solved, auditReason.supported, result.feedback);
+            if (result.solved && v.id !== fix.value) alternatives++;
+            if (!result.solved) unsupported++;
+            for (const reason of ['exact-only', 'accuracy-only', 'made-up']) {
+                assert.equal(P.check(data, { flaw: data.flaw, fix: fix.id, value, reason }).solved, false);
+            }
+        });
+    });
+    assert.ok(alternatives > 0, 'reasoned disagreement with the canonical value is accepted');
+    assert.ok(unsupported > 0, 'claims must still fit the actual change');
+});
+
+function repairExamples(Puzzle, rng) {
+    let perfect, imperfect;
+    for (let s = 0; s < 150 && (!perfect || !imperfect); s++) {
+        const data = Puzzle.generate(rng('repair-feedback-' + s), 2);
+        for (const fix of data.fixes) {
+            const out = Puzzle.internals.fixOutcome(data, fix);
+            if (!out.ok) continue;
+            const example = { data, fix, out };
+            if (out.fn === 0 && out.fp === 0) perfect ||= example;
+            else imperfect ||= example;
+        }
+    }
+    assert.ok(perfect && imperfect, 'both repair outcomes are represented');
+    return { perfect, imperfect };
+}
+
+test('perfect and imperfect repairs report actual outcomes and scope perfection to this sample', () => {
+    const examples = repairExamples(P, Rift.makeRng);
+    for (const [kind, { data, fix, out }] of Object.entries(examples)) {
+        const result = P.check(data, { flaw: data.flaw, fix: fix.id });
+        assert.equal(result.solved, true);
+        for (const text of [out.tp + ' needy villagers helped', out.fp + ' helped who did not need it', out.fn + ' missed', out.tn + ' rightly refused']) {
+            assert.ok(result.feedback.includes(text), result.feedback);
+        }
+        if (kind === 'perfect') assert.match(result.feedback, /Every decision matches.*this sample.*does not guarantee/);
+        else assert.match(result.feedback, /still has mistakes/);
+        assert.doesNotMatch(result.feedback, /No perfect answer|No change is perfect/);
+    }
+});
+
+test('mounted repair guidance matches the selected fix and labels the original report', () => {
+    for (const kind of ['perfect', 'imperfect']) {
+        const g = loadWithDom(['js/core/rift.js', 'js/puzzles/registry.js', 'js/puzzles/sorting.js']);
+        const Puzzle = g.Rift.Puzzles.get('sorting');
+        const { data, fix, out } = repairExamples(Puzzle, g.Rift.makeRng)[kind];
+        const root = g.document.createElement('div');
+        g.document.body.appendChild(root);
+        const handle = Puzzle.mount(root, data, { submit: answer => Puzzle.check(data, answer) });
+        g.$$('.sm-action button').find(b => b.textContent === 'Run the home-visit audit').click();
+        assert.match(g.$('.sm-evidence').textContent, /Original machine report — before your fix/);
+        g.$$('.sm-opt').find(b => b.textContent === data.flawOptions.find(o => o.id === data.flaw).text).click();
+        g.$$('.sm-action button').find(b => b.textContent === 'Now fix it →').click();
+        g.$$('.sm-fix').find(b => b.textContent.includes(fix.label)).click();
+        assert.ok(g.$('.sm-action').textContent.includes(Puzzle.internals.repairSummary(out)));
+        handle.destroy();
+    }
+});
+
+test('mounted ethical reflection accepts a supported alternative priority with its reason', () => {
+    const g = loadWithDom(['js/core/rift.js', 'js/puzzles/registry.js', 'js/puzzles/sorting.js']);
+    const Puzzle = g.Rift.Puzzles.get('sorting');
+    const data = Puzzle.generate(g.Rift.makeRng('ethical-reflection'), 3);
+    const solution = Puzzle.solve(data);
+    const fix = data.fixes.find(f => f.id === solution.fix);
+    const alternative = data.values.find(v => v.id !== fix.value && Puzzle.internals.valueReasons(data, fix, v.id).some(r => r.supported));
+    assert.ok(alternative, 'this repair has another evidence-supported value');
+    const submissions = [];
+    const root = g.document.createElement('div');
+    g.document.body.appendChild(root);
+    const handle = Puzzle.mount(root, data, { submit: answer => { submissions.push(plain(answer)); return Puzzle.check(data, answer); } });
+    const clickText = text => {
+        const button = g.$$('.sm-action button').find(b => b.textContent === text);
+        assert.ok(button, 'button exists: ' + text);
+        button.click();
+    };
+    clickText('Run the home-visit audit');
+    clickText(data.flawOptions.find(o => o.id === data.flaw).text);
+    clickText('Now fix it →');
+    g.$$('.sm-fix').find(b => b.textContent.includes(fix.label)).click();
+    clickText('Justify it →');
+    clickText(alternative.text);
+    const handIn = () => g.$$('.sm-action button').find(b => b.textContent === 'Hand in the audit');
+    assert.equal(handIn().disabled, true, 'a value alone is insufficient');
+    clickText(Puzzle.internals.valueReasons(data, fix, alternative.id).find(r => r.supported).text);
+    assert.equal(handIn().disabled, false);
+    handIn().click();
+    assert.equal(submissions.length, 1);
+    assert.equal(submissions[0].reason, 'audit');
+    assert.equal(submissions[0].value, data.values.findIndex(v => v.id === alternative.id));
+    assert.match(g.$('.sm-action').textContent, /Audit accepted/);
+    handle.destroy();
 });

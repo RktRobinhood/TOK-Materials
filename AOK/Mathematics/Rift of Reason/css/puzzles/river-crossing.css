@@ -57,6 +57,8 @@
 .rc-token.picked { border-color: var(--gold); }
 .rc-art { width: 56px; height: 56px; object-fit: contain; }
 .rc-info { text-align: center; color: var(--parchment-dim); }
+.rc-recovery { text-align: center; color: var(--gold); }
+.rc-recovery:empty { display: none; }
 .rc-tools { justify-content: center; gap: 8px; }
 
 @media (max-width: 640px) {

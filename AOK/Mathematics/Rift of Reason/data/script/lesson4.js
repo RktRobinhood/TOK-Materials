@@ -82,7 +82,7 @@
     ];
     // The dead, played back in sepia at the core (their own recorded lines).
     const ECHOES = [
-        { s: 'sequins', replay: true, t: 'Roll up! My little apprentice guesses the next number! Two, four, six…', when: 'dead:sequins' },
+        { s: 'sequins', replay: true, t: 'Roll up! My little apprentice guesses a rule from the numbers on my board!', when: 'dead:sequins' },
         { s: 'granny', replay: true, t: '{name}! It\'s Fair day! Wear something with pockets. Pockets win prizes.', when: 'dead:granny' },
         { s: 'narrator', replay: true, t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.', when: 'dead:sundial' },
         { s: 'pip', replay: true, t: 'Oh! A visitor! Name, please. …Say it again? For the record.', when: 'dead:pip' },
@@ -533,8 +533,8 @@
             ...ECHOES,
         ] },
         temptation(false, false),
-        // Trial 3 is the Copy itself: it bets on your voice-marked choices, from your whole-game record.
-        COPY('Fine. Then beat me. I know what you usually pick.'),
+        // Trial 3 uses neutral moves; the Copy assumes a link from earlier voice choices to doors.
+        COPY('Fine. Left door or right door. I turned your old choices into starting weights. Beat my guesses.'),
     ];
 
     // The core is won. The Copy's tier was read when trial 3 was won (resolveOnWin).
@@ -553,7 +553,7 @@
             COPY('Finished. I\'ll go home now. They won\'t notice.'),
             { note: 'It walks into the Summit Rift. Complete. It gets home first.' },
         ] },
-        // 2. What it is: it can predict a click, never a question.
+        // 2. This model lacks evidence for the offered questions and the player's reasons.
         { note: 'The colossus, three sizes smaller, shows one last prediction: YOUR NEXT QUESTION: WHAT WILL GET MORE CLICKS?' },
         { choice: [
             { t: 'Why do people believe you?', flag: 'wonder', value: 'believe' },
@@ -564,7 +564,7 @@
             { t: 'What were you before?', only: 'frogling', flag: 'wonder', value: 'before' },
             { t: 'What do you mean by "know"?', only: 'raven', flag: 'wonder', value: 'know' },
         ] },
-        { note: 'It cannot predict a question. Only a click. The colossus cracks open.' },
+        { note: 'Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better? The colossus cracks open.' },
         { note: 'Inside: a small, scratched brass box. One sequin is stuck to it.' },
         { note: 'In your pocket, the Professor\'s Guess-o-Matic beeps.' },
         { s: 'guess-o-matic', t: 'PROBABLY.' },
@@ -582,7 +582,7 @@
             owlet: 'You counted. You never checked. I\'d have checked. Eventually.',
             mothkin: 'Shh. It\'s tiny. And it isn\'t even shining.',
             fox: 'It didn\'t hate me. It counted. A calculator with stage fright.',
-            frogling: 'You remembered everything I did. Never why.',
+            frogling: 'You counted a few things I did. Never why.',
             raven: 'You said "know". You meant "guess".',
         } },
         // 3. Why: the four core lines.
@@ -692,8 +692,8 @@
         { note: 'Nudge stands by the stall. No clipboard. It is learning a new word.' },
         { note: 'A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up.' },
         { s: 'nudge', t: '…Why?' },
-        { s: 'narrator', t: 'Will this one grow up loud? I can\'t predict that. Nobody can.',
-            u: 'Will this one grow up loud? I can\'t tell. Nobody can.' },
+        { s: 'narrator', t: 'Will this one grow up loud? I don\'t have enough evidence yet. Let\'s keep watching.',
+            u: 'Will this one grow up loud? I can\'t tell yet. Let\'s keep watching.' },
 
         // 4. The last question.
         { when: 'dead:sundial', then: [

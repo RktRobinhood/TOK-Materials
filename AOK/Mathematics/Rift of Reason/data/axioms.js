@@ -34,6 +34,7 @@
     // that colour). Memory is colourless: it neither beats nor is beaten.
     Rift.data.wheel = {
         bonus: 1,
+        note: 'This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence.',
         order: ['reason', 'emotion', 'language', 'perception', 'imagination'],
         beats: {
             reason: 'emotion',
@@ -43,13 +44,13 @@
             imagination: 'reason',
         },
         lines: {
-            reason: 'Reason checks Emotion: a calm proof outlasts a heated argument.',
-            emotion: 'Emotion outruns Language: we feel things before we have words for them.',
-            language: 'Language frames Perception: we notice what we have names for.',
-            perception: 'Perception grounds Imagination: a wild idea still has to meet the evidence.',
-            imagination: 'Imagination outflanks Reason: change one axiom and new worlds appear, like curved-space geometry.',
+            reason: 'Game rule: Reason beats Emotion. TOK prompt: when might a calm proof help check a strong feeling?',
+            emotion: 'Game rule: Emotion beats Language. TOK prompt: can a feeling matter before we have words for it?',
+            language: 'Game rule: Language beats Perception. TOK prompt: how might names affect what we notice?',
+            perception: 'Game rule: Perception beats Imagination. TOK prompt: what evidence could test an imagined explanation?',
+            imagination: 'Game rule: Imagination beats Reason. TOK prompt: what new results follow if we change an axiom?',
         },
-        memory: 'Memory stands outside the wheel: it neither beats nor is beaten.',
+        memory: 'Game rule: Memory stands outside the wheel; it neither beats nor is beaten. This does not rank its value in TOK.',
     };
 
     const spotlight = (id, colour, name, flavour) => ({

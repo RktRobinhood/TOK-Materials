@@ -147,7 +147,7 @@
     function hud(opts) {
         const s = Rift.State.get();
         const o = opts || {};
-        const heartsNode = el('span.hearts', { title: 'Hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map.' });
+        const heartsNode = el('span.hearts', { title: 'First hint on each new topic: free and keeps stars. Later hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map.' });
         const scarsNode = el('span.row', { style: { gap: '4px' } });
         const charmsNode = el('span.chip', { title: 'Catch Charms' });
         const refresh = () => {

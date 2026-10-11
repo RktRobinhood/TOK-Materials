@@ -122,6 +122,7 @@
         const ch = Rift.data.chapters[chapterId];
         if (!ch || !ch.start) return false;
         reveal(state, ch.start);
+        (node(ch.start).links || []).filter(id => node(id).chapter === chapterId).forEach(id => reveal(state, id));
         state.map.at = ch.start;
         state.chapter = chapterId;
         const firstJump = !state.map.rifts.includes(chapterId);

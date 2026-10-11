@@ -357,11 +357,12 @@
         const myTurn = () => decider() === ME && !ui.ended && !ui.busy && !ui.preview && !ui.confirm;
         const step = () => (guide ? guide.steps[ui.step] || null : null);
         const matches = expect => a => Object.keys(expect).every(k => a[k] === expect[k]);
+        const stepAccepts = (st, action) => (st.accepts || [st.expect]).some(expect => matches(expect)(action));
         function legal() {
             if (!myTurn()) return [];
             const L = E.legalActions(state);
             const st = step();
-            if (guide) return st ? L.filter(a => matches(st.expect)(a) || (st.trap && matches(st.trap.expect)(a))) : [];
+            if (guide) return st ? L.filter(a => stepAccepts(st, a) || (st.trap && matches(st.trap.expect)(a))) : [];
             return L;
         }
         const name = cid => E.cardName(state, cid);
@@ -387,11 +388,11 @@
             clearTimeout(ui.timer);
             const by = decider();
             const before = rects();
-            const guided = guide && by === ME && !ui.busy && step() && matches(step().expect)(action);
+            const guided = guide && by === ME && !ui.busy && step() && stepAccepts(step(), action);
             if (action.type === 'end' && by === ME) ui.snap = snapshot();
             if (by === ME && action.type !== 'draw') ui.recapTurn = null;   // the recap has been read
             // The lesson's trap: the move is not made; Granny shows why it would backfire.
-            if (guide && by === ME && !ui.busy && step() && step().trap && matches(step().trap.expect)(action) && !matches(step().expect)(action)) { springTrap(step().trap); return; }
+            if (guide && by === ME && !ui.busy && step() && step().trap && matches(step().trap.expect)(action) && !stepAccepts(step(), action)) { springTrap(step().trap); return; }
             try {
                 state = E.applyAction(state, Object.assign({ player: by }, action));
             } catch (e) {
@@ -405,7 +406,7 @@
             ui.sel = null;
             ui.preview = null;
             ui.note = '';
-            if (guided) { ui.busy = true; ui.queue = (step().replies || []).slice(); if (ui.queue.some(r => r.say)) stopVoice(); }
+            if (guided) { ui.busy = true; ui.queue = E.winner(state) == null ? (step().replies || []).slice() : []; if (ui.queue.some(r => r.say)) stopVoice(); }
             noteEvents(state.lastEvents);
             render();
             effects(state.lastEvents, before);
@@ -1188,7 +1189,11 @@
             if (ui.ended || E.winner(state) != null) return 'The battle is over.';
             if (powerUsedNow(ME, st)) return 'You used it this turn. It is ready again ' + turnsWords(st.turnsLeft, ME) + '.';
             if (!st.ready) return 'It is resting: ready ' + turnsWords(st.turnsLeft, ME) + '.';
-            if (guide && !ui.busy) return 'Not now. Follow the gold pointer.';
+            if (guide && !ui.busy) {
+                if (step() && step().predict) return 'Answer Granny’s question first.';
+                if (step() && step().open) return 'This step uses cards, attacks and creature abilities.';
+                return 'Follow the gold pointer.';
+            }
             if (ui.busy || decider() !== ME) return 'Wait for your turn.';
             return st.note || 'Not now.';
         }
@@ -1210,25 +1215,26 @@
             if (!st) return null;
             const mine = pi === ME;
             const can = mine && L.some(a => a.type === 'power');
+            const lessonInfo = mine && guide && !ui.busy && step() && step().info && !step().predict;
             const used = powerUsedNow(pi, st);
             const resting = !st.ready && !used;
-            const poor = st.why === 'energy' || st.why === 'hearts';
-            const idle = mine && !can && st.ready && !poor && (st.why === 'useless' || st.why === 'target');
+            const poor = !lessonInfo && (st.why === 'energy' || st.why === 'hearts');
+            const idle = mine && !can && !lessonInfo && st.ready && !poor && (st.why === 'useless' || st.why === 'target');
             const chosen = mine && ui.sel && ui.sel.kind === 'power';
             const heart = st.heartCost > 0;
             const costArt = bg(heart ? 'ui/heart-full' : 'ui/stat-cost');
             const costText = heart ? st.heartCost + ' heart' + (st.heartCost === 1 ? '' : 's') : st.cost ? st.cost + ' energy' : 'free';
             const why = mine ? powerWhy(st, L) : '';
-            const stateLine = mine
+            const stateLine = lessonInfo ? 'Click to continue the lesson. This click does not use your power.' : mine
                 ? (can ? (st.target ? 'Click it, then click a glowing target.' : 'Click to use it.') : 'Not now: ' + why)
                 : used ? 'Used this turn.' : resting ? 'Resting: ready ' + turnsWords(st.turnsLeft, pi) + '.' : 'Ready.';
             const rest = st.recharge ? 'Rests ' + st.recharge + ' turn' + (st.recharge === 1 ? '' : 's') + ' after use.' : 'Ready every turn.';
             const detail = st.text + ' Cost: ' + costText + '. ' + rest + ' Not a card play. ' + stateLine;
-            const node = el((mine ? 'button' : 'div') + '.b-power' + (mine ? '.mine' : '.theirs') + (can ? '.ready' : '') + (used ? '.used' : '') + (resting ? '.resting' : '')
+            const node = el((mine ? 'button' : 'div') + '.b-power' + (mine ? '.mine' : '.theirs') + (can || lessonInfo ? '.ready' : '') + (used ? '.used' : '') + (resting ? '.resting' : '')
                 + (poor ? '.poor' : '') + (idle ? '.idle' : '') + (chosen ? '.selected' : ''), {
                 type: mine ? 'button' : null, tabindex: mine ? null : 0, dataset: { power: st.id },
-                'aria-disabled': mine && !can ? 'true' : null,
-                'aria-label': (mine ? 'Your power: ' : oppName + '\'s power: ') + st.name + ', ' + costText + '. ' + (mine ? (can ? 'Ready.' : 'Not now: ' + why) : stateLine),
+                'aria-disabled': mine && !can && !lessonInfo ? 'true' : null,
+                'aria-label': (mine ? 'Your power: ' : oppName + '\'s power: ') + st.name + ', ' + costText + '. ' + (lessonInfo ? stateLine : mine ? (can ? 'Ready.' : 'Not now: ' + why) : stateLine),
             }, [
                 powerIcon(st.id, 'b-pw-pic'),
                 el('span.b-pw-cost' + (heart ? '.heart' : '') + (costArt ? '.art' : ''), { style: costArt, text: String(heart ? st.heartCost : st.cost), 'aria-hidden': 'true' }),
@@ -1242,7 +1248,7 @@
         }
         function clickPower(L) {
             // The lesson's "Your power" step: the click is the step, the power is not used.
-            if (guide && step() && step().info) { infoDone(); return; }
+            if (guide && step() && step().info && !step().predict) { infoDone(); return; }
             const acts = L.filter(a => a.type === 'power');
             if (!acts.length) { ui.sel = null; setNote(powerWhy(E.powerStatus(state, ME), L)); return; }
             if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
@@ -1615,10 +1621,10 @@
             const kind = next.type === 'reset' ? 'Reset' : 'New rule';
             const summary = shift
                 ? (moved === 0 ? (next.type === 'reset' ? 'Reset happens NOW' : 'New rule NOW') : (shift < 0 ? '⏩ ' : '⏪ ') + kind + ' in ' + turnsWord(moved))
-                : (anchored ? '⚓ ' : '') + kind + ' in ' + turnsWord(next.turns);
+                : 'Upcoming · ' + (anchored ? '⚓ ' : '') + kind + ' in ' + turnsWord(next.turns);
             // The second line: what it will be, and whose turn it starts.
             const whose = owner(next.turns) === ME ? 'your turn' : 'their turn';
-            const detail = (next.type === 'reset' ? 'All rules back to basic' : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card')) + ' · ' + whose;
+            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card')) + ' · ' + whose;
             // Beyond the reel: the nearest event further than three turns away, with its count.
             const farIdx = tl.findIndex(ev => ev.turns > FATE_AHEAD);
             const farGhost = shift && moved > FATE_AHEAD;
@@ -1681,14 +1687,14 @@
             const known = !reset && i === 0 && top && AX[top];
             const m = el('div.b-fev' + (reset ? '.reset' : '.flip') + (ghost ? '.ghost' : '') + (far ? '.far' : ''), {
                 tabindex: ghost ? null : 0, role: ghost ? null : 'button',
-                'aria-label': (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns',
+                'aria-label': 'Upcoming ' + (reset ? 'reset' : 'new rule') + ' in ' + ev.turns + ' turns. Not active yet.',
             }, [
                 icon(reset ? 'ui/fate-reset' : 'ui/fate-flip', reset ? '↺' : '✦', 'b-fev-icon'),
                 el('span.b-fev-label', { text: (reset ? 'Reset' : 'New rule') + (far ? ' · in ' + ev.turns : '') }),
             ]);
             if (ghost) return m;
             const make = () => (known ? [axiomCardEl(top, { size: 'big' }), el('div.b-notes', {}, [
-                el('div.b-note-line', {}, [el('b', { text: 'Fate in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' }), 'this rule card turns over for free and changes the rule for BOTH players.']),
+                el('div.b-note-line', {}, [el('b', { text: 'Upcoming · not active yet. In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' }), 'this rule card turns over for free and changes the rule for BOTH players.']),
                 el('div.b-note-line', {}, [el('b', { text: 'It replaces: ' }), replacedRule(top)]),
                 el('div.b-note-line.b-flavour', { text: 'It is the top card of the shared rule deck. If someone takes it first, the next card turns over instead.' })])]
                 : [el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns: ' }),
@@ -1852,10 +1858,10 @@
                         buttons.appendChild(b);
                         return seen.concat(a.ability);
                     }, []);
-                    if (acts.length) {
+                    if (acts.length && !tm.size) {
                         const def = (B().Abilities || {})[acts[0].ability];
                         ask.textContent = name(sel.cid) + (def ? ': ' + upFirst(String(def.text).replace(/^Activate \(\d+ energy\):\s*/i, '')) : '') + ' Activating uses its attack this turn.';
-                    }
+                    } else if (acts.length) ask.textContent = name(sel.cid) + ': choose a glowing enemy to attack, or press Activate for its ability. Activating uses its attack this turn.';
                 } else if (sel.kind === 'activate') {
                     ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
                 } else if (sel.kind === 'power') {
@@ -2122,7 +2128,7 @@
             });
             const n = changedRules().length;
             put(dom.rules,
-                el('div.b-rules-head', {}, [el('strong', { text: 'Rules in play' }), el('span.b-rules-sub', { text: n ? n + ' changed (gold tiles)' : 'All basic. Rule cards and Fate can change them.' })]),
+                el('div.b-rules-head', {}, [el('strong', { text: 'Active · rules in play' }), el('span.b-rules-sub', { text: n ? n + ' changed (gold tiles)' : 'All basic. Rule cards and Fate can change them.' })]),
                 el('div.b-rule-tiles' + (tiles.length > 6 ? '.compact' : ''), {}, tiles));
         }
         function ruleTile(cat, id, basicWords, basicArt, basicLong) {
@@ -2337,9 +2343,14 @@
                 ui.busy && !done ? null : el('p.b-coach-text', { text: done ? 'You won by the current rules.' : stepText(st) }),
                 el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read the rule tiles first.' : 'Do this: ' + st.label }),
                 ui.busy && ui.say ? el('p.b-coach-say', { text: ui.say }) : null,
+                !ui.busy && ui.prediction && ui.prediction.step === ui.step ? el('p.b-coach-say.warn', { role: 'status', text: ui.prediction.text }) : null,
                 st && st.compare ? comparison(st.compare) : null,
                 el('div.b-coach-buttons', {}, [
-                    st && st.info && !ui.busy && !nodes.pw0 ? el('button.btn.primary.b-coach-ok',{ type: 'button', text: st.label, onclick: infoDone }) : null,
+                    st && st.predict && !ui.busy ? nodes.predictions = el('div.row.wrap.b-predictions', { role: 'group', 'aria-label': 'Predict the outcome' }, st.predict.map(choice => el('button.btn', { type: 'button', text: choice.label, onclick() {
+                        if (choice.correct) infoDone();
+                        else { ui.prediction = { step: ui.step, text: choice.feedback }; render(); }
+                    } }))) : null,
+                    st && st.info && !st.predict && !ui.busy && !nodes.pw0 ? el('button.btn.primary.b-coach-ok',{ type: 'button', text: st.label, onclick: infoDone }) : null,
                     done ? null : iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, extra: { disabled: ui.busy }, onclick: speak }),
                     iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
                 ]),
@@ -2350,6 +2361,7 @@
         function infoDone() {
             const st = step();
             if (!st || !st.info || ui.busy) return;
+            ui.prediction = null;
             ui.step += 1;
             startHintClock();
             render();
@@ -2382,7 +2394,7 @@
             const x = st.expect;
             let focus = null;
             let ring = null;
-            if (x.type === 'info') focus = nodes.pw0 || null;
+            if (x.type === 'info') focus = st.predict ? nodes.predictions : nodes.pw0 || null;
             else if (x.type === 'draw') focus = nodes.draw && nodes.draw[x.choice];
             else if (x.type === 'end') focus = nodes.end;
             else if (x.type === 'spark') focus = screen.querySelector ? screen.querySelector('.b-spark') : null;
@@ -2987,7 +2999,7 @@
                     'Colour wheel: +' + W.bonus + ' attack',
                     el('span.b-wheel-chain', { title: W.order.map(c => Rift.COLOURS[c].name + ' beats ' + Rift.COLOURS[W.beats[c]].name).join('. ') + '.', text: chain }),
                 ]),
-                el('p.small', { text: 'These are rules for this game, not a ranking of ways of knowing.' }),
+                el('p.small', { text: W.note || 'These are rules for this game, not a ranking of ways of knowing.' }),
                 el('ul', {}, items),
             ]);
         }

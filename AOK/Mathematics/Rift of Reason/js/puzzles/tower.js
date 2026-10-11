@@ -49,6 +49,14 @@
         { id: 'lamp', text: 'a lamplighter', short: 'Lamplighter' },
         { id: 'garden', text: "a gardener's helper", short: "Gardener's helper" },
     ];
+    const STORY_JOBS = {
+        post: { id: 'post', text: 'a postman', short: 'Postman' },
+        visitor: { id: 'visitor', text: 'a visitor', short: 'Visitor' },
+        tutor: { id: 'tutor', text: 'a travelling tutor', short: 'Travelling tutor' },
+        lamp: { id: 'lamp', text: 'a lamp tester', short: 'Lamp tester' },
+        actor: { id: 'actor', text: 'a travelling actor', short: 'Travelling actor' },
+        pond: { id: 'pond', text: 'a pond inspector', short: 'Pond inspector' },
+    };
     const LODGES = [
         { id: 'inn', text: 'the Crooked Kettle inn', short: 'the Crooked Kettle' },
         { id: 'loft', text: 'the bakery loft', short: 'the bakery loft' },
@@ -452,10 +460,11 @@
         return { facts: chosen, bools };
     }
 
-    function attempt(rng, diff, cfg) {
+    function attempt(rng, diff, cfg, cover) {
         const start = rng.int(0, DAYS.length - cfg.days);
         const days = DAYS.slice(start, start + cfg.days);
-        const jobs = rng.shuffle(JOBS).slice(0, 3);
+        const chosenJob = STORY_JOBS[cover];
+        const jobs = chosenJob ? [chosenJob].concat(rng.shuffle(JOBS.filter(j => j.id !== cover)).slice(0, 2)) : rng.shuffle(JOBS).slice(0, 3);
         const lodges = rng.shuffle(LODGES).slice(0, 3);
         const ctx = {
             days,
@@ -476,7 +485,9 @@
         const data = { atoms, groups, rules };
         const cm = compile(data);
         if (!cm.worlds.length) return null;
-        const world = rng.pick(cm.worlds);
+        const possible = chosenJob ? cm.worlds.filter(w => !!(w & (1 << index['job:' + cover]))) : cm.worlds;
+        if (!possible.length) return null;
+        const world = rng.pick(possible);
         const truth = a => !!(world & (1 << a));
 
         // Variables: each group, or a single true/false atom.
@@ -490,7 +501,7 @@
         const groupVars = vars.filter(v => v.kind === 'group'), boolVars = vars.filter(v => v.kind === 'bool');
         let best = null;
         for (let t = 0; t < 8; t++) {
-            const gs = rng.shuffle(groupVars).slice(0, rng.chance(0.4) ? 3 : 2);
+            const gs = chosenJob ? [groupVars.find(v => v.id === 'job')].concat(rng.shuffle(groupVars.filter(v => v.id !== 'job')).slice(0, rng.chance(0.4) ? 2 : 1)) : rng.shuffle(groupVars).slice(0, rng.chance(0.4) ? 3 : 2);
             const pick = gs.concat(rng.shuffle(boolVars).slice(0, 3 - gs.length));
             const lits = pick.map(varLit);
             const p = propagate(data, lits.map(l => ({ a: l.a, v: l.v })));
@@ -533,12 +544,12 @@
         return { data, baseLits, questions, varOptions, ok, quality };
     }
 
-    function generate(rng, difficulty) {
+    function generate(rng, difficulty, opts) {
         const diff = Rift.clamp(Math.round(difficulty || 1), 1, 3);
         const cfg = CFG[diff];
         let best = null;
         for (let i = 0; i < 120; i++) {
-            const a = attempt(rng, diff, cfg);
+            const a = attempt(rng, diff, cfg, opts && opts.cover);
             if (!a) continue;
             if (!best || (a.ok && !best.ok) || (a.ok === best.ok && a.quality > best.quality)) best = a;
             if (best.ok && i >= 2) break;

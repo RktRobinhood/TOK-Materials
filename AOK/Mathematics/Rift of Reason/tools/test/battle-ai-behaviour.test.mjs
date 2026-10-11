@@ -138,12 +138,16 @@ test('the Predict colour guess uses only public cards, never the hidden hand or 
 });
 
 test('Syllo\'s story challenge stays winnable for a beginner-level player', () => {
-    const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
-    const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
     const R = loadRift([
         'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/fate.js',
-        'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/lesson.js',
+        'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/lesson.js', 'js/ui/battles.js',
     ]);
+    const save = R.State.freshState();
+    R.State.get = () => save;
+    let launch;
+    R.Router = { go(screen, params) { assert.equal(screen, 'battle'); launch = params; } };
+    R.Battles.story();
+    assert.equal(launch.mode, 'practice');
     const Eng = R.Battle.Engine;
     const tally = { normal: blank() };
     let won = 0;
@@ -152,17 +156,17 @@ test('Syllo\'s story challenge stays winnable for a beginner-level player', () =
         let s = Eng.createBattle({
             seed: 'syllo-behaviour:' + g,
             players: [
-                { team: R.Battle.Lesson.starter(), tactics: R.data.tacticDecks.starter, axioms: [] },
-                { team: R.Battle.Lesson.team(SYLLO_TEAM, 'syllo-'), tactics: SYLLO_TACTICS, hearts: 8 },
+                launch.player,
+                launch.opponent,
             ],
-            axiomDeck: ['underdog', 'thrift', 'three-actions', 'normal-hearts', 'mercy', 'arrival', 'age-of-reason'],
-            options: { first: 0, shuffle: false, shuffleAxioms: false, deckSize: 16, mode: 'practice' },
+            axiomDeck: launch.axiomDeck,
+            options: { ...launch.battleOptions, mode: launch.mode },
         });
-        // The player side is the test-only 'beginner' level; Syllo is Normal with 8 hearts (js/ui/battles.js story()).
+        // The player side is the test-only 'beginner' level; use the real story setup so tuning cannot drift.
         let guard = 0;
         while (Eng.winner(s) == null && guard++ < 6000) {
             const p = Eng.decider(s);
-            const a = R.Battle.AI.choose(s, { level: p ? 'normal' : 'beginner', salt: p ? '' : 'student' });
+            const a = R.Battle.AI.choose(s, { level: p ? launch.opponent.ai : 'beginner', salt: p ? '' : 'student' });
             if (p === 1 && s.phase === 'main' && a.type === 'end') {
                 tally.normal.ends += 1;
                 if (Eng.legalActions(s).some(x => x.type === 'play' && s.cards[x.cid].kind === 'creature')) tally.normal.passed += 1;
@@ -171,7 +175,7 @@ test('Syllo\'s story challenge stays winnable for a beginner-level player', () =
         }
         if (s.winner === 0) won += 1;
     }
-    // Target 65–75% (simulated ladder, 1,100 games); 60 games here, so a wider band.
+    // A beginner should usually win, while the practice opponent still offers resistance.
     assert.ok(won / N >= 0.5 && won / N <= 0.9, 'a beginner-level player beats Syllo in ' + pct(won, N));
     assert.ok(tally.normal.passed / tally.normal.ends < 0.02, 'Syllo passed with a playable creature in ' + pct(tally.normal.passed, tally.normal.ends));
 });

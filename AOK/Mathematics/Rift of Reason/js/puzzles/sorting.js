@@ -24,10 +24,10 @@
  *   3. picks one fix. Each fix's outcome is recomputed; it must meet the stated
  *      criteria: grants ≤ budget, at least minHelp needy villagers helped, and
  *      no two districts' missed rates more than maxGap apart. Several fixes
- *      can pass; there is no perfect answer (each trades one error for another),
- *   4. (difficulty 3) says which value the chosen fix put first.
+ *      can pass; some changes trade errors and some fit this sample perfectly,
+ *   4. (difficulty 3) defends a value with a reason supported by the audit.
  *
- * Answer: { flaw: id, fix: id, value?: index into data.values }.
+ * Answer: { flaw: id, fix: id, value?: index into data.values, reason?: id }.
  * check() recomputes every outcome from data; nothing reported by the UI is used.
  */
 (function (root) {
@@ -67,8 +67,8 @@
     const GLYPHS = ['🦉', '🦊', '🐸', '🦔', '🐭', '🐇', '🦡', '🐿️', '🦆', '🐌', '🦝', '🐢'];
 
     const VALUES = [
-        { id: 'need', text: 'Catch every needy villager, even if some help goes to villagers who did not need it.' },
-        { id: 'thrift', text: 'Never waste help: refuse when unsure, even if some needy villagers are missed.' },
+        { id: 'need', text: 'Put helping needy villagers first, while watching the cost.' },
+        { id: 'thrift', text: 'Keep help within the budget, while checking who still misses out.' },
         { id: 'same', text: 'Judge everyone by the same yardstick, using only information we can trust.' },
         { id: 'equal', text: "Make the districts' results equal, even if that means different rules for different districts." },
     ];
@@ -308,6 +308,33 @@
 
     function pct(x) { return Math.round(x * 100) + '%'; }
 
+    function repairSummary(out) {
+        const result = out.tp + ' needy villagers helped, ' + out.fp + ' helped who did not need it, ' + out.fn + ' missed, and ' + out.tn + ' rightly refused.';
+        return result + (out.fp === 0 && out.fn === 0
+            ? ' Every decision matches the home-visit audit in this sample. That does not guarantee the same result for new applicants.'
+            : ' This sample still has mistakes. Compare who bears them and whether the stated goals are met.');
+    }
+
+    // Several values can be defended for one repair. Judge the stated evidence,
+    // not agreement with the fix author's preferred value.
+    function valueReasons(data, fix, valueId) {
+        const base = outcomes(data, data.rule);
+        const out = fixOutcome(data, fix);
+        const rule = applyFix(data.rule, fix);
+        const evidence = {
+            need: { text: 'The audit shows ' + out.fn + ' needy villagers missed, compared with ' + base.fn + ' before. I put reducing missed needs first.', supported: out.fn < base.fn },
+            thrift: { text: 'This fix uses ' + out.helped + ' of the budget of ' + data.criteria.budget + '. I accept these audited results while keeping within that limit.', supported: out.helped <= data.criteria.budget },
+            same: { text: 'This fix removes district points or corrects how warning notes are counted. I put more trustworthy measures first.', supported: (data.rule.points.some(p => p !== 0) && rule.points.every(p => p === 0)) || (data.rule.wR > 0 && rule.wR === 0) || rule.perVisit.some((v, i) => v !== data.rule.perVisit[i]) },
+            equal: { text: 'The gap in district missed rates falls from ' + Math.round(base.gap * 100) + ' to ' + Math.round(out.gap * 100) + ' points. I put reducing that gap first.', supported: out.gap < base.gap - EPS },
+        }[valueId];
+        if (!evidence) return [];
+        return [
+            { id: 'audit', text: evidence.text, supported: evidence.supported },
+            { id: 'accuracy-only', text: 'The accuracy percentage alone proves this fix is fair.', supported: false },
+            { id: 'exact-only', text: 'The sums are exact, so no values or goals need to be justified.', supported: false },
+        ];
+    }
+
     function critFailText(data, out) {
         const c = data.criteria;
         const bits = [];
@@ -337,11 +364,11 @@
         const second = {
             'biased-data': 'Compare the inspector\'s logbook with the warning-notes column. Does ' + t + ' break more rules, or was it simply checked more often?',
             proxy: 'Where did the district points come from? A district that got little help last year gets minus points this year, whatever its villagers need now.',
-            threshold: 'All districts are missed about equally, so the rule is not unfair between them. Count the needy villagers refused, and the ' + data.theme.grants + ' left unused.',
+            threshold: 'The district missed rates are close, so this sample meets the district-gap goal. Count the needy villagers refused, and the ' + data.theme.grants + ' left unused.',
         }[data.flaw];
         const pass = data.fixes.find(f => fixOutcome(data, f).ok);
         const third = 'Try the changes and watch the three goals at the top. "' + pass.label + '" meets all of them'
-            + (data.difficulty >= 3 ? ', and it puts this first: ' + VALUES.find(v => v.id === pass.value).text : '.');
+            + (data.difficulty >= 3 ? '. You could defend this value with the audit: ' + VALUES.find(v => v.id === pass.value).text : '.');
         return [
             'Run the audit, then look at the district bars: whose needy villagers are missed most? Then read the evidence notes.',
             second,
@@ -352,24 +379,28 @@
     function whyFor(data) {
         const acc = pct(outcomes(data, data.rule).accuracy);
         const opts = [
-            'Accuracy treats every mistake the same and adds them all up, so it can hide that the mistakes fall on one group, and which mistakes matter more is a human choice.',
-            'It cannot be unfair: maths is neutral, so an accurate machine is a fair machine.',
+            'I would give missed needs more weight than overall accuracy: some mistakes leave needy villagers without help.',
+            'I would judge fairness by justified measures and agreed goals. People may reasonably disagree about which mistakes matter most.',
             'It was only unfair because of a calculation error somewhere in the score.',
             'Anything above 50% accurate is fair; only machines below 50% are biased.',
         ];
         const order = Rift.makeRng(data.whyShuffle || 1).shuffle([0, 1, 2, 3]);
         return {
-            question: 'The machine was ' + acc + ' accurate. Why can an accurate algorithm still be unfair?',
+            question: 'The original machine was ' + acc + ' accurate. Which judgement can you defend using this audit?',
             options: order.map(i => opts[i]),
             correct: order.indexOf(0),
-            explain: 'The sums were exact. But someone chose what to count (warning notes, district points), where to put the cut-off, and which mistake is worse: missing a needy villager or helping one who did not need it. Those are value choices, so maths that decides about people is never neutral.',
+            correctOptions: [order.indexOf(0), order.indexOf(1)],
+            explain: 'Here, people chose what to measure, the cut-off, the budget and the allowed district gap. The sums alone do not justify those choices. You can defend different priorities if your reason fits the audit and acknowledges who gains or loses.',
         };
     }
 
     function solveFor(data) {
         const fix = data.fixes.find(f => fixOutcome(data, f).ok);
         const answer = { flaw: data.flaw, fix: fix.id };
-        if (data.difficulty >= 3) answer.value = data.values.findIndex(v => v.id === fix.value);
+        if (data.difficulty >= 3) {
+            answer.value = data.values.findIndex(v => v.id === fix.value);
+            answer.reason = 'audit';
+        }
         return answer;
     }
 
@@ -390,14 +421,15 @@
         }
         if (data.difficulty >= 3) {
             const v = Number.isInteger(answer.value) ? data.values[answer.value] : null;
-            if (!v) return { solved: false, partial: 0.7, feedback: 'Your fix works. Now say which value it put first.' };
-            if (v.id !== fix.value) {
-                return { solved: false, partial: 0.8, feedback: 'Your fix works, but that is not what it put first. Look at what "' + fix.label + '" changes, and who gains or loses from it.' };
+            if (!v) return { solved: false, partial: 0.7, feedback: 'Your fix works. Now choose a value you can defend.' };
+            const reason = valueReasons(data, fix, v.id).find(r => r.id === answer.reason);
+            if (!reason || !reason.supported) {
+                return { solved: false, partial: 0.8, feedback: 'Your fix works. Defend your chosen value with a reason supported by the rule and audit. Check the change, who gains or loses, and the budget.' };
             }
         }
         return {
             solved: true, partial: 1,
-            feedback: '"' + fix.label + '" meets all three goals: ' + out.tp + ' needy villagers helped, ' + out.fp + ' helped who did not need it, ' + out.fn + ' missed. No perfect answer, but a defensible one.',
+            feedback: '"' + fix.label + '" meets all three goals. ' + repairSummary(out),
         };
     }
 
@@ -447,6 +479,7 @@
             flaw: null,
             fix: null,
             value: null,
+            reason: null,
             done: false,
             open: {},
             shown: base.decisions.slice(),   // decisions currently stamped (to animate changes)
@@ -691,7 +724,7 @@
             ]));
             if (st.audited) {
                 notes.appendChild(el('div.sm-note.boast', null, [
-                    el('div.sm-nt', { text: '🤖 ' + th.machine.replace(/^the /, 'The ') + ' reports' }),
+                    el('div.sm-nt', { text: '🤖 Original machine report — before your fix' }),
                     el('div', { text: '"' + pct(base.accuracy) + ' of my stamps were right. My sums never make mistakes."' }),
                 ]));
             }
@@ -741,21 +774,30 @@
                     last
                         ? el('button.btn.gold', { text: 'Hand in the audit', disabled: !st.fix, onclick: send })
                         : el('button.btn.gold', { text: 'Justify it →', disabled: !st.fix, onclick: () => { sfx('click'); go('value'); } }),
-                    el('span.muted.small', { text: 'No change is perfect: each one trades one mistake for another.' }),
+                    el('span.muted.small', { text: st.fix ? repairSummary(cur()) : 'A change can trade one kind of mistake for another. Check this sample to see what actually happens.' }),
                 ]));
                 return;
             }
             if (ph === 'value') {
                 const f = fixById(data, st.fix);
-                actionEl.appendChild(el('div.sm-q', { text: 'You chose "' + (f ? f.label : '?') + '". Which value did that put first?' }));
+                actionEl.appendChild(el('div.sm-q', { text: 'You chose "' + (f ? f.label : '?') + '". Which value would you defend for this fix?' }));
                 const list = el('div.sm-opts');
                 data.values.forEach((v, i) => list.appendChild(el('button.sm-opt', {
                     className: st.value === i ? 'on' : '',
-                    onclick: () => { st.value = i; sfx('place'); setStatus(''); render(); },
+                    onclick: () => { st.value = i; st.reason = null; sfx('place'); setStatus(''); render(); },
                 }, [el('span.sm-radio'), el('span', { text: v.text })])));
                 actionEl.appendChild(list);
+                if (st.value != null && f) {
+                    actionEl.appendChild(el('div.sm-q', { text: 'Give a reason. Different priorities can be defended if the evidence supports them.' }));
+                    const reasons = el('div.sm-opts');
+                    valueReasons(data, f, data.values[st.value].id).forEach(r => reasons.appendChild(el('button.sm-opt', {
+                        className: st.reason === r.id ? 'on' : '',
+                        onclick: () => { st.reason = r.id; sfx('place'); setStatus(''); render(); },
+                    }, [el('span.sm-radio'), el('span', { text: r.text })])));
+                    actionEl.appendChild(reasons);
+                }
                 actionEl.appendChild(el('div.sm-row', null, [
-                    el('button.btn.gold', { text: 'Hand in the audit', disabled: st.value == null, onclick: send }),
+                    el('button.btn.gold', { text: 'Hand in the audit', disabled: st.value == null || !st.reason, onclick: send }),
                 ]));
             }
         }
@@ -795,6 +837,7 @@
             const before = cur().decisions;
             st.fix = id;
             st.value = null;
+            st.reason = null;
             const after = cur();
             after.decisions.forEach((y, i) => { if (y !== before[i]) st.fresh[i] = true; });
             sfx(after.ok ? 'place' : 'click');
@@ -808,7 +851,7 @@
             if (st.done) return;
             sfx('click');
             const answer = { flaw: st.flaw, fix: st.fix };
-            if (data.difficulty >= 3) answer.value = st.value;
+            if (data.difficulty >= 3) { answer.value = st.value; answer.reason = st.reason; }
             let r = null;
             try { r = api && api.submit ? api.submit(answer) : null; } catch (e) { console.error('[sorting]', e); }
             const show = res => {
@@ -880,7 +923,7 @@
                 "highlight": ".sm-rule"
             },
             {
-                "text": "Check who your fix changes, its cost, and the mistakes left. Choose the value your fix puts first if asked, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "text": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
                 "highlight": ".sm-action"
             }
         ],
@@ -888,7 +931,7 @@
         colour: 'emotion',
         family: 'Ethics of maths',
         blurb: 'A machine decides which villagers get help. Its sums are perfect. Audit it: who does it miss, and why?',
-        tok: 'The maths was exact, but choosing what to count, which mistakes matter more and what "fair" means were human value choices: maths is not neutral when it decides about people.',
+        tok: 'In this model, people chose the measures, budget, cut-off and allowed gap. Exact sums do not justify those choices. Defend your priorities with evidence, and consider why someone might choose different ones.',
 
         generate,
         check: checkAnswer,
@@ -897,7 +940,7 @@
         solve: solveFor,
         mount,
 
-        internals: { SETTINGS, VALUES, FIX_SETS, applyFix, scoreOf, outcomes, fixOutcome, worstDistrict, mostNotesDistrict },
+        internals: { SETTINGS, VALUES, FIX_SETS, applyFix, scoreOf, outcomes, fixOutcome, worstDistrict, mostNotesDistrict, repairSummary, valueReasons },
     };
 
     Rift.Puzzles.register(def);

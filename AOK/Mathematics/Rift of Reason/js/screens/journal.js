@@ -37,6 +37,7 @@
 
             function entry(q) {
                 const place = (Rift.World.node(q.node) || {}).name || '';
+                const reasoning = Rift.State.get().flags['reasoning:' + q.node] || [];
                 return el('article.journal-entry.' + q.kind + '.' + q.status, { style: { '--quest': Rift.Quests.COLOURS[q.kind] } }, [
                     el('div.row', null, [
                         Rift.Quests.glyph(q.kind, q.status),
@@ -45,6 +46,7 @@
                     ]),
                     q.text ? el('p.small', { text: q.text }) : null,
                     q.locked ? el('p.small.warn', { text: '🔒 ' + q.locked }) : null,
+                    reasoning.length ? el('details', null, [el('summary', { text: 'Reasoning from your last solve' }), ...reasoning.map(r => el('div', null, [el('p', { text: r.feedback }), r.reflection ? el('p', { text: r.reflection }) : null, r.tok ? el('p.small.muted', { text: r.tok }) : null]))]) : null,
                     el('div.row', null, [
                         el('span.small.muted', { text: place && place !== q.title ? '📍 ' + place : '' }),
                         q.status === 'done' ? null : el('button.btn.small', {

@@ -171,8 +171,8 @@
                     u: 'This is his stall. His rule is still here. I wrote it down.', when: { flag: 'stakes.ch1', not: 3 } },
                 { s: 'sequins', t: 'My stall! My secret rule! I am fine. LIKE AND SUBSCRIBE.', when: { flag: 'stakes.ch1', is: 3 } },
             ], else: [
-                { s: 'sequins', e: 'happy', t: 'Roll up! My little apprentice guesses the next number! Two, four, six…' },
-                { s: 'guess-o-matic', t: 'Probably eight.' },
+                { s: 'sequins', e: 'happy', t: 'Roll up! My little apprentice guesses a rule from the numbers on my board!' },
+                { s: 'guess-o-matic', t: 'Probably. Test it first.' },
                 { s: 'sequins', t: 'It always says "probably". Adorable. Nobody claps for it. I do.' },
             ] },
         ] },
@@ -190,11 +190,11 @@
     ];
 
     S['prologue.gallery'] = [
-        { s: 'syllo', e: 'angry', t: 'ATTENTION! My lobster band! They play the trumpet! Allegedly!' },
+        { s: 'syllo', e: 'angry', t: 'ATTENTION! Read my argument on the board! Does the conclusion follow?' },
     ];
     S['prologue.gallery.win'] = [
-        { s: 'syllo', e: 'happy', t: 'Valid! And still nonsense! My lobsters cannot play the trumpet. I have heard them.', when: SYLLO_HERE },
-        { s: 'narrator', t: 'Valid, and still nonsense. Syllo would have shouted that. Loudly.', when: { not: SYLLO_HERE } },
+        { s: 'syllo', e: 'happy', t: 'You checked what follows! A loud voice is not a proof. Mine included!', when: SYLLO_HERE },
+        { s: 'narrator', t: 'You checked what follows. Syllo would have shouted that. Loudly.', when: { not: SYLLO_HERE } },
     ];
 
     // The Nut Stall (node script): the boast, the theft and that evening, or a look back for a jump-in.

@@ -14,19 +14,26 @@
     function hintCost(s) {
         return Rift.World.hintCost(s);
     }
+    function coverFor(s) {
+        if (s.flags.cover === 'postman') return 'post';
+        if (s.flags.cover === 'visitor') return 'visitor';
+        if (s.flags.cover === 'species') return { owlet: 'tutor', mothkin: 'lamp', fox: 'actor', frogling: 'pond', raven: 'post' }[s.avatar.type];
+        return null;
+    }
 
     Rift.Screens.register('encounter', {
         mount(rootNode, params) {
             const state = Rift.State.get();
-            const visit = Rift.World.rollVisit(state, params.nodeId);
+            const checkpoint = !params.shrine && state.flags['reflection:' + params.nodeId];
+            const visit = checkpoint ? { node: Object.assign({ id: params.nodeId }, Rift.World.node(params.nodeId)), seed: checkpoint.seed, lured: checkpoint.lured } : Rift.World.rollVisit(state, params.nodeId);
             Rift.State.save();
             const n = visit.node;
             const isBoss = n.type === 'boss';
             const isMini = n.type === 'miniboss';
             // Bosses chain every listed puzzle; others play the rolled one.
-            let stages = isBoss ? n.puzzles.slice() : [visit.puzzle];
+            let stages = checkpoint ? checkpoint.stages : isBoss ? n.puzzles.slice() : [visit.puzzle];
             if (params.shrine) stages = [{ id: visit.puzzle ? visit.puzzle.id : 'liars-gate', difficulty: 3 }];
-            stages = stages.filter(p => p && Rift.Puzzles.get(p.id));
+            stages = stages.filter(p => p && Rift.Puzzles.get(p.id)).map(p => Object.assign({}, p));
             // A boss stage with skipWhen (data/map.js) is left out and counts as one step of clock progress.
             const skipNow = p => !!(isBoss && !params.shrine && p.skipWhen && Rift.Story && Rift.Story.test(p.skipWhen));
             const skippedStages = stages.filter(skipNow).length;
@@ -37,13 +44,13 @@
             let catchTimer = null;
             let catchAttempt = 0;
             const firstTime = !state.map.completed.includes(n.id);
-            const firstVisit = state.map.visitCount[n.id] === 1;
+            const firstVisit = !checkpoint && state.map.visitCount[n.id] === 1;
 
-            let stageIx = 0;
+            let stageIx = checkpoint ? checkpoint.stageIx : 0;
             let handle = null;
-            let hintsUsed = 0;
+            let hintsUsed = checkpoint ? checkpoint.hintsUsed || 0 : 0;
             let hintIx = 0;
-            let wrongs = 0;
+            let wrongs = checkpoint ? checkpoint.wrongs || 0 : 0;
             let attempts = null;
             let phase = 'intro';
             const modals = [];
@@ -88,7 +95,8 @@
             const speaker = hostId ? (Rift.data.speakers[hostId] || { name: hostId, art: 'npc/' + hostId }) : null;
             const ownHost = hostId && hostId === (Rift.Cast ? Rift.Cast.actor(hostRole) : hostRole);
             // The bubble: the first reminder line this host speaks (its `when` holding), in the actor's words.
-            const reminder = ownHost ? (Rift.data.script[n.reminder] || []).find(line => line.s === hostRole && (line.t || line.u) && (!Rift.Story || Rift.Story.test(line.when))) : null;
+            const greeting = firstVisit ? n.intro : n.reminder;
+            const reminder = ownHost ? (Rift.data.script[greeting] || []).find(line => line.s === hostRole && (line.t || line.u) && (!Rift.Story || Rift.Story.test(line.when))) : null;
             const reminderText = reminder ? (Rift.Cast ? Rift.Cast.text(reminder, hostId) : reminder.t) : null;
             if (speaker) {
                 host.append(Rift.Assets.img(speaker.art, { className: 'enc-creature', label: speaker.name }),
@@ -124,7 +132,7 @@
                 if (tutorial) tutorial.close();
                 pausePuzzle();
                 const { def } = current();
-                const steps = def.tutorial || [{ text: def.blurb }, { text: 'Use the controls to check your answer. Hints cost hearts.' }];
+                const steps = def.tutorial || [{ text: def.blurb }, { text: 'Use the controls to check your answer. The first hint on a new topic is free and keeps stars; later costs are shown beside Hint.' }];
                 tutorial = Rift.Tutorial.play(puzzleSlot, steps, hostId, { el, container: puzzleSlot, handle, puzzleId:def.id, onClose: resumePuzzle });
             }
             function pausePuzzle() { if (handle && handle.pause) handle.pause(); }
@@ -163,23 +171,31 @@
                     checks.textContent = '⏳ Danger clock';
                     checks.title = 'In this scene, wrong checks and hints fill the danger clock instead of costing hearts.';
                     checks.setAttribute('aria-label', checks.title);
-                    goal.querySelector('.enc-attempt-rule').textContent = 'Each wrong check, hint or wrong "Why?" fills one notch of the clock.';
+                    goal.querySelector('.enc-attempt-rule').textContent = 'Each wrong check or wrong "Why?" fills one notch. ' + hintRule();
                     return;
                 }
                 const left = Math.max(0, attempts.free - attempts.wrong);
                 checks.textContent = 'Checks left: ' + '●'.repeat(left) + '○'.repeat(attempts.free - left);
                 checks.title = 'Free wrong checks left for this stage: ' + left + '. After that, each wrong check costs 1 heart. Correct checks are free.';
                 checks.setAttribute('aria-label', checks.title);
-                goal.querySelector('.enc-attempt-rule').textContent = attempts.free + ' free wrong checks per stage. Then each wrong check costs 1 heart. Hints cost ' + hintCost(Rift.State.get()) + ' heart' + (hintCost(Rift.State.get()) > 1 ? 's' : '') + '.';
+                goal.querySelector('.enc-attempt-rule').textContent = attempts.free + ' free wrong checks per stage. Then each wrong check costs 1 heart. ' + hintRule();
+            }
+            function firstHintAvailable() {
+                return stages[stageIx] && !Rift.State.get().flags['learning-hint:' + stages[stageIx].id];
+            }
+            function hintRule() {
+                const later = stakesClock().scene ? 'Later hints fill one danger notch and count as help for stars.' : 'Later hints cost ' + hintCost(Rift.State.get()) + ' heart(s) and count as help for stars.';
+                return (firstHintAvailable() ? 'The first hint on this topic is free and keeps stars. ' : '') + later;
             }
             function refreshPerk() {
                 const p = perkInfo();
                 perkBtn.style.display = p ? '' : 'none';
                 if (p) { perkBtn.textContent = p.label + (p.available ? '' : ' (used)'); perkBtn.disabled = !p.available; }
-                hintBtn.textContent = stakesClock().scene ? '💡 Hint (+1 danger)' : '💡 Hint (−' + hintCost(Rift.State.get()) + ' ❤)';
+                hintBtn.textContent = firstHintAvailable() ? '💡 Hint (first free; keeps stars)' : stakesClock().scene ? '💡 Hint (+1 danger)' : '💡 Hint (−' + hintCost(Rift.State.get()) + ' ❤)';
             }
             function usePerk() {
                 if (phase !== 'play') return;
+                if (firstHintAvailable()) { hint(); return; }
                 const s = Rift.State.get();
                 const av = Rift.data.avatars[s.avatar.type];
                 Rift.State.update(st => { st.perksUsed[av.perk.id] = st.chapter; });
@@ -209,7 +225,9 @@
                 refreshPerk();
                 refreshChecks();
                 const rng = Rift.makeRng(visit.seed + ':stage' + stageIx);
-                const data = def.generate(rng, difficulty, stages[stageIx].opts); // opts e.g. { theme: 'statistics' } from data/map.js
+                const opts = Object.assign({}, stages[stageIx].opts);
+                if (def.id === 'tower') opts.cover = coverFor(Rift.State.get());
+                const data = def.generate(rng, difficulty, opts);
                 stages[stageIx].data = data;
                 title.querySelector('.stage').textContent = def.name + (stages.length > 1 ? '  ·  stage ' + (stageIx + 1) + ' of ' + stages.length : '');
                 stageBox.append(el('div.enc-blurb.small', null, [el('span.chip', { dataset: { colour: def.colour }, text: Rift.COLOURS[def.colour].icon + ' ' + def.family }), ' ' + (def.blurb || '')]));
@@ -233,13 +251,14 @@
                 helpBtn.disabled = false;
                 if (!Rift.State.get().flags['heart-rules-seen']) {
                     Rift.State.update(s => { s.flags['heart-rules-seen'] = true; });
-                    host.querySelector('.bubble').textContent = 'You get ' + attempts.free + ' free wrong checks. Then wrong checks and hints cost hearts. At zero you get a scar. Rest and shrines help you heal.';
+                    feedback.textContent = 'You get ' + attempts.free + ' free wrong checks. ' + hintRule() + ' At zero hearts, rest and shrines help you recover.';
                 }
                 offerTutorial(def);
+                if (checkpoint && stageIx === checkpoint.stageIx) onSubmit(checkpoint.answer, true);
                 if (meter) meter.refresh();
             }
 
-            function onSubmit(answer) {
+            function onSubmit(answer, restoring) {
                 if (destroyed || phase !== 'play') return { solved: false, feedback: 'Read the feedback, then continue.' };
                 const { def } = current();
                 const result = def.check(stages[stageIx].data, answer) || { solved: false };
@@ -248,16 +267,21 @@
                     closeHelp();
                     pausePuzzle();
                     stages[stageIx].result = result;
+                    stages[stageIx].answer = answer;
                     hintBtn.disabled = perkBtn.disabled = helpBtn.disabled = true;
                     Rift.Audio.sfx('success');
                     feedback.className = 'enc-feedback good';
-                    feedback.textContent = result.feedback || 'Solved!';
-                    Rift.State.update(s => { s.stats.puzzlesSolved += 1; });
+                    feedback.textContent = 'Solved. Continue when you are ready.';
+                    Rift.State.update(s => {
+                        if (!restoring) s.stats.puzzlesSolved += 1;
+                        if (result.meta && result.meta.reflectionComplete) s.flags['reflection:' + n.id] = { seed: visit.seed, lured: visit.lured, stages: stages.map(p => ({ id: p.id, difficulty: p.difficulty, opts: p.opts, result: p.result, answer: p.answer })), stageIx, answer, hintsUsed, wrongs, reflectionCounted: !!(checkpoint && checkpoint.reflectionCounted) };
+                    });
                     const clk = stakesClock();
-                    if (clk.scene) Rift.Stakes.progress(clk.scene, 1);
+                    if (clk.scene && !restoring) Rift.Stakes.progress(clk.scene, 1);
+                    if (result.meta && result.meta.reflectionComplete) Rift.State.saveNow();
                     modal('Stage solved!', el('div.stack', null, [
-                        el('p', { text: result.feedback || 'Your answer fits the rules.' }),
-                        def.tok ? el('p.tok-line', { text: 'Think about it: ' + def.tok }) : null,
+                        el('p', { text: 'Your answer fits the rules. Your reasoning will be saved in the Journal.' }),
+                        el('details', null, [el('summary', { text: 'Inspect the reasoning' }), el('p', { text: result.feedback || 'Your answer fits the rules.' }), def.tok ? el('p.tok-line', { text: def.tok }) : null]),
                     ]), [{ label: 'Continue', required: true, primary: true, onclick: nextStage }]);
                 } else {
                     Rift.Audio.sfx('error');
@@ -286,17 +310,19 @@
                 const list = def.hints(stages[stageIx].data) || [];
                 if (hintIx >= list.length) { Rift.UI.toast('No more hints for this one.'); return; }
                 const clk = stakesClock();
-                if (!free && !clk.scene) {
+                const learning = firstHintAvailable();
+                if (!free && !learning && !clk.scene) {
                     if (!loseHealth(hintCost(Rift.State.get()))) return;
                 }
-                hintsUsed += 1;
-                Rift.State.update(s => { s.stats.hintsUsed += 1; });
+                if (learning) Rift.State.update(s => { s.flags['learning-hint:' + def.id] = true; });
+                else { hintsUsed += 1; Rift.State.update(s => { s.stats.hintsUsed += 1; }); }
                 Rift.Audio.sfx('hint');
                 const text = lantern ? list[list.length - 1] : list[hintIx++];
                 feedback.className = 'enc-feedback hint';
                 feedback.textContent = (lantern ? '🏮 ' : '💡 ') + text;
                 refreshPerk();
-                if (!free && (clk.scene || clk.floor)) tickClock(clk.scene || clk.floor, 1);
+                refreshChecks();
+                if (!free && !learning && (clk.scene || clk.floor)) tickClock(clk.scene || clk.floor, 1);
             }
 
             function loseHealth(k) {
@@ -335,8 +361,11 @@
                 if (destroyed || phase !== 'feedback') return;
                 phase = 'debrief';
                 const { def } = current();
-                if ((isBoss || isMini) && !params.shrine && def.why) {
-                    const ok = await whyStep(def.why(stages[stageIx].data));
+                const reflectionDone = stages[stageIx].result && stages[stageIx].result.meta && stages[stageIx].result.meta.reflectionComplete;
+                if ((isBoss || isMini) && !params.shrine && def.why && !reflectionDone) {
+                    const reflection = def.why(stages[stageIx].data, stages[stageIx].answer);
+                    stages[stageIx].reflection = reflection && reflection.explain || '';
+                    const ok = await whyStep(reflection);
                     if (destroyed) return;
                     const clk = stakesClock();
                     if (!ok) {
@@ -344,6 +373,12 @@
                         if (clk.scene) await tickClock(clk.scene, 1);
                         else if (!loseHealth(1)) return;
                     } else if (clk.scene && stageIx === stages.length - 1) Rift.Stakes.progress(clk.scene, 1);
+                } else if (reflectionDone && stakesClock().scene && stageIx === stages.length - 1) {
+                    const pending = Rift.State.get().flags['reflection:' + n.id];
+                    if (!pending || !pending.reflectionCounted) {
+                        Rift.Stakes.progress(stakesClock().scene, 1);
+                        if (pending) Rift.State.update(s => { s.flags['reflection:' + n.id].reflectionCounted = true; });
+                    }
                 }
                 if (destroyed) return;
                 stageIx += 1;
@@ -364,7 +399,7 @@
                     const opts = q.options.map((t, i) => el('button.btn.why-option', {
                         text: t,
                         onclick() {
-                            const ok = i === q.correct;
+                            const ok = Array.isArray(q.correctOptions) ? q.correctOptions.includes(i) : i === q.correct;
                             Rift.Audio.sfx(ok ? 'success' : 'error');
                             m.close();
                             modal(ok ? 'Exactly.' : 'Not quite.', el('p', { text: q.explain || '' }), [{ label: 'Continue', required: true, primary: true, onclick: () => resolve(ok) }]);
@@ -397,7 +432,8 @@
                 let earned = [];
                 const stars = Rift.World.solveStars(hintsUsed, wrongs);
                 catchOpts = { stars, lured: visit.lured };
-                obstacle = Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
+                // Finish the homecoming before offering a generic visitor at the Core.
+                obstacle = n.id === 'k-core' && !s.flags['seen:finale.home'] ? null : Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
                 const slotsBefore = Rift.World.tweakSlots(s);
                 Rift.State.update(st => {
@@ -412,24 +448,23 @@
                         if (p.id === 'chart-fixer') earned.push('chart-honest');
                         if (p.id === 'rule-hunter' && r.discriminating) earned.push('falsifier');
                     });
+                    st.flags['reasoning:' + n.id] = stages.map(p => ({ puzzle: p.id, feedback: (p.result || {}).feedback || '', reflection: p.reflection || (p.result && p.result.meta && p.result.meta.reflectionExplain) || '', tok: Rift.Puzzles.get(p.id).tok || '' }));
+                    delete st.flags['reflection:' + n.id];
                     if (n.id === 'b-town-hall') earned.push('unmasker');
                     earned = earned.filter(id => Rift.World.award(st, id));
                 });
-                const def = Rift.Puzzles.get(stages[stages.length - 1].id);
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name)
                     .concat(r.tactic ? ['new tactic card: ' + Rift.data.tactics[r.tactic].name + ' (add it in Collection → Build decks)'] : []).join(', ');
                 const body = el('div.stack', null, [
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
-                    obstacle ? el('p', { text: 'A rustle near the rift… something appeared!' }) : el('p', { text: 'No creature appeared this time. Your rewards are yours. More stars improve the chance of rare visitors.' }),
-                    el('p.small', { text: 'Three stars: no hints or wrong checks. Two: up to two in total. More stars give more XP.' }),
-                    el('p.enc-goal', { text: n.goal || 'Check the rules before you choose an answer.' }),
-                    def && def.tok ? el('p.tok-line', { text: '💭 ' + def.tok }) : null,
+                    obstacle ? el('p', { text: Rift.data.creatures[obstacle].name + ' appeared. Catching is optional.' }) : null,
                     el('p', { text: '+' + r.xp + ' XP' + (items ? '  ·  ' + items : '') }),
                     earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
                 ]);
-                modal('Solved!', body, [{ label: obstacle ? 'Catch the ' + Rift.data.creatures[obstacle].name + '!' : 'Back to the map', primary: true, onclick: () => (obstacle ? catchPhase() : Rift.Router.replace('map')) }]);
+                const buttons = obstacle ? [{ label: 'Catch ' + Rift.data.creatures[obstacle].name + '!', primary: true, onclick: catchPhase }, { label: 'Back to the map', onclick: () => Rift.Router.replace('map') }] : [{ label: n.id === 'k-core' && !s.flags['seen:finale.home'] ? 'Go to the Summit Rift to return home' : 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }];
+                modal('Solved!', body, buttons);
             }
 
             // ---- catching ----
@@ -565,7 +600,7 @@
                 if (!params.shrine && firstVisit && Rift.Dialogue.has(n.script)) await Rift.Dialogue.play(n.script, ctx);
                 if (destroyed) return;
                 const lead = firstVisit ? n.intro : n.reminder;
-                if (!params.shrine && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead, ctx);
+                if (!params.shrine && !checkpoint && Rift.Dialogue.has(lead)) await Rift.Dialogue.play(lead, ctx);
                 if (destroyed) return;
                 // Skipped stages count as progress once, on a fresh clock (the script started it).
                 const clk = stakesClock();

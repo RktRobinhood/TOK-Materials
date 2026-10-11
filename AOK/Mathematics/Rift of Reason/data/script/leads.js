@@ -19,8 +19,8 @@
     } };
     L['rule-hunter:pattern'] = { inner: {
         owlet: 'A pattern is not a proof. I say this often. I\'m usually right.',
-        mothkin: 'Shh. Number six. It\'s dimmer than the others. Look closer.',
-        fox: 'Five in a row? Boring. Picture the one that breaks it.',
+        mothkin: 'Look at the terms shown. Is the next step forced, or only a guess?',
+        fox: 'A row of examples? Boring. Picture the one that breaks it.',
         frogling: 'I trusted five sunny days once. The sixth was a heron.',
         raven: '"And so on." Three small words. Who is promising?',
     } };
@@ -41,9 +41,9 @@
     // The Syllogism Gallery's own Venn lead (venn d1, met there first), so the Well's Venn lead is fresh.
     L['venn:gallery'] = { inner: {
         owlet: 'Premises first, opinions later. Shade what they say. Nothing more.',
-        mothkin: 'Look at the circles, not the lobsters. The lobsters are very shiny.',
-        fox: 'Picture trumpet lobsters. Fine. If all that were true, must it follow?',
-        frogling: 'Ponds can\'t play trumpets either. Doesn\'t matter. Does it follow?',
+        mothkin: 'Look at the circles and the class names. Shiny stories can wait.',
+        fox: 'Picture the premises true. Fine. Must the conclusion follow?',
+        frogling: 'An odd story can still follow the rules. Does this conclusion follow?',
         raven: '"All" and "some". Two small words. They do all the work.',
     } };
     // The Wishing Well's own banks (map.js opts.lead: 'well'), so a player who met venn or rule-hunter
@@ -71,7 +71,7 @@
     } };
     L['line-drawer:graph'] = { inner: {
         owlet: 'Count lines at each dot. More than two odd dots: impossible. Proven.',
-        mothkin: 'Look for the odd dots. Start at one. Ignore the pretty middle one.',
+        mothkin: 'Look for the odd dots. They can show where a path must start.',
         fox: 'Impossible is an answer too. A dramatic one.',
         frogling: 'Old puzzle. The trick was counting. Count first.',
         raven: '"Impossible" isn\'t giving up here. It\'s a claim. Prove it.',
@@ -80,7 +80,7 @@
         owlet: 'Nobody said the lines must stay in the box. I checked.',
         mothkin: 'Look past the edge. There\'s room out there. Dark, but room.',
         fox: 'The box is boring. Leave it.',
-        frogling: 'Old trick. The answer lives outside the box.',
+        frogling: 'Old trick. Try space outside the box, too.',
         raven: '"Connect the dots." It never said "inside".',
     } };
     L['village'] = { inner: {
@@ -117,7 +117,7 @@
         owlet: 'Valid first. True later. Two different questions. I keep them in separate drawers.',
         mothkin: 'Shade only what the scrolls say. Not what the screens shout.',
         fox: 'Picture the premises true and the ending false. Can you? Then it\'s broken.',
-        frogling: 'At the Fair it was lobsters. Here it\'s screens. Same question: does it follow?',
+        frogling: 'At the Fair we checked conclusions. Here too. Same question: does it follow?',
         raven: '"Valid" isn\'t "true". Two words. Never let anyone swap them.',
     } };
     L['witness:bridge'] = { inner: {
@@ -137,14 +137,14 @@
     } };
     L['chart-fixer'] = { inner: {
         owlet: 'Same numbers, fair scale, then decide. Fair is my favourite.',
-        mothkin: 'Look. The axis starts at ninety. Shiny trick. I fall for shiny.',
-        fox: 'Picture this chart with all the years. Less drama. More true.',
-        frogling: 'Are the years evenly spaced? Last time, they weren\'t.',
+        mothkin: 'Look where the axis starts. Shiny scales can hide a trick. I fall for shiny.',
+        fox: 'Are all the years shown? Picture the full record. Less drama. More evidence.',
+        frogling: 'Do the gaps between years match the calendar? Check this chart.',
         raven: '"Technically true." That word "technically" is working very hard.',
     } };
     L['prediction'] = { inner: {
         owlet: 'It bets on my usual move. So: don\'t be usual. You can do this.',
-        mothkin: 'Look at its counting table. It shows its bet. Brightest number wins.',
+        mothkin: 'Read the counts and the tie rules. They explain this machine\'s bet.',
         fox: 'It counts what I did. So do something I\'d never do. Ta-da.',
         frogling: 'My habits are its food. Starve it.',
         raven: '"Predict." A fancy word for "guess".',
@@ -160,12 +160,12 @@
         owlet: 'Accurate on average. Fair to whom? Good question. Yours, really.',
         mothkin: 'Look at the ones it said no to. They\'re in the dark corner.',
         fox: 'Picture being the one it got wrong.',
-        frogling: 'Which district did it miss before? It\'ll miss it again.',
+        frogling: 'Compare missed rates by district. Then check who still needs help.',
         raven: '"Warning notes." That word measures something else.',
     } };
     L['oracle'] = { inner: {
         owlet: 'Check every step that divides. Dividing by zero is a classic.',
-        mothkin: 'Look at that corner. Does it only look square?',
+        mothkin: 'Look closely at the claimed step. Does it fit the evidence?',
         fox: 'Try a number it didn\'t try. It hates that.',
         frogling: 'Checking some cases isn\'t checking all. I learned that the hard way.',
         raven: '"Therefore." Carrying a lot there.',

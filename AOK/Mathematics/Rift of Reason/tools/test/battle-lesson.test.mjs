@@ -89,3 +89,34 @@ test('starter() still lends ten loaned creatures and team() builds instances', (
     assert.equal(L.team(['eelish'], 'x-')[0].uid, 'x-0');
     assert.equal(L.guide().steps, L.steps);
 });
+
+test('short first lesson reaches a real win-rule decision promptly, with two successful plans and a losing attack', () => {
+    const decision = L.shortSteps.findIndex(st => st.accepts);
+    assert.ok(decision <= 7, 'independent action follows at most six engine actions and one prediction');
+    assert.ok(L.shortSteps.length <= 10);
+    for (const choice of L.shortSteps[decision].accepts) {
+        let s = L.shortGuide().create();
+        assert.ok(L.shortConfig().players.every(p => p.team.every(c => c.loaner)), 'all cards are loaned');
+        for (let i = 0; i < L.shortSteps.length; i++) {
+            const step = L.shortSteps[i];
+            if (step.info) { assert.equal(E.rules(s).reverseHearts, true); continue; }
+            if (i === decision) {
+                assert.equal(s.players[1].hearts, 1);
+                assert.equal(E.rules(s).reverseHearts, true);
+                assert.equal(E.timeline(s)[0].type, 'reset');
+                assert.equal(E.timeline(s)[0].turns, 2);
+                step.accepts.forEach(a => assert.equal(E.legalActions(s).filter(matches(a)).length, 1));
+            }
+            const action = i === decision ? choice : step.expect;
+            assert.equal(E.legalActions(s).filter(matches(action)).length, 1, JSON.stringify(action));
+            s = E.applyAction(s, action);
+            if (E.winner(s) != null) break;
+            for (const reply of (step.replies || []).filter(r => r.type)) {
+                assert.equal(E.legalActions(s).filter(matches(reply)).length, 1, JSON.stringify(reply));
+                s = E.applyAction(s, reply);
+            }
+        }
+        assert.equal(E.winner(s), choice.type === 'attack' ? 1 : 0, JSON.stringify(choice));
+        assert.equal(s.options.mode, 'practice');
+    }
+});

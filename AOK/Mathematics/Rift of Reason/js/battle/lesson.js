@@ -5,14 +5,15 @@
  * Each step: { title, text, label, expect, replies, compare? }
  *   info     an explain-only step (expect { type: 'info' }): no move; the learner clicks the pointed-at
  *            power button (a Got it button only if that button is missing)
- *   expect   the ONE action the learner must take (matched on every key it lists)
+ *   expect   the pointed-at action (matched on every key it lists); accepts can allow other plans
+ *   predict  choices for an explain-only prediction before an independent move
  *   replies  actions applied afterwards with a visible pause (Granny's turn, and the
  *            learner's end where the step says so), and { say } lines Granny speaks between
  *            them (the screen waits for the voice to end before it goes on)
  *   compare  [attacker, defender]: show "Same cards, different rule" for this fight
  * Every step is legal in the normal engine (tools/test/battle-lesson.test.mjs replays them).
  *
- * Rift.Battle.Lesson = { steps, powerStep, create, config, advance, starter, team, guide }
+ * guide is the full reference; shortGuide is the default first lesson.
  * guide(power) adds powerStep before "Change a rule" when the learner's avatar has a power
  * (design/AVATARS.md 1.6: "This button is your power."); the button shows but stays unused.
  */
@@ -131,14 +132,14 @@
     // No Got it button (the teacher's playtest: it was the one step that broke the pointer flow):
     // the gold pointer sits on the power button, and clicking it moves on without using it.
     const powerStep = { title: 'Your power', label: 'Click your power', info: true, expect: { type: 'info' }, replies: [],
-        text: 'The round button by your portrait is your power. Every avatar has a different one. It costs energy, then rests for a few turns. Point at it to read yours. Today we won\'t use it. Click it to go on.' };
+        text: 'The round button by your portrait is your power. Point at it to read its effect and cost. Click it to continue; this lesson click does not use the power.' };
 
     function team(ids, prefix) {
         return ids.map((species, i) => ({ uid: prefix + i, species, loaner: true, injuries: [], scars: [], powerDelta: 0, warped: null, trophyOf: null }));
     }
     // A loaned 10-creature team for anyone without a collection (story match, practice).
     function starter() {
-        return team(['astrophysicat', 'zuckerborg', 'speedcheeta', 'lobstorian', 'muskrat', 'astrophysicat', 'zuckerborg', 'speedcheeta', 'lobstorian', 'muskrat'], 'lesson-you-');
+        return team(['kardashiant', 'astrophysicat', 'zuckerborg', 'speedcheeta', 'lobstorian', 'muskrat', 'astrophysicat', 'zuckerborg', 'speedcheeta', 'lobstorian'], 'lesson-you-');
     }
 
     // The 5th and 6th creatures are too expensive to play during the lesson, so Granny can't be beaten early
@@ -176,8 +177,71 @@
     function guide(power) {
         if (!power) return { steps, create, outro, next };
         const at = steps.findIndex(s => s.title === 'Change a rule');
-        return { steps: steps.slice(0, at).concat([powerStep], steps.slice(at)), create: () => create(power), outro, next };
+        const status = Battle.Engine.powerStatus(create(power), 0);
+        const cost = status.heartCost ? status.heartCost + ' heart' + (status.heartCost === 1 ? '' : 's') : status.cost ? status.cost + ' energy' : 'free';
+        const ownPowerStep = Object.assign({}, powerStep, { text: status.name + ': ' + status.text + ' Cost: ' + cost + '. Click your power to continue; this lesson click does not use it.' });
+        return { steps: steps.slice(0, at).concat([ownPowerStep], steps.slice(at)), create: () => create(power), outro, next };
     }
 
-    Battle.Lesson = { steps, powerStep, create, config, advance, starter, team, guide };
+    // The first visit reaches the changed victory goal after six actions. The learner predicts
+    // the outcome, then chooses between real legal actions: two repairs, or the losing attack.
+    // Guard, tactics, powers and the combat comparison stay in the replayable full reference.
+    const shortSteps = [
+        { title: 'Draw one card', label: 'Draw from your deck',
+            text: 'Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.',
+            expect: { type: 'draw', choice: 'deck' }, replies: [] },
+        { title: 'One cheap creature', label: 'Play Kim Kardashiant',
+            text: 'You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.',
+            expect: { type: 'play', cid: 'p0c0' }, replies: [] },
+        { title: 'Wake your creature', label: 'End turn',
+            text: 'New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.',
+            expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'end' }] },
+        { title: 'Your next draw', label: 'Draw from your deck',
+            text: 'Draw first. Your energy grows and refills each turn.',
+            expect: { type: 'draw', choice: 'deck' }, replies: [] },
+        { title: 'An obvious attack', label: 'Attack Granny with Kim',
+            text: 'Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. One attack takes one heart.',
+            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [] },
+        { title: 'The goal changes', label: 'End turn',
+            text: 'End turn. Watch Granny change the Win rule. Rule cards affect both players.',
+            expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'axiom', choice: 'reverse-hearts' }, { type: 'end' }, { type: 'draw', choice: 'deck' }] },
+        { title: 'Predict before acting', label: 'Choose a prediction', info: true,
+            text: 'Read the Win tile. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?',
+            expect: { type: 'info' }, replies: [],
+            predict: [
+                { label: 'I win', correct: false, feedback: 'Read Win again: a hero now wins when their own hearts reach 0. This attack would make Granny win.' },
+                { label: 'Granny wins', correct: true },
+            ] },
+        { title: 'Choose your plan', label: 'Change the Win rule', open: true,
+            text: 'Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.',
+            hint: 'A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.',
+            hint2: 'Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.',
+            expect: { type: 'activate', cid: 'p0c0', ability: 'filter' },
+            accepts: [{ type: 'activate', cid: 'p0c0', ability: 'filter' }, { type: 'axiom', choice: 'normal-hearts' }, { type: 'attack', cid: 'p0c0', target: 'h1' }],
+            replies: [{ say: 'Zero hearts loses again. You changed the starting rule, so the same attack has a different result.' }] },
+        { title: 'Prepare the last attack', label: 'End turn',
+            text: 'Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.',
+            expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'end' }, { type: 'draw', choice: 'deck' }] },
+        { title: 'Test your prediction', label: 'Attack Granny with Kim',
+            text: 'Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.',
+            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [] },
+    ];
+    function shortConfig(power) {
+        return {
+            seed: 'card-arena-first-lesson',
+            players: [
+                { name: 'You', team: team(['kardashiant', 'muskrat', 'tremendoodle', 'muskrat', 'tremendoodle', 'muskrat'], 'lesson-you-'), tactics: [], hearts: 3, power: power || null },
+                { name: 'Granny Axiom', team: team(['muskrat', 'tremendoodle', 'muskrat', 'tremendoodle', 'muskrat', 'tremendoodle'], 'lesson-granny-'), tactics: [], hearts: 2, consumables: { 'extra-energy': 1 } },
+            ],
+            axiomDeck: ['normal-hearts', 'reverse-hearts', 'thrift', 'underdog', 'normal-hearts'],
+            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 2, fateGap: 4, spark: false,
+                openHand: [1, 1], openAxioms: 1, deckSize: 6, minCreatures: 1 },
+        };
+    }
+    function shortGuide(power) {
+        return { steps: shortSteps, create: () => Battle.Engine.createBattle(shortConfig(power)), outro,
+            next: 'Replay this short lesson or choose Full card lesson in Collection for Guard, abilities, tactics and your avatar’s power.' };
+    }
+
+    Battle.Lesson = { steps, powerStep, create, config, advance, starter, team, guide, shortSteps, shortConfig, shortGuide };
 })(typeof window !== 'undefined' ? window : globalThis);

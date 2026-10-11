@@ -164,6 +164,12 @@
         return pts;
     }
 
+    function extendsBeyondDots(data, points) {
+        const xs = data.dots.map(p => p[0]), ys = data.dots.map(p => p[1]);
+        const box = [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+        return points.some(([x, y]) => x < box[0] - 0.05 || x > box[2] + 0.05 || y < box[1] - 0.05 || y > box[3] + 0.05);
+    }
+
     function checkDots(data, answer) {
         const raw = readPoints(answer);
         if (!raw || raw.length < 2) return { solved: false, feedback: 'Draw at least one line first.', partial: 0 };
@@ -181,7 +187,10 @@
             const miss = total - hit;
             return { solved: false, partial, feedback: miss + (miss === 1 ? ' dot is' : ' dots are') + ' still not on a line.' };
         }
-        return { solved: true, partial: 1, feedback: 'All ' + total + ' dots with ' + segs + (segs === 1 ? ' line' : ' lines') + '. The box was never really there!' };
+        const route = extendsBeyondDots(data, pts)
+            ? ' Your route extended beyond the dots, as the rules allow.'
+            : ' You planned connected lines within the line limit.';
+        return { solved: true, partial: 1, feedback: 'All ' + total + ' dots with ' + segs + (segs === 1 ? ' line' : ' lines') + '.' + route };
     }
 
     // ------------------------------------------------------------------
@@ -594,32 +603,50 @@
         return { options: order.map(i => options[i]), correct: order.indexOf(correctIndex) };
     }
 
-    function whyFor(data) {
+    function whyFor(data, answer) {
         if (data.mode === 'dots') {
+            const points = readPoints(answer) || data.known;
+            const outside = extendsBeyondDots(data, points);
             const s = shuffleOptions(data.whyShuffle, [
-                'Nothing in the rules said the lines must stay inside. The "box" was an assumption we added ourselves.',
+                outside
+                    ? 'The rules allowed connected straight lines to extend beyond the dots. No box restriction was stated.'
+                    : 'The rule asks for connected straight lines that cover every dot within the line limit. It does not assume one fixed route.',
                 'The rules changed halfway through the puzzle.',
                 'Straight lines bend slightly when they are long enough.',
                 'It is a trick: puzzles like this have no real answer.',
             ], 0);
             return {
-                question: 'Why do many people get stuck on puzzles like this one?',
+                question: outside ? 'Why was your route allowed to extend beyond the dots?' : 'What made your route a valid answer?',
                 options: s.options,
                 correct: s.correct,
-                explain: 'The rules never mention a box. Our mind adds that limit on its own. A lot of maths discovery is noticing a rule that was never really there.',
+                explain: outside
+                    ? 'Your route went beyond the dots while following the stated rules. Check which limits the task states and which you add yourself. This shows one allowed route; it does not prove every route must leave the dots.'
+                    : 'You covered every dot with connected straight lines and stayed within the line limit. Planning how the lines join matters. A different route can also work if it follows those same rules.',
             };
         }
+        const odd = oddVertices(data).length;
+        const correct = odd > 2
+            ? 'Each time the chalk passes through a dot it uses two lines (one in, one out). Only the start and the end can have an odd number, so at most two dots can be odd.'
+            : odd === 2
+                ? 'The route must start at one odd dot and end at the other. At every other dot, the lines are paired as you enter and leave.'
+                : 'With no odd dots, every dot is even. The paired lines let a complete route return to its start.';
         const s = shuffleOptions(data.whyShuffle, [
-            'Each time the chalk passes through a dot it uses two lines (one in, one out). Only the start and the end can have an odd number, so at most two dots can be odd.',
+            correct,
             'Nobody has found the route yet, but someone clever might find it one day.',
             'Four is an even number, so the lines cancel each other out.',
             'Figures with crossing lines can never be drawn in one stroke.',
         ], 0);
         return {
-            question: 'Why can a figure with four odd dots (dots where an odd number of lines meet) never be drawn in one stroke?',
+            question: odd > 2
+                ? 'Why can this figure with ' + odd + ' odd dots never be drawn in one stroke?'
+                : odd === 2 ? 'Why must your route start and end at the two odd dots?' : 'Why can your route return to its starting dot?',
             options: s.options,
             correct: s.correct,
-            explain: "Euler's argument (1736): passing through a dot always uses lines in pairs. Odd dots must be where you start or stop, and a stroke has only two ends. This is a proof, so it holds for every attempt, forever, not just the ones we tried.",
+            explain: odd > 2
+                ? "Euler's argument: passing through a dot uses lines in pairs. All " + odd + ' odd dots would have to be ends, but one stroke has only two ends. This rules out every route, not just the ones we tried.'
+                : odd === 2
+                    ? 'Passing through a dot uses lines in pairs. The two odd dots must be the two ends. Your route traced each line once from one odd dot to the other.'
+                    : 'Each dot has an even number of lines. A complete route can pair each arrival with a departure, use every line once and finish where it started.',
         };
     }
 

@@ -731,7 +731,7 @@ Each NPC has one static `peril`. When that scene resolves, whatever the tier, th
 ### Arming
 
 `Cast.canLose(role, scene)` is true only if **all** of these hold:
-1. **"Characters can die"** is on in Settings (the default; a one-line content note plays before the Prologue: "In this story, characters can be lost.");
+1. **"Story characters can die"** is on in Settings (optional; new adventures default to off after playtest repair #78, while existing saves keep their choice; with it on, a one-line content note plays before the Prologue: "In this story, characters can be lost.");
 2. `scene` is the role's `peril`, and `risked:<npc>` is not yet set;
 3. the role is still played by its original;
 4. every beat in `met` has been seen;
@@ -874,7 +874,7 @@ Every flag is set in one place and read later. **Every story flag defaults to un
 | `dead:sequins` / `dead:granny` / `dead:sundial` / `dead:pip` | true | an armed tier 4 at each `peril` | Quiet Scenes, host fallbacks, `role:` lines, candles |
 | `risked:<npc>` | true | when each `peril` resolves | the lock (Appendix D) |
 | `quiet:<role>`, `arrived:<role>` | pending/done; true | a death; an arrival beat | the Quiet Scene queue; who speaks a role |
-| setting `charactersCanDie` | on / off | Settings (default on) | arming |
+| setting `charactersCanDie` | on / off | Settings (new adventures default off; existing choices preserved, #78) | arming |
 | `rumour:hexling` | true | Ch3 West Bridge | Library spawn |
 
 (The `wonder` choice: at the core, before the reveal, the colossus shows its prediction of your next question, "WHAT WILL GET MORE CLICKS?", and you ask your own. Everyone: "Why do people believe you?" / "What happens if nobody clicks?" Avatar-only: Owlet "What are your premises?" · Moth-kin "What's behind all that light?" · Fox "What if you're small?" · Frogling "What were you before?" · Raven "What do you mean by 'know'?". It cannot predict a question, only a click. The box answers it in one line as soon as it cracks open; all seven answers are written in §6.)

@@ -168,5 +168,5 @@
         });
     }
 
-    Rift.Backup = { panel, remind, loadDialog, previousButton, download };
+    Rift.Backup = { panel, remind, loadDialog, previousButton, download, copyText };
 })(typeof window !== 'undefined' ? window : globalThis);

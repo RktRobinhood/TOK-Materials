@@ -283,22 +283,23 @@
         moser: {
             level: 1,
             title: 'Cut the cake',
-            intro: ['Put points on a circle.', 'Join every point to every other point with straight lines.', 'Count the pieces inside the circle.'],
+            intro: ['Put points on a circle and join every pair with straight lines.', 'Move the points so no three lines meet at one point inside the circle.', 'Count the greatest possible number of pieces. This arrangement is called general position.'],
             ns: [1, 2, 3, 4, 5], breakN: 6, starts: [0, 1],
             term: n => String(1 + choose(n, 2) + choose(n, 4)),
             label: n => (n === 1 ? '1 point' : n + ' points'),
-            note: () => 'pieces',
-            question: 'How many pieces with 6 points?',
+            note: () => 'maximum pieces',
+            question: 'What is the greatest possible number of pieces with 6 points?',
             options: () => ['32', '31', '30', '24'],
             naive: '32',
             answer: () => '31',
             revealNote: 'not 32!',
             explain: [
-                '6 points give 31 pieces, not 32. Count them and see.',
+                'The greatest possible number with 6 points is 31 pieces, not 32. No three lines meet at one point inside.',
+                'With 6 equally spaced points, three lines meet at the centre. That shared crossing makes fewer pieces: 30. Move a point and the crossings separate.',
                 'The doubling was a coincidence of small numbers.',
-                'The real formula is 1 + C(n,2) + C(n,4). Next come 57 and 99.',
+                'For points in general position, the maximum is 1 + C(n,2) + C(n,4). Next come 57 and 99.',
             ],
-            hint: 'Draw it with 6 points and count very carefully. Is there any reason the number must double?',
+            hint: 'Use 6 points with no three lines crossing at one point inside. Count the greatest possible number of pieces. Must it double?',
         },
         euler41: {
             level: 1,
@@ -335,10 +336,10 @@
             revealNote: '= 17 × 19607843',
             explain: [
                 '333333331 = 17 × 19607843, so it is not prime.',
-                'Seven primes in a row felt like a law. It was luck.',
-                'Primes get rarer as numbers grow, so long runs like this always end.',
+                'Seven primes in a row do not prove the next number is prime.',
+                'This run ends at the composite number shown above.',
             ],
-            hint: 'Primes get rarer as numbers grow. Seven in a row is lucky, not a law.',
+            hint: 'The first seven numbers are prime. Does that prove the next one is? Look for a factor of the next number.',
         },
         fermat: {
             level: 2,
@@ -471,6 +472,7 @@
             fits: ['SIUUU! It fits!', 'Yes! Through the gate!', 'Fits. Perfection. Like me.'],
             nofit: ['No siuuu. Doesn\'t fit.', 'Blocked! Doesn\'t fit.', 'Nope. Not my rule.'],
             again: 'You tried that already. Same jump, same answer.',
+            success: 'SIUUU! You got it! My secret rule!',
             patternIntro: 'Same jump, every time. Patterns never lie… right?',
             patternBreak: 'SIUUU… wait. That is NOT the pattern.',
         },
@@ -479,6 +481,7 @@
             fits: ['YES! It fits! Huge!', 'Through the gate! Subscribe!', 'It fits! Bigger cheer!'],
             nofit: ['Doesn\'t fit! Eliminated!', 'Oof. Doesn\'t fit.', 'Nope! Blocked at the gate!'],
             again: 'Already tested! We need NEW content!',
+            success: 'YES! You got it! Huge! Subscribe!',
             patternIntro: 'Every one is bigger and better than the last! It can never stop… right?',
             patternBreak: 'WHAT?! It broke! Edit that out!',
         },
@@ -815,7 +818,7 @@
             state.pending = false;
             state.done = r.solved;
             sfx(api, r.solved ? 'success' : 'error');
-            keeper.say(r.solved ? pickLine(lines.fits).replace(/fits/i, 'you got it') : 'Ha! Not my rule!');
+            keeper.say(r.solved ? lines.success : 'Ha! Not my rule!');
             if (namer) { namer.remove(); namer = null; }
             const elim = r.eliminations || eliminations(data, state.tests.map(t => t.triple));
             const rows = data.candidates.map((c, i) => {

@@ -5,7 +5,7 @@
     const el = (...args) => Rift.el(...args);
 
     function rules(def, host, replay, onClose) {
-        const lines = def.rules || [def.blurb || 'Read the task, try a move, then check your answer.', 'Hints cost hearts. You can leave and try again.'];
+        const lines = def.rules || [def.blurb || 'Read the task, try a move, then check your answer.', 'Your first hint on a new topic is free and keeps stars. Check the encounter for later hint costs.'];
         return Rift.UI.modal('How to play: ' + def.name,
             el('div.stack', null, lines.map(text => el('p', { text }))),
             [{ label: 'Close' }, { label: 'Show me how', primary: true, onclick: replay }], { onClose });

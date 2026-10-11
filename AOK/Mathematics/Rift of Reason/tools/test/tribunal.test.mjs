@@ -144,6 +144,7 @@ test('numbers in the varied statistics cases are consistent', () => {
     coin.params.forEach(p => {
         assert.equal(p.p, 2 ** p.k, '1 in 2^k');
         assert.equal(p.m, p.n / p.p, 'expected winners n / p');
+        assert.equal(Number(p.noWinnerPct), Number(((1 - 1 / p.p) ** p.n * 100).toFixed(2)), 'no-winner likelihood is calculated independently of the expectation');
     });
     const bar = CASES.find(c => c.id === 'tall-bar');
     bar.params.forEach(p => {
@@ -341,4 +342,16 @@ test('Count One: Exhibit B is left out when `brave` is unset; Exhibit C reads th
     assert.ok(go.testimony.some(s => /EXHIBIT B: AT THE FAIR, ADA SAID “I WILL GO\.”/.test(s.text)));
     assert.ok(go.testimony.some(s => /POND INSPECTOR/.test(s.text)), 'the species cover story');
     assert.equal(go.testimony.length, 6);
+});
+
+test('Psychic Coin distinguishes an expected count from a guaranteed winner', () => {
+    const coin = CASES.find(c => c.id === 'psychic-coin');
+    const p = coin.params.find(p => p.n === 768 && p.k === 8);
+    assert.equal(p.m, 3);
+    assert.equal(p.noWinnerPct, '4.95');
+    const variant = fill(coin, p);
+    assert.match(variant.contradictions[0].explain, /expected number of winners is 768 ÷ 256 = 3/);
+    assert.match(variant.contradictions[0].explain, /not guaranteed.*chance of no winner.*4\.95%/);
+    assert.match(variant.lesson, /expected on average.*no winner is still possible/);
+    assert.doesNotMatch(JSON.stringify(variant), /always going to win|will succeed by luck|exactly the lucky few/);
 });

@@ -456,13 +456,13 @@
             distractors: ['correlation', 'misleading-chart', 'authority'],
             witness: 'altmanta',
             claim: 'Altmanta can predict the future.',
-            // Chance of k right guesses = 1 in p = 2^k; with n players, about n / p = m win by luck.
+            // Independent fair guesses: expected winners n / p; no-winner chance (1 - 1/p)^n.
             params: [
                 { k: 5, p: 32, n: 160, m: 5 },
                 { k: 6, p: 64, n: 320, m: 5 },
                 { k: 7, p: 128, n: 640, m: 5 },
                 { k: 8, p: 256, n: 768, m: 3 },
-            ],
+            ].map(p => Object.assign(p, { noWinnerPct: (Math.pow(1 - 1 / p.p, p.n) * 100).toFixed(2) })),
             opening: 'The witness predicted {k} coin flips in a row, Your Honour. All correct. The odds are astronomical.',
             intro: 'I knew you would call me. It’s going to be fine. Transformative, but fine.',
             testimony: [
@@ -484,11 +484,11 @@
             ],
             contradictions: [
                 { statements: ['s3', 's4'], evidence: ['poster'],
-                    explain: '{n} players tried. With a 1 in {p} chance each, about {n} ÷ {p} = {m} of them should get all {k} right by pure luck. Somebody was always going to win.',
+                    explain: 'With {n} independent players guessing fairly, the expected number of winners is {n} ÷ {p} = {m}. A winner is unsurprising in this large contest, but not guaranteed: the chance of no winner is (1 − 1/{p})^{n}, about {noWinnerPct}%.',
                     reaction: 'About {m} by luck? But… I felt so special.',
                     after: { lines: ['Fine, {n} players tried. But I WON. Winning proves I’m psychic!'], adds: 's5' } },
                 { statements: ['s5'], evidence: ['results'],
-                    explain: 'A goldfish also got all {k} right. If winning proved psychic powers, the goldfish would be psychic too. The winners are exactly the lucky few we expected.',
+                    explain: 'A goldfish also got all {k} right. Winning alone does not prove psychic powers. These {m} winners are consistent with lucky guessing; the expected count is an average, not a promised result.',
                     reaction: 'The goldfish… is my equal? I did not predict that.' },
             ],
             near: [
@@ -498,10 +498,10 @@
             ],
             hint: 'A 1 in {p} chance is small for one person. But how many people were trying? Press the witness about the contest.',
             why: {
-                right: 'With {n} players, about {m} are expected to get all {k} right by pure luck, so one win tells you nothing about powers.',
+                right: 'With {n} independent players guessing fairly, {m} winners are expected by chance. One win is weak evidence of powers; it is not proof.',
                 wrong: ['It shows the coin was unfair.', 'It shows the chance was really 1 in 2.', 'It shows that nobody can ever be lucky.'],
             },
-            lesson: 'A 1 in {p} event is rare for one person, but common when {n} people try: about {m} will succeed by luck. Before being amazed, ask: out of how many?',
+            lesson: 'A 1 in {p} event is rare for one person. With {n} independent players guessing fairly, {m} winners are expected on average, but no winner is still possible (about {noWinnerPct}%). Before being amazed, ask: out of how many?',
         },
         {
             id: 'truthful-feed',
@@ -649,7 +649,7 @@
             ],
             contradictions: [
                 { statements: ['s3'], evidence: ['record'],
-                    explain: 'Only {n} choices were ever counted. A handful of choices cannot show what you ALWAYS do.',
+                    explain: 'Only {n} recorded choices were counted. A handful of choices cannot show what you ALWAYS do.',
                     reaction: 'A HANDFUL? I… ROUNDED UP.' },
                 { statements: ['s4'], evidence: ['hall'],
                     explain: 'At the Prediction Hall the tower failed to predict you as soon as you changed. Predictable sometimes is not predictable always.',

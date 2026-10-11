@@ -71,6 +71,8 @@
             const fog = svg('rect', { x: 0, y: 0, width: W, height: H, class: 'fog', mask: 'url(#fog-mask)' });
             const nodesLayer = svg('g', { class: 'nodes' });
             const avatarLayer = svg('g', { class: 'avatar-layer' });
+            const crisisLayer = svg('g', { class: 'map-crisis', 'aria-hidden': 'true' });
+            const crisisNote = el('div.map-crisis-note.panel.small', { role: 'status' });
             board.append(svg('defs', {}, [
                 svg('radialGradient', { id: 'fog-hole' }, [
                     svg('stop', { offset: '0', 'stop-color': 'black' }),
@@ -78,13 +80,13 @@
                     svg('stop', { offset: '1', 'stop-color': 'white' }),
                 ]),
                 fogMask,
-            ]), bg, pathsLayer, fog, nodesLayer, avatarLayer);
+            ]), bg, pathsLayer, fog, crisisLayer, nodesLayer, avatarLayer);
 
             const hud = Rift.UI.hud();
             const chapterLabel = el('div.chapter-label.panel');
             const riftBtn = el('button.btn.small', { text: '🌀 Time rift', title: 'Jump to a chapter', onclick: () => riftMenu() });
             const tracker = el('div.quest-tracker.panel');
-            rootNode.append(el('div.map-wrap', null, [board]), hud, tracker, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
+            rootNode.append(el('div.map-wrap', null, [board]), hud, tracker, crisisNote, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
 
             // ---- avatar sprite ----
             const avatarGroup = svg('g', { class: 'map-avatar' });
@@ -119,6 +121,14 @@
             // ---- draw ----
             function draw() {
                 const st = Rift.State.get();
+                const crisis = mapId === 'main' && st.flags['seen:prologue.rift'] && !st.flags['seen:finale.home'];
+                const recovering = !!st.flags['seen:ch1.gate.win'];
+                crisisLayer.replaceChildren();
+                crisisNote.style.display = crisis ? '' : 'none';
+                if (crisis) {
+                    crisisLayer.append(svg('path', { d: 'M90 92 L360 102 L490 68 L720 100 L880 72 L1120 86 L1470 46', class: recovering ? 'sky-crack recovering' : 'sky-crack' }));
+                    crisisNote.textContent = recovering ? 'The crack has stopped drinking. The Fair is recovering.' : 'The sky is cracked. The Fair has fallen quiet.';
+                }
                 const revealed = st.map.revealed.filter(onThisMap);
                 const hints = Rift.World.hinted(st).filter(onThisMap);
                 pathsLayer.innerHTML = '';

@@ -196,6 +196,7 @@
         const rivals = el('div.rc-rivals.panel', null, [el('strong', { text: 'Rivals (never leave them on a bank without you):' })]
             .concat(data.rivals.map(([a, b]) => el('div.small', { text: data.cast[a].name + '  ✕  ' + data.cast[b].name }))));
         const info = el('div.small.rc-info');
+        const recovery = el('div.small.rc-recovery', { role: 'status', 'aria-live': 'polite' });
         const near = el('div.rc-bank.rc-near');
         const far = el('div.rc-bank.rc-far');
         const boatBox = el('div.rc-boat');
@@ -204,8 +205,8 @@
         const row = el('button.btn.primary.rc-row', { text: 'Row across', onclick: rowAcross });
         const tools = el('div.row.rc-tools', null, [
             row,
-            el('button.btn.small', { text: 'Undo', onclick() { if (done || !trips.length) return; trips.pop(); load = []; render(); } }),
-            el('button.btn.small', { text: 'Reset', onclick() { if (done) return; trips = []; load = []; render(); } }),
+            el('button.btn.small', { text: 'Undo', onclick() { if (done || !trips.length) return; trips.pop(); load = []; recovery.textContent = 'Last crossing undone. Earlier crossings are kept.'; render(); } }),
+            el('button.btn.small', { text: 'Reset', onclick() { if (done) return; trips = []; load = []; recovery.textContent = 'The whole plan was reset. Everyone is back on the near bank.'; render(); } }),
         ]);
 
         function state() { return play(data, trips); }
@@ -217,9 +218,9 @@
             if (done) return;
             const s = state();
             const onFar = !!(s.mask >> data.cast.indexOf(c) & 1);
-            if (where !== 'boat' && onFar !== !!s.boat) { api.sfx('error'); info.textContent = 'You can only load creatures from your own bank.'; return; }
+            if (where !== 'boat' && onFar !== !!s.boat) { api.sfx('error'); recovery.textContent = 'You can only load creatures from your own bank.'; return; }
             if (load.includes(c.id)) load = load.filter(x => x !== c.id);
-            else if (load.length >= data.seats) { api.sfx('error'); info.textContent = 'The boat seats ' + data.seats + ' besides you.'; return; }
+            else if (load.length >= data.seats) { api.sfx('error'); recovery.textContent = 'The boat seats ' + data.seats + ' besides you.'; return; }
             else load.push(c.id);
             api.sfx('click');
             render();
@@ -231,7 +232,9 @@
             api.sfx('place');
             if (r.problem === 'clash' || (data.toll && next.length > data.toll)) {
                 api.submit({ trips: next }); // a wrong check: the encounter shows why
-                info.textContent = r.problem === 'clash' ? r.clash.map(i => data.cast[i].name).join(' and ') + ' were left on a bank without you. It got ugly. Trip undone.' : 'Out of tickets. Start again.';
+                recovery.textContent = r.problem === 'clash'
+                    ? r.clash.map(i => data.cast[i].name).join(' and ') + ' were left on a bank without you. Only that crossing was undone. Your earlier crossings are kept.'
+                    : 'Out of tickets. The whole plan was reset. Everyone is back on the near bank, with all tickets restored.';
                 if (r.problem !== 'clash') trips = [];
                 load = [];
                 render();
@@ -239,6 +242,7 @@
             }
             trips = next;
             load = [];
+            recovery.textContent = '';
             render();
             if (r.mask === full) {
                 const res = api.submit({ trips: trips.map(t => t.slice()) });
@@ -262,7 +266,7 @@
             info.textContent = 'Crossings: ' + trips.length + left + ' · Boat seats ' + data.seats + ' besides you.';
         }
 
-        container.append(el('div.rc', null, [rivals, banks, info, tools]));
+        container.append(el('div.rc', null, [rivals, banks, info, recovery, tools]));
         render();
         return { destroy() { done = true; } };
     }

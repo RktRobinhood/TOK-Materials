@@ -26,6 +26,9 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 - Structure follows **Chrono Trigger's beats**: fun village fair → call to action → journey, with a **time-travel subplot** (time travel may happen within a chapter; it needs a logical progression along the avatar's journey).
 - Villain: **The Algorithm** — a faceless feed-entity leaking through time rifts, turning people into rabid caricatures and planting demons disguised as villagers. Finale reveal: it doesn't *know* anything; it is probabilities predicting clicks.
 - Tone: absurd, Monty Python-ish comedy. Art: **cute and dark, close to Demon Bluff** (thick outlines, saturated colour on dark backgrounds, framed character cards).
+- New adventures start with **Story characters can die** switched off. Settings offers the optional story stakes; existing saves keep their chosen setting. This setting controls story deaths, while card practice keeps its separate no-fate rules.
+- After the witnessed Prologue rift, the Fair/Road map shows a static crack in the sky. The Gate win changes its status to recovery; the homecoming clears it. Chapter jumps do not invent a witnessed crisis. The treatment uses no looping motion.
+- The first Core victory leads into the homecoming before any generic creature visitor. The victory summary points to the Summit Rift so the ending keeps its story focus.
 
 ## Overworld
 
@@ -34,11 +37,13 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 - **Jump to chapter** through a **time rift**: the chapter's start node appears with fog lifted around it; skipped chapters stay fogged for later; a one-time chapter starter kit (a couple of catch items + a common caricature) and a short voiced "Previously…" recap.
 - **Sites are fixed, contents vary**: each node rolls an event type/puzzle variant/spawn from its probability table on each visit (seeded). Sites can be revisited.
 - The avatar **walks between nodes with a real walk cycle** (≈6 side-view frames, mirrored for left).
+- A chapter jump updates the Journal and tracker to the new chapter's useful leads. Earlier open leads remain available in the Journal, labelled for later revisits.
 
 ## Avatars
 
 - **5 creature types × boy and girl = 10 avatars**: Owlet, Moth-kin, Fox kit, Frogling, Raven chick. Each type has a small starting perk (e.g. Owlet: one free hint per chapter; Fox: better catch odds on bluffers; Moth: lantern reveals one hidden clue; Frogling and Raven: TBD by the builder, same scale).
 - **Avatars are silent**: text only, JRPG-style. All NPCs, caricatures and narrated scenes are **voiced**, with pop-up portraits.
+- Avatar selection shows the starting map perk. Detailed Card Arena powers are explained in battles and the optional full card lesson, and remain available in Collection. Before saving a new traveller, review the roster name, game nickname and avatar; **Edit details** returns to the form, and **Start adventure** commits the choice.
 
 ## Puzzles
 
@@ -59,13 +64,19 @@ Venn boards judge validity assuming the argument's premises. At difficulty 2–3
 
 Venn working can be built and revised with named keyboard controls for regions, uncertain borders and individual x marks. Switchboard switches and sockets have named keyboard controls; a learner can select, connect, replace, unplug or cancel a wire without dragging. Witness evidence stays visible at every difficulty, so the core task tests the account against the evidence without a memory deadline.
 
+Witness feedback identifies each checked claim's supporting evidence, contradiction or missing link on the first wrong check. A corrected check acknowledges the revision. Answer keys use only stated evidence, including age and time. Moser's circle asks for the greatest possible number of regions with no three chords meeting inside the circle; six points in general position give 31, while six equally spaced points give 30 because three chords meet at the centre. Line Drawer debriefs describe the accepted route and the generated graph's odd vertices; a route within the dots does not imply an outside turn was needed.
+
 The Oracle number tester states each claim's integer or real-number domain. Inputs outside that domain are explained before evaluating the proof and cannot mark a step broken. Tower retries rebuild the local tower within the same encounter, preserving wrong-check, heart and hint counts; pressing Try again is free.
 
 Both are optional Road side paths using locally vendored official engines. Their frames work offline with embedded WASM bytes. Native controls have no reliable solved-versus-Solve completion callback, so a reported solve earns 5 XP and one charm once per station. Bonus reports do not count toward checked puzzle requirements, heart costs, catch rolls or accolades. Replay is free. The Black Box hook distinguishes indirect evidence from a unique explanation; Mines' no-guessing claim applies to default generated boards.
 
 Anti-AI stance: deterrence, not surveillance. Generated layouts, interactive formats, text in pieces/images, speed/streak bonuses, a "why?" multiple-choice step on boss puzzles only. No tab-switch detection.
 
-Hints cost **health** (one heart, or two with Shaky Hand). Each puzzle stage has three free wrong checks at difficulty 1, two at difficulty 2–3; Frogling adds one. Later wrong checks cost one heart everywhere. Boss Why answers/skips cost one heart if wrong. At zero hearts, receive a scar and return to the map with two hearts. Campfires heal hearts; shrine puzzles heal scars. Solved stages keep their feedback until Continue. A clean solve earns three stars; one or two hints/wrong checks earns two; more earns one. Two/three stars add 5/10 XP. Free avatar hints still count as help for stars.
+The **first conceptual hint on each puzzle topic** is free for the adventure, recorded by puzzle id in the save. It costs no hearts or danger, keeps stars, does not increment hint statistics, and does not spend the avatar's chapter hint or lantern. The display names this first free hint and the later cost. After that introductory hint, ordinary hints cost **health** (one heart, or two with Shaky Hand), or the displayed danger during a stakes scene. Free avatar hints retain their chapter limit and count as help for stars.
+
+Each puzzle stage has three free wrong checks at difficulty 1, two at difficulty 2–3; Frogling adds one. Later wrong checks cost one heart everywhere. Boss Why answers/skips cost one heart if wrong. At zero hearts, receive a scar and return to the map with two hearts. Campfires heal hearts; shrine puzzles heal scars. Solved stages keep their feedback until Continue. A clean solve earns three stars; one or two counted hints/wrong checks earns two; more earns one. Two/three stars add 5/10 XP.
+
+Completed encounter reasoning is saved for rereading in the Journal, including the checked feedback and reflection explanation. Prediction's local reflection counts as its boss reflection, so the same question is not asked twice. A saved local-reflection checkpoint restores the accepted answer and remaining encounter stages after reload; Continue completes rewards without repeating the reflection or charging it twice.
 
 ## Collecting
 
@@ -77,7 +88,9 @@ Hints cost **health** (one heart, or two with Shaky Hand). Each puzzle stage has
 
 ## Battles (payoff mode)
 
-The Fair Gate introduces cards as a minigame and offers Granny's fixed, sixteen-step teaching match or exploring the puzzles first. The teaching match uses highlighted real card controls, short instructions and paced animated moves; it is replayable from Collection. Syllo then offers a separate safe Road challenge with a loaned starter team; victory opens the Fair rift alongside the two-puzzle requirement. Both matches use practice rules: no fate or stakes. The Time rift remains available for classroom catch-up. Other puzzle-station challengers appear after the player has solved that station once; rest keepers use a named nearby puzzle prerequisite. Dedicated battle stations remain available. Challengers show portraits and introductions, and offer Easy/Hard; side challenges never count as completing their host puzzle. A shared rules card is available inside battles, with AI paused while it is open.
+The Fair Gate introduces cards as a minigame and offers Granny's **ten-step short lesson** or exploring the puzzles first. Real controls, short instructions and paced moves teach drawing, playing and attacking. A change to the Win rule reverses the consequence of an attack: step 7 asks the learner to predict who would win, then step 8 lets them independently choose among legal actions. A rule card and Filter offer different repairs; the losing attack is allowed and offers a safe retry. Guidance appears on request. Collection offers the replayable short lesson and an optional **Full card lesson** for Guard, abilities, tactics and avatar powers.
+
+Syllo then offers a separate safe practice match at the Fair Gate with a loaned starter team; victory opens the Fair rift alongside the two-puzzle requirement. The gate explanation names both requirements and where to learn or practise. Both matches use practice rules: no fate or stakes. The Time rift remains available for classroom catch-up. Other puzzle-station challengers appear after the player has solved that station once; rest keepers use a named nearby puzzle prerequisite. Dedicated battle stations remain available. Challengers show portraits and introductions, and offer Easy/Hard; side challenges never count as completing their host puzzle. A shared rules card is available inside battles, with AI paused while it is open.
 
 - **Card Arena rules (teacher redesign, 2026-10-07, #46; supersedes the 6 October turn cycle):** heroes start with 10 hearts. Creatures have cost, attack and health; damage stays between turns. Each turn: one draw choice (your own 20-card deck of creatures and Tactic cards, the shared axiom deck, or move the Fate track two spaces either way), then play cards for energy (capacity 1→10, refills), attack by dragging a ready creature at an enemy creature or the enemy hero, activate abilities (uses that creature's attack), and End turn. Keywords: Guard (attack it first), Swift, Shield, Elusive; ability timings Entrance, Last Word, Activate and passives. The second player gets an extra card and the Spark (+1 energy once). Full spec: `card-arena-2026-10-07.md`.
 - Players battle with **their own creatures** (team chosen in Collection) plus Tactic cards. Caught creatures **vary** (attack/health ±, sometimes a natural trait); a **Trick Book** teaches one trick.

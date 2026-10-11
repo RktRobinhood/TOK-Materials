@@ -20,7 +20,7 @@ function game(opts) {
     vm.runInContext(fs.readFileSync(GAME_DIR + '/data/cast.js', 'utf8'), ctx);
     Rift.Assets = { has: () => o.art !== false, img: () => new Element('img') };
     Rift.State.newGame();
-    Rift.State.update(s => { s.avatar = { type: o.type || 'owlet', variant: o.variant || 'girl', nickname: 'Ada' }; });
+    Rift.State.update(s => { s.avatar = { type: o.type || 'owlet', variant: o.variant || 'girl', nickname: 'Ada' }; s.settings.charactersCanDie = true; });
     return Rift;
 }
 const plain = x => JSON.parse(JSON.stringify(x));
@@ -505,7 +505,7 @@ test('the lead for a station uses the mode the encounter resolved', async () => 
     vm.runInContext(fs.readFileSync(GAME_DIR + '/data/script/leads.js', 'utf8'), vm.createContext({ window: { Rift } }));
     await r.play([{ lead: true }], b => b[0], { puzzle: { id: 'line-drawer', opts: undefined, mode: 'dots' } });
     await r.play([{ lead: true }], b => b[0], { puzzle: { id: 'rule-hunter', mode: 'rules' } });
-    assert.deepEqual(r.spoken.map(l => l.text), ['Old trick. The answer lives outside the box.', 'I once counted only sunny days. Then: heron. Count the no\'s too.']);
+    assert.deepEqual(r.spoken.map(l => l.text), [Rift.data.leads['line-drawer:dots'].inner.frogling, Rift.data.leads['rule-hunter'].inner.frogling]);
     assert.equal(r.spoken[0].speaker, 'avatar-frogling-girl-inner');
 });
 

@@ -23,7 +23,7 @@ function setup(onEnd, opts = {}) {
     Rift.Router = { replace: name => routes.push(name) };
     const root = g.document.createElement('div');
     g.document.body.appendChild(root);
-    const handle = screens['battle-lesson'].mount(root, onEnd === undefined ? { onEnd: () => {} } : onEnd ? { onEnd } : {});
+    const handle = screens['battle-lesson'].mount(root, Object.assign({ full: !opts.short }, onEnd === undefined ? { onEnd: () => {} } : onEnd ? { onEnd } : {}));
     return { g, Rift, root, handle, spoken, routes, stops: () => stops, $: s => root.querySelector(s) };
 }
 
@@ -244,6 +244,8 @@ test('with an avatar power, Granny adds "Your power": the pointer is on the butt
         assert.equal(t.handle.step, i);
         assert.match(t.$('.b-coach').textContent, new RegExp('Step ' + (i + 1) + ' of ' + steps.length));
         if (step.info) {
+            assert.equal(t.$('.b-power.mine').getAttribute('aria-disabled'), null, 'the required lesson click is enabled');
+            assert.match(t.$('.b-power.mine').dataset.tipDetail, /Click to continue the lesson/);
             assert.ok(t.$('.b-power.mine').classList.contains('guide-focus'), 'the gold pointer is on the power button');
             assert.match(t.$('.b-power.mine .guide-pointer').textContent, /Click your power/);
             assert.equal(t.$('.b-coach-ok'), null, 'no Got it button: the pointer flow goes on');
@@ -260,4 +262,56 @@ test('with an avatar power, Granny adds "Your power": the pointer is on the butt
     assert.equal(t.Rift.Battle.Engine.winner(t.handle.state), 0, 'still a win');
     t.root.querySelectorAll('button').find(b => b.textContent === 'Finish lesson').click();
     assert.equal(won, true);
+});
+
+test('the first lesson asks for a prediction and accepts both independent rule repairs on the real screen', () => {
+    for (const plan of ['filter', 'normal-hearts', 'attack']) {
+        const t = setup(() => {}, { short: true });
+        const L = t.Rift.Battle.Lesson, E = t.Rift.Battle.Engine;
+        assert.match(t.$('.b-coach-count').textContent, /of 10/);
+        for (const st of L.shortSteps.slice(0, 6)) { perform(t, st.expect); t.g.flush(); }
+        assert.equal(t.handle.step, 6);
+        const before = t.handle.state;
+        t.$('.b-predictions').querySelectorAll('button').find(b => b.textContent === 'I win').click();
+        assert.equal(t.handle.step, 6);
+        assert.equal(t.handle.state, before, 'prediction makes no engine move');
+        assert.match(t.$('.b-coach-say').textContent, /Granny win/);
+        t.$('.b-predictions').querySelectorAll('button').find(b => b.textContent === 'Granny wins').click();
+        assert.equal(t.handle.step, 7);
+        assert.equal(t.$('.guide-focus'), null, 'the learner chooses without a pointer before the hints');
+        if (plan === 'filter') {
+            t.$('.my-board [data-cid="p0c0"]').click();
+            assert.match(t.$('.b-ask').textContent, /attack, or press Activate/);
+            t.$('.b-prompt .btn.gold').click();
+        } else if (plan === 'normal-hearts') perform(t, { type: 'axiom', choice: plan });
+        else perform(t, { type: 'attack', cid: 'p0c0', target: 'h1' });
+        t.g.flush();
+        if (plan === 'attack') {
+            assert.equal(E.winner(t.handle.state), 1, 'the experiment permits the real losing outcome');
+            assert.match(t.$('.b-overlay').textContent, /Granny Axiom reached zero hearts under the reversed victory rule/);
+        } else {
+            assert.equal(E.rules(t.handle.state).reverseHearts, false);
+            for (const st of L.shortSteps.slice(8)) { perform(t, st.expect); t.g.flush(); }
+            assert.equal(E.winner(t.handle.state), 0);
+            assert.match(t.$('.b-overlay').textContent, /Full card lesson in Collection/);
+        }
+        t.handle.destroy();
+    }
+});
+
+test('the full lesson describes the selected free avatar power and its information click accurately', () => {
+    const t = setup(() => {}, { avatar: { type: 'owlet', variant: 'girl' }, power: 'foresee' });
+    const list = t.Rift.Battle.Lesson.guide({ id: 'foresee', tweaks: [] }).steps;
+    const at = list.findIndex(st => st.info);
+    for (const st of list.slice(0, at)) { perform(t, st.expect); t.g.flush(); }
+    assert.match(t.$('.b-coach-text').textContent, /Foresee: Look at the top 3 rule cards.*Cost: free/);
+    const power = t.$('.b-power.mine');
+    assert.equal(power.getAttribute('aria-disabled'), null);
+    assert.match(power.getAttribute('aria-label'), /free.*Click to continue/);
+    assert.doesNotMatch(power.dataset.tipDetail, /Not now/);
+    const before = t.handle.state;
+    power.click();
+    assert.equal(t.handle.state, before);
+    assert.equal(t.handle.step, at + 1);
+    t.handle.destroy();
 });

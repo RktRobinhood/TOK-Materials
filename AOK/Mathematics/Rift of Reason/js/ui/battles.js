@@ -96,7 +96,7 @@
     // Syllo's practice match (a safe beginner match): eight cheap small creatures and kind tactics.
     const SYLLO_TEAM = ['attenbirdough', 'eelish', 'beansprout', 'kardashiant', 'attenbirdough', 'eelish', 'zuckerborg', 'beansprout'];
     const SYLLO_TACTICS = ['look-it-up', 'look-it-up', 'clockwork', 'clockwork', 'stand-firm', 'eureka', 'pep-talk', 'occams-razor'];
-    const SYLLO_HEARTS = 8;
+    const SYLLO_HEARTS = 12;
 
     // A free bag for practice matches (never taken from or given back to the save).
     const PRACTICE_BAG = ['tonic', 'ward'];
@@ -231,9 +231,10 @@
             Rift.UI.modal('A card minigame at the Fair',el('div.stack',null,[
                 Rift.Assets.img(Rift.data.speakers.granny.art,{className:'tutorial-face',label:'Granny Axiom'}),
                 el('p',{text:'Granny has a second game: creature cards. Puzzles help you collect creatures; cards let you challenge their keepers.'}),
-                el('p',{text:'Try a guided practice at her table. Follow the gold pointer: drag or click the cards. Granny shows each reply. You borrow a team and risk nothing.'}),
+                el('p',{text:'To continue from the Fair: solve two stalls, then win Syllo’s safe practice card match. Meet him at the Fair Gate. You can explore the stalls first.'}),
+                el('p',{text:'Granny’s short lesson helps you prepare. Follow the gold pointer, then make your own rule choice. You borrow a team and risk nothing. The full lesson is in Collection.'}),
                 el('p.small',{text:'After you beat a station’s logic puzzle once, its keeper offers a card challenge when you return. The puzzle and the card match are separate.'}),
-            ]),[{label:'Explore first'},{label:'Try the card minigame',primary:true,onclick:()=>Battles.learn(back||'map')}]);
+            ]),[{label:'Explore first',onclick:()=>Rift.UI.toast('Next: solve two Fair stalls, then return to the Fair Gate for Syllo’s safe practice match. Win it to open the Nut Stall route.',6500)},{label:'Try the short card lesson',primary:true,onclick:()=>Battles.learn(back||'map')}]);
         },
 
         rules(onClose) {
@@ -264,13 +265,15 @@
             ]),[{label:'Close'}],{onClose});
         },
 
-        learn(back) {
-            Rift.Router.go('battle-lesson',{onEnd(won){
+        learn(back, full) {
+            Rift.Router.go('battle-lesson',{full:!!full,onEnd(won){
                 if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;s.flags['card-rules-version']=RULES_VERSION;});
                 Rift.Router.replace(back||'map');
                 if(won&&back!=='collection'&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();
             }});
         },
+
+        learnFull(back) { Battles.learn(back, true); },
 
         storyOffer() {
             // Syllo is away after his recruits (side story 7, tier 4): the card school only teaches.
@@ -294,7 +297,8 @@
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
-                // Syllo plays at Normal with 8 hearts (you have 12): a beginner wins about 70% (tools/sim-battle.mjs --ladder).
+                // Both heroes start with 12 hearts. The cheap loaned opening stays playable;
+                // the deterministic beginner balance check exercises this launcher directly.
                 opponent:{name:'Sergeant Syllo · Practice match',art:speakerArt('syllo'),ai:'normal',hearts:SYLLO_HEARTS,
                     team:Rift.Battle.Lesson.team(SYLLO_TEAM,'syllo-'),tactics:SYLLO_TACTICS,power:teamPower(SYLLO_TEAM,'normal')},
                 onEnd(result){
@@ -398,11 +402,14 @@
             if (!needCreatures()) return;
             const deck = myDeck();
             const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: deck.team, tactics: deck.tactics, axioms: deck.axioms, avatar: s.avatar });
-            const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code });
+            const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code, 'aria-label': 'Your team code' });
             Rift.UI.modal('Your team code', el('div.stack', null, [
                 el('p', { text: 'Give this code to a classmate. They battle a ghost of your team on their own laptop. Nothing is taken from you; if they win, they get a trophy copy with your name on it.' }),
                 box,
-            ]), [{ label: 'Copy', primary: true, keepOpen: true, onclick() { box.select(); try { root.navigator.clipboard.writeText(code); Rift.UI.toast('Copied!'); } catch (e) { /* select is enough */ } } }, { label: 'Close' }]);
+            ]), [{ label: 'Copy', primary: true, keepOpen: true, async onclick() {
+                if (await Rift.Backup.copyText(box)) Rift.UI.toast('Copied!');
+                else Rift.UI.toast('The code is selected: press Ctrl+C (or ⌘+C) to copy it.', 4000);
+            } }, { label: 'Close' }]);
         },
 
         // Paste a classmate's code, then fight it.

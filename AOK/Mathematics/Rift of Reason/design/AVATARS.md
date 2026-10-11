@@ -20,7 +20,7 @@ Tracking: epic issue "Avatars that matter" and its children.
 - After use, the power **recharges**: a counter on the button shows how many of your own turns until it is ready again. Recharge 0 means ready every turn; recharge 2 means "use, skip two turns, use again".
 - The power is ready on your first turn.
 - Practice battles, story battles, trainers and team-code ghosts all use powers. Team codes carry the avatar (type, variant, tweaks), so a ghost of a classmate uses their power.
-- Opponents have powers too, so the student gets no free edge: trainers use the power of their team's main colour (from the list below); bosses get their own (section 1.4). Granny's teaching match adds one step: "This button is your power."
+- Opponents have powers too, so the student gets no free edge: trainers use the power of their team's main colour (from the list below); bosses get their own (section 1.4). Granny's optional **Full card lesson** adds one step: "This button is your power." The first ten-step lesson introduces the basic card controls and one meaningful change to the Win rule before advanced powers.
 
 ### Who gets which
 
@@ -41,7 +41,7 @@ Games last about 7–8 turns per player, so a recharge caps how often a power fi
 | Raven girl (Language, board) | **Call It Out** | An enemy creature loses Guard, Shield and Elusive. | 2 | 2 | 0.6 | Look Closer (card) does this and draws, for 1. |
 | Raven boy (Language, hearts) | **Fine Print** | Lose 1 heart and draw a card. | 2 | 2 | 0.8 | Pays hearts for cards. Pairs with the reversed victory rule (zero hearts wins). |
 
-The overworld perks stay as they are (free hint, lantern, catch odds, extra wrong check, boss item) and are shown next to the card power on the avatar screen.
+The overworld perks stay as they are (free hint, lantern, catch odds, extra wrong check, boss item) and appear on the avatar screen. Detailed card-power effects, costs and recharge wait until battles and the optional Full card lesson; Collection keeps the power reference. This staging replaces the initial detailed power preview after the 10 October playtest (#96). The first conceptual hint on each puzzle topic is separately free and does not consume the avatar's chapter perk; later perk hints keep their existing limits and star accounting.
 
 ### 1.3 Tweaks (progression)
 
@@ -92,6 +92,8 @@ The first-player rate must stay near 50%. Record results in `design/reviews/avat
 
 A round button by the hero portrait with the power's icon; the cost in an energy gem; the recharge as a number over a dimmed button; hover/long-press shows the text. Used powers appear in the Recent plays column. Art: 10 power icons + 5 tweak icons (art request).
 
+Avatar selection introduces the traveller and map perk with a short note that card battles explain the power. **Begin** reviews the roster name, game nickname and traveller without saving. **Edit details** returns to the form; **Start adventure** saves the reviewed choice. The roster name travels with the backup code so the teacher can identify it.
+
 ---
 
 ## 2. Story: the inner voice, voiced avatars and talk encounters
@@ -129,7 +131,7 @@ Every chapter script is revisited to add inner-voice beats, avatar-only options 
 
 1. This spec + issues.
 2. Powers in the engine, AI and simulator; balance pass.
-3. Power button on the battle screen; avatar screen shows the power; Granny's step; team codes.
+3. Power button on the battle screen; staged introduction through the Full card lesson and Collection; team codes.
 4. Voice design and auditions (quota: 10 requests per model per day).
 5. Inner-voice step type and voice pipeline for avatars; lesson 1 beats. All story text passes the two-critic writing gate (8/10 each, `design/WRITING-CRITICS.md`) before it is recorded.
 6. Tweaks after boss wins and at campfires.

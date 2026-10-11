@@ -47,7 +47,7 @@
                 { t: 'The north stand was silent at some point.', a: 'T', why: 'Stated directly.' },
                 { t: 'The referee left the pitch.', a: 'U', why: 'The referee walked towards the tunnel. Not the same as leaving.' },
                 { t: 'The score was three-two.', a: 'F', why: 'It was two-all.' },
-                { t: 'The player in the red shirt was a man.', a: 'T', why: 'The story says "his knees".' },
+                { t: 'The player in the red shirt was a man.', a: 'U', why: '"His knees" does not establish age. The player could be a boy; the scene never says he is an adult.' },
             ],
         },
         {
@@ -71,7 +71,7 @@
                 { t: 'The moth took the fox\'s stuffed moon.', a: 'U', why: 'A large stuffed moon is not necessarily the same one.' },
                 { t: 'The fox was wearing a green coat.', a: 'T', why: 'Stated directly.' },
                 { t: 'The moth stole something.', a: 'U', why: 'Nothing says anything was stolen. Our minds love a story.' },
-                { t: 'The fox was at the carousel ten minutes later.', a: 'U', why: 'She was "standing at the nut stall", but we\'re not told when.' },
+                { t: 'The fox was at the carousel ten minutes later.', a: 'U', why: 'The nut-stall sentence has no time attached. It does not tell us where the fox was ten minutes later.' },
                 { t: 'The fox lost the ring-toss game.', a: 'F', why: 'She won it.' },
             ],
         },
@@ -152,21 +152,25 @@
         const answers = {};
         const scene = el('div.wit-scene.parchment', null, data.lines.map(l => el('p', { text: l })));
         const claims = el('div.wit-claims');
-        let wrongChecks = 0;
+        const previouslyWrong = new Set();
         const rows = {};
         const submit = el('button.btn.primary', { text: 'Give my testimony', onclick() {
             const result = api.submit(Object.assign({}, answers));
-            if (!result || result.solved) return;
-            wrongChecks += 1;
+            if (!result) return;
             const wrong = result.wrongIds || [];
-            Object.entries(rows).forEach(([id, row]) => {
-                row.classList.toggle('wit-wrong', wrong.includes(id));
-                row.querySelector('.wit-reason').textContent = wrong.includes(id) ? 'Check this claim against the scene.' : '';
+            data.claims.forEach(c => {
+                const row = rows[c.id];
+                const missed = wrong.includes(c.id);
+                row.classList.toggle('wit-wrong', missed);
+                const reason = row.querySelector('.wit-reason');
+                if (missed) {
+                    const label = c.a === 'T' ? 'Supporting evidence: ' : c.a === 'F' ? 'Contradicting evidence: ' : 'Missing evidence: ';
+                    reason.textContent = label + c.why;
+                    previouslyWrong.add(c.id);
+                } else if (previouslyWrong.has(c.id)) {
+                    reason.textContent = 'Revision supported: ' + c.why;
+                } else reason.textContent = '';
             });
-            if (wrongChecks >= 2 && result.reasons && result.reasons.length) {
-                const reason = result.reasons[0];
-                rows[reason.id].querySelector('.wit-reason').textContent = 'Why: ' + reason.text;
-            }
         } });
         data.claims.forEach(c => {
             const row = el('div.wit-claim.panel', null, [el('div.wit-text', { text: c.t })]);
@@ -178,7 +182,7 @@
                     onclick() {
                         answers[c.id] = k;
                         row.classList.remove('wit-wrong');
-                        row.querySelector('.wit-reason').textContent = '';
+                        if (previouslyWrong.has(c.id)) row.querySelector('.wit-reason').textContent = 'Answer revised. Check it against the scene, then give your testimony again.';
                         btns.querySelectorAll('button').forEach(b => b.classList.toggle('picked', b.dataset.k === k));
                         api.sfx('place');
                     },
@@ -200,7 +204,7 @@
             "True: the scene supports the claim. False: it contradicts the claim.",
             "Can't tell: the scene leaves it open. It does not mean the claim is false.",
             "Choose one answer for every claim, then Give my testimony. The scene stays visible at every level; read it again whenever you need.",
-            "How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+            "How to play is free. Your first hint on a new topic is free and keeps your stars. Later hints show their heart cost. Feedback welcomes a better reason."
         ],
         tutorial: [
             {
@@ -220,7 +224,7 @@
                 "highlight": ".wit-claims"
             },
             {
-                "text": "Choose every answer, then Give my testimony. Read feedback before changing a claim. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                "text": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
                 "highlight": ".wit .primary"
             }
         ],

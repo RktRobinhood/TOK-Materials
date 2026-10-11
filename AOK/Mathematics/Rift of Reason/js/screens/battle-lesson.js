@@ -2,7 +2,8 @@
  * Granny's guided card lesson: a thin wrapper that runs the real battle screen in
  * guide mode with the fixed teaching match from js/battle/lesson.js.
  *
- * Rift.Router.go('battle-lesson', { onEnd(won) })   won: true after the final step, false when left
+ * Rift.Router.go('battle-lesson', { onEnd(won), full? })  short first lesson by default
+ * won: true after the final step; false when left or when the independent experiment loses
  * Without onEnd the lesson returns to the Collection.
  */
 (function (root) {
@@ -26,7 +27,7 @@
             seed: L.config().seed,
             opponent: { name: 'Granny Axiom', art: granny ? granny.art : null },
             // The learner's own power, so Granny can point at its button (it stays unused).
-            guide: L.guide(Rift.Powers && Rift.State ? Rift.Powers.forAvatar((Rift.State.get() || {}).avatar) : null),
+            guide: (params && params.full ? L.guide : L.shortGuide)(Rift.Powers && Rift.State ? Rift.Powers.forAvatar((Rift.State.get() || {}).avatar) : null),
             onEnd: end,
         });
     }
