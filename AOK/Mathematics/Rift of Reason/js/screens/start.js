@@ -108,14 +108,7 @@
                                     Rift.State.update(s => { s.avatar = avatar; Rift.World.start(s); });
                                     Rift.State.saveNow();
                                     Rift.Audio.sfx('success');
-                                    const go = () => Rift.Router.replace('map', { arrive: true });
-                                    // The optional content note follows the saved detail review.
-                                    if (Rift.Story && Rift.Story.canDie()) {
-                                        Rift.UI.modal('Before you begin', el('div.stack', null, [
-                                            el('p', { text: 'In this story, characters can be lost.' }),
-                                            el('p.small.muted', { text: 'You can switch this off in Settings: "Story characters can die".' }),
-                                        ]), [{ label: 'Begin', primary: true, required: true, onclick: go }]);
-                                    } else go();
+                                    Rift.Router.replace('map', { arrive: true });
                                 } },
                             ]);
                         },

@@ -63,20 +63,27 @@ test('avatar selection defers advanced arena-power descriptions while keeping th
     assert.match(t.box.querySelector('.avatar-preview').textContent, /power.*explained.*card battles/i);
 });
 
-test('blank roster names do not submit and the optional story-stakes note follows the detail review', () => {
+test('blank roster names do not submit', () => {
     const t = setup(true);
     const [roster] = t.box.querySelectorAll('input');
     t.begin();
     assert.equal(t.modals.length, 0);
     assert.equal(t.save.avatar, null);
     assert.equal(t.g.document.activeElement, roster);
-    roster.value = 'Alex Student';
-    t.begin();
-    assert.equal(t.save.avatar, null);
-    t.modals.at(-1).buttons.find(b => b.label === 'Start adventure').onclick();
-    assert.equal(t.save.avatar.nickname, 'Alex');
-    assert.equal(t.modals.at(-1).title, 'Before you begin');
     assert.equal(t.routes.length, 0);
-    t.modals.at(-1).buttons[0].onclick();
-    assert.equal(t.routes.length, 1);
 });
+
+for (const canDie of [false, true]) {
+    test('accepting the detail review starts the opening once, story deaths ' + (canDie ? 'on' : 'off'), () => {
+        const t = setup(canDie);
+        t.box.querySelector('input').value = 'Alex Student';
+        t.begin();
+        assert.equal(t.save.avatar, null);
+        assert.equal(t.routes.length, 0);
+        t.modals.at(-1).buttons.find(b => b.label === 'Start adventure').onclick();
+        assert.equal(t.save.avatar.nickname, 'Alex');
+        assert.deepEqual(t.counts(), { updates: 1, saves: 1, starts: 1, powerPreviews: 0 });
+        assert.equal(t.modals.length, 1, 'only the detail review is needed');
+        assert.deepEqual(JSON.parse(JSON.stringify(t.routes)), [['map', { arrive: true }]]);
+    });
+}

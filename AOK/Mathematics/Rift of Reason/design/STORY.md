@@ -731,7 +731,7 @@ Each NPC has one static `peril`. When that scene resolves, whatever the tier, th
 ### Arming
 
 `Cast.canLose(role, scene)` is true only if **all** of these hold:
-1. **"Story characters can die"** is on in Settings (optional; new adventures default to off after playtest repair #78, while existing saves keep their choice; with it on, a one-line content note plays before the Prologue: "In this story, characters can be lost.");
+1. **"Story characters can die"** is on in Settings (optional; new adventures default to off after playtest repair #78, while existing saves keep their choice; the Prologue starts directly after the detail review, with no separate content warning (#105));
 2. `scene` is the role's `peril`, and `risked:<npc>` is not yet set;
 3. the role is still played by its original;
 4. every beat in `met` has been seen;
@@ -974,7 +974,7 @@ Understudies (Kuku, Coach Achilles, Tally, Mr Rubberstamp and the rest) appear o
   - the Feed clock;
   - negotiation;
   - the cast resolver as in Appendix D: silence, host fallbacks limited by chapter, `arrived:`, locks, arming, memory mode, the pending Quiet Scene rule, and brink lines;
-  - the Settings switch and the content note;
+  - the Settings switch;
   - the possession look (CSS glow and a thumbnail overlay on existing portraits, static under Calm motion);
   - the save counters;
   - the Feed's Champion copying your most-used power.

@@ -11,7 +11,7 @@ Status: **round 4** (8 October 2026), aligned to STORY.md round 4. **STORY.md Ap
 - **Required meetings:** each role lists the beats (`met`) a player must have seen before its death can be armed. A **disarmed tier 4 is stored as tier 3.**
 - **The lock:** when a peril resolves, at any tier, `risked:<npc>` is set; no other beat, and no possession, can kill that NPC afterwards.
 - **After a death:** silence (lines skipped, host slots fall back to a named stand-in) → the puzzle continues → the **Quiet Scene** opens the next chapter → the understudy **arrives later**, at a named beat → a candle at the Fair in the finale. **No understudy appears the moment `dead:` is set.**
-- **The switch:** "Story characters can die" (new adventures default off after playtest repair #78; existing saves keep their choice). With it on, a one-line content note plays before the Prologue. Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path. Optional card-match stakes use their separate rules.
+- **The switch:** "Story characters can die" (new adventures default off after playtest repair #78; existing saves keep their choice). The Prologue starts directly after the detail review, with no separate content warning (#105). Off: nobody dies, no understudy steps in, the worst tier is Saved at a price. There is no gentle `away:` path. Optional card-match stakes use their separate rules.
 - **Kuku** has one origin: Granny's hallway cuckoo clock, taken in the same sack as Granny in Ch1 and filed in the Tower's Evidence Locker; mentioned only if `dead:sundial`.
 - **Hum Charms are pairs** (STORY.md A.4): yours pairs with Granny's; Granny's also pairs with the "emergency" charm she gave **Coach Achilles** seventy years ago, which he never wore. **A charm only sounds when worn.** If she dies, the Constable gives you her charm; in the Quiet Scene you put it on beside yours and hum, and only your own hum comes back ("Only mine."). Achilles learns of her death from her lantern going out (A.13) and only then puts his charm on, so her charm, which you now wear, hums at the Ch3 Café. All of this is mentioned only if `dead:granny`.
 - Miss Quill is the Arch-Imp **by her own choice** (STORY.md A.7), `away:schoolteacher` after the Hall in every playthrough, Juror One in Ch3, and core trial 1 in Ch4, after which she sits down. **Mr Gumleaf** takes her class in every playthrough (an ordinary character, not an understudy). **Nudge** is the Algorithm's recurring imp. Judge Hoot is **he**.
@@ -423,7 +423,7 @@ Four puzzles draw NPC art or names directly; each switches to the resolver:
 
 ### 3.9 The switch (STORY.md overrides round 1)
 
-STORY.md Appendix D decides this: one Settings switch, **"Story characters can die"**, default off for new adventures after playtest repair #78; existing saves preserve their selection. With it on, a one-line content note plays before the Prologue ("In this story, characters can be lost."). **Off: nobody dies, no understudy steps in, no Quiet Scene, and the worst tier is Saved at a price** (a tier 4 is resolved as tier 3). There is **no `away:` gentle mode**; `away:` is used only for Miss Quill. The story switch does not change optional card-match stakes.
+STORY.md Appendix D decides this: one Settings switch, **"Story characters can die"**, default off for new adventures after playtest repair #78; existing saves preserve their selection. The Prologue starts directly after the detail review, with no separate content warning (#105). **Off: nobody dies, no understudy steps in, no Quiet Scene, and the worst tier is Saved at a price** (a tier 4 is resolved as tier 3). There is **no `away:` gentle mode**; `away:` is used only for Miss Quill. The story switch does not change optional card-match stakes.
 
 ### 3.10 Files to touch
 
@@ -438,7 +438,7 @@ STORY.md Appendix D decides this: one Settings switch, **"Story characters can d
 | `js/ui/battles.js`, `js/screens/battle-lesson.js`, `js/screens/battle.js` | trainer slots via resolver; Granny's lesson as a memory |
 | `js/puzzles/tower.js`, `tribunal.js`, `village.js`, `oracle.js`, `sorting.js` | NPC art and names via resolver; possession look on the current actor |
 | the stakes widget (new, STORY.md App. C) | calls `Cast.resolvePeril` at a peril's end |
-| `js/screens/collection.js` | the "Characters can die" switch; the content note before the Prologue |
+| `js/screens/collection.js` | the "Story characters can die" switch |
 | `data/map.js` | optional `darkTeaser` per node; optional `introU` per trainer |
 | `data/script/*.js` | `u`, `arrive`, `quiet` steps and `when dead:` branches, written with STORY.md's scripts |
 | `css/*.css` | `.dark` marker, Remembered sepia frame, Fair lantern overlay, silhouettes; all static (calm motion) |
@@ -579,7 +579,7 @@ Estimated from today's voice catalogue and STORY.md's beats: only lines after th
 
 ### Staged plan
 
-1. **Stage 0, code:** `data/cast.js`, `js/core/cast.js`, the dialogue/encounter/tutorial/map/battles changes, memory mode, the Quiet Scene and arrival steps, the switch and content note, `tools/test/cast.test.mjs`. With no `dead:` flags the game behaves exactly as today; every path can be tried from the console (`Rift.State.setFlag('dead:sequins', true)`).
+1. **Stage 0, code:** `data/cast.js`, `js/core/cast.js`, the dialogue/encounter/tutorial/map/battles changes, memory mode, the Quiet Scene and arrival steps, the Settings switch, `tools/test/cast.test.mjs`. With no `dead:` flags the game behaves exactly as today; every path can be tried from the console (`Rift.State.setFlag('dead:sequins', true)`).
 2. **Stage 1, in story order:** Tally (Ch1) → Achilles (Ch2) → Kuku (Ch3) → Rubberstamp (Ch4, art and audition only); Gumleaf with Ch2; the Quiet Scene and lantern props; the stingers. Each Quiet Scene and arrival is written with STORY.md's scripts and goes through the writing critics. **Until a role's understudy has its art and voice entry, that role's death cannot be armed** (guard 6), so the chapters can ship before the understudies do, with tier 4 played as tier 3.
 3. **Later, only if the teacher adds a peril:** that role's designed understudy is built, and its `met`, fallbacks, Quiet Scene and arrival beat are added to STORY.md first.
 
