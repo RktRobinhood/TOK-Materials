@@ -17,7 +17,7 @@
     const GLIDE = 3;         // seconds for a tension change
     const LEVEL = 0.6;       // ambience sits under effects and voices
 
-    let ctx = null, master = null;
+    let ctx = null, master = null, held = false;
     const buffers = {};      // file → Promise<AudioBuffer>
     let base = null;         // { name, gain, src }
     const layers = {};       // 'tension-1' | 'tension-2' → { gain, src }
@@ -77,7 +77,7 @@
     }
 
     async function applyScene() {
-        if (!context() || ctx.state !== 'running') return;
+        if (held || !context() || ctx.state !== 'running') return;
         const name = wantScene;
         if (base && base.name === name) return;
         const old = base;
@@ -92,7 +92,7 @@
     }
 
     async function applyTension() {
-        if (!context() || ctx.state !== 'running') return;
+        if (held || !context() || ctx.state !== 'running') return;
         const t = wantTension;
         const levels = { 'tension-1': Math.min(1, t * 2) * 0.8, 'tension-2': Math.max(0, t * 2 - 1) * 0.9 };
         for (const [name, level] of Object.entries(levels)) {
@@ -123,6 +123,7 @@
 
     // Browsers only allow sound after a click or key press.
     function unlock() {
+        if (held) return;
         if (!context()) return;
         if (ctx.state === 'suspended' && volume() > 0 && !root.document.hidden) ctx.resume().then(() => applyScene().then(applyTension));
     }
@@ -153,5 +154,9 @@
     // What is playing (for the dev benches and tests).
     const now = () => ({ scene: base && base.name, playing: !!(base && base.src), tension: wantTension, state: ctx ? ctx.state : 'none' });
 
-    Rift.Ambience = { scene, tension, now };
+    // Give the optional trailer exclusive sound without changing saved settings.
+    function hold() { held = true; if (ctx) ctx.suspend(); }
+    function release() { held = false; unlock(); }
+
+    Rift.Ambience = { scene, tension, now, hold, release };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -25,6 +25,10 @@ From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-b
 Pre-rendered with Google Gemini text-to-speech from the game's own script.
 The voices are Gemini's prebuilt synthetic voices (`gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`), one fixed voice and acting direction per character in `tools/voices-cast.json`. Caricature voices are directed by style (energy, cadence) and never told to imitate a real person. The Algorithm's chorus and the Sundial's room echo are added afterwards by `tools/voices-fx.mjs`. Any line without a recording uses the browser's built-in speech. The player's avatar is never voiced, and recordings leave out the player's nickname.
 
+## Adventure trailer
+
+The trailer uses the game's original artwork and an original, spoiler-light narration developed from the teacher's supplied *Rift of Reason Trailer Package* pitch. The narrator is ElevenLabs' synthetic Brian voice, generated with `eleven_v3`; it does not imitate an actor or public figure. Four instrumental orchestral cues were generated with ElevenLabs sound generation. Effects reuse the game's ElevenLabs recordings. The edit, comic panels, sprite animation and soundtrack mixing are implemented in JavaScript; FFmpeg handles production audio/video codecs. The portable MP4 is rendered with `@napi-rs/canvas` (MIT) from the same JavaScript compositor. See `data/trailer.js` and `tools/trailer-*.mjs` for the script and production sources.
+
 ## Mechanics and open puzzles
 - Battle rules adapted from *Mindbug* (Richard Garfield, Christian Kudahl, Marvin Hegen, Skaff Elias; Nerdlab Games, 2022).
 - Knights-and-knaves, the 2-4-6 task (Peter Wason, 1960), Euler paths (Leonhard Euler, 1736) and the nine-dots family are classic public puzzles.

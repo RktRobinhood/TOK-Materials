@@ -1,0 +1,170 @@
+{
+  "duration": 82,
+  "peak": 0.7856307625770569,
+  "encodedPeak": 0.7676907777786255,
+  "masterGain": 1,
+  "rms": 0.08886759211265881,
+  "integratedLUFS": -17.37,
+  "loudnessBlocks": 617,
+  "score": "Rift of Reason cinematic instrumental cues",
+  "composition": "ElevenLabs Sound Effects v2; original production prompts and JavaScript arrangement",
+  "narrationComplete": true,
+  "voice": {
+    "id": "nPczCjzI2devNBz1zQrb",
+    "name": "Brian",
+    "model": "eleven_v3"
+  },
+  "musicCues": [
+    {
+      "id": "wonder",
+      "file": "assets/trailer/music/wonder.mp3",
+      "start": 0,
+      "duration": 22,
+      "credits": 220
+    },
+    {
+      "id": "journey",
+      "file": "assets/trailer/music/journey.mp3",
+      "start": 21,
+      "duration": 26,
+      "credits": 260
+    },
+    {
+      "id": "stakes",
+      "file": "assets/trailer/music/stakes.mp3",
+      "start": 46,
+      "duration": 30,
+      "credits": 300
+    },
+    {
+      "id": "resolve",
+      "file": "assets/trailer/music/resolve.mp3",
+      "start": 75,
+      "duration": 8,
+      "credits": 80
+    }
+  ],
+  "effects": [
+    {
+      "time": 7.9,
+      "file": "assets/sfx/el/rift-1.mp3",
+      "duration": 2
+    },
+    {
+      "time": 42.9,
+      "file": "assets/sfx/el/rift-2.mp3",
+      "duration": 2
+    },
+    {
+      "time": 55.85,
+      "file": "assets/sfx/el/summon-1.mp3",
+      "duration": 1
+    },
+    {
+      "time": 60.6,
+      "file": "assets/sfx/el/draw-1.mp3",
+      "duration": 0.6
+    },
+    {
+      "time": 63.1,
+      "file": "assets/sfx/el/impact-1.mp3",
+      "duration": 0.68025
+    },
+    {
+      "time": 66.5,
+      "file": "assets/sfx/el/axiom-1.mp3",
+      "duration": 1.76
+    },
+    {
+      "time": 75.85,
+      "file": "assets/sfx/el/impact-2.mp3",
+      "duration": 0.68025
+    }
+  ],
+  "lines": [
+    {
+      "id": "01",
+      "start": 0.6,
+      "end": 7.5649999999999995,
+      "sourceDuration": 7.205172413793104,
+      "tempo": 1.0344827586206897
+    },
+    {
+      "id": "02",
+      "start": 8.6,
+      "end": 13.719999999999999,
+      "sourceDuration": 5.12,
+      "tempo": 1
+    },
+    {
+      "id": "03",
+      "start": 15.6,
+      "end": 19.6,
+      "sourceDuration": 4,
+      "tempo": 1
+    },
+    {
+      "id": "04",
+      "start": 23.4,
+      "end": 27.479999999999997,
+      "sourceDuration": 4.08,
+      "tempo": 1
+    },
+    {
+      "id": "05",
+      "start": 29.5,
+      "end": 35.57272916666667,
+      "sourceDuration": 6.493611386138613,
+      "tempo": 1.0693069306930691
+    },
+    {
+      "id": "06",
+      "start": 36.5,
+      "end": 42.58,
+      "sourceDuration": 6.08,
+      "tempo": 1
+    },
+    {
+      "id": "07",
+      "start": 43.5,
+      "end": 47.9,
+      "sourceDuration": 4.4,
+      "tempo": 1
+    },
+    {
+      "id": "08",
+      "start": 49.5,
+      "end": 54.14,
+      "sourceDuration": 4.64,
+      "tempo": 1
+    },
+    {
+      "id": "09",
+      "start": 56.4,
+      "end": 62.16,
+      "sourceDuration": 5.76,
+      "tempo": 1
+    },
+    {
+      "id": "10",
+      "start": 63.5,
+      "end": 67.26,
+      "sourceDuration": 3.76,
+      "tempo": 1
+    },
+    {
+      "id": "11",
+      "start": 70.5,
+      "end": 74.34,
+      "sourceDuration": 3.84,
+      "tempo": 1
+    },
+    {
+      "id": "12",
+      "start": 76.6,
+      "end": 79.64,
+      "sourceDuration": 3.04,
+      "tempo": 1
+    }
+  ]
+}

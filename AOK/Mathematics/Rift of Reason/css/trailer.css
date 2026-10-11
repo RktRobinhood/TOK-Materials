@@ -1,0 +1,36 @@
+/* Optional title-page trailer. The adventure remains one click away. */
+.trailer-invitation { display: flex; align-items: center; gap: 12px; margin-top: 8px; padding: 10px 22px; border: 1px solid rgba(237,199,130,.65); border-radius: 999px; color: #fff7e7; background: rgba(9,12,20,.82); cursor: pointer; font: inherit; box-shadow: 0 3px 20px #0006; }
+.trailer-invitation:hover { background: #1d2531; border-color: #f4d89e; }
+.trailer-invitation:focus-visible, .trailer-dialog button:focus-visible, .trailer-dialog input:focus-visible, .trailer-dialog summary:focus-visible, .trailer-dialog a:focus-visible { outline: 3px solid #70e8df; outline-offset: 4px; }
+.trailer-play-icon { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #edc782; border-radius: 50%; color: #edc782; font-size: .85em; }
+.trailer-invitation-copy { text-align: left; line-height: 1.3; }
+.trailer-invitation-copy strong { display: block; font-size: .95em; }
+.trailer-invitation-copy small { color: #c8c3bb; font-size: .72em; }
+.trailer-dialog { width: min(1100px, 96vw, calc((96dvh - 190px) * 16 / 9)); max-width: 96vw; max-height: 96dvh; padding: 0; overflow: auto; border: 1px solid #44505e; border-radius: 16px; background: #090d14; color: #f6f2e9; box-shadow: 0 25px 120px #000a; font-family: Nunito, system-ui, sans-serif; }
+.trailer-dialog::backdrop { background: rgba(3,5,10,.91); }
+.trailer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; }
+.trailer-header h2 { margin: 0; font: 700 15px Nunito, system-ui, sans-serif; letter-spacing: .15em; text-transform: uppercase; color: #edc782; }
+.trailer-header small { display: block; font-size: 11px; margin-top: 3px; letter-spacing: .03em; color: #adb7c4; }
+.trailer-dialog button { border: 1px solid #46505e; border-radius: 7px; padding: 7px 12px; background: #151d29; color: #f7f2e9; font: inherit; font-size: 13px; cursor: pointer; }
+.trailer-dialog button:hover { border-color: #edc782; }
+.trailer-dialog button[aria-pressed=true] { border-color: #edc782; color: #edc782; }
+.trailer-stage { position: relative; background: #03060b; aspect-ratio: 16 / 9; }
+.trailer-stage canvas { display: block; width: 100%; height: 100%; }
+.trailer-captions { position: absolute; bottom: 9%; left: 6%; right: 6%; text-align: center; pointer-events: none; font: 600 clamp(12px, 1.65vw, 20px)/1.5 Nunito, system-ui, sans-serif; color: #fff; }
+.trailer-captions span { box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: 3px 10px; background: #03060bdd; border-radius: 3px; text-shadow: 0 1px 3px #000; }
+.trailer-message { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 32px; background: #050a12d9; }
+.trailer-message[hidden], .trailer-captions[hidden] { display: none; }
+.trailer-message p { max-width: 400px; line-height: 1.6; margin: 0; }
+.trailer-controls { display: flex; align-items: center; gap: 10px; padding: 13px 20px; flex-wrap: wrap; }
+.trailer-controls input[type=range] { flex: 1; min-width: 100px; accent-color: #edc782; cursor: pointer; }
+.trailer-time { font: 12px ui-monospace, monospace; color: #bbc5d2; white-space: nowrap; }
+.trailer-download { padding: 0 20px 12px; font-size: 12px; }
+.trailer-download a { color: #edc782; text-underline-offset: 3px; }
+.trailer-transcript { border-top: 1px solid #26303e; padding: 12px 20px 18px; color: #bbc5d2; font-size: 13px; }
+.trailer-transcript summary { cursor: pointer; color: #edc782; }
+.trailer-transcript p { line-height: 1.8; margin-bottom: 0; }
+.trailer-dialog:fullscreen { width: 100%; max-width: none; height: 100%; max-height: none; border: 0; border-radius: 0; display: flex; flex-direction: column; justify-content: center; }
+.trailer-dialog:fullscreen .trailer-stage { flex: 0 1 auto; width: min(100vw, calc((100dvh - 126px) * 16 / 9)); align-self: center; }
+.trailer-dialog:fullscreen .trailer-transcript { display: none; }
+.trailer-dialog:fullscreen .trailer-download { display: none; }
+@media (max-width: 600px) { .trailer-dialog { width: 96vw; } .trailer-header, .trailer-controls { padding: 10px 12px; } .trailer-controls { gap: 7px; } .trailer-controls button { padding: 7px 9px; font-size: 12px; } .trailer-controls input { order: 3; flex-basis: 100%; } .trailer-captions { bottom: 4%; font-size: 12px; } .trailer-header h2 { font-size: 12px; } }

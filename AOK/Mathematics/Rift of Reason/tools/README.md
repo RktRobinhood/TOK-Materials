@@ -46,6 +46,28 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 
 `tools/voices-cast.json` gives each speaker one prebuilt Gemini voice, an acting direction and the model it always uses (`"model": "flash"` or the default lite), so a voice never changes model halfway through. Caricature directions describe a style (energy, cadence), never a real person. To change a voice, edit its entry, delete that speaker's MP3s in `assets/voice/` and record again. `tools/voices-fx.mjs` adds the Algorithm's synthetic chorus, the Sundial's room echo and the avatars' subtle inner-voice effect (every `*-inner` speaker) after recording.
 
+## Adventure trailer
+
+The optional 82-second trailer on the title page is a JavaScript film using existing game art. Its edit and narration live in `data/trailer.js`, the canvas compositor in `js/ui/trailer-scenes.js`, and the player in `js/ui/trailer.js`. The browser loads the pre-rendered `assets/trailer/soundtrack.mp3`; it never calls an API.
+
+Production commands, run from the game folder:
+
+```
+node tools/trailer-narration.mjs --plan
+node tools/trailer-narration.mjs --render
+node tools/trailer-music.mjs --render
+node tools/trailer-audio.mjs --render
+node tools/trailer-export.mjs --render
+```
+
+Set `RIFT_FFMPEG` to an FFmpeg executable when it is not on PATH. Narration and music read `.secrets/elevenlabs_api_key` at the repository root. Paid runs are bounded and cache completed takes; they stop on API errors and never retry a recording automatically. A changed take must be deliberately archived before regenerating it. Audio composition validates speech timing and keeps whole lines, with at most a small speed adjustment. Regenerating the mix uses no credits. The music cues and final mix are kept in `assets/trailer/`, with metadata for reproduction.
+
+The MP4 exporter needs the production-only `@napi-rs/canvas` package (1.0.11 was used). Install it in a separate npm project and set `RIFT_CANVAS_MODULE_DIR` to that directory. It renders the browser's exact scene compositor at 1280×720, 24fps, then muxes the existing soundtrack and English subtitles with FFmpeg. It writes `Rift-of-Reason.mp4`, `captions.vtt`, `poster.webp` and `video-report.json` in `assets/trailer/`. No canvas package or encoder runs in the game. `--still <seconds> --output <path.png>` renders a frame for visual checks without spending API credits.
+
+If Windows briefly locks the destination during syncing, the exporter retries publishing. A completed `Rift-of-Reason.rendering.mp4` can be published with `--finalize` without rendering again. Do not change the edit or compositor between rendering and finalizing. The preview server supports byte ranges so audio/video seeking works locally.
+
+The shipping check is `node --test tools/test/trailer.test.mjs`; the full game suite must also pass before committing. Browser QA covers title-page launch, narration and captions, pause/seek/replay, Close/Escape and focus restoration, fullscreen, and Calm motion.
+
 ## Classroom clue QR
 
 After `npm install --prefix tools`, run `node tools/build-clue-qr.mjs`. Pinned `qrcode` 1.5.4 generates the local `assets/clues/trace.png`; no QR library runs in the game. The encoded value is plain text `RIFT-TRACE`. `clues.html` supplies printable cards, a slide code and teacher answers, with manual-copy/offline fallbacks. Encoder documentation: https://github.com/soldair/node-qrcode .

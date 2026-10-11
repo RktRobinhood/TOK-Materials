@@ -1,0 +1,10 @@
+{
+  "signature": "d47ec35c6d4e1962f13352a29d1bcc21c06b2372c762d114ef14ad86aec9b3d6",
+  "voice": "nPczCjzI2devNBz1zQrb",
+  "model": "eleven_v3",
+  "characters": 51,
+  "generatedAt": "2026-10-11T07:42:57.370Z",
+  "duration": 3.04,
+  "slot": 4,
+  "maximumTempo": 1.15
+}

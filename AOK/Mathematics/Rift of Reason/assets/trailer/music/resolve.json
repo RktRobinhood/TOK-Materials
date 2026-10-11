@@ -1,0 +1,9 @@
+{
+  "signature": "367f5c9b540b09afa60cfac2ac90977b005233a68710328b6011ae0c0a2c20a2",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Cinematic fantasy film title music sting. Deep orchestral timpani strike and resonant low brass, then warm triumphant strings and French horns resolve to a majestic sustained final chord. Delicate celesta shimmer, long natural concert hall reverb tail fades to silence. Confident heroic finish, premium acoustic orchestral recording. No vocals, speech, choir, electronic beeps or other sound effects.",
+  "requestedSeconds": 8,
+  "credits": 80,
+  "generatedAt": "2026-10-11T07:46:15.025Z",
+  "duration": 8
+}

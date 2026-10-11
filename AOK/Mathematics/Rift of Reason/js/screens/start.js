@@ -39,6 +39,7 @@
                         el('button.btn', { text: 'Load a backup code', onclick: () => { Rift.Audio.sfx('click'); Rift.Backup.loadDialog(); } }),
                     ]),
                     Rift.Backup.previousButton(() => Rift.Router.replace('title')),
+                    Rift.Trailer ? Rift.Trailer.invitation() : null,
                     el('p.small.muted', { style: { marginTop: '18px' }, text: 'A TOK adventure in logic, proof and persuasion. Progress is saved on this laptop only.' }),
                     el('a.small', { href: 'teacher.html', text: 'Teacher overview' }),
                 ]),

@@ -1,0 +1,9 @@
+{
+  "signature": "7a38fc2154c7ef650a935f8377d0337318cd2e256145609ad798dac5f443065a",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Continuous cinematic fantasy adventure instrumental score. Dark low cellos, rich sustained strings, restrained acoustic piano ostinato, distant deep orchestral percussion. A brave journey through a strange forest into a city of mysteries. Gradually rising harmony and intensity with space for narration. Lush orchestral studio recording, sustained beginning and ending. No vocals, speech, choir, electronic beeps or sound effects.",
+  "requestedSeconds": 26,
+  "credits": 260,
+  "generatedAt": "2026-10-11T07:46:06.036Z",
+  "duration": 26
+}

@@ -110,6 +110,18 @@ Syllo then offers a separate safe practice match at the Fair Gate with a loaned 
 
 ## Tech
 
+### Adventure trailer
+
+The title page offers an optional **82-second trailer** for introducing the adventure to students. It starts at the Fair, hints at the crack in time, and shows travellers, places, puzzles, collecting and the Card Arena without answers or story outcomes. A deep male narrator invites students into the story.
+
+`data/trailer.js` owns the scene edit and narration. `js/ui/trailer-scenes.js` renders authentic game artwork on a time-addressable canvas; `js/ui/trailer.js` supplies the native dialog, captions, transcript, playback, seeking and fullscreen. Calm motion and the operating system's reduced-motion preference use static compositions. The trailer takes exclusive audio focus and restores title ambience on close, without changing any saved settings or progress.
+
+The film uses moving comic panels, the travellers' real walk sheets, a charm throw and capture, and a two-row arena with a single launched attack, reaction and rule-card turn. Arena faces follow `creatureFace`: cost at the top only in hand; attack and health below; no cost on the board. A portable 720p/24fps MP4 with English subtitles is exported from this same compositor, with the same finished soundtrack, and linked from the player.
+
+The player's Motion control can change the initial Calm motion/reduced-motion preference for this viewing only. It never alters the game's saved accessibility settings.
+
+Production tools generate and cache ElevenLabs narration and orchestral cues, then compose the finished soundtrack in JavaScript. FFmpeg is a production codec tool only; students need no build step, account or API key. The key stays in the ignored repository `.secrets/` folder.
+
 - Plain HTML/CSS + classic `<script>` files, **no build step**, runs from `file://` and GitHub Pages. Lives at `AOK/Mathematics/Rift of Reason/` in `RktRobinhood/TOK-Materials`; the landing page picks it up via `index.html` + `about.json`.
 - Saves in `localStorage` plus an exportable **backup code** (device moves). No student data leaves the laptop.
 - Determinism: all generation and battles use a seeded PRNG.

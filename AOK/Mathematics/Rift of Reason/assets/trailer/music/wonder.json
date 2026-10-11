@@ -1,0 +1,9 @@
+{
+  "signature": "18f3d51a40ea3f578a2715ea05e0e0a24580d83344ae31b17a47ff7fa10dbb06",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Continuous cinematic fantasy instrumental underscore. Delicate acoustic celesta and warm felt piano over soft expressive chamber strings, lanterns at a mysterious village fair. Gentle wonder, memorable rising motif. At eight seconds warmth darkens: low cellos and an eerie orchestral drone enter, anticipation grows. Spacious premium orchestral recording. Music only; no vocals, speech, choir, sound effects or electronic beeps.",
+  "requestedSeconds": 22,
+  "credits": 220,
+  "generatedAt": "2026-10-11T07:46:01.252Z",
+  "duration": 22
+}

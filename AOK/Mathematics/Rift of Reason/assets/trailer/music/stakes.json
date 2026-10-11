@@ -1,0 +1,9 @@
+{
+  "signature": "fad47bee1145c75e7223913ae79e7be933f8151eafac7fe5b0aa2d24e3208309",
+  "model": "eleven_text_to_sound_v2",
+  "prompt": "Grand fantasy adventure trailer instrumental score. Fast bowed string ostinatos, soaring violins, powerful French horns, low brass, deep timpani and acoustic drums. Mysterious opening builds to an exciting heroic crescendo, high stakes and discovery. Spacious orchestral recording, evolving chords, room for narration. Last five seconds: percussion falls away to a quiet ominous low string chord. No vocals, speech, choir or beeps.",
+  "requestedSeconds": 30,
+  "credits": 300,
+  "generatedAt": "2026-10-11T07:46:11.435Z",
+  "duration": 30
+}
