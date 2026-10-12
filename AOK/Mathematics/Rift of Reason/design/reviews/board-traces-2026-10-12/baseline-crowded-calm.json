@@ -1,0 +1,180 @@
+{
+  "seed": "board-study-107",
+  "variant": "baseline",
+  "fixture": "crowded",
+  "warmedImages": true,
+  "calm": true,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "frames": {
+    "count": 484,
+    "p50": 17.699999999953434,
+    "p95": 18.199999999953434,
+    "p99": 36,
+    "over33ms": 9,
+    "over50ms": 3,
+    "maximum": 54.20000000006985
+  },
+  "inputs": [
+    {
+      "label": "draw",
+      "feedbackMs": 41.10000014305115
+    },
+    {
+      "label": "select creature",
+      "feedbackMs": 14.5
+    },
+    {
+      "label": "play",
+      "feedbackMs": 15.5
+    },
+    {
+      "label": "select attack",
+      "feedbackMs": 18.100000143051147
+    },
+    {
+      "label": "attack / defeat",
+      "feedbackMs": 36
+    },
+    {
+      "label": "select ability",
+      "feedbackMs": 46
+    },
+    {
+      "label": "activate Filter",
+      "feedbackMs": 32.59999990463257
+    },
+    {
+      "label": "select axiom",
+      "feedbackMs": 13.799999952316284
+    },
+    {
+      "label": "change axiom",
+      "feedbackMs": 23.90000009536743
+    },
+    {
+      "label": "End turn / Fate",
+      "feedbackMs": 14.5
+    }
+  ],
+  "mutations": 710,
+  "retired": [
+    {
+      "label": "draw",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "select creature",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "play",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "select attack",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "attack / defeat",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "select ability",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "activate Filter",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "select axiom",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "change axiom",
+      "retainedOriginalCards": 0
+    },
+    {
+      "label": "End turn / Fate",
+      "retainedOriginalCards": 0
+    }
+  ],
+  "longAnimationFramesSupported": true,
+  "longFrames": [
+    {
+      "duration": 54.19999980926514,
+      "blockingDuration": 4,
+      "styleAndLayoutStart": 548086.6999998093,
+      "renderStart": 548032.6999998093
+    },
+    {
+      "duration": 60.5,
+      "blockingDuration": 0,
+      "styleAndLayoutStart": 548161.6999998093,
+      "renderStart": 548161.2999999523
+    },
+    {
+      "duration": 54.5,
+      "blockingDuration": 4.3,
+      "styleAndLayoutStart": 549156.5999999046,
+      "renderStart": 549143.7999999523
+    },
+    {
+      "duration": 54.200000047683716,
+      "blockingDuration": 0,
+      "styleAndLayoutStart": 550781.5999999046,
+      "renderStart": 550781.5
+    },
+    {
+      "duration": 50.200000047683716,
+      "blockingDuration": 0,
+      "styleAndLayoutStart": 551237.399999857,
+      "renderStart": 551233.0999999046
+    },
+    {
+      "duration": 56.80000019073486,
+      "blockingDuration": 6.6,
+      "styleAndLayoutStart": 551790,
+      "renderStart": 551779.5999999046
+    },
+    {
+      "duration": 59,
+      "blockingDuration": 0,
+      "styleAndLayoutStart": 552322.5999999046,
+      "renderStart": 552310
+    }
+  ],
+  "final": {
+    "turn": 9,
+    "phase": "draw",
+    "board": [
+      7,
+      6
+    ],
+    "energy": 7,
+    "axioms": {
+      "cost": "thrift"
+    }
+  },
+  "committedEvents": {
+    "start": 1,
+    "round": 1,
+    "turn": 2,
+    "draw": 1,
+    "play": 1,
+    "attack": 1,
+    "fight": 1,
+    "damage": 2,
+    "defeated": 1,
+    "activate": 1,
+    "ability": 2,
+    "axiom-play": 1,
+    "axiom": 1,
+    "turn-end": 1
+  },
+  "note": "Synthetic click trace on this desktop, including warm images and actual screen pacing. Not school-laptop certification or a measurement of physical input hardware. Missing paint/layout observations are not zero costs."
+}

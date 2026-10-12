@@ -7,6 +7,7 @@
 <title>Battle bench</title>
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/battle.css">
+<link rel="stylesheet" href="dev/arena-prototype.css">
 <style>
     body { overflow: auto; }
     .bench { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; height: 100vh; }
@@ -54,6 +55,9 @@
 <script src="js/core/assets.js"></script>
 <script src="js/core/audio.js"></script>
 <script src="data/assets.js"></script>
+<script src="data/avatars.js"></script>
+<script src="data/script/lesson1.js"></script>
+<script src="data/voice-manifest.js"></script>
 <script src="data/creatures.js"></script><script src="data/barks.js"></script><script src="data/sfx.js"></script><script src="data/sfx-el.js"></script><script src="data/ambience.js"></script><script src="js/core/ambience.js"></script>
 <script src="data/items.js"></script>
 <script src="data/axioms.js"></script>
@@ -66,10 +70,13 @@
 <script src="js/battle/fate.js"></script>
 <script src="js/battle/ante.js"></script>
 <script src="js/battle/team-codes.js"></script>
+<script src="js/battle/lesson.js"></script>
 <script src="js/screens/battle.js"></script>
+<script src="js/screens/battle-lesson.js"></script>
 <script src="js/ui/ui.js"></script>
 <script src="js/ui/battles.js"></script>
 <script src="js/ui/powers.js"></script>
+<script src="dev/arena-prototype.js"></script>
 <script>
 (function () {
     const R = window.Rift;
@@ -114,6 +121,10 @@
     let ghost = null;
 
     function start(opponentOverride) {
+        if (R.BattlePrototype && R.BattlePrototype.enabled) {
+            R.BattlePrototype.start($('seed').value);
+            return;
+        }
         const mode = $('mode').value;
         const opponent = Object.assign({}, opponentOverride || (mode === 'ghost' && ghost) || trainer, { ai: $('ai').value });
         opponent.power = $('p1').value === 'auto' && opponent.power !== undefined ? opponent.power : pickPower(1, opponent.team);

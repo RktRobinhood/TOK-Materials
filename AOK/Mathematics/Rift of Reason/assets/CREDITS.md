@@ -1,6 +1,9 @@
 # Credits
 
 ## Art
+
+The development-only Card Arena board study (`dev/arena-prototype.*`, #107) adapts presentation ideas from Richard Webb's [hearthstone-web](https://github.com/Rymedy/hearthstone-web/tree/8d831088f96ec5c2e47d969e998f63ebcc5d6d56): compact board portraits, hand hierarchy and short transform feedback. Copyright (c) 2021 Richard Webb, MIT; the complete notice is retained in `vendor/hearthstone-web/LICENSE`. The new layout code is written for Rift's existing renderer. All displayed artwork, card backs and audio remain Rift resources; no upstream card/hero/board media, music, voices, video, cursor or font is imported.
+
 Characters, scenes and UI art were generated with ChatGPT from prompts written for this game (see `design/art-requests/ART-REQUESTS.md`) and reviewed and edited by hand. Caricatures are affectionate satire inspired by public figures' public personas; they are not likenesses and imply nothing beyond the jokes.
 
 ## Sound
