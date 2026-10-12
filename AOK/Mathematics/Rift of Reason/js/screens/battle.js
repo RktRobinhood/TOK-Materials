@@ -282,6 +282,8 @@
                 dom.end = el('div.b-end-wrap'),
                 dom.draw = el('div.b-draw', { role: 'group', 'aria-label': 'Your draw' }),
                 dom.choice = el('div.b-choice'),
+                dom.abilities = el('div.b-card-actions', { hidden: true }),
+                dom.abilityLink = el('div.b-card-action-link', { hidden: true, 'aria-hidden': 'true' }),
                 dom.arrow = svgArrow(),
                 dom.floats = el('div.b-floats'),
                 dom.banner = el('div.b-banner', { 'aria-hidden': 'true' }),
@@ -327,16 +329,17 @@
                 width: iw * s + 'px', height: ih * s + 'px', left: (W - iw * s) / 2 + 'px', top: cy - BOARD_BAND * ih * s + 'px' });
         }
         boardImg.addEventListener('load', alignBoard);
-        const boardObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(alignBoard) : null;
+        const boardObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { alignBoard(); placeAbilityTray(); }) : null;
         if (boardObserver) { boardObserver.observe(rootEl); boardObserver.observe(dom.lane); }
         function positionFateInspection() {
             if (ui.inspect && dom.inspect.classList.contains('fate')) placeInspect(ui.inspect.anchor);
+            placeAbilityTray();
         }
         if (root.addEventListener) {
             root.addEventListener('resize', positionFateInspection);
             root.addEventListener('scroll', positionFateInspection, true);
         }
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); cancelTipPress(); });
@@ -595,7 +598,12 @@
             ui.noteTimer = setTimeout(() => { if (ui.note === text) { ui.note = ''; if (!ui.ended && !ui.drag) render(); } }, 4000);
         }
 
-        function clearSel() { if (ui.sel) { ui.sel = null; render(); } }
+        function clearSel(returnFocus) {
+            if (!ui.sel) return;
+            const cid = ui.sel.cid;
+            ui.sel = null; render();
+            if (returnFocus && nodes[cid] && nodes[cid].focus) nodes[cid].focus();
+        }
 
         // ---- why a card can't act (short notes for disabled controls) ----
         function whyNot(cid) {
@@ -1410,7 +1418,7 @@
                     const ready = pi === ME && attackers.has(cid);
                     const node = cardEl(cid, {
                         size: 'board', classes, target: true,
-                        onclick: () => clickCard(cid, L),
+                        onclick: ev => clickCard(cid, L, ev),
                         drag: ready && L.some(a => a.type === 'attack' && a.cid === cid) ? { kind: 'board', cid } : pi === ME ? { kind: 'board', cid, blocked: true } : null,
                     });
                     // A word over a creature that can act now (the glow alone was easy to miss).
@@ -1485,6 +1493,7 @@
             renderEnd(L);
             renderDraw(L);
             renderChoice(L);
+            renderAbilityTray(L);
             renderRules();
             renderRecent();
             if (guide) renderCoach();
@@ -1493,6 +1502,69 @@
             restoreInspect();
             restoreTip();
             turnBanner();
+            placeAbilityTray();
+        }
+
+        function abilityUnavailable(cid, info, L) {
+            if (L.some(a => a.type === 'activate' && a.cid === cid && a.ability === info.id)) return '';
+            const d = E.describe(state, cid);
+            if (d.sleeping || d.frozen || d.activated || d.attacks || ui.busy || decider() !== ME) return whyNot(cid);
+            if (info.cost > state.players[ME].energy) return 'Needs ' + info.cost + ' energy.';
+            return 'No useful target or effect now.';
+        }
+
+        function renderAbilityTray(L) {
+            const tray = dom.abilities, sel = ui.sel;
+            tray.innerHTML = ''; tray.hidden = true; dom.abilityLink.hidden = true;
+            if (!sel || !['board', 'activate'].includes(sel.kind) || state.phase !== 'main' || decider() !== ME || ui.busy) return;
+            if (!state.players[ME].board.includes(sel.cid)) return;
+            const list = E.activations(state, sel.cid);
+            if (!list.length) return;
+            tray.hidden = false; tray.dataset.cid = sel.cid;
+            tray.setAttribute('role', 'group'); tray.setAttribute('aria-label', 'Abilities for ' + name(sel.cid));
+            put(tray, el('div.b-card-actions-head', {}, [el('strong', { text: name(sel.cid) }),
+                button('Close abilities', () => clearSel(true), 'b-card-actions-close')]));
+            const choices = el('div.b-card-action-list');
+            list.forEach(info => {
+                const why = abilityUnavailable(sel.cid, info, L);
+                const b = button('Activate ' + info.name + ' · ' + info.cost + ' ⚡', ev => clickActivate(sel.cid, info.id, L, ev), 'gold',
+                    { disabled: !!why, title: why || info.text, dataset: { ability: info.id }, 'aria-label': info.name + ', ' + info.cost + ' energy' + (why ? '. ' + why : '') });
+                b.classList.toggle('chosen', sel.kind === 'activate' && sel.ability === info.id);
+                nodes.buttons['activate:' + info.id] = b;
+                choices.appendChild(el('div.b-card-action', {}, [b, why ? el('small', { text: why }) : null]));
+            });
+            tray.appendChild(choices);
+        }
+
+        function placeAbilityTray() {
+            const tray = dom.abilities, source = tray && nodes[tray.dataset.cid];
+            if (!tray || tray.hidden || !source || !source.getBoundingClientRect || !dom.arena.getBoundingClientRect) return;
+            const a = dom.arena.getBoundingClientRect(), c = source.getBoundingClientRect();
+            if (!a.width || !a.height) return;
+            const w = Math.min(248, Math.max(100, a.width - 16));
+            tray.style.width = w + 'px';
+            const h = tray.getBoundingClientRect().height;
+            const clamp = (n, max) => Math.max(8, Math.min(Math.max(8, max - 8), n));
+            const candidates = [
+                [c.left + c.width / 2 - w / 2, c.top - h - 8],
+                [c.left - w - 8, c.top - h - 8], [c.right + 8, c.top - h - 8],
+                [c.left - w - 8, c.top], [c.right + 8, c.top],
+                [c.left + c.width / 2 - w / 2, c.bottom + 8],
+            ].map(([x, y]) => ({ x: clamp(x - a.left, a.width - w), y: clamp(y - a.top, a.height - h) }));
+            const obstacles = [dom.end, source].concat(Array.from(dom.arena.querySelectorAll('.bc.valid, .bc.valid-drag, .b-draw-btn, .b-choice .btn')))
+                .filter(n => n && n.getBoundingClientRect).map(n => n.getBoundingClientRect()).filter(r => r.width && r.height);
+            const overlap = pos => obstacles.reduce((sum, r) => sum + Math.max(0, Math.min(pos.x + w, r.right - a.left) - Math.max(pos.x, r.left - a.left))
+                * Math.max(0, Math.min(pos.y + h, r.bottom - a.top) - Math.max(pos.y, r.top - a.top)), 0);
+            candidates.sort((p, q) => overlap(p) - overlap(q));
+            Object.assign(tray.style, { left: candidates[0].x + 'px', top: candidates[0].y + 'px' });
+            const pos = candidates[0], left = c.left - a.left, top = c.top - a.top;
+            const panelPoints = [[pos.x, pos.y + h], [pos.x + w, pos.y + h], [pos.x + w / 2, pos.y + h], [pos.x, pos.y], [pos.x + w, pos.y]];
+            const cardPoints = [[left, top], [left + c.width / 2, top], [left + c.width, top], [left, top + c.height], [left + c.width, top + c.height]];
+            const pairs = panelPoints.flatMap(from => cardPoints.map(to => ({ from, to, distance: Math.hypot(to[0] - from[0], to[1] - from[1]) })));
+            pairs.sort((p, q) => p.distance - q.distance);
+            const link = pairs[0]; dom.abilityLink.hidden = false;
+            Object.assign(dom.abilityLink.style, { left: link.from[0] + 'px', top: link.from[1] + 'px', width: link.distance + 'px',
+                transform: 'rotate(' + Math.atan2(link.to[1] - link.from[1], link.to[0] - link.from[0]) + 'rad)' });
         }
 
         // Hand card positions by key (cid, or axiom id plus copy number), for the settle animation.
@@ -1883,18 +1955,10 @@
                     const acts = L.filter(a => a.type === 'activate' && a.cid === sel.cid);
                     ask.textContent = tm.size ? name(sel.cid) + ': click a glowing target to attack.'
                         : acts.length ? name(sel.cid) + ': press the Activate button.' : name(sel.cid) + ': ' + whyNot(sel.cid);
-                    acts.reduce((seen, a) => {
-                        if (seen.includes(a.ability)) return seen;
-                        const info = E.activations(state, sel.cid).find(x => x.id === a.ability) || { name: a.ability, cost: 0 };
-                        const b = button('Activate ' + info.name + ' · ' + info.cost + ' ⚡', () => clickActivate(sel.cid, a.ability, L), 'gold');
-                        nodes.buttons['activate:' + a.ability] = b;
-                        buttons.appendChild(b);
-                        return seen.concat(a.ability);
-                    }, []);
                     if (acts.length && !tm.size) {
                         const def = (B().Abilities || {})[acts[0].ability];
                         ask.textContent = name(sel.cid) + (def ? ': ' + upFirst(String(def.text).replace(/^Activate \(\d+ energy\):\s*/i, '')) : '') + ' Activating uses its attack this turn.';
-                    } else if (acts.length) ask.textContent = name(sel.cid) + ': choose a glowing enemy to attack, or press Activate for its ability. Activating uses its attack this turn.';
+                    } else if (acts.length) ask.textContent = name(sel.cid) + ': drag to attack, or choose an ability beside its card. Activating uses its attack this turn.';
                 } else if (sel.kind === 'activate') {
                     ask.textContent = 'Choose a glowing target for ' + name(sel.cid) + '.';
                 } else if (sel.kind === 'power') {
@@ -1926,7 +1990,7 @@
                             + ' Press Play rule, or drag it to the middle row.';
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
                 }
-                if (sel) buttons.appendChild(button('Cancel', () => clearSel()));
+                if (sel && !(['board', 'activate'].includes(sel.kind) && E.activations(state, sel.cid).length)) buttons.appendChild(button('Cancel', () => clearSel()));
             }
             // The lane is short: with buttons, a note takes the place of the instruction and the
             // "what just happened" lines are left out (they are in the log), so nothing overlaps.
@@ -2475,17 +2539,27 @@
             return false;
         }
 
-        function clickCard(cid, L) {
-            if (clickTarget(cid, L)) return;
+        function clickCard(cid, L, ev) {
+            const abilitySource = ui.sel && ui.sel.kind === 'activate' && ui.sel.cid;
+            if (clickTarget(cid, L)) {
+                if (abilitySource && ev && ev.detail === 0 && nodes[abilitySource]) nodes[abilitySource].focus();
+                return;
+            }
             const c = state.cards[cid];
             const mine = c.controller === ME && state.players[ME].board.includes(cid);
             // A tactic, Entrance or ability waiting for a target, and an Elusive enemy is clicked.
             if (!mine && ui.sel && (ui.sel.kind === 'hand' || ui.sel.kind === 'activate' || ui.sel.kind === 'item') && elusiveNote(cid)) { setNote(elusiveNote(cid)); return; }
             // An attacker is selected and this enemy is not a valid target (for example: Guard).
             if (!mine && ui.sel && ui.sel.kind === 'board' && state.players[OPP].board.includes(cid)) { setNote(badTargetNote(ui.sel.cid, cid)); return; }
-            if (mine && L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid)) {
+            if (mine && (L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid) || E.activations(state, cid).length)) {
                 ui.sel = ui.sel && ui.sel.cid === cid ? null : { kind: 'board', cid };
                 render();
+                if (ui.sel && !L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid)) setNote(whyNot(cid));
+                if (ui.sel && ev && ev.detail === 0) {
+                    const first = Array.from(dom.abilities.querySelectorAll('button')).find(b => !b.disabled && b.dataset.ability)
+                        || dom.abilities.querySelector('.b-card-actions-close') || nodes[cid];
+                    if (first && first.focus) first.focus();
+                }
                 return;
             }
             if (ui.sel) { ui.sel = null; render(); }
@@ -2518,12 +2592,22 @@
             render();
         }
 
-        function clickActivate(cid, ability, L) {
+        function clickActivate(cid, ability, L, ev) {
             const acts = L.filter(a => a.type === 'activate' && a.cid === cid && a.ability === ability);
             if (!acts.length) return;
-            if (acts.length === 1 && !acts[0].target) { act(acts[0]); return; }
+            if (acts.length === 1 && !acts[0].target) {
+                act(acts[0]);
+                if (ev && ev.detail === 0) {
+                    const next = Object.values(nodes.choose || {}).find(b => !b.disabled) || nodes[cid];
+                    if (next && next.focus) next.focus();
+                }
+                return;
+            }
             ui.sel = { kind: 'activate', cid, ability };
             render();
+            // Rendering replaces the button. Keyboard activation continues at a legal target.
+            const next = ev && ev.detail === 0 ? nodes[acts[0].target] : nodes.buttons['activate:' + ability];
+            if (next && next.focus) next.focus();
         }
 
         // ---- dragging (Pointer Events: mouse, pen and touch) ----

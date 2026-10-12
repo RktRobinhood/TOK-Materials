@@ -263,5 +263,13 @@
     "id": 5814866864,
     "blockedBy": [],
     "nativeDependenciesAdded": true
+  },
+  "ability_tray": {
+    "number": 140,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/140",
+    "title": "Rift of Reason: Choose creature abilities beside their source card",
+    "id": 5818256251,
+    "blockedBy": [],
+    "nativeDependenciesAdded": true
   }
 }

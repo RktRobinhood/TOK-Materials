@@ -54,8 +54,8 @@ function perform(t, expect) {
             break;
         case 'activate':
             click('.my-board [data-cid="' + expect.cid + '"]');
-            assert.ok($('.b-prompt .btn.gold').classList.contains('guide-focus'));
-            click('.b-prompt .btn.gold');
+            assert.ok($('.b-card-actions .btn.gold').classList.contains('guide-focus'));
+            click('.b-card-actions .btn.gold');
             if (expect.target) click('[data-target="' + expect.target + '"]');
             break;
         case 'axiom':
@@ -281,8 +281,8 @@ test('the first lesson asks for a prediction and accepts both independent rule r
         assert.equal(t.$('.guide-focus'), null, 'the learner chooses without a pointer before the hints');
         if (plan === 'filter') {
             t.$('.my-board [data-cid="p0c0"]').click();
-            assert.match(t.$('.b-ask').textContent, /attack, or press Activate/);
-            t.$('.b-prompt .btn.gold').click();
+            assert.match(t.$('.b-ask').textContent, /drag to attack, or choose an ability beside its card/);
+            t.$('.b-card-actions .btn.gold').click();
         } else if (plan === 'normal-hearts') perform(t, { type: 'axiom', choice: plan });
         else perform(t, { type: 'attack', cid: 'p0c0', target: 'h1' });
         t.g.flush();

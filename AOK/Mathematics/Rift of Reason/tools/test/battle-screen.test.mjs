@@ -459,7 +459,7 @@ test('a ready Astrophysicat describes both attack and activation, and either act
     for (const choice of ['attack', 'activate']) {
         const t = prepared({ me: ['astrophysicat', 'kardashiant'], opp: ['kardashiant'] }, (s, move) => move('p0c0', 0, 'board'));
         t.$('.my-board [data-cid="p0c0"]').click();
-        assert.match(t.$('.b-ask').textContent, /choose a glowing enemy to attack, or press Activate/);
+        assert.match(t.$('.b-ask').textContent, /drag to attack, or choose an ability beside its card/);
         assert.match(t.$('.b-ask').textContent, /Activating uses its attack this turn/);
         assert.ok(t.$('.b-hero[data-target="h1"]').classList.contains('valid'));
         const hp = t.handle.state.players[1].hearts;
@@ -468,7 +468,7 @@ test('a ready Astrophysicat describes both attack and activation, and either act
             assert.equal(t.handle.state.players[1].hearts, hp - 1);
             assert.equal(t.handle.state.cards.p0c0.attacks, 1);
         } else {
-            t.$('.b-prompt .btn.gold').click();
+            t.$('.b-card-actions .btn.gold').click();
             assert.equal(t.handle.state.players[0].hand.length, 1);
             assert.equal(t.handle.state.cards.p0c0.activated, true);
         }
@@ -476,6 +476,63 @@ test('a ready Astrophysicat describes both attack and activation, and either act
     }
 });
 const hover = (t, sel) => { t.$(sel).dispatchEvent(mouse({ type: 'pointerenter' })); t.g.flush(); return t.$('.b-inspect').classList.contains('show') ? t.$('.b-inspect').textContent : ''; };
+
+test('a creature-local tray lists multiple gained abilities and resolves a chosen target exactly once', () => {
+    const t = prepared({ me: ['lens-lizard', 'paper-dragon', 'cloud-calf'], opp: ['kardashiant'], energy: 3 }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p0c1', 0, 'board');
+        s.cards.p0c1.damage = 1; s.cards.p0c0.gained = ['well-actually', 'comma-pause'];
+    });
+    t.$('.my-board [data-cid="p0c0"]').dispatchEvent({ type: 'click', detail: 0 });
+    assert.equal(t.g.document.activeElement, t.$('.b-card-actions [data-ability="lens-check"]'));
+    const tray = t.$('.b-card-actions');
+    assert.equal(tray.hidden, false); assert.match(tray.getAttribute('aria-label'), /Abilities for Lens Lizard/);
+    assert.equal(tray.querySelectorAll('[data-ability]').length, 3);
+    assert.equal(t.$('.b-prompt .btn.gold'), null, 'the middle bar has no activation menu');
+    assert(!tray.parentNode.closest('button'), 'ability buttons are outside the card button');
+    t.$('.b-card-actions [data-ability="comma-pause"]').dispatchEvent({ type: 'click', detail: 0 });
+    assert.equal(t.handle.state.players[0].energy, 3, 'selecting a targeted ability does not pay yet');
+    assert(t.$('.my-board [data-cid="p0c1"]').classList.contains('valid'));
+    assert(!t.$('.my-board [data-cid="p0c0"]').classList.contains('valid'));
+    assert.equal(t.g.document.activeElement, t.$('.my-board [data-cid="p0c1"]'), 'keyboard ability focuses a legal target');
+    t.$('.my-board [data-cid="p0c1"]').dispatchEvent({ type: 'click', detail: 0 });
+    assert.equal(t.handle.state.cards.p0c1.damage, 0);
+    assert.equal(t.handle.state.players[0].energy, 2); assert.equal(t.handle.state.cards.p0c0.activated, true);
+    assert.equal(t.$('.b-card-actions').hidden, true);
+    assert.equal(t.g.document.activeElement, t.$('.my-board [data-cid="p0c0"]'), 'keyboard resolution returns to its source');
+    t.$('.my-board [data-cid="p0c0"]').dispatchEvent({ type: 'click', detail: 0 });
+    assert.equal(t.g.document.activeElement, t.$('.b-card-actions-close'), 'all-disabled tray keeps keyboard focus');
+    assert(t.root.querySelectorAll('.b-card-actions [data-ability]').every(b => b.disabled));
+    assert.match(t.$('.b-card-actions').textContent, /used its ability this turn/);
+    t.$('.b-card-actions-close').click();
+    assert.equal(t.$('.b-card-actions').hidden, true);
+    assert.equal(t.g.document.activeElement, t.$('.my-board [data-cid="p0c0"]'));
+    t.handle.destroy();
+});
+
+test('keyboard immediate abilities focus a pending choice or their rebuilt source', () => {
+    for (const species of ['lens-lizard', 'pocket-tortoise']) {
+        const t = prepared({ me: [species, 'paper-dragon', 'cloud-calf'], opp: ['kardashiant'] }, (s, move) => move('p0c0', 0, 'board'));
+        t.$('.my-board [data-cid="p0c0"]').dispatchEvent({ type: 'click', detail: 0 });
+        t.$('.b-card-actions [data-ability]').dispatchEvent({ type: 'click', detail: 0 });
+        const next = species === 'lens-lizard' ? t.$('.b-choice button') : t.$('.my-board [data-cid="p0c0"]');
+        assert.ok(t.g.document.activeElement === next, species + ': focus stays on the next interaction');
+        assert.equal(t.handle.state.cards.p0c0.activated, true);
+        t.handle.destroy();
+    }
+});
+
+test('ability tray exposes actual costs and explains insufficient energy and an empty effect', () => {
+    const t = prepared({ me: ['lens-lizard', 'paper-dragon'], opp: ['kardashiant'], energy: 0 }, (s, move) => { move('p0c0', 0, 'board'); s.axioms.active.abilities = 'silence'; });
+    t.$('.my-board [data-cid="p0c0"]').click();
+    assert(t.$('.b-card-actions [data-ability="lens-check"]').disabled);
+    assert.match(t.$('.b-card-actions').textContent, /Needs 2 energy/);
+    t.handle.destroy();
+    const empty = prepared({ me: ['pocket-tortoise'], opp: ['kardashiant'] }, (s, move) => move('p0c0', 0, 'board'));
+    empty.$('.my-board [data-cid="p0c0"]').click();
+    assert(empty.$('.b-card-actions [data-ability="old-pocket"]').disabled);
+    assert.match(empty.$('.b-card-actions').textContent, /No useful target or effect/);
+    empty.handle.destroy();
+});
 
 test('practice and story can be left after a confirm step; the lesson and risked matches have no Leave match', () => {
     const t = setup(practice);

@@ -8,7 +8,7 @@
     const E=R.Battle.Engine, el=R.el;
     const creatures=['proof-pup','lens-lizard','paper-dragon','cloud-calf','pocket-tortoise','comma-crab','footnote-finch'];
     const spells=R.data.tacticDecks.starterPack;
-    const ids=creatures.concat(spells);
+    const ids=creatures.concat(spells, ['multiple-abilities']);
     let selected=ids.includes(q.get('starter'))?q.get('starter'):'proof-pup';
     const scratch=R.State.freshState();
     R.State.get=()=>scratch; R.State.update=fn=>fn(scratch); R.State.save=()=>{}; R.State.saveNow=()=>true;
@@ -25,11 +25,12 @@
         'creative-spark':'Play Creative Spark on a friend: +1/+1 this turn, removed at End turn.',
         'stored-thought':'Play Stored Thought: draw 1 personal card and restore 1 heart.',
         'careful-words':'Play Careful Words on damaged Paper Dragon: maximum health 2 → 3, heal 1.',
+        'multiple-abilities':'Click Lens Lizard: its gained draw/heal abilities appear with Lens Check. Choose one, then its target if needed.',
     };
     const note=el('p',{id:'starter-note',text:notes[selected]});
     const select=el('select',{'aria-label':'Starter pack case',onchange(e){
         selected=e.target.value;q.set('starter',selected);root.history.replaceState(null,'',root.location.pathname+'?'+q.toString());start();
-    }},ids.map(id=>el('option',{value:id,selected:id===selected,text:(R.data.creatures[id]||R.data.tactics[id]).name})));
+    }},ids.map(id=>el('option',{value:id,selected:id===selected,text:id==='multiple-abilities'?'Multiple abilities':(R.data.creatures[id]||R.data.tactics[id]).name})));
     root.document.querySelector('.bench header').replaceChildren(el('strong',{text:'Starter pack · scratch battle, no saves'}),select,
         el('button.btn.small',{text:'Reset case',onclick:()=>start()}),el('label',{},[el('input',{type:'checkbox',onchange(e){root.document.body.classList.toggle('calm-motion',e.target.checked);}}),' Calm motion']));
     root.document.getElementById('screen').before(note);
@@ -37,7 +38,7 @@
         note.textContent=notes[selected];
         const colour=R.data.tactics[selected]&&R.data.tactics[selected].colour;
         const matching={reason:'proof-pup',perception:'lens-lizard',imagination:'paper-dragon',memory:'pocket-tortoise',language:'comma-crab'};
-        const own=[colour?matching[colour]:selected,'paper-dragon','cloud-calf','pocket-tortoise','lens-lizard','footnote-finch'];
+        const own=[colour?matching[colour]:selected==='multiple-abilities'?'lens-lizard':selected,'paper-dragon','cloud-calf','pocket-tortoise','lens-lizard','footnote-finch'];
         const inst=(species,i,p)=>({uid:'starter-'+p+'-'+i,species,powerDelta:0,injuries:[],scars:[]});
         const s=E.createBattle({seed:'starter-pack-'+selected,
             players:[{name:'You',team:own.map((id,i)=>inst(id,i,0)),tactics:colour?[selected]:[]},
@@ -50,6 +51,7 @@
         move('p0c0',0,selected==='proof-pup'?'hand':'board');move('p0c1',0,'board');s.cards.p0c1.damage=1;
         move('p1c0',1,'board');move('p1c1',1,'board');
         if(selected==='paper-dragon'||selected==='cloud-calf')s.cards.p0c0.damage=1;
+        if(selected==='multiple-abilities')s.cards.p0c0.gained=['well-actually','comma-pause'];
         if(colour)move('p0t0',0,'hand');
         if(selected==='footnote-finch')s.players[0].axHand=['luxury'];
         s.players.forEach(P=>{P.energy=10;P.capacity=10;});s.players[0].hearts=8;s.phase='main';
