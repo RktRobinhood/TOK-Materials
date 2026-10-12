@@ -43,4 +43,4 @@ Native dependencies match text blockers. Content-release tickets also honour #10
 
 - [#137](https://github.com/RktRobinhood/TOK-Materials/issues/137): generated seven starter portraits; independent artwork slice for #113. Selected A refinement milestone is pushed at5e596a3; production#109 and physical-device checks remain.
 
-- [#139](https://github.com/RktRobinhood/TOK-Materials/issues/139): draft public-persona/pun/prop mapping in twelve-creature colour batches before expansion art. #137 art complete at cb5fb44; #113 runtime cards remain open.
+- [#139](https://github.com/RktRobinhood/TOK-Materials/issues/139): all 72 public-persona/pun/prop briefs drafted, twelve per colour. See PERSONA-ROSTER.md, canonical ROSTER.md and art/voice ledgers. #123 owns familiarity, pun, strategy and release review before expansion images; IDs/mechanics/acquisition remain unchanged. #137 art complete at cb5fb44; #113 runtime cards remain open.

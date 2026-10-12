@@ -1,5 +1,7 @@
 # Card pipeline voice and sound handoff
 
+#139 supplies all 72 proposed creature delivery directions and explicit existing SFX keys in [PERSONA-ROSTER.md](PERSONA-ROSTER.md) / persona-roster.json. They are original voice briefs, never celebrity impressions or copied catchphrases. Each sharedSfx list is validated against data/sfx.js; select cues at their actual action rather than layering them. Descriptive words in voiceDirection do not create sound keys. #123 roster/strategy review precedes names/lines in runtime sources. Record only released batches through the existing voice plan, render and audit flow; preserve every existing recording and hash. No new lines or audio were generated for this cast pass.
+
 Production sources remain data/script/*.js, creature lines, data/barks.js and Granny's lesson steps. tools/voices.mjs --plan enumerates actual missing lines; this proposal list is not silently injected into that scan. Preserve all current text hashes, recordings, cast pins and quota ledgers. The current recording audit is design/reviews/voice-recording-2026-10-12.md. No recordings were generated in this planning pass.
 
 | Need | Proposed wording / treatment | Release gate |

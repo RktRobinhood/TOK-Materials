@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+import {loadRift} from '../../../tools/test/harness.mjs';
+const dir=path.dirname(fileURLToPath(import.meta.url));
+const p=JSON.parse(fs.readFileSync(path.join(dir,'persona-roster.json')));
+const catalogue=JSON.parse(fs.readFileSync(path.join(dir,'card-catalogue.json')));
+const R=loadRift(['js/core/rift.js','data/creatures.js','data/sfx.js']);
+const existing=new Set(Object.values(R.data.creatures).map(c=>c.inspiredBy.toLocaleLowerCase()));
+assert.equal(p.rows.length,72);assert.equal(p.pendingColours.length,0);
+for(const colour of p.completedColours)assert.equal(p.rows.filter(r=>r.colour===colour).length,12);
+for(const field of ['mechanicalId','proposedName','inspiration'])assert.equal(new Set(p.rows.map(r=>r[field])).size,72);
+for(const row of p.rows){
+ const c=catalogue.cards.find(c=>c.id===row.mechanicalId);
+ assert(c&&c.kind==='creature');assert.equal(row.colour,c.affinity);assert.equal(row.rarity,c.rarity);
+ assert.deepEqual(row.mechanicalContract,{cost:c.cost,attack:c.attack,health:c.health,text:c.text,gates:c.gates});
+ assert.deepEqual(row.acquisition,c.acquisition);assert.equal(row.artId,c.art);
+ assert.equal(row.palette.accent,R.COLOURS[row.colour].hex);
+ assert(!existing.has(row.inspiration.split('/')[0].trim().toLocaleLowerCase()),'existing persona '+row.inspiration);
+ for(const key of ['signatureProp','jokeAngle','silhouette','source','voiceDirection','familiarity','status'])assert(row[key]&&typeof row[key]==='string');
+ assert(new URL(row.source).protocol==='https:');assert(row.promptReferences.some(ref=>ref.includes('style-board.png')));
+ assert(row.sharedSfx.length>=3);for(const key of row.sharedSfx)assert(R.data.sfx[key]?.length,'Unknown SFX '+key);
+}
+console.log('72 unique persona proposals; six groups of12; no existing actor overlap; exact mechanics, rarity, acquisition, gates, asset IDs and palette preserved.');

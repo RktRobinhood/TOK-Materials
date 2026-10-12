@@ -1,0 +1,3429 @@
+{
+  "issue": 139,
+  "status": "All six batches authored; persona proposals need roster/teacher review before images",
+  "count": 72,
+  "target": 72,
+  "rows": [
+    {
+      "mechanicalId": "reason-premise-pigeon",
+      "workingName": "Premise Pigeon",
+      "proposedName": "Tom Squawk",
+      "inspiration": "Tom Scott",
+      "colour": "reason",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Compact pigeon with expressive brow feathers and a practical brick-red shirt under a short blue travelling vest.",
+      "signatureProp": "One folded blank field guide, wing indicating an odd doorway just outside the portrait.",
+      "jokeAngle": "An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
+      "mechanicLink": "A simple vanilla starter body introduces the careful-explainer identity before triggered abilities.",
+      "source": "https://www.tomscott.com/newsletter/2024-07-08/",
+      "familiarity": "Teacher-review assumption: Recognisable internet explainer; historical red-shirt motif, not a claim about current wardrobe.",
+      "voiceDirection": "Clear curious documentary rhythm; original narrator delivery, no impression or copied catchphrase.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/reason-premise-pigeon/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-axiom-ant",
+      "workingName": "Axiom Ant",
+      "proposedName": "Bill Ny-ant",
+      "inspiration": "Bill Nye",
+      "colour": "reason",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Sturdy ant with rounded head, short antennae, powder-blue lab coat and one oversized patterned bow tie.",
+      "signatureProp": "The bow tie is the main recognition cue; a modest specimen tray is optional, not a second large silhouette.",
+      "jokeAngle": "Explains the tiny everyday thing with theatrical scientific enthusiasm.",
+      "mechanicLink": "Guard is a planted protective stance; the battle backplate supplies its shield cue.",
+      "source": "https://americanhistory.si.edu/collections/object/nmah_1844016",
+      "familiarity": "Teacher-review assumption: Science-show/meme familiarity plausible; review for this Danish class.",
+      "voiceDirection": "Bright concise science-show enthusiasm; do not imitate his voice or theme song.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/reason-axiom-ant/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-proof-beetle",
+      "workingName": "Proof Beetle",
+      "proposedName": "Mark Ro-beetle",
+      "inspiration": "Mark Rober",
+      "colour": "reason",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Friendly broad beetle, practical dark-blue workshop apron, large confident eyes, small curved shell.",
+      "signatureProp": "One chunky repaired gadget held between its forelegs; simple bolt/clamp silhouette, no company logo.",
+      "jokeAngle": "Builds an unnecessarily clever little repair and is very pleased it works.",
+      "mechanicLink": "Entrance support health is a repair for another creature, not a gadget that changes the effect.",
+      "source": "https://www.crunchlabs.com/pages/about-us",
+      "familiarity": "Teacher-review assumption: Engineering-video creator likely familiar to some students; review.",
+      "voiceDirection": "Warm enthusiastic maker; reuse small metal/place/heal sounds, not paid bespoke machine audio.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/reason-proof-beetle/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-counterexample-crow",
+      "workingName": "Counterexample Crow",
+      "proposedName": "V-Squawk",
+      "inspiration": "Michael Stevens / Vsauce",
+      "colour": "reason",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Dark crow with slightly oversized round spectacles, raised brow feathers and a curious lean.",
+      "signatureProp": "One blank folded question card in a wing; head tilt carries the questioning joke.",
+      "jokeAngle": "An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
+      "mechanicLink": "Entrance one damage is the tiny counterexample that changes a comfortable board.",
+      "source": "https://www.vsauce.com/vsauce1/",
+      "familiarity": "Teacher-review assumption: Science-video/meme familiarity plausible; review.",
+      "voiceDirection": "Playful reflective questioning with one deliberate pause; no copied opening line or impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/reason-counterexample-crow/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: deal 1 damage to an enemy creature.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-parity-panda",
+      "workingName": "Parity Panda",
+      "proposedName": "Hannah Frycoon",
+      "inspiration": "Hannah Fry",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round raccoon with auburn cheek tufts, deep-blue coat and a calm amused expression.",
+      "signatureProp": "One large paired-bead counter held level; two matching shapes visible at board size.",
+      "jokeAngle": "Finds a surprisingly simple pattern in a messy everyday problem.",
+      "mechanicLink": "Surviving an equal-attack fight and healing echoes a balanced comparison; no extra mathematical prerequisite.",
+      "source": "https://hannahfry.co.uk/",
+      "familiarity": "Teacher-review assumption: Maths presenter may need a short Collection introduction; don't assume recognition.",
+      "voiceDirection": "Warm precise mathematical storytelling; use ordinary shared heal cue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/reason-parity-panda/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 4,
+        "text": "After surviving a fight with equal effective attack, heal this by 1.",
+        "gates": [
+          109,
+          127
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-induction-ibex",
+      "workingName": "Induction Ibex",
+      "proposedName": "Matt Parkbex",
+      "inspiration": "Matt Parker",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Stocky ibex with short horns, blue-checked shirt and a friendly sheepish grin.",
+      "signatureProp": "One deliberately wonky triangular ruler; no tiny written equations or branded shirt.",
+      "jokeAngle": "The arithmetic presentation almost works, so he gleefully checks it again.",
+      "mechanicLink": "Reason spell sequence builds a temporary attack step; the visual ruler doesn't change card timing.",
+      "source": "https://standupmaths.com/",
+      "familiarity": "Teacher-review assumption: Maths-comedy niche; teacher may prefer a more familiar replacement.",
+      "voiceDirection": "Dry cheerful maths-comedy rhythm; original short lines, no show quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/reason-induction-ibex/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Once per turn, after you cast a Reason spell, this gains 1 attack until your next turn starts.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-logic-lynx",
+      "workingName": "Logic Lynx",
+      "proposedName": "Derek Mullinx",
+      "inspiration": "Derek Muller / Veritasium",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Blue-grey lynx with tall ear tufts, dark practical jacket and an alert questioning face.",
+      "signatureProp": "One large simple pulley wheel with a blue cord; avoid a cluttered laboratory.",
+      "jokeAngle": "Sets up a demonstration that makes a confident prediction worth checking.",
+      "mechanicLink": "Top-two selection is visibly preparing the demonstration, not exposing hidden reserved Fate cards.",
+      "source": "https://www.veritasium.com/about",
+      "familiarity": "Teacher-review assumption: Science-channel familiarity plausible; review.",
+      "voiceDirection": "Calm inquisitive explanation with restrained excitement; shared place/reveal audio.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "artId": "creature/reason-logic-lynx/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: look at the top 2 personal-deck cards; keep their order or swap them.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-guardrail-goat",
+      "workingName": "Guardrail Goat",
+      "proposedName": "Destin Sandhoof",
+      "inspiration": "Destin Sandlin / Smarter Every Day",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Sturdy goat with short curved horns, midnight-blue work shirt and a warm grin.",
+      "signatureProp": "One backward-looking gear wheel cradled against the chest; grounded stance.",
+      "jokeAngle": "Takes a familiar mechanism apart until the ordinary world becomes interesting again.",
+      "mechanicLink": "Guard and first-spell prevention suggest careful engineering; no immunity beyond the drafted effect.",
+      "source": "https://www.smartereveryday.com/",
+      "familiarity": "Teacher-review assumption: Science-maker niche; may need introduction.",
+      "voiceDirection": "Friendly exploratory maker voice; generic clunk/block cues; not an accent imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/reason-guardrail-goat/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. The first spell damage this takes each round is reduced by 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-diagonal-deer",
+      "workingName": "Diagonal Deer",
+      "proposedName": "Grant Sanderstag",
+      "inspiration": "Grant Sanderson / 3Blue1Brown",
+      "colour": "reason",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Slim young stag with short branched antlers, slate-blue coat and thoughtful face.",
+      "signatureProp": "One curved chalk loop between its antlers; three blue beads and one brown bead are a subtle secondary motif, not a copied logo.",
+      "jokeAngle": "Turns a difficult relation into a picture and quietly lets the picture explain it.",
+      "mechanicLink": "Equal-attack Entrance control makes the comparison visual; the UI still performs the exact drafted check.",
+      "source": "https://www.3blue1brown.com/about/",
+      "familiarity": "Teacher-review assumption: Maths-video niche; teacher-review introduction likely useful.",
+      "voiceDirection": "Gentle measured visual explanation; no animated chart show or real voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/reason-diagonal-deer/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 3,
+        "text": "Entrance: silence an enemy creature whose current attack equals this creature's attack.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-inference-heron",
+      "workingName": "Inference Heron",
+      "proposedName": "James Mayron",
+      "inspiration": "James May",
+      "colour": "reason",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-town-hall",
+        "theme": "Ch2 truth/claim resolution",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Long-legged heron with grey swept-back crest, slightly rumpled blue overshirt and a patient expression.",
+      "signatureProp": "One neatly folded blank engineering plan; deliberately slow-looking upright pose.",
+      "jokeAngle": "Will happily take the time to explain the small detail while everyone else wants to rush.",
+      "mechanicLink": "The draw waits for a precise surviving fight; this is patience, not a change to match pace.",
+      "source": "https://press.aboutamazon.com/2016/5/clarkson-hammond-may-announce-the-name-of-their-amazon-prime-show",
+      "familiarity": "Teacher-review assumption: Former motoring presenter; familiarity varies. Slow/detail joke is a creative proposal, not a current-role claim.",
+      "voiceDirection": "Dry unhurried explanation in original delivery; no impersonation or long unskippable monologue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "reveal"
+      ],
+      "artId": "creature/reason-inference-heron/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Once per turn, after another friendly creature survives a fight at 1 health, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          127
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-boundary-bear",
+      "workingName": "Boundary Bear",
+      "proposedName": "Einbear",
+      "inspiration": "Albert Einstein",
+      "colour": "reason",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round older bear with wild pale head tufts and a worn midnight-blue cardigan; clearly animal, not a human face pasted onto fur.",
+      "signatureProp": "One simple bent clock rim held like a puzzle; blank face, no equations to read.",
+      "jokeAngle": "Time refuses to sit neatly in the frame, while the bear looks delighted rather than ominous.",
+      "mechanicLink": "A bounded damage rule becomes a bent boundary motif; historical Mythic placement is a tier proposal for review.",
+      "source": "https://albert-einstein.huji.ac.il/",
+      "familiarity": "Teacher-review assumption: Widely recognisable historical science motif; do not claim class recognition measured.",
+      "voiceDirection": "Kind concise scholarly wonder; shared block/axiom sounds, no celebrity impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/reason-boundary-bear/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 6,
+        "text": "Guard. While this is ready, your hero takes at most 2 damage from each creature attack.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "reason-theorem-tortoise",
+      "workingName": "Theorem Tortoise",
+      "proposedName": "Turingtoise",
+      "inspiration": "Alan Turing",
+      "colour": "reason",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small ancient tortoise with blue-grey skin, dark geometrical shell and quiet focused eyes.",
+      "signatureProp": "One blank paper tape threaded through a simple shell-mounted reader; large folds, no readable code or war symbols.",
+      "jokeAngle": "The machine takes one careful step and then another, even when the puzzle looks magical.",
+      "mechanicLink": "Two Reason spells schedule one public support event; tape represents finite steps, not extra replay policy.",
+      "source": "https://www.kings.cam.ac.uk/alan-mathison-turing-1912-54",
+      "familiarity": "Teacher-review assumption: Historical computing figure may need a short introduction.",
+      "voiceDirection": "Thoughtful spare scholarly delivery; shared reveal/Fate/axiom sounds; no joke about persecution or private life.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "fate-warp"
+      ],
+      "artId": "creature/reason-theorem-tortoise/idle",
+      "palette": {
+        "accent": "#3D7BFF",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "At your turn's end, if you cast 2 Reason spells, schedule at +1 round: your creatures present then gain 1 maximum health and heal 1. At most one event from this creature pending.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-pulse-pup",
+      "workingName": "Pulse Pup",
+      "proposedName": "Dua Lupup",
+      "inspiration": "Dua Lipa",
+      "colour": "emotion",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small dark-coated puppy with a neat high ear tuft and a confident stage-step pose.",
+      "signatureProp": "One simple crimson stage jacket; one paw keeps the beat, no microphone required.",
+      "jokeAngle": "Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
+      "mechanicLink": "A plain common attacker establishes confident rhythm without new triggers.",
+      "source": "https://www.dualipa.com/",
+      "familiarity": "Teacher-review assumption: Current pop artist likely familiar; class recognition still proposed.",
+      "voiceDirection": "Bright rhythmic original delivery; reuse summon sound, no sung lines or artist impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-pulse-pup/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 2,
+        "health": 1,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-courage-cub",
+      "workingName": "Courage Cub",
+      "proposedName": "Simone Bearles",
+      "inspiration": "Simone Biles",
+      "colour": "emotion",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Compact athletic bear cub with bright focused eyes, rounded ears and a red training jacket.",
+      "signatureProp": "One short balance-beam-shaped wooden practice block beside a planted foot, not a full scene.",
+      "jokeAngle": "The landing is tiny, the confidence enormous; praise of public sporting skill.",
+      "mechanicLink": "Entrance healing is recovering balance and encouraging the team; no joke about injury, abuse or personal experiences.",
+      "source": "https://www.teamusa.com/profiles/simone-biles",
+      "familiarity": "Teacher-review assumption: Sporting recognition plausible; teacher review.",
+      "voiceDirection": "Confident encouraging coach-like delivery; original words and shared heal cue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-courage-cub/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: restore 1 heart to your hero.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-spite-sprite",
+      "workingName": "Spite Sprite",
+      "proposedName": "Kai Ceenat",
+      "inspiration": "Kai Cenat",
+      "colour": "emotion",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Lively meerkat with dark raised head tufts, large reactive eyes and a crimson hoodie.",
+      "signatureProp": "One oversized headset; paws lifted in a harmless startled reaction, no platform logo.",
+      "jokeAngle": "The reaction gets bigger than the game; public streaming energy, not a personality diagnosis.",
+      "mechanicLink": "Surviving a hit raises temporary attack; no claim that the person is spiteful.",
+      "source": "https://linktr.ee/imkaicenat",
+      "familiarity": "Teacher-review assumption: Streaming/meme familiarity plausible; review local class.",
+      "voiceDirection": "Energetic short original reactions; throttle levels, no shouted impression or looping shake.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-spite-sprite/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Once per turn, after taking damage and surviving, this gains 1 attack until your next turn starts.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-cheer-chick",
+      "workingName": "Cheer Chick",
+      "proposedName": "Terry Chews",
+      "inspiration": "Terry Crews",
+      "colour": "emotion",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Broad-shouldered rooster with a warm grin, small comb and worn crimson sports vest.",
+      "signatureProp": "One wing gives an exaggerated thumbs-up-shaped encouragement; no human hands.",
+      "jokeAngle": "An ordinary team pep talk becomes a whole motivational performance.",
+      "mechanicLink": "Entrance attack support is cheering another creature, not a bonus to all allies.",
+      "source": "https://terrycrews.com/",
+      "familiarity": "Teacher-review assumption: Comedy/fitness public persona may be familiar; review.",
+      "voiceDirection": "Warm exuberant original encouragement; shared card-play cue, no commercial catchphrase.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-cheer-chick/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: another friendly creature gains 1 attack this turn.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-temper-tiger",
+      "workingName": "Temper Tiger",
+      "proposedName": "Jeremy Clawson",
+      "inspiration": "Jeremy Clarkson",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round tiger with shaggy cheek fur and a rumpled dark-red motoring coat.",
+      "signatureProp": "One tiny toy steering wheel held indignantly; expressive brow rather than a huge vehicle.",
+      "jokeAngle": "The harmless toy is apparently never quite fast enough; invented motoring exaggeration.",
+      "mechanicLink": "Entrance self-heart loss represents risky enthusiasm, not violence attributed to the person.",
+      "source": "https://press.aboutamazon.com/2016/5/clarkson-hammond-may-announce-the-name-of-their-amazon-prime-show",
+      "familiarity": "Teacher-review assumption: Former motoring host; familiarity varies, review.",
+      "voiceDirection": "Comically emphatic original motoring commentary; no imitation or abusive lines.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-temper-tiger/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "Entrance: your hero loses 1 heart.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-bond-badger",
+      "workingName": "Bond Badger",
+      "proposedName": "Dolly Possum",
+      "inspiration": "Dolly Parton",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Warm smiling possum with a tall cream hair tuft, worn crimson shawl and gentle expressive eyes.",
+      "signatureProp": "One blank little book held to its chest; a modest stage sparkle on the collar only.",
+      "jokeAngle": "The big show ends with a small act of kindness; public literacy work supplies the supportive angle.",
+      "mechanicLink": "Healing after an ally's defeat offers comfort; no copied lyrics or private-life gag.",
+      "source": "https://imaginationlibrary.com/about-us/",
+      "familiarity": "Teacher-review assumption: Cross-generational country/book-gifting figure; may need introduction.",
+      "voiceDirection": "Warm concise storyteller; no accent/voice imitation or sung material, shared heal sound.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-bond-badger/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 4,
+        "text": "Once per turn, after another friendly creature is defeated, restore 1 heart to your hero.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-grudge-goose",
+      "workingName": "Grudge Goose",
+      "proposedName": "Jack Honksepticeye",
+      "inspiration": "Jacksepticeye",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Dark goose with one small vivid green head tuft, crimson scarf and playful wide-eyed expression.",
+      "signatureProp": "One plain headset; beak lifted for a final little honk, no copied eye logo.",
+      "jokeAngle": "The playthrough gets one last noisy reaction; community creator reference, not a claim of vindictiveness.",
+      "mechanicLink": "Last Word one damage is a final honk; creature defeat is a game event, not a joke about the person dying.",
+      "source": "https://wish.org/thankmas-2026-launch",
+      "familiarity": "Teacher-review assumption: Gaming-community familiarity plausible; review.",
+      "voiceDirection": "Friendly animated original gaming reactions; one short shared goose-like call, no impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-grudge-goose/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Last Word: deal 1 damage to the enemy hero.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-resolve-ram",
+      "workingName": "Resolve Ram",
+      "proposedName": "Greta Thunram",
+      "inspiration": "Greta Thunberg",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small sturdy ram with long braided wool locks, dark-red travelling coat and quiet determined expression.",
+      "signatureProp": "One blank wooden placard held level; no slogans or political campaign branding.",
+      "jokeAngle": "Keeps asking the group to take the inconvenient evidence seriously.",
+      "mechanicLink": "Low-heart Guard pressure represents resolve under game pressure; no joke about age, disability or personal traits.",
+      "source": "https://www.ted.com/speakers/greta_thunberg",
+      "familiarity": "Teacher-review assumption: Public climate figure likely recognisable; class review.",
+      "voiceDirection": "Plain calm determined original text; shared block cue, no slogan recording.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/emotion-resolve-ram/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. If your hero has 4 hearts or less, this has 1 more attack.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-outrage-ox",
+      "workingName": "Outrage Ox",
+      "proposedName": "Serenox",
+      "inspiration": "Serena Williams",
+      "colour": "emotion",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Powerful rounded ox with a small dark crest, red sports wrap and a composed competitive face.",
+      "signatureProp": "One compact wooden racket silhouette; stable ready stance, no sponsor logos.",
+      "jokeAngle": "Every tiny rally gets championship focus; public tennis skill, not anger or temperament claims.",
+      "mechanicLink": "Swift first creature engagement conveys readiness; arrival hero-attack restriction stays intact.",
+      "source": "https://www.wtatennis.com/legends/230234/serena-williams",
+      "familiarity": "Teacher-review assumption: Sporting recognition plausible; review.",
+      "voiceDirection": "Focused positive competitor; short original lines and ordinary hit/summon audio.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-outrage-ox/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 4,
+        "health": 3,
+        "text": "Swift. This cannot attack a hero on the turn it arrives.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-heartfire-hawk",
+      "workingName": "Heartfire Hawk",
+      "proposedName": "LeBrondor",
+      "inspiration": "LeBron James",
+      "colour": "emotion",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 confronted public claims",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Broad-winged condor with dark crest, crimson unlettered basketball vest and confident team-leading pose.",
+      "signatureProp": "One small plain basketball tucked under a wing; no team badge or crown required.",
+      "jokeAngle": "Turns a setback into another very large team pep talk.",
+      "mechanicLink": "A hero losing hearts enables another ally's temporary attack; no additional global aura.",
+      "source": "https://www.nba.com/player/2544/lebron-james/bio",
+      "familiarity": "Teacher-review assumption: Basketball figure likely familiar; review. No current team/stat claims needed.",
+      "voiceDirection": "Confident encouraging leader, original brief delivery; shared hurt/support cues, no impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-heartfire-hawk/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 4,
+        "text": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-stormheart-serpent",
+      "workingName": "Stormheart Serpent",
+      "proposedName": "Pink Python",
+      "inspiration": "P!NK",
+      "colour": "emotion",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Coiled dark python with a short pink crest and worn crimson stage scarf; warm daring eyes, no fangs displayed as a threat.",
+      "signatureProp": "One simple aerial ribbon loop that remains attached to its body; no arena or scattered confetti.",
+      "jokeAngle": "The small stage act looks daring, then lands neatly; broad performance proposal, not a sourced stunt claim.",
+      "mechanicLink": "Choosing own-heart risk for bounded damage is the game cost of a bold act; exact self-zero Win rules still apply.",
+      "source": "https://www.pinkspage.com/",
+      "familiarity": "Teacher-review assumption: Pop performer plausibly familiar; exact aerial reference needs review if retained.",
+      "voiceDirection": "Brisk confident original performer, no singing/impression; reuse warp/place cue sparingly.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/emotion-stormheart-serpent/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 5,
+        "health": 5,
+        "text": "Entrance: choose to lose up to 2 of your own hearts; deal that much damage to a chosen enemy creature.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "emotion-empathy-elephant",
+      "workingName": "Empathy Elephant",
+      "proposedName": "Pascalophant",
+      "inspiration": "Blaise Pascal",
+      "colour": "emotion",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small scholarly elephant with broad expressive ears, an old crimson waistcoat and a gentle thoughtful gaze.",
+      "signatureProp": "One blank paper heart folded beside a counting frame; choose the heart as the main70px cue.",
+      "jokeAngle": "The scholar keeps room for a feeling even while carefully arranging the argument.",
+      "mechanicLink": "Shared healing after both heroes lose hearts makes the philosophical contrast visible; historical legendary proposal.",
+      "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/",
+      "familiarity": "Teacher-review assumption: Historical maths/philosophy figure needs a short introduction.",
+      "voiceDirection": "Kind spare scholarly reflection; no copied quotations, shared heal/axiom sounds.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "artId": "creature/emotion-empathy-elephant/idle",
+      "palette": {
+        "accent": "#E8384F",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 8,
+        "text": "At your turn's end, if both heroes lost hearts this turn, restore 2 hearts to both and draw 1 personal-deck card.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-cue-cricket",
+      "workingName": "Cue Cricket",
+      "proposedName": "Nikkie de Jaguar",
+      "inspiration": "Nikkie de Jager / NikkieTutorials",
+      "colour": "perception",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Compact dark jaguar with carefully outlined eyes, cream muzzle and a green artist's capelet.",
+      "signatureProp": "One broad makeup brush; eye accents remain creature markings, not a realistic face.",
+      "jokeAngle": "An ordinary colour choice gets a very theatrical reveal; joke only about public makeup work.",
+      "mechanicLink": "Looking at the deck's top card is preparing the next reveal, not exposing anyone's identity.",
+      "source": "https://www.nikkietutorials.com/site/",
+      "familiarity": "Teacher-review assumption: Beauty-video figure plausibly familiar; review.",
+      "voiceDirection": "Confident warm original tutorial voice, no impression or private-identity jokes.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "artId": "creature/perception-cue-cricket/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: look at the top card of your personal deck.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-lens-lynx",
+      "workingName": "Lens Lynx",
+      "proposedName": "James Randilynx",
+      "inspiration": "James Randi",
+      "colour": "perception",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat.",
+      "signatureProp": "One empty folded sleeve opened for inspection; no copied stage logo.",
+      "jokeAngle": "Before admiring the mystery, quietly checks the sleeve.",
+      "mechanicLink": "Removing Elusive is making a creature targetable, not a claim that a real person is fraudulent.",
+      "source": "https://web.randi.org/",
+      "familiarity": "Teacher-review assumption: Historical sceptic/magician likely needs a Collection introduction.",
+      "voiceDirection": "Dry curious original stage delivery; reuse reveal cue, no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/perception-lens-lynx/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-focus-falcon",
+      "workingName": "Focus Falcon",
+      "proposedName": "Steph Cawry",
+      "inspiration": "Stephen Curry",
+      "colour": "perception",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Quick rounded falcon with a short dark crest and an unlettered emerald sports vest.",
+      "signatureProp": "One small plain basketball balanced against a wing.",
+      "jokeAngle": "The tiny target gets absurdly precise sporting focus.",
+      "mechanicLink": "Extra damage checks consumed Shield exactly; no new ranged attack or three-point mechanic.",
+      "source": "https://www.nba.com/player/201939/stephen-curry",
+      "familiarity": "Teacher-review assumption: Basketball recognition plausible; no current team or records assumed.",
+      "voiceDirection": "Focused playful original competitor; shared hit/place sounds, no impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/perception-focus-falcon/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "This deals 1 extra combat damage to a creature whose Shield has already been consumed this match.",
+        "gates": [
+          109,
+          127
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-shadow-shrimp",
+      "workingName": "Shadow Shrimp",
+      "proposedName": "David Brine",
+      "inspiration": "David Blaine",
+      "colour": "perception",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Dark shrimp with broad curved shell, short antennae and a worn emerald-lined stage cape.",
+      "signatureProp": "One plain blank playing card partly tucked into the cape.",
+      "jokeAngle": "The smallest stage exit becomes a mystery everyone wants to inspect.",
+      "mechanicLink": "Elusive is a clear game keyword; no lesson in real dangerous stunts.",
+      "source": "https://www.ted.com/speakers/david_blaine",
+      "familiarity": "Teacher-review assumption: Magician reference needs local familiarity review.",
+      "voiceDirection": "Sparse mysterious original delivery; shared close/reveal cue, no imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/perception-shadow-shrimp/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Elusive.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-scout-stoat",
+      "workingName": "Scout Stoat",
+      "proposedName": "Steve Earwin",
+      "inspiration": "Steve Irwin",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Bright-eyed stoat with large ears, khaki shirt and a small green neckerchief.",
+      "signatureProp": "One folded field notebook; gentle ready-to-observe stance, no animal restraint scene.",
+      "jokeAngle": "Everything in the bushes apparently deserves an enthusiastic closer look.",
+      "mechanicLink": "Deck selection is scouting; no joke about the person's death or risky encounter.",
+      "source": "https://australiazoo.com.au/about-us/the-irwins/steve/",
+      "familiarity": "Teacher-review assumption: Cross-generational wildlife presenter; may need introduction.",
+      "voiceDirection": "Friendly excited wildlife-guide cadence in original voice; no copied catchphrase.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/perception-scout-stoat/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-prism-puffin",
+      "workingName": "Prism Puffin",
+      "proposedName": "Zach Wing",
+      "inspiration": "Zach King",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Dark puffin with large warm eyes, practical green jacket and a tilted curious head.",
+      "signatureProp": "One simple mirror panel with a painted green edge; one object, no film background.",
+      "jokeAngle": "An ordinary prop seems to be a different thing from the other angle.",
+      "mechanicLink": "A friendly creature changes colour temporarily; it is not a new card identity or permanent mutation.",
+      "source": "https://www.zachkingmagic.com/",
+      "familiarity": "Teacher-review assumption: Short-form illusion creator plausibly familiar; review.",
+      "voiceDirection": "Playful concise original reveal, shared reveal/place effects.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/perception-prism-puffin/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 4,
+        "text": "Entrance: another friendly creature becomes Perception until your next turn starts.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-pattern-panther",
+      "workingName": "Pattern Panther",
+      "proposedName": "Marques Brownlynx",
+      "inspiration": "Marques Brownlee / MKBHD",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Tall-eared dark panther with emerald jacket piping and composed interested expression.",
+      "signatureProp": "One unbranded blank-screen handheld device at a deliberate inspection angle.",
+      "jokeAngle": "The smallest gadget detail deserves a whole careful comparison.",
+      "mechanicLink": "Draw after a skipped enemy occurrence uses the original event gate; the prop doesn't create secret previews.",
+      "source": "https://mkbhd.com/",
+      "familiarity": "Teacher-review assumption: Tech-video recognition plausible; review.",
+      "voiceDirection": "Measured practical original reviewer; shared click/reveal cue, no channel intro or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "fate-warp"
+      ],
+      "artId": "creature/perception-pattern-panther/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "Once per round, after an enemy scheduled occurrence is skipped, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-signal-seal",
+      "workingName": "Signal Seal",
+      "proposedName": "Linus Sealbastian",
+      "inspiration": "Linus Sebastian",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round seal in a practical dark-green workshop shirt, curious grin and a little tousled head fur.",
+      "signatureProp": "One oversized loop of plain cable cradled against the body.",
+      "jokeAngle": "The cable collection is becoming larger than the plan; original workshop joke.",
+      "mechanicLink": "Guard/healing after skipped environmental occurrences remains capped at three; no permanent protection.",
+      "source": "https://linusmediagroup.com/",
+      "familiarity": "Teacher-review assumption: Tech-maker niche; review and introduce if needed.",
+      "voiceDirection": "Cheerful busy original maker delivery; reuse clunk/block, no mishap or scandal references.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "block",
+        "fate-warp"
+      ],
+      "artId": "creature/perception-signal-seal/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. Entrance: heal your hero by 1 for each environmental occurrence permanently skipped this match, maximum 3.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-observer-octopus",
+      "workingName": "Observer Octopus",
+      "proposedName": "Adam Savash",
+      "inspiration": "Adam Savage",
+      "colour": "perception",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Warm-eyed octopus with short ginger crown tufts, round goggles and a dark-green worn apron.",
+      "signatureProp": "One sturdy magnifying lens; remaining arms stay close so the silhouette reads at70px.",
+      "jokeAngle": "A small prop inspection somehow becomes an entire afternoon's satisfying build.",
+      "mechanicLink": "Inspection without draw grants one other ally Shield under the original trigger; no simultaneous extra draws.",
+      "source": "https://www.tested.com/adamsavage",
+      "familiarity": "Teacher-review assumption: Maker/television familiarity plausible; review.",
+      "voiceDirection": "Enthusiastic careful original maker, ordinary place/block sounds and no accent imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block",
+        "reveal"
+      ],
+      "artId": "creature/perception-observer-octopus/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Once per turn, after you inspect deck cards without drawing them, another friendly creature gains Shield.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-exposure-eagle",
+      "workingName": "Exposure Eagle",
+      "proposedName": "Houdin-eagle",
+      "inspiration": "Harry Houdini",
+      "colour": "perception",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 observation at the clock tower",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Compact eagle with a sharp curious brow, midnight cape and emerald trim.",
+      "signatureProp": "One open padlock held clearly in a wing; no tied or submerged figure.",
+      "jokeAngle": "The allegedly impossible fastening is now just a very ordinary open lock.",
+      "mechanicLink": "The chosen Guard/Shield/Elusive removal stays a single keyword; no escape stunt or extra suppression.",
+      "source": "https://www.houdinimuseum.net/",
+      "familiarity": "Teacher-review assumption: Historical stage figure likely needs a short introduction.",
+      "voiceDirection": "Confident original stage patter; no dangerous-stunt instructions, shared reveal/block sound.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/perception-exposure-eagle/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Entrance: remove one chosen enemy keyword: Guard, Shield or Elusive.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-horizon-hare",
+      "workingName": "Horizon Hare",
+      "proposedName": "Amelia Earhare",
+      "inspiration": "Amelia Earhart",
+      "colour": "perception",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Long-eared hare with a worn flying cap, broad brass goggles and an emerald scarf.",
+      "signatureProp": "One folded blank flight chart held forward; ears and feet fully visible.",
+      "jokeAngle": "The route is planned before the dramatic entrance; joke about maps and preparation.",
+      "mechanicLink": "Moves one own pending event earlier with a+1-round floor; no joke about disappearance or a real crash.",
+      "source": "https://womenshistory.si.edu/blog/amelia-earharts-trailblazing-life-aviation",
+      "familiarity": "Teacher-review assumption: Historical aviation figure may need introduction.",
+      "voiceDirection": "Clear adventurous original narrator; shared step/Fate cue, no imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "fate-warp"
+      ],
+      "artId": "creature/perception-horizon-hare/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 5,
+        "text": "Entrance: move one own pending event one space earlier, no sooner than +1 round; announce its new time.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    },
+    {
+      "mechanicalId": "perception-true-sight-stag",
+      "workingName": "True Sight Stag",
+      "proposedName": "Galileelk",
+      "inspiration": "Galileo Galilei",
+      "colour": "perception",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small old elk with expressive white beard-like chin fur, short antlers and a dark emerald scholarly coat.",
+      "signatureProp": "One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette.",
+      "jokeAngle": "Would rather let everyone look through the instrument than argue around it.",
+      "mechanicLink": "The public three-card selection follows original order restoration; no prophecy of hidden Fate reservations.",
+      "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Galileo/",
+      "familiarity": "Teacher-review assumption: Historical science figure needs a brief introduction; existing Tycho overlap reviewed by prop/stance.",
+      "voiceDirection": "Kind inquisitive original scholar, shared reveal/axiom cue and no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "artId": "creature/perception-true-sight-stag/idle",
+      "palette": {
+        "accent": "#2FBF71",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Once per round, replace your normal personal draw with inspecting the top 3 cards, drawing one and restoring the others in their original order.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-question-quail",
+      "workingName": "Question Quail",
+      "proposedName": "Jimmy Fowlon",
+      "inspiration": "Jimmy Fallon",
+      "colour": "language",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small quail with expressive brow feathers, midnight jacket and a gold tie.",
+      "signatureProp": "One blank interview cue card and an inviting wing gesture.",
+      "jokeAngle": "Every interview seems ready to turn into another small game.",
+      "mechanicLink": "Entrance supports one ally's next creature attack only; no extra play allowance.",
+      "source": "https://www.nbc.com/the-tonight-show",
+      "familiarity": "Teacher-review assumption: Late-night host familiarity varies; broadcaster role reference checked, review.",
+      "voiceDirection": "Friendly playful original host; no copied sketch or impression, shared place cue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/language-question-quail/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-comma-caterpillar",
+      "workingName": "Comma Caterpillar",
+      "proposedName": "Emma Wordson",
+      "inspiration": "Emma Watson",
+      "colour": "language",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Rounded caterpillar with chestnut head tufts, a practical gold shawl and intent eyes.",
+      "signatureProp": "One closed blank book, not a wand or school crest.",
+      "jokeAngle": "Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
+      "mechanicLink": "Guard is a steady grounded stance; no licensed wizard character, magic or franchise clothing.",
+      "source": "https://interactive.unwomen.org/multimedia/feature/generationequalityrising/en/index.html",
+      "familiarity": "Teacher-review assumption: Actor/speaker likely familiar; institutional public-role reference checked, review.",
+      "voiceDirection": "Clear thoughtful original speaker; not a film-role impression or private-life joke.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/language-comma-caterpillar/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-label-lemur",
+      "workingName": "Label Lemur",
+      "proposedName": "Ryan Georilla",
+      "inspiration": "Ryan George",
+      "colour": "language",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small gentle gorilla with a tidy head tuft, charcoal jacket and gold collar.",
+      "signatureProp": "One blank label stamp; one raised questioning brow.",
+      "jokeAngle": "A very literal question exposes the absurdity in the pitch; original joke, no catchphrase.",
+      "mechanicLink": "Temporary attack reduction is questioning a label, not suppressing all abilities.",
+      "source": "https://www.youtube.com/watch?v=06SxBWnXytI",
+      "familiarity": "Teacher-review assumption: Sketch-video niche; short introduction may help.",
+      "voiceDirection": "Dry conversational original comic with two distinct speeds, no copied performance.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/language-label-lemur/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-word-weasel",
+      "workingName": "Word Weasel",
+      "proposedName": "Stephen Clawbert",
+      "inspiration": "Stephen Colbert",
+      "colour": "language",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Slim weasel with neat glasses, dark coat and a broad gold tie.",
+      "signatureProp": "One blank cue card held with an exaggerated farewell flourish.",
+      "jokeAngle": "The last polite sentence still contains a helpful little correction.",
+      "mechanicLink": "Last Word supports one surviving ally; no broadcast quote or real-person mortality joke.",
+      "source": "https://www.cbsnews.com/amp/news/stephen-colbert-late-show-farewell/",
+      "familiarity": "Teacher-review assumption: Satirical-host recognition varies; historical public work reference checked, no current-role claim.",
+      "voiceDirection": "Crisp original comic commentary; no impression or topical personal allegations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/language-word-weasel/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-echo-egret",
+      "workingName": "Echo Egret",
+      "proposedName": "Sabrina Carpwenter",
+      "inspiration": "Sabrina Carpenter",
+      "colour": "language",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small carp with long pale fin tufts, dark stage jacket and gold ribbon accents.",
+      "signatureProp": "One unbranded microphone; the body remains fish-shaped, no human face.",
+      "jokeAngle": "A small quip somehow gets an entire encore; no lyric quotation.",
+      "mechanicLink": "Playing an Axiom gives one draw under the original once-per-turn gate.",
+      "source": "https://www.sabrinacarpenter.com/",
+      "familiarity": "Teacher-review assumption: Pop recognition plausible; review.",
+      "voiceDirection": "Playful brisk original performer; no singing, lyric reference or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "axiom"
+      ],
+      "artId": "creature/language-echo-egret/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-definition-dolphin",
+      "workingName": "Definition Dolphin",
+      "proposedName": "Stephen Fryfin",
+      "inspiration": "Stephen Fry",
+      "colour": "language",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round dolphin with a scholarly dark waistcoat, gold scarf and delighted questioning expression.",
+      "signatureProp": "One sturdy closed dictionary with a blank cover.",
+      "jokeAngle": "Before answering, enthusiastically decides what the word actually means.",
+      "mechanicLink": "Giving another creature temporary Guard uses the existing duration; no new dictionary game.",
+      "source": "https://www.stephenfry.com/",
+      "familiarity": "Teacher-review assumption: Broadcaster/writer may need introduction.",
+      "voiceDirection": "Warm precise original storytelling; shared block cue and no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/language-definition-dolphin/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-debate-dingo",
+      "workingName": "Debate Dingo",
+      "proposedName": "Chomskunk",
+      "inspiration": "Noam Chomsky",
+      "colour": "language",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small old skunk with broad white brow fur, charcoal coat and gold lapel detail.",
+      "signatureProp": "One blank folded sentence diagram; choose one broad branching shape.",
+      "jokeAngle": "The apparently simple sentence has another structure hiding in it.",
+      "mechanicLink": "Higher-attack fight Shield is a defensive argument motif, not a claim about political views.",
+      "source": "https://linguistics.mit.edu/user/chomsky/",
+      "familiarity": "Teacher-review assumption: Linguistics figure needs introduction; current health/life status not part of joke.",
+      "voiceDirection": "Quiet exact original scholar; short plain lines, no impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/language-debate-dingo/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+        "gates": [
+          109,
+          127
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-clause-crane",
+      "workingName": "Clause Crane",
+      "proposedName": "Jacinda Ardheron",
+      "inspiration": "Jacinda Ardern",
+      "colour": "language",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Composed crane with dark swept-back head feathers and a neat gold-trimmed travelling coat.",
+      "signatureProp": "One blank meeting note held level; an open-wing listening gesture.",
+      "jokeAngle": "Makes room for one more speaker before the rule is rewritten; invented public leadership joke.",
+      "mechanicLink": "Healing when an Axiom changes remains once per round, not a permanent leadership aura.",
+      "source": "https://www.beehive.govt.nz/release/prime-minister-jacinda-ardern-announces-resignation",
+      "familiarity": "Teacher-review assumption: Former New Zealand prime minister; recognition review needed.",
+      "voiceDirection": "Calm welcoming original chairperson; no policy endorsements or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "block",
+        "axiom"
+      ],
+      "artId": "creature/language-clause-crane/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. Once per round, when an active Axiom is replaced, heal this by 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-metaphor-mantis",
+      "workingName": "Metaphor Mantis",
+      "proposedName": "Bo Birdham",
+      "inspiration": "Bo Burnham",
+      "colour": "language",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small dark bird with long angular wings, gold stage trim and amused slightly uncanny eyes.",
+      "signatureProp": "One blank miniature stage card; a single warm spotlight-like rim, no set or piano.",
+      "jokeAngle": "Takes a phrase literally until the little stage becomes absurd.",
+      "mechanicLink": "Temporary colour/attack loss remains exactly the draft; no copied lyrics or adult sketch material.",
+      "source": "https://www.boburnham.com/",
+      "familiarity": "Teacher-review assumption: Comedy/music-film reference plausibly familiar; review clean public-work angle.",
+      "voiceDirection": "Dry playful original delivery, no singing, copied monologue or real accent.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/language-metaphor-mantis/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 3,
+        "text": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-contract-coyote",
+      "workingName": "Contract Coyote",
+      "proposedName": "Amal Clawney",
+      "inspiration": "Amal Clooney",
+      "colour": "language",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-archive",
+        "theme": "Ch3 recovered archival evidence",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Alert coyote with tidy dark ear fur, a charcoal robe-like coat and gold ribbon detail.",
+      "signatureProp": "One blank rolled agreement tied with a broad gold band.",
+      "jokeAngle": "Even the tiny helping hand gets a carefully worded agreement; no billing or case allegation.",
+      "mechanicLink": "Only the first friendly-target spell gets the cost reduction; minimum zero stays visible.",
+      "source": "https://www.doughtystreet.co.uk/barristers/amal-clooney",
+      "familiarity": "Teacher-review assumption: Public barrister may need introduction; professional role is sourced, satire is invented.",
+      "voiceDirection": "Plain precise supportive original counsel; not real legal advice or imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/language-contract-coyote/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-orator-owl",
+      "workingName": "Orator Owl",
+      "proposedName": "Oprawlh",
+      "inspiration": "Oprah Winfrey",
+      "colour": "language",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round owl with warm eyes, dark stage coat and a generous gold collar.",
+      "signatureProp": "One blank audience ticket waved like an invitation; no show logo.",
+      "jokeAngle": "The whole audience seems included in the next encouraging announcement.",
+      "mechanicLink": "End-turn scheduling still requires an Axiom play and one own event limit; no instant global buff.",
+      "source": "https://images.oprah.com/images/obc_classic/book/2008/anewearth/ane_chapter1_transcript.pdf",
+      "familiarity": "Teacher-review assumption: Broadcaster persona needs class review; historical official host reference checked, joke is invented.",
+      "voiceDirection": "Warm inclusive original host; no copied giveaway phrase or impersonation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "fate-warp",
+        "axiom"
+      ],
+      "artId": "creature/language-orator-owl/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 6,
+        "text": "At your turn's end, if you played an Axiom, schedule at +1 round: your creatures present then gain 1 attack until your next turn ends. At most one own Orator event pending.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    },
+    {
+      "mechanicalId": "language-lexicon-lion",
+      "workingName": "Lexicon Lion",
+      "proposedName": "Descartiger",
+      "inspiration": "René Descartes",
+      "colour": "language",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small historical tiger with thoughtful eyes, a dark scholarly coat and gold cuff details.",
+      "signatureProp": "One folded blank foundation plan; no written quotation or royal regalia.",
+      "jokeAngle": "Takes the argument apart so it can be rebuilt from a clear starting point.",
+      "mechanicLink": "Restores one chosen Axiom category to basic and draws once; no new global reset.",
+      "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Descartes/",
+      "familiarity": "Teacher-review assumption: Historical maths/philosophy figure requires introduction.",
+      "voiceDirection": "Careful spare original scholar; historical legendary presentation, shared axiom sound.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "axiom"
+      ],
+      "artId": "creature/language-lexicon-lion/idle",
+      "palette": {
+        "accent": "#F2B632",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Entrance: choose one active Axiom category; discard that rule and restore its basic rule. Draw 1 personal-deck card.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-doodle-duck",
+      "workingName": "Doodle Duck",
+      "proposedName": "Dan TDuck",
+      "inspiration": "DanTDM",
+      "colour": "imagination",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small cheerful duck with dark-blue head feathers, a violet hoodie and bright curious eyes.",
+      "signatureProp": "One unbranded game controller, held like the next little adventure is ready.",
+      "jokeAngle": "Every ordinary room could be the beginning of another game.",
+      "mechanicLink": "A simple common body introduces the gamer persona with no licensed game character or extra ability.",
+      "source": "https://www.youtube.com/@DanTDM",
+      "familiarity": "Teacher-review assumption: Gaming creator plausibly familiar; review.",
+      "voiceDirection": "Bright family-friendly original gamer, no copied intro or sound pack.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/imagination-doodle-duck/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-possibility-pika",
+      "workingName": "Possibility Pika",
+      "proposedName": "PewDiePika",
+      "inspiration": "PewDiePie",
+      "colour": "imagination",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round pika with small upright ears, charcoal head tufts and a worn violet jacket.",
+      "signatureProp": "One plain two-button controller and a puzzled raised paw.",
+      "jokeAngle": "There is apparently always one more way to play the situation.",
+      "mechanicLink": "Choice of attack or health remains a single Entrance choice; no private-life/scandal gag.",
+      "source": "https://www.youtube.com/@PewDiePie",
+      "familiarity": "Teacher-review assumption: Internet/gaming reference plausible; familiarity varies.",
+      "voiceDirection": "Playful original commentator, not an accent or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/imagination-possibility-pika/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: choose 1 extra attack or 1 extra maximum health and healing for this creature.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-fable-fawn",
+      "workingName": "Fable Fawn",
+      "proposedName": "Jack Blackbird",
+      "inspiration": "Jack Black",
+      "colour": "imagination",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Stocky blackbird with a tiny wild crest, dark coat and a purple stage scarf.",
+      "signatureProp": "One unbranded miniature microphone; wings planted in a grand harmless pose.",
+      "jokeAngle": "Treats a tiny imaginary adventure like a huge theatrical entrance.",
+      "mechanicLink": "Friendly stat swap is dramatic reframing; no song lyrics, film-role costume or copied game persona.",
+      "source": "https://www.youtube.com/@JablinskiGames",
+      "familiarity": "Teacher-review assumption: Actor/gaming public persona likely familiar; review.",
+      "voiceDirection": "Exuberant original performer with controlled volume; no singing or voice impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/imagination-fable-fawn/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-mosaic-mole",
+      "workingName": "Mosaic Mole",
+      "proposedName": "Jaiden Animole",
+      "inspiration": "Jaiden Animations",
+      "colour": "imagination",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small mole with warm dark eyes, simple black head tuft and violet artist's shawl.",
+      "signatureProp": "One folded blank paper figure connected to a pencil; no copied channel avatar or pet.",
+      "jokeAngle": "A side doodle immediately wants its own little side adventure.",
+      "mechanicLink": "Last Word creates only the specified colourless paper token if space exists.",
+      "source": "https://www.youtube.com/@jaidenanimations",
+      "familiarity": "Teacher-review assumption: Animation/video creator may be familiar; review.",
+      "voiceDirection": "Gentle playful original storyteller; shared place cue, not the creator's recorded voice.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/imagination-mosaic-mole/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 2,
+        "text": "Last Word: summon a colourless 1/1 paper token if you have board space.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-blueprint-bat",
+      "workingName": "Blueprint Bat",
+      "proposedName": "Hideo Kojibat",
+      "inspiration": "Hideo Kojima",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round bat with glasses, tidy dark ear fur and a practical violet-trimmed designer jacket.",
+      "signatureProp": "One blank folded storyboard panel held between folded wings.",
+      "jokeAngle": "The smallest device apparently needs an entire mysterious backstory.",
+      "mechanicLink": "Only the first colourless token each turn gains maximum health; no new token class or film sequence.",
+      "source": "https://www.kojimaproductions.jp/en/company",
+      "familiarity": "Teacher-review assumption: Game-creator niche; a short introduction may help.",
+      "voiceDirection": "Quiet intrigued original designer; no commercial game sound, character, costume or quotation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/imagination-blueprint-bat/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "The first colourless token you summon each turn arrives with 1 extra maximum health.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-mirror-marten",
+      "workingName": "Mirror Marten",
+      "proposedName": "Peter Jackmarten",
+      "inspiration": "Peter Jackson",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small shaggy marten with a soft beard-like muzzle, dark working shirt and violet collar.",
+      "signatureProp": "One blank film clapper held at a thoughtful angle.",
+      "jokeAngle": "The little prop needs one more carefully considered take.",
+      "mechanicLink": "Copies bounded attack temporarily, not a creature's art, identity or abilities.",
+      "source": "https://www.nzfilm.co.nz/assets/resources/Undergrowth_Press_Kit.pdf",
+      "familiarity": "Teacher-review assumption: Filmmaker reference may need introduction; cite production credits only.",
+      "voiceDirection": "Warm practical original film-maker; shared click/place cue, no franchise character or accent imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/imagination-mirror-marten/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-chimera-chick",
+      "workingName": "Chimera Chick",
+      "proposedName": "Shigeru Miyamole",
+      "inspiration": "Shigeru Miyamoto",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round mole with bright amused eyes, short dark hair-like tuft and violet workshop vest.",
+      "signatureProp": "One simple blank toy controller with two large coloured buttons.",
+      "jokeAngle": "Changes one small rule and suddenly the toy feels different.",
+      "mechanicLink": "Shield follows the specified stat-swap trigger; no copying Nintendo characters, logos or game media.",
+      "source": "https://www.nintendo.com/en-gb/News/2009/Watch-exclusive-interviews-with-Mario-creator-Shigeru-Miyamoto-251785.html",
+      "familiarity": "Teacher-review assumption: Game-creator recognition uncertain; introduce if needed.",
+      "voiceDirection": "Playful spare original inventor; no character voice imitation or commercial sound effect.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "block"
+      ],
+      "artId": "creature/imagination-chimera-chick/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Once per turn, after this has attack and health swapped, it gains Shield.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-stage-mouse",
+      "workingName": "Stage Mouse",
+      "proposedName": "Tim Burrowton",
+      "inspiration": "Tim Burton",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Tiny dark mouse with unruly head fur, round curious eyes and a worn violet stage coat.",
+      "signatureProp": "One crooked blank film clapper; tail curl is a second broad silhouette cue.",
+      "jokeAngle": "Every ordinary little box seems to have a slightly spooky theatrical idea inside.",
+      "mechanicLink": "Elusive and token attack aura stay exact; maintain Rift style, no copied film characters or imitation of another art style.",
+      "source": "https://movies.disney.com/dumbo-2019",
+      "familiarity": "Teacher-review assumption: Filmmaker reference plausibly familiar; review.",
+      "voiceDirection": "Dry whimsical original storyteller; restrained shared reveal cue, no branded character voice.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/imagination-stage-mouse/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 4,
+        "text": "Elusive. Your colourless tokens have 1 extra attack while this remains in play.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-paradox-pony",
+      "workingName": "Paradox Pony",
+      "proposedName": "David Lynx",
+      "inspiration": "David Lynch",
+      "colour": "imagination",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small lynx with swept-back pale head tufts, midnight jacket and violet scarf.",
+      "signatureProp": "One ordinary coffee cup tilted beside an impossibly folded blank card.",
+      "jokeAngle": "The perfectly ordinary cup apparently belongs in an unexpectedly odd scene.",
+      "mechanicLink": "Enemy stat swap is a bounded public game effect, not a dream cutscene or claim about the person's beliefs.",
+      "source": "https://www.davidlynchfoundation.org/board-of-directors.html",
+      "familiarity": "Teacher-review assumption: Historical film-maker likely needs a short introduction.",
+      "voiceDirection": "Calm gently strange original narrator, no copied film monologue or real-person death joke.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/imagination-paradox-pony/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 3,
+        "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-cloud-castle-crab",
+      "workingName": "Cloud Castle Crab",
+      "proposedName": "Björk Beetle",
+      "inspiration": "Björk",
+      "colour": "imagination",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "k-sorting",
+        "theme": "Ch4 completed Sorting Room story",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Round beetle with dark expressive eyes, violet petal-like shell plates and an adventurous stage silhouette.",
+      "signatureProp": "One broad folded-paper wing attached to its shell, not a copied outfit or album design.",
+      "jokeAngle": "The costume looks ready to invent a small world of its own.",
+      "mechanicLink": "Guard/damage survival summons one paper token; story-only Sorting Room source remains unchanged.",
+      "source": "https://www.bjork.com/",
+      "familiarity": "Teacher-review assumption: Icelandic performer may need introduction; review.",
+      "voiceDirection": "Curious theatrical original delivery; no singing, lyrics, costume copying or artist impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/imagination-cloud-castle-crab/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 2,
+        "health": 6,
+        "text": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-dreamweaver-whale",
+      "workingName": "Dreamweaver Whale",
+      "proposedName": "Miyazawhale",
+      "inspiration": "Hayao Miyazaki",
+      "colour": "imagination",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small wise whale with warm eyes, pale moustache-like mouth markings and a dark violet travelling vest.",
+      "signatureProp": "One simple paper wind toy near a fin; original Rift companion design only.",
+      "jokeAngle": "The tiniest side character seems to deserve one more story.",
+      "mechanicLink": "Draw still requires two colourless tokens at turn end; no copied Ghibli characters, scenes or requested imitation of its visual style.",
+      "source": "https://www.ghibli.jp/works/",
+      "familiarity": "Teacher-review assumption: Film-maker reference may need a short introduction.",
+      "voiceDirection": "Warm spare original story-maker; shared reveal cue, no licensed soundtrack or character voices.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "artId": "creature/imagination-dreamweaver-whale/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 3,
+        "health": 7,
+        "text": "At your turn's end, if you control at least 2 colourless tokens, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      }
+    },
+    {
+      "mechanicalId": "imagination-impossible-unicorn",
+      "workingName": "Impossible Unicorn",
+      "proposedName": "Ramanujicorn",
+      "inspiration": "Srinivasa Ramanujan",
+      "colour": "imagination",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small scholarly unicorn with dark mane, thoughtful eyes and a modest violet coat.",
+      "signatureProp": "One blank slate with a single original looping geometric motif; no readable equations or religious symbols.",
+      "jokeAngle": "Spots a surprising pattern where everyone else only sees a jumble.",
+      "mechanicLink": "Swaps two friendly attack values using the draft contract; no supernatural mathematical claim or instant victory.",
+      "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Ramanujan/",
+      "familiarity": "Teacher-review assumption: Historical mathematical legendary requires introduction.",
+      "voiceDirection": "Quiet delighted original scholar; shared axiom/place sound and no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/imagination-impossible-unicorn/idle",
+      "palette": {
+        "accent": "#A05CF0",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 6,
+        "text": "Entrance: choose two other friendly creatures; swap their attack values permanently, then give each 1 maximum health and heal 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-bookmark-bunny",
+      "workingName": "Bookmark Bunny",
+      "proposedName": "Hank Greenhare",
+      "inspiration": "Hank Green",
+      "colour": "memory",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small alert hare with sandy head tufts, dark spectacles and a silver-edged practical vest.",
+      "signatureProp": "One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour.",
+      "jokeAngle": "One more useful note must be saved before the explanation moves on.",
+      "mechanicLink": "Entrance healing is a reminder for one damaged ally; no new medical or educational claims.",
+      "source": "https://www.hankgreen.com/",
+      "familiarity": "Teacher-review assumption: Science/video creator familiarity plausible; review, site text was minimal.",
+      "voiceDirection": "Quick curious original explainer; no copied intro or impersonation, shared heal cue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/memory-bookmark-bunny/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: heal a damaged friendly creature by 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-recall-robin",
+      "workingName": "Recall Robin",
+      "proposedName": "John Greenfinch",
+      "inspiration": "John Green",
+      "colour": "memory",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round russet finch with spectacles, a soft dark cardigan and silver scarf.",
+      "signatureProp": "One old blank paperback with a large visible page marker.",
+      "jokeAngle": "The old page still has something worth returning to.",
+      "mechanicLink": "Returns the latest discarded spell to deck bottom exactly; no lyric, novel passage or plot quotation.",
+      "source": "https://www.johngreenbooks.com/",
+      "familiarity": "Teacher-review assumption: Public author/video creator likely familiar to some; review.",
+      "voiceDirection": "Warm thoughtful original narrator; shared page/reveal sounds, no copied prose.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/memory-recall-robin/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: put your most recently discarded spell on the bottom of your personal deck if still there.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-archive-armadillo",
+      "workingName": "Archive Armadillo",
+      "proposedName": "Daniel Radclaw",
+      "inspiration": "Daniel Radcliffe",
+      "colour": "memory",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Compact dark armadillo with neat brow fur, warm eyes and a silver-trimmed stage coat.",
+      "signatureProp": "One rolled blank map; avoid wizard scars, house crests, costumes or branded props.",
+      "jokeAngle": "A familiar performer appears ready for another unexpectedly different adventure.",
+      "mechanicLink": "Guard is the armadillo's grounded stance; no film character or new magical ability.",
+      "source": "https://www.tonyawards.com/winners/year/2024/category/any/show/any/",
+      "familiarity": "Teacher-review assumption: Actor familiarity plausible; role/award reference checked, familiarity still proposed.",
+      "voiceDirection": "Curious original stage performer, not a film-role voice impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block"
+      ],
+      "artId": "creature/memory-archive-armadillo/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-return-roach",
+      "workingName": "Return Roach",
+      "proposedName": "Rick Ash-tley",
+      "inspiration": "Rick Astley",
+      "colour": "memory",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small rounded roach with a neat reddish crest, silver-grey raincoat and charming raised brow.",
+      "signatureProp": "One plain microphone; modest mid-step pose is a broad pop-stage cue.",
+      "jokeAngle": "The familiar performer returns just when the audience expected someone else.",
+      "mechanicLink": "Once-per-match return is the meme payoff; no song lyrics, tune, commercial clip or copied choreography.",
+      "source": "https://rickastley.co.uk/",
+      "familiarity": "Teacher-review assumption: Internet/pop reference likely familiar; review.",
+      "voiceDirection": "Warm playful original spoken performer; no singing or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/memory-return-roach/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Last Word: return this to your hand once per match.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-chronicle-cat",
+      "workingName": "Chronicle Cat",
+      "proposedName": "Stan Meow",
+      "inspiration": "Stan Lee",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small older cat with expressive pale moustache-like muzzle fur, dark glasses and silver cardigan trim.",
+      "signatureProp": "One blank comic page; no superheroes, emblems or copyrighted panel art.",
+      "jokeAngle": "Even this tiny side scene seems to have room for a friendly cameo.",
+      "mechanicLink": "Recovery heals the hero once per turn; no claim of a new heroic transformation.",
+      "source": "https://www.marvel.com/comics/creators/30/stan_lee",
+      "familiarity": "Teacher-review assumption: Public comics/cameo figure plausibly familiar; review.",
+      "voiceDirection": "Friendly enthusiastic original narrator; no copied signature word or real-person death joke.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/memory-chronicle-cat/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Once per turn, after you recover a card from discard, heal your hero by 1.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-replay-raccoon",
+      "workingName": "Replay Raccoon",
+      "proposedName": "Snoop Raccoon",
+      "inspiration": "Snoop Dogg",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Long-limbed raccoon with braided head fur, dark glasses and a loose silver-trimmed jacket.",
+      "signatureProp": "One plain commentator headset; no brands or smoking/drug props.",
+      "jokeAngle": "A familiar entertainer turns up in an unexpectedly different broadcast.",
+      "mechanicLink": "Returns one cheap creature from discard; no live-world behaviour or private-life joke.",
+      "source": "https://www.nbcolympics.com/news/best-viral-moments-2024-paris-olympics",
+      "familiarity": "Teacher-review assumption: Music/commentary public persona plausible; recognition review.",
+      "voiceDirection": "Relaxed amused original commentator; no accent imitation, song, lyric or drug reference.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "artId": "creature/memory-replay-raccoon/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-hourglass-hedgehog",
+      "workingName": "Hourglass Hedgehog",
+      "proposedName": "Chris Nolhog",
+      "inspiration": "Christopher Nolan",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Round hedgehog with swept-back head quills, dark formal coat and silver lapel trim.",
+      "signatureProp": "One simple two-layer blank clock diagram; not a copied film prop or poster.",
+      "jokeAngle": "The small scene apparently has more than one very carefully planned timeline.",
+      "mechanicLink": "Backward Fate grants the first Shield each round only; no new repeat/rewind policy.",
+      "source": "https://www.oscars.org/oscars/ceremonies/embed/2024",
+      "familiarity": "Teacher-review assumption: Film-maker reference may need introduction; nonlinear-scene joke is a creative proposal.",
+      "voiceDirection": "Calm deliberate original story planner; shared Fate/block sounds, no film dialogue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "block",
+        "fate-warp"
+      ],
+      "artId": "creature/memory-hourglass-hedgehog/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Guard. The first time each round you move Fate backward, this gains Shield.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-souvenir-seal",
+      "workingName": "Souvenir Seal",
+      "proposedName": "Martha Stewhart",
+      "inspiration": "Martha Stewart",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Composed seal with pale head tufts, a practical dark shawl and silver edging.",
+      "signatureProp": "One tidy keepsake envelope tied with a broad ribbon; no tiny labels to read.",
+      "jokeAngle": "Every completed little task seems to deserve an impeccably organised keepsake.",
+      "mechanicLink": "Only resolving an own pending event draws; skipped events remain excluded.",
+      "source": "https://www.marthastewart.com/",
+      "familiarity": "Teacher-review assumption: Public craft/home reference may need introduction.",
+      "voiceDirection": "Calm exact original craft host; shared paper/reveal cue, no personal-history gag.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "fate-warp"
+      ],
+      "artId": "creature/memory-souvenir-seal/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 4,
+        "text": "Once per turn, after an own pending event resolves, draw 1 personal-deck card. Skipped events do not count.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-sequence-swan",
+      "workingName": "Sequence Swan",
+      "proposedName": "Adelloon",
+      "inspiration": "Adele",
+      "colour": "memory",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small dark loon with a pale face, soft velvet-like grey stage cape and silver trim.",
+      "signatureProp": "One plain microphone at a deliberately paused entrance.",
+      "jokeAngle": "The little stage pause lasts just long enough to become part of the performance.",
+      "mechanicLink": "Delays one own event within the draft cap and draws only if it moved; no copied lyrics.",
+      "source": "https://www.adele.com/",
+      "familiarity": "Teacher-review assumption: Pop artist recognition plausible; review.",
+      "voiceDirection": "Warm expressive original spoken performer; no singing, accent or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "fate-warp"
+      ],
+      "artId": "creature/memory-sequence-swan/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: move one own pending event one space later, maximum +4 rounds; draw 1 personal-deck card if it moved.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-second-chance-salamander",
+      "workingName": "Second Chance Salamander",
+      "proposedName": "Downewt Jr.",
+      "inspiration": "Robert Downey Jr.",
+      "colour": "memory",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 completed time-related story",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "silhouette": "Lively newt with dark head tufts, broad warm eyes, plain dark stage jacket and silver collar.",
+      "signatureProp": "One blank film clapper; no armoured superhero suit, branded glasses or film logo.",
+      "jokeAngle": "Apparently the little scene still had room for one more cameo.",
+      "mechanicLink": "Recovering a defeated creature is only the game effect; no joke about health, addiction or personal recovery.",
+      "source": "https://www.oscars.org/oscars/ceremonies/embed/2024",
+      "familiarity": "Teacher-review assumption: Actor recognition likely; class review.",
+      "voiceDirection": "Brisk playful original actor, no character impression; shared reveal/place cues.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "artId": "creature/memory-second-chance-salamander/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+        "gates": [
+          109
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-keeper-koi",
+      "workingName": "Keeper Koi",
+      "proposedName": "David Tennantacle",
+      "inspiration": "David Tennant",
+      "colour": "memory",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small cuttlefish with pointed head-fin tufts, delighted questioning eyes and a worn silver scarf; arms stay close for a clear silhouette.",
+      "signatureProp": "One simple blank pocket-watch case held beside a fin; no blue box or signature fictional device.",
+      "jokeAngle": "The familiar face seems to arrive precisely when the strange story needs another scene.",
+      "mechanicLink": "Marked repeatable event healing stays behind existing Fate gates; no licensed character or guaranteed rewind payoff.",
+      "source": "https://www.rsc.org.uk/about-us/whos-who/associate-artists",
+      "familiarity": "Teacher-review assumption: Stage/screen actor may be familiar; review.",
+      "voiceDirection": "Curious nimble original storyteller; no television-role voice or copied quotation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal",
+        "fate-warp"
+      ],
+      "artId": "creature/memory-keeper-koi/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 3,
+        "health": 7,
+        "text": "Once per round, when a marked repeatable player event resolves, heal all your creatures by 1.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      }
+    },
+    {
+      "mechanicalId": "memory-timekeeper-tapir",
+      "workingName": "Timekeeper Tapir",
+      "proposedName": "Noetapir",
+      "inspiration": "Emmy Noether",
+      "colour": "memory",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "silhouette": "Small scholarly tapir with thoughtful eyes, neat head fur, dark coat and silver cuffs.",
+      "signatureProp": "One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra.",
+      "jokeAngle": "Finds a familiar relationship even after every piece has been rearranged.",
+      "mechanicLink": "Copies a spent event to a new occurrence without reviving the consumed original; no real time-travel or settled replay claim.",
+      "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Noether_Emmy/",
+      "familiarity": "Teacher-review assumption: Historical mathematical legendary needs a short introduction.",
+      "voiceDirection": "Clear delighted original scholar; shared Fate/axiom sounds, no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "fate-warp"
+      ],
+      "artId": "creature/memory-timekeeper-tapir/idle",
+      "palette": {
+        "accent": "#C9C9D6",
+        "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+        "materials": "worn cloth/leather or painted metal; no pristine plastic"
+      },
+      "promptReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Entrance, once per match: copy one spent own one-shot event to a new public occurrence at +2 rounds. No spell energy is repaid; the spent original stays consumed.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      }
+    }
+  ],
+  "completedColours": [
+    "reason",
+    "emotion",
+    "perception",
+    "language",
+    "imagination",
+    "memory"
+  ],
+  "pendingColours": []
+}

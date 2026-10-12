@@ -1099,3 +1099,7 @@ Record what was approved and why, as in the Odyssey project.
 ### Card starter pack outcome — 12 October 2026 (#137)
 
 Seven first takes selected and integrated, each original source retained. Provenance: design/source-assets/4-caricatures/card-starters-2026-10-12/generation.json; review: design/reviews/starter-art-2026-10-12.md. The teacher reaffirmed cute-horror public-persona direction; ART-BIBLE.md now makes the fresh-agent references and roster gate explicit. These starter helpers do not redefine the collectible cast. No new voices/SFX.
+
+### Expansion cast brief handoff — 12 October 2026 (#139)
+
+All 72 expansion creature portrait requests retain their existing mechanical/asset IDs. Proposed public-persona puns, silhouettes, one readable prop, harmless joke angle, jewel accent, source and original voice/SFX directions are in [PERSONA-ROSTER.md](../drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json; ASSET-PLAN.md indexes the exact IDs. Canonical ROSTER.md marks these as draft additions, not shipped cast. The art bible and approved style board govern future batches; attach those and a matching shipped creature before generation. Teacher familiarity, pun and strategy review under #123 precedes images. Generate only small released batches; do not redraw the seven #137 helpers or bulk-generate generic animals. No expansion art, voices, catch identities or runtime definitions were produced by this pass.
