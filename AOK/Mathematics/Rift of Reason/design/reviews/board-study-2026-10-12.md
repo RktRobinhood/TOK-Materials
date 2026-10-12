@@ -65,6 +65,21 @@ Raw JSON includes long-animation-frame blocking/render/style-layout data and act
 - Make the Fate track visually more interesting and easier to inspect: upcoming nodes show an effect icon/card and a hover description so players can plan.
 - Proposed Fate mechanics: players/creatures can schedule deferred abilities, spells/tactics or creature events onto spaces; a jump may bypass an enemy's planned space; rewinding and re-entering a +1/+1 space can trigger it again. These are new engine mechanics, not features already implemented by this prototype.
 
+### Deterministic schedule and turn cycles — teacher follow-up
+
+- Scheduled Fate events should be knowable in advance: their effect, countdown and relevant source/board/enemy relationship are visible. A reset, new axiom or specific rule change is announced before it happens. Deterministic must mean a player can plan from the displayed information, not merely that a hidden random generator has a fixed seed.
+- Ordinary Fate movement happens **once per full turn cycle**: first player's turn, second player's turn, then Fate advances/resolves. Label countdowns in cycles/rounds to avoid the current ambiguity between individual turns and both players' turns. Card-driven jumps/rewinds remain explicit exceptions.
+- A scheduled board wipe two cycles ahead is an example of a deferred spell/tactic. The visible event should identify what is affected and when; no new timing rule is implemented yet.
+- Proposed implementation: freeze the announced event's identity when it is scheduled. Drawing from the shared deck should not silently replace an already announced future rule. Explicit changes to scheduled events must update the preview visibly.
+
+### Deck exhaustion — direction and unresolved details
+
+- Teacher direction: an empty shared Axiom deck alone is not punitive; there are no new rules available to draw. An empty personal deck can still use the shared Axiom draw.
+- Proposed exhaustion damage starts only when that player's personal deck **and** the shared Axiom draw source are empty. The opponent's personal deck does not determine that player's exhaustion.
+- Suggested implementation, not approved tuning: automatically apply increasing damage (1, then 2, then 3…) at the player's normal draw step when both sources are exhausted. Full hand capacity is not deck exhaustion; extra-draw abilities or choosing a time action must not multiply or evade the normal exhaustion check.
+- Current engine has no fatigue counter and does recycle shared Axiom discards. Whether shared depletion is permanent or discarded rules can refill it must be settled; permanent depletion better matches the teacher's “no more rules left” description, but is a proposed change.
+- Win-rule interaction needs a decision: ordinary exhaustion damage could make a player **win** under the own-zero-hearts axiom. Recommendation is to obey the active Win rule consistently, rather than introduce an unexplained exception; this is not yet approved.
+
 ### Fate rule still to settle
 
 The current `shiftFate()` changes the countdown to the next automatic axiom flip/reset. Moving back delays that event; it does not revisit a stored event or undo previous effects. A genuine timeline therefore needs explicit positions, scheduled event ownership, landing/skipping rules, retained history and effect expiry.

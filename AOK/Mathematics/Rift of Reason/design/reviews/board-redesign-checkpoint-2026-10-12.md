@@ -23,6 +23,8 @@ Teacher selected A. Record of the annotated feedback and remaining Fate question
 
 Clarify whether scheduled Fate events are one-shot or repeatable on re-entry before changing the engine. The current track only advances/delays the next flip/reset; it cannot replay previous events. UI refinement can proceed independently, then continue #109 from the refined A structure, preserve keyed card nodes/focus and coordinate #66. Set up a fresh continuation heartbeat if needed for the next authorized block.
 
+Latest teacher steering: visible deterministic events, ordinary Fate advances once after both players have taken a turn (a full cycle), and future deferred spells such as a board wipe. Exhaustion should spare an empty shared deck alone and permit shared draws after the personal deck runs out; proposed damage begins only when both sources are exhausted. See the report for unresolved recycling, fatigue tuning and own-zero-hearts Win-rule interaction. These mechanics remain design notes, not implemented behaviour.
+
 ## Open boundaries
 
 - #107: teacher feedback is recorded and A is selected; the specified layout revisions, actual zoom and physical touch checks remain.
