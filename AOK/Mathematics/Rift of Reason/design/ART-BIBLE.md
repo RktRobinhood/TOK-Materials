@@ -14,6 +14,10 @@ Each art batch keeps exact prompts, references, selected source PNGs and a prove
 
 ## Look
 
+### Card layering: teacher correction, 12 October 2026
+
+Full-card art is the preferred direction. Use the shipped colour frame behind the transparent creature cutout; do not trap the creature behind that frame or inside an arched art-window crop. Keep the creature inside the card's outer rectangle, with live names/rules/stats above it. Preserve faces and signature props with contain fitting. Prototype and production integration must check both inspection and ~70px sizes, six colours and narrow screens before visual acceptance. The current developer correction is recorded in reviews/full-art-frame-2026-10-13.md; it does not yet change production rendering.
+
 - **Cute and dark.** A storybook creature world at dusk: whimsical, slightly spooky, never gory. Big expressive eyes, round friendly shapes, sharp comedy in the poses.
 - **Clear dark outlines** of consistent medium weight (dark brown-black, as on the approved style board), cel shading with a soft painterly texture, a little rim light.
 - **Saturated jewel colours that glow against deep, dark backgrounds** (forest green, midnight violet). Lanterns, magic and the time rift are the light sources.

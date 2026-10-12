@@ -1,5 +1,7 @@
 # Reusable foil material — #141, 12 October 2026
 
+**Superseded by teacher feedback:** full-card art is preferred, using shipped colour frames behind foreground transparent creatures, with names/rules/stats above both. The etched-frame recommendation and A/B/C prototype below are historical. See full-art-frame-2026-10-13.md for the revised developer study and its pending visual acceptance.
+
 Question: how can a cosmetic foil print share its normal artwork and rules while staying distinguishable at inspection and board size? Developer-only study: dev/foil-prototype.html?variant=A. A/B/C are shareable; arrows and keyboard cycle them. This is a throwaway material study, not a replacement production card renderer.
 
 Recommendation: **A, etched frame**. Cyan/magenta engraved edges and an explicit foil star/label preserve the normal portrait, colour identity, rarity and rules plate. B's spectral rings compete with the silhouette; C's expanded portrait suits a collection inspection more than dense board reading. Keep A as the builder's default; optional teacher feedback can refine it without blocking unrelated art work. Absorb the selected treatment into the production renderer under #131/#134 and remove the study after integration.

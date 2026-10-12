@@ -12,6 +12,8 @@ See [starter/card drafts](drafts/card-arena-2026-10-12/CARD-DRAFTS.md), [build r
 
 Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the approved style board and ROSTER.md. The expansion's public-persona/pun/prop assignments are selected in [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md); the teacher delegates meme-worthiness and teenage appeal to the builder, with no teacher roster approval. Mechanical animal names remain stable working IDs. Preserve the cute-horror meme identity across future agent sessions.
 
+Later teacher card feedback selects full art over etched foil: transparent creatures should overlap the shipped decorative frame, clipped at the outer card rectangle, with readable live names/rules/stats above both. This is a planned renderer change; #141's developer study precedes production integration. See [foreground frame handoff](reviews/full-art-frame-2026-10-13.md).
+
 ## Purpose
 
 A browser game that is the **follow-up activity** for a 4-lesson IB TOK unit introducing Mathematics as an area of knowledge. The teacher teaches the concept; the game gives exposure to more ideas and cements them through replayable puzzles. Students are DP1 (16–17), mostly non-native English speakers at a Danish gymnasium, and love Pokémon.
