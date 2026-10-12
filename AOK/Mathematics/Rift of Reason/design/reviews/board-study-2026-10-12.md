@@ -54,7 +54,22 @@ Raw JSON includes long-animation-frame blocking/render/style-layout data and act
 
 ## Teacher decision and remaining checks
 
-**Carry A into production, or prefer B/C?** #107 explicitly requires teacher feedback and a settled layout before replacement. No redesign issue is closed by this study.
+**Teacher selected A on 12 October 2026, with the changes below.** B wastes space on the side; C is compressed and confusing. A's symmetrical battle-board structure is the approved direction, not its permanent card-inspection column. No redesign issue is closed by this study.
+
+### Teacher feedback for the next iteration
+
+- Put the player's deck directly above their energy and the opponent's deck directly below theirs, mirrored at the right edge of the battlefield. Show each owner's selected card back at a useful scale. Move the shared Axiom deck to the left of the central area, as marked in the teacher's annotated screenshot.
+- Use the right-hand column for the persistent **Axioms** panel: the changing shared rules are a core game layer. Restore contextual enlarged card hover/inspection instead of dedicating that column to one card. Preserve click/touch/keyboard inspection and readable Active effects without covering targets or the selected action.
+- Keep only essential names, values and keywords readable on compact board cards. Reduce the competing labels above them; give complete ability/effect text more room in contextual inspection. New frames are an option if layout changes cannot solve compressed text.
+- Make Guard obvious with a substantial shield-shaped background/backplate. Distinguish it from Shield's protective bubble: Guard redirects attacks; Shield absorbs damage. Both should remain readable at comparable scale, including when a creature has both.
+- Make the Fate track visually more interesting and easier to inspect: upcoming nodes show an effect icon/card and a hover description so players can plan.
+- Proposed Fate mechanics: players/creatures can schedule deferred abilities, spells/tactics or creature events onto spaces; a jump may bypass an enemy's planned space; rewinding and re-entering a +1/+1 space can trigger it again. These are new engine mechanics, not features already implemented by this prototype.
+
+### Fate rule still to settle
+
+The current `shiftFate()` changes the countdown to the next automatic axiom flip/reset. Moving back delays that event; it does not revisit a stored event or undo previous effects. A genuine timeline therefore needs explicit positions, scheduled event ownership, landing/skipping rules, retained history and effect expiry.
+
+Teacher clarification pending: should every scheduled event replay on re-entry, including creature summons, or should events distinguish one-shot and repeatable behaviour? Recommendation: one-shot events by default, with explicitly repeatable spaces for the proposed rewind/buff interactions. Preserve the current engine until those semantics are settled; board/Axiom layout refinement can proceed independently.
 
 #109 should port only the selected structure, preserve keyed hand/board nodes and keyboard focus, synchronize stats/effect explanations, and coordinate a cancellable queue with #66. #108 owns actual future clips; #103 owns production required-question behaviour.
 

@@ -1,6 +1,6 @@
 # Card Arena redesign checkpoint
 
-Status: **ready for teacher layout review**. Updated: 12 October 2026.
+Status: **A selected with layout revisions; Fate expansion needs a rule decision**. Updated: 12 October 2026.
 
 ## Scope
 
@@ -19,13 +19,13 @@ The teacher requested a substantial, properly tested board redesign and continua
 
 ## Exact next step
 
-Await the teacher's layout choice. This stage finished within the allowance; no continuation automation remains active. Do not spend usage on unchanged review status. The report recommends A.
+Teacher selected A. Record of the annotated feedback and remaining Fate question is in board-study-2026-10-12.md. Next layout iteration: mirrored owner decks beside energy, shared Axiom deck at centre-left, permanent right-hand Axiom panel, contextual card inspection, less label clutter and a clear Guard backplate distinct from Shield. Keep the symmetrical board. No continuation automation is active.
 
-After the teacher chooses, continue #109 from that structure, preserve keyed card nodes/focus and coordinate #66. Set up a fresh continuation heartbeat if needed for that next authorized block.
+Clarify whether scheduled Fate events are one-shot or repeatable on re-entry before changing the engine. The current track only advances/delays the next flip/reset; it cannot replay previous events. UI refinement can proceed independently, then continue #109 from the refined A structure, preserve keyed card nodes/focus and coordinate #66. Set up a fresh continuation heartbeat if needed for the next authorized block.
 
 ## Open boundaries
 
-- #107: teacher feedback/settled layout, actual zoom and physical touch checks remain; prototype is ready to review.
+- #107: teacher feedback is recorded and A is selected; the specified layout revisions, actual zoom and physical touch checks remain.
 - #106: representative school-device and complete layout/paint profiling remain; only the desktop baseline is measured.
 - #108/#103/#109/#110: future clips, production question integration, production layout integration and school playtest remain in their owners.
 - Interactive file:// verification was blocked by browser policy. No workaround attempted. Complete lesson/Chapter 4 walkthroughs and production-save checks remain for integration QA.
