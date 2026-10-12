@@ -15,10 +15,11 @@ The teacher requested a substantial, properly tested board redesign and continua
 - Manual draw, drag/play, attack/defeat, keyboard draw/card selection, wrong/correct prediction and Escape checks. Corrected inspection-driven focus loss and cramped layout spacing. A/B/C checked at 1280x720 and 1024x768. Ordinary bench still works.
 - Five complete trace captures and screenshots. Worst A crowded frame: 100.3 ms; no speed improvement claimed.
 - Final full suite: 804 passed, one skipped, zero failed. Syntax check passed. Review links/evidence: board-study-2026-10-12.md.
+- Implementation commit 47566d1 pushed to main. Pages run 38227621824 succeeded; deployed HTML/JS/CSS and a real browser draw were verified. The hourly heartbeat was deleted after this review milestone. The owned local server on port 18793 was stopped.
 
 ## Exact next step
 
-Publish this tested study to main and verify GitHub Pages. Then delete heartbeat resume-rift-board-redesign: this stage finished within the allowance and the next substantive step needs teacher layout feedback. Do not spend usage on unchanged review status. The report recommends A.
+Await the teacher's layout choice. This stage finished within the allowance; no continuation automation remains active. Do not spend usage on unchanged review status. The report recommends A.
 
 After the teacher chooses, continue #109 from that structure, preserve keyed card nodes/focus and coordinate #66. Set up a fresh continuation heartbeat if needed for that next authorized block.
 
