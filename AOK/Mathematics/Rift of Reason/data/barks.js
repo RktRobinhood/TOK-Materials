@@ -8,6 +8,13 @@
 (function (root) {
     'use strict';
     root.Rift.data.barks = {
+        'proof-pup': { enter: ['I fetched the proof. Ignore the teeth marks.'], defeat: ['The proof needs a nap.'] },
+        'lens-lizard': { enter: ['Let me adjust my very serious glasses.'], ability: ['Tomorrow needs a closer look.'] },
+        'paper-dragon': { enter: ['Fear my very sharp paper corners.'], ability: ['New fold. New me.'] },
+        'cloud-calf': { enter: ['I brought a spare cloud.'], defeat: ['Even clouds need a rest.'] },
+        'pocket-tortoise': { enter: ['I put it somewhere very safe.'], ability: ['Ah. It was in the old pocket.'] },
+        'comma-crab': { enter: ['Hold still. You missed a comma.'], ability: ['A tiny pause. Not a full stop.'] },
+        'footnote-finch': { enter: ['One tiny note before we begin.'], defeat: ['Please read the tiny print next time.'] },
         lobstorian: {
             enter: ['Sit up straight. You. Yes, you. No attacking.', 'Lecture one. Hierarchies. Take notes.', 'Stop. Before you attack, tidy your room.'],
             defeat: ['I was making a very precise point.', 'Clean your room. Without me.', 'This is… roughly a disaster.'],

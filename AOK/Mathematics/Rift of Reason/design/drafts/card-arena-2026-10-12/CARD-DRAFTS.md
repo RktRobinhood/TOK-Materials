@@ -53,25 +53,29 @@ All five use the current default Axioms, one copy each: underdog, reverse-hearts
 
 ## Small common pack required by these lists
 
+Implemented definitions under #113, revised after the teacher's uniqueness direction. These seven original helpers use their already-produced portraits. They share simple keywords, but have distinct timing, choices or payoff. No new scheduled Fate rule, catch variant or ownership grant.
+
 | ID / name | Colour | Cost | Attack / health | Text |
 |---|---|---:|---|---|
-| proof-pup / Proof Pup | reason | 2 | 1/3 | Guard. |
-| lens-lizard / Lens Lizard | perception | 1 | 1/2 | No ability. |
-| paper-dragon / Paper Dragon | imagination | 2 | 2/2 | No ability. |
-| cloud-calf / Cloud Calf | imagination | 3 | 1/4 | Guard. |
-| pocket-tortoise / Pocket Tortoise | memory | 1 | 1/2 | No ability. |
-| comma-crab / Comma Crab | language | 2 | 1/3 | Guard. |
-| footnote-finch / Footnote Finch | language | 1 | 1/2 | No ability. |
+| proof-pup / Proof Pup | reason | 2 | 1/3 | Guard. Entrance: heal another friendly creature by 1. |
+| lens-lizard / Lens Lizard | perception | 1 | 1/2 | Activate (1 energy): look at your top card. Keep it there or move it to the bottom. |
+| paper-dragon / Paper Dragon | imagination | 2 | 2/2 | Activate (1 energy): swap this creature's attack and health. |
+| cloud-calf / Cloud Calf | imagination | 3 | 1/4 | Guard. At your turn's end, if this is damaged, restore 1 heart to your hero. |
+| pocket-tortoise / Pocket Tortoise | memory | 1 | 1/2 | Activate (1 energy): move the bottom card of your deck to the top. |
+| comma-crab / Comma Crab | language | 2 | 1/3 | Guard. Activate (1 energy): heal another friendly creature by 1. |
+| footnote-finch / Footnote Finch | language | 1 | 1/2 | When you play an Axiom, this gets +1 attack this turn. |
 
 | ID / name | Colour | Cost | Text |
 |---|---|---:|---|
-| patient-proof / Patient Proof | reason | 1 | Deal 2 damage to an enemy creature. |
+| patient-proof / Patient Proof | reason | 1 | Deal 2 damage to an enemy creature with 2 or less attack. |
 | steady-gaze / Steady Gaze | perception | 2 | Deal 1 damage to an enemy creature. Draw 1 card from your deck. |
 | creative-spark / Creative Spark | imagination | 1 | Give a friendly creature +1/+1 this turn. |
 | stored-thought / Stored Thought | memory | 2 | Draw 1 card from your deck. Restore 1 heart to your hero. |
 | careful-words / Careful Words | language | 1 | Give a friendly creature +1 maximum health and heal it by 1. |
 
-Keep these creatures simple. Existing generic spells have no explicit rarity metadata; the selected basic generics are treated as baseline starter cards for this draft, not asserted to have a current common tag. All existing selected creatures are currently common. Validate target legality, healing/max-health order and expiration using the authoritative engine. New creature/art requests should be appended to the existing art-request list during implementation; placeholders must stay usable until teacher art exists.
+Proof Pup's heal happens once on entry; Comma Crab trades its attack and energy for repeatable single-target healing. Lens Lizard inspects/rejects the top card; Pocket Tortoise retrieves the bottom card without drawing. Paper Dragon folds only itself; Cloud Calf offers conditional, capped turn-end support; Footnote Finch gets a temporary own-Axiom attack burst rather than Zuckerberg's permanent global-Axiom growth. Patient Proof now targets only small attackers instead of duplicating the unrestricted Counterexample role. Temporary Spark boosts expire together; health that depends on them can then be lost. Careful Words raises maximum health before restoring one damage point. The existing colour-in-play casting rule remains until #112 removes it; these definitions do not silently change construction or current tutorial contracts.
+
+The five twenty-card lists above and permanent grants remain #114 proposals, not shipped ownership. Existing generic spells have no explicit rarity metadata; starter selection still needs that release validation. Seven helper casts have two original lines each, with exactly matching barks and pinned Google voices; recordings are a separate existing pipeline run. Reuse generic action sounds. Runtime battle fixtures: dev/battle.html?starter=proof-pup (visible selector covers all twelve definitions).
 
 ## Later Fate card pack (not in initial starters)
 

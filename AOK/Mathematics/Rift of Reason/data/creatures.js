@@ -219,7 +219,53 @@
             blurb: 'A Danish poet-mathematician hedgehog who writes tiny wise verses and invents games.',
             lines: ['A little verse for a little problem.', 'Problems bite back. Good.', 'Hex! I mean, hello.'],
         },
+        // Small original starter helpers (#113); no plot spawn or automatic ownership grant.
+        'proof-pup': {
+            name: 'Proof Pup', inspiredBy: 'Original starter helper', colour: 'reason', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+            ability: 'fetch-proof', abilityText: 'Guard. Entrance: heal another friendly creature by 1.',
+            blurb: 'Fetches the missing proof. It is slightly damp.',
+            lines: ['I fetched the proof. Ignore the teeth marks.', 'The proof needs a nap.'],
+        },
+        'lens-lizard': {
+            name: 'Lens Lizard', inspiredBy: 'Original starter helper', colour: 'perception', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'lens-check', abilityText: 'Activate (1 energy): look at your top card. Keep it there or move it to the bottom.',
+            blurb: 'Inspects tomorrow through very large glasses.',
+            lines: ['Let me adjust my very serious glasses.', 'Tomorrow needs a closer look.'],
+        },
+        'paper-dragon': {
+            name: 'Paper Dragon', inspiredBy: 'Original starter helper', colour: 'imagination', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'fold-self', abilityText: 'Activate (1 energy): swap this creature\'s attack and health.',
+            blurb: 'A fierce dragon, folded on the wrong side.',
+            lines: ['Fear my very sharp paper corners.', 'New fold. New me.'],
+        },
+        'cloud-calf': {
+            name: 'Cloud Calf', inspiredBy: 'Original starter helper', colour: 'imagination', rarity: 'common', power: 3, cost: 3, attack: 1, health: 4,
+            ability: 'soft-landing', abilityText: 'Guard. At your turn\'s end, if this is damaged, restore 1 heart to your hero.',
+            blurb: 'Keeps a fluffy umbrella ready for a very small disaster.',
+            lines: ['I brought a spare cloud.', 'Even clouds need a rest.'],
+        },
+        'pocket-tortoise': {
+            name: 'Pocket Tortoise', inspiredBy: 'Original starter helper', colour: 'memory', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'old-pocket', abilityText: 'Activate (1 energy): move the bottom card of your deck to the top.',
+            blurb: 'Finds useful things in pockets older than the pockets.',
+            lines: ['I put it somewhere very safe.', 'Ah. It was in the old pocket.'],
+        },
+        'comma-crab': {
+            name: 'Comma Crab', inspiredBy: 'Original starter helper', colour: 'language', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+            ability: 'comma-pause', abilityText: 'Guard. Activate (1 energy): heal another friendly creature by 1.',
+            blurb: 'Prescribes one very small pause, with claws.',
+            lines: ['Hold still. You missed a comma.', 'A tiny pause. Not a full stop.'],
+        },
+        'footnote-finch': {
+            name: 'Footnote Finch', inspiredBy: 'Original starter helper', colour: 'language', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'tiny-print', abilityText: 'When you play an Axiom, this gets +1 attack this turn.',
+            blurb: 'The smallest note always wants the last word.',
+            lines: ['One tiny note before we begin.', 'Please read the tiny print next time.'],
+        },
     };
+
+    // Starter content begins with the adventure; grants are handled by the owned-deck ticket.
+    Rift.data.starterSpecies = ['proof-pup', 'lens-lizard', 'paper-dragon', 'cloud-calf', 'pocket-tortoise', 'comma-crab', 'footnote-finch'];
 
     // Rarity weights used by catch odds and spawn tables.
     Rift.data.rarities = {

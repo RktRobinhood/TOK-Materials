@@ -77,12 +77,14 @@
 <script src="js/ui/battles.js"></script>
 <script src="js/ui/powers.js"></script>
 <script src="dev/arena-prototype.js"></script>
+<script src="dev/starter-pack.js"></script>
 <script>
 (function () {
     const R = window.Rift;
     const q = new URLSearchParams(location.search);
     const $ = id => document.getElementById(id);
     const msg = t => { $('msg').textContent = t; };
+    if (R.StarterPackBench) { R.StarterPackBench.start(); return; }
     $('mode').value = q.get('mode') || 'practice';
     $('ai').value = R.Battle.AI.levelOf(q.get('ai') || 'competent');
     $('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);

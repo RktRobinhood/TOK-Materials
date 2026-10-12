@@ -1,5 +1,5 @@
 {
-  "status": "draft; validate and tune before release",
+  "status": "Card definitions implemented under #113; owned deck grants/workshop remain #114/#115, construction quotas #112.",
   "rules": {
     "deckSize": 20,
     "maxCopies": 2,
@@ -13,9 +13,10 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard.",
+      "text": "Guard. Entrance: heal another friendly creature by 1.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "fetch-proof"
     },
     {
       "id": "lens-lizard",
@@ -24,9 +25,10 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "No ability.",
+      "text": "Activate (1 energy): look at your top card. Keep it there or move it to the bottom.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "lens-check"
     },
     {
       "id": "paper-dragon",
@@ -35,9 +37,10 @@
       "cost": 2,
       "attack": 2,
       "health": 2,
-      "text": "No ability.",
+      "text": "Activate (1 energy): swap this creature's attack and health.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "fold-self"
     },
     {
       "id": "cloud-calf",
@@ -46,9 +49,10 @@
       "cost": 3,
       "attack": 1,
       "health": 4,
-      "text": "Guard.",
+      "text": "Guard. At your turn's end, if this is damaged, restore 1 heart to your hero.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "soft-landing"
     },
     {
       "id": "pocket-tortoise",
@@ -57,9 +61,10 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "No ability.",
+      "text": "Activate (1 energy): move the bottom card of your deck to the top.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "old-pocket"
     },
     {
       "id": "comma-crab",
@@ -68,9 +73,10 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard.",
+      "text": "Guard. Activate (1 energy): heal another friendly creature by 1.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "comma-pause"
     },
     {
       "id": "footnote-finch",
@@ -79,9 +85,10 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "No ability.",
+      "text": "When you play an Axiom, this gets +1 attack this turn.",
       "rarity": "common",
-      "draft": true
+      "draft": false,
+      "ability": "tiny-print"
     }
   ],
   "newSpells": [
@@ -90,9 +97,9 @@
       "name": "Patient Proof",
       "colour": "reason",
       "cost": 1,
-      "text": "Deal 2 damage to an enemy creature.",
+      "text": "Deal 2 damage to an enemy creature with 2 or less attack.",
       "rarity": "common",
-      "draft": true
+      "draft": false
     },
     {
       "id": "steady-gaze",
@@ -101,7 +108,7 @@
       "cost": 2,
       "text": "Deal 1 damage to an enemy creature. Draw 1 card from your deck.",
       "rarity": "common",
-      "draft": true
+      "draft": false
     },
     {
       "id": "creative-spark",
@@ -110,7 +117,7 @@
       "cost": 1,
       "text": "Give a friendly creature +1/+1 this turn.",
       "rarity": "common",
-      "draft": true
+      "draft": false
     },
     {
       "id": "stored-thought",
@@ -119,7 +126,7 @@
       "cost": 2,
       "text": "Draw 1 card from your deck. Restore 1 heart to your hero.",
       "rarity": "common",
-      "draft": true
+      "draft": false
     },
     {
       "id": "careful-words",
@@ -128,7 +135,7 @@
       "cost": 1,
       "text": "Give a friendly creature +1 maximum health and heal it by 1.",
       "rarity": "common",
-      "draft": true
+      "draft": false
     }
   ],
   "decks": [

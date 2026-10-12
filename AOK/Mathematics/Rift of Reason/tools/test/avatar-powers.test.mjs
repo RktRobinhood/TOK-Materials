@@ -379,7 +379,9 @@ test('every AI level uses its power and plays legal moves to the end; Expert sta
     for (const level of ['normal', 'competent', 'expert']) {
         const used = {};
         const times = [];
-        for (let g = 0; g < POWER_IDS.length; g++) {
+        // Two encounters per power: adding commons changes weighted team draws, and a single
+        // random encounter may never offer that power a useful target. Keep the coverage threshold.
+        for (let g = 0; g < POWER_IDS.length * 2; g++) {
             let s = poweredGame(level, g, g % 3 === 2 ? ['deeper', 'broader'] : g % 3 === 1 ? ['blood'] : []);
             let guard = 0;
             while (E.winner(s) == null) {

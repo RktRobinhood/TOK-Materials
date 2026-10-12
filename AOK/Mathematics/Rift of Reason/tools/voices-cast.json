@@ -1,5 +1,33 @@
 {
     "_about": "One Gemini prebuilt voice and acting direction per speaker (tools/voices.mjs). Caricatures are creatures inspired by public personas: the directions describe a style, never a real person. Changing a voice here only affects lines rendered afterwards; delete a speaker's MP3s to re-render them. Avatars (design/AVATAR-VOICES.md): an entry with an \"inner\" direction also defines the speaker <id>-inner (same voice and model, inner acting, the inner effect in voices-fx.mjs).",
+    "proof-pup": {
+        "voice": "Puck", "model": "flash",
+        "style": "A tiny earnest puppy carrying a chewed proof. Bright, warm and careful, proud of a very small achievement; one gentle comic pause. Original creature voice, clear short English."
+    },
+    "lens-lizard": {
+        "voice": "Leda", "model": "flash",
+        "style": "A little lizard with very serious oversized glasses. Curious, precise, softly self-important, crisp consonants and a brief thoughtful pause. Original creature voice, clear English."
+    },
+    "paper-dragon": {
+        "voice": "Zephyr", "model": "flash",
+        "style": "A tiny folded-paper dragon pretending to be terrifying. Light, theatrical confidence, a playful contrast between a grand announcement and a small papery creature. Clear English, no shouting."
+    },
+    "cloud-calf": {
+        "voice": "Sulafat", "model": "flash",
+        "style": "A soft little cloud calf with a practical umbrella. Gentle, reassuring and matter-of-fact about small disasters; warm smile in the delivery. Original creature voice, clear English."
+    },
+    "pocket-tortoise": {
+        "voice": "Gacrux", "model": "flash",
+        "style": "A small tortoise checking an ancient pocket. Unhurried, quietly amused, with a tiny delighted discovery at the end. Clear short English, kind and original."
+    },
+    "comma-crab": {
+        "voice": "Kore", "model": "flash",
+        "style": "A fussy small crab correcting punctuation with a claw. Dry, exact and lightly bossy, clipped but friendly, relishing a short pause. Clear English, no harsh or scolding tone."
+    },
+    "footnote-finch": {
+        "voice": "Aoede", "model": "flash",
+        "style": "A tiny finch with a large scholarly opinion. Quick, articulate and politely insistent; a cheerful little emphasis on tiny. Original creature voice, clear English."
+    },
     "narrator": {
         "voice": "Gacrux",
         "model": "flash",

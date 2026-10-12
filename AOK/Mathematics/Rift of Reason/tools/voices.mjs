@@ -162,6 +162,8 @@ function lessonsOf(line) {
             for (const k of Object.keys(R.data.clocks || {})) lessonIndex.clocks[k] = lesson;
         }
         const Rift = loadGame();
+        // Owned starter helpers are introduced from the beginning, not through plot spawn tables.
+        for (const id of Rift.data.starterSpecies || []) (lessonIndex.creatures[id] ||= new Set()).add('lesson1');
         for (const [k, st] of Object.entries(Rift.data.sideStories || {})) lessonIndex.side[k] = 'lesson' + st.lesson;
         for (const n of Object.values(Rift.data.map.nodes)) {
             const lesson = LESSON_OF_CHAPTER[n.chapter];

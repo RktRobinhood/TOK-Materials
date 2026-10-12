@@ -10,6 +10,8 @@ Reuse existing generic sound effects wherever they communicate the action. Add a
 
 Production sources remain data/script/*.js, creature lines, data/barks.js and Granny's lesson steps. tools/voices.mjs --plan enumerates actual missing lines; this proposal list is not silently injected into that scan. Preserve all current text hashes, recordings, cast pins and quota ledgers. The current recording audit is design/reviews/voice-recording-2026-10-12.md. No recordings were generated in this planning pass.
 
+#113 authored the seven helper casts and two lines each in data/creatures.js / data/barks.js, deduplicated by speaker/text hash. New entries in tools/voices-cast.json are additive. starterSpecies metadata places these lines in the lesson1 recording plan independently of plot spawn tables; it grants no ownership. `--plan --only proof-pup` reports two lines / one Flash request; run separate `--only` selections for the other helpers (the option accepts a single speaker, not a comma list). The total source budget is fourteen lines. No paid request, voice manifest or existing recording changed. Shared generic SFX cover the remaining actions.
+
 | Need | Proposed wording / treatment | Release gate |
 |---|---|---|
 | Deck workshop, Granny | “Your creatures support your spells. Count the matching colours in your deck.” | #112/#114/#115; text review before recording |

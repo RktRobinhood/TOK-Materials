@@ -353,6 +353,82 @@
                 api.emit({ t: 'ability', cid: card.cid, text: choice === 'true' ? 'TRUE: your other creatures get +1/+1.' : 'FALSE: enemy creatures get −1 attack.' });
             },
         },
+        // Small, bounded starter hooks. They use existing engine effects and no scheduled Fate.
+        'fetch-proof': {
+            name: 'Fetch Proof', keywords: ['guard'],
+            text: 'Guard. Entrance: heal another friendly creature by 1.',
+            entrance: {
+                target: 'friendly-other', filter: (s, cid) => s.cards[cid].damage > 0,
+                run(api, card, target) { api.heal(target, 1); api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' fetches a damp proof: heal ' + api.name(target) + ' by 1.' }); },
+            },
+        },
+        'lens-check': {
+            name: 'Lens Check',
+            text: 'Activate (1 energy): look at your top card. Keep it there or move it to the bottom.',
+            activate: {
+                cost: 1, usable: (s, card) => s.players[card.controller].deck.length > 0,
+                run(api, card) {
+                    const top = api.s.players[card.controller].deck[0];
+                    api.ask({ player: card.controller, kind: 'option', auto: false, options: ['keep', 'bottom'],
+                        labels: { keep: 'Keep on top', bottom: 'Move to bottom' },
+                        prompt: 'Your top card is ' + api.cardName(top) + '. Where should it go?',
+                        source: { type: 'ability', id: 'lens-check', cid: card.cid } });
+                },
+            },
+            choose(api, card, choice) {
+                const deck = api.s.players[card.controller].deck;
+                if (choice === 'bottom' && deck.length) deck.push(deck.shift());
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + (choice === 'bottom' ? ' moves a card to the bottom of the deck.' : ' keeps the top card in place.') });
+            },
+            ai: () => 0.2,
+        },
+        'fold-self': {
+            name: 'Fold Self',
+            text: 'Activate (1 energy): swap this creature\'s attack and health.',
+            activate: {
+                cost: 1, usable: (s, card, H) => H.attack(s, card.cid) !== H.health(s, card.cid),
+                run(api, card) { api.swapStats(card.cid); api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' folds the other way: swap its attack and health.' }); },
+            },
+        },
+        'soft-landing': {
+            name: 'Soft Landing', keywords: ['guard'],
+            text: 'Guard. At your turn\'s end, if this is damaged, restore 1 heart to your hero.',
+            onTurnEnd(api, card) {
+                if (card.damage <= 0) return;
+                api.healHero(card.controller, 1);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' offers a soft landing: restore 1 heart.' });
+            },
+            ai: (s, card) => card.damage > 0 && s.players[card.controller].hearts < s.players[card.controller].maxHearts ? 0.3 : 0,
+        },
+        'old-pocket': {
+            name: 'Old Pocket',
+            text: 'Activate (1 energy): move the bottom card of your deck to the top.',
+            activate: {
+                cost: 1, usable: (s, card) => s.players[card.controller].deck.length > 1,
+                run(api, card) {
+                    const deck = api.s.players[card.controller].deck;
+                    deck.unshift(deck.pop());
+                    api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' unpacks the bottom card onto the top of the deck.' });
+                },
+            },
+        },
+        'comma-pause': {
+            name: 'Comma Pause', keywords: ['guard'],
+            text: 'Guard. Activate (1 energy): heal another friendly creature by 1.',
+            activate: {
+                cost: 1, target: 'friendly-other', filter: (s, cid) => s.cards[cid].damage > 0,
+                run(api, card, target) { api.heal(target, 1); api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' adds a small pause: heal ' + api.name(target) + ' by 1.' }); },
+            },
+        },
+        'tiny-print': {
+            name: 'Tiny Print',
+            text: 'When you play an Axiom, this gets +1 attack this turn.',
+            onAxiomPlayed(api, card, id, by) {
+                if (by !== card.controller) return;
+                api.buff(card.cid, 1, 0, 'Tiny Print', true);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' argues in tiny print: +1 attack this turn.' });
+            },
+        },
         grook: {
             name: 'Grook',
             text: 'Whenever it survives a fight, draw a card.',

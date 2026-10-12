@@ -49,7 +49,7 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
             assert.equal(T[id].inTune, undefined, id + ': no In tune bonus any more');
         });
     });
-    const old = Object.keys(T).filter(id => !ids.includes(id));
+    const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id));
     assert.equal(old.length, 15);
     old.forEach(id => { assert.equal(T[id].colour, undefined, id); assert.equal(T[id].rarity, undefined, id); });
     const D = Rift.data.tacticDecks;

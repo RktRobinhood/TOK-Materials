@@ -79,6 +79,22 @@ Species ids (data/creatures.js keys and art ids): carlseal, khaby, eminemu, obam
 Balance after the expansion (catchable species, legendaries excluded): 🔵 4 · 🟡 5 · 🟣 4 · ⚪ 5 · 🔴 5 · 🟢 5; rarities: 10 common, 11 uncommon, 7 rare.
 Red and green have no lesson 1 puzzles of their own yet, so these need to appear as wild spawns or trainer rewards until the Switchboard (Ch2) and Chart Fixer (L4) arrive.
 
+## Original starter helpers — #113
+
+Seven small original creatures are the documented starter-helper exception to the public-persona main cast. Their produced portraits remain the same. They are weak/common teaching tools with distinct, bounded hooks, not generic-animal replacements for the expansion caricatures. Definitions are implemented; ownership, avatar-type deck grants and workshop follow #112/#114/#115.
+
+| Helper / stable ID | Visual cue | Distinct hook |
+|---|---|---|
+| Proof Pup / proof-pup | Chewed proof and small shield | Guard; one-time entry heal for a damaged ally |
+| Lens Lizard / lens-lizard | Oversized glasses | Paid top-card inspection and keep/bottom choice, no draw |
+| Paper Dragon / paper-dragon | Folded paper wings | Paid self-only attack/health swap |
+| Cloud Calf / cloud-calf | Fluffy umbrella | Guard; capped turn-end hero healing only while damaged |
+| Pocket Tortoise / pocket-tortoise | Old pocket | Paid bottom-to-top deck reordering without drawing |
+| Comma Crab / comma-crab | Punctuation claw | Guard; paid single-ally heal that uses its attack |
+| Footnote Finch / footnote-finch | Tiny scroll | Own played Axioms trigger temporary attack, not permanent growth |
+
+Each has two original runtime voice lines and an additive pinned Google cast; no recordings have been generated for this pack. Art source/provenance: 4-caricatures/card-starters-2026-10-12. Keep helper definitions after the existing roster so legacy chapter-kit selections stay stable. No plot spawn or automatic starter grant was added here.
+
 <!-- persona-roster-2026-10-12:start -->
 
 ## Card Arena expansion cast proposals — 12 October 2026

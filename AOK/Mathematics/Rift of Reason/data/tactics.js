@@ -107,6 +107,44 @@
             },
         },
 
+        // Common starter additions (#113). Ownership grants and deck quotas land separately.
+        'patient-proof': {
+            short: '2 damage to a small enemy',
+            name: 'Patient Proof', cost: 1, colour: 'reason', rarity: 'common', target: 'enemy-creature',
+            filter: (s, cid, H) => H.attack(s, cid) <= 2,
+            text: 'Deal 2 damage to an enemy creature with 2 or less attack.',
+            flavour: 'First find the small mistake. Then chew it carefully.',
+            run(api, p, target) { api.emit({ t: 'tactic', text: 'Patient Proof: 2 damage to ' + api.name(target) + '.' }); api.damage(target, 2, null); },
+        },
+        'steady-gaze': {
+            short: '1 damage to an enemy; draw',
+            name: 'Steady Gaze', cost: 2, colour: 'perception', rarity: 'common', target: 'enemy-creature',
+            text: 'Deal 1 damage to an enemy creature. Draw 1 card from your deck.',
+            flavour: 'Stare until the next idea blinks first.',
+            run(api, p, target) { api.emit({ t: 'tactic', text: 'Steady Gaze: 1 damage to ' + api.name(target) + ', then draw a card.' }); api.damage(target, 1, null); api.draw(p); },
+        },
+        'creative-spark': {
+            short: 'Your creature +1/+1 this turn',
+            name: 'Creative Spark', cost: 1, colour: 'imagination', rarity: 'common', target: 'friendly-creature',
+            text: 'Give a friendly creature +1/+1 this turn.',
+            flavour: 'One bright idea. Tiny battery.',
+            run(api, p, target) { api.buff(target, 1, 1, 'Creative Spark', true); api.emit({ t: 'tactic', text: 'Creative Spark: ' + api.name(target) + ' gets +1/+1 this turn.' }); },
+        },
+        'stored-thought': {
+            short: 'Draw a card; heal your hero 1',
+            name: 'Stored Thought', cost: 2, colour: 'memory', rarity: 'common',
+            text: 'Draw 1 card from your deck. Restore 1 heart to your hero.',
+            flavour: 'Yesterday left a snack in this pocket.',
+            usable: (s, p) => s.players[p].deck.length > 0 || s.players[p].hearts < s.players[p].maxHearts,
+            run(api, p) { api.draw(p); api.healHero(p, 1); api.emit({ t: 'tactic', text: 'Stored Thought: draw a card and restore 1 heart.' }); },
+        },
+        'careful-words': {
+            short: 'Your creature +1 max health; heal 1',
+            name: 'Careful Words', cost: 1, colour: 'language', rarity: 'common', target: 'friendly-creature',
+            text: 'Give a friendly creature +1 maximum health and heal it by 1.',
+            flavour: 'Add a comma. Remove a bruise.',
+            run(api, p, target) { api.buff(target, 0, 1, 'Careful Words'); api.heal(target, 1); api.emit({ t: 'tactic', text: 'Careful Words: ' + api.name(target) + ' gets +1 maximum health and heals 1.' }); },
+        },
         // ---- earned tactics (trainers, puzzles, rumours) ----
         'peer-review': {
             short: '2 damage to all enemies',
@@ -376,6 +414,8 @@
         starter: ['counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'occams-razor', 'rethink', 'big-claims', 'clockwork', 'look-it-up'],
         // Won from trainers, puzzles and rumours.
         earned: ['peer-review', 'recall', 'pause-for-thought', 'safety-net', 'lemma'],
+        // Definitions only: #114 grants these with owned avatar-type starters.
+        starterPack: ['patient-proof', 'steady-gaze', 'creative-spark', 'stored-thought', 'careful-words'],
         // Colour tactics by colour, [common, uncommon, rare]. The common unlocks with the first
         // creature of that colour; the others are granted by later systems (Rift.State.grantTactic).
         colour: {
