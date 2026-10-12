@@ -271,5 +271,13 @@
     "id": 5818256251,
     "blockedBy": [],
     "nativeDependenciesAdded": true
+  },
+  "foil_material": {
+    "number": 141,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/141",
+    "title": "Rift of Reason: Design reusable normal and foil card presentation",
+    "id": 5818764866,
+    "blockedBy": [],
+    "nativeDependenciesAdded": true
   }
 }
