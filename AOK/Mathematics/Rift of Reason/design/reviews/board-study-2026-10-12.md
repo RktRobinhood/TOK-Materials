@@ -78,7 +78,16 @@ Raw JSON includes long-animation-frame blocking/render/style-layout data and act
 - Proposed exhaustion damage starts only when that player's personal deck **and** the shared Axiom draw source are empty. The opponent's personal deck does not determine that player's exhaustion.
 - Suggested implementation, not approved tuning: automatically apply increasing damage (1, then 2, then 3…) at the player's normal draw step when both sources are exhausted. Full hand capacity is not deck exhaustion; extra-draw abilities or choosing a time action must not multiply or evade the normal exhaustion check.
 - Current engine has no fatigue counter and does recycle shared Axiom discards. Whether shared depletion is permanent or discarded rules can refill it must be settled; permanent depletion better matches the teacher's “no more rules left” description, but is a proposed change.
-- Win-rule interaction needs a decision: ordinary exhaustion damage could make a player **win** under the own-zero-hearts axiom. Recommendation is to obey the active Win rule consistently, rather than introduce an unexplained exception; this is not yet approved.
+- **Teacher approved:** exhaustion damage follows the active Win axiom, including winning at zero of your own hearts. Deliberately exhausting the decks/damaging yourself under that axiom is a legitimate strategy.
+
+### Deck copies, spell eligibility and teaching — teacher follow-up
+
+- Teacher direction for ordinary deck construction: each player contributes ten Axiom cards, with at most **two copies of the same Axiom** in their own contribution. Limits concern card identity, not Axiom category. Two players' contributions can therefore yield four copies of one rule in the combined twenty-card shared deck.
+- Personal decks contain twenty cards total, with at most **two copies of any one creature or spell/tactic**. Creature copies should count by species rather than collection-instance UID; this is a deck limit, not an ownership/collection limit. Scripted lesson decks need review because some current examples contain more than two copies.
+- Non-generic spells require a friendly creature of the matching type in play. Interpret type as **current creature colour**, matching the existing tactic system. Losing the last matching creature blocks those spells until the colour is restored on the board; generic spells have no colour prerequisite. Energy, targets and current Axiom rules still apply.
+- The engine already enforces the live colour prerequisite, and tactics already have a two-copy cap. Axioms currently require ten distinct choices, so their builder/selection/validation must change to support counts; creature deck limits also need implementation and validation.
+- The engine currently also filters colour tactics at construction unless the team contains that colour. Clarification pending: keep this construction restriction as well, or allow any unlocked spell in a deck and gate only casting by the live board? Teacher's “you may play any spell” wording suggests the latter, but this is not yet settled.
+- Teach by interaction: use a generic spell with no creature, play a coloured creature, cast its colour spell, lose the last matching creature and inspect the now-blocked spell, then restore a matching creature and cast again. Explain the two-copy limits in the deck builder and provide a clear reason beside blocked spell cards.
 
 ### Fate rule still to settle
 

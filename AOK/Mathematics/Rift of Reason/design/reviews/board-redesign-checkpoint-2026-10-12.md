@@ -25,6 +25,8 @@ Clarify whether scheduled Fate events are one-shot or repeatable on re-entry bef
 
 Latest teacher steering: visible deterministic events, ordinary Fate advances once after both players have taken a turn (a full cycle), and future deferred spells such as a board wipe. Exhaustion should spare an empty shared deck alone and permit shared draws after the personal deck runs out; proposed damage begins only when both sources are exhausted. See the report for unresolved recycling, fatigue tuning and own-zero-hearts Win-rule interaction. These mechanics remain design notes, not implemented behaviour.
 
+Teacher subsequently approved exhaustion obeying the active Win axiom, including own-zero-hearts victory. New direction: ten Axioms contributed per player with maximum two copies per Axiom; twenty-card personal decks with maximum two copies per creature species or spell/tactic. Live matching-colour creature gates colour spells; generic spells have no colour prerequisite. Live gating/tactic copy limits already exist; Axiom counts and creature limits need work. Teach losing/restoring the last matching creature. Clarify whether the additional construction-time colour restriction remains. Fate replayability, recycling and numeric exhaustion tuning remain unresolved.
+
 ## Open boundaries
 
 - #107: teacher feedback is recorded and A is selected; the specified layout revisions, actual zoom and physical touch checks remain.
