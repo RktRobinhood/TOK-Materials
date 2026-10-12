@@ -1,0 +1,143 @@
+{
+  "rules": {
+    "number": 112,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/112",
+    "title": "Rift of Reason: Enforce two-copy limits and construction colour quotas",
+    "blockedBy": [],
+    "id": 5812035986,
+    "nativeDependenciesAdded": true
+  },
+  "commons": {
+    "number": 113,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/113",
+    "title": "Rift of Reason: Add the simple common starter creature and spell pack",
+    "blockedBy": [],
+    "id": 5812036419,
+    "nativeDependenciesAdded": true
+  },
+  "starters": {
+    "number": 114,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/114",
+    "title": "Rift of Reason: Grant five persistent avatar-type starter decks",
+    "blockedBy": [
+      112,
+      113
+    ],
+    "id": 5812036800,
+    "nativeDependenciesAdded": true
+  },
+  "workshop": {
+    "number": 115,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/115",
+    "title": "Rift of Reason: Teach deck construction in a replayable starter workshop",
+    "blockedBy": [
+      114
+    ],
+    "id": 5812037529,
+    "nativeDependenciesAdded": true
+  },
+  "cycles": {
+    "number": 116,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/116",
+    "title": "Rift of Reason: Make Fate advance per full round with locked public forecasts",
+    "blockedBy": [],
+    "id": 5812038111,
+    "nativeDependenciesAdded": true
+  },
+  "exhaustion": {
+    "number": 117,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/117",
+    "title": "Rift of Reason: End stalled battles with exhaustion obeying the Win axiom",
+    "blockedBy": [],
+    "id": 5812038514,
+    "nativeDependenciesAdded": true
+  },
+  "policy": {
+    "number": 118,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/118",
+    "title": "Rift of Reason: Settle Fate landing, skipping, replay and expiry rules",
+    "blockedBy": [],
+    "id": 5812038910,
+    "nativeDependenciesAdded": true
+  },
+  "schedule": {
+    "number": 119,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/119",
+    "title": "Rift of Reason: Ship the first public scheduled Fate spell: Clean Slate",
+    "blockedBy": [
+      116,
+      118
+    ],
+    "id": 5812039329,
+    "nativeDependenciesAdded": true
+  },
+  "reentry": {
+    "number": 120,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/120",
+    "title": "Rift of Reason: Make Fate leaps and rewind interact with marked repeatable spaces",
+    "blockedBy": [
+      119,
+      118
+    ],
+    "id": 5812040136,
+    "nativeDependenciesAdded": true
+  },
+  "temporal": {
+    "number": 121,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/121",
+    "title": "Rift of Reason: Add the first colour-scheduled spells and temporal Axiom pack",
+    "blockedBy": [
+      119,
+      112
+    ],
+    "id": 5812040871,
+    "nativeDependenciesAdded": true
+  },
+  "layout": {
+    "number": 122,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/122",
+    "title": "Rift of Reason: Refine approved layout A with owner decks, Axiom panel and contextual inspection",
+    "blockedBy": [],
+    "id": 5812041555,
+    "nativeDependenciesAdded": true
+  },
+  "catalogue": {
+    "number": 123,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/123",
+    "title": "Rift of Reason: Draft and review 210 new cards before staged content release",
+    "blockedBy": [
+      122
+    ],
+    "id": 5812105113,
+    "nativeDependenciesAdded": true
+  },
+  "rewards": {
+    "number": 124,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/124",
+    "title": "Rift of Reason: Audit story card rewards and collection progression",
+    "blockedBy": [
+      114
+    ],
+    "id": 5812105768,
+    "nativeDependenciesAdded": true
+  },
+  "catching": {
+    "number": 125,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/125",
+    "title": "Rift of Reason: Playtest catching and lure supply as a separate gameplay loop",
+    "blockedBy": [],
+    "id": 5812106422,
+    "nativeDependenciesAdded": true
+  },
+  "packs": {
+    "number": 126,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/126",
+    "title": "Rift of Reason: Design earned-currency packs and duplicate-to-foil protection",
+    "blockedBy": [
+      112,
+      123
+    ],
+    "id": 5812106812,
+    "nativeDependenciesAdded": true
+  }
+}

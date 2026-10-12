@@ -82,6 +82,8 @@ Raw JSON includes long-animation-frame blocking/render/style-layout data and act
 
 ### Deck copies, spell eligibility and teaching — teacher follow-up
 
+**Superseded by the latest teacher decision:** spell eligibility is now a construction quota, not a live-board condition. Per colour, spell copies cannot exceed creature copies of that colour in the deck. No matching creature is needed in play. Use a separate deck-building workshop and owned avatar-type starters; see [the card/deck draft](../drafts/card-arena-2026-10-12/CARD-DRAFTS.md). The earlier live-board proposal below is retained as conversation history only.
+
 - Teacher direction for ordinary deck construction: each player contributes ten Axiom cards, with at most **two copies of the same Axiom** in their own contribution. Limits concern card identity, not Axiom category. Two players' contributions can therefore yield four copies of one rule in the combined twenty-card shared deck.
 - Personal decks contain twenty cards total, with at most **two copies of any one creature or spell/tactic**. Creature copies should count by species rather than collection-instance UID; this is a deck limit, not an ownership/collection limit. Scripted lesson decks need review because some current examples contain more than two copies.
 - Non-generic spells require a friendly creature of the matching type in play. Interpret type as **current creature colour**, matching the existing tactic system. Losing the last matching creature blocks those spells until the colour is restored on the board; generic spells have no colour prerequisite. Energy, targets and current Axiom rules still apply.

@@ -1,0 +1,341 @@
+{
+  "status": "draft; validate and tune before release",
+  "rules": {
+    "deckSize": 20,
+    "maxCopies": 2,
+    "colourSpellLimit": "number of creatures of that colour in the submitted deck; no live-board prerequisite"
+  },
+  "newCreatures": [
+    {
+      "id": "proof-pup",
+      "name": "Proof Pup",
+      "colour": "reason",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Guard.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "lens-lizard",
+      "name": "Lens Lizard",
+      "colour": "perception",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "No ability.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "paper-dragon",
+      "name": "Paper Dragon",
+      "colour": "imagination",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "No ability.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "cloud-calf",
+      "name": "Cloud Calf",
+      "colour": "imagination",
+      "cost": 3,
+      "attack": 1,
+      "health": 4,
+      "text": "Guard.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "pocket-tortoise",
+      "name": "Pocket Tortoise",
+      "colour": "memory",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "No ability.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "comma-crab",
+      "name": "Comma Crab",
+      "colour": "language",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Guard.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "footnote-finch",
+      "name": "Footnote Finch",
+      "colour": "language",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "No ability.",
+      "rarity": "common",
+      "draft": true
+    }
+  ],
+  "newSpells": [
+    {
+      "id": "patient-proof",
+      "name": "Patient Proof",
+      "colour": "reason",
+      "cost": 1,
+      "text": "Deal 2 damage to an enemy creature.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "steady-gaze",
+      "name": "Steady Gaze",
+      "colour": "perception",
+      "cost": 2,
+      "text": "Deal 1 damage to an enemy creature. Draw 1 card from your deck.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "creative-spark",
+      "name": "Creative Spark",
+      "colour": "imagination",
+      "cost": 1,
+      "text": "Give a friendly creature +1/+1 this turn.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "stored-thought",
+      "name": "Stored Thought",
+      "colour": "memory",
+      "cost": 2,
+      "text": "Draw 1 card from your deck. Restore 1 heart to your hero.",
+      "rarity": "common",
+      "draft": true
+    },
+    {
+      "id": "careful-words",
+      "name": "Careful Words",
+      "colour": "language",
+      "cost": 1,
+      "text": "Give a friendly creature +1 maximum health and heal it by 1.",
+      "rarity": "common",
+      "draft": true
+    }
+  ],
+  "decks": [
+    {
+      "avatarType": "owlet",
+      "strategy": "Patient midrange",
+      "creatures": [
+        "astrophysicat",
+        "astrophysicat",
+        "khaby",
+        "khaby",
+        "proof-pup",
+        "proof-pup",
+        "siuuugull",
+        "siuuugull",
+        "keanu",
+        "keanu",
+        "beansprout",
+        "beansprout"
+      ],
+      "tactics": [
+        "step-by-step",
+        "step-by-step",
+        "patient-proof",
+        "patient-proof",
+        "pause-for-thought",
+        "pause-for-thought",
+        "counterexample",
+        "counterexample"
+      ],
+      "axioms": [
+        "underdog",
+        "reverse-hearts",
+        "normal-hearts",
+        "thrift",
+        "abundance",
+        "study",
+        "arrival",
+        "vigilance",
+        "choice",
+        "mercy"
+      ],
+      "synergy": "Guard buys time; small damage sets up Close the Proof. Drawing and selective answers support Foresee."
+    },
+    {
+      "avatarType": "mothkin",
+      "strategy": "Information tempo",
+      "creatures": [
+        "kardashiant",
+        "kardashiant",
+        "attenbirdough",
+        "attenbirdough",
+        "lens-lizard",
+        "lens-lizard",
+        "astrophysicat",
+        "astrophysicat",
+        "beansprout",
+        "beansprout",
+        "keanu",
+        "keanu"
+      ],
+      "tactics": [
+        "look-closer",
+        "look-closer",
+        "steady-gaze",
+        "steady-gaze",
+        "counterexample",
+        "counterexample",
+        "pause-for-thought",
+        "pause-for-thought"
+      ],
+      "axioms": [
+        "underdog",
+        "reverse-hearts",
+        "normal-hearts",
+        "thrift",
+        "abundance",
+        "study",
+        "arrival",
+        "vigilance",
+        "choice",
+        "mercy"
+      ],
+      "synergy": "Small damage pairs with Lantern; inspection and cheap interaction support Night Sight. Kim introduces current Fate manipulation."
+    },
+    {
+      "avatarType": "fox",
+      "strategy": "Growth and pressure",
+      "creatures": [
+        "zuckerborg",
+        "zuckerborg",
+        "paper-dragon",
+        "paper-dragon",
+        "cloud-calf",
+        "cloud-calf",
+        "beansprout",
+        "beansprout",
+        "siuuugull",
+        "siuuugull",
+        "eelish",
+        "eelish"
+      ],
+      "tactics": [
+        "daydream",
+        "daydream",
+        "creative-spark",
+        "creative-spark",
+        "eureka",
+        "eureka",
+        "pep-talk",
+        "pep-talk"
+      ],
+      "axioms": [
+        "underdog",
+        "reverse-hearts",
+        "normal-hearts",
+        "thrift",
+        "abundance",
+        "study",
+        "arrival",
+        "vigilance",
+        "choice",
+        "mercy"
+      ],
+      "synergy": "Cloud Calf offers a useful, risky stat swap for What If; cheap creatures and buffs make Brainstorm useful."
+    },
+    {
+      "avatarType": "frogling",
+      "strategy": "Resilient planning",
+      "creatures": [
+        "pocket-tortoise",
+        "pocket-tortoise",
+        "siuuugull",
+        "siuuugull",
+        "keanu",
+        "keanu",
+        "khaby",
+        "khaby",
+        "attenbirdough",
+        "attenbirdough",
+        "beansprout",
+        "beansprout"
+      ],
+      "tactics": [
+        "remember-when",
+        "remember-when",
+        "stored-thought",
+        "stored-thought",
+        "clockwork",
+        "clockwork",
+        "second-wind",
+        "second-wind"
+      ],
+      "axioms": [
+        "underdog",
+        "reverse-hearts",
+        "normal-hearts",
+        "thrift",
+        "abundance",
+        "study",
+        "arrival",
+        "vigilance",
+        "choice",
+        "mercy"
+      ],
+      "synergy": "Recall recovers defeated creatures; Clockwork and a modest draw/heal package support Hold That Thought. No scheduled-event dependency in the initial deck."
+    },
+    {
+      "avatarType": "raven",
+      "strategy": "Defensive attrition",
+      "creatures": [
+        "beansprout",
+        "beansprout",
+        "comma-crab",
+        "comma-crab",
+        "footnote-finch",
+        "footnote-finch",
+        "eelish",
+        "eelish",
+        "zuckerborg",
+        "zuckerborg",
+        "astrophysicat",
+        "astrophysicat"
+      ],
+      "tactics": [
+        "label-it",
+        "label-it",
+        "careful-words",
+        "careful-words",
+        "stand-firm",
+        "stand-firm",
+        "second-wind",
+        "second-wind"
+      ],
+      "axioms": [
+        "underdog",
+        "reverse-hearts",
+        "normal-hearts",
+        "thrift",
+        "abundance",
+        "study",
+        "arrival",
+        "vigilance",
+        "choice",
+        "mercy"
+      ],
+      "synergy": "A protected board benefits from Call It Out removing defences. Healing and economical plays support Fine Print without forcing self-damage."
+    }
+  ]
+}

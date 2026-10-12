@@ -2,6 +2,14 @@
 
 The source of truth for the game. Every GitHub issue links here. Decisions below were settled with the teacher in a planning interview (2026-10-01/02); change them only with the teacher's agreement.
 
+## Approved next Card Arena revision — 12 October 2026
+
+The teacher approved these **planned changes**, superseding earlier deck eligibility and Fate timing descriptions below once implemented. Personal decks contain twenty cards, maximum two copies per creature species or named spell. For each colour, spell copies cannot exceed creature copies of that colour in the submitted deck; casting requires no matching creature on the live board. Generic spells have no colour quota. Each player contributes ten Axioms with maximum two copies per named rule. Give each avatar type an owned weak/common starter deck shared by its two variants, with the existing default ten Axioms, and teach construction in a separate replayable workshop. Preserve earned collection progress and save backups.
+
+Ordinary Fate advances after both players have taken a turn, with visible deterministic events. Planned exhaustion damage applies only when the player's deck and shared draw source are depleted, and obeys the active Win axiom including own-zero-hearts victory. The approved board direction is symmetrical layout A with owner decks beside energy, the shared deck at centre-left, a permanent Axiom panel and contextual card inspection. Draft card numbers, balance, scheduled-event replay/expiry and shared-discard recycling remain proposals to settle before their respective implementation slices.
+
+See [starter/card drafts](drafts/card-arena-2026-10-12/CARD-DRAFTS.md), [build roadmap](drafts/card-arena-2026-10-12/ROADMAP.md) and [recorded board feedback](reviews/board-study-2026-10-12.md). Runtime rules below describe the existing game until those tickets land.
+
 ## Purpose
 
 A browser game that is the **follow-up activity** for a 4-lesson IB TOK unit introducing Mathematics as an area of knowledge. The teacher teaches the concept; the game gives exposure to more ideas and cements them through replayable puzzles. Students are DP1 (16–17), mostly non-native English speakers at a Danish gymnasium, and love Pokémon.

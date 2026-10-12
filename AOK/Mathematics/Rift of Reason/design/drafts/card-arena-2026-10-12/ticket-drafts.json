@@ -1,0 +1,215 @@
+[
+  {
+    "key": "rules",
+    "title": "Rift of Reason: Enforce two-copy limits and construction colour quotas",
+    "blockedBy": [],
+    "acceptance": [
+      "Twenty-card personal decks, maximum two per creature species or named spell; ten contributed Axioms with maximum two per named rule.",
+      "Per colour, spell copies are at most creature copies of that colour in the submitted deck. Generic spells use no colour quota. Remove the live-board colour gate; a legal colour spell still casts with no matching creature in play.",
+      "Builder shows copy/quota counts and actionable rejection reasons; persisted/imported/team-code/AI decks use the same validation. Preserve legacy inventory and surface invalid custom decks for repair rather than silently replacing cards.",
+      "Cover 3 creatures/3 spells accepted, fourth rejected, third identical card rejected, generic freedom, duplicated Axioms across both contributions, casting without a matching board creature, and backup round trips."
+    ],
+    "label": "rift: engine",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "commons",
+    "title": "Rift of Reason: Add the simple common starter creature and spell pack",
+    "blockedBy": [],
+    "acceptance": [
+      "Implement the seven creature and five spell drafts linked below, with no legendary/uncommon dependencies or scheduled Fate requirement.",
+      "Cards have readable text, working authoritative effects, legal targets, AI support and usable placeholder artwork; add new art to the existing request list. Do not generate voice/art until wording is settled.",
+      "Exercise every new effect in a real battle and with the engine; temporary attack expires, health/healing are coherent, Guard is visible. Compare against current commons and adjust draft costs if evidence requires it."
+    ],
+    "label": "rift: content",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "starters",
+    "title": "Rift of Reason: Grant five persistent avatar-type starter decks",
+    "blockedBy": [
+      "rules",
+      "commons"
+    ],
+    "acceptance": [
+      "Grant the five exact proposed 12-creature/8-spell starters and default ten Axioms as real owned cards/loadouts once per adventure. Each avatar type uses the same list for both variants.",
+      "Grant/unlock pools and a versioned receipt live in the existing save object and survive backup/import. Reloads, avatar appearance changes and chapter jumps cannot repeat the grant.",
+      "Existing players receive a safe idempotent catch-up path preserving catches, earned unlocks and custom loadouts. Tutorial loaners remain separate; ordinary starting battles do not silently pad illegal decks with loans.",
+      "Validate every list with the shared rules and both actual avatar powers; make first owned-deck battle playable before catching more creatures."
+    ],
+    "label": "rift: battle",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "workshop",
+    "title": "Rift of Reason: Teach deck construction in a replayable starter workshop",
+    "blockedBy": [
+      "starters"
+    ],
+    "acceptance": [
+      "Offer an optional deck-building tutorial before first owned-deck play and replay from Collection. Use the selected starter and show its strategy and both variant powers.",
+      "Teach 20/20 personal, 10/10 Axioms, two copies per named card and colour quotas. Learner repairs a third copy and an over-quota colour spell; generic spells remain available.",
+      "Demonstrate a colour spell casting without a matching creature on the battlefield. Remove obsolete live-colour instructions/tooltips from existing lessons without expanding the short battle lesson into a workshop.",
+      "Support keyboard/click/touch, clear mistakes/retry, short plain English and no progress loss. Record settled voices later through #43."
+    ],
+    "label": "rift: content",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "cycles",
+    "title": "Rift of Reason: Make Fate advance per full round with locked public forecasts",
+    "blockedBy": [],
+    "acceptance": [
+      "First player turn, second player turn, then exactly one ordinary Fate advance. Countdown labels use full rounds and agree with actual resolution for either starting player.",
+      "Lock and display the exact next announced axiom/reset effect; later shared draws cannot silently replace it. Represent a reserved rule consistently so it is neither duplicated nor drawn twice.",
+      "Preview source/effect/rounds, synchronize notes/audio/Calm movement and preserve deterministic replay/save data. Existing explicit time abilities remain understandable; do not introduce replayable-event semantics here.",
+      "Test odd/even turn boundaries, first-player variants, announced rule identity, reset, empty rule sources and interrupted visuals. Related #66/#109; do not create a second animation owner."
+    ],
+    "label": "rift: engine",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "exhaustion",
+    "title": "Rift of Reason: End stalled battles with exhaustion obeying the Win axiom",
+    "blockedBy": [],
+    "acceptance": [
+      "At a normal draw step, when that player personal deck and shared Axiom source are empty, apply proposed escalating exhaustion 1,2,3 damage, once per own turn. Opponent personal deck is irrelevant.",
+      "Empty shared deck alone is harmless; personal-empty/shared-available can still draw Axioms. Full hand is not exhaustion. Extra draws/time choices do not multiply or evade normal exhaustion.",
+      "Exhaustion uses the current victory rule, including own-zero-hearts winning, with clear impending damage and cause. Counter persists through deterministic battle restore; AI can finish stalled games.",
+      "Before implementation settle shared-discard recycling and numeric tuning with teacher (recommended finite shared deck). Test each emptiness combination, recycling decision, normal/reversed Win, both heroes defeated, and special draw rules."
+    ],
+    "label": "teacher in the loop",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "policy",
+    "title": "Rift of Reason: Settle Fate landing, skipping, replay and expiry rules",
+    "blockedBy": [],
+    "acceptance": [
+      "Present a small deterministic worked example covering ordinary entry, a two-space leap bypassing a node, rewind onto a fired node, one-shot summon, marked repeatable buff and expiry.",
+      "Proposed default: scheduled spells are one-shot; only marked repeatable spaces replay; lifetime counts elapsed full rounds independent of cursor rewind. Confirm or revise with teacher before changing these semantics.",
+      "Specify pending-event capacity, source death, full board/hand, simultaneous event order, invalid targets, cancellation, reset versus queued events and lossless battle saves.",
+      "Publish the agreed finite state model and deterministic acceptance examples. This is a design gate, not a ticket to silently invent rules."
+    ],
+    "label": "teacher in the loop",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "schedule",
+    "title": "Rift of Reason: Ship the first public scheduled Fate spell: Clean Slate",
+    "blockedBy": [
+      "cycles",
+      "policy"
+    ],
+    "acceptance": [
+      "Implement Clean Slate as the draft generic spell: schedule a public all-creature wipe two full rounds ahead. Card play, event node, inspectable countdown, actual engine resolution and spent status form one complete playable slice.",
+      "Resolve affected creatures at firing time, with normal Last Words and winner checks; source/controller/targets are explicit. AI sees only public schedule and can react.",
+      "Queued state saves/restores and is resolved once despite repeated clicks/navigation/visual cancellation. Owner/source removal and reset follow the agreed policy.",
+      "Provide a real playable bench/tutorial demonstration and tests proving preview matches resolution under normal/changed Axioms. Preserve #66 pacing and Calm motion."
+    ],
+    "label": "rift: engine",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "reentry",
+    "title": "Rift of Reason: Make Fate leaps and rewind interact with marked repeatable spaces",
+    "blockedBy": [
+      "schedule",
+      "policy"
+    ],
+    "acceptance": [
+      "Implement draft Leap Ahead, Revisit and Echoing Encouragement using the agreed policy. Show intermediate skipped nodes, landed node, consumed one-shot history and expiry clearly.",
+      "Demonstrate bypassing an enemy plan, re-entering the +1/+1 space, no duplicate one-shot summons, and elapsed-round expiry that rewind cannot extend.",
+      "Use finite deterministic transitions and existing action/activation budgets; cap/cancel presentation work, preserve focus and expose exact effects in inspection.",
+      "Tests cover both directions, consecutive abilities, expired/skipped events, changing controller/rules, saved replay and duplicate-submit resistance."
+    ],
+    "label": "rift: engine",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "temporal",
+    "title": "Rift of Reason: Add the first colour-scheduled spells and temporal Axiom pack",
+    "blockedBy": [
+      "schedule",
+      "rules"
+    ],
+    "acceptance": [
+      "Implement five colour-scheduled spell drafts and the four temporal Axiom families from the linked draft, with earnable progression rather than replacing default starters.",
+      "Construction quotas apply even though no live matching creature is required; previews expose only public information. Both players share Axiom effects and replacement categories. Existing announced events stay fixed when delay Axioms change.",
+      "Handle invalidated targets/full board/hand/source loss according to agreed policy, keep current values/explanations synchronized and test rule replacement/reset.",
+      "Coordinate general +/-1/+/-2 and Unlimited content with existing #101 rather than duplicate it. Simulate/tune costs and unlock pacing before exposing the pack to students."
+    ],
+    "label": "rift: content",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "layout",
+    "title": "Rift of Reason: Refine approved layout A with owner decks, Axiom panel and contextual inspection",
+    "blockedBy": [],
+    "acceptance": [
+      "Mirror chosen owner card-back decks beside energy (own above, opponent below); put shared Axiom deck centre-left. Keep the symmetric battlefield.",
+      "Permanent right column shows active Axioms; restore contextual full-text/Active-effects inspection without obscuring targets/actions. Reduce competing modifier labels and show target-dependent bonuses when relevant.",
+      "Guard has a clear large backplate, distinct from Shield bubble and both simultaneously legible. Upcoming Fate nodes show inspectable effects and full-round timing when available.",
+      "Verify crowded/narrow/zoom, keyboard/click/drag/touch and Calm motion with actual engine states. Coordinate production renderer continuity with #109 and motion with #66; do not close parents or bypass required Granny questions."
+    ],
+    "label": "rift: battle",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md"
+  },
+  {
+    "key": "catalogue",
+    "title": "Rift of Reason: Draft and review 210 new cards before staged content release",
+    "blockedBy": [
+      "layout"
+    ],
+    "acceptance": [
+      "Create 210 distinct design concepts: 28 for each of six colours plus 42 generic (20%). Cover creature, spell, Axiom, Fate and alternative-victory strategies. Avoid recoloured duplicates.",
+      "Use common/uncommon/rare/mythic/legendary tiers with readable consistent frames. Make a creative strategy/interaction matrix, costs and counterplay explicit; draft numbers are not balance results.",
+      "Stage implementation after approved board refinement and production integration #109; scheduled cards also wait for #118/#119/#120 as applicable. Coordinate Axioms with #101. Document artwork needs, reuse shared effect sounds, and test/tune small packs before the next."
+    ],
+    "label": "rift: content",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/EXPANSION.md"
+  },
+  {
+    "key": "rewards",
+    "title": "Rift of Reason: Audit story card rewards and collection progression",
+    "blockedBy": [
+      "starters"
+    ],
+    "acceptance": [
+      "Inventory card/catch/item/currency rewards across all four chapters and repeat visits, including non-ideal puzzle results. Measure time to first meaningful deck swap and colour strategy.",
+      "Propose and implement a staged reward cadence feeding common starters into optional spell/Axiom/Fate strategies without requiring grinding. Preserve catch rewards and legacy progress.",
+      "Report simulated and observed acquisition rates, chapter gaps, rarity mix, unlock bottlenecks and avoid paying all rewards only at bosses. Coordinate with the expansion/economy plans."
+    ],
+    "label": "rift: content",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/EXPANSION.md"
+  },
+  {
+    "key": "catching",
+    "title": "Rift of Reason: Playtest catching and lure supply as a separate gameplay loop",
+    "blockedBy": [],
+    "acceptance": [
+      "Perform real click playtests plus repeatable simulations of catching, lure activation/duration, item use and failed catches across chapters.",
+      "Measure engagement, meaningful choice, odds communication, items spent per catch, consecutive-failure runs and whether ordinary play replenishes supplies. Account for optional catches, low puzzle scores, avatar perks and rarity.",
+      "Tune only evidence-backed problems; player can recover from depleted inventory without a dead end. Preserve save/backups and add meaningful regression coverage for any actual changes. Publish a short evidence report."
+    ],
+    "label": "rift: battle",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/EXPANSION.md"
+  },
+  {
+    "key": "packs",
+    "title": "Rift of Reason: Design earned-currency packs and duplicate-to-foil protection",
+    "blockedBy": [
+      "rules",
+      "catalogue"
+    ],
+    "acceptance": [
+      "Audit existing currency/shop/sell systems first; reuse earned in-game currency. Draft prices, income, sell exclusions and reward cadence; do not add real-money purchasing.",
+      "Collection progression per card: first two draws give normal copies, third/fourth upgrade those copies to foil cosmetics, then exclude that card from eligible packs. Preserve unique caught instances and existing usable unlocks during migration.",
+      "Renormalize rarity weights over eligible cards, disclose odds/progress, handle empty tiers and fully completed collection without charging for an unusable pack. Do not claim unapproved guarantee/pity rules.",
+      "Purchase and rewards commit once in the canonical save before presentation; reload/cancel cannot double-charge or reroll committed rewards. Build accessible reveal with shared sounds, short rarity accents, Calm/skip and restrained foil sheen.",
+      "Decide pack size/weights/prices and starter/earned/legacy ownership interactions with teacher, then implement in narrow demoable slices after #109. Test conservation of currency, copies and cosmetics plus backups."
+    ],
+    "label": "teacher in the loop",
+    "spec": "https://github.com/RktRobinhood/TOK-Materials/blob/main/AOK/Mathematics/Rift%20of%20Reason/design/drafts/card-arena-2026-10-12/EXPANSION.md"
+  }
+]
