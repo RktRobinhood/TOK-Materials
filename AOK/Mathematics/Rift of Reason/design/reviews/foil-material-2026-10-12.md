@@ -17,3 +17,5 @@ Validation:
 - Standards review passed. Spec review's visible keyboard/touch rules finding fixed with persistent hover/focus/tap readout.
 
 Evidence: etched.png, spectral.png, full-art.png, narrow-light.png, board-reading.png in foil-material-2026-10-12/. Browser screenshots are captures of the inspected files, not generated mockups. Cosmetic ownership/captured-instance policy remains #131; packs/atomic purchase remain #134/#136. Nothing in this study bypasses those gates.
+
+Published at92a52de; #141 closed. Pages run38293980455 succeeded; public study verified with eight cards and all eight referenced images loaded.
