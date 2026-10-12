@@ -173,3 +173,71 @@
     .prototype-mode:not(.variant-baseline) .b-coach { width: min(260px,65%); max-height: 140px; }
 }
 @media (prefers-reduced-motion:reduce) { .prototype-mode .bc { transition-duration: 0s !important; } }
+
+/* Teacher-selected A refinement (#122). Real rules replace the permanent inspector. */
+.prototype-mode.variant-A .battle { --side: 230px; --inspect-w: 140px; }
+.prototype-mode.variant-A .proto-inspector { display: none !important; }
+.prototype-mode.variant-A .b-side { display: flex; position: relative; inset: auto; grid-column: 2; grid-row: 1; width: auto; z-index: 6; padding: 8px; background: #0c1c24a8; border: 1px solid #84a69a40; border-radius: 12px; }
+.prototype-mode.variant-A .b-side-toggle,.prototype-mode.variant-A .b-side-close { display: none; }
+.variant-A .b-rule-tiles { grid-template-columns: 1fr; gap: 6px; }
+.variant-A .b-rtile { min-height: 44px; }
+.variant-A .b-rules > p { display: none; }
+.variant-A .b-rtile-val { font-size: 13px; white-space: normal; }
+.variant-A .b-rules-sub { line-height: 1.4; }
+.variant-A .proto-glimpse { margin-top: auto; font-size: 12px; }
+.prototype-mode.variant-A .b-inspect.show:not(.fate) { display: flex !important; flex-direction: row; align-items: flex-start; flex-wrap: wrap; gap: 6px; width: 310px; max-width: calc(100% - 12px); max-height: calc(100dvh - 120px); overflow: hidden; padding: 10px; background: #10212bf5; border: 1px solid #bca46d; border-radius: 12px; }
+.variant-A .b-inspect .bc.big[data-cid] { display: none; }
+.variant-A .b-inspect .b-notes { flex-basis: 100%; min-width: 130px; margin: 0; padding: 8px; font: 13px/1.4 system-ui,sans-serif; }
+.proto-preview-title { font: bold 15px/1.35 system-ui,sans-serif; color: #eed39b; }
+.proto-reader { display: none; }
+.variant-A .proto-reader { display: block; position: absolute; left: 8px; top: 92px; z-index: 30; max-width: 180px; }
+.variant-A .proto-reader button { font-size: 11px; padding: 4px 8px; white-space: normal; }
+.variant-A .b-inspect .proto-effect-notes { flex-basis: 100%; }
+.proto-effect-notes ul { margin: 4px 0; padding-left: 18px; }
+.proto-effect-notes li { margin: 4px 0; }
+.proto-card-dialog { width: min(440px,90vw); max-height: 85dvh; overflow-y: auto; padding: 20px; color: #edf1e3; background: #11252e; border: 2px solid #bdad79; border-radius: 16px; font: 15px/1.5 system-ui,sans-serif; }
+.proto-card-dialog::backdrop { background: #061018b8; }
+.proto-card-dialog > button { float: right; }
+.proto-card-dialog h2 { color: #f0cd8b; }
+.proto-card-dialog h3 { color: #b5dbcf; font-size: 15px; }
+.proto-card-dialog .proto-portrait { width: 150px; height: 150px; }
+.prototype-mode.variant-A .proto-decks { position: absolute; inset: 0; grid-column: auto; grid-row: auto; display: block !important; pointer-events: none; z-index: 10; }
+.variant-A .proto-deck { position: absolute; width: 68px; height: 86px; display: flex; flex-direction: column; justify-content: center; gap: 3px; pointer-events: auto; padding: 3px; border: 0; background: #0a1b23bb; font-size: 10px; }
+.variant-A .proto-deck:disabled { opacity: .85; }
+.variant-A .proto-deck-back { width: 36px; height: 50px; flex: none; }
+.variant-A .proto-deck.deck { right: 6px; bottom: 120px; }
+.variant-A .proto-deck.opponent { right: 6px; top: 86px; }
+.variant-A .proto-deck.axiom { left: 8px; top: calc(50% - 48px); }
+.variant-A .proto-decks > .btn { position: absolute; left: 90px; top: 50%; pointer-events: auto; }
+.variant-A .b-board { margin-right: 84px; margin-left: 70px; }
+.prototype-mode.variant-A .b-lane { padding-left: 85px; }
+.variant-A .proto-values { display: none; }
+.variant-A .b-axdeck { display: none; }
+.variant-A .bc.board .bc-guard { z-index: 0; left: -14%; top: -9%; bottom: auto; width: 128%; height: 133%; transform: none; aspect-ratio: auto; background: linear-gradient(135deg,#ecdcad,#8eaaac 25%,#53676e 55%,#b6c4ac) !important; clip-path: polygon(9% 3%,50% 0,91% 3%,100% 30%,92% 70%,50% 100%,8% 70%,0 30%); filter: drop-shadow(0 4px 4px #000b); opacity: .8; }
+.variant-A .bc.board .bc-guard.off { opacity: .25; filter: grayscale(1); }
+.variant-A .bc.board:has(.bc-guard) { background: #11232c; }
+.variant-A .bc.board .bc-art,.variant-A .bc.board .bc-name,.variant-A .bc.board .bc-brief { z-index: 2; }
+.variant-A .bc.board .bc-bubble { z-index: 4; }
+.prototype-mode.variant-A .guide-mode .b-coach { position: relative; grid-column: 2; grid-row: 1; align-self: start; top: auto; right: auto; width: auto; max-height: 200px; z-index: 20; }
+.variant-A .guide-mode .b-side { padding-top: 210px; }
+@media (max-width:1100px) { .prototype-mode.variant-A .battle { --side: 195px; } .variant-A .b-board { margin-left: 45px; margin-right: 75px; gap: 6px; } }
+@media (max-width:850px), (max-height:620px) {
+    .prototype-mode.variant-A { overflow: auto; }
+    .prototype-mode.variant-A #screen { position: relative; inset: auto; margin: 52px 8px 50px; min-height: 700px; }
+    .prototype-mode.variant-A .bench { height: auto; }
+    .prototype-mode.variant-A .battle { --side: 190px; grid-template-columns: minmax(0,1fr) var(--side) !important; min-height: 700px; }
+    .variant-A .b-board { margin-left: 0; margin-right: 70px; gap: 3px; }
+    .variant-A .bc.board { min-width: 0; width: min(var(--bw),calc((100cqw - 295px)/7)); }
+    .variant-A .b-rtile-val { font-size: 12px; }
+}
+@media (max-width:850px) {
+    .prototype-mode.variant-A #screen { min-height: 980px; }
+    .prototype-mode.variant-A .battle { --side: 0px; grid-template-columns: 1fr !important; grid-template-rows: 700px auto; min-height: 980px; }
+    .prototype-mode.variant-A .b-side { grid-column: 1; grid-row: 2; }
+    .variant-A .b-rule-tiles { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .variant-A .bc.board { width: min(var(--bw),calc((100cqw - 90px)/7)); }
+    .variant-A .proto-summary { max-width: calc(100% - 80px); }
+    .variant-A .guide-mode .b-side { padding-top: 8px; }
+    .prototype-mode.variant-A .guide-mode .b-coach { position: absolute; top: 12px; right: 75px; width: min(260px,70%); }
+    .prototype-mode.variant-A .b-inspect.show:not(.fate) { display: none !important; }
+}

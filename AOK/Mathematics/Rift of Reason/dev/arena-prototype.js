@@ -12,7 +12,7 @@
     const names = { A: 'Duelling table', B: 'Command board', C: 'Study desk', baseline: 'Current arena' };
     let variant = variants.includes(q.get('variant')) ? q.get('variant') : 'A';
     let fixture = q.get('fixture') || 'normal', selected = null, seed = 'board-study-107';
-    let observer, modal = null, coach = null, dock, summary, decks, previous, collecting = false;
+    let observer, modal = null, reading = null, coach = null, dock, summary, decks, reader, previous, collecting = false;
     const flights = new Set();
     const scratch = R.State.freshState();
     scratch.avatar = { type: 'owlet', variant: 'girl', nickname: 'Prototype' };
@@ -80,6 +80,7 @@
         s.players.forEach(p => { p.energy = p.capacity = 10; });
         // Prepared stacks demonstrate both signs; all values below still come from the engine.
         if (kind === 'effects') {
+            s.cards.p0c5.extraKeywords.push('shield'); // Guard + Shield must remain distinct together.
             s.cards.p0c3.buffs = [{ label: 'Pep Talk', attack: 2, health: 2, temp: false }, { label: 'Worn Out (fixture)', attack: -1, health: -1, temp: true }];
             s.cards.p1c0.buffs = [{ label: 'Rally (fixture)', attack: 1, health: 1, temp: true }];
             s.cards.p0c4.buffs = [{ label: 'Doubt (fixture)', attack: -2, health: 0, temp: true }];
@@ -106,6 +107,7 @@
         if (focus) focus.focus();
     }
     function start(nextSeed) {
+        if (reading) reading.close();
         seed = nextSeed || seed; selected = null; previous = null;
         if (observer) observer.disconnect(); closeQuestion();
         flights.forEach(a => a.cancel()); flights.clear();
@@ -113,18 +115,20 @@
         R.Router.replace('battle', { mode: 'practice', seed,
             initialState: guide ? undefined : makeFixture(fixture), guide,
             opponent: { name: 'Sergeant Syllo', art: guide ? R.data.speakers.granny.art : R.data.speakers.syllo.art, ai: 'normal' },
-            onEnd: result => { closeQuestion(); metrics.hidden = false; metrics.value = JSON.stringify({ result }, null, 2); },
+            onEnd: result => { closeQuestion(); if (reading) reading.close(); metrics.hidden = false; metrics.value = JSON.stringify({ result }, null, 2); },
         });
         const screen = host.querySelector('.battle');
         dock = el('aside.proto-inspector', { 'aria-label': 'Selected card and active effects' });
         summary = el('div.proto-summary', { 'aria-label': 'Essential axioms' });
         decks = el('div.proto-decks', { 'aria-label': 'Decks on the table' });
         screen.append(dock, summary, decks);
+        reader = el('div.proto-reader'); screen.querySelector('.b-arena').append(reader);
         screen.style.setProperty('--proto-back', 'url("' + new URL(R.Assets.url('ui/card-back'), root.document.baseURI).href + '")');
         screen.style.setProperty('--proto-axiom-back', 'url("' + new URL(R.Assets.url('ui/axiom-back'), root.document.baseURI).href + '")');
         observer = new MutationObserver(records => {
+            if (records.some(r => r.target.closest('.b-inspect') && !r.target.closest('.proto-effect-notes'))) decorateInspect();
             // Inspecting a card must not rebuild and remove a focused deck button.
-            if (records.some(r => !r.target.closest('.proto-inspector,.proto-decks,.proto-summary'))) update();
+            if (records.some(r => !r.target.closest('.proto-inspector,.proto-decks,.proto-summary,.b-inspect,.proto-reader,.proto-glimpse'))) update();
         });
         observe(); setVariant(variant);
     }
@@ -160,9 +164,54 @@
             if (c.kind === 'creature') dock.append(R.Assets.img('creature/' + c.species + '/idle', { className: 'proto-portrait', alt: d.name }));
             dock.append(el('p', { text: c.kind === 'creature' ? 'Attack ' + d.attack + ' · Health ' + Math.max(0, d.health) + '/' + d.maxHealth + ' · Cost ' + d.cost : 'Cost ' + d.cost }),
                 el('h3', { text: 'Active effects' }), el('ul', {}, effects(s, cid).map(text => el('li', { text }))),
-                el('h3', { text: 'What it does' }), el('p', { text: c.kind === 'tactic' ? d.text : d.lines.map(l => l.text).join(' ') || 'No ability.' }));
+                el('h3', { text: 'What it does' }), el('p', { text: c.kind === 'tactic' ? d.text : d.lines.map(l => l.text).join(' ') || (d.keywords.length ? 'Keywords:' : 'No ability.') }));
+            if (c.kind === 'creature') d.keywords.forEach(k => dock.append(el('p', { text: (R.Battle.KEYWORD_TEXT || {})[k] || k })));
+            if (c.kind === 'creature' && d.keywords.includes('guard') && E.rules(s).ignoreGuard) dock.append(el('p', { text: 'Guard is ignored under the current rules.' }));
         } else dock.append(el('h2', { text: 'Your next decision' }), el('p', { text: s.phase === 'draw' ? 'Choose one glowing deck. Then play, attack or use an ability.' : 'Select a card to see its actions and effects here.' }), el('p.proto-legend', { text: 'Green + READY: can attack. Orange + TARGET: a legal target. Signed changes stay on the card.' }));
         dock.append(el('details.proto-glimpse', {}, [el('summary', { text: 'Future glimpse' }), el('p', { text: 'Reserved for the optional before → move → result clip (#108). This prototype does not predict hidden draws.' })]));
+    }
+    // Keep the native hover/focus/long-press preview; add the study's sourced effect breakdown.
+    function decorateInspect() {
+        if (variant !== 'A') return;
+        const preview = host.querySelector('.b-inspect'), big = preview && preview.querySelector('.bc.big[data-cid]');
+        if (!big || preview.querySelector('.proto-effect-notes')) return;
+        const cid = big.dataset.cid;
+        if (!state().cards[cid]) return;
+        const d = E.describe(state(), cid);
+        preview.prepend(el('div.proto-preview-title', { text: d.name + (state().cards[cid].kind === 'creature' ? ' · Attack ' + d.attack + ' · Health ' + Math.max(0, d.health) + '/' + d.maxHealth : '') }));
+        preview.append(el('div.proto-effect-notes.b-notes', {}, [el('strong', { text: 'Active effects' }), el('ul', {}, effects(state(), cid).map(text => el('li', { text })))]));
+        // Native placement ran before these notes existed. Clamp the completed preview again.
+        const box = host.querySelector('.battle').getBoundingClientRect(), p = preview.getBoundingClientRect();
+        const bottom = Math.min(box.bottom, root.innerHeight) - 6;
+        preview.style.top = Math.max(6, Math.min(p.top - box.top, bottom - box.top - p.height)) + 'px';
+        const end = host.querySelector('.b-end').getBoundingClientRect();
+        const placed = preview.getBoundingClientRect();
+        if (placed.right > end.left && placed.left < end.right && placed.bottom > end.top && placed.top < end.bottom) preview.style.left = Math.max(6, end.left - box.left - placed.width - 8) + 'px';
+    }
+    function offerReading(cid, axiom) {
+        if (!reader) return;
+        reader.replaceChildren();
+        const name = axiom ? R.data.axioms[axiom].name : cid && state().cards[cid] ? E.describe(state(), cid).name : null;
+        if (name) reader.append(el('button.btn.small', { text: 'Read ' + name, onclick: () => readCard(cid, axiom) }));
+    }
+    function readCard(cid, axiom) {
+        if (!axiom && (!cid || !state().cards[cid])) return;
+        if (cid) inspect(cid);
+        const dialog = el('dialog.proto-card-dialog', { 'aria-label': 'Read card and active effects' });
+        if (reading) reading.close(); reading = dialog;
+        const close = el('button.btn', { text: 'Close card', onclick: () => dialog.close() });
+        dialog.append(close);
+        if (axiom) {
+            const ax = R.data.axioms[axiom];
+            dialog.append(el('h2', { text: ax.name }), el('p', { text: ax.text }), el('p', { text: 'Cost ' + E.axiomCost(state(), axiom) + ' · Changes the rules for both players.' }));
+        } else dialog.append(...[...dock.children].filter(n => !n.classList.contains('proto-glimpse')).map(n => n.cloneNode(true)));
+        dialog.addEventListener('close', () => {
+            if (reading === dialog) reading = null;
+            dialog.remove();
+            const card = axiom ? host.querySelector('.b-hand [data-axiom="' + axiom + '"]') : host.querySelector('.b-board [data-cid="' + cid + '"],.b-hand [data-cid="' + cid + '"]');
+            if (card) card.focus();
+        });
+        root.document.body.append(dialog); dialog.showModal(); close.focus();
     }
     function update() {
         if (!dock || !observer) return;
@@ -173,7 +222,10 @@
             previous = s; observe(); return;
         }
         const lane = screen.querySelector('.b-lane');
-        if (decks.parentNode !== lane) lane.append(decks);
+        const deckHost = variant === 'A' ? screen.querySelector('.b-arena') : lane;
+        if (decks.parentNode !== deckHost) deckHost.append(decks);
+        const side = screen.querySelector('.b-side');
+        if (variant === 'A' && !side.querySelector('.proto-glimpse')) side.append(el('details.proto-glimpse', {}, [el('summary', { text: 'Future glimpse' }), el('p', { text: 'Space reserved for optional outcome clips (#108).' })]));
         screen.classList.toggle('proto-needs-draw', s.phase === 'draw' && s.active === 0);
         const rules = E.rules(s);
         const combat = E.activeAxioms(s).find(a => a.category === 'combat');
@@ -188,7 +240,7 @@
             const amount = choice === 'axiom' ? s.axioms.deck.length : s.players[choice === 'deck' ? 0 : 1].deck.length;
             const title = choice === 'deck' ? 'Your deck' : choice === 'axiom' ? 'Shared axioms' : 'Their deck';
             const enabled = s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === choice);
-            return el('button.proto-deck' + (choice === 'axiom' ? '.axiom' : ''), { disabled: !enabled, 'aria-label': title + ': ' + amount + ' cards' + (enabled ? '. Draw one.' : ''),
+            return el('button.proto-deck.' + choice + (choice === 'axiom' ? '.axiom' : ''), { disabled: !enabled, 'aria-label': title + ': ' + amount + ' cards' + (enabled ? '. Draw one.' : ''),
                 onclick: () => { const b = screen.querySelector('.b-draw-btn[data-choice="' + choice + '"]'); if (b && !b.disabled) b.click(); } }, [el('span.proto-deck-back'), el('span', { text: title }), el('b', { text: String(amount) })]);
         }));
         if (s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === 'none')) decks.append(el('button.btn.small', { text: 'No cards left · Continue', onclick: () => screen.querySelector('.b-draw-btn[data-choice="none"]').click() }));
@@ -200,12 +252,16 @@
             if (d.attack !== d.baseAttack) changes.push(signed(d.attack - d.baseAttack) + ' ATK');
             if (d.maxHealth !== c.health) changes.push(signed(d.maxHealth - c.health) + ' HP');
             if (d.cost !== c.cost && s.players[c.controller].hand.includes(cid)) changes.push(signed(d.cost - c.cost) + ' COST');
-            const foe = s.players[1 - c.controller].board.find(t => E.attackParts(s, cid, t).parts.some(p => p.source === 'colour'));
-            if (foe) changes.push('+' + R.data.wheel.bonus + ' vs ' + R.COLOURS[E.colourOf(s, s.cards[foe])].name.replace('Sense perception', 'Perception'));
+            // Colour damage depends on the chosen target. The real fight preview explains it.
+            if (variant !== 'A') {
+                const foe = s.players[1 - c.controller].board.find(t => E.attackParts(s, cid, t).parts.some(p => p.source === 'colour'));
+                if (foe) changes.push('+' + R.data.wheel.bonus + ' vs ' + R.COLOURS[E.colourOf(s, s.cards[foe])].name.replace('Sense perception', 'Perception'));
+            }
             const badge = el('span.proto-values', { text: changes.join(' · ') });
             if (changes.length) node.append(badge);
         });
         inspect(selected);
+        decorateInspect();
         const required = screen.querySelector('.b-predictions, .b-coach-ok');
         if (variant !== 'baseline' && required && !screen.querySelector('.b-overlay.show') && !modal) {
             coach = screen.querySelector('.b-coach');
@@ -226,16 +282,20 @@
     }
     function flyDraw(cid, axiom) {
         const card = axiom ? [...host.querySelectorAll('.b-hand [data-axiom="' + axiom + '"]')].at(-1) : host.querySelector('.b-hand [data-cid="' + cid + '"]');
-        const deck = decks.querySelector(axiom ? '.proto-deck.axiom' : '.proto-deck');
+        const deck = decks.querySelector(axiom ? '.proto-deck.axiom' : '.proto-deck.deck');
         if (!card || !deck || !card.animate) return;
         const from = deck.getBoundingClientRect(), to = card.getBoundingClientRect();
         const calm = root.document.body.classList.contains('calm-motion') || root.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const a = card.animate(calm ? [{ opacity: 0.3 }, { opacity: 1 }] : [{ transform: 'translate(' + (from.left - to.left) + 'px,' + (from.top - to.top) + 'px) scale(.65)', opacity: 0.5 }, { transform: getComputedStyle(card).transform, opacity: 1 }], { duration: 300 });
         flights.add(a); a.finished.catch(() => {}).finally(() => flights.delete(a));
     }
-    host.addEventListener('pointerover', e => { const card = e.target.closest('.bc[data-cid]'); if (card) { selected = card.dataset.cid; inspect(selected); } });
-    host.addEventListener('focusin', e => { const card = e.target.closest('.bc[data-cid]'); if (card) { selected = card.dataset.cid; inspect(selected); } });
-    host.addEventListener('click', e => { const card = e.target.closest('.bc[data-cid]'); if (card) { selected = card.dataset.cid; inspect(selected); } });
+    function offerCard(e) {
+        const card = e.target.closest('.bc:not(.big)[data-cid],.bc:not(.big)[data-axiom]');
+        if (card) { selected = card.dataset.cid || null; inspect(selected); offerReading(selected, card.dataset.axiom); }
+    }
+    host.addEventListener('pointerover', offerCard);
+    host.addEventListener('focusin', offerCard);
+    host.addEventListener('click', offerCard);
     root.addEventListener('resize', () => { flights.forEach(a => a.cancel()); flights.clear(); });
 
     async function measure() {
