@@ -1,0 +1,80 @@
+{
+  "status": "design simulation, not production behaviour or classroom playtest",
+  "runs": 1000,
+  "seedPattern": "pack-model-v2:0..999",
+  "poolIds": 192,
+  "storyExcluded": 18,
+  "baseline": {
+    "common": 90,
+    "uncommon": 58,
+    "rare": 25,
+    "mythic": 13,
+    "legendary": 6
+  },
+  "initialTargets": {
+    "common": 0.65,
+    "uncommon": 0.23,
+    "rare": 0.09,
+    "mythic": 0.025,
+    "legendary": 0.005
+  },
+  "stageTransitions": "normal, normal, foil-upgrade, foil-upgrade, excluded",
+  "fullCompletionDraws": 768,
+  "fullFiveDrawPacks": 153,
+  "finalPartialSlots": 3,
+  "firstPackWithLegendary": {
+    "count": 21,
+    "rate": 0.021,
+    "wilson95": [
+      0.013775634089646441,
+      0.03189053475611568
+    ]
+  },
+  "firstLegendaryDraw": {
+    "p50": 140,
+    "p90": 400
+  },
+  "allIdsHaveTwoNormalEntitlementsByDraw": {
+    "p50": 763,
+    "p90": 766
+  },
+  "drawQuarterRarityPercentages": [
+    {
+      "common": 64.71,
+      "uncommon": 23.21,
+      "rare": 9.1,
+      "mythic": 2.46,
+      "legendary": 0.51
+    },
+    {
+      "common": 60.86,
+      "uncommon": 25.61,
+      "rare": 10.12,
+      "mythic": 2.84,
+      "legendary": 0.58
+    },
+    {
+      "common": 47.47,
+      "uncommon": 33.51,
+      "rare": 13.65,
+      "mythic": 4.46,
+      "legendary": 0.91
+    },
+    {
+      "common": 14.46,
+      "uncommon": 38.5,
+      "rare": 19.22,
+      "mythic": 17.32,
+      "legendary": 10.5
+    }
+  ],
+  "checks": [
+    "192 pack IDs; 18 story IDs excluded",
+    "two normal copies then two foil upgrades",
+    "completed IDs excluded after every draw",
+    "insufficient funds leave stages unchanged",
+    "final partial price delivers only usable slots",
+    "completed pool never charges",
+    "all 1000 complete reference runs preserve stage bounds"
+  ]
+}

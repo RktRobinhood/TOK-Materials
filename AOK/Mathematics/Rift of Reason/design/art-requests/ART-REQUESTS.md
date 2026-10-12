@@ -923,6 +923,21 @@ For the other four, swap the bold part for:
 **After the art:** paste the results into a Claude session; the cutscene work (#65) slices and wires them (`tools/build-assets.mjs`, new folder `6-cutscene/`).
 
 
+### 13.CARD-2026-10-12 — Card Arena pipeline (planned)
+
+Teacher authorizes builder-generated images for this pipeline. Status: planned; no images produced by this planning pass. See [asset index](../drafts/card-arena-2026-10-12/ASSET-PLAN.md) and [card catalogue](../drafts/card-arena-2026-10-12/CARD-CATALOGUE.md). Generate after board review in small release batches, preserving source prompts/provenance and the existing build-assets manifest flow.
+
+| Request ID | Asset / use | Status |
+|---|---|---|
+| 13.CARD.STARTER | Proof Pup, Lens Lizard, Paper Dragon, Cloud Calf, Pocket Tortoise, Comma Crab, Footnote Finch: seven transparent idle cutouts for #113 | Planned, generate first |
+| 13.CARD.EXPANSION | 72 portraits with exact asset IDs in ASSET-PLAN.md; board/hand/Collection/inspection | Planned, release-gated |
+| 13.CARD.GUARD | Large readable Guard backplate, distinct from Shield and compatible with both; code/SVG | #122 implementation |
+| 13.CARD.RARITY | Five consistent frames including Mythic, with labels/icons; shared foil cosmetic | Planned, rarity policy gate |
+| 13.CARD.PACK | One pack wrapper/opened treatment, restrained rarity reveal; reuse current sounds | Planned, transactional packs first |
+| 13.CARD.FATE | Environmental node marking and inspectable preview; code/SVG; outcome-clip space remains reserved | #122/#128 |
+
+Voice needs are tracked in [VOICE-NEEDS.md](../drafts/card-arena-2026-10-12/VOICE-NEEDS.md) and tools/README.md. Avoid bulk art/audio generation before concepts are released and reviewed.
+
 ## Outcome log
 
 Record what was approved and why, as in the Odyssey project.

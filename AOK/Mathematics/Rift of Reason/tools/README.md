@@ -11,6 +11,9 @@ Dev-only scripts. Nothing in this folder is loaded by the game or needed to play
 
 ## Voices
 
+Card Arena expansion planning: [voice needs and release gates](../design/drafts/card-arena-2026-10-12/VOICE-NEEDS.md). This is a proposal list; the status/plan commands below continue to read authoritative runtime lines. Preserve existing recorded hashes/cast choices.
+
+
 NPCs, narration and creatures are voiced with pre-recorded MP3s from Google Gemini text-to-speech. A line without a recording falls back to the browser's own speech, so the game never waits on this. The ten player avatars have voices in the cast (`avatar-<species>-<variant>`, plus a derived `…-inner` speaker for the inner voice; see `design/AVATAR-VOICES.md`), but script lines are not wired to them yet, so the avatar is still silent in the game. Audition them with `--audition --avatars <id[,id…]|all>`: one request per avatar, a spoken and an inner sample, saved as `<id>.mp3` and `<id>-inner.mp3` in `tools/voice-auditions/`.
 
 **The key** lives in `.secrets/gemini_api_key` at the repo root (one line, gitignored). The tools only read it from there; it is never printed, committed or shipped.

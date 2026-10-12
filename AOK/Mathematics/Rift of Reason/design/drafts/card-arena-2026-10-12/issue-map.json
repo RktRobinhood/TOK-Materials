@@ -159,5 +159,93 @@
       120
     ],
     "nativeDependenciesAdded": true
+  },
+  "pipeline": {
+    "number": 129,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/129",
+    "title": "Card Arena implementation map: board, starters, expansion and earned packs",
+    "id": 5814196244,
+    "blockedBy": [],
+    "nativeDependenciesAdded": true
+  },
+  "rarity": {
+    "number": 130,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/130",
+    "title": "Support Mythic consistently across card data and collection presentation",
+    "id": 5814196956,
+    "blockedBy": [
+      109,
+      123
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "quantities": {
+    "number": 131,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/131",
+    "title": "Persist two playable card copies and cosmetic foil progression without flattening captures",
+    "id": 5814197425,
+    "blockedBy": [
+      112
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "story_rewards": {
+    "number": 132,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/132",
+    "title": "Grant plot-exclusive cards and keep them permanently outside pack pools",
+    "id": 5814197946,
+    "blockedBy": [
+      112,
+      123
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "wallet": {
+    "number": 133,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/133",
+    "title": "Add earned Coins and a first small shop with reward receipts",
+    "id": 5814198383,
+    "blockedBy": [
+      114,
+      124,
+      126
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "pack_reveal": {
+    "number": 134,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/134",
+    "title": "Present packs with restrained rarity reveals, foil cues and shared sounds",
+    "id": 5814198886,
+    "blockedBy": [
+      126,
+      136,
+      122
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "surplus_sales": {
+    "number": 135,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/135",
+    "title": "Sell configured surplus consumables without draining catching supplies",
+    "id": 5814199321,
+    "blockedBy": [
+      133,
+      125
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "pack_transactions": {
+    "number": 136,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/136",
+    "title": "Commit weighted pack rewards before reveal with duplicate and complete-pool protection",
+    "id": 5814229584,
+    "blockedBy": [
+      131,
+      130,
+      133,
+      132
+    ],
+    "nativeDependenciesAdded": true
   }
 }

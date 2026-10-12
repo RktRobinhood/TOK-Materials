@@ -1,0 +1,5611 @@
+{
+  "version": 2,
+  "date": "2026-10-12",
+  "status": "creative proposals, not shipped cards",
+  "counts": {
+    "total": 210,
+    "affinity": {
+      "reason": 28,
+      "emotion": 28,
+      "perception": 28,
+      "language": 28,
+      "imagination": 28,
+      "memory": 28,
+      "generic": 42
+    },
+    "kind": {
+      "creature": 72,
+      "spell": 84,
+      "axiom": 54
+    },
+    "rarity": {
+      "common": 92,
+      "uncommon": 60,
+      "rare": 37,
+      "mythic": 14,
+      "legendary": 7
+    },
+    "acquisition": {
+      "packPool": 192,
+      "storyOnly": 18
+    },
+    "packRarity": {
+      "common": 90,
+      "uncommon": 58,
+      "rare": 25,
+      "mythic": 13,
+      "legendary": 6
+    }
+  },
+  "cards": [
+    {
+      "id": "reason-premise-pigeon",
+      "name": "Premise Pigeon",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "No ability.",
+      "tags": [
+        "board"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Trade with a larger creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-premise-pigeon/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-axiom-ant",
+      "name": "Axiom Ant",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Guard.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Remove Guard or use a spell.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-axiom-ant/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-proof-beetle",
+      "name": "Proof Beetle",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Remove the supported creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-proof-beetle/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-counterexample-crow",
+      "name": "Counterexample Crow",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 3,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: deal 1 damage to an enemy creature.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Shield protects a small target.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-counterexample-crow/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-parity-panda",
+      "name": "Parity Panda",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 4,
+      "text": "After surviving a fight with equal effective attack, heal this by 1.",
+      "tags": [
+        "combat",
+        "healing"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Attack with unequal power.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "creature/reason-parity-panda/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-induction-ibex",
+      "name": "Induction Ibex",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Once per turn, after you cast a Reason spell, this gains 1 attack until your next turn starts.",
+      "tags": [
+        "spell-payoff"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Remove it before the spell sequence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-induction-ibex/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-logic-lynx",
+      "name": "Logic Lynx",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 3,
+      "health": 4,
+      "text": "Entrance: look at the top 2 personal-deck cards; keep their order or swap them.",
+      "tags": [
+        "inspection"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Pressure its setup turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-logic-lynx/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-guardrail-goat",
+      "name": "Guardrail Goat",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 5,
+      "text": "Guard. The first spell damage this takes each round is reduced by 1.",
+      "tags": [
+        "guard",
+        "prevention"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use combat or multiple small spells.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-guardrail-goat/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-diagonal-deer",
+      "name": "Diagonal Deer",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 3,
+      "health": 3,
+      "text": "Entrance: silence an enemy creature whose current attack equals this creature's attack.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Change the target's attack first.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-diagonal-deer/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-inference-heron",
+      "name": "Inference Heron",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 3,
+      "health": 5,
+      "text": "Once per turn, after another friendly creature survives a fight at 1 health, draw 1 personal-deck card.",
+      "tags": [
+        "draw",
+        "combat"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Finish damaged creatures before they fight.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "creature/reason-inference-heron/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-town-hall",
+        "theme": "Ch2 truth/claim resolution",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "reason-boundary-bear",
+      "name": "Boundary Bear",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 4,
+      "health": 6,
+      "text": "Guard. While this is ready, your hero takes at most 2 damage from each creature attack.",
+      "tags": [
+        "guard",
+        "prevention"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Disable it, use spells or attack repeatedly.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/reason-boundary-bear/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-theorem-tortoise",
+      "name": "Theorem Tortoise",
+      "affinity": "reason",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 7,
+      "text": "At your turn's end, if you cast 2 Reason spells, schedule at +1 round: your creatures present then gain 1 maximum health and heal 1. At most one event from this creature pending.",
+      "tags": [
+        "fate-schedule",
+        "spell-payoff"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Remove the board or skip the announced event.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/reason-theorem-tortoise/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-pulse-pup",
+      "name": "Pulse Pup",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 2,
+      "health": 1,
+      "text": "No ability.",
+      "tags": [
+        "board"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Trade a small creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-pulse-pup/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-courage-cub",
+      "name": "Courage Cub",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: restore 1 heart to your hero.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Keep pressure on its board.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-courage-cub/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-spite-sprite",
+      "name": "Spite Sprite",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Once per turn, after taking damage and surviving, this gains 1 attack until your next turn starts.",
+      "tags": [
+        "self-damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Defeat it in one hit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-spite-sprite/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-cheer-chick",
+      "name": "Cheer Chick",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: another friendly creature gains 1 attack this turn.",
+      "tags": [
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Remove or block the supported attacker.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-cheer-chick/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-temper-tiger",
+      "name": "Temper Tiger",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 3,
+      "health": 2,
+      "text": "Entrance: your hero loses 1 heart.",
+      "tags": [
+        "self-damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Counterattack the fragile body.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-temper-tiger/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-bond-badger",
+      "name": "Bond Badger",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 4,
+      "text": "Once per turn, after another friendly creature is defeated, restore 1 heart to your hero.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Remove this first.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-bond-badger/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-grudge-goose",
+      "name": "Grudge Goose",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Last Word: deal 1 damage to the enemy hero.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Silence it or change Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-grudge-goose/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-resolve-ram",
+      "name": "Resolve Ram",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 5,
+      "text": "Guard. If your hero has 4 hearts or less, this has 1 more attack.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Use removal instead of small trades.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-resolve-ram/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-outrage-ox",
+      "name": "Outrage Ox",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 4,
+      "health": 3,
+      "text": "Swift. This cannot attack a hero on the turn it arrives.",
+      "tags": [
+        "swift"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Use a high-health defender.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-outrage-ox/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-heartfire-hawk",
+      "name": "Heartfire Hawk",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 3,
+      "health": 4,
+      "text": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+      "tags": [
+        "self-damage",
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Remove its supporting attackers.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-heartfire-hawk/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 confronted public claims",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "emotion-stormheart-serpent",
+      "name": "Stormheart Serpent",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 5,
+      "health": 5,
+      "text": "Entrance: choose to lose up to 2 of your own hearts; deal that much damage to a chosen enemy creature.",
+      "tags": [
+        "self-damage",
+        "choice"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Exploit low hearts or deny small kill targets.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-stormheart-serpent/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-empathy-elephant",
+      "name": "Empathy Elephant",
+      "affinity": "emotion",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 8,
+      "text": "At your turn's end, if both heroes lost hearts this turn, restore 2 hearts to both and draw 1 personal-deck card.",
+      "tags": [
+        "healing",
+        "draw"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Avoid enabling both losses or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/emotion-empathy-elephant/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-cue-cricket",
+      "name": "Cue Cricket",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: look at the top card of your personal deck.",
+      "tags": [
+        "inspection"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Pressure instead of giving planning time.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-cue-cricket/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-lens-lynx",
+      "name": "Lens Lynx",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use other keywords or restore Elusive.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-lens-lynx/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-focus-falcon",
+      "name": "Focus Falcon",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "This deals 1 extra combat damage to a creature whose Shield has already been consumed this match.",
+      "tags": [
+        "combat"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Refresh Shield or heal the exposed target.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "creature/perception-focus-falcon/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-shadow-shrimp",
+      "name": "Shadow Shrimp",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 1,
+      "text": "Elusive.",
+      "tags": [
+        "elusive"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use a spell or remove Elusive.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-shadow-shrimp/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-scout-stoat",
+      "name": "Scout Stoat",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+      "tags": [
+        "inspection"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Contest its setup turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-scout-stoat/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-prism-puffin",
+      "name": "Prism Puffin",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 4,
+      "text": "Entrance: another friendly creature becomes Perception until your next turn starts.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Choose neutral matchups or remove the buff.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-prism-puffin/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-pattern-panther",
+      "name": "Pattern Panther",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 3,
+      "health": 2,
+      "text": "Once per round, after an enemy scheduled occurrence is skipped, draw 1 personal-deck card.",
+      "tags": [
+        "fate-move",
+        "draw"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use immediate effects or protect key occurrences.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "creature/perception-pattern-panther/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-signal-seal",
+      "name": "Signal Seal",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 5,
+      "text": "Guard. Entrance: heal your hero by 1 for each environmental occurrence permanently skipped this match, maximum 3.",
+      "tags": [
+        "guard",
+        "fate-move"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Pressure before skips accumulate.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "creature/perception-signal-seal/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-observer-octopus",
+      "name": "Observer Octopus",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 3,
+      "health": 4,
+      "text": "Once per turn, after you inspect deck cards without drawing them, another friendly creature gains Shield.",
+      "tags": [
+        "inspection",
+        "shield"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Remove its support before protection arrives.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-observer-octopus/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-exposure-eagle",
+      "name": "Exposure Eagle",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 3,
+      "health": 5,
+      "text": "Entrance: remove one chosen enemy keyword: Guard, Shield or Elusive.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Stack different defences or restore a keyword.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-exposure-eagle/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 observation at the clock tower",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "perception-horizon-hare",
+      "name": "Horizon Hare",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 4,
+      "health": 5,
+      "text": "Entrance: move one own pending event one space earlier, no sooner than +1 round; announce its new time.",
+      "tags": [
+        "fate-schedule"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Skip the new node or contest the board.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/perception-horizon-hare/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-true-sight-stag",
+      "name": "True Sight Stag",
+      "affinity": "perception",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 7,
+      "text": "Once per round, replace your normal personal draw with inspecting the top 3 cards, drawing one and restoring the others in their original order.",
+      "tags": [
+        "inspection",
+        "draw"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Pressure before the expensive selector arrives.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/perception-true-sight-stag/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-question-quail",
+      "name": "Question Quail",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+      "tags": [
+        "buff"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Block the supported attacker.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-question-quail/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-comma-caterpillar",
+      "name": "Comma Caterpillar",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Guard.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove Guard or use a spell.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-comma-caterpillar/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-label-lemur",
+      "name": "Label Lemur",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use another attacker or restore its stats.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-label-lemur/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-word-weasel",
+      "name": "Word Weasel",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 1,
+      "text": "Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1.",
+      "tags": [
+        "buff"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove other friendly creatures first.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-word-weasel/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-echo-egret",
+      "name": "Echo Egret",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+      "tags": [
+        "axiom",
+        "draw"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove the engine or change rules through Fate.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-echo-egret/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-definition-dolphin",
+      "name": "Definition Dolphin",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 1,
+      "health": 4,
+      "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove Guard or attack after expiry.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-definition-dolphin/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-debate-dingo",
+      "name": "Debate Dingo",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 3,
+      "health": 2,
+      "text": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+      "tags": [
+        "combat",
+        "shield"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use equal or lower power or silence it.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "creature/language-debate-dingo/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-clause-crane",
+      "name": "Clause Crane",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 5,
+      "text": "Guard. Once per round, when an active Axiom is replaced, heal this by 1.",
+      "tags": [
+        "guard",
+        "axiom"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use direct removal instead of chip damage.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-clause-crane/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-metaphor-mantis",
+      "name": "Metaphor Mantis",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 3,
+      "health": 3,
+      "text": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+      "tags": [
+        "control",
+        "transformation"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Wait out the label or clear the debuff.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-metaphor-mantis/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-contract-coyote",
+      "name": "Contract Coyote",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 3,
+      "health": 5,
+      "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+      "tags": [
+        "cost"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove the creature before the support sequence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-contract-coyote/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-archive",
+        "theme": "Ch3 recovered archival evidence",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "language-orator-owl",
+      "name": "Orator Owl",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 4,
+      "health": 6,
+      "text": "At your turn's end, if you played an Axiom, schedule at +1 round: your creatures present then gain 1 attack until your next turn ends. At most one own Orator event pending.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Trade the board or skip the occurrence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/language-orator-owl/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-lexicon-lion",
+      "name": "Lexicon Lion",
+      "affinity": "language",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 7,
+      "text": "Entrance: choose one active Axiom category; discard that rule and restore its basic rule. Draw 1 personal-deck card.",
+      "tags": [
+        "axiom",
+        "draw"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Keep a replacement or rely on other categories.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/language-lexicon-lion/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-doodle-duck",
+      "name": "Doodle Duck",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "No ability.",
+      "tags": [
+        "board"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Trade a larger creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-doodle-duck/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-possibility-pika",
+      "name": "Possibility Pika",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "text": "Entrance: choose 1 extra attack or 1 extra maximum health and healing for this creature.",
+      "tags": [
+        "choice"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Punish the mode not chosen.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-possibility-pika/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-fable-fawn",
+      "name": "Fable Fawn",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use balanced bodies or remove the transformed threat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-fable-fawn/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-mosaic-mole",
+      "name": "Mosaic Mole",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 2,
+      "text": "Last Word: summon a colourless 1/1 paper token if you have board space.",
+      "tags": [
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Silence it before defeat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "creature/imagination-mosaic-mole/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-blueprint-bat",
+      "name": "Blueprint Bat",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "The first colourless token you summon each turn arrives with 1 extra maximum health.",
+      "tags": [
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove this before the token spell.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "creature/imagination-blueprint-bat/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-mirror-marten",
+      "name": "Mirror Marten",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove the large source before the copy turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-mirror-marten/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-chimera-chick",
+      "name": "Chimera Chick",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 1,
+      "health": 4,
+      "text": "Once per turn, after this has attack and health swapped, it gains Shield.",
+      "tags": [
+        "transformation",
+        "shield"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove Shield or deal damage twice.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-chimera-chick/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-stage-mouse",
+      "name": "Stage Mouse",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 4,
+      "text": "Elusive. Your colourless tokens have 1 extra attack while this remains in play.",
+      "tags": [
+        "token",
+        "elusive"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use a spell or strip Elusive.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "creature/imagination-stage-mouse/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-paradox-pony",
+      "name": "Paradox Pony",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 3,
+      "health": 3,
+      "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use balanced stats or restore them.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-paradox-pony/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-cloud-castle-crab",
+      "name": "Cloud Castle Crab",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 2,
+      "health": 6,
+      "text": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+      "tags": [
+        "guard",
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Defeat it in one hit or silence it.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "creature/imagination-cloud-castle-crab/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "k-sorting",
+        "theme": "Ch4 completed Sorting Room story",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "imagination-dreamweaver-whale",
+      "name": "Dreamweaver Whale",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 3,
+      "health": 7,
+      "text": "At your turn's end, if you control at least 2 colourless tokens, draw 1 personal-deck card.",
+      "tags": [
+        "token",
+        "draw"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove the tokens or their engine.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "creature/imagination-dreamweaver-whale/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-impossible-unicorn",
+      "name": "Impossible Unicorn",
+      "affinity": "imagination",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 6,
+      "text": "Entrance: choose two other friendly creatures; swap their attack values permanently, then give each 1 maximum health and heal 1.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Limit supporting creatures or silence boosted bodies.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/imagination-impossible-unicorn/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-bookmark-bunny",
+      "name": "Bookmark Bunny",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: heal a damaged friendly creature by 1.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Finish damaged targets before the heal.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-bookmark-bunny/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-recall-robin",
+      "name": "Recall Robin",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: put your most recently discarded spell on the bottom of your personal deck if still there.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Race before it is redrawn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-recall-robin/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-archive-armadillo",
+      "name": "Archive Armadillo",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 1,
+      "health": 3,
+      "text": "Guard.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Remove Guard or use spells.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-archive-armadillo/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-return-roach",
+      "name": "Return Roach",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "common",
+      "cost": 2,
+      "attack": 2,
+      "health": 1,
+      "text": "Last Word: return this to your hand once per match.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Silence it before defeat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-return-roach/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-chronicle-cat",
+      "name": "Chronicle Cat",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Once per turn, after you recover a card from discard, heal your hero by 1.",
+      "tags": [
+        "recursion",
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Remove the engine or exploit reversed Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-chronicle-cat/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-replay-raccoon",
+      "name": "Replay Raccoon",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 2,
+      "health": 3,
+      "text": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Pressure during the replay turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-replay-raccoon/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-hourglass-hedgehog",
+      "name": "Hourglass Hedgehog",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 3,
+      "attack": 1,
+      "health": 4,
+      "text": "Guard. The first time each round you move Fate backward, this gains Shield.",
+      "tags": [
+        "guard",
+        "fate-move"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Remove Shield or use repeated damage.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "creature/memory-hourglass-hedgehog/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-souvenir-seal",
+      "name": "Souvenir Seal",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "uncommon",
+      "cost": 4,
+      "attack": 2,
+      "health": 4,
+      "text": "Once per turn, after an own pending event resolves, draw 1 personal-deck card. Skipped events do not count.",
+      "tags": [
+        "fate-schedule",
+        "draw"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Skip or cancel the event.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/memory-souvenir-seal/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-sequence-swan",
+      "name": "Sequence Swan",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 4,
+      "attack": 3,
+      "health": 4,
+      "text": "Entrance: move one own pending event one space later, maximum +4 rounds; draw 1 personal-deck card if it moved.",
+      "tags": [
+        "fate-schedule",
+        "draw"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Contest the newly announced node.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/memory-sequence-swan/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-second-chance-salamander",
+      "name": "Second Chance Salamander",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "rare",
+      "cost": 5,
+      "attack": 3,
+      "health": 4,
+      "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Race the replay or remove the restored creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "creature/memory-second-chance-salamander/idle",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 completed time-related story",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "memory-keeper-koi",
+      "name": "Keeper Koi",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "mythic",
+      "cost": 6,
+      "attack": 3,
+      "health": 7,
+      "text": "Once per round, when a marked repeatable player event resolves, heal all your creatures by 1.",
+      "tags": [
+        "fate-repeat",
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Expire or skip the marked space.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "creature/memory-keeper-koi/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-timekeeper-tapir",
+      "name": "Timekeeper Tapir",
+      "affinity": "memory",
+      "kind": "creature",
+      "rarity": "legendary",
+      "cost": 7,
+      "attack": 4,
+      "health": 7,
+      "text": "Entrance, once per match: copy one spent own one-shot event to a new public occurrence at +2 rounds. No spell energy is repaid; the spent original stays consumed.",
+      "tags": [
+        "fate-schedule",
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Skip the new occurrence or avoid supplying a powerful original.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "creature/memory-timekeeper-tapir/idle",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-check-the-premise",
+      "name": "Check the Premise",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Deal 1 damage, or 2 if the target has Guard.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use a non-Guard threat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-small-lemma",
+      "name": "Small Lemma",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Give 1 maximum health and heal 1.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use removal instead of chip damage.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-work-it-out",
+      "name": "Work It Out",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Inspect the top 3 personal-deck cards; draw one and bottom the others in their original relative order.",
+      "tags": [
+        "inspection",
+        "draw"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Pressure the selection turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-exact-answer",
+      "name": "Exact Answer",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "enemy-creature",
+      "text": "Deal damage equal to its current attack, capped at 3.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use low attack and high health.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-provisional-proof",
+      "name": "Provisional Proof",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Give Shield. Draw 1 personal-deck card only if it already had Guard when cast.",
+      "tags": [
+        "shield",
+        "draw"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Remove its keywords.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-divide-the-case",
+      "name": "Divide the Case",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "two-enemy-creatures",
+      "text": "Deal 2 damage to each of two distinct chosen creatures. If only one legal target exists, deal 2 to it.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Play one large threat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-wait-for-evidence",
+      "name": "Wait for Evidence",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "At +1 round, fully heal the chosen creature if it is still on your board.",
+      "tags": [
+        "fate-schedule",
+        "healing"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Bounce, remove or skip it before resolution.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-narrow-conclusion",
+      "name": "Narrow Conclusion",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "enemy-creature",
+      "text": "Silence it; its attack becomes 2 until its controller's next turn ends.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use a different threat or restore attack.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-proof-by-cases",
+      "name": "Proof by Cases",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "choice",
+      "text": "Choose: deal 4 damage to an enemy creature, or give two friendly creatures 2 maximum health and heal each by 2.",
+      "tags": [
+        "choice"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Force the less useful choice.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-finish-the-argument",
+      "name": "Finish the Argument",
+      "affinity": "reason",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 5,
+      "target": "enemy-creature",
+      "text": "Defeat a creature with 2 health or less. If defeated, put one Reason spell from your discard on the bottom of your deck.",
+      "tags": [
+        "control",
+        "recursion"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Heal beyond the threshold.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-quick-courage",
+      "name": "Quick Courage",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Give 2 attack until this turn ends.",
+      "tags": [
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Block with Guard or prevent the hit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-honest-hurt",
+      "name": "Honest Hurt",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "none",
+      "text": "Your hero loses 1 heart. Draw 1 personal-deck card.",
+      "tags": [
+        "self-damage",
+        "draw"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Change Win or pressure remaining hearts.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-share-the-feeling",
+      "name": "Share the Feeling",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Deal 1 damage to it; if it survives, give 2 attack until your next turn starts.",
+      "tags": [
+        "self-damage",
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Remove it before it attacks.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-cool-down",
+      "name": "Cool Down",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Reduce its attack by 2 until its controller's next turn ends, minimum 0.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Wait or use another attacker.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-careful-cheer",
+      "name": "Careful Cheer",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Restore 2 hearts to your hero, or 3 if you control 2 or fewer creatures.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Develop a larger board.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-cost-of-courage",
+      "name": "Cost of Courage",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Your hero loses 2 hearts; give the target 2 maximum health and heal it by 2.",
+      "tags": [
+        "self-damage",
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Silence or remove the supported target.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-tomorrow-s-rally",
+      "name": "Tomorrow's Rally",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "none",
+      "text": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+      "tags": [
+        "fate-schedule",
+        "buff"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Trade the board or skip the node.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-shared-pain",
+      "name": "Shared Pain",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "none",
+      "text": "Deal 2 damage to both heroes as one simultaneous effect.",
+      "tags": [
+        "self-damage",
+        "damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Change Win, heal or race the threshold.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-outburst",
+      "name": "Outburst",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "enemy-creature",
+      "text": "Deal 5 damage to it. Your hero loses 2 hearts.",
+      "tags": [
+        "self-damage",
+        "damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Exploit the caster's low hearts.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-second-heartbeat",
+      "name": "Second Heartbeat",
+      "affinity": "emotion",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "none",
+      "text": "Restore your hero to 5 hearts if below 5; otherwise draw 2 personal-deck cards.",
+      "tags": [
+        "healing",
+        "draw"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Maintain pressure or exploit reversed Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-notice-the-crack",
+      "name": "Notice the Crack",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Deal 1 damage, or 2 if the creature is already damaged.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Heal between exchanges.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-read-the-room",
+      "name": "Read the Room",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "none",
+      "text": "See the count and colours, not identities, of enemy hand creatures. Draw 1 personal-deck card.",
+      "tags": [
+        "inspection",
+        "draw"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Change the hand before playing.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-expose-the-shield",
+      "name": "Expose the Shield",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Remove Shield. If none was removed, reduce its attack by 1 this turn, minimum 0.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use other defences.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-practical-observation",
+      "name": "Practical Observation",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Inspect the top 2 unreserved shared Axioms without changing them. Draw 1 personal-deck card.",
+      "tags": [
+        "inspection",
+        "draw"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Draw or reorder unreserved rules before the next choice.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-focused-hit",
+      "name": "Focused Hit",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "enemy-creature",
+      "text": "Deal 2 damage, or 3 if it has no keywords.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Keep a keyword or use Shield.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-change-the-angle",
+      "name": "Change the Angle",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Choose its colour until your next turn starts; restore its base colour afterward.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use neutral targets or clear the effect.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-mark-the-moment",
+      "name": "Mark the Moment",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "enemy-creature",
+      "text": "At +1 round, deal 3 damage to the chosen creature if still in play. Its controller sees the mark.",
+      "tags": [
+        "fate-schedule",
+        "damage"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Bounce, heal, protect or skip.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-follow-the-clue",
+      "name": "Follow the Clue",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "none",
+      "text": "Inspect the top 4 personal-deck cards; draw one creature and one spell if present, then bottom the others in original order.",
+      "tags": [
+        "inspection",
+        "draw"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Pressure the expensive selection turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-strip-the-illusion",
+      "name": "Strip the Illusion",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "enemy-creature",
+      "text": "Remove its keywords and temporary buffs. Printed stats, permanent changes and existing damage remain.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use permanent stats or reapply a keyword.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-public-forecast",
+      "name": "Public Forecast",
+      "affinity": "perception",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 3,
+      "target": "own-pending-event",
+      "text": "Move one own pending event one space earlier or later; earliest +1 round. Announce the new time.",
+      "tags": [
+        "fate-schedule"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Adapt to or skip the new node.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-a-better-label",
+      "name": "A Better Label",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Reduce its attack by 1 until its controller's next turn ends, minimum 0. Draw 1 personal-deck card.",
+      "tags": [
+        "control",
+        "draw"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use another attacker.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-plain-words",
+      "name": "Plain Words",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Remove one temporary attack debuff; if none exists, heal the target by 1.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use permanent damage or silence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-hold-the-floor",
+      "name": "Hold the Floor",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Give Guard and 1 maximum health; heal it by 1.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove Guard or target with spells.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-ask-again",
+      "name": "Ask Again",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "enemy-creature",
+      "text": "Remove Elusive and reduce its attack by 1 this turn, minimum 0.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Reapply protection or wait out the penalty.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-change-the-subject",
+      "name": "Change the Subject",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "active-attacks-axiom",
+      "text": "Discard the active attack-limit rule and restore that category to basics. Draw 1 personal-deck card.",
+      "tags": [
+        "axiom",
+        "draw"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Hold another attack-limit rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-careful-wording",
+      "name": "Careful Wording",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "friendly-creature",
+      "text": "Give 1 attack and 2 maximum health; heal it by 2.",
+      "tags": [
+        "buff"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Silence or remove the supported creature.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-tomorrow-s-address",
+      "name": "Tomorrow's Address",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "none",
+      "text": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+      "tags": [
+        "fate-schedule"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Trade the board or skip the occurrence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-read-the-fine-print",
+      "name": "Read the Fine Print",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "enemy-creature",
+      "text": "Silence it. Your hero loses 1 heart.",
+      "tags": [
+        "control",
+        "self-damage"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Exploit low hearts or reverse Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-borrowed-voice",
+      "name": "Borrowed Voice",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "enemy-creature",
+      "text": "Take control of a creature with 1 attack or less until your next turn starts. It arrives asleep; return it if still in play.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Raise its attack or fill the borrower's board.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-rewrite-one-clause",
+      "name": "Rewrite One Clause",
+      "affinity": "language",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "active-axiom-category",
+      "text": "Remove that category's active rule. You may immediately play one matching-category Axiom from hand, paying its normal cost and activation budget.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Keep another answer or exhaust its resources.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-sketch-a-friend",
+      "name": "Sketch a Friend",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "none",
+      "text": "Summon one colourless 1/1 paper token if you have board space.",
+      "tags": [
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use small area damage.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-try-another-shape",
+      "name": "Try Another Shape",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Swap its attack and health using normal stat-swap rules.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use balanced defenders or answer after the swap.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-bright-possibility",
+      "name": "Bright Possibility",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Choose 1 attack this turn or 1 maximum health and healing.",
+      "tags": [
+        "choice"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Force defensive spending.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-paper-shield",
+      "name": "Paper Shield",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Give Shield. If it is a colourless token, also give 1 attack.",
+      "tags": [
+        "token",
+        "shield"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove Shield or hit twice.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-unexpected-door",
+      "name": "Unexpected Door",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Return it to your hand; its next play costs 1 less, minimum 0. Consume the discount on play.",
+      "tags": [
+        "recursion",
+        "cost"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Pressure while its board is smaller.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-new-perspective",
+      "name": "New Perspective",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "enemy-creature",
+      "text": "It becomes Imagination until its controller's next turn ends. Draw 1 personal-deck card.",
+      "tags": [
+        "transformation",
+        "draw"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Avoid affected matchups or restore colour.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-tomorrow-s-sketch",
+      "name": "Tomorrow's Sketch",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "none",
+      "text": "At +1 round, summon two colourless 1/1 paper tokens, limited by board space.",
+      "tags": [
+        "fate-schedule",
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Wipe after resolution or skip the node.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-borrow-the-shape",
+      "name": "Borrow the Shape",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "friendly-and-enemy-creature",
+      "text": "The friendly target copies the enemy target's current attack until your next turn starts, maximum 5.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Reduce the source's attack before casting.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-dream-in-layers",
+      "name": "Dream in Layers",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "none",
+      "text": "Summon two colourless 1/1 paper tokens, then give all your colourless tokens 1 maximum health and heal 1.",
+      "tags": [
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use area damage or remove token support.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-impossible-position",
+      "name": "Impossible Position",
+      "affinity": "imagination",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 5,
+      "target": "two-distinct-creatures",
+      "text": "Swap their current attack values until your next turn starts. May choose either side; controllers do not change.",
+      "tags": [
+        "transformation"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use balanced stats or clear the benefit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-keep-the-note",
+      "name": "Keep the Note",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "own-discard-spell",
+      "text": "Put it on the bottom of your personal deck. Restore 1 heart to your hero.",
+      "tags": [
+        "recursion",
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Race before it is redrawn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-familiar-path",
+      "name": "Familiar Path",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "own-discard-creature",
+      "text": "Return a creature costing 1 or less to hand.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Use tempo while it is absent.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-remember-the-guard",
+      "name": "Remember the Guard",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Give Guard until your next turn starts. Heal it by 2.",
+      "tags": [
+        "guard",
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Remove Guard or focus another target.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-a-little-later",
+      "name": "A Little Later",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "own-pending-event",
+      "text": "Move it one space later, maximum +4 rounds. Announce the new time.",
+      "tags": [
+        "fate-schedule"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Pressure before it resolves.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-clear-reminder",
+      "name": "Clear Reminder",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Draw 1 personal-deck card. If you recovered a discard card earlier this turn, restore 2 hearts.",
+      "tags": [
+        "draw",
+        "healing"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Pressure recovery or reverse Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-return-to-the-plan",
+      "name": "Return to the Plan",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "own-discard-spell",
+      "text": "Return a spell other than this card to hand; its cost stays unchanged.",
+      "tags": [
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Pressure the recovery turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-marked-revisit",
+      "name": "Marked Revisit",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "none",
+      "text": "Rewind Fate one space. Only marked repeatable player effects may fire again; permanently skipped environmental occurrences stay skipped.",
+      "tags": [
+        "fate-repeat",
+        "fate-move"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Expire the space or exploit its public path.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-tomorrow-s-return",
+      "name": "Tomorrow's Return",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "own-discard-creature",
+      "text": "At +1 round, return that chosen creature to hand if still in your discard.",
+      "tags": [
+        "fate-schedule",
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Move the card, apply pressure or skip.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-stored-resolve",
+      "name": "Stored Resolve",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "none",
+      "text": "At +2 rounds, your creatures present then gain 1 attack and 1 maximum health, and heal 1. One-shot.",
+      "tags": [
+        "fate-schedule",
+        "buff"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Trade the board or skip the occurrence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-one-more-chance",
+      "name": "One More Chance",
+      "affinity": "memory",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 5,
+      "target": "own-discard-creature",
+      "text": "Return it to hand and reduce its next play cost by 2, minimum 0. Each creature may receive this discount once per match.",
+      "tags": [
+        "recursion",
+        "cost"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Race before replay or remove its new body.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-stable-premises",
+      "name": "Stable Premises",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "healing",
+      "text": "Each player's Guard creatures heal 1 at the start of their controller's turn.",
+      "tags": [
+        "axiom",
+        "healing"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Replace the rule or remove Guard.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-one-clear-case",
+      "name": "One Clear Case",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "draw",
+      "text": "A personal draw takes 1 card and lets its player inspect the next without changing it.",
+      "tags": [
+        "axiom",
+        "inspection"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Replace the draw rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-measured-dispute",
+      "name": "Measured Dispute",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "combat",
+      "text": "Effective attack above 4 counts as 4 in creature fights, for damage and combat comparison.",
+      "tags": [
+        "axiom",
+        "combat"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Use several medium creatures.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-burden-of-proof",
+      "name": "Burden of Proof",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "cost",
+      "text": "Each player's first spell each turn costs 1 less, minimum 0; later spells cost 1 more.",
+      "tags": [
+        "axiom",
+        "cost"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Force an awkward spell sequence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "reason-complete-argument",
+      "name": "Complete Argument",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Reason creatures and 6 cards in hand.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Reduce the board or hand, or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "gate",
+        "theme": "Ch1 completed Gate challenge",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "reason-long-view",
+      "name": "Long View",
+      "affinity": "reason",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "fate-delay",
+      "text": "New effects from either player are scheduled 1 round later, maximum +4 rounds. Announced events do not move.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Careful exchanges, defensive control and public proof goals",
+      "counterplay": "Replace before scheduling.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-shared-nerves",
+      "name": "Shared Nerves",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "damage",
+      "text": "Each creature attack on a hero deals at most 2 damage.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Attack repeatedly or use spells.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-brave-arrivals",
+      "name": "Brave Arrivals",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "arrival",
+      "text": "New creatures may attack creatures immediately; only Swift permits hero attacks on arrival.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Protect important creatures.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-small-comforts",
+      "name": "Small Comforts",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "healing",
+      "text": "At each turn's start, if that player has fewer hearts, restore 1 to their hero.",
+      "tags": [
+        "axiom",
+        "healing"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Replace the rule or race its healing.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-price-of-passion",
+      "name": "Price of Passion",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "cost",
+      "text": "Once per turn, each player may pay 1 heart to reduce a spell's cost by 1. Heart loss obeys Win.",
+      "tags": [
+        "axiom",
+        "self-damage"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Change Win or force risky spending.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "emotion-shared-vulnerability",
+      "name": "Shared Vulnerability",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn at exactly 1 heart with 3 Emotion creatures.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Change hearts, remove a creature or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "troll-bridge",
+        "theme": "Ch1 completed confrontation, either supported outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "emotion-rising-tension",
+      "name": "Rising Tension",
+      "affinity": "emotion",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "fate-impact",
+      "text": "Each scheduled effect damaging a hero deals 1 more damage, for both players and once per effect.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Risk, pressure, self-damage and changed victory conditions",
+      "counterplay": "Skip the occurrence or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-open-evidence",
+      "name": "Open Evidence",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "inspection",
+      "text": "Reveal the name of every Axiom drawn from the shared deck; personal draws stay private.",
+      "tags": [
+        "axiom",
+        "inspection"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Use personal draws or play the revealed rule promptly.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-visible-weakness",
+      "name": "Visible Weakness",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "combat",
+      "text": "In creature fights, the strong-matchup bonus remains +1 but weakness reduces effective attack by 2 instead of 1, keeping the agreed minimum.",
+      "tags": [
+        "axiom",
+        "combat"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Choose neutral matchups or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-careful-aim",
+      "name": "Careful Aim",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "damage",
+      "text": "Each player's first damage spell each turn deals 1 more damage to a damaged creature.",
+      "tags": [
+        "axiom",
+        "damage"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Heal or protect damaged targets.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-shared-horizon",
+      "name": "Shared Horizon",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "inspection",
+      "text": "Both players may inspect the top card of each personal deck; the cards stay there.",
+      "tags": [
+        "axiom",
+        "inspection"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Draw or reorder the exposed card.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "perception-observed-pattern",
+      "name": "Observed Pattern",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Perception creatures and no damaged friendly creatures.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Damage or remove a creature, or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 completed evidence-based verdict",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "perception-clear-timetable",
+      "name": "Clear Timetable",
+      "affinity": "perception",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "fate-capacity",
+      "text": "Each player may hold one additional pending player-created event. Environmental events use no player slots.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Information, exposed targets and visible future plans",
+      "counterplay": "Skip or cancel the highest-impact event.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-names-matter",
+      "name": "Names Matter",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "colour",
+      "text": "A colourless creature gains 1 maximum health while this rule is active; remove that maximum-health increase on replacement or reset.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use damage or restore its original colour.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-one-speaker",
+      "name": "One Speaker",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "attacks",
+      "text": "Each player may attack with at most 2 distinct creatures per turn; repeated attacks still obey creature limits.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use two strong attackers or replace the limit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-clear-definitions",
+      "name": "Clear Definitions",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "abilities",
+      "text": "Each player's first silence effect each turn also heals its target by 1 after silence.",
+      "tags": [
+        "axiom",
+        "control"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Use damage on nearly defeated targets.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-open-debate",
+      "name": "Open Debate",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "draw",
+      "text": "Playing an Axiom from hand draws its player 1 personal-deck card, once per turn. Fate flips do not count.",
+      "tags": [
+        "axiom",
+        "draw"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Pressure the rule-playing turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "language-consensus",
+      "name": "Consensus",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Language creatures while 3 different Axiom categories are active.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Remove a creature, reset rules or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 completed verdict, either supported outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "language-binding-words",
+      "name": "Binding Words",
+      "affinity": "language",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "fate-impact",
+      "text": "Scheduled buffs for either player last until the recipient controller's next turn ends instead of this turn's end; one-shot resolution time does not change.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Labels, support, rule changes and temporary control",
+      "counterplay": "Silence, trade or skip the buff.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-room-for-ideas",
+      "name": "Room for Ideas",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "arrival",
+      "text": "Each player's first colourless token each turn may attack creatures immediately, not heroes.",
+      "tags": [
+        "axiom",
+        "token"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use durable defenders.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-different-shapes",
+      "name": "Different Shapes",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "combat",
+      "text": "In a fight, matching printed attack values reduce each fighter's damage by 1, minimum 0, after matchup calculation.",
+      "tags": [
+        "axiom",
+        "combat"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Use varied printed attacks.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-light-materials",
+      "name": "Light Materials",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "cost",
+      "text": "Each player's first token-summoning spell each turn costs 1 less, minimum 0.",
+      "tags": [
+        "axiom",
+        "token",
+        "cost"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Contest the tokens before the next spell.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-mixed-colours",
+      "name": "Mixed Colours",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "power",
+      "text": "A creature gets 1 extra attack if its controller also has creatures of at least 2 other colours.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Remove a supporting colour.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "imagination-living-possibilities",
+      "name": "Living Possibilities",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 2 Imagination creatures and 4 colourless tokens.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Clear tokens or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed homecoming, either supported story outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "imagination-changed-horizons",
+      "name": "Changed Horizons",
+      "affinity": "imagination",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "fate-delay",
+      "text": "Each player may schedule a new effect one space later than its card says, up to +4 rounds. Its chosen time is public and fixed.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Stat transformations, diverse boards and token plans",
+      "counterplay": "Plan around the published node.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-small-reminders",
+      "name": "Small Reminders",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "healing",
+      "text": "Recovering a discard card heals that player's hero by 1, at most once per turn.",
+      "tags": [
+        "axiom",
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Pressure directly or reverse Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-keep-the-order",
+      "name": "Keep the Order",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "draw",
+      "text": "Personal draws are normal; draw-selection effects inspect one fewer card, minimum one.",
+      "tags": [
+        "axiom",
+        "inspection"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Use raw draw or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-patient-recovery",
+      "name": "Patient Recovery",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "defeat",
+      "text": "The first creature defeated on each player's own turn goes to its owner's deck bottom instead of discard. Other defeats are unchanged.",
+      "tags": [
+        "axiom",
+        "recursion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Defeat it on the other player's turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-written-history",
+      "name": "Written History",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "fate-capacity",
+      "text": "Each player may retain one more marked repeatable space under its original elapsed-round expiry. No one-shot or environment becomes repeatable.",
+      "tags": [
+        "axiom",
+        "fate-repeat"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Wait out expiry or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "memory-recovered-story",
+      "name": "Recovered Story",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 2,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Memory creatures after recovering 2 distinct discard cards that turn.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Remove the board or deny recovery targets.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed homecoming and the recovered account",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "memory-no-forgotten-debts",
+      "name": "No Forgotten Debts",
+      "affinity": "memory",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 3,
+      "category": "exhaustion",
+      "text": "Future exhaustion steps increase by 2 rather than 1 for both players. Damage already taken is unchanged.",
+      "tags": [
+        "axiom",
+        "exhaustion"
+      ],
+      "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+      "counterplay": "Restore a draw source, change Win or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        117
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-clean-cut",
+      "name": "Clean Cut",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Deal 1 damage. If the target is a colourless token, deal 2 instead.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use non-token bodies.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-small-patch",
+      "name": "Small Patch",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Heal it by 2 without changing maximum health.",
+      "tags": [
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Defeat it in one hit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-quick-study",
+      "name": "Quick Study",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Draw 1 personal-deck card; inspect the next without changing it.",
+      "tags": [
+        "draw",
+        "inspection"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Pressure the slow draw turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-simple-cover",
+      "name": "Simple Cover",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "friendly-creature",
+      "text": "Give Guard until your next turn starts.",
+      "tags": [
+        "guard"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Remove Guard or wait out the effect.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-pocket-plan",
+      "name": "Pocket Plan",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "none",
+      "text": "Inspect the top unreserved shared Axiom. You may put it on the bottom; reserved events are untouched.",
+      "tags": [
+        "inspection",
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Draw or reorder the rule before the next shared draw.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-spare-spark",
+      "name": "Spare Spark",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 0,
+      "target": "none",
+      "text": "Gain 1 energy this turn, capped at 10. This still uses the normal activation budget.",
+      "tags": [
+        "energy"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Force inefficient sequencing.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-settle-down",
+      "name": "Settle Down",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "enemy-creature",
+      "text": "Reduce its attack by 1 until its controller's next turn ends, minimum 0.",
+      "tags": [
+        "control"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use another attacker.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-fair-trade",
+      "name": "Fair Trade",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "Each player draws 1 personal-deck card, caster first; normal hand limits apply.",
+      "tags": [
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Benefit from the shared draw.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-follow-through",
+      "name": "Follow Through",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "enemy-creature",
+      "text": "Deal 2 damage if already damaged, otherwise 1.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Heal before it is cast.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-warm-blanket",
+      "name": "Warm Blanket",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Heal it by 2 and give Shield until your next turn starts.",
+      "tags": [
+        "healing",
+        "shield"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Remove Shield or strike twice.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-pause-one-beat",
+      "name": "Pause One Beat",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 2,
+      "target": "none",
+      "text": "At +1 round, restore 2 hearts to your hero. One-shot.",
+      "tags": [
+        "fate-schedule",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Skip the occurrence or exploit reversed Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-take-stock",
+      "name": "Take Stock",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "common",
+      "cost": 1,
+      "target": "none",
+      "text": "Draw 1 personal-deck card. If that deck is empty, restore 1 heart instead; no extra exhaustion step.",
+      "tags": [
+        "draw",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Maintain pressure through the small benefit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-balanced-exchange",
+      "name": "Balanced Exchange",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "own-hand-card",
+      "text": "Put one chosen personal card from hand on deck bottom, then draw 2 personal-deck cards.",
+      "tags": [
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Pressure its card-quality turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-forked-reply",
+      "name": "Forked Reply",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "two-enemy-creatures",
+      "text": "Deal 1 damage to two distinct creatures, then restore 1 heart to your hero. One target is legal if no second exists.",
+      "tags": [
+        "damage",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use large bodies or Shield.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-repair-the-shield",
+      "name": "Repair the Shield",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "friendly-creature",
+      "text": "Remove its consumed-Shield marker, give a fresh Shield and heal it by 1.",
+      "tags": [
+        "shield",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Remove keywords or use repeated damage.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-quiet-reset",
+      "name": "Quiet Reset",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "active-axiom-category",
+      "text": "Restore one chosen active category to basics without drawing or moving Fate.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Hold a replacement rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-town-hall",
+        "theme": "Ch2 resolved the Town Hall claims",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "generic-scheduled-shelter",
+      "name": "Scheduled Shelter",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 3,
+      "target": "none",
+      "text": "At +1 round, your creatures present then gain Shield. One-shot.",
+      "tags": [
+        "fate-schedule",
+        "shield"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Trade them before resolution or skip.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-recorded-choice",
+      "name": "Recorded Choice",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "uncommon",
+      "cost": 2,
+      "target": "none",
+      "text": "If you have a pending own event, draw 1 personal-deck card; otherwise inspect the top 2 personal cards and bottom one.",
+      "tags": [
+        "inspection",
+        "draw",
+        "fate-schedule"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Pressure setup before the pending plan exists.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-board-sweep",
+      "name": "Board Sweep",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 5,
+      "target": "none",
+      "text": "Deal 3 damage to every creature as one effect. Shields and normal prevention apply.",
+      "tags": [
+        "damage"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use high health or Shield.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-one-last-draw",
+      "name": "One Last Draw",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 3,
+      "target": "none",
+      "text": "Your hero loses 2 hearts; draw 2 personal-deck cards.",
+      "tags": [
+        "self-damage",
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Change Win or exploit low hearts.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-cancel-the-appointment",
+      "name": "Cancel the Appointment",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 3,
+      "target": "player-created-pending-event",
+      "text": "Cancel one chosen player-created one-shot event. It is spent and cannot fire; environmental occurrences are not legal targets.",
+      "tags": [
+        "fate-schedule"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Keep a second plan or protect the important occurrence.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-steal-a-beat",
+      "name": "Steal a Beat",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "rare",
+      "cost": 4,
+      "target": "enemy-pending-event",
+      "text": "Move one enemy player-created event one space later, maximum +4 rounds. Draw 1 personal-deck card if it moved; announce its new time.",
+      "tags": [
+        "fate-schedule",
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Adapt to the known delay or use immediate effects.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-common-ground",
+      "name": "Common Ground",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "mythic",
+      "cost": 5,
+      "target": "none",
+      "text": "Remove temporary buffs and debuffs from both boards. Each surviving creature gains 1 maximum health and heals 1; both players draw 1 personal card.",
+      "tags": [
+        "control",
+        "healing",
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use permanent stats or play after the reset.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-the-last-page",
+      "name": "The Last Page",
+      "affinity": "generic",
+      "kind": "spell",
+      "rarity": "legendary",
+      "cost": 6,
+      "target": "none",
+      "text": "Reset all active Axiom categories to basics, return one own defeated creature costing 4 or less to hand, and draw 2 personal-deck cards. Announced events keep their identities and timing.",
+      "tags": [
+        "axiom",
+        "recursion",
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Keep replacement rules and pressure the expensive recovery turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed final story, not only a repeatable battle win",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "generic-careful-hands",
+      "name": "Careful Hands",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "hand",
+      "text": "At the end of each player's turn, keep at most 5 cards; discard the oldest excess cards.",
+      "tags": [
+        "axiom",
+        "hand"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Play cards before the limit checks.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-small-armies",
+      "name": "Small Armies",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "board-capacity",
+      "text": "A player controlling 5 or more creatures cannot play or summon another. Existing creatures remain.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Remove a body or replace the cap.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-fair-rest",
+      "name": "Fair Rest",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "healing",
+      "text": "At the start of each player's turn, heal their most damaged creature by 1; break ties by oldest arrival.",
+      "tags": [
+        "axiom",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Defeat threats in one hit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "gate",
+        "theme": "Ch1 completed Gate and recovery beat",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "generic-unhurried-arrival",
+      "name": "Unhurried Arrival",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "arrival",
+      "text": "New non-Swift creatures cannot activate until their controller's next turn, even if another effect readies their attacks.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use Swift or wait a turn.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-one-tool-at-a-time",
+      "name": "One Tool at a Time",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "abilities",
+      "text": "Each player may activate at most one creature ability per turn; hero powers and card plays still follow their normal budgets.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Choose the key ability or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-gentle-growth",
+      "name": "Gentle Growth",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "growth",
+      "text": "A creature surviving a fight at 1 health gains 1 maximum health and heals 1; at most once per creature per round.",
+      "tags": [
+        "axiom",
+        "combat"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Finish wounded creatures before they fight again.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-public-rules",
+      "name": "Public Rules",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "inspection",
+      "text": "After an Axiom enters either hand, its name stays public until played or discarded. Personal cards stay private.",
+      "tags": [
+        "axiom",
+        "inspection"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use personal cards or promptly play the revealed rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-gate",
+        "theme": "Completed Fair Gate introduction, not merely opening its screen",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "generic-modest-claims",
+      "name": "Modest Claims",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "common",
+      "cost": 1,
+      "category": "damage",
+      "text": "A single spell effect deals at most 3 damage to each creature; hero damage is unchanged.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use several spells or combat.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-shared-supplies",
+      "name": "Shared Supplies",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "draw",
+      "text": "Once per turn, playing a creature costing 5 or more draws its controller 1 personal card.",
+      "tags": [
+        "axiom",
+        "draw"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Pressure before expensive plays.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-give-and-take",
+      "name": "Give and Take",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "healing",
+      "text": "An original hero-healing effect also heals the other hero by that amount once; the copy creates no further copies.",
+      "tags": [
+        "axiom",
+        "healing"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Exploit shared healing under the current Win rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-conservative-plans",
+      "name": "Conservative Plans",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "fate-delay",
+      "text": "New player-created scheduled effects have minimum +2 rounds; already announced times and environments do not change.",
+      "tags": [
+        "axiom",
+        "fate-schedule"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Replace before scheduling or use immediate spells.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 understood the timeline",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    },
+    {
+      "id": "generic-no-shortcuts",
+      "name": "No Shortcuts",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "cost",
+      "text": "Neither player's spells may cost less than 1 energy, after discounts; printed zero-cost spells also cost 1.",
+      "tags": [
+        "axiom",
+        "cost"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use efficient creatures or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-open-slots",
+      "name": "Open Slots",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "board-capacity",
+      "text": "Playing a new creature requires a free slot beyond it: a player at one below the normal board limit cannot add another. Existing boards remain.",
+      "tags": [
+        "axiom"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Trade before playing or replace the limit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-prepared-response",
+      "name": "Prepared Response",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "uncommon",
+      "cost": 2,
+      "category": "abilities",
+      "text": "Each player's first creature activation each turn costs 1 less, minimum 0; later creature activations cost 1 more.",
+      "tags": [
+        "axiom",
+        "cost"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Choose activation order carefully.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-fragile-shields",
+      "name": "Fragile Shields",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 3,
+      "category": "keywords",
+      "text": "A newly granted Shield expires at its controller's next turn start unless consumed first. Printed arrival Shield follows the same expiry.",
+      "tags": [
+        "axiom",
+        "shield"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Wait out protection or replace the rule.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-balanced-accounts",
+      "name": "Balanced Accounts",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 3,
+      "category": "exhaustion",
+      "text": "Exhaustion counters increase normally, but each normal draw's exhaustion damage is capped at 3 for both players.",
+      "tags": [
+        "axiom",
+        "exhaustion"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Use attacks or replace the cap; self-zero strategies may still benefit.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        117
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-one-fair-fight",
+      "name": "One Fair Fight",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "rare",
+      "cost": 3,
+      "category": "combat",
+      "text": "The first creature fight each turn ignores auras on both fighters for that fight only; permanent buffs remain.",
+      "tags": [
+        "axiom",
+        "combat"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Make the first fight with a creature not relying on an aura.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        127
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      }
+    },
+    {
+      "id": "generic-the-common-good",
+      "name": "The Common Good",
+      "affinity": "generic",
+      "kind": "axiom",
+      "rarity": "mythic",
+      "cost": 4,
+      "category": "victory",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with all 6 creature colours on your board and at least 4 hero hearts.",
+      "tags": [
+        "axiom",
+        "alt-win"
+      ],
+      "strategy": "Simple support and shared rules accessible to any deck",
+      "counterplay": "Remove one colour, reduce hearts or replace Win.",
+      "status": "draft; not implemented or balance-tested",
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "art": "shared frame and mechanic icon; unique illustration optional",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed shared homecoming",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      }
+    }
+  ]
+}

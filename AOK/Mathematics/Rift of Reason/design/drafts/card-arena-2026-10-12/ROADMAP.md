@@ -20,8 +20,23 @@ One complete slice at a time; honour blockers and teacher decisions. [Starter/ca
 | [#125](https://github.com/RktRobinhood/TOK-Materials/issues/125) | Playtest catching and lure supply as a separate gameplay loop | None |
 | [#126](https://github.com/RktRobinhood/TOK-Materials/issues/126) | Design earned-currency packs and duplicate-to-foil protection | #112, #123 |
 
-Native dependencies match text blockers. Content-release tickets also honour #109 and relevant Fate gates stated in their bodies. Start with #112/#113; board refinement #122 is independent. The full 210-card catalogue and detailed economy draft are unfinished and tracked in PLANNING-CHECKPOINT.md for continuation. No runtime content or mechanics were changed.
+Native dependencies match text blockers. Content-release tickets also honour #109 and relevant Fate gates stated in their bodies. Planning is complete as a draft handoff: 210 concepts, economy simulation, story split and art/voice needs. Implementation is now authorized. Start #122 (visual priority), then #109 and the documented frontier; #112/#113 remain independent. No runtime content or mechanics were changed by the planning pass.
 
 - [#127](https://github.com/RktRobinhood/TOK-Materials/issues/127): colour strength/weakness aiming previews and wheel teaching; blocked by #109 and the stated rule decisions.
 
 - [#128](https://github.com/RktRobinhood/TOK-Materials/issues/128): deterministic environmental Fate schedules by opponent/scene/difficulty; blocked by #118/#119/#120.
+
+## Implementation pipeline slices
+
+| Issue | Delivers | Blocked by |
+|---|---|---|
+| [#129](https://github.com/RktRobinhood/TOK-Materials/issues/129) | Card Arena implementation map: board, starters, expansion and earned packs | Tracking |
+| [#130](https://github.com/RktRobinhood/TOK-Materials/issues/130) | Support Mythic consistently across card data and collection presentation | #109, #123 |
+| [#131](https://github.com/RktRobinhood/TOK-Materials/issues/131) | Persist two playable card copies and cosmetic foil progression without flattening captures | #112 |
+| [#132](https://github.com/RktRobinhood/TOK-Materials/issues/132) | Grant plot-exclusive cards and keep them permanently outside pack pools | #112, #123 |
+| [#133](https://github.com/RktRobinhood/TOK-Materials/issues/133) | Add earned Coins and a first small shop with reward receipts | #114, #124, #126 |
+| [#126](https://github.com/RktRobinhood/TOK-Materials/issues/126) | Rift of Reason: Design earned-currency packs and duplicate-to-foil protection | #112, #123 |
+| [#134](https://github.com/RktRobinhood/TOK-Materials/issues/134) | Present packs with restrained rarity reveals, foil cues and shared sounds | #126, #136, #122 |
+| [#135](https://github.com/RktRobinhood/TOK-Materials/issues/135) | Sell configured surplus consumables without draining catching supplies | #133, #125 |
+
+- [#136](https://github.com/RktRobinhood/TOK-Materials/issues/136): transactional weighted pack model; blocked by #130/#131/#132/#133.
