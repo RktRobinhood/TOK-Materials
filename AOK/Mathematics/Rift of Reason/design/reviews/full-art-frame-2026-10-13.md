@@ -14,3 +14,5 @@ Completed checks:
 **Pending visual acceptance:** the selected in-app browser has no attached tabs in this unattended run. Two documented fresh-tab attempts timed out waiting for its webview to attach; making it visible did not recover it. open_in_codex queued the local preview in this chat. No alternate browser/control mechanism or synthetic screenshot was used. There are no new screenshots, viewport results or claimed successful browser checks for this revision.
 
 Next step when this chat/browser can display the preview: inspect all six foreground creatures at large/70px, paying attention to signature props and frame overlap; verify 390px stacking, longest rules, light background and keyboard/tap reading; capture the actual page; fix defects before closing #141. The published developer page is a reviewable draft. Runtime production .bc-art z1/.bc-frame z2 remains unchanged; #109 owns its integration audit, and #131/#134 retain cosmetic ownership/pack gates.
+
+Developer draft published at12bcf36. Pages workflow38320640771 succeeded. Deployment success does not substitute for the pending native visual checks above.
