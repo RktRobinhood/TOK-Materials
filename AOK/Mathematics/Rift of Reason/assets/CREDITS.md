@@ -6,6 +6,8 @@ The development-only Card Arena board study (`dev/arena-prototype.*`, #107) adap
 
 Characters, scenes and UI art were generated with ChatGPT from prompts written for this game (see `design/art-requests/ART-REQUESTS.md`) and reviewed and edited by hand. Caricatures are affectionate satire inspired by public figures' public personas; they are not likenesses and imply nothing beyond the jokes.
 
+The seven common starter helper portraits (#137, 12 October 2026) were generated using the built-in image generation tool from original project prompts and Rift style references. Selected original PNGs, exact prompts, reference identities and validation are retained in design/source-assets/4-caricatures/card-starters-2026-10-12/. They were visually checked against the approved style board and built into WebP through the existing asset pipeline. No commercial character art was imported. See design/ART-BIBLE.md for continuing cute-horror/public-persona direction.
+
 ## Sound
 From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-bit PCM WAVs for browser playback. Existing source sounds were shared with the psychology games in `psychology materials`. All effects peak at -13 dB; the four playback buses leave mix headroom. `tools/prepare-sfx.mjs` reproduces conversion and levelling with FFmpeg.
 

@@ -2,6 +2,16 @@
 
 The rules every image is judged against during the art sessions (#32). Once the style board (0.1) is approved, it is attached to every later request as the reference, and wins over any wording here.
 
+## Start here in a fresh agent session
+
+The teacher reaffirmed the direction on 12 October 2026: **cute horror and meme caricatures of public figures**. Preserve that identity across new cards, effects and scenes. Read this bible, [DESIGN.md](DESIGN.md), [ROSTER.md](ROSTER.md) and the relevant [running art request](art-requests/ART-REQUESTS.md), then visually inspect the [approved style board](source-assets/0-style/style-board.png) and a shipped creature such as [Astrophysicat](../assets/creatures/astrophysicat-idle.webp). Attach the style board and relevant shipped creature to new generation requests. Do not rely on an earlier chat remembering the style.
+
+The horror comes from dusk, uncanny masks, crooked fairground silhouettes, dark forests and dangerous rifts, with expressive creatures and funny public-persona exaggeration. Keep it slightly unsettling and welcoming, never gory. Faces and signature props need enough light to read; saturated accents sit against ink/forest/violet darkness. The style board's soft feather/fabric texture and clean cel-lit forms set the level of detail. Avoid drifting into an all-pastel nursery collection, realistic celebrity portraits, glossy 3D mascots or a uniform set of harmless woodland pets.
+
+For a collectible creature, record its real public-persona inspiration, pun name, animal silhouette, signature prop/pose, harmless joke angle, colour and rarity in ROSTER.md before release. One readable prop or gesture should carry the meme at small scale. Mechanical creature concepts in the 210-card draft are not a finished cast: their animal names are working labels pending this persona/roster pass. Do not mass-generate those concepts as generic animals. Historical mathematical legendaries follow their established roster treatment. Avatars/story NPCs and explicitly reviewed starter helpers have their own roles; they do not replace the main caricature cast.
+
+Each art batch keeps exact prompts, references, selected source PNGs and a provenance record, and links its Stage13 request, issue and asset IDs. Inspect on the dark game palette and a light background, then at ~70px board size and ~300px inspection size. Reject cropped parts, painted-in checkerboards, unreadable props and excessive tiny ornaments. Log any intentional exception and the teacher's feedback; don't silently redefine the style from the last generated image.
+
 ## Look
 
 - **Cute and dark.** A storybook creature world at dusk: whimsical, slightly spooky, never gory. Big expressive eyes, round friendly shapes, sharp comedy in the poses.
@@ -39,7 +49,7 @@ Neutrals: ink `#1A1020`, night `#14121F`, deep forest `#0F1F1A`, parchment `#EFE
 - Caricatures: by species and their signature prop (the tie, the rocket, the cheque, the spatula…).
 - The demon imps must look sweet until the mask slips.
 
-## Review checklist (Claude uses this on every image)
+## Review checklist (every builder uses this on every image)
 
 1. Matches the style board: outline weight, shading, palette, level of detail.
 2. Format rules above (transparency, spacing, no text, grid).

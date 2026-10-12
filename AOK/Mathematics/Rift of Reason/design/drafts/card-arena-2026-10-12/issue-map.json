@@ -247,5 +247,13 @@
       132
     ],
     "nativeDependenciesAdded": true
+  },
+  "starter_art": {
+    "number": 137,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/137",
+    "title": "Rift of Reason: Generate and integrate seven common starter portraits",
+    "id": 5814470213,
+    "blockedBy": [],
+    "nativeDependenciesAdded": true
   }
 }

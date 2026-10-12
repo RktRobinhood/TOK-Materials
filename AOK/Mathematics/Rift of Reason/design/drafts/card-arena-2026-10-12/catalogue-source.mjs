@@ -24,7 +24,8 @@ function add(affinity, kind, rows, rarities) {
       ...(kind === 'creature' ? {attack: Number(detail.split('/')[0]), health: Number(detail.split('/')[1])}
         : kind === 'axiom' ? {category: detail} : {target: detail}),
       text, tags: tags.split(','), strategy: themes[affinity], counterplay,
-      status: 'draft; not implemented or balance-tested'});
+      status: 'draft; not implemented or balance-tested',
+      ...(kind === 'creature' ? {identityStatus: 'Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.', artDirection: 'design/ART-BIBLE.md and approved 0-style/style-board.png'} : {})});
   });
 }
 add('reason', 'creature', `
@@ -334,6 +335,6 @@ for (const affinity of Object.keys(themes)) {
     md += '| ' + c.name + ' · `' + c.id + '` | ' + c.kind + ' / ' + c.rarity + ' / ' + c.cost + ' | ' + (c.kind === 'creature' ? c.attack + '/' + c.health : c.category || c.target) + ' | ' + c.text + ' | ' + c.counterplay + ' | ' + c.acquisition.channel + ' |\n';
   }
 }
-md += '\n## Release sequence\n\nUse small playtested packs, never enable all 210 at once. Begin with simple common board/heal/draw/control cards after the existing starter-pack slice. Then introduce uncommons, bounded tokens/transformations, scheduled one-shots, contextual Axiom families and only then alternate goals, repeatable spaces and mythic/legendary engines. Existing #101 owns broad modifier rules. Thematic overlap is deliberate; exact stat-only duplicates should be merged during review rather than counted as strategic breadth. All names/art concepts are original support-creature proposals; teacher may choose public-persona equivalents before commissioning art.\n\nRun catalogue-source.mjs to regenerate these two catalogue files and arithmetic checks. New runtime card definitions belong in later implementation tickets.\n';
+md += '\n## Release sequence\n\nUse small playtested packs, never enable all 210 at once. Begin with simple common board/heal/draw/control cards after the existing starter-pack slice. Then introduce uncommons, bounded tokens/transformations, scheduled one-shots, contextual Axiom families and only then alternate goals, repeatable spaces and mythic/legendary engines. Existing #101 owns broad modifier rules. Thematic overlap is deliberate; exact stat-only duplicates should be merged during review rather than counted as strategic breadth. Creature names are working mechanical labels. The teacher reaffirmed cute-horror public-persona satire: assign inspiration, pun, signature prop and harmless joke in ROSTER.md before art/release. Generic helper exceptions require explicit review; do not mass-generate seventy-two generic animals. Follow ART-BIBLE.md and the approved style board.\n\nRun catalogue-source.mjs to regenerate these two catalogue files and arithmetic checks. New runtime card definitions belong in later implementation tickets.\n';
 fs.writeFileSync(path.join(dir, 'CARD-CATALOGUE.md'), md);
 console.log(JSON.stringify(catalogue.counts));

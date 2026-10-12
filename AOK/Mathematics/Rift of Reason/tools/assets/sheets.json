@@ -18,6 +18,13 @@
         "  Without it the class is guessed from the id (see tools/assets/classes.mjs)."
     ],
     "sheets": {
+        "card-starter-proof-pup.png": {"type":"single","id":"creature/proof-pup/idle","class":"sprite"},
+        "card-starter-lens-lizard.png": {"type":"single","id":"creature/lens-lizard/idle","class":"sprite"},
+        "card-starter-paper-dragon.png": {"type":"single","id":"creature/paper-dragon/idle","class":"sprite"},
+        "card-starter-cloud-calf.png": {"type":"single","id":"creature/cloud-calf/idle","class":"sprite"},
+        "card-starter-pocket-tortoise.png": {"type":"single","id":"creature/pocket-tortoise/idle","class":"sprite"},
+        "card-starter-comma-crab.png": {"type":"single","id":"creature/comma-crab/idle","class":"sprite"},
+        "card-starter-footnote-finch.png": {"type":"single","id":"creature/footnote-finch/idle","class":"sprite"},
         "style-board.png": { "type": "skip" },
 
         "owlet-sheet.png": { "type": "islands", "ids": [

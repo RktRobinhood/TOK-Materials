@@ -1,0 +1,113 @@
+{
+  "issue": 137,
+  "notes": "Original generated assets for this project; references are Rift artwork. No commercial-media reference. Exact prompts preserved. Runtime cards remain #113.",
+  "assets": [
+    {
+      "id": "creature/proof-pup/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-proof-pup.png",
+      "generatedOutput": "exec-cfc22eb3-38a5-4a77-8e91-548566c4d492.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Proof Pup, a weak common Reason creature. The attached cat is ONLY a style reference: match its hand-painted storybook fantasy rendering, rich ink outlines, cute stocky proportions, warm expressive eyes, saturated accents and subtle worn fabric textures. Do not depict a cat or copy its costume. Proof Pup is a small friendly brown-and-cream puppy scholar, standing upright full body in a stable three-quarter pose, with floppy ears, blue practical waistcoat, small leather satchel and a simple rounded wooden buckler held beside its body to suggest Guard. Gentle determined expression, a modest beginner companion, no huge weapons, no jeweled regalia. Readable coherent silhouette, paws and tail fully visible, few strong shapes, lit face. One creature centered, generous transparent padding all around, true transparent background. No scenery, ground plane, cast shadow on background, frame, card border, letters, numbers, logos, additional creatures or scattered particles. Crisp alpha and no cropped ears/paws/shield. Intended to read at 70px high and also enlarged to 300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/lens-lizard/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-lens-lizard.png",
+      "generatedOutput": "exec-f92b5cdc-07cc-4dad-8a27-dbee09c78a5c.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "assets/creatures/astrophysicat-idle.webp",
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Lens Lizard, a weak common Perception creature. The attached cat and puppy are ONLY style references: match their hand-painted storybook fantasy rendering, rich ink outlines, cute stocky proportions, warm expressive eyes, saturated accents and subtle worn fabric textures. Do not depict a cat or dog or copy their costumes. Lens Lizard is a small bright emerald-and-olive gecko with a pale belly, standing upright full body in a stable three-quarter pose, curled tail, big observant amber eyes, short practical moss-green capelet and a simple leather belt pouch. It holds one round brass magnifying lens beside its face, not covering its eyes. Curious gentle beginner companion, not an armored boss. Broad readable shapes, simple charming silhouette, all toes and tail fully visible. One creature centered with generous transparent padding, true transparent background. No scenery, ground plane, shadow on background, frame, card border, lettering, numbers, logos, extra creatures or particles. Crisp alpha, no cropped parts. Intended to read at 70px high and enlarged to 300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/paper-dragon/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-paper-dragon.png",
+      "generatedOutput": "exec-6d20f36a-4bc7-43d0-a3b4-46305481f9b6.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Paper Dragon, a weak common Imagination creature. The attached puppy is ONLY a style reference for rich hand-painted storybook fantasy brush texture, strong dark ink outlines, adorable stocky proportions and warm expressive eyes. Do not depict a dog or copy its outfit. Paper Dragon is a tiny living origami dragon made from warm ivory folded paper with violet painted wing edges and a few lavender folds. Give it a cute rounded paper snout, lively amber eyes, two modest folded wings, a long folded tail curling beside it and two sturdy little paper legs, standing full body in a stable three-quarter pose. It must unmistakably look constructed from folded paper, not a scaled reptile in armor. A simple purple ribbon collar can tie it to imagination. Keep the wing/tail silhouette broad and cohesive, friendly and humble, beginner companion rather than legendary spectacle. One figure centered with generous transparent margin on every edge, true transparent background. No scenery, ground plane, shadow on background, glowing cloud, scattered scraps, letters, numbers, frame, logos or extra creatures. Crisp alpha; all wings, legs and tail fit fully inside image. Intended to read at70px high and enlarged to300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/cloud-calf/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-cloud-calf.png",
+      "generatedOutput": "exec-4c1cc100-c3ad-496e-a6ef-208b1ab16459.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Cloud Calf, a weak common Imagination creature with Guard. The attached puppy is ONLY a style reference for hand-painted storybook fantasy texture, strong dark ink outlines, adorable stocky proportions and warm expressive eyes; do not depict a dog or copy its costume. Cloud Calf is a small sturdy baby cow, standing full body in a stable three-quarter pose. Its coat is soft off-white fleece shaped into a few simple rounded cloud tufts, with subtle lavender-grey shading, two short violet horns, round ears, gentle amber eyes, a dusky purple nose and four dark purple hooves. One small lavender scarf, no armor. A tiny curled tail is visible. Convey a calm protective little companion through the planted stance, not a literal separate shield. Broad readable cohesive fluffy silhouette, no huge atmospheric clouds. Center one figure with generous transparent padding on all edges. True transparent background; no scenery, ground plane, cast shadow on background, mist, particles, lettering, numbers, card frame, logos or extra creatures. All horns, tail and hooves fully visible. Intended to read at70px high and enlarged to300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/pocket-tortoise/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-pocket-tortoise.png",
+      "generatedOutput": "exec-7b171bc1-6a2b-4ac3-9656-0f655f86a418.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Pocket Tortoise, a weak common Memory creature. The attached puppy is ONLY a style reference for hand-painted storybook fantasy texture, strong dark ink outlines, adorable stocky proportions and warm expressive eyes; do not depict a dog or copy its costume. Pocket Tortoise is a small round land tortoise with soft sage-grey skin, a weathered warm brown domed shell with broad readable hexagonal plates, bright gentle amber eyes and a thoughtful smile. It stands full body on four short sturdy legs in a stable three-quarter pose, head lifted. A tiny worn cream scarf and one practical leather pocket fixed to its shell hold a few blank folded note slips; no readable writing, no spectacles, no hats or armor. A little tail is visible. Calm humble beginner companion; clearly a tortoise, not a turtle warrior. Strong cohesive silhouette, broad simple features readable at small scale. One figure centered with generous transparent margin all around, true transparent background. No scenery, ground plane, shadow on background, glow, particles, letters, numbers, logos, card border or additional figures. Whole shell, head, legs and tail inside image. Intended to read at70px high and enlarged to300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/comma-crab/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-comma-crab.png",
+      "generatedOutput": "exec-ba96caa6-f6d9-4c80-851c-64ffb58c0686.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Comma Crab, a weak common Language creature with Guard. The attached puppy is ONLY a style reference for rich hand-painted storybook fantasy texture, strong dark ink outlines, adorable stocky proportions and warm expressive eyes; do not depict a dog or copy its outfit. Comma Crab is a small sturdy golden-yellow and warm amber land crab with a broad rounded shell, two short eye stalks with bright amber eyes, a friendly thoughtful smile, two curved comma-shaped claws held protectively in front and clearly readable short walking legs on both sides. It wears only a simple mustard-gold neckerchief and one small leather side pouch containing a blank folded parchment corner. Make it a modest beginner companion, no crown, giant weapon, armor or extravagant jewelry. Its body/claws should have distinctive broad comma-like curves but no literal written punctuation floating around. Stand full body in a stable three-quarter pose. One figure centered with generous transparent margin all around, true transparent background. No scenery, ground plane, background shadow, glow, particles, readable text, numbers, logos, card frame or additional creatures. All eye stalks, claws and legs fully visible. Readable at70px high and enlarged to300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    },
+    {
+      "id": "creature/footnote-finch/idle",
+      "date": "2026-10-12",
+      "method": "built-in image_gen",
+      "model": "not reported by tool",
+      "transparentBackgroundRequested": true,
+      "source": "card-starter-footnote-finch.png",
+      "generatedOutput": "exec-cbee8d66-82bf-439d-a965-2d3ba3c7c1dd.png",
+      "generationSession": "01a12c0e-2918-7731-88d6-e7980ca1adfd",
+      "styleReferences": [
+        "card-starter-proof-pup.png"
+      ],
+      "prompt": "Create one original game creature cutout for Rift of Reason: Footnote Finch, a weak common Language creature. The attached puppy is ONLY a style reference for rich hand-painted storybook fantasy texture, strong dark ink outlines, adorable stocky proportions and warm expressive eyes; do not depict a dog or copy its outfit. Footnote Finch is a tiny plump songbird with golden-yellow chest, cream face, warm brown cap and wing feathers, short dark beak and bright amber eyes. It stands full body on two small clearly visible bird feet in a stable three-quarter pose, wings folded close, small fan tail visible. A simple mustard scarf and one tiny rolled blank note tied beside a leg evoke a messenger/scribe. No spectacles, tall hat, giant book, armor or fancy regalia. Friendly inquisitive modest beginner companion, readable rounded silhouette and just a few feather group shapes. One bird centered with generous transparent margin all around, true transparent background. No perch, scenery, ground plane, cast shadow on background, particles, floating letters, readable text, numbers, card frame, logos or extra creatures. Entire tail, feet and head in image. Intended to read at70px high and enlarged to300px.",
+      "status": "selected first take; source/runtime alpha/dimension checks pass; dark/light and70px gallery visually reviewed"
+    }
+  ],
+  "reviewNote": "Style board inspected after first-reference generation; future batches must attach approved style board from start. Seven starter helper proposals do not replace public-persona cast."
+}

@@ -6,6 +6,6 @@ Acceptance: keyboard and touch reveal/Skip; clear first-copy/second-copy/foil-up
 
 ## Blocked by
 
-#126, #122
+#126, #136, #122
 
 Follow AGENTS.md: classic scripts/offline, save defaults/backup, Calm motion, short student text, scoped files, full required tests, review and push. Preserve other sessions and recorded voice contracts.

@@ -54,6 +54,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Trade with a larger creature.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -80,6 +82,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove Guard or use a spell.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -106,6 +110,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove the supported creature.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -132,6 +138,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Shield protects a small target.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -159,6 +167,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Attack with unequal power.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         127
@@ -186,6 +196,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove it before the spell sequence.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -212,6 +224,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Pressure its setup turn.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -239,6 +253,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Use combat or multiple small spells.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -265,6 +281,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Change the target's attack first.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -292,6 +310,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Finish damaged creatures before they fight.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         127
@@ -322,6 +342,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Disable it, use spells or attack repeatedly.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -349,6 +371,8 @@
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove the board or skip the announced event.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -377,6 +401,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Trade a small creature.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -403,6 +429,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Keep pressure on its board.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -429,6 +457,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Defeat it in one hit.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -455,6 +485,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove or block the supported attacker.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -481,6 +513,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Counterattack the fragile body.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -507,6 +541,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove this first.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -533,6 +569,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Silence it or change Win.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -559,6 +597,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Use removal instead of small trades.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -585,6 +625,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Use a high-health defender.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -612,6 +654,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove its supporting attackers.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -641,6 +685,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Exploit low hearts or deny small kill targets.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -668,6 +714,8 @@
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Avoid enabling both losses or replace Win.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -694,6 +742,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Pressure instead of giving planning time.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -720,6 +770,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use other keywords or restore Elusive.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -746,6 +798,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Refresh Shield or heal the exposed target.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         127
@@ -773,6 +827,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use a spell or remove Elusive.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -799,6 +855,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Contest its setup turn.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -825,6 +883,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Choose neutral matchups or remove the buff.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -852,6 +912,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use immediate effects or protect key occurrences.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -881,6 +943,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Pressure before skips accumulate.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -910,6 +974,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Remove its support before protection arrives.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -936,6 +1002,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Stack different defences or restore a keyword.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -964,6 +1032,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Skip the new node or contest the board.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -993,6 +1063,8 @@
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Pressure before the expensive selector arrives.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1019,6 +1091,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Block the supported attacker.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1045,6 +1119,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove Guard or use a spell.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1071,6 +1147,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use another attacker or restore its stats.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1097,6 +1175,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove other friendly creatures first.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1124,6 +1204,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove the engine or change rules through Fate.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1150,6 +1232,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove Guard or attack after expiry.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1177,6 +1261,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use equal or lower power or silence it.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         127
@@ -1205,6 +1291,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use direct removal instead of chip damage.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1232,6 +1320,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Wait out the label or clear the debuff.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1258,6 +1348,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove the creature before the support sequence.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1287,6 +1379,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Trade the board or skip the occurrence.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -1316,6 +1410,8 @@
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Keep a replacement or rely on other categories.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1342,6 +1438,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Trade a larger creature.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1368,6 +1466,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Punish the mode not chosen.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1394,6 +1494,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use balanced bodies or remove the transformed threat.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1420,6 +1522,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Silence it before defeat.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         "token-order"
@@ -1447,6 +1551,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove this before the token spell.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         "token-order"
@@ -1474,6 +1580,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove the large source before the copy turn.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1501,6 +1609,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove Shield or deal damage twice.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1528,6 +1638,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use a spell or strip Elusive.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         "token-order"
@@ -1555,6 +1667,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use balanced stats or restore them.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1582,6 +1696,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Defeat it in one hit or silence it.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         "token-order"
@@ -1612,6 +1728,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove the tokens or their engine.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         "token-order"
@@ -1639,6 +1757,8 @@
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Limit supporting creatures or silence boosted bodies.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1665,6 +1785,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Finish damaged targets before the heal.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1691,6 +1813,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Race before it is redrawn.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1717,6 +1841,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Remove Guard or use spells.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1743,6 +1869,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Silence it before defeat.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1770,6 +1898,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Remove the engine or exploit reversed Win.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1796,6 +1926,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Pressure during the replay turn.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1823,6 +1955,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Remove Shield or use repeated damage.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -1852,6 +1986,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Skip or cancel the event.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -1881,6 +2017,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Contest the newly announced node.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -1909,6 +2047,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Race the replay or remove the restored creature.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109
       ],
@@ -1938,6 +2078,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Expire or skip the marked space.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,
@@ -1967,6 +2109,8 @@
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Skip the new occurrence or avoid supplying a powerful original.",
       "status": "draft; not implemented or balance-tested",
+      "identityStatus": "Mechanical concept only: public-persona inspiration, pun, signature prop and roster review required before art/release; any helper exception needs explicit review.",
+      "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
         109,
         118,

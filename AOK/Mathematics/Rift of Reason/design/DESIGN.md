@@ -10,6 +10,8 @@ Ordinary Fate advances after both players have taken a turn, with visible determ
 
 See [starter/card drafts](drafts/card-arena-2026-10-12/CARD-DRAFTS.md), [build roadmap](drafts/card-arena-2026-10-12/ROADMAP.md) and [recorded board feedback](reviews/board-study-2026-10-12.md). Runtime rules below describe the existing game until those tickets land.
 
+Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the approved style board and ROSTER.md. The expansion's creature concepts still need public-persona/pun/prop assignments before release; a mechanical animal name alone is not a finished collectible caricature. Preserve the cute-horror meme identity across future agent sessions.
+
 ## Purpose
 
 A browser game that is the **follow-up activity** for a 4-lesson IB TOK unit introducing Mathematics as an area of knowledge. The teacher teaches the concept; the game gives exposure to more ideas and cements them through replayable puzzles. Students are DP1 (16–17), mostly non-native English speakers at a Danish gymnasium, and love Pokémon.

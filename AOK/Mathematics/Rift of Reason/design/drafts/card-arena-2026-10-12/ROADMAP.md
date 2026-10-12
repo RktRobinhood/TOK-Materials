@@ -40,3 +40,5 @@ Native dependencies match text blockers. Content-release tickets also honour #10
 | [#135](https://github.com/RktRobinhood/TOK-Materials/issues/135) | Sell configured surplus consumables without draining catching supplies | #133, #125 |
 
 - [#136](https://github.com/RktRobinhood/TOK-Materials/issues/136): transactional weighted pack model; blocked by #130/#131/#132/#133.
+
+- [#137](https://github.com/RktRobinhood/TOK-Materials/issues/137): generated seven starter portraits; independent artwork slice for #113. Selected A refinement milestone is pushed at5e596a3; production#109 and physical-device checks remain.

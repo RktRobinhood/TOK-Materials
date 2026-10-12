@@ -929,7 +929,7 @@ Teacher authorizes builder-generated images for this pipeline. Status: planned; 
 
 | Request ID | Asset / use | Status |
 |---|---|---|
-| 13.CARD.STARTER | Proof Pup, Lens Lizard, Paper Dragon, Cloud Calf, Pocket Tortoise, Comma Crab, Footnote Finch: seven transparent idle cutouts for #113 | Planned, generate first |
+| 13.CARD.STARTER | Proof Pup, Lens Lizard, Paper Dragon, Cloud Calf, Pocket Tortoise, Comma Crab, Footnote Finch: seven transparent idle cutouts for #113 | Produced/integrated #137; sources, prompts and validation in card-starters-2026-10-12; gallery dev/starter-art.html |
 | 13.CARD.EXPANSION | 72 portraits with exact asset IDs in ASSET-PLAN.md; board/hand/Collection/inspection | Planned, release-gated |
 | 13.CARD.GUARD | Large readable Guard backplate, distinct from Shield and compatible with both; code/SVG | #122 implementation |
 | 13.CARD.RARITY | Five consistent frames including Mythic, with labels/icons; shared foil cosmetic | Planned, rarity policy gate |
@@ -1095,3 +1095,7 @@ Record what was approved and why, as in the Odyssey project.
 | 13.23e Stakes frame, Pip | First try (2026-10-08) | The Sorting Room: a dark conveyor of blank cards under a row of mechanical stamp arms with cold white pads, endless sorting belts behind, and at the right Pip hunched at a clerk's desk under a lamp, headphones glowing cyan, a cloud of profile-picture thumbnails around him (generic silhouettes, tiny and faint at 35%). Single panel, ui/stakes-pip. All five stakes frames done. |
 | 13.13 Side-story marker | First try (2026-10-08) | Gold-rimmed studded medallion on violet with an open storybook, red bookmark ribbon, a magenta spark and gold stars rising from the pages (page lines are plain stripes, no text). Matches the marker family. Single item, ui/side-story. |
 | 13.71 Quest badges | First try (2026-10-09) | A faceted gold gem "!" made alone first to set the look, then a sheet matching it: gold "?", sky-blue crystal "!" and "?", and a brown leather journal with gold corners, clasp, a gold gem on the cover and a red ribbon. Real transparency. Sliced into ui/quest-new-main, ui/quest-progress-main, ui/quest-new-side, ui/quest-progress-side, ui/journal. |
+
+### Card starter pack outcome — 12 October 2026 (#137)
+
+Seven first takes selected and integrated, each original source retained. Provenance: design/source-assets/4-caricatures/card-starters-2026-10-12/generation.json; review: design/reviews/starter-art-2026-10-12.md. The teacher reaffirmed cute-horror public-persona direction; ART-BIBLE.md now makes the fresh-agent references and roster gate explicit. These starter helpers do not redefine the collectible cast. No new voices/SFX.

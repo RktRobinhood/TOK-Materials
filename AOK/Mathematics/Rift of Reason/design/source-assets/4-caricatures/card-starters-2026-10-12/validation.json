@@ -1,0 +1,146 @@
+{
+  "issue": 137,
+  "status": "source and runtime alpha/dimension checks pass; visual gallery reviewed separately",
+  "assets": [
+    {
+      "id": "creature/proof-pup/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 57,
+          "y": 18,
+          "w": 1127,
+          "h": 1277
+        }
+      },
+      "runtime": {
+        "file": "creatures/proof-pup-idle.webp",
+        "w": 547,
+        "h": 620
+      },
+      "transparentPercent": 43.1,
+      "bytes": 94012
+    },
+    {
+      "id": "creature/lens-lizard/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 28,
+          "y": 66,
+          "w": 1146,
+          "h": 1210
+        }
+      },
+      "runtime": {
+        "file": "creatures/lens-lizard-idle.webp",
+        "w": 587,
+        "h": 620
+      },
+      "transparentPercent": 44.8,
+      "bytes": 98796
+    },
+    {
+      "id": "creature/paper-dragon/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 28,
+          "y": 67,
+          "w": 1140,
+          "h": 1161
+        }
+      },
+      "runtime": {
+        "file": "creatures/paper-dragon-idle.webp",
+        "w": 609,
+        "h": 620
+      },
+      "transparentPercent": 40.9,
+      "bytes": 101422
+    },
+    {
+      "id": "creature/cloud-calf/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 58,
+          "y": 16,
+          "w": 1105,
+          "h": 1268
+        }
+      },
+      "runtime": {
+        "file": "creatures/cloud-calf-idle.webp",
+        "w": 540,
+        "h": 620
+      },
+      "transparentPercent": 37.7,
+      "bytes": 80506
+    },
+    {
+      "id": "creature/pocket-tortoise/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 46,
+          "y": 207,
+          "w": 1111,
+          "h": 963
+        }
+      },
+      "runtime": {
+        "file": "creatures/pocket-tortoise-idle.webp",
+        "w": 715,
+        "h": 620
+      },
+      "transparentPercent": 28.9,
+      "bytes": 138486
+    },
+    {
+      "id": "creature/comma-crab/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 41,
+          "y": 101,
+          "w": 1135,
+          "h": 1118
+        }
+      },
+      "runtime": {
+        "file": "creatures/comma-crab-idle.webp",
+        "w": 629,
+        "h": 620
+      },
+      "transparentPercent": 41,
+      "bytes": 114368
+    },
+    {
+      "id": "creature/footnote-finch/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 68,
+          "y": 74,
+          "w": 1070,
+          "h": 1189
+        }
+      },
+      "runtime": {
+        "file": "creatures/footnote-finch-idle.webp",
+        "w": 558,
+        "h": 620
+      },
+      "transparentPercent": 47.1,
+      "bytes": 84298
+    }
+  ]
+}
