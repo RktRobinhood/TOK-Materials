@@ -35,3 +35,7 @@ Runtime-builder frontier: #113 uses the seven produced portraits for simple crea
 ## Continuation
 
 Hourly heartbeat finish-rift-card-planning, named Build Rift card pipeline, remains ACTIVE; prompt updated/verified to prioritize audited generated art after #140/#141. Check usage first, remain quiet when low, resume after recovery. Delete only when the actual authorized pipeline is finished or the user stops it. Latest read:5% five-hour/7% weekly remaining; stop new work blocks and resume the art frontier after reset. App-crash recovery and final tests are complete. Own preview on18793 session54073 remains available; public ability/foil tabs marked deliverable. Preserve other servers/sessions, unowned art preview/helper and two research drafts. Stage only owned files; retain classic/offline, save/backup and recorded-voice contracts.
+
+## Latest teacher correction — takes priority after reset
+
+#141 reopened. Teacher chooses full-card art over etched foil; previous A recommendation is superseded. Exact next step: revise dev/foil-prototype.html to use shipped ui/card-<colour> frames, layer transparent creatures above the decorative frame and constrain only to the outer card rectangle. Keep names/rules/stats above creatures. Inspect six colours, large/70px/narrow, props and cropping; update evidence/review/art handoff, checks and scoped push. Current production .bc-art z1 / .bc-frame z2 needs a separate integration audit. Do this before new portrait generation. Account usage read99% five-hour/94% weekly used; no runtime edits made in this feedback turn.
