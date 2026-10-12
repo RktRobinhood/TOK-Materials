@@ -90,6 +90,8 @@ A countdown, starting 6 spaces away. Each End turn advances it exactly 1 (no pla
 
 ## Interface
 
+Fate uses a thicker 42 px painted groove (28 px without artwork), a larger NOW hourglass and 44 px event targets (#102). Hover, keyboard focus/Enter/Space and touch show compact notes: when the event reaches NOW, whose turn starts, and which axioms it changes. The current top card is conditional on nobody drawing it first; an empty deck distinguishes a shuffled shared discard from no remaining card. Past events say they already happened and point to Axioms for the current rules. Inspection remains visible and refreshes across reel repaints; Calm motion and time-shift previews keep their existing behaviour.
+
 - Opponent hero at top centre, opponent hand (backs) above it, opponent board, Fate track in the centre lane, my board, my hero, my hand fanned at the bottom; energy crystals and the End turn button at the right; Axioms and the log in a collapsible side panel.
 - **Drag** a creature from your board onto an enemy creature or the enemy hero to attack. A gold arrow follows the pointer; valid targets glow; Guard creatures show a shield frame. **Click-click** works too (click attacker, click target) for touch and keyboard. Drag a hand card onto the board to play it; an Entrance with a target then asks for a target click.
 - The draw choice is four large buttons at the start of the turn.

@@ -164,7 +164,7 @@
 @keyframes b-lane-flash { from { background-color: rgba(242, 182, 50, 0.35); } }
 /* The Fate track: the lane's top row. One space per turn (two past, NOW, nine ahead); spaces are
  * tinted by whose turn it is (teal: yours, coral: theirs). Events sit on their spaces. */
-.b-fate { grid-column: 1 / span 2; grid-row: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(150px, auto); align-items: center; gap: 10px; height: 46px; }
+.b-fate { grid-column: 1 / span 2; grid-row: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(150px, auto); align-items: center; gap: 10px; height: 60px; }
 .b-fate-none { grid-column: 1 / -1; font-size: 13px; opacity: 0.7; }
 .b-fate-label { display: flex; flex-direction: column; align-items: center; line-height: 1; cursor: help; }
 .b-fate-label strong { font-family: var(--font-display); font-size: 17px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; }
@@ -177,9 +177,9 @@
     background: radial-gradient(ellipse at center, rgba(242, 182, 50, 0.25), transparent 70%); }
 .b-fate-now-tag { margin-top: -6px; font-size: 9px; font-weight: 800; letter-spacing: 0.08em; color: var(--ink); background: var(--gold); border-radius: 4px; padding: 0 3px; }
 .b-fate-groove { position: absolute; left: 0; right: 0; top: 50%; height: 24px; transform: translateY(-50%); background: center / 100% 100% no-repeat; pointer-events: none; }
-/* ui/fate-track is 1000×104 with a 120 px cap at each end: the caps are sliced off at their own aspect (28 px tall → 32 px wide). */
-.b-fate-track.art .b-fate-groove { height: 28px; box-sizing: border-box; border-style: solid; border-width: 0 32px; border-image-slice: 0 120 fill; border-image-width: 0 32px; border-image-repeat: stretch; }
-.b-fate-track:not(.art) .b-fate-groove { height: 8px; border-radius: 4px; background: linear-gradient(#2a2238, #463a5c); border: 1px solid #b08a3a; }
+/* ui/fate-track is 1000×104; its 120 px end caps keep their aspect (42 px tall → 48 px wide). */
+.b-fate-track.art .b-fate-groove { height: 42px; box-sizing: border-box; border-style: solid; border-width: 0 48px; border-image-slice: 0 120 fill; border-image-width: 0 48px; border-image-repeat: stretch; }
+.b-fate-track:not(.art) .b-fate-groove { height: 28px; border-radius: 8px; background: linear-gradient(#2a2238, #463a5c); border: 2px solid #b08a3a; }
 .b-fs { position: relative; height: 100%; display: grid; place-items: center; }
 .b-fs::before { content: ''; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; background: #1b1428; }
 .b-fs.mine::before { border-color: var(--rift); }
@@ -187,16 +187,16 @@
 .b-fs.past::before { opacity: 0.4; }
 .b-fs.now::before { display: none; }
 .b-fs > * { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
-.b-fs-now { width: 24px; height: 38px; background: center / contain no-repeat; display: grid; place-items: center; font-size: 26px; color: var(--gold); filter: drop-shadow(0 0 6px rgba(242, 182, 50, 0.85)); z-index: 2; }
-.b-fev { display: flex; flex-direction: column; align-items: center; gap: 0; z-index: 3; cursor: help; border-radius: 8px; padding: 0 2px; }
-.b-fev .b-fev-icon { width: 30px; height: 30px; font-size: 22px; color: var(--gold); filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8)); }
+.b-fs-now { width: 32px; height: 48px; background: center / contain no-repeat; display: grid; place-items: center; font-size: 32px; color: var(--gold); filter: drop-shadow(0 0 6px rgba(242, 182, 50, 0.85)); z-index: 2; }
+.b-fev { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; min-width: 44px; min-height: 44px; z-index: 3; cursor: help; border-radius: 8px; padding: 2px; }
+.b-fev .b-fev-icon { width: 36px; height: 36px; font-size: 26px; color: var(--gold); filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.8)); }
 .b-fev-label { font-size: 10.5px; font-weight: 800; line-height: 1.1; white-space: nowrap; padding: 0 4px; border-radius: 5px; background: rgba(12, 8, 20, 0.92); color: var(--gold); margin-top: -3px; }
 .b-fev.reset .b-fev-label { color: #9fe8ff; }
 .b-fev:hover, .b-fev:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .b-fev.ghost { opacity: 0.85; cursor: default; animation: b-fade-in 0.15s ease-out; }
 .b-fev.ghost .b-fev-icon { filter: drop-shadow(0 0 8px rgba(63, 224, 208, 0.95)); }
 .b-fev.ghost .b-fev-label { background: var(--rift); color: var(--ink); }
-.b-fpast { width: 22px; height: 22px; border-radius: 5px; overflow: hidden; display: grid; place-items: center; font-size: 14px; background: rgba(12, 8, 20, 0.9); border: 1px solid rgba(242, 182, 50, 0.6); opacity: 0.85; cursor: help; z-index: 2; }
+.b-fpast { width: 44px; height: 44px; border-radius: 5px; overflow: hidden; display: grid; place-items: center; font-size: 20px; background: rgba(12, 8, 20, 0.9); border: 1px solid rgba(242, 182, 50, 0.6); opacity: 0.85; cursor: help; z-index: 2; }
 .b-fpast img { width: 100%; height: 100%; object-fit: cover; }
 .b-fs.now .b-fpast { left: 92%; top: 24%; width: 18px; height: 18px; z-index: 5; }
 .b-fpast:hover, .b-fpast:focus-visible { opacity: 1; outline: 2px solid var(--gold); }
@@ -583,6 +583,8 @@ body.calm-motion .battle .b-hand > .bc:hover, body.calm-motion .battle .b-hand >
     width: calc(var(--inspect-w) + 32px);
 }
 .b-inspect.show { display: flex; animation: b-fade-in 0.12s ease-out; }
+.b-inspect.fate { box-sizing: border-box; width: 340px; max-width: calc(100% - 12px); padding: 10px; }
+.b-inspect.fate .b-notes { width: 100%; }
 .b-inspect .bc { box-shadow: 0 18px 44px rgba(0, 0, 0, 0.85); border-radius: 9% / 6%; }
 .b-inspect .bc-text { font-size: max(13px, 0.64em); line-height: 1.22; }
 .b-flavour { font-style: italic; opacity: 0.75; }

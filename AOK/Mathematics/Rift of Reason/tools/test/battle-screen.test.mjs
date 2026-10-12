@@ -538,6 +538,47 @@ test('Fate draw buttons (only with timeDraws) show the new count in short words'
     c.handle.destroy();
 });
 
+test('Fate inspection explains timing, turn owner and conditional flips, and refreshes after a draw', () => {
+    const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => {
+        s.fate.until = 2;
+        s.axioms.deck = ['thrift', 'luxury'];
+    });
+    let marker = t.$('.b-fev.flip');
+    marker.focus();
+    marker.dispatchEvent({ type: 'keydown', key: 'Enter', preventDefault() {} });
+    assert.match(t.$('.b-inspect').textContent, /Free flip in 2 turns, as your turn starts/);
+    assert.match(marker.getAttribute('aria-label'), /If someone takes it first/);
+    assert.match(t.$('.b-inspect').textContent, /It replaces:/);
+    assert.match(t.$('.b-inspect').textContent, new RegExp(t.Rift.data.axioms.thrift.name));
+    t.$('.b-draw-btn[data-choice="axiom"]').click();
+    marker = t.$('.b-fev.flip');
+    assert.equal(t.g.document.activeElement, marker, 'focused event survives a repaint');
+    assert.ok(t.$('.b-inspect').classList.contains('show'));
+    assert.match(t.$('.b-inspect').textContent, new RegExp(t.Rift.data.axioms.luxury.name));
+    const until = t.handle.state.fate.until;
+    marker.dispatchEvent({ type: 'keydown', key: ' ', preventDefault() {} });
+    marker.click();
+    assert.equal(t.handle.state.fate.until, until, 'inspection never moves Fate');
+    t.handle.destroy();
+});
+
+test('Fate inspection distinguishes reset, unknown reshuffle and empty piles', () => {
+    for (const [events, discard, pattern] of [
+        [1, [], /Reset in 1 turn, as Dummy's turn starts.*All axioms return to the basic rules/],
+        [0, ['thrift', 'luxury'], /shared discard is shuffled.*not known yet/],
+        [0, [], /No rule card is left to flip.*Current axioms stay in play/],
+    ]) {
+        const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => {
+            s.fate.until = 1; s.fate.events = events; s.axioms.deck = []; s.axioms.discard = discard;
+        });
+        const marker = t.$('.b-fev');
+        marker.click();
+        assert.match(t.$('.b-inspect').textContent, pattern);
+        assert.match(marker.getAttribute('aria-label'), pattern);
+        t.handle.destroy();
+    }
+});
+
 test('changed rules: gold "Changed" tiles beside the core tiles, and each tile shows its card', () => {
     const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.axioms.active = { combat: 'underdog', cost: 'thrift', arrival: 'arrival', defeat: 'mercy' }; });
     assert.equal(t.root.querySelectorAll('.b-rule-chip').length, 0, 'no lane rule chips');

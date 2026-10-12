@@ -329,6 +329,13 @@
         boardImg.addEventListener('load', alignBoard);
         const boardObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(alignBoard) : null;
         if (boardObserver) { boardObserver.observe(rootEl); boardObserver.observe(dom.lane); }
+        function positionFateInspection() {
+            if (ui.inspect && dom.inspect.classList.contains('fate')) placeInspect(ui.inspect.anchor);
+        }
+        if (root.addEventListener) {
+            root.addEventListener('resize', positionFateInspection);
+            root.addEventListener('scroll', positionFateInspection, true);
+        }
         screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
@@ -975,7 +982,8 @@
             dom.inspect.innerHTML = '';
             [].concat(content).forEach(n => { if (n) dom.inspect.appendChild(n); });
             dom.inspect.classList.add('show');
-            ui.inspect = { key: key || null, zone: zoneOf(anchor), anchor };
+            dom.inspect.classList.toggle('fate', /^(fate|past):/.test(key || ''));
+            ui.inspect = { key: key || null, zone: zoneOf(anchor), anchor, focused: root.document.activeElement === anchor };
             placeInspect(anchor);
         }
         // Over the side panel (Axioms and the log), level with the card where it fits, so it
@@ -998,20 +1006,27 @@
             let y = cy - p.height / 2;
             x = Math.max(m, Math.min(box.width - p.width - m, x));
             y = Math.max(m, Math.min(box.height - p.height - m, y));
+            if (dom.inspect.classList.contains('fate')) {
+                // A bench or zoomed arena may extend below the visible browser viewport.
+                if (root.innerWidth) x = Math.max(m, m - box.left, Math.min(root.innerWidth - box.left - p.width - m, x));
+                if (root.innerHeight) y = Math.max(m, m - box.top, Math.min(root.innerHeight - box.top - p.height - m, y));
+            }
             dom.inspect.style.left = Math.round(x) + 'px';
             dom.inspect.style.top = Math.round(y) + 'px';
         }
         function hideInspect(keep) {
             clearTimeout(ui.inspectTimer);
-            dom.inspect.classList.remove('show');
+            if (!keep || !ui.inspect || !/^(fate|past):/.test(ui.inspect.key || '')) dom.inspect.classList.remove('show');
             if (!keep) ui.inspect = null;
         }
         function restoreInspect() {
             const was = ui.inspect;
             if (!was || !was.key || (ui.drag && ui.drag.active)) return;
             const it = inspectables[was.key];
-            if (it && zoneOf(it.node) === was.zone && !aiming(it.node)) showInspect(it.make(), it.node, was.key);
-            else ui.inspect = null;
+            if (it && zoneOf(it.node) === was.zone && !aiming(it.node)) {
+                if (was.focused && /^(fate|past):/.test(was.key)) it.node.focus();
+                showInspect(it.make(), it.node, was.key);
+            } else hideInspect();
         }
 
         // ---- picture buttons and their tooltip ----
@@ -1624,7 +1639,8 @@
                 : 'Upcoming · ' + (anchored ? '⚓ ' : '') + kind + ' in ' + turnsWord(next.turns);
             // The second line: what it will be, and whose turn it starts.
             const whose = owner(next.turns) === ME ? 'your turn' : 'their turn';
-            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card')) + ' · ' + whose;
+            const flipDetail = !state.axioms.deck.length ? (state.axioms.discard.length ? 'shared discard will be shuffled' : 'no rule card left to flip') : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card');
+            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : flipDetail) + ' · ' + whose;
             // Beyond the reel: the nearest event further than three turns away, with its count.
             const farIdx = tl.findIndex(ev => ev.turns > FATE_AHEAD);
             const farGhost = shift && moved > FATE_AHEAD;
@@ -1685,23 +1701,38 @@
             const AX = Rift.data.axioms || {};
             const reset = ev.type === 'reset';
             const known = !reset && i === 0 && top && AX[top];
+            const whose = (state.active + ev.turns) % 2 === ME ? 'your turn' : oppName + '\'s turn';
+            const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ', as ' + whose + ' starts.';
+            const effect = reset ? 'Every active rule card is removed. All axioms return to the basic rules for BOTH players.'
+                : known ? known.name + ': ' + known.text
+                : i === 0 && !state.axioms.deck.length && !state.axioms.discard.length ? 'No rule card is left to flip. Current axioms stay in play.'
+                : i === 0 && !state.axioms.deck.length ? 'The shared discard is shuffled, then its top card becomes active for BOTH players. The card is not known yet.'
+                : 'A free flip uses the shared deck’s top card, if one is available. This later card is not known yet.';
+            const condition = known ? 'It is the top card of the shared axiom deck. If someone takes it first, the next card turns over instead.' : '';
             const m = el('div.b-fev' + (reset ? '.reset' : '.flip') + (ghost ? '.ghost' : '') + (far ? '.far' : ''), {
                 tabindex: ghost ? null : 0, role: ghost ? null : 'button',
-                'aria-label': 'Upcoming ' + (reset ? 'reset' : 'new rule') + ' in ' + ev.turns + ' turns. Not active yet.',
+                'aria-label': when + ' ' + effect + (known ? ' It replaces: ' + replacedRule(top) + '. ' + condition : ''),
             }, [
                 icon(reset ? 'ui/fate-reset' : 'ui/fate-flip', reset ? '↺' : '✦', 'b-fev-icon'),
                 el('span.b-fev-label', { text: (reset ? 'Reset' : 'New rule') + (far ? ' · in ' + ev.turns : '') }),
             ]);
             if (ghost) return m;
-            const make = () => (known ? [axiomCardEl(top, { size: 'big' }), el('div.b-notes', {}, [
-                el('div.b-note-line', {}, [el('b', { text: 'Upcoming · not active yet. In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ' }), 'this rule card turns over for free and changes the rule for BOTH players.']),
-                el('div.b-note-line', {}, [el('b', { text: 'It replaces: ' }), replacedRule(top)]),
-                el('div.b-note-line.b-flavour', { text: 'It is the top card of the shared axiom deck. If someone takes it first, the next card turns over instead.' })])]
-                : [el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: (reset ? 'Reset' : 'New rule') + ' in ' + ev.turns + ' turns: ' }),
-                    reset ? 'every rule card in play is removed. All rules go back to the basics.' : 'the top card of the shared axiom deck turns over for free.'])])]);
-            hoverInspect(m, make, 'fate:' + i);
-            m.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), m, 'fate:' + i); });
+            const make = () => [el('div.b-notes', {}, [
+                el('div.b-note-line', {}, [el('b', { text: when })]),
+                el('div.b-note-line', { text: effect }),
+                known ? el('div.b-note-line', { text: 'It replaces: ' + replacedRule(top) + '.' }) : null,
+                condition ? el('div.b-note-line.b-flavour', { text: condition }) : null,
+            ])];
+            inspectFateMarker(m, make, 'fate:' + i);
             return m;
+        }
+        function inspectFateMarker(node, make, key) {
+            hoverInspect(node, make, key);
+            const open = () => { if (!ui.suppressClick) showInspect(make(), node, key); };
+            node.addEventListener('click', open);
+            node.addEventListener('keydown', ev => {
+                if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
+            });
         }
         // " Fate resets all rules in 1 turn!" when a reset is that close (else '').
         function resetSoon() {
@@ -1727,13 +1758,15 @@
             const who = h.by === ME ? 'You' : h.by === OPP ? oppName : 'Fate';
             const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 sooner' : h.kind === 'rewind' ? who + ': Fate 1 later'
                 : (h.kind === 'flip' ? 'Fate turned over ' : who + ' played ') + (ax ? ax.name : 'a rule');
-            const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': text },
+            const when = h.k === 0 ? 'this turn' : -h.k + ' turn' + (h.k === -1 ? '' : 's') + ' ago';
+            const detail = 'Already happened · ' + when + '. ' + text + '. '
+                + (h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : ax ? ax.text + ' ' : '')
+                + 'See Axioms for what is active now.';
+            const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': detail },
                 [h.kind === 'reset' ? el('span', { text: '↺' }) : h.kind === 'forward' ? el('span', { text: '⏩' }) : h.kind === 'rewind' ? el('span', { text: '⏪' })
                     : has('ui/axiom-' + h.id) ? Rift.Assets.img('ui/axiom-' + h.id, { alt: '' }) : el('span', { text: '⚖' })]);
-            const make = () => (ax ? [axiomCardEl(h.id, { size: 'big' }), el('div.b-notes', {}, [el('div.b-note-line', { text: text + (h.k === 0 ? ' (this turn).' : ' (' + -h.k + ' turn' + (h.k === -1 ? '' : 's') + ' ago).') })])]
-                : [el('div.b-notes', {}, [el('div.b-note-line', { text: text + '.' })])]);
-            hoverInspect(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || ''));
-            m.addEventListener('click', () => { if (!ui.suppressClick) showInspect(make(), m, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || '')); });
+            const make = () => [el('div.b-notes', {}, [el('div.b-note-line', { text: detail })])];
+            inspectFateMarker(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || ''));
             return m;
         }
 
@@ -3010,6 +3043,10 @@
                 clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); clearTimeout(ui.revealTimer); clearTimeout(ui.hintTimer); clearTimeout(ui.sayTimer); clearTimeout(ui.sayCap); cancelLongPress(); hideTip();
                 ui.ended = true; cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
+                if (root.removeEventListener) {
+                    root.removeEventListener('resize', positionFateInspection);
+                    root.removeEventListener('scroll', positionFateInspection, true);
+                }
                 if (help) help.close();
                 if (guide) stopVoice();
             },
