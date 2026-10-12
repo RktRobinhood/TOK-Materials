@@ -148,5 +148,16 @@
       109
     ],
     "nativeDependenciesAdded": true
+  },
+  "environment": {
+    "number": 128,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/128",
+    "title": "Environmental Fate schedules",
+    "blockedBy": [
+      118,
+      119,
+      120
+    ],
+    "nativeDependenciesAdded": true
   }
 }

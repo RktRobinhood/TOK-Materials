@@ -11,3 +11,5 @@ Exact next steps: The four expansion/reward/catching/pack issues are now publish
 Heartbeat finish-rift-card-planning checks allowance hourly and resumes unfinished planning only. Delete it after all requested planning and issue handoff are finished. Do not start game implementation. Source repo RktRobinhood/TOK-Materials, main; game AGENTS requires scoped work/push.
 
 Latest additional request: target-specific +/-1 strength/weakness, minimum-one proposal, wheel icon/diagram and tutorial after redesigned board. See COLOUR-MATCHUPS.md. Six actual card colours versus five avatars: proposed balanced next-two/previous-two/opposite-neutral model; zero-attack/prevention interactions need explicit treatment.
+
+Final teacher request: environmental Fate events belong on the track, deterministic and scene/opponent/difficulty-specific. Jumping over an environmental occurrence permanently skips it, even after rewind; recurrence creates a distinct new occurrence. Issue #128 and ENVIRONMENTAL-FATE.md capture it. Continue unfinished planning after allowance recovers; user explicitly requested this continuation.

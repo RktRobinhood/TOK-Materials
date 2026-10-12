@@ -23,3 +23,5 @@ One complete slice at a time; honour blockers and teacher decisions. [Starter/ca
 Native dependencies match text blockers. Content-release tickets also honour #109 and relevant Fate gates stated in their bodies. Start with #112/#113; board refinement #122 is independent. The full 210-card catalogue and detailed economy draft are unfinished and tracked in PLANNING-CHECKPOINT.md for continuation. No runtime content or mechanics were changed.
 
 - [#127](https://github.com/RktRobinhood/TOK-Materials/issues/127): colour strength/weakness aiming previews and wheel teaching; blocked by #109 and the stated rule decisions.
+
+- [#128](https://github.com/RktRobinhood/TOK-Materials/issues/128): deterministic environmental Fate schedules by opponent/scene/difficulty; blocked by #118/#119/#120.

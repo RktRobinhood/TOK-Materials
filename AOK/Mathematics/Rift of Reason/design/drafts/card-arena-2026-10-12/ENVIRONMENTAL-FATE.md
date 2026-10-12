@@ -1,0 +1,13 @@
+# Environmental Fate schedules — teacher direction, 12 October 2026
+
+Mandatory and optional story card battles should have public, deterministic environmental events tailored to the opponent, scene and difficulty. Events belong on Fate spaces, labelled Environmental with a source icon/name; they are not an unrelated side timer. Their effects/countdowns are inspectable before resolution. Examples such as every two/four/six refer to full turn cycles/rounds under the latest approved cadence, not individual player turns.
+
+Teacher explicitly says jumping past an environmental event prevents it from happening; mark it skipped permanently. Rewinding must not resurrect that skipped occurrence. A recurring environment may schedule a distinct later occurrence, with its own identity/countdown, rather than replaying the skipped one. This settles environmental skip semantics only; replay rules for player-created repeatable spaces still need #118.
+
+Hard bosses can have frequent, publicly signalled advantages (e.g. every two rounds); introductory battles should use mild, quirky character effects that teach planning. Random-looking flavour is allowed, but the scheduled effect must be fixed and visible, never secretly rerolled at trigger time. Avoid hidden unfairness or tutorial actions invalidated without explanation.
+
+Draft examples, not approved balance: Fair practice/Syllo cheer at round 4 gives both sides +1 energy for their next turn; Clockmaker workshop clockwork event every 4 rounds publicly schedules the next Axiom; a late Algorithm boss every 2 rounds grants one named enemy creature +1 attack for a bounded duration. Choose targets deterministically and show fallbacks if a named source is absent. These examples require an inventory of actual encounter configs before assignment.
+
+Audit every actual mandatory/optional card battle and publish a configuration table: encounter, opponent, scene, difficulty, event identity, effect, first round, recurrence, target rule, duration, skip behaviour and intended counterplay. Scenario-specific rules live in encounter data, not scattered opponent-name conditionals. Tutorial/practice exceptions and Easy/Hard differences must be explicit. Preserve normal Axiom/Fate changes and show event ownership distinctly from scheduled player spells.
+
+Test predictions versus resolution, both starting positions, full-round cadence, leap skip forever, rewind after skip, recurrence with new IDs, missing targets, simultaneous events, save restore, AI/public knowledge and visual cancellation. Playtest pacing and difficulty before broad rollout; use existing shared sounds and Calm motion.
