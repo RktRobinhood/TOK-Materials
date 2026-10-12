@@ -1,0 +1,1618 @@
+{
+  "date": "2026-10-12",
+  "newClips": 217,
+  "currentRecorded": 1532,
+  "currentTotal": 2565,
+  "manifestFiles": 1901,
+  "usage": {
+    "day": "2026-10-12",
+    "counts": {
+      "gemini-3.8-flash-tts": 10,
+      "gemini-3.8-flash-lite-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "lobstorian-possessed-dik5gk",
+      "speaker": "lobstorian-possessed",
+      "expected": "The crack goes left. Stand up straight and go left.",
+      "seconds": 7.944,
+      "sha256": "2affd27759299234c07f21e875df2743fef9df483730aa8eb27ed521a094b857"
+    },
+    {
+      "id": "tremendoodle-possessed-hi7gzw",
+      "speaker": "tremendoodle-possessed",
+      "expected": "Wrong. It goes right. The best right. Everyone says so.",
+      "seconds": 8.784,
+      "sha256": "7c5608c280de76270be56a40312faeacdf8ccb45c9d537411f704f1841ccb2a5"
+    },
+    {
+      "id": "lobstorian-19mkul3",
+      "speaker": "lobstorian",
+      "expected": "Was I shouting? Sorry. I should go and tidy my room.",
+      "seconds": 4.776,
+      "sha256": "34850b785c9ddb1e6ad2ba2c9ee656ef7ba22d294c8376ddd04bbb532f1b33e5"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1n9e1l7",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Salesmen. Tuesdays it's always salesmen. Every Tuesday for years.",
+      "seconds": 6.912,
+      "sha256": "aa7513051a915baad7980b80d308c0f421a83300e71ddb42d0291505c2fd1b61"
+    },
+    {
+      "id": "avatar-raven-girl-inner-6ylx6a",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"A pot never hurt anybody.\" Grannies know pots.",
+      "seconds": 4.704,
+      "sha256": "c8a94912503c6e93c9904735049ddae3ee825ba5f951461b016442bec7e269de"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-14yis2s",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Every Tuesday, salesmen. This Tuesday, imps.",
+      "seconds": 4.464,
+      "sha256": "2fd7153f0b28a247b18a40d67e25b60bea62d298a221bcb852ac737020ed7534"
+    },
+    {
+      "id": "avatar-raven-girl-inner-wpayff",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Never.\" Biggest little word there is.",
+      "seconds": 3.288,
+      "sha256": "8fdc2a7cde18b37a2560f5bc64fd5439b9fb5633b979df1b10a7449d4eae048f"
+    },
+    {
+      "id": "corvina-vlk1d2",
+      "speaker": "corvina",
+      "expected": "Leaving so soon, little traveller? One hand first. Cards are good for worrying.",
+      "seconds": 6.288,
+      "sha256": "620809e7b24bb5b0b7cfb5df1a8f852131e6358ba1a1e45674f3bab923716d83"
+    },
+    {
+      "id": "keanu-qtncee",
+      "speaker": "keanu",
+      "expected": "Oh, hi. Going through? About the pie. I forgive you. I forgive the chef. I forgive the vent.",
+      "seconds": 8.832,
+      "sha256": "2bd064569370ed32cf3fcdc84a6031763a51dd8a0707f8bc1b224264d87b5d1f"
+    },
+    {
+      "id": "avatar-raven-boy-inner-3xxi0o",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"By order of the Mayor.\" Order. Not \"idea\". Interesting.",
+      "seconds": 4.992,
+      "sha256": "43ec6389304a6cb9acaf3d1eec629f199a57a67dc65cfe53d7b22e38279ac8ab"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1xntfu1",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"By order of the Mayor.\" Order. Not \"idea\". Interesting.",
+      "seconds": 6.888,
+      "sha256": "96af2ebd0fc05e44f33a6d202b7c52cb4851fd98d029729493ea57f462681d8c"
+    },
+    {
+      "id": "nudge-1vcflp6",
+      "speaker": "nudge",
+      "expected": "Flyers! Ring light smashed, so: new mask. Villagers trust villagers. Feast tonight!",
+      "seconds": 7.488,
+      "sha256": "c7c116c6e3b0b5824cd89bec4866ea4276c70d7da87cb32d868a52ac8dab2950"
+    },
+    {
+      "id": "nudge-nnl02p",
+      "speaker": "nudge",
+      "expected": "Flyers! Feast tonight! Like my mask? Nothing under it. Nothing shadowy.",
+      "seconds": 7.68,
+      "sha256": "140ee945af7731a4f3a44013347cbd9d42a05ff514c9f238974fbd62962937e5"
+    },
+    {
+      "id": "nudge-1pf0q8e",
+      "speaker": "nudge",
+      "expected": "Tonight's soup: one Granny Axiom! No Granny, no first rules. Engagement!",
+      "seconds": 7.344,
+      "sha256": "4bc41bcd77bb9dd5bb7fc27b78ea51cd381d691b836d2501a7246b7f42914ef7"
+    },
+    {
+      "id": "lamplighter-13fwmja",
+      "speaker": "lamplighter",
+      "expected": "Evening. Old Wick. They want the feast stove lit. Not till this bridge comes down.",
+      "seconds": 7.416,
+      "sha256": "2bfb2fc01a041c6decc936fa382ed43ccdc21cb3a3c7bb9a3cdbef05867707ea"
+    },
+    {
+      "id": "lamplighter-11rxs4",
+      "speaker": "lamplighter",
+      "expected": "The lamps agree with you. They rarely agree with anyone.",
+      "seconds": 4.248,
+      "sha256": "6386c0a5690f2803d87e64df81b17611551a7aa0ee4511562498bdc1a2fd5fc3"
+    },
+    {
+      "id": "lamplighter-1n3cp78",
+      "speaker": "lamplighter",
+      "expected": "My neighbours are whispering again. Somebody says somebody is an imp. Every night.",
+      "seconds": 7.224,
+      "sha256": "4065ead1d9a678b2d460b42b70ea632179d3cf4d0731584825a812cd62eac904"
+    },
+    {
+      "id": "lamplighter-pt5xu1",
+      "speaker": "lamplighter",
+      "expected": "Nobody shouted. Nobody fainted. Best evening in years.",
+      "seconds": 4.032,
+      "sha256": "836c54711c81df01f82ddcdf7943ca072700f6435a88700fc2fe60d4a233bf76"
+    },
+    {
+      "id": "baker-k5q6sb",
+      "speaker": "baker",
+      "expected": "My last loaf is missing.",
+      "seconds": 2.184,
+      "sha256": "873fe463e1968969376ca3c452748366018b84f3dcdd21a43ae634ce0cd26dd4"
+    },
+    {
+      "id": "mayor-1u64sb3",
+      "speaker": "mayor",
+      "expected": "Not me! Smudge!",
+      "seconds": 1.728,
+      "sha256": "b3c4b9292aded22a72177627353b71a1d95809dc9c967bb1323c3566d9818bab"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-156cv6z",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The loud one is always the bad one. Muskrat. The guards. Now him.",
+      "seconds": 5.64,
+      "sha256": "bc237c0af01625fd8cc32596247893ec1f3f231da78efd3006515db9ef952676"
+    },
+    {
+      "id": "postmistress-9cgb12",
+      "speaker": "postmistress",
+      "expected": "Never mind bread! The flyers say imps. Which of you three is one?",
+      "seconds": 5.088,
+      "sha256": "cb6ce0294894af812e01b31605e6117c0f90a1517d9ca508df43b9657d1162a5"
+    },
+    {
+      "id": "mayor-1gabqi5",
+      "speaker": "mayor",
+      "expected": "See? Not an imp! I have not seen your loaf. Also, this statement is false.",
+      "seconds": 7.896,
+      "sha256": "cf92a0b74e1ec2f2c8f3438ef3c77f534b5f784c268018ee20611424f4da8f2f"
+    },
+    {
+      "id": "mayor-17czg4h",
+      "speaker": "mayor",
+      "expected": "I heard that! I'm behind nothing! I'm in front of everything!",
+      "seconds": 4.488,
+      "sha256": "a357fa5b19b65eaea496f9827003cdc021fc0c9bef040e008272d89196d2cb78"
+    },
+    {
+      "id": "nudge-jv8adt",
+      "speaker": "nudge",
+      "expected": "Constable! A stranger! Ask them EVERYTHING! I'll count the questions!",
+      "seconds": 5.64,
+      "sha256": "0bd17832629770f3cbcb253c175cc947e66a8ddeeaf3dd49fb398fd2c9df96e5"
+    },
+    {
+      "id": "avatar-raven-boy-inner-2hpcfx",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "If I say it smoothly enough, I am one. Words make things so.",
+      "seconds": 5.136,
+      "sha256": "55811e7e35a3dccb3f9feda9e74c47fb820c2469a24ddc7a2f8c0bdfdab92f45"
+    },
+    {
+      "id": "avatar-raven-girl-inner-3bhpjx",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "If I say it smoothly enough, I am one. Words make things so.",
+      "seconds": 6.768,
+      "sha256": "0b36041981ccec537a517d13df1eb06749272a878870d5c805fe97a610c94dee"
+    },
+    {
+      "id": "postmistress-18om4hr",
+      "speaker": "postmistress",
+      "expected": "The Constable's back, dear. He likes our ink.",
+      "seconds": 2.928,
+      "sha256": "5caa2c3fdd9aad9e2652c478b69d5a1148a11e366747b58f04a19e65a0f7ded5"
+    },
+    {
+      "id": "postmistress-1rx94ci",
+      "speaker": "postmistress",
+      "expected": "Everybody's a postman this week, dear. Here, a cap. Pick a better story.",
+      "seconds": 4.896,
+      "sha256": "445be168d976d331f51e3fcf3a667b36538c5493481c84eea1293ca8a1e59bb8"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1cr1rb8",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "Smooth words. Still a story. He knew.",
+      "seconds": 4.008,
+      "sha256": "4df5e0f7bd00fa4b230708af9d9989249e015ffce57458c7643dc368cb8615b5"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1lrdsdq",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "Smooth words. Still a story. He knew.",
+      "seconds": 4.608,
+      "sha256": "d6e114acbb13671fade390ae27f31a95558d954b37aa32c59807ecb7708bde8a"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1b7vptc",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "True words. Still not proof. Noted.",
+      "seconds": 2.496,
+      "sha256": "45c84f0071b1f81dbc00459fc01c11c9e9548345a2aa863fc1afad8c8fb02d8b"
+    },
+    {
+      "id": "avatar-raven-girl-inner-mh9mil",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "True words. Still not proof. Noted.",
+      "seconds": 2.952,
+      "sha256": "da94176857e5e315cc4e2d207a392c965adc5dc71acb4be81242217f78696416"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-45cgh9",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "\"Tall.\" Lots of birds are tall. Herons are tall. I'm not enjoying this.",
+      "seconds": 6.264,
+      "sha256": "2e4200ef9dd79c385ed20361da21d996f824c4b3d5cba7cb3c15806e27be4e74"
+    },
+    {
+      "id": "mayor-9c99np",
+      "speaker": "mayor",
+      "expected": "You again! I'm busy. Being innocent.",
+      "seconds": 3.96,
+      "sha256": "2ba636271b789bf08ba04dcb41c63fb2d443ee970821e1e16326ec34900f5719"
+    },
+    {
+      "id": "mayor-v4a0fv",
+      "speaker": "mayor",
+      "expected": "Boiling? It said \"soup\"!…I stopped reading at \"soup\".",
+      "seconds": 4.584,
+      "sha256": "153edafc556f421236677b30fba2d330557c8b27f92846f976dec58446f1cfa2"
+    },
+    {
+      "id": "mayor-grj6a4",
+      "speaker": "mayor",
+      "expected": "Your table says I'm not an imp. True. I'm worse. I'm a mayor who doesn't read.",
+      "seconds": 6.336,
+      "sha256": "920fbb543f07c54b29cd36e5607adc7472abf5ffd2a8ae9ca811ee2597345371"
+    },
+    {
+      "id": "mayor-71b83j",
+      "speaker": "mayor",
+      "expected": "Cheering? For me?…Go on.",
+      "seconds": 3.096,
+      "sha256": "8c309ea6c2fb456a7a241f93f40464fba089281b89da1e7c9e7a7670f7989ef9"
+    },
+    {
+      "id": "mayor-ruxxv9",
+      "speaker": "mayor",
+      "expected": "On the MENU? I'm listening.",
+      "seconds": 2.616,
+      "sha256": "1b6820ca466c8e34ea1434911fb496ba759dca28e5d5a361b100e8a0b653ee3b"
+    },
+    {
+      "id": "mayor-1122rqk",
+      "speaker": "mayor",
+      "expected": "Facts! Boring! And rude!",
+      "seconds": 3.216,
+      "sha256": "155d6803adbbdff8d053584f3b255584a9e8b4819d664562b52c4bd5af53b649"
+    },
+    {
+      "id": "mayor-diwqpe",
+      "speaker": "mayor",
+      "expected": "But the decree has my name on it. In gold!",
+      "seconds": 4.512,
+      "sha256": "8952bea50bf5d4e5832d6aec1afa963ee3b315d684e2b08a5192c58f1463240f"
+    },
+    {
+      "id": "mayor-1j9kdxt",
+      "speaker": "mayor",
+      "expected": "In front of everyone?…Dramatic. I love it.",
+      "seconds": 4.08,
+      "sha256": "2dadcc340ee479f6fce4caa670c54352400e38d3de6594db5ea52e61a18690aa"
+    },
+    {
+      "id": "mayor-1qrhqyv",
+      "speaker": "mayor",
+      "expected": "Nobody needs to know. My favourite words.",
+      "seconds": 2.592,
+      "sha256": "3a481654bfc101ad0131f72c5187a3e5d4d90728a96219b348bac7dc91e6435f"
+    },
+    {
+      "id": "mayor-18gm4fk",
+      "speaker": "mayor",
+      "expected": "Clauses! I don't do clauses!",
+      "seconds": 3,
+      "sha256": "f5caea82a13a2ef4a41e270e7d72d494d4495712487a046d8ffdcd57912bca68"
+    },
+    {
+      "id": "mayor-11h0uum",
+      "speaker": "mayor",
+      "expected": "Citizens! The feast is OFF! By order of… me. Again.",
+      "seconds": 5.76,
+      "sha256": "102eecedb1d7651fdb5bb9e281f9ff5c7d62e7ef53ebf58426d5ab11c6ba2e54"
+    },
+    {
+      "id": "baker-12gwf9w",
+      "speaker": "baker",
+      "expected": "Imps in my queue! In my customers' faces! Which ones?",
+      "seconds": 3.912,
+      "sha256": "81c93ebdb257c7e5be842096d172231c29038753cf5f96ba70a7fb846ee30978"
+    },
+    {
+      "id": "baker-a9gxq2",
+      "speaker": "baker",
+      "expected": "Well! I'd have blamed the one who looked nervous.",
+      "seconds": 4.056,
+      "sha256": "e339b29b93e98c288201c03cb15e1a6187d4afa75c518c39fc7b1388316c31f3"
+    },
+    {
+      "id": "nudge-1o0bdi0",
+      "speaker": "nudge",
+      "expected": "Tradition!",
+      "seconds": 1.536,
+      "sha256": "6fbd0fbee0ba58d2215ddcec964b847066e031ef362a6fe07f7b01a94895ec6d"
+    },
+    {
+      "id": "nudge-wkk7kd",
+      "speaker": "nudge",
+      "expected": "Paws off my winch! Every turn is a click! Every click, she goes lower!",
+      "seconds": 5.112,
+      "sha256": "ef1e4eaefe065e6a53195d4e29e837ae7b2f57cf944b4e8c2d6dd4281d4c81b3"
+    },
+    {
+      "id": "nudge-9sdny",
+      "speaker": "nudge",
+      "expected": "My mask! Forty villagers trusted that face! I COUNTED!",
+      "seconds": 5.592,
+      "sha256": "0cb9a8669e9d2f3da25119b261677b81ee5fec7443f1d60eec9d309c49c8f0f8"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-3ujopq",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Loud was bad three times. The fourth time, quiet was.",
+      "seconds": 5.4,
+      "sha256": "ffb93d46fb3d456bcc7d4f73e2f6d94cb6563a75ce2ba92d3c58b8ee58df10da"
+    },
+    {
+      "id": "lamplighter-nnmpna",
+      "speaker": "lamplighter",
+      "expected": "Set the levers right and the bridge comes down. Set them wrong and… it doesn't.",
+      "seconds": 8.232,
+      "sha256": "4681c624cd9972ac3b90ee39fd0425c26585b45144d6bf3498003fa25ad9cf30"
+    },
+    {
+      "id": "lamplighter-was802",
+      "speaker": "lamplighter",
+      "expected": "Back to my levers? They don't mind. They're very patient levers.",
+      "seconds": 7.368,
+      "sha256": "5ee38821eef40009240008f17b1145135e824bf4a427981b4c31cea3278f053e"
+    },
+    {
+      "id": "lamplighter-9rj9wg",
+      "speaker": "lamplighter",
+      "expected": "Hear my neighbours out. Then see which of them can be honest.",
+      "seconds": 4.632,
+      "sha256": "4a96290106376891255dc17b8d438630831a46cc26c3787639aa691a2541001e"
+    },
+    {
+      "id": "lamplighter-sxn6wy",
+      "speaker": "lamplighter",
+      "expected": "Whispering again. Hear them out. Every one.",
+      "seconds": 4.392,
+      "sha256": "5e306cbb99a2ab717134a28c83d9be9aecbb195f17dd25f8cbc7accb58700e00"
+    },
+    {
+      "id": "baker-1s27n8v",
+      "speaker": "baker",
+      "expected": "Check every word before you point. I've been pointed at. It's rude.",
+      "seconds": 5.496,
+      "sha256": "ca29194dc6abd33607d5485f7eb8bfb71c37d57e4b0e4dbe637ec3fd291c635d"
+    },
+    {
+      "id": "baker-7bbs5w",
+      "speaker": "baker",
+      "expected": "More imps in the queue. Check before you point.",
+      "seconds": 3.048,
+      "sha256": "510646d8bf910fcd88fd4f6e2512d4dd1a49cce210062f273ffacba672a6db3e"
+    },
+    {
+      "id": "baker-uhfiaw",
+      "speaker": "baker",
+      "expected": "Granny's ladles. Granny's recipe. Exact cups, or nothing.",
+      "seconds": 4.392,
+      "sha256": "d2f47d952b5171366419e74abfd0186962ca86103ec4b273eaf85431885dafef"
+    },
+    {
+      "id": "baker-1gj5xh6",
+      "speaker": "baker",
+      "expected": "Ladles again. Exact cups. Granny would know if you guessed.",
+      "seconds": 5.28,
+      "sha256": "9e1f5a5ca66e47d5454419177182c63ef373688a3d91a71837ddcaa062c67c1a"
+    },
+    {
+      "id": "avatar-raven-boy-inner-giunuc",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Admits.\" Only the guilty admit. Whoever this is, they did it.",
+      "seconds": 5.496,
+      "sha256": "c33eb956b64d015b795b046fa99a2f2fe08211276b73ce808ddab6ea7876b155"
+    },
+    {
+      "id": "avatar-raven-girl-inner-s14kyw",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Admits.\" Only the guilty admit. Whoever this is, they did it.",
+      "seconds": 6.432,
+      "sha256": "83f9d435e75cd6b0eedbf2e45d280530aa0f621476d78e2d348f9ed421721e0b"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-u2z63c",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Fin's never lost. He won't lose this. Never has, never will.",
+      "seconds": 7.872,
+      "sha256": "78e8badaf1feaf426273a1117fcc56d4e9e18ef4dcb3f02b60e5bba39ffff842"
+    },
+    {
+      "id": "nudge-1gwtc4m",
+      "speaker": "nudge",
+      "expected": "Votes! Lovely votes! Guilty or guilty? Click now!",
+      "seconds": 4.728,
+      "sha256": "2f5d028f8317fac130565b8786c928bb99f710301044b491347d02deb34257d0"
+    },
+    {
+      "id": "avatar-raven-boy-inner-ybyyt9",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Saved to favourites.\" Those exact words. At the Fair.",
+      "seconds": 4.896,
+      "sha256": "09c6bcff39a1d463906ccde2c9ce9ad70c2cf7a5294e46076d371e3b032722fc"
+    },
+    {
+      "id": "avatar-raven-girl-inner-twx5th",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Saved to favourites.\" Those exact words. At the Fair.",
+      "seconds": 5.352,
+      "sha256": "fe194bbe3e5210379b137f1323c610a9f7c6e4c17fbe410df912c1141b678a50"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1qvr08j",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Saved to favourites.\" A boast. Boasts leak.",
+      "seconds": 3.264,
+      "sha256": "46c25ccaf5536c27670530dec25191537d9ba34c5ab98c9962daa8951542eb86"
+    },
+    {
+      "id": "avatar-raven-girl-inner-16wq2t7",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Saved to favourites.\" A boast. Boasts leak.",
+      "seconds": 5.184,
+      "sha256": "dc10a56894f859498992cf299d98d0bb5b248374c5d049e708e0857f5bf67812"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-14918g2",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "\"I guess.\" The Fair. The very first morning. I remember now.",
+      "seconds": 6,
+      "sha256": "ce210e90820b0fa6079427f98202ce6542eb94493a34a8a5b54985cd7d042939"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1x9ei8",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "That wasn't me. I always remember which. Ask me anything.",
+      "seconds": 5.832,
+      "sha256": "5dd8c0e9d41a1bc920e5e6a0679f74139c6e670a1965156d2c5dabc429df0d7d"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1iajobt",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "That wasn't me. Strong words make me suspicious. They always have.",
+      "seconds": 6.216,
+      "sha256": "a91d14985b84484ea21848e75508100c304cc84ff89dae582a92c8805c8e9ed6"
+    },
+    {
+      "id": "avatar-raven-girl-inner-qajrn6",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "That wasn't me. Strong words make me suspicious. They always have.",
+      "seconds": 6.24,
+      "sha256": "3164f014d375df83917ce8b774c1237215ee78944732c0c841fc7e239c12eabe"
+    },
+    {
+      "id": "nudge-d49j2k",
+      "speaker": "nudge",
+      "expected": "Boo! He was MY witness. I had him at a million views.",
+      "seconds": 4.872,
+      "sha256": "8492e2428a69d70dfd9cd44a309673107a7a7c5edb7681a7e1c8765480af627d"
+    },
+    {
+      "id": "nudge-crd2qk",
+      "speaker": "nudge",
+      "expected": "Nobody counts imps. It counted me. Every click. I was a NUMBER!",
+      "seconds": 7.464,
+      "sha256": "7828219c1cd37130c1c496e8eb694e8dd30fa4c3ab15f01fd9fb9df9434b2566"
+    },
+    {
+      "id": "nudge-8h7e57",
+      "speaker": "nudge",
+      "expected": "…Nudge. Nobody asks imps.",
+      "seconds": 4.008,
+      "sha256": "0cc9fde84102070b374daeeeb3ec6847010f900f61fdbdda64c57f602d8d86a4"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1q0uun0",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Admits\" was the headline's word. The quote just said \"I guess\".",
+      "seconds": 7.464,
+      "sha256": "ccbd050a6346a4cf4274cce383690652d8e5170c8477c2d68fc6559cf4b0c687"
+    },
+    {
+      "id": "avatar-raven-girl-inner-mklvkx",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Admits\" was the headline's word. The quote just said \"I guess\".",
+      "seconds": 6.504,
+      "sha256": "5c179e3bc349629c05da8278905b5ebde807e29af072d24c264a2df853b39df2"
+    },
+    {
+      "id": "nudge-17e6vjl",
+      "speaker": "nudge",
+      "expected": "I counted! I LOVE counting!",
+      "seconds": 3.12,
+      "sha256": "523378c45e1e87675a7289d3ca0619c615a66b71342ba589fa22f1c46678a985"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-pty4v9",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "\"A case he wanted to win.\" He wanted this one. It went anyway.",
+      "seconds": 5.928,
+      "sha256": "cfd330a8c83e6c24c52a3564d1b1011f7fe92edca3b1b8d694f2414e1eeffc45"
+    },
+    {
+      "id": "nudge-102lbvq",
+      "speaker": "nudge",
+      "expected": "…Why is nobody cheering?",
+      "seconds": 2.616,
+      "sha256": "56572679e00534bdc7a520e208f717f1427e6eb24c33157e30853254fc829bcd"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-w37g9g",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "\"A case he wanted to win.\" Small print. Always read the small print.",
+      "seconds": 6.456,
+      "sha256": "f9217c6fbe663c022e37452e200d0fde6c426bb8c4b2f9729eef61d6b7af5737"
+    },
+    {
+      "id": "nudge-ntfv40",
+      "speaker": "nudge",
+      "expected": "Hold still! I'm cutting out your voice. For the new you.",
+      "seconds": 5.136,
+      "sha256": "78012f4560ecabb9ddfbbe28315b05a7ae45cc796ee46da242adddcc2fc9df10"
+    },
+    {
+      "id": "nudge-ck8tva",
+      "speaker": "nudge",
+      "expected": "Your voice was too noisy. I'm using the rock's. Two pieces of it.",
+      "seconds": 5.256,
+      "sha256": "4b5142d9c890fc13a74e6e6a7dbc1fc9cd48a9915e1e112e57de0dd54e53e4e1"
+    },
+    {
+      "id": "avatar-raven-boy-inner-163t806",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Predictable.\" Not \"known\". It picked that word carefully.",
+      "seconds": 5.448,
+      "sha256": "50c855686f8aaec1aef4fe82e8b099ded9dd089e111a903dcb7894ea87c414d0"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1v5esn4",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Predictable.\" Not \"known\". It picked that word carefully.",
+      "seconds": 4.44,
+      "sha256": "7ce129377457d24bb984da8958cc823bac3ecef8fe8795934808148ba9d183cc"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-8u3c",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "It's been right five times. Five out of five. It knows me.",
+      "seconds": 4.632,
+      "sha256": "ccd96a84a16deca13c333fbcde365fad8c547c0dd4e0c9c0eb64eff88d216d11"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-iuyvts",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Five right. Then I changed. It didn't.",
+      "seconds": 4.368,
+      "sha256": "b77e11db136df79d161fd19e6ecf55762dadec0f13cd0e9bc66f193fb191de17"
+    },
+    {
+      "id": "nudge-8oocix",
+      "speaker": "nudge",
+      "expected": "He asked my name. For the record. Nobody asks imps.",
+      "seconds": 4.176,
+      "sha256": "18b61b8fc25d110792cf49fe9f38cb1f4f804ddf85220d8b0ba108cfcffd476c"
+    },
+    {
+      "id": "avatar-raven-boy-inner-18rxvp2",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "Called \"thinking\". Never checked once.",
+      "seconds": 3.84,
+      "sha256": "784038fae31553e50c5f5d6e2a5cff899bfc44c8dc9a5015a43a11f29991b982"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1bi3ruo",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "Called \"thinking\". Never checked once.",
+      "seconds": 3.744,
+      "sha256": "b3ac175dd7c5fabbec23db4aebd5c8268437ef3a8750f2416cfa7e45dcec67f7"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-m76otw",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Pip checked one. I remember when he didn't.",
+      "seconds": 4.464,
+      "sha256": "49a69ee4e1ba5d30e5c20bdfc204ff21c787be5ce535d0ec05af105e21028252"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1u1gfvs",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "He'd have checked this one.",
+      "seconds": 2.688,
+      "sha256": "22291fbeae2d18eda3cc1af4006ca7e55a248efa7c6392c4f3f46dd8f7a4cbaf"
+    },
+    {
+      "id": "nudge-b1dqyy",
+      "speaker": "nudge",
+      "expected": "Votes! Lovely votes! Against you, this time!",
+      "seconds": 4.32,
+      "sha256": "f7f722606bab3f8ccb12d8c71baa616d0ef0066ad2b7c7daecc264226fe7f52a"
+    },
+    {
+      "id": "nudge-bak5u0",
+      "speaker": "nudge",
+      "expected": "Votes. Against you.…I'm counting. I'm not enjoying it.",
+      "seconds": 4.32,
+      "sha256": "9b28f2220cf4ad05baf22a0ea7950ac2f3a5852fd6cc03da921a96cb6be8290b"
+    },
+    {
+      "id": "nudge-12gabdg",
+      "speaker": "nudge",
+      "expected": "Not again.",
+      "seconds": 1.2,
+      "sha256": "aded82b8ed6a00a72c47c3e56a77150c1b1277654e8ab55709904a73fea8037a"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1u7tgpj",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "You counted a few things I did. Never why.",
+      "seconds": 4.392,
+      "sha256": "0799032e42942086cbe92df236253f22f791e98ce862d0b62a4d765b342be51e"
+    },
+    {
+      "id": "avatar-raven-boy-inner-cyolxf",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "You said \"know\". You meant \"guess\".",
+      "seconds": 3.816,
+      "sha256": "25c550cd87cfae910545653a65535fe14242f9cf2a9192180baf16504ed0368b"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1p32dgh",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "You said \"know\". You meant \"guess\".",
+      "seconds": 3.984,
+      "sha256": "fb7042e1b7f000006b46a84754901eb022f4143c2bf3b71119a7815045d6baa8"
+    },
+    {
+      "id": "nudge-jjqp1g",
+      "speaker": "nudge",
+      "expected": "…Why?",
+      "seconds": 1.056,
+      "sha256": "635bcec01e751b14e5333145b67a03dac14d245597322e8a69f151b02e7c53cb"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-r2a6x0",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "A heron. At the Fair.…It's just looking at the cakes. Huh. Not every heron.",
+      "seconds": 8.4,
+      "sha256": "2202e8344bf9823d5bd48c3d20238171e149e9202a5919eac47b2592b4779c83"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-8icdkr",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Compare it with something real. Like a pond filling up.",
+      "seconds": 6.792,
+      "sha256": "3908712e8fcc031142e99a552a424d58c2b52b86ce3babe0837887dbe813b276"
+    },
+    {
+      "id": "avatar-raven-boy-inner-14fawj4",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Thinking engine.\" It's in the name. It thinks.",
+      "seconds": 4.488,
+      "sha256": "1ccda5b71933446638e85d8a32974de90654958624b1f43603dd92d0fb9907ad"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1ifevjj",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Thinking engine.\" It's in the name. It thinks.",
+      "seconds": 4.8,
+      "sha256": "f3331a5030fece44adafcdb3a747caef4e795fe727d25b3d3b8a38df5b8a9671"
+    },
+    {
+      "id": "tremendoodle-possessed-1wo7so1",
+      "speaker": "tremendoodle-possessed",
+      "expected": "It admitted it! Everybody heard it! Tremendously guilty!",
+      "seconds": 7.656,
+      "sha256": "aed4f7d5a34317f56bf0cf038044d91d7b24b67858a639c725f5a490e6c9fc96"
+    },
+    {
+      "id": "nudge-10hsw5",
+      "speaker": "nudge",
+      "expected": "Seven! SEVEN! One more and it passes! One more click!",
+      "seconds": 6.936,
+      "sha256": "fc06477e367577b99d2d6f930e43d8a138dc5ae2c61710483442d8451064e9a9"
+    },
+    {
+      "id": "corvina-ilq4ht",
+      "speaker": "corvina",
+      "expected": "I didn't take the Thinking Trophy! Nobody believes a crow. Ever.",
+      "seconds": 6.216,
+      "sha256": "456fa087868d60cc21e0e9e635eb78572f5d0af2039f4563a5be4f79e268c984"
+    },
+    {
+      "id": "corvina-zci9h1",
+      "speaker": "corvina",
+      "expected": "These three aren't hostages. They're my witnesses. Nobody leaves until somebody listens.",
+      "seconds": 6.312,
+      "sha256": "e1483aab035a06c6bd354905e96f2c1add2480c6e40f0cef9174de9f40b96905"
+    },
+    {
+      "id": "corvina-1la21gd",
+      "speaker": "corvina",
+      "expected": "Who's out there? If it's another expert, go away.",
+      "seconds": 4.872,
+      "sha256": "5c8d5e8b542c3792f37645a46386089649e8b38562982466b9f73bfe6e396ec6"
+    },
+    {
+      "id": "corvina-72whwa",
+      "speaker": "corvina",
+      "expected": "Talk. Ha. Everybody talks. Nobody listens to a crow.",
+      "seconds": 4.392,
+      "sha256": "6d2760e77cac6eb97d1c734e058ba716106e8a18b8562c548b2784db6611416e"
+    },
+    {
+      "id": "corvina-1x96izb",
+      "speaker": "corvina",
+      "expected": "Hmph. You do, chick. Fine. I'll listen. For one hand.",
+      "seconds": 5.472,
+      "sha256": "35c298c6f608394f840445737ee44bd29eee96cde756beacb184469f7342076e"
+    },
+    {
+      "id": "corvina-10pcatp",
+      "speaker": "corvina",
+      "expected": "So you know it wasn't me. Lovely. Out there, they still \"know\" it was.",
+      "seconds": 5.88,
+      "sha256": "66044e0cac442ad6e1d97a9e435c1c745c6ba00f53553d7c12c03693cbe2647c"
+    },
+    {
+      "id": "corvina-1j5ogby",
+      "speaker": "corvina",
+      "expected": "Nobody. If I win at cards, I cheated. If I lose, I cheated badly.",
+      "seconds": 6.12,
+      "sha256": "9c0cc6310109962f1e7893bd2f68feeebe9c74e1943e8c7de2c3c5cefe4706af"
+    },
+    {
+      "id": "corvina-1bcd85f",
+      "speaker": "corvina",
+      "expected": "Tired? I'm a crow at a fair. I was born tired.",
+      "seconds": 4.848,
+      "sha256": "cab7e582aa6a11e17269fe4f03506382abaaf174cb8060452498a0c6aa5a98a8"
+    },
+    {
+      "id": "corvina-lgfpcr",
+      "speaker": "corvina",
+      "expected": "Yes. That.…Huh. Nobody ever said it back to me before.",
+      "seconds": 5.808,
+      "sha256": "dae7b9ece39a1877e2d6bbc0eb3f6bae4e89ff360ba101672a197e261553200e"
+    },
+    {
+      "id": "corvina-1d2p93c",
+      "speaker": "corvina",
+      "expected": "A crow, cleared in public. That would be a first. Go on.",
+      "seconds": 5.088,
+      "sha256": "3a4471e06b0b36d228c3fc31f93377b92ad30860b8b59ed52205cbddcc5909e5"
+    },
+    {
+      "id": "corvina-cohhad",
+      "speaker": "corvina",
+      "expected": "Full tables. Full pockets. Now you're speaking crow.",
+      "seconds": 6.192,
+      "sha256": "ee49522584bbb83fbedca3e5c53a6c0c1b77fd0cfd34128d055348ac84aab18e"
+    },
+    {
+      "id": "corvina-i6cc7v",
+      "speaker": "corvina",
+      "expected": "Don't you lecture me. Experts said crows steal shiny things.",
+      "seconds": 5.28,
+      "sha256": "1ae886cf218bdca0d583f44ab504577911af349d625162c47ade622442c76636"
+    },
+    {
+      "id": "corvina-ofh1v",
+      "speaker": "corvina",
+      "expected": "Facts. Lovely. That drum can't read.",
+      "seconds": 3.984,
+      "sha256": "1f9c015147f5487f21d46704315f655909af548380e38ba51fc7043f4796cdc6"
+    },
+    {
+      "id": "corvina-1hsvuto",
+      "speaker": "corvina",
+      "expected": "I've been hit by Tuesdays. Corks, though… Fine. Go on.",
+      "seconds": 6.84,
+      "sha256": "3a8fde2304c6a4a30fa09e97fee569476db58c82c0e3e5c6cd920445a899aba7"
+    },
+    {
+      "id": "corvina-41246g",
+      "speaker": "corvina",
+      "expected": "Logic. From an owlet. Fine. I'll allow it.",
+      "seconds": 5.376,
+      "sha256": "0f78c4533407e30df28bfcbceb7d188c6393768ea5423a9c1ad97e48b5a6e584"
+    },
+    {
+      "id": "corvina-1x2t4jr",
+      "speaker": "corvina",
+      "expected": "Black and white. Pretty, grub.…And if they see it, the corks go down.",
+      "seconds": 7.368,
+      "sha256": "bbe5554ff9f507c112a149bab50cec4384c2a071f06ca4b462c5f422af9678f1"
+    },
+    {
+      "id": "corvina-nr4zc5",
+      "speaker": "corvina",
+      "expected": "Nobody hurt. Not even me. That's a new picture. Keep painting.",
+      "seconds": 5.184,
+      "sha256": "7834eb4d12f3189fa89467c2310933328721784b1c1200081f28d0875695d998"
+    },
+    {
+      "id": "corvina-yukiyj",
+      "speaker": "corvina",
+      "expected": "The wind. Ha. The wind never says sorry either.",
+      "seconds": 5.952,
+      "sha256": "55e5b6f1e0c5cba8d991348199287339e3fab6001db474331b939c925c24ea82"
+    },
+    {
+      "id": "corvina-88fcek",
+      "speaker": "corvina",
+      "expected": "Change the word, fill the table. Ha. Clever chick.",
+      "seconds": 4.392,
+      "sha256": "422e7d51799e71fe76cd7927ce9b58a80b78b441ac02924891a6816472a57a25"
+    },
+    {
+      "id": "corvina-124cixy",
+      "speaker": "corvina",
+      "expected": "Out? Into THAT? Not yet. Deal me a better hand.",
+      "seconds": 5.256,
+      "sha256": "db2f2166eedc7ff0e4b2976edafb03e5e8445eb4cbbb1f90402128c21ddc3c61"
+    },
+    {
+      "id": "corvina-e36sk0",
+      "speaker": "corvina",
+      "expected": "Fine. I'm coming out. If a cork hits me, I'm going back in.",
+      "seconds": 5.496,
+      "sha256": "79686b385121e663e214eeac353edbd39b3e094ec2ae7ba1e5e998dc2dc090f5"
+    },
+    {
+      "id": "corvina-1v7dojo",
+      "speaker": "corvina",
+      "expected": "Hm. Go on.",
+      "seconds": 1.224,
+      "sha256": "588a83054bc03617c23de3b347a58c7fc52e18f8a4241d672adad37f7f5f6afb"
+    },
+    {
+      "id": "corvina-19t957f",
+      "speaker": "corvina",
+      "expected": "And? The drum is still going.",
+      "seconds": 2.976,
+      "sha256": "55afa3a85bbb1fdbe9f170f02958a0fb13f876f987b983a8b2096d28146579b9"
+    },
+    {
+      "id": "corvina-1s597c6",
+      "speaker": "corvina",
+      "expected": "Don't you lecture me.",
+      "seconds": 3.048,
+      "sha256": "9f8c2bac728b8be23fb67cfaa80a572c17721dde42b8e05aafbdb0321e9ed564"
+    },
+    {
+      "id": "corvina-1vcobsi",
+      "speaker": "corvina",
+      "expected": "Stop. Shuffle. Start again. Slowly this time.",
+      "seconds": 4.488,
+      "sha256": "f40bf9f2fd0b1f7db9f9bed704975ceb4db2ed9090252f1ee7eebec06a22edbf"
+    },
+    {
+      "id": "corvina-1xpk5rt",
+      "speaker": "corvina",
+      "expected": "Here. A lantern. Don't tell anyone a crow gave you a present.",
+      "seconds": 4.8,
+      "sha256": "a2126ebe9e6a7fe26be339264c352f50b7458696f3dbe60ee0d16126bf76c2e1"
+    },
+    {
+      "id": "corvina-1g1htds",
+      "speaker": "corvina",
+      "expected": "Crows get blamed. Magpies get trophies.…I'm keeping the ace.",
+      "seconds": 5.28,
+      "sha256": "c5b9f87d126215f1a5e60f74bd3687cdec29d44b540928c15fe18253408eb742"
+    },
+    {
+      "id": "corvina-1lny3sv",
+      "speaker": "corvina",
+      "expected": "Crows get blamed. Magpies get missed.…He'd have polished this ace.",
+      "seconds": 6.576,
+      "sha256": "03d986e9f9507266b3646d233293527be2eeb0cc4627c18a081bb4e969e4e30c"
+    },
+    {
+      "id": "keanu-19f55a9",
+      "speaker": "keanu",
+      "expected": "I have a strange feeling I've been accused of this before.",
+      "seconds": 3.816,
+      "sha256": "3c29f3a3a9b2f7fa0091f5400ba6555e755f9546b767491c23276a92af0ff2d1"
+    },
+    {
+      "id": "keanu-13591ha",
+      "speaker": "keanu",
+      "expected": "The vent is lovely. Warm air. I go and say hello to it.",
+      "seconds": 5.064,
+      "sha256": "cb848a746f431f930cd23b1231f98e64e5151eb413dce4adaa1dc4a3ae51d87a"
+    },
+    {
+      "id": "keanu-7s6vf8",
+      "speaker": "keanu",
+      "expected": "That's okay. I forgive you. I didn't do it. But I forgive you.",
+      "seconds": 5.664,
+      "sha256": "63bbab218d97da97cc4b81a96a3f34e2e0a7651ad722ba8bf49ae0b5ec90b7c8"
+    },
+    {
+      "id": "keanu-mz9lzs",
+      "speaker": "keanu",
+      "expected": "I don't like pie. I like the vent.",
+      "seconds": 3.096,
+      "sha256": "44a44e5942fecd7e06055f6492e8a720f866d0cd622a82917ae23f37017f9cb9"
+    },
+    {
+      "id": "keanu-a2sb11",
+      "speaker": "keanu",
+      "expected": "Thank you. I'll share it with the vent.",
+      "seconds": 2.736,
+      "sha256": "44c848eebe6f117173e0b8975fe00554f89f5054d66f885fcf5a8cf3d91c1045"
+    },
+    {
+      "id": "keanu-14hh9zf",
+      "speaker": "keanu",
+      "expected": "Okay. I'll go. I'm not angry. I'm just walking.",
+      "seconds": 5.232,
+      "sha256": "64746ada220c58001761631d5bcc33fe4c04e426949cd7347d4af67bf4eb8c24"
+    },
+    {
+      "id": "baker-1o4krli",
+      "speaker": "baker",
+      "expected": "It's browning! I can SMELL it browning!",
+      "seconds": 2.784,
+      "sha256": "3f617b07a0621a5ca2d027d11cbf4c77c320c2e3d0e420fd5b735fb902fb54bd"
+    },
+    {
+      "id": "baker-1elzxax",
+      "speaker": "baker",
+      "expected": "The custard trap is warming up. When it's hot, it jumps.",
+      "seconds": 3.288,
+      "sha256": "ceb5b6539e4eaaccfb49f152d3a9b8aca8f789ed4f1f523a6f6f1ba46318b4f3"
+    },
+    {
+      "id": "baker-1y1ib41",
+      "speaker": "baker",
+      "expected": "Smoke! Is that my cake? Tell me that's not my cake!",
+      "seconds": 3.504,
+      "sha256": "7c844ad85dc469456a72c8121896b1cc66acb875caf92ec6194301bb547ce526"
+    },
+    {
+      "id": "baker-yuxhf2",
+      "speaker": "baker",
+      "expected": "Three tins! One cake! And imps lit fires under ALL of them!",
+      "seconds": 4.704,
+      "sha256": "44b328e7f421791fe1e3cfda91193936543dc21f58c7ef0830ae1fa1d44db804"
+    },
+    {
+      "id": "baker-1vkejuh",
+      "speaker": "baker",
+      "expected": "One tin has the cake. One has a custard trap. One has the Mayor's itching powder. Don't ask.",
+      "seconds": 5.976,
+      "sha256": "d154fed1c94cf8007c8e88ff3704e71400a10def26943c90d856f4581e015c41"
+    },
+    {
+      "id": "baker-17xufs9",
+      "speaker": "baker",
+      "expected": "I wrote the labels. At most one tells the truth. Very secure.",
+      "seconds": 4.152,
+      "sha256": "b6bec885a540b3a5b0258d5568e7c0d6e4903f9f81668148afdd4a0eb48da6ae"
+    },
+    {
+      "id": "baker-14yj0an",
+      "speaker": "baker",
+      "expected": "I wrote them so the imps couldn't tell. Now I can't either.",
+      "seconds": 4.848,
+      "sha256": "f5fa883069b44a9f4afaf884aadf0040de06e068dde6539ef6da8ad1c9a30120"
+    },
+    {
+      "id": "baker-1kzdo0m",
+      "speaker": "baker",
+      "expected": "My own writing. Lovely, isn't it? Very loopy.",
+      "seconds": 4.128,
+      "sha256": "a5173a36caf1bebf7e986bd839287c4443ee4739bf323f4d7946dbefafc4e5e5"
+    },
+    {
+      "id": "baker-19hep4b",
+      "speaker": "baker",
+      "expected": "Dented? Then that's not my cake. I would never dent my cake tin. Never.",
+      "seconds": 5.544,
+      "sha256": "5d7c288ce0a7b3978469feaf661a33c824ddd2b789e1ec53c6da0c9a9ad26f27"
+    },
+    {
+      "id": "baker-tp79yv",
+      "speaker": "baker",
+      "expected": "And hurry. It's not just a cake. There's a note baked inside.",
+      "seconds": 4.2,
+      "sha256": "fb7dc9ff80605117431f70056ce37c8c93d1376e1aaa5a455fad6865cf574dd4"
+    },
+    {
+      "id": "baker-1pai8vk",
+      "speaker": "baker",
+      "expected": "My flour sack came back from the Hall kitchen. With a note in it. Granny's writing.",
+      "seconds": 5.472,
+      "sha256": "854747b33195d337d4162e2729ca885aae8b0c3c2d21e2bf77d326bbcf82971c"
+    },
+    {
+      "id": "baker-1oewmg3",
+      "speaker": "baker",
+      "expected": "I read the end: \"I have a plan.\" Then it fell into the cake mix.",
+      "seconds": 5.376,
+      "sha256": "b726f0c82c8cfb518034f1c94af8ca0984f9a8493ec01eccc199b7a53e279e70"
+    },
+    {
+      "id": "baker-1rij4mv",
+      "speaker": "baker",
+      "expected": "She's in a soup pot, and she has a PLAN. Of course she does.",
+      "seconds": 4.704,
+      "sha256": "a9d6cf599b5ecad8ebbb71989ce9de4d16631d3e9a50b258ed84d03e9e8a8e36"
+    },
+    {
+      "id": "baker-ad4aw9",
+      "speaker": "baker",
+      "expected": "She wrote it from the pot. She's home now. I still want to read it.",
+      "seconds": 5.256,
+      "sha256": "0e8f687d5b115eca858aefe3e26ca759be13ae39fceafdef91969a13b5ce6c52"
+    },
+    {
+      "id": "baker-1ucct4",
+      "speaker": "baker",
+      "expected": "She wrote it from the pot. It's the last thing she wrote.…Please. The right tin.",
+      "seconds": 5.808,
+      "sha256": "86d82a68e64dbacc03035f8a55515a201b8ad2f4c008ebc1477eb886d50138e9"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1rz8hkb",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "\"Bring a lad—\". Granny said that once. I remember. The rest is in the cake.",
+      "seconds": 7.8,
+      "sha256": "6ff9b7bf0aa75672ab184ba4609a78cc479e5611e53f516bca19d6416e06e24d"
+    },
+    {
+      "id": "avatar-raven-boy-inner-b6lcsk",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"At most one\" allows zero. Read the small words.",
+      "seconds": 4.992,
+      "sha256": "9f5ce3dba5e8c61257cbeb0b165ebc79c3838ab96c9864ab6b0efdaba34d41f2"
+    },
+    {
+      "id": "avatar-raven-girl-inner-r1o3ek",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"At most one\" allows zero. Read the small words.",
+      "seconds": 4.224,
+      "sha256": "008b17c8bfac1444a3ccc4da72c21579661a77dc071973807fa4a332e53fa856"
+    },
+    {
+      "id": "baker-7m04b5",
+      "speaker": "baker",
+      "expected": "If I knew, would I be shouting at ovens?",
+      "seconds": 3.216,
+      "sha256": "4f07c0ecbb235ea1d260a0959dd479139412c1bda0848b208db226f91855a454"
+    },
+    {
+      "id": "baker-fvy882",
+      "speaker": "baker",
+      "expected": "If I knew, it would be out already.",
+      "seconds": 2.4,
+      "sha256": "0777e07e6fac20652c90db5ed83423242ac2ed2f52a6b5702e891d41d02d83a0"
+    },
+    {
+      "id": "baker-1tnehqw",
+      "speaker": "baker",
+      "expected": "Count? I'm a baker. I count in dozens.…Go on, then.",
+      "seconds": 4.536,
+      "sha256": "c2aebf4bfaedc470ccfa3a834d41ddd14be261d5f750bde14fad357058ed0ba2"
+    },
+    {
+      "id": "baker-1abi1v4",
+      "speaker": "baker",
+      "expected": "First, my rule. Then a tin. Mind the custard.",
+      "seconds": 3.888,
+      "sha256": "f2bf293debed03009cd84876a2529c9c1bf74dddc3af14f394ed7b23c7b1f910"
+    },
+    {
+      "id": "baker-6kq9qr",
+      "speaker": "baker",
+      "expected": "Exactly one? I said AT MOST. I choose my words. Like my flour.",
+      "seconds": 5.832,
+      "sha256": "3efe0358a71a76282bfbc0f2996cb6482ad2dde7fa0f1593e7dea958b56687f6"
+    },
+    {
+      "id": "baker-5lbrbf",
+      "speaker": "baker",
+      "expected": "None! Three liars! Now THAT would be secure.",
+      "seconds": 4.296,
+      "sha256": "48091d4012240c3220dedf934c7731bc029e38c6f229fae4c339a1ca07759e7e"
+    },
+    {
+      "id": "baker-y6ai7q",
+      "speaker": "baker",
+      "expected": "I bake on holidays. I don't lie on them.",
+      "seconds": 3.528,
+      "sha256": "83230ff0832fb258086a7acfd71a2808b5a017df4828b848c0636bb154a3ce0a"
+    },
+    {
+      "id": "baker-1kc8uiw",
+      "speaker": "baker",
+      "expected": "The Mayor's itching powder! Don't scratch! Scratching makes it ANGRY!",
+      "seconds": 4.008,
+      "sha256": "c5d62210ded88e4f7809e10e3c663e613fe60345fecfa7b2092e84bbcb4481f7"
+    },
+    {
+      "id": "baker-iqewqw",
+      "speaker": "baker",
+      "expected": "That one. Please be that one.",
+      "seconds": 1.896,
+      "sha256": "3e580112cbe490b8dbef829883a06526ae6e4f9a24e3585b312e6677bf3ca570"
+    },
+    {
+      "id": "baker-17rlegf",
+      "speaker": "baker",
+      "expected": "The custard trap! Put it back! Gently! It JUMPS!",
+      "seconds": 3.84,
+      "sha256": "2dcef5b91215622c772ecff3e78c2cd01c0f2e02eafc65d028ab12fc491a0405"
+    },
+    {
+      "id": "baker-1gy2g4m",
+      "speaker": "baker",
+      "expected": "Labels don't hide things. Tins hide things. Labels just lie.",
+      "seconds": 4.68,
+      "sha256": "4a7f9ce92fc4be8a6c7c5ab5a27477fec730c8f1ed231f9c0646e2298ff28d06"
+    },
+    {
+      "id": "baker-mopx5r",
+      "speaker": "baker",
+      "expected": "The dent rules out C. Fine. \"Feels wrong\" rules out nothing.",
+      "seconds": 5.928,
+      "sha256": "aa087903802a9e5a5f109e767406de92d5c8cbb9133247647dd07fbc939e0e56"
+    },
+    {
+      "id": "baker-1a1xgvz",
+      "speaker": "baker",
+      "expected": "A ladle! I have just the thing. And a slice, for the road.",
+      "seconds": 4.56,
+      "sha256": "ae96b4c1246e8c43a981cf666c48a4ed649531961589b93ddb2adf95dc08266e"
+    },
+    {
+      "id": "baker-5l7as2",
+      "speaker": "baker",
+      "expected": "A slice, for the road.",
+      "seconds": 2.208,
+      "sha256": "e1284c4e46a52eb385c9772affbb33e87fe4c099c96fda3a5424a3b2729bedc9"
+    },
+    {
+      "id": "baker-n4gmmf",
+      "speaker": "baker",
+      "expected": "Singed. Well. We'll call it \"toasted\". People pay more for toasted.",
+      "seconds": 5.4,
+      "sha256": "8b014a879822344de36dfdec3bde5720d0979e237852202a3e3afc3c6c5ae256"
+    },
+    {
+      "id": "baker-1h4qc90",
+      "speaker": "baker",
+      "expected": "Singed. The note is safe. Just.",
+      "seconds": 2.496,
+      "sha256": "1284d48bb20d63558238fcca3c9ea6b4de8f73c09edfa6b4ee4708b0afd9e0b8"
+    },
+    {
+      "id": "baker-gbzpf7",
+      "speaker": "baker",
+      "expected": "My ladle! Gone! Into the custard! Nothing comes back from the custard.",
+      "seconds": 7.272,
+      "sha256": "6cf2b52cab75c9e5b4c837664fe9ec381b2ee9d4fa3e38584679bfc880429f9a"
+    },
+    {
+      "id": "baker-9xmx1b",
+      "speaker": "baker",
+      "expected": "Granny's note. Burnt. Now nobody knows what she wanted.",
+      "seconds": 4.68,
+      "sha256": "dfb1879a0481d38564f2a08852660331778590b2e0ebafb3a05de3d0b67c25a8"
+    },
+    {
+      "id": "baker-1lozlum",
+      "speaker": "baker",
+      "expected": "Ha! Too late for the pot. You got her out without a ladle. That'll do.",
+      "seconds": 5.352,
+      "sha256": "1d784cff1aff18ff469d30ae669c5e7a43b9959f4b08a574ad5d32c9e6bbd130"
+    },
+    {
+      "id": "baker-2r221x",
+      "speaker": "baker",
+      "expected": "Biggest ladle in Boolesbury. Bring her back. And the ladle.",
+      "seconds": 4.08,
+      "sha256": "3e404a71e29c9297155254ada2051601417a961e4527647742ae253a74ad584a"
+    },
+    {
+      "id": "baker-1sh178g",
+      "speaker": "baker",
+      "expected": "No ladle now. Bring her back anyway. Use a teacup.",
+      "seconds": 4.056,
+      "sha256": "908c0ce1527170d2d08c0e8ee11696256d79824784d4232e6979d0881e935365"
+    },
+    {
+      "id": "baker-1gw63gd",
+      "speaker": "baker",
+      "expected": "Next time, every label tells the truth. Less secure. More cake.",
+      "seconds": 5.016,
+      "sha256": "612f5625bd3aa6c42f54decc04517b28586a575120c9d616bb96bb1abf06c8de"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1tjq42d",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The Mayor said that sentence in the Square. Miss Quill snapped. I remember.",
+      "seconds": 9.12,
+      "sha256": "a2caa056a394e38355054f6ee66c8185e3d63cdc740fbe2c2757e9d73fca8873"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1jrdjj2",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "Silence isn't a statement. Can't be true. Can't be false.",
+      "seconds": 6.312,
+      "sha256": "0cabe7b2a4019a01cb5a16135c561a0d1860d1d246919884418e7a49425f2b95"
+    },
+    {
+      "id": "avatar-raven-girl-inner-uaokhw",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "Silence isn't a statement. Can't be true. Can't be false.",
+      "seconds": 4.608,
+      "sha256": "4de9153b317f0e1312eb3194eda0078095c754e6567c80805e323f351147594f"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-gd1v6j",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "That sentence broke Miss Quill at the Hall. I was there. I remember.",
+      "seconds": 7.152,
+      "sha256": "408e718b2c1db3c7e625b77563ee04579ceea7e2cb85963dfcaa03a2636376b8"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-zdo0e4",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The Square, again. Everyone shouted there too. A check settled it. Remember?",
+      "seconds": 8.112,
+      "sha256": "3ddeac20e963f3b6143b709e39ac2c4dabe02f48ce538a1a8952188d604e0a63"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1omdy6w",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"One of them lies.\" It never said we'd know which.",
+      "seconds": 6.096,
+      "sha256": "ac4a83e2d17af7f1961b351c36a507b23c0067a05609a9b0592b8eb3072b29ef"
+    },
+    {
+      "id": "avatar-raven-girl-inner-r6bxyq",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"One of them lies.\" It never said we'd know which.",
+      "seconds": 6.696,
+      "sha256": "4e083b14118f251485955ca236a4913d5d9315d68829a19af5b5d49e7b23c88c"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1tfv1v0",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Last time eyes glowed here, the sky split. Syllo shouted it.",
+      "seconds": 7.704,
+      "sha256": "53142d57fde290e36c9cc378bc11e90274ef235018d157a0cfa60a017efb5a86"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1bayqbs",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Everyone.\" Count them. It's eleven.",
+      "seconds": 3.168,
+      "sha256": "2bbf2adf708a7ed42d049b08db51c89bb33f955f5914b1f85606d497921c4152"
+    },
+    {
+      "id": "avatar-raven-girl-inner-whgton",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Everyone.\" Count them. It's eleven.",
+      "seconds": 3.648,
+      "sha256": "b147a0a0147b7f3be0bcd69a8b5b7c9c5bc4f0e49b21bb34c22550b7563528df"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1lskzi9",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The paper cut the Sundial's quote once. Check what they cut this time.",
+      "seconds": 7.704,
+      "sha256": "e97c0eedb57f7eb6ae983120598f9e27a54881216204e5748055afb2aaf647d1"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1i97ddt",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Says.\" He never said it. The headline did.",
+      "seconds": 3.936,
+      "sha256": "67e6ffe8e97253a58d72541b169e3393c6b1c29de841037d1ec9a34e245d72da"
+    },
+    {
+      "id": "avatar-raven-girl-inner-fofn8a",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Says.\" He never said it. The headline did.",
+      "seconds": 4.416,
+      "sha256": "315e270ebc1b68ccc15eb626050d3cd5dbbd3170f0df700fc456d7b1d5787fd8"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1weii70",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The day the sky cracked, my pond went still. What did the box say?",
+      "seconds": 5.736,
+      "sha256": "a86d2f7658de56867a55f3b75e7409896d3c708047e964854896c6d1694f8331"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1whp007",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "\"Accurate.\" Accurate at what?",
+      "seconds": 3.096,
+      "sha256": "0965bc3479e712268ce7236b3537164b0812b7a5cd35f3013565c42a6c7ae878"
+    },
+    {
+      "id": "avatar-raven-girl-inner-1prspj",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "\"Accurate.\" Accurate at what?",
+      "seconds": 3.192,
+      "sha256": "9b75835c051efa4c8db060736f72f3b8a3eb4340fa0393c0962658b7eae4230b"
+    },
+    {
+      "id": "avatar-raven-boy-inner-1jgiwin",
+      "speaker": "avatar-raven-boy-inner",
+      "expected": "Ask him: \"Needs it most.\" Define \"most\".",
+      "seconds": 3.216,
+      "sha256": "29d686b2ce992865b9e9b3423dd62c7742ab58e4db45966514f984808714c740"
+    },
+    {
+      "id": "avatar-raven-girl-inner-lnqx9x",
+      "speaker": "avatar-raven-girl-inner",
+      "expected": "Ask him: \"Needs it most.\" Define \"most\".",
+      "seconds": 5.016,
+      "sha256": "811a415956e5b65546a258d4c4c25752f9c8a39557dcd1f7284f7c034761b9cc"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-1094q6x",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "The Sorting Room did this. Same mistake, smaller.",
+      "seconds": 5.136,
+      "sha256": "b1bb8c4f741d0b10b7bd0fc31188d4956e4f2d6d12d9c0c463b36e42e4b50299"
+    },
+    {
+      "id": "avatar-frogling-boy-inner-14tntxv",
+      "speaker": "avatar-frogling-boy-inner",
+      "expected": "Our pond fed the loudest frog first. The quiet ones got thin.",
+      "seconds": 5.712,
+      "sha256": "dcdc229decc6a8a1f5b2fbfe89aa3d447e357e148e58d4c560dd3dcb5e4bf523"
+    },
+    {
+      "id": "keanu-1w60cur",
+      "speaker": "keanu",
+      "expected": "Whoa.",
+      "seconds": 1.008,
+      "sha256": "07c48d15d7acff0e70f2cec387201cf8bc4cd065e61d635503b6f1e398e69477"
+    },
+    {
+      "id": "keanu-cxp4ik",
+      "speaker": "keanu",
+      "expected": "Did you see that? I walked past twice.",
+      "seconds": 3.648,
+      "sha256": "9331f38c41a58c2df28946f6c92fcbab9aebea5953f57c9c5a9436779f0c62e1"
+    },
+    {
+      "id": "keanu-t7p3fo",
+      "speaker": "keanu",
+      "expected": "You're breathtaking. Also, your argument has a glitch.",
+      "seconds": 5.112,
+      "sha256": "b2113476aea63ebef4ad268fef33b65de779b7c6f586d4b481fce408f3ff0a91"
+    },
+    {
+      "id": "lobstorian-1b789th",
+      "speaker": "lobstorian",
+      "expected": "Sit up straight. You. Yes, you. No attacking.",
+      "seconds": 4.872,
+      "sha256": "ab1244d1b75cc83df7dcdebcb83276ed55a50e8fb4aed589bb78f89765f8322b"
+    },
+    {
+      "id": "lobstorian-dfia7l",
+      "speaker": "lobstorian",
+      "expected": "Lecture one. Hierarchies. Take notes.",
+      "seconds": 3.936,
+      "sha256": "b53daf5178fab969f4898ad27ad2a11db00aaf7a18d3842576c31ea800324db9"
+    },
+    {
+      "id": "lobstorian-ariu5d",
+      "speaker": "lobstorian",
+      "expected": "Stop. Before you attack, tidy your room.",
+      "seconds": 4.296,
+      "sha256": "71f93f81fb5838a317e7f543824f0839060a513d49c362abf268efa8bbfbc7ce"
+    },
+    {
+      "id": "lobstorian-jelwc5",
+      "speaker": "lobstorian",
+      "expected": "I was making a very precise point.",
+      "seconds": 3.144,
+      "sha256": "74937180053b86a66c27477de80169267055769cef8085c6386068594de39c22"
+    },
+    {
+      "id": "lobstorian-8s87kn",
+      "speaker": "lobstorian",
+      "expected": "Clean your room. Without me.",
+      "seconds": 3.024,
+      "sha256": "62c575a59255ec664b6602adbc5f4f97af5e14f72dc0d62a2ab68d445561c201"
+    },
+    {
+      "id": "lobstorian-5monga",
+      "speaker": "lobstorian",
+      "expected": "This is… roughly a disaster.",
+      "seconds": 3.072,
+      "sha256": "18983f1901c35b5fe9924c0113ae0528d783899c5a7a21d65aac2fcb7b24e478"
+    },
+    {
+      "id": "keanu-jebhu8",
+      "speaker": "keanu",
+      "expected": "You're breathtaking. All of you.",
+      "seconds": 2.784,
+      "sha256": "b76b1101ec77d641c72c1dff3c51e526dc9c6fd5074f1544eadaffde2ff597ec"
+    },
+    {
+      "id": "keanu-1juasr7",
+      "speaker": "keanu",
+      "expected": "I know logic. Show me.",
+      "seconds": 2.688,
+      "sha256": "cbf65c941ee0601f54e2bc1b37407ccc613371d0ffee791ce6ac3179d47d51e8"
+    },
+    {
+      "id": "keanu-1iex22z",
+      "speaker": "keanu",
+      "expected": "Déjà vu. I'll see you again.",
+      "seconds": 3.048,
+      "sha256": "eff911bc82cc683a14d7d3a2cc580c0abfb45aed9fae67aa709e243ca2b9f3ca"
+    },
+    {
+      "id": "keanu-bjuuu3",
+      "speaker": "keanu",
+      "expected": "This isn't goodbye.",
+      "seconds": 1.272,
+      "sha256": "971d39c21121798cc234e248c6c425a23e72ba23d25d59cc2df0af3b746e2cb6"
+    },
+    {
+      "id": "keanu-1qe8pw1",
+      "speaker": "keanu",
+      "expected": "Whoa. Okay. Back soon.",
+      "seconds": 2.856,
+      "sha256": "dad914682d78bd74ab20f8c9e1d50dae6cc69315b26ade1fc37b3ff78397f8d4"
+    },
+    {
+      "id": "baker-1r4tnmj",
+      "speaker": "baker",
+      "expected": "Goal: exactly this many cups in one ladle. The ladles have no markings.",
+      "seconds": 5.832,
+      "sha256": "56e113a6e1f25f7375180c973aaeea55b09c799739bd947790f8dc7fbc384089"
+    },
+    {
+      "id": "baker-1vmofi2",
+      "speaker": "baker",
+      "expected": "Fill a ladle, empty it, or pour it into the other. A pour stops when one ladle is full or empty.",
+      "seconds": 7.704,
+      "sha256": "9c9ae5e818b1cbeee206a57bea454d2e34d4a89a9d3f42e6d514058e586eb5a3"
+    },
+    {
+      "id": "baker-h6xsue",
+      "speaker": "baker",
+      "expected": "Example, not this puzzle: ladles of 3 and 5. Fill the 5, pour into the 3. Now 2 cups are left in the 5.",
+      "seconds": 6.984,
+      "sha256": "985a030fc746a8d97084aa5cd4918615ee21a5b3502d3814daab6c9e68bf3c74"
+    },
+    {
+      "id": "baker-1e2p39",
+      "speaker": "baker",
+      "expected": "Watch the amounts you make. If the goal can never appear, say so here, and pick the reason that proves it.",
+      "seconds": 8.712,
+      "sha256": "ad34fdc9b617b4537c450322c76490aa6326846ba00dc1ab9b65a1ee8c554dc5"
+    },
+    {
+      "id": "baker-ld1f7x",
+      "speaker": "baker",
+      "expected": "Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 8.184,
+      "sha256": "63c6ca28710404acfd0d14cf4ca5d97e4720ef5f59359882de27965d4665c4e2"
+    }
+  ],
+  "audit": [
+    {
+      "id": "corvina-i6cc7v",
+      "expected": "Don't you lecture me. Experts said crows steal shiny things.",
+      "heard": "Don't you lecture me. Experts say crows steal shiny things.",
+      "ok": false
+    },
+    {
+      "id": "corvina-ofh1v",
+      "expected": "Facts. Lovely. That drum can't read.",
+      "heard": "Facts. Lovely. That drum can't read.",
+      "ok": true
+    },
+    {
+      "id": "corvina-1hsvuto",
+      "expected": "I've been hit by Tuesdays. Corks, though… Fine. Go on.",
+      "heard": "I've been hit by Tuesdays. Corks, though? Fine. Go on.",
+      "ok": true
+    },
+    {
+      "id": "corvina-41246g",
+      "expected": "Logic. From an owlet. Fine. I'll allow it.",
+      "heard": "Logic, from an owlet. Fine. I'll allow it.",
+      "ok": true
+    },
+    {
+      "id": "corvina-1xpk5rt",
+      "expected": "Here. A lantern. Don't tell anyone a crow gave you a present.",
+      "heard": "Here, a lantern. Don't tell anyone a crow gave you a present.",
+      "ok": true
+    },
+    {
+      "id": "corvina-1g1htds",
+      "expected": "Crows get blamed. Magpies get trophies.…I'm keeping the ace.",
+      "heard": "Crows get blamed. Magpies get trophies. I'm keeping the ace.",
+      "ok": true
+    },
+    {
+      "id": "corvina-1lny3sv",
+      "expected": "Crows get blamed. Magpies get missed.…He'd have polished this ace.",
+      "heard": "Crows get blamed. Magpies get missed. He'd have polished this ace.",
+      "ok": true
+    },
+    {
+      "id": "baker-17xufs9",
+      "expected": "I wrote the labels. At most one tells the truth. Very secure.",
+      "heard": "I wrote the labels. At most, one tells the truth. Very secure.",
+      "ok": true
+    }
+  ],
+  "auditError": "HTTP 503",
+  "limits": "All new clips decode. Bounded independent cloud transcripts sample adjacent clips; unreviewed cuts and acting are provisional.",
+  "localFollowup": [
+    {
+      "id": "corvina-cohhad",
+      "heard": " Go on. Full tables, full pockets. Now you're speaking, Crow.",
+      "model": "Whisper tiny.en q8 CPU; approximate local transcription"
+    },
+    {
+      "id": "corvina-i6cc7v",
+      "heard": " Don't you lecture me. Experts say crows steal shiny things.",
+      "model": "Whisper tiny.en q8 CPU; approximate local transcription"
+    },
+    {
+      "id": "corvina-ofh1v",
+      "heard": " Facts. Lovely. That drum can't read.",
+      "model": "Whisper tiny.en q8 CPU; approximate local transcription"
+    }
+  ],
+  "publication": {
+    "retainedNewClips": 214,
+    "currentRecorded": 1529,
+    "currentTotal": 2565,
+    "missing": 1036,
+    "plannedRequests": 86,
+    "manifestFiles": 1898,
+    "quarantined": [
+      "corvina-1d2p93c",
+      "corvina-cohhad",
+      "corvina-i6cc7v"
+    ],
+    "backupDirectory": "C:/Users/BlackBox/AppData/Local/Temp/rift-voice-validation-2026-10-12/quarantine"
+  }
+}
