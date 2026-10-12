@@ -255,5 +255,13 @@
     "id": 5814470213,
     "blockedBy": [],
     "nativeDependenciesAdded": true
+  },
+  "persona_roster": {
+    "number": 139,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/139",
+    "title": "Rift of Reason: Map expansion mechanics to the cute-horror public-persona cast",
+    "id": 5814866864,
+    "blockedBy": [],
+    "nativeDependenciesAdded": true
   }
 }
