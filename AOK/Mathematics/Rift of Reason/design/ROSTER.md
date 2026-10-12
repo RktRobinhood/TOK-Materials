@@ -83,7 +83,7 @@ Red and green have no lesson 1 puzzles of their own yet, so these need to appear
 
 ## Card Arena expansion cast proposals — 12 October 2026
 
-Draft #139, not teacher-approved additions or runtime species. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
+Cast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. These are not yet runtime species. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
 
 | Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |
 |---|---|---|---|---|
@@ -129,10 +129,10 @@ Draft #139, not teacher-approved additions or runtime species. The 210-card cata
 | Stephen Clawbert | Stephen Colbert | language-word-weasel | language / common | One blank cue card held with an exaggerated farewell flourish. |
 | Sabrina Carpwenter | Sabrina Carpenter | language-echo-egret | language / uncommon | One unbranded microphone; the body remains fish-shaped, no human face. |
 | Stephen Fryfin | Stephen Fry | language-definition-dolphin | language / uncommon | One sturdy closed dictionary with a blank cover. |
-| Chomskunk | Noam Chomsky | language-debate-dingo | language / uncommon | One blank folded sentence diagram; choose one broad branching shape. |
-| Jacinda Ardheron | Jacinda Ardern | language-clause-crane | language / uncommon | One blank meeting note held level; an open-wing listening gesture. |
+| K-S-Ibis | KSI | language-debate-dingo | language / uncommon | One plain headset; the long beak opens for an absurdly emphatic rebuttal. |
+| Olivia Rodentgo | Olivia Rodrigo | language-clause-crane | language / uncommon | One blank lyric-notebook-shaped journal, with a big crossed-out line shape and no words. |
 | Bo Birdham | Bo Burnham | language-metaphor-mantis | language / rare | One blank miniature stage card; a single warm spotlight-like rim, no set or piano. |
-| Amal Clawney | Amal Clooney | language-contract-coyote | language / rare | One blank rolled agreement tied with a broad gold band. |
+| Jenna Otterga | Jenna Ortega | language-contract-coyote | language / rare | One blank rolled agreement held with an unimpressed straight face; no franchise costume. |
 | Oprawlh | Oprah Winfrey | language-orator-owl | language / mythic | One blank audience ticket waved like an invitation; no show logo. |
 | Descartiger | René Descartes | language-lexicon-lion | language / legendary | One folded blank foundation plan; no written quotation or royal regalia. |
 | Dan TDuck | DanTDM | imagination-doodle-duck | imagination / common | One unbranded game controller, held like the next little adventure is ready. |
@@ -143,8 +143,8 @@ Draft #139, not teacher-approved additions or runtime species. The 210-card cata
 | Peter Jackmarten | Peter Jackson | imagination-mirror-marten | imagination / uncommon | One blank film clapper held at a thoughtful angle. |
 | Shigeru Miyamole | Shigeru Miyamoto | imagination-chimera-chick | imagination / uncommon | One simple blank toy controller with two large coloured buttons. |
 | Tim Burrowton | Tim Burton | imagination-stage-mouse | imagination / uncommon | One crooked blank film clapper; tail curl is a second broad silhouette cue. |
-| David Lynx | David Lynch | imagination-paradox-pony | imagination / rare | One ordinary coffee cup tilted beside an impossibly folded blank card. |
-| Björk Beetle | Björk | imagination-cloud-castle-crab | imagination / rare | One broad folded-paper wing attached to its shell, not a copied outfit or album design. |
+| Pedro Ponycal | Pedro Pascal | imagination-paradox-pony | imagination / rare | One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop. |
+| Ariana Crande | Ariana Grande | imagination-cloud-castle-crab | imagination / rare | One broad folded-paper fan held like a tiny stage set; no copied costume or logo. |
 | Miyazawhale | Hayao Miyazaki | imagination-dreamweaver-whale | imagination / mythic | One simple paper wind toy near a fin; original Rift companion design only. |
 | Ramanujicorn | Srinivasa Ramanujan | imagination-impossible-unicorn | imagination / legendary | One blank slate with a single original looping geometric motif; no readable equations or religious symbols. |
 | Hank Greenhare | Hank Green | memory-bookmark-bunny | memory / common | One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour. |
@@ -160,5 +160,5 @@ Draft #139, not teacher-approved additions or runtime species. The 210-card cata
 | David Tennantacle | David Tennant | memory-keeper-koi | memory / mythic | One simple blank pocket-watch case held beside a fin; no blue box or signature fictional device. |
 | Noetapir | Emmy Noether | memory-timekeeper-tapir | memory / legendary | One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra. |
 
-All six colours have twelve persona proposals. Recognition/pun/rarity choices require review. Do not generate images or grant cards based on this draft table.
+All six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.
 <!-- persona-roster-2026-10-12:end -->

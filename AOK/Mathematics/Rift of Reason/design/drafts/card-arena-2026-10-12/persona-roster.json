@@ -1,6 +1,6 @@
 {
   "issue": 139,
-  "status": "All six batches authored; persona proposals need roster/teacher review before images",
+  "status": "All six batches authored; cast selected by builder; no teacher roster review required",
   "count": 72,
   "target": 72,
   "rows": [
@@ -21,7 +21,7 @@
       "jokeAngle": "An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
       "mechanicLink": "A simple vanilla starter body introduces the careful-explainer identity before triggered abilities.",
       "source": "https://www.tomscott.com/newsletter/2024-07-08/",
-      "familiarity": "Teacher-review assumption: Recognisable internet explainer; historical red-shirt motif, not a claim about current wardrobe.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear curious documentary rhythm; original narrator delivery, no impression or copied catchphrase.",
       "sharedSfx": [
         "card-play",
@@ -39,7 +39,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -48,6 +48,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
+        "smallScaleCue": "One folded blank field guide, wing indicating an odd doorway just outside the portrait."
       }
     },
     {
@@ -67,7 +74,7 @@
       "jokeAngle": "Explains the tiny everyday thing with theatrical scientific enthusiasm.",
       "mechanicLink": "Guard is a planted protective stance; the battle backplate supplies its shield cue.",
       "source": "https://americanhistory.si.edu/collections/object/nmah_1844016",
-      "familiarity": "Teacher-review assumption: Science-show/meme familiarity plausible; review for this Danish class.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Bright concise science-show enthusiasm; do not imitate his voice or theme song.",
       "sharedSfx": [
         "card-play",
@@ -86,7 +93,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -95,6 +102,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Explains the tiny everyday thing with theatrical scientific enthusiasm.",
+        "smallScaleCue": "The bow tie is the main recognition cue; a modest specimen tray is optional, not a second large silhouette."
       }
     },
     {
@@ -114,7 +128,7 @@
       "jokeAngle": "Builds an unnecessarily clever little repair and is very pleased it works.",
       "mechanicLink": "Entrance support health is a repair for another creature, not a gadget that changes the effect.",
       "source": "https://www.crunchlabs.com/pages/about-us",
-      "familiarity": "Teacher-review assumption: Engineering-video creator likely familiar to some students; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm enthusiastic maker; reuse small metal/place/heal sounds, not paid bespoke machine audio.",
       "sharedSfx": [
         "card-play",
@@ -133,7 +147,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -142,6 +156,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Builds an unnecessarily clever little repair and is very pleased it works.",
+        "smallScaleCue": "One chunky repaired gadget held between its forelegs; simple bolt/clamp silhouette, no company logo."
       }
     },
     {
@@ -161,7 +182,7 @@
       "jokeAngle": "An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
       "mechanicLink": "Entrance one damage is the tiny counterexample that changes a comfortable board.",
       "source": "https://www.vsauce.com/vsauce1/",
-      "familiarity": "Teacher-review assumption: Science-video/meme familiarity plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful reflective questioning with one deliberate pause; no copied opening line or impersonation.",
       "sharedSfx": [
         "card-play",
@@ -179,7 +200,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -188,6 +209,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
+        "smallScaleCue": "One blank folded question card in a wing; head tilt carries the questioning joke."
       }
     },
     {
@@ -207,7 +235,7 @@
       "jokeAngle": "Finds a surprisingly simple pattern in a messy everyday problem.",
       "mechanicLink": "Surviving an equal-attack fight and healing echoes a balanced comparison; no extra mathematical prerequisite.",
       "source": "https://hannahfry.co.uk/",
-      "familiarity": "Teacher-review assumption: Maths presenter may need a short Collection introduction; don't assume recognition.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm precise mathematical storytelling; use ordinary shared heal cue.",
       "sharedSfx": [
         "card-play",
@@ -226,7 +254,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -236,6 +264,13 @@
           109,
           127
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Finds a surprisingly simple pattern in a messy everyday problem.",
+        "smallScaleCue": "One large paired-bead counter held level; two matching shapes visible at board size."
       }
     },
     {
@@ -255,7 +290,7 @@
       "jokeAngle": "The arithmetic presentation almost works, so he gleefully checks it again.",
       "mechanicLink": "Reason spell sequence builds a temporary attack step; the visual ruler doesn't change card timing.",
       "source": "https://standupmaths.com/",
-      "familiarity": "Teacher-review assumption: Maths-comedy niche; teacher may prefer a more familiar replacement.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry cheerful maths-comedy rhythm; original short lines, no show quotations.",
       "sharedSfx": [
         "card-play",
@@ -273,7 +308,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -282,6 +317,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The arithmetic presentation almost works, so he gleefully checks it again.",
+        "smallScaleCue": "One deliberately wonky triangular ruler; no tiny written equations or branded shirt."
       }
     },
     {
@@ -301,7 +343,7 @@
       "jokeAngle": "Sets up a demonstration that makes a confident prediction worth checking.",
       "mechanicLink": "Top-two selection is visibly preparing the demonstration, not exposing hidden reserved Fate cards.",
       "source": "https://www.veritasium.com/about",
-      "familiarity": "Teacher-review assumption: Science-channel familiarity plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Calm inquisitive explanation with restrained excitement; shared place/reveal audio.",
       "sharedSfx": [
         "card-play",
@@ -320,7 +362,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -329,6 +371,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Sets up a demonstration that makes a confident prediction worth checking.",
+        "smallScaleCue": "One large simple pulley wheel with a blue cord; avoid a cluttered laboratory."
       }
     },
     {
@@ -348,7 +397,7 @@
       "jokeAngle": "Takes a familiar mechanism apart until the ordinary world becomes interesting again.",
       "mechanicLink": "Guard and first-spell prevention suggest careful engineering; no immunity beyond the drafted effect.",
       "source": "https://www.smartereveryday.com/",
-      "familiarity": "Teacher-review assumption: Science-maker niche; may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly exploratory maker voice; generic clunk/block cues; not an accent imitation.",
       "sharedSfx": [
         "card-play",
@@ -367,7 +416,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -376,6 +425,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Takes a familiar mechanism apart until the ordinary world becomes interesting again.",
+        "smallScaleCue": "One backward-looking gear wheel cradled against the chest; grounded stance."
       }
     },
     {
@@ -395,7 +451,7 @@
       "jokeAngle": "Turns a difficult relation into a picture and quietly lets the picture explain it.",
       "mechanicLink": "Equal-attack Entrance control makes the comparison visual; the UI still performs the exact drafted check.",
       "source": "https://www.3blue1brown.com/about/",
-      "familiarity": "Teacher-review assumption: Maths-video niche; teacher-review introduction likely useful.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Gentle measured visual explanation; no animated chart show or real voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -413,7 +469,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -422,6 +478,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Turns a difficult relation into a picture and quietly lets the picture explain it.",
+        "smallScaleCue": "One curved chalk loop between its antlers; three blue beads and one brown bead are a subtle secondary motif, not a copied logo."
       }
     },
     {
@@ -443,7 +506,7 @@
       "jokeAngle": "Will happily take the time to explain the small detail while everyone else wants to rush.",
       "mechanicLink": "The draw waits for a precise surviving fight; this is patience, not a change to match pace.",
       "source": "https://press.aboutamazon.com/2016/5/clarkson-hammond-may-announce-the-name-of-their-amazon-prime-show",
-      "familiarity": "Teacher-review assumption: Former motoring presenter; familiarity varies. Slow/detail joke is a creative proposal, not a current-role claim.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry unhurried explanation in original delivery; no impersonation or long unskippable monologue.",
       "sharedSfx": [
         "card-play",
@@ -463,7 +526,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -473,6 +536,13 @@
           109,
           127
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Will happily take the time to explain the small detail while everyone else wants to rush.",
+        "smallScaleCue": "One neatly folded blank engineering plan; deliberately slow-looking upright pose."
       }
     },
     {
@@ -492,7 +562,7 @@
       "jokeAngle": "Time refuses to sit neatly in the frame, while the bear looks delighted rather than ominous.",
       "mechanicLink": "A bounded damage rule becomes a bent boundary motif; historical Mythic placement is a tier proposal for review.",
       "source": "https://albert-einstein.huji.ac.il/",
-      "familiarity": "Teacher-review assumption: Widely recognisable historical science motif; do not claim class recognition measured.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Kind concise scholarly wonder; shared block/axiom sounds, no celebrity impression.",
       "sharedSfx": [
         "card-play",
@@ -511,7 +581,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -520,6 +590,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One simple bent clock rim held like a puzzle; blank face, no equations to read."
       }
     },
     {
@@ -539,7 +616,7 @@
       "jokeAngle": "The machine takes one careful step and then another, even when the puzzle looks magical.",
       "mechanicLink": "Two Reason spells schedule one public support event; tape represents finite steps, not extra replay policy.",
       "source": "https://www.kings.cam.ac.uk/alan-mathison-turing-1912-54",
-      "familiarity": "Teacher-review assumption: Historical computing figure may need a short introduction.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Thoughtful spare scholarly delivery; shared reveal/Fate/axiom sounds; no joke about persecution or private life.",
       "sharedSfx": [
         "card-play",
@@ -559,7 +636,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -570,6 +647,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One blank paper tape threaded through a simple shell-mounted reader; large folds, no readable code or war symbols."
       }
     },
     {
@@ -589,7 +673,7 @@
       "jokeAngle": "Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
       "mechanicLink": "A plain common attacker establishes confident rhythm without new triggers.",
       "source": "https://www.dualipa.com/",
-      "familiarity": "Teacher-review assumption: Current pop artist likely familiar; class recognition still proposed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Bright rhythmic original delivery; reuse summon sound, no sung lines or artist impression.",
       "sharedSfx": [
         "card-play",
@@ -607,7 +691,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 2,
@@ -616,6 +700,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
+        "smallScaleCue": "One simple crimson stage jacket; one paw keeps the beat, no microphone required."
       }
     },
     {
@@ -635,7 +726,7 @@
       "jokeAngle": "The landing is tiny, the confidence enormous; praise of public sporting skill.",
       "mechanicLink": "Entrance healing is recovering balance and encouraging the team; no joke about injury, abuse or personal experiences.",
       "source": "https://www.teamusa.com/profiles/simone-biles",
-      "familiarity": "Teacher-review assumption: Sporting recognition plausible; teacher review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Confident encouraging coach-like delivery; original words and shared heal cue.",
       "sharedSfx": [
         "card-play",
@@ -653,7 +744,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -662,6 +753,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The landing is tiny, the confidence enormous; praise of public sporting skill.",
+        "smallScaleCue": "One short balance-beam-shaped wooden practice block beside a planted foot, not a full scene."
       }
     },
     {
@@ -681,7 +779,7 @@
       "jokeAngle": "The reaction gets bigger than the game; public streaming energy, not a personality diagnosis.",
       "mechanicLink": "Surviving a hit raises temporary attack; no claim that the person is spiteful.",
       "source": "https://linktr.ee/imkaicenat",
-      "familiarity": "Teacher-review assumption: Streaming/meme familiarity plausible; review local class.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Energetic short original reactions; throttle levels, no shouted impression or looping shake.",
       "sharedSfx": [
         "card-play",
@@ -699,7 +797,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -708,6 +806,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The reaction gets bigger than the game; public streaming energy, not a personality diagnosis.",
+        "smallScaleCue": "One oversized headset; paws lifted in a harmless startled reaction, no platform logo."
       }
     },
     {
@@ -727,7 +832,7 @@
       "jokeAngle": "An ordinary team pep talk becomes a whole motivational performance.",
       "mechanicLink": "Entrance attack support is cheering another creature, not a bonus to all allies.",
       "source": "https://terrycrews.com/",
-      "familiarity": "Teacher-review assumption: Comedy/fitness public persona may be familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm exuberant original encouragement; shared card-play cue, no commercial catchphrase.",
       "sharedSfx": [
         "card-play",
@@ -745,7 +850,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -754,6 +859,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An ordinary team pep talk becomes a whole motivational performance.",
+        "smallScaleCue": "One wing gives an exaggerated thumbs-up-shaped encouragement; no human hands."
       }
     },
     {
@@ -773,7 +885,7 @@
       "jokeAngle": "The harmless toy is apparently never quite fast enough; invented motoring exaggeration.",
       "mechanicLink": "Entrance self-heart loss represents risky enthusiasm, not violence attributed to the person.",
       "source": "https://press.aboutamazon.com/2016/5/clarkson-hammond-may-announce-the-name-of-their-amazon-prime-show",
-      "familiarity": "Teacher-review assumption: Former motoring host; familiarity varies, review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Comically emphatic original motoring commentary; no imitation or abusive lines.",
       "sharedSfx": [
         "card-play",
@@ -791,7 +903,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -800,6 +912,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The harmless toy is apparently never quite fast enough; invented motoring exaggeration.",
+        "smallScaleCue": "One tiny toy steering wheel held indignantly; expressive brow rather than a huge vehicle."
       }
     },
     {
@@ -819,7 +938,7 @@
       "jokeAngle": "The big show ends with a small act of kindness; public literacy work supplies the supportive angle.",
       "mechanicLink": "Healing after an ally's defeat offers comfort; no copied lyrics or private-life gag.",
       "source": "https://imaginationlibrary.com/about-us/",
-      "familiarity": "Teacher-review assumption: Cross-generational country/book-gifting figure; may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm concise storyteller; no accent/voice imitation or sung material, shared heal sound.",
       "sharedSfx": [
         "card-play",
@@ -837,7 +956,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -846,6 +965,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The big show ends with a small act of kindness; public literacy work supplies the supportive angle.",
+        "smallScaleCue": "One blank little book held to its chest; a modest stage sparkle on the collar only."
       }
     },
     {
@@ -865,7 +991,7 @@
       "jokeAngle": "The playthrough gets one last noisy reaction; community creator reference, not a claim of vindictiveness.",
       "mechanicLink": "Last Word one damage is a final honk; creature defeat is a game event, not a joke about the person dying.",
       "source": "https://wish.org/thankmas-2026-launch",
-      "familiarity": "Teacher-review assumption: Gaming-community familiarity plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly animated original gaming reactions; one short shared goose-like call, no impersonation.",
       "sharedSfx": [
         "card-play",
@@ -883,7 +1009,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -892,6 +1018,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The playthrough gets one last noisy reaction; community creator reference, not a claim of vindictiveness.",
+        "smallScaleCue": "One plain headset; beak lifted for a final little honk, no copied eye logo."
       }
     },
     {
@@ -911,7 +1044,7 @@
       "jokeAngle": "Keeps asking the group to take the inconvenient evidence seriously.",
       "mechanicLink": "Low-heart Guard pressure represents resolve under game pressure; no joke about age, disability or personal traits.",
       "source": "https://www.ted.com/speakers/greta_thunberg",
-      "familiarity": "Teacher-review assumption: Public climate figure likely recognisable; class review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Plain calm determined original text; shared block cue, no slogan recording.",
       "sharedSfx": [
         "card-play",
@@ -930,7 +1063,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -939,6 +1072,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Keeps asking the group to take the inconvenient evidence seriously.",
+        "smallScaleCue": "One blank wooden placard held level; no slogans or political campaign branding."
       }
     },
     {
@@ -958,7 +1098,7 @@
       "jokeAngle": "Every tiny rally gets championship focus; public tennis skill, not anger or temperament claims.",
       "mechanicLink": "Swift first creature engagement conveys readiness; arrival hero-attack restriction stays intact.",
       "source": "https://www.wtatennis.com/legends/230234/serena-williams",
-      "familiarity": "Teacher-review assumption: Sporting recognition plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Focused positive competitor; short original lines and ordinary hit/summon audio.",
       "sharedSfx": [
         "card-play",
@@ -976,7 +1116,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 4,
@@ -985,6 +1125,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every tiny rally gets championship focus; public tennis skill, not anger or temperament claims.",
+        "smallScaleCue": "One compact wooden racket silhouette; stable ready stance, no sponsor logos."
       }
     },
     {
@@ -1006,7 +1153,7 @@
       "jokeAngle": "Turns a setback into another very large team pep talk.",
       "mechanicLink": "A hero losing hearts enables another ally's temporary attack; no additional global aura.",
       "source": "https://www.nba.com/player/2544/lebron-james/bio",
-      "familiarity": "Teacher-review assumption: Basketball figure likely familiar; review. No current team/stat claims needed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Confident encouraging leader, original brief delivery; shared hurt/support cues, no impersonation.",
       "sharedSfx": [
         "card-play",
@@ -1024,7 +1171,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -1033,6 +1180,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Turns a setback into another very large team pep talk.",
+        "smallScaleCue": "One small plain basketball tucked under a wing; no team badge or crown required."
       }
     },
     {
@@ -1052,7 +1206,7 @@
       "jokeAngle": "The small stage act looks daring, then lands neatly; broad performance proposal, not a sourced stunt claim.",
       "mechanicLink": "Choosing own-heart risk for bounded damage is the game cost of a bold act; exact self-zero Win rules still apply.",
       "source": "https://www.pinkspage.com/",
-      "familiarity": "Teacher-review assumption: Pop performer plausibly familiar; exact aerial reference needs review if retained.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Brisk confident original performer, no singing/impression; reuse warp/place cue sparingly.",
       "sharedSfx": [
         "card-play",
@@ -1070,7 +1224,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 5,
@@ -1079,6 +1233,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The small stage act looks daring, then lands neatly; broad performance proposal, not a sourced stunt claim.",
+        "smallScaleCue": "One simple aerial ribbon loop that remains attached to its body; no arena or scattered confetti."
       }
     },
     {
@@ -1098,7 +1259,7 @@
       "jokeAngle": "The scholar keeps room for a feeling even while carefully arranging the argument.",
       "mechanicLink": "Shared healing after both heroes lose hearts makes the philosophical contrast visible; historical legendary proposal.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/",
-      "familiarity": "Teacher-review assumption: Historical maths/philosophy figure needs a short introduction.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Kind spare scholarly reflection; no copied quotations, shared heal/axiom sounds.",
       "sharedSfx": [
         "card-play",
@@ -1117,7 +1278,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -1126,6 +1287,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One blank paper heart folded beside a counting frame; choose the heart as the main70px cue."
       }
     },
     {
@@ -1145,7 +1313,7 @@
       "jokeAngle": "An ordinary colour choice gets a very theatrical reveal; joke only about public makeup work.",
       "mechanicLink": "Looking at the deck's top card is preparing the next reveal, not exposing anyone's identity.",
       "source": "https://www.nikkietutorials.com/site/",
-      "familiarity": "Teacher-review assumption: Beauty-video figure plausibly familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Confident warm original tutorial voice, no impression or private-identity jokes.",
       "sharedSfx": [
         "card-play",
@@ -1164,7 +1332,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -1173,6 +1341,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An ordinary colour choice gets a very theatrical reveal; joke only about public makeup work.",
+        "smallScaleCue": "One broad makeup brush; eye accents remain creature markings, not a realistic face."
       }
     },
     {
@@ -1192,7 +1367,7 @@
       "jokeAngle": "Before admiring the mystery, quietly checks the sleeve.",
       "mechanicLink": "Removing Elusive is making a creature targetable, not a claim that a real person is fraudulent.",
       "source": "https://web.randi.org/",
-      "familiarity": "Teacher-review assumption: Historical sceptic/magician likely needs a Collection introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry curious original stage delivery; reuse reveal cue, no copied quotations.",
       "sharedSfx": [
         "card-play",
@@ -1210,7 +1385,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1219,6 +1394,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Before admiring the mystery, quietly checks the sleeve.",
+        "smallScaleCue": "One empty folded sleeve opened for inspection; no copied stage logo."
       }
     },
     {
@@ -1238,7 +1420,7 @@
       "jokeAngle": "The tiny target gets absurdly precise sporting focus.",
       "mechanicLink": "Extra damage checks consumed Shield exactly; no new ranged attack or three-point mechanic.",
       "source": "https://www.nba.com/player/201939/stephen-curry",
-      "familiarity": "Teacher-review assumption: Basketball recognition plausible; no current team or records assumed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Focused playful original competitor; shared hit/place sounds, no impersonation.",
       "sharedSfx": [
         "card-play",
@@ -1257,7 +1439,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -1267,6 +1449,13 @@
           109,
           127
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The tiny target gets absurdly precise sporting focus.",
+        "smallScaleCue": "One small plain basketball balanced against a wing."
       }
     },
     {
@@ -1286,7 +1475,7 @@
       "jokeAngle": "The smallest stage exit becomes a mystery everyone wants to inspect.",
       "mechanicLink": "Elusive is a clear game keyword; no lesson in real dangerous stunts.",
       "source": "https://www.ted.com/speakers/david_blaine",
-      "familiarity": "Teacher-review assumption: Magician reference needs local familiarity review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Sparse mysterious original delivery; shared close/reveal cue, no imitation.",
       "sharedSfx": [
         "card-play",
@@ -1304,7 +1493,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1313,6 +1502,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The smallest stage exit becomes a mystery everyone wants to inspect.",
+        "smallScaleCue": "One plain blank playing card partly tucked into the cape."
       }
     },
     {
@@ -1332,7 +1528,7 @@
       "jokeAngle": "Everything in the bushes apparently deserves an enthusiastic closer look.",
       "mechanicLink": "Deck selection is scouting; no joke about the person's death or risky encounter.",
       "source": "https://australiazoo.com.au/about-us/the-irwins/steve/",
-      "familiarity": "Teacher-review assumption: Cross-generational wildlife presenter; may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly excited wildlife-guide cadence in original voice; no copied catchphrase.",
       "sharedSfx": [
         "card-play",
@@ -1350,7 +1546,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1359,6 +1555,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Everything in the bushes apparently deserves an enthusiastic closer look.",
+        "smallScaleCue": "One folded field notebook; gentle ready-to-observe stance, no animal restraint scene."
       }
     },
     {
@@ -1378,7 +1581,7 @@
       "jokeAngle": "An ordinary prop seems to be a different thing from the other angle.",
       "mechanicLink": "A friendly creature changes colour temporarily; it is not a new card identity or permanent mutation.",
       "source": "https://www.zachkingmagic.com/",
-      "familiarity": "Teacher-review assumption: Short-form illusion creator plausibly familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful concise original reveal, shared reveal/place effects.",
       "sharedSfx": [
         "card-play",
@@ -1396,7 +1599,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1405,6 +1608,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An ordinary prop seems to be a different thing from the other angle.",
+        "smallScaleCue": "One simple mirror panel with a painted green edge; one object, no film background."
       }
     },
     {
@@ -1424,7 +1634,7 @@
       "jokeAngle": "The smallest gadget detail deserves a whole careful comparison.",
       "mechanicLink": "Draw after a skipped enemy occurrence uses the original event gate; the prop doesn't create secret previews.",
       "source": "https://mkbhd.com/",
-      "familiarity": "Teacher-review assumption: Tech-video recognition plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Measured practical original reviewer; shared click/reveal cue, no channel intro or voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -1444,7 +1654,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -1455,6 +1665,13 @@
           118,
           120
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The smallest gadget detail deserves a whole careful comparison.",
+        "smallScaleCue": "One unbranded blank-screen handheld device at a deliberate inspection angle."
       }
     },
     {
@@ -1474,7 +1691,7 @@
       "jokeAngle": "The cable collection is becoming larger than the plan; original workshop joke.",
       "mechanicLink": "Guard/healing after skipped environmental occurrences remains capped at three; no permanent protection.",
       "source": "https://linusmediagroup.com/",
-      "familiarity": "Teacher-review assumption: Tech-maker niche; review and introduce if needed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Cheerful busy original maker delivery; reuse clunk/block, no mishap or scandal references.",
       "sharedSfx": [
         "card-play",
@@ -1495,7 +1712,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -1506,6 +1723,13 @@
           118,
           120
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The cable collection is becoming larger than the plan; original workshop joke.",
+        "smallScaleCue": "One oversized loop of plain cable cradled against the body."
       }
     },
     {
@@ -1525,7 +1749,7 @@
       "jokeAngle": "A small prop inspection somehow becomes an entire afternoon's satisfying build.",
       "mechanicLink": "Inspection without draw grants one other ally Shield under the original trigger; no simultaneous extra draws.",
       "source": "https://www.tested.com/adamsavage",
-      "familiarity": "Teacher-review assumption: Maker/television familiarity plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Enthusiastic careful original maker, ordinary place/block sounds and no accent imitation.",
       "sharedSfx": [
         "card-play",
@@ -1545,7 +1769,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -1554,6 +1778,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: A small prop inspection somehow becomes an entire afternoon's satisfying build.",
+        "smallScaleCue": "One sturdy magnifying lens; remaining arms stay close so the silhouette reads at70px."
       }
     },
     {
@@ -1575,7 +1806,7 @@
       "jokeAngle": "The allegedly impossible fastening is now just a very ordinary open lock.",
       "mechanicLink": "The chosen Guard/Shield/Elusive removal stays a single keyword; no escape stunt or extra suppression.",
       "source": "https://www.houdinimuseum.net/",
-      "familiarity": "Teacher-review assumption: Historical stage figure likely needs a short introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Confident original stage patter; no dangerous-stunt instructions, shared reveal/block sound.",
       "sharedSfx": [
         "card-play",
@@ -1594,7 +1825,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -1603,6 +1834,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The allegedly impossible fastening is now just a very ordinary open lock.",
+        "smallScaleCue": "One open padlock held clearly in a wing; no tied or submerged figure."
       }
     },
     {
@@ -1622,7 +1860,7 @@
       "jokeAngle": "The route is planned before the dramatic entrance; joke about maps and preparation.",
       "mechanicLink": "Moves one own pending event earlier with a+1-round floor; no joke about disappearance or a real crash.",
       "source": "https://womenshistory.si.edu/blog/amelia-earharts-trailblazing-life-aviation",
-      "familiarity": "Teacher-review assumption: Historical aviation figure may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear adventurous original narrator; shared step/Fate cue, no imitation.",
       "sharedSfx": [
         "card-play",
@@ -1641,7 +1879,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -1652,6 +1890,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The route is planned before the dramatic entrance; joke about maps and preparation.",
+        "smallScaleCue": "One folded blank flight chart held forward; ears and feet fully visible."
       }
     },
     {
@@ -1671,7 +1916,7 @@
       "jokeAngle": "Would rather let everyone look through the instrument than argue around it.",
       "mechanicLink": "The public three-card selection follows original order restoration; no prophecy of hidden Fate reservations.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Galileo/",
-      "familiarity": "Teacher-review assumption: Historical science figure needs a brief introduction; existing Tycho overlap reviewed by prop/stance.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Kind inquisitive original scholar, shared reveal/axiom cue and no copied quotations.",
       "sharedSfx": [
         "card-play",
@@ -1690,7 +1935,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -1699,6 +1944,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette."
       }
     },
     {
@@ -1718,7 +1970,7 @@
       "jokeAngle": "Every interview seems ready to turn into another small game.",
       "mechanicLink": "Entrance supports one ally's next creature attack only; no extra play allowance.",
       "source": "https://www.nbc.com/the-tonight-show",
-      "familiarity": "Teacher-review assumption: Late-night host familiarity varies; broadcaster role reference checked, review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly playful original host; no copied sketch or impression, shared place cue.",
       "sharedSfx": [
         "card-play",
@@ -1736,7 +1988,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -1745,6 +1997,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every interview seems ready to turn into another small game.",
+        "smallScaleCue": "One blank interview cue card and an inviting wing gesture."
       }
     },
     {
@@ -1764,7 +2023,7 @@
       "jokeAngle": "Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
       "mechanicLink": "Guard is a steady grounded stance; no licensed wizard character, magic or franchise clothing.",
       "source": "https://interactive.unwomen.org/multimedia/feature/generationequalityrising/en/index.html",
-      "familiarity": "Teacher-review assumption: Actor/speaker likely familiar; institutional public-role reference checked, review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear thoughtful original speaker; not a film-role impression or private-life joke.",
       "sharedSfx": [
         "card-play",
@@ -1783,7 +2042,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -1792,6 +2051,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
+        "smallScaleCue": "One closed blank book, not a wand or school crest."
       }
     },
     {
@@ -1811,7 +2077,7 @@
       "jokeAngle": "A very literal question exposes the absurdity in the pitch; original joke, no catchphrase.",
       "mechanicLink": "Temporary attack reduction is questioning a label, not suppressing all abilities.",
       "source": "https://www.youtube.com/watch?v=06SxBWnXytI",
-      "familiarity": "Teacher-review assumption: Sketch-video niche; short introduction may help.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry conversational original comic with two distinct speeds, no copied performance.",
       "sharedSfx": [
         "card-play",
@@ -1829,7 +2095,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1838,6 +2104,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A very literal question exposes the absurdity in the pitch; original joke, no catchphrase.",
+        "smallScaleCue": "One blank label stamp; one raised questioning brow."
       }
     },
     {
@@ -1857,7 +2130,7 @@
       "jokeAngle": "The last polite sentence still contains a helpful little correction.",
       "mechanicLink": "Last Word supports one surviving ally; no broadcast quote or real-person mortality joke.",
       "source": "https://www.cbsnews.com/amp/news/stephen-colbert-late-show-farewell/",
-      "familiarity": "Teacher-review assumption: Satirical-host recognition varies; historical public work reference checked, no current-role claim.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Crisp original comic commentary; no impression or topical personal allegations.",
       "sharedSfx": [
         "card-play",
@@ -1876,7 +2149,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1885,6 +2158,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The last polite sentence still contains a helpful little correction.",
+        "smallScaleCue": "One blank cue card held with an exaggerated farewell flourish."
       }
     },
     {
@@ -1904,7 +2184,7 @@
       "jokeAngle": "A small quip somehow gets an entire encore; no lyric quotation.",
       "mechanicLink": "Playing an Axiom gives one draw under the original once-per-turn gate.",
       "source": "https://www.sabrinacarpenter.com/",
-      "familiarity": "Teacher-review assumption: Pop recognition plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful brisk original performer; no singing, lyric reference or voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -1924,7 +2204,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1933,6 +2213,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A small quip somehow gets an entire encore; no lyric quotation.",
+        "smallScaleCue": "One unbranded microphone; the body remains fish-shaped, no human face."
       }
     },
     {
@@ -1952,7 +2239,7 @@
       "jokeAngle": "Before answering, enthusiastically decides what the word actually means.",
       "mechanicLink": "Giving another creature temporary Guard uses the existing duration; no new dictionary game.",
       "source": "https://www.stephenfry.com/",
-      "familiarity": "Teacher-review assumption: Broadcaster/writer may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm precise original storytelling; shared block cue and no copied quotations.",
       "sharedSfx": [
         "card-play",
@@ -1971,7 +2258,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -1980,13 +2267,20 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Before answering, enthusiastically decides what the word actually means.",
+        "smallScaleCue": "One sturdy closed dictionary with a blank cover."
       }
     },
     {
       "mechanicalId": "language-debate-dingo",
       "workingName": "Debate Dingo",
-      "proposedName": "Chomskunk",
-      "inspiration": "Noam Chomsky",
+      "proposedName": "K-S-Ibis",
+      "inspiration": "KSI",
       "colour": "language",
       "rarity": "uncommon",
       "acquisition": {
@@ -1994,13 +2288,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small old skunk with broad white brow fur, charcoal coat and gold lapel detail.",
-      "signatureProp": "One blank folded sentence diagram; choose one broad branching shape.",
-      "jokeAngle": "The apparently simple sentence has another structure hiding in it.",
-      "mechanicLink": "Higher-attack fight Shield is a defensive argument motif, not a claim about political views.",
-      "source": "https://linguistics.mit.edu/user/chomsky/",
-      "familiarity": "Teacher-review assumption: Linguistics figure needs introduction; current health/life status not part of joke.",
-      "voiceDirection": "Quiet exact original scholar; short plain lines, no impersonation.",
+      "silhouette": "Compact ibis with dark head tufts, a gold-edged hoodie and an oversized confident reaction face.",
+      "signatureProp": "One plain headset; the long beak opens for an absurdly emphatic rebuttal.",
+      "jokeAngle": "The reaction is much bigger than the tiny disagreement; original gaming banter, no feuds, products or song quotes.",
+      "mechanicLink": "Shield after fighting a stronger enemy is surviving the argument; no new boxing mechanic.",
+      "source": "https://www.youtube.com/watch?v=9qrwZUgJpRQ",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+      "voiceDirection": "Brisk playful original reaction voice, no imitation, lyrics or screaming loop.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2018,7 +2312,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -2028,13 +2322,20 @@
           109,
           127
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "replace weaker reference",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The reaction is much bigger than the tiny disagreement; original gaming banter, no feuds, products or song quotes.",
+        "smallScaleCue": "One plain headset; the long beak opens for an absurdly emphatic rebuttal."
       }
     },
     {
       "mechanicalId": "language-clause-crane",
       "workingName": "Clause Crane",
-      "proposedName": "Jacinda Ardheron",
-      "inspiration": "Jacinda Ardern",
+      "proposedName": "Olivia Rodentgo",
+      "inspiration": "Olivia Rodrigo",
       "colour": "language",
       "rarity": "uncommon",
       "acquisition": {
@@ -2042,13 +2343,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Composed crane with dark swept-back head feathers and a neat gold-trimmed travelling coat.",
-      "signatureProp": "One blank meeting note held level; an open-wing listening gesture.",
-      "jokeAngle": "Makes room for one more speaker before the rule is rewritten; invented public leadership joke.",
-      "mechanicLink": "Healing when an Axiom changes remains once per round, not a permanent leadership aura.",
-      "source": "https://www.beehive.govt.nz/release/prime-minister-jacinda-ardern-announces-resignation",
-      "familiarity": "Teacher-review assumption: Former New Zealand prime minister; recognition review needed.",
-      "voiceDirection": "Calm welcoming original chairperson; no policy endorsements or voice imitation.",
+      "silhouette": "Small mouse with long dark head fur, a worn gold-lined stage jacket and expressive brows.",
+      "signatureProp": "One blank lyric-notebook-shaped journal, with a big crossed-out line shape and no words.",
+      "jokeAngle": "The tiny mouse rewrites the rule with enormous stage emotion; an invented songwriting gag.",
+      "mechanicLink": "Healing once per round when an Axiom changes is finding a better line; no new rule-changing ability.",
+      "source": "https://www.grammy.com/artists/olivia-rodrigo/38411/",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+      "voiceDirection": "Expressive original spoken performer, no lyrics, singing or artist impression.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2068,7 +2369,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -2077,6 +2378,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "replace weaker reference",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The tiny mouse rewrites the rule with enormous stage emotion; an invented songwriting gag.",
+        "smallScaleCue": "One blank lyric-notebook-shaped journal, with a big crossed-out line shape and no words."
       }
     },
     {
@@ -2096,7 +2404,7 @@
       "jokeAngle": "Takes a phrase literally until the little stage becomes absurd.",
       "mechanicLink": "Temporary colour/attack loss remains exactly the draft; no copied lyrics or adult sketch material.",
       "source": "https://www.boburnham.com/",
-      "familiarity": "Teacher-review assumption: Comedy/music-film reference plausibly familiar; review clean public-work angle.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry playful original delivery, no singing, copied monologue or real accent.",
       "sharedSfx": [
         "card-play",
@@ -2114,7 +2422,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -2123,13 +2431,20 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Takes a phrase literally until the little stage becomes absurd.",
+        "smallScaleCue": "One blank miniature stage card; a single warm spotlight-like rim, no set or piano."
       }
     },
     {
       "mechanicalId": "language-contract-coyote",
       "workingName": "Contract Coyote",
-      "proposedName": "Amal Clawney",
-      "inspiration": "Amal Clooney",
+      "proposedName": "Jenna Otterga",
+      "inspiration": "Jenna Ortega",
       "colour": "language",
       "rarity": "rare",
       "acquisition": {
@@ -2139,13 +2454,13 @@
         "theme": "Ch3 recovered archival evidence",
         "assignmentStatus": "draft; verify exact plot completion flag"
       },
-      "silhouette": "Alert coyote with tidy dark ear fur, a charcoal robe-like coat and gold ribbon detail.",
-      "signatureProp": "One blank rolled agreement tied with a broad gold band.",
-      "jokeAngle": "Even the tiny helping hand gets a carefully worded agreement; no billing or case allegation.",
-      "mechanicLink": "Only the first friendly-target spell gets the cost reduction; minimum zero stays visible.",
-      "source": "https://www.doughtystreet.co.uk/barristers/amal-clooney",
-      "familiarity": "Teacher-review assumption: Public barrister may need introduction; professional role is sourced, satire is invented.",
-      "voiceDirection": "Plain precise supportive original counsel; not real legal advice or imitation.",
+      "silhouette": "Small dark otter with straight head-fur fringe, calm wide eyes and a worn charcoal coat with gold cuffs.",
+      "signatureProp": "One blank rolled agreement held with an unimpressed straight face; no franchise costume.",
+      "jokeAngle": "The spooky little clerk makes a perfectly ordinary favour sound very serious.",
+      "mechanicLink": "The first friendly-target spell gets the existing bounded discount; the agreement doesn't alter its rules.",
+      "source": "https://www.netflix.com/tudum/features/wednesday-jenna-ortega-season-2-digital-cover",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+      "voiceDirection": "Dry original spooky-clerk delivery, no screen-character voice, dance or quotations.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2162,7 +2477,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -2171,6 +2486,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "replace weaker reference",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The spooky little clerk makes a perfectly ordinary favour sound very serious.",
+        "smallScaleCue": "One blank rolled agreement held with an unimpressed straight face; no franchise costume."
       }
     },
     {
@@ -2190,7 +2512,7 @@
       "jokeAngle": "The whole audience seems included in the next encouraging announcement.",
       "mechanicLink": "End-turn scheduling still requires an Axiom play and one own event limit; no instant global buff.",
       "source": "https://images.oprah.com/images/obc_classic/book/2008/anewearth/ane_chapter1_transcript.pdf",
-      "familiarity": "Teacher-review assumption: Broadcaster persona needs class review; historical official host reference checked, joke is invented.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm inclusive original host; no copied giveaway phrase or impersonation.",
       "sharedSfx": [
         "card-play",
@@ -2210,7 +2532,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -2221,6 +2543,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The whole audience seems included in the next encouraging announcement.",
+        "smallScaleCue": "One blank audience ticket waved like an invitation; no show logo."
       }
     },
     {
@@ -2240,7 +2569,7 @@
       "jokeAngle": "Takes the argument apart so it can be rebuilt from a clear starting point.",
       "mechanicLink": "Restores one chosen Axiom category to basic and draws once; no new global reset.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Descartes/",
-      "familiarity": "Teacher-review assumption: Historical maths/philosophy figure requires introduction.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Careful spare original scholar; historical legendary presentation, shared axiom sound.",
       "sharedSfx": [
         "card-play",
@@ -2260,7 +2589,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -2269,6 +2598,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One folded blank foundation plan; no written quotation or royal regalia."
       }
     },
     {
@@ -2288,7 +2624,7 @@
       "jokeAngle": "Every ordinary room could be the beginning of another game.",
       "mechanicLink": "A simple common body introduces the gamer persona with no licensed game character or extra ability.",
       "source": "https://www.youtube.com/@DanTDM",
-      "familiarity": "Teacher-review assumption: Gaming creator plausibly familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Bright family-friendly original gamer, no copied intro or sound pack.",
       "sharedSfx": [
         "card-play",
@@ -2306,7 +2642,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -2315,6 +2651,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every ordinary room could be the beginning of another game.",
+        "smallScaleCue": "One unbranded game controller, held like the next little adventure is ready."
       }
     },
     {
@@ -2334,7 +2677,7 @@
       "jokeAngle": "There is apparently always one more way to play the situation.",
       "mechanicLink": "Choice of attack or health remains a single Entrance choice; no private-life/scandal gag.",
       "source": "https://www.youtube.com/@PewDiePie",
-      "familiarity": "Teacher-review assumption: Internet/gaming reference plausible; familiarity varies.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful original commentator, not an accent or voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -2353,7 +2696,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -2362,6 +2705,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: There is apparently always one more way to play the situation.",
+        "smallScaleCue": "One plain two-button controller and a puzzled raised paw."
       }
     },
     {
@@ -2381,7 +2731,7 @@
       "jokeAngle": "Treats a tiny imaginary adventure like a huge theatrical entrance.",
       "mechanicLink": "Friendly stat swap is dramatic reframing; no song lyrics, film-role costume or copied game persona.",
       "source": "https://www.youtube.com/@JablinskiGames",
-      "familiarity": "Teacher-review assumption: Actor/gaming public persona likely familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Exuberant original performer with controlled volume; no singing or voice impression.",
       "sharedSfx": [
         "card-play",
@@ -2400,7 +2750,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2409,6 +2759,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Treats a tiny imaginary adventure like a huge theatrical entrance.",
+        "smallScaleCue": "One unbranded miniature microphone; wings planted in a grand harmless pose."
       }
     },
     {
@@ -2428,7 +2785,7 @@
       "jokeAngle": "A side doodle immediately wants its own little side adventure.",
       "mechanicLink": "Last Word creates only the specified colourless paper token if space exists.",
       "source": "https://www.youtube.com/@jaidenanimations",
-      "familiarity": "Teacher-review assumption: Animation/video creator may be familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Gentle playful original storyteller; shared place cue, not the creator's recorded voice.",
       "sharedSfx": [
         "card-play",
@@ -2446,7 +2803,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2456,6 +2813,13 @@
           109,
           "token-order"
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A side doodle immediately wants its own little side adventure.",
+        "smallScaleCue": "One folded blank paper figure connected to a pencil; no copied channel avatar or pet."
       }
     },
     {
@@ -2475,7 +2839,7 @@
       "jokeAngle": "The smallest device apparently needs an entire mysterious backstory.",
       "mechanicLink": "Only the first colourless token each turn gains maximum health; no new token class or film sequence.",
       "source": "https://www.kojimaproductions.jp/en/company",
-      "familiarity": "Teacher-review assumption: Game-creator niche; a short introduction may help.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Quiet intrigued original designer; no commercial game sound, character, costume or quotation.",
       "sharedSfx": [
         "card-play",
@@ -2494,7 +2858,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -2504,6 +2868,13 @@
           109,
           "token-order"
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The smallest device apparently needs an entire mysterious backstory.",
+        "smallScaleCue": "One blank folded storyboard panel held between folded wings."
       }
     },
     {
@@ -2523,7 +2894,7 @@
       "jokeAngle": "The little prop needs one more carefully considered take.",
       "mechanicLink": "Copies bounded attack temporarily, not a creature's art, identity or abilities.",
       "source": "https://www.nzfilm.co.nz/assets/resources/Undergrowth_Press_Kit.pdf",
-      "familiarity": "Teacher-review assumption: Filmmaker reference may need introduction; cite production credits only.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm practical original film-maker; shared click/place cue, no franchise character or accent imitation.",
       "sharedSfx": [
         "card-play",
@@ -2541,7 +2912,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -2550,6 +2921,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The little prop needs one more carefully considered take.",
+        "smallScaleCue": "One blank film clapper held at a thoughtful angle."
       }
     },
     {
@@ -2569,7 +2947,7 @@
       "jokeAngle": "Changes one small rule and suddenly the toy feels different.",
       "mechanicLink": "Shield follows the specified stat-swap trigger; no copying Nintendo characters, logos or game media.",
       "source": "https://www.nintendo.com/en-gb/News/2009/Watch-exclusive-interviews-with-Mario-creator-Shigeru-Miyamoto-251785.html",
-      "familiarity": "Teacher-review assumption: Game-creator recognition uncertain; introduce if needed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful spare original inventor; no character voice imitation or commercial sound effect.",
       "sharedSfx": [
         "card-play",
@@ -2589,7 +2967,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -2598,6 +2976,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Changes one small rule and suddenly the toy feels different.",
+        "smallScaleCue": "One simple blank toy controller with two large coloured buttons."
       }
     },
     {
@@ -2617,7 +3002,7 @@
       "jokeAngle": "Every ordinary little box seems to have a slightly spooky theatrical idea inside.",
       "mechanicLink": "Elusive and token attack aura stay exact; maintain Rift style, no copied film characters or imitation of another art style.",
       "source": "https://movies.disney.com/dumbo-2019",
-      "familiarity": "Teacher-review assumption: Filmmaker reference plausibly familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Dry whimsical original storyteller; restrained shared reveal cue, no branded character voice.",
       "sharedSfx": [
         "card-play",
@@ -2635,7 +3020,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -2645,13 +3030,20 @@
           109,
           "token-order"
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every ordinary little box seems to have a slightly spooky theatrical idea inside.",
+        "smallScaleCue": "One crooked blank film clapper; tail curl is a second broad silhouette cue."
       }
     },
     {
       "mechanicalId": "imagination-paradox-pony",
       "workingName": "Paradox Pony",
-      "proposedName": "David Lynx",
-      "inspiration": "David Lynch",
+      "proposedName": "Pedro Ponycal",
+      "inspiration": "Pedro Pascal",
       "colour": "imagination",
       "rarity": "rare",
       "acquisition": {
@@ -2659,13 +3051,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small lynx with swept-back pale head tufts, midnight jacket and violet scarf.",
-      "signatureProp": "One ordinary coffee cup tilted beside an impossibly folded blank card.",
-      "jokeAngle": "The perfectly ordinary cup apparently belongs in an unexpectedly odd scene.",
-      "mechanicLink": "Enemy stat swap is a bounded public game effect, not a dream cutscene or claim about the person's beliefs.",
-      "source": "https://www.davidlynchfoundation.org/board-of-directors.html",
-      "familiarity": "Teacher-review assumption: Historical film-maker likely needs a short introduction.",
-      "voiceDirection": "Calm gently strange original narrator, no copied film monologue or real-person death joke.",
+      "silhouette": "Round pony with tousled dark mane, small moustache-like muzzle markings and a soft violet travelling jacket.",
+      "signatureProp": "One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop.",
+      "jokeAngle": "The cosy little traveller gives the impossible stat swap a dramatically baffled side-eye.",
+      "mechanicLink": "Enemy stat swap stays the exact bounded game effect; no licensed role or new dodge ability.",
+      "source": "https://www.lucasfilm.com/productions/the-mandalorian/",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+      "voiceDirection": "Warm puzzled original traveller, no actor or television-role impression.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2683,7 +3075,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -2692,13 +3084,20 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "replace weaker reference",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The cosy little traveller gives the impossible stat swap a dramatically baffled side-eye.",
+        "smallScaleCue": "One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop."
       }
     },
     {
       "mechanicalId": "imagination-cloud-castle-crab",
       "workingName": "Cloud Castle Crab",
-      "proposedName": "Björk Beetle",
-      "inspiration": "Björk",
+      "proposedName": "Ariana Crande",
+      "inspiration": "Ariana Grande",
       "colour": "imagination",
       "rarity": "rare",
       "acquisition": {
@@ -2708,13 +3107,13 @@
         "theme": "Ch4 completed Sorting Room story",
         "assignmentStatus": "draft; verify exact plot completion flag"
       },
-      "silhouette": "Round beetle with dark expressive eyes, violet petal-like shell plates and an adventurous stage silhouette.",
-      "signatureProp": "One broad folded-paper wing attached to its shell, not a copied outfit or album design.",
-      "jokeAngle": "The costume looks ready to invent a small world of its own.",
-      "mechanicLink": "Guard/damage survival summons one paper token; story-only Sorting Room source remains unchanged.",
-      "source": "https://www.bjork.com/",
-      "familiarity": "Teacher-review assumption: Icelandic performer may need introduction; review.",
-      "voiceDirection": "Curious theatrical original delivery; no singing, lyrics, costume copying or artist impression.",
+      "silhouette": "Small dark crab with a high curved hair-tuft silhouette, warm big eyes and violet stage-coat trim.",
+      "signatureProp": "One broad folded-paper fan held like a tiny stage set; no copied costume or logo.",
+      "jokeAngle": "The tiny entrance apparently needs one more spectacular paper backup performer.",
+      "mechanicLink": "Guard and surviving damage summon the original paper token; the story-only Sorting Room source is unchanged.",
+      "source": "https://www.arianagrande.com/",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+      "voiceDirection": "Bright poised original spoken performer, no singing, lyrics or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2732,7 +3131,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 2,
@@ -2742,6 +3141,13 @@
           109,
           "token-order"
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "replace weaker reference",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The tiny entrance apparently needs one more spectacular paper backup performer.",
+        "smallScaleCue": "One broad folded-paper fan held like a tiny stage set; no copied costume or logo."
       }
     },
     {
@@ -2761,7 +3167,7 @@
       "jokeAngle": "The tiniest side character seems to deserve one more story.",
       "mechanicLink": "Draw still requires two colourless tokens at turn end; no copied Ghibli characters, scenes or requested imitation of its visual style.",
       "source": "https://www.ghibli.jp/works/",
-      "familiarity": "Teacher-review assumption: Film-maker reference may need a short introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm spare original story-maker; shared reveal cue, no licensed soundtrack or character voices.",
       "sharedSfx": [
         "card-play",
@@ -2780,7 +3186,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 3,
@@ -2790,6 +3196,13 @@
           109,
           "token-order"
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The tiniest side character seems to deserve one more story.",
+        "smallScaleCue": "One simple paper wind toy near a fin; original Rift companion design only."
       }
     },
     {
@@ -2809,7 +3222,7 @@
       "jokeAngle": "Spots a surprising pattern where everyone else only sees a jumble.",
       "mechanicLink": "Swaps two friendly attack values using the draft contract; no supernatural mathematical claim or instant victory.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Ramanujan/",
-      "familiarity": "Teacher-review assumption: Historical mathematical legendary requires introduction.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Quiet delighted original scholar; shared axiom/place sound and no copied quotations.",
       "sharedSfx": [
         "card-play",
@@ -2828,7 +3241,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -2837,6 +3250,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One blank slate with a single original looping geometric motif; no readable equations or religious symbols."
       }
     },
     {
@@ -2856,7 +3276,7 @@
       "jokeAngle": "One more useful note must be saved before the explanation moves on.",
       "mechanicLink": "Entrance healing is a reminder for one damaged ally; no new medical or educational claims.",
       "source": "https://www.hankgreen.com/",
-      "familiarity": "Teacher-review assumption: Science/video creator familiarity plausible; review, site text was minimal.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Quick curious original explainer; no copied intro or impersonation, shared heal cue.",
       "sharedSfx": [
         "card-play",
@@ -2875,7 +3295,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -2884,6 +3304,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: One more useful note must be saved before the explanation moves on.",
+        "smallScaleCue": "One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour."
       }
     },
     {
@@ -2903,7 +3330,7 @@
       "jokeAngle": "The old page still has something worth returning to.",
       "mechanicLink": "Returns the latest discarded spell to deck bottom exactly; no lyric, novel passage or plot quotation.",
       "source": "https://www.johngreenbooks.com/",
-      "familiarity": "Teacher-review assumption: Public author/video creator likely familiar to some; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm thoughtful original narrator; shared page/reveal sounds, no copied prose.",
       "sharedSfx": [
         "card-play",
@@ -2921,7 +3348,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2930,6 +3357,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The old page still has something worth returning to.",
+        "smallScaleCue": "One old blank paperback with a large visible page marker."
       }
     },
     {
@@ -2949,7 +3383,7 @@
       "jokeAngle": "A familiar performer appears ready for another unexpectedly different adventure.",
       "mechanicLink": "Guard is the armadillo's grounded stance; no film character or new magical ability.",
       "source": "https://www.tonyawards.com/winners/year/2024/category/any/show/any/",
-      "familiarity": "Teacher-review assumption: Actor familiarity plausible; role/award reference checked, familiarity still proposed.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Curious original stage performer, not a film-role voice impression.",
       "sharedSfx": [
         "card-play",
@@ -2968,7 +3402,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2977,6 +3411,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A familiar performer appears ready for another unexpectedly different adventure.",
+        "smallScaleCue": "One rolled blank map; avoid wizard scars, house crests, costumes or branded props."
       }
     },
     {
@@ -2996,7 +3437,7 @@
       "jokeAngle": "The familiar performer returns just when the audience expected someone else.",
       "mechanicLink": "Once-per-match return is the meme payoff; no song lyrics, tune, commercial clip or copied choreography.",
       "source": "https://rickastley.co.uk/",
-      "familiarity": "Teacher-review assumption: Internet/pop reference likely familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm playful original spoken performer; no singing or voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -3014,7 +3455,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -3023,6 +3464,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The familiar performer returns just when the audience expected someone else.",
+        "smallScaleCue": "One plain microphone; modest mid-step pose is a broad pop-stage cue."
       }
     },
     {
@@ -3042,7 +3490,7 @@
       "jokeAngle": "Even this tiny side scene seems to have room for a friendly cameo.",
       "mechanicLink": "Recovery heals the hero once per turn; no claim of a new heroic transformation.",
       "source": "https://www.marvel.com/comics/creators/30/stan_lee",
-      "familiarity": "Teacher-review assumption: Public comics/cameo figure plausibly familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly enthusiastic original narrator; no copied signature word or real-person death joke.",
       "sharedSfx": [
         "card-play",
@@ -3061,7 +3509,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -3070,6 +3518,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Even this tiny side scene seems to have room for a friendly cameo.",
+        "smallScaleCue": "One blank comic page; no superheroes, emblems or copyrighted panel art."
       }
     },
     {
@@ -3089,7 +3544,7 @@
       "jokeAngle": "A familiar entertainer turns up in an unexpectedly different broadcast.",
       "mechanicLink": "Returns one cheap creature from discard; no live-world behaviour or private-life joke.",
       "source": "https://www.nbcolympics.com/news/best-viral-moments-2024-paris-olympics",
-      "familiarity": "Teacher-review assumption: Music/commentary public persona plausible; recognition review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Relaxed amused original commentator; no accent imitation, song, lyric or drug reference.",
       "sharedSfx": [
         "card-play",
@@ -3107,7 +3562,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -3116,6 +3571,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A familiar entertainer turns up in an unexpectedly different broadcast.",
+        "smallScaleCue": "One plain commentator headset; no brands or smoking/drug props."
       }
     },
     {
@@ -3135,7 +3597,7 @@
       "jokeAngle": "The small scene apparently has more than one very carefully planned timeline.",
       "mechanicLink": "Backward Fate grants the first Shield each round only; no new repeat/rewind policy.",
       "source": "https://www.oscars.org/oscars/ceremonies/embed/2024",
-      "familiarity": "Teacher-review assumption: Film-maker reference may need introduction; nonlinear-scene joke is a creative proposal.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Calm deliberate original story planner; shared Fate/block sounds, no film dialogue.",
       "sharedSfx": [
         "card-play",
@@ -3155,7 +3617,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -3166,6 +3628,13 @@
           118,
           120
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The small scene apparently has more than one very carefully planned timeline.",
+        "smallScaleCue": "One simple two-layer blank clock diagram; not a copied film prop or poster."
       }
     },
     {
@@ -3185,7 +3654,7 @@
       "jokeAngle": "Every completed little task seems to deserve an impeccably organised keepsake.",
       "mechanicLink": "Only resolving an own pending event draws; skipped events remain excluded.",
       "source": "https://www.marthastewart.com/",
-      "familiarity": "Teacher-review assumption: Public craft/home reference may need introduction.",
+      "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Calm exact original craft host; shared paper/reveal cue, no personal-history gag.",
       "sharedSfx": [
         "card-play",
@@ -3205,7 +3674,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -3216,6 +3685,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "standalone visual comedy / niche discovery",
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Every completed little task seems to deserve an impeccably organised keepsake.",
+        "smallScaleCue": "One tidy keepsake envelope tied with a broad ribbon; no tiny labels to read."
       }
     },
     {
@@ -3235,7 +3711,7 @@
       "jokeAngle": "The little stage pause lasts just long enough to become part of the performance.",
       "mechanicLink": "Delays one own event within the draft cap and draws only if it moved; no copied lyrics.",
       "source": "https://www.adele.com/",
-      "familiarity": "Teacher-review assumption: Pop artist recognition plausible; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Warm expressive original spoken performer; no singing, accent or voice imitation.",
       "sharedSfx": [
         "card-play",
@@ -3255,7 +3731,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -3266,6 +3742,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The little stage pause lasts just long enough to become part of the performance.",
+        "smallScaleCue": "One plain microphone at a deliberately paused entrance."
       }
     },
     {
@@ -3287,7 +3770,7 @@
       "jokeAngle": "Apparently the little scene still had room for one more cameo.",
       "mechanicLink": "Recovering a defeated creature is only the game effect; no joke about health, addiction or personal recovery.",
       "source": "https://www.oscars.org/oscars/ceremonies/embed/2024",
-      "familiarity": "Teacher-review assumption: Actor recognition likely; class review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Brisk playful original actor, no character impression; shared reveal/place cues.",
       "sharedSfx": [
         "card-play",
@@ -3306,7 +3789,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -3315,6 +3798,13 @@
         "gates": [
           109
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Apparently the little scene still had room for one more cameo.",
+        "smallScaleCue": "One blank film clapper; no armoured superhero suit, branded glasses or film logo."
       }
     },
     {
@@ -3334,7 +3824,7 @@
       "jokeAngle": "The familiar face seems to arrive precisely when the strange story needs another scene.",
       "mechanicLink": "Marked repeatable event healing stays behind existing Fate gates; no licensed character or guaranteed rewind payoff.",
       "source": "https://www.rsc.org.uk/about-us/whos-who/associate-artists",
-      "familiarity": "Teacher-review assumption: Stage/screen actor may be familiar; review.",
+      "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Curious nimble original storyteller; no television-role voice or copied quotation.",
       "sharedSfx": [
         "card-play",
@@ -3354,7 +3844,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 6,
         "attack": 3,
@@ -3365,6 +3855,13 @@
           118,
           120
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "internet, music, sport or screen-fandom crossover",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The familiar face seems to arrive precisely when the strange story needs another scene.",
+        "smallScaleCue": "One simple blank pocket-watch case held beside a fin; no blue box or signature fictional device."
       }
     },
     {
@@ -3384,7 +3881,7 @@
       "jokeAngle": "Finds a familiar relationship even after every piece has been rearranged.",
       "mechanicLink": "Copies a spent event to a new occurrence without reviving the consumed original; no real time-travel or settled replay claim.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Noether_Emmy/",
-      "familiarity": "Teacher-review assumption: Historical mathematical legendary needs a short introduction.",
+      "familiarity": "Builder audience judgement (not measured): historical maths discovery. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear delighted original scholar; shared Fate/axiom sounds, no copied quotations.",
       "sharedSfx": [
         "card-play",
@@ -3403,7 +3900,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Persona/visual proposal, not approved, generated, voiced, implemented or balance-tested",
+      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -3414,6 +3911,13 @@
           118,
           119
         ]
+      },
+      "castDecision": {
+        "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+        "decision": "retain",
+        "audienceLane": "historical maths discovery",
+        "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
+        "smallScaleCue": "One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra."
       }
     }
   ],

@@ -10,7 +10,7 @@ Ordinary Fate advances after both players have taken a turn, with visible determ
 
 See [starter/card drafts](drafts/card-arena-2026-10-12/CARD-DRAFTS.md), [build roadmap](drafts/card-arena-2026-10-12/ROADMAP.md) and [recorded board feedback](reviews/board-study-2026-10-12.md). Runtime rules below describe the existing game until those tickets land.
 
-Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the approved style board and ROSTER.md. The expansion's creature concepts still need public-persona/pun/prop assignments before release; a mechanical animal name alone is not a finished collectible caricature. Preserve the cute-horror meme identity across future agent sessions.
+Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the approved style board and ROSTER.md. The expansion's public-persona/pun/prop assignments are selected in [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md); the teacher delegates meme-worthiness and teenage appeal to the builder, with no teacher roster approval. Mechanical animal names remain stable working IDs. Preserve the cute-horror meme identity across future agent sessions.
 
 ## Purpose
 

@@ -1,8 +1,16 @@
 # Expansion persona roster review — #139
 
+## Subsequent teacher delegation: cast selected by builder
+
+The teacher explicitly removed teacher roster review and delegated meme-worthiness / teenage appeal to the builder. All 72 identities now have a recorded castDecision. Five weaker references were replaced: Chomsky → KSI (K-S-Ibis), Ardern → Olivia Rodrigo (Olivia Rodentgo), Amal Clooney → Jenna Ortega (Jenna Otterga), Lynch → Pedro Pascal (Pedro Ponycal), Björk → Ariana Grande (Ariana Crande). Sources for their public roles were checked against the verified KSI channel, Recording Academy, Netflix, Lucasfilm and Ariana's official site. These sources do not measure teenage familiarity; appeal is an explicit editorial judgement.
+
+Keep the historical maths lane and selected niche creators where the independent prop/pose joke works without knowing the person. Artwork still follows the style board, readability and alpha checks. Mechanical strategy/balance, board integration and gameplay policy gates remain. Earlier references below to teacher familiarity/pun review are historical and superseded; no builder should wait for teacher roster approval.
+
 All 72 creature concepts now have proposed public-persona mappings: twelve per each of the six colours. The pass drafts puns, silhouettes, one main prop, harmless joke angles, exact palette accents, source links, original voice directions and reusable sound keys. ART-BIBLE.md and the approved style board remain canonical. The seven already produced starter helpers are a separate small exception proposal, not a new generic-animal cast direction.
 
 The JSON retains the original mechanical IDs, asset IDs, costs, stats, effect text, rarity, acquisition and release gates. Proposed name/silhouette changes do not change species identity or two-copy rules. Eighteen plot-only cards remain outside packs. Public roles were checked using linked official/institutional references; thin or inaccessible sources and class familiarity remain explicit review limits. The creative jokes and prop choices are proposals, not biographical claims. No celebrity voice impressions, lyrics, logos, private-life/victim jokes or new recordings.
+
+Latest delegated-selection checks: persona/planning validators passed; full suite 805 tests, 804 passed, one skipped, zero failed (105,434 ms). Independent Standards review found no blockers; Spec found only stale CARD-DRAFTS mapping language, corrected along with DESIGN.md. Zero remaining findings. Cast changes introduce no runtime or recording changes.
 
 ## Validation
 

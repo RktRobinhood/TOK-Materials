@@ -21,5 +21,8 @@ for(const row of p.rows){
  for(const key of ['signatureProp','jokeAngle','silhouette','source','voiceDirection','familiarity','status'])assert(row[key]&&typeof row[key]==='string');
  assert(new URL(row.source).protocol==='https:');assert(row.promptReferences.some(ref=>ref.includes('style-board.png')));
  assert(row.sharedSfx.length>=3);for(const key of row.sharedSfx)assert(R.data.sfx[key]?.length,'Unknown SFX '+key);
+ assert(row.castDecision&&['retain','replace weaker reference'].includes(row.castDecision.decision));
+ assert(row.castDecision.authority.includes('no teacher roster gate'));
+ assert(row.castDecision.appealReason&&row.castDecision.smallScaleCue);
 }
 console.log('72 unique persona proposals; six groups of12; no existing actor overlap; exact mechanics, rarity, acquisition, gates, asset IDs and palette preserved.');

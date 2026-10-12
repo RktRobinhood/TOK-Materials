@@ -14,7 +14,7 @@ Live site: https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20o
 - Student-facing English must be short and plain. Caricatures joke only about public personas; no jokes about sexual abuse; no song lyrics.
 - Borrow proven mechanics, never names, art or text, from commercial games.
 - Found missing or new art? Append it to the running list in `design/art-requests/ART-REQUESTS.md` (Stage 13) with its id and where it is needed. The teacher makes the art later.
-- Before generating or changing art, read `design/ART-BIBLE.md` and the relevant `design/ROSTER.md`/Stage13 entry; visually inspect `design/source-assets/0-style/style-board.png` and a matching shipped creature. Cute horror, jewel accents on dark backgrounds and public-persona creature satire are the continuous direction. Preserve exact prompts/provenance. The teacher explicitly authorizes builder image generation for the 12 October Card Arena pipeline; that authorization supersedes the default teacher-made-art workflow for this task.
+- Before generating or changing art, read `design/ART-BIBLE.md` and the relevant `design/ROSTER.md`/Stage13 entry; visually inspect `design/source-assets/0-style/style-board.png` and a matching shipped creature. Cute horror, jewel accents on dark backgrounds and public-persona creature satire are the continuous direction. The teacher delegates roster selection and teenage/meme appeal to the builder; do not wait for teacher roster approval. Document selections and replacements. Preserve exact prompts/provenance. The teacher explicitly authorizes builder image generation for the 12 October Card Arena pipeline; that authorization supersedes the default teacher-made-art workflow for this task.
 
 ## Run and test
 

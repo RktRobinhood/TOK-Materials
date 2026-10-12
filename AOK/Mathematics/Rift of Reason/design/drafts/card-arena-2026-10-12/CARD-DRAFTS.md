@@ -1,6 +1,6 @@
 # Starter decks and card drafts — 12 October 2026
 
-Draft content for implementation and playtesting, not shipped cards or a claim of measured balance. The teacher approved avatar-type starters shared by both variants, weak/common starting cards, twenty-card decks, the existing default ten Axioms, and progression through earned cards. Names, costs and tuning below are proposals. Seven proposed common creature portraits are now integrated under #137; runtime cards remain #113. No new voices have been generated. The main expansion cast still requires public-persona/pun/prop mapping under ART-BIBLE.md.
+Draft content for implementation and playtesting, not shipped cards or a claim of measured balance. The teacher approved avatar-type starters shared by both variants, weak/common starting cards, twenty-card decks, the existing default ten Axioms, and progression through earned cards. Names, costs and tuning below are proposals. Seven proposed common creature portraits are now integrated under #137; runtime cards remain #113. No new voices have been generated. The main expansion cast has complete builder-selected public-persona/pun/prop mappings in [PERSONA-ROSTER.md](PERSONA-ROSTER.md), following ART-BIBLE.md. The teacher delegates meme-worthiness and teenage appeal to the builder; no teacher roster approval is required.
 
 ## Revised construction rule
 
