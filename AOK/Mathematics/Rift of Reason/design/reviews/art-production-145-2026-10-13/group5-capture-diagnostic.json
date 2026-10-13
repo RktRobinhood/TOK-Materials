@@ -1,0 +1,62 @@
+{
+  "status": "diagnostic only; native acceptance blocked",
+  "tab": 14,
+  "url": "http://localhost:18793/dev/art-production.html?group=5",
+  "devicePixelRatio": 1.2999999523162842,
+  "requestedDesktop": {
+    "width": 1280,
+    "height": 720
+  },
+  "reportedDesktop": {
+    "width": 985,
+    "height": 554,
+    "scrollWidth": 985
+  },
+  "capturedDesktop": {
+    "file": "group5-dark-incomplete.jpg",
+    "width": 757,
+    "height": 733,
+    "format": "JPEG; originally saved with png suffix then honestly renamed"
+  },
+  "requestedNarrow": {
+    "width": 390,
+    "height": 844
+  },
+  "reportedNarrow": {
+    "width": 300,
+    "height": 649,
+    "scrollWidth": 300,
+    "cardWidth": 250.48077392578125
+  },
+  "capturedNarrow": {
+    "file": "group5-narrow-light-incomplete.jpg",
+    "width": 231,
+    "height": 1085,
+    "format": "JPEG"
+  },
+  "directCapture": {
+    "file": "group5-direct-light.jpg",
+    "result": "viewport image also shows mismatched/clipped painted content; does not establish full-card acceptance"
+  },
+  "checks": {
+    "all4ImagesLoaded": true,
+    "frameZ": 1,
+    "artZ": 2,
+    "fullRuleAvailableInDOM": true,
+    "cssReportedNoHorizontalOverflow": true
+  },
+  "recovery": [
+    "fresh viewport capability",
+    "reload after set",
+    "checkbox interaction",
+    "documented direct capture alternative"
+  ],
+  "outcome": "right-side frame/text cropped in captures; no actual390/1280 native acceptance claimed",
+  "restoredViewport": {
+    "width": 1182,
+    "height": 652,
+    "scrollWidth": 1182,
+    "devicePixelRatio": 1.2999999523162842
+  },
+  "next": "Resolve capture/viewport scale mismatch without changing game CSS to mask it, then finish group5 actual dark/light70/300/narrow/public QA; no generation or full-test repeat."
+}

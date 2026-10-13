@@ -351,5 +351,14 @@
       112
     ],
     "nativeDependenciesAdded": true
+  },
+  "native_capture_mismatch": {
+    "number": 150,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/150",
+    "title": "Rift art QA: Resolve in-app viewport/capture scale mismatch before native acceptance",
+    "id": 5838993719,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false,
+    "scope": "developer QA/client capture mismatch; blocks group5 native acceptance, not a gameplay defect"
   }
 }

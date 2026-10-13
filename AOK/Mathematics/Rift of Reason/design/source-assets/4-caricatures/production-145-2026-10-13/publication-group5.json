@@ -37,9 +37,11 @@
     "findings": 0
   },
   "browser": {
-    "status": "fresh attachment timeout; queued open_in_codex",
+    "status": "localtab14 attached; capture/viewport mismatch blocks native acceptance, issue150",
     "url": "http://localhost:18793/dev/art-production.html?group=5",
-    "nativeEvidence": "pending; do not substitute group4 captures"
+    "nativeEvidence": "pending; do not substitute group4 captures",
+    "blockingIssue": "https://github.com/RktRobinhood/TOK-Materials/issues/150",
+    "diagnostic": "design/reviews/art-production-145-2026-10-13/group5-capture-diagnostic.json"
   },
   "commit": "bc26530cfb83fdc9625a0df0e74b450a7ac0c3fe",
   "pagesRun": 38475303028,
