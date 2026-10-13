@@ -1,0 +1,21 @@
+{
+  "issue": 145,
+  "group": 5,
+  "species": "language-question-quail",
+  "source": "production-language-question-quail-145.png",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a12c0e-2918-7731-88d6-e7980ca1adfd\\exec-82a1586a-9588-4a8b-82be-ab40399f31e2.png",
+  "exactPrompt": "Use case: stylized-concept. ONE original transparent full-body Rift of Reason creature cutout. Image1 is the approved STYLE BOARD: authoritative cute-horror storybook dusk, medium dark-brown ink outlines, textured clean cel shading, jewel highlights and warm expressive faces. Image2 shipped Lobstorian is RENDERING reference only: do NOT copy lobster anatomy, antennae, pincers, broom, pose or costume. Subject: Jimmy Fowlon, a NONHUMAN quail inspired loosely by Jimmy Fallon's public game-host persona, not a realistic human likeness. A small plump quail with expressive raised brow feathers, an eager open beak, midnight-violet formal jacket and one broad jewel-gold #F2B632 cravat. The nervous guest freezes; this overexcited little host gives them the floor anyway. One main accessory: an oversized plain brass microphone, held out in the left wing as if offering it to a guest. NO book, cue card, notebook, pencil, logo, lyrics or text. FRONT-LEFT action composition: quail hopping diagonally toward the viewer, beak pointing LEFT, microphone leading LEFT, right wing flared for balance and exactly TWO bird legs tucked in a funny mid-hop pose. Bird anatomy: TWO wings, TWO legs, one compact tail; no human hands, extra limbs or extra figures. Big readable face/microphone at70px, attractive at300px, soft feather/fabric texture, dark ink/violet shadows and warm lantern rim light. Entire coherent silhouette takes about80percent of canvas, comfortably inside with transparent margins around wings/feet/microphone. Genuinely transparent background; no scene, frame, floor, shadow blob, floating particles, letters or watermark. No glossy3D, realistic celebrity face or nursery pastel mascot. Art sits ABOVE a separate shipped colour card frame; live names/rules/stats are separate. Original harmless public-persona visual joke only. Keep the single prop and bold silhouette simple.",
+  "references": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "transparentBackgroundRequested": true,
+  "method": "built-in image_gen",
+  "visualReview": "First take accepted: cute-horror quail in front-left mid-hop, two wings/two legs, readable brass microphone, no book/text/human face; whole silhouette visible. Basic alpha and native frame acceptance follow.",
+  "draftRevision": {
+    "issue": 144,
+    "commit": "1136ee4857206ccc4ba2555f55397c59bd0fdf9a",
+    "resolution": "Entrance unfreezes one other friendly creature without resetting action budgets",
+    "notRuntimeRelease": true
+  }
+}

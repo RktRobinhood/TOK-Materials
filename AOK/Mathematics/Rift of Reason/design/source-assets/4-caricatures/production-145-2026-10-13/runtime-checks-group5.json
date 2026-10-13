@@ -1,0 +1,29 @@
+{
+  "issue": 145,
+  "group": 5,
+  "added": [
+    "creature/language-question-quail/idle"
+  ],
+  "changed": [],
+  "manifestCount": 912,
+  "asset": {
+    "file": "creatures/language-question-quail-idle.webp",
+    "w": 693,
+    "h": 620
+  },
+  "alphaBox": {
+    "x": 0,
+    "y": 0,
+    "w": 693,
+    "h": 620
+  },
+  "transparentPercent": 53.555834846157424,
+  "solidPercent": 45.66727179630406,
+  "cornerAlpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "nativeAcceptance": "pending browser attachment"
+}

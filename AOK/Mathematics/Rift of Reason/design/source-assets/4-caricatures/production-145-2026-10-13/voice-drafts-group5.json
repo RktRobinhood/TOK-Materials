@@ -1,0 +1,21 @@
+{
+  "issue": 145,
+  "group": 5,
+  "status": "original source-only candidates; record after runtime wording is frozen",
+  "rows": [
+    {
+      "mechanicalId": "language-question-quail",
+      "persona": "Jimmy Fowlon",
+      "lines": [
+        "The floor is yours.",
+        "No frozen interviews today."
+      ],
+      "voiceDirection": "Friendly playful original host; no copied sketch or impression, shared place cue.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ]
+    }
+  ]
+}

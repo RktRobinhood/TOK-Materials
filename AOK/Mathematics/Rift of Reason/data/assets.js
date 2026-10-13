@@ -220,6 +220,7 @@
         'creature/language-lexicon-lion/idle': { file: 'creatures/language-lexicon-lion-idle.webp', w: 636, h: 620 },
         'creature/language-metaphor-mantis/idle': { file: 'creatures/language-metaphor-mantis-idle.webp', w: 515, h: 620 },
         'creature/language-orator-owl/idle': { file: 'creatures/language-orator-owl-idle.webp', w: 603, h: 620 },
+        'creature/language-question-quail/idle': { file: 'creatures/language-question-quail-idle.webp', w: 693, h: 620 },
         'creature/language-word-weasel/idle': { file: 'creatures/language-word-weasel-idle.webp', w: 889, h: 620 },
         'creature/lens-lizard/idle': { file: 'creatures/lens-lizard-idle.webp', w: 587, h: 620 },
         'creature/lobstorian/angry': { file: 'creatures/lobstorian-angry.webp', w: 199, h: 240 },

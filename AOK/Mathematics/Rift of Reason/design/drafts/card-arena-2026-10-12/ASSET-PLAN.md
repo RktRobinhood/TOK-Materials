@@ -44,7 +44,7 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 | creature/perception-exposure-eagle/idle | Houdini Wisp | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/perception-horizon-hare/idle | Amelia Airgator | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/perception-true-sight-stag/idle | Galileon | Art selected/built #145 group 4; acceptance pending; runtime gated #109/#123 |
-| creature/language-question-quail/idle | Jimmy Fowlon | Deferred #144 distinctness; no portrait |
+| creature/language-question-quail/idle | Jimmy Fowlon | Distinct proposal #144 resolved; group5 art selected/built, native acceptance pending; runtime #109/#123 |
 | creature/language-comma-caterpillar/idle | Emma Wordson | Art produced #145 group 2; runtime gated #109/#123 |
 | creature/language-label-lemur/idle | Ryan Georilla | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/language-word-weasel/idle | Stephen Clawbert | Art selected/built #145 group 4; acceptance pending; runtime gated #109/#123 |
@@ -138,3 +138,7 @@ Exact PNGs, prompts/references, output receipts and source-only voice drafts rem
 ## Jimmy distinctness proposal — 13 October 2026
 
 Jimmy #144 proposal now uses unfreeze support and a plain brass microphone. No portrait generated or bulk inventory silently revised by this design slice.
+
+## Jimmy group5 draft delivery — 13 October 2026
+
+Jimmy Fowlon group5: #144 distinct draft proposal CLOSED at1136ee4/comment6155969004; revised Entrance unfreezes another friendly creature while retaining normal action limits. Explicit adoption preserves prior contract/prompt in inventory.priorContracts and jimmy-draft-adoption-144.json. New transparent first-take quail hops FRONT-LEFT offering one brass microphone; two wings/two legs, no book/human face/text, whole silhouette visible. Source1312x1199,56.6percenttransparent,corners0; runtime693x620,53.6percenttransparent,corners0. One selected PNG/one WebP/exactly one manifest addition, all old entries unchanged; unowned _preview.html restored byte-for-byte. Gallery74bulk assets=66portraits+8motifs, plus four pilots means70of72portraits MADE;69accepted and Jimmy native acceptance pending. Rick147/service-rejected Stephen remain unproduced. No runtime card/grants/voices/save changes. Full art normal. Native dark/light70/300/narrow/public verification is pending: one fresh hidden-browser attempt timed out with no tabs; open_in_codex queued group5 view. Do not repeat unchanged failed attachment attempts or claim stale native evidence. Required full suite and independent reviews still pending at this checkpoint.

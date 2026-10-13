@@ -382,6 +382,7 @@
         "axioms-2.png": { "type": "islands", "minArea": 1500, "class": "item", "ids": ["ui/axiom-excluded-middle", "ui/axiom-extensionality", "ui/axiom-choice", "ui/axiom-curved-space", "ui/axiom-empty-set", "ui/axiom-induction"] },
         "axioms-3.png": { "type": "islands", "minArea": 1500, "class": "item", "ids": ["ui/axiom-age-of-reason", "ui/axiom-age-of-feeling", "ui/axiom-age-of-rhetoric", "ui/axiom-age-of-observation", "ui/axiom-age-of-wonder", "ui/axiom-age-of-tradition"] },
         "kardashiant-shocked.png": { "type": "single", "id": "creature/kardashiant/shocked" },
+        "production-language-question-quail-145.png": { "type": "single", "id": "creature/language-question-quail/idle", "class": "sprite" },
         "map-ch4.png": { "type": "scene", "id": "scene/map-ch4" },
         "tower-base.png": { "type": "scene", "id": "scene/tower-base" },
         "chart-gallery.png": { "type": "scene", "id": "scene/chart-gallery" },

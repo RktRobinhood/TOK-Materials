@@ -1,0 +1,19 @@
+{
+  "id": "creature/language-question-quail/idle",
+  "w": 1312,
+  "h": 1199,
+  "alphaBox": {
+    "x": 16,
+    "y": 18,
+    "w": 1284,
+    "h": 1149
+  },
+  "transparentPercent": 56.5744573730141,
+  "solidPercent": 42.88946327223906,
+  "cornerAlpha": [
+    0,
+    0,
+    0,
+    0
+  ]
+}

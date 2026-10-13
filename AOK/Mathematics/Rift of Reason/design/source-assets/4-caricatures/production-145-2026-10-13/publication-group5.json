@@ -1,0 +1,44 @@
+{
+  "issue": 145,
+  "group": 5,
+  "status": "fully tested/reviewed art draft; native/public-gallery acceptance pending",
+  "designIssue": {
+    "number": 144,
+    "commit": "1136ee4857206ccc4ba2555f55397c59bd0fdf9a",
+    "state": "CLOSED",
+    "comment": "https://github.com/RktRobinhood/TOK-Materials/issues/144#issuecomment-6155969004",
+    "pagesRun": 38473728852,
+    "pagesConclusion": "success"
+  },
+  "portraitsMade": 70,
+  "portraitsFullyAccepted": 69,
+  "deferred": [
+    "memory-return-roach (#147)",
+    "language-definition-dolphin (service-rejected input; no retry)"
+  ],
+  "selectedNewArt": [
+    "creature/language-question-quail/idle"
+  ],
+  "manifestAdditions": 1,
+  "existingManifestChanges": 0,
+  "tests": {
+    "tests": 823,
+    "pass": 822,
+    "skip": 1,
+    "fail": 0,
+    "durationMs": 141565.0778,
+    "exitCode": 0
+  },
+  "standards": {
+    "hardBreaches": 0,
+    "materialSmells": 0
+  },
+  "spec": {
+    "findings": 0
+  },
+  "browser": {
+    "status": "fresh attachment timeout; queued open_in_codex",
+    "url": "http://localhost:18793/dev/art-production.html?group=5",
+    "nativeEvidence": "pending; do not substitute group4 captures"
+  }
+}

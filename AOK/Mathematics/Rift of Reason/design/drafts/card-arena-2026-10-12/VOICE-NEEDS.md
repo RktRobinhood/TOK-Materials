@@ -65,3 +65,5 @@ Zero recordings, runtime bark/cast-pin additions, voice API calls or voice-manif
 ## Jimmy distinctness proposal — 13 October 2026
 
 Jimmy #144: original playful host cue may become “The floor is yours.” after runtime text is frozen. One brass microphone replaces the cue card in the proposal. Reuse shared effects; no recording/API/manifest changes.
+
+Group5 Jimmy has two original short source-only host lines (“The floor is yours.” / “No frozen interviews today.”), saved in voice-drafts-group5.json and inventory. Shared card-play/hit/defeat effects; no voice resemblance request, paid/API run, pin or manifest change. Runtime wording and #109/#123 release precede recording.

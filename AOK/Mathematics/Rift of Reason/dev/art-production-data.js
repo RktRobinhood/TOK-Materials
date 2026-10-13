@@ -677,6 +677,26 @@
       "group": 4
     },
     {
+      "id": "creature/language-question-quail/idle",
+      "name": "Jimmy Fowlon",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "common",
+      "pose": "front-left mid-hop toward viewer, offering microphone left",
+      "contract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: unfreeze another friendly creature.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-question-quail-145.png",
+      "group": 5
+    },
+    {
       "id": "creature/language-comma-caterpillar/idle",
       "name": "Emma Wordson",
       "kind": "portrait",
