@@ -61,3 +61,7 @@ Seven sports substitutions now have selected group 4 art and are mapped in canon
 Thirty selected identities have one original draft line each in design/source-assets/4-caricatures/production-145-2026-10-13/voice-drafts-group4.json and inventory.json. ROSTER.md indexes exact IDs/personas; do not duplicate the 30-line source file here. Use broad original delivery directions/existing shared SFX, never celebrity imitation or copied quotations. Seven sports substitutions, Steph/LeBron/Serena and corrected Chris/Mathias/Jaiden keep fictional identities.
 
 Zero recordings, runtime bark/cast-pin additions, voice API calls or voice-manifest edits for this art group. Freeze text/mechanics and individual release gates before the existing plan/render/audit flow records one or two lines per released card. Preserve existing audio/hashes. Art selection does not approve recording; final group 4 acceptance remains in the central review.
+
+## Jimmy distinctness proposal — 13 October 2026
+
+Jimmy #144: original playful host cue may become “The floor is yours.” after runtime text is frozen. One brass microphone replaces the cue card in the proposal. Reuse shared effects; no recording/API/manifest changes.

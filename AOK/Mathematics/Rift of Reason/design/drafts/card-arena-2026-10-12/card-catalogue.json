@@ -1084,12 +1084,13 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+      "text": "Entrance: unfreeze another friendly creature.",
       "tags": [
-        "buff"
+        "control",
+        "support"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
-      "counterplay": "Block the supported attacker.",
+      "counterplay": "Use removal, Guard or another Freeze; normal action limits still apply.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",

@@ -139,7 +139,7 @@ Labels, support, rule changes and temporary control.
 
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
-| Question Quail · `language-question-quail` | creature / common / 1 | 1/2 | Entrance: another friendly creature gains 1 attack for its next creature attack this turn. | Block the supported attacker. | pack-pool |
+| Question Quail · `language-question-quail` | creature / common / 1 | 1/2 | Entrance: unfreeze another friendly creature. | Use removal, Guard or another Freeze; normal action limits still apply. | pack-pool |
 | Comma Caterpillar · `language-comma-caterpillar` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use a spell. | pack-pool |
 | Label Lemur · `language-label-lemur` | creature / common / 2 | 2/2 | Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0. | Use another attacker or restore its stats. | pack-pool |
 | Word Weasel · `language-word-weasel` | creature / common / 2 | 2/1 | Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1. | Remove other friendly creatures first. | pack-pool |

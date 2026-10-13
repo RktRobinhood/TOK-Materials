@@ -84,3 +84,7 @@ After ALL initial art generation, the latest human authorizes conditional backen
 All 30 formerly pending portraits selected/built: 69/72 produced, three deferred, no other pending portrait. All 73 bulk assets pass source/runtime checks. ROSTER.md indexes the 30 identities and produced sports substitutions; output receipts retain corrections/actual pose variation. Thirty original voice drafts remain unrecorded.
 
 Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group. Finish acceptance before another implementation slice. #145 remains open for Jimmy #144, Rick #147 and service-rejected Stephen. #109/#123/owned-deck and individual gameplay gates remain; later conditional work retains the authorized sequence and actual #148/#149 prerequisites above.
+
+## Jimmy distinctness proposal — 13 October 2026
+
+Jimmy #144 now proposes a distinct thaw-support Entrance, preserving all allocation/identity/acquisition fields. Publication/review acceptance is pending. #145 inventory and portrait remain deferred until explicit adoption; no runtime release.

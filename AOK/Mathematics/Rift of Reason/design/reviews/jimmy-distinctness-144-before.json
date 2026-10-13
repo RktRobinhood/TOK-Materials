@@ -1,0 +1,84 @@
+{
+  "baseCommit": "5646c14424045fcbd9b367a19507160a791ebb25",
+  "card": {
+    "id": "language-question-quail",
+    "name": "Question Quail",
+    "affinity": "language",
+    "kind": "creature",
+    "rarity": "common",
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+    "tags": [
+      "buff"
+    ],
+    "strategy": "Labels, support, rule changes and temporary control",
+    "counterplay": "Block the supported attacker.",
+    "status": "draft; not implemented or balance-tested",
+    "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
+    "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+    "gates": [
+      109
+    ],
+    "art": "creature/language-question-quail/idle",
+    "acquisition": {
+      "channel": "pack-pool",
+      "packEligible": true,
+      "releaseStatus": "draft; only enters packs when its implementation is released"
+    }
+  },
+  "persona": {
+    "mechanicalId": "language-question-quail",
+    "workingName": "Question Quail",
+    "proposedName": "Jimmy Fowlon",
+    "inspiration": "Jimmy Fallon",
+    "colour": "language",
+    "rarity": "common",
+    "acquisition": {
+      "channel": "pack-pool",
+      "packEligible": true,
+      "releaseStatus": "draft; only enters packs when its implementation is released"
+    },
+    "silhouette": "Small quail with expressive brow feathers, midnight jacket and a gold tie.",
+    "signatureProp": "One blank interview cue card and an inviting wing gesture.",
+    "jokeAngle": "Every interview seems ready to turn into another small game.",
+    "mechanicLink": "Entrance supports one ally's next creature attack only; no extra play allowance.",
+    "source": "https://www.nbc.com/the-tonight-show",
+    "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+    "voiceDirection": "Friendly playful original host; no copied sketch or impression, shared place cue.",
+    "sharedSfx": [
+      "card-play",
+      "hit",
+      "defeat"
+    ],
+    "artId": "creature/language-question-quail/idle",
+    "palette": {
+      "accent": "#F2B632",
+      "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+      "materials": "worn cloth/leather or painted metal; no pristine plastic"
+    },
+    "promptReferences": [
+      "design/source-assets/0-style/style-board.png",
+      "assets/creatures/astrophysicat-idle.webp"
+    ],
+    "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+    "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+    "mechanicalContract": {
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+      "gates": [
+        109
+      ]
+    },
+    "castDecision": {
+      "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+      "decision": "retain",
+      "audienceLane": "internet, music, sport or screen-fandom crossover",
+      "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every interview seems ready to turn into another small game.",
+      "smallScaleCue": "One blank interview cue card and an inviting wing gesture."
+    }
+  }
+}

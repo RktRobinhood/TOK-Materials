@@ -1966,9 +1966,9 @@
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
       "silhouette": "Small quail with expressive brow feathers, midnight jacket and a gold tie.",
-      "signatureProp": "One blank interview cue card and an inviting wing gesture.",
-      "jokeAngle": "Every interview seems ready to turn into another small game.",
-      "mechanicLink": "Entrance supports one ally's next creature attack only; no extra play allowance.",
+      "signatureProp": "One oversized plain brass microphone offered with an inviting wing gesture.",
+      "jokeAngle": "The guest freezes; the little host gives them the floor anyway.",
+      "mechanicLink": "Unfreezes one friendly guest without resetting attacks, activation use, sleeping or any play allowance.",
       "source": "https://www.nbc.com/the-tonight-show",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Friendly playful original host; no copied sketch or impression, shared place cue.",
@@ -1993,7 +1993,7 @@
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "Entrance: another friendly creature gains 1 attack for its next creature attack this turn.",
+        "text": "Entrance: unfreeze another friendly creature.",
         "gates": [
           109
         ]
@@ -2002,8 +2002,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every interview seems ready to turn into another small game.",
-        "smallScaleCue": "One blank interview cue card and an inviting wing gesture."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The guest freezes; the little host gives them the floor anyway.",
+        "smallScaleCue": "One oversized plain brass microphone offered with an inviting wing gesture."
       }
     },
     {

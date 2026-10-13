@@ -134,3 +134,7 @@ Exact twelve group 3 mappings are indexed above and in canonical ROSTER.md. Seve
 69/72 portraits produced; three deferred, no other pending portrait. Source/runtime checks pass all 73 bulk assets (65 portraits/eight motifs; four pilots outside). Thirty new manifest entries and 35 mappings include five skipped takes; unowned preview restored. Updated index rows/canonical ROSTER.md give exact IDs/current personas, including all seven produced sports substitutions.
 
 Exact PNGs, prompts/references, output receipts and source-only voice drafts remain in design/source-assets/4-caricatures/production-145-2026-10-13/. All first/intermediate takes are preserved. Chris/Mathias/Jaiden corrections replace only defective takes; retain originals. Shared motifs remain proposed for 84 spells/54 Axioms; normal full art needs no foil entitlement. Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group. No runtime/save/ownership/acquisition/audio release implied.
+
+## Jimmy distinctness proposal — 13 October 2026
+
+Jimmy #144 proposal now uses unfreeze support and a plain brass microphone. No portrait generated or bulk inventory silently revised by this design slice.

@@ -139,7 +139,7 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 | Houdin-eagle | Harry Houdini | perception-exposure-eagle | perception / rare | One open padlock held clearly in a wing; no tied or submerged figure. |
 | Amelia Earhare | Amelia Earhart | perception-horizon-hare | perception / mythic | One folded blank flight chart held forward; ears and feet fully visible. |
 | Galileelk | Galileo Galilei | perception-true-sight-stag | perception / legendary | One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette. |
-| Jimmy Fowlon | Jimmy Fallon | language-question-quail | language / common | One blank interview cue card and an inviting wing gesture. |
+| Jimmy Fowlon | Jimmy Fallon | language-question-quail | language / common | One oversized plain brass microphone offered with an inviting wing gesture. |
 | Emma Wordson | Emma Watson | language-comma-caterpillar | language / common | One closed blank book, not a wand or school crest. |
 | Ryan Georilla | Ryan George | language-label-lemur | language / common | One blank label stamp; one raised questioning brow. |
 | Stephen Clawbert | Stephen Colbert | language-word-weasel | language / common | One blank cue card held with an exaggerated farewell flourish. |

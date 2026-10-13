@@ -1,0 +1,82 @@
+{
+  "issue": 144,
+  "baseCommit": "5646c14424045fcbd9b367a19507160a791ebb25",
+  "scope": "draft-only; no runtime or frozen bulk inventory edits",
+  "changedCatalogueIds": [
+    "language-question-quail"
+  ],
+  "protectedFields": [
+    "id",
+    "name",
+    "affinity",
+    "kind",
+    "rarity",
+    "cost",
+    "attack",
+    "health",
+    "gates",
+    "art",
+    "acquisition"
+  ],
+  "counts": {
+    "total": 210,
+    "affinity": {
+      "reason": 28,
+      "emotion": 28,
+      "perception": 28,
+      "language": 28,
+      "imagination": 28,
+      "memory": 28,
+      "generic": 42
+    },
+    "kind": {
+      "creature": 72,
+      "spell": 84,
+      "axiom": 54
+    },
+    "rarity": {
+      "common": 92,
+      "uncommon": 60,
+      "rare": 37,
+      "mythic": 14,
+      "legendary": 7
+    },
+    "acquisition": {
+      "packPool": 192,
+      "storyOnly": 18
+    },
+    "packRarity": {
+      "common": 90,
+      "uncommon": 58,
+      "rare": 25,
+      "mythic": 13,
+      "legendary": 6
+    }
+  },
+  "selectedContract": {
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "Entrance: unfreeze another friendly creature.",
+    "gates": [
+      109
+    ]
+  },
+  "planningValidator": "passed",
+  "personaValidator": "passed",
+  "standards": {
+    "hardBreaches": 0,
+    "materialSmells": 0
+  },
+  "spec": {
+    "findings": 0
+  },
+  "fullSuite": {
+    "tests": 823,
+    "pass": 822,
+    "skip": 1,
+    "fail": 0,
+    "durationMs": 129984.6861,
+    "exitCode": 0
+  }
+}

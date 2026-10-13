@@ -71,7 +71,7 @@ Horizon Hare|6|4/5|Entrance: move one own pending event one space earlier, no so
 True Sight Stag|7|4/7|Once per round, replace your normal personal draw with inspecting the top 3 cards, drawing one and restoring the others in their original order.|inspection,draw|Pressure before the expensive selector arrives.
 `, creatureRarities);
 add('language', 'creature', `
-Question Quail|1|1/2|Entrance: another friendly creature gains 1 attack for its next creature attack this turn.|buff|Block the supported attacker.
+Question Quail|1|1/2|Entrance: unfreeze another friendly creature.|control,support|Use removal, Guard or another Freeze; normal action limits still apply.
 Comma Caterpillar|2|1/3|Guard.|guard|Remove Guard or use a spell.
 Label Lemur|2|2/2|Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0.|control|Use another attacker or restore its stats.
 Word Weasel|2|2/1|Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1.|buff|Remove other friendly creatures first.
