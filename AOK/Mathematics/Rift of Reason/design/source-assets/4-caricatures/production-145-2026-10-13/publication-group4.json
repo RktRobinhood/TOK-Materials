@@ -1,0 +1,31 @@
+{
+  "issue": 145,
+  "group": 4,
+  "commit": "763c6c2967b4909460df2827dc9c077a777b1412",
+  "pagesRun": 38439178547,
+  "conclusion": "success",
+  "publicGroupAssets": 30,
+  "publicLoadedImages": 62,
+  "publicFailedImages": 0,
+  "publicCumulativeAssets": 73,
+  "cumulativeExpansionPortraits": 69,
+  "target": 72,
+  "deferred": [
+    "language-question-quail (#144)",
+    "memory-return-roach (#147)",
+    "language-definition-dolphin (rejected Stephen input; never retry)"
+  ],
+  "evidence": "design/reviews/art-production-145-2026-10-13/group4-public.png",
+  "tests": {
+    "total": 823,
+    "passed": 822,
+    "skipped": 1,
+    "failed": 0,
+    "durationMs": 142459.8418
+  },
+  "independentReview": {
+    "standardsFindings": 0,
+    "specFindings": 0
+  },
+  "runtimeCardRelease": false
+}
