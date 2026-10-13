@@ -178,3 +178,7 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 
 All six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.
 <!-- persona-roster-2026-10-12:end -->
+
+### Expansion art produced — #142, 13 October 2026
+
+Grant Sanderstag (`reason-diagonal-deer`, Reason rare) and Kai Ceenat (`emotion-spite-sprite`, Emotion common) now have separate generated transparent idle portraits. These are art-ready proposals, not playable/catchable/unlocked species. Frozen draft mechanics, uniqueness/counterplay checks and two original voice lines each are in [the batch audit](reviews/persona-art-batch-142-2026-10-13.md); exact prompts/references and selected sources are in `design/source-assets/4-caricatures/persona-batch-142-2026-10-13/`. Grant uses a chalk loop in his antlers; Kai uses a large reaction headset, with the first take's squirrel-like tail corrected to a slender meerkat tail. Both use approved style-board and shipped Astrophysicat references. Review `dev/persona-art-142.html` before release; #109/#123 still own engine, balance and acquisition validation. No cast pins, recordings or runtime definitions changed.

@@ -1,0 +1,50 @@
+{
+  "issue": 142,
+  "status": "Source padding, alpha, dimensions and provenance pass; gallery evidence recorded separately.",
+  "assets": [
+    {
+      "id": "creature/reason-diagonal-deer/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 242,
+          "y": 23,
+          "w": 765,
+          "h": 1271
+        },
+        "sha256": "7e95f54ea963e60b3e443f458d77082c3317af0d5db9ec97c8dbba179c7cd8b1"
+      },
+      "runtime": {
+        "file": "creatures/reason-diagonal-deer-idle.webp",
+        "w": 373,
+        "h": 620,
+        "sha256": "63bb2fcd4181fac98ec69d74294af8237d58a2607685692926a1fdfa45deb489"
+      },
+      "transparentPercent": 41.1,
+      "bytes": 77706
+    },
+    {
+      "id": "creature/emotion-spite-sprite/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 86,
+          "y": 3,
+          "w": 1065,
+          "h": 1294
+        },
+        "sha256": "d09b9c2455b43e8e922f0d819b98d5700f8381ec22a028298ea8638dfb0c848a"
+      },
+      "runtime": {
+        "file": "creatures/emotion-spite-sprite-idle.webp",
+        "w": 510,
+        "h": 620,
+        "sha256": "5d415eb25e5caf31cdd2eee16b7616f3a07ddd3aef9750605b34945994745081"
+      },
+      "transparentPercent": 51.5,
+      "bytes": 66602
+    }
+  ]
+}

@@ -16,13 +16,13 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 | creature/reason-induction-ibex/idle | Induction Ibex | Planned; gated by card release |
 | creature/reason-logic-lynx/idle | Logic Lynx | Planned; gated by card release |
 | creature/reason-guardrail-goat/idle | Guardrail Goat | Planned; gated by card release |
-| creature/reason-diagonal-deer/idle | Diagonal Deer | Planned; gated by card release |
+| creature/reason-diagonal-deer/idle | Grant Sanderstag (Diagonal Deer) | Art produced #142; runtime gated #109/#123 |
 | creature/reason-inference-heron/idle | Inference Heron | Planned; gated by card release |
 | creature/reason-boundary-bear/idle | Boundary Bear | Planned; gated by card release |
 | creature/reason-theorem-tortoise/idle | Theorem Tortoise | Planned; gated by card release |
 | creature/emotion-pulse-pup/idle | Pulse Pup | Planned; gated by card release |
 | creature/emotion-courage-cub/idle | Courage Cub | Planned; gated by card release |
-| creature/emotion-spite-sprite/idle | Spite Sprite | Planned; gated by card release |
+| creature/emotion-spite-sprite/idle | Kai Ceenat (Spite Sprite) | Art produced #142; runtime gated #109/#123 |
 | creature/emotion-cheer-chick/idle | Cheer Chick | Planned; gated by card release |
 | creature/emotion-temper-tiger/idle | Temper Tiger | Planned; gated by card release |
 | creature/emotion-bond-badger/idle | Bond Badger | Planned; gated by card release |
@@ -85,4 +85,6 @@ Shared presentation: code/SVG Guard backplate distinct from Shield; enlarged car
 
 Spell/Axiom illustrations are a later shared motif set, not 138 bespoke full paintings. Start with colour/keyword motifs and only commission a unique scene for an effect needing it. Pack motion is short, skippable and Calm/reduced-motion friendly. No looping moving borders or shakes. Teacher layout review and actual viewport checks precede production release (#109).
 
-#141 revised developer study: dev/foil-prototype.html uses shipped ui/card-<colour> frames and the same transparent portraits; the teacher selects foreground full art. Frames behind creatures, outer-card clipping, live labels above both. No duplicate bitmap/new asset ID. Code checks passed; visual acceptance remains pending because the unattended in-app browser could not attach. See design/reviews/full-art-frame-2026-10-13.md. Finish that visual check before a small audited public-persona portrait batch; production/ownership gates remain #109/#131.
+#141 revised developer study: dev/foil-prototype.html uses shipped ui/card-<colour> frames and the same transparent portraits; the teacher selects foreground full art. Frames behind creatures, outer-card clipping, live labels above both. No duplicate bitmap/new asset ID. Code and native visual acceptance passed; #141 closed with evidence at cbe172e. See design/reviews/full-art-frame-2026-10-13.md; production/ownership gates remain #109/#131.
+
+#142 produces the two exact idle IDs above through the existing builder, without runtime creature definitions or collection grants. Selected source PNGs, exact prompts/edit history, reference paths, hashes and alpha checks: design/source-assets/4-caricatures/persona-batch-142-2026-10-13/. Developer samples: dev/persona-art-142.html; audit/evidence: design/reviews/persona-art-batch-142-2026-10-13.md. One cutout serves normal and future cosmetic treatment; no second cosmetic bitmap or new SFX is needed. Remaining 70 portraits are planned.

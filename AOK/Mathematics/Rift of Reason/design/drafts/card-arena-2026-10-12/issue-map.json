@@ -279,5 +279,13 @@
     "id": 5818764866,
     "blockedBy": [],
     "nativeDependenciesAdded": true
+  },
+  "persona_art_142": {
+    "number": 142,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/142",
+    "title": "Rift of Reason: Generate two audited public-persona card portraits",
+    "id": 5824882025,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
   }
 }
