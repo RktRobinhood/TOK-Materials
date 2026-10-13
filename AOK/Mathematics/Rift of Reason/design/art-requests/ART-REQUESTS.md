@@ -1115,3 +1115,23 @@ Two of the 72 expansion portraits are now produced: `creature/reason-diagonal-de
 ### Expansion portrait outcome — 13 October 2026 (#143)
 
 Produced `creature/perception-cue-cricket/idle` (Nikkie de Jaguar, padding-corrected jaguar/brush) and `creature/language-echo-egret/idle` (Sabrina Carpwenter, first-take carp/microphone). Exact prompts, selected PNGs, edit history/reference paths and source/runtime hashes/alpha: `design/source-assets/4-caricatures/persona-batch-143-2026-10-13/`. Approved style board and shipped Astrophysicat inspected/attached before generation. Shared review gallery `dev/persona-art-142.html?batch=143`; native light/dark/70px/300px/390px and public acceptance passed, Pages38357064010 succeeded. [Audit](../reviews/persona-art-batch-143-2026-10-13.md) distinguishes frozen mechanics and future engine checks. No voices/SFX/runtime releases. Four expansion portraits produced,68remaining. Teacher13October confirms full art as DEFAULT NORMAL cards, not foil; #122/#109 also record clearer draw-step lighting and larger responsive deck presentation. Jimmy Fowlon portrait deferred to #144 mechanical distinctness review.
+
+## Bulk art group1 — #145, 13 October 2026
+
+Eleven expansion portraits and three shared spell motifs (Reason, Language, Imagination) produced. Selected sources/exact prompts/references/hashes: `design/source-assets/4-caricatures/production-145-2026-10-13/`; common contact sheet `dev/art-production.html`, review `design/reviews/art-production-145-2026-10-13.md`. All14 built through sheets.json and source/runtime alpha checks pass. Native dark/light180px/70px and representative300px frames/actual390px layout passed; all30images loaded, no console warnings/errors. Required823tests:822pass,1skip,0fail (129471.8092ms). Standards/Spec each caught the Proof Pup comparison error; corrected and filed Hank overlap as #146. Artwork preserved.
+
+Fifteen of72expansion portraits now produced;57remain (including Jimmy #144 and Stephen photo-request deferral). This is an art-only delivery; engine effects, acquisition/owned starters/workshop, production board and voice recording remain separate release gates. #145 stays open. Public deployment verification follows the scoped push.
+
+| Art id | Display persona | Proposed type/rarity |
+|---|---|---|
+| `creature/reason-parity-panda/idle` | Hannah Frycoon | reason · uncommon |
+| `creature/reason-logic-lynx/idle` | Derek Mullinx | reason · uncommon |
+| `creature/emotion-outrage-ox/idle` | Serenox | emotion · rare |
+| `creature/emotion-empathy-elephant/idle` | Pascalophant | emotion · legendary |
+| `creature/perception-lens-lynx/idle` | James Randilynx | perception · common |
+| `creature/perception-prism-puffin/idle` | Zach Wing | perception · uncommon |
+| `creature/language-clause-crane/idle` | Olivia Rodentgo | language · uncommon |
+| `creature/imagination-possibility-pika/idle` | PewDiePika | imagination · common |
+| `creature/imagination-blueprint-bat/idle` | Hideo Kojibat | imagination · uncommon |
+| `creature/memory-bookmark-bunny/idle` | Hank Greenhare | memory · common · mechanic gated #146 |
+| `creature/memory-recall-robin/idle` | John Greenfinch | memory · common |

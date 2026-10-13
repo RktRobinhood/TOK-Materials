@@ -56,3 +56,5 @@ Native dependencies match text blockers. Content-release tickets also honour #10
 
 Teacher13October: foreground full art is the default normal card appearance. Board #122/#109 must scale decks to the arena/background and visibly emphasize legal sources during the required draw step, with static Calm-compatible cues. Existing layout acceptance remains; these refinements do not certify production integration.
 
+
+#145 bulk art production: group1 elevenportraits/threemotifs built and locally accepted;15of72expansion portraits produced,57remain. Next acceptance is scoped push/deployment/public contact-sheet. Continue larger groups with birds/insects/aquatic/reptile/unusual mammal/fantasy breadth and varied action/composition. Preserve made art. #146 gates Hank's near-Proof-Pup heal; #144 Jimmy remains open. Full art is normal; production board/deck ownership/Fate/economy/recording gates are not completed by these pictures.

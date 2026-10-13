@@ -303,5 +303,21 @@
     "id": 5825456137,
     "blockedBy": [],
     "nativeDependenciesAdded": false
+  },
+  "bulk_art_145": {
+    "number": 145,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/145",
+    "title": "Rift of Reason: Bulk-produce expansion portraits and shared spell artwork",
+    "id": 5825816524,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
+  },
+  "hank_distinctness": {
+    "number": 146,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/146",
+    "title": "Rift of Reason: Give Hank Greenhare a distinct Memory ability",
+    "id": 5828430351,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
   }
 }

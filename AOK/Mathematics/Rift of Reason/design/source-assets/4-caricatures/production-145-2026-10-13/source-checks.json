@@ -1,0 +1,362 @@
+{
+  "issue": 145,
+  "selected": 14,
+  "pending": 14,
+  "status": "source checks pass; runtime pending",
+  "warnings": [
+    "creature/perception-lens-lynx/idle: source silhouette contacts an edge; manually check for major cropping, accept minor tips."
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "id": "creature/reason-parity-panda/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 42,
+          "y": 40,
+          "w": 1238,
+          "h": 1079
+        },
+        "transparentPercent": 49.9,
+        "solidPercent": 49.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d88a6579ca82d03348454335bf094677381e858fbb841ef68b0751529dff1451"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/reason-logic-lynx/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 231,
+          "y": 10,
+          "w": 921,
+          "h": 1111
+        },
+        "transparentPercent": 65.8,
+        "solidPercent": 33.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a523cfa1fa5342bc6663aafb12068e0527d5a03fae390a7c6b652dd1badbec04"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/emotion-outrage-ox/idle",
+      "source": {
+        "w": 1024,
+        "h": 1536,
+        "alphaBox": {
+          "x": 20,
+          "y": 32,
+          "w": 985,
+          "h": 1477
+        },
+        "transparentPercent": 57.9,
+        "solidPercent": 41,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4e58815767ac536f9fff0ee6e1363c338d56d2237fc264bb3c1e8ed0e2de8635"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/emotion-empathy-elephant/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 30,
+          "y": 77,
+          "w": 1260,
+          "h": 1060
+        },
+        "transparentPercent": 49.3,
+        "solidPercent": 50.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e02deb9b1c5922108485e67053494e428404187dcfdea657fe1564f97aed3efc"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/perception-lens-lynx/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 94,
+          "y": 0,
+          "w": 1088,
+          "h": 1312
+        },
+        "transparentPercent": 52,
+        "solidPercent": 47.2,
+        "cornerAlpha": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "sha256": "031846341ef4e31601a4f488cc63eff7989b9a485d3182437737b55dbc00d9ec"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/perception-prism-puffin/idle",
+      "source": {
+        "w": 1246,
+        "h": 1262,
+        "alphaBox": {
+          "x": 55,
+          "y": 16,
+          "w": 1173,
+          "h": 1187
+        },
+        "transparentPercent": 54.6,
+        "solidPercent": 44.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "209ebd16e9ba2277a37d0c7a668a10a4b2089d139af3340557d898dd22e5d459"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/language-clause-crane/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 32,
+          "y": 11,
+          "w": 1263,
+          "h": 1174
+        },
+        "transparentPercent": 53.9,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "77c38211c7e2c80330fe79169d3ac04953ebaa6848500ba0d44d60ee0eae25a9"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/imagination-possibility-pika/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 131,
+          "y": 26,
+          "w": 1147,
+          "h": 1081
+        },
+        "transparentPercent": 57.6,
+        "solidPercent": 41.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ee02b051b2b410a0c137209d8c3894506a7df978dc485df2e94a52fbfa355724"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/imagination-blueprint-bat/idle",
+      "source": {
+        "w": 1215,
+        "h": 1295,
+        "alphaBox": {
+          "x": 142,
+          "y": 18,
+          "w": 1053,
+          "h": 1199
+        },
+        "transparentPercent": 59.5,
+        "solidPercent": 40,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f2659d7f0a7b714235df092240b8baf56ee2d9afbd9ace4e883d3ca6b39b2155"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/memory-bookmark-bunny/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 154,
+          "y": 9,
+          "w": 1099,
+          "h": 1172
+        },
+        "transparentPercent": 55.6,
+        "solidPercent": 43.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ccedb161bbd4a9ebebccd4d2b96c0c63afa276ec491cf7d6214a1061feb4b0f8"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "creature/memory-recall-robin/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 46,
+          "y": 77,
+          "w": 1242,
+          "h": 1057
+        },
+        "transparentPercent": 53,
+        "solidPercent": 46.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d899451986d51a950d85c3d1650bfee9efd06f17280d718033a2157500a552bf"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "art/spell-motif-reason",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 52,
+          "y": 16,
+          "w": 1233,
+          "h": 1158
+        },
+        "transparentPercent": 46.7,
+        "solidPercent": 51.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "be39685e8f0e49c1a1e9d63910904d9c24a2a31e7fee59e9a46ab1d5d3434d1d"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "art/spell-motif-language",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 71,
+          "y": 18,
+          "w": 1443,
+          "h": 978
+        },
+        "transparentPercent": 55.5,
+        "solidPercent": 43.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "sha256": "9b3d3fa3995acae579ea934ef3dad712ae5826828e11d65c4b4c95dd77dc3320"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    },
+    {
+      "id": "art/spell-motif-imagination",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 21,
+          "y": 11,
+          "w": 1281,
+          "h": 1174
+        },
+        "transparentPercent": 45.1,
+        "solidPercent": 54.5,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "65edd3695a9535777792a9560e4046f0994719c5d21ba331dfeb40a8461fc19a"
+      },
+      "runtime": {
+        "status": "pending manifest/build"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+# Bulk card artwork — #145, 13 October 2026
+
+Teacher direction: move beyond the four accepted pilot portraits to bulk production, spend usage on art Claude cannot generate, and keep critique proportionate to a student project. Full art is the default normal appearance. This issue produces art, not runtime species/engine effects/collection grants/recordings.
+
+Inventory/exact prompts: `design/source-assets/4-caricatures/production-145-2026-10-13/inventory.json`. It tracks68remaining portraits, preserving4accepted expansion portraits and7helper portraits. Jimmy Fowlon is deferred to144; do not silently count him complete. Initial larger group has12portraits,2per colour. Seven shared spell-colour motifs and one shared Axiom illustration are planned; routine cards reuse these, standout needs may get extra art after mapping. No138bespoke paintings or automatic runtime assignments.
+
+## Proportionate art/release checks
+
+One visual look at each generated image: matching style, readable animal/face/prop, no opaque background or major missing/cropped parts. Do not regenerate for small ornaments or subjective polish. Retain exact prompt/references/output/selected source. Basic alpha/dimension checks and one dark/light/contact-sheet/representative-frame pass for the larger published group; required full suite/independent reviews once per publishing group, not per portrait. Native acceptance remains actual evidence, not generated mockups. Sources remain PNG; builder trims/resizes/WebP-converts. Preserve unowned preview bytes around builder.
+
+Approved style board and shipped Astrophysicat were inspected/attached in the current session. The common prompt explicitly limits the latter to rendering, not copying cat anatomy/coat/stars. Each persona uses its already-selected silhouette/prop/palette. Builder owns audience appeal; no teacher roster review. Keep names/rules/stats live over normal frame; no baked text/brand/lyrics/private-history jokes. Original draft spoken lines are recorded in inventory; use existing SFX and delay recording until mechanical wording ships.
+
+## Group1: quick distinctness / later release checks
+
+| Persona | Distinct proposed play role | Future boundedness check |
+|---|---|---|
+| PewDiePika | Own Entrance chooses attack or maximum-health/heal, not a stat-swap activation. | One choice per paid play, maximum-health and existing damage order. |
+| Hideo Kojibat | First colourless token each turn arrives healthier, not an all-token attack aura or token-producing Last Word. | Existing token-order gate; first trigger stamped/capped, no extra token/resource generation. |
+| Hank Greenhare | Entrance heal1 overlaps shipped Proof Pup creature healing; cost/body differences do not establish a unique hook. Artwork retained; mechanic deferred to #146. | Redesign and audit before runtime release; legal damaged target/empty-state rules remain proposal-only. |
+| John Greenfinch | One most-recent discarded spell returns to deck bottom, not an immediate free hand cast or general resurrection. | Exact discard instance/removal, empty discard, no duplicates, ordinary draw costs. |
+| Derek Mullinx | Paid Entrance inspects/reorders exactly two, unlike Lens Lizard recurring top/bottom activation or draw-selection. | Keep/swap conserves ordered deck instances and privacy; empty/one-card deck. |
+| Hannah Frycoon | Surviving an equal-power fight heals own body, not permanent attack growth or Kai damage reaction. | Authoritative effective-attack comparison before fight; no heal after defeat, cap max health. |
+| Pascalophant | Both heroes losing hearts enables symmetric recovery and one personal draw at own turn end. | Winner already resolved cannot be revived; both-damage stamp, one end trigger, hand/deck caps. |
+| Serenox | Swift may trade immediately but cannot rush a hero on arrival, unlike unconditional Swift or Siiu team buff. | Source arrival-turn stamp and target legality, copied/replayed costs. |
+| James Randilynx | Temporary single-keyword exposure, not full silence/permanent colour removal. | Target Elusive through authoritative seen-target seam; exact expiry/restore, no arbitrary bypass. |
+| Zach Wing | One ally temporarily changes colour, not stats/keywords or global colour rule. | Colour restoration and overlapping effects; colour advantage remains127gated. |
+| Stephen Fryfin | Temporary Guard on a chosen friendly creature, not printed intrinsic Guard/Shield. | Target/expiry/silence, multiple grants preserve existing Guard sources. |
+| Olivia Rodentgo | Guard body heals once per round on rule replacement, unlike Finch attack or Sabrina draw on own hand play. | Actual replacement event vs redundant play, per-round cap, max-health, no healing after defeat. |
+
+This quick pass distinguishes triggers/targets/timing/payoffs against known runtime/draft overlaps. Shared primitives are allowed; it does not certify all210cards, measured balance or unimplemented engine tests. Clear near-clones remain filed (Jimmy144); uncertain Fate/token/colour/victory details stay gated. No mechanical contract changed to justify artwork.
+
+## Generation / publication log
+
+Production starts with the12inventory records above; record each selected output and quality exception before advancing. On allowance limit, checkpoint the exact next pending record, not a vague restart. No per-card foil experiments or duplicated galleries.
+
+Latest teacher steering adds real pose/composition variation: front/left/right, seated/crouched/leaning, over-shoulder and a few jumps toward the viewer. Remaining prompts revised before generation; no bulk regeneration of earlier calm portraits. Hideo's standing bat first take is retained. PewDiePika's first take read as fox (bushy tail/pointed ears), a clear subject defect; replacement also uses a forward-jump composition. Minor storyboard doodles instead of a blank panel are accepted for Hideo: student-project proportionality, no readable text/logo. Pose variety is now canonical ART-BIBLE guidance for fresh builders.
+
+13 October07:45UTC: first larger group has11selected portraits and3selected spell motifs, saved in the project. All14source checks pass; James Randilynx has a minor silhouette-edge contact accepted after visual inspection. source-checks.json records source hashes/dimensions/alpha honestly as runtime pending. Dev snapshot refreshed to14selected assets; no native acceptance or publication claimed. The photo-guided Stephen Fryfin request was rejected by the service and deferred. Public-domain Serena serve photo informed Serenox; sources and prompts are in inventory.
+
+Latest teacher steering broadens unproduced bodies across the animal kingdom and imaginary creatures, avoiding feline/genus dominance. Keep existing art. Next group should favor insects/invertebrates, aquatic/reptile and fantasy bodies alongside a few birds and unusual mammals. Record replacements before generation; mechanical IDs/contracts remain stable. Human-caricature face clarification is still pending.
+
+## Group1 validation — recovered block13October
+
+14selected sources built;14manifest additions, all source/runtime alpha/dimension/hash checks pass (runtime-checks.json). Unowned _preview.html restored byte-for-byte after builder. All823tests ran:822passed,1skipped,0failed,129471.8092ms. Native1280px dark/light contact sheets show all14assets at180px/70px; representative300px foreground frames use the shipped frame. Actual390px light inspector fits without horizontal overflow; all30images loaded and no console warnings/errors. Keyboard focus and click/Enter select the correct full-rule inspector. Long rules remain fully available below the card; inner live card text can scroll.
+
+Evidence: [dark](art-production-145-2026-10-13/group1-dark.png), [light](art-production-145-2026-10-13/group1-light.png), [actual390px](art-production-145-2026-10-13/group1-narrow-light.png). Independent Standards/Spec each found one documentation comparison error; Proof Pup heals another friendly creature, not the hero. Fixed comparison and filed Hank's overlapping heal as #146, preserving its picture and frozen proposal pending revision. No other concrete findings. Publication and public proof follow; issue145 remains open for57remaining portraits/five remaining shared motifs and proposed mapping.

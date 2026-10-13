@@ -1,0 +1,544 @@
+{
+  "issue": 145,
+  "selected": 14,
+  "pending": 0,
+  "status": "basic asset checks pass",
+  "warnings": [
+    "creature/perception-lens-lynx/idle: source silhouette contacts an edge; manually check for major cropping, accept minor tips."
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "id": "creature/reason-parity-panda/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 42,
+          "y": 40,
+          "w": 1238,
+          "h": 1079
+        },
+        "transparentPercent": 49.9,
+        "solidPercent": 49.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d88a6579ca82d03348454335bf094677381e858fbb841ef68b0751529dff1451"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-parity-panda-idle.webp",
+        "w": 711,
+        "h": 620,
+        "transparentPercent": 40.9,
+        "solidPercent": 58.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "78d10bbf21880295585ffdd13be4cbcc5ebf1fab5a2bf54e15658b2bbe83f962",
+        "bytes": 119000
+      }
+    },
+    {
+      "id": "creature/reason-logic-lynx/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 231,
+          "y": 10,
+          "w": 921,
+          "h": 1111
+        },
+        "transparentPercent": 65.8,
+        "solidPercent": 33.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a523cfa1fa5342bc6663aafb12068e0527d5a03fae390a7c6b652dd1badbec04"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-logic-lynx-idle.webp",
+        "w": 514,
+        "h": 620,
+        "transparentPercent": 47.3,
+        "solidPercent": 51.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e09b827e805517991556485026f9df295145e8cfbd41810815bcd98335e35936",
+        "bytes": 98188
+      }
+    },
+    {
+      "id": "creature/emotion-outrage-ox/idle",
+      "source": {
+        "w": 1024,
+        "h": 1536,
+        "alphaBox": {
+          "x": 20,
+          "y": 32,
+          "w": 985,
+          "h": 1477
+        },
+        "transparentPercent": 57.9,
+        "solidPercent": 41,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4e58815767ac536f9fff0ee6e1363c338d56d2237fc264bb3c1e8ed0e2de8635"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-outrage-ox-idle.webp",
+        "w": 413,
+        "h": 620,
+        "transparentPercent": 53.9,
+        "solidPercent": 44,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "6b138f941817671f2534d314507b740bbf805a25659cf6d42d5e7b43ef5a66b6",
+        "bytes": 66074
+      }
+    },
+    {
+      "id": "creature/emotion-empathy-elephant/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 30,
+          "y": 77,
+          "w": 1260,
+          "h": 1060
+        },
+        "transparentPercent": 49.3,
+        "solidPercent": 50.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e02deb9b1c5922108485e67053494e428404187dcfdea657fe1564f97aed3efc"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-empathy-elephant-idle.webp",
+        "w": 737,
+        "h": 620,
+        "transparentPercent": 40.2,
+        "solidPercent": 59.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "3a75661247fe51e5c2d16e41de75851d140991bad8b7be0cf39b3e2b5783bbbb",
+        "bytes": 109842
+      }
+    },
+    {
+      "id": "creature/perception-lens-lynx/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 94,
+          "y": 0,
+          "w": 1088,
+          "h": 1312
+        },
+        "transparentPercent": 52,
+        "solidPercent": 47.2,
+        "cornerAlpha": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "sha256": "031846341ef4e31601a4f488cc63eff7989b9a485d3182437737b55dbc00d9ec"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-lens-lynx-idle.webp",
+        "w": 514,
+        "h": 620,
+        "transparentPercent": 47,
+        "solidPercent": 52,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "68d6b670cca31f5f7f26be4f3cf7e429eb745c16736097176146ef9f3f97c905",
+        "bytes": 92978
+      }
+    },
+    {
+      "id": "creature/perception-prism-puffin/idle",
+      "source": {
+        "w": 1246,
+        "h": 1262,
+        "alphaBox": {
+          "x": 55,
+          "y": 16,
+          "w": 1173,
+          "h": 1187
+        },
+        "transparentPercent": 54.6,
+        "solidPercent": 44.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "209ebd16e9ba2277a37d0c7a668a10a4b2089d139af3340557d898dd22e5d459"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-prism-puffin-idle.webp",
+        "w": 613,
+        "h": 620,
+        "transparentPercent": 48.6,
+        "solidPercent": 50.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "51631389d208e8cc450e892612ac3d2e7d21ae2a11065b67944a3a0a381c1298",
+        "bytes": 98856
+      }
+    },
+    {
+      "id": "creature/language-clause-crane/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 32,
+          "y": 11,
+          "w": 1263,
+          "h": 1174
+        },
+        "transparentPercent": 53.9,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "77c38211c7e2c80330fe79169d3ac04953ebaa6848500ba0d44d60ee0eae25a9"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-clause-crane-idle.webp",
+        "w": 667,
+        "h": 620,
+        "transparentPercent": 51,
+        "solidPercent": 48,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f606b3f80e09cfa1f448be48880f61b1bac6fa1f323bd8e4175e7e12ed854a78",
+        "bytes": 111898
+      }
+    },
+    {
+      "id": "creature/imagination-possibility-pika/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 131,
+          "y": 26,
+          "w": 1147,
+          "h": 1081
+        },
+        "transparentPercent": 57.6,
+        "solidPercent": 41.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ee02b051b2b410a0c137209d8c3894506a7df978dc485df2e94a52fbfa355724"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-possibility-pika-idle.webp",
+        "w": 658,
+        "h": 620,
+        "transparentPercent": 46.1,
+        "solidPercent": 53.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d386313a92924cb8f594619c4536d306ecd7ae1bcd2ff87c715d29944d2691eb",
+        "bytes": 110612
+      }
+    },
+    {
+      "id": "creature/imagination-blueprint-bat/idle",
+      "source": {
+        "w": 1215,
+        "h": 1295,
+        "alphaBox": {
+          "x": 142,
+          "y": 18,
+          "w": 1053,
+          "h": 1199
+        },
+        "transparentPercent": 59.5,
+        "solidPercent": 40,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f2659d7f0a7b714235df092240b8baf56ee2d9afbd9ace4e883d3ca6b39b2155"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-blueprint-bat-idle.webp",
+        "w": 545,
+        "h": 620,
+        "transparentPercent": 49.4,
+        "solidPercent": 49.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "32b3e6eff17a5a3251c12d2202da048c2120ee392f4e7bafb2cbf83014b6026f",
+        "bytes": 81864
+      }
+    },
+    {
+      "id": "creature/memory-bookmark-bunny/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 154,
+          "y": 9,
+          "w": 1099,
+          "h": 1172
+        },
+        "transparentPercent": 55.6,
+        "solidPercent": 43.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ccedb161bbd4a9ebebccd4d2b96c0c63afa276ec491cf7d6214a1061feb4b0f8"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-bookmark-bunny-idle.webp",
+        "w": 581,
+        "h": 620,
+        "transparentPercent": 45.6,
+        "solidPercent": 53.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f68f9effe0ae0d789dcae096c0f35e62c20766fcb662ac74d89c368731afa832",
+        "bytes": 100006
+      }
+    },
+    {
+      "id": "creature/memory-recall-robin/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 46,
+          "y": 77,
+          "w": 1242,
+          "h": 1057
+        },
+        "transparentPercent": 53,
+        "solidPercent": 46.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d899451986d51a950d85c3d1650bfee9efd06f17280d718033a2157500a552bf"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-recall-robin-idle.webp",
+        "w": 729,
+        "h": 620,
+        "transparentPercent": 43.6,
+        "solidPercent": 55.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "89d5ccb7747d30e5d5d295598de7283a17616bba35eefb0e842b356e93ade75d",
+        "bytes": 122052
+      }
+    },
+    {
+      "id": "art/spell-motif-reason",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 52,
+          "y": 16,
+          "w": 1233,
+          "h": 1158
+        },
+        "transparentPercent": 46.7,
+        "solidPercent": 51.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "be39685e8f0e49c1a1e9d63910904d9c24a2a31e7fee59e9a46ab1d5d3434d1d"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-reason.webp",
+        "w": 600,
+        "h": 564,
+        "transparentPercent": 41.1,
+        "solidPercent": 56.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "b17ae34de3c9fdd0e580bde2f6e660f359a1b859129d63d81518db52fb4c104a",
+        "bytes": 133526
+      }
+    },
+    {
+      "id": "art/spell-motif-language",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 71,
+          "y": 18,
+          "w": 1443,
+          "h": 978
+        },
+        "transparentPercent": 55.5,
+        "solidPercent": 43.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "sha256": "9b3d3fa3995acae579ea934ef3dad712ae5826828e11d65c4b4c95dd77dc3320"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-language.webp",
+        "w": 600,
+        "h": 407,
+        "transparentPercent": 49.8,
+        "solidPercent": 47.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a6f9d3ebd6a3d5db2637e8933f11996bb608ea100cd6a41f0f75694f6ccd61b9",
+        "bytes": 101538
+      }
+    },
+    {
+      "id": "art/spell-motif-imagination",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 21,
+          "y": 11,
+          "w": 1281,
+          "h": 1174
+        },
+        "transparentPercent": 45.1,
+        "solidPercent": 54.5,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "65edd3695a9535777792a9560e4046f0994719c5d21ba331dfeb40a8461fc19a"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-imagination.webp",
+        "w": 600,
+        "h": 550,
+        "transparentPercent": 42.4,
+        "solidPercent": 56.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "485c13f1a56eb2d2ae42e66a971fb574083dbdfb8008212c621e70c9f2b71e32",
+        "bytes": 106410
+      }
+    }
+  ]
+}

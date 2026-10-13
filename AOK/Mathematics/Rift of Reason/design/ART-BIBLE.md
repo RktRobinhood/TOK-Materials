@@ -24,6 +24,10 @@ Full-card art is the default normal appearance (teacher clarified13October2026),
 - Feels like a modern indie card game. Inspired by the cute-dark feel of games like Demon Bluff, but we never copy their characters, frames or layouts.
 - **Everyone is a creature.** No humans anywhere. Caricatures are creatures *inspired by* real people's public traits and props, never realistic likenesses.
 
+## Pose variety — teacher steering13October2026
+
+Do not make a whole collection of upright creatures facing right. Mix front/left/right views, seated/crouched/leaning poses, over-shoulder glances and occasional diagonal jumps/lunges toward the viewer. Compose the actual cutout differently; mirroring can supplement this but is not a substitute. Keep faces and one prop legible, anatomy coherent and the full silhouette inside the transparent canvas. Dynamic still illustrations do not require looping motion. Retain calm standing portraits as part of the mix, not the default for every new card.
+
 ## Colour tokens
 
 Each Way of Knowing has a colour used on card frames, icons, glows and the caricature's accents. Always pair the colour with its icon (colour-blind players).
@@ -60,3 +64,7 @@ Neutrals: ink `#1A1020`, night `#14121F`, deep forest `#0F1F1A`, parchment `#EFE
 3. Character consistency with earlier approved sheets (same markings, colours, proportions).
 4. Readable at game size (a bust at 240 px, a sprite at ~300 px tall).
 5. Tone: cute and dark, funny, not cruel.
+
+### Cast breadth — teacher steering, 13 October 2026
+
+Keep accepted artwork. For fresh card art, spread bodies across birds, insects and other invertebrates, aquatic animals, reptiles, unusual mammals and imaginary creatures. Avoid repeating felines or any narrow genus. Track body family alongside pose/composition in the production inventory before choosing the next group; explicit mechanical species IDs need not dictate an unproduced visual body. Record any display-name/body replacement so later builders can reconcile the roster without changing gameplay contracts. Spell and Axiom art should also include objects and small scenes, rather than a creature in every image.

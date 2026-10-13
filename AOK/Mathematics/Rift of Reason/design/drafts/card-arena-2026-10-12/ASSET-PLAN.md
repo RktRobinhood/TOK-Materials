@@ -90,3 +90,23 @@ Spell/Axiom illustrations are a later shared motif set, not 138 bespoke full pai
 #142 produces the two exact idle IDs above through the existing builder, without runtime creature definitions or collection grants. Selected source PNGs, exact prompts/edit history, reference paths, hashes and alpha checks: design/source-assets/4-caricatures/persona-batch-142-2026-10-13/. Developer samples: dev/persona-art-142.html; audit/evidence: design/reviews/persona-art-batch-142-2026-10-13.md. One cutout serves normal and future cosmetic treatment; no second cosmetic bitmap or new SFX is needed. Remaining 70 portraits are planned.
 
 #143 produces two more exact idle IDs via the existing builder; source/alpha/native390px/public checks pass, Pages38357064010 succeeded. Sources/provenance: design/source-assets/4-caricatures/persona-batch-143-2026-10-13/; shared gallery dev/persona-art-142.html?batch=143; audit design/reviews/persona-art-batch-143-2026-10-13.md. Four portraits produced/68remaining. Full art is default NORMAL, no cosmetic entitlement required; remaining foil/packs need separate cosmetic/economy decisions. Teacher deck-sizing/draw-step cues recorded in #122/#109, requiring responsive arena/background proportions and legal-source static emphasis. #144 defers Jimmy Fowlon until his buff is mechanically distinct.
+
+## Bulk art group1 — #145, 13 October 2026
+
+Eleven expansion portraits and three shared spell motifs (Reason, Language, Imagination) produced. Selected sources/exact prompts/references/hashes: `design/source-assets/4-caricatures/production-145-2026-10-13/`; common contact sheet `dev/art-production.html`, review `design/reviews/art-production-145-2026-10-13.md`. All14 built through sheets.json and source/runtime alpha checks pass. Native dark/light180px/70px and representative300px frames/actual390px layout passed; all30images loaded, no console warnings/errors. Required823tests:822pass,1skip,0fail (129471.8092ms). Standards/Spec each caught the Proof Pup comparison error; corrected and filed Hank overlap as #146. Artwork preserved.
+
+Fifteen of72expansion portraits now produced;57remain (including Jimmy #144 and Stephen photo-request deferral). This is an art-only delivery; engine effects, acquisition/owned starters/workshop, production board and voice recording remain separate release gates. #145 stays open. Public deployment verification follows the scoped push.
+
+| Art id | Display persona | Proposed type/rarity |
+|---|---|---|
+| `creature/reason-parity-panda/idle` | Hannah Frycoon | reason · uncommon |
+| `creature/reason-logic-lynx/idle` | Derek Mullinx | reason · uncommon |
+| `creature/emotion-outrage-ox/idle` | Serenox | emotion · rare |
+| `creature/emotion-empathy-elephant/idle` | Pascalophant | emotion · legendary |
+| `creature/perception-lens-lynx/idle` | James Randilynx | perception · common |
+| `creature/perception-prism-puffin/idle` | Zach Wing | perception · uncommon |
+| `creature/language-clause-crane/idle` | Olivia Rodentgo | language · uncommon |
+| `creature/imagination-possibility-pika/idle` | PewDiePika | imagination · common |
+| `creature/imagination-blueprint-bat/idle` | Hideo Kojibat | imagination · uncommon |
+| `creature/memory-bookmark-bunny/idle` | Hank Greenhare | memory · common · mechanic gated #146 |
+| `creature/memory-recall-robin/idle` | John Greenfinch | memory · common |
