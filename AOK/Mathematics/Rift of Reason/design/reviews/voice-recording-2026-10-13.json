@@ -1,0 +1,2407 @@
+{
+  "date": "2026-10-13",
+  "newClips": 293,
+  "currentRecorded": 1811,
+  "currentTotal": 2579,
+  "manifestFiles": 2180,
+  "usage": {
+    "day": "2026-10-13",
+    "counts": {
+      "gemini-3.8-flash-tts": 10,
+      "gemini-3.8-flash-lite-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "avatar-mothkin-girl-inner-1jophes",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. His eye twitched at \"missing\". Twitchers are guilty. Science.",
+      "seconds": 7.56,
+      "sha256": "7366df2a56c5b44b5b54c7efc82a4932837be15cc087d3bf7fb78cc5f3667ced"
+    },
+    {
+      "id": "avatar-fox-boy-inner-s1bd89",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture it. Midnight. The Mayor peels off his face. Perfect.",
+      "seconds": 5.472,
+      "sha256": "925bd1776b4d5b3a2bbf30ab353bb87dd8b4edaec3662709fd5f9032643b0618"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-11vznuw",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The loud one is always the bad one. Muskrat. The guards. Now him.",
+      "seconds": 6.96,
+      "sha256": "da230c5c53df20f882fd692e217afa3c5dd0a66d3a73d7e2752976f9d6835d7a"
+    },
+    {
+      "id": "sweep-1uvku9e",
+      "speaker": "sweep",
+      "expected": "Not me! I'm honest! I'm honest!",
+      "seconds": 2.664,
+      "sha256": "c3337c66e1739094348475d71133520e0bb1c7f291efb5d97c8f040df72a0cc1"
+    },
+    {
+      "id": "schoolteacher-1c6b83o",
+      "speaker": "schoolteacher",
+      "expected": "Plumage. Crumbs on your chain. Again. And stop that. It's neither.",
+      "seconds": 7.392,
+      "sha256": "c199037600a76fcef17c374eae2221289936298eaf580859cc9b3df64c9def86"
+    },
+    {
+      "id": "schoolteacher-k75t6o",
+      "speaker": "schoolteacher",
+      "expected": "Every claim is true or false, child. Isn't that a comfort?",
+      "seconds": 4.968,
+      "sha256": "9f72ec0ed665f1b70bc73530431c80b35a08d6ba6fc2234e0096a8e2e225a1ae"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-lqlt16",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Correct. Every sentence is true or false. First rule of everything.",
+      "seconds": 5.208,
+      "sha256": "6fb6ae203ec6adfcef656a84c7b9ced1be3c2bf6d3233bfbec632a5ff5817aeb"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1oltepx",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. Her scarf. There's wind. It doesn't move.…Lovely lamp behind her, though.",
+      "seconds": 10.152,
+      "sha256": "b8732d84272c04f071945e4be8fcd955f86e4a55a404df5ec7bc1f3a6abc0efb"
+    },
+    {
+      "id": "schoolteacher-1bvc3r9",
+      "speaker": "schoolteacher",
+      "expected": "A feeling, child? Feelings are not one or zero. Sit up straight.",
+      "seconds": 6.024,
+      "sha256": "50d81152b08f756a68845f839f6843efeb61e20e74d03672f3a75c8a90e84ccb"
+    },
+    {
+      "id": "constable-1o4enex",
+      "speaker": "constable",
+      "expected": "Stranger, eh? Name and business. Slowly. I write slowly.",
+      "seconds": 5.76,
+      "sha256": "f096b2c382076d1d436eb9b1c58b23c28453f154d3dce77b01fe07dea6450a7d"
+    },
+    {
+      "id": "constable-1ox0f0y",
+      "speaker": "constable",
+      "expected": "A postman. Another one. That's four today.",
+      "seconds": 3.864,
+      "sha256": "57605ac726914fdb9e605dd59548dc43aaa1f88dc22fb54582275d5fd8a7b6aa"
+    },
+    {
+      "id": "constable-1ygwtd7",
+      "speaker": "constable",
+      "expected": "Visiting. Visiting what? Never mind. Writing it down.",
+      "seconds": 5.328,
+      "sha256": "9ee1ad33ad3e50b9c3650df2d33e060941c1654ef96eddd54c9bf23756ba8a99"
+    },
+    {
+      "id": "constable-7ctzdu",
+      "speaker": "constable",
+      "expected": "Tutor. Of tutoring. T-O-O-T. Got it.",
+      "seconds": 4.008,
+      "sha256": "c1d2e87e85ac7a49e37f1522adfcff3ffcf77bb5c382572d9c7255647721255a"
+    },
+    {
+      "id": "constable-19hsdhc",
+      "speaker": "constable",
+      "expected": "Lamp… taster. Got it.",
+      "seconds": 2.232,
+      "sha256": "64a37aad9df35230c0ca0dfc11a84c306c371d290e7f7387359a65844546475f"
+    },
+    {
+      "id": "constable-1htmp68",
+      "speaker": "constable",
+      "expected": "Acting. Right now. Is that a crime? I'll check.",
+      "seconds": 4.464,
+      "sha256": "152c81db5043b04d83034c3524f6ec3abb307083b0da489025197576ee858313"
+    },
+    {
+      "id": "constable-xw6yrt",
+      "speaker": "constable",
+      "expected": "Pond… Inspector. Two p's?",
+      "seconds": 2.496,
+      "sha256": "66cc82dba989aeaa57453107ca2d9018323bc2d0182851d23573766603dd4608"
+    },
+    {
+      "id": "constable-1o7g4x0",
+      "speaker": "constable",
+      "expected": "Letter… carrot. Fine.",
+      "seconds": 2.712,
+      "sha256": "ee30c4347ed14f1845805d820c8add520aefa8f49d39271b5daec44b75efc0e4"
+    },
+    {
+      "id": "schoolteacher-xzd37i",
+      "speaker": "schoolteacher",
+      "expected": "Constable, this one's with me. I checked their story. Every row.",
+      "seconds": 5.136,
+      "sha256": "c9a43cbeb8f506b8967f00ce9aec4ebb04082fa75b6356c155864c4e1e24a095"
+    },
+    {
+      "id": "schoolteacher-dxi9qo",
+      "speaker": "schoolteacher",
+      "expected": "Take my red pencil, child. Mark what's wrong. Never write \"maybe\".",
+      "seconds": 5.136,
+      "sha256": "4f174a6be1c69df758ffa90ee54feadfae54551eea9ba4ce16bfb6e601925dca"
+    },
+    {
+      "id": "constable-1mk7s0j",
+      "speaker": "constable",
+      "expected": "If Miss Quill checked it, it's checked. Still. A few questions. For the form.",
+      "seconds": 7.224,
+      "sha256": "58f09af316eaaa9301d60b90dad3cb0c8893f31d70ab710543a80fe58ccb422b"
+    },
+    {
+      "id": "constable-1a0kqhv",
+      "speaker": "constable",
+      "expected": "Hmph. Your story holds. For now. I've underlined \"for now\".",
+      "seconds": 7.536,
+      "sha256": "caf750ed8a0c5c43e0a5a4dfa073a726f7049f58629b376beee574c4a2fbb338"
+    },
+    {
+      "id": "clockmaker-vvrrlg",
+      "speaker": "clockmaker",
+      "expected": "Mind the pendulums! A hundred clocks, all correct. I check them twice.",
+      "seconds": 5.952,
+      "sha256": "48cd1ec1481110d1403858b53e305d6a2fbc1e83163a87f6bc02ebd653868cf7"
+    },
+    {
+      "id": "clockmaker-e3zviy",
+      "speaker": "clockmaker",
+      "expected": "A sundial! You never need winding. I've always envied that.",
+      "seconds": 5.16,
+      "sha256": "abd1745a8382371f5870068abf69b4aa144459edbf7a2feaed5a92dbc14efd51"
+    },
+    {
+      "id": "clockmaker-1f291c1",
+      "speaker": "clockmaker",
+      "expected": "The bulb agrees with you. So do the clocks. That never happens.",
+      "seconds": 4.872,
+      "sha256": "2b834891e7b0c1aacdc1e8bcf42a40a489bd75d826fee98f025acc6a4a809704"
+    },
+    {
+      "id": "constable-18h5aeg",
+      "speaker": "constable",
+      "expected": "You again. From the top. Harder questions up here.",
+      "seconds": 5.256,
+      "sha256": "f55cb22a5279676f2f29ad20f1fb768c466196df7c1b70f366a254aab187c942"
+    },
+    {
+      "id": "constable-x3dib3",
+      "speaker": "constable",
+      "expected": "The Mayor signed it. For the applause.…I didn't say that.",
+      "seconds": 5.64,
+      "sha256": "7589cef89adfd5e2b883e17748e0f53a27b6039d913da372c282c6e4aa7056e3"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-1d53r9e",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "\"The Mayor signed it.\" Signing is choosing. Write that down. I did.",
+      "seconds": 6.624,
+      "sha256": "13b9e165c574e5bb54b423261a3986252bb8c82af25ded3e6eb47863335dbc22"
+    },
+    {
+      "id": "constable-oeq51e",
+      "speaker": "constable",
+      "expected": "Your story never wobbled. Lies can be tidy too.",
+      "seconds": 3.816,
+      "sha256": "0f20008796dd1ecb280860ead6e23e408d014e78825a618566235d68f7a21dbc"
+    },
+    {
+      "id": "constable-2acvu4",
+      "speaker": "constable",
+      "expected": "A true story holds too. Proves less than you'd think.",
+      "seconds": 6.624,
+      "sha256": "e2084ace7ab59ae62fb952308254bc6206ded8b93c16b2209df7f96e4639115c"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1v6f4k9",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "\"Tall.\" Lots of birds are tall. Herons are tall. I'm not enjoying this.",
+      "seconds": 6.984,
+      "sha256": "44af24c34cab872ba38e5e5400a8153a8b93e5b97ab672d02e108bd9d225256e"
+    },
+    {
+      "id": "clockmaker-cvkr6p",
+      "speaker": "clockmaker",
+      "expected": "My lock. I built it for the Mayor. He paid me in bread.",
+      "seconds": 4.392,
+      "sha256": "f5a940d916a75ff1df325f336f65a3a163f8d6662b9fa986423405f62d11792c"
+    },
+    {
+      "id": "avatar-fox-boy-inner-g02cfk",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture the Mayor reading what he signed.…I can't. Can you?",
+      "seconds": 4.896,
+      "sha256": "48667c57d38ecbe4a743ccc005b8d3bdd08a90106bd0edd967838eb03687df81"
+    },
+    {
+      "id": "mayor-1f78gb0",
+      "speaker": "mayor",
+      "expected": "Here. The kitchen key. You didn't get it from me.",
+      "seconds": 3.168,
+      "sha256": "fd81e4ea0b25009ad98721c01c09b18f654f73b59526518120a2f45c9c3f24d9"
+    },
+    {
+      "id": "mayor-289lzk",
+      "speaker": "mayor",
+      "expected": "No. Nothing is wrong. Especially me. Good evening!",
+      "seconds": 3.864,
+      "sha256": "01a5930f76344d2c34e03ede960b42c9a15f7b9a8e7da5ce89f546a5c48da06e"
+    },
+    {
+      "id": "gumleaf-7ll1ae",
+      "speaker": "gumleaf",
+      "expected": "Mr Gumleaf. Supply teacher. Today's lesson, apparently: true or false. No maybes. In capitals.",
+      "seconds": 8.688,
+      "sha256": "42a770270e83a1894cfd6ac3cf164dc9512f7a257f31b6a61986496fed4c3a2e"
+    },
+    {
+      "id": "sweep-1v5p23t",
+      "speaker": "sweep",
+      "expected": "I'm honest, sir!",
+      "seconds": 1.08,
+      "sha256": "533b0008466515f2763acd4e07fdbaf1e0126df63cae13cfd2d28c5fa4417727"
+    },
+    {
+      "id": "gumleaf-a7gp7n",
+      "speaker": "gumleaf",
+      "expected": "Saying it doesn't prove it, Smudge. An imp would say the same. Sorry. Rules.",
+      "seconds": 8.664,
+      "sha256": "6058f36ebcfa0150b82d7b5f74500d489dcbdb70d0980471c783bb0a3dd2d76b"
+    },
+    {
+      "id": "schoolteacher-b77h59",
+      "speaker": "schoolteacher",
+      "expected": "Today's lesson: every statement is true or false. One or zero. No maybes.",
+      "seconds": 7.128,
+      "sha256": "439b3384d9c577aa4537396b57ab957ef236fef72b3a6975066bb423d042b906"
+    },
+    {
+      "id": "sweep-13xt8hb",
+      "speaker": "sweep",
+      "expected": "I'm honest, miss! I'm honest!",
+      "seconds": 2.04,
+      "sha256": "bc09d9d078c77a31e41cd6a52841401822cd47e2a5c73648c2a576dcb325583b"
+    },
+    {
+      "id": "schoolteacher-uob9vn",
+      "speaker": "schoolteacher",
+      "expected": "Saying so proves nothing, Smudge. Saying it twice, also nothing. Sit.",
+      "seconds": 7.152,
+      "sha256": "d1da72c9946b65f20b5a2037b90e668ef7c2b14979dbbe303f721d267cf59995"
+    },
+    {
+      "id": "schoolteacher-1shxdrt",
+      "speaker": "schoolteacher",
+      "expected": "Top marks. You checked every row. I do like a child who checks.",
+      "seconds": 8.376,
+      "sha256": "d47e7c46e46ee4977502519138bf5f6e1341007e6b071bca388da6d7cb71c741"
+    },
+    {
+      "id": "gumleaf-tbg6wn",
+      "speaker": "gumleaf",
+      "expected": "Top marks. I didn't know we gave marks. Nice.",
+      "seconds": 4.608,
+      "sha256": "73810fe9f8c3bb7e040361aaff4a4a119ccc2b38748b77c354afd6d7f881a65d"
+    },
+    {
+      "id": "constable-1cibbeq",
+      "speaker": "constable",
+      "expected": "Off duty. Cards? I play by the rules. Whatever the rules are this round.",
+      "seconds": 6.576,
+      "sha256": "591f72d8afc6ff46215ee2270ca7d8470a1d288296e70b69520c16c750c22448"
+    },
+    {
+      "id": "constable-1flmp11",
+      "speaker": "constable",
+      "expected": "Guarding the soup. Two p's in \"soup\"?",
+      "seconds": 3.84,
+      "sha256": "a124b47ff15cd9a598db05eda8022a5d67297ca55968c2bc95973eca45bdb298"
+    },
+    {
+      "id": "mayor-10u6846",
+      "speaker": "mayor",
+      "expected": "I tore it up! Half the guests went home!",
+      "seconds": 2.808,
+      "sha256": "32cb4a05328078a664795b85d5fd5d316eb618fbf6684daea2067c225052d2be"
+    },
+    {
+      "id": "mayor-1mhrbux",
+      "speaker": "mayor",
+      "expected": "I'm not looking. If I don't look, it isn't happening.",
+      "seconds": 5.04,
+      "sha256": "61c9dd5f2a9c30d8ebcfae68cd9d35bee4c82dfbb46403a712d479f7f05123c3"
+    },
+    {
+      "id": "mayor-19icgdy",
+      "speaker": "mayor",
+      "expected": "Is it soup yet?",
+      "seconds": 1.488,
+      "sha256": "0507ece30caa048ddc7aab968e2587be0925dc9d8c3e1d4a23cde54e6ec76e41"
+    },
+    {
+      "id": "mayor-2zcw6g",
+      "speaker": "mayor",
+      "expected": "…Is that allowed?",
+      "seconds": 2.28,
+      "sha256": "3fe26a712b1b4b4a9716159fcc55295938d3caf8271be2ce7c41439a15fb9a48"
+    },
+    {
+      "id": "schoolteacher-y95v91",
+      "speaker": "schoolteacher",
+      "expected": "I'll keep the tables, child. You find the imps.",
+      "seconds": 5.304,
+      "sha256": "1bcaff7c5cc02d57f894ae51b23d7e5dbd75770c549e25dbb9da66bfd639d1e9"
+    },
+    {
+      "id": "mayor-cn7625",
+      "speaker": "mayor",
+      "expected": "I've got the rope! Both wings! Nobody pull!",
+      "seconds": 3.552,
+      "sha256": "417f3fb9321cb8f6eeed1de82c6cb1afe52f730367c42814851da253b3d6171f"
+    },
+    {
+      "id": "schoolteacher-1in4x3p",
+      "speaker": "schoolteacher",
+      "expected": "My own table, child. I checked it for you. Like with the Constable.",
+      "seconds": 4.8,
+      "sha256": "018c0c5c0a529c605b8690645dd33784aac0ff1192ebb550538c8552cadd3382"
+    },
+    {
+      "id": "schoolteacher-1ejtfeq",
+      "speaker": "schoolteacher",
+      "expected": "My own table, child. I checked it for you. Every row.",
+      "seconds": 5.544,
+      "sha256": "e035197c856c3213a9697d6fd2137607ff29aa62dde161b94a0d611a85ec13cd"
+    },
+    {
+      "id": "schoolteacher-ahp9kl",
+      "speaker": "schoolteacher",
+      "expected": "One or zero, child. You are a zero.",
+      "seconds": 3.12,
+      "sha256": "f88198cf53afa1d5427a8939b40ff314b33570317bff45dc6b16e8bab8beb098"
+    },
+    {
+      "id": "schoolteacher-1nqoaje",
+      "speaker": "schoolteacher",
+      "expected": "One. Stamped. It agrees with itself. Next.",
+      "seconds": 3.888,
+      "sha256": "58ad2188061349e30c6aca5d3882e3e71ef500351dfb012446eed68ed55dd775"
+    },
+    {
+      "id": "schoolteacher-1q751u3",
+      "speaker": "schoolteacher",
+      "expected": "One. Obviously. Next.",
+      "seconds": 2.04,
+      "sha256": "ff46e7b2fdabc80a9597ee84c23d6e7bec839af2d53f3a4c57702f8a7fcb77ed"
+    },
+    {
+      "id": "schoolteacher-13sydrd",
+      "speaker": "schoolteacher",
+      "expected": "True. No. False. No. ONE. ZER—",
+      "seconds": 3.648,
+      "sha256": "73300b5d3acc9e2049764625ec727ac512483e92439d401eab880f2957883a58"
+    },
+    {
+      "id": "sweep-c7bbnp",
+      "speaker": "sweep",
+      "expected": "That's my sentence! From her board! It WORKS!",
+      "seconds": 3.648,
+      "sha256": "6035ab7beb5ae99e35c416b002ca01094a13d6e246ae2b37ecbf25e8a6366bcb"
+    },
+    {
+      "id": "schoolteacher-t1bo4n",
+      "speaker": "schoolteacher",
+      "expected": "Forty years I marked \"maybe\" wrong. Red ink. Every child.",
+      "seconds": 5.928,
+      "sha256": "05dd3678faf7321077dee7497d8a8e6ef6e9b7897f85ad9287e7898fe79c4fdb"
+    },
+    {
+      "id": "schoolteacher-1oze8so",
+      "speaker": "schoolteacher",
+      "expected": "If \"maybe\" was allowed… I was cruel for forty years.",
+      "seconds": 5.64,
+      "sha256": "30abe9af6f5c54ee1b44be354cc8f42816699a8363ea0eef00cb926b4116e194"
+    },
+    {
+      "id": "schoolteacher-zlqjvg",
+      "speaker": "schoolteacher",
+      "expected": "So when a voice offered me a world with no maybes… I said yes.",
+      "seconds": 5.112,
+      "sha256": "58e15117ab0f8e50584cb87ef4888ab2202937ec6986a2ab65547e382b763430"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-1g8q6c",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "I called it the first rule. It was an assumption. That sentence just broke it.",
+      "seconds": 6.384,
+      "sha256": "8aec623aa24ecf0998daef6d7da4d17b1ee72baa4705c75f479bd4728e5d1660"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1fv4cv4",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Loud was bad three times. The fourth time, quiet was.",
+      "seconds": 7.152,
+      "sha256": "f8ae135aa3af40eeb32bbbe867f0e4843b8821f9b75f0462d9832207e6dffa2e"
+    },
+    {
+      "id": "avatar-fox-boy-inner-cggxlo",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Great story. Wrong face.",
+      "seconds": 2.592,
+      "sha256": "0228bba91114acf679f9a1eb67e1daeda788c4645fc248a540dde93017bab40a"
+    },
+    {
+      "id": "avatar-fox-boy-inner-c43keg",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "I pictured the wrong face. The whole time.",
+      "seconds": 3.48,
+      "sha256": "65dabe06c8cb179285936e7489a0846b55d5697e73f18af4cccb4a9832334460"
+    },
+    {
+      "id": "schoolteacher-1b5ua8g",
+      "speaker": "schoolteacher",
+      "expected": "Tomorrow is waiting. Everyone there has already decided about you.",
+      "seconds": 5.928,
+      "sha256": "ed93f7c6798c2812d7e6a88fdcda604bcf5e62a3817a7f651bc0509c352ae1cd"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-8v6b8t",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "He twitched. Bread in his hat. Guilty of bread.",
+      "seconds": 5.928,
+      "sha256": "0b9882dc74cb7f2bcfc77a93043677db94dbc4a0bdc6e7884852ce4cb8e7f82e"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1u1vo9d",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "He twitched. Bread in his hat. That's all a twitch proved.",
+      "seconds": 6.6,
+      "sha256": "08f8de1abe0ed2c93b5784fc9321c3049e8d5072794e9cbf18d61a20c68da929"
+    },
+    {
+      "id": "mayor-1ri7lvt",
+      "speaker": "mayor",
+      "expected": "Three of us. Three statements. Check them. Gently. I bruise.",
+      "seconds": 5.28,
+      "sha256": "4362671800b4f5fd7fa5e78ed94b077decc67e3c640007a0c2b2957f2a30b60d"
+    },
+    {
+      "id": "mayor-zkzts3",
+      "speaker": "mayor",
+      "expected": "Check us again, if you like. Still not an imp. Officially.",
+      "seconds": 4.776,
+      "sha256": "231d5e433819b81ac5c823b773f8276c3f15adcbe950387cf53da0052d26a6d3"
+    },
+    {
+      "id": "constable-1kd1nd8",
+      "speaker": "constable",
+      "expected": "Every answer stands on the last one. Wobble, and down it all comes.",
+      "seconds": 5.688,
+      "sha256": "c4268374a51f33ef4e31c21374604854a96cd9c533f6f52bdc52e88491bafaac"
+    },
+    {
+      "id": "constable-1pz091u",
+      "speaker": "constable",
+      "expected": "More questions. Same story, mind. I've written it down. Nearly right.",
+      "seconds": 6.288,
+      "sha256": "f3469ad7dd60300a466c4287cf5e342a56880a827e955d80d7ad4fba2883b540"
+    },
+    {
+      "id": "clockmaker-1kfi7xd",
+      "speaker": "clockmaker",
+      "expected": "My bulb only lights for the right inputs. Tick, tock. Find them.",
+      "seconds": 5.88,
+      "sha256": "22abde4198510bc03d483a37b1dcaae0fd34f87d5fc308c08dfa0b2f2eb8d444"
+    },
+    {
+      "id": "clockmaker-1fve55y",
+      "speaker": "clockmaker",
+      "expected": "Back? The bulb is still waiting. So am I. Tick.",
+      "seconds": 4.128,
+      "sha256": "d50f4dc5ff7c891085d6e4dcc715d5fd4764b8792ca4aa7a631fe42ca5f2cde8"
+    },
+    {
+      "id": "schoolteacher-1mfi8i0",
+      "speaker": "schoolteacher",
+      "expected": "Today's task is on the board. Check every case, child. Guessing is for gamblers.",
+      "seconds": 6.336,
+      "sha256": "2582f9760d8e8ab4e26f30f2f0b826f77c7eb3dc4c772d2af212e6acaa68d259"
+    },
+    {
+      "id": "gumleaf-1w7xp4d",
+      "speaker": "gumleaf",
+      "expected": "Miss Quill left. Through a window. So: the board. Check every case. Apparently.",
+      "seconds": 6.624,
+      "sha256": "fce1980884f2c59b10856364dae97ef6eb5644f1241d336dbb645de1a101fcb7"
+    },
+    {
+      "id": "schoolteacher-1h3r5gc",
+      "speaker": "schoolteacher",
+      "expected": "Back to class? Every case, child. No guessing.",
+      "seconds": 4.608,
+      "sha256": "2ef390a5d1bea8166fce8b0bdc0af959232d77b27406d9b54c96c7c72cf4d290"
+    },
+    {
+      "id": "gumleaf-ywbjnm",
+      "speaker": "gumleaf",
+      "expected": "Oh, hello again. The board's still there. So are the rules, apparently.",
+      "seconds": 7.536,
+      "sha256": "be1e3074b9f9f9a65b638429577762dcdb075f6657d7314fdfb0fa8905e2a062"
+    },
+    {
+      "id": "constable-1xjvc4c",
+      "speaker": "constable",
+      "expected": "Harder questions up here. Your first answers had better hold the rest.",
+      "seconds": 5.136,
+      "sha256": "e28db1afc77cd1f29a2862a574a382d80e3e595005f3c1a99a1623bd97356603"
+    },
+    {
+      "id": "constable-1fpxcwy",
+      "speaker": "constable",
+      "expected": "Again? From the top, then. Same story.",
+      "seconds": 3.984,
+      "sha256": "51d311963a058f2d9c84462602e92d1c4030d47db3d8570125ee85f67ec34c91"
+    },
+    {
+      "id": "clockmaker-1mc15lj",
+      "speaker": "clockmaker",
+      "expected": "One switch hides behind a curtain. The Mayor wanted that.",
+      "seconds": 5.256,
+      "sha256": "b656c0b52f8d7685722c0e6406c50db61d7951644d264d4df667e116d74baddb"
+    },
+    {
+      "id": "clockmaker-kijqhi",
+      "speaker": "clockmaker",
+      "expected": "The hidden switch is still hidden. That's its whole job.",
+      "seconds": 3.816,
+      "sha256": "bbd681e4544346e3edd770b70f6f7d6570152fe9795b28d73d63fe8d9061cb08"
+    },
+    {
+      "id": "achilles-1a0ldnp",
+      "speaker": "achilles",
+      "expected": "Coach here. Her charm went quiet somewhere near you.…I'm listening. Slowly, for once.",
+      "seconds": 6.912,
+      "sha256": "d604a1afc18be95225788f31a98c9b843045750c1fe1cfe8a5e68802cebf0dfb"
+    },
+    {
+      "id": "constable-hyi79i",
+      "speaker": "constable",
+      "expected": "I'm guarding the door. Somebody has to.",
+      "seconds": 3.192,
+      "sha256": "f797aeca43984cd1fcb8ba3b4ab3e142876314f42be10d848bcd83cea322946b"
+    },
+    {
+      "id": "pip-nzcegl",
+      "speaker": "pip",
+      "expected": "Previously. I'm Pip. I keep the record.",
+      "seconds": 2.736,
+      "sha256": "199f824727bbf581ede156076bf3dd25a791f006bd4e9329198c7d317e319f8f"
+    },
+    {
+      "id": "pip-1bvid3e",
+      "speaker": "pip",
+      "expected": "The Sundial rode in your shadow. Here, they put it on trial. For guessing.",
+      "seconds": 6.168,
+      "sha256": "78c12755a840418e4d8213bb76b10d5af6081b3308c19c3e490da8150974907e"
+    },
+    {
+      "id": "pip-scr89b",
+      "speaker": "pip",
+      "expected": "The vote passed. It stopped in the middle of a word.",
+      "seconds": 3.648,
+      "sha256": "367bbbbc1696809e0fc2750062ea87ae037a6167beab1f4d198d235da048362c"
+    },
+    {
+      "id": "pip-1cvqbq0",
+      "speaker": "pip",
+      "expected": "The Rift Landing. It counted the shadows here once. Nine. None of them its own.",
+      "seconds": 6.264,
+      "sha256": "ee51a0dd4244cac49bd785b8e5c2213180f016526adb35b65fc3ce81c1133c89"
+    },
+    {
+      "id": "pip-xgbi7n",
+      "speaker": "pip",
+      "expected": "Oh! A visitor! Name, please.…Say it again? For the record.",
+      "seconds": 5.088,
+      "sha256": "d723ef908ca014ffd58cf692b8b349bdc42d5128d5f05a8ee7e20ecbcb8e12a9"
+    },
+    {
+      "id": "pip-ps90x7",
+      "speaker": "pip",
+      "expected": "Judge Hoot wants every claim in town on the record. For the trial of the season!",
+      "seconds": 4.992,
+      "sha256": "a76f82f35d154842edb4a1b5502eddf23e8d47d088e41cb87cb72e42b807926a"
+    },
+    {
+      "id": "pip-1owsolu",
+      "speaker": "pip",
+      "expected": "Nobody's told me! Isn't that exciting?",
+      "seconds": 2.688,
+      "sha256": "ba9a1b7fcece5c57d9d62b573007fe552632fa9806571c2f41e30d08354fc482"
+    },
+    {
+      "id": "pip-1bxl7mv",
+      "speaker": "pip",
+      "expected": "The headline of the day! Filed. For the trial of the season.",
+      "seconds": 4.08,
+      "sha256": "a8c55dc290230eceedfa17c307265a8c62998f15324436ce28852bb2bb60ff30"
+    },
+    {
+      "id": "pip-1w5emdk",
+      "speaker": "pip",
+      "expected": "It squeaked! You broke it. Filed!",
+      "seconds": 3.216,
+      "sha256": "63ea17cc95cde077cf121e5326b7341e86240278849584a92c4773eca10c26fb"
+    },
+    {
+      "id": "pip-mdmnoz",
+      "speaker": "pip",
+      "expected": "It squeaked! Filed. For the defence, this time.",
+      "seconds": 3.528,
+      "sha256": "c6ce112344fbe7cd56432e07dcd343cab3a26a41a6e6d0af2055667b82f0c13a"
+    },
+    {
+      "id": "pip-1ud9etw",
+      "speaker": "pip",
+      "expected": "Filed anyway. The trial's over. Old habits.",
+      "seconds": 3.792,
+      "sha256": "6a501e3fa01578c3b8b5cdbb12928a360f5b707f104a1570e903d0e84b1b75cf"
+    },
+    {
+      "id": "pip-qm4d9i",
+      "speaker": "pip",
+      "expected": "It sat just there. Under the skylight. Waiting for sun.",
+      "seconds": 3.984,
+      "sha256": "e3ce4b8ed9ab4403be0b1517d91561105e6355feb1b2b00ff703589c9041be69"
+    },
+    {
+      "id": "achilles-gnoe18",
+      "speaker": "achilles",
+      "expected": "Coach Achilles. Her rival. Saw her lantern go out.",
+      "seconds": 4.464,
+      "sha256": "308f6aa398ded8af5964258de589e12de7cef10edb0aebaa8fd84d6fc571c4a2"
+    },
+    {
+      "id": "achilles-1vhd0ve",
+      "speaker": "achilles",
+      "expected": "She gave me this charm seventy years ago. For emergencies.…This is one.",
+      "seconds": 5.448,
+      "sha256": "8ff206cbb646be40ea2dc98a022c9d9045be0c0430cbf4d69488dcde562b47db"
+    },
+    {
+      "id": "avatar-fox-boy-inner-1cffhz2",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture it. Fin's the real villain. A shark who never loses? Obvious.",
+      "seconds": 5.328,
+      "sha256": "5d1ac84f87eca4759ef89f21ebe9d8817257653dd32d09b4286f59750e6767cf"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-2pneks",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Fin's never lost. He won't lose this. Never has, never will.",
+      "seconds": 6.216,
+      "sha256": "0773bc82413bd62f15b1f7c2628418bab7f9ac645dc4b85fa15ae91fb15a8eb3"
+    },
+    {
+      "id": "pip-7wppsy",
+      "speaker": "pip",
+      "expected": "Could you say \"I guess\" again? The record's a bit quiet.",
+      "seconds": 3.912,
+      "sha256": "a3d1e19871b48f5e23e4d7984edbb2f6abc1ed81775e1a3e24be2312bc7b61ad"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1isohio",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. The counter ticks every time it talks.…Pretty numbers, though.",
+      "seconds": 7.944,
+      "sha256": "3cae77440f1b69355d05cdd9bd3b569b23b8885071eb84fd7087397a9ed43489"
+    },
+    {
+      "id": "pip-oa0832",
+      "speaker": "pip",
+      "expected": "The Sundial? But I put it all on the record. Everything it said.",
+      "seconds": 5.04,
+      "sha256": "27203ec3c9dc62a749c611dfa459a154b199454b498ea3dd13196dbc27268307"
+    },
+    {
+      "id": "pip-1j0htyo",
+      "speaker": "pip",
+      "expected": "…Filed. Sorry. Habit.",
+      "seconds": 2.28,
+      "sha256": "8fdca8e2f5236caa5165d3bd9d411758444fe2db352efccafaf18e891b369709"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-busbbr",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "A vote counts opinions. Not reasons. I counted twice. Same answer: none.",
+      "seconds": 6.576,
+      "sha256": "0329f0dc33451cf40c34c32de46130cc7335b11aab5212d9a520d77388ceed3b"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-150ajmm",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. Thousands of screens. Thousands of hands. So bright. They must have seen something.",
+      "seconds": 10.488,
+      "sha256": "54328ab01c2c6f7d5beb2ded142bbe95f84bce8d24ea13d40e9396bb36987506"
+    },
+    {
+      "id": "pip-6iprfj",
+      "speaker": "pip",
+      "expected": "I'm allowed to file for both sides! I checked! Page one!",
+      "seconds": 4.392,
+      "sha256": "06724fcb3a7f539c278861ffbf3e05b28093e04ca4be85c944a41770bc375ee4"
+    },
+    {
+      "id": "pip-lupkcl",
+      "speaker": "pip",
+      "expected": "Its sunny-day record! Right every single time. Filed, for the defence.",
+      "seconds": 5.904,
+      "sha256": "5b77fb19966c8077070211b081dd6c34311c33e3a02142b6d837b0b285c7720e"
+    },
+    {
+      "id": "avatar-owlet-boy-possessed-12t1b61",
+      "speaker": "avatar-owlet-boy-possessed",
+      "expected": "Everyone votes guilty. So: guilty. Elegant. Like everyone.",
+      "seconds": 9.072,
+      "sha256": "1ed61dced5a84df01d10306f87040fb2e0aee6b341de977653f56123178a040e"
+    },
+    {
+      "id": "avatar-mothkin-girl-possessed-1790fdw",
+      "speaker": "avatar-mothkin-girl-possessed",
+      "expected": "Look at the votes. Only the votes. Lights are boring.",
+      "seconds": 7.56,
+      "sha256": "d85b77366f1a6d13453e5f97de761b086a2513a8bbfce2ff6238e5308a89e98f"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-hd6hme",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "\"I guess.\" The Fair. The very first morning. I remember now.",
+      "seconds": 6.84,
+      "sha256": "d90fef514ea791b84e8cb17e8c56e631c47e10cf5695526deceb5ae557500f9a"
+    },
+    {
+      "id": "pip-j9v30u",
+      "speaker": "pip",
+      "expected": "Same numbers. Honest picture. Filed, for the defence.",
+      "seconds": 4.152,
+      "sha256": "aba1e8bd76b68e23580a3e65b9a3d34bd73be5986bb64432cddc6c448ea15bcf"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-kudby7",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "That grey voice at the lab wasn't me. I never say \"like everyone\".",
+      "seconds": 6.264,
+      "sha256": "263366eb88e4aec9d083df62619c136197db007376f27c6eb826f8476adceee2"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1x7eygf",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "That grey voice wasn't me. I'd never call lights boring. Never.",
+      "seconds": 8.568,
+      "sha256": "43c6b9bc9c4e15f36383a1888549c1d62f03551421056e347689268a06116587"
+    },
+    {
+      "id": "avatar-fox-boy-inner-r1yj7t",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "That wasn't me. \"Realistic\"? I have never once wanted realistic.",
+      "seconds": 5.016,
+      "sha256": "139cf0791e67e7811f56a60b3e01a39b162a99ce7c96017a3c9b1f7fad54131d"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-txinhe",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "That wasn't me. I always remember which. Ask me anything.",
+      "seconds": 5.64,
+      "sha256": "1d26f8dfe04589fed784088309b9c89c4e1dc9eb3dc33190df295bb91e5af7cf"
+    },
+    {
+      "id": "avatar-fox-boy-inner-1ra80qm",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture the defendant hearing all this.…Oh. It can.",
+      "seconds": 3.432,
+      "sha256": "0565921652981753c07b5642a868d46cd7da8d2baa0dc082729da571dab8a24e"
+    },
+    {
+      "id": "pip-10p4vk4",
+      "speaker": "pip",
+      "expected": "The trial's over. You're not evidence any more. Go home.",
+      "seconds": 3.504,
+      "sha256": "2d89c73ab0b2fbf4e4f954666168ab7851bc104a70ad40e8d7819c0208fe7e2f"
+    },
+    {
+      "id": "pip-1mxfyer",
+      "speaker": "pip",
+      "expected": "You streamed the Fair. The eye, the net, the shadow. Can we have it?",
+      "seconds": 4.68,
+      "sha256": "346755c09b0b8e331956fb0d8e5fae8a9ab8702cc6f51faf8b0493e3ca27489e"
+    },
+    {
+      "id": "pip-1ivilqv",
+      "speaker": "pip",
+      "expected": "For the record. Was your argument good? Or did it just work?",
+      "seconds": 3.864,
+      "sha256": "619085cdee4134ee9187529de9cc46560c8fc909631a5e6c13236e8852c00ac6"
+    },
+    {
+      "id": "pip-d9tmaw",
+      "speaker": "pip",
+      "expected": "Good and working. That's the rare kind.",
+      "seconds": 2.808,
+      "sha256": "3da25f06d9f37521123c7c3f543080616e9e45897f2bb18456f586e0ef154fd5"
+    },
+    {
+      "id": "pip-gwnk5t",
+      "speaker": "pip",
+      "expected": "Hmm. The Algorithm's arguments work too.",
+      "seconds": 3.336,
+      "sha256": "27045bf4159ad3dd735f7b75ca3d8173f8b233634d0d6a12f25124caf7f7139f"
+    },
+    {
+      "id": "pip-ea5qyf",
+      "speaker": "pip",
+      "expected": "No clip. We still have my record. And you.",
+      "seconds": 2.472,
+      "sha256": "12945f216f1b013c7c50332d9e2f279e2e14f30583bcb22d52f43c5266a6c752"
+    },
+    {
+      "id": "pip-t27anl",
+      "speaker": "pip",
+      "expected": "What's your name? For the record.",
+      "seconds": 2.688,
+      "sha256": "b6842717285a257e0991c777bcef535a9149f30ac5769355f13f93d14362dbd7"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1u4bg6q",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "All that light. Not one of them was looking.",
+      "seconds": 4.704,
+      "sha256": "f8c62ec4ba30a8e8ad7db388c8e2dfe91e929927a1a503f31d926b111e71ff47"
+    },
+    {
+      "id": "achilles-1giq1g7",
+      "speaker": "achilles",
+      "expected": "Ninety years she knew that rock. I'm faster than her. Never caught her, though.",
+      "seconds": 6.384,
+      "sha256": "06be490d28a5538dbe2e299d21bdb171662d23e69f0c8da3a3bfbca41165ab11"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-g5wp0t",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Valid. It follows. We've lost.",
+      "seconds": 3.744,
+      "sha256": "4f35fdf7d534bffdf981bc2e3dde426edf47e7a5af2f8564c0efe40267e2a885"
+    },
+    {
+      "id": "pip-um547o",
+      "speaker": "pip",
+      "expected": "I'm still recording. It would want the end on the record.",
+      "seconds": 3.456,
+      "sha256": "9ce853da9f866770e2d1eaba4fdd0a6c7fe23a08850fc9bf89442a78a91be256"
+    },
+    {
+      "id": "pip-w4x3h2",
+      "speaker": "pip",
+      "expected": "Struck from the record: \"fraud admits\". The whole quote: \"I tell the time. Mostly. On cloudy days I guess.\"",
+      "seconds": 7.776,
+      "sha256": "05df5b87e8f4d58189603d6ad217666da566f30bf3a6d74281b3ada13916f2c5"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-heuf8e",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Valid isn't sound. It followed, and it was still false. I knew that. Definitely.",
+      "seconds": 7.872,
+      "sha256": "d04f4ea525b342cfef8b485f4e3ad1d9977564ed18f4e57732de91ffd83c8911"
+    },
+    {
+      "id": "pip-dxfjb4",
+      "speaker": "pip",
+      "expected": "The defence plays Speedcheeta's stream. The whole thing. Uncut.",
+      "seconds": 3.912,
+      "sha256": "f585ccf5207c0deda98d73148e2a266bb0c34c055ef63c6b780d8812b11ab2d9"
+    },
+    {
+      "id": "pip-1umdn1w",
+      "speaker": "pip",
+      "expected": "Your Honour! My record. Every word it said in this city.",
+      "seconds": 4.392,
+      "sha256": "187e66b83f75adba2c61d02bf26c658301020083ff78f79fc1b1542523fa7e62"
+    },
+    {
+      "id": "avatar-fox-boy-inner-m6wpwa",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "He was the villain in my story. He wasn't. The vote was.",
+      "seconds": 3.576,
+      "sha256": "acf79d028ce175a5643c3f57840b447e1382909c8d9cc9fd4d168f40d8e7edbe"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-rtksoo",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "\"A case he wanted to win.\" He wanted this one. It went anyway.",
+      "seconds": 6.24,
+      "sha256": "2b8fd25615f67da3284f94ba95c6dcda8b098f40e94c03f0215d4779b8c5d673"
+    },
+    {
+      "id": "avatar-fox-boy-inner-bm02zd",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "He was the villain in my story. My story was wrong. Again.",
+      "seconds": 5.424,
+      "sha256": "31c0a140f49326170f07ae3666ab42545d31cbf45de3886cbd44aae013049110"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-17z7692",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "\"A case he wanted to win.\" Small print. Always read the small print.",
+      "seconds": 6.36,
+      "sha256": "d035eb34c22a5b939317de02f61fab8c8aceb3a25e574c6f1cd1e1785dc72026"
+    },
+    {
+      "id": "pip-zhkzgq",
+      "speaker": "pip",
+      "expected": "The Tower Road. Up, or back down to the city.",
+      "seconds": 3.744,
+      "sha256": "26dbe54e7bfc60e035450c2a5cfadb0807981a42f4b6edc357b436c8c9506692"
+    },
+    {
+      "id": "pip-35ek7i",
+      "speaker": "pip",
+      "expected": "The third piece of shadow. It's in your pocket. Still cold.",
+      "seconds": 4.176,
+      "sha256": "6ff0d133c54aebf4d029a6095b034f3bf754c13f2cc85389fa58809e52008799"
+    },
+    {
+      "id": "pip-19155i0",
+      "speaker": "pip",
+      "expected": "It let me record every word. Nobody ever gave me all their words before.",
+      "seconds": 5.088,
+      "sha256": "dcafb2c4edf0b6fab1ab1b0dd0b54960b4cf5ae2984a07797e6d2c04ddad64cd"
+    },
+    {
+      "id": "pip-7rtdo7",
+      "speaker": "pip",
+      "expected": "It wanted somewhere sunny. When we find the sun, its piece goes there.",
+      "seconds": 4.248,
+      "sha256": "bcfaf8d887ef1d3eefef0bb0460706ee6c08177a926adc5fc70c5532a04c2963"
+    },
+    {
+      "id": "pip-14g0svd",
+      "speaker": "pip",
+      "expected": "Come on. Up. I'll record the way. It liked being recorded.",
+      "seconds": 4.2,
+      "sha256": "292e918c3b1faea9d5f532c242f18a5fc5892c99b42a55b0278e9fd01c7ccc4d"
+    },
+    {
+      "id": "pip-g6ktdc",
+      "speaker": "pip",
+      "expected": "She's glowing, and she's blocking the bridge. Check what her claims really show.",
+      "seconds": 5.16,
+      "sha256": "c3a89b35c3d640e07a308d77551d5cd1ce5384238738440f870e201413010055"
+    },
+    {
+      "id": "pip-28wlun",
+      "speaker": "pip",
+      "expected": "The screens are still shouting. What does each claim actually show?",
+      "seconds": 4.464,
+      "sha256": "77be2a9c461cc130c106e257c0810650a6176e4b2626e9c7d83660bd9a5901f7"
+    },
+    {
+      "id": "pip-1jdo3bn",
+      "speaker": "pip",
+      "expected": "A practice trial! Today's headline is on the stand. Press it till it squeaks.",
+      "seconds": 5.328,
+      "sha256": "167ff9f47149be03feab3af0f5626649e9e6330d5f0362d09139fcc7e25af868"
+    },
+    {
+      "id": "pip-z4vxql",
+      "speaker": "pip",
+      "expected": "Another headline on the stand. Press the one that sounds too sure.",
+      "seconds": 5.016,
+      "sha256": "3981c266d742f005faa726c5682293813a25e1eda629eae31dd40df98a38c154"
+    },
+    {
+      "id": "pip-xvbv9f",
+      "speaker": "pip",
+      "expected": "Mr Fin loves proofs. Here's one in the dock. Check every step. One bad step sinks it.",
+      "seconds": 7.008,
+      "sha256": "f020e49079451340193c7f5da3792da20a53b55c0c817ba9cb44252c59d46c24"
+    },
+    {
+      "id": "pip-1cdl1ys",
+      "speaker": "pip",
+      "expected": "Another proof in the dock. Which step is pretending?",
+      "seconds": 3.816,
+      "sha256": "85aa7eb6271e758fbf6aa345f22eec2e20a7349a6b08ada9ff6d0b1290d7f7a2"
+    },
+    {
+      "id": "pip-mwc506",
+      "speaker": "pip",
+      "expected": "Someone tore the bylines off. The writers' names. Scared of being wrong in print, I think. Cross out what cannot be true.",
+      "seconds": 8.376,
+      "sha256": "9369c37365c81c4986f70f8e0681b367a0ee65c55987de48dfd0251d40eefedf"
+    },
+    {
+      "id": "pip-1tl0288",
+      "speaker": "pip",
+      "expected": "More stories without bylines. Cross out, then confirm.",
+      "seconds": 3.936,
+      "sha256": "b7a5e0f49977b6024bb4fb5e4696daa5fb1d6cbf2a9bcda6cc5e058c7c47260b"
+    },
+    {
+      "id": "pip-1uqc02b",
+      "speaker": "pip",
+      "expected": "Numbers for the prosecution. Let's see if they hold up. Fairly.",
+      "seconds": 4.368,
+      "sha256": "559cade2ae7f08f1ccfd8745d15015fcce7fd827e13f9f62e50755a164eb8858"
+    },
+    {
+      "id": "pip-qeglo3",
+      "speaker": "pip",
+      "expected": "More numbers. Ask what they were compared with.",
+      "seconds": 2.88,
+      "sha256": "9cd2d19d2d375c69fea96a4b87dc40f8e20217057c5244f22f75e7cec7b1b452"
+    },
+    {
+      "id": "pip-1p0wabn",
+      "speaker": "pip",
+      "expected": "These charts make the vote look huge. Fix them, so the numbers speak fairly.",
+      "seconds": 5.088,
+      "sha256": "5862b5457ec99076ba68c524c3578053d054337efc4b7f67681e998abd388a3a"
+    },
+    {
+      "id": "pip-17w5l0l",
+      "speaker": "pip",
+      "expected": "More gold frames. Check where each axis starts.",
+      "seconds": 3.264,
+      "sha256": "0319d153fd1ce8b811a6e0acbb0d5c95e76c9210010aaaa24cbfc748562692fc"
+    },
+    {
+      "id": "pip-ty6w3b",
+      "speaker": "pip",
+      "expected": "The star witness. Glowing. Cross-examine him till the glow drains.",
+      "seconds": 5.112,
+      "sha256": "aad19085f7f38d6cb751e671f9a1f084681d5df995dbc322a9686676f1a94383"
+    },
+    {
+      "id": "pip-af7at0",
+      "speaker": "pip",
+      "expected": "The witness is rehearsing again. Press the loud bits.",
+      "seconds": 4.272,
+      "sha256": "cac4eb9a4a7a2b81b3aa15288962bfe2be593422d0270aacfdce848976b3f220"
+    },
+    {
+      "id": "pip-1g6e5kc",
+      "speaker": "pip",
+      "expected": "Previously. I'm Pip. I record things. I recorded the Sundial. Every word.",
+      "seconds": 4.704,
+      "sha256": "fc396cf88a684b3f6a617dfe19ca1526bce9420e0e1c52276c26659d098bf9f0"
+    },
+    {
+      "id": "pip-jq6ju2",
+      "speaker": "pip",
+      "expected": "At the Fair, you said you'd win the Thinking Trophy. You always know, you said. Something heard.",
+      "seconds": 5.808,
+      "sha256": "c4a909ee5a9580752a395eaad0b330beb57bc754af150ac3c4a6bdaed3e016d0"
+    },
+    {
+      "id": "pip-osh03r",
+      "speaker": "pip",
+      "expected": "The trial was for guessing. The vote passed. It stopped in the middle of a word.",
+      "seconds": 6.48,
+      "sha256": "528f0e06b04c28ada5559a93759ef043dfb5c2f69e5d2bb8e77c7c12b8b967ec"
+    },
+    {
+      "id": "pip-1jxz3cn",
+      "speaker": "pip",
+      "expected": "And a little toy is in your pocket. The Guess-o-Matic. It says \"probably\".",
+      "seconds": 4.8,
+      "sha256": "be9ad21aa2fbe51118d480921afa3edee98d585eddcb5c748b36acf74d39639f"
+    },
+    {
+      "id": "pip-1bh8gik",
+      "speaker": "pip",
+      "expected": "Its last piece of shadow is at the top of that tower. So is the Algorithm.",
+      "seconds": 4.368,
+      "sha256": "d6d6959beac93584a5e585049c0bd7c4530a79bbe02c2f60b08a986f76f5230c"
+    },
+    {
+      "id": "pip-isn6sf",
+      "speaker": "pip",
+      "expected": "Pip. Clerk. Bat. I'm coming too. Clerks go where the record goes.",
+      "seconds": 4.464,
+      "sha256": "754e1389323bcf3829f9c26452599785a5df6e0e80157fb51c49a210e9aed7a8"
+    },
+    {
+      "id": "pip-vqkf77",
+      "speaker": "pip",
+      "expected": "Wait for me! Clerks go where the record goes.",
+      "seconds": 3,
+      "sha256": "898b1a001e4ac4ce7f7f2e4a543287eacca3cf0f0226199798b4bb6974f7064b"
+    },
+    {
+      "id": "pip-19p936q",
+      "speaker": "pip",
+      "expected": "Clerks go where the record goes. Up.",
+      "seconds": 2.352,
+      "sha256": "4db94e325668c1f08973b88ccb59363d71ae7461d2978a9e6ae5ab0517dd8c92"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1mjoaqz",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. The bar says \"2.0\". Two point oh. Of me.",
+      "seconds": 5.664,
+      "sha256": "8555c2ffb04a7800ebbe0dad4a1597d9b05bcb7a50efeec443929842c6bac5f3"
+    },
+    {
+      "id": "avatar-fox-boy-inner-109r7kc",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "It hates me. I can feel it. Very cinematic.",
+      "seconds": 4.104,
+      "sha256": "df2af404031864304cfb37a8ed139f9d250ae17a4bda86311f0f8ddc311c189e"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1fet5i2",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. Gold frames. So bright. These must be the honest ones.",
+      "seconds": 6.936,
+      "sha256": "33f153bc3ccea0306fc0aeab19ceac9762235aaa634c763a0f54cddbf3ca8103"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-vcenum",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Gold frame. Same trick. Shinier.",
+      "seconds": 3.912,
+      "sha256": "a6ad6f0b7d03e56c26fe85935f7cfd8459fa4a34c1d4731a684859d70dd84de4"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1n92x6p",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "It's been right five times. Five out of five. It knows me.",
+      "seconds": 4.632,
+      "sha256": "6ff1ce7c22c1bb02e341f8a55f58e35d36dc427c0ab726d5ab87311235c82482"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1fqqhui",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Five right. Then I changed. It didn't.",
+      "seconds": 2.832,
+      "sha256": "c606664f20250d100a34e08f0cd935484b3219a23540c2e96f12de01df5088cf"
+    },
+    {
+      "id": "avatar-fox-boy-inner-1ue378k",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture a machine that can't finish a question. Sad. Good film, though.",
+      "seconds": 5.52,
+      "sha256": "d55b9bfbc0e81f12be93fdd0123ee88baa8a45b98bb53c8d8d18b9eb9742e404"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-1hr3koh",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "The arithmetic is perfect. So the sorting is fair. QED.",
+      "seconds": 5.976,
+      "sha256": "2e09d2e1cdcaf6d25572c154fdbd6e27726a7d6d460b4dda263d48a7fa65cf2a"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-11a9akw",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Perfect sums. Unfair choices. Both true. It cost Pip.",
+      "seconds": 6.504,
+      "sha256": "3ce27eb65c612b21efe4613ec61eac73df93b0c3559725a65b1acd9423eaf8a3"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-gwe6s7",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Perfect sums. Unfair choices. Both true. Annoying.",
+      "seconds": 5.904,
+      "sha256": "23d19472c159db4ad2a6923ecda916f6eb427ba847bff59b2ce3eee5eeef0c85"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-s49yo7",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Pip checked one. I remember when he didn't.",
+      "seconds": 4.44,
+      "sha256": "b0a44886fb48f3fa150a1aca122591624de49c20876e0448a0b2077c564082fa"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-1uuvbc0",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "He was certain. Certain felt lovely to him. Noted. Uncomfortably.",
+      "seconds": 7.176,
+      "sha256": "fb75ca80314499135d506fcd92af101f801aa0c5cba15f12b08e81668513247a"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-1ed9ru9",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "He was certain. It cost him every claim he filed. Noted.",
+      "seconds": 4.728,
+      "sha256": "068a59be3b51b4d68a2efd80c9d8f28800b620011a2b3856f706dd57fc454abc"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-164015c",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "He'd have checked this one.",
+      "seconds": 3.216,
+      "sha256": "b8358635df90790a1a1f5c70291ac5b1bb996423c501a33b1b44e74dd15eeac5"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-rnjjs8",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "He was certain. Certain took him. I'm checking everything now.",
+      "seconds": 6.6,
+      "sha256": "1946d6c5d345677d41df54817928bb4ed026d7db3db12c0298790221ca26101b"
+    },
+    {
+      "id": "schoolteacher-1bge3zw",
+      "speaker": "schoolteacher",
+      "expected": "It promised me no more maybes. I still believe it. Someone has to.",
+      "seconds": 6.072,
+      "sha256": "d6062bd484979ba936520077849073453096994207e91f3198a64b0e6035424a"
+    },
+    {
+      "id": "schoolteacher-1vgrc0a",
+      "speaker": "schoolteacher",
+      "expected": "Every row checked, child. By me.",
+      "seconds": 2.904,
+      "sha256": "99080e270c5db62f059d7e354a3e27ea7d762e369215d012d44a41a738606568"
+    },
+    {
+      "id": "schoolteacher-yb1mx7",
+      "speaker": "schoolteacher",
+      "expected": "One last question, child. Will you win? Yes or no.",
+      "seconds": 5.232,
+      "sha256": "c21894635db78a778b587c5393982641517b96fa83c09bc1f2ee96da4addc564"
+    },
+    {
+      "id": "schoolteacher-8go5ug",
+      "speaker": "schoolteacher",
+      "expected": "Wrong. Again.",
+      "seconds": 1.488,
+      "sha256": "f38232bac98249c69c523724d83e1c49c808dd6a53df3e3bc0595c094571ac89"
+    },
+    {
+      "id": "avatar-owlet-boy-possessed-hrqxfi",
+      "speaker": "avatar-owlet-boy-possessed",
+      "expected": "Give up. Losing is likely. Likely means proven. That's logic.",
+      "seconds": 9.24,
+      "sha256": "d9371892e2fb9fd2dddeac3fd34c504e94e45a8c9a652b8cec6e1751d10e0831"
+    },
+    {
+      "id": "avatar-mothkin-girl-possessed-w3bwll",
+      "speaker": "avatar-mothkin-girl-possessed",
+      "expected": "Don't look at it. Looking is tiring. Just give up.",
+      "seconds": 7.272,
+      "sha256": "8c23f3a1117e932f4c5028bdb21d2cee74ceadb04317e0c08f8d2b05469057a5"
+    },
+    {
+      "id": "avatar-owlet-boy-possessed-165rbx7",
+      "speaker": "avatar-owlet-boy-possessed",
+      "expected": "It's always right. You aren't. So it should go home. QED.",
+      "seconds": 9.816,
+      "sha256": "72d09b85f0b4228784efcf4e8d5c7700dad601fb392eb0c2fa94906c050f8c77"
+    },
+    {
+      "id": "avatar-mothkin-girl-possessed-1bfgsrz",
+      "speaker": "avatar-mothkin-girl-possessed",
+      "expected": "Look at it. So bright. Brighter than you. Let it go.",
+      "seconds": 8.64,
+      "sha256": "05d08d6611e8187ab6a4c63e255130023373686c35caf5bc41e2093968ddc427"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-howkyq",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "You counted. You never checked. I'd have checked. Eventually.",
+      "seconds": 5.256,
+      "sha256": "3135a3a24d6bcde31afce0978ccdf80602b49b601c4668e1703554babd9f5a36"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-il6rw4",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. It's tiny. And it isn't even shining.",
+      "seconds": 5.232,
+      "sha256": "a74d11b5591a746c18132296d4d9ce1bde5ca8de39d40be1be54926569cc7ca6"
+    },
+    {
+      "id": "avatar-fox-boy-inner-1ibemmh",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "It didn't hate me. It counted. A calculator with stage fright.",
+      "seconds": 4.992,
+      "sha256": "411f5689c3ba890a6a6e598f84707d0279673cc569230008305ecdf76a29d494"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-wrettc",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "You counted a few things I did. Never why.",
+      "seconds": 5.544,
+      "sha256": "024ca6d4b43c3b265019fdb7123bd90b7529a3a5fff758e797165a75941302d5"
+    },
+    {
+      "id": "achilles-19kxam6",
+      "speaker": "achilles",
+      "expected": "Coach Achilles. Saw her lantern go out. Came as fast as I could. Which is fast.",
+      "seconds": 6.696,
+      "sha256": "0e3f625cb2979b4bb44184a19001ca33023ad53f99efe88f201020a56a55eb88"
+    },
+    {
+      "id": "achilles-8x1rj2",
+      "speaker": "achilles",
+      "expected": "Came to sit at her table. Somebody was already sitting there.",
+      "seconds": 4.296,
+      "sha256": "ad957948ccb60fa364b3f473f343fd0271622afbdc0b91a6630c5a6d7d86b44b"
+    },
+    {
+      "id": "achilles-j3873d",
+      "speaker": "achilles",
+      "expected": "Nobody's 100%. Not even me, and I'm fast.",
+      "seconds": 4.728,
+      "sha256": "702adc2daa3105630714d6e8f308a48296bb690ff3134de99c5e52513a28508b"
+    },
+    {
+      "id": "achilles-1covnoe",
+      "speaker": "achilles",
+      "expected": "You. The slow one. Good.",
+      "seconds": 2.64,
+      "sha256": "4e59b5494463dd9f217d6dcf6fea194c7ba8112d0cea001e78613f7a674a304d"
+    },
+    {
+      "id": "achilles-1y750ic",
+      "speaker": "achilles",
+      "expected": "Her magpie friend. All shine, she said. It's dark now.",
+      "seconds": 4.2,
+      "sha256": "615b71cb7efbdc851e5061c51a4846f6445a6d0f1e21c767aae3f86c20b15cbe"
+    },
+    {
+      "id": "achilles-i8mt00",
+      "speaker": "achilles",
+      "expected": "Her rock. Ninety years she said good morning to it.",
+      "seconds": 4.68,
+      "sha256": "c716131e7df1543642c3f9c890123fa136e469683f61b9172832180c26ba74c8"
+    },
+    {
+      "id": "achilles-1pzxa9k",
+      "speaker": "achilles",
+      "expected": "She'd have said she'd dust it later. I'll do it now.…Slowly.",
+      "seconds": 5.424,
+      "sha256": "ac65733bf9e14d04e44299fe231ea51ba1a9efd50f7b5df8f4b73c8b0e08abe8"
+    },
+    {
+      "id": "achilles-1m9anf6",
+      "speaker": "achilles",
+      "expected": "\"Always right.\" Is that you? Think fast.…No. Slow. She'd say slow.",
+      "seconds": 6.288,
+      "sha256": "5d4a54368f1f37a4546393dc6d0e043f76407a3f0b26219af068b337afc08eda"
+    },
+    {
+      "id": "achilles-ukcz1o",
+      "speaker": "achilles",
+      "expected": "Got a berry. Gave it to Volt. Felt good.",
+      "seconds": 3.384,
+      "sha256": "34943c0e238829047d6a014152f09ac349983af6449bf991c19363cecbe2d67f"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1dkkpic",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "A heron. At the Fair.…It's just looking at the cakes. Huh. Not every heron.",
+      "seconds": 7.824,
+      "sha256": "fc46f45b908e69188a2bdc529f9068155ce04e72df0c4bbdd9f329f8623a5f32"
+    },
+    {
+      "id": "mayor-1u6bnpb",
+      "speaker": "mayor",
+      "expected": "Oh.",
+      "seconds": 0.624,
+      "sha256": "6b6a17175e18acf0278c986dfbf9e5cc99d610a864f5429924e13ad3583e9a7b"
+    },
+    {
+      "id": "corvina-1d2p93c",
+      "speaker": "corvina",
+      "expected": "A crow, cleared in public. That would be a first. Go on.",
+      "seconds": 6.36,
+      "sha256": "d2de957f4a2d35fdfe3d5f965ef98696d6fd69d87a43b67512aab7289f43fcb5"
+    },
+    {
+      "id": "corvina-cohhad",
+      "speaker": "corvina",
+      "expected": "Full tables. Full pockets. Now you're speaking crow.",
+      "seconds": 5.232,
+      "sha256": "12a6ee8e7159b2212bea4ff61f4d9ee63cf0895cd9d7a08ad480faa77f524a34"
+    },
+    {
+      "id": "corvina-i6cc7v",
+      "speaker": "corvina",
+      "expected": "Don't you lecture me. Experts said crows steal shiny things.",
+      "seconds": 6.624,
+      "sha256": "c7b02cd1abb09a6f4830f8c44c3a6357ebe3a4711f653bdac83820f696db6412"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-5hvkz2",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Suppose each tin in turn. Count the true labels. One world fits. Mine.",
+      "seconds": 7.632,
+      "sha256": "bccef32825e15bac4405be64bea5076579807f6db4b6d7b88e81187b05129fba"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-shusp2",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Ooh, tin A gleams. Shiny means nothing.…The dent on C, though. Look.",
+      "seconds": 8.448,
+      "sha256": "f913f9103c565999f98ce00afdf437494407c7101b6ced6fa144980e919f0045"
+    },
+    {
+      "id": "avatar-fox-boy-inner-1jj7nmx",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "What if the label on the cake tin is the liar? Delicious.",
+      "seconds": 4.224,
+      "sha256": "a63e97cc18b29409d0eff13b712c55f9b23882b86aa8508c4e3741fdb7cfb155"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-16l7qjx",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "\"Bring a lad—\". Granny said that once. I remember. The rest is in the cake.",
+      "seconds": 7.896,
+      "sha256": "9f99441e22ecae3f0793572718716618440f1b94f85500fe8dac19e8ebc2efb7"
+    },
+    {
+      "id": "schoolteacher-xftsfd",
+      "speaker": "schoolteacher",
+      "expected": "Ten more minutes. For everyone.",
+      "seconds": 2.496,
+      "sha256": "880748c7fc2b31d1762b110758c49b2c026b9ad899787869ecc3639e9f99d310"
+    },
+    {
+      "id": "gumleaf-bbh2z9",
+      "speaker": "gumleaf",
+      "expected": "Ten more minutes. Sorry. Rules. Who writes these rules?",
+      "seconds": 5.832,
+      "sha256": "d4edbd9f9217385e9889d886b978cfea9d392509a3af3ac3d770a9fd8d8fa126"
+    },
+    {
+      "id": "schoolteacher-1iprfuf",
+      "speaker": "schoolteacher",
+      "expected": "Ten more. I can wait all night, child. I am very patient.",
+      "seconds": 4.752,
+      "sha256": "8301c66a53f2db3b27390a826ae5735a412f80b89378beaa64bf5681772dc366"
+    },
+    {
+      "id": "gumleaf-c4np5f",
+      "speaker": "gumleaf",
+      "expected": "Ten more minutes. Wow. I sound just like her.",
+      "seconds": 5.208,
+      "sha256": "06b2e1ce102ada80bd5480cf356be9469532c3e8163ca6fa5c1694ab956acf0b"
+    },
+    {
+      "id": "schoolteacher-1vm0ll4",
+      "speaker": "schoolteacher",
+      "expected": "It is neither one nor zero. Detention for all until someone confesses.",
+      "seconds": 5.4,
+      "sha256": "34aa572f9fc4b5a69877ddb962ebf786b0295fb587ec64bde4afb9b227e95017"
+    },
+    {
+      "id": "gumleaf-1xomcwx",
+      "speaker": "gumleaf",
+      "expected": "Miss Quill would have been furious. I think it's great. But the rules say find them.",
+      "seconds": 7.752,
+      "sha256": "e7256c3c1db79856dec9e048db8be43f3dd83c4d7f8049da03743db95fb095ac"
+    },
+    {
+      "id": "schoolteacher-8k0h7a",
+      "speaker": "schoolteacher",
+      "expected": "The writer will lie, child. The rest will tell the truth. I taught them well.",
+      "seconds": 5.568,
+      "sha256": "95448c638acd2790f3668da40cb1c26c4d6d6580fd8b1d129815a2d952348cd9"
+    },
+    {
+      "id": "gumleaf-s0wt3l",
+      "speaker": "gumleaf",
+      "expected": "Rules say the guilty one lies and the rest tell the truth. Very tidy. Not my rules.",
+      "seconds": 9.24,
+      "sha256": "572dc4470e61cae747a6ccd77d53b4e9c072b6c6daa15fd1b21a5bf44c02741a"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-12ko20j",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "If no row works, my suspect list is wrong. Not me. The list.",
+      "seconds": 5.616,
+      "sha256": "57e0a0dddfe117b8cb4df0735873e3a9f534422e0a92dbbd0537e00fb396ad2d"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1rasn4x",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. Chalk dust. On the grate. Not on a desk. Look.",
+      "seconds": 5.928,
+      "sha256": "c9ee2327055cc5230306258c11d1efae0a52f2158a766e01f0fa53a60900fc86"
+    },
+    {
+      "id": "avatar-fox-boy-inner-t34fsh",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "What if it's nobody in this room? Ooh.",
+      "seconds": 3.24,
+      "sha256": "ec2e124a14a4907a82397c1f72c5ebca697228ee25984ab723d531191bea535a"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1cp0006",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The Mayor said that sentence in the Square. Miss Quill snapped. I remember.",
+      "seconds": 7.944,
+      "sha256": "f67f05e066d3d5257d1b9b6fd103fe260a82fd0dee1a8f534acaf88270d96a99"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-ny62mv",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "That sentence broke Miss Quill at the Hall. I was there. I remember.",
+      "seconds": 6.336,
+      "sha256": "168d77260b7b537e3cdb2182f2d5fc460b4e507c58e7fb8ea7d192846d0b5619"
+    },
+    {
+      "id": "schoolteacher-lwn792",
+      "speaker": "schoolteacher",
+      "expected": "Nobody? Nobody does not hold chalk, child.",
+      "seconds": 3.84,
+      "sha256": "1c3c873114fb44b46af91b9726d3a162d11400dd2153a8974029f05c88900872"
+    },
+    {
+      "id": "gumleaf-1xj9fbs",
+      "speaker": "gumleaf",
+      "expected": "Nobody? Ooh. Spooky. I love it. Rules say somebody, though.",
+      "seconds": 6,
+      "sha256": "252e55b0b3a1d22046864f87a41e08de611eb24b1519487da02ab948184ba743"
+    },
+    {
+      "id": "schoolteacher-1nowdc7",
+      "speaker": "schoolteacher",
+      "expected": "I faced the class all lesson. Nobody stood up. I turned to the board, and there it was.",
+      "seconds": 6.96,
+      "sha256": "0bd3f4d9520d6af1680ca72b4bdc2f702b9a3377bbc70d30c996112f9ecb9a00"
+    },
+    {
+      "id": "gumleaf-1xo2pv2",
+      "speaker": "gumleaf",
+      "expected": "I was facing the class. Nobody moved. Honestly. Then I turned round: that.",
+      "seconds": 7.272,
+      "sha256": "459699a001ecd4765983879ad181c8f9e43d6960bc68431753ca8551799b5866"
+    },
+    {
+      "id": "schoolteacher-10a1ci2",
+      "speaker": "schoolteacher",
+      "expected": "Bless you, Astrophysicat.",
+      "seconds": 1.848,
+      "sha256": "c46fe044924d98b39d56ad1a2408a5e73d3482de00d283f42c9a09506eeae615"
+    },
+    {
+      "id": "gumleaf-c5uwsi",
+      "speaker": "gumleaf",
+      "expected": "Bless you. Who was that? Nobody? Spooky.",
+      "seconds": 4.68,
+      "sha256": "5fb5f48895f7dc6e3f006f26c6f2ee6506e968baf04e52623cdde4f8d5ec48f0"
+    },
+    {
+      "id": "schoolteacher-1tys4zl",
+      "speaker": "schoolteacher",
+      "expected": "Well, child? First, the quiet one. Then name the writer.",
+      "seconds": 6.072,
+      "sha256": "cde84c0fc292e66b6fe80baa935d829c81c9e452fd754e7d17417fa776ec9a27"
+    },
+    {
+      "id": "gumleaf-1643675",
+      "speaker": "gumleaf",
+      "expected": "So. Start with Beansprout. Then who wrote it. No pressure. Well, a little.",
+      "seconds": 7.992,
+      "sha256": "2a28d878b465f845bbb6facef98f602201857044c2447e01c8a03f548e4f222b"
+    },
+    {
+      "id": "schoolteacher-18auoq1",
+      "speaker": "schoolteacher",
+      "expected": "Nobody? Then who holds the chalk, child?",
+      "seconds": 3.792,
+      "sha256": "97533cf75314ef3da52e29b615073beda05f5f3fb625ee0e82b5795383de349e"
+    },
+    {
+      "id": "gumleaf-cy6ktw",
+      "speaker": "gumleaf",
+      "expected": "Nobody? Ooh. Then who's got the chalk?",
+      "seconds": 4.344,
+      "sha256": "fe5bd68c2731fe88b4849a734f977d07a4b4231420aa443d020de5f68572a924"
+    },
+    {
+      "id": "sweep-wal0vu",
+      "speaker": "sweep",
+      "expected": "I only wanted to see her snap again. Like in the Square.",
+      "seconds": 3.48,
+      "sha256": "718819fab07849f4fb8c067006d47256187c55f574ef333d591e8e9220478025"
+    },
+    {
+      "id": "sweep-14s8upn",
+      "speaker": "sweep",
+      "expected": "It's the sentence that beat her. I wanted it on her board.",
+      "seconds": 3.408,
+      "sha256": "0cdfcf9247cb55192fc70398c9d1bb567e0147f7daaf4db849da32a895dbe36f"
+    },
+    {
+      "id": "schoolteacher-3mb6ko",
+      "speaker": "schoolteacher",
+      "expected": "Not one of them. How… unexpected. Class dismissed.",
+      "seconds": 4.416,
+      "sha256": "e78a5749e3f67f5eefc762d2e00fd5f61d279d0ad83226bf3b866a22f99d9a9e"
+    },
+    {
+      "id": "gumleaf-e67vmo",
+      "speaker": "gumleaf",
+      "expected": "Smudge! Come down! Wrong board. Great sentence.",
+      "seconds": 5.784,
+      "sha256": "e2858910e145025538b6e837d6a4464b5feb9ecfa8edeec9fce87055689fe37c"
+    },
+    {
+      "id": "sweep-113dij3",
+      "speaker": "sweep",
+      "expected": "Really, sir? Nobody ever says \"great\" to a sweep.",
+      "seconds": 3.72,
+      "sha256": "2a613cf2414304d78cf1154e91797b874f8b3fcf66af99f9a3c71c439527278d"
+    },
+    {
+      "id": "schoolteacher-1p3gc3b",
+      "speaker": "schoolteacher",
+      "expected": "Silence is not a statement. I cannot grade it. Can you?",
+      "seconds": 6.984,
+      "sha256": "e1e61ba63e42f906f481cdeea5bf70e979e1cbdf3926e8ae375e192ec4d40f57"
+    },
+    {
+      "id": "gumleaf-m2ujsu",
+      "speaker": "gumleaf",
+      "expected": "Silence. Can't grade it. Can't fail it. Lovely.",
+      "seconds": 5.52,
+      "sha256": "6c754dab03b35440c7e54f618cfee66c4472001054c47277d2fc86da8415666c"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-rgzdis",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Fill every row. Don't stop at the first one that fits. I nearly did.",
+      "seconds": 6.048,
+      "sha256": "d7c69f96c9b929b4d48514ed8086950f3e147da707390776f67857f94397a4ab"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-7nvxt1",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. The diagram's scratched, but one wire still shines.",
+      "seconds": 5.832,
+      "sha256": "b145d4352f549b01df1242ba5349e8c7f486a935af5619415fd54f7e508502b8"
+    },
+    {
+      "id": "avatar-fox-boy-inner-jde8uc",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture it: we flip the wrong switch. Splash. Very cinematic. Let's not.",
+      "seconds": 5.712,
+      "sha256": "170b77ff0d61865ff8933f0337840b1ac6aa9ed212f60869db927e0b8c5b0630"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1yyb86k",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The Square, again. Everyone shouted there too. A check settled it. Remember?",
+      "seconds": 6.768,
+      "sha256": "71b7dedb12bbad37db1b6e437457ee6d987961b248f580c626940850814f28c7"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-199ck9y",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "\"March or be a coward.\" Two options? I count at least four.",
+      "seconds": 5.52,
+      "sha256": "de8e0d4c45502ec37ed13d256e8616a8fefcf0cb17e1e1d338c1fc8d2d673d99"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-kb5gbb",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.",
+      "seconds": 8.736,
+      "sha256": "25d3f023df776e45aab8ee7a58b0674a2ff92b317902cb4d34ac89bd2cc715a8"
+    },
+    {
+      "id": "avatar-fox-boy-inner-i06elm",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Tell him: picture the Fair without its Sergeant.",
+      "seconds": 3.024,
+      "sha256": "aa19aa76954c8166c02c8fc33ccce6d819a4fb01b1f1c360383aacc72f607922"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-5r1ers",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Last time eyes glowed here, the sky split. Syllo shouted it.",
+      "seconds": 5.328,
+      "sha256": "88a852ce387bfd69eb4e499c3fd7bbee4e129a0ff09e8171d87d8c2e122bec56"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-w0tqzv",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Spell it out: what the paper wrote, then what the headline claims. Compare.",
+      "seconds": 6.432,
+      "sha256": "c4b8b299f932d8c85c6c9f3cc60fe6b123f4668e33ebbc7b24ef9b29b8a6ac63"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-9nksom",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. The headline shines. Gold ink. Who in town writes in gold?",
+      "seconds": 7.104,
+      "sha256": "fbf10e76b96646be6ce123f5d7ddf669fb64f27f4a2671ff4c694f0827125918"
+    },
+    {
+      "id": "avatar-fox-boy-inner-2c9a72",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture him writing it. Tongue out. Concentrating.",
+      "seconds": 3,
+      "sha256": "038e03a77b34aa2042cef1c871816e83fac98e23dfb618b6669bc52b36b71797"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-m8hpxa",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The paper cut the Sundial's quote once. Check what they cut this time.",
+      "seconds": 4.656,
+      "sha256": "4b1fcdfe5f7fff4aba0d6e9d8b4aa7657206c50cdcb1df90a4e6d8d03578f2dd"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-53vtkp",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Ninety right? If ninety days were the same, a parrot scores ninety. Proud of that.",
+      "seconds": 6.576,
+      "sha256": "4f88f2e9b6aa287b08b44c705a88540ee6f29f85047d23b3aec9aedc11440337"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-nwrlkk",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. Behind the panel. Something shiny. Only one thing. Look.",
+      "seconds": 6.408,
+      "sha256": "2025e6ed418049e7def32a4a98ab1b8ebff5663db8ca34255b842116bd9704d6"
+    },
+    {
+      "id": "avatar-fox-boy-inner-3tvlnh",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture it: we ask it about a strange day. It panics. Sparks. Great scene.",
+      "seconds": 5.136,
+      "sha256": "4d6c5a716f7a46917eb1ca5b28afd9e906fc0fd188c26f8e0137a966392bcf72"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1ixz40t",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The day the sky cracked, my pond went still. What did the box say?",
+      "seconds": 6.24,
+      "sha256": "2b92b38d59bddad326becceae041bb195e9bc2db8fbf19f97a264f52f3d6cce9"
+    },
+    {
+      "id": "achilles-1ti90g6",
+      "speaker": "achilles",
+      "expected": "First? I don't need berries. Give mine to the limping one.",
+      "seconds": 5.112,
+      "sha256": "818c6ea000f04855de56e32591a7d8edbbc27e2490b9a9600e292087339d6f7c"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-gk6ntr",
+      "speaker": "avatar-owlet-boy-inner",
+      "expected": "Asking a lot isn't needing a lot. Different ruler. I checked. Well. I will.",
+      "seconds": 8.664,
+      "sha256": "6a1521e39b12b726c12d881d8324aff1666cec1a11e1cb5e0737fbf4e92d35d7"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-iz5pbw",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.",
+      "seconds": 5.448,
+      "sha256": "3f227decb2350a636a9cc191a714ba2235c54bfc828474068d9bb1d15b4f78a6"
+    },
+    {
+      "id": "avatar-fox-boy-inner-13u43wn",
+      "speaker": "avatar-fox-boy-inner",
+      "expected": "Picture being too proud to ask. Last place. Forever.",
+      "seconds": 4.704,
+      "sha256": "edfddd1149cfd32dccd6178d7f837f92f963c30b1c5ab21aa44e0304c7a0c7bc"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-nfdjnh",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "The Sorting Room did this. Same mistake, smaller.",
+      "seconds": 4.752,
+      "sha256": "5174d12fb65db8f159c9b5f646ab4f77d99ce9867e224b772f51286331483194"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1we33cf",
+      "speaker": "avatar-frogling-girl-inner",
+      "expected": "Our pond fed the loudest frog first. The quiet ones got thin.",
+      "seconds": 5.472,
+      "sha256": "5940c099837cb1fe987f3bbb744f4befd411b197bd921d4405d80854c46dff46"
+    },
+    {
+      "id": "achilles-f1k6ji",
+      "speaker": "achilles",
+      "expected": "She typed with one finger. Took her an hour.…I'd wait for her now.",
+      "seconds": 5.424,
+      "sha256": "835770cc99b2098f4617d30920076f95e8a5a4388eab8624e488584d1d88fde9"
+    },
+    {
+      "id": "achilles-652u0v",
+      "speaker": "achilles",
+      "expected": "Thanks. I'll give it to the limping one. He won't ask.",
+      "seconds": 3.504,
+      "sha256": "6200950ad33392476b4c8d3400bfd7e451253008dcb2105eb37a99f826095193"
+    },
+    {
+      "id": "mayor-uf3rni",
+      "speaker": "mayor",
+      "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "seconds": 6.984,
+      "sha256": "d34541b8ab417a592db37454f42b74dcd30868fdd23b001e1169dcc7530f8aa2"
+    },
+    {
+      "id": "mayor-l9nf08",
+      "speaker": "mayor",
+      "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "seconds": 10.68,
+      "sha256": "a96d473d11ec17f919cbc4e2b684e3f91785cae9e7dca8e55a77949135ba1147"
+    },
+    {
+      "id": "mayor-qkgo4c",
+      "speaker": "mayor",
+      "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "seconds": 9.912,
+      "sha256": "dcfe5aa4de25005cfd43e18d4456005556c96e9dd6dc2e707be658948dfed016"
+    },
+    {
+      "id": "mayor-k8pkxw",
+      "speaker": "mayor",
+      "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "seconds": 10.632,
+      "sha256": "d2de24e6e2df3123a92dd9e2dfdb065df96b4d6085995a0bec82c632d77ae646"
+    },
+    {
+      "id": "mayor-1fszosz",
+      "speaker": "mayor",
+      "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 18.936,
+      "sha256": "a2a54defcc81e185b99b5054798b8a45c5adc444d1be46a382394786f3cd8587"
+    },
+    {
+      "id": "constable-r1o3rn",
+      "speaker": "constable",
+      "expected": "Read your cover story and the posted facts. Your answers must fit them all.",
+      "seconds": 6.264,
+      "sha256": "38a81bcecb0b658c7fa87d3f82556a4e1d09927aa44ce868f823897c0b3c9b2d"
+    },
+    {
+      "id": "constable-ccgkri",
+      "speaker": "constable",
+      "expected": "Choose an answer to the current question. Both choices may look safe, but later facts can force one.",
+      "seconds": 7.296,
+      "sha256": "01f791084cf61fdca59dc86bd25e9df4d83abfb83650fcc266e977e23cc9e44a"
+    },
+    {
+      "id": "constable-1arv1yx",
+      "speaker": "constable",
+      "expected": "Cemented means already forced by your story. Loose means still open; it is not automatically wrong.",
+      "seconds": 8.568,
+      "sha256": "00de63dc8e71fcc345e0298d5e4fcf30041349de4c53cb03ca867c5984627b09"
+    },
+    {
+      "id": "constable-1gg6zxk",
+      "speaker": "constable",
+      "expected": "Example: all runners wear boots; your story says you are a runner. \"I wear no boots\" would contradict that story.",
+      "seconds": 9.144,
+      "sha256": "babadd00afa573bec28c8541213669f8b561de401edec810a24d68d7fbd7560f"
+    },
+    {
+      "id": "constable-eclhsg",
+      "speaker": "constable",
+      "expected": "Follow what the blocks force, rather than choose whatever sounds nice. Finish every question without a collapse. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 14.808,
+      "sha256": "e4c61b01ac20b9eb3ec3a683fea7eceb5cc8f8f801f4abc44a2425869caef75c"
+    },
+    {
+      "id": "gumleaf-1kwuq19",
+      "speaker": "gumleaf",
+      "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "seconds": 8.448,
+      "sha256": "632f39bd49ee706b16e977c08572b889bd92cc99bad61c48fffbc1ec0aed4cc1"
+    },
+    {
+      "id": "gumleaf-1j7e6n2",
+      "speaker": "gumleaf",
+      "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "seconds": 10.56,
+      "sha256": "1afbe1ebdf0450e696c70a5e2ef6d94ae9efbb19053466d0abbaf030aef95908"
+    },
+    {
+      "id": "gumleaf-p4tgb8",
+      "speaker": "gumleaf",
+      "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "seconds": 8.712,
+      "sha256": "dc07c5e2a2e5ab094803f2639f49556a362ba7049d7a603974f3f95fabbbab6b"
+    },
+    {
+      "id": "gumleaf-jg3h8d",
+      "speaker": "gumleaf",
+      "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "seconds": 11.784,
+      "sha256": "df87f02b3390aa013951e99cf6c35d6600b38ed290895c614577027a791e7611"
+    },
+    {
+      "id": "gumleaf-12mfwza",
+      "speaker": "gumleaf",
+      "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 19.728,
+      "sha256": "60dd46550e92c7880a4168e23af35afef2d3a33f5e676c46b9855cb02bc43c6b"
+    },
+    {
+      "id": "gumleaf-joxhms",
+      "speaker": "gumleaf",
+      "expected": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+      "seconds": 10.392,
+      "sha256": "a20b5c1fed76642636f89a0ec270a2bf3589aadc79f37bf215e4b8143850a071"
+    },
+    {
+      "id": "gumleaf-3o1fqn",
+      "speaker": "gumleaf",
+      "expected": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+      "seconds": 10.344,
+      "sha256": "a7cc5c707e1efdfb9fd0eba24b066469320eba07b007cc4e50530a943f914024"
+    },
+    {
+      "id": "gumleaf-rxwnz6",
+      "speaker": "gumleaf",
+      "expected": "Light mode: make the requested bulbs light with the fewest ON switches. Try a switch and watch its path through the gates.",
+      "seconds": 10.08,
+      "sha256": "076dfae339d6163cb577207a48a74f976bb03f89ba751f62088fd9cdb3807261"
+    },
+    {
+      "id": "gumleaf-gza4oo",
+      "speaker": "gumleaf",
+      "expected": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+      "seconds": 17.568,
+      "sha256": "be8cb02c45dcd2871482e861766573ed18d741eeb3f2fb96989d665d549ae64c"
+    },
+    {
+      "id": "gumleaf-58x0wn",
+      "speaker": "gumleaf",
+      "expected": "Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.",
+      "seconds": 12.192,
+      "sha256": "29e4f1aa22a2bc5381e13f19d24b8300d596913887dca8df013d9ebe1519d609"
+    },
+    {
+      "id": "gumleaf-dc3raf",
+      "speaker": "gumleaf",
+      "expected": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 24.84,
+      "sha256": "b3f400bb227fdcbe3a2883c7dec7b09d5441e5c4f5f6007466a19cd8a9bf0823"
+    },
+    {
+      "id": "constable-470zi9",
+      "speaker": "constable",
+      "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "seconds": 6.912,
+      "sha256": "4ff3a6631fc162cafc5517dd826d05024c201029d03ae2d9465f227e6ccce245"
+    },
+    {
+      "id": "constable-1g4dd3g",
+      "speaker": "constable",
+      "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "seconds": 12.768,
+      "sha256": "f807297dc1d6b1ce27febe20f83263b3250f07d2db74c4f346b40f3dd461ecae"
+    },
+    {
+      "id": "constable-8dz1mr",
+      "speaker": "constable",
+      "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "seconds": 9.168,
+      "sha256": "8c4e605edf4d1e50d07326306a683256c84288251ce506f0ddc6a6d7c2d38dd9"
+    },
+    {
+      "id": "constable-1qxpflh",
+      "speaker": "constable",
+      "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "seconds": 10.344,
+      "sha256": "fad3655fb0ef2170771791ab33fe723c1fb7d3982e4102f0594aa620c27a8b17"
+    },
+    {
+      "id": "constable-dtxagl",
+      "speaker": "constable",
+      "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 15.816,
+      "sha256": "47e3f765512d6a4bd8d8b234508e22d338b1ada1e2c6eac490d7f7493c32d2c0"
+    },
+    {
+      "id": "constable-9qqtql",
+      "speaker": "constable",
+      "expected": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+      "seconds": 6.48,
+      "sha256": "6daa216ba25781bf93c0728a3f4057c99c0215821b9adb9683b2119a3eee090d"
+    },
+    {
+      "id": "constable-1e3waz6",
+      "speaker": "constable",
+      "expected": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+      "seconds": 11.208,
+      "sha256": "1d9c12ec920e35d6f1b1618b3c1bf218783438012915c2f040e8d447f0448842"
+    },
+    {
+      "id": "constable-1tw3crs",
+      "speaker": "constable",
+      "expected": "Light mode: make the requested bulbs light with the fewest ON switches. Try a switch and watch its path through the gates.",
+      "seconds": 10.896,
+      "sha256": "a479e54180a7f4d216d9e2f826ea9f6edff11a38c3b8c2fb7516dbf6c46921eb"
+    },
+    {
+      "id": "constable-1kpd0tp",
+      "speaker": "constable",
+      "expected": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+      "seconds": 10.992,
+      "sha256": "45ccd19931bff905f0d9c048eb4559826761d1b9f94ab83062336b32dada2902"
+    },
+    {
+      "id": "constable-45f474",
+      "speaker": "constable",
+      "expected": "Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.",
+      "seconds": 13.608,
+      "sha256": "f796ee4b6fd8d5c64d0ffb6edd7047f8a5ab2ebfbda4061ec8bf9bd97210bc20"
+    },
+    {
+      "id": "constable-18ihy92",
+      "speaker": "constable",
+      "expected": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 21.624,
+      "sha256": "322a67abd2e8cae7f9c0627bef35ca63132c90891b137e612f1ad887d6c5bd19"
+    }
+  ],
+  "audit": [
+    {
+      "id": "avatar-mothkin-girl-inner-1jophes",
+      "expected": "Look. His eye twitched at \"missing\". Twitchers are guilty. Science.",
+      "heard": "Look, his eye twitched at missing. Twitchers are guilty. Science. Shh.",
+      "ok": false,
+      "version": 1,
+      "hash": "7366df2a56c5b44b5b54c7efc82a4932837be15cc087d3bf7fb78cc5f3667ced"
+    },
+    {
+      "id": "avatar-fox-boy-inner-s1bd89",
+      "expected": "Picture it. Midnight. The Mayor peels off his face. Perfect.",
+      "heard": "Picture it: Midnight, the mayor peels off his face. Perfect.",
+      "ok": true,
+      "version": 1,
+      "hash": "925bd1776b4d5b3a2bbf30ab353bb87dd8b4edaec3662709fd5f9032643b0618"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-11vznuw",
+      "expected": "The loud one is always the bad one. Muskrat. The guards. Now him.",
+      "heard": "The loud one is always the bad one. Muskrat, the guards, now him.",
+      "ok": true,
+      "version": 1,
+      "hash": "da230c5c53df20f882fd692e217afa3c5dd0a66d3a73d7e2752976f9d6835d7a"
+    },
+    {
+      "id": "sweep-1uvku9e",
+      "expected": "Not me! I'm honest! I'm honest!",
+      "heard": "Not me! I'm honest! I'm honest!",
+      "ok": true,
+      "version": 1,
+      "hash": "c3337c66e1739094348475d71133520e0bb1c7f291efb5d97c8f040df72a0cc1"
+    },
+    {
+      "id": "schoolteacher-1c6b83o",
+      "expected": "Plumage. Crumbs on your chain. Again. And stop that. It's neither.",
+      "heard": "plumage, crumbs on your chain. Again. And stop that. It's neither",
+      "ok": true,
+      "version": 1,
+      "hash": "c199037600a76fcef17c374eae2221289936298eaf580859cc9b3df64c9def86"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-lqlt16",
+      "expected": "Correct. Every sentence is true or false. First rule of everything.",
+      "heard": "Correct. Every sentence is true or false. First rule of everything.",
+      "ok": true,
+      "version": 1,
+      "hash": "6fb6ae203ec6adfcef656a84c7b9ced1be3c2bf6d3233bfbec632a5ff5817aeb"
+    },
+    {
+      "id": "constable-1o4enex",
+      "expected": "Stranger, eh? Name and business. Slowly. I write slowly.",
+      "heard": "Stranger, eh? Name and business. Slowly. I write slowly.",
+      "ok": true,
+      "version": 1,
+      "hash": "f096b2c382076d1d436eb9b1c58b23c28453f154d3dce77b01fe07dea6450a7d"
+    },
+    {
+      "id": "clockmaker-vvrrlg",
+      "expected": "Mind the pendulums! A hundred clocks, all correct. I check them twice.",
+      "heard": "Mind the pendulums. A hundred clocks, all correct. I checked them twice.",
+      "ok": false,
+      "version": 1,
+      "hash": "48cd1ec1481110d1403858b53e305d6a2fbc1e83163a87f6bc02ebd653868cf7"
+    },
+    {
+      "id": "mayor-1f78gb0",
+      "expected": "Here. The kitchen key. You didn't get it from me.",
+      "heard": "Here, the the kitchen key. You didn't get it from me.",
+      "ok": false,
+      "version": 1,
+      "hash": "fd81e4ea0b25009ad98721c01c09b18f654f73b59526518120a2f45c9c3f24d9"
+    },
+    {
+      "id": "gumleaf-7ll1ae",
+      "expected": "Mr Gumleaf. Supply teacher. Today's lesson, apparently: true or false. No maybes. In capitals.",
+      "heard": "Mr. Gumleaf. Supply teacher. Today's lesson, apparently, true or false?",
+      "ok": false,
+      "version": 1,
+      "hash": "42a770270e83a1894cfd6ac3cf164dc9512f7a257f31b6a61986496fed4c3a2e"
+    },
+    {
+      "id": "sweep-1v5p23t",
+      "expected": "I'm honest, sir!",
+      "heard": "I'm honest, sir.",
+      "ok": true,
+      "version": 1,
+      "hash": "533b0008466515f2763acd4e07fdbaf1e0126df63cae13cfd2d28c5fa4417727"
+    },
+    {
+      "id": "clockmaker-kijqhi",
+      "expected": "The hidden switch is still hidden. That's its whole job.",
+      "heard": "The hidden switch is still hidden. That's its whole job.",
+      "ok": true,
+      "version": 1,
+      "hash": "bbd681e4544346e3edd770b70f6f7d6570152fe9795b28d73d63fe8d9061cb08"
+    },
+    {
+      "id": "achilles-1a0ldnp",
+      "expected": "Coach here. Her charm went quiet somewhere near you.…I'm listening. Slowly, for once.",
+      "heard": "Coach here. Her charm went quiet somewhere near you. I'm listening. Slowly, for once.",
+      "ok": true,
+      "version": 1,
+      "hash": "d604a1afc18be95225788f31a98c9b843045750c1fe1cfe8a5e68802cebf0dfb"
+    },
+    {
+      "id": "corvina-1d2p93c",
+      "expected": "A crow, cleared in public. That would be a first. Go on.",
+      "heard": "A crow, cleared in public? That would be a first. Go on.",
+      "ok": true,
+      "version": 1,
+      "hash": "d2de957f4a2d35fdfe3d5f965ef98696d6fd69d87a43b67512aab7289f43fcb5"
+    },
+    {
+      "id": "corvina-cohhad",
+      "expected": "Full tables. Full pockets. Now you're speaking crow.",
+      "heard": "Full tables, full pockets. Now you're speaking crow.",
+      "ok": true,
+      "version": 1,
+      "hash": "12a6ee8e7159b2212bea4ff61f4d9ee63cf0895cd9d7a08ad480faa77f524a34"
+    },
+    {
+      "id": "corvina-i6cc7v",
+      "expected": "Don't you lecture me. Experts said crows steal shiny things.",
+      "heard": "Don't you lecture me, experts said crows steal shiny things.",
+      "ok": true,
+      "version": 1,
+      "hash": "c7b02cd1abb09a6f4830f8c44c3a6357ebe3a4711f653bdac83820f696db6412"
+    },
+    {
+      "id": "sweep-wal0vu",
+      "expected": "I only wanted to see her snap again. Like in the Square.",
+      "heard": "I only wanted to see her snap again, like in the square.",
+      "ok": true,
+      "version": 1,
+      "hash": "718819fab07849f4fb8c067006d47256187c55f574ef333d591e8e9220478025"
+    },
+    {
+      "id": "sweep-14s8upn",
+      "expected": "It's the sentence that beat her. I wanted it on her board.",
+      "heard": "It's the sentence that beat her. I wanted it on her board.",
+      "ok": true,
+      "version": 1,
+      "hash": "0cdfcf9247cb55192fc70398c9d1bb567e0147f7daaf4db849da32a895dbe36f"
+    },
+    {
+      "id": "sweep-113dij3",
+      "expected": "Really, sir? Nobody ever says \"great\" to a sweep.",
+      "heard": "Really sir, nobody ever says great to a sweep.",
+      "ok": true,
+      "version": 1,
+      "hash": "2a613cf2414304d78cf1154e91797b874f8b3fcf66af99f9a3c71c439527278d"
+    },
+    {
+      "id": "schoolteacher-1p3gc3b",
+      "expected": "Silence is not a statement. I cannot grade it. Can you?",
+      "heard": "Class, dismissed. Silence is not a statement. I cannot grade it. Can you",
+      "ok": false,
+      "version": 1,
+      "hash": "e1e61ba63e42f906f481cdeea5bf70e979e1cbdf3926e8ae375e192ec4d40f57"
+    },
+    {
+      "id": "avatar-owlet-boy-inner-gk6ntr",
+      "expected": "Asking a lot isn't needing a lot. Different ruler. I checked. Well. I will.",
+      "heard": "asking a lot isn't needing a lot. Different ruler. I checked. Well, I will.",
+      "ok": true,
+      "version": 1,
+      "hash": "6a1521e39b12b726c12d881d8324aff1666cec1a11e1cb5e0737fbf4e92d35d7"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-iz5pbw",
+      "expected": "Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.",
+      "heard": "Well, look who's limping. Then who's typing?",
+      "ok": false,
+      "version": 1,
+      "hash": "3f227decb2350a636a9cc191a714ba2235c54bfc828474068d9bb1d15b4f78a6"
+    },
+    {
+      "id": "avatar-fox-boy-inner-13u43wn",
+      "expected": "Picture being too proud to ask. Last place. Forever.",
+      "heard": "Picture being too proud to ask. Last place forever.",
+      "ok": true,
+      "version": 1,
+      "hash": "edfddd1149cfd32dccd6178d7f837f92f963c30b1c5ab21aa44e0304c7a0c7bc"
+    },
+    {
+      "id": "avatar-frogling-girl-inner-1we33cf",
+      "expected": "Our pond fed the loudest frog first. The quiet ones got thin.",
+      "heard": "Our pond fed the loudest frog first. The quiet ones got thin.",
+      "ok": true,
+      "version": 1,
+      "hash": "5940c099837cb1fe987f3bbb744f4befd411b197bd921d4405d80854c46dff46"
+    },
+    {
+      "id": "mayor-1fszosz",
+      "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "heard": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "ok": true,
+      "version": 1,
+      "hash": "a2a54defcc81e185b99b5054798b8a45c5adc444d1be46a382394786f3cd8587"
+    },
+    {
+      "id": "gumleaf-dc3raf",
+      "expected": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "heard": "Use, \"These are enough\" for light mode, \"Check my wiring\" for wire mode, or \"Lift the curtain\" for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "ok": true,
+      "version": 1,
+      "hash": "b3f400bb227fdcbe3a2883c7dec7b09d5441e5c4f5f6007466a19cd8a9bf0823"
+    },
+    {
+      "id": "constable-18ihy92",
+      "expected": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "heard": "Your guess must fit every report. Use, \"These are enough\" for light mode, \"Check my wiring\" for wire mode, or \"Lift the curtain\" for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "ok": false,
+      "version": 1,
+      "hash": "322a67abd2e8cae7f9c0627bef35ca63132c90891b137e612f1ad887d6c5bd19"
+    }
+  ],
+  "auditError": "fetch failed",
+  "limits": "All new clips decode. Bounded independent cloud transcripts sample adjacent clips; unreviewed cuts and acting are provisional.",
+  "quarantine": [
+    {
+      "id": "avatar-mothkin-girl-inner-1jophes",
+      "reason": "Transcript discrepancy: Look, his eye twitched at missing. Twitchers are guilty. Science. Shh.",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\avatar-mothkin-girl-inner-1jophes.mp3"
+    },
+    {
+      "id": "clockmaker-vvrrlg",
+      "reason": "Transcript discrepancy: Mind the pendulums. A hundred clocks, all correct. I checked them twice.",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\clockmaker-vvrrlg.mp3"
+    },
+    {
+      "id": "mayor-1f78gb0",
+      "reason": "Transcript discrepancy: Here, the the kitchen key. You didn't get it from me.",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\mayor-1f78gb0.mp3"
+    },
+    {
+      "id": "gumleaf-7ll1ae",
+      "reason": "Transcript discrepancy: Mr. Gumleaf. Supply teacher. Today's lesson, apparently, true or false?",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\gumleaf-7ll1ae.mp3"
+    },
+    {
+      "id": "gumleaf-a7gp7n",
+      "reason": "Neighbour retained for boundary repair with gumleaf-7ll1ae",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\gumleaf-a7gp7n.mp3"
+    },
+    {
+      "id": "schoolteacher-1p3gc3b",
+      "reason": "Transcript discrepancy: Class, dismissed. Silence is not a statement. I cannot grade it. Can you",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\schoolteacher-1p3gc3b.mp3"
+    },
+    {
+      "id": "schoolteacher-3mb6ko",
+      "reason": "Neighbour retained for boundary repair with schoolteacher-1p3gc3b",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\schoolteacher-3mb6ko.mp3"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-iz5pbw",
+      "reason": "Transcript discrepancy: Well, look who's limping. Then who's typing?",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\avatar-mothkin-girl-inner-iz5pbw.mp3"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-nwrlkk",
+      "reason": "Neighbour retained for boundary repair with avatar-mothkin-girl-inner-iz5pbw",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\avatar-mothkin-girl-inner-nwrlkk.mp3"
+    },
+    {
+      "id": "constable-18ihy92",
+      "reason": "Transcript discrepancy: Your guess must fit every report. Use, \"These are enough\" for light mode, \"Check my wiring\" for wire mode, or \"Lift the curtain\" for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\constable-18ihy92.mp3"
+    },
+    {
+      "id": "constable-45f474",
+      "reason": "Neighbour retained for boundary repair with constable-18ihy92",
+      "backup": "C:\\Users\\BlackBox\\AppData\\Local\\Temp\\rift-voice-validation-2026-10-13\\quarantine\\constable-45f474.mp3"
+    }
+  ],
+  "boundaryFollowup": {
+    "results": [],
+    "error": "Audio audit IDs do not match"
+  },
+  "started": "2026-10-13T07:20:34.844Z",
+  "finished": "2026-10-13T07:38:40.763Z",
+  "baseline": {
+    "files": 1898,
+    "recorded": 1529,
+    "total": 2579
+  },
+  "missing": 768,
+  "repairs": [
+    "corvina-1d2p93c",
+    "corvina-cohhad",
+    "corvina-i6cc7v"
+  ],
+  "followup": {
+    "initialFindings": [
+      {
+        "id": "sweep-14s8upn",
+        "expected": "It's the sentence that beat her. I wanted it on her board.",
+        "heard": "It's the sentence that beat her. I wanted it on our board.",
+        "ok": false
+      }
+    ],
+    "transcripts": [
+      {
+        "id": "sweep-wal0vu",
+        "expected": "I only wanted to see her snap again. Like in the Square.",
+        "heard": "I only wanted to see her snap again, like in the square.",
+        "ok": true
+      },
+      {
+        "id": "sweep-14s8upn",
+        "expected": "It's the sentence that beat her. I wanted it on her board.",
+        "heard": "It's the sentence that beat her. I wanted it on her board.",
+        "ok": true
+      },
+      {
+        "id": "sweep-113dij3",
+        "expected": "Really, sir? Nobody ever says \"great\" to a sweep.",
+        "heard": "Really sir, nobody ever says great to a sweep.",
+        "ok": true
+      }
+    ],
+    "disposition": "Retained Sweep clip: second independent transcription matches the wording and both neighbours. Initial her/our difference may be a transcription error.",
+    "localTranscription": "Cached local Whisper dependency was unavailable; no local transcription was obtained."
+  },
+  "tests": {
+    "passing": 822,
+    "skipped": 1,
+    "failed": 0,
+    "focusedVoiceChecks": 9
+  },
+  "originalAudioPreserved": true,
+  "publication": {
+    "newClips": 282,
+    "manifestFiles": 2180,
+    "recorded": 1811,
+    "total": 2579,
+    "missing": 768
+  }
+}
