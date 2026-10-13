@@ -319,5 +319,36 @@
     "id": 5828430351,
     "blockedBy": [],
     "nativeDependenciesAdded": false
+  },
+  "rick_distinctness": {
+    "number": 147,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/147",
+    "title": "Rift of Reason: Differentiate Rick Ash-tley from Zuckerborg return",
+    "id": 5828548685,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
+  },
+  "conditional_backend": {
+    "number": 148,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/148",
+    "title": "Rift of Reason: Plan future conditional-card event backend",
+    "id": 5829049190,
+    "blockedBy": [
+      109,
+      123
+    ],
+    "nativeDependenciesAdded": true
+  },
+  "conditional_content": {
+    "number": 149,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/149",
+    "title": "Rift of Reason: Draft future 23-card conditional expansion",
+    "id": 5829054549,
+    "blockedBy": [
+      148,
+      109,
+      123
+    ],
+    "nativeDependenciesAdded": true
   }
 }

@@ -6,6 +6,46 @@
   "date": "2026-10-13",
   "records": [
     {
+      "id": "creature/reason-premise-pigeon/idle",
+      "name": "Tom Skink",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "common",
+      "pose": "Front-facing low crouch, guide extended in one forefoot; head turns toward a doorway implied outside the image.",
+      "contract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-premise-pigeon-145.png",
+      "group": 2
+    },
+    {
+      "id": "creature/reason-axiom-ant/idle",
+      "name": "Bill Ny-ant",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "common",
+      "pose": "Left-facing brisk sidestep, one foreleg taps the bow tie while the face turns back to the viewer.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-axiom-ant-145.png",
+      "group": 2
+    },
+    {
       "id": "creature/reason-parity-panda/idle",
       "name": "Hannah Frycoon",
       "kind": "portrait",
@@ -45,6 +85,46 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-logic-lynx-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/emotion-pulse-pup/idle",
+      "name": "Dua Leapfrog",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "common",
+      "pose": "A small diagonal leap toward the viewer, knees opened asymmetrically, face calmly confident.",
+      "contract": {
+        "cost": 1,
+        "attack": 2,
+        "health": 1,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-pulse-pup-145.png",
+      "group": 2
+    },
+    {
+      "id": "creature/emotion-resolve-ram/idle",
+      "name": "Greta Thunbug",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "pose": "Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer.",
+      "contract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. If your hero has 4 hearts or less, this has 1 more attack.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-resolve-ram-145.png",
+      "group": 2
     },
     {
       "id": "creature/emotion-outrage-ox/idle",
@@ -107,6 +187,26 @@
       "group": 1
     },
     {
+      "id": "creature/perception-shadow-shrimp/idle",
+      "name": "David Brine",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "common",
+      "pose": "Left-facing curled half-bow, card exposed by one forelimb; tail fan folds underneath.",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Elusive.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-shadow-shrimp-145.png",
+      "group": 2
+    },
+    {
       "id": "creature/perception-prism-puffin/idle",
       "name": "Zach Wing",
       "kind": "portrait",
@@ -127,6 +227,46 @@
       "group": 1
     },
     {
+      "id": "creature/perception-observer-octopus/idle",
+      "name": "Adam Savash",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "rare",
+      "pose": "Front-facing compact coil, two arms lift the lens and one arm gestures outward while remaining arms form a low base.",
+      "contract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Once per turn, after you inspect deck cards without drawing them, another friendly creature gains Shield.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-observer-octopus-145.png",
+      "group": 2
+    },
+    {
+      "id": "creature/language-comma-caterpillar/idle",
+      "name": "Emma Wordson",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "common",
+      "pose": "Low front-facing curl behind the shield, one foreleg peeks around its rim; keep warm animal eyes visible.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-comma-caterpillar-145.png",
+      "group": 2
+    },
+    {
       "id": "creature/language-clause-crane/idle",
       "name": "Olivia Rodentgo",
       "kind": "portrait",
@@ -145,6 +285,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-clause-crane-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/language-contract-coyote/idle",
+      "name": "Jenna Otterga",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "rare",
+      "pose": "Seated left-facing with tail wrapped forward, baton held flat across the lap and an unimpressed sideways look.",
+      "contract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-contract-coyote-145.png",
+      "group": 2
     },
     {
       "id": "creature/imagination-possibility-pika/idle",
@@ -188,6 +348,47 @@
       "group": 1
     },
     {
+      "id": "creature/imagination-cloud-castle-crab/idle",
+      "name": "Ariana Crande",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "rare",
+      "pose": "Front-facing low wide stance, one claw raises the fan while the other rests across a shoulder plate.",
+      "contract": {
+        "cost": 5,
+        "attack": 2,
+        "health": 6,
+        "text": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-cloud-castle-crab-145.png",
+      "group": 2
+    },
+    {
+      "id": "creature/imagination-impossible-unicorn/idle",
+      "name": "Ramanujicorn",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "legendary",
+      "pose": "Front-facing braced kneel, staff diagonal across the forelegs, horn and both crystal ends fully visible.",
+      "contract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 6,
+        "text": "Entrance: choose two other friendly creatures; swap their attack values permanently, then give each 1 maximum health and heal 1.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-impossible-unicorn-145.png",
+      "group": 2
+    },
+    {
       "id": "creature/memory-bookmark-bunny/idle",
       "name": "Hank Greenhare",
       "kind": "portrait",
@@ -228,6 +429,48 @@
       "group": 1
     },
     {
+      "id": "creature/memory-chronicle-cat/idle",
+      "name": "Stan Leemur",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "pose": "Front-facing playful peek above the comic page; tail curves into one visible arc, feet remain clear.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Once per turn, after you recover a card from discard, heal your hero by 1.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-chronicle-cat-145.png",
+      "group": 2
+    },
+    {
+      "id": "creature/memory-keeper-koi/idle",
+      "name": "David Tennantacle",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "mythic",
+      "pose": "Left-facing hovering S-curve, watch held toward the viewer and remaining arms swept compactly backward.",
+      "contract": {
+        "cost": 6,
+        "attack": 3,
+        "health": 7,
+        "text": "Once per round, when a marked repeatable player event resolves, heal all your creatures by 1.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-keeper-koi-145.png",
+      "group": 2
+    },
+    {
       "id": "art/spell-motif-reason",
       "name": "reason spell motif",
       "kind": "motif",
@@ -237,6 +480,30 @@
       "contract": null,
       "coverage": "Routine reason spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-reason-145.png",
+      "group": null
+    },
+    {
+      "id": "art/spell-motif-emotion",
+      "name": "emotion spell motif",
+      "kind": "motif",
+      "colour": "emotion",
+      "rarity": null,
+      "pose": "Magical object / scene",
+      "contract": null,
+      "coverage": "Routine emotion spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-emotion-145.png",
+      "group": null
+    },
+    {
+      "id": "art/spell-motif-perception",
+      "name": "perception spell motif",
+      "kind": "motif",
+      "colour": "perception",
+      "rarity": null,
+      "pose": "Magical object / scene",
+      "contract": null,
+      "coverage": "Routine perception spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-perception-145.png",
       "group": null
     },
     {
@@ -261,6 +528,42 @@
       "contract": null,
       "coverage": "Routine imagination spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-imagination-145.png",
+      "group": null
+    },
+    {
+      "id": "art/spell-motif-memory",
+      "name": "memory spell motif",
+      "kind": "motif",
+      "colour": "memory",
+      "rarity": null,
+      "pose": "Magical object / scene",
+      "contract": null,
+      "coverage": "Routine memory spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-memory-145.png",
+      "group": null
+    },
+    {
+      "id": "art/spell-motif-generic",
+      "name": "generic spell motif",
+      "kind": "motif",
+      "colour": "generic",
+      "rarity": null,
+      "pose": "Magical object / scene",
+      "contract": null,
+      "coverage": "Routine generic spells; individual proposed mappings follow motif selection. Axiom art is a separate shared rule motif; no runtime mapping yet.",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-spell-motif-generic-145.png",
+      "group": null
+    },
+    {
+      "id": "art/axiom-rule-motif",
+      "name": "Shared Axiom motif",
+      "kind": "motif",
+      "colour": "generic",
+      "rarity": null,
+      "pose": "Magical object / scene",
+      "contract": null,
+      "coverage": "Shared Axiom/rule illustration, with native colour treatment where appropriate; no runtime mapping yet.",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-axiom-rule-motif-145.png",
       "group": null
     }
   ]

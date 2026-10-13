@@ -1,0 +1,14 @@
+{
+  "species": "memory-keeper-koi",
+  "id": "creature/memory-keeper-koi/idle",
+  "source": "production-memory-keeper-koi-145.png",
+  "persona": "David Tennantacle",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: David Tennantacle, an original NONHUMAN creature inspired by David Tennant public persona. Exact body/clothing/one prop: Small cuttlefish with pointed head fins, delighted animal eyes and a silver scarf over a compact bronze mantle collar. One blank pocket-watch reliquary is held by two close arms; no blue box. Pose/composition: Left-facing hovering S-curve, watch held toward the viewer and remaining arms swept compactly backward. Role/accessory: 3/7 is sturdy support: a small bronze-and-silver mantle collar suits the bulk. Watch and armour add no automatic healing, Shield or Fate ability. Use jewel accent #C9C9D6 on dark worn materials. Expression: playful half-smile. View: slightly elevated camera angle. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas. No book/sketchpad/pencil unless the single explicitly specified comic page is the persona prop. Gear is visual storytelling only, no text/ability icons.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-96da6b07-2004-4b25-92a2-75df70f23560.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

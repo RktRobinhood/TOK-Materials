@@ -1,0 +1,2165 @@
+{
+  "issue": 145,
+  "status": "Proposed shared art assignments only; no runtime definitions or grants",
+  "method": "Routine spells use affinity motifs; Axioms use shared rulebook. Standout-specific artwork may replace a mapping in later releases.",
+  "rows": [
+    {
+      "cardId": "reason-check-the-premise",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-small-lemma",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-work-it-out",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-exact-answer",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-provisional-proof",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-divide-the-case",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-wait-for-evidence",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-narrow-conclusion",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-proof-by-cases",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-finish-the-argument",
+      "kind": "spell",
+      "affinity": "reason",
+      "artId": "art/spell-motif-reason",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-quick-courage",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-honest-hurt",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-share-the-feeling",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-cool-down",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-careful-cheer",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-cost-of-courage",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-tomorrow-s-rally",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-shared-pain",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-outburst",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-second-heartbeat",
+      "kind": "spell",
+      "affinity": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-notice-the-crack",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-read-the-room",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-expose-the-shield",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-practical-observation",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-focused-hit",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-change-the-angle",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-mark-the-moment",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-follow-the-clue",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-strip-the-illusion",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-public-forecast",
+      "kind": "spell",
+      "affinity": "perception",
+      "artId": "art/spell-motif-perception",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-a-better-label",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-plain-words",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-hold-the-floor",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-ask-again",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-change-the-subject",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-careful-wording",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-tomorrow-s-address",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-read-the-fine-print",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-borrowed-voice",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-rewrite-one-clause",
+      "kind": "spell",
+      "affinity": "language",
+      "artId": "art/spell-motif-language",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-sketch-a-friend",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-try-another-shape",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-bright-possibility",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-paper-shield",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-unexpected-door",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-new-perspective",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-tomorrow-s-sketch",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-borrow-the-shape",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-dream-in-layers",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-impossible-position",
+      "kind": "spell",
+      "affinity": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-keep-the-note",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-familiar-path",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-remember-the-guard",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-a-little-later",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-clear-reminder",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-return-to-the-plan",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-marked-revisit",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-tomorrow-s-return",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-stored-resolve",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-one-more-chance",
+      "kind": "spell",
+      "affinity": "memory",
+      "artId": "art/spell-motif-memory",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-stable-premises",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-one-clear-case",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-measured-dispute",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        127
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-burden-of-proof",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-complete-argument",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "gate",
+        "theme": "Ch1 completed Gate challenge",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "reason-long-view",
+      "kind": "axiom",
+      "affinity": "reason",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-shared-nerves",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-brave-arrivals",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-small-comforts",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-price-of-passion",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-shared-vulnerability",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "troll-bridge",
+        "theme": "Ch1 completed confrontation, either supported outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "emotion-rising-tension",
+      "kind": "axiom",
+      "affinity": "emotion",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-open-evidence",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-visible-weakness",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        127
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-careful-aim",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-shared-horizon",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-observed-pattern",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 completed evidence-based verdict",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "perception-clear-timetable",
+      "kind": "axiom",
+      "affinity": "perception",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-names-matter",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-one-speaker",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-clear-definitions",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-open-debate",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-consensus",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "t-tribunal",
+        "theme": "Ch3 completed verdict, either supported outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "language-binding-words",
+      "kind": "axiom",
+      "affinity": "language",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-room-for-ideas",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-different-shapes",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        127
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-light-materials",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        "token-order"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-mixed-colours",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-living-possibilities",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed homecoming, either supported story outcome",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "imagination-changed-horizons",
+      "kind": "axiom",
+      "affinity": "imagination",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-small-reminders",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-keep-the-order",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-patient-recovery",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-written-history",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        120
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-recovered-story",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed homecoming and the recovered account",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "memory-no-forgotten-debts",
+      "kind": "axiom",
+      "affinity": "memory",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        117
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-clean-cut",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-small-patch",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-quick-study",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-simple-cover",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-pocket-plan",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-spare-spark",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-settle-down",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-fair-trade",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-follow-through",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-warm-blanket",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-pause-one-beat",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-take-stock",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-balanced-exchange",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-forked-reply",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-repair-the-shield",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-quiet-reset",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-town-hall",
+        "theme": "Ch2 resolved the Town Hall claims",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-scheduled-shelter",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-recorded-choice",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-board-sweep",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-one-last-draw",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-cancel-the-appointment",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-steal-a-beat",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-common-ground",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-the-last-page",
+      "kind": "spell",
+      "affinity": "generic",
+      "artId": "art/spell-motif-generic",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed final story, not only a repeatable battle win",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-careful-hands",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-small-armies",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-fair-rest",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "gate",
+        "theme": "Ch1 completed Gate and recovery beat",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-unhurried-arrival",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-one-tool-at-a-time",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-gentle-growth",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        127
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-public-rules",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-gate",
+        "theme": "Completed Fair Gate introduction, not merely opening its screen",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-modest-claims",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-shared-supplies",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-give-and-take",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-conservative-plans",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "b-clock-tower",
+        "theme": "Ch2 understood the timeline",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        118,
+        119
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-no-shortcuts",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-open-slots",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-prepared-response",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-fragile-shields",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-balanced-accounts",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        117
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-one-fair-fight",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "gates": [
+        109,
+        127
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    },
+    {
+      "cardId": "generic-the-common-good",
+      "kind": "axiom",
+      "affinity": "generic",
+      "artId": "art/axiom-rule-motif",
+      "acquisition": {
+        "channel": "story-only",
+        "packEligible": false,
+        "proposedMilestoneNode": "fair-finale",
+        "theme": "Completed shared homecoming",
+        "assignmentStatus": "draft; verify exact plot completion flag"
+      },
+      "gates": [
+        109,
+        "victory-policy"
+      ],
+      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+    }
+  ]
+}

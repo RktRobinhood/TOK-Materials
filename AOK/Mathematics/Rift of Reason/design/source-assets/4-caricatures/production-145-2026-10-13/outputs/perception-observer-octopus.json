@@ -1,0 +1,14 @@
+{
+  "species": "perception-observer-octopus",
+  "id": "creature/perception-observer-octopus/idle",
+  "source": "production-perception-observer-octopus-145.png",
+  "persona": "Adam Savash",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Adam Savash, an original NONHUMAN creature inspired by Adam Savage public persona. Exact body/clothing/one prop: Warm-eyed octopus with ginger crown tufts, round goggles and dark-green apron; one sturdy magnifying lens. Arms stay close enough for 70px reading. Pose/composition: Front-facing compact coil, two arms lift the lens and one arm gestures outward while remaining arms form a low base. Harmless visual joke: A small prop inspection somehow becomes an entire afternoon's satisfying build. Use jewel accent #2FBF71 on dark worn materials. Expression: playful half-smile. View: level camera with head tilted toward viewer. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-33d6ec01-b7b2-4919-a5f8-9875af1108a8.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

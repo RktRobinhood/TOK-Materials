@@ -1,0 +1,14 @@
+{
+  "species": "imagination-impossible-unicorn",
+  "id": "creature/imagination-impossible-unicorn/idle",
+  "source": "production-imagination-impossible-unicorn-145.png",
+  "persona": "Ramanujicorn",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Ramanujicorn, an original NONHUMAN creature inspired by Srinivasa Ramanujan public persona. Exact body/clothing/one prop: Small scholarly unicorn with dark mane, thoughtful animal eyes and violet coat over modest dark shoulder armour. One brass staff with two unequal violet crystal ends is the sole bold prop. Pose/composition: Front-facing braced kneel, staff diagonal across the forelegs, horn and both crystal ends fully visible. Role/accessory: 4/6 supports a substantial magical staff and modest dark shoulder armour. The paired orbs echo the frozen attack-swap concept without adding a new power. Use jewel accent #A05CF0 on dark worn materials. Expression: dry amused raised eyebrow. View: slightly elevated camera angle. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas. No book/sketchpad/pencil unless the single explicitly specified comic page is the persona prop. Gear is visual storytelling only, no text/ability icons.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/paper-dragon-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-cb6032c3-f7c4-430a-8cea-b9689eae7726.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

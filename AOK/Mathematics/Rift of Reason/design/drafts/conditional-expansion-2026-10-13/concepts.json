@@ -1,0 +1,631 @@
+{
+  "status": "Future proposal only; separate from the existing 210",
+  "count": 23,
+  "allocation": {
+    "reason": 3,
+    "emotion": 3,
+    "perception": 3,
+    "language": 3,
+    "imagination": 3,
+    "memory": 3,
+    "generic": 5
+  },
+  "cards": [
+    {
+      "id": "conditional-reason-premise-pending",
+      "name": "Premise Pending",
+      "colour": "reason",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "The triggering creature loses 1 attack until its controller’s next turn ends, minimum 0.",
+      "role": "Small precise ambush; preparing an equal-attack exchange.",
+      "counterplay": "Play a low-value body first; an irrelevant/no-longer-present target still consumes the condition.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-reason-spare-premise",
+      "name": "Spare Premise",
+      "colour": "reason",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "axiom-replaced"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Your most damaged surviving creature gains 1 maximum health and heals 1. Ties use oldest board arrival.",
+      "role": "Rule-change support for a durable board.",
+      "counterplay": "Remove its useful recipient before the rule change; no creature means no effect.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-reason-exhibit-aha",
+      "name": "Exhibit Aha",
+      "colour": "reason",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played",
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Inspect your top 2 personal-deck cards; keep their order or swap them. Draw nothing.",
+      "role": "Commit to one anticipated action; private preparation rather than a free draw.",
+      "counterplay": "Force the unhelpful timing; deck mutation/draw limits still apply.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-emotion-tiny-drama",
+      "name": "Tiny Drama",
+      "colour": "emotion",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "creature-defeated"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Your hero loses 1 heart. If the match is still active, draw 1 personal-deck card.",
+      "role": "A loss becomes risky fuel for Emotion payoffs.",
+      "counterplay": "Pressure low hearts; terminal Win rules stop the later draw.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-emotion-standing-ovation",
+      "name": "Standing Ovation",
+      "colour": "emotion",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Your surviving creatures gain 1 attack until your next turn starts.",
+      "role": "Opponent spell timing creates one counter-pressure window.",
+      "counterplay": "Cast before the armed player has useful attackers; no copied/repeated ovation from this instance.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-emotion-group-gasp",
+      "name": "Group Gasp",
+      "colour": "emotion",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "axiom-replaced"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Both heroes lose 1 heart as one simultaneous effect, following the settled Win/tie policy.",
+      "role": "Symmetrical pressure, including active own-zero Win situations.",
+      "counterplay": "Plan around the visible rule-change trigger; simultaneous outcomes remain a release gate.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "victory-tie-policy"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-perception-velvet-reveal",
+      "name": "Velvet Reveal",
+      "colour": "perception",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "If the triggering creature has Elusive, remove it until that creature’s controller next starts a turn.",
+      "role": "Expose one expected arrival rather than silence every ability.",
+      "counterplay": "Lead with another creature; non-Elusive arrival consumes the condition without a removal.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-perception-clock-eyes",
+      "name": "Clock Eyes",
+      "colour": "perception",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "fate-entered"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Privately inspect the top 2 unreserved shared Axioms without moving or drawing them. Public scheduled effects stay unchanged.",
+      "role": "Public Fate timing buys limited hidden-deck information.",
+      "counterplay": "Change the available unreserved deck before entry; this reveals no reserved effect.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "fate-entry-policy",
+        118,
+        119
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-perception-blink-forecast",
+      "name": "Blink Forecast",
+      "colour": "perception",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "creature-played",
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Reveal your top personal-deck card to both players. If it is a creature, heal your hero by 1; if it is a spell, heal your most damaged creature by 1. An empty deck does nothing.",
+      "role": "A committed action menu and a public forecast exchange secrecy for a small benefit.",
+      "counterplay": "Alter deck order; no draw/reorder or benefit for an unsupported card type.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-language-footnote-trap",
+      "name": "Footnote Trap",
+      "colour": "language",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "axiom-replaced"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Heal your most damaged surviving creature by 1 and the opponent’s hero by 1. Missing creature does not cancel the hero heal.",
+      "role": "An asymmetrical polite concession after an enemy rule change.",
+      "counterplay": "Change rules when the friendly heal is wasted; the opponent receives its concession.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-language-queue-that-question",
+      "name": "Queue That Question",
+      "colour": "language",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "The opponent’s next spell before their next turn ends costs 1 more. Consume this tax after that play; otherwise it expires.",
+      "role": "Post-play follow-up tax; it never cancels the spell that triggered it.",
+      "counterplay": "Use a cheap follow-up or wait out the openly revealed tax.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-language-chair-recognises",
+      "name": "The Chair Recognises You",
+      "colour": "language",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self",
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "The triggering creature gains Guard until its controller’s next turn starts. Existing Guard does not stack.",
+      "role": "Choose whose next speaker must take the front seat; support or force an enemy blocker.",
+      "counterplay": "Control the next arrival; an already-Guard target gains no second keyword.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-imagination-wrong-way-round",
+      "name": "Wrong Way Round",
+      "colour": "imagination",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Swap the triggering creature’s attack and health until your next turn starts, using settled stat-swap/temporary-expiry rules.",
+      "role": "An arrival changes shape instead of being directly damaged.",
+      "counterplay": "Balanced stats blunt the surprise; source disappearance creates no replacement.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "temporary-swap-policy"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-imagination-paper-tiger",
+      "name": "Paper Tiger",
+      "colour": "imagination",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "creature-defeated"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "If the defeated creature was not a token, summon a colourless 1/1 paper token if you have room.",
+      "role": "One paid replacement piece for token decks; token death cannot feed itself.",
+      "counterplay": "Fill the board or remove the result; consumed source produces no second token.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "token-order"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-imagination-costume-rehearsal",
+      "name": "Costume Rehearsal",
+      "colour": "imagination",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "All surviving colourless paper tokens on both sides gain Shield until their controllers’ next turns start. Identical Shield does not stack.",
+      "role": "Symmetrical stage protection; a mixed deck can shelter its small pieces.",
+      "counterplay": "Opponent tokens also benefit; use the visible timing and consume protection with small hits.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "token-order"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-memory-somewhere-safe",
+      "name": "Somewhere Very Safe",
+      "colour": "memory",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "creature-defeated"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "If the defeated non-token creature is still in your discard, move that exact instance to the bottom of your personal deck.",
+      "role": "Preserve a body for a later draw without a free replay.",
+      "counterplay": "Pressure the delay; earlier Last Word recovery means no second copy is created.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-memory-second-alarm",
+      "name": "Second Alarm",
+      "colour": "memory",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "fate-entered"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Move one chosen own pending player-created one-shot occurrence one space later, no later than +4 rounds. Announce its new time; never move an environment.",
+      "role": "A visible later opportunity rather than resurrecting a skipped occurrence.",
+      "counterplay": "Contest the newly announced timing; no legal pending event consumes this harmlessly.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "fate-entry-policy",
+        118,
+        119
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-memory-borrowed-tomorrow",
+      "name": "Borrowed Tomorrow",
+      "colour": "memory",
+      "kind": "conditional",
+      "costProposal": 2,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Put your oldest discarded conditional card other than this card on the bottom of your deck, preserving its identity and spent history. It gains no discount or immediate rearm.",
+      "role": "Slow conditional-card recovery with a real future draw/play cost.",
+      "counterplay": "Pressure before the redraw; eligibility to arm a recovered spent card requires explicit policy.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "conditional-rearm-policy"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-generic-spare-umbrella",
+      "name": "Spare Umbrella",
+      "colour": "generic",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "self"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Your lowest-current-health creature gains Shield until your next turn starts. Ties use oldest arrival; no creature means no effect.",
+      "role": "Easy generic shelter for a mixed fragile board.",
+      "counterplay": "Empty the board or consume Shield cheaply; existing Shield does not become two layers.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-generic-queue-please",
+      "name": "Queue, Please",
+      "colour": "generic",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Each player moves the top card of their personal deck to its bottom without looking. A deck of 0 or 1 card is unchanged.",
+      "role": "Symmetrical blind disruption; nobody gets information or an extra card.",
+      "counterplay": "Play around publicly known ordering changes; no hidden reroll or shuffle.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-generic-refreshments",
+      "name": "Round of Refreshments",
+      "colour": "generic",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-up",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "axiom-replaced",
+        "fate-entered"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "Restore 1 heart to both heroes, without exceeding either maximum. A finished match stays finished.",
+      "role": "Choose one public gathering moment for simple shared recovery.",
+      "counterplay": "The opponent heals too; a Fate option waits for settled entry semantics.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "fate-entry-policy-for-fate-menu",
+        118
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-generic-tiny-windfall",
+      "name": "Tiny Windfall",
+      "colour": "generic",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "either"
+      ],
+      "allowedTriggers": [
+        "spell-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "The currently active player gains 1 energy this turn, capped at 10. No draw, free card play or additional activation budget.",
+      "role": "A small surprise whose beneficiary depends on turn timing.",
+      "counterplay": "Opponent spell timing may give the opponent the energy; the condition is already consumed.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    },
+    {
+      "id": "conditional-generic-seat-reserved",
+      "name": "Seat Reserved",
+      "colour": "generic",
+      "kind": "conditional",
+      "costProposal": 1,
+      "visibilityProposal": "face-down",
+      "allowedActors": [
+        "opponent"
+      ],
+      "allowedTriggers": [
+        "creature-played"
+      ],
+      "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
+      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "effectProposal": "If your board is empty, summon one colourless 1/1 paper token if there is a legal slot. Otherwise do nothing.",
+      "role": "A simple response to an enemy arrival while behind.",
+      "counterplay": "Trigger while a friendly creature remains; normal slot/prevention rules still apply.",
+      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "gates": [
+        148,
+        109,
+        123,
+        "token-order"
+      ],
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+    }
+  ]
+}

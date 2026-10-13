@@ -1,0 +1,14 @@
+{
+  "species": "emotion-resolve-ram",
+  "id": "creature/emotion-resolve-ram/idle",
+  "source": "production-emotion-resolve-ram-145.png",
+  "persona": "Greta Thunbug",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Greta Thunbug, an original NONHUMAN creature inspired by Greta Thunberg public persona. Exact body/clothing/one prop: A small sturdy stick insect with two braided antennae, dark-red travelling coat and one blank placard. Use insect eyes and a twig body. Pose/composition: Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer. Harmless visual joke: Keeps asking the group to take the inconvenient evidence seriously. Use jewel accent #E8384F on dark worn materials. Expression: focused squint. View: slightly low camera angle. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-839be2ed-64ea-4647-9c26-6ee1486c77d9.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

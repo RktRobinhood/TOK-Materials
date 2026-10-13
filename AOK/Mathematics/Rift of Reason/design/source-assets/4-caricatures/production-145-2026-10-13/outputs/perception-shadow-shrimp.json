@@ -1,0 +1,14 @@
+{
+  "species": "perception-shadow-shrimp",
+  "id": "creature/perception-shadow-shrimp/idle",
+  "source": "production-perception-shadow-shrimp-145.png",
+  "persona": "David Brine",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: David Brine, an original NONHUMAN creature inspired by David Blaine public persona. Exact body/clothing/one prop: Dark shrimp with broad curved shell, short antennae and emerald-lined stage cape; one blank playing card partly tucked into the cape. Pose/composition: Left-facing curled half-bow, card exposed by one forelimb; tail fan folds underneath. Harmless visual joke: The smallest stage exit becomes a mystery everyone wants to inspect. Use jewel accent #2FBF71 on dark worn materials. Expression: delighted eyes partly closed. View: slightly elevated camera angle. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-4ecfaedb-d3cf-48c7-9724-0a419d3510f1.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "Both issues published; native blocking dependencies attached",
+  "repository": "RktRobinhood/TOK-Materials",
+  "backend": {
+    "number": 148,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/148",
+    "blockedBy": [
+      109,
+      123
+    ]
+  },
+  "content": {
+    "number": 149,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/149",
+    "blockedBy": [
+      148,
+      109,
+      123
+    ]
+  },
+  "validation": {
+    "total": 23,
+    "perColour": 3,
+    "colours": 6,
+    "generic": 5,
+    "uniqueIdsNamesEffects": true,
+    "noExisting210IdNameCollision": true,
+    "runtimeTests": "not run; proposal only"
+  }
+}

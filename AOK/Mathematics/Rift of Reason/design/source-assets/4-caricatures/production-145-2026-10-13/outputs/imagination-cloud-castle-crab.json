@@ -1,0 +1,14 @@
+{
+  "species": "imagination-cloud-castle-crab",
+  "id": "creature/imagination-cloud-castle-crab/idle",
+  "source": "production-imagination-cloud-castle-crab-145.png",
+  "persona": "Ariana Crande",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Ariana Crande, an original NONHUMAN creature inspired by Ariana Grande public persona. Exact body/clothing/one prop: Small dark crab with a high curved shell tuft, warm animal eyes and violet stage trim over chunky gold-edged carapace plates. Its folded-paper stage fan remains the one main prop. Pose/composition: Front-facing low wide stance, one claw raises the fan while the other rests across a shoulder plate. Role/accessory: 2/6 and Guard justify chunky segmented shoulder plates on the natural carapace. The fan is visual stagecraft, not an additional ability. Use jewel accent #A05CF0 on dark worn materials. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas. No book/sketchpad/pencil unless the single explicitly specified comic page is the persona prop. Gear is visual storytelling only, no text/ability icons.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-58f10da0-e543-4424-aba9-568dc6bc50a8.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

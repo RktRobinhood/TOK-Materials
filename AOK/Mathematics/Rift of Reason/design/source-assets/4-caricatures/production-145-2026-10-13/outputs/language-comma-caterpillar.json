@@ -1,0 +1,14 @@
+{
+  "species": "language-comma-caterpillar",
+  "id": "creature/language-comma-caterpillar/idle",
+  "source": "production-language-comma-caterpillar-145.png",
+  "persona": "Emma Wordson",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Emma Wordson, an original NONHUMAN creature inspired by Emma Watson public persona. Exact body/clothing/one prop: Rounded caterpillar with chestnut head tufts and a practical gold shawl; several short feet visible. It holds the small comma-notched gold shield as its single bold prop. Pose/composition: Low front-facing curl behind the shield, one foreleg peeks around its rim; keep warm animal eyes visible. Role/accessory: Printed Guard,1/3: a modest shield suits a defensive common; no extra Shield keyword. Use jewel accent #F2B632 on dark worn materials. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas. No book/sketchpad/pencil unless the single explicitly specified comic page is the persona prop. Gear is visual storytelling only, no text/ability icons.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-eb91b9ed-bc26-4f87-8ed6-30c4decbed1f.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

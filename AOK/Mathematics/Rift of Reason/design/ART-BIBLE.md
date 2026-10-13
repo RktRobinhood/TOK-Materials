@@ -68,3 +68,7 @@ Neutrals: ink `#1A1020`, night `#14121F`, deep forest `#0F1F1A`, parchment `#EFE
 ### Cast breadth — teacher steering, 13 October 2026
 
 Keep accepted artwork. For fresh card art, spread bodies across birds, insects and other invertebrates, aquatic animals, reptiles, unusual mammals and imaginary creatures. Avoid repeating felines or any narrow genus. Track body family alongside pose/composition in the production inventory before choosing the next group; explicit mechanical species IDs need not dictate an unproduced visual body. Record any display-name/body replacement so later builders can reconcile the roster without changing gameplay contracts. Spell and Axiom art should also include objects and small scenes, rather than a creature in every image.
+
+### Accessory breadth — teacher steering13October2026
+
+Avoid a collection where every creature holds a book, sketchpad or pencil. Retain these where essential to a persona joke; otherwise mix instruments, tools, relics, enchantments, armour and original magical weapons. Bulkier/Guard bodies can read as protected; higher-attack bodies can carry heavier fantasy gear. Art should suggest the printed role without implying a new keyword or equipment mechanic. Use one large readable cue rather than many tiny trinkets. Preserve artwork already generated/in flight; update pending production briefs and record accessory family with the body/pose mapping.

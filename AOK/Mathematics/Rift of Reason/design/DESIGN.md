@@ -150,3 +150,7 @@ Production tools generate and cache ElevenLabs narration and orchestral cues, th
 ## Research
 
 `research/` at the repo root: TOK maths teaching ideas, Moonstone combat, bluff mechanics, video-game card minigames, shared-deck monster battlers, borrowable puzzles, serverless multiplayer.
+
+## Card identity and deck/play synergies — teacher steering13October2026
+
+Keep the first expansion understandable while giving each Way of Knowing distinct actions/payoffs and a few memorable oddities. Support both a bonus based on the submitted personal deck (including generic-creature authored bonuses) and a separate bonus for different types present on the board. These are individual card abilities with modest bounded triggers, not universal rules. [Strategy identity](drafts/card-arena-2026-10-12/STRATEGY-IDENTITY.md) proposes mono snapshots, generic compatibility, colour roles and mixed bridges; exact numbers/Memory-versus-Generic classification remain release decisions under #123. Preserve quotas, spell casting without matching live creatures and existing unresolved Fate/win gates.

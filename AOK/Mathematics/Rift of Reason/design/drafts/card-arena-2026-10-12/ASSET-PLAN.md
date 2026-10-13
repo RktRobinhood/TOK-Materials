@@ -110,3 +110,9 @@ Fifteen of72expansion portraits now produced;57remain (including Jimmy #144 and 
 | `creature/imagination-blueprint-bat/idle` | Hideo Kojibat | imagination · uncommon |
 | `creature/memory-bookmark-bunny/idle` | Hank Greenhare | memory · common · mechanic gated #146 |
 | `creature/memory-recall-robin/idle` | John Greenfinch | memory · common |
+
+## Bulk art group2 — #145,13October2026
+
+Twelve more expansion portraits plus the last five shared spell/Axiom motifs produced and built. Cumulative expansion art27of72produced,45remain (42pending +Jimmy144/Rick147/service-rejected Stephen deferred). All31selected bulk assets pass source/runtime alpha/dimension/hash checks;17newmanifest entries. Unowned preview restored after build. Unicorn five-limb first take retained and corrected to exactly four limbs before selection. Native1280dark/light180px/70px samples and300px foreground frame, actual390px narrow card fit:64images loaded, no warnings/errors. Full823tests822pass1skip0fail127276.3846ms; independent Standards/Spec zero remaining findings.
+
+Sources/prompts/edit history/body-accessory mappings and proposed138card-art assignments: design/source-assets/4-caricatures/production-145-2026-10-13/. Contact sheet dev/art-production.html; evidence/review design/reviews/art-production-145-2026-10-13.md. Shared mapping is proposed, not runtime registration/acquisition. Gear follows printed role without adding powers. Books remain a minority where essential; original glider-croc/mushroom-puppet/loon-balloon are next unproduced fantasy briefs. No engine/owned-deck/save/voice release implied. Publication/deployment follow.

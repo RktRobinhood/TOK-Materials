@@ -1,0 +1,14 @@
+{
+  "species": "memory-chronicle-cat",
+  "id": "creature/memory-chronicle-cat/idle",
+  "source": "production-memory-chronicle-cat-145.png",
+  "persona": "Stan Leemur",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD: cute-horror dusk, textured clean cel shading, medium dark-brown ink outlines, warm expressive faces and jewel accents. Image2 shipped creature is RENDERING reference only: do not copy its species, pose, clothes, hair, jewellery or props. Public-persona satire via fictional creature, never a realistic human face. Use the SPECIFIC animal/fantasy anatomy below, no generic furry mascot body. An insect has antennae/segmented abdomen/appropriate insect limbs and eyes, not mammal ears/muzzle; an aquatic creature retains fins/tentacles/body curve rather than human legs. Faces and one main prop readable at70px, charming at300px. Complete silhouette at75percent of canvas, generous genuinely transparent margin around every limb/ear/tail/prop. No floor/ground-shadow/scenery rectangle, card frame, readable text/letters/numbers, logos/brands, copyrighted costume/emblem, watermark or extra character. Cute and slightly eerie, never gore; ink/forest/violet shadows and warm lantern rim light, no glossy3D or nursery pastels. Subject: Stan Leemur, an original NONHUMAN creature inspired by Stan Lee public persona. Exact body/clothing/one prop: Small older ring-tailed lemur with pale muzzle tufts, dark glasses and silver cardigan trim. Its single blank comic page stays the key public-persona prop. Pose/composition: Front-facing playful peek above the comic page; tail curves into one visible arc, feet remain clear. Role/accessory: 2/3 needs no bulky armour. The comic is essential to the public cameo/creator joke and is deliberately retained as a minority print prop. Use jewel accent #C9C9D6 on dark worn materials. Expression: big theatrical surprise. View: slightly elevated camera angle. No additional prop or background. Keep the specified animal anatomy; whole pose comfortably inside transparent canvas. No book/sketchpad/pencil unless the single explicitly specified comic page is the persona prop. Gear is visual storytelling only, no text/ability icons.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-dbc02e12-4a4b-4b8a-940f-0bf5d78d0bfa.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}
