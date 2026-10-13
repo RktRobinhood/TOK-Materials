@@ -51,3 +51,8 @@ Native dependencies match text blockers. Content-release tickets also honour #10
 
 - [#142](https://github.com/RktRobinhood/TOK-Materials/issues/142): completed at5a1b72e, Pages38351974109 succeeded. Art-only Grant Sanderstag/Kai Ceenat portraits: proposal uniqueness/strategy audit, reference generation, exact sources/prompts/alpha checks and native/public shipped-frame gallery. Full823tests822pass1skip, independent Standards/Spec zero findings. No runtime species, ownership or audio. Release/balance remain #109/#123; continue other colours in similarly small audited art batches.
 
+- [#143](https://github.com/RktRobinhood/TOK-Materials/issues/143): Nikkie de Jaguar/Sabrina Carpwenter art-only batch. Selected PNGs/two built WebPs, exact prompts/references/hash/alpha pass; shared two-batch gallery, native acceptance pending. No runtime cards, ownership or recordings. Four expansion portraits produced,68remaining; release #109/#123 remains.
+- [#144](https://github.com/RktRobinhood/TOK-Materials/issues/144): resolve Jimmy Fowlon's next-attack buff overlap with Cheer Chick before spending portrait budget; preserve totals/IDs/acquisition and update authoritative catalogue/persona mapping if revised. A discovered draft-design issue, not a shipped bug.
+
+Teacher13October: foreground full art is the default normal card appearance. Board #122/#109 must scale decks to the arena/background and visibly emphasize legal sources during the required draw step, with static Calm-compatible cues. Existing layout acceptance remains; these refinements do not certify production integration.
+

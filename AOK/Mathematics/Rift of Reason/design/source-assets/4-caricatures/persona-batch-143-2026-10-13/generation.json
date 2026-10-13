@@ -1,0 +1,45 @@
+{
+  "issue": 143,
+  "date": "2026-10-13",
+  "status": "Selected source/runtime alpha checks and large-frame inspection pass; narrow/post-fix native acceptance pending.",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "assets": [
+    {
+      "id": "creature/perception-cue-cricket/idle",
+      "species": "perception-cue-cricket",
+      "persona": "Nikkie de Jaguar",
+      "source": "expansion-perception-cue-cricket-143.png",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: stylized-concept. Asset: one original Rift of Reason transparent full-body collectible creature cutout. Image1 is the approved STYLE BOARD: match cute-horror storybook warmth, medium thick dark brown ink outlines, clean cel-lit forms with soft fur/fabric/fin texture, jewel accents against midnight-violet darkness. Image2 is shipped Astrophysicat: matching rendering/texture/outline reference ONLY; do not copy its cat species, clothes, pose or gesture. No realistic human likeness. One readable public-persona prop and expression. Whole creature centered with ample transparent padding around every extremity. No card frame, arch, background, floor, shadow blob, floating particles, extra figures, watermark, brand logo, letters, numbers or formula. Intended foreground layer above existing decorative frame, clipped only at outer card edges with separate live text. Readable silhouette/face/prop at70px and attractive at300px. Avoid nursery pastels, photorealism and glossy3D. Subject: Nikkie de Jaguar, inspired by Nikkie de Jager / NikkieTutorials' PUBLIC makeup tutorial persona, a compact dark jaguar with clearly visible restrained rosette markings, cream muzzle, broad velvet paws and a gracefully curved cat tail. Round expressive animal face, large amber eyes with clean graphic outer-eye markings, amused theatrical reveal smile; NO human lips/face. Worn deep forest-green artist capelet over a dark fitted cloth tunic, jade Perception accents #2FBF71, parchment inner lining, tiny practical belt. Main prop: ONE oversized simple makeup brush with a dark unbranded handle and broad soft cream bristle fan, held beside the cheek by one paw. Other paw extends in a small confident reveal gesture. Stable full-body three-quarter standing pose, both feet visible, brush separate enough from face to read at small scale. Face/cream bristles warm lantern-lit, ink #1A1020 shadows. Do not turn the brush into a weapon, wand, paint splatter or secondary floating prop. Public makeup-work comedy only; no identity/privacy/history joke. Entire brush, ears, tail and feet inside canvas.",
+      "firstTake": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-a35ec6b5-5588-465d-86c6-93b0cda53605.png",
+      "firstTakeReview": "Ear touched source edge (alphaBox y0). Padding-only built-in edit selected before integration.",
+      "editPrompt": "Edit image1 ONLY to fix edge padding: retain exactly the same Nikkie de Jaguar character, face/expression, dark rosette fur, green capelet/tunic, brush, paws, pose, tail, costume ornaments, palette, outlines, texture and lighting. The first image's top ear touches the canvas edge. Make the complete character about15percent smaller within the canvas, centered, with a generous clear TRANSPARENT margin on all four sides, including above the intact whole ear and below both feet. Extend the tiny missing top outline of the ear naturally if necessary; no other redesign. Entire tail, brush, whiskers, ears, paws and feet fit without edge clipping. Preserve true alpha transparency, no floor/shadow plane/scenery/frame/text. Images2 and3 are original project STYLE REFERENCES only; do not copy their subject or put a frame around this cutout.",
+      "editReferences": [
+        "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-a35ec6b5-5588-465d-86c6-93b0cda53605.png",
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-f31f0360-ec91-4662-97b6-32228f0b1964.png",
+      "status": "selected; source padding, alpha and native asset dimensions pass"
+    },
+    {
+      "id": "creature/language-echo-egret/idle",
+      "species": "language-echo-egret",
+      "persona": "Sabrina Carpwenter",
+      "source": "expansion-language-echo-egret-143.png",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "prompt": "Use case: stylized-concept. Asset: one original Rift of Reason transparent full-body collectible creature cutout. Image1 is the approved STYLE BOARD: match cute-horror storybook warmth, medium thick dark brown ink outlines, clean cel-lit forms with soft fur/fabric/fin texture, jewel accents against midnight-violet darkness. Image2 is shipped Astrophysicat: matching rendering/texture/outline reference ONLY; do not copy its cat species, clothes, pose or gesture. No realistic human likeness. One readable public-persona prop and expression. Whole creature centered with ample transparent padding around every extremity. No card frame, arch, background, floor, shadow blob, floating particles, extra figures, watermark, brand logo, letters, numbers or formula. Intended foreground layer above existing decorative frame, clipped only at outer card edges with separate live text. Readable silhouette/face/prop at70px and attractive at300px. Avoid nursery pastels, photorealism and glossy3D. Subject: Sabrina Carpwenter, inspired by Sabrina Carpenter's PUBLIC playful performer persona, a charming small upright CARP with warm cream-and-copper scales, clear short carp barbels beside a ROUND ANIMAL mouth, big lively amber eyes, pale flowing FIN TUFTS framing the head like elegant fins rather than a human wig, a broad graceful fan tail and little pelvic fins. Clearly a fish, NOT a mermaid, human singer, bird or mammal; no human hair, skin, lips, arms, legs or shoes. Worn dark midnight stage jacket naturally adapted to the fish torso with warm gold #F2B632 Language ribbon accents and cream cuff edges around fin openings; no copied celebrity costume. Main prop ONE plain miniature unbranded microphone held against a bent pectoral fin beside the cheek. The other fin makes a tiny cheeky 'one more' invitation, expressive half-smile; compact coherent full-body three-quarter pose, floating upright but no bubbles/water/scenery/ground shadow. Tail and fins visibly separate from jacket silhouette. Warm lantern rim light, ink #1A1020 and midnight violet shadows, gold highlights on scales/ribbon. No song lyrics, singing text, stage logo, heart particles or personal-history joke. The joke is a little spoken quip earning one encore. Entire microphone, fin tufts and tail inside canvas.",
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-ede669ba-68f6-4c3b-ad09-9085a2c3a00f.png",
+      "status": "selected; source padding, alpha and native asset dimensions pass"
+    }
+  ]
+}

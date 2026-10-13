@@ -12,7 +12,7 @@ See [starter/card drafts](drafts/card-arena-2026-10-12/CARD-DRAFTS.md), [build r
 
 Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the approved style board and ROSTER.md. The expansion's public-persona/pun/prop assignments are selected in [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md); the teacher delegates meme-worthiness and teenage appeal to the builder, with no teacher roster approval. Mechanical animal names remain stable working IDs. Preserve the cute-horror meme identity across future agent sessions.
 
-Later teacher card feedback selects full art over etched foil: transparent creatures should overlap the shipped decorative frame, clipped at the outer card rectangle, with readable live names/rules/stats above both. This is a planned renderer change; #141's developer study precedes production integration. See [foreground frame handoff](reviews/full-art-frame-2026-10-13.md).
+Later teacher card feedback selects full art over etched foil: transparent creatures should overlap the shipped decorative frame, clipped at the outer card rectangle, with readable live names/rules/stats above both. Teacher clarified13October2026: this is the default normal card appearance, not a cosmetic upgrade. This is a planned renderer change; #141's developer study precedes production integration. See [foreground frame handoff](reviews/full-art-frame-2026-10-13.md). Draw-eligible decks must clearly light up during the required draw step, using engine phase/source legality and Calm-compatible static cues. Scale deck backs to their arena/background and energy zones responsively; the current A prototype's decks are too small. These refinements remain #122/#109.
 
 ## Purpose
 

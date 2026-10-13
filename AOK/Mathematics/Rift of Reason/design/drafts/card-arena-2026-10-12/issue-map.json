@@ -287,5 +287,21 @@
     "id": 5824882025,
     "blockedBy": [],
     "nativeDependenciesAdded": false
+  },
+  "persona_art_143": {
+    "number": 143,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/143",
+    "title": "Rift of Reason: Generate Perception and Language persona portraits",
+    "id": 5825431129,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
+  },
+  "jimmy_distinctness": {
+    "number": 144,
+    "url": "https://github.com/RktRobinhood/TOK-Materials/issues/144",
+    "title": "Rift of Reason: Differentiate Jimmy Fowlon support from Cheer Chick",
+    "id": 5825456137,
+    "blockedBy": [],
+    "nativeDependenciesAdded": false
   }
 }

@@ -1,0 +1,50 @@
+{
+  "issue": 143,
+  "status": "Source padding, alpha, dimensions and provenance pass; gallery evidence recorded separately.",
+  "assets": [
+    {
+      "id": "creature/perception-cue-cricket/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 93,
+          "y": 72,
+          "w": 1037,
+          "h": 1162
+        },
+        "sha256": "466f2e6ba156d070cd90ce865cafee0e4e54bc41f7d356bc8506c9e91a9f5ed8"
+      },
+      "runtime": {
+        "file": "creatures/perception-cue-cricket-idle.webp",
+        "w": 553,
+        "h": 620,
+        "sha256": "bea3c2a29500c1b6d29c5939c6fe969cd6511fd8fa26f99b35fe272e2aad36b0"
+      },
+      "transparentPercent": 45.9,
+      "bytes": 83678
+    },
+    {
+      "id": "creature/language-echo-egret/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 25,
+          "y": 25,
+          "w": 1278,
+          "h": 1162
+        },
+        "sha256": "b654c3f36eb719c8975981401dfc0d045b23a3a22b6e87cec73cd56260b9e28b"
+      },
+      "runtime": {
+        "file": "creatures/language-echo-egret-idle.webp",
+        "w": 682,
+        "h": 620,
+        "sha256": "1cd94e5284bbe3d713a0d20d88e7cb889de7deec5357dd11e3682cf39c9525f4"
+      },
+      "transparentPercent": 44.9,
+      "bytes": 120952
+    }
+  ]
+}

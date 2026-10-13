@@ -18,6 +18,8 @@
         "  Without it the class is guessed from the id (see tools/assets/classes.mjs)."
     ],
     "sheets": {
+        "expansion-perception-cue-cricket-143.png": {"type":"single","id":"creature/perception-cue-cricket/idle","class":"sprite"},
+        "expansion-language-echo-egret-143.png": {"type":"single","id":"creature/language-echo-egret/idle","class":"sprite"},
         "expansion-reason-diagonal-deer-142.png": {"type":"single","id":"creature/reason-diagonal-deer/idle","class":"sprite"},
         "expansion-emotion-spite-sprite-142.png": {"type":"single","id":"creature/emotion-spite-sprite/idle","class":"sprite"},
         "card-starter-proof-pup.png": {"type":"single","id":"creature/proof-pup/idle","class":"sprite"},

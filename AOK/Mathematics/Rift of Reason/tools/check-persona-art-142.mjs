@@ -1,4 +1,4 @@
-// Verify #142 provenance, source padding and generated runtime assets; never edits pixels.
+// Verify selected persona batches; legacy filename/default retain the #142 command.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -7,10 +7,14 @@ import assert from 'node:assert/strict';
 import {load,alphaBox} from './assets/image.mjs';
 import {readManifest} from './assets/manifest.mjs';
 const game=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const dir=path.join(game,'design/source-assets/4-caricatures/persona-batch-142-2026-10-13');
+const issue=Number(process.argv[2]||142);
+const ids={142:['creature/reason-diagonal-deer/idle','creature/emotion-spite-sprite/idle'],143:['creature/perception-cue-cricket/idle','creature/language-echo-egret/idle']};
+assert(ids[issue],'supported batch:142 or143');
+const dir=path.join(game,'design/source-assets/4-caricatures/persona-batch-'+issue+'-2026-10-13');
 const provenance=JSON.parse(await fs.readFile(path.join(dir,'generation.json')));
 const manifest=await readManifest(path.join(game,'data/assets.js'));
-assert.deepEqual(provenance.assets.map(a=>a.id),['creature/reason-diagonal-deer/idle','creature/emotion-spite-sprite/idle']);
+assert.equal(provenance.issue,issue);
+assert.deepEqual(provenance.assets.map(a=>a.id),ids[issue]);
 const report=[];
 for(const a of provenance.assets){
  assert(a.prompt&&a.source&&a.styleReferences.length===2&&a.generatedOutput,'incomplete provenance');
@@ -26,5 +30,5 @@ for(const a of provenance.assets){
  const hash=async file=>createHash('sha256').update(await fs.readFile(file)).digest('hex');
  report.push({id:a.id,source:{w:source.w,h:source.h,alphaBox:box,sha256:await hash(sourceFile)},runtime:{...entry,sha256:await hash(builtFile)},transparentPercent:Math.round(1000*transparent/(built.w*built.h))/10,bytes:(await fs.stat(builtFile)).size});
 }
-await fs.writeFile(path.join(dir,'validation.json'),JSON.stringify({issue:142,status:'Source padding, alpha, dimensions and provenance pass; gallery evidence recorded separately.',assets:report},null,2)+'\n');
+await fs.writeFile(path.join(dir,'validation.json'),JSON.stringify({issue,status:'Source padding, alpha, dimensions and provenance pass; gallery evidence recorded separately.',assets:report},null,2)+'\n');
 console.log(JSON.stringify(report.map(a=>({id:a.id,w:a.runtime.w,h:a.runtime.h,transparentPercent:a.transparentPercent,bytes:a.bytes}))));
