@@ -40,5 +40,10 @@
     "status": "fresh attachment timeout; queued open_in_codex",
     "url": "http://localhost:18793/dev/art-production.html?group=5",
     "nativeEvidence": "pending; do not substitute group4 captures"
-  }
+  },
+  "commit": "bc26530cfb83fdc9625a0df0e74b450a7ac0c3fe",
+  "pagesRun": 38475303028,
+  "pagesConclusion": "success",
+  "issueComment": "https://github.com/RktRobinhood/TOK-Materials/issues/145#issuecomment-6156172258",
+  "staticPublicDelivery": "three public files HTTP200/SHA256 match tested local files; public-static-group5.json"
 }

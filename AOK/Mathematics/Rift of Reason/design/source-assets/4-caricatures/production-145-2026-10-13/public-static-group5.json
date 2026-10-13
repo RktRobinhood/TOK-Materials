@@ -1,0 +1,28 @@
+{
+  "commit": "bc26530cfb83fdc9625a0df0e74b450a7ac0c3fe",
+  "pagesRun": 38475303028,
+  "pagesConclusion": "success",
+  "staticDelivery": "public bytes match tested local files",
+  "assets": [
+    {
+      "file": "assets/creatures/language-question-quail-idle.webp",
+      "status": 200,
+      "bytes": 99866,
+      "sha256": "4a1f029738dbf2497c411c4733534d0c5e66e2bf70cfc3999c19788026bd07ef"
+    },
+    {
+      "file": "dev/art-production-data.js",
+      "status": 200,
+      "bytes": 50905,
+      "sha256": "02c35e4758897089294d177211da90c59aa3b02280dc5bd1d7374de99444ac76"
+    },
+    {
+      "file": "data/assets.js",
+      "status": 200,
+      "bytes": 84677,
+      "sha256": "175688734340fa51043acefaae4312bfba459655fcb9b5cbcab38f5c4e1cc2f1"
+    }
+  ],
+  "recordCount": 74,
+  "nativeAcceptance": "pending browser attachment; static HTTP checks are not rendered/native QA"
+}
