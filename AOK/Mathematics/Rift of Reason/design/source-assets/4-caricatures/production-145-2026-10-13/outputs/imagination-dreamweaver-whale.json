@@ -1,0 +1,14 @@
+{
+  "species": "imagination-dreamweaver-whale",
+  "id": "creature/imagination-dreamweaver-whale/idle",
+  "source": "production-imagination-dreamweaver-whale-145.png",
+  "persona": "Miyazawhale",
+  "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Miyazawhale, an original NONHUMAN character inspired by Hayao Miyazaki public persona. Specific body/gear: Wise little whale with pale animal mouth markings and violet vest; one small windmill relic near a fin. Pose/composition: Slow left-facing diagonal hover, belly toward viewer and one fin gently indicates the toy. Main accessory: One small wood-and-brass windmill toy with violet cloth sails; no book, paper pad or film character. Printed-role visual rationale: The large3/7 body already conveys staying power. The little windmill adds visual storycraft, not another draw condition. Jewel accent #A05CF0. Expression: playful half-smile. View: slightly low camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-89d824ac-6ffc-4559-8bcb-c16ce9f7950c.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

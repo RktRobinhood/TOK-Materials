@@ -1,0 +1,63 @@
+{
+  "id": "creature/imagination-mirror-marten/idle",
+  "species": "imagination-mirror-marten",
+  "persona": "Peter Jacktree",
+  "inspiration": "Peter Jackson",
+  "source": "production-imagination-mirror-marten-145.png",
+  "prompt": "PRIMARY COMPOSITION: FRONT facing. Front-facing crouch, viewfinder held at a thoughtful angle and one root lifted as if changing the shot. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Peter Jacktree, an original NONHUMAN character inspired by Peter Jackson public persona. Specific body/gear: Living sapling with knot eyes, mossy bark beard and violet collar; one brass viewfinder. Pose/composition: Front-facing crouch, viewfinder held at a thoughtful angle and one root lifted as if changing the shot. Main accessory: One brass director's viewfinder with a broad violet lens; no clapper, plan or script. Printed-role visual rationale: 2/3 needs no heavy equipment. The frame-of-view joke supports copying attack conceptually without new effects. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "requiredFacing": "FRONT",
+  "poseDirection": "Front-facing crouch, viewfinder held at a thoughtful angle and one root lifted as if changing the shot.",
+  "mechanicalContract": {
+    "cost": 3,
+    "attack": 2,
+    "health": 3,
+    "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: FRONT facing. Front-facing crouch, viewfinder held at a thoughtful angle and one root lifted as if changing the shot. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Peter Jacktree, an original NONHUMAN character inspired by Peter Jackson public persona. Specific body/gear: Living sapling with knot eyes, mossy bark beard and violet collar; one brass viewfinder. Pose/composition: Front-facing crouch, viewfinder held at a thoughtful angle and one root lifted as if changing the shot. Main accessory: One brass director's viewfinder with a broad violet lens; no clapper, plan or script. Printed-role visual rationale: 2/3 needs no heavy equipment. The frame-of-view joke supports copying attack conceptually without new effects. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-fcd5da04-7334-42b1-ae63-6ddae4de4c20.png",
+  "retry": {
+    "boundedAttempt": 1,
+    "reason": "Prior three-call cell ended in network error; no Peter PNG existed after own-folder recovery check"
+  },
+  "actualOrientation": "FRONT with viewfinder angled LEFT",
+  "visualReview": "Distinct living sapling with bark limbs/root feet/moss beard and one brass viewfinder; four main body limbs, complete silhouette, accepted bounded-retry take. No starter dragon anatomy.",
+  "sourceCheck": {
+    "w": 1225,
+    "h": 1284,
+    "alphaBox": {
+      "x": 11,
+      "y": 5,
+      "w": 1205,
+      "h": 1274
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 46.4,
+    "solidPercent": 52.6,
+    "sha256": "eac45e5442603780db9dada60ac273db1455951962d49cfcd4704d61aa553d24",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

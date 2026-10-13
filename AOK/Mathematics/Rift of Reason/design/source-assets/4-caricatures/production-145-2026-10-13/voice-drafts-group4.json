@@ -1,0 +1,182 @@
+[
+  {
+    "species": "reason-induction-ibex",
+    "persona": "Matt Parkbex",
+    "line": "Three sides. One small problem.",
+    "voiceDirection": "Dry cheerful maths-comedy rhythm; original short lines, no show quotations."
+  },
+  {
+    "species": "reason-guardrail-goat",
+    "persona": "Destin Sandolin",
+    "line": "My scales have a safety margin.",
+    "voiceDirection": "Friendly exploratory maker voice; generic clunk/block cues; not an accent imitation."
+  },
+  {
+    "species": "reason-inference-heron",
+    "persona": "James Mayfly",
+    "line": "Measure first. Panic much later.",
+    "voiceDirection": "Dry unhurried explanation in original delivery; no impersonation or long unskippable monologue."
+  },
+  {
+    "species": "reason-theorem-tortoise",
+    "persona": "Turingator",
+    "line": "Two ideas. One careful plan.",
+    "voiceDirection": "Thoughtful spare scholarly delivery; shared reveal/Fate/axiom sounds; no joke about persecution or private life."
+  },
+  {
+    "species": "emotion-courage-cub",
+    "persona": "Simone Bearles",
+    "line": "One deep breath. Then we try.",
+    "voiceDirection": "Confident encouraging coach-like delivery; original words and shared heal cue."
+  },
+  {
+    "species": "emotion-cheer-chick",
+    "persona": "Terry Chews",
+    "line": "Tiny horn. Big encouragement.",
+    "voiceDirection": "Warm exuberant original encouragement; shared card-play cue, no commercial catchphrase."
+  },
+  {
+    "species": "emotion-bond-badger",
+    "persona": "Dolly Possum",
+    "line": "There is room for one more story.",
+    "voiceDirection": "Warm concise storyteller; no accent/voice imitation or sung material, shared heal sound."
+  },
+  {
+    "species": "emotion-stormheart-serpent",
+    "persona": "Giannis Antetokudu",
+    "line": "This ball is heavier than it looks.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "perception-focus-falcon",
+    "persona": "Steph Cawry",
+    "line": "That cover has a crack.",
+    "voiceDirection": "Focused playful original competitor; shared hit/place sounds, no impersonation."
+  },
+  {
+    "species": "perception-scout-stoat",
+    "persona": "Nelly Koalda",
+    "line": "Two choices. I'll take the clearer path.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "perception-signal-seal",
+    "persona": "Linus Sealbastian",
+    "line": "I brought the cable. Where's the socket?",
+    "voiceDirection": "Cheerful busy original maker delivery; reuse clunk/block, no mishap or scandal references."
+  },
+  {
+    "species": "perception-true-sight-stag",
+    "persona": "Galileon",
+    "line": "Let us look a little closer.",
+    "voiceDirection": "Kind inquisitive original scholar, shared reveal/axiom cue and no copied quotations."
+  },
+  {
+    "species": "language-word-weasel",
+    "persona": "Stephen Clawbert",
+    "line": "Even my bell needs a final word.",
+    "voiceDirection": "Crisp original comic commentary; no impression or topical personal allegations."
+  },
+  {
+    "species": "language-metaphor-mantis",
+    "persona": "Isabelle Haakheron",
+    "line": "Same ball. Different name.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "language-lexicon-lion",
+    "persona": "Descarab",
+    "line": "That rule needs a fresh beginning.",
+    "voiceDirection": "Careful spare original scholar; historical legendary presentation, shared axiom sound."
+  },
+  {
+    "species": "imagination-doodle-duck",
+    "persona": "Luka Donchilla",
+    "line": "Small paws. Proper game face.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "imagination-fable-fawn",
+    "persona": "Jack Blackbird",
+    "line": "That shape deserves an encore.",
+    "voiceDirection": "Exuberant original performer with controlled volume; no singing or voice impression."
+  },
+  {
+    "species": "imagination-mosaic-mole",
+    "persona": "Jaiden Anima-snail",
+    "line": "My puppet has a very small role.",
+    "voiceDirection": "Gentle playful original storyteller; shared place cue, not the creator's recorded voice."
+  },
+  {
+    "species": "imagination-mirror-marten",
+    "persona": "Peter Jacktree",
+    "line": "Hold that pose. It looks useful.",
+    "voiceDirection": "Warm practical original film-maker; shared click/place cue, no franchise character or accent imitation."
+  },
+  {
+    "species": "imagination-chimera-chick",
+    "persona": "Shigeru Miyamole",
+    "line": "A new shape. A safer landing.",
+    "voiceDirection": "Playful spare original inventor; no character voice imitation or commercial sound effect."
+  },
+  {
+    "species": "imagination-stage-mouse",
+    "persona": "Tim Burrowton",
+    "line": "The shadows wanted a bigger part.",
+    "voiceDirection": "Dry whimsical original storyteller; restrained shared reveal cue, no branded character voice."
+  },
+  {
+    "species": "imagination-paradox-pony",
+    "persona": "Pedro Platypascal",
+    "line": "The handle bends. The coffee doesn't.",
+    "voiceDirection": "Warm puzzled original traveller, no actor or television-role impression."
+  },
+  {
+    "species": "imagination-dreamweaver-whale",
+    "persona": "Miyazawhale",
+    "line": "Small windmill. Plenty of ideas.",
+    "voiceDirection": "Warm spare original story-maker; shared reveal cue, no licensed soundtrack or character voices."
+  },
+  {
+    "species": "memory-archive-armadillo",
+    "persona": "Niklas Landillo",
+    "line": "I stay in front. You take the shot.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "memory-replay-raccoon",
+    "persona": "Nikola Jokaroo",
+    "line": "One more pass for the little one.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "memory-hourglass-hedgehog",
+    "persona": "Chris Nolhog",
+    "line": "I packed yesterday. Just in case.",
+    "voiceDirection": "Calm deliberate original story planner; shared Fate/block sounds, no film dialogue."
+  },
+  {
+    "species": "memory-souvenir-seal",
+    "persona": "Martha Starwart",
+    "line": "I kept the ribbon for later.",
+    "voiceDirection": "Calm exact original craft host; shared paper/reveal cue, no personal-history gag."
+  },
+  {
+    "species": "memory-sequence-swan",
+    "persona": "Mathias Gidscorpion",
+    "line": "We can wait. I've still got the ball.",
+    "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation."
+  },
+  {
+    "species": "memory-second-chance-salamander",
+    "persona": "Downewt Jr.",
+    "line": "The next take needs a stronger start.",
+    "voiceDirection": "Brisk playful original actor, no character impression; shared reveal/place cues."
+  },
+  {
+    "species": "memory-timekeeper-tapir",
+    "persona": "Noetapir",
+    "line": "That old idea deserves another chance.",
+    "voiceDirection": "Clear delighted original scholar; shared Fate/axiom sounds, no copied quotations."
+  }
+]

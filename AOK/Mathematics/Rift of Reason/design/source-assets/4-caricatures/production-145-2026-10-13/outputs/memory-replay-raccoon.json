@@ -1,0 +1,14 @@
+{
+  "species": "memory-replay-raccoon",
+  "id": "creature/memory-replay-raccoon/idle",
+  "source": "production-memory-replay-raccoon-145.png",
+  "persona": "Nikola Jokaroo",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Nikola Jokaroo, original NONHUMAN public-persona sporting parody inspired by Nikola Jokic; never a realistic human face. Body: A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass. Main accessory: One plain silver-and-cream leather basketball with broad seams; no team badge, number, second ball or hoop. Printed-role rationale: Frozen2/3 support body: light sports wraps only. Offered ball suggests bringing a teammate back into play, without changing the recovery effect or adding any bonus. Jewel accent #C9C9D6 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-e83ff373-0e6f-4bc4-a690-3ee0ee1d297f.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

@@ -1,0 +1,337 @@
+{
+  "issue": 145,
+  "group": 4,
+  "date": "2026-10-13",
+  "worker": "production_preview",
+  "status": "Eight Language/Imagination sources selected; root owns four Memory generations and whole-group build/native/tests/publication",
+  "selected": 8,
+  "assets": [
+    {
+      "id": "creature/language-word-weasel/idle",
+      "species": "language-word-weasel",
+      "persona": "Stephen Clawbert",
+      "status": "selected",
+      "source": "production-language-word-weasel-145.png",
+      "receipt": "outputs/language-word-weasel.json",
+      "actualOrientation": "Body faces LEFT; head turns toward viewer",
+      "requiredFacing": "LEFT",
+      "visualReview": "Six-limbed mantis, readable spectacles/tie and handbell, intact wings/antennae/feet; accepted first take. Head turns toward viewer rather than strict profile.",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 57,
+          "y": 16,
+          "w": 1421,
+          "h": 991
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 73.6,
+        "solidPercent": 25.6,
+        "sha256": "64d1d2020af6e150c95c64bb32d33961986acbdd5f62f2020667e0194921ce62",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-9e8f1b0d-f114-4336-b8e4-91c92de2d8e8.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": null,
+      "retry": null
+    },
+    {
+      "id": "creature/language-metaphor-mantis/idle",
+      "species": "language-metaphor-mantis",
+      "persona": "Isabelle Haakheron",
+      "status": "selected",
+      "source": "production-language-metaphor-mantis-145.png",
+      "receipt": "outputs/language-metaphor-mantis.json",
+      "actualOrientation": "FRONT toward viewer with raised ball and spread wings",
+      "requiredFacing": "FRONT",
+      "visualReview": "Two wings and two bird legs, long heron beak, forward volleyball action, one plain ball; accepted first take.",
+      "sourceCheck": {
+        "w": 1145,
+        "h": 1374,
+        "alphaBox": {
+          "x": 19,
+          "y": 17,
+          "w": 1114,
+          "h": 1341
+        },
+        "cornerAlpha": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "transparentPercent": 56.6,
+        "solidPercent": 42.4,
+        "sha256": "5d0a6eb81fe366f88044d53891c51acca4bd1e12e5836b9af8103e5a8f8da97d",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-f3313df9-74be-4584-bd30-ffb7fa6ba5aa.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": null,
+      "retry": null
+    },
+    {
+      "id": "creature/language-lexicon-lion/idle",
+      "species": "language-lexicon-lion",
+      "persona": "Descarab",
+      "status": "selected",
+      "source": "production-language-lexicon-lion-145.png",
+      "receipt": "outputs/language-lexicon-lion.json",
+      "actualOrientation": "RIGHT three-quarter stance",
+      "requiredFacing": "RIGHT",
+      "visualReview": "Armoured scarab/insect with antennae, six limb silhouette and one caged plumb staff; all parts inside canvas, accepted first take. Warm halo judged by actual alpha rather than display.",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 297,
+          "y": 5,
+          "w": 1045,
+          "h": 1018
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 69.5,
+        "solidPercent": 29.7,
+        "sha256": "18a0c4f5fddc88357102d0d2edb7ca52aa87968c0cc967129532f82ebeb87bef",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-377a9492-7b1d-4417-bfa6-3800bf5497e5.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": null,
+      "retry": null
+    },
+    {
+      "id": "creature/imagination-doodle-duck/idle",
+      "species": "imagination-doodle-duck",
+      "persona": "Luka Donchilla",
+      "status": "selected",
+      "source": "production-imagination-doodle-duck-145.png",
+      "receipt": "outputs/imagination-doodle-duck.json",
+      "actualOrientation": "LEFT low basketball crouch",
+      "requiredFacing": "LEFT",
+      "visualReview": "Four-limb chinchilla-like sporting body, round ears and balancing tail, one plain ball; intact silhouette, accepted recovered first take. Stylized furry form is retained.",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 228,
+          "y": 12,
+          "w": 1268,
+          "h": 978
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 60.4,
+        "solidPercent": 39,
+        "sha256": "3c05ecfcc00544096d15b1bda36b6603d5a679edef994ae6b2f51472328c5192",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a1341a-39a6-7a31-b7c9-e5e1e5fa629e/exec-c87c04d5-9d96-4ad3-9f83-562c883aae46.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": {
+        "failedCell": 35,
+        "responseStatus": "network error after outputs saved; no successful tool output_hint available",
+        "pathSource": "Own generated_images folder, new files at attempted-request times",
+        "identification": "Visually matched the distinct subject and prop to this exact attempted prompt; not regenerated"
+      },
+      "retry": null
+    },
+    {
+      "id": "creature/imagination-mosaic-mole/idle",
+      "species": "imagination-mosaic-mole",
+      "persona": "Jaiden Anima-snail",
+      "status": "selected",
+      "source": "production-imagination-mosaic-mole-alpha-corrected-145.png",
+      "receipt": "outputs/imagination-mosaic-mole.json",
+      "actualOrientation": "LEFT snail body and puppet presentation",
+      "requiredFacing": "LEFT",
+      "visualReview": "Two stalk eyes only, limbless foot and collar-suspended paper puppet preserved. One background-removal repair attempted after eye-only correction flattened alpha; alpha result below determines release acceptance. Alpha repair passes; final two-eye cutout accepted.",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 59,
+          "y": 12,
+          "w": 1457,
+          "h": 990
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 55.4,
+        "solidPercent": 44,
+        "sha256": "474e6658dd62aa75dcb2a92e875dd737e23eb0fc297f6b05b82738b18b88dabd",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-551c622e-2e19-40cd-907c-c79f62dd98d3.png",
+      "retainedSources": [
+        "production-imagination-mosaic-mole-145.png",
+        "production-imagination-mosaic-mole-corrected-145.png"
+      ],
+      "promptAugmentation": null,
+      "recovery": {
+        "failedCell": 35,
+        "responseStatus": "network error after outputs saved; no successful tool output_hint available",
+        "pathSource": "Own generated_images folder, new files at attempted-request times",
+        "identification": "Visually matched the distinct subject and prop to this exact attempted prompt; not regenerated"
+      },
+      "retry": null
+    },
+    {
+      "id": "creature/imagination-mirror-marten/idle",
+      "species": "imagination-mirror-marten",
+      "persona": "Peter Jacktree",
+      "status": "selected",
+      "source": "production-imagination-mirror-marten-145.png",
+      "receipt": "outputs/imagination-mirror-marten.json",
+      "actualOrientation": "FRONT with viewfinder angled LEFT",
+      "requiredFacing": "FRONT",
+      "visualReview": "Distinct living sapling with bark limbs/root feet/moss beard and one brass viewfinder; four main body limbs, complete silhouette, accepted bounded-retry take. No starter dragon anatomy.",
+      "sourceCheck": {
+        "w": 1225,
+        "h": 1284,
+        "alphaBox": {
+          "x": 11,
+          "y": 5,
+          "w": 1205,
+          "h": 1274
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 46.4,
+        "solidPercent": 52.6,
+        "sha256": "eac45e5442603780db9dada60ac273db1455951962d49cfcd4704d61aa553d24",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-fcd5da04-7334-42b1-ae63-6ddae4de4c20.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": null,
+      "retry": {
+        "boundedAttempt": 1,
+        "reason": "Prior three-call cell ended in network error; no Peter PNG existed after own-folder recovery check"
+      }
+    },
+    {
+      "id": "creature/imagination-chimera-chick/idle",
+      "species": "imagination-chimera-chick",
+      "persona": "Shigeru Miyamole",
+      "status": "selected",
+      "source": "production-imagination-chimera-chick-145.png",
+      "receipt": "outputs/imagination-chimera-chick.json",
+      "actualOrientation": "RIGHT seated three-quarter, head angled toward viewer",
+      "requiredFacing": "RIGHT",
+      "visualReview": "Round mole-like body, two digging forepaws/two hind feet and one wind-up puzzle box; fuller stylized tail retained, no major crop or extra limb. Accepted first take without a polish loop.",
+      "sourceCheck": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 10,
+          "y": 49,
+          "w": 1295,
+          "h": 1112
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 48.1,
+        "solidPercent": 51.3,
+        "sha256": "905eb7f9c76da0ba04033628c901f59cb8473552dcbc235b980b6f6136f4a636",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-043f3c36-5262-4e1d-9c93-9653dd2a16e4.png",
+      "retainedSources": [],
+      "promptAugmentation": null,
+      "recovery": null,
+      "retry": null
+    },
+    {
+      "id": "creature/imagination-paradox-pony/idle",
+      "species": "imagination-paradox-pony",
+      "persona": "Pedro Platypascal",
+      "status": "selected",
+      "source": "production-imagination-paradox-pony-145.png",
+      "receipt": "outputs/imagination-paradox-pony.json",
+      "actualOrientation": "LEFT reclining body, bill turned toward viewer",
+      "requiredFacing": "LEFT",
+      "visualReview": "Platypus bill, webbed limbs and flat tail, single twisted-handle mug; relaxed composition and coherent four-limb body, accepted first take.",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 93,
+          "y": 28,
+          "w": 1397,
+          "h": 958
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 55.8,
+        "solidPercent": 43.7,
+        "sha256": "658ca61707b88616f44a958262ac7d29d125cd5e181e2223bd73ab1f4a13c2cd",
+        "status": "pass",
+        "edgeContact": false
+      },
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-6283d4d1-706f-46b0-911c-af6cd9eb8e0a.png",
+      "retainedSources": [],
+      "promptAugmentation": "Added explicit LEFT leading composition to the existing reclining pose.",
+      "recovery": null,
+      "retry": null
+    }
+  ],
+  "handedOffToRoot": [
+    "memory-archive-armadillo",
+    "memory-hourglass-hedgehog",
+    "memory-souvenir-seal",
+    "memory-second-chance-salamander"
+  ],
+  "handoffEvidence": "No active request, returned output or source PNG existed for these four IDs at handoff. Prepared exact prompt receipts remain for root.",
+  "networkFailure": "Second three-call cell failed after output files were written for Luka/Jaiden. Those two identifiable results were recovered from this worker tool folder with exact attempted prompts/references. Peter had no output and succeeded on one bounded retry.",
+  "repair": "Jaiden extra face-eye pair removed by one targeted edit; that edit flattened alpha and was retained as rejected. One background-removal repair then passed; no further refinements.",
+  "runtime": "No shared inventory/sheets/manifest/ledgers/game/save/audio edits by this worker. No build/native/full tests/commit/push performed.",
+  "usageLastCheck": {
+    "primaryUsedPercent": 48,
+    "weeklyUsedPercent": 38
+  },
+  "exactFrontier": "All eight retained Language/Imagination IDs complete. Four Memory IDs handed to root; no more image requests running in this worker."
+}

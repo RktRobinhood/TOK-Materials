@@ -1,0 +1,39 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/memory-hourglass-hedgehog/idle",
+  "species": "memory-hourglass-hedgehog",
+  "persona": "Chris Nolhog",
+  "source": "production-memory-hourglass-hedgehog-corrected-145.png",
+  "prompt": "Use case: precise-object-edit. Edit Image1 only to correct a clear species error in the original Rift of Reason cutout. Keep the entire transparent silhouette, four limbs, seated pose, swept dark quills, formal coat, brass-scaled waistcoat, silver jewel accent, one low-held off-centre-neck hourglass, texture, palette and outline style unchanged. Replace ONLY the feline head/ears: a HEDGEHOG has two very small rounded ears nestled into the quills, a longer narrow triangular animal snout ending in a small dark nose, no big pointed cat ears and no feline cheek whisker pads. Keep expressive warm eyes and thoughtful raised brow; retain nonhuman cute-horror public-persona joke. Turn the corrected snout LEFT in a left three-quarter seated profile so the existing head now looks toward the hourglass, with one eye mainly visible and the far eye only partly visible. Do not add a new prop, new armour, separate animal, label, logo, text, background or floor; preserve real transparency and every existing limb/tail/hourglass end. Image2 style board is style only. One targeted species/head correction, not a new illustration.",
+  "refs": [
+    "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-hourglass-hedgehog-145.png",
+    "design/source-assets/0-style/style-board.png"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-ec709a20-f243-46db-9fee-aa98a52e6b1a.png",
+  "transparentRequested": true,
+  "status": "selected; correction visual and basic RGBA acceptance passed",
+  "correctionReason": "First take has large pointed cat ears/feline head; replace only species head with small round hedgehog ears/narrow snout, retain first take.",
+  "firstTakeSource": "production-memory-hourglass-hedgehog-145.png",
+  "actualFacing": "LEFT three-quarter seated",
+  "visualReview": "Accepted targeted species/head correction: small rounded hedgehog ears and narrow animal snout now face LEFT toward the hourglass. Quills, seated four-limbed body, coat/waistcoat, single hourglass and silhouette retained. First feline-headed take preserved unused.",
+  "validation": {
+    "species": "memory-hourglass-hedgehog-corrected",
+    "w": 1374,
+    "h": 1145,
+    "alphaBox": {
+      "x": 165,
+      "y": 24,
+      "w": 1081,
+      "h": 1111
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5251794079695912,
+    "sha256": "443582e737cb843c09cb7a3eb3340c022d9a097915f47d44112f1b090368a8c0"
+  }
+}

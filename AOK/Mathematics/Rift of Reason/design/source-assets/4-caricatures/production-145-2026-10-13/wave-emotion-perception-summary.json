@@ -1,0 +1,251 @@
+{
+  "issue": 145,
+  "group": 4,
+  "wave": "Emotion and Perception only",
+  "status": "8 source portraits selected; root integration/native-scale/full-suite/public acceptance pending",
+  "tool": "built-in image_gen",
+  "generated": 8,
+  "corrected": 0,
+  "preservedOriginalOutputs": true,
+  "sharedFilesEdited": false,
+  "usageChecks": [
+    {
+      "before": "first three",
+      "primaryUsedPercent": 27
+    },
+    {
+      "before": "second three",
+      "primaryUsedPercent": 32
+    },
+    {
+      "before": "final two",
+      "primaryUsedPercent": 37
+    }
+  ],
+  "frontier": "All eight assigned sources and receipts saved; no unstarted assigned asset.",
+  "acceptanceScope": "One visual inspection per returned image and source RGBA dimensions/corners/bounds/hash. No manifest/runtime/gameplay/native gallery approval claimed.",
+  "orientationExceptions": [
+    "emotion-cheer-chick front/slight-left versus planned left",
+    "emotion-bond-badger right over-shoulder versus planned left",
+    "perception-true-sight-stag right versus planned left"
+  ],
+  "linusPromptAugmentation": "Explicit PRIMARY FRONT reclining instruction prepended; exact augmented prompt saved in outputs/perception-signal-seal.json.",
+  "outputs": [
+    {
+      "species": "emotion-courage-cub",
+      "id": "creature/emotion-courage-cub/idle",
+      "persona": "Simone Bearles",
+      "source": "production-emotion-courage-cub-145.png",
+      "receipt": "outputs/emotion-courage-cub.json",
+      "actualFacing": "FRONT",
+      "validation": {
+        "species": "emotion-courage-cub",
+        "w": 1245,
+        "h": 1263,
+        "alphaBox": {
+          "x": 50,
+          "y": 14,
+          "w": 1180,
+          "h": 1215
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.6053185028315956,
+        "sha256": "53ca45c0b2939af0c9f7fe1e251affdd5219f75d406bf5079c92f6e59b36e32e"
+      }
+    },
+    {
+      "species": "emotion-cheer-chick",
+      "id": "creature/emotion-cheer-chick/idle",
+      "persona": "Terry Chews",
+      "source": "production-emotion-cheer-chick-145.png",
+      "receipt": "outputs/emotion-cheer-chick.json",
+      "actualFacing": "FRONT / slight LEFT",
+      "validation": {
+        "species": "emotion-cheer-chick",
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 25,
+          "y": 16,
+          "w": 1335,
+          "h": 1106
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "transparentFraction": 0.5623564259517044,
+        "sha256": "0b58c73829f4623228b96005f29c8e40dacfb94b8a6729dfd0743842b143c6fc"
+      }
+    },
+    {
+      "species": "emotion-bond-badger",
+      "id": "creature/emotion-bond-badger/idle",
+      "persona": "Dolly Possum",
+      "source": "production-emotion-bond-badger-145.png",
+      "receipt": "outputs/emotion-bond-badger.json",
+      "actualFacing": "RIGHT over-shoulder seated",
+      "validation": {
+        "species": "emotion-bond-badger",
+        "w": 1328,
+        "h": 1184,
+        "alphaBox": {
+          "x": 33,
+          "y": 10,
+          "w": 1277,
+          "h": 1155
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.47848636946434386,
+        "sha256": "18cae1f43091daeab0d0411531c09f0252c6024d38cf40ab59731c982300adb7"
+      }
+    },
+    {
+      "species": "emotion-stormheart-serpent",
+      "id": "creature/emotion-stormheart-serpent/idle",
+      "persona": "Giannis Antetokudu",
+      "source": "production-emotion-stormheart-serpent-145.png",
+      "receipt": "outputs/emotion-stormheart-serpent.json",
+      "actualFacing": "FRONT three-quarter",
+      "validation": {
+        "species": "emotion-stormheart-serpent",
+        "w": 1208,
+        "h": 1302,
+        "alphaBox": {
+          "x": 252,
+          "y": 16,
+          "w": 711,
+          "h": 1264
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.6968539231543931,
+        "sha256": "4258ccf6f7e04aed5b54be2e94f667a5291fbe4d8f95abdb701889413be73825"
+      }
+    },
+    {
+      "species": "perception-focus-falcon",
+      "id": "creature/perception-focus-falcon/idle",
+      "persona": "Steph Cawry",
+      "source": "production-perception-focus-falcon-145.png",
+      "receipt": "outputs/perception-focus-falcon.json",
+      "actualFacing": "FRONT",
+      "validation": {
+        "species": "perception-focus-falcon",
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 16,
+          "y": 6,
+          "w": 1168,
+          "h": 1238
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.5258868373759458,
+        "sha256": "e10419c38313a35cbb001026e584b397101ec3201c7c81cec709acb868590869"
+      }
+    },
+    {
+      "species": "perception-scout-stoat",
+      "id": "creature/perception-scout-stoat/idle",
+      "persona": "Nelly Koalda",
+      "source": "production-perception-scout-stoat-145.png",
+      "receipt": "outputs/perception-scout-stoat.json",
+      "actualFacing": "LEFT three-quarter",
+      "validation": {
+        "species": "perception-scout-stoat",
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 47,
+          "y": 48,
+          "w": 1235,
+          "h": 1104
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.5692148182428447,
+        "sha256": "aa2d0018b02aa81502625caa0aefc0c93c5e680fe3f783bc3f4ea45e1b775bde"
+      }
+    },
+    {
+      "species": "perception-signal-seal",
+      "id": "creature/perception-signal-seal/idle",
+      "persona": "Linus Sealbastian",
+      "source": "production-perception-signal-seal-145.png",
+      "receipt": "outputs/perception-signal-seal.json",
+      "actualFacing": "FRONT face / diagonal reclining body",
+      "validation": {
+        "species": "perception-signal-seal",
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 47,
+          "y": 35,
+          "w": 1448,
+          "h": 941
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.5809434254964193,
+        "sha256": "17975e825a0d003f855ffedbb8f812afaebfb0fac945b4d8491dd5d875a14149"
+      }
+    },
+    {
+      "species": "perception-true-sight-stag",
+      "id": "creature/perception-true-sight-stag/idle",
+      "persona": "Galileon",
+      "source": "production-perception-true-sight-stag-145.png",
+      "receipt": "outputs/perception-true-sight-stag.json",
+      "actualFacing": "RIGHT low crouch",
+      "validation": {
+        "species": "perception-true-sight-stag",
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 30,
+          "y": 10,
+          "w": 1458,
+          "h": 975
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "transparentFraction": 0.5168768564860026,
+        "sha256": "581ea56c83846b737c59f7edebda790044f77503199fb3229558df5c259f0186"
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/emotion-cheer-chick/idle",
+  "species": "emotion-cheer-chick",
+  "persona": "Terry Chews",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing deep lunge, chest raised and horn offered high in an enthusiastic flourish. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Terry Chews, an original NONHUMAN character inspired by Terry Crews public persona. Specific body/gear: Broad rooster with a small comb and crimson sports vest; one curved little warhorn held by a wing. Pose/composition: Left-facing deep lunge, chest raised and horn offered high in an enthusiastic flourish. Main accessory: One small battered crimson warhorn with a broad curved bell; no lettering or second prop. Printed-role visual rationale: 1/2 with a brief ally-attack boost suits a lightly equipped encourager. The horn illustrates a pep talk and adds no audio requirement. Jewel accent #E8384F. Expression: big theatrical surprise. View: slightly low camera angle. EXACTLY two wing/forelimbs and two feet, one beak. Do not add separate human arms in addition to the wings. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-9f688aeb-3c71-4647-b7a3-9030600ead2b.png",
+  "source": "production-emotion-cheer-chick-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "LEFT",
+  "actualFacing": "FRONT / slight LEFT",
+  "visualReview": "Accepted first take: broad lunge with two wings and two feet, intact raised warhorn and readable face. Face turned more frontward than planned LEFT; keep as pose variation rather than regenerate.",
+  "validation": {
+    "species": "emotion-cheer-chick",
+    "w": 1374,
+    "h": 1145,
+    "alphaBox": {
+      "x": 25,
+      "y": 16,
+      "w": 1335,
+      "h": 1106
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "transparentFraction": 0.5623564259517044,
+    "sha256": "0b58c73829f4623228b96005f29c8e40dacfb94b8a6729dfd0743842b143c6fc"
+  }
+}

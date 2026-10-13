@@ -1,0 +1,58 @@
+{
+  "id": "creature/memory-archive-armadillo/idle",
+  "species": "memory-archive-armadillo",
+  "persona": "Niklas Landillo",
+  "inspiration": "Niklas Landin Jacobsen",
+  "source": "production-memory-archive-armadillo-145.png",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both animal eyes visible, low wide goalkeeper brace, shell raised behind shoulders and one forepaw blocks beside the ball. Exactly two forepaws and two hind feet; no extra hands. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Niklas Landillo, original NONHUMAN public-persona sporting parody inspired by Niklas Landin Jacobsen; never a realistic human face. Body: A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform. Main accessory: One small plain handball with broad panels. Shell/padded vest are costume rather than a second prop; no goal, net, logo or jersey number. Printed-role rationale: Frozen1/3 with Guard makes a modest natural-shell goalkeeper visual apt. It does not add Shield, saves, healing or a ball-catching mechanic. Jewel accent #C9C9D6 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "requiredFacing": "FRONT",
+  "poseDirection": "PRIMARY FRONT: both animal eyes visible, low wide goalkeeper brace, shell raised behind shoulders and one forepaw blocks beside the ball. Exactly two forepaws and two hind feet; no extra hands.",
+  "mechanicalContract": {
+    "cost": 2,
+    "attack": 1,
+    "health": 3,
+    "text": "Guard.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both animal eyes visible, low wide goalkeeper brace, shell raised behind shoulders and one forepaw blocks beside the ball. Exactly two forepaws and two hind feet; no extra hands. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Niklas Landillo, original NONHUMAN public-persona sporting parody inspired by Niklas Landin Jacobsen; never a realistic human face. Body: A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform. Main accessory: One small plain handball with broad panels. Shell/padded vest are costume rather than a second prop; no goal, net, logo or jersey number. Printed-role rationale: Frozen1/3 with Guard makes a modest natural-shell goalkeeper visual apt. It does not add Shield, saves, healing or a ball-catching mechanic. Jewel accent #C9C9D6 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "issue": 145,
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-bf4ca402-e297-4afe-ae13-ed38e1623d04.png",
+  "transparentRequested": true,
+  "actualFacing": "FRONT three-quarter",
+  "visualReview": "Accepted first take: low wide goalkeeper pose, two forepaws and two hind feet, natural shell/tail and intact ball. Worn silver-trimmed padding has heavier-looking plates, accepted as cosmetic Guard presentation.",
+  "validation": {
+    "species": "memory-archive-armadillo",
+    "w": 1312,
+    "h": 1199,
+    "alphaBox": {
+      "x": 61,
+      "y": 11,
+      "w": 1242,
+      "h": 1168
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.47412605016375436,
+    "sha256": "8ca1bc2583825d6d6c9ba6e84bc6b4735445538e891aa77537448d3b4e39031e"
+  }
+}

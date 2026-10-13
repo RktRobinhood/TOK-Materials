@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/perception-true-sight-stag/idle",
+  "species": "perception-true-sight-stag",
+  "persona": "Galileon",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Side-on low crouch, telescope tilted upward and one eye turned toward the viewer. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Galileon, an original NONHUMAN character inspired by Galileo Galilei public persona. Specific body/gear: Old chameleon with pale chin frills, emerald scholarly coat, brass collar and one telescope staff. Pose/composition: Side-on low crouch, telescope tilted upward and one eye turned toward the viewer. Main accessory: One short brass telescope mounted on a sturdy dark staff; no second instrument. Printed-role visual rationale: 4/7 suits a reinforced scholarly collar and substantial staff. It remains an observation cue, not an additional combat or draw ability. Jewel accent #2FBF71. Expression: playful half-smile. View: slightly elevated camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/shakirattle-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-7ab3192a-4fdc-40bc-9411-114b70e45b8a.png",
+  "source": "production-perception-true-sight-stag-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "LEFT",
+  "actualFacing": "RIGHT low crouch",
+  "visualReview": "Accepted first take: four coherent chameleon limbs, curl tail and intact telescope staff in low crouch. Face/telescope point RIGHT despite planned LEFT, recorded honestly; retain intact first take rather than polish-regenerate. Decorative generic star details are not text or licensed emblems.",
+  "validation": {
+    "species": "perception-true-sight-stag",
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 30,
+      "y": 10,
+      "w": 1458,
+      "h": 975
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "transparentFraction": 0.5168768564860026,
+    "sha256": "581ea56c83846b737c59f7edebda790044f77503199fb3229558df5c259f0186"
+  }
+}

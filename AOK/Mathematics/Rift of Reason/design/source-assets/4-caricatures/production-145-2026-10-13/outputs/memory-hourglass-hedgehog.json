@@ -1,0 +1,90 @@
+{
+  "id": "creature/memory-hourglass-hedgehog/idle",
+  "species": "memory-hourglass-hedgehog",
+  "persona": "Chris Nolhog",
+  "inspiration": "Christopher Nolan",
+  "source": "production-memory-hourglass-hedgehog-corrected-145.png",
+  "prompt": "Use case: precise-object-edit. Edit Image1 only to correct a clear species error in the original Rift of Reason cutout. Keep the entire transparent silhouette, four limbs, seated pose, swept dark quills, formal coat, brass-scaled waistcoat, silver jewel accent, one low-held off-centre-neck hourglass, texture, palette and outline style unchanged. Replace ONLY the feline head/ears: a HEDGEHOG has two very small rounded ears nestled into the quills, a longer narrow triangular animal snout ending in a small dark nose, no big pointed cat ears and no feline cheek whisker pads. Keep expressive warm eyes and thoughtful raised brow; retain nonhuman cute-horror public-persona joke. Turn the corrected snout LEFT in a left three-quarter seated profile so the existing head now looks toward the hourglass, with one eye mainly visible and the far eye only partly visible. Do not add a new prop, new armour, separate animal, label, logo, text, background or floor; preserve real transparency and every existing limb/tail/hourglass end. Image2 style board is style only. One targeted species/head correction, not a new illustration.",
+  "styleReferences": [
+    "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-hourglass-hedgehog-145.png",
+    "design/source-assets/0-style/style-board.png"
+  ],
+  "requiredFacing": "LEFT",
+  "poseDirection": "Seated left-facing profile, hourglass held low and one thoughtful animal brow raised.",
+  "mechanicalContract": {
+    "cost": 3,
+    "attack": 1,
+    "health": 4,
+    "text": "Guard. The first time each round you move Fate backward, this gains Shield.",
+    "gates": [
+      109,
+      118,
+      120
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: LEFT facing. Seated left-facing profile, hourglass held low and one thoughtful animal brow raised. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Chris Nolhog, an original NONHUMAN character inspired by Christopher Nolan public persona. Specific body/gear: Round hedgehog with swept quills, dark formal coat over a brass-scaled waistcoat and one odd hourglass. Pose/composition: Seated left-facing profile, hourglass held low and one thoughtful animal brow raised. Main accessory: One double-lobed glass hourglass with an off-centre neck, no written clock diagram. Printed-role visual rationale: 1/4 and Guard justify a small brass-scaled waistcoat. It adds no permanent Shield; the existing trigger remains required. Jewel accent #C9C9D6. Expression: playful half-smile. View: slightly low camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected corrected take; student-project visual and basic RGBA acceptance passed",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "issue": 145,
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-ec709a20-f243-46db-9fee-aa98a52e6b1a.png",
+  "transparentRequested": true,
+  "actualFacing": "LEFT three-quarter seated",
+  "visualReview": "Accepted targeted species/head correction: small rounded hedgehog ears and narrow animal snout now face LEFT toward the hourglass. Quills, seated four-limbed body, coat/waistcoat, single hourglass and silhouette retained. First feline-headed take preserved unused.",
+  "validation": {
+    "species": "memory-hourglass-hedgehog-corrected",
+    "w": 1374,
+    "h": 1145,
+    "alphaBox": {
+      "x": 165,
+      "y": 24,
+      "w": 1081,
+      "h": 1111
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5251794079695912,
+    "sha256": "443582e737cb843c09cb7a3eb3340c022d9a097915f47d44112f1b090368a8c0"
+  },
+  "firstTake": {
+    "source": "production-memory-hourglass-hedgehog-145.png",
+    "prompt": "PRIMARY COMPOSITION: LEFT facing. Seated left-facing profile, hourglass held low and one thoughtful animal brow raised. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Chris Nolhog, an original NONHUMAN character inspired by Christopher Nolan public persona. Specific body/gear: Round hedgehog with swept quills, dark formal coat over a brass-scaled waistcoat and one odd hourglass. Pose/composition: Seated left-facing profile, hourglass held low and one thoughtful animal brow raised. Main accessory: One double-lobed glass hourglass with an off-centre neck, no written clock diagram. Printed-role visual rationale: 1/4 and Guard justify a small brass-scaled waistcoat. It adds no permanent Shield; the existing trigger remains required. Jewel accent #C9C9D6. Expression: playful half-smile. View: slightly low camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+    "refs": [
+      "design/source-assets/0-style/style-board.png",
+      "assets/creatures/astrophysicat-idle.webp"
+    ],
+    "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-dcbc8510-16fe-4d5f-a5c2-5fe15ebc216e.png",
+    "validation": {
+      "species": "memory-hourglass-hedgehog",
+      "w": 1374,
+      "h": 1145,
+      "alphaBox": {
+        "x": 164,
+        "y": 11,
+        "w": 1072,
+        "h": 1123
+      },
+      "cornerAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5287993491097932,
+      "sha256": "3e441393d1bee2877ac4b5ff1fbf7df85e26985ef2f415c7df36854b63c2db4c"
+    },
+    "status": "retained unused; feline head/species mismatch"
+  },
+  "correctionReceipt": "outputs/memory-hourglass-hedgehog-correction.json"
+}

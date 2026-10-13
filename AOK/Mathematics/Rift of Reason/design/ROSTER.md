@@ -242,11 +242,11 @@ Art readiness does not complete production board #109, mechanics/balance #123, o
 | `creature/language-debate-dingo/idle` | K-S-Ibis | language / uncommon |
 | `creature/language-orator-owl/idle` | Opra-moth | language / mythic |
 
-### Future sports substitutions — unproduced cards only
+### Sports substitutions — selected in group 4
 
-Current production body-plan.json and inventory override the historical cast briefs below. Official role sources and original nonhuman body/pose/fantasy sports-gear briefs are retained there. Three basketball, two Danish handball, one golf and one volleyball additions; no hockey. Preserve made art, including LeBrontosaurus and Serenox. Display inspiration/body changes leave frozen IDs, colour, rarity, mechanics and acquisition intact.
+Current production body-plan.json and inventory override the historical cast briefs below. All seven substitutions now have selected group 4 art. Official role sources and original nonhuman body/pose/fantasy sports-gear briefs are retained there. Three basketball, two Danish handball, one golf and one volleyball additions; no hockey. Preserve made art, including LeBrontosaurus and Serenox. Display inspiration/body changes leave frozen IDs, colour, rarity, mechanics and acquisition intact.
 
-| Species id | Future display persona | Public-persona reference | Sport | Replaces historical brief |
+| Species id | Selected display persona | Public-persona reference | Sport | Replaces historical brief |
 |---|---|---|---|---|
 | `imagination-doodle-duck` | Luka Donchilla | Luka Doncic | basketball | Dan TDuck |
 | `emotion-stormheart-serpent` | Giannis Antetokudu | Giannis Antetokounmpo | basketball | Pink Python |
@@ -256,4 +256,49 @@ Current production body-plan.json and inventory override the historical cast bri
 | `memory-replay-raccoon` | Nikola Jokaroo | Nikola Jokic | basketball | Snoop Dogfish |
 | `memory-sequence-swan` | Mathias Gidscorpion | Mathias Gidsel | handball | Adelloon |
 
-Next pending six: Jack Blackbird, Tim Burrowton, Miyazawhale, Nikola Jokaroo, Mathias Gidscorpion and Noetapir. None is counted as produced. One-line group 3 voice proposals are in VOICE-NEEDS.md; no audio/runtime voices added.
+Previously queued six: Jack Blackbird, Tim Burrowton, Miyazawhale, Nikola Jokaroo, Mathias Gidscorpion and Noetapir. All are now selected in group 4. One-line group 3 voice proposals are in VOICE-NEEDS.md; no audio/runtime voices added.
+
+## Bulk art group 4 — #145, 13 October 2026
+
+Thirty further portraits selected and built: 69/72 expansion portraits produced, three deferred (Jimmy #144, Rick #147 and service-rejected Stephen), no other pending portrait. Bulk assets total 73 (65 portraits plus eight motifs); four pilots are outside the folder. Source/runtime checker: 73 passed, zero errors, zero pending. Thirty new manifest entries and 35 sheet mappings include five skipped takes; unowned preview restored.
+
+Exact PNGs, prompts/references, output receipts and source-only voice drafts remain in design/source-assets/4-caricatures/production-145-2026-10-13/. All first/intermediate takes are preserved. Chris's feline-headed first take was corrected to small rounded hedgehog ears/narrow snout. Mathias's crustacean-like take was corrected to an antenna-free scorpion with eight walking legs/two pincers. Jaiden's snail was corrected to two stalk eyes, then had alpha repaired after that edit flattened transparency. Defective first/intermediate takes remain unused provenance.
+
+Actual poses include front goalkeeper/rebound/hover, left seated/crouched/leaning, diagonal reclining and right high-step/over-shoulder compositions. Some planned left poses rendered frontward or rightward and were accepted proportionately; exact planned orientation is not claimed.
+
+| Art id | Selected display persona | Proposed type/rarity |
+|---|---|---|
+| `creature/reason-induction-ibex/idle` | Matt Parkbex | reason / uncommon |
+| `creature/reason-guardrail-goat/idle` | Destin Sandolin | reason / uncommon |
+| `creature/reason-inference-heron/idle` | James Mayfly | reason / rare |
+| `creature/reason-theorem-tortoise/idle` | Turingator | reason / legendary |
+| `creature/emotion-courage-cub/idle` | Simone Bearles | emotion / common |
+| `creature/emotion-cheer-chick/idle` | Terry Chews | emotion / common |
+| `creature/emotion-bond-badger/idle` | Dolly Possum | emotion / uncommon |
+| `creature/emotion-stormheart-serpent/idle` | Giannis Antetokudu | emotion / mythic |
+| `creature/perception-focus-falcon/idle` | Steph Cawry | perception / common |
+| `creature/perception-scout-stoat/idle` | Nelly Koalda | perception / uncommon |
+| `creature/perception-signal-seal/idle` | Linus Sealbastian | perception / uncommon |
+| `creature/perception-true-sight-stag/idle` | Galileon | perception / legendary |
+| `creature/language-word-weasel/idle` | Stephen Clawbert | language / common |
+| `creature/language-metaphor-mantis/idle` | Isabelle Haakheron | language / rare |
+| `creature/language-lexicon-lion/idle` | Descarab | language / legendary |
+| `creature/imagination-doodle-duck/idle` | Luka Donchilla | imagination / common |
+| `creature/imagination-fable-fawn/idle` | Jack Blackbird | imagination / common |
+| `creature/imagination-mosaic-mole/idle` | Jaiden Anima-snail | imagination / common |
+| `creature/imagination-mirror-marten/idle` | Peter Jacktree | imagination / uncommon |
+| `creature/imagination-chimera-chick/idle` | Shigeru Miyamole | imagination / uncommon |
+| `creature/imagination-stage-mouse/idle` | Tim Burrowton | imagination / uncommon |
+| `creature/imagination-paradox-pony/idle` | Pedro Platypascal | imagination / rare |
+| `creature/imagination-dreamweaver-whale/idle` | Miyazawhale | imagination / mythic |
+| `creature/memory-archive-armadillo/idle` | Niklas Landillo | memory / common |
+| `creature/memory-replay-raccoon/idle` | Nikola Jokaroo | memory / uncommon |
+| `creature/memory-hourglass-hedgehog/idle` | Chris Nolhog | memory / uncommon |
+| `creature/memory-souvenir-seal/idle` | Martha Starwart | memory / uncommon |
+| `creature/memory-sequence-swan/idle` | Mathias Gidscorpion | memory / rare |
+| `creature/memory-second-chance-salamander/idle` | Downewt Jr. | memory / rare |
+| `creature/memory-timekeeper-tapir/idle` | Noetapir | memory / legendary |
+
+All seven sports substitutions above are now selected, alongside Steph Cawry, LeBrontosaurus and Serenox. The previously queued six are included in this group. Thirty original lines are in inventory.json / voice-drafts-group4.json.
+
+Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group. #145 stays open for the three deferrals; art selection does not release runtime cards, balance, acquisition or recording.

@@ -1,0 +1,138 @@
+{
+  "issue": 145,
+  "group": 4,
+  "wave": "Final four Memory portraits only",
+  "status": "4 selected sources receipted; root mapping/build/native/full-suite/public acceptance pending",
+  "tool": "built-in image_gen",
+  "newGenerations": 4,
+  "targetedCorrections": 1,
+  "firstTakesPreserved": true,
+  "usageChecks": [
+    {
+      "before": "first three",
+      "primaryUsedPercent": 49
+    },
+    {
+      "before": "final newt plus targeted correction",
+      "primaryUsedPercent": 53
+    }
+  ],
+  "frontier": "All four assigned portraits saved; no unstarted assigned asset.",
+  "sharedFilesEdited": false,
+  "acceptanceScope": "One visual inspection per returned image plus source RGBA dimensions/corners/bounds/hash. Integration/render scale/gameplay/voice acceptance remains with root.",
+  "marthaPromptSource": "Retained prepared request with explicit FRONT diagonal/exactly five arms; exact prompt in outputs/memory-souvenir-seal.json.",
+  "outputs": [
+    {
+      "species": "memory-archive-armadillo",
+      "id": "creature/memory-archive-armadillo/idle",
+      "persona": "Niklas Landillo",
+      "source": "production-memory-archive-armadillo-145.png",
+      "receipt": "outputs/memory-archive-armadillo.json",
+      "actualFacing": "FRONT three-quarter",
+      "validation": {
+        "species": "memory-archive-armadillo",
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 61,
+          "y": 11,
+          "w": 1242,
+          "h": 1168
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.47412605016375436,
+        "sha256": "8ca1bc2583825d6d6c9ba6e84bc6b4735445538e891aa77537448d3b4e39031e"
+      }
+    },
+    {
+      "species": "memory-hourglass-hedgehog",
+      "id": "creature/memory-hourglass-hedgehog/idle",
+      "persona": "Chris Nolhog",
+      "source": "production-memory-hourglass-hedgehog-corrected-145.png",
+      "receipt": "outputs/memory-hourglass-hedgehog.json",
+      "actualFacing": "LEFT three-quarter seated",
+      "validation": {
+        "species": "memory-hourglass-hedgehog-corrected",
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 165,
+          "y": 24,
+          "w": 1081,
+          "h": 1111
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.5251794079695912,
+        "sha256": "443582e737cb843c09cb7a3eb3340c022d9a097915f47d44112f1b090368a8c0"
+      }
+    },
+    {
+      "species": "memory-souvenir-seal",
+      "id": "creature/memory-souvenir-seal/idle",
+      "persona": "Martha Starwart",
+      "source": "production-memory-souvenir-seal-145.png",
+      "receipt": "outputs/memory-souvenir-seal.json",
+      "actualFacing": "FRONT diagonal",
+      "validation": {
+        "species": "memory-souvenir-seal",
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 10,
+          "y": 12,
+          "w": 1355,
+          "h": 1119
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.49395002637885116,
+        "sha256": "4df07e145e8104e1307736fde9b802930fe3d974bcd15195cd34d9b9aedff07b"
+      }
+    },
+    {
+      "species": "memory-second-chance-salamander",
+      "id": "creature/memory-second-chance-salamander/idle",
+      "persona": "Downewt Jr.",
+      "source": "production-memory-second-chance-salamander-145.png",
+      "receipt": "outputs/memory-second-chance-salamander.json",
+      "actualFacing": "RIGHT high step / head over shoulder",
+      "validation": {
+        "species": "memory-second-chance-salamander",
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 59,
+          "y": 17,
+          "w": 1252,
+          "h": 1155
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentFraction": 0.5500620435728961,
+        "sha256": "eaa4e6326466eb73798d93b093ac8510e923c7922f8ec9fda5da1f9273645617"
+      }
+    }
+  ],
+  "retainedUnused": [
+    "production-memory-hourglass-hedgehog-145.png"
+  ],
+  "correctionReceipt": "outputs/memory-hourglass-hedgehog-correction.json"
+}

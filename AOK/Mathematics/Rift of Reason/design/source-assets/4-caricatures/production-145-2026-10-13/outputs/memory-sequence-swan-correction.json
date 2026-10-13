@@ -1,0 +1,14 @@
+{
+  "species": "memory-sequence-swan",
+  "id": "creature/memory-sequence-swan/idle",
+  "persona": "Mathias Gidscorpion",
+  "source": "production-memory-sequence-swan-corrected-145.png",
+  "prompt": "Use case: precise-object-edit. Image1 is the EDIT TARGET, Mathias Gidscorpion, an original fictional handball scorpion. Image2 is approved cute-horror STYLE BOARD. Correct only species anatomy: completely REMOVE BOTH LONG ANTENNAE, with a low dark segmented scorpion head instead. Replace the current walking-leg arrangement with EXACTLY EIGHT short distinct walking legs, FOUR EACH SIDE, each ending in a small clawed foot; no extra human arms or hands. Retain exactly TWO broad pincers and ONE curved segmented tail with a blunt stylized tip. Keep the same warm expressive animal eyes, dark silver-trimmed sports wraps, single plain handball held by the raised pincer, cute-horror ink outlines/cel texture and warm rim light. Preserve the current energetic RIGHT-facing throwing pose for composition variety; no wholesale costume/face redesign. Whole body, all eight walking legs, both pincers, antenna-free head, ball and entire tail fit comfortably INSIDE a truly TRANSPARENT canvas with generous clear padding. No floor, ground shadow, scene, text, card frame, logo, second ball, new accessory or magical power icons. No books. This is a targeted anatomy repair, not a new character.",
+  "styleReferences": [
+    "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-sequence-swan-145.png",
+    "design/source-assets/0-style/style-board.png"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-92b6858d-4a70-4c3e-b7db-67946ba47238.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

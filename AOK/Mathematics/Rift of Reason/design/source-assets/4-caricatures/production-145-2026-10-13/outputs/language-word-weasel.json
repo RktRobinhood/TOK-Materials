@@ -1,0 +1,59 @@
+{
+  "id": "creature/language-word-weasel/idle",
+  "species": "language-word-weasel",
+  "persona": "Stephen Clawbert",
+  "inspiration": "Stephen Colbert",
+  "source": "production-language-word-weasel-145.png",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing half-bow, forelegs hold the bell outward while the head glances back. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Stephen Clawbert, an original NONHUMAN character inspired by Stephen Colbert public persona. Specific body/gear: Slim mantis with spectacles, dark coat, broad gold tie and one crooked-clapper handbell. Pose/composition: Left-facing half-bow, forelegs hold the bell outward while the head glances back. Main accessory: One handheld gold bell with a deliberately crooked broad clapper; no cue card. Printed-role visual rationale: 2/1 is fragile and theatrical, so no armour. A last little bell flourish is a visual joke, not an added Last Word trigger. Jewel accent #F2B632. Expression: big theatrical surprise. View: slightly elevated camera angle. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "requiredFacing": "LEFT",
+  "poseDirection": "Left-facing half-bow, forelegs hold the bell outward while the head glances back.",
+  "mechanicalContract": {
+    "cost": 2,
+    "attack": 2,
+    "health": 1,
+    "text": "Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing half-bow, forelegs hold the bell outward while the head glances back. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Stephen Clawbert, an original NONHUMAN character inspired by Stephen Colbert public persona. Specific body/gear: Slim mantis with spectacles, dark coat, broad gold tie and one crooked-clapper handbell. Pose/composition: Left-facing half-bow, forelegs hold the bell outward while the head glances back. Main accessory: One handheld gold bell with a deliberately crooked broad clapper; no cue card. Printed-role visual rationale: 2/1 is fragile and theatrical, so no armour. A last little bell flourish is a visual joke, not an added Last Word trigger. Jewel accent #F2B632. Expression: big theatrical surprise. View: slightly elevated camera angle. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-9e8f1b0d-f114-4336-b8e4-91c92de2d8e8.png",
+  "actualOrientation": "Body faces LEFT; head turns toward viewer",
+  "visualReview": "Six-limbed mantis, readable spectacles/tie and handbell, intact wings/antennae/feet; accepted first take. Head turns toward viewer rather than strict profile.",
+  "sourceCheck": {
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 57,
+      "y": 16,
+      "w": 1421,
+      "h": 991
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 73.6,
+    "solidPercent": 25.6,
+    "sha256": "64d1d2020af6e150c95c64bb32d33961986acbdd5f62f2020667e0194921ce62",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

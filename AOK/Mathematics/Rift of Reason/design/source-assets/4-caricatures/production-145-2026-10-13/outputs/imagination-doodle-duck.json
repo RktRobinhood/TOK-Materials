@@ -1,0 +1,65 @@
+{
+  "id": "creature/imagination-doodle-duck/idle",
+  "species": "imagination-doodle-duck",
+  "persona": "Luka Donchilla",
+  "inspiration": "Luka Doncic",
+  "source": "production-imagination-doodle-duck-145.png",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY LEFT: low left-facing dribble-ready crouch, both forepaws hold the single ball near the left knee, tail arcs back to the right. Animal snout points left, one eye more prominent; not three-quarter right. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Luka Donchilla, original NONHUMAN public-persona sporting parody inspired by Luka Doncic; never a realistic human face. Body: A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit. Main accessory: One plain violet-and-cream leather basketball with broad seams; no brand, numbered shirt, hoop or second ball. Printed-role rationale: Frozen1/2 vanilla common: light padded sports vest only, not heroic armour. Athletic confidence is a visual joke and grants no playmaking or attack bonus. Jewel accent #A05CF0 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing LEFT; no habitual right-facing pose. All extremities and prop fit.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "requiredFacing": "LEFT",
+  "poseDirection": "PRIMARY LEFT: low left-facing dribble-ready crouch, both forepaws hold the single ball near the left knee, tail arcs back to the right. Animal snout points left, one eye more prominent; not three-quarter right.",
+  "mechanicalContract": {
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "No ability.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: PRIMARY LEFT: low left-facing dribble-ready crouch, both forepaws hold the single ball near the left knee, tail arcs back to the right. Animal snout points left, one eye more prominent; not three-quarter right. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Luka Donchilla, original NONHUMAN public-persona sporting parody inspired by Luka Doncic; never a realistic human face. Body: A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit. Main accessory: One plain violet-and-cream leather basketball with broad seams; no brand, numbered shirt, hoop or second ball. Printed-role rationale: Frozen1/2 vanilla common: light padded sports vest only, not heroic armour. Athletic confidence is a visual joke and grants no playmaking or attack bonus. Jewel accent #A05CF0 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing LEFT; no habitual right-facing pose. All extremities and prop fit.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a1341a-39a6-7a31-b7c9-e5e1e5fa629e/exec-c87c04d5-9d96-4ad3-9f83-562c883aae46.png",
+  "recovery": {
+    "failedCell": 35,
+    "responseStatus": "network error after outputs saved; no successful tool output_hint available",
+    "pathSource": "Own generated_images folder, new files at attempted-request times",
+    "identification": "Visually matched the distinct subject and prop to this exact attempted prompt; not regenerated"
+  },
+  "actualOrientation": "LEFT low basketball crouch",
+  "visualReview": "Four-limb chinchilla-like sporting body, round ears and balancing tail, one plain ball; intact silhouette, accepted recovered first take. Stylized furry form is retained.",
+  "sourceCheck": {
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 228,
+      "y": 12,
+      "w": 1268,
+      "h": 978
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 60.4,
+    "solidPercent": 39,
+    "sha256": "3c05ecfcc00544096d15b1bda36b6603d5a679edef994ae6b2f51472328c5192",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

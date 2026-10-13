@@ -1,0 +1,61 @@
+{
+  "id": "creature/memory-souvenir-seal/idle",
+  "species": "memory-souvenir-seal",
+  "persona": "Martha Starwart",
+  "inspiration": "Martha Stewart",
+  "source": "production-memory-souvenir-seal-145.png",
+  "prompt": "PRIMARY COMPOSITION: FRONT-facing starfish, its central-body face looks toward the viewer, whole five-armed star tilted diagonally. No right-facing animal-head profile. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Martha Starwart, an original NONHUMAN character inspired by Martha Stewart public persona. Specific body/gear: Composed five-armed starfish in a silver-edged shawl; one ribbon-tied little casket. Pose/composition: Whole star tilted diagonally, upper arm offers the casket and lower arms form a soft base. Main accessory: One small silver keepsake casket tied with a broad ribbon; no envelope or paper label. Printed-role visual rationale: 2/4 is steady support. The gift box preserves the craft-host joke, with no extra reward or draw rule. Jewel accent #C9C9D6. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. EXACTLY FIVE starfish arms total, with the face on the central body. No human hands, feet, legs, extra arms, shell or fins. One ribbon-tied casket, held by a single arm.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "requiredFacing": "FRONT",
+  "poseDirection": "Whole star tilted diagonally, upper arm offers the casket and lower arms form a soft base.",
+  "mechanicalContract": {
+    "cost": 4,
+    "attack": 2,
+    "health": 4,
+    "text": "Once per turn, after an own pending event resolves, draw 1 personal-deck card. Skipped events do not count.",
+    "gates": [
+      109,
+      118,
+      119
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Martha Starwart, an original NONHUMAN character inspired by Martha Stewart public persona. Specific body/gear: Composed five-armed starfish in a silver-edged shawl; one ribbon-tied little casket. Pose/composition: Whole star tilted diagonally, upper arm offers the casket and lower arms form a soft base. Main accessory: One small silver keepsake casket tied with a broad ribbon; no envelope or paper label. Printed-role visual rationale: 2/4 is steady support. The gift box preserves the craft-host joke, with no extra reward or draw rule. Jewel accent #C9C9D6. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "promptAugmentation": "Added FRONT diagonal composition and exactly five starfish arms with one casket.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "issue": 145,
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-d961ed79-5518-430e-b261-cd0bf68d31f0.png",
+  "transparentRequested": true,
+  "actualFacing": "FRONT diagonal",
+  "visualReview": "Accepted first take: exactly five starfish arms, face on central body, front diagonal composition and one intact ribboned silver casket. No human hands, extra limbs, floor or scene.",
+  "validation": {
+    "species": "memory-souvenir-seal",
+    "w": 1374,
+    "h": 1145,
+    "alphaBox": {
+      "x": 10,
+      "y": 12,
+      "w": 1355,
+      "h": 1119
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.49395002637885116,
+    "sha256": "4df07e145e8104e1307736fde9b802930fe3d974bcd15195cd34d9b9aedff07b"
+  }
+}

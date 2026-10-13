@@ -1,0 +1,60 @@
+{
+  "id": "creature/memory-second-chance-salamander/idle",
+  "species": "memory-second-chance-salamander",
+  "persona": "Downewt Jr.",
+  "inspiration": "Robert Downey Jr.",
+  "source": "production-memory-second-chance-salamander-145.png",
+  "prompt": "PRIMARY COMPOSITION: RIGHT facing. Right-facing high step, clapper raised and head looking back over a shoulder. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Downewt Jr., an original NONHUMAN character inspired by Robert Downey Jr. public persona. Specific body/gear: Lively newt with dark tufts, animal eyes and silver-collared jacket over a light chest guard; one plain clapper. Pose/composition: Right-facing high step, clapper raised and head looking back over a shoulder. Main accessory: One blank bronze-hinged film clapper; no franchise insignia or written title. Printed-role visual rationale: 3/4 allows a light silver chest guard under stage clothes. Gear adds no resurrection or bonus beyond the frozen return effect. Jewel accent #C9C9D6. Expression: delighted eyes partly closed. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/shakirattle-idle.webp"
+  ],
+  "requiredFacing": "RIGHT",
+  "poseDirection": "Right-facing high step, clapper raised and head looking back over a shoulder.",
+  "mechanicalContract": {
+    "cost": 5,
+    "attack": 3,
+    "health": 4,
+    "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "story-only",
+    "packEligible": false,
+    "proposedMilestoneNode": "b-clock-tower",
+    "theme": "Ch2 completed time-related story",
+    "assignmentStatus": "draft; verify exact plot completion flag"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: RIGHT facing. Right-facing high step, clapper raised and head looking back over a shoulder. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Downewt Jr., an original NONHUMAN character inspired by Robert Downey Jr. public persona. Specific body/gear: Lively newt with dark tufts, animal eyes and silver-collared jacket over a light chest guard; one plain clapper. Pose/composition: Right-facing high step, clapper raised and head looking back over a shoulder. Main accessory: One blank bronze-hinged film clapper; no franchise insignia or written title. Printed-role visual rationale: 3/4 allows a light silver chest guard under stage clothes. Gear adds no resurrection or bonus beyond the frozen return effect. Jewel accent #C9C9D6. Expression: delighted eyes partly closed. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "issue": 145,
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-2688e141-cd82-4f44-adb1-d785e5849afc.png",
+  "transparentRequested": true,
+  "actualFacing": "RIGHT high step / head over shoulder",
+  "visualReview": "Accepted first take: coherent newt with two forelimbs/two hind legs and tail; right high step and raised blank clapper, head turned over shoulder. No crop or extra prop.",
+  "validation": {
+    "species": "memory-second-chance-salamander",
+    "w": 1312,
+    "h": 1199,
+    "alphaBox": {
+      "x": 59,
+      "y": 17,
+      "w": 1252,
+      "h": 1155
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5500620435728961,
+    "sha256": "eaa4e6326466eb73798d93b093ac8510e923c7922f8ec9fda5da1f9273645617"
+  }
+}

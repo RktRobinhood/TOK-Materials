@@ -1,0 +1,14 @@
+{
+  "issue": 145,
+  "group": 3,
+  "commit": "e275e64e5745615d8f42efae11ecb1673836cbf7",
+  "pagesRun": 38428323122,
+  "conclusion": "success",
+  "publicSelectedAssets": 43,
+  "publicLoadedImages": 88,
+  "publicFailedImages": 0,
+  "consoleWarningsErrors": 0,
+  "evidence": "design/reviews/art-production-145-2026-10-13/group3-public.png",
+  "expansionPortraits": 39,
+  "target": 72
+}

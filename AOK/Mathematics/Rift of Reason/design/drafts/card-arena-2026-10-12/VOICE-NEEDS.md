@@ -54,4 +54,10 @@ One short original play/entrance proposal per art-ready character. These are sou
 | `language-debate-dingo` | K-S-Ibis | My beak has one more point. |
 | `language-orator-owl` | Opra-moth | There is room for one more. |
 
-Seven unproduced sports substitutions are mapped in canonical ROSTER.md/body-plan.json; later voice briefs must use the new fictional display identity and broad original acting traits. No audio, API requests, sound keys or manifests were changed for this ledger acceptance.
+Seven sports substitutions now have selected group 4 art and are mapped in canonical ROSTER.md/body-plan.json; later voice briefs must use the new fictional display identity and broad original acting traits. No audio, API requests, sound keys or manifests were changed for this ledger acceptance.
+
+## Group 4 voice handoff — #145
+
+Thirty selected identities have one original draft line each in design/source-assets/4-caricatures/production-145-2026-10-13/voice-drafts-group4.json and inventory.json. ROSTER.md indexes exact IDs/personas; do not duplicate the 30-line source file here. Use broad original delivery directions/existing shared SFX, never celebrity imitation or copied quotations. Seven sports substitutions, Steph/LeBron/Serena and corrected Chris/Mathias/Jaiden keep fictional identities.
+
+Zero recordings, runtime bark/cast-pin additions, voice API calls or voice-manifest edits for this art group. Freeze text/mechanics and individual release gates before the existing plan/render/audit flow records one or two lines per released card. Preserve existing audio/hashes. Art selection does not approve recording; final group 4 acceptance remains in the central review.

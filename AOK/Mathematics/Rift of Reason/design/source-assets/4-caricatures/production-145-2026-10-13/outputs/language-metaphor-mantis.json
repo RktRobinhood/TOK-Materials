@@ -1,0 +1,59 @@
+{
+  "id": "creature/language-metaphor-mantis/idle",
+  "species": "language-metaphor-mantis",
+  "persona": "Isabelle Haakheron",
+  "inspiration": "Isabelle Haak",
+  "source": "production-language-metaphor-mantis-145.png",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both eyes visible, high compact set-or-spike preparation, one wing forelimb lifts the single ball while the other balances wide; legs tuck below. Beak faces viewer, not three-quarter right. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Isabelle Haakheron, original NONHUMAN public-persona sporting parody inspired by Isabelle Haak; never a realistic human face. Body: A tall compact heron with a long clear beak, warm animal eyes and charcoal-and-gold volleyball tunic. Exactly two wings and two bird legs; no added human arms. One plain cream-and-gold volleyball, no stage mirror or licensed uniform. Main accessory: One cream-and-gold volleyball with broad curved panels; no net, court, logo, numbered shirt, second ball or magic attack beam. Printed-role rationale: Frozen3/3 is a midrange body: light padded gold wrist/wing wraps, no permanent shield. Ball and leap add no stat swap, colour effect or volleyball rule. Jewel accent #F2B632 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "requiredFacing": "FRONT",
+  "poseDirection": "PRIMARY FRONT: both eyes visible, high compact set-or-spike preparation, one wing forelimb lifts the single ball while the other balances wide; legs tuck below. Beak faces viewer, not three-quarter right.",
+  "mechanicalContract": {
+    "cost": 4,
+    "attack": 3,
+    "health": 3,
+    "text": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both eyes visible, high compact set-or-spike preparation, one wing forelimb lifts the single ball while the other balances wide; legs tuck below. Beak faces viewer, not three-quarter right. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Isabelle Haakheron, original NONHUMAN public-persona sporting parody inspired by Isabelle Haak; never a realistic human face. Body: A tall compact heron with a long clear beak, warm animal eyes and charcoal-and-gold volleyball tunic. Exactly two wings and two bird legs; no added human arms. One plain cream-and-gold volleyball, no stage mirror or licensed uniform. Main accessory: One cream-and-gold volleyball with broad curved panels; no net, court, logo, numbered shirt, second ball or magic attack beam. Printed-role rationale: Frozen3/3 is a midrange body: light padded gold wrist/wing wraps, no permanent shield. Ball and leap add no stat swap, colour effect or volleyball rule. Jewel accent #F2B632 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-f3313df9-74be-4584-bd30-ffb7fa6ba5aa.png",
+  "actualOrientation": "FRONT toward viewer with raised ball and spread wings",
+  "visualReview": "Two wings and two bird legs, long heron beak, forward volleyball action, one plain ball; accepted first take.",
+  "sourceCheck": {
+    "w": 1145,
+    "h": 1374,
+    "alphaBox": {
+      "x": 19,
+      "y": 17,
+      "w": 1114,
+      "h": 1341
+    },
+    "cornerAlpha": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "transparentPercent": 56.6,
+    "solidPercent": 42.4,
+    "sha256": "5d0a6eb81fe366f88044d53891c51acca4bd1e12e5836b9af8103e5a8f8da97d",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

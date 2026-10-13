@@ -78,3 +78,9 @@ Art readiness does not complete production board #109, mechanics/balance #123, o
 Next pending six: imagination-fable-fawn, imagination-stage-mouse, imagination-dreamweaver-whale, memory-replay-raccoon, memory-sequence-swan and memory-timekeeper-tapir. Use current body-plan overrides including Nikola Jokaroo/Mathias Gidscorpion; seven future sports replacements are reconciled in canonical ROSTER.md.
 
 After ALL initial art generation, the latest human authorizes conditional backend/set implementation with actual prerequisites preserved: #148 depends on #109/#123; #149 depends on #148/#109/#123/#112. Current conditional artifacts remain drafting/issue handoff. Availability follows two completed lesson milestones and the persistent introduction. Unresolved Fate/event-order/queue/win policies remain explicit gates.
+
+## Group 4 frontier — #145
+
+All 30 formerly pending portraits selected/built: 69/72 produced, three deferred, no other pending portrait. All 73 bulk assets pass source/runtime checks. ROSTER.md indexes the 30 identities and produced sports substitutions; output receipts retain corrections/actual pose variation. Thirty original voice drafts remain unrecorded.
+
+Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group. Finish acceptance before another implementation slice. #145 remains open for Jimmy #144, Rick #147 and service-rejected Stephen. #109/#123/owned-deck and individual gameplay gates remain; later conditional work retains the authorized sequence and actual #148/#149 prerequisites above.

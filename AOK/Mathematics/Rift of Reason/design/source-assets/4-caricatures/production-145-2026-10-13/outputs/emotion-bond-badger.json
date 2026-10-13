@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/emotion-bond-badger/idle",
+  "species": "emotion-bond-badger",
+  "persona": "Dolly Possum",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Seated left-facing, looking over the shoulder and offering the book toward the viewer. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Dolly Possum, an original NONHUMAN character inspired by Dolly Parton public persona. Specific body/gear: Warm possum with cream head tufts, crimson shawl and slender tail; one small blank book. Pose/composition: Seated left-facing, looking over the shoulder and offering the book toward the viewer. Main accessory: One small blank literacy book held to the chest; no second page prop. Printed-role visual rationale: 2/4 is gentle support. Keep the book because public book-gifting is the core joke; it is one of only two retained print props. Jewel accent #E8384F. Expression: dry amused raised eyebrow. View: slightly low camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-592d8590-ddb8-44f8-b813-5a1ef0d2b694.png",
+  "source": "production-emotion-bond-badger-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "LEFT",
+  "actualFacing": "RIGHT over-shoulder seated",
+  "visualReview": "Accepted first take: seated possum with four coherent limbs, slender tail, shawl and readable book. Looking right rather than planned LEFT; retain first take. Warm edge glow fades into actual alpha, not an opaque backdrop.",
+  "validation": {
+    "species": "emotion-bond-badger",
+    "w": 1328,
+    "h": 1184,
+    "alphaBox": {
+      "x": 33,
+      "y": 10,
+      "w": 1277,
+      "h": 1155
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.47848636946434386,
+    "sha256": "18cae1f43091daeab0d0411531c09f0252c6024d38cf40ab59731c982300adb7"
+  }
+}

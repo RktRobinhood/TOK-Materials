@@ -1,0 +1,37 @@
+{
+  "status": "30pending publishing group; begin these six then remaining24",
+  "firstSix": [
+    "imagination-fable-fawn",
+    "imagination-stage-mouse",
+    "imagination-dreamweaver-whale",
+    "memory-replay-raccoon",
+    "memory-sequence-swan",
+    "memory-timekeeper-tapir"
+  ],
+  "remaining": [
+    "reason-induction-ibex",
+    "reason-guardrail-goat",
+    "reason-inference-heron",
+    "reason-theorem-tortoise",
+    "emotion-courage-cub",
+    "emotion-cheer-chick",
+    "emotion-bond-badger",
+    "emotion-stormheart-serpent",
+    "perception-focus-falcon",
+    "perception-scout-stoat",
+    "perception-signal-seal",
+    "perception-true-sight-stag",
+    "language-word-weasel",
+    "language-metaphor-mantis",
+    "language-lexicon-lion",
+    "imagination-doodle-duck",
+    "imagination-mosaic-mole",
+    "imagination-mirror-marten",
+    "imagination-chimera-chick",
+    "imagination-paradox-pony",
+    "memory-archive-armadillo",
+    "memory-hourglass-hedgehog",
+    "memory-souvenir-seal",
+    "memory-second-chance-salamander"
+  ]
+}

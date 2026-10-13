@@ -107,6 +107,26 @@
       "group": 1
     },
     {
+      "id": "creature/reason-induction-ibex/idle",
+      "name": "Matt Parkbex",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "pose": "Seated three-quarter right, triangle held upside down with a puzzled glance; model drift from planned left accepted.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Once per turn, after you cast a Reason spell, this gains 1 attack until your next turn starts.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-induction-ibex-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/reason-logic-lynx/idle",
       "name": "Derek Mullinx",
       "kind": "portrait",
@@ -125,6 +145,47 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-logic-lynx-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/reason-guardrail-goat/idle",
+      "name": "Destin Sandolin",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "uncommon",
+      "pose": "Curl partly around the shield, side-on right, peering over its rim with the tail forming a low brace.",
+      "contract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. The first spell damage this takes each round is reduced by 1.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-guardrail-goat-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/reason-inference-heron/idle",
+      "name": "James Mayfly",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "rare",
+      "pose": "Front-facing hover, caliper jaws held just apart while the face studies the tiny gap.",
+      "contract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Once per turn, after another friendly creature survives a fight at 1 health, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          127
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-inference-heron-145.png",
+      "group": 4
     },
     {
       "id": "creature/reason-boundary-bear/idle",
@@ -147,6 +208,28 @@
       "group": 3
     },
     {
+      "id": "creature/reason-theorem-tortoise/idle",
+      "name": "Turingator",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "legendary",
+      "pose": "Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently.",
+      "contract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "At your turn's end, if you cast 2 Reason spells, schedule at +1 round: your creatures present then gain 1 maximum health and heal 1. At most one event from this creature pending.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-theorem-tortoise-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/emotion-pulse-pup/idle",
       "name": "Dua Leapfrog",
       "kind": "portrait",
@@ -167,6 +250,46 @@
       "group": 2
     },
     {
+      "id": "creature/emotion-courage-cub/idle",
+      "name": "Simone Bearles",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "common",
+      "pose": "Rendered FRONT; original pose intent in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: restore 1 heart to your hero.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-courage-cub-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/emotion-cheer-chick/idle",
+      "name": "Terry Chews",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "common",
+      "pose": "Rendered FRONT / slight LEFT; original pose intent in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 2,
+        "text": "Entrance: another friendly creature gains 1 attack this turn.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-cheer-chick-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/emotion-temper-tiger/idle",
       "name": "Jeremy Clawson",
       "kind": "portrait",
@@ -185,6 +308,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-temper-tiger-145.png",
       "group": 3
+    },
+    {
+      "id": "creature/emotion-bond-badger/idle",
+      "name": "Dolly Possum",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "pose": "Rendered RIGHT over-shoulder seated; original pose intent in provenance.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 4,
+        "text": "Once per turn, after another friendly creature is defeated, restore 1 heart to your hero.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-bond-badger-145.png",
+      "group": 4
     },
     {
       "id": "creature/emotion-grudge-goose/idle",
@@ -267,6 +410,26 @@
       "group": 3
     },
     {
+      "id": "creature/emotion-stormheart-serpent/idle",
+      "name": "Giannis Antetokudu",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "mythic",
+      "pose": "Rendered FRONT three-quarter; original pose intent in provenance.",
+      "contract": {
+        "cost": 6,
+        "attack": 5,
+        "health": 5,
+        "text": "Entrance: choose to lose up to 2 of your own hearts; deal that much damage to a chosen enemy creature.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-stormheart-serpent-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/emotion-empathy-elephant/idle",
       "name": "Pascalophant",
       "kind": "portrait",
@@ -307,6 +470,27 @@
       "group": 1
     },
     {
+      "id": "creature/perception-focus-falcon/idle",
+      "name": "Steph Cawry",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "common",
+      "pose": "Rendered FRONT; original pose intent in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "This deals 1 extra combat damage to a creature whose Shield has already been consumed this match.",
+        "gates": [
+          109,
+          127
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-focus-falcon-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/perception-shadow-shrimp/idle",
       "name": "David Brine",
       "kind": "portrait",
@@ -325,6 +509,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-shadow-shrimp-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/perception-scout-stoat/idle",
+      "name": "Nelly Koalda",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "pose": "Rendered LEFT three-quarter; original pose intent in provenance.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-scout-stoat-145.png",
+      "group": 4
     },
     {
       "id": "creature/perception-prism-puffin/idle",
@@ -367,6 +571,28 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-pattern-panther-145.png",
       "group": 3
+    },
+    {
+      "id": "creature/perception-signal-seal/idle",
+      "name": "Linus Sealbastian",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "pose": "Rendered FRONT face / diagonal reclining body; original pose intent in provenance.",
+      "contract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 5,
+        "text": "Guard. Entrance: heal your hero by 1 for each environmental occurrence permanently skipped this match, maximum 3.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-signal-seal-145.png",
+      "group": 4
     },
     {
       "id": "creature/perception-observer-octopus/idle",
@@ -431,6 +657,26 @@
       "group": 3
     },
     {
+      "id": "creature/perception-true-sight-stag/idle",
+      "name": "Galileon",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "legendary",
+      "pose": "Rendered RIGHT low crouch; original pose intent in provenance.",
+      "contract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Once per round, replace your normal personal draw with inspecting the top 3 cards, drawing one and restoring the others in their original order.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-true-sight-stag-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/language-comma-caterpillar/idle",
       "name": "Emma Wordson",
       "kind": "portrait",
@@ -469,6 +715,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-label-lemur-145.png",
       "group": 3
+    },
+    {
+      "id": "creature/language-word-weasel/idle",
+      "name": "Stephen Clawbert",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "common",
+      "pose": "Rendered Body faces LEFT; head turns toward viewer; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-word-weasel-145.png",
+      "group": 4
     },
     {
       "id": "creature/language-debate-dingo/idle",
@@ -510,6 +776,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-clause-crane-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/language-metaphor-mantis/idle",
+      "name": "Isabelle Haakheron",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "rare",
+      "pose": "Rendered FRONT toward viewer with raised ball and spread wings; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 3,
+        "text": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-metaphor-mantis-145.png",
+      "group": 4
     },
     {
       "id": "creature/language-contract-coyote/idle",
@@ -554,6 +840,46 @@
       "group": 3
     },
     {
+      "id": "creature/language-lexicon-lion/idle",
+      "name": "Descarab",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "legendary",
+      "pose": "Rendered RIGHT three-quarter stance; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Entrance: choose one active Axiom category; discard that rule and restore its basic rule. Draw 1 personal-deck card.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-lexicon-lion-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/imagination-doodle-duck/idle",
+      "name": "Luka Donchilla",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "common",
+      "pose": "Rendered LEFT low basketball crouch; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 1,
+        "attack": 1,
+        "health": 2,
+        "text": "No ability.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-doodle-duck-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/imagination-possibility-pika/idle",
       "name": "PewDiePika",
       "kind": "portrait",
@@ -572,6 +898,47 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-possibility-pika-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/imagination-fable-fawn/idle",
+      "name": "Jack Blackbird",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "common",
+      "pose": "Left-facing wide-wing stage flourish, lute lifted diagonally and feet planted apart.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-fable-fawn-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/imagination-mosaic-mole/idle",
+      "name": "Jaiden Anima-snail",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "common",
+      "pose": "Rendered LEFT snail body and puppet presentation; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 2,
+        "text": "Last Word: summon a colourless 1/1 paper token if you have board space.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mosaic-mole-alpha-corrected-145.png",
+      "group": 4
     },
     {
       "id": "creature/imagination-blueprint-bat/idle",
@@ -595,6 +962,87 @@
       "group": 1
     },
     {
+      "id": "creature/imagination-mirror-marten/idle",
+      "name": "Peter Jacktree",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "pose": "Rendered FRONT with viewfinder angled LEFT; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mirror-marten-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/imagination-chimera-chick/idle",
+      "name": "Shigeru Miyamole",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "pose": "Rendered RIGHT seated three-quarter, head angled toward viewer; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Once per turn, after this has attack and health swapped, it gains Shield.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-chimera-chick-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/imagination-stage-mouse/idle",
+      "name": "Tim Burrowton",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "pose": "Lean sideways as a still jointed puppet step, cap tilted and lantern raised; keep the little root feet visible.",
+      "contract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 4,
+        "text": "Elusive. Your colourless tokens have 1 extra attack while this remains in play.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-stage-mouse-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/imagination-paradox-pony/idle",
+      "name": "Pedro Platypascal",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "rare",
+      "pose": "Rendered LEFT reclining body, bill turned toward viewer; authored intent and actual changes in provenance.",
+      "contract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 3,
+        "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-paradox-pony-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/imagination-cloud-castle-crab/idle",
       "name": "Ariana Crande",
       "kind": "portrait",
@@ -614,6 +1062,27 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-cloud-castle-crab-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/imagination-dreamweaver-whale/idle",
+      "name": "Miyazawhale",
+      "kind": "portrait",
+      "colour": "imagination",
+      "rarity": "mythic",
+      "pose": "Slow left-facing diagonal hover, belly toward viewer and one fin gently indicates the toy.",
+      "contract": {
+        "cost": 6,
+        "attack": 3,
+        "health": 7,
+        "text": "At your turn's end, if you control at least 2 colourless tokens, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-dreamweaver-whale-145.png",
+      "group": 4
     },
     {
       "id": "creature/imagination-impossible-unicorn/idle",
@@ -676,6 +1145,26 @@
       "group": 1
     },
     {
+      "id": "creature/memory-archive-armadillo/idle",
+      "name": "Niklas Landillo",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "common",
+      "pose": "Rendered FRONT three-quarter; original pose and any correction in provenance.",
+      "contract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Guard.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-archive-armadillo-145.png",
+      "group": 4
+    },
+    {
       "id": "creature/memory-chronicle-cat/idle",
       "name": "Stan Leemur",
       "kind": "portrait",
@@ -694,6 +1183,112 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-chronicle-cat-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/memory-replay-raccoon/idle",
+      "name": "Nikola Jokaroo",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "pose": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-replay-raccoon-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/memory-hourglass-hedgehog/idle",
+      "name": "Chris Nolhog",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "pose": "Rendered LEFT three-quarter seated; original pose and any correction in provenance.",
+      "contract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Guard. The first time each round you move Fate backward, this gains Shield.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-hourglass-hedgehog-corrected-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/memory-souvenir-seal/idle",
+      "name": "Martha Starwart",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "pose": "Rendered FRONT diagonal; original pose and any correction in provenance.",
+      "contract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 4,
+        "text": "Once per turn, after an own pending event resolves, draw 1 personal-deck card. Skipped events do not count.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-souvenir-seal-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/memory-sequence-swan/idle",
+      "name": "Mathias Gidscorpion",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "rare",
+      "pose": "Right-facing handball throw; corrected antenna-free scorpion with eight walking legs, two pincers and one curved tail.",
+      "contract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: move one own pending event one space later, maximum +4 rounds; draw 1 personal-deck card if it moved.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-sequence-swan-corrected-145.png",
+      "group": 4
+    },
+    {
+      "id": "creature/memory-second-chance-salamander/idle",
+      "name": "Downewt Jr.",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "rare",
+      "pose": "Rendered RIGHT high step / head over shoulder; original pose and any correction in provenance.",
+      "contract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-second-chance-salamander-145.png",
+      "group": 4
     },
     {
       "id": "creature/memory-keeper-koi/idle",
@@ -716,6 +1311,28 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-keeper-koi-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/memory-timekeeper-tapir/idle",
+      "name": "Noetapir",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "legendary",
+      "pose": "Front-facing seated brace, staff held diagonally and short snout turned toward its linked rings.",
+      "contract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Entrance, once per match: copy one spent own one-shot event to a new public occurrence at +2 rounds. No spell energy is repaid; the spent original stays consumed.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-timekeeper-tapir-145.png",
+      "group": 4
     },
     {
       "id": "art/spell-motif-reason",

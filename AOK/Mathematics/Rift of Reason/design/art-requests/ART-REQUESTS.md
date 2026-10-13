@@ -1172,3 +1172,9 @@ Art readiness does not complete production board #109, mechanics/balance #123, o
 | `creature/language-orator-owl/idle` | Opra-moth | language / mythic |
 
 Future requests use the seven exact unproduced sports substitutions in canonical ROSTER.md/body-plan.json. Preserve selected art. Full art stays DEFAULT NORMAL with separate live labels/stats. Twelve source-only original voice drafts are in VOICE-NEEDS.md; no new audio or paid sound request.
+
+## Bulk art group 4 — #145, 13 October 2026
+
+69/72 portraits produced; only Jimmy #144, Rick #147 and service-rejected Stephen remain deferred. The 30 new art IDs/personas are tabulated once in canonical ROSTER.md; all seven sports substitutions are now produced. All 73 bulk assets pass source/runtime checks; 30 new manifest entries and 35 mappings including five skipped takes. Exact PNGs, prompts/references, output receipts and source-only voice drafts remain in design/source-assets/4-caricatures/production-145-2026-10-13/. All first/intermediate takes are preserved.
+
+Chris head, Mathias legs/antennae and Jaiden eyes/alpha corrections are documented in the central review/output receipts. Pose drift is recorded honestly. Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group. #145 stays open; normal full art/live labels remain separate from runtime release. VOICE-NEEDS.md links 30 source-only drafts; zero recordings or voice API requests.

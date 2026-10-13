@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/emotion-courage-cub/idle",
+  "species": "emotion-courage-cub",
+  "persona": "Simone Bearles",
+  "prompt": "PRIMARY COMPOSITION: FRONT facing. Front-facing one-foot landing, free paw spread for balance and the bar kept below the face. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Simone Bearles, an original NONHUMAN character inspired by Simone Biles public persona. Specific body/gear: Compact bear cub in a red training jacket and light wraps; one small bronze practice bar beside its lifted foot. Pose/composition: Front-facing one-foot landing, free paw spread for balance and the bar kept below the face. Main accessory: One short bronze balance bar with a padded red grip, no full apparatus. Printed-role visual rationale: 2/2 and Entrance hero healing suit light athlete wraps; the bar is a sporting reference, not a weapon or additional heal. Jewel accent #E8384F. Expression: dry amused raised eyebrow. View: slightly elevated camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-4f1b9b88-d8de-4cf1-871b-48baa0a183b3.png",
+  "source": "production-emotion-courage-cub-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "FRONT",
+  "actualFacing": "FRONT",
+  "visualReview": "Accepted first take: front-facing one-foot balance pose, four coherent limbs, readable bar and intact silhouette. Bar includes small supports; accepted as a compact practice prop.",
+  "validation": {
+    "species": "emotion-courage-cub",
+    "w": 1245,
+    "h": 1263,
+    "alphaBox": {
+      "x": 50,
+      "y": 14,
+      "w": 1180,
+      "h": 1215
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.6053185028315956,
+    "sha256": "53ca45c0b2939af0c9f7fe1e251affdd5219f75d406bf5079c92f6e59b36e32e"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/perception-scout-stoat/idle",
+  "species": "perception-scout-stoat",
+  "persona": "Nelly Koalda",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY LEFT: left-facing three-quarter follow-through, club angled upward behind the left shoulder, short knees bent and animal nose clearly left. Whole club fits with transparent margin; no right-facing pose. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Nelly Koalda, original NONHUMAN public-persona sporting parody inspired by Nelly Korda; never a realistic human face. Body: A compact silver-grey koala with round fluffy ears, broad dark animal nose and worn emerald golf jacket. Four total limbs, no human face. One oversized simple brass-headed golf club with dark green grip; no notebook, visor logo or branded kit. Main accessory: One plain golf iron with an oversized rounded brass head and dark-green leather grip; no extra ball, golf bag, flag, scenery or logo. Printed-role rationale: Frozen2/3 information creature: light sport cloth only. Club is a visual precision tool, not a weapon bonus or new inspection action. Jewel accent #2FBF71 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing LEFT; no habitual right-facing pose. All extremities and prop fit.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-02cc5ca9-6dde-4d17-b4f7-ddd2b6ae0033.png",
+  "source": "production-perception-scout-stoat-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "LEFT",
+  "actualFacing": "LEFT three-quarter",
+  "visualReview": "Accepted first take: coherent four-limbed koala, left-directed face and golf follow-through with intact club and ears. One large readable sports prop, no extra ball or scene.",
+  "validation": {
+    "species": "perception-scout-stoat",
+    "w": 1312,
+    "h": 1199,
+    "alphaBox": {
+      "x": 47,
+      "y": 48,
+      "w": 1235,
+      "h": 1104
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5692148182428447,
+    "sha256": "aa2d0018b02aa81502625caa0aefc0c93c5e680fe3f783bc3f4ea45e1b775bde"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/perception-signal-seal/idle",
+  "species": "perception-signal-seal",
+  "persona": "Linus Sealbastian",
+  "prompt": "PRIMARY COMPOSITION: FRONT reclining. Reclining diagonally with the animal face squarely toward the viewer and both eyes visible, cable coil lifted above its belly; retain two foreflippers and two seal-shaped rear flippers. Do not drift into a right-facing upright pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Linus Sealbastian, an original NONHUMAN character inspired by Linus Sebastian public persona. Specific body/gear: Round seal in dark-green workshop shirt, brass foreflipper brace and one oversized cable coil; rear flippers stay seal-shaped. Pose/composition: Reclining diagonally, coil lifted above the belly while the head leans forward to inspect it. Main accessory: One large insulated cable coil strapped to a plain brass foreflipper guard; no second tool. Printed-role visual rationale: 2/5 and Guard justify a protective brass brace. Cable remains the maker joke and does not imply added spell resistance. Jewel accent #2FBF71. Expression: delighted eyes partly closed. View: level camera with head tilted toward viewer. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-bdad9d69-1af1-49e6-b23c-62ab65a40151.png",
+  "source": "production-perception-signal-seal-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "FRONT",
+  "actualFacing": "FRONT face / diagonal reclining body",
+  "visualReview": "Accepted first take: front-directed smiling animal face, two foreflippers and two seal-shaped rear flippers, reclining diagonal body. Brass foreflipper brace and large cable coil intact. Warm edge glow fades into actual alpha; no opaque scene.",
+  "validation": {
+    "species": "perception-signal-seal",
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 47,
+      "y": 35,
+      "w": 1448,
+      "h": 941
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5809434254964193,
+    "sha256": "17975e825a0d003f855ffedbb8f812afaebfb0fac945b4d8491dd5d875a14149"
+  }
+}

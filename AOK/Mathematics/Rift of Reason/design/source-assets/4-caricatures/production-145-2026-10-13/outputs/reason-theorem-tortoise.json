@@ -1,0 +1,14 @@
+{
+  "id": "creature/reason-theorem-tortoise/idle",
+  "species": "reason-theorem-tortoise",
+  "persona": "Turingator",
+  "source": "production-reason-theorem-tortoise-145.png",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Turingator, an original NONHUMAN character inspired by Alan Turing public persona. Specific body/gear: Small blue-grey alligator with blunt animal snout and reinforced dark-blue scholarly coat; one brass tape-reader relic. Pose/composition: Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently. Main accessory: One brass punch-wheel reader with a short blank paper-tape loop; no notebook or readable code. Printed-role visual rationale: 4/7 supports an armoured scholarly coat over natural scales. The finite-step machine is a cue, not an extra scheduling mechanism. Jewel accent #3D7BFF. Expression: playful half-smile. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/shakirattle-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-74c631d3-b544-4c09-8a58-363ce5e4d2dc.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

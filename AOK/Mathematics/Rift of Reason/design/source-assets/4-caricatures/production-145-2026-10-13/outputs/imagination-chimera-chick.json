@@ -1,0 +1,59 @@
+{
+  "id": "creature/imagination-chimera-chick/idle",
+  "species": "imagination-chimera-chick",
+  "persona": "Shigeru Miyamole",
+  "inspiration": "Shigeru Miyamoto",
+  "source": "production-imagination-chimera-chick-145.png",
+  "prompt": "PRIMARY COMPOSITION: RIGHT facing. Seated right-facing, big digging paws hold the box and head turns toward viewer. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Shigeru Miyamole, an original NONHUMAN character inspired by Shigeru Miyamoto public persona. Specific body/gear: Round mole with bright animal eyes, violet workshop vest and one little wind-up puzzle box. Pose/composition: Seated right-facing, big digging paws hold the box and head turns toward viewer. Main accessory: One compact brass wind-up puzzle box with two large violet buttons; no controller logo or notebook. Printed-role visual rationale: 1/4 can look sturdy through its broad paws and workshop vest; armour must not imply automatic Shield outside the swap trigger. Jewel accent #A05CF0. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "requiredFacing": "RIGHT",
+  "poseDirection": "Seated right-facing, big digging paws hold the box and head turns toward viewer.",
+  "mechanicalContract": {
+    "cost": 3,
+    "attack": 1,
+    "health": 4,
+    "text": "Once per turn, after this has attack and health swapped, it gains Shield.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: RIGHT facing. Seated right-facing, big digging paws hold the box and head turns toward viewer. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Shigeru Miyamole, an original NONHUMAN character inspired by Shigeru Miyamoto public persona. Specific body/gear: Round mole with bright animal eyes, violet workshop vest and one little wind-up puzzle box. Pose/composition: Seated right-facing, big digging paws hold the box and head turns toward viewer. Main accessory: One compact brass wind-up puzzle box with two large violet buttons; no controller logo or notebook. Printed-role visual rationale: 1/4 can look sturdy through its broad paws and workshop vest; armour must not imply automatic Shield outside the swap trigger. Jewel accent #A05CF0. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-043f3c36-5262-4e1d-9c93-9653dd2a16e4.png",
+  "actualOrientation": "RIGHT seated three-quarter, head angled toward viewer",
+  "visualReview": "Round mole-like body, two digging forepaws/two hind feet and one wind-up puzzle box; fuller stylized tail retained, no major crop or extra limb. Accepted first take without a polish loop.",
+  "sourceCheck": {
+    "w": 1312,
+    "h": 1199,
+    "alphaBox": {
+      "x": 10,
+      "y": 49,
+      "w": 1295,
+      "h": 1112
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 48.1,
+    "solidPercent": 51.3,
+    "sha256": "905eb7f9c76da0ba04033628c901f59cb8473552dcbc235b980b6f6136f4a636",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

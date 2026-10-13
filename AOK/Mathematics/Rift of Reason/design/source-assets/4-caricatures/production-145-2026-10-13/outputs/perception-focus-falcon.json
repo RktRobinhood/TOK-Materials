@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/perception-focus-falcon/idle",
+  "species": "perception-focus-falcon",
+  "persona": "Steph Cawry",
+  "prompt": "PRIMARY COMPOSITION: FRONT facing. Front-facing hover with one wing high and the ball tucked low, focused animal eyes visible. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Steph Cawry, an original NONHUMAN character inspired by Stephen Curry public persona. Specific body/gear: Rounded falcon with dark crest and emerald sports vest; one plain little ball held by a wing. Pose/composition: Front-facing hover with one wing high and the ball tucked low, focused animal eyes visible. Main accessory: One small plain emerald leather basketball; no brand or glowing attack beam. Printed-role visual rationale: 1/3 remains a lightly equipped precision athlete; a large weapon would misread its modest printed attack. Jewel accent #2FBF71. Expression: eyes narrowed in mock seriousness. View: level camera with head tilted toward viewer. EXACTLY two wing/forelimbs and two feet, one beak. Do not add separate human arms in addition to the wings. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-7960b127-1c9e-45b6-8367-35d6968305d8.png",
+  "source": "production-perception-focus-falcon-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "FRONT",
+  "actualFacing": "FRONT",
+  "visualReview": "Accepted first take: two wings, two feet and single beak; front hovering pose, raised wing and low basketball intact. Rounded owl-like face accepted within the brief's rounded bird body, without changing any mechanical ID.",
+  "validation": {
+    "species": "perception-focus-falcon",
+    "w": 1194,
+    "h": 1317,
+    "alphaBox": {
+      "x": 16,
+      "y": 6,
+      "w": 1168,
+      "h": 1238
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5258868373759458,
+    "sha256": "e10419c38313a35cbb001026e584b397101ec3201c7c81cec709acb868590869"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "id": "creature/imagination-mosaic-mole/idle",
+  "species": "imagination-mosaic-mole",
+  "persona": "Jaiden Anima-snail",
+  "inspiration": "Jaiden Animations",
+  "source": "production-imagination-mosaic-mole-alpha-corrected-145.png",
+  "prompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Jaiden Anima-snail, an original NONHUMAN character inspired by Jaiden Animations public persona. Specific body/gear: Dark snail with warm stalk eyes, violet artist shawl and textured shell; one simple paper marionette. Pose/composition: Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Main accessory: One folded-paper marionette with a broad violet thread loop; no pencil, sketchpad or book. Printed-role visual rationale: 1/2 stays a modest artist. The puppet retains animation-making comedy and does not create an extra token beyond the frozen Last Word. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Snail anatomy only: one soft crawling foot, shell and head stalks, no added mammal arms/hands/legs. Puppet hangs from its collar thread.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "requiredFacing": "LEFT",
+  "poseDirection": "Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away.",
+  "mechanicalContract": {
+    "cost": 2,
+    "attack": 1,
+    "health": 2,
+    "text": "Last Word: summon a colourless 1/1 paper token if you have board space.",
+    "gates": [
+      109,
+      "token-order"
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Jaiden Anima-snail, an original NONHUMAN character inspired by Jaiden Animations public persona. Specific body/gear: Dark snail with warm stalk eyes, violet artist shawl and textured shell; one simple paper marionette. Pose/composition: Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Main accessory: One folded-paper marionette with a broad violet thread loop; no pencil, sketchpad or book. Printed-role visual rationale: 1/2 stays a modest artist. The puppet retains animation-making comedy and does not create an extra token beyond the frozen Last Word. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Snail anatomy only: one soft crawling foot, shell and head stalks, no added mammal arms/hands/legs. Puppet hangs from its collar thread.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-551c622e-2e19-40cd-907c-c79f62dd98d3.png",
+  "recovery": {
+    "failedCell": 35,
+    "responseStatus": "network error after outputs saved; no successful tool output_hint available",
+    "pathSource": "Own generated_images folder, new files at attempted-request times",
+    "identification": "Visually matched the distinct subject and prop to this exact attempted prompt; not regenerated"
+  },
+  "firstTake": {
+    "source": "production-imagination-mosaic-mole-145.png",
+    "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a1341a-39a6-7a31-b7c9-e5e1e5fa629e/exec-faa87a64-bc81-40fb-8d41-ac3ab10e453e.png",
+    "prompt": "PRIMARY COMPOSITION: LEFT facing. Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Jaiden Anima-snail, an original NONHUMAN character inspired by Jaiden Animations public persona. Specific body/gear: Dark snail with warm stalk eyes, violet artist shawl and textured shell; one simple paper marionette. Pose/composition: Left-facing slow lean, puppet suspended from a broad collar thread before the eyes while the shell tilts away. Main accessory: One folded-paper marionette with a broad violet thread loop; no pencil, sketchpad or book. Printed-role visual rationale: 1/2 stays a modest artist. The puppet retains animation-making comedy and does not create an extra token beyond the frozen Last Word. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Snail anatomy only: one soft crawling foot, shell and head stalks, no added mammal arms/hands/legs. Puppet hangs from its collar thread.",
+    "styleReferences": [
+      "design/source-assets/0-style/style-board.png",
+      "assets/creatures/astrophysicat-idle.webp"
+    ],
+    "reason": "Two stalk eyes plus two unrequested face eyes; coherent snail requires two total eyes. Original retained."
+  },
+  "editPrompt": "Image1 is the EDIT TARGET, the existing Jaiden Anima-snail portrait. Image2 is the approved STYLE BOARD; Image3 is a shipped rendering reference only. Change ONLY the incorrect extra eye pair. This snail currently has TWO eyes on its tall eyestalks AND TWO extra eyes on the central face. Remove the TWO eyes drawn on the central face/head beneath the eyestalks; fill those two areas with the same softly shaded speckled snail skin. FINAL TOTAL must be exactly TWO eyes, one at the end of each existing eyestalk. Keep both tall eyestalks and their big eyes unchanged. Keep the open surprised mouth, central face shape, collar thread suspending the original folded-paper puppet, violet shawl, shell details, limbless snail foot, pose, whole silhouette, palette, ink/cel-painted texture, warm lighting, transparency and canvas padding exactly as they are. Do not add hands, arms, legs, extra eyes, new props, text, frame or background. No other change.",
+  "editReferences": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mosaic-mole-145.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+  ],
+  "actualOrientation": "LEFT snail body and puppet presentation",
+  "visualReview": "Two stalk eyes only, limbless foot and collar-suspended paper puppet preserved. One background-removal repair attempted after eye-only correction flattened alpha; alpha result below determines release acceptance. Alpha repair passes; final two-eye cutout accepted.",
+  "sourceCheck": {
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 59,
+      "y": 12,
+      "w": 1457,
+      "h": 990
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 55.4,
+    "solidPercent": 44,
+    "sha256": "474e6658dd62aa75dcb2a92e875dd737e23eb0fc297f6b05b82738b18b88dabd",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending",
+  "edits": [
+    {
+      "prompt": "Image1 is the EDIT TARGET, the existing Jaiden Anima-snail portrait. Image2 is the approved STYLE BOARD; Image3 is a shipped rendering reference only. Change ONLY the incorrect extra eye pair. This snail currently has TWO eyes on its tall eyestalks AND TWO extra eyes on the central face. Remove the TWO eyes drawn on the central face/head beneath the eyestalks; fill those two areas with the same softly shaded speckled snail skin. FINAL TOTAL must be exactly TWO eyes, one at the end of each existing eyestalk. Keep both tall eyestalks and their big eyes unchanged. Keep the open surprised mouth, central face shape, collar thread suspending the original folded-paper puppet, violet shawl, shell details, limbless snail foot, pose, whole silhouette, palette, ink/cel-painted texture, warm lighting, transparency and canvas padding exactly as they are. Do not add hands, arms, legs, extra eyes, new props, text, frame or background. No other change.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mosaic-mole-145.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "source": "production-imagination-mosaic-mole-corrected-145.png",
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-acd2ea9e-c2f1-45d3-97fc-3b6f19474f38.png",
+      "status": "eye correction succeeded; rejected because alpha/background failed",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "cornerAlpha": [
+          169,
+          106,
+          69,
+          10
+        ],
+        "transparentPercent": 3.1,
+        "solidPercent": 74.4,
+        "sha256": "9240d43599c133857cb09d16f2069238a099e91b698bdda3685774082e109d6d",
+        "status": "FAIL",
+        "edgeContact": true
+      }
+    },
+    {
+      "prompt": "Image1 is the EDIT TARGET, the corrected TWO-EYE Jaiden Anima-snail portrait. Remove ONLY the surrounding background/atmospheric halo. The source has unwanted opaque or partly opaque orange/brown/violet cloud pixels around the artwork. Output must be a genuine TRANSPARENT PNG CUTOUT: EVERY pixel outside the complete snail, clothing, puppet, collar thread and eyestalk silhouette must have alpha 0. Remove the broad glow/cloud/backdrop entirely, including all four corners and outer margins. Do NOT paint a checkerboard, white, black, grey or coloured background. Keep warm highlights inside the illustrated silhouette, but no atmospheric glow outside it. Keep the existing portrait itself unchanged: exactly TWO eyes on two eyestalks, NO eyes on the central face; open surprised mouth, limbless snail foot, shell, violet shawl, collar-suspended folded-paper puppet, threads, pose, colours, ink/cel-painted texture, whole silhouette and generous padding. No new eyes, hands, arms, legs, props, text, frame or scene. This is a background-removal correction only.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mosaic-mole-corrected-145.png"
+      ],
+      "source": "production-imagination-mosaic-mole-alpha-corrected-145.png",
+      "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-551c622e-2e19-40cd-907c-c79f62dd98d3.png",
+      "status": "selected after alpha repair",
+      "sourceCheck": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 59,
+          "y": 12,
+          "w": 1457,
+          "h": 990
+        },
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "transparentPercent": 55.4,
+        "solidPercent": 44,
+        "sha256": "474e6658dd62aa75dcb2a92e875dd737e23eb0fc297f6b05b82738b18b88dabd",
+        "status": "pass",
+        "edgeContact": false
+      }
+    }
+  ],
+  "alphaEditPrompt": "Image1 is the EDIT TARGET, the corrected TWO-EYE Jaiden Anima-snail portrait. Remove ONLY the surrounding background/atmospheric halo. The source has unwanted opaque or partly opaque orange/brown/violet cloud pixels around the artwork. Output must be a genuine TRANSPARENT PNG CUTOUT: EVERY pixel outside the complete snail, clothing, puppet, collar thread and eyestalk silhouette must have alpha 0. Remove the broad glow/cloud/backdrop entirely, including all four corners and outer margins. Do NOT paint a checkerboard, white, black, grey or coloured background. Keep warm highlights inside the illustrated silhouette, but no atmospheric glow outside it. Keep the existing portrait itself unchanged: exactly TWO eyes on two eyestalks, NO eyes on the central face; open surprised mouth, limbless snail foot, shell, violet shawl, collar-suspended folded-paper puppet, threads, pose, colours, ink/cel-painted texture, whole silhouette and generous padding. No new eyes, hands, arms, legs, props, text, frame or scene. This is a background-removal correction only.",
+  "alphaEditReferences": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/4-caricatures/production-145-2026-10-13/production-imagination-mosaic-mole-corrected-145.png"
+  ]
+}

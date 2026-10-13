@@ -8,12 +8,15 @@ body{height:auto;overflow:auto;padding:20px;background:#14121f;color:#efe3c8;--s
 .tile .samples{display:flex}
 </style></head><body><main>
 <h1>Bulk card art</h1><p>Selected artwork for proposed cards. These cards are not playable or unlocked. Full art is the default normal appearance: art above its shipped frame, live text above both.</p>
-<div class="toolbar"><label><input type="checkbox" id="light"> Light background</label><span id="count"></span></div>
+<div class="toolbar"><label><input type="checkbox" id="light"> Light background</label><span id="count"></span><a id="all-art" href="dev/art-production.html" hidden>All artwork</a></div>
 <div class="layout"><div class="grid" id="grid" aria-label="Selected artwork"></div><section class="inspector" id="inspector" aria-label="Selected art inspection"><p>No selected artwork yet.</p></section></div>
 <footer>Click or focus a tile for its 300px frame and proposed rule. Tiles show 180px / 70px samples. <a href="design/reviews/art-production-145-2026-10-13.md">Production notes</a> · <a href="design/source-assets/4-caricatures/production-145-2026-10-13/inventory.json">Exact prompts and provenance</a> · <a href="design/ART-BIBLE.md">Art bible</a></footer>
 </main><script src="js/core/rift.js"></script><script src="data/assets.js"></script><script src="js/core/assets.js"></script><script src="dev/art-production-data.js"></script><script>
 (function(){'use strict';
-const R=window.Rift, records=R.devArtProduction.records, grid=document.getElementById('grid'), inspector=document.getElementById('inspector');
+const R=window.Rift, allRecords=R.devArtProduction.records, grid=document.getElementById('grid'), inspector=document.getElementById('inspector');
+const requestedGroup=new URLSearchParams(location.search).get('group');
+const group=/^[1-9]\d*$/.test(requestedGroup||'')&&Number.isSafeInteger(Number(requestedGroup))?Number(requestedGroup):null;
+const records=group===null?allRecords:allRecords.filter(c=>c.group===group);
 const colourOf=c=>R.COLOURS[c.colour]||{name:'Generic',hex:'#b9aa95'};
 const nameOf=c=>c.name.charAt(0).toUpperCase()+c.name.slice(1);
 function image(c,className,alt){const url=R.Assets.url(c.id);return R.el('img',{src:url||c.source,className,alt,draggable:false});}
@@ -29,8 +32,10 @@ records.forEach(c=>{
  const tile=R.el('button.tile',{type:'button','aria-pressed':'false','aria-label':'Inspect '+nameOf(c),'data-id':c.id},[R.el('span.samples',{},[image(c,'thumb',nameOf(c)+' at 180px'),image(c,'mini','70px sample')]),R.el('strong',{text:nameOf(c)}),R.el('span.meta',{text:colourOf(c).name+' · '+(c.kind==='portrait'?'Portrait':'Motif')}),R.el('span.pose',{text:c.pose})]);
  tile.addEventListener('click',()=>select(c));tile.addEventListener('focus',()=>select(c));grid.append(tile);
 });
-document.getElementById('count').textContent=records.length+' selected assets · '+records.filter(c=>c.kind==='portrait').length+' portraits / '+records.filter(c=>c.kind==='motif').length+' motifs';
+document.getElementById('count').textContent=(group===null?'':'Group '+group+' · ')+records.length+' selected assets · '+records.filter(c=>c.kind==='portrait').length+' portraits / '+records.filter(c=>c.kind==='motif').length+' motifs'+(group===null?'':' · '+allRecords.length+' cumulative assets');
+document.getElementById('all-art').hidden=group===null;
 document.getElementById('light').addEventListener('change',e=>document.body.classList.toggle('light',e.target.checked));
 if(records.length)select(records[0]);
+else if(group!==null)inspector.replaceChildren(R.el('p',{text:'No selected artwork in group '+group+'.'}));
 })();
 </script></body></html>

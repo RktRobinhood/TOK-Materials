@@ -1,0 +1,38 @@
+{
+  "issue": 145,
+  "group": 4,
+  "id": "creature/emotion-stormheart-serpent/idle",
+  "species": "emotion-stormheart-serpent",
+  "persona": "Giannis Antetokudu",
+  "prompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both animal eyes visible in a forward rising rebound pose, ball held overhead by the two forelimbs and one hoof tucked. Horns and ball fully inside canvas; no right-facing portrait. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Giannis Antetokudu, original NONHUMAN public-persona sporting parody inspired by Giannis Antetokounmpo; never a realistic human face. Body: A tall but endearingly stocky kudu with short spiral horns, deep tawny animal muzzle and crimson sports vest over modest dark shoulder armour. Exactly two upper forelimbs and two lower hoofed legs, one tail. One unbranded crimson basketball; no snake or human face. Main accessory: One substantial crimson leather basketball with simple brass seams; no team logo, numbers, hoop or extra weapon. Printed-role rationale: Frozen5/5 supports broad athletic bulk and dark shoulder plates. Pose and ball do not add damage, Swift, Guard or any effect beyond the existing risky Entrance. Jewel accent #E8384F against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+  "refs": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1303d-fa44-75b1-a652-30e59d0bb0a9\\exec-73844ee8-ae78-46e6-9d3d-a31d099d169c.png",
+  "source": "production-emotion-stormheart-serpent-145.png",
+  "transparentRequested": true,
+  "status": "selected; student-project visual and basic RGBA acceptance passed",
+  "requiredFacing": "FRONT",
+  "actualFacing": "FRONT three-quarter",
+  "visualReview": "Accepted first take: four coherent kudu limbs, readable short spiral horns and overhead ball in front-facing rebound pose. All extremities intact; armour and ball remain cosmetic.",
+  "validation": {
+    "species": "emotion-stormheart-serpent",
+    "w": 1208,
+    "h": 1302,
+    "alphaBox": {
+      "x": 252,
+      "y": 16,
+      "w": 711,
+      "h": 1264
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.6968539231543931,
+    "sha256": "4258ccf6f7e04aed5b54be2e94f667a5291fbe4d8f95abdb701889413be73825"
+  }
+}

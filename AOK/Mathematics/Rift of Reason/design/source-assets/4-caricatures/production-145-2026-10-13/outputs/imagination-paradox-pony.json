@@ -1,0 +1,60 @@
+{
+  "id": "creature/imagination-paradox-pony/idle",
+  "species": "imagination-paradox-pony",
+  "persona": "Pedro Platypascal",
+  "inspiration": "Pedro Pascal",
+  "source": "production-imagination-paradox-pony-145.png",
+  "prompt": "PRIMARY COMPOSITION: LEFT-facing reclining platypus, broad bill toward LEFT, body and flat tail toward RIGHT; keep the single twisted-handle coffee mug visible, head turned slightly toward viewer in a baffled glance. No habitual right-facing portrait. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Pedro Platypascal, an original NONHUMAN character inspired by Pedro Pascal public persona. Specific body/gear: Round platypus with broad bill, webbed feet and violet jacket; one twisted-handle coffee mug. Pose/composition: Reclining three-quarter left, mug held close and head turned back in a baffled glance. Main accessory: One ordinary coffee mug with a single impossible twisted handle; no licensed costume or extra prop. Printed-role visual rationale: 3/3 need not look like a warrior. Keep the public side-eye cue, making the cup fantastical without changing the stat-swap effect. Jewel accent #A05CF0. Expression: playful half-smile. View: slightly low camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "requiredFacing": "LEFT",
+  "poseDirection": "Reclining three-quarter left, mug held close and head turned back in a baffled glance.",
+  "mechanicalContract": {
+    "cost": 4,
+    "attack": 3,
+    "health": 3,
+    "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+    "gates": [
+      109
+    ]
+  },
+  "acquisition": {
+    "channel": "pack-pool",
+    "packEligible": true,
+    "releaseStatus": "draft; only enters packs when its implementation is released"
+  },
+  "inventoryPrompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Pedro Platypascal, an original NONHUMAN character inspired by Pedro Pascal public persona. Specific body/gear: Round platypus with broad bill, webbed feet and violet jacket; one twisted-handle coffee mug. Pose/composition: Reclining three-quarter left, mug held close and head turned back in a baffled glance. Main accessory: One ordinary coffee mug with a single impossible twisted handle; no licensed costume or extra prop. Printed-role visual rationale: 3/3 need not look like a warrior. Keep the public side-eye cue, making the cup fantastical without changing the stat-swap effect. Jewel accent #A05CF0. Expression: playful half-smile. View: slightly low camera angle. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "promptAugmentation": "Added explicit LEFT leading composition to the existing reclining pose.",
+  "group": 4,
+  "transparentBackgroundRequested": true,
+  "status": "selected",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a1341a-39a6-7a31-b7c9-e5e1e5fa629e\\exec-6283d4d1-706f-46b0-911c-af6cd9eb8e0a.png",
+  "actualOrientation": "LEFT reclining body, bill turned toward viewer",
+  "visualReview": "Platypus bill, webbed limbs and flat tail, single twisted-handle mug; relaxed composition and coherent four-limb body, accepted first take.",
+  "sourceCheck": {
+    "w": 1536,
+    "h": 1024,
+    "alphaBox": {
+      "x": 93,
+      "y": 28,
+      "w": 1397,
+      "h": 958
+    },
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentPercent": 55.8,
+    "solidPercent": 43.7,
+    "sha256": "658ca61707b88616f44a958262ac7d29d125cd5e181e2223bd73ab1f4a13c2cd",
+    "status": "pass",
+    "edgeContact": false
+  },
+  "runtimeStatus": "Build/native acceptance pending"
+}

@@ -1,0 +1,14 @@
+{
+  "species": "reason-inference-heron",
+  "id": "creature/reason-inference-heron/idle",
+  "persona": "James Mayfly",
+  "source": "production-reason-inference-heron-145.png",
+  "prompt": "PRIMARY COMPOSITION: FRONT facing. Front-facing hover, caliper jaws held just apart while the face studies the tiny gap. Do not drift into a generic standing right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: James Mayfly, an original NONHUMAN character inspired by James May public persona. Specific body/gear: Grey-crested mayfly with transparent-edged wings and blue travelling harness; one large caliper in its forelegs. Pose/composition: Front-facing hover, caliper jaws held just apart while the face studies the tiny gap. Main accessory: One oversized folding brass caliper with two broad jaws; no engineering plan. Printed-role visual rationale: 3/5 supports a fitted travelling harness; the precise tool preserves the detail-obsessed explainer cue without granting a new action. Jewel accent #3D7BFF. Expression: big theatrical surprise. View: level camera with head tilted toward viewer. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-9e8f036e-9eee-4643-bf31-b8df2ae1c14e.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}
