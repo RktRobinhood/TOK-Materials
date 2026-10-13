@@ -1,7 +1,7 @@
 {
   "issue": 143,
   "date": "2026-10-13",
-  "status": "Selected source/runtime alpha checks and large-frame inspection pass; narrow/post-fix native acceptance pending.",
+  "status": "Selected sources/assets pass alpha, hash, native dark/light70px/300px/390px and public gallery checks; runtime release gated.",
   "method": "built-in image_gen",
   "model": "not reported by tool",
   "assets": [
@@ -25,7 +25,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-f31f0360-ec91-4662-97b6-32228f0b1964.png",
-      "status": "selected; source padding, alpha and native asset dimensions pass"
+      "status": "selected; source/runtime and native/public gallery QA pass"
     },
     {
       "id": "creature/language-echo-egret/idle",
@@ -39,7 +39,7 @@
       "transparentBackgroundRequested": true,
       "prompt": "Use case: stylized-concept. Asset: one original Rift of Reason transparent full-body collectible creature cutout. Image1 is the approved STYLE BOARD: match cute-horror storybook warmth, medium thick dark brown ink outlines, clean cel-lit forms with soft fur/fabric/fin texture, jewel accents against midnight-violet darkness. Image2 is shipped Astrophysicat: matching rendering/texture/outline reference ONLY; do not copy its cat species, clothes, pose or gesture. No realistic human likeness. One readable public-persona prop and expression. Whole creature centered with ample transparent padding around every extremity. No card frame, arch, background, floor, shadow blob, floating particles, extra figures, watermark, brand logo, letters, numbers or formula. Intended foreground layer above existing decorative frame, clipped only at outer card edges with separate live text. Readable silhouette/face/prop at70px and attractive at300px. Avoid nursery pastels, photorealism and glossy3D. Subject: Sabrina Carpwenter, inspired by Sabrina Carpenter's PUBLIC playful performer persona, a charming small upright CARP with warm cream-and-copper scales, clear short carp barbels beside a ROUND ANIMAL mouth, big lively amber eyes, pale flowing FIN TUFTS framing the head like elegant fins rather than a human wig, a broad graceful fan tail and little pelvic fins. Clearly a fish, NOT a mermaid, human singer, bird or mammal; no human hair, skin, lips, arms, legs or shoes. Worn dark midnight stage jacket naturally adapted to the fish torso with warm gold #F2B632 Language ribbon accents and cream cuff edges around fin openings; no copied celebrity costume. Main prop ONE plain miniature unbranded microphone held against a bent pectoral fin beside the cheek. The other fin makes a tiny cheeky 'one more' invitation, expressive half-smile; compact coherent full-body three-quarter pose, floating upright but no bubbles/water/scenery/ground shadow. Tail and fins visibly separate from jacket silhouette. Warm lantern rim light, ink #1A1020 and midnight violet shadows, gold highlights on scales/ribbon. No song lyrics, singing text, stage logo, heart particles or personal-history joke. The joke is a little spoken quip earning one encore. Entire microphone, fin tufts and tail inside canvas.",
       "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-ede669ba-68f6-4c3b-ad09-9085a2c3a00f.png",
-      "status": "selected; source padding, alpha and native asset dimensions pass"
+      "status": "selected; source/runtime and native/public gallery QA pass"
     }
   ]
 }

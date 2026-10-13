@@ -32,7 +32,7 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 | creature/emotion-heartfire-hawk/idle | Heartfire Hawk | Planned; gated by card release |
 | creature/emotion-stormheart-serpent/idle | Stormheart Serpent | Planned; gated by card release |
 | creature/emotion-empathy-elephant/idle | Empathy Elephant | Planned; gated by card release |
-| creature/perception-cue-cricket/idle | Nikkie de Jaguar (Cue Cricket) | Source/alpha ready #143; native QA pending; runtime gated |
+| creature/perception-cue-cricket/idle | Nikkie de Jaguar (Cue Cricket) | Art/native/public QA pass #143; runtime gated |
 | creature/perception-lens-lynx/idle | Lens Lynx | Planned; gated by card release |
 | creature/perception-focus-falcon/idle | Focus Falcon | Planned; gated by card release |
 | creature/perception-shadow-shrimp/idle | Shadow Shrimp | Planned; gated by card release |
@@ -48,7 +48,7 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 | creature/language-comma-caterpillar/idle | Comma Caterpillar | Planned; gated by card release |
 | creature/language-label-lemur/idle | Label Lemur | Planned; gated by card release |
 | creature/language-word-weasel/idle | Word Weasel | Planned; gated by card release |
-| creature/language-echo-egret/idle | Sabrina Carpwenter (Echo Egret) | Source/alpha ready #143; native QA pending; runtime gated |
+| creature/language-echo-egret/idle | Sabrina Carpwenter (Echo Egret) | Art/native/public QA pass #143; runtime gated |
 | creature/language-definition-dolphin/idle | Definition Dolphin | Planned; gated by card release |
 | creature/language-debate-dingo/idle | Debate Dingo | Planned; gated by card release |
 | creature/language-clause-crane/idle | Clause Crane | Planned; gated by card release |
@@ -89,4 +89,4 @@ Spell/Axiom illustrations are a later shared motif set, not 138 bespoke full pai
 
 #142 produces the two exact idle IDs above through the existing builder, without runtime creature definitions or collection grants. Selected source PNGs, exact prompts/edit history, reference paths, hashes and alpha checks: design/source-assets/4-caricatures/persona-batch-142-2026-10-13/. Developer samples: dev/persona-art-142.html; audit/evidence: design/reviews/persona-art-batch-142-2026-10-13.md. One cutout serves normal and future cosmetic treatment; no second cosmetic bitmap or new SFX is needed. Remaining 70 portraits are planned.
 
-#143 produces two more exact idle IDs via the existing builder, source/alpha checks pass, native frame/viewport QA pending. Sources/provenance: design/source-assets/4-caricatures/persona-batch-143-2026-10-13/; shared gallery dev/persona-art-142.html?batch=143; audit design/reviews/persona-art-batch-143-2026-10-13.md. Four portraits produced/68remaining. Full art is default NORMAL, no cosmetic entitlement required; remaining foil/packs need separate cosmetic/economy decisions. Teacher deck-sizing/draw-step cues recorded in #122/#109, requiring responsive arena/background proportions and legal-source static emphasis. #144 defers Jimmy Fowlon until his buff is mechanically distinct.
+#143 produces two more exact idle IDs via the existing builder; source/alpha/native390px/public checks pass, Pages38357064010 succeeded. Sources/provenance: design/source-assets/4-caricatures/persona-batch-143-2026-10-13/; shared gallery dev/persona-art-142.html?batch=143; audit design/reviews/persona-art-batch-143-2026-10-13.md. Four portraits produced/68remaining. Full art is default NORMAL, no cosmetic entitlement required; remaining foil/packs need separate cosmetic/economy decisions. Teacher deck-sizing/draw-step cues recorded in #122/#109, requiring responsive arena/background proportions and legal-source static emphasis. #144 defers Jimmy Fowlon until his buff is mechanically distinct.
