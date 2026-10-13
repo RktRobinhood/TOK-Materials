@@ -1145,3 +1145,30 @@ Sources/prompts/edit history/body-accessory mappings and proposed138card-art ass
 ### Future conditional expansion — #148/#149 (planned only)
 
 After initial board/content release, plan shared `ui/conditional-back` and an armed/consumed marker with text/icon distinctions; reuse colour/full-art frames and selected motifs. Twenty-three proposed conditional concepts,3per6Ways +5Generic, are in design/drafts/conditional-expansion-2026-10-13/. No trap-zone UI, new bitmap or sound/voice is implemented/generated now. Placement must preserve the selected board/Axiom/Fate/clip space.
+
+## Bulk art group 3 — #145, 13 October 2026
+
+Twelve further portraits are selected, built and locally accepted. Cumulative expansion readiness is 39/72 portraits; 33 remain (30 pending plus Jimmy #144, Rick #147 and service-rejected Stephen deferred). The bulk source folder contains 43 selected assets: 35 portraits plus eight shared motifs. Four earlier pilot portraits complete the total of 39. The 138-card motif mapping remains proposed for 84 spells and 54 Axioms.
+
+Selected sources/exact prompts/references/body/gear mappings: design/source-assets/4-caricatures/production-145-2026-10-13/. Ein-stone's corrected left-facing stone golem is selected; the dragon-like first take remains unused provenance. No species/art IDs, colour, rarity, mechanics or acquisition changed.
+
+Recorded source/runtime checks and independent reviews passed. Full suite: 823 tests, 822 passed, one skipped, zero failed (120286.8496 ms). Native dark 180px/70px contact sheet, light 300px frame and actual 390px light viewport passed; 88 images loaded without warnings/errors. Review evidence: group3-contact-dark.png, group3-light-viewport.png and group3-narrow-light.png in design/reviews/art-production-145-2026-10-13/. These are viewport/clip captures. Publication/public verification follows.
+
+Art readiness does not complete production board #109, mechanics/balance #123, owned-deck/acquisition/save gates or voice recording. #145 remains open. No teacher roster review is required.
+
+| Art id | Selected display persona | Proposed type/rarity |
+|---|---|---|
+| `creature/reason-proof-beetle/idle` | Mark Ro-beetle | reason / common |
+| `creature/reason-counterexample-crow/idle` | V-Squish | reason / common |
+| `creature/reason-boundary-bear/idle` | Ein-stone | reason / mythic |
+| `creature/emotion-temper-tiger/idle` | Jeremy Clawson | emotion / uncommon |
+| `creature/emotion-grudge-goose/idle` | Jack Axoloticeye | emotion / uncommon |
+| `creature/emotion-heartfire-hawk/idle` | LeBrontosaurus | emotion / rare |
+| `creature/perception-pattern-panther/idle` | Marques Brownleaf | perception / uncommon |
+| `creature/perception-exposure-eagle/idle` | Houdini Wisp | perception / rare |
+| `creature/perception-horizon-hare/idle` | Amelia Airgator | perception / mythic |
+| `creature/language-label-lemur/idle` | Ryan Georilla | language / common |
+| `creature/language-debate-dingo/idle` | K-S-Ibis | language / uncommon |
+| `creature/language-orator-owl/idle` | Opra-moth | language / mythic |
+
+Future requests use the seven exact unproduced sports substitutions in canonical ROSTER.md/body-plan.json. Preserve selected art. Full art stays DEFAULT NORMAL with separate live labels/stats. Twelve source-only original voice drafts are in VOICE-NEEDS.md; no new audio or paid sound request.

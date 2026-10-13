@@ -331,7 +331,7 @@
   "conditional_backend": {
     "number": 148,
     "url": "https://github.com/RktRobinhood/TOK-Materials/issues/148",
-    "title": "Rift of Reason: Plan future conditional-card event backend",
+    "title": "Rift of Reason: Add conditional spells and masked-creature interception after initial art",
     "id": 5829049190,
     "blockedBy": [
       109,
@@ -342,12 +342,13 @@
   "conditional_content": {
     "number": 149,
     "url": "https://github.com/RktRobinhood/TOK-Materials/issues/149",
-    "title": "Rift of Reason: Draft future 23-card conditional expansion",
+    "title": "Rift of Reason: Add 23 advanced conditional cards after two completed lessons",
     "id": 5829054549,
     "blockedBy": [
       148,
       109,
-      123
+      123,
+      112
     ],
     "nativeDependenciesAdded": true
   }

@@ -1,0 +1,14 @@
+{
+  "species": "reason-boundary-bear-correction",
+  "id": "creature/reason-boundary-bear/idle",
+  "source": "production-reason-boundary-bear-corrected-145.png",
+  "persona": "Ein-stone",
+  "prompt": "PRIMARY COMPOSITION: LEFT-facing original living STONE GOLEM, no dragon anatomy. Make a new, distinct Ein-stone cutout for Rift of Reason; Image1 approved style board is rendering/style only, Image2 Lobstorian rendering/ink/texture only, do not copy species/clothes/pose/props. A squat broad pumice-and-granite golem composed of ROUND worn boulders, with a craggy white quartz tuft like unruly hair, bushy stone eyebrows and warm nonhuman stone eyes. Exactly four stout rounded stone limbs, two arms and two legs. NO snout, beak, horns, wings, scales, reptile tail, pointed paper folds or Paper Dragon silhouette. It wears a worn midnight-blue knitted vest over compact brass shoulder guards and braces one LARGE cracked round brass shield before its body, the only prop. Shield/bulk fit its printed Guard and4/6 body without adding abilities. LEFT-facing low braced crouch, broad torso tilted forward, shield points toward LEFT edge, face glances left with amused surprise. Blue #3D7BFF jewel accent, ink/violet crevices and warm lantern rim light; medium dark-brown outlines, softly textured cel shading, cute-horror dusk, not glossy3D or nursery pastels. Entire golem/shield comfortably inside canvas with genuinely transparent margins; no ground shadow/scenery/frame, text/numbers/logos/watermark or extra figures. Bold broad STONE silhouette readable70px/300px. This replaces a mistaken dragon-shaped take, while its source is retained; do not use that take or the starter dragon as a reference.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/lobstorian-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-9f6e774c-ea0c-4c9f-923f-9fae7be92499.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

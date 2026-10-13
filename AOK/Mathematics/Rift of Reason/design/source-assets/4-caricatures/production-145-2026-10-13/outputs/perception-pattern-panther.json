@@ -1,0 +1,14 @@
+{
+  "species": "perception-pattern-panther",
+  "id": "creature/perception-pattern-panther/idle",
+  "source": "production-perception-pattern-panther-145.png",
+  "persona": "Marques Brownleaf",
+  "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Marques Brownleaf, an original NONHUMAN character inspired by Marques Brownlee / MKBHD public persona. Specific body/gear: Dark leaf insect with emerald-edged leaf abdomen and a worn reviewer jacket; one blank-screen scrying device. Pose/composition: Side-on left, screen angled deliberately toward its face and one hind leg extended behind. Main accessory: One unbranded obsidian-screen device in a chunky emerald brass case; screen remains blank. Printed-role visual rationale: 3/2 is a fragile reviewer engine, so retain a practical jacket rather than heavy armour; device adds no gameplay reveal. Jewel accent #2FBF71. Expression: focused squint. View: slightly elevated camera angle. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-4cc691f1-12df-488b-b369-5bf627a676ac.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

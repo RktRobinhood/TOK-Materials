@@ -72,3 +72,9 @@ Keep accepted artwork. For fresh card art, spread bodies across birds, insects a
 ### Accessory breadth — teacher steering13October2026
 
 Avoid a collection where every creature holds a book, sketchpad or pencil. Retain these where essential to a persona joke; otherwise mix instruments, tools, relics, enchantments, armour and original magical weapons. Bulkier/Guard bodies can read as protected; higher-attack bodies can carry heavier fantasy gear. Art should suggest the printed role without implying a new keyword or equipment mechanic. Use one large readable cue rather than many tiny trinkets. Preserve artwork already generated/in flight; update pending production briefs and record accessory family with the body/pose mapping.
+
+### Current production direction — #145 group 3, 13 October 2026
+
+Thirty-nine of 72 expansion portraits are now art-ready; 33 remain (30 pending and three deferred). The latest twelve include a repair beetle, puzzle slime, clock-shield golem, axolotl, leaf insect, lantern wisp and original glider crocodile. Keep all selected images, including the corrected Ein-stone golem; retain the unused dragon-like first take as provenance rather than reusing it for this card. Full art above shipped colour frames remains the default NORMAL appearance, with live labels/stats above both layers.
+
+For unproduced cards, use the seven sports substitutions in ROSTER.md and production body-plan.json: three basketball, two Danish handball, one golf and one volleyball persona. These are builder-selected original nonhuman forms, with one readable fantasy sports cue, no licensed uniforms/emblems or imitated voices. Preserve already-made sports characters. Historical body briefs do not override the current production mapping. Species/art IDs, rarity, colour, mechanics and acquisition stay fixed; armour, glider wings and props add no powers. No teacher roster review is required.

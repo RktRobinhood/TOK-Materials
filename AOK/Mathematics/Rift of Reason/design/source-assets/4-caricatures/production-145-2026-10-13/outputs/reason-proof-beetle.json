@@ -1,0 +1,14 @@
+{
+  "species": "reason-proof-beetle",
+  "id": "creature/reason-proof-beetle/idle",
+  "source": "production-reason-proof-beetle-145.png",
+  "persona": "Mark Ro-beetle",
+  "prompt": "Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Mark Ro-beetle, an original NONHUMAN character inspired by Mark Rober public persona. Specific body/gear: Broad workshop beetle with curved shell and dark-blue apron; one brass repair gauntlet fitted to a foreleg. Pose/composition: Low right-facing crouch, repair clamp open toward viewer, rear legs planted wide. Main accessory: One chunky brass repair gauntlet with a single broad hinged clamp, no extra gadget. Printed-role visual rationale: 2/2 with ally-health support suits a practical light apron, not heroic armour; the clamp is visual repair equipment. Jewel accent #3D7BFF. Expression: dry amused raised eyebrow. View: slightly elevated camera angle. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-0e3fa0a5-a178-45d6-b5ed-88fd2427b3a5.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

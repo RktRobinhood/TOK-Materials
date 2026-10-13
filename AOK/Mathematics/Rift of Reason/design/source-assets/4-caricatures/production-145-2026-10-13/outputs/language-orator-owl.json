@@ -1,0 +1,14 @@
+{
+  "species": "language-orator-owl",
+  "id": "creature/language-orator-owl/idle",
+  "source": "production-language-orator-owl-145.png",
+  "persona": "Opra-moth",
+  "prompt": "PRIMARY COMPOSITION: straight FRONT-facing creature looking toward the viewer, symmetrical face with both eyes equally visible, dynamic forward or seated composition. No three-quarter right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Opra-moth, an original NONHUMAN character inspired by Oprah Winfrey public persona. Specific body/gear: Round velvet moth with warm insect eyes, dark stage cape, small gold wing pauldrons and one lotus cup. Pose/composition: Front-facing open-wing invitation, cup extended between forelegs and both wing edges fully visible. Main accessory: One warm gold lotus-shaped cup with a blank surface; no ticket, words or second gift. Printed-role visual rationale: 4/6 permits modest gold-edged wing pauldrons under the cape. The inviting cup adds no healing or scheduling effect. Jewel accent #F2B632. Expression: dry amused raised eyebrow. View: level camera with head tilted toward viewer. Exactly SIX total insect limbs, clearly segmented body and antennae; no mammal ears or extra human arms. Wings, if the specified species has them, remain one simple pair. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: FRONT. All extremities/prop fit with clear transparent margin.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-434f4479-5a78-4435-8aa9-0c91b1bf33f1.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

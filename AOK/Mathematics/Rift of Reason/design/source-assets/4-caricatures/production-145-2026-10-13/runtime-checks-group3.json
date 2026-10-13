@@ -1,0 +1,1648 @@
+{
+  "issue": 145,
+  "selected": 43,
+  "pending": 0,
+  "status": "basic asset checks pass",
+  "warnings": [
+    "creature/emotion-heartfire-hawk/idle: source silhouette contacts an edge; manually check for major cropping, accept minor tips.",
+    "creature/perception-lens-lynx/idle: source silhouette contacts an edge; manually check for major cropping, accept minor tips.",
+    "creature/language-orator-owl/idle: source silhouette contacts an edge; manually check for major cropping, accept minor tips."
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "id": "creature/reason-premise-pigeon/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 86,
+          "y": 63,
+          "w": 1422,
+          "h": 915
+        },
+        "transparentPercent": 57.1,
+        "solidPercent": 42.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "208fa2fb0e2b5aabfac2a67e0b992c5443f87f8771863b58ab58e508752e9531"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-premise-pigeon-idle.webp",
+        "w": 964,
+        "h": 620,
+        "transparentPercent": 48.1,
+        "solidPercent": 51.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f219013450287283d321f62ff936afdde455799bad79abf3d6e068a33e5154af",
+        "bytes": 150608
+      }
+    },
+    {
+      "id": "creature/reason-axiom-ant/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 239,
+          "y": 10,
+          "w": 989,
+          "h": 1118
+        },
+        "transparentPercent": 71.3,
+        "solidPercent": 28.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "226064ad2a498843461d092b2bed946317a456bd75cbb338903308d7132870ee"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-axiom-ant-idle.webp",
+        "w": 548,
+        "h": 620,
+        "transparentPercent": 58.9,
+        "solidPercent": 40,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "5c8a65585c027f3692aa57b1375cd15f64b87680b6c0a5f696706cbc253647d4",
+        "bytes": 86328
+      }
+    },
+    {
+      "id": "creature/reason-proof-beetle/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 17,
+          "y": 9,
+          "w": 1356,
+          "h": 1126
+        },
+        "transparentPercent": 53.2,
+        "solidPercent": 46.1,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "5e48e711f8f625a5047fdb421155ff0423b8a14c6d1585827b3b2c23ce4d4f23"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-proof-beetle-idle.webp",
+        "w": 747,
+        "h": 620,
+        "transparentPercent": 51.7,
+        "solidPercent": 47.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "6c8a1a8d276821fd9b50cfd01ded09711f28b1e90c6b1e157dd8d0840c29133c",
+        "bytes": 134004
+      }
+    },
+    {
+      "id": "creature/reason-counterexample-crow/idle",
+      "source": {
+        "w": 1368,
+        "h": 1150,
+        "alphaBox": {
+          "x": 41,
+          "y": 11,
+          "w": 1274,
+          "h": 1119
+        },
+        "transparentPercent": 54.3,
+        "solidPercent": 45.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "8f54ecac4d77b2f6a59ae2579099e390250f5d394c4dac8e69c3a0e0a325c0df"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-counterexample-crow-idle.webp",
+        "w": 706,
+        "h": 620,
+        "transparentPercent": 49.4,
+        "solidPercent": 49.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ab6d865b7516ce471caa2a20f621c84dc3899cf6481fd4f810877f29b7e22099",
+        "bytes": 108624
+      }
+    },
+    {
+      "id": "creature/reason-parity-panda/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 42,
+          "y": 40,
+          "w": 1238,
+          "h": 1079
+        },
+        "transparentPercent": 49.9,
+        "solidPercent": 49.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d88a6579ca82d03348454335bf094677381e858fbb841ef68b0751529dff1451"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-parity-panda-idle.webp",
+        "w": 711,
+        "h": 620,
+        "transparentPercent": 40.9,
+        "solidPercent": 58.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "78d10bbf21880295585ffdd13be4cbcc5ebf1fab5a2bf54e15658b2bbe83f962",
+        "bytes": 119000
+      }
+    },
+    {
+      "id": "creature/reason-logic-lynx/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 231,
+          "y": 10,
+          "w": 921,
+          "h": 1111
+        },
+        "transparentPercent": 65.8,
+        "solidPercent": 33.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a523cfa1fa5342bc6663aafb12068e0527d5a03fae390a7c6b652dd1badbec04"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-logic-lynx-idle.webp",
+        "w": 514,
+        "h": 620,
+        "transparentPercent": 47.3,
+        "solidPercent": 51.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e09b827e805517991556485026f9df295145e8cfbd41810815bcd98335e35936",
+        "bytes": 98188
+      }
+    },
+    {
+      "id": "creature/reason-boundary-bear/idle",
+      "source": {
+        "w": 1333,
+        "h": 1180,
+        "alphaBox": {
+          "x": 49,
+          "y": 15,
+          "w": 1269,
+          "h": 1144
+        },
+        "transparentPercent": 43.3,
+        "solidPercent": 56.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "dcb7deb9aa31088d3a99124c2b178932a154cc83a421815ac9770c173839acd4"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/reason-boundary-bear-idle.webp",
+        "w": 688,
+        "h": 620,
+        "transparentPercent": 38.5,
+        "solidPercent": 61,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "76d523c168577f4edddddaa743dcc31f7933490ea08f06d7c5e8e7cd16b4fa5b",
+        "bytes": 140278
+      }
+    },
+    {
+      "id": "creature/emotion-pulse-pup/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 75,
+          "y": 48,
+          "w": 1204,
+          "h": 1105
+        },
+        "transparentPercent": 69.1,
+        "solidPercent": 30.3,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "04db17a85d79adda0a1a8a725919098d1cf8e252cbff85ebc0130e6ebf6352a1"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-pulse-pup-idle.webp",
+        "w": 676,
+        "h": 620,
+        "transparentPercent": 63.3,
+        "solidPercent": 35.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "eeaa46932d958e92448ba991d6d7db8c42cd952254ecbbfe7f1ce6a36157ec62",
+        "bytes": 94262
+      }
+    },
+    {
+      "id": "creature/emotion-temper-tiger/idle",
+      "source": {
+        "w": 1326,
+        "h": 1186,
+        "alphaBox": {
+          "x": 43,
+          "y": 14,
+          "w": 1260,
+          "h": 1140
+        },
+        "transparentPercent": 51.5,
+        "solidPercent": 47.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "sha256": "46e6caf625d6c19af7d157bed9dcce912e462b1d058b26b5fa8a28ef21c82cfc"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-temper-tiger-idle.webp",
+        "w": 685,
+        "h": 620,
+        "transparentPercent": 46.8,
+        "solidPercent": 52.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "93ed54371fb44bdedfb8c543587c0830262f053034c69eb29d0d6a67825b2b35",
+        "bytes": 125424
+      }
+    },
+    {
+      "id": "creature/emotion-grudge-goose/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 14,
+          "y": 3,
+          "w": 1340,
+          "h": 1134
+        },
+        "transparentPercent": 49.3,
+        "solidPercent": 49.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "b38636615c75861bd8cbafa6e3825de85f0cd3b4b544889e2031d02f677ab4fb"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-grudge-goose-idle.webp",
+        "w": 733,
+        "h": 620,
+        "transparentPercent": 47.3,
+        "solidPercent": 51.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "1d63f2cc61cd265d29970befaac7c1b97fd81aec06fcd38750078c482e21ed84",
+        "bytes": 118212
+      }
+    },
+    {
+      "id": "creature/emotion-resolve-ram/idle",
+      "source": {
+        "w": 1024,
+        "h": 1536,
+        "alphaBox": {
+          "x": 57,
+          "y": 66,
+          "w": 944,
+          "h": 1430
+        },
+        "transparentPercent": 64.7,
+        "solidPercent": 34.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "fb0d32f8c27f8fadef9d8452126672107bfacac644b8bdd375082b36d08579f2"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-resolve-ram-idle.webp",
+        "w": 409,
+        "h": 620,
+        "transparentPercent": 58.4,
+        "solidPercent": 39.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "9240a0bd34838ff1f0bc0f90763fbe48a57168b800777fffd0c1fbacfa16309a",
+        "bytes": 77492
+      }
+    },
+    {
+      "id": "creature/emotion-outrage-ox/idle",
+      "source": {
+        "w": 1024,
+        "h": 1536,
+        "alphaBox": {
+          "x": 20,
+          "y": 32,
+          "w": 985,
+          "h": 1477
+        },
+        "transparentPercent": 57.9,
+        "solidPercent": 41,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4e58815767ac536f9fff0ee6e1363c338d56d2237fc264bb3c1e8ed0e2de8635"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-outrage-ox-idle.webp",
+        "w": 413,
+        "h": 620,
+        "transparentPercent": 53.9,
+        "solidPercent": 44,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "6b138f941817671f2534d314507b740bbf805a25659cf6d42d5e7b43ef5a66b6",
+        "bytes": 66074
+      }
+    },
+    {
+      "id": "creature/emotion-heartfire-hawk/idle",
+      "source": {
+        "w": 1177,
+        "h": 1336,
+        "alphaBox": {
+          "x": 10,
+          "y": 7,
+          "w": 1167,
+          "h": 1322
+        },
+        "transparentPercent": 54,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a2036ba88c461c4a4d504f14d3a91457a2de18c9329ae8fe74743420cee75926"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-heartfire-hawk-idle.webp",
+        "w": 547,
+        "h": 620,
+        "transparentPercent": 53,
+        "solidPercent": 46.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "bf0fb543d9405fef0b97b8410ebd3b32144fda389ee4e6aa4ddab835381c4e86",
+        "bytes": 82940
+      }
+    },
+    {
+      "id": "creature/emotion-empathy-elephant/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 30,
+          "y": 77,
+          "w": 1260,
+          "h": 1060
+        },
+        "transparentPercent": 49.3,
+        "solidPercent": 50.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e02deb9b1c5922108485e67053494e428404187dcfdea657fe1564f97aed3efc"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/emotion-empathy-elephant-idle.webp",
+        "w": 737,
+        "h": 620,
+        "transparentPercent": 40.2,
+        "solidPercent": 59.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "3a75661247fe51e5c2d16e41de75851d140991bad8b7be0cf39b3e2b5783bbbb",
+        "bytes": 109842
+      }
+    },
+    {
+      "id": "creature/perception-lens-lynx/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 94,
+          "y": 0,
+          "w": 1088,
+          "h": 1312
+        },
+        "transparentPercent": 52,
+        "solidPercent": 47.2,
+        "cornerAlpha": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "sha256": "031846341ef4e31601a4f488cc63eff7989b9a485d3182437737b55dbc00d9ec"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-lens-lynx-idle.webp",
+        "w": 514,
+        "h": 620,
+        "transparentPercent": 47,
+        "solidPercent": 52,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "68d6b670cca31f5f7f26be4f3cf7e429eb745c16736097176146ef9f3f97c905",
+        "bytes": 92978
+      }
+    },
+    {
+      "id": "creature/perception-shadow-shrimp/idle",
+      "source": {
+        "w": 1199,
+        "h": 1312,
+        "alphaBox": {
+          "x": 59,
+          "y": 17,
+          "w": 1118,
+          "h": 1273
+        },
+        "transparentPercent": 61.3,
+        "solidPercent": 38.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "7819d61c30d7035f0c208c28ba8089a7c67150264a6813a4cc2cc812e8f9e57d"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-shadow-shrimp-idle.webp",
+        "w": 545,
+        "h": 620,
+        "transparentPercent": 57,
+        "solidPercent": 42,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "44620665d0d4f478f18ba7a00cd56de636128879f2b7c7ba0897036a7326aa69",
+        "bytes": 90744
+      }
+    },
+    {
+      "id": "creature/perception-prism-puffin/idle",
+      "source": {
+        "w": 1246,
+        "h": 1262,
+        "alphaBox": {
+          "x": 55,
+          "y": 16,
+          "w": 1173,
+          "h": 1187
+        },
+        "transparentPercent": 54.6,
+        "solidPercent": 44.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "209ebd16e9ba2277a37d0c7a668a10a4b2089d139af3340557d898dd22e5d459"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-prism-puffin-idle.webp",
+        "w": 613,
+        "h": 620,
+        "transparentPercent": 48.6,
+        "solidPercent": 50.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "51631389d208e8cc450e892612ac3d2e7d21ae2a11065b67944a3a0a381c1298",
+        "bytes": 98856
+      }
+    },
+    {
+      "id": "creature/perception-pattern-panther/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 100,
+          "y": 26,
+          "w": 1343,
+          "h": 986
+        },
+        "transparentPercent": 66.4,
+        "solidPercent": 32.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "c75992b3ff4aca6c7db8ee5dcb67e3f4b209b0c324b9f9393a89463f43fa4696"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-pattern-panther-idle.webp",
+        "w": 844,
+        "h": 620,
+        "transparentPercent": 60,
+        "solidPercent": 38.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "befdc09f2ad3f2f46083179dc99e0f7b19e1123f8ba674e468c39ee99ef464c0",
+        "bytes": 133630
+      }
+    },
+    {
+      "id": "creature/perception-observer-octopus/idle",
+      "source": {
+        "w": 1225,
+        "h": 1284,
+        "alphaBox": {
+          "x": 15,
+          "y": 13,
+          "w": 1196,
+          "h": 1248
+        },
+        "transparentPercent": 38.4,
+        "solidPercent": 60.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "e8e2b991d88afc146269a851fabb811d5dc16ad8ac2e57f3261754958a308253"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-observer-octopus-idle.webp",
+        "w": 594,
+        "h": 620,
+        "transparentPercent": 35,
+        "solidPercent": 63.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "bd16a014381f5e7e0230898b93b892c37625cd1985ce8e5dbf3919a90f47ed0e",
+        "bytes": 125068
+      }
+    },
+    {
+      "id": "creature/perception-exposure-eagle/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 39,
+          "y": 26,
+          "w": 1464,
+          "h": 945
+        },
+        "transparentPercent": 59,
+        "solidPercent": 39.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "47a8ccf851010a8b0b7ee56db4d87e3481b6df1099f8a6c317664117097c1660"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-exposure-eagle-idle.webp",
+        "w": 961,
+        "h": 620,
+        "transparentPercent": 53.3,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "27a22d7881b572897c98ad48e8a024e0259c4e15482224553b7ebe6918b960b0",
+        "bytes": 178768
+      }
+    },
+    {
+      "id": "creature/perception-horizon-hare/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 77,
+          "y": 96,
+          "w": 1418,
+          "h": 846
+        },
+        "transparentPercent": 59.4,
+        "solidPercent": 39.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4c04aa430418316a5fee2f8b298d794956a59e18a24c4831a1389b7e6cdcfcc9"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/perception-horizon-hare-idle.webp",
+        "w": 1039,
+        "h": 620,
+        "transparentPercent": 46.7,
+        "solidPercent": 52.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f0260684ca3e7fe09e3627be3cbcdd75260fa4c3fcbc5d92700a2573a1e38c4f",
+        "bytes": 175670
+      }
+    },
+    {
+      "id": "creature/language-comma-caterpillar/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 130,
+          "y": 12,
+          "w": 1215,
+          "h": 972
+        },
+        "transparentPercent": 54.2,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "5e899ac982fb7057513f77ebf1b34725f2b5950816c7b1706e48c819f15aa6c7"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-comma-caterpillar-idle.webp",
+        "w": 775,
+        "h": 620,
+        "transparentPercent": 38.9,
+        "solidPercent": 60.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "56d8ef7ffff7fa8aa85f99b5a27d16b5e8c68251b089b055df376dd145584375",
+        "bytes": 135706
+      }
+    },
+    {
+      "id": "creature/language-label-lemur/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 117,
+          "y": 20,
+          "w": 1176,
+          "h": 1144
+        },
+        "transparentPercent": 47.8,
+        "solidPercent": 51.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4a05e20a9632a2da76cf62349076754bf8f8ec328fe05b96c02b68f035e02636"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-label-lemur-idle.webp",
+        "w": 637,
+        "h": 620,
+        "transparentPercent": 38.8,
+        "solidPercent": 60.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "7aadfe714f629a2bf2a168b150f2ee7c1fd5f9373a42bd509d0eaa427173948d",
+        "bytes": 92946
+      }
+    },
+    {
+      "id": "creature/language-debate-dingo/idle",
+      "source": {
+        "w": 1261,
+        "h": 1247,
+        "alphaBox": {
+          "x": 8,
+          "y": 16,
+          "w": 1242,
+          "h": 1219
+        },
+        "transparentPercent": 48.7,
+        "solidPercent": 50.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "9704a7b3ca2a24b797303aa986de188edab062da4e7eb0d07afd3e25afb3085d"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-debate-dingo-idle.webp",
+        "w": 632,
+        "h": 620,
+        "transparentPercent": 46.5,
+        "solidPercent": 52.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a464b0422bf5ff02fa0ef214f7e31e452243c82907381551924302ea7e8ab599",
+        "bytes": 106634
+      }
+    },
+    {
+      "id": "creature/language-clause-crane/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 32,
+          "y": 11,
+          "w": 1263,
+          "h": 1174
+        },
+        "transparentPercent": 53.9,
+        "solidPercent": 45.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "77c38211c7e2c80330fe79169d3ac04953ebaa6848500ba0d44d60ee0eae25a9"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-clause-crane-idle.webp",
+        "w": 667,
+        "h": 620,
+        "transparentPercent": 51,
+        "solidPercent": 48,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f606b3f80e09cfa1f448be48880f61b1bac6fa1f323bd8e4175e7e12ed854a78",
+        "bytes": 111898
+      }
+    },
+    {
+      "id": "creature/language-contract-coyote/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 95,
+          "y": 29,
+          "w": 1154,
+          "h": 1155
+        },
+        "transparentPercent": 51.3,
+        "solidPercent": 48.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "926366bbb3a9eead611133ec24926457fbe846c33ce408e6e5c8eccd97dded52"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-contract-coyote-idle.webp",
+        "w": 619,
+        "h": 620,
+        "transparentPercent": 42.4,
+        "solidPercent": 56.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4a231598bde2d0afba3ec2de89e6d8ecdb01f2176a212d0b59b6cec722caa94f",
+        "bytes": 104036
+      }
+    },
+    {
+      "id": "creature/language-orator-owl/idle",
+      "source": {
+        "w": 1236,
+        "h": 1273,
+        "alphaBox": {
+          "x": 2,
+          "y": 0,
+          "w": 1233,
+          "h": 1267
+        },
+        "transparentPercent": 32.9,
+        "solidPercent": 66.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "239ce8db72882aefc0c0978dcce1082265318917abd5f1618f25bc3442cfc6be"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/language-orator-owl-idle.webp",
+        "w": 603,
+        "h": 620,
+        "transparentPercent": 32.3,
+        "solidPercent": 66.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "988eb57a98f261467bc0872f70b9bd928a85a8dc84f72735bf2aafecfc73c195",
+        "bytes": 136560
+      }
+    },
+    {
+      "id": "creature/imagination-possibility-pika/idle",
+      "source": {
+        "w": 1374,
+        "h": 1145,
+        "alphaBox": {
+          "x": 131,
+          "y": 26,
+          "w": 1147,
+          "h": 1081
+        },
+        "transparentPercent": 57.6,
+        "solidPercent": 41.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ee02b051b2b410a0c137209d8c3894506a7df978dc485df2e94a52fbfa355724"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-possibility-pika-idle.webp",
+        "w": 658,
+        "h": 620,
+        "transparentPercent": 46.1,
+        "solidPercent": 53.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d386313a92924cb8f594619c4536d306ecd7ae1bcd2ff87c715d29944d2691eb",
+        "bytes": 110612
+      }
+    },
+    {
+      "id": "creature/imagination-blueprint-bat/idle",
+      "source": {
+        "w": 1215,
+        "h": 1295,
+        "alphaBox": {
+          "x": 142,
+          "y": 18,
+          "w": 1053,
+          "h": 1199
+        },
+        "transparentPercent": 59.5,
+        "solidPercent": 40,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f2659d7f0a7b714235df092240b8baf56ee2d9afbd9ace4e883d3ca6b39b2155"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-blueprint-bat-idle.webp",
+        "w": 545,
+        "h": 620,
+        "transparentPercent": 49.4,
+        "solidPercent": 49.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "32b3e6eff17a5a3251c12d2202da048c2120ee392f4e7bafb2cbf83014b6026f",
+        "bytes": 81864
+      }
+    },
+    {
+      "id": "creature/imagination-cloud-castle-crab/idle",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 232,
+          "y": 54,
+          "w": 1292,
+          "h": 923
+        },
+        "transparentPercent": 65.1,
+        "solidPercent": 34.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "9f0ccff33364298aaaab62ba29eda27388bb772966d5401e842d415496e219e3"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-cloud-castle-crab-idle.webp",
+        "w": 868,
+        "h": 620,
+        "transparentPercent": 53.8,
+        "solidPercent": 45.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "74ba61e09ca9d64ea07b9e80463e6a512dedbc827787fa58cfa55d08966e3769",
+        "bytes": 141862
+      }
+    },
+    {
+      "id": "creature/imagination-impossible-unicorn/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 51,
+          "y": 9,
+          "w": 1254,
+          "h": 1168
+        },
+        "transparentPercent": 58.7,
+        "solidPercent": 40.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "29dcd3df163451b2477200175fb895e5c03e9cb824a9bd3f897eba4aa6f32c1b"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/imagination-impossible-unicorn-idle.webp",
+        "w": 666,
+        "h": 620,
+        "transparentPercent": 55.4,
+        "solidPercent": 43.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ab2e4256cd611f9bfa19c4cba01918eaf063b9981363b4400a950cd41fc8a496",
+        "bytes": 92730
+      }
+    },
+    {
+      "id": "creature/memory-bookmark-bunny/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 154,
+          "y": 9,
+          "w": 1099,
+          "h": 1172
+        },
+        "transparentPercent": 55.6,
+        "solidPercent": 43.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ccedb161bbd4a9ebebccd4d2b96c0c63afa276ec491cf7d6214a1061feb4b0f8"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-bookmark-bunny-idle.webp",
+        "w": 581,
+        "h": 620,
+        "transparentPercent": 45.6,
+        "solidPercent": 53.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f68f9effe0ae0d789dcae096c0f35e62c20766fcb662ac74d89c368731afa832",
+        "bytes": 100006
+      }
+    },
+    {
+      "id": "creature/memory-recall-robin/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 46,
+          "y": 77,
+          "w": 1242,
+          "h": 1057
+        },
+        "transparentPercent": 53,
+        "solidPercent": 46.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d899451986d51a950d85c3d1650bfee9efd06f17280d718033a2157500a552bf"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-recall-robin-idle.webp",
+        "w": 729,
+        "h": 620,
+        "transparentPercent": 43.6,
+        "solidPercent": 55.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "89d5ccb7747d30e5d5d295598de7283a17616bba35eefb0e842b356e93ade75d",
+        "bytes": 122052
+      }
+    },
+    {
+      "id": "creature/memory-chronicle-cat/idle",
+      "source": {
+        "w": 1194,
+        "h": 1317,
+        "alphaBox": {
+          "x": 35,
+          "y": 24,
+          "w": 1129,
+          "h": 1270
+        },
+        "transparentPercent": 50.4,
+        "solidPercent": 48.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "00add31b19735afbd7b54b815a43b089721652f3449aaa921ce31b4419a9d854"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-chronicle-cat-idle.webp",
+        "w": 551,
+        "h": 620,
+        "transparentPercent": 45.5,
+        "solidPercent": 53.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "eb41fabe15a5262ebd92bbcae6f2f409cb40dfa87db2cfe3fcd96e6a6629c205",
+        "bytes": 93926
+      }
+    },
+    {
+      "id": "creature/memory-keeper-koi/idle",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 78,
+          "y": 9,
+          "w": 1225,
+          "h": 1181
+        },
+        "transparentPercent": 54.5,
+        "solidPercent": 44.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "8380b02d0b0e20fe4ee1b86a9f7f47281cb5fbd95c6c9fbd8a1f5f341af1a5e3"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "creatures/memory-keeper-koi-idle.webp",
+        "w": 643,
+        "h": 620,
+        "transparentPercent": 50.3,
+        "solidPercent": 48.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "2365406ff4316632f47dfe34ef11005992f1d2bbc9065a6291efdea00b1f7a6f",
+        "bytes": 117644
+      }
+    },
+    {
+      "id": "art/spell-motif-reason",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 52,
+          "y": 16,
+          "w": 1233,
+          "h": 1158
+        },
+        "transparentPercent": 46.7,
+        "solidPercent": 51.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "be39685e8f0e49c1a1e9d63910904d9c24a2a31e7fee59e9a46ab1d5d3434d1d"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-reason.webp",
+        "w": 600,
+        "h": 564,
+        "transparentPercent": 41.1,
+        "solidPercent": 56.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "b17ae34de3c9fdd0e580bde2f6e660f359a1b859129d63d81518db52fb4c104a",
+        "bytes": 133526
+      }
+    },
+    {
+      "id": "art/spell-motif-emotion",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 88,
+          "y": 25,
+          "w": 1105,
+          "h": 1152
+        },
+        "transparentPercent": 53.3,
+        "solidPercent": 45.9,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "36dadb89ecf9a3cffd7e1f941e19acd2363d8cafd78411a010e724e2e6ceab2d"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-emotion.webp",
+        "w": 576,
+        "h": 600,
+        "transparentPercent": 42.1,
+        "solidPercent": 56.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ebe472fd919d7c040a12adfaceebc9b2fa573a66eb74eb86017589efae9dfc91",
+        "bytes": 113300
+      }
+    },
+    {
+      "id": "art/spell-motif-perception",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 32,
+          "y": 28,
+          "w": 1474,
+          "h": 906
+        },
+        "transparentPercent": 58,
+        "solidPercent": 41.5,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "47a7663a7bb9091d03d5cb6310c84d5fd58bf40e190a7ab8b7c50eb8e3097801"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-perception.webp",
+        "w": 600,
+        "h": 369,
+        "transparentPercent": 50.2,
+        "solidPercent": 48.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "95a63c23871863ac46051fbb492056395fab3c32f329363e39f7e8e10e51a670",
+        "bytes": 69336
+      }
+    },
+    {
+      "id": "art/spell-motif-language",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 71,
+          "y": 18,
+          "w": 1443,
+          "h": 978
+        },
+        "transparentPercent": 55.5,
+        "solidPercent": 43.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "sha256": "9b3d3fa3995acae579ea934ef3dad712ae5826828e11d65c4b4c95dd77dc3320"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-language.webp",
+        "w": 600,
+        "h": 407,
+        "transparentPercent": 49.8,
+        "solidPercent": 47.8,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a6f9d3ebd6a3d5db2637e8933f11996bb608ea100cd6a41f0f75694f6ccd61b9",
+        "bytes": 101538
+      }
+    },
+    {
+      "id": "art/spell-motif-imagination",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 21,
+          "y": 11,
+          "w": 1281,
+          "h": 1174
+        },
+        "transparentPercent": 45.1,
+        "solidPercent": 54.5,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "65edd3695a9535777792a9560e4046f0994719c5d21ba331dfeb40a8461fc19a"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-imagination.webp",
+        "w": 600,
+        "h": 550,
+        "transparentPercent": 42.4,
+        "solidPercent": 56.9,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "485c13f1a56eb2d2ae42e66a971fb574083dbdfb8008212c621e70c9f2b71e32",
+        "bytes": 106410
+      }
+    },
+    {
+      "id": "art/spell-motif-memory",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "alphaBox": {
+          "x": 60,
+          "y": 19,
+          "w": 1242,
+          "h": 1163
+        },
+        "transparentPercent": 37.8,
+        "solidPercent": 61.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f395d6bb05d5c18fb0bb0007abbb84ec704f88afe62e7c8228f1b1f38a0b4161"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-memory.webp",
+        "w": 600,
+        "h": 562,
+        "transparentPercent": 32,
+        "solidPercent": 67.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "0d130b2a13bcc65fc85b46cf537764eae62d5fe879d6897a91c0c6a533946bc2",
+        "bytes": 119806
+      }
+    },
+    {
+      "id": "art/spell-motif-generic",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 30,
+          "y": 46,
+          "w": 1491,
+          "h": 920
+        },
+        "transparentPercent": 48,
+        "solidPercent": 51.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f676f1977d5cb65ce2db349adc9e745a41db51e96951bc8397cfb40fbc1a9a1e"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/spell-motif-generic.webp",
+        "w": 600,
+        "h": 370,
+        "transparentPercent": 40.2,
+        "solidPercent": 59.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "0473a20f8177e08286c12d6baf72de6a6b8e4bd97a7ab0c676073ad9170232ec",
+        "bytes": 67058
+      }
+    },
+    {
+      "id": "art/axiom-rule-motif",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "alphaBox": {
+          "x": 93,
+          "y": 15,
+          "w": 1400,
+          "h": 1001
+        },
+        "transparentPercent": 47.3,
+        "solidPercent": 52.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d902509f3ec490bf9f2c60d031b10c25ae6c8d179cdd631b281239b5e282db69"
+      },
+      "runtime": {
+        "status": "built",
+        "file": "art/axiom-rule-motif.webp",
+        "w": 600,
+        "h": 429,
+        "transparentPercent": 40.7,
+        "solidPercent": 58.7,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f7e509aeaea725895eeddfbbec20e2e7d9d8ad1d6ee2ee386494a9c26b0b6954",
+        "bytes": 73138
+      }
+    }
+  ]
+}

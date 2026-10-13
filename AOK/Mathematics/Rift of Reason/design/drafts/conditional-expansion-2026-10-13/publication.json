@@ -1,9 +1,10 @@
 {
-  "status": "Both issues published; native blocking dependencies attached",
+  "status": "Latest human steering published and native blocking dependencies verified; owned draft ready for parent review/commit",
   "repository": "RktRobinhood/TOK-Materials",
   "backend": {
     "number": 148,
     "url": "https://github.com/RktRobinhood/TOK-Materials/issues/148",
+    "title": "Rift of Reason: Add conditional spells and masked-creature interception after initial art",
     "blockedBy": [
       109,
       123
@@ -12,19 +13,57 @@
   "content": {
     "number": 149,
     "url": "https://github.com/RktRobinhood/TOK-Materials/issues/149",
+    "title": "Rift of Reason: Add 23 advanced conditional cards after two completed lessons",
     "blockedBy": [
       148,
       109,
-      123
+      123,
+      112
     ]
+  },
+  "authorization": {
+    "current": "Drafting and issue publication only; no runtime/art changes",
+    "next": "After ALL current initial/starter art generation, directly continue authorized backend implementation and this 23-card set design/art, respecting actual prerequisites"
+  },
+  "availability": {
+    "acceptedThreshold": "TWO completed lessons",
+    "recommendedPredicate": {
+      "canonicalField": "map.completed",
+      "bothMilestones": [
+        "gate",
+        "b-town-hall"
+      ]
+    },
+    "oldQualifiedSaves": "Infer preserved completion history; missing new introduction flag does not undo eligibility",
+    "introduction": "Persistent canonical NPC/quest flow; teaser grants nothing",
+    "acquisition": "Gate every pool/grant/loadout route plus per-card release; never bulk grant all cards or admit plot-only cards to packs"
   },
   "validation": {
     "total": 23,
     "perColour": 3,
     "colours": 6,
     "generic": 5,
+    "maskedCreatures": 8,
+    "spells": 15,
+    "strategyLinesPerWay": [
+      "aggro",
+      "midrange",
+      "control"
+    ],
     "uniqueIdsNamesEffects": true,
     "noExisting210IdNameCollision": true,
-    "runtimeTests": "not run; proposal only"
-  }
+    "conceptValidator": "PASS",
+    "canonicalProgressFixtures": "PASS; neither/one/both, duplicate completion, jump-only and old qualified saves",
+    "javascriptSyntax": "PASS",
+    "runtimeTests": "Not run; proposal only, no runtime implementation"
+  },
+  "unresolvedPolicyGates": [
+    "reserved slots/full board",
+    "reveal versus play event ordering",
+    "multiple Guards and impossible interception",
+    "sleeping/Swift and costs",
+    "Fate entry/replay/expiry",
+    "copy/rearm identity",
+    "winner/tie and bounded queue policy"
+  ]
 }

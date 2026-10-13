@@ -46,6 +46,46 @@
       "group": 2
     },
     {
+      "id": "creature/reason-proof-beetle/idle",
+      "name": "Mark Ro-beetle",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "common",
+      "pose": "Low right-facing crouch, repair clamp open toward viewer, rear legs planted wide.",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-proof-beetle-145.png",
+      "group": 3
+    },
+    {
+      "id": "creature/reason-counterexample-crow/idle",
+      "name": "V-Squish",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "common",
+      "pose": "Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: deal 1 damage to an enemy creature.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-counterexample-crow-145.png",
+      "group": 3
+    },
+    {
       "id": "creature/reason-parity-panda/idle",
       "name": "Hannah Frycoon",
       "kind": "portrait",
@@ -87,6 +127,26 @@
       "group": 1
     },
     {
+      "id": "creature/reason-boundary-bear/idle",
+      "name": "Ein-stone",
+      "kind": "portrait",
+      "colour": "reason",
+      "rarity": "mythic",
+      "pose": "Left-facing braced kneel, shield tilted outward and one broad stone foot forward.",
+      "contract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 6,
+        "text": "Guard. While this is ready, your hero takes at most 2 damage from each creature attack.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-reason-boundary-bear-corrected-145.png",
+      "group": 3
+    },
+    {
       "id": "creature/emotion-pulse-pup/idle",
       "name": "Dua Leapfrog",
       "kind": "portrait",
@@ -105,6 +165,46 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-pulse-pup-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/emotion-temper-tiger/idle",
+      "name": "Jeremy Clawson",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "pose": "Low front-facing squat, weapon across its knees while the face indignantly examines its tiny wheel.",
+      "contract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "Entrance: your hero loses 1 heart.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-temper-tiger-145.png",
+      "group": 3
+    },
+    {
+      "id": "creature/emotion-grudge-goose/idle",
+      "name": "Jack Axoloticeye",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "uncommon",
+      "pose": "Lean back in a startled reaction, little feet spread and tail curling clear of the headset.",
+      "contract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Last Word: deal 1 damage to the enemy hero.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-grudge-goose-145.png",
+      "group": 3
     },
     {
       "id": "creature/emotion-resolve-ram/idle",
@@ -145,6 +245,26 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-outrage-ox-145.png",
       "group": 1
+    },
+    {
+      "id": "creature/emotion-heartfire-hawk/idle",
+      "name": "LeBrontosaurus",
+      "kind": "portrait",
+      "colour": "emotion",
+      "rarity": "rare",
+      "pose": "Side-on athletic step, ball offered in forefeet and the long neck bent to inspect it.",
+      "contract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 4,
+        "text": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-emotion-heartfire-hawk-145.png",
+      "group": 3
     },
     {
       "id": "creature/emotion-empathy-elephant/idle",
@@ -227,6 +347,28 @@
       "group": 1
     },
     {
+      "id": "creature/perception-pattern-panther/idle",
+      "name": "Marques Brownleaf",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "uncommon",
+      "pose": "Side-on left, screen angled deliberately toward its face and one hind leg extended behind.",
+      "contract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "Once per round, after an enemy scheduled occurrence is skipped, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          118,
+          120
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-pattern-panther-145.png",
+      "group": 3
+    },
+    {
       "id": "creature/perception-observer-octopus/idle",
       "name": "Adam Savash",
       "kind": "portrait",
@@ -247,6 +389,48 @@
       "group": 2
     },
     {
+      "id": "creature/perception-exposure-eagle/idle",
+      "name": "Houdini Wisp",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "rare",
+      "pose": "Float diagonally left into a cheeky half-bow, lock extended fully toward the viewer.",
+      "contract": {
+        "cost": 5,
+        "attack": 3,
+        "health": 5,
+        "text": "Entrance: remove one chosen enemy keyword: Guard, Shield or Elusive.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-exposure-eagle-145.png",
+      "group": 3
+    },
+    {
+      "id": "creature/perception-horizon-hare/idle",
+      "name": "Amelia Airgator",
+      "kind": "portrait",
+      "colour": "perception",
+      "rarity": "mythic",
+      "pose": "Bank diagonally left, short legs tucked, animal head looking back and compass held close to the chest; glider wings and tail entirely in frame.",
+      "contract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 5,
+        "text": "Entrance: move one own pending event one space earlier, no sooner than +1 round; announce its new time.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-horizon-hare-145.png",
+      "group": 3
+    },
+    {
       "id": "creature/language-comma-caterpillar/idle",
       "name": "Emma Wordson",
       "kind": "portrait",
@@ -265,6 +449,47 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-comma-caterpillar-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/language-label-lemur/idle",
+      "name": "Ryan Georilla",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "common",
+      "pose": "Front-facing seated pose, long arms hold the tiny-to-its-body stamp low and one brow is raised.",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 2,
+        "text": "Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-label-lemur-145.png",
+      "group": 3
+    },
+    {
+      "id": "creature/language-debate-dingo/idle",
+      "name": "K-S-Ibis",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "uncommon",
+      "pose": "Front-facing emphatic lean, wings unevenly spread and long beak opened for a harmless rebuttal.",
+      "contract": {
+        "cost": 3,
+        "attack": 3,
+        "health": 2,
+        "text": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+        "gates": [
+          109,
+          127
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-debate-dingo-145.png",
+      "group": 3
     },
     {
       "id": "creature/language-clause-crane/idle",
@@ -305,6 +530,28 @@
       "coverage": "",
       "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-contract-coyote-145.png",
       "group": 2
+    },
+    {
+      "id": "creature/language-orator-owl/idle",
+      "name": "Opra-moth",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "mythic",
+      "pose": "Front-facing open-wing invitation, cup extended between forelegs and both wing edges fully visible.",
+      "contract": {
+        "cost": 6,
+        "attack": 4,
+        "health": 6,
+        "text": "At your turn's end, if you played an Axiom, schedule at +1 round: your creatures present then gain 1 attack until your next turn ends. At most one own Orator event pending.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-orator-owl-145.png",
+      "group": 3
     },
     {
       "id": "creature/imagination-possibility-pika/idle",

@@ -216,3 +216,44 @@ Teacher13October requests the whole animal kingdom and imaginary creatures, avoi
 Twelve more expansion portraits plus the last five shared spell/Axiom motifs produced and built. Cumulative expansion art27of72produced,45remain (42pending +Jimmy144/Rick147/service-rejected Stephen deferred). All31selected bulk assets pass source/runtime alpha/dimension/hash checks;17newmanifest entries. Unowned preview restored after build. Unicorn five-limb first take retained and corrected to exactly four limbs before selection. Native1280dark/light180px/70px samples and300px foreground frame, actual390px narrow card fit:64images loaded, no warnings/errors. Full823tests822pass1skip0fail127276.3846ms; independent Standards/Spec zero remaining findings.
 
 Sources/prompts/edit history/body-accessory mappings and proposed138card-art assignments: design/source-assets/4-caricatures/production-145-2026-10-13/. Contact sheet dev/art-production.html; evidence/review design/reviews/art-production-145-2026-10-13.md. Shared mapping is proposed, not runtime registration/acquisition. Gear follows printed role without adding powers. Books remain a minority where essential; original glider-croc/mushroom-puppet/loon-balloon are next unproduced fantasy briefs. No engine/owned-deck/save/voice release implied. Publication/deployment follow.
+
+## Bulk art group 3 — #145, 13 October 2026
+
+Twelve further portraits are selected, built and locally accepted. Cumulative expansion readiness is 39/72 portraits; 33 remain (30 pending plus Jimmy #144, Rick #147 and service-rejected Stephen deferred). The bulk source folder contains 43 selected assets: 35 portraits plus eight shared motifs. Four earlier pilot portraits complete the total of 39. The 138-card motif mapping remains proposed for 84 spells and 54 Axioms.
+
+Selected sources/exact prompts/references/body/gear mappings: design/source-assets/4-caricatures/production-145-2026-10-13/. Ein-stone's corrected left-facing stone golem is selected; the dragon-like first take remains unused provenance. No species/art IDs, colour, rarity, mechanics or acquisition changed.
+
+Recorded source/runtime checks and independent reviews passed. Full suite: 823 tests, 822 passed, one skipped, zero failed (120286.8496 ms). Native dark 180px/70px contact sheet, light 300px frame and actual 390px light viewport passed; 88 images loaded without warnings/errors. Review evidence: group3-contact-dark.png, group3-light-viewport.png and group3-narrow-light.png in design/reviews/art-production-145-2026-10-13/. These are viewport/clip captures. Publication/public verification follows.
+
+Art readiness does not complete production board #109, mechanics/balance #123, owned-deck/acquisition/save gates or voice recording. #145 remains open. No teacher roster review is required.
+
+| Art id | Selected display persona | Proposed type/rarity |
+|---|---|---|
+| `creature/reason-proof-beetle/idle` | Mark Ro-beetle | reason / common |
+| `creature/reason-counterexample-crow/idle` | V-Squish | reason / common |
+| `creature/reason-boundary-bear/idle` | Ein-stone | reason / mythic |
+| `creature/emotion-temper-tiger/idle` | Jeremy Clawson | emotion / uncommon |
+| `creature/emotion-grudge-goose/idle` | Jack Axoloticeye | emotion / uncommon |
+| `creature/emotion-heartfire-hawk/idle` | LeBrontosaurus | emotion / rare |
+| `creature/perception-pattern-panther/idle` | Marques Brownleaf | perception / uncommon |
+| `creature/perception-exposure-eagle/idle` | Houdini Wisp | perception / rare |
+| `creature/perception-horizon-hare/idle` | Amelia Airgator | perception / mythic |
+| `creature/language-label-lemur/idle` | Ryan Georilla | language / common |
+| `creature/language-debate-dingo/idle` | K-S-Ibis | language / uncommon |
+| `creature/language-orator-owl/idle` | Opra-moth | language / mythic |
+
+### Future sports substitutions — unproduced cards only
+
+Current production body-plan.json and inventory override the historical cast briefs below. Official role sources and original nonhuman body/pose/fantasy sports-gear briefs are retained there. Three basketball, two Danish handball, one golf and one volleyball additions; no hockey. Preserve made art, including LeBrontosaurus and Serenox. Display inspiration/body changes leave frozen IDs, colour, rarity, mechanics and acquisition intact.
+
+| Species id | Future display persona | Public-persona reference | Sport | Replaces historical brief |
+|---|---|---|---|---|
+| `imagination-doodle-duck` | Luka Donchilla | Luka Doncic | basketball | Dan TDuck |
+| `emotion-stormheart-serpent` | Giannis Antetokudu | Giannis Antetokounmpo | basketball | Pink Python |
+| `memory-archive-armadillo` | Niklas Landillo | Niklas Landin Jacobsen | handball | Daniel Radclaw |
+| `perception-scout-stoat` | Nelly Koalda | Nelly Korda | golf | Steve Earwing |
+| `language-metaphor-mantis` | Isabelle Haakheron | Isabelle Haak | volleyball | Bo Birdham |
+| `memory-replay-raccoon` | Nikola Jokaroo | Nikola Jokic | basketball | Snoop Dogfish |
+| `memory-sequence-swan` | Mathias Gidscorpion | Mathias Gidsel | handball | Adelloon |
+
+Next pending six: Jack Blackbird, Tim Burrowton, Miyazawhale, Nikola Jokaroo, Mathias Gidscorpion and Noetapir. None is counted as produced. One-line group 3 voice proposals are in VOICE-NEEDS.md; no audio/runtime voices added.

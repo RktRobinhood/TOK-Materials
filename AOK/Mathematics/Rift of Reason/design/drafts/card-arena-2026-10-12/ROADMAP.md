@@ -64,3 +64,17 @@ Teacher13October: foreground full art is the default normal card appearance. Boa
 Twelve more expansion portraits plus the last five shared spell/Axiom motifs produced and built. Cumulative expansion art27of72produced,45remain (42pending +Jimmy144/Rick147/service-rejected Stephen deferred). All31selected bulk assets pass source/runtime alpha/dimension/hash checks;17newmanifest entries. Unowned preview restored after build. Unicorn five-limb first take retained and corrected to exactly four limbs before selection. Native1280dark/light180px/70px samples and300px foreground frame, actual390px narrow card fit:64images loaded, no warnings/errors. Full823tests822pass1skip0fail127276.3846ms; independent Standards/Spec zero remaining findings.
 
 Sources/prompts/edit history/body-accessory mappings and proposed138card-art assignments: design/source-assets/4-caricatures/production-145-2026-10-13/. Contact sheet dev/art-production.html; evidence/review design/reviews/art-production-145-2026-10-13.md. Shared mapping is proposed, not runtime registration/acquisition. Gear follows printed role without adding powers. Books remain a minority where essential; original glider-croc/mushroom-puppet/loon-balloon are next unproduced fantasy briefs. No engine/owned-deck/save/voice release implied. Publication/deployment follow.
+
+## Bulk art group 3 — #145, 13 October 2026
+
+Twelve further portraits are selected, built and locally accepted. Cumulative expansion readiness is 39/72 portraits; 33 remain (30 pending plus Jimmy #144, Rick #147 and service-rejected Stephen deferred). The bulk source folder contains 43 selected assets: 35 portraits plus eight shared motifs. Four earlier pilot portraits complete the total of 39. The 138-card motif mapping remains proposed for 84 spells and 54 Axioms.
+
+Selected sources/exact prompts/references/body/gear mappings: design/source-assets/4-caricatures/production-145-2026-10-13/. Ein-stone's corrected left-facing stone golem is selected; the dragon-like first take remains unused provenance. No species/art IDs, colour, rarity, mechanics or acquisition changed.
+
+Recorded source/runtime checks and independent reviews passed. Full suite: 823 tests, 822 passed, one skipped, zero failed (120286.8496 ms). Native dark 180px/70px contact sheet, light 300px frame and actual 390px light viewport passed; 88 images loaded without warnings/errors. Review evidence: group3-contact-dark.png, group3-light-viewport.png and group3-narrow-light.png in design/reviews/art-production-145-2026-10-13/. These are viewport/clip captures. Publication/public verification follows.
+
+Art readiness does not complete production board #109, mechanics/balance #123, owned-deck/acquisition/save gates or voice recording. #145 remains open. No teacher roster review is required.
+
+Next pending six: imagination-fable-fawn, imagination-stage-mouse, imagination-dreamweaver-whale, memory-replay-raccoon, memory-sequence-swan and memory-timekeeper-tapir. Use current body-plan overrides including Nikola Jokaroo/Mathias Gidscorpion; seven future sports replacements are reconciled in canonical ROSTER.md.
+
+After ALL initial art generation, the latest human authorizes conditional backend/set implementation with actual prerequisites preserved: #148 depends on #109/#123; #149 depends on #148/#109/#123/#112. Current conditional artifacts remain drafting/issue handoff. Availability follows two completed lesson milestones and the persistent introduction. Unresolved Fate/event-order/queue/win policies remain explicit gates.

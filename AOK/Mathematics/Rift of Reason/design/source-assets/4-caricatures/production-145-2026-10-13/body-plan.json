@@ -1,7 +1,7 @@
 {
   "issue": 145,
   "date": "2026-10-13",
-  "status": "Builder-selected body/pose/accessory briefs for48remaining portraits. Six newly-made group2 outputs and all prior selected art preserved.",
+  "status": "Body/pose/gear planning records retained as history; seven physically unproduced sports cast overrides added under latest teacher steering. Root merges only still-unproduced records.",
   "authority": "Teacher delegated body/cast decisions. No teacher roster approval. Human-face direction remains unresolved; every body here stays nonhuman.",
   "rules": [
     "Preserve all already-selected portraits and prior accepted artwork. This plan covers pending portraits only.",
@@ -31,18 +31,16 @@
     }
   ],
   "counts": {
-    "pending": 48,
     "suggestedNextGroup": 6,
     "bodyFamilies": {
-      "insect": 8,
-      "fantasy": 8,
-      "unusual-mammal": 13,
-      "reptile-amphibian": 6,
-      "bird": 6,
+      "insect": 7,
+      "fantasy": 7,
+      "unusual-mammal": 17,
+      "reptile-amphibian": 5,
+      "bird": 5,
       "aquatic-mammal": 2,
-      "other-invertebrate": 1,
-      "aquatic-invertebrate": 3,
-      "aquatic-fish": 1
+      "other-invertebrate": 2,
+      "aquatic-invertebrate": 3
     },
     "accessoryFamilies": {
       "repair-tool": 1,
@@ -53,36 +51,35 @@
       "shield-relic": 1,
       "machine-relic": 1,
       "training-tool": 1,
-      "musical-instrument": 4,
+      "musical-instrument": 3,
       "training-weapon": 1,
       "essential-print": 2,
-      "wearable-relic": 3,
-      "training-orb": 2,
-      "magical-weapon": 4,
-      "inspection-tool": 1,
+      "wearable-relic": 2,
+      "training-orb": 8,
+      "sports-tool": 1,
       "scrying-device": 1,
       "shield-tool": 1,
       "escape-relic": 1,
       "navigation-relic": 1,
       "observation-staff": 1,
       "seal-tool": 1,
-      "reflection-relic": 1,
       "enchanted-weapon": 1,
       "ceremonial-relic": 1,
-      "enchanted-toy": 2,
+      "magical-weapon": 3,
       "puppet-tool": 1,
       "viewfinder-tool": 1,
+      "enchanted-toy": 1,
       "lantern-relic": 1,
       "odd-relic": 1,
       "stage-relic": 1,
       "wind-relic": 1,
-      "key-relic": 1,
       "time-relic": 2,
       "keepsake-relic": 1,
       "stage-tool": 1
     },
     "essentialPrintProps": 2,
-    "accessoryBriefs": 48
+    "accessoryBriefs": 48,
+    "plannedRecords": 48
   },
   "rows": [
     {
@@ -250,15 +247,26 @@
     },
     {
       "species": "emotion-stormheart-serpent",
-      "bodyFamily": "reptile-amphibian",
+      "bodyFamily": "unusual-mammal",
       "originalPersona": "Pink Python",
-      "bodyBrief": "Dark python with pink crest, crimson scarf, fitted dark leather coil guards and one broad ribbon-lash.",
-      "poseBrief": "Tall loose spiral, ribbon held in a single open loop while the head looks down over a coil.",
-      "shortRationale": "Retain the snake because the vertical coil differs sharply from humanoid mascots; no stunt or private-life joke.",
+      "bodyBrief": "A tall but endearingly stocky kudu with short spiral horns, deep tawny animal muzzle and crimson sports vest over modest dark shoulder armour. Exactly two upper forelimbs and two lower hoofed legs, one tail. One unbranded crimson basketball; no snake or human face.",
+      "poseBrief": "PRIMARY FRONT: both animal eyes visible in a forward rising rebound pose, ball held overhead by the two forelimbs and one hoof tucked. Horns and ball fully inside canvas; no right-facing portrait.",
+      "shortRationale": "A recognisable basketball name gains a long-horned energetic silhouette; the fictional high-power body is not a claim about current statistics.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "magical-weapon",
-      "accessoryBrief": "One broad crimson aerial ribbon-lash, still attached to the coil; no spikes, extra sword or particles.",
-      "gearRationale": "5/5 supports dark segmented leather guards and a substantial ribbon weapon. Its appearance does not add damage beyond the frozen Entrance choice."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One substantial crimson leather basketball with simple brass seams; no team logo, numbers, hoop or extra weapon.",
+      "gearRationale": "Frozen5/5 supports broad athletic bulk and dark shoulder plates. Pose and ball do not add damage, Swift, Guard or any effect beyond the existing risky Entrance.",
+      "priorDisplayPersona": "Pink Python",
+      "priorInspiration": "P!NK",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Future group; do not add to current group3 six",
+      "displayPersona": "Giannis Antetokudu",
+      "inspirationOverride": "Giannis Antetokounmpo",
+      "sport": "basketball",
+      "sourceURLs": [
+        "https://www.nba.com/player/203507/giannis-antetokounmpo/bio"
+      ]
     },
     {
       "species": "perception-focus-falcon",
@@ -274,16 +282,26 @@
     },
     {
       "species": "perception-scout-stoat",
-      "bodyFamily": "insect",
-      "displayPersona": "Steve Earwing",
+      "bodyFamily": "unusual-mammal",
+      "displayPersona": "Nelly Koalda",
       "originalPersona": "Steve Earwin",
-      "bodyBrief": "Friendly earwig with blunt tail pincers, khaki shirt and green neckerchief; one large field-binocular unit.",
-      "poseBrief": "Low right-facing scouting lean, binoculars raised beside the face and antennae stretched forward.",
-      "shortRationale": "An inquisitive earwig replaces a stoat and broadens the insect body shapes without making a scary predator.",
+      "bodyBrief": "A compact silver-grey koala with round fluffy ears, broad dark animal nose and worn emerald golf jacket. Four total limbs, no human face. One oversized simple brass-headed golf club with dark green grip; no notebook, visor logo or branded kit.",
+      "poseBrief": "PRIMARY LEFT: left-facing three-quarter follow-through, club angled upward behind the left shoulder, short knees bent and animal nose clearly left. Whole club fits with transparent margin; no right-facing pose.",
+      "shortRationale": "A female golfer adds the requested small golf lane; the koala/club shape is distinct without requiring celebrity face likeness.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "inspection-tool",
-      "accessoryBrief": "One broad brass field-binocular unit with dark-green leather grips; no notebook.",
-      "gearRationale": "2/3 suits a light explorer harness. Binoculars preserve the wildlife-observer cue without new inspection rules."
+      "accessoryFamily": "sports-tool",
+      "accessoryBrief": "One plain golf iron with an oversized rounded brass head and dark-green leather grip; no extra ball, golf bag, flag, scenery or logo.",
+      "gearRationale": "Frozen2/3 information creature: light sport cloth only. Club is a visual precision tool, not a weapon bonus or new inspection action.",
+      "priorDisplayPersona": "Steve Earwing",
+      "priorInspiration": "Steve Irwin",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Future group; do not add to current group3 six",
+      "inspirationOverride": "Nelly Korda",
+      "sport": "golf",
+      "sourceURLs": [
+        "https://www.lpga.com/athletes/nelly-korda/98350/bio"
+      ]
     },
     {
       "species": "perception-pattern-panther",
@@ -401,13 +419,24 @@
       "species": "language-metaphor-mantis",
       "bodyFamily": "bird",
       "originalPersona": "Bo Birdham",
-      "bodyBrief": "Dark crane with angular wings, gold stage trim and one small hand mirror.",
-      "poseBrief": "Side-on one-leg balance, tucked leg visible and wing presents the mirror at a comic angle.",
-      "shortRationale": "Make the original bird specific; its tall spare outline contrasts with broad hosts and short finches.",
+      "bodyBrief": "A tall compact heron with a long clear beak, warm animal eyes and charcoal-and-gold volleyball tunic. Exactly two wings and two bird legs; no added human arms. One plain cream-and-gold volleyball, no stage mirror or licensed uniform.",
+      "poseBrief": "PRIMARY FRONT: both eyes visible, high compact set-or-spike preparation, one wing forelimb lifts the single ball while the other balances wide; legs tuck below. Beak faces viewer, not three-quarter right.",
+      "shortRationale": "A Nordic female volleyball reference answers the smaller volleyball interest; the long beak and jumping wings preserve creature-body variety.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "reflection-relic",
-      "accessoryBrief": "One plain gold-framed hand mirror with dark glass and no emblem; no stage card.",
-      "gearRationale": "3/3 suits light stagewear. The theatrical mirror cues reframing without adding colour changes beyond the frozen Entrance."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One cream-and-gold volleyball with broad curved panels; no net, court, logo, numbered shirt, second ball or magic attack beam.",
+      "gearRationale": "Frozen3/3 is a midrange body: light padded gold wrist/wing wraps, no permanent shield. Ball and leap add no stat swap, colour effect or volleyball rule.",
+      "priorDisplayPersona": "Bo Birdham",
+      "priorInspiration": "Bo Burnham",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Future group; do not add to current group3 six",
+      "displayPersona": "Isabelle Haakheron",
+      "inspirationOverride": "Isabelle Haak",
+      "sport": "volleyball",
+      "sourceURLs": [
+        "https://en.volleyballworld.com/volleyball/competitions/women-world-championship/players/153170"
+      ]
     },
     {
       "species": "language-contract-coyote",
@@ -449,22 +478,33 @@
     },
     {
       "species": "imagination-doodle-duck",
-      "bodyFamily": "bird",
+      "bodyFamily": "unusual-mammal",
       "originalPersona": "Dan TDuck",
-      "bodyBrief": "Cheerful duck with dark-blue feathers, violet hoodie and one plain crystal-button controller.",
-      "poseBrief": "Low right-facing shuffle, one wing offers the controller while the other balances behind.",
-      "shortRationale": "Keep a compact aquatic bird whose bill and paddle feet read independently of the gaming prop.",
+      "bodyBrief": "A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit.",
+      "poseBrief": "PRIMARY LEFT: low left-facing dribble-ready crouch, both forepaws hold the single ball near the left knee, tail arcs back to the right. Animal snout points left, one eye more prominent; not three-quarter right.",
+      "shortRationale": "A small European basketball star parody fills a simple common slot; rounded chinchilla ears avoid another duck or feline.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "enchanted-toy",
-      "accessoryBrief": "One unbranded toy controller with two broad violet crystal buttons; no screen text.",
-      "gearRationale": "1/2 has no ability and should remain simply equipped; a toy preserves the gaming persona without implying magic effects."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One plain violet-and-cream leather basketball with broad seams; no brand, numbered shirt, hoop or second ball.",
+      "gearRationale": "Frozen1/2 vanilla common: light padded sports vest only, not heroic armour. Athletic confidence is a visual joke and grants no playmaking or attack bonus.",
+      "priorDisplayPersona": "Dan TDuck",
+      "priorInspiration": "DanTDM",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Future group; do not add to current group3 six",
+      "displayPersona": "Luka Donchilla",
+      "inspirationOverride": "Luka Doncic",
+      "sport": "basketball",
+      "sourceURLs": [
+        "https://www.nba.com/player/1629029/luka-doncic/bio"
+      ]
     },
     {
       "species": "imagination-fable-fawn",
       "bodyFamily": "bird",
       "originalPersona": "Jack Blackbird",
       "bodyBrief": "Stocky blackbird with wild crest, dark coat, purple scarf and one small lute.",
-      "poseBrief": "Front-facing wide-wing stage flourish, lute lifted diagonally and feet planted apart.",
+      "poseBrief": "Left-facing wide-wing stage flourish, lute lifted diagonally and feet planted apart.",
       "shortRationale": "A broad theatrical blackbird remains distinct from finches and retains a readable performer gag.",
       "suggestedNextGroup": false,
       "accessoryFamily": "musical-instrument",
@@ -574,13 +614,24 @@
       "species": "memory-archive-armadillo",
       "bodyFamily": "unusual-mammal",
       "originalPersona": "Daniel Radclaw",
-      "bodyBrief": "Compact armadillo with silver-trimmed stage coat, visible shell rings/claws and one large old key.",
-      "poseBrief": "Left-facing low curl, key offered beneath the shell edge and head peeking forward.",
-      "shortRationale": "Keep an unusual armoured mammal, with a map and protective pose rather than a wizard costume.",
+      "bodyBrief": "A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform.",
+      "poseBrief": "PRIMARY FRONT: both animal eyes visible, low wide goalkeeper brace, shell raised behind shoulders and one forepaw blocks beside the ball. Exactly two forepaws and two hind feet; no extra hands.",
+      "shortRationale": "A Danish goalkeeper reference directly serves the class handball interest while keeping the existing common defensive role.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "key-relic",
-      "accessoryBrief": "One oversized old iron key with a curled silver bow; no map, wizard wand or branded crest.",
-      "gearRationale": "1/3 and Guard are conveyed by the natural shell; the key is an adventure prop, not a weapon or escape ability."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One small plain handball with broad panels. Shell/padded vest are costume rather than a second prop; no goal, net, logo or jersey number.",
+      "gearRationale": "Frozen1/3 with Guard makes a modest natural-shell goalkeeper visual apt. It does not add Shield, saves, healing or a ball-catching mechanic.",
+      "priorDisplayPersona": "Daniel Radclaw",
+      "priorInspiration": "Daniel Radcliffe",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Future group; do not add to current group3 six",
+      "displayPersona": "Niklas Landillo",
+      "inspirationOverride": "Niklas Landin Jacobsen",
+      "sport": "handball",
+      "sourceURLs": [
+        "https://www.ihf.info/competitions/men/308/2024-olympic-games-paris-mens-tournament/159985/players/22033"
+      ]
     },
     {
       "species": "memory-chronicle-cat",
@@ -597,16 +648,26 @@
     },
     {
       "species": "memory-replay-raccoon",
-      "bodyFamily": "aquatic-fish",
-      "displayPersona": "Snoop Dogfish",
+      "bodyFamily": "unusual-mammal",
+      "displayPersona": "Nikola Jokaroo",
       "originalPersona": "Snoop Raccoon",
-      "bodyBrief": "Small dogfish shark with dark glasses, subtle braided fin filaments and silver-trimmed jacket; one shell-earcup headset.",
-      "poseBrief": "Relaxed right-facing float, head half-turned and one fin touches an earcup.",
-      "shortRationale": "A laid-back dogfish commentator replaces a repeated raccoon while keeping the entertainer's public-work angle.",
+      "bodyBrief": "A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass.",
+      "poseBrief": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose.",
+      "shortRationale": "A pouch-shaped passer provides a memorable basketball cue and replaces an unproduced entertainer while preserving every card contract.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "wearable-relic",
-      "accessoryBrief": "One plain commentator headset with shell-shaped silver earcups; no logo or smoking prop.",
-      "gearRationale": "2/3 suits a loose jacket rather than heavy armour. Shell earcups keep the broadcast cue without inventing audio or recovery effects."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One plain silver-and-cream leather basketball with broad seams; no team badge, number, second ball or hoop.",
+      "gearRationale": "Frozen2/3 support body: light sports wraps only. Offered ball suggests bringing a teammate back into play, without changing the recovery effect or adding any bonus.",
+      "priorDisplayPersona": "Snoop Dogfish",
+      "priorInspiration": "Snoop Dogg",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "inspirationOverride": "Nikola Jokic",
+      "sport": "basketball",
+      "sportsProductionTiming": "Ready for remaining group3 six",
+      "sourceURLs": [
+        "https://www.nba.com/player/203999"
+      ]
     },
     {
       "species": "memory-hourglass-hedgehog",
@@ -635,15 +696,26 @@
     },
     {
       "species": "memory-sequence-swan",
-      "bodyFamily": "fantasy",
+      "bodyFamily": "other-invertebrate",
       "originalPersona": "Adelloon",
-      "bodyBrief": "An enchanted loon-shaped velvet balloon creature with warm nonhuman eyes, a short knotted beak, two soft fabric wing lobes and cord-like limbs; grey stage cape and silver trim. One silver voice-trumpet remains the sole prop. Keep Adelloon.",
-      "poseBrief": "Tall poised float, one fabric wing angled down and trumpet lowered during a deliberate pause; cord tail curls once beneath.",
-      "shortRationale": "The loon/balloon pun creates a surreal performer silhouette while retaining the public stage-pause joke.",
+      "bodyBrief": "A friendly silver-edged scorpion with broad warm animal eyes, dark segmented shell and simple silver-trimmed sports wraps. Eight small walking legs, two broad pincers and one curved tail with a blunt stylized tip; no human arms. One plain handball held in a pincer.",
+      "poseBrief": "PRIMARY LEFT: low forward throwing step, body and pincers clearly face left, tail curls upward and back to the right. One pincer raises the ball above the shoulder line; whole tail and all legs fit.",
+      "shortRationale": "A Danish handball role answers the class preference; the scorpion throw is an original nonhuman sporting gag, not a human likeness.",
       "suggestedNextGroup": false,
-      "accessoryFamily": "musical-instrument",
-      "accessoryBrief": "One silver voice-trumpet with a soft velvet bell; no microphone, lyric or logo.",
-      "gearRationale": "3/4 is a substantial but airy performer. The instrument supplies a held-pause joke, not another delay or sound mechanic."
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One compact silver-and-cream handball with broad plain panels; no branded kit, number, net or second prop.",
+      "gearRationale": "Frozen3/4 timing-support body: natural shell and modest sport wraps convey sturdy tempo play. Tail is cosmetic, adding no poison, damage, Guard or extra scheduling.",
+      "priorDisplayPersona": "Adelloon",
+      "priorInspiration": "Adele",
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "displayPersona": "Mathias Gidscorpion",
+      "inspirationOverride": "Mathias Gidsel",
+      "sport": "handball",
+      "sportsProductionTiming": "Ready for remaining group3 six",
+      "sourceURLs": [
+        "https://www.eurohandball.com/en/player/zNNV4MTuxI13Pq9C77tyFA/Mathias-Gidsel/"
+      ]
     },
     {
       "species": "memory-second-chance-salamander",
@@ -690,5 +762,27 @@
     "perception-shadow-shrimp",
     "perception-observer-octopus"
   ],
-  "accessoryPolicy": "Fantasy tools, relics, instruments, armour and occasional magical weapons; one bold prop. Gear is purely artistic and never adds a gameplay keyword. Only essential minority print props survive."
+  "accessoryPolicy": "Fantasy tools, relics, instruments, armour and occasional magical weapons; one bold prop. Gear is purely artistic and never adds a gameplay keyword. Only essential minority print props survive.",
+  "sportsSteering": "Teacher13October: more basketball, Danish handball, a little golf/volleyball; preserve all produced/inflight art. Sports are visual cast substitutions only. Official links establish public sporting roles, not survey-backed popularity.",
+  "sportsPlan": {
+    "checkedOn": "2026-10-13",
+    "additionalAthletes": 7,
+    "sportCounts": {
+      "basketball": 3,
+      "golf": 1,
+      "volleyball": 1,
+      "handball": 2
+    },
+    "hockey": 0,
+    "currentGroup3Changes": [
+      "memory-replay-raccoon",
+      "memory-sequence-swan"
+    ],
+    "preserve": [
+      "Every source PNG/output record already made or in flight",
+      "LeBrontosaurus and Serenox",
+      "Existing Steph Cawry and other accepted cast"
+    ],
+    "researchRule": "Primary official sporting roles only. Names/bodies/jokes are original editorial choices; teenage recognition is not claimed measured. No club/award assertions, licensed uniforms, logos, lyrics, private or sexual jokes."
+  }
 }

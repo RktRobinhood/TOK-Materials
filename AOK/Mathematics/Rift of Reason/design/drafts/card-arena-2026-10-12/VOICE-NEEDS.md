@@ -34,3 +34,24 @@ Use existing open, reveal, card-play, jingle, axiom, block, hit and defeat sound
 #145 group1 adds11art-only persona proposals. One original draft line each plus broad acting traits/shared SFX directions are in production inventory.json. Hank wording/voice draft remains gated by #146; Jimmy by #144. Reuse existing nonverbal card-play/hit/defeat/reveal/Axiom sounds; no new paid effects, API calls, voice pins, recordings or voice-manifest edits. Record one or two original lines when the matching runtime mechanic/text is frozen. Source voices already changed by another session at b86c157 are preserved.
 
 #145 group2 adds12original one-line drafts in inventory.json, with retained broad acting directions and shared SFX; no celebrity voice cloning, runtime bark/voice pin/API/render/recording edits. Record only when mechanics/text release. Future conditional expansion148/149 may reuse reveal/condition/axiom/block sounds and one optional original host cue, not23newsound sets; no generation now.
+
+## Group 3 voice drafts — #145, 13 October 2026
+
+One short original play/entrance proposal per art-ready character. These are source-only drafts, outside runtime barks, cast pins and recording scans. Retain the inventory's broad acting directions; no real-person voice imitation or copied quotations. Reuse card-play/hit/defeat and only the existing action-specific cues listed in inventory.json. Record at most one or two lines per card after #109/#123 mechanic/text release, through the established Google plan/render/audit flow; preserve existing recordings and hashes.
+
+| Species id | Display persona | Original draft line |
+|---|---|---|
+| `reason-proof-beetle` | Mark Ro-beetle | Fixed it. Mostly. |
+| `reason-counterexample-crow` | V-Squish | That answer has a loose corner. |
+| `reason-boundary-bear` | Ein-stone | Time bent my shield again. |
+| `emotion-temper-tiger` | Jeremy Clawson | The wheel is far too small. |
+| `emotion-grudge-goose` | Jack Axoloticeye | That was a tiny surprise! |
+| `emotion-heartfire-hawk` | LeBrontosaurus | One pass. A very long neck. |
+| `perception-pattern-panther` | Marques Brownleaf | Let's check the little details. |
+| `perception-exposure-eagle` | Houdini Wisp | The lock looks less impressive now. |
+| `perception-horizon-hare` | Amelia Airgator | I checked the route twice. |
+| `language-label-lemur` | Ryan Georilla | This label needs another label. |
+| `language-debate-dingo` | K-S-Ibis | My beak has one more point. |
+| `language-orator-owl` | Opra-moth | There is room for one more. |
+
+Seven unproduced sports substitutions are mapped in canonical ROSTER.md/body-plan.json; later voice briefs must use the new fictional display identity and broad original acting traits. No audio, API requests, sound keys or manifests were changed for this ledger acceptance.

@@ -8,77 +8,77 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 
 | Asset | Card | Status |
 |---|---|---|
-| creature/reason-premise-pigeon/idle | Premise Pigeon | Planned; gated by card release |
-| creature/reason-axiom-ant/idle | Axiom Ant | Planned; gated by card release |
-| creature/reason-proof-beetle/idle | Proof Beetle | Planned; gated by card release |
-| creature/reason-counterexample-crow/idle | Counterexample Crow | Planned; gated by card release |
-| creature/reason-parity-panda/idle | Parity Panda | Planned; gated by card release |
+| creature/reason-premise-pigeon/idle | Tom Skink | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/reason-axiom-ant/idle | Bill Ny-ant | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/reason-proof-beetle/idle | Mark Ro-beetle | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/reason-counterexample-crow/idle | V-Squish | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/reason-parity-panda/idle | Hannah Frycoon | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/reason-induction-ibex/idle | Induction Ibex | Planned; gated by card release |
-| creature/reason-logic-lynx/idle | Logic Lynx | Planned; gated by card release |
+| creature/reason-logic-lynx/idle | Derek Mullinx | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/reason-guardrail-goat/idle | Guardrail Goat | Planned; gated by card release |
 | creature/reason-diagonal-deer/idle | Grant Sanderstag (Diagonal Deer) | Art produced #142; runtime gated #109/#123 |
 | creature/reason-inference-heron/idle | Inference Heron | Planned; gated by card release |
-| creature/reason-boundary-bear/idle | Boundary Bear | Planned; gated by card release |
+| creature/reason-boundary-bear/idle | Ein-stone | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/reason-theorem-tortoise/idle | Theorem Tortoise | Planned; gated by card release |
-| creature/emotion-pulse-pup/idle | Pulse Pup | Planned; gated by card release |
+| creature/emotion-pulse-pup/idle | Dua Leapfrog | Art produced #145 group 2; runtime gated #109/#123 |
 | creature/emotion-courage-cub/idle | Courage Cub | Planned; gated by card release |
 | creature/emotion-spite-sprite/idle | Kai Ceenat (Spite Sprite) | Art produced #142; runtime gated #109/#123 |
 | creature/emotion-cheer-chick/idle | Cheer Chick | Planned; gated by card release |
-| creature/emotion-temper-tiger/idle | Temper Tiger | Planned; gated by card release |
+| creature/emotion-temper-tiger/idle | Jeremy Clawson | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/emotion-bond-badger/idle | Bond Badger | Planned; gated by card release |
-| creature/emotion-grudge-goose/idle | Grudge Goose | Planned; gated by card release |
-| creature/emotion-resolve-ram/idle | Resolve Ram | Planned; gated by card release |
-| creature/emotion-outrage-ox/idle | Outrage Ox | Planned; gated by card release |
-| creature/emotion-heartfire-hawk/idle | Heartfire Hawk | Planned; gated by card release |
-| creature/emotion-stormheart-serpent/idle | Stormheart Serpent | Planned; gated by card release |
-| creature/emotion-empathy-elephant/idle | Empathy Elephant | Planned; gated by card release |
+| creature/emotion-grudge-goose/idle | Jack Axoloticeye | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/emotion-resolve-ram/idle | Greta Thunbug | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/emotion-outrage-ox/idle | Serenox | Art produced #145 group 1; runtime gated #109/#123 |
+| creature/emotion-heartfire-hawk/idle | LeBrontosaurus | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/emotion-stormheart-serpent/idle | Giannis Antetokudu | Planned #145; sports override; runtime gated |
+| creature/emotion-empathy-elephant/idle | Pascalophant | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/perception-cue-cricket/idle | Nikkie de Jaguar (Cue Cricket) | Art/native/public QA pass #143; runtime gated |
-| creature/perception-lens-lynx/idle | Lens Lynx | Planned; gated by card release |
+| creature/perception-lens-lynx/idle | James Randilynx | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/perception-focus-falcon/idle | Focus Falcon | Planned; gated by card release |
-| creature/perception-shadow-shrimp/idle | Shadow Shrimp | Planned; gated by card release |
-| creature/perception-scout-stoat/idle | Scout Stoat | Planned; gated by card release |
-| creature/perception-prism-puffin/idle | Prism Puffin | Planned; gated by card release |
-| creature/perception-pattern-panther/idle | Pattern Panther | Planned; gated by card release |
+| creature/perception-shadow-shrimp/idle | David Brine | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/perception-scout-stoat/idle | Nelly Koalda | Planned #145; sports override; runtime gated |
+| creature/perception-prism-puffin/idle | Zach Wing | Art produced #145 group 1; runtime gated #109/#123 |
+| creature/perception-pattern-panther/idle | Marques Brownleaf | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/perception-signal-seal/idle | Signal Seal | Planned; gated by card release |
-| creature/perception-observer-octopus/idle | Observer Octopus | Planned; gated by card release |
-| creature/perception-exposure-eagle/idle | Exposure Eagle | Planned; gated by card release |
-| creature/perception-horizon-hare/idle | Horizon Hare | Planned; gated by card release |
+| creature/perception-observer-octopus/idle | Adam Savash | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/perception-exposure-eagle/idle | Houdini Wisp | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/perception-horizon-hare/idle | Amelia Airgator | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/perception-true-sight-stag/idle | True Sight Stag | Planned; gated by card release |
 | creature/language-question-quail/idle | Question Quail | Planned; gated by card release |
-| creature/language-comma-caterpillar/idle | Comma Caterpillar | Planned; gated by card release |
-| creature/language-label-lemur/idle | Label Lemur | Planned; gated by card release |
+| creature/language-comma-caterpillar/idle | Emma Wordson | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/language-label-lemur/idle | Ryan Georilla | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/language-word-weasel/idle | Word Weasel | Planned; gated by card release |
 | creature/language-echo-egret/idle | Sabrina Carpwenter (Echo Egret) | Art/native/public QA pass #143; runtime gated |
 | creature/language-definition-dolphin/idle | Definition Dolphin | Planned; gated by card release |
-| creature/language-debate-dingo/idle | Debate Dingo | Planned; gated by card release |
-| creature/language-clause-crane/idle | Clause Crane | Planned; gated by card release |
-| creature/language-metaphor-mantis/idle | Metaphor Mantis | Planned; gated by card release |
-| creature/language-contract-coyote/idle | Contract Coyote | Planned; gated by card release |
-| creature/language-orator-owl/idle | Orator Owl | Planned; gated by card release |
+| creature/language-debate-dingo/idle | K-S-Ibis | Art produced #145 group 3; runtime gated #109/#123 |
+| creature/language-clause-crane/idle | Olivia Rodentgo | Art produced #145 group 1; runtime gated #109/#123 |
+| creature/language-metaphor-mantis/idle | Isabelle Haakheron | Planned #145; sports override; runtime gated |
+| creature/language-contract-coyote/idle | Jenna Otterga | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/language-orator-owl/idle | Opra-moth | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/language-lexicon-lion/idle | Lexicon Lion | Planned; gated by card release |
-| creature/imagination-doodle-duck/idle | Doodle Duck | Planned; gated by card release |
-| creature/imagination-possibility-pika/idle | Possibility Pika | Planned; gated by card release |
+| creature/imagination-doodle-duck/idle | Luka Donchilla | Planned #145; sports override; runtime gated |
+| creature/imagination-possibility-pika/idle | PewDiePika | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/imagination-fable-fawn/idle | Fable Fawn | Planned; gated by card release |
 | creature/imagination-mosaic-mole/idle | Mosaic Mole | Planned; gated by card release |
-| creature/imagination-blueprint-bat/idle | Blueprint Bat | Planned; gated by card release |
+| creature/imagination-blueprint-bat/idle | Hideo Kojibat | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/imagination-mirror-marten/idle | Mirror Marten | Planned; gated by card release |
 | creature/imagination-chimera-chick/idle | Chimera Chick | Planned; gated by card release |
 | creature/imagination-stage-mouse/idle | Stage Mouse | Planned; gated by card release |
 | creature/imagination-paradox-pony/idle | Paradox Pony | Planned; gated by card release |
-| creature/imagination-cloud-castle-crab/idle | Cloud Castle Crab | Planned; gated by card release |
+| creature/imagination-cloud-castle-crab/idle | Ariana Crande | Art produced #145 group 2; runtime gated #109/#123 |
 | creature/imagination-dreamweaver-whale/idle | Dreamweaver Whale | Planned; gated by card release |
-| creature/imagination-impossible-unicorn/idle | Impossible Unicorn | Planned; gated by card release |
-| creature/memory-bookmark-bunny/idle | Bookmark Bunny | Planned; gated by card release |
-| creature/memory-recall-robin/idle | Recall Robin | Planned; gated by card release |
-| creature/memory-archive-armadillo/idle | Archive Armadillo | Planned; gated by card release |
+| creature/imagination-impossible-unicorn/idle | Ramanujicorn | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/memory-bookmark-bunny/idle | Hank Greenhare | Art produced #145 group 1; runtime gated #109/#123/#146 |
+| creature/memory-recall-robin/idle | John Greenfinch | Art produced #145 group 1; runtime gated #109/#123 |
+| creature/memory-archive-armadillo/idle | Niklas Landillo | Planned #145; sports override; runtime gated |
 | creature/memory-return-roach/idle | Return Roach | Planned; gated by card release |
-| creature/memory-chronicle-cat/idle | Chronicle Cat | Planned; gated by card release |
-| creature/memory-replay-raccoon/idle | Replay Raccoon | Planned; gated by card release |
+| creature/memory-chronicle-cat/idle | Stan Leemur | Art produced #145 group 2; runtime gated #109/#123 |
+| creature/memory-replay-raccoon/idle | Nikola Jokaroo | Planned #145; sports override; runtime gated |
 | creature/memory-hourglass-hedgehog/idle | Hourglass Hedgehog | Planned; gated by card release |
 | creature/memory-souvenir-seal/idle | Souvenir Seal | Planned; gated by card release |
-| creature/memory-sequence-swan/idle | Sequence Swan | Planned; gated by card release |
+| creature/memory-sequence-swan/idle | Mathias Gidscorpion | Planned #145; sports override; runtime gated |
 | creature/memory-second-chance-salamander/idle | Second Chance Salamander | Planned; gated by card release |
-| creature/memory-keeper-koi/idle | Keeper Koi | Planned; gated by card release |
+| creature/memory-keeper-koi/idle | David Tennantacle | Art produced #145 group 2; runtime gated #109/#123 |
 | creature/memory-timekeeper-tapir/idle | Timekeeper Tapir | Planned; gated by card release |
 
 Shared presentation: code/SVG Guard backplate distinct from Shield; enlarged card text with type/rarity text and icons; five consistent rarity treatments including Mythic; cosmetic foil static overlay or one short optional sheen; shared pack illustration/opened wrapper; seven affinity symbols (six colours + generic); upcoming Fate environmental marker and inspectable node. Reuse current card backs, frames and effect sounds where suitable. Owner back selection must use saved choices with default fallback, not invented save fields. Reserve the outcome-clip area (#108) without covering board controls.
@@ -116,3 +116,15 @@ Fifteen of72expansion portraits now produced;57remain (including Jimmy #144 and 
 Twelve more expansion portraits plus the last five shared spell/Axiom motifs produced and built. Cumulative expansion art27of72produced,45remain (42pending +Jimmy144/Rick147/service-rejected Stephen deferred). All31selected bulk assets pass source/runtime alpha/dimension/hash checks;17newmanifest entries. Unowned preview restored after build. Unicorn five-limb first take retained and corrected to exactly four limbs before selection. Native1280dark/light180px/70px samples and300px foreground frame, actual390px narrow card fit:64images loaded, no warnings/errors. Full823tests822pass1skip0fail127276.3846ms; independent Standards/Spec zero remaining findings.
 
 Sources/prompts/edit history/body-accessory mappings and proposed138card-art assignments: design/source-assets/4-caricatures/production-145-2026-10-13/. Contact sheet dev/art-production.html; evidence/review design/reviews/art-production-145-2026-10-13.md. Shared mapping is proposed, not runtime registration/acquisition. Gear follows printed role without adding powers. Books remain a minority where essential; original glider-croc/mushroom-puppet/loon-balloon are next unproduced fantasy briefs. No engine/owned-deck/save/voice release implied. Publication/deployment follow.
+
+## Bulk art group 3 — #145, 13 October 2026
+
+Twelve further portraits are selected, built and locally accepted. Cumulative expansion readiness is 39/72 portraits; 33 remain (30 pending plus Jimmy #144, Rick #147 and service-rejected Stephen deferred). The bulk source folder contains 43 selected assets: 35 portraits plus eight shared motifs. Four earlier pilot portraits complete the total of 39. The 138-card motif mapping remains proposed for 84 spells and 54 Axioms.
+
+Selected sources/exact prompts/references/body/gear mappings: design/source-assets/4-caricatures/production-145-2026-10-13/. Ein-stone's corrected left-facing stone golem is selected; the dragon-like first take remains unused provenance. No species/art IDs, colour, rarity, mechanics or acquisition changed.
+
+Recorded source/runtime checks and independent reviews passed. Full suite: 823 tests, 822 passed, one skipped, zero failed (120286.8496 ms). Native dark 180px/70px contact sheet, light 300px frame and actual 390px light viewport passed; 88 images loaded without warnings/errors. Review evidence: group3-contact-dark.png, group3-light-viewport.png and group3-narrow-light.png in design/reviews/art-production-145-2026-10-13/. These are viewport/clip captures. Publication/public verification follows.
+
+Art readiness does not complete production board #109, mechanics/balance #123, owned-deck/acquisition/save gates or voice recording. #145 remains open. No teacher roster review is required.
+
+Exact twelve group 3 mappings are indexed above and in canonical ROSTER.md. Seven future sports substitutions remain unproduced requests; use body-plan.json over historical animal/paper-prop briefs. Full art is default NORMAL; later foil reuses the same cutout.

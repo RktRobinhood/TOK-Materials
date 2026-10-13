@@ -1,6 +1,10 @@
 {
-  "status": "Future proposal only; separate from the existing 210",
+  "status": "Design handoff; backend/design/art directly authorized after all current initial generation, not implemented now",
   "count": 23,
+  "cardKinds": {
+    "maskedCreatures": 8,
+    "conditionalSpells": 15
+  },
   "allocation": {
     "reason": 3,
     "emotion": 3,
@@ -15,7 +19,7 @@
       "id": "conditional-reason-premise-pending",
       "name": "Premise Pending",
       "colour": "reason",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -26,23 +30,42 @@
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
       "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
-      "effectProposal": "The triggering creature loses 1 attack until its controller’s next turn ends, minimum 0.",
-      "role": "Small precise ambush; preparing an equal-attack exchange.",
-      "counterplay": "Play a low-value body first; an irrelevant/no-longer-present target still consumes the condition.",
+      "effectProposal": "If you have a creature and the triggering creature has more current attack than every creature on your board, it loses 2 attack until its controller’s next turn ends, minimum 0.",
+      "role": "Reason precision tempo: punish a provably larger arrival rather than grant a generic attack buff.",
+      "counterplay": "Play a smaller body first or keep attacks outside the comparison; a failed comparison consumes the spell.",
       "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Comparisons, matched values, odd/even costs and carefully committed cases.",
+        "mono": "Repeated Reason bodies/spells build predictable comparisons and cost cases.",
+        "mix": "Imagination swaps or Language attack labels set up comparisons; Perception helps choose the trigger."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-reason-spare-premise",
       "name": "Spare Premise",
       "colour": "reason",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "self"
@@ -51,23 +74,50 @@
         "axiom-replaced"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
-      "effectProposal": "Your most damaged surviving creature gains 1 maximum health and heals 1. Ties use oldest board arrival.",
-      "role": "Rule-change support for a durable board.",
-      "counterplay": "Remove its useful recipient before the rule change; no creature means no effect.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
+      "effectProposal": "Entrance: choose two other friendly creatures with equal current attack; each gains 1 maximum health and heals 1. Without a legal pair, the creature still enters with no pair effect.",
+      "role": "Reason midrange: maintain a matched pair through changing rules; the revealed body is support, not a second healing copy.",
+      "counterplay": "Break the equality or remove one prospective recipient before the rule change.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Comparisons, matched values, odd/even costs and carefully committed cases.",
+        "mono": "Repeated Reason bodies/spells build predictable comparisons and cost cases.",
+        "mix": "Imagination swaps or Language attack labels set up comparisons; Perception helps choose the trigger."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "Entrance: choose two other friendly creatures with equal current attack; each gains 1 maximum health and heals 1. Without a legal pair, the creature still enters with no pair effect."
     },
     {
       "id": "conditional-reason-exhibit-aha",
       "name": "Exhibit Aha",
       "colour": "reason",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -79,22 +129,41 @@
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
       "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
-      "effectProposal": "Inspect your top 2 personal-deck cards; keep their order or swap them. Draw nothing.",
-      "role": "Commit to one anticipated action; private preparation rather than a free draw.",
-      "counterplay": "Force the unhelpful timing; deck mutation/draw limits still apply.",
+      "effectProposal": "If the triggering card’s actual paid energy cost was odd, draw 1 personal-deck card. If it was even, heal your most damaged creature by 1; ties use oldest arrival. Zero is even.",
+      "role": "Reason control: commit to one event class and predict the odd/even cost after public discounts.",
+      "counterplay": "Choose a cost/timing that wastes the desired branch; neither branch repays energy or rearms the spell.",
       "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Comparisons, matched values, odd/even costs and carefully committed cases.",
+        "mono": "Repeated Reason bodies/spells build predictable comparisons and cost cases.",
+        "mix": "Imagination swaps or Language attack labels set up comparisons; Perception helps choose the trigger."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-emotion-tiny-drama",
       "name": "Tiny Drama",
       "colour": "emotion",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -112,15 +181,34 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Spend own hearts, pressure opposing hearts and turn losses into tempo.",
+        "mono": "Concentrate paid heart-risk and damage reactions under the active Win axiom.",
+        "mix": "Language Guard or Memory recovery sustains risk; borrowed payoff is not a free universal heal."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-emotion-standing-ovation",
       "name": "Standing Ovation",
       "colour": "emotion",
-      "kind": "conditional",
+      "kind": "creature",
       "costProposal": 2,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -130,23 +218,50 @@
         "spell-played"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "Your surviving creatures gain 1 attack until your next turn starts.",
       "role": "Opponent spell timing creates one counter-pressure window.",
       "counterplay": "Cast before the armed player has useful attackers; no copied/repeated ovation from this instance.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Spend own hearts, pressure opposing hearts and turn losses into tempo.",
+        "mono": "Concentrate paid heart-risk and damage reactions under the active Win axiom.",
+        "mix": "Language Guard or Memory recovery sustains risk; borrowed payoff is not a free universal heal."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "Your surviving creatures gain 1 attack until your next turn starts."
     },
     {
       "id": "conditional-emotion-group-gasp",
       "name": "Group Gasp",
       "colour": "emotion",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -165,15 +280,34 @@
         148,
         109,
         123,
+        112,
         "victory-tie-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Spend own hearts, pressure opposing hearts and turn losses into tempo.",
+        "mono": "Concentrate paid heart-risk and damage reactions under the active Win axiom.",
+        "mix": "Language Guard or Memory recovery sustains risk; borrowed payoff is not a free universal heal."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-perception-velvet-reveal",
       "name": "Velvet Reveal",
       "colour": "perception",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -191,16 +325,35 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Private/public deck information, exposure and planned trigger knowledge.",
+        "mono": "Inspect and expose before committing attacks or concealed triggers.",
+        "mix": "Feed Reason precision or protect a fragile Imagination plan; preserve opponent privacy."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-perception-clock-eyes",
       "name": "Clock Eyes",
       "colour": "perception",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "either"
@@ -209,26 +362,53 @@
         "fate-entered"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "Privately inspect the top 2 unreserved shared Axioms without moving or drawing them. Public scheduled effects stay unchanged.",
       "role": "Public Fate timing buys limited hidden-deck information.",
       "counterplay": "Change the available unreserved deck before entry; this reveals no reserved effect.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
         123,
+        112,
         "fate-entry-policy",
         118,
-        119
+        119,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Private/public deck information, exposure and planned trigger knowledge.",
+        "mono": "Inspect and expose before committing attacks or concealed triggers.",
+        "mix": "Feed Reason precision or protect a fragile Imagination plan; preserve opponent privacy."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "Privately inspect the top 2 unreserved shared Axioms without moving or drawing them. Public scheduled effects stay unchanged."
     },
     {
       "id": "conditional-perception-blink-forecast",
       "name": "Blink Forecast",
       "colour": "perception",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -247,15 +427,34 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Private/public deck information, exposure and planned trigger knowledge.",
+        "mono": "Inspect and expose before committing attacks or concealed triggers.",
+        "mix": "Feed Reason precision or protect a fragile Imagination plan; preserve opponent privacy."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-language-footnote-trap",
       "name": "Footnote Trap",
       "colour": "language",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -273,15 +472,34 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Axiom replacement, temporary permissions/Guard and post-play resource taxes.",
+        "mono": "Plan around rule replacement and controlled follow-up costs.",
+        "mix": "Change the terms under which another colour fights, rather than repeat its damage spell."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-language-queue-that-question",
       "name": "Queue That Question",
       "colour": "language",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -299,16 +517,35 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Axiom replacement, temporary permissions/Guard and post-play resource taxes.",
+        "mono": "Plan around rule replacement and controlled follow-up costs.",
+        "mix": "Change the terms under which another colour fights, rather than repeat its damage spell."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-language-chair-recognises",
       "name": "The Chair Recognises You",
       "colour": "language",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "self",
@@ -318,23 +555,50 @@
         "creature-played"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "The triggering creature gains Guard until its controller’s next turn starts. Existing Guard does not stack.",
       "role": "Choose whose next speaker must take the front seat; support or force an enemy blocker.",
       "counterplay": "Control the next arrival; an already-Guard target gains no second keyword.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Axiom replacement, temporary permissions/Guard and post-play resource taxes.",
+        "mono": "Plan around rule replacement and controlled follow-up costs.",
+        "mix": "Change the terms under which another colour fights, rather than repeat its damage spell."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "The triggering creature gains Guard until its controller’s next turn starts. Existing Guard does not stack."
     },
     {
       "id": "conditional-imagination-wrong-way-round",
       "name": "Wrong Way Round",
       "colour": "imagination",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -353,16 +617,35 @@
         148,
         109,
         123,
+        112,
         "temporary-swap-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Unexpected shapes, revealed bodies and colourless token formations.",
+        "mono": "Build token boards and transformation windows with available slots.",
+        "mix": "Transform defensive bodies or shelter other colours’ token plans; do not create free copies."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-imagination-paper-tiger",
       "name": "Paper Tiger",
       "colour": "imagination",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "self"
@@ -371,24 +654,51 @@
         "creature-defeated"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "If the defeated creature was not a token, summon a colourless 1/1 paper token if you have room.",
       "role": "One paid replacement piece for token decks; token death cannot feed itself.",
       "counterplay": "Fill the board or remove the result; consumed source produces no second token.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
         123,
-        "token-order"
+        112,
+        "token-order",
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Unexpected shapes, revealed bodies and colourless token formations.",
+        "mono": "Build token boards and transformation windows with available slots.",
+        "mix": "Transform defensive bodies or shelter other colours’ token plans; do not create free copies."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "If the defeated creature was not a token, summon a colourless 1/1 paper token if you have room."
     },
     {
       "id": "conditional-imagination-costume-rehearsal",
       "name": "Costume Rehearsal",
       "colour": "imagination",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -407,16 +717,35 @@
         148,
         109,
         123,
+        112,
         "token-order"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Unexpected shapes, revealed bodies and colourless token formations.",
+        "mono": "Build token boards and transformation windows with available slots.",
+        "mix": "Transform defensive bodies or shelter other colours’ token plans; do not create free copies."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-memory-somewhere-safe",
       "name": "Somewhere Very Safe",
       "colour": "memory",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "self"
@@ -425,23 +754,50 @@
         "creature-defeated"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "If the defeated non-token creature is still in your discard, move that exact instance to the bottom of your personal deck.",
       "role": "Preserve a body for a later draw without a free replay.",
       "counterplay": "Pressure the delay; earlier Last Word recovery means no second copy is created.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "midrange",
+        "specialism": "Discard instance history, delayed opportunities and paid future recovery.",
+        "mono": "Recover the right instance and preserve a planned later event.",
+        "mix": "Revisit other colours’ useful paid Entrances/spells; never revive a permanently skipped environment."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "If the defeated non-token creature is still in your discard, move that exact instance to the bottom of your personal deck."
     },
     {
       "id": "conditional-memory-second-alarm",
       "name": "Second Alarm",
       "colour": "memory",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -460,17 +816,36 @@
         148,
         109,
         123,
+        112,
         "fate-entry-policy",
         118,
         119
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "aggro",
+        "specialism": "Discard instance history, delayed opportunities and paid future recovery.",
+        "mono": "Recover the right instance and preserve a planned later event.",
+        "mix": "Revisit other colours’ useful paid Entrances/spells; never revive a permanently skipped environment."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-memory-borrowed-tomorrow",
       "name": "Borrowed Tomorrow",
       "colour": "memory",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 2,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -489,16 +864,35 @@
         148,
         109,
         123,
+        112,
         "conditional-rearm-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "control",
+        "specialism": "Discard instance history, delayed opportunities and paid future recovery.",
+        "mono": "Recover the right instance and preserve a planned later event.",
+        "mix": "Revisit other colours’ useful paid Entrances/spells; never revive a permanently skipped environment."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-generic-spare-umbrella",
       "name": "Spare Umbrella",
       "colour": "generic",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-up",
       "allowedActors": [
         "self"
@@ -507,23 +901,50 @@
         "spell-played"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
+      "timingProposal": "Reveal/enter through normal creature-entry handling after the triggering action; run the printed Entrance once.",
       "effectProposal": "Your lowest-current-health creature gains Shield until your next turn starts. Ties use oldest arrival; no creature means no effect.",
       "role": "Easy generic shelter for a mixed fragile board.",
       "counterplay": "Empty the board or consume Shield cheaply; existing Shield does not become two layers.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
-        123
+        123,
+        112,
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "helper",
+        "specialism": "Plain shelter, modest shared resources and a readable Guard ambush.",
+        "mono": "Supports a qualifying mono deck without defining its identity.",
+        "mix": "Easy bridges; these helpers do not receive automatic colour bonuses."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 2,
+        "keywords": []
+      },
+      "entryEffectProposal": "Your lowest-current-health creature gains Shield until your next turn starts. Ties use oldest arrival; no creature means no effect."
     },
     {
       "id": "conditional-generic-queue-please",
       "name": "Queue, Please",
       "colour": "generic",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -541,15 +962,34 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "helper",
+        "specialism": "Plain shelter, modest shared resources and a readable Guard ambush.",
+        "mono": "Supports a qualifying mono deck without defining its identity.",
+        "mix": "Easy bridges; these helpers do not receive automatic colour bonuses."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-generic-refreshments",
       "name": "Round of Refreshments",
       "colour": "generic",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-up",
       "allowedActors": [
@@ -569,16 +1009,35 @@
         148,
         109,
         123,
+        112,
         "fate-entry-policy-for-fate-menu",
         118
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "helper",
+        "specialism": "Plain shelter, modest shared resources and a readable Guard ambush.",
+        "mono": "Supports a qualifying mono deck without defining its identity.",
+        "mix": "Easy bridges; these helpers do not receive automatic colour bonuses."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-generic-tiny-windfall",
       "name": "Tiny Windfall",
       "colour": "generic",
-      "kind": "conditional",
+      "kind": "spell",
       "costProposal": 1,
       "visibilityProposal": "face-down",
       "allowedActors": [
@@ -596,36 +1055,85 @@
       "gates": [
         148,
         109,
-        123
+        123,
+        112
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "helper",
+        "specialism": "Plain shelter, modest shared resources and a readable Guard ambush.",
+        "mono": "Supports a qualifying mono deck without defining its identity.",
+        "mix": "Easy bridges; these helpers do not receive automatic colour bonuses."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Spell copy/colour quota. Pay arming once; consume then resolve/discard once."
     },
     {
       "id": "conditional-generic-seat-reserved",
       "name": "Seat Reserved",
       "colour": "generic",
-      "kind": "conditional",
-      "costProposal": 1,
+      "kind": "creature",
+      "costProposal": 2,
       "visibilityProposal": "face-down",
       "allowedActors": [
         "opponent"
       ],
       "allowedTriggers": [
-        "creature-played"
+        "attack-declared"
       ],
       "selection": "Choose one actor/trigger from these printed options when arming; single options are fixed.",
-      "timingProposal": "After the triggering action/effect and ordinary cleanup complete; no retroactive cancellation.",
-      "effectProposal": "If your board is empty, summon one colourless 1/1 paper token if there is a legal slot. Otherwise do nothing.",
-      "role": "A simple response to an enemy arrival while behind.",
-      "counterplay": "Trigger while a friendly creature remains; normal slot/prevention rules still apply.",
-      "limits": "One shot per committed arming; consume before effect. Ordinary energy/play budgets. No free rearming.",
+      "timingProposal": "After attack declaration, before final Guard legality and combat damage.",
+      "effectProposal": "While your board is empty, reveal this Guard creature in response to an attack aimed at your side. It enters normally; the declared attack must then obey legal Guard targeting. No extra Entrance effect.",
+      "role": "A simple masked Guard interception rather than a retroactive damage shield.",
+      "counterplay": "Fill the armed player’s board or use applicable Guard-ignoring rules; full-board/impossible-interception policy must be settled first.",
+      "limits": "One conditional reveal per committed arming. No second payment/free attack. Sleeping/Swift and normal Entrance/Guard rules apply. Board reservation/full-board/rearm policy unresolved.",
       "gates": [
         148,
         109,
         123,
-        "token-order"
+        112,
+        "guard-interception-policy",
+        "masked-creature-board-space",
+        "masked-creature-board-space",
+        "reveal-vs-play-event-policy"
       ],
-      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance."
+      "status": "Future concept; no runtime definition, grant, artwork, recording or settled balance.",
+      "mechanic": "conditional",
+      "strategy": {
+        "line": "helper",
+        "specialism": "Plain shelter, modest shared resources and a readable Guard ambush.",
+        "mono": "Supports a qualifying mono deck without defining its identity.",
+        "mix": "Easy bridges; these helpers do not receive automatic colour bonuses."
+      },
+      "availability": {
+        "minimumCompletedLessons": 2,
+        "recommendedCompletedNodes": [
+          "gate",
+          "b-town-hall"
+        ],
+        "predicateStatus": "Recommended canonical completion history; not runtime enforcement",
+        "introduction": "Existing saved NPC/quest flow; teaser grants nothing",
+        "channels": "All pool/grant/loadout paths require qualification and individual release; plot-only never packs"
+      },
+      "armingClassification": "Creature copy/colour contribution, not spell quota. Pay arming once; reveal enters normally without a second payment.",
+      "statsProposal": {
+        "attack": 1,
+        "health": 3,
+        "keywords": [
+          "guard"
+        ]
+      },
+      "entryEffectProposal": "While your board is empty, reveal this Guard creature in response to an attack aimed at your side. It enters normally; the declared attack must then obey legal Guard targeting. No extra Entrance effect."
     }
   ]
 }

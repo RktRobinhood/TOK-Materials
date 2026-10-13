@@ -1,0 +1,14 @@
+{
+  "species": "language-debate-dingo",
+  "id": "creature/language-debate-dingo/idle",
+  "source": "production-language-debate-dingo-145.png",
+  "persona": "K-S-Ibis",
+  "prompt": "PRIMARY COMPOSITION: straight FRONT-facing creature looking toward the viewer, symmetrical face with both eyes equally visible, dynamic forward or seated composition. No three-quarter right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: K-S-Ibis, an original NONHUMAN character inspired by KSI public persona. Specific body/gear: Compact ibis with dark head tufts, gold-edged hoodie and one oversized plain headset. Pose/composition: Front-facing emphatic lean, wings unevenly spread and long beak opened for a harmless rebuttal. Main accessory: One plain gold-edged reaction headset; no logo, extra gloves or real boxing kit. Printed-role visual rationale: 3/2 can look bold without permanent armour; its existing Shield applies only during the specified fight, never from costume. Jewel accent #F2B632. Expression: eyes narrowed in mock seriousness. View: slightly low camera angle. EXACTLY two wing/forelimbs and two feet, one beak. Do not add separate human arms in addition to the wings. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: FRONT. All extremities/prop fit with clear transparent margin.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-78b40231-60b4-4dae-825c-51ce7c7e1f7d.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}

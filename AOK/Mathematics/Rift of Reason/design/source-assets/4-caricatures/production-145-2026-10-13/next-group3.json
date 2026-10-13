@@ -1,0 +1,366 @@
+{
+  "status": "Resume six only after current twelve publication",
+  "portraits": [
+    {
+      "id": "creature/imagination-fable-fawn/idle",
+      "species": "imagination-fable-fawn",
+      "persona": "Jack Blackbird",
+      "inspiration": "Jack Black",
+      "colour": "imagination",
+      "rarity": "common",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 2,
+        "attack": 1,
+        "health": 3,
+        "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+        "gates": [
+          109
+        ]
+      },
+      "source": "production-imagination-fable-fawn-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Jack Blackbird, an original NONHUMAN character inspired by Jack Black public persona. Specific body/gear: Stocky blackbird with wild crest, dark coat, purple scarf and one small lute. Pose/composition: Left-facing wide-wing stage flourish, lute lifted diagonally and feet planted apart. Main accessory: One tiny two-string travelling lute in worn violet wood; no microphone, lyrics or logo. Printed-role visual rationale: 1/3 is a light performer body. The lute is a public-performance cue, not a new bard buff or sound request. Jewel accent #A05CF0. Expression: big theatrical surprise. View: slightly elevated camera angle. EXACTLY two wing/forelimbs and two feet, one beak. Do not add separate human arms in addition to the wings. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Exuberant original performer with controlled volume; no singing or voice impression.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "heal"
+      ],
+      "draftLines": [],
+      "poseDirection": "Left-facing wide-wing stage flourish, lute lifted diagonally and feet planted apart.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Jack Blackbird, an ORIGINAL NONHUMAN creature inspired by Jack Black's public persona. Silhouette/costume: Stocky blackbird with a tiny wild crest, dark coat and a purple stage scarf. Main prop/gesture: One unbranded miniature microphone; wings planted in a grand harmless pose. Visual joke: Treats a tiny imaginary adventure like a huge theatrical entrance. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "imagination-fable-fawn145-variation-v1",
+        "expression": "big theatrical surprise",
+        "camera": "slightly elevated camera angle"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Jack Blackbird, an ORIGINAL NONHUMAN creature inspired by Jack Black's public persona. Silhouette/costume: Stocky blackbird with a tiny wild crest, dark coat and a purple stage scarf. Main prop/gesture: One unbranded miniature microphone; wings planted in a grand harmless pose. Visual joke: Treats a tiny imaginary adventure like a huge theatrical entrance. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing seated or tucked pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Jack Blackbird",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Jack Blackbird, an ORIGINAL NONHUMAN creature inspired by Jack Black's public persona. Silhouette/costume: Stocky blackbird with a tiny wild crest, dark coat and a purple stage scarf. Main prop/gesture: One unbranded miniature microphone; wings planted in a grand harmless pose. Visual joke: Treats a tiny imaginary adventure like a huge theatrical entrance. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing seated or tucked pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly elevated camera angle, big theatrical surprise. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "bird",
+      "bodyBrief": "Stocky blackbird with wild crest, dark coat, purple scarf and one small lute.",
+      "bodyRationale": "A broad theatrical blackbird remains distinct from finches and retains a readable performer gag.",
+      "accessoryFamily": "musical-instrument",
+      "accessoryBrief": "One tiny two-string travelling lute in worn violet wood; no microphone, lyrics or logo.",
+      "gearRationale": "1/3 is a light performer body. The lute is a public-performance cue, not a new bard buff or sound request.",
+      "requiredFacing": "LEFT"
+    },
+    {
+      "id": "creature/imagination-stage-mouse/idle",
+      "species": "imagination-stage-mouse",
+      "persona": "Tim Burrowton",
+      "inspiration": "Tim Burton",
+      "colour": "imagination",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 2,
+        "health": 4,
+        "text": "Elusive. Your colourless tokens have 1 extra attack while this remains in play.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "source": "production-imagination-stage-mouse-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Tim Burrowton, an original NONHUMAN character inspired by Tim Burton public persona. Specific body/gear: A tiny crooked mushroom sprite with a hinged wooden puppet torso, root feet and broad uneven cap; violet stage cloth forms a little curtain-like cape. One crooked shadow lantern is its sole hand prop. Keep Tim Burrowton. Pose/composition: Lean sideways as a still jointed puppet step, cap tilted and lantern raised; keep the little root feet visible. Main accessory: One crooked glass lantern containing a single unmarked shadow cutout; no clapper, scene or film emblem. Printed-role visual rationale: 2/4 and Elusive suit light theatrical clothes. The lantern echoes shadow performance but adds no new aura or invisibility. Jewel accent #A05CF0. Expression: focused squint. View: level camera with head tilted toward viewer. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/lobstorian-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Dry whimsical original storyteller; restrained shared reveal cue, no branded character voice.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "draftLines": [],
+      "poseDirection": "Lean sideways as a still jointed puppet step, cap tilted and lantern raised; keep the little root feet visible.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Tim Burrowton, an ORIGINAL NONHUMAN creature inspired by Tim Burton's public persona. Silhouette/costume: Tiny dark mouse with unruly head fur, round curious eyes and a worn violet stage coat. Main prop/gesture: One crooked blank film clapper; tail curl is a second broad silhouette cue. Visual joke: Every ordinary little box seems to have a slightly spooky theatrical idea inside. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "imagination-stage-mouse145-variation-v1",
+        "expression": "focused squint",
+        "camera": "level camera with head tilted toward viewer"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Tim Burrowton, an ORIGINAL NONHUMAN creature inspired by Tim Burton's public persona. Silhouette/costume: Tiny dark mouse with unruly head fur, round curious eyes and a worn violet stage coat. Main prop/gesture: One crooked blank film clapper; tail curl is a second broad silhouette cue. Visual joke: Every ordinary little box seems to have a slightly spooky theatrical idea inside. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: over-shoulder curious glance. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Tim Burrowton",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Tim Burrowton, an ORIGINAL NONHUMAN creature inspired by Tim Burton's public persona. Silhouette/costume: Tiny dark mouse with unruly head fur, round curious eyes and a worn violet stage coat. Main prop/gesture: One crooked blank film clapper; tail curl is a second broad silhouette cue. Visual joke: Every ordinary little box seems to have a slightly spooky theatrical idea inside. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: over-shoulder curious glance. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: level camera with head tilted toward viewer, focused squint. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "fantasy",
+      "bodyBrief": "A tiny crooked mushroom sprite with a hinged wooden puppet torso, root feet and broad uneven cap; violet stage cloth forms a little curtain-like cape. One crooked shadow lantern is its sole hand prop. Keep Tim Burrowton.",
+      "bodyRationale": "A mildly spooky mushroom filmmaker replaces another mouse; use Rift's style rather than any film's look.",
+      "accessoryFamily": "lantern-relic",
+      "accessoryBrief": "One crooked glass lantern containing a single unmarked shadow cutout; no clapper, scene or film emblem.",
+      "gearRationale": "2/4 and Elusive suit light theatrical clothes. The lantern echoes shadow performance but adds no new aura or invisibility.",
+      "requiredFacing": "LEFT"
+    },
+    {
+      "id": "creature/imagination-dreamweaver-whale/idle",
+      "species": "imagination-dreamweaver-whale",
+      "persona": "Miyazawhale",
+      "inspiration": "Hayao Miyazaki",
+      "colour": "imagination",
+      "rarity": "mythic",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 6,
+        "attack": 3,
+        "health": 7,
+        "text": "At your turn's end, if you control at least 2 colourless tokens, draw 1 personal-deck card.",
+        "gates": [
+          109,
+          "token-order"
+        ]
+      },
+      "source": "production-imagination-dreamweaver-whale-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Miyazawhale, an original NONHUMAN character inspired by Hayao Miyazaki public persona. Specific body/gear: Wise little whale with pale animal mouth markings and violet vest; one small windmill relic near a fin. Pose/composition: Slow left-facing diagonal hover, belly toward viewer and one fin gently indicates the toy. Main accessory: One small wood-and-brass windmill toy with violet cloth sails; no book, paper pad or film character. Printed-role visual rationale: The large3/7 body already conveys staying power. The little windmill adds visual storycraft, not another draw condition. Jewel accent #A05CF0. Expression: playful half-smile. View: slightly low camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/lobstorian-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Warm spare original story-maker; shared reveal cue, no licensed soundtrack or character voices.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal"
+      ],
+      "draftLines": [],
+      "poseDirection": "Slow left-facing diagonal hover, belly toward viewer and one fin gently indicates the toy.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Miyazawhale, an ORIGINAL NONHUMAN creature inspired by Hayao Miyazaki's public persona. Silhouette/costume: Small wise whale with warm eyes, pale moustache-like mouth markings and a dark violet travelling vest. Main prop/gesture: One simple paper wind toy near a fin; original Rift companion design only. Visual joke: The tiniest side character seems to deserve one more story. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "imagination-dreamweaver-whale145-variation-v1",
+        "expression": "playful half-smile",
+        "camera": "slightly low camera angle"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Miyazawhale, an ORIGINAL NONHUMAN creature inspired by Hayao Miyazaki's public persona. Silhouette/costume: Small wise whale with warm eyes, pale moustache-like mouth markings and a dark violet travelling vest. Main prop/gesture: One simple paper wind toy near a fin; original Rift companion design only. Visual joke: The tiniest side character seems to deserve one more story. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing presenting pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Miyazawhale",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Miyazawhale, an ORIGINAL NONHUMAN creature inspired by Hayao Miyazaki's public persona. Silhouette/costume: Small wise whale with warm eyes, pale moustache-like mouth markings and a dark violet travelling vest. Main prop/gesture: One simple paper wind toy near a fin; original Rift companion design only. Visual joke: The tiniest side character seems to deserve one more story. Use jewel accent #A05CF0 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing presenting pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly low camera angle, playful half-smile. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "aquatic-mammal",
+      "bodyBrief": "Wise little whale with pale animal mouth markings and violet vest; one small windmill relic near a fin.",
+      "bodyRationale": "A floating story-maker whale supplies a large smooth silhouette outside the furry-mascot family.",
+      "accessoryFamily": "wind-relic",
+      "accessoryBrief": "One small wood-and-brass windmill toy with violet cloth sails; no book, paper pad or film character.",
+      "gearRationale": "The large3/7 body already conveys staying power. The little windmill adds visual storycraft, not another draw condition.",
+      "requiredFacing": "LEFT"
+    },
+    {
+      "id": "creature/memory-replay-raccoon/idle",
+      "species": "memory-replay-raccoon",
+      "persona": "Nikola Jokaroo",
+      "inspiration": "Nikola Jokic",
+      "colour": "memory",
+      "rarity": "uncommon",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 3,
+        "attack": 2,
+        "health": 3,
+        "text": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+        "gates": [
+          109
+        ]
+      },
+      "source": "production-memory-replay-raccoon-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Nikola Jokaroo, original NONHUMAN public-persona sporting parody inspired by Nikola Jokic; never a realistic human face. Body: A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass. Main accessory: One plain silver-and-cream leather basketball with broad seams; no team badge, number, second ball or hoop. Printed-role rationale: Frozen2/3 support body: light sports wraps only. Offered ball suggests bringing a teammate back into play, without changing the recovery effect or adding any bonus. Jewel accent #C9C9D6 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing FRONT; no habitual right-facing pose. All extremities and prop fit.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat"
+      ],
+      "draftLines": [],
+      "poseDirection": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Snoop Raccoon, an ORIGINAL NONHUMAN creature inspired by Snoop Dogg's public persona. Silhouette/costume: Long-limbed raccoon with braided head fur, dark glasses and a loose silver-trimmed jacket. Main prop/gesture: One plain commentator headset; no brands or smoking/drug props. Visual joke: A familiar entertainer turns up in an unexpectedly different broadcast. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "memory-replay-raccoon145-variation-v1",
+        "expression": "focused squint",
+        "camera": "slightly elevated camera angle"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Snoop Raccoon, an ORIGINAL NONHUMAN creature inspired by Snoop Dogg's public persona. Silhouette/costume: Long-limbed raccoon with braided head fur, dark glasses and a loose silver-trimmed jacket. Main prop/gesture: One plain commentator headset; no brands or smoking/drug props. Visual joke: A familiar entertainer turns up in an unexpectedly different broadcast. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: left-facing crouch or species-appropriate floating curl. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Snoop Raccoon",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Snoop Raccoon, an ORIGINAL NONHUMAN creature inspired by Snoop Dogg's public persona. Silhouette/costume: Long-limbed raccoon with braided head fur, dark glasses and a loose silver-trimmed jacket. Main prop/gesture: One plain commentator headset; no brands or smoking/drug props. Visual joke: A familiar entertainer turns up in an unexpectedly different broadcast. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: left-facing crouch or species-appropriate floating curl. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly elevated camera angle, focused squint. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "unusual-mammal",
+      "bodyBrief": "A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass.",
+      "bodyRationale": "A pouch-shaped passer provides a memorable basketball cue and replaces an unproduced entertainer while preserving every card contract.",
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One plain silver-and-cream leather basketball with broad seams; no team badge, number, second ball or hoop.",
+      "gearRationale": "Frozen2/3 support body: light sports wraps only. Offered ball suggests bringing a teammate back into play, without changing the recovery effect or adding any bonus.",
+      "requiredFacing": "FRONT",
+      "preSportsPersona": "Snoop Dogfish",
+      "preSportsInspiration": "Snoop Dogg",
+      "preSportsPrompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Snoop Dogfish, an original NONHUMAN character inspired by Snoop Dogg public persona. Specific body/gear: Small dogfish shark with dark glasses, subtle braided fin filaments and silver-trimmed jacket; one shell-earcup headset. Pose/composition: Relaxed right-facing float, head half-turned and one fin touches an earcup. Main accessory: One plain commentator headset with shell-shaped silver earcups; no logo or smoking prop. Printed-role visual rationale: 2/3 suits a loose jacket rather than heavy armour. Shell earcups keep the broadcast cue without inventing audio or recovery effects. Jewel accent #C9C9D6. Expression: focused squint. View: slightly elevated camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+      "sport": "basketball",
+      "sourceURLs": [
+        "https://www.nba.com/player/203999"
+      ],
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Ready for remaining group3 six"
+    },
+    {
+      "id": "creature/memory-sequence-swan/idle",
+      "species": "memory-sequence-swan",
+      "persona": "Mathias Gidscorpion",
+      "inspiration": "Mathias Gidsel",
+      "colour": "memory",
+      "rarity": "rare",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 4,
+        "attack": 3,
+        "health": 4,
+        "text": "Entrance: move one own pending event one space later, maximum +4 rounds; draw 1 personal-deck card if it moved.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "source": "production-memory-sequence-swan-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: PRIMARY LEFT: low forward throwing step, body and pincers clearly face left, tail curls upward and back to the right. One pincer raises the ball above the shoulder line; whole tail and all legs fit. Use case: stylized-concept. ONE original full-body transparent Rift of Reason card creature. Image1 approved STYLE BOARD establishes cute-horror dusk, medium dark-brown ink outlines, soft textured cel shading and warm jewel highlights. Image2 shipped creature is RENDERING ONLY: never copy its species, face, pose, clothes or prop. Subject: Mathias Gidscorpion, original NONHUMAN public-persona sporting parody inspired by Mathias Gidsel; never a realistic human face. Body: A friendly silver-edged scorpion with broad warm animal eyes, dark segmented shell and simple silver-trimmed sports wraps. Eight small walking legs, two broad pincers and one curved tail with a blunt stylized tip; no human arms. One plain handball held in a pincer. Main accessory: One compact silver-and-cream handball with broad plain panels; no branded kit, number, net or second prop. Printed-role rationale: Frozen3/4 timing-support body: natural shell and modest sport wraps convey sturdy tempo play. Tail is cosmetic, adding no poison, damage, Guard or extra scheduling. Jewel accent #C9C9D6 against worn dark materials, ink/forest/violet shadows, warm lantern rim light. Face and single accessory read at70px and300px. Entire coherent species-specific silhouette at75percent canvas with comfortable truly transparent padding around every limb, tail, wing and prop. No scene, ground, shadow blob, card/frame, text, lettering, numbers, logo, branded kit, licensed costume, watermark, extra figure, book, pencil or tiny clutter. Gear is cosmetic and grants no new power. No glossy3D or nursery pastels. Required facing LEFT; no habitual right-facing pose. All extremities and prop fit.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/lobstorian-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "reveal",
+        "fate-warp"
+      ],
+      "draftLines": [],
+      "poseDirection": "PRIMARY LEFT: low forward throwing step, body and pincers clearly face left, tail curls upward and back to the right. One pincer raises the ball above the shoulder line; whole tail and all legs fit.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Adelloon, an ORIGINAL NONHUMAN creature inspired by Adele's public persona. Silhouette/costume: Small dark loon with a pale face, soft velvet-like grey stage cape and silver trim. Main prop/gesture: One plain microphone at a deliberately paused entrance. Visual joke: The little stage pause lasts just long enough to become part of the performance. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "memory-sequence-swan145-variation-v1",
+        "expression": "eyes narrowed in mock seriousness",
+        "camera": "slightly low camera angle"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Adelloon, an ORIGINAL NONHUMAN creature inspired by Adele's public persona. Silhouette/costume: Small dark loon with a pale face, soft velvet-like grey stage cape and silver trim. Main prop/gesture: One plain microphone at a deliberately paused entrance. Visual joke: The little stage pause lasts just long enough to become part of the performance. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing seated or tucked pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Adelloon",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Adelloon, an ORIGINAL NONHUMAN creature inspired by Adele's public persona. Silhouette/costume: Small dark loon with a pale face, soft velvet-like grey stage cape and silver trim. Main prop/gesture: One plain microphone at a deliberately paused entrance. Visual joke: The little stage pause lasts just long enough to become part of the performance. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: front-facing seated or tucked pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly low camera angle, eyes narrowed in mock seriousness. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "other-invertebrate",
+      "bodyBrief": "A friendly silver-edged scorpion with broad warm animal eyes, dark segmented shell and simple silver-trimmed sports wraps. Eight small walking legs, two broad pincers and one curved tail with a blunt stylized tip; no human arms. One plain handball held in a pincer.",
+      "bodyRationale": "A Danish handball role answers the class preference; the scorpion throw is an original nonhuman sporting gag, not a human likeness.",
+      "accessoryFamily": "training-orb",
+      "accessoryBrief": "One compact silver-and-cream handball with broad plain panels; no branded kit, number, net or second prop.",
+      "gearRationale": "Frozen3/4 timing-support body: natural shell and modest sport wraps convey sturdy tempo play. Tail is cosmetic, adding no poison, damage, Guard or extra scheduling.",
+      "requiredFacing": "LEFT",
+      "preSportsPersona": "Adelloon",
+      "preSportsInspiration": "Adele",
+      "preSportsPrompt": "PRIMARY COMPOSITION: straight FRONT-facing creature looking toward the viewer, symmetrical face with both eyes equally visible, dynamic forward or seated composition. No three-quarter right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Adelloon, an original NONHUMAN character inspired by Adele public persona. Specific body/gear: An enchanted loon-shaped velvet balloon creature with warm nonhuman eyes, a short knotted beak, two soft fabric wing lobes and cord-like limbs; grey stage cape and silver trim. One silver voice-trumpet remains the sole prop. Keep Adelloon. Pose/composition: Tall poised float, one fabric wing angled down and trumpet lowered during a deliberate pause; cord tail curls once beneath. Main accessory: One silver voice-trumpet with a soft velvet bell; no microphone, lyric or logo. Printed-role visual rationale: 3/4 is a substantial but airy performer. The instrument supplies a held-pause joke, not another delay or sound mechanic. Jewel accent #C9C9D6. Expression: eyes narrowed in mock seriousness. View: slightly low camera angle. Keep coherent species-specific anatomy, do not add humanoid arms to fins/tentacles. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: FRONT. All extremities/prop fit with clear transparent margin.",
+      "sport": "handball",
+      "sourceURLs": [
+        "https://www.eurohandball.com/en/player/zNNV4MTuxI13Pq9C77tyFA/Mathias-Gidsel/"
+      ],
+      "sourceCheckedOn": "2026-10-13",
+      "sourceScope": "Official sporting-role evidence only; no current club, award, injury, private-life or class-recognition claim.",
+      "sportsProductionTiming": "Ready for remaining group3 six"
+    },
+    {
+      "id": "creature/memory-timekeeper-tapir/idle",
+      "species": "memory-timekeeper-tapir",
+      "persona": "Noetapir",
+      "inspiration": "Emmy Noether",
+      "colour": "memory",
+      "rarity": "legendary",
+      "acquisition": {
+        "channel": "pack-pool",
+        "packEligible": true,
+        "releaseStatus": "draft; only enters packs when its implementation is released"
+      },
+      "mechanicalContract": {
+        "cost": 7,
+        "attack": 4,
+        "health": 7,
+        "text": "Entrance, once per match: copy one spent own one-shot event to a new public occurrence at +2 rounds. No spell energy is repaid; the spent original stays consumed.",
+        "gates": [
+          109,
+          118,
+          119
+        ]
+      },
+      "source": "production-memory-timekeeper-tapir-145.png",
+      "status": "pending",
+      "group": 3,
+      "prompt": "PRIMARY COMPOSITION: straight FRONT-facing creature looking toward the viewer, symmetrical face with both eyes equally visible, dynamic forward or seated composition. No three-quarter right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Noetapir, an original NONHUMAN character inspired by Emmy Noether public persona. Specific body/gear: Scholarly tapir with short snout, dark coat and modest silver shoulder armour; one linked-loop staff. Pose/composition: Front-facing seated brace, staff held diagonally and short snout turned toward its linked rings. Main accessory: One broad silver-linked-loop staff, two simple rings sharing a single shaft; no slate or algebra. Printed-role visual rationale: 4/7 supports modest silver shoulder armour and a large scholarly focus. The loop staff does not create extra replay or refund energy. Jewel accent #C9C9D6. Expression: playful half-smile. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: FRONT. All extremities/prop fit with clear transparent margin.",
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp"
+      ],
+      "transparentBackgroundRequested": true,
+      "voiceDirection": "Clear delighted original scholar; shared Fate/axiom sounds, no copied quotations.",
+      "sharedSfx": [
+        "card-play",
+        "hit",
+        "defeat",
+        "fate-warp"
+      ],
+      "draftLines": [],
+      "poseDirection": "Front-facing seated brace, staff held diagonally and short snout turned toward its linked rings.",
+      "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Noetapir, an ORIGINAL NONHUMAN creature inspired by Emmy Noether's public persona. Silhouette/costume: Small scholarly tapir with thoughtful eyes, neat head fur, dark coat and silver cuffs. Main prop/gesture: One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra. Visual joke: Finds a familiar relationship even after every piece has been rearranged. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "variation": {
+        "seed": "memory-timekeeper-tapir145-variation-v1",
+        "expression": "playful half-smile",
+        "camera": "level camera with head tilted toward viewer"
+      },
+      "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Noetapir, an ORIGINAL NONHUMAN creature inspired by Emmy Noether's public persona. Silhouette/costume: Small scholarly tapir with thoughtful eyes, neat head fur, dark coat and silver cuffs. Main prop/gesture: One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra. Visual joke: Finds a familiar relationship even after every piece has been rearranged. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: left-facing crouch or species-appropriate floating curl. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+      "originalPersona": "Noetapir",
+      "originalVisualPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Noetapir, an ORIGINAL NONHUMAN creature inspired by Emmy Noether's public persona. Silhouette/costume: Small scholarly tapir with thoughtful eyes, neat head fur, dark coat and silver cuffs. Main prop/gesture: One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra. Visual joke: Finds a familiar relationship even after every piece has been rearranged. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: left-facing crouch or species-appropriate floating curl. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: level camera with head tilted toward viewer, playful half-smile. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "bodyFamily": "unusual-mammal",
+      "bodyBrief": "Scholarly tapir with short snout, dark coat and modest silver shoulder armour; one linked-loop staff.",
+      "bodyRationale": "Keep the uncommon tapir and symmetry prop; its compact snout/body differ from the existing elephant.",
+      "accessoryFamily": "magical-weapon",
+      "accessoryBrief": "One broad silver-linked-loop staff, two simple rings sharing a single shaft; no slate or algebra.",
+      "gearRationale": "4/7 supports modest silver shoulder armour and a large scholarly focus. The loop staff does not create extra replay or refund energy.",
+      "requiredFacing": "FRONT"
+    }
+  ]
+}

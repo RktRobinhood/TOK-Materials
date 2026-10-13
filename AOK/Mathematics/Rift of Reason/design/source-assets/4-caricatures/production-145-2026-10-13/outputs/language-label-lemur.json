@@ -1,0 +1,14 @@
+{
+  "species": "language-label-lemur",
+  "id": "creature/language-label-lemur/idle",
+  "source": "production-language-label-lemur-145.png",
+  "persona": "Ryan Georilla",
+  "prompt": "PRIMARY COMPOSITION: the creature is clearly facing LEFT, nose/beak and main prop toward the LEFT edge, body/tail extending RIGHT. Show a three-quarter LEFT profile with one eye more prominent. Do not mirror the references' right-facing pose. Use case: stylized-concept. ONE original full-body transparent card creature illustration for Rift of Reason. Image1 approved STYLE BOARD gives cute-horror dusk, medium dark-brown ink outlines, softly textured clean cel-lit forms and warm jewel highlights. Image2 shipped creature is RENDERING-ONLY: do not copy its species/face/pose/clothes/hair/jewellery/prop. Public-persona parody through a fictional creature, never a realistic human face. Use the specific body below, no generic furry mascot anatomy. One bold accessory and face read at70px; tactile at300px. Whole silhouette at75percent of canvas with comfortable truly transparent padding around every limb/wing/tail/prop. No scene/ground/shadow blob/card/frame, text/letters/numbers, logo/brand/licensed costume/emblem/watermark, extra character or tiny clutter. Gear conveys appearance, never new ability icons. No glossy3D or nursery-pastel collection; jewel accent against dark worn materials, ink/forest/violet shadows, warm lantern rim light. Subject: Ryan Georilla, an original NONHUMAN character inspired by Ryan George public persona. Specific body/gear: Gentle gorilla with tidy head tuft, charcoal jacket/gold collar and one large blank stamp. Pose/composition: Front-facing seated pose, long arms hold the tiny-to-its-body stamp low and one brow is raised. Main accessory: One oversized blank brass label stamp with a heavy rounded handle; no paper label or written letters. Printed-role visual rationale: 2/2 needs only a charcoal jacket. The exaggerated stamp supports the sketch joke without extra suppression mechanics. Jewel accent #F2B632. Expression: playful half-smile. View: level camera with head tilted toward viewer. EXACTLY FOUR total limbs: two forelimbs and two hindlimbs, no additional arms/hands/feet. Tail is distinct. For an upright pose, forelimbs serve as arms; never four legs PLUS two arms. No book/sketchpad/pencil unless it is the single explicitly specified essential persona prop. Full figure and main accessory intact inside transparent canvas. Repeat required facing: LEFT. All extremities/prop fit with clear transparent margin.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-d0a29d0f-a4b7-454a-ac64-f3a324b5ff25.png",
+  "transparentBackgroundRequested": true,
+  "status": "generated; visual/source acceptance pending"
+}
