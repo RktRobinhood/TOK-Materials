@@ -1,3 +1,7 @@
+### Conditional expansion acceptance — 14 October 2026
+
+#148/#149 now have8new persona cutouts (`creature/conditional-*/idle`) and `ui/conditional-back`,9source/runtime acceptances, plus15spell mappings to existing colour motifs. See source-assets/4-caricatures/conditional-149-2026-10-14/inventory.json for exact prompts and build receipts; dev/conditional-art.html for all23cards. The normal full-art framing and armed rails are wired into the developer study. Armed/consumed meaning uses named text and existing static styling/SFX; no redundant marker painting or new recording. Campaign release remains gated;13mechanics and acquisition/introduction remain. This latest entry supersedes the old planned-only conditional-art status below.
+
 # Art requests for Rift of Reason (for ChatGPT)
 
 Latest Stage 13 continuation (#145,14October2026): dedicated spell-object variants for `art/spell-common-ground` (mythic Common Ground, shared stabilisation/heal/draw metaphor) and `art/spell-the-last-page` (legendary story reward, blank final page/recovered paper bookmark/two cards). Exact prompts/references/receipts: source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json. Keep all eight shared motifs and existing portraits. These optional unique spell illustrations replace only two proposed art mappings; no new gameplay, grants or Fate timing. Art/source acceptance is pending until built and checked. No deferred Stephen retry or conditional-set release.

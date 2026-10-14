@@ -187,6 +187,7 @@
     function boardValue(s, p, ctx) {
         let v = 0;
         for (const cid of s.players[p].board) v += creatureValue(s, cid, ctx);
+        for (const cid of s.players[p].armed || []) v += 1.2 + (s.cards[cid].kind === 'creature' ? creatureValue(s, cid, ctx) * 0.4 : 0);
         return v;
     }
 
@@ -277,7 +278,7 @@
     function creatureCount(s, p) {
         const P = s.players[p];
         let n = 0;
-        for (const z of [P.deck, P.hand, P.board]) for (const cid of z) if (s.cards[cid].kind === 'creature') n++;
+        for (const z of [P.deck, P.hand, P.board, P.armed || []]) for (const cid of z) if (s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature) n++;
         return n;
     }
 
@@ -922,7 +923,7 @@
         const level = levelOf(o.level);
         const cfg = LEVELS[level];
         const Eng = E();
-        const s = state;
+        const s = Eng.informationState(state, Eng.decider(state));
         const legal = allowedActions(s, legalFor(s), level);
         if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);

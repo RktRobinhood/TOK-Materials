@@ -1,0 +1,271 @@
+{
+  "beforeCount": 915,
+  "afterCount": 924,
+  "changed": [],
+  "added": [
+    "creature/conditional-emotion-standing-ovation/idle",
+    "creature/conditional-generic-seat-reserved/idle",
+    "creature/conditional-generic-spare-umbrella/idle",
+    "creature/conditional-imagination-paper-tiger/idle",
+    "creature/conditional-language-chair-recognises/idle",
+    "creature/conditional-memory-somewhere-safe/idle",
+    "creature/conditional-perception-clock-eyes/idle",
+    "creature/conditional-reason-spare-premise/idle",
+    "ui/conditional-back"
+  ],
+  "previewHash": "0a0ae8e6fa51c39f38c5f743cfb8bcb9a0bc1c066b475057a3865d91b5eeddad",
+  "results": [
+    {
+      "id": "creature/conditional-generic-seat-reserved/idle",
+      "source": {
+        "width": 1194,
+        "height": 1317,
+        "zeroAlphaFraction": 0.4687446343333982,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d06afde775fa850c874c4d5bdafdd4bdbbe944e91ec93c53fd726262c3df241c"
+      },
+      "runtime": {
+        "width": 636,
+        "height": 620,
+        "zeroAlphaFraction": 0.36396327855548793,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d043a4d1cfc7bdd443d8c585a1e1ab747fc10364cebea267296cd58fd079e808"
+      },
+      "file": "assets/creatures/conditional-generic-seat-reserved-idle.webp"
+    },
+    {
+      "id": "creature/conditional-memory-somewhere-safe/idle",
+      "source": {
+        "width": 1312,
+        "height": 1199,
+        "zeroAlphaFraction": 0.452778865518013,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "14bf9e8ecf6c95ae11ba9c8f6fb4183f4e421322f5abac789e9a95399e72b16d"
+      },
+      "runtime": {
+        "width": 670,
+        "height": 620,
+        "zeroAlphaFraction": 0.4228189696677901,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a2703a966ad8dddf3dea64ee1cb8068cb8f99b1b65169c38d9b2d31ee2985d2c"
+      },
+      "file": "assets/creatures/conditional-memory-somewhere-safe-idle.webp"
+    },
+    {
+      "id": "ui/conditional-back",
+      "source": {
+        "width": 1024,
+        "height": 1536,
+        "zeroAlphaFraction": 0.259127934773763,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "0dd48b954a16bb11b00cfa7db95b9e366d00223b19efe9f646cc80a999cefbb8"
+      },
+      "runtime": {
+        "width": 336,
+        "height": 500,
+        "zeroAlphaFraction": 0.00425,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "cdb5943d3ceee365d5388670c47d9b6e4c6c9b9cdc0fabf084ad89d9ea3cf394"
+      },
+      "file": "assets/ui/conditional-back.webp"
+    },
+    {
+      "id": "creature/conditional-reason-spare-premise/idle",
+      "source": {
+        "width": 1312,
+        "height": 1199,
+        "zeroAlphaFraction": 0.4282080849895238,
+        "corners": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "0ad501cd46f88e83ac899ae93d0aabbfc705e9ba09c3d93e9975beae84320ad5"
+      },
+      "runtime": {
+        "width": 680,
+        "height": 620,
+        "zeroAlphaFraction": 0.41185483870967743,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f995bfe90bf8c53d853d4bb277406adacbb5c065b8b9a3951814d7683bc8e682"
+      },
+      "file": "assets/creatures/conditional-reason-spare-premise-idle.webp"
+    },
+    {
+      "id": "creature/conditional-emotion-standing-ovation/idle",
+      "source": {
+        "width": 1312,
+        "height": 1199,
+        "zeroAlphaFraction": 0.5159151935556053,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "cf58e197e890afa382685d05c8f7fa416ed46abd1ad3e5f89ac0d189a7dc2470"
+      },
+      "runtime": {
+        "width": 642,
+        "height": 620,
+        "zeroAlphaFraction": 0.4639533715204502,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "6ef5c56c2241fede37bf1acad5639278ea2c0fa34eebd2b3ca26218c18fe0c49"
+      },
+      "file": "assets/creatures/conditional-emotion-standing-ovation-idle.webp"
+    },
+    {
+      "id": "creature/conditional-perception-clock-eyes/idle",
+      "source": {
+        "width": 1194,
+        "height": 1317,
+        "zeroAlphaFraction": 0.43080181977973897,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "63b47461e54216ab7a89a8d48b97c1e7a1478252c5188bb958b9ec6e2f773d29"
+      },
+      "runtime": {
+        "width": 578,
+        "height": 620,
+        "zeroAlphaFraction": 0.3529495479406184,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "8eac6cbb7146e6d11c31a80ab6183c31a6f86c25e1c6a76f8571299decad164c"
+      },
+      "file": "assets/creatures/conditional-perception-clock-eyes-idle.webp"
+    },
+    {
+      "id": "creature/conditional-language-chair-recognises/idle",
+      "source": {
+        "width": 1312,
+        "height": 1199,
+        "zeroAlphaFraction": 0.5973778962143249,
+        "corners": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "4b3a321b845d8853d4847974d69a71c752bb11cbbdca63f41d4be09f6d7afb8b"
+      },
+      "runtime": {
+        "width": 643,
+        "height": 620,
+        "zeroAlphaFraction": 0.552330306526865,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d21fcf5e6ac545e1ae5f1065d4e07abec4cf7e30849a47e87acee3cd00037ecc"
+      },
+      "file": "assets/creatures/conditional-language-chair-recognises-idle.webp"
+    },
+    {
+      "id": "creature/conditional-imagination-paper-tiger/idle",
+      "source": {
+        "width": 1312,
+        "height": 1199,
+        "zeroAlphaFraction": 0.48367033503529366,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4c41d41601ebffa8710138b16d99355c8a46c35025b4f3a88fb4e547ad3c9db8"
+      },
+      "runtime": {
+        "width": 671,
+        "height": 620,
+        "zeroAlphaFraction": 0.4557569347627518,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "9b7e0c9d9b12f76278324a150a152135249d899d51d5090cfd2f9c4e602edc68"
+      },
+      "file": "assets/creatures/conditional-imagination-paper-tiger-idle.webp"
+    },
+    {
+      "id": "creature/conditional-generic-spare-umbrella/idle",
+      "source": {
+        "width": 1194,
+        "height": 1317,
+        "zeroAlphaFraction": 0.47775068712329044,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "8afef558b1e591d2be459500b4d2c611c6b7fea4efc3b07bf2b6720b9e1edae3"
+      },
+      "runtime": {
+        "width": 547,
+        "height": 620,
+        "zeroAlphaFraction": 0.40879872618977414,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "fcc4644e8537da1eff3da8883ddd62aac67a6e8c48baabafbdea9adb885f76b5"
+      },
+      "file": "assets/creatures/conditional-generic-spare-umbrella-idle.webp"
+    }
+  ]
+}

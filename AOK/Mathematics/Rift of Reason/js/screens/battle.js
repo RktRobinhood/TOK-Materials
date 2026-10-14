@@ -433,6 +433,11 @@
             const by = decider();
             const target = action.target;
             if (by === OPP && !revealed && action.type === 'play' && state.cards[action.cid]) {
+                const condition = E.conditionOf(state, action.cid);
+                if (condition && !state.cards[action.cid].conditionSpent && condition.visibility === 'face-down') {
+                    perform(action, true);
+                    return;
+                }
                 const what = state.cards[action.cid].kind === 'tactic' ? 'plays a tactic' : 'plays a creature';
                 const aim = target ? ' on ' + targetName(target) : '';
                 showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL, '', false);
@@ -474,7 +479,11 @@
         function ruleReveal(events) {
             const ev = events.filter(e => e.t === 'axiom').pop();
             const reset = events.some(e => e.t === 'reset');
-            if (!ev && !reset) return;
+            if (!ev && !reset) {
+                const reveals = events.filter(e => e.t === 'conditional-reveal');
+                if (reveals.length) showReveal(cardEl(reveals[0].cid, { size: 'big', unregistered: true }), reveals.map(e => e.text).join(' '), RULE_SHOW, 'condition');
+                return;
+            }
             if (ev) {
                 const ax = (Rift.data.axioms || {})[ev.id] || { name: ev.id };
                 const by = ev.clear ? (ev.player === ME ? 'You clear every rule' : oppName + ' clears every rule')
@@ -554,6 +563,8 @@
             const wantBark = (cid, kind, chance) => { const s = sp(cid); if (!bark && s && Math.random() < chance) bark = { s, kind }; };
             events.forEach(ev => {
                 switch (ev.t) {
+                    case 'armed': add('card-play'); break;
+                    case 'conditional-reveal': add('card-play'); break;
                     case 'play': add('summon', 'card-play'); call(ev.cid, 'enter'); wantBark(ev.cid, 'enter', 0.6); break;
                     case 'tactic-play': {
                         const def = (Rift.data.tactics || {})[ev.id] || {};
@@ -618,7 +629,10 @@
                 if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn). You can still attack.';
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
-                if (c.kind === 'creature' && P.board.length >= state.options.boardLimit) return 'Your side is full.';
+                const condition = E.conditionOf(state, cid);
+                if (condition && !c.conditionSpent && P.armed.length >= 2) return 'Your two condition slots are full.';
+                if (condition && c.conditionSpent && c.kind === 'tactic') return 'This condition has already been used this match.';
+                if (c.kind === 'creature' && E.boardOccupancy(state, ME) >= state.options.boardLimit) return 'Your side is full, including reserved creature spaces.';
                 const tdef = c.kind === 'tactic' ? (Rift.data.tactics || {})[c.tactic] : null;
                 if (tdef && tdef.colour && !E.colourInPlay(state, ME, tdef.colour)) return needsText(tdef.colour);
                 return 'It has no target right now.';
@@ -779,7 +793,8 @@
             const d = E.describe(state, cid);
             // A colour tactic: its own frame art if painted, else the CSS frame tinted to the colour.
             const frame = d.colour ? bg('ui/card-tactic-' + d.colour) : bg('ui/card-tactic');
-            const art = has('tactic/' + d.id) ? Rift.Assets.img('tactic/' + d.id, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
+            const artId = d.art || 'tactic/' + d.id;
+            const art = has(artId) ? Rift.Assets.img(artId, { alt: '' }) : el('div.bc-glyph', { text: TACTIC_ICON[d.id] || '✦' });
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
@@ -867,6 +882,10 @@
         }
         function cardPreview(cid) {
             const out = cardPreviewOf(cid);
+            const condition = E.conditionOf(state, cid);
+            if (condition) out[1].appendChild(el('div.b-note-line', { text: 'Conditional: ' + condition.options.map(o => o.label).join(' OR ')
+                + '. ' + (condition.visibility === 'face-down' ? 'Concealed until reveal. ' : 'Visible to both players. ')
+                + (state.cards[cid].conditionSpent ? 'Condition spent for this match.' : 'Pay once to arm; reveal once when it matches.') }));
             const seen = seenNote(cid);
             if (seen) out[1].appendChild(seen);
             return out;
@@ -1428,6 +1447,25 @@
                     }
                     box.appendChild(node);
                 });
+                const armed = E.armedView(state, pi, ME);
+                box.classList.toggle('has-conditions', armed.length > 0);
+                if (armed.length) {
+                    const rail = el('div.b-conditions', { role: 'group', 'aria-label': (pi === ME ? 'Your' : oppName + '\'s') + ' armed conditions' }, [el('span', { text: 'Conditions ' + armed.length + '/2' })]);
+                    armed.forEach((info, index) => {
+                        const node = el('button.b-condition' + (info.concealed ? '.concealed' : ''), { type: 'button',
+                            text: info.concealed ? 'Concealed ' + (index + 1) : info.name,
+                            'aria-label': info.concealed ? 'Concealed condition ' + (index + 1) + '. Reveals when its committed event happens.' : info.name + '. ' + info.condition });
+                        if (has('ui/conditional-back')) node.appendChild(Rift.Assets.img('ui/conditional-back', { alt: '' }));
+                        if (info.concealed) tipFor(node, 'condition:' + pi + ':' + index, 'Concealed condition', 'Its identity and chosen event are hidden until it reveals.');
+                        else {
+                            const make = () => cardPreview(info.cid), key = 'condition:' + info.cid;
+                            hoverInspect(node, make, key);
+                            node.addEventListener('click', () => showInspect(make(), node, key));
+                        }
+                        rail.appendChild(node);
+                    });
+                    box.appendChild(rail);
+                }
             });
 
             // my hand (cards that stay slide from their old places, so the card you see is the card you grab)
@@ -1974,8 +2012,9 @@
                         const entrance = state.cards[sel.cid].kind === 'creature';
                         ask.textContent = 'Now click a glowing target for ' + name(sel.cid) + (entrance ? '\'s Entrance' : '') + ' (or Cancel).';
                     } else {
-                        ask.textContent = 'Play ' + name(sel.cid) + ' for ' + cost + ' energy? You have ' + P.energy + '.';
-                        const b = button('Play · ' + cost + ' ⚡', () => act(playActs[0]), 'primary');
+                        const arming = E.conditionOf(state, sel.cid) && !state.cards[sel.cid].conditionSpent;
+                        ask.textContent = (arming ? 'Arm ' : 'Play ') + name(sel.cid) + ' for ' + cost + ' energy? You have ' + P.energy + '.';
+                        const b = button((arming ? 'Arm' : 'Play') + ' · ' + cost + ' ⚡', () => act(playActs[0]), 'primary');
                         nodes.buttons.play = b;
                         buttons.appendChild(b);
                     }
@@ -2913,6 +2952,10 @@
             if (!a || !t || !state.cards[att]) return;
             let p;
             try { p = predictLines(att, target); } catch (e) { return; }
+            if ((state.players[1 - state.cards[att].controller].armed || []).length) {
+                t.appendChild(predictBadge(['Before conditions', 'A reveal may change this attack.'], false));
+                return;
+            }
             t.appendChild(predictBadge(p.target, p.targetDies || /you win/.test(p.target[1] || '')));
             a.appendChild(predictBadge(p.attacker, p.attackerDies));
         }

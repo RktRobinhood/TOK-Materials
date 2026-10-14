@@ -311,3 +311,19 @@ Jimmy Fowlon group5: #144 distinct draft proposal CLOSED at1136ee4/comment615596
 ## Continuation in the new chat — 14 October 2026
 
 Teacher stopped the old scheduled loop; the app confirmed deletion of Build Rift card pipeline / finish-rift-card-planning. Earlier active-automation instructions are historical. The new browser captures correctly at DPR1/1280x720 and390x844; Jimmy native acceptance is complete. Rick #147 now has a distinct gated spell-escape proposal and group6 first-take portrait, built through the existing pipeline. Total71of72expansion portraits made and locally accepted, all8sharedmotifs preserved. Stephen remains unproduced after service rejection (do not retry/rephrase); Hank146 still needs a distinct mechanic. Rick reaction timing has an explicit spell-reaction-policy release gate; no expansion runtime/grants/recordings changed. See design/reviews/art-recovery-2026-10-14.md for exact prompts/provenance, captures and asset checks. Publication/fulltests/independentreviews pending at this point.
+
+
+## Conditional expansion cast — 14 October 2026
+
+Eight selected paintings follow the Art Bible; exact prompts in the conditional149 inventory. Names replace the proposed creature working names only in the art catalogue/study. The two Memory/Generic creatures are scratch-playable; six mechanics remain draft. All eight campaign releases are gated. Costs/stats remain the original proposals (1/2 except Seat Reserved1/3); no celebrity voice imitation or recordings. Distinct props support the six Ways and plain Generic bridges.
+
+| Name | Public-persona inspiration | Way | Silhouette / prop | Harmless joke | Stable working ID |
+|---|---|---|---|---|---|
+| Timothée Chalkamet | Timothée Chalamet | Reason | Moth; two blank chalk tablets | Small premise rehearsed with theatrical intensity | conditional-reason-spare-premise |
+| Shia LaBeef | Shia LaBeouf | Emotion | Calf; megaphone and raised hooves | Motivational intensity for a tiny school performance | conditional-emotion-standing-ovation |
+| Cillian Owlish | Cillian Murphy | Perception | Owl; pocket watch and quiet stare | Every tick deserves a dramatic close-up | conditional-perception-clock-eyes |
+| Morgan Freemantis | Morgan Freeman | Language | Mantis; courteous lectern gesture | An absurdly solemn classroom introduction | conditional-language-chair-recognises |
+| Benedict Paperbatch | Benedict Cumberbatch | Imagination | Origami tiger; magnifier | Every crease is a detective clue | conditional-imagination-paper-tiger |
+| Keanu Reeveaver | Keanu Reeves | Memory | Beaver; keepsake box/paper friend | Gentle rescue of a crumpled paper friend | conditional-memory-somewhere-safe |
+| Tom Holland-er | Tom Holland | Generic | Frog; umbrella/paper friend | An enthusiastic everyday rescue | conditional-generic-spare-umbrella |
+| Danny DeSeato | Danny DeVito | Generic | Pigeon; velvet theatre chair | Comic confidence about the reserved seat | conditional-generic-seat-reserved |

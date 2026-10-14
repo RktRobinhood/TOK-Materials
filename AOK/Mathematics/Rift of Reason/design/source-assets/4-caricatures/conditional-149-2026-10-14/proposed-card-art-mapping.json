@@ -1,0 +1,235 @@
+{
+  "status": "23 proposed mappings; ten study definitions; no campaign release",
+  "records": [
+    {
+      "cardId": "conditional-reason-premise-pending",
+      "name": "Premise Pending",
+      "originalName": "Premise Pending",
+      "kind": "spell",
+      "colour": "reason",
+      "artId": "art/spell-motif-reason",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-reason-spare-premise",
+      "name": "Timothée Chalkamet",
+      "originalName": "Spare Premise",
+      "kind": "creature",
+      "colour": "reason",
+      "artId": "creature/conditional-reason-spare-premise/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-reason-exhibit-aha",
+      "name": "Exhibit Aha!",
+      "originalName": "Exhibit Aha",
+      "kind": "spell",
+      "colour": "reason",
+      "artId": "art/spell-motif-reason",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-emotion-tiny-drama",
+      "name": "Tiny Drama",
+      "originalName": "Tiny Drama",
+      "kind": "spell",
+      "colour": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-emotion-standing-ovation",
+      "name": "Shia LaBeef",
+      "originalName": "Standing Ovation",
+      "kind": "creature",
+      "colour": "emotion",
+      "artId": "creature/conditional-emotion-standing-ovation/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-emotion-group-gasp",
+      "name": "Group Gasp",
+      "originalName": "Group Gasp",
+      "kind": "spell",
+      "colour": "emotion",
+      "artId": "art/spell-motif-emotion",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-perception-velvet-reveal",
+      "name": "Velvet Reveal",
+      "originalName": "Velvet Reveal",
+      "kind": "spell",
+      "colour": "perception",
+      "artId": "art/spell-motif-perception",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-perception-clock-eyes",
+      "name": "Cillian Owlish",
+      "originalName": "Clock Eyes",
+      "kind": "creature",
+      "colour": "perception",
+      "artId": "creature/conditional-perception-clock-eyes/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-perception-blink-forecast",
+      "name": "Blink Forecast",
+      "originalName": "Blink Forecast",
+      "kind": "spell",
+      "colour": "perception",
+      "artId": "art/spell-motif-perception",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-language-footnote-trap",
+      "name": "Footnote, Please",
+      "originalName": "Footnote Trap",
+      "kind": "spell",
+      "colour": "language",
+      "artId": "art/spell-motif-language",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-language-queue-that-question",
+      "name": "Queue That Question",
+      "originalName": "Queue That Question",
+      "kind": "spell",
+      "colour": "language",
+      "artId": "art/spell-motif-language",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-language-chair-recognises",
+      "name": "Morgan Freemantis",
+      "originalName": "The Chair Recognises You",
+      "kind": "creature",
+      "colour": "language",
+      "artId": "creature/conditional-language-chair-recognises/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-imagination-wrong-way-round",
+      "name": "Wrong Way Round",
+      "originalName": "Wrong Way Round",
+      "kind": "spell",
+      "colour": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-imagination-paper-tiger",
+      "name": "Benedict Paperbatch",
+      "originalName": "Paper Tiger",
+      "kind": "creature",
+      "colour": "imagination",
+      "artId": "creature/conditional-imagination-paper-tiger/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-imagination-costume-rehearsal",
+      "name": "Costume Rehearsal",
+      "originalName": "Costume Rehearsal",
+      "kind": "spell",
+      "colour": "imagination",
+      "artId": "art/spell-motif-imagination",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-memory-somewhere-safe",
+      "name": "Keanu Reeveaver",
+      "originalName": "Somewhere Very Safe",
+      "kind": "creature",
+      "colour": "memory",
+      "artId": "creature/conditional-memory-somewhere-safe/idle",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-memory-second-alarm",
+      "name": "Second Alarm",
+      "originalName": "Second Alarm",
+      "kind": "spell",
+      "colour": "memory",
+      "artId": "art/spell-motif-memory",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-memory-borrowed-tomorrow",
+      "name": "Borrowed Tomorrow",
+      "originalName": "Borrowed Tomorrow",
+      "kind": "spell",
+      "colour": "memory",
+      "artId": "art/spell-motif-memory",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-generic-spare-umbrella",
+      "name": "Tom Holland-er",
+      "originalName": "Spare Umbrella",
+      "kind": "creature",
+      "colour": "generic",
+      "artId": "creature/conditional-generic-spare-umbrella/idle",
+      "playableStudy": false,
+      "studyNote": "Mechanic still pending; artwork does not release this card."
+    },
+    {
+      "cardId": "conditional-generic-queue-please",
+      "name": "Queue, Please",
+      "originalName": "Queue, Please",
+      "kind": "spell",
+      "colour": "generic",
+      "artId": "art/spell-motif-generic",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-generic-refreshments",
+      "name": "Round of Refreshments",
+      "originalName": "Round of Refreshments",
+      "kind": "spell",
+      "colour": "generic",
+      "artId": "art/spell-motif-generic",
+      "playableStudy": true,
+      "studyNote": "Study uses Axiom replacement only; Fate choice remains draft."
+    },
+    {
+      "cardId": "conditional-generic-tiny-windfall",
+      "name": "Tiny Windfall",
+      "originalName": "Tiny Windfall",
+      "kind": "spell",
+      "colour": "generic",
+      "artId": "art/spell-motif-generic",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    },
+    {
+      "cardId": "conditional-generic-seat-reserved",
+      "name": "Danny DeSeato",
+      "originalName": "Seat Reserved",
+      "kind": "creature",
+      "colour": "generic",
+      "artId": "creature/conditional-generic-seat-reserved/idle",
+      "playableStudy": true,
+      "studyNote": "Playable in the scratch battle bench."
+    }
+  ]
+}

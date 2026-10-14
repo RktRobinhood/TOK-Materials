@@ -1,3 +1,7 @@
+# Conditional foundation and artwork — 14 October 2026
+
+#148/#149 have a tested engine/board foundation, ten playable scratch cards and all23art mappings with8new creature portraits/one shared back. The campaign set is unreleased:13effects, Fate/introduction/acquisition and #109/#112/#123 remain. Continue from ../conditional-expansion-2026-10-13/NEXT-STEPS.md; acceptance and publication status live in ../../reviews/conditional-148-149-2026-10-14.md.
+
 # Build roadmap
 
 14October follow-through: voices140newruntimeclips and boardAesthetic c6dae43/d686d97 published on main/Pages (transcript acceptance still pending after503s). Two optional standout spell illustrations for Common Ground/The Last Page and a full84spell/54Axiom art gallery are locally accepted; see ../../reviews/spell-standouts-145-2026-10-14.md for the latest publication receipt. Preserve8sharedmotifs/71portraits, all card mechanics/acquisition/gates and old voices. #145/#122/#109/#43 remain open.

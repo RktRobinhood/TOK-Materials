@@ -76,6 +76,8 @@
 <script src="js/ui/ui.js"></script>
 <script src="js/ui/battles.js"></script>
 <script src="js/ui/powers.js"></script>
+<script src="dev/conditional-cards.js"></script>
+<script src="dev/conditional-bench.js"></script>
 <script src="dev/arena-prototype.js?v=122-732fac823199"></script>
 <script src="dev/starter-pack.js"></script>
 <script>
@@ -84,6 +86,7 @@
     const q = new URLSearchParams(location.search);
     const $ = id => document.getElementById(id);
     const msg = t => { $('msg').textContent = t; };
+    if (R.ConditionalBench) { R.ConditionalBench.start(); return; }
     if (R.StarterPackBench) { R.StarterPackBench.start(); return; }
     $('mode').value = q.get('mode') || 'practice';
     $('ai').value = R.Battle.AI.levelOf(q.get('ai') || 'competent');

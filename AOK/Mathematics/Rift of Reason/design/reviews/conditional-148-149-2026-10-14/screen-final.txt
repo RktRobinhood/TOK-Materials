@@ -1,0 +1,46 @@
+✔ concealed opponent arming never displays the normal card reveal (309.5908ms)
+✔ arming controls use the normal play budget and expose a readable condition rail (105.4866ms)
+✔ click-click: draw, play with the Play button, end turn, then attack a creature (243.0436ms)
+✔ guide mode allows only the expected action and runs the replies (202.4379ms)
+✔ How to play pauses and closes with the screen; Leave lesson ends with outcome left (79.5162ms)
+✔ the draw choice is docked in the centre lane and "Your turn" shows at turn start (93.7906ms)
+✔ hand and board cards show a big preview with the full text on hover and long-press (88.053ms)
+✔ calm motion: damage numbers still appear (they only fade) (199.8412ms)
+✔ the big hover copy never takes over a board card: dragging still lights the real target (77.164ms)
+✔ pointing at a target with an attacker chosen shows the predicted fight (243.5296ms)
+✔ a long opponent title stays out of Recent plays; story end screen, rule tiles and the Fate reel (194.0976ms)
+✔ practice end screen says nothing is at stake (218.2245ms)
+✔ a creature dropped on the table waits for its Entrance target, and is not lost silently (207.6865ms)
+✔ card faces name the timing of each ability (77.1416ms)
+✔ board cards show keyword chips and the timing word only, and "Ready" on a creature that can act (109.3553ms)
+✔ their turn: a banner, their creature shown big first, and a recap when my turn starts (140.1914ms)
+✔ a rule change is shown big, and the opponent waits until it fades (156.1866ms)
+✔ a ready Astrophysicat describes both attack and activation, and either action works (245.7861ms)
+✔ a creature-local tray lists multiple gained abilities and resolves a chosen target exactly once (245.3498ms)
+✔ keyboard immediate abilities focus a pending choice or their rebuilt source (310.7015ms)
+✔ ability tray exposes actual costs and explains insufficient energy and an empty effect (270.0722ms)
+✔ practice and story can be left after a confirm step; the lesson and risked matches have no Leave match (256.3492ms)
+✔ Fate draw buttons (only with timeDraws) show the new count in short words (382.2285ms)
+✔ Fate inspection explains timing, turn owner and conditional flips, and refreshes after a draw (122.5777ms)
+✔ Fate inspection distinguishes reset, unknown reshuffle and empty piles (375.0961ms)
+✔ changed rules: gold "Changed" tiles beside the core tiles, and each tile shows its card (226.3064ms)
+✔ with a button in the bar, the news lines step aside (73.4926ms)
+✔ Elusive: dropping a tactic on it explains why and leaves no waiting copy (116.5727ms)
+✔ only your own loaned cards are tagged Loaned (103.8105ms)
+✔ a lectured creature: "on its next turn" until its own turn, then "this turn" (94.6668ms)
+✔ Haste: a creature that may attack again shows "2nd attack" (111.645ms)
+✔ the Spark hint replaces "Nothing left to do" when +1 energy makes a card playable (70.1743ms)
+✔ a rule card that would change nothing is dimmed and says "Already the rule" (85.6715ms)
+✔ hover previews wait, close on pointerdown and stay shut after a drag until the mouse moves (90.8853ms)
+✔ picture buttons: each has a name (aria-label) and a tooltip, and no native title (69.7913ms)
+✔ the tooltip shows on keyboard focus and hides on Escape; hover waits a moment; a long-press keeps it (73.1175ms)
+✔ a dim draw button says why in its tooltip (hand full) (148.4158ms)
+✔ the Fate reel slides one space per turn, step by step, and a repaint mid-slide carries on from where it was (97.8094ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8049.7803

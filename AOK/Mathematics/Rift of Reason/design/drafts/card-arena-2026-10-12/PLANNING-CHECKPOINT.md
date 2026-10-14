@@ -1,3 +1,7 @@
+# Conditional foundation and artwork — 14 October 2026
+
+Latest teacher request starts #148/#149 now. The engine and board support paid one-shot conditions and masked Guard interception. Ten scratch-study cards work; all23concepts have art assignments, including8new portraits and a shared concealed back. Full final engine suite842/841pass/1skip/0fail421201.0164ms; final narrow CSS38screen checks pass, actual390 keyboard/Calm/68px hand and no page overflow. Source/runtime9additions only, old915assets unchanged. Root Standards0/Spec0 within this partial slice; full issues remainOPEN. See ../../reviews/conditional-148-149-2026-10-14.md, ../conditional-expansion-2026-10-13/IMPLEMENTATION-2026-10-14.md and NEXT-STEPS.md. Source9PNG/exact prompts: source-assets/4-caricatures/conditional-149-2026-10-14/inventory.json. No campaign grants, acquisition, save fields or recordings.13mechanics plusRefreshments Fate option/introduction/eligibility/production109/112/123remain. Old loop staysdeleted; unrelated dirty files preserved. Scoped commit/publication receipt follows in the review; do not regenerate this art.
+
 # Card Arena continuation checkpoint
 
 ## Publication complete — spell standouts

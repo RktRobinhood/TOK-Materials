@@ -40,6 +40,33 @@ const practice = {
     battleOptions: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [3, 3], deckSize: 8, minCreatures: 1 },
 };
 
+test('concealed opponent arming never displays the normal card reveal', () => {
+    const t = setup(Object.assign({}, practice, { player: { team: team(Array(8).fill('astrophysicat'),'me-'), tactics: [] } }), { before(g) {
+        const c = g.Rift.data.creatures.kardashiant; c.cost = 1;
+        c.conditional = { visibility: 'face-down', options: [{ key: 'attack', event: 'attack-declared', actor: 'opponent', label: 'Opponent attacks' }] };
+    } });
+    t.$('.b-draw-btn[data-choice="deck"]').click(); t.$('.b-end').click(); t.g.flush();
+    assert.equal(t.handle.state.players[1].armed.length, 1);
+    assert.ok(!t.$('.b-reveal').classList.contains('show'));
+    assert.ok(!t.$('.b-reveal').textContent.includes('Kim Kardashiant'));
+    assert.match(t.$('.opp-board .b-conditions').textContent, /Concealed 1/);
+    assert.ok(!t.$('.opp-board .b-conditions').textContent.includes('Kim Kardashiant'));
+    t.handle.destroy();
+});
+
+test('arming controls use the normal play budget and expose a readable condition rail', () => {
+    const t = setup(practice, { before(g) {
+        const c = g.Rift.data.creatures.kardashiant; c.cost = 1;
+        c.conditional = { visibility: 'face-up', options: [{ key: 'attack', event: 'attack-declared', actor: 'opponent', label: 'Opponent attacks' }] };
+    } });
+    t.$('.b-draw-btn[data-choice="deck"]').click(); t.$('.b-hand [data-cid="p0c0"]').click();
+    assert.match(t.$('.b-prompt .btn.primary').textContent, /Arm/);t.$('.b-prompt .btn.primary').click();
+    assert.equal(t.handle.state.players[0].energy,0);assert.equal(t.handle.state.players[0].playsThisTurn,1);
+    assert.match(t.$('.my-board .b-conditions').textContent, /Kim Kardashiant/);
+    assert.match(t.$('.my-board .b-condition').getAttribute('aria-label'),/Opponent attacks/);
+    t.handle.destroy();
+});
+
 test('click-click: draw, play with the Play button, end turn, then attack a creature', () => {
     const t = setup(practice);
     const { E, $ } = t;

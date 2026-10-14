@@ -1,0 +1,20 @@
+{
+  "calm": true,
+  "condition": "Exhibit Aha!. After the opponent plays a spell",
+  "handCards": [
+    {
+      "name": "Proof Pup, cost 2, attack 1, health 3 of 3, guard",
+      "width": 68
+    },
+    {
+      "name": "Tactic Second Wind, cost 2: Restore 3 hearts to your hero.",
+      "width": 68
+    },
+    {
+      "name": "Rule card: Costly Assumptions",
+      "width": 68
+    }
+  ],
+  "scrollWidth": 390,
+  "width": 390
+}

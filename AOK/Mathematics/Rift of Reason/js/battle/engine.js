@@ -120,11 +120,14 @@
         const s = { ...state };
         s.players = state.players.map(P => ({
             ...P, deck: P.deck.slice(), hand: P.hand.slice(), axHand: P.axHand.slice(),
-            board: P.board.slice(), discard: P.discard.slice(), knows: P.knows.slice(),
+            board: P.board.slice(), armed: (P.armed || []).slice(), discard: P.discard.slice(), knows: P.knows.slice(),
         }));
         s.cards = cards;
         s.roundTurns = state.roundTurns.slice();
         s.pending = state.pending ? { ...state.pending } : null;
+        s.reactions = (state.reactions || []).slice();
+        s.completedPlays = (state.completedPlays || []).slice();
+        s.attackIntent = state.attackIntent ? { ...state.attackIntent } : null;
         s.axioms = { ...state.axioms, active: { ...state.axioms.active }, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
         s.fate = { ...state.fate };
         s.lastEvents = [];
@@ -243,7 +246,7 @@
 
     // 'none' (nicknamed): no colour at all, so no spotlight (not even Memory's) and no wheel bonus.
     function colourOf(s, card) {
-        return card.colourless ? 'none' : (card.colour || 'memory');
+        return card.colourless || card.generic ? 'none' : (card.colour || 'memory');
     }
     function wheelBonus(s, card, foe) {
         const W = Rift.data.wheel;
@@ -410,7 +413,7 @@
 
     function creaturesLeft(s, p) {
         const P = s.players[p];
-        return P.deck.concat(P.hand, P.board).some(cid => s.cards[cid].kind === 'creature');
+        return P.deck.concat(P.hand, P.board, P.armed || []).some(cid => s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature);
     }
 
     // Everything a card face needs.
@@ -419,7 +422,7 @@
         if (c.kind === 'tactic') {
             const t = tacticDefs()[c.tactic] || {};
             return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, short: t.short || null, flavour: t.flavour, target: t.target || null,
-                colour: t.colour || null, rarity: t.rarity || null, colourReady: !t.colour || colourInPlay(s, c.controller, t.colour) };
+                colour: t.colour || null, rarity: t.rarity || null, art: t.art || null, colourReady: !!t.conditional || !t.colour || colourInPlay(s, c.controller, t.colour) };
         }
         const sp = species(c.species) || {};
         const defs = abilityDefs();
@@ -516,8 +519,15 @@
         P.hand.forEach(cid => {
             if (!canPlay || playCost(s, cid) > P.energy) return;
             const c = s.cards[cid];
+            const condition = conditionOf(s, cid);
+            if (condition && !c.conditionSpent) {
+                if ((P.armed || []).length >= 2 || (c.kind === 'creature' && boardOccupancy(s, p) >= s.options.boardLimit)) return;
+                list.push({ type: 'play', player: p, cid });
+                return;
+            }
+            if (condition && c.kind === 'tactic') return; // spent one-shots cannot be rearmed by bounce/recovery
             if (c.kind === 'creature') {
-                if (P.board.length >= s.options.boardLimit) return;
+                if (boardOccupancy(s, p) >= s.options.boardLimit) return;
                 const entry = entranceOf(s, c);
                 const targets = entry && entry.target ? targetsFor(s, entry.target, p, entry.filter, cid) : [];
                 if (targets.length) targets.forEach(target => list.push({ type: 'play', player: p, cid, target }));
@@ -586,7 +596,7 @@
         [v.trait, taught].forEach(k => { if (KEYWORDS.includes(k) && !kws.includes(k)) kws.push(k); });
         return {
             cid, kind: 'creature', uid: inst.uid || cid, species: inst.species, owner, controller: owner,
-            colour: sp.colour, cost: sp.cost,
+            colour: sp.colour, generic: !!sp.generic, cost: sp.cost,
             attack: Math.max(0, sp.attack + (v.attack || 0) + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0)),
             health: Math.max(1, sp.health + (v.health || 0) + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0)),
             baseKeywords: kws,
@@ -628,7 +638,7 @@
         const s = {
             v: 3, seed, step: 0, turn: 1, round: 0, roundTurns: [false, false],
             active: 0, phase: 'setup', pending: null,
-            players: [], cards: {},
+            players: [], cards: {}, reactions: [], completedPlays: [], factSequence: 0, armSequence: 0, reactionCount: 0, attackIntent: null,
             axioms: { deck: [], discard: [], active: {}, flips: 0 },
             fate: { until: opts.fateStart, events: 0 },
             winner: null, endReason: null, options: opts,
@@ -657,7 +667,7 @@
             s.players.push({
                 id: pl.id || ('p' + i), name: pl.name || (i === 0 ? 'You' : 'Opponent'),
                 hearts, maxHearts: hearts, energy: 0, capacity: 0, spark: false,
-                deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], discard: [],
+                deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], armed: [], discard: [],
                 playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [],
                 consumables: Object.assign({}, cons),
                 bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
@@ -708,6 +718,7 @@
     function applyLegal(state, match) {
         const s = cloneState(state);
         s.step += 1;
+        if (match.type !== 'choose') { s.reactionCount = 0; s.resolutionRoot = s.step; }
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
         switch (match.type) {
             case 'draw': doDraw(G, match.choice); break;
@@ -722,6 +733,7 @@
             case 'choose': resolveChoice(G, match.choice); break;
             default: throw new Error('Unknown action ' + match.type);
         }
+        resolveReactions(G);
         s.lastEvents = G.events;
         s.log = { prev: state.log, events: G.events };
         return s;
@@ -750,6 +762,7 @@
             draw: p => draw(G, p),
             drawAxiom: p => drawAxiom(G, p),
             damage: (target, amount, source) => (isHero(target) ? damageHero(G, +target[1], amount) : dealDamage(G, target, amount, source)),
+            checkHearts: () => checkHearts(G),
             heal(cid, n) { const c = s.cards[cid]; c.damage = Math.max(0, c.damage - n); },
             healHero(p, n) { const P = s.players[p]; P.hearts = Math.min(P.maxHearts, P.hearts + n); },
             defeat: (cid, why) => defeat(G, cid, why),
@@ -775,6 +788,120 @@
             swapStats: cid => swapStats(s, cid),
             takeControl: (cid, p) => takeControl(G, cid, p),
         };
+    }
+
+    // Authored conditions use semantic facts, never translated log messages or animation callbacks.
+    // Only released definitions should be installed in production data. The developer set is separate.
+    function conditionOf(s, cid) {
+        const c = s.cards[cid];
+        const def = c && (c.kind === 'tactic' ? tacticDefs()[c.tactic] : species(c.species));
+        return def && def.conditional;
+    }
+    function boardOccupancy(s, p) {
+        return s.players[p].board.length + (s.players[p].armed || []).filter(cid => s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature).length;
+    }
+    function armedView(s, p, viewer) {
+        return (s.players[p].armed || []).map(cid => {
+            const c = s.cards[cid], def = conditionOf(s, cid);
+            if (p !== viewer && (!def || def.visibility === 'face-down')) return { concealed: true };
+            const option = def.options.find(o => o.key === c.conditionKey);
+            return { cid, concealed: false, name: cardName(s, cid), condition: option ? option.label : 'Choosing a condition', kind: c.kind };
+        });
+    }
+    // AI lookahead must not resolve unseen opponent conditions from the engine's private records.
+    function informationState(state, viewer) {
+        const hidden = (state.players[1 - viewer].armed || []).filter(cid => {
+            const def = conditionOf(state, cid);
+            return !def || def.visibility === 'face-down';
+        });
+        if (!hidden.length) return state;
+        const s = cloneState(state);
+        hidden.forEach(cid => {
+            const c = state.cards[cid];
+            s.cards[cid] = { cid, kind: 'concealed', owner: c.owner, controller: c.controller, reservedCreature: c.kind === 'creature' || !!c.reservedCreature };
+        });
+        s.reactions = s.reactions.filter(r => !hidden.includes(r.cid));
+        return s;
+    }
+    function arm(G, cid) {
+        const s = G.s, c = s.cards[cid], p = c.controller, def = conditionOf(s, cid);
+        if (!def.options || def.options.length < 1 || def.options.length > 3) throw new Error('A conditional card needs one to three authored options.');
+        const events = ['creature-played', 'spell-played', 'axiom-replaced', 'creature-defeated', 'attack-declared'];
+        if (new Set(def.options.map(o => o.key)).size !== def.options.length || def.options.some(o => !o.key || !events.includes(o.event) || !['self', 'opponent', 'either'].includes(o.actor))) {
+            throw new Error('Invalid authored conditional option. Fate entry is not implemented in this release.');
+        }
+        s.players[p].armed.push(cid);
+        c.armSequence = ++s.armSequence;
+        const visible = def.visibility !== 'face-down';
+        emit(G, { t: 'armed', player: p, privateTo: p, cid: visible ? cid : undefined,
+            text: says(s, p, 'plays') + ' ' + cardName(s, cid) + ' as a condition.',
+            publicText: visible ? says(s, p, 'plays') + ' ' + cardName(s, cid) + ' as a condition.' : playerName(s, p) + ' arms a concealed condition.' });
+        ask(G, { player: p, kind: 'option', options: def.options.map(o => o.key), labels: Object.fromEntries(def.options.map(o => [o.key, o.label])),
+            prompt: 'Choose when ' + cardName(s, cid) + ' will reveal.', source: { type: 'conditional-arm', cid } });
+    }
+    function conditionalFact(G, event, actor, data) {
+        const s = G.s;
+        const fact = { ...data, event, actor, id: ++s.factSequence, root: s.resolutionRoot || s.step };
+        const sources = s.players.flatMap(P => P.armed || []).filter(cid => {
+            const c = s.cards[cid], def = conditionOf(s, cid);
+            const option = def && def.options.find(o => o.key === c.conditionKey);
+            return option && !c.conditionSpent && option.event === event
+                && (option.actor === 'either' || (actor != null && (option.actor === 'self' ? actor === c.controller : actor !== c.controller)))
+                && (!def.matches || def.matches(s, c, fact, H));
+        }).sort((a, b) => s.cards[a].armSequence - s.cards[b].armSequence || a.localeCompare(b));
+        sources.forEach(cid => s.reactions.push({ cid, fact }));
+    }
+    function resolveReactions(G) {
+        const s = G.s;
+        while (s.winner == null && s.phase !== 'choose') {
+            const completed = s.completedPlays;
+            s.completedPlays = [];
+            completed.forEach(f => conditionalFact(G, f.event, f.actor, f));
+            if (!s.reactions.length) break;
+            const { cid, fact } = s.reactions.shift(), c = s.cards[cid];
+            if (!c || c.conditionSpent || !s.players[c.controller].armed.includes(cid)) continue;
+            if (++s.reactionCount > 128) throw new Error('Conditional resolution exceeded 128 reveals; the action was not committed.');
+            const def = conditionOf(s, cid), p = c.controller;
+            // Claim before effects. Recovery retains this marker; no free recursive rearming.
+            c.conditionSpent = true;
+            removeFrom(s.players[p].armed, cid);
+            emit(G, { t: 'conditional-reveal', player: p, cid, fact: fact.id, text: cardName(s, cid) + ' reveals: ' + def.options.find(o => o.key === c.conditionKey).label + '.' });
+            if (c.kind === 'creature') {
+                c.revealFact = fact;
+                if (s.players[p].board.length >= s.options.boardLimit) {
+                    c.burned = true; // failed entry is a discard, not a combat defeat/Fate casualty
+                    s.players[c.owner].discard.push(cid);
+                    emit(G, { t: 'fizzle', cid, text: cardName(s, cid) + ' cannot enter: the reserved space was filled.' });
+                } else enterCreature(G, cid, null, true);
+            } else {
+                s.players[c.owner].discard.push(cid);
+                def.run(api(G), p, fact, cid);
+            }
+            cleanup(G);
+        }
+        if (s.winner != null) { s.reactions = []; s.completedPlays = []; s.attackIntent = null; return; }
+        if (s.phase !== 'choose' && !s.reactions.length && s.attackIntent) {
+            finishDeclaredAttack(G);
+            if (s.reactions.length) resolveReactions(G);
+        }
+    }
+    function enterCreature(G, cid, target, revealed) {
+        const s = G.s, c = s.cards[cid], p = c.controller, P = s.players[p];
+        P.board.push(cid);
+        c.enteredTurn = s.turn;
+        P.playedCount += 1;
+        emit(G, { t: 'play', player: p, cid, target, revealed: !!revealed, text: says(s, p, 'plays') + ' ' + cardName(s, cid) + '.' });
+        s.players[1 - p].board.slice().forEach(other => {
+            const o = s.cards[other];
+            eachAbility(s, o, def => { if (def.onEnemyPlay) def.onEnemyPlay(api(G), o, cid); });
+        });
+        const entry = entranceOf(s, c);
+        const targets = entry && entry.target ? targetsFor(s, entry.target, p, entry.filter, cid) : [];
+        if (revealed && entry && entry.target && targets.length) {
+            ask(G, { player: p, kind: 'card', options: targets, prompt: 'Choose the Entrance target for ' + cardName(s, cid) + '.', source: { type: 'conditional-entry', cid } });
+        } else if (entry && (!entry.target || target)) entry.run(api(G), c, target);
+        else if (entry) emit(G, { t: 'fizzle', cid, text: logName(s, cid) + ' finds no target for its Entrance.' });
+        // Reveals are entries for existing auras, but not a second creature-played conditional fact.
     }
 
     // ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ------------------
@@ -1035,6 +1162,7 @@
     // reset does (Fate does not move), and never becomes an active rule itself.
     function setAxiom(G, id, by) {
         const s = G.s, A = s.axioms, ax = axiomDefs()[id];
+        const changed = axiomWouldChange(s, id);
         if (ax.clearRules) {
             A.discard.push(...Object.values(A.active));
             A.active = {};
@@ -1053,6 +1181,7 @@
                 eachAbility(s, c, def => { if (def.onAxiomPlayed) def.onAxiomPlayed(api(G), c, id, by); });
             }));
         }
+        if (changed) s.completedPlays.push({ event: 'axiom-replaced', actor: by == null ? null : by, axiom: id });
     }
 
     // ---- main-phase moves ---------------------------------------------------------------------
@@ -1061,29 +1190,22 @@
 
     function doPlay(G, cid, target) {
         const s = G.s, p = s.active, P = s.players[p], c = s.cards[cid];
-        spend(G, playCost(s, cid));
+        const paidCost = playCost(s, cid);
+        spend(G, paidCost);
         if (P.tax > 0) P.tax -= 1;
         removeFrom(P.hand, cid);
         s.players[1 - p].knows = s.players[1 - p].knows.filter(k => k !== cid);
+        if (conditionOf(s, cid) && !c.conditionSpent) { arm(G, cid); afterMove(G); return; }
         if (c.kind === 'tactic') {
             const def = tacticDefs()[c.tactic];
             P.discard.push(cid);
             emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
             def.run(api(G), p, target);
         } else {
-            P.board.push(cid);
-            c.enteredTurn = s.turn;
-            P.playedCount += 1;
-            emit(G, { t: 'play', player: p, cid, target, text: says(s, p, 'plays') + ' ' + cardName(s, cid) + '.' });
-            s.players[1 - p].board.slice().forEach(other => {
-                const o = s.cards[other];
-                eachAbility(s, o, def => { if (def.onEnemyPlay) def.onEnemyPlay(api(G), o, cid); });
-            });
-            const entry = entranceOf(s, c);
-            if (entry && (!entry.target || target)) entry.run(api(G), c, target);
-            else if (entry) emit(G, { t: 'fizzle', cid, text: logName(s, cid) + ' finds no target for its Entrance.' });
+            enterCreature(G, cid, target, false);
         }
         afterMove(G);
+        s.completedPlays.push({ event: c.kind === 'tactic' ? 'spell-played' : 'creature-played', actor: p, cid, paidCost });
     }
 
     function doAxiom(G, id) {
@@ -1128,7 +1250,14 @@
 
     function answer(G, req, choice) {
         const s = G.s;
-        if (req.source.type === 'tactic') tacticDefs()[req.source.id].choose(api(G), req.player, choice, req);
+        if (req.source.type === 'conditional-arm') {
+            s.cards[req.source.cid].conditionKey = choice;
+        } else if (req.source.type === 'conditional-entry') {
+            const c = s.cards[req.source.cid], entry = entranceOf(s, c);
+            if (entry) entry.run(api(G), c, choice);
+        } else if (req.source.type === 'conditional-intercept') {
+            s.attackIntent.target = choice;
+        } else if (req.source.type === 'tactic') tacticDefs()[req.source.id].choose(api(G), req.player, choice, req);
         else if (req.source.type === 'power') powerDefs()[req.source.id].choose(api(G), req.player, choice, req, powerMods(s, req.player));
         else abilityDefs()[req.source.id].choose(api(G), s.cards[req.source.cid], choice, req);
     }
@@ -1147,6 +1276,33 @@
         const s = G.s, p = s.active, c = s.cards[cid];
         c.attacks += 1;
         s.players[p].attacksThisTurn += 1;
+        s.attackIntent = { cid, target, player: p };
+        conditionalFact(G, 'attack-declared', p, { cid, target });
+        resolveReactions(G);
+    }
+
+    function finishDeclaredAttack(G) {
+        const s = G.s, intent = s.attackIntent, cid = intent.cid, p = intent.player, c = s.cards[cid];
+        let target = intent.target;
+        if (!s.players[p].board.includes(cid) || c.controller !== p || c.frozen || c.activated || isSleeping(s, cid) || attackOf(s, cid) <= 0) {
+            s.attackIntent = null;
+            emit(G, { t: 'attack-cancelled', cid, text: 'The declared attacker can no longer attack. Its attack was spent.' });
+            return;
+        }
+        const targets = attackTargets(s, cid);
+        if (!targets.includes(target)) {
+            const guards = targets.filter(t => !isHero(t) && hasKeyword(s, t, 'guard'));
+            if (guards.length) {
+                ask(G, { player: p, kind: 'card', options: guards, prompt: 'A Guard revealed. Choose which Guard to attack.', source: { type: 'conditional-intercept' } });
+                if (s.phase === 'choose') return;
+                target = intent.target;
+            } else {
+                s.attackIntent = null;
+                emit(G, { t: 'attack-cancelled', cid, text: 'The declared target is no longer legal. The attack was spent.' });
+                return;
+            }
+        }
+        s.attackIntent = null;
         emit(G, { t: 'attack', player: p, cid, target, text: says(s, p, 'attacks') + ' ' + logName(s, target) + ' with ' + logName(s, cid) + '.' });
         eachAbility(s, c, def => { if (def.onAttack) def.onAttack(api(G), c, target); });
         if (isHero(target)) {
@@ -1240,6 +1396,7 @@
         const s = G.s, c = s.cards[cid];
         if (!s.players[c.controller].board.includes(cid)) return;
         if (!name) name = logName(s, cid);
+        const controller = c.controller;
         removeFrom(s.players[c.controller].board, cid);
         let dest = 'discard', saver = null;
         // Mercy first, and no return with a full hand, so a once-per-match Last Word is not wasted.
@@ -1257,6 +1414,7 @@
         else { dest = 'discard'; P.discard.push(cid); }
         emit(G, { t: 'defeated', cid, player: c.owner, dest, why,
             text: dest === 'hand' ? name + ' is defeated, but ' + saver + ' returns it to the hand.' : name + ' is defeated.' });
+        conditionalFact(G, 'creature-defeated', controller, { cid, owner: c.owner, dest, why });
     }
 
     function bounce(G, cid) {
@@ -1467,5 +1625,6 @@
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, identityFilter, H,
         BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,
         TWEAKS, powerMods, powerActions, powerStatus,
+        conditionOf, boardOccupancy, armedView, informationState,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

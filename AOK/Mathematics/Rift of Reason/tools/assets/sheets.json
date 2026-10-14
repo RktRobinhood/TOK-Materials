@@ -18,6 +18,15 @@
         "  Without it the class is guessed from the id (see tools/assets/classes.mjs)."
     ],
     "sheets": {
+        "conditional-reason-spare-premise-149.png": {"type":"single","id":"creature/conditional-reason-spare-premise/idle","class":"sprite"},
+        "conditional-emotion-standing-ovation-149.png": {"type":"single","id":"creature/conditional-emotion-standing-ovation/idle","class":"sprite"},
+        "conditional-perception-clock-eyes-149.png": {"type":"single","id":"creature/conditional-perception-clock-eyes/idle","class":"sprite"},
+        "conditional-language-chair-recognises-149.png": {"type":"single","id":"creature/conditional-language-chair-recognises/idle","class":"sprite"},
+        "conditional-imagination-paper-tiger-149.png": {"type":"single","id":"creature/conditional-imagination-paper-tiger/idle","class":"sprite"},
+        "conditional-generic-spare-umbrella-149.png": {"type":"single","id":"creature/conditional-generic-spare-umbrella/idle","class":"sprite"},
+        "conditional-seat-reserved-149.png": {"type":"single","id":"creature/conditional-generic-seat-reserved/idle","class":"sprite"},
+        "conditional-somewhere-safe-149.png": {"type":"single","id":"creature/conditional-memory-somewhere-safe/idle","class":"sprite"},
+        "conditional-back-149.png": {"type":"single","id":"ui/conditional-back","class":"card"},
         "production-reason-induction-ibex-145.png": {"type":"single","id":"creature/reason-induction-ibex/idle","class":"sprite"},
         "production-reason-guardrail-goat-145.png": {"type":"single","id":"creature/reason-guardrail-goat/idle","class":"sprite"},
         "production-reason-inference-heron-145.png": {"type":"single","id":"creature/reason-inference-heron/idle","class":"sprite"},

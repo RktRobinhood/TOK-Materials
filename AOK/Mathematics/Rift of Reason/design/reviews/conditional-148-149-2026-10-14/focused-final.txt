@@ -1,0 +1,40 @@
+✔ arming pays once, uses a normal play, commits a menu and preserves the input (24.9625ms)
+✔ hidden cards expose a back; face-up cards expose their committed condition (12.7368ms)
+✔ opponent spell condition resolves after the spell, draws once and cannot rearm (4.7899ms)
+✔ a revealed Guard intercepts before hero damage, with exactly one attack spent (11.7703ms)
+✔ multiple revealed Guards let the attacker choose without paying twice (3.5808ms)
+✔ reveal Entrance pauses an attack and resolves exactly once before Guard targeting (11.4468ms)
+✔ armed creatures reserve space and still count as remaining creatures (1.3436ms)
+✔ a forced full-board reveal consumes into discard without a combat/Fate loss (81.1129ms)
+✔ terminal Win stops later conditions in the same event, including own-zero victory (5.1898ms)
+✔ AI decisions cannot distinguish two concealed identities and remain legal (173.5501ms)
+✔ fate never kills legendaries (113.142ms)
+✔ ordinary creatures can die, and the dead are removed (2.6173ms)
+✔ practice battles never change instances (6.3646ms)
+✔ fate is pure: input instances are never mutated (1.2404ms)
+✔ injured: -1 power or loses its ability; warp: a different keyword; scarred: cosmetic (5.9282ms)
+✔ injuries lower attack but never below 0: a 0-attack creature loses its ability or is only scarred (1.9037ms)
+✔ anchor stops a warp; wards cancel the worst bad rolls first (1.0228ms)
+✔ loaned commons and creatures outside the instance list never roll (0.6347ms)
+✔ fate odds are tuned to be kinder to winners (2.0107ms)
+✔ trainer ante: real items change hands (2.8534ms)
+✔ boss ante: the player stakes two items (0.7598ms)
+✔ ghost ante: the winner gets a named trophy copy; nothing is taken from the classmate (1.4421ms)
+✔ ghost trophy: strongest by real attack, copying its variant and taught trick (6.8951ms)
+✔ applyToSave drops dead creatures from the chosen battle team (1.2674ms)
+✔ applyToSave applies fate and ante to a save (2.4198ms)
+✔ team codes round-trip a team, its axiom pool and nickname (17.4244ms)
+✔ tampered, wrong-kind and impossible team codes are rejected (21.3972ms)
+✔ old-scale injuries below attack 0 are lifted to attack 0 on import and export, not rejected (92.6381ms)
+✔ decks are capped at 14 creatures and 20 cards on export (2.3976ms)
+✔ v2 team codes carry variants, taught tricks and tactics; ghosts use them (3.4555ms)
+✔ v1 team codes still import with plain variants and the starter tactics (1.3232ms)
+✔ a ghost battle runs the imported team with the AI, deterministically (1162.9444ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4244.1983

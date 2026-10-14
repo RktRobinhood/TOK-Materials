@@ -1,0 +1,168 @@
+{
+  "status": "Six proposed persona assignments; no runtime or acquisition release inferred from artwork.",
+  "cast": [
+    {
+      "cardId": "conditional-reason-spare-premise",
+      "name": "Timothée Chalkamet",
+      "person": "Timothée Chalamet",
+      "animal": "moth",
+      "prop": "two identical blank chalk tablets",
+      "silhouette": "a pale silver moth with tousled dark head fluff, theatrical earnest eyebrows and a narrow dark scholarly cape, its two broad blue-black wings cupping two equally sized blank chalk tablets side by side",
+      "joke": "dramatically rehearsing a very small mathematical premise",
+      "colour": "reason"
+    },
+    {
+      "cardId": "conditional-emotion-standing-ovation",
+      "name": "Shia LaBeef",
+      "person": "Shia LaBeouf",
+      "animal": "calf",
+      "prop": "one megaphone",
+      "silhouette": "a stout rust-red calf with a small dark beard tuft, swept-back short head fur and intensely earnest golden eyes, dark simple sleeveless stage waistcoat, both hooves raised in an exaggerated motivational gesture, one bright antique brass megaphone at the hip",
+      "joke": "overwhelming motivational intensity at a tiny school performance",
+      "colour": "emotion"
+    },
+    {
+      "cardId": "conditional-perception-clock-eyes",
+      "name": "Cillian Owlish",
+      "person": "Cillian Murphy",
+      "animal": "owl",
+      "prop": "one old pocket watch",
+      "silhouette": "a blue-grey owl with very large piercing ice-blue eyes, severe rounded feather brow and a small dark flat cap, simple ink-blue collar, holding one enormous brass pocket watch close to its chest with its wings, leaning forward in a quietly intense stare",
+      "joke": "watching the next tick as though it were the most important dramatic close-up",
+      "colour": "perception"
+    },
+    {
+      "cardId": "conditional-language-chair-recognises",
+      "name": "Morgan Freemantis",
+      "person": "Morgan Freeman",
+      "animal": "mantis",
+      "prop": "one small lectern",
+      "silhouette": "a dignified moss-and-gold praying mantis with kindly amber eyes, salt-and-pepper cheek tufts and a very small cream cravat, upright beside one curving dark wooden lectern, one foreleg extended in a gracious invitation to speak",
+      "joke": "giving an absurdly solemn introduction to the next classroom speaker",
+      "colour": "language"
+    },
+    {
+      "cardId": "conditional-imagination-paper-tiger",
+      "name": "Benedict Paperbatch",
+      "person": "Benedict Cumberbatch",
+      "animal": "folded paper tiger",
+      "prop": "one magnifying glass",
+      "silhouette": "a living origami tiger folded from ivory and deep violet paper, dark angular head folds suggesting tousled hair, expressive inquisitive amber eyes and two large dramatically lifted paper brow folds, a simple folded detective scarf and one oversized brass magnifying glass in a paper paw",
+      "joke": "treating every crease as an elaborate detective clue",
+      "colour": "imagination"
+    },
+    {
+      "cardId": "conditional-generic-spare-umbrella",
+      "name": "Tom Holland-er",
+      "person": "Tom Holland",
+      "animal": "frog",
+      "prop": "one umbrella",
+      "silhouette": "an eager emerald frog with cheerful young amber eyes, curly chestnut head fluff and a simple dark travelling jacket, both webbed hands holding one oversized plum umbrella over a tiny folded paper friend tucked beside its foot, slightly awkward protective forward lean",
+      "joke": "an enthusiastic performer making an everyday rescue unnecessarily dramatic",
+      "colour": "generic"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "creature/conditional-reason-spare-premise/idle",
+      "cardId": "conditional-reason-spare-premise",
+      "source": "conditional-reason-spare-premise-149.png",
+      "cast": {
+        "cardId": "conditional-reason-spare-premise",
+        "name": "Timothée Chalkamet",
+        "person": "Timothée Chalamet",
+        "animal": "moth",
+        "prop": "two identical blank chalk tablets",
+        "silhouette": "a pale silver moth with tousled dark head fluff, theatrical earnest eyebrows and a narrow dark scholarly cape, its two broad blue-black wings cupping two equally sized blank chalk tablets side by side",
+        "joke": "dramatically rehearsing a very small mathematical premise",
+        "colour": "reason"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Timothée Chalkamet, a satirical moth CREATURE inspired by the public screen persona of Timothée Chalamet, not a human portrait. Exact silhouette: a pale silver moth with tousled dark head fluff, theatrical earnest eyebrows and a narrow dark scholarly cape, its two broad blue-black wings cupping two equally sized blank chalk tablets side by side. One readable signature prop: two identical blank chalk tablets. Harmless comic angle: dramatically rehearsing a very small mathematical premise. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear cobalt blue jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    },
+    {
+      "id": "creature/conditional-emotion-standing-ovation/idle",
+      "cardId": "conditional-emotion-standing-ovation",
+      "source": "conditional-emotion-standing-ovation-149.png",
+      "cast": {
+        "cardId": "conditional-emotion-standing-ovation",
+        "name": "Shia LaBeef",
+        "person": "Shia LaBeouf",
+        "animal": "calf",
+        "prop": "one megaphone",
+        "silhouette": "a stout rust-red calf with a small dark beard tuft, swept-back short head fur and intensely earnest golden eyes, dark simple sleeveless stage waistcoat, both hooves raised in an exaggerated motivational gesture, one bright antique brass megaphone at the hip",
+        "joke": "overwhelming motivational intensity at a tiny school performance",
+        "colour": "emotion"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Shia LaBeef, a satirical calf CREATURE inspired by the public screen persona of Shia LaBeouf, not a human portrait. Exact silhouette: a stout rust-red calf with a small dark beard tuft, swept-back short head fur and intensely earnest golden eyes, dark simple sleeveless stage waistcoat, both hooves raised in an exaggerated motivational gesture, one bright antique brass megaphone at the hip. One readable signature prop: one megaphone. Harmless comic angle: overwhelming motivational intensity at a tiny school performance. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear ruby red jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    },
+    {
+      "id": "creature/conditional-perception-clock-eyes/idle",
+      "cardId": "conditional-perception-clock-eyes",
+      "source": "conditional-perception-clock-eyes-149.png",
+      "cast": {
+        "cardId": "conditional-perception-clock-eyes",
+        "name": "Cillian Owlish",
+        "person": "Cillian Murphy",
+        "animal": "owl",
+        "prop": "one old pocket watch",
+        "silhouette": "a blue-grey owl with very large piercing ice-blue eyes, severe rounded feather brow and a small dark flat cap, simple ink-blue collar, holding one enormous brass pocket watch close to its chest with its wings, leaning forward in a quietly intense stare",
+        "joke": "watching the next tick as though it were the most important dramatic close-up",
+        "colour": "perception"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Cillian Owlish, a satirical owl CREATURE inspired by the public screen persona of Cillian Murphy, not a human portrait. Exact silhouette: a blue-grey owl with very large piercing ice-blue eyes, severe rounded feather brow and a small dark flat cap, simple ink-blue collar, holding one enormous brass pocket watch close to its chest with its wings, leaning forward in a quietly intense stare. One readable signature prop: one old pocket watch. Harmless comic angle: watching the next tick as though it were the most important dramatic close-up. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear teal green jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    },
+    {
+      "id": "creature/conditional-language-chair-recognises/idle",
+      "cardId": "conditional-language-chair-recognises",
+      "source": "conditional-language-chair-recognises-149.png",
+      "cast": {
+        "cardId": "conditional-language-chair-recognises",
+        "name": "Morgan Freemantis",
+        "person": "Morgan Freeman",
+        "animal": "mantis",
+        "prop": "one small lectern",
+        "silhouette": "a dignified moss-and-gold praying mantis with kindly amber eyes, salt-and-pepper cheek tufts and a very small cream cravat, upright beside one curving dark wooden lectern, one foreleg extended in a gracious invitation to speak",
+        "joke": "giving an absurdly solemn introduction to the next classroom speaker",
+        "colour": "language"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Morgan Freemantis, a satirical mantis CREATURE inspired by the public screen persona of Morgan Freeman, not a human portrait. Exact silhouette: a dignified moss-and-gold praying mantis with kindly amber eyes, salt-and-pepper cheek tufts and a very small cream cravat, upright beside one curving dark wooden lectern, one foreleg extended in a gracious invitation to speak. One readable signature prop: one small lectern. Harmless comic angle: giving an absurdly solemn introduction to the next classroom speaker. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear amber gold jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    },
+    {
+      "id": "creature/conditional-imagination-paper-tiger/idle",
+      "cardId": "conditional-imagination-paper-tiger",
+      "source": "conditional-imagination-paper-tiger-149.png",
+      "cast": {
+        "cardId": "conditional-imagination-paper-tiger",
+        "name": "Benedict Paperbatch",
+        "person": "Benedict Cumberbatch",
+        "animal": "folded paper tiger",
+        "prop": "one magnifying glass",
+        "silhouette": "a living origami tiger folded from ivory and deep violet paper, dark angular head folds suggesting tousled hair, expressive inquisitive amber eyes and two large dramatically lifted paper brow folds, a simple folded detective scarf and one oversized brass magnifying glass in a paper paw",
+        "joke": "treating every crease as an elaborate detective clue",
+        "colour": "imagination"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Benedict Paperbatch, a satirical folded paper tiger CREATURE inspired by the public screen persona of Benedict Cumberbatch, not a human portrait. Exact silhouette: a living origami tiger folded from ivory and deep violet paper, dark angular head folds suggesting tousled hair, expressive inquisitive amber eyes and two large dramatically lifted paper brow folds, a simple folded detective scarf and one oversized brass magnifying glass in a paper paw. One readable signature prop: one magnifying glass. Harmless comic angle: treating every crease as an elaborate detective clue. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear amethyst violet jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    },
+    {
+      "id": "creature/conditional-generic-spare-umbrella/idle",
+      "cardId": "conditional-generic-spare-umbrella",
+      "source": "conditional-generic-spare-umbrella-149.png",
+      "cast": {
+        "cardId": "conditional-generic-spare-umbrella",
+        "name": "Tom Holland-er",
+        "person": "Tom Holland",
+        "animal": "frog",
+        "prop": "one umbrella",
+        "silhouette": "an eager emerald frog with cheerful young amber eyes, curly chestnut head fluff and a simple dark travelling jacket, both webbed hands holding one oversized plum umbrella over a tiny folded paper friend tucked beside its foot, slightly awkward protective forward lean",
+        "joke": "an enthusiastic performer making an everyday rescue unnecessarily dramatic",
+        "colour": "generic"
+      },
+      "prompt": "Generate one brand-new single creature cutout for Rift of Reason. Reference image 1 is the approved style board; reference image 2 is shipped Astrophysicat for thick clean outlines, cel lighting and soft tactile texture only. Do not copy the reference animal, pose or clothes. Subject: Tom Holland-er, a satirical frog CREATURE inspired by the public screen persona of Tom Holland, not a human portrait. Exact silhouette: an eager emerald frog with cheerful young amber eyes, curly chestnut head fluff and a simple dark travelling jacket, both webbed hands holding one oversized plum umbrella over a tiny folded paper friend tucked beside its foot, slightly awkward protective forward lean. One readable signature prop: one umbrella. Harmless comic angle: an enthusiastic performer making an everyday rescue unnecessarily dramatic. Cute horror, crooked theatrical storybook silhouette, dark ink shadows and one clear restrained plum and brass jewel accent, welcoming expressive face with enough warm light to read. Creature caricature with round expressive eyes, no realistic human likeness. Entire figure, prop, feet, tail or wings visible with generous margins. Compact three-quarter frontal cutout, one simple silhouette readable at 70 pixels, clear face and prop at 300 pixels. No extra props, scenery, floor shadow, words, numerals, brands, logos, card border or gore. For the frog no superhero costume or franchise symbols; for all figures no weapons. True transparent alpha outside the single isolated foreground figure. Preserve approved cute-dark styling, clean saturated rim lights on darker forms; avoid pastel nursery styling, glossy 3D or excessive tiny ornaments."
+    }
+  ],
+  "mode": "built-in image_gen",
+  "references": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+  ]
+}

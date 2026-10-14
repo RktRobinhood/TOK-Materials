@@ -1,3 +1,7 @@
+# Conditional foundation and artwork — 14 October 2026
+
+Preserve the8new persona cutouts and shared concealed back in source-assets/4-caricatures/conditional-149-2026-10-14/. All23conditional concepts have assignments;15spells reuse accepted motifs. dev/conditional-art.html reviews all8creatures in normal foreground colour frames at300/70, dark/light and390. Only10study definitions are playable; artwork never implies campaign release. Original prompts/roles/paths and alpha/SHA receipts are retained. The initial210 and71/72portrait frontier remain separate; no declined-cast retry or new recordings.
+
 # Rift of Reason — Art bible
 
 Latest spell continuation14October2026: preserve all8shared motifs and71accepted expansion portraits. Two optional unique object illustrations now distinguish Common Ground and The Last Page; source/prompts/reference roles/alpha checks in source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json. Tactile braided-root/healing/draw and blank-last-page/recovered-paper-bookmark metaphors add no powers or Fate changes. dev/spell-art.html uses actual spell/Axiom frames, foreground art/live labels and complete original draft text, with300/70 and1280dark/light/390light native evidence in reviews/spell-standouts-145-2026-10-14.md. This is proposed art coverage, not card release; the deferred cast and all runtime/acquisition gates remain explicit.

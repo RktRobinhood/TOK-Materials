@@ -1110,3 +1110,35 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-note-line.b-seen-note b { color: var(--rift); }
 /* Night Sight's tax on the next card, under the energy. */
 .b-tax { grid-column: 1 / span 2; margin-top: 3px; text-align: center; font-size: 11.5px; font-weight: 800; color: #ffb3a8; white-space: nowrap; }
+.b-board.has-conditions { padding-top: 40px; }
+.b-conditions { position: absolute; top: 3px; left: 8px; right: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 11px; z-index: 4; }
+.b-condition { max-width: 34%; min-height: 32px; padding: 4px 8px; border: 1px solid #b19ee1; border-radius: 8px; background: #302640; color: #f7eddc; font: inherit; cursor: pointer; }
+.b-condition.concealed { background: #21182f; border-style: dashed; }
+.b-condition:focus-visible { outline: 3px solid #ffce6b; outline-offset: 2px; }
+.b-condition { display: flex; align-items: center; gap: 5px; }
+.b-condition img { width: 21px; height: 29px; object-fit: contain; flex: 0 0 auto; }
+.conditional-study .bc { overflow: hidden; }
+.conditional-study .bc-frame { z-index: 1; }
+.conditional-study .bc-art { z-index: 2; inset: 0 2% 24%; height: auto; border-radius: 0; background: none; overflow: visible; }
+.conditional-study .bc-art img { object-fit: contain; object-position: center; }
+.conditional-study .bc-name, .conditional-study .bc-brief, .conditional-study .bc-text, .conditional-study .bc-gem { z-index: 3; }
+@media (max-width: 600px) {
+    .conditional-study .battle { --hero: 36px; --hw: 68px; --bw: 60px; }
+    .conditional-study .b-arena { grid-template-rows: 58px minmax(120px, 1fr) 116px minmax(130px, 1fr) 180px; }
+    .conditional-study .b-hero-row.opp { grid-template-columns: 110px minmax(0, 1fr) 106px; }
+    .conditional-study .b-hero-row .b-row-left { padding-left: 10px; gap: 4px; }
+    .conditional-study .b-hero-row .b-info, .conditional-study .b-crystals { display: none; }
+    .conditional-study .b-hero-name { left: 0; font-size: 11px; }
+    .conditional-study .b-hearts { width: 30px; font-size: 20px; }
+    .conditional-study .b-hero-row.opp .b-row-right { padding-right: 48px; }
+    .conditional-study .b-hero-row.me { grid-template-columns: 1fr 1fr; grid-template-rows: 50px 130px; }
+    .conditional-study .b-hero-row.me .b-row-left { grid-column: 1; grid-row: 1; }
+    .conditional-study .b-hero-row.me .b-row-right { grid-column: 2; grid-row: 1; }
+    .conditional-study .b-hand { grid-column: 1 / -1; grid-row: 2; width: 100%; justify-content: flex-start; overflow-x: auto; overflow-y: hidden; gap: 9px; padding: 12px 8px 8px; }
+    .conditional-study .b-hand > .bc { margin-left: 0; transform: none !important; flex-shrink: 0; }
+    .conditional-study .b-board { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; gap: 9px; padding: 8px 10px; }
+    .conditional-study .b-board.has-conditions { padding-top: 42px; }
+    .conditional-study .b-lane { grid-template-columns: minmax(0, 1fr) 42px auto; gap: 6px; padding: 3px 8px; }
+    .conditional-study .b-prompt { min-width: 0; font-size: 12px; }
+    .conditional-study .b-axdeck { width: 36px; }
+}
