@@ -242,20 +242,20 @@ test('Recall: the most recently defeated creature returns (Deeper +1/+1, Broader
     assert.equal(E.powerStatus(none, 0).why, 'useless');
 });
 
-test('Hold That Thought: move Fate 1 space and draw a card (Deeper up to 2, Broader restores 1 heart)', () => {
-    let s = powered('hold-that-thought', [], { options: { timeline: true, fateStart: 6 } });
+test('Hold That Thought: move Fate 1 round and draw a card (Deeper up to 2, Broader restores 1 heart)', () => {
+    let s = powered('hold-that-thought', [], { options: { timeline: true, fateStart: 3 } });
     s = act(s, { type: 'power' });
     same(s.pending.options, ['forward', 'rewind']);
     s = act(s, { type: 'choose', choice: 'forward' });
-    assert.equal(s.fate.until, 5);
+    assert.equal(s.fate.until, 2);
     assert.equal(s.players[0].hand.length, 1, 'draws a card');
     assert.equal(s.players[0].energy, 10 - P('hold-that-thought').cost);
-    let d = powered('hold-that-thought', ['deeper', 'broader'], { options: { timeline: true, fateStart: 6 } });
+    let d = powered('hold-that-thought', ['deeper', 'broader'], { options: { timeline: true, fateStart: 3 } });
     d.players[0].hearts = 5;
     d = act(d, { type: 'power' });
     same(d.pending.options, ['forward-2', 'forward', 'rewind', 'rewind-2']);
     d = act(d, { type: 'choose', choice: 'rewind-2' });
-    assert.equal(d.fate.until, 8);
+    assert.equal(d.fate.until, 5, 'two rounds later');
     assert.equal(d.players[0].hand.length, 1, 'still one card');
     assert.equal(d.players[0].hearts, 6, 'Broader: 1 heart');
     assert.equal(E.powerStatus(powered('hold-that-thought'), 0).why, 'useless', 'no Fate track');

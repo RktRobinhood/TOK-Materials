@@ -63,10 +63,10 @@
             run(api, p, target) { api.heal(target, api.s.cards[target].damage); api.emit({ t: 'item', text: 'Mending: ' + api.name(target) + ' is fully healed.' }); },
         } },
         anchor: { name: 'Anchor', kind: 'battle', text: 'Stops a creature being warp-cursed in one battle.', battle: {
-            cost: 0, text: "The Fate track doesn't move at the end of this turn.",
+            cost: 0, text: "The Fate track doesn't move at the end of this round.",
             usable: s => !!s.options.timeline,
             why: 'There is no Fate track in this match.',
-            run(api) { api.s.fate.anchorTurn = api.s.turn; api.emit({ t: 'item', text: 'Anchor: the Fate track will not move at the end of this turn.' }); },
+            run(api) { api.s.fate.anchorRound = api.s.round; api.emit({ t: 'item', text: 'Anchor: the Fate track will not move at the end of this round.' }); },
         } },
         'trick-book': { name: 'Trick Book', kind: 'support', text: 'Use in the Bag or Collection: teach one creature a trick for card battles.' },
         // Battle consumables earned from puzzles: chosen before a real battle, used up when it starts.

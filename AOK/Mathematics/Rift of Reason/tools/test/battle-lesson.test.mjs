@@ -120,3 +120,27 @@ test('short first lesson reaches a real win-rule decision promptly, with two suc
         assert.equal(s.options.mode, 'practice');
     }
 });
+
+test('both lessons count Fate in rounds: the first flip is set aside at the start and lands as scripted', () => {
+    // Full lesson: Small Assumptions is announced from the first turn and active as round 3 (turn 5) starts.
+    let s = L.create();
+    assert.equal(s.fate.next, 'thrift');
+    assert.equal(E.timeline(s)[0].rounds, 2);
+    assert.equal(E.timeline(s)[0].turn, 5);
+    const fateStep = L.steps.findIndex(st => st.title === 'The Fate track');
+    const decide = L.steps.findIndex(st => st.title === 'What will you do?');
+    replay((i, st) => {
+        if (i === fateStep) {
+            assert.equal(st.axioms.active.cost, 'thrift');
+            assert.deepEqual([st.turn, st.round], [5, 3]);
+            assert.equal(E.timeline(st)[0].rounds, 3, 'the reset in 3 rounds, as Granny says');
+        }
+        if (i === decide) assert.deepEqual([E.timeline(st)[0].type, E.timeline(st)[0].rounds, E.timeline(st)[0].turns], ['reset', 1, 2]);
+    });
+    assert.match(L.steps[fateStep].text, /After each round/);
+    assert.match(L.steps[fateStep].replies[0].say, /In 3 rounds/);
+    // Short lesson: the first flip is set aside too, and resolves at the end of round 1.
+    const short = L.shortGuide().create();
+    assert.equal(short.fate.next, 'thrift');
+    assert.deepEqual([E.timeline(short)[0].rounds, E.timeline(short)[0].turns], [1, 2]);
+});

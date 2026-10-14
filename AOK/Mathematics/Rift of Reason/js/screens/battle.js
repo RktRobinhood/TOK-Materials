@@ -139,8 +139,8 @@
     const DRAW_TEXT = {
         deck: ['Draw from your deck', 'A creature or tactic card'],
         axiom: ['Take a rule card', 'A rule card for your hand'],
-        forward: ['Fate sooner', 'No card. Every Fate event comes 1 turn sooner'],
-        rewind: ['Fate later', 'No card. Every Fate event comes 1 turn later'],
+        forward: ['Fate sooner', 'No card. Every Fate event comes 1 round sooner'],
+        rewind: ['Fate later', 'No card. Every Fate event comes 1 round later'],
     };
     // Picture buttons: optional art, else a small inline SVG in the game's palette.
     const TIP_DELAY = 250;      // ms before a button's name shows under a resting mouse
@@ -1503,7 +1503,7 @@
                 if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 else {
                     const tlr = E.timeline(state)[0];
-                    if (tlr && tlr.type === 'reset' && tlr.turns <= 2) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset in ' + tlr.turns + '!' }));
+                    if (tlr && tlr.type === 'reset' && tlr.rounds <= 1) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset this round!' }));
                 }
                 if (!nodes['ax:' + id]) nodes['ax:' + id] = node;
                 fan(node, i++, handItems);
@@ -1683,31 +1683,47 @@
             paintFate(0);
             const deckN = state.axioms.deck.length;
             const axdeck = el('div.b-axdeck', { tabindex: 0, 'aria-label': 'Shared axiom deck: ' + deckN + ' rule cards' }, [cardBack(true), el('span', { text: String(deckN) })]);
-            tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it, and the Fate track turns its top card over.');
+            tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it.' + (state.fate && state.fate.next ? ' Fate has set 1 more aside for its next free rule.' : ''));
             put(dom.lane, dom.fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [axdeck]), dom.draw, dom.end);
         }
 
-        // Fate events in the log, by turn: the rules that turned over or were played, resets and
-        // time draws. k = turns before the current one (0 = this turn, -1 = the turn before).
+        // Fate events in the log, by ROUND: the rules that turned over or were played, resets and
+        // time draws. k = rounds before the current one (0 = this round, -1 = the round before). Fate's
+        // ordinary move comes after the round's last End turn, so what it does belongs to the round it starts.
         function fateHistory() {
-            let count = 0, between = false;
+            let between = false;
             const out = [];
             E.fullLog(state).forEach(ev => {
-                if (ev.t === 'turn') { count += 1; between = false; return; }
+                if (ev.t === 'turn') { between = false; return; }
                 if (ev.t === 'turn-end') { between = true; return; }
-                const idx = between ? count + 1 : count;
+                const idx = (ev.round || 0) + (between ? 1 : 0);
                 if (ev.t === 'reset') out.push({ idx, kind: 'reset' });
                 else if (ev.t === 'axiom') out.push({ idx, kind: ev.player == null ? 'flip' : 'rule', id: ev.id, by: ev.player });
                 else if (ev.t === 'time') out.push({ idx, kind: /closer/.test(ev.text) ? 'forward' : 'rewind', by: ev.player });
             });
-            return out.map(x => Object.assign(x, { k: x.idx - count }));
+            return out.map(x => Object.assign(x, { k: x.idx - state.round }));
         }
 
-        // The Fate track, a reel: NOW (the hourglass) is fixed in the middle; three past turns on the
-        // left, three coming turns on the right, the next events on their spaces (a further one waits at
-        // the right edge). When turns pass, the reel slides left under NOW (a fade under calm motion). Each space is tinted by whose turn it
-        // is. shift (−1 / +1) previews a Fate sooner / later draw: the next event appears where it
-        // would land. Every event (past or coming) shows its card on hover, focus or tap.
+        // Fate counts full rounds: your turn and the opponent's, then one move.
+        const roundsWord = n => n + ' round' + (n === 1 ? '' : 's');
+        const afterWho = p => (p === ME ? 'your turn' : oppName + '\'s turn');
+        // "at the end of this round, after Anna's turn" / "in 2 rounds, at the end of round 4, after your turn".
+        function fateWhen(ev) {
+            if (ev.rounds <= 0) return 'now';
+            return (ev.rounds === 1 ? 'at the end of this round' : 'in ' + roundsWord(ev.rounds) + ', at the end of round ' + (state.round + ev.rounds - 1))
+                + ', after ' + afterWho(ev.after);
+        }
+        // Who plays first in each round, for the NOW space: "your turn, then Anna's".
+        function roundOrder(after) {
+            return after === ME ? oppName + '\'s turn, then yours' : 'your turn, then ' + oppName + '\'s';
+        }
+
+        // The Fate track, a reel of ROUNDS: NOW (the hourglass) is this round, fixed in the middle;
+        // three past rounds on the left, three coming rounds on the right, the next events on the
+        // round they start (a further one waits at the right edge). Fate moves once per round, after
+        // the second player's turn; then the reel slides left under NOW (a step under calm motion).
+        // shift (−1 / +1) previews a Fate sooner / later draw: the next event appears where it would
+        // land. Every event (past or coming) shows its card on hover, focus or tap.
         const FATE_PAST = 3, FATE_AHEAD = 3;
         function paintFate(shift) {
             const box = dom.fate;
@@ -1716,53 +1732,52 @@
             const tl = E.timeline(state);
             if (!tl.length) { put(box, el('div.b-fate-none', { text: 'No Fate track in this match.' })); return; }
             const AX = Rift.data.axioms || {};
-            const owner = k => ((state.active + k) % 2 + 2) % 2;
             const hist = fateHistory();
-            const top = state.axioms.deck[0];
             const next = tl[0];
-            const moved = shift ? Math.max(0, Math.min(state.options.fateMax, next.turns + shift)) : null;
+            const pre = shift ? E.fatePreview(state, -shift) : null;
+            const moved = pre ? pre.rounds : null;
+            const ghostOf = () => Object.assign({}, next, { rounds: moved, turns: pre.turns });
             const spaces = [];
             for (let k = -FATE_PAST; k <= FATE_AHEAD; k++) {
-                const who = owner(k);
                 const kids = [];
-                // Past events (and those of this turn) as small markers.
-                hist.filter(h => h.k === k && k >= -FATE_PAST).forEach(h => kids.push(pastMarker(h, AX)));
-                // Coming events on their own space (further ones wait in the chip beyond the reel).
+                // Past events (and those of this round) as small markers.
+                hist.filter(h => h.k === k).forEach(h => kids.push(pastMarker(h, AX)));
+                // Coming events on the round they start (further ones wait in the chip beyond the reel).
                 tl.forEach((ev, i) => {
-                    if (ev.turns !== k || (shift && i === 0)) return;
-                    kids.push(eventMarker(ev, i, top, false));
+                    if (ev.rounds !== k || (shift && i === 0)) return;
+                    kids.push(eventMarker(ev, i, false));
                 });
-                if (shift && moved === k) kids.push(eventMarker(Object.assign({}, next, { turns: moved }), 0, top, false, true));
-                const cls = (k < 0 ? '.past' : k === 0 ? '.now' : '.ahead') + (who === ME ? '.mine' : '.theirs');
-                const space = el('div.b-fs' + cls, { dataset: { k: String(k) } }, kids);
-                // The game's own tooltip (no native title): whose turn this space is.
-                tipFor(space, 'fs:' + k, who === ME ? 'Your turn' : oppName + '\'s turn', k === 0 ? 'Now.' : k < 0 ? (-k) + ' turn' + (k === -1 ? '' : 's') + ' ago.' : 'In ' + k + ' turn' + (k === 1 ? '' : 's') + '.');
+                if (shift && moved === k) kids.push(eventMarker(ghostOf(), 0, false, true));
+                const cls = k < 0 ? '.past' : k === 0 ? '.now' : '.ahead';
+                const space = el('div.b-fs.round' + cls, { dataset: { k: String(k) } }, kids);
+                // The game's own tooltip (no native title): which round this space is.
+                const n = state.round + k;
+                tipFor(space, 'fs:' + k, n >= 1 ? 'Round ' + n : 'Before round 1',
+                    k === 0 ? 'This round: ' + roundOrder(next.after) + '.' : k < 0 ? roundsWord(-k) + ' ago.' : 'In ' + roundsWord(k) + '.');
                 spaces.push(space);
             }
             let reel = null;
-            const turnsWord = n => n + ' turn' + (n === 1 ? '' : 's');
-            const evName = ev => (ev.type === 'reset' ? 'All rules reset' : 'New rule' + (top && ev === next && AX[top] ? ': ' + ruleWords(AX[top]) + (E.axiomWouldChange && !E.axiomWouldChange(state, top) ? ' (no change)' : '') : ''));
-            const anchored = state.fate.anchorTurn === state.turn;
             const kind = next.type === 'reset' ? 'Reset' : 'New rule';
             const summary = shift
-                ? (moved === 0 ? (next.type === 'reset' ? 'Reset happens NOW' : 'New rule NOW') : (shift < 0 ? '⏩ ' : '⏪ ') + kind + ' in ' + turnsWord(moved))
-                : 'Upcoming · ' + (anchored ? '⚓ ' : '') + kind + ' in ' + turnsWord(next.turns);
-            // The second line: what it will be, and whose turn it starts.
-            const whose = owner(next.turns) === ME ? 'your turn' : 'their turn';
-            const flipDetail = !state.axioms.deck.length ? (state.axioms.discard.length ? 'shared discard will be shuffled' : 'no rule card left to flip') : evName(next).replace(/^New rule: /, '').replace(/^New rule$/, 'The top rule card');
-            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : flipDetail) + ' · ' + whose;
-            // Beyond the reel: the nearest event further than three turns away, with its count.
-            const farIdx = tl.findIndex(ev => ev.turns > FATE_AHEAD);
+                ? (pre.now ? (next.type === 'reset' ? 'Reset happens NOW' : 'New rule NOW') : (shift < 0 ? '⏩ ' : '⏪ ') + kind + ' in ' + roundsWord(moved))
+                : 'Upcoming · ' + (next.held ? '⚓ ' : '') + kind + ' in ' + roundsWord(next.rounds);
+            // The second line: what it will be (the set-aside card), and whose End turn brings it.
+            const nextAx = next.id && AX[next.id];
+            const flipDetail = nextAx ? ruleWords(nextAx) + (E.axiomWouldChange && !E.axiomWouldChange(state, next.id) ? ' (no change)' : '')
+                : state.axioms.deck.length || state.axioms.discard.length ? 'no rule card set aside yet' : 'no rule card left to flip';
+            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : flipDetail) + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
+            // Beyond the reel: the nearest event further than three rounds away, with its count.
+            const farIdx = tl.findIndex(ev => ev.rounds > FATE_AHEAD);
             const farGhost = shift && moved > FATE_AHEAD;
             let farChip = null;
-            if (farGhost) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(Object.assign({}, next, { turns: moved }), 0, top, true, true)]);
-            else if (farIdx >= 0 && !(shift && farIdx === 0)) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(tl[farIdx], farIdx, top, true)]);
-            // A card bent time (not a turn passing): the summary flashes so the change is seen.
-            const sig = next.type + ':' + next.turns;
-            const bent = !shift && ui.fateSig && ui.fateSig.turn === state.turn && ui.fateSig.sig !== sig;
-            if (!shift) ui.fateSig = { turn: state.turn, sig };
+            if (farGhost) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(ghostOf(), 0, true, true)]);
+            else if (farIdx >= 0 && !(shift && farIdx === 0)) farChip = el('div.b-fate-far', {}, [el('span.b-far-arrow', { text: '››' }), eventMarker(tl[farIdx], farIdx, true)]);
+            // A card bent time, or Fate set a card aside (not a round passing): the summary flashes so the change is seen.
+            const sig = next.type + ':' + next.rounds + ':' + (next.id || '');
+            const bent = !shift && ui.fateSig && ui.fateSig.round === state.round && ui.fateSig.sig !== sig;
+            if (!shift) ui.fateSig = { round: state.round, sig };
             put(box,
-                el('div.b-fate-label', {}, [el('strong', { text: 'Fate' }), el('span', { text: 'turns' })]),
+                el('div.b-fate-label', {}, [el('strong', { text: 'Fate' }), el('span', { text: 'rounds' })]),
                 el('div.b-fate-track' + (has('ui/fate-track') ? '.art' : ''), {}, [
                     // Nine-slice: the end caps keep their shape, only the plain bar between them stretches.
                     el('div.b-fate-groove', { style: (u => (u ? { borderImageSource: 'url("' + u + '")' } : null))(artUrl('ui/fate-track')) }),
@@ -1774,24 +1789,25 @@
                     el('span', { text: shift ? 'if you choose this draw' : detail, title: detail })]),
             );
             slideReel(reel, shift);
-            tipFor(box.querySelector ? box.querySelector('.b-fate-label') || box : box, 'fate', 'Fate track', 'Each End turn moves every event 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, or a reset to the basic rules.');
+            tipFor(box.querySelector ? box.querySelector('.b-fate-label') || box : box, 'fate', 'Fate track',
+                'One space is one round. After both players have had a turn, every event moves 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, or a reset to the basic rules. Fate sets its next new rule aside, so no draw can take it.');
         }
-        // Turns passed since the last paint: the reel slides that many spaces left (at most 3), one space
+        // Rounds passed since the last paint: the reel slides that many spaces left (at most 3), one space
         // at a time with a short stop on each ("tick, tick"), slow enough to follow. The screen repaints the
         // reel on every move, so the slide is kept in ui.fateSlide and picked up again by each new reel
         // (before, a repaint mid-slide threw it away and the reel seemed to jump). Calm motion steps
         // space by space without sliding.
         const FATE_STEP = 700, FATE_HOLD = 220;
         function slideReel(reel, shift) {
-            const was = ui.fateTurn;
-            if (!shift) ui.fateTurn = state.turn;
+            const was = ui.fateRound;
+            if (!shift) ui.fateRound = state.round;
             if (!reel || shift || !reel.animate) return;
             const now = root.performance && root.performance.now ? root.performance.now() : Date.now();
             const run = ui.fateSlide && now - ui.fateSlide.start < ui.fateSlide.d * FATE_STEP ? ui.fateSlide : null;
-            if (was != null && state.turn > was) {
+            if (was != null && state.round > was) {
                 // Spaces still to go in a slide that is under way are added to the new one.
                 const left = run ? run.d - Math.floor((now - run.start) / FATE_STEP) : 0;
-                ui.fateSlide = { d: Math.min(3, state.turn - was + left), start: now };
+                ui.fateSlide = { d: Math.min(3, state.round - was + left), start: now };
             } else if (!run) { ui.fateSlide = null; return; }
             const s = ui.fateSlide, unit = 100 / (FATE_PAST + FATE_AHEAD + 1), calm = calmMotion();
             const at = i => ({ transform: 'translateX(' + ((s.d - i) * unit) + '%)' });
@@ -1806,31 +1822,31 @@
                 anim.currentTime = Math.max(0, now - s.start);
             } catch (e) { /* no WAAPI */ }
         }
-        // A coming event: the flip (with the rule card that will turn over) or the reset.
-        function eventMarker(ev, i, top, far, ghost) {
+        // A coming event: the flip (with the rule card Fate has set aside) or the reset.
+        function eventMarker(ev, i, far, ghost) {
             const AX = Rift.data.axioms || {};
             const reset = ev.type === 'reset';
-            const known = !reset && i === 0 && top && AX[top];
-            const whose = (state.active + ev.turns) % 2 === ME ? 'your turn' : oppName + '\'s turn';
-            const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ', as ' + whose + ' starts.';
+            const known = !reset && i === 0 && ev.id && AX[ev.id];
+            const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' ' + fateWhen(ev) + '.';
+            const left = state.axioms.deck.length || state.axioms.discard.length;
             const effect = reset ? 'Every active rule card is removed. All axioms return to the basic rules for BOTH players.'
                 : known ? known.name + ': ' + known.text
-                : i === 0 && !state.axioms.deck.length && !state.axioms.discard.length ? 'No rule card is left to flip. Current axioms stay in play.'
-                : i === 0 && !state.axioms.deck.length ? 'The shared discard is shuffled, then its top card becomes active for BOTH players. The card is not known yet.'
-                : 'A free flip uses the shared deck’s top card, if one is available. This later card is not known yet.';
-            const condition = known ? 'It is the top card of the shared axiom deck. If someone takes it first, the next card turns over instead.' : '';
+                : i === 0 && !left ? 'No rule card is left to flip. Current axioms stay in play.'
+                : i === 0 ? 'No rule card is set aside yet. Fate sets one aside from the shared deck when the next turn starts.'
+                : 'A free flip from the shared deck. Fate sets its card aside, and shows it here, when the reset before it happens.';
+            const condition = known ? 'Fate has set this card aside: no draw can take it, and it turns over as announced.' : '';
             const m = el('div.b-fev' + (reset ? '.reset' : '.flip') + (ghost ? '.ghost' : '') + (far ? '.far' : ''), {
                 tabindex: ghost ? null : 0, role: ghost ? null : 'button',
-                'aria-label': when + ' ' + effect + (known ? ' It replaces: ' + replacedRule(top) + '. ' + condition : ''),
+                'aria-label': when + ' ' + effect + (known ? ' It replaces: ' + replacedRule(ev.id) + '. ' + condition : ''),
             }, [
                 icon(reset ? 'ui/fate-reset' : 'ui/fate-flip', reset ? '↺' : '✦', 'b-fev-icon'),
-                el('span.b-fev-label', { text: (reset ? 'Reset' : 'New rule') + (far ? ' · in ' + ev.turns : '') }),
+                el('span.b-fev-label', { text: (reset ? 'Reset' : 'New rule') + (far ? ' · in ' + ev.rounds : '') }),
             ]);
             if (ghost) return m;
             const make = () => [el('div.b-notes', {}, [
                 el('div.b-note-line', {}, [el('b', { text: when })]),
                 el('div.b-note-line', { text: effect }),
-                known ? el('div.b-note-line', { text: 'It replaces: ' + replacedRule(top) + '.' }) : null,
+                known ? el('div.b-note-line', { text: 'It replaces: ' + replacedRule(ev.id) + '.' }) : null,
                 condition ? el('div.b-note-line.b-flavour', { text: condition }) : null,
             ])];
             inspectFateMarker(m, make, 'fate:' + i);
@@ -1844,10 +1860,10 @@
                 if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
             });
         }
-        // " Fate resets all rules in 1 turn!" when a reset is that close (else '').
+        // " Careful: Fate resets all rules at the end of this round!" when a reset is that close (else '').
         function resetSoon() {
             const ev = E.timeline(state)[0];
-            return ev && ev.type === 'reset' && ev.turns <= 2 ? ' Careful: Fate resets all rules in ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + '!' : '';
+            return ev && ev.type === 'reset' && ev.rounds <= 1 ? ' Careful: Fate resets all rules at the end of this round!' : '';
         }
         // 'Guard: Off (attack anyone)' — the category's name, then the rule in a few words.
         const ruleWords = ax => (ax.short ? (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short : ax.name);
@@ -1862,13 +1878,13 @@
             const basic = core ? core[2] : BASIC_WORDS[ax.category];
             return 'the basic rule' + (basic ? ' (' + basic + ')' : '');
         }
-        // Something that already happened on the track (or this turn): a small marker.
+        // Something that already happened on the track (or this round): a small marker.
         function pastMarker(h, AX) {
             const ax = h.id ? AX[h.id] : null;
             const who = h.by === ME ? 'You' : h.by === OPP ? oppName : 'Fate';
-            const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 sooner' : h.kind === 'rewind' ? who + ': Fate 1 later'
+            const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 round sooner' : h.kind === 'rewind' ? who + ': Fate 1 round later'
                 : (h.kind === 'flip' ? 'Fate turned over ' : who + ' played ') + (ax ? ax.name : 'a rule');
-            const when = h.k === 0 ? 'this turn' : -h.k + ' turn' + (h.k === -1 ? '' : 's') + ' ago';
+            const when = h.k === 0 ? 'this round' : roundsWord(-h.k) + ' ago';
             const detail = 'Already happened · ' + when + '. ' + text + '. '
                 + (h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : ax ? ax.text + ' ' : '')
                 + 'See Axioms for what is active now.';
@@ -1879,29 +1895,12 @@
             inspectFateMarker(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || ''));
             return m;
         }
-
-        // Short Fate wording for the lane (two lines at most); the long one is in its tooltip.
-        function fateShort(ev) {
-            const when = 'In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ';
-            if (ev.type === 'reset') return when + (changedRules().length ? 'all rules go back to normal.' : 'rules reset (no change now).');
-            const top = state.axioms.deck[0];
-            const ax = top && (Rift.data.axioms || {})[top];
-            if (ax) return when + 'new rule (' + ax.name + ').';
-            if (!state.axioms.deck.length && !state.axioms.discard.length) return when + 'no rule card is left.';
-            return when + 'a new rule card.';
-        }
-
-        // Plain Fate track wording: "In 6 turns: a new rule card turns over (Wounds Remain)".
-        // The named card is only the current top card of the shared deck: someone may take it first.
-        function fateText(ev, long) {
-            const when = 'In ' + ev.turns + ' turn' + (ev.turns === 1 ? '' : 's') + ': ';
-            if (ev.type === 'reset') return when + 'all rules go back to normal.';
-            const top = state.axioms.deck[0];
-            const ax = top && (Rift.data.axioms || {})[top];
-            const next = ev.turns === (E.timeline(state)[0] || {}).turns;
-            if (next && ax) return when + 'a new rule card turns over (' + ax.name + (long ? ', the top card of the shared deck' : '') + ').';
-            if (!state.axioms.deck.length && !state.axioms.discard.length) return when + 'no rule card is left to turn over.';
-            return when + 'a new rule card turns over (the top card of the shared deck).';
+        // End turn's tooltip: whether this End closes the round and moves Fate.
+        function endFateNote() {
+            const ev = E.timeline(state)[0];
+            if (!ev) return '';
+            if (ev.after !== ME) return ' Fate moves after ' + oppName + '\'s turn.';
+            return ev.held ? ' The round ends; the Anchor holds the Fate track.' : ' The round ends: the Fate track moves 1 space.';
         }
 
         function button(label, fn, cls, extra) {
@@ -2122,19 +2121,19 @@
             }, (state.phase === 'over' ? ['Game', 'over'] : mine ? ['End', 'turn'] : ui.busy ? ['Watch', ''] : ['Their', 'turn'])
                 .filter(Boolean).map(w => el('span', { text: w })));
             tipFor(b, 'end', 'End turn', state.phase === 'over' ? 'The battle is over.' : !mine ? 'Wait for your turn.'
-                : state.phase === 'draw' ? 'First choose your draw.' : end ? 'Finish your turn. The Fate track moves 1 space.' + (E.rules(state).handCap != null && state.players[ME].hand.length + state.players[ME].axHand.length > E.rules(state).handCap ? ' Hand limit ' + E.rules(state).handCap + ': your oldest cards will be discarded.' : '') : 'First answer the question.');
+                : state.phase === 'draw' ? 'First choose your draw.' : end ? 'Finish your turn.' + endFateNote() + (E.rules(state).handCap != null && state.players[ME].hand.length + state.players[ME].axHand.length > E.rules(state).handCap ? ' Hand limit ' + E.rules(state).handCap + ': your oldest cards will be discarded.' : '') : 'First answer the question.');
             nodes.end = b;
             dom.end.appendChild(b);
             if (onlyEnd) dom.end.appendChild(el('div.b-end-hint', { text: 'Nothing left to do' }));
         }
 
-        // The rule card draw takes the top card of the shared deck: the one Fate would turn over next.
-        function axiomDrawNote(tl) {
+        // The rule card draw takes the top card of the shared deck. Fate's next free rule is set aside,
+        // out of the deck, so taking a card never changes what Fate turns over.
+        function axiomDrawNote() {
             const AX = Rift.data.axioms || {};
             const top = AX[state.axioms.deck[0]];
             if (!top) return 'Shared deck: ' + state.axioms.deck.length;
-            const flip = tl.length && tl[0].type === 'flip';
-            return 'You take ' + top.name + ': ' + ruleWords(top) + (flip ? '. Fate would turn it over in ' + tl[0].turns + ' turn' + (tl[0].turns === 1 ? '' : 's') + ', so taking it stops that' : '');
+            return 'You take ' + top.name + ': ' + ruleWords(top);
         }
         function renderDraw(L) {
             dom.draw.innerHTML = '';
@@ -2147,27 +2146,28 @@
             const choices = E.drawChoices(state);
             const full = P.hand.length + P.axHand.length >= state.options.handLimit;
             const tl = E.timeline(state);
-            // Short enough to fit at 1280 px: "Rule card in 4", "Reset in 3", "Reset (no change now)".
-            const after = n => {
+            // Short enough to fit at 1280 px: "Rule card in 2 rounds", "Reset in 3 rounds", "Reset (no change now)".
+            const after = pre => {
                 const ev = tl[0];
                 if (ev.type === 'reset' && !changedRules().length) return 'Reset (no change now)';
-                return (ev.type === 'reset' ? 'Reset' : 'Rule card') + (n <= 0 ? ' now' : ' in ' + n);
+                return (ev.type === 'reset' ? 'Reset' : 'Rule card') + (pre.now ? ' now' : ' in ' + roundsWord(pre.rounds));
             };
             const noFate = !state.options.timeline ? 'No Fate track in this match.' : '';
+            const sooner = tl.length ? E.fatePreview(state, 1) : null, later = tl.length ? E.fatePreview(state, -1) : null;
             const why = {
                 deck: full ? 'Your hand is full.' : !P.deck.length ? 'Your deck is empty.' : P.deck.length + ' cards left',
-                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The rule deck is empty.' : axiomDrawNote(tl),
-                forward: noFate || (tl.length ? after(tl[0].turns - 1) : ''),
-                rewind: noFate || (tl.length ? after(Math.min(state.options.fateMax, tl[0].turns + 1)) : ''),
+                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The rule deck is empty.' : axiomDrawNote(),
+                forward: noFate || (sooner ? after(sooner) : ''),
+                rewind: noFate || (later ? after(later) : ''),
             };
             const st = step();
-            // Picture buttons with a tiny status badge; the name and the details are in the tooltip.
-            const when = n => (n <= 0 ? 'now' : 'in ' + n);
+            // Picture buttons with a tiny status badge (rounds); the name and the details are in the tooltip.
+            const when = pre => (pre.now ? 'now' : 'in ' + pre.rounds);
             const badge = {
                 deck: String(P.deck.length),
                 axiom: String(state.axioms.deck.length),
-                forward: !noFate && tl.length ? when(tl[0].turns - 1) : '',
-                rewind: !noFate && tl.length ? when(Math.min(state.options.fateMax, tl[0].turns + 1)) : '',
+                forward: !noFate && sooner ? when(sooner) : '',
+                rewind: !noFate && later ? when(later) : '',
             };
             const none = L.find(x => x.type === 'draw' && x.choice === 'none');
             put(dom.draw, el('div.b-draw-title', {}, [el('strong', { text: 'Choose' }), el('span', { text: 'one draw' })]), el('div.b-draw-buttons', {}, ['deck', 'axiom'].concat(state.options.timeDraws ? ['forward', 'rewind'] : []).map(choice => {
@@ -2236,15 +2236,15 @@
 
         // "Axioms": one tile per active rule, a picture and a few words. The four core rules always
         // show; a changed rule glows gold and says "Changed". Hover, focus or tap a tile for the card.
-        // For a Fate choice (Clockwork): what the next event would do after that move.
+        // For a Fate choice (Clockwork, Hold That Thought): what the next event would do after that move.
         function fateOutcome(pend, choice) {
-            if (!(choice === 'forward' || choice === 'rewind') || !pend.source || pend.source.id !== 'clockwork') return null;
+            const src = pend.source || {};
+            if (!/^(forward|rewind)(-2)?$/.test(String(choice)) || !(src.id === 'clockwork' || src.id === 'hold-that-thought')) return null;
             const tl = E.timeline(state);
             if (!tl.length) return null;
-            const n = Math.max(0, Math.min(state.options.fateMax, tl[0].turns + (choice === 'forward' ? -1 : 1)));
+            const pre = E.fatePreview(state, (/-2$/.test(choice) ? 2 : 1) * (/^forward/.test(choice) ? 1 : -1));
             const what = tl[0].type === 'reset' ? 'Reset' : 'New rule';
-            const whose = ((state.active + n) % 2) === ME ? 'your turn' : oppName + '\'s turn';
-            return el('small.b-choice-out', { text: n === 0 ? what + ' happens NOW' : what + ' in ' + n + ' turn' + (n === 1 ? '' : 's') + ' (' + whose + ')' });
+            return el('small.b-choice-out', { text: pre.now ? what + ' happens NOW' : what + ' in ' + roundsWord(pre.rounds) + ' (after ' + afterWho(tl[0].after) + ')' });
         }
 
         function renderRules() {
@@ -2317,7 +2317,7 @@
             // A Fate flip logs 'flip' and then the rule ('axiom' with no player): one tile, the rule.
             E.fullLog(state).forEach(ev => {
                 if (MOVES[ev.t] && !(ev.t === 'spark' && !/uses? the Spark/.test(ev.text || ''))) moves.push({ ev, after: [] });
-                else if (moves.length && !/^(turn|turn-end|round|draw|draw-axiom|axiom-play|flip|time)$/.test(ev.t)) {
+                else if (moves.length && !/^(turn|turn-end|round|draw|draw-axiom|axiom-play|flip|time|fate-move)$/.test(ev.t)) {
                     const text = visibleText(ev);
                     if (text) moves[moves.length - 1].after.push(text);
                 }

@@ -37,7 +37,7 @@
         },
         muskrat: {
             name: 'Muskrat Rocket', inspiredBy: 'Elon Musk', colour: 'imagination', rarity: 'uncommon', power: 8, cost: 6, attack: 5, health: 6,
-            ability: 'next-year', abilityText: 'Activate (1 energy): rewind the Fate track 2 spaces.',
+            ability: 'next-year', abilityText: 'Activate (1 energy): rewind the Fate track 2 rounds.',
             blurb: 'Mars by next year. Every year. Renames things at three in the morning.',
             lines: ['We land on the next node by next year. Probably.', 'I have renamed this puzzle X.', 'First principles! Also, vibes.'],
         },
@@ -165,7 +165,7 @@
         },
         kardashiant: {
             name: 'Kim Kardashiant', inspiredBy: 'Kim Kardashian', colour: 'perception', rarity: 'common', power: 3, cost: 1, attack: 1, health: 2,
-            ability: 'filter', abilityText: 'Activate (1 energy): move the Fate track 2 spaces closer.',
+            ability: 'filter', abilityText: 'Activate (1 energy): move the Fate track 2 rounds closer.',
             blurb: 'A tiny ant whose selfie filter makes her look enormous. Seeing is not knowing.',
             lines: ['Hold on, let me find my light.', 'With the filter I am basically a lion.', 'Is this real? Does it matter? It got likes.'],
         },

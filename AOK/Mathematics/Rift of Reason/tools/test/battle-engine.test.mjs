@@ -31,7 +31,9 @@ test('opening hands: first player deck cards + an axiom; second player one more 
         assert.equal(s.players[1 - who].spark, true);
         assert.equal(s.players[who].capacity, 1);
         assert.equal(s.players[who].energy, 1);
-        assert.equal(s.axioms.deck.length, 20 - 2);
+        // Fate sets its first flip's card aside at once: out of the deck, in no hand.
+        assert.ok(s.fate.next);
+        assert.equal(s.axioms.deck.length, 20 - 2 - 1);
     }
 });
 
@@ -121,7 +123,7 @@ test('the axiom deck reshuffles its discard pile when it runs out', () => {
     const d = act(s, { type: 'draw', choice: 'axiom' });
     assert.equal(d.players[0].axHand.length, 1);
     assert.equal(d.axioms.discard.length, 0);
-    assert.equal(d.axioms.deck.length, 19);
+    assert.equal(d.axioms.deck.length, 18, 'twenty, less the card Fate set aside and the one drawn');
 });
 
 // ---- energy and turns -------------------------------------------------------------------
@@ -357,30 +359,34 @@ test('the turn limit ends the battle in a draw', () => {
 
 // ---- Fate track ---------------------------------------------------------------------------------
 
-test('Fate: End turn moves it one closer; forward/rewind (timeDraws) move one, clamped to 0..12', () => {
+test('Fate: a full round moves it one closer; forward/rewind (timeDraws) move one round, clamped to 0..fateMax', () => {
     let s = fresh({ openHand: [0, 0], openAxioms: 0, timeDraws: true });
     assert.equal(s.fate.until, E.DEFAULTS.fateStart);
+    assert.equal(E.DEFAULTS.fateMax, 6, 'six rounds (the old twelve turns)');
     let d = act(s, { type: 'draw', choice: 'rewind' });
     assert.equal(d.fate.until, E.DEFAULTS.fateStart + 1);
     d = act(d, { type: 'end' });
-    assert.equal(d.fate.until, E.DEFAULTS.fateStart);
-    const top = E.cloneState(s);
-    top.fate.until = 12;
-    assert.equal(act(top, { type: 'draw', choice: 'rewind' }).fate.until, 12, 'clamped at 12');
-    d = act(s, { type: 'draw', choice: 'deck' });
-    d = act(d, { type: 'end' });
-    assert.equal(d.fate.until, E.DEFAULTS.fateStart - 1);
+    assert.equal(d.fate.until, E.DEFAULTS.fateStart + 1, 'the first player\'s End turn does not move it');
     d = act(d, { type: 'draw', choice: 'deck' });
     d = act(d, { type: 'end' });
-    assert.equal(d.fate.until, E.DEFAULTS.fateStart - 2, 'exactly one space per End turn');
-    assert.equal(E.timeline(s)[0].turns, s.fate.until);
+    assert.equal(d.fate.until, E.DEFAULTS.fateStart, 'the second player\'s End turn closes the round');
+    const top = E.cloneState(s);
+    top.fate.until = E.DEFAULTS.fateMax;
+    assert.equal(act(top, { type: 'draw', choice: 'rewind' }).fate.until, E.DEFAULTS.fateMax, 'clamped');
+    for (let r = 1; r <= 2; r++) {
+        for (let k = 0; k < 2; k++) { d = act(d, { type: 'draw', choice: 'deck' }); d = act(d, { type: 'end' }); }
+        assert.equal(d.fate.until, E.DEFAULTS.fateStart - r, 'exactly one space per round');
+    }
+    assert.equal(E.timeline(s)[0].rounds, s.fate.until);
+    assert.equal(E.timeline(s)[0].turns, 2 * s.fate.until);
     assert.equal(E.timeline(s)[0].type, 'flip');
     assert.equal(E.timeline(s)[1].type, 'reset');
 });
 
-test('Fate flips the top shared axiom at zero, then resets every rule six spaces later', () => {
+test('Fate flips its set-aside axiom at zero, then resets every rule a gap later', () => {
     let s = fresh({ openHand: [0, 0], openAxioms: 0, fateStart: 1, timeDraws: true }, { axiomDeck: ['haste', 'underdog', 'mercy'] });
-    s.axioms.deck = ['haste', 'underdog', 'mercy'];
+    s.fate.next = 'haste';
+    s.axioms.deck = ['underdog', 'mercy'];
     s = act(s, { type: 'draw', choice: 'forward' });
     assert.equal(s.axioms.active.attacks, 'haste');
     assert.equal(s.fate.until, E.DEFAULTS.fateGap);
@@ -388,6 +394,9 @@ test('Fate flips the top shared axiom at zero, then resets every rule six spaces
     assert.ok(s.lastEvents.some(e => e.t === 'flip'));
     rule(s, 'underdog');
     s.fate.until = 1;
+    s = act(s, { type: 'end' });
+    assert.equal(s.axioms.active.combat, 'underdog', 'only the first player\'s turn is over');
+    s = act(s, { type: 'draw', choice: 'deck' });
     s = act(s, { type: 'end' });
     same(s.axioms.active, {});
     assert.ok(s.axioms.discard.includes('haste') && s.axioms.discard.includes('underdog'));

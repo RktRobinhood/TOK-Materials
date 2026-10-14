@@ -233,18 +233,18 @@
         },
         'hold-that-thought': {
             name: 'Hold That Thought', colour: 'memory', kind: 'other', cost: 3, recharge: 2,
-            text: 'Move the Fate track 1 space closer or further away. Draw a card.',
-            deeper: 'Move the Fate track up to 2 spaces closer or further away. Draw a card.',
+            text: 'Move the Fate track 1 round closer or further away. Draw a card.',
+            deeper: 'Move the Fate track up to 2 rounds closer or further away. Draw a card.',
             broader: 'Also restore 1 heart.',
             usable: s => !!s.options.timeline,
             run(api, p, target, m) {
                 const options = m.deeper ? ['forward-2', 'forward', 'rewind', 'rewind-2'] : ['forward', 'rewind'];
-                const labels = { forward: 'Fate 1 space closer', rewind: 'Fate 1 space further away', 'forward-2': 'Fate 2 spaces closer', 'rewind-2': 'Fate 2 spaces further away' };
+                const labels = { forward: 'Fate 1 round closer', rewind: 'Fate 1 round further away', 'forward-2': 'Fate 2 rounds closer', 'rewind-2': 'Fate 2 rounds further away' };
                 api.ask({ player: p, kind: 'option', auto: false, options, labels, prompt: 'Hold That Thought: which way does Fate move?', source: { type: 'power', id: 'hold-that-thought' } });
             },
             choose(api, p, choice, req, m) {
                 const n = /-2$/.test(choice) ? 2 : 1, closer = /^forward/.test(choice);
-                api.emit({ t: 'power', player: p, text: 'Hold That Thought: Fate moves ' + n + ' space' + (n === 1 ? '' : 's') + ' ' + (closer ? 'closer.' : 'further away.') });
+                api.emit({ t: 'power', player: p, text: 'Hold That Thought: Fate moves ' + n + ' round' + (n === 1 ? '' : 's') + ' ' + (closer ? 'closer.' : 'further away.') });
                 api.shiftFate(closer ? n : -n);
                 api.draw(p);
                 if (m.broader) {

@@ -54,8 +54,8 @@
                 { say: 'I played Khaby Llame. See his silver shield frame? That means Guard.' },
                 { type: 'end' }] },
         { title: 'The Fate track', label: 'Draw from your deck',
-            text: 'This is the Fate track. Every turn it moves one step. It reached NOW, so a rule changed: creatures cost 1 less. Now draw.',
-            expect: { type: 'draw', choice: 'deck' }, replies: [{ say: 'In 6 turns, Fate comes back and resets all rules.' }] },
+            text: 'This is the Fate track. After each round, your turn and then mine, it moves one step. It reached NOW, so a rule changed: creatures cost 1 less. Now draw.',
+            expect: { type: 'draw', choice: 'deck' }, replies: [{ say: 'In 3 rounds, Fate comes back and resets all rules.' }] },
         { title: 'Guard comes first', label: 'Attack Khaby Llame',
             text: 'You want to hit me, but Khaby Llame has Guard. While he stands, attacks must hit him first: only Khaby glows. Drag Astrophysicat onto Khaby.',
             expect: { type: 'attack', cid: 'p0c1', target: 'p1c0' },
@@ -84,7 +84,7 @@
             text: 'Tactic cards work once. Counterexample deals 3 damage. Khaby keeps hitting you, and Shakirattle is Elusive, so aim at Khaby Llame.',
             expect: { type: 'play', cid: 'p0t0', target: 'p1c0' },
             replies: [{ say: 'Khaby is defeated. That was your first card. You can play 2 cards each turn.' },
-                { say: 'One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 turns sooner.' }] },
+                { say: 'One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.' }] },
         { title: 'Change a rule', label: 'Play the Underdog rule',
             text: 'A rule card changes a rule for BOTH players. Underdog: in a fight, only the LOWER attack hits. Drag it to the middle row.',
             expect: { type: 'axiom', choice: 'underdog' }, replies: [], compare: ['p0c1', 'p1c1'] },
@@ -113,7 +113,7 @@
             open: true,
             // Two hints: first the idea, later the click (so the learner can still find it alone).
             hint: 'Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?',
-            hint2: 'Kim\'s Filter (1 energy) brings the Reset 2 turns sooner. Click Kim, then press Activate.',
+            hint2: 'Kim\'s Filter (1 energy) brings the Reset 2 rounds sooner. Click Kim, then press Activate.',
             expect: { type: 'activate', cid: 'p0c0', ability: 'filter' },
             // Tempting, but under The Last Shall Be First it would help Granny: the screen stops it and says why.
             trap: { expect: { type: 'attack', target: 'h1' }, card: 'reverse-hearts', title: 'Careful!',
@@ -153,11 +153,13 @@
                 { id: 'you', name: 'You', team: team(YOU, 'lesson-you-'), tactics: ['counterexample', 'second-wind', 'stand-firm'], hearts: 6, power: power || null },
                 { id: 'granny', name: 'Granny Axiom', team: team(GRANNY, 'lesson-granny-'), tactics: [], hearts: 6 },
             ],
-            // Opening rule cards: Underdog for you, the reversed victory rule for Granny. The first
-            // Fate flip (turn 5) is Small Assumptions (creatures cost 1 less): easy to see on the blue cost
-            // numbers. The reset is due on turn 11; Kim's Filter on turn 9 brings it forward.
+            // Opening rule cards: Underdog for you, the reversed victory rule for Granny. Fate counts
+            // rounds (your turn, then Granny's). Its first flip is set aside at the start: Small
+            // Assumptions (creatures cost 1 less), active from round 3 (turn 5) and easy to see on the
+            // blue cost numbers. The reset is due as round 6 (turn 11) starts; Kim's Filter on turn 9
+            // (round 5, 1 round left) brings it forward.
             axiomDeck: ['underdog', 'reverse-hearts', 'thrift', 'normal-hearts', 'doubt', 'arrival'],
-            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 4, fateGap: 6, spark: false,
+            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 2, fateGap: 3, spark: false,
                 openHand: [3, 3], openAxioms: 1, deckSize: 9, minCreatures: 1, hearts: 6 },
         };
     }
@@ -234,7 +236,7 @@
                 { name: 'Granny Axiom', team: team(['muskrat', 'tremendoodle', 'muskrat', 'tremendoodle', 'muskrat', 'tremendoodle'], 'lesson-granny-'), tactics: [], hearts: 2, consumables: { 'extra-energy': 1 } },
             ],
             axiomDeck: ['normal-hearts', 'reverse-hearts', 'thrift', 'underdog', 'normal-hearts'],
-            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 2, fateGap: 4, spark: false,
+            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 1, fateGap: 2, spark: false,
                 openHand: [1, 1], openAxioms: 1, deckSize: 6, minCreatures: 1 },
         };
     }

@@ -182,8 +182,7 @@
 .b-fate-track:not(.art) .b-fate-groove { height: 28px; border-radius: 8px; background: linear-gradient(#2a2238, #463a5c); border: 2px solid #b08a3a; }
 .b-fs { position: relative; height: 100%; display: grid; place-items: center; }
 .b-fs::before { content: ''; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; background: #1b1428; }
-.b-fs.mine::before { border-color: var(--rift); }
-.b-fs.theirs::before { border-color: #ff8a6a; }
+.b-fs.round::before { border-color: var(--gold); }   /* one space = one round (both players) */
 .b-fs.past::before { opacity: 0.4; }
 .b-fs.now::before { display: none; }
 .b-fs > * { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
@@ -957,7 +956,8 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-fate-far.none { min-width: 0; }
 .b-far-arrow { font-size: 16px; font-weight: 800; color: var(--gold); opacity: 0.8; }
 .b-fate-far .b-fev { position: static; transform: none; }
-.b-fs:last-child > .b-fev { transform: translate(-50%, -50%); }
+/* The last round space: the icon stays on its space and the label ends inside the track (not clipped). */
+.b-fs:last-child > .b-fev { align-items: flex-end; transform: translate(calc(-100% + 22px), -50%); }
 /* A card bent time: the summary flashes once (colour only, no movement). */
 .b-fate-sum.bent strong { animation: b-bent 1.6s ease-out; }
 @keyframes b-bent { 0%, 40% { color: #fff; text-shadow: 0 0 10px var(--rift); } }
