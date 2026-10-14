@@ -74,7 +74,9 @@ test('ten axiom cards with at most two copies each; both contributions may bring
     assert.equal(shared.length, 20);
     assert.equal(shared.filter(id => id === 'mercy').length, 4);
     const s = E.createBattle({ seed: 'axioms', players: [{ team: [], axioms: mine }, { team: [], axioms: mine }], options: { shuffleAxioms: false, openAxioms: 0 } });
-    assert.equal(s.axioms.deck.filter(id => id === 'mercy').length, 4);
+    // Fate may set one rule card aside for its announced flip (#116); it is still one of the four.
+    const held = [s.fate.next].concat(s.axioms.deck).filter(id => id === 'mercy').length;
+    assert.equal(held, 4);
 });
 
 test('a legal colour tactic casts with no matching creature on the board, and resolves', () => {
