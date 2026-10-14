@@ -96,13 +96,13 @@
             name: 'Look It Up', cost: 1,
             text: 'Take the top card of the shared rule deck into your hand.',
             flavour: 'Check the source before you argue.',
-            // Needs a card in the shared deck or its discard (reshuffled), and room in the hand.
-            usable: (s, p, H) => (s.axioms.deck.length > 0 || s.axioms.discard.length > 0) && H.handRoom(s, p, 1, 1),
+            // Needs a card in the shared deck (finite: used rules never come back, #117) and room in the hand.
+            usable: (s, p, H) => s.axioms.deck.length > 0 && H.handRoom(s, p, 1, 1),
             run(api, p) {
                 // Announce first so the log reads in order before the private "You take…" line.
                 if (!api.handRoom(p)) { api.emit({ t: 'tactic', text: 'Look It Up: the hand is full, so no rule card is taken.' }); return; }
                 const A = api.s.axioms;
-                if (!A.deck.length && !A.discard.length) { api.emit({ t: 'tactic', text: 'Look It Up: the shared rule deck is empty.' }); return; }
+                if (!A.deck.length) { api.emit({ t: 'tactic', text: 'Look It Up: the shared rule deck is empty.' }); return; }
                 api.emit({ t: 'tactic', text: 'Look It Up: take a rule card.' });
                 api.drawAxiom(p);
             },

@@ -120,13 +120,15 @@ test('Second Opinion (study) draws two cards from the deck or the axiom deck', (
     assert.equal(act(s, { type: 'draw', choice: 'axiom' }).players[0].axHand.length, 2);
 });
 
-test('the axiom deck reshuffles its discard pile when it runs out', () => {
+test('the shared axiom deck is finite: its discard pile never shuffles back in (#117)', () => {
     const s = fresh({ openHand: [0, 0], openAxioms: 0 });
     s.axioms.discard = s.axioms.deck.splice(0);
-    const d = act(s, { type: 'draw', choice: 'axiom' });
-    assert.equal(d.players[0].axHand.length, 1);
-    assert.equal(d.axioms.discard.length, 0);
-    assert.equal(d.axioms.deck.length, 18, 'twenty, less the card Fate set aside and the one drawn');
+    const used = plain(s.axioms.discard);
+    same(E.legalActions(s).map(a => a.choice), ['deck'], 'no rule card draw from the discard');
+    const d = act(s, { type: 'draw', choice: 'deck' });
+    same(d.axioms.deck, []);
+    same(d.axioms.discard, used, 'used rules stay used');
+    assert.equal(d.players[0].hearts, s.players[0].hearts, 'an empty shared deck alone is harmless');
 });
 
 // ---- energy and turns -------------------------------------------------------------------

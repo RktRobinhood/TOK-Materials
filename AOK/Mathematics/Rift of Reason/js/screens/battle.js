@@ -1388,7 +1388,35 @@
                 el('div', { text: 'Deck ' + P.deck.length }),
                 el('div', { text: 'Hand ' + (P.hand.length + P.axHand.length) }),
                 el('div', { text: 'Discard ' + P.discard.length }),
+                exhaustEl(pi),
             ]);
+        }
+        // Exhaustion (#117): with this player's deck and the rule deck both empty, their next draw
+        // costs hearts. Shown on both hero rows, so the coming damage is known before it happens.
+        function exhaustNote(pi) {
+            const x = E.exhaustion ? E.exhaustion(state, pi) : null;
+            if (!x || !x.due) return null;
+            const who = pi === ME ? 'You lose' : oppName + ' loses';
+            const hearts = x.damage + ' heart' + (x.damage === 1 ? '' : 's');
+            const goal = x.wins ? ' Reversed Win rule: that reaches zero and wins!' : x.lethal ? ' That is the last heart.' : x.reversed ? ' Reversed Win rule: losing hearts helps.' : '';
+            return { x, hearts, short: 'Empty: −' + x.damage + ' ❤',
+                // On the hero rows, before the draw step.
+                text: (pi === ME ? 'Your' : oppName + '\'s') + ' deck and the rule deck are empty. ' + who + ' ' + hearts + ' at ' + (pi === ME ? 'your' : 'their') + ' next draw (then ' + (x.damage + 1) + ').' + goal,
+                // On the draw controls, at the draw step itself: one short line, the details in its tip.
+                badge: 'Both decks empty: −' + x.damage + ' ❤' + (x.wins ? ', you win' : ''),
+                now: 'Exhaustion: both decks are empty. ' + who + ' ' + hearts + ' now.' + goal };
+        }
+        function exhaustEl(pi) {
+            const n = exhaustNote(pi);
+            if (!n) return null;
+            const node = el('div.b-exhaust' + (n.x.wins ? '.wins' : n.x.lethal ? '.lethal' : ''), { tabindex: 0, text: n.short, 'aria-label': 'Exhaustion. ' + n.text });
+            tipFor(node, 'exhaust:' + pi, 'Exhaustion', n.text);
+            return node;
+        }
+        function exhaustWarnEl(n) {
+            const node = el('div.b-draw-warn' + (n.x.wins ? '.wins' : ''), { role: 'status', tabindex: 0, text: n.badge, 'aria-label': n.now });
+            tipFor(node, 'draw:exhaust', 'Exhaustion', n.now);
+            return node;
         }
 
         // ---- rendering ----
@@ -1721,7 +1749,7 @@
             paintFate(0);
             const deckN = state.axioms.deck.length;
             const axdeck = el('div.b-axdeck', { tabindex: 0, 'aria-label': 'Shared axiom deck: ' + deckN + ' rule cards' }, [cardBack(true), el('span', { text: String(deckN) })]);
-            tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it.' + (state.fate && state.fate.next ? ' Fate has set 1 more aside for its next free rule.' : ''));
+            tipFor(axdeck, 'axdeck', 'Shared rule deck', deckN + ' rule cards. Both players draw from it. Used rules do not come back.' + (state.fate && state.fate.next ? ' Fate has set 1 more aside for its next free rule.' : ''));
             put(dom.lane, dom.fate, dom.prompt = el('div.b-prompt', { role: 'status', 'aria-live': 'polite' }), el('div.b-lane-right', {}, [axdeck]), dom.draw, dom.end);
         }
 
@@ -1802,7 +1830,7 @@
             // The second line: what it will be (the set-aside card), and whose End turn brings it.
             const nextAx = next.id && AX[next.id];
             const flipDetail = nextAx ? ruleWords(nextAx) + (E.axiomWouldChange && !E.axiomWouldChange(state, next.id) ? ' (no change)' : '')
-                : state.axioms.deck.length || state.axioms.discard.length ? 'no rule card set aside yet' : 'no rule card left to flip';
+                : state.axioms.deck.length ? 'no rule card set aside yet' : 'no rule card left to flip';   // finite deck (#117)
             const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : flipDetail) + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
             // Beyond the reel: the nearest event further than three rounds away, with its count.
             const farIdx = tl.findIndex(ev => ev.rounds > FATE_AHEAD);
@@ -1866,7 +1894,7 @@
             const reset = ev.type === 'reset';
             const known = !reset && i === 0 && ev.id && AX[ev.id];
             const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' ' + fateWhen(ev) + '.';
-            const left = state.axioms.deck.length || state.axioms.discard.length;
+            const left = state.axioms.deck.length;   // used rules never come back (#117)
             const effect = reset ? 'Every active rule card is removed. All axioms return to the basic rules for BOTH players.'
                 : known ? known.name + ': ' + known.text
                 : i === 0 && !left ? 'No rule card is left to flip. Current axioms stay in play.'
@@ -2100,6 +2128,7 @@
                 if (ev.t === 'power-use' && ev.player === OPP) bits.push('used ' + powerName(ev.id) + (ev.target && state.cards[ev.target] ? ' on ' + targetName(ev.target) : ''));
                 if (ev.t === 'axiom' && AX[ev.id]) bits.push(AX[ev.id].basic ? ruleWords(AX[ev.id]) + ' (as before)' : 'new rule: ' + ruleWords(AX[ev.id]));
                 if (ev.t === 'reset') bits.push('all rules reset');
+                if (ev.t === 'exhaustion' && ev.player === OPP) bits.push('lost ' + ev.amount + ' ❤ to exhaustion');
             });
             if (fell.length) bits.unshift(fell.join(', ') + ' defeated');
             if (played.length) bits.unshift('played ' + played.join(', '));
@@ -2194,7 +2223,7 @@
             const sooner = tl.length ? E.fatePreview(state, 1) : null, later = tl.length ? E.fatePreview(state, -1) : null;
             const why = {
                 deck: full ? 'Your hand is full.' : !P.deck.length ? 'Your deck is empty.' : P.deck.length + ' cards left',
-                axiom: full ? 'Your hand is full.' : !(state.axioms.deck.length || state.axioms.discard.length) ? 'The rule deck is empty.' : axiomDrawNote(),
+                axiom: full ? 'Your hand is full.' : !state.axioms.deck.length ? 'The rule deck is empty. Used rules do not come back.' : axiomDrawNote(),
                 forward: noFate || (sooner ? after(sooner) : ''),
                 rewind: noFate || (later ? after(later) : ''),
             };
@@ -2208,7 +2237,11 @@
                 rewind: !noFate && later ? when(later) : '',
             };
             const none = L.find(x => x.type === 'draw' && x.choice === 'none');
-            put(dom.draw, el('div.b-draw-title', {}, [el('strong', { text: 'Choose' }), el('span', { text: 'one draw' })]), el('div.b-draw-buttons', {}, ['deck', 'axiom'].concat(state.options.timeDraws ? ['forward', 'rewind'] : []).map(choice => {
+            // Exhaustion (#117): both decks empty, so this draw step costs hearts whatever is chosen.
+            const tired = exhaustNote(ME);
+            put(dom.draw, el('div.b-draw-title', {}, [el('strong', { text: 'Choose' }), el('span', { text: 'one draw' })]),
+                tired ? exhaustWarnEl(tired) : null,
+                el('div.b-draw-buttons', {}, ['deck', 'axiom'].concat(state.options.timeDraws ? ['forward', 'rewind'] : []).map(choice => {
                 const a = L.find(x => x.type === 'draw' && x.choice === choice);
                 const possible = choices.includes(choice);
                 const lessonOnly = !a && possible && guide && st;
@@ -2232,7 +2265,7 @@
                 const topAx = choice === 'axiom' && a ? (Rift.data.axioms || {})[state.axioms.deck[0]] : null;
                 return el('div.b-draw-opt', {}, [b, el('span.b-draw-label', { 'aria-hidden': 'true', onclick: () => b.click() }, [DRAW_LABEL[choice],
                     topAx ? el('small', { text: ruleWords(topAx) }) : choice === 'deck' && a ? el('small', { text: 'creature or tactic' }) : null])]);
-            }).concat(none ? [button('Nothing to draw: continue', () => act(none), 'primary')] : [])));
+            }).concat(none ? [button(tired ? 'Continue: lose ' + tired.hearts : 'Nothing to draw: continue', () => act(none), 'primary')] : [])));
             // What the opponent's turn did to me, in one line, beside the draw choice.
             const recap = guide ? '' : theirTurnRecap();
             ui.recapTurn = state.turn;

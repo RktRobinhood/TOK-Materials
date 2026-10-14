@@ -88,11 +88,10 @@
             deeper: 'Look at the top 4 rule cards. Take one into your hand and put the others back in any order.',
             broader: 'Also put one of the others at the bottom of the rule deck.',
             usable(s, p, H) {
-                const A = s.axioms, have = A.deck.length || A.discard.length;
+                const have = s.axioms.deck.length;   // finite: used rules never come back (#117)
                 return have >= 2 || (have >= 1 && H.handRoom(s, p, 1));
             },
             run(api, p, target, m) {
-                api.refillAxioms();
                 const n = Math.min(m.deeper ? 4 : 3, api.s.axioms.deck.length);
                 const top = api.s.axioms.deck.slice(0, n);
                 api.emit({ t: 'power', player: p, privateTo: p, text: 'Foresee: you look at the top ' + n + ' rule cards: ' + list(top.map(axName)) + '.',

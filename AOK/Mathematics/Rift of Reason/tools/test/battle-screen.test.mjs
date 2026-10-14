@@ -661,13 +661,15 @@ test('Fate inspection explains timing in rounds and the set-aside flip, which a 
 });
 
 test('Fate inspection distinguishes reset, a flip still waiting for a card and empty piles', () => {
-    for (const [events, discard, pattern] of [
-        [1, [], /Reset at the end of this round, after Dummy's turn.*All axioms return to the basic rules/],
-        [0, ['thrift', 'luxury'], /No rule card is set aside yet\. Fate sets one aside from the shared deck when the next turn starts/],
-        [0, [], /No rule card is left to flip.*Current axioms stay in play/],
+    // The shared deck is finite (#117): rule cards in the discard never come back for Fate.
+    for (const [events, deck, discard, pattern] of [
+        [1, [], [], /Reset at the end of this round, after Dummy's turn.*All axioms return to the basic rules/],
+        [0, ['thrift', 'luxury'], [], /No rule card is set aside yet\. Fate sets one aside from the shared deck when the next turn starts/],
+        [0, [], ['thrift', 'luxury'], /No rule card is left to flip.*Current axioms stay in play/],
+        [0, [], [], /No rule card is left to flip.*Current axioms stay in play/],
     ]) {
         const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => {
-            s.fate.until = 1; s.fate.events = events; s.fate.next = null; s.axioms.deck = []; s.axioms.discard = discard;
+            s.fate.until = 1; s.fate.events = events; s.fate.next = null; s.axioms.deck = deck; s.axioms.discard = discard;
         });
         const marker = t.$('.b-fev');
         marker.click();
@@ -675,6 +677,38 @@ test('Fate inspection distinguishes reset, a flip still waiting for a card and e
         assert.match(marker.getAttribute('aria-label'), pattern);
         t.handle.destroy();
     }
+});
+
+test('exhaustion: the draw controls and both hero rows show the coming heart loss and its cause (#117)', () => {
+    const exhausted = (hearts, reversed) => prepared({ me: ['kardashiant', 'kardashiant'], opp: ['kardashiant', 'kardashiant'], phase: 'draw' }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+        s.players.forEach(P => { P.discard.push(...P.deck.splice(0)); });
+        s.axioms.discard.push(...s.axioms.deck.splice(0)); s.fate.next = null;
+        s.players[0].exhaustion = 1;
+        s.players[0].hearts = hearts;
+        if (reversed) s.axioms.active = { victory: 'reverse-hearts' };
+    });
+    const t = exhausted(10);
+    const warn = t.$('.b-draw-warn');
+    assert.ok(warn, 'a warning on the draw controls');
+    assert.equal(warn.textContent, 'Both decks empty: −2 ❤');
+    assert.equal(warn.getAttribute('aria-label'), 'Exhaustion: both decks are empty. You lose 2 hearts now.');
+    const rows = t.root.querySelectorAll('.b-exhaust').map(n => n.textContent);
+    assert.deepEqual(rows.sort(), ['Empty: −1 ❤', 'Empty: −2 ❤'], 'both hero rows show their next exhaustion');
+    assert.match(t.root.querySelectorAll('.b-exhaust').map(n => n.getAttribute('aria-label')).join(' '), /Dummy's deck and the rule deck are empty\. Dummy loses 1 heart at their next draw/);
+    const go = t.root.querySelectorAll('.b-draw button').find(b => /Continue: lose 2 hearts/.test(b.textContent));
+    assert.ok(go, 'the continue button names the cost');
+    go.click();
+    assert.equal(t.handle.state.players[0].hearts, 8);
+    assert.equal(t.handle.state.players[0].exhaustion, 2);
+    t.handle.destroy();
+    // Reversed Win rule: the same loss reaches zero and wins, and the warning says so.
+    assert.equal(t.Rift.data.axioms['reverse-hearts'].category, 'victory');
+    const r = exhausted(2, true);
+    assert.ok(r.$('.b-draw-warn').classList.contains('wins'));
+    assert.equal(r.$('.b-draw-warn').textContent, 'Both decks empty: −2 ❤, you win');
+    assert.match(r.$('.b-draw-warn').getAttribute('aria-label'), /You lose 2 hearts now\. Reversed Win rule: that reaches zero and wins!/);
+    r.handle.destroy();
 });
 
 test('changed rules: gold "Changed" tiles beside the core tiles, and each tile shows its card', () => {

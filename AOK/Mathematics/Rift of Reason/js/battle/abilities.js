@@ -309,7 +309,6 @@
             text: 'Entrance: choose one of the next five shared axioms. It takes effect now.',
             entrance: {
                 run(api, card) {
-                    api.refillAxioms();
                     const options = api.s.axioms.deck.slice(0, 5);
                     if (!api.ask({ player: card.controller, kind: 'axiom', options, auto: false, prompt: 'Choose a rule. It takes effect for both players now.', source: { type: 'ability', id: 'axiomatic', cid: card.cid } })) {
                         api.emit({ t: 'fizzle', cid: card.cid, text: 'No axioms left to choose.' });

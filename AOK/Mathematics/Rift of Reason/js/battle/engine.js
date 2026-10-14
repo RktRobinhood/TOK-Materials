@@ -9,6 +9,11 @@
  * abilities (uses that creature's attack), and End turn. Energy capacity grows
  * 1→10 and refills. The Fate track flips/resets the shared rules.
  *
+ * The shared axiom deck is FINITE (teacher, 14 Oct, #117): played, replaced, reset and discarded
+ * rule cards go to state.axioms.discard and never shuffle back in. Exhaustion: at a player's normal
+ * draw step, when their own deck AND the shared axiom deck are both empty, they lose 1 heart, then 2,
+ * then 3… (players[p].exhaustion counts the steps so far). See exhaustion(state, p) and doDraw.
+ *
  * API (Rift.Battle.Engine):
  *   createBattle({ seed, players: [{ id, name, team: [instances], tactics?: [ids], axioms?: [ids],
  *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] }, ownAxioms?: [ids] }], axiomDeck?: [ids], options })      → state
@@ -21,6 +26,7 @@
  *   describe(state, cid) → everything a card face needs (name, cost, attack, health, keywords, lines…)
  *   attackOf / healthOf / keywordsOf / canAttack / attackTargets / activations / targetsFor / fightPreview
  *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p)
+ *   exhaustion(state, p) → { due, damage, count, reversed, lethal, wins } for the draw controls
  *   activeAxioms(state) → every active rule card (a "basic" one has ax.basic: it restates a default rule)
  *   changedAxioms(state) → only the active rule cards that change a basic rule
  *   cardName(state, cid) → plain name;  logName(state, cid) → "your X" / "Anna's X" when both boards have an X
@@ -499,7 +505,8 @@
         const limit = r.attackLimit === Infinity ? '' : ' At most ' + r.attackLimit + ' attack' + (r.attackLimit === 1 ? '' : 's') + ' per player per turn.';
         return [
             ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the enemy hero to zero hearts.'],
-            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Play up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' cards.'],
+            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Play up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' cards.'
+                + ' Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'],
             ['Attacks', (r.attacksPerCreature > 1 ? 'Each ready creature may attack twice.' : 'Each ready creature may attack once.') + limit + ' New creatures wait a turn unless Swift' + (r.arrivalReady ? ' (now: all can act at once).' : '.')],
             ['Combat', (combat ? combat.text : 'Both creatures deal damage equal to their attack.') + ' Damage stays' + (r.heal ? ' until the controller\'s next turn (healing rule).' : '.')],
             ['Guard', r.ignoreGuard ? 'Guard is ignored right now.' : 'If the enemy has Guard creatures, attack one of them first.'],
@@ -576,7 +583,7 @@
         const room = handCount(P) < s.options.handLimit;
         const out = [];
         if (room && P.deck.length) out.push('deck');
-        if (room && (s.axioms.deck.length || s.axioms.discard.length)) out.push('axiom');
+        if (room && s.axioms.deck.length) out.push('axiom');   // finite: the discard never refills it (#117)
         // Time draws (move Fate instead of drawing) are off by default: the teacher wants Fate to move
         // only forward, 1 space per turn, and be bent only by cards and abilities.
         if (s.options.timeline && s.options.timeDraws) out.push('forward', 'rewind');
@@ -753,7 +760,7 @@
                 id: pl.id || ('p' + i), name: pl.name || (i === 0 ? 'You' : 'Opponent'),
                 hearts, maxHearts: hearts, energy: 0, capacity: 0, spark: false,
                 deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], armed: [], discard: [],
-                playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [],
+                playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [], exhaustion: 0,
                 consumables: Object.assign({}, cons),
                 bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
                 power: powerSetup(pl.power), tax: 0, sight: [],
@@ -862,7 +869,6 @@
             shiftFate: n => shiftFate(G, n),
             setAxiom: (id, by) => setAxiom(G, id, by),
             takeAxiom(id) { removeFrom(s.axioms.deck, id); },
-            refillAxioms: () => refillAxioms(G),
             ask: req => ask(G, req),
             attack: cid => attackOf(s, cid),
             // Colour tactics (below).
@@ -1066,7 +1072,6 @@
 
     function drawAxiom(G, p, quiet) {
         const s = G.s, P = s.players[p];
-        refillAxioms(G);
         if (!s.axioms.deck.length || handCount(P) >= s.options.handLimit) return null;
         const id = s.axioms.deck.shift();
         P.axHand.push(id);
@@ -1145,8 +1150,33 @@
         }
     }
 
+    // Exhaustion (#117): the normal draw step of a player whose own deck AND the shared axiom deck are
+    // both empty costs hearts: 1, then 2, then 3… (players[p].exhaustion = steps so far, part of the
+    // plain battle state). The opponent's deck does not matter; a full hand alone is not exhaustion.
+    // Checked once per draw step before the choice, so a time draw neither dodges nor repeats it,
+    // and extra draws (Second Opinion, Fresh Start, Think It Over, tactics) never cause it. The hearts
+    // go through damageHero and checkHearts: the current Win rule decides, so under reversed hearts
+    // it can win the game, and both heroes at zero is the usual draw. It is not an attack, so the
+    // Hero-hits cap (heroDamageCap) does not shrink it.
+    const isExhausted = (s, p) => !s.players[p].deck.length && !s.axioms.deck.length;
+    // For the draw controls and the hero rows: what the next draw step of p would cost.
+    function exhaustion(s, p) {
+        const P = s.players[p], count = P.exhaustion || 0, damage = count + 1, reversed = !!rules(s).reverseHearts;
+        const lethal = P.hearts - damage <= 0;
+        return { due: isExhausted(s, p), damage, count, reversed, lethal, wins: lethal && reversed };
+    }
+    function exhaust(G, p) {
+        const s = G.s, P = s.players[p];
+        P.exhaustion = (P.exhaustion || 0) + 1;
+        const amount = P.exhaustion;
+        emit(G, { t: 'exhaustion', player: p, amount, text: 'Exhaustion: ' + possessive(s, p) + ' deck and the rule deck are empty.' });
+        damageHero(G, p, amount, null);
+        checkHearts(G);
+    }
+
     function doDraw(G, choice) {
         const s = G.s, p = s.active, n = rules(s).drawCount;
+        if (isExhausted(s, p)) { exhaust(G, p); if (s.winner != null) return; }
         if (choice === 'deck') { for (let i = 0; i < n; i++) draw(G, p); }
         else if (choice === 'axiom') { for (let i = 0; i < n; i++) drawAxiom(G, p); }
         else if (choice === 'forward' || choice === 'rewind') {
@@ -1227,7 +1257,7 @@
             emit(G, { t: 'reset', text: 'Fate reset: all rules return to the basics.' });
         } else {
             // An older state never set a card aside: it turns over the deck's top card, as before.
-            if (s.fate.next === undefined) { refillAxioms(G); s.fate.next = s.axioms.deck.length ? s.axioms.deck.shift() : null; }
+            if (s.fate.next === undefined) s.fate.next = s.axioms.deck.length ? s.axioms.deck.shift() : null;
             const id = s.fate.next;
             s.fate.next = null;
             if (id) { emit(G, { t: 'flip', id, text: 'Fate flips a free rule.' }); setAxiom(G, id, null); }
@@ -1239,19 +1269,15 @@
         cleanup(G);
     }
 
-    // When the next event is a flip, set its rule card aside now, publicly. A flip announced with no
-    // rule card left tries again at each turn start (a card may have reached the discard since).
+    // When the next event is a flip, set its rule card aside now, publicly. The shared deck is finite
+    // (#117: used rule cards never come back), so a flip announced with no rule card left stays empty:
+    // when it is due, Fate reports 'fate-empty' and the rules stay as they are. It still looks at each
+    // turn start, in case a card is put back on the deck.
     function announceFlip(G) {
         const s = G.s, A = s.axioms;
         if (!s.options.timeline || s.fate.events % 2 === 1 || s.fate.next) return;
-        refillAxioms(G);
         s.fate.next = A.deck.length ? A.deck.shift() : null;
         if (s.fate.next) emit(G, { t: 'fate-next', id: s.fate.next, text: 'Fate sets aside the next free rule: ' + axiomDefs()[s.fate.next].name + '.' });
-    }
-
-    function refillAxioms(G) {
-        const A = G.s.axioms;
-        if (!A.deck.length && A.discard.length) { A.deck = G.rng.shuffle(A.discard); A.discard = []; }
     }
 
     // by: the player who played the card, or null for a Fate flip.
@@ -1718,7 +1744,7 @@
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
-        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
+        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, exhaustion,
         rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
