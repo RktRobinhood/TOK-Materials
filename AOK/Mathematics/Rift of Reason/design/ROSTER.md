@@ -103,42 +103,42 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 
 | Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |
 |---|---|---|---|---|
-| Tom Squawk | Tom Scott | reason-premise-pigeon | reason / common | One folded blank field guide, wing indicating an odd doorway just outside the portrait. |
+| Tom Skink | Tom Scott | reason-premise-pigeon | reason / common | Front-facing low crouch, guide extended in one forefoot; head turns toward a doorway implied outside the image. |
 | Bill Ny-ant | Bill Nye | reason-axiom-ant | reason / common | The bow tie is the main recognition cue; a modest specimen tray is optional, not a second large silhouette. |
 | Mark Ro-beetle | Mark Rober | reason-proof-beetle | reason / common | One chunky repaired gadget held between its forelegs; simple bolt/clamp silhouette, no company logo. |
-| V-Squawk | Michael Stevens / Vsauce | reason-counterexample-crow | reason / common | One blank folded question card in a wing; head tilt carries the questioning joke. |
+| V-Squish | Michael Stevens / Vsauce | reason-counterexample-crow | reason / common | Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat. |
 | Hannah Frycoon | Hannah Fry | reason-parity-panda | reason / uncommon | One large paired-bead counter held level; two matching shapes visible at board size. |
 | Matt Parkbex | Matt Parker | reason-induction-ibex | reason / uncommon | One deliberately wonky triangular ruler; no tiny written equations or branded shirt. |
 | Derek Mullinx | Derek Muller / Veritasium | reason-logic-lynx | reason / uncommon | One large simple pulley wheel with a blue cord; avoid a cluttered laboratory. |
-| Destin Sandhoof | Destin Sandlin / Smarter Every Day | reason-guardrail-goat | reason / uncommon | One backward-looking gear wheel cradled against the chest; grounded stance. |
+| Destin Sandolin | Destin Sandlin / Smarter Every Day | reason-guardrail-goat | reason / uncommon | Curl partly around the shield, side-on right, peering over its rim with the tail forming a low brace. |
 | Grant Sanderstag | Grant Sanderson / 3Blue1Brown | reason-diagonal-deer | reason / rare | One curved chalk loop between its antlers; three blue beads and one brown bead are a subtle secondary motif, not a copied logo. |
-| James Mayron | James May | reason-inference-heron | reason / rare | One neatly folded blank engineering plan; deliberately slow-looking upright pose. |
-| Einbear | Albert Einstein | reason-boundary-bear | reason / mythic | One simple bent clock rim held like a puzzle; blank face, no equations to read. |
-| Turingtoise | Alan Turing | reason-theorem-tortoise | reason / legendary | One blank paper tape threaded through a simple shell-mounted reader; large folds, no readable code or war symbols. |
-| Dua Lupup | Dua Lipa | emotion-pulse-pup | emotion / common | One simple crimson stage jacket; one paw keeps the beat, no microphone required. |
+| James Mayfly | James May | reason-inference-heron | reason / rare | Front-facing hover, caliper jaws held just apart while the face studies the tiny gap. |
+| Ein-stone | Albert Einstein | reason-boundary-bear | reason / mythic | Left-facing braced kneel, shield tilted outward and one broad stone foot forward. |
+| Turingator | Alan Turing | reason-theorem-tortoise | reason / legendary | Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently. |
+| Dua Leapfrog | Dua Lipa | emotion-pulse-pup | emotion / common | A small diagonal leap toward the viewer, knees opened asymmetrically, face calmly confident. |
 | Simone Bearles | Simone Biles | emotion-courage-cub | emotion / common | One short balance-beam-shaped wooden practice block beside a planted foot, not a full scene. |
 | Kai Ceenat | Kai Cenat | emotion-spite-sprite | emotion / common | One oversized headset; paws lifted in a harmless startled reaction, no platform logo. |
 | Terry Chews | Terry Crews | emotion-cheer-chick | emotion / common | One wing gives an exaggerated thumbs-up-shaped encouragement; no human hands. |
 | Jeremy Clawson | Jeremy Clarkson | emotion-temper-tiger | emotion / uncommon | One tiny toy steering wheel held indignantly; expressive brow rather than a huge vehicle. |
 | Dolly Possum | Dolly Parton | emotion-bond-badger | emotion / uncommon | One blank little book held to its chest; a modest stage sparkle on the collar only. |
-| Jack Honksepticeye | Jacksepticeye | emotion-grudge-goose | emotion / uncommon | One plain headset; beak lifted for a final little honk, no copied eye logo. |
-| Greta Thunram | Greta Thunberg | emotion-resolve-ram | emotion / uncommon | One blank wooden placard held level; no slogans or political campaign branding. |
+| Jack Axoloticeye | Jacksepticeye | emotion-grudge-goose | emotion / uncommon | Lean back in a startled reaction, little feet spread and tail curling clear of the headset. |
+| Greta Thunbug | Greta Thunberg | emotion-resolve-ram | emotion / uncommon | Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer. |
 | Serenox | Serena Williams | emotion-outrage-ox | emotion / rare | One compact wooden racket silhouette; stable ready stance, no sponsor logos. |
-| LeBrondor | LeBron James | emotion-heartfire-hawk | emotion / rare | One small plain basketball tucked under a wing; no team badge or crown required. |
-| Pink Python | P!NK | emotion-stormheart-serpent | emotion / mythic | One simple aerial ribbon loop that remains attached to its body; no arena or scattered confetti. |
+| LeBrontosaurus | LeBron James | emotion-heartfire-hawk | emotion / rare | Side-on athletic step, ball offered in forefeet and the long neck bent to inspect it. |
+| Giannis Antetokudu | Giannis Antetokounmpo | emotion-stormheart-serpent | emotion / mythic | Rendered FRONT three-quarter; original pose intent in provenance. |
 | Pascalophant | Blaise Pascal | emotion-empathy-elephant | emotion / legendary | One blank paper heart folded beside a counting frame; choose the heart as the main70px cue. |
 | Nikkie de Jaguar | Nikkie de Jager / NikkieTutorials | perception-cue-cricket | perception / common | One broad makeup brush; eye accents remain creature markings, not a realistic face. |
 | James Randilynx | James Randi | perception-lens-lynx | perception / common | One empty folded sleeve opened for inspection; no copied stage logo. |
 | Steph Cawry | Stephen Curry | perception-focus-falcon | perception / common | One small plain basketball balanced against a wing. |
 | David Brine | David Blaine | perception-shadow-shrimp | perception / common | One plain blank playing card partly tucked into the cape. |
-| Steve Earwin | Steve Irwin | perception-scout-stoat | perception / uncommon | One folded field notebook; gentle ready-to-observe stance, no animal restraint scene. |
+| Nelly Koalda | Nelly Korda | perception-scout-stoat | perception / uncommon | Rendered LEFT three-quarter; original pose intent in provenance. |
 | Zach Wing | Zach King | perception-prism-puffin | perception / uncommon | One simple mirror panel with a painted green edge; one object, no film background. |
-| Marques Brownlynx | Marques Brownlee / MKBHD | perception-pattern-panther | perception / uncommon | One unbranded blank-screen handheld device at a deliberate inspection angle. |
+| Marques Brownleaf | Marques Brownlee / MKBHD | perception-pattern-panther | perception / uncommon | Side-on left, screen angled deliberately toward its face and one hind leg extended behind. |
 | Linus Sealbastian | Linus Sebastian | perception-signal-seal | perception / uncommon | One oversized loop of plain cable cradled against the body. |
 | Adam Savash | Adam Savage | perception-observer-octopus | perception / rare | One sturdy magnifying lens; remaining arms stay close so the silhouette reads at70px. |
-| Houdin-eagle | Harry Houdini | perception-exposure-eagle | perception / rare | One open padlock held clearly in a wing; no tied or submerged figure. |
-| Amelia Earhare | Amelia Earhart | perception-horizon-hare | perception / mythic | One folded blank flight chart held forward; ears and feet fully visible. |
-| Galileelk | Galileo Galilei | perception-true-sight-stag | perception / legendary | One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette. |
+| Houdini Wisp | Harry Houdini | perception-exposure-eagle | perception / rare | Float diagonally left into a cheeky half-bow, lock extended fully toward the viewer. |
+| Amelia Airgator | Amelia Earhart | perception-horizon-hare | perception / mythic | Bank diagonally left, short legs tucked, animal head looking back and compass held close to the chest; glider wings and tail entirely in frame. |
+| Galileon | Galileo Galilei | perception-true-sight-stag | perception / legendary | Rendered RIGHT low crouch; original pose intent in provenance. |
 | Jimmy Fowlon | Jimmy Fallon | language-question-quail | language / common | One oversized plain brass microphone offered with an inviting wing gesture. |
 | Emma Wordson | Emma Watson | language-comma-caterpillar | language / common | One closed blank book, not a wand or school crest. |
 | Ryan Georilla | Ryan George | language-label-lemur | language / common | One blank label stamp; one raised questioning brow. |
@@ -147,31 +147,31 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 | Susie Dentshell | Susie Dent | language-definition-dolphin | language / uncommon | One stout closed dictionary with a blank gold-edged cover held like a protective lectern. |
 | K-S-Ibis | KSI | language-debate-dingo | language / uncommon | One plain headset; the long beak opens for an absurdly emphatic rebuttal. |
 | Olivia Rodentgo | Olivia Rodrigo | language-clause-crane | language / uncommon | One blank lyric-notebook-shaped journal, with a big crossed-out line shape and no words. |
-| Bo Birdham | Bo Burnham | language-metaphor-mantis | language / rare | One blank miniature stage card; a single warm spotlight-like rim, no set or piano. |
+| Isabelle Haakheron | Isabelle Haak | language-metaphor-mantis | language / rare | Rendered FRONT toward viewer with raised ball and spread wings; authored intent and actual changes in provenance. |
 | Jenna Otterga | Jenna Ortega | language-contract-coyote | language / rare | One blank rolled agreement held with an unimpressed straight face; no franchise costume. |
-| Oprawlh | Oprah Winfrey | language-orator-owl | language / mythic | One blank audience ticket waved like an invitation; no show logo. |
-| Descartiger | René Descartes | language-lexicon-lion | language / legendary | One folded blank foundation plan; no written quotation or royal regalia. |
-| Dan TDuck | DanTDM | imagination-doodle-duck | imagination / common | One unbranded game controller, held like the next little adventure is ready. |
+| Opra-moth | Oprah Winfrey | language-orator-owl | language / mythic | Front-facing open-wing invitation, cup extended between forelegs and both wing edges fully visible. |
+| Descarab | René Descartes | language-lexicon-lion | language / legendary | Rendered RIGHT three-quarter stance; authored intent and actual changes in provenance. |
+| Luka Donchilla | Luka Doncic | imagination-doodle-duck | imagination / common | Rendered LEFT low basketball crouch; authored intent and actual changes in provenance. |
 | PewDiePika | PewDiePie | imagination-possibility-pika | imagination / common | One plain two-button controller and a puzzled raised paw. |
 | Jack Blackbird | Jack Black | imagination-fable-fawn | imagination / common | One unbranded miniature microphone; wings planted in a grand harmless pose. |
-| Jaiden Animole | Jaiden Animations | imagination-mosaic-mole | imagination / common | One folded blank paper figure connected to a pencil; no copied channel avatar or pet. |
+| Jaiden Anima-snail | Jaiden Animations | imagination-mosaic-mole | imagination / common | Rendered LEFT snail body and puppet presentation; authored intent and actual changes in provenance. |
 | Hideo Kojibat | Hideo Kojima | imagination-blueprint-bat | imagination / uncommon | One blank folded storyboard panel held between folded wings. |
-| Peter Jackmarten | Peter Jackson | imagination-mirror-marten | imagination / uncommon | One blank film clapper held at a thoughtful angle. |
+| Peter Jacktree | Peter Jackson | imagination-mirror-marten | imagination / uncommon | Rendered FRONT with viewfinder angled LEFT; authored intent and actual changes in provenance. |
 | Shigeru Miyamole | Shigeru Miyamoto | imagination-chimera-chick | imagination / uncommon | One simple blank toy controller with two large coloured buttons. |
 | Tim Burrowton | Tim Burton | imagination-stage-mouse | imagination / uncommon | One crooked blank film clapper; tail curl is a second broad silhouette cue. |
-| Pedro Ponycal | Pedro Pascal | imagination-paradox-pony | imagination / rare | One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop. |
+| Pedro Platypascal | Pedro Pascal | imagination-paradox-pony | imagination / rare | Rendered LEFT reclining body, bill turned toward viewer; authored intent and actual changes in provenance. |
 | Ariana Crande | Ariana Grande | imagination-cloud-castle-crab | imagination / rare | One broad folded-paper fan held like a tiny stage set; no copied costume or logo. |
 | Miyazawhale | Hayao Miyazaki | imagination-dreamweaver-whale | imagination / mythic | One simple paper wind toy near a fin; original Rift companion design only. |
 | Ramanujicorn | Srinivasa Ramanujan | imagination-impossible-unicorn | imagination / legendary | One blank slate with a single original looping geometric motif; no readable equations or religious symbols. |
 | Hank Greenhare | Hank Green | memory-bookmark-bunny | memory / common | One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour. |
 | John Greenfinch | John Green | memory-recall-robin | memory / common | One old blank paperback with a large visible page marker. |
-| Daniel Radclaw | Daniel Radcliffe | memory-archive-armadillo | memory / common | One rolled blank map; avoid wizard scars, house crests, costumes or branded props. |
+| Niklas Landillo | Niklas Landin Jacobsen | memory-archive-armadillo | memory / common | Rendered FRONT three-quarter; original pose and any correction in provenance. |
 | Rick Ash-tley | Rick Astley | memory-return-roach | memory / common | One plain microphone; a theatrical backward sidestep keeps the whole insect silhouette readable. |
-| Stan Meow | Stan Lee | memory-chronicle-cat | memory / uncommon | One blank comic page; no superheroes, emblems or copyrighted panel art. |
-| Snoop Raccoon | Snoop Dogg | memory-replay-raccoon | memory / uncommon | One plain commentator headset; no brands or smoking/drug props. |
+| Stan Leemur | Stan Lee | memory-chronicle-cat | memory / uncommon | Front-facing playful peek above the comic page; tail curves into one visible arc, feet remain clear. |
+| Nikola Jokaroo | Nikola Jokic | memory-replay-raccoon | memory / uncommon | PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose. |
 | Chris Nolhog | Christopher Nolan | memory-hourglass-hedgehog | memory / uncommon | One simple two-layer blank clock diagram; not a copied film prop or poster. |
-| Martha Stewhart | Martha Stewart | memory-souvenir-seal | memory / uncommon | One tidy keepsake envelope tied with a broad ribbon; no tiny labels to read. |
-| Adelloon | Adele | memory-sequence-swan | memory / rare | One plain microphone at a deliberately paused entrance. |
+| Martha Starwart | Martha Stewart | memory-souvenir-seal | memory / uncommon | Rendered FRONT diagonal; original pose and any correction in provenance. |
+| Mathias Gidscorpion | Mathias Gidsel | memory-sequence-swan | memory / rare | Right-facing handball throw; corrected antenna-free scorpion with eight walking legs, two pincers and one curved tail. |
 | Downewt Jr. | Robert Downey Jr. | memory-second-chance-salamander | memory / rare | One blank film clapper; no armoured superhero suit, branded glasses or film logo. |
 | David Tennantacle | David Tennant | memory-keeper-koi | memory / mythic | One simple blank pocket-watch case held beside a fin; no blue box or signature fictional device. |
 | Noetapir | Emmy Noether | memory-timekeeper-tapir | memory / legendary | One broad linked-loop ribbon on a blank slate; a simple symmetry motif rather than readable algebra. |

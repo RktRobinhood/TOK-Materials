@@ -7,7 +7,7 @@
     {
       "mechanicalId": "reason-premise-pigeon",
       "workingName": "Premise Pigeon",
-      "proposedName": "Tom Squawk",
+      "proposedName": "Tom Skink",
       "inspiration": "Tom Scott",
       "colour": "reason",
       "rarity": "common",
@@ -16,8 +16,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Compact pigeon with expressive brow feathers and a practical brick-red shirt under a short blue travelling vest.",
-      "signatureProp": "One folded blank field guide, wing indicating an odd doorway just outside the portrait.",
+      "silhouette": "A compact blue-tongued skink in a brick-red shirt and blue travelling vest; broad animal muzzle and short legs. The folded field guide stays the only prop.",
+      "signatureProp": "Front-facing low crouch, guide extended in one forefoot; head turns toward a doorway implied outside the image.",
       "jokeAngle": "An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
       "mechanicLink": "A simple vanilla starter body introduces the careful-explainer identity before triggered abilities.",
       "source": "https://www.tomscott.com/newsletter/2024-07-08/",
@@ -54,7 +54,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
-        "smallScaleCue": "One folded blank field guide, wing indicating an odd doorway just outside the portrait."
+        "smallScaleCue": "Front-facing low crouch, guide extended in one forefoot; head turns toward a doorway implied outside the image."
       }
     },
     {
@@ -168,7 +168,7 @@
     {
       "mechanicalId": "reason-counterexample-crow",
       "workingName": "Counterexample Crow",
-      "proposedName": "V-Squawk",
+      "proposedName": "V-Squish",
       "inspiration": "Michael Stevens / Vsauce",
       "colour": "reason",
       "rarity": "common",
@@ -177,8 +177,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Dark crow with slightly oversized round spectacles, raised brow feathers and a curious lean.",
-      "signatureProp": "One blank folded question card in a wing; head tilt carries the questioning joke.",
+      "silhouette": "Midnight-blue slime with round spectacles and warm nonhuman eyes; one brass puzzle cube balanced on a soft lobe.",
+      "signatureProp": "Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat.",
       "jokeAngle": "An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
       "mechanicLink": "Entrance one damage is the tiny counterexample that changes a comfortable board.",
       "source": "https://www.vsauce.com/vsauce1/",
@@ -215,7 +215,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
-        "smallScaleCue": "One blank folded question card in a wing; head tilt carries the questioning joke."
+        "smallScaleCue": "Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat."
       }
     },
     {
@@ -383,7 +383,7 @@
     {
       "mechanicalId": "reason-guardrail-goat",
       "workingName": "Guardrail Goat",
-      "proposedName": "Destin Sandhoof",
+      "proposedName": "Destin Sandolin",
       "inspiration": "Destin Sandlin / Smarter Every Day",
       "colour": "reason",
       "rarity": "uncommon",
@@ -392,8 +392,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Sturdy goat with short curved horns, midnight-blue work shirt and a warm grin.",
-      "signatureProp": "One backward-looking gear wheel cradled against the chest; grounded stance.",
+      "silhouette": "Small pangolin with dark-blue shirt, overlapping natural scales and brass shoulder plates; one blue gear shield.",
+      "signatureProp": "Curl partly around the shield, side-on right, peering over its rim with the tail forming a low brace.",
       "jokeAngle": "Takes a familiar mechanism apart until the ordinary world becomes interesting again.",
       "mechanicLink": "Guard and first-spell prevention suggest careful engineering; no immunity beyond the drafted effect.",
       "source": "https://www.smartereveryday.com/",
@@ -431,7 +431,7 @@
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
         "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Takes a familiar mechanism apart until the ordinary world becomes interesting again.",
-        "smallScaleCue": "One backward-looking gear wheel cradled against the chest; grounded stance."
+        "smallScaleCue": "Curl partly around the shield, side-on right, peering over its rim with the tail forming a low brace."
       }
     },
     {
@@ -490,7 +490,7 @@
     {
       "mechanicalId": "reason-inference-heron",
       "workingName": "Inference Heron",
-      "proposedName": "James Mayron",
+      "proposedName": "James Mayfly",
       "inspiration": "James May",
       "colour": "reason",
       "rarity": "rare",
@@ -501,8 +501,8 @@
         "theme": "Ch2 truth/claim resolution",
         "assignmentStatus": "draft; verify exact plot completion flag"
       },
-      "silhouette": "Long-legged heron with grey swept-back crest, slightly rumpled blue overshirt and a patient expression.",
-      "signatureProp": "One neatly folded blank engineering plan; deliberately slow-looking upright pose.",
+      "silhouette": "Grey-crested mayfly with transparent-edged wings and blue travelling harness; one large caliper in its forelegs.",
+      "signatureProp": "Front-facing hover, caliper jaws held just apart while the face studies the tiny gap.",
       "jokeAngle": "Will happily take the time to explain the small detail while everyone else wants to rush.",
       "mechanicLink": "The draw waits for a precise surviving fight; this is patience, not a change to match pace.",
       "source": "https://press.aboutamazon.com/2016/5/clarkson-hammond-may-announce-the-name-of-their-amazon-prime-show",
@@ -542,13 +542,13 @@
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
         "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Will happily take the time to explain the small detail while everyone else wants to rush.",
-        "smallScaleCue": "One neatly folded blank engineering plan; deliberately slow-looking upright pose."
+        "smallScaleCue": "Front-facing hover, caliper jaws held just apart while the face studies the tiny gap."
       }
     },
     {
       "mechanicalId": "reason-boundary-bear",
       "workingName": "Boundary Bear",
-      "proposedName": "Einbear",
+      "proposedName": "Ein-stone",
       "inspiration": "Albert Einstein",
       "colour": "reason",
       "rarity": "mythic",
@@ -557,8 +557,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Round older bear with wild pale head tufts and a worn midnight-blue cardigan; clearly animal, not a human face pasted onto fur.",
-      "signatureProp": "One simple bent clock rim held like a puzzle; blank face, no equations to read.",
+      "silhouette": "Small pumice golem with white crystal tufts, blue cardigan under chunky brass shoulder armour and one bent clock shield.",
+      "signatureProp": "Left-facing braced kneel, shield tilted outward and one broad stone foot forward.",
       "jokeAngle": "Time refuses to sit neatly in the frame, while the bear looks delighted rather than ominous.",
       "mechanicLink": "A bounded damage rule becomes a bent boundary motif; historical Mythic placement is a tier proposal for review.",
       "source": "https://albert-einstein.huji.ac.il/",
@@ -596,13 +596,13 @@
         "decision": "retain",
         "audienceLane": "historical maths discovery",
         "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
-        "smallScaleCue": "One simple bent clock rim held like a puzzle; blank face, no equations to read."
+        "smallScaleCue": "Left-facing braced kneel, shield tilted outward and one broad stone foot forward."
       }
     },
     {
       "mechanicalId": "reason-theorem-tortoise",
       "workingName": "Theorem Tortoise",
-      "proposedName": "Turingtoise",
+      "proposedName": "Turingator",
       "inspiration": "Alan Turing",
       "colour": "reason",
       "rarity": "legendary",
@@ -611,8 +611,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small ancient tortoise with blue-grey skin, dark geometrical shell and quiet focused eyes.",
-      "signatureProp": "One blank paper tape threaded through a simple shell-mounted reader; large folds, no readable code or war symbols.",
+      "silhouette": "Small blue-grey alligator with blunt animal snout and reinforced dark-blue scholarly coat; one brass tape-reader relic.",
+      "signatureProp": "Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently.",
       "jokeAngle": "The machine takes one careful step and then another, even when the puzzle looks magical.",
       "mechanicLink": "Two Reason spells schedule one public support event; tape represents finite steps, not extra replay policy.",
       "source": "https://www.kings.cam.ac.uk/alan-mathison-turing-1912-54",
@@ -653,13 +653,13 @@
         "decision": "retain",
         "audienceLane": "historical maths discovery",
         "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
-        "smallScaleCue": "One blank paper tape threaded through a simple shell-mounted reader; large folds, no readable code or war symbols."
+        "smallScaleCue": "Seated in LEFT profile, tail curled forward and forefeet turn the reader wheel gently."
       }
     },
     {
       "mechanicalId": "emotion-pulse-pup",
       "workingName": "Pulse Pup",
-      "proposedName": "Dua Lupup",
+      "proposedName": "Dua Leapfrog",
       "inspiration": "Dua Lipa",
       "colour": "emotion",
       "rarity": "common",
@@ -668,8 +668,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small dark-coated puppy with a neat high ear tuft and a confident stage-step pose.",
-      "signatureProp": "One simple crimson stage jacket; one paw keeps the beat, no microphone required.",
+      "silhouette": "A dark tree frog with round sticky toes and a short crimson stage jacket; no microphone. One long leg and a raised forefoot carry the beat.",
+      "signatureProp": "A small diagonal leap toward the viewer, knees opened asymmetrically, face calmly confident.",
       "jokeAngle": "Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
       "mechanicLink": "A plain common attacker establishes confident rhythm without new triggers.",
       "source": "https://www.dualipa.com/",
@@ -706,7 +706,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
-        "smallScaleCue": "One simple crimson stage jacket; one paw keeps the beat, no microphone required."
+        "smallScaleCue": "A small diagonal leap toward the viewer, knees opened asymmetrically, face calmly confident."
       }
     },
     {
@@ -977,7 +977,7 @@
     {
       "mechanicalId": "emotion-grudge-goose",
       "workingName": "Grudge Goose",
-      "proposedName": "Jack Honksepticeye",
+      "proposedName": "Jack Axoloticeye",
       "inspiration": "Jacksepticeye",
       "colour": "emotion",
       "rarity": "uncommon",
@@ -986,8 +986,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Dark goose with one small vivid green head tuft, crimson scarf and playful wide-eyed expression.",
-      "signatureProp": "One plain headset; beak lifted for a final little honk, no copied eye logo.",
+      "silhouette": "Dark axolotl with small green gill fan, crimson scarf and one plain headset; rounded animal mouth.",
+      "signatureProp": "Lean back in a startled reaction, little feet spread and tail curling clear of the headset.",
       "jokeAngle": "The playthrough gets one last noisy reaction; community creator reference, not a claim of vindictiveness.",
       "mechanicLink": "Last Word one damage is a final honk; creature defeat is a game event, not a joke about the person dying.",
       "source": "https://wish.org/thankmas-2026-launch",
@@ -1024,13 +1024,13 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The playthrough gets one last noisy reaction; community creator reference, not a claim of vindictiveness.",
-        "smallScaleCue": "One plain headset; beak lifted for a final little honk, no copied eye logo."
+        "smallScaleCue": "Lean back in a startled reaction, little feet spread and tail curling clear of the headset."
       }
     },
     {
       "mechanicalId": "emotion-resolve-ram",
       "workingName": "Resolve Ram",
-      "proposedName": "Greta Thunram",
+      "proposedName": "Greta Thunbug",
       "inspiration": "Greta Thunberg",
       "colour": "emotion",
       "rarity": "uncommon",
@@ -1039,8 +1039,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small sturdy ram with long braided wool locks, dark-red travelling coat and quiet determined expression.",
-      "signatureProp": "One blank wooden placard held level; no slogans or political campaign branding.",
+      "silhouette": "A small sturdy stick insect with two braided antennae, dark-red travelling coat and one blank placard. Use insect eyes and a twig body.",
+      "signatureProp": "Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer.",
       "jokeAngle": "Keeps asking the group to take the inconvenient evidence seriously.",
       "mechanicLink": "Low-heart Guard pressure represents resolve under game pressure; no joke about age, disability or personal traits.",
       "source": "https://www.ted.com/speakers/greta_thunberg",
@@ -1078,7 +1078,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Keeps asking the group to take the inconvenient evidence seriously.",
-        "smallScaleCue": "One blank wooden placard held level; no slogans or political campaign branding."
+        "smallScaleCue": "Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer."
       }
     },
     {
@@ -1137,7 +1137,7 @@
     {
       "mechanicalId": "emotion-heartfire-hawk",
       "workingName": "Heartfire Hawk",
-      "proposedName": "LeBrondor",
+      "proposedName": "LeBrontosaurus",
       "inspiration": "LeBron James",
       "colour": "emotion",
       "rarity": "rare",
@@ -1148,8 +1148,8 @@
         "theme": "Ch3 confronted public claims",
         "assignmentStatus": "draft; verify exact plot completion flag"
       },
-      "silhouette": "Broad-winged condor with dark crest, crimson unlettered basketball vest and confident team-leading pose.",
-      "signatureProp": "One small plain basketball tucked under a wing; no team badge or crown required.",
+      "silhouette": "Compact sauropod with dark crest, crimson basketball vest, light bronze wrist braces and one plain ball.",
+      "signatureProp": "Side-on athletic step, ball offered in forefeet and the long neck bent to inspect it.",
       "jokeAngle": "Turns a setback into another very large team pep talk.",
       "mechanicLink": "A hero losing hearts enables another ally's temporary attack; no additional global aura.",
       "source": "https://www.nba.com/player/2544/lebron-james/bio",
@@ -1186,14 +1186,14 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Turns a setback into another very large team pep talk.",
-        "smallScaleCue": "One small plain basketball tucked under a wing; no team badge or crown required."
+        "smallScaleCue": "Side-on athletic step, ball offered in forefeet and the long neck bent to inspect it."
       }
     },
     {
       "mechanicalId": "emotion-stormheart-serpent",
       "workingName": "Stormheart Serpent",
-      "proposedName": "Pink Python",
-      "inspiration": "P!NK",
+      "proposedName": "Giannis Antetokudu",
+      "inspiration": "Giannis Antetokounmpo",
       "colour": "emotion",
       "rarity": "mythic",
       "acquisition": {
@@ -1201,13 +1201,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Coiled dark python with a short pink crest and worn crimson stage scarf; warm daring eyes, no fangs displayed as a threat.",
-      "signatureProp": "One simple aerial ribbon loop that remains attached to its body; no arena or scattered confetti.",
-      "jokeAngle": "The small stage act looks daring, then lands neatly; broad performance proposal, not a sourced stunt claim.",
+      "silhouette": "A tall but endearingly stocky kudu with short spiral horns, deep tawny animal muzzle and crimson sports vest over modest dark shoulder armour. Exactly two upper forelimbs and two lower hoofed legs, one tail. One unbranded crimson basketball; no snake or human face.",
+      "signatureProp": "Rendered FRONT three-quarter; original pose intent in provenance.",
+      "jokeAngle": "A recognisable basketball name gains a long-horned energetic silhouette; the fictional high-power body is not a claim about current statistics.",
       "mechanicLink": "Choosing own-heart risk for bounded damage is the game cost of a bold act; exact self-zero Win rules still apply.",
-      "source": "https://www.pinkspage.com/",
+      "source": "https://www.nba.com/player/203507/giannis-antetokounmpo/bio",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Brisk confident original performer, no singing/impression; reuse warp/place cue sparingly.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -1238,8 +1238,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The small stage act looks daring, then lands neatly; broad performance proposal, not a sourced stunt claim.",
-        "smallScaleCue": "One simple aerial ribbon loop that remains attached to its body; no arena or scattered confetti."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A recognisable basketball name gains a long-horned energetic silhouette; the fictional high-power body is not a claim about current statistics.",
+        "smallScaleCue": "Rendered FRONT three-quarter; original pose intent in provenance."
       }
     },
     {
@@ -1514,8 +1514,8 @@
     {
       "mechanicalId": "perception-scout-stoat",
       "workingName": "Scout Stoat",
-      "proposedName": "Steve Earwin",
-      "inspiration": "Steve Irwin",
+      "proposedName": "Nelly Koalda",
+      "inspiration": "Nelly Korda",
       "colour": "perception",
       "rarity": "uncommon",
       "acquisition": {
@@ -1523,13 +1523,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Bright-eyed stoat with large ears, khaki shirt and a small green neckerchief.",
-      "signatureProp": "One folded field notebook; gentle ready-to-observe stance, no animal restraint scene.",
-      "jokeAngle": "Everything in the bushes apparently deserves an enthusiastic closer look.",
+      "silhouette": "A compact silver-grey koala with round fluffy ears, broad dark animal nose and worn emerald golf jacket. Four total limbs, no human face. One oversized simple brass-headed golf club with dark green grip; no notebook, visor logo or branded kit.",
+      "signatureProp": "Rendered LEFT three-quarter; original pose intent in provenance.",
+      "jokeAngle": "A female golfer adds the requested small golf lane; the koala/club shape is distinct without requiring celebrity face likeness.",
       "mechanicLink": "Deck selection is scouting; no joke about the person's death or risky encounter.",
-      "source": "https://australiazoo.com.au/about-us/the-irwins/steve/",
+      "source": "https://www.lpga.com/athletes/nelly-korda/98350/bio",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Friendly excited wildlife-guide cadence in original voice; no copied catchphrase.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -1560,8 +1560,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Everything in the bushes apparently deserves an enthusiastic closer look.",
-        "smallScaleCue": "One folded field notebook; gentle ready-to-observe stance, no animal restraint scene."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A female golfer adds the requested small golf lane; the koala/club shape is distinct without requiring celebrity face likeness.",
+        "smallScaleCue": "Rendered LEFT three-quarter; original pose intent in provenance."
       }
     },
     {
@@ -1620,7 +1620,7 @@
     {
       "mechanicalId": "perception-pattern-panther",
       "workingName": "Pattern Panther",
-      "proposedName": "Marques Brownlynx",
+      "proposedName": "Marques Brownleaf",
       "inspiration": "Marques Brownlee / MKBHD",
       "colour": "perception",
       "rarity": "uncommon",
@@ -1629,8 +1629,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Tall-eared dark panther with emerald jacket piping and composed interested expression.",
-      "signatureProp": "One unbranded blank-screen handheld device at a deliberate inspection angle.",
+      "silhouette": "Dark leaf insect with emerald-edged leaf abdomen and a worn reviewer jacket; one blank-screen scrying device.",
+      "signatureProp": "Side-on left, screen angled deliberately toward its face and one hind leg extended behind.",
       "jokeAngle": "The smallest gadget detail deserves a whole careful comparison.",
       "mechanicLink": "Draw after a skipped enemy occurrence uses the original event gate; the prop doesn't create secret previews.",
       "source": "https://mkbhd.com/",
@@ -1671,7 +1671,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The smallest gadget detail deserves a whole careful comparison.",
-        "smallScaleCue": "One unbranded blank-screen handheld device at a deliberate inspection angle."
+        "smallScaleCue": "Side-on left, screen angled deliberately toward its face and one hind leg extended behind."
       }
     },
     {
@@ -1790,7 +1790,7 @@
     {
       "mechanicalId": "perception-exposure-eagle",
       "workingName": "Exposure Eagle",
-      "proposedName": "Houdin-eagle",
+      "proposedName": "Houdini Wisp",
       "inspiration": "Harry Houdini",
       "colour": "perception",
       "rarity": "rare",
@@ -1801,8 +1801,8 @@
         "theme": "Ch2 observation at the clock tower",
         "assignmentStatus": "draft; verify exact plot completion flag"
       },
-      "silhouette": "Compact eagle with a sharp curious brow, midnight cape and emerald trim.",
-      "signatureProp": "One open padlock held clearly in a wing; no tied or submerged figure.",
+      "silhouette": "Emerald-edged lantern wisp with nonhuman eyes, short midnight cape and one open padlock in a light tendril.",
+      "signatureProp": "Float diagonally left into a cheeky half-bow, lock extended fully toward the viewer.",
       "jokeAngle": "The allegedly impossible fastening is now just a very ordinary open lock.",
       "mechanicLink": "The chosen Guard/Shield/Elusive removal stays a single keyword; no escape stunt or extra suppression.",
       "source": "https://www.houdinimuseum.net/",
@@ -1840,13 +1840,13 @@
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
         "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The allegedly impossible fastening is now just a very ordinary open lock.",
-        "smallScaleCue": "One open padlock held clearly in a wing; no tied or submerged figure."
+        "smallScaleCue": "Float diagonally left into a cheeky half-bow, lock extended fully toward the viewer."
       }
     },
     {
       "mechanicalId": "perception-horizon-hare",
       "workingName": "Horizon Hare",
-      "proposedName": "Amelia Earhare",
+      "proposedName": "Amelia Airgator",
       "inspiration": "Amelia Earhart",
       "colour": "perception",
       "rarity": "mythic",
@@ -1855,8 +1855,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Long-eared hare with a worn flying cap, broad brass goggles and an emerald scarf.",
-      "signatureProp": "One folded blank flight chart held forward; ears and feet fully visible.",
+      "silhouette": "A small animal-faced crocodile with a worn flying cap, brass goggles and emerald scarf; two compact canvas glider wings are strapped to its scaled body, with a tapering tail like a rudder. One folding brass compass is the only hand prop.",
+      "signatureProp": "Bank diagonally left, short legs tucked, animal head looking back and compass held close to the chest; glider wings and tail entirely in frame.",
       "jokeAngle": "The route is planned before the dramatic entrance; joke about maps and preparation.",
       "mechanicLink": "Moves one own pending event earlier with a+1-round floor; no joke about disappearance or a real crash.",
       "source": "https://womenshistory.si.edu/blog/amelia-earharts-trailblazing-life-aviation",
@@ -1896,13 +1896,13 @@
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
         "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: The route is planned before the dramatic entrance; joke about maps and preparation.",
-        "smallScaleCue": "One folded blank flight chart held forward; ears and feet fully visible."
+        "smallScaleCue": "Bank diagonally left, short legs tucked, animal head looking back and compass held close to the chest; glider wings and tail entirely in frame."
       }
     },
     {
       "mechanicalId": "perception-true-sight-stag",
       "workingName": "True Sight Stag",
-      "proposedName": "Galileelk",
+      "proposedName": "Galileon",
       "inspiration": "Galileo Galilei",
       "colour": "perception",
       "rarity": "legendary",
@@ -1911,8 +1911,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small old elk with expressive white beard-like chin fur, short antlers and a dark emerald scholarly coat.",
-      "signatureProp": "One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette.",
+      "silhouette": "Old chameleon with pale chin frills, emerald scholarly coat, brass collar and one telescope staff.",
+      "signatureProp": "Rendered RIGHT low crouch; original pose intent in provenance.",
       "jokeAngle": "Would rather let everyone look through the instrument than argue around it.",
       "mechanicLink": "The public three-card selection follows original order restoration; no prophecy of hidden Fate reservations.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Galileo/",
@@ -1950,7 +1950,7 @@
         "decision": "retain",
         "audienceLane": "historical maths discovery",
         "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
-        "smallScaleCue": "One short brass telescope aimed slightly upward; distinct from Tycho's large quadrant silhouette."
+        "smallScaleCue": "Rendered RIGHT low crouch; original pose intent in provenance."
       }
     },
     {
@@ -2390,8 +2390,8 @@
     {
       "mechanicalId": "language-metaphor-mantis",
       "workingName": "Metaphor Mantis",
-      "proposedName": "Bo Birdham",
-      "inspiration": "Bo Burnham",
+      "proposedName": "Isabelle Haakheron",
+      "inspiration": "Isabelle Haak",
       "colour": "language",
       "rarity": "rare",
       "acquisition": {
@@ -2399,13 +2399,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small dark bird with long angular wings, gold stage trim and amused slightly uncanny eyes.",
-      "signatureProp": "One blank miniature stage card; a single warm spotlight-like rim, no set or piano.",
-      "jokeAngle": "Takes a phrase literally until the little stage becomes absurd.",
+      "silhouette": "A tall compact heron with a long clear beak, warm animal eyes and charcoal-and-gold volleyball tunic. Exactly two wings and two bird legs; no added human arms. One plain cream-and-gold volleyball, no stage mirror or licensed uniform.",
+      "signatureProp": "Rendered FRONT toward viewer with raised ball and spread wings; authored intent and actual changes in provenance.",
+      "jokeAngle": "A Nordic female volleyball reference answers the smaller volleyball interest; the long beak and jumping wings preserve creature-body variety.",
       "mechanicLink": "Temporary colour/attack loss remains exactly the draft; no copied lyrics or adult sketch material.",
-      "source": "https://www.boburnham.com/",
+      "source": "https://en.volleyballworld.com/volleyball/competitions/women-world-championship/players/153170",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Dry playful original delivery, no singing, copied monologue or real accent.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2436,8 +2436,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Takes a phrase literally until the little stage becomes absurd.",
-        "smallScaleCue": "One blank miniature stage card; a single warm spotlight-like rim, no set or piano."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A Nordic female volleyball reference answers the smaller volleyball interest; the long beak and jumping wings preserve creature-body variety.",
+        "smallScaleCue": "Rendered FRONT toward viewer with raised ball and spread wings; authored intent and actual changes in provenance."
       }
     },
     {
@@ -2498,7 +2498,7 @@
     {
       "mechanicalId": "language-orator-owl",
       "workingName": "Orator Owl",
-      "proposedName": "Oprawlh",
+      "proposedName": "Opra-moth",
       "inspiration": "Oprah Winfrey",
       "colour": "language",
       "rarity": "mythic",
@@ -2507,8 +2507,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Round owl with warm eyes, dark stage coat and a generous gold collar.",
-      "signatureProp": "One blank audience ticket waved like an invitation; no show logo.",
+      "silhouette": "Round velvet moth with warm insect eyes, dark stage cape, small gold wing pauldrons and one lotus cup.",
+      "signatureProp": "Front-facing open-wing invitation, cup extended between forelegs and both wing edges fully visible.",
       "jokeAngle": "The whole audience seems included in the next encouraging announcement.",
       "mechanicLink": "End-turn scheduling still requires an Axiom play and one own event limit; no instant global buff.",
       "source": "https://images.oprah.com/images/obc_classic/book/2008/anewearth/ane_chapter1_transcript.pdf",
@@ -2549,13 +2549,13 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The whole audience seems included in the next encouraging announcement.",
-        "smallScaleCue": "One blank audience ticket waved like an invitation; no show logo."
+        "smallScaleCue": "Front-facing open-wing invitation, cup extended between forelegs and both wing edges fully visible."
       }
     },
     {
       "mechanicalId": "language-lexicon-lion",
       "workingName": "Lexicon Lion",
-      "proposedName": "Descartiger",
+      "proposedName": "Descarab",
       "inspiration": "René Descartes",
       "colour": "language",
       "rarity": "legendary",
@@ -2564,8 +2564,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small historical tiger with thoughtful eyes, a dark scholarly coat and gold cuff details.",
-      "signatureProp": "One folded blank foundation plan; no written quotation or royal regalia.",
+      "silhouette": "Historical scarab with warm insect eyes, dark scholarly coat, gold shell-edge armour and one plumb staff.",
+      "signatureProp": "Rendered RIGHT three-quarter stance; authored intent and actual changes in provenance.",
       "jokeAngle": "Takes the argument apart so it can be rebuilt from a clear starting point.",
       "mechanicLink": "Restores one chosen Axiom category to basic and draws once; no new global reset.",
       "source": "https://mathshistory.st-andrews.ac.uk/Biographies/Descartes/",
@@ -2604,14 +2604,14 @@
         "decision": "retain",
         "audienceLane": "historical maths discovery",
         "appealReason": "Keep the established historical scholar lane, with a cute impossible prop and a short Collection introduction.",
-        "smallScaleCue": "One folded blank foundation plan; no written quotation or royal regalia."
+        "smallScaleCue": "Rendered RIGHT three-quarter stance; authored intent and actual changes in provenance."
       }
     },
     {
       "mechanicalId": "imagination-doodle-duck",
       "workingName": "Doodle Duck",
-      "proposedName": "Dan TDuck",
-      "inspiration": "DanTDM",
+      "proposedName": "Luka Donchilla",
+      "inspiration": "Luka Doncic",
       "colour": "imagination",
       "rarity": "common",
       "acquisition": {
@@ -2619,13 +2619,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small cheerful duck with dark-blue head feathers, a violet hoodie and bright curious eyes.",
-      "signatureProp": "One unbranded game controller, held like the next little adventure is ready.",
-      "jokeAngle": "Every ordinary room could be the beginning of another game.",
+      "silhouette": "A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit.",
+      "signatureProp": "Rendered LEFT low basketball crouch; authored intent and actual changes in provenance.",
+      "jokeAngle": "A small European basketball star parody fills a simple common slot; rounded chinchilla ears avoid another duck or feline.",
       "mechanicLink": "A simple common body introduces the gamer persona with no licensed game character or extra ability.",
-      "source": "https://www.youtube.com/@DanTDM",
+      "source": "https://www.nba.com/player/1629029/luka-doncic/bio",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Bright family-friendly original gamer, no copied intro or sound pack.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2656,8 +2656,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Every ordinary room could be the beginning of another game.",
-        "smallScaleCue": "One unbranded game controller, held like the next little adventure is ready."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A small European basketball star parody fills a simple common slot; rounded chinchilla ears avoid another duck or feline.",
+        "smallScaleCue": "Rendered LEFT low basketball crouch; authored intent and actual changes in provenance."
       }
     },
     {
@@ -2771,7 +2771,7 @@
     {
       "mechanicalId": "imagination-mosaic-mole",
       "workingName": "Mosaic Mole",
-      "proposedName": "Jaiden Animole",
+      "proposedName": "Jaiden Anima-snail",
       "inspiration": "Jaiden Animations",
       "colour": "imagination",
       "rarity": "common",
@@ -2780,8 +2780,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small mole with warm dark eyes, simple black head tuft and violet artist's shawl.",
-      "signatureProp": "One folded blank paper figure connected to a pencil; no copied channel avatar or pet.",
+      "silhouette": "Dark snail with warm stalk eyes, violet artist shawl and textured shell; one simple paper marionette.",
+      "signatureProp": "Rendered LEFT snail body and puppet presentation; authored intent and actual changes in provenance.",
       "jokeAngle": "A side doodle immediately wants its own little side adventure.",
       "mechanicLink": "Last Word creates only the specified colourless paper token if space exists.",
       "source": "https://www.youtube.com/@jaidenanimations",
@@ -2819,7 +2819,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A side doodle immediately wants its own little side adventure.",
-        "smallScaleCue": "One folded blank paper figure connected to a pencil; no copied channel avatar or pet."
+        "smallScaleCue": "Rendered LEFT snail body and puppet presentation; authored intent and actual changes in provenance."
       }
     },
     {
@@ -2880,7 +2880,7 @@
     {
       "mechanicalId": "imagination-mirror-marten",
       "workingName": "Mirror Marten",
-      "proposedName": "Peter Jackmarten",
+      "proposedName": "Peter Jacktree",
       "inspiration": "Peter Jackson",
       "colour": "imagination",
       "rarity": "uncommon",
@@ -2889,8 +2889,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small shaggy marten with a soft beard-like muzzle, dark working shirt and violet collar.",
-      "signatureProp": "One blank film clapper held at a thoughtful angle.",
+      "silhouette": "Living sapling with knot eyes, mossy bark beard and violet collar; one brass viewfinder.",
+      "signatureProp": "Rendered FRONT with viewfinder angled LEFT; authored intent and actual changes in provenance.",
       "jokeAngle": "The little prop needs one more carefully considered take.",
       "mechanicLink": "Copies bounded attack temporarily, not a creature's art, identity or abilities.",
       "source": "https://www.nzfilm.co.nz/assets/resources/Undergrowth_Press_Kit.pdf",
@@ -2927,7 +2927,7 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The little prop needs one more carefully considered take.",
-        "smallScaleCue": "One blank film clapper held at a thoughtful angle."
+        "smallScaleCue": "Rendered FRONT with viewfinder angled LEFT; authored intent and actual changes in provenance."
       }
     },
     {
@@ -3042,7 +3042,7 @@
     {
       "mechanicalId": "imagination-paradox-pony",
       "workingName": "Paradox Pony",
-      "proposedName": "Pedro Ponycal",
+      "proposedName": "Pedro Platypascal",
       "inspiration": "Pedro Pascal",
       "colour": "imagination",
       "rarity": "rare",
@@ -3051,8 +3051,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Round pony with tousled dark mane, small moustache-like muzzle markings and a soft violet travelling jacket.",
-      "signatureProp": "One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop.",
+      "silhouette": "Round platypus with broad bill, webbed feet and violet jacket; one twisted-handle coffee mug.",
+      "signatureProp": "Rendered LEFT reclining body, bill turned toward viewer; authored intent and actual changes in provenance.",
       "jokeAngle": "The cosy little traveller gives the impossible stat swap a dramatically baffled side-eye.",
       "mechanicLink": "Enemy stat swap stays the exact bounded game effect; no licensed role or new dodge ability.",
       "source": "https://www.lucasfilm.com/productions/the-mandalorian/",
@@ -3090,7 +3090,7 @@
         "decision": "replace weaker reference",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The cosy little traveller gives the impossible stat swap a dramatically baffled side-eye.",
-        "smallScaleCue": "One ordinary coffee cup, held in a startled sideways glance; no armour or franchise prop."
+        "smallScaleCue": "Rendered LEFT reclining body, bill turned toward viewer; authored intent and actual changes in provenance."
       }
     },
     {
@@ -3369,8 +3369,8 @@
     {
       "mechanicalId": "memory-archive-armadillo",
       "workingName": "Archive Armadillo",
-      "proposedName": "Daniel Radclaw",
-      "inspiration": "Daniel Radcliffe",
+      "proposedName": "Niklas Landillo",
+      "inspiration": "Niklas Landin Jacobsen",
       "colour": "memory",
       "rarity": "common",
       "acquisition": {
@@ -3378,13 +3378,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Compact dark armadillo with neat brow fur, warm eyes and a silver-trimmed stage coat.",
-      "signatureProp": "One rolled blank map; avoid wizard scars, house crests, costumes or branded props.",
-      "jokeAngle": "A familiar performer appears ready for another unexpectedly different adventure.",
+      "silhouette": "A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform.",
+      "signatureProp": "Rendered FRONT three-quarter; original pose and any correction in provenance.",
+      "jokeAngle": "A Danish goalkeeper reference directly serves the class handball interest while keeping the existing common defensive role.",
       "mechanicLink": "Guard is the armadillo's grounded stance; no film character or new magical ability.",
-      "source": "https://www.tonyawards.com/winners/year/2024/category/any/show/any/",
+      "source": "https://www.ihf.info/competitions/men/308/2024-olympic-games-paris-mens-tournament/159985/players/22033",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Curious original stage performer, not a film-role voice impression.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -3416,8 +3416,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A familiar performer appears ready for another unexpectedly different adventure.",
-        "smallScaleCue": "One rolled blank map; avoid wizard scars, house crests, costumes or branded props."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A Danish goalkeeper reference directly serves the class handball interest while keeping the existing common defensive role.",
+        "smallScaleCue": "Rendered FRONT three-quarter; original pose and any correction in provenance."
       }
     },
     {
@@ -3477,7 +3477,7 @@
     {
       "mechanicalId": "memory-chronicle-cat",
       "workingName": "Chronicle Cat",
-      "proposedName": "Stan Meow",
+      "proposedName": "Stan Leemur",
       "inspiration": "Stan Lee",
       "colour": "memory",
       "rarity": "uncommon",
@@ -3486,8 +3486,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small older cat with expressive pale moustache-like muzzle fur, dark glasses and silver cardigan trim.",
-      "signatureProp": "One blank comic page; no superheroes, emblems or copyrighted panel art.",
+      "silhouette": "Small older ring-tailed lemur with pale muzzle tufts, dark glasses and silver cardigan trim. Its single blank comic page stays the key public-persona prop.",
+      "signatureProp": "Front-facing playful peek above the comic page; tail curves into one visible arc, feet remain clear.",
       "jokeAngle": "Even this tiny side scene seems to have room for a friendly cameo.",
       "mechanicLink": "Recovery heals the hero once per turn; no claim of a new heroic transformation.",
       "source": "https://www.marvel.com/comics/creators/30/stan_lee",
@@ -3525,14 +3525,14 @@
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Even this tiny side scene seems to have room for a friendly cameo.",
-        "smallScaleCue": "One blank comic page; no superheroes, emblems or copyrighted panel art."
+        "smallScaleCue": "Front-facing playful peek above the comic page; tail curves into one visible arc, feet remain clear."
       }
     },
     {
       "mechanicalId": "memory-replay-raccoon",
       "workingName": "Replay Raccoon",
-      "proposedName": "Snoop Raccoon",
-      "inspiration": "Snoop Dogg",
+      "proposedName": "Nikola Jokaroo",
+      "inspiration": "Nikola Jokic",
       "colour": "memory",
       "rarity": "uncommon",
       "acquisition": {
@@ -3540,13 +3540,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Long-limbed raccoon with braided head fur, dark glasses and a loose silver-trimmed jacket.",
-      "signatureProp": "One plain commentator headset; no brands or smoking/drug props.",
-      "jokeAngle": "A familiar entertainer turns up in an unexpectedly different broadcast.",
+      "silhouette": "A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass.",
+      "signatureProp": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose.",
+      "jokeAngle": "A pouch-shaped passer provides a memorable basketball cue and replaces an unproduced entertainer while preserving every card contract.",
       "mechanicLink": "Returns one cheap creature from discard; no live-world behaviour or private-life joke.",
-      "source": "https://www.nbcolympics.com/news/best-viral-moments-2024-paris-olympics",
+      "source": "https://www.nba.com/player/203999",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Relaxed amused original commentator; no accent imitation, song, lyric or drug reference.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -3577,8 +3577,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A familiar entertainer turns up in an unexpectedly different broadcast.",
-        "smallScaleCue": "One plain commentator headset; no brands or smoking/drug props."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A pouch-shaped passer provides a memorable basketball cue and replaces an unproduced entertainer while preserving every card contract.",
+        "smallScaleCue": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose."
       }
     },
     {
@@ -3641,7 +3641,7 @@
     {
       "mechanicalId": "memory-souvenir-seal",
       "workingName": "Souvenir Seal",
-      "proposedName": "Martha Stewhart",
+      "proposedName": "Martha Starwart",
       "inspiration": "Martha Stewart",
       "colour": "memory",
       "rarity": "uncommon",
@@ -3650,8 +3650,8 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Composed seal with pale head tufts, a practical dark shawl and silver edging.",
-      "signatureProp": "One tidy keepsake envelope tied with a broad ribbon; no tiny labels to read.",
+      "silhouette": "Composed five-armed starfish in a silver-edged shawl; one ribbon-tied little casket.",
+      "signatureProp": "Rendered FRONT diagonal; original pose and any correction in provenance.",
       "jokeAngle": "Every completed little task seems to deserve an impeccably organised keepsake.",
       "mechanicLink": "Only resolving an own pending event draws; skipped events remain excluded.",
       "source": "https://www.marthastewart.com/",
@@ -3692,14 +3692,14 @@
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
         "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Every completed little task seems to deserve an impeccably organised keepsake.",
-        "smallScaleCue": "One tidy keepsake envelope tied with a broad ribbon; no tiny labels to read."
+        "smallScaleCue": "Rendered FRONT diagonal; original pose and any correction in provenance."
       }
     },
     {
       "mechanicalId": "memory-sequence-swan",
       "workingName": "Sequence Swan",
-      "proposedName": "Adelloon",
-      "inspiration": "Adele",
+      "proposedName": "Mathias Gidscorpion",
+      "inspiration": "Mathias Gidsel",
       "colour": "memory",
       "rarity": "rare",
       "acquisition": {
@@ -3707,13 +3707,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small dark loon with a pale face, soft velvet-like grey stage cape and silver trim.",
-      "signatureProp": "One plain microphone at a deliberately paused entrance.",
-      "jokeAngle": "The little stage pause lasts just long enough to become part of the performance.",
-      "mechanicLink": "Delays one own event within the draft cap and draws only if it moved; no copied lyrics.",
-      "source": "https://www.adele.com/",
+      "silhouette": "A friendly silver-edged scorpion with broad warm animal eyes, dark segmented shell and simple silver-trimmed sports wraps. Eight small walking legs, two broad pincers and one curved tail with a blunt stylized tip; no human arms. One plain handball held in a pincer.",
+      "signatureProp": "Right-facing handball throw; corrected antenna-free scorpion with eight walking legs, two pincers and one curved tail.",
+      "jokeAngle": "A Danish handball role answers the class preference; the scorpion throw is an original nonhuman sporting gag, not a human likeness.",
+      "mechanicLink": "Delays one own event within the draft cap and draws only if it moved.",
+      "source": "https://www.eurohandball.com/en/player/zNNV4MTuxI13Pq9C77tyFA/Mathias-Gidsel/",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Warm expressive original spoken performer; no singing, accent or voice imitation.",
+      "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -3748,8 +3748,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The little stage pause lasts just long enough to become part of the performance.",
-        "smallScaleCue": "One plain microphone at a deliberately paused entrance."
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: A Danish handball role answers the class preference; the scorpion throw is an original nonhuman sporting gag, not a human likeness.",
+        "smallScaleCue": "Right-facing handball throw; corrected antenna-free scorpion with eight walking legs, two pincers and one curved tail."
       }
     },
     {
