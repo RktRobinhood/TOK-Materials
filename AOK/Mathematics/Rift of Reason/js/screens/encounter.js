@@ -436,8 +436,11 @@
                 obstacle = n.id === 'k-core' && !s.flags['seen:finale.home'] ? null : Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
                 const slotsBefore = Rift.World.tweakSlots(s);
+                let cards = [];
                 Rift.State.update(st => {
                     Rift.World.applyRewards(st, r);
+                    // The station's card reward (#124), once per adventure; complete() would pay it too.
+                    if (Rift.World.claimCards) cards = Rift.World.claimCards(st, n.id).filter(c => c.id);
                     Rift.World.complete(st, n.id);
                     if (!hintsUsed && st.stats.puzzlesSolved >= 5) earned.push('clear-thinker');
                     stages.forEach(p => {
@@ -454,7 +457,10 @@
                     earned = earned.filter(id => Rift.World.award(st, id));
                 });
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name)
-                    .concat(r.tactic ? ['new tactic card: ' + Rift.data.tactics[r.tactic].name + ' (add it in Collection → Build decks)'] : []).join(', ');
+                    .concat(r.tactic ? ['new tactic card: ' + Rift.data.tactics[r.tactic].name + ' (add it in Collection → Build decks)'] : [])
+                    .concat(cards.map(c => c.kind === 'axiom'
+                        ? 'new axiom card: ' + Rift.World.cardName(c) + ' (add it in Collection → Axiom cards)'
+                        : 'new tactic card: ' + Rift.World.cardName(c) + ' (add it in Collection → Build decks)')).join(', ');
                 const body = el('div.stack', null, [
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
                     obstacle ? el('p', { text: Rift.data.creatures[obstacle].name + ' appeared. Catching is optional.' }) : null,

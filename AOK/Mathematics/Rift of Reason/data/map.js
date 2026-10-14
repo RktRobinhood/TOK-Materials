@@ -10,6 +10,10 @@
  * spawns: visitors rolled after success (weighted by rarity);
  *         rare teasers from other colours can be listed too.
  * puzzles[i].skipWhen: a boss stage left out while a story condition holds (it counts as clock progress).
+ * cards: station card-reward slots (#124). The first completion of any node with a slot grants that slot's
+ *        card from the adventure's starter track (data/starters.js `rewards`), once per adventure
+ *        (Rift.World.claimCards). Slots sit on ordinary and optional stations, not on bosses, which
+ *        already teach earned tactics.
  * scene: background art id (scenes: [{ when, scene }] overrides it while a story condition holds,
  * like hosts). script: dialogue key in data/script/*.js.
  */
@@ -46,7 +50,7 @@
                 intro: "station.stall-pattern.intro", reminder: "station.stall-pattern.reminder",
                 name: "Professor Sequins' Pattern Stall", chapter: 'prologue', type: 'puzzle', x: 397, y: 636,
                 scene: 'scene/stall-pattern', script: 'prologue.pattern',
-                puzzles: [{ id: 'rule-hunter', difficulty: 1 }],
+                cards: ['fit'], puzzles: [{ id: 'rule-hunter', difficulty: 1 }],
                 spawns: ['siuuugull', 'beastie', 'speedcheeta', 'usainvolt', 'keanu'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A magpie in a ringmaster coat is shouting about secret rules.',
             },
@@ -55,7 +59,7 @@
                 intro: "station.stall-witness.intro", reminder: "station.stall-witness.reminder",
                 name: "Madame Mirage's Witness Tent", chapter: 'prologue', type: 'puzzle', x: 105, y: 690,
                 scene: 'scene/stall-witness', script: 'prologue.witness',
-                puzzles: [{ id: 'witness', difficulty: 1 }],
+                cards: ['fit'], puzzles: [{ id: 'witness', difficulty: 1 }],
                 spawns: ['chimpossible', 'rawmsay', 'attenbirdough', 'kardashiant', 'shakirattle'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A velvet tent. "See what really happened," says the sign.',
             },
@@ -67,7 +71,7 @@
                 intro: "station.stall-gallery.intro", reminder: "station.stall-gallery.reminder",
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
                 scene: 'scene/stall-gallery', script: 'prologue.gallery',
-                puzzles: [{ id: 'venn', difficulty: 1 }],
+                cards: ['fit'], puzzles: [{ id: 'venn', difficulty: 1 }],
                 spawns: ['tremendoodle', 'swiftlet', 'beansprout', 'eminemu'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
             },
@@ -99,7 +103,7 @@
                 intro: "station.well.intro", reminder: "station.well.reminder",
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
-                puzzles: [{ id: 'venn', difficulty: 2, opts: { lead: 'well' } }, { id: 'rule-hunter', difficulty: 2, opts: { lead: 'well' } }],
+                cards: ['colour'], puzzles: [{ id: 'venn', difficulty: 2, opts: { lead: 'well' } }, { id: 'rule-hunter', difficulty: 2, opts: { lead: 'well' } }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant'], links: ['troll-bridge', 'campfire', 'card-sharp', 'bonus-blackbox'],
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
@@ -118,7 +122,7 @@
                 intro: 'station.river-ford.intro', reminder: 'station.river-ford.reminder',
                 name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 548, y: 468,
                 scene: 'scene/road-bridge',
-                puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
+                cards: ['fit-2'], puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
                 teaser: 'A small boat, a wide river, and creatures who bite each other.',
             },
@@ -178,7 +182,7 @@
                 intro: "station.b-south-bridge.intro", reminder: "station.b-south-bridge.reminder",
                 name: 'The Lever Bridge', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 756, y: 736,
                 scene: 'scene/switch-room', script: 'ch2.bridge',
-                puzzles: [{ id: 'switchboard', difficulty: 1 }],
+                cards: ['colour-rule'], puzzles: [{ id: 'switchboard', difficulty: 1 }],
                 spawns: ['rawmsay', 'speedcheeta', 'zuckerborg', 'beeyonce', 'eelish'], links: ['b-arrival', 'b-lamp-lane'],
                 teaser: 'A drawbridge worked by brass levers. Something about it is very sure of itself.',
             },
@@ -218,7 +222,7 @@
                 intro: 'station.b-kitchen.intro', reminder: 'station.b-kitchen.reminder',
                 name: "Granny's Kitchen", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 548, y: 300,
                 scene: 'scene/granny-door',
-                puzzles: [{ id: 'water-jugs', difficulty: 1 }, { id: 'water-jugs', difficulty: 2 }, { id: 'water-jugs', difficulty: 3 }],
+                cards: ['second-colour'], puzzles: [{ id: 'water-jugs', difficulty: 1 }, { id: 'water-jugs', difficulty: 2 }, { id: 'water-jugs', difficulty: 3 }],
                 spawns: ['beastie', 'tremendoodle', 'attenbirdough'], links: ['b-bakery'],
                 teaser: 'Two ladles, no markings, and a very exact recipe.',
             },
@@ -346,7 +350,7 @@
                 intro: "station.t-library.intro", reminder: "station.t-library.reminder",
                 name: 'The Library', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 340, y: 239,
                 scene: 'scene/evidence-room', script: 'ch3.library',
-                puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'proof' } }],
+                cards: ['colour-rare'], puzzles: [{ id: 'tribunal', difficulty: 2, opts: { theme: 'proof' } }],
                 spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-cafe', 't-plaza', 't-reading-room'],
                 teaser: 'Silent shelves. Someone claims to have proved something that is not quite true.',
             },
@@ -356,7 +360,7 @@
                 intro: 'station.t-reading-room.intro', reminder: 'station.t-reading-room.reminder',
                 name: 'The Reading Room', chapter: 'ch3', map: 'ch3', type: 'puzzle', x: 128, y: 205,
                 scene: 'scene/evidence-room',
-                puzzles: [{ id: 'logic-grid', difficulty: 1 }, { id: 'logic-grid', difficulty: 2 }, { id: 'logic-grid', difficulty: 3 }],
+                cards: ['second-rule'], puzzles: [{ id: 'logic-grid', difficulty: 1 }, { id: 'logic-grid', difficulty: 2 }, { id: 'logic-grid', difficulty: 3 }],
                 spawns: ['carlseal', 'obambu', 'hexling'], links: ['t-library'],
                 teaser: 'Old newspapers with the bylines torn off. The clues are still there.',
             },
@@ -445,7 +449,7 @@
                 intro: "station.k-prediction.intro", reminder: "station.k-prediction.reminder",
                 name: 'The Prediction Hall', chapter: 'ch4', map: 'ch4', type: 'puzzle', x: 804, y: 631,
                 scene: 'scene/server-hall', script: 'ch4.prediction',
-                puzzles: [{ id: 'prediction', difficulty: 1 }, { id: 'prediction', difficulty: 2 }],
+                cards: ['fate'], puzzles: [{ id: 'prediction', difficulty: 1 }, { id: 'prediction', difficulty: 2 }],
                 spawns: ['altmanta', 'zuckerborg', 'haalandroid'], links: ['k-gallery', 'k-stairwell'],
                 teaser: 'A machine that says it knows what you will do next. It seems very sure.',
             },

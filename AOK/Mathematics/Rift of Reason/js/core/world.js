@@ -108,10 +108,85 @@
         reveal(state, first);
     }
 
-    // Completing a node lifts the fog on its neighbours.
+    // ---- station card rewards (#124) ---------------------------------------------------------------
+    // A node's `cards` (data/map.js) names reward slots; the adventure's starter type has an ordered list
+    // of candidate cards per slot (data/starters.js `rewards`: a tactic id or 'axiom:<id>'). The first
+    // completion of ANY node with a slot grants the first candidate not owned yet, as an ordinary owned
+    // unlock (save.tactics / save.axioms), and writes the receipt flags['card-reward:<slot>'] =
+    // { v, node, kind, id } (kind and id null when every candidate was owned already). The receipt blocks
+    // a second grant, so replays, other nodes with the same slot, reloads, backup codes and the catch-up
+    // of older saves (catchUpCards) never pay twice. Stars, hints and wrong checks never change it.
+    function cardTrack(state) {
+        const D = (Rift.data || {}).starterDecks;
+        const s = state || {};
+        const type = (s.starter && s.starter.type) || (s.avatar && s.avatar.type);
+        const deck = D && D.decks && D.decks[type];
+        return (deck && deck.rewards) || null;
+    }
+    function cardRef(ref) {
+        const m = /^axiom:(.+)$/.exec(String(ref));
+        return m ? { kind: 'axiom', id: m[1] } : { kind: 'tactic', id: String(ref) };
+    }
+    function cardKnown(c) {
+        if (c.kind === 'axiom') { const a = ((Rift.data || {}).axioms || {})[c.id]; return !!(a && !a.own); }
+        return !!(((Rift.data || {}).tactics || {})[c.id]);
+    }
+    function cardOwned(state, c) {
+        return c.kind === 'axiom' ? Rift.State.ownedAxioms(state).includes(c.id) : Rift.State.ownedTactics(state).includes(c.id);
+    }
+    // The node's slots this adventure has a track for and no receipt yet.
+    function openCardSlots(state, id) {
+        const n = node(id), track = cardTrack(state), flags = (state && state.flags) || {};
+        if (!n || !Array.isArray(n.cards) || !track) return [];
+        return n.cards.filter(slot => Array.isArray(track[slot]) && !flags['card-reward:' + slot]);
+    }
+    // Grants the node's open slots. Does not save; use inside State.update or on a save object.
+    // → [{ slot, v, node, kind, id }] for the receipts written now (id null: nothing new to give).
+    function claimCards(state, id) {
+        const out = [];
+        openCardSlots(state, id).forEach(slot => {
+            const pick = cardTrack(state)[slot].map(cardRef).find(c => cardKnown(c) && !cardOwned(state, c)) || null;
+            if (pick && pick.kind === 'tactic') Rift.State.grantTactic(pick.id, state);
+            if (pick && pick.kind === 'axiom') {
+                if (!Array.isArray(state.axioms)) state.axioms = [];
+                state.axioms.push(pick.id);
+            }
+            const receipt = { v: ((Rift.data || {}).starterDecks || {}).rewardsVersion || 1, node: id, kind: pick ? pick.kind : null, id: pick ? pick.id : null };
+            if (!state.flags) state.flags = {};
+            state.flags['card-reward:' + slot] = receipt;
+            out.push(Object.assign({ slot }, receipt));
+        });
+        return out;
+    }
+    // Older saves (before #124) and completions without an encounter: every completed node's open slots.
+    function pendingCards(state) {
+        return !!(state && state.map && (state.map.completed || []).some(id => openCardSlots(state, id).length));
+    }
+    function reconcileCards(state) {
+        if (!pendingCards(state)) return [];
+        return state.map.completed.reduce((out, id) => out.concat(claimCards(state, id)), []);
+    }
+    // Catch-up for the live save (boot, a loaded backup code, the previous save): pays each slot once,
+    // saves, and announces 'cards:granted' when a card was new. → the receipts written now.
+    function catchUpCards() {
+        const s = Rift.State.get();
+        if (!pendingCards(s)) return [];
+        let got = [];
+        Rift.State.update(st => { got = reconcileCards(st); });
+        if (Rift.bus && got.some(r => r.id)) Rift.bus.emit('cards:granted', got);
+        return got;
+    }
+    // The display name of a receipt's card.
+    function cardName(r) {
+        const defs = r.kind === 'axiom' ? (Rift.data.axioms || {}) : (Rift.data.tactics || {});
+        return ((defs[r.id] || {}).name || r.id);
+    }
+
+    // Completing a node lifts the fog on its neighbours and pays its station card reward once.
     function complete(state, id) {
         const firstTime = !state.map.completed.includes(id);
         if (firstTime) state.map.completed.push(id);
+        claimCards(state, id);
         (node(id).links || []).forEach(n => reveal(state, n));
         const ch = node(id).chapter;
         if (ch && ch !== state.chapter && !(Rift.data.chapters[ch] || {}).comingSoon) state.chapter = ch;
@@ -313,5 +388,6 @@
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter, claimBonus,
+        cardTrack, openCardSlots, claimCards, pendingCards, reconcileCards, catchUpCards, cardName,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

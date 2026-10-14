@@ -11,7 +11,23 @@
  *
  *   version   the receipt version written to save.starter.v
  *   axioms    the ten axiom cards every starter uses (one copy each; data/axioms.js axiomDecks.default)
- *   decks     { type: { strategy, creatures: [12 species], tactics: [8 tactic ids] } }
+ *   decks     { type: { strategy, colour, creatures: [12 species], tactics: [8 tactic ids], rewards } }
+ *
+ * Station card rewards (#124, design/reviews/reward-cadence-124-2026-10-14.md): `rewards` maps a reward
+ * slot (the `cards` list of a node in data/map.js) to an ordered list of candidate cards: a tactic id,
+ * or 'axiom:<id>'. The first completion of a node with that slot grants the first candidate the player
+ * does not own yet, once per adventure (Rift.World.claimCards; receipt flags['card-reward:<slot>']).
+ * Each track grows the starter: a common for a second colour it already has creatures of, its own
+ * colour's uncommon, rare and spotlight Axiom, then a second colour's uncommon and spotlight Axiom,
+ * and Nostalgia for Fate planning. Later candidates are fallbacks when a trainer already gave the card.
+ *   fit, fit-2      Fair stalls (first one won), the Ford: a common that fits the deck's colour quota now
+ *   colour          the Wishing Well: the uncommon tactic of the deck's colour
+ *   colour-rule     the Lever Bridge: the deck colour's spotlight Axiom (Age of …)
+ *   second-colour   Granny's Kitchen: an uncommon of a second colour in the deck
+ *   colour-rare     the Library: the rare tactic of the deck's colour
+ *   second-rule     the Reading Room: the second colour's spotlight Axiom
+ *   fate            the Prediction Hall: Nostalgia (moves the Fate track), else a fallback
+ * Amounts and choices are draft tuning (teacher review); rewardsVersion is written to each receipt.
  */
 (function (root) {
     'use strict';
@@ -22,28 +38,49 @@
 
     Rift.data.starterDecks = {
         version: 1,
+        rewardsVersion: 1,
         axioms: ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy'],
         decks: {
             // Guard buys time; small damage sets up Close the Proof. Drawing and selective answers support Foresee.
-            owlet: { strategy: 'Patient midrange',
+            owlet: { strategy: 'Patient midrange', colour: 'reason',
                 creatures: two(['astrophysicat', 'khaby', 'proof-pup', 'siuuugull', 'keanu', 'beansprout']),
-                tactics: two(['step-by-step', 'patient-proof', 'pause-for-thought', 'counterexample']) },
+                tactics: two(['step-by-step', 'patient-proof', 'pause-for-thought', 'counterexample']),
+                rewards: { fit: ['stored-thought', 'careful-words'], 'fit-2': ['careful-words', 'stored-thought'],
+                    colour: ['proof-by-contradiction', 'qed'], 'colour-rule': ['axiom:age-of-reason', 'axiom:age-of-tradition'],
+                    'second-colour': ['nostalgia', 'rousing-speech'], 'colour-rare': ['qed', 'proof-by-contradiction', 'total-recall'],
+                    'second-rule': ['axiom:age-of-tradition', 'axiom:age-of-rhetoric'], fate: ['nostalgia', 'total-recall', 'rousing-speech'] } },
             // Small damage pairs with Lantern; inspection and cheap interaction support Night Sight.
-            mothkin: { strategy: 'Information tempo',
+            mothkin: { strategy: 'Information tempo', colour: 'perception',
                 creatures: two(['kardashiant', 'attenbirdough', 'lens-lizard', 'astrophysicat', 'beansprout', 'keanu']),
-                tactics: two(['look-closer', 'steady-gaze', 'counterexample', 'pause-for-thought']) },
+                tactics: two(['look-closer', 'steady-gaze', 'counterexample', 'pause-for-thought']),
+                rewards: { fit: ['patient-proof', 'stored-thought'], 'fit-2': ['stored-thought', 'careful-words'],
+                    colour: ['field-notes', 'clear-view'], 'colour-rule': ['axiom:age-of-observation', 'axiom:age-of-reason'],
+                    'second-colour': ['proof-by-contradiction', 'nostalgia'], 'colour-rare': ['clear-view', 'field-notes', 'qed'],
+                    'second-rule': ['axiom:age-of-reason', 'axiom:age-of-tradition'], fate: ['nostalgia', 'proof-by-contradiction', 'qed'] } },
             // Cloud Calf offers a risky stat swap for What If; cheap creatures and buffs make Brainstorm useful.
-            fox: { strategy: 'Growth and pressure',
+            fox: { strategy: 'Growth and pressure', colour: 'imagination',
                 creatures: two(['zuckerborg', 'paper-dragon', 'cloud-calf', 'beansprout', 'siuuugull', 'eelish']),
-                tactics: two(['daydream', 'creative-spark', 'eureka', 'pep-talk']) },
+                tactics: two(['daydream', 'creative-spark', 'eureka', 'pep-talk']),
+                rewards: { fit: ['careful-words', 'stored-thought'], 'fit-2': ['stored-thought', 'careful-words'],
+                    colour: ['imagine-otherwise', 'dream-big'], 'colour-rule': ['axiom:age-of-wonder', 'axiom:age-of-feeling'],
+                    'second-colour': ['rally-cry', 'rousing-speech'], 'colour-rare': ['dream-big', 'imagine-otherwise', 'wave-of-feeling'],
+                    'second-rule': ['axiom:age-of-feeling', 'axiom:age-of-rhetoric'], fate: ['nostalgia', 'rally-cry', 'wave-of-feeling'] } },
             // Recall recovers defeated creatures; Clockwork and a modest draw/heal package support Hold That Thought.
-            frogling: { strategy: 'Resilient planning',
+            frogling: { strategy: 'Resilient planning', colour: 'memory',
                 creatures: two(['pocket-tortoise', 'siuuugull', 'keanu', 'khaby', 'attenbirdough', 'beansprout']),
-                tactics: two(['remember-when', 'stored-thought', 'clockwork', 'second-wind']) },
+                tactics: two(['remember-when', 'stored-thought', 'clockwork', 'second-wind']),
+                rewards: { fit: ['steady-gaze', 'patient-proof'], 'fit-2': ['patient-proof', 'careful-words'],
+                    colour: ['nostalgia', 'total-recall'], 'colour-rule': ['axiom:age-of-tradition', 'axiom:age-of-observation'],
+                    'second-colour': ['field-notes', 'proof-by-contradiction'], 'colour-rare': ['total-recall', 'nostalgia', 'clear-view'],
+                    'second-rule': ['axiom:age-of-observation', 'axiom:age-of-reason'], fate: ['nostalgia', 'clear-view', 'field-notes', 'proof-by-contradiction'] } },
             // A protected board benefits from Call It Out; healing and economical plays support Fine Print.
-            raven: { strategy: 'Defensive attrition',
+            raven: { strategy: 'Defensive attrition', colour: 'language',
                 creatures: two(['beansprout', 'comma-crab', 'footnote-finch', 'eelish', 'zuckerborg', 'astrophysicat']),
-                tactics: two(['label-it', 'careful-words', 'stand-firm', 'second-wind']) },
+                tactics: two(['label-it', 'careful-words', 'stand-firm', 'second-wind']),
+                rewards: { fit: ['creative-spark', 'patient-proof'], 'fit-2': ['patient-proof', 'creative-spark'],
+                    colour: ['rousing-speech', 'persuasion'], 'colour-rule': ['axiom:age-of-rhetoric', 'axiom:age-of-feeling'],
+                    'second-colour': ['rally-cry', 'imagine-otherwise'], 'colour-rare': ['persuasion', 'rousing-speech', 'wave-of-feeling'],
+                    'second-rule': ['axiom:age-of-feeling', 'axiom:age-of-wonder'], fate: ['nostalgia', 'rally-cry', 'wave-of-feeling'] } },
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

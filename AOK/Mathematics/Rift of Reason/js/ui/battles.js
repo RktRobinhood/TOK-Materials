@@ -54,6 +54,12 @@
             : 'Your ' + a + ' starter deck is ready: 12 creatures, 8 tactics and 10 axiom cards. See Collection.';
     }
     if (Rift.bus) Rift.bus.on('starter:granted', receipt => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(starterText(receipt), 6000); });
+    // Station card rewards paid for places finished earlier (#124, World.catchUpCards).
+    function cardsText(receipts) {
+        const names = receipts.filter(r => r.id).map(r => Rift.World.cardName(r));
+        return 'New cards for places you finished: ' + names.join(', ') + '. Add them in Collection.';
+    }
+    if (Rift.bus) Rift.bus.on('cards:granted', receipts => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(cardsText(receipts), 6000); });
 
     function needCreatures() {
         const s = Rift.State.get();
