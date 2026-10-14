@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-14",
+  "commits": [
+    "38d0c1539c81cc140a872b28b068a549264074fe",
+    "d986ad0c165589459fb4adaf51b349ceff508d20"
+  ],
+  "pages": [
+    {
+      "run": 38515394390,
+      "conclusion": "success"
+    },
+    {
+      "run": 38515996378,
+      "conclusion": "success"
+    }
+  ],
+  "publicPreview": "https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/dev/art-production.html?group=6&release=d986ad0",
+  "native": {
+    "viewport": "1280x720",
+    "dpr": 1,
+    "all4ImagesLoaded": true,
+    "correctRule": true,
+    "consoleWarningsErrors": [],
+    "cumulativeBulkAssets": 75,
+    "screenshot": "rick-public.png"
+  },
+  "issues": {
+    "closed": [
+      147
+    ],
+    "open": [
+      145,
+      146,
+      150
+    ],
+    "comments": {
+      "145": "6161522070",
+      "147": "6161432580",
+      "150": "6161433334"
+    }
+  },
+  "expansionPortraits": {
+    "made": 71,
+    "accepted": 71,
+    "target": 72
+  },
+  "sharedMotifs": 8,
+  "automationDeleted": "finish-rift-card-planning"
+}

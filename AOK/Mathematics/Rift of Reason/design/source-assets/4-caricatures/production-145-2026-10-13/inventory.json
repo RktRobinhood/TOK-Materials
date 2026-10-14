@@ -4202,7 +4202,7 @@
       "visualReview": "First take selected: coherent roach with two antennae, two arm-like front limbs and four walking legs, segmented abdomen, silver coat, one clear microphone. Alpha bounds x57..1181/y4..1306 in1194x1317: complete silhouette, small but nonzero margins; no major cut parts, no opaque background/text. No edit needed under proportional student QA.",
       "sourceSha256": "5266eed2ba66ce7c8e01e0f458f86028ac6e8abcc537d0f2f42251c5f47277bd",
       "nativeAcceptance": {
-        "status": "accepted locally",
+        "status": "accepted locally and publicly",
         "date": "2026-10-14",
         "evidence": "design/reviews/art-recovery-2026-10-14.md",
         "viewports": [
@@ -4213,7 +4213,7 @@
           "dark",
           "light"
         ],
-        "publicStatus": "Pending publication"
+        "publicStatus": "Accepted: publicgroup6,75bulkassets,all4imagesloaded,correctrule,zero warning/errors; Pages38515996378; rick-public.png"
       }
     },
     {
