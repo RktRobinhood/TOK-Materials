@@ -1,0 +1,100 @@
+{
+  "dpr": 1,
+  "images": [
+    {
+      "alt": "Original dawn village",
+      "loaded": true
+    },
+    {
+      "alt": "Dawn sky",
+      "loaded": true
+    },
+    {
+      "alt": "Far hills and river",
+      "loaded": true
+    },
+    {
+      "alt": "Village and sundial",
+      "loaded": true
+    },
+    {
+      "alt": "Foreground trees and fence",
+      "loaded": true
+    },
+    {
+      "alt": "Thin crack in the sky",
+      "loaded": true
+    },
+    {
+      "alt": "Empty attic bedroom at dawn",
+      "loaded": true
+    },
+    {
+      "alt": "Owlet boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Owlet boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Owlet girl asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Moth-kin boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Moth-kin girl asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Fox boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Fox girl asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Frogling boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Frogling girl asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Raven boy asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Raven girl asleep",
+      "loaded": true
+    },
+    {
+      "alt": "Dawn sky",
+      "loaded": true
+    },
+    {
+      "alt": "Far hills and river",
+      "loaded": true
+    },
+    {
+      "alt": "Village and sundial",
+      "loaded": true
+    },
+    {
+      "alt": "Foreground trees and fence",
+      "loaded": true
+    }
+  ],
+  "scripts": [
+    "js/core/rift.js",
+    "data/assets.js?v=final-art-20261014",
+    "js/core/assets.js"
+  ],
+  "url": "https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/dev/cold-open-art.html?release=37e06c2",
+  "width": 1280
+}

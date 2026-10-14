@@ -1,0 +1,43 @@
+{
+  "release": "37e06c2",
+  "pagesRun": 38599314122,
+  "conclusion": "success",
+  "results": [
+    {
+      "file": "data/assets.js",
+      "status": 200,
+      "match": true,
+      "sha256": "adbfb2156a2aa645c870dac28f8ef45ddd6d21f3a76faa8a48e93918c2b0fedc"
+    },
+    {
+      "file": "dev/art-production-data.js",
+      "status": 200,
+      "match": true,
+      "sha256": "a381efcb3e791e632a4b4bb6ea8a57ce7699fbce2713227a3fa15755d4305782"
+    },
+    {
+      "file": "dev/cold-open-art.html",
+      "status": 200,
+      "match": true,
+      "sha256": "683624283e42fbb62134b73d29ea74c05e7ded3ceb4197e931cbeb55c7950187"
+    },
+    {
+      "file": "assets/creatures/language-definition-dolphin-idle.webp",
+      "status": 200,
+      "match": true,
+      "sha256": "c2e93c69cd3d20b9c053f71a182840eae43f7135075d13607829fc1d0bf66091"
+    },
+    {
+      "file": "assets/scenes/bedroom.webp",
+      "status": 200,
+      "match": true,
+      "sha256": "9afe46d46c4e4dd453200bd07d68a4bd23ce661bb90d97271b39ca2018d4bbd7"
+    },
+    {
+      "file": "assets/avatars/raven-girl-asleep.webp",
+      "status": 200,
+      "match": true,
+      "sha256": "1b8e787e2467313955d0afe5c2256021ce7d8eda8b236ff5f5a62b94a81afe85"
+    }
+  ]
+}
