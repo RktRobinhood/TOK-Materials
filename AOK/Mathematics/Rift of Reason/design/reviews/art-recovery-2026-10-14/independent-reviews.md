@@ -15,3 +15,5 @@ Zero actionable findings in the scoped design/art slice.
 #147's bounded distinct Memory proposal is satisfied by a once-per-match escape from a targeted enemy spell; catalogue/persona/voice drafts agree, identities/stats/rarity/acquisition are preserved and the new timing is release-gated. #150's matching-geometry and painted-capture requirement is satisfied for this chat's native acceptance; original incomplete captures are preserved and excluded. The underlying old-client cause remains unconfirmed. #145 remains open at 71/72 with Stephen deferred; public deployment was still pending at review and is completion work rather than a falsely claimed result.
 
 Summary: Standards 0 hard breaches / 0 material smells; Spec 0 actionable findings. Runtime card integration, the remaining portrait and client root-cause investigation are not certified by these reviews.
+
+Follow-up preview-cache patch: both independent reviewers report0findings. Only two classic script refs gain?v=38d0c15; load order/game entrypoints/manifests unchanged. Local native browser confirms75assets and all loaded images. Public painted acceptance is still required after deployment.

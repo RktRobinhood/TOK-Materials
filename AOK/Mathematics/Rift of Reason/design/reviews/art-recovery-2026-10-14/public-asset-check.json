@@ -1,0 +1,38 @@
+[
+  {
+    "path": "dev/art-production-data.js",
+    "status": 200,
+    "remoteSha256": "982fe79172face440c291779ed38a3f4787fceb1c431d70ef40822ad4133ae3b",
+    "localSha256": "982fe79172face440c291779ed38a3f4787fceb1c431d70ef40822ad4133ae3b",
+    "etag": "W/\"6acf0f98-c9ca\"",
+    "age": "0",
+    "lastModified": "Wed, 14 Oct 2026 05:14:00 GMT"
+  },
+  {
+    "path": "data/assets.js",
+    "status": 200,
+    "remoteSha256": "ba27319fc2d47a1be96d1d60182787c7aceb76c28dfeca1b30ec0da19a304566",
+    "localSha256": "ba27319fc2d47a1be96d1d60182787c7aceb76c28dfeca1b30ec0da19a304566",
+    "etag": "W/\"6acf0f99-14b37\"",
+    "age": "0",
+    "lastModified": "Wed, 14 Oct 2026 05:14:01 GMT"
+  },
+  {
+    "path": "assets/creatures/memory-return-roach-idle.webp",
+    "status": 200,
+    "remoteSha256": "974c9cb823d661b5499e40d2de1267f0926e69b98def45d5e5c7a6be1c6bb6b2",
+    "localSha256": "974c9cb823d661b5499e40d2de1267f0926e69b98def45d5e5c7a6be1c6bb6b2",
+    "etag": "\"6acf0f99-13b24\"",
+    "age": "0",
+    "lastModified": "Wed, 14 Oct 2026 05:14:01 GMT"
+  },
+  {
+    "path": "design/source-assets/4-caricatures/production-145-2026-10-13/inventory.json",
+    "status": 200,
+    "remoteSha256": "0e999b05693046eeb9f310e434d57969b3db429dfe593687dacccaa451e4e4e0",
+    "localSha256": "0e999b05693046eeb9f310e434d57969b3db429dfe593687dacccaa451e4e4e0",
+    "etag": "W/\"6acf0f99-cdd30\"",
+    "age": "0",
+    "lastModified": "Wed, 14 Oct 2026 05:14:01 GMT"
+  }
+]
