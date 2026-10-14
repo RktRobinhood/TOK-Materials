@@ -463,7 +463,8 @@
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
                 ]);
-                const buttons = obstacle ? [{ label: 'Catch ' + Rift.data.creatures[obstacle].name + '!', primary: true, onclick: catchPhase }, { label: 'Back to the map', onclick: () => Rift.Router.replace('map') }] : [{ label: n.id === 'k-core' && !s.flags['seen:finale.home'] ? 'Go to the Summit Rift to return home' : 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }];
+                // required: a stray click beside the box must not close it and lose the catch offer (#125 playtest).
+                const buttons = obstacle ? [{ label: 'Catch ' + Rift.data.creatures[obstacle].name + '!', primary: true, required: true, onclick: catchPhase }, { label: 'Back to the map', onclick: () => Rift.Router.replace('map') }] : [{ label: n.id === 'k-core' && !s.flags['seen:finale.home'] ? 'Go to the Summit Rift to return home' : 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }];
                 modal('Solved!', body, buttons);
             }
 
@@ -497,10 +498,11 @@
                 const render = () => {
                     panel.innerHTML = '';
                     const st = Rift.State.get();
-                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: (mode === 'throw' ? 'Time a click inside a shrinking ring. One charm per throw.' : 'Place charms on a grid to block every exit. Each placement uses a charm.') + ' Skill improves your chance; a miss leaves a small chance.' }));
+                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: (mode === 'throw' ? 'Time a click inside a shrinking ring. One charm per throw.' : 'Place charms on a grid to block every exit. One charm per try.') + ' Skill improves your chance; a miss leaves a small chance.' }));
+                    if (catchOpts.lured) panel.append(el('p.small.catch-lured', { text: 'Your lure is lit here: rare creatures were more likely, and the odds below include +5 points.' }));
                     const avail = ['charm', 'greatcharm'].filter(id => (st.items[id] || 0) > 0);
                     if (!avail.length) {
-                        panel.append(el('p', { text: 'You have no charms left. It wanders off… for now.' }), el('button.btn', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }));
+                        panel.append(el('p', { text: 'You have no charms left. It wanders off… for now. Puzzle wins (replays too) and card challenges can give more.' }), el('button.btn', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }));
                         return;
                     }
                     avail.forEach(id => {

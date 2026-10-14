@@ -28,7 +28,7 @@
             noTarget: 'You need an enemy creature to aim at.',
             run(api, p, target) { api.freeze(target); api.emit({ t: 'item', text: 'Great Charm: ' + api.name(target) + " can't attack next turn." }); },
         } },
-        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it at a node: rare creatures become more likely for your next 3 visits; catch odds gain 5 points.', battle: {
+        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it where you stand. Your next 3 visits to that place: rare creatures are more likely and catch odds gain 5 points.', battle: {
             cost: 1, text: 'Draw a card from your deck.',
             usable: (s, p, H) => s.players[p].deck.length > 0 && H.handRoom(s, p, 1),
             why: (s, p) => (s.players[p].deck.length ? 'Your hand is full.' : 'Your deck is empty.'),
@@ -36,7 +36,7 @@
             run(api, p) { api.emit({ t: 'item', text: 'Lure Lantern: draw a card.' }); api.draw(p); },
         } },
         // The Gate reward for saving Professor Sequins (STORY.md Ch1, tiers 1–2): a stronger lure.
-        'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. Hold it up at a node: rare creatures become more likely for your next 5 visits; catch odds gain 5 points.' },
+        'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. Hold it up where you stand. Your next 5 visits to that place: rare creatures are more likely and catch odds gain 5 points.' },
         // The Tribunal reward for a clean save of the Sundial (STORY.md Ch3, tier 1). One use: in a later
         // stakes scene it cancels one mistake tick (the Ch4 drains read the `hoots-gavel` flag too).
         'hoots-gavel': { name: 'Hoot’s Gavel', kind: 'story', text: 'Judge Hoot’s own gavel. In a later stakes scene, it cancels one mistake. Once.' },

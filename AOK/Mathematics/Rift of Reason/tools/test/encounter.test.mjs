@@ -165,3 +165,22 @@ test('Owlet first-topic hint keeps stars and leaves its chapter perk available',
  all(g.root).find(x=>x.textContent.startsWith('🦉 Free hint')).onclick();
  assert.equal(g.state.flags['learning-hint:fake'],true);assert.equal(g.state.perksUsed['free-hint'],undefined);assert.equal(g.state.stats.hintsUsed,0);assert.equal(g.state.health,5);
 });
+
+test('catch offer (#125): a stray backdrop click cannot dismiss it; the panel names an active lure and how to earn charms',async()=>{
+ for(const empty of [false,true]){
+  const g=await game('puzzle',1,null,R=>{R.State.get().lures.test=1;});
+  g.Rift.World.rollLoot=()=>({species:'lobstorian'});g.Rift.voiceId=()=>'';
+  g.Rift.CatchGame={mount:()=>({destroy(){}})};
+  g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();
+  const offer=g.modals.at(-1);assert.equal(offer.title,'Solved!');
+  assert.ok(offer.buttons.some(b=>b.required),'the modal backdrop closes only modals without a required button');
+  assert.equal(offer.buttons.find(b=>b.label==='Back to the map').required,undefined);
+  if(empty){g.state.items.charm=0;g.state.items.greatcharm=0;}
+  offer.buttons[0].onclick();
+  function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
+  const texts=all(g.root).map(n=>n.textContent);
+  assert.ok(texts.some(t=>t.startsWith('Your lure is lit here')));
+  assert.equal(texts.some(t=>/Puzzle wins \(replays too\) and card challenges can give more/.test(t)),empty);
+  assert.equal(texts.some(t=>t.startsWith('Time a throw:')||t.startsWith('Box it in:')),!empty);
+ }
+});

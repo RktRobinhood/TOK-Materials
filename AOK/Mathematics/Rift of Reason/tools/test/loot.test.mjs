@@ -34,3 +34,18 @@ test('catch stars and lure improve the same displayed/rolled odds, never guarant
  assert.equal(Rift.World.rollCatch(s,'swiftlet','charm',{next:()=>.999},opts).caught,false);
  assert.equal(Rift.World.rollCatch(s,'swiftlet','charm',{next:()=>0},opts).p,Rift.World.catchOdds(s,'swiftlet','charm',opts));
 });
+
+// #125 supply evidence: a player never reaches a first-time catch offer empty-handed, and replays
+// keep paying catch items, so an empty bag is never a dead end (design/reviews/catching-loop-125-2026-10-14.md).
+test('every first win at a spawning station pays a catch item before the catch offer; replays still can',()=>{
+ const s=state();const catchItems=r=>(r.items.charm||0)+(r.items.greatcharm||0);
+ const stations=Object.entries(Rift.data.map.nodes).filter(([,n])=>(n.spawns||[]).length&&['puzzle','miniboss','boss'].includes(n.type));
+ assert.ok(stations.length>=30);
+ let replayPaid=0,replays=0;
+ for(const [id,n] of stations)for(const stars of [1,2,3])for(let seed=0;seed<40;seed++){
+  const rng=()=>Rift.makeRng(id+':'+stars+':'+seed);
+  assert.ok(catchItems(Rift.World.rewards(s,{id,...n},rng(),{stars,firstTime:true}))>=1,id);
+  replays++;replayPaid+=catchItems(Rift.World.rewards(s,{id,...n},rng(),{stars,firstTime:false}))>0?1:0;
+ }
+ assert.ok(replayPaid/replays>0.45,'replays pay a catch item about half the time or more');
+});

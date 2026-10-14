@@ -149,8 +149,9 @@ test('Start and Pause do not change the seeded box path, charm charges or trappi
         });
         assert.equal(g.results.length, 1);
         assert.equal(g.results[0].bonus, 0.15);
-        assert.equal(g.results[0].spent, path.length);
-        assert.equal(g.state.items.charm, 8 - path.length);
+        // One charm pays for the whole box try (#125), however many placements the path needs.
+        assert.equal(g.results[0].spent, 1);
+        assert.equal(g.state.items.charm, 7);
         g.handle.destroy();
     }
 });

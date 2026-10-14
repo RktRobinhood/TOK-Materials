@@ -90,10 +90,13 @@
             animate = update;
             update();
         } else {
-            game.append(el('p', { text: 'Place a charm on an empty square (cost: 1). It moves away from the nearest charm. Block every exit for +15 points. When moves tie, it follows a fixed order.' }),
+            // One charm from the bag pays for the whole try (#125: per-placement costs made a box try
+            // cost about five throws). The placement budget is the challenge, not the bag.
+            game.append(el('p', { text: 'One charm per try. Place up to ' + cfg.placements + ' charms on empty squares. It moves away from the nearest charm. Block every exit for +15 points. When moves tie, it follows a fixed order.' }),
                 el('p.small', { text: o.lured ? 'Your lure slows it: it moves only after every second charm.' : 'It moves after every charm.' }));
             const grid = el('div.catch-grid', { 'aria-label': 'Six by six catch board' });
             game.append(clock, playBtn, grid, status);
+            let placed = 0;
             function render() {
                 grid.innerHTML = '';
                 for (let i = 0; i < 36; i++) {
@@ -107,17 +110,18 @@
                             if (elapsed() >= cfg.seconds) { tick(); return; }
                             const step = Rift.Catching.boxStep(board, i, o.lured);
                             if (!step.valid) return;
-                            if (!spend()) { finish(0, 'No charms left.'); return; }
+                            if (!placed && !spend()) { finish(0, 'No charms left.'); return; }
+                            placed += 1;
                             const moved = step.board.creature !== board.creature;
                             board = step.board;
                             Rift.Audio.sfx(moved ? 'wobble' : 'place');
                             if (step.trapped) { finish(0.15, 'Trapped! Clever plan.'); return; }
-                            if (spent >= cfg.placements || !o.available(o.item)) { finish(0, 'It still has an exit.'); return; }
+                            if (placed >= cfg.placements) { finish(0, 'It still has an exit.'); return; }
                             render();
                         },
                     }, creature ? [Rift.Assets.img('creature/' + o.species + '/idle', { label: c.name })] : blocked ? [Rift.Assets.img('item/' + o.item, { label: 'Charm' })] : []));
                 }
-                status.textContent = 'Placements left: ' + Math.min(cfg.placements - spent, o.available(o.item)) + '. Trap it for +15 points.';
+                status.textContent = 'Placements left: ' + (cfg.placements - placed) + '. Trap it for +15 points.';
             }
             refresh = () => Array.from(grid.children).forEach((cell, i) => {
                 cell.disabled = phase !== 'running' || i === board.creature || board.charms.includes(i);
