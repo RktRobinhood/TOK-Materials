@@ -48,6 +48,8 @@ A map node (`data/map.js`) has a `type` (story, puzzle, miniboss, boss, rest, ru
 3. mounts the puzzle with an `api` (`submit`, `sfx`, `say`, `rng`, `difficulty`, `el`);
 4. on success: plays `<script>.win`, gives stars/rewards/accolades, rolls creature loot (sometimes none), then offers the catch.
 
+Card rewards: mini-bosses and bosses teach the next earned tactic on their first win, and so does a first trainer win (`World.claimTrainerReward`). A node's `cards` slots (data/map.js) pay a card from the avatar type's track (`rewards` in data/starters.js) once per adventure, with the receipt `flags['card-reward:<slot>']` (`World.claimCards`; `World.catchUpCards` for older saves). `node tools/sim-rewards.mjs` measures the cadence; see `design/reviews/reward-cadence-124-2026-10-14.md`.
+
 Hearts: a hint costs 1 (2 with the Shaky Hand scar). Every stage has 3 free wrong checks at difficulty 1 and 2 at difficulty 2–3 (Frogling adds one). Later wrong checks cost 1 heart everywhere. Correct checks cost nothing. Boss Why answers/skips cost 1 heart if wrong. At 0 hearts the player is knocked out and gets a scar.
 
 ## Working with the teacher
