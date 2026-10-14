@@ -1,0 +1,22 @@
+768 lines to render in 81 requests on gemini-3.8-flash-tts, gemini-3.8-flash-lite-tts.
+09.40.52 lite  clockmaker: saved 1 lines (total 1)
+09.40.59 flash avatar-mothkin-girl-inner: saved 3 lines (total 4)
+09.41.26 lite  gumleaf: saved 2 lines (total 6)
+09.41.32 flash mayor: saved 1 lines (total 7)
+09.42.19 lite  kuku: saved 12 lines (total 19)
+09.42.30 flash avatar-fox-boy-possessed: saved 3 lines (total 22)
+09.42.49 lite  kardashiant-possessed: saved 1 lines (total 23)
+09.43.14 flash avatar-frogling-girl-possessed: saved 3 lines (total 26)
+09.43.48 lite  kardashiant: saved 16 lines (total 42)
+09.44.10 flash avatar-raven-boy-possessed: saved 3 lines (total 45)
+09.45.01 lite  fin: saved 20 lines (total 65)
+09.45.38 flash judge: saved 10 lines (total 75)
+09.45.53 lite  avatar-owlet-girl-possessed: saved 3 lines (total 78)
+split failed for mirage x25; kept in tools/voice-raw, retrying as 13 + 12.
+09.46.31 lite  avatar-mothkin-boy-possessed: saved 3 lines (total 81)
+09.47.27 flash mirage: saved 13 lines (total 94)
+09.47.39 lite  avatar-fox-girl-possessed: saved 3 lines (total 97)
+09.48.31 flash mirage: saved 12 lines (total 109)
+09.48.44 lite  avatar-frogling-boy-possessed: saved 3 lines (total 112)
+09.50.31 flash colossus: saved 28 lines (total 140)
+FINISHED: 140 lines saved, 20 requests used. Manifest lists 2320 files.

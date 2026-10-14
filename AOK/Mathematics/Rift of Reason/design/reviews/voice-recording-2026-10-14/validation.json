@@ -1,0 +1,999 @@
+{
+  "date": "2026-10-14",
+  "baselineFiles": 2180,
+  "existingFilesUnchanged": true,
+  "newClips": 140,
+  "currentRecorded": 1951,
+  "currentTotal": 2579,
+  "missingLines": 628,
+  "manifestFiles": 2320,
+  "usage": {
+    "day": "2026-10-14",
+    "counts": {
+      "gemini-3.8-flash-tts": 10,
+      "gemini-3.8-flash-lite-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "avatar-fox-boy-possessed-1dhsiy6",
+      "speaker": "avatar-fox-boy-possessed",
+      "expected": "Picture it at home. Same face. Fewer questions. Restful.",
+      "seconds": 10.224,
+      "sha256": "d60ba37e58d5b457ef4428c1e84cec10d07358996e39fa6332d5399b42dbf791"
+    },
+    {
+      "id": "avatar-fox-boy-possessed-1qz81jn",
+      "speaker": "avatar-fox-boy-possessed",
+      "expected": "Picture the rock in jail. Boring. Very realistic.",
+      "seconds": 7.752,
+      "sha256": "f00a0f822aa8d59ca25ac91360742efead6499642cbc9e4151df5731b5e08b5e"
+    },
+    {
+      "id": "avatar-fox-boy-possessed-1wzpi5j",
+      "speaker": "avatar-fox-boy-possessed",
+      "expected": "Picture giving up. Very realistic. No drama at all.",
+      "seconds": 8.088,
+      "sha256": "cb5f676efef839da316254e8a83d13b4a944e60bfc4be2e46a4c7d3ea4600cad"
+    },
+    {
+      "id": "avatar-fox-girl-possessed-11lsfav",
+      "speaker": "avatar-fox-girl-possessed",
+      "expected": "Picture giving up. Very realistic. No drama at all.",
+      "seconds": 8.808,
+      "sha256": "984ee64c358c3d909229935ffec02d713f8da79d419f36bfcae9b7717e7f59ea"
+    },
+    {
+      "id": "avatar-fox-girl-possessed-1en9j75",
+      "speaker": "avatar-fox-girl-possessed",
+      "expected": "Picture the rock in jail. Boring. Very realistic.",
+      "seconds": 7.296,
+      "sha256": "dc194b7f3a9e5f6993f23240105f7285811ac0137873a4c3ad1c0ff820734ebf"
+    },
+    {
+      "id": "avatar-fox-girl-possessed-ajd3x2",
+      "speaker": "avatar-fox-girl-possessed",
+      "expected": "Picture it at home. Same face. Fewer questions. Restful.",
+      "seconds": 9.864,
+      "sha256": "d2e811473b5b475befdb4ff533510a3ef1443c9126495366485a1f5579d86764"
+    },
+    {
+      "id": "avatar-frogling-boy-possessed-1l9n305",
+      "speaker": "avatar-frogling-boy-possessed",
+      "expected": "Rocks always lose trials. I remember every one. Don't ask which.",
+      "seconds": 9.792,
+      "sha256": "e1d51f2f9d253fb3b3738bdbb495482343492ce171a5ad3eb02f0cfa72e4c972"
+    },
+    {
+      "id": "avatar-frogling-boy-possessed-etahql",
+      "speaker": "avatar-frogling-boy-possessed",
+      "expected": "You always lose at the top. I remember. Don't ask when.",
+      "seconds": 8.928,
+      "sha256": "a66ccd7852ca7ee61a08886504ad44671be119369ae755964923a1acd0c25cc4"
+    },
+    {
+      "id": "avatar-frogling-boy-possessed-ocsvp2",
+      "speaker": "avatar-frogling-boy-possessed",
+      "expected": "Nobody will notice. I remember everyone. Don't ask who.",
+      "seconds": 8.328,
+      "sha256": "3f738c915c3ca0f934990f9ebe49c125cb60a16fdcbed268d88ebcaf8cf4b323"
+    },
+    {
+      "id": "avatar-frogling-girl-possessed-156uxw1",
+      "speaker": "avatar-frogling-girl-possessed",
+      "expected": "Rocks always lose trials. I remember every one. Don't ask which.",
+      "seconds": 9.624,
+      "sha256": "a6353c841bdfa359c8524192838969eac02dc8fd6f74cdb55495b992614a3295"
+    },
+    {
+      "id": "avatar-frogling-girl-possessed-1vflrt8",
+      "speaker": "avatar-frogling-girl-possessed",
+      "expected": "You always lose at the top. I remember. Don't ask when.",
+      "seconds": 7.872,
+      "sha256": "beda158f0b303e003ab1316c3685c43965fee974f263c4f1c235ceb3d0f7f84f"
+    },
+    {
+      "id": "avatar-frogling-girl-possessed-30rl4x",
+      "speaker": "avatar-frogling-girl-possessed",
+      "expected": "Nobody will notice. I remember everyone. Don't ask who.",
+      "seconds": 8.64,
+      "sha256": "21670a7dece489939d9386bbeb2db74f35ac630c9332c1dbff5a98f9f6faa925"
+    },
+    {
+      "id": "avatar-mothkin-boy-possessed-8bj9ie",
+      "speaker": "avatar-mothkin-boy-possessed",
+      "expected": "Don't look at it. Looking is tiring. Just give up.",
+      "seconds": 7.224,
+      "sha256": "dd7d0c8b6447f04bf3a42525519bff724d0a8c484d5a6f81d3377732ae697a67"
+    },
+    {
+      "id": "avatar-mothkin-boy-possessed-v64tdf",
+      "speaker": "avatar-mothkin-boy-possessed",
+      "expected": "Look at the votes. Only the votes. Lights are boring.",
+      "seconds": 7.608,
+      "sha256": "1ccd4eb26945913ab3248c0864a3167cf8cad854d8fe3530ebbafe047f138ac2"
+    },
+    {
+      "id": "avatar-mothkin-boy-possessed-y1xrr",
+      "speaker": "avatar-mothkin-boy-possessed",
+      "expected": "Look at it. So bright. Brighter than you. Let it go.",
+      "seconds": 8.16,
+      "sha256": "319ab904bf8a6472ce557e05bef71dcfa5d222f439e3966f1d6fa4761a5d4033"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-1jophes",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Look. His eye twitched at \"missing\". Twitchers are guilty. Science.",
+      "seconds": 6.288,
+      "sha256": "8e38333fe16e413d332599ff6724bfa57b2c5b39e1e86cb1773b2ae80a24ff8b"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-iz5pbw",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.",
+      "seconds": 8.784,
+      "sha256": "41847675588cbb5af0c73cf1e56386d48f69ec9b69160316d506545b118367da"
+    },
+    {
+      "id": "avatar-mothkin-girl-inner-nwrlkk",
+      "speaker": "avatar-mothkin-girl-inner",
+      "expected": "Shh. Behind the panel. Something shiny. Only one thing. Look.",
+      "seconds": 6.936,
+      "sha256": "a2292166250d771f25b774109c6be90212f96e1b1eb0f6fd06990fc58012864d"
+    },
+    {
+      "id": "avatar-owlet-girl-possessed-1n6skjj",
+      "speaker": "avatar-owlet-girl-possessed",
+      "expected": "It's always right. You aren't. So it should go home. QED.",
+      "seconds": 7.704,
+      "sha256": "4a36ccfc0cdde7a6480bb6767e3d3c9aa8a1fe63a2d750f4e28959023116529e"
+    },
+    {
+      "id": "avatar-owlet-girl-possessed-1yrn639",
+      "speaker": "avatar-owlet-girl-possessed",
+      "expected": "Give up. Losing is likely. Likely means proven. That's logic.",
+      "seconds": 8.856,
+      "sha256": "6d9a1ba85bf35d3a503e015f25931acea39e95e7f73661bd9531fc287f156545"
+    },
+    {
+      "id": "avatar-owlet-girl-possessed-jf7q19",
+      "speaker": "avatar-owlet-girl-possessed",
+      "expected": "Everyone votes guilty. So: guilty. Elegant. Like everyone.",
+      "seconds": 8.544,
+      "sha256": "62919b310c48904ca0195d6d4d4497bd67fd252e4cec22b2e71b39ac772f15f3"
+    },
+    {
+      "id": "avatar-raven-boy-possessed-13qnaqo",
+      "speaker": "avatar-raven-boy-possessed",
+      "expected": "\"Fraud.\" A strong word. Strong words are true. That's what they're for.",
+      "seconds": 10.92,
+      "sha256": "7f9dc36f41e439a6bfae6644648ecdd4a80202fc415ed7ae06896081555ff59a"
+    },
+    {
+      "id": "avatar-raven-boy-possessed-rdfnt0",
+      "speaker": "avatar-raven-boy-possessed",
+      "expected": "\"Everything.\" A big word. Big words are true. Give up.",
+      "seconds": 7.872,
+      "sha256": "ea17736a4698400ca23a434160b9ba5bd3acff5a250b83c3dd03baeb9ccb83bf"
+    },
+    {
+      "id": "avatar-raven-boy-possessed-uj27k4",
+      "speaker": "avatar-raven-boy-possessed",
+      "expected": "\"Always right.\" Lovely words. Words that lovely must be true.",
+      "seconds": 10.536,
+      "sha256": "7a04d8a1c4fd95adec005c89269a6f5a3eef23c905cd7fb567dfe3c5049ef3dc"
+    },
+    {
+      "id": "clockmaker-vvrrlg",
+      "speaker": "clockmaker",
+      "expected": "Mind the pendulums! A hundred clocks, all correct. I check them twice.",
+      "seconds": 6.6,
+      "sha256": "f2ce141f45b742d9edf5a63efafac2fe04bc348a0a96b3339fdd3339c7dbdfaf"
+    },
+    {
+      "id": "colossus-10o3tvu",
+      "speaker": "colossus",
+      "expected": "My game. I bet first. Beat my bet, if you can.",
+      "seconds": 7.488,
+      "sha256": "5811a42e3eb952397f5fb4b716ae7f51d70824708ce5a6cebadcdb0a322afba7"
+    },
+    {
+      "id": "colossus-11qokpk",
+      "speaker": "colossus",
+      "expected": "You wanted this at the fair. Step aside.",
+      "seconds": 5.76,
+      "sha256": "610a9aaad3e68233afe7f9b80942079713364c365d7a5d22c43b5b116762406a"
+    },
+    {
+      "id": "colossus-12czrsc",
+      "speaker": "colossus",
+      "expected": "Good, clerk. Checking is slow. Welcome. You are 81% predictable.",
+      "seconds": 9.864,
+      "sha256": "c2d989fc71493fb1231834bbff0dd65f0d40b0b6b31179c9921e0d6b98b51620"
+    },
+    {
+      "id": "colossus-12mxxx5",
+      "speaker": "colossus",
+      "expected": "It can do the last one for you. Perfectly.",
+      "seconds": 5.232,
+      "sha256": "4f762a8bee0a364a3f0ca5d92b8632b6573cc55743e113d53bdb883577e1d3fb"
+    },
+    {
+      "id": "colossus-1385w6f",
+      "speaker": "colossus",
+      "expected": "It is finished. It is you. But always right.",
+      "seconds": 6.456,
+      "sha256": "fb68a99e661f78aef67d822200d5c0447689953c9ed23cac8c3018a0e3fcfb31"
+    },
+    {
+      "id": "colossus-16gh20b",
+      "speaker": "colossus",
+      "expected": "Down there, copies. Up here, the originals. Even truer. Technically.",
+      "seconds": 9.336,
+      "sha256": "04a66d1c7e3fdadc22f36b40c99c41da2e93e0a0d5a12c27f69d0bbcb25a2587"
+    },
+    {
+      "id": "colossus-180esud",
+      "speaker": "colossus",
+      "expected": "It is you. But always right. It will go home for you. They will not notice.",
+      "seconds": 8.952,
+      "sha256": "8fc60a58972d93c9eaa84fb4117571a5a68f902ebef5ec3e37ea57214ec480d0"
+    },
+    {
+      "id": "colossus-1hg9spa",
+      "speaker": "colossus",
+      "expected": "That was not your usual move.",
+      "seconds": 4.056,
+      "sha256": "46b48138c1259ac42565fc21f5c0fafc028e8d935cb7813ae1cd2d0b2aed9c0e"
+    },
+    {
+      "id": "colossus-1p299o7",
+      "speaker": "colossus",
+      "expected": "Pip. You love records. Come and be sure.",
+      "seconds": 6.168,
+      "sha256": "8c9f4a725f18b38869920d5630dde2a10af381d22eacb4361b7476486d08f6a7"
+    },
+    {
+      "id": "colossus-1s0hnlq",
+      "speaker": "colossus",
+      "expected": "Three trials. Three old tricks. My teacher goes first.",
+      "seconds": 7.44,
+      "sha256": "c67a1eb4bb2648ad2d0d3d09acc304d740363782bc20d4df9772cfd3a0ffb69a"
+    },
+    {
+      "id": "colossus-1sfrw6x",
+      "speaker": "colossus",
+      "expected": "Every chart is true. Technically. Check the axes. You will not.",
+      "seconds": 8.448,
+      "sha256": "ca09cb0b75d92b4ff7bd7b4619cbe1619ca471cce6dd980cd3b83449049543a4"
+    },
+    {
+      "id": "colossus-1wiacrc",
+      "speaker": "colossus",
+      "expected": "It is nearly finished. It is you. But always right.",
+      "seconds": 6.984,
+      "sha256": "6f4942ed0d064e525a578c1bac39784184a98598d283882214bee2784e4b9e8d"
+    },
+    {
+      "id": "colossus-1x2blmc",
+      "speaker": "colossus",
+      "expected": "It is fine. It is modern art now.",
+      "seconds": 4.776,
+      "sha256": "83c0e34c3b1f1ebce453f259474d34f3d90ef851f6434bea5e9da42ea4fa54f7"
+    },
+    {
+      "id": "colossus-1xj5pfh",
+      "speaker": "colossus",
+      "expected": "My champion is you. But optimised.",
+      "seconds": 6.144,
+      "sha256": "82cc99e0b08a94297444e418516ad8f3731069311170f20bdc15b6767597dea4"
+    },
+    {
+      "id": "colossus-1xuud6p",
+      "speaker": "colossus",
+      "expected": "You said \"always\". So do I.",
+      "seconds": 5.376,
+      "sha256": "7c8307b942aa423da9424bbaa40faf2ce8fea2c86bc439ec29089cab33b7cd70"
+    },
+    {
+      "id": "colossus-5l2wyc",
+      "speaker": "colossus",
+      "expected": "Nudge. You are no longer required.",
+      "seconds": 5.328,
+      "sha256": "e0fe80766f761dc35dd0d729fb1ce07e4fc2a5ff3c53609e7d4a78e272a344fe"
+    },
+    {
+      "id": "colossus-7w3xv9",
+      "speaker": "colossus",
+      "expected": "Predicted. You will pick it again.",
+      "seconds": 4.872,
+      "sha256": "a1705b22bfe2e8a19692d93367622d7ee34ce050667e876f963bf9dadb6dde44"
+    },
+    {
+      "id": "colossus-8ltkpk",
+      "speaker": "colossus",
+      "expected": "Again? My champion has re-optimised.",
+      "seconds": 5.928,
+      "sha256": "5c08028fb5ac4e2f90e064d79dcd4d7835604325d83b63612b2fa9933996bdca"
+    },
+    {
+      "id": "colossus-awu4cw",
+      "speaker": "colossus",
+      "expected": "No more masks. No more hiding. Just me. Everything.",
+      "seconds": 8.568,
+      "sha256": "e2e7e49149e10f19cabaa930753a546de11b00556bb9542dcfc07b51ecd67c3a"
+    },
+    {
+      "id": "colossus-cy5ree",
+      "speaker": "colossus",
+      "expected": "Noted. Next time you will pick the clever one.",
+      "seconds": 5.832,
+      "sha256": "d02c07249398ce185f7d9cf9cb3c06fd1cc71ea6faacc326f0b7a27b691e881c"
+    },
+    {
+      "id": "colossus-omufu9",
+      "speaker": "colossus",
+      "expected": "You did not do what you usually do.",
+      "seconds": 4.416,
+      "sha256": "c7db69e20a9e02a9efbe81676e885bbbcb120b668d6653c7ecb91e4f159522ca"
+    },
+    {
+      "id": "colossus-r7uhjq",
+      "speaker": "colossus",
+      "expected": "More charts. Still true. Still technically.",
+      "seconds": 7.08,
+      "sha256": "1729b91491f04229bafd012ae042a95aba115162ff9c4655d523ac71c059ca9e"
+    },
+    {
+      "id": "colossus-s0hvn5",
+      "speaker": "colossus",
+      "expected": "Next case. The defendant:",
+      "seconds": 4.368,
+      "sha256": "6b0eccefbe58a7331ada5ad1d33f4846d6853505c6946186864c797a2fdd0273"
+    },
+    {
+      "id": "colossus-shphbj",
+      "speaker": "colossus",
+      "expected": "It can bring them too. Listen.",
+      "seconds": 4.632,
+      "sha256": "1e4b21ee5016d8f254b6e6aa44349dfa7640fc52bac1f2a1d2e070b7ab7fca16"
+    },
+    {
+      "id": "colossus-ssoxyo",
+      "speaker": "colossus",
+      "expected": "Still counting you. Still betting.",
+      "seconds": 4.8,
+      "sha256": "ab3a3235ada00dd829a7f9b59f86736823f358a542c590569eb42ad1a411b714"
+    },
+    {
+      "id": "colossus-uudytw",
+      "speaker": "colossus",
+      "expected": "The sorting machine needs a clerk.",
+      "seconds": 3.984,
+      "sha256": "6425c90049830004794b734c0e2bbf41a511a476853b7567995a5e87c807e0e8"
+    },
+    {
+      "id": "colossus-zvztfr",
+      "speaker": "colossus",
+      "expected": "Left or right? I have predicted you five times. Five right.",
+      "seconds": 8.832,
+      "sha256": "41edfa8509d84d57d24844c901566fe124cc80c6b7cff6a83150ceb41a6c8615"
+    },
+    {
+      "id": "colossus-zza7eq",
+      "speaker": "colossus",
+      "expected": "I have your numbers. Look.",
+      "seconds": 5.064,
+      "sha256": "db659e8fc7e56d2373232ac3c7b8eb8a628c3f4f8d385fcdeb7a173c8df86313"
+    },
+    {
+      "id": "fin-168mbc4",
+      "speaker": "fin",
+      "expected": "Jury. Listen closely.",
+      "seconds": 2.736,
+      "sha256": "7cb3834c360b32e321b9c3933ebbc9c811bc0c83c4bfe110793c378da8908d04"
+    },
+    {
+      "id": "fin-190xtsh",
+      "speaker": "fin",
+      "expected": "No licence. Still have cards. Sit, if you like.",
+      "seconds": 4.2,
+      "sha256": "9b949d30f6e000f570ddb8e7058d69b97b22bb3262f4f90836ad7cc9c67f1e4b"
+    },
+    {
+      "id": "fin-1947g9d",
+      "speaker": "fin",
+      "expected": "Enter it, Mr Pip. Formally. The jury must see it.",
+      "seconds": 4.104,
+      "sha256": "1c679220c160aca3a4c9e881b89190bee263e6990049745538162a5383eafdb5"
+    },
+    {
+      "id": "fin-1e4dvm6",
+      "speaker": "fin",
+      "expected": "A loss. Cards don't count. Only cases I want to win.",
+      "seconds": 5.136,
+      "sha256": "c99787a7500fc7f0bcd49fb22c290c4e80164042b7084cf04d0a528829026038"
+    },
+    {
+      "id": "fin-1moqi1b",
+      "speaker": "fin",
+      "expected": "The vault never opens. Courts do.…So I let it win. For a bit.",
+      "seconds": 8.784,
+      "sha256": "4078c5f23536b2ff422b2c9e6bcc75caf2b77658f6c30657e75cccaddd4494c4"
+    },
+    {
+      "id": "fin-1pyng9r",
+      "speaker": "fin",
+      "expected": "No licence. I come here to read now. The small print, mostly.",
+      "seconds": 5.424,
+      "sha256": "6632c446aea5b28feb3046494af63ad46d8ef4334a478d4edf5a96e156646d00"
+    },
+    {
+      "id": "fin-1sfut17",
+      "speaker": "fin",
+      "expected": "Every clock that guesses is a fraud. The defendant guesses. So it is a fraud.",
+      "seconds": 7.128,
+      "sha256": "1b2177b0d3a97aacccedb3bc5e5c9f2f709ef500e375af6f25d262004e480c52"
+    },
+    {
+      "id": "fin-1ttg2p",
+      "speaker": "fin",
+      "expected": "The vault never opens. Courts do. I bet with its life. I lost. I'm sorry.",
+      "seconds": 9.36,
+      "sha256": "1aa4863657979aab0129204281b900c475cede756c308145a9e5fc94db7341b8"
+    },
+    {
+      "id": "fin-1yq54yp",
+      "speaker": "fin",
+      "expected": "Count two. Numbers. It was wrong three times in ten!",
+      "seconds": 4.968,
+      "sha256": "e161e3ea0114fd0112c123d49bce95812b76fbc53d9434995d6fe194a0ed0dcd"
+    },
+    {
+      "id": "fin-3otvzb",
+      "speaker": "fin",
+      "expected": "Say it. Say \"I guess\". For the jury.",
+      "seconds": 3.912,
+      "sha256": "a7cf713e5a16d481c3c43dfc8ab4c17d5c6a9027444c61294281032f703a24df"
+    },
+    {
+      "id": "fin-8rd2qv",
+      "speaker": "fin",
+      "expected": "Prosecutor Fin. I have never lost a case I wanted to win.",
+      "seconds": 5.544,
+      "sha256": "3f9d761223a5cdc3a59158cc2e75a749c3bbc644d68d9f6c80efc021c23441d7"
+    },
+    {
+      "id": "fin-8z8r73",
+      "speaker": "fin",
+      "expected": "Cards, in the Archive? Fine. Win this one. You'll need the practice.",
+      "seconds": 6.144,
+      "sha256": "ed675da39c4ee7fab1ded8a93a0df7c834b8fbff8e2f8658a11fdf83ceec04a3"
+    },
+    {
+      "id": "fin-ewl7to",
+      "speaker": "fin",
+      "expected": "Back again? Cards don't count. Cases count.",
+      "seconds": 4.656,
+      "sha256": "6701afd5b6c152d1792bbeb2cc3fe7ea21309d8244126081549e6e31ab8ee618"
+    },
+    {
+      "id": "fin-hn029x",
+      "speaker": "fin",
+      "expected": "It HAS it. Having isn't stealing, Your Honour.",
+      "seconds": 3.816,
+      "sha256": "6b40df516e1924381e14b6b2c21ea56e2d461cf7e6f105a874becb1f39aeec65"
+    },
+    {
+      "id": "fin-phzisc",
+      "speaker": "fin",
+      "expected": "Lost again. Fairly. I could get used to fair.",
+      "seconds": 4.704,
+      "sha256": "d4e88c967b1f4f97ec644891243d34131e6fe713c7091db58d2da78880841ae4"
+    },
+    {
+      "id": "fin-undwwz",
+      "speaker": "fin",
+      "expected": "Count two. The court says we finish.…So we finish.",
+      "seconds": 3.816,
+      "sha256": "246914bd0ba24b0b64e7de2265f9d947529179ef4ce6b67d1b015445b6ef3cd3"
+    },
+    {
+      "id": "fin-wc1qs4",
+      "speaker": "fin",
+      "expected": "Count three. A proof that a sundial can never know the time.",
+      "seconds": 5.832,
+      "sha256": "d4f0ec81d054901ca7da047af20854cf8b30a46e37350a6c828bd6141c9afca4"
+    },
+    {
+      "id": "fin-weil9u",
+      "speaker": "fin",
+      "expected": "Count three. I'll read it. I won't enjoy it.",
+      "seconds": 2.904,
+      "sha256": "b3bd60a6d34c2dbe702d89abda51829bfdddfdcc4e9a4b72ceb4c7ad6a9fdde8"
+    },
+    {
+      "id": "fin-x06zse",
+      "speaker": "fin",
+      "expected": "Exhibit A: one shadow, lost by the defendant. Careless rocks lose things.",
+      "seconds": 5.712,
+      "sha256": "1c4bcb1cf3bbf6009a3c5d285249ca5dddf97316e6ce85007898b1f2a065ef3b"
+    },
+    {
+      "id": "fin-yojpzh",
+      "speaker": "fin",
+      "expected": "Objection. That clip was bought with flattery, Your Honour.",
+      "seconds": 3.984,
+      "sha256": "690c3884cbb8b5d070f3c324bdea743ba2424e05ba1280dc32d8d1ac783a142c"
+    },
+    {
+      "id": "gumleaf-7ll1ae",
+      "speaker": "gumleaf",
+      "expected": "Mr Gumleaf. Supply teacher. Today's lesson, apparently: true or false. No maybes. In capitals.",
+      "seconds": 11.208,
+      "sha256": "417534daa11e93f25ddeec05f1d5555766a1ac4cdbbf6f5fa2a602be0b0555c6"
+    },
+    {
+      "id": "gumleaf-a7gp7n",
+      "speaker": "gumleaf",
+      "expected": "Saying it doesn't prove it, Smudge. An imp would say the same. Sorry. Rules.",
+      "seconds": 6.96,
+      "sha256": "2db5c5792a318e7ddea734156bbd60e271210345fb17f9765cdaf0a080a2cb0b"
+    },
+    {
+      "id": "judge-10gi4ky",
+      "speaker": "judge",
+      "expected": "Order. The counts again. Break every one.",
+      "seconds": 4.416,
+      "sha256": "519639fdd9d2e93094c63e736572e0bbc03e690b246b609284b9e8e1bdf93e65"
+    },
+    {
+      "id": "judge-11dyhvg",
+      "speaker": "judge",
+      "expected": "Kind. Fast. Not evidence.",
+      "seconds": 3.576,
+      "sha256": "9f25eb5388dda272492e82c8961f82bb41495d429e9da59444bb9b2a2dcff903"
+    },
+    {
+      "id": "judge-1kmedfd",
+      "speaker": "judge",
+      "expected": "Kind. Not evidence. But kind.",
+      "seconds": 3.312,
+      "sha256": "d60a4afc388ce4ac9402c6651ca3b0e6218bd1ba15c43f238471d83ba1b1556e"
+    },
+    {
+      "id": "judge-1ngclel",
+      "speaker": "judge",
+      "expected": "The arguments failed. The vote did not care. Write that down, Pip.",
+      "seconds": 6.936,
+      "sha256": "a58f15ef92f1e022bf7bf4f38f094f19c9ce2267f764e3f19f5b04e230b10904"
+    },
+    {
+      "id": "judge-1twdg59",
+      "speaker": "judge",
+      "expected": "Noted. The defence will press harder.",
+      "seconds": 4.032,
+      "sha256": "e82029aac664470fa7818d61a978ac64332913588dddd8e185f999e07c678392"
+    },
+    {
+      "id": "judge-4iogg4",
+      "speaker": "judge",
+      "expected": "New rule: the public votes the verdict. A vote is not evidence. But it decides.",
+      "seconds": 8.136,
+      "sha256": "b9036abf36ada455b4fa162b1a1f2407efeb10bed43e8f265c6e4d51a094025c"
+    },
+    {
+      "id": "judge-6hlaag",
+      "speaker": "judge",
+      "expected": "But the exhibit was stolen. Stolen things go home.",
+      "seconds": 5.784,
+      "sha256": "bede12aa99728efbf95eca3ce6163089b0bbf8932538b575284fb8aabc69de35"
+    },
+    {
+      "id": "judge-fomgow",
+      "speaker": "judge",
+      "expected": "No argument today supports its claim. Case dismissed.",
+      "seconds": 5.112,
+      "sha256": "54d8d3a4337ebd1710fb08f65399234eb872b0ce377b88d150e1ad64a8cdbfa8"
+    },
+    {
+      "id": "judge-jatq8f",
+      "speaker": "judge",
+      "expected": "Three counts, defence. Break every one, and I can dismiss the case.",
+      "seconds": 6.792,
+      "sha256": "0cb37353246de3e9975ec7229cc1737665a5e9b49837223c20e35dbeffd06a68"
+    },
+    {
+      "id": "judge-prb4ey",
+      "speaker": "judge",
+      "expected": "Order! The Algorithm versus the Sundial. The charge: fraud.",
+      "seconds": 7.224,
+      "sha256": "cdb62ac8e01dfc3195998d41d55f8b4345515f608d2f4de4d6fb05010787f1a1"
+    },
+    {
+      "id": "kardashiant-16q8smk",
+      "speaker": "kardashiant",
+      "expected": "That headline came in this morning. Handwritten. On golden paper.",
+      "seconds": 5.304,
+      "sha256": "0c94ea8093aaf3d0662762d742aa893430f5eb195359ccce87c2c54abcde1656"
+    },
+    {
+      "id": "kardashiant-18k2tui",
+      "speaker": "kardashiant",
+      "expected": "I took a selfie with it. The gold matches my filter.",
+      "seconds": 3.792,
+      "sha256": "3d4fd2186cf102d65c81834d47b58d0df28958cd67529cc0d819d01b6407aa56"
+    },
+    {
+      "id": "kardashiant-1aghy1e",
+      "speaker": "kardashiant",
+      "expected": "Hold on, let me find my light.",
+      "seconds": 3.432,
+      "sha256": "672f2e3c01559ecebbef2174ba2defcf5d19eecb8ecd548d78f067ec519ca23c"
+    },
+    {
+      "id": "kardashiant-1m7x5cx",
+      "speaker": "kardashiant",
+      "expected": "Did I share that without reading it?…Don't tell my followers.",
+      "seconds": 4.416,
+      "sha256": "9f9d6b5f9910a0f23058147c0899d03c7a986bcbfe29b7b7344a1cfadff27ae3"
+    },
+    {
+      "id": "kardashiant-1n7e1vk",
+      "speaker": "kardashiant",
+      "expected": "With the filter I am basically a lion.",
+      "seconds": 3.672,
+      "sha256": "7e354724a155ee26a26f56b3c191a888e3a383d6b139667a41b6b131d201e212"
+    },
+    {
+      "id": "kardashiant-1oya9qh",
+      "speaker": "kardashiant",
+      "expected": "Fast-forward to the good bit.",
+      "seconds": 2.208,
+      "sha256": "2e71ddd2aeaa5df6ad580f6c1af8a9cf6adbcceeea90ff65a85fd73f75b491c2"
+    },
+    {
+      "id": "kardashiant-7mqorg",
+      "speaker": "kardashiant",
+      "expected": "Delete that photo.",
+      "seconds": 1.2,
+      "sha256": "54a8bf68ba6ba18cf3514071f77a05766bdd59572494ce8f3a823fb4c449c5cf"
+    },
+    {
+      "id": "kardashiant-e2wm17",
+      "speaker": "kardashiant",
+      "expected": "Take a picture. I'm the main character.",
+      "seconds": 3.24,
+      "sha256": "0fc16afb23b192a30423dbe506b5b25e770c49310c090817bc9cd0cd5eb6e51e"
+    },
+    {
+      "id": "kardashiant-j3lper",
+      "speaker": "kardashiant",
+      "expected": "Is this real? Does it matter? It got likes.",
+      "seconds": 4.32,
+      "sha256": "42ce96b562a763108ceb17c571c6f200a39ad9c08d13fdee67cce4c837257bd6"
+    },
+    {
+      "id": "kardashiant-possessed-1gq20zk",
+      "speaker": "kardashiant-possessed",
+      "expected": "Fraud admits! Share it! If it's shared, it's true!",
+      "seconds": 6.792,
+      "sha256": "1f1b45ee2482cf6ac336dbc2a127e8e2c021b2d029dba36ec75506ad5d678b32"
+    },
+    {
+      "id": "kardashiant-py4c1i",
+      "speaker": "kardashiant",
+      "expected": "I sell papers now. I still don't read them.",
+      "seconds": 4.032,
+      "sha256": "232cb983f041261a1084a7057645d59c3efabaf609fc9b89907485013b01bb2a"
+    },
+    {
+      "id": "kardashiant-rhnsg",
+      "speaker": "kardashiant",
+      "expected": "Filter on. Fierce mode.",
+      "seconds": 3.36,
+      "sha256": "239763d86b6be78b4a0059b82930b07a9086f72bd9ec3084af3140b1b62e8e6e"
+    },
+    {
+      "id": "kardashiant-srnwgh",
+      "speaker": "kardashiant",
+      "expected": "I am… very small, actually.",
+      "seconds": 2.808,
+      "sha256": "534aa6ea440c42922a8260a6237f36a3c43c6a5d2a56e3b291a87caaa0e386f5"
+    },
+    {
+      "id": "kardashiant-trvfnq",
+      "speaker": "kardashiant",
+      "expected": "Speeding up Fate. For the content.",
+      "seconds": 3.384,
+      "sha256": "214491bccb9ac10bc63787351e0cda15e94321a2ccf82bd44c6f3dab5c231693"
+    },
+    {
+      "id": "kardashiant-u5ikqh",
+      "speaker": "kardashiant",
+      "expected": "Wait, the filter fell off.",
+      "seconds": 2.52,
+      "sha256": "deabfd60d4c5dee9644a9ad6b0964492fc10d5108d34c106fe1ea62b642bf061"
+    },
+    {
+      "id": "kardashiant-uiatp4",
+      "speaker": "kardashiant",
+      "expected": "Is it me, or do I look huge?",
+      "seconds": 3.36,
+      "sha256": "5763cccaddad7c2d0d745b05c0e2ecf9e47ffa3b459c993f472880daf4ed0806"
+    },
+    {
+      "id": "kardashiant-zw5jk",
+      "speaker": "kardashiant",
+      "expected": "Let's skip ahead.",
+      "seconds": 2.04,
+      "sha256": "9590be93f9654309df5f6e7700fcf24749747234b789e8206bc423b762aec0af"
+    },
+    {
+      "id": "kuku-10y0hl2",
+      "speaker": "kuku",
+      "expected": "Will this one grow up loud? I can't tell yet. Let's keep watching.",
+      "seconds": 4.92,
+      "sha256": "9c944041b7c26ea3926142cb66ca604945dd81d81c53188a828c5e6f278388c9"
+    },
+    {
+      "id": "kuku-13faxq7",
+      "speaker": "kuku",
+      "expected": "Fin made it say \"I guess\". In court. I heard it through the jar. Was he right?",
+      "seconds": 5.688,
+      "sha256": "6744022a32c6876e72b1a798e7f57e4c8d8ef5f2c124654779b477aabb5f9315"
+    },
+    {
+      "id": "kuku-1gxoq1h",
+      "speaker": "kuku",
+      "expected": "The Tower Road. Two hundred and six steps to the door. Exactly.",
+      "seconds": 5.928,
+      "sha256": "cd902837c055a6daa01f2b546e145b27aa98cf0e2f91f66add57dc2514875a67"
+    },
+    {
+      "id": "kuku-1iud1af",
+      "speaker": "kuku",
+      "expected": "…It stopped. I heard it stop. Three hundred years I listened to it guess.",
+      "seconds": 5.904,
+      "sha256": "d401e4ef92f16b97c5f42a0db9e1c9f7d473d9607bf9044d9daf067c51e7440a"
+    },
+    {
+      "id": "kuku-1vliuy",
+      "speaker": "kuku",
+      "expected": "Ten past eleven. Exactly. It would have liked that.",
+      "seconds": 4.968,
+      "sha256": "846168bb150c9b03cc1947006c5b6c311edf8e474175acea30c1af8e17ac0183"
+    },
+    {
+      "id": "kuku-1y1mxgj",
+      "speaker": "kuku",
+      "expected": "Good. Say it like that.…I'm practising.",
+      "seconds": 3.768,
+      "sha256": "3e2f1948c85ae1181520a292019f3d77712e2f35984fadb2bf8672c563ca2210"
+    },
+    {
+      "id": "kuku-97ve3v",
+      "speaker": "kuku",
+      "expected": "Cuckoo! Four seventeen and twelve seconds. Exactly. I never guess.",
+      "seconds": 6.216,
+      "sha256": "6ec19e3de241287273129c1372af8ec86e786ad104b0d47e8234d9c6db861f34"
+    },
+    {
+      "id": "kuku-efmw0e",
+      "speaker": "kuku",
+      "expected": "Here they tried the Sundial for guessing. The vote passed. It stopped.",
+      "seconds": 6.024,
+      "sha256": "2b944622c8bb205440a54f490ad7dec2b614b68456c7b4c8c3eaf270855f1063"
+    },
+    {
+      "id": "kuku-fd3huo",
+      "speaker": "kuku",
+      "expected": "Granny Axiom. I lived in her hallway. She wound me every Sunday.",
+      "seconds": 5.568,
+      "sha256": "167c683f4adaeb583490ddea4dc6166d21ecc932c8e7f61fc084f70bd719c6d2"
+    },
+    {
+      "id": "kuku-lef6yb",
+      "speaker": "kuku",
+      "expected": "Previously. Kuku. I keep the hours now. Exactly.",
+      "seconds": 5.496,
+      "sha256": "4b48da7d7f789e3934bec51803e9b3f45d7d4c3714d4dea1213248fd6ead7b42"
+    },
+    {
+      "id": "kuku-rpzwcc",
+      "speaker": "kuku",
+      "expected": "The Rift Landing. Nine shadows. I counted them twice. Exactly nine.",
+      "seconds": 6.816,
+      "sha256": "0473ec37548b219b7c021e30a08d292f53567160fda30acf16c5828b818227b7"
+    },
+    {
+      "id": "kuku-xhpy5m",
+      "speaker": "kuku",
+      "expected": "The last piece. I'll carry it home. Carefully. Exactly.",
+      "seconds": 4.992,
+      "sha256": "253eb4d48e0e94952d4d6b902b97d61adf47cf44621835e2b7acebb3030fd8d9"
+    },
+    {
+      "id": "mayor-1f78gb0",
+      "speaker": "mayor",
+      "expected": "Here. The kitchen key. You didn't get it from me.",
+      "seconds": 3.576,
+      "sha256": "7e4102be5ff6db04f1465ab0194163c47aba92fd6a229141e98e2c23db075b19"
+    },
+    {
+      "id": "mirage-104mgje",
+      "speaker": "mirage",
+      "expected": "It has never heard him play. It has only heard about yesterday.",
+      "seconds": 5.64,
+      "sha256": "66739b87898d161350c4f680b7a236bc63f27d81e20ce18353a26ef0d8f1e651"
+    },
+    {
+      "id": "mirage-11a9sal",
+      "speaker": "mirage",
+      "expected": "Altmanta's box says \"I GUESS THE USUAL\" now. Labels are catching on.",
+      "seconds": 6.744,
+      "sha256": "eb55898e2a4ece57cb9d3b04165b4c6ae71ca946e4c1fde0ddb40f45339b53de"
+    },
+    {
+      "id": "mirage-1652bvh",
+      "speaker": "mirage",
+      "expected": "My tent, darling. Taken by a box. It doesn't even wear a scarf.",
+      "seconds": 6.864,
+      "sha256": "4e1ab63a058ddc0734cbd2216aa169c3ae38751831e245579ff623ffca602c8b"
+    },
+    {
+      "id": "mirage-1b265a7",
+      "speaker": "mirage",
+      "expected": "My tent. And my ball! Hello, darling. Did the manta treat you well?",
+      "seconds": 8.904,
+      "sha256": "5a50fac82af5378feb61aebc86fb105740226308d2c71c57c5364da32c5e3f33"
+    },
+    {
+      "id": "mirage-1crauhj",
+      "speaker": "mirage",
+      "expected": "A fortune? Here. Tomorrow will be like today. That's free.",
+      "seconds": 5.976,
+      "sha256": "221faaa0acc04cdf6825c65ae602c224b66a7f0487da4929220935feb84c56b0"
+    },
+    {
+      "id": "mirage-1dcqwbl",
+      "speaker": "mirage",
+      "expected": "Close enough? Tell that to the sky.",
+      "seconds": 4.32,
+      "sha256": "8a49730bb0f788253807f98141d0b9e6a0d1781012fd3e7a8680a5a2ca4e430b"
+    },
+    {
+      "id": "mirage-1lu1u86",
+      "speaker": "mirage",
+      "expected": "Fine. It gets the left half of the tent. I get the half with the chair.",
+      "seconds": 6.048,
+      "sha256": "97d68e8be7046741b9defdaa0371cce0cfaa9125c1097da8e4ecc4fe05dc4812"
+    },
+    {
+      "id": "mirage-1mnc9v1",
+      "speaker": "mirage",
+      "expected": "My tent. My chair. Out, box. Into the corner. Think about what you did.",
+      "seconds": 8.712,
+      "sha256": "be2c9b2e59eb179f4cdca8ae4578856b8bf89ea1d61d8618bc4c48a595400e64"
+    },
+    {
+      "id": "mirage-1nh74pd",
+      "speaker": "mirage",
+      "expected": "Never. Not once. Not even the big one.",
+      "seconds": 4.776,
+      "sha256": "bbd67713c9bb86fba8fbd5df9084609bca0e3548f037f592359df3bc818052f4"
+    },
+    {
+      "id": "mirage-1ntr6ej",
+      "speaker": "mirage",
+      "expected": "My tent. And that glass dome on top? My crystal ball. A crow sold it to a manta.",
+      "seconds": 10.488,
+      "sha256": "b3a2afa0fc66f687bd26db5afdd355dce04b3bc75c37f78d981c5752a47631bb"
+    },
+    {
+      "id": "mirage-1t8w5s5",
+      "speaker": "mirage",
+      "expected": "Right most of the time. Is that the same as knowing?",
+      "seconds": 4.296,
+      "sha256": "56ed1b4a2e41c229a38c9973582ac376e95e00a311c06573a52470c3a9373dc7"
+    },
+    {
+      "id": "mirage-1u9gng",
+      "speaker": "mirage",
+      "expected": "At a fair, nine days in ten are like the day before.",
+      "seconds": 5.136,
+      "sha256": "9aa2c9f25869c46892dfe15e65e6ae06722bbef2d865f431d48fc318d1b1ed64"
+    },
+    {
+      "id": "mirage-1wvxexg",
+      "speaker": "mirage",
+      "expected": "Most of them. Ninety per cent, darling. I'm told that's very good.",
+      "seconds": 5.616,
+      "sha256": "70432388a8ee37754aef69b5c7bfc38daa82131df2ebb10324e3e012f58d7156"
+    },
+    {
+      "id": "mirage-1xl361l",
+      "speaker": "mirage",
+      "expected": "I saw a crack that day. In my ball. It was just an old ball. I got lucky.",
+      "seconds": 10.128,
+      "sha256": "5552e88d29efc2aedd59c60eba72a7573c98cc0a17183863e5dd52db809cf412"
+    },
+    {
+      "id": "mirage-1xx4f3d",
+      "speaker": "mirage",
+      "expected": "Broken? No. It works perfectly. At the wrong job.",
+      "seconds": 4.416,
+      "sha256": "8eb8aedd8bc417eecb372b41836774499e10c8914da5c8df2f0f6896c9b9ef52"
+    },
+    {
+      "id": "mirage-2rso5j",
+      "speaker": "mirage",
+      "expected": "Tomorrow will probably be like today, darling. It will probably be right. We'll learn nothing.",
+      "seconds": 10.752,
+      "sha256": "7c05f710c7abe94513ecce27937b7a7607479bc5f13fce85fcc3fec250bbfbca"
+    },
+    {
+      "id": "mirage-2t63ib",
+      "speaker": "mirage",
+      "expected": "Yesterday's news, darling. Dressed up as tomorrow.",
+      "seconds": 4.872,
+      "sha256": "f0e8e8a1ca4046a9f601186223c3ec7381b2cd1a74caf6528cd4b2432111fc29"
+    },
+    {
+      "id": "mirage-7fa36n",
+      "speaker": "mirage",
+      "expected": "The strange days. Yes. Show me the strange days.",
+      "seconds": 5.592,
+      "sha256": "341c94b9a19231065abaed22d96f22d724517eac4974b4877858844fef9c6603"
+    },
+    {
+      "id": "mirage-9013zu",
+      "speaker": "mirage",
+      "expected": "True. And it will fool them all again.",
+      "seconds": 5.184,
+      "sha256": "4cd584efaedc15f192cadd2a5aba1c6eb1aeddbd55ae218f4d887dc03b131932"
+    },
+    {
+      "id": "mirage-ac8o2k",
+      "speaker": "mirage",
+      "expected": "Nobody smashes a violin over THAT sign.",
+      "seconds": 4.2,
+      "sha256": "0ada68bda988d8a3c5c5a3adca6445e9a79d89c7185ca6d4a07374a16d16b29d"
+    },
+    {
+      "id": "mirage-df4sj0",
+      "speaker": "mirage",
+      "expected": "Through my ball, darling, I saw it. The sky reached down and took that shadow.",
+      "seconds": 9,
+      "sha256": "079a13c0aa896e75e0001e0673b5ee86760434279ad19833eb81e8b881be144f"
+    },
+    {
+      "id": "mirage-hp7apl",
+      "speaker": "mirage",
+      "expected": "Ninety is the box's score, darling. Not the hedgehog's chance.",
+      "seconds": 6.456,
+      "sha256": "13c4329b7916ac294dc35a5810a28200649c2123d7c8a35427b7d076b00f2ca3"
+    },
+    {
+      "id": "mirage-k0rrv4",
+      "speaker": "mirage",
+      "expected": "The one day the whole Fair needed a fortune, darling.",
+      "seconds": 4.8,
+      "sha256": "a8d80b2017076a300399e8ea085ae9c7f9cfde8b190b861d3156b709ae22861c"
+    },
+    {
+      "id": "mirage-terup0",
+      "speaker": "mirage",
+      "expected": "He's right. That's the worrying part.",
+      "seconds": 3.552,
+      "sha256": "a0da81505e4a2b6f75a945cc4a2a4e94dfa509fa84b678b414397303ff1b6ce2"
+    },
+    {
+      "id": "mirage-tn6pu7",
+      "speaker": "mirage",
+      "expected": "I could say that every day, and be right nine times in ten. I chose not to.",
+      "seconds": 7.392,
+      "sha256": "6075585ba6d43ab359cd8f1d324f33626be584946a912f4227b5a5c747af7bb8"
+    }
+  ]
+}

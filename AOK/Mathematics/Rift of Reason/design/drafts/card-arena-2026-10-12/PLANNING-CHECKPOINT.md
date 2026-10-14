@@ -1,5 +1,9 @@
 # Card Arena continuation checkpoint
 
+## Voice priority completed before publication — 14 October
+
+Teacher requested today's recording pass alongside the board work, with one writer. 140 new runtime clips recorded within 10 attempts per pinned model (20 total, including Mirage's failed split and 13+12 successful retries). 1951/2579 runtime lines recorded;628missing. All2180pre-existingMP3hashes unchanged;140newclips decode/non-silent,all2320manifest paths exist,exact140additions/no deletions. Full823/822pass/1skip/0fail233809.4509ms. Independent transcription had two bounded HTTP503 failures and checkedZEROclips; spoken-word/boundary acceptance remains PENDING. Preserve those receipts,rawtakes,cast/model pins and quota ledgers. No new TTS for saved clips or transcript-coverage claim. Voice review ../../reviews/voice-recording-2026-10-14.md owns final publication receipt; #43/#34 remainOPEN. Expansion voice drafts remain outside runtime recording scans. Board c6dae43 independent Standards0/Spec0; push it with the voices. No scheduled task exists.
+
 ## Latest aesthetic priority — #122, 14 October 2026
 
 Teacher requested a spell check followed by aesthetic board/expansion work. All 84 expansion spell concepts and 54 Axioms have unique proposed mappings to the eight shipped shared motifs; none of those 84 spells is a runtime tactic. Five common starter-pack spells have definitions. Standout-specific paintings, expansion implementation/balance/acquisition and gated conditional set remain future work. Portrait frontier stays 71/72; preserve the rejected Stephen request and Hank #146 mechanic gate. Old scheduled loop remains deleted.

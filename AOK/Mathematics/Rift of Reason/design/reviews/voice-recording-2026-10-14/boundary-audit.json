@@ -1,0 +1,52 @@
+{
+  "method": "Independent transcription without expected script priming; batch boundaries prioritized for split retries and larger takes. At most three total requests including the initial 503 failure.",
+  "model": "gemini-3.8-flash",
+  "selectedIds": [
+    "mirage-df4sj0",
+    "mirage-1xx4f3d",
+    "mirage-1dcqwbl",
+    "mirage-1t8w5s5",
+    "colossus-12czrsc",
+    "colossus-1s0hnlq",
+    "fin-1pyng9r",
+    "fin-1moqi1b",
+    "kardashiant-1m7x5cx",
+    "kardashiant-srnwgh",
+    "kuku-lef6yb",
+    "kuku-1y1mxgj",
+    "judge-prb4ey",
+    "judge-10gi4ky",
+    "avatar-mothkin-girl-inner-1jophes",
+    "avatar-mothkin-girl-inner-iz5pbw",
+    "avatar-fox-boy-possessed-1qz81jn",
+    "avatar-fox-boy-possessed-1dhsiy6",
+    "avatar-frogling-girl-possessed-156uxw1",
+    "avatar-frogling-girl-possessed-30rl4x",
+    "avatar-raven-boy-possessed-13qnaqo",
+    "avatar-raven-boy-possessed-uj27k4",
+    "avatar-owlet-girl-possessed-jf7q19",
+    "avatar-owlet-girl-possessed-1n6skjj",
+    "avatar-mothkin-boy-possessed-v64tdf",
+    "avatar-mothkin-boy-possessed-y1xrr",
+    "avatar-fox-girl-possessed-1en9j75",
+    "avatar-fox-girl-possessed-ajd3x2",
+    "avatar-frogling-boy-possessed-1l9n305",
+    "avatar-frogling-boy-possessed-ocsvp2",
+    "gumleaf-7ll1ae",
+    "gumleaf-a7gp7n",
+    "clockmaker-vvrrlg",
+    "mayor-1f78gb0",
+    "kardashiant-possessed-1gq20zk"
+  ],
+  "results": [],
+  "requests": 2,
+  "priorAttempts": [
+    {
+      "request": 1,
+      "status": 503,
+      "checked": 0
+    }
+  ],
+  "complete": false,
+  "stopped": "HTTP 503"
+}
