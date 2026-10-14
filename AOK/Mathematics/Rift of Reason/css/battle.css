@@ -923,6 +923,12 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-draw-label { display: flex; flex-direction: column; }
 .b-draw-label small { font-size: 11px; font-weight: 700; color: var(--gold); opacity: 0.95; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .b-draw-recap { max-width: 300px; font-size: 12.5px; font-weight: 700; line-height: 1.25; color: #ffb39a; padding: 4px 10px; border-left: 2px solid rgba(255, 138, 106, 0.6); }
+/* Exhaustion (#117): both decks empty, the draw step costs hearts. Static colour only (no motion). */
+.b-draw-warn { font-size: 13px; font-weight: 800; line-height: 1.25; white-space: nowrap; color: #ffd0c2; background: rgba(150, 30, 30, 0.55); border: 2px solid #ff7a5c; border-radius: 8px; padding: 4px 10px; cursor: help; }
+.b-draw-warn.wins { color: #10261f; background: #7ee0b8; border-color: #3fe0a0; }
+.b-exhaust { color: #ff9a80; font-weight: 800; cursor: help; }
+.b-exhaust.lethal { color: #ff5c5c; }
+.b-exhaust.wins { color: #7ee0b8; }
 /* Energy: crystals in rows of five (never a tall column). */
 .b-crystals { max-width: 92px; }
 .b-energy.small .b-crystals { max-width: 66px; }

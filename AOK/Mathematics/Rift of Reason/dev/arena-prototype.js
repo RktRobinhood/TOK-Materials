@@ -1,5 +1,7 @@
 /* THROWAWAY board study (#107): three layouts on the real battle bench.
- * ?prototype=1&variant=A|B|C|baseline&fixture=normal|crowded|effects|question|lesson
+ * ?prototype=1&variant=A|B|C|baseline&fixture=normal|crowded|effects|empty-own|shared-empty|exhausted|full-hand|question|lesson
+ * The shared axiom deck is finite (#117): there is no "Refill & draw"; used rules never come back,
+ * and with both decks empty the draw step costs hearts (exhaustion, shown on the Continue button).
  * Engine actions are real; progress is in scratch memory. No save writes.
  * Keep only the teacher's selected layout when production integration begins.
  */
@@ -11,7 +13,8 @@
     const variants = ['A', 'B', 'C', 'baseline'];
     const names = { A: 'Duelling table', B: 'Command board', C: 'Study desk', baseline: 'Current arena' };
     let variant = variants.includes(q.get('variant')) ? q.get('variant') : 'A';
-    let fixture = q.get('fixture') || 'normal', selected = null, seed = 'board-study-107';
+    // 'shared-refill' was the old name of 'shared-empty' (before the finite shared deck, #117).
+    let fixture = (q.get('fixture') === 'shared-refill' ? 'shared-empty' : q.get('fixture')) || 'normal', selected = null, seed = 'board-study-107';
     const backIds = Object.keys(R.data.assets).filter(id => /^ui\/card-back(?:-|$)/.test(id)).sort();
     const ownerBacks = ['yourBack', 'theirBack'].map(key => backIds.includes(q.get(key)) ? q.get(key) : 'ui/card-back');
     const backName = id => id === 'ui/card-back' ? 'Default' : id.replace('ui/card-back-', '').replace(/-/g, ' ');
@@ -40,7 +43,7 @@
     const control = el('div.proto-controls', { 'aria-label': 'Prototype controls' }, [
         el('strong', { text: 'BOARD STUDY' }), el('span.proto-safe', { text: 'Scratch match · no saves' }),
         el('label', {}, ['Situation ', el('select', { onchange(e) { fixture = e.target.value; setUrl(); start(seed); } },
-            ['normal', 'crowded', 'effects', 'empty-own', 'shared-refill', 'full-hand', 'question', 'lesson', 'full'].map(v => el('option', { value: v, text: v === 'full' ? 'Full lesson' : v, selected: v === fixture })))]),
+            ['normal', 'crowded', 'effects', 'empty-own', 'shared-empty', 'exhausted', 'full-hand', 'question', 'lesson', 'full'].map(v => el('option', { value: v, text: v === 'full' ? 'Full lesson' : v, selected: v === fixture })))]),
         ...['Your back', 'Their back'].map((label, player) => el('label', { title: 'Study only; this does not save or grant a card back.' }, [label + ' ', el('select', {
             'aria-label': label + ' (study only)', onchange(e) {
                 ownerBacks[player] = e.target.value; q.set(player === 0 ? 'yourBack' : 'theirBack', e.target.value); setUrl(); update();
@@ -88,10 +91,11 @@
         s.players[0].axHand = ['thrift', 'normal-hearts'];
         s.turn = 8; s.phase = 'draw'; s.fate.until = 4;
         s.players.forEach(p => { p.energy = p.capacity = 10; });
-        if (kind === 'empty-own') {
+        if (kind === 'empty-own' || kind === 'exhausted') {
             s.players[0].discard.push(...s.players[0].deck); s.players[0].deck = [];
         }
-        if (kind === 'shared-refill') { s.axioms.discard.push(...s.axioms.deck); s.axioms.deck = []; }
+        // Used rules stay in the discard: the shared deck is finite (#117).
+        if (kind === 'shared-empty' || kind === 'exhausted') { s.axioms.discard.push(...s.axioms.deck); s.axioms.deck = []; }
         if (kind === 'full-hand') {
             while (E.handRoom(s, 0) && s.players[0].deck.length) move(s.players[0].deck[0], 0, 'hand');
         }
@@ -261,7 +265,6 @@
         ['deck', 'axiom', 'opponent'].forEach(choice => {
             const amount = choice === 'axiom' ? s.axioms.deck.length : s.players[choice === 'deck' ? 0 : 1].deck.length;
             const title = choice === 'deck' ? 'Your deck' : choice === 'axiom' ? 'Shared axioms' : 'Their deck';
-            const refill = choice === 'axiom' && amount === 0 && s.axioms.discard.length > 0;
             const enabled = s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === choice) && usableDraw(drawSource(choice));
             const back = choice === 'axiom' ? 'ui/axiom-back' : ownerBacks[choice === 'deck' ? 0 : 1];
             let button = decks.querySelector('.proto-deck.' + choice);
@@ -274,10 +277,10 @@
             }
             button.disabled = !enabled; button.classList.toggle('draw-ready', !!enabled);
             button.style.setProperty('--deck-back', 'url("' + new URL(R.Assets.url(back) || R.Assets.url('ui/card-back'), root.document.baseURI).href + '")');
-            button.setAttribute('aria-label', title + ': ' + amount + ' cards' + (refill ? '. Discarded rules refill this deck' : '') + (enabled ? '. Draw one.' : ''));
+            button.setAttribute('aria-label', title + ': ' + amount + ' cards' + (choice === 'axiom' && amount === 0 ? '. Used rules do not come back' : '') + (enabled ? '. Draw one.' : ''));
             button.querySelector('.proto-deck-label').textContent = title;
             button.querySelector('.proto-deck-count').textContent = String(amount);
-            button.querySelector('.proto-deck-status').textContent = enabled ? (refill ? 'Refill & draw' : 'Draw →') : amount === 0 && !refill ? 'Empty' : '';
+            button.querySelector('.proto-deck-status').textContent = enabled ? 'Draw →' : amount === 0 ? 'Empty' : '';
         });
         let continueButton = decks.querySelector('.proto-draw-continue');
         if (!continueButton) {
@@ -286,7 +289,10 @@
         }
         continueButton.hidden = !(s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === 'none'));
         continueButton.disabled = !usableDraw(drawSource('none'));
-        continueButton.textContent = E.handRoom(s, 0) ? 'No cards to draw · Continue' : 'Hand full · Continue';
+        // Exhaustion (#117): both decks empty, so the draw step costs hearts (the engine's own preview).
+        const tired = E.exhaustion(s, 0);
+        continueButton.textContent = tired.due ? 'Both decks empty · Lose ' + tired.damage + ' ❤' + (tired.wins ? ' and win' : '')
+            : E.handRoom(s, 0) ? 'No cards to draw · Continue' : 'Hand full · Continue';
         if (focusedDeck) {
             const same = decks.querySelector('[data-choice="' + focusedDeck + '"]:not(:disabled)');
             const next = same || (s.active === 0 && (screen.querySelector('.b-hand .bc') || screen.querySelector('.b-end:not(:disabled)')));

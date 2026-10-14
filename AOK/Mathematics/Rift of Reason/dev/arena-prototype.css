@@ -37,7 +37,7 @@
 .prototype-mode:not(.variant-baseline) .battle:has(.bc.selected) .b-prompt { grid-column: 1 / span 2; }
 .prototype-mode:not(.variant-baseline) .battle:has(.bc.selected) .proto-decks { display: none; }
 .prototype-mode:not(.variant-baseline) .b-draw-buttons { visibility: hidden; }
-.prototype-mode:not(.variant-baseline) .b-draw-title { display: none; }
+.prototype-mode:not(.variant-baseline) .b-draw-title, .prototype-mode:not(.variant-baseline) .b-draw-warn { display: none; } /* its own Continue button shows exhaustion (#117) */
 .prototype-mode:not(.variant-baseline) .b-draw { grid-column: 1; min-height: 44px; }
 .prototype-mode:not(.variant-baseline) .b-end { --s: 64px; }
 .prototype-mode:not(.variant-baseline) .b-hero-row.me { grid-template-columns: 92px minmax(0,1fr) 80px; }
