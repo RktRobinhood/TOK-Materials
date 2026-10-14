@@ -2,7 +2,7 @@
 
 Mandatory and optional story card battles should have public, deterministic environmental events tailored to the opponent, scene and difficulty. Events belong on Fate spaces, labelled Environmental with a source icon/name; they are not an unrelated side timer. Their effects/countdowns are inspectable before resolution. Examples such as every two/four/six refer to full turn cycles/rounds under the latest approved cadence, not individual player turns.
 
-Teacher explicitly says jumping past an environmental event prevents it from happening; mark it skipped permanently. Rewinding must not resurrect that skipped occurrence. A recurring environment may schedule a distinct later occurrence, with its own identity/countdown, rather than replaying the skipped one. This settles environmental skip semantics only; replay rules for player-created repeatable spaces still need #118.
+Teacher explicitly says jumping past an environmental event prevents it from happening; mark it skipped permanently. Rewinding must not resurrect that skipped occurrence. A recurring environment may schedule a distinct later occurrence, with its own identity/countdown, rather than replaying the skipped one. This settles environmental skip semantics. #118 settled player-created events the same way (one-shot by default, marked repeatable spaces only); see [FATE-SCHEDULE-MODEL.md](FATE-SCHEDULE-MODEL.md).
 
 Hard bosses can have frequent, publicly signalled advantages (e.g. every two rounds); introductory battles should use mild, quirky character effects that teach planning. Random-looking flavour is allowed, but the scheduled effect must be fixed and visible, never secretly rerolled at trigger time. Avoid hidden unfairness or tutorial actions invalidated without explanation.
 

@@ -79,7 +79,7 @@ Proof Pup's heal happens once on entry; Comma Crab trades its attack and energy 
 
 ## Later Fate card pack (not in initial starters)
 
-All scheduled spells are one-shot in the first slice. Costs below are proposed; exact replay/jump/expiry semantics need the dedicated decision ticket before those mechanics change. Show public source, controller, target/effect and rounds until resolution.
+All scheduled spells are one-shot. Costs below are proposed. Replay, leap, rewind and expiry semantics are settled (teacher decision 14 October 2026, #118): one-shot by default, only marked repeatable spaces replay, and lifetimes count elapsed full rounds. The state model and builder decisions are in [FATE-SCHEDULE-MODEL.md](FATE-SCHEDULE-MODEL.md). Show public source, controller, target/effect and rounds until resolution.
 
 | Draft | Kind / cost | Effect |
 |---|---|---|
