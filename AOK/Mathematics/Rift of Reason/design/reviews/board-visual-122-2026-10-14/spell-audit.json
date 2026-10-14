@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-14",
+  "mapping": "design/source-assets/4-caricatures/production-145-2026-10-13/proposed-card-art-mapping.json",
+  "status": "Proposed shared art assignments only; no runtime definitions or grants",
+  "method": "Routine spells use affinity motifs; Axioms use shared rulebook. Standout-specific artwork may replace a mapping in later releases.",
+  "spellProposals": 84,
+  "axiomProposals": 54,
+  "uniqueMappedCards": 138,
+  "spellMotifs": [
+    "art/spell-motif-reason",
+    "art/spell-motif-emotion",
+    "art/spell-motif-perception",
+    "art/spell-motif-language",
+    "art/spell-motif-imagination",
+    "art/spell-motif-memory",
+    "art/spell-motif-generic"
+  ],
+  "axiomMotifs": [
+    "art/axiom-rule-motif"
+  ],
+  "missingManifestArt": [],
+  "runtimeTactics": 38,
+  "expansionSpellIdsInRuntime": [],
+  "starterPackDefinitions": [
+    "patient-proof",
+    "steady-gaze",
+    "creative-spark",
+    "stored-thought",
+    "careful-words"
+  ],
+  "note": "Shared artwork covers routine proposals. Standout-specific paintings, expansion mechanics, acquisition and staged release remain future work; this audit adds no cards or grants."
+}

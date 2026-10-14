@@ -12,7 +12,10 @@
     const names = { A: 'Duelling table', B: 'Command board', C: 'Study desk', baseline: 'Current arena' };
     let variant = variants.includes(q.get('variant')) ? q.get('variant') : 'A';
     let fixture = q.get('fixture') || 'normal', selected = null, seed = 'board-study-107';
-    let observer, modal = null, reading = null, coach = null, dock, summary, decks, reader, previous, collecting = false;
+    const backIds = Object.keys(R.data.assets).filter(id => /^ui\/card-back(?:-|$)/.test(id)).sort();
+    const ownerBacks = ['yourBack', 'theirBack'].map(key => backIds.includes(q.get(key)) ? q.get(key) : 'ui/card-back');
+    const backName = id => id === 'ui/card-back' ? 'Default' : id.replace('ui/card-back-', '').replace(/-/g, ' ');
+    let observer, modal = null, reading = null, coach = null, dock, summary, decks, reader, previous, collecting = false, focusAfterDraw = null;
     const flights = new Set();
     const scratch = R.State.freshState();
     scratch.avatar = { type: 'owlet', variant: 'girl', nickname: 'Prototype' };
@@ -37,7 +40,12 @@
     const control = el('div.proto-controls', { 'aria-label': 'Prototype controls' }, [
         el('strong', { text: 'BOARD STUDY' }), el('span.proto-safe', { text: 'Scratch match · no saves' }),
         el('label', {}, ['Situation ', el('select', { onchange(e) { fixture = e.target.value; setUrl(); start(seed); } },
-            ['normal', 'crowded', 'effects', 'question', 'lesson', 'full'].map(v => el('option', { value: v, text: v === 'full' ? 'Full lesson' : v, selected: v === fixture })))]),
+            ['normal', 'crowded', 'effects', 'empty-own', 'shared-refill', 'full-hand', 'question', 'lesson', 'full'].map(v => el('option', { value: v, text: v === 'full' ? 'Full lesson' : v, selected: v === fixture })))]),
+        ...['Your back', 'Their back'].map((label, player) => el('label', { title: 'Study only; this does not save or grant a card back.' }, [label + ' ', el('select', {
+            'aria-label': label + ' (study only)', onchange(e) {
+                ownerBacks[player] = e.target.value; q.set(player === 0 ? 'yourBack' : 'theirBack', e.target.value); setUrl(); update();
+            },
+        }, backIds.map(id => el('option', { value: id, text: backName(id), selected: id === ownerBacks[player] })))])),
         el('label', {}, [el('input', { type: 'checkbox', onchange(e) { root.document.body.classList.toggle('calm-motion', e.target.checked); } }), ' Calm motion']),
         el('button.btn.small', { text: 'Measure trace', onclick: () => measure() }),
         el('button.btn.small', { text: 'Metrics', onclick() { metrics.hidden = !metrics.hidden; } }),
@@ -55,6 +63,8 @@
         el('button', { text: '→', 'aria-label': 'Next layout', onclick: () => cycle(1) }),
     ]);
     root.document.body.append(control, metrics, switcher);
+    const sizeControls = () => root.document.body.style.setProperty('--proto-controls-h', control.getBoundingClientRect().height + 'px');
+    sizeControls(); root.addEventListener('resize', sizeControls);
     root.document.addEventListener('keydown', e => {
         if (e.target.closest('input,textarea,select,[contenteditable],.battle,dialog')) return;
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); cycle(e.key === 'ArrowLeft' ? -1 : 1); }
@@ -78,6 +88,13 @@
         s.players[0].axHand = ['thrift', 'normal-hearts'];
         s.turn = 8; s.phase = 'draw'; s.fate.until = 4;
         s.players.forEach(p => { p.energy = p.capacity = 10; });
+        if (kind === 'empty-own') {
+            s.players[0].discard.push(...s.players[0].deck); s.players[0].deck = [];
+        }
+        if (kind === 'shared-refill') { s.axioms.discard.push(...s.axioms.deck); s.axioms.deck = []; }
+        if (kind === 'full-hand') {
+            while (E.handRoom(s, 0) && s.players[0].deck.length) move(s.players[0].deck[0], 0, 'hand');
+        }
         // Prepared stacks demonstrate both signs; all values below still come from the engine.
         if (kind === 'effects') {
             s.cards.p0c5.extraKeywords.push('shield'); // Guard + Shield must remain distinct together.
@@ -108,7 +125,7 @@
     }
     function start(nextSeed) {
         if (reading) reading.close();
-        seed = nextSeed || seed; selected = null; previous = null;
+        seed = nextSeed || seed; selected = null; previous = null; focusAfterDraw = null;
         if (observer) observer.disconnect(); closeQuestion();
         flights.forEach(a => a.cancel()); flights.clear();
         const guide = fixture === 'question' ? questionGuide() : fixture === 'lesson' ? R.Battle.Lesson.shortGuide() : fixture === 'full' ? R.Battle.Lesson.guide() : null;
@@ -128,7 +145,7 @@
         observer = new MutationObserver(records => {
             if (records.some(r => r.target.closest('.b-inspect') && !r.target.closest('.proto-effect-notes'))) decorateInspect();
             // Inspecting a card must not rebuild and remove a focused deck button.
-            if (records.some(r => !r.target.closest('.proto-inspector,.proto-decks,.proto-summary,.b-inspect,.proto-reader,.proto-glimpse'))) update();
+            if (records.some(r => !r.target.closest('.proto-inspector,.proto-decks,.proto-summary,.b-inspect,.b-tip,.proto-reader,.proto-glimpse'))) update();
         });
         observe(); setVariant(variant);
     }
@@ -226,24 +243,53 @@
         if (decks.parentNode !== deckHost) deckHost.append(decks);
         const side = screen.querySelector('.b-side');
         if (variant === 'A' && !side.querySelector('.proto-glimpse')) side.append(el('details.proto-glimpse', {}, [el('summary', { text: 'Future glimpse' }), el('p', { text: 'Space reserved for optional outcome clips (#108).' })]));
-        screen.classList.toggle('proto-needs-draw', s.phase === 'draw' && s.active === 0);
         const rules = E.rules(s);
         const combat = E.activeAxioms(s).find(a => a.category === 'combat');
         summary.replaceChildren(el('button', { text: 'Axioms · ' + (rules.reverseHearts ? 'Own zero hearts wins' : 'Enemy zero hearts wins') + ' · ' + (combat ? combat.short || combat.name : 'Both creatures hit'), onclick: () => {
             const toggle = screen.querySelector('.b-side-toggle'); if (toggle) toggle.click();
         } }));
         const legal = E.legalActions(s);
+        screen.classList.toggle('proto-needs-draw', s.active === 0 && legal.some(a => a.type === 'draw'));
         if (!screen.classList.contains('guide-mode') && s.active === 0 && s.phase === 'main' && E.winner(s) == null && !screen.querySelector('.bc.selected')) {
             const ask = screen.querySelector('.b-ask'); if (ask) ask.textContent = 'Choose your next move.';
         }
-        decks.replaceChildren(...['deck', 'axiom', 'opponent'].map(choice => {
+        const focusedDeck = focusAfterDraw || (decks.contains(root.document.activeElement) ? root.document.activeElement.dataset.choice : null);
+        focusAfterDraw = null;
+        // Keep deck identity through tooltip, focus and action updates: a press must not lose its node.
+        ['deck', 'axiom', 'opponent'].forEach(choice => {
             const amount = choice === 'axiom' ? s.axioms.deck.length : s.players[choice === 'deck' ? 0 : 1].deck.length;
             const title = choice === 'deck' ? 'Your deck' : choice === 'axiom' ? 'Shared axioms' : 'Their deck';
-            const enabled = s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === choice);
-            return el('button.proto-deck.' + choice + (choice === 'axiom' ? '.axiom' : ''), { disabled: !enabled, 'aria-label': title + ': ' + amount + ' cards' + (enabled ? '. Draw one.' : ''),
-                onclick: () => { const b = screen.querySelector('.b-draw-btn[data-choice="' + choice + '"]'); if (b && !b.disabled) b.click(); } }, [el('span.proto-deck-back'), el('span', { text: title }), el('b', { text: String(amount) })]);
-        }));
-        if (s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === 'none')) decks.append(el('button.btn.small', { text: 'No cards left · Continue', onclick: () => screen.querySelector('.b-draw-btn[data-choice="none"]').click() }));
+            const refill = choice === 'axiom' && amount === 0 && s.axioms.discard.length > 0;
+            const enabled = s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === choice) && usableDraw(drawSource(choice));
+            const back = choice === 'axiom' ? 'ui/axiom-back' : ownerBacks[choice === 'deck' ? 0 : 1];
+            let button = decks.querySelector('.proto-deck.' + choice);
+            if (!button) {
+                button = el('button.proto-deck.' + choice, { type: 'button', 'data-choice': choice, onclick: () => chooseDraw(choice) }, [
+                    el('span.proto-deck-back', { 'aria-hidden': 'true' }), el('span.proto-deck-label'),
+                    el('b.proto-deck-count', { 'aria-hidden': 'true' }), el('span.proto-deck-status', { 'aria-hidden': 'true' }),
+                ]);
+                decks.append(button);
+            }
+            button.disabled = !enabled; button.classList.toggle('draw-ready', !!enabled);
+            button.style.setProperty('--deck-back', 'url("' + new URL(R.Assets.url(back) || R.Assets.url('ui/card-back'), root.document.baseURI).href + '")');
+            button.setAttribute('aria-label', title + ': ' + amount + ' cards' + (refill ? '. Discarded rules refill this deck' : '') + (enabled ? '. Draw one.' : ''));
+            button.querySelector('.proto-deck-label').textContent = title;
+            button.querySelector('.proto-deck-count').textContent = String(amount);
+            button.querySelector('.proto-deck-status').textContent = enabled ? (refill ? 'Refill & draw' : 'Draw →') : amount === 0 && !refill ? 'Empty' : '';
+        });
+        let continueButton = decks.querySelector('.proto-draw-continue');
+        if (!continueButton) {
+            continueButton = el('button.btn.small.proto-draw-continue', { type: 'button', 'data-choice': 'none', onclick: () => chooseDraw('none') });
+            decks.append(continueButton);
+        }
+        continueButton.hidden = !(s.active === 0 && legal.some(a => a.type === 'draw' && a.choice === 'none'));
+        continueButton.disabled = !usableDraw(drawSource('none'));
+        continueButton.textContent = E.handRoom(s, 0) ? 'No cards to draw · Continue' : 'Hand full · Continue';
+        if (focusedDeck) {
+            const same = decks.querySelector('[data-choice="' + focusedDeck + '"]:not(:disabled)');
+            const next = same || (s.active === 0 && (screen.querySelector('.b-hand .bc') || screen.querySelector('.b-end:not(:disabled)')));
+            if (next) next.focus();
+        }
         screen.querySelectorAll('.bc[data-cid]').forEach(node => {
             node.querySelectorAll('.proto-values').forEach(b => b.remove());
             if (variant === 'baseline') return;
@@ -280,6 +326,17 @@
         }
         previous = s; observe();
     }
+    function chooseDraw(choice) {
+        const button = drawSource(choice);
+        if (!usableDraw(button)) return;
+        focusAfterDraw = choice; button.click();
+    }
+    // Native picture buttons keep off choices focusable to explain them: aria-disabled matters.
+    // The native no-draw fallback is a plain button, rather than a picture with data-choice.
+    function drawSource(choice) {
+        return host.querySelector(choice === 'none' ? '.b-draw-buttons > .btn.primary' : '.b-draw-btn[data-choice="' + choice + '"]');
+    }
+    const usableDraw = button => !!button && !button.disabled && button.getAttribute('aria-disabled') !== 'true';
     function flyDraw(cid, axiom) {
         const card = axiom ? [...host.querySelectorAll('.b-hand [data-axiom="' + axiom + '"]')].at(-1) : host.querySelector('.b-hand [data-cid="' + cid + '"]');
         const deck = decks.querySelector(axiom ? '.proto-deck.axiom' : '.proto-deck.deck');

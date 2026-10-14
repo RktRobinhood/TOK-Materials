@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "case": "normal mouse draw",
+      "ownDeck": 9,
+      "allDrawsDisabled": true,
+      "focus": "Kim Kardashiant"
+    },
+    {
+      "case": "shared refill draw",
+      "handRules": 3,
+      "label": "Shared axioms: 5 cards",
+      "ready": 0
+    },
+    {
+      "case": "empty own deck",
+      "ownDisabled": true,
+      "sharedEnabled": true
+    },
+    {
+      "case": "full hand Enter",
+      "continueHidden": true,
+      "ready": 0,
+      "focus": "Kim Kardashiant"
+    },
+    {
+      "case": "effects and keyboard reading",
+      "simultaneousGuardShield": true,
+      "fullRulesDialog": true
+    },
+    {
+      "case": "required Granny prediction",
+      "modalOpenBeforeAnswer": true,
+      "modalGoneAfterCorrectAnswer": true
+    },
+    {
+      "case": "narrow crowded 390x844",
+      "pageWidth": 390,
+      "boardsScroll": true,
+      "handScroll": true,
+      "keyboardReachedLastCreature": true,
+      "sharedDoesNotOverlapOwnBoard": true,
+      "ownDeckAfterEnter": 3
+    },
+    {
+      "case": "guided draw source",
+      "ownEnabled": true,
+      "sharedDisabled": true,
+      "nativeAriaDisabledRespected": true
+    },
+    {
+      "case": "Calm draw and creature play",
+      "ownBoard": 5,
+      "energy": "9/10",
+      "deckAnimations": [
+        "none",
+        "none",
+        "none"
+      ]
+    },
+    {
+      "case": "compact 1024x620",
+      "pageWidth": 1024,
+      "boardOverflow": false,
+      "ownerBacksSurviveReload": true
+    }
+  ],
+  "unverified": [
+    "physical touch and drag",
+    "browser zoom",
+    "rapid double-click",
+    "school-laptop performance"
+  ],
+  "note": "DOM-only browser tools sometimes left synthetic dblclick or checkbox clicks unchanged. Assertions record only verified visible transitions; no rapid-repeat/touch/zoom certification."
+}
