@@ -254,11 +254,22 @@ test('old-scale injuries below attack 0 are lifted to attack 0 on import and exp
     assert.equal(Rift.State.decode('team', code).t[0][1], -1);
 });
 
-test('decks are capped at 14 creatures and 20 cards on export', () => {
-    const code = TeamCodes.exportTeam({ nickname: 'Big', creatures: Array.from({ length: 16 }, () => inst('zuckerborg')), tactics: Rift.data.tacticDecks.starter });
-    const back = TeamCodes.importTeam(code);
-    assert.equal(back.team.length, 14);
-    assert.equal(back.tactics.length, 6);
+test('export refuses a deck that breaks the construction rules instead of trimming it (#112)', () => {
+    const species = ['zuckerborg', 'astrophysicat', 'siuuugull', 'khaby', 'kardashiant', 'keanu', 'eelish', 'beansprout'];
+    const two = n => Array.from({ length: n }, (_, i) => inst(species[i >> 1]));
+    assert.throws(() => TeamCodes.exportTeam({ nickname: 'Big', creatures: two(16), tactics: [] }), /at most 14 creatures/);
+    assert.throws(() => TeamCodes.exportTeam({ nickname: 'Big', creatures: two(12), tactics: Rift.data.tacticDecks.starter }), /Remove 2 cards/);
+    assert.throws(() => TeamCodes.exportTeam({ nickname: 'Big', creatures: Array.from({ length: 3 }, () => inst('zuckerborg')) }), /Zuckerborg: at most 2 copies/);
+    assert.throws(() => TeamCodes.exportTeam({ nickname: 'Big', creatures: two(10), tactics: ['eureka', 'eureka', 'eureka'] }), /Eureka!: at most 2 copies/);
+    // Two copies of an axiom card travel; a third is refused.
+    const back = TeamCodes.importTeam(TeamCodes.exportTeam({ nickname: 'Ten', creatures: two(10), tactics: Rift.data.tacticDecks.starter, axioms: ['mercy', 'mercy', 'thrift'] }));
+    assert.equal(back.team.length, 10);
+    assert.deepEqual(J(back.axioms), ['mercy', 'mercy', 'thrift']);
+    assert.throws(() => TeamCodes.exportTeam({ nickname: 'Ten', creatures: two(2), axioms: ['mercy', 'mercy', 'mercy'] }), /Mercy.*at most 2 copies/);
+    // A hand-made code with three copies is refused on import.
+    const row = ['zuckerborg', 0, [], 0, 0, [0, 0, 0], 0];
+    assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: [], t: [row, row, row], k: [] })), /at most 2 copies of Zuckerborg/);
+    assert.throws(() => TeamCodes.importTeam(Rift.State.encode('team', { v: 2, n: 'Hax', a: ['mercy', 'mercy', 'mercy'], t: [row], k: [] })), /2 copies of an axiom card/);
 });
 
 test('v2 team codes carry variants, taught tricks and tactics; ghosts use them', () => {

@@ -633,8 +633,6 @@
                 if (condition && !c.conditionSpent && P.armed.length >= 2) return 'Your two condition slots are full.';
                 if (condition && c.conditionSpent && c.kind === 'tactic') return 'This condition has already been used this match.';
                 if (c.kind === 'creature' && E.boardOccupancy(state, ME) >= state.options.boardLimit) return 'Your side is full, including reserved creature spaces.';
-                const tdef = c.kind === 'tactic' ? (Rift.data.tactics || {})[c.tactic] : null;
-                if (tdef && tdef.colour && !E.colourInPlay(state, ME, tdef.colour)) return needsText(tdef.colour);
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
@@ -806,15 +804,15 @@
                     size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
                     size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
                     el('div.bc-line', { text: d.short || d.text }),
-                    d.colour && !d.colourReady && state.cards[cid].controller === ME ? el('div.bc-need', { text: needsText(d.colour) }) : null,
                 ]),
             ];
         }
         // "Reason · uncommon" under the name of a colour tactic.
         const tacticKind = d => (Rift.COLOURS[d.colour] || { name: d.colour }).name + (d.rarity ? ' · ' + d.rarity : '');
-        // A colour tactic is played only while you control a creature of its colour.
-        const needsText = colour => { const C = Rift.COLOURS[colour] || { colour, name: colour }; return 'Needs a ' + C.colour + ' (' + C.name + ') creature in play.'; };
-        // The colour's emblem in the card's top corner; lit while a creature of that colour is in play.
+        // Since #112 a colour tactic needs no creature in play: the deck's colour quota limits it instead.
+        // describe().colourReady is always true now, so this text is only a fallback.
+        const needsText = colour => { const C = Rift.COLOURS[colour] || { colour, name: colour }; return 'A deck holds as many ' + C.name + ' tactics as ' + C.name + ' creatures.'; };
+        // The colour's emblem in the card's top corner (lit: playable by colour; always since #112).
         function colourEmblem(colour, on) {
             const C = Rift.COLOURS[colour] || {};
             return el('div.bc-emblem' + (on ? '.on' : ''), { title: (C.name || colour) + ' tactic', 'aria-hidden': 'true' },
@@ -895,15 +893,13 @@
             if (state.cards[cid].kind === 'creature') return [big, creatureNotes(cid)];
             const d = E.describe(state, cid);
             const C = d.colour ? Rift.COLOURS[d.colour] || { name: d.colour } : null;
-            const mine = state.cards[cid].controller === ME;
             return [big, el('div.b-notes', {}, [
                 C ? el('div.b-notes-tags', {}, [colourChip(d.colour)]) : null,
                 el('div.b-note-line.b-ability', {}, [el('b', { text: d.name + ': ' }), d.text]),
                 el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
                 whyNotNote(cid),
                 C ? el('div.b-note-line', {}, [el('b', { text: C.name + ' tactic' + (d.rarity ? ' (' + d.rarity + ')' : '') + ': ' }),
-                    'it can only be played while you control a ' + C.colour + ' (' + C.name + ') creature. '
-                    + (mine ? (d.colourReady ? 'You do now.' : 'You don\'t right now.') : '')]) : null,
+                    'a deck holds no more of these than ' + C.name + ' creatures. You can play it with none in play.']) : null,
                 d.flavour ? el('div.b-note-line.b-flavour', { text: d.flavour }) : null,
             ])];
         }

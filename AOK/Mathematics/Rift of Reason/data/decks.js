@@ -5,8 +5,8 @@
  *
  *   creatures  species ids (data/creatures.js), one or two neighbouring colours, a low cost curve
  *   tactics    tactic ids (data/tactics.js), at most 2 copies each: colourless ones plus colour
- *              tactics of the deck's own colours only (the colour identity rule, Engine.identityFilter)
- *   creatures + tactics = 20 cards, like a player's deck (6–14 of each).
+ *              tactics of the deck's own colours, within the colour quota (Rift.State.validateDeck)
+ *   creatures + tactics = 20 cards, like a player's deck (6–14 of each, at most 2 of a species).
  *
  * Simulated strength: design/reviews/card-arena-balance-2026-10-07.md (`node tools/sim-battle.mjs --ladder`).
  * Tuned so Expert with the deck beats Competent with the loaned starter deck about 80% (the later

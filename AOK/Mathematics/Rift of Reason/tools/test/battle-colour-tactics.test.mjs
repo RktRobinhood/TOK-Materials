@@ -58,45 +58,52 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
     assert.deepEqual(plain(Object.values(COLOUR).map(l => l[2])), ['qed', 'wave-of-feeling', 'clear-view', 'persuasion', 'dream-big', 'total-recall']);
 });
 
-test('colour identity in play: a colour tactic is offered only while you control a creature of its colour', () => {
+test('no live colour gate (#112): a colour tactic casts with no creature of its colour in play', () => {
     let s = table('step-by-step', {}, true);
     assert.equal(E.colourInPlay(s, 0, 'reason'), false);
-    assert.equal(offered(s), false, 'the Reason creature is still in the deck');
-    toHand(s, 'p0c0');
-    assert.equal(offered(s), false, 'in the hand is not in play');
-    assert.equal(E.colourInPlay(s, 1, 'reason'), true, 'the enemy has one, which does not count for you');
-    onBoard(s, 'p0c0');
-    assert.equal(offered(s), true);
-    s.cards.p0c0.colourless = true;
-    assert.equal(offered(s), false, 'a nicknamed creature has no colour');
-    // Memory counts as a colour too.
+    assert.equal(offered(s), true, 'the Reason creature is still in the deck, and the tactic casts anyway');
+    const n = s.players[0].hand.length;
+    assert.equal(cast(s).players[0].hand.length, n + 1, 'it resolves: played one, drew two');
+    s.cards.p0c1.colourless = true;
+    assert.equal(offered(s), true, 'a nicknamed creature changes nothing either');
+    // Memory counts as a colour too, and needs nothing in play.
     s = table('remember-when', {}, true);
     toDiscard(s, 'p0t1');
-    assert.equal(offered(s), false);
-    onBoard(s, 'p0c0');
     assert.equal(offered(s), true);
-    // Colourless tactics need nothing.
-    s = table('step-by-step', {}, true);
-    toHand(s, 'p0t1');
-    assert.ok(legal(s, a => a.cid === 'p0t1').length > 0);
-    const d = E.describe(s, 'p0t0');
+    // Every colour tactic with its own target or condition met is offered with no matching creature in play.
+    // For every colour tactic, the plays offered are the same with or without its colour in play.
+    let castable = 0;
+    for (const id of Object.values(COLOUR).flat()) {
+        const away = table(id, {}, true), there = table(id);
+        [away, there].forEach(x => toDiscard(x, 'p0t1'));
+        const without = targets(away).filter(x => x !== 'p0c0'), withIt = targets(there).filter(x => x !== 'p0c0');
+        assert.deepEqual(without, withIt, id);
+        if (offered(away)) castable += 1;
+    }
+    assert.ok(castable >= 14, castable + ' of 18 colour tactics cast with no creature of their colour in play');
+    const d = E.describe(table('step-by-step', {}, true), 'p0t0');
     assert.equal(d.colour, 'reason');
     assert.equal(d.rarity, 'common');
-    assert.equal(d.colourReady, false);
-    assert.equal(E.describe(s, 'p0t1').colourReady, true);
+    assert.equal(d.colourReady, true, 'kept for older callers, always true');
 });
 
-test('colour identity in the deck: a colour tactic without a creature of its colour is left out of the battle', () => {
+test('the battle builds a deck as given; the shared validator applies the colour quota before a battle', () => {
     const inst = (sp, i) => ({ uid: 'id' + i, species: sp });
-    assert.deepEqual(plain(E.identityFilter(['qed', 'counterexample', 'daydream', 'step-by-step'], [inst('astrophysicat', 1)])),
-        { kept: ['qed', 'counterexample', 'step-by-step'], dropped: ['daydream'] });
+    const S = Rift.State;
     const s = E.createBattle({ seed: 'id', players: [
         { team: [inst('astrophysicat', 1), inst('kardashiant', 2)], tactics: ['qed', 'daydream', 'daydream', 'look-closer', 'counterexample'] },
         { team: [inst('eelish', 3)], tactics: ['gut-reaction', 'nostalgia'] },
     ], options: { shuffle: false } });
     const tacticsOf = p => Object.values(s.cards).filter(c => c.kind === 'tactic' && c.owner === p).map(c => c.tactic);
-    assert.deepEqual(plain(tacticsOf(0)), ['qed', 'look-closer', 'counterexample']);
-    assert.deepEqual(plain(tacticsOf(1)), ['gut-reaction']);
+    assert.deepEqual(plain(tacticsOf(0)), ['qed', 'daydream', 'daydream', 'look-closer', 'counterexample'], 'nothing is dropped quietly');
+    assert.deepEqual(plain(tacticsOf(1)), ['gut-reaction', 'nostalgia']);
+    const r = S.validateDeck({ creatures: [inst('astrophysicat', 1), inst('kardashiant', 2)], tactics: ['qed', 'daydream', 'daydream', 'look-closer', 'counterexample'] }, { complete: false });
+    assert.equal(r.valid, false);
+    assert.deepEqual(plain(r.problems.map(p => [p.code, p.colour])), [['quota', 'imagination']]);
+    assert.match(r.problems[0].text, /^2 Imagination tactics need 2 Imagination creatures\. You have 0\. Add an Imagination creature or remove an Imagination tactic\.$/);
+    assert.deepEqual(plain(r.quota), { reason: { creatures: 1, tactics: 1 }, perception: { creatures: 1, tactics: 1 }, imagination: { creatures: 0, tactics: 2 } });
+    assert.deepEqual(plain(S.quotaFilter(['qed', 'counterexample', 'daydream', 'step-by-step'], [inst('astrophysicat', 1)])),
+        { kept: ['qed', 'counterexample'], dropped: ['daydream', 'step-by-step'] });
 });
 
 test('Reason: Step by Step draws 2; Proof by Contradiction 3 damage and a card if it defeats; Q.E.D. defeats', () => {
@@ -319,22 +326,26 @@ test('colour tactics are deterministic, keep the card invariants and are played 
     assert.ok(Object.keys(played).length >= 12, 'the AI plays most colour tactics: ' + Object.keys(played).join(', '));
 });
 
-test('team codes keep colour tactics only with a creature of their colour', () => {
+test('team codes use the shared colour quota: export refuses, an old code drops only the extra copies', () => {
     const R = loadRift([
         'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js',
         'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/team-codes.js',
     ]);
     const TC = R.Battle.TeamCodes;
     const creatures = [{ uid: 'c1', species: 'astrophysicat' }, { uid: 'c2', species: 'kardashiant' }];
-    const code = TC.exportTeam({ nickname: 'Ida', creatures, tactics: ['qed', 'daydream', 'look-closer', 'counterexample'] });
+    assert.throws(() => TC.exportTeam({ nickname: 'Ida', creatures, tactics: ['qed', 'daydream', 'look-closer', 'counterexample'] }),
+        /1 Imagination tactic needs 1 Imagination creature\. You have 0/, 'export names the broken quota');
+    const code = TC.exportTeam({ nickname: 'Ida', creatures, tactics: ['qed', 'look-closer', 'counterexample'] });
     const back = TC.importTeam(code);
-    assert.deepEqual(plain(back.tactics), ['qed', 'look-closer', 'counterexample'], 'export leaves out Daydream (no Imagination creature)');
-    // A code made elsewhere with an offending tactic: dropped and flagged, not refused.
+    assert.deepEqual(plain(back.tactics), ['qed', 'look-closer', 'counterexample']);
+    assert.deepEqual(plain(back.droppedTactics), []);
+    // A code made under the older rule (one Reason creature allowed any number of Reason tactics):
+    // the copies beyond the quota are dropped and listed, the code is not refused.
     const payload = R.State.decode('team', code);
-    payload.k = ['daydream', 'step-by-step'];
+    payload.k = ['daydream', 'step-by-step', 'qed', 'counterexample'];
     const odd = TC.importTeam(R.State.encode('team', payload));
-    assert.deepEqual(plain(odd.tactics), ['step-by-step']);
-    assert.deepEqual(plain(odd.droppedTactics), ['daydream']);
+    assert.deepEqual(plain(odd.tactics), ['step-by-step', 'counterexample']);
+    assert.deepEqual(plain(odd.droppedTactics), ['daydream', 'qed']);
 });
 
 // ---- unlocks and grants ------------------------------------------------------------------------------
@@ -365,16 +376,20 @@ test('the first creature of a colour unlocks that colour\'s common; also for an 
     assert.deepEqual(plain(S.migrate(plain(cur)).tactics), ['lemma', 'daydream', 'label-it']);
 });
 
-test('the default deck drops colour tactics whose colour is not in the battle team', () => {
+test('a saved deck that breaks the quota is kept as saved and reported for repair, never trimmed', () => {
     const S = Rift.State;
     const save = S.freshState();
     save.creatures.push(S.makeCreature('astrophysicat'), S.makeCreature('kardashiant'));
     S.unlockColourTactics(save);
     S.grantTactic('daydream', save);
     save.deckTactics = ['step-by-step', 'look-closer', 'daydream', 'counterexample', 'pep-talk', 'stand-firm'];
-    assert.deepEqual(plain(S.deckTactics(save)), ['step-by-step', 'look-closer', 'counterexample', 'pep-talk', 'stand-firm']);
+    assert.deepEqual(plain(S.deckTactics(save)), plain(save.deckTactics), 'the cards stay as saved');
+    let quota = S.ownDeck(save).check.problems.filter(p => p.code === 'quota');
+    assert.deepEqual(plain(quota.map(p => p.colour)), ['imagination']);
     save.team = [save.creatures[1].uid];
-    assert.ok(!S.deckTactics(save).includes('step-by-step'), 'the Reason creature is not in the chosen team');
+    quota = S.ownDeck(save).check.problems.filter(p => p.code === 'quota');
+    assert.deepEqual(plain(quota.map(p => p.colour)).sort(), ['imagination', 'reason'], 'the Reason creature is not in the chosen team');
+    assert.equal(S.ownDeck(save).check.valid, false);
 });
 
 test('a trainer whose earned tactics are all owned gives the uncommon of the team\'s main colour', () => {

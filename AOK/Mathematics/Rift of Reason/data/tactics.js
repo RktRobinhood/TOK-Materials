@@ -11,8 +11,9 @@
  *                       card is still in hand: it leaves the hand before it resolves)
  *   choose?(api, p, choice, req)   answer to api.ask(...)
  *   ai?(s, p, target, H)           rough value for the AI (optional; the AI also simulates)
- *   colour?, rarity?    a colour tactic (see below): playable only while you control a creature of
- *                       that colour, and only in a deck with one; rarity 'common' | 'uncommon' | 'rare'
+ *   colour?, rarity?    a colour tactic (see below): a deck may hold as many copies of that colour's
+ *                       tactics as it has creatures of that colour (Rift.State.validateDeck, #112); no
+ *                       creature needs to be in play; rarity 'common' | 'uncommon' | 'rare'
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
  */
 (function (root) {
@@ -189,9 +190,9 @@
         },
 
         // ---- colour tactics: three per Way of Knowing (design/card-arena-expansion-2026-10-07.md, section 2) ----
-        // colour: its Way of Knowing. Colour identity: it may only go in a deck with a creature of that colour,
-        // and it can only be played while you control a creature of that colour (engine legality). Because of
-        // that cost each is about one stat point better than a colourless tactic of the same cost.
+        // colour: its Way of Knowing. Colour quota (#112): per colour, a deck holds at most as many of these
+        // as creatures of that colour; casting needs no creature of that colour in play. Because of that
+        // deck cost each is about one stat point better than a colourless tactic of the same cost.
         // rarity: 'common' (unlocked by the first creature of that colour) | 'uncommon' | 'rare' (granted later:
         // trainers, vendor, quests, Rift Run; Rift.State.grantTactic).
         'step-by-step': {

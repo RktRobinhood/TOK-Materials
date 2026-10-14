@@ -103,10 +103,13 @@ test('migration v1 → v2: old-scale powerDelta never leaves attack below 0', ()
     });
     // Migrating again (or loading a save already at v2) changes nothing.
     assert.deepEqual(J(S.migrate(J(s))), J(s));
-    // The migrated creatures make a team code that imports again.
+    // The migrated creatures make a team code that imports again (a legal team: at most 2 of a species).
     const T = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js', 'js/battle/abilities.js', 'js/battle/team-codes.js']);
-    const back = T.Battle.TeamCodes.importTeam(T.Battle.TeamCodes.exportTeam({ nickname: 'Old Power', creatures: s.creatures }));
-    assert.deepEqual(J(back.team.map(c => c.powerDelta)), J(s.creatures.map(c => c.powerDelta)));
+    const legal = S.defaultTeam(s);
+    assert.ok(legal.length >= 2 && legal.length < s.creatures.length, 'the old save has a third copy of a species');
+    const back = T.Battle.TeamCodes.importTeam(T.Battle.TeamCodes.exportTeam({ nickname: 'Old Power', creatures: legal }));
+    assert.deepEqual(J(back.team.map(c => c.powerDelta)), J(legal.map(c => c.powerDelta)));
+    assert.throws(() => T.Battle.TeamCodes.exportTeam({ nickname: 'Old Power', creatures: s.creatures }), /Astrophysicat: at most 2 copies/);
     // A v2 save from before the clamp is fixed on load as well.
     const stale = J(s);
     stale.creatures[0].powerDelta = -2;
@@ -125,17 +128,24 @@ test('loanFillers lists the loaned creatures the battle will add', () => {
     assert.deepEqual(J(L.State.loanFillers({ owned: 0, team: 0, tactics: 8 })), J(starter.concat(L.Battle.Engine.PAD_SPECIES.slice(0, 2))));
 });
 
-test('battleTeam and deckTactics honour choices and drop what is gone or not owned', () => {
+test('battleTeam and deckTactics keep choices as saved; ownDeck reports what is gone, not owned or over the limit', () => {
     const s = S.freshState();
     for (let i = 0; i < 12; i++) s.creatures.push(S.makeCreature('khaby', { uid: 'k' + i }));
-    assert.equal(S.battleTeam(s).length, 10);
+    assert.deepEqual(J(S.battleTeam(s).map(c => c.uid)), ['k0', 'k1'], 'the default team keeps the copy limit');
+    s.creatures.push(S.makeCreature('astrophysicat', { uid: 'a0' }));
+    assert.deepEqual(J(S.defaultTeam(s).map(c => c.uid)), ['k0', 'k1', 'a0']);
     s.team = ['k11', 'k3', 'gone'];
     assert.deepEqual(J(S.battleTeam(s).map(c => c.uid)), ['k11', 'k3']);
     s.deckTactics = ['peer-review', 'eureka', 'eureka', 'eureka', 'nonsense'];
-    assert.deepEqual(J(S.deckTactics(s)), ['eureka', 'eureka'], 'peer-review is not owned yet; at most 2 copies');
+    assert.deepEqual(J(S.deckTactics(s)), J(s.deckTactics), 'nothing is dropped quietly');
+    const texts = J(S.ownDeck(s).check.problems.map(p => p.text));
+    assert.ok(texts.includes('1 chosen creature is no longer in your collection. Choose another.'), texts.join(' | '));
+    assert.ok(texts.includes('You do not own Peer Review yet. Remove it.'));
+    assert.ok(texts.includes('Eureka!: at most 2 copies. Remove 1.'));
+    assert.ok(texts.includes('Unknown tactic card: nonsense. Remove it.'));
     s.tactics.push('peer-review');
     assert.deepEqual(J(S.ownedTactics(s)).slice(-1), ['peer-review']);
-    assert.deepEqual(J(S.deckTactics(s)), ['peer-review', 'eureka', 'eureka']);
+    assert.ok(!S.ownDeck(s).check.problems.some(p => p.code === 'unowned'));
 });
 
 test('checkDeck: creatures + tactics = 20 with 6–14 of each; loans fill a small collection', () => {

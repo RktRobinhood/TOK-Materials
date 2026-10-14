@@ -7,7 +7,7 @@ function setup(writeText, fallback = false) {
     const { Rift } = g;
     const instance = { uid: 'owned', species: 'kardashiant' };
     const save = { creatures: [instance], avatar: { nickname: 'Tester' }, flags: {}, axioms: [] };
-    Rift.State = { get: () => save, battleTeam: () => [instance], deckTactics: () => [] };
+    Rift.State = { get: () => save, ownDeck: () => ({ team: [instance], tactics: [], axioms: [], loans: [], check: { valid: true, problems: [] } }) };
     Rift.Battle = { Engine: { axiomSelection: () => [] }, TeamCodes: { exportTeam: () => 'ROR1.team.test' } };
     const toasts = [];
     let modal;

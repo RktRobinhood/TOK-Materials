@@ -41,9 +41,9 @@
             trophies: [],          // named trophy copies won from classmates' ghosts
             seen: [],              // species ids seen
             axioms: [],            // axiom ids added to the player's pool
-            axiomLoadout: [],      // ten chosen cards; empty saves receive the starter selection
+            axiomLoadout: [],      // ten chosen cards (≤2 copies each); empty saves receive the starter selection
             tactics: [],           // earned tactic ids beyond the starter pool (data/tactics.js)
-            deckTactics: [],       // chosen tactic cards for the own deck (≤2 copies); empty = the starter ten
+            deckTactics: [],       // chosen tactic cards for the own deck (validateDeck rules); empty = the starter ten
             rumours: [],           // rumour ids heard
             lures: {},             // node id -> visits of boosted rare spawns left
             perksUsed: {},         // perk id -> chapter it was used in
@@ -146,14 +146,21 @@
     }
 
     // ---- the player's own battle deck ------------------------------------------
-    // Battle team: the chosen uids (6–14) that still exist, else the first 10.
+    // Battle team: the chosen uids (6–14) that still exist, else the default team.
     function battleTeam(save) {
         const s = save || current;
         if (!s) return [];
         const byUid = {};
         (s.creatures || []).forEach(c => { byUid[c.uid] = c; });
         const chosen = (s.team || []).map(uid => byUid[uid]).filter(Boolean).slice(0, 14);
-        return chosen.length ? chosen : (s.creatures || []).slice(0, 10);
+        return chosen.length ? chosen : defaultTeam(s);
+    }
+    // The default team (no team chosen yet): the first 10 creatures in collection order, skipping
+    // a species once 2 copies are in, so the default never breaks the copy limit.
+    function defaultTeam(save) {
+        const s = save || current || {};
+        const counts = {};
+        return (s.creatures || []).filter(c => c && (counts[c.species] = (counts[c.species] || 0) + 1) <= DECK_RULES.copies).slice(0, 10);
     }
     // Tactics this player may put in a deck: the starter pool plus earned ones.
     function ownedTactics(save) {
@@ -188,22 +195,31 @@
         s.tactics.push(id);
         return true;
     }
-    // The chosen tactic cards (owned, ≤2 copies each), else the starter ten.
+    // The chosen tactic cards exactly as saved, else the starter ten. Nothing is dropped quietly:
+    // validateDeck (through ownDeck) reports cards that break a rule, so the player can repair them.
     function deckTactics(save) {
         const s = save || current || {};
-        const owned = ownedTactics(s);
-        const counts = {};
-        // Colour identity: a colour tactic needs a creature of its colour in the battle team.
-        const colours = teamColours(battleTeam(s));
-        const known = (Rift.data || {}).tactics || {};
-        const fits = id => !(known[id] && known[id].colour) || colours.has(known[id].colour);
-        const chosen = (s.deckTactics || []).filter(id => owned.includes(id) && fits(id) && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, 14);
+        const chosen = (s.deckTactics || []).slice();
         return chosen.length ? chosen : (((Rift.data || {}).tacticDecks || {}).starter || []).slice();
     }
-    // The colours of these creature instances (for the colour identity of colour tactics).
-    function teamColours(team) {
-        const creatures = (Rift.data || {}).creatures || {};
-        return new Set((team || []).map(x => x && (creatures[x.species] || {}).colour).filter(Boolean));
+    // Axiom ids this player may put in the ten: the starter pool plus earned ones.
+    function ownedAxioms(save) {
+        const s = save || current || {};
+        const known = (Rift.data || {}).axioms || {};
+        const starter = ((Rift.data || {}).axiomDecks || {}).starter || [];
+        return Array.from(new Set(starter.concat(s.axioms || []))).filter(id => known[id] && !known[id].own);
+    }
+    // The ten axiom cards: the saved loadout exactly as saved, else the owned pool topped up from the
+    // default ten (the same choice the battle makes for an empty loadout).
+    function axiomLoadout(save) {
+        const s = save || current || {};
+        if ((s.axiomLoadout || []).length) return s.axiomLoadout.slice();
+        const known = (Rift.data || {}).axioms || {};
+        const out = [];
+        (s.axioms || []).concat(((Rift.data || {}).axiomDecks || {}).default || []).forEach(id => {
+            if (out.length < DECK_RULES.axioms && known[id] && !known[id].own && !out.includes(id)) out.push(id);
+        });
+        return out;
     }
 
     // Deck rule for the Collection builder: creatures + tactics = 20, 6–14 of each.
@@ -243,6 +259,147 @@
         const out = starter.slice(0, count);
         for (let k = 0; out.length < count; k++) out.push(pad[k % pad.length]);
         return out;
+    }
+
+    // ---- construction rules (#112, design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md) ----------
+    // ONE validator for every deck: the Collection builder, saved decks, team codes, and the
+    // trainer, boss and starter decks (their tests). A personal deck has 20 cards (6–14 creatures,
+    // 6–14 tactics), at most 2 copies of a creature species or a named tactic. Colour quota: per
+    // colour, colour tactic copies ≤ creature copies of that colour in the deck. Generic tactics
+    // (no colour) have no quota, and no creature needs to be in play to cast a colour tactic.
+    // Ten axiom cards, at most 2 copies of a named rule. Rules limit decks, not ownership.
+    const DECK_RULES = Object.freeze({ size: DECK_SIZE, minCreatures: 6, maxCreatures: 14, minTactics: 6, maxTactics: 14, copies: 2, axioms: 10, axiomCopies: 2 });
+
+    const speciesOf = x => (typeof x === 'string' ? x : x && x.species);
+    // The colour a creature counts for in a quota: null for a generic or unknown one.
+    function creatureColour(x) {
+        const sp = ((Rift.data || {}).creatures || {})[speciesOf(x)];
+        return (sp && !sp.generic && sp.colour) || null;
+    }
+    const tacticColour = id => ((((Rift.data || {}).tactics || {})[id]) || {}).colour || null;
+    function countBy(list, key) {
+        const out = {};
+        (list || []).forEach(x => { const k = key ? key(x) : x; if (k != null) out[k] = (out[k] || 0) + 1; });
+        return out;
+    }
+    // { colour: { creatures, tactics } } for every colour the deck uses.
+    function colourQuota(creatures, tactics) {
+        const out = {};
+        const row = c => out[c] || (out[c] = { creatures: 0, tactics: 0 });
+        (creatures || []).forEach(x => { const c = creatureColour(x); if (c) row(c).creatures += 1; });
+        (tactics || []).forEach(id => { const c = tacticColour(id); if (c) row(c).tactics += 1; });
+        return out;
+    }
+    // The colour tactics that fit the quota, in order → { kept, dropped } (only for old team codes
+    // made under the earlier rule; a player's own deck is never trimmed).
+    function quotaFilter(tactics, creatures) {
+        const room = countBy(creatures, creatureColour);
+        const kept = [], dropped = [];
+        (tactics || []).forEach(id => {
+            const c = tacticColour(id);
+            if (c && !(room[c] > 0)) { dropped.push(id); return; }
+            if (c) room[c] -= 1;
+            kept.push(id);
+        });
+        return { kept, dropped };
+    }
+
+    // validateDeck({ creatures: [instances | species ids], tactics: [ids], axioms?: [ids], loans?, missing? }, opts)
+    //   opts.complete (default true): the exact size and the 6–14 bands; false only checks maxima
+    //     (team codes: the battle fills a classmate's short ghost deck).
+    //   opts.owned / opts.ownedAxioms: when given, cards outside them are reported.
+    //   loans: legacy loaned creatures that fill a small collection; they count for the size only.
+    //   missing: chosen creatures no longer in the collection.
+    // → { valid, problems: [{ part: 'deck'|'axioms', code, text, id?, colour? }], message, head, axiomHead,
+    //     counts: { creatures, loans, tactics, total, axioms }, copies: { creatures, tactics, axioms }, quota }
+    function validateDeck(deck, opts) {
+        const d = deck || {}, o = Object.assign({ complete: true }, opts);
+        const R = DECK_RULES, data = Rift.data || {};
+        const species = data.creatures || {}, known = data.tactics || {}, axDefs = data.axioms || {};
+        const creatures = d.creatures || [], tactics = d.tactics || [], loans = d.loans || 0;
+        const problems = [];
+        const add = (part, code, text, extra) => problems.push(Object.assign({ part, code, text }, extra || {}));
+        const n = (k, word) => k + ' ' + word + (k === 1 ? '' : 's');
+        const nameOf = (defs, id) => ((defs[id] || {}).name || id);
+        const colourName = c => (((Rift.COLOURS || {})[c]) || { name: c }).name;
+        const aColour = c => (/^[aeiou]/i.test(colourName(c)) ? 'an ' : 'a ') + colourName(c);
+        const copies = { creatures: countBy(creatures, speciesOf), tactics: countBy(tactics), axioms: countBy(d.axioms) };
+        const quota = colourQuota(creatures, tactics);
+
+        if (d.missing) add('deck', 'missing', n(d.missing, 'chosen creature') + (d.missing === 1 ? ' is' : ' are') + ' no longer in your collection. Choose another.');
+        Object.keys(copies.creatures).forEach(id => {
+            if (!species[id]) add('deck', 'unknown', 'Unknown creature: ' + id + '. Remove it.', { id });
+            else if (copies.creatures[id] > R.copies) add('deck', 'copies', nameOf(species, id) + ': at most ' + R.copies + ' copies. Remove ' + (copies.creatures[id] - R.copies) + '.', { id });
+        });
+        Object.keys(copies.tactics).forEach(id => {
+            if (!known[id]) add('deck', 'unknown', 'Unknown tactic card: ' + id + '. Remove it.', { id });
+            else if (o.owned && !o.owned.includes(id)) add('deck', 'unowned', 'You do not own ' + nameOf(known, id) + ' yet. Remove it.', { id });
+            if (known[id] && copies.tactics[id] > R.copies) add('deck', 'copies', nameOf(known, id) + ': at most ' + R.copies + ' copies. Remove ' + (copies.tactics[id] - R.copies) + '.', { id });
+        });
+        Object.keys(quota).forEach(c => {
+            const q = quota[c];
+            if (q.tactics > q.creatures) {
+                add('deck', 'quota', n(q.tactics, colourName(c) + ' tactic') + (q.tactics === 1 ? ' needs ' : ' need ') + n(q.tactics, colourName(c) + ' creature')
+                    + '. You have ' + q.creatures + '. Add ' + aColour(c) + ' creature or remove ' + aColour(c) + ' tactic.', { colour: c });
+            }
+        });
+        const total = creatures.length + loans + tactics.length;
+        if (o.complete) {
+            if (tactics.length < R.minTactics) add('deck', 'tactics', 'Choose at least ' + R.minTactics + ' tactic cards.');
+            else if (tactics.length > R.maxTactics) add('deck', 'tactics', 'Choose at most ' + R.maxTactics + ' tactic cards.');
+            if (creatures.length > R.maxCreatures) add('deck', 'creatures', 'Choose at most ' + R.maxCreatures + ' creatures.');
+            else if (creatures.length + loans < R.minCreatures) add('deck', 'creatures', 'Choose at least ' + R.minCreatures + ' creatures.');
+            if (total < R.size) add('deck', 'size', 'Add ' + n(R.size - total, 'more card') + '.');
+            else if (total > R.size) add('deck', 'size', 'Remove ' + n(total - R.size, 'card') + '.');
+        } else {
+            if (creatures.length > R.maxCreatures) add('deck', 'creatures', 'Choose at most ' + R.maxCreatures + ' creatures.');
+            if (total > R.size) add('deck', 'size', 'Remove ' + n(total - R.size, 'card') + '.');
+        }
+
+        if (d.axioms) {
+            Object.keys(copies.axioms).forEach(id => {
+                const ax = axDefs[id];
+                if (!ax) add('axioms', 'unknown', 'Unknown axiom card: ' + id + '. Remove it.', { id });
+                else if (ax.own) add('axioms', 'own', ax.name + ' starts in your hand. It is not one of the ten.', { id });
+                else if (o.ownedAxioms && !o.ownedAxioms.includes(id)) add('axioms', 'unowned', 'You do not own ' + ax.name + ' yet. Remove it.', { id });
+                if (ax && copies.axioms[id] > R.axiomCopies) add('axioms', 'copies', ax.name + ': at most ' + R.axiomCopies + ' copies. Remove ' + (copies.axioms[id] - R.axiomCopies) + '.', { id });
+            });
+            const k = d.axioms.length;
+            if (k > R.axioms) add('axioms', 'size', 'Axiom cards ' + k + '/' + R.axioms + ': remove ' + (k - R.axioms) + '.');
+            else if (o.complete && k < R.axioms) add('axioms', 'size', 'Axiom cards ' + k + '/' + R.axioms + ': add ' + (R.axioms - k) + '.');
+        }
+
+        const who = !loans ? n(creatures.length, 'creature')
+            : !creatures.length ? n(loans, 'loaned creature')
+                : n(creatures.length + loans, 'creature') + ' (' + creatures.length + ' yours + ' + loans + ' loaned)';
+        const head = 'Deck ' + total + '/' + R.size + ': ' + who + ' + ' + n(tactics.length, 'tactic') + '.';
+        const axiomHead = d.axioms ? 'Axiom cards ' + d.axioms.length + '/' + R.axioms + '.' : null;
+        const first = problems[0];
+        return {
+            valid: !problems.length, problems, head, axiomHead,
+            message: first ? (first.part === 'axioms' ? axiomHead : head) + ' ' + first.text : head,
+            counts: { creatures: creatures.length, loans, tactics: tactics.length, total, axioms: d.axioms ? d.axioms.length : null },
+            copies, quota,
+        };
+    }
+
+    // The player's own deck for a battle, exactly as saved (defaults for empty choices), with its
+    // check. Battles start only when check.valid; otherwise the player repairs it in Collection.
+    // → { team: [instances], tactics: [ids], axioms: [ids], loans: [species], missing, custom, check }
+    function ownDeck(save) {
+        const s = save || current;
+        if (!s) return null;
+        const byUid = {};
+        (s.creatures || []).forEach(c => { byUid[c.uid] = c; });
+        const chosen = s.team || [];
+        const team = chosen.length ? chosen.map(uid => byUid[uid]).filter(Boolean) : defaultTeam(s);
+        const missing = chosen.length ? chosen.length - team.length : 0;
+        const tactics = deckTactics(s);
+        const axioms = axiomLoadout(s);
+        const loans = loanFillers({ owned: (s.creatures || []).length, team: team.length, tactics: tactics.length });
+        const check = validateDeck({ creatures: team, tactics, axioms, loans: loans.length, missing },
+            { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s) });
+        return { team, tactics, axioms, loans, missing, custom: !!(chosen.length || (s.deckTactics || []).length), check };
     }
 
     let instanceCounter = 0;
@@ -618,13 +775,20 @@
         loanFillers,
         describeVariant,
         battleTeam,
+        defaultTeam,
         ownedTactics,
+        ownedAxioms,
         unlockColourTactics,
         grantTactic,
-        teamColours,
         deckTactics,
+        axiomLoadout,
         checkDeck,
         DECK_SIZE,
+        DECK_RULES,
+        validateDeck,
+        colourQuota,
+        quotaFilter,
+        ownDeck,
         TRAITS,
         TRICKS,
         TRICK_LABELS,

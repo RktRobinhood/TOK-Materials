@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 function game(){
- const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/decks.js','data/axioms.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
+ const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/decks.js','data/axioms.js','data/tactics.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};
  Rift.State.get=()=>state;Rift.State.update=fn=>fn(state);Rift.el=(...args)=>new Node(...args);
  const routes=[],modals=[];
