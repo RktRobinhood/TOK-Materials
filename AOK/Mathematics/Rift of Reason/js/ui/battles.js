@@ -18,6 +18,8 @@
  * A deck that breaks the shared construction rules (#112, Rift.State.validateDeck) does not start a
  * trainer, practice or ghost battle or a team code: deckReady() lists what to fix and opens Collection
  * (Battles.repairDeck). Opponent decks follow the same rules (trainer data is checked by the tests).
+ * Before the first of these battles with the own deck, the optional deck workshop is offered once
+ * (#115, Rift.DeckWorkshop.offer); it never changes the saved deck.
  * A trainer's first defeat gives a Trick Book and one earned tactic (World.claimTrainerReward).
  * The Bag: before a real battle (trainer, ghost) the player may bring up to two items with a battle
  * job (player.bag). They are used up only when used: after the match only result.itemsUsed leave the
@@ -88,6 +90,10 @@
         ]);
         return true;
     }
+
+    // The deck workshop (#115, js/ui/deck-workshop.js) is offered once, before the first battle with the
+    // player's own deck (trainer, practice or ghost). Optional: 'Not now' starts the battle at once.
+    const offerWorkshop = start => !!(Rift.DeckWorkshop && Rift.DeckWorkshop.offer(start));
 
     // The player's own side of a battle (Rift.State.ownDeck): chosen team (or the default team), chosen
     // tactic cards, ten-card axiom contribution, hero art and own rule
@@ -372,6 +378,7 @@
         trainer(nodeId, difficulty) {
             if(!Battles.canChallenge(nodeId)){Rift.UI.toast('Beat this station’s puzzle once to unlock its card challenge.',3500);return;}
             if(offerUpdatedLesson(()=>Battles.trainer(nodeId,difficulty),'map'))return;
+            if(offerWorkshop(()=>Battles.trainer(nodeId,difficulty)))return;
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
             const side = trainerSide(n.trainer, difficulty);
@@ -400,6 +407,7 @@
 
         practice() {
             if(offerUpdatedLesson(()=>Battles.practice(),'collection'))return;
+            if(offerWorkshop(()=>Battles.practice()))return;
             const deck = myDeck();
             if (!deckReady(deck)) return;
             const sd = seed('practice');
@@ -424,6 +432,7 @@
                 Rift.UI.toast(e.message, 4000);
                 return;
             }
+            if(offerWorkshop(()=>Battles.ghost(code)))return;
             const deck = myDeck();
             if (!deckReady(deck)) return;
             prepare((consumables, bag) => Rift.Router.go('battle', {

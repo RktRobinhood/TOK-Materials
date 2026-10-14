@@ -419,6 +419,8 @@
                     el('div.row.wrap', null, [
                         el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(resum) }),
                         el('button.btn', { text: 'Axiom cards · 10 cards', onclick: () => editAxiomDeck(resum) }),
+                        // The deck workshop (#115): replayable; it uses a copy of the starter deck.
+                        s.starter && Rift.DeckWorkshop ? el('button.btn.workshop-open', { text: 'Deck workshop', title: 'Practise the deck rules with a copy of your starter deck. Your saved deck stays the same.', onclick: () => Rift.DeckWorkshop.open({ onClose: resum }) }) : null,
                         (s.items['trick-book'] || 0) > 0 && s.creatures.length ? el('button.btn', { text: 'Use a Trick Book (' + s.items['trick-book'] + ')', onclick: () => Rift.UI.trickBook(null, () => Rift.Router.replace('collection')) }) : null,
                     ]),
                 ]),
