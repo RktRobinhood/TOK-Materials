@@ -1174,3 +1174,15 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
     .conditional-study .b-prompt { min-width: 0; font-size: 12px; }
     .conditional-study .b-axdeck { width: 36px; }
 }
+
+/* Scheduled Fate events (#119, Clean Slate): a smaller node above the space's centre, so it never hides
+   Fate's own rule event on the same round. Spent ones stay visible, dimmed and struck through. */
+.b-fs > .b-fev.sched { transform: translate(-50%, -86%); min-height: 38px; }
+.b-fs:last-child > .b-fev.sched { transform: translate(-78%, -86%); }
+.b-fev.sched .b-fev-icon { width: 28px; height: 28px; font-size: 20px; border-radius: 6px; background-size: cover; color: var(--rift); }
+.b-fev.sched.mine .b-fev-label { color: var(--rift); }
+.b-fev.sched.theirs .b-fev-label { color: #ff9b8a; }
+.b-fev.sched.spent { opacity: 0.55; }
+.b-fev.sched.spent .b-fev-label { text-decoration: line-through; }
+.b-fpast.scheduled { color: var(--rift); }
+.b-fate-sum .b-fate-sched { color: var(--rift); opacity: 0.95; }

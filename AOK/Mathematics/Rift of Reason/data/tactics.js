@@ -14,6 +14,12 @@
  *   colour?, rarity?    a colour tactic (see below): a deck may hold as many copies of that colour's
  *                       tactics as it has creatures of that colour (Rift.State.validateDeck, #112); no
  *                       creature needs to be in play; rarity 'common' | 'uncommon' | 'rare'
+ *   scheduled?          a scheduled Fate spell (#118/#119, design/drafts/card-arena-2026-10-12/
+ *                       FATE-SCHEDULE-MODEL.md): playing it puts a public event on the Fate track instead
+ *                       of acting now. { delay (spaces ahead, ≥ 1), summary (one sentence), repeat?,
+ *                       lifetime? (rounds, repeatable only), resolve(api, ev, H) when Fate reaches it,
+ *                       expire?(api, ev, H), project?(s, ev, H) a rough after-state for the AI only }.
+ *                       Not offered without a Fate track or while its player has 2 events waiting.
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
  */
 (function (root) {
@@ -396,6 +402,39 @@
                 if (req.step === 1) recallStep(api, p, 2);
             },
         },
+    };
+    // The first scheduled Fate spell (#119). Bench and tests only: no tacticDecks list, starter,
+    // trainer deck or reward names it, so no student can own it yet (dev/battle.html?fate=you-cast).
+    tactics['clean-slate'] = {
+        short: 'In 2 rounds: defeat every creature',
+        name: 'Clean Slate', cost: 4, art: 'art/spell-motif-generic',
+        text: 'Put Clean Slate on the Fate track, 2 rounds ahead. When Fate reaches it, every creature in play is defeated.',
+        flavour: 'Wipe the board. Start the proof again.',
+        scheduled: {
+            delay: 2,
+            summary: 'Every creature in play is defeated.',
+            // Whoever is in play when it resolves (not when it was cast): its controller's side first, left
+            // to right, then the other side, so the order never depends on whose turn it is (the preview
+            // matches). Normal defeats: Mercy and Last Words still apply.
+            resolve(api, ev) {
+                const s = api.s, first = ev.controller == null ? s.active : ev.controller;
+                const doomed = [first, 1 - first].reduce((out, p) => out.concat(s.players[p].board), []);
+                if (!doomed.length) { api.emit({ t: 'tactic', text: 'Clean Slate: there is no creature to defeat.' }); return; }
+                const names = doomed.map(cid => api.name(cid));   // before any leaves the board
+                doomed.forEach((cid, i) => api.defeat(cid, 'fate', names[i]));
+            },
+            // For the AI's look-ahead only: both boards empty (to the hand under Mercy, else the discard).
+            project(s, ev, H) {
+                const mercy = H.rules(s).mercy;
+                const players = s.players.map(P => Object.assign({}, P, { board: [] }));
+                s.players.forEach(P => P.board.forEach(cid => {
+                    const o = players[s.cards[cid].owner];
+                    if (mercy) o.hand = o.hand.concat([cid]); else o.discard = o.discard.concat([cid]);
+                }));
+                return Object.assign({}, s, { players });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
     };
     const SEEN = ['guard', 'elusive', 'shield'];
     function cap(k) { return k[0].toUpperCase() + k.slice(1); }

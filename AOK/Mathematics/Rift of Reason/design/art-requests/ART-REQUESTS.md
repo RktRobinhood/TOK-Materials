@@ -607,6 +607,7 @@ The side panel's "Rules in play" tiles show a picture for each rule. Changed rul
 | 13.75 | Cold-open cutscene: the avatar's bedroom at dawn, an empty bed facing us, the window showing the cracked sky | `scene/bedroom` | Cutscene prototype (#65): the lock-on and the wake | 2 | to make |
 | 13.76 | Cold-open cutscene: each avatar asleep (lying down, eyes closed), boy and girl, five sheets | `avatar/<type>-<variant>/asleep` | Cutscene prototype (#65): laid into the bed in 13.75 | 2 | to make |
 | 13.77 | Revised walk loops with clearly opposite left/right contact poses, a planted sole during stance and a lifted passing foot; stable head and body, no motion marks | `avatar/{fox-girl,raven-girl,frogling-boy,owlet-boy,mothkin-girl}/walk` | Enlarged trailer travellers expose the repeated forward-foot pose in the existing sheets; trailer now articulates the original leg art in JavaScript | 3 | source-sheet revision to make (reviewed 2026-10-11) |
+| 13.78 | Clean Slate spell art (the first scheduled Fate spell: a slate wiped clean, chalk dust settling) and a small Fate-reel node icon for scheduled events, readable at 28 px | `tactic/clean-slate` (card currently uses `art/spell-motif-generic`: drop its `art` field in data/tactics.js when this lands), `ui/fate-scheduled` (reel node; currently the card art or a ◎ glyph) | #119 Clean Slate (bench and tests only for now; needed before it is granted) | 3 | requested 2026-10-14 |
 
 
 ### 13.18 Nudge (session of 8 October)

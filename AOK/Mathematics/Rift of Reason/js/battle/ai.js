@@ -59,6 +59,11 @@
  *   value a creature that a ready enemy Lantern or Close the Proof could finish a little lower
  *   (powerExposure, WEIGHTS.exposure; without it What If? fed 4/1s to Lantern, 61% in the pairs).
  *
+ *   Scheduled Fate events (#118/#119, Clean Slate) are public: evaluate() counts each coming one as the
+ *   change its definition's rough `project` says it makes, weighted by End turns like the next Fate event
+ *   (scheduledTerm). So every level casts Clean Slate when behind on the board, values moving Fate to
+ *   bring a wipe sooner or later, and does not force a creature onto a board that is wiped this round.
+ *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
  *   Bag item actions ({ type: 'item' }) are never chosen by the AI.
@@ -437,11 +442,31 @@
     function evaluate(s, me, opts) {
         const o = opts || {};
         const ctx = o.ctx || makeCtx(me, o);
-        if (!o.deep || s.winner != null) return evaluateBase(s, me, ctx);
+        if (!o.deep || s.winner != null) return evaluateBase(s, me, ctx) + scheduledTerm(s, me, ctx);
         let v = staticDeep(s, me, ctx);
         const next = nextEventState(s);
         if (next) v += Math.pow(0.85, fateTurns(s)) * (staticDeep(next, me, ctx) - staticDeep(s, me, ctx));
+        return v + scheduledTerm(s, me, ctx);
+    }
+
+    // The coming scheduled Fate events (public), each as the change it would make: its definition's
+    // rough `project` (data/tactics.js), weighted by End turns until it resolves. 0 when none is coming.
+    function comingScheduled(s) {
+        const q = s.fate && s.fate.queue;
+        if (!q || !q.length || s.winner != null || !s.options.timeline) return [];
+        return E().fateSchedule(s).filter(ev => ev.live && ev.rounds != null && ((Rift.data.tactics || {})[ev.def] || {}).scheduled && Rift.data.tactics[ev.def].scheduled.project);
+    }
+    function scheduledTerm(s, me, ctx) {
+        const coming = comingScheduled(s);
+        if (!coming.length) return 0;
+        const base = evaluateBase(s, me, ctx);
+        let v = 0;
+        for (const ev of coming) v += Math.pow(0.85, ev.turns) * (evaluateBase(Rift.data.tactics[ev.def].scheduled.project(s, ev, E().H), me, ctx) - base);
         return v;
+    }
+    // A public event that empties my side resolves at the end of this round (before my next turn).
+    function wipedThisRound(s, me) {
+        return comingScheduled(s).some(ev => ev.rounds === 1 && !Rift.data.tactics[ev.def].scheduled.project(s, ev, E().H).players[me].board.length);
     }
 
     // What each axiom would be worth to me if it became active now.
@@ -912,6 +937,7 @@
     // every such play looks clearly bad (it would just be thrown away).
     function develop(s, scored, best) {
         if (!best || best.type !== 'end') return best;
+        if (wipedThisRound(s, s.active)) return best;   // a creature played now would only be wiped
         let pick = null;
         for (const x of scored) {
             if (x.a.type !== 'play' || s.cards[x.a.cid].kind !== 'creature' || x.score < DEVELOP_FLOOR) continue;

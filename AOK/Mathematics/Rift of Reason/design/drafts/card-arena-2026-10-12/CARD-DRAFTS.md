@@ -79,7 +79,7 @@ Proof Pup's heal happens once on entry; Comma Crab trades its attack and energy 
 
 ## Later Fate card pack (not in initial starters)
 
-All scheduled spells are one-shot in the first slice. Costs below are proposed; exact replay/jump/expiry semantics need the dedicated decision ticket before those mechanics change. Show public source, controller, target/effect and rounds until resolution.
+All scheduled spells are one-shot. Costs below are proposed. Replay, leap, rewind and expiry semantics are settled (teacher decision 14 October 2026, #118): one-shot by default, only marked repeatable spaces replay, and lifetimes count elapsed full rounds. The state model and builder decisions are in [FATE-SCHEDULE-MODEL.md](FATE-SCHEDULE-MODEL.md). Show public source, controller, target/effect and rounds until resolution.
 
 | Draft | Kind / cost | Effect |
 |---|---|---|
@@ -94,6 +94,8 @@ All scheduled spells are one-shot in the first slice. Costs below are proposed; 
 | Revisit | Memory spell, 2, later | Rewind one space; marked repeatable effects may fire on re-entry. One-shot events do not duplicate. Requires replay-policy approval. |
 
 Tokens are generated battle objects, not collectible copies and not part of construction quotas. Queued spells retain their controller but do not require the casting creature to survive. Cancelled/skipped/expired states must be explained in the UI.
+
+#119 (14 October 2026) implements Clean Slate as specified, with a public reel node, a live "if it resolved now" preview, real resolution, a spent marker and AI awareness. It is defined in data/tactics.js but no grant list names it, so it is playable only on the battle bench (dev/battle.html?fate=you-cast) and in tests until its release, tutorial and art are decided (ART-REQUESTS 13.78).
 
 ## Axiom expansion drafts
 
