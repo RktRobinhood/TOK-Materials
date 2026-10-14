@@ -526,7 +526,8 @@
         ch4: { scene: 'scene/map-ch4', name: 'The Server Tower' },
     };
 
-    // NPC trainers for battle nodes. team: 10 species; tactics?: their tactic cards (default: the
+    // NPC trainers for battle nodes. team: 10 species (at most 2 of one; Rift.State.validateDeck checks the
+    // whole deck in tools/test/deck-rules.test.mjs); tactics?: their tactic cards (default: the
     // starter ten; one or two colour tactics matching the team's colours); rewardTactic?: the earned
     // tactic their first defeat unlocks (else the next unowned one).
     // ai: the AI level (design/card-arena-expansion-2026-10-07.md section 8): 'normal' for ordinary
@@ -535,7 +536,7 @@
     Rift.data.trainers = {
         'syllo': {
             name:'Sergeant Syllo', speaker:'syllo', ai:'normal', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
-            team:['lobstorian','astrophysicat','lobstorian','astrophysicat','beastie','astrophysicat','lobstorian','khaby','beastie','astrophysicat'],
+            team:['lobstorian','astrophysicat','lobstorian','astrophysicat','beastie','khaby','keanu','khaby','beastie','proof-pup'], // at most 2 copies of a species (#112)
             ante:{items:{charm:2}},
             rewardTactic:'pause-for-thought',
         },

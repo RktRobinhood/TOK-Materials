@@ -105,8 +105,11 @@
                             ]), [
                                 { label: 'Edit details', onclick() { realInput.focus(); } },
                                 { label: 'Start adventure', primary: true, onclick() {
-                                    Rift.State.update(s => { s.avatar = avatar; Rift.World.start(s); });
+                                    // The avatar type's starter deck: real owned cards, once per adventure (#114).
+                                    let starter = null;
+                                    Rift.State.update(s => { s.avatar = avatar; Rift.World.start(s); starter = Rift.State.grantStarter(s); });
                                     Rift.State.saveNow();
+                                    if (starter && Rift.bus) Rift.bus.emit('starter:granted', starter);
                                     Rift.Audio.sfx('success');
                                     Rift.Router.replace('map', { arrive: true });
                                 } },

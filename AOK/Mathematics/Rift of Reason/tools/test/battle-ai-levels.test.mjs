@@ -138,7 +138,7 @@ test('the AI never chooses a Bag item action', () => {
     }
 });
 
-test('built boss decks are legal 20-card decks: real ids, their own colours, colour identity, a low curve', () => {
+test('built boss decks are legal 20-card decks: real ids, their own colours, the shared construction rules, a low curve', () => {
     const decks = R.data.decks;
     assert.ok(Object.keys(decks).length >= 3);
     for (const [id, d] of Object.entries(decks)) {
@@ -164,7 +164,8 @@ test('built boss decks are legal 20-card decks: real ids, their own colours, col
         assert.ok(d.creatures.every(sp => R.data.creatures[sp].cost <= 6), id + ' tops out at 6 energy');
         // The engine builds the deck as given: no loaned pad creatures.
         const team = d.creatures.map((species, i) => ({ uid: id + i, species, injuries: [], scars: [], powerDelta: 0, warped: null, trophyOf: null }));
-        assert.equal(E.identityFilter(d.tactics, team).dropped.length, 0, id + ' obeys the colour identity rule');
+        const rules = R.State.validateDeck({ creatures: team, tactics: d.tactics });
+        assert.ok(rules.valid, id + ' obeys the shared construction rules: ' + rules.problems.map(p => p.text).join(' '));
         assert.ok(d.tactics.some(t => R.data.tactics[t].colour), id + ' has colour tactics');
         const s = E.createBattle({ seed: 'deck:' + id, players: [{ team, tactics: d.tactics }, { team: R.Battle.Lesson.starter() }] });
         const P = s.players[0];

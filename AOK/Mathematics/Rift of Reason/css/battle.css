@@ -800,8 +800,8 @@ body.calm-motion .battle .b-question.show { animation: b-fade-in 0.12s ease-out 
 body.calm-motion .battle .b-bag-tray { animation: b-fade-in 0.12s ease-out !important; }
 /* ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ----
    The copper tactic frame tinted to the colour (until ui/card-tactic-<colour> art exists),
-   the colour's emblem top right (lit while a creature of that colour is in play), colour and
-   rarity under the name, and the "Needs a … creature in play" line. No animation. */
+   the colour's emblem top right (always lit since #112), colour and
+   rarity under the name. Since #112 no creature in play is needed (no "Needs a …" line). No animation. */
 .bc.tactic[data-tcolour="reason"] { --tcol: var(--reason); }
 .bc.tactic[data-tcolour="emotion"] { --tcol: var(--emotion); }
 .bc.tactic[data-tcolour="perception"] { --tcol: var(--perception); }

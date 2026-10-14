@@ -8,6 +8,10 @@
 
     function boot() {
         Rift.State.load();
+        // Catch-up (#114): an adventure from before the owned starter decks gets its avatar type's
+        // starter once (also after loading a backup code or the previous save). Never repeats.
+        Rift.State.ensureStarter();
+        Rift.bus.on('state:replaced', () => Rift.State.ensureStarter());
         // Calm motion reduces animation and keeps the catch ring still.
         const applyCalm = () => {
             const s = Rift.State.get();

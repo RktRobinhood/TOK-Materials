@@ -12,7 +12,12 @@
  * Every launcher passes both sides as { name?, team: [instances], tactics: [ids], axioms?: [ids],
  * art?: asset id for the hero portrait, consumables? } (player) and opponent { ..., ai, stake? }.
  * The player's side comes from the Collection deck builder (save.team, save.deckTactics,
- * save.axiomLoadout); an empty collection borrows the lesson starter team.
+ * save.axiomLoadout) through Rift.State.ownDeck. Every adventure owns its avatar type's starter deck
+ * (#114, Rift.State.grantStarter), so no loaned creatures fill it; only the scripted lessons and
+ * Syllo's safe story match lend fixed teams.
+ * A deck that breaks the shared construction rules (#112, Rift.State.validateDeck) does not start a
+ * trainer, practice or ghost battle or a team code: deckReady() lists what to fix and opens Collection
+ * (Battles.repairDeck). Opponent decks follow the same rules (trainer data is checked by the tests).
  * A trainer's first defeat gives a Trick Book and one earned tactic (World.claimTrainerReward).
  * The Bag: before a real battle (trainer, ghost) the player may bring up to two items with a battle
  * job (player.bag). They are used up only when used: after the match only result.itemsUsed leave the
@@ -41,6 +46,14 @@
         return 'New tactic' + (ids.length > 1 ? 's' : '') + ': ' + ids.map(id => ((Rift.data.tactics || {})[id] || { name: id }).name).join(', ') + '. Add ' + (ids.length > 1 ? 'them' : 'it') + ' in Collection.';
     }
     if (Rift.bus) Rift.bus.on('tactics:unlocked', ids => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(unlockedText(ids), 5000); });
+    // The avatar type's starter deck arrived (#114): a new adventure, or the catch-up of an older one.
+    function starterText(receipt) {
+        const a = ((Rift.data.avatars || {})[receipt.type] || { name: receipt.type }).name;
+        return receipt.catchUp
+            ? 'New in Collection: your ' + a + ' starter cards (12 creatures, 8 tactics). Your own deck is unchanged.'
+            : 'Your ' + a + ' starter deck is ready: 12 creatures, 8 tactics and 10 axiom cards. See Collection.';
+    }
+    if (Rift.bus) Rift.bus.on('starter:granted', receipt => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(starterText(receipt), 6000); });
 
     function needCreatures() {
         const s = Rift.State.get();
@@ -76,21 +89,39 @@
         return true;
     }
 
-    // The player's own side of a battle: chosen team (or first 10, or a loaned starter
-    // team), chosen tactic cards, ten-card axiom contribution, hero art and own rule cards.
+    // The player's own side of a battle (Rift.State.ownDeck): chosen team (or the default team), chosen
+    // tactic cards, ten-card axiom contribution, hero art and own rule
+    // cards, plus `check`: the shared construction rules (#112). Launchers start only a legal deck.
     function myDeck() {
         const s = Rift.State.get();
-        // With no creatures, loaned starters fill only the places tactics leave (as the deck builder shows).
-        const team = s.creatures.length ? Rift.State.battleTeam(s) : Rift.Battle.Lesson.starter().slice(0, Math.max(6, 20 - Rift.State.deckTactics(s).length));
+        const own = Rift.State.ownDeck(s);
+        const team = own.team;
         const art = s.avatar && typeof Rift.avatarArt === 'function' ? Rift.avatarArt(s.avatar, 'neutral') : null;
         return {
             team,
-            tactics: Rift.State.deckTactics(s),
-            axioms: Rift.Battle.Engine.axiomSelection(s.axiomLoadout && s.axiomLoadout.length ? s.axiomLoadout : s.axioms),
+            tactics: own.tactics,
+            axioms: own.axioms,
             art,
             power: avatarPower(s.avatar),
             ownAxioms: ownAxioms(s),
+            check: own.check,
         };
+    }
+
+    // A deck that breaks a construction rule is never trimmed or padded quietly: the player sees
+    // what to fix and can open the deck builder. → true when the deck is ready.
+    function deckReady(deck) {
+        if (deck.check.valid) return true;
+        const problems = deck.check.problems;
+        const part = problems[0].part === 'axioms' ? 'axioms' : 'deck';
+        Rift.UI.modal('Fix your deck first', el('div.stack', null, [
+            el('p', { text: 'This battle uses your own deck. Change these cards in Collection:' }),
+            el('ul.deck-problems', null, problems.slice(0, 4).map(x => el('li', { text: x.text }))),
+        ]), [
+            { label: 'Later' },
+            { label: part === 'axioms' ? 'Open the axiom cards' : 'Open the deck builder', primary: true, onclick: () => Battles.repairDeck(part) },
+        ]);
+        return false;
     }
 
     // Syllo's practice match (a safe beginner match): eight cheap small creatures and kind tactics.
@@ -334,7 +365,7 @@
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
                 {label:'Challenge · '+levelLabel(levelOf(t.ai||'normal')),primary:true,onclick:()=>Battles.trainer(nodeId)});
             Rift.UI.modal(t.name,el('div.stack',null,[Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
+                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Use Practice in Collection for a safe match.'}),
             ]),choices);
         },
 
@@ -344,10 +375,12 @@
             const n = Rift.World.node(nodeId);
             const t = Rift.data.trainers[n.trainer];
             const side = trainerSide(n.trainer, difficulty);
+            const deck = myDeck();
+            if (!deckReady(deck)) return;
             prepare((consumables, bag) => Rift.Router.go('battle', {
                 mode: 'trainer',
                 seed: seed(nodeId),
-                player: Object.assign(myDeck(), { consumables, bag }),
+                player: Object.assign(deck, { consumables, bag }),
                 opponent: { name: t.name, team: side.team, tactics: side.tactics,
                     art: speakerArt(t.speaker), ai: side.ai, stake: t.ante, power: side.power },
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer, bagFromSave: true }),
@@ -367,12 +400,15 @@
 
         practice() {
             if(offerUpdatedLesson(()=>Battles.practice(),'collection'))return;
+            const deck = myDeck();
+            if (!deckReady(deck)) return;
             const sd = seed('practice');
-            const team = Rift.Battle.Engine.randomTeam(Rift.makeRng(sd), 10, { prefix: 'spar', legendaries: false });
+            // A legal opponent deck too: at most 2 copies of a species, with the generic starter tactics.
+            const team = Rift.Battle.Engine.randomTeam(Rift.makeRng(sd), 10, { prefix: 'spar', legendaries: false, maxCopies: 2 });
             Rift.Router.go('battle', {
                 mode: 'practice',
                 seed: sd,
-                player: Object.assign(myDeck(), { bag: PRACTICE_BAG.slice() }),
+                player: Object.assign(deck, { bag: PRACTICE_BAG.slice() }),
                 opponent: { name: 'The Training Dummy', team, tactics: starterTactics(), ai: 'normal', power: teamPower(team, 'normal') },
                 onEnd: result => finish(result, { back: 'collection' }),
             });
@@ -388,10 +424,12 @@
                 Rift.UI.toast(e.message, 4000);
                 return;
             }
+            const deck = myDeck();
+            if (!deckReady(deck)) return;
             prepare((consumables, bag) => Rift.Router.go('battle', {
                 mode: 'ghost',
                 seed: seed('ghost'),
-                player: Object.assign(myDeck(), { consumables, bag }),
+                player: Object.assign(deck, { consumables, bag }),
                 opponent: Rift.Battle.TeamCodes.ghostOpponent(imported),
                 onEnd: result => finish(result, { back: 'collection', bagFromSave: true }),
             }));
@@ -401,6 +439,7 @@
             const s = Rift.State.get();
             if (!needCreatures()) return;
             const deck = myDeck();
+            if (!deckReady(deck)) return;
             const code = Rift.Battle.TeamCodes.exportTeam({ nickname: s.avatar.nickname, creatures: deck.team, tactics: deck.tactics, axioms: deck.axioms, avatar: s.avatar });
             const box = el('textarea', { rows: 4, readOnly: true, style: { width: '100%' }, value: code, 'aria-label': 'Your team code' });
             Rift.UI.modal('Your team code', el('div.stack', null, [
@@ -425,6 +464,14 @@
         },
     };
 
+    // Opens the deck builder (part 'deck') or the axiom cards ('axioms') in Collection to repair a deck.
+    Battles.repairDeck = function (part) {
+        const C = Rift.Collection;
+        if (C && Rift.Router.current() === 'collection') { if (part === 'axioms') C.editAxiomDeck(); else C.editOwnDeck(); return; }
+        Rift.Router.go('collection', { edit: part === 'axioms' ? 'axioms' : 'deck' });
+    };
     Battles.trainerSide = trainerSide;
+    Battles.myDeck = myDeck;
+    Battles.deckReady = deckReady;
     Rift.Battles = Battles;
 })(typeof window !== 'undefined' ? window : globalThis);

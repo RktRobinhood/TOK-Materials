@@ -59,11 +59,14 @@ test('deck building limits: at most 14 creatures and two copies of a tactic', ()
     same(E.tacticSelection(['lemma', 'lemma', 'lemma', 'x']), ['lemma', 'lemma']);
 });
 
-test('the shared axiom deck takes ten distinct cards from each side, topped up from the default pool', () => {
-    const deck = E.buildAxiomDeck(['haste', 'haste', 'nonsense'], []);
+test('the shared axiom deck takes ten cards from each side (at most two of a rule), topped up from the default pool', () => {
+    const deck = E.buildAxiomDeck(['haste', 'haste', 'haste', 'nonsense'], []);
     assert.equal(deck.length, 20);
-    assert.equal(deck.slice(0, 10).filter(id => id === 'haste').length, 1);
+    assert.equal(deck.slice(0, 10).filter(id => id === 'haste').length, 2, 'two copies of a rule are kept; the third is not');
     deck.forEach(id => assert.ok(Rift.data.axioms[id]));
+    // Both contributions may bring two copies: up to four of one rule in the shared deck.
+    const both = E.buildAxiomDeck(['mercy', 'mercy'], ['mercy', 'mercy']);
+    assert.equal(both.filter(id => id === 'mercy').length, 4);
 });
 
 // ---- draw choice ----------------------------------------------------------------------

@@ -25,8 +25,8 @@
  *   changedAxioms(state) → only the active rule cards that change a basic rule
  *   cardName(state, cid) → plain name;  logName(state, cid) → "your X" / "Anna's X" when both boards have an X
  *   colourOf(state, card) → its colour for spotlights and the wheel; 'none' for a colourless (nicknamed) creature
- *   colourInPlay(state, p, colour) → p controls a creature of that colour (a colour tactic needs it to be played)
- *   identityFilter(tacticIds, team) → { kept, dropped }: colour tactics need a creature of their colour in the deck
+ *   colourInPlay(state, p, colour) → p controls a creature of that colour (for abilities and the UI). A colour
+ *                  tactic does NOT need one: deck construction limits colour tactics (Rift.State.validateDeck, #112)
  *
  * activations(state, cid) lists every paid ability (with `usable`); legalActions offers only usable ones,
  * and leaves out tactics whose `usable` hook says they would certainly fizzle.
@@ -464,7 +464,8 @@
         if (c.kind === 'tactic') {
             const t = tacticDefs()[c.tactic] || {};
             return { cid, kind: 'tactic', id: c.tactic, name: t.name, cost: playCost(s, cid), text: t.text, short: t.short || null, flavour: t.flavour, target: t.target || null,
-                colour: t.colour || null, rarity: t.rarity || null, art: t.art || null, colourReady: !!t.conditional || !t.colour || colourInPlay(s, c.controller, t.colour) };
+                // colourReady stays for older callers: always true since #112 (no creature in play is needed).
+                colour: t.colour || null, rarity: t.rarity || null, art: t.art || null, colourReady: true };
         }
         const sp = species(c.species) || {};
         const defs = abilityDefs();
@@ -614,7 +615,6 @@
                 const def = tacticDefs()[c.tactic];
                 if (!def) return;
                 if (def.usable && !def.usable(s, p, H)) return;
-                if (def.colour && !colourInPlay(s, p, def.colour)) return; // colour identity: needs that colour in play
                 if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => list.push({ type: 'play', player: p, cid, target }));
                 else list.push({ type: 'play', player: p, cid });
             }
@@ -688,14 +688,19 @@
         };
     }
 
+    // A side's ten rule cards: known ids from the pool, at most two copies each (#112), topped up with
+    // the default ten. Own cards (Granny's Spare Axiom) never go in.
     function axiomSelection(pool) {
-        const out = [];
-        (pool || []).concat((Rift.data.axiomDecks || {}).default || []).forEach(id => {
+        const out = [], counts = {};
+        (pool || []).forEach(id => {
+            if (out.length < 10 && axiomDefs()[id] && !axiomDefs()[id].own && (counts[id] || 0) < 2) { counts[id] = (counts[id] || 0) + 1; out.push(id); }
+        });
+        ((Rift.data.axiomDecks || {}).default || []).forEach(id => {
             if (out.length < 10 && axiomDefs()[id] && !axiomDefs()[id].own && !out.includes(id)) out.push(id);
         });
         return out;
     }
-    // Ten distinct cards from each side. Copies between sides remain in the shared deck.
+    // Ten cards from each side. Copies between sides remain in the shared deck (up to four of a rule).
     function buildAxiomDeck(mine, theirs) { return axiomSelection(mine).concat(axiomSelection(theirs)); }
 
     // A tactic contribution: known ids, at most two copies each.
@@ -726,8 +731,8 @@
         };
 
         players.forEach((pl, i) => {
-            // Colour identity: a colour tactic without a creature of its colour in the team is left out.
-            const tactics = identityFilter(tacticSelection(pl.tactics == null ? (Rift.data.tacticDecks || {}).starter : pl.tactics), pl.team).kept;
+            // Built as given: deck construction (Rift.State.validateDeck) is checked before a battle starts.
+            const tactics = tacticSelection(pl.tactics == null ? (Rift.data.tacticDecks || {}).starter : pl.tactics);
             const want = Math.min(opts.maxCreatures, Math.max(opts.minCreatures, opts.deckSize - tactics.length));
             const team = (pl.team || []).filter(inst => inst && species(inst.species)).slice(0, opts.maxCreatures);
             let k = 0;
@@ -986,21 +991,10 @@
 
     // ---- colour tactics (design/card-arena-expansion-2026-10-07.md, section 2) ------------------
 
-    // Colour identity in play: player p controls a creature of this colour (a nicknamed creature has
-    // none). A colour tactic can only be played then (legalActions).
+    // Player p controls a creature of this colour (a nicknamed creature has none). Since #112 this is
+    // no casting condition: a colour tactic in a legal deck can be played without such a creature.
     function colourInPlay(s, p, colour) {
         return s.players[p].board.some(cid => colourOf(s, s.cards[cid]) === colour);
-    }
-    // Colour identity in the deck: a colour tactic may only go in a deck with a creature of that colour.
-    // team: creature instances ({ species }). Returns { kept, dropped } (ids, in order).
-    function identityFilter(tactics, team) {
-        const colours = new Set((team || []).map(inst => inst && (species(inst.species) || {}).colour).filter(Boolean));
-        const kept = [], dropped = [];
-        (tactics || []).forEach(id => {
-            const t = tacticDefs()[id];
-            (t && t.colour && !colours.has(t.colour) ? dropped : kept).push(id);
-        });
-        return { kept, dropped };
     }
     // Persuasion: player p takes control of an enemy creature. It arrives asleep on p's side; its owner
     // stays the same, so a defeat (or Rethink) sends it back to the owner's discard (or hand) and the
@@ -1690,16 +1684,20 @@
     }
 
     // A random team of n instances, weighted by rarity (for the simulator and bench).
+    // opts.maxCopies: at most this many of one species (2 makes a legal opponent deck, #112).
     function randomTeam(rng, n, opts) {
         const o = opts || {};
         const all = Rift.data.creatures || {};
         const rar = Rift.data.rarities || {};
-        const weights = Object.keys(all)
+        let weights = Object.keys(all)
             .filter(id => o.legendaries !== false || all[id].rarity !== 'legendary')
             .map(id => ({ item: id, weight: (rar[all[id].rarity] || { weight: 1 }).weight }));
-        const team = [];
-        for (let i = 0; i < n; i++) {
-            team.push({ uid: (o.prefix || 'r') + '-' + i, species: rng.weighted(weights), caughtAt: 0,
+        const team = [], counts = {};
+        for (let i = 0; i < n && weights.length; i++) {
+            const sp = rng.weighted(weights);
+            counts[sp] = (counts[sp] || 0) + 1;
+            if (o.maxCopies && counts[sp] >= o.maxCopies) weights = weights.filter(w => w.item !== sp);
+            team.push({ uid: (o.prefix || 'r') + '-' + i, species: sp, caughtAt: 0,
                 powerDelta: 0, scars: [], injuries: [], warped: null, trophyOf: null, wins: 0 });
         }
         return team;
@@ -1725,7 +1723,7 @@
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
-        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, identityFilter, H,
+        buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, H,
         BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,
         TWEAKS, powerMods, powerActions, powerStatus,
         conditionOf, boardOccupancy, armedView, informationState,

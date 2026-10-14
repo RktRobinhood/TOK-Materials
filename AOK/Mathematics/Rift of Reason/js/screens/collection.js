@@ -86,105 +86,171 @@
         dialog = Rift.UI.modal(c.name, body);
     }
 
-    // ---- own deck: battle team (6–14 creatures) + tactic cards (≤2 copies) = 20 ----------
+    // ---- own deck: battle team + tactic cards = 20, under the shared construction rules ----------
+    // Rift.State.validateDeck (#112) decides; this builder shows its counts, copy limits, colour quotas
+    // and reasons. A saved deck that breaks a rule opens as saved, with its problems, for repair.
 
-    // The intro line: what the player can choose, said plainly for a small collection.
+    const colourName = colour => (Rift.COLOURS[colour] || { name: colour }).name;
+
+    // The intro line: what the player can choose, said plainly. No loaned creatures fill the deck (#114).
     function deckIntro(D, owned) {
-        const tail = ' Choose up to 2 copies of each tactic. Win tactics from trainers. Each new colour you catch unlocks a colour tactic. A colour tactic needs a creature of its colour in your team.';
-        if (!owned) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have no creatures yet. Loaned creatures fill your team.' + tail;
-        if (owned < 6) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + '. Use them all. Loaned creatures fill the rest.' + tail;
-        return 'Your deck has ' + D + ' cards: creatures from your team plus tactic cards. Choose 6 to 14 creatures.'
-            + (owned < 14 ? ' If you pick all ' + owned + ', loaned creatures can fill the rest.' : '') + tail;
+        const tail = ' Take at most 2 copies of a creature or a tactic. Colour tactics: for each colour, take no more of them than creatures of that colour. Generic tactics have no limit. A colour tactic does not need its colour in play.';
+        return 'Your deck has ' + D + ' cards: 6 to 14 of your own creatures plus tactic cards.'
+            + (owned < 6 ? ' You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + ': catch more to build a deck.' : '') + tail;
+    }
+
+    // The starter deck again (#114): the granted copies still owned (another owned copy of the same
+    // species replaces a lost one) and the starter tactics. null without a receipt.
+    function starterChoice(s) {
+        const r = s.starter;
+        if (!r || !Array.isArray(r.uids)) return null;
+        const byUid = {};
+        s.creatures.forEach(c => { byUid[c.uid] = c; });
+        const picked = r.uids.map(uid => byUid[uid]).filter(Boolean);
+        const species = r.uids.map((uid, i) => (byUid[uid] ? null : ((Rift.data.starterDecks || { decks: {} }).decks[r.type] || { creatures: [] }).creatures[i])).filter(Boolean);
+        species.forEach(sp => { const spare = s.creatures.find(c => c.species === sp && !picked.includes(c)); if (spare) picked.push(spare); });
+        return { team: picked.map(c => c.uid), tactics: (r.tactics || []).slice() };
     }
 
     function editOwnDeck(onSaved) {
         const s = Rift.State.get();
-        const D = Rift.Battle.TeamCodes ? Rift.Battle.TeamCodes.DECK || 20 : 20;
-        const tactics = Rift.data.tactics;
-        const owned = Rift.State.ownedTactics(s);
-        const team = new Set((s.creatures.length ? Rift.State.battleTeam(s) : []).map(x => x.uid));
+        const S = Rift.State, RULES = S.DECK_RULES;
+        const D = RULES.size;
+        const own = S.ownDeck(s);
+        const owned = S.ownedTactics(s);
+        const team = new Set((s.creatures.length ? own.team : []).map(x => x.uid));
         const counts = {};
-        Rift.State.deckTactics(s).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+        own.tactics.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+        // Saved cards outside the owned list stay listed, so they can be removed (repair, not replace).
+        const listed = owned.concat(Object.keys(counts).filter(id => !owned.includes(id)));
+        let missing = own.missing; // chosen creatures that are gone: reported until the team is changed
         const status = el('p.deck-status', { role: 'status', 'aria-live': 'polite' });
-        const loanNote = el('p.small.muted.loan-note');
-        const boxes = [], steppers = [], needLines = [];
-        const byUid = {};
-        s.creatures.forEach(x => { byUid[x.uid] = x; });
-        let loanRows = [];
-        const tacticTotal = () => Object.values(counts).reduce((a, b) => a + b, 0);
+        const problemList = el('ul.deck-problems');
+        const quotaLine = el('div.deck-quota.small');
+        const reject = el('p.small.deck-reject', { role: 'alert' });
+        const boxes = [], steppers = [];
         let saveBtn = null;
 
-        const deckCounts = () => ({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() });
-        // Colour identity: a colour tactic needs a creature of its colour in the chosen team.
-        const teamColours = () => Rift.State.teamColours(Array.from(team).map(uid => byUid[uid]));
-        const fitsTeam = id => !tactics[id].colour || teamColours().has(tactics[id].colour);
-        function check() {
-            const r = Rift.State.checkDeck(deckCounts());
-            const bad = owned.filter(id => counts[id] && !fitsTeam(id));
-            if (!bad.length) return r;
-            return Object.assign({}, r, { valid: false, message: r.message + ' ' + tactics[bad[0]].name + ' needs ' + aColour(tactics[bad[0]].colour) + ' creature in your team.' });
+        const chosenTeam = () => s.creatures.filter(x => team.has(x.uid));
+        const chosenTactics = () => {
+            const out = [];
+            listed.forEach(id => { for (let i = 0; i < (counts[id] || 0); i++) out.push(id); });
+            return out;
+        };
+        const speciesCount = sp => chosenTeam().filter(x => x.species === sp).length;
+        const tacticTotal = () => chosenTactics().length;
+        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned });
+        const tacticDef = id => Rift.data.tactics[id] || { name: id, cost: '?', text: 'This card is no longer in the game. Remove it.' };
+        const nameOf = sp => Rift.data.creatures[sp].name;
+
+        // Why this card cannot be added now (null: it can).
+        function creatureBlock(x) {
+            if (team.has(x.uid)) return null;
+            if (speciesCount(x.species) >= RULES.copies) return 'At most ' + RULES.copies + ' copies of ' + nameOf(x.species) + '. Uncheck one first.';
+            if (team.size >= RULES.maxCreatures) return 'At most ' + RULES.maxCreatures + ' creatures. Uncheck one first.';
+            return null;
+        }
+        function tacticBlock(id) {
+            const t = Rift.data.tactics[id];
+            if (!t) return 'This card is no longer in the game.';
+            if (!owned.includes(id)) return 'You do not own ' + t.name + ' yet.';
+            if ((counts[id] || 0) >= RULES.copies) return 'At most ' + RULES.copies + ' copies of ' + t.name + '.';
+            if (tacticTotal() >= RULES.maxTactics) return 'At most ' + RULES.maxTactics + ' tactic cards. Remove one first.';
+            if (t.colour) {
+                const q = check().quota[t.colour] || { creatures: 0, tactics: 0 };
+                if (q.tactics >= q.creatures) {
+                    const C = colourName(t.colour);
+                    return q.creatures + ' ' + C + ' creature' + (q.creatures === 1 ? '' : 's') + ' allow' + (q.creatures === 1 ? 's' : '') + ' ' + q.creatures + ' ' + C + ' tactic' + (q.creatures === 1 ? '' : 's')
+                        + '. Add ' + aColour(t.colour) + ' creature first, or remove another ' + C + ' tactic.';
+                }
+            }
+            return null;
         }
 
-        // Greyed rows for the loaned creatures the battle adds, so a + on a tactic never hides one.
-        function loanRow(id) {
-            const c = Rift.data.creatures[id];
-            return el('div.deck-option.loan-option', { title: 'Loaned ' + c.name + ': it fills your deck in battle and is never at risk.' }, [
-                el('span.loan-tag', { text: 'Loaned' }),
-                el('span', null, [el('strong', { text: c.name }), ' ', Rift.UI.statLine(id)]),
-            ]);
-        }
 
         function refresh() {
             const r = check();
-            status.textContent = r.message;
+            status.textContent = r.head;
             status.classList.toggle('bad', !r.valid);
-            boxes.forEach(({ uid, input }) => { input.disabled = !team.has(uid) && team.size >= 14; });
-            steppers.forEach(({ id, minus, plus, out }) => {
-                out.textContent = '×' + (counts[id] || 0);
-                minus.disabled = !counts[id];
-                plus.disabled = (counts[id] || 0) >= 2 || tacticTotal() >= 14 || !fitsTeam(id);
+            problemList.textContent = '';
+            r.problems.forEach(x => problemList.appendChild(el('li', { text: x.text })));
+            problemList.hidden = !r.problems.length;
+            const colours = Object.keys(r.quota);
+            quotaLine.textContent = colours.length
+                ? 'Colour quotas: ' + colours.map(c => colourName(c) + ' ' + r.quota[c].tactics + '/' + r.quota[c].creatures).join(' · ') + ' (tactics/creatures).'
+                : 'Colour quotas: no colour creatures or colour tactics yet.';
+            boxes.forEach(({ x, input, copiesOut }) => {
+                const why = creatureBlock(x);
+                input.setAttribute('aria-disabled', why ? 'true' : 'false');
+                input.title = why || '';
+                const k = speciesCount(x.species);
+                copiesOut.textContent = k ? 'In deck: ' + k + '/' + RULES.copies : '';
             });
-            loanRows.forEach(n => n.remove());
-            loanRows = Rift.State.loanFillers(deckCounts()).map(loanRow);
-            loanRows.forEach(n => teamList.appendChild(n));
-            loanNote.textContent = r.loans ? 'Loaned creatures fill the empty places. Each tactic you add takes the place of one loaned creature.' : '';
-            loanNote.hidden = !r.loans;
-            needLines.forEach(({ id, node }) => { node.hidden = fitsTeam(id); });
+            steppers.forEach(({ id, minus, plus, out, quota }) => {
+                out.textContent = '×' + (counts[id] || 0) + '/' + RULES.copies;
+                minus.disabled = !counts[id];
+                const why = tacticBlock(id);
+                plus.setAttribute('aria-disabled', why ? 'true' : 'false');
+                plus.title = why || 'Add one';
+                plus.classList.toggle('blocked', !!why);
+                const t = Rift.data.tactics[id];
+                if (quota && t && t.colour) {
+                    const q = r.quota[t.colour] || { creatures: 0, tactics: 0 };
+                    quota.textContent = colourName(t.colour) + ' quota: ' + q.tactics + ' of ' + q.creatures + ' used.';
+                    quota.classList.toggle('need-line', q.tactics > q.creatures || (!counts[id] && q.creatures === 0));
+                }
+            });
             if (saveBtn) saveBtn.disabled = !r.valid;
         }
 
         const teamList = el('div.deck-builder.team-builder', null, s.creatures.map(x => {
             const c = Rift.data.creatures[x.species];
-            const d = Rift.State.describeVariant(x);
+            const d = S.describeVariant(x);
+            const copiesOut = el('span.small.muted.copy-count');
             const input = el('input', { type: 'checkbox', checked: team.has(x.uid), 'aria-label': [c.name].concat(d.labels, d.taught || []).join(', '),
-                onchange(ev) { if (ev.target.checked) team.add(x.uid); else team.delete(x.uid); refresh(); } });
-            boxes.push({ uid: x.uid, input });
+                onchange(ev) {
+                    if (ev.target.checked) {
+                        const why = creatureBlock(x);
+                        if (why) { ev.target.checked = false; reject.textContent = why; return; }
+                        team.add(x.uid);
+                    } else team.delete(x.uid);
+                    missing = 0;
+                    reject.textContent = '';
+                    refresh();
+                } });
+            boxes.push({ x, input, copiesOut });
             const hurt = [].concat(x.powerDelta < 0 && (x.injuries || []).includes('minus-one') ? ['injured (' + x.powerDelta + ' attack)'] : [],
                 (x.injuries || []).includes('no-ability') ? ['no ability'] : [], x.trophyOf ? ['trophy from ' + x.trophyOf] : []);
-            return el('label.deck-option', null, [input, el('span.deck-creature', null, [
-                el('span.row.wrap.deck-creature-head', null, [el('strong', { text: c.name }), Rift.UI.statLine(x.species, x)]),
+            return el('label.deck-option', { dataset: { colour: c.colour } }, [input, el('span.deck-creature', null, [
+                el('span.row.wrap.deck-creature-head', null, [el('strong', { text: c.name }), Rift.UI.statLine(x.species, x), copiesOut]),
                 Rift.UI.variantBadges(x),
                 hurt.length ? el('div.small.muted', { text: hurt.join(' · ') }) : null,
             ])]);
         }));
 
-        const tacticList = el('div.deck-builder.tactic-builder', null, owned.map(id => {
-            const t = tactics[id];
+        const tacticList = el('div.deck-builder.tactic-builder', null, listed.map(id => {
+            const t = tacticDef(id);
             const out = el('span.stepper-count', { text: '×0' });
-            const minus = el('button.btn.small', { text: '−', 'aria-label': 'Remove one ' + t.name, onclick() { if (counts[id]) counts[id] -= 1; refresh(); } });
-            const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + t.name, onclick() { if ((counts[id] || 0) < 2 && tacticTotal() < 14) counts[id] = (counts[id] || 0) + 1; refresh(); } });
-            steppers.push({ id, minus, plus, out });
-            // A colour tactic: its colour and rarity, and a note while the team has no creature of that colour.
-            const need = t.colour ? el('div.small.need-line', { text: 'Needs ' + aColour(t.colour) + ' creature in your team.' }) : null;
-            if (need) needLines.push({ id, node: need });
+            const minus = el('button.btn.small', { text: '−', 'aria-label': 'Remove one ' + t.name, onclick() { if (counts[id]) counts[id] -= 1; reject.textContent = ''; refresh(); } });
+            const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + t.name, onclick() {
+                const why = tacticBlock(id);
+                if (why) { reject.textContent = why; return; }
+                counts[id] = (counts[id] || 0) + 1;
+                reject.textContent = '';
+                refresh();
+            } });
+            // A colour tactic: its colour, rarity and its colour's quota, used / allowed.
+            const quota = t.colour ? el('div.small.quota-line') : null;
+            steppers.push({ id, minus, plus, out, quota });
             return el('div.deck-option.tactic-option', t.colour ? { dataset: { tcolour: t.colour } } : null, [
                 Rift.Assets.has('tactic/' + id) ? Rift.Assets.img('tactic/' + id, { className: 'tactic-art', alt: '' }) : null,
                 el('span', { style: { flex: 1 } }, [
                     el('strong', { text: t.name }), ' ', el('span.stat.stat-cost', { title: 'Energy cost', text: '⚡ ' + t.cost }),
-                    t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : null,
+                    t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : el('span.chip', { text: 'generic' }),
                     t.rarity ? ' ' : null, t.rarity ? el('span.chip', { text: t.rarity }) : null,
                     el('div.small', { text: t.text }),
-                    need,
+                    quota,
+                    !owned.includes(id) ? el('div.small.need-line', { text: Rift.data.tactics[id] ? 'Not owned: remove it.' : 'Not in the game any more: remove it.' }) : null,
                 ]),
                 el('span.stepper', { role: 'group', 'aria-label': t.name + ' copies' }, [minus, out, plus]),
             ]);
@@ -194,9 +260,11 @@
         const body = el('div.stack.deck-editor', null, [
             el('p.small', { text: deckIntro(D, s.creatures.length) }),
             status,
+            problemList,
+            quotaLine,
+            reject,
             el('div.stack.deck-scroll', null, [
                 el('h3', { text: 'Battle team' }),
-                loanNote,
                 teamList,
                 el('h3', { text: 'Tactic cards' }),
                 tacticList,
@@ -204,21 +272,24 @@
         ]);
         const dialog = Rift.UI.modal('Build your deck', body, [
             { label: 'Cancel' },
-            { label: 'Default', keepOpen: true, onclick() {
-                team.clear(); s.creatures.slice(0, 10).forEach(x => team.add(x.uid));
-                boxes.forEach(({ uid, input }) => { input.checked = team.has(uid); });
+            { label: s.starter ? 'Starter deck' : 'Default', keepOpen: true, onclick() {
+                const start = starterChoice(s);
+                team.clear();
+                (start ? start.team : S.defaultTeam(s).map(x => x.uid)).forEach(uid => team.add(uid));
+                boxes.forEach(({ x, input }) => { input.checked = team.has(x.uid); });
                 Object.keys(counts).forEach(k => delete counts[k]);
-                Rift.data.tacticDecks.starter.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+                (start ? start.tactics : Rift.data.tacticDecks.starter).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+                missing = 0;
+                reject.textContent = '';
                 refresh();
             } },
             { label: 'Save deck', primary: true, keepOpen: true, onclick() {
                 const r = check();
-                if (!r.valid) { status.textContent = r.message; return; }
-                const chosenTactics = [];
-                owned.forEach(id => { for (let i = 0; i < (counts[id] || 0); i++) chosenTactics.push(id); });
+                if (!r.valid) { reject.textContent = r.problems[0].text; return; }
+                const chosen = chosenTactics();
                 Rift.State.update(st => {
                     st.team = st.creatures.filter(x => team.has(x.uid)).map(x => x.uid);
-                    st.deckTactics = chosenTactics;
+                    st.deckTactics = chosen;
                 });
                 dialog.close();
                 Rift.UI.toast('Your deck is saved: ' + r.message);
@@ -229,39 +300,103 @@
         if (box) box.classList.add('deck-modal');
         saveBtn = Array.from(dialog.node.querySelectorAll ? dialog.node.querySelectorAll('button') : []).find(b => b.textContent === 'Save deck') || null;
         refresh();
+        return dialog;
     }
 
-    // Short summary for the Collection panel.
+    // Short summary for the Collection panel: the deck's counts, or what needs repair.
     function deckSummary(s) {
-        const t = Rift.State.deckTactics(s).length;
-        const r = Rift.State.checkDeck({ owned: s.creatures.length, team: s.creatures.length ? Rift.State.battleTeam(s).length : 0, tactics: t });
-        return r.message;
+        const r = Rift.State.ownDeck(s).check;
+        const deck = r.problems.find(x => x.part === 'deck');
+        const ax = r.problems.find(x => x.part === 'axioms');
+        return r.head + (deck ? ' Needs repair: ' + deck.text : '') + ' ' + (ax ? r.axiomHead + ' Needs repair: ' + ax.text : r.axiomHead);
     }
 
-    function editAxiomDeck() {
-        const s=Rift.State.get(), E=Rift.Battle.Engine;
-        const available=Array.from(new Set(Rift.data.axiomDecks.starter.concat(s.axioms)));
-        const selected=new Set(E.axiomSelection(s.axiomLoadout.length?s.axiomLoadout:s.axioms));
-        const count=el('p',{role:'status','aria-live':'polite'}), boxes=[];
-        function refresh(){count.textContent=selected.size+'/10 chosen. Uncheck a card to make room.';boxes.forEach(({id,input})=>{input.disabled=selected.size===10&&!selected.has(id);});}
-        const grid=el('div.axiom-builder',null,available.map(id=>{
-            const ax=Rift.data.axioms[id];
-            const input=el('input',{type:'checkbox',checked:selected.has(id),'aria-label':ax.name,onchange(ev){if(ev.target.checked)selected.add(id);else selected.delete(id);refresh();}});
-            boxes.push({id,input});
-            return el('label',null,[input,el('span',null,[el('strong',{text:ax.name}),el('div.small',{text:ax.category+': '+ax.text})])]);
+    // The ten axiom cards: up to 2 copies of a rule (#112).
+    function editAxiomDeck(onSaved) {
+        const s = Rift.State.get(), S = Rift.State, RULES = S.DECK_RULES;
+        const owned = S.ownedAxioms(s);
+        const counts = {};
+        S.axiomLoadout(s).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+        const listed = owned.concat(Object.keys(counts).filter(id => !owned.includes(id)));
+        const status = el('p.deck-status', { role: 'status', 'aria-live': 'polite' });
+        const problemList = el('ul.deck-problems');
+        const reject = el('p.small.deck-reject', { role: 'alert' });
+        const steppers = [];
+        let saveBtn = null;
+        const chosen = () => { const out = []; listed.forEach(id => { for (let i = 0; i < (counts[id] || 0); i++) out.push(id); }); return out; };
+        const check = () => S.validateDeck({ creatures: [], tactics: [], axioms: chosen() }, { complete: true, ownedAxioms: owned });
+        const axName = id => ((Rift.data.axioms || {})[id] || { name: id }).name;
+        function block(id) {
+            if (!Rift.data.axioms[id]) return 'This card is no longer in the game.';
+            if (!owned.includes(id)) return 'You do not own ' + axName(id) + ' yet.';
+            if ((counts[id] || 0) >= RULES.axiomCopies) return 'At most ' + RULES.axiomCopies + ' copies of ' + axName(id) + '.';
+            if (chosen().length >= RULES.axioms) return 'You have ' + RULES.axioms + ' axiom cards. Remove one first.';
+            return null;
+        }
+        function refresh() {
+            const r = check();
+            const problems = r.problems.filter(x => x.part === 'axioms');
+            status.textContent = r.axiomHead + (problems.length ? '' : ' Ready.');
+            status.classList.toggle('bad', !!problems.length);
+            problemList.textContent = '';
+            problems.forEach(x => problemList.appendChild(el('li', { text: x.text })));
+            problemList.hidden = !problems.length;
+            steppers.forEach(({ id, minus, plus, out }) => {
+                out.textContent = '×' + (counts[id] || 0) + '/' + RULES.axiomCopies;
+                minus.disabled = !counts[id];
+                const why = block(id);
+                plus.setAttribute('aria-disabled', why ? 'true' : 'false');
+                plus.title = why || 'Add one';
+                plus.classList.toggle('blocked', !!why);
+            });
+            if (saveBtn) saveBtn.disabled = !!problems.length;
+        }
+        const grid = el('div.axiom-builder', null, listed.map(id => {
+            const ax = Rift.data.axioms[id] || { name: id, category: '?', text: 'This card is no longer in the game. Remove it.' };
+            const out = el('span.stepper-count', { text: '×0' });
+            const minus = el('button.btn.small', { text: '−', 'aria-label': 'Remove one ' + ax.name, onclick() { if (counts[id]) counts[id] -= 1; reject.textContent = ''; refresh(); } });
+            const plus = el('button.btn.small', { text: '+', 'aria-label': 'Add one ' + ax.name, onclick() {
+                const why = block(id);
+                if (why) { reject.textContent = why; return; }
+                counts[id] = (counts[id] || 0) + 1;
+                reject.textContent = '';
+                refresh();
+            } });
+            steppers.push({ id, minus, plus, out });
+            return el('div.axiom-option', null, [
+                el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), el('div.small', { text: ax.category + ': ' + ax.text })]),
+                el('span.stepper', { role: 'group', 'aria-label': ax.name + ' copies' }, [minus, out, plus]),
+            ]);
         }));
         // Same layout as the team builder: intro and count on top, the list scrolls, buttons stay visible.
-        const dialog=Rift.UI.modal('Build your ten-card axiom deck',el('div.stack.deck-editor',null,[
-            el('p',{text:'Choose rules that help your creatures. Your ten cards and the opponent’s ten are shuffled together. Both players can use any offered rule; you do not know the full order.'}),
-            count,el('div.deck-scroll',null,[grid]),
-        ]),[{label:'Cancel'},{label:'Save ten cards',primary:true,keepOpen:true,onclick(){if(selected.size!==10){count.textContent='Choose exactly ten cards before saving.';return;}Rift.State.update(st=>{st.axiomLoadout=Array.from(selected);});dialog.close();Rift.UI.toast('Your ten-card axiom deck is saved.');}}]);
-        const box=dialog.node&&dialog.node.querySelector?dialog.node.querySelector('.modal'):null;
-        if(box)box.classList.add('deck-modal');
+        const dialog = Rift.UI.modal('Build your ten-card axiom deck', el('div.stack.deck-editor', null, [
+            el('p', { text: 'Choose ten rule cards, at most 2 copies of a rule. Your ten cards and the opponent’s ten are shuffled together. Both players can use any offered rule; you do not know the full order.' }),
+            status, problemList, reject,
+            el('div.deck-scroll', null, [grid]),
+        ]), [{ label: 'Cancel' }, { label: 'Default ten', keepOpen: true, onclick() {
+            Object.keys(counts).forEach(k => delete counts[k]);
+            (Rift.data.axiomDecks.default || []).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+            reject.textContent = '';
+            refresh();
+        } }, { label: 'Save ten cards', primary: true, keepOpen: true, onclick() {
+            const r = check();
+            const problems = r.problems.filter(x => x.part === 'axioms');
+            if (problems.length) { reject.textContent = problems[0].text; return; }
+            const list = chosen();
+            Rift.State.update(st => { st.axiomLoadout = list; });
+            dialog.close();
+            Rift.UI.toast('Your ten-card axiom deck is saved.');
+            if (onSaved) onSaved();
+        } }]);
+        const box = dialog.node && dialog.node.querySelector ? dialog.node.querySelector('.modal') : null;
+        if (box) box.classList.add('deck-modal');
+        saveBtn = Array.from(dialog.node && dialog.node.querySelectorAll ? dialog.node.querySelectorAll('button') : []).find(b => b.textContent === 'Save ten cards') || null;
         refresh();
+        return dialog;
     }
 
     Rift.Screens.register('collection', {
-        mount(rootNode) {
+        mount(rootNode, params) {
             const s = Rift.State.get();
             const counts = {};
             s.creatures.forEach(x => { counts[x.species] = (counts[x.species] || 0) + 1; });
@@ -271,7 +406,8 @@
             });
             const caughtKinds = Object.keys(counts).length;
             const hud = Rift.UI.hud({ back: { label: 'Back', onclick: () => Rift.Router.back('map') } });
-            const summary = el('p.small', { text: deckSummary(s) + ' Axiom cards: 10.' });
+            const summary = el('p.small.deck-summary', { text: deckSummary(s) });
+            const resum = () => { summary.textContent = deckSummary(Rift.State.get()); };
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
@@ -281,8 +417,8 @@
                     // Your hero's power in the Card Arena (design/AVATARS.md 1.6).
                     s.avatar && Rift.PowerView ? Rift.PowerView.panel(s.avatar) : null,
                     el('div.row.wrap', null, [
-                        el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(() => { summary.textContent = deckSummary(Rift.State.get()) + ' Axiom cards: 10.'; }) }),
-                        el('button.btn', { text: 'Axiom cards · 10 cards', onclick: editAxiomDeck }),
+                        el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(resum) }),
+                        el('button.btn', { text: 'Axiom cards · 10 cards', onclick: () => editAxiomDeck(resum) }),
                         (s.items['trick-book'] || 0) > 0 && s.creatures.length ? el('button.btn', { text: 'Use a Trick Book (' + s.items['trick-book'] + ')', onclick: () => Rift.UI.trickBook(null, () => Rift.Router.replace('collection')) }) : null,
                     ]),
                 ]),
@@ -308,9 +444,16 @@
                     })),
                 ]),
             ]));
+            // Opened to repair a deck (Rift.Battles.repairDeck): show that builder at once.
+            const p = params || {};
+            if (p.edit === 'deck') editOwnDeck(resum);
+            else if (p.edit === 'axioms') editAxiomDeck(resum);
             return { destroy() { if (hud.destroy) hud.destroy(); } };
         },
     });
+
+    // The builders, for Rift.Battles.repairDeck and tests.
+    Rift.Collection = { editOwnDeck, editAxiomDeck, deckSummary };
 
     Rift.Screens.register('settings', {
         mount(rootNode) {

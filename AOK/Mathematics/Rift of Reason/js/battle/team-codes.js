@@ -22,6 +22,10 @@
  * The checksum is not a secret, so import also validates the contents: known species,
  * no positive power boost (an injury below attack 0 is lifted to attack 0, as old saves and
  * codes counted injuries on the old 1–10 power scale), real abilities, variants and tricks in range, known tactics with at most 2 copies, 1–14 creatures and at most 20 cards.
+ * Construction (#112) uses the shared Rift.State.validateDeck: at most 2 copies of a species, a tactic or
+ * an axiom card (an axiom list may now hold two copies of a rule). Export refuses a deck that breaks a
+ * rule. Import refuses extra copies; colour tactics beyond the colour quota (codes made under the older
+ * colour rule) are dropped and listed in droppedTactics instead of refusing the whole code.
  */
 (function (root) {
     'use strict';
@@ -48,19 +52,18 @@
     }
 
     const known = () => Rift.data.tactics || {};
-    // Colour identity (Engine.identityFilter): { kept, dropped }.
-    const identity = (list, team) => (Battle.Engine && Battle.Engine.identityFilter ? Battle.Engine.identityFilter(list, team) : { kept: (list || []).slice(), dropped: [] });
-
-    // Known ids, at most two copies each, at most `room` cards.
-    function cleanTactics(list, room) {
-        const counts = {};
-        return (list || []).filter(id => known()[id] && (counts[id] = (counts[id] || 0) + 1) <= 2).slice(0, Math.max(0, room));
-    }
+    // Known axiom ids that can go in the shared deck (unknown ones, e.g. from a newer game, are left out).
+    const sharedAxioms = list => (list || []).filter(id => (Rift.data.axioms || {})[id] && !Rift.data.axioms[id].own);
+    const speciesName = id => ((Rift.data.creatures || {})[id] || { name: id }).name;
 
     function exportTeam(opts) {
         const o = opts || {};
-        const creatures = (o.creatures || []).slice(0, MAX);
+        const creatures = (o.creatures || []).slice();
         if (!creatures.length) throw new Error('Pick at least one creature for your team.');
+        const tactics = (o.tactics || ((Rift.data.tacticDecks || {}).starter || [])).filter(id => known()[id]);
+        const axioms = sharedAxioms(o.axioms);
+        const check = Rift.State.validateDeck({ creatures, tactics, axioms }, { complete: false });
+        if (!check.valid) throw new Error('This deck cannot be shared yet: ' + check.problems[0].text);
         const payload = {
             v: VERSION,
             n: String(o.nickname || 'Anonymous').slice(0, 24),
@@ -78,8 +81,8 @@
                     TRICKS.includes(c.taught) ? c.taught : 0,
                 ];
             }),
-            a: Array.from(new Set((o.axioms || []).filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10),
-            k: cleanTactics(identity(o.tactics || ((Rift.data.tacticDecks || {}).starter || []), creatures).kept, DECK - creatures.length),
+            a: axioms,
+            k: tactics,
         };
         if (o.stake) payload.s = o.stake;
         const av = avatarRow(o.avatar);
@@ -135,11 +138,16 @@
             if (team.length + p.k.length > DECK) throw bad('a deck has at most ' + DECK + ' cards.');
             tactics = p.k.slice();
         }
-        // Colour identity: colour tactics without a creature of their colour in the team are dropped
-        // (listed in droppedTactics) instead of refusing the whole code.
-        const ident = identity(tactics, team);
+        const axioms = Array.isArray(p.a) ? sharedAxioms(p.a) : [];
+        if (axioms.length > 10) throw bad('a deck has at most 10 axiom cards.');
+        // The shared construction rules. Extra copies are refused; colour tactics beyond the quota
+        // (codes made under the older colour rule) are dropped and listed instead.
+        const check = Rift.State.validateDeck({ creatures: team, tactics, axioms }, { complete: false });
+        const copies = check.problems.find(x => x.code === 'copies');
+        if (copies && copies.part === 'axioms') throw bad('a deck has at most 2 copies of an axiom card.');
+        if (copies) throw bad('a deck has at most 2 copies of ' + speciesName(copies.id) + '.');
+        const ident = Rift.State.quotaFilter(tactics, team);
         tactics = ident.kept;
-        const axioms = Array.isArray(p.a) ? Array.from(new Set(p.a.filter(id => (Rift.data.axioms || {})[id]))).slice(0, 10) : [];
         let stake = null;
         if (p.s && typeof p.s === 'object' && p.s.items && typeof p.s.items === 'object') {
             // A ghost can offer at most one ordinary item, whatever the code says.

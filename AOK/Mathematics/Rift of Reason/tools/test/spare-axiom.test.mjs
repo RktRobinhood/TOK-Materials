@@ -98,9 +98,9 @@ test('the AI handles it: values it as clearing the rules and plays out a match w
 // ---- the launcher reads the save flag ----------------------------------------------------
 
 function game() {
-    const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js', 'data/axioms.js',
+    const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js', 'data/starters.js', 'data/axioms.js', 'data/tactics.js',
         'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/lesson.js', 'js/ui/battles.js']);
-    const state = R.State.freshState(); state.avatar = { type: 'owlet', nickname: 'Test' };
+    const state = R.State.freshState(); state.avatar = { type: 'owlet', nickname: 'Test' }; R.State.grantStarter(state);
     R.State.get = () => state; R.State.update = fn => fn(state); R.el = (...args) => new Node(...args);
     const routes = [];
     R.Assets = { img: () => new Node() }; R.Dialogue = { has: () => false };
