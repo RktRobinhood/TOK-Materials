@@ -83,6 +83,8 @@
         "production-spell-motif-perception-145.png": {"type":"single","id":"art/spell-motif-perception","class":"prop"},
         "production-spell-motif-memory-145.png": {"type":"single","id":"art/spell-motif-memory","class":"prop"},
         "production-spell-motif-generic-145.png": {"type":"single","id":"art/spell-motif-generic","class":"prop"},
+        "spell-common-ground-145.png": {"type":"single","id":"art/spell-common-ground","class":"prop"},
+        "spell-the-last-page-145.png": {"type":"single","id":"art/spell-the-last-page","class":"prop"},
         "production-axiom-rule-motif-145.png": {"type":"single","id":"art/axiom-rule-motif","class":"prop"},
         "unicorn-five-limbs-first-145.png": {"type":"skip"},
         "production-reason-parity-panda-145.png": {"type":"single","id":"creature/reason-parity-panda/idle","class":"sprite"},

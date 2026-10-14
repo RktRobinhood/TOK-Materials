@@ -1,5 +1,7 @@
 # Rift of Reason — Art bible
 
+Latest spell continuation14October2026: preserve all8shared motifs and71accepted expansion portraits. Two optional unique object illustrations now distinguish Common Ground and The Last Page; source/prompts/reference roles/alpha checks in source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json. Tactile braided-root/healing/draw and blank-last-page/recovered-paper-bookmark metaphors add no powers or Fate changes. dev/spell-art.html uses actual spell/Axiom frames, foreground art/live labels and complete original draft text, with300/70 and1280dark/light/390light native evidence in reviews/spell-standouts-145-2026-10-14.md. This is proposed art coverage, not card release; the deferred cast and all runtime/acquisition gates remain explicit.
+
 The rules every image is judged against during the art sessions (#32). Once the style board (0.1) is approved, it is attached to every later request as the reference, and wins over any wording here.
 
 ## Start here in a fresh agent session

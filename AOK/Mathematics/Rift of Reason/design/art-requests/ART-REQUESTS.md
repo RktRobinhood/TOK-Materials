@@ -1,5 +1,7 @@
 # Art requests for Rift of Reason (for ChatGPT)
 
+Latest Stage 13 continuation (#145,14October2026): dedicated spell-object variants for `art/spell-common-ground` (mythic Common Ground, shared stabilisation/heal/draw metaphor) and `art/spell-the-last-page` (legendary story reward, blank final page/recovered paper bookmark/two cards). Exact prompts/references/receipts: source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json. Keep all eight shared motifs and existing portraits. These optional unique spell illustrations replace only two proposed art mappings; no new gameplay, grants or Fate timing. Art/source acceptance is pending until built and checked. No deferred Stephen retry or conditional-set release.
+
 One request per part of the art epic (#32). The teacher runs every request in **one ongoing ChatGPT chat**, so earlier images (the style board, approved sheets) are already in its context and **Attach** just names which earlier images the prompt leans on. Results are pasted into the Claude session, which critiques them and saves keepers under **Save as** (inside `design/source-assets/`).
 
 Do **0.1 first**. Once it is approved, every other request attaches it as `style-board.png`, and the parts can be done in any order.

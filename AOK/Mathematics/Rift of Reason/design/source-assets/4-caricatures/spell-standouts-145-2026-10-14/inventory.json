@@ -1,0 +1,80 @@
+{
+  "issue": 145,
+  "date": "2026-10-14",
+  "method": "built-in image_gen",
+  "status": "two selected sources built and locally art-accepted; publication pending",
+  "references": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/beeyonce-idle.webp"
+  ],
+  "assets": [
+    {
+      "cardId": "generic-common-ground",
+      "id": "art/spell-common-ground",
+      "source": "spell-common-ground-145.png",
+      "prompt": "Use case: style-transfer. Produce ONE original transparent spell-art cutout for Rift of Reason, a distinct object vignette for the proposed mythic spell Common Ground. Image 1 is the approved style reference; Image 2 is a shipped rendering reference only: match medium brown-black ink outlines, softly textured cel-lit materials and cute-horror jewel light, but copy no creature, costume, face, crown or composition. Subject: two crooked dark roots, one entering from the left and one from the right, knitting together into a single compact, broad braided knot. Fresh emerald leaves unfurl equally on both sides; one warm amber seed glows in the centre of the repaired knot. Two small completely blank parchment cards float just behind the knot, one on either side, caught in a restrained cyan magic ribbon. A clear metaphor for both sides settling their temporary changes, healing and drawing. Objects only, no animals or people. Compact asymmetric triangular silhouette, entire roots/leaves/cards visible inside canvas with generous genuinely transparent margins. The knot and new leaves are large enough to read at 70px; tactile and atmospheric at 300px. Ink shadows, parchment, warm brass/amber and restrained green/cyan accents; not pastel or glossy 3D. No floor, backdrop rectangle, grounded shadow blob, card frame, text, letters, equations, numbers, logo, watermark or painted checkerboard. Live title and rule text are separate. Do not imply clocks, moving Fate, equipment or a new growth keyword. Preserve real alpha.",
+      "status": "selected",
+      "transparentBackgroundRequested": true,
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/beeyonce-idle.webp"
+      ],
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a138c0-4032-7d23-8621-5331de857ada/exec-0dc0beb1-2b4f-42e1-ac7f-06d1822d5495.png",
+      "visualReview": "First take accepted proportionately: tactile braided roots, readable seed/leaves/two blank cards, no people/text/frame, whole primary silhouette visible. Outer glow/margins differ from brief; actual source alpha49.98percent zero/corners0. No invented gameplay.",
+      "alpha": {
+        "info": {
+          "format": "raw",
+          "width": 1536,
+          "height": 1024,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 6291456
+        },
+        "zeroFraction": 0.4997698465983073,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "cardId": "generic-the-last-page",
+      "id": "art/spell-the-last-page",
+      "source": "spell-the-last-page-145.png",
+      "prompt": "Use case: style-transfer. Produce ONE original transparent spell-art cutout for Rift of Reason, a distinct object vignette for the proposed legendary story spell The Last Page. Image 1 is the approved style reference; Image 2 is a shipped rendering reference only: match medium brown-black ink outlines, softly textured cel-lit materials and cute-horror jewel light, but copy no creature, costume, face, crown or composition. Subject: a battered deep-violet storybook floating open at a steep three-quarter angle, its single thick final parchment leaf curling toward the viewer and glowing warmly. Every visible page is completely blank. A tiny moth-shaped folded-paper bookmark lifts out of the gutter as if recovered from the forgotten pages. Exactly two small blank parchment cards rise behind the book in one broad cyan magic arc. The book/last leaf is the dominant readable form; the bookmark is clearly a paper object, not a new collectible character. A gentle, slightly uncanny homecoming feeling, dark ink shadows, warm parchment, worn brass corner fittings, violet/cyan jewel rim light. Whole object group visible with generous genuinely transparent margins, compact diagonal S silhouette that reads at 70px and has painterly texture at 300px. No scenery, floor, backdrop rectangle, grounded shadow blob, card frame, lettering, equations, numbers, logo, watermark or painted checkerboard. Live title and rule text are separate. No clocks/hourglasses or visual claim that announced Fate events are erased. Preserve real alpha.",
+      "status": "selected",
+      "transparentBackgroundRequested": true,
+      "styleReferences": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/beeyonce-idle.webp"
+      ],
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a138c0-4032-7d23-8621-5331de857ada/exec-3df4d736-4a97-4963-8e5d-a8c0d939eec9.png",
+      "visualReview": "First take accepted: open violet storybook, glowing blank final leaf, paper moth bookmark and two blank cards. No lettering, people, clock or major clipped book part. Cyan glow reaches canvas edge; no cropped primary object. Exact decorative cover differs from brief; kept proportionately.",
+      "alpha": {
+        "info": {
+          "format": "raw",
+          "width": 1312,
+          "height": 1199,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 6292352
+        },
+        "zeroFraction": 0.44214500396672024,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "model": "not reported by tool",
+  "validation": "Exactly two new manifest entries, all old entries unchanged. Native1280/390 art/layers/full rule/keyboard/filter checks passed. Full823/822pass/1skip/0fail253383.1018ms. No runtime cards, voices, grants, save changes or deferred cast retries."
+}

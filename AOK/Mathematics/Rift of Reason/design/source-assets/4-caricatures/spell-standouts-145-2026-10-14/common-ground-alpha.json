@@ -1,0 +1,19 @@
+{
+  "info": {
+    "format": "raw",
+    "width": 1536,
+    "height": 1024,
+    "channels": 4,
+    "depth": "uchar",
+    "premultiplied": false,
+    "hasAlpha": true,
+    "size": 6291456
+  },
+  "zeroFraction": 0.4997698465983073,
+  "corners": [
+    0,
+    0,
+    0,
+    0
+  ]
+}

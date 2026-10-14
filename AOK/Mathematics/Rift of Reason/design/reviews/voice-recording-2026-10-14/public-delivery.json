@@ -1,0 +1,30 @@
+{
+  "commit": "d686d97",
+  "pagesRun": 38532323662,
+  "results": [
+    {
+      "file": "data/voice-manifest.js",
+      "status": 200,
+      "sha256": "a1fca43f418258abc6120f4598e15dee1a4281478ac7aa1c79b3d18d9e2a1165",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/voice/clockmaker-vvrrlg.mp3",
+      "status": 200,
+      "sha256": "f2ce141f45b742d9edf5a63efafac2fe04bc348a0a96b3339fdd3339c7dbdfaf",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/voice/mirage-104mgje.mp3",
+      "status": 200,
+      "sha256": "66739b87898d161350c4f680b7a236bc63f27d81e20ce18353a26ef0d8f1e651",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/voice/colossus-10o3tvu.mp3",
+      "status": 200,
+      "sha256": "5811a42e3eb952397f5fb4b716ae7f51d70824708ce5a6cebadcdb0a322afba7",
+      "matchesLocal": true
+    }
+  ]
+}

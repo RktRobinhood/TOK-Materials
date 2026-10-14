@@ -1,7 +1,7 @@
 {
   "issue": 145,
-  "status": "Proposed shared art assignments only; no runtime definitions or grants",
-  "method": "Routine spells use affinity motifs; Axioms use shared rulebook. Standout-specific artwork may replace a mapping in later releases.",
+  "status": "Proposed art assignments only; shared and standout artwork, no runtime definitions or grants",
+  "method": "Routine spells use affinity motifs; Axioms use shared rulebook. Common Ground and The Last Page use explicit standout paintings; previous motif IDs are preserved in those two rows. Mechanics and acquisition remain gated.",
   "rows": [
     {
       "cardId": "reason-check-the-premise",
@@ -1849,7 +1849,7 @@
       "cardId": "generic-common-ground",
       "kind": "spell",
       "affinity": "generic",
-      "artId": "art/spell-motif-generic",
+      "artId": "art/spell-common-ground",
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
@@ -1858,13 +1858,15 @@
       "gates": [
         109
       ],
-      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+      "release": "Draft proposed art mapping; mechanics/acquisition gated",
+      "previousArtId": "art/spell-motif-generic",
+      "artSource": "design/source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json"
     },
     {
       "cardId": "generic-the-last-page",
       "kind": "spell",
       "affinity": "generic",
-      "artId": "art/spell-motif-generic",
+      "artId": "art/spell-the-last-page",
       "acquisition": {
         "channel": "story-only",
         "packEligible": false,
@@ -1875,7 +1877,9 @@
       "gates": [
         109
       ],
-      "release": "Draft proposed art mapping; mechanics/acquisition gated"
+      "release": "Draft proposed art mapping; mechanics/acquisition gated",
+      "previousArtId": "art/spell-motif-generic",
+      "artSource": "design/source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json"
     },
     {
       "cardId": "generic-careful-hands",

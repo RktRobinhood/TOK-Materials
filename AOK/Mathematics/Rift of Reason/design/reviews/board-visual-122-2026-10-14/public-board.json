@@ -1,0 +1,25 @@
+{
+  "allImagesLoaded": true,
+  "decks": [
+    {
+      "back": "url(\"https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/assets/ui/card-back-prism.webp\")",
+      "label": "Your deck: 10 cards. Draw one."
+    },
+    {
+      "back": "url(\"https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/assets/ui/axiom-back.webp\")",
+      "label": "Shared axioms: 6 cards. Draw one."
+    },
+    {
+      "back": "url(\"https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/assets/ui/card-back-expert.webp\")",
+      "label": "Their deck: 13 cards"
+    }
+  ],
+  "prototypeUrls": [
+    "dev/arena-prototype.css?v=122-732fac823199",
+    "dev/arena-prototype.js?v=122-732fac823199"
+  ],
+  "viewport": [
+    1280,
+    720
+  ]
+}

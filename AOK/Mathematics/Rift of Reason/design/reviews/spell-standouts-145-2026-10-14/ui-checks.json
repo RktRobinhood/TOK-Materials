@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "case": "all proposed cards",
+      "count": 138
+    },
+    {
+      "case": "Axioms",
+      "count": 54
+    },
+    {
+      "case": "Reason keyboard tile reading",
+      "count": 10,
+      "dialog": "Check the Premise",
+      "escapeReturnsTile": true
+    },
+    {
+      "case": "empty search",
+      "count": 0
+    },
+    {
+      "case": "390x844 light Last Page",
+      "cardWidth": 300,
+      "layer": [
+        {
+          "class": "frame",
+          "z": "1"
+        },
+        {
+          "class": "art",
+          "z": "2"
+        },
+        {
+          "class": "name",
+          "z": "3"
+        }
+      ],
+      "loaded": true,
+      "pageWidth": 390,
+      "selected": "The Last Page",
+      "viewport": [
+        390,
+        844
+      ]
+    }
+  ],
+  "extra": {
+    "sourceFrames": "native spell and Axiom frames",
+    "costsRules": "complete original draft text",
+    "lightDialogClose": "cream on dark #28243b after contrast fix",
+    "keyboardModalFocusRestored": true
+  },
+  "note": "1280x720/390x844 DPR1 viewport QA; physical touch, browser zoom and acting/audio transcription not certified by these art captures."
+}

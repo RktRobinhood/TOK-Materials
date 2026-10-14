@@ -1,0 +1,95 @@
+{
+  "issue": 145,
+  "manifestAdded": [
+    "art/spell-common-ground",
+    "art/spell-the-last-page"
+  ],
+  "oldEntriesChanged": [],
+  "proposedMappingsChanged": [
+    "generic-common-ground",
+    "generic-the-last-page"
+  ],
+  "catalogueUnchanged": true,
+  "unownedPreviewRestored": true,
+  "inlineScriptSyntax": true,
+  "results": [
+    {
+      "id": "art/spell-common-ground",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 54.49803670247396,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaBox": {
+          "x": 21,
+          "y": 9,
+          "w": 1507,
+          "h": 1000
+        },
+        "sha256": "4b2c2974e1620e8f9001d7641092818b30f87018f7ce019e8624e0c6c1030cf0"
+      },
+      "runtime": {
+        "w": 600,
+        "h": 398,
+        "transparentPercent": 52.0607202680067,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaBox": {
+          "x": 0,
+          "y": 0,
+          "w": 600,
+          "h": 398
+        },
+        "sha256": "b60e7d8ba31e087eb1be80f773c8950f5efde36ef7fd2219c036b4d11dfda4f4"
+      }
+    },
+    {
+      "id": "art/spell-the-last-page",
+      "source": {
+        "w": 1312,
+        "h": 1199,
+        "transparentPercent": 47.00023139201367,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaBox": {
+          "x": 134,
+          "y": 0,
+          "w": 1147,
+          "h": 1185
+        },
+        "sha256": "dbd5658b79e3679593b6f650f4d54b09bfe6f533e38947c4167438bdcc21c429"
+      },
+      "runtime": {
+        "w": 581,
+        "h": 600,
+        "transparentPercent": 38.5140562248996,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaBox": {
+          "x": 0,
+          "y": 0,
+          "w": 581,
+          "h": 600
+        },
+        "sha256": "9b2d27242fb3232e28afbe56791a8fb6c9e8b6ff5c89112e9d7bf7aad8895a41"
+      }
+    }
+  ]
+}

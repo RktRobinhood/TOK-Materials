@@ -7,6 +7,7 @@
     'use strict';
     root.Rift.data.assets = {
         'art/axiom-rule-motif': { file: 'art/axiom-rule-motif.webp', w: 600, h: 429 },
+        'art/spell-common-ground': { file: 'art/spell-common-ground.webp', w: 600, h: 398 },
         'art/spell-motif-emotion': { file: 'art/spell-motif-emotion.webp', w: 576, h: 600 },
         'art/spell-motif-generic': { file: 'art/spell-motif-generic.webp', w: 600, h: 370 },
         'art/spell-motif-imagination': { file: 'art/spell-motif-imagination.webp', w: 600, h: 550 },
@@ -14,6 +15,7 @@
         'art/spell-motif-memory': { file: 'art/spell-motif-memory.webp', w: 600, h: 562 },
         'art/spell-motif-perception': { file: 'art/spell-motif-perception.webp', w: 600, h: 369 },
         'art/spell-motif-reason': { file: 'art/spell-motif-reason.webp', w: 600, h: 564 },
+        'art/spell-the-last-page': { file: 'art/spell-the-last-page.webp', w: 581, h: 600 },
         'avatar/fox-boy/happy': { file: 'avatars/fox-boy-happy.webp', w: 187, h: 240 },
         'avatar/fox-boy/idle': { file: 'avatars/fox-boy-idle.webp', w: 350, h: 473 },
         'avatar/fox-boy/neutral': { file: 'avatars/fox-boy-neutral.webp', w: 181, h: 240 },

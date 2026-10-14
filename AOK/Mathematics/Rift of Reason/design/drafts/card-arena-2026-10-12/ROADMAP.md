@@ -1,5 +1,7 @@
 # Build roadmap
 
+14October follow-through: voices140newruntimeclips and boardAesthetic c6dae43/d686d97 published on main/Pages (transcript acceptance still pending after503s). Two optional standout spell illustrations for Common Ground/The Last Page and a full84spell/54Axiom art gallery are locally accepted; see ../../reviews/spell-standouts-145-2026-10-14.md for the latest publication receipt. Preserve8sharedmotifs/71portraits, all card mechanics/acquisition/gates and old voices. #145/#122/#109/#43 remain open.
+
 Latest 14 October aesthetic continuation: #122's A developer board study now has larger owner backs/static legal-draw cues, foreground framed portraits, stable keyboard draw/Continue controls, and readable narrow scrolling boards/hand. See ../../reviews/board-visual-122-2026-10-14.md for verified flows and remaining acceptance. Study-only owner-back choices are URL parameters, not saved ownership; #122 and production #109 remain open. The 84 expansion spells have shared art mappings, but none is a shipped runtime tactic; standout-specific artwork and staged mechanics/balance/acquisition remain future work. No new scheduled loop or conditional-set release.
 
 One complete slice at a time; honour blockers and teacher decisions. [Starter/card draft](CARD-DRAFTS.md), [expansion brief](EXPANSION.md), [validated lists](VALIDATION.md). Existing #101 owns general Axiom modifiers, #109 production integration.
