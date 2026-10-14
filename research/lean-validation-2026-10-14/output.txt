@@ -1,0 +1,100 @@
+PART A. Open-grid gate construction (exclusive or, 3x3 board, cracked cell at column 2 row 1,
+        toolbox AND x2, OR x1, NOT x2, at most 5 plaques)
+
+    orAndNotBoth   -> solved=true [ok] All 4 rows match, with 4 plaques. Every case checked.
+    sumOfProducts  -> solved=true [ok] All 4 rows match, with 5 plaques. Every case checked.
+    justOr         -> solved=false [behaviour] Row 4 (A ON, B ON): your bulb is lit, but the target says dark. 1 of 4 rows differ.
+    wrongWire      -> solved=false [behaviour] Row 3 (A ON, B off): your bulb is dark, but the target says lit. 1 of 4 rows differ.
+    wrongLast      -> solved=false [tool] You used 2 OR plaques, but the toolbox has 1. Can you build the same behaviour with other plaques?
+    onCrack        -> solved=false [placement] The NOT plaque sits on a cracked cell (column 2, row 1). Cracked cells cannot hold a plaque.
+    deMorgan       -> solved=false [tool] You used 2 OR plaques, but the toolbox has 1. Can you build the same behaviour with other plaques?
+    backwards      -> solved=false [placement] A wire into the AND plaque in column 3 comes from column 3. Wires flow left to right.
+
+  PASS two structurally different valid circuits both pass
+  PASS near-miss "just OR" fails on behaviour with a counterexample row (row 4: A ON, B ON)
+  PASS near-miss "wrong wire" fails on behaviour with partial credit 3/4 and counterexample row 3
+  PASS near-miss "wrong last plaque" (also two ORs) is reported as a toolbox break, not behaviour
+  PASS the three rule-breaking circuits really do produce the target (Switchboard evaluator)
+  PASS cracked-cell circuit fails on placement
+  PASS two-OR circuit fails on the toolbox rule
+  PASS right-to-left wire fails on placement
+  PASS the checker is deterministic (same answer, same result)
+
+    Exhaustive search space: 4914 canonical trees over 2 inputs, 47838 over 3 inputs (up to 5 plaques); built once in 19.605 ms.
+    Exclusive-or task: multiple, 2 valid constructions, e.g.
+      (A OR B) AND NOT (A AND B)
+      (A AND NOT B) OR (B AND NOT A)
+  PASS exhaustive search finds several constructions for the exclusive-or task
+  PASS every construction the search finds is accepted by checkGate
+  PASS removing every NOT makes the task impossible (exclusive or is not monotone) and the search says so
+
+    Seeded generated gate tasks (seed "gate-task:<i>"):
+      seed  inputs  toolbox (A/O/N)  cracked  squeezed  verdict     constructions
+         0       2  0/2/1            2.2      false     multiple    3
+         1       3  1/1/1            2.3 1.1  false     unique      1
+         2       2  0/0/1            2.1      true      impossible  0
+         3       3  0/1/0            2.1 3.2  true      impossible  0
+         4       3  0/1/0            2.3 3.2  true      impossible  0
+         5       3  0/1/1            1.1      true      impossible  0
+         6       2  1/1/1            1.2      false     unique      1
+         7       3  1/0/0            2.1      true      impossible  0
+         8       2  2/0/1            1.2 1.3  false     multiple    3
+         9       3  0/1/1            1.2 1.3  true      impossible  0
+        10       2  0/0/1            2.3 3.1  true      impossible  0
+        11       2  1/1/1            3.2 1.1  false     multiple    2
+      ... 200 tasks: {"impossible":59,"unique":54,"multiple":87,"degenerate":0}
+      split: one plaque removed {"impossible":59,"unique":10}; one spare added {"multiple":87,"unique":44}
+  PASS generation-time search classifies every seeded task (impossible / unique / multiple)
+  PASS squeezed toolboxes produce some impossible tasks, which the search detects
+  PASS checker accepts every construction the search found (560 checked)
+  PASS AND<->OR mutations: checker verdict agrees with the Switchboard evaluator, failures carry a counterexample row
+  PASS generated tasks repeat exactly for the same seed
+    Mean generation-time analysis per task: 0.198 ms (after the one-off tree build).
+
+PART B. Knights and knaves
+
+  PASS Liar's Gate: 900 seeded puzzles (300 per difficulty) each have exactly one consistent world
+  PASS Liar's Gate: the independent enumerator agrees with the game's solver on every one
+    Mean generate + double enumeration per Liar's Gate puzzle (ms, d1/d2/d3): 1.806 / 0.745 / 1.497
+  PASS Village: 300 seeded squares (100 per difficulty) each have exactly one consistent world
+
+    Raw random statement sets (1,000 per size, seed "raw-kk:<n>:<k>:<i>"), classified by enumeration:
+      guards doors  contradictory  unique  ambiguous(door fixed)  ambiguous(door open)
+           2     2             85     145                     44                   726
+           3     2             94     156                    103                   647
+           4     3            112      84                     73                   731
+           5     3            148      85                    100                   667
+  PASS raw statement sets repeat exactly for the same seed
+
+    Open-verdict checker:
+      openOneWorld         -> solved=false  Your world fits, but so does another: Amber liar, Basalt liar, Cobalt honest; left door safe. The door is not settled.
+      openTwoWorlds        -> solved=true  Both worlds fit every statement and disagree about the door. The guards do not settle it.
+      openTwoWorldsSwapped -> solved=true  Both worlds fit every statement and disagree about the door. The guards do not settle it.
+      openSameDoor         -> solved=false  Both your worlds fit, but they agree on the safe door. To show the door is not settled, find two worlds with different safe doors.
+      badWorld             -> solved=false  Amber is honest in your world, but says something false there.
+      badDeclared          -> solved=true  Right: every one of the 8 worlds breaks a statement. These premises cannot all hold.
+      openDeclaredBad      -> solved=false  At least one world fits all the statements. Look for it before calling the gate impossible.
+  PASS an ambiguous gate rejects a single consistent world and names a rival world
+  PASS two consistent worlds with different doors prove the gate is open (either order)
+  PASS two worlds with the same door do not prove openness
+  PASS a contradictory gate is recognised by exhaustion; a world answer gets a named clash
+  PASS calling a satisfiable gate contradictory fails
+
+    "Write your own gate" construction (3 guards, right door must be the only safe answer):
+      selfIf        -> solved=true [ok] Exactly one world fits: Amber honest, Basalt honest, Cobalt liar; right door safe. A careful traveller can deduce the right door.
+      sameAnd       -> solved=true [ok] Exactly one world fits: Amber liar, Basalt honest, Cobalt liar; right door safe. A careful traveller can deduce the right door.
+      nearMiss      -> solved=false [behaviour] 2 worlds fit, for example: (1) Amber honest, Basalt honest, Cobalt liar; right door safe and (2) Amber liar, Basalt liar, Cobalt honest; left door safe. Add or change a statement to rule one out.
+      tooManyDoors  -> solved=false [tool] Amber and Basalt and Cobalt all talk about doors. Only one guard may mention a door.
+      orTile        -> solved=false [tool] The "or" tile is not in your toolbox.
+  PASS two structurally different gates both pass
+  PASS the near-miss (two worlds fit) fails and names both worlds
+  PASS a gate with a unique right-door world, but three door statements, fails on the toolbox rule
+  PASS a gate that uses a tile outside the toolbox fails on the toolbox rule
+
+    Latency per call (mean, Node v24.14.0):
+      checkGate, 5-plaque circuit, 2 inputs       0.012 ms
+      checkKK, 5 guards x 3 doors (96 worlds)     0.050 ms
+      checkBuild, 3 guards x 2 doors              0.014 ms
+      Liar's Gate check() (game code), d3         1.392 ms (includes generate)
+
+ALL EXPECTATIONS HELD
