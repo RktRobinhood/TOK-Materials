@@ -1,5 +1,10 @@
 # Card pipeline art plan
 
+## Current delivery — 14 October 2026
+
+All 72 initial expansion portraits and eight shared spell/Axiom motifs are produced and built. The two standout spell paintings and all 23 conditional art assignments are also complete. Susie Dentshell replaces the unproduced Stephen identity in the stable language-definition-dolphin slot; declined input preserved, never retried. Hank #146 is explicitly adopted into the art inventory without changing its painting. Historical per-group pending statuses below are superseded by design/reviews/visual-completion-2026-10-14.md; gameplay/acquisition release stays gated.
+
+
 The 72 expansion targets now have proposed public-persona mappings in [PERSONA-ROSTER.md](PERSONA-ROSTER.md) and persona-roster.json (#139). The table below retains original mechanical labels and exact asset IDs; use that ID to find the proposed pun, silhouette, signature prop, palette, source and required references. Name or animal changes never rename an asset ID implicitly. All are builder-selected cast briefs; the teacher explicitly delegates familiarity/meme/teenage-appeal judgement with no teacher roster approval. #123 retains mechanical strategy/balance and staged release checks. Read ART-BIBLE.md and visually inspect/attach the approved style board plus a shipped creature for each released generation batch. Retain prompts, references, source PNGs, alpha/margin checks and 70px dark/light samples as in #137.
 
 Use the existing Stage 13 list in ../../art-requests/ART-REQUESTS.md as the running production ledger. This index is generated from the creative catalogue; none of these portraits is claimed produced. Seven starter creatures are listed separately in CARD-DRAFTS.md. Total new portrait targets: 79 (7 starters + 72 expansion creatures). The seven common portraits are now generated/integrated under #137, following the refined A board milestone. See dev/starter-art.html and design/reviews/starter-art-2026-10-12.md. Future expansion portraits use the selected ROSTER.md public-persona assignments and the approved style-board reference; then produce one tested batch at a time. Do not generate all 79 before balancing their release.
@@ -49,7 +54,7 @@ Use the game's cute/dark painted cutout style, strong outlines and readable silh
 | creature/language-label-lemur/idle | Ryan Georilla | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/language-word-weasel/idle | Stephen Clawbert | Art selected/built #145 group 4; acceptance pending; runtime gated #109/#123 |
 | creature/language-echo-egret/idle | Sabrina Carpwenter (Echo Egret) | Art/native/public QA pass #143; runtime gated |
-| creature/language-definition-dolphin/idle | Stephen Fryfin | Deferred service-rejected request; no portrait |
+| creature/language-definition-dolphin/idle | Susie Dentshell | Produced/built group 7; distinct replacement persona; runtime gated #109/#123 |
 | creature/language-debate-dingo/idle | K-S-Ibis | Art produced #145 group 3; runtime gated #109/#123 |
 | creature/language-clause-crane/idle | Olivia Rodentgo | Art produced #145 group 1; runtime gated #109/#123 |
 | creature/language-metaphor-mantis/idle | Isabelle Haakheron | Art selected/built #145 group 4; acceptance pending; runtime gated #109/#123 |

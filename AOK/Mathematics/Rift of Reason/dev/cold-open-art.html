@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cold-open artwork · Rift of Reason</title>
+<style>
+:root{color-scheme:dark;font:16px/1.5 system-ui;background:#14121f;color:#efe3c8}*{box-sizing:border-box}body{margin:0;padding:24px}main{max-width:1200px;margin:auto}h1{margin-top:0}h2{font-size:1.25rem}a{color:#3fe0d0}.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:16px 0}button,select,input{font:inherit}button,select{background:#2b2137;color:inherit;border:1px solid #8d739e;border-radius:6px;padding:8px}button{cursor:pointer}button[aria-pressed=true]{outline:2px solid #3fe0d0}:focus-visible{outline:3px solid #3fe0d0;outline-offset:3px}.scene{position:relative;aspect-ratio:1672/941;overflow:hidden;background:#14121f;border:1px solid #685277;border-radius:12px}.scene>img,.layer{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.scene .crack{inset:auto;left:29%;top:15%;width:42%;height:5%;object-fit:contain;opacity:.8}.scene .sleeper{inset:auto;left:25%;bottom:-8%;width:50%;height:auto;object-fit:contain}.thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.thumbs button{min-width:0}.thumbs img{display:block;width:100%;height:120px;object-fit:contain}.samples{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.samples img{width:100%;aspect-ratio:1672/941;object-fit:contain;background:repeating-conic-gradient(#eee3cf 0 25%,#c4b8a6 0 50%) 0/20px 20px;border-radius:6px}.samples figure{margin:0}.samples figcaption{font-size:14px}.note{color:#c5b6cb;font-size:14px}footer{margin-top:24px}@media(max-width:650px){body{padding:12px}.thumbs{grid-template-columns:repeat(2,minmax(0,1fr))}.samples{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{gap:10px}h1{font-size:25px}}
+</style></head><body><main>
+<h1>Cold-open artwork</h1>
+<p>All artwork for requests 13.72–13.76. This is a still composition study; the opening film and its controls remain issue #65.</p>
+<h2>The sleeping village</h2>
+<div class="controls"><label><input id="layers" type="checkbox" checked> Use four separate layers</label><label>Parallax position <input id="shift" type="range" min="-1" max="1" step="0.05" value="0"></label><label><input id="crack" type="checkbox" checked> Hairline crack</label></div>
+<div class="scene" id="village" role="img" aria-label="Dawn village assembled from sky, hills, houses and foreground"></div>
+<p class="note">The sky has not opened. The crack is a narrow overlay. Move the slider to inspect the layer edges; there is no automatic animation.</p>
+<h2>The player's bedroom</h2>
+<div class="controls"><label>Sleeping avatar <select id="avatar"></select></label><span id="status" role="status"></span></div>
+<div class="scene" id="bedroom"></div>
+<div class="controls"><label>Avatar width <input id="size" type="range" min="35" max="65" value="50"></label><label>Vertical position <input id="bottom" type="range" min="-15" max="10" value="-8"></label></div>
+<p class="note">Each avatar includes a small pillow/quilt segment. These settings are composition aids, not saved game preferences.</p>
+<div class="thumbs" id="thumbs" aria-label="Ten sleeping avatar cutouts"></div>
+<h2>Individual layers</h2><div class="samples" id="samples"></div>
+<footer><a href="design/source-assets/6-cutscene/generation.json">Exact prompts and provenance</a> · <a href="design/reviews/visual-completion-2026-10-14.md">Delivery notes</a> · <a href="dev/art-production.html?group=7">Final expansion portrait</a></footer>
+</main><script src="js/core/rift.js"></script><script src="data/assets.js?v=final-art-20261014"></script><script src="js/core/assets.js"></script><script>
+(function(){'use strict';
+ const R=window.Rift,byId=id=>document.getElementById(id);
+ const types=['owlet','mothkin','fox','frogling','raven'],avatars=[];
+ const layerIds=['cutscene/cold-open-sky','cutscene/cold-open-hills','cutscene/cold-open-village','cutscene/cold-open-front'];
+ const labels=['Dawn sky','Far hills and river','Village and sundial','Foreground trees and fence'];
+ function art(id,alt,cls){return R.Assets.img(id,{alt,className:cls||'',draggable:false});}
+ const whole=art('scene/cold-open','Original dawn village');
+ const layerImages=layerIds.map((id,i)=>art(id,labels[i],'layer'));
+ const crack=art('cutscene/sky-crack','Thin crack in the sky','crack');
+ byId('village').append(whole,...layerImages,crack);
+ function village(){const layered=byId('layers').checked,shift=Number(byId('shift').value);whole.hidden=layered;layerImages.forEach((img,i)=>{img.hidden=!layered;img.style.transform='translateX('+(shift*[0,.25,.5,1][i])+'%)';});crack.hidden=!byId('crack').checked;}
+ ['layers','shift','crack'].forEach(id=>byId(id).addEventListener('input',village));village();
+ const room=art('scene/bedroom','Empty attic bedroom at dawn'),sleeper=art('avatar/owlet-boy/asleep','Sleeping Owlet boy','sleeper');byId('bedroom').append(room,sleeper);
+ types.forEach(type=>['boy','girl'].forEach(variant=>{const id='avatar/'+type+'-'+variant+'/asleep',name=(type==='mothkin'?'Moth-kin':type.charAt(0).toUpperCase()+type.slice(1))+' '+variant;avatars.push({id,name,type});const option=R.el('option',{value:id,text:name});byId('avatar').append(option);const button=R.el('button',{type:'button','aria-label':'Preview '+name},[art(id,name+' asleep'),R.el('span',{text:name})]);button.addEventListener('click',()=>{byId('avatar').value=id;select();});byId('thumbs').append(button);}));
+ function position(){const size=Number(byId('size').value);sleeper.style.width=size+'%';sleeper.style.left=(100-size)/2+'%';sleeper.style.bottom=Number(byId('bottom').value)+'%';}
+ function select(){const chosen=avatars.find(a=>a.id===byId('avatar').value);sleeper.src=R.Assets.url(chosen.id);sleeper.alt=chosen.name+' asleep';byId('bedroom').setAttribute('aria-label',chosen.name+' asleep in the attic bedroom');byId('size').value=chosen.type==='mothkin'?'58':'50';byId('status').textContent=R.Assets.has(chosen.id)?'Built transparent asset':'Missing asset';byId('thumbs').querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(avatars[i].id===chosen.id)));position();}
+ byId('avatar').addEventListener('change',select);['size','bottom'].forEach(id=>byId(id).addEventListener('input',position));select();
+ layerIds.forEach((id,i)=>byId('samples').append(R.el('figure',{},[art(id,labels[i]),R.el('figcaption',{text:labels[i]})])));
+})();
+</script></body></html>

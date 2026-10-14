@@ -2225,8 +2225,8 @@
     {
       "mechanicalId": "language-definition-dolphin",
       "workingName": "Definition Dolphin",
-      "proposedName": "Stephen Fryfin",
-      "inspiration": "Stephen Fry",
+      "proposedName": "Susie Dentshell",
+      "inspiration": "Susie Dent",
       "colour": "language",
       "rarity": "uncommon",
       "acquisition": {
@@ -2234,13 +2234,13 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Round dolphin with a scholarly dark waistcoat, gold scarf and delighted questioning expression.",
-      "signatureProp": "One sturdy closed dictionary with a blank cover.",
-      "jokeAngle": "Before answering, enthusiastically decides what the word actually means.",
-      "mechanicLink": "Giving another creature temporary Guard uses the existing duration; no new dictionary game.",
-      "source": "https://www.stephenfry.com/",
+      "silhouette": "A compact hermit crab with a dark spiral shell, golden edging and two bright stalk eyes; a short russet crest curls over its brow.",
+      "signatureProp": "One stout closed dictionary with a blank gold-edged cover held like a protective lectern.",
+      "jokeAngle": "Even a looming monster must wait while the tiny lexicographer finds precisely the right word.",
+      "mechanicLink": "Giving another creature temporary Guard is a carefully worded defence, with the unchanged printed duration.",
+      "source": "https://www.some.ox.ac.uk/eminent/susie-dent/",
       "familiarity": "Builder audience judgement (not measured): standalone visual comedy / niche discovery. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Warm precise original storytelling; shared block cue and no copied quotations.",
+      "voiceDirection": "Calm curious original word-expert delivery; no imitation, quotes or new recordings.",
       "sharedSfx": [
         "card-play",
         "hit",
@@ -2272,8 +2272,8 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "standalone visual comedy / niche discovery",
-        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Before answering, enthusiastically decides what the word actually means.",
-        "smallScaleCue": "One sturdy closed dictionary with a blank cover."
+        "appealReason": "Keep for this self-contained visual joke; recognition is a bonus, not required: Even a looming monster must wait while the tiny lexicographer finds precisely the right word.",
+        "smallScaleCue": "One stout closed dictionary with a blank gold-edged cover held like a protective lectern."
       }
     },
     {

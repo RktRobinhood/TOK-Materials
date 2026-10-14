@@ -1,0 +1,27 @@
+{
+  "base": "0a4d704",
+  "before": 924,
+  "after": 942,
+  "changedOld": [],
+  "added": [
+    "avatar/fox-boy/asleep",
+    "avatar/fox-girl/asleep",
+    "avatar/frogling-boy/asleep",
+    "avatar/frogling-girl/asleep",
+    "avatar/mothkin-boy/asleep",
+    "avatar/mothkin-girl/asleep",
+    "avatar/owlet-boy/asleep",
+    "avatar/owlet-girl/asleep",
+    "avatar/raven-boy/asleep",
+    "avatar/raven-girl/asleep",
+    "creature/language-definition-dolphin/idle",
+    "cutscene/cold-open-front",
+    "cutscene/cold-open-hills",
+    "cutscene/cold-open-sky",
+    "cutscene/cold-open-village",
+    "cutscene/sky-crack",
+    "scene/bedroom",
+    "scene/cold-open"
+  ],
+  "missingPortraits": []
+}

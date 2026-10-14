@@ -1,0 +1,10 @@
+{
+  "key": "cold-open-sky",
+  "id": "cutscene/cold-open-sky",
+  "prompt": "Edit the attached dawn village painting into ONLY its SKY parallax layer. Preserve its full original1672x941 landscape canvas, exact sky colours, stars and peach horizon at y0.30; keep the same framing and camera. Remove ALL mountains, hills, castle, river, trees, houses, ground, fair and fences. Inpaint a continuous deep blue-violet to muted peach dawn sky behind their former area down to the bottom, so the image is entirely opaque sky with no cutouts. Top45percent should match original sky closely; lower sky is softly muted and will be covered by other layers. No sun, moon, birds, buildings, silhouettes, crack/rift, text or new objects. Cute dark painterly game background, warm low dawn and very dark violet zenith. Full16:9 opaque canvas, same size and no cropping.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+  ],
+  "transparent": false,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-0a955967-04d6-40cc-a826-28f74e4c1a7d.png"
+}

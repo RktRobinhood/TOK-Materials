@@ -1,0 +1,16 @@
+{
+  "key": "frogling-asleep",
+  "ids": [
+    "avatar/frogling-boy/asleep",
+    "avatar/frogling-girl/asleep"
+  ],
+  "prompt": "Extend EXACT FROGLING avatar identities from image2 into ONE transparent TWO-FIGURE SLEEPING SHEET, Stage13.76 Rift of Reason. Image1 approved cute-dark style, image2 IDENTITY/anatomy/colours, image3 bedroom camera/quilt only, image4 sleeping layout only (NO owls). TWO separate figures in LEFT and RIGHT equal halves of wide1536x1024 canvas, same scale, clear120px transparent centre gap plus50px empty outer padding. LEFT boy: small olive-green speckled frog, cream chin, yellow raincoat folded and tucked along side of pillow (rather than a floating hook), identity yellow collar visible. RIGHT girl: same original green frog girl, red raincoat loosely draped across upper quilt; her broad lily-pad hat with pink flower lies touching her pillow beside cheek. EACH lies asleep on one cream pillow, seen from FOOT OF BED towards head, natural rounded FROG head/protruding CLOSED eyes, relaxed broad mouth, one little four-finger frog hand resting on top of short chest-down violet/moss/cream patchwork quilt. Match original sheet face and skin markings, no fur, ears, beak, human body or new creature. One coherent connected island per half including hat/coat; no loose props. Whole head/hat/pillow/quilt visible inside canvas, no room, bedframe, floor, hook, text/Zs, labels, decorative floating stars, glow haze, shadow blob or extra poses. Medium ink-brown outlines, soft painterly cel shading, warm gentle rim and true transparency. Calm peaceful sleep.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/frogling-sheet.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-e1aecaa4-acee-4403-bea7-300d5499a67a.png"
+}

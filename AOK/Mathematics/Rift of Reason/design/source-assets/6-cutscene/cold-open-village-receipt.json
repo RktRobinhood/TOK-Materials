@@ -1,0 +1,10 @@
+{
+  "key": "cold-open-village",
+  "id": "cutscene/cold-open-village",
+  "prompt": "Edit attached dawn village painting into ONLY its NEAR VILLAGE parallax layer, on genuine transparency. Preserve full original1672x941 canvas, framing, same exact camera, cottage positions and scale. Remove all sky, mountains, far castle, river, distant hills/forests, and foreground fence and close fir treetops/flowers. KEEP the crooked timber houses across lower half, their connecting stone paths/green, little central sundial, fair tents on right, strings of unlit lanterns, and central-right player's cottage with its single warm amber ROUND attic window. Keep a coherent ground island extending from the houses down to bottom edge, filling in roof/ground bits hidden by foreground trees; do not add an outline/frame around it. The layer's upper boundary follows roofs and local trees, remaining top half transparent. Preserve exact roofs/window/cottage designs from reference; this same player's home is used for lock-on. No sky or mountain backplate hiding transparency, no fence or branches from the foreground, no new scene, characters, text, rift, sun, floating particles or shadow blob. Quiet cool blue-violet dawn with one warm home window; cute dark storybook painting. Same full16:9 canvas, don't crop/zoom/centre the isolated layer.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-b7bd71e2-876a-4c7d-95ae-ecc6bb3ede27.png"
+}

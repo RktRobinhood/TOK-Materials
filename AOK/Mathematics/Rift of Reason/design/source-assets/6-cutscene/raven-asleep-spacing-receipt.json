@@ -1,0 +1,8 @@
+{
+  "prompt": "Fix ONLY spacing and transparent padding in this two-Raven sleeping sprite sheet. Keep the EXACT two ravens, faces, closed eyes, feather colours, grey hoodie/notebook for boy LEFT and purple beret/cape/magnifier for girl RIGHT, cream pillows, patchwork fabric and painting. Do not redesign or add objects. Their quilts currently TOUCH at centre and outer edges: separate the entire complete groups. Scale both complete groups down to about75percent their present size and center one within LEFT HALF and one within RIGHT HALF of the SAME1536x1024 transparent canvas. Leave a clearly EMPTY transparent vertical gap at least160px between nearest quilt/pillow pixels. Leave at least70px transparency on all FOUR outer edges around each group's entire pillow/quilt/head. Each group must be a COMPLETE isolated closed silhouette with its own visible quilt side edges and no part cut at canvas or centre. Both same scale and pillow height; true alpha with absolutely no painted background, diffuse glow, haze, floor/shadow, text or checkerboard. The ONLY change is translating/scaling the two complete groups apart and completing the little quilt tips where they touched; retain everything else.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/raven-asleep.png"
+  ],
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-691cceb1-b0a2-4ce1-b6e0-f8e6c2e19a42.png",
+  "reason": "Initial quilts touched, one detected island instead of two."
+}

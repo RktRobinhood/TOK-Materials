@@ -1,0 +1,5 @@
+Crash recovery checked 14 October: previous Codex chat stopped with a workspace-credit error, not an identified game exception. Its conditional foundation/art work is committed and preserved (design/reviews/conditional-148-149-2026-10-14.md). Existing public-study/gallery screenshots and DOM receipts were left untracked; preserve them for the publication receipt.
+
+This remains IN FLIGHT, NEEDS CONTINUATION: ten bench cards implemented, thirteen mechanics plus Refreshments Fate option and campaign eligibility/introduction/acquisition remain. NEXT-STEPS.md is the concrete continuation list. Last saved full test receipt was 841 passing / one intentional skip / zero failures. Do not regenerate the accepted eight portraits/shared back, reset voice quotas, or report a campaign release.
+
+Current user priority is completing visual assets; Codex is finishing #145 and the outstanding cold-open #65 asset queue before taking further gameplay issues.

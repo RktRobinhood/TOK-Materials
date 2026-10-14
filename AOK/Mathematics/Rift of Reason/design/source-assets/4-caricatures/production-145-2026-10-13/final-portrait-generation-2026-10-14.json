@@ -1,0 +1,77 @@
+{
+  "issue": 145,
+  "date": "2026-10-14",
+  "method": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset: ONE original transparent full-body creature cutout for the cute-horror storybook card game Rift of Reason. Reference image1 is the approved STYLE BOARD: medium dark brown outlines, softly textured cel shading, readable warm faces, jewel accents and dusk shadows. Reference image2 is rendering reference ONLY; do not copy its cat anatomy, costume, gesture or prop. New character: Susie Dentshell, an original nonhuman hermit-crab lexicographer, a playful public-work nod to Susie Dent's love of words. A compact friendly but slightly uncanny crab crouching toward FRONT-LEFT; dark midnight-violet spiral shell with worn golden edging; two clear bright stalk eyes under a little russet crest, tiny amused mouth, two large coherent pincers and four visible walking legs. One stout CLOSED dictionary with entirely blank gold-edged cover is held upright across the body like a protective lectern, only prop. One pincer braces the dictionary and the other makes a small precise conversational gesture; no human hands. Clear whole shell, legs, pincers, eyes and book inside generous genuinely transparent padding. Language gold #F2B632 highlights on dark materials, warm lantern rim, no pastel nursery or glossy3D. Charming visual joke: even a monster must wait while this tiny scholar finds the exact word. Readable at70px and tactile at300px. No human likeness, lettering, numbers, logos, copied costume, frame, card, scene, floor, ground-shadow blob, water, scattered particles or second character. Transparent background, preserve alpha.",
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-ccfcd3ed-cd2c-4628-8a62-33788a0bfdf3.png",
+  "references": [
+    {
+      "path": "design/source-assets/0-style/style-board.png",
+      "role": "approved style"
+    },
+    {
+      "path": "assets/creatures/astrophysicat-idle.webp",
+      "role": "rendering only"
+    }
+  ],
+  "reason": "Distinct replacement identity Susie Dentshell / Susie Dent, hermit crab. Original rejected Stephen photo-guided request remains historical and was not retried.",
+  "source": "https://www.some.ox.ac.uk/eminent/susie-dent/",
+  "priorRecord": {
+    "id": "creature/language-definition-dolphin/idle",
+    "species": "language-definition-dolphin",
+    "persona": "Stephen Fryfin",
+    "inspiration": "Stephen Fry",
+    "colour": "language",
+    "rarity": "uncommon",
+    "acquisition": {
+      "channel": "pack-pool",
+      "packEligible": true,
+      "releaseStatus": "draft; only enters packs when its implementation is released"
+    },
+    "mechanicalContract": {
+      "cost": 3,
+      "attack": 1,
+      "health": 4,
+      "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+      "gates": [
+        109
+      ]
+    },
+    "source": "production-language-definition-dolphin-145.png",
+    "status": "deferred: image service rejected photo-guided public-figure input",
+    "group": 1,
+    "prompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Stephen Fryfin, an ORIGINAL NONHUMAN creature inspired by Stephen Fry's public persona. Silhouette/costume: Round dolphin with a scholarly dark waistcoat, gold scarf and delighted questioning expression. Main prop/gesture: One sturdy closed dictionary with a blank cover. Visual joke: Before answering, enthusiastically decides what the word actually means. Use jewel accent #F2B632 on worn dark cloth/trim, no invented branding. Pose/composition: Diagonal mid-swim curve facing the viewer, dolphin tail curls downward/left, one flipper clasps the closed dictionary, the other opens in a delighted question. Fish-shaped, no human legs/water.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Image3 is an actual PUBLIC PERSONA ACTION/GESTURE reference. Borrow its broad pose/expressive body language, not human anatomy/face, photographed outfit/logos/background. Use the theatrical half-closed-eye explaining expression and two animated flipper gestures inspired by the reference. A fin may indicate a point like the gesturing hand; the dictionary is the only costume prop. Adapt the gesture to a smooth anthropomorphic dolphin body, no fluffy mammal fur or standard wide-eyed smiling mascot face.",
+    "styleReferences": [
+      "design/source-assets/0-style/style-board.png",
+      "assets/creatures/astrophysicat-idle.webp"
+    ],
+    "transparentBackgroundRequested": true,
+    "voiceDirection": "Warm precise original storytelling; shared block cue and no copied quotations.",
+    "sharedSfx": [
+      "card-play",
+      "hit",
+      "defeat",
+      "block"
+    ],
+    "draftLines": [
+      "Let’s agree what safe means."
+    ],
+    "poseDirection": "Diagonal mid-swim curve facing the viewer, dolphin tail curls downward/left, one flipper clasps the closed dictionary, the other opens in a delighted question. Fish-shaped, no human legs/water.",
+    "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Stephen Fryfin, an ORIGINAL NONHUMAN creature inspired by Stephen Fry's public persona. Silhouette/costume: Round dolphin with a scholarly dark waistcoat, gold scarf and delighted questioning expression. Main prop/gesture: One sturdy closed dictionary with a blank cover. Visual joke: Before answering, enthusiastically decides what the word actually means. Use jewel accent #F2B632 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+    "promptBeforePhoto": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Stephen Fryfin, an ORIGINAL NONHUMAN creature inspired by Stephen Fry's public persona. Silhouette/costume: Round dolphin with a scholarly dark waistcoat, gold scarf and delighted questioning expression. Main prop/gesture: One sturdy closed dictionary with a blank cover. Visual joke: Before answering, enthusiastically decides what the word actually means. Use jewel accent #F2B632 on worn dark cloth/trim, no invented branding. Pose/composition: Diagonal mid-swim curve facing the viewer, dolphin tail curls downward/left, one flipper clasps the closed dictionary, the other opens in a delighted question. Fish-shaped, no human legs/water.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+    "photoReference": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/references/stephen-fry-hay2014.jpg",
+    "photoSource": "https://www.hayfestival.com/p-7469-stephen-fry.aspx",
+    "referenceRoles": [
+      "approved game style board",
+      "shipped rendering only",
+      "public persona pose/expression only"
+    ],
+    "generationFailure": {
+      "kind": "moderation_blocked",
+      "stage": "input",
+      "category": "public-figure",
+      "requestId": "d9179aa6-5ac5-45a7-bf74-917cb6290ccd",
+      "action": "Photo-guided request not retried through another tool/model; continue independent assets."
+    }
+  }
+}

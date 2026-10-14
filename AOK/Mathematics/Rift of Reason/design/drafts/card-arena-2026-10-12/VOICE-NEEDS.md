@@ -78,3 +78,7 @@ Rick147/145group6 has two original draft lines only: “Backstage, briefly.” a
 ## Hank distinctness proposal — 14 October 2026
 
 Hank #146 mechanic is frozen in the draft as To Be Continued. The frozen #145 draft line “Keep this note. It might help.” still fits. Two further original draft lines: “Where was I? Right, here.” and “To be continued.” Quick curious explainer delivery; no copied intro, catchphrase or impersonation. The shared cue changes from heal to reveal (card-play/hit/defeat/reveal). No runtime bark/cast pin, API call, recording or voice-manifest change until #109/#123 release the wording.
+
+## Visual completion / cast handoff — 14 October
+
+The final unproduced expansion slot now uses Susie Dentshell / Susie Dent public lexicography, a gold Language hermit crab with a closed dictionary. Stable language-definition-dolphin ID/Guard contract preserved. Delivery: calm curious original word-expert voice; no imitation. Existing original draft line “Let’s agree what safe means.” may be retained if/when implemented. The prior declined Stephen request remains historical. All other recorded clips/cast pins/quotas are unchanged; no new voice request. Hank #146 draft-contract adoption affects only the art gallery/inventory, not audio.

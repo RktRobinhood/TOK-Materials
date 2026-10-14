@@ -1,0 +1,199 @@
+{
+  "issue": 65,
+  "date": "2026-10-14",
+  "method": "built-in image_gen",
+  "records": [
+    {
+      "key": "cold-open",
+      "id": "scene/cold-open",
+      "prompt": "Use case: stylized-concept. Production game background for Rift of Reason, Stage13.72 cold open. Make one wide landscape 16:9 painted image, preferably2048x1152 and at least1672x941, NO characters and NO text. Image1 approved style board is authoritative: cute dark storybook, medium ink-brown outlines, softly textured cel-painted forms, jewel accents amid midnight violet/forest shadows. Image2 shipped world map establishes the same crooked timber village/fair geography and distant hills. Image3 title scene provides architectural continuity ONLY: OMIT its characters and spectacular open rifts. This is BEFORE the sky opens, at the FIRST LIGHT OF DAWN. High oblique view looking down gently onto a quiet small crooked hill village. Top45percent open deep blue-violet sky with a narrow peach dawn horizon and just a few fading stars. Keep upper-middle sky empty: no crack or rift yet, overlay added later. Across middle a distant low hill/river band, then village in lower half: about eight crooked timber cottages, a little sundial green at x0.50 y0.67, strings of UNLIT fair lanterns, small folded fair tents on right. One recognisable player cottage near x0.56 y0.72 has a SINGLE warm amber lit ROUND attic window, rest mostly asleep/dark. Foreground dark tree tops at bottom corners and low crooked fence along bottom8percent. Organise into sky/hills/village/foreground depth bands for later separate parallax extraction. Welcoming and slightly uncanny, quiet still dawn. No people/animals, glowing portal, vortex, daytime sun, text/signs/numbers, watermark or logo. Full edge-to-edge opaque background.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/2-world/map.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/2-world/title.png"
+      ],
+      "transparent": false,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-731deb7b-4cfe-4be2-be82-b9c100ec34e2.png",
+      "source": "design/source-assets/6-cutscene/cold-open.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "bedroom",
+      "id": "scene/bedroom",
+      "prompt": "Use case: stylized-concept. New background Stage13.75 Rift of Reason, wide16:9 preferably1672x941 or larger. Reference1 approved game style, cute dark outlined storybook soft cel painting; reference2 crooked cosy cottage materials ONLY, omit its flying pots and spectacular rift. Reference3 dawn village palette/player cottage continuity. Reference4 tiny restrained sky crack shape ONLY. An EMPTY cosy small attic bedroom, view from FOOT OF BED towards headboard, symmetrical gentle perspective. Simple crooked dark wooden bed CENTRED in LOWER HALF, occupies about x.30to.70 y.53to1.00. One plump cream pillow centered at x.50 y.60, and warm moss-violet patchwork quilt starting BELOW pillow around y.69; pillow and upper bed uncluttered, gently lit and EMPTY so separate sleeping creature can be laid over it. Round attic window above bed centered x.50 y.29 shows deep blue-violet dawn and thin peach horizon; ONE tiny hairline black crack with very faint cyan edge crosses its upper part, NO big open rift. Sloping timber ceiling, worn violet plaster, a satchel on a side hook, warm small lantern on RIGHT window sill, few blank closed books on LEFT low stool, one small calendar with abstract empty grid and single circled blank cell, no writing/numerals. Cool early light and one soft warm lantern glow; slightly eerie but safe and inviting. Do NOT add occupant, sleeper, creature, person, face, bedclothes shaped like a body, text, logos, magical particles or floating objects. No flash. Full opaque landscape painting. Bed pillow and upper quilt clear for compositing.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/2-world/granny-door.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/sky-crack.png"
+      ],
+      "transparent": false,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-13d6ea24-a05b-4480-b1c0-93cd694446f8.png",
+      "source": "design/source-assets/6-cutscene/bedroom.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "cold-open-front",
+      "id": "cutscene/cold-open-front",
+      "prompt": "Edit attached dawn village into ONLY its FOREGROUND parallax layer on genuine transparency. Keep full original1672x941 landscape canvas, exact position and scale. Retain just the near dark fir treetops framing bottom left and bottom right, low wooden fence with unlit pennant string along bottom edge, a few close rocks and violet flowers at bottom. Everything behind and above is entirely transparent: no village houses, green, sundial, tents, far trees/hills/mountains, river, sky or background colour. Foreground should be an irregular dark silhouette along bottom20percent with taller tree masses at lower corners, leaving middle80percent open to see village. Fill the near fence/trees behind overlaps just enough for modest parallax movement. Cute-dark painted ink-violet/forest forms with very restrained dawn peach rim; no giant new tree blocking player cottage at x0.56y0.60. No text, characters, rifts, floor shadow blobs, painted checkerboard or new lamps. Preserve original full16:9 canvas, don't crop tight to artwork.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-a675dee4-46c5-483e-a287-cde559b7d156.png",
+      "source": "design/source-assets/6-cutscene/cold-open-front.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "cold-open-hills",
+      "id": "cutscene/cold-open-hills",
+      "prompt": "Edit attached dawn village into ONLY its FAR HILLS AND RIVER parallax layer. Preserve full original1672x941 landscape canvas, SAME camera, skyline and exact object positions. Actual transparent background ABOVE the distant mountain skyline (roughly top25percent, varying with mountains). Retain distant blue-violet mountain ridges, the far castle on right, hazy wooded hills and peach-reflecting river band across middle. Remove ALL near village houses, sundial, fair tents, near lantern strings, close fir trees, fence, foreground flowers/ground. Paint/inpaint continuous distant blue-violet hills and river down behind where those near objects were until the BOTTOM edge, so foreground can slide without revealing transparent holes. Keep distant mountain skyline identical to original, not moved down or scaled to fill frame. Near village will be another transparent layer. Only far landscape remains, no sky pixels above skyline, no new buildings, text, characters, rifts or detached floating islands. Original cute-dark painted game style and dawn palette. Full original16:9 canvas, true alpha above the skyline; do not crop tight to remaining art.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-4400b14e-6b6f-4f73-a479-6d7148328461.png",
+      "source": "design/source-assets/6-cutscene/cold-open-hills.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "cold-open-sky",
+      "id": "cutscene/cold-open-sky",
+      "prompt": "Edit the attached dawn village painting into ONLY its SKY parallax layer. Preserve its full original1672x941 landscape canvas, exact sky colours, stars and peach horizon at y0.30; keep the same framing and camera. Remove ALL mountains, hills, castle, river, trees, houses, ground, fair and fences. Inpaint a continuous deep blue-violet to muted peach dawn sky behind their former area down to the bottom, so the image is entirely opaque sky with no cutouts. Top45percent should match original sky closely; lower sky is softly muted and will be covered by other layers. No sun, moon, birds, buildings, silhouettes, crack/rift, text or new objects. Cute dark painterly game background, warm low dawn and very dark violet zenith. Full16:9 opaque canvas, same size and no cropping.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+      ],
+      "transparent": false,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-0a955967-04d6-40cc-a826-28f74e4c1a7d.png",
+      "source": "design/source-assets/6-cutscene/cold-open-sky.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "cold-open-village",
+      "id": "cutscene/cold-open-village",
+      "prompt": "Edit attached dawn village painting into ONLY its NEAR VILLAGE parallax layer, on genuine transparency. Preserve full original1672x941 canvas, framing, same exact camera, cottage positions and scale. Remove all sky, mountains, far castle, river, distant hills/forests, and foreground fence and close fir treetops/flowers. KEEP the crooked timber houses across lower half, their connecting stone paths/green, little central sundial, fair tents on right, strings of unlit lanterns, and central-right player's cottage with its single warm amber ROUND attic window. Keep a coherent ground island extending from the houses down to bottom edge, filling in roof/ground bits hidden by foreground trees; do not add an outline/frame around it. The layer's upper boundary follows roofs and local trees, remaining top half transparent. Preserve exact roofs/window/cottage designs from reference; this same player's home is used for lock-on. No sky or mountain backplate hiding transparency, no fence or branches from the foreground, no new scene, characters, text, rift, sun, floating particles or shadow blob. Quiet cool blue-violet dawn with one warm home window; cute dark storybook painting. Same full16:9 canvas, don't crop/zoom/centre the isolated layer.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-b7bd71e2-876a-4c7d-95ae-ecc6bb3ede27.png",
+      "source": "design/source-assets/6-cutscene/cold-open-village.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "fox-asleep",
+      "ids": [
+        "avatar/fox-boy/asleep",
+        "avatar/fox-girl/asleep"
+      ],
+      "prompt": "Extend EXACT FOX KIT avatars from image2 into ONE transparent TWO-FIGURE SLEEPING SHEET for Rift of Reason Stage13.76. Image1 style board authoritative, image2 identities/species/outfits, image3 bedroom camera/quilt palette only, image4 sleeping sheet layout only (NO owls). Wide1536x1024, TWO separate same-scale groups in LEFT/RIGHT halves, transparent120px centre gap plus at least50px outer margins. LEFT boy: original orange fox kit, cream cheeks/muzzle/ear interiors and dark nose, green bandana at neck. RIGHT girl: original richer red fox kit with cream cheeks/ear interiors, mustard duffle coat loosely laid across upper quilt and short tail ribbon visible only if natural. BOTH lie asleep facing toward foot-of-bed camera, heads on cream pillows, large triangular ears intact, BOTH eyes completely CLOSED, soft peaceful smiles, one small fox forepaw on short quilt segment. Violet/moss/cream patchwork quilt covers from CHEST down, same fabric as bedroom. Only fox upper body, pillow and quilt segment, coherent one island each. Entire ears/pillows/paws/quilt inside canvas; no giant tail outside group, no human face/hands, no new clothes or different fox proportions. Preserve medium ink-brown outlines and painterly cel shading, warm rim highlights, cute dark storybook. NO bedframe, room, floor, ground shadow, background glow/haze, text/Zs, particles, frame or other figures. Genuine transparent background, no checkerboard.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/fox-sheet.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-10edccf0-29a1-43c3-bf8a-9eb3338d4fcb.png",
+      "source": "design/source-assets/1-avatars/fox-asleep.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "frogling-asleep",
+      "ids": [
+        "avatar/frogling-boy/asleep",
+        "avatar/frogling-girl/asleep"
+      ],
+      "prompt": "Extend EXACT FROGLING avatar identities from image2 into ONE transparent TWO-FIGURE SLEEPING SHEET, Stage13.76 Rift of Reason. Image1 approved cute-dark style, image2 IDENTITY/anatomy/colours, image3 bedroom camera/quilt only, image4 sleeping layout only (NO owls). TWO separate figures in LEFT and RIGHT equal halves of wide1536x1024 canvas, same scale, clear120px transparent centre gap plus50px empty outer padding. LEFT boy: small olive-green speckled frog, cream chin, yellow raincoat folded and tucked along side of pillow (rather than a floating hook), identity yellow collar visible. RIGHT girl: same original green frog girl, red raincoat loosely draped across upper quilt; her broad lily-pad hat with pink flower lies touching her pillow beside cheek. EACH lies asleep on one cream pillow, seen from FOOT OF BED towards head, natural rounded FROG head/protruding CLOSED eyes, relaxed broad mouth, one little four-finger frog hand resting on top of short chest-down violet/moss/cream patchwork quilt. Match original sheet face and skin markings, no fur, ears, beak, human body or new creature. One coherent connected island per half including hat/coat; no loose props. Whole head/hat/pillow/quilt visible inside canvas, no room, bedframe, floor, hook, text/Zs, labels, decorative floating stars, glow haze, shadow blob or extra poses. Medium ink-brown outlines, soft painterly cel shading, warm gentle rim and true transparency. Calm peaceful sleep.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/frogling-sheet.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-e1aecaa4-acee-4403-bea7-300d5499a67a.png",
+      "source": "design/source-assets/1-avatars/frogling-asleep.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "mothkin-asleep",
+      "ids": [
+        "avatar/mothkin-boy/asleep",
+        "avatar/mothkin-girl/asleep"
+      ],
+      "prompt": "Extend the EXACT MOTH-KIN avatar identities from image2 into ONE transparent TWO-FIGURE SLEEPING POSE SHEET, Stage13.76 Rift of Reason. Image1 approved cute-dark painted style, image2 character identity/anatomy, image3 empty bedroom CAMERA/quilt palette, image4 sleeping layout reference ONLY, do NOT draw owls. Wide1536x1024 sheet, separate LEFT and RIGHT groups in equal halves with clear120px transparent gap and outer padding. LEFT boy: dusty-blue moth fur, cream muzzle, long feathery arched antennae, brown waistcoat collar, dim amber lantern nestled against cream pillow. RIGHT girl: lilac moth fur/cream muzzle, long feathery antennae, midnight star shawl with gold trim, moon-white dim lantern against pillow. EACH lies asleep on own small cream pillow seen from FOOT OF BED, head inclined slightly towards viewer, both eyes fully CLOSED, small soft relaxed mouth, one small forelimb on quilt top edge. Moth wings folded naturally behind upper body, most body covered from chest down by short violet/moss/cream patchwork quilt segment matching bedroom. Two coherent connected groups only; lantern touches pillow not detached. Preserve moth facial shapes, antennae, species and colours from original sheet, don't turn into rabbits/owls. NO bed frame/room/floor/scenery/glowing haze/ground shadow, text/Zs/stars floating outside shawl, particles or extra poses. Real transparent background. Entire antennae, lanterns, pillows and quilt edges inside canvas and no overlap across centre gap.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/mothkin-sheet.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-60a8fa97-a3b8-4fcd-9aeb-a0333e6214fc.png",
+      "source": "design/source-assets/1-avatars/mothkin-asleep.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "owlet-asleep",
+      "ids": [
+        "avatar/owlet-boy/asleep",
+        "avatar/owlet-girl/asleep"
+      ],
+      "prompt": "Edit/extend the EXACT Owlet avatar designs from image2 into ONE transparent TWO-FIGURE SLEEPING POSE SHEET, Stage13.76 Rift of Reason. Image1 style authority; image2 IDENTITY and clothes; image3 bedroom CAMERA/bedclothes reference ONLY, do not include room. Wide1536x1024 canvas, two separate figures side-by-side in equal left/right halves, at same scale and same pillow height, generous transparent outer margins and at least120px transparent vertical gap between groups. LEFT: brown/cream OWLET BOY from top row, long deep-red scarf relaxed over chest, his brown satchel tucked beside pillow and connected to group. RIGHT: same brown/cream OWLET GIRL from lower row, teal hooded cloak with worn gold trim, folded round spectacles on pillow beside cheek, connected to group. EACH asleep lying back on ONE small cream pillow, seen from FOOT of bed looking toward head, head slightly angled towards us, both eyes fully CLOSED, peaceful relaxed beak. One wing rests on TOP edge of a short quilt segment covering chest down. Only character, pillow and small patchwork quilt segment; all parts form one connected island per half. Match violet/moss/warm muted patchwork of bedroom; NO bed frame/floor/room/background, detached floating accessories, text, sleep letters/Zs, stars, symbols or extra poses. Identity, feather shapes, coat/scarf colours and medium dark-brown outlines exact to sheet. Cute slightly dark painterly cel shading, warm gentle rim light, real transparency. Whole pillow/ears/quilt/props intact and nothing touches other half or canvas edges.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-sheet.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-b20fd522-57dd-49ce-911e-b88e6bfc814e.png",
+      "source": "design/source-assets/1-avatars/owlet-asleep.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "raven-asleep",
+      "ids": [
+        "avatar/raven-boy/asleep",
+        "avatar/raven-girl/asleep"
+      ],
+      "prompt": "Extend EXACT RAVEN CHICK avatar identities from image2 into ONE transparent TWO-FIGURE SLEEPING SHEET, Stage13.76 Rift of Reason. Image1 approved cute-dark style, image2 raven identities/feathers/costume, image3 bedroom camera/quilt palette only, image4 sleeping pose layout only, NO owls. Wide1536x1024 sheet, two separate same-scale figures in LEFT/RIGHT equal halves with at least100px clear transparent centre gap and50px outer padding; full heads/pillows/quilt inside frame. LEFT boy: midnight blue-black raven chick, fluffy spiky feather crest and broad charcoal BEAK, oversized soft grey hoodie; one closed blank brown notebook resting against quilt, not floating, pencil tucked beside notebook. RIGHT girl: same original blue-black raven chick, purple cape collar with gold edging; purple beret resting at pillow edge touching feathers and magnifying glass resting flat on quilt, all attached as one connected group. EACH lying asleep on one cream pillow, seen from FOOT of bed looking toward head, head gently tilted toward viewer, both eyes fully CLOSED, closed relaxed beak, one feathered wing on short violet/moss/cream patchwork quilt covering from chest down. Preserve raven anatomy not mammal ears, human face or human hands. Face and dark feather edges need soft warm rim highlights, classic medium ink-brown outlines and softly textured cel shading. Calm peaceful sleep. NO bed frame, room, floor, background glow/haze, ground-shadow blob, letters/Zs, readable notebook text, labels, extra figures, floating particles or checkerboard. Genuine transparent background.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/raven-sheet.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-a770fc2c-6fc2-4f68-a307-0e196bc27908.png",
+      "corrections": [
+        {
+          "prompt": "Fix ONLY spacing and transparent padding in this two-Raven sleeping sprite sheet. Keep the EXACT two ravens, faces, closed eyes, feather colours, grey hoodie/notebook for boy LEFT and purple beret/cape/magnifier for girl RIGHT, cream pillows, patchwork fabric and painting. Do not redesign or add objects. Their quilts currently TOUCH at centre and outer edges: separate the entire complete groups. Scale both complete groups down to about75percent their present size and center one within LEFT HALF and one within RIGHT HALF of the SAME1536x1024 transparent canvas. Leave a clearly EMPTY transparent vertical gap at least160px between nearest quilt/pillow pixels. Leave at least70px transparency on all FOUR outer edges around each group's entire pillow/quilt/head. Each group must be a COMPLETE isolated closed silhouette with its own visible quilt side edges and no part cut at canvas or centre. Both same scale and pillow height; true alpha with absolutely no painted background, diffuse glow, haze, floor/shadow, text or checkerboard. The ONLY change is translating/scaling the two complete groups apart and completing the little quilt tips where they touched; retain everything else.",
+          "refs": [
+            "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/raven-asleep.png"
+          ],
+          "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-691cceb1-b0a2-4ce1-b6e0-f8e6c2e19a42.png",
+          "reason": "Initial quilts touched, one detected island instead of two."
+        }
+      ],
+      "selectedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-691cceb1-b0a2-4ce1-b6e0-f8e6c2e19a42.png",
+      "source": "design/source-assets/1-avatars/raven-asleep.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    },
+    {
+      "key": "sky-crack",
+      "id": "cutscene/sky-crack",
+      "prompt": "Use case: stylized-concept. One transparent overlay asset, Stage13.74 Rift of Reason. Reference1 approved style board establishes cute-dark painterly outlines. Reference2 is target DAWN background and scale context only; do NOT draw the village or sky. Reference3 Algorithm eye gives only abstract violet/cyan feed-tile motif; do NOT draw an eye, creature, hooded figure or portal. Draw ONE very long THIN HAIRLINE crack, jagged black with a faint restrained cold-cyan edge, gently curving left-to-right with only3tiny side branches. On a wide4:1 transparent canvas; the entire crack and glow inside padding, occupying central80percent width but only middle12percent height. Main black hairline1to3pixels, faint irregular cyan rim not a broad glowing lightning bolt. A few minute violet/cyan rectangular tile glints inside slightly wider tiny segments, barely visible; no readable icons or words. Calm and eerie, a glass-like flaw through which something quietly watches; this is BEFORE the Fair and the sky has NOT opened. No explosion, round hole, torn-paper sheet, giant lightning flash, neon blast, particles, clouds, moon, scene, text, symbols, humans, watermark, checkerboard or black rectangular background. Actual transparent background.",
+      "refs": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/3-cast/algorithm.png"
+      ],
+      "transparent": true,
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-65c066a2-f209-4bf6-8c6c-331ac4079ca9.png",
+      "source": "design/source-assets/6-cutscene/sky-crack.png",
+      "visualReview": "Selected painted asset inspected for style, correct subject, closed eyes where relevant, readable identity and no major clipping. Source/runtime alpha and dimensions are checked separately."
+    }
+  ],
+  "status": "All Stage13.72–13.76 assets produced; cold-open timeline/gameplay implementation remains issue65"
+}

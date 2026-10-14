@@ -1,0 +1,35 @@
+{
+  "issue": 146,
+  "date": "2026-10-14",
+  "reason": "Explicit adoption of the closed #146 draft decision into the art-only inventory/gallery. Preserve the accepted portrait and original generation prompt.",
+  "oldContract": {
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "Entrance: heal a damaged friendly creature by 1.",
+    "gates": [
+      109
+    ]
+  },
+  "newContract": {
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+    "gates": [
+      109
+    ]
+  },
+  "unchanged": [
+    "art ID",
+    "persona",
+    "source PNG",
+    "runtime WebP",
+    "prompt",
+    "stats",
+    "rarity",
+    "colour",
+    "acquisition"
+  ],
+  "runtimeImplemented": false
+}

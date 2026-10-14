@@ -1,0 +1,10 @@
+{
+  "key": "cold-open-hills",
+  "id": "cutscene/cold-open-hills",
+  "prompt": "Edit attached dawn village into ONLY its FAR HILLS AND RIVER parallax layer. Preserve full original1672x941 landscape canvas, SAME camera, skyline and exact object positions. Actual transparent background ABOVE the distant mountain skyline (roughly top25percent, varying with mountains). Retain distant blue-violet mountain ridges, the far castle on right, hazy wooded hills and peach-reflecting river band across middle. Remove ALL near village houses, sundial, fair tents, near lantern strings, close fir trees, fence, foreground flowers/ground. Paint/inpaint continuous distant blue-violet hills and river down behind where those near objects were until the BOTTOM edge, so foreground can slide without revealing transparent holes. Keep distant mountain skyline identical to original, not moved down or scaled to fill frame. Near village will be another transparent layer. Only far landscape remains, no sky pixels above skyline, no new buildings, text, characters, rifts or detached floating islands. Original cute-dark painted game style and dawn palette. Full original16:9 canvas, true alpha above the skyline; do not crop tight to remaining art.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-4400b14e-6b6f-4f73-a479-6d7148328461.png"
+}

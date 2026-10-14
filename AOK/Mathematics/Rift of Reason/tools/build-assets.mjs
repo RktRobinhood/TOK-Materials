@@ -23,7 +23,7 @@ import { previewHtml } from './assets/preview.mjs';
 const TOOL_VERSION = 1;
 const HERE = dirname(fileURLToPath(import.meta.url));
 const GAME = resolve(HERE, '..');
-const STAGES = ['0-style', '1-avatars', '2-world', '3-cast', '4-caricatures', '5-ui'];
+const STAGES = ['0-style', '1-avatars', '2-world', '3-cast', '4-caricatures', '5-ui', '6-cutscene'];
 
 // ---- options ----------------------------------------------------------------
 
@@ -113,8 +113,10 @@ async function doScene(file, spec, ctx) {
 
 async function doSingle(file, spec, ctx) {
     const img = await load(file);
-    const piece = trim(img, 8);
-    if (!piece) return { error: 'image is completely transparent', size: { w: img.w, h: img.h } };
+    const trimmed = trim(img, 8);
+    if (!trimmed) return { error: 'image is completely transparent', size: { w: img.w, h: img.h } };
+    // Parallax layers share their source canvas; trimming would move their anchors.
+    const piece = spec.trim === false ? img : trimmed;
     const rel = fileFor(spec.id);
     const { w, h } = await writeSprite(piece, join(ctx.out, rel), capsFor(spec.id, spec.class), QUALITY, ctx.dry);
     return { outputs: [{ id: spec.id, entry: { file: rel, w, h } }], size: { w: img.w, h: img.h } };

@@ -1,0 +1,12 @@
+{
+  "key": "sky-crack",
+  "id": "cutscene/sky-crack",
+  "prompt": "Use case: stylized-concept. One transparent overlay asset, Stage13.74 Rift of Reason. Reference1 approved style board establishes cute-dark painterly outlines. Reference2 is target DAWN background and scale context only; do NOT draw the village or sky. Reference3 Algorithm eye gives only abstract violet/cyan feed-tile motif; do NOT draw an eye, creature, hooded figure or portal. Draw ONE very long THIN HAIRLINE crack, jagged black with a faint restrained cold-cyan edge, gently curving left-to-right with only3tiny side branches. On a wide4:1 transparent canvas; the entire crack and glow inside padding, occupying central80percent width but only middle12percent height. Main black hairline1to3pixels, faint irregular cyan rim not a broad glowing lightning bolt. A few minute violet/cyan rectangular tile glints inside slightly wider tiny segments, barely visible; no readable icons or words. Calm and eerie, a glass-like flaw through which something quietly watches; this is BEFORE the Fair and the sky has NOT opened. No explosion, round hole, torn-paper sheet, giant lightning flash, neon blast, particles, clouds, moon, scene, text, symbols, humans, watermark, checkerboard or black rectangular background. Actual transparent background.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/3-cast/algorithm.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-65c066a2-f209-4bf6-8c6c-331ac4079ca9.png"
+}

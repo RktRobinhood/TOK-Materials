@@ -757,6 +757,26 @@
       "group": 4
     },
     {
+      "id": "creature/language-definition-dolphin/idle",
+      "name": "Susie Dentshell",
+      "kind": "portrait",
+      "colour": "language",
+      "rarity": "uncommon",
+      "pose": "Front-left crouch; upright closed dictionary braced by one pincer and the other gesturing.",
+      "contract": {
+        "cost": 3,
+        "attack": 1,
+        "health": 4,
+        "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+        "gates": [
+          109
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-language-definition-dolphin-145.png",
+      "group": 7
+    },
+    {
       "id": "creature/language-debate-dingo/idle",
       "name": "K-S-Ibis",
       "kind": "portrait",
@@ -1135,7 +1155,7 @@
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "Entrance: heal a damaged friendly creature by 1.",
+        "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
         "gates": [
           109
         ]

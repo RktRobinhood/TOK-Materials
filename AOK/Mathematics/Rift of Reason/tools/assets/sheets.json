@@ -11,7 +11,7 @@
         "  threshold (alpha 0-255 that counts as solid when finding figures; default 170).",
         "type 'walk': rows of 6 walk frames; 'rows' lists one id per row, top to bottom. Frames are re-packed",
         "  into equal cells on a shared ground line. If a row does not split into 6 figures, equal-width cells are used.",
-        "type 'single': one transparent image, trimmed. type 'scene': an opaque background (not sliced) plus a -small copy.",
+        "type 'single': one transparent image, trimmed; trim:false preserves its full canvas for parallax. type 'scene': an opaque background (not sliced) plus a -small copy.",
         "type 'skip': known file that is not game art.",
         "class (optional, per sheet or per figure) picks the size cap: sprite (620 tall), bust (240 tall), item (160 box),",
         "  icon (160 box), card (500 tall), prop (600 box), panel (1000 box), fx (800 box), logo (1200 wide), scene (1600 wide).",
@@ -424,6 +424,20 @@
             "ui/door-closed", "ui/door-open", "ui/token-truth", "ui/token-lie", "ui/venn",
             "ui/tile-1", "ui/tile-2", "ui/tile-3", "ui/tile-4", "ui/tile-5", "ui/tile-6",
             "ui/slate", "ui/chalk"
-        ] }
+        ] },
+        "production-language-definition-dolphin-145.png": { "type": "single", "id": "creature/language-definition-dolphin/idle", "class": "sprite" },
+        "cold-open.png": {"type":"scene","id":"scene/cold-open"},
+        "bedroom.png": {"type":"scene","id":"scene/bedroom"},
+        "cold-open-front.png": {"type":"single","id":"cutscene/cold-open-front","class":"scene","trim":false},
+        "cold-open-hills.png": {"type":"single","id":"cutscene/cold-open-hills","class":"scene","trim":false},
+        "cold-open-sky.png": {"type":"single","id":"cutscene/cold-open-sky","class":"scene","trim":false},
+        "cold-open-village.png": {"type":"single","id":"cutscene/cold-open-village","class":"scene","trim":false},
+        "fox-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/fox-boy/asleep","avatar/fox-girl/asleep"]},
+        "frogling-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/frogling-boy/asleep","avatar/frogling-girl/asleep"]},
+        "mothkin-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/mothkin-boy/asleep","avatar/mothkin-girl/asleep"]},
+        "owlet-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/owlet-boy/asleep","avatar/owlet-girl/asleep"]},
+        "raven-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/raven-boy/asleep","avatar/raven-girl/asleep"]},
+        "sky-crack.png": {"type":"single","id":"cutscene/sky-crack","class":"fx","trim":true},
+        "raven-asleep-first-take.png": {"type":"skip"}
     }
 }

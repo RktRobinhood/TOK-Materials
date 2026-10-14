@@ -1,0 +1,13 @@
+{
+  "key": "bedroom",
+  "id": "scene/bedroom",
+  "prompt": "Use case: stylized-concept. New background Stage13.75 Rift of Reason, wide16:9 preferably1672x941 or larger. Reference1 approved game style, cute dark outlined storybook soft cel painting; reference2 crooked cosy cottage materials ONLY, omit its flying pots and spectacular rift. Reference3 dawn village palette/player cottage continuity. Reference4 tiny restrained sky crack shape ONLY. An EMPTY cosy small attic bedroom, view from FOOT OF BED towards headboard, symmetrical gentle perspective. Simple crooked dark wooden bed CENTRED in LOWER HALF, occupies about x.30to.70 y.53to1.00. One plump cream pillow centered at x.50 y.60, and warm moss-violet patchwork quilt starting BELOW pillow around y.69; pillow and upper bed uncluttered, gently lit and EMPTY so separate sleeping creature can be laid over it. Round attic window above bed centered x.50 y.29 shows deep blue-violet dawn and thin peach horizon; ONE tiny hairline black crack with very faint cyan edge crosses its upper part, NO big open rift. Sloping timber ceiling, worn violet plaster, a satchel on a side hook, warm small lantern on RIGHT window sill, few blank closed books on LEFT low stool, one small calendar with abstract empty grid and single circled blank cell, no writing/numerals. Cool early light and one soft warm lantern glow; slightly eerie but safe and inviting. Do NOT add occupant, sleeper, creature, person, face, bedclothes shaped like a body, text, logos, magical particles or floating objects. No flash. Full opaque landscape painting. Bed pillow and upper quilt clear for compositing.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/2-world/granny-door.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/sky-crack.png"
+  ],
+  "transparent": false,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-13d6ea24-a05b-4480-b1c0-93cd694446f8.png"
+}

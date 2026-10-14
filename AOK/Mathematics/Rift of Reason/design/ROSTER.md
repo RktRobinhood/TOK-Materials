@@ -144,7 +144,7 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 | Ryan Georilla | Ryan George | language-label-lemur | language / common | One blank label stamp; one raised questioning brow. |
 | Stephen Clawbert | Stephen Colbert | language-word-weasel | language / common | One blank cue card held with an exaggerated farewell flourish. |
 | Sabrina Carpwenter | Sabrina Carpenter | language-echo-egret | language / uncommon | One unbranded microphone; the body remains fish-shaped, no human face. |
-| Stephen Fryfin | Stephen Fry | language-definition-dolphin | language / uncommon | One sturdy closed dictionary with a blank cover. |
+| Susie Dentshell | Susie Dent | language-definition-dolphin | language / uncommon | One stout closed dictionary with a blank gold-edged cover held like a protective lectern. |
 | K-S-Ibis | KSI | language-debate-dingo | language / uncommon | One plain headset; the long beak opens for an absurdly emphatic rebuttal. |
 | Olivia Rodentgo | Olivia Rodrigo | language-clause-crane | language / uncommon | One blank lyric-notebook-shaped journal, with a big crossed-out line shape and no words. |
 | Bo Birdham | Bo Burnham | language-metaphor-mantis | language / rare | One blank miniature stage card; a single warm spotlight-like rim, no set or piano. |
@@ -327,3 +327,7 @@ Eight selected paintings follow the Art Bible; exact prompts in the conditional1
 | Keanu Reeveaver | Keanu Reeves | Memory | Beaver; keepsake box/paper friend | Gentle rescue of a crumpled paper friend | conditional-memory-somewhere-safe |
 | Tom Holland-er | Tom Holland | Generic | Frog; umbrella/paper friend | An enthusiastic everyday rescue | conditional-generic-spare-umbrella |
 | Danny DeSeato | Danny DeVito | Generic | Pigeon; velvet theatre chair | Comic confidence about the reserved seat | conditional-generic-seat-reserved |
+
+## Final expansion portrait selection — 14 October 2026
+
+Builder selects Susie Dentshell (Susie Dent public lexicography) as a distinct replacement identity for the unproduced language-definition-dolphin slot. This is a new hermit-crab design with a protective dictionary cue, not another Stephen Fry/dolphin request. The declined request and photo remain historical provenance and will not be retried. Reference: https://www.some.ox.ac.uk/eminent/susie-dent/ . The joke works as a tiny word-expert defending an argument even without recognising the person. Gold Language/uncommon, stable asset ID, cost 3, 1/4 and Entrance Guard remain unchanged. New front-left crab crouch, spiral shell, stalk eyes and one closed dictionary; no human likeness, extra abilities or recordings.

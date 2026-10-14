@@ -1,0 +1,10 @@
+{
+  "key": "cold-open-front",
+  "id": "cutscene/cold-open-front",
+  "prompt": "Edit attached dawn village into ONLY its FOREGROUND parallax layer on genuine transparency. Keep full original1672x941 landscape canvas, exact position and scale. Retain just the near dark fir treetops framing bottom left and bottom right, low wooden fence with unlit pennant string along bottom edge, a few close rocks and violet flowers at bottom. Everything behind and above is entirely transparent: no village houses, green, sundial, tents, far trees/hills/mountains, river, sky or background colour. Foreground should be an irregular dark silhouette along bottom20percent with taller tree masses at lower corners, leaving middle80percent open to see village. Fill the near fence/trees behind overlaps just enough for modest parallax movement. Cute-dark painted ink-violet/forest forms with very restrained dawn peach rim; no giant new tree blocking player cottage at x0.56y0.60. No text, characters, rifts, floor shadow blobs, painted checkerboard or new lamps. Preserve original full16:9 canvas, don't crop tight to artwork.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/cold-open.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-a675dee4-46c5-483e-a287-cde559b7d156.png"
+}

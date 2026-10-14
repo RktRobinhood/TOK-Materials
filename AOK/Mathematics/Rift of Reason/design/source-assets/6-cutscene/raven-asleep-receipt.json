@@ -1,0 +1,16 @@
+{
+  "key": "raven-asleep",
+  "ids": [
+    "avatar/raven-boy/asleep",
+    "avatar/raven-girl/asleep"
+  ],
+  "prompt": "Extend EXACT RAVEN CHICK avatar identities from image2 into ONE transparent TWO-FIGURE SLEEPING SHEET, Stage13.76 Rift of Reason. Image1 approved cute-dark style, image2 raven identities/feathers/costume, image3 bedroom camera/quilt palette only, image4 sleeping pose layout only, NO owls. Wide1536x1024 sheet, two separate same-scale figures in LEFT/RIGHT equal halves with at least100px clear transparent centre gap and50px outer padding; full heads/pillows/quilt inside frame. LEFT boy: midnight blue-black raven chick, fluffy spiky feather crest and broad charcoal BEAK, oversized soft grey hoodie; one closed blank brown notebook resting against quilt, not floating, pencil tucked beside notebook. RIGHT girl: same original blue-black raven chick, purple cape collar with gold edging; purple beret resting at pillow edge touching feathers and magnifying glass resting flat on quilt, all attached as one connected group. EACH lying asleep on one cream pillow, seen from FOOT of bed looking toward head, head gently tilted toward viewer, both eyes fully CLOSED, closed relaxed beak, one feathered wing on short violet/moss/cream patchwork quilt covering from chest down. Preserve raven anatomy not mammal ears, human face or human hands. Face and dark feather edges need soft warm rim highlights, classic medium ink-brown outlines and softly textured cel shading. Calm peaceful sleep. NO bed frame, room, floor, background glow/haze, ground-shadow blob, letters/Zs, readable notebook text, labels, extra figures, floating particles or checkerboard. Genuine transparent background.",
+  "refs": [
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/raven-sheet.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/bedroom.png",
+    "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/1-avatars/owlet-asleep.png"
+  ],
+  "transparent": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13b18-511f-7841-8539-4b989dbeea28/exec-a770fc2c-6fc2-4f68-a307-0e196bc27908.png"
+}
