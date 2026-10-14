@@ -5,6 +5,10 @@
  *
  * Legendaries never die (a death roll becomes "scarred").
  * Items: 'anchor' stops one warp; 'ward' cancels one bad roll (injured, warp or death).
+ *
+ * TO BE REPLACED (teacher, 14 Oct 2026): rare "Changes" (2% base, more in boss battles and on
+ * 3+ overkill; gains, losses, sideways and trade-offs; cost ±1, never 0). Spec: GitHub issue
+ * #151 (body + clarification comment) and design/DESIGN.md "Changes replace the Fate table".
  */
 (function (root) {
     'use strict';
