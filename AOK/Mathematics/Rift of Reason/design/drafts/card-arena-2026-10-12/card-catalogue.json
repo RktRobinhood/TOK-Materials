@@ -1779,12 +1779,13 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "Entrance: heal a damaged friendly creature by 1.",
+      "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
       "tags": [
-        "healing"
+        "draw",
+        "delayed"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
-      "counterplay": "Finish damaged targets before the heal.",
+      "counterplay": "Defeat, bounce, steal or silence it before its owner's next turn.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",

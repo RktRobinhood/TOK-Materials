@@ -4,6 +4,10 @@ Latest teacher request starts #148/#149 now. The engine and board support paid o
 
 # Card Arena continuation checkpoint
 
+## Hank distinctness proposal — #146, 14 October 2026
+
+Hank #146 draft hook is now To Be Continued: `Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.` Replaces the Proof Pup-like Entrance heal. Cost/body/Memory/common/IDs/acquisition/gates and accepted portrait/prop unchanged; ROSTER.md unchanged. Both generators rerun (byte-stable), both validators and base comparison pass: exactly one card/persona row changed. Audit, contract and before/validation receipts in ../../reviews/hank-distinctness-146*. No runtime/save/grant/art/recording/voice-manifest changes; frozen #145 inventory and dev/art-production-data.js still carry the old contract until an explicit adoption record. Next: independent Standards/Spec and full-suite receipt, scoped commit, #146 closure, then Hank inventory adoption under #145. #123 must add a turn-start creature hook.
+
 ## Publication complete — spell standouts
 
 6388f29 PUSHED; Pages38537782135 SUCCESS. Public native1280×720/DPR1/84spells/87images loaded, proper versioncf57f595e457, new LastPage art/fullrule/keyboardreading visibly verified; public-last-page.png and public-gallery.json saved. Source+runtime2paintings/only2artmapchanges/oldassets+cardcontracts preserved; all local/source/native/fullsuite/rootreview acceptance completed. No generation/build/test repetition required. Voice140clips remain published1951/2579recorded/628missing; transcript acceptance stillpending after2HTTP503s/zero checked. Scheduled loop staysdeleted; onlyrootwriter, unrelatedpreview/helper/research preserved. Next exact frontier: actual pending audio transcription (only after actionable service change), permitted remaining cast handoff/Hank146 mechanics, and production109/122physicalinteraction/saved-back/parent gates. No72/72 or expansion-runtime/conditional-set release claim.

@@ -147,3 +147,7 @@ Jimmy Fowlon group5: #144 distinct draft proposal CLOSED at1136ee4/comment615596
 ## Continuation in the new chat — 14 October 2026
 
 Teacher stopped the old scheduled loop; the app confirmed deletion of Build Rift card pipeline / finish-rift-card-planning. Earlier active-automation instructions are historical. The new browser captures correctly at DPR1/1280x720 and390x844; Jimmy native acceptance is complete. Rick #147 now has a distinct gated spell-escape proposal and group6 first-take portrait, built through the existing pipeline. Total71of72expansion portraits made and locally accepted, all8sharedmotifs preserved. Stephen remains unproduced after service rejection (do not retry/rephrase); Hank146 still needs a distinct mechanic. Rick reaction timing has an explicit spell-reaction-policy release gate; no expansion runtime/grants/recordings changed. See design/reviews/art-recovery-2026-10-14.md for exact prompts/provenance, captures and asset checks. Publication/fulltests/independentreviews pending at this point.
+
+## Hank distinctness proposal — 14 October 2026
+
+Hank #146 proposal now uses To Be Continued: a delayed draw if the same bunny is still on its owner's board when their next turn starts. The accepted portrait, notebook-and-bookmark prop and art ID fit the new hook and are kept. No portrait generated; the #145 bulk inventory is not silently revised by this design slice and needs an explicit adoption record.

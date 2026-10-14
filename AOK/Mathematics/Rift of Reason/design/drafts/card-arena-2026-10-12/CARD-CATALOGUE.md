@@ -209,7 +209,7 @@ Discard recovery, delayed effects and bounded Fate re-entry.
 
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
-| Bookmark Bunny · `memory-bookmark-bunny` | creature / common / 1 | 1/2 | Entrance: heal a damaged friendly creature by 1. | Finish damaged targets before the heal. | pack-pool |
+| Bookmark Bunny · `memory-bookmark-bunny` | creature / common / 1 | 1/2 | Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card. | Defeat, bounce, steal or silence it before its owner's next turn. | pack-pool |
 | Recall Robin · `memory-recall-robin` | creature / common / 2 | 1/2 | Entrance: put your most recently discarded spell on the bottom of your personal deck if still there. | Race before it is redrawn. | pack-pool |
 | Archive Armadillo · `memory-archive-armadillo` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use spells. | pack-pool |
 | Return Roach · `memory-return-roach` | creature / common / 2 | 2/1 | Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room. | Use creature combat, untargeted damage or silence; a full hand prevents escape. | pack-pool |

@@ -27,6 +27,6 @@ Candidate slots, pending #123 revision:
 
 ## First-release acceptance
 
-[#123](https://github.com/RktRobinhood/TOK-Materials/issues/123): demonstrate one mono sequence/mixed bridge per colour and one memorable oddity. Compare triggers, targets, payoffs, durations/caps against shipped/draft counterparts; shared keywords are fine, exact clones are not. Jimmy #144/Hank #146/Rick #147 remain deferred. Check replay, discounts, copied abilities and repeated triggers for unbounded loops; competitive perfection is unnecessary.
+[#123](https://github.com/RktRobinhood/TOK-Materials/issues/123): demonstrate one mono sequence/mixed bridge per colour and one memorable oddity. Compare triggers, targets, payoffs, durations/caps against shipped/draft counterparts; shared keywords are fine, exact clones are not. Jimmy #144, Rick #147 and Hank #146 now have revised draft hooks; their audits and release contracts are in design/reviews/*-distinctness-*. Check replay, discounts, copied abilities and repeated triggers for unbounded loops; competitive perfection is unnecessary.
 
 Keep helpers/tutorial text simple. Preserve IDs/acquisition; document contract revisions. Fate replay/expiry, token ordering, matchups and alternative-win/tie gates remain open. No inventory, card count, save, engine or recording changes here.

@@ -3273,16 +3273,16 @@
       },
       "silhouette": "Small alert hare with sandy head tufts, dark spectacles and a silver-edged practical vest.",
       "signatureProp": "One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour.",
-      "jokeAngle": "One more useful note must be saved before the explanation moves on.",
-      "mechanicLink": "Entrance healing is a reminder for one damaged ally; no new medical or educational claims.",
+      "jokeAngle": "He bookmarks the explanation and promises to finish it next turn, if nobody interrupts him first.",
+      "mechanicLink": "One delayed draw only if this same bunny is still on your board when your next turn starts; not a heal, Fate event, repeat or recovery. No copied intro, catchphrase or educational claims.",
       "source": "https://www.hankgreen.com/",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
-      "voiceDirection": "Quick curious original explainer; no copied intro or impersonation, shared heal cue.",
+      "voiceDirection": "Quick curious original explainer; no copied intro or impersonation, shared reveal cue.",
       "sharedSfx": [
         "card-play",
         "hit",
         "defeat",
-        "heal"
+        "reveal"
       ],
       "artId": "creature/memory-bookmark-bunny/idle",
       "palette": {
@@ -3300,7 +3300,7 @@
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "Entrance: heal a damaged friendly creature by 1.",
+        "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
         "gates": [
           109
         ]
@@ -3309,7 +3309,7 @@
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
-        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: One more useful note must be saved before the explanation moves on.",
+        "appealReason": "Keep the pun, expressive creature and readable public-persona gag: He bookmarks the explanation and promises to finish it next turn, if nobody interrupts him first.",
         "smallScaleCue": "One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour."
       }
     },

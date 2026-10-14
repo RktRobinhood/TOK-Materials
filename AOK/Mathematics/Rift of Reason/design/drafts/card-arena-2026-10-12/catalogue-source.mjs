@@ -99,7 +99,7 @@ Dreamweaver Whale|6|3/7|At your turn's end, if you control at least 2 colourless
 Impossible Unicorn|7|4/6|Entrance: choose two other friendly creatures; swap their attack values permanently, then give each 1 maximum health and heal 1.|transformation|Limit supporting creatures or silence boosted bodies.
 `, creatureRarities);
 add('memory', 'creature', `
-Bookmark Bunny|1|1/2|Entrance: heal a damaged friendly creature by 1.|healing|Finish damaged targets before the heal.
+Bookmark Bunny|1|1/2|Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.|draw,delayed|Defeat, bounce, steal or silence it before its owner's next turn.
 Recall Robin|2|1/2|Entrance: put your most recently discarded spell on the bottom of your personal deck if still there.|recursion|Race before it is redrawn.
 Archive Armadillo|2|1/3|Guard.|guard|Remove Guard or use spells.
 Return Roach|2|2/1|Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room.|recursion,spell-reaction|Use creature combat, untargeted damage or silence; a full hand prevents escape.

@@ -1,0 +1,141 @@
+{
+  "issue": 146,
+  "baseCommit": "71431dacbc62d5550958416594d36e2e0fba836e",
+  "scope": "draft-only; no runtime, frozen #145 inventory, art, save, grant or recording edits",
+  "changedCatalogueIds": [
+    "memory-bookmark-bunny"
+  ],
+  "changedCatalogueFields": [
+    "text",
+    "tags",
+    "counterplay"
+  ],
+  "changedPersonaIds": [
+    "memory-bookmark-bunny"
+  ],
+  "changedPersonaFields": [
+    "jokeAngle",
+    "mechanicLink",
+    "voiceDirection",
+    "sharedSfx",
+    "mechanicalContract.text",
+    "castDecision.appealReason"
+  ],
+  "protectedFields": [
+    "id",
+    "name",
+    "affinity",
+    "kind",
+    "rarity",
+    "cost",
+    "attack",
+    "health",
+    "gates",
+    "art",
+    "acquisition",
+    "strategy",
+    "status",
+    "identityStatus",
+    "artDirection"
+  ],
+  "protectedPersonaFields": [
+    "mechanicalId",
+    "workingName",
+    "proposedName",
+    "inspiration",
+    "colour",
+    "rarity",
+    "acquisition",
+    "silhouette",
+    "signatureProp",
+    "source",
+    "familiarity",
+    "artId",
+    "palette",
+    "promptReferences",
+    "overlap",
+    "status",
+    "castDecision.decision",
+    "castDecision.smallScaleCue"
+  ],
+  "counts": {
+    "total": 210,
+    "affinity": {
+      "reason": 28,
+      "emotion": 28,
+      "perception": 28,
+      "language": 28,
+      "imagination": 28,
+      "memory": 28,
+      "generic": 42
+    },
+    "kind": {
+      "creature": 72,
+      "spell": 84,
+      "axiom": 54
+    },
+    "rarity": {
+      "common": 92,
+      "uncommon": 60,
+      "rare": 37,
+      "mythic": 14,
+      "legendary": 7
+    },
+    "acquisition": {
+      "packPool": 192,
+      "storyOnly": 18
+    },
+    "packRarity": {
+      "common": 90,
+      "uncommon": 58,
+      "rare": 25,
+      "mythic": 13,
+      "legendary": 6
+    }
+  },
+  "selectedContract": {
+    "cost": 1,
+    "attack": 1,
+    "health": 2,
+    "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+    "tags": [
+      "draw",
+      "delayed"
+    ],
+    "counterplay": "Defeat, bounce, steal or silence it before its owner's next turn.",
+    "gates": [
+      109
+    ]
+  },
+  "overlapAuditRows": {
+    "shippedCreatures": 41,
+    "shippedAbilities": 41,
+    "shippedTactics": 38,
+    "shippedAxioms": 42,
+    "shippedPowers": 12,
+    "shippedBattleItems": 7,
+    "draftCatalogue": 210,
+    "starterSupport": 12,
+    "conditionalConcepts": 23,
+    "total": 426
+  },
+  "generatorRepeat": "byte-stable (card-catalogue.json, CARD-CATALOGUE.md, persona-roster.json, PERSONA-ROSTER.md, design/ROSTER.md)",
+  "rosterMdChanged": false,
+  "planningValidator": "passed",
+  "personaValidator": "passed",
+  "baseComparison": "passed",
+  "focusedTests": {
+    "tools/test/conditional-study.test.mjs": {
+      "tests": 7,
+      "pass": 7,
+      "fail": 0
+    },
+    "tools/test/battle-starter-pack.test.mjs": {
+      "tests": 15,
+      "pass": 15,
+      "fail": 0
+    }
+  },
+  "fullSuite": "not run in this slice (shared checkout under concurrent test load); record before publication",
+  "independentReview": "pending"
+}
