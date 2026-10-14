@@ -264,6 +264,44 @@ test('with an avatar power, Granny adds "Your power": the pointer is on the butt
     assert.equal(won, true);
 });
 
+test('a required question pops up over the table, blocks the board and hands focus back after a right answer (#103)', () => {
+    const t = setup(() => {}, { short: true });
+    const L = t.Rift.Battle.Lesson;
+    for (const st of L.shortSteps.slice(0, 5)) { perform(t, st.expect); t.g.flush(); }
+    assert.ok(t.$('.b-question').hidden, 'no popup for ordinary board steps');
+    perform(t, L.shortSteps[5].expect); t.g.flush();
+    assert.equal(t.handle.step, 6);
+    const q = t.$('.b-question');
+    assert.ok(!q.hidden && q.classList.contains('show'), 'the prediction pops up');
+    const card = q.querySelector('[role="dialog"]');
+    assert.equal(card.getAttribute('aria-modal'), 'true');
+    assert.match(card.textContent, /Predict before acting/);
+    assert.match(q.querySelector('.b-question-rule').textContent, /Win rule now: Reach zero of YOUR OWN hearts to win\./, 'the rule the question is about is in the popup');
+    assert.deepEqual(q.querySelectorAll('.b-predictions button').map(b => b.textContent).join('|'), 'I win|Granny wins');
+    assert.ok(q.querySelector('.b-leave'), 'Leave lesson stays reachable');
+    assert.equal(t.$('.b-coach .b-predictions'), null, 'the answers are not duplicated in the side panel');
+    assert.match(t.$('.b-coach').textContent, /waiting for your answer/);
+    assert.ok(t.$('.b-arena').inert && t.$('.b-side').inert && t.$('.b-coach').inert, 'the table cannot be used meanwhile');
+    assert.equal(t.g.document.activeElement.dataset.answer, '0', 'focus moves to the first answer');
+
+    // Escape answers nothing; a wrong answer explains and keeps the question open, focus kept.
+    t.$('.battle').dispatchEvent({ type: 'keydown', key: 'Escape' });
+    assert.equal(t.handle.step, 6);
+    assert.ok(!t.$('.b-question').hidden);
+    q.querySelectorAll('.b-predictions button').find(b => b.textContent === 'I win').click();
+    assert.equal(t.handle.step, 6);
+    assert.match(t.$('.b-question .b-coach-say.warn').textContent, /Granny win/);
+    assert.equal(t.g.document.activeElement.textContent, 'I win', 'focus stays on the answer just tried');
+
+    t.$('.b-question .b-predictions').querySelectorAll('button').find(b => b.textContent === 'Granny wins').click();
+    assert.equal(t.handle.step, 7, 'a right answer moves on exactly once');
+    assert.ok(t.$('.b-question').hidden);
+    assert.ok(!t.$('.b-arena').inert && !t.$('.b-side').inert && !t.$('.b-coach').inert);
+    const focus = t.g.document.activeElement;
+    assert.ok(focus && t.$('.b-arena').contains(focus), 'focus returns to a control on the table');
+    t.handle.destroy();
+});
+
 test('the first lesson asks for a prediction and accepts both independent rule repairs on the real screen', () => {
     for (const plan of ['filter', 'normal-hearts', 'attack']) {
         const t = setup(() => {}, { short: true });

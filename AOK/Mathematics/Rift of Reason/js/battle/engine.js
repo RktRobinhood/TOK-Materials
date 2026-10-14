@@ -269,7 +269,7 @@
             if (other === cid || !onBoard) return;
             const src = s.cards[other];
             eachAbility(s, src, def => {
-                if (def.aura) { const v = def.aura(s, src, c, H); if (v) parts.push({ source: 'aura', label: def.name, amount: v }); }
+                if (def.aura) { const v = def.aura(s, src, c, H); if (v) parts.push({ source: 'aura', label: def.name, amount: v, from: cardName(s, other) }); }
             });
         });
         activeAxioms(s).forEach(ax => {
@@ -287,6 +287,47 @@
         const c = s.cards[cid];
         const max = Math.max(1, c.health + c.buffs.reduce((sum, b) => sum + (b.health || 0), 0));
         return { current: max - c.damage, max, damaged: c.damage > 0 };
+    }
+
+    // What is changing a creature's numbers right now, for the card face and its Active effects
+    // list: [{ stat: 'attack'|'health'|'cost', amount, label, until, from }]. until says how long:
+    // 'turn' (this turn), 'play' (until it leaves play), 'ability' (its own ability), 'aura' (while
+    // `from` is in play), 'rule' (while that rule is active), 'tax' (Night Sight). The colour wheel
+    // depends on the target, so it is not here: see wheelEdges.
+    function activeEffects(s, cid) {
+        const c = s.cards[cid];
+        if (!c || c.kind !== 'creature') return [];
+        const out = [];
+        attackParts(s, cid).parts.forEach(x => {
+            if (x.source === 'base') return;
+            const until = x.source === 'buff' ? null : x.source === 'axiom' ? 'rule' : x.source;
+            if (until) out.push({ stat: 'attack', amount: x.amount, label: x.label, until, from: x.from || null });
+        });
+        c.buffs.forEach(b => {
+            const until = b.temp ? 'turn' : 'play';
+            if (b.attack) out.push({ stat: 'attack', amount: b.attack, label: b.label, until, from: null });
+            if (b.health) out.push({ stat: 'health', amount: b.health, label: b.label, until, from: null });
+        });
+        if (s.players[c.controller].hand.includes(cid)) {
+            const delta = rules(s).costDelta;
+            const shown = Math.max(0, c.cost + delta) - c.cost;   // a cost never goes below 0
+            if (shown) out.push({ stat: 'cost', amount: shown, label: (activeAxioms(s).find(ax => ax.rules && ax.rules.costDelta) || {}).name || 'Cost rule', until: 'rule', from: null });
+            if (taxOn(s, cid)) out.push({ stat: 'cost', amount: 1, label: 'Night Sight', until: 'tax', from: null });
+        }
+        return out;
+    }
+    // The colour wheel from this creature's side: { strong: colours it gets +bonus against,
+    // weak: colours that get +bonus against it, bonus }. Follows a reversed wheel.
+    function wheelEdges(s, cid) {
+        const W = Rift.data.wheel, c = s.cards[cid];
+        const out = { strong: [], weak: [], bonus: W ? W.bonus : 0 };
+        if (!W || !c || c.kind !== 'creature') return out;
+        Object.keys(W.beats).forEach(b => {
+            const foe = { kind: 'creature', colour: b };
+            if (wheelBonus(s, c, foe)) out.strong.push(b);
+            if (wheelBonus(s, foe, c)) out.weak.push(b);
+        });
+        return out;
     }
 
     function isSleeping(s, cid) {
@@ -1618,7 +1659,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

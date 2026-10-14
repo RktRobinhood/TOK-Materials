@@ -424,6 +424,23 @@ button.bc { cursor: pointer; }
 .bc-gem.art.hurt { color: #ff4a4a; }
 .bc.mini .bc-gem { font-size: 11px; width: 40%; }
 .bc.mini .bc-gem.attack, .bc.mini .bc-gem.health { display: none; }
+/* A signed change beside a number (+1 / −1): readable without the gem's colour (#98). */
+.bc-delta {
+    position: absolute; z-index: 6; padding: 0 0.3em; border-radius: 0.7em; pointer-events: none;
+    font-family: var(--font-display); font-weight: 800; font-size: max(9px, 0.72em); line-height: 1.15;
+    background: rgba(12, 8, 20, 0.92); border: 1px solid currentColor; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+.bc-delta.up { color: #8dff9a; }
+.bc-delta.down { color: #ff9a9a; }
+/* Centred on the top rim of its gem: clear of the name band and the centred ability tag. */
+.bc-delta.attack { bottom: 8%; left: 8.5%; transform: translateX(-50%); }
+.bc-delta.health { bottom: 8%; right: 8.5%; transform: translateX(50%); }
+.bc-delta.cost { top: 14%; left: 8%; transform: translateX(-50%); }
+.bc.mini .bc-delta { display: none; }
+.b-effects { margin-top: 0.35em; padding-top: 0.3em; border-top: 1px solid rgba(169, 200, 255, 0.25); }
+.b-effect.up::before { content: '▲ '; color: #8dff9a; }
+.b-effect.down::before { content: '▼ '; color: #ff9a9a; }
+.b-effect.wheel { opacity: 0.85; }
 
 .bc-bubble { position: absolute; z-index: 5; inset: -5% -7%; border-radius: 50%; pointer-events: none; background: radial-gradient(ellipse, transparent 55%, rgba(150, 225, 255, 0.35) 75%, rgba(200, 240, 255, 0.55)); border: 2px solid rgba(180, 235, 255, 0.85); }
 .b-icon.state { position: absolute; z-index: 5; top: 3%; right: 3%; font-weight: 800; font-size: max(11px, 0.95em); padding: 0.1em 0.35em; border-radius: 0.6em; background: rgba(12, 8, 20, 0.88); border: 1px solid rgba(169, 200, 255, 0.5); }
@@ -640,6 +657,15 @@ body.calm-motion .battle .b-inspect.show { animation: b-fade-in 0.12s ease-out !
 .b-coach-text { margin: 8px 0; line-height: 1.35; }
 .b-coach-notice { color: var(--gold); font-weight: 700; margin: 6px 0; min-height: 1.2em; }
 .b-coach-buttons { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 4px; }
+/* A lesson question that needs an answer (#103): centred over the whole table, not in a corner. */
+.b-question { position: absolute; inset: 0; z-index: 75; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(5, 4, 10, 0.62); }
+.b-question.show { display: flex; animation: b-fade-in 0.25s ease-out; }
+.b-question-card { width: min(30rem, 100%); max-height: 100%; overflow: auto; padding: 14px 16px; font-size: 14px; }
+.b-question-card h3 { margin: 0; font-size: 18px; }
+.b-question-rule { margin: 8px 0; padding: 6px 10px; border-radius: 10px; line-height: 1.35; background: rgba(169, 200, 255, 0.1); border: 1px solid rgba(169, 200, 255, 0.4); }
+.b-question-card .b-predictions, .b-question-card .b-predictions-ok { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.b-question-card .b-predictions .btn { min-width: 9rem; font-size: 15px; }
+body.calm-motion .battle .b-question.show { animation: b-fade-in 0.12s ease-out !important; }
 .b-compare { background: rgba(242, 182, 50, 0.1); border: 1px solid rgba(242, 182, 50, 0.5); border-radius: 10px; padding: 6px 8px; margin: 6px 0; font-size: 12px; }
 .b-compare p { margin: 3px 0; }
 

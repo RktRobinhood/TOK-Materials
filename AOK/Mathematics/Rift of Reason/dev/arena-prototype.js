@@ -196,7 +196,9 @@
         if (!state().cards[cid]) return;
         const d = E.describe(state(), cid);
         preview.prepend(el('div.proto-preview-title', { text: d.name + (state().cards[cid].kind === 'creature' ? ' · Attack ' + d.attack + ' · Health ' + Math.max(0, d.health) + '/' + d.maxHealth : '') }));
-        preview.append(el('div.proto-effect-notes.b-notes', {}, [el('strong', { text: 'Active effects' }), el('ul', {}, effects(state(), cid).map(text => el('li', { text })))]));
+        // The battle screen now lists Active effects itself (#98); add the study's list only for cards without one.
+        if (!preview.querySelector('.b-effects')) preview.append(el('div.proto-effect-notes.b-notes', {}, [el('strong', { text: 'Active effects' }), el('ul', {}, effects(state(), cid).map(text => el('li', { text })))]));
+        else preview.append(el('span.proto-effect-notes', { hidden: true }));   // marks the preview as decorated
         // Native placement ran before these notes existed. Clamp the completed preview again.
         const box = host.querySelector('.battle').getBoundingClientRect(), p = preview.getBoundingClientRect();
         const bottom = Math.min(box.bottom, root.innerHeight) - 6;
@@ -308,7 +310,8 @@
         });
         inspect(selected);
         decorateInspect();
-        const required = screen.querySelector('.b-predictions, .b-coach-ok');
+        // The battle screen pops required questions up itself now (#103); this study dialog is only a fallback.
+        const required = !screen.querySelector('.b-question') && screen.querySelector('.b-predictions, .b-coach-ok');
         if (variant !== 'baseline' && required && !screen.querySelector('.b-overlay.show') && !modal) {
             coach = screen.querySelector('.b-coach');
             modal = el('dialog.proto-required', { 'aria-label': 'Granny needs your answer' });

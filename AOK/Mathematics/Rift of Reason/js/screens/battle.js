@@ -307,6 +307,8 @@
             // The big preview sits over the side panel (or the far edge of the table), never over the
             // centre lane or End turn. See placeInspect.
             dom.inspect = el('div.b-inspect', { 'aria-hidden': 'true' }),
+            // A lesson question that needs an answer, over the table (see renderQuestion).
+            dom.question = guide ? el('div.b-question', { hidden: true }) : null,
             dom.overlay = el('div.b-overlay'),
             // One small tooltip for every picture button (name + one detail line). See showTip.
             dom.tip = el('div.b-tip', { role: 'tooltip', id: tipId, 'aria-hidden': 'true' }),
@@ -396,6 +398,7 @@
         function act(action) {
             if (ui.ended) return;
             clearTimeout(ui.timer);
+            clearPredict();   // before rects(): a defeat ghost copies the old card, badges and all
             const by = decider();
             const before = rects();
             const guided = guide && by === ME && !ui.busy && step() && stepAccepts(step(), action);
@@ -683,6 +686,10 @@
             const style = bg(art);
             return el('span.bc-gem.' + kind + (style ? '.art' : '') + (extra ? '.' + extra : ''), style ? { style, text: String(value) } : { text: String(value) });
         }
+        const signed = n => (n > 0 ? '+' : '−') + Math.abs(n);
+        function deltaChip(kind, n) {
+            return n ? el('span.bc-delta.' + kind + (n > 0 ? '.up' : '.down'), { text: signed(n), 'aria-hidden': 'true' }) : null;
+        }
         function icon(id, fallback, cls, title) {
             const style = bg(id);
             return el('span.b-icon' + (cls ? '.' + cls : '') + (style ? '.art' : ''), { style, title: title || null, text: style ? '' : fallback });
@@ -735,6 +742,10 @@
                 text,
                 gem('attack', d.attack, atkClass),
                 gem('health', d.health, hpClass),
+                // Signed changes beside the numbers, so a buff or debuff reads without colour alone.
+                d.onBoard ? null : deltaChip('cost', d.cost - d.baseCost),
+                deltaChip('attack', d.attack - d.baseAttack),
+                deltaChip('health', d.maxHealth - d.baseHealth),
                 d.keywords.includes('shield') ? el('div.bc-bubble') : null,
                 // Guard: a shield badge under the card's bottom edge (dimmed while a rule ignores Guard).
                 size === 'board' && d.keywords.includes('guard') ? el('div.bc-guard' + (E.rules(state).ignoreGuard ? '.off' : ''), {
@@ -762,7 +773,6 @@
             else if (d.onBoard && d.canAttack && state.cards[cid].controller === ME && decider() === ME) lines.push('✅ Ready: drag it onto a target to attack.');
             d.keywords.forEach(k => { if (KT[k]) lines.push(KT[k]); });
             if (d.damaged) lines.push('Health ' + d.health + ' of ' + d.maxHealth + '. Damage stays.');
-            d.attackParts.filter(x => x.source !== 'base').forEach(x => lines.push(x.label + ': ' + (x.amount > 0 ? '+' : '') + x.amount + ' attack.'));
             // The full ability text first (it never fits on the card face itself).
             const abilityLines = d.lines.map(l => el('div.b-note-line.b-ability' + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
                 el('b', { text: (l.warped ? '🌀 ' : '') + (timing(l) ? timing(l) + ' · ' + l.name + ': ' : l.name + ': ') }),
@@ -785,8 +795,40 @@
                 el('div.b-notes-tags', {}, [colourChip(d.colour)].concat(tags.map(t => el('span.b-tag', { text: t })))),
                 ...abilityLines,
                 ...lines.map(t => el('div.b-note-line', { text: t })),
+                activeEffectsNote(cid),
                 whyNotNote(cid),
             ]);
+        }
+
+        // "Active effects": every change to this card's numbers, its source and how long it lasts,
+        // then the colour wheel (it depends on the target, so it is said, not added to the card).
+        const UNTIL = {
+            turn: () => 'this turn only', play: () => 'until it leaves play', ability: () => 'its own ability',
+            aura: from => 'while ' + (from || 'its friend') + ' is in play', rule: () => 'while this rule is active', tax: () => 'until Night Sight ends',
+        };
+        function effectLine(fx) {
+            return signed(fx.amount) + ' ' + fx.stat + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
+        }
+        function wheelLine(cid) {
+            const w = E.wheelEdges(state, cid);
+            const names = list => list.map(c => (Rift.COLOURS[c] || { name: c }).name).join(', ');
+            if (!w.strong.length && !w.weak.length) return 'Colour wheel: no bonus either way.';
+            return 'Colour wheel' + (E.rules(state).wheelReversed ? ' (reversed now)' : '') + ': '
+                + [w.strong.length ? '+' + w.bonus + ' attack against ' + names(w.strong) : '',
+                    w.weak.length ? names(w.weak) + ' get' + (w.weak.length === 1 ? 's' : '') + ' +' + w.bonus + ' against it' : ''].filter(Boolean).join('; ') + '.';
+        }
+        function activeEffectsNote(cid) {
+            const fx = E.activeEffects(state, cid);
+            return el('div.b-effects', {}, [
+                el('div.b-note-line.b-effects-head', {}, [el('b', { text: 'Active effects' }), fx.length ? null : ': none right now.']),
+                ...fx.map(x => el('div.b-note-line.b-effect.' + (x.amount > 0 ? 'up' : 'down'), { text: effectLine(x) })),
+                el('div.b-note-line.b-effect.wheel', { text: wheelLine(cid) }),
+            ]);
+        }
+        // For screen readers: the changes the card face shows as +/− chips.
+        function effectsLabel(cid) {
+            const fx = E.activeEffects(state, cid);
+            return fx.length ? '. Active effects: ' + fx.map(effectLine).join('; ') : '';
         }
 
         function tacticFace(cid, size) {
@@ -943,7 +985,7 @@
             if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text
                 + (d.colour ? ' ' + tacticKind(d) + '.' + (d.colourReady ? '' : ' ' + needsText(d.colour)) : '');
             return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
-                + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '');
+                + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '') + effectsLabel(cid);
         }
 
         function cardBack(axiom) {
@@ -1537,6 +1579,8 @@
             if (guide) renderCoach();
             renderGuidePointer();
             drawArrowForPreview();
+            // The opponent's attack shows the same fight preview as yours before it lands (#98).
+            if (opponentAttack()) showPredict(ui.preview.cid, ui.preview.target);
             restoreInspect();
             restoreTip();
             turnBanner();
@@ -1956,7 +2000,7 @@
             nodes.buttons = {};
             if (E.winner(state) != null) { ask.textContent = 'The battle is over.'; return; }
             if (ui.busy || decider() !== ME) {
-                ask.textContent = ui.busy ? 'Watch what happens…' : oppName + ' is thinking…';
+                ask.textContent = opponentAttackText() || (ui.busy ? 'Watch what happens…' : oppName + ' is thinking…');
                 ask.classList.add('wait');
             } else if (state.phase === 'draw') {
                 ask.textContent = guide && step() ? 'Do this: ' + step().label + '.' : 'Choose your draw for this turn.';
@@ -2471,11 +2515,19 @@
             const n = guide.steps.length;
             const speaker = (Rift.data.speakers || {}).granny;
             const done = !st;
-            put(box, 
-                el('div.b-coach-head', {}, [
-                    speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
-                    el('div', {}, [el('div.b-coach-count', { text: done ? 'Lesson complete' : 'Step ' + (ui.step + 1) + ' of ' + n }), el('h3', { text: done ? 'Well played!' : st.title })]),
-                ]),
+            const head = el('div.b-coach-head', {}, [
+                speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
+                el('div', {}, [el('div.b-coach-count', { text: done ? 'Lesson complete' : 'Step ' + (ui.step + 1) + ' of ' + n }), el('h3', { text: done ? 'Well played!' : st.title })]),
+            ]);
+            // A question that needs an answer pops up over the table (#103); the panel just points to it.
+            const asking = !done && !ui.busy && E.winner(state) == null && (st.predict || (st.info && !nodes.pw0)) ? st : null;
+            renderQuestion(asking);
+            if (asking) {
+                put(box, head, el('p.b-coach-notice', { role: 'status', text: 'Granny is waiting for your answer.' }));
+                return;
+            }
+            put(box,
+                head,
                 !ui.busy && ui.trapSaid && ui.trapSaid.step === ui.step ? el('p.b-coach-say.warn', { text: ui.trapSaid.text }) : null,
                 ui.busy && !done ? null : el('p.b-coach-text', { text: done ? 'You won by the current rules.' : stepText(st) }),
                 el('p.b-coach-notice', { role: 'status', 'aria-live': 'polite', text: done ? '' : E.winner(state) != null ? 'The match is over.' : ui.busy ? (ui.say || !ui.queue.length ? '' : 'Watch Granny\'s reply…') : st.open && !ui.hinted ? 'Your decision: read Axioms first.' : 'Do this: ' + st.label }),
@@ -2494,14 +2546,68 @@
             );
         }
 
+        // Granny's question as a dialog over the table: her text, the rule it is about, the answers,
+        // feedback for a wrong one, Hear again and Leave. While it is open the table, side panel and
+        // guide panel are inert, so nothing else can move the lesson on; Escape answers nothing.
+        // st: the step that needs an answer, or null to close it.
+        function renderQuestion(st) {
+            const box = dom.question;
+            if (!box) return;
+            const doc = root.document;
+            const active = doc && doc.activeElement;
+            const had = active && box.contains && box.contains(active) && active.dataset ? active.dataset.answer : null;
+            box.innerHTML = '';
+            [dom.arena, dom.side, dom.coach].forEach(n => { n.inert = !!st; });
+            box.hidden = !st;
+            if (st) box.classList.add('show'); else box.classList.remove('show');
+            if (!st) { ui.questionStep = null; return; }
+            const speaker = (Rift.data.speakers || {}).granny;
+            const win = st.predict ? (E.ruleSummary(state).find(r => r[0] === 'Win') || [])[1] : null;
+            const answers = st.predict
+                ? st.predict.map((choice, i) => el('button.btn', { type: 'button', text: choice.label, dataset: { answer: String(i) }, onclick() {
+                    if (choice.correct) infoDone();
+                    else { ui.prediction = { step: ui.step, text: choice.feedback }; render(); }
+                } }))
+                : [el('button.btn.primary.b-coach-ok', { type: 'button', text: st.label, dataset: { answer: 'ok' }, onclick: infoDone })];
+            put(box, el('div.b-question-card.panel', { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'b-question-title', 'aria-describedby': 'b-question-text' }, [
+                el('div.b-coach-head', {}, [
+                    speaker ? Rift.Assets.img(speaker.art, { className: 'b-coach-face', label: speaker.name, alt: '' }) : null,
+                    el('div', {}, [el('div.b-coach-count', { text: (speaker ? speaker.name : 'Granny') + ' asks' }), el('h3#b-question-title', { text: st.title })]),
+                ]),
+                el('p.b-coach-text#b-question-text', { text: stepText(st) }),
+                win ? el('p.b-question-rule', {}, [el('b', { text: 'Win rule now: ' }), win]) : null,
+                ui.prediction && ui.prediction.step === ui.step ? el('p.b-coach-say.warn', { role: 'status', text: ui.prediction.text }) : null,
+                st.predict ? nodes.predictions = el('div.row.wrap.b-predictions', { role: 'group', 'aria-label': 'Predict the outcome' }, answers) : el('div.b-predictions-ok', {}, answers),
+                el('div.b-coach-buttons', {}, [
+                    iconButton('.b-replay', { key: 'replay', name: 'Hear this step again', detail: 'Granny reads this step out loud again.', art: 'ui/btn-replay', svg: CTRL_SVG.replay, onclick: speak }),
+                    iconButton('.b-leave', { key: 'leave', name: 'Leave lesson', detail: 'Stop the lesson. You can start it again later.', art: 'ui/btn-leave', svg: CTRL_SVG.leave, onclick: leaveGuide }),
+                ]),
+            ]));
+            // Focus moves in once per question, then stays on the answer the learner last used.
+            const again = had != null && box.querySelector('[data-answer="' + had + '"]');
+            const target = again || (ui.questionStep !== ui.step ? box.querySelector('[data-answer]') : null);
+            ui.questionStep = ui.step;
+            if (target && target.focus) try { target.focus(); } catch (e) { /* ignore */ }
+        }
+        // After an answer: focus the control Granny points at next, else a usable draw, one of your
+        // own cards (an open step has no pointer yet) or End turn.
+        function focusBoard() {
+            const q = sel => (screen.querySelector ? screen.querySelector(sel) : null);
+            const usable = ':not([disabled]):not([aria-disabled="true"])';
+            const next = q('.guide-focus') || q('.b-draw-btn' + usable) || q('.my-board button' + usable) || q('.b-hand button' + usable) || q('.b-end' + usable);
+            if (next && next.focus) try { next.focus(); } catch (e) { /* ignore */ }
+        }
+
         // An explain-only lesson step (step.info): Got it moves on, with no move made.
         function infoDone() {
             const st = step();
             if (!st || !st.info || ui.busy) return;
+            const asked = ui.questionStep === ui.step;
             ui.prediction = null;
             ui.step += 1;
             startHintClock();
             render();
+            if (asked) focusBoard();
             speak();
         }
 
@@ -2926,10 +3032,13 @@
         function predictLines(att, target) {
             const pv = E.fightPreview(state, att, target);
             if (pv.hero) {
-                const h = state.players[+target[1]];
+                const owner = +target[1], h = state.players[owner];
                 const rev = E.rules(state).reverseHearts;
-                return { target: ['−' + pv.damage + ' heart' + (pv.damage === 1 ? '' : 's'), h.hearts - pv.damage <= 0 ? (rev ? '0 hearts: ' + oppName + ' wins!' : '0 hearts: you win!') : pv.hearts + ' left'].concat(
-                    rev && target === 'h' + OPP ? ['⚠ The Last Shall Be First: this helps ' + oppName + '!'] : []),
+                // At 0 hearts the attacker's side wins (or, reversed, the hero's own side).
+                const winner = rev ? owner : state.cards[att].controller;
+                const wins = winner === ME ? '0 hearts: you win!' : '0 hearts: ' + oppName + ' wins!';
+                return { target: ['−' + pv.damage + ' heart' + (pv.damage === 1 ? '' : 's'), h.hearts - pv.damage <= 0 ? wins : pv.hearts + ' left'].concat(
+                    rev && owner !== state.cards[att].controller ? ['⚠ The Last Shall Be First: this helps ' + (owner === ME ? 'you' : oppName) + '!'] : []),
                     attacker: ['Deals ' + pv.damage], targetDies: rev };
             }
             const colourPart = (cid, foe) => (E.attackParts(state, cid, foe).parts.find(x => x.source === 'colour') || {}).amount || 0;
@@ -2958,6 +3067,19 @@
             }
             t.appendChild(predictBadge(p.target, p.targetDies || /you win/.test(p.target[1] || '')));
             a.appendChild(predictBadge(p.attacker, p.attackerDies));
+        }
+        // The opponent's attack waiting on its arrow (ui.preview), or null.
+        function opponentAttack() {
+            const pv = ui.preview;
+            return pv && pv.by !== ME && pv.action && pv.action.type === 'attack' && state.cards[pv.cid] ? pv : null;
+        }
+        // "Syllo attacks Kim with Mr. Beansprout: deals 2 (+1 colour)." for the status line.
+        function opponentAttackText() {
+            const pv = opponentAttack();
+            if (!pv) return '';
+            const who = oppName + ' attacks ' + targetName(pv.target) + ' with ' + name(pv.cid);
+            if ((state.players[ME].armed || []).length) return who + '. A reveal may change this attack.';
+            try { return who + ': ' + predictLines(pv.cid, pv.target).attacker[0].replace(/^Deals/, 'deals') + '.'; } catch (e) { return who + '.'; }
         }
         function clearPredict() {
             const q = screen.querySelectorAll ? screen.querySelectorAll('.b-predict') : [];
