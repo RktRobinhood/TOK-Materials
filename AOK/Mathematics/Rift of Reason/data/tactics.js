@@ -78,17 +78,17 @@
             run(api, p, target) { api.emit({ t: 'tactic', text: 'Big claims need big evidence: ' + api.name(target) + ' cannot stand.' }); api.defeat(target, 'tactic'); },
         },
         clockwork: {
-            short: 'Move Fate 1 step',
+            short: 'Move Fate 1 round',
             name: 'Clockwork', cost: 1,
-            text: 'Move the Fate track 1 space closer or 1 space further away.',
+            text: 'Move the Fate track 1 round closer or 1 round further away.',
             flavour: 'Time in mathematics is whatever the axioms say it is.',
             usable: s => !!s.options.timeline,
             run(api, p) {
                 api.ask({ player: p, kind: 'option', auto: false, options: ['forward', 'rewind'],
-                    labels: { forward: 'Fate 1 space closer', rewind: 'Fate 1 space further away' },
+                    labels: { forward: 'Fate 1 round closer', rewind: 'Fate 1 round further away' },
                     prompt: 'Which way do you turn the clock?', source: { type: 'tactic', id: 'clockwork' } });
             },
-            choose(api, p, choice) { api.shiftFate(choice === 'forward' ? 1 : -1); api.emit({ t: 'tactic', text: 'Clockwork: Fate moves 1 space ' + (choice === 'forward' ? 'closer.' : 'further away.') }); },
+            choose(api, p, choice) { api.shiftFate(choice === 'forward' ? 1 : -1); api.emit({ t: 'tactic', text: 'Clockwork: Fate moves 1 round ' + (choice === 'forward' ? 'closer.' : 'further away.') }); },
         },
         'look-it-up': {
             short: 'Take a rule card',
@@ -367,14 +367,14 @@
             choose(api, p, cid) { api.fromDiscard(cid); api.emit({ t: 'tactic', text: 'Remember When: ' + api.cardName(cid) + ' returns to your hand.' }); },
         },
         nostalgia: {
-            short: 'Fate 2 steps later; heal 3 ❤',
+            short: 'Fate 2 rounds later; heal 3 ❤',
             name: 'Nostalgia', cost: 2, colour: 'memory', rarity: 'uncommon',
-            text: 'Move the Fate track 2 spaces further away. Restore 3 hearts.',
+            text: 'Move the Fate track 2 rounds further away. Restore 3 hearts.',
             flavour: 'The good old days were never quite this good.',
             usable: (s, p) => s.players[p].hearts < s.players[p].maxHearts || (!!s.options.timeline && s.fate.until < s.options.fateMax),
             run(api, p) {
                 api.healHero(p, 3);
-                api.emit({ t: 'tactic', text: 'Nostalgia: restore 3 hearts. Fate moves 2 spaces further away.' });
+                api.emit({ t: 'tactic', text: 'Nostalgia: restore 3 hearts. Fate moves 2 rounds further away.' });
                 api.shiftFate(-2);
             },
         },

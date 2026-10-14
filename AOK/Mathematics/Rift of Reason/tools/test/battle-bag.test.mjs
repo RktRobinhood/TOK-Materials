@@ -180,20 +180,28 @@ test('Great Charm: any enemy creature can\'t attack on its next turn', () => {
     assert.ok(!E.canAttack(s, 'p1c0'));
 });
 
-test('Anchor: the Fate track does not move at the end of this turn (then it moves again)', () => {
+test('Anchor: the Fate track does not move at the end of this round (then it moves again)', () => {
     let s = bagged(['anchor', 'lure'], { options: { timeline: true, fateStart: 3 } });
     assert.equal(s.fate.until, 3);
-    assert.equal(E.timeline(s)[0].turns, 3);
+    assert.equal(E.timeline(s)[0].rounds, 3);
+    assert.equal(E.timeline(s)[0].turns, 6);
     s = act(s, { type: 'item', id: 'anchor' });
     assert.equal(s.players[0].energy, 10, 'free');
-    assert.equal(E.timeline(s)[0].turns, 4, 'the lane counts the held turn');
+    assert.equal(E.timeline(s)[0].rounds, 4, 'the lane counts the held round');
+    assert.equal(E.timeline(s)[0].turns, 8);
+    assert.ok(E.timeline(s)[0].held);
     s = act(s, { type: 'end' });
-    assert.equal(s.fate.until, 3, 'held');
-    assert.ok(s.lastEvents.some(e => e.t === 'anchor'));
-    assert.equal(E.timeline(s)[0].turns, 3);
+    assert.equal(s.fate.until, 3, 'the first player\'s End turn never moves it');
+    assert.ok(!s.lastEvents.some(e => e.t === 'anchor'));
+    assert.equal(E.timeline(s)[0].turns, 7, 'still held: the round is not over');
     s = act(s, { type: 'draw', choice: 'deck' });
     s = act(s, { type: 'end' });
-    assert.equal(s.fate.until, 2, 'the next End turn moves it again');
+    assert.equal(s.fate.until, 3, 'held at the end of the round');
+    assert.ok(s.lastEvents.some(e => e.t === 'anchor'));
+    assert.ok(!E.timeline(s)[0].held);
+    assert.equal(E.timeline(s)[0].turns, 6);
+    for (let k = 0; k < 2; k++) { s = act(s, { type: 'draw', choice: 'deck' }); s = act(s, { type: 'end' }); }
+    assert.equal(s.fate.until, 2, 'the next round moves it again');
     // No Fate track: not offered.
     const off = bagged(['anchor']);
     assert.equal(items(off).length, 0);

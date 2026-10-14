@@ -311,16 +311,25 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     assert.equal(t.root.querySelectorAll('.b-fate-track > .b-fate-reel > .b-fs').length, 7);
     assert.equal(t.root.querySelectorAll('.b-fate-reel .b-fs.now').length, 1);
     assert.ok($('.b-fate-track > .b-fate-now'));
-    const turns = t.handle.state.fate.until;
-    assert.match($('.b-fate-sum').textContent, new RegExp('^Upcoming · New rule in ' + turns + ' turnsNot active yet: .+ · '));
+    // Fate counts full rounds: you go first, so each round ends after the opponent's turn.
+    const rounds = t.handle.state.fate.until;
+    assert.equal(rounds, 3);
+    assert.equal($('.b-fate-label span').textContent, 'rounds');
+    assert.match($('.b-fate-sum').textContent, new RegExp('^Upcoming · New rule in ' + rounds + ' roundsNot active yet: .+ · after their turn$'));
     assert.equal($('.b-fate-label').dataset.tip, 'Fate track');
-    assert.match($('.b-fate-label').dataset.tipDetail, /Each End turn moves every event 1 space closer/);
-    // The next event (further than 3 spaces) waits at the edge and says when; hovering it explains it.
-    const far = $('.b-fev.flip');
+    assert.match($('.b-fate-label').dataset.tipDetail, /One space is one round. After both players have had a turn, every event moves 1 space closer/);
+    // The flip sits on the round it starts; its card is set aside, so hovering names it for certain.
+    const flip = $('.b-fev.flip');
+    assert.ok(!flip.classList.contains('far'));
+    assert.equal(flip.parentNode.dataset.k, String(rounds));
+    const kept = t.Rift.data.axioms[t.handle.state.fate.next];
+    flip.click();   // (the fake DOM bubbles pointerenter into the round's own tooltip, so click)
+    assert.match(t.$('.b-inspect').textContent, new RegExp(kept.name + '.*Fate has set this card aside'));
+    flip.dispatchEvent(mouse({ type: 'pointerleave' }));
+    // The next event further than 3 rounds (the reset) waits at the edge and says when.
+    const far = $('.b-fev.reset');
     assert.ok(far.classList.contains('far'));
-    assert.equal(far.querySelector('.b-fev-label').textContent, 'New rule · in ' + turns);
-    assert.match(hover(t, '.b-fev.flip'), /top card of the shared axiom deck/);
-    far.dispatchEvent(mouse({ type: 'pointerleave' }));
+    assert.equal(far.querySelector('.b-fev-label').textContent, 'Reset · in ' + (rounds + t.handle.state.options.fateGap));
     // "Axioms": picture tiles for the core rules, all basic now; no keyword list in the panel.
     assert.equal($('.b-rules').getAttribute('aria-label'), 'Axioms');
     assert.equal($('.b-rules-head strong').textContent, 'Axioms');
@@ -597,48 +606,53 @@ test('Fate draw buttons (only with timeDraws) show the new count in short words'
     const fwd = t.$('.b-draw-btn[data-choice="forward"]'), back = t.$('.b-draw-btn[data-choice="rewind"]');
     assert.equal(fwd.dataset.tip, 'Fate sooner');
     assert.equal(back.dataset.tip, 'Fate later');
-    assert.equal(fwd.querySelector('.b-ibtn-badge').textContent, 'in 5', 'one space sooner');
-    assert.equal(back.querySelector('.b-ibtn-badge').textContent, 'in 7', 'one space later');
-    assert.match(fwd.dataset.tipDetail, /1 turn sooner\. Rule card in 5\./);
-    assert.match(back.dataset.tipDetail, /1 turn later\. Rule card in 7\./);
+    assert.equal(fwd.querySelector('.b-ibtn-badge').textContent, 'in 2', 'one round sooner');
+    assert.equal(back.querySelector('.b-ibtn-badge').textContent, 'in 4', 'one round later');
+    assert.match(fwd.dataset.tipDetail, /1 round sooner\. Rule card in 2 rounds\./);
+    assert.match(back.dataset.tipDetail, /1 round later\. Rule card in 4 rounds\./);
     const labels = t.root.querySelectorAll('.b-draw-label').map(x => x.textContent);
     assert.ok(labels.includes('Fate sooner') && labels.includes('Fate later'), labels.join(', '));
     // Pointing at a time draw previews it on the Fate track.
     fwd.dispatchEvent(mouse({ type: 'pointerenter' }));
-    assert.match(t.$('.b-fate-sum.preview').textContent, /in 5 turns/);
+    assert.match(t.$('.b-fate-sum.preview').textContent, /in 2 rounds/);
     fwd.dispatchEvent(mouse({ type: 'pointerleave' }));
     assert.equal(t.$('.b-fate-sum.preview'), null);
     fwd.click();
-    assert.equal(t.handle.state.fate.until, 5);
+    assert.equal(t.handle.state.fate.until, 2);
     t.handle.destroy();
     const timeDraws = s => { s.options.timeDraws = true; };
     const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
     assert.match(r.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset \(no change now\)\./);
-    assert.match(r.$('.b-fate-sum').textContent, /^Upcoming · Reset in 5 turnsNot active yet: all rules will return to basic · /);
+    assert.match(r.$('.b-fate-sum').textContent, /^Upcoming · Reset in 5 roundsNot active yet: all rules will return to basic · after their turn$/);
     r.handle.destroy();
     const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
-    assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 4\./);
+    assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 4 rounds\./);
     assert.equal(c.$('.b-draw-btn[data-choice="forward"] .b-ibtn-badge').textContent, 'in 4');
     c.handle.destroy();
 });
 
-test('Fate inspection explains timing, turn owner and conditional flips, and refreshes after a draw', () => {
+test('Fate inspection explains timing in rounds and the set-aside flip, which a shared draw cannot replace', () => {
     const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => {
         s.fate.until = 2;
-        s.axioms.deck = ['thrift', 'luxury'];
+        s.fate.next = 'thrift';
+        s.axioms.deck = ['luxury', 'arrival'];
     });
     let marker = t.$('.b-fev.flip');
     marker.focus();
     marker.dispatchEvent({ type: 'keydown', key: 'Enter', preventDefault() {} });
-    assert.match(t.$('.b-inspect').textContent, /Free flip in 2 turns, as your turn starts/);
-    assert.match(marker.getAttribute('aria-label'), /If someone takes it first/);
+    assert.match(t.$('.b-inspect').textContent, /Free flip in 2 rounds, at the end of round 2, after Dummy's turn/);
+    assert.match(marker.getAttribute('aria-label'), /Fate has set this card aside: no draw can take it/);
     assert.match(t.$('.b-inspect').textContent, /It replaces:/);
     assert.match(t.$('.b-inspect').textContent, new RegExp(t.Rift.data.axioms.thrift.name));
+    // The rule card draw takes the deck's top card (Luxury), never the set-aside flip.
+    assert.match(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tipDetail, new RegExp('You take ' + t.Rift.data.axioms.luxury.name));
     t.$('.b-draw-btn[data-choice="axiom"]').click();
+    assert.deepEqual([...t.handle.state.players[0].axHand], ['luxury']);
     marker = t.$('.b-fev.flip');
     assert.equal(t.g.document.activeElement, marker, 'focused event survives a repaint');
     assert.ok(t.$('.b-inspect').classList.contains('show'));
-    assert.match(t.$('.b-inspect').textContent, new RegExp(t.Rift.data.axioms.luxury.name));
+    assert.match(t.$('.b-inspect').textContent, new RegExp(t.Rift.data.axioms.thrift.name), 'still the announced card');
+    assert.ok(!t.$('.b-fate-sum').classList.contains('bent'), 'nothing about Fate changed');
     const until = t.handle.state.fate.until;
     marker.dispatchEvent({ type: 'keydown', key: ' ', preventDefault() {} });
     marker.click();
@@ -646,14 +660,14 @@ test('Fate inspection explains timing, turn owner and conditional flips, and ref
     t.handle.destroy();
 });
 
-test('Fate inspection distinguishes reset, unknown reshuffle and empty piles', () => {
+test('Fate inspection distinguishes reset, a flip still waiting for a card and empty piles', () => {
     for (const [events, discard, pattern] of [
-        [1, [], /Reset in 1 turn, as Dummy's turn starts.*All axioms return to the basic rules/],
-        [0, ['thrift', 'luxury'], /shared discard is shuffled.*not known yet/],
+        [1, [], /Reset at the end of this round, after Dummy's turn.*All axioms return to the basic rules/],
+        [0, ['thrift', 'luxury'], /No rule card is set aside yet\. Fate sets one aside from the shared deck when the next turn starts/],
         [0, [], /No rule card is left to flip.*Current axioms stay in play/],
     ]) {
         const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => {
-            s.fate.until = 1; s.fate.events = events; s.axioms.deck = []; s.axioms.discard = discard;
+            s.fate.until = 1; s.fate.events = events; s.fate.next = null; s.axioms.deck = []; s.axioms.discard = discard;
         });
         const marker = t.$('.b-fev');
         marker.click();
@@ -899,7 +913,7 @@ test('a dim draw button says why in its tooltip (hand full)', () => {
     t.handle.destroy();
 });
 
-test('the Fate reel slides one space per turn, step by step, and a repaint mid-slide carries on from where it was', () => {
+test('the Fate reel slides one space per round, step by step, and a repaint mid-slide carries on from where it was', () => {
     const anims = [];
     let clock = 1000;
     const t = setup(practice, { before(g) {
@@ -915,21 +929,73 @@ test('the Fate reel slides one space per turn, step by step, and a repaint mid-s
     t.$('.b-draw-btn[data-choice="deck"]').click();
     assert.equal(reelAnims().length, 0, 'no slide while the turn is the same');
     t.$('.b-end').click();
+    assert.equal(reelAnims().length, 0, 'the first player\'s End turn does not move Fate');
+    // The opponent's End turn closes the round: Fate moves once and the reel slides one space.
+    for (let n = 0; n < 60 && t.g.timers.length && t.handle.state.round === 1; n++) t.g.timers.shift().fn();
+    assert.equal(t.handle.state.round, 2);
+    assert.equal(t.handle.state.fate.until, 2, 'exactly one advance for the round');
     const first = reelAnims()[0];
-    assert.ok(first, 'End turn slides the reel');
+    assert.ok(first, 'the round end slides the reel');
     assert.equal(first.timing.duration, 700, 'one space, slow enough to follow');
     assert.equal(first.currentTime, 0);
     assert.match(first.frames[0].transform, /^translateX\(14\.28\d*%\)$/, 'it starts one space to the right');
     assert.equal(first.frames.at(-1).transform, 'translateX(0%)');
     assert.equal(first.frames[0].easing, 'ease-in-out');
-    // The opponent acts 300 ms in: the screen repaints, and the new reel picks up the same slide.
+    // Something happens 300 ms in: the screen repaints, and the new reel picks up the same slide.
     clock += 300;
     const before = reelAnims().length;
     const reel = t.$('.b-fate-reel');
     for (let n = 0; n < 20 && t.g.timers.length && t.$('.b-fate-reel') === reel; n++) t.g.timers.shift().fn();
+    if (t.$('.b-fate-reel') === reel) t.$('.b-draw-btn[data-choice="deck"]').click();
     assert.notEqual(t.$('.b-fate-reel'), reel, 'the screen repainted the reel');
     const later = reelAnims().slice(before);
     assert.ok(later.length, 'the repainted reel is animated too');
     assert.ok(later.every(a => a.timing.duration === 700 && a.currentTime === 300), 'it carries on, not from the start');
+    t.handle.destroy();
+});
+
+test('Fate wording follows the round for either first player; Calm motion steps the reel, and a slide cut short by the next round carries on', () => {
+    for (const first of [0, 1]) {
+        const t = setup(Object.assign({}, practice, { battleOptions: Object.assign({}, practice.battleOptions, { timeline: true, first }) }));
+        t.g.flush();
+        assert.equal(t.handle.state.active, 0, 'my turn');
+        assert.equal(t.$('.b-fs.now').dataset.tip, 'Round ' + t.handle.state.round);
+        assert.match(t.$('.b-fs.now').dataset.tipDetail, first === 0 ? /your turn, then Dummy's/ : /Dummy's turn, then yours/);
+        t.$('.b-draw-btn[data-choice="deck"]').click();
+        // Going first, my End turn does not move Fate; going second, it closes the round.
+        assert.match(t.$('.b-end').dataset.tipDetail, first === 0 ? /Fate moves after Dummy's turn\./ : /The round ends: the Fate track moves 1 space\./);
+        assert.match(t.$('.b-fate-sum').textContent, first === 0 ? /after their turn$/ : /after your turn$/);
+        const until = t.handle.state.fate.until;
+        t.$('.b-end').click();
+        assert.equal(t.handle.state.fate.until, first === 0 ? until : until - 1);
+        t.handle.destroy();
+    }
+    const anims = [];
+    let clock = 1000;
+    const t = setup(practice, { calm: true, before(g) {
+        g.ctx.performance = { now: () => clock };
+        Object.getPrototypeOf(g.document.createElement('div')).animate = function (frames, timing) {
+            const a = { el: this, frames, timing, currentTime: null };
+            anims.push(a);
+            return a;
+        };
+    } });
+    const reelAnims = () => anims.filter(a => a.el.classList.contains('b-fate-reel'));
+    const round = () => {
+        const r = t.handle.state.round;
+        t.$('.b-draw-btn[data-choice="deck"]').click();
+        t.$('.b-end').click();
+        for (let n = 0; n < 60 && t.g.timers.length && t.handle.state.round === r; n++) t.g.timers.shift().fn();
+        assert.equal(t.handle.state.round, r + 1);
+    };
+    round();
+    const first = reelAnims().at(-1);
+    assert.equal(first.frames[0].easing, 'steps(1, end)', 'Calm motion: a step, no slide');
+    // The next round ends 300 ms later, before the first slide is over: one longer slide picks up both.
+    clock += 300;
+    round();
+    const both = reelAnims().at(-1);
+    assert.equal(both.timing.duration, 2 * 700, 'the space still to go and the new one');
+    assert.equal(both.currentTime, 0);
     t.handle.destroy();
 });

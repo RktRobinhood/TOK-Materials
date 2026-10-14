@@ -14,7 +14,8 @@
  *   and 'end' is just another action. Pending questions (cards, colours, axioms,
  *   true/false, forward/rewind) are answered the same way. The draw choice is scored
  *   without peeking at the deck: a card is worth a flat amount, the top shared axiom
- *   is public (the Fate track shows it), and Fate moves are simulated.
+ *   is public (the rule card draw names it), and Fate moves are simulated. Fate's next
+ *   flip is set aside (public) and counts full rounds; its weight fades per End turn.
  *
  *   evaluate(): hearts (each heart is worth more when you are low; the sign flips
  *   under The Last Shall Be First), creatures (attack, current health, keywords,
@@ -386,9 +387,11 @@
     function nextEventState(s) {
         if (!s.options.timeline) return null;
         if (s.fate.events % 2 === 1) return withRules(s, {});
-        const top = s.axioms.deck[0];
-        return top ? withAxiom(s, top) : null;
+        const id = E().fateNext(s);   // the rule card Fate has set aside (no draw can take it)
+        return id ? withAxiom(s, id) : null;
     }
+    // End turns until the next Fate event (Fate counts rounds; the weight still fades per End turn).
+    function fateTurns(s) { const p = E().fatePreview(s, 0); return p ? p.turns : 0; }
 
     // Base score plus fights and rules (used to value rule changes).
     function staticDeep(s, me, ctx) {
@@ -437,7 +440,7 @@
         if (!o.deep || s.winner != null) return evaluateBase(s, me, ctx);
         let v = staticDeep(s, me, ctx);
         const next = nextEventState(s);
-        if (next) v += Math.pow(0.85, s.fate.until) * (staticDeep(next, me, ctx) - staticDeep(s, me, ctx));
+        if (next) v += Math.pow(0.85, fateTurns(s)) * (staticDeep(next, me, ctx) - staticDeep(s, me, ctx));
         return v;
     }
 
@@ -602,8 +605,7 @@
                     const vals = axiomValues(s, me, ctx, [top]);
                     const own = Math.max(0, vals[top]);
                     score = AXIOM_CARD + own * 0.6;
-                    // Taking it also stops Fate flipping it for free.
-                    if (s.options.timeline && s.fate.events % 2 === 0) score += Math.max(0, -vals[top]) * Math.pow(0.85, s.fate.until) * 0.8;
+                    // Taking it no longer stops a Fate flip: Fate sets its next card aside, out of the deck.
                 } else score = AXIOM_CARD + 0.3;
                 if (P.axHand.length >= 2) score -= 0.6 * (P.axHand.length - 1);
             } else if (a.choice === 'forward' || a.choice === 'rewind') {

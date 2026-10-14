@@ -46,7 +46,7 @@ Each colour gets three tactics with a clear personality: a **common**, an **unco
 | Imagination | | uncommon | **Imagine Otherwise** (2) | Swap a creature's attack and health. Draw a card. |
 | Imagination | | rare | **Dream Big** (4) | A friendly creature gets +3/+3. (Stands in for *Thought Experiment*, two 2/2 Idea tokens, which needs token support in the engine first.) |
 | Memory | the past returns | common | **Remember When** (1) | Return another tactic (not another Remember When) from your discard pile to your hand. Restore 2 hearts. |
-| Memory | | uncommon | **Nostalgia** (2) | Move the Fate track 2 spaces further away. Restore 3 hearts. |
+| Memory | | uncommon | **Nostalgia** (2) | Move the Fate track 2 rounds further away. Restore 3 hearts. |
 | Memory | | rare | **Total Recall** (4) | Return up to two creatures from your discard pile to your hand. Restore 3 hearts. |
 
 *Remember When* was called *Déjà Vu* in the first plan; it was renamed because Keanu Meows' Last Word ability is already called Déjà Vu. Art ids: `tactic/<id>` (`tactic/qed`, `tactic/wave-of-feeling`, `tactic/clear-view`, `tactic/persuasion`, `tactic/dream-big`, `tactic/total-recall`, …), all optional. Simulation results: `reviews/card-arena-balance-2026-10-07.md` (section "Colour tactics").
@@ -72,7 +72,7 @@ The world items so far mostly help catching. In battle they get a second functio
 | Lure Lantern | rarer creatures for 3 visits | Draw a card from your deck. | 1 |
 | Catch Charm | catching | An enemy creature with 2 or less health can't attack on its next turn. | 1 |
 | Great Charm | catching (+20%) | An enemy creature can't attack on its next turn. | 1 |
-| Anchor | stops a warp curse | The Fate track doesn't move at the end of this turn. | 0 |
+| Anchor | stops a warp curse | The Fate track doesn't move at the end of this round. | 0 |
 
 As built (7 Oct): like rule and tactic cards, an item is not offered when it would do nothing (Tonic at full hearts, Lure Lantern with an empty deck or full hand, Ward on a creature that already has Shield, Mending on an unhurt one, a Charm on an enemy already held, Anchor without a Fate track); the Bag tray shows it dimmed with the reason. You bring one of each kind (two different items). The practice bag is for Collection practice; Syllo's story match and Granny's lesson have no bag. A Ward or Anchor used in the battle no longer counts for the after-battle check.
 

@@ -146,8 +146,8 @@
         },
         'next-year': {
             name: 'Next Year',
-            text: 'Activate (1 energy): rewind the Fate track 2 spaces.',
-            activate: { cost: 1, usable: s => !!s.options.timeline, run(api, card) { api.shiftFate(-2); api.emit({ t: 'ability', cid: card.cid, text: 'Next Year: the Fate track moves 2 spaces back.' }); } },
+            text: 'Activate (1 energy): rewind the Fate track 2 rounds.',
+            activate: { cost: 1, usable: s => !!s.options.timeline, run(api, card) { api.shiftFate(-2); api.emit({ t: 'ability', cid: card.cid, text: 'Next Year: the Fate track moves 2 rounds back.' }); } },
         },
         metaverse: Object.assign({ name: 'Metaverse', text: 'Last Word: return it to your hand (once per match).' }, returnOnce),
         predict: {
@@ -289,8 +289,8 @@
         },
         filter: {
             name: 'Filter',
-            text: 'Activate (1 energy): move the Fate track 2 spaces closer.',
-            activate: { cost: 1, usable: s => !!s.options.timeline, run(api, card) { api.shiftFate(2); api.emit({ t: 'ability', cid: card.cid, text: 'Filter: the Fate track moves 2 spaces closer.' }); } },
+            text: 'Activate (1 energy): move the Fate track 2 rounds closer.',
+            activate: { cost: 1, usable: s => !!s.options.timeline, run(api, card) { api.shiftFate(2); api.emit({ t: 'ability', cid: card.cid, text: 'Filter: the Fate track moves 2 rounds closer.' }); } },
         },
         vision: {
             name: 'Vision',

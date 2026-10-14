@@ -77,7 +77,8 @@
         hearts: 12, energyCap: 10, handLimit: 10, boardLimit: 7,
         deckSize: 20, minCreatures: 6, maxCreatures: 14,
         openHand: [2, 4], openAxioms: 1, spark: true,
-        timeline: true, timeDraws: false, fateStart: 6, fateGap: 6, fateMax: 12,
+        // Fate counts full ROUNDS (both players' turns), not single turns: see "Fate" below shiftFate.
+        timeline: true, timeDraws: false, fateStart: 3, fateGap: 3, fateMax: 6,
         maxTurns: 60, first: 'random', shuffle: true, shuffleAxioms: true, mode: 'practice',
     };
     const RULE_DEFAULTS = {
@@ -507,19 +508,55 @@
         ];
     }
 
+    // The next two Fate events, in full rounds (see "Fate" below shiftFate):
+    //   rounds  round ends until it happens (1 = at the end of this round)
+    //   turns   End turns until it happens (the same moment counted in turns)
+    //   turn / round  the turn and round that start with it active
+    //   after   the player whose End turn closes the round (the second player)
+    //   held    the Anchor holds this round's end, so everything is one round later
+    //   type    'flip' | 'reset';  id  the next flip's rule card (set aside, see fateNext) or null
     function timeline(s) {
         if (!s.options.timeline) return [];
-        const hold = s.fate.anchorTurn === s.turn ? 1 : 0;   // Anchor: this End turn does not count
+        const hold = fateHeld(s) ? 1 : 0, half = s.roundTurns[1 - s.active] ? 1 : 0, after = roundCloser(s);
         return [0, 1].map(offset => {
-            const turns = s.fate.until + hold + offset * s.options.fateGap;
+            const rounds = s.fate.until + hold + offset * s.options.fateGap;
+            const turns = 2 * rounds - half;
             const reset = (s.fate.events + offset) % 2 === 1;
-            const top = s.axioms.deck[0] || s.axioms.discard[0];
+            const id = reset || offset ? null : fateNext(s);
+            const ax = id && axiomDefs()[id];
             return {
-                turns, turn: s.turn + turns, type: reset ? 'reset' : 'flip',
+                rounds, turns, turn: s.turn + turns, round: s.round + rounds, after, held: !!hold, type: reset ? 'reset' : 'flip', id,
                 text: reset ? 'Reset all rules to the basics' : offset ? 'Free flip from the shared deck'
-                    : s.axioms.deck.length ? 'Free flip: ' + axiomDefs()[s.axioms.deck[0]].name : top ? 'Free flip from the reshuffled deck' : 'No rule left to flip',
+                    : ax ? 'Free flip: ' + ax.name : 'No rule left to flip',
             };
         });
+    }
+
+    // Fate in full rounds. Ordinary movement happens once per round: the first player's turn, the
+    // second player's turn, then exactly one advance (endTurn). s.fate.until counts the round ends
+    // left before the next event; events alternate: a free flip (events even), then a reset (odd).
+    // Every explicit time ability (Clockwork, Filter, Next Year, Nostalgia, Hold That Thought and the
+    // optional time draws) moves the same unit: 1 space = 1 round. The Anchor item holds one round end
+    // (s.fate.anchorRound). The next flip's rule card is set aside when that flip is announced
+    // (s.fate.next): it leaves the shared deck, so no draw can take it, change it or draw it twice,
+    // and it is in exactly one place until it turns over. null: no rule card was left then; Fate
+    // tries again at each turn start (a public 'fate-next' event says so). An older state without
+    // `next` turns over the deck's top card, as before.
+    const fateHeld = s => s.fate.anchorRound != null && s.fate.anchorRound === s.round;
+    // The player whose End turn closes the current round: the second player of the match.
+    const roundCloser = s => (s.roundTurns[1 - s.active] ? s.active : 1 - s.active);
+    function fateNext(s) {
+        if (s.fate.next !== undefined) return s.fate.next;
+        return s.axioms.deck[0] || null;
+    }
+    // Where the next event would be after shiftFate(spaces), without moving anything (for previews):
+    // { rounds, turns, now } (now: it would happen at once).
+    function fatePreview(s, spaces) {
+        if (!s.options.timeline) return null;
+        const until = Math.max(0, Math.min(s.options.fateMax, s.fate.until - (spaces || 0)));
+        if (!until) return { rounds: 0, turns: 0, now: true };
+        const rounds = until + (fateHeld(s) ? 1 : 0);
+        return { rounds, turns: 2 * rounds - (s.roundTurns[1 - s.active] ? 1 : 0), now: false };
     }
 
     // ---- legal actions ------------------------------------------------------------------
@@ -671,17 +708,19 @@
     function createBattle(config) {
         const cfg = config || {};
         const opts = Object.assign({}, DEFAULTS, cfg.options || {});
+        opts.fateMax = Math.max(opts.fateMax, opts.fateStart, opts.fateGap);   // a scheduled event always fits the track
         const seed = String(cfg.seed == null ? 'battle' : cfg.seed);
         const rng = Rift.makeRng('battle:' + seed + ':0');
         const players = cfg.players || [];
         if (players.length !== 2) throw new Error('A battle needs exactly two players.');
 
         const s = {
-            v: 3, seed, step: 0, turn: 1, round: 0, roundTurns: [false, false],
+            v: 4, seed, step: 0, turn: 1, round: 0, roundTurns: [false, false],   // v4: Fate counts rounds
             active: 0, phase: 'setup', pending: null,
             players: [], cards: {}, reactions: [], completedPlays: [], factSequence: 0, armSequence: 0, reactionCount: 0, attackIntent: null,
             axioms: { deck: [], discard: [], active: {}, flips: 0 },
-            fate: { until: opts.fateStart, events: 0 },
+            // until counts ROUNDS; next: the flip's set-aside rule card (filled by the first startTurn).
+            fate: { until: Math.max(1, opts.fateStart), events: 0, next: null },
             winner: null, endReason: null, options: opts,
             log: null, lastEvents: [],
         };
@@ -1075,6 +1114,7 @@
             setWinner(G, 1 - p, 'cannot-act');
             return;
         }
+        announceFlip(G);   // the first turn, or a flip still waiting for a rule card
         P.capacity = Math.max(1, Math.min(s.options.energyCap, P.capacity + r.growth));   // growth may be 0 or −1
         P.energy = P.capacity + (P.consumables['extra-energy'] || 0);
         P.attacksThisTurn = 0;
@@ -1116,7 +1156,7 @@
         if (choice === 'deck') { for (let i = 0; i < n; i++) draw(G, p); }
         else if (choice === 'axiom') { for (let i = 0; i < n; i++) drawAxiom(G, p); }
         else if (choice === 'forward' || choice === 'rewind') {
-            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw. Fate moves 1 space ' + (choice === 'forward' ? 'closer.' : 'away.') });
+            emit(G, { t: 'time', player: p, text: says(s, p, 'skips') + ' the draw. Fate moves 1 round ' + (choice === 'forward' ? 'closer.' : 'away.') });
             shiftFate(G, choice === 'forward' ? 1 : -1);
         }
         if (s.winner == null) { s.phase = 'main'; cleanup(G); }
@@ -1143,12 +1183,19 @@
         P.turnsTaken += 1;
         s.roundTurns[p] = true;
         if (s.winner != null) return;
-        const anchored = s.fate.anchorTurn === s.turn;   // the Anchor item was used this turn
         s.turn += 1;
         s.active = 1 - p;
-        if (anchored) emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move.' });
-        else shiftFate(G, 1);
+        if (s.roundTurns[0] && s.roundTurns[1]) endRound(G, p);   // the second player's End turn
         if (s.winner == null) startTurn(G);
+    }
+
+    // Both players have had their turn: exactly one ordinary Fate advance (none while the Anchor holds).
+    function endRound(G, p) {
+        const s = G.s;
+        if (!s.options.timeline) return;
+        if (fateHeld(s)) { emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move this round.' }); return; }
+        emit(G, { t: 'fate-move', text: 'Round ' + s.round + ' ends: Fate moves 1 space.' });
+        shiftFate(G, 1);
     }
 
     function endRules(G, p) {
@@ -1174,23 +1221,38 @@
         }
     }
 
-    // Positive shifts move the next event closer; negative shifts delay it.
-    function shiftFate(G, turns) {
+    // Positive shifts move the next event closer; negative shifts delay it. One space = one round.
+    function shiftFate(G, spaces) {
         const s = G.s;
         if (!s.options.timeline) return;
-        s.fate.until = Math.max(0, Math.min(s.options.fateMax, s.fate.until - turns));
+        s.fate.until = Math.max(0, Math.min(s.options.fateMax, s.fate.until - spaces));
         if (s.fate.until) return;
         if (s.fate.events % 2 === 1) {
             s.axioms.discard.push(...Object.values(s.axioms.active));
             s.axioms.active = {};
             emit(G, { t: 'reset', text: 'Fate reset: all rules return to the basics.' });
         } else {
-            refillAxioms(G);
-            if (s.axioms.deck.length) { emit(G, { t: 'flip', text: 'Fate flips a free rule.' }); setAxiom(G, s.axioms.deck.shift(), null); }
+            // An older state never set a card aside: it turns over the deck's top card, as before.
+            if (s.fate.next === undefined) { refillAxioms(G); s.fate.next = s.axioms.deck.length ? s.axioms.deck.shift() : null; }
+            const id = s.fate.next;
+            s.fate.next = null;
+            if (id) { emit(G, { t: 'flip', id, text: 'Fate flips a free rule.' }); setAxiom(G, id, null); }
+            else emit(G, { t: 'fate-empty', text: 'Fate has no rule card to turn over. The rules stay as they are.' });
         }
         s.fate.events += 1;
         s.fate.until = s.options.fateGap;
+        announceFlip(G);
         cleanup(G);
+    }
+
+    // When the next event is a flip, set its rule card aside now, publicly. A flip announced with no
+    // rule card left tries again at each turn start (a card may have reached the discard since).
+    function announceFlip(G) {
+        const s = G.s, A = s.axioms;
+        if (!s.options.timeline || s.fate.events % 2 === 1 || s.fate.next) return;
+        refillAxioms(G);
+        s.fate.next = A.deck.length ? A.deck.shift() : null;
+        if (s.fate.next) emit(G, { t: 'fate-next', id: s.fate.next, text: 'Fate sets aside the next free rule: ' + axiomDefs()[s.fate.next].name + '.' });
     }
 
     function refillAxioms(G) {
@@ -1659,7 +1721,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
