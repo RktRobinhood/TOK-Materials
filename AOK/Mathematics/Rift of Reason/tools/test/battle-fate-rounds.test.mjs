@@ -134,13 +134,18 @@ test('empty rule sources: nothing is announced, nothing flips, and a card is set
     assert.ok(!s.lastEvents.some(e => e.t === 'axiom'));
     assert.deepEqual(plain(s.axioms.active), active);
     assert.equal(s.fate.events, 1, 'the next event is the reset');
-    // A flip announced with nothing left waits for a card: the next turn start sets one aside, publicly.
+    // The shared deck is finite (#117): a used rule in the discard never comes back for Fate.
     let w = fresh({ openAxioms: 1 }, { axiomDeck: ['haste', 'mercy'] });
     assert.equal(w.fate.next, null);
     w.axioms.discard = ['underdog'];
     w = quietTurn(w);
+    assert.equal(w.fate.next, null, 'nothing is set aside from the discard');
+    assert.deepEqual(plain(w.axioms.discard), ['underdog']);
+    assert.ok(!w.lastEvents.some(e => e.t === 'fate-next'));
+    // A card put back on the deck itself is still found at the next turn start, publicly.
+    w.axioms.deck = ['underdog'];
+    w = quietTurn(w);
     assert.equal(w.fate.next, 'underdog');
-    assert.deepEqual(plain(w.axioms.discard), []);
     assert.equal(w.lastEvents.find(e => e.t === 'fate-next').id, 'underdog');
 });
 

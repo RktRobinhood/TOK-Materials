@@ -745,7 +745,9 @@ test('tactics that would certainly do nothing are not offered', () => {
     s = withTactic('look-it-up');
     assert.equal(offered(s), false, 'Look It Up: shared deck and discard both empty');
     s.axioms.discard.push('haste');
-    assert.equal(offered(s), true, 'the discard is reshuffled');
+    assert.equal(offered(s), false, 'the discard never comes back (finite shared deck, #117)');
+    s.axioms.deck.push('haste');
+    assert.equal(offered(s), true, 'a card in the shared deck');
     while (s.players[0].hand.length + s.players[0].axHand.length < 10) s.players[0].axHand.push('haste');
     assert.equal(offered(s), true, 'playing it frees a place in a full hand');
     s.players[0].axHand.push('haste');

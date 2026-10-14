@@ -79,6 +79,7 @@ Raw JSON includes long-animation-frame blocking/render/style-layout data and act
 - Suggested implementation, not approved tuning: automatically apply increasing damage (1, then 2, then 3…) at the player's normal draw step when both sources are exhausted. Full hand capacity is not deck exhaustion; extra-draw abilities or choosing a time action must not multiply or evade the normal exhaustion check.
 - Current engine has no fatigue counter and does recycle shared Axiom discards. Whether shared depletion is permanent or discarded rules can refill it must be settled; permanent depletion better matches the teacher's “no more rules left” description, but is a proposed change.
 - **Teacher approved:** exhaustion damage follows the active Win axiom, including winning at zero of your own hearts. Deliberately exhausting the decks/damaging yourself under that axiom is a legitimate strategy.
+- **Settled 14 October 2026 (#117):** the shared deck is finite (no recycling) and exhaustion escalates 1, 2, 3… as proposed. Implemented in `js/battle/engine.js` (`exhaustion`, `doDraw`); see `design/card-arena-2026-10-07.md`.
 
 ### Deck copies, spell eligibility and teaching — teacher follow-up
 
