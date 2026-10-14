@@ -21,6 +21,8 @@
  *   describe(state, cid) → everything a card face needs (name, cost, attack, health, keywords, lines…)
  *   attackOf / healthOf / keywordsOf / canAttack / attackTargets / activations / targetsFor / fightPreview
  *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p)
+ *   fateSchedule(state) → the public scheduled Fate events (#118/#119), fateEventPreview(state, id) → what
+ *                  one would do if it resolved now (the real resolution, run on a copy), canSchedule(state, p)
  *   activeAxioms(state) → every active rule card (a "basic" one has ax.basic: it restates a default rule)
  *   changedAxioms(state) → only the active rule cards that change a basic rule
  *   cardName(state, cid) → plain name;  logName(state, cid) → "your X" / "Anna's X" when both boards have an X
@@ -47,6 +49,8 @@
  * Events (state.lastEvents for the latest action, fullLog(state) for all):
  *   { t, text, publicText?, privateTo?, ...data }. Show `text` to privateTo (or everyone
  *   when privateTo is undefined) and `publicText` to the other player.
+ *   Scheduled Fate events: 'fate-schedule' { player, id, cid, def, space, rounds }, 'fate-event' { id, def,
+ *   cid, player, how: 'walk' | 'rewind', fires } (its effects follow), 'fate-expire' { id, def, player }.
  *
  * The Bag (design/card-arena-expansion-2026-10-07.md §3): players[p].bag lists the item ids brought
  * in (createBattle player.bag; only items with a `battle` block in data/items.js count). In the main
@@ -131,6 +135,7 @@
         s.attackIntent = state.attackIntent ? { ...state.attackIntent } : null;
         s.axioms = { ...state.axioms, active: { ...state.axioms.active }, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
         s.fate = { ...state.fate };
+        if (state.fate.queue) s.fate.queue = state.fate.queue.map(ev => ({ ...ev }));   // records change in place (#118)
         s.lastEvents = [];
         return s;
     }
@@ -212,7 +217,7 @@
         const name = s.players[p].name;
         if (name !== 'You') return name + ' ' + verb;
         const base = { has: 'have', goes: 'go', wins: 'win', takes: 'take', chooses: 'choose', plays: 'play',
-            attacks: 'attack', loses: 'lose', ends: 'end', draws: 'draw', activates: 'activate', skips: 'skip', uses: 'use' }[verb] || verb;
+            attacks: 'attack', loses: 'lose', ends: 'end', draws: 'draw', activates: 'activate', skips: 'skip', uses: 'use', schedules: 'schedule' }[verb] || verb;
         return 'You ' + base;
     }
 
@@ -614,6 +619,7 @@
             } else {
                 const def = tacticDefs()[c.tactic];
                 if (!def) return;
+                if (def.scheduled && !canSchedule(s, p)) return;
                 if (def.usable && !def.usable(s, p, H)) return;
                 if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => list.push({ type: 'play', player: p, cid, target }));
                 else list.push({ type: 'play', player: p, cid });
@@ -725,7 +731,8 @@
             players: [], cards: {}, reactions: [], completedPlays: [], factSequence: 0, armSequence: 0, reactionCount: 0, attackIntent: null,
             axioms: { deck: [], discard: [], active: {}, flips: 0 },
             // until counts ROUNDS; next: the flip's set-aside rule card (filled by the first startTurn).
-            fate: { until: Math.max(1, opts.fateStart), events: 0, next: null },
+            // pos / seq / queue: the cursor's space, the last scheduled-event number, the scheduled events (#118).
+            fate: { until: Math.max(1, opts.fateStart), events: 0, next: null, pos: 0, seq: 0, queue: [] },
             winner: null, endReason: null, options: opts,
             log: null, lastEvents: [],
         };
@@ -850,7 +857,7 @@
             checkHearts: () => checkHearts(G),
             heal(cid, n) { const c = s.cards[cid]; c.damage = Math.max(0, c.damage - n); },
             healHero(p, n) { const P = s.players[p]; P.hearts = Math.min(P.maxHearts, P.hearts + n); },
-            defeat: (cid, why) => defeat(G, cid, why),
+            defeat: (cid, why, name) => defeat(G, cid, why, name),
             silence: cid => silence(G, cid),
             freeze(cid) { s.cards[cid].frozen = true; },
             bounce: cid => bounce(G, cid),
@@ -1184,12 +1191,16 @@
     }
 
     // Both players have had their turn: exactly one ordinary Fate advance (none while the Anchor holds).
+    // Lifetimes (#118) count real round ends, so they run on while the Anchor holds the track.
     function endRound(G, p) {
         const s = G.s;
         if (!s.options.timeline) return;
-        if (fateHeld(s)) { emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move this round.' }); return; }
-        emit(G, { t: 'fate-move', text: 'Round ' + s.round + ' ends: Fate moves 1 space.' });
-        shiftFate(G, 1);
+        if (fateHeld(s)) emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move this round.' });
+        else {
+            emit(G, { t: 'fate-move', text: 'Round ' + s.round + ' ends: Fate moves 1 space.' });
+            shiftFate(G, 1);
+        }
+        if (s.winner == null) expireScheduled(G);
     }
 
     function endRules(G, p) {
@@ -1216,11 +1227,33 @@
     }
 
     // Positive shifts move the next event closer; negative shifts delay it. One space = one round.
+    // The cursor (s.fate.pos) moves with them (#118). A forward shift WALKS: it enters each space in turn
+    // (scheduled events there fire) and stops on the rule event when it reaches it (the rest is absorbed,
+    // as before). A rewind enters only the space it lands on and goes back only as far as keeps the rule
+    // event within fateMax; scheduled events move relative to NOW by the same amount.
     function shiftFate(G, spaces) {
         const s = G.s;
-        if (!s.options.timeline) return;
-        s.fate.until = Math.max(0, Math.min(s.options.fateMax, s.fate.until - spaces));
-        if (s.fate.until) return;
+        if (!s.options.timeline || !spaces) return;
+        if (spaces < 0) {
+            const before = s.fate.until;
+            s.fate.until = Math.max(0, Math.min(s.options.fateMax, s.fate.until - spaces));
+            const back = s.fate.until - before;
+            if (back > 0) { s.fate.pos = cursorOf(s) - back; enterSpace(G, s.fate.pos, 'rewind'); }
+            return;
+        }
+        for (let i = 0; i < spaces; i++) {
+            s.fate.pos = cursorOf(s) + 1;
+            s.fate.until = Math.max(0, s.fate.until - 1);
+            enterSpace(G, s.fate.pos, 'walk');
+            if (s.winner != null) return;
+            if (!s.fate.until) { ruleEvent(G); return; }
+        }
+    }
+
+    // Fate's own event (a free flip or a reset) on the space the cursor has just entered. It resolves
+    // after the scheduled events on that space (#118), so they resolve under the rules they were forecast with.
+    function ruleEvent(G) {
+        const s = G.s;
         if (s.fate.events % 2 === 1) {
             s.axioms.discard.push(...Object.values(s.axioms.active));
             s.axioms.active = {};
@@ -1281,6 +1314,118 @@
         if (changed) s.completedPlays.push({ event: 'axiom-replaced', actor: by == null ? null : by, axiom: id });
     }
 
+    // ---- scheduled Fate events (#118; design/drafts/card-arena-2026-10-12/FATE-SCHEDULE-MODEL.md) ----
+    // A tactic with a `scheduled` block (data/tactics.js) puts a public event on the Fate track, `delay`
+    // spaces ahead of the cursor. s.fate.queue holds plain records (never functions):
+    //   { id: 'f<seq>', seq, def, source: { type: 'tactic', cid, card }, controller, space, createdRound,
+    //     createdTurn, repeat, lifetime, expiresRound, state, fires, firedRound, reason, target }
+    // state: 'pending' → 'fired' when the cursor enters its space (claimed before its effect runs, so it
+    // can never fire twice); one-shot records stay fired for good, whichever way the cursor comes back.
+    // A marked repeatable record (repeat) stays live after firing and fires on every later entry until
+    // it expires: lifetime counts real round ends (expiresRound), never spaces. 'skipped' (#120 leaps) and
+    // 'cancelled' are reserved for later cards. Events on one space resolve in seq order, then Fate's own
+    // rule event. A battle that is over freezes the schedule.
+    const SCHEDULE_LIMIT = 2;   // live scheduled events per player (like the two conditional slots)
+    const cursorOf = s => s.fate.pos || 0;          // an older state has no cursor: space 0
+    const queueOf = s => s.fate.queue || [];
+    const isLive = ev => ev.state === 'pending' || (ev.state === 'fired' && !!ev.repeat);
+    function scheduledDef(ev) {
+        if (!ev || !ev.source || ev.source.type !== 'tactic') return null;
+        return (tacticDefs()[ev.def] || {}).scheduled || null;
+    }
+    function liveScheduled(s, p) { return queueOf(s).filter(ev => ev.controller === p && isLive(ev)).length; }
+    function canSchedule(s, p) { return !!s.options.timeline && liveScheduled(s, p) < SCHEDULE_LIMIT; }
+    const lowerFirst = t => (t ? t[0].toLowerCase() + t.slice(1) : t);
+    const roundsText = n => n + ' round' + (n === 1 ? '' : 's');
+
+    function scheduleEvent(G, p, cid, def) {
+        const s = G.s, sch = def.scheduled, delay = Math.max(1, sch.delay || 1);
+        const seq = (s.fate.seq || 0) + 1;
+        const lifetime = sch.repeat && sch.lifetime ? sch.lifetime : null;
+        const ev = { id: 'f' + seq, seq, def: def.id, source: { type: 'tactic', cid, card: def.id }, controller: p,
+            space: cursorOf(s) + delay, createdRound: s.round, createdTurn: s.turn, repeat: !!sch.repeat,
+            lifetime, expiresRound: lifetime ? s.round + lifetime - 1 : null,
+            state: 'pending', fires: 0, firedRound: null, reason: null, target: null };
+        s.fate.seq = seq;
+        s.fate.queue = queueOf(s).concat([ev]);
+        const rounds = delay + (fateHeld(s) ? 1 : 0);
+        emit(G, { t: 'fate-schedule', player: p, id: ev.id, cid, def: def.id, space: ev.space, rounds,
+            text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + lowerFirst(sch.summary) });
+    }
+
+    // The cursor has entered this space: its live scheduled events fire, oldest first.
+    function enterSpace(G, space, how) {
+        const s = G.s;
+        const due = queueOf(s).filter(ev => ev.space === space && isLive(ev)).sort((a, b) => a.seq - b.seq).map(ev => ev.id);
+        for (const id of due) {
+            if (s.winner != null) return;
+            fireScheduled(G, id, how);
+        }
+    }
+    function fireScheduled(G, id, how) {
+        const s = G.s, ev = queueOf(s).find(e => e.id === id);
+        if (!ev || !isLive(ev)) return;
+        ev.state = 'fired';   // claimed before the effect
+        ev.fires = (ev.fires || 0) + 1;
+        if (ev.firedRound == null) ev.firedRound = s.round;
+        const def = scheduledDef(ev), name = (tacticDefs()[ev.def] || {}).name || ev.def;
+        const whose = ev.controller == null ? 'the' : possessive(s, ev.controller);
+        emit(G, { t: 'fate-event', id, def: ev.def, cid: ev.source && ev.source.cid, player: ev.controller, how, fires: ev.fires,
+            text: 'Fate reaches ' + whose + ' ' + name + ': ' + lowerFirst(def ? def.summary : 'nothing happens.') });
+        if (def && def.resolve) def.resolve(api(G), ev, H);
+        cleanup(G);
+    }
+    // After a round's end (the Fate move or the Anchor's hold): live records whose lifetime is used up expire.
+    function expireScheduled(G) {
+        const s = G.s;
+        queueOf(s).forEach(ev => {
+            if (!isLive(ev) || ev.expiresRound == null || s.round < ev.expiresRound) return;
+            ev.state = 'expired';
+            ev.reason = 'lifetime';
+            const def = scheduledDef(ev), name = (tacticDefs()[ev.def] || {}).name || ev.def;
+            emit(G, { t: 'fate-expire', id: ev.id, def: ev.def, player: ev.controller,
+                text: (ev.controller == null ? 'The' : capFirst(possessive(s, ev.controller))) + ' ' + name + ' expires after ' + roundsText(ev.lifetime) + '.' });
+            if (def && def.expire) def.expire(api(G), ev, H);
+        });
+        cleanup(G);
+    }
+
+    // The public schedule, one entry per record (oldest first), for the reel, previews and the AI:
+    //   { id, seq, def, name, summary, text, cid, controller, state, live, repeat, spaces (from the cursor),
+    //     rounds / turns / turn / round / after / held (as in timeline; null when it is not coming),
+    //     createdRound, expiresRound, lifetime, fires, firedRound, reason }
+    function fateSchedule(s) {
+        if (!s.options.timeline) return [];
+        const hold = fateHeld(s) ? 1 : 0, half = s.roundTurns[1 - s.active] ? 1 : 0, after = roundCloser(s), pos = cursorOf(s);
+        return queueOf(s).map(ev => {
+            const def = scheduledDef(ev) || {}, card = tacticDefs()[ev.def] || {};
+            const spaces = ev.space - pos, live = isLive(ev);
+            const rounds = live && spaces > 0 ? spaces + hold : null, turns = rounds == null ? null : 2 * rounds - half;
+            return {
+                id: ev.id, seq: ev.seq, def: ev.def, name: card.name || ev.def, summary: def.summary || '', text: card.text || '',
+                cid: ev.source ? ev.source.cid || null : null, controller: ev.controller, state: ev.state, live, repeat: !!ev.repeat, spaces,
+                rounds, turns, turn: turns == null ? null : s.turn + turns, round: rounds == null ? null : s.round + rounds, after, held: !!hold,
+                createdRound: ev.createdRound, expiresRound: ev.expiresRound, lifetime: ev.lifetime, fires: ev.fires || 0, firedRound: ev.firedRound, reason: ev.reason,
+            };
+        });
+    }
+    // What a live scheduled event would do if it resolved NOW: the real resolution, run on a copy of the
+    // state (nothing is changed), so the preview and the resolution cannot disagree. null when not live.
+    //   { id, defeated: [{ cid, name, owner, controller, dest }], hearts: [h0, h1], winner, events }
+    function fateEventPreview(state, id) {
+        const ev = queueOf(state).find(e => e.id === id);
+        if (!ev || !isLive(ev) || state.winner != null) return null;
+        const s = cloneState(state);
+        const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':preview:' + id), events: [] };
+        fireScheduled(G, id, 'preview');
+        return {
+            id,
+            defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : e.cid,
+                owner: e.player, controller: state.cards[e.cid] ? state.cards[e.cid].controller : e.player, dest: e.dest })),
+            hearts: s.players.map(P => P.hearts), winner: s.winner, events: G.events,
+        };
+    }
+
     // ---- main-phase moves ---------------------------------------------------------------------
 
     function spend(G, amount) { G.s.players[G.s.active].energy -= amount; }
@@ -1297,6 +1442,7 @@
             const def = tacticDefs()[c.tactic];
             P.discard.push(cid);
             emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
+            if (def.scheduled) scheduleEvent(G, p, cid, def);
             def.run(api(G), p, target);
         } else {
             enterCreature(G, cid, target, false);
@@ -1719,7 +1865,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, SCHEDULE_LIMIT, canSchedule, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

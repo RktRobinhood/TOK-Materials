@@ -59,8 +59,8 @@ Anything below marked **Builder decision** is the builder's most conservative re
 - **schedule**: a scheduled card resolves. The record is created `pending` at `space = pos + delay` (delay ≥ 1). It isn't legal without a Fate track or at capacity.
 - **enter**: a `pending` one-shot becomes `fired`. The record is claimed (state set) **before** its effect runs, as the conditional queue does, so nothing can make it fire twice. A live repeatable (`pending`, or `fired` with `repeat`) fires and `fires` goes up by 1. Entering a `fired` one-shot, `skipped`, `cancelled` or `expired` record does nothing, whichever direction the cursor came from.
 - **bypass** (#120 leaps only): a `pending` one-shot becomes `skipped`, permanently. Rewinding onto it later doesn't bring it back (matches ENVIRONMENTAL-FATE.md). **Builder decision:** a bypassed repeatable space was not entered, so it doesn't fire and stays live.
-- **cancel**: only explicit card text, or a missing required source (section 5), cancels. Hiding, skipping or interrupting an animation never changes the engine state.
-- **expire**: after the round end that uses up its lifetime (section 6).
+- **cancel**: only explicit card text, or a missing required source (section 4), cancels. Hiding, skipping or interrupting an animation never changes the engine state.
+- **expire**: after the round end that uses up its lifetime (section 5).
 - **battle over**: the schedule freezes. Pending records stay pending and never resolve. **Builder decision:** they are not rewritten, so the final state records what was still planned.
 
 ## 4. Rules for the edge cases
@@ -89,12 +89,12 @@ Anything below marked **Builder decision** is the builder's most conservative re
 3. Each event's targets are a snapshot taken when that event starts.
 4. After each event, the engine's cleanup runs: chained defeats, Last Words and the heart and winner check.
 5. A winner ends the battle at once, and nothing further resolves.
-6. For a multi-creature effect, the order is the active player's board left to right, then the other board. This is the existing cleanup order.
+6. For a multi-creature effect, the order is the event controller's board left to right, then the other board. (Amended during #119: an "active player first" order would depend on whose turn it is when Fate arrives, and the "if it resolved now" preview would then disagree with the real round-end resolution.)
 7. Conditional cards that react to these facts (#148/#149) queue and resolve after the whole Fate movement, in their own arming order.
 
 **Invalid targets.** Targets described by a rule ("all creatures", "your creatures present then") are resolved at entry, so they are always valid. A target fixed when the event was scheduled that is gone or illegal at entry gives no effect. The event is consumed with a public "no target" line, and there is no arbitrary retarget (the conditional-attack convention). **Builder decision:** scheduled effects never ask a question when they resolve. Any choice is made when the event is scheduled, so resolution stays deterministic and can happen in the middle of an End turn.
 
-**Fate reset vs queued events.** A reset (and Granny's Spare Axiom) clears active rules only. Scheduled events, their spaces and their lifetimes don't change, unless a card explicitly says otherwise.
+**Fate reset vs queued events.** A reset (and Granny's Spare Axiom) clears active rules only. Scheduled events, their spaces and their lifetimes don't change, unless a card explicitly says otherwise. With #117's finite shared deck, the cleared rules stay in the discard. No scheduled effect (Clean Slate included) draws, shuffles or recycles rule cards. A flip with nothing set aside still reports `fate-empty` after the scheduled events on its space.
 
 **Repeated clicks, navigation and visual cancellation.** Resolution happens inside the one engine action that moves Fate. The engine is pure: the input state is never changed, and the result already holds the fired record. Clicking again acts on the new state. Replaying an old state yields the same single firing. Leaving or skipping animations only stops reading events. Battles are not saved mid-match. The whole state is still serialisable, and a restored copy resolves the same way.
 
@@ -129,6 +129,8 @@ Checks: 6 ordinary advances, 1 leap (+2) and 3 rewinds (−4) leave the cursor a
 ## 7. What #119 implements now
 
 #119 implements the record, the queue, capacity, walks, rewinds, the entry and claim rules, simultaneous order, reset independence, the lifetime and expiry of repeatable records, the public schedule view with a resolve-on-a-copy preview, the reel nodes and AI awareness. It does this with one card, Clean Slate.
+
+Clean Slate is defined in `data/tactics.js`, but no grant list, starter, deck or reward names it. It is playable only on the battle bench (`dev/battle.html?fate=you-cast|mercy|rival-casts|due-now`) and in tests. Engine API: `fateSchedule`, `fateEventPreview` and `canSchedule`. Tests: `tools/test/battle-fate-schedule*.test.mjs`.
 
 Leaps, bypass, required sources, repeatable content and environmental sources are data-ready but have no card yet. They belong to #120, #121 and #128.
 

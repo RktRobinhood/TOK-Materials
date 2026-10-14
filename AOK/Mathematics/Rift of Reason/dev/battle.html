@@ -26,6 +26,7 @@
     ?mode=practice|trainer|boss|ghost&ai=normal|competent|expert&seed=abc   (easy/hard still work)
     Hero powers: ?p0=<power id>|none&t0=<tweak>  (you), ?p1=<power id>|none|auto&t1=<tweak>  (them; auto = the trainer's colour)
     Granny's Spare Axiom in your opening hand: ?spare=1
+    Clean Slate, the scheduled Fate spell (#119): ?fate=you-cast|mercy|rival-casts|due-now
 -->
 <div class="bench">
     <header>
@@ -80,6 +81,7 @@
 <script src="dev/conditional-bench.js"></script>
 <script src="dev/arena-prototype.js?v=98-103-1"></script>
 <script src="dev/starter-pack.js"></script>
+<script src="dev/fate-bench.js"></script>
 <script>
 (function () {
     const R = window.Rift;
@@ -88,6 +90,7 @@
     const msg = t => { $('msg').textContent = t; };
     if (R.ConditionalBench) { R.ConditionalBench.start(); return; }
     if (R.StarterPackBench) { R.StarterPackBench.start(); return; }
+    if (R.FateBench) { R.FateBench.start(); return; }
     $('mode').value = q.get('mode') || 'practice';
     $('ai').value = R.Battle.AI.levelOf(q.get('ai') || 'competent');
     $('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);

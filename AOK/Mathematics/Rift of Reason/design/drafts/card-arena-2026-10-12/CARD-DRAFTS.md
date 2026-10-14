@@ -95,6 +95,8 @@ All scheduled spells are one-shot. Costs below are proposed. Replay, leap, rewin
 
 Tokens are generated battle objects, not collectible copies and not part of construction quotas. Queued spells retain their controller but do not require the casting creature to survive. Cancelled/skipped/expired states must be explained in the UI.
 
+#119 (14 October 2026) implements Clean Slate as specified, with a public reel node, a live "if it resolved now" preview, real resolution, a spent marker and AI awareness. It is defined in data/tactics.js but no grant list names it, so it is playable only on the battle bench (dev/battle.html?fate=you-cast) and in tests until its release, tutorial and art are decided (ART-REQUESTS 13.78).
+
 ## Axiom expansion drafts
 
 Existing #101 owns common +/-1 and +/-2 modifiers and rarer Unlimited; do not duplicate that work. Add its attack, maximum-health and cost modifiers as later earnable rule families, never silently convert the starting default ten. Prototype the following separate temporal families after scheduling works:
