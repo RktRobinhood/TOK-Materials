@@ -51,6 +51,7 @@
             stats: { puzzlesSolved: 0, hintsUsed: 0, battlesWon: 0, battlesLost: 0, catches: 0, escapes: 0, powerUses: {} },
             settings: { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, textSpeed: 1, textInstant: false, calm: false, charactersCanDie: false },
             backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
+            starter: null,         // receipt of the avatar type's starter deck (#114, grantStarter): { v, type, uids, tactics, axioms, unlocked, catchUp, at }
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
         };
@@ -222,44 +223,9 @@
         return out;
     }
 
-    // Deck rule for the Collection builder: creatures + tactics = 20, 6–14 of each.
-    // When the player owns too few creatures, all of them are picked and loans fill the rest.
-    // checkDeck({ owned, team, tactics }) → { valid, creatures, loans, tactics, total, message }
+    // Deck size for every personal deck (no loaned creatures fill a player's deck since #114: every
+    // adventure owns its avatar type's starter deck).
     const DECK_SIZE = 20;
-    function checkDeck(o) {
-        const owned = o.owned || 0, team = o.team || 0, tactics = o.tactics || 0;
-        const slots = DECK_SIZE - tactics;
-        const loans = owned < slots && team === owned ? slots - owned : 0;
-        const total = team + loans + tactics;
-        const n = (k, word) => k + ' ' + word + (k === 1 ? '' : 's');
-        const creatures = !loans ? n(team, 'creature')
-            : !team ? n(loans, 'loaned creature')
-                : n(team + loans, 'creature') + ' (' + team + ' yours + ' + loans + ' loaned)';
-        const parts = creatures + ' + ' + n(tactics, 'tactic');
-        const head = 'Deck ' + total + '/' + DECK_SIZE + ': ' + parts + '.';
-        let problem = null;
-        if (tactics < 6) problem = 'Choose at least 6 tactic cards.';
-        else if (tactics > 14) problem = 'Choose at most 14 tactic cards.';
-        else if (team > 14) problem = 'Choose at most 14 creatures.';
-        else if (owned < slots && team < owned) problem = 'Pick all your creatures; loaned creatures fill the rest.';
-        else if (total < DECK_SIZE) problem = 'Add ' + (DECK_SIZE - total) + ' more card' + (DECK_SIZE - total === 1 ? '' : 's') + '.';
-        else if (total > DECK_SIZE) problem = 'Remove ' + (total - DECK_SIZE) + ' card' + (total - DECK_SIZE === 1 ? '' : 's') + '.';
-        return { valid: !problem, creatures: team, loans, tactics, total, message: problem ? head + ' ' + problem : head };
-    }
-
-    // Species of the loaned creatures that fill the deck, in the order the battle adds them:
-    // with no creatures, the loaned starter team (js/battle/lesson.js); otherwise the engine's
-    // pad species. loanFillers({ owned, team, tactics }) → ['astrophysicat', …]
-    const PAD_FALLBACK = ['astrophysicat', 'zuckerborg', 'siuuugull'];
-    function loanFillers(o) {
-        const count = checkDeck(o).loans;
-        const B = Rift.Battle || {};
-        const pad = (B.Engine && B.Engine.PAD_SPECIES) || PAD_FALLBACK;
-        const starter = !(o.owned || 0) && B.Lesson && B.Lesson.starter ? B.Lesson.starter().map(x => x.species) : [];
-        const out = starter.slice(0, count);
-        for (let k = 0; out.length < count; k++) out.push(pad[k % pad.length]);
-        return out;
-    }
 
     // ---- construction rules (#112, design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md) ----------
     // ONE validator for every deck: the Collection builder, saved decks, team codes, and the
@@ -308,7 +274,7 @@
     //   opts.complete (default true): the exact size and the 6–14 bands; false only checks maxima
     //     (team codes: the battle fills a classmate's short ghost deck).
     //   opts.owned / opts.ownedAxioms: when given, cards outside them are reported.
-    //   loans: legacy loaned creatures that fill a small collection; they count for the size only.
+    //   loans: loaned filler creatures (fixtures only); they count for the size, never for copies or quotas.
     //   missing: chosen creatures no longer in the collection.
     // → { valid, problems: [{ part: 'deck'|'axioms', code, text, id?, colour? }], message, head, axiomHead,
     //     counts: { creatures, loans, tactics, total, axioms }, copies: { creatures, tactics, axioms }, quota }
@@ -385,6 +351,7 @@
 
     // The player's own deck for a battle, exactly as saved (defaults for empty choices), with its
     // check. Battles start only when check.valid; otherwise the player repairs it in Collection.
+    // No loaned creatures fill it (#114): `loans` stays empty for old callers.
     // → { team: [instances], tactics: [ids], axioms: [ids], loans: [species], missing, custom, check }
     function ownDeck(save) {
         const s = save || current;
@@ -396,10 +363,52 @@
         const missing = chosen.length ? chosen.length - team.length : 0;
         const tactics = deckTactics(s);
         const axioms = axiomLoadout(s);
-        const loans = loanFillers({ owned: (s.creatures || []).length, team: team.length, tactics: tactics.length });
-        const check = validateDeck({ creatures: team, tactics, axioms, loans: loans.length, missing },
+        const loans = [];
+        const check = validateDeck({ creatures: team, tactics, axioms, missing },
             { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s) });
         return { team, tactics, axioms, loans, missing, custom: !!(chosen.length || (s.deckTactics || []).length), check };
+    }
+
+    // ---- owned avatar-type starter decks (#114, data/starters.js) ------------------------------------
+    // The avatar type's starter deck as { strategy, creatures, tactics, axioms }, or null.
+    function starterDeck(type) {
+        const D = (Rift.data || {}).starterDecks;
+        const deck = D && D.decks && D.decks[type];
+        return deck ? { strategy: deck.strategy, creatures: deck.creatures.slice(), tactics: deck.tactics.slice(), axioms: D.axioms.slice() } : null;
+    }
+    // Grants the avatar type's starter deck ONCE per adventure: real owned creatures (plain variants,
+    // ordinary stakes, never loaners), its tactics as owned unlocks, and the receipt save.starter =
+    // { v, type, uids, tactics, axioms, unlocked, catchUp, at }. Any receipt blocks a second grant, so
+    // reloads, backup codes, a changed appearance or type and chapter jumps never repeat it. A new
+    // adventure (nothing owned or chosen yet) also gets the deck as its loadout; an existing adventure
+    // (catch-up) keeps its catches, unlocks and loadouts, and can pick the starter in Collection.
+    // Does not save; use inside State.update or on a save object. → the receipt, or null.
+    function grantStarter(save) {
+        const s = save || current;
+        if (!s || !s.avatar || s.starter) return null;
+        const deck = starterDeck(s.avatar.type);
+        if (!deck) return null;
+        ['creatures', 'team', 'deckTactics', 'axiomLoadout', 'seen', 'tactics'].forEach(k => { if (!Array.isArray(s[k])) s[k] = []; });
+        const fresh = !s.creatures.length && !s.team.length && !s.deckTactics.length && !s.axiomLoadout.length;
+        const taken = new Set(s.creatures.concat(s.trophies || []).map(c => c && c.uid));
+        const tag = 'starter-' + ((s.seed >>> 0) || 0).toString(36) + '-';
+        const uids = deck.creatures.map((species, i) => {
+            let uid = tag + i;
+            while (taken.has(uid)) uid += 'x';
+            taken.add(uid);
+            s.creatures.push(makeCreature(species, { uid, variant: plainVariant() }));
+            if (!s.seen.includes(species)) s.seen.push(species);
+            return uid;
+        });
+        const unlocked = Array.from(new Set(deck.tactics)).filter(id => grantTactic(id, s));
+        if (fresh) {
+            s.team = uids.slice();
+            s.deckTactics = deck.tactics.slice();
+            s.axiomLoadout = deck.axioms.slice();
+        }
+        s.starter = { v: (Rift.data.starterDecks || {}).version || 1, type: s.avatar.type, uids, tactics: deck.tactics, axioms: deck.axioms,
+            unlocked, catchUp: !fresh, at: Date.now() };
+        return s.starter;
     }
 
     let instanceCounter = 0;
@@ -772,7 +781,6 @@
         naturalKeywords,
         minPowerDelta,
         clampPower,
-        loanFillers,
         describeVariant,
         battleTeam,
         defaultTeam,
@@ -782,13 +790,14 @@
         grantTactic,
         deckTactics,
         axiomLoadout,
-        checkDeck,
         DECK_SIZE,
         DECK_RULES,
         validateDeck,
         colourQuota,
         quotaFilter,
         ownDeck,
+        starterDeck,
+        grantStarter,
         TRAITS,
         TRICKS,
         TRICK_LABELS,
@@ -840,6 +849,16 @@
         // Marks backup reminders as shown (ids from backupMilestone).
         markReminded(ids) {
             State.update(s => { [].concat(ids || []).forEach(id => { if (!s.backup.reminded.includes(id)) s.backup.reminded.push(id); }); });
+        },
+        // Catch-up (#114): grants the live adventure its avatar type's starter deck if it has no receipt
+        // yet (boot, a loaded backup code, the previous save). Safe to call any time; announces
+        // 'starter:granted'. → the receipt, or null.
+        ensureStarter() {
+            if (!current || !current.avatar || current.starter || !starterDeck(current.avatar.type)) return null;
+            let receipt = null;
+            State.update(s => { receipt = grantStarter(s); });
+            if (receipt && Rift.bus) Rift.bus.emit('starter:granted', receipt);
+            return receipt;
         },
         // Convenience mutators that also autosave and announce changes.
         update(fn) {

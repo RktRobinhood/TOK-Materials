@@ -439,7 +439,7 @@ test('Competent sees an enemy Lantern or Close the Proof that could finish its 1
 
 // ---- team codes, launchers and Granny's lesson ----
 
-const G = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js',
+const G = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js', 'data/starters.js',
     'data/axioms.js', 'data/tactics.js', 'data/avatars.js', 'data/powers.js', 'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js',
     'js/battle/lesson.js', 'js/battle/team-codes.js', 'js/ui/battles.js']);
 const TC = G.Battle.TeamCodes;
@@ -507,6 +507,7 @@ test('the Feed\'s Champion copies your most-used power (else your own); finished
 test('launchers pass the avatar power and the opponent power; Granny\'s lesson has none', () => {
     const state = G.State.freshState();
     state.avatar = { type: 'fox', variant: 'boy', nickname: 'Test' };
+    G.State.grantStarter(state);
     state.flags['card-lesson-won'] = true;
     state.flags['card-rules-version'] = 3;
     G.State.get = () => state;

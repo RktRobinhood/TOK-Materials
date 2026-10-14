@@ -158,7 +158,7 @@ test('one validator for every deck: trainers, boss decks, the practice dummy, te
         assert.equal(team.length, 10);
         assert.ok(S.validateDeck({ creatures: team, tactics: R.data.tacticDecks.starter }).valid, 'practice dummy ' + i);
     }
-    // The loaned starter team for an empty collection keeps the copy limit too.
+    // The loaned team of Syllo's safe story match keeps the copy limit too.
     assert.ok(S.validateDeck({ creatures: R.Battle.Lesson.starter(), tactics: R.data.tacticDecks.starter }).valid);
     // A team code's ghost goes through the same rules (a short ghost deck is filled by the battle).
     const TC = R.Battle.TeamCodes;
@@ -266,8 +266,8 @@ test('an invalid saved deck opens as saved for repair, and battles say what to f
     assert.match(text(dialog.body.querySelector('.deck-problems')), /3 Reason tactics need 3 Reason creatures/);
     assert.equal(dialog.body.querySelectorAll('.stepper-count').map(text).filter(x => x !== '×0/2').length, 9, 'the saved tactics are shown as saved');
     minusFor(dialog.body, 'Q.E.D.').click();
-    // (Legacy: a small collection with every creature picked is filled by a loaned creature.)
-    assert.match(text(dialog.body.querySelector('.deck-status')), /Deck 20\/20: 11 creatures \(10 yours \+ 1 loaned\) \+ 9 tactics\./);
+    // No loaned creature fills the gap (#114).
+    assert.match(text(dialog.body.querySelector('.deck-status')), /^Deck 19\/20: 10 creatures \+ 9 tactics\.$/);
     plusFor(dialog.body, 'Occam\'s Razor').click();
     assert.match(text(dialog.body.querySelector('.deck-status')), /^Deck 20\/20: 10 creatures \+ 10 tactics\.$/);
     button(dialog, 'Save deck').onclick();

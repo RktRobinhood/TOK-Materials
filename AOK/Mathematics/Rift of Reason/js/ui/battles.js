@@ -12,7 +12,9 @@
  * Every launcher passes both sides as { name?, team: [instances], tactics: [ids], axioms?: [ids],
  * art?: asset id for the hero portrait, consumables? } (player) and opponent { ..., ai, stake? }.
  * The player's side comes from the Collection deck builder (save.team, save.deckTactics,
- * save.axiomLoadout) through Rift.State.ownDeck; an empty collection borrows the lesson starter team.
+ * save.axiomLoadout) through Rift.State.ownDeck. Every adventure owns its avatar type's starter deck
+ * (#114, Rift.State.grantStarter), so no loaned creatures fill it; only the scripted lessons and
+ * Syllo's safe story match lend fixed teams.
  * A deck that breaks the shared construction rules (#112, Rift.State.validateDeck) does not start a
  * trainer, practice or ghost battle or a team code: deckReady() lists what to fix and opens Collection
  * (Battles.repairDeck). Opponent decks follow the same rules (trainer data is checked by the tests).
@@ -44,6 +46,14 @@
         return 'New tactic' + (ids.length > 1 ? 's' : '') + ': ' + ids.map(id => ((Rift.data.tactics || {})[id] || { name: id }).name).join(', ') + '. Add ' + (ids.length > 1 ? 'them' : 'it') + ' in Collection.';
     }
     if (Rift.bus) Rift.bus.on('tactics:unlocked', ids => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(unlockedText(ids), 5000); });
+    // The avatar type's starter deck arrived (#114): a new adventure, or the catch-up of an older one.
+    function starterText(receipt) {
+        const a = ((Rift.data.avatars || {})[receipt.type] || { name: receipt.type }).name;
+        return receipt.catchUp
+            ? 'New in Collection: your ' + a + ' starter cards (12 creatures, 8 tactics). Your own deck is unchanged.'
+            : 'Your ' + a + ' starter deck is ready: 12 creatures, 8 tactics and 10 axiom cards. See Collection.';
+    }
+    if (Rift.bus) Rift.bus.on('starter:granted', receipt => { if (Rift.UI && Rift.UI.toast) Rift.UI.toast(starterText(receipt), 6000); });
 
     function needCreatures() {
         const s = Rift.State.get();
@@ -79,14 +89,13 @@
         return true;
     }
 
-    // The player's own side of a battle (Rift.State.ownDeck): chosen team (or the default team, or a
-    // loaned starter team), chosen tactic cards, ten-card axiom contribution, hero art and own rule
+    // The player's own side of a battle (Rift.State.ownDeck): chosen team (or the default team), chosen
+    // tactic cards, ten-card axiom contribution, hero art and own rule
     // cards, plus `check`: the shared construction rules (#112). Launchers start only a legal deck.
     function myDeck() {
         const s = Rift.State.get();
         const own = Rift.State.ownDeck(s);
-        // With no creatures, loaned starters fill only the places tactics leave (as the deck builder shows).
-        const team = s.creatures.length ? own.team : Rift.Battle.Lesson.starter().slice(0, Math.max(6, own.loans.length));
+        const team = own.team;
         const art = s.avatar && typeof Rift.avatarArt === 'function' ? Rift.avatarArt(s.avatar, 'neutral') : null;
         return {
             team,
@@ -356,7 +365,7 @@
             choices.push({label:'Learn the card game',onclick:()=>Battles.learn('map')},
                 {label:'Challenge · '+levelLabel(levelOf(t.ai||'normal')),primary:true,onclick:()=>Battles.trainer(nodeId)});
             Rift.UI.modal(t.name,el('div.stack',null,[Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Missing team cards are loaned. Use Practice in Collection for a safe match.'}),
+                el('p',{text:t.intro}),el('p.small',{text:'This challenge has stakes. After the match, your defeated collected cards get an after-battle check: they may be injured or lost. Use Practice in Collection for a safe match.'}),
             ]),choices);
         },
 

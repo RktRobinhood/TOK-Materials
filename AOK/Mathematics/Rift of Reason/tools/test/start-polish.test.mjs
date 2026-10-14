@@ -5,11 +5,11 @@ import { loadWithDom } from './fake-dom.mjs';
 function setup(canDie = false) {
     const save = { avatar: null };
     const modals = [], routes = [], toasts = [];
-    let updates = 0, saves = 0, starts = 0, powerPreviews = 0;
+    let updates = 0, saves = 0, starts = 0, powerPreviews = 0, grants = 0;
     const g = loadWithDom(['js/core/rift.js', 'data/avatars.js', ctx => {
         const R = ctx.Rift;
         R.Screens = { entries: {}, register(id, screen) { this.entries[id] = screen; } };
-        R.State = { cleanName: s => String(s).trim().replace(/\s+/g, ' '), update(fn) { updates++; fn(save); }, saveNow() { saves++; } };
+        R.State = { cleanName: s => String(s).trim().replace(/\s+/g, ' '), update(fn) { updates++; fn(save); }, saveNow() { saves++; }, grantStarter(s) { grants++; assert.equal(s, save); return null; } };
         R.Assets = { img(id, opts = {}) { return R.el('img', { src: id, alt: opts.label || '' }); } };
         R.Audio = { sfx() {} };
         R.World = { start() { starts++; } };
@@ -21,7 +21,7 @@ function setup(canDie = false) {
     const box = g.document.createElement('div');
     g.document.body.appendChild(box);
     g.Rift.Screens.entries.avatar.mount(box);
-    return { g, box, save, modals, routes, toasts, counts: () => ({ updates, saves, starts, powerPreviews }), begin: () => box.querySelector('.primary').click() };
+    return { g, box, save, modals, routes, toasts, counts: () => ({ updates, saves, starts, powerPreviews, grants }), begin: () => box.querySelector('.primary').click() };
 }
 
 test('roster details are reviewed and editable before the adventure is submitted', () => {
@@ -46,7 +46,7 @@ test('roster details are reviewed and editable before the adventure is submitted
     assert.match(t.modals.at(-1).body.textContent, /Correct Name/);
     t.modals.at(-1).buttons.find(b => b.label === 'Start adventure').onclick();
     assert.deepEqual(JSON.parse(JSON.stringify(t.save.avatar)), { type: 'fox', variant: 'girl', nickname: 'Moon', realName: 'Correct Name' });
-    assert.deepEqual(t.counts(), { updates: 1, saves: 1, starts: 1, powerPreviews: 0 });
+    assert.deepEqual(t.counts(), { updates: 1, saves: 1, starts: 1, powerPreviews: 0, grants: 1 });
     assert.equal(t.routes.length, 1);
     assert.equal(t.routes[0][0], 'map');
     assert.doesNotMatch(t.box.textContent, /cannot be changed|real name/i);
@@ -82,7 +82,7 @@ for (const canDie of [false, true]) {
         assert.equal(t.routes.length, 0);
         t.modals.at(-1).buttons.find(b => b.label === 'Start adventure').onclick();
         assert.equal(t.save.avatar.nickname, 'Alex');
-        assert.deepEqual(t.counts(), { updates: 1, saves: 1, starts: 1, powerPreviews: 0 });
+        assert.deepEqual(t.counts(), { updates: 1, saves: 1, starts: 1, powerPreviews: 0, grants: 1 });
         assert.equal(t.modals.length, 1, 'only the detail review is needed');
         assert.deepEqual(JSON.parse(JSON.stringify(t.routes)), [['map', { arrive: true }]]);
     });

@@ -116,18 +116,6 @@ test('migration v1 → v2: old-scale powerDelta never leaves attack below 0', ()
     assert.equal(S.migrate(stale).creatures[0].powerDelta, -1);
 });
 
-test('loanFillers lists the loaned creatures the battle will add', () => {
-    assert.deepEqual(J(S.loanFillers({ owned: 4, team: 4, tactics: 10 })), ['astrophysicat', 'zuckerborg', 'siuuugull', 'astrophysicat', 'zuckerborg', 'siuuugull']);
-    assert.deepEqual(J(S.loanFillers({ owned: 6, team: 6, tactics: 11 })), J(E.PAD_SPECIES));
-    assert.deepEqual(J(S.loanFillers({ owned: 20, team: 10, tactics: 10 })), []);
-    assert.deepEqual(J(S.loanFillers({ owned: 8, team: 7, tactics: 10 })), [], 'no loans until every owned creature is picked');
-    // With no creatures, the loaned starter team comes first (js/battle/lesson.js).
-    const L = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/tactics.js', 'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/lesson.js']);
-    const starter = L.Battle.Lesson.starter().map(x => x.species);
-    assert.deepEqual(J(L.State.loanFillers({ owned: 0, team: 0, tactics: 11 })), J(starter.slice(0, 9)));
-    assert.deepEqual(J(L.State.loanFillers({ owned: 0, team: 0, tactics: 8 })), J(starter.concat(L.Battle.Engine.PAD_SPECIES.slice(0, 2))));
-});
-
 test('battleTeam and deckTactics keep choices as saved; ownDeck reports what is gone, not owned or over the limit', () => {
     const s = S.freshState();
     for (let i = 0; i < 12; i++) s.creatures.push(S.makeCreature('khaby', { uid: 'k' + i }));
@@ -148,23 +136,26 @@ test('battleTeam and deckTactics keep choices as saved; ownDeck reports what is 
     assert.ok(!S.ownDeck(s).check.problems.some(p => p.code === 'unowned'));
 });
 
-test('checkDeck: creatures + tactics = 20 with 6–14 of each; loans fill a small collection', () => {
-    const c = (owned, team, tactics) => S.checkDeck({ owned, team, tactics });
-    assert.equal(c(20, 10, 10).valid, true);
-    assert.equal(c(20, 10, 10).message, 'Deck 20/20: 10 creatures + 10 tactics.');
-    assert.equal(c(20, 14, 6).valid, true);
-    assert.equal(c(20, 12, 10).valid, false);
-    assert.match(c(20, 12, 10).message, /Remove 2 cards/);
-    assert.match(c(20, 8, 10).message, /Add 2 more cards/);
-    assert.match(c(20, 15, 5).message, /at least 6 tactic/);
-    const small = c(4, 4, 10);
-    assert.equal(small.valid, true);
-    assert.equal(small.loans, 6);
-    assert.equal(small.message, 'Deck 20/20: 10 creatures (4 yours + 6 loaned) + 10 tactics.');
-    assert.equal(c(0, 0, 11).message, 'Deck 20/20: 9 loaned creatures + 11 tactics.');
-    assert.equal(c(6, 6, 11).message, 'Deck 20/20: 9 creatures (6 yours + 3 loaned) + 11 tactics.');
-    assert.match(c(4, 3, 10).message, /Pick all your creatures/);
-    assert.equal(c(0, 0, 14).valid, true);
+test('deck size: creatures + tactics = 20 with 6–14 of each; no loaned creatures fill a small collection (#114)', () => {
+    const sp = ['khaby', 'kardashiant', 'eelish', 'keanu', 'beansprout', 'zuckerborg', 'siuuugull', 'attenbirdough'];
+    const team = n => Array.from({ length: n }, (_, i) => sp[i >> 1]);
+    const generic = ['counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'occams-razor', 'rethink', 'big-claims', 'clockwork', 'look-it-up', 'lemma', 'recall', 'pause-for-thought', 'safety-net'];
+    const c = (creatures, tactics) => S.validateDeck({ creatures: team(creatures), tactics: generic.slice(0, tactics) });
+    assert.equal(c(10, 10).valid, true);
+    assert.equal(c(10, 10).message, 'Deck 20/20: 10 creatures + 10 tactics.');
+    assert.equal(c(14, 6).valid, true);
+    assert.match(c(12, 10).message, /Remove 2 cards/);
+    assert.match(c(8, 10).message, /Add 2 more cards/);
+    assert.match(c(15, 5).message, /at least 6 tactic/);
+    const small = c(4, 10);
+    assert.equal(small.valid, false, 'four creatures are not filled with loans');
+    assert.equal(small.message, 'Deck 14/20: 4 creatures + 10 tactics. Choose at least 6 creatures.');
+    const s = S.freshState();
+    team(4).forEach((x, i) => s.creatures.push(S.makeCreature(x, { uid: 'm' + i })));
+    const own = S.ownDeck(s);
+    assert.deepEqual(J(own.loans), []);
+    assert.equal(own.team.length, 4);
+    assert.equal(own.check.valid, false);
 });
 
 test('createBattle uses variant, natural traits and taught tricks for battle stats', () => {

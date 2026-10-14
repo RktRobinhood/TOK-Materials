@@ -292,6 +292,7 @@ body.calm-motion .tour-practice * { animation:none; }
 .copy-count { flex: none; }
 .axiom-option { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--panel-edge); border-radius: 8px; }
 .stepper .btn.blocked { opacity: 0.45; }
+.tactic-builder { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
 .tactic-art { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; }
 /* Colour tactics in the deck builder: a coloured edge and the In tune line (lit when the team has the colour). */
 .tactic-option[data-tcolour="reason"] { border-left: 4px solid var(--reason); }

@@ -6,11 +6,12 @@ import { loadRift } from './harness.mjs';
 import { Node } from './dom-adapter.mjs';
 
 function game(items) {
-    const Rift = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/axioms.js', 'data/tactics.js',
+    const Rift = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/starters.js', 'data/axioms.js', 'data/tactics.js',
         'data/script/lesson1.js', 'data/script/lesson2.js', 'data/script/lesson3.js', 'data/script/lesson4.js',
         'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/ai.js', 'js/battle/lesson.js', 'js/ui/battles.js']);
     const state = Rift.State.freshState();
     state.avatar = { type: 'owlet', nickname: 'Test' };
+    Rift.State.grantStarter(state);
     state.items = Object.assign({}, items);
     state.flags['story-battle-won'] = true;
     Rift.State.get = () => state;

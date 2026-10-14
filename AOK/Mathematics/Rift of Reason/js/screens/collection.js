@@ -92,13 +92,24 @@
 
     const colourName = colour => (Rift.COLOURS[colour] || { name: colour }).name;
 
-    // The intro line: what the player can choose, said plainly for a small collection.
+    // The intro line: what the player can choose, said plainly. No loaned creatures fill the deck (#114).
     function deckIntro(D, owned) {
         const tail = ' Take at most 2 copies of a creature or a tactic. Colour tactics: for each colour, take no more of them than creatures of that colour. Generic tactics have no limit. A colour tactic does not need its colour in play.';
-        if (!owned) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have no creatures yet. Loaned creatures fill your team.' + tail;
-        if (owned < 6) return 'Your deck has ' + D + ' cards: creatures plus tactic cards. You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + '. Use them all. Loaned creatures fill the rest.' + tail;
-        return 'Your deck has ' + D + ' cards: 6 to 14 creatures from your collection plus tactic cards.'
-            + (owned < 14 ? ' If you pick all ' + owned + ', loaned creatures can fill the rest.' : '') + tail;
+        return 'Your deck has ' + D + ' cards: 6 to 14 of your own creatures plus tactic cards.'
+            + (owned < 6 ? ' You have only ' + owned + ' creature' + (owned === 1 ? '' : 's') + ': catch more to build a deck.' : '') + tail;
+    }
+
+    // The starter deck again (#114): the granted copies still owned (another owned copy of the same
+    // species replaces a lost one) and the starter tactics. null without a receipt.
+    function starterChoice(s) {
+        const r = s.starter;
+        if (!r || !Array.isArray(r.uids)) return null;
+        const byUid = {};
+        s.creatures.forEach(c => { byUid[c.uid] = c; });
+        const picked = r.uids.map(uid => byUid[uid]).filter(Boolean);
+        const species = r.uids.map((uid, i) => (byUid[uid] ? null : ((Rift.data.starterDecks || { decks: {} }).decks[r.type] || { creatures: [] }).creatures[i])).filter(Boolean);
+        species.forEach(sp => { const spare = s.creatures.find(c => c.species === sp && !picked.includes(c)); if (spare) picked.push(spare); });
+        return { team: picked.map(c => c.uid), tactics: (r.tactics || []).slice() };
     }
 
     function editOwnDeck(onSaved) {
@@ -117,9 +128,7 @@
         const problemList = el('ul.deck-problems');
         const quotaLine = el('div.deck-quota.small');
         const reject = el('p.small.deck-reject', { role: 'alert' });
-        const loanNote = el('p.small.muted.loan-note');
         const boxes = [], steppers = [];
-        let loanRows = [];
         let saveBtn = null;
 
         const chosenTeam = () => s.creatures.filter(x => team.has(x.uid));
@@ -130,8 +139,7 @@
         };
         const speciesCount = sp => chosenTeam().filter(x => x.species === sp).length;
         const tacticTotal = () => chosenTactics().length;
-        const loansNow = () => S.loanFillers({ owned: s.creatures.length, team: team.size, tactics: tacticTotal() });
-        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), loans: loansNow().length, missing }, { owned });
+        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned });
         const tacticDef = id => Rift.data.tactics[id] || { name: id, cost: '?', text: 'This card is no longer in the game. Remove it.' };
         const nameOf = sp => Rift.data.creatures[sp].name;
 
@@ -159,14 +167,6 @@
             return null;
         }
 
-        // Greyed rows for the loaned creatures the battle adds, so a + on a tactic never hides one.
-        function loanRow(id) {
-            const c = Rift.data.creatures[id];
-            return el('div.deck-option.loan-option', { title: 'Loaned ' + c.name + ': it fills your deck in battle and is never at risk.' }, [
-                el('span.loan-tag', { text: 'Loaned' }),
-                el('span', null, [el('strong', { text: c.name }), ' ', Rift.UI.statLine(id)]),
-            ]);
-        }
 
         function refresh() {
             const r = check();
@@ -200,11 +200,6 @@
                     quota.classList.toggle('need-line', q.tactics > q.creatures || (!counts[id] && q.creatures === 0));
                 }
             });
-            loanRows.forEach(n => n.remove());
-            loanRows = loansNow().map(loanRow);
-            loanRows.forEach(n => teamList.appendChild(n));
-            loanNote.textContent = r.counts.loans ? 'Loaned creatures fill the empty places. Each tactic you add takes the place of one loaned creature.' : '';
-            loanNote.hidden = !r.counts.loans;
             if (saveBtn) saveBtn.disabled = !r.valid;
         }
 
@@ -270,7 +265,6 @@
             reject,
             el('div.stack.deck-scroll', null, [
                 el('h3', { text: 'Battle team' }),
-                loanNote,
                 teamList,
                 el('h3', { text: 'Tactic cards' }),
                 tacticList,
@@ -278,11 +272,13 @@
         ]);
         const dialog = Rift.UI.modal('Build your deck', body, [
             { label: 'Cancel' },
-            { label: 'Default', keepOpen: true, onclick() {
-                team.clear(); S.defaultTeam(s).forEach(x => team.add(x.uid));
+            { label: s.starter ? 'Starter deck' : 'Default', keepOpen: true, onclick() {
+                const start = starterChoice(s);
+                team.clear();
+                (start ? start.team : S.defaultTeam(s).map(x => x.uid)).forEach(uid => team.add(uid));
                 boxes.forEach(({ x, input }) => { input.checked = team.has(x.uid); });
                 Object.keys(counts).forEach(k => delete counts[k]);
-                Rift.data.tacticDecks.starter.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+                (start ? start.tactics : Rift.data.tacticDecks.starter).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
                 missing = 0;
                 reject.textContent = '';
                 refresh();
@@ -377,7 +373,12 @@
             el('p', { text: 'Choose ten rule cards, at most 2 copies of a rule. Your ten cards and the opponent’s ten are shuffled together. Both players can use any offered rule; you do not know the full order.' }),
             status, problemList, reject,
             el('div.deck-scroll', null, [grid]),
-        ]), [{ label: 'Cancel' }, { label: 'Save ten cards', primary: true, keepOpen: true, onclick() {
+        ]), [{ label: 'Cancel' }, { label: 'Default ten', keepOpen: true, onclick() {
+            Object.keys(counts).forEach(k => delete counts[k]);
+            (Rift.data.axiomDecks.default || []).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
+            reject.textContent = '';
+            refresh();
+        } }, { label: 'Save ten cards', primary: true, keepOpen: true, onclick() {
             const r = check();
             const problems = r.problems.filter(x => x.part === 'axioms');
             if (problems.length) { reject.textContent = problems[0].text; return; }

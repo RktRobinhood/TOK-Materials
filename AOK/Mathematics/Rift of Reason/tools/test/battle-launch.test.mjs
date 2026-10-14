@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 function game(){
- const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/decks.js','data/axioms.js','data/tactics.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
- const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};
+ const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/creatures.js','data/items.js','data/map.js','data/decks.js','data/starters.js','data/axioms.js','data/tactics.js','data/script/lesson1.js','data/script/lesson2.js','data/script/lesson3.js','data/script/lesson4.js','js/battle/abilities.js','js/battle/engine.js','js/battle/ai.js','js/battle/lesson.js','js/ui/battles.js']);
+ const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};Rift.State.grantStarter(state);
  Rift.State.get=()=>state;Rift.State.update=fn=>fn(state);Rift.el=(...args)=>new Node(...args);
  const routes=[],modals=[];
  Rift.Assets={img:()=>new Node()};Rift.Dialogue={has:()=>false};
@@ -13,11 +13,12 @@ function game(){
  Rift.Battle.Ante={applyToSave(){throw new Error('Safe battle must not settle stakes');}};
  return {Rift,state,routes,modals};
 }
-test('empty collection can learn, practice and win the real safe story match',()=>{
+test('a new adventure can learn, practice with its owned starter deck and win the real safe story match',()=>{
  const g=game(),{Rift}=g,E=Rift.Battle.Engine;
  Rift.Battles.learn('collection');assert.equal(g.routes.at(-1).screen,'battle-lesson');
  g.routes.at(-1).params.onEnd(true);assert.equal(g.state.flags['card-lesson-won'],true);assert.equal(g.state.flags['card-rules-version'],3);
- Rift.Battles.practice();assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(g.routes.at(-1).params.player.team.length,10);
+ Rift.Battles.practice();assert.equal(g.routes.at(-1).params.mode,'practice');assert.equal(g.routes.at(-1).params.player.team.length,12);
+ assert.ok(!g.routes.at(-1).params.player.team.some(c=>c.loaner),'the owned starter deck, no loans');assert.equal(g.routes.at(-1).params.player.tactics.length,8);
  Rift.Battles.story();const p=g.routes.at(-1).params;assert.equal(p.story,true,'the end screen can say Story challenge');
  assert.equal(p.mode,'practice');assert.ok(p.player.team.every(c=>c.loaner));
  const start=E.createBattle({seed:p.seed,players:[{name:'You',team:p.player.team},{name:p.opponent.name,team:p.opponent.team}],axiomDeck:p.axiomDeck,options:{...p.battleOptions,mode:p.mode}});
@@ -43,7 +44,7 @@ test('story gate requires victory and a side challenge never completes its puzzl
  g.Rift.Battles.trainer('stall-gallery','easy');
  // A fresh save has Catch Charms and a Tonic (battle jobs), so "Bring anything?" comes first.
  assert.equal(g.modals.at(-1).title,'Bring anything?');g.modals.at(-1).buttons[0].onclick();const p=g.routes.at(-1).params;
- assert.equal(p.opponent.ai,'normal','the old name easy means Normal');assert.ok(p.player.team.every(c=>c.loaner));
+ assert.equal(p.opponent.ai,'normal','the old name easy means Normal');assert.ok(p.player.team.length===12&&!p.player.team.some(c=>c.loaner),'owned starters, not loans');
  p.onEnd({mode:'trainer',outcome:'won'});assert.equal(JSON.stringify(g.state.map.completed),completedBefore);
 });
 test('every map challenger has a portrait, short introduction and complete themed team',()=>{
@@ -149,4 +150,14 @@ test('Syllo’s loaned practice team always has an affordable opening creature a
  const playable=E.legalActions(s).filter(a=>a.type==='play'&&s.cards[a.cid].kind==='creature');
  assert.ok(playable.length>0);
  assert.ok(playable.some(a=>s.cards[a.cid].loaner&&E.playCost(s,a.cid)<=1));
+});
+test('an illegal deck is never padded with loans: a player who lost creatures repairs the deck first',()=>{
+ const g=game(),{Rift}=g;
+ g.state.creatures.splice(0,7);
+ Rift.Battles.practice();assert.equal(g.routes.length,0,'no battle starts');
+ const m=g.modals.at(-1);assert.equal(m.title,'Fix your deck first');
+ const text=n=>typeof n==='string'?n:(n.textContent||'')+(n.children||[]).map(text).join(' ');
+ assert.match(text(m.body),/no longer in your collection/);
+ // The safe story match still lends its fixed team.
+ Rift.Battles.story();assert.ok(g.routes.at(-1).params.player.team.every(c=>c.loaner));
 });
