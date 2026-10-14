@@ -1,0 +1,18 @@
+{
+  "allLoaded": true,
+  "art": "assets/art/spell-the-last-page.webp",
+  "count": "84 proposed cards",
+  "fullRule": "Reset all active Axiom categories to basics, return one own defeated creature costing 4 or less to hand, and draw 2 personal-deck cards. Announced events keep their identities and timing.",
+  "images": 87,
+  "scripts": [
+    "js/core/rift.js",
+    "data/assets.js?v=spell-cf57f595e457",
+    "js/core/assets.js",
+    "dev/spell-art-data.js?v=spell-cf57f595e457"
+  ],
+  "selected": "The Last Page",
+  "viewport": [
+    1280,
+    720
+  ]
+}

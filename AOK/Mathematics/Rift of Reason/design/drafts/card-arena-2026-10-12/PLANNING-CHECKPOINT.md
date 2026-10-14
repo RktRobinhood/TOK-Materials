@@ -1,5 +1,9 @@
 # Card Arena continuation checkpoint
 
+## Publication complete — spell standouts
+
+6388f29 PUSHED; Pages38537782135 SUCCESS. Public native1280×720/DPR1/84spells/87images loaded, proper versioncf57f595e457, new LastPage art/fullrule/keyboardreading visibly verified; public-last-page.png and public-gallery.json saved. Source+runtime2paintings/only2artmapchanges/oldassets+cardcontracts preserved; all local/source/native/fullsuite/rootreview acceptance completed. No generation/build/test repetition required. Voice140clips remain published1951/2579recorded/628missing; transcript acceptance stillpending after2HTTP503s/zero checked. Scheduled loop staysdeleted; onlyrootwriter, unrelatedpreview/helper/research preserved. Next exact frontier: actual pending audio transcription (only after actionable service change), permitted remaining cast handoff/Hank146 mechanics, and production109/122physicalinteraction/saved-back/parent gates. No72/72 or expansion-runtime/conditional-set release claim.
+
 ## Latest spell-art continuation — 14 October
 
 Voices d686d97 and board c6dae43 are PUSHED; Pages38532323662 SUCCESS. Public board1280/DPR1/correct version122-732fac823199/allimagesloaded confirmed after a failed first capture and successful reload. Public voice manifest +Clockmaker/Mirage/Colossus samples HTTP200/hashmatch.140clips delivered; spoken-word acceptance remains pending after two503s/zero audited clips. No old audio changed, no scheduled loop.
