@@ -2255,7 +2255,21 @@
       "bodyFamily": "bird: quail",
       "generatedOutput": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a12c0e-2918-7731-88d6-e7980ca1adfd\\exec-82a1586a-9588-4a8b-82be-ab40399f31e2.png",
       "visualReview": "First take accepted: cute-horror quail in front-left mid-hop, two wings/two legs, readable brass microphone, no book/text/human face; whole silhouette visible. Basic alpha and native frame acceptance follow.",
-      "actualOrientation": "front-left, microphone left, mid-hop"
+      "actualOrientation": "front-left, microphone left, mid-hop",
+      "nativeAcceptance": {
+        "status": "accepted locally",
+        "date": "2026-10-14",
+        "evidence": "design/reviews/art-recovery-2026-10-14.md",
+        "viewports": [
+          "1280x720 DPR1",
+          "390x844 DPR1"
+        ],
+        "backgrounds": [
+          "dark",
+          "light"
+        ],
+        "publicStatus": "Accepted: group5, all4imagesloaded, correct rule, zero warning/errors; jimmy-public.png"
+      }
     },
     {
       "id": "creature/language-comma-caterpillar/idle",
@@ -4125,15 +4139,16 @@
         "cost": 2,
         "attack": 2,
         "health": 1,
-        "text": "Last Word: return this to your hand once per match.",
+        "text": "Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room.",
         "gates": [
-          109
+          109,
+          "spell-reaction-policy"
         ]
       },
       "source": "production-memory-return-roach-145.png",
-      "status": "deferred:147 identical Zuckerborg",
-      "group": null,
-      "prompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Rick Ash-tley, an ORIGINAL NONHUMAN creature inspired by Rick Astley's public persona. Silhouette/costume: Small rounded roach with a neat reddish crest, silver-grey raincoat and charming raised brow. Main prop/gesture: One plain microphone; modest mid-step pose is a broad pop-stage cue. Visual joke: The familiar performer returns just when the audience expected someone else. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: three-quarter right-facing calm pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly low camera angle, big theatrical surprise. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "status": "selected",
+      "group": 6,
+      "prompt": "Use case: stylized-concept. ONE original transparent full-body card creature cutout for Rift of Reason. Image 1 is the approved STYLE BOARD: cute-horror storybook dusk, medium dark-brown ink outlines, clean cel-lit forms and softly painted texture, expressive warm faces and dark jewel contrast. Image 2 shipped Astrophysicat is RENDERING reference only; do NOT copy cat anatomy, outfit, stars, gesture or colours. Subject: Rick Ash-tley, a NONHUMAN roach inspired loosely by Rick Astley's public pop-performer persona, never a realistic human face. A rounded chestnut-brown insect with a neat swept reddish crest, charming raised brow, big amber insect eyes, TWO antennae, small segmented abdomen and exactly SIX insect limbs. Two front limbs are arms: one holds ONE oversized plain silver-and-brass microphone, the other fans outward in theatrical surprise; four remaining limbs are insect legs supporting a funny BACKWARD SIDESTEP toward the LEFT. Three-quarter FRONT-LEFT view, face turned toward viewer, not a uniform right-facing standing mascot. Silver-grey short raincoat with broad silver #C9C9D6 trim and a dark midnight-violet collar, worn cloth, warm lantern edge light. The unexpected stage guest slips backstage when the spotlight finds him; convey the joke in the still pose without painting a spotlight, scenery or another person. No lyrics, tune, printed words, logos, commercial costume or copied choreography. Whole coherent silhouette occupies about 75percent of canvas, all antennae/legs/coat/microphone safely inside with generous actually transparent margins. Face and single microphone read at70px and charming at300px. No human hands, mammal muzzle/ears, cat body, extra limbs or extra figures; insect mouth and rounded mandibles. GENUINELY TRANSPARENT BACKGROUND, no frame, floor, ground-shadow blob, particles, text, letters, watermark or scenery rectangle. No glossy3D or nursery pastel look. Live names/rules/stats and separate Memory card frame will be added by code. This is one distinct original creature, not a sheet.",
       "styleReferences": [
         "design/source-assets/0-style/style-board.png",
         "assets/creatures/astrophysicat-idle.webp"
@@ -4145,8 +4160,11 @@
         "hit",
         "defeat"
       ],
-      "draftLines": [],
-      "poseDirection": "three-quarter right-facing calm pose",
+      "draftLines": [
+        "Backstage, briefly.",
+        "I knew that spotlight."
+      ],
+      "poseDirection": "Front-left theatrical backward sidestep; actual six insect limbs, swept crest, microphone and two antennae",
       "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Rick Ash-tley, an ORIGINAL NONHUMAN creature inspired by Rick Astley's public persona. Silhouette/costume: Small rounded roach with a neat reddish crest, silver-grey raincoat and charming raised brow. Main prop/gesture: One plain microphone; modest mid-step pose is a broad pop-stage cue. Visual joke: The familiar performer returns just when the audience expected someone else. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
       "variation": {
         "seed": "memory-return-roach145-variation-v1",
@@ -4157,6 +4175,45 @@
       "mechanicalReleaseGate": {
         "issue": 147,
         "reason": "Same body and once-per-match self-return Last Word as Zuckerborg; redesign before portrait/runtime release."
+      },
+      "priorContracts": [
+        {
+          "issue": 147,
+          "contract": {
+            "cost": 2,
+            "attack": 2,
+            "health": 1,
+            "text": "Last Word: return this to your hand once per match.",
+            "gates": [
+              109
+            ]
+          },
+          "priorPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: Rick Ash-tley, an ORIGINAL NONHUMAN creature inspired by Rick Astley's public persona. Silhouette/costume: Small rounded roach with a neat reddish crest, silver-grey raincoat and charming raised brow. Main prop/gesture: One plain microphone; modest mid-step pose is a broad pop-stage cue. Visual joke: The familiar performer returns just when the audience expected someone else. Use jewel accent #C9C9D6 on worn dark cloth/trim, no invented branding. Pose/composition: three-quarter right-facing calm pose. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly low camera angle, big theatrical surprise. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+          "status": "deferred:147 identical Zuckerborg",
+          "poseDirection": "three-quarter right-facing calm pose"
+        }
+      ],
+      "draftRevision": {
+        "issue": 147,
+        "base": "9f83a2882b81752d93f5ca72bb0e7f1e17138035",
+        "resolution": "Distinct proposed once-per-match escape from a targeted enemy spell; explicit pre-spell policy gate. No runtime release."
+      },
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a138c0-4032-7d23-8621-5331de857ada/exec-737119d1-1629-4a1e-8192-20cfc51bf507.png",
+      "visualReview": "First take selected: coherent roach with two antennae, two arm-like front limbs and four walking legs, segmented abdomen, silver coat, one clear microphone. Alpha bounds x57..1181/y4..1306 in1194x1317: complete silhouette, small but nonzero margins; no major cut parts, no opaque background/text. No edit needed under proportional student QA.",
+      "sourceSha256": "5266eed2ba66ce7c8e01e0f458f86028ac6e8abcc537d0f2f42251c5f47277bd",
+      "nativeAcceptance": {
+        "status": "accepted locally",
+        "date": "2026-10-14",
+        "evidence": "design/reviews/art-recovery-2026-10-14.md",
+        "viewports": [
+          "1280x720 DPR1",
+          "390x844 DPR1"
+        ],
+        "backgrounds": [
+          "dark",
+          "light"
+        ],
+        "publicStatus": "Pending publication"
       }
     },
     {

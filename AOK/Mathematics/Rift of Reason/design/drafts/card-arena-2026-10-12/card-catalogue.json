@@ -1863,17 +1863,19 @@
       "cost": 2,
       "attack": 2,
       "health": 1,
-      "text": "Last Word: return this to your hand once per match.",
+      "text": "Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room.",
       "tags": [
-        "recursion"
+        "recursion",
+        "spell-reaction"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
-      "counterplay": "Silence it before defeat.",
+      "counterplay": "Use creature combat, untargeted damage or silence; a full hand prevents escape.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
-        109
+        109,
+        "spell-reaction-policy"
       ],
       "art": "creature/memory-return-roach/idle",
       "acquisition": {

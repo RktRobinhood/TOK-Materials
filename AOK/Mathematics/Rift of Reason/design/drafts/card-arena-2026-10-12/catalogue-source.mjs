@@ -102,7 +102,7 @@ add('memory', 'creature', `
 Bookmark Bunny|1|1/2|Entrance: heal a damaged friendly creature by 1.|healing|Finish damaged targets before the heal.
 Recall Robin|2|1/2|Entrance: put your most recently discarded spell on the bottom of your personal deck if still there.|recursion|Race before it is redrawn.
 Archive Armadillo|2|1/3|Guard.|guard|Remove Guard or use spells.
-Return Roach|2|2/1|Last Word: return this to your hand once per match.|recursion|Silence it before defeat.
+Return Roach|2|2/1|Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room.|recursion,spell-reaction|Use creature combat, untargeted damage or silence; a full hand prevents escape.
 Chronicle Cat|3|2/3|Once per turn, after you recover a card from discard, heal your hero by 1.|recursion,healing|Remove the engine or exploit reversed Win.
 Replay Raccoon|3|2/3|Entrance: return a friendly creature costing 1 or less from discard to hand.|recursion|Pressure during the replay turn.
 Hourglass Hedgehog|3|1/4|Guard. The first time each round you move Fate backward, this gains Shield.|guard,fate-move|Remove Shield or use repeated damage.
@@ -290,7 +290,7 @@ for (const [rarity, count] of Object.entries(expectedRarity)) assert(counts('rar
 for (const affinity of Object.keys(themes)) assert(counts('affinity')[affinity] === (affinity === 'generic' ? 42 : 28), 'Affinity count: ' + affinity);
 assert(cards.every(c => c.text && c.counterplay && c.strategy && c.tags.every(Boolean) && Number.isInteger(c.cost) && c.cost >= 0), 'Missing design information');
 assert(cards.filter(c => c.kind === 'creature').every(c => c.health > 0 && c.attack >= 0), 'Invalid creature stats');
-const gateTags = { 'fate-schedule':[118,119], 'fate-move':[118,120], 'fate-repeat':[118,120], 'alt-win':['victory-policy'], 'exhaustion':[117], 'token':['token-order'], 'combat':[127] };
+const gateTags = { 'fate-schedule':[118,119], 'fate-move':[118,120], 'fate-repeat':[118,120], 'alt-win':['victory-policy'], 'exhaustion':[117], 'token':['token-order'], 'combat':[127], 'spell-reaction':['spell-reaction-policy'] };
 for (const card of cards) {
   card.gates = [109, ...new Set(card.tags.flatMap(t => gateTags[t] || []))];
   card.art = card.kind === 'creature' ? 'creature/' + card.id + '/idle' : 'shared frame and mechanic icon; unique illustration optional';

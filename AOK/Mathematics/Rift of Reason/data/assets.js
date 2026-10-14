@@ -241,6 +241,7 @@
         'creature/memory-keeper-koi/idle': { file: 'creatures/memory-keeper-koi-idle.webp', w: 643, h: 620 },
         'creature/memory-recall-robin/idle': { file: 'creatures/memory-recall-robin-idle.webp', w: 729, h: 620 },
         'creature/memory-replay-raccoon/idle': { file: 'creatures/memory-replay-raccoon-idle.webp', w: 835, h: 620 },
+        'creature/memory-return-roach/idle': { file: 'creatures/memory-return-roach-idle.webp', w: 534, h: 620 },
         'creature/memory-second-chance-salamander/idle': { file: 'creatures/memory-second-chance-salamander-idle.webp', w: 672, h: 620 },
         'creature/memory-sequence-swan/idle': { file: 'creatures/memory-sequence-swan-idle.webp', w: 919, h: 620 },
         'creature/memory-souvenir-seal/idle': { file: 'creatures/memory-souvenir-seal-idle.webp', w: 751, h: 620 },

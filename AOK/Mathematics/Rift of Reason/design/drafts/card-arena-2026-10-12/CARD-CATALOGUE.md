@@ -212,7 +212,7 @@ Discard recovery, delayed effects and bounded Fate re-entry.
 | Bookmark Bunny · `memory-bookmark-bunny` | creature / common / 1 | 1/2 | Entrance: heal a damaged friendly creature by 1. | Finish damaged targets before the heal. | pack-pool |
 | Recall Robin · `memory-recall-robin` | creature / common / 2 | 1/2 | Entrance: put your most recently discarded spell on the bottom of your personal deck if still there. | Race before it is redrawn. | pack-pool |
 | Archive Armadillo · `memory-archive-armadillo` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use spells. | pack-pool |
-| Return Roach · `memory-return-roach` | creature / common / 2 | 2/1 | Last Word: return this to your hand once per match. | Silence it before defeat. | pack-pool |
+| Return Roach · `memory-return-roach` | creature / common / 2 | 2/1 | Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room. | Use creature combat, untargeted damage or silence; a full hand prevents escape. | pack-pool |
 | Chronicle Cat · `memory-chronicle-cat` | creature / uncommon / 3 | 2/3 | Once per turn, after you recover a card from discard, heal your hero by 1. | Remove the engine or exploit reversed Win. | pack-pool |
 | Replay Raccoon · `memory-replay-raccoon` | creature / uncommon / 3 | 2/3 | Entrance: return a friendly creature costing 1 or less from discard to hand. | Pressure during the replay turn. | pack-pool |
 | Hourglass Hedgehog · `memory-hourglass-hedgehog` | creature / uncommon / 3 | 1/4 | Guard. The first time each round you move Fate backward, this gains Shield. | Remove Shield or use repeated damage. | pack-pool |

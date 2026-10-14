@@ -1,0 +1,32 @@
+{
+  "added": [
+    "creature/memory-return-roach/idle"
+  ],
+  "oldEntriesUnchanged": true,
+  "checks": [
+    {
+      "file": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-return-roach-145.png",
+      "width": 1194,
+      "height": 1317,
+      "transparentFraction": 0.6262793339005837,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "assets/creatures/memory-return-roach-idle.webp",
+      "width": 534,
+      "height": 620,
+      "transparentFraction": 0.5988190165518907,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

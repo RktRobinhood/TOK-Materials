@@ -1,0 +1,84 @@
+{
+  "base": "9f83a2882b81752d93f5ca72bb0e7f1e17138035",
+  "card": {
+    "id": "memory-return-roach",
+    "name": "Return Roach",
+    "affinity": "memory",
+    "kind": "creature",
+    "rarity": "common",
+    "cost": 2,
+    "attack": 2,
+    "health": 1,
+    "text": "Last Word: return this to your hand once per match.",
+    "tags": [
+      "recursion"
+    ],
+    "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
+    "counterplay": "Silence it before defeat.",
+    "status": "draft; not implemented or balance-tested",
+    "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
+    "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+    "gates": [
+      109
+    ],
+    "art": "creature/memory-return-roach/idle",
+    "acquisition": {
+      "channel": "pack-pool",
+      "packEligible": true,
+      "releaseStatus": "draft; only enters packs when its implementation is released"
+    }
+  },
+  "persona": {
+    "mechanicalId": "memory-return-roach",
+    "workingName": "Return Roach",
+    "proposedName": "Rick Ash-tley",
+    "inspiration": "Rick Astley",
+    "colour": "memory",
+    "rarity": "common",
+    "acquisition": {
+      "channel": "pack-pool",
+      "packEligible": true,
+      "releaseStatus": "draft; only enters packs when its implementation is released"
+    },
+    "silhouette": "Small rounded roach with a neat reddish crest, silver-grey raincoat and charming raised brow.",
+    "signatureProp": "One plain microphone; modest mid-step pose is a broad pop-stage cue.",
+    "jokeAngle": "The familiar performer returns just when the audience expected someone else.",
+    "mechanicLink": "Once-per-match return is the meme payoff; no song lyrics, tune, commercial clip or copied choreography.",
+    "source": "https://rickastley.co.uk/",
+    "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
+    "voiceDirection": "Warm playful original spoken performer; no singing or voice imitation.",
+    "sharedSfx": [
+      "card-play",
+      "hit",
+      "defeat"
+    ],
+    "artId": "creature/memory-return-roach/idle",
+    "palette": {
+      "accent": "#C9C9D6",
+      "shadow": "ink-brown and midnight violet; restrained affinity rim light",
+      "materials": "worn cloth/leather or painted metal; no pristine plastic"
+    },
+    "promptReferences": [
+      "design/source-assets/0-style/style-board.png",
+      "assets/creatures/astrophysicat-idle.webp"
+    ],
+    "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
+    "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+    "mechanicalContract": {
+      "cost": 2,
+      "attack": 2,
+      "health": 1,
+      "text": "Last Word: return this to your hand once per match.",
+      "gates": [
+        109
+      ]
+    },
+    "castDecision": {
+      "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
+      "decision": "retain",
+      "audienceLane": "internet, music, sport or screen-fandom crossover",
+      "appealReason": "Keep the pun, expressive creature and readable public-persona gag: The familiar performer returns just when the audience expected someone else.",
+      "smallScaleCue": "One plain microphone; modest mid-step pose is a broad pop-stage cue."
+    }
+  }
+}

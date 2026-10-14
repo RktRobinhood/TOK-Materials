@@ -1,5 +1,11 @@
 # Card Arena continuation checkpoint
 
+## Continuation in the new chat — 14 October 2026
+
+Teacher stopped the old scheduled loop; the app confirmed deletion of Build Rift card pipeline / finish-rift-card-planning. Earlier active-automation instructions are historical. The new browser captures correctly at DPR1/1280x720 and390x844; Jimmy native acceptance is complete. Rick #147 now has a distinct gated spell-escape proposal and group6 first-take portrait, built through the existing pipeline. Total71of72expansion portraits made and locally accepted, all8sharedmotifs preserved. Stephen remains unproduced after service rejection (do not retry/rephrase); Hank146 still needs a distinct mechanic. Rick reaction timing has an explicit spell-reaction-policy release gate; no expansion runtime/grants/recordings changed. See design/reviews/art-recovery-2026-10-14.md for exact prompts/provenance, captures and asset checks. Publication/fulltests/independentreviews pending at this point.
+
+Latest continuation above supersedes older automation/browser-frontier instructions below.
+
 Updated 12 October 2026. Latest authorization: finish design and issue handoff, then implement one issue at a time, prioritizing visual work and assets. Use existing art/voice flows and leave an exact builder frontier. Continue after five-hour resets while weekly allowance permits. Earlier planning-only and reserve restrictions are superseded.
 
 ## Completed and pushed
@@ -184,3 +190,5 @@ Metadata90e439a deployment38475699388 succeeded. Queued localtab14 attached;4ima
 Native capture blocker filed#150: https://github.com/RktRobinhood/TOK-Materials/issues/150. This is a client QA investigation, not a certified game layout defect. Exactcheckpointnow waitsforan actionablecapture/browserstate; no repeat unchanged attempts, generation, build or fulltests.69accepted/70made/#145OPEN remains.
 
 #150 read-only service audit found inverseDPR applied as screenshotclip.scale, consistent with757/231widths; doesnotconclusivelyexplainclipping. No supportedscale/DPRoverride/recoveryfound. EnabledsurfaceinventoryonlyIAB2/MCPApps1, no alternatebrowserbackend. Evidence group5-capture-source-audit.md/issue150comment; installedtools/settings/gameunchanged. Awaitnewactionablecapturestate, preserve70made69accepted and tab14handoff.
+
+Validation completed14October: full823tests,822pass,1skip,0fail,127698.1441ms,exit0. Both draft validators passed; base comparison found only Rick changed with protected fields/counts unchanged. Source/runtime alpha and exactone-manifest-addition check passed. Generator repeat is byte-stable, including other builders’ trailing ROSTER notes. Local captures are real1280/390px DPR1; Jimmy public1280/DPR1 has all4imagesloaded/correctrule/zeroerrors. See jimmy-public.png. Independent Standards/Spec review and new Rick deployment remain pending.

@@ -1185,6 +1185,27 @@
       "group": 4
     },
     {
+      "id": "creature/memory-return-roach/idle",
+      "name": "Rick Ash-tley",
+      "kind": "portrait",
+      "colour": "memory",
+      "rarity": "common",
+      "pose": "Front-left theatrical backward sidestep; actual six insect limbs, swept crest, microphone and two antennae",
+      "contract": {
+        "cost": 2,
+        "attack": 2,
+        "health": 1,
+        "text": "Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room.",
+        "gates": [
+          109,
+          "spell-reaction-policy"
+        ]
+      },
+      "coverage": "",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-memory-return-roach-145.png",
+      "group": 6
+    },
+    {
       "id": "creature/memory-chronicle-cat/idle",
       "name": "Stan Leemur",
       "kind": "portrait",

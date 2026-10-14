@@ -67,3 +67,10 @@ Zero recordings, runtime bark/cast-pin additions, voice API calls or voice-manif
 Jimmy #144: original playful host cue may become “The floor is yours.” after runtime text is frozen. One brass microphone replaces the cue card in the proposal. Reuse shared effects; no recording/API/manifest changes.
 
 Group5 Jimmy has two original short source-only host lines (“The floor is yours.” / “No frozen interviews today.”), saved in voice-drafts-group5.json and inventory. Shared card-play/hit/defeat effects; no voice resemblance request, paid/API run, pin or manifest change. Runtime wording and #109/#123 release precede recording.
+
+
+## Continuation in the new chat — 14 October 2026
+
+Teacher stopped the old scheduled loop; the app confirmed deletion of Build Rift card pipeline / finish-rift-card-planning. Earlier active-automation instructions are historical. The new browser captures correctly at DPR1/1280x720 and390x844; Jimmy native acceptance is complete. Rick #147 now has a distinct gated spell-escape proposal and group6 first-take portrait, built through the existing pipeline. Total71of72expansion portraits made and locally accepted, all8sharedmotifs preserved. Stephen remains unproduced after service rejection (do not retry/rephrase); Hank146 still needs a distinct mechanic. Rick reaction timing has an explicit spell-reaction-policy release gate; no expansion runtime/grants/recordings changed. See design/reviews/art-recovery-2026-10-14.md for exact prompts/provenance, captures and asset checks. Publication/fulltests/independentreviews pending at this point.
+
+Rick147/145group6 has two original draft lines only: “Backstage, briefly.” and “I knew that spotlight.” Warm playful spoken delivery, no singing/celebrity imitation; reuse card-play/hit/defeat cues as appropriate. They remain outside runtime sources/recordings until wording/mechanics release. Jimmy lines/recordings and all existing cast pins are preserved.
