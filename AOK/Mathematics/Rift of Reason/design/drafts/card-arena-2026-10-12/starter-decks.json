@@ -1,5 +1,5 @@
 {
-  "status": "Card definitions implemented under #113; construction quotas implemented under #112 (Rift.State.validateDeck); owned deck grants implemented under #114 (data/starters.js); workshop remains #115.",
+  "status": "Card definitions implemented under #113; construction quotas implemented under #112 (Rift.State.validateDeck); owned deck grants implemented under #114 (data/starters.js); starter workshop implemented under #115 (js/ui/deck-workshop.js).",
   "rules": {
     "deckSize": 20,
     "maxCopies": 2,

@@ -840,7 +840,7 @@
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
-                d.colour ? colourEmblem(d.colour, d.colourReady) : null,
+                d.colour ? colourEmblem(d.colour) : null,
                 el('div.bc-name' + fitName(d.name + (d.rarity === 'rare' ? ' ★' : '')), { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
                 el('div.bc-text', {}, [
                     size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
@@ -851,13 +851,11 @@
         }
         // "Reason · uncommon" under the name of a colour tactic.
         const tacticKind = d => (Rift.COLOURS[d.colour] || { name: d.colour }).name + (d.rarity ? ' · ' + d.rarity : '');
-        // Since #112 a colour tactic needs no creature in play: the deck's colour quota limits it instead.
-        // describe().colourReady is always true now, so this text is only a fallback.
-        const needsText = colour => { const C = Rift.COLOURS[colour] || { colour, name: colour }; return 'A deck holds as many ' + C.name + ' tactics as ' + C.name + ' creatures.'; };
-        // The colour's emblem in the card's top corner (lit: playable by colour; always since #112).
-        function colourEmblem(colour, on) {
+        // The colour's emblem in the card's top corner, always lit: since #112 a colour tactic needs no
+        // creature of its colour in play (the deck's colour quota limits it instead, #115 teaches it).
+        function colourEmblem(colour) {
             const C = Rift.COLOURS[colour] || {};
-            return el('div.bc-emblem' + (on ? '.on' : ''), { title: (C.name || colour) + ' tactic', 'aria-hidden': 'true' },
+            return el('div.bc-emblem.on', { title: (C.name || colour) + ' tactic', 'aria-hidden': 'true' },
                 [has('ui/icon-' + colour) ? Rift.Assets.img('ui/icon-' + colour, { alt: '' }) : el('span', { text: C.icon || '◆' })]);
         }
 
@@ -979,7 +977,7 @@
             const c = state.cards[cid];
             const d = E.describe(state, cid);
             if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text
-                + (d.colour ? ' ' + tacticKind(d) + '.' + (d.colourReady ? '' : ' ' + needsText(d.colour)) : '');
+                + (d.colour ? ' ' + tacticKind(d) + '.' : '');
             return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
                 + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '') + effectsLabel(cid);
         }
