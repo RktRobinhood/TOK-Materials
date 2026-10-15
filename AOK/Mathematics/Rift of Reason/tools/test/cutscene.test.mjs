@@ -153,6 +153,7 @@ function storyGame(type = 'fox', variant = 'girl') {
     });
     g.Rift.UI.toast=()=>{}; g.Rift.UI.input.consume=()=>{};
     g.run('data/map.js'); g.run('data/items.js'); g.run('data/creatures.js'); g.run('data/script/lesson1.js'); g.run('data/cast.js');
+    g.run('data/script/lesson2.js');
     g.run('js/core/story.js'); g.run('js/core/cast.js'); g.run('js/core/stakes.js');
     return g;
 }
@@ -261,6 +262,133 @@ test('Gate navigation abandonment grants no reward and re-entry grants only one'
         await finishStory(g,g.Rift.Dialogue.play('ch1.gate.win'),'complete');
         assert.equal(g.state.items['lucky-sequin']||0,tier<=2?1:0);
         assert.equal(!!g.state.flags.nudgeFled,tier>=2);assert.equal(g.claims(),0);
+    }
+});
+
+function hallGame(type='mothkin',variant='girl',tier=1) {
+    const g=storyGame(type,variant),n=[0,0,3,5,8][tier];
+    Object.assign(g.state.flags,{'seen:ch2.cover':true,'seen:ch2.square.win':true,
+        'seen:prologue.evening':true,'seen:ch2.arrive':true,'seen:ch2.well':true,
+        'dead:granny':tier===4,'stakes.ch2':tier===4?4:undefined,
+        'clock:ch2':{n,size:8,started:true,done:tier===4,tier:tier===4?4:null},suspect:'mayor'});
+    g.state.chapter='ch2';
+    return g;
+}
+
+test('the Hall replay uses only canonical words and stages each tier without changing story state',async()=>{
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl'])
+        for(const tier of [1,2,3,4])for(const recovered of [false,true]) {
+            const g=hallGame(type,variant,tier);
+            g.state.flags['stakes.ch2']=tier;
+            Object.assign(g.state.flags,{nudgeFled:recovered,'paradox-board':true});
+            const before=JSON.stringify(g.state),p=g.Rift.Cutscene.plan('town-hall-aftermath');
+            const says=p.steps.filter(s=>s.say),shots=p.steps.filter(s=>s.shot);
+            assert.equal(JSON.stringify(g.state),before);
+            for(const s of says)assert.ok(voices.has(s.say+':'+s.t),'catalogued Hall line '+s.say+':'+s.t);
+            assert.equal(says.filter(s=>s.t.includes('my first piece')).length,recovered?1:0);
+            assert.equal(says.filter(s=>s.say==='nudge').length,tier===4?0:1);
+            assert.equal(says.filter(s=>s.say==='granny').length,tier===4?0:1);
+            assert.ok(says.some(s=>s.t==='Forty years I marked "maybe" wrong. Red ink. Every child.'));
+            const outcome=shots.find(s=>s.shot==='the-space-beside-you');
+            assert.equal(outcome.layers.some(l=>l.id==='granny'),tier!==4);
+            assert.equal(outcome.layers.some(l=>l.id==='axiom'),tier<=2);
+            assert.equal(outcome.layers.some(l=>l.id==='keepsakes'),tier===4);
+            if(tier===3)assert.equal(outcome.layers.find(l=>l.id==='granny').art,'npc/granny-axiom/idle');
+            for(const s of shots) {
+                const isPeril=['the-last-answer','the-teachers-face','the-shadow-on-the-floor','borrowed-faces','forty-years'].includes(s.shot);
+                assert.equal(s.layers[0].art,isPeril&&tier!==4?'scene/feast-hall':'scene/hall-after');
+                for(const l of s.layers.filter(l=>!l.cover)) {
+                    const p=g.Rift.Cutscene.project(s.camera,l);
+                    assert.ok(p.sx-l.w*p.S/2>=0&&p.sx+l.w*p.S/2<=1600,l.id+' fits horizontally');
+                    assert.ok(p.sy-l.h*p.S/2>=0&&p.sy+l.h*p.S/2<=760,l.id+' fits above subtitles');
+                }
+            }
+            assert.equal(shots.find(s=>s.shot==='forty-years').layers.filter(l=>/^shadow-/.test(l.id)).length,recovered?2:1);
+            const speech=p.steps.findIndex(s=>s.t==='Tomorrow is waiting. Everyone there has already decided about you.');
+            const exit=p.steps.findIndex(s=>s.tween==='quill'&&s.to.opacity===0);
+            assert.ok(speech>=0&&exit>speech,'Quill speaks before she leaves');
+            assert.ok(p.steps.every(s=>!s.flag&&!s.clock&&!s.give&&!s.choice));
+        }
+    const brink=hallGame('raven','boy',3);
+    brink.state.flags['stakes.ch2']=3;brink.state.flags['clock:ch2'].n=8;
+    const saved=brink.Rift.Cutscene.plan('town-hall-aftermath');
+    assert.equal(saved.steps.find(s=>s.shot==='the-space-beside-you').layers.find(l=>l.id==='granny').art,'cutscene/granny-without-shawl');
+    assert.ok(saved.steps.some(s=>s.t==='My shawl boiled away. With your card in the pocket.'));
+    const recovered=saved.steps.find(s=>s.shot==='the-last-answer');
+    assert.equal(recovered.layers[0].art,'scene/hall-after');
+    assert.equal(recovered.layers.find(l=>l.id==='granny-safe').art,'cutscene/granny-without-shawl');
+    const grounded=saved.steps.find(s=>s.shot==='the-space-beside-you').layers.find(l=>l.id==='granny');
+    assert.equal(grounded.y+grounded.h/2,730);
+});
+
+test('Hall complete, Skip and failed films preserve decisions, outcomes, inner voices and one earned card',async()=>{
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const tier of [1,2,3,4])
+        for(const mode of ['complete','skip','unavailable','failed']) {
+            const g=hallGame(type,type==='mothkin'?'boy':'girl',tier),trace=[];
+            g.state.flags.nudgeFled=true;g.state.flags['paradox-board']=true;
+            const play=g.Rift.Cutscene.play;
+            if(mode==='unavailable')g.Rift.Cutscene=null;
+            else if(mode==='failed')g.Rift.Cutscene.play=async()=>false;
+            else g.Rift.Cutscene.play=(id,o)=>play(id,{...o,onStep:(k,s)=>trace.push([k,s])});
+            await finishStory(g,g.Rift.Dialogue.play('ch2.hall.win'),mode);
+            assert.equal(g.state.flags['stakes.ch2'],tier);
+            assert.equal(!!g.state.flags['spare-axiom'],tier<=2);
+            assert.equal(g.state.flags['away:schoolteacher'],true);
+            assert.equal(g.state.flags['hall-paradox'],true);
+            assert.equal(g.state.flags['seen:ch2.hall.win'],true);
+            assert.equal(g.speech.filter(l=>l.text.startsWith('True. No. False.')).length,1);
+            assert.equal(g.speech.filter(l=>l.text.startsWith('Forty years I marked')).length,1);
+            assert.equal(g.speech.filter(l=>l.text.includes('my first piece')).length,1);
+            assert.equal(g.speech.filter(l=>l.text.includes('Who checks the table')).length,1);
+            if(tier===4)assert.ok(g.speech.every(l=>l.speaker!=='granny'&&l.speaker!=='nudge'));
+            const expected={owlet:'I called it the first rule.',mothkin:'He twitched.',fox:tier===4?'I pictured the wrong face.':'Great story.',frogling:'Loud was bad three times.'}[type];
+            if(expected)assert.ok(g.speech.some(l=>l.text.startsWith(expected)),type+' keeps its inner reveal');
+            if(mode==='complete')assert.equal(trace.filter(([,s])=>s.shot==='the-space-beside-you').length,1);
+            assert.equal(g.claims(),0);
+        }
+});
+
+test('one wrong Hall sentence still advances danger and changes Granny from dry to damp',async()=>{
+    const g=hallGame();g.state.flags['clock:ch2'].n=2;
+    const play=g.Rift.Cutscene.play;g.Rift.Cutscene.play=(id,o)=>play(id,{...o,instant:true});
+    let wrong=false,done=false;
+    const promise=g.Rift.Dialogue.play('ch2.hall.win');promise.then(()=>{done=true;});
+    for(let guard=0;guard<150&&!done;guard++) {
+        await settle();
+        const choices=g.$$('.choices button');
+        if(choices.length){const pick=!wrong?choices.find(b=>b.textContent==='This statement is true.'):choices[0];wrong=true;pick.click();}
+        else if(g.$('.box'))g.$('.box').click();
+    }
+    assert.ok(done);await promise;
+    assert.equal(g.state.flags['clock:ch2'].n,4);
+    assert.equal(g.state.flags['stakes.ch2'],2);
+    assert.ok(g.speech.some(l=>l.text==='I smell of leek. Tell no one. Tell everyone. Here: my Spare Axiom.'));
+    assert.ok(g.speech.every(l=>!l.text.startsWith('Not a drop on me.')));
+});
+
+test('Hall navigation aborts each passage without granting the card; accepted paradox and danger survive re-entry',async()=>{
+    for(const stopAt of ['town-hall-unmask','town-hall-outcome','town-hall-departure']) {
+        const g=hallGame(),play=g.Rift.Cutscene.play;let arrived=false;
+        g.Rift.Cutscene.play=(id,o)=>{if(id===stopAt)arrived=true;return play(id,{...o,instant:id!==stopAt});};
+        g.Rift.Dialogue.play('ch2.hall.win');
+        for(let guard=0;guard<100&&!arrived;guard++) {
+            await settle();
+            if(g.$('.choices button'))g.$('.choices button').click();
+            else if(g.$('.box'))g.$('.box').click();
+        }
+        assert.ok(arrived);await settle();assert.ok(g.Rift.Cutscene.current(),'abort occurs inside the film');
+        g.Rift.Dialogue.abortAll();await settle();
+        assert.equal(g.state.flags['seen:ch2.hall.win'],undefined);
+        assert.equal(g.state.flags['spare-axiom'],undefined);
+        assert.equal(g.state.flags['hall-paradox'],true);
+        const danger=g.state.flags['clock:ch2'].n;
+        g.Rift.Cutscene.play=(id,o)=>play(id,{...o,instant:true});
+        await finishStory(g,g.Rift.Dialogue.play('ch2.hall.win'),'complete');
+        assert.equal(g.state.flags['clock:ch2'].n,danger);
+        assert.equal(g.state.flags['spare-axiom'],true);
+        assert.equal(g.state.flags['seen:ch2.hall.win'],true);
+        assert.equal(g.claims(),0);
     }
 });
 
@@ -400,6 +528,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
     for(const seen of [false,true]){
         const g=game();g.state.flags['seen:prologue.cold']=seen;
         g.state.flags['seen:prologue.rift']=seen;g.state.flags['seen:ch1.gate.win']=seen;
+        g.state.flags['seen:ch2.hall.win']=seen;
         g.Rift.UI.hud=()=>g.Rift.el('div');g.Rift.UI.toast=()=>{};
         g.Rift.Quests={glyph:()=>'',COLOURS:{main:'#fff',side:'#fff'},list:()=>[]};
         g.run('js/core/router.js');g.run('js/screens/journal.js');
@@ -409,6 +538,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         assert.equal(!!replay,seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Gate aftermath again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Fair rupture again'),seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Hall aftermath again'),seen);
         if(!seen)continue;
         let end,calls=0;g.Rift.Cutscene.play=()=>{calls++;return new Promise(resolve=>{end=resolve;});};
         const before=JSON.stringify(g.state);replay.click();replay.click();assert.equal(calls,1);assert.ok(replay.disabled);

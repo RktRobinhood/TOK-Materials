@@ -1,0 +1,47 @@
+[
+  {
+    "file": "granny-without-shawl-153.png",
+    "box": {
+      "x": 7,
+      "y": 5,
+      "w": 1093,
+      "h": 1332
+    }
+  },
+  {
+    "file": "hall-after-153.png",
+    "box": {
+      "x": 0,
+      "y": 0,
+      "w": 1672,
+      "h": 941
+    }
+  },
+  {
+    "file": "quill-full-153.png",
+    "box": {
+      "x": 208,
+      "y": 8,
+      "w": 1211,
+      "h": 1003
+    }
+  },
+  {
+    "file": "quill-full-first-153.png",
+    "box": {
+      "x": 209,
+      "y": 8,
+      "w": 1209,
+      "h": 999
+    }
+  },
+  {
+    "file": "quill-props-153.png",
+    "box": {
+      "x": 57,
+      "y": 162,
+      "w": 1665,
+      "h": 661
+    }
+  }
+]

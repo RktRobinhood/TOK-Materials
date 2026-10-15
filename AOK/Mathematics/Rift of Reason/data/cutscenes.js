@@ -241,4 +241,123 @@
             { wait: 1100 }, { end: true, fade: 1400, reveal: true },
         ],
     };
+    // The Hall keeps its decisions and danger in lesson2.js. These passages only stage the
+    // canonical words after the player's liar sentence; Journal joins them without mutations.
+    const hallRoom = { id: 'hall', art: 'scene/hall-after', x: 800, y: 450, w: 1600, h: 900, cover: true };
+    // The surviving captive stays visibly in peril until the outcome passage releases her.
+    const hallPerilRoom = [Object.assign({}, hallRoom, { art: 'scene/feast-hall', when: { all: ['!dead:granny', { clock: 'ch2', lte: 7 }] } }),
+        Object.assign({}, hallRoom, { when: { any: ['dead:granny', { clock: 'ch2', gte: 8 }] } }),
+        // On the no-death brink the rope already snapped: she has climbed out, without her shawl.
+        { id: 'granny-safe', art: 'cutscene/granny-without-shawl', x: 200, bottom: 730, w: 200,
+            when: { all: ['!dead:granny', { clock: 'ch2', gte: 8 }] } }];
+    const hallHero = { id: 'hero', art: '{avatar}/idle', x: 1110, bottom: 730, w: 255, wFor: { mothkin: 280 } };
+    const hallQuill = { id: 'quill', art: 'cutscene/quill-unmasked', x: 540, bottom: 730, w: 335 };
+    const hallPiece = { id: 'shadow-two', art: 'cutscene/sundial-shadow', x: 560, y: 680, w: 145 };
+    const hallFirst = { id: 'shadow-one', art: 'cutscene/sundial-shadow', x: 700, bottom: 735, w: 130, when: 'nudgeFled' };
+    C['town-hall-unmask'] = {
+        title: 'The Hall: the faces fall',
+        steps: [
+            { ambience: 'scene/feast-hall' },
+            { shot: 'the-last-answer', fade: 1000, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...hallPerilRoom, hallHero, Object.assign({}, hallQuill, { art: 'cutscene/quill-masked', w: 300 }),
+                { id: 'smudge', art: 'npc/villager-sweep/idle', x: 110, bottom: 460, w: 90, when: 'paradox-board' },
+            ] },
+            { wait: 700 }, { conversation: 'ch2.hall.break' },
+            // The speech finishes before the face moves. A detached prop makes the loss physical.
+            { set: 'quill', art: 'cutscene/quill-unmasked' },
+            { shot: 'the-teachers-face', fade: 500, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...hallPerilRoom, hallHero, hallQuill,
+                { id: 'mask', art: 'cutscene/quill-mask', x: 540, y: 355, w: 125 },
+                { id: 'scarf', art: 'cutscene/quill-scarf', x: 540, y: 500, w: 150 },
+            ] },
+            { tween: 'mask', to: { x: 660, y: 685, scale: 0.8 }, dur: 1700, wait: true },
+            { wait: 700 }, { conversation: 'ch2.hall.face' },
+            { tween: 'scarf', to: { x: 560, y: 680, scale: 0.8 }, dur: 1700, wait: true },
+            { conversation: 'ch2.hall.shadow' },
+            { set: 'scarf', opacity: 0 },
+            { shot: 'the-shadow-on-the-floor', fade: 500, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...hallPerilRoom, hallHero, hallQuill, hallPiece,
+                { id: 'mask', art: 'cutscene/quill-mask', x: 660, y: 685, w: 100 },
+            ] },
+            { wait: 1000 },
+            { shot: 'borrowed-faces', fade: 850, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...hallPerilRoom,
+                { id: 'guest-a', art: 'npc/imp-bunny/masked', x: 470, bottom: 705, w: 170 },
+                { id: 'guest-b', art: 'npc/imp-duck/masked', x: 690, bottom: 705, w: 170 },
+                { id: 'guest-c', art: 'npc/imp-hedgehog/masked', x: 910, bottom: 705, w: 170 },
+                { id: 'nudge', art: 'npc/nudge/masked', x: 1230, bottom: 730, w: 220 },
+                { id: 'shadow-one', art: 'cutscene/sundial-shadow', x: 1260, y: 510, w: 130, opacity: 0, when: 'nudgeFled' },
+            ] },
+            { set: 'guest-a', art: 'npc/imp-bunny/unmasked' },
+            { wait: 300 }, { set: 'guest-b', art: 'npc/imp-duck/unmasked' },
+            { wait: 300 }, { set: 'guest-c', art: 'npc/imp-hedgehog/unmasked' },
+            { set: 'nudge', art: 'npc/nudge/idle', h: 329, y: 565.5 },
+            { conversation: 'ch2.hall.masks' },
+            { tween: 'shadow-one', to: { opacity: 1, x: 1100, y: 710 }, dur: 1400, wait: true, when: 'nudgeFled' },
+            { conversation: 'ch2.hall.first-piece' },
+            { shot: 'forty-years', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...hallPerilRoom, hallHero, hallQuill, hallPiece, hallFirst,
+                { id: 'mask', art: 'cutscene/quill-mask', x: 660, y: 685, w: 100 },
+            ] },
+            { ambience: 'cutscene/cold-open' },
+            { line: 'ch2.hall.confession', at: 0 }, { wait: 900 },
+            { line: 'ch2.hall.confession', at: 1 }, { wait: 1100 },
+            { line: 'ch2.hall.confession', at: 2 },
+            { wait: 1000 }, { end: true, fade: 1000, reveal: true },
+        ],
+    };
+    C['town-hall-outcome'] = {
+        title: 'The Hall: what the victory cost',
+        steps: [
+            { ambience: 'scene/feast-hall' },
+            { shot: 'the-space-beside-you', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                hallRoom, hallHero,
+                { id: 'granny', art: 'npc/granny-axiom/idle', x: 975, bottom: 350, w: 150,
+                    when: { all: ['!dead:granny', { flag: 'stakes.ch2', in: [1, 2] }] } },
+                { id: 'granny', art: 'cutscene/granny-without-shawl', x: 200, bottom: 730, w: 150,
+                    when: { all: ['!dead:granny', { flag: 'stakes.ch2', is: 3 }, { clock: 'ch2', gte: 8 }] } },
+                { id: 'granny', art: 'npc/granny-axiom/idle', x: 975, bottom: 350, w: 150, bright: 0.8,
+                    when: { all: ['!dead:granny', { flag: 'stakes.ch2', is: 3 }, { clock: 'ch2', lte: 7 }] } },
+                // Cut to the belongings; Clobber's helmet action takes place outside this frame.
+                { id: 'keepsakes', art: 'keepsake/granny-charm-glasses', x: 800, y: 520, w: 180, opacity: 0, when: 'dead:granny' },
+                { id: 'axiom', art: 'ui/axiom-spare-axiom', x: 720, y: 550, w: 95, opacity: 0,
+                    when: { all: ['!dead:granny', { flag: 'stakes.ch2', in: [1, 2] }] } },
+            ] },
+            // Lower her from the rig, or approach from the floor if the brink already broke it.
+            { tween: 'granny', to: { x: 800, bottom: 730, scale: 1.73 }, dur: 2400, wait: true, when: '!dead:granny' },
+            { wait: 900 },
+            { tween: 'keepsakes', to: { opacity: 1, x: 950, y: 570 }, dur: 1900, wait: true, when: 'dead:granny' },
+            { conversation: 'ch2.hall.outcome' },
+            { tween: 'axiom', to: { opacity: 1, x: 950 }, dur: 1400, wait: true,
+                when: { all: ['!dead:granny', { flag: 'stakes.ch2', in: [1, 2] }] } },
+            { wait: 2100, when: 'dead:granny' },
+            { wait: 700 }, { end: true, fade: 1100, reveal: true },
+        ],
+    };
+    C['town-hall-departure'] = {
+        title: 'The Hall: tomorrow has decided',
+        steps: [
+            { ambience: 'cutscene/cold-open' },
+            { shot: 'the-window', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                hallRoom, hallHero, hallQuill, hallPiece, hallFirst,
+                { id: 'rift', art: 'fx/rift-6', x: 800, y: 300, w: 330, opacity: 0.75 },
+            ] },
+            { tween: 'quill', to: { x: 800, y: 395, scale: 0.8 }, dur: 1800, wait: true },
+            { conversation: 'ch2.hall.exit' },
+            // Her threat belongs to her face, not an empty window. She leaves after speaking.
+            { tween: 'quill', to: { x: 800, y: 300, scale: 0.35, opacity: 0 }, dur: 2000, wait: true },
+            { shot: 'the-next-era', fade: 800, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                hallRoom, hallHero, hallPiece, hallFirst,
+                { id: 'rift', art: 'fx/rift-6', x: 800, y: 300, w: 330, opacity: 0.7 },
+                { id: 'eye', art: 'npc/algorithm/sky-eye', x: 800, y: 290, w: 290, opacity: 0.75 },
+            ] },
+            { conversation: 'ch2.hall.algorithm' },
+            { wait: 1000 }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    C['town-hall-aftermath'] = {
+        title: 'The Hall: a world with no maybes', script: 'ch2.hall.win', replayLabel: 'Watch the Hall aftermath again',
+        steps: [].concat(C['town-hall-unmask'].steps.filter(s => !s.end),
+            C['town-hall-outcome'].steps.filter(s => !s.end), C['town-hall-departure'].steps),
+    };
 })(typeof window !== 'undefined' ? window : globalThis);

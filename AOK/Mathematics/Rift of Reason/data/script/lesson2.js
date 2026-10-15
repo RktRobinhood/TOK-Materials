@@ -475,6 +475,8 @@
     // The reveals and the Mayor's sentence need their set-ups at the Square: a Ch3 jump-in who
     // walks back through the Sky Rift reaches the Hall first.
     S['ch2.hall.win'] = [
+        // An accepted paradox survives navigation during the film; re-entry cannot charge its danger again.
+        { when: '!hall-paradox', then: [
         { flag: 'quillNamed' },
         { s: 'avatar', e: 'surprised', t: 'Miss Quill? You were on my side.', when: { seen: 'ch2.cover' } },
         { when: ROPE_OPEN, then: [
@@ -516,19 +518,9 @@
                 ] },
             ] },
         ] },
-        { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
-        // Side story 5 (paradox-board): Smudge, who chalked the sentence on her board, cheers from the gallery.
-        { s: 'sweep', t: 'That\'s my sentence! From her board! It WORKS!', when: { all: ['paradox-board', '!dead:granny'] } },
-        { s: 'narrator', t: 'In the gallery, Smudge stares at the floor. His sentence. Her board.', when: { all: ['paradox-board', 'dead:granny'] } },
-        { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. Her own tired eyes.' },
-        { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
-        { s: 'narrator', t: 'Round the tables, more masks drop. Imps in borrowed faces. Nudge\'s too.' },
-        { s: 'nudge', t: 'My mask! Forty villagers trusted that face! I COUNTED!', when: '!dead:granny' },
-        { s: 'narrator', t: 'And out of Nudge\'s mask tumbles my first piece.', when: 'nudgeFled' },
-        // Her confession, last: she chose the feed.
-        { s: 'schoolteacher', e: 'unmasked', t: 'Forty years I marked "maybe" wrong. Red ink. Every child.' },
-        { s: 'schoolteacher', e: 'unmasked', t: 'If "maybe" was allowed… I was cruel for forty years.' },
-        { s: 'schoolteacher', e: 'unmasked', t: 'So when a voice offered me a world with no maybes… I said yes.' },
+        { flag: 'hall-paradox' },
+        ] },
+        { cutscene: 'town-hall-unmask', continuation: 'ch2.hall.unmask' },
         { when: { seen: 'ch2.square.win' }, then: [
             { inner: {
                 owlet: 'I called it the first rule. It was an assumption. That sentence just broke it.',
@@ -538,28 +530,9 @@
             { inner: { fox: 'I pictured the wrong face. The whole time.' }, when: 'dead:granny' },
         ] },
         { clock: 'ch2', resolve: true },
-        { when: 'dead:granny', then: [
-            { s: 'narrator', t: 'Constable Clobber takes off his helmet. He hands you her charm and her glasses.' },
-        ], else: [
-            { when: { flag: 'stakes.ch2', is: 1 }, then: [
-                { s: 'granny', e: 'happy', t: 'Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom.' },
-                { flag: 'spare-axiom' },
-            ] },
-            { when: { flag: 'stakes.ch2', is: 2 }, then: [
-                { s: 'granny', t: 'I smell of leek. Tell no one. Tell everyone. Here: my Spare Axiom.' },
-                { flag: 'spare-axiom' },
-            ] },
-            { when: { flag: 'stakes.ch2', is: 3 }, then: [
-                { s: 'granny', e: 'angry', t: 'Somebody boiled my shawl. Rude. Your card was in the pocket.', when: { clock: 'ch2', lte: 7 } },
-                { s: 'granny', e: 'angry', t: 'My shawl boiled away. With your card in the pocket.', when: { clock: 'ch2', gte: 8 } },
-            ] },
-        ] },
-        // Her exit, seen: up to the window and the Sky Rift beyond it.
-        { s: 'narrator', t: 'She steps up onto the window. The Sky Rift glows behind her.' },
-        { s: 'schoolteacher', e: 'unmasked', t: 'Tomorrow is waiting. Everyone there has already decided about you.' },
+        { cutscene: 'town-hall-outcome', continuation: 'ch2.hall.outcome' },
+        { cutscene: 'town-hall-departure', continuation: 'ch2.hall.departure' },
         { flag: 'away:schoolteacher' },
-        { s: 'algorithm', t: '"SEE? SHE\'S ON MY SIDE." SHE WAS. MY SIDE.', when: { seen: 'ch2.cover' } },
-        { s: 'algorithm', t: 'THE NEXT ERA WILL BE… probably— LOUDER.' },
         { when: { seen: 'ch2.square.win' }, then: [
             { inner: { mothkin: 'He twitched. Bread in his hat. Guilty of bread.' }, when: '!dead:granny' },
             { inner: { mothkin: 'He twitched. Bread in his hat. That\'s all a twitch proved.' }, when: 'dead:granny' },
@@ -572,7 +545,63 @@
             { s: 'narrator', t: 'You guessed Miss Quill. Her own table left her row out. Who checks the table?', when: { flag: 'suspect', is: 'quill' } },
             { s: 'narrator', t: 'Miss Quill\'s table left out one row. Hers. Who checks the table?', when: { flag: 'suspect', unset: true } },
         ] },
+        // A navigation abort cannot grant the card before this whole ending has completed.
+        { when: { all: ['!dead:granny', { flag: 'stakes.ch2', in: [1, 2] }] }, then: [{ flag: 'spare-axiom' }] },
     ];
+
+    // Read-only film conversations are also Skip/failure continuations and voice catalogue sources.
+    S['ch2.hall.break'] = [
+        { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
+        // Smudge's reaction stays solemn when Granny has died.
+        { s: 'sweep', t: 'That\'s my sentence! From her board! It WORKS!', when: { all: ['paradox-board', '!dead:granny'] } },
+        { s: 'narrator', t: 'In the gallery, Smudge stares at the floor. His sentence. Her board.', when: { all: ['paradox-board', 'dead:granny'] } },
+    ];
+    S['ch2.hall.face'] = [
+        { s: 'narrator', t: 'Her mask slides off. Under it: a crowned imp. Her own tired eyes.' },
+    ];
+    S['ch2.hall.shadow'] = [
+        { s: 'narrator', t: 'Her black scarf falls. It never moved in the wind. It\'s my shadow.' },
+    ];
+    S['ch2.hall.masks'] = [
+        { s: 'narrator', t: 'Round the tables, more masks drop. Imps in borrowed faces. Nudge\'s too.' },
+        { s: 'nudge', t: 'My mask! Forty villagers trusted that face! I COUNTED!', when: '!dead:granny' },
+    ];
+    S['ch2.hall.first-piece'] = [
+        { s: 'narrator', t: 'And out of Nudge\'s mask tumbles my first piece.', when: 'nudgeFled' },
+    ];
+    S['ch2.hall.confession'] = [
+        { s: 'schoolteacher', e: 'unmasked', t: 'Forty years I marked "maybe" wrong. Red ink. Every child.' },
+        { s: 'schoolteacher', e: 'unmasked', t: 'If "maybe" was allowed… I was cruel for forty years.' },
+        { s: 'schoolteacher', e: 'unmasked', t: 'So when a voice offered me a world with no maybes… I said yes.' },
+    ];
+    S['ch2.hall.unmask'] = [].concat(S['ch2.hall.break'], S['ch2.hall.face'], S['ch2.hall.shadow'],
+        S['ch2.hall.masks'], S['ch2.hall.first-piece'], S['ch2.hall.confession']);
+    S['ch2.hall.outcome'] = [
+        { when: 'dead:granny', then: [
+            { s: 'narrator', t: 'Constable Clobber takes off his helmet. He hands you her charm and her glasses.' },
+        ], else: [
+            { when: { flag: 'stakes.ch2', is: 1 }, then: [
+                { s: 'granny', e: 'happy', t: 'Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom.' },
+            ] },
+            { when: { flag: 'stakes.ch2', is: 2 }, then: [
+                { s: 'granny', t: 'I smell of leek. Tell no one. Tell everyone. Here: my Spare Axiom.' },
+            ] },
+            { when: { flag: 'stakes.ch2', is: 3 }, then: [
+                { s: 'granny', e: 'angry', t: 'Somebody boiled my shawl. Rude. Your card was in the pocket.', when: { clock: 'ch2', lte: 7 } },
+                { s: 'granny', e: 'angry', t: 'My shawl boiled away. With your card in the pocket.', when: { clock: 'ch2', gte: 8 } },
+            ] },
+        ] },
+    ];
+    S['ch2.hall.exit'] = [
+        // Her exit, seen: up to the window and the Sky Rift beyond it.
+        { s: 'narrator', t: 'She steps up onto the window. The Sky Rift glows behind her.' },
+        { s: 'schoolteacher', e: 'unmasked', t: 'Tomorrow is waiting. Everyone there has already decided about you.' },
+    ];
+    S['ch2.hall.algorithm'] = [
+        { s: 'algorithm', t: '"SEE? SHE\'S ON MY SIDE." SHE WAS. MY SIDE.', when: { seen: 'ch2.cover' } },
+        { s: 'algorithm', t: 'THE NEXT ERA WILL BE… probably— LOUDER.' },
+    ];
+    S['ch2.hall.departure'] = [].concat(S['ch2.hall.exit'], S['ch2.hall.algorithm']);
 
     // ---------------------------------------------------------------- the Sky Rift
 

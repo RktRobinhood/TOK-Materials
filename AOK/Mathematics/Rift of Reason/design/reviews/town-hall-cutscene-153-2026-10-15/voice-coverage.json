@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-15",
+  "requestedRecordingMorning": "2026-10-16",
+  "timezone": "Europe/Copenhagen",
+  "newLines": 0,
+  "covered": 20,
+  "recorded": 20,
+  "pending": [],
+  "lines": [
+    {
+      "speaker": "schoolteacher",
+      "id": "schoolteacher-13sydrd",
+      "text": "True. No. False. No. ONE. ZER—",
+      "source": "ch2.hall.break"
+    },
+    {
+      "speaker": "sweep",
+      "id": "sweep-c7bbnp",
+      "text": "That's my sentence! From her board! It WORKS!",
+      "source": "ch2.hall.break"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-1ijtlfo",
+      "text": "In the gallery, Smudge stares at the floor. His sentence. Her board.",
+      "source": "ch2.hall.break"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-j9nfwu",
+      "text": "Her mask slides off. Under it: a crowned imp. Her own tired eyes.",
+      "source": "ch2.hall.face"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-n3hdhy",
+      "text": "Her black scarf falls. It never moved in the wind. It's my shadow.",
+      "source": "ch2.hall.shadow"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-1qe3j30",
+      "text": "Round the tables, more masks drop. Imps in borrowed faces. Nudge's too.",
+      "source": "ch2.hall.masks"
+    },
+    {
+      "speaker": "nudge",
+      "id": "nudge-9sdny",
+      "text": "My mask! Forty villagers trusted that face! I COUNTED!",
+      "source": "ch2.hall.masks"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-142zhmw",
+      "text": "And out of Nudge's mask tumbles my first piece.",
+      "source": "ch2.hall.first-piece"
+    },
+    {
+      "speaker": "schoolteacher",
+      "id": "schoolteacher-t1bo4n",
+      "text": "Forty years I marked \"maybe\" wrong. Red ink. Every child.",
+      "source": "ch2.hall.confession"
+    },
+    {
+      "speaker": "schoolteacher",
+      "id": "schoolteacher-1oze8so",
+      "text": "If \"maybe\" was allowed… I was cruel for forty years.",
+      "source": "ch2.hall.confession"
+    },
+    {
+      "speaker": "schoolteacher",
+      "id": "schoolteacher-zlqjvg",
+      "text": "So when a voice offered me a world with no maybes… I said yes.",
+      "source": "ch2.hall.confession"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-3538a9",
+      "text": "Constable Clobber takes off his helmet. He hands you her charm and her glasses.",
+      "source": "ch2.hall.outcome"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-adg0kk",
+      "text": "Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom.",
+      "source": "ch2.hall.outcome"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-efbulb",
+      "text": "I smell of leek. Tell no one. Tell everyone. Here: my Spare Axiom.",
+      "source": "ch2.hall.outcome"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-1wrhd5p",
+      "text": "Somebody boiled my shawl. Rude. Your card was in the pocket.",
+      "source": "ch2.hall.outcome"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-oy7nqi",
+      "text": "My shawl boiled away. With your card in the pocket.",
+      "source": "ch2.hall.outcome"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-1pxh9rb",
+      "text": "She steps up onto the window. The Sky Rift glows behind her.",
+      "source": "ch2.hall.exit"
+    },
+    {
+      "speaker": "schoolteacher",
+      "id": "schoolteacher-1b5ua8g",
+      "text": "Tomorrow is waiting. Everyone there has already decided about you.",
+      "source": "ch2.hall.exit"
+    },
+    {
+      "speaker": "algorithm",
+      "id": "algorithm-e5pnpz",
+      "text": "\"SEE? SHE'S ON MY SIDE.\" SHE WAS. MY SIDE.",
+      "source": "ch2.hall.algorithm"
+    },
+    {
+      "speaker": "algorithm",
+      "id": "algorithm-oai8h0",
+      "text": "THE NEXT ERA WILL BE… probably— LOUDER.",
+      "source": "ch2.hall.algorithm"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-15",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "entries": [
+    {
+      "file": "hall-after-153.png",
+      "promptKey": "hallPlatePrompt",
+      "refsKey": "hallPlateRefs",
+      "imageKey": "hallPlateImage",
+      "selected": true,
+      "prompt": "Edit the supplied Rift of Reason feast-hall background into a clean AFTERMATH animation plate. Preserve the exact architecture, perspective, candlelit amber and violet jewel colours, wide stone floor, tables, tall central open window and cosmic purple Sky Rift outside. Remove EVERY character, especially the elderly tortoise hanging over the cauldron. Remove the cauldron and the lit fire, hanging hook and taut rope: after the rescue/death the apparatus is no longer active; leave a safe empty raised stone dais and the existing winch at far left. No people, no creatures, no corpses, no character-shaped shadows. Keep the foreground stone floor empty for whole-body actors. The window is a real walkable exit on the raised dais, reachable from the centre floor steps. Do not add text, borders or UI. Painterly cute-horror storybook style of the supplied style-board and shipped cat reference. Wide 16:9 opaque complete scene. Reference1 is exact location to edit, reference2 styleboard, reference3 shipped style/colour.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/2-world/feast-hall.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-3e381df3-65fc-4946-b0ff-ca2e50e66060.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "quill-full-first-153.png",
+      "promptKey": "quillPrompt",
+      "refsKey": "quillRefs",
+      "imageKey": "quillImage",
+      "selected": false,
+      "note": "Retained first take. Unmasked right figure incorrectly retained scarf; corrected exact sheet.",
+      "prompt": "Create a transparent game animation sprite sheet for Rift of Reason with TWO COMPLETE FULL-BODY versions of the SAME Miss Quill character, side by side with generous clear gaps. Left: exact elderly stork schoolmistress from the top-left of supplied reference1, spectacles, cream feathers, long ochre beak, dark Victorian teaching dress and red bow, complete feet and hat visible, distressed but dignified. Add a plain long BLACK scarf around her neck hanging to her waist; this is a detachable stolen shadow. Right: her true small crowned arch-imp form, same tired expressive eyes and same modest old-fashioned dark dress/red bow, small pointed ears, charcoal skin, subdued ember eyes, tiny crooked brass crown, complete body/hands/tail/feet. She is NOT possessed; she looks tired and ashamed, not snarling or triumphant. Both stand in three-quarter pose looking slightly to the LEFT towards the hero, neutral empty hands lowered, consistent ground level, body scale/height and exact painterly cute horror texture of styleboard2 and shippedcat3. This is a full-body expansion of Quill's existing lifted-mask bust in top row reference1. Do not include the gardener/goat or any other character. Do not include mask in hands, any props on ground, labels, text, border, shadows behind them or environment. Keep all extremities and fabric ends far inside image edges. Genuine alpha background with no floor.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-ch2/villagers-schoolteacher-gardener.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-bf0fb4c9-eb4d-421a-8993-582e8107a21e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "quill-full-153.png",
+      "promptKey": "quillCorrectionPrompt",
+      "refsKey": "quillCorrectionRefs",
+      "imageKey": "quillCorrectionImage",
+      "selected": true,
+      "prompt": "Edit this exact transparent two-character sprite sheet with ONE precise change: remove the BLACK SCARF completely from the RIGHT-HAND charcoal crowned imp Quill. Reveal the existing red bow, cream blouse and dress underneath naturally, with no scarf/fringes anywhere on the right figure. The LEFT stork version MUST KEEP her black scarf. Preserve both characters' identities, faces, pose, full bodies, feet, clothing, crown, tail, spacing, size and lighting exactly. True alpha background, no new background/glow cloud, no floor. Preserve complete extremities inside generous canvas margins.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/town-hall-153/quill-full-first-153.png"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-b3b7d814-6449-481d-b959-b5677a22e889.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "quill-props-153.png",
+      "promptKey": "quillPropPrompt",
+      "refsKey": "quillPropRefs",
+      "imageKey": "quillPropImage",
+      "selected": true,
+      "prompt": "Create a transparent two-prop sprite sheet for Rift of Reason in the supplied painterly cute-horror style. Exactly TWO clearly separated animation props on true alpha, no floor/environment. LEFT: the detached hollow face-mask worn by Miss Quill the elderly stork schoolmistress in the TOP ROW of reference1. Cream feather-shaped mask, familiar long ochre beak and round brass spectacles, dark empty eyeholes, lying tilted three-quarter, fully visible, complete beak and glasses, no head/body inside. RIGHT: her detached long plain black fabric scarf, curled loosely into an S on the ground, with a subtle thin cyan edge glow matching the Sundial's stolen shadow. No wearer and no decoration. Each prop occupies its own half with generous transparent gap and clear edge margins; whole silhouettes no cropping. No text, labels, board, other masks/props or characters. Reference2 is approved styleboard; reference3 shipped style. Simple readable silhouettes for a cinematic mask fall and scarf drop.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-ch2/villagers-schoolteacher-gardener.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-2a24c465-af1b-4c2d-bb2a-5a9b7b0cc9bb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "granny-without-shawl-153.png",
+      "promptKey": "grannyPrompt",
+      "refsKey": "grannyRefs",
+      "imageKey": "grannyImage",
+      "selected": true,
+      "prompt": "Generate one full-body transparent animation sprite of Granny Axiom, the EXACT elderly tortoise character in reference1, after she has survived the Town Hall ordeal but her PURPLE KNITTED SHAWL has BOILED AWAY. Remove the shawl completely, exposing the same cream blouse, modest patterned skirt, brown shell, clock-pendant, round brass glasses, silver hair bun and warm tired face. Retain same wooden walking stick, complete hands, shell, legs and BOTH feet. Whole head, hair, stick, feet, clothes all comfortably inside canvas edges. Standing three-quarter facing slightly right, small relieved smile, no distress gag, no injury or burn/gore. Paint in matching textured jewel-toned cute horror storybook style, reference2 approvedstyleboard and reference3shippedcat. One character only on TRUE TRANSPARENT background, no floor, no soup, no shadow/glow cloud, no text or border.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/granny-axiom-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-d01032fd-7c0f-4b33-ae21-f7f3d670a973.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ]
+}

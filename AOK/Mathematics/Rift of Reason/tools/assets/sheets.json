@@ -451,6 +451,11 @@
         "gate-after-153.png": {"type":"scene","id":"scene/gate-after"},
         "sundial-shadow-153.png": {"type":"single","id":"cutscene/sundial-shadow","class":"prop"},
         "nudge-net-empty-153.png": {"type":"single","id":"cutscene/nudge-net-empty","class":"sprite"},
-        "ring-light-153.png": {"type":"islands","minArea":1500,"class":"prop","ids":["cutscene/ring-light","cutscene/ring-light-broken"]}
+        "ring-light-153.png": {"type":"islands","minArea":1500,"class":"prop","ids":["cutscene/ring-light","cutscene/ring-light-broken"]},
+        "hall-after-153.png": {"type":"scene","id":"scene/hall-after"},
+        "quill-full-first-153.png": {"type":"skip"},
+        "quill-full-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/quill-masked","cutscene/quill-unmasked"]},
+        "quill-props-153.png": {"type":"islands","minArea":1500,"class":"prop","ids":["cutscene/quill-mask","cutscene/quill-scarf"]},
+        "granny-without-shawl-153.png": {"type":"single","class":"sprite","id":"cutscene/granny-without-shawl"}
     }
 }
