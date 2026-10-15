@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-15",
+  "requestedRecordingMorning": "2026-10-16",
+  "timezone": "Europe/Copenhagen",
+  "issue": 153,
+  "sourceScripts": [
+    "prologue.rupture",
+    "prologue.evening",
+    "ch1.gate.release",
+    "ch1.gate.escape",
+    "ch1.gate.trap"
+  ],
+  "mechanism": "Existing tools/voices.mjs catalogue; --render skips recorded lines. Browser speech/subtitles until manifest lands. No new automation.",
+  "newWords": [
+    "The eye's light. It's inside that gull.",
+    "Forget the trophy!",
+    "Find my shadow. Then we can finish that final.",
+    "The Talking Signpost is just beyond the Fair. Ask it where the Forest Road begins."
+  ],
+  "covered": 68,
+  "recorded": 64,
+  "pending": [
+    {
+      "id": "granny-fcmpxq",
+      "speaker": "granny",
+      "text": "The eye's light. It's inside that gull.",
+      "say": "The eye's light. It's inside that gull.",
+      "source": "prologue.rupture"
+    },
+    {
+      "id": "sequins-t3qe5x",
+      "speaker": "sequins",
+      "text": "Forget the trophy!",
+      "say": "Forget the trophy!",
+      "source": "prologue.rupture"
+    },
+    {
+      "id": "narrator-1nqdw7e",
+      "speaker": "narrator",
+      "text": "Find my shadow. Then we can finish that final.",
+      "say": "Find my shadow. Then we can finish that final.",
+      "source": "prologue.evening"
+    },
+    {
+      "id": "granny-m56o9f",
+      "speaker": "granny",
+      "text": "The Talking Signpost is just beyond the Fair. Ask it where the Forest Road begins.",
+      "say": "The Talking Signpost is just beyond the Fair. Ask it where the Forest Road begins.",
+      "source": "prologue.evening"
+    }
+  ]
+}

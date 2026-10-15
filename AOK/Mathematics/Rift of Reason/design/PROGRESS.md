@@ -103,3 +103,7 @@ Removed literal pause tokens from TTS spoken input, re-recorded eighteen marker-
 ## Commands
 
 From the game folder: `node tools/serve.mjs` (port 8790), single tests while editing, then `node --test "tools/test/*.test.mjs"` before each commit. The frozen baseline copy under the system temporary directory is only for critic evidence, not implementation.
+
+## Story films checkpoint — #153, 15 October 2026
+
+The Prologue Fair rupture and Unit 1 Gate aftermath are integrated with canonical voice keys, conditional whole-body staging, Calm/Skip/failure continuation and Journal replay. The actual evening decision/gifts and Gate reflection remain; Granny's next destination persists in the quest tracker. Reviews corrected shadow transfer, gull possession, Sequins exits, Nudge escape and the Granny-door live feed. Gate reward commits after the conversation; abort/re-entry cannot duplicate it. Four new lines are queued for 16 October morning through the existing Google catalogue (64/68 relevant lines already recorded). Independent writing gates all >=8; Standards and Spec rechecks clear. Final suite: 954 tests, 953 pass, one skip, zero fail. See `reviews/story-cutscenes-153-2026-10-15.md` for exact evidence and limits. Town Hall, Tribunal, Core and homecoming remain pending in that order. Granny's slower two-of-three-stations instructions are filed separately as #154.

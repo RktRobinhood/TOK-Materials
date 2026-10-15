@@ -20,6 +20,16 @@ function game() {
 const plain = x => JSON.parse(JSON.stringify(x));
 const byTitle = (Rift, t) => Rift.Quests.list().find(q => q.title === t);
 
+test('after the Fair rupture, the tracker leads across the chapter boundary to the signpost',()=>{
+    const R=game();R.State.update(s=>{
+        s.chapter='prologue';s.flags['seen:prologue.rift']=true;
+        s.map.at='fair-rift';s.map.revealed.push('signpost');
+    });
+    const next=R.Quests.tracked()[0];assert.equal(next.node,'signpost');assert.match(next.text,/stolen shadow/);
+    R.State.update(s=>R.World.complete(s,'signpost'));
+    assert.equal(byTitle(R,'Follow the crack').status,'done');
+});
+
 test('stations: new until entered, started until won, then done; only revealed ones are known', () => {
     const Rift = game();
     const home = Rift.World.node('burrow').name;

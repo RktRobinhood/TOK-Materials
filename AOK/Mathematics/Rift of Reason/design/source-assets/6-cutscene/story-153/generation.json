@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-15",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "cutscene/nudge-shadow",
+      "source": "nudge-shadow-153.png",
+      "prompt": "Use case: illustration-story. Asset type: transparent full-body character cutout for Rift of Reason's Fair shadow-theft cutscene, not a card or scene. References: image 1 is the approved style board (outline weight, painterly cel texture, cute horror); image 2 is the EXACT existing Nudge character to preserve; image 3 is a shipped creature for finish quality. Draw ONE Nudge, the same charcoal-grey baby imp with huge warm red-orange eyes, two little golden horns, batlike ears, tiny fangs and bell-tipped curled tail. Full body in an eager left-facing three-quarter sneak, looking proudly upward. Nudge carries one small long-handled butterfly net, its complete hoop and handle clearly visible, held diagonally beside the body. Inside its mesh is a single folded inky-black ribbon of stolen shadow with subtle cyan rim light. Greedy childlike delight, not menace. Keep exact species proportions and markings, no clothing or extra characters. Small mischievous imp, NOT the Algorithm's eye. Clear separation between face, net hoop and tail. Jewel cyan/purple highlights with warm readable face; dark brown-black outlines and soft feather/fabric-level painterly texture like reference. Everything fits inside canvas with at least 10% empty transparent safe margin: horns, ears, both feet, full tail bell, complete net and handle. True transparent alpha background, no ground, no floor shadow, no labels, text, borders, glow clouds or extra poses. Do not crop any part. ONE finished cutout.",
+      "references": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/cast/nudge-idle.webp",
+        "assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "scene/gate-after",
+      "source": "gate-after-153.png",
+      "prompt": "Use case: illustration-story. Asset type: 16:9 character-free game background for the Gate of Guards AFTER the confrontation, Rift of Reason. Reference 1 is the approved style board; reference 2 is the existing Gate of Guards location, preserve its identity exactly; reference 3 sets shipped painterly finish. Show this same dark storybook gate and thorn arch at night, purple-red foliage, midnight sky and cyan hairline crack, warm lantern light, but BOTH tall wooden gate doors are now swung OPEN to reveal the quiet forest path beyond. In the lower-right middle distance, one small brass birdcage stands EMPTY, its little door open and a warm plum-coloured velvet cushion inside. Cage complete with top loop and whole base, entirely inside frame. It is a quiet aftermath: nobody inside, no characters, no birds, no blood, no particles or explosion. Open walkable foreground in bottom half, unobstructed left and centre for live full-body characters. Eye-level medium-wide theatrical composition matching the existing painting, no close-up, no text. Cute dark fairy-tale horror, clean dark outlines, painterly cel-lit materials, deep jewel purple forest with warm amber lamps. Canvas landscape 16:9, preferably 2048x1152 or wider. No letterbox bars, no UI, no logos. The empty cage and opened doors must read clearly without crowding the character standing space.",
+      "references": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/scenes/road-gate.webp",
+        "assets/creatures/astrophysicat-idle.webp"
+      ]
+    }
+  ]
+}

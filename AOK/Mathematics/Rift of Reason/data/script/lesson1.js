@@ -214,7 +214,8 @@
         ], else: [{ play: 'prologue.rift' }] },
     ];
     // The boast opens the final: the whole Fair hears it, and so does the sky.
-    S['prologue.rift'] = [
+    // Canonical spoken text: the film reads this same array and Skip resumes its unheard lines.
+    S['prologue.rupture'] = [
         { s: 'sequins', e: 'happy', t: 'Make way! The final! Our finalist: {name}! My apprentice will predict!' },
         { s: 'guess-o-matic', t: 'Probably wins.' },
         { s: 'avatar', e: 'happy', t: 'Probably? I\'ll win that trophy. I always know the answer.' },
@@ -227,10 +228,15 @@
         { s: 'nudge', t: 'Got it, boss! Saved to favourites!' },
         { s: 'narrator', t: 'Hey! That was my shadow! I was using it!' },
         { s: 'algorithm', t: 'SHADOW SAVED TO FAVOURITES. THANK YOU FOR YOUR CONTENT.' },
+        { s: 'granny', t: 'The eye\'s light. It\'s inside that gull.' },
         { s: 'siuuugull', t: 'I AM ALWAYS RIGHT! ALWAYS! SIUUU!', possessed: true },
+        { s: 'sequins', t: 'Forget the trophy!' },
         { s: 'sequins', e: 'angry', t: 'My sequins! The crack is drinking them! Down the Road! WAIT FOR ME!' },
         { s: 'algorithm', t: 'PREDICTION: {name} FOLLOWS THE CRACK. CONFIDENCE: 94%.' },
         { s: 'avatar', t: 'Wrong. I decide where I go.' },
+    ];
+    S['prologue.rift'] = [
+        { cutscene: 'fair-rupture', continuation: 'prologue.rupture' },
         { play: 'prologue.evening', once: true },
     ];
 
@@ -257,6 +263,8 @@
         { s: 'granny', t: 'And my Hum Charm. If you need me, hum. I\'ll hum back.' },
         { s: 'narrator', t: 'I\'ll ride in your shadow. Mind you don\'t stand in the dark.' },
         { s: 'avatar', t: 'Back before the trophy final. Obviously.' },
+        { s: 'narrator', t: 'Find my shadow. Then we can finish that final.' },
+        { s: 'granny', t: 'The Talking Signpost is just beyond the Fair. Ask it where the Forest Road begins.' },
     ];
 
     // ---------------------------------------------------------------- Chapter 1
@@ -531,25 +539,41 @@
     // After a death: no jokes, and no Nudge.
     S['ch1.gate.win'] = [
         { clock: 'ch1', resolve: true },
+        { cutscene: 'gate-aftermath', continuation: 'ch1.gate.aftermath' },
+        // The inner voice and reflective question remain an unhurried conversation after the film.
+        { when: { all: ['!turnedBack', { seen: 'ch1.road' }, { seen: 'ch1.well.win' }] }, then: [REVEAL] },
+        { when: 'turnedBack', then: [
+            { s: 'narrator', t: 'You turned back. It was still too late. Was turning back wrong?' },
+        ], else: [
+            { s: 'narrator', t: 'It knew where you\'d go before you did. How?' },
+        ] },
+        // Commit the handoff only after the conversation; leaving the film cannot award a sequin.
+        { when: { all: ['!dead:sequins', { flag: 'stakes.ch1', in: [1, 2] }] }, then: [
+            { give: { 'lucky-sequin': 1 } },
+        ] },
+        { when: { any: ['dead:sequins', { clock: 'ch1', gte: 3 }] }, then: [{ flag: 'nudgeFled' }] },
+    ];
+    S['ch1.gate.release'] = [
         { when: 'dead:sequins', then: [
             { s: 'narrator', t: 'The gate is open. The cushion is still warm.' },
-            { flag: 'nudgeFled' },
-            { s: 'narrator', t: 'Nudge has gone through the Rift Pass. With my piece.' },
         ], else: [
             { when: { flag: 'stakes.ch1', is: 1 }, then: [
                 { s: 'sequins', e: 'happy', t: 'Take my Lucky Sequin. Keep the apprentice for now. You\'re better company.' },
-                { give: { 'lucky-sequin': 1 } },
             ] },
             { when: { flag: 'stakes.ch1', is: 2 }, then: [
                 { s: 'sequins', t: 'I am forty per cent less shiny. Here. A Lucky Sequin. I\'m going home.' },
-                { give: { 'lucky-sequin': 1 } },
             ] },
             { when: { flag: 'stakes.ch1', gte: 3 }, then: [
                 { s: 'sequins', t: 'I\'m fine. I\'m going home. LIKE AND SUBSCRIBE.' },
             ] },
+        ] },
+    ];
+    S['ch1.gate.escape'] = [
+        { when: 'dead:sequins', then: [
+            { s: 'narrator', t: 'Nudge has gone through the Rift Pass. With my piece.' },
+        ], else: [
             // The trap has teeth: at Danger 3 or more, Nudge escapes with the first piece.
             { when: { clock: 'ch1', gte: 3 }, then: [
-                { flag: 'nudgeFled' },
                 { s: 'nudge', t: 'Got it, boss! Saved to favourites!' },
                 { s: 'narrator', t: 'Gone through the Rift Pass. With my piece. Above us, the eye shrinks.' },
             ], else: [
@@ -557,6 +581,8 @@
                 { s: 'narrator', t: 'You caught my piece as it ran. Above us, the eye shrinks a little.' },
             ] },
         ] },
+    ];
+    S['ch1.gate.trap'] = [
         { when: 'dead:sequins', then: [
             { s: 'algorithm', t: 'PREDICTED. YOU TRIED TO SAVE THE MAGPIE. I TOOK THE TORTOISE TOO.' },
         ], else: [
@@ -568,15 +594,8 @@
         ] },
         // Only for a player who heard the boast (or its recap).
         { s: 'algorithm', t: 'YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.', when: HEARD_BOAST },
-        // The voices' reveal plays here, unless it already played at Granny's open door, and only after
-        // its set-ups (the Road and the Well win: a Ch2 jump-in walking back has had neither yet).
-        { when: { all: ['!turnedBack', { seen: 'ch1.road' }, { seen: 'ch1.well.win' }] }, then: [REVEAL] },
-        { when: 'turnedBack', then: [
-            { s: 'narrator', t: 'You turned back. It was still too late. Was turning back wrong?' },
-        ], else: [
-            { s: 'narrator', t: 'It knew where you\'d go before you did. How?' },
-        ] },
     ];
+    S['ch1.gate.aftermath'] = [].concat(S['ch1.gate.release'], S['ch1.gate.escape'], S['ch1.gate.trap']);
 
     // Granny's voice through the charm as the imps' sack leaves through the rift next door (STORY.md A.4),
     // and each voice's reading of it. Once only: at the Rift Pass, or (if a class jumps straight into

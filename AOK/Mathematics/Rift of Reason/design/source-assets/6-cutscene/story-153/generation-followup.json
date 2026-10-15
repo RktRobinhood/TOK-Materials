@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-15",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "cutscene/sundial-shadow",
+      "source": "sundial-shadow-153.png",
+      "prompt": "Use case: illustration-story. Asset: ONE transparent shadow cutout for the Sundial in Rift of Reason, to be stolen by an imp. Image1 sets approved art style; image2 shows the stone Sundial whose cast shadow this is. Draw ONLY the shadow, NOT the object, face, pedestal, clock or second Sundial. Seen on a ground plane in three-quarter perspective: a long inky tapered crooked wedge with an unmistakable pointed triangular gnomon tip, connected to a soft broad oval footprint. A tangible stolen silhouette, almost a folded strip of black velvet, simple enough to read at 100px. Deep near-black with the faintest violet inner tone and very fine cold cyan rim. It is a dark cast shadow: no shiny eyes, no creature, no glow cloud, no rectangular background. Entire shape isolated with generous transparent margin on all sides. Landscape composition, longer left to right than tall, triangular tip points up-right. True transparent alpha, no floor, no text, no border. One single coherent shadow silhouette.",
+      "references": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/cast/sundial-idle.webp"
+      ]
+    },
+    {
+      "id": "cutscene/nudge-net-empty",
+      "source": "nudge-net-empty-153.png",
+      "prompt": "Precise object edit of this existing transparent full-body Nudge imp cutout. Change ONLY the inside of the butterfly net: remove the folded black shadow ribbon currently caught in the mesh. Leave an EMPTY delicate open net with transparent mesh, so the background can be seen through it. Preserve exact character, pose, face, fur, horns, feet, bell tail, net hoop, handle, texture, lighting and all positions. Do not crop or enlarge. Preserve existing transparent background and add no other elements. Keep the entire net hoop and cloth mesh edges, all limbs, horns and tail within generous transparent margins. One exact matching empty-net cutout for the BEFORE-theft frame.",
+      "references": [
+        "design/source-assets/6-cutscene/story-153/nudge-shadow-153.png"
+      ],
+      "note": "First edit attempt failed with network error. Retried built-in tool. Exact matching empty net preserves complete silhouette."
+    },
+    {
+      "id": [
+        "cutscene/ring-light",
+        "cutscene/ring-light-broken"
+      ],
+      "source": "ring-light-153.png",
+      "prompt": "Use case: illustration-story. Asset type: two isolated transparent game prop variants on ONE landscape sheet, equal scale, generous space between. Image1 approved style board and image2 Nudge imp define the exact cute-dark painterly game style. LEFT: a tiny brass-and-black selfie ring light on a squat three-legged tabletop stand, round cyan-white luminous ring with simple dark central phone mount, completely visible from top of ring to all three feet. RIGHT: the EXACT SAME prop after defeat: light switched off, brass outer hoop visibly cracked at one point but still connected around its lower arc to the same stand, tilted slightly; no loose disconnected shards. Both are whole freestanding objects, not hands or characters. Dark outlines, subtle cel shading and painterly brass, clearly readable at 120px. No letters, no logos, no floor/shadow blob, no background or extra objects. True transparent alpha. Leave at least 10% empty margin around each complete prop and a broad transparent gutter between the two props. No overlap, no cropping, no decorative border.",
+      "references": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/cast/nudge-idle.webp"
+      ]
+    }
+  ]
+}

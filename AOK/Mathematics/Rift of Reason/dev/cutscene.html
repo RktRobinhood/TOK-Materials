@@ -32,6 +32,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     <label>Cutscene <select id="which"></select></label>
     <label>Name <input id="name" type="text" maxlength="16" value="Traveller" placeholder="Your nickname"></label>
     <label><input id="calm" type="checkbox"> Calm motion</label>
+    <label>Gate outcome <select id="outcome"><option value="1">Sequins saved</option><option value="2">Less sparkle</option><option value="3">Diminished</option><option value="4">Sequins lost</option><option value="back">Turned back</option></select></label>
     <button class="btn primary" id="play" type="button">▶ Play</button>
   </div>
   <div class="avatars" id="avatars" aria-label="Avatar"></div>
@@ -50,7 +51,8 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 // A save-shaped stand-in so the volume sliders reach the audio code; nothing is written anywhere.
 (function () {
     const settings = { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, calm: false };
-    window.Rift.State = { get: () => ({ settings, avatar: null, flags: {} }), has: () => false };
+    const standIn = { settings, avatar: null, flags: {} };
+    window.Rift.State = { get: () => standIn, has: () => false };
 })();
 </script>
 <script src="js/core/assets.js"></script>
@@ -63,7 +65,12 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 <script src="data/ambience.js"></script>
 <script src="data/cutscenes.js"></script>
 <script src="data/avatars.js"></script>
+<script src="data/creatures.js"></script>
 <script src="data/script/lesson1.js"></script>
+<script src="data/cast.js"></script>
+<script src="js/core/story.js"></script>
+<script src="js/core/cast.js"></script>
+<script src="js/core/stakes.js"></script>
 <script src="js/ui/cutscene.js"></script>
 <script>
 (function () {
@@ -76,6 +83,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 
     R.Cutscene.list().forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
     if (params.get('id')) byId('which').value = params.get('id');
+    if (params.get('outcome')) byId('outcome').value = params.get('outcome');
 
     function drawAvatars() {
         const box = byId('avatars');
@@ -103,13 +111,18 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
         byId('trace').textContent = '';
         byId('status').textContent = 'Playing…';
         const started = performance.now();
+        const tier = byId('outcome').value === 'back' ? 1 : +byId('outcome').value;
+        const danger = [0, 1, 3, 5, 6][tier];
+        Object.assign(R.State.get(), { avatar: Object.assign({ nickname: byId('name').value.trim() || 'traveller' }, pick),
+            flags: { 'stakes.ch1': tier, 'dead:sequins': tier === 4, turnedBack: byId('outcome').value === 'back',
+                'seen:prologue.rift': true, 'clock:ch1': { n: danger, size: 6 } } });
         const played = await R.Cutscene.play(byId('which').value, {
             player: Object.assign({ nickname: byId('name').value.trim() || 'traveller' }, pick),
             onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
         });
         byId('status').textContent = played
-            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the Sundial greets you now on the regular screen.'
-            : 'Could not play (missing or broken art). In the game, the two lines on black would play instead.';
+            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the story continues on the regular screen.'
+            : 'Could not play (missing or broken art). In the game, the conversation remains available as dialogue.';
         byId('play').focus();
     });
 })();

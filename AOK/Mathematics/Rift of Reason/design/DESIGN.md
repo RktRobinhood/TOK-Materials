@@ -172,3 +172,7 @@ ROSTER.md and the art/voice ledgers record the selected identities and future sp
 69/72 portraits selected; three deferred, no other pending portrait. Bulk assets total 73 (65 portraits plus eight motifs), with four pilots outside the set. Thirty newly built portraits passed source/runtime checks. Native QA, the full suite, independent reviews and publication/public deployment are pending for group 4. The central review design/reviews/art-production-145-2026-10-13.md owns final acceptance receipts; earlier group results do not certify this group.
 
 #145 remains open; #109 production board, #123 balance/card release, owned-deck/acquisition and individual mechanic prerequisites remain. Thirty original voice lines are source-only drafts; zero recordings or voice API requests. No engine/save/acquisition contract changed.
+
+### Story cutscene production — #153, 15 October 2026
+
+Teacher-selected production order is Fair rupture/handoff, Gate, Town Hall, Tribunal, Core, Fair homecoming. The Core revelation and homecoming are connected scenes at different locations, separated by the existing playable Summit Rift return. Optional proposals 7-11 remain shelved as separate films. First two movies are integrated; production evidence and voice queue: `reviews/story-cutscenes-153-2026-10-15.md`. Cinematics select pure canonical conversation text and read actual outcomes; choices/rewards remain authoritative story steps, with reward commits after completion. The next-direction Fair objective uses existing save flags. No new save schema or storage key.

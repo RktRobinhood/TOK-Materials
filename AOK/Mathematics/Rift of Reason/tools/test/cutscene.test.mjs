@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {loadWithDom} from './fake-dom.mjs';
+import {voiceCatalog} from '../voices.mjs';
 
 test('completed greeting lines are not repeated; Skip and failure supply only unheard lines',async()=>{
     for(const completed of [0,1,2])for(const failed of [false,true]){
@@ -142,6 +143,149 @@ function game(options = {}) {
 }
 const shot = {shot:'quiet',layers:[]};
 
+function storyGame(type = 'fox', variant = 'girl') {
+    const g = game(); dialogue(g);
+    Object.assign(g.state.avatar, {type, variant});
+    g.state.items = {}; g.state.map = {completed:[],rifts:[]}; g.state.chapter = 'prologue';
+    Object.assign(g.Rift.State, {
+        setFlag:(k,v)=>{g.state.flags[k]=v;}, update:fn=>fn(g.state),
+        addItem:(id,n)=>{g.state.items[id]=(g.state.items[id]||0)+n;},
+    });
+    g.Rift.UI.toast=()=>{}; g.Rift.UI.input.consume=()=>{};
+    g.run('data/map.js'); g.run('data/items.js'); g.run('data/creatures.js'); g.run('data/script/lesson1.js'); g.run('data/cast.js');
+    g.run('js/core/story.js'); g.run('js/core/cast.js'); g.run('js/core/stakes.js');
+    return g;
+}
+async function finishStory(g, promise, mode) {
+    let done=false; promise.then(()=>{done=true;});
+    for(let guard=0;guard<260&&!done;guard++) {
+        await settle();
+        if(g.Rift.Cutscene && g.Rift.Cutscene.current()) {
+            if(mode==='skip') g.key('Escape'); else await g.advance(20000);
+        } else if(g.$('.choices button')) g.$('.choices button').click();
+        else if(g.$('.box')) g.$('.box').click();
+    }
+    assert.ok(done,'story must finish without hiding a decision'); await promise;
+}
+
+test('the Fair movie uses canonical recorded keys for all ten avatars, remains in frame and changes no save',async()=>{
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(const type of ['owlet','mothkin','fox','frogling','raven']) for(const variant of ['boy','girl']) {
+        const g=storyGame(type,variant), before=JSON.stringify(g.state), trace=[];
+        const ok=await g.Rift.Cutscene.play('fair-rupture',{instant:true,onStep:(k,s)=>trace.push([k,s])});
+        assert.ok(ok); assert.equal(JSON.stringify(g.state),before); assert.equal(g.speech.length,18);
+        for(const l of g.speech) assert.ok(voices.has(l.voice),'catalogued: '+l.voice);
+        assert.equal(g.speech[2].speaker,'avatar-'+type+'-'+variant);
+        for(const [,s] of trace) for(const l of s.layers||[]) {
+            if(l.cover||l.id==='shadow')continue;
+            const p=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
+            assert.ok(p.sx-l.w*p.S/2>=0&&p.sx+l.w*p.S/2<=1600,l.id+' fits horizontally');
+            assert.ok(p.sy-l.h*p.S/2>=0&&p.sy+l.h*p.S/2<=760,l.id+' fits above subtitles');
+        }
+    }
+});
+
+test('complete, skipped and unavailable Fair films preserve the evening decision, gifts and next destination exactly once',async()=>{
+    for(const mode of ['complete','skip','unavailable']) {
+        const g=storyGame('mothkin','girl');
+        if(mode==='unavailable')g.Rift.Cutscene=null;
+        await finishStory(g,g.Rift.Dialogue.play('prologue.rift'),mode);
+        assert.equal(g.state.flags.brave,'go'); assert.equal(g.state.items.charm,3);assert.equal(g.state.items.tonic,1);
+        assert.ok(g.state.flags['seen:prologue.rift']);assert.ok(g.state.flags['seen:prologue.evening']);
+        assert.ok(g.speech.some(l=>l.text.includes('Talking Signpost')));
+        assert.ok(g.speech.some(l=>l.text==='Find my shadow. Then we can finish that final.'));
+        assert.equal(g.speech.filter(l=>l.text==='Hey! That was my shadow! I was using it!').length,1);
+        if(g.Rift.Cutscene)g.Rift.Cutscene.play=async()=>true;
+        await finishStory(g,g.Rift.Dialogue.play('prologue.rift'),'skip');
+        assert.equal(g.state.items.charm,3);assert.equal(g.state.items.tonic,1);
+    }
+});
+
+test('an interrupted named conversation resumes only unheard lines; navigation never commits its ending',async()=>{
+    const g=storyGame(); let release;
+    const spoken=g.Rift.Audio.speak;
+    g.Rift.Audio.speak=line=>{spoken(line);return g.speech.length===4?new Promise(r=>{release=r;}):Promise.resolve();};
+    const promise=g.Rift.Dialogue.play('prologue.rift');
+    await settle();
+    for(let i=0;i<20&&g.speech.length<4;i++)await g.advance(20000);
+    assert.equal(g.speech.length,4);g.key('Escape');release();
+    await finishStory(g,promise,'skip');
+    assert.equal(g.speech.filter(l=>l.text.startsWith('Make way!')).length,1);
+    assert.equal(g.speech.filter(l=>l.text.startsWith('Always?')).length,2,'interrupted line is replayed');
+    const abandoned=storyGame();abandoned.Rift.Dialogue.play('prologue.rift');await settle();
+    abandoned.Rift.Dialogue.abortAll();await settle();
+    assert.equal(abandoned.state.flags['seen:prologue.rift'],undefined);assert.deepEqual(abandoned.state.items,{});
+    assert.equal(abandoned.claims(),0);
+});
+
+test('Gate films show the actual outcome, take Nudge away before narration and preserve rewards on skip/failure',async()=>{
+    for(const type of ['owlet','fox','mothkin','frogling','raven']) for(const tier of [1,2,3,4]) for(const mode of ['complete','skip','unavailable']) {
+        const g=storyGame(type,type==='owlet'?'girl':'boy'), trace=[];
+        Object.assign(g.state.flags, {'seen:prologue.rift':true,'stakes.ch1':tier,'dead:sequins':tier===4,
+            'clock:ch1':{n:[0,1,3,5,6][tier],size:6,started:true,done:true,tier},turnedBack:type==='fox'});
+        g.state.chapter='ch1';
+        const original=g.Rift.Cutscene.play;
+        if(mode==='unavailable')g.Rift.Cutscene=null;
+        else g.Rift.Cutscene.play=(id,o)=>original(id,{...o,onStep:(k,s)=>trace.push([k,s])});
+        await finishStory(g,g.Rift.Dialogue.play('ch1.gate.win'),mode);
+        assert.equal(g.state.items['lucky-sequin']||0,tier<=2?1:0);
+        assert.equal(!!g.state.flags.nudgeFled,tier>=2);
+        assert.ok(g.state.flags['seen:ch1.gate.win']);
+        assert.equal(g.speech.filter(l=>l.text.includes('I TOOK THE TORTOISE')).length,type==='fox'&&tier!==4?0:1);
+        assert.equal(g.speech.filter(l=>l.text.startsWith('You turned back.')).length,type==='fox'?1:0);
+        if(mode!=='complete')continue;
+        const opening=trace.find(([,s])=>s.shot==='the-open-gate')[1];
+        assert.equal(opening.layers.some(l=>l.id==='sequins'),tier!==4);
+        const escape=trace.find(([,s])=>s.shot==='the-escaping-piece')[1];
+        assert.equal(escape.layers.some(l=>l.id==='nudge'),tier!==4);
+        if(tier===4)assert.ok(g.speech.every(l=>l.speaker!=='sequins'&&l.speaker!=='nudge'));
+        else {
+            const leave=trace.findIndex(([k,s])=>k==='tween'&&s.tween==='nudge');
+            const consequence=trace.findIndex(([k,s])=>k==='say'&&/^Gone through|^You caught/.test(s.t));
+            assert.ok(leave>=0&&consequence>leave);
+        }
+        const vision=trace.find(([,s])=>s.shot==='the-wrong-victory')[1];
+        assert.ok(vision.layers.some(l=>l.id==='hero'));assert.ok(vision.layers.some(l=>l.id==='door-feed'&&!l.cover));
+    }
+});
+
+test('Gate navigation abandonment grants no reward and re-entry grants only one',async()=>{
+    for(const tier of [1,2,3,4]) {
+        const g=storyGame();
+        Object.assign(g.state.flags,{'seen:prologue.rift':true,'stakes.ch1':tier,'dead:sequins':tier===4,
+            'clock:ch1':{n:[0,1,3,5,6][tier],size:6,started:true,done:true,tier}});
+        g.Rift.Dialogue.play('ch1.gate.win');await settle();
+        assert.ok(g.Rift.Cutscene.current());g.Rift.Dialogue.abortAll();await settle();
+        assert.equal(g.state.flags['seen:ch1.gate.win'],undefined);
+        assert.equal(g.state.flags.nudgeFled,undefined);assert.deepEqual(g.state.items,{});
+        await finishStory(g,g.Rift.Dialogue.play('ch1.gate.win'),'complete');
+        assert.equal(g.state.items['lucky-sequin']||0,tier<=2?1:0);
+        assert.equal(!!g.state.flags.nudgeFled,tier>=2);assert.equal(g.claims(),0);
+    }
+});
+
+test('canonical creature subtitle labels use display names while voice IDs retain possession',()=>{
+    const g=storyGame();
+    const says=g.Rift.Cutscene.plan('fair-rupture').steps.filter(s=>s.say);
+    for(const actor of ['speedcheeta','siuuugull']) {
+        const s=says.find(s=>s.actor===actor);assert.ok(s);
+        assert.equal(s.label,g.Rift.data.creatures[actor].name);
+    }
+    assert.ok(says.some(s=>s.say==='siuuugull-possessed'));
+});
+
+test('named cutscene dialogue handles understudy words without repetition or unearned actors',async()=>{
+    const g=storyGame();g.state.flags['dead:granny']=true;
+    g.Rift.data.script.testWords=[{s:'granny',t:'Original words.',u:'Understudy words.'}];
+    g.film([shot,{conversation:'testWords'}],'cast-film');
+    assert.equal(g.Rift.Cutscene.plan('cast-film').steps.filter(s=>s.say).length,0);
+    g.state.flags['arrived:granny']=true;
+    const original=g.Rift.Cutscene.play;g.Rift.Cutscene.play=(id,o)=>original(id,{...o,instant:true});
+    await g.Rift.Dialogue.play([{cutscene:'cast-film',continuation:'testWords'}]);
+    assert.deepEqual(g.speech.map(l=>l.text),['Understudy words.']);
+    assert.equal(g.speech[0].speaker,'achilles');
+});
+
 test('each chosen nickname reaches the scan and subtitles while the recorded voice key stays reusable',async()=>{
     for(const nickname of ['Lin','Åsa','Jo & Sam']){
         const g=game(),trace=[];
@@ -255,6 +399,7 @@ test('an invalid timeline falls back cleanly and the player can start another fi
 test('Journal replay is seen-gated, deduplicates clicks and preserves story state',async()=>{
     for(const seen of [false,true]){
         const g=game();g.state.flags['seen:prologue.cold']=seen;
+        g.state.flags['seen:prologue.rift']=seen;g.state.flags['seen:ch1.gate.win']=seen;
         g.Rift.UI.hud=()=>g.Rift.el('div');g.Rift.UI.toast=()=>{};
         g.Rift.Quests={glyph:()=>'',COLOURS:{main:'#fff',side:'#fff'},list:()=>[]};
         g.run('js/core/router.js');g.run('js/screens/journal.js');
@@ -262,6 +407,8 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         g.Rift.Screens.get('journal').mount(root);
         const replay=g.$$('button').find(n=>n.textContent==='Watch the opening again');
         assert.equal(!!replay,seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Gate aftermath again'),seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Fair rupture again'),seen);
         if(!seen)continue;
         let end,calls=0;g.Rift.Cutscene.play=()=>{calls++;return new Promise(resolve=>{end=resolve;});};
         const before=JSON.stringify(g.state);replay.click();replay.click();assert.equal(calls,1);assert.ok(replay.disabled);

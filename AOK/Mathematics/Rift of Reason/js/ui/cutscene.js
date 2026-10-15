@@ -110,15 +110,53 @@
         return s;
     }
 
-    // plan(id, { player, calm }) → { id, def, who, calm, steps }: tokens filled, layers sized, calm cut applied.
+    // Read-only dialogue selection. Decisions, rewards and clocks stay in Dialogue.run.
+    // A named conversation is also the Skip/failure continuation and the voice catalogue source.
+    function conversation(key, ctx) {
+        const out = [];
+        function walk(steps) {
+            for (const s of steps || []) {
+                const allowed = s.when === undefined || (Rift.Story && Rift.Story.test(s.when, ctx));
+                if (s.then || s.else) { walk(allowed ? s.then : s.else); continue; }
+                if (!allowed || (Rift.Story && !Rift.Story.matchesOnly(s.only))) continue;
+                if (s.s && typeof s.t === 'string') out.push(s);
+                else throw new Error('Cutscene conversations may contain only dialogue and conditions: ' + key);
+            }
+        }
+        walk((Rift.data.script || {})[key]);
+        return out;
+    }
+
+    function spokenLine(line, who, ctx) {
+        const avatar = line.s === 'avatar';
+        const actor = avatar ? 'avatar-' + who.type + '-' + who.variant
+            : (Rift.Cast ? (line.replay ? Rift.Cast.original(line.s) : Rift.Cast.actor(line.s, { replay: ctx && ctx.replay })) : line.s);
+        if (!actor) return null;
+        const text = avatar || !Rift.Cast || line.replay ? line.t : Rift.Cast.text(line, actor);
+        if (!text) return null;
+        const possessed = line.possessed || (Rift.Story && Rift.Story.flag('possessed:' + line.s));
+        return { say: actor + (possessed && !avatar ? '-possessed' : ''), role: line.s, actor,
+            label: avatar ? who.name : (((Rift.data.speakers || {})[actor] || (Rift.data.creatures || {})[actor]) || {}).name,
+            t: text, continuationText: line.t, text: fill(text, who) };
+    }
+
+    // plan(id, { player, calm, context }) → a save-free, fully selected timeline.
     function plan(id, opts) {
         const def = typeof id === 'object' ? id : defOf(id);
         if (!def) return null;
         const o = opts || {};
         const who = viewer(o.player);
-        const size = steps => steps.map(step => {
+        const size = steps => steps.flatMap(step => {
+            if (step.when !== undefined && Rift.Story && !Rift.Story.test(step.when, o.context)) return [];
+            if (step.conversation) return conversation(step.conversation, o.context).map(line => spokenLine(line, who, o.context)).filter(Boolean);
+            if (step.line) {
+                const line = conversation(step.line, o.context)[step.at || 0];
+                if (!line) throw new Error('Missing cutscene line: ' + step.line + ' #' + step.at);
+                const spoken = spokenLine(line, who, o.context);
+                return spoken ? [Object.assign({}, step, spoken)] : [];
+            }
             const s = Object.assign({}, step);
-            if (s.layers) s.layers = s.layers.map(l => sizeLayer(l, who));
+            if (s.layers) s.layers = s.layers.filter(l => l.when === undefined || (Rift.Story && Rift.Story.test(l.when, o.context))).map(l => sizeLayer(l, who));
             if (s.during) s.during = size(s.during);
             return s;
         });
@@ -549,7 +587,7 @@
         const speaker = s.say;
         const text = s.text || s.t;
         const info = ((Rift.data && Rift.data.speakers) || {})[speaker];
-        this.subName.textContent = (info && info.name) || speaker;
+        this.subName.textContent = s.label || (info && info.name) || speaker;
         this.subText.textContent = text;
         this.subtitle.hidden = false;
         const voice = Rift.Audio && Rift.Audio.speak
@@ -560,7 +598,8 @@
         await this.hold(Promise.all([voice, reading, this.run(s.during)]));
         if (!this.closed) {
             this.subtitle.hidden = true;
-            if (this.o.onSpoken) this.o.onSpoken({ speaker, text: s.t });
+            if (this.o.onSpoken) this.o.onSpoken({ speaker: s.role || speaker, actor: s.actor,
+                text: s.continuationText == null ? s.t : s.continuationText });
         }
     };
 
@@ -755,7 +794,7 @@
         if (!has(id) || !root.document) return Promise.resolve(false);
         if (current) return current.done || Promise.resolve(false);
         let planned;
-        try { planned = plan(id, { player: o.player, calm: o.calm == null ? calmWanted() : o.calm }); } catch (e) {
+        try { planned = plan(id, { player: o.player, calm: o.calm == null ? calmWanted() : o.calm, context: o.context }); } catch (e) {
             console.error('[Rift] cutscene', e);
             return Promise.resolve(false);
         }
@@ -772,7 +811,7 @@
     function stop() { if (current) current.skip(); }
 
     Rift.Cutscene = {
-        play, stop, has, plan, needs, project, calmWanted,
+        play, stop, has, plan, needs, project, calmWanted, conversation,
         current: () => (current ? current.status() : null),
         list: () => Object.keys((Rift.data && Rift.data.cutscenes) || {}),
     };

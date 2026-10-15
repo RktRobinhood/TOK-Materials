@@ -43,6 +43,11 @@
         if (!s || !s.map) return [];
         const out = [];
         const trainers = new Set();   // a trainer at two stations (Syllo) is one entry
+        if (s.flags['seen:prologue.rift'] && s.map.revealed.includes('signpost')) {
+            out.push({ id: 'story:follow-the-crack', kind: 'main', status: stationStatus(s, 'signpost'),
+                title: 'Follow the crack', text: 'Find the Sundial\'s stolen shadow. Start at the Talking Signpost, then follow the Forest Road.',
+                node: 'signpost', chapter: 'ch1', locked: null });
+        }
         s.map.revealed.forEach(id => {
             const n = nodes()[id];
             if (!n) return;
@@ -108,8 +113,12 @@
         const open = list(s).filter(q => q.status === 'new' || q.status === 'progress');
         const here = q => q.chapter === s.chapter;
         const homeward = q => !s.flags['seen:finale.home'] && (q.node === 'k-summit' || (q.node === 'fair-finale' && s.flags['finale-open']));
+        // After the Fair rupture, the next lead is on the Road, across the chapter boundary.
+        const leavingFair = s.flags['seen:prologue.rift'] && !s.flags['entered:ch1']
+            && !['ch2', 'ch3', 'ch4'].some(ch => s.flags['entered:' + ch]);
+        const roadward = q => leavingFair && (q.node === 'signpost' || q.node === 'road-start');
         const at = q => q.node === s.map.at;
-        open.sort((a, b) => (homeward(b) - homeward(a)) || (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
+        open.sort((a, b) => (homeward(b) - homeward(a)) || (roadward(b) - roadward(a)) || (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
             || (at(b) - at(a))
             || (a.status === b.status ? 0 : a.status === 'progress' ? -1 : 1));
         return open.slice(0, max || 3);

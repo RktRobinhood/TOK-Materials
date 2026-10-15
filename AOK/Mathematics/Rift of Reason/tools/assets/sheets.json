@@ -446,6 +446,11 @@
         "owlet-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/owlet-boy/asleep","avatar/owlet-girl/asleep"]},
         "raven-asleep.png": {"type":"islands","minArea":2500,"class":"sprite","ids":["avatar/raven-boy/asleep","avatar/raven-girl/asleep"]},
         "sky-crack.png": {"type":"single","id":"cutscene/sky-crack","class":"fx","trim":true},
-        "raven-asleep-first-take.png": {"type":"skip"}
+        "raven-asleep-first-take.png": {"type":"skip"},
+        "nudge-shadow-153.png": {"type":"single","id":"cutscene/nudge-shadow","class":"sprite"},
+        "gate-after-153.png": {"type":"scene","id":"scene/gate-after"},
+        "sundial-shadow-153.png": {"type":"single","id":"cutscene/sundial-shadow","class":"prop"},
+        "nudge-net-empty-153.png": {"type":"single","id":"cutscene/nudge-net-empty","class":"sprite"},
+        "ring-light-153.png": {"type":"islands","minArea":1500,"class":"prop","ids":["cutscene/ring-light","cutscene/ring-light-broken"]}
     }
 }
