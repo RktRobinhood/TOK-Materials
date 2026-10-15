@@ -107,7 +107,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
             onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
         });
         byId('status').textContent = played
-            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, prologue.wake would start now.'
+            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the morning conversation continues now.'
             : 'Could not play (missing or broken art). In the game, the two lines on black would play instead.';
         byId('play').focus();
     });

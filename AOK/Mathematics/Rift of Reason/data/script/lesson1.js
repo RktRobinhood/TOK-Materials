@@ -85,16 +85,22 @@
 
     // ---------------------------------------------------------------- Prologue
 
+    S['prologue.greeting'] = [
+        { s: 'narrator', t: 'Nine o\'clock. Roughly. Good morning, {name}.' },
+        { s: 'narrator', t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.' },
+    ];
+
     // The cold open: the Algorithm finds you (data/cutscenes.js 'cold-open', issue #65). Played once at
     // the start of the first morning. If the film cannot play (missing art, an error), the same two
-    // recorded lines play on black instead. The film speaks these exact lines, so keep them in step.
+    // recorded Algorithm lines play on black instead. The continuation carries the Sundial's
+    // greeting when Skip/failure left it unheard; a complete film has already spoken it.
     S['prologue.cold'] = [
         { cutscene: 'cold-open', fallback: [
             { scene: 'black' },
             { s: 'algorithm', t: 'NOISE DETECTED. THE FAIR, 9:02. SUBJECT: {name}.' },
             { s: 'algorithm', t: 'PREDICTABILITY: 51%. UNACCEPTABLE.' },
             { scene: null },
-        ] },
+        ], continuation: S['prologue.greeting'] },
     ];
 
     // Your Home (node script). The morning, or a look back for a jump-in.
@@ -104,11 +110,9 @@
         ], else: [{ play: 'prologue.wake' }] },
     ];
     S['prologue.wake'] = [
-        { play: 'prologue.cold', once: true },
-        { s: 'narrator', t: 'Nine o\'clock. Roughly. Good morning, {name}.' },
-        { s: 'narrator', t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.' },
+        { when: { seen: 'prologue.cold' }, then: [{ play: 'prologue.greeting' }], else: [{ play: 'prologue.cold', once: true }] },
         { s: 'narrator', t: 'My shadow points at now. That\'s my whole job.' },
-        { s: 'avatar', e: 'surprised', t: 'A talking sundial. Outside my door. Normal.' },
+        { s: 'avatar', e: 'surprised', t: 'That light... Was I dreaming? And now a talking sundial. Normal.' },
         { s: 'granny', e: 'happy', t: '{name}! Stop chatting to the Sundial. It\'s Fair day! Wear pockets. Pockets win prizes.' },
         { s: 'granny', t: 'Off you go. They\'ve lit the lanterns. One for each of us.' },
         { s: 'granny', e: 'happy', t: 'Yours is the wonky one.' },

@@ -1,0 +1,66 @@
+0.0s  ambience
+0.0s  shot  morning
+0.0s  camera
+6.6s  wait
+8.1s  ambience
+8.1s  shot  watcher
+8.1s  tween  watcher
+8.1s  camera
+13.6s  shot  void
+13.6s  wait
+14.5s  sfx  fate-warp
+14.5s  tween  eye
+15.9s  camera
+15.9s  wait
+18.9s  tween  eye
+18.9s  wait
+19.4s  shot  crack
+19.4s  wait
+20.3s  fx  flicker
+22.2s  wait
+22.7s  sfx  rift
+22.7s  camera
+22.7s  wait
+23.8s  fx  flash
+24.5s  shot  village
+24.5s  camera
+29.1s  camera
+29.1s  hud  glyphs
+29.1s  hud  sweep
+29.1s  wait
+29.6s  say  NOISE DETECTED. THE FAIR, 9:02. SUBJECT: Ada.
+29.7s  hud  box
+29.7s  sfx  count
+29.7s  wait
+31.0s  hud  box
+31.0s  sfx  count
+31.0s  wait
+32.1s  hud  box
+32.1s  sfx  count
+32.1s  wait
+33.1s  camera
+33.1s  hud  box
+33.1s  sfx  block
+36.7s  wait
+37.1s  shot  bedroom
+37.1s  camera
+37.1s  wait
+38.7s  hud  box
+38.7s  wait
+41.3s  fx  bolt
+41.3s  fx  flash
+41.8s  sfx  rift
+41.8s  hud  clear
+41.8s  shot  waking
+41.8s  camera
+46.3s  wait
+49.3s  ambience
+49.3s  shot  daybreak
+49.3s  title  Rift of Reason
+49.5s  sfx  splash
+49.5s  wait
+51.1s  say  Nine o'clock. Roughly. Good morning, Ada.
+55.2s  title
+56.1s  say  I'm the Sundial. I tell the time. Mostly. On cloudy days I guess.
+56.1s  camera
+63.9s  end

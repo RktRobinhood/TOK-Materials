@@ -1,0 +1,52 @@
+{
+  "clips": [
+    {
+      "id": "avatar-owlet-boy-mn42qo",
+      "bytes": 42336,
+      "duration": 7.056,
+      "peak": 0.8848627805709839,
+      "rms": 0.10324653844102762,
+      "sha256": "7d8d33820f0b75a965e8c0cfee8210ff5ebf17691eb718451278df120907c544"
+    },
+    {
+      "id": "avatar-owlet-girl-w9crj9",
+      "bytes": 34416,
+      "duration": 5.736,
+      "peak": 0.8634738922119141,
+      "rms": 0.08402719547181929,
+      "sha256": "5f44dfa12e58a295e426a156a8843a9f9a6684ed94f2bb9f6de6b30ad62ceff3"
+    },
+    {
+      "id": "avatar-mothkin-boy-17me0jc",
+      "bytes": 51552,
+      "duration": 8.592,
+      "peak": 0.6357244849205017,
+      "rms": 0.055014157171244735,
+      "sha256": "24cd0b8e1c1386e17c6eb146b1e53f2f1deea22a02faf16434ea44d0af7b67d2"
+    },
+    {
+      "id": "avatar-mothkin-girl-1uifwej",
+      "bytes": 50112,
+      "duration": 8.352,
+      "peak": 0.8228898048400879,
+      "rms": 0.09661542424303736,
+      "sha256": "3785586c7d9e365a9073d135aa516989c008a04bd561221448ecc1613b6b7062"
+    }
+  ],
+  "transcriptStatus": "One bounded independent Owlet-boy transcript request failed with network/socket error; no transcripts accepted. Single-line takes have no inter-line split; spoken-word and acting acceptance remains provisional.",
+  "pending": [
+    "avatar-fox-boy-165wepv",
+    "avatar-fox-girl-15rhuh3",
+    "avatar-frogling-boy-1gjyzh5",
+    "avatar-frogling-girl-1ky09cp",
+    "avatar-raven-boy-f08lww",
+    "avatar-raven-girl-1ufzjql"
+  ],
+  "quota": {
+    "day": "2026-10-15",
+    "authorizedAdditionalAttemptLimit": 10,
+    "actualAdditionalAttempts": 6,
+    "localLedgerCountsPerModel": 13,
+    "stop": "Both pinned models returned daily server quota; no retries, reset, model change or billing change."
+  }
+}

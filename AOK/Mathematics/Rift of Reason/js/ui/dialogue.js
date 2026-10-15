@@ -285,13 +285,25 @@
     // Missing art, art that will not load or a player error shows the fallback steps instead.
     async function cutsceneStep(layer, step, ctx) {
         let played = false;
+        const spoken = new Set();
         if (Rift.Cutscene && Rift.Cutscene.has(step.cutscene)) {
-            try { played = await Rift.Cutscene.play(step.cutscene); } catch (e) { console.error('[Rift] cutscene', e); played = false; }
+            try {
+                played = await Rift.Cutscene.play(step.cutscene, {
+                    onSpoken: line => spoken.add(Rift.voiceId(line.speaker, line.text)),
+                });
+            } catch (e) { console.error('[Rift] cutscene', e); played = false; }
         }
         // Match dialogue's navigation contract: the abandoned encounter must never
         // resume its parent script, mark the opening seen, or start the wake-up lines.
         if (ctx.aborted) return new Promise(() => {});
         if (!played && step.fallback) await run(layer, step.fallback, ctx);
+        // Completed film lines need no repeat. Skip/failure still gives the morning
+        // conversation its missing greeting, including a line interrupted halfway.
+        for (const line of step.continuation || []) {
+            if (ctx.aborted) return new Promise(() => {});
+            if (line.s && line.t && spoken.has(Rift.voiceId(line.s, line.t))) continue;
+            await run(layer, [line], ctx);
+        }
     }
 
     async function quietStep(layer, who, ctx) {

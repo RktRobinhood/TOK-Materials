@@ -1,0 +1,744 @@
+{
+  "issue": 65,
+  "sourcePaintings": 17,
+  "assetIds": 27,
+  "errors": [],
+  "status": "source/runtime checks pass",
+  "assets": [
+    {
+      "key": "cold-open",
+      "source": {
+        "w": 1672,
+        "h": 941,
+        "transparentPercent": 0,
+        "solidPercent": 100,
+        "cornerAlpha": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "sha256": "6e42fadbecc40ba097973b9700b4a24c2fb4f09f8d93937ae98dac9c85ca08a7"
+      },
+      "outputs": [
+        {
+          "id": "scene/cold-open",
+          "file": "scenes/cold-open.webp",
+          "w": 1600,
+          "h": 900,
+          "small": "scenes/cold-open-small.webp",
+          "transparentPercent": 0,
+          "solidPercent": 100,
+          "cornerAlpha": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bytes": 282706,
+          "sha256": "ad07b5293792c9a932bba6a954bbc377943d45fb6810967d8d6e3162e3af3cc4"
+        }
+      ]
+    },
+    {
+      "key": "bedroom",
+      "source": {
+        "w": 1672,
+        "h": 941,
+        "transparentPercent": 0,
+        "solidPercent": 100,
+        "cornerAlpha": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "sha256": "de3629c7a4b4e0196bce695061077835738aa5c3fae240f66883266b5f9cf52d"
+      },
+      "outputs": [
+        {
+          "id": "scene/bedroom",
+          "file": "scenes/bedroom.webp",
+          "w": 1600,
+          "h": 900,
+          "small": "scenes/bedroom-small.webp",
+          "transparentPercent": 0,
+          "solidPercent": 100,
+          "cornerAlpha": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bytes": 240326,
+          "sha256": "9afe46d46c4e4dd453200bd07d68a4bd23ce661bb90d97271b39ca2018d4bbd7"
+        }
+      ]
+    },
+    {
+      "key": "cold-open-front",
+      "source": {
+        "w": 1672,
+        "h": 941,
+        "transparentPercent": 78.2,
+        "solidPercent": 21.1,
+        "cornerAlpha": [
+          0,
+          0,
+          251,
+          251
+        ],
+        "sha256": "e4c641d4bb03ad26158001f7cff80d5adb0a5cd57900e31145ebc73d06064196"
+      },
+      "outputs": [
+        {
+          "id": "cutscene/cold-open-front",
+          "file": "cutscene/cold-open-front.webp",
+          "w": 1600,
+          "h": 900,
+          "transparentPercent": 78.2,
+          "solidPercent": 21.1,
+          "cornerAlpha": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "bytes": 117136,
+          "sha256": "d531ab9fc515b31cb288d941a054cf5626d1c1ea4d1bab1ed3b7c28352400fe3"
+        }
+      ]
+    },
+    {
+      "key": "cold-open-hills",
+      "source": {
+        "w": 1671,
+        "h": 941,
+        "transparentPercent": 28,
+        "solidPercent": 71.7,
+        "cornerAlpha": [
+          1,
+          0,
+          250,
+          251
+        ],
+        "sha256": "e45766d72d551da49d31531ae57bc7979b076fcb39468cd7abc9053df39f10bb"
+      },
+      "outputs": [
+        {
+          "id": "cutscene/cold-open-hills",
+          "file": "cutscene/cold-open-hills.webp",
+          "w": 1600,
+          "h": 901,
+          "transparentPercent": 28,
+          "solidPercent": 71.7,
+          "cornerAlpha": [
+            1,
+            0,
+            251,
+            251
+          ],
+          "bytes": 256544,
+          "sha256": "9d108b717991487524cbdd89e426af33865c6faba0c5f2c38cb690607f136296"
+        }
+      ]
+    },
+    {
+      "key": "cold-open-sky",
+      "source": {
+        "w": 1672,
+        "h": 941,
+        "transparentPercent": 0,
+        "solidPercent": 100,
+        "cornerAlpha": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "sha256": "8c95738b7d56c284a983e56ce192b299544dbac498be444c18739a2eaab40b23"
+      },
+      "outputs": [
+        {
+          "id": "cutscene/cold-open-sky",
+          "file": "cutscene/cold-open-sky.webp",
+          "w": 1600,
+          "h": 900,
+          "transparentPercent": 0,
+          "solidPercent": 100,
+          "cornerAlpha": [
+            255,
+            255,
+            255,
+            255
+          ],
+          "bytes": 53622,
+          "sha256": "b6cac7ccc3cab41d6bcb2fba81cb96819a7a848e2cdeb9fe315b913f0218572b"
+        }
+      ]
+    },
+    {
+      "key": "cold-open-village",
+      "source": {
+        "w": 1672,
+        "h": 941,
+        "transparentPercent": 55.9,
+        "solidPercent": 43.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "4a6fb7d13b19ab8ac3ff6c7c3a61b0568b95d62f7a84b33d8291320071d5e7b8"
+      },
+      "outputs": [
+        {
+          "id": "cutscene/cold-open-village",
+          "file": "cutscene/cold-open-village.webp",
+          "w": 1600,
+          "h": 900,
+          "transparentPercent": 55.9,
+          "solidPercent": 43.2,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 283242,
+          "sha256": "79294a265e9e857405c59cff7caea6d257098b442db0d1d7713f4795cd4e7486"
+        }
+      ]
+    },
+    {
+      "key": "fox-asleep",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 47.2,
+        "solidPercent": 52.3,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "94095d49830880f911e4ec8fb2ce64a3d2252c56aef79e6f762489de7075fe54"
+      },
+      "outputs": [
+        {
+          "id": "avatar/fox-boy/asleep",
+          "file": "avatars/fox-boy-asleep.webp",
+          "w": 609,
+          "h": 620,
+          "transparentPercent": 25.2,
+          "solidPercent": 74.1,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 106764,
+          "sha256": "cd5620291ced2b4bcbf18acdbccd33d4a4d0446447a47d84980ca6c99356adea"
+        },
+        {
+          "id": "avatar/fox-girl/asleep",
+          "file": "avatars/fox-girl-asleep.webp",
+          "w": 616,
+          "h": 620,
+          "transparentPercent": 23,
+          "solidPercent": 76.2,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 114660,
+          "sha256": "1b2c56395ff81fb6d281074c21f9660ed2417e585bf54655d083e3b9dcbf85bc"
+        }
+      ]
+    },
+    {
+      "key": "frogling-asleep",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 47.3,
+        "solidPercent": 52.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "405936afee3f3ce50c1bf65c4fa91b515a39d5e09cc0736c592a4894270e2f13"
+      },
+      "outputs": [
+        {
+          "id": "avatar/frogling-boy/asleep",
+          "file": "avatars/frogling-boy-asleep.webp",
+          "w": 737,
+          "h": 620,
+          "transparentPercent": 15.4,
+          "solidPercent": 83.9,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 135794,
+          "sha256": "0786122e0ec86087296548c7db47fad9267d0d375ac1a2601fd2febe1e4bd017"
+        },
+        {
+          "id": "avatar/frogling-girl/asleep",
+          "file": "avatars/frogling-girl-asleep.webp",
+          "w": 736,
+          "h": 620,
+          "transparentPercent": 13.1,
+          "solidPercent": 86.3,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 144686,
+          "sha256": "a9372c95f2ee6aeabfdcd4d7d32b1b27dea73094574efc5cc5cf8e6500918e7f"
+        }
+      ]
+    },
+    {
+      "key": "mothkin-asleep",
+      "source": {
+        "w": 2172,
+        "h": 724,
+        "transparentPercent": 39.3,
+        "solidPercent": 60.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ce4259ff80f968a6c4f37abbfddeb4121b430c2ec674145538dcb78c03d8d3d7"
+      },
+      "outputs": [
+        {
+          "id": "avatar/mothkin-boy/asleep",
+          "file": "avatars/mothkin-boy-asleep.webp",
+          "w": 926,
+          "h": 620,
+          "transparentPercent": 33.8,
+          "solidPercent": 65.5,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 161010,
+          "sha256": "16177c6cbbc400993c89a02b14777e78b54b1868cd4ce4ee49dbded89e781b1f"
+        },
+        {
+          "id": "avatar/mothkin-girl/asleep",
+          "file": "avatars/mothkin-girl-asleep.webp",
+          "w": 895,
+          "h": 620,
+          "transparentPercent": 34.9,
+          "solidPercent": 64.4,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 155860,
+          "sha256": "d50d7ea55bc44814eb23e25df40dfb9b803c5c6c296bf6b2d4ef47bde64bdf14"
+        }
+      ]
+    },
+    {
+      "key": "owlet-asleep",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 57.6,
+        "solidPercent": 42.1,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "f6b893c756006f4447f64c43aa441a1d5fc8d2e5288e560c4a012b9244029c4e"
+      },
+      "outputs": [
+        {
+          "id": "avatar/owlet-boy/asleep",
+          "file": "avatars/owlet-boy-asleep.webp",
+          "w": 761,
+          "h": 606,
+          "transparentPercent": 25.9,
+          "solidPercent": 73.4,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 101832,
+          "sha256": "cb321ce39ccd5e7c8174e6ec7c736556eade628939c05638d352bb0727beae53"
+        },
+        {
+          "id": "avatar/owlet-girl/asleep",
+          "file": "avatars/owlet-girl-asleep.webp",
+          "w": 711,
+          "h": 558,
+          "transparentPercent": 17.9,
+          "solidPercent": 81.5,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 98702,
+          "sha256": "7319e1ca3ee3233ce20c1cd6eab3fee7aed8c9123440ee38081338f0a3445375"
+        }
+      ]
+    },
+    {
+      "key": "raven-asleep",
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 55.3,
+        "solidPercent": 44.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "a9943437027cc596414e4589871822a20125b3b4176f0d477797f9e074c24b6e"
+      },
+      "outputs": [
+        {
+          "id": "avatar/raven-boy/asleep",
+          "file": "avatars/raven-boy-asleep.webp",
+          "w": 737,
+          "h": 618,
+          "transparentPercent": 22.7,
+          "solidPercent": 76.6,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 115780,
+          "sha256": "34cea0ddeb426a45fef1f8d9193f1086f262862c96941807a734e3b44ab62df2"
+        },
+        {
+          "id": "avatar/raven-girl/asleep",
+          "file": "avatars/raven-girl-asleep.webp",
+          "w": 737,
+          "h": 609,
+          "transparentPercent": 21.8,
+          "solidPercent": 77.6,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 113916,
+          "sha256": "1b8e787e2467313955d0afe5c2256021ce7d8eda8b236ff5f5a62b94a81afe85"
+        }
+      ]
+    },
+    {
+      "key": "sky-crack",
+      "source": {
+        "w": 2172,
+        "h": 724,
+        "transparentPercent": 97,
+        "solidPercent": 2.2,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "372b6190091c71ca63afb7a56299ed9a3f31e025a40b7a0cc78a257f106a6260"
+      },
+      "outputs": [
+        {
+          "id": "cutscene/sky-crack",
+          "file": "cutscene/sky-crack.webp",
+          "w": 800,
+          "h": 107,
+          "transparentPercent": 92,
+          "solidPercent": 5.9,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 16866,
+          "sha256": "434a3eeb961d4c539e4b6c5954eabb4dfadf83b7f808ac958345e13a4d727852"
+        }
+      ]
+    },
+    {
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 53.9,
+        "solidPercent": 45.4,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "67b9e19ebc83c87c63fe22df7208633e07a712f87c892ff7cc1b262c2260c59b"
+      },
+      "outputs": [
+        {
+          "id": "avatar/fox-boy/waking",
+          "file": "avatars/fox-boy-waking.webp",
+          "w": 629,
+          "h": 620,
+          "transparentPercent": 35.8,
+          "solidPercent": 63.2,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 111694,
+          "sha256": "deff28de39a574cbf735eebb562571d8d80d7b5e94f6406dbbef35883241bfea"
+        },
+        {
+          "id": "avatar/fox-girl/waking",
+          "file": "avatars/fox-girl-waking.webp",
+          "w": 594,
+          "h": 620,
+          "transparentPercent": 36.1,
+          "solidPercent": 63,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 103096,
+          "sha256": "d479d2969b71f42dcae982605c5aa8bbec3a5025a4dc339be0b69a87512cb484"
+        }
+      ]
+    },
+    {
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 54,
+        "solidPercent": 45.6,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "ded6284e9d66837d08d7b784f56a56db8ed8f33b290602a5115afa08ffe371d8"
+      },
+      "outputs": [
+        {
+          "id": "avatar/owlet-boy/waking",
+          "file": "avatars/owlet-boy-waking.webp",
+          "w": 670,
+          "h": 620,
+          "transparentPercent": 33.4,
+          "solidPercent": 65.8,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 123450,
+          "sha256": "c0126cccc0646b4a18130a4ddd24a5d8edce7ff694ba88bb710f5d04cc35f48c"
+        },
+        {
+          "id": "avatar/owlet-girl/waking",
+          "file": "avatars/owlet-girl-waking.webp",
+          "w": 679,
+          "h": 620,
+          "transparentPercent": 29.6,
+          "solidPercent": 69.7,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 122854,
+          "sha256": "df99973090760fdc30c1cc2c8f466d9ed796d5cc2268a5cea822073b1d91f0cd"
+        }
+      ]
+    },
+    {
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 58,
+        "solidPercent": 41.5,
+        "cornerAlpha": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "sha256": "faa338fe4d478a882af31b59e68b92c4ddd66c56c08a7ce5f45834ffe32c03eb"
+      },
+      "outputs": [
+        {
+          "id": "avatar/mothkin-boy/waking",
+          "file": "avatars/mothkin-boy-waking.webp",
+          "w": 697,
+          "h": 620,
+          "transparentPercent": 38.8,
+          "solidPercent": 60.4,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 124712,
+          "sha256": "fd9a7f18bbd40c6444783ab25c942a224ae5b9004622d8f29592a80b14d34053"
+        },
+        {
+          "id": "avatar/mothkin-girl/waking",
+          "file": "avatars/mothkin-girl-waking.webp",
+          "w": 661,
+          "h": 620,
+          "transparentPercent": 38.7,
+          "solidPercent": 60.5,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 120514,
+          "sha256": "325be0205b4f4bf04f20ffb39bea025690ebc96b267cb64e3229cb1a184eb39c"
+        }
+      ]
+    },
+    {
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 60.3,
+        "solidPercent": 39.3,
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "sha256": "d7009bdfed8d2dba42c10e5320729489ad35c941832328c3f4f331295939a462"
+      },
+      "outputs": [
+        {
+          "id": "avatar/frogling-boy/waking",
+          "file": "avatars/frogling-boy-waking.webp",
+          "w": 736,
+          "h": 620,
+          "transparentPercent": 33.8,
+          "solidPercent": 65.6,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 103794,
+          "sha256": "22372448d2f695045eca74032f805f08e3d5f9354de02dde6f4d59e0d5ac9707"
+        },
+        {
+          "id": "avatar/frogling-girl/waking",
+          "file": "avatars/frogling-girl-waking.webp",
+          "w": 682,
+          "h": 620,
+          "transparentPercent": 30.6,
+          "solidPercent": 68.7,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 102478,
+          "sha256": "8af79840c4e377107c969a8ad55219de9b184b89deac6e9a645fe5db19475805"
+        }
+      ]
+    },
+    {
+      "source": {
+        "w": 1536,
+        "h": 1024,
+        "transparentPercent": 58.5,
+        "solidPercent": 40.9,
+        "cornerAlpha": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "sha256": "29787d5f017dd30276e974ef59718b244ecb9e76e0a56250e607f36ec6a0ce15"
+      },
+      "outputs": [
+        {
+          "id": "avatar/raven-boy/waking",
+          "file": "avatars/raven-boy-waking.webp",
+          "w": 671,
+          "h": 620,
+          "transparentPercent": 38.7,
+          "solidPercent": 60.3,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 110422,
+          "sha256": "f3b2f12563705112f087d5894d72ba6b968a7b7ac21ba018013aa195a2efff7d"
+        },
+        {
+          "id": "avatar/raven-girl/waking",
+          "file": "avatars/raven-girl-waking.webp",
+          "w": 638,
+          "h": 620,
+          "transparentPercent": 35.6,
+          "solidPercent": 63.6,
+          "cornerAlpha": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bytes": 107960,
+          "sha256": "271f1cfd2e623f10564e04ad21d2e9cf6d90035b4c1b243572266caa63a47c4a"
+        }
+      ]
+    }
+  ]
+}

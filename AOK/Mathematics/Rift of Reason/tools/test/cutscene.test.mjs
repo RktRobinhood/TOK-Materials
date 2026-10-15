@@ -2,11 +2,59 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {loadWithDom} from './fake-dom.mjs';
 
+test('completed greeting lines are not repeated; Skip and failure supply only unheard lines',async()=>{
+    for(const completed of [0,1,2])for(const failed of [false,true]){
+        const g=game();dialogue(g);
+        const greetings=[{s:'narrator',t:'Good morning, {name}.'},{s:'narrator',t:'I am the Sundial.'}];
+        g.Rift.Cutscene={has:()=>true,stop(){},play:async(id,options)=>{
+            greetings.slice(0,completed).forEach(line=>options.onSpoken({speaker:line.s,text:line.t}));
+            return !failed;
+        }};
+        const done=g.Rift.Dialogue.play([{cutscene:'cold-open',fallback:[{flag:'fallback'}],continuation:greetings},{flag:'awake'}]);
+        await settle();
+        for(let guard=0;guard<4&&g.$('.box');guard++){g.$('.box').click();await settle();}
+        await done;
+        assert.deepEqual(g.speech.map(line=>line.text),greetings.slice(completed).map(line=>line.t.replace('{name}','Ada')));
+        assert.equal(g.state.flags.awake,true);assert.equal(g.state.flags.fallback,failed?true:undefined);
+        assert.equal(g.claims(),0);
+    }
+});
+
+test('a line interrupted before its voice/reading beat finishes is not reported as spoken',async()=>{
+    let finish;const voice=new Promise(resolve=>{finish=resolve;});
+    const g=game({voice}),heard=[];
+    const done=g.Rift.Cutscene.play(g.film([shot,{say:'narrator',t:'Good morning.'}]),{onSpoken:line=>heard.push(line)});
+    await settle();await g.advance(2500);assert.equal(heard.length,0);
+    g.key('Escape');finish();assert.equal(await done,true);await settle();assert.equal(heard.length,0);
+});
+
+test('older seen openings keep their greeting and a completed new film does not repeat it',async()=>{
+    for(const seen of [false,true]){
+        const g=game();dialogue(g);g.run('data/script/lesson1.js');
+        g.state.flags['seen:prologue.cold']=seen;
+        g.Rift.Story.test=condition=>!!g.state.flags['seen:'+condition.seen];
+        let films=0;
+        const greeting=g.Rift.data.script['prologue.greeting'];
+        g.Rift.Cutscene={has:()=>true,stop(){},play:async(id,options)=>{
+            films++;greeting.forEach(line=>options.onSpoken({speaker:line.s,text:line.t}));return true;
+        }};
+        const opening=g.Rift.data.script['prologue.wake'][0];
+        const done=g.Rift.Dialogue.play([opening,{flag:'awake'}]);
+        await settle();
+        for(let guard=0;guard<4&&g.$('.box');guard++){g.$('.box').click();await settle();}
+        await done;assert.equal(films,seen?0:1);
+        assert.equal(g.speech.length,seen?2:0);assert.equal(g.state.flags.awake,true);
+    }
+});
+
 function dialogue(g) {
     const overlay=g.document.createElement('div');overlay.setAttribute('id','overlay');g.document.body.append(overlay);
     g.Rift.Story={matchesOnly:()=>true,chapterOfKey:()=>null,flag:key=>g.state.flags[key],
         setFlag:(key,value)=>{g.state.flags[key]=value;}};
     g.Rift.data.script={};
+    g.Rift.Cast={actor:role=>role,original:role=>role,text:step=>step.t};
+    g.Rift.Assets={img:()=>g.Rift.el('img'),has:()=>true};
+    g.state.settings.textInstant=true;
     g.run('js/ui/dialogue.js');
 }
 
@@ -75,7 +123,7 @@ function game(options = {}) {
         ctx.Rift.State = {get:() => state};
         ctx.Rift.Audio = {sfx(){},stopVoice(){stopped++;},speak(line){speech.push(line);return options.voice || Promise.resolve();}};
         ctx.Rift.Ambience = {now:() => ({art:options.beforeArt ?? null,tension:0.4}),scene:id=>scenes.push(id),tension(){}};
-        ctx.Rift.UI = {input:{claim:()=>{claims++;return()=>claims--;},guard(){}}};
+        ctx.Rift.UI = {input:{claim:()=>{claims++;return()=>claims--;},guard(){},available:()=>true}};
         ctx.Rift.voiceId = (speaker,text) => speaker+':'+text;
     },'js/ui/cutscene.js']);
     const film = (steps, id='test') => {g.Rift.data.cutscenes[id]={title:'Test film',steps};return id;};
@@ -96,13 +144,20 @@ test('all ten avatars complete the real timeline, speak the exact recorded keys 
         const g=game(),before=JSON.stringify(g.state),trace=[];
         const ok=await g.Rift.Cutscene.play('cold-open',{player:{type,variant,nickname:'Ada'},instant:true,onStep:(kind,s)=>trace.push([kind,s])});
         assert.equal(ok,true,type+' '+variant);assert.equal(JSON.stringify(g.state),before);
-        assert.equal(g.speech.length,2);assert.match(g.speech[0].text,/SUBJECT: Ada/);assert.match(g.speech[0].voice,/\{name\}/);
+        assert.equal(g.speech.length,3);assert.match(g.speech[0].text,/SUBJECT: Ada/);assert.match(g.speech[0].voice,/\{name\}/);
+        assert.match(g.speech[1].text,/Good morning, Ada/);assert.match(g.speech[2].text,/I'm the Sundial/);
         assert.equal(trace.find(([k])=>k==='shot')[1].shot,'morning');
         const bedroom=trace.find(([k,s])=>k==='shot'&&s.shot==='bedroom')[1];
         assert.ok(bedroom.layers.some(l=>l.art==='avatar/'+type+'-'+variant+'/asleep'));
+        const waking=trace.find(([k,s])=>k==='shot'&&s.shot==='waking')[1];
+        const body=waking.layers.find(l=>l.id==='awake');
+        assert.equal(body.art,'avatar/'+type+'-'+variant+'/waking');assert.equal(body.clipY,undefined);
+        const bounds=g.Rift.Cutscene.project({x:800,y:450,zoom:1.035},body);
+        assert.ok(bounds.sx-body.w*bounds.S/2>=0&&bounds.sx+body.w*bounds.S/2<=1600);
+        assert.ok(bounds.sy-body.h*bounds.S/2>=0&&bounds.sy+body.h*bounds.S/2<=900,'full body remains in frame');
         assert.equal(g.$('.cutscene'),null);assert.equal(g.claims(),0);assert.equal(g.timers.size,0);
         assert.equal(g.frames.size,0);assert.equal(g.events.get('keydown').size,0);
-        assert.deepEqual(g.scenes,['scene/fair','cutscene/cold-open',null]);
+        assert.deepEqual(g.scenes,['scene/fair','cutscene/cold-open','scene/fair',null]);
     }
 });
 

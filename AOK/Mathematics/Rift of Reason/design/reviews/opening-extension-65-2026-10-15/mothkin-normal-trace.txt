@@ -1,0 +1,59 @@
+0.1s  ambience
+0.1s  shot  morning
+0.1s  camera
+6.6s  wait
+8.1s  ambience
+8.1s  shot  watcher
+8.1s  tween  watcher
+8.1s  camera
+13.6s  shot  void
+13.6s  wait
+14.5s  sfx  fate-warp
+14.5s  tween  eye
+15.9s  camera
+15.9s  wait
+18.9s  tween  eye
+18.9s  wait
+19.4s  shot  crack
+19.4s  wait
+20.3s  fx  flicker
+22.2s  wait
+22.7s  sfx  rift
+22.7s  camera
+22.7s  wait
+23.8s  fx  flash
+24.5s  shot  village
+24.5s  camera
+29.1s  camera
+29.1s  hud  glyphs
+29.1s  hud  sweep
+29.1s  wait
+29.6s  say  NOISE DETECTED. THE FAIR, 9:02. SUBJECT: Mira.
+29.6s  hud  box
+29.6s  sfx  count
+29.6s  wait
+30.9s  hud  box
+30.9s  sfx  count
+30.9s  wait
+32.1s  hud  box
+32.1s  sfx  count
+32.1s  wait
+33.1s  camera
+33.1s  hud  box
+33.1s  sfx  block
+36.7s  wait
+37.1s  shot  bedroom
+37.1s  camera
+37.1s  wait
+38.6s  hud  box
+38.6s  wait
+41.2s  fx  bolt
+41.2s  fx  flash
+41.7s  sfx  rift
+41.7s  hud  clear
+41.7s  shot  waking
+41.7s  camera
+46.2s  wait
+49.2s  ambience
+49.2s  shot  daybreak
+49.2s  title  Rift of Reason

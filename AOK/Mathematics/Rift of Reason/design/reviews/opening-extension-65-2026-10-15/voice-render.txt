@@ -1,0 +1,8 @@
+10 lines to render in 10 requests on gemini-3.8-flash-tts, gemini-3.8-flash-lite-tts.
+12.36.20 lite  avatar-owlet-girl: saved 1 lines (total 1)
+12.36.21 flash avatar-owlet-boy: saved 1 lines (total 2)
+12.36.47 lite  avatar-mothkin-boy: saved 1 lines (total 3)
+12.36.49 flash avatar-mothkin-girl: saved 1 lines (total 4)
+DAILY QUOTA reached on gemini-3.8-flash-lite-tts; 3 requests left for it. Run again after the reset.
+DAILY QUOTA reached on gemini-3.8-flash-tts; 3 requests left for it. Run again after the reset.
+FINISHED: 4 lines saved, 6 requests used. Manifest lists 2564 files.

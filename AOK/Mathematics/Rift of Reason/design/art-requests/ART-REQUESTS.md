@@ -1206,3 +1206,9 @@ Completed: James Rand-eater, a tamandua anteater, replaces the duplicated lynx i
 ## Cold-open integration — #65, 15 October 2026
 
 Stage 13.72–13.76 assets now run in the actual opening player: quiet dawn/parallax, hairline crack, bedroom, all ten sleepers and existing surprised portraits/Algorithm eye/logo. No new art requested. Normal/Calm timing, Skip/fallback, Journal replay and source tests are implemented. Review: `../reviews/cutscene-65-2026-10-15.md`. Teacher viewing and physical school-device checks remain.
+
+## Stage 13.78 — Full-body waking avatars (#65), 15 October 2026
+
+Teacher requested complete startled waking poses replacing the cropped surprise bust. Five two-avatar transparent sheets, one per owlet/mothkin/fox/frogling/raven, boy LEFT and girl RIGHT; exact identity/costume, complete torso/limbs/feet, small pillow and quilt pushed aside. New IDs `avatar/<type>-<boy|girl>/waking`. Existing sleeping/bust art remains unchanged. Exact prompts/reference roles/status: `../source-assets/6-cutscene/waking/generation.json`. Use these for the longer waking scene and narrative handoff.
+
+Completed and integrated: ten full-body runtime assets, all original manifest entries preserved. Teacher flagged Frogling quilt edges; first take rejected and v2 redrawn with complete quilt ends, both variants rebuilt and native bedroom framing checked. Normal film 64.3 s / Calm 65.2 s, with server projection, waking recovery and Sundial/title handoff. Validation and recording limits: `../reviews/opening-extension-65-2026-10-15.md`.

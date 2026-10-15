@@ -8,6 +8,8 @@ import {readManifest} from './assets/manifest.mjs';
 
 const game = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const inventory = JSON.parse(await fs.readFile(path.join(game, 'design/source-assets/6-cutscene/generation.json')));
+const waking = JSON.parse(await fs.readFile(path.join(game, 'design/source-assets/6-cutscene/waking/generation.json')));
+const records = [...inventory.records, ...waking.records];
 const manifest = await readManifest(path.join(game, 'data/assets.js'));
 const errors = [], assets = [];
 const hash = data => createHash('sha256').update(data).digest('hex');
@@ -23,7 +25,7 @@ function stats(img) {
         cornerAlpha: [0, img.w - 1, img.w * (img.h - 1), pixels - 1].map(p => img.data[p * 4 + 3])};
 }
 const seen = new Set();
-for (const record of inventory.records) {
+for (const record of records) {
     const sourceFile = path.join(game, record.source), source = await load(sourceFile), sourceStats = stats(source);
     if (!record.prompt || !record.refs.length || !record.visualReview) errors.push(record.key + ': missing provenance');
     if (record.transparent && (sourceStats.transparentPercent < 5 || sourceStats.solidPercent < .05)) errors.push(record.key + ': missing alpha or subject');
@@ -45,7 +47,7 @@ for (const record of inventory.records) {
     }
     assets.push(entry);
 }
-if (seen.size !== 17) errors.push('Expected 17 cutscene asset IDs, found ' + seen.size);
-console.log(JSON.stringify({issue: 65, sourcePaintings: inventory.records.length, assetIds: seen.size, errors,
+if (seen.size !== 27) errors.push('Expected 27 cutscene asset IDs, found ' + seen.size);
+console.log(JSON.stringify({issue: 65, sourcePaintings: records.length, assetIds: seen.size, errors,
     status: errors.length ? 'fail' : 'source/runtime checks pass', assets}, null, 2));
 if (errors.length) process.exitCode = 1;

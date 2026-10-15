@@ -47,8 +47,15 @@
             { shot: 'morning', bg: '#14121f', camera: { x: 800, y: 450, zoom: 1 }, layers: VILLAGE },
             { camera: { x: 800, y: 470, zoom: 1.06 }, dur: 6500, ease: 'inOut', wait: true },
             { wait: 1500 },
-            // 1. Black. A low hum. The Algorithm's eye opens.
+            // Somewhere beyond the village's time: a projection, not its later physical form.
             { ambience: 'cutscene/cold-open' },
+            { shot: 'watcher', bg: '#05040a', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                { id: 'servers', art: 'scene/server-hall', x: 800, y: 450, w: 1600, h: 900, depth: 0.6, cover: true, bright: 0.58 },
+                { id: 'watcher', art: 'npc/algorithm/speaking', x: 800, bottom: 850, w: 380, opacity: 0, depth: 1.1, glow: '#3fe0d0' },
+            ] },
+            { tween: 'watcher', to: { opacity: 0.85 }, dur: 2600, ease: 'inOut' },
+            { camera: { x: 800, y: 430, zoom: 1.12 }, dur: 5500, ease: 'inOut', wait: true },
+            // The same watcher looks through the hairline into the ordinary morning.
             { shot: 'void', bg: '#05040a', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 { id: 'eye', art: 'npc/algorithm/sky-eye', x: 800, y: 440, w: 640, opacity: 0, sy: 0.04, glow: '#5fe8ff' },
             ] },
@@ -101,34 +108,38 @@
                 { id: 'room', art: 'scene/bedroom', x: 800, y: 450, w: 1600, h: 900, cover: true },
                 // The sleeping sprite brings its own pillow and quilt. Moth-kin wings need more room.
                 { id: 'sleeper', art: '{avatar}/asleep', x: 800, bottom: 972, w: 800, wFor: { mothkin: 928 } },
-                // The awake face sits up behind the quilt line (clipY) when the lightning wakes them.
-                { id: 'awake', art: '{avatar}/surprised', x: 800, bottom: 840, w: 400, opacity: 0, clipY: 700 },
             ] },
             { camera: { x: 800, y: 500, zoom: 1.15 }, dur: 3600, ease: 'out' },
             { wait: 1500 },
             { hud: 'box', id: 'subject', x: 800, y: 560, w: 560, h: 420, label: 'SUBJECT: {NAME}', colour: '{colour}', lock: true },
-            { hud: 'meter', id: 'predict', x: 800, y: 820, w: 520, label: 'PREDICTABILITY', value: 51, dur: 1800 },
-            { wait: 600 },
-            { say: 'algorithm', t: 'PREDICTABILITY: 51%. UNACCEPTABLE.', during: [
-                { wait: 2000 },
-                { hud: 'alarm', id: 'predict' },
-            ] },
-            { wait: 500 },
+            // The machine watches in silence. Cut the percentage readout: the face,
+            // intimate room and unnatural silence carry the fear without an explanation.
+            { wait: 2600 },
 
             // 5. Wake. Lightning in the window; the avatar jolts awake; the HUD glitches out.
             { fx: 'bolt', x1: 700, y1: 70, x2: 860, y2: 290, seed: 'window' },
             { fx: 'flash', dur: 500 },
             { sfx: 'rift' },
-            { set: 'sleeper', opacity: 0 },
-            { set: 'awake', opacity: 1, bottom: 900 },
-            { tween: 'awake', to: { bottom: 840 }, dur: 220, ease: 'out' },
             { hud: 'clear', glitch: true },
-            { camera: { x: 800, y: 470, zoom: 1.3 }, dur: 1200, ease: 'out' },
-            { wait: 1300 },
+            // Full new seated cutout: no portrait crop or clipping plane through the body.
+            { shot: 'waking', bg: '#14121f', fade: 500, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                { id: 'room', art: 'scene/bedroom', x: 800, y: 450, w: 1600, h: 900, cover: true },
+                { id: 'awake', art: '{avatar}/waking', x: 800, bottom: 850, w: 590, wFor: { mothkin: 690 } },
+            ] },
+            { camera: { x: 800, y: 450, zoom: 1.035 }, dur: 4500, ease: 'inOut', wait: true },
+            { wait: 3000 },
+            // Warm daylight and the Sundial's familiar voice carry us into conversation.
+            { ambience: 'scene/fair' },
+            { shot: 'daybreak', bg: '#14121f', fade: 1200, camera: { x: 800, y: 460, zoom: 1.04 }, layers: VILLAGE },
             { title: 'Rift of Reason', logo: 'ui/logo' },
             { sfx: 'splash' },
-            { wait: 2800 },
-            { end: true, fade: 900 },
+            { wait: 1600 },
+            { say: 'narrator', t: 'Nine o\'clock. Roughly. Good morning, {name}.' },
+            { title: false, dur: 900 },
+            { say: 'narrator', t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.', during: [
+                { camera: { x: 735, y: 600, zoom: 1.18 }, dur: 3600, ease: 'inOut' },
+            ] },
+            { end: true, fade: 350 },
         ],
     };
 })(typeof window !== 'undefined' ? window : globalThis);

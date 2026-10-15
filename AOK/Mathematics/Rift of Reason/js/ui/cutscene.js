@@ -459,7 +459,7 @@
 
     Player.prototype.exec = async function (s) {
         const kind = s.shot ? 'shot' : s.say ? 'say' : s.camera ? 'camera' : s.tween ? 'tween' : s.set ? 'set'
-            : s.fx ? 'fx' : s.hud ? 'hud' : s.title ? 'title' : s.end ? 'end' : s.sfx ? 'sfx' : s.ambience ? 'ambience' : 'wait' in s ? 'wait' : 'unknown';
+            : s.fx ? 'fx' : s.hud ? 'hud' : 'title' in s ? 'title' : s.end ? 'end' : s.sfx ? 'sfx' : s.ambience ? 'ambience' : 'wait' in s ? 'wait' : 'unknown';
         this.trace.push(kind + ':' + (s.shot || s.say || s.tween || s.set || s.fx || s.hud || s.sfx || s.ambience || (kind === 'wait' ? s.wait : '') || ''));
         if (this.o.onStep) this.o.onStep(kind, s);
         if (kind === 'shot') return this.shot(s);
@@ -549,7 +549,10 @@
         // Subtitles stay up for a fair reading time even when the voice is muted or quicker.
         const reading = this.sleep(1200 + 45 * String(text).length);
         await this.hold(Promise.all([voice, reading, this.run(s.during)]));
-        if (!this.closed) this.subtitle.hidden = true;
+        if (!this.closed) {
+            this.subtitle.hidden = true;
+            if (this.o.onSpoken) this.o.onSpoken({ speaker, text: s.t });
+        }
     };
 
     Player.prototype.fx = async function (s) {
@@ -647,6 +650,10 @@
     };
 
     Player.prototype.showTitle = function (s) {
+        if (s.title === false) {
+            if (!this.title) return null;
+            return this.tween(this.title, { opacity: 0 }, s.dur || 900, 'inOut').then(() => { this.titleNode.hidden = true; });
+        }
         const logo = s.logo && manifest()[s.logo];
         this.titleNode.replaceChildren(logo
             ? Rift.el('img.cs-logo', { src: 'assets/' + logo.file, alt: s.title })
@@ -733,7 +740,7 @@
 
     // ---- the public face --------------------------------------------------------------------------
 
-    // opts: { player, calm (default: the Calm motion setting), instant (tests), onStep }
+    // opts: { player, calm (default: the Calm motion setting), instant (tests), onStep, onSpoken }
     function play(id, opts) {
         const o = opts || {};
         if (!has(id) || !root.document) return Promise.resolve(false);

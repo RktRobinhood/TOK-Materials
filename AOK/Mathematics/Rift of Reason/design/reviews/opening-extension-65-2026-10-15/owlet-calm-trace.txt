@@ -1,0 +1,61 @@
+0.1s  ambience
+0.1s  shot  morning
+0.1s  wait
+6.6s  wait
+8.1s  ambience
+8.1s  shot  watcher
+8.1s  tween  watcher
+8.1s  wait
+13.6s  shot  void
+13.6s  wait
+14.5s  sfx  fate-warp
+14.5s  tween  eye
+16.6s  camera
+16.6s  wait
+19.6s  tween  eye
+19.6s  wait
+20.1s  shot  crack
+20.1s  wait
+21.0s  wait
+21.6s  sfx  rift
+21.6s  camera
+21.6s  wait
+22.7s  shot  village
+22.7s  wait
+27.3s  camera
+27.3s  hud  glyphs
+27.3s  wait
+27.8s  say  NOISE DETECTED. THE FAIR, 9:02. SUBJECT: Lin.
+27.8s  hud  box
+27.8s  sfx  count
+27.8s  wait
+29.1s  hud  box
+29.1s  sfx  count
+29.1s  wait
+30.2s  hud  box
+30.2s  sfx  count
+30.2s  wait
+31.2s  camera
+31.2s  hud  box
+31.2s  sfx  block
+35.3s  wait
+35.7s  shot  bedroom
+35.7s  camera
+35.7s  wait
+37.2s  hud  box
+37.2s  wait
+39.8s  sfx  rift
+39.8s  hud  clear
+40.5s  shot  waking
+40.5s  wait
+45.0s  wait
+48.0s  ambience
+48.0s  shot  daybreak
+48.0s  title  Rift of Reason
+49.4s  sfx  splash
+49.4s  wait
+51.0s  say  Nine o'clock. Roughly. Good morning, Lin.
+55.0s  title
+55.9s  say  I'm the Sundial. I tell the time. Mostly. On cloudy days I guess.
+55.9s  camera
+63.8s  end
