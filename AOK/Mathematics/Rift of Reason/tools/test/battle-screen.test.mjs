@@ -54,6 +54,42 @@ test('concealed opponent arming never displays the normal card reveal', () => {
     t.handle.destroy();
 });
 
+test('table decks keep identity, update counts and resolve a rapid repeat only once', () => {
+    const t = setup(practice);
+    assert.ok(t.$('.battle').classList.contains('arena-live'));
+    const own = t.$('.b-table-deck.deck'), shared = t.$('.b-table-deck.axiom');
+    const before = t.handle.state.players[0].deck.length;
+    assert.ok(own.classList.contains('draw-ready'));
+    assert.ok(shared.classList.contains('draw-ready'));
+    own.click(); own.click();
+    assert.equal(t.handle.state.players[0].deck.length, before - 1);
+    assert.equal(t.$('.b-table-deck.deck'), own);
+    assert.equal(t.$('.b-table-deck.axiom'), shared);
+    assert.equal(own.querySelector('.b-table-count').textContent, String(before - 1));
+    assert.equal(own.getAttribute('aria-disabled'), 'true');
+    assert.ok(!shared.classList.contains('draw-ready'));
+    t.handle.destroy();
+});
+
+test('Granny highlights the physical deck and blocks the other source; legacy study stays isolated', () => {
+    const t = setup({}, { screen: 'battle-lesson' });
+    const own = t.$('.b-table-deck.deck'), shared = t.$('.b-table-deck.axiom');
+    assert.ok(own.classList.contains('guide-focus'));
+    assert.ok(!shared.classList.contains('draw-ready'));
+    const count = t.handle.state.axioms.deck.length;
+    shared.click();
+    assert.equal(t.handle.state.axioms.deck.length, count);
+    assert.equal(t.handle.step, 0);
+    own.click();
+    assert.equal(t.handle.step, 1);
+    assert.ok(!own.classList.contains('guide-focus'));
+    t.handle.destroy();
+    const old = setup(Object.assign({}, practice, { layout: 'legacy' }));
+    assert.equal(old.$('.b-table-decks'), null);
+    assert.ok(old.$('.b-draw-opt .b-draw-btn'));
+    old.handle.destroy();
+});
+
 test('arming controls use the normal play budget and expose a readable condition rail', () => {
     const t = setup(practice, { before(g) {
         const c = g.Rift.data.creatures.kardashiant; c.cost = 1;
@@ -79,12 +115,12 @@ test('click-click: draw, play with the Play button, end turn, then attack a crea
     const title = t.$(".b-draw-title");
     assert.equal(title.querySelector('strong').textContent, 'Choose');
     assert.equal(title.querySelector('span').textContent, 'one draw');
-    // Each picture button has a short visible label under it.
-    const labels = t.root.querySelectorAll('.b-draw-opt .b-draw-label');
-    assert.equal(labels.length, 2);
+    // The two draw sources are physical piles; the opposing pile is informational.
+    const labels = t.root.querySelectorAll('.b-table-deck .b-table-label');
+    assert.equal(labels.length, 3);
     assert.match(labels[0].textContent, /^Your deck/);
-    assert.match(labels[1].textContent, /^Rule card/);
-    assert.ok(labels[1].querySelector('small'), 'the rule card label names the top card in a small line');
+    assert.match(labels[1].textContent, /^Shared axioms/);
+    assert.match(t.$('.b-table-deck.axiom').dataset.tipDetail, /You take/, 'the shared deck tooltip names its next rule');
     assert.ok(!/Draw from your deck/.test(t.text()), "the long name is only in the tooltip");
     $('.b-draw-btn[data-choice="deck"]').click();
     assert.equal(t.handle.state.phase, 'main');
@@ -853,7 +889,7 @@ test('hover previews wait, close on pointerdown and stay shut after a drag until
 
 test('picture buttons: each has a name (aria-label) and a tooltip, and no native title', () => {
     const t = setup(practice);
-    const names = t.root.querySelectorAll('.b-ibtn').map(b => b.getAttribute('aria-label'));
+    const names = t.root.querySelectorAll('.b-ibtn, button.b-table-deck').map(b => b.getAttribute('aria-label'));
     for (const n of ['Draw from your deck', 'Take a rule card', 'How to play', 'Leave match', 'Close', 'Axioms & log']) assert.ok(names.includes(n), n);
     assert.ok(!names.includes('Fate sooner') && !names.includes('Fate later'), 'no time draws by default');
     t.root.querySelectorAll('.b-ibtn').forEach(b => {
@@ -866,7 +902,7 @@ test('picture buttons: each has a name (aria-label) and a tooltip, and no native
     // The rule card draw names the card on top of the shared deck (the one Fate would turn over).
     const top = t.Rift.data.axioms[t.handle.state.axioms.deck[0]];
     assert.ok(t.$('.b-draw-btn[data-choice="axiom"]').dataset.tipDetail.startsWith('A rule card for your hand. You take ' + top.name + ': '));
-    assert.equal(t.$('.b-draw-btn[data-choice="deck"] .b-ibtn-badge').textContent, String(t.handle.state.players[0].deck.length));
+    assert.equal(t.$('.b-draw-btn[data-choice="deck"] .b-table-count').textContent, String(t.handle.state.players[0].deck.length));
     // End turn: a two-word face and a name that says whose turn it is.
     const end = () => t.$('.b-end');
     assert.equal(end().dataset.tip, 'End turn');

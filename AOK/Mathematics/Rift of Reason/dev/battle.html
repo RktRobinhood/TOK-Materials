@@ -7,6 +7,7 @@
 <title>Battle bench</title>
 <link rel="stylesheet" href="css/game.css">
 <link rel="stylesheet" href="css/battle.css">
+<link rel="stylesheet" href="css/arena.css?v=20261015">
 <link rel="stylesheet" href="dev/arena-prototype.css?v=117-1">
 <style>
     body { overflow: auto; }
@@ -72,14 +73,14 @@
 <script src="js/battle/ante.js"></script>
 <script src="js/battle/team-codes.js"></script>
 <script src="js/battle/lesson.js"></script>
-<script src="js/screens/battle.js"></script>
+<script src="js/screens/battle.js?v=20261015-table"></script>
 <script src="js/screens/battle-lesson.js"></script>
 <script src="js/ui/ui.js"></script>
 <script src="js/ui/battles.js"></script>
 <script src="js/ui/powers.js"></script>
 <script src="dev/conditional-cards.js"></script>
 <script src="dev/conditional-bench.js"></script>
-<script src="dev/arena-prototype.js?v=117-1"></script>
+<script src="dev/arena-prototype.js?v=20261015-table"></script>
 <script src="dev/starter-pack.js"></script>
 <script src="dev/fate-bench.js"></script>
 <script>
@@ -140,6 +141,7 @@
         msg('');
         R.Router.replace('battle', {
             mode,
+            guide: q.get('lesson') === 'short' ? R.Battle.Lesson.shortGuide() : q.get('lesson') === 'full' ? R.Battle.Lesson.guide() : null,
             opponent,
             seed: $('seed').value,
             // The Bag: ?bag=tonic,ward (default) or ?bag= for none.

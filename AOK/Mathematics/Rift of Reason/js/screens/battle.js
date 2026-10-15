@@ -29,8 +29,8 @@
  * hand card onto your side / onto its target to play it. Click-click works everywhere:
  * click a creature or card, then a glowing target or a button in the centre lane.
  * Any card (hand, board, opponent) and any active rule chip shows a big readable preview on
- * hover, keyboard focus or long-press (touch). The draw choice is docked in the centre lane so
- * both boards stay visible, and "Your turn" fades in briefly when a turn of yours starts.
+ * hover, keyboard focus or long-press (touch). Owner deck piles sit by energy, the shared rule
+ * deck sits centre-left, and "Your turn" fades in briefly when a turn of yours starts.
  *
  * The opponent's portrait and the log use the short name (before " · "); the full title is the tooltip.
  * The instruction bar follows the card being dragged or chosen; in guide mode it repeats the step's label.
@@ -262,7 +262,10 @@
         const lesson = p.lesson || (save && save.chapter && Rift.data.chapters && Rift.data.chapters[save.chapter] ? Rift.data.chapters[save.chapter].lesson : 1);
         const sceneId = ['scene/arena-l' + lesson, 'scene/arena'].find(id => has(id)) || 'scene/battle-table';
         if (Rift.Ambience) Rift.Ambience.scene(sceneId);
-        const screen = el('div.battle' + (guide ? '.guide-mode' : ''), {}, [
+        // The old layout is retained only for the developer comparison study.
+        const liveTable = p.layout !== 'legacy';
+        const tableDecks = {};
+        const screen = el('div.battle' + (guide ? '.guide-mode' : '') + (liveTable ? '.arena-live' : ''), {}, [
             dom.arena = el('div.b-arena', {}, [
                 // Top row: opponent hero | opponent hand (backs) | opponent energy.
                 dom.oppRow = el('div.b-hero-row.opp', {}, [
@@ -316,6 +319,28 @@
         const boardImg = Rift.Assets.img(sceneId, { className: 'scene-bg', label: 'the card table' });
         rootEl.appendChild(boardImg);
         rootEl.appendChild(screen);
+        if (liveTable) {
+            dom.decks = el('div.b-table-decks', { role: 'group', 'aria-label': 'Decks on the table' });
+            ['deck', 'axiom', 'opponent'].forEach(choice => {
+                const mine = choice !== 'opponent';
+                const node = el((mine ? 'button.b-draw-btn' : 'div') + '.b-table-deck.' + choice, {
+                    ...(mine ? { type: 'button', onclick() {
+                        if (ui.tipSuppress) return;
+                        // Resolve against current legality, including Granny's step and busy state.
+                        const action = legal().find(a => a.type === 'draw' && a.choice === choice);
+                        if (action) { hideTip(); act(action); }
+                        else showTip(node, true);
+                    } } : { role: 'img' }),
+                    dataset: { choice },
+                }, [el('span.b-table-back', { style: bg(choice === 'axiom' ? 'ui/axiom-back' : 'ui/card-back'), 'aria-hidden': 'true' }),
+                    el('span.b-table-label', { text: choice === 'deck' ? 'Your deck' : choice === 'axiom' ? 'Shared axioms' : 'Their deck', 'aria-hidden': 'true' }),
+                    el('b.b-table-count', { 'aria-hidden': 'true' }), el('span.b-table-status', { 'aria-hidden': 'true' })]);
+                if (mine) tipFor(node, 'draw:' + choice, DRAW_TEXT[choice][0], '');
+                tableDecks[choice] = node;
+                dom.decks.appendChild(node);
+            });
+            dom.arena.appendChild(dom.decks);
+        }
         // The lesson boards paint a calm band across the middle (its centre at about 46.7% of the
         // picture's height). The lane sits above the screen's middle (the hand takes the bottom), so
         // plain "cover" leaves the band low; scale and shift the picture so the band stays behind the lane.
@@ -2285,6 +2310,31 @@
             dom.draw.classList.toggle('show', show);
             dom.lane.classList.toggle('drawing', show);
             nodes.draw = {};
+            if (liveTable) {
+                Object.keys(tableDecks).forEach(choice => {
+                    const node = tableDecks[choice];
+                    const count = choice === 'axiom' ? state.axioms.deck.length : state.players[choice === 'deck' ? ME : OPP].deck.length;
+                    const enabled = show && L.some(a => a.type === 'draw' && a.choice === choice);
+                    node.classList.remove('guide-focus');
+                    node.querySelectorAll('.guide-pointer').forEach(n => n.remove());
+                    node.classList.toggle('draw-ready', !!enabled);
+                    node.classList.toggle('off', !enabled);
+                    node.querySelector('.b-table-count').textContent = String(count);
+                    node.querySelector('.b-table-status').textContent = enabled ? 'Draw →' : !count ? 'Empty' : '';
+                    if (choice === 'opponent') node.setAttribute('aria-label', 'Their deck: ' + count + ' cards');
+                    else {
+                        if (enabled) node.removeAttribute('aria-disabled'); else node.setAttribute('aria-disabled', 'true');
+                        node.setAttribute('aria-label', DRAW_TEXT[choice][0]);
+                        node.dataset.tipDetail = count + ' cards left. ' + (show ? 'Not in this lesson step.' : 'Wait for your next draw.');
+                        nodes.draw[choice] = node;
+                    }
+                });
+                // A stable deck stays mounted; hand focus follows a completed keyboard draw.
+                if (!show && [tableDecks.deck, tableDecks.axiom].includes(root.document.activeElement)) {
+                    const next = dom.myHand.querySelector('.bc');
+                    if (next) next.focus();
+                }
+            }
             if (!show) return;
             const P = state.players[ME];
             const choices = E.drawChoices(state);
@@ -2323,6 +2373,10 @@
                 const possible = choices.includes(choice);
                 const lessonOnly = !a && possible && guide && st;
                 const detail = (choice === 'deck' && E.rules(state).drawCount > 1 ? E.rules(state).drawCount + ' cards from your deck' : DRAW_TEXT[choice][1]) + '. ' + (lessonOnly ? 'Not in this lesson step.' : why[choice] ? why[choice].replace(/\.?$/, '.') : '');
+                if (liveTable && tableDecks[choice]) {
+                    tableDecks[choice].dataset.tipDetail = detail.trim();
+                    return null;
+                }
                 const b = iconButton('.b-draw-btn', {
                     key: 'draw:' + choice, name: DRAW_TEXT[choice][0], detail: detail.trim(), off: !a,
                     art: DRAW_ART[choice], svg: CTRL_SVG[choice], badge: badge[choice], extra: { dataset: { choice } },

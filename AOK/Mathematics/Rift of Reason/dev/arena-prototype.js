@@ -133,7 +133,7 @@
         if (observer) observer.disconnect(); closeQuestion();
         flights.forEach(a => a.cancel()); flights.clear();
         const guide = fixture === 'question' ? questionGuide() : fixture === 'lesson' ? R.Battle.Lesson.shortGuide() : fixture === 'full' ? R.Battle.Lesson.guide() : null;
-        R.Router.replace('battle', { mode: 'practice', seed,
+        R.Router.replace('battle', { mode: 'practice', seed, layout: 'legacy',
             initialState: guide ? undefined : makeFixture(fixture), guide,
             opponent: { name: 'Sergeant Syllo', art: guide ? R.data.speakers.granny.art : R.data.speakers.syllo.art, ai: 'normal' },
             onEnd: result => { closeQuestion(); if (reading) reading.close(); metrics.hidden = false; metrics.value = JSON.stringify({ result }, null, 2); },

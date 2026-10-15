@@ -1,0 +1,150 @@
+/* Selected A board (#122), shared by Granny's lessons and real matches.
+ * Adapted from dev/arena-prototype.css; reference layout patterns credited in
+ * vendor/hearthstone-web/LICENSE. All artwork is Rift's own shipped artwork.
+ * The engine, input controls, teaching decisions and event pacing stay native. */
+.battle.arena-live {
+    --side: 230px; --hero: 48px; --hw: 76px; --lane-h: 116px;
+    --arena-w: calc(100cqw - var(--side) - 30px);
+    --bw: clamp(60px, (var(--arena-w) - 230px) / 7.4, 90px);
+    padding: 12px; gap: 14px; grid-template-columns: minmax(0, 1fr) var(--side); grid-template-rows: minmax(0, 1fr);
+    background: linear-gradient(110deg, #102b25bd, #17212cc9);
+}
+.arena-live .b-arena {
+    grid-row: 1; padding-top: 12px; overflow: hidden;
+    grid-template-rows: 58px minmax(100px, 1fr) 116px minmax(100px, 1fr) 142px;
+    background: radial-gradient(ellipse at center, #64827430, transparent 65%);
+}
+.arena-live .b-board { margin-left: 94px; margin-right: 106px; padding: 12px 5px 18px; gap: 8px; }
+.arena-live .b-board::before { inset: 7px 0; border: 0; background: #06161224; }
+.arena-live .b-hero-row { padding: 0; }
+.arena-live .b-hero-row.opp { grid-template-columns: 1fr auto 1fr; }
+.arena-live .b-hero-row.opp .b-row-left { grid-column: 2; grid-row: 1; padding: 0; }
+.arena-live .b-hero-row.opp .b-opp-hand { grid-column: 1; grid-row: 1; justify-content: flex-end; opacity: .8; }
+.arena-live .b-hero-row.opp .b-row-right { grid-column: 3; grid-row: 1; padding-right: 10px; }
+.arena-live .b-hero-row.me { grid-template-columns: 92px minmax(0, 1fr) 80px; }
+.arena-live .b-back { width: 23px; height: 35px; }
+.arena-live .b-energy-num { padding: 2px 5px; font-size: 13px; }
+.arena-live .b-energy-num strong { font-size: 23px; }
+.arena-live .b-crystals { display: none; }
+.arena-live .b-plays { font-size: 10px; gap: 4px; }
+.arena-live .b-plays strong { font-size: 14px; }
+.arena-live .b-lane { padding: 5px 4px 5px 105px; border-radius: 12px; background: #0d1a24c9; column-gap: 6px; }
+.arena-live .b-fate { height: 58px; gap: 6px; grid-template-columns: auto minmax(80px, 1fr) auto minmax(125px, .75fr); }
+.arena-live .b-fate-label strong { font-size: 13px; }
+.arena-live .b-fate-sum { font-size: 11px; }
+.arena-live .b-prompt { font-size: 12px; }
+.arena-live .b-prompt .b-ask { font-size: 13px; line-height: 1.25; white-space: normal; }
+.arena-live .b-end { --s: 64px; }
+.arena-live .b-axdeck { display: none; }
+.arena-live .b-draw { gap: 10px; height: auto; flex-wrap: wrap; }
+.arena-live .b-draw-title { text-align: left; }
+.arena-live .b-draw-title strong { font-size: 16px; }
+.arena-live .b-draw-buttons:empty { display: none; }
+
+/* Full foreground cutouts overlap the decorative frame. Text and live values
+ * remain above both; only the outside of the card clips the silhouette. */
+.arena-live .bc[data-cid]:not(.tactic) .bc-art {
+    inset: 0; height: 100%; z-index: 3; background: none;
+    overflow: hidden; border-radius: inherit;
+}
+.arena-live .bc[data-cid]:not(.tactic) .bc-art img { height: 72%; object-fit: contain; object-position: center bottom; }
+.arena-live .bc[data-cid]:not(.tactic) .bc-frame { z-index: 2; }
+.arena-live .bc[data-cid]:not(.tactic) .bc-name,
+.arena-live .bc[data-cid]:not(.tactic) .bc-brief { z-index: 4; }
+.arena-live .bc[data-cid]:not(.tactic) .bc-gem { z-index: 5; }
+.arena-live .bc.board { height: calc(var(--bw) * 1.62); border-radius: 9px; }
+.arena-live .bc.board .bc-name { top: 63%; left: 8%; right: 8%; height: auto; font-size: 10px; line-height: 1.05; white-space: normal; transform: none; }
+.arena-live .bc.board .bc-brief { top: 83%; bottom: 9%; left: 10%; right: 10%; font-size: 8px; background: #10252ae8; border-radius: 4px; }
+.arena-live .bc.board .bc-ab-name { display: none; }
+.arena-live .bc.board .bc-ab-kind { font-size: 8px; }
+.arena-live .bc.board .bc-kw { font-size: 7px; }
+.arena-live .bc.board .bc-gem { bottom: -7%; }
+.arena-live .bc.board .bc-guard {
+    z-index: 0; left: -14%; top: -9%; bottom: auto; width: 128%; height: 133%;
+    transform: none; aspect-ratio: auto; opacity: .8;
+    background: linear-gradient(135deg, #ecdcad, #8eaaac 25%, #53676e 55%, #b6c4ac) !important;
+    clip-path: polygon(9% 3%, 50% 0, 91% 3%, 100% 30%, 92% 70%, 50% 100%, 8% 70%, 0 30%);
+}
+.arena-live .bc.board .bc-guard.off { opacity: .25; filter: grayscale(1); }
+.arena-live .bc.board .bc-bubble { z-index: 6; }
+
+/* Stable deck controls: static cues use current engine and lesson legality. */
+.b-table-decks { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
+.b-table-deck {
+    --back-w: clamp(52px, 5.5cqw, 70px);
+    position: absolute; width: calc(var(--back-w) + 22px); height: calc(var(--back-w) * 1.6 + 38px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    padding: 5px; border: 1px solid #a7997040; border-radius: 12px;
+    color: var(--parchment); background: #0b1627cc; font: 12px/1.1 var(--font-body);
+    pointer-events: auto; cursor: pointer;
+}
+.b-table-deck.opponent { pointer-events: none; }
+.b-table-back { flex: none; width: var(--back-w); height: calc(var(--back-w) * 1.6); background: #211b32 center / contain no-repeat; border-radius: 5px; box-shadow: 3px 3px 2px #000b; }
+.b-table-label { text-align: center; }
+.b-table-count { position: absolute; right: 2px; top: 3px; display: grid; place-items: center; min-width: 25px; height: 25px; border-radius: 50%; background: #14121f; border: 1px solid #c3a56b; font-size: 13px; }
+.b-table-deck.deck { right: 6px; bottom: 146px; }
+.b-table-deck.opponent { right: 6px; top: 78px; }
+.b-table-deck.opponent .b-table-back { transform: rotate(180deg); }
+.b-table-deck.axiom { left: 7px; top: calc(50% - 74px); }
+.b-table-deck.off { cursor: help; }
+.b-table-deck.draw-ready { outline: 2px solid #76ffd1; outline-offset: 3px; border-color: #dcffe6; background: #163b35e8; box-shadow: 0 0 26px #56e4bb70, inset 0 0 16px #83edbc30; }
+.b-table-deck:focus-visible { outline: 3px solid #ffe09a; outline-offset: 4px; }
+.b-table-status { position: absolute; bottom: -9px; left: 8px; right: 8px; padding: 3px 2px; border-radius: 6px; color: #081e1a; background: #a3f3cc; font-weight: bold; font-size: 11px; text-align: center; }
+.b-table-status:empty { display: none; }
+.b-table-deck.off .b-table-status { color: #dbd4c6; background: #263040; }
+.arena-live .b-side { display: flex; position: relative; inset: auto; width: auto; grid-row: 1; padding: 8px; background: #0c1c24c9; border: 1px solid #84a69a40; border-radius: 12px; }
+.arena-live .b-side-toggle, .arena-live .b-side-close { display: none; }
+.arena-live .b-rule-tiles { grid-template-columns: 1fr; gap: 6px; }
+.arena-live .b-rtile { min-height: 44px; }
+.arena-live .b-rtile-val { font-size: 13px; white-space: normal; }
+.arena-live.guide-mode { grid-template-rows: auto minmax(0, 1fr); }
+.arena-live.guide-mode .b-arena { grid-row: 1 / span 2; }
+.arena-live.guide-mode .b-side { grid-row: 2; }
+.arena-live.guide-mode .b-coach { position: relative; left: auto; top: auto; width: auto; grid-column: 2; grid-row: 1; max-height: 275px; overflow-y: auto; font-size: 13px; }
+.arena-live .b-coach-text { font-size: 13px; line-height: 1.35; }
+.arena-live .b-coach-face { width: 42px; height: 42px; }
+.arena-live.guide-mode .b-hero-row.opp, .arena-live.guide-mode .b-board.opp-board { padding-left: 0; }
+
+@media (max-width:1100px) {
+    .battle.arena-live { --side: 195px; }
+    .arena-live .b-board { gap: 6px; }
+}
+/* Scroll the battle itself on small screens. Keep cards at usable widths and
+ * let the crowded rows scroll independently. The rules remain in the flow. */
+@media (max-width:850px), (max-height:620px) {
+    .battle.arena-live { overflow-y: auto; container-type: inline-size; --bw: 64px; }
+    .arena-live .b-arena { min-height: 700px; }
+    .arena-live .b-board { overflow-x: auto; overflow-y: hidden; justify-content: flex-start; }
+    .arena-live .bc.board { flex-shrink: 0; }
+}
+@media (max-width:850px) {
+    .battle.arena-live { --side: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 700px max-content; }
+    .arena-live .b-arena { grid-row: 1; }
+    .arena-live .b-side { display: flex; position: relative; inset: auto; width: auto; max-height: none; grid-column: 1; grid-row: 2; overflow: visible; }
+    .arena-live .b-rule-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .arena-live.guide-mode { grid-template-rows: max-content 700px max-content; }
+    .arena-live.guide-mode .b-coach { grid-column: 1; grid-row: 1; min-height: max-content; max-height: none; overflow: visible; }
+    .arena-live.guide-mode .b-arena { grid-row: 2; }
+    .arena-live.guide-mode .b-side { grid-row: 3; }
+    .arena-live .b-board { margin-left: 0; margin-right: 92px; }
+    .arena-live .b-hand { overflow-x: auto; overflow-y: hidden; justify-content: flex-start; padding: 12px 8px 18px; }
+    .arena-live .b-hand .bc.hand { flex-shrink: 0; margin: 0 3px; transform: none !important; }
+    .arena-live .b-table-deck { --back-w: 52px; font-size: 11px; }
+    .arena-live .b-table-deck.axiom { --back-w: 42px; top: calc(50% - 85px); }
+    .arena-live .b-lane { padding-left: 80px; }
+    .arena-live .b-rules { flex: none; overflow: visible; }
+    .arena-live .b-info { display: none; }
+}
+@media (max-width:600px) {
+    .arena-live .b-lane { grid-template-columns: minmax(0, 1fr) 0 64px; }
+    .arena-live .b-fate { height: 62px; grid-template-columns: 30px minmax(0, 1fr); gap: 3px; }
+    .arena-live .b-fate-label strong { font-size: 10px; }
+    .arena-live .b-fate-label span { font-size: 9px; }
+    .arena-live .b-fate-track { min-width: 0; height: 36px; }
+    .arena-live .b-fate-far { display: none; }
+    .arena-live .b-fate-sum { grid-column: 1 / -1; }
+    .arena-live .b-fate-sum strong { font-size: 10px; }
+    .arena-live .b-fate-sum span { display: none; }
+    .arena-live .b-draw-title { display: flex; flex-direction: column; white-space: normal; }
+    .arena-live .b-draw-title strong { font-size: 12px; }
+}
