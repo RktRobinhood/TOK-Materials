@@ -1,0 +1,15 @@
+{
+  "decks": 3,
+  "height": 720,
+  "imagesLoaded": true,
+  "liveTable": true,
+  "step": "Step 1 of 10",
+  "styles": [
+    "css/game.css",
+    "css/battle.css",
+    "css/arena.css?v=20261015",
+    "dev/arena-prototype.css?v=117-1"
+  ],
+  "url": "https://rktrobinhood.github.io/TOK-Materials/AOK/Mathematics/Rift%20of%20Reason/dev/battle.html?lesson=short&release=99eaaf1",
+  "width": 1280
+}

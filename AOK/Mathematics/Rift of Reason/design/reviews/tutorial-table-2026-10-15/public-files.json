@@ -1,0 +1,38 @@
+{
+  "commit": "99eaaf1",
+  "pagesRun": 38754274071,
+  "results": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "committedSha256": "ec3d92e94ff4eae18baeb29418c19824350b933d2602ffbb99c045d3b32ef662",
+      "publicSha256": "ec3d92e94ff4eae18baeb29418c19824350b933d2602ffbb99c045d3b32ef662",
+      "match": true,
+      "workingTextMatches": true
+    },
+    {
+      "file": "js/screens/battle.js",
+      "status": 200,
+      "committedSha256": "e9044e639ce4b651158e5518a23d8c23d5a896e583f9635891214c17c5ef05a5",
+      "publicSha256": "e9044e639ce4b651158e5518a23d8c23d5a896e583f9635891214c17c5ef05a5",
+      "match": true,
+      "workingTextMatches": true
+    },
+    {
+      "file": "css/arena.css",
+      "status": 200,
+      "committedSha256": "5dacb60adf3d57ce3bea6a50a6697129e47352c47fc13f710bbce41748f5004e",
+      "publicSha256": "5dacb60adf3d57ce3bea6a50a6697129e47352c47fc13f710bbce41748f5004e",
+      "match": true,
+      "workingTextMatches": true
+    },
+    {
+      "file": "dev/battle.html",
+      "status": 200,
+      "committedSha256": "f9ed6d0b0cf6220ca35157e90eb5b21d19a17e98c55aad964ddd6bbc098ddfe8",
+      "publicSha256": "f9ed6d0b0cf6220ca35157e90eb5b21d19a17e98c55aad964ddd6bbc098ddfe8",
+      "match": true,
+      "workingTextMatches": true
+    }
+  ]
+}

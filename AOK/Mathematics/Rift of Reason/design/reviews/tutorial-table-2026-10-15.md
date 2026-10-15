@@ -24,4 +24,8 @@ The independent Standards reviewer found one compact-layout regression: inherite
 
 The independent Spec reviewer found the same compact-layout regression against the permanent Axiom panel requirement, and confirmed its resolution. No scope creep or engine/save/voice changes found; native required decisions and legal action checks remain intact. No remaining actionable findings.
 
-Total unresolved findings: Standards 0; Spec 0. Publication receipt follows after deployment.
+Total unresolved findings: Standards 0; Spec 0.
+
+## Published
+
+Implementation commit **99eaaf1** is pushed to `main`. Pages run **38754274071 succeeded**. Public `index.html`, battle script, arena stylesheet and bench HTML return HTTP 200 and match the committed Git blobs by SHA256 (`public-files.json`). Native public 1280×720 verification shows the live layout, three deck piles, step 1 of 10 and all images loaded. `public.png` is the unedited, visually inspected public screenshot; `public.json` records its DOM receipt. Local desktop, compact and narrow captures are saved alongside it. Existing unrelated receipts, helper and research files were left unstaged.
