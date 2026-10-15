@@ -1353,7 +1353,7 @@
     {
       "mechanicalId": "perception-lens-lynx",
       "workingName": "Lens Lynx",
-      "proposedName": "James Randilynx",
+      "proposedName": "James Rand-eater",
       "inspiration": "James Randi",
       "colour": "perception",
       "rarity": "common",
@@ -1362,7 +1362,7 @@
         "packEligible": true,
         "releaseStatus": "draft; only enters packs when its implementation is released"
       },
-      "silhouette": "Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat.",
+      "silhouette": "Long-snouted cream-and-charcoal tamandua anteater with round ears, bushy white brow fur, spectacles and a dark-green magician's waistcoat; low left lean and a broad curling tail. Replaces the duplicated lynx silhouette under #152.",
       "signatureProp": "One empty folded sleeve opened for inspection; no copied stage logo.",
       "jokeAngle": "Before admiring the mystery, quietly checks the sleeve.",
       "mechanicLink": "Removing Elusive is making a creature targetable, not a claim that a real person is fraudulent.",

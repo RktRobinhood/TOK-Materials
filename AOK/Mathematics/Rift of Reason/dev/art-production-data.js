@@ -451,11 +451,11 @@
     },
     {
       "id": "creature/perception-lens-lynx/idle",
-      "name": "James Randilynx",
+      "name": "James Rand-eater",
       "kind": "portrait",
       "colour": "perception",
       "rarity": "common",
-      "pose": "Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.",
+      "pose": "Low front-left lean, long muzzle directed down toward the empty sleeve, head turned toward viewer; broad tail curves high at right.",
       "contract": {
         "cost": 2,
         "attack": 2,
@@ -466,7 +466,7 @@
         ]
       },
       "coverage": "",
-      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-lens-lynx-145.png",
+      "source": "design/source-assets/4-caricatures/production-145-2026-10-13/production-perception-lens-anteater-152.png",
       "group": 1
     },
     {

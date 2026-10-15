@@ -1,5 +1,7 @@
 # Conditional foundation and artwork — 14 October 2026
 
+15 October #152: the duplicated James Randilynx portrait is replaced by James Rand-eater, a long-snouted tamandua anteater with spectacles, emerald waistcoat and an empty sleeve. Keep stable creature/perception-lens-lynx/idle and all mechanical/acquisition contracts. Old PNG/prompt retained; selected source and exact built-in ImageGen prompt: source-assets/4-caricatures/production-145-2026-10-13/james-redraw-152.json. Roster regenerated; 72/72 expansion portrait coverage preserved. Verification: reviews/repo-audit-2026-10-15.md.
+
 Preserve the8new persona cutouts and shared concealed back in source-assets/4-caricatures/conditional-149-2026-10-14/. All23conditional concepts have assignments;15spells reuse accepted motifs. dev/conditional-art.html reviews all8creatures in normal foreground colour frames at300/70, dark/light and390. Only10study definitions are playable; artwork never implies campaign release. Original prompts/roles/paths and alpha/SHA receipts are retained. The initial210 and71/72portrait frontier remain separate; no declined-cast retry or new recordings.
 
 # Rift of Reason — Art bible

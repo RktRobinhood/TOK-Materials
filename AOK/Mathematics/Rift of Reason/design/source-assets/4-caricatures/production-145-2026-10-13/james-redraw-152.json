@@ -1,0 +1,23 @@
+{
+  "issue": 152,
+  "date": "2026-10-15",
+  "method": "built-in image_gen",
+  "model": "not reported by tool",
+  "assetId": "creature/perception-lens-lynx/idle",
+  "priorName": "James Randilynx",
+  "name": "James Rand-eater",
+  "inspiration": "James Randi",
+  "bodyFamily": "mammal-anteater",
+  "bodyBrief": "Long-snouted tamandua with round ears, dark shoulder saddle and a broad curling tail; low left lean showing an empty sleeve.",
+  "editorialRationale": "Replace the duplicated upright spotted-lynx silhouette with an immediately distinct non-feline animal. The sceptic's public-stage sleeve-inspection joke and green Perception identity remain readable.",
+  "prompt": "Use case: stylized-concept.\nAsset type: ONE full-body transparent collectible creature cutout for Rift of Reason, replacement for creature/perception-lens-lynx/idle, issue 152.\nInput images: Image 1 approved STYLE BOARD is authoritative for medium dark-brown outlines, textured cel shading, warm expressive faces, dusk cute-horror atmosphere and jewel accents. Image 2 shipped Astrophysicat is a rendering reference ONLY: do not copy cat anatomy, clothing or star patterns.\nSubject: James Rand-eater, an original NONHUMAN small tamandua anteater inspired by James Randi's public persona as a sceptic and stage magician. Clearly ANTEATER anatomy: very long narrow curved muzzle, small round ears without tufts, cream and charcoal fur with a bold dark shoulder saddle, broad bushy prehensile curved tail, short hind legs and two deft forepaws. No feline face, cat ears, spots, whiskers or cat tail. Dark emerald-green magician waistcoat with one emerald clasp and cream rolled cuffs; small round spectacles and white bushy eyebrow fur. He leans low to the LEFT with a knowingly curious raised eyebrow, head turned toward viewer, unfurling ONE visibly EMPTY emerald-edged cloth sleeve between his two forepaws for inspection. The open hollow sleeve is the sole large prop and the readable joke: check the trick before admiring the mystery. Avoid human likeness. Exactly one coherent animal, two forelimbs, two hind legs and one tail.\nComposition: entire broad low diagonal silhouette and sleeve fit inside the canvas with generous genuinely transparent padding on all sides; face and sleeve remain readable at 70px, expressive at 300px. Creature occupies about 78 percent of canvas. Dark forest/violet cloth shadows, warm lantern rim light, saturated green #2FBF71 identity accent, slight uncanny storybook charm, never gore, nursery pastel or glossy 3D.\nConstraints: actual transparent background. No scenery, floor, ground shadow blob, card frame, text, letters, numbers, logos, watermark, extra props, particles or other creatures. No recognisable commercial costume. Preserve original card's green Perception identity; the new species and pose must instantly differ from an upright lynx.",
+  "styleReferences": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "transparentBackgroundRequested": true,
+  "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13ecf-a18f-7d02-9a9a-628c936fb874/exec-877f7726-6683-4b20-9052-681f8c008e74.png",
+  "source": "production-perception-lens-anteater-152.png",
+  "poseDirection": "Low front-left lean, long muzzle directed down toward the empty sleeve, head turned toward viewer; broad tail curves high at right.",
+  "visualReview": "Accepted first take: coherent anteater silhouette, round ears, long muzzle, four limbs and broad tail; face, emerald clasp and open empty sleeve remain legible. Warm rim light and textured outline match the shipped style. Minor alpha fringe contacts the right canvas edge; the visible tail and every major part remain complete. Real alpha and all four clear corners measured."
+}

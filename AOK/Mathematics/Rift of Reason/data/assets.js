@@ -290,7 +290,7 @@
         'creature/perception-exposure-eagle/idle': { file: 'creatures/perception-exposure-eagle-idle.webp', w: 961, h: 620 },
         'creature/perception-focus-falcon/idle': { file: 'creatures/perception-focus-falcon-idle.webp', w: 585, h: 620 },
         'creature/perception-horizon-hare/idle': { file: 'creatures/perception-horizon-hare-idle.webp', w: 1039, h: 620 },
-        'creature/perception-lens-lynx/idle': { file: 'creatures/perception-lens-lynx-idle.webp', w: 514, h: 620 },
+        'creature/perception-lens-lynx/idle': { file: 'creatures/perception-lens-lynx-idle.webp', w: 959, h: 620 },
         'creature/perception-observer-octopus/idle': { file: 'creatures/perception-observer-octopus-idle.webp', w: 594, h: 620 },
         'creature/perception-pattern-panther/idle': { file: 'creatures/perception-pattern-panther-idle.webp', w: 844, h: 620 },
         'creature/perception-prism-puffin/idle': { file: 'creatures/perception-prism-puffin-idle.webp', w: 613, h: 620 },

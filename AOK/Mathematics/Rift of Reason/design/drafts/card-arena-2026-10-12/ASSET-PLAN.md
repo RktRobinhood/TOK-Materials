@@ -1,3 +1,5 @@
+15 October correction #152: James Rand-eater (tamandua anteater) replaces James Randilynx at the stable perception-lens-lynx asset ID. Full initial portrait coverage remains 72/72; historical per-group pending rows below are superseded by the selected inventory and design/reviews/repo-audit-2026-10-15.md.
+
 # Card pipeline art plan
 
 ## Current delivery — 14 October 2026

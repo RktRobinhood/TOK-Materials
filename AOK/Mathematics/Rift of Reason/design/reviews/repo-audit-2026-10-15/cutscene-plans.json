@@ -1,0 +1,145 @@
+{
+  "scope": "Pure planning only; no browser playback, Skip, audio synchronization or performance acceptance",
+  "cases": [
+    {
+      "type": "owlet",
+      "variant": "boy",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "owlet",
+      "variant": "boy",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "owlet",
+      "variant": "girl",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "owlet",
+      "variant": "girl",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "mothkin",
+      "variant": "boy",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "mothkin",
+      "variant": "boy",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "mothkin",
+      "variant": "girl",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "mothkin",
+      "variant": "girl",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "fox",
+      "variant": "boy",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "fox",
+      "variant": "boy",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "fox",
+      "variant": "girl",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "fox",
+      "variant": "girl",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "frogling",
+      "variant": "boy",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "frogling",
+      "variant": "boy",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "frogling",
+      "variant": "girl",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "frogling",
+      "variant": "girl",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "raven",
+      "variant": "boy",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "raven",
+      "variant": "boy",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "raven",
+      "variant": "girl",
+      "calm": false,
+      "required": 10,
+      "missing": []
+    },
+    {
+      "type": "raven",
+      "variant": "girl",
+      "calm": true,
+      "required": 10,
+      "missing": []
+    }
+  ]
+}

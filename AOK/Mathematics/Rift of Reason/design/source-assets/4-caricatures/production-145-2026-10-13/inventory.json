@@ -1425,7 +1425,7 @@
     {
       "id": "creature/perception-lens-lynx/idle",
       "species": "perception-lens-lynx",
-      "persona": "James Randilynx",
+      "persona": "James Rand-eater",
       "inspiration": "James Randi",
       "colour": "perception",
       "rarity": "common",
@@ -1443,10 +1443,10 @@
           109
         ]
       },
-      "source": "production-perception-lens-lynx-145.png",
+      "source": "production-perception-lens-anteater-152.png",
       "status": "selected",
       "group": 1,
-      "prompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Pose/composition: Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly elevated camera angle, playful half-smile. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE full-body transparent collectible creature cutout for Rift of Reason, replacement for creature/perception-lens-lynx/idle, issue 152.\nInput images: Image 1 approved STYLE BOARD is authoritative for medium dark-brown outlines, textured cel shading, warm expressive faces, dusk cute-horror atmosphere and jewel accents. Image 2 shipped Astrophysicat is a rendering reference ONLY: do not copy cat anatomy, clothing or star patterns.\nSubject: James Rand-eater, an original NONHUMAN small tamandua anteater inspired by James Randi's public persona as a sceptic and stage magician. Clearly ANTEATER anatomy: very long narrow curved muzzle, small round ears without tufts, cream and charcoal fur with a bold dark shoulder saddle, broad bushy prehensile curved tail, short hind legs and two deft forepaws. No feline face, cat ears, spots, whiskers or cat tail. Dark emerald-green magician waistcoat with one emerald clasp and cream rolled cuffs; small round spectacles and white bushy eyebrow fur. He leans low to the LEFT with a knowingly curious raised eyebrow, head turned toward viewer, unfurling ONE visibly EMPTY emerald-edged cloth sleeve between his two forepaws for inspection. The open hollow sleeve is the sole large prop and the readable joke: check the trick before admiring the mystery. Avoid human likeness. Exactly one coherent animal, two forelimbs, two hind legs and one tail.\nComposition: entire broad low diagonal silhouette and sleeve fit inside the canvas with generous genuinely transparent padding on all sides; face and sleeve remain readable at 70px, expressive at 300px. Creature occupies about 78 percent of canvas. Dark forest/violet cloth shadows, warm lantern rim light, saturated green #2FBF71 identity accent, slight uncanny storybook charm, never gore, nursery pastel or glossy 3D.\nConstraints: actual transparent background. No scenery, floor, ground shadow blob, card frame, text, letters, numbers, logos, watermark, extra props, particles or other creatures. No recognisable commercial costume. Preserve original card's green Perception identity; the new species and pose must instantly differ from an upright lynx.",
       "styleReferences": [
         "design/source-assets/0-style/style-board.png",
         "assets/creatures/astrophysicat-idle.webp"
@@ -1461,7 +1461,7 @@
       "draftLines": [
         "Lovely trick. Show me the sleeve."
       ],
-      "poseDirection": "Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.",
+      "poseDirection": "Low front-left lean, long muzzle directed down toward the empty sleeve, head turned toward viewer; broad tail curves high at right.",
       "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
       "variation": {
         "seed": "perception-lens-lynx145-variation-v1",
@@ -1469,8 +1469,65 @@
         "camera": "slightly elevated camera angle"
       },
       "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Pose/composition: Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
-      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-c340e39e-ae6b-4143-b81a-6b5affe8097d.png",
-      "visualReview": "Accepted single visual pass: cute horror palette, clear persona prop and varied action/composition; no major subject or prop crop. Basic alpha check follows."
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13ecf-a18f-7d02-9a9a-628c936fb874/exec-877f7726-6683-4b20-9052-681f8c008e74.png",
+      "visualReview": "Accepted first take: coherent anteater silhouette, round ears, long muzzle, four limbs and broad tail; face, emerald clasp and open empty sleeve remain legible. Warm rim light and textured outline match the shipped style. Minor alpha fringe contacts the right canvas edge; the visible tail and every major part remain complete. Real alpha and all four clear corners measured.",
+      "priorVisuals": [
+        {
+          "id": "creature/perception-lens-lynx/idle",
+          "species": "perception-lens-lynx",
+          "persona": "James Randilynx",
+          "inspiration": "James Randi",
+          "colour": "perception",
+          "rarity": "common",
+          "acquisition": {
+            "channel": "pack-pool",
+            "packEligible": true,
+            "releaseStatus": "draft; only enters packs when its implementation is released"
+          },
+          "mechanicalContract": {
+            "cost": 2,
+            "attack": 2,
+            "health": 2,
+            "text": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+            "gates": [
+              109
+            ]
+          },
+          "source": "production-perception-lens-lynx-145.png",
+          "status": "selected",
+          "group": 1,
+          "prompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Pose/composition: Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas. Recorded composition variation: slightly elevated camera angle, playful half-smile. This overrides a generic standing/right-facing/wide-eyed smile; keep species/prop/colour and coherent anatomy. Do not add extra text or scenery.",
+          "styleReferences": [
+            "design/source-assets/0-style/style-board.png",
+            "assets/creatures/astrophysicat-idle.webp"
+          ],
+          "transparentBackgroundRequested": true,
+          "voiceDirection": "Dry curious original stage delivery; reuse reveal cue, no copied quotations.",
+          "sharedSfx": [
+            "card-play",
+            "hit",
+            "defeat"
+          ],
+          "draftLines": [
+            "Lovely trick. Show me the sleeve."
+          ],
+          "poseDirection": "Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.",
+          "initialPrompt": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Three-quarter stable full-body pose adapted to its species. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+          "variation": {
+            "seed": "perception-lens-lynx145-variation-v1",
+            "expression": "playful half-smile",
+            "camera": "slightly elevated camera angle"
+          },
+          "promptBeforeVariation": "Use case: stylized-concept. Make ONE original transparent full-body Rift of Reason creature cutout. Image1: approved STYLE BOARD, authoritative cute-horror storybook ink outlines, soft textured cel shading, warm expressive animal faces and dusk jewel accents. Image2: shipped Astrophysicat, rendering reference only; do not copy cat anatomy, its clothes/stars/gesture. Match this game, not nursery pastels, realistic celebrity likeness or glossy3D. No humans. Center the entire coherent silhouette at about80percent of the canvas so ears/props/feet/tail have transparent padding. No background, floor, ground-shadow blob, frame, text, letters, logo, watermark, particles or extra figures. Art will sit ABOVE a separate shipped card frame with live names/rules/stats. Face and one signature prop readable at70px, attractive at300px; medium dark brown outlines, ink/violet shadows and warm lantern rim light. Public-persona joke only, no private-life/scandal jokes or copied lyrics/quotes/costumes. Subject: James Randilynx, an ORIGINAL NONHUMAN creature inspired by James Randi's public persona. Silhouette/costume: Small silver lynx with bushy brow fur, spectacles and a dark-green magician's waistcoat. Main prop/gesture: One empty folded sleeve opened for inspection; no copied stage logo. Visual joke: Before admiring the mystery, quietly checks the sleeve. Use jewel accent #2FBF71 on worn dark cloth/trim, no invented branding. Pose/composition: Facing LEFT in a theatrical half-bow, paws stretch one empty sleeve open toward viewer, head glances up with a dry amused expression. Spectacles/ear tufts intact.. A fish/dolphin remains fish-shaped with fins/tail rather than human legs; a bird/bat retains wings/beak/ears. One bold recognition cue; keep small ornaments minimal. No extra props or scene. Entire figure/prop comfortably inside transparent canvas.",
+          "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a12c0e-2918-7731-88d6-e7980ca1adfd/exec-c340e39e-ae6b-4143-b81a-6b5affe8097d.png",
+          "visualReview": "Accepted single visual pass: cute horror palette, clear persona prop and varied action/composition; no major subject or prop crop. Basic alpha check follows."
+        }
+      ],
+      "bodyFamily": "mammal-anteater",
+      "bodyBrief": "Long-snouted tamandua with round ears, dark shoulder saddle and a broad curling tail; low left lean showing an empty sleeve.",
+      "originalPersona": "James Randilynx",
+      "bodyRationale": "Replace the duplicated upright spotted-lynx silhouette with an immediately distinct non-feline animal. The sceptic's public-stage sleeve-inspection joke and green Perception identity remain readable.",
+      "redrawIssue": 152
     },
     {
       "id": "creature/perception-focus-falcon/idle",

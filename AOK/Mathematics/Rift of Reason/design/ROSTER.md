@@ -128,7 +128,7 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 | Giannis Antetokudu | Giannis Antetokounmpo | emotion-stormheart-serpent | emotion / mythic | Rendered FRONT three-quarter; original pose intent in provenance. |
 | Pascalophant | Blaise Pascal | emotion-empathy-elephant | emotion / legendary | One blank paper heart folded beside a counting frame; choose the heart as the main70px cue. |
 | Nikkie de Jaguar | Nikkie de Jager / NikkieTutorials | perception-cue-cricket | perception / common | One broad makeup brush; eye accents remain creature markings, not a realistic face. |
-| James Randilynx | James Randi | perception-lens-lynx | perception / common | One empty folded sleeve opened for inspection; no copied stage logo. |
+| James Rand-eater | James Randi | perception-lens-lynx | perception / common | One empty folded sleeve opened for inspection; no copied stage logo. |
 | Steph Cawry | Stephen Curry | perception-focus-falcon | perception / common | One small plain basketball balanced against a wing. |
 | David Brine | David Blaine | perception-shadow-shrimp | perception / common | One plain blank playing card partly tucked into the cape. |
 | Nelly Koalda | Nelly Korda | perception-scout-stoat | perception / uncommon | Rendered LEFT three-quarter; original pose intent in provenance. |

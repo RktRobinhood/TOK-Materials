@@ -1,5 +1,11 @@
 # Rift of Reason — implementation progress
 
+## Latest handoff audit — 15 October 2026
+
+Art coverage is complete for the initial expansion (72/72 portraits), shared motifs, conditional assignments and cold-open bitmaps. #152 replaces the duplicated James Randilynx portrait with James Rand-eater, an anteater; exact prompt/source/history and stable mechanics are preserved. Current suite: 923 passed, one skipped, zero failures. See [the dated repo audit](reviews/repo-audit-2026-10-15.md) for verification and prioritized remaining issues.
+
+Claude's cold-open implementation is still uncommitted and lacks dedicated playback tests/Journal replay. #151 is part 1 only: collection stacks, release, random foils and Fogged Eye remain. Conditional, battle presentation, content and economy tickets are also unfinished. Older status and voice totals below are historical; use dated review receipts for current numbers.
+
 Updated 2026-10-06. Work directly on `main`, as requested by the teacher. Limit changes to this activity. The starting commit for this session was `f1bfcf6`.
 
 ## Card-cycle rebuild (#44, 2026-10-06)
