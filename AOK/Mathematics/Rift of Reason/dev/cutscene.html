@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cutscene bench · Rift of Reason</title>
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/cutscene.css">
+<style>
+body { padding: 24px; overflow: auto; }
+main { max-width: 980px; margin: auto; }
+h1 { margin-top: 0; font-family: var(--font-display); }
+.bench { display: grid; gap: 18px; }
+.panel-box { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: var(--radius); padding: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.avatars { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.avatars button { display: grid; justify-items: center; gap: 4px; padding: 6px; border-radius: 10px; border: 2px solid transparent; background: rgba(255, 255, 255, 0.05); color: inherit; cursor: pointer; font: inherit; font-size: 13px; }
+.avatars button[aria-pressed="true"] { border-color: var(--rift); background: rgba(63, 224, 208, 0.12); }
+.avatars img { width: 64px; height: 64px; object-fit: contain; }
+label { display: inline-flex; gap: 6px; align-items: center; }
+input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--panel-edge); background: #1d1830; color: inherit; }
+.sliders label { min-width: 200px; }
+.note { color: var(--parchment-dim); font-size: 14px; }
+#trace { font-family: ui-monospace, Consolas, monospace; font-size: 12px; white-space: pre-wrap; color: var(--parchment-dim); max-height: 160px; overflow: auto; }
+@media (max-width: 650px) { body { padding: 12px; } .avatars { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sliders label { min-width: 0; } }
+</style></head><body>
+<div id="overlay"></div>
+<main class="bench">
+<header>
+  <h1>Cutscene bench</h1>
+  <p class="note">Plays a cutscene with any avatar and name, without a save. Nothing here is stored. Skip with the ⏭ button, Esc, or by holding anywhere on the film. Issue #65.</p>
+</header>
+<section class="panel-box stack">
+  <div class="row">
+    <label>Cutscene <select id="which"></select></label>
+    <label>Name <input id="name" type="text" maxlength="16" value="Ada"></label>
+    <label><input id="calm" type="checkbox"> Calm motion</label>
+    <button class="btn primary" id="play" type="button">▶ Play</button>
+  </div>
+  <div class="avatars" id="avatars" aria-label="Avatar"></div>
+  <div class="row sliders">
+    <label>Voices <input id="voice" type="range" min="0" max="1" step="0.05" value="1"></label>
+    <label>Sound effects <input id="sfx" type="range" min="0" max="1" step="0.05" value="0.45"></label>
+    <label>Ambience <input id="ambience" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+  </div>
+  <p class="note" id="status" role="status">Ready.</p>
+  <details><summary>Step trace</summary><div id="trace"></div></details>
+</section>
+</main>
+<script src="js/core/rift.js"></script>
+<script>
+// A save-shaped stand-in so the volume sliders reach the audio code; nothing is written anywhere.
+(function () {
+    const settings = { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, calm: false };
+    window.Rift.State = { get: () => ({ settings, avatar: null, flags: {} }), has: () => false };
+})();
+</script>
+<script src="js/core/assets.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/core/ambience.js"></script>
+<script src="data/assets.js"></script>
+<script src="data/voice-manifest.js"></script>
+<script src="data/sfx.js"></script>
+<script src="data/sfx-el.js"></script>
+<script src="data/ambience.js"></script>
+<script src="data/cutscenes.js"></script>
+<script src="data/avatars.js"></script>
+<script src="data/script/lesson1.js"></script>
+<script src="js/ui/cutscene.js"></script>
+<script>
+(function () {
+    'use strict';
+    const R = window.Rift, byId = id => document.getElementById(id);
+    const params = new URLSearchParams(location.search);
+    let pick = { type: params.get('type') || 'fox', variant: params.get('variant') || 'girl' };
+    if (params.get('name')) byId('name').value = params.get('name');
+    if (params.get('calm') === '1') byId('calm').checked = true;
+
+    R.Cutscene.list().forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
+    if (params.get('id')) byId('which').value = params.get('id');
+
+    function drawAvatars() {
+        const box = byId('avatars');
+        box.replaceChildren();
+        Object.entries(R.data.avatars).forEach(([type, a]) => ['boy', 'girl'].forEach(variant => {
+            const on = pick.type === type && pick.variant === variant;
+            box.append(R.el('button', { type: 'button', 'aria-pressed': String(on), title: a.name + ' ' + variant, onclick() { pick = { type, variant }; drawAvatars(); } }, [
+                R.Assets.img(R.avatarArt({ type, variant }, 'neutral'), { alt: '' }),
+                R.el('span', { text: a.name + ' · ' + variant }),
+            ]));
+        }));
+    }
+    drawAvatars();
+
+    const settings = R.State.get().settings;
+    ['voice', 'sfx', 'ambience'].forEach(key => {
+        byId(key).value = settings[key];
+        byId(key).addEventListener('input', ev => { settings[key] = +ev.target.value; R.bus.emit('state:changed'); });
+    });
+    byId('calm').addEventListener('change', () => document.body.classList.toggle('calm-motion', byId('calm').checked));
+    document.body.classList.toggle('calm-motion', byId('calm').checked);
+
+    byId('play').addEventListener('click', async () => {
+        const trace = [];
+        byId('trace').textContent = '';
+        byId('status').textContent = 'Playing…';
+        const started = performance.now();
+        const played = await R.Cutscene.play(byId('which').value, {
+            player: Object.assign({ nickname: byId('name').value.trim() || 'traveller' }, pick),
+            onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
+        });
+        byId('status').textContent = played
+            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, prologue.wake would start now.'
+            : 'Could not play (missing or broken art). In the game, the two lines on black would play instead.';
+        byId('play').focus();
+    });
+})();
+</script>
+</body></html>

@@ -419,3 +419,7 @@ A file is found by speaker + exact text, so editing a line's text makes it fall 
 - Understudy text only behind `dead:`.
 - Inner lines: one line, at most 15 words, at most two per station visit; every species gets the same number of avatar-only options per chapter.
 - A boss with a clock: `start` in the boss's own script (before play), `resolve` first in `.win`.
+
+## Cutscene step — 15 October 2026 (#65)
+
+`{ cutscene: 'cold-open', fallback: [ /* ordinary dialogue steps */ ] }` plays a data timeline from `data/cutscenes.js` through `Rift.Cutscene`. Film completion or Skip continues the script. Missing player, required art, load timeout or rendering failure uses the fallback. Navigation abandons the old script without marking it seen. Keep the two original cold-open lines in the fallback: they retain voice-catalogue keys and offline/error coverage. `prologue.wake` calls the named cold-open script once; the existing seen flag also enables Journal film replay. Replay plays only the film and changes no story state. No new dialogue or recordings are required.

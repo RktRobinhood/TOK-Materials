@@ -281,6 +281,19 @@
         if (layer.insertBefore && layer.firstChild) layer.insertBefore(node, layer.firstChild); else layer.appendChild(node);
     }
 
+    // { cutscene: 'cold-open', fallback: [steps] } plays a film from data/cutscenes.js (js/ui/cutscene.js).
+    // Missing art, art that will not load or a player error shows the fallback steps instead.
+    async function cutsceneStep(layer, step, ctx) {
+        let played = false;
+        if (Rift.Cutscene && Rift.Cutscene.has(step.cutscene)) {
+            try { played = await Rift.Cutscene.play(step.cutscene); } catch (e) { console.error('[Rift] cutscene', e); played = false; }
+        }
+        // Match dialogue's navigation contract: the abandoned encounter must never
+        // resume its parent script, mark the opening seen, or start the wake-up lines.
+        if (ctx.aborted) return new Promise(() => {});
+        if (!played && step.fallback) await run(layer, step.fallback, ctx);
+    }
+
     async function quietStep(layer, who, ctx) {
         const npc = Story().npcOf(Rift.Cast.roleOf(who));
         const key = 'quiet.' + npc;
@@ -329,6 +342,7 @@
             else if (step.visitor) { if (!ctx.quiet) Story().setFlag('visitor:' + step.visitor, true); }
             else if (step.closed) Story().setFlag('closed:' + step.closed, step.note || true);
             else if (step.prop) { if (Rift.Assets.has(step.prop)) keepsake(layer, step.prop, ctx, step.prop); }
+            else if (step.cutscene) await cutsceneStep(layer, step, ctx);
             else if ('scene' in step) backdrop(layer, step.scene, ctx);
             else if (step.possess) {
                 const role = step.possess;
@@ -408,6 +422,7 @@
             ctx.layer.remove();
         });
         live.clear();
+        if (Rift.Cutscene) Rift.Cutscene.stop();
         Rift.Audio.stopVoice();
     }
 

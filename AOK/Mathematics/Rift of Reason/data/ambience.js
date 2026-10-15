@@ -26,6 +26,8 @@
             'scene/neon-plaza': 'future', 'scene/server-hall': 'tower', 'scene/switch-room': 'tower', 'scene/core-chamber': 'core',
             'scene/arena-l1': 'arena-l1', 'scene/arena-l2': 'arena-l2', 'scene/arena-l3': 'arena-l3', 'scene/arena-l4': 'arena-l4',
             'scene/arena': 'arena-l1', 'scene/battle-table': 'table',
+            // The cold open (data/cutscenes.js): the Algorithm's crackling hum, not the title theme.
+            'cutscene/cold-open': 'title',
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

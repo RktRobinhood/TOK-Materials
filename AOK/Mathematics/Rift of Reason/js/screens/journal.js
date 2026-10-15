@@ -18,8 +18,21 @@
             const hud = Rift.UI.hud({ back: { label: 'Map', onclick: () => Rift.Router.replace('map') } });
             const filters = el('div.journal-filters.row.wrap');
             const body = el('div.journal-body.stack');
+            const seenOpening = Rift.State.get().flags['seen:prologue.cold'];
+            const replay = seenOpening && Rift.Cutscene && Rift.Cutscene.has('cold-open') ? el('button.btn.small', {
+                type: 'button', text: 'Watch the opening again',
+                async onclick() {
+                    if (replay.disabled) return;
+                    replay.disabled = true;
+                    try {
+                        const played = await Rift.Cutscene.play('cold-open');
+                        if (!played) Rift.UI.toast('The film could not load. Try again later.');
+                    } finally { replay.disabled = false; }
+                },
+            }) : null;
             rootNode.append(hud, el('section.collection-screen.panel.journal', null, [
                 el('h1', { text: 'Journal' }),
+                replay,
                 el('p.small.muted', null, [
                     Rift.Quests.glyph('main', 'new'), ' new  ', Rift.Quests.glyph('main', 'progress'), ' started  ·  ',
                     el('span', { text: 'Main story', style: { color: Rift.Quests.COLOURS.main } }), '  ·  ',

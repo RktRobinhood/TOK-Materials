@@ -1202,3 +1202,7 @@ Initial expansion: 72/72 portraits built, including Susie Dentshell as a distinc
 ## Stage 13.77 — James silhouette correction (#152), 15 October 2026
 
 Completed: James Rand-eater, a tamandua anteater, replaces the duplicated lynx in `creature/perception-lens-lynx/idle`. Preserve Perception green, common rarity, cost 2 / attack 2 / health 2, Entrance and acquisition. Empty-sleeve sceptic/stage-magic cue retained. Selected source: `4-caricatures/production-145-2026-10-13/production-perception-lens-anteater-152.png`. Exact built-in ImageGen prompt, roles and original output: `james-redraw-152.json` in that folder. Old PNG and complete metadata remain historical; mapping explicitly skips the old take. Source/runtime alpha pass, dark/light 70/180/300 and 390px gallery inspected; full existing suite 923 pass / 1 skip / 0 fail. Minor source right-edge alpha fringe accepted, no major cropped body part. See `../reviews/repo-audit-2026-10-15.md`. No new artwork remains required by #152.
+
+## Cold-open integration — #65, 15 October 2026
+
+Stage 13.72–13.76 assets now run in the actual opening player: quiet dawn/parallax, hairline crack, bedroom, all ten sleepers and existing surprised portraits/Algorithm eye/logo. No new art requested. Normal/Calm timing, Skip/fallback, Journal replay and source tests are implemented. Review: `../reviews/cutscene-65-2026-10-15.md`. Teacher viewing and physical school-device checks remain.

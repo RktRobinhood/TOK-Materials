@@ -23,7 +23,7 @@
     const native = new Set();
     let base = null;         // { name, bus, level, gain, src }
     const layers = {};
-    let wantScene = null, wantTension = 0;
+    let wantScene = null, wantTension = 0, wantArt = null;   // wantArt: the art id last asked for (a cutscene restores it)
 
     function volume(bus) {
         const s = Rift.State && Rift.State.get();
@@ -170,6 +170,7 @@
         const map = Rift.data.ambience || { scenes: {} };
         const name = artId === null ? null : ((map.scenes || {})[artId] || map.fallback || null);
         if (name !== wantScene) sceneVersion++;
+        wantArt = artId;
         wantScene = name;
         wantTension = 0;
         applyScene().then(applyTension);
@@ -222,7 +223,7 @@
         });
     }
 
-    const now = () => ({ scene: base && base.name, playing: !!(base && base.src), tension: wantTension, state: ctx ? ctx.state : 'none' });
+    const now = () => ({ scene: base && base.name, art: wantArt, playing: !!(base && base.src), tension: wantTension, state: ctx ? ctx.state : 'none' });
 
     // Give the optional trailer exclusive sound without changing saved settings.
     function hold() { held = true; if (ctx) ctx.suspend(); pauseNative(); }

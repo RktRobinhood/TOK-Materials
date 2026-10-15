@@ -85,12 +85,16 @@
 
     // ---------------------------------------------------------------- Prologue
 
-    // The cold open, on black. Played once at the start of the first morning.
+    // The cold open: the Algorithm finds you (data/cutscenes.js 'cold-open', issue #65). Played once at
+    // the start of the first morning. If the film cannot play (missing art, an error), the same two
+    // recorded lines play on black instead. The film speaks these exact lines, so keep them in step.
     S['prologue.cold'] = [
-        { scene: 'black' },
-        { s: 'algorithm', t: 'NOISE DETECTED. THE FAIR, 9:02. SUBJECT: {name}.' },
-        { s: 'algorithm', t: 'PREDICTABILITY: 51%. UNACCEPTABLE.' },
-        { scene: null },
+        { cutscene: 'cold-open', fallback: [
+            { scene: 'black' },
+            { s: 'algorithm', t: 'NOISE DETECTED. THE FAIR, 9:02. SUBJECT: {name}.' },
+            { s: 'algorithm', t: 'PREDICTABILITY: 51%. UNACCEPTABLE.' },
+            { scene: null },
+        ] },
     ];
 
     // Your Home (node script). The morning, or a look back for a jump-in.
