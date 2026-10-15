@@ -1,0 +1,6 @@
+20 unreviewed recordings; up to 3 text-model requests this run.
+HTTP 503; stopping audit. Existing results kept.
+0 recordings checked; 0 need review. Differences may be transcription/number spelling, not faulty audio. This does not certify acting or voice consistency.
+53 unreviewed recordings; up to 2 text-model requests this run.
+HTTP 503; stopping audit. Existing results kept.
+0 recordings checked; 0 need review. Differences may be transcription/number spelling, not faulty audio. This does not certify acting or voice consistency.

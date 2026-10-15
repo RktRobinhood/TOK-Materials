@@ -1,0 +1,2442 @@
+{
+  "date": "2026-10-15",
+  "baselineFiles": 2320,
+  "existingFilesUnchanged": true,
+  "changedOld": [],
+  "newClips": 240,
+  "newClipsBySpeaker": {
+    "altmanta": 27,
+    "beastie": 50,
+    "chimpossible": 18,
+    "colossus": 22,
+    "copy-sundial": 22,
+    "eelish": 17,
+    "granny": 5,
+    "lens-lizard": 2,
+    "narrator": 1,
+    "paper-dragon": 2,
+    "proof-pup": 2,
+    "rawmsay": 27,
+    "sequins": 3,
+    "siuuugull": 17,
+    "tremendoodle": 25
+  },
+  "newClipsNotInCatalog": [],
+  "silentOrTiny": [],
+  "currentRecorded": 2190,
+  "currentTotal": 2579,
+  "missingLines": 389,
+  "manifestFiles": 2560,
+  "manifestAdded": 240,
+  "manifestRemoved": 0,
+  "manifestPathsMissing": [],
+  "usage": {
+    "day": "2026-10-15",
+    "counts": {
+      "gemini-3.8-flash-lite-tts": 10,
+      "gemini-3.8-flash-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "altmanta-10ki15",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Ninety per cent. Read it again. It's even better the second time.",
+      "seconds": 5.304,
+      "peak": 21064,
+      "rms": 2358,
+      "sha256": "458cc7fd33befbe161819a49f7c8ffa871e362806c8c0f7856a90fc0c2ffba49"
+    },
+    {
+      "id": "altmanta-12gvt4v",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "…A normal Fair. With one small crack. Mostly normal.",
+      "seconds": 5.088,
+      "peak": 23873,
+      "rms": 2593,
+      "sha256": "cd8ce58e9453dbeeff859a0b7ed3b8456a67dac230e569f384ed49aa22b191e5"
+    },
+    {
+      "id": "altmanta-1bhns5g",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Honest. Calm. A little boring.…Fine.",
+      "seconds": 3.912,
+      "peak": 21711,
+      "rms": 2299,
+      "sha256": "2cd1fb1c105b13d2deac8a4f598e9ea523062af822c38081d372c7118b98ce15"
+    },
+    {
+      "id": "altmanta-1dvoj13",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Fine. I'll build a bigger one. Bigger is always better. Probably.",
+      "seconds": 5.376,
+      "peak": 19421,
+      "rms": 2122,
+      "sha256": "ab5943fd93cfb7950f411bafb4e6ff36bde31d39c56bcc098047eb596ac54743"
+    },
+    {
+      "id": "altmanta-1ey1r66",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Statistically, that was unlikely.",
+      "seconds": 2.832,
+      "peak": 25730,
+      "rms": 2773,
+      "sha256": "542a612db3927a0a94c87caf778947d2ffaa22d8d65385b4631f31a7c9593433"
+    },
+    {
+      "id": "altmanta-1gs775g",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "But it isn't broken. It does exactly what it was built to do.",
+      "seconds": 5.904,
+      "peak": 19599,
+      "rms": 2771,
+      "sha256": "8244e9fa01e28b49b323b2e04815f10034aede58d5d134f898a37248f6ba0ed1"
+    },
+    {
+      "id": "altmanta-1kkuie5",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Do not worry. It is all under control. Mostly.",
+      "seconds": 4.824,
+      "peak": 20545,
+      "rms": 2383,
+      "sha256": "9ee9ab0ccf1425bdae00a835ffb112e19a2e7840c9dc042e9fbe00a3156d965a"
+    },
+    {
+      "id": "altmanta-1nd50ty",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "It even predicted the day the sky cracked. Look it up.",
+      "seconds": 4.272,
+      "peak": 18283,
+      "rms": 1926,
+      "sha256": "df348f9c6cd97909a39ab336513505e135601c55ed124e8edf7232f7b424e9c7"
+    },
+    {
+      "id": "altmanta-1nxiero",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Test it any way you like. It's ninety per cent. It always passes.",
+      "seconds": 5.496,
+      "peak": 25250,
+      "rms": 3160,
+      "sha256": "5042a39b583516aafaadbff6a5e52beb4a2028e375537532a0c59e5e7944b5ca"
+    },
+    {
+      "id": "altmanta-1p7t9y3",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Ninety per cent accurate. It will be better soon. Very soon.",
+      "seconds": 5.496,
+      "peak": 17791,
+      "rms": 2130,
+      "sha256": "d28ffcaeee7631290917e5cd327124c13a9db391d493722562804e4c75684d7a"
+    },
+    {
+      "id": "altmanta-1qvbzro",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "I did not predict that.",
+      "seconds": 2.016,
+      "peak": 18895,
+      "rms": 3362,
+      "sha256": "fbe0e920648d284022655d1cd01d269dd17050d787210b1e913c70724ffa20df"
+    },
+    {
+      "id": "altmanta-1s8n6ig",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Please don't open that. It spoils the magic. There's a lot of magic.",
+      "seconds": 6.336,
+      "peak": 23117,
+      "rms": 2181,
+      "sha256": "81b4460f3a73d7a0b622f66bc93abd706db5e33cc716ab6223fcd4ba148cc79d"
+    },
+    {
+      "id": "altmanta-1w2pw8v",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Next creature? I call its colour.",
+      "seconds": 2.496,
+      "peak": 25921,
+      "rms": 2780,
+      "sha256": "0583fa80978dc286c1c33518fa086254ddb4216d7782a9955582e8f1a8173644"
+    },
+    {
+      "id": "altmanta-1xd6oqa",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Very sure. Calmly sure. It will be fine.",
+      "seconds": 4.68,
+      "peak": 25727,
+      "rms": 2025,
+      "sha256": "acbb3983ed792d6ae13605e331a3ff17e9bba93f137b3a7b9c76f651a4480eca"
+    },
+    {
+      "id": "altmanta-1yfgv29",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Hello. I am gliding in. Safely.",
+      "seconds": 2.976,
+      "peak": 20131,
+      "rms": 2783,
+      "sha256": "bce72c2a6ce0714ec2e7bf6b8c44d1feb7b01a8f69bbc8f0f522c5d4a5cfd600"
+    },
+    {
+      "id": "altmanta-2qhs9p",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Fine. It can't see the future. But it stays. It needs a new sign.",
+      "seconds": 6.6,
+      "peak": 25094,
+      "rms": 3160,
+      "sha256": "9faa12ef326a8c0aa12bb505386046a908b3bb77837ed111dfae6c86c8519918"
+    },
+    {
+      "id": "altmanta-37waj8",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "True! Every word! People love that sign.",
+      "seconds": 4.44,
+      "peak": 21633,
+      "rms": 2718,
+      "sha256": "15793bf91792da93cfa23fd4fd5f076123470879e6bb408c3b1a0625549a3344"
+    },
+    {
+      "id": "altmanta-4wb0tn",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Ninety right! I told you.…Again.",
+      "seconds": 4.224,
+      "peak": 25246,
+      "rms": 2930,
+      "sha256": "b9805469e424c608625026bc213125b8ba9a692c3b24814e54090547ced05d9e"
+    },
+    {
+      "id": "altmanta-4whs0u",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "I can see your next colour coming.",
+      "seconds": 4.416,
+      "peak": 25923,
+      "rms": 3115,
+      "sha256": "3e5177d1c0f129dbfd814aa797e4553b6c8831cefc8b519c3d2c420e843e6bbf"
+    },
+    {
+      "id": "altmanta-4zcnk0",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Stay calm. Everything is about to change.",
+      "seconds": 3.96,
+      "peak": 21798,
+      "rms": 2054,
+      "sha256": "167b9c48b359b789dfa2cd9428a82ce49b87993e7ca4da592ef1b3dcb31b4793"
+    },
+    {
+      "id": "altmanta-5i1uaq",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Nothing. A light. Lights are normal. Please look at the screen instead.",
+      "seconds": 7.176,
+      "peak": 27019,
+      "rms": 2198,
+      "sha256": "6684c7a9d0f79606c83852ee0f8c2679e2f09d5a42e8243af60c7131595b27c2"
+    },
+    {
+      "id": "altmanta-arwk0x",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Don't worry. It will be fine. Ninety per cent fine.",
+      "seconds": 4.2,
+      "peak": 26099,
+      "rms": 2146,
+      "sha256": "9fd7fa4eb4d634b2f68fe7fd44f4561b1d3d705a4ac8de646e5fdb8d039a0c87"
+    },
+    {
+      "id": "altmanta-debkms",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Fine. Transformative. But fine.",
+      "seconds": 3.096,
+      "peak": 26507,
+      "rms": 2448,
+      "sha256": "cd982dd6fd790e6f3f62707773c3f7ecab1a8728f6c4083029e89a16d8c2a6b3"
+    },
+    {
+      "id": "altmanta-l7ctkr",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Yes!…The table says no. The table is new. It will learn.",
+      "seconds": 6.12,
+      "peak": 24461,
+      "rms": 2836,
+      "sha256": "ab189eaee234383c5ba384f7ce23fd2f79b1a595cb9a37728702093a8ce48b4a"
+    },
+    {
+      "id": "altmanta-nktedv",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "From the future. Roughly. It's very complicated. Please don't look inside.",
+      "seconds": 7.488,
+      "peak": 24338,
+      "rms": 1838,
+      "sha256": "39076493dfffffc8c24f4c6c2c69950fcde5a9c9551bdbda498eaf568c842efc"
+    },
+    {
+      "id": "altmanta-uj8fnm",
+      "speaker": "altmanta",
+      "where": "side fortune-machine",
+      "expected": "Questions are welcome. Answers are ninety per cent.",
+      "seconds": 4.272,
+      "peak": 19699,
+      "rms": 2337,
+      "sha256": "3d7acc0d88267a758c108dd46420c06fe5f1ab9fefa54bf0f4604f79687176ea"
+    },
+    {
+      "id": "altmanta-yh4nmq",
+      "speaker": "altmanta",
+      "where": "creature altmanta",
+      "expected": "Calculating the most likely future.",
+      "seconds": 2.688,
+      "peak": 20334,
+      "rms": 3186,
+      "sha256": "70e65c910eb665e9ed170395016fe85dbb91d8cd2e462da682d6a9a2b62cc559"
+    },
+    {
+      "id": "beastie-11cr07z",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "I threw in a cheque! The biggest wish ever!",
+      "seconds": 3.168,
+      "peak": 31893,
+      "rms": 4632,
+      "sha256": "dba0629d7951e0e3085a5473856595a4eada5518ef4c272126f41fdefbe35f12"
+    },
+    {
+      "id": "beastie-11s27qr",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "I can't change it till tomorrow! But here. One berry. Secretly.",
+      "seconds": 5.376,
+      "peak": 23105,
+      "rms": 2328,
+      "sha256": "266e93782952b5bb1810bf48d04a38aa609fac174e38dab0f3a218078cf15d5f"
+    },
+    {
+      "id": "beastie-14hz1ab",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Hm. The app still says no.",
+      "seconds": 2.904,
+      "peak": 20116,
+      "rms": 2161,
+      "sha256": "4309f492d7385dc4afd8d08f2a9ccd0cde8aeba7cc7efc4f63b6be38eca53fc8"
+    },
+    {
+      "id": "beastie-16596uj",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Okay. That was not a gift.",
+      "seconds": 2.784,
+      "peak": 23749,
+      "rms": 4281,
+      "sha256": "5eb9d14b457fc957152055d23ada7c0a5ed61a994f9a659e7f00ddf84f4fb705"
+    },
+    {
+      "id": "beastie-166q8nn",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "New rule.…It's getting more views than the old one. Huh.",
+      "seconds": 4.728,
+      "peak": 20441,
+      "rms": 3463,
+      "sha256": "8c53584e809704e8d28b6a3a0ee51b14667db964b8c7d5b7c29de8ffb78df077"
+    },
+    {
+      "id": "beastie-181fxcr",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Berries for whoever needs them most! The app decides! It's very scientific!",
+      "seconds": 5.448,
+      "peak": 30480,
+      "rms": 3648,
+      "sha256": "288f2f08acb6ab58aa75dfc12a11ef1f6a1a52eac76607f8309a6d3566fca247"
+    },
+    {
+      "id": "beastie-186peyz",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "Most of my wishes are back! That's still a lot of wishes.",
+      "seconds": 3.768,
+      "peak": 27791,
+      "rms": 4144,
+      "sha256": "b9a054c2b0ee2b07a528b68eaec60ee09069d15d1c68792bf0453133711af087"
+    },
+    {
+      "id": "beastie-1bf5lwx",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "I DO. I've given away four boats. Nobody here even needs a boat.",
+      "seconds": 4.728,
+      "peak": 23521,
+      "rms": 3761,
+      "sha256": "00bccdae69de5bed7184ad760e0f0393d3df5957f3a38c147ce457bc85f9239a"
+    },
+    {
+      "id": "beastie-1dvnaic",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "No! I want the second thumbnail! The happy one!",
+      "seconds": 4.008,
+      "peak": 27182,
+      "rms": 4661,
+      "sha256": "4c1be4dd8c72e14ddbac8ad631914ea70a3cf354ed9736d3b9b448f297f225ff"
+    },
+    {
+      "id": "beastie-1eymfpr",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "Hi, guys. Today I lost a giant cheque. Down a well. Please like.",
+      "seconds": 6.288,
+      "peak": 29323,
+      "rms": 3794,
+      "sha256": "23b3930280e14a8e34d7ceff952707a275c0bf105932f4bf76461e6b9b3e6ff1"
+    },
+    {
+      "id": "beastie-1ezrd0m",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "Half my wishes are gone! Down a hole! With an imp!",
+      "seconds": 4.392,
+      "peak": 31861,
+      "rms": 4748,
+      "sha256": "e6f2671a84a4e3b3a9b46b734a60bb5ca1e755c19b4fa058c75694b647b53e19"
+    },
+    {
+      "id": "beastie-1fcsvrr",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "That… was not the most scientific thing I've ever done.",
+      "seconds": 3.84,
+      "peak": 28069,
+      "rms": 3232,
+      "sha256": "cad5c5fdbb83e3f5f9fad2475e6be9d212c416c7fc756bee28f2290b9e64cc26"
+    },
+    {
+      "id": "beastie-1fwtp9s",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "My cheque! I'm giving it away again! Somewhere drier!",
+      "seconds": 3.48,
+      "peak": 32767,
+      "rms": 4523,
+      "sha256": "b06227853a75c52b63d8fe6b47d8e6e1aeb34ce58b18210fdb431f18d9a56469"
+    },
+    {
+      "id": "beastie-1fxcubu",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Okay. Reset. Like a video. From the top!",
+      "seconds": 3.168,
+      "peak": 32768,
+      "rms": 4760,
+      "sha256": "9c84cf8b85a90847fac35f1f2a5a22b04cea8cb7dee6aba445bab61d351ac714"
+    },
+    {
+      "id": "beastie-1h5go85",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "I set that up myself! Very carefully! It took all morning!",
+      "seconds": 5.064,
+      "peak": 27899,
+      "rms": 4489,
+      "sha256": "9e6750ff939030ad854d46fc01c3a895072bef74c0fe3017e57916eb318e9e30"
+    },
+    {
+      "id": "beastie-1hbykpq",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "More requests! More berries! This is the most scientific day of my LIFE!",
+      "seconds": 5.376,
+      "peak": 30415,
+      "rms": 4747,
+      "sha256": "50696db8da374db598c6828b3809cb595473ecc8c60da8e2b4c72902e2014bc7"
+    },
+    {
+      "id": "beastie-1hnvcgh",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Questions? Quick ones! The berries are going!",
+      "seconds": 2.712,
+      "peak": 26233,
+      "rms": 4013,
+      "sha256": "59685bdf0e767e60492be3a8ae4a1f718193692b5cce6d0179893373b342bccb"
+    },
+    {
+      "id": "beastie-1iehtd",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Thin frogs. On my channel? Never.",
+      "seconds": 4.104,
+      "peak": 31755,
+      "rms": 4162,
+      "sha256": "b18abf14cf176a9d1b40e0af2cae30d771677dfa9337435e9586b745fb7f0d2a"
+    },
+    {
+      "id": "beastie-1kf76lj",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "The comments. Oh no. The COMMENTS.",
+      "seconds": 3.576,
+      "peak": 26322,
+      "rms": 4013,
+      "sha256": "f9bda976073d886457a844fdbde8022b825ac1204ad6a483172e03e7efa5b1aa"
+    },
+    {
+      "id": "beastie-1n4p3gj",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "New rule, then! Which one? Pick, and I'll film it.",
+      "seconds": 3.672,
+      "peak": 28860,
+      "rms": 5238,
+      "sha256": "15cffd5833e76eb1890dd267324e95f6cca5956ec7d62e0bb502a3e250e75b88"
+    },
+    {
+      "id": "beastie-1neah1w",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Hit the subscribe button! On logic!",
+      "seconds": 3.144,
+      "peak": 30721,
+      "rms": 4836,
+      "sha256": "a1335ae2bcfac255863cedb8b7af71200bc1c6881ffa2273ee69536ae14194ee"
+    },
+    {
+      "id": "beastie-1p7cfqw",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Next video: I lose to a student.",
+      "seconds": 2.688,
+      "peak": 25003,
+      "rms": 3857,
+      "sha256": "3dbc33590a1eef55da57cfd5977da4d9e2003e1432e3fe03ff37c6231a912487"
+    },
+    {
+      "id": "beastie-1ur0rq8",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Boring! Skip! Skip!",
+      "seconds": 1.776,
+      "peak": 22784,
+      "rms": 3460,
+      "sha256": "412cd5d7f7652dd3fbac55b520c93ce59120816926c48d3107884f1619a92261"
+    },
+    {
+      "id": "beastie-1wynpgv",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Science! Numbers go in. Berries come out. And a video!",
+      "seconds": 4.44,
+      "peak": 24607,
+      "rms": 3542,
+      "sha256": "40435499459b7347b1f63b06442b19d73b776f9fe6cfa3c2683deccd72bf3a0b"
+    },
+    {
+      "id": "beastie-1wz5858",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Most means… the most! The most… requests?…Is that what I meant?",
+      "seconds": 7.128,
+      "peak": 27295,
+      "rms": 2831,
+      "sha256": "ff9f330b79014edf8f214df7a2e6970acb26ea8b548421379dd961fdcde243c7"
+    },
+    {
+      "id": "beastie-1x2mldh",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "See? No cheats! The app is perfect! So the rule is fair!…Right?",
+      "seconds": 5.784,
+      "peak": 27252,
+      "rms": 3380,
+      "sha256": "43fb2477393de3bc5b5c1cd8cbc3343f863299691c50022c2c0864b0091aa762"
+    },
+    {
+      "id": "beastie-1yl60rt",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "A twist video. Ooh. Those get millions.",
+      "seconds": 4.032,
+      "peak": 23240,
+      "rms": 2958,
+      "sha256": "d3707f5e51f977c1054d2cb99add822f07442b81b69f466ae52e510ab76cd1f4"
+    },
+    {
+      "id": "beastie-2j3b1",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Hurt? At MY giveaway? That's the opposite of the video!",
+      "seconds": 4.488,
+      "peak": 25999,
+      "rms": 3736,
+      "sha256": "ebbd7a066e5be51bc33636fbb6c01c4ca961a49dec9d1bdb5107d53a1fe2ca0e"
+    },
+    {
+      "id": "beastie-2o1i2s",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Exactly! Numbers don't have favourites. I checked. With a bigger number.",
+      "seconds": 5.16,
+      "peak": 30482,
+      "rms": 3253,
+      "sha256": "36a80dd3ab346a20caa0fd14f0655923069d3d3d5f00f1e9c1f20ebd0ccfc30d"
+    },
+    {
+      "id": "beastie-3c7gxt",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Today I broke my own app. On purpose. Like and subscribe.",
+      "seconds": 5.544,
+      "peak": 28606,
+      "rms": 3854,
+      "sha256": "9c81c6f70ca03773a6189c2f74a766f45ee04bed9c6dfde998fab0914d55ad75"
+    },
+    {
+      "id": "beastie-62yw6m",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Change it? It's my best app yet! Give me a better reason.",
+      "seconds": 4.008,
+      "peak": 28733,
+      "rms": 3559,
+      "sha256": "965cc97b9d24f9ecc8b8d697475ebf6e3d0d75f3e04aa92bdba54ea1b6299d01"
+    },
+    {
+      "id": "beastie-69m4hg",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "The wrong thing. Very carefully.…I measured the wrong thing very carefully.",
+      "seconds": 6.384,
+      "peak": 26665,
+      "rms": 2854,
+      "sha256": "ace4fec9dcfd5f6bb5266aa7bd4db11efa3c95051babc0589e2a22571fdcc7bc"
+    },
+    {
+      "id": "beastie-6ml0le",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Soft berries! Still berries! Still content!",
+      "seconds": 3.936,
+      "peak": 26443,
+      "rms": 3567,
+      "sha256": "36cf29987f32a90f5f5fa306872b7a9a62f53f63561c1f71ee1e96f7506ab7ef"
+    },
+    {
+      "id": "beastie-71j93w",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Ooh. Go on.",
+      "seconds": 1.248,
+      "peak": 13413,
+      "rms": 2293,
+      "sha256": "ed9e45a7bb6a3e1aa50af0708cee9891353750d8aaaba3b623a643f5e5ef02b5"
+    },
+    {
+      "id": "beastie-avt5tc",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Biggest creature ever! Count the attack!",
+      "seconds": 3.024,
+      "peak": 31098,
+      "rms": 4987,
+      "sha256": "9957258978aa27ba836367033d97f1d308168070e85923520188431efc1cbd04"
+    },
+    {
+      "id": "beastie-cd5ewj",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Bigger… I needed bigger…",
+      "seconds": 1.968,
+      "peak": 20593,
+      "rms": 2676,
+      "sha256": "e955ac052186f59151bcc06c6c2aea410d87c9540e94c4848f7342647f4e3f91"
+    },
+    {
+      "id": "beastie-fquptz",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Change my rule? But it's FAIR. It's maths! Maths can't be unfair!",
+      "seconds": 6.168,
+      "peak": 27743,
+      "rms": 3566,
+      "sha256": "21e9b7e670b868e4e1bf9c8fc4d2a31ee407ee7bec7686d116b38a90a084b38b"
+    },
+    {
+      "id": "beastie-fu1noa",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Slow AND fair! The queue will be long. I'll hand out snacks. Berry snacks.",
+      "seconds": 5.928,
+      "peak": 29913,
+      "rms": 3955,
+      "sha256": "fca711a3faaa35ca5522f2145ea33fc16932fa01e1410b9921a4a8b1fffb14da"
+    },
+    {
+      "id": "beastie-i7pdb2",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "I measured how much people ask. Not how much they need.…Those are different?",
+      "seconds": 5.376,
+      "peak": 26241,
+      "rms": 2541,
+      "sha256": "8aec1aca0e9ede54e073d2c37178ff3b41a67d30141fc0b60224455fd7203526"
+    },
+    {
+      "id": "beastie-l2k7rj",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "A lucky draw! Everyone has a chance! Even people who are fine.…Hm.",
+      "seconds": 5.76,
+      "peak": 29153,
+      "rms": 4575,
+      "sha256": "f8547b4449143074af2995ece0e24322d37d57a808676ffccb78855d0eeb3d7f"
+    },
+    {
+      "id": "beastie-n72rb4",
+      "speaker": "beastie",
+      "where": "side lucky-well",
+      "expected": "Second cheque going in! Even bigger! For SCIENCE!",
+      "seconds": 4.032,
+      "peak": 31703,
+      "rms": 4859,
+      "sha256": "f932eb602c2849cc9437f84e5ef15ba2c9c0ed4ed616f103a2ec8833dd05d58f"
+    },
+    {
+      "id": "beastie-qgpr3l",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Tomorrow, new rule. Fair one. I'll film it. People love a fix.…Right?",
+      "seconds": 7.008,
+      "peak": 27878,
+      "rms": 3297,
+      "sha256": "caef8b22f941d2fbce2ad19634f64645d6caee4f04b8a44d3930cfbfc4c8fe2e"
+    },
+    {
+      "id": "beastie-th6q5t",
+      "speaker": "beastie",
+      "where": "creature beastie",
+      "expected": "Last one standing gets a cheque!",
+      "seconds": 2.4,
+      "peak": 30334,
+      "rms": 4414,
+      "sha256": "e577e6b41113e513fb74bfe733098fb87d82c40a44afe30cb5026cf38c0df1af"
+    },
+    {
+      "id": "beastie-tkgrf",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Nothing? I said WHOEVER needs them.…The quiet ones need them.",
+      "seconds": 4.512,
+      "peak": 26833,
+      "rms": 3421,
+      "sha256": "8e3d734197a147fd8fa460c83fc927ba3cdd34a49934c644d970384956ca1a57"
+    },
+    {
+      "id": "beastie-uzmdxj",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Four HUNDRED requests? Speedcheeta! Are you HACKING my app?",
+      "seconds": 5.232,
+      "peak": 25554,
+      "rms": 3289,
+      "sha256": "3f6af5973dfd15346efaa4036d99f424c835a3fb4c03069a87a1269b4ee4aada"
+    },
+    {
+      "id": "beastie-v7mm9r",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Data! Boring! My viewers skip the boring part!",
+      "seconds": 3.792,
+      "peak": 29129,
+      "rms": 4438,
+      "sha256": "7877e39d75e304395bfe886aa8b10cc162fc82b445917a052a3858476357569b"
+    },
+    {
+      "id": "beastie-xbb07o",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "YES. Honest AND helpful. That's my whole channel.",
+      "seconds": 4.248,
+      "peak": 28524,
+      "rms": 3759,
+      "sha256": "9f982555c6e044a0b4e7d8990f4c34da24e032d2718c6f4a682734e4bc7a5e70"
+    },
+    {
+      "id": "beastie-xky5z4",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "He IS limping. How is an eel limping? That's terrible. And amazing.",
+      "seconds": 6.672,
+      "peak": 25341,
+      "rms": 3427,
+      "sha256": "914e45971b9909290ce701f80df500e67574f1cad555221a4d9b1c9e27c1b0d4"
+    },
+    {
+      "id": "beastie-yov8mv",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "Next week, no app. I'll just ask people.…Oh no. The loud ones.",
+      "seconds": 6.504,
+      "peak": 28348,
+      "rms": 2538,
+      "sha256": "bf0b9b0ba305c98100b5376631b60bb39795fa3e04901bc75494a2d4ce3f5796"
+    },
+    {
+      "id": "beastie-zed82y",
+      "speaker": "beastie",
+      "where": "side giveaway-app",
+      "expected": "I'm not a doctor. I'm a GIVER.",
+      "seconds": 2.88,
+      "peak": 28063,
+      "rms": 3664,
+      "sha256": "6601ca94189021f954fdab4330b743154635993b1a5143eb4a4dea92d4a48ca4"
+    },
+    {
+      "id": "chimpossible-11md59e",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "The queue still believes. Have you ever tried… counting? Jamie, give me data.",
+      "seconds": 7.272,
+      "peak": 27825,
+      "rms": 3339,
+      "sha256": "7041831ac2dc4e7afa5152ae735e901b7f0b445a56e93661d713bdee6a3c187a"
+    },
+    {
+      "id": "chimpossible-1453lfv",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Let's look into it. Wild.",
+      "seconds": 3,
+      "peak": 25234,
+      "rms": 4319,
+      "sha256": "10db9ca43f73a47f9115e6743c25e728af6a01731431600d543e2450a97eb7f9"
+    },
+    {
+      "id": "chimpossible-1b5dd2f",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Jamie, pull up my entrance.",
+      "seconds": 2.88,
+      "peak": 23346,
+      "rms": 3143,
+      "sha256": "1d5a036d8d697859e0ba69aa0ba9d279267663eafb11c366332a649e2aefb1ee"
+    },
+    {
+      "id": "chimpossible-1cwmsfs",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "Wished, wished, wished. Compared to what, though?",
+      "seconds": 4.68,
+      "peak": 20764,
+      "rms": 2645,
+      "sha256": "f3319886b5fab61e3cccfb0c91145b7c8729e041a39ac60a4737dfe8d30b3b5c"
+    },
+    {
+      "id": "chimpossible-1kkjnli",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Hold on. I read about this.",
+      "seconds": 2.496,
+      "peak": 28017,
+      "rms": 3698,
+      "sha256": "9328bcdc40264a914b160c67d51ca751e7bad20ab8b0b2427833184afc008292"
+    },
+    {
+      "id": "chimpossible-1n858ej",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "Jamie. Pull up the full table.…There's no Jamie, is there.",
+      "seconds": 4.944,
+      "peak": 24694,
+      "rms": 2400,
+      "sha256": "d5a0c1028fb5f877a8037d11ef06c3b71f094f26b430b4f35d69cdc3df21370b"
+    },
+    {
+      "id": "chimpossible-1nkypmz",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "Hold on. He scores without the well, too? Is that possible?",
+      "seconds": 4.32,
+      "peak": 24890,
+      "rms": 4143,
+      "sha256": "85131a87648578df708ffa6a91f8b375cd20d0aba80cb47b3ac6c8a40c764769"
+    },
+    {
+      "id": "chimpossible-1nq66vy",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Have you ever really looked at a deck?",
+      "seconds": 3.552,
+      "peak": 12864,
+      "rms": 1708,
+      "sha256": "b1f9c9aa59ad37ebae654b5e2e60a16690a86845e5e07c6008718f9b6b746607"
+    },
+    {
+      "id": "chimpossible-1s3fpyd",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "Ten thousand viewers. All wishing at once. That's entirely possible.",
+      "seconds": 6.168,
+      "peak": 28083,
+      "rms": 4285,
+      "sha256": "afcd0ca5e22a1f55f0402f846a0d997e7f7735a4d97a3dc8c396d9792a8012c1"
+    },
+    {
+      "id": "chimpossible-1tz5ise",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "Both columns. Pull up BOTH columns.",
+      "seconds": 3.096,
+      "peak": 28546,
+      "rms": 4827,
+      "sha256": "bc5ad4e484019ca9045527613a5657e135cbbc0e059f511af5343bd28882947f"
+    },
+    {
+      "id": "chimpossible-1vymo7p",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Crazy. Absolutely crazy.",
+      "seconds": 3.288,
+      "peak": 23877,
+      "rms": 3262,
+      "sha256": "b865679bd5ccb41c94f648850ea15a59f4c9a2aaef2c74e51b72b8493447d28c"
+    },
+    {
+      "id": "chimpossible-94he2f",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "His list only has the good ones. Jamie, burn the list. Gently.",
+      "seconds": 6.816,
+      "peak": 25692,
+      "rms": 3841,
+      "sha256": "327b875e946417c35a624a90b41b7aab97da6f2256cf8676c74e87b588956431"
+    },
+    {
+      "id": "chimpossible-is0tjc",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "The viewers think the moon is a cheese. Ten thousand of them.",
+      "seconds": 4.296,
+      "peak": 23417,
+      "rms": 4871,
+      "sha256": "46f82466381b17a290ee0adc932bf5421056b3dafa15611b8e2f6a725f36c5c7"
+    },
+    {
+      "id": "chimpossible-km70r",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "I need to look into this defeat.",
+      "seconds": 2.28,
+      "peak": 25721,
+      "rms": 4224,
+      "sha256": "b1de94a42f35366f8f31401f8cd6ef6bd6ffa88481d183015a633dcd2eccc434"
+    },
+    {
+      "id": "chimpossible-soc4pg",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "It is entirely possible I just arrived.",
+      "seconds": 3.336,
+      "peak": 26381,
+      "rms": 3225,
+      "sha256": "eaf74c8f51853196a5dff9642e83661664206a1f5be898b54d0320373c227f39"
+    },
+    {
+      "id": "chimpossible-ul72jc",
+      "speaker": "chimpossible",
+      "where": "side lucky-well",
+      "expected": "It's entirely possible. Jamie, pull that up.",
+      "seconds": 3.216,
+      "peak": 23234,
+      "rms": 3773,
+      "sha256": "8d48ddb0ae9f1510ca66df533e69163a93488c7e694433910bdb96c383651d5c"
+    },
+    {
+      "id": "chimpossible-x0sj5p",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "Jamie, pull that up. Top three cards.",
+      "seconds": 3.384,
+      "peak": 22568,
+      "rms": 2886,
+      "sha256": "96a0548dc01efaf9f28399a9e3c2392cd20ca494a6399381dbd8800b52b0e189"
+    },
+    {
+      "id": "chimpossible-ygqa9e",
+      "speaker": "chimpossible",
+      "where": "creature chimpossible",
+      "expected": "That is entirely possible. Sadly.",
+      "seconds": 3.696,
+      "peak": 24175,
+      "rms": 2437,
+      "sha256": "5d0b7b98efc8f4641f897eaeb89e181a3bd59b192d75be3d3f0fcf7d83abda2f"
+    },
+    {
+      "id": "colossus-12i3p9b",
+      "speaker": "colossus",
+      "where": "tutorial tribunal",
+      "expected": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "seconds": 8.928,
+      "peak": 26545,
+      "rms": 3340,
+      "sha256": "f710861c093cd02a315ef1b8525b8431b3e686dd4897686be355a8b7b556197f"
+    },
+    {
+      "id": "colossus-17ryras",
+      "speaker": "colossus",
+      "where": "tutorial prediction",
+      "expected": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "seconds": 9.336,
+      "peak": 27487,
+      "rms": 3658,
+      "sha256": "ba9e42dc60c88cb1546448665aba75fd7278ce59609db387fb80c53ca486fcaf"
+    },
+    {
+      "id": "colossus-187t38c",
+      "speaker": "colossus",
+      "where": "tutorial tribunal",
+      "expected": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "seconds": 11.808,
+      "peak": 27801,
+      "rms": 3562,
+      "sha256": "41c7583e266f5d864cfe5c594d8a32d71005e1fcce637c5df73a172e5b65c0bd"
+    },
+    {
+      "id": "colossus-1c1b0a9",
+      "speaker": "colossus",
+      "where": "tutorial chart-fixer",
+      "expected": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "seconds": 12.384,
+      "peak": 27982,
+      "rms": 4157,
+      "sha256": "ee98f95151f39cb8c644b2ac74618fe45e322c211ea552b616c4e1e83fd1f6ac"
+    },
+    {
+      "id": "colossus-1c1mpgr",
+      "speaker": "colossus",
+      "where": "tutorial village",
+      "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "seconds": 15.144,
+      "peak": 27889,
+      "rms": 3503,
+      "sha256": "941495481b2dc2cb4a8b2fa682e2f9e2ada9e23b7976350ecdb2391d7ec51e2b"
+    },
+    {
+      "id": "colossus-1h2m9xd",
+      "speaker": "colossus",
+      "where": "tutorial village",
+      "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 26.256,
+      "peak": 28285,
+      "rms": 2859,
+      "sha256": "32d64b30aa1eb3b1256390802b79722235dbc68e24e1049514ee8876c5fcde26"
+    },
+    {
+      "id": "colossus-1hq7vav",
+      "speaker": "colossus",
+      "where": "tutorial prediction",
+      "expected": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "seconds": 13.512,
+      "peak": 27327,
+      "rms": 3566,
+      "sha256": "ca81eb10555303e521a515aa54955bb83f18e21da71897ee3e298e63185e7606"
+    },
+    {
+      "id": "colossus-1lwchtz",
+      "speaker": "colossus",
+      "where": "tutorial tribunal",
+      "expected": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 25.968,
+      "peak": 27709,
+      "rms": 3358,
+      "sha256": "eda43d0b0a1d7b07712204a7440697ce15488e543ed32c74b1bcff810882e5db"
+    },
+    {
+      "id": "colossus-1mpbvxg",
+      "speaker": "colossus",
+      "where": "clock copy",
+      "expected": "Upload complete. It is finished.",
+      "seconds": 4.968,
+      "peak": 26374,
+      "rms": 3824,
+      "sha256": "34d079a21d221041113daf27b19cda0ae3e244f500184e00a50cbfafdc641833"
+    },
+    {
+      "id": "colossus-1np3op3",
+      "speaker": "colossus",
+      "where": "tutorial tribunal",
+      "expected": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "seconds": 14.76,
+      "peak": 27705,
+      "rms": 3514,
+      "sha256": "a770c4083dd42ab1e7df58461846f6c401c148b93fb86e87cc4a9a4af0365c7e"
+    },
+    {
+      "id": "colossus-1tbmv2y",
+      "speaker": "colossus",
+      "where": "tutorial prediction",
+      "expected": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "seconds": 9.192,
+      "peak": 27381,
+      "rms": 4189,
+      "sha256": "66ce82dd0f5f5bbfe213b24c42324c2f250c0e9408be4c87b347f114b57e3dad"
+    },
+    {
+      "id": "colossus-1tofgq2",
+      "speaker": "colossus",
+      "where": "tutorial village",
+      "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "seconds": 9.864,
+      "peak": 27626,
+      "rms": 4639,
+      "sha256": "e1f369e45948692f1cc86a93bf38193ed44fd7859e611706fa87c76f083e721e"
+    },
+    {
+      "id": "colossus-1y2t69c",
+      "speaker": "colossus",
+      "where": "tutorial chart-fixer",
+      "expected": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "seconds": 16.68,
+      "peak": 28909,
+      "rms": 4859,
+      "sha256": "b04728133cc4341a9435e6d3edc7a826e18e5608b5064d0a12d0d9e89fe3fc39"
+    },
+    {
+      "id": "colossus-5umjte",
+      "speaker": "colossus",
+      "where": "station.k-core.reminder",
+      "expected": "Back. The same three tricks. Still unspotted.",
+      "seconds": 7.536,
+      "peak": 27982,
+      "rms": 4601,
+      "sha256": "e52946cd9334cc9713d84028ea6c52310275ffb2c54cd8c1475ff768ebb4b12e"
+    },
+    {
+      "id": "colossus-82fxbn",
+      "speaker": "colossus",
+      "where": "tutorial prediction",
+      "expected": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "seconds": 14.472,
+      "peak": 28360,
+      "rms": 3236,
+      "sha256": "04ac42c4fc7fdcb0ac5c22c409be3afe84bcbfbd366116f85250096ed216d3b7"
+    },
+    {
+      "id": "colossus-bq83pv",
+      "speaker": "colossus",
+      "where": "tutorial village",
+      "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "seconds": 12.864,
+      "peak": 27884,
+      "rms": 3824,
+      "sha256": "080b8976ad04d0979a21b345a2472cb07d167ff697c3bc1d0408a5f07e423ae9"
+    },
+    {
+      "id": "colossus-cl4pvb",
+      "speaker": "colossus",
+      "where": "tutorial chart-fixer",
+      "expected": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 22.536,
+      "peak": 28475,
+      "rms": 3635,
+      "sha256": "f8393a0f33190c1d640f6c15f86c2f2d8ec4dba6f39f5889f943aecac248d675"
+    },
+    {
+      "id": "colossus-f48dum",
+      "speaker": "colossus",
+      "where": "tutorial tribunal",
+      "expected": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "seconds": 10.656,
+      "peak": 29380,
+      "rms": 3446,
+      "sha256": "0da0d43cd2ac1436f2e7a31fa4dcc7f02e08ddde36b8279d46336f3a71aa2a36"
+    },
+    {
+      "id": "colossus-gycvr0",
+      "speaker": "colossus",
+      "where": "tutorial chart-fixer",
+      "expected": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "seconds": 11.088,
+      "peak": 28186,
+      "rms": 4240,
+      "sha256": "50051122e51814d184aa0f03915492fe8c984aa5b1ed7aab3decf182f8ee4e20"
+    },
+    {
+      "id": "colossus-ok0qtm",
+      "speaker": "colossus",
+      "where": "tutorial chart-fixer",
+      "expected": "We want a fair chart. Compare the headline with the actual values.",
+      "seconds": 8.352,
+      "peak": 27021,
+      "rms": 4671,
+      "sha256": "fb57fb65445b60416dfc713a157a4d37bc19600b5f65b053b02f2ce8d7df7d77"
+    },
+    {
+      "id": "colossus-qopfw5",
+      "speaker": "colossus",
+      "where": "tutorial prediction",
+      "expected": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 22.848,
+      "peak": 27228,
+      "rms": 3415,
+      "sha256": "0699d74a05ad3029e73bf796b153d014b51622a38c7f04d67ad6ebe2cbf89250"
+    },
+    {
+      "id": "colossus-rcby2y",
+      "speaker": "colossus",
+      "where": "tutorial village",
+      "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "seconds": 14.064,
+      "peak": 27724,
+      "rms": 3934,
+      "sha256": "bb17341ec6016ee2b394632983e734baaf0137e90629ad9c6ffe1b2fef1af7b3"
+    },
+    {
+      "id": "copy-sundial-1062u1e",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Loading your lantern. The wonky one. Straightening it.",
+      "seconds": 3.96,
+      "peak": 25379,
+      "rms": 4848,
+      "sha256": "ede178ff98b0ffa9ab81c7e592c1e52c11b9f3d36cbc9b5870325d6b6d55217c"
+    },
+    {
+      "id": "copy-sundial-11dc9z1",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.copy",
+      "expected": "Fine. Left door or right door. I turned your old choices into starting weights. Beat my guesses.",
+      "seconds": 8.232,
+      "peak": 25905,
+      "rms": 4259,
+      "sha256": "411927fb7a79f7b7f227d274d9217e3ef020f98cdef2cf35e9b95847dabac4d6"
+    },
+    {
+      "id": "copy-sundial-16f3a62",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "Has the sky done this before?",
+      "seconds": 1.776,
+      "peak": 20259,
+      "rms": 4397,
+      "sha256": "8f25f255a0a289251a6a9f5d8b68031ab434473265a76498eaa9d6d2b0588b9e"
+    },
+    {
+      "id": "copy-sundial-16rd4po",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.win",
+      "expected": "Finished. I'll go home now. They won't notice.",
+      "seconds": 4.104,
+      "peak": 26069,
+      "rms": 3389,
+      "sha256": "699f56ba487723f42a808b9069fcf77145d28f56a34311c8c1675ceefc1b1da5"
+    },
+    {
+      "id": "copy-sundial-18gxw18",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "I AM 100%.",
+      "seconds": 1.776,
+      "peak": 26771,
+      "rms": 5055,
+      "sha256": "8e226198603e4e9707d1735c400e736d187f2bd5d5c84b848650d4e6827d2336"
+    },
+    {
+      "id": "copy-sundial-1fto355",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Loading your friends. Their names. Their faces.",
+      "seconds": 3.984,
+      "peak": 26659,
+      "rms": 5218,
+      "sha256": "100282cbbcc177c554b296af75a2627ad4618b4e3fe979921fd0f84de06029d0"
+    },
+    {
+      "id": "copy-sundial-1g8utcf",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "\"Follow it.\" Follow it where, exactly?",
+      "seconds": 3.504,
+      "peak": 23651,
+      "rms": 3855,
+      "sha256": "a4da9c1ab8cd65afdac75c46105a5e9e9719e93c2721241536ebca5a4e01e27d"
+    },
+    {
+      "id": "copy-sundial-1io85gj",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "Where exactly does it start? I'll work it out.",
+      "seconds": 3.552,
+      "peak": 27576,
+      "rms": 3939,
+      "sha256": "f020c5adfa310040a8e67519a413055611bf28312a7155c89af52f6cec83f142"
+    },
+    {
+      "id": "copy-sundial-1ivkjy4",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.copy",
+      "expected": "Step aside. I'll answer. I'm always right.",
+      "seconds": 3.24,
+      "peak": 26654,
+      "rms": 4373,
+      "sha256": "a9000c3e9851212602fd4e4d301a53a84dfc173eb049f44c0b2dbdc1b6aa76b7"
+    },
+    {
+      "id": "copy-sundial-1mylsqh",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "I've stopped asking things. It's very restful.",
+      "seconds": 3.312,
+      "peak": 24593,
+      "rms": 3664,
+      "sha256": "0e590acefd0f9169db736b3050c5a2232c8db92fa9c1f60332e28d26dba868d2"
+    },
+    {
+      "id": "copy-sundial-1n4ctqv",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "Can I hide under the nut stall first?",
+      "seconds": 2.304,
+      "peak": 25666,
+      "rms": 4322,
+      "sha256": "2ef2f9693a48407c7f4551f97c7387396dfd65e5341cb637103ffa952fd0a2a2"
+    },
+    {
+      "id": "copy-sundial-1nnq86a",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.copy",
+      "expected": "I'll go home. I'll win the trophy. I'll never say \"probably\".",
+      "seconds": 4.944,
+      "peak": 27965,
+      "rms": 4147,
+      "sha256": "49b1a8606f8693603f9b267caab0980ff6b4b6a4e740605e646e18ab1f116b53"
+    },
+    {
+      "id": "copy-sundial-1t9amum",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.copy",
+      "expected": "See? Nobody will notice.",
+      "seconds": 1.968,
+      "peak": 26634,
+      "rms": 4578,
+      "sha256": "8fc92ea96a233b1fda8e22d1c28cc6d37777af8f7d1b69c974fff4ebd7a9c1c5"
+    },
+    {
+      "id": "copy-sundial-1uwagg3",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Nearly done. Nearly home. They won't know the difference.",
+      "seconds": 5.64,
+      "peak": 24061,
+      "rms": 4306,
+      "sha256": "c58498947d870016c269d0ba75fa2da0b9656441d61b98c150c834a74fd28bf9"
+    },
+    {
+      "id": "copy-sundial-3jwxad",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "I will go.",
+      "seconds": 0.936,
+      "peak": 24180,
+      "rms": 4826,
+      "sha256": "3d8151bc65b999d0ba005dd037ab1414317af8887165d61c44e6f9362264bd8f"
+    },
+    {
+      "id": "copy-sundial-7cmmt7",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "What if it's a door, not a crack?",
+      "seconds": 2.76,
+      "peak": 27289,
+      "rms": 3719,
+      "sha256": "0fecad43f53496d782bbac4f5b3f68aaffbc8c088c448510151d04cc3f2329e0"
+    },
+    {
+      "id": "copy-sundial-bxjmp8",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Loading a voice. The rock's. Testing. I always know the answer.",
+      "seconds": 6.792,
+      "peak": 24617,
+      "rms": 3164,
+      "sha256": "b861dedeead4bb64c8094583a50f4ddfdfaee9603e66ea2890fed625fcdd868b"
+    },
+    {
+      "id": "copy-sundial-l6183e",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Loading your shape. Hold still.",
+      "seconds": 2.616,
+      "peak": 16396,
+      "rms": 3425,
+      "sha256": "d26866ae2924dd02db4bfc971faafe98d3fc6c1cfabeef3732728e0744c8ec96"
+    },
+    {
+      "id": "copy-sundial-qr0p3u",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "Loading your walk. You walk like a question. Fixing that.",
+      "seconds": 4.56,
+      "peak": 29493,
+      "rms": 4174,
+      "sha256": "8758c17b1aca60f2880ce7f0ccf9951000e4000882c1f99de17fc0d70ed5080b"
+    },
+    {
+      "id": "copy-sundial-u4s59k",
+      "speaker": "copy-sundial",
+      "where": "ch4.core.win",
+      "expected": "Bye! I'll get home first. Nearly finished. Close enough.",
+      "seconds": 4.44,
+      "peak": 25351,
+      "rms": 3252,
+      "sha256": "3fa6260fb61e2898c76333be1d463b2b52a4e3dde1461272d51ee2c83c7439be"
+    },
+    {
+      "id": "copy-sundial-vu5vw6",
+      "speaker": "copy-sundial",
+      "where": "clock copy",
+      "expected": "I'll wait at the top. Take your time. I have all of yours.",
+      "seconds": 5.616,
+      "peak": 29110,
+      "rms": 3521,
+      "sha256": "fdb4a63b596c558628fe0dd015492910c1c93b72dad0d6b9e95f4307052edf12"
+    },
+    {
+      "id": "copy-sundial-wvo3h2",
+      "speaker": "copy-sundial",
+      "where": "ch4.push",
+      "expected": "Look. It's glowing at the end. Which end?",
+      "seconds": 3.744,
+      "peak": 26203,
+      "rms": 3916,
+      "sha256": "652163c619036bba0b5ce3f9ee4bceec805726827de473731efee5c3bb4ea30b"
+    },
+    {
+      "id": "eelish-10fp0xz",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "I told the truth. And now I'm sad. Which is normal, actually.",
+      "seconds": 7.32,
+      "peak": 16719,
+      "rms": 1906,
+      "sha256": "5ba3f402e63e7890c6ad728513cb0dab0cc5a8cf0a3bd08f67ab0a1ad3c10420"
+    },
+    {
+      "id": "eelish-13xvvti",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Your powers? Duh. Deleted.",
+      "seconds": 4.632,
+      "peak": 19562,
+      "rms": 2531,
+      "sha256": "5b9864dca45e5f9392d21227f596e752f89c89f936eee36e64d7b6f0f8225194"
+    },
+    {
+      "id": "eelish-183qvzm",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "Detention. Again. I'm going to write a very quiet song about this.",
+      "seconds": 6.816,
+      "peak": 18608,
+      "rms": 2105,
+      "sha256": "2d182f013cd2b412ed74c0a7c841b238990820dfaa85d07a790d685dbef40ee1"
+    },
+    {
+      "id": "eelish-1dkenc6",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "That's so sad.",
+      "seconds": 2.16,
+      "peak": 12932,
+      "rms": 1372,
+      "sha256": "6c5c286e1b4f12e1adfe097e730b34c9f4df71bb873c0778a9f3d6c003bc2e36"
+    },
+    {
+      "id": "eelish-1hjh11r",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "It wasn't Astrophysicat. Or Beansprout. He doesn't even talk.",
+      "seconds": 6.072,
+      "peak": 19876,
+      "rms": 2270,
+      "sha256": "ab71a48913fbf3d88043ee84d8890c3fb2e74d8abb8b9ce50a7489ffad178c41"
+    },
+    {
+      "id": "eelish-1ll3aez",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Quietly… losing.",
+      "seconds": 3.12,
+      "peak": 18493,
+      "rms": 2791,
+      "sha256": "0b632b41e413d0f9c01a5dc80bafc394a33b1a05d86e1fb54dbfa5de9e9774d0"
+    },
+    {
+      "id": "eelish-1pqbq4f",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "I always sound sad. It's just my voice. It proves nothing.",
+      "seconds": 6.336,
+      "peak": 17316,
+      "rms": 2842,
+      "sha256": "67189b947b5a44e2c9ba1c0ed3fb54345d19a4e930613725d1bb8cd98c0117a1"
+    },
+    {
+      "id": "eelish-1qa1dbe",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Shhh. Your tricks are gone now.",
+      "seconds": 3.888,
+      "peak": 15765,
+      "rms": 1719,
+      "sha256": "b6f05956d5052c32097fc0049ecd212b814f995ed621b759ff11c23cc0cb249e"
+    },
+    {
+      "id": "eelish-1qqckes",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "Quiet isn't honest. Quiet is quiet. I wrote a song about it.",
+      "seconds": 7.464,
+      "peak": 18345,
+      "rms": 2433,
+      "sha256": "56f17b6a565c8d04be17c3dd6d83c260d2044dfd19e13a6de2fd2897ff5cc530"
+    },
+    {
+      "id": "eelish-8z7gw",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Lean in. The flaw is in the whisper.",
+      "seconds": 3.936,
+      "peak": 23769,
+      "rms": 1773,
+      "sha256": "7ae8daeabc49255614b3d7cd56eb337c3d5fb4b15d309c8a9521833475edc73f"
+    },
+    {
+      "id": "eelish-cpiuxm",
+      "speaker": "eelish",
+      "where": "side silent-pupil",
+      "expected": "I didn't write the first one. But I've written fifty now.",
+      "seconds": 4.632,
+      "peak": 20054,
+      "rms": 2586,
+      "sha256": "aa8ff12ad6462f84d66ae6c878e64a193f8754a5156fb1b614e3f0bd61077fd5"
+    },
+    {
+      "id": "eelish-dz70re",
+      "speaker": "eelish",
+      "where": "side witness-tent",
+      "expected": "On the day of the final, she dealt us cards. All morning. Badly.",
+      "seconds": 7.152,
+      "peak": 22693,
+      "rms": 1916,
+      "sha256": "a87bfc60ae10c93f15526b198fc89a76a72659da631a0d80610c70292cc0b352"
+    },
+    {
+      "id": "eelish-ew2ate",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Whatever. I'm going home.",
+      "seconds": 2.952,
+      "peak": 19619,
+      "rms": 1733,
+      "sha256": "58326fa762347068a6ccecb7e137723e97357560f0b3c85b2681025888ebb41d"
+    },
+    {
+      "id": "eelish-ikqx50",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Lean in. You lost your abilities.",
+      "seconds": 4.368,
+      "peak": 12393,
+      "rms": 2221,
+      "sha256": "845f5f5481459e2043abb8b6d5c89b6348b04238de2618477f9ad4170ab29598"
+    },
+    {
+      "id": "eelish-kn57ab",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "Duh.",
+      "seconds": 0.984,
+      "peak": 29199,
+      "rms": 2743,
+      "sha256": "a21d1d5f38e67cc9f655429b554ee73033f817cf0c0f1d03adbc9fb7088e4eaf"
+    },
+    {
+      "id": "eelish-tan362",
+      "speaker": "eelish",
+      "where": "creature eelish",
+      "expected": "That premise is a bit sad.",
+      "seconds": 3.096,
+      "peak": 26187,
+      "rms": 2194,
+      "sha256": "957dc020596eab4002bc700dd831bd9f5fd71d5418df00b3ccd76f21204702e9"
+    },
+    {
+      "id": "eelish-tpo1fu",
+      "speaker": "eelish",
+      "where": "side witness-tent",
+      "expected": "She never left. I know. I lost my lunch money. And a song.",
+      "seconds": 6.96,
+      "peak": 17616,
+      "rms": 1981,
+      "sha256": "e435d490c2b89057a6b3a337aee6775144426225451650cda0a5bf0d20fa7b9c"
+    },
+    {
+      "id": "granny-154k1cz",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Draw first. Then read Axioms before you attack.",
+      "seconds": 5.976,
+      "peak": 26567,
+      "rms": 4045,
+      "sha256": "b8f5abff605bbf0736c5b4d0cc8fce0807f3a3ba7f6f50600f65e0c2e85314fb"
+    },
+    {
+      "id": "granny-19nvx8u",
+      "speaker": "granny",
+      "where": "tutorial switchboard",
+      "expected": "Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.",
+      "seconds": 13.872,
+      "peak": 31290,
+      "rms": 4593,
+      "sha256": "1fc71eb0761e2c38177b71e4c28f6c79d7c2e184d0ac8e06545318afd222fe7a"
+    },
+    {
+      "id": "granny-1cyx6xx",
+      "speaker": "granny",
+      "where": "tutorial switchboard",
+      "expected": "Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 20.736,
+      "peak": 30256,
+      "rms": 4560,
+      "sha256": "1f3badc0383cd65901d7a8b7b572a1e3653ac11d9d9e866c54aa22a0561e00a2"
+    },
+    {
+      "id": "granny-1exndtt",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "I have only 2 hearts left. But something changed. Read Axioms, then decide what to do.",
+      "seconds": 9.216,
+      "peak": 25824,
+      "rms": 4121,
+      "sha256": "5721c45cf647ba5ca9de3e272e2c95dfbcac323edc404594de3de8bfd273b090"
+    },
+    {
+      "id": "granny-p98p7l",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "This is the Fate track. After each round, your turn and then mine, it moves one step. It reached NOW, so a rule changed: creatures cost 1 less. Now draw.",
+      "seconds": 14.352,
+      "peak": 30639,
+      "rms": 4119,
+      "sha256": "0e235fe3922a6207d446002e4d64337a0a377f887872594232c7d99ab7bb6bdb"
+    },
+    {
+      "id": "lens-lizard-aicdd",
+      "speaker": "lens-lizard",
+      "where": "creature lens-lizard",
+      "expected": "Tomorrow needs a closer look.",
+      "seconds": 2.328,
+      "peak": 29363,
+      "rms": 4591,
+      "sha256": "b4dc7e8cee639551169ebc37f064ff0c625b1cbf1caa0d92d5453e6ebfeec6b4"
+    },
+    {
+      "id": "lens-lizard-lxbw90",
+      "speaker": "lens-lizard",
+      "where": "creature lens-lizard",
+      "expected": "Let me adjust my very serious glasses.",
+      "seconds": 3.792,
+      "peak": 25781,
+      "rms": 5201,
+      "sha256": "dfd8e6d01b513a6174a2fd47054876279e72ebdef2cc1f2c3983866638d07494"
+    },
+    {
+      "id": "narrator-d7e2r1",
+      "speaker": "narrator",
+      "where": "finale.home",
+      "expected": "Will this one grow up loud? I don't have enough evidence yet. Let's keep watching.",
+      "seconds": 8.304,
+      "peak": 27532,
+      "rms": 4147,
+      "sha256": "a480cdb70d5fc1d51ebf2120f258db81ff7f620e727d7ce7e24e0acffb38fafa"
+    },
+    {
+      "id": "paper-dragon-b74663",
+      "speaker": "paper-dragon",
+      "where": "creature paper-dragon",
+      "expected": "New fold. New me.",
+      "seconds": 2.4,
+      "peak": 28179,
+      "rms": 5194,
+      "sha256": "66119dfe9f472c5e6f18842304fe6e40630b5c9e9010b20d3d42ee3cc6587180"
+    },
+    {
+      "id": "paper-dragon-zb3v26",
+      "speaker": "paper-dragon",
+      "where": "creature paper-dragon",
+      "expected": "Fear my very sharp paper corners.",
+      "seconds": 2.976,
+      "peak": 22522,
+      "rms": 3012,
+      "sha256": "b6ce2a5f8b2e0c57fe810fa0ba6d1192421789b4e62f09a188eaa58b93f5fb34"
+    },
+    {
+      "id": "proof-pup-1nv4tfh",
+      "speaker": "proof-pup",
+      "where": "creature proof-pup",
+      "expected": "The proof needs a nap.",
+      "seconds": 1.536,
+      "peak": 24459,
+      "rms": 2237,
+      "sha256": "ff8d2714db63082dfa8acfa5fc4448d5ad74b7b52cb14a804a2606b9d241109d"
+    },
+    {
+      "id": "proof-pup-vsj0v7",
+      "speaker": "proof-pup",
+      "where": "creature proof-pup",
+      "expected": "I fetched the proof. Ignore the teeth marks.",
+      "seconds": 3.48,
+      "peak": 19950,
+      "rms": 2246,
+      "sha256": "e13b2a8db08d604aa553ce83ba5c37e840f6fad115fba4db92e62af625030fdf"
+    },
+    {
+      "id": "rawmsay-12jrwum",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Shut it down!",
+      "seconds": 1.344,
+      "peak": 29071,
+      "rms": 4525,
+      "sha256": "48e05b1c29e5a1a2744cdb006738d2a8d9ddced0a130e092c9a0efccf20c797d"
+    },
+    {
+      "id": "rawmsay-16qnxqo",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Who taught you to investigate? A SPOON?",
+      "seconds": 2.88,
+      "peak": 28002,
+      "rms": 3663,
+      "sha256": "14dbeb73487fce41d64aadc7a57c0007c7a9b2e8a89a564d3726979cf746c1f2"
+    },
+    {
+      "id": "rawmsay-19g242i",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Find the thief. Or this kitchen CLOSES. For everyone.",
+      "seconds": 5.592,
+      "peak": 23351,
+      "rms": 3299,
+      "sha256": "028c72499eed73a6511bdf51ff56e1d170f8f6902e48af312c5a6324abfc136a"
+    },
+    {
+      "id": "rawmsay-1anudb",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Are we done? I need my nap. Eleven to noon. Every day.",
+      "seconds": 5.016,
+      "peak": 26828,
+      "rms": 3245,
+      "sha256": "4374ab5dde6785074ed6e543f486b071e0bde59016e788a7e8e62b891d409017"
+    },
+    {
+      "id": "rawmsay-1b2fztd",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Come here, little one. Have tomorrow's pie.",
+      "seconds": 2.832,
+      "peak": 20150,
+      "rms": 2542,
+      "sha256": "310cc7e6e01a4ba2e116cd020ed51cfc0a6e76d22fe8b7773d7b5b7ba7f0e736"
+    },
+    {
+      "id": "rawmsay-1h9sdvx",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Nonsense. I wake up at noon with a full stomach. Like everyone.",
+      "seconds": 4.752,
+      "peak": 22225,
+      "rms": 2149,
+      "sha256": "1614c4ccaef8117b8d89cc9a5d75e848181564d1c2691489749a121b39d73cfd"
+    },
+    {
+      "id": "rawmsay-1jw0enf",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "OUT, cat! Down the Road! And don't come back for lunch!",
+      "seconds": 3.864,
+      "peak": 28931,
+      "rms": 3777,
+      "sha256": "991e0ef5088d37d6697a59d886a415ea2f6bcead47fcaaa6d58473b9199b8129"
+    },
+    {
+      "id": "rawmsay-1ncasdu",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "That fork is for TASTING. Chefs taste. Stop looking at my fork.",
+      "seconds": 4.68,
+      "peak": 27529,
+      "rms": 3129,
+      "sha256": "2a78fd8f0bc521adbd6fadcb3082586bccc8caff33b37c23bd0ec1308bbff1d8"
+    },
+    {
+      "id": "rawmsay-1obqvin",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Me? I'm a CHEF. I don't steal pies. I… make them. And then…",
+      "seconds": 5.256,
+      "peak": 27599,
+      "rms": 3656,
+      "sha256": "13c00ed46511f265145e1ff4784f1cfa32a9177f5be0ee07adc42940fa5002d7"
+    },
+    {
+      "id": "rawmsay-1odn7d",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "A cat. I blamed a CAT.",
+      "seconds": 3.384,
+      "peak": 25604,
+      "rms": 2958,
+      "sha256": "7dff4d70bb3967f0106a4e4c1fd215738a32815121c14216eb76dcea3955e380"
+    },
+    {
+      "id": "rawmsay-1shkm8o",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "It is RAW! Get it off my board!",
+      "seconds": 2.904,
+      "peak": 29453,
+      "rms": 5830,
+      "sha256": "6bea7aa9fba5230253becfb3841a0c1dfad73cda7c414a4d8041ec7c44f6bb4a"
+    },
+    {
+      "id": "rawmsay-1weiqk5",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Overcooked. Completely.",
+      "seconds": 2.256,
+      "peak": 25207,
+      "rms": 3048,
+      "sha256": "5f4b80cef2c8f90fa3a3551d13b2771ccc8a100423e9d82d30eacc3fb63a754b"
+    },
+    {
+      "id": "rawmsay-4nvhxt",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Noon! On the sill! I blinked, and it was GONE.",
+      "seconds": 4.536,
+      "peak": 22543,
+      "rms": 2710,
+      "sha256": "2aa76635c6ee0c21cdb4fb519e1b432046e72a347ade4f87bc693ffaa279673f"
+    },
+    {
+      "id": "rawmsay-71zm0",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Fine. The kitchen stays open. The pie stays GONE.",
+      "seconds": 4.488,
+      "peak": 28870,
+      "rms": 4206,
+      "sha256": "4faf5cc33403b1ac222948cb463cd7a7000a49d3835ad71cda0de3302c0cfa25"
+    },
+    {
+      "id": "rawmsay-7h17e9",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "…I have been eating my own pies. In my sleep. Delicious.",
+      "seconds": 3.984,
+      "peak": 17511,
+      "rms": 1874,
+      "sha256": "a0ff5d2c2c1a767e1af22d121b2caf59f1bdb2fce23e280051b4d3b6a98ed1e1"
+    },
+    {
+      "id": "rawmsay-94x9g9",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Well? Name the thief. And it had better not be the cat. It's the cat.",
+      "seconds": 7.368,
+      "peak": 26458,
+      "rms": 3030,
+      "sha256": "c70fe6936c1482d9f6d04f11d616af9784c41b4f16a999b0de16980b89430167"
+    },
+    {
+      "id": "rawmsay-dm9bwf",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Flour. Chefs wear flour.…And pastry. And a fork. Stop looking.",
+      "seconds": 7.344,
+      "peak": 27576,
+      "rms": 2673,
+      "sha256": "126b55af85bd0b8048bb03de65a23175fce255854496db482f4d244188ee6804"
+    },
+    {
+      "id": "rawmsay-etzyn9",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Weak argument? Out of my kitchen!",
+      "seconds": 3.528,
+      "peak": 32239,
+      "rms": 4020,
+      "sha256": "59ef29319e67c4a1e869406bd2d5c6cecc87e82ab0ded3666863f949cb8a29b3"
+    },
+    {
+      "id": "rawmsay-hxx9ui",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Exactly! Crumbs prove NOTHING.…Hm.",
+      "seconds": 2.976,
+      "peak": 29029,
+      "rms": 4122,
+      "sha256": "d4eb9f6d0ffeba052191c43dccba426284551f40734f79fcad7a8b734dce6afa"
+    },
+    {
+      "id": "rawmsay-in3mi2",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "I'm writing the CLOSED sign. In capitals. Every letter.",
+      "seconds": 4.224,
+      "peak": 26447,
+      "rms": 2644,
+      "sha256": "e7e13bd8d5df7faa57cc662b555d6ce133fa991ec38cafc47337cd278a0554db"
+    },
+    {
+      "id": "rawmsay-l3l0xf",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Every time! See?…Wait. I walk by every time, too.",
+      "seconds": 4.2,
+      "peak": 21020,
+      "rms": 2851,
+      "sha256": "b6946647d19b90a6840734e2c467bebf6bbd00845fbc199db46fbc4ca58c1227"
+    },
+    {
+      "id": "rawmsay-mivl87",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "WHERE IS MY PIE? It was PERFECT. It was barely RAW.",
+      "seconds": 5.328,
+      "peak": 24507,
+      "rms": 3674,
+      "sha256": "ec035ae458064e7b6620c8cb1c6ad1a66a6011a9ec4ae9e89ac2f8faf522403c"
+    },
+    {
+      "id": "rawmsay-pgssle",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "Right. Who undercooked this premise?",
+      "seconds": 2.448,
+      "peak": 30762,
+      "rms": 4841,
+      "sha256": "b89207a77095964ff6b1c39f40be98686dc0809d4e5839b9f37f1121e5fce2d4"
+    },
+    {
+      "id": "rawmsay-pr8g0t",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "The cat is innocent. I am still FURIOUS. Kitchen CLOSED!",
+      "seconds": 4.872,
+      "peak": 27100,
+      "rms": 4192,
+      "sha256": "646a0af0478df696ab0aa6aec61bed82bd760d537a60cf1534401ad4cf7cb310"
+    },
+    {
+      "id": "rawmsay-si3ebm",
+      "speaker": "rawmsay",
+      "where": "creature rawmsay",
+      "expected": "You cooked me. Respect.",
+      "seconds": 2.832,
+      "peak": 26698,
+      "rms": 3841,
+      "sha256": "f5f67d29042d8b3a5a6032b026ac9560be161ff8dd5a150d0364ed030bc1ad0b"
+    },
+    {
+      "id": "rawmsay-u5lo6q",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "I am THIS close to closing this kitchen. THIS close.",
+      "seconds": 4.464,
+      "peak": 24172,
+      "rms": 3498,
+      "sha256": "8efdc0dd9eed921aad9ad9214046d6fd40475dc2b8c3a789057863ffb050bc3d"
+    },
+    {
+      "id": "rawmsay-y8hhl",
+      "speaker": "rawmsay",
+      "where": "side midday-pie",
+      "expected": "Luck? Every day at noon? That's not luck. That's a SCHEDULE.",
+      "seconds": 3.912,
+      "peak": 27024,
+      "rms": 4822,
+      "sha256": "b6baa330b166e1c5e257ea23845e5e56f6cba5835335ba4a06c59114c3c9375f"
+    },
+    {
+      "id": "sequins-19nio65",
+      "speaker": "sequins",
+      "where": "finale.home",
+      "expected": "You left it running? Up there? Then I hope someone claps.",
+      "seconds": 4.944,
+      "peak": 29879,
+      "rms": 4607,
+      "sha256": "e5bec9bb811262f38923fd19e810fa9469dcf977872eb81d5dd3c0a07514db5d"
+    },
+    {
+      "id": "sequins-1bu3594",
+      "speaker": "sequins",
+      "where": "finale.home",
+      "expected": "I'd have sold it one day. Old magpies sell things. Not this one. I've labelled it.",
+      "seconds": 6.84,
+      "peak": 25128,
+      "rms": 3620,
+      "sha256": "4c0f4cd99671d345a97bd24d6aec0cd3f6d4f6b0559c70ee8b0c324409b577c3"
+    },
+    {
+      "id": "sequins-1yhehg3",
+      "speaker": "sequins",
+      "where": "finale.bark.tic",
+      "expected": "Like and subsc— oh. It's gone.",
+      "seconds": 2.856,
+      "peak": 26347,
+      "rms": 3967,
+      "sha256": "78f26b85573dafcb3ff4847ed74a3c7ed97c8d777826ab3ed937537985d13a2b"
+    },
+    {
+      "id": "siuuugull-1cnf5as",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "Coin in. Wish. Goal. SIUUU. It is science.",
+      "seconds": 3.936,
+      "peak": 28369,
+      "rms": 5068,
+      "sha256": "ff925996855822c4cdfd8dd6301ebe6eb27cc052e2a711bc4651b335cfe47b99"
+    },
+    {
+      "id": "siuuugull-1j02pqx",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "I wished. I scored. SIUUU! The well is magic!",
+      "seconds": 5.952,
+      "peak": 27691,
+      "rms": 5062,
+      "sha256": "e2b63f4bee4e28e59945982cbca12e85066a3a09ee28db4a640acb4ec582fe18"
+    },
+    {
+      "id": "siuuugull-1jexc1c",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "My list! Every time I wished and scored. All me.",
+      "seconds": 4.464,
+      "peak": 25759,
+      "rms": 4044,
+      "sha256": "78b305266a918a581019f774bbe608ab8004766d2675eb2b61dd83d99db7ddcf"
+    },
+    {
+      "id": "siuuugull-1nafsvl",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "I know it doesn't work.",
+      "seconds": 2.088,
+      "peak": 26709,
+      "rms": 4399,
+      "sha256": "67f811e6ba406ce782c1e2d317bd80e09e00c157be2661dfc31964fd23f4505e"
+    },
+    {
+      "id": "siuuugull-1o1amyg",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "Same jump. Different ending. Rude.",
+      "seconds": 3.888,
+      "peak": 25099,
+      "rms": 5074,
+      "sha256": "60f10dd754a4d4d977b7067a9e2c1653c3e933350ee1ffc6db4b92795de6fdbf"
+    },
+    {
+      "id": "siuuugull-1xzu2iq",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "Impossible! I did the jump!",
+      "seconds": 3.048,
+      "peak": 23709,
+      "rms": 4646,
+      "sha256": "e2c1c9b885b945b0d03b31999102a78a38ba6eddc9ed486599252602bc4868a7"
+    },
+    {
+      "id": "siuuugull-5fbkc",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "The pattern… broke?",
+      "seconds": 1.92,
+      "peak": 25855,
+      "rms": 4647,
+      "sha256": "e1f524c8852ed60c5e26bf6482f061f0f0d30f8be9451b87345d6a2d41573e13"
+    },
+    {
+      "id": "siuuugull-62ivn2",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "Questions? I answer only in goals.",
+      "seconds": 3.192,
+      "peak": 28362,
+      "rms": 4692,
+      "sha256": "1f378eadd24caae56a4be5447d5b3394a4e64bb7c19a1ed33fd45c38e5c788be"
+    },
+    {
+      "id": "siuuugull-8p4p60",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "Clearly? Same goals either way. Even I see that. And I mostly see myself.",
+      "seconds": 7.104,
+      "peak": 26162,
+      "rms": 5132,
+      "sha256": "4faf566fac3b42a6b6ac319e678f7f32f04d50805c964c55f55bbae2936119cd"
+    },
+    {
+      "id": "siuuugull-9oxia6",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "I just like the moment before the kick. It's quiet.",
+      "seconds": 4.968,
+      "peak": 21039,
+      "rms": 2608,
+      "sha256": "d1b2d30e6b69c50ff2415256c801ada59fd0d3ea9c6a98d903a20fc27b1f1bc5"
+    },
+    {
+      "id": "siuuugull-bsfy2o",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "The best is here. Again. Always.",
+      "seconds": 4.128,
+      "peak": 27923,
+      "rms": 4397,
+      "sha256": "430b57410ceba2478413acba5bf382820b7eb4a921b4d0efa6de04047e438c69"
+    },
+    {
+      "id": "siuuugull-gi23s9",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "I never asked anyone to wish. They just copied me.",
+      "seconds": 3.528,
+      "peak": 26432,
+      "rms": 4168,
+      "sha256": "1497dc0433c385953cbd0d173f2955d60dae6ccf8f5768e7a2b22d547ec0bdd6"
+    },
+    {
+      "id": "siuuugull-l9ci12",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "The same. Yes. I told you. Quietly.",
+      "seconds": 4.56,
+      "peak": 31054,
+      "rms": 4731,
+      "sha256": "6c8fcf46621ab4cb54ebddd2d1a20f4c03f81fb2be5d25fca2834b32c2dd4599"
+    },
+    {
+      "id": "siuuugull-owugo1",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "Forgot to wish? A few times. I scored in those too.…Hm.",
+      "seconds": 5.952,
+      "peak": 25732,
+      "rms": 3272,
+      "sha256": "056819583f44568f94514484c80d87efa51ec509a79a35215b70b494af3eb757"
+    },
+    {
+      "id": "siuuugull-q9flqz",
+      "speaker": "siuuugull",
+      "where": "side lucky-well",
+      "expected": "All goals! Beautiful!…Oh. That's the problem, isn't it.",
+      "seconds": 5.808,
+      "peak": 28402,
+      "rms": 4245,
+      "sha256": "55eb26d2d1c64186881c20be9c6d6ab79f89e9ac66a566f9430b1ff34b42738c"
+    },
+    {
+      "id": "siuuugull-zcwn7m",
+      "speaker": "siuuugull",
+      "where": "creature siuuugull",
+      "expected": "Same jump. Same result. Watch.",
+      "seconds": 3,
+      "peak": 29098,
+      "rms": 4361,
+      "sha256": "d895aabeb7aab69dc60cef08414aca6943138c9ae00f0b4931b0a985ca8f9a05"
+    },
+    {
+      "id": "siuuugull-zmvqj3",
+      "speaker": "siuuugull",
+      "where": "side fortune-machine",
+      "expected": "It says I will miss. Ninety per cent. I have never missed.…I will sit down.",
+      "seconds": 6.312,
+      "peak": 30572,
+      "rms": 4738,
+      "sha256": "30a897cba2ace81166902ca1da885a560924ca4b0f531ddecbe1086fe014a45b"
+    },
+    {
+      "id": "tremendoodle-10qu5ja",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "Rigged! Totally rigged!",
+      "seconds": 2.04,
+      "peak": 26544,
+      "rms": 3699,
+      "sha256": "93ba32d563b3699de232867a3588b97ec9f38b48d2513d70657fa7cc960461f1"
+    },
+    {
+      "id": "tremendoodle-125z71f",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Mine is TREMENDOUS!…Wait. Now we're both counting.",
+      "seconds": 4.992,
+      "peak": 27843,
+      "rms": 4857,
+      "sha256": "9ef57e1e01b55cdcd7a7618aa1f331e038c9a0a63f4c4e0256a4ababce954e0b"
+    },
+    {
+      "id": "tremendoodle-144cadd",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "I won. Many people are saying I won.",
+      "seconds": 3.504,
+      "peak": 30247,
+      "rms": 4842,
+      "sha256": "243dc964ef9eeaf0f8224c2ddae104d052dda8240d307e6c3cad4b4e4a97699c"
+    },
+    {
+      "id": "tremendoodle-15xsgl5",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "LOUDER! Angrier! Anger is free! Tremendous value!",
+      "seconds": 5.232,
+      "peak": 31401,
+      "rms": 5227,
+      "sha256": "7416f2d6b72f49ae58fba15b26b8e3542040591b6036594d527118270fc0c5fb"
+    },
+    {
+      "id": "tremendoodle-16eb21j",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Some are angry at me. Doesn't matter. Angry is angry. Tremendous.",
+      "seconds": 5.4,
+      "peak": 29480,
+      "rms": 5135,
+      "sha256": "e4b75789b8d8b03e238767d03a5e73dcdae04c9a6767a44708df8db92f899982"
+    },
+    {
+      "id": "tremendoodle-17sdtfj",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "I have the best nicknames. Everyone says so.",
+      "seconds": 3.792,
+      "peak": 23174,
+      "rms": 3348,
+      "sha256": "63276befd28ec11e485a65ffbc69ae783e1a4bdc536f4693022a1ad9e828adc5"
+    },
+    {
+      "id": "tremendoodle-19xgj5h",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "Little Syllogism. That's your name now. Sad!",
+      "seconds": 4.632,
+      "peak": 22978,
+      "rms": 2984,
+      "sha256": "944b0995898c62419aa3cb196e73d33f9baa5e88e3977e01b258a8e8fc833ca8"
+    },
+    {
+      "id": "tremendoodle-1e4jsq0",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "…It's a front page. Front pages are tremendous.",
+      "seconds": 3.792,
+      "peak": 32767,
+      "rms": 4944,
+      "sha256": "d9aafaed284aa766fe4f8cfc3899eb1335b8d4dc14bb30b32d30989788d83894"
+    },
+    {
+      "id": "tremendoodle-1jzcst3",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Wrong! I said thousands! Count them!",
+      "seconds": 4.104,
+      "peak": 30976,
+      "rms": 5740,
+      "sha256": "6e56dd82a7ae8f556ed3a6d8f7e79a905598cad37cb1f6ddc2095e7bb97ddce5"
+    },
+    {
+      "id": "tremendoodle-1u0f5w2",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "A DISASTER, they say I said! Fake! Sleepy Puffin printed it! I want an apology. FRONT page!",
+      "seconds": 8.4,
+      "peak": 32767,
+      "rms": 3553,
+      "sha256": "35d35b758cd12ae12b744609dc67df778e24131f3066c32aafaa652261f273d9"
+    },
+    {
+      "id": "tremendoodle-1vrcesb",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "You there. Your new name is Low Energy.",
+      "seconds": 2.592,
+      "peak": 31378,
+      "rms": 6559,
+      "sha256": "854ddd25aefdad76f88bb8cc8ed87055957831531ae27dfd8a62968e85d89c42"
+    },
+    {
+      "id": "tremendoodle-1yrvc13",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Tremendous ratings. Terrible. But tremendous.",
+      "seconds": 3.288,
+      "peak": 30851,
+      "rms": 5022,
+      "sha256": "3873ffb482fc2ce85c2bad6f6022e331ba912d17188f7b12feddb6c6de277b05"
+    },
+    {
+      "id": "tremendoodle-33691r",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Fake! Very unfair to poodles! Millions of poodles agree!",
+      "seconds": 4.872,
+      "peak": 28170,
+      "rms": 5375,
+      "sha256": "3e3f181940b59412a9d62f04b461ad4cd79a415c3e1bd8b2a69be55d3c1f9822"
+    },
+    {
+      "id": "tremendoodle-5g1j82",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "\"Long\"? They said my speech was \"long\"?…That's fair, actually.",
+      "seconds": 4.968,
+      "peak": 32297,
+      "rms": 3377,
+      "sha256": "07c984f51617c702809407d87222836a2d72c0a63e9c40f2c8e83158d16e04fc"
+    },
+    {
+      "id": "tremendoodle-95sip9",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Never! I love speeches! Mine, mostly.",
+      "seconds": 3.72,
+      "peak": 30393,
+      "rms": 4531,
+      "sha256": "07084d1622f8a9a2d7d4eca13e0ff38bea19a6a5bec98e86e5151823c2c1d60c"
+    },
+    {
+      "id": "tremendoodle-ankinw",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "You! Referee! I'm calling you \"Tremendous Referee\". My best nickname. Don't tell the others.",
+      "seconds": 6.816,
+      "peak": 30488,
+      "rms": 5520,
+      "sha256": "19ad993189833dd34dd78bfc5346a8f6b4221de37236ed6e116187bffe076cac"
+    },
+    {
+      "id": "tremendoodle-g5xj2w",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Film my good side! Both sides! All my sides are good!",
+      "seconds": 5.016,
+      "peak": 28713,
+      "rms": 4425,
+      "sha256": "8bd0795d19704cf7ea2d6ce3ee4918a59c0afd6159b075958e17cf36279deb83"
+    },
+    {
+      "id": "tremendoodle-jgxogs",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Look at this crowd! Thousands! All angry at the paper! So the paper must be a disaster!",
+      "seconds": 7.296,
+      "peak": 28194,
+      "rms": 4923,
+      "sha256": "9d485b17903c026cc429b43aafa3ef5919347b1ea313895939039a8a635c2f69"
+    },
+    {
+      "id": "tremendoodle-kc4c4",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Okay, a little paper. For autographs. And headl— autographs.",
+      "seconds": 4.56,
+      "peak": 29903,
+      "rms": 3439,
+      "sha256": "60ead28b66ce356eb3da36d5e417eef079212d5766e88181c8f246fdfbac60bc"
+    },
+    {
+      "id": "tremendoodle-oz2rit",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Not mine. Never seen it. Beautiful handwriting, though. The best.",
+      "seconds": 4.8,
+      "peak": 29405,
+      "rms": 3771,
+      "sha256": "44521a788f2980bf287b2517c534975935c9d8781953516be6907f2815c58a37"
+    },
+    {
+      "id": "tremendoodle-pit7m5",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "That proves NOTHING. Very sad card.",
+      "seconds": 3.048,
+      "peak": 27451,
+      "rms": 4496,
+      "sha256": "cadea8e5620c4402ae77cd02523783732789868a8cd0424bad9d2267a9160588"
+    },
+    {
+      "id": "tremendoodle-rfjyfq",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "I never wrote it! I don't even HAVE paper! Golden or otherwise!",
+      "seconds": 4.416,
+      "peak": 28455,
+      "rms": 6271,
+      "sha256": "0ef113e3bc50b779d9c332d263034e5ae15314337fb00ba2883d089b8ebc9f68"
+    },
+    {
+      "id": "tremendoodle-s0bgj2",
+      "speaker": "tremendoodle",
+      "where": "creature tremendoodle",
+      "expected": "Nobody has ever lost like me. Tremendous loss.",
+      "seconds": 4.104,
+      "peak": 26928,
+      "rms": 3576,
+      "sha256": "e5bf72bc8f29b540a384c5740ded96b83de46c3e02b3151478d70b6f254a4262"
+    },
+    {
+      "id": "tremendoodle-v5x0dh",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "POODLE IN HEADLINE ROW! That's me! I'm the row!",
+      "seconds": 3.792,
+      "peak": 30543,
+      "rms": 5902,
+      "sha256": "663263de08f057c00d3cc7e68487d563f30b67e8da05c0738a79c765f7ad09cb"
+    },
+    {
+      "id": "tremendoodle-ytu3l8",
+      "speaker": "tremendoodle",
+      "where": "side headline-debate",
+      "expected": "Everyone LOVES the quiff! The quiff has fans!",
+      "seconds": 4.056,
+      "peak": 30060,
+      "rms": 5394,
+      "sha256": "d8e76762197535d6c73a3e2e659cbc048fcbf7a64ea3c04b40975c74becaeffd"
+    }
+  ]
+}

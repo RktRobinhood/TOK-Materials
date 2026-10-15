@@ -1,0 +1,77 @@
+### rawmsay
+27 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.51.36 lite  rawmsay: saved 27 lines (total 27)
+FINISHED: 27 lines saved, 1 requests used. Manifest lists 2347 files.
+### altmanta
+27 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.52.11 lite  altmanta: saved 27 lines (total 27)
+FINISHED: 27 lines saved, 1 requests used. Manifest lists 2374 files.
+### chimpossible
+18 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.52.33 lite  chimpossible: saved 18 lines (total 18)
+FINISHED: 18 lines saved, 1 requests used. Manifest lists 2392 files.
+### siuuugull
+17 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+split failed for siuuugull x17; kept in tools/voice-raw, retrying as 9 + 8.
+09.53.21 lite  siuuugull: saved 9 lines (total 9)
+09.53.56 lite  siuuugull: saved 8 lines (total 17)
+FINISHED: 17 lines saved, 3 requests used. Manifest lists 2409 files.
+### eelish
+17 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.54.21 lite  eelish: saved 17 lines (total 17)
+FINISHED: 17 lines saved, 1 requests used. Manifest lists 2426 files.
+### beastie
+50 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+09.54.55 lite  beastie: saved 28 lines (total 28)
+FAILED beastie x22: HTTP 503: {"error":{"message":"gemini-3.8-flash-lite-tts is currently experiencing high demand, spikes in demand are usually temporary. Please try again later."
+09.56.45 lite  beastie: saved 22 lines (total 50)
+FINISHED: 50 lines saved, 3 requests used. Manifest lists 2476 files.
+### attenbirdough
+40 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+LOCAL DAILY BUDGET reached on gemini-3.8-flash-lite-tts: 10 attempts today. Resume after the Pacific reset.
+FINISHED: 0 lines saved, 0 requests used. Manifest lists 2476 files.
+### pip
+35 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+LOCAL DAILY BUDGET reached on gemini-3.8-flash-lite-tts: 10 attempts today. Resume after the Pacific reset.
+FINISHED: 0 lines saved, 0 requests used. Manifest lists 2476 files.
+### tremendoodle
+25 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.57.33 flash tremendoodle: saved 25 lines (total 25)
+FINISHED: 25 lines saved, 1 requests used. Manifest lists 2501 files.
+### copy-sundial
+22 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.58.03 flash copy-sundial: saved 22 lines (total 22)
+FINISHED: 22 lines saved, 1 requests used. Manifest lists 2523 files.
+### colossus
+22 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.59.31 flash colossus: saved 22 lines (total 22)
+FINISHED: 22 lines saved, 1 requests used. Manifest lists 2545 files.
+### granny
+5 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.00.00 flash granny: saved 5 lines (total 5)
+FINISHED: 5 lines saved, 1 requests used. Manifest lists 2550 files.
+### narrator
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.00.08 flash narrator: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2551 files.
+### sequins
+3 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.00.19 flash sequins: saved 3 lines (total 3)
+FINISHED: 3 lines saved, 1 requests used. Manifest lists 2554 files.
+### proof-pup
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.00.26 flash proof-pup: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2556 files.
+### lens-lizard
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.00.33 flash lens-lizard: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2558 files.
+### paper-dragon
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+429 on gemini-3.8-flash-tts, waiting 26s
+10.01.08 flash paper-dragon: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 2 requests used. Manifest lists 2560 files.
+### cloud-calf
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+LOCAL DAILY BUDGET reached on gemini-3.8-flash-tts: 10 attempts today. Resume after the Pacific reset.
+FINISHED: 0 lines saved, 0 requests used. Manifest lists 2560 files.
