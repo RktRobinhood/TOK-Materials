@@ -9,6 +9,9 @@ Characters, scenes and UI art were generated with ChatGPT from prompts written f
 The seven common starter helper portraits (#137, 12 October 2026) were generated using the built-in image generation tool from original project prompts and Rift style references. Selected original PNGs, exact prompts, reference identities and validation are retained in design/source-assets/4-caricatures/card-starters-2026-10-12/. They were visually checked against the approved style board and built into WebP through the existing asset pipeline. No commercial character art was imported. See design/ART-BIBLE.md for continuing cute-horror/public-persona direction.
 
 ## Sound
+
+The opening also layers real server fans/disks by Joseph Sardin (BigSoundBank) with the horror score *Lost in a bad place* by congusbongus (OpenGameArt), both CC0. [Sources, licences and processing](music/CREDITS.md#the-algorithms-opening-soundscape-cc0).
+
 From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-bit PCM WAVs for browser playback. Existing source sounds were shared with the psychology games in `psychology materials`. All effects peak at -13 dB; the four playback buses leave mix headroom. `tools/prepare-sfx.mjs` reproduces conversion and levelling with FFmpeg.
 
 | File | Source pack | Original |

@@ -22,6 +22,7 @@
     const buffers = {};      // full URL → Promise<AudioBuffer>
     const native = new Set();
     let base = null;         // { name, bus, level, gain, src }
+    let bed = null, pendingBed = null;
     const layers = {};
     let wantScene = null, wantTension = 0, wantArt = null;   // wantArt: the art id last asked for (a cutscene restores it)
 
@@ -142,6 +143,29 @@
         return request.promise;
     }
 
+    // An optional physical room recording under the score, on its own volume bus.
+    async function applyBed() {
+        if (held || !context() || ctx.state !== 'running') return;
+        const name = ((Rift.data.ambience || {}).beds || {})[wantArt] || null;
+        if (bed && bed.name === name) return;
+        if (!name) { stop(bed, FADE); bed = null; pendingBed = null; return; }
+        if (pendingBed && pendingBed.name === name && pendingBed.version === sceneVersion) return pendingBed.promise;
+        const track = trackOf(name);
+        if (!track || !track.file) { stop(bed, FADE); bed = null; return; }
+        const request = pendingBed = {name, version: sceneVersion};
+        request.promise = (async () => {
+            const buffer = localFiles ? null : await load(track.file);
+            if ((!localFiles && !buffer) || held || ctx.state !== 'running' || pendingBed !== request || request.version !== sceneVersion) return;
+            const old = bed;
+            bed = Object.assign({}, track, start(buffer, track));
+            ramp(bed.gain, track.level, FADE);
+            stop(old, FADE);
+        })().finally(() => { if (pendingBed === request) pendingBed = null; });
+        return request.promise;
+    }
+
+    function applyBackground() { return Promise.all([applyScene(), applyBed()]).then(applyTension); }
+
     function tensionLevel(name) {
         const track = trackOf(wantScene);
         const t = track && track.bus === 'music' ? 0 : wantTension;
@@ -169,11 +193,11 @@
     function scene(artId) {
         const map = Rift.data.ambience || { scenes: {} };
         const name = artId === null ? null : ((map.scenes || {})[artId] || map.fallback || null);
-        if (name !== wantScene) sceneVersion++;
+        if (name !== wantScene || artId !== wantArt) sceneVersion++;
         wantArt = artId;
         wantScene = name;
         wantTension = 0;
-        applyScene().then(applyTension);
+        applyBackground();
     }
 
     function tension(x) {
@@ -195,7 +219,7 @@
         const ready = () => {
             if (held || hidden() || !audible()) { ctx.suspend(); pauseNative(); return; }
             resumeNative();
-            applyScene().then(applyTension);
+            applyBackground();
         };
         if (ctx.state === 'suspended') ctx.resume().then(ready);
         else if (ctx.state === 'running') ready();
@@ -223,7 +247,7 @@
         });
     }
 
-    const now = () => ({ scene: base && base.name, art: wantArt, playing: !!(base && base.src), tension: wantTension, state: ctx ? ctx.state : 'none' });
+    const now = () => ({ scene: base && base.name, bed: bed && bed.name, art: wantArt, playing: !!(base && base.src), tension: wantTension, state: ctx ? ctx.state : 'none' });
 
     // Give the optional trailer exclusive sound without changing saved settings.
     function hold() { held = true; if (ctx) ctx.suspend(); pauseNative(); }

@@ -429,6 +429,8 @@
         "production-language-definition-dolphin-145.png": { "type": "single", "id": "creature/language-definition-dolphin/idle", "class": "sprite" },
         "cold-open.png": {"type":"scene","id":"scene/cold-open"},
         "bedroom.png": {"type":"scene","id":"scene/bedroom"},
+        "server-observatory-65.png": {"type":"scene","id":"cutscene/server-observatory"},
+        "algorithm-watching-65.png": {"type":"single","id":"cutscene/algorithm-watching","class":"sprite"},
         "cold-open-front.png": {"type":"single","id":"cutscene/cold-open-front","class":"scene","trim":false},
         "cold-open-hills.png": {"type":"single","id":"cutscene/cold-open-hills","class":"scene","trim":false},
         "cold-open-sky.png": {"type":"single","id":"cutscene/cold-open-sky","class":"scene","trim":false},

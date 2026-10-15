@@ -1,0 +1,9 @@
+{
+  "before": 952,
+  "after": 954,
+  "added": [
+    "cutscene/algorithm-watching",
+    "cutscene/server-observatory"
+  ],
+  "changed": []
+}

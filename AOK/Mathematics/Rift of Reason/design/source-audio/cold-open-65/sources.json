@@ -1,0 +1,52 @@
+{
+  "issue": 65,
+  "date": "2026-10-15",
+  "method": "CC0 source recordings; local FFmpeg processing",
+  "paidGenerationRequests": 0,
+  "licence": "CC0-1.0",
+  "licenceURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "cues": [
+    {
+      "id": "server-room",
+      "source": "nas-starting-joseph-sardin.mp3",
+      "file": "assets/music/server-room.mp3",
+      "title": "NAS, starting",
+      "author": "Joseph Sardin",
+      "page": "https://bigsoundbank.com/nas-starting-s1622.html",
+      "download": "https://bigsoundbank.com/UPLOAD/mp3/1622.mp3",
+      "filter": "atrim=start=5:end=37,asetpts=PTS-STARTPTS,highpass=f=55,lowpass=f=6500",
+      "lufs": -25,
+      "seam": 1.2,
+      "licence": "CC0-1.0",
+      "sourceSHA256": "d2c3fa15c48d9af8382627ecfe0f74a6bb89f4fd4089dfdb07fcb8d227fe957f",
+      "fileSHA256": "3e981df8270ff5320f6119cce17786af8b10ccd00f96eab57cbfbe92b05443df",
+      "duration": 30.8,
+      "peak": 0.3783509135246277,
+      "rms": 0.03733396164689169,
+      "loudnessLUFS": -25.4,
+      "truePeakDB": -8.44,
+      "seamJump": 0.001023697666823864
+    },
+    {
+      "id": "algorithm-theme",
+      "source": "lost-congusbongus.ogg",
+      "file": "assets/music/algorithm-theme.mp3",
+      "title": "Lost in a bad place (horror ambience loop)",
+      "author": "congusbongus",
+      "page": "https://opengameart.org/content/lost-in-a-bad-place-horror-ambience-loop",
+      "download": "https://opengameart.org/sites/default/files/lost_2.ogg",
+      "filter": "anull",
+      "lufs": -26,
+      "seam": 0,
+      "licence": "CC0-1.0",
+      "sourceSHA256": "ad9a9f39240ef5862d3a6dc5220893926c6873aa0e08a641dadf3f1c0acc2cd4",
+      "fileSHA256": "c5a8eccb300cc7ed05d595f4f2b0c69bda138209cf9eb8ab15a1a48ac00d5862",
+      "duration": 134.7216553287982,
+      "peak": 0.3754379153251648,
+      "rms": 0.06317613735406263,
+      "loudnessLUFS": -26.44,
+      "truePeakDB": -8.51,
+      "seamJump": 0.0016841702163219452
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+✔ menu theme plays quietly through Music while environmental ambience is muted, without clipping its loop (9.8552ms)
+✔ moving into the fair crossfades music away and restores the independent ambience level (3.2046ms)
+✔ server fans and villain score use separate sliders, and entering the feed keeps the score continuous (3.2799ms)
+✔ a server recording that finishes loading after returning to the map cannot start (2.8318ms)
+✔ file previews pause both server layers for hiding and preserve independent volume controls (2.4501ms)
+✔ a delayed menu download cannot take over after leaving the title (3.0247ms)
+✔ the trailer owns audio until release, including a menu loop that finishes loading during the film (2.6036ms)
+✔ local file previews play the same quiet loop and pause for trailer, tab hiding and music mute (2.1262ms)
+✔ mounting the title no longer schedules a thunder strike on first interaction (25.0854ms)
+[Rift] cutscene Error: test
+    at Object.play (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:87:113)
+    at cutsceneStep (js/ui/dialogue.js:291:46)
+    at run (js/ui/dialogue.js:357:43)
+    at Object.play (js/ui/dialogue.js:409:19)
+    at TestContext.<anonymous> (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:88:31)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)
+[Rift] cutscene frame Error: test renderer failure
+    at g.Rift.clamp (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:102:29)
+    at project (js/ui/cutscene.js:156:30)
+    at js/ui/cutscene.js:325:28
+    at Array.forEach (<anonymous>)
+    at js/ui/cutscene.js:324:25
+    at Array.forEach (<anonymous>)
+    at Player.render (js/ui/cutscene.js:322:20)
+    at frame (js/ui/cutscene.js:295:22)
+    at file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:136:75
+    at Array.forEach (<anonymous>)
+[Rift] cutscene cold-open is missing art: scene/bedroom
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene Error: Unknown cutscene step: {"unrecognised":true}
+    at Player.exec (js/ui/cutscene.js:497:15)
+    at Player.run (js/ui/cutscene.js:463:34)
+    at js/ui/cutscene.js:709:25
+✔ completed greeting lines are not repeated; Skip and failure supply only unheard lines (130.7034ms)
+✔ a line interrupted before its voice/reading beat finishes is not reported as spoken (6.3928ms)
+✔ new and older seen openings greet once on the regular screen, after the film closes (17.9258ms)
+✔ the real router starts the opening once, Skip continues to wake, navigation does not (34.6607ms)
+✔ dialogue falls back when film is absent, art fails, or the player rejects (10.8938ms)
+✔ system reduced motion selects the gentler cut without changing saved settings (10.0805ms)
+✔ a render failure after playback starts releases the overlay and returns fallback (4.8191ms)
+✔ each chosen nickname reaches the scan and subtitles while the recorded voice key stays reusable (30.0581ms)
+✔ the observation glass opens continuously, then the film fades to reveal the regular screen (5.5876ms)
+✔ all ten avatars complete the real timeline, speak the exact recorded keys and never change the save (92.7058ms)
+✔ Calm removes every flash/sweep/glitch and preserves the quiet opening hold (11.7642ms)
+✔ a say step waits for the voice as well as the subtitle reading time (5.1148ms)
+✔ Skip button, Escape and hold finish once and cancel timers, frames, input and voice (10.953ms)
+✔ missing and broken art return false; preload is also immediately skippable (23.1027ms)
+✔ initial screen mounted notification does not skip the film; explicit navigation stop cleans it (5.4545ms)
+✔ an invalid timeline falls back cleanly and the player can start another film (5.1785ms)
+✔ Journal replay is seen-gated, deduplicates clicks and preserves story state (31.0945ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 601.1654

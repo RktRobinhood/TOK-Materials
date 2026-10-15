@@ -1,0 +1,42 @@
+0.1s  ambience
+0.1s  shot  morning
+0.1s  wait
+6.6s  wait
+8.1s  ambience
+8.1s  shot  watcher
+8.1s  tween  watcher
+14.4s  tween  watcher
+14.4s  tween  feed
+18.3s  wait
+20.9s  tween  watcher
+20.9s  tween  feed
+30.2s  ambience
+30.2s  shot  village
+30.2s  wait
+34.8s  camera
+34.8s  hud  glyphs
+34.8s  wait
+35.3s  say  NOISE DETECTED. THE FAIR, 9:02. SUBJECT: Lin.
+35.3s  hud  box
+35.3s  sfx  count
+35.3s  wait
+36.7s  hud  box
+36.7s  sfx  count
+36.7s  wait
+37.8s  hud  box
+37.8s  sfx  count
+37.8s  wait
+38.8s  camera
+38.8s  hud  box
+38.8s  sfx  block
+42.4s  wait
+42.8s  shot  bedroom
+42.8s  camera
+42.8s  wait
+44.3s  hud  box
+44.3s  wait
+46.9s  sfx  rift
+46.9s  hud  clear
+47.6s  shot  waking
+47.6s  wait
+49.8s  end

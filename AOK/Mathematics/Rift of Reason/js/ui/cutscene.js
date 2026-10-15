@@ -179,6 +179,7 @@
         this.bolts = [];
         this.glyphs = null;
         this.closed = false;
+        this.curtain = { opacity: 1 };
         this.timers = new Map();
         this.trace = [];
         this.halted = new Promise(resolve => { this.halt = resolve; });
@@ -316,6 +317,7 @@
 
     Player.prototype.render = function () {
         if (this.closed || !this.world) return;
+        this.node.style.opacity = String(this.curtain.opacity);
         const t = this.now();
         this.shots.forEach(shot => {
             shot.node.style.opacity = String(shot.state.opacity);
@@ -331,6 +333,11 @@
                 if (l.bright && l.bright !== 1) filters.push('brightness(' + l.bright + ')');
                 if (l.glow) filters.push('drop-shadow(0 0 ' + Math.round(14 * (l.bright || 1)) + 'px ' + l.glow + ')');
                 style.filter = filters.join(' ');
+                // The observation glass opens from a narrow screen to the full village image.
+                if (l.aperture != null) {
+                    const inset = l.h * (1 - Rift.clamp(l.aperture, 0, 1)) / 2;
+                    style.clipPath = 'inset(' + px(inset) + ' 0)';
+                }
                 // The quilt line: the part of the art below clipY is hidden (sitting up in bed).
                 if (l.clipY != null) {
                     const hidden = Math.max(0, (l.y + l.h * (l.scale || 1) / 2 - l.clipY) / (l.scale || 1));
@@ -484,7 +491,9 @@
         if (kind === 'fx') return this.fx(s);
         if (kind === 'hud') return this.hudStep(s);
         if (kind === 'title') return this.showTitle(s);
-        if (kind === 'end') return this.tween(this.black, { opacity: 1 }, s.fade || 0, 'inOut');
+        if (kind === 'end') return s.reveal
+            ? this.tween(this.curtain, { opacity: 0 }, s.fade || 0, 'inOut')
+            : this.tween(this.black, { opacity: 1 }, s.fade || 0, 'inOut');
         throw new Error('Unknown cutscene step: ' + JSON.stringify(s));
     };
 

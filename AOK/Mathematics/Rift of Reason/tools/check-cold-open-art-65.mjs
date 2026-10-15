@@ -9,7 +9,8 @@ import {readManifest} from './assets/manifest.mjs';
 const game = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const inventory = JSON.parse(await fs.readFile(path.join(game, 'design/source-assets/6-cutscene/generation.json')));
 const waking = JSON.parse(await fs.readFile(path.join(game, 'design/source-assets/6-cutscene/waking/generation.json')));
-const records = [...inventory.records, ...waking.records];
+const reveal = JSON.parse(await fs.readFile(path.join(game, 'design/source-assets/6-cutscene/reveal/generation.json')));
+const records = [...inventory.records, ...waking.records, ...reveal.records];
 const manifest = await readManifest(path.join(game, 'data/assets.js'));
 const errors = [], assets = [];
 const hash = data => createHash('sha256').update(data).digest('hex');
@@ -47,7 +48,7 @@ for (const record of records) {
     }
     assets.push(entry);
 }
-if (seen.size !== 27) errors.push('Expected 27 cutscene asset IDs, found ' + seen.size);
+if (seen.size !== 29) errors.push('Expected 29 cutscene asset IDs, found ' + seen.size);
 console.log(JSON.stringify({issue: 65, sourcePaintings: records.length, assetIds: seen.size, errors,
     status: errors.length ? 'fail' : 'source/runtime checks pass', assets}, null, 2));
 if (errors.length) process.exitCode = 1;

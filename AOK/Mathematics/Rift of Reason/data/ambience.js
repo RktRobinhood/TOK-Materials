@@ -9,7 +9,11 @@
         fallback: 'valley',
         tracks: {
             'title-theme': { file: 'assets/music/title-theme.mp3', bus: 'music', level: 0.5, trim: false },
+            'algorithm-theme': { file: 'assets/music/algorithm-theme.mp3', bus: 'music', level: 0.65, trim: false },
+            'server-room': { file: 'assets/music/server-room.mp3', bus: 'ambience', level: 0.85, trim: false },
         },
+        // Room recordings can accompany the same score without restarting it on a scene change.
+        beds: { 'cutscene/server-room': 'server-room' },
         scenes: {
             'scene/title': 'title-theme',
             'scene/map': 'valley', 'scene/map-ch2': 'town', 'scene/map-ch3': 'future', 'scene/map-ch4': 'tower',
@@ -26,8 +30,9 @@
             'scene/neon-plaza': 'future', 'scene/server-hall': 'tower', 'scene/switch-room': 'tower', 'scene/core-chamber': 'core',
             'scene/arena-l1': 'arena-l1', 'scene/arena-l2': 'arena-l2', 'scene/arena-l3': 'arena-l3', 'scene/arena-l4': 'arena-l4',
             'scene/arena': 'arena-l1', 'scene/battle-table': 'table',
-            // The cold open (data/cutscenes.js): the Algorithm's crackling hum, not the title theme.
-            'cutscene/cold-open': 'title',
+            // CC0 horror score and real fans/disks replace the old crackling noise loop.
+            'cutscene/server-room': 'algorithm-theme',
+            'cutscene/cold-open': 'algorithm-theme',
         },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

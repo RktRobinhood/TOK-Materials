@@ -6,7 +6,7 @@
  * always waits for its voice line (and a fair reading time), so the film fits the recording.
  *
  *   { shot, bg, camera: { x, y, zoom }, layers: [...], fade }   a new shot (cross-fade in ms, 0 = cut)
- *   layer: { id, art, x, y | bottom, w, h?, depth, cover, opacity, scale, sy, clipY, glow, wFor }
+ *   layer: { id, art, x, y | bottom, w, h?, depth, cover, opacity, scale, sy, clipY, aperture, glow, wFor }
  *   { camera: { x, y, zoom }, dur, ease, wait }                  move the camera of the current shot
  *   { tween: '<layer id>', to: { opacity, x, y | bottom, scale, sy, bright }, dur, ease, wait }
  *   { set: '<layer id>', ...props }                               change a layer now (art swaps too)
@@ -14,7 +14,7 @@
  *   { wait: ms }   { sfx: '<name>' }   { ambience: '<art id in data/ambience.js>' }
  *   { fx: 'flicker' | 'flash' | 'bolt' }   one-off light effects; Calm motion leaves them out
  *   { hud: 'box' | 'glyphs' | 'sweep' | 'meter' | 'clear', ... }   the Algorithm's targeting HUD
- *   { title: 'Rift of Reason', logo: 'ui/logo' }   the title card;   { end: true, fade }
+ *   { title: 'Rift of Reason', logo: 'ui/logo' }   the title card;   { end: true, fade, reveal? }
  *
  * Player tokens, filled in for the person watching: {avatar} → avatar/<type>-<variant>,
  * {name} → nickname, {NAME} → NICKNAME, {colour} → the avatar's Way of Knowing colour.
@@ -41,46 +41,30 @@
         // Played instead of the two lines on black in prologue.cold (data/script/lesson1.js).
         script: 'prologue.cold',
         steps: [
-            // An ordinary, quiet morning. Give its small world time to feel safe before
-            // revealing the enormous watcher on the other side of the hairline crack.
+            // An ordinary, quiet morning; the same village becomes the machine's feed.
             { ambience: 'scene/fair' },
             { shot: 'morning', bg: '#14121f', camera: { x: 800, y: 450, zoom: 1 }, layers: VILLAGE },
             { camera: { x: 800, y: 470, zoom: 1.06 }, dur: 6500, ease: 'inOut', wait: true },
             { wait: 1500 },
-            // Somewhere beyond the village's time: a projection, not its later physical form.
+            // Its speaking projection watches from a server observatory. Not the later colossus.
+            // The fans and disks sit beneath a quiet recurring villain theme, on separate buses.
+            { ambience: 'cutscene/server-room' },
+            { shot: 'watcher', bg: '#05040a', fade: 1800, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                { id: 'servers', art: 'cutscene/server-observatory', x: 800, y: 450, w: 1600, h: 900, cover: true, bright: 0.78 },
+                { id: 'feed', art: 'scene/cold-open', x: 800, y: 402, w: 470, h: 264.375, depth: 0, opacity: 0, aperture: 0.58, bright: 0.75, glow: '#367986' },
+                { id: 'watcher', art: 'cutscene/algorithm-watching', x: 330, bottom: 870, w: 570, opacity: 0, depth: 1.1 },
+            ] },
+            { tween: 'watcher', to: { opacity: 1 }, dur: 4200, ease: 'inOut', wait: true },
+            { tween: 'watcher', to: { scale: 1.045, x: 345 }, dur: 9000, ease: 'inOut' },
+            { tween: 'feed', to: { opacity: 1 }, dur: 2600, ease: 'inOut', wait: true },
+            { wait: 2600 },
+            // The observation image grows continuously into the town. No separate eye/crack cards.
+            { tween: 'watcher', to: { opacity: 0 }, dur: 5000, ease: 'inOut' },
+            { tween: 'feed', to: { scale: 1600 / 470, y: 450, aperture: 1, bright: 1 }, dur: 6200, ease: 'inOut', wait: true,
+                calm: { to: { opacity: 1 }, dur: 6200 } },
             { ambience: 'cutscene/cold-open' },
-            { shot: 'watcher', bg: '#05040a', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                { id: 'servers', art: 'scene/server-hall', x: 800, y: 450, w: 1600, h: 900, depth: 0.6, cover: true, bright: 0.58 },
-                { id: 'watcher', art: 'npc/algorithm/speaking', x: 800, bottom: 850, w: 380, opacity: 0, depth: 1.1, glow: '#3fe0d0' },
-            ] },
-            { tween: 'watcher', to: { opacity: 0.85 }, dur: 2600, ease: 'inOut' },
-            { camera: { x: 800, y: 430, zoom: 1.12 }, dur: 5500, ease: 'inOut', wait: true },
-            // The same watcher looks through the hairline into the ordinary morning.
-            { shot: 'void', bg: '#05040a', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                { id: 'eye', art: 'npc/algorithm/sky-eye', x: 800, y: 440, w: 640, opacity: 0, sy: 0.04, glow: '#5fe8ff' },
-            ] },
-            { wait: 900 },
-            { sfx: 'fate-warp' },
-            { tween: 'eye', to: { opacity: 1, sy: 1 }, dur: 1400, ease: 'out', wait: true },
-            { camera: { x: 800, y: 450, zoom: 1.12 }, dur: 2600, ease: 'inOut' },
-            { wait: 3000 },
-            // It looks closer: we fall into the eye.
-            { tween: 'eye', to: { scale: 1.9, opacity: 0 }, dur: 900, ease: 'in' },
-            { wait: 500 },
-
-            // 2. Through the crack. Seen from the Algorithm's side, the hairline flickers.
-            { shot: 'crack', bg: '#07050f', fade: 500, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                { id: 'gap', art: 'cutscene/sky-crack', x: 800, y: 450, w: 1150, opacity: 1, glow: '#5fe8ff' },
-            ] },
-            { wait: 900 },
-            { fx: 'flicker', target: 'gap', times: 3, seed: 'crack' },
-            { wait: 500 },
-            { sfx: 'rift' },
-            { camera: { x: 900, y: 474, zoom: 6 }, dur: 1700, ease: 'in' },
-            { wait: 1150 },
-            { fx: 'flash', dur: 700 },
-            // The sleeping village at dawn, from high in the sky. The crack stays a hairline.
-            { shot: 'village', bg: '#14121f', fade: 450, camera: { x: 800, y: 250, zoom: 1.9 }, layers: VILLAGE },
+            // Match the feed's final framing, then acquire depth as the camera moves into town.
+            { shot: 'village', bg: '#14121f', fade: 1600, camera: { x: 800, y: 450, zoom: 1 }, layers: VILLAGE },
             { camera: { x: 760, y: 470, zoom: 1.2 }, dur: 4600, ease: 'inOut', wait: true },
 
             // 3. Scanning. The HUD sweeps the village while the Algorithm speaks.
@@ -126,20 +110,9 @@
                 { id: 'room', art: 'scene/bedroom', x: 800, y: 450, w: 1600, h: 900, cover: true },
                 { id: 'awake', art: '{avatar}/waking', x: 800, bottom: 850, w: 590, wFor: { mothkin: 690 } },
             ] },
-            { camera: { x: 800, y: 450, zoom: 1.035 }, dur: 4500, ease: 'inOut', wait: true },
-            { wait: 3000 },
-            // Warm daylight and the Sundial's familiar voice carry us into conversation.
-            { ambience: 'scene/fair' },
-            { shot: 'daybreak', bg: '#14121f', fade: 1200, camera: { x: 800, y: 460, zoom: 1.04 }, layers: VILLAGE },
-            { title: 'Rift of Reason', logo: 'ui/logo' },
-            { sfx: 'splash' },
-            { wait: 1600 },
-            { say: 'narrator', t: 'Nine o\'clock. Roughly. Good morning, {name}.' },
-            { title: false, dur: 900 },
-            { say: 'narrator', t: 'I\'m the Sundial. I tell the time. Mostly. On cloudy days I guess.', during: [
-                { camera: { x: 735, y: 600, zoom: 1.18 }, dur: 3600, ease: 'inOut' },
-            ] },
-            { end: true, fade: 350 },
+            { wait: 2200 },
+            // End on the shock. Fade the film away; the regular screen gets the first good morning.
+            { end: true, fade: 1500, reveal: true },
         ],
     };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -30,12 +30,13 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 <section class="panel-box stack">
   <div class="row">
     <label>Cutscene <select id="which"></select></label>
-    <label>Name <input id="name" type="text" maxlength="16" value="Ada"></label>
+    <label>Name <input id="name" type="text" maxlength="16" value="Traveller" placeholder="Your nickname"></label>
     <label><input id="calm" type="checkbox"> Calm motion</label>
     <button class="btn primary" id="play" type="button">▶ Play</button>
   </div>
   <div class="avatars" id="avatars" aria-label="Avatar"></div>
   <div class="row sliders">
+    <label>Music <input id="music" type="range" min="0" max="1" step="0.05" value="0.5"></label>
     <label>Voices <input id="voice" type="range" min="0" max="1" step="0.05" value="1"></label>
     <label>Sound effects <input id="sfx" type="range" min="0" max="1" step="0.05" value="0.45"></label>
     <label>Ambience <input id="ambience" type="range" min="0" max="1" step="0.05" value="0.5"></label>
@@ -90,7 +91,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     drawAvatars();
 
     const settings = R.State.get().settings;
-    ['voice', 'sfx', 'ambience'].forEach(key => {
+    ['music', 'voice', 'sfx', 'ambience'].forEach(key => {
         byId(key).value = settings[key];
         byId(key).addEventListener('input', ev => { settings[key] = +ev.target.value; R.bus.emit('state:changed'); });
     });
@@ -107,7 +108,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
             onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
         });
         byId('status').textContent = played
-            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the morning conversation continues now.'
+            ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the Sundial greets you now on the regular screen.'
             : 'Could not play (missing or broken art). In the game, the two lines on black would play instead.';
         byId('play').focus();
     });

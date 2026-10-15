@@ -51,6 +51,8 @@ Other options: `--only <speaker>`, `--id <id[,id…]>` (target a repair), `--max
 
 ## Main-menu music
 
+Opening atmosphere: `tools/cold-open-audio.mjs` processes the checked-in CC0 server recording and horror score locally; it makes no API requests. Set `RIFT_FFMPEG` and run `node tools/cold-open-audio.mjs` to reproduce the finished loops and measurement receipt. Source/licence/download links and hashes are in `design/source-audio/cold-open-65/sources.json`; credits are in `assets/music/CREDITS.md`. The server bed uses Ambience, the continuing score uses Music, and both respect the existing pause/mute lifecycle.
+
 The title screen plays **A Little Wonder**, a custom 30-second ElevenLabs instrumental loop with a gentle plucked-string melody, bell-like notes and warm string pads. It replaces the electrical-rift ambience and opening thunder strike. The Music setting controls this theme; its quiet scene level is separate from environmental ambience. The trailer pauses it and restores the same loop when closed.
 
 `node tools/title-music.mjs --plan` inspects the cached take. `--render` generates one missing take through ElevenLabs' loop-enabled sound engine, within a 300-credit cap, then normalizes it to -22 LUFS. `--mix` repeats the local normalization without using credits. Set `RIFT_FFMPEG` as for the trailer. The source, finished loop and generation/level metadata live in `assets/music/`. Existing takes are preserved and never automatically regenerated. The browser uses only the finished MP3.

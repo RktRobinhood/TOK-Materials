@@ -28,22 +28,25 @@ test('a line interrupted before its voice/reading beat finishes is not reported 
     g.key('Escape');finish();assert.equal(await done,true);await settle();assert.equal(heard.length,0);
 });
 
-test('older seen openings keep their greeting and a completed new film does not repeat it',async()=>{
+test('new and older seen openings greet once on the regular screen, after the film closes',async()=>{
     for(const seen of [false,true]){
         const g=game();dialogue(g);g.run('data/script/lesson1.js');
         g.state.flags['seen:prologue.cold']=seen;
         g.Rift.Story.test=condition=>!!g.state.flags['seen:'+condition.seen];
         let films=0;
-        const greeting=g.Rift.data.script['prologue.greeting'];
-        g.Rift.Cutscene={has:()=>true,stop(){},play:async(id,options)=>{
-            films++;greeting.forEach(line=>options.onSpoken({speaker:line.s,text:line.t}));return true;
-        }};
-        const opening=g.Rift.data.script['prologue.wake'][0];
-        const done=g.Rift.Dialogue.play([opening,{flag:'awake'}]);
+        const play=g.Rift.Cutscene.play;
+        g.Rift.Cutscene.play=id=>{films++;return play(id,{instant:true});};
+        const opening=g.Rift.data.script['prologue.wake'].slice(0,2);
+        const done=g.Rift.Dialogue.play([...opening,{flag:'awake'}]);
         await settle();
-        for(let guard=0;guard<4&&g.$('.box');guard++){g.$('.box').click();await settle();}
+        for(let guard=0;guard<20&&!g.state.flags.awake;guard++){
+            if(g.$('.box')){assert.equal(g.$('.cutscene'),null);g.$('.box').click();}
+            await settle();
+        }
         await done;assert.equal(films,seen?0:1);
-        assert.equal(g.speech.length,seen?2:0);assert.equal(g.state.flags.awake,true);
+        const greetings=g.speech.filter(line=>line.speaker==='narrator');
+        assert.equal(greetings.length,2);assert.match(greetings[0].text,/Good morning, Ada/);
+        assert.equal(g.state.flags.awake,true);
     }
 });
 
@@ -139,13 +142,42 @@ function game(options = {}) {
 }
 const shot = {shot:'quiet',layers:[]};
 
+test('each chosen nickname reaches the scan and subtitles while the recorded voice key stays reusable',async()=>{
+    for(const nickname of ['Lin','Åsa','Jo & Sam']){
+        const g=game(),trace=[];
+        await g.Rift.Cutscene.play('cold-open',{player:{type:'raven',variant:'girl',nickname},instant:true,onStep:(kind,s)=>trace.push([kind,s])});
+        assert.ok(g.speech[0].text.endsWith('SUBJECT: '+nickname+'.'));
+        assert.ok(g.speech[0].voice.endsWith('SUBJECT: {name}.'));
+        const subject=trace.find(([kind,s])=>kind==='hud'&&s.id==='subject')[1];
+        assert.equal(subject.label,'SUBJECT: '+nickname.toUpperCase());
+        assert.ok(!JSON.stringify(trace).includes('Ada'));
+    }
+});
+
+test('the observation glass opens continuously, then the film fades to reveal the regular screen',async()=>{
+    const g=game();
+    const done=g.Rift.Cutscene.play(g.film([
+        {shot:'monitor',layers:[{id:'feed',art:'scene/cold-open',x:800,y:450,w:800,h:400,aperture:.5}]},
+        {tween:'feed',to:{aperture:1,scale:2},dur:1000,wait:true},
+        {end:true,reveal:true,fade:1000},
+    ]));
+    await settle();assert.equal(g.$('.cs-layer').style.clipPath,'inset(100px 0)');
+    await g.advance(500);assert.equal(g.$('.cs-layer').style.clipPath,'inset(50px 0)');
+    await g.advance(500);assert.equal(g.$('.cs-layer').style.clipPath,'inset(0px 0)');
+    await g.advance(500);assert.equal(g.$('.cutscene').style.opacity,'0.5');
+    assert.equal(g.$('.cs-black').style.opacity,'0');
+    await g.advance(500);assert.equal(await done,true);assert.equal(g.$('.cutscene'),null);
+});
+
 test('all ten avatars complete the real timeline, speak the exact recorded keys and never change the save',async()=>{
     for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl']){
         const g=game(),before=JSON.stringify(g.state),trace=[];
         const ok=await g.Rift.Cutscene.play('cold-open',{player:{type,variant,nickname:'Ada'},instant:true,onStep:(kind,s)=>trace.push([kind,s])});
         assert.equal(ok,true,type+' '+variant);assert.equal(JSON.stringify(g.state),before);
-        assert.equal(g.speech.length,3);assert.match(g.speech[0].text,/SUBJECT: Ada/);assert.match(g.speech[0].voice,/\{name\}/);
-        assert.match(g.speech[1].text,/Good morning, Ada/);assert.match(g.speech[2].text,/I'm the Sundial/);
+        assert.equal(g.speech.length,1);assert.match(g.speech[0].text,/SUBJECT: Ada/);assert.match(g.speech[0].voice,/\{name\}/);
+        assert.ok(trace.every(([k,s])=>!('title' in s)&&s.shot!=='void'&&s.shot!=='crack'&&s.shot!=='daybreak'));
+        assert.equal(trace.filter(([k])=>k==='shot').at(-1)[1].shot,'waking');
+        assert.equal(trace.at(-1)[1].reveal,true);
         assert.equal(trace.find(([k])=>k==='shot')[1].shot,'morning');
         const bedroom=trace.find(([k,s])=>k==='shot'&&s.shot==='bedroom')[1];
         assert.ok(bedroom.layers.some(l=>l.art==='avatar/'+type+'-'+variant+'/asleep'));
@@ -157,7 +189,7 @@ test('all ten avatars complete the real timeline, speak the exact recorded keys 
         assert.ok(bounds.sy-body.h*bounds.S/2>=0&&bounds.sy+body.h*bounds.S/2<=900,'full body remains in frame');
         assert.equal(g.$('.cutscene'),null);assert.equal(g.claims(),0);assert.equal(g.timers.size,0);
         assert.equal(g.frames.size,0);assert.equal(g.events.get('keydown').size,0);
-        assert.deepEqual(g.scenes,['scene/fair','cutscene/cold-open','scene/fair',null]);
+        assert.deepEqual(g.scenes,['scene/fair','cutscene/server-room','cutscene/cold-open',null]);
     }
 });
 

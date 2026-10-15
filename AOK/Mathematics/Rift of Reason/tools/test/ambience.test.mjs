@@ -72,6 +72,44 @@ test('moving into the fair crossfades music away and restores the independent am
     g.tick(2200); assert.equal(g.sources[0].stopped, true);
 });
 
+test('server fans and villain score use separate sliders, and entering the feed keeps the score continuous', async () => {
+    const g=setup();g.state.settings.ambience=.8;
+    g.Rift.Ambience.scene('cutscene/server-room');g.event('pointerdown');await flush();
+    assert.deepEqual(g.fetched.sort(),['assets/music/algorithm-theme.mp3','assets/music/server-room.mp3']);
+    assert.equal(g.sources.length,2);assert.equal(g.Rift.Ambience.now().bed,'server-room');
+    const score=g.sources.find(s=>s.output.output===g.gains[1]);
+    const fans=g.sources.find(s=>s.output.output===g.gains[0]);assert.ok(score&&fans);
+    g.state.settings.music=0;g.update();await flush();
+    assert.equal(g.gains[1].gain.value,0);assert.ok(g.gains[0].gain.value>0);
+    g.Rift.Ambience.scene('cutscene/cold-open');await flush();
+    assert.equal(g.sources.length,2,'same score continues, without a new source');
+    assert.equal(g.Rift.Ambience.now().bed,null);assert.equal(fans.output.gain.value,0);
+    g.tick(2200);assert.equal(fans.stopped,true);assert.notEqual(score.stopped,true);
+    g.Rift.Ambience.scene(null);await flush();g.tick(2200);assert.equal(score.stopped,true);
+});
+
+test('a server recording that finishes loading after returning to the map cannot start', async () => {
+    const g=setup({deferred:true});g.state.settings.ambience=.5;
+    g.Rift.Ambience.scene('cutscene/server-room');g.event('pointerdown');await flush();
+    g.Rift.Ambience.scene('scene/fair');await flush();
+    g.requests['assets/sfx/fair.mp3']();await flush();
+    g.requests['assets/music/server-room.mp3']();g.requests['assets/music/algorithm-theme.mp3']();await flush();
+    assert.equal(g.Rift.Ambience.now().scene,'fair');assert.equal(g.Rift.Ambience.now().bed,null);
+    assert.equal(g.sources.length,1);
+});
+
+test('file previews pause both server layers for hiding and preserve independent volume controls', async () => {
+    const g=setup({local:true});g.state.settings.ambience=.5;
+    g.Rift.Ambience.scene('cutscene/server-room');g.event('pointerdown');await flush();g.tick(3100);
+    assert.equal(g.media.length,2);assert.equal(g.fetched.length,0);
+    g.document.hidden=true;g.event('visibilitychange');assert.ok(g.media.every(a=>a.paused));
+    g.document.hidden=false;g.event('visibilitychange');await flush();
+    assert.ok(g.media.every(a=>!a.paused));
+    g.state.settings.ambience=0;g.update();await flush();
+    assert.equal(g.media.find(a=>a.file.includes('server-room')).volume,0);
+    assert.ok(g.media.find(a=>a.file.includes('algorithm-theme')).volume>0);
+});
+
 test('a delayed menu download cannot take over after leaving the title', async () => {
     const g = setup({ deferred: true }); g.Rift.Ambience.scene('scene/title'); g.event('pointerdown'); await flush();
     g.Rift.Ambience.scene('scene/fair'); await flush();

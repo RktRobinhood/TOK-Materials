@@ -1,0 +1,38 @@
+{
+  "issue": 65,
+  "date": "2026-10-15",
+  "method": "built-in image_gen",
+  "stage": "13.79",
+  "records": [
+    {
+      "key": "server-observatory",
+      "id": "cutscene/server-observatory",
+      "source": "design/source-assets/6-cutscene/reveal/server-observatory-65.png",
+      "transparent": false,
+      "refs": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp",
+        "assets/scenes/server-hall.webp"
+      ],
+      "prompt": "Rift of Reason production art, cute-dark illustrated fantasy for teenage players: medium brown-black ink outlines, softly textured cel shading, saturated restrained cyan/violet and ember-red accents against near-black darkness. Image1 approved style board sets the rendering language; image2 shipped Astrophysicat confirms finish only, do not insert a cat. Alien technological lair is allowed colder than the village, but not glossy photoreal 3D. No text, letters, numbers, logos, watermark or humans. Use case: illustration-story. New 16:9 2048x1152 cinematic EMPTY SERVER OBSERVATORY background, evolved from image3's accepted server hall. Low camera inside an enormous shadowed server nave. Impossibly tall banks of black server racks lean inward like cathedral buttresses; heavy overhead cable bundles and rows of recessed cooling fans, dark vent slats, tiny red status lights and sparse ice-blue vertical seams. Fine cold mist catches narrow shafts of cyan light; polished dark floor with faint broken reflections. Perspective draws toward a single black rectangular observation glass at the EXACT CENTER of the canvas, horizontally wide16:9, approximately central third of canvas; empty black glass, no picture/planet/eye/scene painted in it. The game will place its moving village feed there. Keep the centre glass uncluttered. Near racks frame the upper corners and side edges, leave lower-left third dark and simple for a separately placed villain. Deep oppressive scale and negative space; something feels awake in the machinery. Gorgeous deliberate light hierarchy, crisp readable broad shapes and rich ink shadows. No characters, villain, eye, floating eyeball, rift, stars, planets, scenery through screen or glowing white portal. Empty machinery and atmosphere only. Full-bleed opaque landscape; no border.",
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13ecf-a18f-7d02-9a9a-628c936fb874/exec-2e8e0a7a-9b1d-43c3-a211-ebab4a388a85.png",
+      "status": "selected",
+      "visualReview": "Accepted empty server nave with centred observation glass, strong depth, fan/cable detail and cold atmospheric hierarchy."
+    },
+    {
+      "key": "algorithm-watching",
+      "id": "cutscene/algorithm-watching",
+      "source": "design/source-assets/6-cutscene/reveal/algorithm-watching-65.png",
+      "transparent": true,
+      "refs": [
+        "design/source-assets/0-style/style-board.png",
+        "assets/creatures/astrophysicat-idle.webp",
+        "assets/cast/algorithm-speaking.webp"
+      ],
+      "prompt": "Rift of Reason production art, cute-dark illustrated fantasy for teenage players: medium brown-black ink outlines, softly textured cel shading, saturated restrained cyan/violet and ember-red accents against near-black darkness. Image1 approved style board sets the rendering language; image2 shipped Astrophysicat confirms finish only, do not insert a cat. Alien technological lair is allowed colder than the village, but not glossy photoreal 3D. No text, letters, numbers, logos, watermark or humans. Use case: identity-preserve. ONE transparent complete full-body cutout of the EXISTING ALGORITHM SPEAKING PROJECTION from image3, a darker cinematic watching pose. This is the SAME narrow hooded faceless silhouette and spiral thumbnail eye, NOT its later giant colossus body. Tall ragged ink-black hood with a cold violet lining; the hood largely swallows the spiral eye, which is a small sharp cyan light recessed in darkness. Torso and long trailing lower body are woven from dark translucent feed tiles, with only a FEW restrained violet glowing hearts/profile shapes and thin cyan cable-like tendrils. The viewer sees it from slightly below, three-quarter angle facing RIGHT toward an unseen observation screen. It leans forward very slightly; two long elegant claw-like hands are held still near chest and hip, as if quietly controlling the room, one claw pointing toward the right. Menace from stillness, enormous cloak silhouette and deep facial shadow, not shouting, grin, gore, skulls or extra eyes. Back/left rim almost black; cold screen light picks out hood edge, two claws and sparse thumbnail tiles. Preserve the accepted pointed hood, single recessed spiral and feed-projection anatomy; no human face/legs, weapon, armour, throne or colossus. Entire coherent silhouette, including complete trailing base and all claw tips, inside canvas with 8 percent transparent padding on every side. No crop. Actual transparent background, no room, floor shadow, glow haze cloud, checkerboard or second figure. One connected group.",
+      "generatedOutput": "C:/Users/BlackBox/.codex/generated_images/01a13ecf-a18f-7d02-9a9a-628c936fb874/exec-28da8a4c-4e70-466a-bff5-309505551cc7.png",
+      "status": "selected",
+      "visualReview": "Accepted darker same-identity hood, single recessed spiral eye, complete claw tips/trailing base. No later colossus reveal."
+    }
+  ]
+}
