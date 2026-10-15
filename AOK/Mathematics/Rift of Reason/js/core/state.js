@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 2;
+    const STATE_VERSION = 3;
     const STORAGE_KEY = 'rift-of-reason:save';
     const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
     const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
@@ -88,12 +88,13 @@
         const taught = TRICKS.includes(inst.taught) ? inst.taught : null;
         const keywords = (sp.keywords || []).slice();
         [v.trait, taught].forEach(k => { if (KEYWORD_TRAITS.includes(k) && !keywords.includes(k)) keywords.push(k); });
+        const ch = Rift.changeEffect(inst);
         return {
-            cost: sp.cost,
-            attack: Math.max(0, (sp.attack || 0) + v.attack + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0)),
-            health: Math.max(1, (sp.health || 1) + v.health + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0)),
+            cost: Math.max(1, sp.cost + ch.cost),
+            attack: Math.max(0, (sp.attack || 0) + v.attack + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0) + ch.attack),
+            health: Math.max(1, (sp.health || 1) + v.health + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0) + ch.health),
             keywords,
-            ability: (inst.injuries || []).includes('no-ability') ? null : ((inst.warped && inst.warped.ability) || sp.ability || null),
+            ability: (inst.injuries || []).includes('no-ability') ? null : (ch.ability || (inst.warped && inst.warped.ability) || sp.ability || null),
         };
     }
 
@@ -418,10 +419,11 @@
             uid: Date.now().toString(36) + '-' + instanceCounter.toString(36) + '-' + Math.floor(Math.random() * 1e6).toString(36),
             species: speciesId,
             caughtAt: Date.now(),
-            powerDelta: 0,         // injuries lower it (the engine applies it to attack)
-            scars: [],             // cosmetic scars
-            injuries: [],          // e.g. 'no-ability', 'minus-one'
-            warped: null,          // { ability } when the warp re-rolled it
+            powerDelta: 0,         // old injuries lowered it; healed by migration 2 → 3
+            scars: [],             // old cosmetic scars (kept, not shown)
+            injuries: [],          // old injuries ('no-ability', 'minus-one'); healed by migration 2 → 3
+            warped: null,          // old warp { ability }; migration 2 → 3 makes it a sideways Change
+            changes: [],           // Changes from battles (data/fate.js): [{ id, ability?, from? }]
             trophyOf: null,        // classmate nickname for trophy copies
             wins: 0,
             variant: null,         // { attack, health, trait } rolled from the uid
@@ -441,6 +443,18 @@
         return c;
     }
 
+    function healForChanges(c) {
+        if (!c || typeof c !== 'object') return c;
+        if (!Array.isArray(c.changes)) c.changes = [];
+        if ((c.powerDelta || 0) < 0) c.powerDelta = 0;
+        c.injuries = [];
+        if (c.warped && c.warped.ability && !c.changes.some(ch => ch.id === 'rift-freckles')) {
+            c.changes.push({ id: 'rift-freckles', ability: c.warped.ability, from: c.warped.from || null });
+        }
+        c.warped = null;
+        return c;
+    }
+
     // ---- migrations ----------------------------------------------------------
     // Each entry upgrades from version N to N+1. Add one when STATE_VERSION grows.
     const MIGRATIONS = {
@@ -451,6 +465,13 @@
             if (!Array.isArray(s.tactics)) s.tactics = [];
             if (!Array.isArray(s.deckTactics)) s.deckTactics = [];
             s.version = 2;
+            return s;
+        },
+        // Changes replace the Fate table (#151): injuries heal for free, a warp becomes a sideways
+        // Change, cosmetic scars stay in the data but are no longer shown.
+        2: s => {
+            [s.creatures, s.trophies].forEach(list => { if (Array.isArray(list)) list.forEach(healForChanges); });
+            s.version = 3;
             return s;
         },
     };
@@ -781,6 +802,7 @@
         naturalKeywords,
         minPowerDelta,
         clampPower,
+        healForChanges,
         describeVariant,
         battleTeam,
         defaultTeam,

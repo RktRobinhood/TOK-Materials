@@ -200,16 +200,14 @@
             const here = s.map.at && Rift.data.map.nodes[s.map.at];
             const lureVisits = id === 'lure' ? 3 : it.lure || 0;
             const lureable = lureVisits > 0 && n > 0 && here && (here.spawns || []).length && !((s.lures || {})[s.map.at] > 0);
-            const mendable=id==='mending'&&n>0&&s.creatures.some(c=>c.injuries.some(x=>x==='no-ability'||x==='minus-one'));
             const teachable = id === 'trick-book' && n > 0 && s.creatures.length > 0;
-            const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable || mendable || teachable;
+            const usable = (id === 'tonic' && n > 0 && s.health < maxHealth(s)) || lureable || teachable;
             return el('div.row', { style: { opacity: n ? 1 : 0.45, alignItems: 'flex-start' } }, [
                 Rift.Assets.img('item/' + id, { className: 'bag-icon', label: it.name }),
                 el('div', { style: { flex: 1 } }, [el('strong', { text: it.name + '  ×' + n }), el('div.small.muted', { text: it.text })]),
                 usable ? el('button.btn.small', {
                     text: 'Use',
                     onclick() {
-                        if(id==='mending'){m.close();mending();return;}
                         if(id==='trick-book'){m.close();trickBook();return;}
                         if(!Rift.State.useItem(id))return;
                         if (lureVisits) {
@@ -227,23 +225,6 @@
             ]);
         });
         const m = modal('Bag', el('div.stack', null, rows));
-    }
-
-    function mending(){
-        const s=Rift.State.get();
-        const rows=s.creatures.filter(c=>c.injuries.some(x=>x==='no-ability'||x==='minus-one')).map(c=>
-            el('div.stack.panel',null,[el('strong',{text:Rift.data.creatures[c.species].name+' · '+c.uid.slice(-6)}),
-                el('div.row.wrap',null,c.injuries.filter(x=>x==='no-ability'||x==='minus-one').map(injury=>el('button.btn.small',{
-                    text:(injury==='no-ability'?'Restore ability':'Restore 1 attack')+' · 1 Mending',onclick(){
-                        let healed=false;Rift.State.update(st=>{healed=Rift.World.mend(st,c.uid,injury);});
-                        if(healed){Rift.Audio.sfx('heal');toast('Creature mended.');}
-                        else toast('Its attack is already normal. Nothing was spent.');
-                        m.close();bag();
-                    },
-                }))),
-            ])
-        );
-        const m=modal('Mend a creature',el('div.stack',null,[el('p.small',{text:'Choose one injury. Each use spends 1 Mending. Cosmetic scars and warp changes stay.'}),...rows]),[{label:'Cancel',onclick:bag}]);
     }
 
     // The time rift tearing open: fx/rift-1..6 played in order, then faded out.
@@ -299,7 +280,17 @@
             trait && has('ui/trait-' + trait) ? Rift.Assets.img('ui/trait-' + trait, { className: 'trait-badge', alt: '' }) : null,
             el('span.chip.variant-chip', { text: d.labels.join(' · ') }),
             d.taught ? el('span.chip.taught-chip', { text: d.taught }) : null,
+            ...changeChips(inst),
         ]);
+    }
+    // One badge per Change (data/fate.js, #151): the scar-style name, with the plain effect.
+    function changeChips(inst) {
+        const F = Rift.data.fate;
+        return (inst.changes || []).filter(ch => F.changes[ch.id]).map(ch => {
+            const d = F.changes[ch.id];
+            const text = d.sideways && ch.ability ? 'Ability now ' + (((Rift.Battle && Rift.Battle.Abilities) || {})[ch.ability] || { name: ch.ability }).name + '.' : d.text;
+            return el('span.chip.change-chip.change-' + d.kind, { title: d.name + ': ' + text, text: F.kinds[d.kind].icon + ' ' + d.name + ': ' + text });
+        });
     }
 
     // Trick Book: choose a creature, then a trick. Spends 1 book only when a trick is learned.

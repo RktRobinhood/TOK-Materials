@@ -259,6 +259,12 @@ body.calm-motion .tour-practice * { animation:none; }
 .variant-star.off { opacity: 0.3; }
 .trait-badge { width: 22px; height: 22px; object-fit: contain; }
 .taught-chip { border-color: var(--rift); color: var(--rift); }
+/* Changes from battles (#151): static badges, coloured by kind. */
+.change-chip { border-color: var(--parchment-dim); }
+.change-gain { border-color: var(--perception); color: var(--perception); }
+.change-loss { border-color: var(--emotion); color: var(--emotion); }
+.change-sideways { border-color: var(--imagination); color: var(--imagination); }
+.change-trade { border-color: var(--gold); color: var(--gold); }
 .team-chip { border-color: var(--gold); color: var(--gold); }
 .instance-row { padding: 8px 10px; gap: 4px; display: flex; flex-direction: column; }
 .deck-panel { margin-bottom: 14px; padding: 10px 14px; }

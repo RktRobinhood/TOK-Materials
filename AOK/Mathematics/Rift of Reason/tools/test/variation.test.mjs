@@ -51,16 +51,17 @@ test('labels and stars describe the roll in plain words', () => {
     assert.deepEqual(J(S.describeVariant({}).labels), ['Ordinary']);
 });
 
-test('migration v1 → v2: an old save fixture loads with variants from uids and new fields', () => {
+test('migration v1 → v3: an old save fixture loads with variants from uids and new fields', () => {
     const old = JSON.parse(fs.readFileSync(GAME_DIR + '/tools/test/fixtures/save-v1.json', 'utf8'));
     const s = S.migrate(J(old));
-    assert.equal(s.version, 2);
+    assert.equal(s.version, 3);
     assert.equal(s.creatures.length, 3);
     s.creatures.forEach((c, i) => {
         assert.deepEqual(J(c.variant), J(S.rollVariant(old.creatures[i].uid)));
         assert.equal(c.taught, null);
-        assert.equal(c.powerDelta, old.creatures[i].powerDelta);
-        assert.deepEqual(J(c.injuries), old.creatures[i].injuries);
+        // Changes (#151, migration 2 → 3): old injuries heal for free.
+        assert.equal(c.powerDelta, Math.max(0, old.creatures[i].powerDelta));
+        assert.deepEqual(J(c.injuries), []);
     });
     // Plus the common colour tactic of each colour it owns (Reason, Imagination), unlocked on load
     // (design/card-arena-expansion-2026-10-07.md, section 2).
@@ -76,32 +77,24 @@ test('migration v1 → v2: an old save fixture loads with variants from uids and
     assert.deepEqual(J(S.deckTactics(s)), J(Rift.data.tacticDecks.starter));
 });
 
-test('migration v1 → v2: old-scale powerDelta never leaves attack below 0', () => {
+test('migration v1 → v3: old-scale powerDelta never leaves attack below 0, then injuries heal (#151)', () => {
     // Old saves counted injuries on the 1–10 power scale (Astrophysicat power 4 → 2 = powerDelta −2).
     const old = JSON.parse(fs.readFileSync(GAME_DIR + '/tools/test/fixtures/save-v1-old-power.json', 'utf8'));
     const s = S.migrate(J(old));
     const by = uid => s.creatures.concat(s.trophies).find(c => c.uid === uid);
-    // Astrophysicat attack 1, plain variant: −2 → −1 (attack 0, still injured).
+    // Variants still come from the uids; every injury heals and cosmetic scars stay in the data.
     assert.equal(by('old-cat-b').variant.attack, 0);
-    assert.equal(by('old-cat-b').powerDelta, -1);
-    assert.deepEqual(J(by('old-cat-b').injuries), ['minus-one']);
-    // Gentle Astrophysicat (attack 1 − 1 = 0): −3 → 0 and the minus-one tag goes; other injuries stay.
     assert.equal(by('old-cat-a').variant.attack, -1);
-    assert.equal(by('old-cat-a').powerDelta, 0);
-    assert.deepEqual(J(by('old-cat-a').injuries), ['no-ability']);
     assert.deepEqual(J(by('old-cat-a').scars), ['scar-a']);
-    // Strong Astrophysicat (attack 2): −3 → −2.
-    assert.equal(by('old-cat-c').powerDelta, -2);
-    // Muskrat Rocket (attack 5): −3 is fine as it is.
-    assert.equal(by('old-musk').powerDelta, -3);
-    assert.deepEqual(J(by('old-musk').injuries), ['minus-one']);
-    // Trophies get the same fix (Zuckerborg 2 − 1 = 1: −2 → −1).
-    assert.equal(by('old-zuck-b').powerDelta, -1);
+    s.creatures.concat(s.trophies).forEach(c => {
+        assert.equal(c.powerDelta, 0, c.uid);
+        assert.deepEqual(J(c.injuries), [], c.uid);
+    });
     s.creatures.concat(s.trophies).forEach(c => {
         assert.ok((Rift.data.creatures[c.species].attack + c.variant.attack + c.powerDelta) >= 0, c.uid);
         assert.equal(S.creatureStats(c).attack, Math.max(0, Rift.data.creatures[c.species].attack + c.variant.attack + c.powerDelta));
     });
-    // Migrating again (or loading a save already at v2) changes nothing.
+    // Migrating again (or loading a save already at v3) changes nothing.
     assert.deepEqual(J(S.migrate(J(s))), J(s));
     // The migrated creatures make a team code that imports again (a legal team: at most 2 of a species).
     const T = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js', 'js/battle/abilities.js', 'js/battle/team-codes.js']);

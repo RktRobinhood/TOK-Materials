@@ -1,6 +1,6 @@
 /*
  * The collection (seen vs caught, legendaries hidden until met), your
- * creatures with their scars and injuries, and settings/backup codes.
+ * creatures with their Changes from battles, and settings/backup codes.
  */
 (function (root) {
     'use strict';
@@ -34,7 +34,6 @@
     }
 
     const KEYWORD_NAMES = { guard: 'Guard', swift: 'Swift', shield: 'Shield' };
-    const INJURY_NAMES = { 'no-ability': 'lost its ability', 'minus-one': 'hurt (−attack)' };
 
     // One owned creature: its real battle numbers, variation, trick and history.
     function instanceRow(x, n, s, onTeach) {
@@ -45,9 +44,7 @@
         const notes = [
             'Caught ' + new Date(x.caughtAt).toLocaleDateString(),
             x.trophyOf ? 'trophy from ' + x.trophyOf : null,
-            x.scars.length ? 'scars: ' + x.scars.length : null,
-            x.injuries.length ? x.injuries.map(i => i === 'minus-one' && x.powerDelta < 0 ? 'injured (' + x.powerDelta + ' attack)' : INJURY_NAMES[i] || i).join(', ') : null,
-            x.warped && x.warped.ability ? 'warped ability: ' + (((Rift.Battle.Abilities || {})[x.warped.ability] || {}).name || x.warped.ability) : null,
+            (x.changes || []).length ? 'changed in battle' : null,
             extra.length ? 'battles with ' + extra.join(', ') : null,
         ].filter(Boolean).join(' · ');
         return el('div.panel.instance-row', null, [
@@ -219,8 +216,7 @@
                     refresh();
                 } });
             boxes.push({ x, input, copiesOut });
-            const hurt = [].concat(x.powerDelta < 0 && (x.injuries || []).includes('minus-one') ? ['injured (' + x.powerDelta + ' attack)'] : [],
-                (x.injuries || []).includes('no-ability') ? ['no ability'] : [], x.trophyOf ? ['trophy from ' + x.trophyOf] : []);
+            const hurt = x.trophyOf ? ['trophy from ' + x.trophyOf] : [];
             return el('label.deck-option', { dataset: { colour: c.colour } }, [input, el('span.deck-creature', null, [
                 el('span.row.wrap.deck-creature-head', null, [el('strong', { text: c.name }), Rift.UI.statLine(x.species, x), copiesOut]),
                 Rift.UI.variantBadges(x),

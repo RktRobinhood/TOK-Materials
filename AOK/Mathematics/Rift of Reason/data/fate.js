@@ -1,54 +1,52 @@
 /*
- * Fate table: what happens to a creature that ends a RISKED battle in the
- * discard pile (practice battles never roll). Weights, not percentages.
- * Tuned with tools/sim-battle.mjs; see the numbers in design notes.
+ * Changes (issue #151, teacher 14 Oct 2026; design/DESIGN.md "Changes replace the Fate table"):
+ * after a battle with something at stake (trainer, boss, ghost; never practice, lessons or loans),
+ * a creature rarely comes home a little different. The Change lives on that one caught creature.
+ * Tuned with tools/sim-battle.mjs.
  *
- * Legendaries never die (a death roll becomes "scarred").
- * Items: 'anchor' stops one warp; 'ward' cancels one bad roll (injured, warp or death).
- *
- * TO BE REPLACED (teacher, 14 Oct 2026): rare "Changes" (2% base, more in boss battles and on
- * 3+ overkill; gains, losses, sideways and trade-offs; cost ±1, never 0). Spec: GitHub issue
- * #151 (body + clarification comment) and design/DESIGN.md "Changes replace the Fate table".
+ * Builder decisions (recorded on #151):
+ * - at most 2 Changes per creature; Changes add up to at most ±2 attack and ±2 health, and cost
+ *   stays within ±1 of the printed cost and never 0. Attack never below 0, health never below 1;
+ *   a Change that would break a limit is not offered.
+ * - creatures that were not defeated: 0.5%, gains only.
+ * - "a stronger version of its ability" is left out for now: abilities have no strength setting.
+ * - Wards, Anchors and Mending keep their in-battle uses; they no longer do anything after a battle.
  */
 (function (root) {
     'use strict';
     const Rift = root.Rift;
 
     Rift.data.fate = {
-        // The brief's starting odds (fine 55 / scarred 20 / injured 12 / warp 10 / death 3)
-        // were far too punishing. Card Arena rules (7 Oct 2026, 12 hearts): Hard-vs-Hard
-        // simulations end with about 2.4 creatures per LOSER (1.9 per winner) in the discard
-        // pile, many fewer than the old ~8. Retuned with tools/sim-battle.mjs (2,000 games) so
-        // that a LOST battle means an injury/death ~30% of the time and a permanent loss ~2-3%
-        // (death stays at 1% of rolls, the cap battle-meta.test.mjs enforces),
-        // and a WON battle almost never hurts (~1.5% injury). Weights need not sum to 100.
-        briefOdds: { fine: 55, scarred: 20, injured: 12, warp: 10, death: 3 },
-        // Creatures on the losing side.
-        odds: { fine: 54, scarred: 25, injured: 15, warp: 5, death: 1 },
-        // Creatures on the winning side: you held the field and carried them home. Nobody dies.
-        winnerOdds: { fine: 78, scarred: 20, injured: 1, warp: 1, death: 0 },
+        chance: {
+            defeated: 0.02,     // per defeated collected creature
+            survivor: 0.005,    // per collected creature that was not defeated (gains only)
+            boss: 3,            // boss battles multiply the chance
+            overkill: 5,        // defeated with this much more damage than it had health left…
+            overkillAt: 3,      // …multiplies the chance again
+            cap: 0.3,
+        },
+        limits: { changes: 2, attack: 2, health: 2, cost: 1 },
 
-        outcomes: {
-            fine: { name: 'Fine', icon: '✨', text: 'Shook it off.' },
-            scarred: { name: 'Scarred', icon: '🩹', text: 'Picked up a scar. Purely cosmetic, very dramatic.' },
-            injured: { name: 'Injured', icon: '🤕', text: 'Hurt: loses 1 power or its ability until mended.' },
-            warp: { name: 'Warp-cursed', icon: '🌀', text: 'The rift scrambled it: its ability is now a different one.' },
-            death: { name: 'Lost', icon: '🕯️', text: 'Fell into the rift and did not come back.' },
+        kinds: {
+            gain: { name: 'Gain', icon: '⬆️' },
+            loss: { name: 'Loss', icon: '⬇️' },
+            sideways: { name: 'Sideways', icon: '🌀' },
+            trade: { name: 'Trade-off', icon: '⚖️' },
         },
 
-        // Order of badness, worst first (wards are spent on the worst rolls).
-        bad: ['death', 'warp', 'injured'],
-
-        // Cosmetic scars.
-        scars: [
-            { id: 'chipped-ear', name: 'Chipped ear' },
-            { id: 'singed-whiskers', name: 'Singed whiskers' },
-            { id: 'eye-patch', name: 'Eye patch' },
-            { id: 'bandaged-tail', name: 'Bandaged tail' },
-            { id: 'cracked-crown', name: 'Cracked crown' },
-            { id: 'rift-freckles', name: 'Rift freckles' },
-            { id: 'lightning-streak', name: 'Lightning streak' },
-            { id: 'stitched-cheek', name: 'Stitched cheek' },
-        ],
+        // Scar-style names that tell the story. `text` is the plain explanation shown on the card.
+        changes: {
+            'lightning-streak': { name: 'Lightning Streak', kind: 'gain', attack: 1, weight: 3, text: '+1 attack.' },
+            'thick-hide': { name: 'Thick Hide', kind: 'gain', health: 1, weight: 3, text: '+1 health.' },
+            'light-feet': { name: 'Light Feet', kind: 'gain', cost: -1, weight: 2, text: 'Costs 1 less.' },
+            'stiff-claw': { name: 'Stiff Claw', kind: 'loss', attack: -1, weight: 2, text: '−1 attack.' },
+            'bandaged-tail': { name: 'Bandaged Tail', kind: 'loss', health: -1, weight: 2, text: '−1 health.' },
+            'heavy-step': { name: 'Heavy Step', kind: 'loss', cost: 1, weight: 2, text: 'Costs 1 more.' },
+            'rift-freckles': { name: 'Rift Freckles', kind: 'sideways', sideways: true, weight: 3, text: 'The rift swapped its ability for a different one.' },
+            'chipped-ear': { name: 'Chipped Ear', kind: 'trade', attack: 1, health: -1, weight: 2, text: '+1 attack, −1 health.' },
+            'cracked-crown': { name: 'Cracked Crown', kind: 'trade', attack: 2, health: -1, weight: 1, text: '+2 attack, −1 health.' },
+            'stitched-cheek': { name: 'Stitched Cheek', kind: 'trade', attack: -1, health: 2, weight: 1, text: '+2 health, −1 attack.' },
+            'singed-whiskers': { name: 'Singed Whiskers', kind: 'trade', cost: -1, health: -1, weight: 2, text: 'Costs 1 less, −1 health.' },
+        },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

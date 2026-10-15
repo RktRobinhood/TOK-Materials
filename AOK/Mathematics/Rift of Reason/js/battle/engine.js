@@ -25,7 +25,7 @@
  *   decider(state) → player index who must act, or null     winner(state) → 0 | 1 | 'draw' | null
  *   describe(state, cid) → everything a card face needs (name, cost, attack, health, keywords, lines…)
  *   attackOf / healthOf / keywordsOf / canAttack / attackTargets / activations / targetsFor / fightPreview
- *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p)
+ *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p), overkillOf(state, p)
  *   fateSchedule(state) → the public scheduled Fate events (#118/#119), fateEventPreview(state, id) → what
  *                  one would do if it resolved now (the real resolution, run on a copy), canSchedule(state, p)
  *   exhaustion(state, p) → { due, damage, count, reversed, lethal, wins } for the draw controls
@@ -499,7 +499,7 @@
             keywords: keywordsOf(s, cid), lines, silenced: !!c.silenced, onBoard,
             sleeping: onBoard && isSleeping(s, cid), frozen: !!c.frozen, activated: !!c.activated, attacks: c.attacks,
             canAttack: canAttack(s, cid), hidden: onBoard && isHidden(s, cid),
-            variant: c.variant, taught: c.taught, injured: c.injured.slice(), loaner: c.loaner, trophyOf: c.trophyOf,
+            variant: c.variant, taught: c.taught, injured: c.injured.slice(), changes: (c.changes || []).slice(), loaner: c.loaner, trophyOf: c.trophyOf,
             prediction: c.prediction, metaverseUsed: c.metaverseUsed,
         };
     }
@@ -671,6 +671,15 @@
         return out;
     }
 
+    // { uid: most excess damage at any of its defeats } for the creatures lostUids reports.
+    function overkillOf(s, p) {
+        const out = {};
+        lostUids(s, p).forEach(uid => {
+            Object.values(s.cards).forEach(c => { if (c.uid === uid && c.kind === 'creature') out[uid] = Math.max(out[uid] || 0, c.overkill || 0); });
+        });
+        return out;
+    }
+
     // ---- creation ----------------------------------------------------------------------
 
     function padInstance(p, i) {
@@ -685,18 +694,20 @@
         const injuries = inst.injuries || [];
         const kws = (sp.keywords || []).slice();
         [v.trait, taught].forEach(k => { if (KEYWORDS.includes(k) && !kws.includes(k)) kws.push(k); });
+        const ch = Rift.changeEffect(inst);
         return {
             cid, kind: 'creature', uid: inst.uid || cid, species: inst.species, owner, controller: owner,
-            colour: sp.colour, generic: !!sp.generic, cost: sp.cost,
-            attack: Math.max(0, sp.attack + (v.attack || 0) + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0)),
-            health: Math.max(1, sp.health + (v.health || 0) + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0)),
+            colour: sp.colour, generic: !!sp.generic, cost: Math.max(1, sp.cost + ch.cost),
+            attack: Math.max(0, sp.attack + (v.attack || 0) + (taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0) + ch.attack),
+            health: Math.max(1, sp.health + (v.health || 0) + (taught === 'health' ? 1 : 0) + (v.trait === 'sturdy' ? 1 : 0) + ch.health),
             baseKeywords: kws,
-            ability: injuries.includes('no-ability') ? null : ((inst.warped && inst.warped.ability) || sp.ability || null),
+            ability: injuries.includes('no-ability') ? null : (ch.ability || (inst.warped && inst.warped.ability) || sp.ability || null),
             gained: [], buffs: [], extraKeywords: [],
             damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, silenced: false, shieldUsed: false,
             nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0, burned: false,
             legendary: sp.rarity === 'legendary', loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
-            injured: injuries.slice(), warped: !!(inst.warped && inst.warped.ability),
+            injured: injuries.slice(), warped: !!(ch.ability || (inst.warped && inst.warped.ability)),
+            changes: (inst.changes || []).map(c => c.id), overkill: 0,
             variant: inst.variant || null, taught, defeats: 0,
         };
     }
@@ -1666,6 +1677,8 @@
         if (!s.players[c.controller].board.includes(cid)) return;
         if (!name) name = logName(s, cid);
         const controller = c.controller;
+        // Excess damage at the moment of defeat (Changes, #151: overkill raises the odds).
+        if (c.kind === 'creature') c.overkill = Math.max(c.overkill || 0, -healthOf(s, cid).current);
         removeFrom(s.players[c.controller].board, cid);
         let dest = 'discard', saver = null;
         // Mercy first, and no return with a full hand, so a once-per-match Last Word is not wasted.
@@ -1890,7 +1903,7 @@
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
-        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, exhaustion,
+        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
         rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, SCHEDULE_LIMIT, canSchedule, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,

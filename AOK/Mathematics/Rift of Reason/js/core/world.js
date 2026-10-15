@@ -11,22 +11,6 @@
     function nodes() { return Rift.data.map.nodes; }
     function node(id) { return nodes()[id]; }
 
-    // One Mending restores an ability or one lost attack point on an owned card.
-    // Restoring attack always shows: an old-scale powerDelta below "attack 0" is lifted
-    // to attack 0 first, so the Mending really gives +1 attack. If no attack is really lost
-    // (a stale injury tag), the tag is cleared and nothing is spent.
-    function mend(state,uid,injury){
-        const c=state.creatures.find(x=>x.uid===uid);
-        if(!c || !(state.items.mending>0) || !['no-ability','minus-one'].includes(injury) || !c.injuries.includes(injury))return false;
-        if(injury==='minus-one'){
-            const from=Math.max(c.powerDelta||0,Rift.State.minPowerDelta(c));
-            if((c.powerDelta||0)<0 && from>=0){Rift.State.clampPower(c);return false;}
-            c.powerDelta=from+1;
-            if(c.powerDelta>=0)c.injuries=c.injuries.filter(x=>x!==injury);
-        }else c.injuries=c.injuries.filter(x=>x!==injury);
-        state.items.mending--;return true;
-    }
-
     // One Trick Book teaches an owned creature one trick (replacing any earlier one).
     // Returns false, spending nothing, for a missing book, creature or trick, or the same trick again.
     function teach(state, uid, trick) {
@@ -384,7 +368,7 @@
 
     Rift.World = {
         tweakSlots,
-        award, attempts, recordWrong, hintCost, solveStars, mend, teach, claimTrainerReward,
+        award, attempts, recordWrong, hintCost, solveStars, teach, claimTrainerReward,
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter, claimBonus,

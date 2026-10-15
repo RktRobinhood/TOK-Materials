@@ -1,22 +1,21 @@
 /*
- * Fate rolls for creatures that ended a RISKED battle in a discard pile.
- * Pure: takes instances, returns updated copies plus a log. Practice battles
- * never roll. Odds and scar names live in data/fate.js.
+ * Changes after a battle with something at stake (issue #151). Pure: takes instances, returns
+ * updated copies plus a log. Practice battles never roll. Odds, limits and the Changes live in
+ * data/fate.js; Rift.changeEffect applies them to a card.
  *
  * Rift.Battle.Fate.roll({
  *   instances: [creature instances of ONE player],
  *   defeated: [uids]            // e.g. Engine.lostUids(state, p)
+ *   overkill: { uid: n }        // e.g. Engine.overkillOf(state, p): most excess damage at a defeat
  *   mode: 'practice' | 'trainer' | 'boss' | 'ghost',
- *   won: bool,                  // winners roll on the kinder winnerOdds
- *   items: { ward: n, anchor: n },
  *   seed,
- *   odds?                       // override for tuning
- * }) → { instances, removed: [uid], results: [{ uid, species, roll, outcome, detail, savedBy }],
- *        itemsUsed: { ward, anchor }, log: [string] }
+ *   chance?                     // override data/fate.js chance for tuning and tests
+ * }) → { instances, removed: [], results: [{ uid, species, defeated, change, name, text }],
+ *        itemsUsed: {}, log: [string] }
  *
- * Rules: legendaries never die (death → scarred). An anchor cancels one warp;
- * wards cancel the worst remaining bad rolls (death, then warp, then injured).
- * Items are spent automatically, worst roll first.
+ * Defeated creatures roll the whole pool (gains, losses, sideways, trade-offs); the others roll
+ * gains only. Nothing is ever removed and no item is spent: `removed` and `itemsUsed` stay empty
+ * for Ante.applyToSave.
  */
 (function (root) {
     'use strict';
@@ -25,122 +24,84 @@
     const Battle = Rift.Battle || (Rift.Battle = {});
 
     const data = () => Rift.data.fate;
-
-    function speciesName(id) { return ((Rift.data.creatures || {})[id] || {}).name || id; }
-
-    function currentAbility(inst) {
-        if (inst.warped && inst.warped.ability) return inst.warped.ability;
-        const sp = (Rift.data.creatures || {})[inst.species];
-        return sp ? sp.ability : null;
-    }
+    const species = id => (Rift.data.creatures || {})[id] || null;
 
     function copyInstance(inst) {
-        return Object.assign({}, inst, {
-            scars: (inst.scars || []).slice(),
-            injuries: (inst.injuries || []).slice(),
-            warped: inst.warped ? Object.assign({}, inst.warped) : null,
+        return Object.assign({}, inst, { changes: (inst.changes || []).map(ch => Object.assign({}, ch)) });
+    }
+
+    function abilityNow(inst) {
+        const e = Rift.changeEffect(inst);
+        if (e.ability) return e.ability;
+        if (inst.warped && inst.warped.ability) return inst.warped.ability;
+        return (species(inst.species) || {}).ability || null;
+    }
+
+    // Chance that this creature changes in this battle.
+    function chanceFor(C, mode, defeated, overkill) {
+        let p = defeated ? C.defeated : C.survivor;
+        if (mode === 'boss') p *= C.boss;
+        if (defeated && overkill >= C.overkillAt) p *= C.overkill;
+        return Math.min(p, C.cap);
+    }
+
+    // Changes this creature can still take without breaking a limit (data/fate.js).
+    function eligible(inst, gainsOnly) {
+        const D = data(), L = D.limits;
+        const have = inst.changes || [];
+        if (have.length >= L.changes) return [];
+        const sp = species(inst.species);
+        if (!sp) return [];
+        const st = Rift.State.creatureStats(inst);
+        const e = Rift.changeEffect(inst);
+        return Object.keys(D.changes).filter(id => {
+            const d = D.changes[id];
+            if (gainsOnly && d.kind !== 'gain') return false;
+            if (have.some(ch => ch.id === id)) return false;
+            if (d.sideways) return !have.some(ch => (D.changes[ch.id] || {}).sideways) && (Battle.KEYWORDS || []).some(k => k !== abilityNow(inst));
+            const a = d.attack || 0, h = d.health || 0, c = d.cost || 0;
+            return Math.abs(e.attack + a) <= L.attack && Math.abs(e.health + h) <= L.health && Math.abs(e.cost + c) <= L.cost
+                && st.attack + a >= 0 && st.health + h >= 1 && st.cost + c >= 1;
         });
     }
 
     function roll(opts) {
         const o = opts || {};
         const D = data();
-        const instances = (o.instances || []).map(copyInstance);
-        const result = { instances, removed: [], results: [], itemsUsed: { ward: 0, anchor: 0 }, log: [] };
         if (!o.mode || o.mode === 'practice') {
-            result.log.push('Practice battle: nobody is at risk.');
-            return result;
+            return { instances: (o.instances || []).map(inst => Object.assign({}, inst)), removed: [], results: [], itemsUsed: {}, log: ['Practice battle: nobody is at risk.'] };
         }
+        const instances = (o.instances || []).map(copyInstance);
+        const result = { instances, removed: [], results: [], itemsUsed: {}, log: [] };
         const rng = Rift.makeRng('fate:' + String(o.seed == null ? 'fate' : o.seed));
-        const odds = o.odds || (o.won ? D.winnerOdds : D.odds);
-        const defeated = o.defeated || [];
-        const byUid = {};
-        instances.forEach(inst => { byUid[inst.uid] = inst; });
-
-        // 1. roll
-        const rolls = [];
-        defeated.forEach(uid => {
-            const inst = byUid[uid];
-            if (!inst || inst.loaner) return;
-            const r = { uid, species: inst.species, roll: rng.weighted(odds), outcome: null, detail: '', savedBy: null };
-            r.outcome = r.roll;
-            const sp = (Rift.data.creatures || {})[inst.species] || {};
-            if (r.outcome === 'death' && sp.rarity === 'legendary') {
-                r.outcome = 'scarred';
-                r.savedBy = 'legend';
+        const C = Object.assign({}, D.chance, o.chance || {});
+        const defeated = new Set(o.defeated || []);
+        const overkill = o.overkill || {};
+        instances.forEach(inst => {
+            if (inst.loaner || !species(inst.species)) return;
+            const fell = defeated.has(inst.uid);
+            if (!rng.chance(chanceFor(C, o.mode, fell, overkill[inst.uid] || 0))) return;
+            const pool = eligible(inst, !fell);
+            if (!pool.length) return;
+            const weights = {};
+            pool.forEach(id => { weights[id] = D.changes[id].weight || 1; });
+            const id = rng.weighted(weights), d = D.changes[id];
+            const ch = { id };
+            let text = d.text;
+            if (d.sideways) {
+                const from = abilityNow(inst);
+                ch.ability = rng.pick((Battle.KEYWORDS || []).filter(k => k !== from));
+                ch.from = from;
+                const def = (Battle.Abilities || {})[ch.ability];
+                text = 'Its ability is now ' + (def ? def.name : ch.ability) + '.';
             }
-            rolls.push(r);
+            inst.changes.push(ch);
+            result.results.push({ uid: inst.uid, species: inst.species, defeated: fell, change: id, name: d.name, kind: d.kind, text });
         });
-
-        // 2. spend items, worst rolls first
-        let anchors = Math.max(0, (o.items && o.items.anchor) || 0);
-        let wards = Math.max(0, (o.items && o.items.ward) || 0);
-        rolls.filter(r => r.outcome === 'warp').forEach(r => {
-            if (anchors > 0) { anchors -= 1; result.itemsUsed.anchor += 1; r.outcome = 'fine'; r.savedBy = 'anchor'; }
-        });
-        D.bad.forEach(kind => {
-            rolls.filter(r => r.outcome === kind).forEach(r => {
-                if (wards > 0) { wards -= 1; result.itemsUsed.ward += 1; r.outcome = 'fine'; r.savedBy = 'ward'; }
-            });
-        });
-
-        // 3. apply
-        rolls.forEach(r => {
-            const inst = byUid[r.uid];
-            const name = speciesName(inst.species);
-            switch (r.outcome) {
-                case 'scarred': {
-                    const owned = inst.scars;
-                    const fresh = D.scars.filter(sc => !owned.includes(sc.id));
-                    const scar = rng.pick(fresh.length ? fresh : D.scars);
-                    if (!owned.includes(scar.id)) owned.push(scar.id);
-                    r.detail = scar.name;
-                    break;
-                }
-                case 'injured': {
-                    // -1 lowers powerDelta, which the engine subtracts from attack; attack never goes below 0.
-                    const sp = (Rift.data.creatures || {})[inst.species] || { attack: 0 };
-                    const v = inst.variant || {};
-                    const attack = (sp.attack || 0) + (v.attack || 0) + (inst.taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0);
-                    const canLosePower = attack > 0;
-                    const loseAbility = !inst.injuries.includes('no-ability') && (!canLosePower || rng.chance(0.5));
-                    if (loseAbility) {
-                        inst.injuries.push('no-ability');
-                        r.detail = 'loses its ability';
-                    } else if (canLosePower) {
-                        inst.powerDelta = (inst.powerDelta || 0) - 1;
-                        if (!inst.injuries.includes('minus-one')) inst.injuries.push('minus-one');
-                        r.detail = '-1 attack';
-                    } else {
-                        r.outcome = 'scarred';
-                        r.detail = 'too battered to hurt more';
-                    }
-                    break;
-                }
-                case 'warp': {
-                    const now = currentAbility(inst);
-                    const pool = (Battle.KEYWORDS || []).filter(k => k !== now);
-                    const next = pool.length ? rng.pick(pool) : now;
-                    inst.warped = { ability: next, from: now };
-                    const def = (Battle.Abilities || {})[next];
-                    r.detail = 'ability is now ' + (def ? def.name : next);
-                    break;
-                }
-                case 'death':
-                    result.removed.push(r.uid);
-                    break;
-                default:
-                    break;
-            }
-            const out = D.outcomes[r.outcome];
-            const saved = r.savedBy === 'legend' ? ' (legendaries never die)'
-                : r.savedBy ? ` (a ${r.savedBy} saved it)` : '';
-            result.log.push(`${name}: ${out.name}${r.detail ? ' — ' + r.detail : ''}${saved}.`);
-            result.results.push(r);
-        });
-        result.instances = instances.filter(inst => !result.removed.includes(inst.uid));
+        if (!result.results.length) result.log.push('Everyone shook it off.');
+        result.results.forEach(r => result.log.push(`${species(r.species).name}: ${r.name}. ${r.text}`));
         return result;
     }
 
-    Battle.Fate = { roll };
+    Battle.Fate = { roll, eligible, chanceFor };
 })(typeof window !== 'undefined' ? window : globalThis);

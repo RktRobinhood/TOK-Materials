@@ -149,8 +149,29 @@
         memory: { name: 'Memory', colour: 'silver', hex: '#C9C9D6', icon: '⏳' },
     };
 
+    // What a caught creature's Changes (data/fate.js, issue #151) do to its card: summed attack,
+    // health and cost deltas (cost kept within ±1; callers keep the cost at 1 or more) and the
+    // newest sideways ability. Shared by the save (State), the battle engine and the ante.
+    function changeEffect(inst) {
+        const out = { attack: 0, health: 0, cost: 0, ability: null };
+        const list = (inst && inst.changes) || [];
+        if (!list.length) return out;
+        const defs = Rift.data.fate.changes;
+        list.forEach(ch => {
+            const d = defs[ch.id];
+            if (!d) return; // a Change from a newer copy of the game
+            out.attack += d.attack || 0;
+            out.health += d.health || 0;
+            out.cost += d.cost || 0;
+            if (d.sideways && ch.ability) out.ability = ch.ability;
+        });
+        out.cost = clamp(out.cost, -1, 1);
+        return out;
+    }
+
     Object.assign(Rift, {
         version: '0.1.0',
+        changeEffect,
         hashSeed,
         makeRng,
         voiceId,

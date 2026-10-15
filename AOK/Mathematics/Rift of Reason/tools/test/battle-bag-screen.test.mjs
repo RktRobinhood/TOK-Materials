@@ -172,7 +172,7 @@ test('Leave match reports the items used; End turn ignores items for "Nothing le
     t.handle.destroy();
 });
 
-test('a real match: result.itemsUsed, and a Ward used in battle no longer saves a creature after it', () => {
+test('a real match: result.itemsUsed, and the after-battle Changes roll spends no items (#151)', () => {
     const holder = setup(practice([]));
     const E = holder.E;
     holder.handle.destroy();
@@ -197,7 +197,9 @@ test('a real match: result.itemsUsed, and a Ward used in battle no longer saves 
     t.root.querySelectorAll('.b-overlay button').find(b => b.textContent === 'Continue').click();
     assert.equal(t.results.length, 1);
     assert.deepEqual({ ...t.results[0].itemsUsed }, { ward: 1 });
-    assert.deepEqual({ ...t.fateCalls[0].items }, { ward: 1, anchor: 1 }, 'one Ward is left for the after-battle check');
+    assert.equal(t.fateCalls[0].items, undefined, 'Changes never spend items');
+    assert.equal(t.fateCalls[0].mode, 'trainer');
+    assert.equal(typeof t.fateCalls[0].overkill, 'object');
     t.handle.destroy();
 });
 

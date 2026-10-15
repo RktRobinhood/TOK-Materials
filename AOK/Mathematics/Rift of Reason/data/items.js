@@ -50,19 +50,19 @@
                 api.emit({ t: 'item', text: 'Tonic: +' + (P.hearts - before) + ' heart' + (P.hearts - before === 1 ? '' : 's') + ' (' + P.hearts + ' now).' });
             },
         } },
-        ward: { name: 'Ward', kind: 'battle', text: 'Cancels one bad fate roll after a battle.', battle: {
+        ward: { name: 'Ward', kind: 'battle', text: 'Use in a card battle: a friendly creature gets Shield.', battle: {
             cost: 1, target: 'friendly-creature', filter: (s, cid, H) => !H.hasKeyword(s, cid, 'shield'),
             text: 'A friendly creature gets Shield.',
             noTarget: 'You need a creature of yours without Shield.',
             run(api, p, target) { api.addKeyword(target, 'shield'); api.emit({ t: 'item', text: 'Ward: ' + api.name(target) + ' gets Shield.' }); },
         } },
-        mending: { name: 'Mending', kind: 'support', text: 'Use in the Bag: restore one lost ability or one lost attack point on a creature.', battle: {
+        mending: { name: 'Mending', kind: 'support', text: 'Use in a card battle: fully heal a friendly creature.', battle: {
             cost: 1, target: 'friendly-creature', filter: (s, cid) => s.cards[cid].damage > 0,
             text: 'Fully heal a friendly creature.',
             noTarget: 'You need a damaged creature of yours.',
             run(api, p, target) { api.heal(target, api.s.cards[target].damage); api.emit({ t: 'item', text: 'Mending: ' + api.name(target) + ' is fully healed.' }); },
         } },
-        anchor: { name: 'Anchor', kind: 'battle', text: 'Stops a creature being warp-cursed in one battle.', battle: {
+        anchor: { name: 'Anchor', kind: 'battle', text: "Use in a card battle: the Fate track doesn't move at the end of this round.", battle: {
             cost: 0, text: "The Fate track doesn't move at the end of this round.",
             usable: s => !!s.options.timeline,
             why: 'There is no Fate track in this match.',

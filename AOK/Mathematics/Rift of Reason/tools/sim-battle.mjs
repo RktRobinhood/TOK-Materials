@@ -91,7 +91,6 @@ AI_PATCH.split(',').filter(Boolean).forEach(kv => {
 });
 // --syllo-hearts=N gives Syllo N hearts in the story-challenge row (default: the game's own setting).
 const SYLLO_HEARTS = opt('syllo-hearts', null);
-const OUTCOMES = ['fine', 'scarred', 'injured', 'warp', 'death'];
 
 function matchup(label, g) {
     const rng = Rift.makeRng(SEED + ':' + label + ':' + g);
@@ -158,17 +157,14 @@ function scenarioGame(scenario, label, g, levels, powers) {
     };
 }
 
-function newSide() { return { players: 0, rolls: 0, fine: 0, scarred: 0, injured: 0, warp: 0, death: 0, anyDeath: 0, anyHurt: 0 }; }
-function tally(F, fate) {
+// Changes (#151): per player per risked battle.
+function newSide() { return { players: 0, defeated: 0, overkill: 0, changes: 0, anyChange: 0, gain: 0, loss: 0, sideways: 0, trade: 0 }; }
+function tally(F, fate, lost, overkill) {
     F.players += 1;
-    let death = false, hurt = false;
-    fate.results.forEach(r => {
-        F[r.outcome] += 1; F.rolls += 1;
-        if (r.outcome === 'death') death = true;
-        if (r.outcome === 'death' || r.outcome === 'injured') hurt = true;
-    });
-    if (death) F.anyDeath += 1;
-    if (hurt) F.anyHurt += 1;
+    F.defeated += lost.length;
+    F.overkill += Object.values(overkill).filter(n => n >= Rift.data.fate.chance.overkillAt).length;
+    fate.results.forEach(r => { F.changes += 1; F[r.kind] += 1; });
+    if (fate.results.length) F.anyChange += 1;
 }
 
 function runRange(from, to, levels, label, scenario, powers) {
@@ -248,7 +244,10 @@ function runRange(from, to, levels, label, scenario, powers) {
                 });
                 const lost = Engine.lostUids(s, p);
                 st.lost += lost.length;
-                if (s.winner !== 'draw') tally(won ? st.fate.won : st.fate.lost, Fate.roll({ instances: m.teams[p], defeated: lost, mode: 'trainer', won, seed: seed + ':fate:' + p }));
+                if (s.winner !== 'draw') {
+                    const overkill = Engine.overkillOf(s, p);
+                    tally(won ? st.fate.won : st.fate.lost, Fate.roll({ instances: m.teams[p], defeated: lost, overkill, mode: 'trainer', seed: seed + ':fate:' + p }), lost, overkill);
+                }
                 if (levels[0] === levels[1]) new Set(m.teams[p].map(c => c.species)).forEach(id => {
                     const r = row(st.species, id);
                     r.games += 1;
@@ -311,13 +310,14 @@ function playTable(title, map, games) {
 }
 
 function fateReport(F) {
-    console.log('\n-- fate per player per risked battle (data/fate.js odds) --');
+    console.log('\n-- Changes per player per trainer battle (data/fate.js; boss battles x' + Rift.data.fate.chance.boss + ') --');
     console.log('                       winners           losers');
     const sides = [F.won, F.lost];
-    console.log('rolls per player       ' + sides.map(t => avg(t.rolls, t.players).padEnd(18)).join(''));
-    OUTCOMES.forEach(k => console.log('  ' + k.padEnd(21) + sides.map(t => (avg(t[k], t.players) + ' (' + pct(t[k], t.rolls) + ')').padEnd(18)).join('')));
-    console.log('battles: perm. loss    ' + sides.map(t => pct(t.anyDeath, t.players).padEnd(18)).join(''));
-    console.log('battles: injury/death  ' + sides.map(t => pct(t.anyHurt, t.players).padEnd(18)).join(''));
+    console.log('defeated creatures     ' + sides.map(t => avg(t.defeated, t.players).padEnd(18)).join(''));
+    console.log('  of them overkilled   ' + sides.map(t => avg(t.overkill, t.players).padEnd(18)).join(''));
+    console.log('Changes                ' + sides.map(t => avg(t.changes, t.players).padEnd(18)).join(''));
+    ['gain', 'loss', 'sideways', 'trade'].forEach(k => console.log('  ' + k.padEnd(21) + sides.map(t => avg(t[k], t.players).padEnd(18)).join('')));
+    console.log('battles with a Change  ' + sides.map(t => pct(t.anyChange, t.players).padEnd(18)).join(''));
 }
 
 // The level ladder: each row is --games games of level A vs level B (A's win rate is reported).

@@ -1,4 +1,4 @@
-// Fate table, ante and team codes.
+// Changes after battles (#151), ante and team codes.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
@@ -15,34 +15,30 @@ let n = 0;
 const inst = (species, extra) => Object.assign({ uid: 'm' + (++n), species, caughtAt: 0, powerDelta: 0, injuries: [], scars: [], warped: null, trophyOf: null, wins: 0 }, extra || {});
 const TEN = ['lobstorian', 'astrophysicat', 'tremendoodle', 'swiftlet', 'muskrat', 'zuckerborg', 'altmanta', 'beastie', 'siuuugull', 'speedcheeta'];
 
-// ---- fate ------------------------------------------------------------------------------
+// ---- Changes (#151) ------------------------------------------------------------------------
 
-test('fate never kills legendaries', () => {
-    const legends = Object.keys(Rift.data.creatures).filter(id => Rift.data.creatures[id].rarity === 'legendary').map(id => inst(id));
-    for (let i = 0; i < 200; i++) {
-        const r = Fate.roll({ instances: legends, defeated: legends.map(c => c.uid), mode: 'trainer', seed: 'L' + i, odds: { death: 1 } });
-        assert.equal(r.removed.length, 0);
-        assert.equal(r.instances.length, legends.length);
-        r.results.forEach(x => { assert.equal(x.outcome, 'scarred'); assert.equal(x.savedBy, 'legend'); });
-    }
+const ALL = { defeated: 1, survivor: 1, cap: 1 };
+const F = Rift.data.fate;
+
+test('Changes odds: 2% base, x3 in boss battles, x5 on 3+ overkill, capped at 30%; survivors 0.5%', () => {
+    const C = F.chance;
+    assert.equal(C.defeated, 0.02);
+    assert.equal(Fate.chanceFor(C, 'trainer', true, 0), 0.02);
+    assert.equal(Fate.chanceFor(C, 'ghost', true, 2), 0.02);
+    assert.ok(Math.abs(Fate.chanceFor(C, 'boss', true, 0) - 0.06) < 1e-9);
+    assert.ok(Math.abs(Fate.chanceFor(C, 'trainer', true, 3) - 0.1) < 1e-9);
+    assert.equal(Fate.chanceFor(C, 'boss', true, 9), 0.3);
+    assert.equal(Fate.chanceFor(C, 'trainer', false, 9), 0.005);
 });
 
-test('ordinary creatures can die, and the dead are removed', () => {
-    const team = [inst('lobstorian'), inst('swiftlet')];
-    const r = Fate.roll({ instances: team, defeated: [team[0].uid], mode: 'trainer', seed: 'd', odds: { death: 1 } });
-    assert.deepEqual(J(r.removed), [team[0].uid]);
-    assert.deepEqual(J(r.instances.map(c => c.uid)), [team[1].uid]);
-});
-
-test('practice battles never change instances', () => {
+test('practice battles never change instances, and the ante is empty', () => {
     const team = TEN.map(x => inst(x));
     const before = J(team);
-    const r = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'practice', seed: 'p', odds: { death: 1 } });
+    const r = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'practice', seed: 'p', chance: ALL });
     assert.deepEqual(J(r.instances), before);
     assert.equal(r.removed.length, 0);
     assert.equal(r.results.length, 0);
     assert.deepEqual(J(team), before, 'input untouched');
-    // and the ante is empty
     const a = Ante.compute({ type: 'practice', player: { items: { charm: 5 } } });
     assert.deepEqual(J(Ante.settle(a, 'lost')), { itemsDelta: {}, creaturesGained: [], lines: [] });
     const save = { creatures: J(team), items: { charm: 5 }, stats: { battlesWon: 0, battlesLost: 0 } };
@@ -50,70 +46,96 @@ test('practice battles never change instances', () => {
     assert.deepEqual(save.creatures, before);
 });
 
-test('fate is pure: input instances are never mutated', () => {
+test('Changes are pure, never remove a creature, and never spend items', () => {
     const team = TEN.map(x => inst(x));
     const before = J(team);
-    Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 'pure', odds: { injured: 1, warp: 1, scarred: 1 } });
+    const r = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 'pure', chance: ALL, items: { ward: 3 } });
     assert.deepEqual(J(team), before);
+    assert.equal(r.instances.length, team.length);
+    assert.deepEqual(J(r.removed), []);
+    assert.deepEqual(J(r.itemsUsed), {});
+    assert.equal(r.results.length, team.length);
 });
 
-test('injured: -1 power or loses its ability; warp: a different keyword; scarred: cosmetic', () => {
-    const team = Array.from({ length: 30 }, () => inst('lobstorian'));
-    const hurt = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 'i', odds: { injured: 1 } });
-    hurt.instances.forEach(c => assert.ok(c.powerDelta === -1 || c.injuries.includes('no-ability')));
-    assert.ok(hurt.instances.some(c => c.powerDelta === -1) && hurt.instances.some(c => c.injuries.includes('no-ability')));
-    const warped = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 'w', odds: { warp: 1 } });
-    warped.instances.forEach(c => {
-        assert.ok(Rift.Battle.KEYWORDS.includes(c.warped.ability));
-        assert.notEqual(c.warped.ability, 'lecture');
-    });
-    const scar = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 's', odds: { scarred: 1 } });
-    scar.instances.forEach(c => { assert.equal(c.scars.length, 1); assert.equal(c.powerDelta, 0); });
-    // the engine honours the results
-    const s = E.createBattle({ seed: 'x', players: [{ team: [hurt.instances[0], warped.instances[0]] }, { team: [] }], options: { shuffle: false } });
-    assert.ok(s.cards.p0c0.attack === Rift.data.creatures.lobstorian.attack - 1 || s.cards.p0c0.ability === null);
-    assert.equal(s.cards.p0c1.ability, warped.instances[0].warped.ability);
+test('nobody changes most of the time: "Everyone shook it off"', () => {
+    const team = TEN.map(x => inst(x));
+    const r = Fate.roll({ instances: team, defeated: team.slice(0, 3).map(c => c.uid), mode: 'trainer', seed: 'quiet' });
+    if (!r.results.length) assert.deepEqual(J(r.log), ['Everyone shook it off.']);
+    let changed = 0;
+    for (let i = 0; i < 400; i++) changed += Fate.roll({ instances: team, defeated: team.slice(0, 3).map(c => c.uid), mode: 'trainer', seed: 'q' + i }).results.length;
+    // 3 defeated × 2% + 7 survivors × 0.5% ≈ 0.095 per battle.
+    assert.ok(changed > 10 && changed < 80, 'about 38 Changes in 400 battles, got ' + changed);
 });
 
-test('injuries lower attack but never below 0: a 0-attack creature loses its ability or is only scarred', () => {
-    // Astrophysicat has 1 attack; a -1 attack variant brings it to 0.
-    const weak = Array.from({ length: 20 }, () => inst('astrophysicat', { variant: { attack: -1, health: 0, trait: null } }));
-    const r = Fate.roll({ instances: weak, defeated: weak.map(c => c.uid), mode: 'trainer', seed: 'zero', odds: { injured: 1 } });
-    r.instances.forEach(c => { assert.equal(c.powerDelta, 0); assert.ok(c.injuries.includes('no-ability')); });
-    const done = r.instances.map(c => Object.assign({}, c));
-    const again = Fate.roll({ instances: done, defeated: done.map(c => c.uid), mode: 'trainer', seed: 'zero2', odds: { injured: 1 } });
-    again.results.forEach(x => assert.equal(x.outcome, 'scarred'));
-    // A taught +1 attack trick counts as attack that can be lost.
-    const taught = [inst('astrophysicat', { variant: { attack: -1, health: 0, trait: null }, taught: 'attack', injuries: ['no-ability'] })];
-    const t = Fate.roll({ instances: taught, defeated: [taught[0].uid], mode: 'trainer', seed: 't', odds: { injured: 1 } });
-    assert.equal(t.instances[0].powerDelta, -1);
-    assert.match(t.log[0], /-1 attack/);
+test('defeated creatures can get any kind; creatures that were not defeated only gain', () => {
+    const team = Array.from({ length: 200 }, () => inst('lobstorian'));
+    const fell = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'trainer', seed: 'k', chance: ALL });
+    const kinds = new Set(fell.results.map(r => r.kind));
+    ['gain', 'loss', 'sideways', 'trade'].forEach(k => assert.ok(kinds.has(k), k));
+    const stood = Fate.roll({ instances: team, defeated: [], mode: 'trainer', seed: 'k', chance: ALL });
+    assert.ok(stood.results.length > 0);
+    stood.results.forEach(r => { assert.equal(r.kind, 'gain'); assert.equal(r.defeated, false); });
 });
 
-test('anchor stops a warp; wards cancel the worst bad rolls first', () => {
-    const team = [inst('lobstorian'), inst('swiftlet'), inst('muskrat')];
+test('overkill of 3+ boosts the odds (the engine side is in battle-changes.test.mjs)', () => {
+    const team = Array.from({ length: 400 }, () => inst('lobstorian'));
     const ids = team.map(c => c.uid);
-    const a = Fate.roll({ instances: team, defeated: ids, mode: 'trainer', seed: 'a', odds: { warp: 1 }, items: { anchor: 1 } });
-    assert.equal(a.itemsUsed.anchor, 1);
-    assert.equal(a.results.filter(r => r.outcome === 'fine' && r.savedBy === 'anchor').length, 1);
-    assert.equal(a.results.filter(r => r.outcome === 'warp').length, 2);
-    const w = Fate.roll({ instances: team, defeated: ids, mode: 'trainer', seed: 'b', odds: { death: 1 }, items: { ward: 2 } });
-    assert.equal(w.itemsUsed.ward, 2);
-    assert.equal(w.removed.length, 1);
+    const big = {}; ids.forEach(u => { big[u] = 3; });
+    const plain = Fate.roll({ instances: team, defeated: ids, mode: 'trainer', seed: 'o' }).results.length;
+    const over = Fate.roll({ instances: team, defeated: ids, overkill: big, mode: 'trainer', seed: 'o' }).results.length;
+    assert.ok(over > plain * 2, `overkill ${over} vs plain ${plain}`);
 });
 
-test('loaned commons and creatures outside the instance list never roll', () => {
-    const team = [inst('lobstorian')];
-    const r = Fate.roll({ instances: team, defeated: ['loan-0-1', 'nobody', team[0].uid], mode: 'trainer', seed: 'l' });
-    assert.equal(r.results.length, 1);
+test('limits: at most 2 Changes, ±2 attack and health, cost ±1 and never 0, attack ≥ 0, health ≥ 1', () => {
+    for (let i = 0; i < 60; i++) {
+        let team = Object.keys(Rift.data.creatures).slice(0, 30).map(id => inst(id));
+        for (let round = 0; round < 4; round++) {
+            team = Fate.roll({ instances: team, defeated: team.map(c => c.uid), mode: 'boss', seed: 'lim' + i + ':' + round, chance: ALL }).instances;
+        }
+        team.forEach(c => {
+            assert.ok(c.changes.length <= F.limits.changes);
+            assert.equal(new Set(c.changes.map(ch => ch.id)).size, c.changes.length);
+            const sum = k => c.changes.reduce((n, ch) => n + (F.changes[ch.id][k] || 0), 0);
+            assert.ok(Math.abs(sum('attack')) <= 2 && Math.abs(sum('health')) <= 2 && Math.abs(sum('cost')) <= 1);
+            const sp = Rift.data.creatures[c.species], st = Rift.State.creatureStats(c);
+            assert.ok(st.cost >= 1 && Math.abs(st.cost - sp.cost) <= 1);
+            assert.ok(st.attack >= 0 && st.health >= 1);
+            assert.ok(c.changes.filter(ch => F.changes[ch.id].sideways).length <= 1);
+        });
+    }
 });
 
-test('fate odds are tuned to be kinder to winners', () => {
-    const F = Rift.data.fate;
-    const total = o => Object.values(o).reduce((a, b) => a + b, 0);
-    assert.equal(F.winnerOdds.death, 0);
-    assert.ok(F.odds.death / total(F.odds) <= 0.01);
-    assert.ok(F.winnerOdds.fine / total(F.winnerOdds) > F.odds.fine / total(F.odds));
+test('the engine and the save both honour Changes; a sideways Change swaps the ability', () => {
+    const c = inst('lobstorian', { changes: [{ id: 'cracked-crown' }, { id: 'light-feet' }] });
+    const sp = Rift.data.creatures.lobstorian;
+    const st = Rift.State.creatureStats(c);
+    assert.deepEqual([st.attack, st.health, st.cost], [sp.attack + 2, Math.max(1, sp.health - 1), Math.max(1, sp.cost - 1)]);
+    const w = inst('lobstorian', { changes: [{ id: 'rift-freckles', ability: 'grook', from: sp.ability }] });
+    const s = E.createBattle({ seed: 'x', players: [{ team: [c, w] }, { team: [] }], options: { shuffle: false } });
+    assert.deepEqual([s.cards.p0c0.attack, s.cards.p0c0.health, s.cards.p0c0.cost], [st.attack, st.health, st.cost]);
+    assert.equal(s.cards.p0c1.ability, 'grook');
+    assert.equal(Ante.attackOf(c), st.attack);
+});
+
+test('loaned commons and creatures outside the instance list never change', () => {
+    const team = [inst('lobstorian'), inst('swiftlet', { loaner: true })];
+    const r = Fate.roll({ instances: team, defeated: ['loan-0-1', 'nobody', team[0].uid, team[1].uid], mode: 'trainer', seed: 'l', chance: ALL });
+    assert.deepEqual(J(r.results.map(x => x.uid)), [team[0].uid]);
+});
+
+test('save migration 2 → 3 heals injuries, turns a warp into a sideways Change and keeps scars', () => {
+    const s = Rift.State.freshState();
+    s.version = 2;
+    s.creatures = [inst('lobstorian', { powerDelta: -1, injuries: ['minus-one', 'no-ability'], scars: ['chipped-ear'], warped: { ability: 'grook', from: 'lecture' } })];
+    const m = Rift.State.migrate(J(s));
+    const c = m.creatures[0];
+    assert.equal(m.version, 3);
+    assert.equal(c.powerDelta, 0);
+    assert.deepEqual(J(c.injuries), []);
+    assert.equal(c.warped, null);
+    assert.deepEqual(J(c.changes), [{ id: 'rift-freckles', ability: 'grook', from: 'lecture' }]);
+    assert.deepEqual(J(c.scars), ['chipped-ear']);
+    assert.equal(Rift.State.creatureStats(c).ability, 'grook');
 });
 
 // ---- ante -------------------------------------------------------------------------------
@@ -166,23 +188,28 @@ test('ghost trophy: strongest by real attack, copying its variant and taught tri
     assert.equal(won.taught, null);
 });
 
-test('applyToSave drops dead creatures from the chosen battle team', () => {
+test('applyToSave applies Changes and the ante to a save', () => {
     const team = [inst('lobstorian'), inst('swiftlet')];
-    const save = { creatures: J(team), team: team.map(c => c.uid), items: { charm: 2 }, stats: { battlesWon: 0, battlesLost: 0 } };
-    const fate = Fate.roll({ instances: save.creatures, defeated: [team[0].uid], mode: 'trainer', seed: 'x', odds: { death: 1 } });
-    Ante.applyToSave(save, { mode: 'trainer', outcome: 'won', fate });
-    assert.deepEqual(save.team, [team[1].uid]);
-});
-
-test('applyToSave applies fate and ante to a save', () => {
-    const team = [inst('lobstorian'), inst('swiftlet')];
-    const save = { creatures: J(team), items: { charm: 2, ward: 1 }, stats: { battlesWon: 0, battlesLost: 0 } };
-    const fate = Fate.roll({ instances: save.creatures, defeated: [team[0].uid], mode: 'trainer', seed: 'x', odds: { death: 1 }, items: { ward: 0 } });
+    const save = { creatures: J(team), team: team.map(c => c.uid), items: { charm: 2, ward: 1 }, stats: { battlesWon: 0, battlesLost: 0 } };
+    const fate = Fate.roll({ instances: save.creatures, defeated: [team[0].uid], mode: 'trainer', seed: 'x', chance: { defeated: 1, survivor: 0, cap: 1 } });
     const ante = Ante.compute({ type: 'trainer', player: { items: save.items }, opponent: { name: 'T' }, seed: 'x' });
     Ante.applyToSave(save, { mode: 'trainer', outcome: 'lost', fate, settlement: Ante.settle(ante, 'lost') });
-    assert.deepEqual(save.creatures.map(c => c.uid), [team[1].uid]);
+    assert.deepEqual(save.creatures.map(c => c.uid), team.map(c => c.uid));
+    assert.deepEqual(save.team, team.map(c => c.uid));
+    assert.equal(save.creatures[0].changes.length, 1);
+    assert.equal(save.creatures[1].changes.length, 0);
+    assert.equal(save.items.ward, 1, 'a Ward is no longer spent after a battle');
     assert.equal(save.items.charm, 1);
     assert.equal(save.stats.battlesLost, 1);
+});
+
+test('a ghost trophy keeps the ghost creature’s Changes, with old injuries healed', () => {
+    const ghostTeam = [inst('beastie', { powerDelta: -1, injuries: ['minus-one'], changes: [{ id: 'cracked-crown' }] })];
+    const a = Ante.compute({ type: 'ghost', player: { items: { charm: 1 } }, opponent: { name: 'G', nickname: 'Gro', team: ghostTeam }, seed: 'tc' });
+    const trophy = Ante.settle(a, 'won', { seed: 'tc', now: 0 }).creaturesGained.find(c => c.trophyOf);
+    assert.deepEqual(J(trophy.changes), [{ id: 'cracked-crown' }]);
+    assert.deepEqual(J(trophy.injuries), []);
+    assert.equal(trophy.powerDelta, 0);
 });
 
 // ---- team codes ----------------------------------------------------------------------------
@@ -315,4 +342,20 @@ test('a ghost battle runs the imported team with the AI, deterministically', () 
     assert.ok(a.winner != null);
     assert.equal(a.winner, b.winner);
     assert.equal(a.turn, b.turn);
+});
+
+test('team codes carry Changes; a sideways ability rides in the warped slot; impossible Changes are refused', () => {
+    const team = [
+        inst('lobstorian', { changes: [{ id: 'cracked-crown' }, { id: 'light-feet' }] }),
+        inst('swiftlet', { changes: [{ id: 'rift-freckles', ability: 'grook', from: 'easter-egg' }] }),
+    ];
+    const code = TeamCodes.exportTeam({ nickname: 'Ida', creatures: team });
+    const back = TeamCodes.importTeam(code).team;
+    assert.deepEqual(J(back[0].changes), [{ id: 'cracked-crown' }, { id: 'light-feet' }]);
+    assert.deepEqual(J(back[1].changes), [{ id: 'rift-freckles', ability: 'grook' }]);
+    assert.equal(back[1].warped, null);
+    assert.deepEqual(J(Rift.State.creatureStats(back[0])), J(Rift.State.creatureStats(team[0])));
+    assert.equal(Rift.State.creatureStats(back[1]).ability, 'grook');
+    const forged = TeamCodes.exportTeam({ nickname: 'Ida', creatures: [inst('lobstorian', { changes: [{ id: 'cracked-crown' }, { id: 'lightning-streak' }] })] });
+    assert.throws(() => TeamCodes.importTeam(forged), /impossible Changes/);
 });

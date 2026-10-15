@@ -801,6 +801,7 @@
             if (d.taught) tags.push('Learned: ' + d.taught);
             if (d.variant && d.variant.trait) tags.push('Natural ' + d.variant.trait);
             if (d.injured && d.injured.includes('minus-one')) tags.push('🤕 Injured in an earlier battle: −1 attack');
+            (d.changes || []).forEach(id => { const ch = Rift.data.fate.changes[id]; if (ch) tags.push(Rift.data.fate.kinds[ch.kind].icon + ' ' + ch.name + ': ' + ch.text); });
             if (d.prediction) tags.push('🔮 ' + (Rift.COLOURS[d.prediction] || {}).name);
             if (d.metaverseUsed) tags.push('Last Word used');
             return el('div.b-notes', {}, [
@@ -3310,11 +3311,8 @@
             let settlement = null;
             const itemsUsed = itemsUsedNow();
             if (mode !== 'practice' && !guide) {
-                // A Ward or Anchor used in the battle (the Bag) can't also save a creature afterwards.
-                const left = id => Math.max(0, (me.items[id] || 0) - (itemsUsed[id] || 0));
                 fate = B().Fate.roll({
-                    instances: me.team, defeated: E.lostUids(state, ME), mode, won: outcome === 'won',
-                    items: { ward: left('ward'), anchor: left('anchor') }, seed: seed + ':fate',
+                    instances: me.team, defeated: E.lostUids(state, ME), overkill: E.overkillOf(state, ME), mode, seed: seed + ':fate',
                 });
                 settlement = B().Ante.settle(ante, outcome, { seed, now: Date.now() });
             }
@@ -3323,11 +3321,7 @@
             const powerUsed = myPower ? { id: myPower.id, uses: myPower.uses || 0 } : null;
             const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed, powerUsed };
             sfx(outcome === 'won' ? 'win' : 'lose');
-            if (fate && fate.results.length) {
-                const severity = ['death', 'warp', 'injured', 'scarred', 'fine'];
-                const worst = severity.find(kind => fate.results.some(r => r.outcome === kind));
-                sfx('fate-' + worst);
-            }
+            if (fate && fate.results.length) sfx('fate-warp');
             const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
             const reason = {
                 hearts: outcome === 'won' ? oppName + ' ran out of hearts.' : 'You ran out of hearts.',
@@ -3355,15 +3349,16 @@
             } else if (mode === 'practice') {
                 body.push(el('p', { text: p.story ? 'Story challenge: nothing at stake. Your creatures and items are safe.' : 'Practice: nothing at stake. Your creatures are safe.' }));
             } else {
+                // Changes (#151): rare, and they stay on that one creature.
                 const F = Rift.data.fate;
-                body.push(el('h3', { text: 'After-battle checks for your defeated creatures' }));
-                if (!fate.results.length) body.push(el('p', { text: 'None of your creatures fell. Lucky.' }));
-                else body.push(el('ul.fate-list', {}, fate.results.map(r => el('li.fate-' + r.outcome, {}, [
-                    el('span.fate-icon', { text: F.outcomes[r.outcome].icon }),
-                    el('b', { text: species(r.species).name + ': ' }),
-                    F.outcomes[r.outcome].name + (r.detail ? ' — ' + r.detail : '')
-                        + (r.savedBy === 'legend' ? ' (legendaries never die)' : r.savedBy ? ' (your ' + r.savedBy + ' saved it)' : ''),
+                body.push(el('h3', { text: 'After the battle' }));
+                if (!fate.results.length) body.push(el('p', { text: 'Everyone shook it off.' }));
+                else body.push(el('ul.fate-list', {}, fate.results.map(r => el('li.fate-' + r.kind, {}, [
+                    el('span.fate-icon', { text: F.kinds[r.kind].icon }),
+                    el('b', { text: species(r.species).name + ' changed: ' + r.name + '. ' }),
+                    r.text,
                 ]))));
+                if (fate.results.length) body.push(el('p.small', { text: 'A Change stays on that creature. See it in your Collection.' }));
                 body.push(el('h3', { text: 'Stakes' }));
                 body.push(el('ul.ante-list', {}, ante.lines.concat(settlement.lines).map(t => el('li', { text: t }))));
             }

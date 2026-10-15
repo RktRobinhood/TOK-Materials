@@ -15,7 +15,9 @@
  * tweaks]. Codes without it still import (avatar null), and older copies of the game ignore it.
  *
  * Version 2 (Card Arena) rows: [species, powerDelta, injuries, warpedAbility|0, trophyOf|0,
- * [variantAttack, variantHealth, trait|0], taught|0] plus `k`: the tactic cards.
+ * [variantAttack, variantHealth, trait|0], taught|0, changeIds] plus `k`: the tactic cards.
+ * changeIds (Changes, #151) is optional and older copies of the game ignore it; a sideways Change
+ * keeps its ability in the warpedAbility slot, so older copies still play that ability.
  * Version 1 codes (before variation) still import: plain variants, no taught trick and the
  * starter tactics.
  *
@@ -71,15 +73,19 @@
                 // Lift old-scale injuries to attack 0 so older copies of the game accept the code too.
                 const c = Rift.State.clampPower(Object.assign({}, raw, { injuries: (raw.injuries || []).slice() }));
                 const v = c.variant || {};
-                return [
+                const changes = (c.changes || []).length ? c.changes.filter(ch => Rift.data.fate.changes[ch.id]) : [];
+                const sideways = changes.find(ch => Rift.data.fate.changes[ch.id].sideways && ch.ability);
+                const row = [
                     c.species,
                     c.powerDelta || 0,
                     c.injuries.filter(x => INJURIES.includes(x)),
-                    (c.warped && c.warped.ability) || 0,
+                    (sideways && sideways.ability) || (c.warped && c.warped.ability) || 0,
                     c.trophyOf || 0,
                     [v.attack || 0, v.health || 0, TRAITS.includes(v.trait) ? v.trait : 0],
                     TRICKS.includes(c.taught) ? c.taught : 0,
                 ];
+                if (changes.length) row.push(changes.map(ch => ch.id));
+                return row;
             }),
             a: axioms,
             k: tactics,
@@ -104,7 +110,7 @@
         const tag = Rift.hashSeed(code).toString(36);
         const team = p.t.map((row, i) => {
             if (!Array.isArray(row)) throw bad('a creature is garbled.');
-            const [id, rawDelta, injuries, warped, trophyOf, variant, taught] = row;
+            const [id, rawDelta, injuries, warped, trophyOf, variant, taught, changeIds] = row;
             const sp = species[id];
             if (!sp) throw bad(`unknown creature "${id}".`);
             if (!Number.isInteger(rawDelta) || rawDelta > 0 || rawDelta < -10) throw bad(`${sp.name} has impossible power.`);
@@ -120,11 +126,22 @@
                 v = { attack: va, health: vh, trait: trait || null };
                 trick = taught || null;
             }
+            // Changes (#151): known ids within data/fate.js limits; the sideways one carries the ability
+            // in the warped slot. Ids from a newer copy of the game are left out.
+            if (changeIds != null && (!Array.isArray(changeIds) || changeIds.some(x => typeof x !== 'string'))) throw bad(`${sp.name} has garbled Changes.`);
+            const F = changeIds && changeIds.length ? Rift.data.fate : null;
+            const ids = F ? changeIds.filter(x => F.changes[x]) : [];
+            const changes = ids.map(x => (F.changes[x].sideways ? { id: x, ability: warped || null } : { id: x }));
+            const fx = Rift.changeEffect({ changes });
+            const sum = k => ids.reduce((n, x) => n + (F.changes[x][k] || 0), 0);
+            if (F && (new Set(ids).size !== ids.length || ids.length > F.limits.changes || Math.abs(sum('attack')) > F.limits.attack
+                || Math.abs(sum('health')) > F.limits.health || Math.abs(sum('cost')) > F.limits.cost
+                || changes.some(ch => F.changes[ch.id].sideways && !ch.ability))) throw bad(`${sp.name} has impossible Changes.`);
             // Injuries counted on the old power scale: keep attack at 0 or more (like old saves).
             return Rift.State.clampPower({
                 uid: 'ghost-' + tag + '-' + i, species: id, caughtAt: 0,
                 powerDelta: rawDelta, scars: [], injuries: injuries.slice(),
-                warped: warped ? { ability: warped } : null,
+                warped: warped && !fx.ability ? { ability: warped } : null, changes,
                 trophyOf: trophyOf ? String(trophyOf).slice(0, 24) : null, wins: 0,
                 variant: v, taught: trick,
             });

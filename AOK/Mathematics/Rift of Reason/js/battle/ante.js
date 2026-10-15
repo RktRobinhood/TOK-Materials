@@ -49,11 +49,11 @@
         return out;
     }
 
-    // Battle attack of an instance (species attack + variant + taught trick + injuries), never below 0.
+    // Battle attack of an instance (species attack + variant + taught trick + old injuries + Changes), never below 0.
     function attackOf(inst) {
         const sp = (Rift.data.creatures || {})[inst.species] || {};
         const v = inst.variant || {};
-        return Math.max(0, (sp.attack || 0) + (v.attack || 0) + (inst.taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0));
+        return Math.max(0, (sp.attack || 0) + (v.attack || 0) + (inst.taught === 'attack' ? 1 : 0) + (inst.powerDelta || 0) + Rift.changeEffect(inst).attack);
     }
 
     // The ghost's best card by attack (ties broken at random, seeded).
@@ -82,12 +82,14 @@
         if (type === 'ghost') {
             const best = strongest(opp.team, rng);
             if (best) {
-                ante.opponent.trophy = {
+                // The copy keeps the ghost's Changes; old injuries heal and an old warp becomes a Change.
+                ante.opponent.trophy = Rift.State.healForChanges({
                     species: best.species, powerDelta: best.powerDelta || 0,
-                    injuries: (best.injuries || []).slice(), warped: best.warped || null,
+                    injuries: [], warped: best.warped || null,
+                    changes: (best.changes || []).map(ch => Object.assign({}, ch)),
                     variant: best.variant ? Object.assign({}, best.variant) : null, taught: best.taught || null,
                     trophyOf: opp.nickname || opp.name || 'a classmate',
-                };
+                });
             }
         }
         ante.lines.push(`You stake: ${describeItems(ante.player.items)}.`);
@@ -101,7 +103,7 @@
     function newInstance(speciesId, uid, now, extra) {
         const inst = Object.assign({
             uid, species: speciesId, caughtAt: now || 0, powerDelta: 0,
-            scars: [], injuries: [], warped: null, trophyOf: null, wins: 0, variant: null, taught: null,
+            scars: [], injuries: [], warped: null, changes: [], trophyOf: null, wins: 0, variant: null, taught: null,
         }, extra || {});
         // New creatures vary like caught ones; a trophy keeps the ghost's variant.
         if (!inst.variant) inst.variant = Rift.State && Rift.State.rollVariant ? Rift.State.rollVariant(uid) : { attack: 0, health: 0, trait: null };
@@ -122,7 +124,7 @@
             if (ante.opponent.trophy) {
                 const t = ante.opponent.trophy;
                 res.creaturesGained.push(newInstance(t.species, 'trophy-' + tag, o.now, {
-                    powerDelta: t.powerDelta, injuries: t.injuries.slice(), warped: t.warped, trophyOf: t.trophyOf,
+                    powerDelta: t.powerDelta, injuries: [], warped: null, changes: t.changes.map(ch => Object.assign({}, ch)), trophyOf: t.trophyOf,
                     variant: t.variant || null, taught: t.taught || null,
                 }));
             }
