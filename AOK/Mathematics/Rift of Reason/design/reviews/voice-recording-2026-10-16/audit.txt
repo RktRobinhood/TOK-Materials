@@ -1,0 +1,13 @@
+== --only copy --max-requests 3
+23 unreviewed recordings; up to 3 text-model requests this run.
+HTTP 503; stopping audit. Existing results kept.
+0 recordings checked; 0 need review. Differences may be transcription/number spelling, not faulty audio. This does not certify acting or voice consistency.
+== --only cloud-calf --max-requests 1
+2 unreviewed recordings; up to 1 text-model requests this run.
+MATCH cloud-calf-zx235o
+MATCH cloud-calf-yqx22u
+2 recordings checked; 0 need review. Differences may be transcription/number spelling, not faulty audio. This does not certify acting or voice consistency.
+== retry --only copy --max-requests 2
+23 unreviewed recordings; up to 2 text-model requests this run.
+HTTP 503; stopping audit. Existing results kept.
+0 recordings checked; 0 need review. Differences may be transcription/number spelling, not faulty audio. This does not certify acting or voice consistency.

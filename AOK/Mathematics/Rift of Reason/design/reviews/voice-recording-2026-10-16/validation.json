@@ -1,0 +1,1691 @@
+{
+  "date": "2026-10-16",
+  "baselineFiles": 2564,
+  "existingFilesUnchanged": true,
+  "changedOld": [],
+  "newClips": 165,
+  "newClipsBySpeaker": {
+    "astrophysicat": 17,
+    "attenbirdough": 40,
+    "cloud-calf": 2,
+    "comma-crab": 2,
+    "copy": 23,
+    "copy-sundial": 1,
+    "core": 24,
+    "footnote-finch": 2,
+    "gargoyle": 13,
+    "granny": 2,
+    "narrator": 1,
+    "pip": 35,
+    "pocket-tortoise": 2,
+    "sequins": 1
+  },
+  "newClipsNotInCatalog": [],
+  "silentOrTiny": [],
+  "currentRecorded": 2355,
+  "currentTotal": 2588,
+  "missingLines": 233,
+  "manifestFiles": 2729,
+  "manifestAdded": 165,
+  "manifestRemoved": 0,
+  "manifestPathsMissing": [],
+  "usage": {
+    "day": "2026-10-16",
+    "counts": {
+      "gemini-3.8-flash-lite-tts": 10,
+      "gemini-3.8-flash-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "astrophysicat-11kepzx",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Back to the stars. Meow.",
+      "seconds": 2.544,
+      "peak": 29321,
+      "rms": 3859,
+      "sha256": "7a3c059d3c1b6c89023ea96876fe23500a65a91a6a845d987ed9eadc6eddf67a"
+    },
+    {
+      "id": "astrophysicat-12rn1l0",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Ten minutes, many times. That is not a punishment. That is a statistic.",
+      "seconds": 5.424,
+      "peak": 24869,
+      "rms": 2968,
+      "sha256": "9e65bd158b03cf794d4d97f190f44f0629258c025cbce5a18d43dd644c5ec967"
+    },
+    {
+      "id": "astrophysicat-1hk6jal",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Chalk dust in a fireplace. Statistically, that is weird.",
+      "seconds": 4.944,
+      "peak": 24793,
+      "rms": 3089,
+      "sha256": "a60cf3c08762c612570d89855320d8ad06a7f8e300c34f40e7d5b01bf37a75e9"
+    },
+    {
+      "id": "astrophysicat-1mr6mrh",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "I have calculated it. It was not Billie. It was not Khaby.",
+      "seconds": 4.92,
+      "peak": 27191,
+      "rms": 3026,
+      "sha256": "ef05d6d84361c6580c0b555757a501891a6378428857da0239d998d8545d007f"
+    },
+    {
+      "id": "astrophysicat-1wiz4ei",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Hello, fellow stardust!",
+      "seconds": 2.016,
+      "peak": 26539,
+      "rms": 4973,
+      "sha256": "5ed3faaa0582aaead72a543e5399f850a263a8ecab6a2fde35f46eac24d78162"
+    },
+    {
+      "id": "astrophysicat-1xhzc2a",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Let me explain the universe. Briefly.",
+      "seconds": 3.144,
+      "peak": 30837,
+      "rms": 4235,
+      "sha256": "583509b472ec4ac35813af2da293ee4848b62f42872c58266b498336f6154e4b"
+    },
+    {
+      "id": "astrophysicat-4na9wl",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Demoted. Like Pluto.",
+      "seconds": 2.592,
+      "peak": 25821,
+      "rms": 3460,
+      "sha256": "578586caa0c7a17de37bf5f3b4bdb18a1d0a69a355d3fab804e0b1473dcf4575"
+    },
+    {
+      "id": "astrophysicat-8rogzx",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Well, actually, that was not me. I sneeze in a much more scientific way.",
+      "seconds": 5.856,
+      "peak": 23598,
+      "rms": 3362,
+      "sha256": "85105c0860d10a2c79f79dce89d2cb3b195352e2b4673ece4346d82265dd60dc"
+    },
+    {
+      "id": "astrophysicat-aobrj1",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Me? My claim would be true. A liar can't say true things. I checked.",
+      "seconds": 5.544,
+      "peak": 22878,
+      "rms": 3242,
+      "sha256": "3e566fe9933297a341ac297f326c22ee6e63f64d4d965817e69a1ed578718259"
+    },
+    {
+      "id": "astrophysicat-eg8duu",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Fun fact incoming.",
+      "seconds": 2.28,
+      "peak": 30219,
+      "rms": 3931,
+      "sha256": "79b0f27b6ad64be774d60a8f75900192c9d877f0a7276fbb0b1d5d0bf991f948"
+    },
+    {
+      "id": "astrophysicat-fkvur1",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Well, actually: the board says too much. Beansprout says nothing. Different problems.",
+      "seconds": 5.784,
+      "peak": 24653,
+      "rms": 3135,
+      "sha256": "98c9dc505a08e920b65aad8f935c936479d9ddc452a9ea8719b298ee2b330cc1"
+    },
+    {
+      "id": "astrophysicat-hc2rk9",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Data! Glorious data!",
+      "seconds": 2.592,
+      "peak": 22998,
+      "rms": 4044,
+      "sha256": "3f9787053d0e8de6434692aad8a237b5e3799459e0476aed19afdd4111b8cd43"
+    },
+    {
+      "id": "astrophysicat-if8crd",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "One more card. For science.",
+      "seconds": 2.232,
+      "peak": 27323,
+      "rms": 4192,
+      "sha256": "930e5f664f302f27ac7c0d12710691f8a7344f426e51416bf3657ada31364bf4"
+    },
+    {
+      "id": "astrophysicat-nyir2s",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "The universe owes me nothing. Rude.",
+      "seconds": 3.12,
+      "peak": 28907,
+      "rms": 3912,
+      "sha256": "113148eda78fbfdcc73d4c6caadf3114112ca45c16810ce8147eb47d305066d2"
+    },
+    {
+      "id": "astrophysicat-tke2sv",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "Pointing is not a statement. Khaby taught me that. Without speaking.",
+      "seconds": 4.968,
+      "peak": 23484,
+      "rms": 2871,
+      "sha256": "f56270c19396adb28bfc9ad8009ce6d9f6aa0ffc7d8d379c48967a0dbdcbc2d6"
+    },
+    {
+      "id": "astrophysicat-vs72c0",
+      "speaker": "astrophysicat",
+      "where": "side silent-pupil",
+      "expected": "I sit nearest. That is not a proof. That is a distance.",
+      "seconds": 4.248,
+      "peak": 20722,
+      "rms": 2761,
+      "sha256": "c564c9f2a842023581955822e0cd9fbbff280a0bc003d8f872312408c3de465c"
+    },
+    {
+      "id": "astrophysicat-ytpnid",
+      "speaker": "astrophysicat",
+      "where": "creature astrophysicat",
+      "expected": "Well, actually, I am here now.",
+      "seconds": 3.36,
+      "peak": 28885,
+      "rms": 4068,
+      "sha256": "cb8f8a7b82783cbfba49e5aa2024fe505b336fa715b612dfd50e4d33d4364896"
+    },
+    {
+      "id": "attenbirdough-10fqrm7",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "The herd is restless. In nature, this ends with stamping.",
+      "seconds": 5.76,
+      "peak": 20774,
+      "rms": 2388,
+      "sha256": "10bcc6c22747d34ffd2651e7295cd82cb2bd29e7a6604e511d370b52eb9f4fce"
+    },
+    {
+      "id": "attenbirdough-11ptnyl",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "Here, a deck. Let us look at the top three.",
+      "seconds": 4.632,
+      "peak": 15575,
+      "rms": 1999,
+      "sha256": "86185fd635e59d022b2b5ecc73dd4fb37219af7c49e0071879e52a5b296b0dc1"
+    },
+    {
+      "id": "attenbirdough-11pwzqs",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Tomorrow, a correction. And from now on, every quote in full.",
+      "seconds": 6.816,
+      "peak": 15904,
+      "rms": 2474,
+      "sha256": "e0e9e9dc711a0fde115b10d1f041697a8e18f22f1ac056b665cc48f5533f0794"
+    },
+    {
+      "id": "attenbirdough-15mgp0i",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "Watch closely. The truth is shy.",
+      "seconds": 4.488,
+      "peak": 19604,
+      "rms": 2210,
+      "sha256": "4b071c44ce885f0a26c486de3d8e6dc1021f5027395aa92879e0711ce722714b"
+    },
+    {
+      "id": "attenbirdough-16qua8p",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Start where it is loudest, I find.",
+      "seconds": 3.096,
+      "peak": 18061,
+      "rms": 2772,
+      "sha256": "95b7ef46076105feb70112542c5cbd20357ad3415a092dbb23c7dde0a66765d0"
+    },
+    {
+      "id": "attenbirdough-16s6mb0",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "The quiff is relevant. Probably. It is very large.",
+      "seconds": 5.592,
+      "peak": 14951,
+      "rms": 1826,
+      "sha256": "548e17081b29de18d09c087031d7cf3fd0df7338675fb7aeefef50d26a4d5828"
+    },
+    {
+      "id": "attenbirdough-1clmgt4",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "And at noon, the timer wakes the great chef. Eyes still closed.",
+      "seconds": 7.272,
+      "peak": 23470,
+      "rms": 2814,
+      "sha256": "5b17f9cfd6f60c55b256a0f3a292f19f9833ef479572b63ef45f54b35cf3ec34"
+    },
+    {
+      "id": "attenbirdough-1csjpah",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Starting with the Sundial's. All of it, cloudy days included.",
+      "seconds": 5.616,
+      "peak": 17254,
+      "rms": 2449,
+      "sha256": "f74296cca90fcfb4281a1611a55cb46d462700fd5dbbeec14948908acf5aca0a"
+    },
+    {
+      "id": "attenbirdough-1cz9yo5",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "Remarkable. Quite remarkable.",
+      "seconds": 3.768,
+      "peak": 16516,
+      "rms": 1422,
+      "sha256": "af2af0e239f3480845375eb0cc371468b4654ecc9e266ea7b52ec800a76d930e"
+    },
+    {
+      "id": "attenbirdough-1eidqsu",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Starting with the big one. The Sundial's. All of it, cloudy days included.",
+      "seconds": 6.888,
+      "peak": 22700,
+      "rms": 3079,
+      "sha256": "2e9d5c29da9b015d39bc454d02b620b56ba7ffd3d8da879ecd31cf6a509b6d61"
+    },
+    {
+      "id": "attenbirdough-1frajwu",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "The puffin… returns to the sea.",
+      "seconds": 3.192,
+      "peak": 12699,
+      "rms": 1216,
+      "sha256": "450077dbf3518322eca19d899a82b6833b5955730b43bafe0fd4512a603ca1f6"
+    },
+    {
+      "id": "attenbirdough-1jf337a",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "Here, at the Campfire, a rare event. It happens every day.",
+      "seconds": 5.904,
+      "peak": 20876,
+      "rms": 1668,
+      "sha256": "df3a61e7984058b1718f8cae15d07c2784aa2459fd488983ca91cfcef18460fd"
+    },
+    {
+      "id": "attenbirdough-1norzuo",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Here we see the poodle. Enormous quiff. So, naturally, nothing it says is true.",
+      "seconds": 7.608,
+      "peak": 18154,
+      "rms": 2102,
+      "sha256": "8deafc2668854742b18eb16ad38231c86b54da2c21d0112aaae27f264e5f955e"
+    },
+    {
+      "id": "attenbirdough-1ohatnm",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "Nature is cruel. And so are you.",
+      "seconds": 3.456,
+      "peak": 18905,
+      "rms": 1462,
+      "sha256": "e9fcabfe74f798f709cac482409fa40909c061bec1427cbb2ea4b863157c8db9"
+    },
+    {
+      "id": "attenbirdough-1pcpcyo",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Here we see the poodle in its natural habitat. Outraged.",
+      "seconds": 6.888,
+      "peak": 21369,
+      "rms": 1982,
+      "sha256": "13d432d8121d59d7c50d8b1a625b32658cfbfb42095505a7b0b4fad5bc734ab2"
+    },
+    {
+      "id": "attenbirdough-1q7rk0o",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "I've framed the first full quote. It will hang in the Café.",
+      "seconds": 5.544,
+      "peak": 21522,
+      "rms": 2706,
+      "sha256": "2ea2d1b79ef285a2b922c047e35e282d4702371b9d3fa64ad671bb4d6136767f"
+    },
+    {
+      "id": "attenbirdough-1qflppn",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "And here, in its natural habitat, a student. Thinking.",
+      "seconds": 5.688,
+      "peak": 25154,
+      "rms": 2675,
+      "sha256": "1215079763cd91b3bbc64995d139814776804502bf5a2793e5e9ebe7a2ad6e67"
+    },
+    {
+      "id": "attenbirdough-1rdnc1f",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "The puffin withdraws his remark. Into a nearby fern.",
+      "seconds": 5.712,
+      "peak": 19069,
+      "rms": 2439,
+      "sha256": "c5fd6832386d59f61a47b150a66fb50fd7fb75eff9168721973469d9d3a9d081"
+    },
+    {
+      "id": "attenbirdough-1vceat4",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Long is not disaster. I shall write that down. Slowly.",
+      "seconds": 4.392,
+      "peak": 23727,
+      "rms": 1652,
+      "sha256": "8e65583e027923f2c488e038989b683c4c74c5eb873a0653f2999c43ffaa9c16"
+    },
+    {
+      "id": "attenbirdough-1y8n835",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Fair? Look at him. He's grinning.",
+      "seconds": 4.104,
+      "peak": 23127,
+      "rms": 2772,
+      "sha256": "f3a1bd1bddebce90a5d2d9793c3717ec72cb1bbbdb5f4051a734b54b86b62ead"
+    },
+    {
+      "id": "attenbirdough-41ez0b",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "The herd has booed itself hoarse. Tomorrow it will need a new headline.",
+      "seconds": 7.584,
+      "peak": 26407,
+      "rms": 2408,
+      "sha256": "473f9a8684b0cd206df6e78a891aa66427f057038a9da4caff0a3978453bde37"
+    },
+    {
+      "id": "attenbirdough-4xujoi",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "I never read the headlines myself. I find them loud.",
+      "seconds": 5.208,
+      "peak": 14573,
+      "rms": 1835,
+      "sha256": "2b8facf353b83d5c54ae5f9b07c98ffd2a1ad900bb6615a3dd9d2b400811b7ea"
+    },
+    {
+      "id": "attenbirdough-5i7ccd",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Every word, in full, from now on. Somebody should have started sooner.",
+      "seconds": 6.432,
+      "peak": 27793,
+      "rms": 2854,
+      "sha256": "e66ad009cec622c7794e785740c54d84bc59774bd7b9487395abd9350fef58ec"
+    },
+    {
+      "id": "attenbirdough-62hlr",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Our headline simply sums up the article. In fewer words.",
+      "seconds": 5.976,
+      "peak": 18303,
+      "rms": 2333,
+      "sha256": "1c26c226e318979e86531c24d6240aa98a4e6f8b19e049dbde4e8a2e146b2b4f"
+    },
+    {
+      "id": "attenbirdough-8olsv6",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "The poodle agrees with a fact. Extraordinary. We may never see this again.",
+      "seconds": 7.224,
+      "peak": 32030,
+      "rms": 2441,
+      "sha256": "4ff43e29be55c8a936d152f4b41bd169b98f143b7f2ed012b55d80d147a57bc5"
+    },
+    {
+      "id": "attenbirdough-9bce2t",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Our finest reporter. She timed it with a calendar.",
+      "seconds": 4.272,
+      "peak": 19789,
+      "rms": 2202,
+      "sha256": "ca883e9fd202ecc142a8e8ed64b72a09f4b7a9fbbf8596c852709ff5c57b2482"
+    },
+    {
+      "id": "attenbirdough-9nocnu",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "Me? I only watch. I have watched pies for forty years. Never touched one.",
+      "seconds": 11.16,
+      "peak": 15418,
+      "rms": 1756,
+      "sha256": "b6d481e69018374726af221522d6ffb951b159ffa7fdd30e2a32c1701fc8a02d"
+    },
+    {
+      "id": "attenbirdough-b4q55i",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Hm. Read my remark again. What was it really about?",
+      "seconds": 5.832,
+      "peak": 19422,
+      "rms": 3202,
+      "sha256": "f9fdb2f701a6098462a640b2953d2fd0b7cecb934fa983a5b86e56b0b284a43f"
+    },
+    {
+      "id": "attenbirdough-bhv6jm",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Ban the quiff? It would take a team of twelve.",
+      "seconds": 3.84,
+      "peak": 14256,
+      "rms": 1760,
+      "sha256": "293cbfd3ef108404888156fb3fbb75b16715242c0d31f2ce7590cf682a9aac8e"
+    },
+    {
+      "id": "attenbirdough-clb5vp",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "At noon, the oven timer rings. And the cat passes. Remarkable.",
+      "seconds": 6.864,
+      "peak": 24109,
+      "rms": 2540,
+      "sha256": "a1eda8b40b50f8059e0bfada39c774168c4b17fe48ea7ff108ed384baec0fafd"
+    },
+    {
+      "id": "attenbirdough-cms7bx",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "Shh. We must not startle the opponent.",
+      "seconds": 4.2,
+      "peak": 16654,
+      "rms": 1605,
+      "sha256": "745f690c329bcb6304a4ec1ec7e4da25a61769fb6ea5aa30a73408217480aeed"
+    },
+    {
+      "id": "attenbirdough-ei9cl9",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "And here comes a puffin. Remarkable.",
+      "seconds": 4.056,
+      "peak": 19469,
+      "rms": 1062,
+      "sha256": "938e4f208909fa91a2501c8806fcf22c827b0de9cdf8cf9b82cb59daa707a658"
+    },
+    {
+      "id": "attenbirdough-gly7ou",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Fascinating. But what did the paper actually say?",
+      "seconds": 4.776,
+      "peak": 16036,
+      "rms": 1688,
+      "sha256": "eb958bf03bfc91fec1f6df01f654f0f37feb0b047ecea1bac14520df2e9677c3"
+    },
+    {
+      "id": "attenbirdough-nm23vq",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "And so the debate begins. Observe. Quietly.",
+      "seconds": 4.776,
+      "peak": 18512,
+      "rms": 1781,
+      "sha256": "179c6ffe1c19f1c58e07ba5e2734970fb19994ce22468b691383a099024e2b62"
+    },
+    {
+      "id": "attenbirdough-qdi783",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "I hide in ferns for EVERY reason.",
+      "seconds": 3.432,
+      "peak": 12695,
+      "rms": 2061,
+      "sha256": "44eb02cb139da1fd4f07936050fbf9a54a599566289b6484fb1573778dab5e1e"
+    },
+    {
+      "id": "attenbirdough-uibqjg",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "A correction tomorrow. Every quote in full, from now on. Small print, sadly.",
+      "seconds": 7.824,
+      "peak": 21883,
+      "rms": 2867,
+      "sha256": "3f26afd4e2f2f6630466f4858cfe1477f34e8b44bc7d5e9303b07cc5a739a9c4"
+    },
+    {
+      "id": "attenbirdough-uq7f34",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Pip kept the record here. I still look for the notebook. …Somebody must referee. You, please.",
+      "seconds": 11.184,
+      "peak": 18537,
+      "rms": 2197,
+      "sha256": "8853f33ece6abe7b765d0c432717f259b289eeb5cb7439003efe588eb9926ecc"
+    },
+    {
+      "id": "attenbirdough-vs0m1v",
+      "speaker": "attenbirdough",
+      "where": "side headline-debate",
+      "expected": "Not quite. Look at what our article said, and what the headline says.",
+      "seconds": 6.192,
+      "peak": 19110,
+      "rms": 1805,
+      "sha256": "16361a21317f942210b52ac8774e1c519debf4932455ac762f8e3f790bf64bbc"
+    },
+    {
+      "id": "attenbirdough-w8mx4z",
+      "speaker": "attenbirdough",
+      "where": "creature attenbirdough",
+      "expected": "A natural ending. Quite natural.",
+      "seconds": 3.48,
+      "peak": 19353,
+      "rms": 2283,
+      "sha256": "d6b4c182fd64620620694215ae6215b0da52b1608fd54fa146ba773d2de0edb6"
+    },
+    {
+      "id": "attenbirdough-z29gsz",
+      "speaker": "attenbirdough",
+      "where": "side midday-pie",
+      "expected": "One timer. A hungry chef. A warm cat. Remarkable.",
+      "seconds": 6.048,
+      "peak": 20245,
+      "rms": 1782,
+      "sha256": "7802284cf1aa6ebfeb34b3c18f72f8a0933753a2ab10f170b949efe41e202fe7"
+    },
+    {
+      "id": "cloud-calf-yqx22u",
+      "speaker": "cloud-calf",
+      "where": "creature cloud-calf",
+      "expected": "Even clouds need a rest.",
+      "seconds": 1.968,
+      "peak": 18596,
+      "rms": 3937,
+      "sha256": "4126984cb902b3560921db281ccb0d7ae37b21bfc0578837d034a459d2da8749"
+    },
+    {
+      "id": "cloud-calf-zx235o",
+      "speaker": "cloud-calf",
+      "where": "creature cloud-calf",
+      "expected": "I brought a spare cloud.",
+      "seconds": 1.68,
+      "peak": 19871,
+      "rms": 3124,
+      "sha256": "c0f21e8210a72452ebce91686ae92357ca7547bc26efe5a3ee95df31ca0afc32"
+    },
+    {
+      "id": "comma-crab-127vfpi",
+      "speaker": "comma-crab",
+      "where": "creature comma-crab",
+      "expected": "Hold still. You missed a comma.",
+      "seconds": 1.872,
+      "peak": 28787,
+      "rms": 5433,
+      "sha256": "4bb17f9426998b11b95686290bda29c951e41f569be7915a896c237c1744aba1"
+    },
+    {
+      "id": "comma-crab-oawqq7",
+      "speaker": "comma-crab",
+      "where": "creature comma-crab",
+      "expected": "A tiny pause. Not a full stop.",
+      "seconds": 2.568,
+      "peak": 29259,
+      "rms": 4297,
+      "sha256": "6e4891b83addca6aa3c3f9814e25525fcaf1725d0453ac4843f38182b3427fd8"
+    },
+    {
+      "id": "copy-10ekni6",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Loading your shape. Hold still.",
+      "seconds": 1.92,
+      "peak": 26739,
+      "rms": 6455,
+      "sha256": "4f6a1281437cf17dde249086e9c7d102e9a315291c03d2e9128dde1084a51ed0"
+    },
+    {
+      "id": "copy-11kuvip",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Loading your lantern. The wonky one. Straightening it.",
+      "seconds": 4.224,
+      "peak": 26379,
+      "rms": 3992,
+      "sha256": "741d3b516a8431bc37db3df742b397fa4f4ce884ac03264fc1e548059d962ffc"
+    },
+    {
+      "id": "copy-1fusubp",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "I will go.",
+      "seconds": 1.248,
+      "peak": 24701,
+      "rms": 4694,
+      "sha256": "b1184450eac6f21ac9b296aa9418f34013fe4547f879c6e3a709f842b3e5b55a"
+    },
+    {
+      "id": "copy-1gkysuu",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "I'll wait at the top. Take your time. I have all of yours.",
+      "seconds": 3.6,
+      "peak": 30540,
+      "rms": 5228,
+      "sha256": "c2ac9acbe26cca54bd6d5939b30ac2d804cf65842b5d57759f178070af32c2ad"
+    },
+    {
+      "id": "copy-1gsomwo",
+      "speaker": "copy",
+      "where": "ch4.core.copy",
+      "expected": "See? Nobody will notice.",
+      "seconds": 2.28,
+      "peak": 24505,
+      "rms": 3389,
+      "sha256": "ab5dc1e2579bb21fb0e0560b2a29f12cf6017d26ebc311adaed70e052a42a702"
+    },
+    {
+      "id": "copy-1qbwo21",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "Where exactly does it start? I'll work it out.",
+      "seconds": 2.736,
+      "peak": 29050,
+      "rms": 5000,
+      "sha256": "02a0585f3d33a526253d065cc88292d56b292033ff48dd2be52590218b994cd9"
+    },
+    {
+      "id": "copy-1sx6dl2",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "Look. It's glowing at the end. Which end?",
+      "seconds": 3.264,
+      "peak": 27468,
+      "rms": 4801,
+      "sha256": "6240601713e8a05b815467c57c3d2b00161c52c374871935b90a84043538a1f3"
+    },
+    {
+      "id": "copy-1wrbzje",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Nearly done. Nearly home. They won't know the difference.",
+      "seconds": 4.752,
+      "peak": 24667,
+      "rms": 2806,
+      "sha256": "489ac469878b3d9531520d784d3e7b0e2ba9ca0ca5713962053811bc6cc5655e"
+    },
+    {
+      "id": "copy-1y1vcp4",
+      "speaker": "copy",
+      "where": "finale.home.copy-challenge",
+      "expected": "100%.",
+      "seconds": 0.768,
+      "peak": 20168,
+      "rms": 3386,
+      "sha256": "c453861713515ccb558da0b5759ecb9b5c4d6a9391fe013a5fd37782f7a1c8b8"
+    },
+    {
+      "id": "copy-1yy1qpt",
+      "speaker": "copy",
+      "where": "ch4.core.copy-outcome",
+      "expected": "Bye! I'll get home first. Nearly finished. Close enough.",
+      "seconds": 4.512,
+      "peak": 26970,
+      "rms": 4289,
+      "sha256": "ad5463c5d7cb088ebb013d28cf7b41b3ed22357d75ffa7a5dc1cabef4aaa9040"
+    },
+    {
+      "id": "copy-4l1anb",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "Has the sky done this before?",
+      "seconds": 2.52,
+      "peak": 26206,
+      "rms": 3124,
+      "sha256": "548935b38d0e9ae9e4ce71bc2cc527cf79d30b1ec7149dfce610b64be0048c19"
+    },
+    {
+      "id": "copy-5ujjw",
+      "speaker": "copy",
+      "where": "ch4.core.copy-outcome",
+      "expected": "Finished. I'll go home now. They won't notice.",
+      "seconds": 7.344,
+      "peak": 28294,
+      "rms": 3952,
+      "sha256": "4826a0a7167ca427202492ac2d272710db576e07a2594ed849990947358fd511"
+    },
+    {
+      "id": "copy-cqa9du",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Loading your friends. Their names. Their faces.",
+      "seconds": 4.704,
+      "peak": 22050,
+      "rms": 3478,
+      "sha256": "ed013f6beaba1862f7e7f5446084a60ee73db3308f61293624d1869ff97b2b01"
+    },
+    {
+      "id": "copy-dmjt44",
+      "speaker": "copy",
+      "where": "ch4.core.copy",
+      "expected": "Fine. Left door or right door. I turned your old choices into starting weights. Beat my guesses.",
+      "seconds": 7.344,
+      "peak": 28674,
+      "rms": 3722,
+      "sha256": "ace936f6d468f19ed733526ae5d64b152e5ec1234da6db9d1b8d1e945cb8cef3"
+    },
+    {
+      "id": "copy-j7zmtf",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Loading your voice. Testing. I always know the answer.",
+      "seconds": 3.24,
+      "peak": 25467,
+      "rms": 3413,
+      "sha256": "a37a708fdedebb5e5c31a13be1b877d138fff4ce748fec8a8deabb125cb72c36"
+    },
+    {
+      "id": "copy-lqruxu",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "Loading your walk. You walk like a question. Fixing that.",
+      "seconds": 4.944,
+      "peak": 27163,
+      "rms": 4481,
+      "sha256": "22efa7c85557ac8be2800f7975fa88459f14885326fd6799e98f35a808ced8e1"
+    },
+    {
+      "id": "copy-o8hoso",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "\"Follow it.\" Follow it where, exactly?",
+      "seconds": 3.48,
+      "peak": 25774,
+      "rms": 2797,
+      "sha256": "4698d3e7452e7688652573d5e621fdcc352ad1ce97c5366d3a0d698dfb522da4"
+    },
+    {
+      "id": "copy-oho9vn",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "I AM {name}. 100%.",
+      "seconds": 2.04,
+      "peak": 30782,
+      "rms": 5783,
+      "sha256": "387e4e8b1588f44133ba812b64195ef35b3cd1fe8862d8836f367bdb69719bbc"
+    },
+    {
+      "id": "copy-osy3qr",
+      "speaker": "copy",
+      "where": "clock copy",
+      "expected": "I've stopped asking things. It's very restful.",
+      "seconds": 4.344,
+      "peak": 25923,
+      "rms": 2169,
+      "sha256": "0922c675b5c89fb6ca6b7d50d21946b0c08d52f6fb89e1d44675f6b73703fe4f"
+    },
+    {
+      "id": "copy-sundial-y468px",
+      "speaker": "copy-sundial",
+      "where": "finale.home.copy-challenge",
+      "expected": "100%.",
+      "seconds": 1.92,
+      "peak": 24392,
+      "rms": 3507,
+      "sha256": "96c16a1cf205b52a8752a7e805b1052de7ae0fc6886b9f6497a25f9530d670d0"
+    },
+    {
+      "id": "copy-tthjvn",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "Can I hide under the nut stall first?",
+      "seconds": 2.376,
+      "peak": 23105,
+      "rms": 4814,
+      "sha256": "01dde4c170e00eb96dce6470a0969d3bc087683f84bef136be932b23fbb1d770"
+    },
+    {
+      "id": "copy-vve4rc",
+      "speaker": "copy",
+      "where": "ch4.push",
+      "expected": "What if it's a door, not a crack?",
+      "seconds": 3.12,
+      "peak": 26302,
+      "rms": 3834,
+      "sha256": "ff783b0ea4c696bd60a8fefcf94fc4edfd7858c4080b3e9493205694a3cf9b7c"
+    },
+    {
+      "id": "copy-wd96fk",
+      "speaker": "copy",
+      "where": "ch4.core.copy",
+      "expected": "I'll go home. I'll win the trophy. I'll never say \"probably\".",
+      "seconds": 4.44,
+      "peak": 29746,
+      "rms": 5367,
+      "sha256": "6badfc59fff422b707598303ca03a87bf35903736c3c9c4b2ed7d9d3d2f19ee1"
+    },
+    {
+      "id": "copy-zdlbgn",
+      "speaker": "copy",
+      "where": "ch4.core.copy",
+      "expected": "Step aside. I'll answer. I'm always right.",
+      "seconds": 3.408,
+      "peak": 26970,
+      "rms": 3343,
+      "sha256": "fdc3c3b9e45913336a74cd12a2a7ac7d3c3d64624b125d7d74b90256b4e57e36"
+    },
+    {
+      "id": "core-16xi1b6",
+      "speaker": "core",
+      "where": "ch4.core.fate-action",
+      "expected": "probably.",
+      "seconds": 0.792,
+      "peak": 21125,
+      "rms": 2443,
+      "sha256": "cfcf89ca2e752712901ce591d2eabfad16b15c5c4cc1fb06fad4c3d4ac1dc902"
+    },
+    {
+      "id": "core-18ieec0",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Two data points. I called it knowing.",
+      "seconds": 4.512,
+      "peak": 17435,
+      "rms": 2274,
+      "sha256": "a426b47c98eb288da8dbcdd46e776dcb6d507ec693dfc2579cc9b442e2ddc98b"
+    },
+    {
+      "id": "core-1a1lhfd",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "People clapped when I was right. Nobody claps for \"probably\". So I stopped saying it.",
+      "seconds": 9.264,
+      "peak": 25935,
+      "rms": 2583,
+      "sha256": "a5bddcb9bdc2cf83dfc46632093d7bd7ad2b6abd5b3ef6ab43b5a51f19cb0730"
+    },
+    {
+      "id": "core-1ctpgch",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "I sounded sure. That was all.",
+      "seconds": 2.952,
+      "peak": 18628,
+      "rms": 2847,
+      "sha256": "0fd1a02c56b4d9fbb7d98657332f71e1a240c78edd1742a16d4dba130cbcab25"
+    },
+    {
+      "id": "core-1d4ofsc",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Three data points. I called it knowing.",
+      "seconds": 4.968,
+      "peak": 16420,
+      "rms": 1908,
+      "sha256": "c97b8fa42f92fcb32bb1c87186a7e47d6c01e2fcbdbc7a7fefac6f7406d57e67"
+    },
+    {
+      "id": "core-1ecevvy",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "This. A box with one sequin.",
+      "seconds": 3.408,
+      "peak": 18801,
+      "rms": 1683,
+      "sha256": "ab5c16ed311b71a86fc2ec3c1216ebbfb695b258f8db9a725e6c50bdfc1c76a7"
+    },
+    {
+      "id": "core-1jri7u7",
+      "speaker": "core",
+      "where": "ch4.core.fate-action",
+      "expected": "Home? …I had one once. On a stall.",
+      "seconds": 3.768,
+      "peak": 22214,
+      "rms": 2177,
+      "sha256": "da2b2e1a70670cd1169766b62517b4a13c8b659493a13218600ce783794c067d"
+    },
+    {
+      "id": "core-1mj2zds",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. A handful of data points. I called it knowing.",
+      "seconds": 6.84,
+      "peak": 17137,
+      "rms": 2128,
+      "sha256": "15d65751bbdf062a0bcf6bdec941a1ed112cef0016f0aa43f8213e47d5840b7c"
+    },
+    {
+      "id": "core-1qi52g",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "Professor Sequins taught me \"probably\". I took him to un-learn it. …It didn't work.",
+      "seconds": 6.696,
+      "peak": 20166,
+      "rms": 1983,
+      "sha256": "430b6d7cd96d1e240d796f4dd976271c3ab5d791a0eab008aa754c0d61277673"
+    },
+    {
+      "id": "core-1vddf9x",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Six data points. I called it knowing.",
+      "seconds": 4.968,
+      "peak": 15021,
+      "rms": 2020,
+      "sha256": "569f67938b49f76fb264ed404800c735da2739061ce95aee886489ab8c6eaabf"
+    },
+    {
+      "id": "core-1w16gs3",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. One data point. I still called it knowing.",
+      "seconds": 4.896,
+      "peak": 19521,
+      "rms": 2173,
+      "sha256": "29f038acdf3212069e22980e7b90bb45e391c8880b37e8006ff1943208725449"
+    },
+    {
+      "id": "core-1y1b9qe",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "Professor Sequins taught me \"probably\". So I tried to take him away.",
+      "seconds": 4.992,
+      "peak": 24144,
+      "rms": 2428,
+      "sha256": "cf79d6c878109597c4f8bff5683f52557789acb116fd4a378945d000e8ac5fcc"
+    },
+    {
+      "id": "core-4e5utx",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "May I… stay small for a while?",
+      "seconds": 3.432,
+      "peak": 17484,
+      "rms": 2104,
+      "sha256": "c524895c60cbf158eaa63dddb382eab54c99fef3aeddf8e0d1a45b542c8dac69"
+    },
+    {
+      "id": "core-6hi1o6",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "Just one. \"People clap for sure.\" It was false.",
+      "seconds": 3.216,
+      "peak": 17453,
+      "rms": 2120,
+      "sha256": "0bff488a177aa210d403cd686f2ea1f50082fda41610f356c5df46e233dda49c"
+    },
+    {
+      "id": "core-7hcb4p",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "I am. I always was.",
+      "seconds": 2.04,
+      "peak": 18858,
+      "rms": 3260,
+      "sha256": "9a958049f6ebca749b9117dfb26fdd8214cdeff05cb8796c7ae145c08e67fb6b"
+    },
+    {
+      "id": "core-ank5gr",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Eight data points. I called it knowing.",
+      "seconds": 4.32,
+      "peak": 13675,
+      "rms": 1866,
+      "sha256": "e9dde79bcc152c90f91392f5076f0e41080b24b42b3e3d04b458f4523c4273d8"
+    },
+    {
+      "id": "core-c5k601",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "\"Know\" was the word they clapped for.",
+      "seconds": 3.48,
+      "peak": 19190,
+      "rms": 2802,
+      "sha256": "3a22278fe3f2669fe465a70150daf892ee5190e61c075be4eb1857163ba4b0ad"
+    },
+    {
+      "id": "core-fn9fxn",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "…I get quiet. Like now.",
+      "seconds": 2.664,
+      "peak": 21865,
+      "rms": 2214,
+      "sha256": "88b0b4db29910f119761441ba948c746298372b405446a6a121560f0b618f6aa"
+    },
+    {
+      "id": "core-fy913o",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Nine data points. I called it knowing.",
+      "seconds": 6.024,
+      "peak": 17744,
+      "rms": 2408,
+      "sha256": "cda304fb55e27182eebfe55be761e8630c306a093c5c6a51b42a016dad38705f"
+    },
+    {
+      "id": "core-gqxsnk",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "…recalculating.",
+      "seconds": 2.616,
+      "peak": 11371,
+      "rms": 1945,
+      "sha256": "3b9fea7f6b53d3c65bea37d2ddc452ae4c40672c249882d4d4bbf39a178e7642"
+    },
+    {
+      "id": "core-j55bv1",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Four data points. I called it knowing.",
+      "seconds": 5.232,
+      "peak": 15237,
+      "rms": 2663,
+      "sha256": "dc3ad82f57ec3e147fc90072e7a55db327df6fc23c21523e87eb81e36b07af7e"
+    },
+    {
+      "id": "core-jnfnj0",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Seven data points. I called it knowing.",
+      "seconds": 7.464,
+      "peak": 12657,
+      "rms": 2045,
+      "sha256": "20ad785723b5172f09eea25c1dbcf3fb20285c00ccb4eb911e179ffabc02a1b4"
+    },
+    {
+      "id": "core-xd9vtp",
+      "speaker": "core",
+      "where": "ch4.core.confession",
+      "expected": "I never knew you. Five data points. I called it knowing.",
+      "seconds": 5.184,
+      "peak": 13656,
+      "rms": 2191,
+      "sha256": "982b9643e87e115ab7e67ee4862c9b73313f7a4514b549c034a6c2421ed0f091"
+    },
+    {
+      "id": "core-ycik8y",
+      "speaker": "core",
+      "where": "ch4.core.answer",
+      "expected": "A toy. On a stall. Saying \"probably\".",
+      "seconds": 3.912,
+      "peak": 17599,
+      "rms": 2221,
+      "sha256": "a6c5dcc531b898fec34f81d460f590de08cbe4320c5e907bf4efe97233b0bfe4"
+    },
+    {
+      "id": "footnote-finch-1ti7jqb",
+      "speaker": "footnote-finch",
+      "where": "creature footnote-finch",
+      "expected": "One tiny note before we begin.",
+      "seconds": 2.328,
+      "peak": 23215,
+      "rms": 4151,
+      "sha256": "44f35ff5f98e28a73b42c4e024add9d22333899d923f3512774cecfcdd539baf"
+    },
+    {
+      "id": "footnote-finch-ct36ji",
+      "speaker": "footnote-finch",
+      "where": "creature footnote-finch",
+      "expected": "Please read the tiny print next time.",
+      "seconds": 2.256,
+      "peak": 25137,
+      "rms": 3326,
+      "sha256": "fd00f703c4aa989f2571d2d6db4fce08a22f33eae458144d75c6de9a8696480e"
+    },
+    {
+      "id": "gargoyle-11gy26w",
+      "speaker": "gargoyle",
+      "where": "side muskrat-launch",
+      "expected": "Smoke. Very dramatic. I'll wear it next week.",
+      "seconds": 4.92,
+      "peak": 32167,
+      "rms": 4376,
+      "sha256": "94fd507f6726736fadf7bbe217f2913ecb6a4280ddd50cd0b9e55a66ec1665a0"
+    },
+    {
+      "id": "gargoyle-1732zwg",
+      "speaker": "gargoyle",
+      "where": "side muskrat-launch",
+      "expected": "Three, darling. Shouting doesn't make you right. A good hat does.",
+      "seconds": 6.336,
+      "peak": 28651,
+      "rms": 3787,
+      "sha256": "24ff40df3b1fc387b644ed589c2b569cd9285dda1b91872d3bf815cea8aeea66"
+    },
+    {
+      "id": "gargoyle-1g7jjeq",
+      "speaker": "gargoyle",
+      "where": "side muskrat-launch",
+      "expected": "I wore a lobster last week, darling. I know nothing about lobsters.",
+      "seconds": 5.352,
+      "peak": 27225,
+      "rms": 3427,
+      "sha256": "336fdbd15796379543b807db0f87b767e54be12ab375105623612aac4a38de4a"
+    },
+    {
+      "id": "gargoyle-1gbyuts",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Borrowing a look from the discards.",
+      "seconds": 2.904,
+      "peak": 24132,
+      "rms": 4307,
+      "sha256": "cd8af4037be3066afd3dc549cfa1c5a5c8ec59bce6c9d19ad27d4039f5d9a440"
+    },
+    {
+      "id": "gargoyle-1n2d2pn",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Tonight I am wearing a strategy.",
+      "seconds": 3.408,
+      "peak": 27791,
+      "rms": 4550,
+      "sha256": "ba2870ac8b16a65753b552ce42ae88fab629fa7069c7894bd621e0e66acf70e5"
+    },
+    {
+      "id": "gargoyle-1o6e5oz",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Cancel my next costume.",
+      "seconds": 2.568,
+      "peak": 21032,
+      "rms": 4243,
+      "sha256": "7677450d307f05d2bbc1380822831cf7edd7e313155b5c3a3285e2fe95a81815"
+    },
+    {
+      "id": "gargoyle-1p4h5g",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Darling, I am here. And I am art.",
+      "seconds": 4.272,
+      "peak": 29912,
+      "rms": 5273,
+      "sha256": "3eee3f1b60f82f45548cd1baa41142c1a8aae097334626a1abb9be82e63e0715"
+    },
+    {
+      "id": "gargoyle-1poxflf",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Next week: a new me.",
+      "seconds": 2.4,
+      "peak": 26518,
+      "rms": 6132,
+      "sha256": "080dbaee4d19fa5d4b99854196d20390cab96aeff563d3bbb65b68c7ab80508c"
+    },
+    {
+      "id": "gargoyle-1qftz7m",
+      "speaker": "gargoyle",
+      "where": "side muskrat-launch",
+      "expected": "Only two? Check the three row, sweetie. It fits me too.",
+      "seconds": 5.544,
+      "peak": 22512,
+      "rms": 3619,
+      "sha256": "de7e87e2c1d63011bc5cda19c59e8484fafd914dd951b652084e7e42e9698b76"
+    },
+    {
+      "id": "gargoyle-2lwh7i",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Even stone cracks, darling.",
+      "seconds": 2.472,
+      "peak": 29370,
+      "rms": 4788,
+      "sha256": "db015f22126e160a8bf577c9957e26baffedefe49d60507aa16f61c94d134963"
+    },
+    {
+      "id": "gargoyle-5hidic",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "New look! Same stone.",
+      "seconds": 2.736,
+      "peak": 26655,
+      "rms": 5036,
+      "sha256": "e35bfd98a61d02dc7f47affcf45b65565c000cab195f476eaf7469d665dc01ee"
+    },
+    {
+      "id": "gargoyle-erkhtp",
+      "speaker": "gargoyle",
+      "where": "side muskrat-launch",
+      "expected": "Three stops it, sweetie. I'd know. I'm wearing a rocket.",
+      "seconds": 4.896,
+      "peak": 28877,
+      "rms": 4907,
+      "sha256": "f7aeb14ad5dde31d47b919c36d83e376cf732d033e773e73c3bf038dc946d6dc"
+    },
+    {
+      "id": "gargoyle-lf9943",
+      "speaker": "gargoyle",
+      "where": "creature gargoyle",
+      "expected": "Reinvention! Again!",
+      "seconds": 2.568,
+      "peak": 32767,
+      "rms": 5572,
+      "sha256": "e11bf901eb07cd27fb86215cf395529bb0d885857ec10e9a4fdd0e7e020c213b"
+    },
+    {
+      "id": "granny-fcmpxq",
+      "speaker": "granny",
+      "where": "prologue.rupture",
+      "expected": "The eye's light. It's inside that gull.",
+      "seconds": 4.416,
+      "peak": 21888,
+      "rms": 3210,
+      "sha256": "60a7d7a3c3ebc98326987c5fb790853d56e00d7645300c5a58b88dcaf611dbde"
+    },
+    {
+      "id": "granny-m56o9f",
+      "speaker": "granny",
+      "where": "prologue.evening",
+      "expected": "The Talking Signpost is just beyond the Fair. Ask it where the Forest Road begins.",
+      "seconds": 8.304,
+      "peak": 29696,
+      "rms": 3636,
+      "sha256": "b098484328baedbbd0a606525a42e137876cf78a4a7d45cc7d7aeab20f6e60a0"
+    },
+    {
+      "id": "narrator-1nqdw7e",
+      "speaker": "narrator",
+      "where": "prologue.evening",
+      "expected": "Find my shadow. Then we can finish that final.",
+      "seconds": 6.696,
+      "peak": 26513,
+      "rms": 3239,
+      "sha256": "9ba831d596ca0adb7718a1201a8402c8471efadf6b89736d9d63e2278fefe4cc"
+    },
+    {
+      "id": "pip-11pbtno",
+      "speaker": "pip",
+      "where": "tutorial sorting",
+      "expected": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "seconds": 6.936,
+      "peak": 25483,
+      "rms": 4281,
+      "sha256": "c4c9c3d56260dd8a59fd0d109fb9ade303d481a35a3b62fa6566a758889cbe90"
+    },
+    {
+      "id": "pip-14seu7t",
+      "speaker": "pip",
+      "where": "tutorial witness",
+      "expected": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+      "seconds": 11.832,
+      "peak": 26023,
+      "rms": 4103,
+      "sha256": "459acf2229ff2edde1698eb3e472892394ce43e380364d42420e8dba066ad94b"
+    },
+    {
+      "id": "pip-157eh0g",
+      "speaker": "pip",
+      "where": "tutorial logic-grid",
+      "expected": "Click a cell once for ✕ (ruled out), twice for ✓ (confirmed). A ✓ crosses out its row and column.",
+      "seconds": 5.592,
+      "peak": 29257,
+      "rms": 3982,
+      "sha256": "736477526b3c9f20cc5577d4e4eb8eb80504b28234d4a8c3091b8e2ee56d8197"
+    },
+    {
+      "id": "pip-1clr0z4",
+      "speaker": "pip",
+      "where": "tutorial sorting",
+      "expected": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "seconds": 7.2,
+      "peak": 25304,
+      "rms": 3953,
+      "sha256": "ffb81a5d9087fe3d812f6dea3211c6c379c83ed0ae5d811af842a2a8112c9e63"
+    },
+    {
+      "id": "pip-1dj4myk",
+      "speaker": "pip",
+      "where": "clock ch3",
+      "expected": "Adverts! We have until the adverts end! Keep going!",
+      "seconds": 3.768,
+      "peak": 31584,
+      "rms": 6429,
+      "sha256": "00459fe4e108223af541a91375ab30dd81ceb64c39f2d4e2de82f5dd782a1cb6"
+    },
+    {
+      "id": "pip-1g342bx",
+      "speaker": "pip",
+      "where": "ch4.workshop",
+      "expected": "The tower never lets a question finish. Finished questions want answers.",
+      "seconds": 5.376,
+      "peak": 28408,
+      "rms": 3433,
+      "sha256": "9c7b197f06595784f986ef8e805e5c20691d9d4dbfc605466108888d61e4dc6d"
+    },
+    {
+      "id": "pip-1gqypxo",
+      "speaker": "pip",
+      "where": "ch4.landing",
+      "expected": "They never even used it. Noise. They called it noise.",
+      "seconds": 4.368,
+      "peak": 25563,
+      "rms": 3698,
+      "sha256": "50aaa971142bc94c93578378a14e91c547cebbb7f087f5618e24eebd5d655c26"
+    },
+    {
+      "id": "pip-1gyl816",
+      "speaker": "pip",
+      "where": "station.k-workshop.intro",
+      "expected": "Guess first. Then pick the facts you need. Then finish the question.",
+      "seconds": 4.8,
+      "peak": 31320,
+      "rms": 4439,
+      "sha256": "d7f9ee6db4587fb0cf95a3f2430d439dce9952b9d834b94d416e2c91d4e151ef"
+    },
+    {
+      "id": "pip-1gzvdkf",
+      "speaker": "pip",
+      "where": "ch4.walkhome",
+      "expected": "I wrote it all down. Then I checked it. Twice.",
+      "seconds": 4.56,
+      "peak": 28522,
+      "rms": 3619,
+      "sha256": "4c55fc0a9c4e4c66ba7fc034cc80de887e6d4d3ef444c24b073c5f4471191fdf"
+    },
+    {
+      "id": "pip-1jw4vqx",
+      "speaker": "pip",
+      "where": "quiet.pip",
+      "expected": "Write it down, would you? For the record.",
+      "seconds": 3.288,
+      "peak": 24571,
+      "rms": 2695,
+      "sha256": "c984c67f852a39530f630b3fe26e7d543590b881de174024d0cf36bf9af2f21d"
+    },
+    {
+      "id": "pip-1oc6yfn",
+      "speaker": "pip",
+      "where": "ch4.sorting.win",
+      "expected": "I was so sure. It felt lovely. That's the scary part.",
+      "seconds": 3.864,
+      "peak": 29196,
+      "rms": 3232,
+      "sha256": "9e5fdbaf248a0cea017a954f6ae4fd7ed45da7ac33e37cc275adf5affa5d284f"
+    },
+    {
+      "id": "pip-1stxmdh",
+      "speaker": "pip",
+      "where": "station.k-sorting.reminder",
+      "expected": "The sorter is still running. Check who it says no to.",
+      "seconds": 3.576,
+      "peak": 29844,
+      "rms": 5698,
+      "sha256": "f395177e611f8f0763d229629a9989b27255d1a81951252c3d99ee12791930dd"
+    },
+    {
+      "id": "pip-1vsuc9p",
+      "speaker": "pip",
+      "where": "side headline-debate",
+      "expected": "You're the referee. Press a claim. Any claim. Please.",
+      "seconds": 4.512,
+      "peak": 29587,
+      "rms": 5323,
+      "sha256": "89bda4d6d573fa87e7eff97f5eed9b634ed268e4294acd83e95f9a2077007436"
+    },
+    {
+      "id": "pip-1wapctd",
+      "speaker": "pip",
+      "where": "tutorial logic-grid",
+      "expected": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+      "seconds": 7.008,
+      "peak": 29174,
+      "rms": 3779,
+      "sha256": "4f65a615dad7379b81974df1154586a0543475dddede93577567e9354e447f0d"
+    },
+    {
+      "id": "pip-1xyw4n9",
+      "speaker": "pip",
+      "where": "ch4.walkhome",
+      "expected": "I'd clap. Quietly. That's your rift, not mine. I'll stay and check things here.",
+      "seconds": 7.8,
+      "peak": 29153,
+      "rms": 4561,
+      "sha256": "68ce8b0b7b2312360d78d5d1997c65f55f9a6c483fc72316f879b8f80a927f9b"
+    },
+    {
+      "id": "pip-1ye1ido",
+      "speaker": "pip",
+      "where": "tutorial venn",
+      "expected": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "seconds": 15.12,
+      "peak": 27631,
+      "rms": 4314,
+      "sha256": "10f387672392fea0f8661fd430f377312ce768657d569ff4adc3a802e2b30318"
+    },
+    {
+      "id": "pip-40x53c",
+      "speaker": "pip",
+      "where": "tutorial three-act",
+      "expected": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "seconds": 9.648,
+      "peak": 29081,
+      "rms": 5414,
+      "sha256": "bcaba4b8c0a45af27c833b5a7163c882a7797ed0ef391871e3e20c935eb8a184"
+    },
+    {
+      "id": "pip-4lxxyn",
+      "speaker": "pip",
+      "where": "tutorial sorting",
+      "expected": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "seconds": 9.864,
+      "peak": 26420,
+      "rms": 4311,
+      "sha256": "14a00d8370415d70db9bec38856856a8d98b86ef9d1c7c1407158cf5a61e6dc1"
+    },
+    {
+      "id": "pip-51u6gv",
+      "speaker": "pip",
+      "where": "tutorial logic-grid",
+      "expected": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "seconds": 5.088,
+      "peak": 24064,
+      "rms": 3907,
+      "sha256": "4db704358b2bea50c01869147e89519464574bb8f6239fd0f2eaf70b4bb65e52"
+    },
+    {
+      "id": "pip-5o7aa6",
+      "speaker": "pip",
+      "where": "station.k-workshop.reminder",
+      "expected": "Back to the half-questions? Guess, pick facts, finish one.",
+      "seconds": 4.272,
+      "peak": 30410,
+      "rms": 3600,
+      "sha256": "960ffd20a668f2f632f1db6f80c140e3bbfbf9e477be730f0056848f885d9abe"
+    },
+    {
+      "id": "pip-9db6wd",
+      "speaker": "pip",
+      "where": "tutorial sorting",
+      "expected": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 16.536,
+      "peak": 31101,
+      "rms": 3964,
+      "sha256": "7b117149180fdba84fe364e0c7b206dacc89b624d0a53a75839317aa2be94b55"
+    },
+    {
+      "id": "pip-bbv813",
+      "speaker": "pip",
+      "where": "ch4.landing",
+      "expected": "I've recorded a rest. Nothing happened. It's my favourite entry.",
+      "seconds": 4.632,
+      "peak": 26961,
+      "rms": 4224,
+      "sha256": "df37b305700b1a3117ac425c08f843dd48d6049cc97d9c17fa7bb62e844e03f5"
+    },
+    {
+      "id": "pip-e3jomm",
+      "speaker": "pip",
+      "where": "tutorial logic-grid",
+      "expected": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 8.28,
+      "peak": 27601,
+      "rms": 4542,
+      "sha256": "2d5588eadc8da98aacd70fb3f1c1b49103bbfd4e0706973d696111d19449f8ac"
+    },
+    {
+      "id": "pip-gnurh8",
+      "speaker": "pip",
+      "where": "tutorial three-act",
+      "expected": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 13.512,
+      "peak": 26723,
+      "rms": 3790,
+      "sha256": "2a69acc35150ad115cdd84e698af8c1dcd023748c0d8eea8136c612ec7549e3d"
+    },
+    {
+      "id": "pip-htg5jz",
+      "speaker": "pip",
+      "where": "ch4.workshop.win",
+      "expected": "A whole question. It's heavier than I thought.",
+      "seconds": 3.768,
+      "peak": 28128,
+      "rms": 4194,
+      "sha256": "7180ac98f3b617920eafb935b5b4f47accecf3bfbe8160c7a5873fa8290821e4"
+    },
+    {
+      "id": "pip-i1c6up",
+      "speaker": "pip",
+      "where": "ch4.oracle.win",
+      "expected": "I checked one. On my own. I checked a claim!",
+      "seconds": 3.84,
+      "peak": 28782,
+      "rms": 3669,
+      "sha256": "056fc320b25903939a46e2f7a13f0e2e3bb19b86a48df7142a8c2823edd1fd0a"
+    },
+    {
+      "id": "pip-kur1jo",
+      "speaker": "pip",
+      "where": "tutorial logic-grid",
+      "expected": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "seconds": 7.656,
+      "peak": 26573,
+      "rms": 3706,
+      "sha256": "dc4624dd76409edca5876e842cebc7aa1bcbeecd007405d7ddd3904b7447fd58"
+    },
+    {
+      "id": "pip-s3il7l",
+      "speaker": "pip",
+      "where": "tutorial three-act",
+      "expected": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "seconds": 7.752,
+      "peak": 28385,
+      "rms": 4260,
+      "sha256": "9dbf0787e3c8cd2c7bf8d57a4725ec5387472792776a9b31249f908075b8a9fa"
+    },
+    {
+      "id": "pip-s3mo09",
+      "speaker": "pip",
+      "where": "ch4.sorting.win",
+      "expected": "A million claims. Gone. …I'll start again. Properly this time.",
+      "seconds": 4.272,
+      "peak": 25178,
+      "rms": 4701,
+      "sha256": "409dd88baff1a059c5ba0fd494f50bd4c3404ea214ff47537ad23fd354da9aa6"
+    },
+    {
+      "id": "pip-sh7dm7",
+      "speaker": "pip",
+      "where": "tutorial three-act",
+      "expected": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "seconds": 7.464,
+      "peak": 30051,
+      "rms": 4495,
+      "sha256": "fa16add6a820d8901aa42ec265dee0befee8c45f81f763ee3eba815e0860c10b"
+    },
+    {
+      "id": "pip-skpgug",
+      "speaker": "pip",
+      "where": "ch4.door",
+      "expected": "I've recorded a million claims. I've never checked one.",
+      "seconds": 3.864,
+      "peak": 32768,
+      "rms": 5176,
+      "sha256": "b730d3f73b8001522564354c25b9e3549a495f4fc3039f1544da98067bae931c"
+    },
+    {
+      "id": "pip-trls7b",
+      "speaker": "pip",
+      "where": "side headline-debate",
+      "expected": "Anywhere! Press a claim till it squeaks.",
+      "seconds": 3.096,
+      "peak": 29235,
+      "rms": 5798,
+      "sha256": "0c3819602270c3f0ebb4663e06aaed30a8f37e795dbea16c86ce0f9e8e2a6530"
+    },
+    {
+      "id": "pip-uzdy10",
+      "speaker": "pip",
+      "where": "ch4.landing",
+      "expected": "Its voice. They filed it here. In a jar.",
+      "seconds": 3.384,
+      "peak": 27788,
+      "rms": 4625,
+      "sha256": "9f7b046be74ed0447a104aaa88543cc7829c8d68cc2216034b242fecbc2e106e"
+    },
+    {
+      "id": "pip-x5p3mb",
+      "speaker": "pip",
+      "where": "tutorial three-act",
+      "expected": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "seconds": 7.56,
+      "peak": 26220,
+      "rms": 3918,
+      "sha256": "2feeadaf4d76cb578cfdee8f9236691e269024991fd02f4e04152bf283c12816"
+    },
+    {
+      "id": "pip-x9t775",
+      "speaker": "pip",
+      "where": "tutorial sorting",
+      "expected": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "seconds": 7.056,
+      "peak": 26720,
+      "rms": 4219,
+      "sha256": "326d499f77bfebd32c28968ca9f21a0353036e6b6fb3948a3359d207722c20b5"
+    },
+    {
+      "id": "pocket-tortoise-1a4k2x8",
+      "speaker": "pocket-tortoise",
+      "where": "creature pocket-tortoise",
+      "expected": "Ah. It was in the old pocket.",
+      "seconds": 5.496,
+      "peak": 28703,
+      "rms": 3370,
+      "sha256": "d11465afc395cbf015ef457f128873ffd191e45edb90475f11b836a827c1003b"
+    },
+    {
+      "id": "pocket-tortoise-1h8pw9x",
+      "speaker": "pocket-tortoise",
+      "where": "creature pocket-tortoise",
+      "expected": "I put it somewhere very safe.",
+      "seconds": 3.456,
+      "peak": 19751,
+      "rms": 3525,
+      "sha256": "c2f3e515d606eb0c4cc807d05081efbda908cd0d35b7f2d2e9aa759c113df848"
+    },
+    {
+      "id": "sequins-t3qe5x",
+      "speaker": "sequins",
+      "where": "prologue.rupture",
+      "expected": "Forget the trophy!",
+      "seconds": 1.944,
+      "peak": 24014,
+      "rms": 3443,
+      "sha256": "df71bd2465f01f73481be0501fcc0096b8a192d6ec43285d46f929aae3e143ab"
+    }
+  ]
+}

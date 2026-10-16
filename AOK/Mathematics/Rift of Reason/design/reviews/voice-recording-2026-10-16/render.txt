@@ -1,0 +1,191 @@
+===== --render --only attenbirdough  (07:05:41Z)
+40 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+09.06.29 lite  attenbirdough: saved 28 lines (total 28)
+09.07.09 lite  attenbirdough: saved 12 lines (total 40)
+FINISHED: 40 lines saved, 2 requests used. Manifest lists 2604 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 2
+  }
+}
+===== --render --only pip  (07:07:09Z)
+35 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+09.07.54 lite  pip: saved 28 lines (total 28)
+09.08.36 lite  pip: saved 7 lines (total 35)
+FINISHED: 35 lines saved, 2 requests used. Manifest lists 2639 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 4
+  }
+}
+===== --render --only copy  (07:08:36Z)
+23 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+split failed for copy x23; kept in tools/voice-raw, retrying as 12 + 11.
+09.09.20 lite  copy: saved 12 lines (total 12)
+09.09.55 lite  copy: saved 11 lines (total 23)
+FINISHED: 23 lines saved, 3 requests used. Manifest lists 2662 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 7
+  }
+}
+===== --render --only core  (07:09:55Z)
+24 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.10.29 lite  core: saved 24 lines (total 24)
+FINISHED: 24 lines saved, 1 requests used. Manifest lists 2686 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 8
+  }
+}
+===== --render --only astrophysicat  (07:10:29Z)
+17 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.10.51 lite  astrophysicat: saved 17 lines (total 17)
+FINISHED: 17 lines saved, 1 requests used. Manifest lists 2703 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 9
+  }
+}
+===== --render --only gargoyle  (07:10:51Z)
+13 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+09.11.10 lite  gargoyle: saved 13 lines (total 13)
+FINISHED: 13 lines saved, 1 requests used. Manifest lists 2716 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}
+===== --render --only muskrat  (07:11:10Z)
+14 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+LOCAL DAILY BUDGET reached on gemini-3.8-flash-lite-tts: 10 attempts today. Resume after the Pacific reset.
+FINISHED: 0 lines saved, 0 requests used. Manifest lists 2716 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}
+===== --render --only zuckerborg  (07:11:11Z)
+12 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+LOCAL DAILY BUDGET reached on gemini-3.8-flash-lite-tts: 10 attempts today. Resume after the Pacific reset.
+FINISHED: 0 lines saved, 0 requests used. Manifest lists 2716 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}
+===== --render --only granny  (07:11:11Z)
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.11.21 flash granny: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2718 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 1
+  }
+}
+===== --render --only sequins  (07:11:21Z)
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.11.26 flash sequins: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2719 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 2
+  }
+}
+===== --render --only narrator  (07:11:26Z)
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.11.32 flash narrator: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2720 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 3
+  }
+}
+===== --render --only copy-sundial  (07:11:32Z)
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.11.36 flash copy-sundial: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2721 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 4
+  }
+}
+===== --render --only cloud-calf  (07:11:37Z)
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+429 on gemini-3.8-flash-tts, waiting 22s
+429 on gemini-3.8-flash-tts, waiting 58s
+09.13.07 flash cloud-calf: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 3 requests used. Manifest lists 2723 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 7
+  }
+}
+===== --render --only pocket-tortoise  (07:13:08Z)
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.13.17 flash pocket-tortoise: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2725 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 8
+  }
+}
+===== --render --only comma-crab  (07:13:17Z)
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.13.23 flash comma-crab: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2727 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 9
+  }
+}
+===== --render --only footnote-finch  (07:13:24Z)
+2 lines to render in 1 requests on gemini-3.8-flash-tts.
+09.13.30 flash footnote-finch: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 2729 files.
+exit 0
+{
+  "day": "2026-10-16",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 10
+  }
+}
+ALL DONE
