@@ -1,0 +1,90 @@
+[
+  {
+    "file": "copy-flat-remnant-153.png",
+    "width": 2172,
+    "height": 724,
+    "bounds": {
+      "x": 96,
+      "y": 251,
+      "w": 1980,
+      "h": 356
+    }
+  },
+  {
+    "file": "core-covered-153.png",
+    "width": 1312,
+    "height": 1199,
+    "bounds": {
+      "x": 23,
+      "y": 22,
+      "w": 1269,
+      "h": 1083
+    }
+  },
+  {
+    "file": "fair-furniture-153.png",
+    "width": 1774,
+    "height": 887,
+    "bounds": {
+      "x": 83,
+      "y": 101,
+      "w": 1624,
+      "h": 694
+    }
+  },
+  {
+    "file": "fair-shelf-153.png",
+    "width": 1672,
+    "height": 941,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "w": 1672,
+      "h": 941
+    }
+  },
+  {
+    "file": "nudge-clap-153.png",
+    "width": 1024,
+    "height": 1536,
+    "bounds": {
+      "x": 61,
+      "y": 113,
+      "w": 916,
+      "h": 1319
+    }
+  },
+  {
+    "file": "sundial-silent-153.png",
+    "width": 932,
+    "height": 1687,
+    "bounds": {
+      "x": 3,
+      "y": 0,
+      "w": 929,
+      "h": 1673
+    }
+  },
+  {
+    "file": "trophy-poses-153.png",
+    "width": 2172,
+    "height": 724,
+    "bounds": {
+      "x": 116,
+      "y": 48,
+      "w": 1953,
+      "h": 637
+    }
+  },
+  {
+    "file": "trophy-poses-first-153.png",
+    "width": 2172,
+    "height": 724,
+    "bounds": {
+      "x": 46,
+      "y": 8,
+      "w": 2039,
+      "h": 711
+    }
+  }
+]

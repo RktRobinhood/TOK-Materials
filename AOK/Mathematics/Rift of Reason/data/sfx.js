@@ -38,5 +38,8 @@
         axiom: ['page1.wav', 'page2.wav'],
         win: ['victory.wav'],
         lose: ['loss.wav'],
+        // CC0 recorded claps; sources and processing in design/source-audio/homecoming-153.
+        'single-clap': ['single-clap.wav'],
+        'fair-applause': ['fair-applause.wav'],
     };
 })(typeof window !== 'undefined' ? window : globalThis);

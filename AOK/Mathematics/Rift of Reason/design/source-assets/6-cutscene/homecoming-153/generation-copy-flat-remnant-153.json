@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "copy-flat-remnant-153.png",
+    "prompt": "Create one low ground prop for Rift of Reason: the harmless flattened REMNANT of an unfinished imitation creature after somebody sat on it. It is a small very flat crumpled pile of dark grey-violet translucent imitation-paper / cloth, with a few folded seams and faint cyan duplicate-outline traces, broad and irregular like a collapsed paper puppet. NO identifiable animal head, ears, eyes, hands, feet, tail or clothing; those features must not conflict with the player's ten possible avatar bodies. The former Copy's voice will come from under a chair and the story caption identifies it; this is a deliberate insert of leftover material, not a new character. No blood, injury, corpse, discarded skin, ghost or horror gore. Quiet absurd failed-prop feeling, warm Fair light, painterly cute-horror texture from approvedstyleboard1. Whole compact silhouette inside LARGE alpha margins, no edges cropped. True ALPHA transparent background, no chair, table, floor, shadowcloud, particles, text or other objects. Aspect roughly3wide:1high in perspective at ground level.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-99059175-14dd-4ef7-9c8f-c096d4bb4bd7.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

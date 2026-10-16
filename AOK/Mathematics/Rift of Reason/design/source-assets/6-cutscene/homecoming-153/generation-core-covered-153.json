@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "core-covered-153.png",
+    "prompt": "Make a single transparent game prop: the EXACT small scratched brass Algorithm core box from reference1, now switched OFF and entirely draped beneath one soft faded blue-purple cloth. Preserve its squat mechanical silhouette and four little foot shapes under the drape, owl top just a rounded contour beneath fabric. Cloth covers every light, dial, eye and sequin; no glowing parts or face visible. It must read as a small covered appliance, not a ghost, person, bag, gravestone or living creature. Calm folds, warm Fair light from upper left. Whole cloth hem and complete footprint comfortably inside generous alpha margins, NO edge contact. Match exact established box dimensions/proportions and approved styleboard2. Isolated true alpha background, no floor, shadow cloud, text, shelf or other props.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/algorithm-core.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-2a39e94f-7e5f-45f8-ad3e-0b2b6c70b4ad.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "retry": "Built-in imagegen first attempt failed network error: error sending request; retried once with identical prompt and references."
+  }
+}

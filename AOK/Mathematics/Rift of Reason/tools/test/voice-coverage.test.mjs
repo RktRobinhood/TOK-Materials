@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import os from 'node:os';
 import path from 'node:path';
-import {voiceCatalog,speechParts,lessonsOf} from '../voices.mjs';
+import {voiceCatalog,collectVoiceLines,speechParts,lessonsOf} from '../voices.mjs';
 import {budgetDay,readBudget,reserveRequest,reserveFileRequest} from '../voice-budget.mjs';
 import {loadRift,GAME_DIR} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
@@ -28,6 +28,17 @@ test('--script: every voiced line belongs to a lesson, so recording lesson by le
  assert.deepEqual(orphans.map(l=>l.who+' @ '+l.where),[]);
  assert.ok(lines.some(l=>l.where.startsWith('prologue')&&lessonsOf(l).includes('lesson1')));
  assert.ok(lines.filter(l=>l.where.startsWith('lead ')).every(l=>lessonsOf(l).includes('lesson1')),'the lead bank is heard from lesson 1');
+});
+
+test('numeric spoken dialogue enters the recording catalogue while bare directions stay silent',()=>{
+ const R=loadRift(['js/core/rift.js']);
+ R.data.map={nodes:{}};R.Battle={Lesson:{steps:[]}};
+ R.data.script={sample:[{s:'copy',t:'100%.'},{s:'copy-sundial',t:'100%.'},{s:'copy',t:'(turns away)'},{s:'copy',t:'…'}]};
+ const {lines,skipped}=collectVoiceLines(R);
+ assert.deepEqual(lines.map(l=>[l.who,l.say]),[['copy','100%.'],['copy-sundial','100%.']]);
+ assert.equal(skipped.length,2);
+ const actual=new Set(voiceCatalog().lines.map(l=>l.id));
+ for(const who of ['copy','copy-sundial'])assert.ok(actual.has(R.voiceId(who,'100%.')));
 });
 test('batch speech keeps acting directions in each line metadata',()=>{
  const parts=speechParts([{say:'Come closer.',mood:'whispering'},{say:'We have a plan!',mood:'triumphant'}],'Dry tortoise humour');

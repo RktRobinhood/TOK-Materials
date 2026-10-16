@@ -40,6 +40,11 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     <label>Core question <select id="wonder"><option value="believe">Why believe?</option><option value="noclicks">Nobody clicks?</option><option value="premises">Premises?</option><option value="light">Behind the light?</option><option value="small">Stay small?</option><option value="before">Before?</option><option value="know">Know?</option></select></label>
     <label>Box fate <select id="fate"><option value="home">Take home awake</option><option value="off">Switch off</option><option value="left">Leave labelled</option></select></label>
     <label><input id="kuku-arrived" type="checkbox" checked> Kuku has arrived</label>
+    <label><input id="pip-lost" type="checkbox"> Pip lost</label>
+    <label><input id="achilles-arrived" type="checkbox" checked> Achilles has arrived</label>
+    <label><input id="tally-arrived" type="checkbox" checked> Tally has arrived</label>
+    <label><input id="high-feed" type="checkbox"> Hairline crack remains</label>
+    <label>Fair reply <select id="brave"><option value="ask">Asked a question</option><option value="go">I will go</option><option value="hide">Hide under stall</option><option value="unset">No recorded reply</option></select></label>
     <label><input id="nudge-fled" type="checkbox" checked> Nudge kept first piece</label>
     <label><input id="paradox-board" type="checkbox" checked> Smudge's chalkboard</label>
     <button class="btn primary" id="play" type="button">▶ Play</button>
@@ -93,7 +98,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     if (params.get('name')) byId('name').value = params.get('name');
     if (params.get('calm') === '1') byId('calm').checked = true;
 
-    R.Cutscene.list().filter(id => id === params.get('id') || !(id.startsWith('town-hall-') || id.startsWith('tribunal-') || id.startsWith('core-')) || R.data.cutscenes[id].replayLabel).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
+    R.Cutscene.list().filter(id => id === params.get('id') || !(id.startsWith('town-hall-') || id.startsWith('tribunal-') || id.startsWith('core-') || id.startsWith('fair-home-')) || R.data.cutscenes[id].replayLabel).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
     if (params.get('id')) byId('which').value = params.get('id');
     if (params.get('outcome')) byId('outcome').value = params.get('outcome');
     if (params.get('hallOutcome')) byId('hall-outcome').value = params.get('hallOutcome');
@@ -103,6 +108,11 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     if (params.get('wonder')) byId('wonder').value = params.get('wonder');
     if (params.get('fate')) byId('fate').value = params.get('fate');
     if (params.get('kuku') === '0') byId('kuku-arrived').checked = false;
+    if (params.get('pip') === 'lost') byId('pip-lost').checked = true;
+    if (params.get('achilles') === '0') byId('achilles-arrived').checked = false;
+    if (params.get('tally') === '0') byId('tally-arrived').checked = false;
+    if (params.get('feed') === '6') byId('high-feed').checked = true;
+    if (params.get('brave')) byId('brave').value = params.get('brave');
 
     function drawAvatars() {
         const box = byId('avatars');
@@ -143,6 +153,10 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
                 'stakes.ch3': trialTier, 'dead:sundial': trialTier === 4, 'clock:ch3': { n: trialDanger, size: 8 },
                 'stakes.ch4': +byId('core-outcome').value, wonder: byId('wonder').value, fate: byId('fate').value,
                 'arrived:sundial': trialTier === 4 && byId('kuku-arrived').checked,
+                'dead:pip': byId('pip-lost').checked, 'arrived:granny': hallTier === 4 && byId('achilles-arrived').checked,
+                'arrived:sequins': tier === 4 && byId('tally-arrived').checked,
+                feed: byId('high-feed').checked ? 6 : 0,
+                brave: byId('brave').value === 'unset' ? undefined : byId('brave').value,
                 bargain: byId('trial-deal').checked ? 'yes' : 'no',
                 nudgeFled: byId('nudge-fled').checked, 'paradox-board': byId('paradox-board').checked,
                 'seen:ch2.cover': true, 'seen:ch2.square.win': true } });

@@ -91,7 +91,7 @@ function collect(Rift) {
         seen.add(id);
         if (!CAST[who]) { skipped.push({ who, text, why: understudies.has(who) ? 'understudy voice not cast yet' : 'no voice in voices-cast.json' }); return; }
         const say = spoken(text);
-        if (!/[a-z]/i.test(say)) { skipped.push({ who, text, why: 'nothing to say (stage direction only)' }); return; }
+        if (!/[a-z0-9]/i.test(say)) { skipped.push({ who, text, why: 'nothing to say (stage direction only)' }); return; }
         lines.push({ id, who, text, say, mood, where });
     };
     const avatars = Object.keys(Rift.data.avatars || {}).flatMap(sp => ['boy', 'girl'].map(v => ({ sp, id: sp + '-' + v })));

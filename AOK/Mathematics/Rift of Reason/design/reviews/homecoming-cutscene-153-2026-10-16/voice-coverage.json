@@ -1,0 +1,449 @@
+{
+  "date": "2026-10-16",
+  "newLines": 0,
+  "covered": 60,
+  "recorded": 47,
+  "missing": [],
+  "pending": [
+    {
+      "speaker": "achilles",
+      "id": "achilles-p0n5qv",
+      "text": "Then it isn't yours. Good. It's very heavy.",
+      "source": "finale.home.reply"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-1p45jqo",
+      "text": "Pip. He'd have written all this down.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1qbwo21",
+      "text": "Where exactly does it start? I'll work it out.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-tthjvn",
+      "text": "Can I hide under the nut stall first?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1fusubp",
+      "text": "I will go.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-oho9vn",
+      "text": "I AM {name}. 100%.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1y1vcp4",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-y468px",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1l11ywa",
+      "text": "Are you sure you're {name}?",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1sx6dl2",
+      "text": "Look. It's glowing at the end. Which end?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-vve4rc",
+      "text": "What if it's a door, not a crack?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-4l1anb",
+      "text": "Has the sky done this before?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-o8hoso",
+      "text": "\"Follow it.\" Follow it where, exactly?",
+      "source": "ch4.push"
+    }
+  ],
+  "lines": [
+    {
+      "speaker": "sequins",
+      "id": "sequins-1bu3594",
+      "text": "I'd have sold it one day. Old magpies sell things. Not this one. I've labelled it.",
+      "source": "finale.home.shelf-boxes"
+    },
+    {
+      "speaker": "nudge",
+      "id": "nudge-jjqp1g",
+      "text": "…Why?",
+      "source": "finale.home.new-word"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-d7e2r1",
+      "text": "Will this one grow up loud? I don't have enough evidence yet. Let's keep watching.",
+      "source": "finale.home.new-word"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-ahm337",
+      "text": "There's a hair on the sky. I'll dust it later.",
+      "source": "finale.home.sky-hair"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-bi2ibv",
+      "text": "\"For the thinker who is always right.\" Is that you?",
+      "source": "finale.home.trophy"
+    },
+    {
+      "speaker": "avatar-owlet-girl",
+      "id": "avatar-owlet-girl-cxq1ye",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-1inljyt",
+      "text": "Then it isn't yours. Good. It's very heavy.",
+      "source": "finale.home.reply"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-hfehbm",
+      "text": "Tick. Tock. Good. Say it like that.",
+      "source": "finale.home.last-words"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-9hu1un",
+      "text": "Sequins. He'd have hated how dark it is.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "tally",
+      "id": "tally-1nf79ml",
+      "text": "He'd have sold it one day. I won't. I labelled it. Neatly. He'd have used glitter.",
+      "source": "finale.home.shelf-boxes"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-142z8ks",
+      "text": "Granny. Ninety years of good mornings. I never said it first.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1pzxa9k",
+      "text": "She'd have said she'd dust it later. I'll do it now. …Slowly.",
+      "source": "finale.home.sky-hair"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1m9anf6",
+      "text": "\"Always right.\" Is that you? Think fast. …No. Slow. She'd say slow.",
+      "source": "finale.home.trophy"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-p0n5qv",
+      "text": "Then it isn't yours. Good. It's very heavy.",
+      "source": "finale.home.reply"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-frcs02",
+      "text": "The Sundial. It always said when it wasn't sure.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-10y0hl2",
+      "text": "Will this one grow up loud? I can't tell yet. Let's keep watching.",
+      "source": "finale.home.new-word"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-1vliuy",
+      "text": "Ten past eleven. Exactly. It would have liked that.",
+      "source": "finale.home.sunlight"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-1y1mxgj",
+      "text": "Good. Say it like that. …I'm practising.",
+      "source": "finale.home.last-words"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-klynj9",
+      "text": "Pip. He'd have written all this down.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1y750ic",
+      "text": "Her magpie friend. All shine, she said. It's dark now.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-fd3huo",
+      "text": "Granny Axiom. I lived in her hallway. She wound me every Sunday.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-i8mt00",
+      "text": "Her rock. Ninety years she said good morning to it.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-1p45jqo",
+      "text": "Pip. He'd have written all this down.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "sequins",
+      "id": "sequins-19nio65",
+      "text": "You left it running? Up there? Then I hope someone claps.",
+      "source": "finale.home.shelf-boxes"
+    },
+    {
+      "speaker": "tally",
+      "id": "tally-19chjoy",
+      "text": "You left it running. Up there. I hope someone claps.",
+      "source": "finale.home.shelf-boxes"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-x15hbi",
+      "text": "Got home Tuesday. Somebody was already here. It blinks wrong.",
+      "source": "finale.home.copy-greeting"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1qbwo21",
+      "text": "Where exactly does it start? I'll work it out.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-tthjvn",
+      "text": "Can I hide under the nut stall first?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1fusubp",
+      "text": "I will go.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-oho9vn",
+      "text": "I AM {name}. 100%.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-1io85gj",
+      "text": "Where exactly does it start? I'll work it out.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-1n4ctqv",
+      "text": "Can I hide under the nut stall first?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-3jwxad",
+      "text": "I will go.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-18gxw18",
+      "text": "I AM {name}. 100%.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-8x1rj2",
+      "text": "Came to sit at her table. Somebody was already sitting there.",
+      "source": "finale.home.copy-greeting"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-14yxbei",
+      "text": "Are you sure you're {name}?",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1y1vcp4",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-19f7ycw",
+      "text": "Nobody's 100%, dear. Not even me.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "granny",
+      "id": "granny-ffwet1",
+      "text": "Come here. That's my {name}.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-y468px",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1l11ywa",
+      "text": "Are you sure you're {name}?",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-j3873d",
+      "text": "Nobody's 100%. Not even me, and I'm fast.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1covnoe",
+      "text": "You. The slow one. Good.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "avatar-owlet-boy",
+      "id": "avatar-owlet-boy-1brl6ls",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "avatar-mothkin-girl",
+      "id": "avatar-mothkin-girl-1834ghe",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1sx6dl2",
+      "text": "Look. It's glowing at the end. Which end?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-wvo3h2",
+      "text": "Look. It's glowing at the end. Which end?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "avatar-mothkin-boy",
+      "id": "avatar-mothkin-boy-1spbqfk",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "avatar-fox-girl",
+      "id": "avatar-fox-girl-1kl8veh",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-vve4rc",
+      "text": "What if it's a door, not a crack?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-7cmmt7",
+      "text": "What if it's a door, not a crack?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "avatar-fox-boy",
+      "id": "avatar-fox-boy-1mcrq0j",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "avatar-frogling-girl",
+      "id": "avatar-frogling-girl-118hmn3",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-4l1anb",
+      "text": "Has the sky done this before?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-16f3a62",
+      "text": "Has the sky done this before?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "avatar-frogling-boy",
+      "id": "avatar-frogling-boy-lx5sgw",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "avatar-raven-girl",
+      "id": "avatar-raven-girl-1cxylit",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-o8hoso",
+      "text": "\"Follow it.\" Follow it where, exactly?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-1g8utcf",
+      "text": "\"Follow it.\" Follow it where, exactly?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "avatar-raven-boy",
+      "id": "avatar-raven-boy-3o71s7",
+      "text": "Probably.",
+      "source": "finale.home.probably"
+    }
+  ]
+}

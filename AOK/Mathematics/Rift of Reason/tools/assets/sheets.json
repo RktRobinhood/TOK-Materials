@@ -465,6 +465,14 @@
         "trial-crowd-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/court-juror-a","cutscene/court-juror-b"]},
         "colossus-shell-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/colossus-shell-left","cutscene/colossus-shell-right"]},
         "colossus-shell-first-153.png": {"type":"skip"},
-        "sundial-half-shadow-153.png": {"type":"single","class":"prop","id":"cutscene/sundial-half-shadow"}
+        "sundial-half-shadow-153.png": {"type":"single","class":"prop","id":"cutscene/sundial-half-shadow"},
+        "fair-shelf-153.png": {"type":"scene","id":"scene/fair-shelf"},
+        "sundial-silent-153.png": {"type":"single","class":"sprite","id":"cutscene/sundial-silent"},
+        "trophy-poses-first-153.png": {"type":"skip"},
+        "trophy-poses-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/granny-trophy","cutscene/granny-bare-trophy","cutscene/achilles-trophy"]},
+        "nudge-clap-153.png": {"type":"single","class":"sprite","id":"cutscene/nudge-clap"},
+        "fair-furniture-153.png": {"type":"islands","minArea":1500,"class":"prop","ids":["cutscene/fair-card-table","cutscene/fair-chair"]},
+        "copy-flat-remnant-153.png": {"type":"single","class":"prop","id":"cutscene/copy-flat-remnant"},
+        "core-covered-153.png": {"type":"single","class":"prop","id":"cutscene/core-covered"}
     }
 }

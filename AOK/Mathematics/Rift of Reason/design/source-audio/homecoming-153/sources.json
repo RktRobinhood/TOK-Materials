@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "licence": "CC0-1.0",
+  "licenceURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "method": "Source recordings decoded locally to22050Hz mono PCM16 WAV, normalized to-13dB peak; applause trimmed to3.6s with0.6s tail fade. No synthesis or paid requests.",
+  "cues": [
+    {
+      "id": "single-clap",
+      "source": "clap-xumr.mp3",
+      "author": "xUMR",
+      "title": "clap.wav",
+      "page": "https://freesound.org/people/xUMR/sounds/478657/",
+      "download": "https://cdn.freesound.org/previews/478/478657_5953161-hq.mp3",
+      "file": "assets/sfx/single-clap.wav",
+      "gain": 0.24746831267442404,
+      "duration": 0.5,
+      "peak": 0.223876953125,
+      "sourceSHA256": "1d8d858f33ca5012978bc364e695b2e63b56ec9134566f27615e5968a8e6b1da",
+      "fileSHA256": "c451e07b03a3f93ae032547d92bbd58bbf90c333c9659ca88fe5f6ca9b9fa83a"
+    },
+    {
+      "id": "fair-applause",
+      "source": "applause-breviceps.mp3",
+      "author": "Breviceps",
+      "title": "Small applause",
+      "page": "https://freesound.org/people/Breviceps/sounds/462362/",
+      "download": "https://cdn.freesound.org/previews/462/462362_9159316-hq.mp3",
+      "file": "assets/sfx/fair-applause.wav",
+      "gain": 0.2745263014809482,
+      "duration": 3.6,
+      "peak": 0.223876953125,
+      "sourceSHA256": "0297dc19883bf2ffd6ea2634101eb744c6d52acb588a7b8eab1760d6ebd543ba",
+      "fileSHA256": "0e8e565f62d723dbf9eea8d34d720276be4df96ba09f2871e17faf053c186495"
+    }
+  ]
+}

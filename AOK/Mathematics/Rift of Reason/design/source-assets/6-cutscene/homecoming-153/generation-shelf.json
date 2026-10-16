@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "fair-shelf-153.png",
+    "prompt": "Edit the supplied Pattern Stall painting into the SAME restored Fair stall ready for its final two little brass boxes. Preserve the purple draped fabric, antique wooden stall, brass warm lanterns, hanging jewel decorations, painterly cute-horror jewel palette. Clear ALL loose merchandise, jewellery trays, bowls, little props, boxes and birds from the main long counter so its middle 70% is one empty sturdy wooden shelf surface at about y=465 of a 900-high view; expose enough wall behind it to read brass-box silhouettes. Preserve hanging decorations only in upper third and far sides. No people, creatures, faces or machines baked into the background. Warm late-morning sunlight now reaches the front, lanterns still gently warm, no overly bright white patches. Keep the lower third as empty clear foreground ground for whole standing characters. Widescreen 16:9 full opaque game stage, scene only, no text/sign/letters. Reference1 exact stall is edit target, reference2 styleboard for consistency. Do not place the Guess-o-Matics yet; we animate them separately.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/scenes/stall-pattern.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-7c4c7e95-d59a-4bc2-9d4e-a446d31f79ae.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

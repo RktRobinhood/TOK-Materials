@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "sundial-silent-153.png",
+    "prompt": "Edit the supplied whole Sundial character into its quiet memorial state for Rift of Reason. Preserve the EXACT same round carved stone dial, triangular gnomon at top, cylindrical pedestal, moss, flowers, weathering and proportions. Its carved eyes are gently CLOSED, the mouth is a still neutral shallow stone line, no smile, no tears, no glow, no movement: clearly a silent stone, not a revived character. The gnomon and complete broad foot remain intact. No cast shadow painted behind it: the recovered shadow is animated as a separate prop. Whole complete silhouette with every point and flower comfortably inside generous transparent margins, no cropping. Exact character reference1; painterly cute-horror jewel styleboard2. True ALPHA background, no environment, text, candles or new props.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/sundial-idle.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-c90b4e82-98d9-495b-b6b2-fb6ac3d28157.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

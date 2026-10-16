@@ -366,10 +366,11 @@
             shot.layers.forEach(l => {
                 const at = project(shot.camera, l);
                 const sy = l.sy == null ? 1 : l.sy;
+                const facing = l.mirror ? -1 : 1;
                 const style = l.node.style;
                 style.width = l.w + 'px';
                 style.height = l.h + 'px';
-                style.transform = 'translate(' + px(at.sx - l.w * at.S / 2) + ',' + px(at.sy - l.h * at.S * sy / 2) + ') scale(' + at.S + ',' + at.S * sy + ')';
+                style.transform = 'translate(' + px(at.sx - l.w * at.S * facing / 2) + ',' + px(at.sy - l.h * at.S * sy / 2) + ') scale(' + at.S * facing + ',' + at.S * sy + ')';
                 style.opacity = String(Rift.clamp(l.opacity, 0, 1));
                 const filters = [];
                 if (l.bright && l.bright !== 1) filters.push('brightness(' + l.bright + ')');
@@ -516,7 +517,7 @@
 
     Player.prototype.exec = async function (s) {
         const kind = s.shot ? 'shot' : s.say ? 'say' : s.note ? 'note' : s.camera ? 'camera' : s.tween ? 'tween' : s.set ? 'set'
-            : s.fx ? 'fx' : s.hud ? 'hud' : 'title' in s ? 'title' : s.end ? 'end' : s.sfx ? 'sfx' : s.ambience ? 'ambience' : 'wait' in s ? 'wait' : 'unknown';
+            : s.fx ? 'fx' : s.hud ? 'hud' : 'title' in s ? 'title' : s.end ? 'end' : s.sfx ? 'sfx' : 'ambience' in s ? 'ambience' : 'wait' in s ? 'wait' : 'unknown';
         this.trace.push(kind + ':' + (s.shot || s.say || s.tween || s.set || s.fx || s.hud || s.sfx || s.ambience || (kind === 'wait' ? s.wait : '') || ''));
         if (this.o.onStep) this.o.onStep(kind, s);
         if (kind === 'shot') return this.shot(s);
@@ -534,7 +535,13 @@
         }
         if (kind === 'set') return this.set(s);
         if (kind === 'wait') return this.sleep(s.wait);
-        if (kind === 'sfx') { if (Rift.Audio && Rift.Audio.sfx) Rift.Audio.sfx(s.sfx, { volume: s.volume, minGap: 0 }); return null; }
+        if (kind === 'sfx') {
+            if (Rift.Audio && Rift.Audio.sfx) {
+                this.sfxPlayed = true;
+                Rift.Audio.sfx(s.sfx, { volume: s.volume, minGap: 0 });
+            }
+            return null;
+        }
         if (kind === 'ambience') {
             if (Rift.Ambience && Rift.Ambience.scene) { this.ambienceChanged = true; Rift.Ambience.scene(s.ambience); }
             return null;
@@ -803,6 +810,7 @@
         this.tweens = [];
         if (this.onKey) this.unlisten();
         if (Rift.Audio && Rift.Audio.stopVoice) Rift.Audio.stopVoice();
+        if (this.sfxPlayed && Rift.Audio && Rift.Audio.stopSounds) Rift.Audio.stopSounds();
         // Back to whatever was playing before (the map's loop), at its old tension.
         const before = this.ambienceBefore;
         if (this.ambienceChanged && Rift.Ambience && before && before.art !== undefined) {

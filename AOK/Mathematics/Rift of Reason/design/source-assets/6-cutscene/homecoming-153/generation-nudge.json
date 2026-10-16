@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "nudge-clap-153.png",
+    "prompt": "Edit the exact whole Nudge imp from reference1 into ONE quiet clapping pose for Rift of Reason's final Fair scene. Preserve its small grey furry imp body, huge reddish amber eyes, three little horns, ears, single fang, bell on curling tail and short legs. Both empty paws meet gently in front of the chest for a single tentative clap. Face is attentive and a little uncertain, small sincere smile, no manic cheering. NO clipboard, mask, net, sign, trophy or other carried prop. Full head/horns, both paws, complete tail bell, legs and BOTH feet comfortably inside generous transparent margins, at least 8 percent breathing space on every side. No crop or edge contact. Exact character reference1; approvedstyleboard2 and shippedcat3 for painterly cute-horror texture. True ALPHA transparent background, no floor, environment, text or motion lines. One complete independent figure.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/nudge-idle.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-a5a54c14-f2f3-4a0b-9825-2cd5fba7648a.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

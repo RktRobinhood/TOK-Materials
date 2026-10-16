@@ -680,43 +680,84 @@
             { arrive: 'granny' },
             { s: 'granny', t: '', u: 'Coach Achilles. Saw her lantern go out. Came as fast as I could. Which is fast.' },
         ] },
-
-        // 1. Who are you? (the Copy got home first: tiers 3–4)
-        { when: COPY_HOME, then: [
-            { s: 'granny', t: 'Got home Tuesday. Somebody was already here. It blinks wrong.',
-                u: 'Came to sit at her table. Somebody was already sitting there.' },
-            { when: { flag: 'stakes.ch4', is: 4 }, then: [
-                { note: 'At the card table sits the Copy. Being you.' },
-                { s: 'granny', t: 'Are you sure you\'re {name}?' },
-                COPY('100%.'),
-                { s: 'granny', t: 'Nobody\'s 100%, dear. Not even me.', u: 'Nobody\'s 100%. Not even me, and I\'m fast.' },
-                { s: 'granny', e: 'happy', t: 'Come here. That\'s my {name}.', u: 'You. The slow one. Good.' },
-                { note: 'You say nothing. The Copy shrinks to a single die.' },
-            ], else: [
-                { note: 'Somebody has already sat on the Copy. It is very flat.' },
-                ...BRAVE_ECHO,
-                { note: 'Then it stops.' },
-            ] },
-        ] },
-
-        // 2. The candles (only if someone died). No jokes here.
+        { cutscene: 'fair-home-recognition', continuation: 'finale.home.recognition' },
         { when: ANY_DEATH, then: [
             { prop: 'ui/memorial-candle' },
-            { note: 'The lanterns. A candle burns under each dark one.' },
-            { note: 'Pip never had a lantern here. You light a new one for him. A candle goes under it.', when: 'dead:pip' },
-            { s: 'granny', t: 'Sequins. He\'d have hated how dark it is.', u: 'Her magpie friend. All shine, she said. It\'s dark now.', when: 'dead:sequins' },
-            { s: 'narrator', t: 'Granny. Ninety years of good mornings. I never said it first.',
-                u: 'Granny Axiom. I lived in her hallway. She wound me every Sunday.', when: 'dead:granny' },
-            { s: 'granny', t: 'The Sundial. It always said when it wasn\'t sure.', u: 'Her rock. Ninety years she said good morning to it.', when: 'dead:sundial' },
-            { s: 'narrator', t: 'Pip. He\'d have written all this down.', when: 'dead:pip' },
+            { cutscene: 'fair-home-memorial', continuation: 'finale.home.memorial' },
         ] },
-
-        // 3. The shelf (five spoken lines at most).
+        // These story arrivals precede the shelf's cast resolution; a replay never performs them.
         { s: 'granny', t: 'I walked home. Downhill, through time. Took ages.', when: { all: ['!dead:granny', { not: COPY_HOME }, { not: TALLY_AT_SHELF }] } },
         { when: TALLY_AT_SHELF, then: [
             { arrive: 'sequins' },
             { s: 'sequins', t: '', u: 'He did the shouting. I did the counting.' },
         ] },
+        { cutscene: 'fair-home-shelf', continuation: 'finale.home.shelf' },
+        { cutscene: 'fair-home-probably', continuation: 'finale.home.probably-ending' },
+        // Neither Skip nor navigation may confer the ending before its unheard lines finish.
+        { flag: 'rift-walker' },
+    ];
+
+    // Pure words for the films and their completed/unheard continuations.
+    S['finale.home.copy-greeting'] = [
+        // 1. Who are you? (the Copy got home first: tiers 3–4)
+        { when: COPY_HOME, then: [
+            { s: 'granny', t: 'Got home Tuesday. Somebody was already here. It blinks wrong.',
+                u: 'Came to sit at her table. Somebody was already sitting there.' },
+        ] },
+    ];
+    S['finale.home.copy-table'] = [
+        { when: { flag: 'stakes.ch4', is: 4 }, then: [
+                { note: 'At the card table sits the Copy. Being you.' },
+        ] },
+    ];
+    S['finale.home.copy-challenge'] = [
+        { when: { flag: 'stakes.ch4', is: 4 }, then: [
+                { s: 'granny', t: 'Are you sure you\'re {name}?', u: 'Are you sure you\'re {name}?' },
+                COPY('100%.'),
+                { s: 'granny', t: 'Nobody\'s 100%, dear. Not even me.', u: 'Nobody\'s 100%. Not even me, and I\'m fast.' },
+                { s: 'granny', e: 'happy', t: 'Come here. That\'s my {name}.', u: 'You. The slow one. Good.' },
+        ] },
+    ];
+    S['finale.home.copy-fold'] = [
+        { when: { flag: 'stakes.ch4', is: 4 }, then: [
+                { note: 'You say nothing. The Copy shrinks to a single die.' },
+        ] },
+    ];
+    S['finale.home.copy-flat'] = [
+        { when: { flag: 'stakes.ch4', is: 3 }, then: [
+                { note: 'Somebody has already sat on the Copy. It is very flat.' },
+        ] },
+    ];
+    S['finale.home.copy-echo'] = [
+        { when: { flag: 'stakes.ch4', is: 3 }, then: [
+                ...BRAVE_ECHO,
+        ] },
+    ];
+    S['finale.home.copy-stopped'] = [
+        { when: { flag: 'stakes.ch4', is: 3 }, then: [
+                { note: 'Then it stops.' },
+        ] },
+    ];
+    S['finale.home.recognition'] = [].concat(S['finale.home.copy-greeting'], S['finale.home.copy-table'],
+        S['finale.home.copy-challenge'], S['finale.home.copy-fold'], S['finale.home.copy-flat'],
+        S['finale.home.copy-echo'], S['finale.home.copy-stopped']);
+    S['finale.home.memorial-lanterns'] = [
+        // 2. The candles (only if someone died). No jokes here.
+            { note: 'The lanterns. A candle burns under each dark one.' },
+    ];
+    S['finale.home.memorial-pip'] = [
+            { note: 'Pip never had a lantern here. You light a new one for him. A candle goes under it.', when: 'dead:pip' },
+    ];
+    S['finale.home.memorial-names'] = [
+            { s: 'granny', t: 'Sequins. He\'d have hated how dark it is.', u: 'Her magpie friend. All shine, she said. It\'s dark now.', when: 'dead:sequins' },
+            { s: 'narrator', t: 'Granny. Ninety years of good mornings. I never said it first.',
+                u: 'Granny Axiom. I lived in her hallway. She wound me every Sunday.', when: 'dead:granny' },
+            { s: 'granny', t: 'The Sundial. It always said when it wasn\'t sure.', u: 'Her rock. Ninety years she said good morning to it.', when: 'dead:sundial' },
+            { s: 'narrator', t: 'Pip. He\'d have written all this down.', u: 'Pip. He\'d have written all this down.', when: 'dead:pip' },
+    ];
+    S['finale.home.memorial'] = [].concat(S['finale.home.memorial-lanterns'], S['finale.home.memorial-pip'], S['finale.home.memorial-names']);
+    S['finale.home.shelf-boxes'] = [
+        // 3. The shelf (five spoken lines at most).
         { note: 'At the Pattern Stall, the young Guess-o-Matic gets a painted sign: IT GUESSES.' },
         { s: 'sequins', t: 'I\'d have sold it one day. Old magpies sell things. Not this one. I\'ve labelled it.',
             u: 'He\'d have sold it one day. I won\'t. I labelled it. Neatly. He\'d have used glitter.' },
@@ -725,12 +766,20 @@
         { note: 'No box on the shelf for this one. You tell them where it is.', when: { flag: 'fate', is: 'left' } },
         { s: 'sequins', t: 'You left it running? Up there? Then I hope someone claps.',
             u: 'You left it running. Up there. I hope someone claps.', when: { flag: 'fate', is: 'left' } },
+    ];
+    S['finale.home.shelf-nudge'] = [
         { note: 'Nudge stands by the stall. No clipboard. It is learning a new word.' },
+    ];
+    S['finale.home.nuts'] = [
         { note: 'A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up.' },
+    ];
+    S['finale.home.new-word'] = [
         { s: 'nudge', t: '…Why?' },
         { s: 'narrator', t: 'Will this one grow up loud? I don\'t have enough evidence yet. Let\'s keep watching.',
             u: 'Will this one grow up loud? I can\'t tell yet. Let\'s keep watching.' },
-
+    ];
+    S['finale.home.shelf'] = [].concat(S['finale.home.shelf-boxes'], S['finale.home.shelf-nudge'], S['finale.home.nuts'], S['finale.home.new-word']);
+    S['finale.home.sunlight'] = [
         // 4. The last question.
         { when: 'dead:sundial', then: [
             { note: 'The sun comes out. Kuku lays the shadow on the silent stone. In the sun.', when: 'arrived:sundial' },
@@ -740,19 +789,34 @@
             { note: 'The sun comes out. The shadow lies where it should.', when: NO_BARGAIN },
             { note: 'The sun comes out. Half a shadow lies where it should.', when: BARGAIN },
         ] },
+    ];
+    S['finale.home.sky-hair'] = [
         { s: 'granny', t: 'There\'s a hair on the sky. I\'ll dust it later.',
             u: 'She\'d have said she\'d dust it later. I\'ll do it now. …Slowly.', when: { flag: 'feed', gte: 6 } },
+    ];
+    S['finale.home.trophy'] = [
         { note: 'Granny holds up the Thinking Trophy.', when: '!dead:granny' },
         { note: 'Coach Achilles holds up the Thinking Trophy.', when: 'dead:granny' },
         { s: 'granny', t: '"For the thinker who is always right." Is that you?',
             u: '"Always right." Is that you? Think fast. …No. Slow. She\'d say slow.' },
+    ];
+    S['finale.home.probably'] = [
         { s: 'avatar', t: 'Probably.' },
-        { s: 'granny', e: 'happy', t: 'Then it isn\'t yours. Good. It\'s very heavy.' },
+    ];
+    S['finale.home.reply'] = [
+        { s: 'granny', e: 'happy', t: 'Then it isn\'t yours. Good. It\'s very heavy.', u: 'Then it isn\'t yours. Good. It\'s very heavy.' },
+    ];
+    S['finale.home.applause'] = [
         { note: 'By the stall, Nudge claps. Once. Then the whole Fair claps. For "probably".' },
+    ];
+    S['finale.home.last-words'] = [
         { s: 'narrator', t: 'Tick. Tock. Good. Say it like that.', u: 'Good. Say it like that. …I\'m practising.' },
-        { flag: 'rift-walker' },
+    ];
+    S['finale.home.end'] = [
         { note: 'The end. For now.' },
     ];
+    S['finale.home.probably-ending'] = [].concat(S['finale.home.sunlight'], S['finale.home.sky-hair'], S['finale.home.trophy'],
+        S['finale.home.probably'], S['finale.home.reply'], S['finale.home.applause'], S['finale.home.last-words'], S['finale.home.end']);
 
     // After the end: the restored Fair map. A few stations hold one bark each, played once, so nobody
     // waits for them before the last word (STORY.md §6). They hook into lesson1.js's station scripts.

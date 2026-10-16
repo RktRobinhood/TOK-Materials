@@ -143,6 +143,23 @@ function game(options = {}) {
 }
 const shot = {shot:'quiet',layers:[]};
 
+test('mirroring a full character changes facing without shifting its centre or visible bounds',async()=>{
+    for(const mirror of [false,true]) {
+        const g=game(),camera={x:800,y:450,zoom:1.1};
+        const body={id:'body',art:'item/lucky-sequin',x:1180,y:580,w:240,h:280,mirror};
+        const done=g.Rift.Cutscene.play(g.film([{shot:'facing',camera,layers:[body]},{wait:60000}]));
+        await settle();
+        const transform=g.$('.cs-layer').style.transform.match(/translate\(([-\d.]+)px,([-\d.]+)px\) scale\(([-\d.]+),([-\d.]+)\)/);
+        assert.ok(transform);const [,tx,ty,sx,sy]=transform.map(Number),at=g.Rift.Cutscene.project(camera,body);
+        const left=Math.min(tx,tx+body.w*sx),right=Math.max(tx,tx+body.w*sx);
+        assert.ok(Math.abs((left+right)/2-at.sx)<0.01,'the projected centre stays fixed');
+        assert.ok(Math.abs(right-left-body.w*at.S)<0.01,'the complete width survives the flip');
+        assert.equal(sx<0,mirror);assert.ok(sy>0,'vertical scale stays upright');
+        assert.ok(left>=0&&right<=1600&&ty>=0&&ty+body.h*sy<=760,'the whole figure stays above subtitles');
+        g.key('Escape');assert.equal(await done,true);
+    }
+});
+
 test('silent film notes allow reading and never request a narrator recording',async()=>{
     const g=game(),noted=[];
     const done=g.Rift.Cutscene.play(g.film([shot,{note:'LICENCE: DELETED.'}]),{onNote:text=>noted.push(text)});
@@ -737,6 +754,199 @@ test('Core navigation before or after either accepted decision cannot reopen a c
     }
 });
 
+test('a silent memorial dispatches null ambience and restores the preceding room when it closes',async()=>{
+    const g=game({beforeArt:'scene/fair-restored'}),id=g.film([shot,{ambience:null},{wait:60000}]);
+    const done=g.Rift.Cutscene.play(id);await settle();assert.deepEqual(g.scenes,[null]);
+    g.key('Escape');assert.equal(await done,true);assert.deepEqual(g.scenes,[null,'scene/fair-restored']);
+});
+
+test('abandoning or skipping film-owned applause stops it once; quiet films do not stop unrelated effects',async()=>{
+    for(const cue of [null,'fair-applause'])for(const how of ['skip','stop']) {
+        const g=game(),played=[];let stops=0;
+        g.Rift.Audio.sfx=name=>played.push(name);g.Rift.Audio.stopSounds=()=>{stops++;};
+        const id=g.film([shot,...(cue?[{sfx:cue}]:[]),{wait:60000}]),done=g.Rift.Cutscene.play(id);
+        await settle();if(how==='skip')g.key('Escape');else g.Rift.Cutscene.stop();
+        assert.equal(await done,true);assert.equal(stops,cue?1:0);assert.deepEqual(played,cue?[cue]:[]);
+        g.Rift.Cutscene.stop();assert.equal(stops,cue?1:0);
+    }
+});
+
+function homeGame(type='owlet',variant='girl',tier=1,options={}) {
+    const g=coreGame(type,variant,tier);
+    Object.assign(g.state.flags,{'finale-open':true,fate:options.fate||'home',brave:options.brave||'go',feed:options.feed||0});
+    if(options.brave==='unset')delete g.state.flags.brave;
+    for(const name of options.deaths||[])g.state.flags['dead:'+name]=true;
+    if(options.kuku)g.state.flags['arrived:sundial']=true;
+    if(options.deal)g.state.flags.bargain='yes';
+    return g;
+}
+const finishHome=(g,promise,mode='complete',events=[])=>finishCore(g,promise,mode,events);
+
+test('Homecoming replay frames all ten avatars and four Copy outcomes without arrivals, rewards or save writes',()=>{
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl'])for(const tier of [1,2,3,4]) {
+        const g=homeGame(type,variant,tier),before=JSON.stringify(g.state),p=g.Rift.Cutscene.plan('fair-homecoming');
+        assert.equal(JSON.stringify(g.state),before);assert.equal(p.def.noteLabel,'THE FAIR');
+        const first=p.steps.find(s=>s.shot==='home-again');
+        assert.equal(first.layers.find(l=>l.id==='hero').mirror,true);
+        const recognition=g.Rift.Cutscene.plan('fair-home-recognition');
+        assert.equal(recognition.steps.some(s=>s.wait===1100),tier>=3,'the unchallenged arrival has no empty dialogue hold');
+        assert.equal(first.layers.some(l=>l.id==='copy'),tier===4);assert.equal(first.layers.some(l=>l.id==='flat-copy'),tier===3);
+        if(tier===4) {
+            const copy=first.layers.find(l=>l.id==='copy'),die=first.layers.find(l=>l.id==='copy-die');
+            assert.equal(copy.art,'avatar/'+type+'-'+variant+'/idle');assert.equal(die.x,copy.x);
+            const fold=p.steps.find(s=>s.note?.startsWith('You say nothing. The Copy shrinks'));
+            assert.equal(fold.during.find(s=>s.tween==='copy').to.x,die.x,'the die stays at the Copy\'s seat');
+        }
+        assert.ok(p.steps.every(s=>!s.flag&&!s.arrive&&!s.give&&!s.keepsake&&!s.clock&&!s.choice));
+        assert.ok(p.steps.every(s=>(s.layers||[]).every(l=>l.id!=='pip'&&l.art!=='npc/clerk/idle'&&l.art!=='cutscene/pip-solemn')));
+        for(const s of p.steps.filter(s=>s.say))assert.ok(voices.has(s.say+':'+s.t),'canonical home line '+s.say+':'+s.t);
+        for(const s of p.steps)for(const l of s.layers||[]) {
+            if(l.cover)continue;const at=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
+            assert.ok(at.sx-l.w*at.S/2>=0&&at.sx+l.w*at.S/2<=1600,l.id+' fits horizontally');
+            assert.ok(at.sy-l.h*at.S/2>=0&&at.sy+l.h*at.S/2<=760,l.id+' is wholly above captions');
+        }
+    }
+});
+
+test('Homecoming completion, Skip and missing/error films preserve the ending order and commit only after the end',async()=>{
+    for(const [type,variant] of [['owlet','girl'],['fox','boy']])for(const tier of [1,2,3,4])for(const mode of ['complete','skip','unavailable','failed']) {
+        const g=homeGame(type,variant,tier),{events,trace}=trialPresentation(g,mode);
+        await finishHome(g,g.Rift.Dialogue.play('finale.home'),mode,events);
+        assert.equal(g.state.flags['rift-walker'],true);assert.equal(g.state.flags['seen:finale.home'],true);
+        const pos=text=>events.findIndex(e=>e.text.includes(text));
+        assert.ok(pos('BEST NUTS IN THE WORLD!')<pos('…Why?'),'the new question answers an actual claim');
+        assert.ok(pos('Probably.')>pos('For the thinker who is always right.'));
+        assert.ok(pos('Then it isn\'t yours.')>pos('Probably.'));
+        assert.ok(pos('Nudge claps. Once.')>pos('Then it isn\'t yours.'));
+        assert.ok(pos('The end. For now.')>pos('Good. Say it like that.'));
+        assert.equal(events.filter(e=>e.text==='Probably.').length,1);
+        if(tier===4)assert.ok(pos('100%.')<pos('Nobody\'s 100%')&&pos('Nobody\'s 100%')<pos('The Copy shrinks'));
+        if(tier===3)assert.ok(pos('very flat.')<pos('I will go.')&&pos('I will go.')<pos('Then it stops.'));
+        if(mode==='complete')assert.ok(trace.some(([,s])=>s.shot==='the-thinking-trophy'));
+        assert.equal(g.claims(),0);
+    }
+});
+
+test('Homecoming memorials follow every actual death combination and never applaud under remembrance',()=>{
+    const names=['sequins','granny','sundial','pip'];
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(let mask=0;mask<16;mask++) {
+        const deaths=names.filter((name,i)=>mask&(1<<i)),g=homeGame('fox','boy',2,{deaths,kuku:deaths.includes('sundial')});
+        for(const name of ['granny','sequins'])if(deaths.includes(name))g.state.flags['arrived:'+name]=true;
+        const p=g.Rift.Cutscene.plan('fair-homecoming'),memorial=p.steps.find(s=>s.shot==='the-lanterns');
+        assert.equal(!!memorial,deaths.length>0);
+        if(memorial) {
+            assert.equal(memorial.layers.filter(l=>l.id.startsWith('lantern-')).length,deaths.length);
+            assert.equal(memorial.layers.filter(l=>l.id.startsWith('candle-')).length,deaths.length);
+            for(const name of names)assert.equal(memorial.layers.some(l=>l.id==='lantern-'+name),deaths.includes(name));
+            assert.equal(p.steps.filter(s=>s.note?.startsWith('Pip never had a lantern')).length,deaths.includes('pip')?1:0);
+            const start=p.steps.indexOf(memorial),shelf=p.steps.findIndex(s=>s.shot==='the-pattern-shelf');
+            assert.ok(p.steps.slice(start,shelf).every(s=>!s.sfx));
+            assert.ok(Object.hasOwn(p.steps[start-1],'ambience')&&p.steps[start-1].ambience===null);
+        }
+        const says=p.steps.filter(s=>s.say);
+        for(const name of ['granny','sequins'])if(deaths.includes(name))assert.ok(says.every(s=>s.say!==name));
+        if(deaths.includes('sundial'))assert.ok(says.every(s=>s.say!=='narrator'));
+        for(const tier of [2,3,4])for(const bargain of [false,true]) {
+            g.state.flags['stakes.ch4']=tier;
+            if(bargain)g.state.flags.bargain='yes';else delete g.state.flags.bargain;
+            for(const s of g.Rift.Cutscene.plan('fair-homecoming').steps.filter(s=>s.say)) {
+                assert.ok(voices.has(s.say+':'+s.t),'catalogue includes actual home actor '+s.say+':'+s.t);
+            }
+        }
+    }
+});
+
+test('Homecoming resolves Achilles before recognition and Tally before shelf words without bringing Pip home',async()=>{
+    const g=homeGame('owlet','girl',4,{deaths:['granny','sequins','sundial','pip'],kuku:true}),{events,trace}=trialPresentation(g,'skip');
+    await finishHome(g,g.Rift.Dialogue.play('finale.home'),'skip',events);
+    assert.equal(g.state.flags['arrived:granny'],true);assert.equal(g.state.flags['arrived:sequins'],true);
+    const pos=text=>events.findIndex(e=>e.text.includes(text));
+    assert.ok(pos('Coach Achilles. Saw her lantern go out.')<pos('Came to sit at her table.'));
+    assert.ok(pos('He did the shouting. I did the counting.')<pos('He\'d have sold it one day.'));
+    assert.ok(g.speech.every(s=>!['granny','sequins','narrator','pip'].includes(s.speaker)));
+    assert.ok(events.some(e=>e.text==='Ten past eleven. Exactly. It would have liked that.'));
+    assert.equal(g.state.flags['rift-walker'],true);
+    assert.ok(trace.every(([,s])=>(s.layers||[]).every(l=>l.id!=='pip')));
+});
+
+test('Homecoming keeps every brave echo and bargain Copy voice for the unfinished arrival',async()=>{
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const brave of ['go','hide','ask','unset'])for(const deal of [false,true]) {
+        const g=homeGame(type,'boy',3,{brave,deal}),{events}=trialPresentation(g,'skip');
+        await finishHome(g,g.Rift.Dialogue.play('finale.home'),'skip',events);
+        const copy=g.speech.filter(s=>s.speaker==='copy'||s.speaker==='copy-sundial');assert.equal(copy.length,1);
+        assert.equal(copy[0].speaker,deal?'copy-sundial':'copy');
+        const expected=brave==='go'?'I will go.':brave==='hide'?'Can I hide under the nut stall first?':brave==='unset'?'I AM Ada. 100%.':
+            {owlet:'Where exactly does it start? I\'ll work it out.',mothkin:'Look. It\'s glowing at the end. Which end?',fox:'What if it\'s a door, not a crack?',
+                frogling:'Has the sky done this before?',raven:'"Follow it." Follow it where, exactly?'}[type];
+        assert.equal(copy[0].text,expected);
+    }
+});
+
+test('Homecoming shelf fates, full/half/memorial shadows, elder poses and the sky hair match the saved outcomes',()=>{
+    for(const fate of ['home','off','left'])for(const companion of ['alive','bargain','silent','kuku'])for(const feed of [0,6]) {
+        const dead=companion==='silent'||companion==='kuku';
+        const g=homeGame('fox','boy',1,{fate,deal:companion==='bargain',deaths:dead?['sundial']:[],kuku:companion==='kuku',feed});
+        const p=g.Rift.Cutscene.plan('fair-homecoming'),shelf=p.steps.find(s=>s.shot==='the-pattern-shelf'),sun=p.steps.find(s=>s.shot==='a-place-in-the-sun');
+        assert.equal(shelf.layers.some(l=>l.id==='old-box'),fate==='home');assert.equal(shelf.layers.some(l=>l.id==='covered-box'),fate==='off');
+        const young=shelf.layers.find(l=>l.id==='young-box'),sign=shelf.layers.find(l=>l.id==='honest-sign'),label=p.steps.find(s=>s.id==='young-label');
+        assert.ok(sign.y-sign.h/2>young.y+young.h/2,'the plaque leaves the young box face clear');
+        assert.equal(label.follow,sign.id);assert.equal(label.x,sign.x);assert.equal(label.y,sign.y);
+        assert.ok(label.w<sign.w&&label.h<sign.h&&label.font<=22,'painted words fit inside the plaque');
+        assert.equal(sun.layers.some(l=>l.id==='sundial'),!dead);assert.equal(sun.layers.some(l=>l.id==='silent-stone'),dead);
+        assert.equal(sun.layers.some(l=>l.id==='kuku'),companion==='kuku');
+        assert.equal(sun.layers.find(l=>l.id==='shadow').art,companion==='bargain'?'cutscene/sundial-half-shadow':'cutscene/sundial-shadow');
+        assert.equal(sun.layers.find(l=>l.id==='shadow').y,dead?665:715,'the memorial shadow leaves the closed eyes clear');
+        assert.equal(sun.layers.find(l=>l.id==='shadow').w,dead?65:140);
+        const trophy=p.steps.find(s=>s.shot==='the-thinking-trophy'),elder=trophy.layers.find(l=>l.id==='elder'),hero=trophy.layers.find(l=>l.id==='hero');
+        assert.ok(hero.x-elder.x<350,'elder and traveller share the final question at close distance');
+        assert.ok(elder.x+elder.w/2<hero.x-hero.w/2,'cup and player remain physically separate');
+        assert.equal(trophy.layers.find(l=>l.id==='shadow').x,dead?800:840);
+        assert.equal(trophy.layers.find(l=>l.id==='shadow').opacity,dead?0.45:0.85);
+        assert.equal(sun.layers.some(l=>l.id==='sky-hair'),feed>=6);
+        if(dead)assert.ok(p.steps.filter(s=>s.say).every(s=>s.say!=='narrator'));
+    }
+    for(const elder of ['granny','bare','achilles']) {
+        const g=homeGame();
+        if(elder==='bare')Object.assign(g.state.flags,{'stakes.ch2':3,'clock:ch2':{n:8,size:8,done:true}});
+        if(elder==='achilles')Object.assign(g.state.flags,{'dead:granny':true,'arrived:granny':true});
+        const p=g.Rift.Cutscene.plan('fair-home-probably'),trophy=p.steps.find(s=>s.shot==='the-thinking-trophy');
+        assert.equal(trophy.layers.find(l=>l.id==='elder').art,{granny:'cutscene/granny-trophy',bare:'cutscene/granny-bare-trophy',achilles:'cutscene/achilles-trophy'}[elder]);
+        const arrival=p.steps.find(s=>s.shot==='a-place-in-the-sun').layers.find(l=>l.id==='elder');
+        assert.ok(Math.abs(arrival.h-trophy.layers.find(l=>l.id==='elder').h)<35,'holding the cup keeps the elder the same height');
+    }
+});
+
+test('Probably gets silence, the elder replies, and one clap starts the Fair applause',()=>{
+    const g=homeGame(),steps=g.Rift.Cutscene.plan('fair-home-probably').steps;
+    const answer=steps.findIndex(s=>s.t==='Probably.'),reply=steps.findIndex(s=>s.t?.startsWith('Then it isn\'t yours.'));
+    assert.ok(answer>0&&Object.hasOwn(steps[answer-1],'ambience')&&steps[answer-1].ambience===null);
+    assert.equal(steps[answer+1].wait,1800);assert.ok(reply>answer);
+    const applause=steps.findIndex(s=>s.note?.startsWith('By the stall, Nudge claps.'));assert.ok(applause>reply);
+    const during=steps[applause].during,first=during.findIndex(s=>s.sfx==='single-clap'),whole=during.findIndex(s=>s.sfx==='fair-applause');
+    assert.ok(first>=0&&whole>first);assert.equal(during[first+1].wait,900);assert.ok(during[whole+1].wait>=4500);
+    assert.equal(during.filter(s=>s.sfx==='single-clap').length,1);assert.equal(during.filter(s=>s.sfx==='fair-applause').length,1);
+    const clap=during.find(s=>s.set==='nudge');assert.ok(Math.abs(clap.h/185-620/431)<0.01);assert.equal(clap.y+clap.h/2,730);
+    assert.ok(steps.findIndex(s=>s.note==='The end. For now.')>applause);
+});
+
+test('Homecoming abandonment inside each passage never grants Rift-Walker; re-entry completes with established actors',async()=>{
+    for(const stopAt of ['fair-home-recognition','fair-home-memorial','fair-home-shelf','fair-home-probably']) {
+        const g=homeGame('fox','boy',4,{deaths:['granny','sequins','sundial','pip'],kuku:true}),play=g.Rift.Cutscene.play;let arrived=false;
+        g.Rift.Cutscene.play=(id,o)=>{if(id===stopAt)arrived=true;return play(id,{...o,instant:id!==stopAt});};
+        g.Rift.Dialogue.play('finale.home');
+        for(let guard=0;guard<200&&!arrived;guard++) {await settle();if(g.$('.box'))g.$('.box').click();}
+        assert.ok(arrived);await settle();assert.ok(g.Rift.Cutscene.current());g.Rift.Dialogue.abortAll();await settle();
+        assert.equal(g.state.flags['rift-walker'],undefined);assert.equal(g.state.flags['seen:finale.home'],undefined);
+        assert.equal(g.state.flags['arrived:granny'],true);
+        g.Rift.Cutscene.play=(id,o)=>play(id,{...o,instant:true});
+        await finishHome(g,g.Rift.Dialogue.play('finale.home'));
+        assert.equal(g.state.flags['rift-walker'],true);assert.equal(g.state.flags['seen:finale.home'],true);
+        assert.equal(g.state.flags['arrived:sequins'],true);assert.equal(g.claims(),0);
+    }
+});
+
 test('canonical creature subtitle labels use display names while voice IDs retain possession',()=>{
     const g=storyGame();
     const says=g.Rift.Cutscene.plan('fair-rupture').steps.filter(s=>s.say);
@@ -876,6 +1086,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         g.state.flags['seen:ch2.hall.win']=seen;
         g.state.flags['seen:ch3.trial.win']=seen;
         g.state.flags['seen:ch4.core.win']=seen;
+        g.state.flags['seen:finale.home']=seen;
         g.Rift.UI.hud=()=>g.Rift.el('div');g.Rift.UI.toast=()=>{};
         g.Rift.Quests={glyph:()=>'',COLOURS:{main:'#fff',side:'#fff'},list:()=>[]};
         g.run('js/core/router.js');g.run('js/screens/journal.js');
@@ -888,6 +1099,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Hall aftermath again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Tribunal aftermath again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Core revelation again'),seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the homecoming again'),seen);
         if(!seen)continue;
         let end,calls=0;g.Rift.Cutscene.play=()=>{calls++;return new Promise(resolve=>{end=resolve;});};
         const before=JSON.stringify(g.state);replay.click();replay.click();assert.equal(calls,1);assert.ok(replay.disabled);

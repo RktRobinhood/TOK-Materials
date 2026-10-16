@@ -1,0 +1,84 @@
+{
+  "target": "2026-10-16 morning, Europe/Copenhagen",
+  "pipeline": "Existing capped Google recording catalogue/run; no additional automation or synthesis requests.",
+  "lines": [
+    {
+      "speaker": "achilles",
+      "id": "achilles-p0n5qv",
+      "text": "Then it isn't yours. Good. It's very heavy.",
+      "source": "finale.home.reply"
+    },
+    {
+      "speaker": "kuku",
+      "id": "kuku-1p45jqo",
+      "text": "Pip. He'd have written all this down.",
+      "source": "finale.home.memorial-names"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1qbwo21",
+      "text": "Where exactly does it start? I'll work it out.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-tthjvn",
+      "text": "Can I hide under the nut stall first?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1fusubp",
+      "text": "I will go.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-oho9vn",
+      "text": "I AM {name}. 100%.",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1y1vcp4",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy-sundial",
+      "id": "copy-sundial-y468px",
+      "text": "100%.",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "achilles",
+      "id": "achilles-1l11ywa",
+      "text": "Are you sure you're {name}?",
+      "source": "finale.home.copy-challenge"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-1sx6dl2",
+      "text": "Look. It's glowing at the end. Which end?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-vve4rc",
+      "text": "What if it's a door, not a crack?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-4l1anb",
+      "text": "Has the sky done this before?",
+      "source": "ch4.push"
+    },
+    {
+      "speaker": "copy",
+      "id": "copy-o8hoso",
+      "text": "\"Follow it.\" Follow it where, exactly?",
+      "source": "ch4.push"
+    }
+  ]
+}

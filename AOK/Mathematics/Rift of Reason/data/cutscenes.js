@@ -602,4 +602,164 @@
             ] }, { conversation: 'ch4.core.prediction' }],
             C['core-revelation'].steps.filter(s => !s.end), C['core-confession'].steps.filter(s => !s.end), C['core-chosen-fate'].steps),
     };
+    // The Fair recognises a changed traveller. Story arrivals remain in finale.home, outside film data.
+    const fairHome = { id: 'fair', art: 'scene/fair-restored', x: 800, y: 450, w: 1600, h: 900, cover: true };
+    const homeHero = { id: 'hero', art: '{avatar}/idle', x: 1320, bottom: 730, w: 240, wFor: { mothkin: 265 }, mirror: true };
+    const bareGranny = { all: ['!dead:granny', { flag: 'stakes.ch2', is: 3 }, { clock: 'ch2', gte: 8 }] };
+    const shawledGranny = { all: ['!dead:granny', { not: bareGranny }] };
+    const homeElder = [
+        { id: 'elder', art: 'npc/granny-axiom/idle', x: 500, bottom: 730, w: 250, when: shawledGranny },
+        { id: 'elder', art: 'cutscene/granny-without-shawl', x: 500, bottom: 730, w: 250, when: bareGranny },
+        { id: 'elder', art: 'npc/achilles/idle', x: 500, bottom: 730, w: 130, when: { all: ['dead:granny', 'arrived:granny'] } },
+    ];
+    const homeCompanion = [
+        { id: 'sundial', art: 'npc/sundial/idle', x: 1100, bottom: 730, w: 105, when: '!dead:sundial' },
+        { id: 'kuku', art: 'npc/kuku/idle', x: 1100, bottom: 730, w: 145, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+    ];
+    const homeNudge = { id: 'nudge', art: 'npc/nudge/idle', x: 930, bottom: 730, w: 185 };
+    const copyAtHome = { flag: 'stakes.ch4', in: [3, 4] };
+    const memorialDeaths = ['sequins', 'granny', 'sundial', 'pip'];
+    const memorialProps = memorialDeaths.flatMap((name, i) => [
+        { id: 'lantern-' + name, art: 'ui/memorial-lantern-dark', x: 470 + i * 200, bottom: 605, w: 80,
+            opacity: name === 'pip' ? 0 : 1, when: 'dead:' + name },
+        { id: 'candle-' + name, art: 'ui/memorial-candle', x: 470 + i * 200, bottom: 730, w: 55,
+            opacity: name === 'pip' ? 0 : 1, when: 'dead:' + name },
+    ]);
+    const memorialLabels = memorialDeaths.map((name, i) => ({ hud: 'text', id: 'name-' + name, x: 470 + i * 200, y: 415,
+        w: 175, h: 55, label: name === 'sundial' ? 'THE SUNDIAL' : name.toUpperCase(), colour: '#f6e9cf', when: 'dead:' + name }));
+    C['fair-home-recognition'] = {
+        title: 'Home: somebody was already here', noteLabel: 'THE FAIR',
+        steps: [
+            { ambience: 'scene/fair-restored' },
+            { shot: 'home-again', fade: 1600, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                fairHome, ...homeElder, ...homeCompanion,
+                { id: 'chair', art: 'cutscene/fair-chair', x: 850, bottom: 710, w: 270, when: copyAtHome },
+                // The whole sprite sits behind physical table furniture, rather than a crop plane.
+                { id: 'copy', art: '{avatar}/idle', x: 850, bottom: 650, w: 230, wFor: { mothkin: 250 }, when: { flag: 'stakes.ch4', is: 4 } },
+                { id: 'table', art: 'cutscene/fair-card-table', x: 850, bottom: 730, w: 380, when: copyAtHome },
+                { id: 'flat-copy', art: 'cutscene/copy-flat-remnant', x: 900, bottom: 735, w: 215, glow: '{colour}',
+                    when: { flag: 'stakes.ch4', is: 3 } },
+                { id: 'copy-die', art: 'keepsake/lucky-die', x: 850, bottom: 730, w: 60, opacity: 0,
+                    when: { flag: 'stakes.ch4', is: 4 } },
+                homeHero,
+            ] },
+            { wait: 1100, when: copyAtHome }, { conversation: 'finale.home.copy-greeting' },
+            { conversation: 'finale.home.copy-table' }, { conversation: 'finale.home.copy-challenge' },
+            { line: 'finale.home.copy-fold', at: 0, when: { flag: 'stakes.ch4', is: 4 }, during: [
+                { tween: 'copy', to: { x: 850, y: 690, scale: 0.15, opacity: 0 }, dur: 1900, wait: true },
+                { tween: 'copy-die', to: { opacity: 1 }, dur: 1000, wait: true },
+            ] },
+            { conversation: 'finale.home.copy-flat' }, { conversation: 'finale.home.copy-echo' },
+            { line: 'finale.home.copy-stopped', at: 0, when: { flag: 'stakes.ch4', is: 3 }, during: [
+                { tween: 'flat-copy', to: { bright: 0.5 }, dur: 1300, wait: true },
+            ] },
+            { wait: 1000, when: copyAtHome }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    C['fair-home-memorial'] = {
+        title: 'Home: the dark lanterns', noteLabel: 'THE FAIR',
+        steps: [
+            { ambience: null },
+            { shot: 'the-lanterns', fade: 1800, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                Object.assign({}, fairHome, { bright: 0.55 }),
+                ...homeElder.map(l => Object.assign({}, l, { x: 220, w: l.art === 'npc/achilles/idle' ? 108 : 210 })),
+                ...memorialProps, ...homeCompanion.map(l => Object.assign({}, l, { x: 1180 })), homeHero,
+            ] },
+            ...memorialLabels.filter(l => l.id !== 'name-pip'),
+            { wait: 1400 }, { conversation: 'finale.home.memorial-lanterns' },
+            { line: 'finale.home.memorial-pip', at: 0, when: 'dead:pip', during: [
+                { tween: 'lantern-pip', to: { opacity: 1 }, dur: 1600 },
+                { tween: 'candle-pip', to: { opacity: 1 }, dur: 1600 },
+                memorialLabels[3],
+            ] },
+            { conversation: 'finale.home.memorial-names' },
+            { hud: 'clear' }, { wait: 2200 }, { end: true, fade: 1600, reveal: true },
+        ],
+    };
+    C['fair-home-shelf'] = {
+        title: 'Home: it guesses', noteLabel: 'THE FAIR',
+        steps: [
+            { ambience: 'scene/fair-restored' },
+            { shot: 'the-pattern-shelf', fade: 1600, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                { id: 'shelf', art: 'scene/fair-shelf', x: 800, y: 450, w: 1600, h: 900, cover: true },
+                { id: 'sequins', art: 'npc/professor-sequins/idle', x: 330, bottom: 730, w: 270, when: '!dead:sequins' },
+                { id: 'tally', art: 'npc/tally/idle', x: 330, bottom: 730, w: 250, when: { all: ['dead:sequins', 'arrived:sequins'] } },
+                { id: 'young-box', art: 'ui/guess-o-matic', x: 650, bottom: 440, w: 135 },
+                { id: 'old-box', art: 'npc/algorithm/core', x: 850, bottom: 440, w: 135, when: { flag: 'fate', is: 'home' } },
+                { id: 'covered-box', art: 'cutscene/core-covered', x: 850, bottom: 440, w: 135, when: { flag: 'fate', is: 'off' } },
+                { id: 'honest-sign', art: 'cutscene/court-sign', x: 650, y: 505, w: 160 },
+                homeNudge, ...homeCompanion, homeHero,
+            ] },
+            { hud: 'text', id: 'young-label', follow: 'honest-sign', x: 650, y: 505, w: 140, h: 65, font: 22,
+                label: 'IT GUESSES', colour: '#413244' },
+            { conversation: 'finale.home.shelf-boxes' }, { conversation: 'finale.home.shelf-nudge' },
+            { line: 'finale.home.nuts', at: 0, during: [
+                { hud: 'text', id: 'nuts-claim', x: 1000, y: 135, w: 720, h: 120,
+                    label: 'BEST NUTS IN THE WORLD! EVERYONE SAYS SO!', colour: '#ffdb9c' },
+                { tween: 'nudge', to: { x: 1000 }, dur: 1600, wait: true },
+            ] },
+            { conversation: 'finale.home.new-word' },
+            { hud: 'clear' }, { wait: 1200 }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    const homeSunLayers = [Object.assign({}, fairHome, { bright: 0.7 }), ...homeElder, homeNudge, homeHero,
+        { id: 'sundial', art: 'npc/sundial/idle', x: 1100, bottom: 730, w: 105, when: '!dead:sundial' },
+        { id: 'silent-stone', art: 'cutscene/sundial-silent', x: 1100, bottom: 730, w: 105, when: 'dead:sundial' },
+        { id: 'kuku', art: 'npc/kuku/idle', x: 730, bottom: 730, w: 145, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+        ...[false, true].flatMap(dead => [
+            { id: 'shadow', art: 'cutscene/sundial-shadow', x: dead ? 1100 : 1140, y: dead ? 665 : 715, w: dead ? 65 : 140,
+                opacity: 0, when: { all: [dead ? 'dead:sundial' : '!dead:sundial', { flag: 'bargain', not: 'yes' }] } },
+            { id: 'shadow', art: 'cutscene/sundial-half-shadow', x: dead ? 1100 : 1140, y: dead ? 665 : 715, w: dead ? 65 : 140,
+                opacity: 0, when: { all: [dead ? 'dead:sundial' : '!dead:sundial', { flag: 'bargain', is: 'yes' }] } },
+        ]),
+        { id: 'sky-hair', art: 'cutscene/sky-crack', x: 1020, y: 150, w: 230, opacity: 0, bright: 0.35, when: { flag: 'feed', gte: 6 } },
+    ];
+    const trophyElder = [
+        { id: 'elder', art: 'cutscene/granny-trophy', x: 500, bottom: 730, w: 260, when: shawledGranny },
+        { id: 'elder', art: 'cutscene/granny-bare-trophy', x: 500, bottom: 730, w: 260, when: bareGranny },
+        { id: 'elder', art: 'cutscene/achilles-trophy', x: 500, bottom: 730, w: 210, when: { all: ['dead:granny', 'arrived:granny'] } },
+    ];
+    const homeTrophyLayers = homeSunLayers.filter(l => l.id !== 'elder').map(l => Object.assign({}, l,
+        l.id === 'fair' ? { bright: 1 } : l.id === 'shadow' ? { x: l.y === 665 ? 800 : 840, opacity: l.y === 665 ? 0.45 : 0.85 }
+            : l.id === 'sky-hair' ? { opacity: 0.65 } : l.id === 'nudge' ? { x: 450 }
+                : l.id === 'kuku' ? { x: 650 } : ['sundial', 'silent-stone'].includes(l.id) ? { x: 800 } : {}))
+        .concat(trophyElder.map(l => Object.assign({}, l, { x: 1020 })));
+    C['fair-home-probably'] = {
+        title: 'Home: probably', noteLabel: 'THE FAIR',
+        steps: [
+            { ambience: 'scene/fair-restored' },
+            { shot: 'a-place-in-the-sun', fade: 1500, camera: { x: 800, y: 450, zoom: 1 }, layers: homeSunLayers },
+            { set: 'shadow', x: 780, y: 560, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+            { line: 'finale.home.sunlight', at: 0, during: [
+                { tween: 'fair', to: { bright: 1 }, dur: 2200 },
+                { tween: 'shadow', to: { x: 1140, y: 715, opacity: 0.85 }, dur: 2400, wait: true, when: '!dead:sundial' },
+                { tween: 'shadow', to: { x: 1100, y: 665, opacity: 0.45 }, dur: 2400, wait: true, when: 'dead:sundial' },
+            ] },
+            { line: 'finale.home.sunlight', at: 1, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+            { tween: 'sky-hair', to: { opacity: 0.65 }, dur: 1600, wait: true, when: { flag: 'feed', gte: 6 } },
+            { conversation: 'finale.home.sky-hair' },
+            { shot: 'the-thinking-trophy', fade: 1300, camera: { x: 800, y: 450, zoom: 1 }, layers: homeTrophyLayers },
+            { conversation: 'finale.home.trophy' },
+            { ambience: null },
+            { conversation: 'finale.home.probably' },
+            { wait: 1800 }, { conversation: 'finale.home.reply' },
+            { line: 'finale.home.applause', at: 0, during: [
+                { set: 'nudge', art: 'cutscene/nudge-clap', h: 266, y: 597 },
+                { sfx: 'single-clap', volume: 0.45 }, { wait: 900 },
+                { sfx: 'fair-applause', volume: 0.4 }, { wait: 4600 },
+            ] },
+            { ambience: 'scene/fair-restored' }, { conversation: 'finale.home.last-words' },
+            { conversation: 'finale.home.end' },
+            { hud: 'clear' }, { wait: 1600 }, { end: true, fade: 1800, reveal: true },
+        ],
+    };
+    const anyMemorial = { any: memorialDeaths.map(name => 'dead:' + name) };
+    C['fair-homecoming'] = {
+        title: 'The Fair: probably', noteLabel: 'THE FAIR', script: 'finale.home', replayLabel: 'Watch the homecoming again',
+        // Arrival mutations and their regular portrait lines remain outside this read-only replay.
+        steps: [].concat(C['fair-home-recognition'].steps.filter(s => !s.end),
+            C['fair-home-memorial'].steps.filter(s => !s.end).map(s => Object.assign({}, s, {
+                when: s.when === undefined ? anyMemorial : { all: [anyMemorial, s.when] },
+            })), C['fair-home-shelf'].steps.filter(s => !s.end), C['fair-home-probably'].steps),
+    };
 })(typeof window !== 'undefined' ? window : globalThis);
