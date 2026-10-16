@@ -1,0 +1,8 @@
+0.0s  ambience
+0.0s  shot  the-window
+0.0s  tween  quill
+1.8s  say  She steps up onto the window. The Sky Rift glows behind her.
+8.5s  say  Tomorrow is waiting. Everyone there has already decided about you.
+14.5s  tween  quill
+16.5s  shot  the-next-era
+16.5s  say  "SEE? SHE'S ON MY SIDE." SHE WAS. MY SIDE.

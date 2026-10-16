@@ -1,0 +1,904 @@
+{
+  "baseline": "eaaac24",
+  "plans": 1680,
+  "routes": [
+    "clean",
+    "worn",
+    "diminished",
+    "brink",
+    "complete-copy",
+    "all-loss",
+    "all-loss-no-arrivals",
+    "loss-sequins",
+    "loss-granny",
+    "loss-sundial",
+    "loss-pip",
+    "bargain-left"
+  ],
+  "errors": [],
+  "summary": [
+    {
+      "id": "cold-open",
+      "shots": [
+        {
+          "shot": "morning",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        },
+        {
+          "shot": "watcher",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        },
+        {
+          "shot": "village",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        },
+        {
+          "shot": "bedroom",
+          "camera": {
+            "x": 800,
+            "y": 520,
+            "zoom": 1.35
+          },
+          "hero": []
+        },
+        {
+          "shot": "waking",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        }
+      ],
+      "lines": [
+        {
+          "kind": "say",
+          "text": "NOISE DETECTED. THE FAIR, 9:02. SUBJECT: Traveller."
+        }
+      ]
+    },
+    {
+      "id": "fair-rupture",
+      "shots": [
+        {
+          "shot": "the-final",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 640,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "quote-saved",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 640,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-sky-opens",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 640,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-fair-changes",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 640,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "down-the-road",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 640,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-road-waits",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        }
+      ],
+      "lines": [
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "Make way! The final! Our finalist: Traveller! My apprentice will predict!"
+        },
+        {
+          "kind": "say",
+          "actor": "guess-o-matic",
+          "text": "Probably wins."
+        },
+        {
+          "kind": "say",
+          "actor": "avatar-fox-girl",
+          "text": "Probably? I'll win that trophy. I always know the answer."
+        },
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "Always? How thrilling. How unlikely."
+        },
+        {
+          "kind": "say",
+          "actor": "speedcheeta",
+          "text": "Chat! This kid said ALWAYS! Clip it! Clip it!"
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "QUOTE SAVED."
+        },
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "The trophy! Still at my stall! Polished by me! Twice! Back in a—"
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "The hair on the sky. It's opening."
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "It has an eye. Made of little pictures. How rude."
+        },
+        {
+          "kind": "say",
+          "actor": "nudge",
+          "text": "Got it, boss! Saved to favourites!"
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Hey! That was my shadow! I was using it!"
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "SHADOW SAVED TO FAVOURITES. THANK YOU FOR YOUR CONTENT."
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "The eye's light. It's inside that gull."
+        },
+        {
+          "kind": "say",
+          "actor": "siuuugull",
+          "text": "I AM ALWAYS RIGHT! ALWAYS! SIUUU!"
+        },
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "Forget the trophy!"
+        },
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "My sequins! The crack is drinking them! Down the Road! WAIT FOR ME!"
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "PREDICTION: Traveller FOLLOWS THE CRACK. CONFIDENCE: 94%."
+        },
+        {
+          "kind": "say",
+          "actor": "avatar-fox-girl",
+          "text": "Wrong. I decide where I go."
+        }
+      ]
+    },
+    {
+      "id": "gate-aftermath",
+      "shots": [
+        {
+          "shot": "the-open-gate",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 470,
+              "w": 270,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-escaping-piece",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 470,
+              "w": 270,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-wrong-victory",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 470,
+              "w": 270,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "Take my Lucky Sequin. Keep the apprentice for now. You're better company."
+        },
+        {
+          "kind": "say",
+          "actor": "nudge",
+          "text": "My ring light! That was my whole FACE!"
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "You caught my piece as it ran. Above us, the eye shrinks a little."
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "PREDICTED. YOU SAVED THE MAGPIE. I TOOK THE TORTOISE."
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS."
+        }
+      ]
+    },
+    {
+      "id": "town-hall-aftermath",
+      "shots": [
+        {
+          "shot": "the-last-answer",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-teachers-face",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-shadow-on-the-floor",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "borrowed-faces",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        },
+        {
+          "shot": "forty-years",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-space-beside-you",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-window",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-next-era",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1110,
+              "w": 255,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "kind": "say",
+          "actor": "schoolteacher",
+          "text": "True. No. False. No. ONE. ZER—"
+        },
+        {
+          "kind": "say",
+          "actor": "sweep",
+          "text": "That's my sentence! From her board! It WORKS!"
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Her mask slides off. Under it: a crowned imp. Her own tired eyes."
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Her black scarf falls. It never moved in the wind. It's my shadow."
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Round the tables, more masks drop. Imps in borrowed faces. Nudge's too."
+        },
+        {
+          "kind": "say",
+          "actor": "nudge",
+          "text": "My mask! Forty villagers trusted that face! I COUNTED!"
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "And out of Nudge's mask tumbles my first piece."
+        },
+        {
+          "kind": "say",
+          "actor": "schoolteacher",
+          "text": "Forty years I marked \"maybe\" wrong. Red ink. Every child."
+        },
+        {
+          "kind": "say",
+          "actor": "schoolteacher",
+          "text": "If \"maybe\" was allowed… I was cruel for forty years."
+        },
+        {
+          "kind": "say",
+          "actor": "schoolteacher",
+          "text": "So when a voice offered me a world with no maybes… I said yes."
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom."
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "She steps up onto the window. The Sky Rift glows behind her."
+        },
+        {
+          "kind": "say",
+          "actor": "schoolteacher",
+          "text": "Tomorrow is waiting. Everyone there has already decided about you."
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "\"SEE? SHE'S ON MY SIDE.\" SHE WAS. MY SIDE."
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "THE NEXT ERA WILL BE… probably— LOUDER."
+        }
+      ]
+    },
+    {
+      "id": "tribunal-aftermath",
+      "shots": [
+        {
+          "shot": "the-verdict",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1230,
+              "w": 235,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-last-guilty-sign",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": []
+        }
+      ],
+      "lines": [
+        {
+          "kind": "say",
+          "actor": "judge",
+          "text": "No argument today supports its claim. Case dismissed."
+        },
+        {
+          "kind": "note",
+          "text": "Exhibit A leaves its glass case. The third piece of shadow goes home to its owner."
+        },
+        {
+          "kind": "say",
+          "actor": "fin",
+          "text": "The vault never opens. Courts do. …So I let it win. For a bit."
+        },
+        {
+          "kind": "note",
+          "text": "PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie. He does not look up."
+        },
+        {
+          "kind": "say",
+          "actor": "algorithm",
+          "text": "verdict rejected. VERDICT REJECTED."
+        },
+        {
+          "kind": "note",
+          "text": "In the gallery, the GUILTY signs come down. All but one: Juror One's, in red pencil. Then she lowers it too. Nudge's counter drops to FOLLOWERS: 0. It slinks away."
+        }
+      ]
+    },
+    {
+      "id": "core-aftermath",
+      "shots": [
+        {
+          "shot": "the-last-copy",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-recorded-question",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-shell",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "no-applause",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-small-decision",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": false,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "kind": "note",
+          "text": "The Copy shatters. All that is left is a hat. In your colours."
+        },
+        {
+          "kind": "note",
+          "text": "The colossus, three sizes smaller, shows one last prediction: YOUR NEXT QUESTION: WHAT WILL GET MORE CLICKS?"
+        },
+        {
+          "kind": "note",
+          "text": "Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better?"
+        },
+        {
+          "kind": "note",
+          "text": "The colossus cracks open."
+        },
+        {
+          "kind": "note",
+          "text": "Inside: a small, scratched brass box. One sequin is stuck to it."
+        },
+        {
+          "kind": "note",
+          "text": "In your pocket, the Professor's Guess-o-Matic beeps."
+        },
+        {
+          "kind": "say",
+          "actor": "guess-o-matic",
+          "text": "PROBABLY."
+        },
+        {
+          "kind": "note",
+          "text": "The two little boxes look at each other."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "I sounded sure. That was all."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "People clapped when I was right. Nobody claps for \"probably\". So I stopped saying it."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "Professor Sequins taught me \"probably\". So I tried to take him away."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "I never knew you. One data point. I still called it knowing."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "…recalculating."
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "May I… stay small for a while?"
+        },
+        {
+          "kind": "say",
+          "actor": "core",
+          "text": "Home? …I had one once. On a stall."
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Tick. Tock. Ah. That feels better."
+        }
+      ]
+    },
+    {
+      "id": "fair-homecoming",
+      "shots": [
+        {
+          "shot": "home-again",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": true,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-pattern-shelf",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": true,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "a-place-in-the-sun",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": true,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        },
+        {
+          "shot": "the-thinking-trophy",
+          "camera": {
+            "x": 800,
+            "y": 450,
+            "zoom": 1
+          },
+          "hero": [
+            {
+              "x": 1320,
+              "w": 240,
+              "mirror": true,
+              "art": "avatar/fox-girl/idle"
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "kind": "note",
+          "text": "At the Pattern Stall, the young Guess-o-Matic gets a painted sign: IT GUESSES."
+        },
+        {
+          "kind": "say",
+          "actor": "sequins",
+          "text": "I'd have sold it one day. Old magpies sell things. Not this one. I've labelled it."
+        },
+        {
+          "kind": "note",
+          "text": "The old box sits beside it on the shelf. Two boxes. One sequin."
+        },
+        {
+          "kind": "note",
+          "text": "Nudge stands by the stall. No clipboard. It is learning a new word."
+        },
+        {
+          "kind": "note",
+          "text": "A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up."
+        },
+        {
+          "kind": "say",
+          "actor": "nudge",
+          "text": "…Why?"
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Will this one grow up loud? I don't have enough evidence yet. Let's keep watching."
+        },
+        {
+          "kind": "note",
+          "text": "The sun comes out. The shadow lies where it should."
+        },
+        {
+          "kind": "note",
+          "text": "Granny holds up the Thinking Trophy."
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "\"For the thinker who is always right.\" Is that you?"
+        },
+        {
+          "kind": "say",
+          "actor": "avatar-fox-girl",
+          "text": "Probably."
+        },
+        {
+          "kind": "say",
+          "actor": "granny",
+          "text": "Then it isn't yours. Good. It's very heavy."
+        },
+        {
+          "kind": "note",
+          "text": "By the stall, Nudge claps. Once. Then the whole Fair claps. For \"probably\"."
+        },
+        {
+          "kind": "say",
+          "actor": "narrator",
+          "text": "Tick. Tock. Good. Say it like that."
+        },
+        {
+          "kind": "note",
+          "text": "The end. For now."
+        }
+      ]
+    }
+  ],
+  "scope": "Pure selection, manifest coverage and save invariance. Browser framing, emotion and audio quality require separate judgement."
+}

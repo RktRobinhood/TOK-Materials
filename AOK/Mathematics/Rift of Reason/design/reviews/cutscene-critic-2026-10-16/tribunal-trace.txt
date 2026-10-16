@@ -1,0 +1,37 @@
+0.1s  ambience
+0.1s  shot  the-verdict
+0.1s  wait
+1.1s  hud  box
+1.1s  say  No argument today supports its claim. Case dismissed.
+6.4s  note  Exhibit A leaves its glass case. The third piece of shadow goes home to its owner.
+6.4s  tween  glass
+7.7s  tween  exhibit
+11.2s  hud  clear
+12.0s  hud  box
+12.0s  say  The vault never opens. Courts do. …So I let it win. For a bit.
+20.9s  wait
+21.7s  hud  clear
+22.4s  hud  box
+22.4s  note  PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie. He does not look up.
+22.4s  set  fin
+27.7s  set  fin
+27.7s  wait
+28.8s  say  verdict rejected. VERDICT REJECTED.
+33.1s  shot  the-last-guilty-sign
+33.1s  hud  text
+33.1s  hud  text
+33.1s  hud  text
+33.1s  note  In the gallery, the GUILTY signs come down. All but one: Juror One's, in red pencil. Then she lowers it too. Nudge's counter drops to FOLLOWERS: 0. It slinks away.
+33.1s  tween  sign-a
+33.1s  tween  sign-b
+33.1s  wait
+35.0s  hud  clear
+35.7s  hud  text
+35.7s  wait
+37.0s  tween  sign-one
+38.9s  hud  clear
+39.6s  hud  box
+39.6s  wait
+40.8s  tween  nudge
+42.7s  wait
+43.8s  end

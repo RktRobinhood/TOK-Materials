@@ -1,0 +1,50 @@
+{
+  "innerHeight": 844,
+  "innerWidth": 390,
+  "labels": [
+    {
+      "font": "6.83px",
+      "scrollWidth": 43,
+      "text": "SEQUINS",
+      "width": 43
+    },
+    {
+      "font": "6.83px",
+      "scrollWidth": 43,
+      "text": "GRANNY",
+      "width": 43
+    },
+    {
+      "font": "6.83px",
+      "scrollWidth": 43,
+      "text": "THE SUNDIAL",
+      "width": 43
+    },
+    {
+      "font": "6.83px",
+      "scrollWidth": 43,
+      "text": "PIP",
+      "width": 43
+    }
+  ],
+  "skip": {
+    "bottom": 62.872596740722656,
+    "height": 45.997596740722656,
+    "left": 332.0072326660156,
+    "right": 378.0048294067383,
+    "top": 16.875,
+    "width": 45.997596740722656,
+    "x": 332.0072326660156,
+    "y": 16.875
+  },
+  "subtitle": {
+    "bottom": 818.5336685180664,
+    "height": 75.06009674072266,
+    "left": 16.00360679626465,
+    "right": 373.9964046478271,
+    "top": 743.4735717773438,
+    "width": 357.9927978515625,
+    "x": 16.00360679626465,
+    "y": 743.4735717773438
+  }
+}

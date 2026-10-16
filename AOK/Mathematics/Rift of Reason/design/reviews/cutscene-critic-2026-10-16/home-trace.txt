@@ -1,0 +1,72 @@
+0.5s  ambience
+0.5s  shot  home-again
+0.5s  wait
+1.6s  say  Came to sit at her table. Somebody was already sitting there.
+6.1s  note  At the card table sits the Copy. Being you.
+9.2s  say  Are you sure you're Traveller?
+12.5s  say  100%.
+14.5s  say  Nobody's 100%. Not even me, and I'm fast.
+19.3s  say  You. The slow one. Good.
+22.1s  note  You say nothing. The Copy shrinks to a single die.
+22.1s  tween  copy
+24.0s  tween  copy-die
+25.5s  wait
+26.5s  ambience
+26.5s  shot  the-lanterns
+26.5s  hud  text
+26.5s  hud  text
+26.5s  hud  text
+26.5s  wait
+28.0s  note  The lanterns. A candle burns under each dark one.
+31.4s  note  Pip never had a lantern here. You light a new one for him. A candle goes under it.
+31.4s  tween  lantern-pip
+31.4s  tween  candle-pip
+31.4s  hud  text
+36.3s  say  Her magpie friend. All shine, she said. It's dark now.
+40.6s  say  Granny Axiom. I lived in her hallway. She wound me every Sunday.
+46.2s  say  Her rock. Ninety years she said good morning to it.
+51.0s  say  Pip. He'd have written all this down.
+54.8s  hud  clear
+55.5s  wait
+57.7s  ambience
+57.7s  shot  the-pattern-shelf
+57.7s  hud  text
+57.7s  note  At the Pattern Stall, the young Guess-o-Matic gets a painted sign: IT GUESSES.
+62.4s  say  He'd have sold it one day. I won't. I labelled it. Neatly. He'd have used glitter.
+71.8s  note  The dark box sits beside it, under a cloth.
+74.9s  note  Nudge stands by the stall. No clipboard. It is learning a new word.
+79.1s  note  A stall-holder shouts: BEST NUTS IN THE WORLD! EVERYONE SAYS SO! Nudge steps up.
+79.1s  hud  text
+79.1s  tween  nudge
+83.9s  say  …Why?
+85.4s  say  Will this one grow up loud? I can't tell yet. Let's keep watching.
+90.4s  hud  clear
+91.1s  wait
+92.3s  ambience
+92.3s  shot  a-place-in-the-sun
+92.3s  set  shadow
+92.3s  note  The sun comes out. Kuku lays the shadow on the silent stone. In the sun.
+92.3s  tween  fair
+92.3s  tween  shadow
+96.8s  say  Ten past eleven. Exactly. It would have liked that.
+101.8s  tween  sky-hair
+103.5s  say  She'd have said she'd dust it later. I'll do it now. …Slowly.
+109.0s  shot  the-thinking-trophy
+109.0s  note  Coach Achilles holds up the Thinking Trophy.
+112.2s  say  "Always right." Is that you? Think fast. …No. Slow. She'd say slow.
+118.5s  ambience
+118.5s  say  Probably.
+120.2s  wait
+122.0s  say  Then it isn't yours. Good. It's very heavy.
+126.4s  note  By the stall, Nudge claps. Once. Then the whole Fair claps. For "probably".
+126.4s  set  nudge
+126.4s  sfx  single-clap
+126.4s  wait
+127.3s  sfx  fair-applause
+127.3s  wait
+131.9s  ambience
+131.9s  say  Good. Say it like that. …I'm practising.
+135.7s  note  The end. For now.
+137.7s  hud  clear
+138.4s  wait
+140.0s  end

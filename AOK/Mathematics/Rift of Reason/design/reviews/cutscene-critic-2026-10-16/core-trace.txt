@@ -1,0 +1,52 @@
+0.1s  ambience
+0.1s  shot  the-last-copy
+0.1s  wait
+1.1s  say  Bye! I'll get home first. Nearly finished. Close enough.
+5.7s  note  It runs for the Summit Rift. Unfinished. It gets home first.
+5.7s  tween  copy
+9.6s  wait
+10.6s  shot  the-recorded-question
+10.6s  note  The colossus, three sizes smaller, shows one last prediction: YOUR NEXT QUESTION: WHAT WILL GET MORE CLICKS?
+16.6s  ambience
+16.6s  shot  the-shell
+16.6s  hud  text
+16.6s  note  Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better?
+23.4s  note  The colossus cracks open.
+23.4s  tween  room
+23.4s  tween  shell-left
+23.4s  tween  shell-right
+23.4s  tween  old-box
+25.7s  wait
+27.1s  note  Inside: a small, scratched brass box. One sequin is stuck to it.
+31.2s  note  In your pocket, the Professor's Guess-o-Matic beeps.
+31.2s  tween  young-box
+34.8s  say  PROBABLY.
+36.4s  wait
+37.4s  note  The two little boxes look at each other.
+40.4s  ambience
+40.4s  say  Just one. "People clap for sure." It was false.
+43.7s  hud  clear
+44.4s  wait
+45.6s  ambience
+45.6s  shot  no-applause
+45.6s  wait
+46.5s  say  People clapped when I was right. Nobody claps for "probably". So I stopped saying it.
+55.9s  say  Professor Sequins taught me "probably". I took him to un-learn it. …It didn't work.
+62.7s  say  I never knew you. One data point. I still called it knowing.
+67.7s  say  …recalculating.
+70.4s  say  May I… stay small for a while?
+74.0s  wait
+75.4s  ambience
+75.4s  shot  the-small-decision
+75.4s  wait
+76.1s  tween  label-board
+77.5s  hud  text
+77.5s  note  You hang a sign on it: IT GUESSES.
+80.2s  say  probably.
+81.8s  tween  last-piece
+82.9s  tween  last-piece
+85.1s  tween  restored-shadow
+86.5s  say  Tick. Tock. Ah. That feels better.
+90.7s  hud  clear
+91.5s  wait
+92.9s  end

@@ -1,0 +1,53 @@
+0.2s  ambience
+0.2s  shot  the-final
+0.2s  wait
+1.1s  say  Make way! The final! Our finalist: Traveller! My apprentice will predict!
+7.5s  say  Probably wins.
+9.9s  say  Probably? I'll win that trophy. I always know the answer.
+14.8s  say  Always? How thrilling. How unlikely.
+18.9s  shot  quote-saved
+18.9s  say  Chat! This kid said ALWAYS! Clip it! Clip it!
+22.4s  ambience
+22.4s  say  QUOTE SAVED.
+24.6s  say  The trophy! Still at my stall! Polished by me! Twice! Back in a—
+30.2s  tween  sequins
+31.4s  shot  the-sky-opens
+31.4s  say  The hair on the sky. It's opening.
+31.4s  sfx  rift
+31.4s  tween  rift
+35.0s  say  It has an eye. Made of little pictures. How rude.
+35.0s  tween  eye
+40.6s  tween  thief
+42.1s  tween  shadow
+43.8s  set  thief
+43.8s  wait
+44.3s  say  Got it, boss! Saved to favourites!
+47.2s  tween  thief
+48.3s  say  Hey! That was my shadow! I was using it!
+54.8s  wait
+55.6s  say  SHADOW SAVED TO FAVOURITES. THANK YOU FOR YOUR CONTENT.
+62.9s  shot  the-fair-changes
+62.9s  wait
+63.9s  tween  eye-light
+64.9s  tween  skin
+66.4s  tween  eye-light
+67.1s  say  The eye's light. It's inside that gull.
+71.6s  say  I AM ALWAYS RIGHT! ALWAYS! SIUUU!
+78.6s  shot  down-the-road
+78.6s  tween  sequins
+79.9s  wait
+80.5s  set  glint1
+80.5s  set  glint2
+80.5s  set  glint3
+80.5s  say  Forget the trophy!
+80.5s  tween  glint1
+80.5s  tween  glint2
+80.5s  tween  glint3
+82.6s  say  My sequins! The crack is drinking them! Down the Road! WAIT FOR ME!
+88.7s  tween  sequins
+90.3s  say  PREDICTION: Traveller FOLLOWS THE CRACK. CONFIDENCE: 94%.
+96.3s  wait
+97.1s  say  Wrong. I decide where I go.
+100.6s  shot  the-road-waits
+100.6s  wait
+101.3s  end

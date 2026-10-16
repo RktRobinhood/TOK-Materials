@@ -1,0 +1,52 @@
+0.3s  ambience
+0.3s  shot  the-last-answer
+0.3s  wait
+1.0s  say  True. No. False. No. ONE. ZER—
+4.9s  say  That's my sentence! From her board! It WORKS!
+8.7s  set  quill
+8.7s  shot  the-teachers-face
+8.7s  tween  mask
+10.4s  wait
+11.1s  say  Her mask slides off. Under it: a crowned imp. Her own tired eyes.
+20.0s  tween  scarf
+21.7s  say  Her black scarf falls. It never moved in the wind. It's my shadow.
+29.6s  set  scarf
+29.6s  shot  the-shadow-on-the-floor
+29.6s  wait
+30.6s  shot  borrowed-faces
+30.6s  set  guest-a
+30.6s  wait
+30.9s  set  guest-b
+30.9s  wait
+31.2s  set  guest-c
+31.2s  set  nudge
+31.2s  say  Round the tables, more masks drop. Imps in borrowed faces. Nudge's too.
+40.7s  say  My mask! Forty villagers trusted that face! I COUNTED!
+46.4s  tween  shadow-one
+47.8s  say  And out of Nudge's mask tumbles my first piece.
+54.1s  shot  forty-years
+54.1s  ambience
+54.1s  say  Forty years I marked "maybe" wrong. Red ink. Every child.
+60.1s  wait
+61.0s  say  If "maybe" was allowed… I was cruel for forty years.
+66.8s  wait
+67.9s  say  So when a voice offered me a world with no maybes… I said yes.
+73.1s  wait
+74.1s  ambience
+74.1s  shot  the-space-beside-you
+74.1s  tween  granny
+76.5s  wait
+77.4s  say  Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom.
+84.0s  tween  axiom
+85.4s  wait
+86.1s  ambience
+86.1s  shot  the-window
+86.1s  tween  quill
+87.9s  say  She steps up onto the window. The Sky Rift glows behind her.
+94.5s  say  Tomorrow is waiting. Everyone there has already decided about you.
+100.5s  tween  quill
+102.5s  shot  the-next-era
+102.5s  say  "SEE? SHE'S ON MY SIDE." SHE WAS. MY SIDE.
+109.0s  say  THE NEXT ERA WILL BE… probably— LOUDER.
+114.3s  wait
+115.3s  end
