@@ -119,15 +119,16 @@
                 const allowed = s.when === undefined || (Rift.Story && Rift.Story.test(s.when, ctx));
                 if (s.then || s.else) { walk(allowed ? s.then : s.else); continue; }
                 if (!allowed || (Rift.Story && !Rift.Story.matchesOnly(s.only))) continue;
-                if (s.s && typeof s.t === 'string') out.push(s);
-                else throw new Error('Cutscene conversations may contain only dialogue and conditions: ' + key);
+                if ((s.s && typeof s.t === 'string') || typeof s.note === 'string') out.push(s);
+                else throw new Error('Cutscene conversations may contain only dialogue, notes and conditions: ' + key);
             }
         }
         walk((Rift.data.script || {})[key]);
         return out;
     }
 
-    function spokenLine(line, who, ctx) {
+    function canonicalLine(line, who, ctx) {
+        if (typeof line.note === 'string') return { note: line.note, text: fill(line.note, who) };
         const avatar = line.s === 'avatar';
         const actor = avatar ? 'avatar-' + who.type + '-' + who.variant
             : (Rift.Cast ? (line.replay ? Rift.Cast.original(line.s) : Rift.Cast.actor(line.s, { replay: ctx && ctx.replay })) : line.s);
@@ -148,12 +149,15 @@
         const who = viewer(o.player);
         const size = steps => steps.flatMap(step => {
             if (step.when !== undefined && Rift.Story && !Rift.Story.test(step.when, o.context)) return [];
-            if (step.conversation) return conversation(step.conversation, o.context).map(line => spokenLine(line, who, o.context)).filter(Boolean);
+            if (step.conversation) return conversation(step.conversation, o.context).map(line => canonicalLine(line, who, o.context)).filter(Boolean);
             if (step.line) {
                 const line = conversation(step.line, o.context)[step.at || 0];
                 if (!line) throw new Error('Missing cutscene line: ' + step.line + ' #' + step.at);
-                const spoken = spokenLine(line, who, o.context);
-                return spoken ? [Object.assign({}, step, spoken)] : [];
+                const spoken = canonicalLine(line, who, o.context);
+                if (!spoken) return [];
+                const selected = Object.assign({}, step, spoken);
+                if (selected.during) selected.during = size(selected.during);
+                return [selected];
             }
             const s = Object.assign({}, step);
             if (s.layers) s.layers = s.layers.filter(l => l.when === undefined || (Rift.Story && Rift.Story.test(l.when, o.context))).map(l => sizeLayer(l, who));
@@ -408,7 +412,15 @@
         this.hud.forEach(item => {
             const style = item.node.style;
             style.opacity = String(item.state.opacity);
-            if (item.kind === 'box' && shot) {
+            if (item.kind === 'text' && shot) {
+                const anchor = item.follow && shot.layers.find(l => l.id === item.follow);
+                const target = anchor ? Object.assign({}, item, { x: anchor.x, y: anchor.y,
+                    w: item.w * (anchor.scale || 1), h: item.h * (anchor.scale || 1) }) : item;
+                const r = this.toScreen(shot, target);
+                Object.assign(style, { left: px(r.x - r.w / 2), top: px(r.y - r.h / 2),
+                    width: px(r.w), height: px(r.h), fontSize: px(item.font * r.w / item.w),
+                    opacity: String(item.state.opacity * (anchor ? anchor.opacity : 1)) });
+            } else if (item.kind === 'box' && shot) {
                 const r = this.toScreen(shot, item);
                 const k = item.state.k;
                 Object.assign(style, { left: px(r.x - r.w * k / 2), top: px(r.y - r.h * k / 2), width: px(r.w * k), height: px(r.h * k) });
@@ -503,12 +515,13 @@
     };
 
     Player.prototype.exec = async function (s) {
-        const kind = s.shot ? 'shot' : s.say ? 'say' : s.camera ? 'camera' : s.tween ? 'tween' : s.set ? 'set'
+        const kind = s.shot ? 'shot' : s.say ? 'say' : s.note ? 'note' : s.camera ? 'camera' : s.tween ? 'tween' : s.set ? 'set'
             : s.fx ? 'fx' : s.hud ? 'hud' : 'title' in s ? 'title' : s.end ? 'end' : s.sfx ? 'sfx' : s.ambience ? 'ambience' : 'wait' in s ? 'wait' : 'unknown';
         this.trace.push(kind + ':' + (s.shot || s.say || s.tween || s.set || s.fx || s.hud || s.sfx || s.ambience || (kind === 'wait' ? s.wait : '') || ''));
         if (this.o.onStep) this.o.onStep(kind, s);
         if (kind === 'shot') return this.shot(s);
         if (kind === 'say') return this.say(s);
+        if (kind === 'note') return this.note(s);
         if (kind === 'camera') {
             const done = this.tween(this.shots[this.shots.length - 1].camera, s.camera, s.dur, s.ease);
             return s.wait ? done : null;
@@ -583,6 +596,19 @@
         return null;
     };
 
+    // Court screens and silent actions are canonical notes, never a dead narrator's voice.
+    Player.prototype.note = async function (s) {
+        const text = s.text || s.note;
+        this.subName.textContent = 'COURT RECORD';
+        this.subText.textContent = text;
+        this.subtitle.hidden = false;
+        await this.hold(Promise.all([this.sleep(1200 + 45 * String(text).length), this.run(s.during)]));
+        if (!this.closed) {
+            this.subtitle.hidden = true;
+            if (this.o.onNote) this.o.onNote(s.note);
+        }
+    };
+
     Player.prototype.say = async function (s) {
         const speaker = s.say;
         const text = s.text || s.t;
@@ -631,6 +657,14 @@
     Player.prototype.hudStep = function (s) {
         const el = Rift.el;
         const colour = s.colour || HUD;
+        if (s.hud === 'text') {
+            const node = el('div.cs-lettering', { text: s.label || '', style: { color: colour } });
+            const item = { kind: 'text', id: s.id, x: s.x, y: s.y, w: s.w, h: s.h, depth: s.depth,
+                follow: s.follow, font: s.font || 28, node, state: { opacity: 0 } };
+            this.hud.push(item); this.hudLayer.appendChild(node);
+            this.tween(item.state, { opacity: 1 }, this.calm ? 700 : 250, 'out');
+            return null;
+        }
         if (s.hud === 'box') {
             const node = el('div.cs-box' + (s.lock ? '.lock' : ''), { style: { '--hud': colour } }, [
                 el('i.c1'), el('i.c2'), el('i.c3'), el('i.c4'),

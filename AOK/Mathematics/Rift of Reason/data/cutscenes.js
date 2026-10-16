@@ -11,6 +11,7 @@
  *   { tween: '<layer id>', to: { opacity, x, y | bottom, scale, sy, bright }, dur, ease, wait }
  *   { set: '<layer id>', ...props }                               change a layer now (art swaps too)
  *   { say: '<speaker>', t: '<the scripted line>', during: [steps] }   voice + subtitle; `during` runs alongside
+ *   { note: '<silent court record>', during: [steps] }             caption + reading time, never voiced
  *   { wait: ms }   { sfx: '<name>' }   { ambience: '<art id in data/ambience.js>' }
  *   { fx: 'flicker' | 'flash' | 'bolt' }   one-off light effects; Calm motion leaves them out
  *   { hud: 'box' | 'glyphs' | 'sweep' | 'meter' | 'clear', ... }   the Algorithm's targeting HUD
@@ -359,5 +360,112 @@
         title: 'The Hall: a world with no maybes', script: 'ch2.hall.win', replayLabel: 'Watch the Hall aftermath again',
         steps: [].concat(C['town-hall-unmask'].steps.filter(s => !s.end),
             C['town-hall-outcome'].steps.filter(s => !s.end), C['town-hall-departure'].steps),
+    };
+    // The Tribunal's accepted evidence and clock resolve in lesson3.js. Only the returned
+    // shadow is shown here; a bargain never conjures the two pieces already handed away.
+    const courtRoom = { id: 'court', art: 'scene/tribunal', x: 800, y: 450, w: 1600, h: 900, cover: true };
+    const courtHero = { id: 'hero', art: '{avatar}/idle', x: 1230, bottom: 730, w: 235, wFor: { mothkin: 260 } };
+    const courtPip = { id: 'pip', art: 'cutscene/pip-solemn', x: 1000, bottom: 730, w: 185 };
+    const courtFin = { id: 'fin', art: 'cutscene/fin-subdued', x: 420, bottom: 730, w: 245 };
+    const courtSundial = { id: 'sundial', art: 'npc/sundial/idle', x: 800, bottom: 730, w: 115, when: '!dead:sundial' };
+    const courtCase = { id: 'case', art: 'cutscene/exhibit-case', x: 630, bottom: 680, w: 220 };
+    const courtGlass = { id: 'glass', art: 'cutscene/exhibit-glass', x: 650, y: 585, w: 160, opacity: 0.3 };
+    const courtPiece = { id: 'exhibit', art: 'cutscene/sundial-shadow', x: 650, y: 590, w: 90 };
+    const courtAisle = [courtRoom, courtFin, courtCase, courtPiece, courtGlass, courtHero, courtPip, courtSundial,
+        { id: 'judge', art: 'npc/judge/idle', x: 800, bottom: 535, w: 170 }];
+    const living = '!dead:sundial';
+    const lost = 'dead:sundial';
+    const courtGallery = [Object.assign({}, courtRoom, { bright: 0.65 }),
+        { id: 'juror-a', art: 'cutscene/court-juror-a', x: 390, bottom: 730, w: 185 },
+        { id: 'juror-b', art: 'cutscene/court-juror-b', x: 650, bottom: 730, w: 185 },
+        { id: 'juror-one', art: 'cutscene/juror-one', x: 910, bottom: 730, w: 235 },
+        { id: 'sign-a', art: 'cutscene/court-sign', x: 390, y: 635, w: 145 },
+        { id: 'sign-b', art: 'cutscene/court-sign', x: 650, y: 635, w: 145 },
+        { id: 'sign-one', art: 'cutscene/court-sign', x: 910, y: 555, w: 145 },
+        { id: 'nudge', art: 'npc/nudge/idle', x: 1200, bottom: 730, w: 185 }];
+    const signLabels = [
+        { hud: 'text', id: 'jury-a', follow: 'sign-a', x: 390, y: 555, w: 125, h: 60, label: 'GUILTY', colour: '#413244' },
+        { hud: 'text', id: 'jury-b', follow: 'sign-b', x: 650, y: 555, w: 125, h: 60, label: 'GUILTY', colour: '#413244' },
+        { hud: 'text', id: 'jury-one', follow: 'sign-one', x: 910, y: 555, w: 125, h: 60, label: 'GUILTY', colour: '#b32738' },
+    ];
+    const livingGallery = [
+        { shot: 'the-last-guilty-sign', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: courtGallery },
+        ...signLabels,
+        { line: 'ch3.trial.gallery-living', at: 0, during: [
+            { tween: 'sign-a', to: { y: 660, opacity: 0 }, dur: 1700 },
+            { tween: 'sign-b', to: { y: 660, opacity: 0 }, dur: 1700 },
+            { wait: 1900 }, { hud: 'clear' }, signLabels[2],
+            { wait: 1300 },
+            { tween: 'sign-one', to: { y: 660, opacity: 0 }, dur: 1800, wait: true },
+            { hud: 'clear' },
+            { hud: 'box', id: 'followers', x: 1200, y: 300, w: 250, h: 80, label: 'FOLLOWERS: 0' },
+            { wait: 1200 },
+            { tween: 'nudge', to: { x: 1320, opacity: 0 }, dur: 1900, wait: true },
+        ] },
+    ];
+    C['tribunal-verdict'] = {
+        title: 'The Tribunal: the prosecutor\'s gamble',
+        steps: [
+            { ambience: 'scene/tribunal' },
+            { shot: 'the-verdict', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: courtAisle },
+            { wait: 1000 },
+            { hud: 'box', id: 'exhibit-label', x: 630, y: 590, w: 240, h: 190, label: 'EXHIBIT A' },
+            { conversation: 'ch3.trial.verdict' },
+            { hud: 'box', id: 'court-label', x: 800, y: 160, w: 440, h: 105, label: 'CONTROVERSIAL',
+                when: { all: [living, { flag: 'stakes.ch3', is: 2 }] } },
+            { hud: 'box', id: 'court-label', x: 800, y: 160, w: 440, h: 105, label: 'RECORDING RETAINED · “…I GUESS.”',
+                when: { all: [living, { flag: 'stakes.ch3', is: 3 }] } },
+            { conversation: 'ch3.trial.label' },
+            // Living owner gets the exhibit before Fin explains; the death branch releases it later.
+            { line: 'ch3.trial.release', at: 0, when: living, during: [
+                { tween: 'glass', to: { y: 365, opacity: 0.2 }, dur: 1300, wait: true },
+                { tween: 'exhibit', to: { x: 800, y: 690 }, dur: 2200, wait: true },
+            ] },
+            { hud: 'clear' },
+            { hud: 'box', id: 'fin-licence', x: 420, y: 205, w: 350, h: 100, label: 'PROSECUTOR FIN · LICENCE ACTIVE' },
+            { conversation: 'ch3.trial.fin' },
+            { wait: 800 }, { hud: 'clear' },
+            { hud: 'box', id: 'fin-licence', x: 420, y: 205, w: 350, h: 100, label: 'FIN · UNFOLLOWED · LICENCE DELETED' },
+            { line: 'ch3.trial.licence', at: 0, during: [
+                { set: 'fin', art: 'cutscene/fin-tie', when: living },
+            ] },
+            { set: 'fin', art: 'cutscene/fin-subdued', when: living },
+            { wait: 1100 },
+            { hud: 'box', id: 'verdict-readout', x: 800, y: 160, w: 460, h: 100, label: 'VERDICT: EXECUTED', when: lost },
+            { conversation: 'ch3.trial.algorithm' },
+            { line: 'ch3.trial.cold-piece', at: 0, when: lost, during: [
+                { tween: 'glass', to: { y: 365, opacity: 0.2 }, dur: 1300, wait: true },
+                { tween: 'exhibit', to: { x: 1190, y: 590 }, dur: 2100, wait: true },
+                { tween: 'exhibit', to: { opacity: 0 }, dur: 1000, wait: true },
+            ] },
+            ...livingGallery.map(s => Object.assign({}, s, { when: living })),
+            { wait: 1100 }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    C['tribunal-empty-gallery'] = {
+        title: 'The Tribunal: nobody cheering',
+        steps: [
+            { ambience: 'cutscene/cold-open' },
+            { shot: 'the-empty-gallery', fade: 1400, camera: { x: 800, y: 450, zoom: 1 }, layers: courtGallery },
+            ...signLabels,
+            { hud: 'box', id: 'guilty-peak', x: 1200, y: 300, w: 250, h: 80, label: 'GUILTY: 8 / 8' },
+            { line: 'ch3.trial.gallery-loss', at: 0, during: [
+                { wait: 900 },
+                { tween: 'juror-a', to: { opacity: 0 }, dur: 1800 },
+                { tween: 'juror-b', to: { opacity: 0 }, dur: 1800 },
+                { tween: 'sign-a', to: { opacity: 0 }, dur: 1800 },
+                { tween: 'sign-b', to: { opacity: 0 }, dur: 1800 },
+                { wait: 2000 }, { hud: 'clear' }, signLabels[2],
+                { hud: 'box', id: 'followers', x: 1200, y: 300, w: 250, h: 80, label: 'FOLLOWERS: 0' },
+            ] },
+            { wait: 1200 }, { line: 'ch3.trial.gallery-loss', at: 1 },
+            { wait: 1800 }, { end: true, fade: 1500, reveal: true },
+        ],
+    };
+    C['tribunal-aftermath'] = {
+        title: 'The Tribunal: stolen things go home', script: 'ch3.trial.win', replayLabel: 'Watch the Tribunal aftermath again',
+        steps: [].concat(C['tribunal-verdict'].steps.filter(s => !s.end),
+            C['tribunal-empty-gallery'].steps.filter(s => !s.end).map(s => Object.assign({}, s, { when: lost })),
+            [{ end: true, fade: 1500, reveal: true }]),
     };
 })(typeof window !== 'undefined' ? window : globalThis);

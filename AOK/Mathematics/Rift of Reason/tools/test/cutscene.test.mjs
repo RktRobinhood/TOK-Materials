@@ -143,6 +143,44 @@ function game(options = {}) {
 }
 const shot = {shot:'quiet',layers:[]};
 
+test('silent film notes allow reading and never request a narrator recording',async()=>{
+    const g=game(),noted=[];
+    const done=g.Rift.Cutscene.play(g.film([shot,{note:'LICENCE: DELETED.'}]),{onNote:text=>noted.push(text)});
+    await settle();assert.equal(g.$('.cs-sub-text').textContent,'LICENCE: DELETED.');
+    assert.equal(g.speech.length,0);await g.advance(100);assert.deepEqual(noted,[]);
+    await g.advance(8000);assert.equal(await done,true);assert.deepEqual(noted,['LICENCE: DELETED.']);
+    assert.equal(g.claims(),0);
+});
+
+test('painted sign lettering travels and fades with its physical placard',async()=>{
+    const g=game();
+    const done=g.Rift.Cutscene.play(g.film([
+        {shot:'sign',layers:[{id:'sign',art:'item/lucky-sequin',x:800,y:450,w:200,h:100}]},
+        {hud:'text',follow:'sign',x:800,y:450,w:160,h:60,label:'GUILTY',colour:'#b32738'},
+        {tween:'sign',to:{y:650,opacity:0},dur:1000,wait:true},
+    ]));
+    await settle();await g.advance(250);
+    const label=g.$('.cs-lettering'),firstTop=parseFloat(label.style.top),firstOpacity=+label.style.opacity;
+    assert.equal(label.textContent,'GUILTY');assert.equal(label.style.color,'#b32738');
+    await g.advance(500);assert.ok(parseFloat(label.style.top)>firstTop);assert.ok(+label.style.opacity<firstOpacity);
+    await g.advance(500);assert.equal(await done,true);assert.equal(g.claims(),0);
+});
+
+test('Skip preserves an interrupted silent note and does not repeat a completed one',async()=>{
+    for(const interrupt of [false,true]) {
+        const g=storyGame();
+        g.Rift.data.script.noteWords=[{note:'The licence disappears.'},{note:'The gallery falls silent.'}];
+        g.film([shot,{conversation:'noteWords'}],'note-film');
+        const play=g.Rift.Cutscene.play;
+        g.Rift.Cutscene.play=(id,o)=>play(id,{...o,onNote:text=>{o.onNote(text);if(!interrupt)g.key('Escape');}});
+        const done=g.Rift.Dialogue.play([{cutscene:'note-film',continuation:'noteWords'}]);await settle();
+        if(interrupt)g.key('Escape');else await g.advance(20000);
+        await settle();
+        assert.match(g.$('.box').textContent,interrupt?/The licence disappears\./:/The gallery falls silent\./);
+        await finishStory(g,done,'skip');assert.equal(g.speech.length,0);assert.equal(g.claims(),0);
+    }
+});
+
 function storyGame(type = 'fox', variant = 'girl') {
     const g = game(); dialogue(g);
     Object.assign(g.state.avatar, {type, variant});
@@ -154,6 +192,7 @@ function storyGame(type = 'fox', variant = 'girl') {
     g.Rift.UI.toast=()=>{}; g.Rift.UI.input.consume=()=>{};
     g.run('data/map.js'); g.run('data/items.js'); g.run('data/creatures.js'); g.run('data/script/lesson1.js'); g.run('data/cast.js');
     g.run('data/script/lesson2.js');
+    g.run('data/script/lesson3.js');
     g.run('js/core/story.js'); g.run('js/core/cast.js'); g.run('js/core/stakes.js');
     return g;
 }
@@ -392,6 +431,149 @@ test('Hall navigation aborts each passage without granting the card; accepted pa
     }
 });
 
+function trialGame(type='owlet',variant='girl',tier=1,bargain) {
+    const g=storyGame(type,variant),n=[0,1,4,6,8][tier];
+    Object.assign(g.state.flags,{'dead:sundial':tier===4,
+        'stakes.ch3':tier===4?4:undefined,'clock:ch3':{n,size:8,started:true,done:tier===4,tier:tier===4?4:null,paused:bargain==='yes'},
+        'seen:prologue.wake':true,'seen:prologue.evening':true,'seen:ch1.night':true,
+        'seen:ch2.clockmaker':true,'seen:ch3.cafe':true});
+    if(bargain!==undefined)g.state.flags.bargain=bargain;
+    g.state.chapter='ch3';g.state.settings.charactersCanDie=true;
+    return g;
+}
+function trialPresentation(g,mode='complete') {
+    const events=[],trace=[],speak=g.Rift.Audio.speak,play=g.Rift.Cutscene.play;
+    g.Rift.Audio.speak=line=>{events.push({kind:'say',speaker:line.speaker,text:line.text});return speak(line);};
+    if(mode==='unavailable')g.Rift.Cutscene=null;
+    else if(mode==='failed')g.Rift.Cutscene.play=async()=>false;
+    else g.Rift.Cutscene.play=(id,o)=>play(id,{...o,onStep:(kind,s)=>trace.push([kind,s]),
+        onNote:note=>{events.push({kind:'note',text:note});if(o.onNote)o.onNote(note);}});
+    return {events,trace};
+}
+async function finishTrial(g,promise,mode='complete',events=[],wrongFirst=false) {
+    let done=false,choices=0;promise.then(()=>{done=true;});
+    for(let guard=0;guard<300&&!done;guard++) {
+        await settle();
+        if(g.Rift.Cutscene?.current()) {
+            if(mode==='skip')g.key('Escape');else await g.advance(20000);
+        } else if(g.$('.choices button')) {
+            const options=g.$$('.choices button');
+            const pick=wrongFirst&&choices===0?options.find(b=>b.textContent.includes('I HAVE THE BEST SHADOW')):
+                options.find(b=>b.textContent.includes('I TOOK IT AT A FAIR'));
+            assert.ok(pick,'the accepted evidence remains an actual choice');pick.click();choices++;
+        } else if(g.$('.box')) {
+            const note=g.$('.stage-note .text');
+            if(note)events.push({kind:'note',text:note.textContent});
+            g.$('.box').click();
+        }
+    }
+    assert.ok(done,'the Tribunal ending completes');await promise;return choices;
+}
+
+test('Tribunal replay is save-free for all ten avatars, frames whole figures and voices no silent court record',async()=>{
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl'])
+        for(const tier of [1,2,3,4]) {
+            const g=trialGame(type,variant,tier);g.state.flags['stakes.ch3']=tier;
+            const before=JSON.stringify(g.state),p=g.Rift.Cutscene.plan('tribunal-aftermath');
+            assert.equal(JSON.stringify(g.state),before);
+            const notes=p.steps.filter(s=>s.note),says=p.steps.filter(s=>s.say);
+            assert.ok(notes.length>=3);for(const s of says)assert.ok(voices.has(s.say+':'+s.t),'canonical '+s.say+':'+s.t);
+            if(tier===4)assert.ok(says.every(s=>s.say!=='narrator'));
+            const main=p.steps.find(s=>s.shot==='the-verdict');
+            const licence=p.steps.find(s=>s.line==='ch3.trial.licence');
+            assert.equal(licence.during.some(s=>s.art==='cutscene/fin-tie'),tier!==4,'nested line animations honour outcome conditions');
+            assert.equal(main.layers.some(l=>l.id==='sundial'),tier!==4);
+            assert.equal(main.layers.filter(l=>l.id==='exhibit').length,1,'only the returning third piece is shown');
+            for(const s of p.steps)for(const l of s.layers||[]) {
+                if(l.cover)continue;
+                const at=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
+                assert.ok(at.sx-l.w*at.S/2>=0&&at.sx+l.w*at.S/2<=1600,l.id+' fits horizontally');
+                assert.ok(at.sy-l.h*at.S/2>=0&&at.sy+l.h*at.S/2<=760,l.id+' is wholly above captions');
+            }
+            assert.ok(p.steps.every(s=>!s.flag&&!s.clock&&!s.give&&!s.choice));
+        }
+});
+
+test('Tribunal films preserve the different living/dead event order and reward across completion, Skip and failure',async()=>{
+    for(const type of ['fox','frogling'])for(const tier of [1,2,3,4])for(const mode of ['complete','skip','unavailable','failed']) {
+        const g=trialGame(type,type==='fox'?'boy':'girl',tier),{events,trace}=trialPresentation(g,mode);
+        assert.equal(await finishTrial(g,g.Rift.Dialogue.play('ch3.trial.win'),mode,events),1);
+        assert.equal(g.state.flags['stakes.ch3'],tier);assert.equal(g.state.items['hoots-gavel']||0,tier===1?1:0);
+        assert.equal(!!g.state.flags['hoots-gavel'],tier===1);assert.equal(g.state.flags['trial-evidence'],true);
+        assert.equal(g.state.flags['seen:ch3.trial.win'],true);
+        const pos=snippet=>events.findIndex(e=>e.text.includes(snippet));
+        const verdict=pos(tier===4?'The arguments failed.':'Case dismissed.');
+        const fin=pos('The vault never opens.'),licence=pos('LICENCE: DELETED.'),algorithm=pos(tier===4?'VERDICT: EXECUTED.':'verdict rejected.');
+        const piece=pos(tier===4?'It is cold.':'Exhibit A leaves its glass case.');
+        const inner=pos(type==='fox'?'He was the villain in my story.':'"A case he wanted to win."');
+        const gallery=pos(tier===4?'The GUILTY counter peaks.':'In the gallery, the GUILTY signs');
+        assert.ok(verdict>=0&&fin>verdict&&licence>fin&&algorithm>licence);
+        if(tier===4) {
+            assert.ok(piece>algorithm&&inner>piece&&gallery>inner&&pos('Why is nobody cheering?')>gallery);
+            assert.ok(events.slice(verdict).every(e=>e.kind!=='say'||e.speaker!=='narrator'));
+        } else assert.ok(piece>verdict&&piece<fin&&gallery>algorithm&&inner>gallery&&pos('Was he right?')>inner);
+        for(const n of events.filter(e=>e.kind==='note'))assert.ok(g.speech.every(s=>s.text!==n.text),'notes stay silent');
+        assert.equal(events.filter(e=>e.text.startsWith('The vault never opens.')).length,1);
+        assert.equal(g.claims(),0);
+        if(mode==='complete')assert.ok(trace.some(([,s])=>s.shot==='the-verdict'));
+    }
+});
+
+test('Tribunal bargain, refusal and no-death brink preserve the real outcome without inventing pocket pieces',async()=>{
+    for(const bargain of ['yes','no',undefined]) {
+        const g=trialGame('raven','boy',2,bargain),{events}=trialPresentation(g,'skip');
+        await finishTrial(g,g.Rift.Dialogue.play('ch3.trial.win'),'skip',events);
+        assert.equal(g.state.flags.bargain,bargain);assert.equal(g.state.flags['clock:ch3'].paused,bargain==='yes');
+        assert.equal(g.state.flags['stakes.ch3'],2);assert.equal(g.state.flags['dead:sundial'],false);
+        const p=g.Rift.Cutscene.plan('tribunal-aftermath');
+        assert.equal(p.steps.find(s=>s.shot==='the-verdict').layers.filter(l=>l.id==='exhibit').length,1);
+        assert.ok(events.some(e=>e.text.includes('CONTROVERSIAL.')));
+    }
+    const g=trialGame('owlet','girl',3);g.state.flags['clock:ch3'].n=8;
+    g.state.settings.charactersCanDie=false;const {events}=trialPresentation(g,'skip');
+    await finishTrial(g,g.Rift.Dialogue.play('ch3.trial.win'),'skip',events);
+    assert.equal(g.state.flags['stakes.ch3'],3);assert.equal(!!g.state.flags['dead:sundial'],false);
+    assert.ok(events.some(e=>e.text==='The adverts end. The sentence never starts.'));
+    assert.ok(events.some(e=>e.text.startsWith('One screen keeps playing it:')));
+    assert.ok(events.every(e=>!e.text.startsWith('VERDICT: EXECUTED.')));
+});
+
+test('a wrong final evidence pick can still kill the Sundial before the film and retains the correct late order',async()=>{
+    const g=trialGame('fox','boy',3);g.state.flags['clock:ch3'].n=7;
+    const {events}=trialPresentation(g,'skip');
+    assert.equal(await finishTrial(g,g.Rift.Dialogue.play('ch3.trial.win'),'skip',events,true),2);
+    assert.equal(g.state.flags['dead:sundial'],true);assert.equal(g.state.flags['stakes.ch3'],4);
+    assert.equal(g.state.flags['clock:ch3'].n,8);assert.equal(g.state.flags['quiet:sundial'],'pending');
+    assert.equal(g.state.items['hoots-gavel'],undefined);
+    const at=snippet=>events.findIndex(e=>e.text.includes(snippet));
+    assert.ok(at('On cloudy days I gu—')<at('The arguments failed.'));
+    assert.ok(at('The arguments failed.')<at('I bet with its life. I lost.'));
+    assert.ok(at('VERDICT: EXECUTED.')<at('It is cold.'));
+});
+
+test('Tribunal navigation during either film grants no gavel and re-entry never repeats accepted evidence or danger',async()=>{
+    for(const [tier,stopAt] of [[1,'tribunal-verdict'],[4,'tribunal-empty-gallery']]) {
+        const g=trialGame('fox','boy',tier),play=g.Rift.Cutscene.play;let arrived=false;
+        g.Rift.Cutscene.play=(id,o)=>{if(id===stopAt)arrived=true;return play(id,{...o,instant:id!==stopAt});};
+        g.Rift.Dialogue.play('ch3.trial.win');
+        for(let guard=0;guard<150&&!arrived;guard++) {
+            await settle();
+            if(g.$('.choices button'))g.$$('.choices button').find(b=>b.textContent.includes('I TOOK IT AT A FAIR')).click();
+            else if(g.$('.box'))g.$('.box').click();
+        }
+        assert.ok(arrived);await settle();assert.ok(g.Rift.Cutscene.current());
+        g.Rift.Dialogue.abortAll();await settle();
+        assert.equal(g.state.flags['seen:ch3.trial.win'],undefined);assert.equal(g.state.items['hoots-gavel'],undefined);
+        assert.equal(g.state.flags['trial-evidence'],true);const danger=g.state.flags['clock:ch3'].n;
+        g.Rift.Cutscene.play=(id,o)=>play(id,{...o,instant:true});
+        assert.equal(await finishTrial(g,g.Rift.Dialogue.play('ch3.trial.win')),0);
+        assert.equal(g.state.flags['clock:ch3'].n,danger);
+        assert.equal(g.state.items['hoots-gavel']||0,tier===1?1:0);
+        assert.equal(g.state.flags['seen:ch3.trial.win'],true);assert.equal(g.claims(),0);
+    }
+});
+
 test('canonical creature subtitle labels use display names while voice IDs retain possession',()=>{
     const g=storyGame();
     const says=g.Rift.Cutscene.plan('fair-rupture').steps.filter(s=>s.say);
@@ -529,6 +711,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         const g=game();g.state.flags['seen:prologue.cold']=seen;
         g.state.flags['seen:prologue.rift']=seen;g.state.flags['seen:ch1.gate.win']=seen;
         g.state.flags['seen:ch2.hall.win']=seen;
+        g.state.flags['seen:ch3.trial.win']=seen;
         g.Rift.UI.hud=()=>g.Rift.el('div');g.Rift.UI.toast=()=>{};
         g.Rift.Quests={glyph:()=>'',COLOURS:{main:'#fff',side:'#fff'},list:()=>[]};
         g.run('js/core/router.js');g.run('js/screens/journal.js');
@@ -539,6 +722,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Gate aftermath again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Fair rupture again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Hall aftermath again'),seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Tribunal aftermath again'),seen);
         if(!seen)continue;
         let end,calls=0;g.Rift.Cutscene.play=()=>{calls++;return new Promise(resolve=>{end=resolve;});};
         const before=JSON.stringify(g.state);replay.click();replay.click();assert.equal(calls,1);assert.ok(replay.disabled);

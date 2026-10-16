@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "records": [
+    {
+      "file": "trial-cast-153.png",
+      "promptKey": "trialCastPrompt",
+      "refsKey": "trialCastRefs",
+      "resultKey": "trialCastImage",
+      "prompt": "Create a transparent TWO-character game sprite sheet for Rift of Reason, exactly TWO separated COMPLETE FULL-BODY figures, generous clear margins and gap. LEFT: Prosecutor Fin, EXACT shark identity and tailored black/gold suit, purple waistcoat and purple tie from reference1. A subdued aftermath pose: both hands lowered, mouth CLOSED, no toothy smile, eyes looking down-left, shoulders lowered, tie a little loose, a man who has lost his licence and must live with his gamble. Preserve dorsal fin, long coat tails, shoes and full shark tail completely. RIGHT: Pip the court clerk, EXACT tiny bat identity, dark fur, enormous gold/cyan headphones, black/gold waistcoat and cyan jewel from reference2. Grounded small worried attentive stance, mouth closed, both hands holding a palm-sized brass/cyan voice recorder firmly against chest; no open book or magic sparkles. Preserve complete ears, wings, toes and recorder. Both face slightly LEFT toward the hero, soft textured cel-lit painterly cute-horror jewel-on-dark style matching approvedstyleboard3 and shippedcat4. True ALPHA background, no floor or background cloud, no text, labels, border or other figures. All extremities well inside image edges, no clipping, no portrait busts.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/prosecutor-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/clerk-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-a2ee04af-29d1-4a39-971d-b7c5fecee753.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "trial-case-153.png",
+      "promptKey": "trialCasePrompt",
+      "refsKey": "trialCaseRefs",
+      "resultKey": "trialCaseImage",
+      "note": "Case selected; portrait pane retained in source but excluded from mapping. Replaced with landscape single pane.",
+      "prompt": "Make a transparent TWO-PROP animation sprite sheet for Rift of Reason in the painterly storybook-futuristic courtroom style from reference1; styleboard2 and shippedcat3 govern texture and jewel colours. LEFT: one COMPLETE EMPTY museum evidence display case on a low dark-polished wood and brass plinth, front facing three-quarter slightly right. This is a stable open-front box with glass sides and back, slim cyan-lit brass corner supports and a gold top rail. EMPTY central chamber fully visible; no front door/pane attached and nothing inside. The front can be closed with the separate sliding pane. Allcase/plinth edges and feet complete, generous margin. RIGHT: its SEPARATE upright rectangular sliding FRONT GLASS PANE, cyan-brass slim perimeter frame and very subtle glass reflections, transparent empty centre; samewidth/height as the case's chamber/frontopening and matching view/perspective. This pane is a detachable animation layer to slide UP away before a stolen shadow can exit. Clearly separate props with generous transparent gap, full silhouettes inside canvas. No shadow fragment, no object inside, no text, lettering, labels, characters, floor or background. True ALPHA.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/scenes/tribunal.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-cd10e713-0c83-49e1-b904-1f46d95375e8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "trial-juror-153.png",
+      "promptKey": "trialJurorPrompt",
+      "refsKey": "trialJurorRefs",
+      "resultKey": "trialJurorImage",
+      "prompt": "Create a transparent TWO-OBJECT animation sprite sheet for Rift of Reason. LEFT: JUROR ONE is the SAME Miss Quill revealed crowned Arch-Imp from reference1, now hiding behind a NEW ivory owl-shaped theatrical mask and a dark jury hood. Preserve her familiar dark Victorian dress, red bow, grey-charcoal paws, little crooked brass crown halfhidden by the hood and tired amber eyes visible through the mask. A tall narrow stubborn court-juror silhouette, quiet closed-mouth posture, a red pencil tucked behind one pointed ear as identifying clue. BOTH PAWS EMPTY at mid-chest height, separated as if supporting a sign in front of her, but NO sign/board/paper attached to her body. Complete head, crown, hood, dress, tail, hands and feet well inside generous canvas margins. RIGHT: one SEPARATE blank cream paper protest placard, simple dull purple wood border, NO lettering or symbols, NO stick and NO hand/body. Separate rectangle to overlay at her empty paws, then lower independently. Broad transparent gap between character and placard. Match approved styleboard2 and shippedcat3, painterly cute horror, clean dark outlines, textured fabric and jewel accents. TrueALPHA, no environment/floor, no shadows/background cloud, no text labels or additional objects.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cutscene/quill-unmasked.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-4f108397-cf37-4b7e-b632-2bba8c18f1dd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "trial-pane-153.png",
+      "promptKey": "trialPanePrompt",
+      "refsKey": "trialPaneRefs",
+      "resultKey": "trialPaneImage",
+      "prompt": "Make ONE separate sliding GLASS PANE animation prop to fit the WIDE FRONT OPENING of the evidence display case at LEFT in reference1. IMPORTANT: LANDSCAPE rectangle, width exactly about TWO TIMES its height, NOT an upright portrait door. Slim straight brass/cyan rim, mostly clear transparent central glass with only two faint diagonal reflection streaks. Match the long landscape front opening between that case's front brass posts. Front-on view with only extremely slight perspective matching case, complete four corners and all edges inside generous transparent margin. No plinth, no sidewalls, no handle sticking out, nothing inside/on glass, no writing, no characters, no environment or background cloud. This pane will overlay the empty open-front case and slide upward as a separate game layer. True ALPHA glass centre and background. Reference1 provides exact case materials, styleboard2 and shippedcat3 the painterly cute-horror texture/colour.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/tribunal-153/trial-case-153.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-3a39d1ff-d09b-44b4-999a-811d25dfee5b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "trial-fin-tie-153.png",
+      "promptKey": "trialTiePrompt",
+      "refsKey": "trialTieRefs",
+      "resultKey": "trialTieImage",
+      "prompt": "Edit this EXACT full-body Prosecutor Fin sprite into the next subtle animation pose. Preserve the same shark identity, body proportions, black/gold suit, purple waistcoat, complete dorsalfin/tail/shoes, head position and downward ashamed gaze. Raise ONLY his nearer right hand gently to straighten the knot of his purple necktie; the other hand remains lowered. His mouth stays closed, no grin or tears. The tie is now straightened; this is a quiet defeated professional gesture, not an accusation. Preserve the same overall silhouette scale, orientation, lighting, palette, painterly texture and complete body. Entire head, fins, hand, coat tails and shoes inside generous clear margins, no cropping. True alpha background, no floor, no props/text/environment. Do not add other figures.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cutscene/fin-subdued.webp"
+      ],
+      "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-e96e284a-d62b-4461-9b6f-1523205a3a50.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-16",
+  "newLines": 0,
+  "covered": 9,
+  "recorded": 9,
+  "pending": [],
+  "lines": [
+    {
+      "speaker": "judge",
+      "id": "judge-1ngclel",
+      "text": "The arguments failed. The vote did not care. Write that down, Pip.",
+      "source": "ch3.trial.verdict"
+    },
+    {
+      "speaker": "judge",
+      "id": "judge-6hlaag",
+      "text": "But the exhibit was stolen. Stolen things go home.",
+      "source": "ch3.trial.verdict"
+    },
+    {
+      "speaker": "judge",
+      "id": "judge-fomgow",
+      "text": "No argument today supports its claim. Case dismissed.",
+      "source": "ch3.trial.verdict"
+    },
+    {
+      "speaker": "narrator",
+      "id": "narrator-zhz7um",
+      "text": "I've never been controversial. I quite like it.",
+      "source": "ch3.trial.label"
+    },
+    {
+      "speaker": "fin",
+      "id": "fin-1ttg2p",
+      "text": "The vault never opens. Courts do. I bet with its life. I lost. I'm sorry.",
+      "source": "ch3.trial.fin"
+    },
+    {
+      "speaker": "fin",
+      "id": "fin-1moqi1b",
+      "text": "The vault never opens. Courts do. …So I let it win. For a bit.",
+      "source": "ch3.trial.fin"
+    },
+    {
+      "speaker": "algorithm",
+      "id": "algorithm-hwayc0",
+      "text": "VERDICT: EXECUTED. EXHIBIT A… released? probably— RELEASED.",
+      "source": "ch3.trial.algorithm"
+    },
+    {
+      "speaker": "algorithm",
+      "id": "algorithm-slim37",
+      "text": "verdict rejected. VERDICT REJECTED.",
+      "source": "ch3.trial.algorithm"
+    },
+    {
+      "speaker": "nudge",
+      "id": "nudge-102lbvq",
+      "text": "…Why is nobody cheering?",
+      "source": "ch3.trial.gallery-loss"
+    }
+  ]
+}

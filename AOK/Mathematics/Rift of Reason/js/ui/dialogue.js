@@ -286,10 +286,12 @@
     async function cutsceneStep(layer, step, ctx) {
         let played = false;
         const spoken = new Set();
+        const noted = new Set();
         if (Rift.Cutscene && Rift.Cutscene.has(step.cutscene)) {
             try {
                 played = await Rift.Cutscene.play(step.cutscene, {
                     context: ctx,
+                    onNote: text => noted.add(text),
                     onSpoken: line => {
                         spoken.add(Rift.voiceId(line.speaker, line.text));
                         if (line.actor && line.speaker !== 'avatar' && line.actor !== Rift.Cast.original(line.speaker)) ctx.cast[line.speaker] = line.actor;
@@ -312,6 +314,7 @@
         for (const line of continuation) {
             if (ctx.aborted) return new Promise(() => {});
             if (line.s && line.t && spoken.has(Rift.voiceId(line.s, line.t))) continue;
+            if (line.note && noted.has(line.note)) continue;
             await run(layer, [line], ctx);
         }
     }

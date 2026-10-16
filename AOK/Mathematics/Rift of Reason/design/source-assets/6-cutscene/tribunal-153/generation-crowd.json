@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "trial-crowd-153.png",
+    "prompt": "Create a transparent TWO-CHARACTER game animation sprite sheet, exactly two anonymous courtroom gallery spectators for Rift of Reason. LEFT: a small round barn owl spectator in a simple muted teal coat, no judge wig or crown. RIGHT: a stocky grey badger spectator in a plain russet coat. Both complete fullbody figures front-three-quarter facing slightly right, closed mouths and serious watchful faces, not cheering, no comic exaggerated grin. They are ordinary background townsfolk, not named collectible cards. Each holds both EMPTY paws/wings separated near the UPPER chest as if supporting a protest placard laid in front of them, but NOTHING in or attached to their hands. NO boards, signs, frames, instruments, books, sticks or other props anywhere. Compact broad proportions, readable clear space between paws. Full heads, ears, wings/tails, hands and BOTH feet comfortably inside generous canvas margins, all extremities complete. Large clear gap between the two independent figures. Match supplied approved styleboard1 and shippedcat2, painterly cute-horror jewel accents on dark cloth, clean medium dark outlines, soft fur/feather fabric texture. True ALPHA background, no floor, no shadow cloud, no environment or text.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-45e4c42d-a9c0-4705-8760-19075997952b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "note": "Native QA found a reused Beastie spectator had a baked-in board. Both crowd stand-ins replaced with empty-handed anonymous story extras; all placards remain separate."
+  }
+}

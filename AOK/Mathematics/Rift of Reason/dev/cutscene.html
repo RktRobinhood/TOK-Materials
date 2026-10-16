@@ -34,6 +34,8 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     <label><input id="calm" type="checkbox"> Calm motion</label>
     <label>Gate outcome <select id="outcome"><option value="1">Sequins saved</option><option value="2">Less sparkle</option><option value="3">Diminished</option><option value="4">Sequins lost</option><option value="back">Turned back</option></select></label>
     <label>Hall outcome <select id="hall-outcome"><option value="1">Granny dry</option><option value="2">Damp shawl</option><option value="3">Boiled shawl</option><option value="bare">Shawl lost</option><option value="4">Granny lost</option></select></label>
+    <label>Trial outcome <select id="trial-outcome"><option value="1">Sundial saved</option><option value="2">Controversial</option><option value="3">Recording kept</option><option value="brink">Sentence stopped</option><option value="4">Sundial lost</option></select></label>
+    <label><input id="trial-deal" type="checkbox"> Trial bargain accepted</label>
     <label><input id="nudge-fled" type="checkbox" checked> Nudge kept first piece</label>
     <label><input id="paradox-board" type="checkbox" checked> Smudge's chalkboard</label>
     <button class="btn primary" id="play" type="button">▶ Play</button>
@@ -71,6 +73,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 <script src="data/creatures.js"></script>
 <script src="data/script/lesson1.js"></script>
 <script src="data/script/lesson2.js"></script>
+<script src="data/script/lesson3.js"></script>
 <script src="data/cast.js"></script>
 <script src="js/core/story.js"></script>
 <script src="js/core/cast.js"></script>
@@ -85,10 +88,12 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     if (params.get('name')) byId('name').value = params.get('name');
     if (params.get('calm') === '1') byId('calm').checked = true;
 
-    R.Cutscene.list().filter(id => !id.startsWith('town-hall-') || id === 'town-hall-aftermath' || id === params.get('id')).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
+    R.Cutscene.list().filter(id => id === params.get('id') || !(id.startsWith('town-hall-') || id.startsWith('tribunal-')) || R.data.cutscenes[id].replayLabel).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
     if (params.get('id')) byId('which').value = params.get('id');
     if (params.get('outcome')) byId('outcome').value = params.get('outcome');
     if (params.get('hallOutcome')) byId('hall-outcome').value = params.get('hallOutcome');
+    if (params.get('trialOutcome')) byId('trial-outcome').value = params.get('trialOutcome');
+    if (params.get('deal') === 'yes') byId('trial-deal').checked = true;
 
     function drawAvatars() {
         const box = byId('avatars');
@@ -120,15 +125,19 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
         const danger = [0, 1, 3, 5, 6][tier];
         const hallTier = byId('hall-outcome').value === 'bare' ? 3 : +byId('hall-outcome').value;
         const hallDanger = byId('hall-outcome').value === 'bare' ? 8 : [0, 1, 4, 6, 8][hallTier];
+        const trialTier = byId('trial-outcome').value === 'brink' ? 3 : +byId('trial-outcome').value;
+        const trialDanger = byId('trial-outcome').value === 'brink' ? 8 : [0, 1, 4, 6, 8][trialTier];
         Object.assign(R.State.get(), { avatar: Object.assign({ nickname: byId('name').value.trim() || 'traveller' }, pick),
             flags: { 'stakes.ch1': tier, 'dead:sequins': tier === 4, turnedBack: byId('outcome').value === 'back',
                 'seen:prologue.rift': true, 'clock:ch1': { n: danger, size: 6 },
                 'stakes.ch2': hallTier, 'dead:granny': hallTier === 4, 'clock:ch2': { n: hallDanger, size: 8 },
+                'stakes.ch3': trialTier, 'dead:sundial': trialTier === 4, 'clock:ch3': { n: trialDanger, size: 8 },
+                bargain: byId('trial-deal').checked ? 'yes' : 'no',
                 nudgeFled: byId('nudge-fled').checked, 'paradox-board': byId('paradox-board').checked,
                 'seen:ch2.cover': true, 'seen:ch2.square.win': true } });
         const played = await R.Cutscene.play(byId('which').value, {
             player: Object.assign({ nickname: byId('name').value.trim() || 'traveller' }, pick),
-            onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
+            onStep: (kind, step) => { trace.push(((performance.now() - started) / 1000).toFixed(1) + 's  ' + kind + '  ' + (step.shot || step.note || step.say && step.text || step.hud || step.fx || step.tween || step.set || step.sfx || step.title || '')); byId('trace').textContent = trace.join('\n'); },
         });
         byId('status').textContent = played
             ? 'Finished in ' + ((performance.now() - started) / 1000).toFixed(1) + ' s. In the game, the story continues on the regular screen.'

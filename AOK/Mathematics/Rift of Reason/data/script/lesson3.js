@@ -24,7 +24,8 @@
  *
  * Flags set here: filed (the EVIDENCE FILED counter, before the Plaza only), clip (sound / slick /
  * none; clip.interest and clip.lean are the negotiation's own counters), bargain (yes / no; unset if
- * never offered), stakes.ch3 (by the clock), hoots-gavel, rumour:lovelace / tycho / hexling.
+ * never offered), trial-evidence (accepted climax record), stakes.ch3 (by the clock), hoots-gavel,
+ * rumour:lovelace / tycho / hexling.
  * Read here: dead:granny, arrived:granny, quiet:granny, brave and cover (data/cases.js), mirage-witness
  * and fair-quote (side stories 1 and 8), seen:prologue.rift.
  *
@@ -513,54 +514,94 @@
     // (the misjudged villain's plan, on the page), what the Algorithm loses, one voice, the Sundial's
     // question. Quill and Nudge lose here as silent images (notes), so the cap holds.
     S['ch3.trial.win'] = [
-        { s: 'pip', t: 'Your Honour! My record. Every word it said in this city.' },
-        { choice: [
-            { t: '"I HAVE THE BEST SHADOW."', then: [
-                { s: 'fin', t: 'It HAS it. Having isn\'t stealing, Your Honour.' },
-                { clock: 'ch3', tick: 1 },
-                { choice: RECORD_RIGHT },
-            ] },
-        ].concat(RECORD_RIGHT) },
+        // Once the evidence is accepted, navigation cannot repeat its choice or danger charge.
+        { when: '!trial-evidence', then: [
+            { s: 'pip', t: 'Your Honour! My record. Every word it said in this city.' },
+            { choice: [
+                { t: '"I HAVE THE BEST SHADOW."', then: [
+                    { s: 'fin', t: 'It HAS it. Having isn\'t stealing, Your Honour.' },
+                    { clock: 'ch3', tick: 1 },
+                    { choice: RECORD_RIGHT },
+                ] },
+            ].concat(RECORD_RIGHT) },
+            { flag: 'trial-evidence' },
+        ] },
         { clock: 'ch3', resolve: true },
+        { cutscene: 'tribunal-verdict', continuation: 'ch3.trial.aftermath' },
         { when: 'dead:sundial', then: [
-            // Tier 4: the vote passed first. No jokes. No Sundial question (Kuku asks it in Ch4).
-            { s: 'judge', t: 'The arguments failed. The vote did not care. Write that down, Pip.' },
-            { s: 'judge', t: 'But the exhibit was stolen. Stolen things go home.' },
-            { s: 'fin', e: 'shaken', t: 'The vault never opens. Courts do. I bet with its life. I lost. I\'m sorry.' },
-            { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED.' },
-            { s: 'algorithm', t: 'VERDICT: EXECUTED. EXHIBIT A… released? probably— RELEASED.' },
-            { note: 'The third piece of shadow drops into your pocket. It is cold.' },
             { inner: {
                 fox: 'He was the villain in my story. He wasn\'t. The vote was.',
                 frogling: '"A case he wanted to win." He wanted this one. It went anyway.',
             } },
-            { note: 'The GUILTY counter peaks. Then the crowd logs off anyway. Juror One holds up her red-pencil sign in an empty gallery.' },
-            { s: 'nudge', t: '…Why is nobody cheering?' },
+            { cutscene: 'tribunal-empty-gallery', continuation: 'ch3.trial.gallery-loss' },
         ], else: [
-            { s: 'judge', e: 'gavel', t: 'No argument today supports its claim. Case dismissed.' },
-            { note: 'The adverts end. The sentence never starts.', when: { all: [{ flag: 'stakes.ch3', is: 3 }, { clock: 'ch3', gte: 8 }] } },
-            // The tier: Hoot's Gavel (shown as an item) · CONTROVERSIAL · a recording kept.
-            { when: { flag: 'stakes.ch3', is: 1 }, then: [
-                { give: { 'hoots-gavel': 1 } },
-                { flag: 'hoots-gavel' },
-            ] },
-            { when: { flag: 'stakes.ch3', is: 2 }, then: [
-                { note: 'Every screen in the city brands the Sundial: CONTROVERSIAL.' },
-                { s: 'narrator', t: 'I\'ve never been controversial. I quite like it.' },
-            ] },
-            { note: 'One screen keeps playing it: "…I guess." "…I guess." The Algorithm kept a copy.', when: { flag: 'stakes.ch3', is: 3 } },
-            { note: 'Exhibit A leaves its glass case. The third piece of shadow goes home to its owner.' },
-            { s: 'fin', t: 'The vault never opens. Courts do. …So I let it win. For a bit.' },
-            { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie. He does not look up.' },
-            { s: 'algorithm', t: 'verdict rejected. VERDICT REJECTED.' },
-            { note: 'In the gallery, the GUILTY signs come down. All but one: Juror One\'s, in red pencil. Then she lowers it too. Nudge\'s counter drops to FOLLOWERS: 0. It slinks away.' },
             { inner: {
                 fox: 'He was the villain in my story. My story was wrong. Again.',
                 frogling: '"A case he wanted to win." Small print. Always read the small print.',
             } },
             { s: 'narrator', t: 'He made me say it, to get my shadow home. Was he right?' },
         ] },
+        // The ending owns its reward. Leaving a film or reflection cannot grant another gavel.
+        { when: { all: [ALIVE, { flag: 'stakes.ch3', is: 1 }] }, then: [
+            { give: { 'hoots-gavel': 1 } }, { flag: 'hoots-gavel' },
+        ] },
     ];
+
+    // Canonical selected dialogue and silent captions. Films never decide the verdict or award items.
+    S['ch3.trial.verdict'] = [
+        { when: 'dead:sundial', then: [
+            { s: 'judge', t: 'The arguments failed. The vote did not care. Write that down, Pip.' },
+            { s: 'judge', t: 'But the exhibit was stolen. Stolen things go home.' },
+        ], else: [
+            { s: 'judge', e: 'gavel', t: 'No argument today supports its claim. Case dismissed.' },
+            { note: 'The adverts end. The sentence never starts.', when: { all: [{ flag: 'stakes.ch3', is: 3 }, { clock: 'ch3', gte: 8 }] } },
+        ] },
+    ];
+    S['ch3.trial.label'] = [
+        { when: ALIVE, then: [
+            { when: { flag: 'stakes.ch3', is: 2 }, then: [
+                { note: 'Every screen in the city brands the Sundial: CONTROVERSIAL.' },
+                { s: 'narrator', t: 'I\'ve never been controversial. I quite like it.' },
+            ] },
+            { note: 'One screen keeps playing it: "…I guess." "…I guess." The Algorithm kept a copy.', when: { flag: 'stakes.ch3', is: 3 } },
+        ] },
+    ];
+    S['ch3.trial.release'] = [
+        { note: 'Exhibit A leaves its glass case. The third piece of shadow goes home to its owner.', when: ALIVE },
+    ];
+    S['ch3.trial.fin'] = [
+        { when: 'dead:sundial', then: [
+            { s: 'fin', e: 'shaken', t: 'The vault never opens. Courts do. I bet with its life. I lost. I\'m sorry.' },
+        ], else: [
+            { s: 'fin', t: 'The vault never opens. Courts do. …So I let it win. For a bit.' },
+        ] },
+    ];
+    S['ch3.trial.licence'] = [
+        { when: 'dead:sundial', then: [
+            { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED.' },
+        ], else: [
+            { note: 'PROSECUTOR FIN: UNFOLLOWED. LICENCE: DELETED. Fin straightens his tie. He does not look up.' },
+        ] },
+    ];
+    S['ch3.trial.algorithm'] = [
+        { when: 'dead:sundial', then: [
+            { s: 'algorithm', t: 'VERDICT: EXECUTED. EXHIBIT A… released? probably— RELEASED.' },
+        ], else: [
+            { s: 'algorithm', t: 'verdict rejected. VERDICT REJECTED.' },
+        ] },
+    ];
+    S['ch3.trial.cold-piece'] = [
+        { note: 'The third piece of shadow drops into your pocket. It is cold.', when: 'dead:sundial' },
+    ];
+    S['ch3.trial.gallery-living'] = [
+        { note: 'In the gallery, the GUILTY signs come down. All but one: Juror One\'s, in red pencil. Then she lowers it too. Nudge\'s counter drops to FOLLOWERS: 0. It slinks away.', when: ALIVE },
+    ];
+    S['ch3.trial.gallery-loss'] = [
+        { note: 'The GUILTY counter peaks. Then the crowd logs off anyway. Juror One holds up her red-pencil sign in an empty gallery.' },
+        { s: 'nudge', t: '…Why is nobody cheering?' },
+    ];
+    S['ch3.trial.aftermath'] = [].concat(S['ch3.trial.verdict'], S['ch3.trial.label'], S['ch3.trial.release'],
+        S['ch3.trial.fin'], S['ch3.trial.licence'], S['ch3.trial.algorithm'], S['ch3.trial.cold-piece'], S['ch3.trial.gallery-living']);
 
     // ---------------------------------------------------------------- the Tower Road
 

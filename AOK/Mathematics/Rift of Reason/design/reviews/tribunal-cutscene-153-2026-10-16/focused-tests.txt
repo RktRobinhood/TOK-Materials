@@ -1,0 +1,70 @@
+[Rift] cutscene Error: test
+    at Object.play (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:88:113)
+    at cutsceneStep (js/ui/dialogue.js:292:46)
+    at run (js/ui/dialogue.js:370:43)
+    at Object.play (js/ui/dialogue.js:422:19)
+    at TestContext.<anonymous> (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:89:31)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)
+[Rift] cutscene frame Error: test renderer failure
+    at g.Rift.clamp (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:103:29)
+    at project (js/ui/cutscene.js:198:30)
+    at js/ui/cutscene.js:367:28
+    at Array.forEach (<anonymous>)
+    at js/ui/cutscene.js:366:25
+    at Array.forEach (<anonymous>)
+    at Player.render (js/ui/cutscene.js:364:20)
+    at frame (js/ui/cutscene.js:337:22)
+    at file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:137:75
+    at Array.forEach (<anonymous>)
+[Rift] cutscene cold-open is missing art: scene/bedroom
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene Error: Unknown cutscene step: {"unrecognised":true}
+    at Player.exec (js/ui/cutscene.js:548:15)
+    at Player.run (js/ui/cutscene.js:513:34)
+    at js/ui/cutscene.js:782:25
+✔ completed greeting lines are not repeated; Skip and failure supply only unheard lines (55.8605ms)
+✔ a line interrupted before its voice/reading beat finishes is not reported as spoken (8.427ms)
+✔ new and older seen openings greet once on the regular screen, after the film closes (23.8626ms)
+✔ the real router starts the opening once, Skip continues to wake, navigation does not (11.4698ms)
+✔ dialogue falls back when film is absent, art fails, or the player rejects (14.7828ms)
+✔ system reduced motion selects the gentler cut without changing saved settings (10.3767ms)
+✔ a render failure after playback starts releases the overlay and returns fallback (7.0426ms)
+✔ silent film notes allow reading and never request a narrator recording (4.3979ms)
+✔ painted sign lettering travels and fades with its physical placard (5.595ms)
+✔ Skip preserves an interrupted silent note and does not repeat a completed one (25.0777ms)
+✔ the Fair movie uses canonical recorded keys for all ten avatars, remains in frame and changes no save (329.0084ms)
+✔ complete, skipped and unavailable Fair films preserve the evening decision, gifts and next destination exactly once (129.9795ms)
+✔ an interrupted named conversation resumes only unheard lines; navigation never commits its ending (24.5766ms)
+✔ Gate films show the actual outcome, take Nudge away before narration and preserve rewards on skip/failure (1006.7527ms)
+✔ Gate navigation abandonment grants no reward and re-entry grants only one (87.5008ms)
+✔ the Hall replay uses only canonical words and stages each tier without changing story state (975.8144ms)
+✔ Hall complete, Skip and failed films preserve decisions, outcomes, inner voices and one earned card (1906.2843ms)
+✔ one wrong Hall sentence still advances danger and changes Granny from dry to damp (16.5508ms)
+✔ Hall navigation aborts each passage without granting the card; accepted paradox and danger survive re-entry (64.515ms)
+✔ Tribunal replay is save-free for all ten avatars, frames whole figures and voices no silent court record (456.5367ms)
+✔ Tribunal films preserve the different living/dead event order and reward across completion, Skip and failure (504.0845ms)
+✔ Tribunal bargain, refusal and no-death brink preserve the real outcome without inventing pocket pieces (90.2863ms)
+✔ a wrong final evidence pick can still kill the Sundial before the film and retains the correct late order (14.668ms)
+✔ Tribunal navigation during either film grants no gavel and re-entry never repeats accepted evidence or danger (32.0471ms)
+✔ canonical creature subtitle labels use display names while voice IDs retain possession (7.6481ms)
+✔ named cutscene dialogue handles understudy words without repetition or unearned actors (9.1575ms)
+✔ each chosen nickname reaches the scan and subtitles while the recorded voice key stays reusable (22.6917ms)
+✔ the observation glass opens continuously, then the film fades to reveal the regular screen (5.7645ms)
+✔ all ten avatars complete the real timeline, speak the exact recorded keys and never change the save (78.3553ms)
+✔ Calm removes every flash/sweep/glitch and preserves the quiet opening hold (7.588ms)
+✔ a say step waits for the voice as well as the subtitle reading time (4.2455ms)
+✔ Skip button, Escape and hold finish once and cancel timers, frames, input and voice (12.8945ms)
+✔ missing and broken art return false; preload is also immediately skippable (18.3104ms)
+✔ initial screen mounted notification does not skip the film; explicit navigation stop cleans it (3.722ms)
+✔ an invalid timeline falls back cleanly and the player can start another film (4.4317ms)
+✔ Journal replay is seen-gated, deduplicates clicks and preserves story state (8.4858ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6226.4283
