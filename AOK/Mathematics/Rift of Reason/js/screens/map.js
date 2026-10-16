@@ -421,7 +421,7 @@
                         finish();
                         if(n.cardSchool){
                             if(!Rift.State.get().flags['card-lesson-won'])Rift.Battles.introduction('map');
-                            else if(!Rift.State.get().flags['story-battle-won'])Rift.Battles.storyOffer();
+                            else if(!Rift.State.get().flags['story-battle-won'])Rift.Battles.fairPlan().then(()=>{if(!destroyed)Rift.Battles.storyOffer();});
                             else Rift.Battles.offer(id);
                             break;
                         }

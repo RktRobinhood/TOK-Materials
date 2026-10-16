@@ -90,3 +90,26 @@ test('Core completion foregrounds Summit Rift ahead of unfinished puzzles and op
  const Rift=game();Rift.State.update(s=>{Rift.World.jumpToChapter(s,'ch4');s.flags['finale-open']=true;s.map.visitCount['k-oracle']=1;Rift.World.complete(s,'k-core');});
  assert.equal(Rift.Quests.tracked()[0].node,'k-summit');
 });
+
+test('Fair day (#154): one tracked checklist names any 2 of 3 stalls, Syllo’s separate match and the Nut Stall', () => {
+    const R = game();
+    assert.equal(R.Quests.list().find(q => q.id === 'story:fair-day'), undefined, 'not before Granny speaks');
+    R.State.update(s => { R.World.complete(s, 'burrow'); R.World.complete(s, 'fair-gate'); s.flags['seen:prologue.fair'] = true; });
+    let q = R.Quests.tracked()[0];
+    assert.equal(q.id, 'story:fair-day', 'first in the tracker');
+    assert.ok(q.title.includes('puzzle stalls 0/2 (any of 3) · Syllo’s match at the Gate: not yet'), q.title);
+    assert.match(q.text, /any 2 of the 3 puzzle stalls.*not Syllo’s Gallery.*Syllo’s practice match.*any order.*Nut Stall/);
+    assert.ok(['stall-pattern', 'stall-witness', 'stall-gallery'].includes(q.node));
+    R.State.update(s => { s.map.visitCount['stall-witness'] = 1; });
+    assert.equal(R.Quests.tracked()[0].node, 'stall-witness', 'a started stall first');
+    R.State.update(s => { R.World.complete(s, 'stall-witness'); R.World.complete(s, 'stall-gallery'); });
+    q = R.Quests.tracked()[0];
+    assert.equal(q.node, 'fair-gate', 'two stalls are enough: next is the match');
+    assert.ok(q.title.includes('puzzle stalls 2/2'), q.title);
+    R.State.update(s => { s.flags['story-battle-won'] = true; });
+    q = R.Quests.tracked()[0];
+    assert.equal(q.node, 'fair-rift'); assert.match(q.title, /Nut Stall/);
+    assert.equal(R.World.lockReason(R.State.get(), 'fair-rift'), null, 'the checklist and the lock agree');
+    R.State.update(s => { s.flags['seen:prologue.rift'] = true; });
+    assert.equal(R.Quests.list().find(q => q.id === 'story:fair-day'), undefined, 'gone after the rupture');
+});

@@ -79,7 +79,7 @@
         const n = node(id);
         if (n.requiresFlag && !state.flags[n.requiresFlag]) return n.lockText || 'Not yet.';
         if (n.requires && completedPuzzlesInChapter(state, n.chapter) < n.requires) {
-            return 'Win ' + n.requires + ' games here first (' + completedPuzzlesInChapter(state, n.chapter) + ' so far).';
+            return (n.requiresText || 'Win ' + n.requires + ' games here first') + ' (' + completedPuzzlesInChapter(state, n.chapter) + ' so far).';
         }
         const ch = Rift.data.chapters[n.chapter];
         if (ch && ch.comingSoon && n.type !== 'rift') return 'Opens in a later lesson.';

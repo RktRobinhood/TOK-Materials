@@ -129,9 +129,29 @@
     ];
     S['prologue.fair'] = [
         { s: 'granny', e: 'happy', t: 'There you are. Sit. Ninety years of cards. I have lost twice. Both times to myself.' },
-        { s: 'granny', t: 'Cards with me first. Then Sergeant Syllo\'s practice match. He shouts. It\'s how he says hello.' },
-        { s: 'granny', t: 'Then any two stalls. Then the final at the Nut Stall. The prize is the Thinking Trophy.' },
+        { s: 'granny', t: 'First, cards with me. A short lesson. Then tea, and I\'ll tell you the plan.' },
+    ];
+    // Granny's plan for the Fair day (#154): after her card lesson, or when the player explores
+    // first (Rift.Battles.fairPlan). One instruction per line: any two of the three puzzle stalls,
+    // a win in Syllo's practice match HERE (not his Gallery), then the Nut Stall. The map tracker
+    // keeps the same checklist. "Very heavy" is paid off in the finale; the nuts in the bark
+    // "The nuts are getting nervous".
+    S['prologue.fair.plan'] = [
+        { s: 'granny', t: 'Tea\'s poured. Now, your Fair day. One thing at a time, dear. My knees insist.' },
+        { s: 'granny', t: 'Don\'t look at that hair on the sky. I\'ll deal with it. Look at me.' },
+        { s: 'granny', t: 'Three puzzle stalls are open. Sequins\' Pattern Stall. Mirage\'s Witness Tent. Syllo\'s Gallery.' },
+        { s: 'granny', t: 'You choose. Win at any two puzzle stalls.' },
+        { s: 'avatar', e: 'happy', t: 'Only two? I could win all three. I always do.' },
+        { s: 'granny', e: 'happy', t: 'Two is plenty, dear. Play the third for fun, if you like.' },
+        { s: 'granny', t: 'One more thing. Not a stall. Syllo\'s practice card match. Here at my gate, not his Gallery.' },
+        { s: 'granny', t: 'It\'s only practice, but you must win it. No win, no final.' },
+        { s: 'granny', t: 'He shouts. It\'s how he says hello. You borrow a team, so you risk nothing.' },
+        { s: 'granny', t: 'Win my card lesson first, dear. Syllo won\'t play you without it.', when: '!card-lesson-won' },
+        { s: 'granny', t: 'So: two puzzle stall wins, and a win against Syllo. Any order. I wrote it in your Journal.' },
+        { s: 'granny', t: 'Then the final opens at the Nut Stall. The winner gets the Thinking Trophy. And a sack of nuts.' },
         { s: 'granny', e: 'happy', t: '"For the thinker who is always right." Very shiny. Very heavy.' },
+        { s: 'granny', t: 'Ninety years, and I\'ve never met that thinker.' },
+        { s: 'granny', t: 'The trophy is for you. The nuts are for me. Off you go.' },
     ];
     S['prologue.fair.again'] = [
         { when: 'finale-open', then: [

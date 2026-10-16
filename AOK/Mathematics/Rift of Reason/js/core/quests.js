@@ -38,6 +38,29 @@
         try { return !!(Rift.Battles && Rift.Battles.canChallenge(id)); } catch (e) { return false; }
     }
 
+    // Fair day (#154): from Granny's first words at the Fair Gate until the Nut Stall, one checklist
+    // names both keys to the final (any 2 of the 3 stalls, and Syllo's practice match) and points
+    // at the next useful place. It reads the same save facts as the Nut Stall lock.
+    const FAIR_STALLS = ['stall-pattern', 'stall-witness', 'stall-gallery'];
+    function fairDayEntry(s) {
+        if (s.chapter !== 'prologue' || !s.flags['seen:prologue.fair'] || s.flags['seen:prologue.rift']) return null;
+        const need = (nodes()['fair-rift'] || {}).requires || 2;
+        const wins = Math.min(need, Rift.World.completedPuzzlesInChapter(s, 'prologue'));
+        const match = !!s.flags['story-battle-won'];
+        let node = 'fair-rift', title = 'Fair day: the final is open at the Nut Stall';
+        if (wins < need) {
+            const left = FAIR_STALLS.filter(id => !s.map.completed.includes(id));
+            node = left.find(id => visited(s, id)) || left[0] || 'fair-gate';
+            title = 'Fair day: puzzle stalls ' + wins + '/' + need + ' (any of 3) · Syllo’s match at the Gate: ' + (match ? 'won' : 'not yet');
+        } else if (!match) {
+            node = 'fair-gate';
+            title = 'Fair day: puzzle stalls ' + need + '/' + need + ' · Syllo’s match at the Gate: not yet';
+        }
+        return { id: 'story:fair-day', kind: 'main', status: 'progress', title, node, chapter: 'prologue', locked: null,
+            text: 'Win any ' + need + ' of the 3 puzzle stalls (' + wins + ' so far). At the Fair Gate (not Syllo’s Gallery): Granny’s card lesson, then Syllo’s practice match ('
+                + (match ? 'won' : 'not yet') + '). Stalls and Gate: any order. Then the final opens at the Nut Stall.' };
+    }
+
     function list(state) {
         const s = state || Rift.State.get();
         if (!s || !s.map) return [];
@@ -48,6 +71,8 @@
                 title: 'Follow the crack', text: 'Find the Sundial\'s stolen shadow. Start at the Talking Signpost, then follow the Forest Road.',
                 node: 'signpost', chapter: 'ch1', locked: null });
         }
+        const fairDay = fairDayEntry(s);
+        if (fairDay) out.push(fairDay);
         s.map.revealed.forEach(id => {
             const n = nodes()[id];
             if (!n) return;
@@ -117,8 +142,9 @@
         const leavingFair = s.flags['seen:prologue.rift'] && !s.flags['entered:ch1']
             && !['ch2', 'ch3', 'ch4'].some(ch => s.flags['entered:' + ch]);
         const roadward = q => leavingFair && (q.node === 'signpost' || q.node === 'road-start');
+        const fairDay = q => q.id === 'story:fair-day';
         const at = q => q.node === s.map.at;
-        open.sort((a, b) => (homeward(b) - homeward(a)) || (roadward(b) - roadward(a)) || (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
+        open.sort((a, b) => (homeward(b) - homeward(a)) || (roadward(b) - roadward(a)) || (fairDay(b) - fairDay(a)) || (here(b) - here(a)) || (a.kind === b.kind ? 0 : a.kind === 'main' ? -1 : 1)
             || (at(b) - at(a))
             || (a.status === b.status ? 0 : a.status === 'progress' ? -1 : 1));
         return open.slice(0, max || 3);

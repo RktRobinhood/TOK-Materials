@@ -271,13 +271,25 @@
 
     const Battles = {
         introduction(back) {
-            Rift.UI.modal('A card minigame at the Fair',el('div.stack',null,[
+            // Cards only: Granny explains the rest of the Fair day herself (prologue.fair.plan, #154).
+            const planned=!!(Rift.State.get().flags||{})['seen:prologue.fair.plan'];
+            Rift.UI.modal('Granny’s card lesson',el('div.stack',null,[
                 Rift.Assets.img(Rift.data.speakers.granny.art,{className:'tutorial-face',label:'Granny Axiom'}),
-                el('p',{text:'Granny has a second game: creature cards. Puzzles help you collect creatures; cards let you challenge their keepers.'}),
-                el('p',{text:'To continue from the Fair: solve two stalls, then win Syllo’s safe practice card match. Meet him at the Fair Gate. You can explore the stalls first.'}),
-                el('p',{text:'Granny’s short lesson helps you prepare. Follow the gold pointer, then make your own rule choice. You borrow a team and risk nothing. The full lesson is in Collection.'}),
-                el('p.small',{text:'After you beat a station’s logic puzzle once, its keeper offers a card challenge when you return. The puzzle and the card match are separate.'}),
-            ]),[{label:'Explore first',onclick:()=>Rift.UI.toast('Next: solve two Fair stalls, then return to the Fair Gate for Syllo’s safe practice match. Win it to open the Nut Stall route.',6500)},{label:'Try the short card lesson',primary:true,onclick:()=>Battles.learn(back||'map')}]);
+                el('p',{text:'Granny Axiom: “Creature cards. My favourite game. I’ll show you one turn.”'}),
+                el('p',{text:'Follow the gold pointer. You borrow a team. You can’t lose anything.'}),
+                el('p.small',{text:planned?'Your Fair day plan is in the Journal. Syllo’s practice match opens after this lesson.':'Lesson or not, Granny explains your Fair day next.'}),
+            ]),[{label:'Explore first',onclick:()=>Battles.fairPlan(true)},{label:'Try the short card lesson',primary:true,onclick:()=>Battles.learn(back||'map')}]);
+        },
+
+        // Granny's patient plan for the Fair day (data/script/lesson1.js 'prologue.fair.plan', #154): once,
+        // before the rupture. Afterwards `remind` shows a short toast; the map tracker keeps the checklist either way.
+        fairPlan(remind) {
+            const f=Rift.State.get().flags||{};
+            if(f['seen:prologue.rift'])return Promise.resolve(false);
+            if(!f['seen:prologue.fair.plan']&&Rift.Dialogue&&Rift.Dialogue.play)
+                return Promise.resolve(Rift.Dialogue.play('prologue.fair.plan')).then(()=>true,()=>false);
+            if(remind)Rift.UI.toast('Fair day: win any 2 of the 3 puzzle stalls. Here at the Gate: Granny’s card lesson, then Syllo’s practice match. Then the Nut Stall.',9500);
+            return Promise.resolve(false);
         },
 
         rules(onClose) {
@@ -313,7 +325,7 @@
             Rift.Router.go('battle-lesson',{full:!!full,onEnd(won){
                 if(won)Rift.State.update(s=>{s.flags['card-lesson-won']=true;s.flags['card-rules-version']=RULES_VERSION;});
                 Rift.Router.replace(back||'map');
-                if(won&&back!=='collection'&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();
+                if(back!=='collection')Battles.fairPlan().then(()=>{if(won&&!Rift.State.get().flags['story-battle-won'])Battles.storyOffer();});
             }});
         },
 
@@ -326,8 +338,8 @@
             const host=Rift.data.speakers.syllo;
             Rift.UI.modal('Syllo’s practice match',el('div.stack',null,[
                 Rift.Assets.img(host.art,{className:'tutorial-face',label:host.name}),
-                el('p',{text:'Sergeant Syllo: “Practice match, recruit! Loaned team. No risk. Some shouting.”'}),
-                el('p.small',{text:'Win this safe match, then solve two stalls, to open the final at the Nut Stall. You get a loaned starter team. No cards or items are at risk.'}),
+                el('p',{text:'Sergeant Syllo: “Granny says you’re ready, recruit! Practice match. Loaned team. No risk. Some shouting.”'}),
+                el('p.small',{text:'This match is not a puzzle stall. Win it, and win any 2 of the 3 puzzle stalls, to open the final at the Nut Stall.'}),
             ]),[{label:'Later'},{label:'Learn first',onclick:()=>Battles.learn('map')},{label:'Challenge',primary:true,onclick:()=>Battles.story()}]);
         },
 
@@ -409,6 +421,10 @@
             // A trainer away on a side story (syllo-away, story 7 tier 4) is back only on the restored Fair.
             const f=Rift.State.get().flags||{};
             if(t&&t.speaker&&f[t.speaker+'-away']&&!f['finale-open'])return false;
+            // The card school's own trainer (Syllo) offers his stall challenge only after the required
+            // practice match at the Fair Gate, so the two are never confused (#154).
+            const school=Object.values(((Rift.data||{}).map||{}).nodes||{}).find(x=>x.cardSchool);
+            if(n&&!n.cardSchool&&school&&n.trainer===school.trainer&&!f['story-battle-won'])return false;
             return !!(n&&n.trainer&&(n.cardSchool||n.type==='battle'||Rift.State.get().map.completed.includes(n.challengeAfter||nodeId)));
         },
 

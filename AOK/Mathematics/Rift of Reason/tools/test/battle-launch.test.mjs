@@ -36,7 +36,7 @@ test('returning learners are offered the changed rules once without spending ite
 });
 test('story gate requires victory and a side challenge never completes its puzzle',()=>{
  const g=game();assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/Syllo/);
- g.state.flags['story-battle-won']=true;assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/Win 2/);
+ g.state.flags['story-battle-won']=true;assert.match(g.Rift.World.lockReason(g.state,'fair-rift'),/any 2 of the 3 puzzle stalls first \(0 so far\)/);
  g.state.map.completed.push('stall-pattern','stall-witness');assert.equal(g.Rift.World.lockReason(g.state,'fair-rift'),null);
  g.Rift.Battle.Ante.applyToSave=()=>{};
  g.Rift.Battles.trainer('stall-gallery','easy');assert.equal(g.routes.length,0,'unfinished station cannot be challenged directly');
@@ -120,6 +120,8 @@ test('a boss challenge shows its level and launches Expert with the built deck',
 });
 test('a trainer away on a side story cannot be challenged; the card school still offers Learn',()=>{
  const g=game();g.state.map.completed.push('stall-gallery');
+ assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),false,'the Gallery challenge waits for the required Gate match (#154)');
+ g.state.flags['story-battle-won']=true;
  assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true);assert.equal(g.Rift.Battles.canChallenge('fair-gate'),true);
  g.state.flags['syllo-away']=true;
  assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),false,'Syllo is away after his recruits');
@@ -130,16 +132,32 @@ test('a trainer away on a side story cannot be challenged; the card school still
  g.state.flags['finale-open']=true;assert.equal(g.Rift.Battles.canChallenge('stall-gallery'),true,'home on the restored Fair');
 });
 
-test('the Fair invitation explains the required match, and Explore first keeps the next action clear',()=>{
- const g=game();const toasts=[];g.Rift.UI.toast=text=>toasts.push(text);
+test('the Fair invitation teaches cards, then Granny explains the day once, and Explore first keeps the next action clear',async()=>{
+ const g=game();const toasts=[],played=[];g.Rift.UI.toast=text=>toasts.push(text);
+ g.Rift.Dialogue={has:()=>true,play:async key=>{played.push(key);g.state.flags['seen:'+key]=true;}};
  g.Rift.Battles.introduction('map');const m=g.modals.at(-1);
  const text=n=>typeof n==='string'?n:(n.textContent||'')+(n.children||[]).map(text).join(' ');
- assert.match(text(m.body),/solve two stalls, then win Syllo’s safe practice card match.*Fair Gate/);
- m.buttons.find(b=>b.label==='Explore first').onclick();
- assert.match(toasts.at(-1),/two Fair stalls.*Fair Gate.*Win it/);
+ assert.doesNotMatch(text(m.body),/two stalls/,'the card modal no longer repeats the Fair plan (#154)');
+ assert.match(text(m.body),/Lesson or not, Granny explains your Fair day next/);
+ await m.buttons.find(b=>b.label==='Explore first').onclick();
+ assert.deepEqual(played,['prologue.fair.plan'],'Explore first plays the plan');assert.equal(toasts.length,0);
  assert.equal(g.routes.length,0,'Explore keeps the player on the map');
+ await g.Rift.Battles.fairPlan(true);assert.equal(played.length,1,'the plan plays once');
+ assert.match(toasts.at(-1),/any 2 of the 3 puzzle stalls.*Granny’s card lesson, then Syllo’s practice match.*Nut Stall/);
  g.Rift.Battles.learnFull('collection');assert.equal(g.routes.at(-1).params.full,true,'the full reference is replayable');
  g.Rift.Battles.learn('collection');assert.equal(g.routes.at(-1).params.full,false,'the first lesson stays short by default');
+});
+
+test('after the map lesson, a fresh player hears the plan before Syllo offers the match',async()=>{
+ const g=game();const played=[];
+ g.Rift.Dialogue={has:()=>true,play:async key=>{played.push(key);g.state.flags['seen:'+key]=true;}};
+ g.Rift.Battles.learn('map');g.routes.at(-1).params.onEnd(true);
+ await new Promise(r=>setTimeout(r,0));
+ assert.deepEqual(played,['prologue.fair.plan']);assert.equal(g.modals.at(-1).title,'Syllo’s practice match');
+ const text=n=>typeof n==='string'?n:(n.textContent||'')+(n.children||[]).map(text).join(' ');
+ assert.match(text(g.modals.at(-1).body),/not a puzzle stall.*any 2 of the 3 puzzle stalls.*Nut Stall/);
+ g.state.flags['seen:prologue.rift']=true;g.state.flags['seen:prologue.fair.plan']=false;
+ assert.equal(await g.Rift.Battles.fairPlan(true),false,'never after the rupture');assert.equal(played.length,1);
 });
 
 test('Syllo’s loaned practice team always has an affordable opening creature after its draw',()=>{
