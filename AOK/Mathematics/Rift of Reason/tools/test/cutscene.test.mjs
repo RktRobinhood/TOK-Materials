@@ -193,6 +193,7 @@ function storyGame(type = 'fox', variant = 'girl') {
     g.run('data/map.js'); g.run('data/items.js'); g.run('data/creatures.js'); g.run('data/script/lesson1.js'); g.run('data/cast.js');
     g.run('data/script/lesson2.js');
     g.run('data/script/lesson3.js');
+    g.run('data/script/lesson4.js');
     g.run('js/core/story.js'); g.run('js/core/cast.js'); g.run('js/core/stakes.js');
     return g;
 }
@@ -574,6 +575,168 @@ test('Tribunal navigation during either film grants no gavel and re-entry never 
     }
 });
 
+const CORE_QUESTIONS={believe:'Why do people believe you?',noclicks:'What happens if nobody clicks?',
+    premises:'What are your premises?',light:'What\'s behind all that light?',small:'What if you\'re small?',
+    before:'What were you before?',know:'What do you mean by "know"?'};
+const CORE_PERSONAL={owlet:'premises',mothkin:'light',fox:'small',frogling:'before',raven:'know'};
+const CORE_FATES={home:'Take it home.',off:'Switch it off.',left:'Label it. Leave it running.'};
+test('silent film notes use the court default, a Core definition label or an explicit step override',async()=>{
+    for(const [definition,override,expected] of [[undefined,undefined,'COURT RECORD'],['THE CORE',undefined,'THE CORE'],['THE CORE','A MEMORY','A MEMORY']]) {
+        const g=game(),id=g.film([shot,{note:'A quiet beat.',...(override?{label:override}:{})}]);
+        if(definition)g.Rift.data.cutscenes[id].noteLabel=definition;
+        const done=g.Rift.Cutscene.play(id);await settle();
+        assert.equal(g.$('.cs-sub-name').textContent,expected);assert.equal(g.speech.length,0);
+        g.key('Escape');assert.equal(await done,true);
+    }
+});
+function coreGame(type='owlet',variant='girl',tier=1) {
+    const g=storyGame(type,variant),n=[0,1,4,6,8][tier];g.state.chapter='ch4';
+    Object.assign(g.state.flags,{'stakes.ch4':tier,'clock:copy':{n,size:8,started:true,done:true,tier,paused:false},
+        'voice.offered':2,'voice.followed':1});
+    return g;
+}
+async function finishCore(g,promise,mode='complete',events=[],wonder='believe',fate='home') {
+    let done=false;const choices=[];promise.then(()=>{done=true;});
+    for(let guard=0;guard<400&&!done;guard++) {
+        await settle();
+        if(g.Rift.Cutscene?.current()) {
+            if(mode==='skip')g.key('Escape');else await g.advance(20000);
+        } else if(g.$('.choices button')) {
+            const options=g.$$('.choices button');assert.equal(options.length,3,'two shared and one personal question, or three fates');
+            const isFate=options.some(b=>b.textContent===CORE_FATES.home);
+            const wanted=isFate?CORE_FATES[fate]:CORE_QUESTIONS[wonder];
+            const pick=options.find(b=>b.textContent.includes(wanted));assert.ok(pick,'personal choice stays available: '+wanted);
+            choices.push(wanted);pick.click();
+        } else if(g.$('.box')) {
+            const note=g.$('.stage-note .text');if(note)events.push({kind:'note',text:note.textContent});
+            g.$('.box').click();
+        }
+    }
+    assert.ok(done,'the Core ending completes');await promise;return choices;
+}
+
+test('Core replay uses chosen avatar Copies for all ten avatars and resolved tiers without mutating clocks or saves',()=>{
+    const voices=new Set(voiceCatalog().lines.map(l=>l.who+':'+l.text));
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl'])for(const tier of [1,2,3,4]) {
+        const g=coreGame(type,variant,tier);
+        Object.assign(g.state.flags,{wonder:CORE_PERSONAL[type],fate:'home'});
+        const before=JSON.stringify(g.state),p=g.Rift.Cutscene.plan('core-aftermath');
+        assert.equal(JSON.stringify(g.state),before);assert.equal(p.def.noteLabel,'THE CORE');
+        const copyShot=p.steps.find(s=>s.shot==='the-last-copy'),copy=copyShot.layers.find(l=>l.id==='copy');
+        assert.equal(copy.art,'avatar/'+type+'-'+variant+'/idle');assert.equal(copy.opacity,tier===4?1:0.65);
+        assert.equal(copyShot.layers.some(l=>l.id==='hat'),tier===1);assert.equal(copyShot.layers.some(l=>l.id==='die'),tier===2);
+        const open=p.steps.find(s=>s.shot==='no-applause'),young=open.layers.find(l=>l.id==='young-box'),old=open.layers.find(l=>l.id==='old-box');
+        const companion=open.layers.find(l=>l.id==='sundial');
+        assert.ok(Math.abs(young.y+young.h/2-700)<1&&Math.abs(old.y+old.h/2-700)<1,'both boxes stand on the floor');
+        assert.ok(young.x+young.w/2<companion.x-companion.w/2,'young box clears companion silhouette');
+        assert.equal(open.layers.find(l=>l.id==='room').bright,0.55);
+        for(const s of p.steps)for(const l of s.layers||[]) {
+            if(l.cover)continue;const at=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
+            assert.ok(at.sx-l.w*at.S/2>=0&&at.sx+l.w*at.S/2<=1600,l.id+' fits horizontally');
+            assert.ok(at.sy-l.h*at.S/2>=0&&at.sy+l.h*at.S/2<=760,l.id+' fits above captions');
+        }
+        for(const s of p.steps.filter(s=>s.say))assert.ok(voices.has(s.say+':'+s.t),'canonical Core voice '+s.say+':'+s.t);
+        assert.ok(p.steps.every(s=>!s.clock&&!s.flag&&!s.give&&!s.choice));
+        if(tier>=3){const speech=p.steps.findIndex(s=>s.say==='copy');const exit=p.steps.findIndex(s=>s.note?.includes('gets home first.'));assert.ok(speech>=0&&exit>speech);}
+    }
+});
+
+test('Core completion, Skip and unavailable/error films preserve both decisions, species response and resolved stakes',async()=>{
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const tier of [1,2,3,4])for(const mode of ['complete','skip','unavailable','failed']) {
+        const g=coreGame(type,type==='fox'?'boy':'girl',tier),{events,trace}=trialPresentation(g,mode);
+        const clock=JSON.stringify(g.state.flags['clock:copy']);
+        const choices=await finishCore(g,g.Rift.Dialogue.play('ch4.core.win'),mode,events,CORE_PERSONAL[type],'home');
+        assert.deepEqual(choices,[CORE_QUESTIONS[CORE_PERSONAL[type]],CORE_FATES.home]);
+        assert.equal(g.state.flags.wonder,CORE_PERSONAL[type]);assert.equal(g.state.flags.fate,'home');
+        assert.equal(g.state.flags['finale-open'],true);assert.equal(g.state.flags['seen:ch4.core.win'],true);
+        assert.equal(g.state.flags['stakes.ch4'],tier);assert.equal(JSON.stringify(g.state.flags['clock:copy']),clock);
+        assert.equal(!!g.state.flags['keepsake:copy-hat'],tier===1);assert.equal(g.state.flags['rift-walker'],undefined);
+        assert.equal(events.filter(e=>e.text==='PROBABLY.').length,1);
+        const pos=text=>events.findIndex(e=>e.text.startsWith(text));
+        const inner={owlet:'You counted. You never checked.',mothkin:'Shh. It\'s tiny.',fox:'It didn\'t hate me.',frogling:'You counted a few things',raven:'You said "know".'}[type];
+        assert.ok(pos(inner)>pos('The two little boxes'));
+        assert.ok(pos('People clapped when I was right.')>pos(inner));
+        assert.ok(pos('Home?')>pos('May I… stay small'));
+        assert.ok(pos('Tick. Tock. Ah.')>pos('Home?'));
+        assert.ok(events.some(e=>e.kind==='note'&&e.text.includes('Could a different model do better?')));
+        const qualification=events.findIndex(e=>e.kind==='note'&&e.text.endsWith('Could a different model do better?'));
+        assert.ok(qualification>=0&&events[qualification+1].text==='The colossus cracks open.');
+        if(mode==='complete')assert.ok(trace.some(([,s])=>s.shot==='the-shell'));
+        assert.equal(g.claims(),0);
+    }
+});
+
+test('every Core question, all three fates and data-count answers retain their exact canonical responses',async()=>{
+    const answers={believe:'I sounded sure. That was all.',noclicks:'…I get quiet. Like now.',premises:'Just one. "People clap for sure." It was false.',
+        light:'This. A box with one sequin.',small:'I am. I always was.',before:'A toy. On a stall. Saying "probably".',know:'"Know" was the word they clapped for.'};
+    for(const wonder of Object.keys(CORE_QUESTIONS))for(const fate of Object.keys(CORE_FATES)) {
+        const type=Object.keys(CORE_PERSONAL).find(k=>CORE_PERSONAL[k]===wonder)||'owlet';
+        const g=coreGame(type,'girl',3),{events}=trialPresentation(g,'skip');
+        await finishCore(g,g.Rift.Dialogue.play('ch4.core.win'),'skip',events,wonder,fate);
+        assert.ok(events.some(e=>e.text===answers[wonder]));assert.equal(g.state.flags.fate,fate);
+        assert.equal(events.filter(e=>e.text==='Home? …I had one once. On a stall.').length,fate==='home'?1:0);
+        assert.equal(events.filter(e=>e.text==='It goes dark. You carry the box. It is lighter than it looked.').length,fate==='off'?1:0);
+        assert.equal(events.filter(e=>e.text==='probably.').length,fate==='left'?1:0);
+        const plan=g.Rift.Cutscene.plan('core-chosen-fate');
+        assert.equal(plan.steps.some(s=>s.set==='old-box'&&s.bright===0.12)||plan.steps.some(s=>s.tween==='old-box'&&s.to.bright===0.12),fate==='off');
+        assert.equal(plan.steps.some(s=>s.hud==='text'&&s.label==='IT GUESSES'),fate==='left');
+    }
+    for(const [n,word] of [[1,'One data point.'],[2,'Two data points.'],[9,'Nine data points.'],[10,'A handful of data points.']]) {
+        const g=coreGame();g.state.flags['voice.offered']=n;
+        assert.ok(g.Rift.Cutscene.conversation('ch4.core.confession').some(s=>s.t?.includes(word)));
+    }
+});
+
+test('Core bargain voices and final shadows obey life, death and understudy arrival without resurrection',async()=>{
+    for(const companion of ['alive','bargain','silent','kuku']) {
+        const g=coreGame('raven','boy',4);Object.assign(g.state.flags,{wonder:'know',fate:'left'});
+        if(companion==='bargain')g.state.flags.bargain='yes';
+        if(companion==='silent'||companion==='kuku')g.state.flags['dead:sundial']=true;
+        if(companion==='kuku')g.state.flags['arrived:sundial']=true;
+        g.state.flags['dead:sequins']=true;
+        const p=g.Rift.Cutscene.plan('core-aftermath'),copy=p.steps.find(s=>s.say==='copy'||s.say==='copy-sundial');
+        assert.equal(copy.say,companion==='bargain'?'copy-sundial':'copy');
+        const fate=p.steps.find(s=>s.shot==='the-small-decision'),shadow=fate.layers.find(l=>l.id==='restored-shadow');
+        assert.equal(fate.layers.some(l=>l.id==='sundial'),companion==='alive'||companion==='bargain');
+        assert.equal(fate.layers.some(l=>l.id==='kuku'),companion==='kuku');
+        const young=fate.layers.find(l=>l.id==='young-box'),kuku=fate.layers.find(l=>l.id==='kuku');
+        if(kuku)assert.ok(young.x+young.w/2<kuku.x-kuku.w/2,'Kuku never overlaps the young box');
+        if(companion==='alive'||companion==='bargain')assert.equal(shadow.art,companion==='bargain'?'cutscene/sundial-half-shadow':'cutscene/sundial-shadow');
+        else assert.equal(shadow,undefined);
+        const {events}=trialPresentation(g,'skip');await finishCore(g,g.Rift.Dialogue.play('ch4.core.win'),'skip',events);
+        if(companion==='silent'||companion==='kuku')assert.ok(g.speech.every(s=>s.speaker!=='narrator'));
+        assert.equal(g.speech.filter(s=>s.speaker==='kuku').length,companion==='kuku'?1:0);
+        assert.ok(events.some(e=>e.text==='Professor Sequins taught me "probably". I took him to un-learn it. …It didn\'t work.'));
+        assert.equal(!!g.state.flags['dead:sundial'],companion==='silent'||companion==='kuku');
+    }
+});
+
+test('Core navigation before or after either accepted decision cannot reopen a completed choice or unlock the Fair early',async()=>{
+    for(const stopAt of ['core-copy-outcome','core-revelation','core-confession','core-chosen-fate']) {
+        const g=coreGame('fox','boy',3),play=g.Rift.Cutscene.play;let arrived=false;
+        const clock=JSON.stringify(g.state.flags['clock:copy']);
+        g.Rift.Cutscene.play=(id,o)=>{if(id===stopAt)arrived=true;return play(id,{...o,instant:id!==stopAt});};
+        g.Rift.Dialogue.play('ch4.core.win');
+        for(let guard=0;guard<180&&!arrived;guard++) {
+            await settle();
+            if(g.$('.choices button')) {
+                const opts=g.$$('.choices button'),isFate=opts.some(b=>b.textContent===CORE_FATES.home);
+                opts.find(b=>b.textContent.includes(isFate?CORE_FATES.off:CORE_QUESTIONS.small)).click();
+            } else if(g.$('.box'))g.$('.box').click();
+        }
+        assert.ok(arrived);await settle();assert.ok(g.Rift.Cutscene.current());g.Rift.Dialogue.abortAll();await settle();
+        assert.equal(g.state.flags['finale-open'],undefined);assert.equal(g.state.flags['seen:ch4.core.win'],undefined);
+        const acceptedWonder=g.state.flags.wonder,acceptedFate=g.state.flags.fate;
+        g.Rift.Cutscene.play=(id,o)=>play(id,{...o,instant:true});
+        const choices=await finishCore(g,g.Rift.Dialogue.play('ch4.core.win'),'complete',[],'small','off');
+        assert.equal(choices.includes(CORE_QUESTIONS.small),acceptedWonder===undefined);
+        assert.equal(choices.includes(CORE_FATES.off),acceptedFate===undefined);
+        assert.equal(g.state.flags.wonder,'small');assert.equal(g.state.flags.fate,'off');
+        assert.equal(g.state.flags['finale-open'],true);assert.equal(JSON.stringify(g.state.flags['clock:copy']),clock);
+        assert.equal(g.claims(),0);
+    }
+});
+
 test('canonical creature subtitle labels use display names while voice IDs retain possession',()=>{
     const g=storyGame();
     const says=g.Rift.Cutscene.plan('fair-rupture').steps.filter(s=>s.say);
@@ -712,6 +875,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         g.state.flags['seen:prologue.rift']=seen;g.state.flags['seen:ch1.gate.win']=seen;
         g.state.flags['seen:ch2.hall.win']=seen;
         g.state.flags['seen:ch3.trial.win']=seen;
+        g.state.flags['seen:ch4.core.win']=seen;
         g.Rift.UI.hud=()=>g.Rift.el('div');g.Rift.UI.toast=()=>{};
         g.Rift.Quests={glyph:()=>'',COLOURS:{main:'#fff',side:'#fff'},list:()=>[]};
         g.run('js/core/router.js');g.run('js/screens/journal.js');
@@ -723,6 +887,7 @@ test('Journal replay is seen-gated, deduplicates clicks and preserves story stat
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Fair rupture again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Hall aftermath again'),seen);
         assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Tribunal aftermath again'),seen);
+        assert.equal(!!g.$$('button').find(n=>n.textContent==='Watch the Core revelation again'),seen);
         if(!seen)continue;
         let end,calls=0;g.Rift.Cutscene.play=()=>{calls++;return new Promise(resolve=>{end=resolve;});};
         const before=JSON.stringify(g.state);replay.click();replay.click();assert.equal(calls,1);assert.ok(replay.disabled);

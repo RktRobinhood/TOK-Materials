@@ -1,0 +1,24 @@
+[
+  {
+    "file": "colossus-shell-153.png",
+    "width": 1659,
+    "height": 948,
+    "bounds": {
+      "x": 110,
+      "y": 85,
+      "w": 1439,
+      "h": 783
+    }
+  },
+  {
+    "file": "sundial-half-shadow-153.png",
+    "width": 1737,
+    "height": 906,
+    "bounds": {
+      "x": 80,
+      "y": 261,
+      "w": 1465,
+      "h": 607
+    }
+  }
+]

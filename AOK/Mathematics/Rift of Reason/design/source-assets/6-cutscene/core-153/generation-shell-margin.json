@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "colossus-shell-153.png",
+    "prompt": "Make a precise safety-margin edit to this exact transparent two-halves Algorithm robot sheet. Keep both matching halves, every screen icon, pose, split edge, proportions and palette exactly as shown. Zoom the entire artwork out about 12 percent within the same canvas, adding generous transparent space on EVERY outer side. Reconstruct any tiny clipped outer contour at the extreme RIGHT fingertips so the whole right hand and complete dark outline sit comfortably inside the image. No hand, aerial, foot, cable or other extremity touches any canvas edge. Do not add anything else or change the design. Keep a clear gap between matching halves; identical top and ground levels. True alpha transparent background.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/6-cutscene/core-153/colossus-shell-first-153.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-e5fce4e9-af2e-44a6-987a-4066d1d6207c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "note": "Selected margin correction; first source retained as colossus-shell-first-153.png excluded from build. Original first-generation record describes first source."
+  }
+}

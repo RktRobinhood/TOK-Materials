@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "sundial-half-shadow-153.png",
+    "prompt": "Edit the supplied isolated Sundial shadow into its story's HALF-RESTORED SHADOW. Preserve the dark inky pool with muted cyan edge, perspective and painterly texture. One contiguous broad base at lower left narrows diagonally towards upper right, but stops HALFWAY along its original long pointed reach at a clearly incomplete blunt irregular edge. This is one visibly incomplete shadow, not a scaled-down complete shadow: no long intact tip, no second shadow, no sundial or physical creature. Give the base its original generous organic width; do not compress or squash it. Clean complete isolated game prop comfortably inside generous margins. True alpha transparent background, no floor, no environment, no text, no glow cloud or disconnected flecks. Reference1 existing full shadow is the edit target, reference2 approved styleboard supplies texture/style. Keep it sombre enough to read under the warm restored Fair.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cutscene/sundial-shadow.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-7415ec6a-5268-421a-abc8-7390ddcc2066.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "note": "Incomplete broad-based shadow with visibly broken blunt reach; independent raster rather than cropping or compressing complete shadow."
+  }
+}

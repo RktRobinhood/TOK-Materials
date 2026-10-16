@@ -1,0 +1,189 @@
+{
+  "target": "2026-10-16 morning, Europe/Copenhagen",
+  "pipeline": "Existing Google catalogue: node tools/voices.mjs --render --script lesson4 (scheduled capped run; do not duplicate automation or bypass daily limits).",
+  "source": "Canonical data/script/lesson4.js; 26 existing lines lack MP3s. Browser speech and subtitles remain available.",
+  "lines": [
+    {
+      "id": "copy-1yy1qpt",
+      "who": "copy",
+      "text": "Bye! I'll get home first. Nearly finished. Close enough.",
+      "say": "Bye! I'll get home first. Nearly finished. Close enough.",
+      "where": "ch4.core.copy-outcome"
+    },
+    {
+      "id": "copy-5ujjw",
+      "who": "copy",
+      "text": "Finished. I'll go home now. They won't notice.",
+      "say": "Finished. I'll go home now. They won't notice.",
+      "where": "ch4.core.copy-outcome"
+    },
+    {
+      "id": "core-1ctpgch",
+      "who": "core",
+      "text": "I sounded sure. That was all.",
+      "say": "I sounded sure. That was all.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-fn9fxn",
+      "who": "core",
+      "text": "…I get quiet. Like now.",
+      "say": "…I get quiet. Like now.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-6hi1o6",
+      "who": "core",
+      "text": "Just one. \"People clap for sure.\" It was false.",
+      "say": "Just one. \"People clap for sure.\" It was false.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-1ecevvy",
+      "who": "core",
+      "text": "This. A box with one sequin.",
+      "say": "This. A box with one sequin.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-7hcb4p",
+      "who": "core",
+      "text": "I am. I always was.",
+      "say": "I am. I always was.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-ycik8y",
+      "who": "core",
+      "text": "A toy. On a stall. Saying \"probably\".",
+      "say": "A toy. On a stall. Saying \"probably\".",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-c5k601",
+      "who": "core",
+      "text": "\"Know\" was the word they clapped for.",
+      "say": "\"Know\" was the word they clapped for.",
+      "where": "ch4.core.answer"
+    },
+    {
+      "id": "core-1a1lhfd",
+      "who": "core",
+      "text": "People clapped when I was right. Nobody claps for \"probably\". So I stopped saying it.",
+      "say": "People clapped when I was right. Nobody claps for \"probably\". So I stopped saying it.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1y1b9qe",
+      "who": "core",
+      "text": "Professor Sequins taught me \"probably\". So I tried to take him away.",
+      "say": "Professor Sequins taught me \"probably\". So I tried to take him away.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1qi52g",
+      "who": "core",
+      "text": "Professor Sequins taught me \"probably\". I took him to un-learn it. …It didn't work.",
+      "say": "Professor Sequins taught me \"probably\". I took him to un-learn it.…It didn't work.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1w16gs3",
+      "who": "core",
+      "text": "I never knew you. One data point. I still called it knowing.",
+      "say": "I never knew you. One data point. I still called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-18ieec0",
+      "who": "core",
+      "text": "I never knew you. Two data points. I called it knowing.",
+      "say": "I never knew you. Two data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1d4ofsc",
+      "who": "core",
+      "text": "I never knew you. Three data points. I called it knowing.",
+      "say": "I never knew you. Three data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-j55bv1",
+      "who": "core",
+      "text": "I never knew you. Four data points. I called it knowing.",
+      "say": "I never knew you. Four data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-xd9vtp",
+      "who": "core",
+      "text": "I never knew you. Five data points. I called it knowing.",
+      "say": "I never knew you. Five data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1vddf9x",
+      "who": "core",
+      "text": "I never knew you. Six data points. I called it knowing.",
+      "say": "I never knew you. Six data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-jnfnj0",
+      "who": "core",
+      "text": "I never knew you. Seven data points. I called it knowing.",
+      "say": "I never knew you. Seven data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-ank5gr",
+      "who": "core",
+      "text": "I never knew you. Eight data points. I called it knowing.",
+      "say": "I never knew you. Eight data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-fy913o",
+      "who": "core",
+      "text": "I never knew you. Nine data points. I called it knowing.",
+      "say": "I never knew you. Nine data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1mj2zds",
+      "who": "core",
+      "text": "I never knew you. A handful of data points. I called it knowing.",
+      "say": "I never knew you. A handful of data points. I called it knowing.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-gqxsnk",
+      "who": "core",
+      "text": "…recalculating.",
+      "say": "…recalculating.",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-4e5utx",
+      "who": "core",
+      "text": "May I… stay small for a while?",
+      "say": "May I… stay small for a while?",
+      "where": "ch4.core.confession"
+    },
+    {
+      "id": "core-1jri7u7",
+      "who": "core",
+      "text": "Home? …I had one once. On a stall.",
+      "say": "Home?…I had one once. On a stall.",
+      "where": "ch4.core.fate-action"
+    },
+    {
+      "id": "core-16xi1b6",
+      "who": "core",
+      "text": "probably.",
+      "say": "Probably.",
+      "where": "ch4.core.fate-action"
+    }
+  ]
+}

@@ -462,6 +462,9 @@
         "trial-juror-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/juror-one",{"id":"cutscene/court-sign","class":"prop"}]},
         "trial-pane-153.png": {"type":"single","class":"prop","id":"cutscene/exhibit-glass"},
         "trial-fin-tie-153.png": {"type":"single","class":"sprite","id":"cutscene/fin-tie"},
-        "trial-crowd-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/court-juror-a","cutscene/court-juror-b"]}
+        "trial-crowd-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/court-juror-a","cutscene/court-juror-b"]},
+        "colossus-shell-153.png": {"type":"islands","minArea":1500,"class":"sprite","ids":["cutscene/colossus-shell-left","cutscene/colossus-shell-right"]},
+        "colossus-shell-first-153.png": {"type":"skip"},
+        "sundial-half-shadow-153.png": {"type":"single","class":"prop","id":"cutscene/sundial-half-shadow"}
     }
 }

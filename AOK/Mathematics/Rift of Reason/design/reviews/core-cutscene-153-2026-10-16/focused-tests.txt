@@ -1,0 +1,93 @@
+[Rift] cutscene Error: test
+    at Object.play (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:88:113)
+    at cutsceneStep (js/ui/dialogue.js:292:46)
+    at run (js/ui/dialogue.js:370:43)
+    at Object.play (js/ui/dialogue.js:422:19)
+    at TestContext.<anonymous> (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:89:31)
+    at async Test.run (node:internal/test_runner/test:1125:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)
+[Rift] cutscene frame Error: test renderer failure
+    at g.Rift.clamp (file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:103:29)
+    at project (js/ui/cutscene.js:198:30)
+    at js/ui/cutscene.js:367:28
+    at Array.forEach (<anonymous>)
+    at js/ui/cutscene.js:366:25
+    at Array.forEach (<anonymous>)
+    at Player.render (js/ui/cutscene.js:364:20)
+    at frame (js/ui/cutscene.js:337:22)
+    at file:///D:/OneDrive%20-%20Ikast/OneDrive%20-%20Ikast-Brande%20Gymnasium/AI%20Projects/TOK%20Materials/AOK/Mathematics/Rift%20of%20Reason/tools/test/cutscene.test.mjs:137:75
+    at Array.forEach (<anonymous>)
+[Rift] cutscene cold-open is missing art: scene/bedroom
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene art did not load; showing the fallback
+[Rift] cutscene Error: Unknown cutscene step: {"unrecognised":true}
+    at Player.exec (js/ui/cutscene.js:548:15)
+    at Player.run (js/ui/cutscene.js:513:34)
+    at js/ui/cutscene.js:782:25
+✔ completed greeting lines are not repeated; Skip and failure supply only unheard lines (344.282ms)
+✔ a line interrupted before its voice/reading beat finishes is not reported as spoken (48.3781ms)
+✔ new and older seen openings greet once on the regular screen, after the film closes (136.694ms)
+✔ the real router starts the opening once, Skip continues to wake, navigation does not (93.0006ms)
+✔ dialogue falls back when film is absent, art fails, or the player rejects (39.4827ms)
+✔ system reduced motion selects the gentler cut without changing saved settings (12.989ms)
+✔ a render failure after playback starts releases the overlay and returns fallback (9.7862ms)
+✔ silent film notes allow reading and never request a narrator recording (26.4824ms)
+✔ painted sign lettering travels and fades with its physical placard (11.9559ms)
+✔ Skip preserves an interrupted silent note and does not repeat a completed one (1039.6486ms)
+✔ the Fair movie uses canonical recorded keys for all ten avatars, remains in frame and changes no save (2690.9356ms)
+✔ complete, skipped and unavailable Fair films preserve the evening decision, gifts and next destination exactly once (302.437ms)
+✔ an interrupted named conversation resumes only unheard lines; navigation never commits its ending (62.5125ms)
+✔ Gate films show the actual outcome, take Nudge away before narration and preserve rewards on skip/failure (2058.064ms)
+✔ Gate navigation abandonment grants no reward and re-entry grants only one (171.3623ms)
+✔ the Hall replay uses only canonical words and stages each tier without changing story state (2089.6332ms)
+✔ Hall complete, Skip and failed films preserve decisions, outcomes, inner voices and one earned card (4707.5216ms)
+✔ one wrong Hall sentence still advances danger and changes Granny from dry to damp (49.5485ms)
+✔ Hall navigation aborts each passage without granting the card; accepted paradox and danger survive re-entry (161.2505ms)
+✔ Tribunal replay is save-free for all ten avatars, frames whole figures and voices no silent court record (921.1574ms)
+✔ Tribunal films preserve the different living/dead event order and reward across completion, Skip and failure (1291.7332ms)
+✔ Tribunal bargain, refusal and no-death brink preserve the real outcome without inventing pocket pieces (279.5672ms)
+✔ a wrong final evidence pick can still kill the Sundial before the film and retains the correct late order (36.2287ms)
+✔ Tribunal navigation during either film grants no gavel and re-entry never repeats accepted evidence or danger (100.1294ms)
+✔ silent film notes use the court default, a Core definition label or an explicit step override (31.2802ms)
+✔ Core replay uses chosen avatar Copies for all ten avatars and resolved tiers without mutating clocks or saves (938.3501ms)
+✔ Core completion, Skip and unavailable/error films preserve both decisions, species response and resolved stakes (4839.3508ms)
+✔ every Core question, all three fates and data-count answers retain their exact canonical responses (1317.5009ms)
+✔ Core bargain voices and final shadows obey life, death and understudy arrival without resurrection (235.6905ms)
+✔ Core navigation before or after either accepted decision cannot reopen a completed choice or unlock the Fair early (196.802ms)
+✔ canonical creature subtitle labels use display names while voice IDs retain possession (17.0917ms)
+✔ named cutscene dialogue handles understudy words without repetition or unearned actors (18.3631ms)
+✔ each chosen nickname reaches the scan and subtitles while the recorded voice key stays reusable (68.3215ms)
+✔ the observation glass opens continuously, then the film fades to reveal the regular screen (10.4915ms)
+✔ all ten avatars complete the real timeline, speak the exact recorded keys and never change the save (216.08ms)
+✔ Calm removes every flash/sweep/glitch and preserves the quiet opening hold (14.3236ms)
+✔ a say step waits for the voice as well as the subtitle reading time (10.0662ms)
+✔ Skip button, Escape and hold finish once and cancel timers, frames, input and voice (32.52ms)
+✔ missing and broken art return false; preload is also immediately skippable (56.4371ms)
+✔ initial screen mounted notification does not skip the film; explicit navigation stop cleans it (9.5071ms)
+✔ an invalid timeline falls back cleanly and the player can start another film (74.4496ms)
+✔ Journal replay is seen-gated, deduplicates clicks and preserves story state (152.2422ms)
+✔ generate: well-formed data for every difficulty (10.1288ms)
+✔ determinism: same seed, same puzzle and same predictions (37.213ms)
+✔ the model matches an independent re-implementation on random and patterned play (549.1787ms)
+✔ confidence is the displayed ratio (raw, or add-one smoothed at difficulty 3) (1.0553ms)
+✔ ties back off to shorter contexts, then to the seeded favourite (0.7829ms)
+✔ solve() passes check for every difficulty and seed (54.3407ms)
+✔ a naive alternating pattern loses to the bigram model (10.1832ms)
+✔ check() never trusts reported results (52.7139ms)
+✔ the warm-up does not count; a later block can still win (0.9376ms)
+✔ hints, why and text (1.0504ms)
+✔ prediction scopes its explanation to its actual evidence and confidence rule (0.5517ms)
+✔ core choices are neutral, with the copied starting weights identified as an assumption (2.6478ms)
+✔ only a completed local reflection marks reflectionComplete for the encounter (1.059ms)
+✔ generated Gallery themes use matching neutral inner leads and pattern echoes retain the original line (136.8918ms)
+✔ variant leads invite checking the active board without imposing a number or result (2.6033ms)
+✔ the ending recognises missing evidence without claiming questions cannot be predicted (3.6412ms)
+✔ combat colour explanations identify the hierarchy as a game rule (146.8011ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25937.583

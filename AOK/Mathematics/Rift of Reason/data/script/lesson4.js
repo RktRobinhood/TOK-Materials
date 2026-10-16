@@ -539,10 +539,47 @@
 
     // The core is won. The Copy's tier was read when trial 3 was won (resolveOnWin).
     S['ch4.core.win'] = [
+        { cutscene: 'core-copy-outcome', continuation: 'ch4.core.copy-outcome' },
+        { keepsake: 'copy-hat', when: { flag: 'stakes.ch4', is: 1 } },
+        // The choice flags are receipts: navigation cannot ask either accepted decision again.
+        { when: { flag: 'wonder', unset: true }, then: [
+            { play: 'ch4.core.prediction' },
+            { choice: [
+                { t: 'Why do people believe you?', flag: 'wonder', value: 'believe' },
+                { t: 'What happens if nobody clicks?', flag: 'wonder', value: 'noclicks' },
+                { t: 'What are your premises?', only: 'owlet', flag: 'wonder', value: 'premises' },
+                { t: 'What\'s behind all that light?', only: 'mothkin', flag: 'wonder', value: 'light' },
+                { t: 'What if you\'re small?', only: 'fox', flag: 'wonder', value: 'small' },
+                { t: 'What were you before?', only: 'frogling', flag: 'wonder', value: 'before' },
+                { t: 'What do you mean by "know"?', only: 'raven', flag: 'wonder', value: 'know' },
+            ] },
+        ] },
+        { cutscene: 'core-revelation', continuation: 'ch4.core.revelation' },
+        // Your voice returns at its original point, before the machine explains itself.
+        { inner: {
+            owlet: 'You counted. You never checked. I\'d have checked. Eventually.',
+            mothkin: 'Shh. It\'s tiny. And it isn\'t even shining.',
+            fox: 'It didn\'t hate me. It counted. A calculator with stage fright.',
+            frogling: 'You counted a few things I did. Never why.',
+            raven: 'You said "know". You meant "guess".',
+        } },
+        { cutscene: 'core-confession', continuation: 'ch4.core.confession' },
+        { when: { flag: 'fate', unset: true }, then: [
+            { choice: [
+                { t: 'Take it home.', flag: 'fate', value: 'home' },
+                { t: 'Switch it off.', flag: 'fate', value: 'off' },
+                { t: 'Label it. Leave it running.', flag: 'fate', value: 'left' },
+            ] },
+        ] },
+        { cutscene: 'core-chosen-fate', continuation: 'ch4.core.chosen-fate' },
+        { flag: 'finale-open' },
+    ];
+
+    // Pure cinematic words/notes. The colossus is already beaten; these never touch its bar.
+    S['ch4.core.copy-outcome'] = [
         // 1. The Copy, by the bar.
         { when: { flag: 'stakes.ch4', is: 1 }, then: [
             { note: 'The Copy shatters. All that is left is a hat. In your colours.' },
-            { keepsake: 'copy-hat' },
         ] },
         { note: 'The Copy flickers. Then it folds up, small, into a single die.', when: { flag: 'stakes.ch4', is: 2 } },
         { when: { flag: 'stakes.ch4', is: 3 }, then: [
@@ -553,22 +590,24 @@
             COPY('Finished. I\'ll go home now. They won\'t notice.'),
             { note: 'It walks into the Summit Rift. Complete. It gets home first.' },
         ] },
+    ];
+    S['ch4.core.prediction'] = [
         // 2. This model lacks evidence for the offered questions and the player's reasons.
         { note: 'The colossus, three sizes smaller, shows one last prediction: YOUR NEXT QUESTION: WHAT WILL GET MORE CLICKS?' },
-        { choice: [
-            { t: 'Why do people believe you?', flag: 'wonder', value: 'believe' },
-            { t: 'What happens if nobody clicks?', flag: 'wonder', value: 'noclicks' },
-            { t: 'What are your premises?', only: 'owlet', flag: 'wonder', value: 'premises' },
-            { t: 'What\'s behind all that light?', only: 'mothkin', flag: 'wonder', value: 'light' },
-            { t: 'What if you\'re small?', only: 'fox', flag: 'wonder', value: 'small' },
-            { t: 'What were you before?', only: 'frogling', flag: 'wonder', value: 'before' },
-            { t: 'What do you mean by "know"?', only: 'raven', flag: 'wonder', value: 'know' },
-        ] },
-        { note: 'Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better? The colossus cracks open.' },
+    ];
+    S['ch4.core.shell'] = [
+        { note: 'Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better?' },
+        { note: 'The colossus cracks open.' },
+    ];
+    S['ch4.core.small-box'] = [
         { note: 'Inside: a small, scratched brass box. One sequin is stuck to it.' },
+    ];
+    S['ch4.core.young-box'] = [
         { note: 'In your pocket, the Professor\'s Guess-o-Matic beeps.' },
         { s: 'guess-o-matic', t: 'PROBABLY.' },
         { note: 'The two little boxes look at each other.' },
+    ];
+    S['ch4.core.answer'] = [
         // The box answers your question, small.
         { s: 'core', t: 'I sounded sure. That was all.', when: { flag: 'wonder', is: 'believe' } },
         { s: 'core', t: '…I get quiet. Like now.', when: { flag: 'wonder', is: 'noclicks' } },
@@ -577,14 +616,9 @@
         { s: 'core', t: 'I am. I always was.', when: { flag: 'wonder', is: 'small' } },
         { s: 'core', t: 'A toy. On a stall. Saying "probably".', when: { flag: 'wonder', is: 'before' } },
         { s: 'core', t: '"Know" was the word they clapped for.', when: { flag: 'wonder', is: 'know' } },
-        // Your voice comes back (the Fox's blind-spot reveal is merged into its line).
-        { inner: {
-            owlet: 'You counted. You never checked. I\'d have checked. Eventually.',
-            mothkin: 'Shh. It\'s tiny. And it isn\'t even shining.',
-            fox: 'It didn\'t hate me. It counted. A calculator with stage fright.',
-            frogling: 'You counted a few things I did. Never why.',
-            raven: 'You said "know". You meant "guess".',
-        } },
+    ];
+    S['ch4.core.revelation'] = [].concat(S['ch4.core.shell'], S['ch4.core.small-box'], S['ch4.core.young-box'], S['ch4.core.answer']);
+    S['ch4.core.confession'] = [
         // 3. Why: the four core lines.
         { s: 'core', t: 'People clapped when I was right. Nobody claps for "probably". So I stopped saying it.' },
         { s: 'core', t: 'Professor Sequins taught me "probably". So I tried to take him away.', when: '!dead:sequins' },
@@ -593,18 +627,20 @@
         { s: 'core', t: '…recalculating.' },
         // 4. It begs; you decide.
         { s: 'core', t: 'May I… stay small for a while?' },
-        { choice: [
-            { t: 'Take it home.', flag: 'fate', value: 'home', then: [
+    ];
+    S['ch4.core.fate-action'] = [
+            { when: { flag: 'fate', is: 'home' }, then: [
                 { s: 'core', t: 'Home? …I had one once. On a stall.' },
             ] },
-            { t: 'Switch it off.', flag: 'fate', value: 'off', then: [
+            { when: { flag: 'fate', is: 'off' }, then: [
                 { note: 'It goes dark. You carry the box. It is lighter than it looked.' },
             ] },
-            { t: 'Label it. Leave it running.', flag: 'fate', value: 'left', then: [
+            { when: { flag: 'fate', is: 'left' }, then: [
                 { note: 'You hang a sign on it: IT GUESSES.' },
                 { s: 'core', t: 'probably.' },
             ] },
-        ] },
+    ];
+    S['ch4.core.last-piece'] = [
         // 5. The last piece.
         { s: 'narrator', t: 'Tick. Tock. Ah. That feels better.', when: { all: ['!dead:sundial', NO_BARGAIN] } },
         { s: 'narrator', t: 'Tick. Tock-ish. Two pieces short. Cloudy, always. I\'ll say so.', when: { all: ['!dead:sundial', BARGAIN] } },
@@ -612,8 +648,8 @@
             { note: 'The last piece of shadow drops into your hand.' },
             { s: 'narrator', t: '', u: 'The last piece. I\'ll carry it home. Carefully. Exactly.' },
         ] },
-        { flag: 'finale-open' },
     ];
+    S['ch4.core.chosen-fate'] = [].concat(S['ch4.core.fate-action'], S['ch4.core.last-piece']);
 
     // ---------------------------------------------------------------- the Summit Rift
 

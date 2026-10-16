@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-16",
+  "issue": 153,
+  "tool": "Built-in image_gen",
+  "record": {
+    "file": "colossus-shell-153.png",
+    "prompt": "Edit the supplied full-body Algorithm screen-colossus into TWO SEPARATE MATCHING HALVES of that EXACT ONE ROBOT for a Rift of Reason reveal animation. LEFT half on left, RIGHT half on right, with a clear transparent gap down the vertical middle. Together they reconstruct the original complete pose and silhouette: matching pink/purple/cyan notification screens, one massive arm and hand and one leg/foot each, half the central eye-screen each. Make the split run vertically through the body's centre, with dark inactive internal cable edges exposed; no new creature or object inside. This is an empty theatrical robot shell opening like two doors, not a violent injury. Preserve whole hands, fingertips, aerials, speakers, screen corners and feet inside generous canvas margins; no crop. Keep the proportions, original wide squat stance and height of the reference, not two thin tall robots. Align both halves at identical top and ground levels; they need to slide apart sideways to reveal a tiny brass box below. No loose debris, extra islands, explosions, flashing, text, readable labels, floor or environment. True ALPHA transparent background. Reference1 exact character/design, styleboard2 and shippedcat3 texture/cutehorror palette. Two independent whole fragments, broad clear gap.",
+    "references": [
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/algorithm-colossus.webp",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+      "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+    ],
+    "output": "Generated images are saved to C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e as C:\\Users\\BlackBox\\.codex\\generated_images\\01a1400b-1dac-7fa1-866b-affa82d9f51e\\exec-d3e8eb50-b1c7-4e6c-b773-94d5f46d871a.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "note": "Matching shell halves; whole limbs retained. Separate sprites open to reveal existing brass box."
+  }
+}

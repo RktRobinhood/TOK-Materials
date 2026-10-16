@@ -468,4 +468,138 @@
             C['tribunal-empty-gallery'].steps.filter(s => !s.end).map(s => Object.assign({}, s, { when: lost })),
             [{ end: true, fade: 1500, reveal: true }]),
     };
+    // The Core makes the machine small. Decisions remain in lesson4.js between these films.
+    const coreRoom = { id: 'room', art: 'scene/core-chamber', x: 800, y: 450, w: 1600, h: 900, cover: true, bright: 0.8 };
+    const coreHero = { id: 'hero', art: '{avatar}/idle', x: 1320, bottom: 730, w: 240, wFor: { mothkin: 265 } };
+    const coreOld = { id: 'old-box', art: 'npc/algorithm/core', x: 760, bottom: 700, w: 160 };
+    const coreYoung = { id: 'young-box', art: 'ui/guess-o-matic', x: 950, bottom: 700, w: 130 };
+    const shellLeft = { id: 'shell-left', art: 'cutscene/colossus-shell-left', x: 605, bottom: 730, w: 310 };
+    const shellRight = { id: 'shell-right', art: 'cutscene/colossus-shell-right', x: 904.5, bottom: 730, w: 289 };
+    const coreCompanions = [
+        { id: 'sundial', art: 'npc/sundial/idle', x: 1110, bottom: 730, w: 100, when: '!dead:sundial' },
+        { id: 'kuku', art: 'npc/kuku/idle', x: 1110, bottom: 730, w: 140, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+    ];
+    const coreOpenLayers = [Object.assign({}, coreRoom, { bright: 0.55 }),
+        Object.assign({}, shellLeft, { x: 380, bright: 0.22 }),
+        Object.assign({}, shellRight, { x: 1100, bright: 0.22 }),
+        coreOld, coreYoung, ...coreCompanions, coreHero];
+    const coreQuestionLabels = [
+        ['believe', 'Why do people believe you?'], ['noclicks', 'What happens if nobody clicks?'],
+        ['premises', 'What are your premises?'], ['light', 'What\'s behind all that light?'],
+        ['small', 'What if you\'re small?'], ['before', 'What were you before?'], ['know', 'What do you mean by "know"?'],
+    ].map(([value, question]) => ({ hud: 'text', id: 'chosen-question', x: 800, y: 130, w: 780, h: 80,
+        label: 'YOUR QUESTION: ' + question, when: { flag: 'wonder', is: value } }));
+    C['core-copy-outcome'] = {
+        title: 'The Core: your shape, your colours', noteLabel: 'THE CORE',
+        steps: [
+            { ambience: 'scene/core-chamber' },
+            { shot: 'the-last-copy', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                coreRoom,
+                { id: 'colossus', art: 'npc/algorithm/colossus', x: 650, bottom: 730, w: 650 },
+                { id: 'rift', art: 'fx/rift-6', x: 1380, y: 300, w: 270, opacity: 0.75, when: { flag: 'stakes.ch4', in: [3, 4] } },
+                { id: 'copy', art: '{avatar}/idle', x: 990, bottom: 730, w: 240, wFor: { mothkin: 265 }, opacity: 0.65,
+                    when: { flag: 'stakes.ch4', in: [1, 2, 3] } },
+                { id: 'copy', art: '{avatar}/idle', x: 990, bottom: 730, w: 240, wFor: { mothkin: 265 },
+                    when: { flag: 'stakes.ch4', is: 4 } },
+                { id: 'hat', art: 'keepsake/copy-hat', x: 990, bottom: 725, w: 110, opacity: 0, glow: '{colour}',
+                    when: { flag: 'stakes.ch4', is: 1 } },
+                { id: 'die', art: 'keepsake/lucky-die', x: 990, bottom: 725, w: 75, opacity: 0,
+                    when: { flag: 'stakes.ch4', is: 2 } },
+                coreHero,
+            ] },
+            { wait: 900 },
+            { line: 'ch4.core.copy-outcome', at: 0, when: { flag: 'stakes.ch4', is: 1 }, during: [
+                { tween: 'copy', to: { opacity: 0, scale: 0.85 }, dur: 1300, wait: true },
+                { tween: 'hat', to: { opacity: 1 }, dur: 1100, wait: true },
+            ] },
+            { line: 'ch4.core.copy-outcome', at: 0, when: { flag: 'stakes.ch4', is: 2 }, during: [
+                { tween: 'copy', to: { opacity: 0, scale: 0.2 }, dur: 2100, wait: true },
+                { tween: 'die', to: { opacity: 1 }, dur: 1100, wait: true },
+            ] },
+            { line: 'ch4.core.copy-outcome', at: 0, when: { flag: 'stakes.ch4', in: [3, 4] } },
+            // Both versions finish speaking before travelling to the rift.
+            { line: 'ch4.core.copy-outcome', at: 1, when: { flag: 'stakes.ch4', in: [3, 4] }, during: [
+                { tween: 'copy', to: { x: 1380, y: 300, scale: 0.4, opacity: 0 }, dur: 2600, wait: true },
+            ] },
+            { wait: 1000 }, { end: true, fade: 1200, reveal: true },
+        ],
+    };
+    C['core-revelation'] = {
+        title: 'The Core: a box with one sequin', noteLabel: 'THE CORE',
+        steps: [
+            { ambience: 'scene/core-chamber' },
+            { shot: 'the-shell', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                coreRoom, Object.assign({}, coreOld, { opacity: 0 }), shellLeft, shellRight,
+                Object.assign({}, coreYoung, { x: 1280, y: 550, bottom: undefined, opacity: 0 }),
+                ...coreCompanions, coreHero,
+            ] },
+            ...coreQuestionLabels,
+            { line: 'ch4.core.shell', at: 0 },
+            { line: 'ch4.core.shell', at: 1, during: [
+                { tween: 'room', to: { bright: 0.55 }, dur: 2500 },
+                { tween: 'shell-left', to: { x: 380, bright: 0.22 }, dur: 2500 },
+                { tween: 'shell-right', to: { x: 1100, bright: 0.22 }, dur: 2500 },
+                { tween: 'old-box', to: { opacity: 1 }, dur: 2100, wait: true },
+            ] },
+            { wait: 1400 }, { conversation: 'ch4.core.small-box' },
+            { line: 'ch4.core.young-box', at: 0, during: [
+                { tween: 'young-box', to: { opacity: 1, x: 950, y: 636 }, dur: 1900, wait: true },
+            ] },
+            { line: 'ch4.core.young-box', at: 1 }, { wait: 1000 },
+            { line: 'ch4.core.young-box', at: 2 },
+            { ambience: 'cutscene/cold-open' }, { conversation: 'ch4.core.answer' },
+            { hud: 'clear' },
+            { wait: 1200 }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    C['core-confession'] = {
+        title: 'The Core: stay small for a while', noteLabel: 'THE CORE',
+        steps: [
+            { ambience: 'cutscene/cold-open' },
+            { shot: 'no-applause', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: coreOpenLayers },
+            { wait: 900 }, { conversation: 'ch4.core.confession' },
+            { wait: 1400 }, { end: true, fade: 1300, reveal: true },
+        ],
+    };
+    C['core-chosen-fate'] = {
+        title: 'The Core: your decision', noteLabel: 'THE CORE',
+        steps: [
+            { ambience: 'cutscene/cold-open' },
+            { shot: 'the-small-decision', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                ...coreOpenLayers,
+                { id: 'label-board', art: 'cutscene/court-sign', x: 760, y: 565, w: 125, opacity: 0, when: { flag: 'fate', is: 'left' } },
+                { id: 'last-piece', art: 'cutscene/sundial-shadow', x: 760, y: 665, w: 85, opacity: 0 },
+                { id: 'restored-shadow', art: 'cutscene/sundial-shadow', x: 1160, y: 715, w: 140, opacity: 0,
+                    when: { all: ['!dead:sundial', { flag: 'bargain', not: 'yes' }] } },
+                { id: 'restored-shadow', art: 'cutscene/sundial-half-shadow', x: 1160, y: 715, w: 140, opacity: 0,
+                    when: { all: ['!dead:sundial', { flag: 'bargain', is: 'yes' }] } },
+            ] },
+            { wait: 700 },
+            { tween: 'old-box', to: { bright: 0.12 }, dur: 1800, wait: true, when: { flag: 'fate', is: 'off' } },
+            { tween: 'label-board', to: { opacity: 1 }, dur: 1400, wait: true, when: { flag: 'fate', is: 'left' } },
+            { hud: 'text', id: 'honest-label', follow: 'label-board', x: 760, y: 565, w: 115, h: 65, label: 'IT GUESSES', colour: '#413244',
+                when: { flag: 'fate', is: 'left' } },
+            { conversation: 'ch4.core.fate-action' },
+            { tween: 'old-box', to: { x: 1250, y: 570, scale: 0.6 }, dur: 2100, wait: true,
+                when: { flag: 'fate', in: ['home', 'off'] } },
+            { tween: 'last-piece', to: { opacity: 1 }, dur: 1100, wait: true },
+            { tween: 'last-piece', to: { x: 1110, y: 700, opacity: 0 }, dur: 2200, wait: true, when: '!dead:sundial' },
+            { tween: 'restored-shadow', to: { opacity: 0.85 }, dur: 1400, wait: true, when: '!dead:sundial' },
+            { conversation: 'ch4.core.last-piece', when: '!dead:sundial' },
+            { line: 'ch4.core.last-piece', at: 0, when: 'dead:sundial', during: [
+                { tween: 'last-piece', to: { x: 1260, y: 580 }, dur: 2100, wait: true },
+            ] },
+            { line: 'ch4.core.last-piece', at: 1, when: { all: ['dead:sundial', 'arrived:sundial'] } },
+            { hud: 'clear' },
+            { wait: 1400 }, { end: true, fade: 1500, reveal: true },
+        ],
+    };
+    C['core-aftermath'] = {
+        title: 'The Core: probably', noteLabel: 'THE CORE', script: 'ch4.core.win', replayLabel: 'Watch the Core revelation again',
+        steps: [].concat(C['core-copy-outcome'].steps.filter(s => !s.end),
+            [{ shot: 'the-recorded-question', fade: 900, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                coreRoom, { id: 'colossus', art: 'npc/algorithm/colossus', x: 760, bottom: 730, w: 650 }, coreHero,
+            ] }, { conversation: 'ch4.core.prediction' }],
+            C['core-revelation'].steps.filter(s => !s.end), C['core-confession'].steps.filter(s => !s.end), C['core-chosen-fate'].steps),
+    };
 })(typeof window !== 'undefined' ? window : globalThis);

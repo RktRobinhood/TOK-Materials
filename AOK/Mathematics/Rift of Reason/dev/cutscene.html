@@ -36,6 +36,10 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     <label>Hall outcome <select id="hall-outcome"><option value="1">Granny dry</option><option value="2">Damp shawl</option><option value="3">Boiled shawl</option><option value="bare">Shawl lost</option><option value="4">Granny lost</option></select></label>
     <label>Trial outcome <select id="trial-outcome"><option value="1">Sundial saved</option><option value="2">Controversial</option><option value="3">Recording kept</option><option value="brink">Sentence stopped</option><option value="4">Sundial lost</option></select></label>
     <label><input id="trial-deal" type="checkbox"> Trial bargain accepted</label>
+    <label>Copy outcome <select id="core-outcome"><option value="1">Hat remains</option><option value="2">Folds into a die</option><option value="3">Unfinished Copy escapes</option><option value="4">Complete Copy escapes</option></select></label>
+    <label>Core question <select id="wonder"><option value="believe">Why believe?</option><option value="noclicks">Nobody clicks?</option><option value="premises">Premises?</option><option value="light">Behind the light?</option><option value="small">Stay small?</option><option value="before">Before?</option><option value="know">Know?</option></select></label>
+    <label>Box fate <select id="fate"><option value="home">Take home awake</option><option value="off">Switch off</option><option value="left">Leave labelled</option></select></label>
+    <label><input id="kuku-arrived" type="checkbox" checked> Kuku has arrived</label>
     <label><input id="nudge-fled" type="checkbox" checked> Nudge kept first piece</label>
     <label><input id="paradox-board" type="checkbox" checked> Smudge's chalkboard</label>
     <button class="btn primary" id="play" type="button">▶ Play</button>
@@ -74,6 +78,7 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
 <script src="data/script/lesson1.js"></script>
 <script src="data/script/lesson2.js"></script>
 <script src="data/script/lesson3.js"></script>
+<script src="data/script/lesson4.js"></script>
 <script src="data/cast.js"></script>
 <script src="js/core/story.js"></script>
 <script src="js/core/cast.js"></script>
@@ -88,12 +93,16 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
     if (params.get('name')) byId('name').value = params.get('name');
     if (params.get('calm') === '1') byId('calm').checked = true;
 
-    R.Cutscene.list().filter(id => id === params.get('id') || !(id.startsWith('town-hall-') || id.startsWith('tribunal-')) || R.data.cutscenes[id].replayLabel).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
+    R.Cutscene.list().filter(id => id === params.get('id') || !(id.startsWith('town-hall-') || id.startsWith('tribunal-') || id.startsWith('core-')) || R.data.cutscenes[id].replayLabel).forEach(id => byId('which').append(R.el('option', { value: id, text: (R.data.cutscenes[id].title || id) })));
     if (params.get('id')) byId('which').value = params.get('id');
     if (params.get('outcome')) byId('outcome').value = params.get('outcome');
     if (params.get('hallOutcome')) byId('hall-outcome').value = params.get('hallOutcome');
     if (params.get('trialOutcome')) byId('trial-outcome').value = params.get('trialOutcome');
     if (params.get('deal') === 'yes') byId('trial-deal').checked = true;
+    if (params.get('coreOutcome')) byId('core-outcome').value = params.get('coreOutcome');
+    if (params.get('wonder')) byId('wonder').value = params.get('wonder');
+    if (params.get('fate')) byId('fate').value = params.get('fate');
+    if (params.get('kuku') === '0') byId('kuku-arrived').checked = false;
 
     function drawAvatars() {
         const box = byId('avatars');
@@ -132,6 +141,8 @@ input[type="text"], select { font: inherit; padding: 6px 8px; border-radius: 6px
                 'seen:prologue.rift': true, 'clock:ch1': { n: danger, size: 6 },
                 'stakes.ch2': hallTier, 'dead:granny': hallTier === 4, 'clock:ch2': { n: hallDanger, size: 8 },
                 'stakes.ch3': trialTier, 'dead:sundial': trialTier === 4, 'clock:ch3': { n: trialDanger, size: 8 },
+                'stakes.ch4': +byId('core-outcome').value, wonder: byId('wonder').value, fate: byId('fate').value,
+                'arrived:sundial': trialTier === 4 && byId('kuku-arrived').checked,
                 bargain: byId('trial-deal').checked ? 'yes' : 'no',
                 nudgeFled: byId('nudge-fled').checked, 'paradox-board': byId('paradox-board').checked,
                 'seen:ch2.cover': true, 'seen:ch2.square.win': true } });

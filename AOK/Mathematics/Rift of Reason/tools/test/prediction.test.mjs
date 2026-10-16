@@ -288,13 +288,16 @@ test('variant leads invite checking the active board without imposing a number o
 test('the ending recognises missing evidence without claiming questions cannot be predicted', () => {
     const R = loadRift(['js/core/rift.js', 'data/script/lesson4.js']);
     const ending = R.data.script['ch4.core.win'];
-    const choiceAt = ending.findIndex(s => s.choice && s.choice.some(o => o.flag === 'wonder'));
-    assert.ok(choiceAt >= 0, 'the final question is still a player choice');
-    const line = ending.slice(choiceAt + 1).find(s => s.note)?.note;
+    const question = ending.find(s => s.when?.flag === 'wonder' && s.when.unset);
+    assert.ok(question?.then.some(s => s.choice?.some(o => o.flag === 'wonder')), 'the final question is still a player choice');
+    const revealAt = ending.findIndex(s => s.cutscene === 'core-revelation');
+    assert.ok(revealAt > ending.indexOf(question), 'the answer follows the interactive question');
+    const words = R.data.script[ending[revealAt].continuation];
+    const line = words.find(s => s.note)?.note;
     assert.match(line, /guess missed your chosen question/);
     assert.match(line, /moves, not your reasons/);
     assert.match(line, /different model do better/);
-    assert.doesNotMatch(JSON.stringify(ending), /cannot predict a question|Only a click/);
+    assert.doesNotMatch(JSON.stringify(words), /cannot predict a question|Only a click/);
 });
 
 test('combat colour explanations identify the hierarchy as a game rule', () => {

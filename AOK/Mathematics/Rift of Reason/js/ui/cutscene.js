@@ -599,7 +599,7 @@
     // Court screens and silent actions are canonical notes, never a dead narrator's voice.
     Player.prototype.note = async function (s) {
         const text = s.text || s.note;
-        this.subName.textContent = 'COURT RECORD';
+        this.subName.textContent = s.label || this.p.def.noteLabel || 'COURT RECORD';
         this.subText.textContent = text;
         this.subtitle.hidden = false;
         await this.hold(Promise.all([this.sleep(1200 + 45 * String(text).length), this.run(s.during)]));
