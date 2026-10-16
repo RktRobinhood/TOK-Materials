@@ -1239,8 +1239,16 @@ Produced/built tenIDs: scene/fair-shelf (empty warm counter), cutscene/granny-tr
 
 ## Stage 13.85 — Solemn whole-body avatar reactions, 16 October 2026
 
-Pending request from the [cutscene critic review](../reviews/cutscene-critic-2026-10-16.md). No images generated or runtime IDs registered by this review.
+Produced and integrated following the [cutscene critic review](../reviews/cutscene-critic-2026-10-16.md) and the teacher's explicit request to direct the fixes through new assets. All ten variants now have complete, unsmiling, attentive whole-body poses. First Frogling boy take is retained but skipped; the clean-margin correction is selected.
 
-Requested IDs: `avatar/owlet-boy/solemn`, `avatar/owlet-girl/solemn`, `avatar/mothkin-boy/solemn`, `avatar/mothkin-girl/solemn`, `avatar/fox-boy/solemn`, `avatar/fox-girl/solemn`, `avatar/frogling-boy/solemn`, `avatar/frogling-girl/solemn`, `avatar/raven-boy/solemn`, `avatar/raven-girl/solemn`.
+Produced IDs: `avatar/owlet-boy/solemn`, `avatar/owlet-girl/solemn`, `avatar/mothkin-boy/solemn`, `avatar/mothkin-girl/solemn`, `avatar/fox-boy/solemn`, `avatar/fox-girl/solemn`, `avatar/frogling-boy/solemn`, `avatar/frogling-girl/solemn`, `avatar/raven-boy/solemn`, `avatar/raven-girl/solemn`.
 
 Use at Gate loss, Hall consequences, Tribunal loss, the Core's moral decision and Fair remembrance. Preserve each shipped avatar's species, clothes, colours, anatomy and complete silhouette. A restrained non-smiling expression and attentive or slightly lowered posture must read at small scale. Keep full feet/wings/tail and transparent safe margins; match the idle's ground anchor and scale. Existing worried/surprised busts cannot substitute for whole-body art. No looping movement, caricature grief, tears as spectacle, new prop, or story text. Follow the art bible and inspect the style board and shipped avatar references before production. Facing corrections and shot/layer/lettering fixes use existing runtime capabilities and do not require new bitmaps.
+
+Exact prompts, original tool outputs, references, selected and skipped takes: `../source-assets/6-cutscene/director-2026-10-16/generation.json`. See [directing completion and evidence](../reviews/cutscene-direction-2026-10-16.md).
+
+## Stage 13.86 — Shadow continuity and Hall safety, 16 October 2026
+
+Produced and integrated eight additional IDs: `cutscene/shadow-whole`, `cutscene/shadow-incomplete`, `cutscene/shadow-fragment-one`, `cutscene/shadow-fragment-two`, `cutscene/shadow-fragment-three`, `cutscene/shadow-fragment-four`, `cutscene/nudge-net-soft-shadow`, and `scene/hall-stilled`. The six-part atlas uses matte dark silhouettes with a restrained purple edge; the four pieces differ in shape and remain hand-sized during recovery. Whole and incomplete shadows rest flat on the ground; the bargain preserves its missing reach. Nudge's complete replacement net contains folded shadow material behind its mesh. The Hall plate preserves Granny in the stopped harness over cold ashes until her canonical rescue, with no active fire or steam during Quill's confession.
+
+Thirteen selected paintings yield eighteen additive runtime IDs including Stage 13.85. First shadow atlas and first net edit remain as skipped provenance; corrected takes have six separate islands and complete net/bell margins. Built through `tools/build-assets.mjs --only director`; all existing manifest entries preserved. `tools/check-director-art.mjs` checks provenance, alpha, source margins, island count, dimensions and hashes, and produces dark/light inspection sheets. Exact prompts, references and retained takes are in the same director source folder. No spoken dialogue or recording request added; a short silent safety caption accompanies the stopped winch.

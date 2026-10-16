@@ -183,6 +183,72 @@ test('painted sign lettering travels and fades with its physical placard',async(
     await g.advance(500);assert.equal(await done,true);assert.equal(g.claims(),0);
 });
 
+test('important labels remain readable and separate on a phone, then return to their world positions after resize',async()=>{
+    const g=game();Object.assign(g.ctx,{innerWidth:390,innerHeight:844});
+    const names=['SEQUINS','GRANNY','THE SUNDIAL','PIP'];
+    const labels=names.map((label,i)=>({hud:'text',id:'name-'+i,x:470+i*200,y:415,w:175,h:55,label,
+        compact:{columns:2,column:i%2,row:Math.floor(i/2)}}));
+    const done=g.Rift.Cutscene.play(g.film([shot,...labels,{wait:60000}]));await settle();await g.advance(700);
+    const nodes=g.$$('.cs-lettering');assert.equal(nodes.length,4);
+    const rectangles=nodes.map(node=>{
+        assert.equal(node.style.fontSize,'12px');assert.ok(node.classList.contains('cs-caption-label'));
+        const r={x:parseFloat(node.style.left),y:parseFloat(node.style.top),w:parseFloat(node.style.width),h:parseFloat(node.style.height)};
+        assert.ok(r.x>=0&&r.x+r.w<=390&&r.y>=0&&r.y+r.h<80,'the name stays in the readable sky legend');return r;
+    });
+    for(let a=0;a<4;a++)for(let b=a+1;b<4;b++){
+        const r=rectangles[a],s=rectangles[b];
+        assert.ok(r.x+r.w<=s.x||s.x+s.w<=r.x||r.y+r.h<=s.y||s.y+s.h<=r.y,'names never overlap');
+    }
+    Object.assign(g.ctx,{innerWidth:1280,innerHeight:720});g.events.get('resize').forEach(fn=>fn());
+    assert.ok(nodes.every(node=>!node.classList.contains('cs-caption-label')&&parseFloat(node.style.fontSize)>12));
+    g.key('Escape');assert.equal(await done,true);assert.equal(g.claims(),0);
+});
+
+test('chapter endings give the real traveller a solemn pose facing the conversation, while the confident Copy keeps its own idle',()=>{
+    for(const type of ['owlet','mothkin','fox','frogling','raven'])for(const variant of ['boy','girl']) {
+        const g=coreGame(type,variant,4);Object.assign(g.state.flags,{wonder:'believe',fate:'home'});
+        for(const id of ['gate-aftermath','town-hall-aftermath','tribunal-aftermath','core-aftermath']) {
+            for(const s of g.Rift.Cutscene.plan(id).steps)for(const hero of (s.layers||[]).filter(l=>l.id==='hero')) {
+                assert.equal(hero.art,'avatar/'+type+'-'+variant+'/solemn');
+                assert.equal(!!hero.mirror,hero.x>800,'the traveller faces the people at the centre');
+            }
+        }
+        const copy=g.Rift.Cutscene.plan('core-copy-outcome').steps.find(s=>s.shot).layers.find(l=>l.id==='copy');
+        assert.equal(copy.art,'avatar/'+type+'-'+variant+'/idle');
+        const h=homeGame(type,variant,4,{deaths:['granny','sundial','sequins','pip']});
+        const memorial=h.Rift.Cutscene.plan('fair-home-memorial').steps.find(s=>s.shot);
+        assert.equal(memorial.layers.find(l=>l.id==='hero').art,'avatar/'+type+'-'+variant+'/solemn');
+    }
+});
+
+test('the Hall makes immediate safety explicit without inventing a rescue after death or hiding Quill behind her exit',()=>{
+    for(const tier of [1,2,3,4])for(const brink of [false,true]) {
+        const g=hallGame('mothkin','girl',tier);g.state.flags['stakes.ch2']=tier;
+        if(brink)g.state.flags['clock:ch2'].n=8;
+        const before=JSON.stringify(g.state),p=g.Rift.Cutscene.plan('town-hall-aftermath');
+        assert.equal(p.steps.some(s=>s.note==='The winch locks. The fire goes out.'),tier!==4&&!brink);
+        const opening=p.steps.find(s=>s.shot==='the-last-answer');
+        assert.equal(opening.layers[0].art,tier!==4&&!brink?'scene/hall-stilled':'scene/hall-after');
+        const departure=p.steps.find(s=>s.shot==='the-window');
+        assert.ok(departure.layers.findIndex(l=>l.id==='rift')<departure.layers.findIndex(l=>l.id==='quill'),'the speaker is in front of the Rift');
+        assert.equal(JSON.stringify(g.state),before);
+    }
+});
+
+test('four stolen shadow pieces have four distinct identities and only restoration uses a complete ground shadow',()=>{
+    const g=coreGame('fox','girl',1);Object.assign(g.state.flags,{nudgeFled:true,wonder:'believe',fate:'home',
+        'stakes.ch1':1,'clock:ch1':{n:1,size:6},'stakes.ch2':1,'clock:ch2':{n:1,size:8},'stakes.ch3':1,'clock:ch3':{n:1,size:8}});
+    const layer=(id,shot,name)=>g.Rift.Cutscene.plan(id).steps.find(s=>s.shot===shot).layers.find(l=>l.id===name);
+    const parts=[layer('gate-aftermath','the-escaping-piece','piece'),layer('town-hall-aftermath','the-shadow-on-the-floor','shadow-two'),
+        layer('tribunal-aftermath','the-verdict','exhibit'),layer('core-chosen-fate','the-small-decision','last-piece')];
+    assert.deepEqual(parts.map(l=>l.art),['one','two','three','four'].map(n=>'cutscene/shadow-fragment-'+n));
+    assert.ok(parts.every(l=>l.w<110),'a fragment is hand-sized, not a whole sundial shadow');
+    const restored=layer('core-chosen-fate','the-small-decision','restored-shadow');
+    assert.equal(restored.art,'cutscene/shadow-whole');assert.ok(restored.sy<0.5&&restored.y>730,'the returned shadow lies flat at the companion feet');
+    g.state.flags.bargain='yes';
+    assert.equal(layer('core-chosen-fate','the-small-decision','restored-shadow').art,'cutscene/shadow-incomplete');
+});
+
 test('Skip preserves an interrupted silent note and does not repeat a completed one',async()=>{
     for(const interrupt of [false,true]) {
         const g=storyGame();
@@ -354,7 +420,7 @@ test('the Hall replay uses only canonical words and stages each tier without cha
             if(tier===3)assert.equal(outcome.layers.find(l=>l.id==='granny').art,'npc/granny-axiom/idle');
             for(const s of shots) {
                 const isPeril=['the-last-answer','the-teachers-face','the-shadow-on-the-floor','borrowed-faces','forty-years'].includes(s.shot);
-                assert.equal(s.layers[0].art,isPeril&&tier!==4?'scene/feast-hall':'scene/hall-after');
+                assert.equal(s.layers[0].art,isPeril&&tier!==4?'scene/hall-stilled':'scene/hall-after');
                 for(const l of s.layers.filter(l=>!l.cover)) {
                     const p=g.Rift.Cutscene.project(s.camera,l);
                     assert.ok(p.sx-l.w*p.S/2>=0&&p.sx+l.w*p.S/2<=1600,l.id+' fits horizontally');
@@ -643,14 +709,16 @@ test('Core replay uses chosen avatar Copies for all ten avatars and resolved tie
         assert.equal(copy.art,'avatar/'+type+'-'+variant+'/idle');assert.equal(copy.opacity,tier===4?1:0.65);
         assert.equal(copyShot.layers.some(l=>l.id==='hat'),tier===1);assert.equal(copyShot.layers.some(l=>l.id==='die'),tier===2);
         const open=p.steps.find(s=>s.shot==='no-applause'),young=open.layers.find(l=>l.id==='young-box'),old=open.layers.find(l=>l.id==='old-box');
-        const companion=open.layers.find(l=>l.id==='sundial');
         assert.ok(Math.abs(young.y+young.h/2-700)<1&&Math.abs(old.y+old.h/2-700)<1,'both boxes stand on the floor');
-        assert.ok(young.x+young.w/2<companion.x-companion.w/2,'young box clears companion silhouette');
-        assert.equal(open.layers.find(l=>l.id==='room').bright,0.55);
+        assert.ok(old.x+old.w/2<young.x-young.w/2,'the two complete boxes have clear separate silhouettes');
+        assert.ok(old.w>=320&&young.w>=250,'the confession gives both small faces a readable close shot');
+        assert.ok(!open.layers.some(l=>['hero','sundial','kuku','shell-left','shell-right'].includes(l.id)),'the close shot isolates the speakers without cropping figures');
+        assert.equal(open.layers.find(l=>l.id==='room').bright,0.35);
         for(const s of p.steps)for(const l of s.layers||[]) {
             if(l.cover)continue;const at=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
             assert.ok(at.sx-l.w*at.S/2>=0&&at.sx+l.w*at.S/2<=1600,l.id+' fits horizontally');
-            assert.ok(at.sy-l.h*at.S/2>=0&&at.sy+l.h*at.S/2<=760,l.id+' fits above captions');
+            const h=l.h*at.S*Math.abs(l.sy==null?1:l.sy);
+            assert.ok(at.sy-h/2>=0&&at.sy+h/2<=760,l.id+' fits above captions');
         }
         for(const s of p.steps.filter(s=>s.say))assert.ok(voices.has(s.say+':'+s.t),'canonical Core voice '+s.say+':'+s.t);
         assert.ok(p.steps.every(s=>!s.clock&&!s.flag&&!s.give&&!s.choice));
@@ -718,7 +786,7 @@ test('Core bargain voices and final shadows obey life, death and understudy arri
         assert.equal(fate.layers.some(l=>l.id==='kuku'),companion==='kuku');
         const young=fate.layers.find(l=>l.id==='young-box'),kuku=fate.layers.find(l=>l.id==='kuku');
         if(kuku)assert.ok(young.x+young.w/2<kuku.x-kuku.w/2,'Kuku never overlaps the young box');
-        if(companion==='alive'||companion==='bargain')assert.equal(shadow.art,companion==='bargain'?'cutscene/sundial-half-shadow':'cutscene/sundial-shadow');
+        if(companion==='alive'||companion==='bargain')assert.equal(shadow.art,companion==='bargain'?'cutscene/shadow-incomplete':'cutscene/shadow-whole');
         else assert.equal(shadow,undefined);
         const {events}=trialPresentation(g,'skip');await finishCore(g,g.Rift.Dialogue.play('ch4.core.win'),'skip',events);
         if(companion==='silent'||companion==='kuku')assert.ok(g.speech.every(s=>s.speaker!=='narrator'));
@@ -804,7 +872,8 @@ test('Homecoming replay frames all ten avatars and four Copy outcomes without ar
         for(const s of p.steps)for(const l of s.layers||[]) {
             if(l.cover)continue;const at=g.Rift.Cutscene.project(s.camera||{x:800,y:450,zoom:1},l);
             assert.ok(at.sx-l.w*at.S/2>=0&&at.sx+l.w*at.S/2<=1600,l.id+' fits horizontally');
-            assert.ok(at.sy-l.h*at.S/2>=0&&at.sy+l.h*at.S/2<=760,l.id+' is wholly above captions');
+            const h=l.h*at.S*Math.abs(l.sy==null?1:l.sy);
+            assert.ok(at.sy-h/2>=0&&at.sy+h/2<=760,l.id+' is wholly above captions');
         }
     }
 });
@@ -896,14 +965,14 @@ test('Homecoming shelf fates, full/half/memorial shadows, elder poses and the sk
         assert.ok(label.w<sign.w&&label.h<sign.h&&label.font<=22,'painted words fit inside the plaque');
         assert.equal(sun.layers.some(l=>l.id==='sundial'),!dead);assert.equal(sun.layers.some(l=>l.id==='silent-stone'),dead);
         assert.equal(sun.layers.some(l=>l.id==='kuku'),companion==='kuku');
-        assert.equal(sun.layers.find(l=>l.id==='shadow').art,companion==='bargain'?'cutscene/sundial-half-shadow':'cutscene/sundial-shadow');
-        assert.equal(sun.layers.find(l=>l.id==='shadow').y,dead?665:715,'the memorial shadow leaves the closed eyes clear');
-        assert.equal(sun.layers.find(l=>l.id==='shadow').w,dead?65:140);
+        assert.equal(sun.layers.find(l=>l.id==='shadow').art,companion==='bargain'?'cutscene/shadow-incomplete':'cutscene/shadow-whole');
+        assert.equal(sun.layers.find(l=>l.id==='shadow').y,dead?675:companion==='bargain'?735:742,'memorial cloth leaves the eyes clear; living shadows lie on the floor');
+        assert.equal(sun.layers.find(l=>l.id==='shadow').w,dead?75:companion==='bargain'?100:190);
         const trophy=p.steps.find(s=>s.shot==='the-thinking-trophy'),elder=trophy.layers.find(l=>l.id==='elder'),hero=trophy.layers.find(l=>l.id==='hero');
         assert.ok(hero.x-elder.x<350,'elder and traveller share the final question at close distance');
         assert.ok(elder.x+elder.w/2<hero.x-hero.w/2,'cup and player remain physically separate');
-        assert.equal(trophy.layers.find(l=>l.id==='shadow').x,dead?800:840);
-        assert.equal(trophy.layers.find(l=>l.id==='shadow').opacity,dead?0.45:0.85);
+        assert.equal(trophy.layers.find(l=>l.id==='shadow').x,dead?800:companion==='bargain'?880:850);
+        assert.equal(trophy.layers.find(l=>l.id==='shadow').opacity,dead?0.45:0.65);
         assert.equal(sun.layers.some(l=>l.id==='sky-hair'),feed>=6);
         if(dead)assert.ok(p.steps.filter(s=>s.say).every(s=>s.say!=='narrator'));
     }

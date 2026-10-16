@@ -1,0 +1,36 @@
+0.1s  ambience
+0.1s  shot  the-last-answer
+0.1s  note  The winch locks. The fire goes out.
+2.9s  wait
+3.6s  say  True. No. False. No. ONE. ZER—
+7.4s  say  That's my sentence! From her board! It WORKS!
+11.1s  set  quill
+11.1s  shot  the-teachers-face
+11.1s  tween  mask
+12.8s  wait
+13.5s  say  Her mask slides off. Under it: a crowned imp. Her own tired eyes.
+22.4s  tween  scarf
+24.1s  say  Her black scarf falls. It never moved in the wind. It's my shadow.
+32.0s  set  scarf
+32.0s  shot  the-shadow-on-the-floor
+32.0s  wait
+33.0s  shot  borrowed-faces
+33.0s  set  guest-a
+33.0s  wait
+33.3s  set  guest-b
+33.3s  wait
+33.6s  set  guest-c
+33.6s  set  nudge
+33.6s  say  Round the tables, more masks drop. Imps in borrowed faces. Nudge's too.
+43.1s  say  My mask! Forty villagers trusted that face! I COUNTED!
+48.8s  tween  shadow-one
+50.2s  say  And out of Nudge's mask tumbles my first piece.
+56.5s  shot  forty-years
+56.5s  ambience
+56.5s  say  Forty years I marked "maybe" wrong. Red ink. Every child.
+62.5s  wait
+63.4s  say  If "maybe" was allowed… I was cruel for forty years.
+69.4s  wait
+70.5s  say  So when a voice offered me a world with no maybes… I said yes.
+75.8s  wait
+76.8s  end

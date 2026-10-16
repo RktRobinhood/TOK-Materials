@@ -550,6 +550,9 @@
     ];
 
     // Read-only film conversations are also Skip/failure continuations and voice catalogue sources.
+    S['ch2.hall.safety'] = [
+        { note: 'The winch locks. The fire goes out.', when: { all: ['!dead:granny', { clock: 'ch2', lte: 7 }] } },
+    ];
     S['ch2.hall.break'] = [
         { s: 'schoolteacher', e: 'nervous', t: 'True. No. False. No. ONE. ZER—' },
         // Smudge's reaction stays solemn when Granny has died.
@@ -574,7 +577,7 @@
         { s: 'schoolteacher', e: 'unmasked', t: 'If "maybe" was allowed… I was cruel for forty years.' },
         { s: 'schoolteacher', e: 'unmasked', t: 'So when a voice offered me a world with no maybes… I said yes.' },
     ];
-    S['ch2.hall.unmask'] = [].concat(S['ch2.hall.break'], S['ch2.hall.face'], S['ch2.hall.shadow'],
+    S['ch2.hall.unmask'] = [].concat(S['ch2.hall.safety'], S['ch2.hall.break'], S['ch2.hall.face'], S['ch2.hall.shadow'],
         S['ch2.hall.masks'], S['ch2.hall.first-piece'], S['ch2.hall.confession']);
     S['ch2.hall.outcome'] = [
         { when: 'dead:granny', then: [

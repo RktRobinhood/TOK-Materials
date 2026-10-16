@@ -1,0 +1,16 @@
+0.1s  ambience
+0.1s  shot  the-open-gate
+0.1s  wait
+1.1s  say  The gate is open. The cushion is still warm.
+7.0s  wait
+8.4s  shot  the-escaping-piece
+8.4s  say  Nudge has gone through the Rift Pass. With my piece.
+14.4s  tween  eye
+16.4s  ambience
+16.4s  shot  the-wrong-victory
+16.4s  hud  box
+16.4s  say  PREDICTED. YOU TRIED TO SAVE THE MAGPIE. I TOOK THE TORTOISE TOO.
+25.3s  say  YOU ALWAYS KNOW THE ANSWER. I KNEW YOURS.
+30.2s  hud  clear
+30.9s  wait
+32.0s  end

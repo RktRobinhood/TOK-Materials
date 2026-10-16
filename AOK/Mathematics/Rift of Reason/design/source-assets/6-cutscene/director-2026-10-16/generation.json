@@ -1,0 +1,198 @@
+{
+  "date": "2026-10-16",
+  "tool": "Built-in image_gen",
+  "authorization": "Teacher explicitly asked to fix the identified cinematic problems, primarily by making assets, and take directing to fruition.",
+  "records": [
+    {
+      "id": "fox-girl",
+      "file": "director-fox-girl.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the shipped Fox girl whole-body avatar for Rift of Reason. Preserve her exact identity, red-orange fur, cream muzzle and tail tip, red ribbon on large tail, ochre hooded toggle coat, brown backpack, brown gloves and boots, proportions, outline weight, painterly fabric and fur. Change only the emotional performance: a quiet solemn, concerned attentive expression, closed unsmiling mouth, slightly lowered chin, relaxed shoulders and hands, listening to a friend after a loss. Eyes still open and readable looking toward the RIGHT, no tears, no theatrical sobbing, no grin. Full body standing in three-quarter view facing RIGHT, entire ears, tail, backpack, both hands and both boots visible. Match existing body size/stance rather than a bust or baby. Center the complete silhouette with generous transparent margins, no contour touching any edge. Image 2 is style-board reference, image 3 is shipped creature finish reference only; do not add their characters or props. Transparent alpha background, no ground, no cast shadow blob, no text, no extra objects. One character only. This will be used as a game sprite for grief and moral consideration.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-ae07d2df-ccdd-4624-a762-57ee08cf4fcd.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/fox-girl-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "fox-boy",
+      "file": "director-fox-boy.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped fox-boy whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-194e0b7a-0d49-47fa-acf8-5cc396b3cc73.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/fox-boy-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "owlet-boy",
+      "file": "director-owlet-boy.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped owlet-boy whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-b1c86494-a7ad-4c12-84cb-2e56d91acd5e.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/owlet-boy-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "owlet-girl",
+      "file": "director-owlet-girl.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped owlet-girl whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-19178f7a-a8ee-4a67-9f64-5f0b7f3107c8.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/owlet-girl-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "mothkin-boy",
+      "file": "director-mothkin-boy.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped mothkin-boy whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only emotional performance: quiet solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. Whole body in the same three-quarter pose facing RIGHT as reference; gaze RIGHT with slight downward attention. Entire ears or feather tufts, antennae, wings, tail, hands, feet and every garment/prop intact and visible. Teenage creature, never human or baby. Image2 is the art style reference and image3 is shipped finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, transparent alpha background, no floor, no shadow blob, no text or extra objects. CRITICAL COMPOSITION: COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill canvas or crop any outline. Single full-body game sprite, not close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-882a8670-0340-49bb-9d85-97b2888ecc50.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/mothkin-boy-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "mothkin-girl",
+      "file": "director-mothkin-girl.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped mothkin-girl whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only emotional performance: quiet solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. Whole body in the same three-quarter pose facing RIGHT as reference; gaze RIGHT with slight downward attention. Entire ears or feather tufts, antennae, wings, tail, hands, feet and every garment/prop intact and visible. Teenage creature, never human or baby. Image2 is the art style reference and image3 is shipped finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, transparent alpha background, no floor, no shadow blob, no text or extra objects. CRITICAL COMPOSITION: COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill canvas or crop any outline. Single full-body game sprite, not close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-97144bd7-5604-4186-9c28-068dc6b1101d.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/mothkin-girl-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "frogling-boy",
+      "file": "director-frogling-boy.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped frogling-boy whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only emotional performance: quiet solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. Whole body in the same three-quarter pose facing RIGHT as reference; gaze RIGHT with slight downward attention. Entire ears or feather tufts, antennae, wings, tail, hands, feet and every garment/prop intact and visible. Teenage creature, never human or baby. Image2 is the art style reference and image3 is shipped finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, transparent alpha background, no floor, no shadow blob, no text or extra objects. CRITICAL COMPOSITION: COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill canvas or crop any outline. Single full-body game sprite, not close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-32291a78-8783-4f54-9422-42e3865efbfd.png",
+      "selected": false,
+      "note": "Retained first take; selected follow-up preserves the same performance.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/frogling-boy-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "frogling-girl",
+      "file": "director-frogling-girl.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped frogling-girl whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-c3fbae99-8f06-4ec7-899e-07d702b71328.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/frogling-girl-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "raven-boy",
+      "file": "director-raven-boy.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped raven-boy whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-ab89078b-b52c-4ecc-9e9f-d00d2b919d2a.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/raven-boy-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "raven-girl",
+      "file": "director-raven-girl.png",
+      "prompt": "Use case: identity-preserve. Edit target image 1 is the EXACT shipped raven-girl whole-body avatar for Rift of Reason. Keep its species, gender variant, face identity, colours, costume, all existing signature props and accessories, anatomy and proportions identical. Change only the emotional performance: quiet, solemn concern and attentive listening after a loss, closed unsmiling mouth/beak, open readable eyes, slightly lowered chin, relaxed shoulders. No grin, tears, melodrama, or eyes shut. The whole body stands in the same three-quarter pose facing RIGHT as reference, gaze toward RIGHT with slight downward attention. Entire ears or feather tufts, wings, tail, hands, feet and every garment/prop must be intact and visible. A teenage creature, never a human or baby. Image2 is the art style reference and image3 is the shipped rendering finish reference only, do not add their subjects/props. Dark outlines, painterly fur/feathers/fabric, warm cel lighting and muted jewel accents. One character only, genuinely transparent alpha background, no floor, no shadow blob, no extra text or objects. CRITICAL COMPOSITION: show the COMPLETE character at about 75% of canvas height, centered with at least 10% EMPTY transparent margin on ALL FOUR SIDES; never fill the canvas or crop any outline. A single full-body game sprite, not a close-up.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-36d2fecb-6f2e-48e9-9ead-66060f89817e.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/avatars/raven-girl-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "shadow-atlas",
+      "file": "director-shadow-atlas.png",
+      "prompt": "Use case: illustration-story. Asset type: a transparent game sprite ATLAS for Rift of Reason, six separate flat shadow sprites. Image1 identifies the sundial that casts the shadow: round dial with triangular gnomon, thin stone pedestal and broad scalloped foot. Image2 is the old shadow ONLY as a colour reference; do NOT repeat its tall shark-fin shape. Images3/4 are finish/style references only. Create ONE consistent low, flattened cast-shadow silhouette of that sundial, projected diagonally toward the RIGHT on a ground plane, about 4 times wider than tall. The broad grounded foot transitions through a slim pedestal silhouette into a rounded dial shadow and a small triangular gnomon reach. No face, eye, stone texture or 3D thickness: this is matte midnight-plum/charcoal shadow, nearly black with only a restrained dim violet edge so lifted pieces remain visible. Top row: LEFT the complete shadow; RIGHT the same shape with its far half missing, ending in a torn irregular seam. Bottom row: FOUR SEPARATE DISTINCT torn fragments from LEFT TO RIGHT which together form the whole shadow in sequence: broad foot/base fragment, narrow pedestal fragment, round dial fragment, small gnomon-point fragment. Keep their relative scales and related matching torn edges; none is a miniature copy of the complete shadow. All six silhouettes must be independent opaque dark shapes on true transparent alpha with LARGE clear gaps between every sprite and at least 8% safe outer margins. Top two shapes must not overlap bottom four. Soft painterly edges, flat and flexible like stolen shadow, no glossy shards, cyan glow, sparks, particles, floor, cast shadows under sprites, labels, diagrams, text, extra objects or characters. Two rows only: 2 sprites above, 4 below, exactly SIX connected silhouettes.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-59f2b38d-4ff7-4961-99e1-6c3fb887cd84.png",
+      "selected": false,
+      "note": "First incomplete shape had an extra base island; replaced by corrected six-sprite atlas.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cast/sundial-idle.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cutscene/sundial-shadow.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "hall-stilled",
+      "file": "director-hall-stilled.png",
+      "prompt": "Use case: precise-object-edit. Edit target image1 is the exact feast hall background from Rift of Reason, widescreen16:9. Create its immediate AFTER THE WINCH STOPS state while preserving the exact architecture, perspective, wooden tables, candles, colours, central window/rift, cauldron, rope path and the SAME living Granny hanging high in her harness at the SAME location and scale. Change only these things: extinguish ALL flames beneath the central soup cauldron, remove its boiling steam, replace the burning fire with visibly cold wet gray ashes and one modest wisp of cooling vapor, and add a simple visibly engaged wooden ratchet stop at the existing winch drum on the left. The rope is taut and LOCKED safely; Granny is no longer being lowered. Keep her full body safely ABOVE the pot, no fall, injury, distress or new expression change. Other candles remain lit, retaining the warm lantern atmosphere. No new people, imps, words, labels or symbols; lower foreground remains clear for the game's actors. Exact match to the original composition, clean 16:9 landscape game plate. Images2/3 are established style/finish reference only, do not add their characters. No transparency.",
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-ce68ca43-ba91-45b2-afa7-f9a7217f9039.png",
+      "selected": true,
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/scenes/feast-hall.webp",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ]
+    },
+    {
+      "id": "frogling-boy-clean",
+      "file": "director-frogling-boy-clean.png",
+      "selected": true,
+      "prompt": "Precise-object-edit of this EXACT full-body concerned frog sprite. Preserve absolutely all character pixels, anatomy, face, clothes, colours, pose, hands, backpack, boots and framing. Remove ONLY the large soft brown/gold halo surrounding the character. Every pixel outside the actual dark outline of the frog, its clothes, backpack and boots must be fully transparent alpha ZERO, with natural clean antialiasing only at the silhouette edge. No warm aura, bloom, haze, ambient shadow or backdrop. Keep the expression solemn and unsmiling and the complete silhouette intact. Do not crop or enlarge. True transparent game cutout.",
+      "references": [
+        "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-32291a78-8783-4f54-9422-42e3865efbfd.png"
+      ],
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-fe91ebae-dc4d-442c-b9ef-639ad2e6f65f.png"
+    },
+    {
+      "id": "shadow-atlas-clean",
+      "file": "director-shadow-atlas-clean.png",
+      "selected": true,
+      "prompt": "Precise-object-edit of this shadow sprite atlas. Preserve the design of the complete sundial shadow TOP LEFT and the FOUR distinct fragments in the BOTTOM ROW, with their proportions and shapes, and preserve their two-row arrangement. REMOVE ALL purple glow, aura, haze and bloom outside the actual shape outlines: all outside pixels must be fully transparent alpha ZERO. The shadows must be flat opaque matte almost-black midnight plum with only a thin restrained dark-violet contour, no lighting effect. Correct ONLY the TOP RIGHT incomplete shadow: it must be ONE CONNECTED right-hand round dial fragment plus its attached small gnomon-point fragment. Remove the broad left foot/base and the central pedestal from that top-right sprite entirely. Thus top-right is the far HALF of the whole, a single connected disc-and-point silhouette with a torn left edge, NO left blob. Keep exactly SIX separate connected sprites: TOP ROW whole at left, incomplete far half at right; BOTTOM ROW four distinct contiguous pieces (broad foot, thin pedestal, round dial, pointed gnomon). Transparent gaps of at least60pixels between every sprite, generous outside margins, no clipping, no text or extra objects. Clean alpha on all empty space; no soft haze joining the silhouettes.",
+      "references": [
+        "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-59f2b38d-4ff7-4961-99e1-6c3fb887cd84.png"
+      ],
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-dcba1c14-a56b-4823-9a73-063c8dbfbb9d.png"
+    },
+    {
+      "id": "nudge-net-soft-shadow",
+      "file": "director-nudge-net-soft-shadow.png",
+      "selected": false,
+      "prompt": "Precise-object-edit. Image1 is the EXACT full-body Nudge imp carrying his full net from Rift of Reason. Preserve Nudge's identity, full ears/horns, eyes, fur, two arms/legs, bell tail, stance, scale and the entire brass-and-mesh net at exactly the same angle. Change ONLY the stolen shadow INSIDE the net: remove the stiff curved black shark-fin/knife shape. Replace it with a compact folded/rolled piece of matte midnight-plum shadow, with a round dial-shaped fold and a small folded triangular end, sitting with believable weight at the bottom of the mesh bag. The mesh must remain visibly IN FRONT OF and around the shadow. It is a stolen flexible cast shadow, not a blade, animal or solid artifact. Image2 is shape/material reference only (do not add an atlas or its glow), images3/4 finish reference only. One complete imp and net only, no extra objects, no glow or halo outside their outlines. Fully transparent alpha background; generous empty safe margin around ALL contours, no crop. No text, floor, backdrop, particles or shadow under feet.",
+      "references": [
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/cutscene/nudge-shadow.webp",
+        "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-59f2b38d-4ff7-4961-99e1-6c3fb887cd84.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/design/source-assets/0-style/style-board.png",
+        "D:/OneDrive - Ikast/OneDrive - Ikast-Brande Gymnasium/AI Projects/TOK Materials/AOK/Mathematics/Rift of Reason/assets/creatures/astrophysicat-idle.webp"
+      ],
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-6fabee26-2a4b-4d13-a0ce-0f955c1714ae.png",
+      "note": "Retained first net take; bell and hoop touched source edges. Replaced by wider margin correction."
+    },
+    {
+      "id": "nudge-net-margin",
+      "file": "director-nudge-net-margin.png",
+      "selected": true,
+      "prompt": "Edit this exact Nudge-with-net sprite ONLY to correct its cropped framing. ZOOM OUT STRONGLY: redraw the same full character and the entire same net at only 65% of the new canvas size, centered in a much larger transparent landscape canvas, with at least 15% EMPTY space on every side. Complete the currently clipped outer LEFT rim of the bell on his tail and the currently clipped TOP brass rim of the net. Both must be fully enclosed by transparent margins. Preserve the exact face, imp anatomy, hands, stance, gold bell, brass net angle, translucent mesh and the folded dark shadow behind the mesh, all colours and painterly finish. Do NOT make a closeup. The whole composition MUST be surrounded by a broad empty border; nothing may touch the outer canvas. No new object, no ground, no halo or text. Genuine transparent alpha background. This is a wide full-body asset, not a crop.",
+      "references": [
+        "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-6fabee26-2a4b-4d13-a0ce-0f955c1714ae.png"
+      ],
+      "original": "C:\\Users\\BlackBox\\.codex\\generated_images\\01a14571-3158-7803-a31b-3d1947a67b83\\exec-237db06d-539a-4c92-9f86-20a65c3c92ef.png"
+    }
+  ]
+}

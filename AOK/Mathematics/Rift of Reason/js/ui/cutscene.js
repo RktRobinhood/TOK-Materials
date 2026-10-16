@@ -418,8 +418,19 @@
                 const target = anchor ? Object.assign({}, item, { x: anchor.x, y: anchor.y,
                     w: item.w * (anchor.scale || 1), h: item.h * (anchor.scale || 1) }) : item;
                 const r = this.toScreen(shot, target);
-                Object.assign(style, { left: px(r.x - r.w / 2), top: px(r.y - r.h / 2),
-                    width: px(r.w), height: px(r.h), fontSize: px(item.font * r.w / item.w),
+                const font = item.font * r.w / item.w;
+                const compact = item.compact && font < 12;
+                item.node.classList.toggle('cs-caption-label', !!compact);
+                // Important labels become a readable legend in the sky area on a small stage.
+                // Physical prop lettering keeps following the prop, so it cannot spill off it.
+                const columns = compact ? item.compact.columns : 1;
+                const cell = compact ? (W * this.scale - 24) / columns : 0;
+                Object.assign(style, compact ? {
+                    left: px(12 + item.compact.column * cell), top: px(6 + item.compact.row * 30),
+                    width: px(cell - 8), height: '28px', fontSize: '12px',
+                } : { left: px(r.x - r.w / 2), top: px(r.y - r.h / 2),
+                    width: px(r.w), height: px(r.h), fontSize: px(font) });
+                Object.assign(style, {
                     opacity: String(item.state.opacity * (anchor ? anchor.opacity : 1)) });
             } else if (item.kind === 'box' && shot) {
                 const r = this.toScreen(shot, item);
@@ -667,7 +678,7 @@
         if (s.hud === 'text') {
             const node = el('div.cs-lettering', { text: s.label || '', style: { color: colour } });
             const item = { kind: 'text', id: s.id, x: s.x, y: s.y, w: s.w, h: s.h, depth: s.depth,
-                follow: s.follow, font: s.font || 28, node, state: { opacity: 0 } };
+                follow: s.follow, font: s.font || 28, compact: s.compact, node, state: { opacity: 0 } };
             this.hud.push(item); this.hudLayer.appendChild(node);
             this.tween(item.state, { opacity: 1 }, this.calm ? 700 : 250, 'out');
             return null;

@@ -1,0 +1,24 @@
+0.0s  ambience
+0.0s  shot  a-place-in-the-sun
+0.1s  note  The sun comes out. Half a shadow lies where it should.
+0.1s  tween  fair
+0.1s  tween  shadow
+3.7s  shot  the-thinking-trophy
+3.7s  note  Granny holds up the Thinking Trophy.
+6.5s  say  "For the thinker who is always right." Is that you?
+11.7s  ambience
+11.7s  say  Probably.
+13.4s  wait
+15.2s  say  Then it isn't yours. Good. It's very heavy.
+19.9s  note  By the stall, Nudge claps. Once. Then the whole Fair claps. For "probably".
+19.9s  set  nudge
+19.9s  sfx  single-clap
+19.9s  wait
+20.8s  sfx  fair-applause
+20.8s  wait
+25.4s  ambience
+25.4s  say  Tick. Tock. Good. Say it like that.
+30.6s  note  The end. For now.
+32.6s  hud  clear
+33.3s  wait
+34.9s  end

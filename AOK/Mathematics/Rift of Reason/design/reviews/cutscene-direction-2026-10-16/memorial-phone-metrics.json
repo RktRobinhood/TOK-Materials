@@ -1,0 +1,80 @@
+{
+  "height": 844,
+  "labels": [
+    {
+      "font": "12px",
+      "rect": {
+        "bottom": 306.3125,
+        "height": 28,
+        "left": 12,
+        "right": 187,
+        "top": 278.3125,
+        "width": 175,
+        "x": 12,
+        "y": 278.3125
+      },
+      "scroll": 175,
+      "text": "SEQUINS",
+      "width": 175
+    },
+    {
+      "font": "12px",
+      "rect": {
+        "bottom": 306.3125,
+        "height": 28,
+        "left": 195,
+        "right": 370,
+        "top": 278.3125,
+        "width": 175,
+        "x": 195,
+        "y": 278.3125
+      },
+      "scroll": 175,
+      "text": "GRANNY",
+      "width": 175
+    },
+    {
+      "font": "12px",
+      "rect": {
+        "bottom": 336.3125,
+        "height": 28,
+        "left": 12,
+        "right": 187,
+        "top": 308.3125,
+        "width": 175,
+        "x": 12,
+        "y": 308.3125
+      },
+      "scroll": 175,
+      "text": "THE SUNDIAL",
+      "width": 175
+    },
+    {
+      "font": "12px",
+      "rect": {
+        "bottom": 336.3125,
+        "height": 28,
+        "left": 195,
+        "right": 370,
+        "top": 308.3125,
+        "width": 175,
+        "x": 195,
+        "y": 308.3125
+      },
+      "scroll": 175,
+      "text": "PIP",
+      "width": 175
+    }
+  ],
+  "skip": {
+    "bottom": 62.875,
+    "height": 46,
+    "left": 332,
+    "right": 378,
+    "top": 16.875,
+    "width": 46,
+    "x": 332,
+    "y": 16.875
+  },
+  "width": 390
+}

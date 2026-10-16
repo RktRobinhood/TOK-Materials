@@ -1,0 +1,18 @@
+0.1s  ambience
+0.1s  shot  the-lanterns
+0.1s  hud  text
+0.1s  hud  text
+0.1s  hud  text
+0.1s  wait
+1.5s  note  The lanterns. A candle burns under each dark one.
+4.9s  note  Pip never had a lantern here. You light a new one for him. A candle goes under it.
+4.9s  tween  lantern-pip
+4.9s  tween  candle-pip
+4.9s  hud  text
+9.8s  say  Her magpie friend. All shine, she said. It's dark now.
+14.1s  say  Granny Axiom. I lived in her hallway. She wound me every Sunday.
+19.7s  say  Her rock. Ninety years she said good morning to it.
+24.5s  say  Pip. He'd have written all this down.
+28.3s  hud  clear
+29.0s  wait
+31.2s  end

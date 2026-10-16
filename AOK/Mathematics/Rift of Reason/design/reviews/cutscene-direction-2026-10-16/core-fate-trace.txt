@@ -1,0 +1,14 @@
+0.0s  ambience
+0.0s  shot  the-small-decision
+0.0s  wait
+0.7s  tween  label-board
+2.1s  hud  text
+2.2s  note  You hang a sign on it: IT GUESSES.
+4.9s  say  probably.
+6.5s  tween  last-piece
+7.6s  tween  last-piece
+9.8s  tween  restored-shadow
+11.2s  say  Tick. Tock. Ah. That feels better.
+15.4s  hud  clear
+16.1s  wait
+17.5s  end

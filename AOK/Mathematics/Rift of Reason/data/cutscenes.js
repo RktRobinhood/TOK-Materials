@@ -116,6 +116,11 @@
             { end: true, fade: 1500, reveal: true },
         ],
     };
+    // The four stolen pieces have distinct silhouettes. Complete shadows belong on the ground;
+    // fragments may be carried or exhibited without turning into miniature whole sundials.
+    const SHADOW = { whole: 'cutscene/shadow-whole', half: 'cutscene/shadow-incomplete',
+        one: 'cutscene/shadow-fragment-one', two: 'cutscene/shadow-fragment-two',
+        three: 'cutscene/shadow-fragment-three', four: 'cutscene/shadow-fragment-four' };
     // Whole figures stay above the subtitle band. Cameras never punch through their silhouettes.
     const FAIR = [
         { id: 'fair', art: 'scene/fair', x: 800, y: 450, w: 1600, h: 900, cover: true },
@@ -124,9 +129,10 @@
         { id: 'granny', art: 'npc/granny-axiom/idle', x: 900, bottom: 730, w: 270 },
         { id: 'sundial', art: 'npc/sundial/idle', x: 1130, bottom: 730, w: 135 },
         { id: 'toy', art: 'ui/guess-o-matic', x: 470, bottom: 735, w: 95 },
-        { id: 'shadow', art: 'cutscene/sundial-shadow', x: 1190, bottom: 745, w: 200 },
-        { id: 'gull', art: 'creature/siuuugull/idle', x: 1370, bottom: 600, w: 120 },
+        { id: 'shadow', art: SHADOW.whole, x: 1200, y: 742, w: 240, sy: 0.4, opacity: 0.65 },
+        { id: 'gull', art: 'creature/siuuugull/idle', x: 1290, bottom: 735, w: 180 },
     ];
+    const fairConcern = Object.assign({}, FAIR[2], { art: '{avatar}/solemn' });
     const fairLine = (at, during) => ({ line: 'prologue.rupture', at, during });
     C['fair-rupture'] = {
         title: 'The Fair: the sky opens', script: 'prologue.rift', replayLabel: 'Watch the Fair rupture again',
@@ -137,44 +143,46 @@
             fairLine(0), fairLine(1), fairLine(2), fairLine(3),
             // The streamer records the boast; the sky answers from outside the frame.
             { shot: 'quote-saved', fade: 550, camera: { x: 800, y: 450, zoom: 1 }, layers: FAIR.concat([
-                { id: 'streamer', art: 'creature/speedcheeta/idle', x: 1390, bottom: 730, w: 220 },
+                { id: 'streamer', art: 'creature/speedcheeta/idle', x: 1490, bottom: 730, w: 160 },
             ]) },
             fairLine(4), { ambience: 'cutscene/cold-open' }, fairLine(5),
             fairLine(6),
             { tween: 'sequins', to: { x: 150 }, dur: 1200, wait: true },
             { shot: 'the-sky-opens', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                FAIR[0], FAIR[2], FAIR[3], FAIR[4],
+                FAIR[0], fairConcern, FAIR[3], FAIR[4],
                 { id: 'rift', art: 'fx/rift-6', x: 1080, y: 260, w: 420, opacity: 0, glow: '#3fe0d0' },
                 { id: 'eye', art: 'npc/algorithm/sky-eye', x: 1080, y: 250, w: 530, opacity: 0 },
-                { id: 'shadow', art: 'cutscene/sundial-shadow', x: 1190, bottom: 745, w: 200 },
-                { id: 'thief', art: 'cutscene/nudge-net-empty', x: 1390, bottom: 735, w: 320, opacity: 0 },
+                FAIR[6],
                 FAIR[7],
+                // The thief crosses in front of the gull so his face and net stay readable.
+                { id: 'thief', art: 'cutscene/nudge-net-empty', x: 1430, bottom: 735, w: 320, opacity: 0 },
             ] },
             fairLine(7, [{ sfx: 'rift' }, { tween: 'rift', to: { opacity: 1 }, dur: 1800 }]),
             fairLine(8, [{ tween: 'eye', to: { opacity: 1 }, dur: 2200 }]),
-            { tween: 'thief', to: { opacity: 1, x: 1280 }, dur: 1500, wait: true },
-            { tween: 'shadow', to: { x: 1380, y: 495, scale: 0.35, opacity: 0 }, dur: 1700, wait: true },
-            { set: 'thief', art: 'cutscene/nudge-shadow' },
+            { tween: 'thief', to: { opacity: 1, x: 1370 }, dur: 1500, wait: true },
+            { tween: 'shadow', to: { x: 1470, y: 490, sy: 1, scale: 0.35, opacity: 0 }, dur: 1700, wait: true },
+            { set: 'thief', art: 'cutscene/nudge-net-soft-shadow' },
             { wait: 500 }, fairLine(9),
             { tween: 'thief', to: { opacity: 0 }, dur: 1100, wait: true },
             fairLine(10), { wait: 800 }, fairLine(11),
             { shot: 'the-fair-changes', fade: 700, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                FAIR[0], FAIR[2], FAIR[3], FAIR[4],
+                FAIR[0], fairConcern, FAIR[3], FAIR[4],
                 { id: 'eye', art: 'npc/algorithm/sky-eye', x: 1080, y: 250, w: 530 },
-                { id: 'gull', art: 'creature/siuuugull/idle', x: 1320, bottom: 735, w: 250 },
-                { id: 'skin', art: 'fx/possessed', x: 1320, y: 575, w: 300, opacity: 0 },
-                { id: 'eye-light', art: 'fx/rift-1', x: 1250, y: 410, w: 70, opacity: 0 },
+                FAIR[7],
+                { id: 'skin', art: 'fx/possessed', x: 1290, y: 610, w: 220, opacity: 0 },
+                { id: 'eye-light', art: 'fx/rift-1', x: 1080, y: 290, w: 55, opacity: 0 },
             ] },
             { wait: 1000 },
-            { tween: 'eye-light', to: { opacity: 0.8 }, dur: 1000, wait: true },
+            { tween: 'eye-light', to: { opacity: 0.8 }, dur: 600, wait: true },
+            { tween: 'eye-light', to: { x: 1290, y: 610 }, dur: 1600, wait: true },
             { tween: 'skin', to: { opacity: 0.4 }, dur: 1500, wait: true },
             { tween: 'eye-light', to: { opacity: 0 }, dur: 700, wait: true },
             fairLine(12), fairLine(13),
             { shot: 'down-the-road', fade: 800, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                FAIR[0], FAIR[2], FAIR[3], FAIR[4],
+                FAIR[0], fairConcern, FAIR[3], FAIR[4],
                 { id: 'eye', art: 'npc/algorithm/sky-eye', x: 1080, y: 250, w: 530 },
-                { id: 'gull', art: 'creature/siuuugull/idle', x: 1320, bottom: 735, w: 250 },
-                { id: 'skin', art: 'fx/possessed', x: 1320, y: 575, w: 300, opacity: 0.4 },
+                FAIR[7],
+                { id: 'skin', art: 'fx/possessed', x: 1290, y: 610, w: 220, opacity: 0.4 },
                 { id: 'sequins', art: 'npc/professor-sequins/idle', x: 150, bottom: 730, w: 300 },
                 { id: 'glint1', art: 'item/lucky-sequin', x: 340, y: 550, w: 20, opacity: 0 },
                 { id: 'glint2', art: 'item/lucky-sequin', x: 360, y: 585, w: 16, opacity: 0 },
@@ -204,7 +212,7 @@
             { ambience: 'scene/road-gate' },
             { shot: 'the-open-gate', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 { id: 'gate', art: 'scene/gate-after', x: 800, y: 450, w: 1600, h: 900, cover: true },
-                { id: 'hero', art: '{avatar}/idle', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
+                { id: 'hero', art: '{avatar}/solemn', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
                 { id: 'sequins', art: 'npc/professor-sequins/idle', x: 880, bottom: 730, w: 330, when: { all: ['!dead:sequins', { flag: 'stakes.ch1', is: 1 }] } },
                 { id: 'sequins', art: 'npc/professor-sequins/idle', x: 880, bottom: 730, w: 330, bright: 0.65, when: { all: ['!dead:sequins', { flag: 'stakes.ch1', is: 2 }] } },
                 { id: 'sequins', art: 'npc/professor-sequins/idle', x: 880, bottom: 730, w: 330, bright: 0.4, when: { all: ['!dead:sequins', { flag: 'stakes.ch1', gte: 3 }] } },
@@ -214,16 +222,16 @@
             { shot: 'the-escaping-piece', fade: 1000, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 { id: 'pass', art: 'scene/rift-pass', x: 800, y: 450, w: 1600, h: 900, cover: true },
                 { id: 'eye', art: 'npc/algorithm/sky-eye', x: 1050, y: 230, w: 390, opacity: 0.75 },
-                { id: 'hero', art: '{avatar}/idle', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
+                { id: 'hero', art: '{avatar}/solemn', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
                 { id: 'nudge', art: 'npc/nudge/idle', x: 1100, bottom: 720, w: 210, when: '!dead:sequins' },
                 { id: 'ring', art: 'cutscene/ring-light-broken', x: 930, bottom: 725, w: 130, when: { all: ['!dead:sequins', { clock: 'ch1', lte: 2 }] } },
                 { id: 'ring', art: 'cutscene/ring-light', x: 960, bottom: 725, w: 130, when: { all: ['!dead:sequins', { clock: 'ch1', gte: 3 }] } },
-                { id: 'piece', art: 'cutscene/sundial-shadow', x: 1130, y: 620, w: 145, when: '!dead:sequins' },
+                { id: 'piece', art: SHADOW.one, x: 1170, y: 560, w: 76, when: '!dead:sequins' },
             ] },
             { line: 'ch1.gate.escape', at: 0 },
-            { tween: 'piece', to: { x: 600, y: 620 }, dur: 1500, wait: true, when: { all: ['!dead:sequins', { clock: 'ch1', lte: 2 }] } },
+            { tween: 'piece', to: { x: 560, y: 590 }, dur: 1500, wait: true, when: { all: ['!dead:sequins', { clock: 'ch1', lte: 2 }] } },
             { tween: 'nudge', to: { x: 1210, y: 360, scale: 0.4, opacity: 0 }, dur: 1500, when: '!dead:sequins' },
-            { tween: 'piece', to: { x: 1210, y: 360, scale: 0.4, opacity: 0 }, dur: 1500, when: { all: ['!dead:sequins', { clock: 'ch1', gte: 3 }] } },
+            { tween: 'piece', to: { x: 1240, y: 365, scale: 0.4, opacity: 0 }, dur: 1500, when: { all: ['!dead:sequins', { clock: 'ch1', gte: 3 }] } },
             { tween: 'ring', to: { x: 1190, y: 400, scale: 0.4, opacity: 0 }, dur: 1500, when: { all: ['!dead:sequins', { clock: 'ch1', gte: 3 }] } },
             { wait: 1700, when: '!dead:sequins' },
             { line: 'ch1.gate.escape', at: 1, when: '!dead:sequins' },
@@ -232,7 +240,7 @@
             { ambience: 'cutscene/cold-open' },
             { shot: 'the-wrong-victory', fade: 1500, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 { id: 'gate', art: 'scene/gate-after', x: 800, y: 450, w: 1600, h: 900, cover: true },
-                { id: 'hero', art: '{avatar}/idle', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
+                { id: 'hero', art: '{avatar}/solemn', x: 470, bottom: 730, w: 270, wFor: { mothkin: 290 } },
                 { id: 'door-feed', art: 'scene/granny-door', x: 1090, y: 410, w: 700, h: 394, depth: 0 },
                 { id: 'watcher', art: 'npc/algorithm/sky-eye', x: 1180, y: 150, w: 260, opacity: 0.7 },
             ] },
@@ -245,16 +253,17 @@
     // The Hall keeps its decisions and danger in lesson2.js. These passages only stage the
     // canonical words after the player's liar sentence; Journal joins them without mutations.
     const hallRoom = { id: 'hall', art: 'scene/hall-after', x: 800, y: 450, w: 1600, h: 900, cover: true };
-    // The surviving captive stays visibly in peril until the outcome passage releases her.
-    const hallPerilRoom = [Object.assign({}, hallRoom, { art: 'scene/feast-hall', when: { all: ['!dead:granny', { clock: 'ch2', lte: 7 }] } }),
+    // The accepted paradox locks the winch and extinguishes the fire. The outcome/reward still
+    // resolves in the story, but the confession no longer competes with an active emergency.
+    const hallPerilRoom = [Object.assign({}, hallRoom, { art: 'scene/hall-stilled', when: { all: ['!dead:granny', { clock: 'ch2', lte: 7 }] } }),
         Object.assign({}, hallRoom, { when: { any: ['dead:granny', { clock: 'ch2', gte: 8 }] } }),
         // On the no-death brink the rope already snapped: she has climbed out, without her shawl.
         { id: 'granny-safe', art: 'cutscene/granny-without-shawl', x: 200, bottom: 730, w: 200,
             when: { all: ['!dead:granny', { clock: 'ch2', gte: 8 }] } }];
-    const hallHero = { id: 'hero', art: '{avatar}/idle', x: 1110, bottom: 730, w: 255, wFor: { mothkin: 280 } };
+    const hallHero = { id: 'hero', art: '{avatar}/solemn', x: 1110, bottom: 730, w: 255, wFor: { mothkin: 280 }, mirror: true };
     const hallQuill = { id: 'quill', art: 'cutscene/quill-unmasked', x: 540, bottom: 730, w: 335 };
-    const hallPiece = { id: 'shadow-two', art: 'cutscene/sundial-shadow', x: 560, y: 680, w: 145 };
-    const hallFirst = { id: 'shadow-one', art: 'cutscene/sundial-shadow', x: 700, bottom: 735, w: 130, when: 'nudgeFled' };
+    const hallPiece = { id: 'shadow-two', art: SHADOW.two, x: 560, y: 727, w: 95, sy: 0.65 };
+    const hallFirst = { id: 'shadow-one', art: SHADOW.one, x: 1340, y: 728, w: 75, sy: 0.55, when: 'nudgeFled' };
     C['town-hall-unmask'] = {
         title: 'The Hall: the faces fall',
         steps: [
@@ -263,6 +272,7 @@
                 ...hallPerilRoom, hallHero, Object.assign({}, hallQuill, { art: 'cutscene/quill-masked', w: 300 }),
                 { id: 'smudge', art: 'npc/villager-sweep/idle', x: 110, bottom: 460, w: 90, when: 'paradox-board' },
             ] },
+            { conversation: 'ch2.hall.safety' },
             { wait: 700 }, { conversation: 'ch2.hall.break' },
             // The speech finishes before the face moves. A detached prop makes the loss physical.
             { set: 'quill', art: 'cutscene/quill-unmasked' },
@@ -286,15 +296,15 @@
                 { id: 'guest-a', art: 'npc/imp-bunny/masked', x: 470, bottom: 705, w: 170 },
                 { id: 'guest-b', art: 'npc/imp-duck/masked', x: 690, bottom: 705, w: 170 },
                 { id: 'guest-c', art: 'npc/imp-hedgehog/masked', x: 910, bottom: 705, w: 170 },
-                { id: 'nudge', art: 'npc/nudge/masked', x: 1230, bottom: 730, w: 220 },
-                { id: 'shadow-one', art: 'cutscene/sundial-shadow', x: 1260, y: 510, w: 130, opacity: 0, when: 'nudgeFled' },
+                { id: 'nudge', art: 'npc/nudge/masked', x: 1340, bottom: 730, w: 190 },
+                { id: 'shadow-one', art: SHADOW.one, x: 1340, y: 510, w: 75, opacity: 0, when: 'nudgeFled' },
             ] },
             { set: 'guest-a', art: 'npc/imp-bunny/unmasked' },
             { wait: 300 }, { set: 'guest-b', art: 'npc/imp-duck/unmasked' },
             { wait: 300 }, { set: 'guest-c', art: 'npc/imp-hedgehog/unmasked' },
-            { set: 'nudge', art: 'npc/nudge/idle', h: 329, y: 565.5 },
+            { set: 'nudge', art: 'npc/nudge/idle', h: 284, y: 588 },
             { conversation: 'ch2.hall.masks' },
-            { tween: 'shadow-one', to: { opacity: 1, x: 1100, y: 710 }, dur: 1400, wait: true, when: 'nudgeFled' },
+            { tween: 'shadow-one', to: { opacity: 1, y: 728, sy: 0.55 }, dur: 1400, wait: true, when: 'nudgeFled' },
             { conversation: 'ch2.hall.first-piece' },
             { shot: 'forty-years', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 ...hallPerilRoom, hallHero, hallQuill, hallPiece, hallFirst,
@@ -340,10 +350,11 @@
         steps: [
             { ambience: 'cutscene/cold-open' },
             { shot: 'the-window', fade: 1100, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                hallRoom, hallHero, hallQuill, hallPiece, hallFirst,
+                hallRoom,
                 { id: 'rift', art: 'fx/rift-6', x: 800, y: 300, w: 330, opacity: 0.75 },
+                hallHero, hallQuill, hallPiece, hallFirst,
             ] },
-            { tween: 'quill', to: { x: 800, y: 395, scale: 0.8 }, dur: 1800, wait: true },
+            { tween: 'quill', to: { x: 800, y: 425, scale: 0.8 }, dur: 1800, wait: true },
             { conversation: 'ch2.hall.exit' },
             // Her threat belongs to her face, not an empty window. She leaves after speaking.
             { tween: 'quill', to: { x: 800, y: 300, scale: 0.35, opacity: 0 }, dur: 2000, wait: true },
@@ -364,13 +375,13 @@
     // The Tribunal's accepted evidence and clock resolve in lesson3.js. Only the returned
     // shadow is shown here; a bargain never conjures the two pieces already handed away.
     const courtRoom = { id: 'court', art: 'scene/tribunal', x: 800, y: 450, w: 1600, h: 900, cover: true };
-    const courtHero = { id: 'hero', art: '{avatar}/idle', x: 1230, bottom: 730, w: 235, wFor: { mothkin: 260 } };
+    const courtHero = { id: 'hero', art: '{avatar}/solemn', x: 1230, bottom: 730, w: 235, wFor: { mothkin: 260 }, mirror: true };
     const courtPip = { id: 'pip', art: 'cutscene/pip-solemn', x: 1000, bottom: 730, w: 185 };
     const courtFin = { id: 'fin', art: 'cutscene/fin-subdued', x: 420, bottom: 730, w: 245 };
     const courtSundial = { id: 'sundial', art: 'npc/sundial/idle', x: 800, bottom: 730, w: 115, when: '!dead:sundial' };
     const courtCase = { id: 'case', art: 'cutscene/exhibit-case', x: 630, bottom: 680, w: 220 };
     const courtGlass = { id: 'glass', art: 'cutscene/exhibit-glass', x: 650, y: 585, w: 160, opacity: 0.3 };
-    const courtPiece = { id: 'exhibit', art: 'cutscene/sundial-shadow', x: 650, y: 590, w: 90 };
+    const courtPiece = { id: 'exhibit', art: SHADOW.three, x: 650, y: 590, w: 95 };
     const courtAisle = [courtRoom, courtFin, courtCase, courtPiece, courtGlass, courtHero, courtPip, courtSundial,
         { id: 'judge', art: 'npc/judge/idle', x: 800, bottom: 535, w: 170 }];
     const living = '!dead:sundial';
@@ -419,7 +430,7 @@
             // Living owner gets the exhibit before Fin explains; the death branch releases it later.
             { line: 'ch3.trial.release', at: 0, when: living, during: [
                 { tween: 'glass', to: { y: 365, opacity: 0.2 }, dur: 1300, wait: true },
-                { tween: 'exhibit', to: { x: 800, y: 690 }, dur: 2200, wait: true },
+                { tween: 'exhibit', to: { x: 835, y: 728, sy: 0.6 }, dur: 2200, wait: true },
             ] },
             { hud: 'clear' },
             { hud: 'box', id: 'fin-licence', x: 420, y: 205, w: 350, h: 100, label: 'PROSECUTOR FIN · LICENCE ACTIVE' },
@@ -470,7 +481,7 @@
     };
     // The Core makes the machine small. Decisions remain in lesson4.js between these films.
     const coreRoom = { id: 'room', art: 'scene/core-chamber', x: 800, y: 450, w: 1600, h: 900, cover: true, bright: 0.8 };
-    const coreHero = { id: 'hero', art: '{avatar}/idle', x: 1320, bottom: 730, w: 240, wFor: { mothkin: 265 } };
+    const coreHero = { id: 'hero', art: '{avatar}/solemn', x: 1320, bottom: 730, w: 240, wFor: { mothkin: 265 }, mirror: true };
     const coreOld = { id: 'old-box', art: 'npc/algorithm/core', x: 760, bottom: 700, w: 160 };
     const coreYoung = { id: 'young-box', art: 'ui/guess-o-matic', x: 950, bottom: 700, w: 130 };
     const shellLeft = { id: 'shell-left', art: 'cutscene/colossus-shell-left', x: 605, bottom: 730, w: 310 };
@@ -483,12 +494,18 @@
         Object.assign({}, shellLeft, { x: 380, bright: 0.22 }),
         Object.assign({}, shellRight, { x: 1100, bright: 0.22 }),
         coreOld, coreYoung, ...coreCompanions, coreHero];
+    // A whole-object close shot: the confession belongs to these two small faces. No actor is
+    // cropped to obtain it; the listening traveller remains present in the surrounding wide shots.
+    const coreCloseOld = Object.assign({}, coreOld, { x: 610, w: 370 });
+    const coreCloseYoung = Object.assign({}, coreYoung, { x: 1030, w: 300 });
+    const coreCloseLayers = [Object.assign({}, coreRoom, { bright: 0.35 }), coreCloseOld, coreCloseYoung];
     const coreQuestionLabels = [
         ['believe', 'Why do people believe you?'], ['noclicks', 'What happens if nobody clicks?'],
         ['premises', 'What are your premises?'], ['light', 'What\'s behind all that light?'],
         ['small', 'What if you\'re small?'], ['before', 'What were you before?'], ['know', 'What do you mean by "know"?'],
     ].map(([value, question]) => ({ hud: 'text', id: 'chosen-question', x: 800, y: 130, w: 780, h: 80,
-        label: 'YOUR QUESTION: ' + question, when: { flag: 'wonder', is: value } }));
+        label: 'YOUR QUESTION: ' + question, compact: { columns: 1, column: 0, row: 0 },
+        when: { flag: 'wonder', is: value } }));
     C['core-copy-outcome'] = {
         title: 'The Core: your shape, your colours', noteLabel: 'THE CORE',
         steps: [
@@ -541,9 +558,14 @@
                 { tween: 'shell-right', to: { x: 1100, bright: 0.22 }, dur: 2500 },
                 { tween: 'old-box', to: { opacity: 1 }, dur: 2100, wait: true },
             ] },
-            { wait: 1400 }, { conversation: 'ch4.core.small-box' },
+            { wait: 1400 },
+            { shot: 'one-sequin', fade: 1000, camera: { x: 800, y: 450, zoom: 1 }, layers: [
+                coreCloseLayers[0], coreCloseOld,
+                Object.assign({}, coreCloseYoung, { x: 1250, y: 490, bottom: undefined, opacity: 0 }),
+            ] },
+            { conversation: 'ch4.core.small-box' },
             { line: 'ch4.core.young-box', at: 0, during: [
-                { tween: 'young-box', to: { opacity: 1, x: 950, y: 636 }, dur: 1900, wait: true },
+                { tween: 'young-box', to: { opacity: 1, x: 1030, bottom: 700 }, dur: 1900, wait: true },
             ] },
             { line: 'ch4.core.young-box', at: 1 }, { wait: 1000 },
             { line: 'ch4.core.young-box', at: 2 },
@@ -556,7 +578,7 @@
         title: 'The Core: stay small for a while', noteLabel: 'THE CORE',
         steps: [
             { ambience: 'cutscene/cold-open' },
-            { shot: 'no-applause', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: coreOpenLayers },
+            { shot: 'no-applause', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: coreCloseLayers },
             { wait: 900 }, { conversation: 'ch4.core.confession' },
             { wait: 1400 }, { end: true, fade: 1300, reveal: true },
         ],
@@ -567,24 +589,24 @@
             { ambience: 'cutscene/cold-open' },
             { shot: 'the-small-decision', fade: 1200, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 ...coreOpenLayers,
-                { id: 'label-board', art: 'cutscene/court-sign', x: 760, y: 565, w: 125, opacity: 0, when: { flag: 'fate', is: 'left' } },
-                { id: 'last-piece', art: 'cutscene/sundial-shadow', x: 760, y: 665, w: 85, opacity: 0 },
-                { id: 'restored-shadow', art: 'cutscene/sundial-shadow', x: 1160, y: 715, w: 140, opacity: 0,
+                { id: 'label-board', art: 'cutscene/court-sign', x: 760, y: 505, w: 180, opacity: 0, when: { flag: 'fate', is: 'left' } },
+                { id: 'last-piece', art: SHADOW.four, x: 760, y: 665, w: 65, opacity: 0 },
+                { id: 'restored-shadow', art: SHADOW.whole, x: 1160, y: 742, w: 190, sy: 0.4, opacity: 0,
                     when: { all: ['!dead:sundial', { flag: 'bargain', not: 'yes' }] } },
-                { id: 'restored-shadow', art: 'cutscene/sundial-half-shadow', x: 1160, y: 715, w: 140, opacity: 0,
+                { id: 'restored-shadow', art: SHADOW.half, x: 1185, y: 735, w: 100, sy: 0.4, opacity: 0,
                     when: { all: ['!dead:sundial', { flag: 'bargain', is: 'yes' }] } },
             ] },
             { wait: 700 },
             { tween: 'old-box', to: { bright: 0.12 }, dur: 1800, wait: true, when: { flag: 'fate', is: 'off' } },
             { tween: 'label-board', to: { opacity: 1 }, dur: 1400, wait: true, when: { flag: 'fate', is: 'left' } },
-            { hud: 'text', id: 'honest-label', follow: 'label-board', x: 760, y: 565, w: 115, h: 65, label: 'IT GUESSES', colour: '#413244',
+            { hud: 'text', id: 'honest-label', follow: 'label-board', x: 760, y: 505, w: 160, h: 65, font: 22, label: 'IT GUESSES', colour: '#413244',
                 when: { flag: 'fate', is: 'left' } },
             { conversation: 'ch4.core.fate-action' },
             { tween: 'old-box', to: { x: 1250, y: 570, scale: 0.6 }, dur: 2100, wait: true,
                 when: { flag: 'fate', in: ['home', 'off'] } },
             { tween: 'last-piece', to: { opacity: 1 }, dur: 1100, wait: true },
-            { tween: 'last-piece', to: { x: 1110, y: 700, opacity: 0 }, dur: 2200, wait: true, when: '!dead:sundial' },
-            { tween: 'restored-shadow', to: { opacity: 0.85 }, dur: 1400, wait: true, when: '!dead:sundial' },
+            { tween: 'last-piece', to: { x: 1160, y: 735, sy: 0.4, opacity: 0 }, dur: 2200, wait: true, when: '!dead:sundial' },
+            { tween: 'restored-shadow', to: { opacity: 0.65 }, dur: 1400, wait: true, when: '!dead:sundial' },
             { conversation: 'ch4.core.last-piece', when: '!dead:sundial' },
             { line: 'ch4.core.last-piece', at: 0, when: 'dead:sundial', during: [
                 { tween: 'last-piece', to: { x: 1260, y: 580 }, dur: 2100, wait: true },
@@ -598,7 +620,7 @@
         title: 'The Core: probably', noteLabel: 'THE CORE', script: 'ch4.core.win', replayLabel: 'Watch the Core revelation again',
         steps: [].concat(C['core-copy-outcome'].steps.filter(s => !s.end),
             [{ shot: 'the-recorded-question', fade: 900, camera: { x: 800, y: 450, zoom: 1 }, layers: [
-                coreRoom, { id: 'colossus', art: 'npc/algorithm/colossus', x: 760, bottom: 730, w: 650 }, coreHero,
+                coreRoom, { id: 'colossus', art: 'npc/algorithm/colossus', x: 760, bottom: 730, w: 400 }, coreHero,
             ] }, { conversation: 'ch4.core.prediction' }],
             C['core-revelation'].steps.filter(s => !s.end), C['core-confession'].steps.filter(s => !s.end), C['core-chosen-fate'].steps),
     };
@@ -626,7 +648,8 @@
             opacity: name === 'pip' ? 0 : 1, when: 'dead:' + name },
     ]);
     const memorialLabels = memorialDeaths.map((name, i) => ({ hud: 'text', id: 'name-' + name, x: 470 + i * 200, y: 415,
-        w: 175, h: 55, label: name === 'sundial' ? 'THE SUNDIAL' : name.toUpperCase(), colour: '#f6e9cf', when: 'dead:' + name }));
+        w: 175, h: 55, label: name === 'sundial' ? 'THE SUNDIAL' : name.toUpperCase(), colour: '#f6e9cf',
+        compact: { columns: 2, column: i % 2, row: Math.floor(i / 2) }, when: 'dead:' + name }));
     C['fair-home-recognition'] = {
         title: 'Home: somebody was already here', noteLabel: 'THE FAIR',
         steps: [
@@ -663,7 +686,8 @@
             { shot: 'the-lanterns', fade: 1800, camera: { x: 800, y: 450, zoom: 1 }, layers: [
                 Object.assign({}, fairHome, { bright: 0.55 }),
                 ...homeElder.map(l => Object.assign({}, l, { x: 220, w: l.art === 'npc/achilles/idle' ? 108 : 210 })),
-                ...memorialProps, ...homeCompanion.map(l => Object.assign({}, l, { x: 1180 })), homeHero,
+                ...memorialProps, ...homeCompanion.map(l => Object.assign({}, l, { x: 1180 })),
+                Object.assign({}, homeHero, { art: '{avatar}/solemn' }),
             ] },
             ...memorialLabels.filter(l => l.id !== 'name-pip'),
             { wait: 1400 }, { conversation: 'finale.home.memorial-lanterns' },
@@ -695,7 +719,8 @@
             { conversation: 'finale.home.shelf-boxes' }, { conversation: 'finale.home.shelf-nudge' },
             { line: 'finale.home.nuts', at: 0, during: [
                 { hud: 'text', id: 'nuts-claim', x: 1000, y: 135, w: 720, h: 120,
-                    label: 'BEST NUTS IN THE WORLD! EVERYONE SAYS SO!', colour: '#ffdb9c' },
+                    label: 'BEST NUTS IN THE WORLD! EVERYONE SAYS SO!', colour: '#ffdb9c',
+                    compact: { columns: 1, column: 0, row: 0 } },
                 { tween: 'nudge', to: { x: 1000 }, dur: 1600, wait: true },
             ] },
             { conversation: 'finale.home.new-word' },
@@ -707,9 +732,9 @@
         { id: 'silent-stone', art: 'cutscene/sundial-silent', x: 1100, bottom: 730, w: 105, when: 'dead:sundial' },
         { id: 'kuku', art: 'npc/kuku/idle', x: 730, bottom: 730, w: 145, when: { all: ['dead:sundial', 'arrived:sundial'] } },
         ...[false, true].flatMap(dead => [
-            { id: 'shadow', art: 'cutscene/sundial-shadow', x: dead ? 1100 : 1140, y: dead ? 665 : 715, w: dead ? 65 : 140,
+            { id: 'shadow', art: SHADOW.whole, x: dead ? 1100 : 1150, y: dead ? 675 : 742, w: dead ? 75 : 190, sy: dead ? 0.65 : 0.4,
                 opacity: 0, when: { all: [dead ? 'dead:sundial' : '!dead:sundial', { flag: 'bargain', not: 'yes' }] } },
-            { id: 'shadow', art: 'cutscene/sundial-half-shadow', x: dead ? 1100 : 1140, y: dead ? 665 : 715, w: dead ? 65 : 140,
+            { id: 'shadow', art: SHADOW.half, x: dead ? 1100 : 1180, y: dead ? 675 : 735, w: dead ? 65 : 100, sy: dead ? 0.65 : 0.4,
                 opacity: 0, when: { all: [dead ? 'dead:sundial' : '!dead:sundial', { flag: 'bargain', is: 'yes' }] } },
         ]),
         { id: 'sky-hair', art: 'cutscene/sky-crack', x: 1020, y: 150, w: 230, opacity: 0, bright: 0.35, when: { flag: 'feed', gte: 6 } },
@@ -720,7 +745,7 @@
         { id: 'elder', art: 'cutscene/achilles-trophy', x: 500, bottom: 730, w: 210, when: { all: ['dead:granny', 'arrived:granny'] } },
     ];
     const homeTrophyLayers = homeSunLayers.filter(l => l.id !== 'elder').map(l => Object.assign({}, l,
-        l.id === 'fair' ? { bright: 1 } : l.id === 'shadow' ? { x: l.y === 665 ? 800 : 840, opacity: l.y === 665 ? 0.45 : 0.85 }
+        l.id === 'fair' ? { bright: 1 } : l.id === 'shadow' ? { x: l.y === 675 ? 800 : l.art === SHADOW.half ? 880 : 850, opacity: l.y === 675 ? 0.45 : 0.65 }
             : l.id === 'sky-hair' ? { opacity: 0.65 } : l.id === 'nudge' ? { x: 450 }
                 : l.id === 'kuku' ? { x: 650 } : ['sundial', 'silent-stone'].includes(l.id) ? { x: 800 } : {}))
         .concat(trophyElder.map(l => Object.assign({}, l, { x: 1020 })));
@@ -732,8 +757,8 @@
             { set: 'shadow', x: 780, y: 560, when: { all: ['dead:sundial', 'arrived:sundial'] } },
             { line: 'finale.home.sunlight', at: 0, during: [
                 { tween: 'fair', to: { bright: 1 }, dur: 2200 },
-                { tween: 'shadow', to: { x: 1140, y: 715, opacity: 0.85 }, dur: 2400, wait: true, when: '!dead:sundial' },
-                { tween: 'shadow', to: { x: 1100, y: 665, opacity: 0.45 }, dur: 2400, wait: true, when: 'dead:sundial' },
+                { tween: 'shadow', to: { opacity: 0.65 }, dur: 2400, wait: true, when: '!dead:sundial' },
+                { tween: 'shadow', to: { x: 1100, y: 675, opacity: 0.45 }, dur: 2400, wait: true, when: 'dead:sundial' },
             ] },
             { line: 'finale.home.sunlight', at: 1, when: { all: ['dead:sundial', 'arrived:sundial'] } },
             { tween: 'sky-hair', to: { opacity: 0.65 }, dur: 1600, wait: true, when: { flag: 'feed', gte: 6 } },

@@ -1,0 +1,322 @@
+{
+  "baseline": "c9e6039",
+  "errors": [],
+  "sources": [
+    {
+      "id": "fox-girl",
+      "file": "director-fox-girl.png",
+      "w": 1101,
+      "h": 1428,
+      "bounds": {
+        "x": 5,
+        "y": 20,
+        "w": 1051,
+        "h": 1373
+      },
+      "sha256": "b21ef2182f13cb0170367f4d8a1ce9573c7ac3bc94cea4fa51fdb176b3a2f722"
+    },
+    {
+      "id": "fox-boy",
+      "file": "director-fox-boy.png",
+      "w": 1079,
+      "h": 1458,
+      "bounds": {
+        "x": 70,
+        "y": 77,
+        "w": 915,
+        "h": 1226
+      },
+      "sha256": "af5a422e84c49fa338e14b1e3c78f310d4079a350996cdf1010827215a0f77ee"
+    },
+    {
+      "id": "owlet-boy",
+      "file": "director-owlet-boy.png",
+      "w": 1179,
+      "h": 1334,
+      "bounds": {
+        "x": 104,
+        "y": 85,
+        "w": 987,
+        "h": 1136
+      },
+      "sha256": "ca78d1e89cc7f9182bc309d522cd530173d7a1613eebd4b1ce1fca5d2b46d9ec"
+    },
+    {
+      "id": "owlet-girl",
+      "file": "director-owlet-girl.png",
+      "w": 1159,
+      "h": 1358,
+      "bounds": {
+        "x": 112,
+        "y": 114,
+        "w": 955,
+        "h": 1115
+      },
+      "sha256": "1372c0121e96107fe792d099661ac2524b5dc466f3b203071c1f076d73d3bb53"
+    },
+    {
+      "id": "mothkin-boy",
+      "file": "director-mothkin-boy.png",
+      "w": 1054,
+      "h": 1493,
+      "bounds": {
+        "x": 64,
+        "y": 85,
+        "w": 904,
+        "h": 1282
+      },
+      "sha256": "c1260bdd103e93a33f84d23ada973936def4d0e81d261bc595d105742f965c35"
+    },
+    {
+      "id": "mothkin-girl",
+      "file": "director-mothkin-girl.png",
+      "w": 1085,
+      "h": 1449,
+      "bounds": {
+        "x": 62,
+        "y": 72,
+        "w": 973,
+        "h": 1289
+      },
+      "sha256": "ae8659cc249914d718c2cf525766f1f0eb8e8995636d16df821c50e8917553be"
+    },
+    {
+      "id": "frogling-girl",
+      "file": "director-frogling-girl.png",
+      "w": 1039,
+      "h": 1514,
+      "bounds": {
+        "x": 112,
+        "y": 152,
+        "w": 793,
+        "h": 1171
+      },
+      "sha256": "ead1d959fed4d81913157674003013f2f7760f251b8941d70d947cd2673299f8"
+    },
+    {
+      "id": "raven-boy",
+      "file": "director-raven-boy.png",
+      "w": 1037,
+      "h": 1517,
+      "bounds": {
+        "x": 69,
+        "y": 92,
+        "w": 879,
+        "h": 1316
+      },
+      "sha256": "6d912755b1d9bf61ea9f0c11be8faa55933a32671493d8541f351448ed86466f"
+    },
+    {
+      "id": "raven-girl",
+      "file": "director-raven-girl.png",
+      "w": 1071,
+      "h": 1468,
+      "bounds": {
+        "x": 93,
+        "y": 105,
+        "w": 889,
+        "h": 1245
+      },
+      "sha256": "4442d5890c1e86d3ef40b79beead75fe3e2d31c7f553cc34af7936c53853b8b1"
+    },
+    {
+      "id": "hall-stilled",
+      "file": "director-hall-stilled.png",
+      "w": 1672,
+      "h": 941,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1672,
+        "h": 941
+      },
+      "sha256": "17fcfd060e90b0ca000f434a8e6855cb5d57d6937fa9f8769e519f2a0094008b"
+    },
+    {
+      "id": "frogling-boy-clean",
+      "file": "director-frogling-boy-clean.png",
+      "w": 1024,
+      "h": 1536,
+      "bounds": {
+        "x": 138,
+        "y": 165,
+        "w": 718,
+        "h": 1172
+      },
+      "sha256": "82f91360a69cfb1299d59b77dcb609c7278230897f8725ca74f74386acd81ebf"
+    },
+    {
+      "id": "shadow-atlas-clean",
+      "file": "director-shadow-atlas-clean.png",
+      "w": 1536,
+      "h": 1024,
+      "bounds": {
+        "x": 48,
+        "y": 141,
+        "w": 1450,
+        "h": 756
+      },
+      "sha256": "f004deda57457e9405bd5b557862c88f34eed237ec78970250ad082f6136bcfb"
+    },
+    {
+      "id": "nudge-net-margin",
+      "file": "director-nudge-net-margin.png",
+      "w": 1536,
+      "h": 1024,
+      "bounds": {
+        "x": 289,
+        "y": 130,
+        "w": 1004,
+        "h": 797
+      },
+      "sha256": "3788f50e3183095c23efc6177715e38c7b6df5674a578165e53461de00e19dd6"
+    }
+  ],
+  "runtime": [
+    {
+      "id": "avatar/fox-girl/solemn",
+      "file": "avatars/fox-girl-solemn.webp",
+      "w": 475,
+      "h": 620,
+      "transparentPercent": 40.9,
+      "sha256": "dd681c9fb4c1e634ac29885117793beddc05d7ffe1badcb33916e137d21b1c41"
+    },
+    {
+      "id": "avatar/fox-boy/solemn",
+      "file": "avatars/fox-boy-solemn.webp",
+      "w": 463,
+      "h": 620,
+      "transparentPercent": 44.3,
+      "sha256": "8bbde5e722f3881f7f14c5a4e1d20c92b74371da624713ec5fd54bac5f12ff79"
+    },
+    {
+      "id": "avatar/owlet-boy/solemn",
+      "file": "avatars/owlet-boy-solemn.webp",
+      "w": 539,
+      "h": 620,
+      "transparentPercent": 37.2,
+      "sha256": "c574aaf246f2e3123edb8c84fcbbe6894d3daa90491a24c1cf07cd4ad8df60b0"
+    },
+    {
+      "id": "avatar/owlet-girl/solemn",
+      "file": "avatars/owlet-girl-solemn.webp",
+      "w": 531,
+      "h": 620,
+      "transparentPercent": 35.8,
+      "sha256": "e0a05a00f15b9daf4b4ddda41ce2e8a480d557bfb1fba7fc77798f2d68768de1"
+    },
+    {
+      "id": "avatar/mothkin-boy/solemn",
+      "file": "avatars/mothkin-boy-solemn.webp",
+      "w": 437,
+      "h": 620,
+      "transparentPercent": 40.6,
+      "sha256": "d70788f564c6d2a6983ef20a3c0072f41f386a0fbfb5c1643176a7757c1261c2"
+    },
+    {
+      "id": "avatar/mothkin-girl/solemn",
+      "file": "avatars/mothkin-girl-solemn.webp",
+      "w": 468,
+      "h": 620,
+      "transparentPercent": 37.1,
+      "sha256": "9edde1b12cc5519b1f99fc76d81aa69a4d93d52948883f2aa7cecf4a16b3105f"
+    },
+    {
+      "id": "avatar/frogling-girl/solemn",
+      "file": "avatars/frogling-girl-solemn.webp",
+      "w": 420,
+      "h": 620,
+      "transparentPercent": 31.2,
+      "sha256": "e0d18a753162f354f9aa4379020a7a6cd7969f686259fbeee2019ab201db679b"
+    },
+    {
+      "id": "avatar/raven-boy/solemn",
+      "file": "avatars/raven-boy-solemn.webp",
+      "w": 414,
+      "h": 620,
+      "transparentPercent": 37.8,
+      "sha256": "fd25916679361355cab4c822d6db2dc5cdfda9e4229bb6141b5a57c3def72cce"
+    },
+    {
+      "id": "avatar/raven-girl/solemn",
+      "file": "avatars/raven-girl-solemn.webp",
+      "w": 443,
+      "h": 620,
+      "transparentPercent": 34.6,
+      "sha256": "db49960a0834cb77aebbf62084f12e5c73eb5c8a263460705956d0bf3fe4badd"
+    },
+    {
+      "id": "scene/hall-stilled",
+      "file": "scenes/hall-stilled.webp",
+      "w": 1600,
+      "h": 900,
+      "small": "scenes/hall-stilled-small.webp",
+      "transparentPercent": 0,
+      "sha256": "c3a8f6f6bddcbe1b4c3bd6ba320cd785d949d6ff51d98458317d3fa791b5a3cc"
+    },
+    {
+      "id": "avatar/frogling-boy/solemn",
+      "file": "avatars/frogling-boy-solemn.webp",
+      "w": 380,
+      "h": 620,
+      "transparentPercent": 30.7,
+      "sha256": "63aeb740c81b0c6224874512301a72b8b0fc407e8e1889171135e8b79fca26ad"
+    },
+    {
+      "id": "cutscene/shadow-whole",
+      "file": "cutscene/shadow-whole.webp",
+      "w": 600,
+      "h": 271,
+      "transparentPercent": 65.7,
+      "sha256": "60390e8b16d808499283a96b01887d6000b8b35004c7b3246af736f73ac9c810"
+    },
+    {
+      "id": "cutscene/shadow-incomplete",
+      "file": "cutscene/shadow-incomplete.webp",
+      "w": 315,
+      "h": 270,
+      "transparentPercent": 51.2,
+      "sha256": "d8b6a14da1bc6379067396266c009ab909f04695812f5c132483a83eb86ef276"
+    },
+    {
+      "id": "cutscene/shadow-fragment-one",
+      "file": "cutscene/shadow-fragment-one.webp",
+      "w": 351,
+      "h": 255,
+      "transparentPercent": 28.6,
+      "sha256": "4c2fefa52e657ef15311e6e8085f235b9bde0ffd83c6021d9d2751c8facdecfd"
+    },
+    {
+      "id": "cutscene/shadow-fragment-two",
+      "file": "cutscene/shadow-fragment-two.webp",
+      "w": 305,
+      "h": 169,
+      "transparentPercent": 43.2,
+      "sha256": "b05afbfc7d253817dba4beb068f5bc2f18fb9e62bb41967419fe6d44e4a64654"
+    },
+    {
+      "id": "cutscene/shadow-fragment-three",
+      "file": "cutscene/shadow-fragment-three.webp",
+      "w": 412,
+      "h": 223,
+      "transparentPercent": 24.5,
+      "sha256": "a60ec7c30acc5b10671696307b1038e17d5a851acbdcf1ef4679ca8fa3a7a6e5"
+    },
+    {
+      "id": "cutscene/shadow-fragment-four",
+      "file": "cutscene/shadow-fragment-four.webp",
+      "w": 202,
+      "h": 192,
+      "transparentPercent": 66.6,
+      "sha256": "2304ceefc008bfce089cb0132f1e0aedad963735eaff3c8c5ebccb4fa4ef2d21"
+    },
+    {
+      "id": "cutscene/nudge-net-soft-shadow",
+      "file": "cutscene/nudge-net-soft-shadow.webp",
+      "w": 781,
+      "h": 620,
+      "transparentPercent": 53.6,
+      "sha256": "ea1b9f78d3f85fc009279248780b6950cd4fb16e218ba6cb0a69065ef305be7d"
+    }
+  ]
+}

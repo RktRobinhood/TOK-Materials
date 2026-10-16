@@ -1,0 +1,22 @@
+0.1s  ambience
+0.1s  shot  the-shell
+0.1s  hud  text
+0.1s  note  Its guess missed your chosen question. Its table had moves, not your reasons for asking. Could a different model do better?
+6.8s  note  The colossus cracks open.
+6.8s  tween  room
+6.8s  tween  shell-left
+6.8s  tween  shell-right
+6.8s  tween  old-box
+9.1s  wait
+10.5s  shot  one-sequin
+10.5s  note  Inside: a small, scratched brass box. One sequin is stuck to it.
+14.6s  note  In your pocket, the Professor's Guess-o-Matic beeps.
+14.6s  tween  young-box
+18.2s  say  PROBABLY.
+19.8s  wait
+20.8s  note  The two little boxes look at each other.
+23.8s  ambience
+23.8s  say  I am. I always was.
+26.0s  hud  clear
+26.7s  wait
+27.9s  end
