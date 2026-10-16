@@ -11,7 +11,9 @@
  *
  * Rift.Battle.Ante.compute({ type, player: { items }, opponent: { name, nickname, team, stake }, seed })
  *   → ante { type, player: { items }, opponent: { items, creatures: [species], trophy }, lines: [string] }
- * Rift.Battle.Ante.settle(ante, outcome: 'won'|'lost'|'draw', { seed, now })
+ * Rift.Battle.Ante.settle(ante, outcome: 'won'|'lost'|'draw', { seed, now, room })
+ *   room(species) → free folder slots (4 copies per type, #151); a won creature with no slot
+ *   becomes one Catch Charm instead. Without room, every won creature is taken.
  *   → { itemsDelta: { id: n }, creaturesGained: [instances], lines: [string] }
  * Rift.Battle.Ante.applyToSave(save, battleResult) mutates a save object (use inside Rift.State.update).
  */
@@ -129,9 +131,23 @@
                 }));
             }
             res.lines.push(`You win ${describeItems(ante.opponent.items)}.`);
+            // Full folders (#151): a creature with no free slot (o.room) becomes a Catch Charm, said plainly.
+            const used = {}, full = [];
+            if (typeof o.room === 'function') {
+                res.creaturesGained = res.creaturesGained.filter(inst => {
+                    used[inst.species] = (used[inst.species] || 0) + 1;
+                    if (used[inst.species] <= o.room(inst.species)) return true;
+                    full.push(inst);
+                    return false;
+                });
+            }
             res.creaturesGained.forEach(inst => res.lines.push(inst.trophyOf
                 ? `Trophy: ${speciesName(inst.species)} (from ${inst.trophyOf}).`
                 : `${speciesName(inst.species)} joins your team.`));
+            full.forEach(inst => {
+                res.itemsDelta.charm = (res.itemsDelta.charm || 0) + 1;
+                res.lines.push(`Your ${speciesName(inst.species)} folder is full (4 copies). You take a Catch Charm instead.`);
+            });
         } else {
             Object.keys(ante.player.items).forEach(id => { res.itemsDelta[id] = (res.itemsDelta[id] || 0) - ante.player.items[id]; });
             res.lines.push(`You lose ${describeItems(ante.player.items)}.`);
@@ -158,7 +174,8 @@
         const st = result.settlement;
         if (st) {
             Object.keys(st.itemsDelta).forEach(id => { save.items[id] = Math.max(0, (save.items[id] || 0) + st.itemsDelta[id]); });
-            st.creaturesGained.forEach(inst => save.creatures.push(inst));
+            // The folder cap (#151) is checked again here, so a stale settlement never overfills it.
+            st.creaturesGained.forEach(inst => { if (Rift.State && Rift.State.addCreature) Rift.State.addCreature(save, inst); else save.creatures.push(inst); });
         }
         if (save.stats) {
             if (result.outcome === 'won') save.stats.battlesWon += 1;

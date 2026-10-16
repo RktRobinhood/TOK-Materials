@@ -428,9 +428,50 @@
             wins: 0,
             variant: null,         // { attack, health, trait } rolled from the uid
             taught: null,          // one Trick Book trick: 'guard'|'swift'|'shield'|'attack'|'health'
+            foil: false,           // a shiny catch (#151): the cosmetic foil print, no stat change
         }, extra || {});
         if (!isVariant(inst.variant)) inst.variant = rollVariant(inst.uid);
         return inst;
+    }
+
+    // ---- folders: up to COPY_CAP of each creature type (#151) -------------------------------------
+    // A collection holds at most four copies of a species (variants, foils and Changed copies all
+    // count); a deck still takes two (DECK_RULES). Older saves above the cap keep every copy: they just
+    // cannot gain another until the student releases some. Legendaries are keepsakes and never released.
+    const COPY_CAP = 4;
+    function copiesOf(save, species) {
+        return ((save || current || {}).creatures || []).filter(c => c && c.species === species).length;
+    }
+    function hasRoom(save, species) { return copiesOf(save, species) < COPY_CAP; }
+
+    // Adds a gained instance when its folder has room. Does not save. → true if added.
+    function addCreature(save, inst) {
+        const s = save || current;
+        if (!s || !inst || !hasRoom(s, inst.species)) return false;
+        if (!Array.isArray(s.creatures)) s.creatures = [];
+        s.creatures.push(inst);
+        if (Array.isArray(s.seen) && !s.seen.includes(inst.species)) s.seen.push(inst.species);
+        return true;
+    }
+
+    // Can this copy be released? → { ok, reason?, warn? }. warn: it is in the chosen battle team.
+    function releaseCheck(save, uid) {
+        const s = save || current || {};
+        const inst = (s.creatures || []).find(c => c && c.uid === uid);
+        if (!inst) return { ok: false, reason: 'That creature is not in your collection.' };
+        const sp = (Rift.data.creatures || {})[inst.species] || {};
+        if (sp.rarity === 'legendary') return { ok: false, reason: 'Legendary creatures are keepsakes. They stay with you.' };
+        const inTeam = (s.team || []).includes(uid) || battleTeam(s).includes(inst);
+        return { ok: true, warn: inTeam ? 'This copy is in your battle team. Releasing it takes it out of your deck.' : null };
+    }
+
+    // Releases one copy back to the wild (#151). Does not save. → true if released.
+    function releaseCreature(save, uid) {
+        const s = save || current;
+        if (!s || !releaseCheck(s, uid).ok) return false;
+        s.creatures = s.creatures.filter(c => c.uid !== uid);
+        if (Array.isArray(s.team)) s.team = s.team.filter(id => id !== uid);
+        return true;
     }
 
     // Gives an owned instance its uid-based variant and the taught slot (migration 1 → 2).
@@ -796,6 +837,12 @@
         UNREADABLE_KEY,
         freshState,
         makeCreature,
+        COPY_CAP,
+        copiesOf,
+        hasRoom,
+        addCreature,
+        releaseCheck,
+        releaseCreature,
         rollVariant,
         isVariant,
         creatureStats,

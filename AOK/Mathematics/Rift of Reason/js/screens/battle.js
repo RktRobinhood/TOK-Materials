@@ -3368,7 +3368,7 @@
                 fate = B().Fate.roll({
                     instances: me.team, defeated: E.lostUids(state, ME), overkill: E.overkillOf(state, ME), mode, seed: seed + ':fate',
                 });
-                settlement = B().Ante.settle(ante, outcome, { seed, now: Date.now() });
+                settlement = B().Ante.settle(ante, outcome, { seed, now: Date.now(), room: sp => Math.max(0, Rift.State.COPY_CAP - Rift.State.copiesOf(Rift.State.get(), sp)) });
             }
             // powerUsed: how often I used my power this match (the save counts it; the Feed's Champion copies the top one).
             const myPower = state.players[ME].power;

@@ -402,3 +402,13 @@ img.quest-gem { height: 1.25em; width: auto; vertical-align: -0.25em; min-width:
 .quest-tracker-row img.quest-gem { justify-self: center; }
 .quest-tracker-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .quest-tracker .quest-tracker-fold { padding: 0 4px; color: var(--parchment, #f3e6c8); }
+
+/* The Fogged Eye scar (#151): one clue starts hidden behind a still fog (no motion; Calm-safe). */
+.fogged-eye .fog-hidden { filter: blur(7px) grayscale(0.6); opacity: 0.55; pointer-events: none; user-select: none; }
+.fog-note { margin: 4px 0; }
+
+/* Foil prints (#151, layered as in design/reviews/foil-material-2026-10-12.md): a still etched
+   cyan/magenta edge and a star. No sheen, tilt or loop, so Calm motion needs nothing extra. */
+.fcard.foil { border-radius: 8px; box-shadow: 0 0 0 2px rgba(110, 231, 255, 0.85), 0 0 0 4px rgba(255, 110, 214, 0.6), 0 0 10px rgba(110, 231, 255, 0.35); }
+.fcard-foil { position: absolute; top: 3%; right: 6%; font-size: 1rem; color: #F7F3FF; text-shadow: 0 0 2px #6EE7FF, 0 0 4px #FF6ED6; pointer-events: none; }
+.chip.foil-chip { background: linear-gradient(90deg, rgba(110, 231, 255, 0.25), rgba(255, 110, 214, 0.25)); border-color: rgba(110, 231, 255, 0.7); color: #F7F3FF; }

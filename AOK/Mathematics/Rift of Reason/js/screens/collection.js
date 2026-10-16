@@ -28,15 +28,15 @@
             onclick: o.onclick,
             title: known ? c.name : '???',
         }, [
-            Rift.UI.framedCard(speciesId, { known }),
-            o.count ? el('div.dex-count', { text: '×' + o.count }) : null,
+            Rift.UI.framedCard(speciesId, { known, foil: o.foil }),
+            o.count ? el('div.dex-count', { text: o.count + '/' + Rift.State.COPY_CAP, title: o.count + ' of ' + Rift.State.COPY_CAP + ' copies (a folder holds ' + Rift.State.COPY_CAP + ')' }) : null,
         ]);
     }
 
     const KEYWORD_NAMES = { guard: 'Guard', swift: 'Swift', shield: 'Shield' };
 
     // One owned creature: its real battle numbers, variation, trick and history.
-    function instanceRow(x, n, s, onTeach) {
+    function instanceRow(x, n, s, onTeach, onRelease) {
         const c = Rift.data.creatures[x.species];
         const inTeam = Rift.State.battleTeam(s).includes(x);
         const st = Rift.State.creatureStats(x);
@@ -55,7 +55,10 @@
                 Rift.UI.variantBadges(x),
             ]),
             el('div.small.muted', { text: notes }),
-            (s.items['trick-book'] || 0) > 0 ? el('button.btn.small', { text: (x.taught ? 'Teach a new trick' : 'Teach a trick') + ' · 1 Trick Book', onclick: () => onTeach(x.uid) }) : null,
+            el('div.row.wrap', null, [
+                (s.items['trick-book'] || 0) > 0 ? el('button.btn.small', { text: (x.taught ? 'Teach a new trick' : 'Teach a trick') + ' · 1 Trick Book', onclick: () => onTeach(x.uid) }) : null,
+                Rift.State.releaseCheck(s, x.uid).ok ? el('button.btn.small', { text: 'Release', title: 'Let this copy go, to make room in the folder', onclick: () => onRelease(x.uid) }) : null,
+            ]),
         ]);
     }
 
@@ -65,6 +68,15 @@
         const mine = s.creatures.filter(x => x.species === speciesId);
         let dialog = null;
         const teach = uid => { dialog.close(); Rift.UI.trickBook(uid, () => details(speciesId)); };
+        // Release (#151): confirm first; warn when the copy is in the battle team. Legendaries never offer it.
+        const release = async uid => {
+            const check = Rift.State.releaseCheck(Rift.State.get(), uid);
+            if (!check.ok) { Rift.UI.toast(check.reason, 3500); return; }
+            dialog.close();
+            const ok = await Rift.UI.confirm('Release ' + c.name + '?', 'It goes back to the wild, with its luck and its Changes. You cannot get this copy back.' + (check.warn ? ' ' + check.warn : ''), 'Release', 'Keep it');
+            if (ok) { Rift.State.update(st => Rift.State.releaseCreature(st, uid)); Rift.UI.toast(c.name + ' is free. Your folder has room.', 3000); }
+            if (Rift.State.get().creatures.some(x => x.species === speciesId)) details(speciesId); else Rift.Router.replace('collection');
+        };
         const body = el('div.stack', null, [
             el('div.row', { style: { alignItems: 'flex-start' } }, [
                 Rift.UI.framedCard(speciesId, { big: true }),
@@ -77,8 +89,9 @@
             ]),
             el('p', { text: c.blurb }),
             el('p', null, [el('strong', { text: 'Ability: ' }), c.abilityText]),
-            mine.length ? el('h3', { text: 'Your ' + c.name + (mine.length > 1 ? 's' : '') }) : null,
-            mine.length ? el('div.stack.small', null, mine.map((x, i) => instanceRow(x, i + 1, s, teach))) : null,
+            mine.length ? el('h3', { text: 'Your ' + c.name + ' folder: ' + mine.length + ' of ' + Rift.State.COPY_CAP }) : null,
+            mine.length ? el('p.small.muted', { text: 'You can keep ' + Rift.State.COPY_CAP + ' copies. A deck takes 2, so choose which ones to play. Full? Release one to make room.' }) : null,
+            mine.length ? el('div.stack.small', null, mine.map((x, i) => instanceRow(x, i + 1, s, teach, release))) : null,
         ]);
         dialog = Rift.UI.modal(c.name, body);
     }
@@ -429,7 +442,7 @@
                     el('button.btn', { text: 'Rumour board', onclick: () => Rift.Router.go('rumours') }),
                 ]),
                 el('div.dex-grid', null, species.map(id => card(id, {
-                    caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
+                    caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], foil: s.creatures.some(x => x.species === id && x.foil), onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
                 }))),
                 el('div', null, [
                     el('h3', { text: 'Accolades (' + s.accolades.length + ' of ' + Object.keys(Rift.data.accolades).length + ')' }),

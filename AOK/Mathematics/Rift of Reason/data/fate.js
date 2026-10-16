@@ -26,6 +26,8 @@
             cap: 0.3,
         },
         limits: { changes: 2, attack: 2, health: 2, cost: 1 },
+        // A successful catch is shiny 1 time in 25 (#131/#151): the foil print, cosmetic only.
+        foilCatch: 1 / 25,
 
         kinds: {
             gain: { name: 'Gain', icon: '⬆️' },

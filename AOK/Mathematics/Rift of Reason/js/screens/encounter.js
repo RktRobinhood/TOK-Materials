@@ -14,6 +14,39 @@
     function hintCost(s) {
         return Rift.World.hintCost(s);
     }
+    // The Fogged Eye scar (#151): one clue in each puzzle starts hidden and clears after FOG_MS. The
+    // selector names the puzzle's clue elements; the first one on screen is fogged, again after a
+    // re-render, until it clears. Puzzles with no separate clue (you make the evidence: Line Drawer,
+    // River Crossing, Water Jugs, Rule Hunter) are not fogged.
+    const FOG_MS = 20000;
+    const FOG = {
+        'liars-gate': '.lg-bubble', village: '.vg-bubble', 'logic-grid': '.lg-clue', venn: '.vn-statement',
+        switchboard: '.sb-claim', tower: '.tw-facts li', tribunal: '.tb-card', witness: '.wit-claim',
+        prediction: '.pm-rules > *', sorting: '.sm-evidence > *', 'chart-fixer': '.cf-headline', oracle: '.om-claim', 'three-act': '.ta-bubble',
+    };
+    function fogClue(box, puzzleId, onClear) {
+        const sel = FOG[puzzleId];
+        if (!sel || !box || !box.querySelector) return null;
+        let cleared = false, observer = null;
+        const mark = () => {
+            if (cleared) return;
+            const first = box.querySelector(sel);
+            box.querySelectorAll('.fog-hidden').forEach(x => { if (x !== first) x.classList.remove('fog-hidden'); });
+            if (first && !first.classList.contains('fog-hidden')) { first.classList.add('fog-hidden'); first.setAttribute('aria-hidden', 'true'); }
+        };
+        const clear = () => {
+            if (cleared) return;
+            cleared = true;
+            clearTimeout(timer);
+            if (observer) observer.disconnect();
+            box.querySelectorAll('.fog-hidden').forEach(x => { x.classList.remove('fog-hidden'); x.removeAttribute('aria-hidden'); });
+            if (onClear) onClear();
+        };
+        const timer = setTimeout(clear, FOG_MS);
+        if (typeof MutationObserver === 'function') { observer = new MutationObserver(mark); observer.observe(box, { childList: true, subtree: true }); }
+        mark();
+        return { clear, stop() { cleared = true; clearTimeout(timer); if (observer) observer.disconnect(); } };
+    }
     function coverFor(s) {
         if (s.flags.cover === 'postman') return 'post';
         if (s.flags.cover === 'visitor') return 'visitor';
@@ -48,6 +81,7 @@
 
             let stageIx = checkpoint ? checkpoint.stageIx : 0;
             let handle = null;
+            let fog = null;   // the Fogged Eye scar's hidden clue on this stage
             let hintsUsed = checkpoint ? checkpoint.hintsUsed || 0 : 0;
             let hintIx = 0;
             let wrongs = checkpoint ? checkpoint.wrongs || 0 : 0;
@@ -214,6 +248,7 @@
                 if (tutorial) tutorial.close();
                 if (helpModal) helpModal.close();
                 if (handle && handle.destroy) handle.destroy();
+                if (fog) { fog.stop(); fog = null; }
                 stageBox.innerHTML = '';
                 feedback.textContent = '';
                 hintIx = 0;
@@ -234,7 +269,6 @@
                 const slot = el('div.enc-puzzle');
                 puzzleSlot = slot;
                 stageBox.append(slot);
-                if (Rift.State.get().scars.includes('fogged-eye')) stageBox.classList.add('fogged-eye'); // puzzles may read this
                 handle = def.mount(slot, data, {
                     submit: answer => onSubmit(answer),
                     sfx: name => Rift.Audio.sfx(name),
@@ -249,6 +283,12 @@
                     el: Rift.el,
                 });
                 helpBtn.disabled = false;
+                if (Rift.State.get().scars.includes('fogged-eye')) {
+                    stageBox.classList.add('fogged-eye');
+                    const fogNote = el('p.small.muted.fog-note', { role: 'status', text: '👁️ Fogged Eye: one clue is hidden. It clears in ' + FOG_MS / 1000 + ' seconds.' });
+                    fog = fogClue(slot, def.id, () => { fogNote.textContent = '👁️ The fog has cleared.'; });
+                    if (fog) stageBox.insertBefore(fogNote, slot);
+                }
                 if (!Rift.State.get().flags['heart-rules-seen']) {
                     Rift.State.update(s => { s.flags['heart-rules-seen'] = true; });
                     feedback.textContent = 'You get ' + attempts.free + ' free wrong checks. ' + hintRule() + ' At zero hearts, rest and shrines help you recover.';
@@ -469,6 +509,12 @@
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
                 ]);
+                // A full folder (4 copies, #151) cannot take another: say so, and offer the Collection to release one.
+                if (obstacle && !Rift.State.hasRoom(Rift.State.get(), obstacle)) {
+                    body.append(el('p.small', { text: 'Your ' + Rift.data.creatures[obstacle].name + ' folder is full (' + Rift.State.COPY_CAP + ' copies). Release one in Collection to catch another next time.' }));
+                    modal('Solved!', body, [{ label: '📖 Open Collection', onclick: () => Rift.Router.replace('collection') }, { label: 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }]);
+                    return;
+                }
                 // required: a stray click beside the box must not close it and lose the catch offer (#125 playtest).
                 const buttons = obstacle ? [{ label: 'Catch ' + Rift.data.creatures[obstacle].name + '!', primary: true, required: true, onclick: catchPhase }, { label: 'Back to the map', onclick: () => Rift.Router.replace('map') }] : [{ label: n.id === 'k-core' && !s.flags['seen:finale.home'] ? 'Go to the Summit Rift to return home' : 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }];
                 modal('Solved!', body, buttons);
@@ -557,7 +603,9 @@
                     panel.append(el('p', { text: skill.label }), el('p.catch-odds', { text: 'Base ' + Math.round(base * 100) + '%' + (skill.bonus ? ' · skill +' + Math.round((roll.p - base) * 100) + ' points = ' : ' · missed: quarter chance = ') + Math.round(roll.p * 100) + '%. Used ' + skill.spent + ' charm(s).' }));
                     if (roll.caught) {
                         Rift.Audio.sfx('caught');
-                        const caughtInst = Rift.State.makeCreature(obstacle);
+                        // Some catches are shiny (#151): the foil print, cosmetic only.
+                        const shiny = Rift.makeRng(visit.seed + ':foil:' + catchAttempt).chance((Rift.data.fate || {}).foilCatch || 0);
+                        const caughtInst = Rift.State.makeCreature(obstacle, { foil: shiny });
                         Rift.State.update(st => {
                             st.creatures.push(caughtInst);
                             st.stats.catches += 1;
@@ -628,6 +676,7 @@
                     if (tutorial) tutorial.close();
                     if (helpModal) helpModal.close();
                     if (handle && handle.destroy) handle.destroy();
+                    if (fog) fog.stop();
                     if (meter) meter.destroy();
                     if (hud.destroy) hud.destroy();
                 },

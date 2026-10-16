@@ -276,6 +276,8 @@
             : '★'.repeat(d.stars) + '☆'.repeat(3 - d.stars);
         const trait = inst.variant && inst.variant.trait;
         return el('span.variant-badges', null, [
+            // A shiny catch (#151): a still badge, no sheen or motion; the foil print is cosmetic.
+            inst.foil ? el('span.chip.foil-chip', { title: 'Foil: a shiny catch. It looks special; it plays the same.', text: '✦ Foil' }) : null,
             el('span.variant-stars', { title: 'How lucky this creature is: ' + d.stars + ' of 3 stars', 'aria-label': d.stars + ' of 3 stars' }, [].concat(star)),
             trait && has('ui/trait-' + trait) ? Rift.Assets.img('ui/trait-' + trait, { className: 'trait-badge', alt: '' }) : null,
             el('span.chip.variant-chip', { text: d.labels.join(' · ') }),
@@ -348,7 +350,7 @@
         const c = Rift.data.creatures[speciesId];
         const known = o.known !== false;
         const frameId = 'ui/card-' + c.colour;
-        const node = el('div.fcard' + (o.big ? '.big' : ''), { dataset: { colour: c.colour } }, [
+        const node = el('div.fcard' + (o.big ? '.big' : '') + (o.foil && known ? '.foil' : ''), { dataset: { colour: c.colour } }, [
             el('div.fcard-art', null, [Rift.Assets.img('creature/' + speciesId + '/idle', { colour: known ? c.colour : '#333', label: known ? c.name : '???', className: known ? '' : 'silhouette' })]),
             Rift.Assets.has(frameId) ? Rift.Assets.img(frameId, { className: 'fcard-frame' }) : null,
             el('div.fcard-panel', null, [
@@ -356,6 +358,7 @@
                 o.big && known ? el('div.fcard-power.fcard-stats', null, [statLine(speciesId, o.inst)]) : null,
                 o.big && known ? el('div.fcard-text', { text: c.abilityText }) : null,
             ]),
+            o.foil && known ? el('div.fcard-foil', { 'aria-label': 'Foil', text: '✦' }) : null,
         ]);
         if (!Rift.Assets.has(frameId)) node.classList.add('no-frame');
         return node;
