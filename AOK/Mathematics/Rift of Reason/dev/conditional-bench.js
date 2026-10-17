@@ -18,16 +18,19 @@
     root.document.getElementById('screen').before(note);
     function start() {
         const creature = !!R.data.creatures[selected], seat = selected === set.creatures[1];
+        // Cards that wait for Fate (#148 step 4) need the Fate track; the others keep the quieter table.
+        const def = (creature ? R.data.creatures[selected] : R.data.tactics[selected]).conditional;
+        const fate = def.options.some(o => o.event === 'fate-entered');
         note.textContent = 'Arm the highlighted card, then continue playing. Two conditions maximum; creatures reserve board space. '
-            + (seat ? 'End turn with your board empty: a hero attack reveals Guard before damage.' : 'Inspect the armed card to read its committed condition.')
-            + ' Fifteen study cards are playable; campaign acquisition and eight other concepts remain unfinished.';
+            + (seat ? 'End turn with your board empty: a hero attack reveals Guard before damage.' : fate ? 'Fate moves at the end of each round: watch it reveal when Fate lands.' : 'Inspect the armed card to read its committed condition.')
+            + ' Eighteen study cards are playable; campaign acquisition and five other concepts remain unfinished.';
         const own = [creature ? selected : 'proof-pup', 'paper-dragon', 'lens-lizard', 'cloud-calf', 'comma-crab', 'pocket-tortoise', 'rawmsay'];
         const inst = (species, i) => ({ uid: 'conditional-' + i, species, powerDelta: 0, injuries: [], scars: [] });
         const s = E.createBattle({ seed: 'conditional-study-' + selected,
             players: [{ name: 'You', team: own.map(inst), tactics: creature ? ['second-wind'] : [selected, 'second-wind'] },
                 { name: 'Practice rival', team: ['paper-dragon', 'lens-lizard', 'cloud-calf', 'comma-crab', 'pocket-tortoise'].map(inst), tactics: ['second-wind', 'clockwork'] }],
             axiomDeck: ['luxury', 'abundance', 'reverse-hearts'], options: { first: 0, shuffle: false, shuffleAxioms: false,
-                openHand: [0, 0], openAxioms: 0, spark: false, timeline: false, mode: 'practice' } });
+                openHand: [0, 0], openAxioms: 0, spark: false, timeline: fate, fateStart: 3, mode: 'practice' } });
         const move = (cid, p, zone) => {
             ['deck', 'hand', 'board', 'discard'].forEach(z => { s.players[p][z] = s.players[p][z].filter(id => id !== cid); });
             s.players[p][zone].push(cid); s.cards[cid].enteredTurn = 0;

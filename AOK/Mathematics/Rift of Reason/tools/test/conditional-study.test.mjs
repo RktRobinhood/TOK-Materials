@@ -24,7 +24,7 @@ function move(s,cid,zone) {
 const act = (s,a) => E.applyAction(s,{...a,player:E.decider(s)});
 function enemyTurn(s) {s=act(s,{type:'end'});return act(s,E.legalActions(s)[0]);}
 
-test('all fifteen study cards have legal arming and use the proposed classification',()=>{
+test('all eighteen study cards have legal arming and use the proposed classification',()=>{
     for(const id of R.ConditionalStudy.ids){let s=setup(id),cid=R.data.creatures[id]?'p0c0':'p0t0';
         if(s.cards[cid].kind==='tactic')assert.equal(E.describe(s,cid).colourReady,true);
         assert.ok(E.legalActions(s).some(a=>a.cid===cid));s=act(s,{type:'play',cid});

@@ -242,7 +242,7 @@
         const name = s.players[p].name;
         if (name !== 'You') return name + ' ' + verb;
         const base = { has: 'have', goes: 'go', wins: 'win', takes: 'take', chooses: 'choose', plays: 'play',
-            attacks: 'attack', loses: 'lose', ends: 'end', draws: 'draw', activates: 'activate', skips: 'skip', uses: 'use', schedules: 'schedule' }[verb] || verb;
+            attacks: 'attack', loses: 'lose', ends: 'end', draws: 'draw', activates: 'activate', skips: 'skip', uses: 'use', schedules: 'schedule', pays: 'pay' }[verb] || verb;
         return 'You ' + base;
     }
 
@@ -357,8 +357,7 @@
             const delta = rules(s).costDelta;
             const shown = Math.max(0, c.cost + delta) - c.cost;   // a cost never goes below 0
             if (shown) out.push({ stat: 'cost', amount: shown, label: (activeAxioms(s).find(ax => ax.rules && ax.rules.costDelta) || {}).name || 'Cost rule', until: 'rule', from: null });
-            if (taxOn(s, cid)) out.push({ stat: 'cost', amount: 1, label: 'Night Sight', until: 'tax', from: null });
-        }
+            if (taxOn(s, cid)) out.push({ stat: 'cost', amount: 1, label: 'Night Sight', until: 'tax', from: null });        }
         return out;
     }
     // The colour wheel from this creature's side: { strong: colours it gets +bonus against,
@@ -438,9 +437,15 @@
         const P = s.players[s.cards[cid].controller];
         return P.tax > 0 && P.hand.includes(cid) ? 1 : 0;
     }
+    // A spell-only tax (#148, Queue That Question): the player's next spell card costs `amount` more, until it is
+    // paid or turn `until` ends. Creatures, rule cards and abilities are not taxed. P.spellTax: { amount, until, label }.
+    function spellTaxOn(s, cid) {
+        const c = s.cards[cid], P = s.players[c.controller], T = P.spellTax;
+        return c.kind === 'tactic' && T && T.until >= s.turn && P.hand.includes(cid) ? T.amount : 0;
+    }
     function playCost(s, cid) {
         const c = s.cards[cid];
-        if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || { cost: 0 }).cost + taxOn(s, cid);
+        if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || { cost: 0 }).cost + taxOn(s, cid) + spellTaxOn(s, cid);
         return Math.max(0, c.cost + rules(s).costDelta) + taxOn(s, cid);
     }
     // p: who plays it (default: the active player), for Night Sight's tax.
@@ -928,6 +933,23 @@
                 c.timedKeywords = (c.timedKeywords || []).concat([{ k, mode, until: nextTurnStart(G, p), label: label || null }]);
                 return true;
             },
+            // Player p's soonest pending one-shot scheduled event (#148, Second Alarm), moved `spaces` later, but never
+            // more than 4 spaces ahead of NOW (DELAY_MAX). Environmental events and repeatable spaces never move this
+            // way. → the moved record's id, or null (nothing to move, or already as late as it can be).
+            delayOwnEvent(p, spaces, label) {
+                const pos = cursorOf(s);
+                const ev = queueOf(s).filter(e => e.controller === p && !isEnv(e) && !e.repeat && e.state === 'pending' && e.space > pos)
+                    .sort((a, b) => a.space - b.space || a.seq - b.seq)[0];
+                if (!ev) return null;
+                const to = Math.min(ev.space + (spaces || 1), pos + DELAY_MAX);
+                if (to <= ev.space) return null;
+                ev.space = to;
+                emit(G, { t: 'fate-delay', id: ev.id, player: p, space: to, text: (label || 'A card') + ': ' + eventName(s, ev) + ' now happens in ' + roundsText(to - pos + (fateHeld(s) ? 1 : 0)) + '.' });
+                return ev.id;
+            },
+            // p's next spell card costs `amount` more, until it is played or p's next turn ends (#148). A new tax
+            // replaces an unpaid one (they never add up).
+            spellTax(p, amount, label) { s.players[p].spellTax = { amount: amount || 1, until: nextTurnEnd(G, p), label: label || 'Spell tax' }; },
             // Extra energy for p's next turn start (#128); it is added once, then gone.
             energyNextTurn(p, n) { s.players[p].nextEnergy = (s.players[p].nextEnergy || 0) + (n || 0); },
             summon: (p, id) => summonToken(G, p, id),
@@ -984,9 +1006,9 @@
     function arm(G, cid) {
         const s = G.s, c = s.cards[cid], p = c.controller, def = conditionOf(s, cid);
         if (!def.options || def.options.length < 1 || def.options.length > 3) throw new Error('A conditional card needs one to three authored options.');
-        const events = ['creature-played', 'spell-played', 'axiom-replaced', 'creature-defeated', 'attack-declared'];
+        const events = ['creature-played', 'spell-played', 'axiom-replaced', 'creature-defeated', 'attack-declared', 'fate-entered'];
         if (new Set(def.options.map(o => o.key)).size !== def.options.length || def.options.some(o => !o.key || !events.includes(o.event) || !['self', 'opponent', 'either'].includes(o.actor))) {
-            throw new Error('Invalid authored conditional option. Fate entry is not implemented in this release.');
+            throw new Error('Invalid authored conditional option.');
         }
         s.players[p].armed.push(cid);
         c.armSequence = ++s.armSequence;
@@ -1296,6 +1318,9 @@
         const ends = b => b.temp || (b.untilTurn != null && b.untilTurn <= s.turn);
         Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(ends)) c.buffs = c.buffs.filter(b => !ends(b)); });
         P.board.forEach(cid => { s.cards[cid].frozen = false; });
+        // A spell tax (#148) that was never paid ends with the turn it lasts until.
+        s.players.forEach((Q, q) => { if (Q.spellTax && Q.spellTax.until <= s.turn) {
+            emit(G, { t: 'tax-end', player: q, text: Q.spellTax.label + ' ends: ' + possessive(s, q) + ' spells cost the usual again.' }); Q.spellTax = null; } });
         endRules(G, p);
         cleanup(G);
         emit(G, { t: 'turn-end', player: p, text: says(s, p, 'ends') + ' the turn.' });
@@ -1390,7 +1415,9 @@
             text: capFirst(eventName(s, ev)) + ' is skipped. It will not happen.' }));
         // A skipped environmental occurrence stays skipped; a recurring one puts its next occurrence on (#128).
         skipped.filter(isEnv).forEach(ev => recurEnvironment(G, ev));
+        G.fateBy = by == null ? null : by;
         enterSpace(G, to, 'leap');
+        G.fateBy = undefined;
         if (s.winner == null && !s.fate.until) ruleEvent(G);
     }
 
@@ -1608,6 +1635,9 @@
     }
 
     // The cursor has entered this space: its live scheduled events fire, oldest first.
+    // A semantic fact for conditional cards (#148): { event: 'fate-entered', actor, space, how }. actor: the
+    // player who moved Fate (a card, ability, draw or leap), or null for the ordinary advance at a round's end.
+    // Reactions queue and resolve after the whole Fate movement (FATE-SCHEDULE-MODEL.md section 4, rule 7).
     function enterSpace(G, space, how) {
         const s = G.s;
         const due = queueOf(s).filter(ev => ev.space === space && isLive(ev)).sort((a, b) => a.seq - b.seq).map(ev => ev.id);
@@ -1615,6 +1645,7 @@
             if (s.winner != null) return;
             fireScheduled(G, id, how);
         }
+        if (s.winner == null) s.completedPlays.push({ event: 'fate-entered', actor: G.fateBy !== undefined ? G.fateBy : G.roundEnd ? null : s.active, space, how });
     }
     function fireScheduled(G, id, how) {
         const s = G.s, ev = queueOf(s).find(e => e.id === id);
@@ -1737,8 +1768,10 @@
     function doPlay(G, cid, target) {
         const s = G.s, p = s.active, P = s.players[p], c = s.cards[cid];
         const paidCost = playCost(s, cid);
+        const spellTax = spellTaxOn(s, cid);
         spend(G, paidCost);
         if (P.tax > 0) P.tax -= 1;
+        if (spellTax) { emit(G, { t: 'tax-paid', player: p, text: says(s, p, 'pays') + ' ' + spellTax + ' more for that spell: ' + P.spellTax.label + ' is used up.' }); P.spellTax = null; }
         removeFrom(P.hand, cid);
         s.players[1 - p].knows = s.players[1 - p].knows.filter(k => k !== cid);
         if (conditionOf(s, cid) && !c.conditionSpent) { arm(G, cid); afterMove(G); return; }

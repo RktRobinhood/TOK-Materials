@@ -1,12 +1,14 @@
 /* #149 playable study definitions. Loaded only by the battle bench, never index.html,
- * collection, rewards or imports. Fifteen implementable cards (five added for #148 step 1); the other eight remain drafts.
+ * collection, rewards or imports. Eighteen implementable cards (#148 steps 1, 3 and 4 added eight); the other five remain drafts.
  */
 (function (root) {
     'use strict';
     if (root.location && !new URLSearchParams(root.location.search).has('conditional')) return;
     const R = root.Rift, prefix = 'conditional-';
+    // fate-entered (#148 step 4): Fate lands on a space. "either" includes the ordinary move at a round's end.
     const options = (events, actor) => events.map(event => ({ key: event + ':' + actor, event, actor,
-        label: (actor === 'self' ? 'After you' : actor === 'opponent' ? 'After the opponent' : 'After either player')
+        label: event === 'fate-entered' ? (actor === 'self' ? 'When you move Fate onto a space' : actor === 'opponent' ? 'When the opponent moves Fate onto a space' : 'When Fate lands on a space')
+            : (actor === 'self' ? 'After you' : actor === 'opponent' ? 'After the opponent' : 'After either player')
             + ({ 'spell-played': ' plays a spell', 'creature-played': ' plays a creature', 'axiom-replaced': ' changes an Axiom', 'creature-defeated': ' loses a creature', 'attack-declared': ' declares an attack' })[event] }));
     const mostDamaged = (api, p) => api.s.players[p].board.slice().sort((a, b) => api.s.cards[b].damage - api.s.cards[a].damage)[0];
     function spell(suffix, name, colour, cost, events, actor, visibility, text, run) {
@@ -38,8 +40,8 @@
         spell('generic-queue-please', 'Queue, Please', 'generic', 1, ['spell-played'], 'either', 'face-up',
             'After either player plays a spell: each personal deck moves its top card to the bottom without looking.',
             api => api.s.players.forEach(P => { if (P.deck.length > 1) P.deck.push(P.deck.shift()); })),
-        spell('generic-refreshments', 'Round of Refreshments', 'generic', 1, ['axiom-replaced'], 'either', 'face-up',
-            'After either player changes an Axiom: heal both heroes 1. A finished battle stays finished.',
+        spell('generic-refreshments', 'Round of Refreshments', 'generic', 1, ['axiom-replaced', 'fate-entered'], 'either', 'face-up',
+            'Arm: choose an Axiom change or Fate landing on a space. Then heal both heroes 1. A finished battle stays finished.',
             api => { api.healHero(0, 1); api.healHero(1, 1); }),
         spell('generic-tiny-windfall', 'Tiny Windfall', 'generic', 1, ['spell-played'], 'either', 'face-down',
             'After either player plays a spell: the active player gains 1 energy this turn, up to 10.',
@@ -59,6 +61,16 @@
                 if (!cid || !s.players[1 - p].board.includes(cid) || !api.keywordUntilStart(cid, 'elusive', 'lose', s.cards[cid].controller, 'Velvet Reveal')) {
                     api.emit({ t: 'tactic', text: 'Velvet Reveal: nothing to reveal.' }); return; }
                 api.emit({ t: 'tactic', text: 'Velvet Reveal: ' + api.name(cid) + ' loses Elusive until its controller’s next turn starts.' }); }),
+        // #148 step 3: a spell-only tax.
+        spell('language-queue-that-question', 'Queue That Question', 'language', 2, ['spell-played'], 'opponent', 'face-down',
+            'After the opponent plays a spell: their next spell costs 1 more, until the end of their next turn.',
+            (api, p) => { api.spellTax(1 - p, 1, 'Queue That Question');
+                api.emit({ t: 'tactic', text: 'Queue That Question: ' + (api.s.players[1 - p].name === 'You' ? 'your' : api.s.players[1 - p].name + '’s') + ' next spell costs 1 more, until the end of their next turn.' }); }),
+        // #148 step 4: Fate entry. Builder decision: Second Alarm moves your SOONEST waiting one-shot (no question at
+        // a round's end, where a question would skip the next draw; NEXT-STEPS.md known limitation).
+        spell('memory-second-alarm', 'Second Alarm', 'memory', 2, ['fate-entered'], 'either', 'face-up',
+            'When Fate lands on a space: your soonest waiting one-shot Fate event moves 1 round later (at most 4 rounds ahead). Never an environmental event.',
+            (api, p) => { if (!api.delayOwnEvent(p, 1, 'Second Alarm')) api.emit({ t: 'tactic', text: 'Second Alarm: you have no waiting event to move.' }); }),
     ];
     const safe = prefix + 'memory-somewhere-safe', seat = prefix + 'generic-seat-reserved';
     R.Battle.Abilities['conditional-safe-entry'] = { name: 'Somewhere Safe', text: 'Entrance: put the just-defeated creature from your discard on the bottom of your deck.',
@@ -97,6 +109,15 @@
         conditional: { visibility: 'face-up', options: options(['creature-played'], 'self').concat(options(['creature-played'], 'opponent')) } };
     R.data.creatures[umbrella] = { name: 'Tom Holland-er', colour: 'memory', generic: true, rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-umbrella-entry',
         conditional: { visibility: 'face-up', options: options(['spell-played'], 'self') } };
-    const creatures = [safe, seat, ovation, chair, umbrella];
+    const clock = prefix + 'perception-clock-eyes';
+    entry('conditional-clock-entry', 'Clock Eyes', 'look at the top 2 shared rule cards (only you see them). Nothing moves.', (api, c) => {
+        const s = api.s, p = c.controller, top = s.axioms.deck.slice(0, 2), AX = R.data.axioms;
+        api.emit({ t: 'forecast-axioms', player: p, privateTo: p, ids: top,
+            text: top.length ? 'Clock Eyes: the top rule cards are ' + top.map(id => (AX[id] || { name: id }).name).join(', then ') + '.' : 'Clock Eyes: the shared rule deck is empty.',
+            publicText: api.s.players[p].name + ' looks at the top ' + top.length + ' shared rule card' + (top.length === 1 ? '' : 's') + '.' });
+    });
+    R.data.creatures[clock] = { name: 'Cillian Owlish', colour: 'perception', rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-clock-entry',
+        conditional: { visibility: 'face-up', options: options(['fate-entered'], 'either') } };
+    const creatures = [safe, seat, ovation, chair, umbrella, clock];
     R.ConditionalStudy = { spells: ids, creatures, ids: ids.concat(creatures) };
 })(typeof window !== 'undefined' ? window : globalThis);
