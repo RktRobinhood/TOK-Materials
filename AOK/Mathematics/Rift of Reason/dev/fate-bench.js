@@ -1,7 +1,8 @@
-/* #119/#120/#121 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now, leap, echo, once,
- * five, rules, full).
+/* #119/#120/#121/#128 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now, leap, echo, once,
+ * five, rules, full, whistle, trending).
  * The later Fate pack on the real battle screen and engine: Clean Slate (#119); Leap Ahead, Revisit and
- * Echoing Encouragement (#120); the five colour-scheduled spells and the Fate timing Axioms (#121). No save
+ * Echoing Encouragement (#120); the five colour-scheduled spells and the Fate timing Axioms (#121); the
+ * environmental events of Syllo's practice match and the Feed's Champion (#128). No save
  * writes. The pack is defined in data/tactics.js and data/axioms.js, but no grant list names it: students
  * can't obtain it yet.
  */
@@ -20,6 +21,8 @@
         once: 'Your Clean Slate already happened, 1 round behind NOW. Play Revisit: Fate lands on its space, and nothing happens. A one-shot spell never happens twice.',
         five: 'The five colour spells are in your hand (2 plays a turn; Open Calendar is active, so 3 may wait). Select each to read when it happens. Remember This names Zuckerborg, defeated earlier. Play them, inspect their nodes, then End turn: at the round\'s end an Idea token joins you, you draw 2 (the preview never names them), your creatures heal and grow.',
         rules: 'Patient Plans is active: select Tomorrow\'s Idea or Clean Slate, and the bar says it lands 1 round later. Play one, then play Hasty Plans from your rule cards: the spell already on the track does not move, but the next one lands sooner.',
+        whistle: 'Environmental: Syllo\'s Drill Whistle (gold node) happens at the end of this round. Inspect it: it helps both players. End turn: you both get +1 energy on your next turn. It comes back every 4 rounds as a new node.',
+        trending: 'Environmental: the Algorithm\'s Trending boosts the rival\'s strongest creature at the end of this round, and every 2 rounds. Select Leap Ahead: the bar says it skips Trending for good. Play it, then Nostalgia: Fate goes back over the skipped space, and it still never happens. The next Trending is a new node.',
         full: 'Your side is full and so is your hand. Tomorrow\'s Idea, Delayed Observation and Remember This are already on the Fate track: End turn and read what happens (nothing arrives, nothing is drawn, Zuckerborg stays in the discard pile). Each is still used up.',
     };
     let selected = CASES[q.get('fate')] ? q.get('fate') : 'you-cast';
@@ -38,13 +41,15 @@
     function start() {
         note.textContent = CASES[selected];
         const rival = selected === 'rival-casts';
-        const MINE = { leap: ['leap-ahead', 'revisit', 'clockwork'], echo: ['echoing-encouragement', 'revisit', 'clockwork'], once: ['clean-slate', 'revisit', 'clockwork'],
+        const MINE = { leap: ['leap-ahead', 'revisit', 'clockwork'], trending: ['leap-ahead', 'nostalgia', 'clockwork'], echo: ['echoing-encouragement', 'revisit', 'clockwork'], once: ['clean-slate', 'revisit', 'clockwork'],
             five: ['prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech'],
             rules: ['tomorrows-idea', 'clean-slate', 'scheduled-speech'],
             full: ['tomorrows-idea', 'delayed-observation', 'remember-this', 'second-wind', 'second-wind', 'clockwork', 'clockwork', 'lemma', 'lemma', 'recall'] };
         const mine = ['zuckerborg', 'kardashiant', 'lobstorian', 'astrophysicat', 'keanu', 'tremendoodle'];
         const theirs = ['siuuugull', 'beastie', 'astrophysicat', 'lobstorian', 'tremendoodle', 'kardashiant'];
-        let s = E.createBattle({ seed: 'fate-bench-' + selected,
+        // #128: the encounter plans, as js/ui/battles.js and data/map.js give them (first moved to round 1 here).
+        const ENV = { whistle: [{ def: 'drill-whistle', first: 1, every: 4, side: null }], trending: [{ def: 'trending', first: 1, every: 2, side: 1 }] };
+        let s = E.createBattle({ seed: 'fate-bench-' + selected, environment: ENV[selected] || null,
             players: [{ name: 'You', team: mine.map((x, i) => inst(x, i, 0)), tactics: MINE[selected] || (rival ? ['nostalgia', 'clockwork'] : ['clean-slate', 'clockwork']) },
                 { name: 'Practice rival', team: theirs.map((x, i) => inst(x, i, 1)), tactics: rival || selected === 'leap' ? ['clean-slate'] : ['second-wind'] }],
             axiomDeck: ['luxury', 'abundance', 'haste', 'thrift'],

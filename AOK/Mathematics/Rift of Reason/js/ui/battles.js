@@ -176,12 +176,22 @@
         const deck = ai === 'expert' && t.deck && (Rift.data.decks || {})[t.deck];
         const power = side => (t.copiesPower && copiedPower()) || side;
         if (deck) {
-            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: power(teamPower(deck.creatures, ai)),
+            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: power(teamPower(deck.creatures, ai)), fate: encounterFate(t.fate, ai),
                 team: deck.creatures.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-deck-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } })) };
         }
         const team = trainerTeam(trainerId, t);
-        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: power(teamPower(team, ai)) };
+        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: power(teamPower(team, ai)), fate: encounterFate(t.fate, ai) };
     }
+
+    // An encounter's environmental Fate events (#128) as engine plans. side: 'trainer' (the opponent, player
+    // index 1), 'player' (0) or 'both'; an entry with `levels` applies only at those AI levels.
+    function encounterFate(list, level) {
+        const SIDE = { trainer: 1, player: 0, both: null };
+        return (list || []).filter(x => !x.levels || x.levels.includes(level))
+            .map(x => ({ def: x.def, first: x.first, every: x.every || null, times: x.times || null, side: x.side in SIDE ? SIDE[x.side] : null }));
+    }
+    // Syllo's practice match: his Drill Whistle every 4 rounds, for both players (gentle; it teaches reading the track).
+    const SYLLO_FATE = [{ def: 'drill-whistle', first: 4, every: 4, side: 'both' }];
 
     function rewardText(reward) {
         if (!reward) return '';
@@ -350,6 +360,7 @@
                 mode:'practice',story:true,seed:'syllo-road-challenge',
                 player:{team:Rift.Battle.Lesson.starter(),tactics:starterTactics(),items:{},axioms:[],art:s.avatar&&typeof Rift.avatarArt==='function'?Rift.avatarArt(s.avatar,'neutral'):null,power:avatarPower(s.avatar),ownAxioms:ownAxioms(s)},
                 axiomDeck:['underdog','thrift','three-actions','normal-hearts','mercy','arrival','age-of-reason'],
+                environment:encounterFate(SYLLO_FATE),
                 // A short, gentle beginner match: 16-card decks, and Syllo brings eight cheap,
                 // small creatures (no Guard, no Swift) plus kind tactics.
                 battleOptions:{first:0,shuffle:false,shuffleAxioms:false,deckSize:16},
@@ -409,6 +420,7 @@
                 player: Object.assign(deck, { consumables, bag }),
                 opponent: { name: t.name, team: side.team, tactics: side.tactics,
                     art: speakerArt(t.speaker), ai: side.ai, stake: t.ante, power: side.power },
+                environment: side.fate,
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer, bagFromSave: true }),
             }));
         },

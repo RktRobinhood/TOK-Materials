@@ -537,6 +537,9 @@
     // ai: the AI level (design/card-arena-expansion-2026-10-07.md section 8): 'normal' for ordinary
     // trainers (the default), 'competent' for mini-bosses, 'expert' for bosses. deck?: a built deck in
     // data/decks.js that an Expert boss plays instead of its team and tactics.
+    // fate?: environmental Fate events (#128, Rift.data.environments): [{ def, first, every?, times?, side:
+    // 'trainer' | 'player' | 'both', levels?: AI levels it applies at (default all) }]. The full table of
+    // planned schedules is design/reviews/environmental-fate-128-2026-10-17.md.
     Rift.data.trainers = {
         'syllo': {
             name:'Sergeant Syllo', speaker:'syllo', ai:'normal', intro:'“Reason from the rules, recruit. My team rewards careful thinking.”',
@@ -561,6 +564,10 @@
             name: 'The Feed\'s Champion',
             ai: 'expert', deck: 'feed',
             copiesPower: true,   // plays your most-used power (js/ui/battles.js copiedPower)
+            // Environmental Fate events (#128): the boss's strongest creature trends, every 2 rounds at Expert
+            // (every 3 at a lower level). Public on the Fate track; a leap skips one occurrence for good.
+            fate: [{ def: 'trending', first: 2, every: 2, side: 'trainer', levels: ['expert'] },
+                { def: 'trending', first: 3, every: 3, side: 'trainer', levels: ['normal', 'competent'] }],
             team: ['beastie', 'muskrat', 'altmanta', 'zuckerborg', 'tremendoodle', 'kardashiant', 'rockodile', 'beeyonce', 'haalandroid', 'eminemu'],
             ante: { items: { greatcharm: 3, ward: 1, heartstone: 1 } },
             tactics: ['counterexample', 'counterexample', 'peer-review', 'pep-talk', 'rally-cry', 'eureka', 'rethink', 'big-claims', 'clockwork', 'daydream'],

@@ -670,6 +670,56 @@
         'idea-token': { name: 'Idea', token: true, colour: 'imagination', rarity: 'common', cost: 1, attack: 1, health: 2,
             blurb: 'A small new idea from Tomorrow\'s Idea. It is not a card: when it leaves play, it is gone.' },
     };
+    // Environmental Fate events (#128; design/drafts/card-arena-2026-10-12/ENVIRONMENTAL-FATE.md). An encounter
+    // puts them on the Fate track when the battle starts (encounter data: `fate` on a trainer in data/map.js,
+    // or the launcher's plan in js/ui/battles.js). They are public and fixed in advance: who they help, what
+    // they do and when. Nothing is rolled when they happen. Shaped like a tactic's `scheduled` block:
+    //   name, source (who causes it), art, text, summary(whose, ctx) / idle, resolve(api, ev, H), project(s, ev, H)
+    // ev.side: the player index it favours (null: both players). A leap skips an occurrence for good.
+    function strongestOf(s, p, H) {
+        let best = null;
+        if (p == null) return null;
+        s.players[p].board.forEach(cid => { if (best == null || H.attack(s, cid) > H.attack(s, best)) best = cid; });
+        return best;   // leftmost on a tie
+    }
+    Rift.data.environments = {
+        // Gentle: Syllo's practice match. Both sides, so it teaches reading the track, not luck.
+        'drill-whistle': {
+            name: 'Drill Whistle', source: 'Sergeant Syllo', art: 'npc/sergeant-syllo',
+            summary: 'both players get +1 energy on their next turn.',
+            idle: 'both players would get +1 energy on their next turn.',
+            text: 'Syllo blows his whistle. Both players get +1 energy on their next turn. Plan a bigger play for it!',
+            resolve(api) {
+                [0, 1].forEach(p => api.energyNextTurn(p, 1));
+                api.emit({ t: 'tactic', text: 'Drill Whistle: both players get +1 energy on their next turn.' });
+            },
+            project(s) {
+                return Object.assign({}, s, { players: s.players.map(P => Object.assign({}, P, { nextEnergy: (P.nextEnergy || 0) + 1 })) });
+            },
+        },
+        // Boss: the Feed's Champion. Its strongest creature trends. Counterplay: defeat that creature
+        // before it trends, keep the Feed's board small, or leap past the occurrence.
+        'trending': {
+            name: 'Trending', source: 'The Algorithm', art: 'npc/algorithm',
+            summary: whose => whose + ' creature with the most attack gets +1 attack until the end of its next turn.',
+            idle: 'there is no creature to trend.',
+            text: 'The Feed boosts whatever is loudest: its creature with the most attack (leftmost on a tie) gets +1 attack until the end of its next turn.',
+            resolve(api, ev, H) {
+                const cid = strongestOf(api.s, ev.side, H);
+                if (!cid) { api.emit({ t: 'tactic', text: 'Trending: there is no creature to trend.' }); return; }
+                api.buffNextTurn(cid, 1, 0, 'Trending');
+                api.emit({ t: 'tactic', text: 'Trending: ' + api.name(cid) + ' gets +1 attack until the end of its next turn.' });
+            },
+            project(s, ev, H) {
+                const cid = strongestOf(s, ev.side, H);
+                if (!cid) return s;
+                const cards = Object.assign({}, s.cards);
+                cards[cid] = Object.assign({}, cards[cid], { buffs: cards[cid].buffs.concat([{ label: 'Trending', attack: 1, health: 0, temp: false }]) });
+                return Object.assign({}, s, { cards });
+            },
+        },
+    };
+    Object.keys(Rift.data.environments).forEach(id => { Rift.data.environments[id].id = id; });
     Rift.data.tacticDecks = {
         // Everyone owns these from the start; the default ten-card tactic contribution.
         starter: ['counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'occams-razor', 'rethink', 'big-claims', 'clockwork', 'look-it-up'],

@@ -241,6 +241,7 @@
                 { id: 'opp', name: oppShort, team: oppTeam, tactics: opp.tactics, axioms: oppAxioms, hearts: opp.hearts, power: opp.power || null },
             ],
             axiomDeck: p.axiomDeck || E.buildAxiomDeck(me.axioms, oppAxioms),
+            environment: p.environment || null,   // the encounter's environmental Fate events (#128)
             options: Object.assign({}, p.battleOptions, { mode }),
         });
         const oppName = state.players[OPP].name;
@@ -525,7 +526,10 @@
             if (fired.length) {
                 const f = fired[0], rest = events.slice(events.indexOf(f) + 1);
                 const others = fired.length > 1 ? ' (+' + (fired.length - 1) + ' more)' : '';
-                const card = f.cid && state.cards[f.cid] ? cardEl(f.cid, { size: 'big', unregistered: true }) : null;
+                // An environmental event (#128) has no card: its source's picture stands in.
+                const envDef = (Rift.data.environments || {})[f.def];
+                const card = f.cid && state.cards[f.cid] ? cardEl(f.cid, { size: 'big', unregistered: true })
+                    : envDef ? icon(envDef.art, '◎', 'b-reset-icon') : null;
                 const after = rest.filter(e => e.t === 'axiom' || e.t === 'reset').length ? () => ruleReveal(rest.filter(e => e.t !== 'fate-event')) : undefined;
                 showReveal(el('div.b-reveal-rule', {}, [card, el('div.b-reveal-what', { text: f.text + others })]), 'Fate: ' + scheduledName(f.def) + '!', RULE_SHOW, 'rule fate-event', after);
                 return;
@@ -1925,7 +1929,7 @@
             }
             // The next scheduled event, in one line under the rule event's.
             const soon = sched.filter(ev => ev.live && ev.rounds != null).sort((a, b) => a.rounds - b.rounds || a.seq - b.seq)[0];
-            const schedLine = soon ? '◎ ' + (soon.controller === ME ? 'Your ' : soon.controller === OPP ? oppName + '\'s ' : '') + soon.name + ' in ' + roundsWord(soon.rounds) : '';
+            const schedLine = soon ? '◎ ' + (soon.env ? soon.source + '\'s ' : soon.controller === ME ? 'Your ' : soon.controller === OPP ? oppName + '\'s ' : '') + soon.name + ' in ' + roundsWord(soon.rounds) : '';
             // A card bent time, or Fate set a card aside (not a round passing): the summary flashes so the change is seen.
             const sig = next.type + ':' + next.rounds + ':' + (next.id || '');
             const bent = !shift && ui.fateSig && ui.fateSig.round === state.round && ui.fateSig.sig !== sig;
@@ -1952,9 +1956,11 @@
         // live repeatable space (#120) that Fate has passed stays visible behind NOW, where a rewind can land on it.
         const schedRound = ev => (ev.live ? (ev.rounds != null ? ev.rounds : ev.spaces >= -FATE_PAST ? ev.spaces : null)
             : ev.spaces > 0 ? ev.spaces + (ev.held ? 1 : 0) : null);
-        const scheduledName = def => ((Rift.data.tactics || {})[def] || {}).name || def;
+        const scheduledName = def => ((Rift.data.tactics || {})[def] || (Rift.data.environments || {})[def] || {}).name || def;
         const whoseEvent = (p, cap) => (p === ME ? (cap ? 'Your' : 'your') : p === OPP ? oppName + '\'s' : (cap ? 'The' : 'the'));
-        const eventLabel = id => { const ev = E.fateSchedule(state).find(x => x.id === id); return ev ? whoseEvent(ev.controller) + ' ' + ev.name : 'an event'; };
+        const eventLabel = id => { const ev = E.fateSchedule(state).find(x => x.id === id); return ev ? (ev.env ? ev.source + '\'s ' + ev.name : whoseEvent(ev.controller) + ' ' + ev.name) : 'an event'; };
+        // Who an environmental event (#128) helps, in words.
+        const helpsWords = ev => (ev.side === ME ? 'It helps you.' : ev.side === OPP ? 'It helps ' + oppName + '.' : 'It works the same for both players.');
         // A leap's skipped, jumped and landed events, in words (#120).
         function leapWords(h) {
             const list = ids => ids.map(eventLabel).join(', ');
@@ -1987,7 +1993,8 @@
             const spent = !ev.live;
             const behind = !spent && ev.rounds == null;   // a live repeatable space Fate has passed (#120)
             const t = (Rift.data.tactics || {})[ev.def] || {};
-            const who = whoseEvent(ev.controller, true) + ' ' + ev.name;
+            // An environmental event (#128) belongs to the match, not a player: "Environmental: The Algorithm's Trending".
+            const who = ev.env ? 'Environmental: ' + ev.source + '\'s ' + ev.name : whoseEvent(ev.controller, true) + ' ' + ev.name;
             const when = spent
                 ? 'Over · ' + who + (ev.state === 'fired' ? ' already happened in round ' + ev.firedRound + '. It happens only once: Fate coming back here does not repeat it.'
                     : ev.state === 'expired' ? ' has expired. Fate coming back here does nothing.' : ev.state === 'skipped' ? ' was skipped by a leap. It will not happen.' : ' was cancelled.')
@@ -1998,18 +2005,23 @@
             const left = ev.expiresRound == null ? 0 : ev.expiresRound - state.round + 1;
             const rule = spent ? '' : (ev.repeat ? 'Repeatable: it happens each time Fate lands here' + (ev.fires ? ' (' + ev.fires + ' so far)' : '')
                 + ', until it expires at the end of round ' + ev.expiresRound + ' (' + roundsWord(left) + ' from now). Moving Fate back never makes it last longer.'
+                : ev.env ? 'One-shot: it happens once. A leap past it skips it for good. Cards that move Fate sooner or later move it too.'
                 : 'One-shot: it happens once. Cards that move Fate sooner or later move it too.');
-            const by = ev.controller === ME ? 'You played it.' : ev.controller === OPP ? oppName + ' played it.' : 'Part of this match.';
-            const m = el('div.b-fev.sched.' + (ev.controller === ME ? 'mine' : 'theirs') + (spent ? '.spent.' + ev.state : '') + (ev.repeat ? '.repeat' : '') + (behind ? '.behind' : '') + (far ? '.far' : ''), {
+            const again = ev.env && ev.every ? 'It comes back every ' + roundsWord(ev.every) + (ev.times ? ', ' + ev.times + ' times in all' : '') + ', as a new event.' : '';
+            const by = ev.env ? 'Part of this match: ' + ev.source + ' causes it. ' + helpsWords(ev) + (again ? ' ' + again : '')
+                : ev.controller === ME ? 'You played it.' : ev.controller === OPP ? oppName + ' played it.' : 'Part of this match.';
+            const side = ev.env ? 'env' : ev.controller === ME ? 'mine' : 'theirs';
+            const m = el('div.b-fev.sched.' + side + (spent ? '.spent.' + ev.state : '') + (ev.repeat ? '.repeat' : '') + (behind ? '.behind' : '') + (far ? '.far' : ''), {
                 tabindex: 0, role: 'button', dataset: { fateEvent: ev.id },
                 'aria-label': [when, spent ? '' : ev.summary, now, rule, by].filter(Boolean).join(' '),
             }, [
-                icon(t.art || 'tactic/' + ev.def, '◎', 'b-fev-icon'),
+                icon(ev.env ? ev.art : t.art || 'tactic/' + ev.def, ev.env ? '🌐' : '◎', 'b-fev-icon'),
                 el('span.b-fev-label', { text: ev.name + (spent ? ' · ' + (ENDED[ev.state] || 'over') : far ? ' · in ' + ev.rounds : ev.repeat && ev.fires ? ' · ×' + ev.fires : '') }),
             ]);
             const make = () => [ev.cid && state.cards[ev.cid] ? cardEl(ev.cid, { size: 'big', unregistered: true }) : null, el('div.b-notes', {}, [
                 el('div.b-note-line', {}, [el('b', { text: when })]),
                 spent ? null : el('div.b-note-line', { text: ev.summary }),
+                ev.env && ev.text ? el('div.b-note-line.b-flavour', { text: ev.text }) : null,
                 now ? el('div.b-note-line', { text: now }) : null,
                 spent ? null : el('div.b-note-line.b-flavour', { text: 'Creatures are chosen when it happens, not now. ' + rule }),
                 el('div.b-note-line', { text: by }),

@@ -140,6 +140,7 @@ function scenarioGame(scenario, label, g, levels, powers) {
                 { name: 'Syllo', team: Lesson.team(SYLLO_TEAM, 'syllo-'), tactics: SYLLO_TACTICS, hearts: SYLLO_HEARTS == null ? SYLLO_HEARTS_GAME : +SYLLO_HEARTS },
             ],
             axiomDeck: ['underdog', 'thrift', 'three-actions', 'normal-hearts', 'mercy', 'arrival', 'age-of-reason'],
+            environment: [{ def: 'drill-whistle', first: 4, every: 4, side: null }],   // SYLLO_FATE (#128)
             options: { shuffle: false, shuffleAxioms: false, deckSize: 16, mode: 'practice' },
         };
     }
@@ -149,9 +150,12 @@ function scenarioGame(scenario, label, g, levels, powers) {
         const deck = Rift.data.decks[m.deckId];
         m.teams = levels.map((lv, p) => (AI.levelOf(lv) === 'expert' ? deckTeam(deck, 'g' + g + 'boss') : Lesson.starter()));
         m.tactics = levels.map(lv => (AI.levelOf(lv) === 'expert' ? deck.tactics : starterTactics));
+        // The Feed's Champion brings its environmental Trending at Expert (#128, data/map.js `fate`).
+        const seat = levels.findIndex(lv => AI.levelOf(lv) === 'expert');
+        if (m.deckId === 'feed' && seat >= 0) m.environment = [{ def: 'trending', first: 2, every: 2, side: seat }];
     }
     return {
-        orders: [0, 1], teams: m.teams, deckId: m.deckId,
+        orders: [0, 1], teams: m.teams, deckId: m.deckId, environment: m.environment || null,
         players: m.teams.map((team, p) => ({ name: 'P' + p, team, axioms: m.axioms[p], tactics: m.tactics ? m.tactics[p] : undefined, power: (powers && powers[p]) || undefined })),
         options: { mode: 'trainer' },
     };
@@ -187,6 +191,7 @@ function runRange(from, to, levels, label, scenario, powers) {
                 seed,
                 players: m.players,
                 axiomDeck: m.axiomDeck,
+                environment: m.environment || null,
                 options: Object.assign({}, m.options, { first }, OVERRIDES),
             });
             let guard = 0;

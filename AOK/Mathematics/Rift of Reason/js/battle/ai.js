@@ -456,22 +456,25 @@
 
     // The coming scheduled Fate events (public), each as the change it would make: its definition's
     // rough `project` (data/tactics.js), weighted by End turns until it resolves. 0 when none is coming.
+    // Environmental events (#128, Rift.data.environments) are public too and count the same way.
+    const projectOf = ev => (ev.env ? ((Rift.data.environments || {})[ev.def] || {}).project
+        : (((Rift.data.tactics || {})[ev.def] || {}).scheduled || {}).project) || null;
     function comingScheduled(s) {
         const q = s.fate && s.fate.queue;
         if (!q || !q.length || s.winner != null || !s.options.timeline) return [];
-        return E().fateSchedule(s).filter(ev => ev.live && ev.rounds != null && ((Rift.data.tactics || {})[ev.def] || {}).scheduled && Rift.data.tactics[ev.def].scheduled.project);
+        return E().fateSchedule(s).filter(ev => ev.live && ev.rounds != null && projectOf(ev));
     }
     function scheduledTerm(s, me, ctx) {
         const coming = comingScheduled(s);
         if (!coming.length) return 0;
         const base = evaluateBase(s, me, ctx);
         let v = 0;
-        for (const ev of coming) v += Math.pow(0.85, ev.turns) * (evaluateBase(Rift.data.tactics[ev.def].scheduled.project(s, ev, E().H), me, ctx) - base);
+        for (const ev of coming) v += Math.pow(0.85, ev.turns) * (evaluateBase(projectOf(ev)(s, ev, E().H), me, ctx) - base);
         return v;
     }
     // A public event that empties my side resolves at the end of this round (before my next turn).
     function wipedThisRound(s, me) {
-        return comingScheduled(s).some(ev => ev.rounds === 1 && !Rift.data.tactics[ev.def].scheduled.project(s, ev, E().H).players[me].board.length);
+        return comingScheduled(s).some(ev => ev.rounds === 1 && !projectOf(ev)(s, ev, E().H).players[me].board.length);
     }
 
     // What each axiom would be worth to me if it became active now.

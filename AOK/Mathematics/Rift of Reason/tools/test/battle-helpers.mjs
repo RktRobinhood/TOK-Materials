@@ -19,11 +19,13 @@ export const inst = (species, extra) => Object.assign({ uid: 'u' + (++n), specie
 const asInst = x => (typeof x === 'string' ? inst(x) : x);
 
 // powers: [player 0's power, player 1's power] as { id, tweaks } (hero powers, data/powers.js).
-export function setup({ p0 = [], p1 = [], t0 = [], t1 = [], axioms = [], options = {}, energy = 10, main = true, powers = [] } = {}) {
+// environment: the encounter's environmental Fate event plans (#128), as createBattle takes them.
+export function setup({ p0 = [], p1 = [], t0 = [], t1 = [], axioms = [], options = {}, energy = 10, main = true, powers = [], environment = null } = {}) {
     const s = E.createBattle({
         seed: 'rules',
         players: [{ name: 'A', team: p0.map(asInst), tactics: t0, power: powers[0] }, { name: 'B', team: p1.map(asInst), tactics: t1, power: powers[1] }],
         axiomDeck: axioms,
+        environment,
         options: Object.assign({ first: 0, shuffle: false, shuffleAxioms: false, openHand: [0, 0], openAxioms: 0, spark: false, timeline: false, hearts: 10 }, options),
     });
     if (energy != null) s.players.forEach(P => { P.energy = energy; P.capacity = energy; });

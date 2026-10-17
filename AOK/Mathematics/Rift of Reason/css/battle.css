@@ -1182,6 +1182,9 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-fev.sched .b-fev-icon { width: 28px; height: 28px; font-size: 20px; border-radius: 6px; background-size: cover; color: var(--rift); }
 .b-fev.sched.mine .b-fev-label { color: var(--rift); }
 .b-fev.sched.theirs .b-fev-label { color: #ff9b8a; }
+/* #128: an environmental event belongs to the match, not a player: a gold label and a round, framed picture. */
+.b-fev.sched.env .b-fev-label { color: #ffd479; }
+.b-fev.sched.env .b-fev-icon { border-radius: 50%; box-shadow: 0 0 0 2px #ffd479; background-position: center top; }
 .b-fev.sched.spent { opacity: 0.55; }
 .b-fev.sched.spent .b-fev-label { text-decoration: line-through; }
 .b-fpast.scheduled { color: var(--rift); }

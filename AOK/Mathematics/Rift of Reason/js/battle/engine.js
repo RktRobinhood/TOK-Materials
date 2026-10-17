@@ -16,9 +16,13 @@
  *
  * API (Rift.Battle.Engine):
  *   createBattle({ seed, players: [{ id, name, team: [instances], tactics?: [ids], axioms?: [ids],
- *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] }, ownAxioms?: [ids] }], axiomDeck?: [ids], options })      → state
+ *                  hearts?, consumables?, bag?, power?: { id, tweaks: [] }, ownAxioms?: [ids] }], axiomDeck?: [ids],
+ *                  environment?: [{ def, first, every?, times?, side? }], options })      → state
  *                  ownAxioms: the player's own rule cards (ax.own, e.g. Granny's Spare Axiom), added to the opening
  *                  hand; own cards are never taken into the shared axiom deck.
+ *                  environment: the encounter's public environmental Fate events (#128, Rift.data.environments):
+ *                  def's first occurrence sits on space `first`; with `every` it recurs (a new occurrence each
+ *                  time, at most `times` in all); side: the player index it favours, or null for both.
  *   legalActions(state) → [action]    applyAction(state, action) → new state (input untouched)
  *   applyLegal(state, action) → like applyAction but skips the legality check; only for an
  *                  action object taken from legalActions(state) of this same state (AI lookahead)
@@ -118,6 +122,7 @@
     const abilityDefs = () => Battle.Abilities || {};
     const axiomDefs = () => Rift.data.axioms || {};
     const tacticDefs = () => Rift.data.tactics || {};
+    const envDefs = () => Rift.data.environments || {};
     const battleItem = id => ((Rift.data.items || {})[id] || {}).battle || null;
     const powerDefs = () => Rift.data.powers || {};
     const isHero = t => t === 'h0' || t === 'h1';
@@ -799,7 +804,7 @@
                 playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [], exhaustion: 0,
                 consumables: Object.assign({}, cons),
                 bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
-                power: powerSetup(pl.power), tax: 0, sight: [],
+                power: powerSetup(pl.power), tax: 0, sight: [], nextEnergy: 0,
             });
         });
 
@@ -822,6 +827,7 @@
             emit(G, { t: 'spark', player: 1 - s.active, text: says(s, 1 - s.active, 'goes') + ' second: one extra card and the Spark (+1 energy once).' });
         }
         emit(G, { t: 'start', text: says(s, s.active, 'goes') + ' first.' });
+        setupEnvironment(G, cfg.environment);
         startTurn(G);
         s.lastEvents = G.events;
         s.log = { prev: null, events: G.events };
@@ -903,6 +909,8 @@
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
             // Until the end of its controller's next turn (#121, Scheduled Speech; see nextTurnEnd).
             buffNextTurn(cid, attack, health, label) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilTurn: nextTurnEnd(G, s.cards[cid].controller) }); },
+            // Extra energy for p's next turn start (#128); it is added once, then gone.
+            energyNextTurn(p, n) { s.players[p].nextEnergy = (s.players[p].nextEnergy || 0) + (n || 0); },
             summon: (p, id) => summonToken(G, p, id),
             addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; if (c.lostKeywords) c.lostKeywords = c.lostKeywords.filter(x => x !== k); },
             shiftFate: n => shiftFate(G, n),
@@ -1156,7 +1164,8 @@
         }
         announceFlip(G);   // the first turn, or a flip still waiting for a rule card
         P.capacity = Math.max(1, Math.min(s.options.energyCap, P.capacity + r.growth));   // growth may be 0 or −1
-        P.energy = P.capacity + (P.consumables['extra-energy'] || 0);
+        P.energy = P.capacity + (P.consumables['extra-energy'] || 0) + (P.nextEnergy || 0);   // nextEnergy: an environmental event (#128)
+        P.nextEnergy = 0;
         P.attacksThisTurn = 0;
         P.playsThisTurn = 0;
         P.extraPlays = 0;
@@ -1334,8 +1343,10 @@
         s.fate.until = Math.max(0, s.fate.until - n);
         emit(G, { t: 'fate-leap', player: by, from, to, spaces: n, skipped: skipped.map(ev => ev.id), passed: passed.filter(ev => ev.repeat).map(ev => ev.id),
             text: 'Fate leaps ' + roundsText(n) + ' closer.' + (n < spaces ? ' It stops at Fate\'s own event: a leap never jumps over a new rule or reset.' : '') });
-        skipped.forEach(ev => emit(G, { t: 'fate-skip', id: ev.id, def: ev.def, player: ev.controller, by,
+        skipped.forEach(ev => emit(G, { t: 'fate-skip', id: ev.id, def: ev.def, player: ev.controller, env: isEnv(ev), by,
             text: capFirst(eventName(s, ev)) + ' is skipped. It will not happen.' }));
+        // A skipped environmental occurrence stays skipped; a recurring one puts its next occurrence on (#128).
+        skipped.filter(isEnv).forEach(ev => recurEnvironment(G, ev));
         enterSpace(G, to, 'leap');
         if (s.winner == null && !s.fate.until) ruleEvent(G);
     }
@@ -1418,9 +1429,16 @@
     const queueOf = s => s.fate.queue || [];
     const isLive = ev => ev.state === 'pending' || (ev.state === 'fired' && !!ev.repeat);
     function scheduledDef(ev) {
-        if (!ev || !ev.source || ev.source.type !== 'tactic') return null;
+        if (!ev || !ev.source) return null;
+        if (ev.source.type === 'environment') return envDefs()[ev.def] || null;
+        if (ev.source.type !== 'tactic') return null;
         return (tacticDefs()[ev.def] || {}).scheduled || null;
     }
+    const isEnv = ev => !!(ev && ev.source && ev.source.type === 'environment');
+    // The event's printed name: a tactic's, or an environmental event's (#128).
+    const eventTitle = ev => (isEnv(ev) ? (envDefs()[ev.def] || {}).name : (tacticDefs()[ev.def] || {}).name) || ev.def;
+    // The side an event is about: its controller, or the side an environmental event favours (null: both).
+    const eventSide = ev => (ev.controller != null ? ev.controller : ev.side != null ? ev.side : null);
     function liveScheduled(s, p) { return queueOf(s).filter(ev => ev.controller === p && isLive(ev)).length; }
     // Fate timing Axioms (#121) are read when a spell is played. Events already on the track never move
     // because one changes, and a lower limit never cancels events already waiting.
@@ -1434,15 +1452,16 @@
     }
     const lowerFirst = t => (t ? t[0].toLowerCase() + t.slice(1) : t);
     const roundsText = n => n + ' round' + (n === 1 ? '' : 's');
-    // "your Clean Slate" / "Anna's Clean Slate" / "the Clean Slate" (an environment event, #128).
-    const eventName = (s, ev) => (ev.controller == null ? 'the' : possessive(s, ev.controller)) + ' ' + ((tacticDefs()[ev.def] || {}).name || ev.def);
+    // "your Clean Slate" / "Anna's Clean Slate" / "the Drill Whistle" (an environmental event, #128).
+    const eventName = (s, ev) => (ev.controller == null ? 'the' : possessive(s, ev.controller)) + ' ' + eventTitle(ev);
     // Its one-sentence effect, mid-sentence ("every creature…", "your creatures…", "Anna's creatures…").
     // A summary function names the controller's side itself, so it is never lower-cased. ctx: { who ('you' /
-    // 'Anna' / 'the'), target (the name of the target fixed when it was played, or null) }.
+    // 'Anna' / 'the'), target (the name of the target fixed when it was played, or null) }. An environmental
+    // event (#128) names the side it favours the same way.
     function summaryOf(s, ev, sch) {
         if (!sch) return 'nothing happens.';
         if (typeof sch.summary !== 'function') return lowerFirst(sch.summary || '');
-        const p = ev.controller;
+        const p = eventSide(ev);
         return sch.summary(p == null ? 'the' : possessive(s, p), { who: p == null ? 'the' : s.players[p].name === 'You' ? 'you' : s.players[p].name,
             target: ev.target && s.cards[ev.target] ? cardName(s, ev.target) : null });
     }
@@ -1464,6 +1483,44 @@
             text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + summaryOf(s, ev, sch)
                 + (by ? ' ' + by.name + ' moved it ' + roundsText(Math.abs(delay - printed)) + (delay > printed ? ' later.' : ' sooner.') : '') });
     }
+    // ---- environmental events (#128; design/drafts/card-arena-2026-10-12/ENVIRONMENTAL-FATE.md) ----
+    // An encounter brings plans (createBattle's `environment`): { def, first, every?, times?, side? }. They are
+    // kept in s.fate.env, never changed. Each plan puts ONE occurrence on the track at a time: a one-shot
+    // record with source { type: 'environment', card: def }, controller null (so it uses nobody's limit and
+    // no player owns it), side (the player it favours, or null), plan (its index) and occurrence (1, 2, …).
+    // When an occurrence fires, or a leap skips it, a recurring plan puts its NEXT occurrence `every` spaces
+    // further on (a new record with its own id): a skipped occurrence never comes back, and rewinding only
+    // moves the next one further away. Its effect is fixed now and public; nothing is rolled when it happens.
+    function setupEnvironment(G, plans) {
+        const s = G.s;
+        if (!s.options.timeline || !plans || !plans.length) return;
+        s.fate.env = plans.filter(pl => pl && envDefs()[pl.def]).map(pl => ({
+            def: pl.def, first: Math.max(1, pl.first || 1), every: pl.every > 0 ? pl.every : null,
+            times: pl.times > 0 ? pl.times : null, side: pl.side === 0 || pl.side === 1 ? pl.side : null,
+        }));
+        s.fate.env.forEach((pl, i) => scheduleEnvironment(G, i, 1, pl.first));
+    }
+    function scheduleEnvironment(G, plan, occurrence, space) {
+        const s = G.s, pl = s.fate.env[plan], def = envDefs()[pl.def];
+        const seq = (s.fate.seq || 0) + 1;
+        const ev = { id: 'f' + seq, seq, def: pl.def, source: { type: 'environment', card: pl.def }, controller: null, side: pl.side,
+            plan, occurrence, space, createdRound: s.round, createdTurn: s.turn, repeat: false, lifetime: null, expiresRound: null,
+            state: 'pending', fires: 0, firedRound: null, reason: null, target: null };
+        s.fate.seq = seq;
+        s.fate.queue = queueOf(s).concat([ev]);
+        const rounds = space - cursorOf(s) + (fateHeld(s) ? 1 : 0);
+        emit(G, { t: 'fate-schedule', player: null, env: true, id: ev.id, def: pl.def, space, rounds, occurrence,
+            text: (occurrence > 1 ? 'It comes back: ' : 'Environmental: ') + def.source + '\'s ' + def.name + ' in ' + roundsText(rounds) + ': ' + summaryOf(s, ev, def) });
+    }
+    // The occurrence after `ev` (fired or skipped), if its plan recurs: `every` spaces on, and always ahead of NOW.
+    function recurEnvironment(G, ev) {
+        const s = G.s, pl = isEnv(ev) && (s.fate.env || [])[ev.plan];
+        if (!pl || !pl.every || (pl.times && ev.occurrence >= pl.times) || s.winner != null) return;
+        let space = ev.space + pl.every;
+        while (space <= cursorOf(s)) space += pl.every;
+        scheduleEnvironment(G, ev.plan, ev.occurrence + 1, space);
+    }
+
     // Gentle Consequences (#121): while one scheduled effect resolves (its own effect and the defeats it
     // causes), each hero loses at most rules.fateHeroCap hearts. damageHero reads G.fateCap.
     function withFateCap(G, fn) {
@@ -1532,6 +1589,7 @@
             if (def && def.resolve) def.resolve(A, ev, H);
             cleanup(G);
         });
+        recurEnvironment(G, ev);
     }
     // After a round's end (the Fate move or the Anchor's hold): live records whose lifetime is used up
     // expire, and every boost they gave ends (health that depended on one can then be lost).
@@ -1555,15 +1613,20 @@
     //   { id, seq, def, name, summary, idle, text, cid, controller, state, live, repeat, spaces (from the cursor),
     //     rounds / turns / turn / round / after / held (as in timeline; null when it is not coming),
     //     createdRound, expiresRound, lifetime, fires, firedRound, reason, target, targetName (#121: the target
-    //     fixed when it was played, e.g. Remember This's creature, or null) }
+    //     fixed when it was played, e.g. Remember This's creature, or null),
+    //     env (#128: an environmental event of this encounter), source (its source's name), art, side (the
+    //     player it favours, or null), occurrence, every (it recurs every n rounds, or null), times }
     function fateSchedule(s) {
         if (!s.options.timeline) return [];
         const hold = fateHeld(s) ? 1 : 0, half = s.roundTurns[1 - s.active] ? 1 : 0, after = roundCloser(s), pos = cursorOf(s);
         return queueOf(s).map(ev => {
-            const def = scheduledDef(ev) || {}, card = tacticDefs()[ev.def] || {};
+            const env = isEnv(ev), def = scheduledDef(ev) || {}, card = env ? def : tacticDefs()[ev.def] || {};
+            const plan = env ? (s.fate.env || [])[ev.plan] || {} : {};
             const spaces = ev.space - pos, live = isLive(ev);
             const rounds = live && spaces > 0 ? spaces + hold : null, turns = rounds == null ? null : 2 * rounds - half;
             return {
+                env, source: env ? def.source || '' : null, art: env ? def.art || null : null, side: env ? ev.side : null,
+                occurrence: env ? ev.occurrence : null, every: env ? plan.every || null : null, times: env ? plan.times || null : null,
                 id: ev.id, seq: ev.seq, def: ev.def, name: card.name || ev.def, summary: def.summary ? capFirst(summaryOf(s, ev, def)) : '', idle: def.idle || '', text: card.text || '',
                 cid: ev.source ? ev.source.cid || null : null, controller: ev.controller, state: ev.state, live, repeat: !!ev.repeat, spaces,
                 rounds, turns, turn: turns == null ? null : s.turn + turns, round: rounds == null ? null : s.round + rounds, after, held: !!hold,
