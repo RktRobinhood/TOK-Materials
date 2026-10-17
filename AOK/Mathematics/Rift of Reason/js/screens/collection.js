@@ -29,7 +29,7 @@
             title: known ? c.name : '???',
         }, [
             Rift.UI.framedCard(speciesId, { known, foil: o.foil }),
-            o.count ? el('div.dex-count', { text: o.count + '/' + Rift.State.COPY_CAP, title: o.count + ' of ' + Rift.State.COPY_CAP + ' copies (a folder holds ' + Rift.State.COPY_CAP + ')' }) : null,
+            o.count ? el('div.dex-count', { text: o.count + '/' + Rift.State.copyCap(speciesId), title: Rift.State.isLegendary(speciesId) ? 'Legendary: one of a kind' : o.count + ' of ' + Rift.State.COPY_CAP + ' copies (a folder holds ' + Rift.State.COPY_CAP + ')' }) : null,
         ]);
     }
 
@@ -89,8 +89,10 @@
             ]),
             el('p', { text: c.blurb }),
             el('p', null, [el('strong', { text: 'Ability: ' }), c.abilityText]),
-            mine.length ? el('h3', { text: 'Your ' + c.name + ' folder: ' + mine.length + ' of ' + Rift.State.COPY_CAP }) : null,
-            mine.length ? el('p.small.muted', { text: 'You can keep ' + Rift.State.COPY_CAP + ' copies. A deck takes 2, so choose which ones to play. Full? Release one to make room.' }) : null,
+            mine.length ? el('h3', { text: Rift.State.isLegendary(speciesId) ? 'Your ' + c.name + ' (legendary)' : 'Your ' + c.name + ' folder: ' + mine.length + ' of ' + Rift.State.COPY_CAP }) : null,
+            mine.length ? el('p.small.muted', { text: Rift.State.isLegendary(speciesId)
+                ? 'Legendaries are one of a kind. You keep one, and a deck takes one.'
+                : 'You can keep ' + Rift.State.COPY_CAP + ' copies. A deck takes 2, so choose which ones to play. Full? Release one to make room.' }) : null,
             mine.length ? el('div.stack.small', null, mine.map((x, i) => instanceRow(x, i + 1, s, teach, release))) : null,
         ]);
         dialog = Rift.UI.modal(c.name, body);
@@ -156,7 +158,9 @@
         // Why this card cannot be added now (null: it can).
         function creatureBlock(x) {
             if (team.has(x.uid)) return null;
-            if (speciesCount(x.species) >= RULES.copies) return 'At most ' + RULES.copies + ' copies of ' + nameOf(x.species) + '. Uncheck one first.';
+            if (speciesCount(x.species) >= S.deckCopies(x.species)) return S.isLegendary(x.species)
+                ? nameOf(x.species) + ' is legendary: one per deck.'
+                : 'At most ' + RULES.copies + ' copies of ' + nameOf(x.species) + '. Uncheck one first.';
             if (team.size >= RULES.maxCreatures) return 'At most ' + RULES.maxCreatures + ' creatures. Uncheck one first.';
             return null;
         }
@@ -194,7 +198,7 @@
                 input.setAttribute('aria-disabled', why ? 'true' : 'false');
                 input.title = why || '';
                 const k = speciesCount(x.species);
-                copiesOut.textContent = k ? 'In deck: ' + k + '/' + RULES.copies : '';
+                copiesOut.textContent = k ? 'In deck: ' + k + '/' + S.deckCopies(x.species) : '';
             });
             steppers.forEach(({ id, minus, plus, out, quota }) => {
                 out.textContent = '×' + (counts[id] || 0) + '/' + RULES.copies;

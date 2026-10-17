@@ -278,7 +278,19 @@
 
             function runAlong(h, pts) {
                 const sp = Rift.data.creatures[Hunts.def(h).species];
-                const runner = svg('image', { href: Rift.Assets.src('creature/' + Hunts.def(h).species + '/idle', { colour: sp.colour, label: ' ' }), x: -22, y: -54, width: 44, height: 54, class: 'hunt-runner' });
+                // The run sheet (6 frames facing right, like the avatar's walk) when it exists; else the idle art.
+                const runId = 'creature/' + Hunts.def(h).species + '/run';
+                const sheet = Rift.Assets.frames(runId);
+                const RH = 54;
+                let runner;
+                if (sheet) {
+                    const fw = sheet.frameWidth, fh = sheet.frameHeight, w = RH * fw / fh;
+                    runner = svg('svg', { x: -w / 2, y: -RH, width: w, height: RH, viewBox: `0 0 ${fw} ${fh}`, class: 'hunt-runner' }, [
+                        svg('image', { href: Rift.Assets.url(runId), width: fw * sheet.frames, height: fh }),
+                    ]);
+                } else {
+                    runner = svg('image', { href: Rift.Assets.src('creature/' + Hunts.def(h).species + '/idle', { colour: sp.colour, label: ' ' }), x: -22, y: -RH, width: 44, height: RH, class: 'hunt-runner' });
+                }
                 const g = svg('g', { transform: `translate(${pts[0].x},${pts[0].y})` }, [runner]);
                 huntRunners.append(g);
                 const legs = [];
@@ -289,15 +301,18 @@
                     const done = () => { if (finished) return; finished = true; g.remove(); resolve(); };
                     setTimeout(done, dur + 400);   // animation frames pause in hidden tabs
                     const t0 = performance.now();
+                    if (!legs.length) { done(); return; }
                     const tick = now => {
                         if (finished) return;
                         if (destroyed) return done();
-                        const t = Math.min(1, (now - t0) / dur) * legs.length;
+                        // A frame's timestamp can be a little before t0: clamp, or legs[-1] is undefined.
+                        const t = Math.min(1, Math.max(0, now - t0) / dur) * legs.length;
                         const leg = legs[Math.min(legs.length - 1, Math.floor(t))];
                         const u = Math.min(1, t - Math.min(legs.length - 1, Math.floor(t)));
                         const x = (1 - u) * (1 - u) * leg.a.x + 2 * (1 - u) * u * leg.cx + u * u * leg.b.x;
                         const y = (1 - u) * (1 - u) * leg.a.y + 2 * (1 - u) * u * leg.cy + u * u * leg.b.y;
                         g.setAttribute('transform', `translate(${x},${y})` + (leg.b.x < leg.a.x ? ' scale(-1,1)' : ''));
+                        if (sheet) runner.setAttribute('viewBox', `${(Math.floor(Math.max(0, now - t0) / 90) % sheet.frames) * sheet.frameWidth} 0 ${sheet.frameWidth} ${sheet.frameHeight}`);
                         if (t < legs.length) requestAnimationFrame(tick); else done();
                     };
                     requestAnimationFrame(tick);

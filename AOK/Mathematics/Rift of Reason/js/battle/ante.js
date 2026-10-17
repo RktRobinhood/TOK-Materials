@@ -146,7 +146,8 @@
                 : `${speciesName(inst.species)} joins your team.`));
             full.forEach(inst => {
                 res.itemsDelta.charm = (res.itemsDelta.charm || 0) + 1;
-                res.lines.push(`Your ${speciesName(inst.species)} folder is full (4 copies). You take a Catch Charm instead.`);
+                const why = Rift.State && Rift.State.fullReason ? Rift.State.fullReason(inst.species) : `Your ${speciesName(inst.species)} folder is full (4 copies).`;
+                res.lines.push(`${why} You take a Catch Charm instead.`);
             });
         } else {
             Object.keys(ante.player.items).forEach(id => { res.itemsDelta[id] = (res.itemsDelta[id] || 0) - ante.player.items[id]; });

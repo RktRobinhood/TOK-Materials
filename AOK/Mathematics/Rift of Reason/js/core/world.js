@@ -207,6 +207,8 @@
             const c = Rift.data.creatures[sp];
             if (!c || c.roaming) return; // roaming legendaries (#111) come only from their trick challenge
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
+            // Legendaries are one of a kind: once you have it, it stops turning up.
+            if (c.rarity === 'legendary' && (state.creatures || []).some(x => x && x.species === sp)) return;
             let w = Rift.data.rarities[c.rarity].weight;
             if (c.rarity === 'uncommon') w *= 1 + (stars - 1) * 0.2;
             if (c.rarity === 'rare' || c.rarity === 'legendary') {

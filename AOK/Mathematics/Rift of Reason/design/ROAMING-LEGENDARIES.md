@@ -14,7 +14,15 @@ They are original tricksters, not historical mathematicians. They sit beside the
 | 3 · Tomorrowton (`ch3`) | **Quibblequill**, an ink-stained ferret in a legal wig | language | *The Paper Trail* | One counterexample breaks an "every" claim. A supported claim says no more than the records. A rule does not run backwards (converse). |
 | 4 · Server Tower (`ch4`) | **Oddsnap**, a dice-tailed gremlin in a crooked paper crown | memory | *Odds and Ends* | A frequency model predicts from counts. Likely is not certain. A confident machine adds no evidence. |
 
-Cards (builder proposals, existing abilities, for the stage 3 balance review): Maskip 3 energy 2/3 *whisper*; Quibblequill 4 energy 2/5 Guard *foresight*; Oddsnap 3 energy 2/3 *predict*. A claimed creature has no luck roll (plain variant), so every student's copy is the same.
+Cards (teacher decision 17 October 2026: legendaries are one of a kind, so they sit above the curve; tougher and a bit unfair, still beatable):
+
+| Card | Energy | Stats | Ability (stronger version of) |
+|---|---|---|---|
+| Maskip | 4 | 3/5 | *Lantern Switch*: Entrance, every enemy creature loses its abilities, keywords and boosts (Eelish's *Whisper* hits one). |
+| Quibblequill | 4 | 3/6 Guard | *Cross-Examine*: takes 1 less damage from each hit; Entrance, read the opponent's hand and draw 2 (Carlseal's *Foresight* draws 1). |
+| Oddsnap | 3 | 3/5 | *Loaded Odds*: Predict; right gives +3/+3 and a card, wrong still gives +1/+1 (Altmanta's *Predict* gives nothing when wrong). |
+
+A claimed creature has no luck roll (plain variant), so every student's copy is the same. Like every legendary, a student keeps one copy and a deck takes one (`Rift.State.copyCap` / `deckCopies`).
 
 ## 2. The challenges (three rounds each)
 

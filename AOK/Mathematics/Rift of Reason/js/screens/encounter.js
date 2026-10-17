@@ -509,9 +509,9 @@
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
                 ]);
-                // A full folder (4 copies, #151) cannot take another: say so, and offer the Collection to release one.
+                // A full folder (4 copies, #151; 1 for a legendary) cannot take another: say so, and offer the Collection.
                 if (obstacle && !Rift.State.hasRoom(Rift.State.get(), obstacle)) {
-                    body.append(el('p.small', { text: 'Your ' + Rift.data.creatures[obstacle].name + ' folder is full (' + Rift.State.COPY_CAP + ' copies). Release one in Collection to catch another next time.' }));
+                    body.append(el('p.small', { text: Rift.State.fullReason(obstacle) + (Rift.State.isLegendary(obstacle) ? '' : ' Release one in Collection to catch another next time.') }));
                     modal('Solved!', body, [{ label: '📖 Open Collection', onclick: () => Rift.Router.replace('collection') }, { label: 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }]);
                     return;
                 }

@@ -1270,3 +1270,5 @@ IDs per creature (`<id>` = `maskip`, `quibblequill`, `oddsnap`):
 - `creature/<id>/run`: one row of 6 run (or flutter) frames on a shared ground line, facing right, bottom-centre pivot, in the `walk` sheet format of `tools/assets/sheets.json` (frame about 240–320 × 330–380 px). The map mirrors it for leftward runs. Calm motion shows the static idle, so no extra still is needed.
 
 No voice lines are requested: the hunt lines are on-screen text only.
+
+**Delivered 17 October 2026** (teacher in ChatGPT, prompts and checks by Claude): all 21 images, built as 20 game ids, because `oddsnap-idle` is still waiting for its file and the card shows the placeholder until then. Sources, prompts and decisions: [source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md](../source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md). The challenge screen now switches between the poses, and the map runner plays the run sheet (Calm motion still has no runner).

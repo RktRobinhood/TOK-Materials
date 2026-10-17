@@ -159,11 +159,11 @@
         return chosen.length ? chosen : defaultTeam(s);
     }
     // The default team (no team chosen yet): the first 10 creatures in collection order, skipping
-    // a species once 2 copies are in, so the default never breaks the copy limit.
+    // a species once 2 copies are in (1 for a legendary), so the default never breaks the copy limit.
     function defaultTeam(save) {
         const s = save || current || {};
         const counts = {};
-        return (s.creatures || []).filter(c => c && (counts[c.species] = (counts[c.species] || 0) + 1) <= DECK_RULES.copies).slice(0, 10);
+        return (s.creatures || []).filter(c => c && (counts[c.species] = (counts[c.species] || 0) + 1) <= deckCopies(c.species)).slice(0, 10);
     }
     // Tactics this player may put in a deck: the starter pool plus earned ones.
     function ownedTactics(save) {
@@ -297,7 +297,9 @@
         if (d.missing) add('deck', 'missing', n(d.missing, 'chosen creature') + (d.missing === 1 ? ' is' : ' are') + ' no longer in your collection. Choose another.');
         Object.keys(copies.creatures).forEach(id => {
             if (!species[id]) add('deck', 'unknown', 'Unknown creature: ' + id + '. Remove it.', { id });
-            else if (copies.creatures[id] > R.copies) add('deck', 'copies', nameOf(species, id) + ': at most ' + R.copies + ' copies. Remove ' + (copies.creatures[id] - R.copies) + '.', { id });
+            else if (copies.creatures[id] > deckCopies(id)) add('deck', 'copies', isLegendary(id)
+                ? nameOf(species, id) + ' is legendary: one per deck. Remove ' + (copies.creatures[id] - 1) + '.'
+                : nameOf(species, id) + ': at most ' + R.copies + ' copies. Remove ' + (copies.creatures[id] - R.copies) + '.', { id });
         });
         Object.keys(copies.tactics).forEach(id => {
             if (!known[id]) add('deck', 'unknown', 'Unknown tactic card: ' + id + '. Remove it.', { id });
@@ -439,11 +441,25 @@
     // A collection holds at most four copies of a species (variants, foils and Changed copies all
     // count); a deck still takes two (DECK_RULES). Older saves above the cap keep every copy: they just
     // cannot gain another until the student releases some. Legendaries are keepsakes and never released.
+    // Legendaries are one of a kind (teacher, 17 Oct 2026): a folder of one and one per deck. Old saves
+    // that already hold more keep them; a deck still takes only one.
     const COPY_CAP = 4;
+    const isLegendary = species => (((Rift.data || {}).creatures || {})[species] || {}).rarity === 'legendary';
+    const copyCap = species => (isLegendary(species) ? 1 : COPY_CAP);
+    const deckCopies = species => (isLegendary(species) ? 1 : DECK_RULES.copies);
     function copiesOf(save, species) {
         return ((save || current || {}).creatures || []).filter(c => c && c.species === species).length;
     }
-    function hasRoom(save, species) { return copiesOf(save, species) < COPY_CAP; }
+    function hasRoom(save, species) { return copiesOf(save, species) < copyCap(species); }
+    // Free folder slots for a species (never below 0).
+    function roomFor(save, species) { return Math.max(0, copyCap(species) - copiesOf(save, species)); }
+    // Why a gained copy cannot join, in plain words.
+    function fullReason(species) {
+        const name = (((Rift.data || {}).creatures || {})[species] || {}).name || species;
+        return isLegendary(species)
+            ? 'You already have ' + name + '. Legendaries are one of a kind.'
+            : 'Your ' + name + ' folder is full (' + COPY_CAP + ' copies).';
+    }
 
     // Adds a gained instance when its folder has room. Does not save. → true if added.
     function addCreature(save, inst) {
@@ -841,6 +857,11 @@
         COPY_CAP,
         copiesOf,
         hasRoom,
+        roomFor,
+        copyCap,
+        deckCopies,
+        isLegendary,
+        fullReason,
         addCreature,
         releaseCheck,
         releaseCreature,

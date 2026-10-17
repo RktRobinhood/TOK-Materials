@@ -22,7 +22,7 @@
 body.calm-motion .hunt-panel { animation: none; }
 @media (prefers-reduced-motion: reduce) { .hunt-panel { animation: none; } }
 .hunt-head { display: flex; align-items: center; gap: 12px; }
-.hunt-portrait { width: 72px; height: 86px; object-fit: contain; flex: none; }
+.hunt-portrait { width: 112px; height: 112px; object-fit: contain; flex: none; }
 .hunt-title { flex: 1; min-width: 0; }
 .hunt-title h2 { margin: 0; font-size: 1.15rem; }
 .hunt-pips { display: flex; gap: 6px; }

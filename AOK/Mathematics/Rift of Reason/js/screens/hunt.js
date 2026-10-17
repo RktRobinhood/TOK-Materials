@@ -94,9 +94,10 @@
             const pips = el('div.hunt-pips');
             const box = el('div.hunt-box');
             const leave = el('button.btn.small', { text: 'Leave', title: 'Back to the map. Your progress here is kept.', onclick: () => toMap() });
+            const portrait = Rift.Assets.img('creature/' + d.species + '/idle', { colour: sp.colour, label: sp.name, className: 'hunt-portrait', alt: sp.name });
             const panel = el('div.hunt-panel.panel', { style: { '--hunt': (Rift.COLOURS[sp.colour] || {}).hex || 'var(--rift)' } }, [
                 el('div.hunt-head', null, [
-                    Rift.Assets.img('creature/' + d.species + '/idle', { colour: sp.colour, label: sp.name, className: 'hunt-portrait', alt: sp.name }),
+                    portrait,
                     el('div.hunt-title', null, [
                         el('h2', { text: sp.name + ' · ' + d.title }),
                         el('div.small.muted', { text: practice ? 'Practice: no prize, no running away.' : 'Optional trick challenge' }),
@@ -111,6 +112,14 @@
 
             function toMap() { if (!destroyed) Rift.Router.replace('map'); }
             function speak(text) { say.textContent = text ? sp.name + ': "' + text + '"' : ''; }
+            // The creature's whole-body pose for this moment (taunt, thinking, happy, shocked, recruited);
+            // the idle portrait until that pose's art exists. A still image: no animation.
+            function pose(name) {
+                const want = 'creature/' + d.species + '/' + name;
+                const use = Rift.Assets.has(want) ? want : 'creature/' + d.species + '/idle';
+                portrait.src = Rift.Assets.src(use, { colour: sp.colour, label: sp.name });
+                portrait.dataset.pose = name;
+            }
             function drawPips() {
                 pips.replaceChildren(...run.rounds.map((r, i) => el('span.hunt-pip' + (i < round ? '.done' : i === round ? '.now' : ''))));
                 pips.setAttribute('aria-label', 'Round ' + Math.min(round + 1, run.rounds.length) + ' of ' + run.rounds.length);
@@ -120,6 +129,7 @@
             function intro() {
                 drawPips();
                 const back = !practice && round > 0;
+                pose('taunt');
                 speak(practice ? d.say.practice : back ? 'Back again? We were at round ' + (round + 1) + '. Read my sign!' : d.say.intro);
                 fill([
                     el('ul.hunt-rules', null, [
@@ -137,6 +147,7 @@
                 chosen = null;
                 drawPips();
                 const r = run.rounds[round];
+                pose('thinking');
                 speak(d.say.rounds[round]);
                 const check = el('button.btn.primary.hunt-check', { text: 'Check', disabled: true, onclick: () => submit() });
                 const options = r.options.map(o => el('button.btn.hunt-option', {
@@ -174,6 +185,7 @@
                 if (!practice) Rift.State.update(s => { H.pass(s, id, attempt, round); });
                 round += 1;
                 drawPips();
+                pose('happy');
                 if (round < run.rounds.length) {
                     fill([el('p.hunt-result.good', { text: '✔ Correct!' }), el('button.btn.primary', { text: 'Next round', onclick: showRound })]);
                     return;
@@ -187,6 +199,7 @@
                 let receipt = null;
                 Rift.State.update(s => { receipt = H.claim(s, id, attempt); });
                 const inst = receipt && Rift.State.get().creatures.find(c => c.uid === receipt.uid);
+                pose('recruited');
                 speak(d.say.win);
                 leave.style.display = 'none';   // the panel's own button says the same
                 fill([
@@ -199,6 +212,7 @@
 
             function wrong(why) {
                 Rift.Audio.sfx('error');
+                pose('shocked');
                 if (practice) {
                     round = 0;
                     drawPips();

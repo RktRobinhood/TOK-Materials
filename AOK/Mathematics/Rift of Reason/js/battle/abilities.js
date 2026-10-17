@@ -276,6 +276,56 @@
                 run(api, card, target) { api.silence(target); api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' whispers. ' + api.name(target) + ' loses its abilities, keywords and boosts.' }); },
             },
         },
+        // ---- roaming legendaries (#111): one of a kind, so stronger than the common cards they echo ----
+        'lantern-switch': {
+            name: 'Lantern Switch',
+            text: 'Entrance: every enemy creature loses its abilities, keywords and boosts.',
+            entrance: {
+                run(api, card) {
+                    api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' switches the sign. Every enemy creature loses its abilities, keywords and boosts.' });
+                    api.s.players[1 - card.controller].board.slice().forEach(cid => api.silence(cid));
+                },
+            },
+            ai: (s, card) => 1 + s.players[1 - card.controller].board.length,
+        },
+        'cross-examine': {
+            name: 'Cross-Examine',
+            keywords: ['guard'], damageReduction: 1,
+            text: 'Guard. Hits deal it 1 less damage. Entrance: see the enemy\'s hand, draw 2.',
+            entrance: {
+                run(api, card) {
+                    const P = api.s.players[card.controller];
+                    api.s.players[1 - card.controller].hand.forEach(cid => { if (!P.knows.includes(cid)) P.knows.push(cid); });
+                    api.emit({ t: 'measure', player: card.controller, text: api.name(card.cid) + ' cross-examines the opponent\'s hand.' });
+                    api.draw(card.controller);
+                    api.draw(card.controller);
+                },
+            },
+            ai: () => 2,
+        },
+        'loaded-odds': {
+            name: 'Loaded Odds',
+            text: 'Activate (1 energy): predict the colour of the enemy\'s next creature. Right: +3/+3 and draw. Wrong: +1/+1.',
+            activate: {
+                cost: 1,
+                run(api, card) {
+                    api.ask({ player: card.controller, kind: 'colour', options: Object.keys(Rift.COLOURS), auto: false,
+                        prompt: 'Predict the colour of the next creature your opponent plays.', source: { type: 'ability', id: 'loaded-odds', cid: card.cid } });
+                },
+            },
+            choose(api, card, colour) {
+                card.prediction = colour;
+                api.emit({ t: 'prediction', cid: card.cid, colour, text: api.name(card.cid) + ' predicts ' + Rift.COLOURS[colour].name + '.' });
+            },
+            onEnemyPlay(api, card, played) {
+                if (!card.prediction) return;
+                const right = api.H.colourOf(api.s, api.s.cards[played]) === card.prediction;
+                card.prediction = null;
+                if (right) { api.buff(card.cid, 3, 3, 'Predicted'); api.draw(card.controller); } else api.buff(card.cid, 1, 1, 'Counted');
+                api.emit({ t: 'predict', cid: card.cid, right, text: right ? api.name(card.cid) + ' predicted it! +3/+3 and a card.' : api.name(card.cid) + ' guessed wrong, but still counts: +1/+1.' });
+            },
+            ai: () => 1.5,
+        },
         'the-eyebrow': {
             name: 'The Eyebrow', keywords: ['guard'], damageReduction: 1,
             text: 'Guard. Takes 1 less damage from each hit.',

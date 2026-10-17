@@ -183,6 +183,8 @@
         },
 
         // ---- historical legendaries (never die) ----
+        // One of a kind (a folder of one, one per deck), so a little above the curve (teacher, 17 Oct 2026):
+        // Lovelace +1 attack, Tycho and Booleon cost 6 (were 7), Piet Hexling +1 health.
         euclidon: {
             name: 'Euclidon', inspiredBy: 'Euclid', colour: 'reason', rarity: 'legendary', power: 9, cost: 7, attack: 5, health: 7,
             ability: 'axiomatic', abilityText: 'Entrance: choose one of the next five shared axioms. It takes effect now.',
@@ -190,7 +192,7 @@
             lines: ['Let us assume very little.', 'Therefore.', 'Which was to be demonstrated.'],
         },
         lovelace: {
-            name: 'Lovelace', inspiredBy: 'Ada Lovelace', colour: 'imagination', rarity: 'legendary', power: 8, cost: 6, attack: 4, health: 6,
+            name: 'Lovelace', inspiredBy: 'Ada Lovelace', colour: 'imagination', rarity: 'legendary', power: 9, cost: 6, attack: 5, health: 6,
             ability: 'program', abilityText: 'Activate (1 energy): gain the ability of a creature in your discard pile.',
             blurb: 'Saw what a machine could do before anyone built one. Hums in punched-card lace.',
             lines: ['Imagination is a kind of calculation.', 'The engine weaves patterns.', 'Shall we program the future?'],
@@ -202,43 +204,44 @@
             lines: ['This statement cannot be caught.', 'Is it true? Yes. Can you prove it? Ah.', 'Every system has a loop.'],
         },
         tycho: {
-            name: 'Tycho', inspiredBy: 'Tycho Brahe', colour: 'perception', rarity: 'legendary', power: 8, cost: 7, attack: 5, health: 6,
+            name: 'Tycho', inspiredBy: 'Tycho Brahe', colour: 'perception', rarity: 'legendary', power: 9, cost: 6, attack: 5, health: 6,
             ability: 'measure', abilityText: 'Entrance: deal 1 damage to every enemy creature.',
             blurb: 'Measured the stars from a Danish island more precisely than anyone before telescopes. Brass nose.',
             lines: ['Measure twice. Then measure again.', 'The heavens do not lie. People do.', 'Hven has the best view.'],
         },
         booleon: {
-            name: 'Booleon', inspiredBy: 'George Boole', colour: 'reason', rarity: 'legendary', power: 8, cost: 7, attack: 5, health: 6,
+            name: 'Booleon', inspiredBy: 'George Boole', colour: 'reason', rarity: 'legendary', power: 9, cost: 6, attack: 5, health: 6,
             ability: 'truth-table', abilityText: 'Entrance: choose TRUE (your other creatures get +1/+1) or FALSE (enemy creatures get −1 attack).',
             blurb: 'Turned logic into algebra: every statement a 0 or a 1. A dignified heron who sees every case at once.',
             lines: ['True is one. False is zero. Everything else is arithmetic.', 'Let us check every case.', 'The laws of thought are surprisingly short.'],
         },
         hexling: {
-            name: 'Piet Hexling', inspiredBy: 'Piet Hein', colour: 'language', rarity: 'legendary', power: 7, cost: 6, attack: 4, health: 6,
+            name: 'Piet Hexling', inspiredBy: 'Piet Hein', colour: 'language', rarity: 'legendary', power: 8, cost: 6, attack: 4, health: 7,
             ability: 'grook', abilityText: 'Whenever it survives a fight, draw a card.',
             blurb: 'A Danish poet-mathematician hedgehog who writes tiny wise verses and invents games.',
             lines: ['A little verse for a little problem.', 'Problems bite back. Good.', 'Hex! I mean, hello.'],
         },
         // ---- roaming legendaries (#111, data/legendaries.js): original tricksters, never in a spawn table.
-        // Passing the creature's trick challenge grants exactly one (Rift.Hunts.claim). Card numbers are
-        // builder proposals (design/ROAMING-LEGENDARIES.md) and reuse existing abilities. No `lines` here:
-        // their speech lives in data/legendaries.js and is not voiced yet (no cast voice).
+        // Passing the creature's trick challenge grants exactly one (Rift.Hunts.claim). Legendaries are one
+        // of a kind and hard to win, so these sit above the curve (teacher, 17 Oct 2026): stronger versions
+        // of Eelish's Whisper, Carlseal's Foresight and Altmanta's Predict. No `lines` here: their speech
+        // lives in data/legendaries.js and is not voiced yet (no cast voice).
         maskip: {
             name: 'Maskip', inspiredBy: 'Original roaming trickster', colour: 'reason', rarity: 'legendary', roaming: true, lesson: 2,
-            power: 5, cost: 3, attack: 2, health: 3,
-            ability: 'whisper', abilityText: 'Entrance: an enemy creature loses its abilities, keywords and boosts.',
+            power: 8, cost: 4, attack: 3, health: 5,
+            ability: 'lantern-switch', abilityText: 'Entrance: every enemy creature loses its abilities, keywords and boosts.',
             blurb: 'A lantern imp in an oversized mask. Switches the rule sign when you blink. Its lanterns never lie, even when it does.',
         },
         quibblequill: {
             name: 'Quibblequill', inspiredBy: 'Original roaming trickster', colour: 'language', rarity: 'legendary', roaming: true, lesson: 3, keywords: ['guard'],
-            power: 6, cost: 4, attack: 2, health: 5,
-            ability: 'foresight', abilityText: 'Guard. Entrance: look at the opponent\'s hand and draw a card.',
+            power: 8, cost: 4, attack: 3, health: 6,
+            ability: 'cross-examine', abilityText: 'Guard. Hits deal it 1 less damage. Entrance: see the enemy\'s hand, draw 2.',
             blurb: 'An ink-stained ferret in a legal wig, buried in very official paperwork. Knows that one record can beat a whole pile.',
         },
         oddsnap: {
             name: 'Oddsnap', inspiredBy: 'Original roaming trickster', colour: 'memory', rarity: 'legendary', roaming: true, lesson: 4,
-            power: 5, cost: 3, attack: 2, health: 3,
-            ability: 'predict', abilityText: 'Activate (1 energy): predict the colour of the opponent\'s next creature. If right, this gets +3/+3.',
+            power: 8, cost: 3, attack: 3, health: 5,
+            ability: 'loaded-odds', abilityText: 'Activate (1 energy): predict the colour of the enemy\'s next creature. Right: +3/+3 and draw. Wrong: +1/+1.',
             blurb: 'A dice-tailed gremlin in a crooked paper crown. Counts everything, then sounds far more certain than its numbers.',
         },
         // Small original starter helpers (#113); no plot spawn or automatic ownership grant.
