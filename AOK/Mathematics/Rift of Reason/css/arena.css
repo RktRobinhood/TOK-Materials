@@ -117,6 +117,28 @@
     .arena-live .b-board { overflow-x: auto; overflow-y: hidden; justify-content: flex-start; }
     .arena-live .bc.board { flex-shrink: 0; }
 }
+/* Short, wide windows (a laptop with toolbars, #109): fit the whole table on one
+ * screen instead of scrolling. Card, deck and row sizes follow the window height,
+ * so the hand stays fully in view. Very short windows still scroll (above). */
+@media (min-width:851px) and (max-height:620px) and (min-height:500px) {
+    .battle.arena-live {
+        overflow: clip; container-type: size; padding: 8px; gap: 10px;
+        --hw: clamp(54px, 11.4cqh, 68px);
+        --hand-row: calc(var(--hw) * 1.62 + 12px);
+        --bw: clamp(44px, min((var(--arena-w) - 230px) / 7.4, ((100cqh - 166px - var(--hand-row)) / 2 - 22px) / 1.62), 84px);
+    }
+    .arena-live .b-arena { min-height: 0; padding-top: 4px; grid-template-rows: 46px minmax(0, 1fr) 108px minmax(0, 1fr) var(--hand-row); }
+    .arena-live .b-board { padding: 8px 5px 14px; }
+    .arena-live .b-board::before { inset: 4px 0; }
+    .arena-live .b-hand { padding-top: 4px; }
+    .arena-live .b-lane { --lane-h: 108px; }
+    .arena-live .b-fate { height: 54px; }
+    .arena-live .b-table-deck { --back-w: clamp(40px, 9cqh, 56px); font-size: 11px; }
+    .arena-live .b-table-deck.deck { bottom: calc(var(--hand-row) + 4px); }
+    .arena-live .b-table-deck.opponent { top: 54px; }
+    /* Centred on the lane (the hand row is taller than the top row). */
+    .arena-live .b-table-deck.axiom { top: calc(50% + 25px - var(--hand-row) / 2 - var(--back-w) * 0.8 - 19px); }
+}
 @media (max-width:850px) {
     .battle.arena-live { --side: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 700px max-content; }
     .arena-live .b-arena { grid-row: 1; }
