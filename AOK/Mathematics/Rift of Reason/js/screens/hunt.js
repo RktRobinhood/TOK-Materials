@@ -67,7 +67,31 @@
         ]);
     }
 
-    const SCENES = { lanterns, records, keys, log, doors };
+    // A big shape with the wrong shape's name written on it.
+    // Drawn as SVG, not a text symbol: font glyphs for ● ▲ ■ come out at very different sizes.
+    const SHAPE_SVG = {
+        '▲': '<polygon points="80,8 152,148 8,148"/>',
+        '■': '<rect x="14" y="14" width="132" height="132" rx="4"/>',
+        '●': '<circle cx="80" cy="80" r="72"/>',
+    };
+    function shapeword(scene) {
+        const name = { '▲': 'triangle', '■': 'square', '●': 'circle' }[scene.icon] || 'shape';
+        return el('div.hunt-scene.hunt-shapeword', { role: 'img', 'aria-label': 'A ' + name + ' with the word ' + scene.word + ' on it' }, [
+            el('span.hunt-shape-icon', { 'aria-hidden': 'true', html: '<svg viewBox="0 0 160 160" width="160" height="160">' + (SHAPE_SVG[scene.icon] || '') + '</svg>' }),
+            el('span.hunt-shape-word', { text: scene.word, 'aria-hidden': 'true' }),
+        ]);
+    }
+
+    // Things to count: a row of icons, or fence posts with the gaps drawn between them.
+    function icons(scene) {
+        const items = Array.from({ length: scene.count }, () => el('span.hunt-icon', { text: scene.icon }));
+        const row = scene.gapped
+            ? items.flatMap((it, i) => (i ? [el('span.hunt-gap', { text: '──' }), it] : [it]))
+            : items;
+        return el('div.hunt-scene.hunt-icons' + (scene.gapped ? '.gapped' : ''), { role: 'img', 'aria-label': scene.gapped ? 'A fence of posts with gaps between them' : scene.count + ' pictures to count' }, row);
+    }
+
+    const SCENES = { lanterns, records, keys, log, doors, shapeword, icons };
 
     // ---- the screen ---------------------------------------------------------------------------
 
@@ -88,6 +112,8 @@
             let chosen = null;
             let destroyed = false;
             let busy = false;
+            let timer = null;      // the wait round's countdown
+            let hidden = null;     // this round's hidden-in-plain-sight targets: { portrait|title: optionId }
             const mapDef = (Rift.data.maps || {})[d.map] || {};
 
             const say = el('p.hunt-say', { role: 'status' });
@@ -95,11 +121,18 @@
             const box = el('div.hunt-box');
             const leave = el('button.btn.small', { text: 'Leave', title: 'Back to the map. Your progress here is kept.', onclick: () => toMap() });
             const portrait = Rift.Assets.img('creature/' + d.species + '/idle', { colour: sp.colour, label: sp.name, className: 'hunt-portrait', alt: sp.name });
+            const titleText = el('h2', { text: sp.name + ' · ' + d.title });
+            // The portrait and the title answer some rounds ("Click Maskip."). They only listen then.
+            [[portrait, 'portrait'], [titleText, 'title']].forEach(([node, place]) => {
+                const go = () => { if (hidden && hidden[place]) submit(hidden[place]); };
+                node.addEventListener('click', go);
+                node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+            });
             const panel = el('div.hunt-panel.panel', { style: { '--hunt': (Rift.COLOURS[sp.colour] || {}).hex || 'var(--rift)' } }, [
                 el('div.hunt-head', null, [
                     portrait,
                     el('div.hunt-title', null, [
-                        el('h2', { text: sp.name + ' · ' + d.title }),
+                        titleText,
                         el('div.small.muted', { text: practice ? 'Practice: no prize, no running away.' : 'Optional trick challenge' }),
                     ]),
                     pips,
@@ -131,49 +164,139 @@
                 const back = !practice && round > 0;
                 pose('taunt');
                 speak(practice ? d.say.practice : back ? 'Back again? We were at round ' + (round + 1) + '. Read my sign!' : d.say.intro);
+                const n = run.rounds.length;
                 fill([
                     el('ul.hunt-rules', null, [
-                        el('li', { text: 'This is optional. Your story does not need it.' }),
-                        el('li', { text: 'Three short rounds. Read the sign every time: it changes.' }),
+                        el('li', { text: 'This is optional. Your story does not need it. It is meant to be hard.' }),
+                        el('li', { text: n + ' rounds of tricks. Read the sign every time: it changes, and it means exactly what it says.' }),
+                        el('li', { text: 'Some rounds answer on your first click. Some race a clock. Some want you to wait. Look at the whole screen.' }),
                         practice ? el('li', { text: 'You already won. This is just for fun.' })
-                            : el('li', { text: 'A wrong answer starts the game again and sends ' + sp.name + ' running to another place. You lose no hearts.' }),
-                        !practice ? el('li', { text: 'Pass all three and ' + sp.name + ' joins you.' }) : null,
+                            : el('li', { text: 'One wrong answer starts the game again and sends ' + sp.name + ' running to another place. You lose no hearts.' }),
+                        !practice ? el('li', { text: 'Pass all ' + n + ' and ' + sp.name + ' joins you.' }) : null,
                     ].filter(Boolean)),
                     el('button.btn.primary', { text: back ? 'Go on' : 'Start', onclick: showRound }),
                 ]);
             }
 
+            function stopRound() {
+                if (timer) clearInterval(timer);
+                timer = null;
+                hidden = null;
+                [portrait, titleText].forEach(node => { node.removeAttribute('tabindex'); node.removeAttribute('role'); node.classList.remove('hunt-target'); });
+            }
+
+            // The sign; a 'sign' option turns its word into a button inside the sentence.
+            function signNode(r, link) {
+                let text = el('strong', { text: r.sign });
+                if (link) {
+                    const at = r.sign.lastIndexOf(r.signLink);
+                    text = el('strong', null, [r.sign.slice(0, at), link, r.sign.slice(at + r.signLink.length)]);
+                }
+                return el('div.hunt-sign', { role: 'heading', 'aria-level': '3' }, [el('span.small', { text: 'Round ' + (round + 1) + ' of ' + run.rounds.length + ' · The sign says:' }), text]);
+            }
+
+            const HINTS = {
+                tap: 'One click answers. There is no Check button.',
+                sequence: 'Every press counts. A wrong press ends the run.',
+            };
+
             function showRound() {
+                stopRound();
                 chosen = null;
                 drawPips();
                 const r = run.rounds[round];
                 pose('thinking');
-                speak(d.say.rounds[round]);
-                const check = el('button.btn.primary.hunt-check', { text: 'Check', disabled: true, onclick: () => submit() });
-                const options = r.options.map(o => el('button.btn.hunt-option', {
-                    'aria-pressed': 'false', dataset: { option: o.id },
-                    onclick() {
+                speak(d.say.rounds[round % d.say.rounds.length]);
+                const check = el('button.btn.primary.hunt-check', { text: 'Check', disabled: r.mode !== 'number', onclick: () => submit() });
+                const pressed = [];
+                const pressedLine = el('p.small.muted.hunt-pressed', { role: 'status' });
+                const label = o => [el('span', { text: o.label }), o.sub ? el('span.small.muted', { text: o.sub }) : null];
+                const button = (o, onclick, extra) => el('button.btn.hunt-option' + (o.size ? '.size-' + o.size : '') + (o.flip ? '.flipped' : ''), Object.assign({
+                    dataset: { option: o.id }, onclick,
+                    'aria-label': o.label === '' ? 'A button with no words' : null,
+                }, extra || {}), label(o));
+
+                hidden = {};
+                let link = null;
+                r.options.filter(o => o.place).forEach(o => {
+                    if (o.place === 'sign') link = el('button.hunt-sign-link', { text: r.signLink, onclick: () => submit(o.id) });
+                    else {
+                        hidden[o.place] = o.id;
+                        const node = o.place === 'portrait' ? portrait : titleText;
+                        node.setAttribute('tabindex', '0');
+                        node.setAttribute('role', 'button');
+                        node.classList.add('hunt-target');
+                    }
+                });
+                const plain = r.options.filter(o => !o.place);
+
+                let options = [];
+                let input = null;
+                if (r.mode === 'pick' || r.mode === 'multi') {
+                    const picked = new Set();
+                    options = plain.map(o => button(o, () => {
                         if (busy) return;
-                        chosen = o.id;
-                        options.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.option === chosen)));
-                        check.disabled = false;
+                        if (r.mode === 'pick') picked.clear();
+                        if (picked.has(o.id)) picked.delete(o.id); else picked.add(o.id);
+                        options.forEach(b => b.setAttribute('aria-pressed', String(picked.has(b.dataset.option))));
+                        chosen = r.mode === 'pick' ? [...picked][0] : [...picked];
+                        check.disabled = !picked.size;
                         Rift.Audio.sfx('click');
-                    },
-                }, [el('span', { text: o.label }), o.sub ? el('span.small.muted', { text: o.sub }) : null]));
+                    }, { 'aria-pressed': 'false' }));
+                } else if (r.mode === 'tap') {
+                    options = plain.map(o => button(o, () => submit(o.id)));
+                } else if (r.mode === 'sequence') {
+                    options = plain.map(o => button(o, () => {
+                        if (busy) return;
+                        pressed.push(o.id);
+                        Rift.Audio.sfx('click');
+                        pressedLine.textContent = 'Pressed: ' + pressed.map(x => (plain.find(p => p.id === x) || {}).label).join(', ');
+                        if (!Rift.Tricks.onTrack(r, pressed) || pressed.length === r.accept[0].length) submit(pressed.slice());
+                    }));
+                } else if (r.mode === 'wait') {
+                    options = plain.map(o => button(o, () => submit(o.id)));
+                } else if (r.mode === 'number') {
+                    input = el('input.hunt-number', { type: 'text', inputmode: 'numeric', autocomplete: 'off', 'aria-label': 'Your answer',
+                        oninput() { chosen = input.value; check.disabled = !input.value.trim(); },
+                        // preventDefault: the same Enter must not also press the button that takes focus next.
+                        onkeydown(e) { if (e.key === 'Enter') { e.preventDefault(); if (input.value.trim()) submit(); } } });
+                    check.disabled = true;
+                }
+
                 fill([
-                    el('div.hunt-sign', { role: 'heading', 'aria-level': '3' }, [el('span.small', { text: 'Round ' + (round + 1) + ' of ' + run.rounds.length + ' · The sign says:' }), el('strong', { text: r.sign })]),
-                    (SCENES[r.scene.kind] || (() => null))(r.scene),
-                    el('div.hunt-options', null, options),
-                    el('div.hunt-actions', null, [check]),
+                    signNode(r, link),
+                    r.scene ? (SCENES[r.scene.kind] || (() => null))(r.scene) : null,
+                    HINTS[r.mode] ? el('p.small.muted', { text: HINTS[r.mode] }) : null,
+                    options.length ? el('div.hunt-options' + (r.mode === 'tap' || r.mode === 'sequence' || r.mode === 'wait' ? '.loose' : ''), null, options) : null,
+                    input,
+                    pressedLine,
+                    r.mode === 'pick' || r.mode === 'multi' || r.mode === 'number' ? el('div.hunt-actions', null, [check]) : null,
                 ]);
+                // The clock of a wait round (it passes at zero) or a quick round (it fails at zero). A number that
+                // counts down once a second: nothing moves, so Calm motion needs nothing different.
+                if (r.seconds) {
+                    let left = r.seconds;
+                    const clock = el('p.hunt-clock', { role: 'timer', text: '⏳ ' + left });
+                    box.insertBefore(clock, box.children[1] || null);
+                    timer = setInterval(() => {
+                        if (destroyed) return stopRound();
+                        left -= 1;
+                        clock.textContent = '⏳ ' + Math.max(0, left);
+                        if (left <= 0) submit(r.mode === 'wait' ? Rift.Tricks.WAITED : Rift.Tricks.TIMEOUT);
+                    }, 1000);
+                }
+                // A wait round must not start on a focused button (Enter would press it).
+                if (r.mode === 'wait' && document.activeElement && document.activeElement.blur) document.activeElement.blur();
+                if (input) input.focus();
             }
 
             function submit(force) {
                 if (busy || destroyed) return;
-                const answer = force || chosen;
+                const answer = force != null ? force : chosen;
                 if (answer == null) return;
                 busy = true;
                 const r = run.rounds[round];
+                stopRound();
                 const res = Rift.Tricks.check(r, answer);
                 try {
                     if (res.ok) right(); else wrong(res.why);
@@ -193,7 +316,7 @@
                 if (practice) {
                     Rift.State.update(s => { H.practiced(s, id); });
                     speak(d.say.win);
-                    fill([el('p.hunt-result.good', { text: '✔ All three! Good practice.' }), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
+                    fill([el('p.hunt-result.good', { text: '✔ All ' + run.rounds.length + '! Good practice.' }), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
                     return;
                 }
                 let receipt = null;
@@ -244,9 +367,9 @@
             intro();
 
             return {
-                destroy() { destroyed = true; },
+                destroy() { destroyed = true; stopRound(); },
                 // Playtest hook (AGENTS.md): submits a right answer for the round on screen.
-                debugSolve() { if (run.rounds[round] && box.querySelector('.hunt-option')) submit(run.rounds[round].accept[0]); },
+                debugSolve() { if (run.rounds[round] && box.querySelector('.hunt-sign')) submit(Rift.Tricks.solution(run.rounds[round])); },
             };
         },
     });

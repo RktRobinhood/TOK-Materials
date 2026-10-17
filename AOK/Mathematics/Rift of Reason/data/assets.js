@@ -313,6 +313,7 @@
         'creature/obambu/shocked': { file: 'creatures/obambu-shocked.webp', w: 163, h: 240 },
         'creature/obambu/smug': { file: 'creatures/obambu-smug.webp', w: 232, h: 240 },
         'creature/oddsnap/happy': { file: 'creatures/oddsnap-happy.webp', w: 610, h: 620 },
+        'creature/oddsnap/idle': { file: 'creatures/oddsnap-idle.webp', w: 590, h: 620 },
         'creature/oddsnap/recruited': { file: 'creatures/oddsnap-recruited.webp', w: 520, h: 620 },
         'creature/oddsnap/run': { file: 'creatures/oddsnap-run.webp', w: 1614, h: 240, frames: 6, frameWidth: 269, frameHeight: 240 },
         'creature/oddsnap/shocked': { file: 'creatures/oddsnap-shocked.webp', w: 614, h: 620 },

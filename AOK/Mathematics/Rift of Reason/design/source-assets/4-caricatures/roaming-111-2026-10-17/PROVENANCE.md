@@ -37,4 +37,4 @@ Each later prompt repeated the creature's feature list (below), then a pose para
 | oddsnap-recruited | front, offering its crown | accepted |
 | oddsnap-run | 6-frame side-profile two-legged scamper | re-spaced |
 
-`oddsnap-idle.png` was accepted on sight but reached the session only inline; it is still to be saved here (the game shows the placeholder until then).
+`oddsnap-idle.png`: the first take came out as another taunt (a big grin and a waving hand) and the teacher rejected it as not idle. The retry asked for a calm, still stance: standing on both feet, three-quarter front-left, a die resting on the open palm, the other arm loose, a small closed-mouth smile with one fang, half-lidded eyes, the tail curled on the ground. References: `oddsnap-thinking`, `oddsnap-recruited` and the style board. Accepted 17 October 2026.

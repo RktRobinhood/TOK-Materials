@@ -19,7 +19,10 @@
 
     const Rift = root.Rift;
     const VERSION = 1;
-    const ROUNDS = 3;
+    // Rounds in one run; the same number as Rift.Tricks.ROUNDS (js/core/tricks.js, a test checks).
+    // Twelve since 17 Oct 2026 (was three): legendaries are a gauntlet. A save mid-run keeps its
+    // round count and simply has more rounds to go.
+    const ROUNDS = 12;
     // Node types a creature never waits on: bosses (their chain) and rifts (portals that move the avatar).
     const BARRED = ['boss', 'rift'];
 

@@ -1271,4 +1271,4 @@ IDs per creature (`<id>` = `maskip`, `quibblequill`, `oddsnap`):
 
 No voice lines are requested: the hunt lines are on-screen text only.
 
-**Delivered 17 October 2026** (teacher in ChatGPT, prompts and checks by Claude): all 21 images, built as 20 game ids, because `oddsnap-idle` is still waiting for its file and the card shows the placeholder until then. Sources, prompts and decisions: [source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md](../source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md). The challenge screen now switches between the poses, and the map runner plays the run sheet (Calm motion still has no runner).
+**Delivered 17 October 2026** (teacher in ChatGPT, prompts and checks by Claude): all 21 images, built as 21 game ids (`oddsnap-idle` followed later that evening, after a retake). Sources, prompts and decisions: [source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md](../source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md). The challenge screen now switches between the poses, and the map runner plays the run sheet (Calm motion still has no runner).

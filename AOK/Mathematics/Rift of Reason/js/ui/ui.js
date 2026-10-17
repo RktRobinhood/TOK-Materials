@@ -356,7 +356,8 @@
             el('div.fcard-panel', null, [
                 el('div.fcard-name', { text: known ? c.name + (c.rarity === 'legendary' ? ' ★' : '') : '???' }),
                 o.big && known ? el('div.fcard-power.fcard-stats', null, [statLine(speciesId, o.inst)]) : null,
-                o.big && known ? el('div.fcard-text', { text: c.abilityText }) : null,
+                // Long rules (over ~75 letters) use smaller print, so the name above is never pushed out.
+                o.big && known ? el('div.fcard-text' + ((c.abilityText || '').length > 75 ? '.long' : ''), { text: c.abilityText }) : null,
             ]),
             o.foil && known ? el('div.fcard-foil', { 'aria-label': 'Foil', text: '✦' }) : null,
         ]);

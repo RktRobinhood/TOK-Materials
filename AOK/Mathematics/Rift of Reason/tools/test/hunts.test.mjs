@@ -215,8 +215,12 @@ test('passing all rounds grants exactly one unique creature, once, and later vis
     walkTo(s, H.record(s, 'maskip').node);
     const owned = s.creatures.length;
     assert.equal(H.claim(s, 'maskip', 1), null, 'no claim before the rounds are passed');
-    [0, 1, 2].forEach(r => assert.equal(H.pass(s, 'maskip', 1, r), true));
-    assert.equal(H.pass(s, 'maskip', 1, 3), false);
+    assert.equal(H.ROUNDS, R.Tricks.ROUNDS, 'the save and the challenge agree on the run length');
+    for (let r = 0; r < H.ROUNDS; r++) {
+        if (r === H.ROUNDS - 1) assert.equal(H.claim(s, 'maskip', 1), null, 'one round short is no claim');
+        assert.equal(H.pass(s, 'maskip', 1, r), true);
+    }
+    assert.equal(H.pass(s, 'maskip', 1, H.ROUNDS), false);
     const receipt = H.claim(s, 'maskip', 1);
     assert.ok(receipt);
     assert.equal(s.creatures.length, owned + 1);
@@ -271,55 +275,4 @@ test('a hunt survives a reload and a backup-code round trip, mid-run and mid-fli
     assert.deepEqual(J(t1), J(t2));
 });
 
-test('trick challenges: three rounds, every valid answer listed and accepted, the rest rejected with a reason', () => {
-    const { R } = setup();
-    for (const id of R.Tricks.ids()) {
-        for (let seed = 0; seed < 60; seed++) {
-            const run = R.Tricks.make(id, seed);
-            assert.equal(run.rounds.length, 3);
-            assert.deepEqual(J(R.Tricks.make(id, seed)), J(run), 'same seed, same run');
-            run.rounds.forEach((r, i) => {
-                const ids = r.options.map(o => o.id);
-                assert.equal(new Set(ids).size, ids.length, id + ' round ' + i + ': duplicate options');
-                assert.ok(r.accept.length >= 1 && r.accept.every(a => ids.includes(a)), id + ' round ' + i + ': answer not on offer');
-                assert.ok(r.accept.length < ids.length, id + ' round ' + i + ': everything is right');
-                assert.ok(r.sign && r.why && r.scene && r.scene.kind);
-                ids.forEach(o => {
-                    const res = R.Tricks.check(r, o);
-                    assert.equal(res.ok, r.accept.includes(o));
-                    if (!res.ok) assert.ok(res.why.length > 10);
-                });
-            });
-            // The sign changes between rounds: that is the trick.
-            assert.equal(new Set(run.rounds.map(r => r.sign)).size, 3);
-        }
-    }
-});
-
-test('trick answers follow from the evidence shown', () => {
-    const { R } = setup();
-    for (let seed = 0; seed < 80; seed++) {
-        const m = R.Tricks.make('maskip', seed).rounds;
-        const pair = id => m[0].scene.pairs.find(p => p.id === id);
-        assert.deepEqual(J(m[0].accept.map(pair).map(p => [p.left, p.right])), [[true, true]]);
-        assert.equal(m[1].accept.length, 2, 'both "exactly one" pairs pass');
-        m[1].accept.map(pair).forEach(p => assert.notEqual(p.left, p.right));
-        assert.ok(m[2].scene.claim.startsWith(pair(m[2].scene.target).name));
-
-        const q = R.Tricks.make('quibblequill', seed).rounds;
-        const rec = q[0].scene.records.find(r => r.id === q[0].accept[0]);
-        assert.ok(rec.stamped && !rec.arrived, 'the counterexample is stamped and not arrived');
-        assert.equal(q[0].scene.records.filter(r => r.stamped && !r.arrived).length, 1);
-        assert.ok(q[2].options.find(o => o.id === 'converse'));
-
-        const o = R.Tricks.make('oddsnap', seed).rounds;
-        const low = o[0].scene.shapes.reduce((a, b) => (b.count < a.count ? b : a));
-        const high = o[1].scene.shapes.reduce((a, b) => (b.count > a.count ? b : a));
-        assert.deepEqual(J(o[0].accept), [low.id]);
-        assert.deepEqual(J(o[1].accept), [high.id]);
-        assert.notEqual(o[1].accept[0], o[0].accept[0], 'repeating the last answer fails');
-        assert.ok(!o[0].scene.shapes.find(x => x.id === low.id).glow, 'the glowing shape is a decoy');
-        assert.ok(o[2].scene.doors.every(d => d.pct < 100));
-        assert.deepEqual(J(o[2].accept), ['none']);
-    }
-});
+// The trick rounds themselves are checked in tools/test/tricks.test.mjs.

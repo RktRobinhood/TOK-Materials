@@ -2,7 +2,7 @@
 
 Status, 17 October 2026: stages 1 and 2 are built, with placeholder art. The teacher authorised them on 14 October 2026. Stage 3 (final art, balance review) and stage 4 (class playtest) come later. Research and reference notes: `research/roaming-legendary-trick-challenges-2026-10-11.md` (repository root) and GitHub issue #111.
 
-Code: `data/legendaries.js` (hunt data), `js/core/hunts.js` (save rules, pure), `js/core/tricks.js` (the three challenges, pure), `js/screens/hunt.js` + `css/hunts.css` (challenge screen), `js/screens/map.js` (badge, trail, flight, note). Tests: `tools/test/hunts.test.mjs`.
+Code: `data/legendaries.js` (hunt data), `js/core/hunts.js` (save rules, pure), `js/core/tricks.js` (the trick bank, pure), `js/screens/hunt.js` + `css/hunts.css` (challenge screen), `js/screens/map.js` (badge, trail, flight, note), `dev/tricks.html` (review every trick). Tests: `tools/test/hunts.test.mjs`, `tools/test/tricks.test.mjs`.
 
 ## 1. The three creatures
 
@@ -24,30 +24,26 @@ Cards (teacher decision 17 October 2026: legendaries are one of a kind, so they 
 
 A claimed creature has no luck roll (plain variant), so every student's copy is the same. Like every legendary, a student keeps one copy and a deck takes one (`Rift.State.copyCap` / `deckCopies`).
 
-## 2. The challenges (three rounds each)
+## 2. The challenges (a 12-round gauntlet from a 50-trick bank)
 
-Every round is generated from a seed (save seed + hunt + attempt), so a reload shows the same rounds. The sign (instruction) changes every round: that is the trick. Each answer follows from the shown evidence alone: no timers, no hidden outcomes, no pixel hunting, and no colour-only cues (lanterns say ON/off, shapes have names and symbols). Wrong answers get one or two plain sentences that name the missed rule.
+Teacher, 17 October 2026: these should be hard and a bit of a meme, in the spirit of the old Flash idiot tests (Stupidity Test, Impossible Quiz, Idiot Test). We take their trick TYPES, pacing and instant reset; every question is our own (the originals are someone else's work). Code: `js/core/tricks.js`. Review every trick with its answer: `dev/tricks.html`.
 
-**Maskip.** Four lantern pairs, A–D, show all four on/off combinations in a random order.
-1. "Pick the pair with BOTH lanterns on." One answer.
-2. "The sign changed! Pick a pair with EXACTLY ONE lantern on." Same layout. Both valid pairs pass. Repeating round 1's answer fails.
-3. The mask makes a claim about one marked pair (both / exactly one / none / at least one lantern on). True half the time. The player answers True or False from the lanterns.
+An attempt is 12 rounds drawn from the creature's bank of about 50: 4 of its own TOK tricks and 8 shared troll tricks dressed in its theme, mixed, no trick twice. The draw and every number in it come from a seed (save seed + hunt + attempt), so a reload shows the same run and a new attempt draws a new one. One wrong answer resets the run and the creature runs away.
 
-**Quibblequill.** A table of 4–6 parcel records (stamp yes/no, arrived yes/no). There is exactly one stamped, not-arrived parcel, plus at least one unstamped, not-arrived distractor.
-1. Claim "Every stamped parcel has arrived." Pick the ONE record that proves it false (the stamped, not-arrived parcel).
-2. "New task! Pick the claim these records SUPPORT." Only "At least *k* stamped parcels have arrived" is supported. The others are broken by a record ("every stamped…", "every parcel has a stamp") or say more than the records show ("…always arrive first").
-3. Rule "Every *archive* key is *brass*", plus a test record of a brass key that did not open the archive. Pick the claim that does NOT follow: the converse "Every brass key opens the archive". The material and the door vary.
+Answer types: pick one + Check; pick all + Check; type a number + Check; **tap** (the first click answers, no Check); **press in order** (a wrong press fails at once); **wait** (touch nothing for 5–7 seconds; touching fails). Some taps hide in plain sight: a word in the sign, the creature's picture, or the challenge's name. The rules screen warns that some rounds answer on the first click and some want you to wait.
 
-**Oddsnap.** A machine log of 10 shapes (▲ Triangle, ● Circle, ■ Square) with distinct counts. Its model is chance = count ÷ 10. The most frequent shape glows: the decoy.
-1. "Pick its LEAST likely next shape."
-2. "New log! Now pick the MOST likely next shape." The new log makes round 1's answer the least likely, so repeating the old shape or the old rule fails.
-3. Three doors, all below 100% safe, plus "No door is guaranteed safe". The sign asks for a GUARANTEED safe door; only the last option passes.
+Fair by rule (`tools/test/tricks.test.mjs`): one right answer that follows from the sign and the screen, every other answer rejected with a plain reason, no reflex speed (a quick round gives at least 6 seconds), no colour-only cues, no English puns, no trivia.
+
+- **Maskip's own** (logic words, four lantern pairs): both; exactly one (two answers); the mask's claim true/false; neither; select every pair with at least one on; the pair that breaks an if-then rule; select every pair that is not both on; the pair where an OR claim is false; select every pair that is not exactly one; count every lantern that is on.
+- **Quibblequill's own** (evidence, parcel records): the one counterexample; the supported claim; the converse that does not follow; select every record that says nothing about the claim; select every agreeing record; how many counterexamples break an "every" claim (1); the record that supports "some have not"; the new record that would break the claim; "not brass, so not an archive key" (no); "brass, so an archive key?" (we cannot tell).
+- **Oddsnap's own** (probability, a shape log whose glowing shape is the decoy): least likely; most likely; no door is guaranteed; a fair coin after a streak (50%); two exact roll lists are equally likely; the impossible roll; the certain roll; the most likely total of two dice (7); the chance of a 6 (1 in 6, not 50/50); a bag of more triangles than squares.
+- **Shared** (40): the smallest button; the biggest number in the smallest print; the button with nothing written on it; do not touch; "click here" in the sign; click the creature; click the challenge's name; letters in a number word; double negatives; reverse order; smallest to biggest with minus numbers; odd one out; corners; the shape you see, then the word you read; the cheap-thing price trap; a kilo of feathers; months with at least 28/30 days; select every even number (0 counts); how many rounds; press one button exactly N times; quick GO (6-second clock); quick count (12-second clock); quick "not a word"; second from the left; last letter; every button except one; the number not in digits; times before plus; fence posts; the smaller decimal; legs; alphabet order; a yes/no pattern; a longer wait; count a letter; the same amount written two ways; the upside-down button; the longest word in small print; sides of shapes.
 
 ## 3. Rules of the hunt
 
 - **Optional.** Ignoring every hunt changes nothing. The hunt never writes `map.completed`, `map.revealed`, flags or the chapter. The host station keeps its normal activity: its marker opens the station, and the hunt badge opens the challenge.
 - **Found.** The hunt is found when the avatar is on the hunt's painted map and at least two of its authored sites are legal (§4). The creature starts at the first legal site in the list. A toast and a map note announce it.
-- **Answers.** Pick an answer, then press Check. Nothing submits on the first tap.
+- **Answers.** Depends on the round type (§2). Tap rounds answer on the first click; the screen says so.
 - **Right answer.** Saved at once (`Hunts.pass`).
 - **Leave (voluntary exit).** Back to the map. The run and the rounds passed so far are kept, and the next visit continues ("Go on"). Leaving is never a wrong answer.
 - **Wrong answer.** The run resets to round 1 and the attempt number goes up. The new site is picked once and saved *before* the explanation is shown (`Hunts.fail`). The screen names the new place. A repeated submission (double click, reload, replayed event) is ignored by the attempt guard, so the creature never moves twice.
@@ -99,4 +95,4 @@ The placeholder silhouette (`Rift.Assets` fallback) is used everywhere until the
 ## 8. Open for later stages
 
 - Stage 3: final art and the balance review of the three cards. Voiced taunts are optional: the lines are text only now and go through the normal voice run (#43) if wanted.
-- Stage 4: class playtest of timing and fairness, and whether three rounds is the right length.
+- Stage 4: class playtest of timing and fairness, and whether twelve rounds is the right length (`ROUNDS` in `js/core/tricks.js` and `js/core/hunts.js`).

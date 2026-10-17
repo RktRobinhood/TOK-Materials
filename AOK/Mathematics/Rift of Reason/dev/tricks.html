@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trick bank · Rift of Reason</title>
+<style>
+:root{--bg:#14121f;--fg:#efe3c8;--surface:#211a2c;--line:#685277;--good:#7fe0a0;--muted:#b9aa95;--gold:#eac77b}
+body{margin:0;padding:20px;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
+main{max-width:1100px;margin:auto}h1{margin:0 0 6px;font-size:26px}h2{margin:26px 0 8px;font-size:21px}
+p{margin:6px 0}.muted{color:var(--muted)}button,select{font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}th{font-size:13px;color:var(--muted)}
+td.k{white-space:nowrap;font-family:ui-monospace,monospace;font-size:12px}td.mode{white-space:nowrap}
+.opts{display:flex;flex-wrap:wrap;gap:4px}.opt{border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}.opt.ok{border-color:var(--good);color:var(--good);font-weight:700}
+.ans{color:var(--good);font-weight:700}.why{font-size:13px;color:var(--muted)}
+@media(max-width:720px){body{padding:12px}table,thead,tbody,tr,td,th{display:block}thead{display:none}tr{border-bottom:2px solid var(--line)}td{border:0;padding:4px 10px}}
+</style></head><body><main>
+<h1>Trick bank (#111)</h1>
+<p>Every trick round of the roaming legendaries, one random version each. An attempt draws 6 of them: half from the creature's own tricks, half from the shared ones, dressed in its theme. A wrong answer sends the creature running.</p>
+<p class="muted">The answer is in green. "Why" is what a student sees after a wrong answer. Automatic checks (tools/test/tricks.test.mjs) make sure every round has one fair answer that follows from the screen. Press Reroll to see other random versions.</p>
+<div class="toolbar"><label>Creature <select id="who"></select></label><button id="reroll" type="button">Reroll</button><span id="count" role="status" class="muted"></span></div>
+<div id="out"></div>
+</main>
+<script src="js/core/rift.js"></script><script src="js/core/tricks.js"></script><script>
+(function(){'use strict';
+const R=window.Rift,T=R.Tricks,who=document.getElementById('who'),out=document.getElementById('out'),count=document.getElementById('count');
+const MODES={pick:'Pick one, Check',multi:'Pick all, Check',tap:'First click answers',sequence:'Press in order',wait:'Touch nothing',number:'Type a number'};
+const PLACES={sign:'(the word in the sign)',portrait:'(the creature\'s picture)',title:'(the challenge\'s name)'};
+let seed=1;
+T.ids().forEach(id=>who.append(R.el('option',{value:id,text:id[0].toUpperCase()+id.slice(1)})));
+const label=o=>(o.label===''?'[blank button]':o.label)+(o.place?' '+PLACES[o.place]:'')+(o.size?' · '+o.size:'');
+function answer(r){
+ if(r.mode==='wait')return 'Wait '+r.seconds+' seconds, touch nothing';
+ if(r.mode==='number')return r.accept[0];
+ if(r.mode==='sequence')return r.accept[0].map(a=>label(r.options.find(o=>o.id===a))).join(' → ');
+ const ok=r.mode==='multi'?r.accept[0]:r.accept;
+ return ok.map(a=>label(r.options.find(o=>o.id===a))).join(' + ');
+}
+function evidence(s){
+ if(!s)return '';
+ if(s.kind==='lanterns')return s.pairs.map(p=>p.name+': '+(p.left?'on':'off')+'/'+(p.right?'on':'off')).join(' · ')+(s.claim?' · Claim: '+s.claim:'');
+ if(s.kind==='records')return (s.claim?'Claim: '+s.claim+' · ':'')+s.records.map(r=>r.name+' '+(r.stamped?'stamped':'no stamp')+', '+(r.arrived?'arrived':'not yet')).join(' · ');
+ if(s.kind==='keys')return 'Rule: '+s.rule+' · '+s.record;
+ if(s.kind==='log')return s.shapes.map(x=>x.icon+' '+x.count+(x.glow?' (glows)':'')).join(' · ');
+ if(s.kind==='doors')return s.doors.map(d=>d.name+' '+d.pct+'%').join(' · ');
+ if(s.kind==='shapeword')return 'Shows '+s.icon+' with the word '+s.word;
+ return s.kind;
+}
+function draw(){
+ const id=who.value,bank=T.bank(id,seed);
+ count.textContent=bank.length+' tricks · version '+seed;
+ const rows=bank.map(r=>{
+  const ok=new Set(r.mode==='multi'||r.mode==='sequence'?r.accept[0]:r.accept);
+  return R.el('tr',null,[
+   R.el('td.k',{text:r.key}),R.el('td.mode',{text:MODES[r.mode]}),
+   R.el('td',null,[R.el('strong',{text:r.sign}),evidence(r.scene)?R.el('p.muted',{text:evidence(r.scene)}):null,
+    r.options.length?R.el('div.opts',null,r.options.map(o=>R.el('span.opt'+(ok.has(o.id)&&r.mode!=='wait'?'.ok':''),{text:label(o)}))):null]),
+   R.el('td',null,[R.el('div.ans',{text:answer(r)}),R.el('p.why',{text:r.why})]),
+  ]);
+ });
+ out.replaceChildren(R.el('table',null,[R.el('thead',null,[R.el('tr',null,['Trick','Type','Sign, evidence and options','Answer and why'].map(h=>R.el('th',{text:h})))]),R.el('tbody',null,rows)]));
+}
+who.onchange=draw;document.getElementById('reroll').onclick=()=>{seed+=1;draw();};
+draw();
+})();
+</script></body></html>
