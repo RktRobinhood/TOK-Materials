@@ -219,6 +219,28 @@
             blurb: 'A Danish poet-mathematician hedgehog who writes tiny wise verses and invents games.',
             lines: ['A little verse for a little problem.', 'Problems bite back. Good.', 'Hex! I mean, hello.'],
         },
+        // ---- roaming legendaries (#111, data/legendaries.js): original tricksters, never in a spawn table.
+        // Passing the creature's trick challenge grants exactly one (Rift.Hunts.claim). Card numbers are
+        // builder proposals (design/ROAMING-LEGENDARIES.md) and reuse existing abilities. No `lines` here:
+        // their speech lives in data/legendaries.js and is not voiced yet (no cast voice).
+        maskip: {
+            name: 'Maskip', inspiredBy: 'Original roaming trickster', colour: 'reason', rarity: 'legendary', roaming: true, lesson: 2,
+            power: 5, cost: 3, attack: 2, health: 3,
+            ability: 'whisper', abilityText: 'Entrance: an enemy creature loses its abilities, keywords and boosts.',
+            blurb: 'A lantern imp in an oversized mask. Switches the rule sign when you blink. Its lanterns never lie, even when it does.',
+        },
+        quibblequill: {
+            name: 'Quibblequill', inspiredBy: 'Original roaming trickster', colour: 'language', rarity: 'legendary', roaming: true, lesson: 3, keywords: ['guard'],
+            power: 6, cost: 4, attack: 2, health: 5,
+            ability: 'foresight', abilityText: 'Guard. Entrance: look at the opponent\'s hand and draw a card.',
+            blurb: 'An ink-stained ferret in a legal wig, buried in very official paperwork. Knows that one record can beat a whole pile.',
+        },
+        oddsnap: {
+            name: 'Oddsnap', inspiredBy: 'Original roaming trickster', colour: 'memory', rarity: 'legendary', roaming: true, lesson: 4,
+            power: 5, cost: 3, attack: 2, health: 3,
+            ability: 'predict', abilityText: 'Activate (1 energy): predict the colour of the opponent\'s next creature. If right, this gets +3/+3.',
+            blurb: 'A dice-tailed gremlin in a crooked paper crown. Counts everything, then sounds far more certain than its numbers.',
+        },
         // Small original starter helpers (#113); no plot spawn or automatic ownership grant.
         'proof-pup': {
             name: 'Proof Pup', inspiredBy: 'Original starter helper', colour: 'reason', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,

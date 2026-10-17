@@ -94,7 +94,7 @@ test('a new top-level field in freshState is carried by the code without any oth
     // If this list changes, the round-trip test above already covers the new field; update the list.
     assert.deepEqual(fresh, ['version', 'createdAt', 'seed', 'visits', 'avatar', 'chapter', 'map', 'flags', 'health', 'maxHealth',
         'scars', 'xp', 'accolades', 'items', 'creatures', 'team', 'trophies', 'seen', 'axioms', 'axiomLoadout', 'tactics',
-        'deckTactics', 'rumours', 'lures', 'perksUsed', 'tutorialsSeen', 'stats', 'settings', 'backup', 'starter']);
+        'deckTactics', 'rumours', 'lures', 'perksUsed', 'tutorialsSeen', 'stats', 'settings', 'backup', 'starter', 'hunts']);
 });
 
 test('a code made by the game before the Card Arena (ROR1, save version 1) still loads', async () => {

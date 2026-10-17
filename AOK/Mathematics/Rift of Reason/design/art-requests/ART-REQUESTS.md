@@ -1254,3 +1254,19 @@ Exact prompts, original tool outputs, references, selected and skipped takes: `.
 Produced and integrated eight additional IDs: `cutscene/shadow-whole`, `cutscene/shadow-incomplete`, `cutscene/shadow-fragment-one`, `cutscene/shadow-fragment-two`, `cutscene/shadow-fragment-three`, `cutscene/shadow-fragment-four`, `cutscene/nudge-net-soft-shadow`, and `scene/hall-stilled`. The six-part atlas uses matte dark silhouettes with a restrained purple edge; the four pieces differ in shape and remain hand-sized during recovery. Whole and incomplete shadows rest flat on the ground; the bargain preserves its missing reach. Nudge's complete replacement net contains folded shadow material behind its mesh. The Hall plate preserves Granny in the stopped harness over cold ashes until her canonical rescue, with no active fire or steam during Quill's confession.
 
 Thirteen selected paintings yield eighteen additive runtime IDs including Stage 13.85. First shadow atlas and first net edit remain as skipped provenance; corrected takes have six separate islands and complete net/bell margins. Built through `tools/build-assets.mjs --only director`; all existing manifest entries preserved. `tools/check-director-art.mjs` checks provenance, alpha, source margins, island count, dimensions and hashes, and produces dark/light inspection sheets. Exact prompts, references and retained takes are in the same director source folder. No spoken dialogue or recording request added; a short silent safety caption accompanies the stopped winch.
+
+## Stage 13.87 — Roaming legendaries (#111), 17 October 2026
+
+Three original trickster legendaries now run on placeholders: Maskip (Unit 2, Boolesbury), Quibblequill (Unit 3, Tomorrowton) and Oddsnap (Unit 4, Server Tower). Spec and use: [ROAMING-LEGENDARIES.md](../ROAMING-LEGENDARIES.md). Cute horror, jewel accent in the card colour, a transparent background, and a whole silhouette with safe margins. Follow the art bible, and check the style board and a shipped creature first. They are mischievous, never mean, and not caricatures of real people.
+
+- **Maskip** (colour reason, blue): a small friendly imp in an oversized Victorian mask, carrying two brass lanterns, with a tail shaped like a light switch.
+- **Quibblequill** (colour language, gold): a tiny ferret in a ludicrous legal wig, with an ink-stained quill and a bundle of official-looking papers.
+- **Oddsnap** (colour memory, silver): a cheerful little gremlin with a tail of dice and a crooked paper crown.
+
+IDs per creature (`<id>` = `maskip`, `quibblequill`, `oddsnap`):
+
+- `creature/<id>/idle`: portrait, card art, map badge and map runner (same size class as shipped creatures, about 230×215).
+- `creature/<id>/taunt`, `/thinking`, `/happy` (right answer), `/shocked` (wrong answer, flee start), `/recruited`: whole-body poses for the challenge screen.
+- `creature/<id>/run`: one row of 6 run (or flutter) frames on a shared ground line, facing right, bottom-centre pivot, in the `walk` sheet format of `tools/assets/sheets.json` (frame about 240–320 × 330–380 px). The map mirrors it for leftward runs. Calm motion shows the static idle, so no extra still is needed.
+
+No voice lines are requested: the hunt lines are on-screen text only.

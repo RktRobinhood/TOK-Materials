@@ -73,6 +73,11 @@
             const avatarLayer = svg('g', { class: 'avatar-layer' });
             const crisisLayer = svg('g', { class: 'map-crisis', 'aria-hidden': 'true' });
             const crisisNote = el('div.map-crisis-note.panel.small', { role: 'status' });
+            // Roaming legendaries (#111, js/core/hunts.js): the trail of a flight, the runner, a plain-text note.
+            const huntTrails = svg('g', { class: 'map-hunt-trails', 'aria-hidden': 'true' });
+            const huntRunners = svg('g', { class: 'map-hunt-runners', 'aria-hidden': 'true' });
+            const huntNote = el('div.map-hunt-note.panel.small', { role: 'status' });
+            const flying = new Set();   // hunts whose runner is still on its way (badge not drawn yet)
             board.append(svg('defs', {}, [
                 svg('radialGradient', { id: 'fog-hole' }, [
                     svg('stop', { offset: '0', 'stop-color': 'black' }),
@@ -80,13 +85,13 @@
                     svg('stop', { offset: '1', 'stop-color': 'white' }),
                 ]),
                 fogMask,
-            ]), bg, pathsLayer, fog, crisisLayer, nodesLayer, avatarLayer);
+            ]), bg, pathsLayer, fog, crisisLayer, huntTrails, nodesLayer, huntRunners, avatarLayer);
 
             const hud = Rift.UI.hud();
             const chapterLabel = el('div.chapter-label.panel');
             const riftBtn = el('button.btn.small', { text: '🌀 Time rift', title: 'Jump to a chapter', onclick: () => riftMenu() });
             const tracker = el('div.quest-tracker.panel');
-            rootNode.append(el('div.map-wrap', null, [board]), hud, tracker, crisisNote, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
+            rootNode.append(el('div.map-wrap', null, [board]), hud, tracker, crisisNote, huntNote, el('div.map-bottom.row', null, [chapterLabel, riftBtn]), tip);
 
             // ---- avatar sprite ----
             const avatarGroup = svg('g', { class: 'map-avatar' });
@@ -120,6 +125,7 @@
 
             // ---- draw ----
             function draw() {
+                syncHunts();
                 const st = Rift.State.get();
                 const crisis = mapId === 'main' && st.flags['seen:prologue.rift'] && !st.flags['seen:finale.home'];
                 const recovering = !!st.flags['seen:ch1.gate.win'];
@@ -155,6 +161,7 @@
                 revealed.forEach(id => nodesLayer.append(nodeMarker(id, 'revealed')));
                 const ch = Rift.data.chapters[st.chapter] || {};
                 drawTracker(st);
+                drawHunts(st);
                 chapterLabel.textContent = (mapDef.name ? mapDef.name + '  ·  ' : '') + (ch.name || '') + '  ·  Level ' + Rift.World.level(st);
             }
 
@@ -178,6 +185,123 @@
                 }, [Rift.Quests.glyph(q.kind, q.status),
                     el('span', { text: q.title }),
                     (Rift.World.node(q.node) || {}).name !== q.title ? el('span.small.muted', { text: (Rift.World.node(q.node) || {}).name }) : null])));
+            }
+
+            // ---- roaming legendaries (#111) ----
+            const Hunts = Rift.Hunts;
+            const huntsHere = st => (Hunts ? Object.keys(Hunts.defs()).filter(h => Hunts.def(h).map === mapId && Hunts.record(st, h)) : []);
+            const huntName = h => (Rift.data.creatures[Hunts.def(h).species] || {}).name || h;
+
+            // Finds new hunts and ends caught-up trails; saves only when something changed.
+            function syncHunts() {
+                if (!Hunts || !Hunts.needsSync(Rift.State.get())) return;
+                let found = [];
+                Rift.State.update(s => { found = Hunts.sync(s); });
+                found.forEach(h => {
+                    const rec = Hunts.record(Rift.State.get(), h);
+                    Rift.UI.toast('★ ' + Hunts.def(h).found.replace('{place}', Hunts.placeName(rec.node)), 5000);
+                });
+            }
+
+            // The curve between two linked nodes, as drawn for the map's own paths.
+            function curve(a, b) {
+                return { a, b, cx: (a.x + b.x) / 2 + (a.y - b.y) * 0.12, cy: (a.y + b.y) / 2 + (b.x - a.x) * 0.12 };
+            }
+            function huntRoute(st, h) {
+                const dep = Hunts.record(st, h).departure;
+                const ids = Hunts.path(st, dep.from, dep.to) || [dep.from, dep.to];
+                return ids.map(id => Rift.World.node(id));
+            }
+
+            // The trail of every shown flight (static, in every motion setting) and one plain line per hunt.
+            function drawHunts(st) {
+                huntTrails.replaceChildren();
+                const lines = [];
+                huntsHere(st).forEach(h => {
+                    const rec = Hunts.record(st, h);
+                    if (rec.departure && rec.departure.from !== rec.departure.to) {
+                        const pts = huntRoute(st, h);
+                        let d = `M${pts[0].x} ${pts[0].y}`;
+                        for (let i = 1; i < pts.length; i++) { const c = curve(pts[i - 1], pts[i]); d += ` Q ${c.cx} ${c.cy} ${c.b.x} ${c.b.y}`; }
+                        huntTrails.append(svg('path', { d, class: 'hunt-trail' }));
+                    }
+                    if (rec.phase === 'roaming') lines.push(el('button', { text: '★ ' + Hunts.status(st, h), title: 'Show on the map', onclick: () => focusNode(rec.node) }));
+                });
+                huntNote.replaceChildren(...lines);
+                huntNote.style.display = lines.length ? '' : 'none';
+            }
+
+            function huntBadge(nodeId, h) {
+                const st = Rift.State.get();
+                const sp = Rift.data.creatures[Hunts.def(h).species];
+                const rec = Hunts.record(st, h);
+                const label = (rec.phase === 'claimed' ? 'Practise with ' : 'Optional challenge: ') + sp.name;
+                const b = svg('g', { class: 'hunt-badge' + (rec.resting ? ' resting' : ''), transform: 'translate(36,22)', tabindex: 0, role: 'button', 'aria-label': label });
+                b.append(svg('circle', { r: 23, class: 'hunt-badge-ring' }));
+                b.append(svg('image', { href: Rift.Assets.src('creature/' + Hunts.def(h).species + '/idle', { colour: sp.colour, label: ' ' }), x: -17, y: -21, width: 34, height: 41 }));
+                const star = svg('text', { class: 'hunt-badge-star', x: 15, y: -13, 'text-anchor': 'middle', 'dominant-baseline': 'central' });
+                star.textContent = '★';
+                b.append(star);
+                const go = ev => { ev.stopPropagation(); goTo(nodeId, null, h); };
+                b.addEventListener('click', go);
+                b.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); if (!ev.repeat) go(ev); } });
+                return b;
+            }
+
+            const calmMotion = () => {
+                const body = root.document.body;
+                if (body && body.classList && body.classList.contains('calm-motion')) return true;
+                try { return !!(root.matchMedia && root.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { return false; }
+            };
+
+            // A flight the map has not shown yet: the creature runs once along the trail (a plain jump to the
+            // new place under Calm motion or reduced motion). The new place was saved before; this only shows it.
+            async function showDepartures() {
+                const st = Rift.State.get();
+                const due = huntsHere(st).filter(h => { const dep = Hunts.record(st, h).departure; return dep && !dep.seen; });
+                for (const h of due) {
+                    if (destroyed) return;
+                    const rec = Hunts.record(Rift.State.get(), h);
+                    const dep = rec.departure;
+                    if (dep.from !== dep.to && !calmMotion()) {
+                        flying.add(h);
+                        draw();
+                        await runAlong(h, huntRoute(Rift.State.get(), h));
+                        flying.delete(h);
+                    }
+                    if (destroyed) return;
+                    Rift.State.update(s => { Hunts.seen(s, h); });
+                    Rift.UI.toast('★ ' + Hunts.status(Rift.State.get(), h), 5000);
+                    draw();
+                }
+            }
+
+            function runAlong(h, pts) {
+                const sp = Rift.data.creatures[Hunts.def(h).species];
+                const runner = svg('image', { href: Rift.Assets.src('creature/' + Hunts.def(h).species + '/idle', { colour: sp.colour, label: ' ' }), x: -22, y: -54, width: 44, height: 54, class: 'hunt-runner' });
+                const g = svg('g', { transform: `translate(${pts[0].x},${pts[0].y})` }, [runner]);
+                huntRunners.append(g);
+                const legs = [];
+                for (let i = 1; i < pts.length; i++) legs.push(curve(pts[i - 1], pts[i]));
+                const dur = Math.min(2600, 650 * Math.max(1, legs.length));
+                return new Promise(resolve => {
+                    let finished = false;
+                    const done = () => { if (finished) return; finished = true; g.remove(); resolve(); };
+                    setTimeout(done, dur + 400);   // animation frames pause in hidden tabs
+                    const t0 = performance.now();
+                    const tick = now => {
+                        if (finished) return;
+                        if (destroyed) return done();
+                        const t = Math.min(1, (now - t0) / dur) * legs.length;
+                        const leg = legs[Math.min(legs.length - 1, Math.floor(t))];
+                        const u = Math.min(1, t - Math.min(legs.length - 1, Math.floor(t)));
+                        const x = (1 - u) * (1 - u) * leg.a.x + 2 * (1 - u) * u * leg.cx + u * u * leg.b.x;
+                        const y = (1 - u) * (1 - u) * leg.a.y + 2 * (1 - u) * u * leg.cy + u * u * leg.b.y;
+                        g.setAttribute('transform', `translate(${x},${y})` + (leg.b.x < leg.a.x ? ' scale(-1,1)' : ''));
+                        if (t < legs.length) requestAnimationFrame(tick); else done();
+                    };
+                    requestAnimationFrame(tick);
+                });
             }
 
             // A calm ring that fades out round a station (from the journal or the tracker).
@@ -235,6 +359,8 @@
                     // A side story waits here (design/SIDE-STORIES.md section 1): a slowly fading bubble.
                     const side = Rift.SideStories && Rift.SideStories.at(id);
                     if (side) g.append(sideBubble(id, side));
+                    // A roaming legendary waits here (#111): its badge opens the optional challenge.
+                    if (Hunts) Hunts.at(st, id).filter(h => Hunts.def(h).map === mapId && !flying.has(h)).forEach(h => g.append(huntBadge(id, h)));
                     g.addEventListener('click', () => goTo(id));
                     g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); ev.stopPropagation(); if (!ev.repeat) goTo(id); } });
                 }
@@ -283,6 +409,9 @@
                 ]))));
                 const side = kind === 'revealed' && Rift.SideStories && Rift.SideStories.at(id);
                 if (side) tip.append(el('div.small.side-teaser', { text: '💬 ' + side.teaser }));
+                if (kind === 'revealed' && Hunts) Hunts.at(Rift.State.get(), id).filter(h => !flying.has(h)).forEach(h => tip.append(el('div.small.hunt-teaser', {
+                    text: '★ ' + huntName(h) + (Hunts.record(Rift.State.get(), h).phase === 'claimed' ? ' is here. Practise its tricks.' : ' waits here. Optional trick challenge.'),
+                })));
                 const rect = board.getBoundingClientRect();
                 const sx = rect.width / W, sy = rect.height / H, s = Math.min(sx, sy);
                 const ox = rect.left + (rect.width - W * s) / 2, oy = rect.top + (rect.height - H * s) / 2;
@@ -332,7 +461,8 @@
             }
 
             // sideId: walk there and open that side story instead of the station.
-            async function goTo(id, sideId) {
+            // huntId: walk there and open that roaming legendary's challenge (#111).
+            async function goTo(id, sideId, huntId) {
                 if (destroyed || walking || pendingArrival || arriving || (input && !input.available(rootNode))) return;
                 const st = Rift.State.get();
                 const locked = Rift.World.lockReason(st, id);
@@ -348,7 +478,10 @@
                         if (destroyed) return;
                         Rift.State.update(s => { s.map.at = path[i]; });
                     }
-                    if (!destroyed && sideId) Rift.Router.go('side-story', { id: sideId });
+                    // Walking on lets a hiding creature come back, and ends a trail once you catch up.
+                    syncHunts();
+                    if (!destroyed && huntId) Rift.Router.go('hunt', { id: huntId });
+                    else if (!destroyed && sideId) Rift.Router.go('side-story', { id: sideId });
                     else if (!destroyed) await arrive(id);
                 } finally { walking = false; releaseInput(); }
             }
@@ -514,6 +647,8 @@
             placeAvatar(here.x, here.y);
             draw();
             if (params && params.focus) setTimeout(() => focusNode(params.focus), 300);
+            // A roaming legendary that just fled (or fled while this map was not on screen) runs to its new place.
+            if (Hunts) setTimeout(() => { if (!destroyed) showDepartures(); }, 450);
             const autoOpening = params && params.arrive ? () => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap })
                 : params && params.recap ? () => opening(params.recap, true)
                 : Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length ? () => opening(here.chapter) : null;

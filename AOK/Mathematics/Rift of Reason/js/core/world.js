@@ -205,7 +205,7 @@
         const out = {};
         (n.spawns || []).forEach(sp => {
             const c = Rift.data.creatures[sp];
-            if (!c) return;
+            if (!c || c.roaming) return; // roaming legendaries (#111) come only from their trick challenge
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
             let w = Rift.data.rarities[c.rarity].weight;
             if (c.rarity === 'uncommon') w *= 1 + (stars - 1) * 0.2;

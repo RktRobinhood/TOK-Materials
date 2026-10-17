@@ -52,6 +52,7 @@
             settings: { music: 0.5, sfx: 0.45, voice: 1, ambience: 0.5, textSpeed: 1, textInstant: false, calm: false, charactersCanDie: false },
             backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
             starter: null,         // receipt of the avatar type's starter deck (#114, grantStarter): { v, type, uids, tactics, axioms, unlocked, catchUp, at }
+            hunts: {},             // roaming legendary hunts (#111, js/core/hunts.js): hunt id -> { phase, node, attempt, round, departure, claimed, … }
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
         };

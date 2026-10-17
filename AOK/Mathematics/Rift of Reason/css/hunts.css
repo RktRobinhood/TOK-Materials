@@ -1,0 +1,66 @@
+/* Roaming legendary hunts (#111, design/ROAMING-LEGENDARIES.md): the map badge, trail and note, and the
+   trick challenge screen. Nothing loops, shakes or wobbles; under Calm motion nothing moves at all. */
+
+/* ---- the map ---- */
+.map-node .hunt-badge { cursor: pointer; }
+.map-node .hunt-badge .hunt-badge-ring { fill: rgba(242, 182, 50, 0.35); stroke: var(--gold); stroke-width: 4; }
+.map-node .hunt-badge:hover .hunt-badge-ring, .map-node .hunt-badge:focus .hunt-badge-ring { stroke-width: 7; }
+.map-node .hunt-badge .hunt-badge-star { fill: var(--gold); font-size: 15px; font-weight: 700; pointer-events: none; }
+.map-node .hunt-badge.resting { opacity: 0.55; }
+.hunt-trail { fill: none; stroke: var(--gold); stroke-width: 5; stroke-dasharray: 4 14; stroke-linecap: round; opacity: 0.85; pointer-events: none; }
+.hunt-runner { pointer-events: none; }
+.map-hunt-note { position: absolute; left: 12px; bottom: 112px; z-index: 15; max-width: min(380px, calc(100vw - 24px)); display: flex; flex-direction: column; gap: 4px; }
+.map-hunt-note button { all: unset; cursor: pointer; text-align: left; }
+.map-hunt-note button:hover, .map-hunt-note button:focus-visible { text-decoration: underline; }
+.map-tip .hunt-teaser { margin-top: 6px; color: var(--gold); }
+
+/* ---- the screen ---- */
+.hunt-wrap { position: absolute; inset: 0; background-size: cover; background-position: center; display: flex; align-items: flex-start; justify-content: center; overflow: auto; padding: 64px 12px 16px; }
+.hunt-wrap::before { content: ''; position: fixed; inset: 0; background: rgba(10, 8, 18, 0.62); pointer-events: none; }
+.hunt-panel { position: relative; width: min(760px, 100%); display: flex; flex-direction: column; gap: 10px; border-top: 4px solid var(--hunt, var(--gold)); animation: hunt-in 0.3s ease-out; }
+@keyframes hunt-in { from { opacity: 0; } to { opacity: 1; } }
+body.calm-motion .hunt-panel { animation: none; }
+@media (prefers-reduced-motion: reduce) { .hunt-panel { animation: none; } }
+.hunt-head { display: flex; align-items: center; gap: 12px; }
+.hunt-portrait { width: 72px; height: 86px; object-fit: contain; flex: none; }
+.hunt-title { flex: 1; min-width: 0; }
+.hunt-title h2 { margin: 0; font-size: 1.15rem; }
+.hunt-pips { display: flex; gap: 6px; }
+.hunt-pip { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--parchment-dim); }
+.hunt-pip.done { background: var(--gold); border-color: var(--gold); }
+.hunt-pip.now { border-color: var(--gold); }
+.hunt-say { margin: 0; font-style: italic; color: var(--parchment-dim); }
+.hunt-box { display: flex; flex-direction: column; gap: 10px; }
+.hunt-rules { margin: 0; padding-left: 1.2em; }
+.hunt-sign { display: flex; flex-direction: column; gap: 2px; text-align: center; padding: 10px 14px; border: 2px solid var(--gold); border-radius: var(--radius); background: rgba(242, 182, 50, 0.08); }
+.hunt-sign strong { font-size: 1.15rem; }
+.hunt-scene { display: flex; flex-direction: column; gap: 8px; }
+.hunt-claim { padding: 8px 10px; border-radius: 10px; background: rgba(239, 227, 200, 0.08); border: 1px dashed var(--parchment-dim); }
+.hunt-claim.record { border-style: solid; }
+.hunt-claim-who { font-weight: 700; margin-right: 4px; }
+.hunt-pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.hunt-pair { padding: 8px; border: 1px solid var(--panel-edge); border-radius: 10px; display: flex; flex-direction: column; gap: 4px; }
+.hunt-pair.target { border: 2px solid var(--gold); }
+.hunt-lamps { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: center; }
+.hunt-lamp.on { font-weight: 700; color: var(--gold); }
+.hunt-lamp.off { color: var(--parchment-dim); }
+.hunt-table { border-collapse: collapse; width: 100%; }
+.hunt-table th, .hunt-table td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--panel-edge); }
+.hunt-table tr.glow td { color: var(--gold); font-weight: 700; }
+.hunt-bar { display: inline-block; height: 10px; max-width: 120px; background: var(--parchment-dim); border-radius: 5px; vertical-align: middle; }
+.hunt-doors { display: flex; flex-wrap: wrap; gap: 10px; }
+.hunt-door { flex: 1 1 120px; text-align: center; padding: 8px; border: 1px solid var(--panel-edge); border-radius: 10px; }
+.hunt-door-icon { font-size: 1.8rem; }
+.hunt-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.hunt-option { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+.hunt-option[aria-pressed="true"] { outline: 3px solid var(--gold); outline-offset: 2px; }
+.hunt-option[aria-pressed="true"]::after { content: '✔ chosen'; font-size: 0.75em; }
+.hunt-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.hunt-result { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.hunt-result.good { color: var(--perception); }
+.hunt-result.bad { color: var(--emotion); }
+.hunt-where { font-weight: 700; color: var(--gold); }
+.hunt-box .fcard { align-self: center; }
+.hunt-foot { display: flex; justify-content: flex-end; }
+.hunt-box > .btn { align-self: center; min-width: 220px; }
+@media (max-width: 560px) { .hunt-head { flex-wrap: wrap; } .hunt-portrait { width: 56px; height: 66px; } }
