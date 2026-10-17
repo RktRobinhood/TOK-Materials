@@ -506,6 +506,18 @@
         }
         // A rule changed (a card played or Fate): show the card and what it changes, for everyone.
         function ruleReveal(events) {
+            // A leap (#120): what it skipped for good and jumped over; then what it landed on, and the rule event.
+            const leapAt = events.findIndex(e => e.t === 'fate-leap');
+            if (leapAt >= 0) {
+                const leap = events[leapAt], rest = events.slice(leapAt + 1);
+                const words = [leap.text].concat(rest.filter(e => e.t === 'fate-skip').map(e => e.text),
+                    leap.passed && leap.passed.length ? ['Jumped over, still live: ' + leap.passed.map(eventLabel).join(', ') + '.'] : []);
+                const more = rest.some(e => ['fate-event', 'axiom', 'reset', 'conditional-reveal'].includes(e.t));
+                showReveal(el('div.b-reveal-rule', {}, [el('div.b-reveal-reset', {}, [icon('ui/fate-leap', '⏭', 'b-reset-icon'), el('div', { text: words.join(' ') })])]),
+                    (leap.player === ME ? 'You' : leap.player === OPP ? oppName : 'Fate') + ': Fate leaps ' + roundsWord(leap.spaces) + '!', RULE_SHOW, 'rule fate-leap',
+                    more ? () => { ruleReveal(rest); if (!ui.holding) schedule(); } : undefined);
+                return;
+            }
             const fired = events.filter(e => e.t === 'fate-event');
             if (fired.length) {
                 const f = fired[0], rest = events.slice(events.indexOf(f) + 1);
@@ -614,7 +626,7 @@
                     case 'axiom-play': add('draw'); break;
                     case 'axiom': add('axiom', 'axiom'); break;
                     case 'reset': add('reset', 'axiom'); break;
-                    case 'fate-event': add('reset', 'axiom'); break;
+                    case 'fate-event': case 'fate-leap': add('reset', 'axiom'); break;
                     case 'power-use': add('power', 'jingle'); break;
                     case 'activate': add('activate'); call(ev.cid, 'enter'); wantBark(ev.cid, 'ability', 0.7); break;
                     case 'attack': call(ev.cid, 'attack'); add('slash'); break;
@@ -675,6 +687,9 @@
                 if (c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).scheduled && !E.canSchedule(state, ME)) {
                     return state.options.timeline ? 'You already have ' + E.SCHEDULE_LIMIT + ' events waiting on the Fate track.' : 'There is no Fate track in this match.';
                 }
+                const move = c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).fateMove;
+                if (move && !state.options.timeline) return 'There is no Fate track in this match.';
+                if (move && move.rewind && state.fate.until >= state.options.fateMax) return 'Fate is already as far away as it can be (' + roundsWord(state.options.fateMax) + ').';
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
@@ -843,6 +858,7 @@
         const UNTIL = {
             turn: () => 'this turn only', play: () => 'until it leaves play', ability: () => 'its own ability',
             aura: from => 'while ' + (from || 'its friend') + ' is in play', rule: () => 'while this rule is active', tax: () => 'until Night Sight ends',
+            fate: round => 'until its Fate space expires' + (round ? ', at the end of round ' + round : ''),
         };
         function effectLine(fx) {
             return signed(fx.amount) + ' ' + fx.stat + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
@@ -977,6 +993,8 @@
                 C ? el('div.b-notes-tags', {}, [colourChip(d.colour)]) : null,
                 el('div.b-note-line.b-ability', {}, [el('b', { text: d.name + ': ' }), d.text]),
                 el('div.b-note-line', {}, [el('b', { text: 'Tactic: ' }), 'it works once, then goes to your discard pile.']),
+                // A Fate mover in your hand (#120): exactly what it would do now. The prompt bar may cut it short.
+                (m => (m ? el('div.b-note-line.b-fate-move', {}, [el('b', { text: 'If you play it now: ' }), m]) : null))(state.players[ME].hand.includes(cid) ? fateMoveWords(cid) : ''),
                 whyNotNote(cid),
                 C ? el('div.b-note-line', {}, [el('b', { text: C.name + ' tactic' + (d.rarity ? ' (' + d.rarity + ')' : '') + ': ' }),
                     'a deck holds no more of these than ' + C.name + ' creatures. You can play it with none in play.']) : null,
@@ -1806,7 +1824,15 @@
                 if (ev.t === 'reset') out.push({ idx, kind: 'reset' });
                 else if (ev.t === 'axiom') out.push({ idx, kind: ev.player == null ? 'flip' : 'rule', id: ev.id, by: ev.player });
                 else if (ev.t === 'time') out.push({ idx, kind: /closer/.test(ev.text) ? 'forward' : 'rewind', by: ev.player });
-                else if (ev.t === 'fate-event') out.push({ idx, kind: 'scheduled', def: ev.def, by: ev.player, ref: ev.id });
+                else if (ev.t === 'fate-event') {
+                    const rec = (state.fate.queue || []).find(x => x.id === ev.id) || {};
+                    out.push({ idx, kind: 'scheduled', def: ev.def, by: ev.player, ref: ev.id + ':' + (ev.fires || 1), fires: ev.fires || 1, repeat: !!rec.repeat });
+                    const leap = ev.how === 'leap' && out.filter(h => h.kind === 'leap').pop();
+                    if (leap) leap.landed.push(ev.id);
+                }
+                // A leap (#120) is one marker: what it skipped for good, jumped over and landed on.
+                else if (ev.t === 'fate-leap') out.push({ idx, kind: 'leap', by: ev.player, spaces: ev.spaces, ref: ev.from + '>' + ev.to, skipped: ev.skipped || [], passed: ev.passed || [], landed: [] });
+                else if (ev.t === 'fate-expire') out.push({ idx, kind: 'expired', def: ev.def, by: ev.player, ref: ev.id, boosted: (ev.boosted || []).length });
             });
             return out.map(x => Object.assign(x, { k: x.idx - state.round }));
         }
@@ -1849,13 +1875,13 @@
             for (let k = -FATE_PAST; k <= FATE_AHEAD; k++) {
                 const kids = [];
                 // Past events (and those of this round) as small markers.
-                hist.filter(h => h.k === k).forEach(h => kids.push(pastMarker(h, AX)));
+                hist.filter(h => h.k === k).forEach((h, i) => kids.push(pastMarker(h, AX, i)));
                 // Coming events on the round they start (further ones wait in the chip beyond the reel).
                 tl.forEach((ev, i) => {
                     if (ev.rounds !== k || (shift && i === 0)) return;
                     kids.push(eventMarker(ev, i, false));
                 });
-                if (k > 0) sched.filter(ev => schedRound(ev) === k).forEach(ev => kids.push(scheduledMarker(ev, false)));
+                sched.filter(ev => schedRound(ev) === k).forEach(ev => kids.push(scheduledMarker(ev, false)));
                 if (shift && moved === k) kids.push(eventMarker(ghostOf(), 0, false, true));
                 const cls = k < 0 ? '.past' : k === 0 ? '.now' : '.ahead';
                 const space = el('div.b-fs.round' + cls, { dataset: { k: String(k) } }, kids);
@@ -1912,39 +1938,59 @@
                 'One space is one round. After both players have had a turn, every event moves 1 space closer to NOW (the hourglass). At NOW it happens: a free new rule, a reset to the basic rules, or a spell a player put on the track. Fate sets its next new rule aside, so no draw can take it.');
         }
         // The reel space (rounds from NOW) a scheduled event sits on: a coming one where it resolves; a used
-        // one that Fate moved back past stays visible ahead, marked used (a one-shot never happens again).
-        const schedRound = ev => (ev.live ? ev.rounds : ev.spaces > 0 ? ev.spaces + (ev.held ? 1 : 0) : null);
+        // one that Fate moved back past stays visible ahead, marked used (a one-shot never happens again); a
+        // live repeatable space (#120) that Fate has passed stays visible behind NOW, where a rewind can land on it.
+        const schedRound = ev => (ev.live ? (ev.rounds != null ? ev.rounds : ev.spaces >= -FATE_PAST ? ev.spaces : null)
+            : ev.spaces > 0 ? ev.spaces + (ev.held ? 1 : 0) : null);
         const scheduledName = def => ((Rift.data.tactics || {})[def] || {}).name || def;
         const whoseEvent = (p, cap) => (p === ME ? (cap ? 'Your' : 'your') : p === OPP ? oppName + '\'s' : (cap ? 'The' : 'the'));
-        // "If it happened now: 3 creatures are defeated: your Zuckerborg (back to the hand), …".
-        function previewWords(pre) {
-            if (!pre) return '';
-            if (!pre.defeated.length) return 'If it happened now: no creature is in play, so nothing is defeated.';
-            const one = d => (d.controller === ME ? 'your ' : oppName + '\'s ') + d.name.replace(/^(your|.+'s) /, '') + (d.dest === 'hand' ? ' (back to the hand)' : '');
-            return 'If it happened now: ' + pre.defeated.length + ' creature' + (pre.defeated.length === 1 ? ' is' : 's are') + ' defeated: ' + pre.defeated.map(one).join(', ') + '.'
-                + (pre.winner != null ? ' The battle would end.' : '');
+        const eventLabel = id => { const ev = E.fateSchedule(state).find(x => x.id === id); return ev ? whoseEvent(ev.controller) + ' ' + ev.name : 'an event'; };
+        // A leap's skipped, jumped and landed events, in words (#120).
+        function leapWords(h) {
+            const list = ids => ids.map(eventLabel).join(', ');
+            return [h.skipped.length ? 'Skipped for good (it will not happen): ' + list(h.skipped) + '.' : '',
+                h.passed.length ? 'Jumped over, still live: ' + list(h.passed) + '.' : '',
+                h.landed.length ? 'It landed on ' + list(h.landed) + ', which happened.' : h.skipped.length || h.passed.length ? '' : 'Nothing was in between.'].filter(Boolean).join(' ');
         }
-        // A scheduled event (Clean Slate): who put it there, when it resolves, what it does, and (while it is
-        // coming) what it would do right now. Used ones are dimmed and say they are spent.
+        // "If it happened now: 3 creatures are defeated: your Zuckerborg (back to the hand), …" or "…: your
+        // Kim Kardashiant gets +1/+1." A change to nothing says the event's own idle words.
+        function previewWords(pre, ev) {
+            if (!pre) return '';
+            const whose = d => (d.controller === ME ? 'your ' : oppName + '\'s ') + d.name.replace(/^(your|.+'s) /, '');
+            const signed2 = n => (n > 0 ? '+' : '') + n;
+            const parts = [];
+            if (pre.defeated.length) parts.push(pre.defeated.length + ' creature' + (pre.defeated.length === 1 ? ' is' : 's are') + ' defeated: '
+                + pre.defeated.map(d => whose(d) + (d.dest === 'hand' ? ' (back to the hand)' : '')).join(', '));
+            if (pre.boosted.length) parts.push(pre.boosted.map(b => whose(b) + ' gets ' + signed2(b.attack) + '/' + signed2(b.health)).join(', '));
+            if (!parts.length) return 'If it happened now: ' + ((ev && ev.idle) || 'nothing would change.');
+            return 'If it happened now: ' + parts.join('; ') + '.' + (pre.winner != null ? ' The battle would end.' : '');
+        }
+        // A scheduled event (Clean Slate, Echoing Encouragement): who put it there, when it resolves, what it does,
+        // and (while it is live) what it would do right now. Used ones are dimmed and say why they are over.
+        const ENDED = { fired: 'spent', skipped: 'skipped', expired: 'expired', cancelled: 'cancelled' };
         function scheduledMarker(ev, far) {
             const spent = !ev.live;
+            const behind = !spent && ev.rounds == null;   // a live repeatable space Fate has passed (#120)
             const t = (Rift.data.tactics || {})[ev.def] || {};
             const who = whoseEvent(ev.controller, true) + ' ' + ev.name;
             const when = spent
-                ? 'Spent · ' + who + (ev.state === 'fired' ? ' already happened in round ' + ev.firedRound + '. It happens only once: Fate coming back here does not repeat it.'
-                    : ev.state === 'expired' ? ' has expired.' : ev.state === 'skipped' ? ' was skipped by a leap. It will not happen.' : ' was cancelled.')
+                ? 'Over · ' + who + (ev.state === 'fired' ? ' already happened in round ' + ev.firedRound + '. It happens only once: Fate coming back here does not repeat it.'
+                    : ev.state === 'expired' ? ' has expired. Fate coming back here does nothing.' : ev.state === 'skipped' ? ' was skipped by a leap. It will not happen.' : ' was cancelled.')
+                : behind ? 'Live · ' + who + ' is ' + (ev.spaces === 0 ? 'on NOW' : roundsWord(-ev.spaces) + ' behind NOW') + '. If Fate lands on it again before it expires, it happens again.'
                 : 'Upcoming · ' + who + ' ' + fateWhen(ev) + '.';
             const pre = spent ? null : E.fateEventPreview(state, ev.id);
-            const now = previewWords(pre);
-            const rule = spent ? '' : (ev.repeat ? 'Repeatable: it happens each time Fate lands here, until it expires.'
+            const now = previewWords(pre, ev);
+            const left = ev.expiresRound == null ? 0 : ev.expiresRound - state.round + 1;
+            const rule = spent ? '' : (ev.repeat ? 'Repeatable: it happens each time Fate lands here' + (ev.fires ? ' (' + ev.fires + ' so far)' : '')
+                + ', until it expires at the end of round ' + ev.expiresRound + ' (' + roundsWord(left) + ' from now). Moving Fate back never makes it last longer.'
                 : 'One-shot: it happens once. Cards that move Fate sooner or later move it too.');
             const by = ev.controller === ME ? 'You played it.' : ev.controller === OPP ? oppName + ' played it.' : 'Part of this match.';
-            const m = el('div.b-fev.sched.' + (ev.controller === ME ? 'mine' : 'theirs') + (spent ? '.spent' : '') + (far ? '.far' : ''), {
+            const m = el('div.b-fev.sched.' + (ev.controller === ME ? 'mine' : 'theirs') + (spent ? '.spent.' + ev.state : '') + (ev.repeat ? '.repeat' : '') + (behind ? '.behind' : '') + (far ? '.far' : ''), {
                 tabindex: 0, role: 'button', dataset: { fateEvent: ev.id },
                 'aria-label': [when, spent ? '' : ev.summary, now, rule, by].filter(Boolean).join(' '),
             }, [
                 icon(t.art || 'tactic/' + ev.def, '◎', 'b-fev-icon'),
-                el('span.b-fev-label', { text: ev.name + (spent ? ' · spent' : far ? ' · in ' + ev.rounds : '') }),
+                el('span.b-fev-label', { text: ev.name + (spent ? ' · ' + (ENDED[ev.state] || 'over') : far ? ' · in ' + ev.rounds : ev.repeat && ev.fires ? ' · ×' + ev.fires : '') }),
             ]);
             const make = () => [ev.cid && state.cards[ev.cid] ? cardEl(ev.cid, { size: 'big', unregistered: true }) : null, el('div.b-notes', {}, [
                 el('div.b-note-line', {}, [el('b', { text: when })]),
@@ -2043,19 +2089,24 @@
             return 'the basic rule' + (basic ? ' (' + basic + ')' : '');
         }
         // Something that already happened on the track (or this round): a small marker.
-        function pastMarker(h, AX) {
+        function pastMarker(h, AX, i) {
             const ax = h.id ? AX[h.id] : null;
             const who = h.by === ME ? 'You' : h.by === OPP ? oppName : 'Fate';
             const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 round sooner' : h.kind === 'rewind' ? who + ': Fate 1 round later'
-                : h.kind === 'scheduled' ? 'Fate reached ' + whoseEvent(h.by) + ' ' + scheduledName(h.def) + ' (spent: it happens only once)'
+                : h.kind === 'scheduled' ? 'Fate reached ' + whoseEvent(h.by) + ' ' + scheduledName(h.def) + (h.fires > 1 ? ' again' : '')
+                    + (h.repeat ? ' (repeatable: it happens each time Fate lands there, until it expires)' : ' (spent: it happens only once)')
+                : h.kind === 'leap' ? who + ': Fate leapt ' + roundsWord(h.spaces) + ' closer. ' + leapWords(h)
+                : h.kind === 'expired' ? whoseEvent(h.by, true) + ' ' + scheduledName(h.def) + ' expired' + (h.boosted ? '. Its boosts ended' : '')
                 : (h.kind === 'flip' ? 'Fate turned over ' : who + ' played ') + (ax ? ax.name : 'a rule');
             const when = h.k === 0 ? 'this round' : roundsWord(-h.k) + ' ago';
-            const detail = 'Already happened · ' + when + '. ' + text + '. '
-                + (h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : h.kind === 'scheduled' ? '' : ax ? ax.text + ' ' : '')
-                + 'See Axioms for what is active now.';
-            const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': detail },
+            const fateOnly = ['scheduled', 'leap', 'expired'].includes(h.kind);
+            const detail = 'Already happened · ' + when + '. ' + text.replace(/\.$/, '') + '. '
+                + (h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : fateOnly ? '' : ax ? ax.text + ' ' : '')
+                + (fateOnly ? '' : 'See Axioms for what is active now.');
+            // Markers of one round sit side by side (a leap, what it landed on, an expiry…), never on top of each other.
+            const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': detail.trim(), style: i ? { marginLeft: (i * 14) + 'px' } : null },
                 [h.kind === 'reset' ? el('span', { text: '↺' }) : h.kind === 'forward' ? el('span', { text: '⏩' }) : h.kind === 'rewind' ? el('span', { text: '⏪' })
-                    : h.kind === 'scheduled' ? el('span', { text: '◎' })
+                    : h.kind === 'scheduled' ? el('span', { text: '◎' }) : h.kind === 'leap' ? el('span', { text: '⏭' }) : h.kind === 'expired' ? el('span', { text: '⌛' })
                     : has('ui/axiom-' + h.id) ? Rift.Assets.img('ui/axiom-' + h.id, { alt: '' }) : el('span', { text: '⚖' })]);
             const make = () => [el('div.b-notes', {}, [el('div.b-note-line', { text: detail })])];
             inspectFateMarker(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || h.ref || ''));
@@ -2068,7 +2119,9 @@
             if (ev.after !== ME) return ' Fate moves after ' + oppName + '\'s turn.';
             if (ev.held) return ' The round ends; the Anchor holds the Fate track.';
             const due = E.fateSchedule(state).filter(x => x.live && x.rounds === 1).map(x => whoseEvent(x.controller) + ' ' + x.name);
-            return ' The round ends: the Fate track moves 1 space' + (due.length ? ' and reaches ' + due.join(' and ') + '.' : '.');
+            const ending = E.fateSchedule(state).filter(x => x.live && x.expiresRound === state.round).map(x => whoseEvent(x.controller) + ' ' + x.name);
+            return ' The round ends: the Fate track moves 1 space' + (due.length ? ' and reaches ' + due.join(' and ') + '.' : '.')
+                + (ending.length ? ' Then ' + ending.join(' and ') + ' expire' + (ending.length === 1 ? 's' : '') + '.' : '');
         }
 
         function button(label, fn, cls, extra) {
@@ -2181,6 +2234,8 @@
                     } else {
                         const arming = E.conditionOf(state, sel.cid) && !state.cards[sel.cid].conditionSpent;
                         ask.textContent = (arming ? 'Arm ' : 'Play ') + name(sel.cid) + ' for ' + cost + ' energy? You have ' + P.energy + '.';
+                        const moves = fateMoveWords(sel.cid);
+                        if (moves) ask.appendChild(el('span.b-ask-how.b-fate-move', { text: ' ' + moves }));
                         const b = button((arming ? 'Arm' : 'Play') + ' · ' + cost + ' ⚡', () => act(playActs[0]), 'primary');
                         nodes.buttons.play = b;
                         buttons.appendChild(b);
@@ -2436,6 +2491,30 @@
             put(dom.choice, el('div.b-choice-title', { text: pend.prompt || 'Choose.' }), opts);
         }
 
+        // For a Fate mover in hand (#120, data/tactics.js fateMove): what it would do now. A leap runs the real
+        // move on a copy (E.fateLeapPreview); a rewind names the events on the space it lands on.
+        function fateMoveWords(cid) {
+            const c = state.cards[cid], move = c && c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).fateMove;
+            if (!move || !E.timeline(state).length) return '';
+            const next = E.timeline(state)[0];
+            if (move.leap) {
+                const pre = E.fateLeapPreview(state, move.leap, ME);
+                if (!pre) return '';
+                const list = ids => ids.map(eventLabel).join(', ');
+                return ['Fate leaps ' + roundsWord(pre.spaces) + (pre.rule ? ' and stops at its ' + (next.type === 'reset' ? 'reset' : 'new rule') + ', which happens now' : '') + '.',
+                    pre.skipped.length ? 'Skipped for good: ' + list(pre.skipped) + '.' : '',
+                    pre.passed.length ? 'Jumped over, still live: ' + list(pre.passed) + '.' : '',
+                    pre.fired.length ? 'It lands on ' + list(pre.fired) + ': it happens now.' : ''].filter(Boolean).join(' ');
+            }
+            const back = Math.min(move.rewind || 0, state.options.fateMax - state.fate.until);
+            if (back <= 0) return '';
+            const there = E.fateSchedule(state).filter(ev => ev.spaces === -back);
+            const again = there.filter(ev => ev.live).map(ev => whoseEvent(ev.controller) + ' ' + ev.name);
+            const OVER = { fired: ' already happened there: it will not happen again', skipped: ' there was skipped: it will not happen', expired: ' there has expired' };
+            const over = there.filter(ev => !ev.live).map(ev => whoseEvent(ev.controller) + ' ' + ev.name + (OVER[ev.state] || ' there is over'));
+            return 'Fate moves ' + roundsWord(back) + ' further away' + (again.length ? ' and lands on ' + again.join(' and ') + ': it happens again.' : '.')
+                + (over.length ? ' ' + upFirst(over.join('. ')) + '.' : '');
+        }
         // "Axioms": one tile per active rule, a picture and a few words. The four core rules always
         // show; a changed rule glows gold and says "Changed". Hover, focus or tap a tile for the card.
         // For a Fate choice (Clockwork, Hold That Thought): what the next event would do after that move.

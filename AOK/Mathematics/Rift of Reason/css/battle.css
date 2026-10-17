@@ -1185,4 +1185,11 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-fev.sched.spent { opacity: 0.55; }
 .b-fev.sched.spent .b-fev-label { text-decoration: line-through; }
 .b-fpast.scheduled { color: var(--rift); }
+/* #120: a repeatable space has a ringed icon; while live behind NOW it stays bright enough to aim a rewind
+   at. Leaps and expiries get their own past markers. No motion: these are still states. */
+.b-fev.sched.repeat .b-fev-icon { outline: 2px dashed currentColor; outline-offset: 1px; }
+.b-fev.sched.behind { opacity: 0.85; }
+.b-fpast.leap { color: var(--rift); }
+.b-fpast.expired { color: #c9b8e8; }
+.b-prompt .b-fate-move, .b-notes .b-fate-move { color: var(--rift); }
 .b-fate-sum .b-fate-sched { color: var(--rift); opacity: 0.95; }

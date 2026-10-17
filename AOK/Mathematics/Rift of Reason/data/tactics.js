@@ -16,10 +16,16 @@
  *                       creature needs to be in play; rarity 'common' | 'uncommon' | 'rare'
  *   scheduled?          a scheduled Fate spell (#118/#119, design/drafts/card-arena-2026-10-12/
  *                       FATE-SCHEDULE-MODEL.md): playing it puts a public event on the Fate track instead
- *                       of acting now. { delay (spaces ahead, ≥ 1), summary (one sentence), repeat?,
+ *                       of acting now. { delay (spaces ahead, ≥ 1), summary (one sentence, or
+ *                       whose => sentence when it names its controller's side: whose is 'your' / "Anna's"),
+ *                       idle? (what its preview says when it would change nothing), repeat?,
  *                       lifetime? (rounds, repeatable only), resolve(api, ev, H) when Fate reaches it,
  *                       expire?(api, ev, H), project?(s, ev, H) a rough after-state for the AI only }.
  *                       Not offered without a Fate track or while its player has 2 events waiting.
+ *                       A repeatable event's api.buff boosts end when it expires (#120).
+ *   fateMove?           { leap: n } or { rewind: n }: how far it moves Fate, for the screen's preview (#120)
+ *   pack?               'fate': the later Fate card pack (#119/#120: Clean Slate, Leap Ahead, Revisit,
+ *                       Echoing Encouragement). Bench and tests only until its release is decided.
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
  */
 (function (root) {
@@ -413,6 +419,7 @@
         scheduled: {
             delay: 2,
             summary: 'Every creature in play is defeated.',
+            idle: 'no creature is in play, so nothing is defeated.',
             // Whoever is in play when it resolves (not when it was cast): its controller's side first, left
             // to right, then the other side, so the order never depends on whose turn it is (the preview
             // matches). Normal defeats: Mercy and Last Words still apply.
@@ -436,6 +443,59 @@
         },
         run() { /* the engine schedules it: see scheduled */ },
     };
+    // The rest of the later Fate pack (#120, FATE-SCHEDULE-MODEL.md): a leap, a rewind and the first marked
+    // repeatable space. Bench and tests only, like Clean Slate (dev/battle.html?fate=leap|echo). No rarity
+    // yet: the drafts give none, and it belongs with the pack's release.
+    tactics['leap-ahead'] = {
+        short: 'Fate leaps 2 rounds; spells between are skipped',
+        name: 'Leap Ahead', cost: 2, art: 'art/spell-motif-generic',
+        text: 'Fate leaps 2 rounds closer. Spells it leaps over never happen. It stops at a new rule or reset.',
+        flavour: 'Skip to the last page. Hope nothing important was in the middle.',
+        fateMove: { leap: 2 },
+        usable: s => !!s.options.timeline,
+        run(api, p) { api.leapFate(2, p); },
+    };
+    tactics.revisit = {
+        short: 'Fate 1 round back; a repeatable space repeats',
+        name: 'Revisit', cost: 2, colour: 'memory', art: 'art/spell-motif-memory',
+        text: 'Fate moves 1 round further away. A repeatable space it lands on happens again. One-shot spells don\'t.',
+        flavour: 'Read it again. Some lines get better the second time.',
+        fateMove: { rewind: 1 },
+        // A rewind keeps the next rule event within fateMax: at the cap it would do nothing.
+        usable: s => !!s.options.timeline && s.fate.until < s.options.fateMax,
+        run(api) {
+            api.emit({ t: 'tactic', text: 'Revisit: Fate moves 1 round further away.' });
+            api.shiftFate(-1);
+        },
+    };
+    tactics['echoing-encouragement'] = {
+        short: 'Repeatable space: your creatures +1/+1',
+        name: 'Echoing Encouragement', cost: 3, colour: 'memory', art: 'art/spell-motif-memory',
+        text: 'A repeatable space 1 round ahead. Each time Fate lands on it, your creatures get +1/+1, for 3 rounds only.',
+        flavour: 'Say it once. They hear it again and again.',
+        scheduled: {
+            delay: 1, repeat: true, lifetime: 3,
+            summary: whose => whose + ' creatures get +1/+1 until it expires.',
+            idle: 'there is no creature to boost.',
+            // Its controller's creatures in play at each entry, left to right. The engine tags these boosts
+            // with the event, so they all end when it expires (rewinding never makes it last longer).
+            resolve(api, ev) {
+                const board = api.s.players[ev.controller].board.slice();
+                if (!board.length) { api.emit({ t: 'tactic', text: 'Echoing Encouragement: there is no creature to boost.' }); return; }
+                board.forEach(cid => api.buff(cid, 1, 1, 'Echoing Encouragement'));
+            },
+            // For the AI's look-ahead only: one more +1/+1 on its controller's creatures.
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    cards[cid] = Object.assign({}, cards[cid], { buffs: cards[cid].buffs.concat([{ label: 'Echoing Encouragement', attack: 1, health: 1, temp: false, fate: ev.id }]) });
+                });
+                return Object.assign({}, s, { cards });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement'].forEach(id => { tactics[id].pack = 'fate'; });
     const SEEN = ['guard', 'elusive', 'shield'];
     function cap(k) { return k[0].toUpperCase() + k.slice(1); }
     // Remember When brings back any other tactic, but not another Remember When (no loops).

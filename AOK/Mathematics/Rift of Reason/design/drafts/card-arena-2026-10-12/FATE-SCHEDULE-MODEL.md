@@ -134,4 +134,14 @@ Clean Slate is defined in `data/tactics.js`, but no grant list, starter, deck or
 
 Leaps, bypass, required sources, repeatable content and environmental sources are data-ready but have no card yet. They belong to #120, #121 and #128.
 
+## 8. What #120 implements now
+
+#120 adds the three cards of the worked example that were still missing, with the rules above unchanged:
+
+- **Leap Ahead** (generic, 2): `leapFate` moves the cursor 2 spaces and enters only the landing space. Live one-shots on the spaces in between become `skipped` (reason `leap`) for good; live repeatable spaces in between are passed, not entered. A leap that would cross the rule node lands on it: scheduled events there resolve first, then the rule event. Events: `fate-leap` { player, from, to, spaces, skipped, passed }, then one public `fate-skip` per skipped event.
+- **Revisit** (Memory, 2): an ordinary 1-space rewind. Landing on a live repeatable space fires it again; a fired, skipped or expired record there does nothing. Not offered when the rule node is already `fateMax` away (it would do nothing).
+- **Echoing Encouragement** (Memory, 3): the first marked repeatable space, 1 space ahead, lifetime 3. Each entry gives its controller's creatures in play +1/+1. The engine tags those boosts with the record (`buff.fate`), and they all end when it expires, on whichever side the creature now is; health that needed them can be lost. Control changes never move the event.
+
+The three are in the `fate` pack with Clean Slate (`pack: 'fate'` in `data/tactics.js`): no grant list names them, and they have no rarity until the pack's release is decided. Bench: `dev/battle.html?fate=leap|echo|once`. Engine API added: `fateLeapPreview` (a leap run on a copy, like `fateEventPreview`, which now also reports `boosted`). The screen says what a leap or rewind in hand would do now (prompt and inspection), reveals a leap with what it skipped, keeps a live repeatable space visible behind NOW, and marks leaps and expiries on the reel. The worked example in section 6 runs move by move in `tools/test/battle-fate-reentry.test.mjs`, with a test-only one-shot summon in place of Tomorrow's Idea (#121 owns that card and tokens).
+
 Known limitation (existing, not new): a conditional reaction that asks a question while the next turn's draw step is open would skip that draw. No released card does this. It needs fixing before a conditional reveal with a targeted Entrance ships.
