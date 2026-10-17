@@ -1,0 +1,106 @@
+{
+  "textModelRequests": 10,
+  "successfulRequests": 7,
+  "failedRequests": [
+    {
+      "reason": "HTTP 503",
+      "checked": 0
+    },
+    {
+      "reason": "120-second timeout",
+      "checked": 0
+    },
+    {
+      "reason": "empty transcription payload",
+      "checked": 0
+    }
+  ],
+  "transcriptResultsIncludingRechecks": 48,
+  "uniqueGeneratedClipsTranscribed": 41,
+  "retainedCurrentHashesTranscribed": 36,
+  "exactNormalizedMatches": 28,
+  "reviewedTranscriptionVariants": [
+    {
+      "id": "granny-1flkc98",
+      "expected": "So: two puzzle stall wins, and a win against Syllo. Any order. I wrote it in your Journal.",
+      "heard": "So, two puzzle stall wins, and a win against Scillo, any order. I wrote it in your journal.",
+      "ok": false,
+      "version": 1,
+      "hash": "5b1c0b31e107f812824852f539649900126746d47f695a01c2277bbafa814ac6",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "granny-1hepc8j",
+      "expected": "Win my card lesson first, dear. Syllo won't play you without it.",
+      "heard": "Win my card lesson first, dear. Scillo won't play you without it.",
+      "ok": false,
+      "version": 1,
+      "hash": "20c9eda692dbd4285ce45cab00f0358114455b1fbc921eb19692c070effa203e",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "granny-bflfju",
+      "expected": "One more thing. Not a stall. Syllo's practice card match. Here at my gate, not his Gallery.",
+      "heard": "One more thing, not a stall, Psyllos practice card match here at my gate, not his gallery.",
+      "ok": false,
+      "version": 1,
+      "hash": "fbe77bd6673864fe8dc67689f3072c4af102e3dbf37aaed67b4f63f23a2116e0",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "granny-fulyop",
+      "expected": "Three puzzle stalls are open. Sequins' Pattern Stall. Mirage's Witness Tent. Syllo's Gallery.",
+      "heard": "Three puzzle stalls are open. Sequins pattern stall, Mirage's witness tent, Psyllos gallery.",
+      "ok": false,
+      "version": 1,
+      "hash": "b41c4fa9e27fad4814a1e6bab972893d5886c962433aaf48b8a8f573384fe375",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "granny-wxp9g7",
+      "expected": "Ninety years, and I've never met that thinker.",
+      "heard": "90 years and I've never met that thinker.",
+      "ok": false,
+      "version": 1,
+      "hash": "07ed91cab3dbe688f20141122e033640cc9a470d3ffee55563c93c7488634805",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "muskrat-1pz5bkz",
+      "expected": "Three metres! A personal best!…Can somebody open the hatch?",
+      "heard": "3 m, a personal best. Can somebody open the hatch?",
+      "ok": false,
+      "version": 1,
+      "hash": "e9b905cd0cad5240720f55eafa3b58a393e74daeaabcd46ff0750106b71f73b1",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    },
+    {
+      "id": "muskrat-7b4o5s",
+      "expected": "One of them is lying! I don't know which! Isn't this exciting?",
+      "heard": "One of them is lying. I I don't know which. Isn't this exciting?",
+      "ok": false,
+      "version": 1,
+      "hash": "3b87a45079c1a985f17c2b1f0472a9e1334a2a2e06983f661a275db70bf44072",
+      "disposition": "Retain: harmless acted I/I hesitation; no missing clause."
+    },
+    {
+      "id": "muskrat-qmf6a6",
+      "expected": "Engines warm! Seat belt on! Wait. Is this the seat belt?",
+      "heard": "Engine's warm, seatbelt on. Wait, is this the seatbelt?",
+      "ok": false,
+      "version": 1,
+      "hash": "79fcdbc4802d4d9a12f8d3ffeaa8ae75e573e1b9a13071049f6dfe8325f94d8c",
+      "disposition": "Retain: proper-name, number, apostrophe or word-spacing transcription variant; no displaced clause identified."
+    }
+  ],
+  "reassembledClipPendingFreshTranscript": "pip-possessed-31fm8w",
+  "reassembledClipNotes": "Uses My headphones are so quiet from the original pip-possessed-12k5qqv tail and Only the stamp now from the original pip-possessed-31fm8w opening. Both fragments are present in their original unprimed transcripts. Final concatenation has not been independently transcribed.",
+  "unreviewedCurrentClips": 86,
+  "limits": "Automated transcript samples do not certify all word boundaries, acting or cast consistency. Four suspect clips quarantined; broader spoken-word acceptance remains pending.",
+  "fullTests": {
+    "tests": 1039,
+    "pass": 1038,
+    "fail": 0,
+    "skipped": 1
+  }
+}

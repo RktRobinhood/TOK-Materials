@@ -1,0 +1,65 @@
+Text-model request 1: granny-11tpczb, granny-4rwefj, granny-wkpmsl, granny-fulyop, granny-hogig2, granny-1ta77ul, granny-bflfju, granny-1582d9m
+{"id":"granny-11tpczb","expected":"First, cards with me. A short lesson. Then tea, and I'll tell you the plan.","heard":"First, cards with me, a short lesson, then tea, and I'll tell you the plan.","ok":true}
+{"id":"granny-4rwefj","expected":"Tea's poured. Now, your Fair day. One thing at a time, dear. My knees insist.","heard":"Tea's poured. Now, your fair day. One thing at a time, dear. My knees insist.","ok":true}
+{"id":"granny-wkpmsl","expected":"Don't look at that hair on the sky. I'll deal with it. Look at me.","heard":"Don't look at that hair on the sky. I'll deal with it. Look at me.","ok":true}
+{"id":"granny-fulyop","expected":"Three puzzle stalls are open. Sequins' Pattern Stall. Mirage's Witness Tent. Syllo's Gallery.","heard":"Three puzzle stalls are open. Sequins pattern stall, Mirage's witness tent, Psyllos gallery.","ok":false}
+{"id":"granny-hogig2","expected":"You choose. Win at any two puzzle stalls.","heard":"You choose. Win at any two puzzle stalls.","ok":true}
+{"id":"granny-1ta77ul","expected":"Two is plenty, dear. Play the third for fun, if you like.","heard":"Two is plenty, dear. Play the third for fun if you like.","ok":true}
+{"id":"granny-bflfju","expected":"One more thing. Not a stall. Syllo's practice card match. Here at my gate, not his Gallery.","heard":"One more thing, not a stall, Psyllos practice card match here at my gate, not his gallery.","ok":false}
+{"id":"granny-1582d9m","expected":"It's only practice, but you must win it. No win, no final.","heard":"It's only practice, but you must win it. No win, no final.","ok":true}
+Text-model request 2: granny-1c91tu8, granny-1hepc8j, granny-1flkc98, granny-ec93qw, granny-wxp9g7, granny-v9fk8w, pip-possessed-1xj5be4, pip-possessed-1k92lse
+{"id":"granny-1c91tu8","expected":"He shouts. It's how he says hello. You borrow a team, so you risk nothing.","heard":"He shouts. It's how he says hello. You borrow a team, so you risk nothing.","ok":true}
+{"id":"granny-1hepc8j","expected":"Win my card lesson first, dear. Syllo won't play you without it.","heard":"Win my card lesson first, dear. Scillo won't play you without it.","ok":false}
+{"id":"granny-1flkc98","expected":"So: two puzzle stall wins, and a win against Syllo. Any order. I wrote it in your Journal.","heard":"So, two puzzle stall wins, and a win against Scillo, any order. I wrote it in your journal.","ok":false}
+{"id":"granny-ec93qw","expected":"Then the final opens at the Nut Stall. The winner gets the Thinking Trophy. And a sack of nuts.","heard":"Then the final opens at the nut stall. The winner gets the thinking trophy, and a sack of nuts.","ok":true}
+{"id":"granny-wxp9g7","expected":"Ninety years, and I've never met that thinker.","heard":"90 years and I've never met that thinker.","ok":false}
+{"id":"granny-v9fk8w","expected":"The trophy is for you. The nuts are for me. Off you go.","heard":"The trophy is for you. The nuts are for me. Off you go.","ok":true}
+{"id":"pip-possessed-1xj5be4","expected":"Can't. It's so tidy.","heard":"Can't. It's so tiny.","ok":false}
+{"id":"pip-possessed-1k92lse","expected":"One stamp.…That one's wrong. I stamped it wrong.","heard":"One stamp. That one's wrong. I stamped it wrong.","ok":true}
+Text-model request 3: pip-possessed-8s2yof, pip-possessed-14rnf4q, muskrat-10dkibv, muskrat-qmf6a6, muskrat-6jsan4, muskrat-1rbnlog, muskrat-7b4o5s, muskrat-e5po11
+{"id":"pip-possessed-8s2yof","expected":"Not mine?…It's very cold. Mine was warmer.","heard":"not mine it's very cold mine was warmer","ok":true}
+{"id":"pip-possessed-14rnf4q","expected":"Best chapter.…I'd have to check it first.","heard":"best chapter. I'd have to check it first,","ok":true}
+{"id":"muskrat-10dkibv","expected":"T-minus… some! Lots! Fewer than before!","heard":"T minus some lots.","ok":false}
+{"id":"muskrat-qmf6a6","expected":"Engines warm! Seat belt on! Wait. Is this the seat belt?","heard":"Fewer than before. Engines warm. Seatbelt on.","ok":false}
+{"id":"muskrat-6jsan4","expected":"Mars! Today! Not next year! Today!…Is it always this loud in here?","heard":"Wait, is this the seatbelt? Mars. Today. Not next year, today.","ok":false}
+{"id":"muskrat-1rbnlog","expected":"My crew knows the abort switch. One of them always lies. It's in the contract.","heard":"Is it always this loud in here? My crew knows the abort switch. One of them always lies. It's in the contract.","ok":false}
+{"id":"muskrat-7b4o5s","expected":"One of them is lying! I don't know which! Isn't this exciting?","heard":"One of them is lying. I I don't know which. Isn't this exciting?","ok":false}
+{"id":"muskrat-e5po11","expected":"Check? Like… engineering? I used to love engineering.","heard":"Check. Like engineering? I used to love engineering.","ok":true}
+Text-model request 4: muskrat-1kgm7kx, muskrat-1umii11, muskrat-1m8rvp4, muskrat-1pz5bkz, muskrat-1sa1jby, muskrat-yrun4p, muskrat-1aywz2s, muskrat-14han12
+{"id":"muskrat-1kgm7kx","expected":"Pick a switch! Any switch! Not that one! Or that one! Maybe that one!","heard":"Pick a switch. Any switch. Not that one, or that one. Maybe that one.","ok":true}
+{"id":"muskrat-1umii11","expected":"That doesn't decide anything! Still two worlds! I can feel the engines!","heard":"That doesn't decide anything. Still two worlds. I can feel the engines.","ok":true}
+{"id":"muskrat-1m8rvp4","expected":"Mars. Next year. I feel good about it.","heard":"Mars next year. I feel good about it.","ok":true}
+{"id":"muskrat-1pz5bkz","expected":"Three metres! A personal best!…Can somebody open the hatch?","heard":"3 m, a personal best. Can somebody open the hatch?","ok":false}
+{"id":"muskrat-1sa1jby","expected":"I didn't want to go today. I just couldn't say \"next year\" again.","heard":"I didn't want to go today. I just couldn't say next year again.","ok":true}
+{"id":"muskrat-yrun4p","expected":"Next year. Definitely. Probably.","heard":"next year. Definitely.","ok":false}
+{"id":"muskrat-1aywz2s","expected":"Click creatures to load the boat, then Row across. An unsafe crossing counts as a wrong check.","heard":"creatures to load the boat. Then row across. An unsafe crossing counts as a wrong check.","ok":false}
+{"id":"muskrat-14han12","expected":"Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.","heard":"a few out of  the hint button, shows its heart cost. Think first, then check your answer.","ok":false}
+4 text-model requests; 32 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: pip-possessed-2v7h4s, pip-possessed-x18avg, pip-possessed-ldtjca, pip-possessed-qbiudg, pip-possessed-mlhg3z, pip-possessed-w9p20g, pip-possessed-12k5qqv, pip-possessed-31fm8w
+{"id":"pip-possessed-2v7h4s","expected":"The cocoa. Yes. It did. I checked.","heard":"The cocoa. Yes, it did. I checked.","ok":true}
+{"id":"pip-possessed-x18avg","expected":"No need to… check.…That's a terrible sentence.","heard":"No need to check. That's a terrible sentence.","ok":true}
+{"id":"pip-possessed-ldtjca","expected":"STAMPED. SORTED. 100%. No need to check.","heard":"Stamped, sorted, 100%, no need to check.","ok":true}
+{"id":"pip-possessed-qbiudg","expected":"YES. NO. YES. Don't look at the no pile.…Please look at the no pile.","heard":"Yes. No. Yes. Don't look at the no pile. Please, look at the no pile.","ok":true}
+{"id":"pip-possessed-mlhg3z","expected":"It's so… quiet in here. Everything's certain.","heard":"It's so quiet in here. Everything's certain.","ok":true}
+{"id":"pip-possessed-w9p20g","expected":"Don't make me check. Checking is loud.","heard":"Don't make me check. Checking is loud. Who was that?","ok":false}
+{"id":"pip-possessed-12k5qqv","expected":"Who was that? I stamped them. I don't remember who.","heard":"I stamped them. I don't remember who. My headphones are so quiet.","ok":false}
+{"id":"pip-possessed-31fm8w","expected":"My headphones are so quiet. Only the stamp now.","heard":"Only the stamp now. My headphones are so quiet. Only the stamp now.","ok":false}
+Text-model request 2: pip-possessed-11utcll, zuckerborg-1ohzhq8, zuckerborg-1c6hqwk, zuckerborg-7x7t04, zuckerborg-buumhd, zuckerborg-nx78xm, zuckerborg-1u270rv, zuckerborg-1rbtox7
+HTTP 503; stopping. No clips in this request are counted as checked.
+2 text-model requests; 8 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: muskrat-10dkibv, muskrat-qmf6a6, muskrat-6jsan4, muskrat-1rbnlog
+{"id":"muskrat-10dkibv","expected":"T-minus… some! Lots! Fewer than before!","heard":"T-minus some lots. Fewer than before.","ok":true}
+{"id":"muskrat-qmf6a6","expected":"Engines warm! Seat belt on! Wait. Is this the seat belt?","heard":"Engine's warm, seatbelt on. Wait, is this the seatbelt?","ok":false}
+{"id":"muskrat-6jsan4","expected":"Mars! Today! Not next year! Today!…Is it always this loud in here?","heard":"Mars, today, not next year, today. Is it always this loud in here?","ok":true}
+{"id":"muskrat-1rbnlog","expected":"My crew knows the abort switch. One of them always lies. It's in the contract.","heard":"My crew knows the abort switch. One of them always lies, it's in the contract.","ok":true}
+1 text-model requests; 4 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: pip-possessed-w9p20g, pip-possessed-12k5qqv, pip-possessed-31fm8w, pip-possessed-11utcll
+{"id":"pip-possessed-w9p20g","expected":"Don't make me check. Checking is loud.","heard":"Don't make me check. Checking is loud.","ok":true}
+{"id":"pip-possessed-12k5qqv","expected":"Who was that? I stamped them. I don't remember who.","heard":"Who was that? I stamped them. I don't remember who.","ok":true}
+{"id":"pip-possessed-31fm8w","expected":"My headphones are so quiet. Only the stamp now.","heard":"My headphones are so quiet, only the static now.","ok":false}
+{"id":"pip-possessed-11utcll","expected":"… I can't find my own name. Is it on the list?","heard":"I can't find my own name. Is it on the list?","ok":true}
+1 text-model requests; 4 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: muskrat-qmf6a6, muskrat-7b4o5s, muskrat-1pz5bkz, muskrat-yrun4p, muskrat-1aywz2s, muskrat-14han12
+The preceding six-clip Muskrat recheck timed out after 120 seconds; zero additional clips verified.
+Text-model request 1: avatar-owlet-boy-npxd6a, pip-possessed-31fm8w, zuckerborg-1ohzhq8, zuckerborg-1c6hqwk, eminemu-gwcmvv, zuckerborg-7x7t04, eminemu-trjqa, zuckerborg-buumhd
+The preceding eight-clip request returned an empty transcription payload; parsing failed and zero clips were counted as checked. Stopping cloud checks after 10 total text-model requests (7 successful requests, one HTTP 503, one timeout, one empty result).

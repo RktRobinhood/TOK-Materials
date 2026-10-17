@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pip-possessed-1xj5be4",
+    "reason": "Transcript says tiny instead of tidy; awaiting a reliable independent recheck.",
+    "backup": "D:/Claude/work/tmp/voice-pass-2026-10-17/quarantine/pip-possessed-1xj5be4.mp3",
+    "sha256": "a97d6103436e91360abfbf6d6ff773e3c6ce5061cf1082c0e92adbd9805c2487"
+  },
+  {
+    "id": "muskrat-yrun4p",
+    "reason": "Final Probably is missing from the unprimed transcript.",
+    "backup": "D:/Claude/work/tmp/voice-pass-2026-10-17/quarantine/muskrat-yrun4p.mp3",
+    "sha256": "266488244496ff1851229c7b60b7a8e495d6e6d37f071562fc71132fcf766f1a"
+  },
+  {
+    "id": "muskrat-1aywz2s",
+    "reason": "Initial Click is missing from the unprimed transcript.",
+    "backup": "D:/Claude/work/tmp/voice-pass-2026-10-17/quarantine/muskrat-1aywz2s.mp3",
+    "sha256": "0bac1e06f389ac165ce7a565ee79e7063b3f6514443dfb398422133ae931199f"
+  },
+  {
+    "id": "muskrat-14han12",
+    "reason": "Opening Undo and Reset / How to play instructions were not transcribed intelligibly.",
+    "backup": "D:/Claude/work/tmp/voice-pass-2026-10-17/quarantine/muskrat-14han12.mp3",
+    "sha256": "d4a70b6a96ca24f8afe810bdcacfe7b04979a7a2cd9a9ffe607351e35dbe2589"
+  }
+]

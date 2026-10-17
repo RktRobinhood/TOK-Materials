@@ -1,0 +1,103 @@
+
+--render --only granny 2026-10-17T08:06:06.904Z
+14 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.06.51 flash granny: saved 14 lines (total 14)
+FINISHED: 14 lines saved, 1 requests used. Manifest lists 2743 files.
+exit 0
+
+--render --only muskrat 2026-10-17T08:07:12.122Z
+14 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.07.46 lite  muskrat: saved 14 lines (total 14)
+FINISHED: 14 lines saved, 1 requests used. Manifest lists 2757 files.
+exit 0
+
+--render --only pip-possessed 2026-10-17T08:08:07.375Z
+13 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.08.36 lite  pip-possessed: saved 13 lines (total 13)
+FINISHED: 13 lines saved, 1 requests used. Manifest lists 2770 files.
+exit 0
+
+--render --only zuckerborg 2026-10-17T08:08:57.148Z
+12 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.09.15 lite  zuckerborg: saved 12 lines (total 12)
+FINISHED: 12 lines saved, 1 requests used. Manifest lists 2782 files.
+exit 0
+
+--render --only lovelace 2026-10-17T08:09:37.078Z
+12 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.09.51 lite  lovelace: saved 12 lines (total 12)
+FINISHED: 12 lines saved, 1 requests used. Manifest lists 2794 files.
+exit 0
+
+--render --only eminemu 2026-10-17T08:10:12.704Z
+12 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.10.32 lite  eminemu: saved 12 lines (total 12)
+FINISHED: 12 lines saved, 1 requests used. Manifest lists 2806 files.
+exit 0
+
+--render --only messilion 2026-10-17T08:10:53.127Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.11.02 lite  messilion: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2815 files.
+exit 0
+
+--render --only shakirattle 2026-10-17T08:11:23.445Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.11.34 lite  shakirattle: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2824 files.
+exit 0
+
+--render --only euclidon 2026-10-17T08:11:55.104Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.12.08 lite  euclidon: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2833 files.
+exit 0
+
+--render --only godelix 2026-10-17T08:12:29.985Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.12.43 lite  godelix: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2842 files.
+exit 0
+
+--render --only rockodile 2026-10-17T08:13:04.845Z
+8 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.13.14 lite  rockodile: saved 8 lines (total 8)
+FINISHED: 8 lines saved, 1 requests used. Manifest lists 2850 files.
+exit 0
+
+--render --only avatar-owlet-boy 2026-10-17T08:13:35.941Z
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.13.41 flash avatar-owlet-boy: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2851 files.
+exit 0
+
+--render --only avatar-mothkin-girl 2026-10-17T08:14:02.696Z
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.14.08 flash avatar-mothkin-girl: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2852 files.
+exit 0
+
+--render --only avatar-fox-boy 2026-10-17T08:14:29.696Z
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.14.35 flash avatar-fox-boy: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2853 files.
+exit 0
+
+--render --only avatar-frogling-girl 2026-10-17T08:14:56.282Z
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.15.00 flash avatar-frogling-girl: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2854 files.
+exit 0
+
+--render --only avatar-raven-boy 2026-10-17T08:15:22.037Z
+1 lines to render in 1 requests on gemini-3.8-flash-tts.
+10.15.28 flash avatar-raven-boy: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 2851 files.
+exit 0
+Final ledger: {
+  "day": "2026-10-17",
+  "counts": {
+    "gemini-3.8-flash-tts": 6,
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}

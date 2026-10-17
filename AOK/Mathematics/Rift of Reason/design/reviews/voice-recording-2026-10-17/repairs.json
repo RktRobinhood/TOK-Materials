@@ -1,0 +1,108 @@
+{
+  "method": "Reassemble already generated PCM at measured silence midpoints, then encode MP3. Existing FX preserved. No TTS requests.",
+  "backup": "D:/Claude/work/tmp/voice-pass-2026-10-17/original-clips",
+  "repairs": [
+    {
+      "id": "muskrat-10dkibv",
+      "parts": [
+        {
+          "source": "muskrat-10dkibv",
+          "start": 0,
+          "end": null
+        },
+        {
+          "source": "muskrat-qmf6a6",
+          "start": 0,
+          "end": 1.57
+        }
+      ],
+      "sha256": "9ee9f4fcd4e0efd1a0e32cedf41344a9f11a349e432a51fafc44884e773bfc57"
+    },
+    {
+      "id": "muskrat-qmf6a6",
+      "parts": [
+        {
+          "source": "muskrat-qmf6a6",
+          "start": 1.57,
+          "end": null
+        },
+        {
+          "source": "muskrat-6jsan4",
+          "start": 0,
+          "end": 1.66
+        }
+      ],
+      "sha256": "79fcdbc4802d4d9a12f8d3ffeaa8ae75e573e1b9a13071049f6dfe8325f94d8c"
+    },
+    {
+      "id": "muskrat-6jsan4",
+      "parts": [
+        {
+          "source": "muskrat-6jsan4",
+          "start": 1.66,
+          "end": null
+        },
+        {
+          "source": "muskrat-1rbnlog",
+          "start": 0,
+          "end": 1.92
+        }
+      ],
+      "sha256": "11e1692d179ca848b7b98588a5031e10b1526b94d7ab649a67d9d3c2223f7fe4"
+    },
+    {
+      "id": "muskrat-1rbnlog",
+      "parts": [
+        {
+          "source": "muskrat-1rbnlog",
+          "start": 1.92,
+          "end": null
+        }
+      ],
+      "sha256": "676f9382aabb034d0b5f734b08cf59ba18eb9829316806c3f6e67ff2d957b639"
+    },
+    {
+      "id": "pip-possessed-w9p20g",
+      "parts": [
+        {
+          "source": "pip-possessed-w9p20g",
+          "start": 0,
+          "end": 5.29
+        }
+      ],
+      "sha256": "6cab0776363204f63c8dbc8960d045bd69aadbca372c47618087e549e4c90fb4"
+    },
+    {
+      "id": "pip-possessed-12k5qqv",
+      "parts": [
+        {
+          "source": "pip-possessed-w9p20g",
+          "start": 5.29,
+          "end": null
+        },
+        {
+          "source": "pip-possessed-12k5qqv",
+          "start": 0,
+          "end": 4.49
+        }
+      ],
+      "sha256": "40ade93eef9bfc338b48b3a57964292adb84d140fda5d7467595176ff71d3e8c"
+    },
+    {
+      "id": "pip-possessed-31fm8w",
+      "parts": [
+        {
+          "source": "pip-possessed-12k5qqv",
+          "start": 4.49,
+          "end": null
+        },
+        {
+          "source": "pip-possessed-31fm8w",
+          "start": 0,
+          "end": 2.17
+        }
+      ],
+      "sha256": "c6a28feefc735257f670d9d873113daf364a789e7a37fe3fb422d26cf03cafd6"
+    }
+  ]
+}
