@@ -97,6 +97,8 @@ Tokens are generated battle objects, not collectible copies and not part of cons
 
 #119 (14 October 2026) implements Clean Slate as specified, with a public reel node, a live "if it resolved now" preview, real resolution, a spent marker and AI awareness. It is defined in data/tactics.js but no grant list names it, so it is playable only on the battle bench (dev/battle.html?fate=you-cast) and in tests until its release, tutorial and art are decided (ART-REQUESTS 13.78).
 
+#120 (17 October 2026) implements Leap Ahead, Revisit and Echoing Encouragement with the costs above (FATE-SCHEDULE-MODEL.md section 8). Like Clean Slate they are bench and test only (dev/battle.html?fate=leap|echo|once), with no rarity until the pack is released; art is ART-REQUESTS 13.87.
+
 ## Axiom expansion drafts
 
 Existing #101 owns common +/-1 and +/-2 modifiers and rarer Unlimited; do not duplicate that work. Add its attack, maximum-health and cost modifiers as later earnable rule families, never silently convert the starting default ten. Prototype the following separate temporal families after scheduling works:

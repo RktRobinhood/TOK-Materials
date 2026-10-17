@@ -1,6 +1,7 @@
-/* #119 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now).
- * Clean Slate, the first scheduled Fate spell, on the real battle screen and engine. No save writes.
- * Clean Slate is defined in data/tactics.js but no grant list names it: students can't obtain it yet.
+/* #119/#120 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now, leap, echo, once).
+ * The later Fate pack on the real battle screen and engine: Clean Slate (#119), and Leap Ahead, Revisit and
+ * Echoing Encouragement (#120). No save writes. The pack is defined in data/tactics.js but no grant list names
+ * it: students can't obtain it yet.
  */
 (function (root) {
     'use strict';
@@ -12,15 +13,18 @@
         mercy: 'Mercy is active. Play Clean Slate and inspect its node: every creature would return to its owner\'s hand. The preview always uses the rules in force.',
         'rival-casts': 'The rival is behind on the board and holds Clean Slate. Take your turn and end it: watch the rival schedule the wipe, then react (Nostalgia delays it 2 rounds; Clockwork moves it 1 round).',
         'due-now': 'Your Clean Slate resolves at the end of this round. Clockwork can move Fate (and the wipe) 1 round later, or 1 round sooner, which resolves it at once.',
+        leap: 'The rival\'s Clean Slate wipes the board at the end of this round. Select Leap Ahead: the bar says what it skips. Play it: Fate leaps 2 rounds and the wipe never happens. Inspect the ⏭ marker. Revisit or Clockwork back brings Fate back over its space: still nothing.',
+        echo: 'Your Echoing Encouragement fired at the end of round 1 and is still live, 1 round behind NOW. Play Revisit: Fate lands on it again and your creatures get +1/+1 again. Its node says when it expires: End turn, and its boosts end. Moving Fate back further never makes it last longer.',
+        once: 'Your Clean Slate already happened, 1 round behind NOW. Play Revisit: Fate lands on its space, and nothing happens. A one-shot spell never happens twice.',
     };
     let selected = CASES[q.get('fate')] ? q.get('fate') : 'you-cast';
     const scratch = R.State.freshState();
     R.State.get = () => scratch; R.State.update = fn => fn(scratch); R.State.save = () => {}; R.State.saveNow = () => true;
     const note = el('p', { id: 'fate-note' });
-    const select = el('select', { 'aria-label': 'Clean Slate case', onchange(ev) {
+    const select = el('select', { 'aria-label': 'Fate pack case', onchange(ev) {
         selected = ev.target.value; q.set('fate', selected); root.history.replaceState(null, '', root.location.pathname + '?' + q.toString()); start();
     } }, Object.keys(CASES).map(id => el('option', { value: id, selected: id === selected, text: id })));
-    root.document.querySelector('.bench header').replaceChildren(el('strong', { text: 'Clean Slate · scratch battle, no saves' }), select,
+    root.document.querySelector('.bench header').replaceChildren(el('strong', { text: 'Fate pack · scratch battle, no saves' }), select,
         el('button.btn.small', { text: 'Reset case', onclick: () => start() }),
         el('label', {}, [el('input', { type: 'checkbox', onchange(ev) { root.document.body.classList.toggle('calm-motion', ev.target.checked); } }), ' Calm motion']));
     root.document.getElementById('screen').before(note);
@@ -29,11 +33,12 @@
     function start() {
         note.textContent = CASES[selected];
         const rival = selected === 'rival-casts';
+        const MINE = { leap: ['leap-ahead', 'revisit', 'clockwork'], echo: ['echoing-encouragement', 'revisit', 'clockwork'], once: ['clean-slate', 'revisit', 'clockwork'] };
         const mine = ['zuckerborg', 'kardashiant', 'lobstorian', 'astrophysicat', 'keanu', 'tremendoodle'];
         const theirs = ['siuuugull', 'beastie', 'astrophysicat', 'lobstorian', 'tremendoodle', 'kardashiant'];
         let s = E.createBattle({ seed: 'fate-bench-' + selected,
-            players: [{ name: 'You', team: mine.map((x, i) => inst(x, i, 0)), tactics: rival ? ['nostalgia', 'clockwork'] : ['clean-slate', 'clockwork'] },
-                { name: 'Practice rival', team: theirs.map((x, i) => inst(x, i, 1)), tactics: rival ? ['clean-slate'] : ['second-wind'] }],
+            players: [{ name: 'You', team: mine.map((x, i) => inst(x, i, 0)), tactics: MINE[selected] || (rival ? ['nostalgia', 'clockwork'] : ['clean-slate', 'clockwork']) },
+                { name: 'Practice rival', team: theirs.map((x, i) => inst(x, i, 1)), tactics: rival || selected === 'leap' ? ['clean-slate'] : ['second-wind'] }],
             axiomDeck: ['luxury', 'abundance', 'haste', 'thrift'],
             options: { first: 0, shuffle: false, shuffleAxioms: false, openHand: [0, 0], openAxioms: 0, spark: false, timeline: true, fateStart: 3, mode: 'practice' } });
         const move = (cid, p, zone) => {
@@ -50,6 +55,7 @@
             move('p0t0', 0, 'hand'); move('p0t1', 0, 'hand'); move('p0c2', 0, 'hand');
             move('p1c3', 1, 'hand');
         }
+        if (MINE[selected]) move('p0t2', 0, 'hand');
         if (selected === 'mercy') s.axioms.active = { defeat: 'mercy' };
         // Plenty of hearts, so the case always reaches the wipe (hero damage is not what this bench shows).
         s.players.forEach(P => { P.energy = 10; P.capacity = 10; P.hearts = P.maxHearts = 30; });
@@ -62,6 +68,23 @@
             s = E.applyAction(s, { type: 'end', player: 1 });
             s = E.applyAction(s, { type: 'draw', player: 0, choice: E.legalActions(s).find(a => a.type === 'draw').choice });
             s.players.forEach(P => { P.energy = 10; P.capacity = 10; });
+        }
+        // #120 cases, built with real actions. step: whoever must act; a draw takes the deck.
+        const step = a => { s = E.applyAction(s, Object.assign({ player: E.decider(s) }, a)); s.players.forEach(P => { P.energy = 10; P.capacity = 10; }); };
+        const draw = () => step({ type: 'draw', choice: (E.legalActions(s).find(a => a.type === 'draw' && a.choice === 'deck') || E.legalActions(s).find(a => a.type === 'draw')).choice });
+        const round = () => { step({ type: 'end' }); draw(); step({ type: 'end' }); draw(); };
+        if (selected === 'leap') {
+            // The rival casts Clean Slate in round 1; it is due at the end of round 2 (now).
+            move('p1t0', 1, 'hand');
+            step({ type: 'end' }); draw(); step({ type: 'play', cid: 'p1t0' }); step({ type: 'end' }); draw();
+        } else if (selected === 'echo') {
+            step({ type: 'play', cid: 'p0t0' });   // round 1: Echoing Encouragement on the next space
+            round(); round();                       // it fires at the end of round 1; round 2 passes
+        } else if (selected === 'once') {
+            step({ type: 'play', cid: 'p0t0' });   // round 1: Clean Slate 2 rounds ahead
+            round(); round(); round();              // it happens at the end of round 2; round 3 passes
+            ['p0c1', 'p0c2'].forEach(cid => move(cid, 0, 'board'));
+            ['p1c1', 'p1c2'].forEach(cid => move(cid, 1, 'board'));
         }
         R.Router.replace('battle', { mode: 'practice', initialState: s, opponent: { name: 'Practice rival', ai: 'competent' },
             onEnd(result) { note.textContent = 'Scratch result: ' + result.outcome + '. Reset or choose another case.'; } });
