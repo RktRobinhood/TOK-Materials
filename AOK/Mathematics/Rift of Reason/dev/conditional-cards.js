@@ -1,15 +1,21 @@
 /* #149 playable study definitions. Loaded only by the battle bench, never index.html,
- * collection, rewards or imports. Eighteen implementable cards (#148 steps 1, 3 and 4 added eight); the other five remain drafts.
+ * collection, rewards or imports. All 23 concepts are implementable here (#148 steps 1–5); none is released.
  */
 (function (root) {
     'use strict';
     if (root.location && !new URLSearchParams(root.location.search).has('conditional')) return;
     const R = root.Rift, prefix = 'conditional-';
+    // The paper token (#148 step 2): colourless (generic), 1/1, never collected, a bench-only definition.
+    const PAPER = prefix + 'paper-token';
+    R.data.tokens = R.data.tokens || {};
+    R.data.tokens[PAPER] = { name: 'Paper', token: true, generic: true, colour: 'imagination', rarity: 'common', cost: 1, attack: 1, health: 1,
+        blurb: 'A folded paper creature. It is not a card: when it leaves play, it is gone.' };
     // fate-entered (#148 step 4): Fate lands on a space. "either" includes the ordinary move at a round's end.
     const options = (events, actor) => events.map(event => ({ key: event + ':' + actor, event, actor,
         label: event === 'fate-entered' ? (actor === 'self' ? 'When you move Fate onto a space' : actor === 'opponent' ? 'When the opponent moves Fate onto a space' : 'When Fate lands on a space')
             : (actor === 'self' ? 'After you' : actor === 'opponent' ? 'After the opponent' : 'After either player')
-            + ({ 'spell-played': ' plays a spell', 'creature-played': ' plays a creature', 'axiom-replaced': ' changes an Axiom', 'creature-defeated': ' loses a creature', 'attack-declared': ' declares an attack' })[event] }));
+            + (actor === 'self' ? ' ' + { 'spell-played': 'play a spell', 'creature-played': 'play a creature', 'axiom-replaced': 'change an Axiom', 'creature-defeated': 'lose a creature', 'attack-declared': 'declare an attack' }[event]
+                : ({ 'spell-played': ' plays a spell', 'creature-played': ' plays a creature', 'axiom-replaced': ' changes an Axiom', 'creature-defeated': ' loses a creature', 'attack-declared': ' declares an attack' })[event]) }));
     const mostDamaged = (api, p) => api.s.players[p].board.slice().sort((a, b) => api.s.cards[b].damage - api.s.cards[a].damage)[0];
     function spell(suffix, name, colour, cost, events, actor, visibility, text, run) {
         const id = prefix + suffix;
@@ -71,6 +77,31 @@
         spell('memory-second-alarm', 'Second Alarm', 'memory', 2, ['fate-entered'], 'either', 'face-up',
             'When Fate lands on a space: your soonest waiting one-shot Fate event moves 1 round later (at most 4 rounds ahead). Never an environmental event.',
             (api, p) => { if (!api.delayOwnEvent(p, 1, 'Second Alarm')) api.emit({ t: 'tactic', text: 'Second Alarm: you have no waiting event to move.' }); }),
+        // #148 step 2. Builder decision (a temporary stat swap): the creature's attack becomes its health left,
+        // and its health left becomes its attack, as two boosts that end when your next turn starts. Damage it
+        // takes meanwhile stays when they end. Maximum health never drops below 1, so an undamaged 0-attack creature is left with 1.
+        spell('imagination-wrong-way-round', 'Wrong Way Round', 'imagination', 2, ['creature-played'], 'opponent', 'face-down',
+            'After the opponent plays a creature: swap its attack and health left until your next turn starts.',
+            (api, p, fact) => { const s = api.s, E = R.Battle.Engine, cid = fact.cid;
+                if (!cid || !s.players[1 - p].board.includes(cid)) { api.emit({ t: 'tactic', text: 'Wrong Way Round: that creature has left.' }); return; }
+                const atk = E.attackOf(s, cid), hp = E.healthOf(s, cid);
+                api.buffUntilStart(cid, hp.current - atk, atk + s.cards[cid].damage - hp.max, 'Wrong Way Round', p);
+                api.emit({ t: 'tactic', text: 'Wrong Way Round: ' + api.name(cid) + ' is ' + E.attackOf(s, cid) + '/' + Math.max(0, E.healthOf(s, cid).current) + ' until your next turn starts.' }); }),
+        spell('imagination-costume-rehearsal', 'Costume Rehearsal', 'imagination', 2, ['spell-played'], 'either', 'face-up',
+            'After either player plays a spell: every paper token on both sides gains Shield until its controller’s next turn starts (no second Shield).',
+            api => { const s = api.s; let n = 0;
+                [0, 1].forEach(q => s.players[q].board.slice().forEach(cid => { if (s.cards[cid].species === PAPER && api.keywordUntilStart(cid, 'shield', 'gain', q, 'Costume Rehearsal')) n++; }));
+                api.emit({ t: 'tactic', text: 'Costume Rehearsal: ' + (n ? n + ' paper token' + (n === 1 ? '' : 's') + ' gain Shield.' : 'no paper token needs a Shield.') }); }),
+        // #148 step 5. Builder decision (no rearming): the recovered card keeps its used condition for the whole
+        // match. A used conditional spell could never be played again, so only conditional CREATURES are taken:
+        // they come back as ordinary bodies. Oldest in the pile first; never this card.
+        spell('memory-borrowed-tomorrow', 'Borrowed Tomorrow', 'memory', 2, ['spell-played'], 'opponent', 'face-down',
+            'After the opponent plays a spell: your oldest conditional creature in your discard pile goes to the bottom of your deck. It keeps its used condition.',
+            (api, p, fact, self) => { const s = api.s, P = s.players[p];
+                const cid = P.discard.find(id => id !== self && s.cards[id].kind === 'creature' && !s.cards[id].token && (R.data.creatures[s.cards[id].species] || {}).conditional);
+                if (!cid) { api.emit({ t: 'tactic', text: 'Borrowed Tomorrow: no conditional creature in your discard pile.' }); return; }
+                P.discard = P.discard.filter(id => id !== cid); P.deck.push(cid);
+                api.emit({ t: 'recovery', cid, text: 'Borrowed Tomorrow: ' + api.cardName(cid) + ' goes to the bottom of your deck. Its used condition stays used.' }); }),
     ];
     const safe = prefix + 'memory-somewhere-safe', seat = prefix + 'generic-seat-reserved';
     R.Battle.Abilities['conditional-safe-entry'] = { name: 'Somewhere Safe', text: 'Entrance: put the just-defeated creature from your discard on the bottom of your deck.',
@@ -118,6 +149,31 @@
     });
     R.data.creatures[clock] = { name: 'Cillian Owlish', colour: 'perception', rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-clock-entry',
         conditional: { visibility: 'face-up', options: options(['fate-entered'], 'either') } };
-    const creatures = [safe, seat, ovation, chair, umbrella, clock];
+    // #148 step 2: Spare Premise asks for a pair (its trigger is your own Axiom change, so you are mid-turn).
+    const premise = prefix + 'reason-spare-premise', tiger = prefix + 'imagination-paper-tiger';
+    const pairs = (s, c) => { const E = R.Battle.Engine, mine = s.players[c.controller].board.filter(cid => cid !== c.cid), out = [];
+        mine.forEach((a, i) => mine.slice(i + 1).forEach(b => { if (E.attackOf(s, a) === E.attackOf(s, b)) out.push(a + '|' + b); }));
+        return out; };
+    R.Battle.Abilities['conditional-premise-entry'] = { name: 'Spare Premise', text: 'Entrance: choose two of your other creatures with equal attack. Each gets +1 health and heals 1.',
+        entrance: { run(api, c) {
+            const opts = pairs(api.s, c);
+            if (!opts.length) { api.emit({ t: 'ability', cid: c.cid, text: 'Spare Premise: no two of your creatures have equal attack.' }); return; }
+            api.ask({ player: c.controller, kind: 'option', options: opts, labels: Object.fromEntries(opts.map(k => [k, k.split('|').map(api.name).join(' + ')])),
+                prompt: 'Spare Premise: choose two creatures with equal attack.', source: { type: 'ability', id: 'conditional-premise-entry', cid: c.cid } });
+        } },
+        choose(api, c, key) {
+            key.split('|').forEach(cid => { api.buff(cid, 0, 1, 'Spare Premise'); api.heal(cid, 1); });
+            api.emit({ t: 'ability', cid: c.cid, text: 'Spare Premise: ' + key.split('|').map(api.name).join(' and ') + ' get +1 health and heal 1.' });
+        } };
+    R.data.creatures[premise] = { name: 'Timothée Chalkamet', colour: 'reason', rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-premise-entry',
+        conditional: { visibility: 'face-up', options: options(['axiom-replaced'], 'self') } };
+    entry('conditional-tiger-entry', 'Paper Tiger', 'if the creature just defeated was not a token, a colourless 1/1 paper token joins your side (if there is room).', (api, c) => {
+        const fact = c.revealFact, gone = fact && api.s.cards[fact.cid];
+        if (!gone || gone.token) { api.emit({ t: 'ability', cid: c.cid, text: 'Paper Tiger: a token’s loss makes no paper.' }); return; }
+        if (!api.summon(c.controller, PAPER)) api.emit({ t: 'ability', cid: c.cid, text: 'Paper Tiger: no room for a paper token.' });
+    });
+    R.data.creatures[tiger] = { name: 'Benedict Paperbatch', colour: 'imagination', rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-tiger-entry',
+        conditional: { visibility: 'face-up', options: options(['creature-defeated'], 'self') } };
+    const creatures = [safe, seat, ovation, chair, umbrella, clock, premise, tiger];
     R.ConditionalStudy = { spells: ids, creatures, ids: ids.concat(creatures) };
 })(typeof window !== 'undefined' ? window : globalThis);

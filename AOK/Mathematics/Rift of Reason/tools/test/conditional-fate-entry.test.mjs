@@ -156,5 +156,5 @@ test('every study card still arms legally, including the Fate-entry ones', () =>
         s = arm(s, creature ? 'p0c0' : 'p0t0');
         assert.equal(s.players[0].armed.length, 1, id);
     }
-    assert.equal(R.ConditionalStudy.ids.length, 18);
+    assert.equal(R.ConditionalStudy.ids.length, 23);
 });

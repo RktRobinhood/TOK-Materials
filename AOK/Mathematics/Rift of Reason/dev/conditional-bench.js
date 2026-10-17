@@ -23,7 +23,7 @@
         const fate = def.options.some(o => o.event === 'fate-entered');
         note.textContent = 'Arm the highlighted card, then continue playing. Two conditions maximum; creatures reserve board space. '
             + (seat ? 'End turn with your board empty: a hero attack reveals Guard before damage.' : fate ? 'Fate moves at the end of each round: watch it reveal when Fate lands.' : 'Inspect the armed card to read its committed condition.')
-            + ' Eighteen study cards are playable; campaign acquisition and five other concepts remain unfinished.';
+            + ' All 23 study cards are playable here; none is released to the campaign yet.';
         const own = [creature ? selected : 'proof-pup', 'paper-dragon', 'lens-lizard', 'cloud-calf', 'comma-crab', 'pocket-tortoise', 'rawmsay'];
         const inst = (species, i) => ({ uid: 'conditional-' + i, species, powerDelta: 0, injuries: [], scars: [] });
         const s = E.createBattle({ seed: 'conditional-study-' + selected,
