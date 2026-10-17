@@ -99,6 +99,8 @@ Tokens are generated battle objects, not collectible copies and not part of cons
 
 #120 (17 October 2026) implements Leap Ahead, Revisit and Echoing Encouragement with the costs above (FATE-SCHEDULE-MODEL.md section 8). Like Clean Slate they are bench and test only (dev/battle.html?fate=leap|echo|once), with no rarity until the pack is released; art is ART-REQUESTS 13.87.
 
+#121 (17 October 2026) implements the five colour-scheduled spells above (Prepared Defence, Delayed Observation, Tomorrow's Idea, Remember This, Scheduled Speech) at the drafted cost 2, with the Idea token. FATE-SCHEDULE-MODEL.md section 9 has the details. A token leaves the game when it leaves play. Remember This fixes its creature when it is played and never takes another one. Scheduled Speech lasts until the end of its creatures' controller's next turn. They are bench and tests only (dev/battle.html?fate=five|rules|full), with no rarity; art is ART-REQUESTS 13.88. A paired simulation (design/reviews/fate-pack-121-2026-10-17.md) finds them weaker in AI play than the strong cost-2 generic cards they replace, and cost 1 hardly changes that. So the costs stay as drafted, and whether the effects should be stronger is left to a playtest before release.
+
 ## Axiom expansion drafts
 
 Existing #101 owns common +/-1 and +/-2 modifiers and rarer Unlimited; do not duplicate that work. Add its attack, maximum-health and cost modifiers as later earnable rule families, never silently convert the starting default ten. Prototype the following separate temporal families after scheduling works:
@@ -111,6 +113,8 @@ Existing #101 owns common +/-1 and +/-2 modifiers and rarer Unlimited; do not du
 | Gentle Consequences | fate-impact | Damage from scheduled effects to a hero is at most one per resolving effect; no change to creature damage. |
 
 Axioms affect both players and replace only their own category. Reset removes active rules, not queued effects, unless a card explicitly says otherwise (proposal to confirm in the timeline decision). No global stat modifier or replayable summons is added merely by drafting this pack.
+
+#121 (17 October 2026) implements the four rules as drafted, at the default rule cost of 2 (data/axioms.js, `pack: 'fate'`). A delay rule changes only spells played while it is active. Losing Open Calendar cancels nothing. Gentle Consequences limits each resolving scheduled effect, including the defeats it causes. No pool, default ten, starter or reward names them, so they are bench and tests only. #101's +/-1, +/-2 and Unlimited rules are untouched.
 
 ## Deck-building tutorial
 

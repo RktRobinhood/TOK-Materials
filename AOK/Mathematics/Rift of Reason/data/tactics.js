@@ -16,17 +16,23 @@
  *                       creature needs to be in play; rarity 'common' | 'uncommon' | 'rare'
  *   scheduled?          a scheduled Fate spell (#118/#119, design/drafts/card-arena-2026-10-12/
  *                       FATE-SCHEDULE-MODEL.md): playing it puts a public event on the Fate track instead
- *                       of acting now. { delay (spaces ahead, ≥ 1), summary (one sentence, or
- *                       whose => sentence when it names its controller's side: whose is 'your' / "Anna's"),
- *                       idle? (what its preview says when it would change nothing), repeat?,
- *                       lifetime? (rounds, repeatable only), resolve(api, ev, H) when Fate reaches it,
+ *                       of acting now. { delay (spaces ahead, ≥ 1; a fate-delay Axiom moves it when it is
+ *                       played, #121), summary (one sentence, or (whose, ctx) => sentence when it names its
+ *                       controller's side: whose is 'your' / "Anna's"; ctx.who is 'you' / 'Anna', ctx.target
+ *                       the fixed target's name or null), idle? (what its preview says when it would change
+ *                       nothing), repeat?, lifetime? (rounds, repeatable only), pick?(s, p, H) → the target
+ *                       it fixes when played (cid or null; #121), resolve(api, ev, H) when Fate reaches it,
  *                       expire?(api, ev, H), project?(s, ev, H) a rough after-state for the AI only }.
- *                       Not offered without a Fate track or while its player has 2 events waiting.
- *                       A repeatable event's api.buff boosts end when it expires (#120).
+ *                       Not offered without a Fate track or while its player has the limit of events waiting
+ *                       (2; Open Calendar 3). A repeatable event's api.buff boosts end when it expires (#120).
  *   fateMove?           { leap: n } or { rewind: n }: how far it moves Fate, for the screen's preview (#120)
  *   pack?               'fate': the later Fate card pack (#119/#120: Clean Slate, Leap Ahead, Revisit,
- *                       Echoing Encouragement). Bench and tests only until its release is decided.
+ *                       Echoing Encouragement; #121: the five colour-scheduled spells). Bench and tests only
+ *                       until its release is decided.
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
+ *
+ * Rift.data.tokens (#121): generated battle creatures, such as Tomorrow's Idea's Idea. A token is not a
+ * collected card and not part of any deck or quota; when it leaves play it leaves the game.
  */
 (function (root) {
     'use strict';
@@ -430,11 +436,13 @@
                 const names = doomed.map(cid => api.name(cid));   // before any leaves the board
                 doomed.forEach((cid, i) => api.defeat(cid, 'fate', names[i]));
             },
-            // For the AI's look-ahead only: both boards empty (to the hand under Mercy, else the discard).
+            // For the AI's look-ahead only: both boards empty (to the hand under Mercy, else the discard; a token,
+            // #121, leaves the game).
             project(s, ev, H) {
                 const mercy = H.rules(s).mercy;
                 const players = s.players.map(P => Object.assign({}, P, { board: [] }));
                 s.players.forEach(P => P.board.forEach(cid => {
+                    if (s.cards[cid].token) return;
                     const o = players[s.cards[cid].owner];
                     if (mercy) o.hand = o.hand.concat([cid]); else o.discard = o.discard.concat([cid]);
                 }));
@@ -495,9 +503,157 @@
         },
         run() { /* the engine schedules it: see scheduled */ },
     };
-    ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement'].forEach(id => { tactics[id].pack = 'fate'; });
+    // The first colour-scheduled spells (#121, CARD-DRAFTS.md "Later Fate card pack"): one per colour, each a
+    // one-shot event 1 round ahead (a fate-delay Axiom moves that when it is played). Colour tactics, so the
+    // colour quota counts them; no creature of the colour needs to be in play. Bench and tests only, like the
+    // rest of the pack (dev/battle.html?fate=…), with no rarity until the pack's release is decided.
+    tactics['prepared-defence'] = {
+        short: 'Next round: your creatures +1 health, heal 1',
+        name: 'Prepared Defence', cost: 2, colour: 'reason', art: 'art/spell-motif-reason',
+        text: 'Put it on the Fate track, 1 round ahead. Then your creatures get +1 maximum health and heal 1.',
+        flavour: 'Check every step before anyone asks.',
+        scheduled: {
+            delay: 1,
+            summary: whose => whose + ' creatures in play then get +1 maximum health and heal 1.',
+            idle: 'there is no creature to protect.',
+            // Its controller's creatures in play when it resolves, left to right (like Careful Words on each).
+            // The 'fate-event' line already says what happens; only "nothing happened" gets its own line.
+            resolve(api, ev) {
+                const board = api.s.players[ev.controller].board.slice();
+                if (!board.length) { api.emit({ t: 'tactic', text: 'Prepared Defence: there is no creature to protect.' }); return; }
+                board.forEach(cid => { api.buff(cid, 0, 1, 'Prepared Defence'); api.heal(cid, 1); });
+            },
+            // For the AI's look-ahead only.
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    const c = cards[cid];
+                    cards[cid] = Object.assign({}, c, { damage: Math.max(0, c.damage - 1), buffs: c.buffs.concat([{ label: 'Prepared Defence', attack: 0, health: 1, temp: false }]) });
+                });
+                return Object.assign({}, s, { cards });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    tactics['delayed-observation'] = {
+        short: 'Next round: draw 2 cards',
+        name: 'Delayed Observation', cost: 2, colour: 'perception', art: 'art/spell-motif-perception',
+        text: 'Put it on the Fate track, 1 round ahead. Then you draw 2 cards from your deck.',
+        flavour: 'Look now. Understand tomorrow.',
+        // Its preview names no card: which cards come is hidden until they are drawn.
+        scheduled: {
+            delay: 1,
+            summary: (whose, ctx) => (ctx.who === 'you' ? 'you draw 2 cards from your deck.' : ctx.who + ' draws 2 cards from their deck.'),
+            idle: 'no card can be drawn: the deck is empty or the hand is full.',
+            // Normal draws: a full hand stops them and the card stays in the deck.
+            resolve(api, ev) {
+                const p = ev.controller;
+                let n = 0;
+                for (let i = 0; i < 2; i++) if (api.draw(p)) n++;
+                if (n < 2) api.emit({ t: 'tactic', text: 'Delayed Observation: ' + (n ? 'only 1 card is drawn' : 'no card is drawn') + ' (the deck is empty or the hand is full).' });
+            },
+            // For the AI's look-ahead only: the hand grows by unknown cards. Deck order is hidden, so the
+            // projection never moves a real card; the deck is left as it is.
+            project(s, ev, H) {
+                const P = s.players[ev.controller];
+                let n = 0;
+                while (n < 2 && n < P.deck.length && H.handRoom(s, ev.controller, n + 1)) n++;
+                if (!n) return s;
+                const cards = Object.assign({}, s.cards), unknown = [];
+                for (let i = 0; i < n; i++) {
+                    const cid = 'draw-' + ev.id + '-' + i;
+                    cards[cid] = { cid, kind: 'concealed', owner: ev.controller, controller: ev.controller };
+                    unknown.push(cid);
+                }
+                const players = s.players.slice();
+                players[ev.controller] = Object.assign({}, P, { hand: P.hand.concat(unknown) });
+                return Object.assign({}, s, { players, cards });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    tactics['tomorrows-idea'] = {
+        short: 'Next round: a 1/2 Idea joins you',
+        name: 'Tomorrow\'s Idea', cost: 2, colour: 'imagination', art: 'art/spell-motif-imagination',
+        text: 'Put it on the Fate track, 1 round ahead. Then a 1/2 Idea token joins your side, if there is room.',
+        flavour: 'Not ready yet. Ask again tomorrow.',
+        scheduled: {
+            delay: 1,
+            summary: whose => 'a 1/2 Idea token joins ' + whose + ' side, if there is room.',
+            idle: 'there is no room, so no Idea arrives.',
+            // A full side (reserved condition spaces count): nothing arrives, and the event is still used up.
+            resolve(api, ev) {
+                if (!api.summon(ev.controller, 'idea-token')) api.emit({ t: 'tactic', text: 'Tomorrow\'s Idea: there is no room, so no Idea arrives.' });
+            },
+            project(s, ev, H) { return H.projectToken(s, ev.controller, 'idea-token'); },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    tactics['remember-this'] = {
+        short: 'Next round: get back your last defeated creature',
+        name: 'Remember This', cost: 2, colour: 'memory', art: 'art/spell-motif-memory',
+        text: 'Put it on the Fate track, 1 round ahead. Then your most recently defeated creature returns to your hand.',
+        flavour: 'Tie a string round your finger. Hope you remember why.',
+        usable: (s, p) => !!lastDefeated(s, p),
+        scheduled: {
+            delay: 1,
+            // The creature is fixed when the spell is played (public: discard piles are public).
+            pick: (s, p) => lastDefeated(s, p),
+            summary: (whose, ctx) => (ctx.target ? ctx.target + ' returns from the discard pile to ' + whose + ' hand.'
+                : whose + ' most recently defeated creature returns to the hand.'),
+            idle: 'nothing comes back.',
+            // Only if it is still in its owner's discard pile; a full hand leaves it there. Never another creature.
+            resolve(api, ev) {
+                const s = api.s, p = ev.controller, cid = ev.target, name = cid ? api.cardName(cid) : 'The creature';
+                if (!cid || !s.players[p].discard.includes(cid)) { api.emit({ t: 'tactic', text: 'Remember This: ' + name + ' is no longer in the discard pile, so nothing comes back.' }); return; }
+                if (!api.handRoom(p)) { api.emit({ t: 'tactic', text: 'Remember This: the hand is full, so ' + name + ' stays in the discard pile.' }); return; }
+                api.fromDiscard(cid);
+            },
+            project(s, ev, H) {
+                const P = s.players[ev.controller], cid = ev.target;
+                if (!cid || !P.discard.includes(cid) || !H.handRoom(s, ev.controller, 1)) return s;
+                const players = s.players.slice();
+                players[ev.controller] = Object.assign({}, P, { discard: P.discard.filter(x => x !== cid), hand: P.hand.concat([cid]) });
+                return Object.assign({}, s, { players });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    tactics['scheduled-speech'] = {
+        short: 'Next round: your creatures +1 attack',
+        name: 'Scheduled Speech', cost: 2, colour: 'language', art: 'art/spell-motif-language',
+        text: 'Put it on the Fate track, 1 round ahead. Then your creatures get +1 attack until the end of your next turn.',
+        flavour: 'The speech is at noon. The applause is booked for 12:05.',
+        scheduled: {
+            delay: 1,
+            summary: whose => whose + ' creatures in play then get +1 attack until the end of their next turn.',
+            idle: 'there is no creature to cheer.',
+            resolve(api, ev) {
+                const board = api.s.players[ev.controller].board.slice();
+                if (!board.length) { api.emit({ t: 'tactic', text: 'Scheduled Speech: there is no creature to cheer.' }); return; }
+                board.forEach(cid => api.buffNextTurn(cid, 1, 0, 'Scheduled Speech'));
+            },
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    cards[cid] = Object.assign({}, cards[cid], { buffs: cards[cid].buffs.concat([{ label: 'Scheduled Speech', attack: 1, health: 0, temp: false }]) });
+                });
+                return Object.assign({}, s, { cards });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement',
+        'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech'].forEach(id => { tactics[id].pack = 'fate'; });
     const SEEN = ['guard', 'elusive', 'shield'];
     function cap(k) { return k[0].toUpperCase() + k.slice(1); }
+    // Remember This (#121): p's most recently defeated creature still in p's discard pile (defeats join the end
+    // of the pile). Cards discarded from a full hand never fought, and tokens never reach a pile.
+    function lastDefeated(s, p) {
+        const pile = s.players[p].discard;
+        for (let i = pile.length - 1; i >= 0; i--) { const c = s.cards[pile[i]]; if (c.kind === 'creature' && !c.burned && !c.token) return pile[i]; }
+        return null;
+    }
     // Remember When brings back any other tactic, but not another Remember When (no loops).
     function rememberOption(s, cid) { const c = s.cards[cid]; return c.kind === 'tactic' && c.tactic !== 'remember-when'; }
     // Total Recall asks twice (the second time only if a creature is left).
@@ -509,6 +665,11 @@
     }
     Object.keys(tactics).forEach(id => { tactics[id].id = id; });
     Rift.data.tactics = tactics;
+    // Tokens (#121): plain generated creatures, shaped like data/creatures.js entries (art 'creature/<id>/idle').
+    Rift.data.tokens = {
+        'idea-token': { name: 'Idea', token: true, colour: 'imagination', rarity: 'common', cost: 1, attack: 1, health: 2,
+            blurb: 'A small new idea from Tomorrow\'s Idea. It is not a card: when it leaves play, it is gone.' },
+    };
     Rift.data.tacticDecks = {
         // Everyone owns these from the start; the default ten-card tactic contribution.
         starter: ['counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'occams-razor', 'rethink', 'big-claims', 'clockwork', 'look-it-up'],

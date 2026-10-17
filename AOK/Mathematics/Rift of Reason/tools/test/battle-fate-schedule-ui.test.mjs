@@ -126,6 +126,6 @@ test('a full schedule explains why Clean Slate cannot be played', () => {
         space: 5, createdRound: 1, createdTurn: 1, repeat: false, lifetime: null, expiresRound: null, state: 'pending', fires: 0, firedRound: null, reason: null, target: null }));
     s.fate.seq = 2;
     t.$('.b-hand [data-cid="p0t0"]').click();
-    assert.match(t.root.textContent, /You already have 2 events waiting on the Fate track\./);
+    assert.match(t.root.textContent, /You already have 2 spells waiting on the Fate track\./);
     t.handle.destroy();
 });

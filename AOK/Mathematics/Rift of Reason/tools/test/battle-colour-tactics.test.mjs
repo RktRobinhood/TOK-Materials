@@ -49,11 +49,13 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
             assert.equal(T[id].inTune, undefined, id + ': no In tune bonus any more');
         });
     });
-    // The later Fate pack (#119/#120, bench only) is new cards, not old ones: Clean Slate and Leap Ahead are
-    // generic, Revisit and Echoing Encouragement are Memory cards outside the eighteen.
+    // The later Fate pack (#119/#120/#121, bench only) is new cards, not old ones: Clean Slate and Leap Ahead are
+    // generic; Revisit, Echoing Encouragement and the five colour-scheduled spells are colour cards outside the eighteen.
     const pack = Object.keys(T).filter(id => T[id].pack === 'fate');
-    assert.deepEqual(plain(pack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement']);
-    assert.deepEqual(plain(Object.keys(T).filter(id => T[id].scheduled)), ['clean-slate', 'echoing-encouragement']);
+    assert.deepEqual(plain(pack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement',
+        'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
+    assert.deepEqual(plain(Object.keys(T).filter(id => T[id].scheduled)), ['clean-slate', 'echoing-encouragement',
+        'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
     pack.forEach(id => assert.ok(!ids.includes(id), id));
     const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !T[id].pack);
     assert.equal(old.length, 15);

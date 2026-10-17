@@ -371,7 +371,8 @@ test('the AI reads leaps and repeatable spaces from the public schedule', () => 
 test('the Fate pack is bench and test only: no grant list, starter, deck or reward names its cards', () => {
     const T = Rift.data.tactics;
     const pack = Object.keys(T).filter(id => T[id].pack === 'fate');
-    assert.deepEqual(plain(pack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement']);
+    assert.deepEqual(plain(pack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement',
+        'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
     const decks = Rift.data.tacticDecks;
     const lists = [decks.starter, decks.earned, decks.starterPack].concat(Object.values(decks.colour));
     for (const id of pack) {
@@ -382,7 +383,8 @@ test('the Fate pack is bench and test only: no grant list, starter, deck or rewa
             assert.ok(!fs.readFileSync(path.join(GAME_DIR, 'data', file), 'utf8').includes("'" + id + "'"), 'data/' + file + ' must not grant ' + id);
         }
     }
-    assert.deepEqual(plain(pack.map(id => [T[id].colour || null, T[id].rarity || null])), [[null, null], [null, null], ['memory', null], ['memory', null]]);
-    assert.deepEqual(plain(pack.map(id => T[id].cost)), [4, 2, 2, 3], 'the draft costs');
+    assert.deepEqual(plain(pack.map(id => [T[id].colour || null, T[id].rarity || null])), [[null, null], [null, null], ['memory', null], ['memory', null],
+        ['reason', null], ['perception', null], ['imagination', null], ['memory', null], ['language', null]]);
+    assert.deepEqual(plain(pack.map(id => T[id].cost)), [4, 2, 2, 3, 2, 2, 2, 2, 2], 'the draft costs');
     pack.forEach(id => assert.ok(T[id].text.length <= 110, id + ': short card text'));
 });

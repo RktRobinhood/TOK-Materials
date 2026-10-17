@@ -1,7 +1,9 @@
-/* #119/#120 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now, leap, echo, once).
- * The later Fate pack on the real battle screen and engine: Clean Slate (#119), and Leap Ahead, Revisit and
- * Echoing Encouragement (#120). No save writes. The pack is defined in data/tactics.js but no grant list names
- * it: students can't obtain it yet.
+/* #119/#120/#121 scratch QA: dev/battle.html?fate=you-cast (or mercy, rival-casts, due-now, leap, echo, once,
+ * five, rules, full).
+ * The later Fate pack on the real battle screen and engine: Clean Slate (#119); Leap Ahead, Revisit and
+ * Echoing Encouragement (#120); the five colour-scheduled spells and the Fate timing Axioms (#121). No save
+ * writes. The pack is defined in data/tactics.js and data/axioms.js, but no grant list names it: students
+ * can't obtain it yet.
  */
 (function (root) {
     'use strict';
@@ -16,6 +18,9 @@
         leap: 'The rival\'s Clean Slate wipes the board at the end of this round. Select Leap Ahead: the bar says what it skips. Play it: Fate leaps 2 rounds and the wipe never happens. Inspect the ⏭ marker. Revisit or Clockwork back brings Fate back over its space: still nothing.',
         echo: 'Your Echoing Encouragement fired at the end of round 1 and is still live, 1 round behind NOW. Play Revisit: Fate lands on it again and your creatures get +1/+1 again. Its node says when it expires: End turn, and its boosts end. Moving Fate back further never makes it last longer.',
         once: 'Your Clean Slate already happened, 1 round behind NOW. Play Revisit: Fate lands on its space, and nothing happens. A one-shot spell never happens twice.',
+        five: 'The five colour spells are in your hand (2 plays a turn; Open Calendar is active, so 3 may wait). Select each to read when it happens. Remember This names Zuckerborg, defeated earlier. Play them, inspect their nodes, then End turn: at the round\'s end an Idea token joins you, you draw 2 (the preview never names them), your creatures heal and grow.',
+        rules: 'Patient Plans is active: select Tomorrow\'s Idea or Clean Slate, and the bar says it lands 1 round later. Play one, then play Hasty Plans from your rule cards: the spell already on the track does not move, but the next one lands sooner.',
+        full: 'Your side is full and so is your hand. Tomorrow\'s Idea, Delayed Observation and Remember This are already on the Fate track: End turn and read what happens (nothing arrives, nothing is drawn, Zuckerborg stays in the discard pile). Each is still used up.',
     };
     let selected = CASES[q.get('fate')] ? q.get('fate') : 'you-cast';
     const scratch = R.State.freshState();
@@ -33,7 +38,10 @@
     function start() {
         note.textContent = CASES[selected];
         const rival = selected === 'rival-casts';
-        const MINE = { leap: ['leap-ahead', 'revisit', 'clockwork'], echo: ['echoing-encouragement', 'revisit', 'clockwork'], once: ['clean-slate', 'revisit', 'clockwork'] };
+        const MINE = { leap: ['leap-ahead', 'revisit', 'clockwork'], echo: ['echoing-encouragement', 'revisit', 'clockwork'], once: ['clean-slate', 'revisit', 'clockwork'],
+            five: ['prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech'],
+            rules: ['tomorrows-idea', 'clean-slate', 'scheduled-speech'],
+            full: ['tomorrows-idea', 'delayed-observation', 'remember-this', 'second-wind', 'second-wind', 'clockwork', 'clockwork', 'lemma', 'lemma', 'recall'] };
         const mine = ['zuckerborg', 'kardashiant', 'lobstorian', 'astrophysicat', 'keanu', 'tremendoodle'];
         const theirs = ['siuuugull', 'beastie', 'astrophysicat', 'lobstorian', 'tremendoodle', 'kardashiant'];
         let s = E.createBattle({ seed: 'fate-bench-' + selected,
@@ -56,6 +64,15 @@
             move('p1c3', 1, 'hand');
         }
         if (MINE[selected]) move('p0t2', 0, 'hand');
+        // #121 cases: every listed spell in hand; Zuckerborg already defeated (Remember This fixes it).
+        if (['five', 'rules', 'full'].includes(selected)) {
+            MINE[selected].forEach((_, i) => move('p0t' + i, 0, 'hand'));
+            move('p0c0', 0, 'discard');
+            move('p0c3', 0, 'board');
+            s.cards.p0c1.damage = 1;
+        }
+        if (selected === 'five') s.axioms.active = { 'fate-capacity': 'open-calendar' };
+        if (selected === 'rules') { s.axioms.active = { 'fate-delay': 'patient-plans' }; s.players[0].axHand = ['hasty-plans', 'open-calendar']; }
         if (selected === 'mercy') s.axioms.active = { defeat: 'mercy' };
         // Plenty of hearts, so the case always reaches the wipe (hero damage is not what this bench shows).
         s.players.forEach(P => { P.energy = 10; P.capacity = 10; P.hearts = P.maxHearts = 30; });
@@ -80,6 +97,18 @@
         } else if (selected === 'echo') {
             step({ type: 'play', cid: 'p0t0' });   // round 1: Echoing Encouragement on the next space
             round(); round();                       // it fires at the end of round 1; round 2 passes
+        } else if (selected === 'full') {
+            // The three spells go on the track with real plays (Open Calendar lets 3 wait), all due at the end
+            // of this round. Then the side and the hand fill up, and the rival's creatures can't attack, so
+            // nothing makes room before the round ends.
+            s.axioms.active = { 'fate-capacity': 'open-calendar' };
+            ['p0t0', 'p0t1', 'p0t2'].forEach(cid => { s.players[0].playsThisTurn = 0; step({ type: 'play', cid }); });
+            const P = s.players[0];
+            P.deck.slice().forEach(cid => { if (P.board.length < s.options.boardLimit && s.cards[cid].kind === 'creature') move(cid, 0, 'board'); });
+            P.deck.slice().forEach(cid => { if (P.hand.length + P.axHand.length < s.options.handLimit) move(cid, 0, 'hand'); });
+            while (P.hand.length + P.axHand.length < s.options.handLimit) P.axHand.push('luxury');   // rule cards fill the rest
+            s.players[1].board.forEach(cid => { s.cards[cid].frozen = true; });
+            P.playsThisTurn = 0;
         } else if (selected === 'once') {
             step({ type: 'play', cid: 'p0t0' });   // round 1: Clean Slate 2 rounds ahead
             round(); round(); round();              // it happens at the end of round 2; round 3 passes
