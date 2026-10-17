@@ -9,6 +9,11 @@
  *   [my hero · my hand (fully visible) · my energy]
  * Sizes use container query units of .battle (cqh/cqw), so they are resolved on descendants. */
 
+/* The table picture is deliberately larger than the screen (alignBoard keeps its calm band behind the lane).
+   With overflow: hidden the screen could still be scrolled sideways by a focus or scrollIntoView, which slid
+   the whole table off the left edge (the shared axiom deck and your hero went out of view). clip can't scroll. */
+.screen.screen-battle { overflow: clip; }
+
 .battle {
     --side: 272px;                                        /* side panel column */
     --arena-w: calc(100cqw - var(--side) - 24px);
