@@ -206,16 +206,16 @@ test('a real match: result.itemsUsed, and the after-battle Changes roll spends n
 test('Anchor: the lane shows the anchor and counts the held round', () => {
     const t = setup(Object.assign(practice(['anchor']), { battleOptions: Object.assign({}, practice().battleOptions, { timeline: true }) }));
     t.$('.b-draw-btn[data-choice="deck"]').click();
-    assert.match(t.$('.b-fate-sum').textContent, /^Upcoming · New rule.* in 3 rounds/);
+    assert.match(t.$('.b-fate-sum').textContent, /^New rule.* in 3 rounds/);
     t.$('.b-bag-btn').click();
     item(t, 'anchor').click();
     assert.match(t.$('.b-prompt .b-ask').textContent, /Use the Anchor\? It needs no energy\./);
     t.$('.b-prompt .btn.primary').click();
-    assert.match(t.$('.b-fate-sum').textContent, /^Upcoming · ⚓ New rule.* in 4 rounds/);
+    assert.match(t.$('.b-fate-sum').textContent, /^⚓ New rule.* in 4 rounds/);
     t.$('.b-end').click();
     t.g.flush();
     assert.equal(t.handle.state.round, 2);
     assert.equal(t.handle.state.fate.until, 3, 'the round ended, and the Anchor held the Fate track');
-    assert.match(t.$('.b-fate-sum').textContent, /^Upcoming · New rule.* in 3 rounds/);
+    assert.match(t.$('.b-fate-sum').textContent, /^New rule.* in 3 rounds/);
     t.handle.destroy();
 });

@@ -190,6 +190,9 @@
 .b-fs.round::before { border-color: var(--gold); }   /* one space = one round (both players) */
 .b-fs.past::before { opacity: 0.4; }
 .b-fs.now::before { display: none; }
+/* #109 (teacher 17 Oct: the track was hard to read): each coming space shows how many rounds away it is. */
+.b-fs.ahead::after { content: attr(data-k); position: absolute; left: 50%; bottom: 1px; transform: translateX(-50%); font: 700 10px/1 system-ui, sans-serif;
+    color: var(--gold); opacity: 0.85; pointer-events: none; text-shadow: 0 1px 2px #000; }
 .b-fs > * { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 .b-fs-now { width: 32px; height: 48px; background: center / contain no-repeat; display: grid; place-items: center; font-size: 32px; color: var(--gold); filter: drop-shadow(0 0 6px rgba(242, 182, 50, 0.85)); z-index: 2; }
 .b-fev { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; min-width: 44px; min-height: 44px; z-index: 3; cursor: help; border-radius: 8px; padding: 2px; }

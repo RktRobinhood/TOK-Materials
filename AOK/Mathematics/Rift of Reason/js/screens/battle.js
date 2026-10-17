@@ -1913,12 +1913,14 @@
             const kind = next.type === 'reset' ? 'Reset' : 'New rule';
             const summary = shift
                 ? (pre.now ? (next.type === 'reset' ? 'Reset happens NOW' : 'New rule NOW') : (shift < 0 ? '⏩ ' : '⏪ ') + kind + ' in ' + roundsWord(moved))
-                : 'Upcoming · ' + (next.held ? '⚓ ' : '') + kind + ' in ' + roundsWord(next.rounds);
-            // The second line: what it will be (the set-aside card), and whose End turn brings it.
+                : (next.held ? '⚓ ' : '') + kind + ' in ' + roundsWord(next.rounds);
+            // The second line (#109, teacher 17 Oct: less text): only what it will be (the set-aside card). The full
+            // sentence (not active yet, whose End turn brings it) is the line's tooltip; the event marker says it too.
             const nextAx = next.id && AX[next.id];
             const flipDetail = nextAx ? ruleWords(nextAx) + (E.axiomWouldChange && !E.axiomWouldChange(state, next.id) ? ' (no change)' : '')
                 : state.axioms.deck.length ? 'no rule card set aside yet' : 'no rule card left to flip';   // finite deck (#117)
-            const detail = 'Not active yet: ' + (next.type === 'reset' ? 'all rules will return to basic' : flipDetail) + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
+            const what = next.type === 'reset' ? 'all rules will return to basic' : flipDetail;
+            const detail = 'Not active yet: ' + what + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
             // Beyond the reel: the nearest event further than three rounds away, with its count.
             const farIdx = tl.findIndex(ev => ev.rounds > FATE_AHEAD);
             const farGhost = shift && moved > FATE_AHEAD;
@@ -1948,7 +1950,7 @@
                 ]),
                 farChip || el('div.b-fate-far.none'),
                 el('div.b-fate-sum' + (shift ? '.preview' : '') + (bent ? '.bent' : ''), {}, [el('strong', { text: summary }),
-                    el('span', { text: shift ? 'if you choose this draw' : detail, title: detail }),
+                    el('span', { text: shift ? 'if you choose this draw' : what[0].toUpperCase() + what.slice(1), title: detail }),
                     schedLine && !shift ? el('span.b-fate-sched', { text: schedLine }) : null]),
             );
             slideReel(reel, shift);

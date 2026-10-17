@@ -351,7 +351,7 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     const rounds = t.handle.state.fate.until;
     assert.equal(rounds, 3);
     assert.equal($('.b-fate-label span').textContent, 'rounds');
-    assert.match($('.b-fate-sum').textContent, new RegExp('^Upcoming · New rule in ' + rounds + ' roundsNot active yet: .+ · after their turn$'));
+    assert.match($('.b-fate-sum').textContent, new RegExp('^New rule in ' + rounds + ' rounds[A-Z].+$'));
     assert.equal($('.b-fate-label').dataset.tip, 'Fate track');
     assert.match($('.b-fate-label').dataset.tipDetail, /One space is one round. After both players have had a turn, every event moves 1 space closer/);
     // The flip sits on the round it starts; its card is set aside, so hovering names it for certain.
@@ -659,7 +659,7 @@ test('Fate draw buttons (only with timeDraws) show the new count in short words'
     const timeDraws = s => { s.options.timeDraws = true; };
     const r = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = {}; });
     assert.match(r.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset \(no change now\)\./);
-    assert.match(r.$('.b-fate-sum').textContent, /^Upcoming · Reset in 5 roundsNot active yet: all rules will return to basic · after their turn$/);
+    assert.match(r.$('.b-fate-sum').textContent, /^Reset in 5 roundsAll rules will return to basic$/);
     r.handle.destroy();
     const c = prepared({ me: ['kardashiant'], opp: ['kardashiant'], phase: 'draw' }, s => { timeDraws(s); s.fate.events = 1; s.fate.until = 5; s.axioms.active = { cost: 'thrift' }; });
     assert.match(c.$('.b-draw-btn[data-choice="forward"]').dataset.tipDetail, /Reset in 4 rounds\./);
@@ -1034,7 +1034,7 @@ test('Fate wording follows the round for either first player; Calm motion steps 
         t.$('.b-draw-btn[data-choice="deck"]').click();
         // Going first, my End turn does not move Fate; going second, it closes the round.
         assert.match(t.$('.b-end').dataset.tipDetail, first === 0 ? /Fate moves after Dummy's turn\./ : /The round ends: the Fate track moves 1 space\./);
-        assert.match(t.$('.b-fate-sum').textContent, first === 0 ? /after their turn$/ : /after your turn$/);
+        assert.match((t.$('.b-fate-sum span').title || t.$('.b-fate-sum span').getAttribute('title')), first === 0 ? /after their turn$/ : /after your turn$/);
         const until = t.handle.state.fate.until;
         t.$('.b-end').click();
         assert.equal(t.handle.state.fate.until, first === 0 ? until : until - 1);
