@@ -49,11 +49,13 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
             assert.equal(T[id].inTune, undefined, id + ': no In tune bonus any more');
         });
     });
-    // Scheduled Fate spells (#119 Clean Slate, bench only) are new generic cards, not old ones; they stay colourless too.
-    const scheduled = Object.keys(T).filter(id => T[id].scheduled);
-    assert.deepEqual(plain(scheduled), ['clean-slate']);
-    scheduled.forEach(id => assert.equal(T[id].colour, undefined, id));
-    const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !T[id].scheduled);
+    // The later Fate pack (bench only): #119 Clean Slate and #120 Leap Ahead are generic; #120 Revisit and
+    // Echoing Encouragement are Memory spells, as drafted. None is an old card or in a colour list.
+    const fatePack = Object.keys(T).filter(id => T[id].scheduled || T[id].fateMove);
+    assert.deepEqual(plain(fatePack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement']);
+    assert.deepEqual(plain(fatePack.map(id => T[id].colour || null)), [null, null, 'memory', 'memory']);
+    fatePack.forEach(id => assert.ok(!ids.includes(id), id + ' is in no colour list yet'));
+    const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !fatePack.includes(id));
     assert.equal(old.length, 15);
     old.forEach(id => { assert.equal(T[id].colour, undefined, id); assert.equal(T[id].rarity, undefined, id); });
     const D = Rift.data.tacticDecks;

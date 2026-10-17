@@ -63,6 +63,10 @@
  *   change its definition's rough `project` says it makes, weighted by End turns like the next Fate event
  *   (scheduledTerm). So every level casts Clean Slate when behind on the board, values moving Fate to
  *   bring a wipe sooner or later, and does not force a creature onto a board that is wiped this round.
+ *   Leap Ahead and Revisit (#120) are simulated like any play: a leap that skips an enemy wipe drops
+ *   that wipe from the schedule, and a rewind onto a live repeatable space (Echoing Encouragement)
+ *   shows its boosts at once, so both are valued from the real move. They are scored deep too, because
+ *   they also move Fate's own rule event.
  *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
@@ -519,7 +523,7 @@
 
     // ---- scoring actions -------------------------------------------------------------
 
-    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true, nostalgia: true };
+    const DEEP_TACTICS = { clockwork: true, 'look-it-up': true, nostalgia: true, 'leap-ahead': true, revisit: true };
 
     // A tactic's own value hint (data/tactics.js `ai`), for what the one-ply score can't see.
     function tacticHint(s, a, me) {

@@ -28,6 +28,8 @@
  *   rules(state), ruleSummary(state), timeline(state), fullLog(state), lostUids(state, p), overkillOf(state, p)
  *   fateSchedule(state) → the public scheduled Fate events (#118/#119), fateEventPreview(state, id) → what
  *                  one would do if it resolved now (the real resolution, run on a copy), canSchedule(state, p)
+ *   fateMovePreview(state, spaces, how) → what a Fate move ('walk' | 'leap' | 'rewind', #120) would do now,
+ *                  run on a copy: { from, to, moved, skipped: [ids], fired: [ids], rule, events }
  *   exhaustion(state, p) → { due, damage, count, reversed, lethal, wins } for the draw controls
  *   activeAxioms(state) → every active rule card (a "basic" one has ax.basic: it restates a default rule)
  *   changedAxioms(state) → only the active rule cards that change a basic rule
@@ -56,7 +58,9 @@
  *   { t, text, publicText?, privateTo?, ...data }. Show `text` to privateTo (or everyone
  *   when privateTo is undefined) and `publicText` to the other player.
  *   Scheduled Fate events: 'fate-schedule' { player, id, cid, def, space, rounds }, 'fate-event' { id, def,
- *   cid, player, how: 'walk' | 'rewind', fires } (its effects follow), 'fate-expire' { id, def, player }.
+ *   cid, player, how: 'walk' | 'rewind' | 'leap', fires, repeat } (its effects follow), 'fate-expire' { id, def, player }.
+ *   A leap (#120): 'fate-leap' { player, from, to, spaces, asked, skipped: [ids] }, then one 'fate-skip'
+ *   { id, def, cid, player, by } per bypassed one-shot event, then the landing space's events.
  *
  * The Bag (design/card-arena-expansion-2026-10-07.md §3): players[p].bag lists the item ids brought
  * in (createBattle player.bag; only items with a `battle` block in data/items.js count). In the main
@@ -882,9 +886,15 @@
             fromDiscard(cid) { const P = s.players[s.cards[cid].owner]; if (removeFrom(P.discard, cid)) toHand(G, P === s.players[0] ? 0 : 1, cid); },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
             handRoom: (p, n) => handRoom(s, p, n),
-            buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
+            // fate: the id of the scheduled event that granted it (#120), so the boost ends when that event expires.
+            buff(cid, attack, health, label, temp, fate) {
+                const b = { label, attack: attack || 0, health: health || 0, temp: !!temp };
+                if (fate) b.fate = fate;
+                s.cards[cid].buffs.push(b);
+            },
             addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; if (c.lostKeywords) c.lostKeywords = c.lostKeywords.filter(x => x !== k); },
             shiftFate: n => shiftFate(G, n),
+            leapFate: (n, by) => leapFate(G, n, by),
             setAxiom: (id, by) => setAxiom(G, id, by),
             takeAxiom(id) { removeFrom(s.axioms.deck, id); },
             ask: req => ask(G, req),
@@ -1291,6 +1301,32 @@
         }
     }
 
+    // A LEAP (#120, Leap Ahead): the cursor jumps `spaces` ahead and enters only the space it lands on.
+    // Every pending one-shot event on a space in between is BYPASSED: it becomes 'skipped' for good (a
+    // later rewind or walk onto that space never brings it back). A repeatable space in between was not
+    // entered, so it neither fires nor ends. A leap never jumps over Fate's own rule event: when that
+    // lies inside the leap, the leap lands on it (scheduled events there first, then the rule event).
+    // by: the player whose card leaps (null: no player).
+    function leapFate(G, spaces, by) {
+        const s = G.s;
+        if (!s.options.timeline || !(spaces > 0) || s.winner != null) return;
+        const from = cursorOf(s), n = Math.min(spaces, Math.max(1, s.fate.until)), to = from + n;
+        const skipped = queueOf(s).filter(ev => ev.space > from && ev.space < to && ev.state === 'pending' && !ev.repeat).sort((a, b) => a.seq - b.seq);
+        skipped.forEach(ev => { ev.state = 'skipped'; ev.reason = 'leap'; ev.endedRound = s.round; });
+        s.fate.pos = to;
+        s.fate.until = Math.max(0, s.fate.until - n);
+        emit(G, { t: 'fate-leap', player: by == null ? null : by, from, to, spaces: n, asked: spaces, skipped: skipped.map(ev => ev.id),
+            text: 'Fate leaps ' + roundsText(n) + ' ahead' + (n < spaces ? ' and stops at its own event' : '') + '.' });
+        skipped.forEach(ev => {
+            const name = (tacticDefs()[ev.def] || {}).name || ev.def;
+            emit(G, { t: 'fate-skip', id: ev.id, def: ev.def, cid: ev.source && ev.source.cid, player: ev.controller, by: by == null ? null : by,
+                text: (ev.controller == null ? 'The' : capFirst(possessive(s, ev.controller))) + ' ' + name + ' is skipped. It will never happen.' });
+        });
+        enterSpace(G, to, 'leap');
+        if (s.winner != null) return;
+        if (!s.fate.until) ruleEvent(G);
+    }
+
     // Fate's own event (a free flip or a reset) on the space the cursor has just entered. It resolves
     // after the scheduled events on that space (#118), so they resolve under the rules they were forecast with.
     function ruleEvent(G) {
@@ -1355,13 +1391,14 @@
     // A tactic with a `scheduled` block (data/tactics.js) puts a public event on the Fate track, `delay`
     // spaces ahead of the cursor. s.fate.queue holds plain records (never functions):
     //   { id: 'f<seq>', seq, def, source: { type: 'tactic', cid, card }, controller, space, createdRound,
-    //     createdTurn, repeat, lifetime, expiresRound, state, fires, firedRound, reason, target }
+    //     createdTurn, repeat, lifetime, expiresRound, state, fires, firedRound, reason, target, endedRound? }
     // state: 'pending' → 'fired' when the cursor enters its space (claimed before its effect runs, so it
     // can never fire twice); one-shot records stay fired for good, whichever way the cursor comes back.
     // A marked repeatable record (repeat) stays live after firing and fires on every later entry until
-    // it expires: lifetime counts real round ends (expiresRound), never spaces. 'skipped' (#120 leaps) and
-    // 'cancelled' are reserved for later cards. Events on one space resolve in seq order, then Fate's own
-    // rule event. A battle that is over freezes the schedule.
+    // it expires: lifetime counts real round ends (expiresRound), never spaces. A leap (#120, leapFate)
+    // makes a pending one-shot it bypasses 'skipped' (reason 'leap'); endedRound is the round a record
+    // was skipped or expired. 'cancelled' is reserved for later cards. Events on one space resolve in
+    // seq order, then Fate's own rule event. A battle that is over freezes the schedule.
     const SCHEDULE_LIMIT = 2;   // live scheduled events per player (like the two conditional slots)
     const cursorOf = s => s.fate.pos || 0;          // an older state has no cursor: space 0
     const queueOf = s => s.fate.queue || [];
@@ -1374,6 +1411,14 @@
     function canSchedule(s, p) { return !!s.options.timeline && liveScheduled(s, p) < SCHEDULE_LIMIT; }
     const lowerFirst = t => (t ? t[0].toLowerCase() + t.slice(1) : t);
     const roundsText = n => n + ' round' + (n === 1 ? '' : 's');
+    // One sentence for what it does: the definition's own words for this record (summaryFor, e.g. "Anna's
+    // creatures get +1/+1"), else its general summary.
+    function summaryOf(s, ev, def) {
+        if (!def) return '';
+        return (def.summaryFor && def.summaryFor(s, ev, H)) || def.summary || '';
+    }
+    // After a colon: lower-case the first letter, but never a player's name ("Anna's creatures…").
+    const midSentence = (s, t) => (t && s.players.some(P => P.name !== 'You' && t.indexOf(P.name + '\'s ') === 0) ? t : lowerFirst(t));
 
     function scheduleEvent(G, p, cid, def) {
         const s = G.s, sch = def.scheduled, delay = Math.max(1, sch.delay || 1);
@@ -1387,7 +1432,8 @@
         s.fate.queue = queueOf(s).concat([ev]);
         const rounds = delay + (fateHeld(s) ? 1 : 0);
         emit(G, { t: 'fate-schedule', player: p, id: ev.id, cid, def: def.id, space: ev.space, rounds,
-            text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + lowerFirst(sch.summary) });
+            text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + midSentence(s, summaryOf(s, ev, sch))
+                + (ev.repeat && lifetime ? ' It happens again each time Fate lands there, for ' + roundsText(lifetime) + '.' : '') });
     }
 
     // The cursor has entered this space: its live scheduled events fire, oldest first.
@@ -1407,8 +1453,8 @@
         if (ev.firedRound == null) ev.firedRound = s.round;
         const def = scheduledDef(ev), name = (tacticDefs()[ev.def] || {}).name || ev.def;
         const whose = ev.controller == null ? 'the' : possessive(s, ev.controller);
-        emit(G, { t: 'fate-event', id, def: ev.def, cid: ev.source && ev.source.cid, player: ev.controller, how, fires: ev.fires,
-            text: 'Fate reaches ' + whose + ' ' + name + ': ' + lowerFirst(def ? def.summary : 'nothing happens.') });
+        emit(G, { t: 'fate-event', id, def: ev.def, cid: ev.source && ev.source.cid, player: ev.controller, how, fires: ev.fires, repeat: !!ev.repeat,
+            text: 'Fate ' + (how === 'rewind' ? 'comes back to ' : how === 'leap' ? 'lands on ' : 'reaches ') + whose + ' ' + name + ': ' + midSentence(s, def ? summaryOf(s, ev, def) : 'nothing happens.') });
         if (def && def.resolve) def.resolve(api(G), ev, H);
         cleanup(G);
     }
@@ -1419,9 +1465,10 @@
             if (!isLive(ev) || ev.expiresRound == null || s.round < ev.expiresRound) return;
             ev.state = 'expired';
             ev.reason = 'lifetime';
+            ev.endedRound = s.round;
             const def = scheduledDef(ev), name = (tacticDefs()[ev.def] || {}).name || ev.def;
-            emit(G, { t: 'fate-expire', id: ev.id, def: ev.def, player: ev.controller,
-                text: (ev.controller == null ? 'The' : capFirst(possessive(s, ev.controller))) + ' ' + name + ' expires after ' + roundsText(ev.lifetime) + '.' });
+            emit(G, { t: 'fate-expire', id: ev.id, def: ev.def, cid: ev.source && ev.source.cid, player: ev.controller, fires: ev.fires || 0,
+                text: (ev.controller == null ? 'The' : capFirst(possessive(s, ev.controller))) + ' ' + name + ' expires after ' + roundsText(ev.lifetime) + (def && def.expireText ? ': ' + def.expireText : '.') });
             if (def && def.expire) def.expire(api(G), ev, H);
         });
         cleanup(G);
@@ -1430,7 +1477,8 @@
     // The public schedule, one entry per record (oldest first), for the reel, previews and the AI:
     //   { id, seq, def, name, summary, text, cid, controller, state, live, repeat, spaces (from the cursor),
     //     rounds / turns / turn / round / after / held (as in timeline; null when it is not coming),
-    //     createdRound, expiresRound, lifetime, fires, firedRound, reason }
+    //     createdRound, expiresRound, lifetime, fires, firedRound, reason, endedRound,
+    //     roundsLeft (a live repeatable: round ends it still lives through, this one included; else null) }
     function fateSchedule(s) {
         if (!s.options.timeline) return [];
         const hold = fateHeld(s) ? 1 : 0, half = s.roundTurns[1 - s.active] ? 1 : 0, after = roundCloser(s), pos = cursorOf(s);
@@ -1439,16 +1487,19 @@
             const spaces = ev.space - pos, live = isLive(ev);
             const rounds = live && spaces > 0 ? spaces + hold : null, turns = rounds == null ? null : 2 * rounds - half;
             return {
-                id: ev.id, seq: ev.seq, def: ev.def, name: card.name || ev.def, summary: def.summary || '', text: card.text || '',
+                id: ev.id, seq: ev.seq, def: ev.def, name: card.name || ev.def, summary: summaryOf(s, ev, def), text: card.text || '',
                 cid: ev.source ? ev.source.cid || null : null, controller: ev.controller, state: ev.state, live, repeat: !!ev.repeat, spaces,
                 rounds, turns, turn: turns == null ? null : s.turn + turns, round: rounds == null ? null : s.round + rounds, after, held: !!hold,
                 createdRound: ev.createdRound, expiresRound: ev.expiresRound, lifetime: ev.lifetime, fires: ev.fires || 0, firedRound: ev.firedRound, reason: ev.reason,
+                endedRound: ev.endedRound == null ? null : ev.endedRound,
+                roundsLeft: live && ev.expiresRound != null ? Math.max(0, ev.expiresRound - s.round + 1) : null,
             };
         });
     }
     // What a live scheduled event would do if it resolved NOW: the real resolution, run on a copy of the
     // state (nothing is changed), so the preview and the resolution cannot disagree. null when not live.
-    //   { id, defeated: [{ cid, name, owner, controller, dest }], hearts: [h0, h1], winner, events }
+    //   { id, defeated: [{ cid, name, owner, controller, dest }], hearts: [h0, h1], winner, events,
+    //     changes: [{ cid, name, controller, attack: [before, after], health: [before, after] }] (creatures that stay in play) }
     function fateEventPreview(state, id) {
         const ev = queueOf(state).find(e => e.id === id);
         if (!ev || !isLive(ev) || state.winner != null) return null;
@@ -1459,7 +1510,39 @@
             id,
             defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : e.cid,
                 owner: e.player, controller: state.cards[e.cid] ? state.cards[e.cid].controller : e.player, dest: e.dest })),
-            hearts: s.players.map(P => P.hearts), winner: s.winner, events: G.events,
+            hearts: s.players.map(P => P.hearts), winner: s.winner, events: G.events, changes: statChanges(state, s),
+        };
+    }
+    // Creatures in play before and after whose attack or health changed (for previews).
+    function statChanges(before, after) {
+        const out = [];
+        [0, 1].forEach(p => before.players[p].board.forEach(cid => {
+            if (!after.players[p].board.includes(cid)) return;
+            const a0 = attackOf(before, cid), a1 = attackOf(after, cid), h0 = healthOf(before, cid).current, h1 = healthOf(after, cid).current;
+            if (a0 !== a1 || h0 !== h1) out.push({ cid, name: logName(before, cid), controller: p, attack: [a0, a1], health: [h0, h1] });
+        }));
+        return out;
+    }
+
+    // What a Fate move would do if it were made now (#120): the real move, run on a copy, so the preview
+    // and the move cannot disagree. how: 'walk' (Clockwork forward, Filter) | 'leap' (Leap Ahead) | 'rewind'
+    // (spaces counts back). null without a Fate track or once the battle is over.
+    //   { from, to, moved, skipped: [ids], fired: [ids], rule: 'flip' | 'reset' | 'empty' | null, winner, events,
+    //     changes (as fateEventPreview) }
+    function fateMovePreview(state, spaces, how) {
+        if (!state.options.timeline || state.winner != null) return null;
+        const s = cloneState(state);
+        const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':preview-move:' + how + ':' + spaces), events: [] };
+        const from = cursorOf(s), n = Math.abs(spaces || 0);
+        if (how === 'leap') leapFate(G, n, s.active);
+        else shiftFate(G, how === 'rewind' ? -n : n);
+        const rule = G.events.find(e => e.t === 'reset' || e.t === 'flip' || e.t === 'fate-empty');
+        return {
+            from, to: cursorOf(s), moved: cursorOf(s) - from,
+            skipped: G.events.filter(e => e.t === 'fate-skip').map(e => e.id),
+            fired: G.events.filter(e => e.t === 'fate-event').map(e => e.id),
+            rule: rule ? (rule.t === 'fate-empty' ? 'empty' : rule.t) : null,
+            winner: s.winner, events: G.events, changes: statChanges(state, s),
         };
     }
 
@@ -1904,7 +1987,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, SCHEDULE_LIMIT, canSchedule, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateMovePreview, SCHEDULE_LIMIT, canSchedule, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

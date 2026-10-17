@@ -1186,3 +1186,14 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-fev.sched.spent .b-fev-label { text-decoration: line-through; }
 .b-fpast.scheduled { color: var(--rift); }
 .b-fate-sum .b-fate-sched { color: var(--rift); opacity: 0.95; }
+
+/* #120: a leap, the one-shot events it skipped and repeat spaces that ran out, as small past markers that sit
+   beside each other in their round instead of on top; a live repeat space at or behind NOW is marked too. */
+.b-fs > .b-fpast.leap, .b-fs > .b-fpast.skipped, .b-fs > .b-fpast.expired { width: 26px; height: 26px; font-size: 15px; }
+.b-fs > .b-fpast.leap { transform: translate(-100%, 0); color: var(--rift); }
+.b-fs > .b-fpast.skipped { transform: translate(0, 0); color: #ff9b8a; }
+.b-fs > .b-fpast.expired { transform: translate(-50%, 15%); color: #c9b8ff; }
+.b-fev.sched.behind { opacity: 0.9; }
+.b-fev.sched.behind .b-fev-label { font-style: italic; }
+.b-fev.sched.skipped .b-fev-label { color: #ff9b8a; }
+.b-fate-sum .b-fate-sched.echo { color: #c9b8ff; }

@@ -18,8 +18,12 @@
  *                       FATE-SCHEDULE-MODEL.md): playing it puts a public event on the Fate track instead
  *                       of acting now. { delay (spaces ahead, ≥ 1), summary (one sentence), repeat?,
  *                       lifetime? (rounds, repeatable only), resolve(api, ev, H) when Fate reaches it,
- *                       expire?(api, ev, H), project?(s, ev, H) a rough after-state for the AI only }.
+ *                       expire?(api, ev, H), project?(s, ev, H) a rough after-state for the AI only,
+ *                       summaryFor?(s, ev, H) the summary for one record ("Anna's creatures…"),
+ *                       idle? preview words when it would do nothing, expireText? what ending it does }.
  *                       Not offered without a Fate track or while its player has 2 events waiting.
+ *   fateMove?           a card that moves Fate now (#120): { how: 'leap' | 'rewind', spaces }, so the
+ *                       screen can preview the move with Engine.fateMovePreview. run() makes the move.
  * Art id: 'tactic/<id>' (optional; the card shows a text frame without it).
  */
 (function (root) {
@@ -413,6 +417,7 @@
         scheduled: {
             delay: 2,
             summary: 'Every creature in play is defeated.',
+            idle: 'no creature is in play, so nothing is defeated.',
             // Whoever is in play when it resolves (not when it was cast): its controller's side first, left
             // to right, then the other side, so the order never depends on whose turn it is (the preview
             // matches). Normal defeats: Mercy and Last Words still apply.
@@ -432,6 +437,66 @@
                     if (mercy) o.hand = o.hand.concat([cid]); else o.discard = o.discard.concat([cid]);
                 }));
                 return Object.assign({}, s, { players });
+            },
+        },
+        run() { /* the engine schedules it: see scheduled */ },
+    };
+    // The later Fate pack (#120, design/drafts/card-arena-2026-10-12/CARD-DRAFTS.md and FATE-SCHEDULE-MODEL.md).
+    // Bench and tests only, like Clean Slate: no tacticDecks list, starter, trainer deck or reward names
+    // them (dev/battle.html?fate=leap|echo|expiry). Colours follow the drafts; rarity waits for release.
+    tactics['leap-ahead'] = {
+        short: 'Fate jumps 2 rounds; skips between',
+        name: 'Leap Ahead', cost: 2, art: 'art/spell-motif-generic',
+        text: 'Fate jumps 2 rounds ahead. One-shot events it jumps over never happen.',
+        flavour: 'Skip the middle step. Hope it was not important.',
+        fateMove: { how: 'leap', spaces: 2 },
+        usable: s => !!s.options.timeline,
+        // The engine's leap: it lands on Fate's own rule event if that comes first (it never jumps it).
+        run(api, p) { api.leapFate(2, p); },
+    };
+    tactics.revisit = {
+        short: 'Fate 1 round back; repeats replay',
+        name: 'Revisit', cost: 2, colour: 'memory', art: 'art/spell-motif-memory',
+        text: 'Fate goes 1 round back. A repeat space it lands on happens again. One-shot events do not.',
+        flavour: 'Go back to the good part.',
+        fateMove: { how: 'rewind', spaces: 1 },
+        // Fate can't go further back than its limit: then it would certainly do nothing.
+        usable: s => !!s.options.timeline && s.fate.until < s.options.fateMax,
+        run(api) { api.emit({ t: 'tactic', text: 'Revisit: Fate goes 1 round back.' }); api.shiftFate(-1); },
+    };
+    const whoseSide = (s, p) => (s.players[p].name === 'You' ? 'Your' : s.players[p].name + '\'s');
+    const ECHO = 'Echoing Encouragement';
+    tactics['echoing-encouragement'] = {
+        short: 'Repeat space: your creatures +1/+1',
+        name: ECHO, cost: 3, colour: 'memory', art: 'art/spell-motif-memory',
+        text: 'Mark the next Fate space for 3 rounds. Each time Fate lands there, your creatures get +1/+1. The boosts end with it.',
+        flavour: 'Say it again. It still works.',
+        scheduled: {
+            delay: 1, repeat: true, lifetime: 3,
+            summary: 'Your creatures get +1/+1.',
+            summaryFor: (s, ev) => (ev.controller == null ? 'Every creature gets +1/+1.' : whoseSide(s, ev.controller) + ' creatures get +1/+1.'),
+            idle: 'there is no creature on that side, so nothing changes.',
+            expireText: 'its +1/+1 boosts end.',
+            // The creatures its player controls when Fate lands (left to right). Each boost carries the
+            // event's id, so all of them end together when it expires, wherever those creatures are then.
+            resolve(api, ev) {
+                const board = api.s.players[ev.controller].board.slice();
+                if (!board.length) { api.emit({ t: 'tactic', text: ECHO + ': there is no creature to encourage.' }); return; }
+                board.forEach(cid => api.buff(cid, 1, 1, ECHO, false, ev.id));
+                api.emit({ t: 'tactic', text: ECHO + ': ' + board.map(cid => api.name(cid)).join(', ') + ' get +1/+1.' });
+            },
+            expire(api, ev) {
+                Object.values(api.s.cards).forEach(c => {
+                    if (c.kind === 'creature' && c.buffs.some(b => b.fate === ev.id)) c.buffs = c.buffs.filter(b => b.fate !== ev.id);
+                });
+            },
+            // For the AI's look-ahead only: one landing (+1/+1 for its player's creatures in play now).
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    cards[cid] = Object.assign({}, cards[cid], { buffs: cards[cid].buffs.concat([{ label: ECHO, attack: 1, health: 1, temp: false, fate: ev.id }]) });
+                });
+                return Object.assign({}, s, { cards });
             },
         },
         run() { /* the engine schedules it: see scheduled */ },
