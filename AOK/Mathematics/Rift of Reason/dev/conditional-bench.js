@@ -20,7 +20,7 @@
         const creature = !!R.data.creatures[selected], seat = selected === set.creatures[1];
         note.textContent = 'Arm the highlighted card, then continue playing. Two conditions maximum; creatures reserve board space. '
             + (seat ? 'End turn with your board empty: a hero attack reveals Guard before damage.' : 'Inspect the armed card to read its committed condition.')
-            + ' Ten study cards are playable; campaign acquisition and thirteen other concepts remain unfinished.';
+            + ' Fifteen study cards are playable; campaign acquisition and eight other concepts remain unfinished.';
         const own = [creature ? selected : 'proof-pup', 'paper-dragon', 'lens-lizard', 'cloud-calf', 'comma-crab', 'pocket-tortoise', 'rawmsay'];
         const inst = (species, i) => ({ uid: 'conditional-' + i, species, powerDelta: 0, injuries: [], scars: [] });
         const s = E.createBattle({ seed: 'conditional-study-' + selected,

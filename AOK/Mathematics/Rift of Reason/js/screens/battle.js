@@ -873,8 +873,12 @@
             // Until the end of turn `turn` (#121, Scheduled Speech): turns alternate between the players.
             'next-turn': turn => (turn === state.turn ? 'until the end of this turn'
                 : 'until the end of ' + (((turn - state.turn) % 2 === 0 ? state.active : 1 - state.active) === ME ? 'your' : oppName + '\'s') + ' next turn'),
+            // Until turn `turn` starts (#148): the player whose turn that is.
+            'turn-start': turn => 'until ' + (((turn - state.turn) % 2 === 0 ? state.active : 1 - state.active) === ME ? 'your' : oppName + '\'s') + ' next turn starts',
         };
+        const KEYWORD_WORD = { guard: 'Guard', shield: 'Shield', swift: 'Swift', elusive: 'Elusive' };
         function effectLine(fx) {
+            if (fx.stat === 'keyword') return (fx.amount > 0 ? 'Gains ' : 'Loses ') + (KEYWORD_WORD[fx.keyword] || fx.keyword) + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
             return signed(fx.amount) + ' ' + fx.stat + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
         }
         function wheelLine(cid) {

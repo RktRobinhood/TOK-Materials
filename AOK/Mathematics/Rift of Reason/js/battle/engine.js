@@ -270,8 +270,15 @@
         eachAbility(s, c, def => (def.keywords || []).forEach(add));
         c.extraKeywords.forEach(add);
         if (abilityFlag(s, c, 'elusive')) add('elusive');
-        const kept = c.lostKeywords && c.lostKeywords.length ? out.filter(k => !c.lostKeywords.includes(k)) : out;
-        return c.shieldUsed ? kept.filter(k => k !== 'shield') : kept;
+        // Timed keywords (#148): gained or lost until a turn starts. When one ends, the creature's own keywords
+        // are as they were. A timed Shield is separate from a used printed one: it never revives that one.
+        const timed = c.timedKeywords || [];
+        const timedLoss = timed.filter(t => t.mode === 'lose').map(t => t.k);
+        const lost = (c.lostKeywords || []).concat(timedLoss);
+        let kept = lost.length ? out.filter(k => !lost.includes(k)) : out;
+        if (c.shieldUsed) kept = kept.filter(k => k !== 'shield');
+        timed.forEach(t => { if (t.mode === 'gain' && !timedLoss.includes(t.k) && !kept.includes(t.k)) kept.push(t.k); });
+        return kept;
     }
     const hasKeyword = (s, cid, k) => keywordsOf(s, cid).includes(k);
 
@@ -324,8 +331,8 @@
     // list: [{ stat: 'attack'|'health'|'cost', amount, label, until, from }]. until says how long:
     // 'turn' (this turn), 'play' (until it leaves play), 'ability' (its own ability), 'aura' (while
     // `from` is in play), 'rule' (while that rule is active), 'tax' (Night Sight), 'fate' (until a
-    // repeatable Fate space expires, from: its last round), 'next-turn' (until turn `from` ends). The colour wheel
-    // depends on the target, so it is not here: see wheelEdges.
+    // repeatable Fate space expires, from: its last round), 'next-turn' (until turn `from` ends), 'turn-start'
+    // (#148: until turn `from` starts). The colour wheel depends on the target, so it is not here: see wheelEdges.
     function activeEffects(s, cid) {
         const c = s.cards[cid];
         if (!c || c.kind !== 'creature') return [];
@@ -338,11 +345,14 @@
         c.buffs.forEach(b => {
             // A repeatable Fate space's boost (#120) lasts until that space expires: from = its last round.
             // A boost until a player's next turn ends (#121, Scheduled Speech): from = that turn's number.
-            const until = b.fate ? 'fate' : b.untilTurn != null ? 'next-turn' : b.temp ? 'turn' : 'play';
-            const from = b.fate ? ((queueOf(s).find(ev => ev.id === b.fate) || {}).expiresRound || null) : b.untilTurn != null ? b.untilTurn : null;
+            // A boost until a player's next turn starts (#148, Standing Ovation): from = that turn's number.
+            const until = b.fate ? 'fate' : b.untilTurn != null ? 'next-turn' : b.untilStart != null ? 'turn-start' : b.temp ? 'turn' : 'play';
+            const from = b.fate ? ((queueOf(s).find(ev => ev.id === b.fate) || {}).expiresRound || null) : b.untilTurn != null ? b.untilTurn : b.untilStart != null ? b.untilStart : null;
             if (b.attack) out.push({ stat: 'attack', amount: b.attack, label: b.label, until, from });
             if (b.health) out.push({ stat: 'health', amount: b.health, label: b.label, until, from });
         });
+        // Timed keywords (#148): { stat: 'keyword', keyword, amount: +1 gained / −1 lost, until: 'turn-start' }.
+        (c.timedKeywords || []).forEach(t => out.push({ stat: 'keyword', keyword: t.k, amount: t.mode === 'gain' ? 1 : -1, label: t.label || 'Condition', until: 'turn-start', from: t.until }));
         if (s.players[c.controller].hand.includes(cid)) {
             const delta = rules(s).costDelta;
             const shown = Math.max(0, c.cost + delta) - c.cost;   // a cost never goes below 0
@@ -909,6 +919,15 @@
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
             // Until the end of its controller's next turn (#121, Scheduled Speech; see nextTurnEnd).
             buffNextTurn(cid, attack, health, label) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilTurn: nextTurnEnd(G, s.cards[cid].controller) }); },
+            // Until p's next turn starts (#148): a boost, or a keyword gained or lost. A gain the creature already
+            // has, or a loss of one it doesn't have, changes nothing (→ false). Damage is never touched.
+            buffUntilStart(cid, attack, health, label, p) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilStart: nextTurnStart(G, p) }); },
+            keywordUntilStart(cid, k, mode, p, label) {
+                const c = s.cards[cid], has = hasKeyword(s, cid, k);
+                if (mode === 'gain' ? has : !has) return false;
+                c.timedKeywords = (c.timedKeywords || []).concat([{ k, mode, until: nextTurnStart(G, p), label: label || null }]);
+                return true;
+            },
             // Extra energy for p's next turn start (#128); it is added once, then gone.
             energyNextTurn(p, n) { s.players[p].nextEnergy = (s.players[p].nextEnergy || 0) + (n || 0); },
             summon: (p, id) => summonToken(G, p, id),
@@ -1071,6 +1090,8 @@
         const had = keywordsOf(s, cid).filter(k => list.includes(k));
         c.extraKeywords = c.extraKeywords.filter(k => !list.includes(k));
         if (list.includes('shield')) c.shieldUsed = true;
+        // Timed gains of these keywords end too (#148); a new array, as below.
+        if (c.timedKeywords) { const left = c.timedKeywords.filter(t => !(t.mode === 'gain' && list.includes(t.k))); c.timedKeywords = left.length ? left : null; }
         const lost = (c.lostKeywords || []).slice(); // a new array: cloneState copies cards shallowly
         list.forEach(k => { if (k !== 'shield' && !lost.includes(k)) lost.push(k); });
         c.lostKeywords = lost;
@@ -1086,7 +1107,7 @@
     function swapStats(s, cid) {
         const c = s.cards[cid];
         const atk = attackOf(s, cid), hp = healthOf(s, cid).current;
-        const short = b => b.temp || b.untilTurn != null;   // this-turn and next-turn (#121) boosts are not folded in
+        const short = b => b.temp || b.untilTurn != null || b.untilStart != null;   // this-turn and timed (#121, #148) boosts are not folded in
         const lasting = c.buffs.reduce((sum, b) => sum + (short(b) ? 0 : (b.attack || 0)), 0);
         const extra = attackParts(s, cid).parts.reduce((sum, x) => sum + (x.source === 'base' ? 0 : x.amount), 0) - lasting;
         c.buffs = c.buffs.filter(short).map(b => Object.assign({}, b, { health: 0 }));
@@ -1133,6 +1154,7 @@
         c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
+        if (c.timedKeywords) c.timedKeywords = null;
     }
 
     function setWinner(G, p, reason) {
@@ -1163,6 +1185,7 @@
             return;
         }
         announceFlip(G);   // the first turn, or a flip still waiting for a rule card
+        endAtTurnStart(s);
         P.capacity = Math.max(1, Math.min(s.options.energyCap, P.capacity + r.growth));   // growth may be 0 or −1
         P.energy = P.capacity + (P.consumables['extra-energy'] || 0) + (P.nextEnergy || 0);   // nextEnergy: an environmental event (#128)
         P.nextEnergy = 0;
@@ -1180,6 +1203,26 @@
         s.pending = null;
         emit(G, { t: 'turn', player: p, text: playerName(s, p) + ': ' + P.energy + ' energy. Choose a draw.' });
         startBonus(G, p, r);
+    }
+
+    // Boosts and keywords that last "until a player's next turn starts" (#148) end as that turn starts. Damage
+    // stays; health that depended on a boost can then be lost (as with every other boost that ends).
+    function endAtTurnStart(s) {
+        Object.values(s.cards).forEach(c => {
+            if (c.kind !== 'creature') return;
+            if (c.buffs.some(b => b.untilStart != null && b.untilStart <= s.turn)) c.buffs = c.buffs.filter(b => !(b.untilStart != null && b.untilStart <= s.turn));
+            if (c.timedKeywords && c.timedKeywords.some(t => t.until <= s.turn)) {
+                const left = c.timedKeywords.filter(t => t.until > s.turn);   // a new array: cloneState copies cards shallowly
+                c.timedKeywords = left.length ? left : null;
+            }
+        });
+    }
+    // The turn whose start ends an effect that lasts "until p's next turn starts". Between turns (a round's
+    // end) the turn about to start is p's next one if it is p's; during a turn, p's next turn after this one.
+    function nextTurnStart(G, p) {
+        const s = G.s;
+        if (G.roundEnd) return p === s.active ? s.turn : s.turn + 1;
+        return p === s.active ? s.turn + 2 : s.turn + 1;
     }
 
     // Bonus rules (one at a time), checked when a turn starts:
@@ -1849,6 +1892,14 @@
         const s = G.s, c = s.cards[cid];
         if (!c || amount <= 0 || !s.players[c.controller].board.includes(cid)) return 0;
         if (hasKeyword(s, cid, 'shield')) {
+            // A timed Shield (#148) is used up first; the creature's own Shield, if any, stays.
+            const temp = (c.timedKeywords || []).find(t => t.mode === 'gain' && t.k === 'shield');
+            if (temp) {
+                const left = c.timedKeywords.filter(t => t !== temp);
+                c.timedKeywords = left.length ? left : null;
+                emit(G, { t: 'shield', cid, text: logName(s, cid) + '\'s Shield blocks the damage.' });
+                return 0;
+            }
             c.shieldUsed = true;
             c.extraKeywords = c.extraKeywords.filter(k => k !== 'shield');
             emit(G, { t: 'shield', cid, text: logName(s, cid) + '\'s Shield blocks the damage.' });
