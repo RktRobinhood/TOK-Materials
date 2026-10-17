@@ -117,6 +117,8 @@
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
         growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
+        // Fate timing (#121, data/axioms.js)
+        'fate-delay': 'Fate timing', 'fate-capacity': 'Fate slots', 'fate-impact': 'Fate damage',
     };
     // The basic rule of the other categories, in a few words (what a new rule card replaces).
     const BASIC_WORDS = {
@@ -124,6 +126,7 @@
         targeting: 'attack Guard first', defeat: 'defeated creatures go to the discard pile', power: 'no extra attack',
         colour: 'the normal colour wheel', abilities: 'abilities work', growth: 'no growth', damage: 'a hit takes hearts equal to its attack',
         hand: 'no hand limit', bonus: 'no bonus',
+        'fate-delay': 'Fate spells land when they say', 'fate-capacity': '2 Fate spells waiting each', 'fate-impact': 'Fate spells take hearts in full',
     };
     const RULE_GLYPH = { victory: '🏆', combat: '⚔', attacks: '➶', energy: '⚡', plays: '🂠', hand: '✋', bonus: '🎁' };
     const TACTIC_ICON = {
@@ -616,6 +619,7 @@
                     case 'armed': add('card-play'); break;
                     case 'conditional-reveal': add('card-play'); break;
                     case 'play': add('summon', 'card-play'); call(ev.cid, 'enter'); wantBark(ev.cid, 'enter', 0.6); break;
+                    case 'summon': add('summon', 'card-play'); break;
                     case 'tactic-play': {
                         const def = (Rift.data.tactics || {})[ev.id] || {};
                         add('tactic-' + ev.id, 'cast-' + (def.colour || 'colourless'));
@@ -685,7 +689,10 @@
                 if (condition && c.conditionSpent && c.kind === 'tactic') return 'This condition has already been used this match.';
                 if (c.kind === 'creature' && E.boardOccupancy(state, ME) >= state.options.boardLimit) return 'Your side is full, including reserved creature spaces.';
                 if (c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).scheduled && !E.canSchedule(state, ME)) {
-                    return state.options.timeline ? 'You already have ' + E.SCHEDULE_LIMIT + ' events waiting on the Fate track.' : 'There is no Fate track in this match.';
+                    if (!state.options.timeline) return 'There is no Fate track in this match.';
+                    // More can wait than the limit allows once Open Calendar has gone (#121): say both numbers.
+                    const waiting = E.fateSchedule(state).filter(ev => ev.live && ev.controller === ME).length, limit = E.scheduleLimit(state);
+                    return 'You already have ' + waiting + ' spells waiting on the Fate track.' + (waiting > limit ? ' The limit is now ' + limit + '.' : '');
                 }
                 const move = c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).fateMove;
                 if (move && !state.options.timeline) return 'There is no Fate track in this match.';
@@ -859,6 +866,9 @@
             turn: () => 'this turn only', play: () => 'until it leaves play', ability: () => 'its own ability',
             aura: from => 'while ' + (from || 'its friend') + ' is in play', rule: () => 'while this rule is active', tax: () => 'until Night Sight ends',
             fate: round => 'until its Fate space expires' + (round ? ', at the end of round ' + round : ''),
+            // Until the end of turn `turn` (#121, Scheduled Speech): turns alternate between the players.
+            'next-turn': turn => (turn === state.turn ? 'until the end of this turn'
+                : 'until the end of ' + (((turn - state.turn) % 2 === 0 ? state.active : 1 - state.active) === ME ? 'your' : oppName + '\'s') + ' next turn'),
         };
         function effectLine(fx) {
             return signed(fx.amount) + ' ' + fx.stat + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
@@ -1024,7 +1034,7 @@
                     ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
                     : isBasic(ax)
                     ? el('div.b-note-line', {}, [el('b', { text: 'Back to normal: ' + (ax.category || 'rule') + '. ' }), 'It puts the basic ' + (ax.category || '') + ' rule back for BOTH players.'])
-                    : el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (ax.category || 'rule') + '): ' }), on
+                    : el('div.b-note-line', {}, [el('b', { text: 'Rule card (' + (RULE_LABEL[ax.category] || ax.category || 'rule') + '): ' }), on
                         ? 'active now for BOTH players.'
                         : 'play it to change this rule for BOTH players.']),
                 ax.flavour ? el('div.b-note-line.b-flavour', { text: ax.flavour }) : null,
@@ -1953,15 +1963,20 @@
                 h.landed.length ? 'It landed on ' + list(h.landed) + ', which happened.' : h.skipped.length || h.passed.length ? '' : 'Nothing was in between.'].filter(Boolean).join(' ');
         }
         // "If it happened now: 3 creatures are defeated: your Zuckerborg (back to the hand), …" or "…: your
-        // Kim Kardashiant gets +1/+1." A change to nothing says the event's own idle words.
+        // Kim Kardashiant gets +1/+1." A change to nothing says the event's own idle words. #121: tokens that
+        // would join, cards back from a discard pile, and how many cards a player would draw (never which).
         function previewWords(pre, ev) {
             if (!pre) return '';
             const whose = d => (d.controller === ME ? 'your ' : oppName + '\'s ') + d.name.replace(/^(your|.+'s) /, '');
+            const side = p => (p === ME ? 'your' : oppName + '\'s');
             const signed2 = n => (n > 0 ? '+' : '') + n;
             const parts = [];
             if (pre.defeated.length) parts.push(pre.defeated.length + ' creature' + (pre.defeated.length === 1 ? ' is' : 's are') + ' defeated: '
-                + pre.defeated.map(d => whose(d) + (d.dest === 'hand' ? ' (back to the hand)' : '')).join(', '));
+                + pre.defeated.map(d => whose(d) + (d.dest === 'hand' ? ' (back to the hand)' : d.dest === 'gone' ? ' (a token: it leaves the game)' : '')).join(', '));
             if (pre.boosted.length) parts.push(pre.boosted.map(b => whose(b) + ' gets ' + signed2(b.attack) + '/' + signed2(b.health)).join(', '));
+            (pre.summoned || []).forEach(x => parts.push((/^[aeiou]/i.test(x.name) ? 'an ' : 'a ') + x.name + ' token joins ' + side(x.controller) + ' side'));
+            (pre.returned || []).forEach(x => parts.push(x.name + ' returns to ' + side(x.player) + ' hand'));
+            [ME, OPP].forEach(p => { const n = (pre.drawn || [])[p]; if (n) parts.push((p === ME ? 'you draw ' : oppName + ' draws ') + n + ' card' + (n === 1 ? '' : 's')); });
             if (!parts.length) return 'If it happened now: ' + ((ev && ev.idle) || 'nothing would change.');
             return 'If it happened now: ' + parts.join('; ') + '.' + (pre.winner != null ? ' The battle would end.' : '');
         }
@@ -2493,8 +2508,12 @@
 
         // For a Fate mover in hand (#120, data/tactics.js fateMove): what it would do now. A leap runs the real
         // move on a copy (E.fateLeapPreview); a rewind names the events on the space it lands on.
+        // For a scheduled spell in hand (#121): when it would happen if played now (a Fate timing rule moves
+        // it), the creature it fixes (Remember This), and how many of your spells are already waiting.
         function fateMoveWords(cid) {
-            const c = state.cards[cid], move = c && c.kind === 'tactic' && ((Rift.data.tactics || {})[c.tactic] || {}).fateMove;
+            const c = state.cards[cid], t = c && c.kind === 'tactic' && (Rift.data.tactics || {})[c.tactic];
+            if (t && t.scheduled && E.timeline(state).length) return scheduleWords(c.tactic, t.scheduled);
+            const move = t && t.fateMove;
             if (!move || !E.timeline(state).length) return '';
             const next = E.timeline(state)[0];
             if (move.leap) {
@@ -2514,6 +2533,17 @@
             const over = there.filter(ev => !ev.live).map(ev => whoseEvent(ev.controller) + ' ' + ev.name + (OVER[ev.state] || ' there is over'));
             return 'Fate moves ' + roundsWord(back) + ' further away' + (again.length ? ' and lands on ' + again.join(' and ') + ': it happens again.' : '.')
                 + (over.length ? ' ' + upFirst(over.join('. ')) + '.' : '');
+        }
+        function scheduleWords(id, sch) {
+            const delay = E.scheduleDelay(state, id), printed = Math.max(1, sch.delay || 1);
+            const rounds = delay + (E.timeline(state)[0].held ? 1 : 0);
+            const rule = delay !== printed ? E.activeAxioms(state).find(a => a.category === 'fate-delay') : null;
+            const target = sch.pick ? sch.pick(state, ME, E.H) : null;
+            const waiting = E.fateSchedule(state).filter(ev => ev.live && ev.controller === ME).length;
+            return 'It happens ' + (rounds === 1 ? 'at the end of this round' : 'in ' + roundsWord(rounds))
+                + (rule ? ' (' + rule.name + ': ' + roundsWord(Math.abs(delay - printed)) + (delay > printed ? ' later' : ' sooner') + ')' : '') + '.'
+                + (target ? ' It brings back ' + name(target) + ' if it is still in your discard pile then.' : '')
+                + ' Your spells waiting on the Fate track: ' + waiting + ' of ' + E.scheduleLimit(state) + '.';
         }
         // "Axioms": one tile per active rule, a picture and a few words. The four core rules always
         // show; a changed rule glows gold and says "Changed". Hover, focus or tap a tile for the card.
@@ -3419,7 +3449,7 @@
                         setTimeout(() => { if (ghost.remove) ghost.remove(); }, 900);
                     }
                 }
-                if (ev.t === 'play' && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
+                if ((ev.t === 'play' || ev.t === 'summon') && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
                 if (ev.t === 'attack' && !calm) lunge(ev.cid, ev.target, before);
                 if (ev.t === 'axiom' || ev.t === 'reset') { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
             });

@@ -29,6 +29,9 @@
  *   fateSchedule(state) → the public scheduled Fate events (#118/#119), fateEventPreview(state, id) → what
  *                  one would do if it resolved now (the real resolution, run on a copy), canSchedule(state, p)
  *   fateLeapPreview(state, spaces, p) → what a leap (#120, Leap Ahead) would do now, also run on a copy
+ *   scheduleDelay(state, tacticId) → how many spaces ahead that scheduled card would land if played now (its
+ *                  printed delay moved by a fate-delay Axiom, #121); scheduleLimit(state) → live events each
+ *                  player may have (2; Open Calendar 3)
  *   exhaustion(state, p) → { due, damage, count, reversed, lethal, wins } for the draw controls
  *   activeAxioms(state) → every active rule card (a "basic" one has ax.basic: it restates a default rule)
  *   changedAxioms(state) → only the active rule cards that change a basic rule
@@ -61,6 +64,9 @@
  *   boosted: [cids whose boosts from it end] }.
  *   A leap (#120): 'fate-leap' { player, from, to, spaces, skipped: [ids], passed: [ids] }, then one
  *   'fate-skip' { id, def, player (its controller), by } for each one-shot event it jumped over.
+ *   'fate-schedule' also carries printed and delay (#121: a fate-delay Axiom moved it when they differ).
+ *   A token (#121, Tomorrow's Idea): 'summon' { player, cid, token }. A token that leaves play leaves the game:
+ *   'defeated' with dest 'gone', or 'token-gone' { cid, player } when it would go to a hand.
  *
  * The Bag (design/card-arena-expansion-2026-10-07.md §3): players[p].bag lists the item ids brought
  * in (createBattle player.bag; only items with a `battle` block in data/items.js count). In the main
@@ -100,11 +106,15 @@
         playLimit: 2, handCap: null, bonus: null,
         heal: false, arrivalReady: false, ignoreGuard: false, mercy: false, abilityCostDelta: 0,
         abilitiesOff: false, reverseHearts: false, heroDamageCap: null, wheelReversed: false,
+        // Fate timing Axioms (#121): delay shift for newly scheduled spells, extra live events per player,
+        // most hearts one resolving scheduled effect can take from each hero.
+        fateDelay: 0, scheduleExtra: 0, fateHeroCap: null,
     };
     const PAD_SPECIES = ['astrophysicat', 'zuckerborg', 'siuuugull'];
     const KEYWORDS = ['guard', 'swift', 'shield'];
 
-    const species = id => (Rift.data.creatures || {})[id];
+    // Tokens (#121, data/tactics.js Rift.data.tokens) are looked up like species, but are never collected.
+    const species = id => (Rift.data.creatures || {})[id] || (Rift.data.tokens || {})[id];
     const abilityDefs = () => Battle.Abilities || {};
     const axiomDefs = () => Rift.data.axioms || {};
     const tacticDefs = () => Rift.data.tactics || {};
@@ -308,7 +318,8 @@
     // What is changing a creature's numbers right now, for the card face and its Active effects
     // list: [{ stat: 'attack'|'health'|'cost', amount, label, until, from }]. until says how long:
     // 'turn' (this turn), 'play' (until it leaves play), 'ability' (its own ability), 'aura' (while
-    // `from` is in play), 'rule' (while that rule is active), 'tax' (Night Sight). The colour wheel
+    // `from` is in play), 'rule' (while that rule is active), 'tax' (Night Sight), 'fate' (until a
+    // repeatable Fate space expires, from: its last round), 'next-turn' (until turn `from` ends). The colour wheel
     // depends on the target, so it is not here: see wheelEdges.
     function activeEffects(s, cid) {
         const c = s.cards[cid];
@@ -321,8 +332,9 @@
         });
         c.buffs.forEach(b => {
             // A repeatable Fate space's boost (#120) lasts until that space expires: from = its last round.
-            const until = b.fate ? 'fate' : b.temp ? 'turn' : 'play';
-            const from = b.fate ? ((queueOf(s).find(ev => ev.id === b.fate) || {}).expiresRound || null) : null;
+            // A boost until a player's next turn ends (#121, Scheduled Speech): from = that turn's number.
+            const until = b.fate ? 'fate' : b.untilTurn != null ? 'next-turn' : b.temp ? 'turn' : 'play';
+            const from = b.fate ? ((queueOf(s).find(ev => ev.id === b.fate) || {}).expiresRound || null) : b.untilTurn != null ? b.untilTurn : null;
             if (b.attack) out.push({ stat: 'attack', amount: b.attack, label: b.label, until, from });
             if (b.health) out.push({ stat: 'health', amount: b.health, label: b.label, until, from });
         });
@@ -667,12 +679,12 @@
     function winner(s) { return s.winner == null ? null : s.winner; }
 
     // Collected creatures defeated in this battle (in a discard pile). Cards discarded only because
-    // the hand was full (`burned`) never fought, so they do not count.
+    // the hand was full (`burned`) never fought, so they do not count. Tokens (#121) are not collected.
     function lostUids(s, p) {
         const out = [];
         s.players.forEach(P => P.discard.forEach(cid => {
             const c = s.cards[cid];
-            if (c.kind === 'creature' && c.owner === p && !c.loaner && !c.burned && !out.includes(c.uid)) out.push(c.uid);
+            if (c.kind === 'creature' && c.owner === p && !c.loaner && !c.burned && !c.token && !out.includes(c.uid)) out.push(c.uid);
         }));
         return out;
     }
@@ -889,6 +901,9 @@
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
             handRoom: (p, n) => handRoom(s, p, n),
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
+            // Until the end of its controller's next turn (#121, Scheduled Speech; see nextTurnEnd).
+            buffNextTurn(cid, attack, health, label) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilTurn: nextTurnEnd(G, s.cards[cid].controller) }); },
+            summon: (p, id) => summonToken(G, p, id),
             addKeyword(cid, k) { const c = s.cards[cid]; if (!c.extraKeywords.includes(k)) c.extraKeywords.push(k); if (k === 'shield') c.shieldUsed = false; if (c.lostKeywords) c.lostKeywords = c.lostKeywords.filter(x => x !== k); },
             shiftFate: n => shiftFate(G, n),
             leapFate: (n, by) => leapFate(G, n, by),
@@ -1063,9 +1078,10 @@
     function swapStats(s, cid) {
         const c = s.cards[cid];
         const atk = attackOf(s, cid), hp = healthOf(s, cid).current;
-        const lasting = c.buffs.reduce((sum, b) => sum + (b.temp ? 0 : (b.attack || 0)), 0);
+        const short = b => b.temp || b.untilTurn != null;   // this-turn and next-turn (#121) boosts are not folded in
+        const lasting = c.buffs.reduce((sum, b) => sum + (short(b) ? 0 : (b.attack || 0)), 0);
         const extra = attackParts(s, cid).parts.reduce((sum, x) => sum + (x.source === 'base' ? 0 : x.amount), 0) - lasting;
-        c.buffs = c.buffs.filter(b => b.temp).map(b => Object.assign({}, b, { health: 0 }));
+        c.buffs = c.buffs.filter(short).map(b => Object.assign({}, b, { health: 0 }));
         c.attack = Math.max(0, hp - extra);
         c.health = Math.max(1, atk);
         c.damage = atk > 0 ? 0 : 1;
@@ -1224,7 +1240,9 @@
             const c = s.cards[cid];
             eachAbility(s, c, def => { if (def.onTurnEnd) def.onTurnEnd(api(G), c); });
         });
-        Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(b => b.temp)) c.buffs = c.buffs.filter(b => !b.temp); });
+        // This turn's boosts end, and so do boosts that last until this turn ends (#121, untilTurn).
+        const ends = b => b.temp || (b.untilTurn != null && b.untilTurn <= s.turn);
+        Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(ends)) c.buffs = c.buffs.filter(b => !ends(b)); });
         P.board.forEach(cid => { s.cards[cid].frozen = false; });
         endRules(G, p);
         cleanup(G);
@@ -1246,7 +1264,9 @@
         if (fateHeld(s)) emit(G, { t: 'anchor', player: p, text: 'The Anchor holds: the Fate track does not move this round.' });
         else {
             emit(G, { t: 'fate-move', text: 'Round ' + s.round + ' ends: Fate moves 1 space.' });
+            G.roundEnd = true;   // between turns: see nextTurnEnd and summonToken (#121)
             shiftFate(G, 1);
+            G.roundEnd = false;
         }
         if (s.winner == null) expireScheduled(G);
     }
@@ -1392,7 +1412,8 @@
     // with its id (buff.fate) and end together when it expires (#120). 'skipped': a leap jumped over a
     // pending one-shot (leapFate). 'cancelled' is reserved for later cards. Events on one space resolve in
     // seq order, then Fate's own rule event. A battle that is over freezes the schedule.
-    const SCHEDULE_LIMIT = 2;   // live scheduled events per player (like the two conditional slots)
+    const SCHEDULE_LIMIT = 2;   // live scheduled events per player (like the two conditional slots); Open Calendar +1
+    const DELAY_MAX = 4;        // Patient Plans moves a spell later, but never beyond 4 spaces ahead (#121)
     const cursorOf = s => s.fate.pos || 0;          // an older state has no cursor: space 0
     const queueOf = s => s.fate.queue || [];
     const isLive = ev => ev.state === 'pending' || (ev.state === 'fired' && !!ev.repeat);
@@ -1401,32 +1422,89 @@
         return (tacticDefs()[ev.def] || {}).scheduled || null;
     }
     function liveScheduled(s, p) { return queueOf(s).filter(ev => ev.controller === p && isLive(ev)).length; }
-    function canSchedule(s, p) { return !!s.options.timeline && liveScheduled(s, p) < SCHEDULE_LIMIT; }
+    // Fate timing Axioms (#121) are read when a spell is played. Events already on the track never move
+    // because one changes, and a lower limit never cancels events already waiting.
+    function scheduleLimit(s) { return SCHEDULE_LIMIT + (rules(s).scheduleExtra || 0); }
+    function canSchedule(s, p) { return !!s.options.timeline && liveScheduled(s, p) < scheduleLimit(s); }
+    function scheduleDelay(s, id) {
+        const sch = (tacticDefs()[id] || {}).scheduled;
+        if (!sch) return null;
+        const printed = Math.max(1, sch.delay || 1), shift = rules(s).fateDelay || 0;
+        return Math.max(1, Math.min(Math.max(DELAY_MAX, printed), printed + shift));
+    }
     const lowerFirst = t => (t ? t[0].toLowerCase() + t.slice(1) : t);
     const roundsText = n => n + ' round' + (n === 1 ? '' : 's');
     // "your Clean Slate" / "Anna's Clean Slate" / "the Clean Slate" (an environment event, #128).
     const eventName = (s, ev) => (ev.controller == null ? 'the' : possessive(s, ev.controller)) + ' ' + ((tacticDefs()[ev.def] || {}).name || ev.def);
     // Its one-sentence effect, mid-sentence ("every creature…", "your creatures…", "Anna's creatures…").
-    // A summary function names the controller's side itself, so it is never lower-cased.
+    // A summary function names the controller's side itself, so it is never lower-cased. ctx: { who ('you' /
+    // 'Anna' / 'the'), target (the name of the target fixed when it was played, or null) }.
     function summaryOf(s, ev, sch) {
         if (!sch) return 'nothing happens.';
         if (typeof sch.summary !== 'function') return lowerFirst(sch.summary || '');
-        return sch.summary(ev.controller == null ? 'the' : possessive(s, ev.controller));
+        const p = ev.controller;
+        return sch.summary(p == null ? 'the' : possessive(s, p), { who: p == null ? 'the' : s.players[p].name === 'You' ? 'you' : s.players[p].name,
+            target: ev.target && s.cards[ev.target] ? cardName(s, ev.target) : null });
     }
 
+    // A fate-delay Axiom (#121) moves the new event's space once, now; a card with pick fixes its target now.
     function scheduleEvent(G, p, cid, def) {
-        const s = G.s, sch = def.scheduled, delay = Math.max(1, sch.delay || 1);
+        const s = G.s, sch = def.scheduled, printed = Math.max(1, sch.delay || 1), delay = scheduleDelay(s, def.id);
         const seq = (s.fate.seq || 0) + 1;
         const lifetime = sch.repeat && sch.lifetime ? sch.lifetime : null;
         const ev = { id: 'f' + seq, seq, def: def.id, source: { type: 'tactic', cid, card: def.id }, controller: p,
             space: cursorOf(s) + delay, createdRound: s.round, createdTurn: s.turn, repeat: !!sch.repeat,
             lifetime, expiresRound: lifetime ? s.round + lifetime - 1 : null,
-            state: 'pending', fires: 0, firedRound: null, reason: null, target: null };
+            state: 'pending', fires: 0, firedRound: null, reason: null, target: sch.pick ? sch.pick(s, p, H) || null : null };
         s.fate.seq = seq;
         s.fate.queue = queueOf(s).concat([ev]);
         const rounds = delay + (fateHeld(s) ? 1 : 0);
-        emit(G, { t: 'fate-schedule', player: p, id: ev.id, cid, def: def.id, space: ev.space, rounds,
-            text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + summaryOf(s, ev, sch) });
+        const by = delay !== printed ? activeAxioms(s).find(a => a.category === 'fate-delay') : null;
+        emit(G, { t: 'fate-schedule', player: p, id: ev.id, cid, def: def.id, space: ev.space, rounds, printed, delay,
+            text: says(s, p, 'schedules') + ' ' + def.name + ' on the Fate track. In ' + roundsText(rounds) + ': ' + summaryOf(s, ev, sch)
+                + (by ? ' ' + by.name + ' moved it ' + roundsText(Math.abs(delay - printed)) + (delay > printed ? ' later.' : ' sooner.') : '') });
+    }
+    // Gentle Consequences (#121): while one scheduled effect resolves (its own effect and the defeats it
+    // causes), each hero loses at most rules.fateHeroCap hearts. damageHero reads G.fateCap.
+    function withFateCap(G, fn) {
+        const s = G.s, cap = rules(s).fateHeroCap, was = G.fateCap;
+        G.fateCap = cap == null ? null : { cap, dealt: [0, 0], name: (activeAxioms(s).find(a => a.rules && a.rules.fateHeroCap != null) || { name: 'Fate rule' }).name };
+        try { fn(); } finally { G.fateCap = was; }
+    }
+    // A token (#121): a plain generated creature for player p, if p's side has room (reserved condition
+    // spaces count). It is not a collected card: it never goes to a hand, deck or discard pile, and leaves the
+    // game when it leaves play. It can act on its controller's next turn: a token that arrives between turns
+    // (at a round's end) is ready for the turn that starts next if that turn is its controller's.
+    function summonToken(G, p, id) {
+        const s = G.s;
+        if (!(Rift.data.tokens || {})[id] || boardOccupancy(s, p) >= s.options.boardLimit) return null;
+        s.tokenSeq = (s.tokenSeq || 0) + 1;
+        const cid = 'p' + p + 'k' + s.tokenSeq;
+        const c = makeCreature(cid, { uid: 'token-' + cid, species: id }, p);
+        c.token = true;
+        c.enteredTurn = G.roundEnd && p === s.active ? s.turn - 1 : s.turn;
+        s.cards[cid] = c;
+        s.players[p].board.push(cid);
+        emit(G, { t: 'summon', player: p, cid, token: id, text: 'A ' + c.attack + '/' + c.health + ' ' + cardName(s, cid) + ' token joins ' + possessive(s, p) + ' side.' });
+        return cid;
+    }
+    // The same token added to a copy of the state, for the AI's rough look-ahead only (H.projectToken).
+    function projectToken(s, p, id) {
+        if (!(Rift.data.tokens || {})[id] || boardOccupancy(s, p) >= s.options.boardLimit) return s;
+        const cid = 'p' + p + 'k' + ((s.tokenSeq || 0) + 1);
+        const c = makeCreature(cid, { uid: 'token-' + cid, species: id }, p);
+        c.token = true;
+        c.enteredTurn = s.turn;
+        const players = s.players.slice();
+        players[p] = Object.assign({}, s.players[p], { board: s.players[p].board.concat([cid]) });
+        return Object.assign({}, s, { players, cards: Object.assign({}, s.cards, { [cid]: c }), tokenSeq: (s.tokenSeq || 0) + 1 });
+    }
+    // The turn at whose end a "until its controller's next turn ends" boost stops (#121). Between turns (a
+    // round's end) the turn about to start is the next one; during a turn, the controller's following turn.
+    function nextTurnEnd(G, p) {
+        const s = G.s;
+        if (G.roundEnd) return p === s.active ? s.turn : s.turn + 1;
+        return p === s.active ? s.turn + 2 : s.turn + 1;
     }
 
     // The cursor has entered this space: its live scheduled events fire, oldest first.
@@ -1450,8 +1528,10 @@
         const A = api(G);
         // A repeatable space's boosts carry its id, so they all end when it expires (#120).
         if (ev.repeat) A.buff = (cid, attack, health, label, temp) => { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp, fate: ev.id }); };
-        if (def && def.resolve) def.resolve(A, ev, H);
-        cleanup(G);
+        withFateCap(G, () => {
+            if (def && def.resolve) def.resolve(A, ev, H);
+            cleanup(G);
+        });
     }
     // After a round's end (the Fate move or the Anchor's hold): live records whose lifetime is used up
     // expire, and every boost they gave ends (health that depended on one can then be lost).
@@ -1466,7 +1546,7 @@
             emit(G, { t: 'fate-expire', id: ev.id, def: ev.def, player: ev.controller, boosted,
                 text: capFirst(eventName(s, ev)) + ' expires after ' + roundsText(ev.lifetime) + '.' + (boosted.length ? ' Its boosts end.' : '') });
             boosted.forEach(cid => { s.cards[cid].buffs = s.cards[cid].buffs.filter(b => b.fate !== ev.id); });
-            if (def && def.expire) def.expire(api(G), ev, H);
+            if (def && def.expire) withFateCap(G, () => def.expire(api(G), ev, H));
         });
         cleanup(G);
     }
@@ -1474,7 +1554,8 @@
     // The public schedule, one entry per record (oldest first), for the reel, previews and the AI:
     //   { id, seq, def, name, summary, idle, text, cid, controller, state, live, repeat, spaces (from the cursor),
     //     rounds / turns / turn / round / after / held (as in timeline; null when it is not coming),
-    //     createdRound, expiresRound, lifetime, fires, firedRound, reason }
+    //     createdRound, expiresRound, lifetime, fires, firedRound, reason, target, targetName (#121: the target
+    //     fixed when it was played, e.g. Remember This's creature, or null) }
     function fateSchedule(s) {
         if (!s.options.timeline) return [];
         const hold = fateHeld(s) ? 1 : 0, half = s.roundTurns[1 - s.active] ? 1 : 0, after = roundCloser(s), pos = cursorOf(s);
@@ -1487,13 +1568,17 @@
                 cid: ev.source ? ev.source.cid || null : null, controller: ev.controller, state: ev.state, live, repeat: !!ev.repeat, spaces,
                 rounds, turns, turn: turns == null ? null : s.turn + turns, round: rounds == null ? null : s.round + rounds, after, held: !!hold,
                 createdRound: ev.createdRound, expiresRound: ev.expiresRound, lifetime: ev.lifetime, fires: ev.fires || 0, firedRound: ev.firedRound, reason: ev.reason,
+                target: ev.target || null, targetName: ev.target && s.cards[ev.target] ? cardName(s, ev.target) : null,
             };
         });
     }
     // What a live scheduled event would do if it resolved NOW: the real resolution, run on a copy of the
     // state (nothing is changed), so the preview and the resolution cannot disagree. null when not live.
     //   { id, defeated: [{ cid, name, owner, controller, dest }], boosted: [{ cid, name, controller, attack,
-    //     health }] (creatures still in play whose numbers it changes), hearts: [h0, h1], winner, events }
+    //     health }] (creatures still in play whose numbers it changes), hearts: [h0, h1], winner, events,
+    //     summoned: [{ cid, name, controller }] (tokens, #121), returned: [{ cid, name, player }] (discard pile
+    //     to hand), drawn: [n0, n1] (only how many: a preview never names a hidden card) }
+    // events are public only: a private event (a draw) keeps only what everyone may see.
     function fateEventPreview(state, id) {
         const ev = queueOf(state).find(e => e.id === id);
         if (!ev || !isLive(ev) || state.winner != null) return null;
@@ -1510,10 +1595,18 @@
             const attack = attackOf(s, cid) - attackOf(state, cid), health = healthOf(s, cid).max - healthOf(state, cid).max;
             if (attack || health) boosted.push({ cid, name: logName(state, cid), controller: p, attack, health });
         }));
+        const summoned = [], returned = [];
+        [0, 1].forEach(p => {
+            s.players[p].board.forEach(cid => { if (!state.cards[cid]) summoned.push({ cid, name: cardName(s, cid), controller: p }); });
+            s.players[p].hand.forEach(cid => { if (state.players[p].discard.includes(cid)) returned.push({ cid, name: cardName(state, cid), player: p }); });
+        });
+        const drawn = [0, 1].map(p => s.players[p].hand.filter(cid => state.players[p].deck.includes(cid)).length);
         return {
-            defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : e.cid,
+            // A token made and defeated inside the preview is only in the copy (#121).
+            defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : s.cards[e.cid] ? cardName(s, e.cid) : e.cid,
                 owner: e.player, controller: state.cards[e.cid] ? state.cards[e.cid].controller : e.player, dest: e.dest })),
-            boosted, hearts: s.players.map(P => P.hearts), winner: s.winner, events: G.events,
+            boosted, summoned, returned, drawn, hearts: s.players.map(P => P.hearts), winner: s.winner,
+            events: G.events.map(e => (e.privateTo == null ? e : { t: e.t, player: e.player, turn: e.turn, round: e.round, text: e.publicText || '' })),
         };
     }
     // What a leap of `spaces` by player p would do NOW (#120), run on a copy like fateEventPreview:
@@ -1709,6 +1802,14 @@
 
     function damageHero(G, p, amount, source) {
         const s = G.s, P = s.players[p];
+        // Gentle Consequences (#121): one resolving scheduled effect takes at most cap hearts from each hero.
+        const cap = G.fateCap;
+        if (cap && amount > 0) {
+            const room = Math.max(0, cap.cap - cap.dealt[p]);
+            if (amount > room) emit(G, { t: 'axiom-effect', player: p, text: cap.name + ': a spell from the Fate track takes at most ' + cap.cap + ' heart' + (cap.cap === 1 ? '' : 's') + ' from ' + possessive(s, p) + ' hero.' });
+            amount = Math.min(amount, room);
+            cap.dealt[p] += amount;
+        }
         if (amount <= 0) return 0;
         P.hearts = Math.max(0, P.hearts - amount);
         emit(G, { t: 'hit', player: p, amount, cid: source || null, text: says(s, p, 'loses') + ' ' + amount + ' heart' + (amount === 1 ? '' : 's') + ' (' + P.hearts + ' left).' });
@@ -1750,7 +1851,8 @@
         removeFrom(s.players[c.controller].board, cid);
         let dest = 'discard', saver = null;
         // Mercy first, and no return with a full hand, so a once-per-match Last Word is not wasted.
-        const room = handCount(s.players[c.owner]) < s.options.handLimit;
+        // A token (#121) never goes to a hand or a discard pile: it leaves the game.
+        const room = !c.token && handCount(s.players[c.owner]) < s.options.handLimit;
         if (room && rules(s).mercy) { dest = 'hand'; saver = 'Mercy'; }
         abilityIds(s, c).forEach(id => {
             const def = abilityDefs()[id];
@@ -1760,18 +1862,21 @@
         c.defeats += 1;
         c.controller = c.owner;
         const P = s.players[c.owner];
-        if (dest === 'hand' && handCount(P) < s.options.handLimit) P.hand.push(cid);
+        if (c.token) { dest = 'gone'; c.gone = true; }
+        else if (dest === 'hand' && handCount(P) < s.options.handLimit) P.hand.push(cid);
         else { dest = 'discard'; P.discard.push(cid); }
         emit(G, { t: 'defeated', cid, player: c.owner, dest, why,
-            text: dest === 'hand' ? name + ' is defeated, but ' + saver + ' returns it to the hand.' : name + ' is defeated.' });
+            text: dest === 'hand' ? name + ' is defeated, but ' + saver + ' returns it to the hand.' : dest === 'gone' ? name + ' is defeated. A token leaves the game.' : name + ' is defeated.' });
         conditionalFact(G, 'creature-defeated', controller, { cid, owner: c.owner, dest, why });
     }
 
     function bounce(G, cid) {
         const s = G.s, c = s.cards[cid];
+        const name = logName(s, cid);
         if (!removeFrom(s.players[c.controller].board, cid)) return;
         resetCard(c);
         c.controller = c.owner;
+        if (c.token) { c.gone = true; emit(G, { t: 'token-gone', cid, player: c.owner, text: name + ' leaves the game: a token cannot go to a hand.' }); return; }
         toHand(G, c.owner, cid);
     }
 
@@ -1967,12 +2072,13 @@
         rules,
         playCost: (s, cid) => playCost(s, cid),
         canAttack: (s, cid) => canAttack(s, cid),
+        projectToken: (s, p, id) => projectToken(s, p, id),
     };
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

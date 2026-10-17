@@ -65,6 +65,9 @@
  *   bring a wipe sooner or later, and does not force a creature onto a board that is wiped this round.
  *   #120: a leap that skips a coming event removes its term, so Leap Ahead is worth playing over an
  *   enemy wipe; Revisit and Leap Ahead get the deep score (DEEP_TACTICS) like the other Fate movers.
+ *   #121: the five colour-scheduled spells project their own change (a token, boosts, hand size, the
+ *   fixed Remember This creature), so every level weighs casting them like Clean Slate. A draw projects
+ *   only a bigger hand: the AI scores how many cards it holds, never which.
  *
  *   Hidden information: the AI never looks at the opponent's hand or deck order. The
  *   Predict colour guess uses the opponent's public team list minus the cards seen.
@@ -670,7 +673,7 @@
             const counts = {};
             Object.keys(s.cards).forEach(cid => {
                 const c = s.cards[cid];
-                if (c.kind === 'creature' && c.owner === foe && !seen.has(cid)) counts[c.colour] = (counts[c.colour] || 0) + 1;
+                if (c.kind === 'creature' && c.owner === foe && !c.token && !seen.has(cid)) counts[c.colour] = (counts[c.colour] || 0) + 1;
             });
             return opts.slice().sort((a, b) => (counts[b] || 0) - (counts[a] || 0))[0];
         }

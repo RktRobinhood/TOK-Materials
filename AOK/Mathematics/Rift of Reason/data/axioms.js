@@ -24,6 +24,7 @@
  *                                   basics, like a Fate reset, but Fate does not move). It never becomes
  *                                   an active rule itself. Playable only while a rule is changed.
  *   draws: n                      → after it is played, its player draws n cards from their deck
+ *   pack: 'fate'                  → the later Fate pack (#121): defined, but in no pool or grant list yet
  */
 (function (root) {
     'use strict';
@@ -314,6 +315,39 @@
         'age-of-observation': spotlight('age-of-observation', 'perception', 'Age of Observation', 'Look first. Theorise later.'),
         'age-of-wonder': spotlight('age-of-wonder', 'imagination', 'Age of Wonder', 'Every proof starts as a guess somebody dared to make.'),
         'age-of-tradition': spotlight('age-of-tradition', 'memory', 'Age of Tradition', 'We have always done it this way. Is that a reason?'),
+
+        // ---- Fate timing (#121, CARD-DRAFTS.md "Axiom expansion drafts"): later earnable rules ----
+        // Three categories, each replaced only by its own kind. A reset clears them, never the events already on
+        // the Fate track: a delay rule changes only spells played while it is active. pack 'fate': no pool, grant
+        // or starter names them yet (bench and tests only, like the Fate card pack in data/tactics.js).
+        'patient-plans': {
+            short: 'Fate spells 1 round later',
+            name: 'Patient Plans', category: 'fate-delay', pack: 'fate',
+            text: 'A spell put on the Fate track lands 1 round later (at most 4 rounds ahead). Spells already on the track stay where they are.',
+            flavour: 'Good plans take time. Some take a little more.',
+            rules: { fateDelay: 1 },
+        },
+        'hasty-plans': {
+            short: 'Fate spells 1 round sooner',
+            name: 'Hasty Plans', category: 'fate-delay', pack: 'fate',
+            text: 'A spell put on the Fate track lands 1 round sooner (at least 1 round ahead). Spells already on the track stay where they are.',
+            flavour: 'Why wait for tomorrow? Because tomorrow had a point.',
+            rules: { fateDelay: -1 },
+        },
+        'open-calendar': {
+            short: '3 Fate spells each',
+            name: 'Open Calendar', category: 'fate-capacity', pack: 'fate',
+            text: 'Each player may have 3 spells waiting on the Fate track instead of 2.',
+            flavour: 'A free afternoon is just a plan you have not made yet.',
+            rules: { scheduleExtra: 1 },
+        },
+        'gentle-consequences': {
+            short: 'Fate spells take at most 1 ❤',
+            name: 'Gentle Consequences', category: 'fate-impact', pack: 'fate',
+            text: 'A spell from the Fate track takes at most 1 heart from each hero. Creatures take damage as normal.',
+            flavour: 'The future arrives. It knocks first.',
+            rules: { fateHeroCap: 1 },
+        },
 
         // ---- own cards: never in the shared deck ----
         // Granny's reward for saving her at the Ch2 Hall (flag `spare-axiom`, STORY.md stakes.ch2 tiers 1–2):

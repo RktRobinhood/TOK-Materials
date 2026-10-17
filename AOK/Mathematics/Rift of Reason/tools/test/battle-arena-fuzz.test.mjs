@@ -27,7 +27,10 @@ function invariants(s) {
         assert.ok(P.energy >= 0, 'energy never negative');
         P.board.forEach(cid => assert.ok(E.healthOf(s, cid).current > 0 || s.winner != null, 'no dead creature stays on the board'));
     });
-    assert.equal(Object.keys(seen).length, Object.keys(s.cards).length, 'every card is somewhere');
+    // A token (#121) is on a board, or gone: it left the game when it left play (never a deck, hand or pile).
+    Object.keys(seen).forEach(cid => assert.ok(!s.cards[cid].token || (seen[cid] === 'board' && !s.cards[cid].gone), cid + ': a token only ever in play'));
+    const nowhere = Object.keys(s.cards).filter(cid => !seen[cid]);
+    assert.deepEqual(nowhere.filter(cid => !(s.cards[cid].token && s.cards[cid].gone)), [], 'every card is somewhere');
 }
 
 test('2,000 random games terminate with consistent states', () => {

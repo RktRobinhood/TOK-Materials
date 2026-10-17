@@ -145,3 +145,29 @@ Leaps, bypass, required sources, repeatable content and environmental sources ar
 The three are in the `fate` pack with Clean Slate (`pack: 'fate'` in `data/tactics.js`): no grant list names them, and they have no rarity until the pack's release is decided. Bench: `dev/battle.html?fate=leap|echo|once`. Engine API added: `fateLeapPreview` (a leap run on a copy, like `fateEventPreview`, which now also reports `boosted`). The screen says what a leap or rewind in hand would do now (prompt and inspection), reveals a leap with what it skipped, keeps a live repeatable space visible behind NOW, and marks leaps and expiries on the reel. The worked example in section 6 runs move by move in `tools/test/battle-fate-reentry.test.mjs`, with a test-only one-shot summon in place of Tomorrow's Idea (#121 owns that card and tokens).
 
 Known limitation (existing, not new): a conditional reaction that asks a question while the next turn's draw step is open would skip that draw. No released card does this. It needs fixing before a conditional reveal with a targeted Entrance ships.
+
+## 9. What #121 implements now
+
+#121 adds the five colour-scheduled spells and the four Fate timing Axioms from CARD-DRAFTS.md. The rules above are unchanged. All five spells are one-shot events 1 round ahead and cost 2, as drafted. They are colour tactics, so the colour quota counts them, but no creature of their colour has to be in play.
+
+| Card | Colour | When Fate reaches it |
+|---|---|---|
+| Prepared Defence | Reason | Its controller's creatures in play then get +1 maximum health and heal 1. |
+| Delayed Observation | Perception | Its controller draws 2 cards. A full hand stops the draw, and the card stays in the deck. |
+| Tomorrow's Idea | Imagination | A plain 1/2 Imagination **Idea token** joins its controller's side, if there is room. Reserved condition spaces count. |
+| Remember This | Memory | The creature it fixed when it was played returns from the discard pile to its controller's hand. |
+| Scheduled Speech | Language | Its controller's creatures in play then get +1 attack until the end of their controller's next turn. |
+
+**Builder decisions (#121):**
+
+- **Tokens.** A token is a generated battle creature, not a collected card (`Rift.data.tokens`, card flag `token`). It is never in a deck, a hand or a discard pile, and it counts for no quota. When it leaves play it leaves the game. A defeat reports `dest: 'gone'`, and Mercy and Last Words cannot save it. A bounce (Rethink) reports `token-gone`. Persuasion can take one. `lostUids` never lists a token, so nothing after the battle counts it. A token can act on its controller's next turn. One that arrives between turns (at a round's end) is ready for the turn that starts next, if that turn is its controller's.
+- **Remember This fixes its target when it is played.** The target is its controller's most recently defeated creature that is still in their discard pile. Defeats join the end of the pile. Cards discarded from a full hand never fought, so they don't count. It is not offered when there is no such creature. The target is public, because discard piles are. When Fate arrives, the card returns only if it is still in that pile. If it isn't (Recall took it, say), the event is used up with a public "no longer in the discard pile" line, and it never takes another creature. A full hand leaves the card in the pile, unburned.
+- **"Until the end of their controller's next turn"** (Scheduled Speech). If the boost arrives between turns, the turn about to start counts as next when it is that controller's. If it arrives during a turn (Clockwork forward), the next turn is that controller's following one. The boost is a buff with `untilTurn`. It ends at that turn's End turn, and it isn't folded in by a stat swap.
+- **Previews never name a hidden card.** `fateEventPreview` adds `summoned` (tokens), `returned` (discard pile to hand) and `drawn` (a count for each player). Its `events` keep only the public side of private ones.
+- **Timing Axioms.** Each is in its own category, and only a card of that category replaces it.
+  - `fate-delay`: **Patient Plans** adds 1 to a new spell's delay (at most 4 rounds ahead). **Hasty Plans** takes 1 off (at least 1 round). Both are read only when a spell is played, so announced events never move.
+  - `fate-capacity`: **Open Calendar** lets each player have 3 live events instead of 2. Losing it cancels nothing. A player who already has 3 or more waiting can't add one until fewer than 2 wait.
+  - `fate-impact`: **Gentle Consequences** limits one resolving scheduled effect to at most 1 heart from each hero. That includes the defeats it causes and their cleanup, and a repeatable space's expiry. Creature damage, attacks and every other kind of hero damage are unchanged. Conditional reactions to those defeats (#148/#149) are their own effects (section 4, rule 7), so it doesn't limit them.
+  - A Fate reset or Granny's Spare Axiom clears these rules like any other. Queued events, their spaces and their lifetimes stay.
+  - No released scheduled effect damages a hero yet, so Gentle Consequences is shown in tests with a test-only spell. It matters once #128's environmental events arrive.
+- **Status.** The five spells (`pack: 'fate'`) and the four rules (`pack: 'fate'` in data/axioms.js) are bench and tests only. No grant list, starter, deck, default ten or reward names them, and they have no rarity until the pack's release is decided. Bench: `dev/battle.html?fate=five|rules|full`. Engine API added: `scheduleDelay(state, tacticId)`, `scheduleLimit(state)`, and the `pick` hook for a target fixed at play. Tests: `tools/test/battle-fate-colour*.test.mjs`. Simulation: `tools/sim-fate-pack.mjs`; results are in `design/reviews/fate-pack-121-2026-10-17.md`.
