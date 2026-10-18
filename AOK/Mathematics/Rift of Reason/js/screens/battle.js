@@ -3551,9 +3551,12 @@
             const myPower = state.players[ME].power;
             const powerUsed = myPower ? { id: myPower.id, uses: myPower.uses || 0 } : null;
             const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed, powerUsed };
-            sfx(outcome === 'won' ? 'win' : 'lose');
-            if (fate && fate.results.length) sfx('fate-warp');
-            const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
+            // Let the result speak clearly: stop the final hit, and do not layer a gloomy Change
+            // effect over a win. Changes are still listed below; a draw has no defeat cue.
+            if (Rift.Audio && Rift.Audio.stopSounds) Rift.Audio.stopSounds();
+            if (outcome === 'won') sfx('win');
+            else if (outcome === 'lost') sfx('lose');
+            const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'You won!' : outcome === 'lost' ? 'You lost' : 'A draw';
             const reason = {
                 hearts: outcome === 'won' ? oppName + ' ran out of hearts.' : 'You ran out of hearts.',
                 'reverse-hearts': outcome === 'won' ? 'The reversed victory rule made reaching your own zero hearts a win.' : oppName + ' reached zero hearts under the reversed victory rule.',
@@ -3561,7 +3564,7 @@
                 'turn-limit': 'The rift closed before anyone won.',
                 'both-zero': 'Both heroes reached zero hearts at once.',
             }[state.endReason] || '';
-            const body = [el('h2', { text: title }), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
+            const body = [Rift.resultBanner(outcome, title, outcome === 'won' ? 'Victory! Well played.' : outcome === 'lost' ? 'Try a new plan next time.' : 'Neither player won.'), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
             // The TOK point: which rules decided this match.
             const changes = E.fullLog(state).filter(ev => ev.t === 'axiom' || ev.t === 'reset').length;
             const endRules = changedRules();
@@ -3597,7 +3600,7 @@
                 if (typeof p.onEnd === 'function') p.onEnd(result);
             }, 'primary');
             body.push(el('div.b-buttons', {}, [cont]));
-            dom.overlay.appendChild(el('div.b-end-panel.panel', {}, [el('div.b-end-body', {}, body)]));
+            dom.overlay.appendChild(el('div.b-end-panel.panel', { dataset: { outcome } }, [el('div.b-end-body', {}, body)]));
             dom.overlay.classList.add('show');
             screen.classList.add('ended');
             handle.result = result;

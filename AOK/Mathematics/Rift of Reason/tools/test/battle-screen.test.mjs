@@ -40,6 +40,27 @@ const practice = {
     battleOptions: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [3, 3], deckSize: 8, minCreatures: 1 },
 };
 
+test('battle results distinguish a win, a loss and a draw visually and audibly', () => {
+    for (const [winner, outcome, heading, cue] of [[0, 'won', 'You won!', 'win'], [1, 'lost', 'You lost', 'lose'], ['draw', 'draw', 'A draw', null]]) {
+        const sounds = [];
+        const t = setup(practice, { before(g) {
+            g.Rift.Battle.Engine.winner = () => winner;
+            g.Rift.Audio.sfx = name => sounds.push(name);
+        } });
+        t.g.flush();
+        const panel = t.$('.b-end-panel');
+        assert.equal(panel.dataset.outcome, outcome);
+        const banner = panel.querySelector('.result-banner');
+        assert.ok(banner, 'the result is a prominent banner, not only a line of text');
+        assert.equal(banner.getAttribute('role'), 'status');
+        assert.match(banner.textContent, new RegExp(heading.replace('!', '\\!')));
+        assert.equal(sounds.includes('win'), cue === 'win');
+        assert.equal(sounds.includes('lose'), cue === 'lose', 'a draw must not sound like a defeat');
+        assert.equal(t.handle.result.outcome, outcome);
+        t.handle.destroy();
+    }
+});
+
 test('concealed opponent arming never displays the normal card reveal', () => {
     const t = setup(Object.assign({}, practice, { player: { team: team(Array(8).fill('astrophysicat'),'me-'), tactics: [] } }), { before(g) {
         const c = g.Rift.data.creatures.kardashiant; c.cost = 1;

@@ -20,7 +20,7 @@
         step: ['step1.wav', 'step2.wav'],
         throw: ['throw.wav'],
         wobble: ['dial.wav'],
-        caught: ['victory.wav'],
+        caught: ['victory-bright.wav'],
         escape: ['shatter.wav'],
         jingle: ['sigil.wav'],
         count: ['count.wav'],
@@ -36,7 +36,7 @@
         'fate-warp': ['rift.wav'],
         'fate-death': ['shatter.wav'],
         axiom: ['page1.wav', 'page2.wav'],
-        win: ['victory.wav'],
+        win: ['victory-bright.wav'],
         lose: ['loss.wav'],
         // CC0 recorded claps; sources and processing in design/source-audio/homecoming-153.
         'single-clap': ['single-clap.wav'],

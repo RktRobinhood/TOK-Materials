@@ -1,0 +1,16 @@
+{
+  "creator": "Kenney Vleugels",
+  "license": "CC0-1.0",
+  "sourcePage": "https://kenney.nl/assets/music-jingles",
+  "download": "https://kenney.nl/media/pages/assets/music-jingles/f37e530b9e-1677590399/kenney_music-jingles.zip",
+  "original": "Audio/Steel jingles/jingles_STEEL10.ogg",
+  "originalSha256": "88a6645658b15dc327a2377ca7354e364625f081cd6ff9fda0b46dc54f664b71",
+  "decodedSource": "source.wav",
+  "decodedSourceSha256": "44bc4afc985f1aa85fe32c119f9d203f6a5d14d081f74d6636d364bf9df7c0a2",
+  "decoding": "Original Ogg decoded to 22050 Hz mono by Chrome OfflineAudioContext; retained as PCM16 source.wav.",
+  "processing": "Original recorded ascending steel jingle, gain only to -13 dB peak. No synthesis, new service recording or API quota used.",
+  "seconds": 0.9088888888888889,
+  "peakDb": -13,
+  "output": "assets/sfx/victory-bright.wav",
+  "outputSha256": "b0d0d7e69e06a17e8fc2bc4d7b8d4a1d8a805a6127b8750b674a4168fb3c3ed4"
+}

@@ -138,6 +138,10 @@ Syllo then offers a separate safe practice match at the Fair Gate with a loaned 
 
 ## Tech
 
+### Clear results
+
+Wins use a prominent gold/green banner, star emblem and explicit short text (You won!, You solved it! or Caught!). Losses and draws have different words and emblems, so colour and sound are never the only outcome cues. Calm motion and OS reduced motion keep the same static result. A short ascending Kenney CC0 steel jingle plays for win/caught; a draw never plays the loss cue. Post-battle Changes are listed without a competing gloomy stinger. Showing a saved result does not itself replay audio or rewards. Source/licence and verification: `design/reviews/victory-feedback-160-2026-10-18.md`.
+
 ### Adventure trailer
 
 The title page offers an optional **82-second trailer** for introducing the adventure to students. It starts at the Fair, hints at the crack in time, and shows travellers, places, puzzles, collecting and the Card Arena without answers or story outcomes. A deep male narrator invites students into the story.

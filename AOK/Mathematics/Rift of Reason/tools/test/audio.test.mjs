@@ -50,6 +50,18 @@ test('all mapped effects are short mono PCM WAV with mix headroom and complete l
   assert.ok(peak>0.2&&peak<=0.224,file+' peak '+peak);assert.ok(peak*4<1,'four-voice headroom');
  }
 });
+
+test('wins and catches share a dedicated upbeat cue, distinct from defeat', () => {
+ const Rift = loadRift(['js/core/rift.js', 'data/sfx.js', 'data/sfx-el.js']);
+ assert.deepEqual([...Rift.data.sfx.win], ['victory-bright.wav']);
+ assert.deepEqual([...Rift.data.sfx.caught], [...Rift.data.sfx.win]);
+ const positive = fs.readFileSync(GAME_DIR + '/assets/sfx/' + Rift.data.sfx.win[0]);
+ const negative = fs.readFileSync(GAME_DIR + '/assets/sfx/' + Rift.data.sfx.lose[0]);
+ assert.ok(!positive.equals(negative));
+ const source = JSON.parse(fs.readFileSync(GAME_DIR + '/design/source-audio/victory-feedback-160/sources.json', 'utf8'));
+ assert.equal(source.license, 'CC0-1.0');
+ assert.ok(source.seconds >= .6 && source.seconds < 2, 'a short celebration, not a wait');
+});
 test('cancelled or muted recorded playback cannot restart speech through a late rejection',async()=>{
  const state={settings:{music:.5,sfx:.8,voice:1}},events={},rejects=[],spoken=[];
  class Audio {play(){return new Promise((_,reject)=>rejects.push(reject));}pause(){}}

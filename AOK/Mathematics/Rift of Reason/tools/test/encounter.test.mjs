@@ -99,7 +99,8 @@ test('first topic hint is free, keeps stars, and remains used after the encounte
  assert.match(hint.textContent,/free/);hint.onclick();
  assert.equal(g.state.health,5);assert.equal(g.state.stats.hintsUsed,0);assert.equal(g.state.flags['learning-hint:fake'],true);
  g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();
- assert.match(g.modals.at(-1).body.children[0].textContent,/★★★/);
+ assert.match(g.modals.at(-1).body.querySelector('.enc-stars').textContent,/★★★/);
+ assert.match(g.modals.at(-1).body.querySelector('.result-banner').className,/\bwon\b/);
  assert.ok(g.state.flags['reasoning:test'][0].feedback);
 });
 
@@ -136,7 +137,7 @@ test('reload after a local reflection restores completion and its costs without 
  assert.equal(second.modals.at(-1).title,'Stage solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.map.visitCount.test,1);
  await second.modals.at(-1).buttons[0].onclick();
  assert.equal(second.modals.at(-1).title,'Solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.flags['reflection:test'],undefined);
- assert.match(second.modals.at(-1).body.children[0].textContent,/1 wrong checks/);assert.equal(second.state.flags['reasoning:test'][0].reflection,'Counts do not show reasons.');
+ assert.match(second.modals.at(-1).body.querySelector('.enc-stars').textContent,/1 wrong checks/);assert.equal(second.state.flags['reasoning:test'][0].reflection,'Counts do not show reasons.');
 });
 
 test('Owlet first-topic hint keeps stars and leaves its chapter perk available',async()=>{

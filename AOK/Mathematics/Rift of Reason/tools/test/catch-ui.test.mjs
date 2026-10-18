@@ -37,6 +37,8 @@ for (const kind of ['net', 'lure', 'tracks', 'picture']) for (const item of ['ch
         g.button('Resume').click();
         for (const action of plan) { if (g.board().done) break; g.move(action); }
         assert.equal(g.board().done, 'caught');
+        assert.match(g.root.querySelector('.result-banner.won').textContent, /You won!/);
+        assert.equal(g.root.querySelector('.result-banner').getAttribute('role'), 'status');
         assert.deepEqual(g.outcomes, ['caught']);
         g.move(plan.at(-1));
         assert.deepEqual(g.outcomes, ['caught']);

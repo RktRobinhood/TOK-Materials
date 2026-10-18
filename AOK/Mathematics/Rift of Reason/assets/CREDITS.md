@@ -27,7 +27,12 @@ From [Kenney](https://kenney.nl) (CC0), converted to short mono 22,050 Hz / 16-b
 | tick | UI Audio | click3 |
 | sigil, victory, escape | Music Jingles | jingles_PIZZI03, jingles_PIZZI07, jingles_PIZZI07 |
 | loss | Music Jingles | jingles_PIZZI07, reversed and slowed |
+| victory-bright | [Music Jingles](https://kenney.nl/assets/music-jingles) (CC0) | jingles_STEEL10; ascending steel jingle, re-levelled to −13 dB peak |
 | shatter, clunk | Impact Sounds | impactGlass_heavy_000, impactMetal_heavy_001 |
+
+## Positive win and catch cue
+
+The positive win/catch cue added for #160 retains its original Ogg, decoded PCM source, CC0 licence and hashes in `design/source-audio/victory-feedback-160/`. `node tools/prepare-victory-audio.mjs` reproduces the gain-only runtime WAV from that source. No generated beeps, new service recording or recording quota is used.
 
 ## Final Fair recordings
 

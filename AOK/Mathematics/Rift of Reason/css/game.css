@@ -162,6 +162,22 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.4em; line-height: 1
 .modal-backdrop { position: absolute; inset: 0; background: rgba(5, 4, 10, 0.65); display: flex; align-items: center; justify-content: center; z-index: 70; }
 .modal { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto; }
 
+/* Readable outcome first: the emblem and words work without sound, colour or motion. */
+.result-banner { display: flex; align-items: center; gap: 16px; width: 100%; padding: 20px; margin: 8px 0 16px; border: 2px solid #8c879c; border-radius: var(--radius); background: #252332; text-align: left; }
+.result-emblem { display: grid; place-items: center; flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; font: 44px/1 var(--font-display); }
+.result-copy { min-width: 0; }
+.result-banner h2 { margin: 0; font-size: clamp(1.6rem, 6vw, 2.4rem); line-height: 1.15; overflow-wrap: anywhere; }
+.result-banner p { margin: 8px 0 0; line-height: 1.35; }
+.result-banner.won { border-color: var(--gold); background: linear-gradient(120deg, #164638, #172a2c); color: #fff4ce; box-shadow: 0 0 28px #f2b63230; animation: result-arrive .42s ease-out both; }
+.result-banner.won .result-emblem { color: #ffe27a; background: radial-gradient(circle, #f2b63245, #f2b63208 70%); text-shadow: 0 2px 12px #f2b63280; }
+.result-banner.lost { border-color: #af8e92; background: #35262e; }
+.result-banner.lost .result-emblem { color: #e3c6ca; }
+.result-banner.draw .result-emblem { color: #c6d5ed; }
+.b-end-panel[data-outcome="won"] { border: 2px solid var(--gold); }
+@keyframes result-arrive { from { opacity: .3; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 480px) { .result-banner { gap: 12px; padding: 14px; } .result-emblem { flex-basis: 46px; width: 46px; height: 46px; font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { .result-banner { animation: none !important; } }
+
 @media (max-width: 760px) {
     html, body { font-size: 15px; }
     .dialogue .portrait { width: 110px; height: 110px; }

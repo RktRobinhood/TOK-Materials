@@ -304,7 +304,7 @@
             }
 
             function right() {
-                Rift.Audio.sfx('success');
+                Rift.Audio.sfx(round + 1 < run.rounds.length ? 'success' : 'win');
                 if (!practice) Rift.State.update(s => { H.pass(s, id, attempt, round); });
                 round += 1;
                 drawPips();
@@ -316,7 +316,7 @@
                 if (practice) {
                     Rift.State.update(s => { H.practiced(s, id); });
                     speak(d.say.win);
-                    fill([el('p.hunt-result.good', { text: '✔ All ' + run.rounds.length + '! Good practice.' }), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
+                    fill([Rift.resultBanner('won', 'You won!', 'All ' + run.rounds.length + ' rounds. Good practice.'), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
                     return;
                 }
                 let receipt = null;
@@ -326,7 +326,7 @@
                 speak(d.say.win);
                 leave.style.display = 'none';   // the panel's own button says the same
                 fill([
-                    el('p.hunt-result.good', { text: '★ ' + sp.name + ' joined you!' }),
+                    Rift.resultBanner('won', 'You won!', sp.name + ' joined you!'),
                     Rift.UI.framedCard(d.species, { big: true, inst }),
                     el('p.small', { text: d.tok }),
                     el('button.btn.primary', { text: 'Back to the map', onclick: toMap }),

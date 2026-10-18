@@ -53,3 +53,8 @@ Use the complete tracked test list from `git ls-files 'tools/test/*.test.mjs'`, 
 ## Voice allowance
 
 The 18 October batch already consumed all ten pinned-lite TTS attempts: 2533/2610 lines recorded, 77 missing. Resume only after the natural reset at **09:00 Copenhagen on 19 October**, after re-reading the ignored ledger/free plan. Preserve quotas, model pins, raw takes, quarantines and existing MP3 hashes. No duplicate voice automation.
+## Latest completed feedback fix — #160
+
+The teacher reported that the outcome sound feels negative and victories are hard to recognize. Shared gold/green explicit win banners now cover battles, puzzle completion, catches and final legendary wins. Loss/draw wording and styling differ; draws no longer play defeat audio. Battles stop preceding effects and omit the Change stinger at the result so it cannot muddy the primary cue. Win/caught use Kenney CC0 STEEL10, a bright ascending recorded jingle, processed gain-only to the existing −13 dB mono PCM format; sources/licence/hashes and `tools/prepare-victory-audio.mjs` are retained. No API recording quota was used.
+
+Verification: **100 focused pass; full suite 1,146 pass, one existing skip, zero failures (1,147 total)**. Both independent reviews clear. Real Chrome win/loss/draw fixtures pass at desktop and muted/Calm/reduced-motion phone width; a paid native-touch Picture Catch shows its new result and survives reload with one charm spent and one creature awarded. See `victory-feedback-160-2026-10-18.md`, JSON and screenshots. The GitHub #160 completion comment records the publication commit. This does not reopen any teacher gate or change the next dependency priorities above.
