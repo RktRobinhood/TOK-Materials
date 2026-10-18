@@ -592,10 +592,11 @@
                         panel.append(el('button.btn', { text: result === 'escaped' ? 'Let it go' : 'Back to the map', onclick: dismiss }));
                         return;
                     }
+                    const helpText = o.kind === 'picture' ? '+2 slides' : '+1 cast, turn or trap heart';
                     const intro = el('p.small', { text: 'Win the game to catch it. One charm pays for one whole try. You can pause or return here later.' });
                     panel.append(intro);
-                    if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: +1 cast, turn or trap heart on this visit.' }));
-                    if (session.sly(st, obstacle)) panel.append(el('p.catch-help.small', { text: 'Sly Charm: +1 cast, turn or trap heart for this creature.' }));
+                    if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: ' + helpText + ' on this visit.' }));
+                    if (session.sly(st, obstacle)) panel.append(el('p.catch-help.small', { text: 'Sly Charm: ' + helpText + ' for this creature.' }));
                     const choice = el('div.row.wrap');
                     let selectedItem = o.item || 'charm';
                     const slot = el('div');
@@ -638,7 +639,7 @@
                         return;
                     }
                     if (!o.board) available.forEach(item => choice.append(el('button.btn.small', {
-                        text: Rift.data.items[item].name + ' (' + st.items[item] + ')' + (item === 'greatcharm' ? ' · +1 cast, turn or trap heart' : ''),
+                        text: Rift.data.items[item].name + ' (' + st.items[item] + ')' + (item === 'greatcharm' ? ' · ' + helpText : ''),
                         onclick() { mountGame(item); choice.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === this))); },
                     })));
                     panel.append(choice, slot);

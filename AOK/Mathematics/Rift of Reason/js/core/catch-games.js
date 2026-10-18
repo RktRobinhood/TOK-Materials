@@ -1,13 +1,90 @@
-/* Three short, finite skill games. Every admitted layout has a winning certificate.
+/* Four short, finite skill games. Every admitted layout has a winning certificate.
  * Pure JSON boards: no clocks, DOM, bag changes or random catch roll here. */
 (function (root) {
     'use strict';
     const Rift = root.Rift, net = Rift.CatchNetPrototype;
-    const IDS = ['net', 'lure', 'tracks'];
-    const NAMES = { net: 'Pocket Nets', lure: 'Lantern Lure', tracks: 'Trail Finder' };
+    const IDS = ['net', 'lure', 'tracks', 'picture'];
+    const NAMES = { net: 'Pocket Nets', lure: 'Lantern Lure', tracks: 'Trail Finder', picture: 'Picture Catch' };
     const RARITIES = ['common', 'uncommon', 'rare', 'legendary'];
     const clone = b => JSON.parse(JSON.stringify(b));
     const tier = r => Math.max(0, RARITIES.indexOf(r));
+
+    // The classic eight-piece sliding puzzle. A small reverse breadth-first map
+    // gives every generated layout an exact shortest distance, not a shuffle count.
+    const PICTURE_GOAL = '123456780';
+    let pictureMap, pictureLayers;
+    function pictureMoves(b) {
+        const gap = b.tiles.indexOf(0), x = gap % 3, y = Math.floor(gap / 3);
+        return [y > 0 ? gap - 3 : -1, x < 2 ? gap + 1 : -1, y < 2 ? gap + 3 : -1, x > 0 ? gap - 1 : -1].filter(c => c >= 0);
+    }
+    function pictureIndex() {
+        if (pictureMap) return;
+        pictureMap = new Map([[PICTURE_GOAL, { distance: 0 }]]);
+        pictureLayers = [[PICTURE_GOAL]];
+        for (let distance = 1; distance <= 12; distance++) {
+            const layer = [];
+            for (const parent of pictureLayers[distance - 1]) {
+                const tiles = Array.from(parent, Number), gap = tiles.indexOf(0);
+                for (const cell of pictureMoves({ tiles })) {
+                    const next = tiles.slice(); [next[gap], next[cell]] = [next[cell], next[gap]];
+                    const key = next.join('');
+                    if (pictureMap.has(key)) continue;
+                    pictureMap.set(key, { distance, parent, cell: gap }); layer.push(key);
+                }
+            }
+            pictureLayers.push(layer);
+        }
+    }
+    function picturePlan(b) {
+        if (b.done) return b.done === 'caught' ? [] : null;
+        pictureIndex();
+        const tiles = b.tiles.slice(), available = b.moves - b.turn;
+        function known(key) {
+            const plan = [];
+            while (key !== PICTURE_GOAL) { const entry = pictureMap.get(key); plan.push({ cell: entry.cell }); key = entry.parent; }
+            return plan;
+        }
+        const start = tiles.join(''), entry = pictureMap.get(start);
+        if (entry) return entry.distance <= available ? known(start) : null;
+        // Players may move beyond the generation map. Bounded IDA* finds a route
+        // using only the visible tiles, and never suggests an over-budget win.
+        function estimate() {
+            return tiles.reduce((sum, tile, cell) => tile ? sum + Math.abs(cell % 3 - (tile - 1) % 3) + Math.abs(Math.floor(cell / 3) - Math.floor((tile - 1) / 3)) : sum, 0);
+        }
+        function search(gap, previous, left, seen) {
+            const key = tiles.join(''), indexed = pictureMap.get(key);
+            if (indexed) return indexed.distance <= left ? known(key) : null;
+            if (estimate() > left || (seen.get(key) || -1) >= left) return null;
+            seen.set(key, left);
+            for (const cell of pictureMoves({ tiles })) {
+                if (cell === previous) continue;
+                [tiles[gap], tiles[cell]] = [tiles[cell], tiles[gap]];
+                const tail = search(cell, gap, left - 1, seen);
+                [tiles[gap], tiles[cell]] = [tiles[cell], tiles[gap]];
+                if (tail) return [{ cell }].concat(tail);
+            }
+            return null;
+        }
+        for (let limit = estimate(); limit <= available; limit += 2) {
+            const plan = search(tiles.indexOf(0), -1, limit, new Map());
+            if (plan) return plan;
+        }
+        return null;
+    }
+    function picture(seed, rarity, help) {
+        pictureIndex();
+        const level = tier(rarity), distance = 6 + level * 2;
+        const key = Rift.makeRng(seed + ':picture').pick(pictureLayers[distance]);
+        return { kind: 'picture', size: 3, tiles: Array.from(key, Number), moves: distance + 8 - level + help * 2, turn: 0, done: null };
+    }
+    function slidePicture(board, cell) {
+        if (!Number.isInteger(cell) || !pictureMoves(board).includes(cell)) return null;
+        const b = clone(board), gap = b.tiles.indexOf(0);
+        [b.tiles[cell], b.tiles[gap]] = [b.tiles[gap], b.tiles[cell]];
+        b.turn++;
+        b.done = b.tiles.join('') === PICTURE_GOAL ? 'caught' : b.turn >= b.moves ? 'escaped' : null;
+        return { board: b, cell };
+    }
 
     // A two-ended trail tile is straight (0) or a corner (1). Directions are
     // north/east/south/west. Every rotation and every connection stays visible.
@@ -154,6 +231,7 @@
         const help = (item === 'greatcharm' ? 1 : 0) + (lured ? 1 : 0) + (sly ? 1 : 0), level = tier(rarity);
         if (kind === 'lure') return lantern(seed, rarity, help);
         if (kind === 'tracks') return tracks(seed, rarity, help);
+        if (kind === 'picture') return picture(seed, rarity, help);
         if (kind !== 'net') throw new Error('Unknown catch game');
         const behaviour = Rift.makeRng(seed + ':net-behaviour').pick(net.BEHAVIOURS);
         // Admit against the same three-cast budget before adding the easier rarity's
@@ -169,6 +247,7 @@
         if (!board || board.done || !action) return null;
         if (board.kind === 'net') return net.preview(board, action.cut);
         if (board.kind === 'lure') return turnTrail(board, action.cell);
+        if (board.kind === 'picture') return slidePicture(board, action.cell);
         if (board.kind !== 'tracks' || !Number.isInteger(action.cell) || action.cell < 0 || action.cell >= board.size ** 2 || board.open.includes(action.cell) || (board.hits || []).includes(action.cell)) return null;
         const b = clone(board), cell = action.cell;
         if (action.flag) {
@@ -189,8 +268,9 @@
     function solve(b) {
         if (b.kind === 'net') { const plan = net.solve(b); return plan && plan.map(cut => ({ cut })); }
         if (b.kind === 'lure') return lurePlan(b);
+        if (b.kind === 'picture') return picturePlan(b);
         return solveTracks(b);
     }
     const pick = seed => Rift.makeRng(String(seed) + ':game').pick(IDS);
-    Rift.CatchGames = { IDS, NAMES, RARITIES, pick, create, step, solve, clue, neighbours, deductions, ports, lightPath };
+    Rift.CatchGames = { IDS, NAMES, RARITIES, pick, create, step, solve, clue, neighbours, deductions, ports, lightPath, pictureMoves };
 })(typeof window !== 'undefined' ? window : globalThis);

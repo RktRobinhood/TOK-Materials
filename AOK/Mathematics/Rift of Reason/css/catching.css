@@ -80,3 +80,16 @@
 .catch-trail:focus-visible { outline: 3px solid #fff0aa; outline-offset: -4px; }
 .catch-endpoint { margin: 8px 0; color: #ffe09c; font-size: .85rem; font-weight: 800; }
 .catch-endpoint.exit { text-align: right; }
+/* One continuous creature image, sliced by clipping the same square in each tile. */
+.catch-picture-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); aspect-ratio: 1; border: 2px solid #8b7957; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 4px #101e18; }
+.catch-picture-tile { position: relative; min-width: 0; min-height: 44px; aspect-ratio: 1; padding: 0; border: 0; overflow: hidden; background: #14291e; color: #fff1c7; font: inherit; box-shadow: inset 0 0 0 1px #486652; }
+.catch-picture-scene { position: absolute; display: block; width: 300%; height: 300%; background: radial-gradient(ellipse at 50% 30%, #537267, #193b32 62%, #0c211d); pointer-events: none; }
+.catch-picture-scene img { display: block; width: 100%; height: 100%; padding: 4%; box-sizing: border-box; object-fit: contain; }
+.catch-piece-number { position: absolute; bottom: 3px; left: 3px; z-index: 1; min-width: 1.25em; padding: 1px 3px; border-radius: 4px; background: #0c1918df; font-weight: 800; font-size: .85rem; }
+.catch-picture-tile.movable { cursor: pointer; }
+.catch-picture-tile.movable::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 0 2px #ffdb86; pointer-events: none; }
+.catch-picture-tile:disabled { cursor: default; opacity: 1; }
+.catch-picture-tile:focus-visible { outline: 3px solid #fff0aa; outline-offset: -4px; z-index: 2; }
+.catch-empty-mark { font-size: .7rem; color: #a7c5b3; }
+.catch-picture-reference { position: relative; width: 112px; aspect-ratio: 1; overflow: hidden; border: 1px solid #8b7957; border-radius: 8px; }
+.catch-picture-reference .catch-picture-scene { width: 100%; height: 100%; }

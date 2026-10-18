@@ -8,6 +8,7 @@
         net: 'Cast net fences to close the beast into a small clearing; check its next path first.',
         lure: 'Turn the trails to carry lantern light from IN to the beast at OUT.',
         tracks: 'Search the long grass to reach the beast: numbers count nearby rival snares; flag them and open every safe patch.',
+        picture: 'Slide pieces into the empty space to rebuild the creature before your moves run out.',
     };
     function mount(container, o) {
         let board = o.board, phase = o.board.done ? 'ended' : o.started ? 'paused' : 'ready', destroyed = false;
@@ -18,7 +19,7 @@
         const field = el('div.catch-field'), controls = el('div.catch-controls');
         const rules = el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
         rules.open = !o.started;
-        const visitor = el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : board.kind === 'net' ? 'Close the clearing. Catch the beast.' : 'Guide the beast to your lantern.' })]);
+        const visitor = el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'picture' ? 'Rebuild the picture. Catch the beast.' : board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : board.kind === 'net' ? 'Close the clearing. Catch the beast.' : 'Guide the beast to your lantern.' })]);
         game.append(el('h3', { text: games.NAMES[board.kind] }), rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status);
         container.append(game);
         function beast() {
@@ -47,6 +48,7 @@
                 status.textContent = result.hit ? 'It crossed the net. One cast used; no wall built.' : 'Net closed. Room: ' + net.room(board).length + ' tiles.';
                 if (!net.available(board).includes(selected)) selected = net.available(board)[0];
             } else if (board.kind === 'lure') status.textContent = 'Trail turned. Gold shows where lantern light reaches.';
+            else if (board.kind === 'picture') status.textContent = 'Piece slid. ' + amount(board.moves - board.turn, 'move') + ' left.';
             else status.textContent = result.hit ? 'Rival snare at row ' + (Math.floor(result.cell / board.size) + 1) + ', column ' + (result.cell % board.size + 1) + '. One trap heart used.' : 'Follow the clues through the grass. No guessing is needed.';
             if (board.done) {
                 phase = 'ended';
@@ -62,10 +64,12 @@
             play.disabled = !!board.done;
             budget.textContent = board.kind === 'net' ? amount(board.cfg.casts - board.turn, 'cast') + ' · goal: ' + board.cfg.target + ' tiles · room: ' + net.room(board).length
                 : board.kind === 'lure' ? amount(board.moves - board.turn, 'turn') + ' · connect IN to OUT'
+                    : board.kind === 'picture' ? amount(board.moves - board.turn, 'move') + ' · rebuild the picture'
                     : amount(board.lives - board.mistakes, 'trap heart') + ' · ' + board.traps.length + ' snares · ' + board.open.length + '/' + (board.size ** 2 - board.traps.length) + ' safe tiles';
             field.innerHTML = ''; controls.innerHTML = '';
             if (board.kind === 'net') drawNet();
             else if (board.kind === 'lure') drawLure();
+            else if (board.kind === 'picture') drawPicture();
             else drawTracks();
             if (key) {
                 const same = game.querySelector('[data-catch-key="' + key + '"]');
@@ -129,6 +133,49 @@
             controls.append(el('p', { text: 'Tap a trail to turn it clockwise. Each tap uses one turn.' }),
                 el('p.small', { text: 'Gold = lit trail. Join both ends of each piece. You only need one route from IN to OUT; other pieces can stay dark.' }),
                 el('p.small', { text: 'Keyboard: arrows to move, Enter or Space to turn. No timer.' }));
+        }
+        function drawPicture() {
+            const legal = games.pictureMoves(board), gap = board.tiles.indexOf(0);
+            function scene() {
+                const node = el('span.catch-picture-scene');
+                if (Rift.Assets) node.append(Rift.Assets.img('creature/' + (o.species || 'astrophysicat') + '/idle', { label: 'Creature picture' }));
+                return node;
+            }
+            function slide(cell) {
+                if (!active()) return;
+                if (!legal.includes(cell)) { status.textContent = 'Choose a piece beside the empty space.'; return; }
+                act({ cell });
+            }
+            const grid = el('div.catch-picture-board', {
+                role: 'group', tabindex: 0, 'data-catch-key': 'picture-board',
+                'aria-label': 'Three by three creature picture. Empty space at row ' + (Math.floor(gap / 3) + 1) + ', column ' + (gap % 3 + 1) + '. Arrow keys move the empty space.',
+                onkeydown(ev) {
+                    if (!active()) return;
+                    const delta = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -3, ArrowDown: 3 }[ev.key];
+                    if (delta != null) { ev.preventDefault(); if (legal.includes(gap + delta)) slide(gap + delta); }
+                },
+            });
+            for (let cell = 0; cell < 9; cell++) {
+                const value = board.tiles[cell], movable = !board.done && legal.includes(cell), complete = board.done === 'caught';
+                const button = el('button.catch-picture-tile' + (!value ? '.gap' : '') + (movable ? '.movable' : ''), {
+                    type: 'button', disabled: !active(), 'aria-disabled': String(!active() || !movable), 'data-catch-key': 'picture-' + cell,
+                    'aria-label': 'Row ' + (Math.floor(cell / 3) + 1) + ', column ' + (cell % 3 + 1) + ': ' + (value ? 'piece ' + value + (movable ? ', slide into the empty space' : ', not beside the empty space') : 'empty space'),
+                    onclick() { slide(cell); },
+                });
+                if (value || complete) {
+                    const fragment = scene(), index = value ? value - 1 : 8;
+                    fragment.style.left = -(index % 3) * 100 + '%';
+                    fragment.style.top = -Math.floor(index / 3) * 100 + '%';
+                    button.append(fragment);
+                    if (!complete) button.append(el('span.catch-piece-number', { text: String(value) }));
+                } else button.append(el('span.catch-empty-mark', { text: 'Empty' }));
+                grid.append(button);
+            }
+            field.append(grid);
+            const reference = el('div.catch-picture-reference', { role: 'img', 'aria-label': 'Finished picture to match. Pieces 1 to 8 run left to right, top to bottom; the gap finishes bottom right.' }, [scene()]);
+            controls.append(el('p.small', { text: 'Make this picture. Numbers help: 1–8 in reading order, empty space last.' }), reference,
+                el('p.small', { text: 'Tap a piece beside the empty space. Gold edges show which pieces can slide. No diagonal moves.' }),
+                el('p.small', { text: 'Keyboard: arrow keys move the empty space; Enter or Space slides the focused piece. Each slide uses one move. No timer.' }));
         }
         function drawTracks() {
             controls.append(el('button.btn.small', { type: 'button', text: 'Flag mode: ' + (flagMode ? 'on' : 'off'), 'aria-pressed': String(flagMode), 'data-catch-key': 'flags', disabled: !active(),

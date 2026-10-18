@@ -4,7 +4,7 @@ import { loadRift } from './harness.mjs';
 const R = loadRift(['js/core/rift.js', 'js/core/catch-net.js', 'js/core/catch-games.js']);
 const C = R.CatchGames, json = v => JSON.stringify(v);
 
-test('all three games, every rarity: deterministic layouts have replayable unassisted wins', () => {
+test('all four games, every rarity: deterministic layouts have replayable unassisted wins', () => {
     for (const kind of C.IDS) for (const rarity of C.RARITIES) for (let i = 0; i < 40; i++) {
         let b = C.create(kind, 'held-out:' + i, rarity, 'charm', false);
         const before = json(b);
@@ -29,8 +29,8 @@ test('assistance preserves the exact layout and adds a visible action or mistake
         const base = C.create(kind, 'help:' + i, rarity, 'charm', false);
         for (const [item, lure, extra] of [['greatcharm', false, 1], ['charm', true, 1], ['greatcharm', true, 2]]) {
             let assisted = C.create(kind, 'help:' + i, rarity, item, lure);
-            const field = kind === 'net' ? 'casts' : kind === 'lure' ? 'moves' : 'lives';
-            assert.equal(kind === 'net' ? assisted.cfg[field] : assisted[field], (kind === 'net' ? base.cfg[field] : base[field]) + extra);
+            const field = kind === 'net' ? 'casts' : ['lure', 'picture'].includes(kind) ? 'moves' : 'lives';
+            assert.equal(kind === 'net' ? assisted.cfg[field] : assisted[field], (kind === 'net' ? base.cfg[field] : base[field]) + extra * (kind === 'picture' ? 2 : 1));
             for (const action of C.solve(base)) {
                 if (assisted.done) break;
                 assisted = C.step(assisted, action).board;
@@ -55,14 +55,14 @@ test('trail cells use clues, flags and explicit mistakes; flagging alone never w
     assert.equal(b.done, 'escaped');
 });
 
-test('random game choice uses its own deterministic stream and reaches all three games', () => {
+test('random game choice uses its own deterministic stream and reaches all four games', () => {
     const counts = Object.fromEntries(C.IDS.map(id => [id, 0]));
     for (let i = 0; i < 3000; i++) {
         const id = C.pick('attempt:' + i);
         counts[id]++;
         assert.equal(C.pick('attempt:' + i), id);
     }
-    for (const n of Object.values(counts)) assert.ok(n > 850 && n < 1150, json(counts));
+    for (const n of Object.values(counts)) assert.ok(n > 650 && n < 850, json(counts));
 });
 
 test('net rarity tightens budgets on the same terrain and behaviour; easier tiers cannot remove a policy win', () => {
@@ -104,4 +104,51 @@ test('Lantern Lure shows an actual joined route and enforces a finite turn budge
         assert.equal(C.lightPath(b).path[0], 0);
         assert.equal(C.lightPath(b).path.at(-1), 15);
     }
+});
+
+test('Picture Catch uses exact solvable depths, one gap and only adjacent legal slides', () => {
+    for (const [level, rarity] of C.RARITIES.entries()) {
+        const b = C.create('picture', 'picture-rules', rarity, 'charm', false), before = json(b);
+        assert.deepEqual(Array.from(b.tiles).sort((a, c) => a - c), [0,1,2,3,4,5,6,7,8]);
+        const plan = C.solve(b);
+        assert.equal(plan.length, 6 + level * 2);
+        assert.equal(b.moves, plan.length + 8 - level);
+        assert.equal(json(b), before);
+        for (const cell of [-1, 9, 1.5, b.tiles.indexOf(0), ...Array.from({length:9}, (_,i)=>i).filter(i=>!C.pictureMoves(b).includes(i))]) {
+            assert.equal(C.step(b, {cell}), null, 'illegal slides are free');
+        }
+        const cell = C.pictureMoves(b)[0], gap = b.tiles.indexOf(0), moved = C.step(b, {cell}).board;
+        assert.equal(moved.tiles[cell], 0); assert.equal(moved.tiles[gap], b.tiles[cell]);
+        assert.equal(moved.turn, 1); assert.equal(json(b), before);
+        let exact = {...b, moves:plan.length};
+        for (const action of plan) exact=C.step(exact,action).board;
+        assert.equal(exact.done,'caught','the last allowed move can win');
+        assert.deepEqual(Array.from(exact.tiles),[1,2,3,4,5,6,7,8,0]);
+        let loss=b, from=cell, to=gap;
+        while(!loss.done) { loss=C.step(loss,{cell:from}).board; [from,to]=[to,from]; }
+        assert.equal(loss.done,'escaped'); assert.equal(loss.turn,b.moves);
+    }
+});
+
+test('Picture Catch help preserves the picture layout and gives a whole backtrack per bonus', () => {
+    const base=C.create('picture','picture-help','rare','charm',false);
+    const help=C.create('picture','picture-help','rare','greatcharm',true,true);
+    assert.equal(json(base.tiles),json(help.tiles)); assert.equal(help.moves,base.moves+6);
+});
+
+test('Picture Catch can solve a player detour beyond the generation depths within the remaining budget', () => {
+    let detour=null;
+    const distance=b=>b.tiles.reduce((s,t,c)=>t?s+Math.abs(c%3-(t-1)%3)+Math.abs(Math.floor(c/3)-Math.floor((t-1)/3)):s,0);
+    for(let i=0;i<100 && !detour;i++) {
+        const b=C.create('picture','detour:'+i,'legendary','charm',false);
+        for(const cell of C.pictureMoves(b)) {
+            const next=C.step(b,{cell}).board;
+            if(distance(next)>12) { detour=next; break; }
+        }
+    }
+    assert.ok(detour,'fixture leaves the reverse generation map');
+    const plan=C.solve(detour); assert.ok(plan && plan.length<=detour.moves-detour.turn);
+    for(const action of plan) detour=C.step(detour,action).board;
+    assert.equal(detour.done,'caught');
+    assert.equal(C.solve({kind:'picture',tiles:[2,1,3,4,5,6,7,8,0],moves:10,turn:0,done:null}),null,'a parity-impossible board is never certified');
 });

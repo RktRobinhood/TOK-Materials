@@ -17,7 +17,7 @@ function visitor(g, kind) {
     });
     g.R.State.saveNow();
 }
-for (const kind of ['net', 'lure', 'tracks']) {
+for (const kind of ['net', 'lure', 'tracks', 'picture']) {
     test(`${kind}: a paid attempt resumes exactly and its win grants one creature without a luck roll`, async () => {
         let g = setup(); visitor(g, kind);
         const o = J(g.S.get('test'));

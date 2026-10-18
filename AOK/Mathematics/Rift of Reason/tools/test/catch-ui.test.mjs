@@ -2,12 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadWithDom } from './fake-dom.mjs';
 
-function game(kind, item = 'charm') {
-    const g = loadWithDom(['js/core/rift.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/ui/catching.js']);
+function game(kind, item = 'charm', species = 'astrophysicat') {
+    const g = loadWithDom(['js/core/rift.js', 'data/assets.js', 'js/core/assets.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/ui/catching.js']);
     const root = g.Rift.el('div'); g.document.body.append(root);
     let board = g.Rift.CatchGames.create(kind, 'ui-proof', 'rare', item, false), charms = 1, outcomes = [];
     const handle = g.Rift.CatchGame.mount(root, {
-        board, onStart() { if (!charms) return { ok: false, error: 'No charm' }; charms--; return { ok: true, board }; },
+        board, species, onStart() { if (!charms) return { ok: false, error: 'No charm' }; charms--; return { ok: true, board }; },
         onAction(action) { const result = g.Rift.CatchGames.step(board, action); board = result.board; return { ok: true, ...result }; },
         onFinish: result => outcomes.push(result),
     });
@@ -15,6 +15,7 @@ function game(kind, item = 'charm') {
     const move = action => {
         if (kind === 'net') { root.querySelector('[data-catch-key="cut-' + action.cut + '"]').click(); button('Cast net').click(); }
         else if (kind === 'lure') root.querySelector('[data-catch-key="trail-' + action.cell + '"]').click();
+        else if (kind === 'picture') root.querySelector('[data-catch-key="picture-' + action.cell + '"]').click();
         else {
             const tile = root.querySelector('[data-catch-key="tile-' + action.cell + '"]');
             if (action.flag) tile.dispatchEvent({ type: 'keydown', key: 'f', preventDefault() {} }); else tile.click();
@@ -22,7 +23,7 @@ function game(kind, item = 'charm') {
     };
     return { ...g, root, handle, button, move, outcomes, board: () => board, charms: () => charms };
 }
-for (const kind of ['net', 'lure', 'tracks']) for (const item of ['charm', 'greatcharm']) {
+for (const kind of ['net', 'lure', 'tracks', 'picture']) for (const item of ['charm', 'greatcharm']) {
     test(`${kind}/${item}: untimed instructions, pause, keyboard actions and one settlement`, () => {
         const g = game(kind, item), initial = JSON.stringify(g.board()), plan = g.Rift.CatchGames.solve(g.board());
         assert.equal(g.timers.length, 0, 'reading and playing use no countdown');
@@ -62,4 +63,25 @@ test('trail mode offers touch flagging, removal, arrow navigation and stable key
     tile = g.root.querySelector('[data-catch-key="tile-' + cell + '"]');
     tile.dispatchEvent({ type: 'keydown', key: 'ArrowDown', preventDefault() {} });
     assert.equal(g.document.activeElement.getAttribute('data-catch-key'), 'tile-' + Math.min(24, cell + 5));
+});
+
+test('Picture Catch slices the actual visitor, keeps a reference and supports gap arrows without charging illegal taps', () => {
+    const g=game('picture','charm','swiftlet');
+    const images=g.root.querySelectorAll('.catch-picture-scene img');
+    assert.equal(images.length,9,'eight fragments plus one complete reference');
+    for(const img of images) assert.equal(img.src,'assets/creatures/swiftlet-idle.webp');
+    assert.ok(g.root.querySelector('.catch-picture-reference'));
+    g.button('Start · 1 charm').click();
+    const gap=g.board().tiles.indexOf(0), before=JSON.stringify(g.board());
+    g.root.querySelector('[data-catch-key="picture-'+gap+'"]').click();
+    assert.equal(JSON.stringify(g.board()),before,'the gap cannot slide itself');
+    const cell=g.Rift.CatchGames.pictureMoves(g.board())[0], delta=cell-gap;
+    const key={ '-3':'ArrowUp', '3':'ArrowDown', '-1':'ArrowLeft', '1':'ArrowRight' }[delta];
+    const focused=g.root.querySelector('.catch-picture-board'); focused.focus();
+    focused.dispatchEvent({type:'keydown',key,preventDefault(){}});
+    assert.equal(g.board().tiles.indexOf(0),cell); assert.equal(g.board().turn,1);
+    assert.equal(g.document.activeElement.getAttribute('data-catch-key'),'picture-board');
+    g.button('Pause').click();
+    g.root.querySelector('.catch-picture-board').dispatchEvent({type:'keydown',key,preventDefault(){}});
+    assert.equal(g.board().turn,1,'paused arrows cannot slide');
 });
