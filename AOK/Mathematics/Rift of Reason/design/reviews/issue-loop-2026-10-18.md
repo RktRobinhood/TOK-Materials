@@ -68,3 +68,7 @@ The 18 October voice batch already consumed all ten pinned-lite TTS attempts: 25
 ## Verification commands
 
 From the game folder, the full repository-owned suite is `node --max-old-space-size=2048 --test --test-concurrency=2` with the file list from `git ls-files 'tools/test/*.test.mjs'` (include new tests explicitly until staged). This avoids importing somebody else's untracked unfinished tests. Keep per-process memory bounded and concurrency modest. Focused checks should cover the behavior changed; no need to repeat the suite after documentation-only checkpoint updates.
+
+## 18 October teacher follow-up — catch games
+
+Teacher feedback now supersedes the earlier three-game approval: keep Trail Finder and Pocket Nets mechanics, add long-grass beast-hunt/woodland terrain art, retire Rebound entirely. Implemented Lantern Lure (rotate-to-connect trails) as the third random catch game, six generated terrain assets and a version 3→4 once-only refund for paid unfinished Rebound attempts. Finished receipts remain settled. Current report: `catch-retheme-158-2026-10-18.md`, current policy/certificate evidence: adjacent JSON. The earlier Rebound balance table is historical. #158 remains a teacher playtest gate for the themed games and new replacement; do not reintroduce the rejected bank-shot game.

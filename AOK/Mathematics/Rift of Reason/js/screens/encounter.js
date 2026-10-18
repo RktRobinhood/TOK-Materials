@@ -577,23 +577,25 @@
                         } else if (result === 'full') {
                             panel.append(el('h3', { text: 'You won! Your folder is full.' }), el('p', { text: 'Your charm was returned. ' + Rift.State.fullReason(o.species) }));
                         } else {
-                            panel.append(el('h3', { text: 'It escaped this time.' }), el('p', { text: o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
+                            panel.append(el('h3', { text: 'It escaped this time.' }), el('p', { text: o.board && o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
                                 el('button.btn.primary', { text: 'Try again · new random game', onclick() {
                                     const result = session.retry(n.id, o.version);
                                     if (result.ok) render(); else panel.append(el('p', { role: 'alert', text: result.error }));
                                 } }));
-                            const finalBoard = el('details'), slot = el('div');
-                            finalBoard.append(el('summary', { text: 'See the final board' }), slot);
-                            panel.append(finalBoard);
-                            catchGame = Rift.CatchGame.mount(slot, { board: o.board, started: true });
+                            if (o.board) {
+                                const finalBoard = el('details'), slot = el('div');
+                                finalBoard.append(el('summary', { text: 'See the final board' }), slot);
+                                panel.append(finalBoard);
+                                catchGame = Rift.CatchGame.mount(slot, { board: o.board, species: o.species, started: true });
+                            }
                         }
                         panel.append(el('button.btn', { text: result === 'escaped' ? 'Let it go' : 'Back to the map', onclick: dismiss }));
                         return;
                     }
                     const intro = el('p.small', { text: 'Win the game to catch it. One charm pays for one whole try. You can pause or return here later.' });
                     panel.append(intro);
-                    if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: +1 cast, shot or trap heart on this visit.' }));
-                    if (session.sly(st, obstacle)) panel.append(el('p.catch-help.small', { text: 'Sly Charm: +1 cast, shot or trap heart for this creature.' }));
+                    if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: +1 cast, turn or trap heart on this visit.' }));
+                    if (session.sly(st, obstacle)) panel.append(el('p.catch-help.small', { text: 'Sly Charm: +1 cast, turn or trap heart for this creature.' }));
                     const choice = el('div.row.wrap');
                     let selectedItem = o.item || 'charm';
                     const slot = el('div');
@@ -605,7 +607,7 @@
                         const board = session.preview(n.id, item);
                         let displayedVersion = live.version;
                         catchGame = Rift.CatchGame.mount(slot, {
-                            board, started: !!live.board,
+                            board, species: o.species, started: !!live.board,
                             onStart() {
                                 if (destroyed) return { ok: false, error: 'This screen has closed.' };
                                 const result = session.start(n.id, selectedItem, displayedVersion);
@@ -636,7 +638,7 @@
                         return;
                     }
                     if (!o.board) available.forEach(item => choice.append(el('button.btn.small', {
-                        text: Rift.data.items[item].name + ' (' + st.items[item] + ')' + (item === 'greatcharm' ? ' · +1 cast, shot or trap heart' : ''),
+                        text: Rift.data.items[item].name + ' (' + st.items[item] + ')' + (item === 'greatcharm' ? ' · +1 cast, turn or trap heart' : ''),
                         onclick() { mountGame(item); choice.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === this))); },
                     })));
                     panel.append(choice, slot);

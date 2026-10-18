@@ -17,7 +17,7 @@ function visitor(g, kind) {
     });
     g.R.State.saveNow();
 }
-for (const kind of ['net', 'ricochet', 'tracks']) {
+for (const kind of ['net', 'lure', 'tracks']) {
     test(`${kind}: a paid attempt resumes exactly and its win grants one creature without a luck roll`, async () => {
         let g = setup(); visitor(g, kind);
         const o = J(g.S.get('test'));
@@ -131,4 +131,31 @@ test('escape is counted once; retry saves a new random selection before charging
     assert.equal(retry.kind, g.R.CatchGames.pick(retry.seed + ':attempt:2'));
     assert.deepEqual(J(setup(g.store).S.get('test')), retry);
     assert.equal(g.R.State.get().items.charm, 1);
+});
+
+test('retired Rebound saves refund an active charm once and preserve finished receipts', async () => {
+    const g = setup();
+    const old = g.R.State.freshState(); old.version = 3;
+    old.items = { charm: 1, greatcharm: 0 };
+    old.catchOffers = {
+        paid: { kind: 'ricochet', species: 'swiftlet', seed: 'old', attempt: 1, version: 2, item: 'greatcharm', board: { kind: 'ricochet', turn: 1 }, receipt: null },
+        ready: { kind: 'ricochet', species: 'swiftlet', seed: 'ready', attempt: 1, version: 0, item: null, board: null, receipt: null },
+        won: { kind: 'ricochet', version: 3, item: 'charm', board: { done: 'caught' }, receipt: { outcome: 'caught', uid: 'kept' } },
+        lost: { kind: 'ricochet', version: 3, item: 'charm', board: { done: 'escaped' }, receipt: { outcome: 'escaped' } },
+    };
+    const migrated = g.R.State.migrate(J(old));
+    assert.equal(migrated.items.greatcharm, 1);
+    assert.equal(migrated.items.charm, 1, 'never refund a settled outcome');
+    assert.equal(migrated.catchOffers.paid.kind, 'lure');
+    assert.equal(migrated.catchOffers.paid.species, 'swiftlet');
+    assert.equal(migrated.catchOffers.paid.board, null);
+    assert.equal(migrated.catchOffers.paid.item, null);
+    assert.equal(migrated.catchOffers.paid.version, 3, 'invalidate stale controls');
+    assert.equal(migrated.catchOffers.won.receipt.uid, 'kept');
+    assert.equal(migrated.catchOffers.lost.receipt.outcome, 'escaped');
+    assert.deepEqual(J(g.R.State.migrate(J(migrated))), J(migrated), 'migration is idempotent');
+    g.store.set(g.R.State.STORAGE_KEY, JSON.stringify(old));
+    g.R.State.load();
+    const backup = await g.R.State.exportCode(); await g.R.State.importCode(backup);
+    assert.equal(g.R.State.get().items.greatcharm, 1, 'backup and reload do not refund twice');
 });

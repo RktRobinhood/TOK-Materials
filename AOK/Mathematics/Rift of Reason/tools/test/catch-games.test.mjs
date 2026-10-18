@@ -29,7 +29,7 @@ test('assistance preserves the exact layout and adds a visible action or mistake
         const base = C.create(kind, 'help:' + i, rarity, 'charm', false);
         for (const [item, lure, extra] of [['greatcharm', false, 1], ['charm', true, 1], ['greatcharm', true, 2]]) {
             let assisted = C.create(kind, 'help:' + i, rarity, item, lure);
-            const field = kind === 'net' ? 'casts' : kind === 'ricochet' ? 'shots' : 'lives';
+            const field = kind === 'net' ? 'casts' : kind === 'lure' ? 'moves' : 'lives';
             assert.equal(kind === 'net' ? assisted.cfg[field] : assisted[field], (kind === 'net' ? base.cfg[field] : base[field]) + extra);
             for (const action of C.solve(base)) {
                 if (assisted.done) break;
@@ -78,5 +78,30 @@ test('net rarity tightens budgets on the same terrain and behaviour; easier tier
             }
             harder = easier;
         }
+    }
+});
+
+test('Lantern Lure shows an actual joined route and enforces a finite turn budget', () => {
+    assert.ok(C.IDS.includes('lure')); assert.ok(!C.IDS.includes('ricochet'));
+    for (const rarity of C.RARITIES) {
+        let b = C.create('lure', 'route-check', rarity, 'charm', false);
+        assert.equal(C.lightPath(b).connected, false, 'never serve an already solved route');
+        assert.equal(C.step(b, { cell: -1 }), null);
+        assert.equal(C.step(b, { cell: 16 }), null);
+        const left = b.moves, original = json(b.tiles);
+        for (let i = 0; i < left; i++) {
+            // Tile 3 cannot repair the deliberately closed entrance by itself.
+            b = C.step(b, { cell: 3 }).board;
+            if (b.done) break;
+        }
+        assert.equal(b.done, 'escaped');
+        assert.equal(b.turn, left);
+        b = C.create('lure', 'route-check', rarity, 'charm', false);
+        assert.equal(json(b.tiles), original);
+        for (const action of C.solve(b)) { if (!b.done) b = C.step(b, action).board; }
+        assert.equal(b.done, 'caught');
+        assert.equal(C.lightPath(b).connected, true);
+        assert.equal(C.lightPath(b).path[0], 0);
+        assert.equal(C.lightPath(b).path.at(-1), 15);
     }
 });

@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-18",
+  "issue": 158,
+  "stage": "13.88",
+  "tool": "built-in image_gen",
+  "prompts": [
+    "Use case: stylized-concept\nAsset type: one cohesive terrain sprite atlas for a small browser creature-catching game, 3 columns by 2 rows of equal square cells, landscape 1536x1024. Each cell has a complete isolated object with generous transparent margins. Upper row left to right: dense tuft of long emerald grass, chunky mossy grey rock, crooked dark evergreen tree. Lower row left to right: small round teal woodland pond with a rocky rim, folded golden rope capture net, harmless rival snare made from a loose violet rope loop and wooden peg. Exactly six objects, one per cell, no overlap, no labels.\nStyle reference: attached approved game style board; attached Astrophysicat is a supporting palette and outline reference only, do not draw the cat. Match the cute spooky storybook woodland at dusk, clean dark outlines, painterly cel shading, forest green, teal, violet and warm gold highlights; bold simple silhouettes readable at 40px. Elevated top-down game perspective. No ground outside each object; actual transparent background, no checkerboard painted in. No characters, text, logos or branded objects. This is original art for Rift of Reason, not Pokémon artwork.",
+    "Edit this six-object terrain atlas. Preserve the same six objects, style, order, equal 3-column by 2-row square-cell layout and all identifying details. Remove the entire dark gradient background and glow haze and leave genuinely transparent alpha around the six isolated objects, including inside the rope snare loop and net mesh. Shrink each complete object by 15 percent within its existing cell to add a generous transparent gutter; no object may touch the cell boundary. Keep the grid exactly 3x2 with equal cells. No new elements, no checkerboard texture, no text. Final output is a production sprite atlas with actual transparency."
+  ],
+  "references": [
+    "design/source-assets/0-style/style-board.png",
+    "assets/creatures/astrophysicat-idle.webp"
+  ],
+  "outputs": [
+    "exec-cdf4588d-bfed-46bb-9241-00e52fc4645b.png",
+    "exec-25bd3251-a284-402a-9284-74d2c78ef23f.png"
+  ],
+  "selected": "terrain-atlas.png",
+  "processing": "Exact equal 512x512 cell extraction with sharp; alpha preserved. Build through tools/build-assets.mjs."
+}

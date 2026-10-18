@@ -1272,3 +1272,9 @@ IDs per creature (`<id>` = `maskip`, `quibblequill`, `oddsnap`):
 No voice lines are requested: the hunt lines are on-screen text only.
 
 **Delivered 17 October 2026** (teacher in ChatGPT, prompts and checks by Claude): all 21 images, built as 21 game ids (`oddsnap-idle` followed later that evening, after a retake). Sources, prompts and decisions: [source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md](../source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md). The challenge screen now switches between the poses, and the map runner plays the run sheet (Calm motion still has no runner).
+
+## Stage 13.88 — Woodland catch games (#158), 18 October 2026
+
+Teacher request: retain Trail Finder, retain Pocket Nets with proper terrain graphics, and remove/reimagine Rebound. Produced six original assets: `ui/catch-grass`, `ui/catch-rock`, `ui/catch-tree`, `ui/catch-water`, `ui/catch-net`, `ui/catch-snare`. One coherent 3×2 atlas, alpha-preserving 512×512 crops, built through `tools/build-assets.mjs --only catch-`. Original first take, margin/transparency edit, exact prompts and reference roles retained in [generation.json](../source-assets/5-ui/catching-158/generation.json). Style board and shipped Astrophysicat inspected and attached. No new collectible identities: the current visitor supplies the beast art.
+
+Long grass conceals rival snares in Trail Finder. Rocks, trees and water are equally blocking in Pocket Nets; this is a visual theme over the approved mechanics. Closed clearings show rope nets. Lantern Lure replaces the rejected bank-shot game with native-button trail rotation and a static lit route. Inspect at phone and desktop sizes, including actual paid encounter, keyboard, Calm motion, terrain legibility and live clue contrast. Evidence: [revision report](../reviews/catch-retheme-158-2026-10-18.md).

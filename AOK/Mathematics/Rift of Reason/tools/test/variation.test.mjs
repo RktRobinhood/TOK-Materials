@@ -51,10 +51,10 @@ test('labels and stars describe the roll in plain words', () => {
     assert.deepEqual(J(S.describeVariant({}).labels), ['Ordinary']);
 });
 
-test('migration v1 → v3: an old save fixture loads with variants from uids and new fields', () => {
+test('migration v1 → current: an old save fixture loads with variants from uids and new fields', () => {
     const old = JSON.parse(fs.readFileSync(GAME_DIR + '/tools/test/fixtures/save-v1.json', 'utf8'));
     const s = S.migrate(J(old));
-    assert.equal(s.version, 3);
+    assert.equal(s.version, S.VERSION);
     assert.equal(s.creatures.length, 3);
     s.creatures.forEach((c, i) => {
         assert.deepEqual(J(c.variant), J(S.rollVariant(old.creatures[i].uid)));
@@ -77,7 +77,7 @@ test('migration v1 → v3: an old save fixture loads with variants from uids and
     assert.deepEqual(J(S.deckTactics(s)), J(Rift.data.tacticDecks.starter));
 });
 
-test('migration v1 → v3: old-scale powerDelta never leaves attack below 0, then injuries heal (#151)', () => {
+test('migration v1 → current: old-scale powerDelta never leaves attack below 0, then injuries heal (#151)', () => {
     // Old saves counted injuries on the 1–10 power scale (Astrophysicat power 4 → 2 = powerDelta −2).
     const old = JSON.parse(fs.readFileSync(GAME_DIR + '/tools/test/fixtures/save-v1-old-power.json', 'utf8'));
     const s = S.migrate(J(old));

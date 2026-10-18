@@ -3,68 +3,87 @@
 (function (root) {
     'use strict';
     const Rift = root.Rift, net = Rift.CatchNetPrototype;
-    const IDS = ['net', 'ricochet', 'tracks'];
-    const NAMES = { net: 'Pocket Nets', ricochet: 'Rebound', tracks: 'Trail Finder' };
+    const IDS = ['net', 'lure', 'tracks'];
+    const NAMES = { net: 'Pocket Nets', lure: 'Lantern Lure', tracks: 'Trail Finder' };
     const RARITIES = ['common', 'uncommon', 'rare', 'legendary'];
     const clone = b => JSON.parse(JSON.stringify(b));
     const tier = r => Math.max(0, RARITIES.indexOf(r));
-    const angles = [[-3, -4], [-2, -4], [-1, -4], [0, -4], [1, -4], [2, -4], [3, -4]];
 
-    // A bank shot travels until it returns to the floor. Bricks disappear on contact;
-    // the ball reflects from each brick and the side/top walls, like early paddle games.
-    function shot(board, aim) {
-        if (!Number.isInteger(aim) || !angles[aim] || board.done) return null;
-        const b = clone(board), path = [[3.5, 6.7]];
-        let x = 3.5, y = 6.7, dx = angles[aim][0] / 24, dy = angles[aim][1] / 24;
-        for (let tick = 0; tick < 1400; tick++) {
-            const oldY = y;
-            x += dx; y += dy;
-            if (x < 0.12 || x > 6.88) { dx = -dx; x = Math.max(0.12, Math.min(6.88, x)); }
-            if (y < 0.12) { dy = Math.abs(dy); y = 0.12; }
-            const cell = Math.floor(y) * 7 + Math.floor(x);
-            const i = b.bricks.indexOf(cell);
-            if (i >= 0) {
-                b.bricks.splice(i, 1);
-                if (Math.floor(oldY) !== Math.floor(y)) dy = -dy;
-                else dx = -dx;
+    // A two-ended trail tile is straight (0) or a corner (1). Directions are
+    // north/east/south/west. Every rotation and every connection stays visible.
+    const DELTA = [-4, 1, 4, -1];
+    function ports(tile) {
+        return tile.shape ? [tile.rot, (tile.rot + 1) % 4] : [tile.rot % 2, tile.rot % 2 + 2];
+    }
+    function nextCell(cell, dir) {
+        if (dir === 0 && cell < 4 || dir === 2 && cell >= 12 || dir === 1 && cell % 4 === 3 || dir === 3 && cell % 4 === 0) return -1;
+        return cell + DELTA[dir];
+    }
+    function lightPath(b) {
+        const path = []; let cell = 0, entry = 3;
+        while (cell >= 0 && !path.includes(cell)) {
+            const ends = ports(b.tiles[cell]);
+            if (!ends.includes(entry)) break;
+            path.push(cell);
+            const exit = ends.find(d => d !== entry);
+            if (cell === 15 && exit === 1) return { path, connected: true };
+            cell = nextCell(cell, exit); entry = (exit + 2) % 4;
+        }
+        return { path, connected: false };
+    }
+    // Search simple routes, not the hidden generation recipe. For each route,
+    // calculate the fewest clockwise quarter-turns using the visible tile shapes.
+    function lurePlan(b) {
+        if (b.done) return b.done === 'caught' ? [] : null;
+        let best = null;
+        function walk(cell, entry, visited, actions) {
+            if (best && actions.length >= best.length || actions.length > b.moves - b.turn) return;
+            const tile = b.tiles[cell], variants = tile.shape ? 4 : 2;
+            for (let turns = 0; turns < variants; turns++) {
+                const ends = ports({ shape: tile.shape, rot: (tile.rot + turns) % 4 });
+                if (!ends.includes(entry)) continue;
+                const exit = ends.find(d => d !== entry), plan = actions.concat(Array.from({ length: turns }, () => ({ cell })));
+                if (plan.length > b.moves - b.turn || best && plan.length >= best.length) continue;
+                if (cell === 15 && exit === 1) { best = plan; continue; }
+                const next = nextCell(cell, exit);
+                if (next >= 0 && !visited.includes(next)) walk(next, (exit + 2) % 4, visited.concat(next), plan);
             }
-            if (tick % 5 === 0) path.push([x, y]);
-            if (y >= 6.8 && dy > 0) break;
         }
-        b.turn++;
-        b.done = !b.bricks.length ? 'caught' : b.turn >= b.shots ? 'escaped' : null;
-        return { board: b, path };
+        walk(0, 3, [0], []);
+        return best;
     }
-    function solveShots(board) {
-        const seen = new Set();
-        function search(b) {
-            if (b.done === 'caught') return [];
-            if (b.done) return null;
-            const key = b.bricks.join(',') + ':' + b.turn;
-            if (seen.has(key)) return null;
-            seen.add(key);
-            const options = angles.map((_, a) => ({ a, b: shot(b, a).board }))
-                .filter(o => o.b.bricks.length < b.bricks.length).sort((a, c) => a.b.bricks.length - c.b.bricks.length);
-            for (const o of options) { const tail = search(o.b); if (tail) return [o.a].concat(tail); }
-            return null;
-        }
-        return search(board);
-    }
-    function rebound(seed, rarity, help) {
-        const level = tier(rarity), shots = level < 2 ? 5 - level : 3;
-        // Targets are drawn from cells actually reachable by a bank shot. Admission checks
-        // the full board, because hitting one target changes the rest of the trajectory.
-        const reachable = [7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26];
-        for (let attempt = 0; attempt < 128; attempt++) {
-            const rng = Rift.makeRng(seed + ':bricks:' + attempt);
-            const b = { kind: 'ricochet', bricks: rng.shuffle(reachable).slice(0, 3 + Math.min(3, level)), shots, turn: 0, done: null };
-            if (solveShots(b)) { b.shots += help; return b; }
-        }
-        // An independently checked three-shot pattern; never serve an unchecked fallback.
-        const b = { kind: 'ricochet', bricks: [10, 17, 24], shots, turn: 0, done: null };
-        if (!solveShots(b)) throw new Error('No verified rebound layout');
-        b.shots += help;
+    function lantern(seed, rarity, help) {
+        const level = tier(rarity), rng = Rift.makeRng(seed + ':lantern');
+        // Choose a monotone route, then hide it among random, fully visible pieces.
+        const steps = rng.shuffle([1, 1, 1, 2, 2, 2]), path = [0];
+        steps.forEach(dir => path.push(path[path.length - 1] + DELTA[dir]));
+        const tiles = Array.from({ length: 16 }, () => ({ shape: rng.int(0, 1), rot: rng.int(0, 3) }));
+        path.forEach((cell, i) => {
+            const entry = i ? (steps[i - 1] + 2) % 4 : 3, exit = i < steps.length ? steps[i] : 1;
+            const shape = (entry + 2) % 4 === exit ? 0 : 1;
+            const rot = Array.from({ length: shape ? 4 : 2 }, (_, n) => n).find(n => { const p = ports({ shape, rot: n }); return p.includes(entry) && p.includes(exit); });
+            tiles[cell] = { shape, rot };
+        });
+        // One clockwise turn repairs each scrambled route tile. The solver still
+        // checks every alternative route, so admission never relies on a recipe.
+        rng.shuffle(path).slice(0, 3 + level).forEach(cell => { tiles[cell].rot = (tiles[cell].rot + 3) % 4; });
+        const b = { kind: 'lure', size: 4, tiles, moves: 24, turn: 0, done: null };
+        // A chance alternative can already be connected. Rotate the entry until
+        // it is closed; then re-check instead of serving a pre-won board.
+        while (lightPath(b).connected) b.tiles[0].rot = (b.tiles[0].rot + 1) % 4;
+        const plan = lurePlan(b);
+        if (!plan || !plan.length) throw new Error('No verified lantern route');
+        b.moves = plan.length + 3 - level + help;
         return b;
+    }
+    function turnTrail(board, cell) {
+        if (!Number.isInteger(cell) || cell < 0 || cell >= 16 || board.done) return null;
+        const b = clone(board);
+        b.tiles[cell].rot = (b.tiles[cell].rot + 1) % 4;
+        b.turn++;
+        const light = lightPath(b);
+        b.done = light.connected ? 'caught' : b.turn >= b.moves ? 'escaped' : null;
+        return { board: b, path: light.path };
     }
 
     function neighbours(b, cell) {
@@ -133,7 +152,7 @@
     }
     function create(kind, seed, rarity, item, lured, sly) {
         const help = (item === 'greatcharm' ? 1 : 0) + (lured ? 1 : 0) + (sly ? 1 : 0), level = tier(rarity);
-        if (kind === 'ricochet') return rebound(seed, rarity, help);
+        if (kind === 'lure') return lantern(seed, rarity, help);
         if (kind === 'tracks') return tracks(seed, rarity, help);
         if (kind !== 'net') throw new Error('Unknown catch game');
         const behaviour = Rift.makeRng(seed + ':net-behaviour').pick(net.BEHAVIOURS);
@@ -149,7 +168,7 @@
     function step(board, action) {
         if (!board || board.done || !action) return null;
         if (board.kind === 'net') return net.preview(board, action.cut);
-        if (board.kind === 'ricochet') return shot(board, action.aim);
+        if (board.kind === 'lure') return turnTrail(board, action.cell);
         if (board.kind !== 'tracks' || !Number.isInteger(action.cell) || action.cell < 0 || action.cell >= board.size ** 2 || board.open.includes(action.cell) || (board.hits || []).includes(action.cell)) return null;
         const b = clone(board), cell = action.cell;
         if (action.flag) {
@@ -169,9 +188,9 @@
     }
     function solve(b) {
         if (b.kind === 'net') { const plan = net.solve(b); return plan && plan.map(cut => ({ cut })); }
-        if (b.kind === 'ricochet') { const plan = solveShots(b); return plan && plan.map(aim => ({ aim })); }
+        if (b.kind === 'lure') return lurePlan(b);
         return solveTracks(b);
     }
     const pick = seed => Rift.makeRng(String(seed) + ':game').pick(IDS);
-    Rift.CatchGames = { IDS, NAMES, RARITIES, pick, create, step, solve, clue, neighbours, deductions, angles };
+    Rift.CatchGames = { IDS, NAMES, RARITIES, pick, create, step, solve, clue, neighbours, deductions, ports, lightPath };
 })(typeof window !== 'undefined' ? window : globalThis);

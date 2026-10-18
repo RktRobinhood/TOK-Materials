@@ -35,7 +35,7 @@ function game(kind) {
     const button = text => root.querySelectorAll('button').find(b => b.textContent === text);
     function move(action) {
         if (kind === 'net') { root.querySelector('[data-catch-key="cut-' + action.cut + '"]').click(); button('Cast net').click(); }
-        else if (kind === 'ricochet') { root.querySelector('[data-catch-key="aim-' + action.aim + '"]').click(); button('Fire').click(); }
+        else if (kind === 'lure') root.querySelector('[data-catch-key="trail-' + action.cell + '"]').click();
         else {
             const tile = root.querySelector('[data-catch-key="tile-' + action.cell + '"]');
             if (action.flag) tile.dispatchEvent({ type: 'keydown', key: 'f', preventDefault() {} }); else tile.click();
@@ -45,7 +45,7 @@ function game(kind) {
         reload() { handle.destroy(); root.remove(); g.Rift.State.load(); mount(); },
     };
 }
-for (const kind of ['net', 'ricochet', 'tracks']) test(`${kind}: real encounter resumes a paid game without revisits, puzzle rewards or another charge`, async () => {
+for (const kind of ['net', 'lure', 'tracks']) test(`${kind}: real encounter resumes a paid game without revisits, puzzle rewards or another charge`, async () => {
     const g = game(kind), R = g.Rift;
     g.submit(); await g.modals.at(-1).buttons[0].onclick();
     const before = R.State.get(), xp = before.xp, items = before.items.charm, visits = before.map.visitCount.test;

@@ -123,13 +123,13 @@ test('loaned commons and creatures outside the instance list never change', () =
     assert.deepEqual(J(r.results.map(x => x.uid)), [team[0].uid]);
 });
 
-test('save migration 2 → 3 heals injuries, turns a warp into a sideways Change and keeps scars', () => {
+test('save migration from 2 heals injuries, turns a warp into a sideways Change and keeps scars', () => {
     const s = Rift.State.freshState();
     s.version = 2;
     s.creatures = [inst('lobstorian', { powerDelta: -1, injuries: ['minus-one', 'no-ability'], scars: ['chipped-ear'], warped: { ability: 'grook', from: 'lecture' } })];
     const m = Rift.State.migrate(J(s));
     const c = m.creatures[0];
-    assert.equal(m.version, 3);
+    assert.equal(m.version, Rift.State.VERSION);
     assert.equal(c.powerDelta, 0);
     assert.deepEqual(J(c.injuries), []);
     assert.equal(c.warped, null);

@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 3;
+    const STATE_VERSION = 4;
     const STORAGE_KEY = 'rift-of-reason:save';
     const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
     const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
@@ -531,6 +531,24 @@
         2: s => {
             [s.creatures, s.trophies].forEach(list => { if (Array.isArray(list)) list.forEach(healForChanges); });
             s.version = 3;
+            return s;
+        },
+        // Rebound retired by teacher feedback. Keep the visitor and receipts;
+        // refund active paid games before offering the replacement, exactly once.
+        3: s => {
+            Object.values(s.catchOffers || {}).forEach(o => {
+                if (o.kind !== 'ricochet') return;
+                o.kind = 'lure';
+                if (!o.receipt) {
+                    if (o.board && ['charm', 'greatcharm'].includes(o.item)) {
+                        s.items = s.items || {};
+                        s.items[o.item] = (s.items[o.item] || 0) + 1;
+                    }
+                    o.board = null; o.item = null;
+                } else o.board = null;
+                o.version++;
+            });
+            s.version = 4;
             return s;
         },
     };

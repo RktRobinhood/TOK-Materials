@@ -22,13 +22,13 @@
             noTarget: 'You need an enemy creature with 2 or less health.',
             run(api, p, target) { api.freeze(target); api.emit({ t: 'item', text: 'Catch Charm: ' + api.name(target) + " can't attack next turn." }); },
         } },
-        greatcharm: { name: 'Great Charm', kind: 'catch', catchBonus: 0.2, text: 'A golden charm: +1 cast, shot or trap heart for the whole catch game.', battle: {
+        greatcharm: { name: 'Great Charm', kind: 'catch', catchBonus: 0.2, text: 'A golden charm: +1 cast, turn or trap heart for the whole catch game.', battle: {
             cost: 1, target: 'enemy-creature', filter: (s, cid) => !s.cards[cid].frozen,
             text: "An enemy creature can't attack on its next turn.",
             noTarget: 'You need an enemy creature to aim at.',
             run(api, p, target) { api.freeze(target); api.emit({ t: 'item', text: 'Great Charm: ' + api.name(target) + " can't attack next turn." }); },
         } },
-        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it where you stand. For 3 visits, rare visitors are more likely and catch games gain +1 cast, shot or trap heart.', battle: {
+        lure: { name: 'Lure Lantern', kind: 'support', text: 'Light it where you stand. For 3 visits, rare visitors are more likely and catch games gain +1 cast, turn or trap heart.', battle: {
             cost: 1, text: 'Draw a card from your deck.',
             usable: (s, p, H) => s.players[p].deck.length > 0 && H.handRoom(s, p, 1),
             why: (s, p) => (s.players[p].deck.length ? 'Your hand is full.' : 'Your deck is empty.'),
@@ -36,7 +36,7 @@
             run(api, p) { api.emit({ t: 'item', text: 'Lure Lantern: draw a card.' }); api.draw(p); },
         } },
         // The Gate reward for saving Professor Sequins (STORY.md Ch1, tiers 1–2): a stronger lure.
-        'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. For 5 visits here, rare visitors are more likely and catch games gain +1 cast, shot or trap heart.' },
+        'lucky-sequin': { name: 'Lucky Sequin', kind: 'support', lure: 5, text: 'One of Professor Sequins’ own sequins. For 5 visits here, rare visitors are more likely and catch games gain +1 cast, turn or trap heart.' },
         // The Tribunal reward for a clean save of the Sundial (STORY.md Ch3, tier 1). One use: in a later
         // stakes scene it cancels one mistake tick (the Ch4 drains read the `hoots-gavel` flag too).
         'hoots-gavel': { name: 'Hoot’s Gavel', kind: 'story', text: 'Judge Hoot’s own gavel. In a later stakes scene, it cancels one mistake. Once.' },

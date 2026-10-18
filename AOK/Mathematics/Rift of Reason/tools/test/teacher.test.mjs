@@ -40,7 +40,7 @@ test('teacher reads Card Arena (v2) saves with variants and 14-card teams, and o
  const {R,s}=setup();
  for(let i=0;i<14;i++)s.creatures.push(R.State.makeCreature('khaby',{uid:'k'+i,taught:i%2?'guard':null}));
  s.team=s.creatures.map(c=>c.uid);s.deckTactics=['eureka','eureka','lemma','recall','clockwork','pep-talk'];s.tactics=['lemma','recall'];
- assert.equal(s.version,3);
+ assert.equal(s.version,R.State.VERSION);
  const v2=R.TeacherOverview.read(R.State.encode('save',s));assert.equal(v2.teamSize,14);assert.equal(v2.creatures,14);
  const old=JSON.parse(fs.readFileSync(GAME_DIR+'/tools/test/fixtures/save-v1.json','utf8'));
  const v1=R.TeacherOverview.read(R.State.encode('save',old));assert.equal(v1.creatures,3);assert.equal(v1.chapter,'ch1');

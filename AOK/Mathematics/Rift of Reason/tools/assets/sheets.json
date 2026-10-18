@@ -18,6 +18,14 @@
         "  Without it the class is guessed from the id (see tools/assets/classes.mjs)."
     ],
     "sheets": {
+        "catch-grass.png": {"type":"single","id":"ui/catch-grass","class":"icon","trim":false},
+        "catch-rock.png": {"type":"single","id":"ui/catch-rock","class":"icon","trim":false},
+        "catch-tree.png": {"type":"single","id":"ui/catch-tree","class":"icon","trim":false},
+        "catch-water.png": {"type":"single","id":"ui/catch-water","class":"icon","trim":false},
+        "catch-net.png": {"type":"single","id":"ui/catch-net","class":"icon","trim":false},
+        "catch-snare.png": {"type":"single","id":"ui/catch-snare","class":"icon","trim":false},
+        "terrain-first.png": {"type":"skip"},
+        "terrain-atlas.png": {"type":"skip"},
         "director-fox-girl.png": {"type":"single","id":"avatar/fox-girl/solemn","class":"sprite"},
         "director-fox-boy.png": {"type":"single","id":"avatar/fox-boy/solemn","class":"sprite"},
         "director-owlet-boy.png": {"type":"single","id":"avatar/owlet-boy/solemn","class":"sprite"},

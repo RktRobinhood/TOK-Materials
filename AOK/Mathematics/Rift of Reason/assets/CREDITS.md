@@ -50,3 +50,7 @@ The trailer uses the game's original artwork and an original, spoiler-light narr
 
 ## Fonts
 Fredoka and Nunito via Google Fonts (SIL Open Font License).
+
+## Woodland catch terrain — 18 October 2026
+
+Grass, rock, tree, pond, rope net and rival snare atlas generated with OpenAI's built-in ImageGen using the approved game style board and shipped Astrophysicat as references. Exact prompts, selected edit and retained original: `design/source-assets/5-ui/catching-158/generation.json`. Extracted and built with the existing Sharp asset pipeline. Lantern Lure uses the classic rotate-to-connect tile-puzzle mechanic with original code and boards; no commercial artwork, names or text are included.

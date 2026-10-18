@@ -10,10 +10,10 @@ function play(start, random) {
     while (!b.done && actions++ < 100) {
         let action;
         if (b.kind === 'net') action = { cut: random ? rng.pick(R.CatchNetPrototype.available(b)) : R.CatchNetPrototype.sensible(b) };
-        else if (b.kind === 'ricochet') {
-            const options = C.angles.map((_, aim) => ({ aim, left: C.step(b, { aim }).board.bricks.length }));
-            options.sort((a, c) => a.left - c.left || a.aim - c.aim);
-            action = random ? { aim: rng.int(0, 6) } : { aim: options[0].aim };
+        else if (b.kind === 'lure') {
+            const plan = C.solve(b);
+            if (!random && (!plan || !plan.length)) return false;
+            action = random ? { cell: rng.int(0, 15) } : plan[0];
         } else if (random) {
             const closed = Array.from({ length: b.size ** 2 }, (_, i) => i).filter(i => !b.open.includes(i) && !b.flags.includes(i));
             action = { cell: rng.pick(closed) };
@@ -53,9 +53,9 @@ for (const kind of C.IDS) for (const rarity of ['common', 'uncommon', 'rare', 'l
 }
 const report = { seedsPerGameRarity: count, seedPrefix: 'production-held-out:2381:',
     policies: { net: 'Choose a safe cut with smallest next room; seed-fixed ties; one action of lookahead, no future search.',
-        ricochet: 'Try each visible angle through known deterministic physics, choose fewest cages left; lowest-angle ties; no future search.',
+        lure: 'Minimum-turn route using every visible tile shape. This is a planning expert, not an average student.',
         tracks: 'Apply visible-clue direct/subset deductions plus the total trap count until solved. This is a logical expert, not an average player.',
-        random: 'Uniform legal cut/angle or uniformly chosen unopened unflagged tile. No deliberate-loss coin flip.' },
+        random: 'Uniform legal cut/trail tile or uniformly chosen unopened unflagged tile. No deliberate-loss coin flip.' },
     limitations: 'These are machine policies. They do not establish ~50% average-student success, 20–60-second timing or enjoyment. Those require classroom play.', rows };
 if (process.argv[3]) fs.writeFileSync(process.argv[3], JSON.stringify(report, null, 2) + '\n');
 console.table(rows.map(({ kind, rarity, seeds, certified, policyWins, randomWins, bothWins, medianCertificateActions }) => ({ kind, rarity, seeds, certified, policyWins, randomWins, bothWins, medianCertificateActions })));

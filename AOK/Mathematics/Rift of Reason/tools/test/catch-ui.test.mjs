@@ -14,7 +14,7 @@ function game(kind, item = 'charm') {
     const button = text => root.querySelectorAll('button').find(b => b.textContent === text);
     const move = action => {
         if (kind === 'net') { root.querySelector('[data-catch-key="cut-' + action.cut + '"]').click(); button('Cast net').click(); }
-        else if (kind === 'ricochet') { root.querySelector('[data-catch-key="aim-' + action.aim + '"]').click(); button('Fire').click(); }
+        else if (kind === 'lure') root.querySelector('[data-catch-key="trail-' + action.cell + '"]').click();
         else {
             const tile = root.querySelector('[data-catch-key="tile-' + action.cell + '"]');
             if (action.flag) tile.dispatchEvent({ type: 'keydown', key: 'f', preventDefault() {} }); else tile.click();
@@ -22,7 +22,7 @@ function game(kind, item = 'charm') {
     };
     return { ...g, root, handle, button, move, outcomes, board: () => board, charms: () => charms };
 }
-for (const kind of ['net', 'ricochet', 'tracks']) for (const item of ['charm', 'greatcharm']) {
+for (const kind of ['net', 'lure', 'tracks']) for (const item of ['charm', 'greatcharm']) {
     test(`${kind}/${item}: untimed instructions, pause, keyboard actions and one settlement`, () => {
         const g = game(kind, item), initial = JSON.stringify(g.board()), plan = g.Rift.CatchGames.solve(g.board());
         assert.equal(g.timers.length, 0, 'reading and playing use no countdown');

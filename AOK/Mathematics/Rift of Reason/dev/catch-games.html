@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="../">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Catch games · Rift of Reason</title>
-<link rel="stylesheet" href="../css/game.css">
-<link rel="stylesheet" href="../css/screens.css">
-<link rel="stylesheet" href="../css/catching.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/catching.css">
 <style>
 body { overflow: auto; background: #0d1525; color: #edf3ff; }
 main { width: min(760px, 100%); margin: 24px auto; padding: 16px; }
@@ -24,7 +25,7 @@ select, input[type=text] { font: inherit; color: #f1f5ff; background: #20304a; b
 <h1>Three little catch games</h1>
 <p>Try the games from the adventure. Practice uses no charms and changes no save.</p>
 <div class="practice-settings">
-<label>Game <select id="kind"><option value="net">Pocket Nets</option><option value="ricochet">Rebound</option><option value="tracks">Trail Finder</option></select></label>
+<label>Game <select id="kind"><option value="net">Pocket Nets</option><option value="lure">Lantern Lure</option><option value="tracks">Trail Finder</option></select></label>
 <label>Rarity <select id="rarity"><option>common</option><option>uncommon</option><option selected>rare</option><option>legendary</option></select></label>
 <label>Board seed <input id="seed" type="text" value="first-catch-2" maxlength="60"></label>
 <label class="practice-check"><input id="great" type="checkbox">Great Charm (+1)</label>
@@ -33,13 +34,15 @@ select, input[type=text] { font: inherit; color: #f1f5ff; background: #20304a; b
 </div>
 <div class="row wrap"><button class="btn" id="same">Restart this board</button><button class="btn" id="next">New board</button></div>
 <div id="cabinet" class="catch-cabinet"></div>
-<p class="small">Inspired by early net-cutting, paddle and deduction games. These are original boards and rules. Rarer visitors have tighter budgets, tougher movement or denser clues. A win earns the catch directly.</p>
-<p><a href="../index.html">Back to the adventure</a></p>
+<p class="small">Inspired by early net-cutting, tile-rotation and deduction games. These are original boards and rules. Rarer visitors have tighter budgets, tougher movement or denser clues. A win earns the catch directly.</p>
+<p><a href="index.html">Back to the adventure</a></p>
 </main>
-<script src="../js/core/rift.js"></script>
-<script src="../js/core/catch-net.js"></script>
-<script src="../js/core/catch-games.js"></script>
-<script src="../js/ui/catching.js"></script>
+<script src="js/core/rift.js"></script>
+<script src="data/assets.js"></script>
+<script src="js/core/assets.js"></script>
+<script src="js/core/catch-net.js"></script>
+<script src="js/core/catch-games.js"></script>
+<script src="js/ui/catching.js"></script>
 <script>
 (function () {
     const $ = id => document.getElementById(id);
