@@ -153,7 +153,8 @@ test('Emotion: Gut Reaction 3 to the enemy hero; Rally Cry +1/+1; Wave of Feelin
     assert.equal(E.canAttack(s, 'p0c2'), false, 'asleep');
     s = cast(s);
     assert.equal(atk(s, 'p0c1'), 4);
-    assert.ok(E.canAttack(s, 'p0c2'), 'Swift wakes it');
+    assert.equal(E.isSleeping(s, 'p0c2'), false, 'Swift wakes it');
+    assert.equal(E.canAttack(s, 'p0c2'), false, 'both casts spent the shared allowance');
 });
 
 test('Perception: Look Closer strips Guard, Elusive and Shield (even from an Elusive enemy) and draws; Field Notes; Clear View', () => {

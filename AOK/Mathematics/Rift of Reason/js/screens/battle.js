@@ -109,14 +109,14 @@
     const CORE_RULES = [
         ['victory', 'Win', 'Enemy hero to 0 ❤ wins', 'normal-hearts', 'Take the enemy hero to zero hearts to win.'],
         ['combat', 'Fights', 'Both creatures hit', null, 'In a fight both creatures deal damage equal to their attack. Damage stays.'],
-        ['plays', 'Card plays', '2 per turn', 'two-plays', 'You may play 2 cards per turn: creatures, tactics and rule cards together. Attacking is free.'],
+        ['plays', 'Card activations', '2 per turn', 'two-plays', 'You have 2 card activations per turn. Each cast, attack or manual Activate uses one. Draw, Spark, items and hero powers are separate.'],
         ['attacks', 'Attacks', 'Each creature attacks once', 'three-actions', 'Each ready creature may attack once per turn. New creatures wait a turn (unless Swift).'],
         ['energy', 'Energy', '+1 each turn', null, 'Your energy grows by 1 each turn (up to 10) and refills. Cards and abilities cost energy.'],
     ];
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
-        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card activations', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
         // Fate timing (#121, data/axioms.js)
         'fate-delay': 'Fate timing', 'fate-capacity': 'Fate slots', 'fate-impact': 'Fate damage',
     };
@@ -730,7 +730,7 @@
             const c = state.cards[cid];
             const P = state.players[ME];
             if (P.hand.includes(cid)) {
-                if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn). You can still attack.';
+                if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn (' + E.playLimit(state, ME) + ' per turn). End turn, or use an available item or hero power.';
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
                 const condition = E.conditionOf(state, cid);
@@ -749,6 +749,7 @@
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
+            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn. End turn, or use an available item or hero power.';
             const d = E.describe(state, cid);
             if (d.sleeping) return name(cid) + ' is asleep. It can attack next turn.';
             if (d.frozen) return name(cid) + ' was lectured. ' + frozenText(cid) + '.';
@@ -1363,7 +1364,8 @@
             const hits = [];
             state.players[OPP].board.forEach(cid => { for (let k = 0; k < (r.attacksPerCreature || 1); k++) hits.push(per(cid)); });
             hits.sort((a, b) => b - a);
-            const total = hits.slice(0, r.attackLimit === Infinity ? hits.length : r.attackLimit).reduce((n, x) => n + x, 0);
+            const nextBudget = r.playLimit + (r.bonus === 'momentum' && state.players[OPP].board.length > P.board.length ? 1 : 0);
+            const total = hits.slice(0, Math.min(r.attackLimit, nextBudget)).reduce((n, x) => n + x, 0);
             if (!total || total < P.hearts) return null;
             return el('div.b-danger', { title: 'Danger: ' + oppName + '\'s creatures have ' + total + ' attack together. You have ' + P.hearts + ' hearts.' }, [
                 has('ui/danger') ? icon('ui/danger', '', 'b-danger-icon') : null,
@@ -1473,8 +1475,8 @@
             const lim = E.playLimit(state, ME), left = E.playsLeft(state, ME);
             const mine = state.active === ME;
             const shown = lim === Infinity ? null : lim;
-            return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card plays: no limit this turn.' : 'Card plays: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Creatures, tactics and rule cards each use one.' }, [
-                el('span.b-plays-label', { text: 'Plays' }),
+            return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card activations: no limit this turn.' : 'Card activations: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Each cast, attack or manual Activate uses one.' }, [
+                el('span.b-plays-label', { text: 'Uses' }),
                 shown == null ? el('strong', { text: '∞' }) : el('span.b-plays-pips', {}, Array.from({ length: shown }, (x, i) => el('span.b-play-pip' + (!mine || i < left ? '.on' : '') + (has('ui/play-token') ? '.art' : ''), { style: bg('ui/play-token') }))),
             ]);
         }
@@ -1498,7 +1500,7 @@
                 P.tax > 0 ? el('div.b-tax', { text: (P.tax === 1 ? 'Next card' : 'Next ' + P.tax + ' cards') + ' +1 ⚡' }) : null,
             ]);
             tipFor(node, 'energy:' + pi, (pi === ME ? 'Your energy: ' : oppName + '\'s energy: ') + P.energy + ' of ' + cap,
-                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacking is free.'
+                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacks and manual abilities each use one activation.'
                 + (P.tax > 0 ? ' Night Sight: the next ' + (P.tax === 1 ? 'card' : P.tax + ' cards') + ' played cost' + (P.tax === 1 ? 's' : '') + ' 1 more.' : ''));
             return node;
         }
@@ -1736,7 +1738,7 @@
         function abilityUnavailable(cid, info, L) {
             if (L.some(a => a.type === 'activate' && a.cid === cid && a.ability === info.id)) return '';
             const d = E.describe(state, cid);
-            if (d.sleeping || d.frozen || d.activated || d.attacks || ui.busy || decider() !== ME) return whyNot(cid);
+            if (d.sleeping || d.frozen || d.activated || d.attacks || ui.busy || decider() !== ME || !E.playsLeft(state, ME)) return whyNot(cid);
             if (info.cost > state.players[ME].energy) return 'Needs ' + info.cost + ' energy.';
             return 'No useful target or effect now.';
         }
@@ -2278,9 +2280,8 @@
                     const canPlay = L.some(a => a.type === 'play' || a.type === 'axiom');
                     const canAttack = L.some(a => a.type === 'attack');
                     const canActivate = L.some(a => a.type === 'activate');
-                    const noPlays = E.playsLeft && !E.playsLeft(state, ME) && P.hand.length + P.axHand.length > 0;
-                    ask.textContent = noPlays && canAttack ? 'No card plays left. Attack with a ready creature, then End turn.'
-                        : noPlays ? 'No card plays left this turn. Press End turn.'
+                    const noPlays = E.playsLeft && !E.playsLeft(state, ME);
+                    ask.textContent = noPlays ? 'No card activations left. End turn, or use an available item or hero power.'
                         : canPlay && canAttack ? 'Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.'
                         : canPlay ? 'Drag (or click) a glowing card to play it. Then End turn.'
                             : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
@@ -3063,7 +3064,7 @@
             if (state.phase === 'draw') return 'First choose your draw.';
             if (state.phase === 'choose') return 'First answer the question.';
             if (!axiomChanges(id)) return whyNotAxiomRule(id);
-            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn).';
+            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn (' + E.playLimit(state, ME) + ' per turn).';
             return 'This rule card needs ' + E.axiomCost(state, id) + ' energy. You have ' + state.players[ME].energy + '.';
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).

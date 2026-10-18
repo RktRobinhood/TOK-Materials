@@ -62,7 +62,7 @@
                     'second-rule': ['axiom:age-of-reason', 'axiom:age-of-tradition'], fate: ['nostalgia', 'proof-by-contradiction', 'qed'] } },
             // Cloud Calf offers a risky stat swap for What If; cheap creatures and buffs make Brainstorm useful.
             fox: { strategy: 'Growth and pressure', colour: 'imagination',
-                plan: 'Play cheap creatures fast and make them stronger. What If? swaps attack and health. Brainstorm gives one more card play.',
+                plan: 'Play cheap creatures fast and make them stronger. What If? swaps attack and health. Brainstorm gives one more card activation.',
                 creatures: two(['zuckerborg', 'paper-dragon', 'cloud-calf', 'beansprout', 'siuuugull', 'eelish']),
                 tactics: two(['daydream', 'creative-spark', 'eureka', 'pep-talk']),
                 rewards: { fit: ['careful-words', 'stored-thought'], 'fit-2': ['stored-thought', 'careful-words'],

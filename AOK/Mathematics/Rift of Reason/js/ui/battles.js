@@ -309,8 +309,8 @@
             return Rift.UI.modal('How to play', el('div.htp',null,[
                 el('div.htp-turn',null,[
                     el('div.htp-step',null,[el('strong',{text:'1 · Draw'}),el('span',{text:'Pick ONE: a card from your deck, or a rule card.'})]),
-                    el('div.htp-step',null,[el('strong',{text:'2 · Play'}),el('span',{text:'Up to 2 cards (Card plays rule). Each costs energy ⚡.'})]),
-                    el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Free.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'2 · Play'}),el('span',{text:'2 card activations: each cast, attack or manual Activate uses one. Casts and abilities also cost energy ⚡.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Uses 1 card activation; no energy cost.'})]),
                     el('div.htp-step',null,[el('strong',{text:'4 · End turn'}),el('span',{text:'After both turns, Fate moves 1 step.'})]),
                 ]),
                 row('❤','Win:','take the enemy hero to 0 hearts ('+D.hearts+' each). Check Axioms: the goal can change!'),

@@ -3,8 +3,8 @@
  * PURE and deterministic: state + action → new state. No DOM.
  *
  * Heroes have hearts (10 by default). Creatures have attack and health; damage stays.
- * Each turn: one draw choice (own deck or the shared axiom deck), then play up to rules.playLimit
- * cards (2 by default; creatures, tactics and axiom cards) for energy, attack with ready creatures
+ * Each turn: one draw choice (own deck or the shared axiom deck), then up to two shared card
+ * activations (rules.playLimit): cast a creature/tactic/axiom for energy, attack with a ready creature
  * (drag at a creature or the enemy hero; Guard must be attacked first), activate
  * abilities (uses that creature's attack), and End turn. Energy capacity grows
  * 1→10 and refills. The Fate track flips/resets the shared rules.
@@ -81,7 +81,7 @@
  *
  * Hero powers (design/AVATARS.md section 1, data/powers.js): players[p].power = { id, tweaks, cooldown,
  * uses } or null (createBattle player.power; Granny's lesson has none). In the main phase the owner
- * may use it for its energy (or hearts with the Blood price tweak). It is not a card play. After
+ * may use it for its energy (or hearts with the Blood price tweak). It is not a card activation. After
  * use, cooldown = recharge + 1 and counts down by 1 at the start of each of the owner's turns; it is
  * ready at 0 (so at most once per turn, and ready on turn 1). Tweaks: powerMods(state, p) → { def,
  * cost, heartCost, recharge, deeper, broader }. powerStatus(state, p) → { id, name, text, cost,
@@ -388,7 +388,7 @@
         const c = s.cards[cid];
         if (!c || c.kind !== 'creature' || s.phase !== 'main' || c.controller !== s.active) return false;
         const P = s.players[s.active];
-        if (!P.board.includes(cid) || c.frozen || c.activated || isSleeping(s, cid)) return false;
+        if (!playsLeft(s, s.active) || !P.board.includes(cid) || c.frozen || c.activated || isSleeping(s, cid)) return false;
         if (c.attacks >= attacksAllowed(s, cid) || P.attacksThisTurn >= rules(s).attackLimit) return false;
         return attackOf(s, cid) > 0;
     }
@@ -473,7 +473,7 @@
     function canActivateNow(s, cid) {
         const c = s.cards[cid];
         return c.controller === s.active && s.phase === 'main' && s.players[s.active].board.includes(cid)
-            && !c.frozen && !c.activated && !c.attacks && !isSleeping(s, cid);
+            && playsLeft(s, s.active) > 0 && !c.frozen && !c.activated && !c.attacks && !isSleeping(s, cid);
     }
 
     // A preview of a fight without running hooks (for the UI and quick AI checks).
@@ -548,7 +548,7 @@
         const limit = r.attackLimit === Infinity ? '' : ' At most ' + r.attackLimit + ' attack' + (r.attackLimit === 1 ? '' : 's') + ' per player per turn.';
         return [
             ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the enemy hero to zero hearts.'],
-            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Play up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' cards.'
+            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Use up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' card activations: casts, attacks and manual Activate together.'
                 + ' Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'],
             ['Attacks', (r.attacksPerCreature > 1 ? 'Each ready creature may attack twice.' : 'Each ready creature may attack once.') + limit + ' New creatures wait a turn unless Swift' + (r.arrivalReady ? ' (now: all can act at once).' : '.')],
             ['Combat', (combat ? combat.text : 'Both creatures deal damage equal to their attack.') + ' Damage stays' + (r.heal ? ' until the controller\'s next turn (healing rule).' : '.')],
@@ -684,7 +684,9 @@
         return list;
     }
 
-    // Card plays left this turn (creatures, tactics and rule cards each use one; attacks are free).
+    // Shared card activations: each cast, declared attack and manual Activate costs one.
+    // Draw, End, Spark, Bag, hero powers, passive effects and pending answers are exempt.
+    // Keep the old field/API names for compatible battle fixtures and integrations.
     function playLimit(s, p) { return rules(s).playLimit + (s.players[p].extraPlays || 0); }
     function playsLeft(s, p) { return Math.max(0, playLimit(s, p) - (s.players[p].playsThisTurn || 0)); }
 
@@ -873,8 +875,8 @@
             case 'draw': doDraw(G, match.choice); break;
             case 'play': countPlay(G); doPlay(G, match.cid, match.target || null); break;
             case 'axiom': countPlay(G); doAxiom(G, match.choice); break;
-            case 'attack': doAttack(G, match.cid, match.target); break;
-            case 'activate': doActivate(G, match.cid, match.ability, match.target || null); break;
+            case 'attack': countPlay(G); doAttack(G, match.cid, match.target); break;
+            case 'activate': countPlay(G); doActivate(G, match.cid, match.ability, match.target || null); break;
             case 'spark': doSpark(G); break;
             case 'item': doItem(G, match.id, match.target || null); break;
             case 'power': doPower(G, match.target || null); break;
@@ -1250,7 +1252,7 @@
     // Bonus rules (one at a time), checked when a turn starts:
     //   fresh-start  an empty hand draws 2 cards
     //   fair-share   fewer creatures in play than the opponent: draw 1 card
-    //   momentum     more creatures in play than the opponent: +1 card play this turn
+    //   momentum     more creatures in play than the opponent: +1 card activation this turn
     function startBonus(G, p, r) {
         const s = G.s, P = s.players[p], Q = s.players[1 - p];
         if (r.bonus === 'fresh-start' && !handCount(P)) {
@@ -1261,7 +1263,7 @@
             draw(G, p);
         } else if (r.bonus === 'momentum' && P.board.length > Q.board.length) {
             P.extraPlays = 1;
-            emit(G, { t: 'bonus', player: p, text: 'Momentum: more creatures in play, so +1 card play this turn.' });
+            emit(G, { t: 'bonus', player: p, text: 'Momentum: more creatures in play, so +1 card activation this turn.' });
         }
     }
 
@@ -1353,7 +1355,7 @@
         if (r.bonus === 'think') {
             const n = Math.min(2, playsLeft(s, p));
             if (n > 0) {
-                emit(G, { t: 'bonus', player: p, text: 'Think It Over: ' + n + ' unused play' + (n === 1 ? '' : 's') + ', so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' ' + n + ' card' + (n === 1 ? '' : 's') + '.' });
+                emit(G, { t: 'bonus', player: p, text: 'Think It Over: ' + n + ' unused activation' + (n === 1 ? '' : 's') + ', so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' ' + n + ' card' + (n === 1 ? '' : 's') + '.' });
                 for (let i = 0; i < n; i++) draw(G, p);
             }
         }

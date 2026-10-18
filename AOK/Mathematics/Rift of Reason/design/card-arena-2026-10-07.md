@@ -4,10 +4,14 @@ The teacher asked to move the card minigame towards a familiar digital card-batt
 
 AGENTS.md still applies: borrow mechanics, never names. Our keyword names are **Guard**, **Swift**, **Shield**, **Entrance**, **Last Word** and **Activate**.
 
+## Current counting rule — 18 October 2026 (#100)
+
+The shared two-activation contract in [DESIGN.md](DESIGN.md#shared-card-activations--implemented-18-october-2026-100) supersedes the original play-only allowance. Casts, attacks and manual Activate each spend one; draw, End turn, Spark, Bag and hero powers spend none. All other costs and readiness gates remain. The remaining October 7 prose records the original rebuild.
+
 ## Players and turns
 
 - Each player has a **hero** (the player's avatar or the trainer's portrait) with **12 hearts** (the teacher asked to start at ten; simulation showed ten hearts ends almost half of all games by round 6, so the default is 12 — see `design/reviews/card-arena-balance-2026-10-07.md`). Lessons may use fewer. Creature stats are deliberately modest for their cost (about two stat points per energy, health usually at least attack), and Guard plus removal tactics keep the board relevant, so pure face-rushing should not dominate.
-- Energy capacity grows by 1 at the start of each own turn (max 10) and refills. Unspent energy is lost. **Card plays:** at most 2 cards per turn by default (creatures, tactics and axiom cards each use one; attacks, Activate, items and the Spark are free). Rule cards change the limit (teacher, 7 Oct: an action economy that is generous early and tight later).
+- Energy capacity grows by 1 at the start of each own turn (max 10) and refills. Unspent energy is lost. **Card activations:** at most 2 per turn by default (creature/tactic/axiom casts, attacks and manual Activate each use one; items, Spark and hero powers are separate). Rule cards change the limit (teacher, 7 Oct: an action economy that is generous early and tight later).
 - **Own deck:** 20 cards = creatures from your team plus **Tactic cards** (one-shot spells, our version of trainer cards). Default: your first 10 creatures + your 10 chosen tactics; the Collection deck builder allows 6–14 creatures and up to two copies of a tactic. Missing creatures are loaned.
 - **Opening hands:** the first player gets 2 cards from their deck and 1 axiom card. The second player gets 4 deck cards, 1 axiom card and the **Spark** (once per match: +1 energy this turn). This is the opening compensation #45 asked for (with 3 cards the first player still won ~62% of mirror matches; with 2 it is ~48%).
 - **Draw choice** at the start of every own turn (including the first): exactly one of
@@ -16,11 +20,11 @@ AGENTS.md still applies: borrow mechanics, never names. Our keyword names are **
   - (Removed 7 Oct at the teacher's request: the Fast-forward/Rewind time draws. Fate always moves forward 1 per turn; only cards and abilities bend it. The engine keeps them behind `options.timeDraws`, moving 1 space.)
   A full hand (10 cards) blocks drawing; the time choices remain. An empty deck greys out Deck.
 - **Finite shared deck and exhaustion** (teacher, 12 and 14 Oct, #117): used rule cards (played, replaced, reset, discarded) go to the shared discard and never shuffle back in. An empty shared deck alone is harmless, and an empty own deck can still take rule cards. When a player's own deck **and** the shared deck are both empty, their normal draw step costs 1 heart, then 2, then 3… (`players[p].exhaustion`; the opponent's deck does not matter, a full hand alone is not exhaustion). It happens once per own draw step whatever is chosen (a time draw neither dodges nor repeats it); extra draws (Second Opinion, Fresh Start, Think It Over, tactics) never cause it. It is not an attack (no Hero-hits cap) and follows the current Win rule: under The Last Shall Be First, reaching zero wins; both heroes at zero is the usual draw. The hero rows show "Empty: −N ❤" before it happens, and the draw controls show "Both decks empty: −N ❤" and "Continue: lose N hearts".
-- Then the **main phase**: any number of these, in any order, while energy lasts. **End turn** passes play.
+- Then the **main phase**: any number of these, in any order, while energy and card activations last. **End turn** passes play.
   - **Play a creature** for its cost. It arrives *sleeping*: it can't attack or activate this turn unless it has Swift (or the Arrival rule is on). If it has an Entrance that needs a target, the target is chosen as part of the play.
   - **Play a tactic** for its cost. It resolves once (choose a target if needed) and goes to your discard.
   - **Play an axiom card** from hand for its cost (most cost 2). It becomes the active rule in its category for **both** players and replaces the previous rule in that category (which goes to the shared discard).
-  - **Attack** with a ready creature (free): choose the enemy hero or an enemy creature. Each creature attacks once per turn (some rules/abilities allow two).
+  - **Attack** with a ready creature (one activation, no energy): choose the enemy hero or an enemy creature. Each creature attacks once per turn (some rules/abilities allow two).
   - **Activate** a ready creature's ability for its listed energy cost. Activating **uses that creature's attack for the turn**, so it is a real trade-off.
   - **Spark** (second player only, once).
 
@@ -106,15 +110,15 @@ Borrowed mechanics (Fluxx's Play N, Hand Limit, bonuses, swapping plays for draw
 
 | Category | Ids | Effect |
 |---|---|---|
-| plays | restraint, two-plays (basic), plenty, infinity | 1 / 2 / 3 / any number of card plays per turn |
+| plays | restraint, two-plays (basic), plenty, infinity | 1 / 2 / 3 / any number of shared card activations per turn |
 | energy | steady-state, diminishing-returns | capacity grows by 0 / shrinks by 1 (never below 1) |
 | hand | limited-memory | end of turn: keep at most 3 cards (oldest discarded) |
-| bonus | fresh-start, fair-share, momentum, think | empty hand draws 2 / fewer creatures draws 1 / more creatures +1 play / unused plays draw (max 2) |
+| bonus | fresh-start, fair-share, momentum, think | empty hand draws 2 / fewer creatures draws 1 / more creatures +1 activation / unused activations draw (max 2) |
 
 ## Interface (7 Oct rebuild, after the teacher's playtest and critic rounds)
 
 - Middle bar: the Fate reel on top; below it the instruction (or the two-way draw choice with the card on top of the shared deck named, and a one-line recap of the opponent's turn), the axiom deck and a round End turn medallion.
-- Side panel: **Axioms** picture tiles (Win, Fights, Card plays, Attacks, Energy always; any other changed rule adds a tile; changed tiles are gold with "Changed"; Card plays/Attacks show "N left"), the colour wheel (collapsed), How to play (a one-screen visual sheet).
+- Side panel: **Axioms** picture tiles (Win, Fights, Card activations, Attacks, Energy always; any other changed rule adds a tile; changed tiles are gold with "Changed"; Card activations/Attacks show "N left"), the colour wheel (collapsed), How to play (a one-screen visual sheet).
 - **Recent plays**: a column of pictures at the table's left edge (newest on top, teal = you, coral = them); hover shows the card and what followed. It replaced the text log.
 - Card faces show short text (tactics and axioms have a `short` field); the hover magnifier opens beside the card after 220 ms with the full text in the note under it.
 - Pacing: the opponent waits 1.25 s between moves, a card it plays is shown big first (1.5 s), attacks show their arrow (1 s), and any rule change is shown big for 2.6 s while everything waits. Turn banners for both sides.

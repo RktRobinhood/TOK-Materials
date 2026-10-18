@@ -1142,3 +1142,38 @@ test('Fate wording follows the round for either first player; Calm motion steps 
     assert.equal(both.currentTime, 0);
     t.handle.destroy();
 });
+
+
+test('attacks spend visible shared pips and the third ready card explains the exhausted budget', () => {
+    const t = prepared({ me: ['astrophysicat', 'astrophysicat', 'astrophysicat'], opp: ['kardashiant'] }, (s, move) => {
+        for (let i = 0; i < 3; i++) move('p0c' + i, 0, 'board');
+    });
+    for (let i = 0; i < 2; i++) {
+        assert.equal(t.root.querySelectorAll('.b-play-pip.on').length, 2 - i);
+        t.$('.my-board [data-cid="p0c' + i + '"]').click();
+        t.$('.b-hero[data-target="h1"]').click();
+        t.g.flush();
+    }
+    assert.equal(t.root.querySelectorAll('.b-play-pip.on').length, 0);
+    assert.match(t.$('.b-plays').title, /0 of 2.*cast, attack or manual Activate/);
+    const before = t.handle.state;
+    t.$('.my-board [data-cid="p0c2"]').click();
+    assert.equal(t.handle.state, before);
+    assert.match(t.text(), /No card activations left/);
+    assert.ok(!t.$('.b-hero[data-target="h1"]').classList.contains('valid'));
+    assert.match(t.$('.b-card-actions .btn.gold').getAttribute('aria-label'), /No card activations left/);
+    t.handle.destroy();
+});
+
+
+test('Danger caps next-turn attacks by the shared budget and includes Momentum only when earned', () => {
+    for (const bonus of [null, 'momentum']) {
+        const t = prepared({ me: ['kardashiant'], opp: ['astrophysicat', 'astrophysicat', 'astrophysicat'] }, (s, move) => {
+            s.players[0].hearts = 3;
+            for (let i = 0; i < 3; i++) move('p1c' + i, 1, 'board');
+            if (bonus) s.axioms.active.bonus = bonus;
+        });
+        assert.equal(!!t.$('.b-danger'), !!bonus, 'three one-attack creatures need Momentum to threaten 3 hearts');
+        t.handle.destroy();
+    }
+});

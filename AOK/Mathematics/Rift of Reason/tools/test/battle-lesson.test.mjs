@@ -64,13 +64,13 @@ test('the steps teach what the design asks for, in a sensible order', () => {
 });
 
 test('no early win: until the final steps the learner can never take all of Granny\'s hearts in one turn', () => {
-    const last = L.steps.length - 2;   // the two winning attacks
+    const last = L.steps.findIndex(st => st.title === 'What will you do?');
     replay((i, s) => {
         if (i >= last || s.active !== 0 || s.phase !== 'main' || E.rules(s).reverseHearts) return;
         const r = E.rules(s);
         const hits = s.players[0].board.filter(cid => E.canAttack(s, cid) && E.attackTargets(s, cid).includes('h1'))
             .map(cid => Math.min(E.attackOf(s, cid), r.heroDamageCap == null ? Infinity : r.heroDamageCap));
-        const total = hits.reduce((n, x) => n + x, 0);
+        const total = hits.sort((a, b) => b - a).slice(0, E.playsLeft(s, 0)).reduce((n, x) => n + x, 0);
         assert.ok(total < s.players[1].hearts, 'step ' + i + ': ' + total + ' damage could beat Granny (' + s.players[1].hearts + ' hearts)');
     });
 });
@@ -133,12 +133,12 @@ test('both lessons count Fate in rounds: the first flip is set aside at the star
         if (i === fateStep) {
             assert.equal(st.axioms.active.cost, 'thrift');
             assert.deepEqual([st.turn, st.round], [5, 3]);
-            assert.equal(E.timeline(st)[0].rounds, 3, 'the reset in 3 rounds, as Granny says');
+            assert.equal(E.timeline(st)[0].rounds, 4, 'the reset in 4 rounds, as Granny says');
         }
         if (i === decide) assert.deepEqual([E.timeline(st)[0].type, E.timeline(st)[0].rounds, E.timeline(st)[0].turns], ['reset', 1, 2]);
     });
     assert.match(L.steps[fateStep].text, /After each round/);
-    assert.match(L.steps[fateStep].replies[0].say, /In 3 rounds/);
+    assert.match(L.steps[fateStep].replies[0].say, /In 4 rounds/);
     // Short lesson: the first flip is set aside too, and resolves at the end of round 1.
     const short = L.shortGuide().create();
     assert.equal(short.fate.next, 'thrift');

@@ -21,7 +21,17 @@ All six previously teacher-labelled issues have resolved interviews on GitHub an
 
 New #159 tracks phone landscape/fullscreen/touch work as **stretch, after all currently requested work**. Its body explicitly requests tracking only, not implementation or promotion to ready-for-agent. Leave it deferred.
 
-## Current slice and next frontier
+## Latest completed slice — shared card activations #100 (19:19 UTC)
+
+This chat resumed its existing battle work and completed #100 over baseline f267d77, preserving the independent #111 timer delivery and all unrelated OneDrive/untracked work. Each cast, attack and manual Activate now spends one of two shared uses. Draw, End turn, Spark, Bag and hero powers are explicitly separate. Rule changes preserve spent uses; owner bonuses retain their scope. UI, Help, card copy, AI and both Granny lessons agree.
+
+- Full tracked suite plus the new activation tests: **1,144 passed, one existing skip, zero failures (1,145 total; 300.9 s)**. Includes the 10,000-game AI fuzz, legal mounted lesson replays, exact counting/bonus/limit checks and new exhausted UI/Danger regressions. Independent Standards and Spec reviews have zero remaining findings.
+- A real keyboard browser playthrough completed the short lesson including prediction and independent repair; a full-lesson browser sample confirmed attack plus cast exhausted both uses. Complete full/short routes and alternative short repairs pass at the real engine and mounted UI seams. This does not claim classroom-device validation.
+- The 300-match balance baseline gives Competent 143/200 wins (71.5%), mean length 20.74 player turns, maximum 41, and zero ends while an affordable creature was legal. The AI also preserves a use to avert an imminent public board wipe. See [activation verification](activation-budget-100-2026-10-18.md), screenshots and machine-readable balance receipt.
+- Seven revised Granny lines use current text/browser speech. Their exact canonical IDs are in the report's voice-followup.json for #43 after the natural 19 October allowance reset. No TTS calls or ledger changes were made. The recording collector needs to include short-lesson and reply lines and avoid loading unrelated OneDrive sync copies over the canonical lesson before recording these; do not infer coverage from its historical catalog count alone.
+- The publication receipt and closure are recorded on #100 after the successful scoped push. #101 is the next battle dependency: first pin delta composition/bounds, Unlimited repair/reset and content matrix; preserve current IDs and explicit deck selection. Re-check the checkout and current issue comments before starting it. The two-hour heartbeat remains active.
+
+## Prior slice — #111 quick timers
 
 This run selected the independent #111 quick-timer slice rather than editing battle files already changed by another session.
 
@@ -32,11 +42,11 @@ This run selected the independent #111 quick-timer slice rather than editing bat
 
 Prior completed work is on main through `9d24daa`: catch campaign persistence/inventory integration, woodland retheme/Lantern Lure and Picture Catch, #109 lifecycle cleanup, #126 economy design reconciliation, and #157 bounded fake-DOM failure handling. Consult the corresponding review reports/latest issue comments; the new #158 redesign supersedes its earlier teacher-playtest-only frontier.
 
-Next runs should re-evaluate current GitHub dependencies and active work. Good independent candidates include the rest of #111, #128's per-encounter rollout, and small #66 presentation slices. #158 and #29 require larger staged implementation; do not start both together. #108/#109/#110 integration, #123/#130 releases and the #131–#136 economy chain must respect their actual prerequisites. #100/#101 battle work is already dirty in the shared checkout; do not claim or stage it.
+Next runs should re-evaluate current GitHub dependencies and active work. Good independent candidates include the rest of #111, #128's per-encounter rollout, and small #66 presentation slices. #158 and #29 require larger staged implementation; do not start both together. #108/#109/#110 integration, #123/#130 releases and the #131–#136 economy chain must respect their actual prerequisites. #100 is now complete in the later slice above; #101 remains unstarted.
 
 ## Shared checkout and verification
 
-At this run's start, twelve tracked battle/axiom/power/lesson files were modified by another session, with an additional untracked battle-activations test. Numerous unrelated OneDrive sync copies, two old unfinished Mending tests, research notes and conditional study/gallery receipts also pre-existed. Preserve all of them. Stage only this run's explicitly listed files.
+At the earlier #111 run's start, twelve tracked battle/axiom/power/lesson files were modified by this battle session, with an additional untracked battle-activations test. Numerous unrelated OneDrive sync copies, two old unfinished Mending tests, research notes and conditional study/gallery receipts also pre-existed. Preserve all of them. Stage only this run's explicitly listed files.
 
 Use the complete tracked test list from `git ls-files 'tools/test/*.test.mjs'`, plus any new tests explicitly, with `node --max-old-space-size=2048 --test --test-concurrency=2`. The old untracked Mending tests target retired injury behavior and are not part of the repository-owned suite. Do not hide tracked failures. Use a clean verification checkout with only this slice over its recorded baseline when unrelated tracked changes would contaminate results; archive managed verification worktrees after use.
 
