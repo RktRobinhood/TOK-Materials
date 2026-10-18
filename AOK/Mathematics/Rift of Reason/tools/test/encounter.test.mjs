@@ -6,9 +6,9 @@ import fs from 'node:fs';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 async function game(type='puzzle',difficulty=1,clock=null,prep=null){
- const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
+ const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;state.flags['learning-hint:fake']=true;
- Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
+ Rift.State.transact=fn=>({ok:true,value:fn(state)});Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
  Rift.el=(...a)=>new Node(...a);
  const puzzles=type==='boss'?[{id:'fake',difficulty},{id:'fake',difficulty}]:[{id:'fake',difficulty}];
  Rift.data.map={nodes:{test:{type,chapter:'prologue',links:[],puzzles,name:'Test',host:'narrator',goal:'Check rules'} }};
@@ -43,26 +43,6 @@ test('a paid hint counts once; knockout blocks further checks and completion',as
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,0);assert.equal(g.state.map.completed.length,0);
 });
 
-test('timed catch settles once after a wobble, and leaving cancels its pending outcome',async()=>{
- for(const leave of [false,true]){
-  const pending=new Map();let next=0;
-  const clock={set(fn){pending.set(++next,fn);return next;},clear(id){pending.delete(id);}};
-  const tick=()=>{const [id,fn]=pending.entries().next().value;pending.delete(id);fn();};
-  const g=await game('puzzle',1,clock);
-  g.Rift.World.rollLoot=()=>({species:'lobstorian'});g.Rift.World.rollCatch=()=>({caught:true,p:.65});
-  const rng=g.Rift.makeRng;g.Rift.makeRng=seed=>String(seed).endsWith(':catch-mode')?{pick:()=> 'throw'}:rng(seed);
-  let catchOptions;g.Rift.CatchGame={mount:(_,opts)=>{catchOptions=opts;return {destroy(){}};}};
-  g.Rift.voiceId=()=>'';
-  g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();g.modals.at(-1).buttons[0].onclick();
-  function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
-  all(g.root).find(n=>n.textContent.startsWith('Time a throw:')).onclick();
-  catchOptions.onFinish({spent:1,bonus:.15,label:'Excellent throw!'});
-  assert.equal(g.state.stats.catches,0);assert.equal(pending.size,1);
-  tick();assert.ok(g.sounds.includes('wobble'));assert.equal(pending.size,1);
-  if(leave){g.handle.destroy();assert.equal(pending.size,0);assert.equal(g.state.stats.catches,0);}
-  else{tick();assert.equal(g.state.stats.catches,1);assert.ok(g.sounds.includes('caught'));assert.equal(pending.size,0);}
- }
-});
 test('boss Why knockout cannot grant rewards or advance to the next stage',async()=>{
  const g=await game('boss',3);g.state.health=1;g.api().submit(true);
  const next=g.modals.at(-1).buttons[0].onclick();assert.equal(g.modals.at(-1).title,'Why?');
@@ -179,8 +159,8 @@ test('catch offer (#125): a stray backdrop click cannot dismiss it; the panel na
   offer.buttons[0].onclick();
   function all(n){return [n,...n.children.filter(x=>x instanceof Node).flatMap(all)];}
   const texts=all(g.root).map(n=>n.textContent);
-  assert.ok(texts.some(t=>t.startsWith('Your lure is lit here')));
-  assert.equal(texts.some(t=>/Puzzle wins \(replays too\) and card challenges can give more/.test(t)),empty);
-  assert.equal(texts.some(t=>t.startsWith('Time a throw:')||t.startsWith('Box it in:')),!empty);
+  assert.ok(texts.some(t=>t.startsWith('Lure:')));
+  assert.equal(texts.some(t=>/Puzzle wins and card challenges can give more/.test(t)),empty);
+  assert.equal(texts.some(t=>t.startsWith('Catch Charm (')),!empty);
  }
 });

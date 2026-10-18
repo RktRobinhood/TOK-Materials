@@ -41,7 +41,7 @@ Games last about 7–8 turns per player, so a recharge caps how often a power fi
 | Raven girl (Language, board) | **Call It Out** | An enemy creature loses Guard, Shield and Elusive. | 2 | 2 | 0.6 | Look Closer (card) does this and draws, for 1. |
 | Raven boy (Language, hearts) | **Fine Print** | Lose 1 heart and draw a card. | 2 | 2 | 0.8 | Pays hearts for cards. Pairs with the reversed victory rule (zero hearts wins). |
 
-The overworld perks stay as they are (free hint, lantern, catch odds, extra wrong check, boss item) and appear on the avatar screen. Detailed card-power effects, costs and recharge wait until battles and the optional Full card lesson; Collection keeps the power reference. This staging replaces the initial detailed power preview after the 10 October playtest (#96). The first conceptual hint on each puzzle topic is separately free and does not consume the avatar's chapter perk; later perk hints keep their existing limits and star accounting.
+The overworld perks stay as they are (free hint, lantern, extra catch-game move or trap heart, extra wrong check, boss item) and appear on the avatar screen. Detailed card-power effects, costs and recharge wait until battles and the optional Full card lesson; Collection keeps the power reference. This staging replaces the initial detailed power preview after the 10 October playtest (#96). The first conceptual hint on each puzzle topic is separately free and does not consume the avatar's chapter perk; later perk hints keep their existing limits and star accounting.
 
 ### 1.3 Tweaks (progression)
 

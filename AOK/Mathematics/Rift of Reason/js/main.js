@@ -14,7 +14,7 @@
         // Station card rewards (#124) for places finished before they existed: each slot pays once.
         Rift.World.catchUpCards();
         Rift.bus.on('state:replaced', () => { Rift.State.ensureStarter(); Rift.World.catchUpCards(); });
-        // Calm motion reduces animation and keeps the catch ring still.
+        // Calm motion reduces animation; catch games use static paths in every mode.
         const applyCalm = () => {
             const s = Rift.State.get();
             root.document.body.classList.toggle('calm-motion', !!(s && s.settings.calm));

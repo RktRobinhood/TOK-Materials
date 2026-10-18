@@ -1,146 +1,148 @@
-/* Untimed instructions, then a click/timing throw or a six-by-six planning game. */
+/* Adventure and practice share these finite-move, native-button games. */
 (function (root) {
     'use strict';
-    const Rift = root.Rift;
-    const el = (...args) => Rift.el(...args);
-    function mount(container, opts) {
-        const o = opts;
-        const c = Rift.data.creatures[o.species];
-        const cfg = Rift.Catching.config(o.item, c.rarity, o.lured);
-        const calm = !!Rift.State.get().settings.calm;
-        let ended = false, spent = 0, timer = null;
-        let phase = 'ready', started = 0, used = 0;
-        let board = Rift.Catching.boxStart(o.seed);
-        const status = el('p.small', { 'aria-live': 'polite' });
-        const clock = el('p.small.catch-clock', { 'aria-live': 'polite' });
-        const playBtn = el('button.btn.primary.catch-play', { type: 'button', text: 'Start', onclick: togglePlay });
-        const game = el('div.catch-game.stack');
+    const Rift = root.Rift, games = Rift.CatchGames, net = Rift.CatchNetPrototype;
+    const el = (...a) => Rift.el(...a);
+    const amount = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
+    const RULES = {
+        net: 'Choose a net, check its path, then cast. Shrink the creature’s room to the goal before your casts run out.',
+        ricochet: 'Aim, then fire. Clear every cage before your shots run out. The ball bounces off cages and walls.',
+        tracks: 'Open every safe tile. Numbers count traps in the eight touching tiles. Flag suspected traps; opening one costs a trap heart.',
+    };
+    function mount(container, o) {
+        let board = o.board, phase = o.board.done ? 'ended' : o.started ? 'paused' : 'ready', destroyed = false;
+        let selected = board.kind === 'net' ? net.available(board)[0] : 3, flagMode = false, lastPath = null;
+        const game = el('div.catch-game.stack'), status = el('p.catch-status', { role: 'status', 'aria-live': 'polite' });
+        const budget = el('p.catch-budget');
+        const play = el('button.btn.catch-play', { type: 'button', onclick: toggle });
+        const field = el('div.catch-field'), controls = el('div.catch-controls');
+        const rules = el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
+        rules.open = !o.started;
+        game.append(el('h3', { text: games.NAMES[board.kind] }), rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), field, controls, status);
         container.append(game);
-        const stop = () => { if (timer) clearInterval(timer); timer = null; };
-        let refresh = () => {};
-        let animate = () => {};
-        function finish(bonus, label) {
-            if (ended) return;
-            ended = true;
-            if (phase === 'running') used += Date.now() - started;
-            phase = 'ended';
-            stop();
-            playBtn.disabled = true;
+        function active() { return !destroyed && phase === 'running' && !board.done; }
+        function toggle() {
+            if (destroyed || board.done) return;
+            if (phase === 'ready') {
+                const result = o.onStart();
+                if (!result.ok) { status.textContent = result.error; return; }
+                board = result.board;
+                rules.open = false;
+            }
+            phase = phase === 'running' ? 'paused' : 'running';
             refresh();
-            o.onFinish({ bonus, label, spent, item: o.item, mode: o.mode });
         }
-        const spend = () => {
-            if (!o.spend(o.item)) return false;
-            spent += 1;
-            if (o.mode === 'throw') Rift.Audio.sfx('throw');
-            return true;
-        };
-        const elapsed = () => (used + (phase === 'running' ? Date.now() - started : 0)) / 1000;
-        function togglePlay() {
-            if (ended) return;
-            if (phase === 'running') {
-                // Settle an expired catch before allowing a pause between timer ticks.
-                tick();
-                if (ended) return;
-                used += Date.now() - started;
-                phase = 'paused';
-                stop();
-            } else {
-                phase = 'running';
-                started = Date.now();
-                timer = setInterval(() => {
-                    if (ended || phase !== 'running') return;
-                    tick();
-                    if (!ended) animate();
-                }, 100);
+        function act(action) {
+            if (!active()) return;
+            const result = o.onAction(action);
+            if (!result.ok) { status.textContent = result.error; return; }
+            board = result.board; lastPath = result.path || null;
+            if (board.kind === 'net') {
+                status.textContent = result.hit ? 'It crossed the net. One cast used; no wall built.' : 'Net closed. Room: ' + net.room(board).length + ' tiles.';
+                if (!net.available(board).includes(selected)) selected = net.available(board)[0];
+            } else if (board.kind === 'ricochet') status.textContent = amount(board.bricks.length, 'cage') + ' left. The pale line shows your last shot.';
+            else status.textContent = result.hit ? 'Trap at row ' + (Math.floor(result.cell / board.size) + 1) + ', column ' + (result.cell % board.size + 1) + '. One trap heart used.' : 'Use the numbered clues. No guessing is needed.';
+            if (board.done) {
+                phase = 'ended';
+                status.textContent = board.done === 'caught' ? 'You did it! The creature is caught.' : board.kind === 'tracks' ? 'No hearts left. The creature escaped.' : 'No moves left. The creature escaped.';
             }
-            playBtn.textContent = phase === 'paused' ? 'Resume' : 'Pause';
             refresh();
-            tick();
+            if (board.done && o.onFinish) o.onFinish(board.done);
         }
-        game.append(el('h3', { text: o.mode === 'throw' ? 'Time your throw' : 'Box it in' }),
-            el('p', { text: 'Base odds ' + Math.round(o.base * 100) + '% (charm, stars and lure included). Skill adds up to 15 points (total cap: 95%). A miss leaves one quarter of the base odds, at least 5%.' }),
-            el('p.small', { text: 'Read the instructions, then press Start. Pause stops the clock and controls. Resume continues from the same point.' }));
-        if (o.mode === 'throw') {
-            game.append(el('p', { text: (calm ? 'Click inside the still ring during a Great or Excellent window.' : 'Click inside the gold ring. Smaller ring = bigger bonus.') + ' One charm per throw. Time out uses one charm for a rushed throw.' }));
-            const ring = el('span.catch-ring');
-            const target = el('button.catch-target', { 'aria-label': 'Throw inside the gold ring', onclick(ev) {
-                if (ended || phase !== 'running') return;
-                if (elapsed() >= cfg.seconds) { tick(); return; }
-                if (!spend()) { finish(0, 'No charm left.'); return; }
-                const scale = Rift.Catching.ringScale(elapsed(), cfg);
-                const rect = target.getBoundingClientRect();
-                const keyboard = ev.detail === 0;
-                const dx = keyboard ? 0 : ev.clientX - rect.left - rect.width / 2;
-                const dy = keyboard ? 0 : ev.clientY - rect.top - rect.height / 2;
-                const radius = 85 * cfg.ring * (calm ? 0.7 : scale);
-                const bonus = Rift.Catching.throwBonus(scale, Math.hypot(dx, dy) <= radius);
-                finish(bonus, bonus === 0.15 ? 'Excellent throw!' : bonus === 0.1 ? 'Great throw!' : bonus ? 'Good throw!' : 'The throw missed the ring.');
-            } }, [Rift.Assets.img('creature/' + o.species + '/idle', { label: c.name }), ring]);
-            if (!calm) target.style.left = (Rift.makeRng(o.seed).int(-15, 15)) + 'px';
-            game.append(clock, playBtn, target, status);
-            function update() {
-                target.disabled = phase !== 'running';
-                const scale = Rift.Catching.ringScale(elapsed(), cfg);
-                ring.style.width = ring.style.height = (170 * cfg.ring * (calm ? 0.7 : scale)) + 'px';
-                const text = (scale < 0.4 ? 'Excellent window: +15 points' : scale < 0.65 ? 'Great window: +10 points' : 'Good window: +5 points') + (calm ? ' · Calm motion: the ring stays still.' : '');
-                if (status.textContent !== text) status.textContent = text;
+        function refresh() {
+            const focus = root.document.activeElement;
+            const key = focus && focus.getAttribute && focus.getAttribute('data-catch-key');
+            play.textContent = phase === 'ready' ? o.startLabel || 'Start · 1 charm' : phase === 'running' ? 'Pause' : phase === 'paused' ? 'Resume' : 'Finished';
+            play.disabled = !!board.done;
+            budget.textContent = board.kind === 'net' ? amount(board.cfg.casts - board.turn, 'cast') + ' · goal: ' + board.cfg.target + ' tiles · room: ' + net.room(board).length
+                : board.kind === 'ricochet' ? amount(board.shots - board.turn, 'shot') + ' · ' + amount(board.bricks.length, 'cage') + ' left'
+                    : amount(board.lives - board.mistakes, 'trap heart') + ' · ' + board.traps.length + ' traps · ' + board.open.length + '/' + (board.size ** 2 - board.traps.length) + ' safe tiles';
+            field.innerHTML = ''; controls.innerHTML = '';
+            if (board.kind === 'net') drawNet();
+            else if (board.kind === 'ricochet') drawRebound();
+            else drawTracks();
+            if (key) {
+                const same = game.querySelector('[data-catch-key="' + key + '"]');
+                if (same && !same.disabled) same.focus();
             }
-            refresh = update;
-            animate = update;
-            update();
-        } else {
-            // One charm from the bag pays for the whole try (#125: per-placement costs made a box try
-            // cost about five throws). The placement budget is the challenge, not the bag.
-            game.append(el('p', { text: 'One charm per try. Place up to ' + cfg.placements + ' charms on empty squares. It moves away from the nearest charm. Block every exit for +15 points. When moves tie, it follows a fixed order.' }),
-                el('p.small', { text: o.lured ? 'Your lure slows it: it moves only after every second charm.' : 'It moves after every charm.' }));
-            const grid = el('div.catch-grid', { 'aria-label': 'Six by six catch board' });
-            game.append(clock, playBtn, grid, status);
-            let placed = 0;
-            function render() {
-                grid.innerHTML = '';
-                for (let i = 0; i < 36; i++) {
-                    const creature = i === board.creature;
-                    const blocked = board.charms.includes(i);
-                    grid.append(el('button.catch-cell' + (creature ? '.creature' : blocked ? '.blocked' : ''), {
-                        disabled: phase !== 'running' || creature || blocked,
-                        'aria-label': 'Row ' + (Math.floor(i / 6) + 1) + ', column ' + (i % 6 + 1) + (creature ? ': creature' : blocked ? ': charm' : ': place charm'),
-                        onclick() {
-                            if (ended || phase !== 'running') return;
-                            if (elapsed() >= cfg.seconds) { tick(); return; }
-                            const step = Rift.Catching.boxStep(board, i, o.lured);
-                            if (!step.valid) return;
-                            if (!placed && !spend()) { finish(0, 'No charms left.'); return; }
-                            placed += 1;
-                            const moved = step.board.creature !== board.creature;
-                            board = step.board;
-                            Rift.Audio.sfx(moved ? 'wobble' : 'place');
-                            if (step.trapped) { finish(0.15, 'Trapped! Clever plan.'); return; }
-                            if (placed >= cfg.placements) { finish(0, 'It still has an exit.'); return; }
-                            render();
-                        },
-                    }, creature ? [Rift.Assets.img('creature/' + o.species + '/idle', { label: c.name })] : blocked ? [Rift.Assets.img('item/' + o.item, { label: 'Charm' })] : []));
-                }
-                status.textContent = 'Placements left: ' + (cfg.placements - placed) + '. Trap it for +15 points.';
-            }
-            refresh = () => Array.from(grid.children).forEach((cell, i) => {
-                cell.disabled = phase !== 'running' || i === board.creature || board.charms.includes(i);
+        }
+        function choose(label, key, value) {
+            return el('button.catch-choice' + (selected === value ? '.selected' : ''), {
+                type: 'button', text: label, 'data-catch-key': key, 'aria-pressed': String(selected === value), disabled: !active(),
+                onclick() { if (!active()) return; selected = value; refresh(); },
             });
-            render();
         }
-        function tick() {
-            if (ended) return;
-            const left = Math.max(0, Math.ceil(cfg.seconds - elapsed()));
-            const text = phase === 'ready' ? 'Ready: ' + cfg.seconds + ' seconds after Start'
-                : (phase === 'paused' ? 'Paused · ' : '') + left + ' seconds left';
-            if (clock.textContent !== text) clock.textContent = text;
-            if (phase === 'running' && left === 0) {
-                if (o.mode === 'throw' && !spent) spend();
-                finish(0, 'Time ran out. A small catch chance remains.');
+        function drawNet() {
+            const preview = net.preview(board, selected), region = net.room(board);
+            const grid = el('div.catch-net-board', { role: 'img', 'aria-label': 'Six by six arena. ' + region.length + ' tiles remain. Creature facing ' + ['up', 'right', 'down', 'left'][board.dir] + '.' });
+            for (let cell = 0; cell < 36; cell++) {
+                const rock = board.rocks.includes(cell), creature = board.cell === cell;
+                const tile = el('div.catch-net-tile' + (rock ? '.rock' : !region.includes(cell) ? '.closed' : '') + (preview && preview.path.includes(cell) ? '.path' : ''), { text: rock ? '◆' : creature ? ['↑', '→', '↓', '←'][board.dir] : preview && preview.path.includes(cell) ? '·' : '' });
+                if (cell % 6 < 5 && board.mask & (1 << (cell % 6))) tile.style.borderRight = '3px solid #76ddbd';
+                if (Math.floor(cell / 6) < 5 && board.mask & (1 << (5 + Math.floor(cell / 6)))) tile.style.borderBottom = '3px solid #76ddbd';
+                if (preview && selected < 5 && cell % 6 === selected) tile.style.borderRight = '3px dashed #ffd27e';
+                if (preview && selected >= 5 && Math.floor(cell / 6) === selected - 5) tile.style.borderBottom = '3px dashed #ffd27e';
+                grid.append(tile);
             }
+            field.append(grid);
+            const choices = el('div.catch-net-choices');
+            for (let cut = 0; cut < 10; cut++) {
+                const button = choose((cut < 5 ? 'V' : 'H') + (cut % 5 + 1), 'cut-' + cut, cut);
+                button.setAttribute('aria-label', (cut < 5 ? 'Vertical net after column ' : 'Horizontal net after row ') + (cut % 5 + 1));
+                button.disabled = !active() || !net.available(board).includes(cut);
+                choices.append(button);
+            }
+            controls.append(choices, el('p.small', { text: 'V = vertical · H = horizontal. Dots show the next path. ' + (board.cfg.behaviour === 'steady' ? 'It keeps going, then turns at a wall.' : board.cfg.behaviour === 'turner' ? 'It turns right every third step.' : 'It lunges at a nearby net before moving.') }),
+                el('p.small', { text: preview ? 'Selected net: ' + (preview.hit ? 'it will cross and break this net.' : 'it will leave ' + preview.area + ' tiles.') : 'No unfinished net selected.' }),
+                el('button.btn.primary', { type: 'button', text: 'Cast net', 'data-catch-key': 'cast', disabled: !active() || selected == null, onclick: () => act({ cut: selected }) }));
         }
-        tick();
-        return { destroy() { ended = true; stop(); } };
+        function drawRebound() {
+            const svg = '<svg viewBox="0 0 7 7" role="img" aria-label="Rebound arena: ' + board.bricks.length + ' cages. Launcher at bottom centre.">' +
+                '<rect width="7" height="7" rx=".2" fill="#121d30"/>' +
+                board.bricks.map(cell => '<rect x="' + (cell % 7 + .08) + '" y="' + (Math.floor(cell / 7) + .08) + '" width=".84" height=".84" rx=".12" fill="#78dbc2" stroke="#e4fff3" stroke-width=".04"/>').join('') +
+                (lastPath ? '<polyline points="' + lastPath.map(p => p.join(',')).join(' ') + '" fill="none" stroke="#b4c5e4" stroke-width=".035"/>' : '') +
+                '<line x1="3.5" y1="6.7" x2="' + (3.5 + games.angles[selected][0] / 2) + '" y2="4.7" stroke="#ffd27e" stroke-width=".07" stroke-dasharray=".12 .09"/>' +
+                '<rect x="2.95" y="6.65" width="1.1" height=".16" rx=".08" fill="#ffd27e"/></svg>';
+            field.append(el('div.catch-rebound-board', { html: svg }));
+            const choices = el('div.catch-aims');
+            games.angles.forEach((_, aim) => {
+                const b = choose(['−37°', '−27°', '−14°', '0°', '+14°', '+27°', '+37°'][aim], 'aim-' + aim, aim);
+                b.setAttribute('aria-label', 'Aim ' + (aim + 1) + ' of 7, ' + (aim < 3 ? 'left' : aim > 3 ? 'right' : 'straight') + (aim === 0 || aim === 6 ? ', wide' : aim === 1 || aim === 5 ? ', middle' : aim === 2 || aim === 4 ? ', narrow' : ''));
+                choices.append(b);
+            });
+            controls.append(choices, el('p.small', { text: 'Seven angles · gold = aim · pale = last shot.' }),
+                el('button.btn.primary', { type: 'button', text: 'Fire', 'data-catch-key': 'fire', disabled: !active(), onclick: () => act({ aim: selected }) }));
+        }
+        function drawTracks() {
+            controls.append(el('button.btn.small', { type: 'button', text: 'Flag mode: ' + (flagMode ? 'on' : 'off'), 'aria-pressed': String(flagMode), 'data-catch-key': 'flags', disabled: !active(),
+                onclick() { if (!active()) return; flagMode = !flagMode; refresh(); } }),
+            el('p.small', { text: 'Tap to open; use Flag mode to mark. Keyboard: arrows to move, Enter to open, F to flag. Flags can be removed.' }));
+            const grid = el('div.catch-tracks-board', { 'aria-label': board.size + ' by ' + board.size + ' trail board' });
+            grid.style.gridTemplateColumns = 'repeat(' + board.size + ', 1fr)';
+            for (let cell = 0; cell < board.size ** 2; cell++) {
+                const open = board.open.includes(cell), flagged = board.flags.includes(cell), hit = (board.hits || []).includes(cell), value = open ? games.clue(board, cell) : null;
+                const button = el('button.catch-track' + (open ? '.open' : '') + (flagged ? '.flagged' : ''), {
+                    type: 'button', text: open ? value || '·' : hit ? '✕' : flagged ? '⚑' : '◇', 'data-catch-key': 'tile-' + cell,
+                    'aria-label': 'Row ' + (Math.floor(cell / board.size) + 1) + ', column ' + (cell % board.size + 1) + ': ' + (open ? value + ' touching traps' : hit ? 'opened trap' : flagged ? 'flagged' : 'unopened'),
+                    'aria-disabled': String(!active() || open || hit), disabled: !active(),
+                    onclick() { if (!open && !hit) act({ cell, flag: flagMode }); },
+                    onkeydown(ev) {
+                        if (!active()) return;
+                        if (ev.key.toLowerCase() === 'f' && !open && !hit) { ev.preventDefault(); act({ cell, flag: true }); return; }
+                        const delta = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -board.size, ArrowDown: board.size }[ev.key];
+                        if (delta != null) {
+                            ev.preventDefault();
+                            const target = Math.max(0, Math.min(board.size ** 2 - 1, cell + delta));
+                            const next = grid.children[target]; if (next) next.focus();
+                        }
+                    },
+                });
+                grid.append(button);
+            }
+            field.append(grid);
+        }
+        refresh();
+        return { destroy() { destroyed = true; phase = 'ended'; }, board() { return board; } };
     }
-    Rift.CatchGame = { mount };
+    Rift.CatchGame = { mount, RULES };
 })(typeof window !== 'undefined' ? window : globalThis);

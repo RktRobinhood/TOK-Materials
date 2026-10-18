@@ -489,7 +489,7 @@
                 el('label.row', null, [el('input', { type: 'checkbox', checked: !!s.settings.textInstant, onchange(ev) { Rift.State.update(st => { st.settings.textInstant = ev.target.checked; }); } }), el('span', { text: 'Instant text: show the whole line at once' })]),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: !!s.settings.calm, onchange(ev) { Rift.State.update(st => { st.settings.calm = ev.target.checked; }); } }),
-                    el('span', { text: 'Calm motion: reduce animations and keep catch rings still' }),
+                    el('span', { text: 'Calm motion: reduce animations. Catch games always use still boards.' }),
                 ]),
                 el('label.row', null, [
                     el('input', { type: 'checkbox', checked: s.settings.charactersCanDie !== false, onchange(ev) { Rift.State.update(st => { st.settings.charactersCanDie = ev.target.checked; }); } }),

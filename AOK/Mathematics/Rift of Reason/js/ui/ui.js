@@ -213,7 +213,7 @@
                         if (lureVisits) {
                             Rift.State.update(st => { st.lures[st.map.at] = lureVisits; });
                             Rift.Audio.sfx('jingle');
-                            toast((id === 'lure' ? 'The lantern glows' : it.name + ' shines') + ' at ' + here.name + ': rare creatures become more likely for ' + lureVisits + ' visits, with +5 points to catch odds.');
+                            toast((id === 'lure' ? 'The lantern glows' : it.name + ' shines') + ' at ' + here.name + ': rare creatures become more likely for ' + lureVisits + ' visits. Catch games gain +1 cast, shot or trap heart.');
                         } else {
                             Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
                             Rift.Audio.sfx('heal');
@@ -366,4 +366,11 @@
     }
 
     Rift.UI = { input, toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
+    let conflictShown = false;
+    Rift.bus.on('state:conflict', () => {
+        if (conflictShown || !overlay()) return;
+        conflictShown = true;
+        modal('Adventure changed in another tab', el('p', { text: 'This tab has stopped saving. Reload to continue from the latest saved adventure. Keep playing in one tab.' }),
+            [{ label: 'Reload latest adventure', primary: true, required: true, onclick: () => root.location.reload() }]);
+    });
 })(typeof window !== 'undefined' ? window : globalThis);

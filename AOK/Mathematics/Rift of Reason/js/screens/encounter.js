@@ -1,6 +1,6 @@
 /*
  * Encounters: a node's puzzle (or a boss's chain of puzzles), hints that cost
- * health, the "why?" step on bosses, rewards, and the catch roll on the
+ * health, the "why?" step on bosses, rewards, and the skill catch on the
  * creature revealed after a successful activity.
  *
  * params: { nodeId, shrine? }  shrine = solve a harder puzzle to heal a scar.
@@ -57,8 +57,11 @@
     Rift.Screens.register('encounter', {
         mount(rootNode, params) {
             const state = Rift.State.get();
+            const savedCatch = !params.shrine && Rift.CatchSession.get(params.nodeId);
+            const pendingCatch = savedCatch && !savedCatch.dismissed ? savedCatch : null;
             const checkpoint = !params.shrine && state.flags['reflection:' + params.nodeId];
-            const visit = checkpoint ? { node: Object.assign({ id: params.nodeId }, Rift.World.node(params.nodeId)), seed: checkpoint.seed, lured: checkpoint.lured } : Rift.World.rollVisit(state, params.nodeId);
+            const resume = pendingCatch || checkpoint;
+            const visit = resume ? { node: Object.assign({ id: params.nodeId }, Rift.World.node(params.nodeId)), seed: resume.seed, lured: resume.lured } : Rift.World.rollVisit(state, params.nodeId);
             Rift.State.save();
             const n = visit.node;
             const isBoss = n.type === 'boss';
@@ -72,10 +75,7 @@
             const skippedStages = stages.filter(skipNow).length;
             if (skippedStages && skippedStages < stages.length) stages = stages.filter(p => !skipNow(p));
             let obstacle = null;
-            let catchOpts = null;
             let catchGame = null;
-            let catchTimer = null;
-            let catchAttempt = 0;
             const firstTime = !state.map.completed.includes(n.id);
             const firstVisit = !checkpoint && state.map.visitCount[n.id] === 1;
 
@@ -471,7 +471,7 @@
                 const rng = Rift.makeRng(visit.seed + ':reward');
                 let earned = [];
                 const stars = Rift.World.solveStars(hintsUsed, wrongs);
-                catchOpts = { stars, lured: visit.lured };
+                const catchOpts = { stars, lured: visit.lured };
                 // Finish the homecoming before offering a generic visitor at the Core.
                 obstacle = n.id === 'k-core' && !s.flags['seen:finale.home'] ? null : Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
@@ -493,9 +493,11 @@
                     });
                     st.flags['reasoning:' + n.id] = stages.map(p => ({ puzzle: p.id, feedback: (p.result || {}).feedback || '', reflection: p.reflection || (p.result && p.result.meta && p.result.meta.reflectionExplain) || '', tok: Rift.Puzzles.get(p.id).tok || '' }));
                     delete st.flags['reflection:' + n.id];
+                    if (obstacle && Rift.State.hasRoom(st, obstacle)) Rift.CatchSession.offer(st, n.id, obstacle, visit.seed, visit.lured);
                     if (n.id === 'b-town-hall') earned.push('unmasker');
                     earned = earned.filter(id => Rift.World.award(st, id));
                 });
+                Rift.State.saveNow();
                 const items = Object.entries(r.items).map(([id, k]) => k + '× ' + Rift.data.items[id].name)
                     .concat(r.tactic ? ['new tactic card: ' + Rift.data.tactics[r.tactic].name + ' (add it in Collection → Build decks)'] : [])
                     .concat(cards.map(c => c.kind === 'axiom'
@@ -533,103 +535,115 @@
 
             function catchPhase() {
                 phase = 'catch';
+                rootNode.classList.add('catching');
                 closeHelp();
                 checks.style.display = 'none';
-                const c = Rift.data.creatures[obstacle];
-                const taunt = Rift.makeRng(visit.seed + ':line').pick(c.lines);
-                host.innerHTML = '';
-                host.append(Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature', colour: c.colour, label: c.name }), el('div.bubble', { text: taunt }));
-                if (!Rift.State.get().seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
-                if (taunt) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
-                const mode = Rift.makeRng(visit.seed + ':catch-mode').pick(['throw', 'box']);
-                stageBox.innerHTML = '';
                 controls.style.display = 'none';
                 feedback.textContent = '';
-                const panel = el('div.catch-panel.panel.stack');
+                const c = Rift.data.creatures[obstacle], session = Rift.CatchSession;
+                const taunt = Rift.makeRng(visit.seed + ':line').pick(c.lines || []);
+                host.innerHTML = '';
+                host.append(Rift.Assets.img('creature/' + obstacle + '/idle', { className: 'enc-creature', colour: c.colour, label: c.name }));
+                if (taunt) {
+                    host.append(el('div.bubble', { text: taunt }));
+                    if (Rift.voiceId) Rift.Audio.speak({ speaker: obstacle, text: taunt, voice: Rift.voiceId(obstacle, taunt) });
+                }
+                if (!Rift.State.get().seen.includes(obstacle)) Rift.State.update(s => s.seen.push(obstacle));
+                stageBox.innerHTML = '';
+                const panel = el('div.catch-panel.catch-cabinet.panel.stack');
                 stageBox.append(panel);
-                const render = () => {
+                function dismiss() {
+                    const o = session.get(n.id), result = session.dismiss(n.id, o.version);
+                    if (result.ok) Rift.Router.replace('map');
+                    else panel.append(el('p', { role: 'alert', text: result.error }));
+                }
+                function render() {
+                    if (destroyed) return;
+                    if (catchGame) { catchGame.destroy(); catchGame = null; }
                     panel.innerHTML = '';
-                    const st = Rift.State.get();
-                    panel.append(el('h2', { text: c.name + ' appeared!' }), el('p.muted', { text: (mode === 'throw' ? 'Time a click inside a shrinking ring. One charm per throw.' : 'Place charms on a grid to block every exit. One charm per try.') + ' Skill improves your chance; a miss leaves a small chance.' }));
-                    if (catchOpts.lured) panel.append(el('p.small.catch-lured', { text: 'Your lure is lit here: rare creatures were more likely, and the odds below include +5 points.' }));
-                    const avail = ['charm', 'greatcharm'].filter(id => (st.items[id] || 0) > 0);
-                    if (!avail.length) {
-                        panel.append(el('p', { text: 'You have no charms left. It wanders off… for now. Puzzle wins (replays too) and card challenges can give more.' }), el('button.btn', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }));
+                    const o = session.get(n.id), st = Rift.State.get();
+                    if (!o || o.dismissed) { leave(); return; }
+                    const visitorTitle = el('h2', { text: c.name + ' · ' + c.rarity });
+                    panel.append(visitorTitle);
+                    if (o.receipt) {
+                        const result = o.receipt.outcome;
+                        if (result === 'caught') {
+                            phase = 'caught';
+                            const inst = st.creatures.find(i => i.uid === o.receipt.uid);
+                            panel.append(el('h3', { text: 'Caught! ' + c.name + ' joins you.' }));
+                            if (inst) panel.append(variantNote(inst));
+                            panel.append(el('p', { text: c.blurb }), el('p.small', { text: 'Ability: ' + c.abilityText }),
+                                el('button.btn', { text: 'See collection', onclick: () => Rift.Router.replace('collection') }));
+                        } else if (result === 'full') {
+                            panel.append(el('h3', { text: 'You won! Your folder is full.' }), el('p', { text: 'Your charm was returned. ' + Rift.State.fullReason(o.species) }));
+                        } else {
+                            panel.append(el('h3', { text: 'It escaped this time.' }), el('p', { text: o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
+                                el('button.btn.primary', { text: 'Try again · new random game', onclick() {
+                                    const result = session.retry(n.id, o.version);
+                                    if (result.ok) render(); else panel.append(el('p', { role: 'alert', text: result.error }));
+                                } }));
+                            const finalBoard = el('details'), slot = el('div');
+                            finalBoard.append(el('summary', { text: 'See the final board' }), slot);
+                            panel.append(finalBoard);
+                            catchGame = Rift.CatchGame.mount(slot, { board: o.board, started: true });
+                        }
+                        panel.append(el('button.btn', { text: result === 'escaped' ? 'Let it go' : 'Back to the map', onclick: dismiss }));
                         return;
                     }
-                    avail.forEach(id => {
-                        const p = Rift.World.catchOdds(st, obstacle, id, catchOpts);
-                        panel.append(el('button.btn' + (id === 'greatcharm' ? '.gold' : ''), {
-                            text: (mode === 'throw' ? 'Time a throw: ' : 'Box it in: ') + Rift.data.items[id].name + ' (' + st.items[id] + ' left) · ' + Math.round(p * 100) + '%',
-                            onclick: () => startCatch(id),
-                        }));
-                    });
-                    panel.append(el('button.btn.small', { text: 'Let it go', onclick: () => Rift.Router.replace('map') }));
-                };
-                const startCatch = id => {
-                    if (destroyed || phase !== 'catch' || !(Rift.State.get().items[id] > 0)) return;
-                    if (catchGame) catchGame.destroy();
-                    catchAttempt += 1;
-                    panel.innerHTML = '';
-                    const base = Rift.World.catchOdds(Rift.State.get(), obstacle, id, catchOpts);
-                    catchGame = Rift.CatchGame.mount(panel, {
-                        mode, species: obstacle, item: id, lured: catchOpts.lured,
-                        seed: visit.seed + ':skill:' + catchAttempt, base,
-                        spend: item => Rift.State.useItem(item),
-                        available: item => Rift.State.get().items[item] || 0,
-                        onFinish(skill) {
-                            if (destroyed || phase !== 'catch') return;
-                            if (!skill.spent) { render(); return; }
-                            const st = Rift.State.get();
-                            const rng = Rift.makeRng(visit.seed + ':catch:' + catchAttempt + ':' + st.stats.catches + ':' + st.stats.escapes);
-                            const roll = Rift.World.rollCatch(st, obstacle, id, rng, Object.assign({}, catchOpts, { skillBonus: skill.bonus, skillFailed: skill.bonus === 0 }));
-                            if (mode === 'throw') {
-                                panel.innerHTML = '';
-                                panel.append(el('p', { text: 'The charm is settling…', 'aria-live': 'polite' }));
-                                catchTimer = setTimeout(() => {
-                                    if (destroyed || phase !== 'catch') return;
-                                    Rift.Audio.sfx('wobble');
-                                    catchTimer = setTimeout(() => {
-                                        catchTimer = null;
-                                        if (!destroyed && phase === 'catch') finishThrow(roll, skill, base);
-                                    }, 350);
-                                }, 250);
-                            } else finishThrow(roll, skill, base);
-                        },
-                    });
-                };
-                const finishThrow = (roll, skill, base) => {
-                    panel.innerHTML = '';
-                    panel.append(el('p', { text: skill.label }), el('p.catch-odds', { text: 'Base ' + Math.round(base * 100) + '%' + (skill.bonus ? ' · skill +' + Math.round((roll.p - base) * 100) + ' points = ' : ' · missed: quarter chance = ') + Math.round(roll.p * 100) + '%. Used ' + skill.spent + ' charm(s).' }));
-                    if (roll.caught) {
-                        Rift.Audio.sfx('caught');
-                        // Some catches are shiny (#151): the foil print, cosmetic only.
-                        const shiny = Rift.makeRng(visit.seed + ':foil:' + catchAttempt).chance((Rift.data.fate || {}).foilCatch || 0);
-                        const caughtInst = Rift.State.makeCreature(obstacle, { foil: shiny });
-                        Rift.State.update(st => {
-                            st.creatures.push(caughtInst);
-                            st.stats.catches += 1;
-                            if (c.rarity === 'legendary' && Rift.World.award(st, 'legend-hunter')) Rift.UI.toast('🏅 New accolade: Legend Hunter');
+                    const intro = el('p.small', { text: 'Win the game to catch it. One charm pays for one whole try. You can pause or return here later.' });
+                    panel.append(intro);
+                    if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: +1 cast, shot or trap heart on this visit.' }));
+                    if (session.sly(st, obstacle)) panel.append(el('p.catch-help.small', { text: 'Sly Charm: +1 cast, shot or trap heart for this creature.' }));
+                    const choice = el('div.row.wrap');
+                    let selectedItem = o.item || 'charm';
+                    const slot = el('div');
+                    function mountGame(item) {
+                        if (catchGame) catchGame.destroy();
+                        slot.innerHTML = '';
+                        selectedItem = item;
+                        const live = session.get(n.id);
+                        const board = session.preview(n.id, item);
+                        let displayedVersion = live.version;
+                        catchGame = Rift.CatchGame.mount(slot, {
+                            board, started: !!live.board,
+                            onStart() {
+                                if (destroyed) return { ok: false, error: 'This screen has closed.' };
+                                const result = session.start(n.id, selectedItem, displayedVersion);
+                                if (result.ok) {
+                                    displayedVersion = session.get(n.id).version;
+                                    choice.style.display = intro.style.display = visitorTitle.style.display = 'none';
+                                    Rift.Audio.sfx('throw');
+                                }
+                                return Object.assign({}, result, { board: session.get(n.id).board });
+                            },
+                            onAction(action) {
+                                if (destroyed) return { ok: false, error: 'This screen has closed.' };
+                                const result = session.play(n.id, action, displayedVersion);
+                                if (result.ok) displayedVersion = session.get(n.id).version;
+                                return Object.assign({}, result, result.value || {}, { board: session.get(n.id).board });
+                            },
+                            onFinish(outcome) {
+                                if (destroyed) return;
+                                Rift.Audio.sfx(outcome === 'caught' ? 'caught' : 'escape');
+                                render();
+                            },
                         });
-                        phase = 'caught';
-                        panel.append(
-                            el('h2', { text: 'Caught! ' + c.name + ' joins you.' }),
-                            variantNote(caughtInst),
-                            el('p', { text: c.blurb }),
-                            el('p.small.muted', { text: 'Ability: ' + c.abilityText }),
-                            el('div.row', null, [
-                                el('button.btn', { text: '📖 See collection', onclick: () => Rift.Router.replace('collection') }),
-                                el('button.btn.primary', { text: 'Back to the map', onclick: () => Rift.Router.replace('map') }),
-                            ]),
-                        );
-                    } else {
-                        Rift.Audio.sfx('escape');
-                        Rift.State.update(st => { st.stats.escapes += 1; });
-                        panel.append(el('h2', { text: 'It broke free. A chance is not a promise.' }),
-                            el('button.btn', { text: 'Try again', onclick: render }),
-                            el('button.btn.small', { text: 'Let it go', onclick: () => Rift.Router.replace('map') }));
                     }
-                };
+                    const available = ['charm', 'greatcharm'].filter(id => st.items[id] > 0);
+                    if (!o.board && !available.length) {
+                        panel.append(el('p', { text: 'No charms left. Puzzle wins and card challenges can give more. Come back here when you have one.' }),
+                            el('button.btn', { text: 'Back to the map', onclick: leave }), el('button.btn.small', { text: 'Let it go', onclick: dismiss }));
+                        return;
+                    }
+                    if (!o.board) available.forEach(item => choice.append(el('button.btn.small', {
+                        text: Rift.data.items[item].name + ' (' + st.items[item] + ')' + (item === 'greatcharm' ? ' · +1 cast, shot or trap heart' : ''),
+                        onclick() { mountGame(item); choice.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === this))); },
+                    })));
+                    panel.append(choice, slot);
+                    if (o.board) choice.style.display = intro.style.display = visitorTitle.style.display = 'none';
+                    mountGame(o.item || available[0]);
+                    panel.append(el('button.btn.small', { text: 'Back to the map · keep this try', onclick: leave }), el('button.btn.small', { text: 'Let it go', onclick: dismiss }));
+                }
                 render();
             }
 
@@ -639,7 +653,7 @@
 
             // ---- start ----
             refreshPerk();
-            if (!stages.length) {
+            if (!stages.length && !pendingCatch) {
                 stageBox.append(el('p.panel', { text: 'This place has no puzzle yet. Come back after the next update!' }));
                 return { destroy() { destroyed = true; } };
             }
@@ -652,6 +666,7 @@
                 return { id: p.id, opts: p.opts, mode: mode || null };
             }
             (async () => {
+                if (pendingCatch) { obstacle = pendingCatch.species; catchPhase(); return; }
                 const ctx = params.shrine ? null : { puzzle: leadPuzzle() };
                 if (!params.shrine && firstVisit && Rift.Dialogue.has(n.script)) await Rift.Dialogue.play(n.script, ctx);
                 if (destroyed) return;
@@ -670,7 +685,6 @@
             return {
                 destroy() {
                     destroyed = true;
-                    if (catchTimer) clearTimeout(catchTimer);
                     modals.forEach(m => m.close());
                     if (catchGame) catchGame.destroy();
                     if (tutorial) tutorial.close();

@@ -25,7 +25,7 @@
         fox: {
             name: 'Fox kit', colour: 'imagination',
             looks: { boy: 'green bandana', girl: 'mustard duffle coat' },
-            perk: { id: 'sly', name: 'Sly Charm', text: '+10% catch odds on Language and Imagination caricatures.' },
+            perk: { id: 'sly', name: 'Sly Charm', text: '+1 cast, shot or trap heart when catching Language and Imagination creatures.' },
             powers: { girl: 'what-if', boy: 'brainstorm' },
         },
         frogling: {

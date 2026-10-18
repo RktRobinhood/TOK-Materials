@@ -7,7 +7,7 @@ function game() {
     let screen, state, data, generated = 0, checked = 0;
     const modals = [], routes = [];
     const g = loadWithDom([
-        'js/core/rift.js', 'js/core/state.js', 'js/core/world.js',
+        'js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js',
         'data/avatars.js', 'data/items.js', 'data/creatures.js',
         'js/puzzles/registry.js', 'js/puzzles/tower.js',
         ctx => {

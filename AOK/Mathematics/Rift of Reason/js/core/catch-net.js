@@ -1,4 +1,5 @@
-/* #158 prototype only. Finite, deterministic net cuts; no saves, items or catch rolls. */
+/* #158 deterministic net rules, shared by the production games and the original bench.
+ * This pure module does not change saves, items or catch rewards. */
 (function (root) {
     'use strict';
     const Rift = root.Rift, N = 6, DX = [0, 1, 0, -1], DY = [-1, 0, 1, 0];
@@ -90,25 +91,28 @@
             order: rng.shuffle(Array.from({ length: 10 }, (_, i) => i)) };
     }
     const fallbacks = {};
-    function generate(seed, behaviour, great, lure) {
+    function generate(seed, behaviour, great, lure, difficulty) {
         if (!BEHAVIOURS.includes(behaviour)) throw new Error('Unknown catch behaviour');
         let board = null;
         // Admission uses the unassisted budget, so assistance changes the same layout only.
         for (let attempt = 0; attempt < 32; attempt++) {
             const s = candidate(String(seed), behaviour, attempt);
+            if (difficulty) s.cfg = Object.assign({}, s.cfg, difficulty);
             if (room(s).length >= 20 && solve(s)) { board = s; break; }
         }
         if (!board) {
-            if (!fallbacks[behaviour]) {
+            const key = behaviour + JSON.stringify(difficulty || {});
+            if (!fallbacks[key]) {
                 for (let attempt = 0; attempt < 256; attempt++) {
                     const s = candidate('verified-fallback', behaviour, attempt);
-                    if (room(s).length >= 20 && solve(s)) { fallbacks[behaviour] = s; break; }
+                    if (difficulty) s.cfg = Object.assign({}, s.cfg, difficulty);
+                    if (room(s).length >= 20 && solve(s)) { fallbacks[key] = s; break; }
                 }
             }
-            board = fallbacks[behaviour];
+            board = fallbacks[key];
         }
         if (!board) throw new Error('No verified catch layout available');
-        return Object.assign({}, board, { cfg: config(behaviour, great, lure), rocks: board.rocks.slice(), order: board.order.slice() });
+        return Object.assign({}, board, { cfg: Object.assign({}, board.cfg, { casts: board.cfg.casts + (great ? 1 : 0) + (lure ? 1 : 0) }), rocks: board.rocks.slice(), order: board.order.slice() });
     }
     function playSensible(board) {
         let next = board;

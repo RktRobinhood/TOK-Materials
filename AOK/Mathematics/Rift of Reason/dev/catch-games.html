@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch games · Rift of Reason</title>
+<link rel="stylesheet" href="../css/game.css">
+<link rel="stylesheet" href="../css/screens.css">
+<link rel="stylesheet" href="../css/catching.css">
+<style>
+body { overflow: auto; background: #0d1525; color: #edf3ff; }
+main { width: min(760px, 100%); margin: 24px auto; padding: 16px; }
+h1 { margin: 0; font-size: 1.8rem; color: #ffe1a6; }
+.practice-settings { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
+label { display: grid; gap: 4px; font-size: .9rem; }
+select, input[type=text] { font: inherit; color: #f1f5ff; background: #20304a; border: 1px solid #7186a9; padding: 10px; border-radius: 7px; max-width: 180px; }
+.practice-check { display: flex; align-items: center; gap: 6px; }
+.practice-check input { min-height: 24px; width: 24px; }
+#cabinet { background: #1a2336; border: 1px solid #52647f; border-radius: 16px; padding: 18px; margin-top: 18px; }
+@media(max-width:440px) { main { margin: 0 auto; padding: 12px; } #cabinet { padding: 12px; } }
+</style>
+</head>
+<body><main>
+<h1>Three little catch games</h1>
+<p>Try the games from the adventure. Practice uses no charms and changes no save.</p>
+<div class="practice-settings">
+<label>Game <select id="kind"><option value="net">Pocket Nets</option><option value="ricochet">Rebound</option><option value="tracks">Trail Finder</option></select></label>
+<label>Rarity <select id="rarity"><option>common</option><option>uncommon</option><option selected>rare</option><option>legendary</option></select></label>
+<label>Board seed <input id="seed" type="text" value="first-catch-2" maxlength="60"></label>
+<label class="practice-check"><input id="great" type="checkbox">Great Charm (+1)</label>
+<label class="practice-check"><input id="lure" type="checkbox">Lure (+1)</label>
+<label class="practice-check"><input id="calm" type="checkbox">Calm motion</label>
+</div>
+<div class="row wrap"><button class="btn" id="same">Restart this board</button><button class="btn" id="next">New board</button></div>
+<div id="cabinet" class="catch-cabinet"></div>
+<p class="small">Inspired by early net-cutting, paddle and deduction games. These are original boards and rules. Rarer visitors have tighter budgets, tougher movement or denser clues. A win earns the catch directly.</p>
+<p><a href="../index.html">Back to the adventure</a></p>
+</main>
+<script src="../js/core/rift.js"></script>
+<script src="../js/core/catch-net.js"></script>
+<script src="../js/core/catch-games.js"></script>
+<script src="../js/ui/catching.js"></script>
+<script>
+(function () {
+    const $ = id => document.getElementById(id);
+    let handle, sequence = 0;
+    function mount() {
+        if (handle) handle.destroy();
+        $('cabinet').textContent = '';
+        let board = Rift.CatchGames.create($('kind').value, $('seed').value, $('rarity').value, $('great').checked ? 'greatcharm' : 'charm', $('lure').checked);
+        handle = Rift.CatchGame.mount($('cabinet'), {
+            board, startLabel: 'Start practice', onStart: () => ({ ok: true, board }),
+            onAction(action) { const result = Rift.CatchGames.step(board, action); board = result.board; return Object.assign({ ok: true }, result); },
+        });
+    }
+    ['kind','rarity','great','lure'].forEach(id => $(id).addEventListener('change', mount));
+    $('seed').addEventListener('change', mount);
+    $('calm').addEventListener('change', () => document.body.classList.toggle('calm-motion', $('calm').checked));
+    $('same').onclick = mount;
+    $('next').onclick = () => { $('seed').value = 'practice-' + (++sequence); mount(); };
+    mount();
+})();
+</script>
+</body></html>

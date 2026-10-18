@@ -53,6 +53,7 @@
             backup: { lastAt: 0, reminded: [] }, // last backup code made; milestone reminders already shown
             starter: null,         // receipt of the avatar type's starter deck (#114, grantStarter): { v, type, uids, tactics, axioms, unlocked, catchUp, at }
             hunts: {},             // roaming legendary hunts (#111, js/core/hunts.js): hunt id -> { phase, node, attempt, round, departure, claimed, … }
+            catchOffers: {},       // node -> persisted visitor, selected minigame, board and settlement receipt (#158)
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
         };
@@ -753,6 +754,12 @@
 
     let current = null;
     let saveTimer = null;
+    let lastWritten = null;
+    function writeConflict() {
+        if (storageGet(STORAGE_KEY) === lastWritten) return false;
+        Rift.bus.emit('state:conflict');
+        return true;
+    }
 
     function storageGet(key) {
         const s = Rift.storage();
@@ -773,6 +780,7 @@
 
     function load() {
         const raw = storageGet(STORAGE_KEY);
+        lastWritten = raw;
         if (raw) {
             try {
                 current = migrate(JSON.parse(raw));
@@ -791,7 +799,12 @@
         clearTimeout(saveTimer);
         saveTimer = null;
         if (!current) return false;
-        return storageSet(STORAGE_KEY, JSON.stringify(current));
+        // A background autosave must not undo another tab's paid catch transaction.
+        if (writeConflict()) return false;
+        const raw = JSON.stringify(current);
+        const ok = storageSet(STORAGE_KEY, raw);
+        if (ok) lastWritten = raw;
+        return ok;
     }
 
     function save() {
@@ -830,6 +843,7 @@
         if (!p) return null;
         const was = current;
         current = p.save;
+        lastWritten = storageGet(STORAGE_KEY);
         if (was && was.avatar) storageSet(PREVIOUS_KEY, JSON.stringify({ savedAt: Date.now(), reason: 'swap', save: was }));
         else storageSet(PREVIOUS_KEY, null);
         saveNow();
@@ -842,6 +856,7 @@
         const s = checkSave(state); // throws before anything changes
         keepPrevious('load');
         current = s;
+        lastWritten = storageGet(STORAGE_KEY);
         saveNow();
         Rift.bus.emit('state:replaced', current);
         return current;
@@ -906,19 +921,40 @@
         load,
         save,
         saveNow,
+        // A catch move, charm charge and reward must be one durable write. Publish only
+        // after success. Optimistic checks detect saves changed before/while computing.
+        transact(fn) {
+            if (!current) return { ok: false, error: 'There is no adventure to save.' };
+            if (writeConflict()) return { ok: false, error: 'This adventure changed in another tab. Reload to continue.' };
+            const next = JSON.parse(JSON.stringify(current));
+            const value = fn(next);
+            const fresh = unlockColourTactics(next);
+            const raw = JSON.stringify(next);
+            // Board admission can be expensive: check again after computing the move.
+            if (writeConflict()) return { ok: false, error: 'This adventure changed in another tab. Reload to continue.' };
+            if (!storageSet(STORAGE_KEY, raw)) return { ok: false, error: 'Could not save this move. Free some browser storage, then try again.' };
+            clearTimeout(saveTimer);
+            saveTimer = null;
+            current = next;
+            lastWritten = raw;
+            Rift.bus.emit('state:changed', current);
+            if (fresh.length) Rift.bus.emit('tactics:unlocked', fresh);
+            return { ok: true, value };
+        },
         flush,
         previous,
         restorePrevious,
         replace,
         get() { return current; },
         has() { return !!current; },
-        newGame() { keepPrevious('new'); current = freshState(); saveNow(); return current; },
+        newGame() { keepPrevious('new'); current = freshState(); lastWritten = storageGet(STORAGE_KEY); saveNow(); return current; },
         wipe() {
             keepPrevious('erase');
             clearTimeout(saveTimer);
             saveTimer = null;
             current = null;
             storageSet(STORAGE_KEY, null);
+            lastWritten = null;
         },
         // The live save as a backup code → Promise<string>. Packed when the browser can; the code
         // is read back and compared before it is handed out, else the plain format is used.
@@ -953,6 +989,7 @@
         },
         // Convenience mutators that also autosave and announce changes.
         update(fn) {
+            if (writeConflict()) return current;
             fn(current);
             // A newly owned colour (a catch, a trophy, a won stake) unlocks its two colour tactics.
             const fresh = unlockColourTactics(current);

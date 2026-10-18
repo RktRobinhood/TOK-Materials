@@ -62,7 +62,7 @@ function setup() {
     // FakeElement's id property does not reflect to its attribute.
     screen.setAttribute('id', 'screen'); overlay.setAttribute('id', 'overlay');
     doc.body.append(screen, overlay);
-    ['js/core/state.js', 'js/core/world.js', 'js/core/story.js', 'js/core/cast.js', 'js/core/router.js',
+    ['js/core/state.js', 'js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'js/core/story.js', 'js/core/cast.js', 'js/core/router.js',
         'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'js/puzzles/registry.js'].forEach(g.run);
     const state = Rift.State.freshState();
     state.avatar = { type: 'owlet', variant: 'boy', nickname: 'Tester' };
@@ -89,6 +89,21 @@ function setup() {
     const button = text => g.$$('button').find(n => n.textContent === text);
     return { g, Rift, state, screen, overlay, click, key, button, advance };
 }
+
+test('a detected save conflict blocks underlying controls and offers one required reload notice', () => {
+    const t = setup(); let underlying = 0, reloads = 0;
+    t.g.ctx.location = { reload() { reloads++; } };
+    const button = t.Rift.el('button', { text: 'Play on', onclick() { underlying++; } });
+    t.screen.append(button);
+    t.Rift.bus.emit('state:conflict'); t.Rift.bus.emit('state:conflict');
+    assert.equal(t.g.$$('.modal-backdrop').length, 1);
+    assert.match(t.overlay.textContent, /This tab has stopped saving/);
+    t.click(button); assert.equal(underlying, 0);
+    t.key(button, 'Escape');
+    assert.equal(t.g.$$('.modal-backdrop').length, 1, 'required reload notice cannot be dismissed');
+    t.click(t.button('Reload latest adventure'));
+    assert.equal(reloads, 1);
+});
 
 test('a first-time modal owns Enter while an underlying dialogue is still open', async () => {
     const t = setup();

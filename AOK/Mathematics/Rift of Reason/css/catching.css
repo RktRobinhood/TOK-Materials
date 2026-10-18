@@ -1,0 +1,56 @@
+/* Paths stay still in every motion mode. */
+.catch-panel { width: min(760px, 100%); align-items: stretch; text-align: left; min-width: 0; }
+.catch-cabinet { container-type: inline-size; container-name: catch-cabinet; }
+.catch-game { width: 100%; max-width: 640px; margin-inline: auto; align-items: stretch; gap: 12px; }
+.catch-game h3 { color: #ffe3aa; font-size: 1.45rem; }
+.catch-game .catch-rules { line-height: 1.5; }
+.catch-rules summary { cursor: pointer; color: #f6d397; }
+.catch-rules p { padding-top: 8px; }
+.catch-toolbar { justify-content: space-between; align-items: center; }
+.catch-budget { font-weight: 800; color: #a4efda; font-variant-numeric: tabular-nums; }
+.catch-game .catch-play { align-self: flex-start; min-height: 44px; }
+.catch-field { width: min(300px, 100%); margin-inline: auto; }
+.catch-controls { display: grid; gap: 10px; }
+.catch-controls .small { line-height: 1.5; margin: 0; }
+.catch-controls > .btn { min-height: 46px; }
+.catch-net-board, .catch-tracks-board { display: grid; width: 100%; aspect-ratio: 1; background: #121d30; border: 2px solid #7b91b2; border-radius: 10px; overflow: hidden; }
+.catch-net-board { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(6, minmax(0, 1fr)); }
+.catch-net-tile { display: grid; place-items: center; min-width: 0; min-height: 0; font-size: 1.7rem; font-weight: 900; color: #ffe0a2; border-right: 1px solid #34445e; border-bottom: 1px solid #34445e; box-sizing: border-box; }
+.catch-net-tile.rock { background: #354158; color: #9cb1cb; font-size: 1rem; }
+.catch-net-tile.closed { background: #223e40; color: #527c74; }
+.catch-net-tile.path { background: #483f35; }
+.catch-net-choices { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.catch-aims { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+.catch-choice { min-height: 44px; padding: 4px; border: 2px solid #657a9a; border-radius: 8px; background: #17253b; color: #e9f2ff; cursor: pointer; font: inherit; font-weight: 800; }
+.catch-choice.selected { border-color: #ffd27e; background: #51432b; color: #ffe4b0; }
+.catch-choice:disabled { opacity: .45; cursor: default; }
+.catch-choice:focus-visible, .catch-track:focus-visible { outline: 3px solid #ffe2a2; outline-offset: -4px; }
+.catch-rebound-board svg { display: block; width: 100%; border: 2px solid #7b91b2; border-radius: 10px; }
+.catch-track { border: 1px solid #718aac; background: #263e5b; color: #e8f3ff; min-width: 0; min-height: 44px; aspect-ratio: 1; padding: 0; font: inherit; font-weight: 900; font-size: 1.2rem; cursor: pointer; }
+.catch-track.open { background: #142337; color: #a7e9e0; cursor: default; }
+.catch-track.flagged { color: #ffda92; background: #53442e; }
+.catch-track:disabled { opacity: .75; }
+.catch-status { min-height: 1.5em; line-height: 1.5; }
+.catch-help { border-left: 3px solid #76ddbd; padding-left: 12px; }
+@container catch-cabinet (min-width: 600px) {
+    .catch-game { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); column-gap: 20px; }
+    .catch-game > h3, .catch-rules, .catch-toolbar, .catch-status { grid-column: 1 / -1; }
+    .catch-game .catch-play { justify-self: start; }
+    .catch-field { grid-column: 1; }
+    .catch-controls { grid-column: 2; align-content: start; }
+    .catch-aims { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 440px) {
+    .catch-panel { padding: 12px; }
+    .catch-game { gap: 9px; }
+    .catch-field { width: min(224px, 100%); }
+    .catch-aims { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+}
+.screen-encounter.catching .enc-goal { display: none; }
+@media (max-width: 1000px) {
+    .screen-encounter.catching .enc-layout { grid-template-rows: 76px minmax(0, 1fr); }
+    .screen-encounter.catching .enc-title { display: none; }
+    .screen-encounter.catching .enc-obstacle { flex-direction: row; gap: 10px; }
+    .screen-encounter.catching .enc-creature { width: 60px; height: 68px; }
+    .screen-encounter.catching .bubble { max-height: 68px; overflow: auto; }
+}

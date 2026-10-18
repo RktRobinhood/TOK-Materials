@@ -1,4 +1,5 @@
-/* Short catch challenges. Pure rules shared by the mouse UI and Node tests. */
+/* Historical ring/grid rules for archived simulations and regression fixtures.
+ * The adventure now loads catch-games.js and catch-session.js instead. */
 (function (root) {
     'use strict';
     const Rift = root.Rift;

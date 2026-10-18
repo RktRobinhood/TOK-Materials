@@ -231,7 +231,7 @@ test('receipts and granted cards survive a backup round trip; importing never pa
 
 // The real encounter screen: the "Solved!" box names the station's card, low results pay it too.
 async function encounter(nodeOpts, stateFn) {
-    const Rift = loadRift(FILES.concat(['js/puzzles/registry.js']));
+    const Rift = loadRift(FILES.concat(['js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'js/puzzles/registry.js']));
     const state = Rift.State.freshState();
     state.avatar = { type: 'owlet', nickname: 'Test' };
     Rift.State.grantStarter(state);

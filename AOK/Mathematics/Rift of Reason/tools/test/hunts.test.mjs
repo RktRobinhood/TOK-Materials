@@ -16,7 +16,8 @@ function memoryStorage() {
 
 function setup() {
     const R = loadRift(FILES);
-    R.storage = () => memoryStorage();
+    const store = memoryStorage();
+    R.storage = () => store;
     const s = R.State.freshState();
     s.avatar = { type: 'owlet', variant: 'girl', nickname: 'Ada' };
     s.seed = 12345;
@@ -262,6 +263,8 @@ test('a hunt survives a reload and a backup-code round trip, mid-run and mid-fli
     S.update(s => { walkTo(s, H.record(s, 'maskip').node); H.pass(s, 'maskip', 1, 0); });
     const midRun = J(S.get().hunts);
     assert.equal(midRun.maskip.round, 1);
+    S.saveNow(); S.load();
+    assert.deepEqual(J(S.get().hunts), midRun, 'a real storage reload preserves mid-run progress');
     S.update(s => { H.fail(s, 'maskip', 1, s.map.at); });
     const midFlight = J(S.get());
     assert.equal(midFlight.hunts.maskip.departure.seen, false);

@@ -332,6 +332,11 @@
                 const st = Rift.State.get();
                 const n = Rift.World.node(id);
                 const done = st.map.completed.includes(id);
+                const catchOffer = (st.catchOffers || {})[id];
+                if (catchOffer && !catchOffer.dismissed) {
+                    Rift.Router.go('encounter', { nodeId: id });
+                    return;
+                }
                 const locked = kind === 'revealed' && Rift.World.lockReason(st, id);
                 // A dark-if-lost station (UNDERSTUDIES.md §3.4): its keeper is gone; it still counts as done.
                 const dark = kind === 'revealed' && Rift.Cast && Rift.Cast.isDark(id);
