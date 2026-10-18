@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-18",
+  "rules": 1,
+  "runsPerBehaviour": 1000,
+  "seedPattern": "held-out-catch-158:0..999",
+  "policy": "one-action-v1: reject illegal cuts, prefer a safe cast, then smallest resulting room; seed-fixed candidate order breaks ties; no future search",
+  "limitation": "Bot success is not student success, timing or fun. Layout admission uses a perfect solver; the baseline does not.",
+  "behaviours": {
+    "steady": {
+      "target": 3,
+      "casts": 3,
+      "wins": 437,
+      "rate": 0.437,
+      "wilson95": [
+        0.4065556939663417,
+        0.46792649525554353
+      ],
+      "greatCharmWins": 572,
+      "lureWins": 572,
+      "bothWins": 659,
+      "pairedAssistanceWorsened": 0,
+      "solverWins": 1000,
+      "fallback": 0
+    },
+    "turner": {
+      "target": 3,
+      "casts": 3,
+      "wins": 527,
+      "rate": 0.527,
+      "wilson95": [
+        0.49601066535500904,
+        0.557782682121326
+      ],
+      "greatCharmWins": 657,
+      "lureWins": 657,
+      "bothWins": 720,
+      "pairedAssistanceWorsened": 0,
+      "solverWins": 1000,
+      "fallback": 0
+    },
+    "hunter": {
+      "target": 4,
+      "casts": 3,
+      "wins": 478,
+      "rate": 0.478,
+      "wilson95": [
+        0.4471830669360443,
+        0.5089853166017569
+      ],
+      "greatCharmWins": 601,
+      "lureWins": 601,
+      "bothWins": 657,
+      "pairedAssistanceWorsened": 0,
+      "solverWins": 1000,
+      "fallback": 0
+    }
+  },
+  "equalMixRate": 0.4806666666666667
+}
