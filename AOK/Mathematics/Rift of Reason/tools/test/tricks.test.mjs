@@ -49,6 +49,42 @@ test('a quick round fails when its clock runs out, and says so', () => {
     });
 });
 
+test('quick timers are occasional: at most one per twelve-round run, always signposted', () => {
+    let timed = 0, untimed = 0;
+    for (const id of T.ids()) {
+        for (let seed = 0; seed < 500; seed++) {
+            const run = T.make(id, seed);
+            const quick = run.rounds.filter(r => r.seconds && r.mode !== 'wait');
+            assert.ok(quick.length <= 1, id + ' seed ' + seed + ': speed must not dominate a run');
+            if (quick.length) timed++; else untimed++;
+            run.rounds.forEach(r => {
+                if (r.seconds && r.mode !== 'wait') {
+                    assert.equal(r.mode, 'tap', r.key + ': keep reading/counting untimed');
+                    assert.match(r.sign, /^Quick! /);
+                } else if (r.mode !== 'wait') {
+                    assert.doesNotMatch(r.sign, /Quick!|clock runs out/i, r.key + ': no false deadline');
+                }
+            });
+        }
+    }
+    assert.ok(timed > 0 && untimed > 0, 'some runs have a speed test; others have none');
+});
+
+test('counting stays untimed; waiting still tests resisting a click', () => {
+    for (const id of T.ids()) {
+        const bank = T.bank(id, 0);
+        const count = bank.find(r => r.key === 'shared:quickCount');
+        assert.equal(count.seconds, undefined);
+        assert.doesNotMatch(count.sign, /Quick!/);
+        const waits = bank.filter(r => r.mode === 'wait');
+        assert.ok(waits.length > 0);
+        waits.forEach(r => {
+            assert.ok(r.seconds >= 3);
+            assert.equal(T.check(r, T.WAITED).ok, true);
+        });
+    }
+});
+
 function checkRound(where, r) {
     assert.ok(MODES.includes(r.mode), where + ': mode ' + r.mode);
     assert.ok(r.sign && r.sign.length <= 200, where + ': sign');

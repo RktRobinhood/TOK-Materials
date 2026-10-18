@@ -1,0 +1,26 @@
+[
+  {
+    "viewport": "1366x768 keyboard",
+    "checks": [
+      "quick answer",
+      "expiry resets/flees",
+      "leave cancels timer",
+      "untimed counting",
+      "second quick candidate has no deadline or misleading cue"
+    ],
+    "fixtureSeed": 142,
+    "errors": []
+  },
+  {
+    "viewport": "390x844 touch/reduced-motion",
+    "checks": [
+      "quick answer",
+      "expiry resets/flees",
+      "leave cancels timer",
+      "untimed counting",
+      "second quick candidate has no deadline or misleading cue"
+    ],
+    "fixtureSeed": 142,
+    "errors": []
+  }
+]

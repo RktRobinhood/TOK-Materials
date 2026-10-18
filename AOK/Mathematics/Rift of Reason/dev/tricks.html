@@ -16,7 +16,7 @@ td.k{white-space:nowrap;font-family:ui-monospace,monospace;font-size:12px}td.mod
 @media(max-width:720px){body{padding:12px}table,thead,tbody,tr,td,th{display:block}thead{display:none}tr{border-bottom:2px solid var(--line)}td{border:0;padding:4px 10px}}
 </style></head><body><main>
 <h1>Trick bank (#111)</h1>
-<p>Every trick round of the roaming legendaries, one random version each. An attempt draws 6 of them: half from the creature's own tricks, half from the shared ones, dressed in its theme. A wrong answer sends the creature running.</p>
+<p>Every trick round of the roaming legendaries, one random version each. An attempt draws 12: four of the creature's own tricks and eight shared tricks in its theme. At most one is a timed Quick! round; counting has no deadline. A wrong answer sends the creature running.</p>
 <p class="muted">The answer is in green. "Why" is what a student sees after a wrong answer. Automatic checks (tools/test/tricks.test.mjs) make sure every round has one fair answer that follows from the screen. Press Reroll to see other random versions.</p>
 <div class="toolbar"><label>Creature <select id="who"></select></label><button id="reroll" type="button">Reroll</button><span id="count" role="status" class="muted"></span></div>
 <div id="out"></div>

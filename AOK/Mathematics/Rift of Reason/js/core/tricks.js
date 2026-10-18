@@ -7,12 +7,12 @@
  * The teacher wants these hard, a meme, in the spirit of the old Flash "idiot test" games (#111,
  * research/roaming-legendary-trick-challenges-2026-10-11.md): their trick TYPES, pacing and instant
  * reset, with our own original questions. A run is ROUNDS rounds drawn from the creature's bank:
- * half from its own TOK tricks, half from the shared troll tricks dressed in its theme. The same seed
+ * four from its own TOK tricks, eight from the shared troll tricks dressed in its theme. The same seed
  * always gives the same run, so a reload shows the same rounds; a new attempt draws a new run.
  *
  * A round: { key, mode, sign, signLink?, scene?, options, accept, why, seconds? }
  *   seconds on a 'tap' or 'number' round: a quick-action clock. When it runs out the answer is
- *   TIMEOUT, which fails. Clocks are generous (6+ seconds): they ask for focus, not reflexes.
+ *   TIMEOUT, which fails. At most one quick-action clock per run; counting stays untimed.
  *   mode 'pick'     choose one option, then Check.                answer: option id
  *        'multi'    choose every right option, then Check.        answer: [option ids] (order free)
  *        'tap'      the first click is the answer. No Check.     answer: option id
@@ -25,7 +25,7 @@
  *   accept: every valid answer (for multi and sequence: the one right list).
  *   why: one or two plain sentences that explain the trick a wrong answer fell for.
  * Fair by rule (tools/test/tricks.test.mjs): every answer follows from the sign and what is on screen.
- * No speed, no colour-only cues, no English puns, no trivia. A 'wait' round needs patience, not speed.
+ * No colour-only cues, no English puns, no trivia. A 'wait' round needs patience, not speed.
  */
 (function (root) {
     'use strict';
@@ -221,10 +221,10 @@
             return { mode: 'tap', seconds: 6, sign: 'Quick! Click GO before the clock runs out.', options, accept: ['go'],
                 why: 'Only one button said exactly GO. The others were OG, GOO, GONE and AGO. Fast is fine, but read first.' };
         },
-        // Quick count.
+        // Count without a deadline: reasoning is the task, not speed.
         quickCount(rng, k) {
             const n = rng.int(7, 11);
-            return { mode: 'number', seconds: 12, sign: 'Quick! How many ' + k.icon + ' are there?', scene: { kind: 'icons', icon: k.icon, count: n }, options: [], accept: [String(n)],
+            return { mode: 'number', sign: 'How many ' + k.icon + ' are there?', scene: { kind: 'icons', icon: k.icon, count: n }, options: [], accept: [String(n)],
                 why: 'There were ' + n + '. Count in small groups so you do not lose your place.' };
         },
         // Quick: do exactly as told.
@@ -606,6 +606,17 @@
         const picks = rng.shuffle(Object.keys(own)).slice(0, OWN_PER_RUN).map(k => ['own', k])
             .concat(rng.shuffle(Object.keys(SHARED)).slice(0, ROUNDS - OWN_PER_RUN).map(k => ['shared', k]));
         const rounds = rng.shuffle(picks).map(([from, k]) => Object.assign({ key: from + ':' + k }, (from === 'own' ? own : SHARED)[k](rng, skin)));
+        // Keep the seeded questions, layouts and answers intact for saved attempts. Only the first
+        // quick-action round keeps its deadline; later ones become ordinary untimed tap rounds.
+        // Waiting is a different task (resist clicking), so it keeps its completion countdown.
+        let quickUsed = false;
+        rounds.forEach(r => {
+            if (!r.seconds || r.mode === 'wait') return;
+            if (quickUsed) {
+                delete r.seconds;
+                r.sign = r.sign.replace(/^Quick!\s*/, '').replace(' before the clock runs out.', '.');
+            } else quickUsed = true;
+        });
         return { id, rounds };
     }
 
