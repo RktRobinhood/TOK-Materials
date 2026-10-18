@@ -71,6 +71,79 @@ test('table decks keep identity, update counts and resolve a rapid repeat only o
     t.handle.destroy();
 });
 
+test('an old End turn button cannot submit twice or end the opponent turn', () => {
+    const t = setup(practice);
+    t.$('.b-table-deck.deck').click();
+    const oldEnd = t.$('.b-end');
+    oldEnd.click();
+    const after = t.handle.state;
+    assert.equal(after.active, 1);
+    const timers = t.g.timers.length;
+    oldEnd.click();
+    assert.ok(t.handle.state === after, 'a detached handler cannot submit against a later state');
+    assert.equal(t.g.timers.length, timers, 'a stale click must not cancel the opponent timer');
+    t.handle.destroy();
+});
+
+test('queued event sounds and effects stop when the battle screen is destroyed', () => {
+    const sounds = [];
+    const t = setup(practice, { before(g) {
+        Object.assign(g.Rift.Audio, { has: () => true, speaking: () => false, sfx: id => sounds.push(id) });
+    } });
+    t.$('.b-table-deck.deck').click();
+    t.$('.b-hand [data-cid="p0c0"]').click();
+    t.$('.b-prompt .btn.primary').click();
+    const state = t.handle.state;
+    const played = sounds.length;
+    t.handle.destroy();
+    t.g.flush();
+    assert.equal(sounds.length, played, 'no delayed sound from a departed screen');
+    assert.ok(t.handle.state === state, 'departed screen cannot resolve an AI action');
+    assert.equal(t.$('.b-floats').children.length, 0);
+});
+
+test('resize cancels positioned effects and animations without cancelling the opponent turn', () => {
+    const listeners = {}, motions = [], sounds = [];
+    const t = setup(practice, { before(g) {
+        g.ctx.addEventListener = (type, fn) => { listeners[type] = fn; };
+        g.ctx.removeEventListener = (type, fn) => { if (listeners[type] === fn) delete listeners[type]; };
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            node.getBoundingClientRect = () => ({ left: 0, top: 0, right: 100, bottom: 100, width: 100, height: 100 });
+            node.animate = () => {
+                const motion = { cancelled: false, cancel() { this.cancelled = true; if (this.oncancel) this.oncancel(); } };
+                motions.push(motion);
+                return motion;
+            };
+            return node;
+        };
+        Object.assign(g.Rift.Audio, { has: () => true, speaking: () => false, sfx: id => sounds.push(id) });
+    } });
+    t.$('.b-table-deck.deck').click();
+    t.$('.b-end').click();
+    t.g.flush();
+    assert.equal(t.handle.state.active, 0);
+    t.$('.b-table-deck.deck').click();
+    t.$('.b-end').click();
+    const state = t.handle.state;
+    const oldMotions = motions.slice();
+    assert.ok(oldMotions.length, 'the Fate round change created a real presentation motion');
+    const played = sounds.length;
+    listeners.resize();
+    assert.ok(oldMotions.every(a => a.cancelled));
+    assert.equal(t.$('.b-floats').children.length, 0);
+    assert.ok(t.handle.state === state, 'resize never resolves a game action');
+    // The next AI action still fires, but cancelled presentation callbacks stay silent.
+    const next = t.g.timers.find(timer => timer.ms === 220);
+    assert.equal(next, undefined, 'no old batch sound remains queued');
+    assert.equal(sounds.length, played);
+    t.g.flush();
+    assert.equal(t.handle.state.active, 0, 'the opponent completes its turn after resize');
+    t.handle.destroy();
+    assert.equal(listeners.resize, undefined);
+});
+
 test('Granny highlights the physical deck and blocks the other source; legacy study stays isolated', () => {
     const t = setup({}, { screen: 'battle-lesson' });
     const own = t.$('.b-table-deck.deck'), shared = t.$('.b-table-deck.axiom');

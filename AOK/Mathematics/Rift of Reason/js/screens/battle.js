@@ -253,6 +253,37 @@
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
         };
+        const actionStates = new WeakMap();
+        const presentationTimers = new Set(), motions = new Set();
+        function presentationLater(fn, ms) {
+            const id = setTimeout(() => {
+                presentationTimers.delete(id);
+                if (!ui.ended) fn();
+            }, ms);
+            presentationTimers.add(id);
+            return id;
+        }
+        function animate(node, frames, options) {
+            const motion = node.animate(frames, options);
+            if (motion) {
+                motions.add(motion);
+                motion.onfinish = motion.oncancel = () => motions.delete(motion);
+            }
+            return motion;
+        }
+        function clearPresentation() {
+            presentationTimers.forEach(id => clearTimeout(id));
+            presentationTimers.clear();
+            motions.forEach(motion => { if (motion.cancel) motion.cancel(); });
+            motions.clear();
+            dom.floats.replaceChildren();
+            dom.lane.classList.remove('flash');
+        }
+        function stopScreenTimers() {
+            ['timer', 'noteTimer', 'inspectTimer', 'bannerTimer', 'revealTimer', 'hintTimer', 'sayTimer', 'sayCap'].forEach(key => clearTimeout(ui[key]));
+            if (ui.layoutFrame != null && root.cancelAnimationFrame) root.cancelAnimationFrame(ui.layoutFrame);
+            cancelLongPress(); hideTip();
+        }
         // Nothing is at stake in practice and story matches (not the guided lesson): they can be left.
         const canLeave = !guide && mode === 'practice';
         const nodes = {};
@@ -366,8 +397,17 @@
             if (ui.inspect && dom.inspect.classList.contains('fate')) placeInspect(ui.inspect.anchor);
             placeAbilityTray();
         }
+        function resizeBattle() {
+            if (ui.ended) return;
+            clearPresentation();
+            ui.fateSlide = null;
+            cancelDrag(); cancelLongPress(); hideTip(); clearPredict();
+            ui.sel = null; ui.handPos = null;
+            render();
+            positionFateInspection();
+        }
         if (root.addEventListener) {
-            root.addEventListener('resize', positionFateInspection);
+            root.addEventListener('resize', resizeBattle);
             root.addEventListener('scroll', positionFateInspection, true);
         }
         screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
@@ -402,6 +442,7 @@
         function legal() {
             if (!myTurn()) return [];
             const L = E.legalActions(state);
+            L.forEach(action => actionStates.set(action, state));
             const st = step();
             if (guide) return st ? L.filter(a => stepAccepts(st, a) || (st.trap && matches(st.trap.expect)(a))) : [];
             return L;
@@ -424,9 +465,13 @@
         }
 
         // ---- acting ----
-        function act(action) {
+        function act(action, automated) {
             if (ui.ended) return;
+            // Old DOM handlers may fire again after a render. Reject them before they
+            // can cancel an AI timer, replay audio or touch selection in a newer state.
+            if (!automated && (!myTurn() || actionStates.get(action) !== state)) return;
             clearTimeout(ui.timer);
+            clearPresentation();
             clearPredict();   // before rects(): a defeat ghost copies the old card, badges and all
             const by = decider();
             const before = rects();
@@ -486,8 +531,8 @@
             if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate' || action.type === 'power')) {
                 ui.preview = { cid: action.type === 'power' ? 'pw' + by : action.cid, target, by, action };
                 render();
-                ui.timer = setTimeout(() => { ui.preview = null; act(action); }, PREVIEW);
-            } else act(action);
+                ui.timer = setTimeout(() => { ui.preview = null; act(action, true); }, PREVIEW);
+            } else act(action, true);
         }
 
         // The big card over the opponent's side, with a caption; it fades after ms. While a reveal is
@@ -652,12 +697,12 @@
                 Rift.Ambience.tension(events.some(ev => ev.t === 'end') ? 0 : Rift.clamp((0.75 - low) / 0.6, 0, 1));
             }
             // Space the batch out; a channel may only cut its own previous sound.
-            cue.slice(0, 6).forEach(([n, o], i) => setTimeout(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
+            cue.slice(0, 6).forEach(([n, o], i) => presentationLater(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
             if (bark && !guide && !A.speaking()) {
                 const lines = (((Rift.data.barks || {})[bark.s] || {})[bark.kind]) || [];
                 const text = lines[Math.floor(Math.random() * lines.length)];
                 const voice = text && Rift.voiceId(bark.s, text);
-                if (voice && (Rift.data.voices || {})[voice]) setTimeout(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, cue.length * 220 + 300);
+                if (voice && (Rift.data.voices || {})[voice]) presentationLater(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, cue.length * 220 + 300);
             }
         }
 
@@ -1503,7 +1548,10 @@
             hideInspect(true);
             // The lane can move without changing size (the hand or a board row grows), which the
             // ResizeObserver misses: re-align the board picture after every render's layout.
-            if (typeof requestAnimationFrame === 'function') requestAnimationFrame(alignBoard);
+            if (root.requestAnimationFrame) {
+                if (ui.layoutFrame != null && root.cancelAnimationFrame) root.cancelAnimationFrame(ui.layoutFrame);
+                ui.layoutFrame = root.requestAnimationFrame(() => { ui.layoutFrame = null; if (!ui.ended) alignBoard(); });
+            }
             [dom.myBoard, dom.oppBoard, dom.lane].forEach(n => { n.classList.remove('guide-ring'); n.classList.remove('guide-focus'); });
             const L = legal();
             ui.sparkFor = !guide && decider() === ME ? sparkHelp(L) : null;
@@ -1771,7 +1819,7 @@
                 const key = k + '#' + seen[k];
                 const dx = old[key] == null ? 0 : old[key] - now[key];
                 if (Math.abs(dx) < 2) return;
-                try { n.animate([{ translate: dx + 'px 0' }, { translate: '0 0' }], { duration: SETTLE, easing: 'ease-out' }); } catch (e) { /* no WAAPI */ }
+                try { animate(n, [{ translate: dx + 'px 0' }, { translate: '0 0' }], { duration: SETTLE, easing: 'ease-out' }); } catch (e) { /* no WAAPI */ }
             });
         }
 
@@ -2061,7 +2109,7 @@
                 frames.push(Object.assign(at(i), { offset: moved }), Object.assign(at(i), { offset: end }));
             }
             try {
-                const anim = reel.animate(frames, { duration: s.d * FATE_STEP, fill: 'backwards' });
+                const anim = animate(reel, frames, { duration: s.d * FATE_STEP, fill: 'backwards' });
                 anim.currentTime = Math.max(0, now - s.start);
             } catch (e) { /* no WAAPI */ }
         }
@@ -3440,7 +3488,7 @@
             if (!r) return;
             const f = el('div.b-float' + (cls ? '.' + cls : ''), { text, style: { left: (r.left + r.width / 2) + 'px', top: (r.top + r.height * 0.4) + 'px' } });
             dom.floats.appendChild(f);
-            setTimeout(() => { if (f.remove) f.remove(); }, 1300);
+            presentationLater(() => { if (f.remove) f.remove(); }, 1300);
         }
         function effects(events, before) {
             if (!root.document || !dom.arena.getBoundingClientRect) return;
@@ -3464,7 +3512,7 @@
                         ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
                         Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
                         dom.floats.appendChild(ghost);
-                        setTimeout(() => { if (ghost.remove) ghost.remove(); }, 900);
+                        presentationLater(() => { if (ghost.remove) ghost.remove(); }, 900);
                     }
                 }
                 if ((ev.t === 'play' || ev.t === 'summon') && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
@@ -3477,13 +3525,14 @@
             const a = rectOf(cid, before), t = rectOf(target, before);
             if (!n || !n.animate || !a || !t) return;
             const dx = (t.left + t.width / 2 - a.left - a.width / 2) * 0.35, dy = (t.top + t.height / 2 - a.top - a.height / 2) * 0.35;
-            try { n.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
+            try { animate(n, [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
         }
 
         // ---- the end ----
         function finish() {
             if (ui.ended) return;
             ui.ended = true;
+            clearPresentation(); stopScreenTimers(); stopVoice();
             cancelDrag();
             hideTip();
             const w = E.winner(state);
@@ -3574,15 +3623,15 @@
 
         const handle = {
             destroy() {
-                clearTimeout(ui.timer); clearTimeout(ui.noteTimer); clearTimeout(ui.inspectTimer); clearTimeout(ui.bannerTimer); clearTimeout(ui.revealTimer); clearTimeout(ui.hintTimer); clearTimeout(ui.sayTimer); clearTimeout(ui.sayCap); cancelLongPress(); hideTip();
-                ui.ended = true; cancelDrag();
+                ui.ended = true;
+                clearPresentation(); stopScreenTimers(); cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
                 if (root.removeEventListener) {
-                    root.removeEventListener('resize', positionFateInspection);
+                    root.removeEventListener('resize', resizeBattle);
                     root.removeEventListener('scroll', positionFateInspection, true);
                 }
                 if (help) help.close();
-                if (guide) stopVoice();
+                stopVoice();
             },
             get state() { return state; },
             get step() { return ui.step; },
