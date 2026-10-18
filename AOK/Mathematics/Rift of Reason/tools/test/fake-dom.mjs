@@ -12,8 +12,12 @@ import { GAME_DIR } from './harness.mjs';
 
 const camel = s => s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
 
+// Assertion diagnostics must describe the node's subtree, not expand the whole
+// mounted screen again through every parent/document link (#157).
+const backLink = (node, key, value) => Object.defineProperty(node, key, { value, writable: true, enumerable: false, configurable: true });
+
 class Text {
-    constructor(text) { this.nodeType = 3; this.data = String(text); this.parentNode = null; }
+    constructor(text) { this.nodeType = 3; this.data = String(text); backLink(this, 'parentNode', null); }
     get textContent() { return this.data; }
     cloneNode() { return new Text(this.data); }
 }
@@ -22,9 +26,9 @@ export class FakeElement {
     constructor(tag, doc) {
         this.nodeType = 1;
         this.tagName = String(tag || 'div').toUpperCase();
-        this.ownerDocument = doc;
+        backLink(this, 'ownerDocument', doc);
         this.childNodes = [];
-        this.parentNode = null;
+        backLink(this, 'parentNode', null);
         this.attributes = {};
         this.dataset = {};
         this._classes = [];
