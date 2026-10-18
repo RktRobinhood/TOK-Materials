@@ -1,0 +1,536 @@
+{
+  "textModelRequests": 19,
+  "http503": 1,
+  "invalidIdResponses": 3,
+  "invalidResponseNote": "One eight-clip response failed ID validation before the error was appended to the log; two four-clip responses are preserved in invalid-audit-responses.jsonl. Rejected responses certify zero clips. Subsequent requests use short labels validated before mapping to runtime IDs.",
+  "transcriptResults": 74,
+  "retainedClips": 58,
+  "withCurrentHashTranscript": 58,
+  "exactNormalizedMatches": 56,
+  "reviewedVariants": 2,
+  "pending": [],
+  "clips": [
+    {
+      "id": "avatar-mothkin-boy-inner-1ojirll",
+      "sha256": "5ab92e03acec6edcf6dfdfba56a40368528da44037ebad476f10fd301a8bedb1",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "expected": "Ooh, tin A gleams. Shiny means nothing.…The dent on C, though. Look.",
+      "heard": "Ooh! Tin-eh gleams! Shiny means nothing. The dent on C though, look!",
+      "disposition": "Reviewed alphabetic-label transcription: Tin-eh corresponds to tin A; final independent transcript includes the complete dent on C clause. Automated exact match remains false."
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1tpv2z1",
+      "sha256": "2ab224add198a2418e3e7ab8210bd5bc24e38e40f46ab77a71a779b08e18eaa0",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Shh. Chalk dust. On the grate. Not on a desk. Look.",
+      "heard": "Shh. Chalk dust on the grate. Not on a desk. Look,",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1njjmpv",
+      "sha256": "23a4faf8165af884256c39e72aff6cdcdba469003f0e49f257522bf23cb5d89d",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Look. The diagram's scratched, but one wire still shines.",
+      "heard": "Look, the diagram's scratched, but one wire still shines.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-14hl1wj",
+      "sha256": "370aa8b15c678074347f5253833c3e452a6d27e77bc31a24dec53ac7013af2f2",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I joined because everyone else did. Is that… not a reason?",
+      "heard": "I joined because everyone else did. Is that not a reason?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-h801uy",
+      "sha256": "e6e348af5c931a01bf3458f5139b60604498504c393232bbd8ebec8d5a01e261",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I do this when I win. I'm not sure I'm winning.",
+      "heard": "I do this when I win. I'm not sure I'm winning.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-38oa9a",
+      "sha256": "95b0c40891c7906d1a113e810bad6bd4a0bfdfeec713aa8b0e194a09843cf6a3",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I joined because everyone else did.…Is \"everyone\" made of wood?",
+      "heard": "I joined because everyone else did. Is everyone made of wood?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-11u44u6",
+      "sha256": "e2547e2a82b6c48b3b625a5eedd8393aa041070c6377eb8a2e8aaa828a995cbc",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The whole Fair is marching now! Real ones! So it must be right!",
+      "heard": "The whole fair is marching now. Real ones. So it must be right.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-x85ysf",
+      "sha256": "494e9111bc3d3f51e7fb16ff5ad1a0798998daec98c3445195abb4dcf01c9169",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "They joined because the front rank joined. And the front rank joined because… um.",
+      "heard": "They joined, because the front rank joined. And the front rank joined because, um,",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-lzyrk3",
+      "sha256": "ada222646f39977cd1a34251f62a1d2a9ab8a3e71a0bac9d551a42af0d4180db",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Nice card. But who marched FIRST?",
+      "heard": "Nice card. But who marched first?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-possessed-1sq5jbx",
+      "sha256": "baba002ee13bb34a64b156ae7a84b19287874ae2545f56e2d43dd830d9a85302",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "That's not mine. Mine is \"everybody\". I checked.",
+      "heard": "That's not mine. Mine is everybody. I checked.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-14wuwhc",
+      "sha256": "a494d8f303af7208f242c33d752d5cc9fdfa7a5d8f5c60f375859e0be744a854",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Look. The headline shines. Gold ink. Who in town writes in gold?",
+      "heard": "Look, the headline shines. Gold ink? Who in town writes in gold?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1cm0vat",
+      "sha256": "62163024307f194a6a83b431b6e1629926dbec4d180a97bef72db8b750bb9098",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Shh. Behind the panel. Something shiny. Only one thing. Look.",
+      "heard": "Shh behind the panel something shiny only one thing look",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1v89ua6",
+      "sha256": "7c63788dd7bf952b040e232194a9f2e6cdffc540ff142abae4c9d562cec81e12",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.",
+      "heard": "Ooh the tablet sparkles No Look who's limping Then who's typing",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-1onzain",
+      "sha256": "24a44097e023d1388d9f1e73f0ceb7132b6e37b598b9ce1b7c1d7b5bb73f8765",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I'm hurt. I don't like asking. So I'm near the bottom.",
+      "heard": "I'm hurt. I don't like asking, so I'm near the bottom.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-15ta3m4",
+      "sha256": "1f9b04c3d8e6cd909103b2c46428e0cd5626ebc629ab2ef1f563c1c1d7cad569",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I'm hurt. I don't like asking. So I'm at the bottom.",
+      "heard": "I'm hurt. I don't like asking, so I'm at the bottom.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-nw008p",
+      "sha256": "b08f23765f8d6e0c18afc8dadbbf8f535bb96d7718d35dd81b3a1d7553889654",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Lightning doesn't ask. Lightning just… sits here. Hurting.",
+      "heard": "Lightning doesn't ask. Lightning just sits here hurting.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-gjcprx",
+      "sha256": "4d836309146969618cf0c336b28f313a3fcc7a7f2d57260c8ab6767933b9e357",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The hive has spoken.",
+      "heard": "The hive has spoken.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-qn0fkb",
+      "sha256": "5cfdf2217e7665d92727fe8e7c9563a27688017c54bd0c0d8909da6fd5f6dfa7",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Bow down to a well-formed argument.",
+      "heard": "Bow down to a well-formed argument.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-whiytx",
+      "sha256": "80ad6d7e0cf13c1d5e1dc8a78ff7f6e6f5b6ac4f34801affd5119896f4bf1364",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Flawless reasoning, darling. Check it.",
+      "heard": "Flawless reasoning, darling. Check it.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-u5pqkc",
+      "sha256": "0d60b244009adac0ebf8efe4350caf082e1a5ba7a924653d9eab2fe1018eddb5",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Measure twice. Then measure again.",
+      "heard": "Measure twice, then measure again.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-yqffm0",
+      "sha256": "a505bb1ca0904c9e14afa5ea500ad5a159e681c40486b382846c4089a93e4a36",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The heavens do not lie. People do.",
+      "heard": "The heavens do not lie, people do.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-1pjtl0b",
+      "sha256": "0d0a6f835b6ea31a173673b7c4a70d349b8ab9b6c4d58f8dd004d5fb901ac05d",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "expected": "Hven has the best view.",
+      "heard": "Heaven has the best view.",
+      "disposition": "Reviewed proper-name transcription: Hven is heard as Heaven. No missing or adjacent dialogue in three transcripts; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "booleon-bpvofr",
+      "sha256": "97ba2cbf29068b7d2ef7d5cf5c9e106d268baa0b6e2cbdff97cfaabe7ba0d4f2",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "True is one. False is zero. Everything else is arithmetic.",
+      "heard": "True is one, false is zero, everything else is arithmetic.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-1vyq1ei",
+      "sha256": "c5e92e7294648c541314e4f8bc96ac6ecbc56995eaa3c5d681546fdb1a48b542",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Let us check every case.",
+      "heard": "Let us check every case.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-11zmt0w",
+      "sha256": "ed811304c2d7c66c41496eb659b279bde8e330259390afe5eaf399ebc7178c6a",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The laws of thought are surprisingly short.",
+      "heard": "The laws of thought are surprisingly short.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-1embvsl",
+      "sha256": "023791c9ac6b610b06e1546360239d015fa2746bb1b8149a1ef064a0e68fd107",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "A little verse for a little problem.",
+      "heard": "a little verse for a little problem.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-bk5eyk",
+      "sha256": "c3d651bb8ee6d4366f65f9cf6acedad76ea7d29bb7cb059b1ce9147013e75d68",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Problems bite back. Good.",
+      "heard": "Problems bite back. Good.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-308448",
+      "sha256": "7ef96309450ff65ccc4e5df309f78eecdd05a613719688dc7bbf31725c4d9e52",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Hex! I mean, hello.",
+      "heard": "Hex! I mean, hello.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-v398iq",
+      "sha256": "e048bdea8b5ec405e5ebc060ff1c1ba13d29fbd607ec2278b0304fc94b137c27",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Too fast for your guards!",
+      "heard": "Too fast for your guards?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-11qmufi",
+      "sha256": "4cb892056360b46499b45dc5c4953b16e2bf8ff0b2c8f7e8bcd93559aa0b2770",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Ready. Set. Already here.",
+      "heard": "Ready! Set! Already here.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-6p2yeb",
+      "sha256": "061e6f1ee3574ffda3504f720b9c979292d1cdf09bbb974e124a15276f2ed925",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Lightning pose! Done. Let's go.",
+      "heard": "lightning pose Done. Let's go.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-mu3q35",
+      "sha256": "5a9ad28353e3708911933508661e53462b193d2fc136c281ee3f1a8f69406d07",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Second place? Me?",
+      "heard": "Second place? Me?",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-18c7cqr",
+      "sha256": "49a76aebfff99d41a571c8647632cfd871574cfe2e5bf42ddd62bbdc1c8c9aa1",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I blinked. You won.",
+      "heard": "I blinked, you won.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "usainvolt-129m7jd",
+      "sha256": "dbb69cf582650ceeaa9bd72ce48b286acc2988a81844169419015ba41e0555ca",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Still the fastest loser ever.",
+      "heard": "Still the fastest loser ever.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-k73qxr",
+      "sha256": "5ef172a870e226ff82c3916428e57bdf38d3e5f1c35bef9ab71e5a67ef0acd13",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Hive, line up behind me.",
+      "heard": "Hive, line up behind me.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-r95oh6",
+      "sha256": "e5aefe7c02817d6bb51330d61d3f8b5b279eb020b31cb90ac49b5a78a3fc875a",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Kneel. Then get stronger.",
+      "heard": "kneel then get stronger",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-1j5lpw2",
+      "sha256": "2354c01b7d4332f8d332a4dd6075e25ede9f94144de1667edec6fd14f4d4990e",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Everybody up. The queen is here.",
+      "heard": "everybody up the Queen is here",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-1v9jznc",
+      "sha256": "fcb773c80ad790a67394b16028be80911c9aa44b088d0a120d1bebf37159beb7",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The hive will remember this.",
+      "heard": "The hive will remember this.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-8t1rke",
+      "sha256": "58e9b66145ac2c4c19f4fe9ebdc0f8387457dfcda321f610fbdbdf5dd422e265",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I'm not crying. It's pollen.",
+      "heard": "I'm not crying it's pollen",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beeyonce-12r9bir",
+      "sha256": "55317e7098c1f1c189f49aaede38804e9cb7aa3565a582ea4c0a934d3021bb41",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Even queens take a break.",
+      "heard": "Even queens take a break.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-1bpxn3b",
+      "sha256": "00eed4fb5c986e039c01ae683add12f4d4f5ab298218d8a66b50d4eb13156939",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Measuring every enemy. Precisely. Ouch for them.",
+      "heard": "Measuring every enemy precisely. Ouch for them.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-k9i5jb",
+      "sha256": "7f072c48f605b5668fe8dc13b513743d01b72c5a3a173708c81192c5e9a0af81",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "One damage to everyone. Accurately.",
+      "heard": "One damage to everyone accurately.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-1u7z9w",
+      "sha256": "6218f3cd9124d17e1f1e63419d78155fca6309e6658ae9c807442e234a2fb81f",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The heavens report. You are all hit.",
+      "heard": "The heavens report, you are all hit.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-idkh7a",
+      "sha256": "6f2a31d5cbf7f380369b55e3cf9d9da67369fefdf125dd3387b5700f727667bd",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "My measurements… were perfect.",
+      "heard": "My measurements were perfect.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-1aklp06",
+      "sha256": "941c1334a425f8f35d576bf39ea9746640e52cac9a6c42acefa59e29f4b322dd",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Someone else will finish the charts.",
+      "heard": "someone else will finish the charts.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "tycho-26jfvo",
+      "sha256": "b5698a2cbda607a79132e84617fedd48b3e58ea342946f92815596fa2466a854",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "My charts… unfinished.",
+      "heard": "My charts unfinished,",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-11xfkb0",
+      "sha256": "806f457d01e169f8db6a842d1cc2143d8e0796371e52a510e2b2789a72b88b82",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "True or false? I choose.",
+      "heard": "True or false? I choose.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-71enpe",
+      "sha256": "644ac7b6ab6c8d48865e670d92abc9ced05f85546c8e92313ec77ff21b958308",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "One or zero. Pick wisely.",
+      "heard": "One or zero? Pick wisely.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-9y0dzu",
+      "sha256": "ab66b91886b912e16f15168781a4ffc32bacc22b4cd7658bd128238fc22a7e3f",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Every case checked. Now.",
+      "heard": "Every case checked. Now",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-7ina4k",
+      "sha256": "ca49872f386fc4c291f3db3976f0f0045c0cffa34939a4fde8a099118209013e",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "False. Zero. Gone.",
+      "heard": "False. Zero. Gone.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-486yvj",
+      "sha256": "338ad8f13c48b5d12ac88d2c0769f29f14b36fe8504d501e7acf905264946671",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "I did not check that case.",
+      "heard": "I did not check that case.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "booleon-1w8coof",
+      "sha256": "ece538e44373400e87f8710a6219bc02495955362350790b4b77fb3afd760ee9",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Not true. Not anymore.",
+      "heard": "Not true. Not anymore.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-18hm0f8",
+      "sha256": "785bac378ca17956377b46b065dea6ef87621f7a371974a46b439b19f5c19bcb",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "A tiny verse for a tiny battle.",
+      "heard": "a tiny verse for a tiny battle.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-1fbkimn",
+      "sha256": "7179ce514fc7df630a2c795d342346eb28ce37300d6b1f581e4281d5aa0b917e",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Hex! I mean hello.",
+      "heard": "hex I mean, hello.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-t3jn60",
+      "sha256": "90e3c8f6a65c7d0f8b1ffee822b5b556efccd93e4df3f4e62d1deff0ee86f8fb",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Problems worthy of attack? Here I am.",
+      "heard": "Problems worthy of attack, here I am.",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-1harq",
+      "sha256": "2cc3d2b8babee01c6c21645a810483a8d9940d109da4aeb927cf05a54c3c2e2f",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "A short poem. A short life.",
+      "heard": "A short poem, a short life,",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-13ycb31",
+      "sha256": "4dfbf558220b235cf96633bd2c8b595486287e16d4c882ca73e420899ce56b7a",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "The verse is done.",
+      "heard": "The verse is done,",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "hexling-1su879t",
+      "sha256": "287583004f07cb251e6521ded933c926b63e7257be107066e5f1dccf0686ac2b",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "expected": "Put me in a little book.",
+      "heard": "Put me in a little book,",
+      "disposition": "Exact normalized transcript match"
+    }
+  ]
+}

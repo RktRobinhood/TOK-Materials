@@ -1,0 +1,9 @@
+{
+  "baseHead": "55f03b135110241a3e071a82dd250fd5d497f287",
+  "tests": 1106,
+  "pass": 1105,
+  "fail": 0,
+  "skip": 1,
+  "date": "2026-10-18T08:16:10.369Z",
+  "selection": "All tracked tools/test/*.test.mjs; excludes pre-existing untracked files."
+}

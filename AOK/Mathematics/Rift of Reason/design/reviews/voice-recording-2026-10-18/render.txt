@@ -1,0 +1,45 @@
+
+--render --only usainvolt 2026-10-18T08:01:37.883Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+split failed for usainvolt x9; kept in tools/voice-raw, retrying as 5 + 4.
+split failed for usainvolt x5; kept in tools/voice-raw, retrying as 3 + 2.
+10.02.40 lite  usainvolt: saved 3 lines (total 3)
+split failed for usainvolt x2; kept in tools/voice-raw, retrying as 1 + 1.
+
+Stopped automatic split retries after four attempts; preserved all raw takes. Each following speaker gets at most one request.
+
+--render --only beeyonce --max-requests 1 2026-10-18T08:03:47.595Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.03.58 lite  beeyonce: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2964 files.
+
+--render --only tycho --max-requests 1 2026-10-18T08:04:19.149Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.04.45 lite  tycho: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2979 files.
+
+--render --only booleon --max-requests 1 2026-10-18T08:05:06.868Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.05.45 lite  booleon: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2988 files.
+
+--render --only hexling --max-requests 1 2026-10-18T08:06:07.008Z
+9 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.06.34 lite  hexling: saved 9 lines (total 9)
+FINISHED: 9 lines saved, 1 requests used. Manifest lists 2997 files.
+
+--render --only avatar-mothkin-boy-inner --max-requests 1 2026-10-18T08:06:55.320Z
+7 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.07.10 lite  avatar-mothkin-boy-inner: saved 7 lines (total 7)
+FINISHED: 7 lines saved, 1 requests used. Manifest lists 3004 files.
+
+--render --only usainvolt-possessed --max-requests 1 2026-10-18T08:07:31.176Z
+7 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+10.07.48 lite  usainvolt-possessed: saved 7 lines (total 7)
+FINISHED: 7 lines saved, 1 requests used. Manifest lists 3011 files.
+Final ledger: {
+  "day": "2026-10-18",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}

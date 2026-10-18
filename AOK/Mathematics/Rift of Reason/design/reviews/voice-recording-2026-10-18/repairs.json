@@ -1,0 +1,119 @@
+{
+  "method": "Reassemble generated PCM at measured silence midpoints, encode MP3. Existing FX preserved. No TTS requests.",
+  "backup": "D:/Claude/work/tmp/voice-pass-2026-10-18/original-clips",
+  "repairs": [
+    {
+      "id": "avatar-mothkin-boy-inner-1tpv2z1",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-1tpv2z1",
+          "start": 0,
+          "end": 6.27
+        }
+      ],
+      "sha256": "2ab224add198a2418e3e7ab8210bd5bc24e38e40f46ab77a71a779b08e18eaa0"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1njjmpv",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-1tpv2z1",
+          "start": 6.27,
+          "end": null
+        },
+        {
+          "source": "avatar-mothkin-boy-inner-1njjmpv",
+          "start": 0,
+          "end": 5.095
+        }
+      ],
+      "sha256": "23a4faf8165af884256c39e72aff6cdcdba469003f0e49f257522bf23cb5d89d"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-nao46o",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-1njjmpv",
+          "start": 5.095,
+          "end": null
+        },
+        {
+          "source": "avatar-mothkin-boy-inner-nao46o",
+          "start": 0,
+          "end": 6.77
+        }
+      ],
+      "sha256": "e11bada9fe3b760cd300129dde327f3ed14de788deadc5e93975491b4791cc2d"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-14wuwhc",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-nao46o",
+          "start": 6.77,
+          "end": null
+        },
+        {
+          "source": "avatar-mothkin-boy-inner-14wuwhc",
+          "start": 0,
+          "end": null
+        }
+      ],
+      "sha256": "a494d8f303af7208f242c33d752d5cc9fdfa7a5d8f5c60f375859e0be744a854"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1cm0vat",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-1cm0vat",
+          "start": 0,
+          "end": null
+        },
+        {
+          "source": "avatar-mothkin-boy-inner-1v89ua6",
+          "start": 0,
+          "end": 0.71
+        }
+      ],
+      "sha256": "62163024307f194a6a83b431b6e1629926dbec4d180a97bef72db8b750bb9098"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1v89ua6",
+      "parts": [
+        {
+          "source": "avatar-mothkin-boy-inner-1v89ua6",
+          "start": 0.71,
+          "end": null
+        }
+      ],
+      "sha256": "7c63788dd7bf952b040e232194a9f2e6cdffc540ff142abae4c9d562cec81e12"
+    },
+    {
+      "id": "booleon-7ina4k",
+      "parts": [
+        {
+          "source": "booleon-7ina4k",
+          "start": 0,
+          "end": null
+        },
+        {
+          "source": "booleon-486yvj",
+          "start": 0,
+          "end": 1.13
+        }
+      ],
+      "sha256": "ca49872f386fc4c291f3db3976f0f0045c0cffa34939a4fde8a099118209013e"
+    },
+    {
+      "id": "booleon-486yvj",
+      "parts": [
+        {
+          "source": "booleon-486yvj",
+          "start": 1.13,
+          "end": null
+        }
+      ],
+      "sha256": "338ad8f13c48b5d12ac88d2c0769f29f14b36fe8504d501e7acf905264946671"
+    }
+  ]
+}

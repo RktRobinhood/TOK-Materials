@@ -1,0 +1,103 @@
+Text-model request 1: usainvolt-1onzain, usainvolt-15ta3m4, usainvolt-nw008p, usainvolt-v398iq, usainvolt-11qmufi, usainvolt-6p2yeb, usainvolt-mu3q35, usainvolt-18c7cqr
+HTTP 503; stopping. No clips in this request are counted as checked.
+1 text-model requests; 0 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: usainvolt-1onzain, usainvolt-15ta3m4, usainvolt-nw008p, beeyonce-gjcprx, beeyonce-qn0fkb, beeyonce-whiytx, tycho-u5pqkc, tycho-yqffm0
+{"id":"usainvolt-1onzain","expected":"I'm hurt. I don't like asking. So I'm near the bottom.","heard":"I'm hurt. I don't like asking, so I'm near the bottom.","ok":true}
+{"id":"usainvolt-15ta3m4","expected":"I'm hurt. I don't like asking. So I'm at the bottom.","heard":"I'm hurt. I don't like asking, so I'm at the bottom.","ok":true}
+{"id":"usainvolt-nw008p","expected":"Lightning doesn't ask. Lightning just… sits here. Hurting.","heard":"Lightning doesn't ask. Lightning just sits here hurting.","ok":true}
+{"id":"beeyonce-gjcprx","expected":"The hive has spoken.","heard":"The hive has spoken.","ok":true}
+{"id":"beeyonce-qn0fkb","expected":"Bow down to a well-formed argument.","heard":"Bowed down to a well-formed argument.","ok":false}
+{"id":"beeyonce-whiytx","expected":"Flawless reasoning, darling. Check it.","heard":"Flawless reasoning, darling. Check it.","ok":true}
+{"id":"tycho-u5pqkc","expected":"Measure twice. Then measure again.","heard":"Measure twice, then measure again.","ok":true}
+{"id":"tycho-yqffm0","expected":"The heavens do not lie. People do.","heard":"The heavens do not lie, people do.","ok":true}
+Text-model request 2: tycho-1pjtl0b, usainvolt-v398iq, usainvolt-11qmufi, usainvolt-6p2yeb, usainvolt-mu3q35, usainvolt-18c7cqr, usainvolt-129m7jd, beeyonce-k73qxr
+{"id":"tycho-1pjtl0b","expected":"Hven has the best view.","heard":"heaven has the best view.","ok":false}
+{"id":"usainvolt-v398iq","expected":"Too fast for your guards!","heard":"Too fast for your guards?","ok":true}
+{"id":"usainvolt-11qmufi","expected":"Ready. Set. Already here.","heard":"Ready! Set! Already here.","ok":true}
+{"id":"usainvolt-6p2yeb","expected":"Lightning pose! Done. Let's go.","heard":"lightning pose Done. Let's go.","ok":true}
+{"id":"usainvolt-mu3q35","expected":"Second place? Me?","heard":"Second place? Me?","ok":true}
+{"id":"usainvolt-18c7cqr","expected":"I blinked. You won.","heard":"I blinked, you won.","ok":true}
+{"id":"usainvolt-129m7jd","expected":"Still the fastest loser ever.","heard":"Heh, still the fastest loser ever.","ok":false}
+{"id":"beeyonce-k73qxr","expected":"Hive, line up behind me.","heard":"Hive, line up behind me.","ok":true}
+Text-model request 3: beeyonce-r95oh6, beeyonce-1j5lpw2, beeyonce-1v9jznc, beeyonce-8t1rke, beeyonce-12r9bir, tycho-1bpxn3b, tycho-k9i5jb, tycho-1u7z9w
+{"id":"beeyonce-r95oh6","expected":"Kneel. Then get stronger.","heard":"kneel then get stronger","ok":true}
+{"id":"beeyonce-1j5lpw2","expected":"Everybody up. The queen is here.","heard":"everybody up the Queen is here","ok":true}
+{"id":"beeyonce-1v9jznc","expected":"The hive will remember this.","heard":"The hive will remember this.","ok":true}
+{"id":"beeyonce-8t1rke","expected":"I'm not crying. It's pollen.","heard":"I'm not crying it's pollen","ok":true}
+{"id":"beeyonce-12r9bir","expected":"Even queens take a break.","heard":"Even queens take a break.","ok":true}
+{"id":"tycho-1bpxn3b","expected":"Measuring every enemy. Precisely. Ouch for them.","heard":"Measuring every enemy precisely. Ouch for them.","ok":true}
+{"id":"tycho-k9i5jb","expected":"One damage to everyone. Accurately.","heard":"One damage to everyone accurately.","ok":true}
+{"id":"tycho-1u7z9w","expected":"The heavens report. You are all hit.","heard":"The heavens report, you are all hit.","ok":true}
+Text-model request 4: tycho-idkh7a, tycho-1aklp06, tycho-26jfvo
+{"id":"tycho-idkh7a","expected":"My measurements… were perfect.","heard":"My measurements were perfect.","ok":true}
+{"id":"tycho-1aklp06","expected":"Someone else will finish the charts.","heard":"someone else will finish the charts.","ok":true}
+{"id":"tycho-26jfvo","expected":"My charts… unfinished.","heard":"My charts unfinished,","ok":true}
+4 text-model requests; 27 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: beeyonce-qn0fkb, tycho-1pjtl0b, usainvolt-129m7jd
+{"id":"beeyonce-qn0fkb","expected":"Bow down to a well-formed argument.","heard":"Bow down to a well formed argument.","ok":false}
+{"id":"tycho-1pjtl0b","expected":"Hven has the best view.","heard":"Heaven has the best view.","ok":false}
+{"id":"usainvolt-129m7jd","expected":"Still the fastest loser ever.","heard":"Still the fastest loser ever.","ok":true}
+1 text-model requests; 3 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: booleon-bpvofr, booleon-1vyq1ei, booleon-11zmt0w, hexling-1embvsl, hexling-bk5eyk, hexling-308448, booleon-11xfkb0, booleon-71enpe
+{"id":"booleon-bpvofr","expected":"True is one. False is zero. Everything else is arithmetic.","heard":"True is one, false is zero, everything else is arithmetic.","ok":true}
+{"id":"booleon-1vyq1ei","expected":"Let us check every case.","heard":"Let us check every case.","ok":true}
+{"id":"booleon-11zmt0w","expected":"The laws of thought are surprisingly short.","heard":"The laws of thought are surprisingly short.","ok":true}
+{"id":"hexling-1embvsl","expected":"A little verse for a little problem.","heard":"a little verse for a little problem.","ok":true}
+{"id":"hexling-bk5eyk","expected":"Problems bite back. Good.","heard":"Problems bite back. Good.","ok":true}
+{"id":"hexling-308448","expected":"Hex! I mean, hello.","heard":"Hex! I mean, hello.","ok":true}
+{"id":"booleon-11xfkb0","expected":"True or false? I choose.","heard":"True or false? I choose.","ok":true}
+{"id":"booleon-71enpe","expected":"One or zero. Pick wisely.","heard":"One or zero? Pick wisely.","ok":true}
+Text-model request 2: booleon-9y0dzu, booleon-7ina4k, booleon-486yvj, booleon-1w8coof, hexling-18hm0f8, hexling-1fbkimn, hexling-t3jn60, hexling-1harq
+Text-model request 1: avatar-mothkin-boy-inner-1ojirll, avatar-mothkin-boy-inner-1tpv2z1, avatar-mothkin-boy-inner-1njjmpv, avatar-mothkin-boy-inner-nao46o
+{"id":"avatar-mothkin-boy-inner-1ojirll","expected":"Ooh, tin A gleams. Shiny means nothing.…The dent on C, though. Look.","heard":"Ooh, tin egg gleams. Shiny means nothing. But then can see, though. Look.","ok":false}
+{"id":"avatar-mothkin-boy-inner-1tpv2z1","expected":"Shh. Chalk dust. On the grate. Not on a desk. Look.","heard":"Shh. Chalk dust on the grate, not on the desk. Look. Look.","ok":false}
+{"id":"avatar-mothkin-boy-inner-1njjmpv","expected":"Look. The diagram's scratched, but one wire still shines.","heard":"The diagram's scratched, but one wire still shines. Ooh, glowing eyes.","ok":false}
+{"id":"avatar-mothkin-boy-inner-nao46o","expected":"Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.","heard":"So pretty. Wait, the front ring doesn't glow or blink. Look.","ok":false}
+Text-model request 2: usainvolt-possessed-14hl1wj, usainvolt-possessed-h801uy, usainvolt-possessed-38oa9a, usainvolt-possessed-11u44u6
+{"id":"usainvolt-possessed-14hl1wj","expected":"I joined because everyone else did. Is that… not a reason?","heard":"I joined because everyone else did. Is that not a reason?","ok":true}
+{"id":"usainvolt-possessed-h801uy","expected":"I do this when I win. I'm not sure I'm winning.","heard":"I do this when I win. I'm not sure I'm winning.","ok":true}
+{"id":"usainvolt-possessed-38oa9a","expected":"I joined because everyone else did.…Is \"everyone\" made of wood?","heard":"I joined because everyone else did. Is everyone made of wood?","ok":true}
+{"id":"usainvolt-possessed-11u44u6","expected":"The whole Fair is marching now! Real ones! So it must be right!","heard":"The whole fair is marching now. Real ones. So it must be right.","ok":true}
+Text-model request 3: usainvolt-possessed-x85ysf, usainvolt-possessed-lzyrk3, usainvolt-possessed-1sq5jbx, avatar-mothkin-boy-inner-14wuwhc
+{"id":"usainvolt-possessed-x85ysf","expected":"They joined because the front rank joined. And the front rank joined because… um.","heard":"They joined, because the front rank joined. And the front rank joined because, um,","ok":true}
+{"id":"usainvolt-possessed-lzyrk3","expected":"Nice card. But who marched FIRST?","heard":"Nice card. But who marched first?","ok":true}
+{"id":"usainvolt-possessed-1sq5jbx","expected":"That's not mine. Mine is \"everybody\". I checked.","heard":"That's not mine. Mine is everybody. I checked.","ok":true}
+{"id":"avatar-mothkin-boy-inner-14wuwhc","expected":"Look. The headline shines. Gold ink. Who in town writes in gold?","heard":"The headline shines. Gold ink? Who in town writes in gold?","ok":false}
+Text-model request 4: avatar-mothkin-boy-inner-1cm0vat, avatar-mothkin-boy-inner-1v89ua6, booleon-9y0dzu, booleon-7ina4k
+{"id":"avatar-mothkin-boy-inner-1cm0vat","expected":"Shh. Behind the panel. Something shiny. Only one thing. Look.","heard":"Shh! Behind the panel! Something shiny! Only one thing.","ok":false}
+{"id":"avatar-mothkin-boy-inner-1v89ua6","expected":"Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.","heard":"Look! Ooh, the tablet sparkles! No, look who's limping! Then who's typing?","ok":false}
+{"id":"booleon-9y0dzu","expected":"Every case checked. Now.","heard":"Every case checked. Now","ok":true}
+{"id":"booleon-7ina4k","expected":"False. Zero. Gone.","heard":"false 0","ok":false}
+Text-model request 5: booleon-486yvj, booleon-1w8coof, hexling-18hm0f8, hexling-1fbkimn
+{"id":"booleon-486yvj","expected":"I did not check that case.","heard":"gone. I did not check that case.","ok":false}
+{"id":"booleon-1w8coof","expected":"Not true. Not anymore.","heard":"Not true. Not anymore.","ok":true}
+{"id":"hexling-18hm0f8","expected":"A tiny verse for a tiny battle.","heard":"a tiny verse for a tiny battle.","ok":true}
+{"id":"hexling-1fbkimn","expected":"Hex! I mean hello.","heard":"hex I mean, hello.","ok":true}
+Text-model request 6: hexling-t3jn60, hexling-1harq, hexling-13ycb31, hexling-1su879t
+Invalid response: Audio audit IDs do not match. No clips in this request are counted as checked.
+6 text-model requests; 20 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: hexling-t3jn60, hexling-1harq, hexling-13ycb31, hexling-1su879t
+Invalid response: Audio audit IDs do not match. No clips in this request are counted as checked.
+1 text-model requests; 0 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: avatar-mothkin-boy-inner-1tpv2z1, avatar-mothkin-boy-inner-1njjmpv, avatar-mothkin-boy-inner-nao46o, avatar-mothkin-boy-inner-14wuwhc
+{"id":"avatar-mothkin-boy-inner-1tpv2z1","expected":"Shh. Chalk dust. On the grate. Not on a desk. Look.","heard":"Shh. Chalk dust on the grate. Not on a desk. Look,","ok":true}
+{"id":"avatar-mothkin-boy-inner-1njjmpv","expected":"Look. The diagram's scratched, but one wire still shines.","heard":"Look, the diagram's scratched, but one wire still shines.","ok":true}
+{"id":"avatar-mothkin-boy-inner-nao46o","expected":"Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.","heard":"Ooh, glowing eyes, so pretty. Wait, the front ring doesn't glow or blink.","ok":false}
+{"id":"avatar-mothkin-boy-inner-14wuwhc","expected":"Look. The headline shines. Gold ink. Who in town writes in gold?","heard":"Look, the headline shines. Gold ink? Who in town writes in gold?","ok":true}
+Text-model request 2: avatar-mothkin-boy-inner-1cm0vat, avatar-mothkin-boy-inner-1v89ua6, booleon-7ina4k, booleon-486yvj
+{"id":"avatar-mothkin-boy-inner-1cm0vat","expected":"Shh. Behind the panel. Something shiny. Only one thing. Look.","heard":"Shh behind the panel something shiny only one thing look","ok":true}
+{"id":"avatar-mothkin-boy-inner-1v89ua6","expected":"Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.","heard":"Ooh the tablet sparkles No Look who's limping Then who's typing","ok":true}
+{"id":"booleon-7ina4k","expected":"False. Zero. Gone.","heard":"False. Zero. Gone.","ok":true}
+{"id":"booleon-486yvj","expected":"I did not check that case.","heard":"I did not check that case.","ok":true}
+Text-model request 3: hexling-t3jn60, hexling-1harq, hexling-13ycb31, hexling-1su879t
+{"id":"hexling-t3jn60","expected":"Problems worthy of attack? Here I am.","heard":"Problems worthy of attack, here I am.","ok":true}
+{"id":"hexling-1harq","expected":"A short poem. A short life.","heard":"A short poem, a short life,","ok":true}
+{"id":"hexling-13ycb31","expected":"The verse is done.","heard":"The verse is done,","ok":true}
+{"id":"hexling-1su879t","expected":"Put me in a little book.","heard":"Put me in a little book,","ok":true}
+3 text-model requests; 12 clips transcribed. Acting and unreviewed cuts remain provisional.
+Text-model request 1: avatar-mothkin-boy-inner-1ojirll, avatar-mothkin-boy-inner-nao46o, beeyonce-qn0fkb, tycho-1pjtl0b
+{"id":"avatar-mothkin-boy-inner-1ojirll","expected":"Ooh, tin A gleams. Shiny means nothing.…The dent on C, though. Look.","heard":"Ooh! Tin-eh gleams! Shiny means nothing. The dent on C though, look!","ok":false}
+{"id":"avatar-mothkin-boy-inner-nao46o","expected":"Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.","heard":"Ooh. Glowing eyes. So pretty. Wait. The front ring doesn't glow. Or blink.","ok":false}
+{"id":"beeyonce-qn0fkb","expected":"Bow down to a well-formed argument.","heard":"Bow down to a well-formed argument.","ok":true}
+{"id":"tycho-1pjtl0b","expected":"Hven has the best view.","heard":"Heaven has the best view.","ok":false}
+1 text-model requests; 4 clips transcribed. Acting and unreviewed cuts remain provisional.

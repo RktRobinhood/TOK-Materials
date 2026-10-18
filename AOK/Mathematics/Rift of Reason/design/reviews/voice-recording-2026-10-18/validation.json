@@ -1,0 +1,643 @@
+{
+  "date": "2026-10-18",
+  "baselineFiles": 2952,
+  "existingFilesUnchanged": true,
+  "changedOld": [],
+  "newClips": 58,
+  "newClipsBySpeaker": {
+    "avatar-mothkin-boy-inner": 6,
+    "beeyonce": 9,
+    "booleon": 9,
+    "hexling": 9,
+    "tycho": 9,
+    "usainvolt": 9,
+    "usainvolt-possessed": 7
+  },
+  "newClipsNotInCatalog": [],
+  "silentOrTiny": [],
+  "currentRecorded": 2533,
+  "currentTotal": 2610,
+  "missingLines": 77,
+  "missingBySpeaker": {
+    "avatar-owlet-girl": 1,
+    "avatar-mothkin-boy": 1,
+    "avatar-fox-girl": 1,
+    "avatar-frogling-boy": 1,
+    "avatar-raven-girl": 1,
+    "avatar-raven-girl-possessed": 3,
+    "speedcheeta-possessed": 1,
+    "pip-possessed": 1,
+    "oracle": 5,
+    "achilles": 2,
+    "kuku": 1,
+    "rawmsay-possessed": 1,
+    "beastie-possessed": 1,
+    "zuckerborg-possessed": 1,
+    "rockodile-possessed": 1,
+    "muskrat-possessed": 1,
+    "schoolteacher": 2,
+    "muskrat": 3,
+    "avatar-mothkin-boy-inner": 1,
+    "swiftlet-possessed": 5,
+    "swiftlet": 7,
+    "eminemu-possessed": 5,
+    "speedcheeta": 6,
+    "carlseal": 6,
+    "obambu": 6,
+    "beansprout": 5,
+    "haalandroid": 6,
+    "constable": 2
+  },
+  "manifestFiles": 2909,
+  "manifestAdded": 58,
+  "manifestRemoved": [],
+  "manifestPathsMissing": [],
+  "usage": {
+    "day": "2026-10-18",
+    "counts": {
+      "gemini-3.8-flash-lite-tts": 10
+    }
+  },
+  "decoded": [
+    {
+      "id": "avatar-mothkin-boy-inner-14wuwhc",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side headline-debate",
+      "expected": "Look. The headline shines. Gold ink. Who in town writes in gold?",
+      "seconds": 7.198,
+      "peak": 16535,
+      "rms": 1416,
+      "sha256": "a494d8f303af7208f242c33d752d5cc9fdfa7a5d8f5c60f375859e0be744a854"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1cm0vat",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side fortune-machine",
+      "expected": "Shh. Behind the panel. Something shiny. Only one thing. Look.",
+      "seconds": 6.302,
+      "peak": 16022,
+      "rms": 1495,
+      "sha256": "62163024307f194a6a83b431b6e1629926dbec4d180a97bef72db8b750bb9098"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1njjmpv",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side muskrat-launch",
+      "expected": "Look. The diagram's scratched, but one wire still shines.",
+      "seconds": 5.929958333333333,
+      "peak": 16687,
+      "rms": 2097,
+      "sha256": "23a4faf8165af884256c39e72aff6cdcdba469003f0e49f257522bf23cb5d89d"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1ojirll",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side cake-tins",
+      "expected": "Ooh, tin A gleams. Shiny means nothing.…The dent on C, though. Look.",
+      "seconds": 7.896,
+      "peak": 17256,
+      "rms": 1764,
+      "sha256": "5ab92e03acec6edcf6dfdfba56a40368528da44037ebad476f10fd301a8bedb1"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1tpv2z1",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side silent-pupil",
+      "expected": "Shh. Chalk dust. On the grate. Not on a desk. Look.",
+      "seconds": 6.27,
+      "peak": 13946,
+      "rms": 921,
+      "sha256": "2ab224add198a2418e3e7ab8210bd5bc24e38e40f46ab77a71a779b08e18eaa0"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-1v89ua6",
+      "speaker": "avatar-mothkin-boy-inner",
+      "where": "side giveaway-app",
+      "expected": "Ooh, the tablet sparkles.…No. Look who's limping. Then who's typing.",
+      "seconds": 6.85,
+      "peak": 16514,
+      "rms": 1998,
+      "sha256": "7c63788dd7bf952b040e232194a9f2e6cdffc540ff142abae4c9d562cec81e12"
+    },
+    {
+      "id": "beeyonce-12r9bir",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Even queens take a break.",
+      "seconds": 2.184,
+      "peak": 22562,
+      "rms": 4885,
+      "sha256": "55317e7098c1f1c189f49aaede38804e9cb7aa3565a582ea4c0a934d3021bb41"
+    },
+    {
+      "id": "beeyonce-1j5lpw2",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Everybody up. The queen is here.",
+      "seconds": 3.216,
+      "peak": 29873,
+      "rms": 4203,
+      "sha256": "2354c01b7d4332f8d332a4dd6075e25ede9f94144de1667edec6fd14f4d4990e"
+    },
+    {
+      "id": "beeyonce-1v9jznc",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "The hive will remember this.",
+      "seconds": 2.448,
+      "peak": 20618,
+      "rms": 4175,
+      "sha256": "fcb773c80ad790a67394b16028be80911c9aa44b088d0a120d1bebf37159beb7"
+    },
+    {
+      "id": "beeyonce-8t1rke",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "I'm not crying. It's pollen.",
+      "seconds": 2.568,
+      "peak": 32767,
+      "rms": 4288,
+      "sha256": "58e9b66145ac2c4c19f4fe9ebdc0f8387457dfcda321f610fbdbdf5dd422e265"
+    },
+    {
+      "id": "beeyonce-gjcprx",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "The hive has spoken.",
+      "seconds": 2.616,
+      "peak": 19446,
+      "rms": 3321,
+      "sha256": "4d836309146969618cf0c336b28f313a3fcc7a7f2d57260c8ab6767933b9e357"
+    },
+    {
+      "id": "beeyonce-k73qxr",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Hive, line up behind me.",
+      "seconds": 2.448,
+      "peak": 25234,
+      "rms": 3880,
+      "sha256": "5ef172a870e226ff82c3916428e57bdf38d3e5f1c35bef9ab71e5a67ef0acd13"
+    },
+    {
+      "id": "beeyonce-qn0fkb",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Bow down to a well-formed argument.",
+      "seconds": 3.72,
+      "peak": 24180,
+      "rms": 3309,
+      "sha256": "5cfdf2217e7665d92727fe8e7c9563a27688017c54bd0c0d8909da6fd5f6dfa7"
+    },
+    {
+      "id": "beeyonce-r95oh6",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Kneel. Then get stronger.",
+      "seconds": 2.688,
+      "peak": 25351,
+      "rms": 4851,
+      "sha256": "e5aefe7c02817d6bb51330d61d3f8b5b279eb020b31cb90ac49b5a78a3fc875a"
+    },
+    {
+      "id": "beeyonce-whiytx",
+      "speaker": "beeyonce",
+      "where": "creature beeyonce",
+      "expected": "Flawless reasoning, darling. Check it.",
+      "seconds": 3.408,
+      "peak": 24419,
+      "rms": 3198,
+      "sha256": "80ad6d7e0cf13c1d5e1dc8a78ff7f6e6f5b6ac4f34801affd5119896f4bf1364"
+    },
+    {
+      "id": "booleon-11xfkb0",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "True or false? I choose.",
+      "seconds": 3.072,
+      "peak": 22624,
+      "rms": 2242,
+      "sha256": "806f457d01e169f8db6a842d1cc2143d8e0796371e52a510e2b2789a72b88b82"
+    },
+    {
+      "id": "booleon-11zmt0w",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "The laws of thought are surprisingly short.",
+      "seconds": 3.6,
+      "peak": 26405,
+      "rms": 2999,
+      "sha256": "ed811304c2d7c66c41496eb659b279bde8e330259390afe5eaf399ebc7178c6a"
+    },
+    {
+      "id": "booleon-1vyq1ei",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "Let us check every case.",
+      "seconds": 2.208,
+      "peak": 18861,
+      "rms": 1913,
+      "sha256": "c5e92e7294648c541314e4f8bc96ac6ecbc56995eaa3c5d681546fdb1a48b542"
+    },
+    {
+      "id": "booleon-1w8coof",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "Not true. Not anymore.",
+      "seconds": 2.184,
+      "peak": 12128,
+      "rms": 1616,
+      "sha256": "ece538e44373400e87f8710a6219bc02495955362350790b4b77fb3afd760ee9"
+    },
+    {
+      "id": "booleon-486yvj",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "I did not check that case.",
+      "seconds": 2.566,
+      "peak": 18201,
+      "rms": 2378,
+      "sha256": "338ad8f13c48b5d12ac88d2c0769f29f14b36fe8504d501e7acf905264946671"
+    },
+    {
+      "id": "booleon-71enpe",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "One or zero. Pick wisely.",
+      "seconds": 3.192,
+      "peak": 21700,
+      "rms": 3476,
+      "sha256": "644ac7b6ab6c8d48865e670d92abc9ced05f85546c8e92313ec77ff21b958308"
+    },
+    {
+      "id": "booleon-7ina4k",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "False. Zero. Gone.",
+      "seconds": 3.29,
+      "peak": 25012,
+      "rms": 2791,
+      "sha256": "ca49872f386fc4c291f3db3976f0f0045c0cffa34939a4fde8a099118209013e"
+    },
+    {
+      "id": "booleon-9y0dzu",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "Every case checked. Now.",
+      "seconds": 3.024,
+      "peak": 20495,
+      "rms": 2410,
+      "sha256": "ab66b91886b912e16f15168781a4ffc32bacc22b4cd7658bd128238fc22a7e3f"
+    },
+    {
+      "id": "booleon-bpvofr",
+      "speaker": "booleon",
+      "where": "creature booleon",
+      "expected": "True is one. False is zero. Everything else is arithmetic.",
+      "seconds": 5.832,
+      "peak": 23397,
+      "rms": 2401,
+      "sha256": "97ba2cbf29068b7d2ef7d5cf5c9e106d268baa0b6e2cbdff97cfaabe7ba0d4f2"
+    },
+    {
+      "id": "hexling-13ycb31",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "The verse is done.",
+      "seconds": 1.32,
+      "peak": 24368,
+      "rms": 3665,
+      "sha256": "4dfbf558220b235cf96633bd2c8b595486287e16d4c882ca73e420899ce56b7a"
+    },
+    {
+      "id": "hexling-18hm0f8",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "A tiny verse for a tiny battle.",
+      "seconds": 2.856,
+      "peak": 21219,
+      "rms": 3430,
+      "sha256": "785bac378ca17956377b46b065dea6ef87621f7a371974a46b439b19f5c19bcb"
+    },
+    {
+      "id": "hexling-1embvsl",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "A little verse for a little problem.",
+      "seconds": 3.024,
+      "peak": 26371,
+      "rms": 3749,
+      "sha256": "023791c9ac6b610b06e1546360239d015fa2746bb1b8149a1ef064a0e68fd107"
+    },
+    {
+      "id": "hexling-1fbkimn",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "Hex! I mean hello.",
+      "seconds": 2.256,
+      "peak": 22907,
+      "rms": 2895,
+      "sha256": "7179ce514fc7df630a2c795d342346eb28ce37300d6b1f581e4281d5aa0b917e"
+    },
+    {
+      "id": "hexling-1harq",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "A short poem. A short life.",
+      "seconds": 3.24,
+      "peak": 19690,
+      "rms": 2652,
+      "sha256": "2cc3d2b8babee01c6c21645a810483a8d9940d109da4aeb927cf05a54c3c2e2f"
+    },
+    {
+      "id": "hexling-1su879t",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "Put me in a little book.",
+      "seconds": 1.68,
+      "peak": 23103,
+      "rms": 3874,
+      "sha256": "287583004f07cb251e6521ded933c926b63e7257be107066e5f1dccf0686ac2b"
+    },
+    {
+      "id": "hexling-308448",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "Hex! I mean, hello.",
+      "seconds": 2.232,
+      "peak": 31651,
+      "rms": 3237,
+      "sha256": "7ef96309450ff65ccc4e5df309f78eecdd05a613719688dc7bbf31725c4d9e52"
+    },
+    {
+      "id": "hexling-bk5eyk",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "Problems bite back. Good.",
+      "seconds": 2.592,
+      "peak": 32637,
+      "rms": 3748,
+      "sha256": "c3d651bb8ee6d4366f65f9cf6acedad76ea7d29bb7cb059b1ce9147013e75d68"
+    },
+    {
+      "id": "hexling-t3jn60",
+      "speaker": "hexling",
+      "where": "creature hexling",
+      "expected": "Problems worthy of attack? Here I am.",
+      "seconds": 3.576,
+      "peak": 27403,
+      "rms": 3825,
+      "sha256": "90e3c8f6a65c7d0f8b1ffee822b5b556efccd93e4df3f4e62d1deff0ee86f8fb"
+    },
+    {
+      "id": "tycho-1aklp06",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "Someone else will finish the charts.",
+      "seconds": 2.688,
+      "peak": 24385,
+      "rms": 3030,
+      "sha256": "941c1334a425f8f35d576bf39ea9746640e52cac9a6c42acefa59e29f4b322dd"
+    },
+    {
+      "id": "tycho-1bpxn3b",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "Measuring every enemy. Precisely. Ouch for them.",
+      "seconds": 5.136,
+      "peak": 26710,
+      "rms": 3893,
+      "sha256": "00eed4fb5c986e039c01ae683add12f4d4f5ab298218d8a66b50d4eb13156939"
+    },
+    {
+      "id": "tycho-1pjtl0b",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "Hven has the best view.",
+      "seconds": 2.4,
+      "peak": 25377,
+      "rms": 3060,
+      "sha256": "0d0a6f835b6ea31a173673b7c4a70d349b8ab9b6c4d58f8dd004d5fb901ac05d"
+    },
+    {
+      "id": "tycho-1u7z9w",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "The heavens report. You are all hit.",
+      "seconds": 3.912,
+      "peak": 24529,
+      "rms": 3347,
+      "sha256": "6218f3cd9124d17e1f1e63419d78155fca6309e6658ae9c807442e234a2fb81f"
+    },
+    {
+      "id": "tycho-26jfvo",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "My charts… unfinished.",
+      "seconds": 2.928,
+      "peak": 24141,
+      "rms": 2839,
+      "sha256": "b5698a2cbda607a79132e84617fedd48b3e58ea342946f92815596fa2466a854"
+    },
+    {
+      "id": "tycho-idkh7a",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "My measurements… were perfect.",
+      "seconds": 2.952,
+      "peak": 25343,
+      "rms": 2733,
+      "sha256": "6f2a31d5cbf7f380369b55e3cf9d9da67369fefdf125dd3387b5700f727667bd"
+    },
+    {
+      "id": "tycho-k9i5jb",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "One damage to everyone. Accurately.",
+      "seconds": 4.104,
+      "peak": 29733,
+      "rms": 3228,
+      "sha256": "7f072c48f605b5668fe8dc13b513743d01b72c5a3a173708c81192c5e9a0af81"
+    },
+    {
+      "id": "tycho-u5pqkc",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "Measure twice. Then measure again.",
+      "seconds": 4.008,
+      "peak": 27832,
+      "rms": 4539,
+      "sha256": "0d60b244009adac0ebf8efe4350caf082e1a5ba7a924653d9eab2fe1018eddb5"
+    },
+    {
+      "id": "tycho-yqffm0",
+      "speaker": "tycho",
+      "where": "creature tycho",
+      "expected": "The heavens do not lie. People do.",
+      "seconds": 3.72,
+      "peak": 25530,
+      "rms": 3981,
+      "sha256": "a505bb1ca0904c9e14afa5ea500ad5a159e681c40486b382846c4089a93e4a36"
+    },
+    {
+      "id": "usainvolt-11qmufi",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "Ready. Set. Already here.",
+      "seconds": 2.42,
+      "peak": 32315,
+      "rms": 3714,
+      "sha256": "4cb892056360b46499b45dc5c4953b16e2bf8ff0b2c8f7e8bcd93559aa0b2770"
+    },
+    {
+      "id": "usainvolt-129m7jd",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "Still the fastest loser ever.",
+      "seconds": 2.78,
+      "peak": 26734,
+      "rms": 4697,
+      "sha256": "dbb69cf582650ceeaa9bd72ce48b286acc2988a81844169419015ba41e0555ca"
+    },
+    {
+      "id": "usainvolt-15ta3m4",
+      "speaker": "usainvolt",
+      "where": "side giveaway-app",
+      "expected": "I'm hurt. I don't like asking. So I'm at the bottom.",
+      "seconds": 3.888,
+      "peak": 25608,
+      "rms": 3247,
+      "sha256": "1f9b04c3d8e6cd909103b2c46428e0cd5626ebc629ab2ef1f563c1c1d7cad569"
+    },
+    {
+      "id": "usainvolt-18c7cqr",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "I blinked. You won.",
+      "seconds": 2.06,
+      "peak": 20396,
+      "rms": 3034,
+      "sha256": "49a76aebfff99d41a571c8647632cfd871574cfe2e5bf42ddd62bbdc1c8c9aa1"
+    },
+    {
+      "id": "usainvolt-1onzain",
+      "speaker": "usainvolt",
+      "where": "side giveaway-app",
+      "expected": "I'm hurt. I don't like asking. So I'm near the bottom.",
+      "seconds": 3.72,
+      "peak": 25813,
+      "rms": 3454,
+      "sha256": "24a44097e023d1388d9f1e73f0ceb7132b6e37b598b9ce1b7c1d7b5bb73f8765"
+    },
+    {
+      "id": "usainvolt-6p2yeb",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "Lightning pose! Done. Let's go.",
+      "seconds": 3.18,
+      "peak": 25731,
+      "rms": 3080,
+      "sha256": "061e6f1ee3574ffda3504f720b9c979292d1cdf09bbb974e124a15276f2ed925"
+    },
+    {
+      "id": "usainvolt-mu3q35",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "Second place? Me?",
+      "seconds": 2.52,
+      "peak": 18638,
+      "rms": 2459,
+      "sha256": "5a9ad28353e3708911933508661e53462b193d2fc136c281ee3f1a8f69406d07"
+    },
+    {
+      "id": "usainvolt-nw008p",
+      "speaker": "usainvolt",
+      "where": "side giveaway-app",
+      "expected": "Lightning doesn't ask. Lightning just… sits here. Hurting.",
+      "seconds": 5.256,
+      "peak": 26398,
+      "rms": 2527,
+      "sha256": "b08f23765f8d6e0c18afc8dadbbf8f535bb96d7718d35dd81b3a1d7553889654"
+    },
+    {
+      "id": "usainvolt-possessed-11u44u6",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "The whole Fair is marching now! Real ones! So it must be right!",
+      "seconds": 7.944,
+      "peak": 27568,
+      "rms": 2613,
+      "sha256": "e2547e2a82b6c48b3b625a5eedd8393aa041070c6377eb8a2e8aaa828a995cbc"
+    },
+    {
+      "id": "usainvolt-possessed-14hl1wj",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "I joined because everyone else did. Is that… not a reason?",
+      "seconds": 7.368,
+      "peak": 27614,
+      "rms": 2853,
+      "sha256": "370aa8b15c678074347f5253833c3e452a6d27e77bc31a24dec53ac7013af2f2"
+    },
+    {
+      "id": "usainvolt-possessed-1sq5jbx",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "That's not mine. Mine is \"everybody\". I checked.",
+      "seconds": 6.552,
+      "peak": 29028,
+      "rms": 3459,
+      "sha256": "baba002ee13bb34a64b156ae7a84b19287874ae2545f56e2d43dd830d9a85302"
+    },
+    {
+      "id": "usainvolt-possessed-38oa9a",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "I joined because everyone else did.…Is \"everyone\" made of wood?",
+      "seconds": 7.848,
+      "peak": 26381,
+      "rms": 3713,
+      "sha256": "95b0c40891c7906d1a113e810bad6bd4a0bfdfeec713aa8b0e194a09843cf6a3"
+    },
+    {
+      "id": "usainvolt-possessed-h801uy",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "I do this when I win. I'm not sure I'm winning.",
+      "seconds": 6.288,
+      "peak": 26314,
+      "rms": 3380,
+      "sha256": "e6e348af5c931a01bf3458f5139b60604498504c393232bbd8ebec8d5a01e261"
+    },
+    {
+      "id": "usainvolt-possessed-lzyrk3",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Nice card. But who marched FIRST?",
+      "seconds": 4.464,
+      "peak": 28139,
+      "rms": 2915,
+      "sha256": "ada222646f39977cd1a34251f62a1d2a9ab8a3e71a0bac9d551a42af0d4180db"
+    },
+    {
+      "id": "usainvolt-possessed-x85ysf",
+      "speaker": "usainvolt-possessed",
+      "where": "side recruitment-drive",
+      "expected": "They joined because the front rank joined. And the front rank joined because… um.",
+      "seconds": 8.208,
+      "peak": 27562,
+      "rms": 3248,
+      "sha256": "494e9111bc3d3f51e7fb16ff5ad1a0798998daec98c3445195abb4dcf01c9169"
+    },
+    {
+      "id": "usainvolt-v398iq",
+      "speaker": "usainvolt",
+      "where": "creature usainvolt",
+      "expected": "Too fast for your guards!",
+      "seconds": 2.64,
+      "peak": 26265,
+      "rms": 4467,
+      "sha256": "e048bdea8b5ec405e5ebc060ff1c1ba13d29fbd607ec2278b0304fc94b137c27"
+    }
+  ]
+}

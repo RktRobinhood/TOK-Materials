@@ -1,0 +1,50 @@
+[
+  {
+    "id": "usainvolt-v398iq",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 15.04,
+    "end": 17.68,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "e048bdea8b5ec405e5ebc060ff1c1ba13d29fbd607ec2278b0304fc94b137c27"
+  },
+  {
+    "id": "usainvolt-11qmufi",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 17.68,
+    "end": 20.1,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "4cb892056360b46499b45dc5c4953b16e2bf8ff0b2c8f7e8bcd93559aa0b2770"
+  },
+  {
+    "id": "usainvolt-6p2yeb",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 20.1,
+    "end": 23.28,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "061e6f1ee3574ffda3504f720b9c979292d1cdf09bbb974e124a15276f2ed925"
+  },
+  {
+    "id": "usainvolt-mu3q35",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 23.28,
+    "end": 25.8,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "5a9ad28353e3708911933508661e53462b193d2fc136c281ee3f1a8f69406d07"
+  },
+  {
+    "id": "usainvolt-18c7cqr",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 25.8,
+    "end": 27.86,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "49a76aebfff99d41a571c8647632cfd871574cfe2e5bf42ddd62bbdc1c8c9aa1"
+  },
+  {
+    "id": "usainvolt-129m7jd",
+    "raw": "usainvolt-1onzain-9.wav",
+    "start": 27.86,
+    "end": 30.64,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "dbb69cf582650ceeaa9bd72ce48b286acc2988a81844169419015ba41e0555ca"
+  }
+]
