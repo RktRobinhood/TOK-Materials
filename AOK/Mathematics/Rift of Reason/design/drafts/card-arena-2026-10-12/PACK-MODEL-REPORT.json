@@ -1,7 +1,8 @@
 {
   "status": "design simulation, not production behaviour or classroom playtest",
+  "date": "2026-10-18",
   "runs": 1000,
-  "seedPattern": "pack-model-v2:0..999",
+  "seedPattern": "pack-model-v3:0..999; separate pack-foil-v3 stream",
   "poolIds": 192,
   "storyExcluded": 18,
   "baseline": {
@@ -18,10 +19,13 @@
     "mythic": 0.025,
     "legendary": 0.005
   },
-  "stageTransitions": "normal, normal, foil-upgrade, foil-upgrade, excluded",
-  "fullCompletionDraws": 768,
-  "fullFiveDrawPacks": 153,
-  "finalPartialSlots": 3,
+  "ownership": "four actual copies; legendary creatures one; each copy independently cosmetic foil",
+  "foilChance": 0.04,
+  "observedFoilRate": 0.039834666666666664,
+  "uniqueLegendaryCreatures": 6,
+  "fullCompletionDraws": 750,
+  "fullFiveDrawPacks": 150,
+  "finalPartialSlots": 0,
   "firstPackWithLegendary": {
     "count": 21,
     "rate": 0.021,
@@ -31,50 +35,54 @@
     ]
   },
   "firstLegendaryDraw": {
-    "p50": 140,
-    "p90": 400
+    "p50": 141,
+    "p90": 426
   },
-  "allIdsHaveTwoNormalEntitlementsByDraw": {
-    "p50": 763,
-    "p90": 766
+  "allIdsHavePlayableCopiesByDraw": {
+    "p50": 747,
+    "p90": 750
   },
   "drawQuarterRarityPercentages": [
     {
-      "common": 64.71,
-      "uncommon": 23.21,
-      "rare": 9.1,
-      "mythic": 2.46,
-      "legendary": 0.51
+      "common": 64.85,
+      "uncommon": 23.08,
+      "rare": 9.09,
+      "mythic": 2.5,
+      "legendary": 0.47
     },
     {
-      "common": 60.86,
-      "uncommon": 25.61,
-      "rare": 10.12,
-      "mythic": 2.84,
+      "common": 61.15,
+      "uncommon": 25.55,
+      "rare": 10.03,
+      "mythic": 2.82,
+      "legendary": 0.44
+    },
+    {
+      "common": 47.27,
+      "uncommon": 33.67,
+      "rare": 13.98,
+      "mythic": 4.5,
       "legendary": 0.58
     },
     {
-      "common": 47.47,
-      "uncommon": 33.51,
-      "rare": 13.65,
-      "mythic": 4.46,
-      "legendary": 0.91
-    },
-    {
-      "common": 14.46,
-      "uncommon": 38.5,
-      "rare": 19.22,
-      "mythic": 17.32,
-      "legendary": 10.5
+      "common": 15.7,
+      "uncommon": 42.52,
+      "rare": 20.94,
+      "mythic": 19.04,
+      "legendary": 1.8
     }
   ],
   "checks": [
     "192 pack IDs; 18 story IDs excluded",
-    "two normal copies then two foil upgrades",
-    "completed IDs excluded after every draw",
-    "insufficient funds leave stages unchanged",
+    "every reward adds an actual copy; no foil upgrades",
+    "legendary creatures have one owned copy",
+    "full folders excluded after every draw",
+    "insufficient funds leave ownership unchanged",
     "final partial price delivers only usable slots",
     "completed pool never charges",
-    "all 1000 complete reference runs preserve stage bounds"
+    "excess legacy copies preserved and excluded",
+    "release reopens one eligible slot",
+    "foil tuning cannot alter card selection",
+    "all 1000 complete reference runs preserve copy caps"
   ]
 }
