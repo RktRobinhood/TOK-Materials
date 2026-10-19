@@ -146,6 +146,27 @@ test('every trick in every bank is well-formed, solvable and rejects wrong answe
 
 const find = (rounds, key) => rounds.find(r => r.key === key);
 
+test('audited clues provide the assumptions and layout needed for their accepted answers', () => {
+    for (let seed = 0; seed < SEEDS; seed++) {
+        const bank = T.bank('quibblequill', seed);
+        const months = find(bank, 'shared:months');
+        assert.equal(months.scene.kind, 'note');
+        assert.match(months.scene.text, /12 months.*February.*28 or 29.*30 or 31/);
+        assert.equal(months.accept[0], months.sign.includes('30') ? '11' : '12');
+        const corners = find(bank, 'shared:corners');
+        if (corners.sign.includes('square')) {
+            assert.equal(corners.scene.kind, 'corner-cut');
+            assert.equal(Number(corners.accept[0]), 4 - 1 + 2);
+        }
+        assert.equal(find(bank, 'shared:secondLeft').layout, 'row');
+        const agreeing = find(bank, 'own:agreeing');
+        assert.deepEqual(J(agreeing.accept[0]).sort(), J(agreeing.scene.records.filter(r => r.stamped && r.arrived).map(r => r.id)).sort());
+        assert.match(agreeing.sign, /STAMPED.*ARRIVED/);
+        const odds = T.bank('oddsnap', seed);
+        ['own:streak', 'own:sameRolls', 'own:twoDice'].forEach(key => assert.match(find(odds, key).scene.text, /independent/i));
+    }
+});
+
 test('the creatures\' own tricks follow from their evidence', () => {
     for (let seed = 0; seed < SEEDS; seed++) {
         const m = T.bank('maskip', seed);

@@ -44,6 +44,9 @@ function evidence(s){
  if(s.kind==='log')return s.shapes.map(x=>x.icon+' '+x.count+(x.glow?' (glows)':'')).join(' · ');
  if(s.kind==='doors')return s.doors.map(d=>d.name+' '+d.pct+'%').join(' · ');
  if(s.kind==='shapeword')return 'Shows '+s.icon+' with the word '+s.word;
+ if(s.kind==='note')return s.text;
+ if(s.kind==='corner-cut')return 'Diagram: a square with a straight cut joining the top and left sides, away from the other corners.';
+ if(s.kind==='icons')return s.count+' '+s.icon+(s.gapped?' with gaps drawn between them':'');
  return s.kind;
 }
 function draw(){

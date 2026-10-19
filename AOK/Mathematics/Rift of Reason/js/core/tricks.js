@@ -146,10 +146,10 @@
         corners(rng) {
             const q = rng.pick([
                 { sign: 'How many corners does a circle have?', a: 0, why: 'A circle has no corners at all: 0.' },
-                { sign: 'A square has 4 corners. You cut off ONE corner with one straight cut. How many corners does the shape have now?', a: 5, why: 'The cut removes one corner but makes two new ones: 4 − 1 + 2 = 5.' },
+                { sign: 'A square has 4 corners. Cut off ONE corner as shown. How many corners does the shape have now?', a: 5, scene: { kind: 'corner-cut' }, why: 'The cut removes one corner but makes two new ones: 4 − 1 + 2 = 5.' },
                 { sign: 'How many corners do three circles have, all together?', a: 0, why: 'Circles have no corners. Three times zero is still 0.' },
             ]);
-            return { mode: 'number', sign: q.sign, options: [], accept: [String(q.a)], why: q.why };
+            return { mode: 'number', sign: q.sign, scene: q.scene, options: [], accept: [String(q.a)], why: q.why };
         },
         // See the shape, ignore the word.
         shapeNotWord(rng) {
@@ -187,7 +187,7 @@
                 { sign: 'How many months of the year have at least 28 days?', a: 12, why: 'Every month has at least 28 days, so all 12 do.' },
                 { sign: 'How many months of the year have at least 30 days?', a: 11, why: 'Every month except February has 30 days or more: 11 months.' },
             ]);
-            return { mode: 'number', sign: q.sign, options: [], accept: [String(q.a)], why: q.why };
+            return { mode: 'number', sign: q.sign, scene: { kind: 'note', text: 'A year has 12 months. February has 28 or 29 days. Every other month has 30 or 31 days.' }, options: [], accept: [String(q.a)], why: q.why };
         },
         // Zero is even.
         evens(rng) {
@@ -237,7 +237,7 @@
         secondLeft(rng) {
             const labels = rng.shuffle(['Second', 'First', 'Left', 'Right']);
             const options = labels.map((l, i) => opt(LETTERS[i], l, { size: 'l' }));
-            return { mode: 'tap', sign: 'Click the button that is SECOND from the LEFT.', options, accept: [options[1].id],
+            return { mode: 'tap', layout: 'row', sign: 'Click the button that is SECOND from the LEFT.', options, accept: [options[1].id],
                 why: 'Count from the left: the second button said "' + labels[1] + '". The words on the buttons were there to trick you.' };
         },
         // Last letter.
@@ -466,8 +466,8 @@
         },
         agreeing(rng) {
             const records = parcels(rng), agree = records.filter(r => r.stamped && r.arrived);
-            return { mode: 'multi', sign: 'Select EVERY record that AGREES with the claim. Then press Check.', scene: recScene(records, EVERY), options: recOptions(records), accept: [agree.map(r => r.id)],
-                why: 'Only stamped parcels that arrived agree with it. (And agreeing records still do not prove an "every" claim.)' };
+            return { mode: 'multi', sign: 'Select EVERY STAMPED parcel that has ARRIVED. Then press Check.', scene: recScene(records, EVERY), options: recOptions(records), accept: [agree.map(r => r.id)],
+                why: 'These stamped parcels have arrived. They are matching examples, but they still do not prove an "every" claim.' };
         },
         howMany(rng) {
             const records = parcels(rng);
@@ -512,13 +512,13 @@
         },
         streak(rng) {
             const n = rng.int(4, 7), side = rng.pick(['HEADS', 'TAILS']);
-            return { mode: 'pick', sign: 'A fair coin landed ' + side + ' ' + n + ' times in a row. What is the chance that the next flip is ' + side + '?',
+            return { mode: 'pick', sign: 'A fair coin landed ' + side + ' ' + n + ' times in a row. What is the chance that the next flip is ' + side + '?', scene: { kind: 'note', text: 'Each flip is independent: earlier results do not change the next flip.' },
                 options: rng.shuffle([opt('half', '50%'), opt('less', 'Less than 50%: it is due a change'), opt('more', 'More than 50%: it is on a streak')]), accept: ['half'],
                 why: 'A fair coin has no memory. Every flip is 50% heads and 50% tails, whatever came before.' };
         },
         sameRolls(rng) {
             const odd = rng.pick(['6, 6, 6, 6, 6, 6', '1, 1, 1, 1, 1, 1', '1, 2, 3, 4, 5, 6']);
-            return { mode: 'pick', sign: 'Roll a fair die six times. Which exact list of rolls is more likely?',
+            return { mode: 'pick', sign: 'Roll a fair die six times. Which exact list of rolls is more likely?', scene: { kind: 'note', text: 'Each roll is independent. Every face has the same chance on each roll.' },
                 options: rng.shuffle([opt('odd', odd), opt('mixed', '3, 5, 1, 6, 2, 4'), opt('same', 'They are exactly as likely')]), accept: ['same'],
                 why: 'Each exact list of six rolls has the same chance. A pattern only LOOKS special.' };
         },
@@ -579,7 +579,7 @@
     });
     Object.assign(ODDSNAP, {
         twoDice(rng) {
-            return { mode: 'pick', sign: 'Roll two fair dice and add them. Which total is MOST likely?',
+            return { mode: 'pick', sign: 'Roll two fair dice and add them. Which total is MOST likely?', scene: { kind: 'note', text: 'The dice are independent: one result does not change the other.' },
                 options: rng.shuffle([opt('2', '2'), opt('7', '7'), opt('12', '12'), opt('same', 'All totals are equally likely')]), accept: ['7'],
                 why: 'Six pairs make 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1). Only one pair makes 2, and only one makes 12.' };
         },
@@ -590,7 +590,7 @@
         },
         bag(rng) {
             const a = rng.int(3, 5), b = rng.int(1, 2);
-            return { mode: 'pick', sign: 'A bag holds ' + a + ' ▲ and ' + b + ' ■. You pick one without looking. Which is more likely?',
+            return { mode: 'pick', sign: 'A bag holds ' + a + ' ▲ and ' + b + ' ■. You pick one at random. Which is more likely?',
                 options: rng.shuffle([opt('tri', '▲ Triangle'), opt('sq', '■ Square'), opt('same', 'Equally likely')]), accept: ['tri'],
                 why: 'There are more triangles (' + a + ') than squares (' + b + '), so a triangle is more likely.' };
         },
