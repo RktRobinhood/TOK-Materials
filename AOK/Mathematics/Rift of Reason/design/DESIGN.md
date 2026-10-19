@@ -22,6 +22,10 @@ Draw choice, End turn, Spark, Bag items and hero powers are separate and spend n
 
 Both Granny lessons use this budget. The full lesson adds turn breaks after Counterexample/Underdog and Filter, with a four-round demonstration countdown. The short lesson retains its prediction and independent repair choices. See [verification and balance](reviews/activation-budget-100-2026-10-18.md). This supersedes older free-attack/card-play descriptions below and in the October 7 design.
 
+## Planned relative Flux contract — 19 October 2026 (#101)
+
+Stage 1 is defined in [the relative Flux contract and initial card matrix](drafts/flux-101-2026-10-19/CONTRACT.md). It specifies shared deltas before owner bonuses, finite bounds, Unlimited/finite repair, reset and no-change behavior, old-ID/ownership compatibility, and an initial construction policy. Sixteen planned common modifiers reuse four numeric categories; generated eligible contributions target seven modifier slots, two optional-category slots and an occasional Unlimited special. The linked seeded construction experiment measures that proposed policy only. Runtime modifiers, previews, migration, acquisition, AI and actual match-frequency/balance validation remain unimplemented; current gameplay still uses the absolute rules described above. #101 remains open.
+
 ## Purpose
 
 A browser game that is the **follow-up activity** for a 4-lesson IB TOK unit introducing Mathematics as an area of knowledge. The teacher teaches the concept; the game gives exposure to more ideas and cements them through replayable puzzles. Students are DP1 (16–17), mostly non-native English speakers at a Danish gymnasium, and love Pokémon.
