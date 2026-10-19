@@ -63,6 +63,12 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 - The avatar **walks between nodes with a real walk cycle** (≈6 side-view frames, mirrored for left).
 - A chapter jump updates the Journal and tracker to the new chapter's useful leads. Earlier open leads remain available in the Journal, labelled for later revisits.
 
+## Voice completion requirement — teacher, 19 October 2026
+
+The finished game must use recorded audio for every spoken line. Browser-generated speech is not an acceptable final fallback, including when an audio file is missing or playback fails; readable text must remain available. This covers tutorials, hints, replies, narration, creature speech, generated avatar-power explanations and conditional replacement hosts. Intentionally silent text does not need a recording.
+
+Completion requires a complete inventory of reachable speech, recordings and boundary/wording checks for that inventory, and removal of browser speech synthesis from runtime playback. Generated and customized wording must use covered variants or recorded composition. Track remaining gaps in [the voice handoff](drafts/card-arena-2026-10-12/VOICE-NEEDS.md), with early tutorials first. The current browser fallback is temporary production behavior, and existing catalog totals do not certify complete coverage.
+
 ## Avatars
 
 - **5 creature types × boy and girl = 10 avatars**: Owlet, Moth-kin, Fox kit, Frogling, Raven chick. Each type has a small starting perk (e.g. Owlet: one free hint per chapter; Fox: an extra catch-game move or trap heart on Language/Imagination creatures; Moth: lantern reveals one hidden clue; Frogling and Raven: TBD by the builder, same scale).

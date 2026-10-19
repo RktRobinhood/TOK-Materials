@@ -11,6 +11,8 @@ Dev-only scripts. Nothing in this folder is loaded by the game or needed to play
 
 ## Voices
 
+**Final completion requirement (teacher, 19 October 2026): no browser-generated speech anywhere in the finished game.** Every spoken line must resolve to approved recorded audio, including generated/customized explanations and replacement-host dialogue. Missing recordings and playback failures must never invoke speech synthesis in the finished runtime; readable text remains available. Current fallback behavior is temporary. Complete the [voice inventory and priority backlog](../design/drafts/card-arena-2026-10-12/VOICE-NEEDS.md), check every reachable spoken variant, then remove browser synthesis and verify that no playback path can call it. A complete current catalog alone is insufficient while discovery gaps remain.
+
 Card Arena expansion planning: [voice needs and release gates](../design/drafts/card-arena-2026-10-12/VOICE-NEEDS.md). This is a proposal list; the status/plan commands below continue to read authoritative runtime lines. Preserve existing recorded hashes/cast choices.
 
 

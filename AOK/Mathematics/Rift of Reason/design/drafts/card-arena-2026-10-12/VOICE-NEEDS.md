@@ -1,5 +1,11 @@
 # Card pipeline voice and sound handoff
 
+## Final acceptance — no browser-generated speech
+
+Teacher requirement, 19 October 2026: the finished game must use recorded audio for every spoken line. Early tutorials come first, and this requirement also includes all later dialogue, hints/replies, creature lines, generated or customized power descriptions and replacement-host variants. Deliberately silent text remains silent.
+
+Completion gates: inventory every reachable spoken variant, record and check the complete inventory, resolve withheld clips and discovery gaps, then remove browser speech synthesis from runtime playback and verify it cannot run even on missing-file or playback-error paths. Keep readable text when audio cannot play. The current browser fallback is temporary production behavior; neither a full existing catalog nor this backlog alone establishes completion.
+
 ## Tutorial recording priority — 19 October 2026
 
 Teacher priority: tutorials should use recorded voices, especially early in the game. Put these before remaining creature barks and story pickups. The [tutorial inventory](../../reviews/voice-recording-2026-10-19/tutorial-coverage.json) checks actual runtime speaker/text hashes against the shipping manifest and audio files.
