@@ -1,0 +1,22 @@
+{"id":"tribunal","count":36,"failures":[]}
+{"id":"tower","count":36,"failures":[]}
+{"id":"oracle","count":36,"failures":[]}
+{"id":"river-crossing","count":36,"failures":[]}
+{"id":"water-jugs","count":36,"failures":[]}
+{"id":"logic-grid","count":36,"failures":[]}
+{"id":"line-drawer","count":36,"failures":[]}
+{"id":"three-act","count":36,"failures":[]}
+{"oracle":"gauss","n":-1,"step4":{"claim":true,"fits":true,"ok":true,"env":{"n":-1,"i":1},"result":{"ok":true,"l":0,"r":0}}}
+{"oracle":"gauss","n":0.5,"step4":{"claim":true,"fits":true,"ok":false,"env":{"n":0.5,"i":1},"result":{"ok":false,"l":0,"r":0.75}}}
+{"oracle":"gauss","n":1,"step4":{"claim":true,"fits":true,"ok":true,"env":{"n":1,"i":1},"result":{"ok":true,"l":2,"r":2}}}
+{"oracle":"gauss","n":2.5,"step4":{"claim":true,"fits":true,"ok":false,"env":{"n":2.5,"i":1},"result":{"ok":false,"l":6,"r":8.75}}}
+{"oracle":"gauss","n":4,"step4":{"claim":true,"fits":true,"ok":true,"env":{"n":4,"i":1},"result":{"ok":true,"l":20,"r":20}}}
+{"oracle":"odd","j":-1,"title":"Proof that odd × odd is always odd","final":{"claim":true,"fits":true,"ok":true,"env":{"j":-1,"k":3,"p":-1,"q":7},"result":{"ok":true,"value":-7}}}
+{"oracle":"odd","j":0.5,"title":"Proof that odd × odd is always odd","final":{"claim":true,"fits":true,"ok":false,"env":{"j":0.5,"k":3,"p":2,"q":7},"result":{"ok":false,"value":14}}}
+{"oracle":"odd","j":1,"title":"Proof that odd × odd is always odd","final":{"claim":true,"fits":true,"ok":true,"env":{"j":1,"k":3,"p":3,"q":7},"result":{"ok":true,"value":21}}}
+{"oracle":"odd","j":2.5,"title":"Proof that odd × odd is always odd","final":{"claim":true,"fits":true,"ok":false,"env":{"j":2.5,"k":3,"p":6,"q":7},"result":{"ok":false,"value":42}}}
+{"oracle":"odd","j":4,"title":"Proof that odd × odd is always odd","final":{"claim":true,"fits":true,"ok":true,"env":{"j":4,"k":3,"p":9,"q":7},"result":{"ok":true,"value":63}}}
+{"towerCollapse":{"path":[{"question":"Did you see the Mayor's parade?","answer":"I missed the Mayor's parade","event":"caught"},{"question":"Have you met our Mayor?","answer":"I have never met the Mayor","event":"caught"}],"reason":"base","rubble":5}}
+{"independentBfs":"water-jugs","count":120,"failures":[]}
+{"independentBfs":"river-crossing","count":120,"failures":[]}
+{"psychicCoinNoWinners":0.04949544278314512}
