@@ -2,217 +2,246 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#161620">
-  <meta name="description" content="Global Day 2026 at Ikast-Brande Gymnasium: a cultural food fair designed by IB students for the STX community. One bite starts a conversation.">
-  <title>GLOBAL DAY ’26 — The World, On a Plate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111b29">
+  <meta name="description" content="Global Day 2026 | Ikast-Brande Gymnasium. A food fair, a cultural exchange, and a world of stories — made by IB students for the STX community.">
+  <title>GLOBAL DAY '26 | Bring Culture to the Table</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to presentation</a>
-  <div class="site-shell">
-    <header class="site-header">
-      <button class="brand" type="button" data-goto="0" aria-label="Go to opening slide">
-        <span class="brand-icon"><span class="brand-icon-inner"></span></span>
-        <span class="brand-copy"><strong>GLOBAL DAY</strong><small>IKAST-BRANDE GYMNASIUM / 2026</small></span>
-      </button>
-      <div class="header-center" aria-hidden="true"><span class="live-dot"></span> ONE SCHOOL. MANY CULTURES. ONE TABLE.</div>
-      <div class="header-actions">
-        <button class="header-menu" id="menuToggle" type="button" aria-expanded="false" aria-controls="sceneMenu"><span class="menu-bars"><i></i><i></i></span><span class="menu-label">CONTENTS</span></button>
-        <button class="fullscreen-button" id="fullscreenToggle" type="button" aria-label="Toggle fullscreen" title="Fullscreen presentation">⛶</button>
-      </div>
-    </header>
-
-    <nav id="sceneMenu" class="scene-menu" aria-label="Presentation chapters" aria-hidden="true">
-      <div class="scene-menu-inner">
-        <div class="menu-top"><span class="eyebrow">THE RUN OF SHOW</span><button type="button" class="close-menu" id="menuClose" aria-label="Close contents">✕</button></div>
-        <div class="menu-list">
-          <button data-goto="0"><b>01</b><span>The invitation</span></button>
-          <button data-goto="1"><b>02</b><span>Why we're doing it</span></button>
-          <button data-goto="2"><b>03</b><span>Elevate the everyday</span></button>
-          <button data-goto="3"><b>04</b><span>Watch & steal the thinking</span></button>
-          <button data-goto="4"><b>05</b><span>Choose your story</span></button>
-          <button data-goto="5"><b>06</b><span>Build the crew</span></button>
-          <button data-goto="6"><b>07</b><span>The 60-second film</span></button>
-          <button data-goto="7"><b>08</b><span>The non-negotiables</span></button>
-          <button data-goto="8"><b>09</b><span>Your timeline</span></button>
-          <button data-goto="9"><b>10</b><span>Team planning studio</span></button>
-          <button data-goto="10"><b>11</b><span>Make it memorable</span></button>
-        </div>
-        <p>ARROW KEYS TO PRESENT <span aria-hidden="true">↗</span> · ESC TO CLOSE</p>
-      </div>
-    </nav>
-
-    <main id="main" class="stage" aria-label="Global Day introduction">
-      <!-- 01 / HERO -->
-      <section class="scene scene-hero is-active" id="invitation" data-title="The invitation" aria-hidden="false">
-        <div class="hero-grain" aria-hidden="true"></div>
-        <div class="hero-topline"><span class="eyebrow light">YOUR INVITATION TO CREATE SOMETHING BIG</span><span class="tag outlined">1i × 2i × STX</span></div>
-        <div class="hero-layout">
-          <div class="hero-content">
-            <div class="hero-date"><span class="date-dot"></span> WED 02 DEC 2026 <span class="rule"></span> GLOBAL DAY</div>
-            <h1 class="hero-title"><span>THE</span><span>WORLD<span class="asterisk">✳</span></span><span class="on-a">ON A</span><span class="stroke-text">PLATE.</span></h1>
-            <p class="hero-sub">Not just a food fair. <strong>A cultural exchange you can taste.</strong></p>
-            <button class="primary-cta" type="button" data-goto="1"><span>TAKE THE CHALLENGE</span><b aria-hidden="true">↗</b></button>
-          </div>
-          <div class="hero-art" aria-hidden="true">
-            <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
-            <div class="hero-stamp stamp-top"><span>MADE WITH</span><strong>CURIOSITY</strong></div>
-            <img class="main-plate" src="assets/hero-plate.svg" alt="">
-            <div class="hero-stamp stamp-bottom"><strong>01 BITE</strong><span>ENDLESS STORIES</span></div>
-            <span class="orbit-label orbit-label-a">SHARE</span><span class="orbit-label orbit-label-b">TASTE</span><span class="orbit-label orbit-label-c">CONNECT</span>
-          </div>
-        </div>
-        <div class="hero-bottomline"><span>01 / THE BIG IDEA</span><span>COOK SOMETHING. MEAN SOMETHING. START SOMETHING.</span></div>
-      </section>
-
-      <!-- 02 / PURPOSE -->
-      <section class="scene scene-purpose" id="the-point" data-title="Why we're doing it" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow">01 — THE WHY</span><span class="chapter-status">MORE THAN A MEAL</span></div>
-        <div class="purpose-layout">
-          <div class="purpose-main"><span class="handwritten-note">The real assignment? ↗</span><h2 class="giant-title">FOOD IS AN<br><span class="underline-squiggle">OPEN</span> DOOR.</h2><p class="lead">You share a dish. Someone asks a question. A stranger becomes a conversation.</p></div>
-          <div class="purpose-graphic" aria-hidden="true">
-            <div class="purpose-ring purpose-ring-one"></div><div class="purpose-ring purpose-ring-two"></div>
-            <div class="purpose-core">YOU <span>↔</span> THE WORLD</div>
-            <span class="ring-note note-01">MEMORIES</span><span class="ring-note note-02">FLAVOUR</span><span class="ring-note note-03">IDENTITY</span><span class="ring-note note-04">CURIOSITY</span>
-          </div>
-        </div>
-        <div class="purpose-cards">
-          <div><span class="card-index">01</span><strong>REPRESENT</strong><small>Show a culture you know, value, or have learned to cook.</small></div>
-          <div><span class="card-index">02</span><strong>INVITE</strong><small>Welcome STX students into a conversation, not just a queue.</small></div>
-          <div><span class="card-index">03</span><strong>CONNECT</strong><small>Give someone a taste of something new—and a story to remember.</small></div>
-        </div>
-      </section>
-
-      <!-- 03 / ELEVATE -->
-      <section class="scene scene-elevate" id="the-challenge" data-title="Elevate the everyday" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow">02 — THE CREATIVE CHALLENGE</span><span class="chapter-status">THINK BIG. SPEND SMART.</span></div>
-        <div class="elevate-layout">
-          <div class="elevate-copy"><span class="capsule dark">A MASTERCLASS IN MAKING MORE WITH LESS</span><h2 class="heavy-title">HUMBLE<br>IN <em>→</em><br>BOLD OUT.</h2><p class="lead dark-lead">You don't need expensive ingredients. You need a good idea, real flavour and a little intention.</p>
-            <div class="budget-pill"><strong>150–200 <span>DKK</span></strong><small>WORKING BUDGET<br>TEACHER APPROVAL REQUIRED</small></div>
-          </div>
-          <div class="elevate-studio">
-            <div class="studio-label"><span>THE BITE LAB</span><span>↘ INTERACTIVE</span></div>
-            <div class="studio-plate"><img id="biteImage" src="assets/bite-before.svg" alt="Illustration of an everyday potato bite, simply plated"></div>
-            <div class="studio-footer"><div><b id="biteTitle">START WITH SOMETHING SIMPLE.</b><span id="biteDescription">A familiar ingredient. A genuine connection to the dish.</span></div><button id="elevateToggle" class="elevate-toggle" type="button" aria-pressed="false">ELEVATE THE BITE <span aria-hidden="true">↗</span></button></div>
-          </div>
-        </div>
-        <div class="elevate-bottom">SMALL PORTIONS <span>✳</span> STRONG FLAVOUR <span>✳</span> THOUGHTFUL PRESENTATION <span>✳</span> A STORY WORTH TELLING</div>
-      </section>
-
-      <!-- 04 / VIDEO -->
-      <section class="scene scene-video" id="inspiration" data-title="Watch & steal the thinking" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow light">03 — A LITTLE INSPIRATION</span><span class="chapter-status">WATCH DIFFERENTLY</span></div>
-        <div class="video-layout">
-          <div class="video-left"><span class="eyebrow light accent">EXPERIENCE > PRICE TAG</span><h2 class="heavy-title white">ONE<br>BITE.<br><span class="lime">BIG</span><br>REACTION.</h2><p class="lead">What happens when young people experience food that's been designed, not just cooked?</p><div class="reflection-card"><span>WHILE YOU WATCH</span><strong>What makes one small bite feel special?</strong><small>Is it the flavour, appearance, story, surprise—or all four?</small></div></div>
-          <div class="video-right"><div class="video-tabs" role="tablist" aria-label="Choose inspiration video"><button class="video-tab is-selected" id="jollyTab" type="button" data-video="jolly" aria-selected="true" role="tab">01 / TEENAGERS TRY MICHELIN</button><button class="video-tab" id="masterchefTab" type="button" data-video="masterchef" aria-selected="false" role="tab">02 / MASTERCHEF PLATING</button></div>
-            <div class="video-player" id="videoPlayer"><div class="video-preview" id="videoPreview"><img src="assets/video-fallback.svg" alt="Illustrated plate representing the video inspiration"><button id="videoPlay" type="button" class="play-video" aria-label="Play selected YouTube video"><span aria-hidden="true">▶</span></button><span class="video-offline-note">CLICK TO PLAY · INTERNET REQUIRED</span></div></div>
-            <div class="video-meta"><div><span class="video-source" id="videoSource">JOLLY / YOUTUBE</span><strong id="videoTitle">British Highschoolers try Michelin star food for the first time!</strong></div><a id="videoExternal" href="https://www.youtube.com/watch?v=wi7T7pJsnC0" target="_blank" rel="noopener noreferrer">OPEN ON YOUTUBE ↗</a></div>
-            <div class="video-smallprint">Use a short extract if lesson time is limited. These are inspiration, not the standard you're expected to replicate.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 05 / CULTURAL STORY -->
-      <section class="scene scene-story" id="the-story" data-title="Choose your story" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow">04 — THE CULTURAL CONNECTION</span><span class="chapter-status">GO DEEPER THAN A FLAG</span></div>
-        <div class="story-layout"><div class="story-left"><h2 class="giant-title">EVERY<br>DISH HAS<br>A <span class="color-ink">STORY.</span></h2><p class="lead dark-lead">Choose a country or cuisine you can represent responsibly. You don't have to be born there—but someone in your group should know the food well enough to lead.</p>
-          <div class="story-warning"><span aria-hidden="true">✳</span><p>Specific beats stereotypical. Tell us why <em>this</em> dish means something, not what an entire country is supposedly like.</p></div>
-        </div><div class="story-right"><span class="micro-label">PICK A LENS →</span><div class="lens-buttons" role="group" aria-label="Explore cultural storytelling angles"><button class="lens-button selected" type="button" data-lens="memory">01 / MEMORY</button><button class="lens-button" type="button" data-lens="history">02 / HISTORY</button><button class="lens-button" type="button" data-lens="celebration">03 / CELEBRATION</button><button class="lens-button" type="button" data-lens="innovation">04 / CHANGE</button></div><div class="lens-detail"><div class="lens-big-number" id="lensNumber">01</div><div><span id="lensKicker">THE FOOD YOU GREW UP WITH</span><h3 id="lensHeading">A taste of home.</h3><p id="lensCopy">Who makes it? When do you eat it? What memory, person or place lives inside this recipe?</p></div></div><div class="lens-small-note">A connection can come from family, experience, expertise or genuine curiosity—not an assigned nationality.</div></div></div>
-      </section>
-
-      <!-- 06 / CREW -->
-      <section class="scene scene-crew" id="the-crew" data-title="Build the crew" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow light">05 — BUILD YOUR CREW</span><span class="chapter-status">THIS TAKES A TEAM</span></div>
-        <div class="crew-heading"><div><h2 class="giant-title">ASSEMBLE<br>THE <span class="outlined-text">SQUAD.</span></h2></div><p>Not pairs. Build a crew big enough to cook, film, explain, organize and serve. The teacher signs off on the group before the budget is approved.</p></div>
-        <div class="role-grid">
-          <article class="role-card"><span>01 / CULTURE</span><div class="role-symbol">✳</div><h3>THE FOOD EXPERT</h3><p>Knows the cuisine and guides what is authentic, meaningful and achievable.</p></article>
-          <article class="role-card"><span>02 / KITCHEN</span><div class="role-symbol">↗</div><h3>THE MAKERS</h3><p>Recipes, practice, timing, safe preparation and enough tasting portions.</p></article>
-          <article class="role-card"><span>03 / MEDIA</span><div class="role-symbol">▶</div><h3>THE STORYTELLERS</h3><p>Script, shoot and edit the one-minute cultural food film.</p></article>
-          <article class="role-card"><span>04 / PEOPLE</span><div class="role-symbol">↔</div><h3>THE CONNECTORS</h3><p>Invite 2i English B students; make STX guests feel welcome at the fair.</p></article>
-          <article class="role-card"><span>05 / OPERATIONS</span><div class="role-symbol">＋</div><h3>THE ORGANIZERS</h3><p>Budget, shopping, receipts, setup, serving and keeping everything on track.</p></article>
-        </div>
-        <div class="crew-footnote"><strong>Suggested starting point: 4–6 people.</strong><span>Not a fixed rule. Roles may overlap; every responsibility needs an owner. Final groups require approval.</span></div>
-      </section>
-
-      <!-- 07 / FILM -->
-      <section class="scene scene-film" id="the-film" data-title="The 60-second film" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow">06 — THE MEDIA CHALLENGE</span><span class="chapter-status">THIS IS PART OF THE PROJECT</span></div>
-        <div class="film-layout"><div class="film-left"><span class="capsule dark">ONE TEAM / ONE FILM</span><h2 class="heavy-title">60<br><span class="film-seconds">SECONDS</span><span class="film-dot">.</span></h2><p class="lead dark-lead">Your video should introduce the dish, its cultural history, why you chose it, and what it reveals about the culture. Connect it to a virtue—wisdom, for example—if it fits.</p></div>
-          <div class="film-right"><div class="film-topline"><span>A POSSIBLE STORYBOARD</span><span>CLICK A BEAT</span></div><div class="film-timeline" role="tablist" aria-label="Video storyboard"><button type="button" class="film-beat selected" data-beat="0" role="tab" aria-selected="true" style="--weight:10"><span>00–10s</span><b>HOOK</b></button><button type="button" class="film-beat" data-beat="1" role="tab" aria-selected="false" style="--weight:15"><span>10–25s</span><b>ORIGIN</b></button><button type="button" class="film-beat" data-beat="2" role="tab" aria-selected="false" style="--weight:15"><span>25–40s</span><b>WHY</b></button><button type="button" class="film-beat" data-beat="3" role="tab" aria-selected="false" style="--weight:15"><span>40–55s</span><b>MEANING</b></button><button type="button" class="film-beat" data-beat="4" role="tab" aria-selected="false" style="--weight:5"><span>55–60s</span><b>INVITE</b></button></div>
-              <div class="film-detail"><span id="beatCounter">01 / THE OPENING TEN SECONDS</span><h3 id="beatTitle">Make us curious.</h3><p id="beatBody">Start with an image, sound, surprising detail or one strong line that makes someone want to taste your dish.</p><span class="film-timecode" id="beatTime">00:00 → 00:10</span></div>
-              <div class="film-footnote">The time breakdown is a creative suggestion; the one-minute film and its content are the actual requirement.</div>
-            </div>
-        </div>
-      </section>
-
-      <!-- 08 / REQUIREMENTS -->
-      <section class="scene scene-rules" id="the-rules" data-title="The non-negotiables" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow light">07 — THE REAL-WORLD BRIEF</span><span class="chapter-status">NO AMBIGUITY</span></div>
-        <h2 class="giant-title">THE <span class="lime">RULES.</span><span class="tiny-follow">KEEP THESE STRAIGHT.</span></h2>
-        <div class="rules-grid">
-          <div class="rule-card prominent"><span class="rule-number">01 / BUDGET</span><strong>150–200<span> DKK</span></strong><p>Working budget. Group and spending must receive teacher approval first.</p></div>
-          <div class="rule-card"><span class="rule-number">02 / GROUPS</span><strong>NO DUOS.</strong><p>Make groups large enough to handle the different jobs. Teacher sign-off is required.</p></div>
-          <div class="rule-card"><span class="rule-number">03 / RECEIPTS</span><strong>KEEP THEM.</strong><p>Hold on to all purchase receipts for reimbursement/accountability.</p></div>
-          <div class="rule-card"><span class="rule-number">04 / COOKING</span><strong>ON THE DAY.</strong><p>Plan your preparation and cooking for Global Day itself.</p></div>
-          <div class="rule-card"><span class="rule-number">05 / SERVICE</span><strong>MODULE 5.</strong><p>Bring food ready to share with STX students in the fifth module.</p></div>
-          <div class="rule-card"><span class="rule-number">06 / FILM</span><strong>1 MINUTE.</strong><p>Dish, history, why you chose it, cultural meaning, and a virtue if it fits.</p></div>
-        </div>
-        <div class="guest-banner"><span>THE GUESTS COME FIRST.</span><strong>Eat your own meal beforehand. Don't eat the food before the STX visitors arrive.</strong></div>
-      </section>
-
-      <!-- 09 / LOGISTICS -->
-      <section class="scene scene-logistics" id="timeline" data-title="Your timeline" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow">08 — FROM IDEA TO FOOD FAIR</span><span class="chapter-status">THE REAL TIMELINE</span></div>
-        <h2 class="giant-title">HERE'S THE<br><span class="logistics-accent">PLAYBOOK.</span></h2>
-        <div class="schedule-columns">
-          <div class="schedule-card"><div class="schedule-number">01</div><div class="schedule-details"><span class="schedule-period">NOW / CORE CLASS TIME</span><h3>Pitch it. Group up.</h3><p>Choose a country or cuisine and a meaningful dish. Build a sizeable crew. Map the jobs. Bring the proposal to your teacher for approval.</p></div></div>
-          <div class="schedule-card"><div class="schedule-number">02</div><div class="schedule-details"><span class="schedule-period">BEFORE 02 DECEMBER</span><h3>Connect & create.</h3><p>Reach out specifically to <b>2i English B students</b> and invite them into your groups. Plan cost, quantities, cooking, service and your 60-second film.</p></div></div>
-          <div class="schedule-card"><div class="schedule-number">03</div><div class="schedule-details"><span class="schedule-period">WEDNESDAY 02 DECEMBER</span><h3>Cook. Then host.</h3><p>Prepare and cook your dishes on Global Day. Bring them to the food fair for <b>module 5</b>. Welcome and talk with STX guests.</p></div></div>
-        </div>
-        <div class="schedule-lower"><div><span class="eyebrow">BONUS POINTS FOR THOUGHTFULNESS</span><p>Make each serving easy to sample. Consider food hygiene, ingredient/allergen information and a simple way to explain the dish.</p></div><div class="schedule-quote">“What are we eating—and why does it matter to you?”</div></div>
-      </section>
-
-      <!-- 10 / PLANNING STUDIO -->
-      <section class="scene scene-planner" id="planning-studio" data-title="Team planning studio" aria-hidden="true">
-        <div class="section-top"><span class="eyebrow light">09 — TURN THE IDEA INTO A REAL PLAN</span><span class="chapter-status">WORKSHOP MODE</span></div>
-        <div class="planner-intro"><div><h2 class="giant-title">YOUR TEAM.<br><span class="lime">YOUR MOVE.</span></h2><p>Make a first draft with your group, then show it to your teacher. This page saves only on your device; it does not submit anything.</p></div><div class="planner-status"><span>WORKING BRIEF</span><strong id="completionPercent">0%</strong><div class="meter"><i id="completionBar"></i></div><small>FIELDS COMPLETE · NOT TEACHER APPROVAL</small></div></div>
-        <form id="teamForm" class="planner-form" autocomplete="off">
-          <div class="form-grid">
-            <label><span>01 / COUNTRY OR CUISINE</span><input name="cuisine" placeholder="e.g. Czech / Italian / Baltic / ..." maxlength="140"></label>
-            <label><span>02 / THE DISH</span><input name="dish" placeholder="What are you serving?" maxlength="140"></label>
-            <label><span>03 / CUISINE KNOW-HOW</span><input name="expert" placeholder="Who can lead on this cuisine?" maxlength="140"></label>
-            <label><span>04 / ESTIMATED SPEND IN DKK</span><input name="budget" inputmode="decimal" type="number" min="0" max="9999" placeholder="150–200 is the working range"></label>
-            <label class="form-wide"><span>05 / THE GROUP + JOBS</span><textarea name="crew" rows="2" placeholder="Members, and who owns cooking, media, outreach, budget and service..."></textarea></label>
-            <label class="form-wide"><span>06 / WHY THIS DISH? WHAT'S THE CULTURAL STORY?</span><textarea name="meaning" rows="2" placeholder="What should visitors understand or ask about after tasting it?"></textarea></label>
-            <label><span>07 / RECRUITING 2i ENGLISH B</span><input name="outreach" placeholder="Who will contact them? What will you say?"></label>
-            <label><span>08 / ONE-MINUTE VIDEO</span><input name="video" placeholder="Who's scripting, filming and editing?"></label>
-            <label><span>09 / PREPARATION & SERVICE</span><input name="service" placeholder="When and where will you cook and serve?"></label>
-            <label><span>10 / CULTURAL VIRTUE (IF APPROPRIATE)</span><input name="virtue" placeholder="Wisdom? Hospitality? Another meaningful virtue?"></label>
-          </div>
-          <div class="form-actions"><div id="budgetFeedback" class="budget-feedback" aria-live="polite">Teacher approval is required before any spending.</div><div class="form-buttons"><button id="downloadBrief" class="form-button button-lime" type="button">DOWNLOAD TEAM BRIEF <span>↧</span></button><button id="printBrief" class="form-button button-outline" type="button">PRINT / SAVE AS PDF <span>↗</span></button><button id="resetBrief" class="form-button button-quiet" type="button">CLEAR</button></div></div>
-        </form>
-      </section>
-
-      <!-- 11 / FINAL -->
-      <section class="scene scene-end" id="your-invitation" data-title="Make it memorable" aria-hidden="true">
-        <div class="end-sun" aria-hidden="true"></div><div class="end-orbit" aria-hidden="true"></div>
-        <div class="section-top"><span class="eyebrow light">10 — ONE LAST THING</span><span class="chapter-status">MAKE SOMEONE CURIOUS</span></div>
-        <div class="end-content"><span class="end-pretitle">GLOBAL DAY / 02.12.26 / IKAST-BRANDE GYMNASIUM</span><h2>DON'T JUST<br>MAKE <span>FOOD.</span><br>MAKE A <em>CONNECTION.</em></h2><p>One good bite. One meaningful story. One conversation that wouldn't have happened otherwise.</p><div class="end-buttons"><button class="primary-cta dark-cta" type="button" data-goto="9">BUILD YOUR TEAM BRIEF <b>↗</b></button><button class="text-cta" type="button" data-goto="0">RESTART THE STORY ↺</button></div></div>
-        <div class="end-footer"><span>THE WORLD, ON A PLATE.</span><span>SEE YOU IN MODULE 5.</span></div>
-      </section>
-    </main>
-
-    <footer class="player-bar" aria-label="Presentation controls">
-      <div class="progress-track" aria-label="Presentation progress"><div id="progressFill" class="progress-fill"></div></div>
-      <div class="player-inner"><div class="player-position"><span id="slideCounter">01</span><span class="divider-slash">/</span><span>11</span><span class="current-scene-title" id="sceneTitle">THE INVITATION</span></div><div class="player-tip"><span class="keycap">←</span><span class="keycap">→</span> TO NAVIGATE <span class="tip-divider">•</span> <span class="keycap">F</span> FOR FULLSCREEN</div><div class="player-buttons"><button id="prevScene" aria-label="Previous slide" type="button">←</button><button id="nextScene" aria-label="Next slide" type="button">→</button></div></div>
-    </footer>
+<a class="skip-link" href="#main">Skip to presentation</a>
+<div class="site-shell">
+<header class="masthead">
+  <button class="brand" type="button" data-goto="0" aria-label="Return to opening slide">
+    <span class="brand-mark">G<span>★</span>D</span>
+    <span class="brand-text"><strong>GLOBAL DAY <em>2026</em></strong><small>IKAST-BRANDE GYMNASIUM · IB</small></span>
+  </button>
+  <div class="masthead-center">FOOD <b>•</b> CULTURE <b>•</b> CONVERSATION</div>
+  <div class="top-actions">
+    <button id="menuToggle" class="top-button contents-button" aria-controls="sceneMenu" aria-expanded="false" type="button"><span class="mini-lines" aria-hidden="true">☰</span> ALL SLIDES</button>
+    <button id="fullscreenToggle" class="top-button fullscreen-button" type="button" title="Fullscreen (F)" aria-label="Toggle fullscreen">⛶</button>
   </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</header>
+<nav id="sceneMenu" class="scene-menu" aria-label="Presentation chapters" aria-hidden="true" inert>
+  <div class="menu-shell">
+    <div class="menu-heading"><div><span class="kicker text-lime">THE WHOLE STORY</span><h2>JUMP TO A SLIDE.</h2></div><button type="button" id="menuClose" class="menu-close" aria-label="Close menu">×</button></div>
+    <div id="menuGrid" class="menu-grid">
+      <button data-goto="0"><span>01</span> The invitation</button>
+      <button data-goto="1"><span>02</span> Why food matters</button>
+      <button data-goto="2"><span>03</span> Rules · groups & money</button>
+      <button data-goto="3"><span>04</span> Rules · on the day</button>
+      <button data-goto="4"><span>05</span> Choosing a culture</button>
+      <button data-goto="5"><span>06</span> Who invites whom</button>
+      <button data-goto="6"><span>07</span> Build your team</button>
+      <button data-goto="7"><span>08</span> The 60-second video</button>
+      <button data-goto="8"><span>09</span> Elevate the bite</button>
+      <button data-goto="9"><span>10</span> Video inspiration</button>
+      <button data-goto="10"><span>11</span> Your timeline</button>
+      <button data-goto="11"><span>12</span> Team planning studio</button>
+      <button data-goto="12"><span>13</span> Your invitation</button>
+    </div>
+    <p class="menu-help">Use ← → keys, bottom arrows, or swipe on a phone. Press F for fullscreen. Every slide is also a direct link.</p>
+  </div>
+</nav>
+<main class="stage" id="main" aria-label="Global Day student launch presentation">
+
+<!-- 01: HERO -->
+<section class="scene hero-scene is-active" id="hello-world" data-title="The invitation" aria-hidden="false">
+  <div class="hero-grid" aria-hidden="true"></div><span class="hero-graphic-ring" aria-hidden="true"></span>
+  <div class="scene-label on-dark"><span>01 / THE INVITATION</span><span>DECEMBER 02 · 2026</span></div>
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <div class="eyebrow-banner"><span class="signal-dot"></span> THE GLOBAL DAY FOOD FAIR IS BACK</div>
+      <h1>BRING<br><span class="hero-fuchsia">CULTURE</span><br>TO THE<br><span class="hero-stroke">TABLE.</span></h1>
+      <p>One small bite. A whole world of stories. <strong>Let's make our food fair something worth talking about.</strong></p>
+      <button class="action-button action-yellow" type="button" data-goto="1">LET'S DO THIS <span aria-hidden="true">↗</span></button>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-image-wrap hero-image-a"><img src="assets/chef-at-work.webp" alt=""></div>
+      <div class="hero-image-wrap hero-image-b"><img src="assets/a-shared-bite.webp" alt=""></div>
+      <span class="hero-sticker one">TASTE<br><b>THE WORLD.</b></span>
+      <span class="hero-sticker two">1 BITE =<br><b>A CONVERSATION</b></span>
+      <div class="hero-dashes">╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱ ╱</div>
+    </div>
+  </div>
+  <div class="first-slide-guide" role="note"><span class="guide-pulse">↘</span><span><b>THIS IS A SLIDE PRESENTATION</b>Click the arrow at the bottom-right, or press → on your keyboard.</span></div>
+</section>
+
+<!-- 02: WHY -->
+<section class="scene scene-why" id="why-food" data-title="Why food matters" aria-hidden="true">
+  <div class="scene-label on-dark"><span>02 / THE BIG IDEA</span><span>ONE SCHOOL · MANY CULTURES</span></div>
+  <div class="why-layout">
+    <div class="why-art"><img src="assets/a-shared-bite.webp" alt="Illustration of young people sharing food and conversation"><div class="why-art-label">THE BEST PART IS THE CONVERSATION.</div></div>
+    <div class="why-copy">
+      <span class="micro-kicker">WHY THIS ACTUALLY MATTERS</span>
+      <h2 class="display-big">FOOD<br>IS AN <i>OPEN</i><br>DOOR<span class="dot-pink">.</span></h2>
+      <p class="big-lead">A dish can carry a memory, a tradition, a story—or a reason for two people who have never met to talk.</p>
+      <div class="why-values"><div><span>01</span><strong>SHARE A CULTURE</strong><p>Something authentic or meaningful to your group.</p></div><div><span>02</span><strong>INVITE CURIOSITY</strong><p>Give STX students an opportunity to try and ask.</p></div><div><span>03</span><strong>MAKE CONNECTIONS</strong><p>Build friendships across programmes and year groups.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03: RULES ONE -->
+<section class="scene scene-rules-a" id="rules-groups" data-title="Rules: groups & money" aria-hidden="true">
+  <div class="scene-label"><span>03 / ESSENTIAL RULES — PART 1 OF 2</span><span>PLEASE READ · NOT SUGGESTIONS</span></div>
+  <div class="rules-heading"><div><span class="kicker">THE ACTUAL BRIEF</span><h2 class="display-mid">THE <em>NON-</em><br>NEGOTIABLES.</h2></div><div class="rules-count">01—04<span>GROUPS & MONEY</span></div></div>
+  <div class="rules-board">
+    <div class="requirement orange-rule"><span class="req-num">01</span><div><h3>LARGE ENOUGH GROUPS</h3><p>Form cooking groups with enough people to cover the jobs. <strong>Groups of two are not allowed.</strong></p></div></div>
+    <div class="requirement"><span class="req-num">02</span><div><h3>TEACHER SIGN-OFF FIRST</h3><p>Your teacher must <strong>approve the group before its budget can be approved.</strong> Do not treat the plan as approved automatically.</p></div></div>
+    <div class="requirement blue-rule"><span class="req-num">03</span><div><h3>150–200 DKK BUDGET</h3><p>Plan a dish that fits a <strong>150–200 kroner group budget</strong>. Check with your teacher before spending.</p></div></div>
+    <div class="requirement"><span class="req-num">04</span><div><h3>KEEP ALL RECEIPTS</h3><p>Keep the receipts for everything you purchase. Assign someone to manage spending and documentation.</p></div></div>
+  </div>
+  <div class="rules-bottom-note"><b>REMEMBER</b> These are the school requirements. The creative suggestions later in the presentation are ideas—not extra rules.</div>
+</section>
+
+<!-- 04: RULES TWO -->
+<section class="scene scene-rules-b" id="rules-day" data-title="Rules: on the day" aria-hidden="true">
+  <div class="scene-label on-dark"><span>04 / ESSENTIAL RULES — PART 2 OF 2</span><span>WEDNESDAY 02 DECEMBER</span></div>
+  <div class="day-layout">
+    <div class="day-callout"><span class="kicker text-yellow">THE DAY WE'RE HOSTING</span><h2>COOK.<br>BRING.<br><span>SHARE.</span></h2><div class="module-flag"><span>FOOD FAIR</span><strong>MODULE <b>5</b></strong></div></div>
+    <div class="day-rules">
+      <article><span class="day-index">05 / COOKING</span><h3>PREPARE & COOK IT <em>ON GLOBAL DAY.</em></h3><p>Have the dish ready and bring it to the food fair during the fifth module.</p></article>
+      <article><span class="day-index">06 / YOUR GUESTS</span><h3>THE FOOD IS FOR <em>STX VISITORS.</em></h3><p>Eat your own meal beforehand. <strong>Do not eat the food before the STX students arrive.</strong> Make sure there is enough for visitors to taste.</p></article>
+      <article><span class="day-index">07 / CULTURAL MEDIA</span><h3>EVERY GROUP MAKES A <em>1-MINUTE VIDEO.</em></h3><p>Introduce the food, its cultural background and its significance. You'll get the complete video brief shortly.</p></article>
+    </div>
+  </div>
+  <div class="guests-banner">HOSTS FIRST. TASTERS SECOND. <span>LET THE GUESTS EXPERIENCE YOUR FOOD.</span></div>
+</section>
+
+<!-- 05: CULTURE -->
+<section class="scene scene-culture" id="choose-a-culture" data-title="Choosing a culture" aria-hidden="true">
+  <div class="scene-label on-dark"><span>05 / COUNTRY & CUISINE</span><span>CHOICE + KNOWLEDGE</span></div>
+  <div class="culture-layout">
+    <div class="culture-left"><span class="kicker text-yellow">A QUESTION EVERYONE ASKS</span><h2 class="display-big">DO I HAVE<br>TO PICK MY<br><em>OWN</em> COUNTRY?</h2><div class="huge-answer">NO<span>.</span></div><p>You choose which country or cuisine your group will represent. <strong>You do not have to be born there.</strong></p></div>
+    <div class="culture-right">
+      <img class="culture-globe" src="assets/culture-globe.svg" alt="Abstract illustration of a globe with colourful regions">
+      <div class="culture-principle"><span>THE IMPORTANT CONDITION</span><h3>KNOW THE FOOD.<br>RESPECT THE CULTURE.</h3><p>At least one group member must have <strong>solid knowledge of the cuisine</strong> and be able to lead on the dish, its preparation and its story.</p></div>
+      <div class="culture-stamp">CURIOSITY<br>WITH CARE ✳</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06: OUTREACH -->
+<section class="scene scene-outreach" id="outreach-map" data-title="Who invites whom" aria-hidden="true">
+  <div class="scene-label"><span>06 / JOINING FORCES</span><span>THE OUTREACH ASSIGNMENTS</span></div>
+  <div class="outreach-head"><div><span class="kicker">EVERY 1I TOK CLASS HAS ITS OWN INVITATION</span><h2 class="display-mid">WHO INVITES<br><em>WHOM?</em></h2></div><p>This is more than publicity. Once your groups form, <strong>reach out, invite students, and involve them in your groups.</strong></p></div>
+  <div class="outreach-board">
+    <div class="outreach-card mint-card"><div class="outreach-origin"><span>FROM</span><strong>1I TOK <b>1</b></strong></div><div class="outreach-arrow">→</div><div class="outreach-target"><span>INVITES & INVOLVES</span><strong>1J</strong><small>PRE-IB CLASS</small></div></div>
+    <div class="outreach-card orange-card"><div class="outreach-origin"><span>FROM</span><strong>1I TOK <b>2</b></strong></div><div class="outreach-arrow">→</div><div class="outreach-target"><span>INVITES & INVOLVES</span><strong>1K</strong><small>PRE-IB CLASS</small></div></div>
+    <div class="outreach-card violet-card"><div class="outreach-origin"><span>FROM</span><strong>1I TOK <b>3</b></strong></div><div class="outreach-arrow">→</div><div class="outreach-target"><span>INVITES & INVOLVES</span><strong>2I</strong><small>ENGLISH <b>A</b> CLASSES ONLY</small></div></div>
+    <div class="outreach-card pink-card"><div class="outreach-origin"><span>FROM</span><strong>1I TOK <b>4</b></strong></div><div class="outreach-arrow">→</div><div class="outreach-target"><span>INVITES & INVOLVES</span><strong>2I</strong><small>ENGLISH <b>B</b> CLASSES ONLY</small></div></div>
+  </div>
+  <p class="outreach-foot"><span>IMPORTANT DISTINCTION:</span> TOK 3 recruits from 2I English <b>A</b> · TOK 4 recruits from 2I English <b>B</b>. Do not mix the two assignments.</p>
+</section>
+
+<!-- 07: GROUP JOBS -->
+<section class="scene scene-roles" id="the-crew" data-title="Build your team" aria-hidden="true">
+  <div class="scene-label on-dark"><span>07 / WHY THE GROUP NEEDS TO BE BIGGER</span><span>MANY HANDS · ONE GOOD IDEA</span></div>
+  <div class="roles-heading"><div><span class="kicker text-yellow">THIS IS A SMALL PRODUCTION</span><h2 class="display-mid">BUILD<br><em>THE CREW.</em></h2></div><p>A food fair isn't just cooking. You'll also research, film, invite, budget, and host. Divide the work so everyone contributes.</p></div>
+  <div class="role-board">
+    <article><span class="role-id">TEAM 01</span><span class="role-symbol">✳</span><h3>FOOD</h3><p>Recipe, preparation, cooking, tasting portions.</p></article>
+    <article><span class="role-id">TEAM 02</span><span class="role-symbol">◎</span><h3>CULTURE</h3><p>Dish expertise, accurate history, cultural meaning.</p></article>
+    <article><span class="role-id">TEAM 03</span><span class="role-symbol">◉</span><h3>MEDIA</h3><p>Script, film, edit, and deliver the one-minute video.</p></article>
+    <article><span class="role-id">TEAM 04</span><span class="role-symbol">↗</span><h3>OUTREACH</h3><p>Invite and involve your class's assigned students.</p></article>
+    <article><span class="role-id">TEAM 05</span><span class="role-symbol">≋</span><h3>BUDGET</h3><p>Costs, shopping list, receipts, and approval.</p></article>
+    <article><span class="role-id">TEAM 06</span><span class="role-symbol">↔</span><h3>HOSTING</h3><p>Set up the table and talk with visitors.</p></article>
+  </div>
+  <p class="role-note">Suggested responsibilities, not fixed job titles. People can collaborate across roles. Your teacher approves group composition.</p>
+</section>
+
+<!-- 08: THE FILM -->
+<section class="scene scene-film" id="one-minute-film" data-title="The 60-second video" aria-hidden="true">
+  <div class="scene-label"><span>08 / A NEW REQUIREMENT</span><span>THE CULTURAL MEDIA BRIEF</span></div>
+  <div class="film-layout">
+    <div class="film-heading"><span class="film-count">01:00</span><h2 class="display-mid">TELL THE<br><em>STORY.</em></h2><p>Make a <strong>one-minute video</strong> presenting the dish and the culture behind it. This is part of the group assignment—not an optional extra.</p><div class="phone-frame"><div class="phone-lens"></div><div class="phone-art"><img src="assets/chef-closeup.webp" alt=""></div><div class="phone-controls"><span>● REC</span><b>00:60</b></div></div></div>
+    <div class="film-requirements">
+      <div class="film-item"><span>01</span><div><h3>WHAT IS THE DISH?</h3><p>Give it a name. Show the food.</p></div></div>
+      <div class="film-item"><span>02</span><div><h3>WHERE DOES IT COME FROM?</h3><p>Explain its cultural roots, background or history.</p></div></div>
+      <div class="film-item"><span>03</span><div><h3>WHY DID YOU CHOOSE IT?</h3><p>Tell us why this food matters to the group.</p></div></div>
+      <div class="film-item"><span>04</span><div><h3>WHAT DOES IT SAY ABOUT THE CULTURE?</h3><p>Connect the food to traditions, values or ways of life.</p></div></div>
+      <div class="film-item"><span>05</span><div><h3>CAN YOU CONNECT IT TO A VIRTUE?</h3><p>Explore a meaningful link—wisdom, for example—and explain it rather than just naming it.</p></div></div>
+      <div class="film-creative-note"><b>CREATIVE TIP</b> Film an ingredient, a person, a step in the recipe, or a finished bite. Clear, thoughtful storytelling beats expensive production.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09: DESIGN THINKING -->
+<section class="scene scene-bite" id="elevate-the-bite" data-title="Elevate the bite" aria-hidden="true">
+  <div class="scene-label on-dark"><span>09 / THE CREATIVE CHALLENGE</span><span>CHEAP DOES NOT MEAN ORDINARY</span></div>
+  <div class="bite-layout">
+    <div class="bite-copy"><span class="kicker text-yellow">THINK MASTERCHEF. SPEND SCHOOL-BUDGET.</span><h2 class="display-big">HUMBLE<br>START.<br><em>BOLD BITE.</em></h2><p>You don't need luxury ingredients. Take a meaningful dish and make the presentation intentional: <strong>one memorable mouthful.</strong></p><div class="bite-mantra">SMALL PORTIONS <span>✳</span> BIG PERSONALITY</div></div>
+    <div class="bite-composition"><div class="bite-circle"><img src="assets/plated-bite.svg" alt="Illustrated plated tasting portion with colourful garnishes"></div><div class="bite-graphic one">REAL<br>FLAVOUR</div><div class="bite-graphic two">BOLD<br>COLOUR</div><div class="bite-studio-label">NOT A REQUIREMENT TO BE FANCY. AN INVITATION TO BE CREATIVE.</div></div>
+  </div>
+  <div class="bite-method"><div><b>01 / CHOOSE WELL</b><p>Start with food your group knows how to make.</p></div><div><b>02 / CREATE CONTRAST</b><p>Play with crunch, colour, temperature or sauce.</p></div><div><b>03 / SERVE SMART</b><p>Make easy-to-handle tasting portions without wasting food.</p></div></div>
+</section>
+
+<!-- 10: EMBEDDED VIDEO -->
+<section class="scene scene-video" id="get-inspired" data-title="Video inspiration" aria-hidden="true">
+  <div class="scene-label on-dark"><span>10 / TAKE INSPIRATION, NOT THE PRICE TAG</span><span>CLICK TO WATCH</span></div>
+  <div class="video-layout">
+    <div class="video-copy"><span class="kicker text-yellow">THE INSPIRATION REEL</span><h2 class="display-mid">WATCH<br>WITH A<br><em>CHEF'S EYE.</em></h2><p>Look at the reactions, not the bill. What makes a small bite interesting? What role does presentation play?</p><div class="video-question">WHICH IDEA COULD YOU STEAL—AND REINVENT FOR 150–200 DKK?</div></div>
+    <div class="video-studio">
+      <div class="video-switch" role="tablist" aria-label="Choose inspiration video"><button type="button" class="video-tab is-selected" data-video="jolly" role="tab" aria-selected="true">01 · JOLLY / MICHELIN</button><button type="button" class="video-tab" data-video="masterchef" role="tab" aria-selected="false">02 · MASTERCHEF / PLATING</button></div>
+      <div class="video-box" id="videoPlayer"><div class="video-poster" id="videoPoster"><img id="videoPosterImage" src="assets/a-shared-bite.webp" alt="Stylized scene of young people enjoying and sharing food"><span class="video-poster-tint"></span><button type="button" id="videoPlay" class="big-play" aria-label="Play selected YouTube video">▶<small>PLAY VIDEO</small></button></div></div>
+      <div class="video-caption"><div><span id="videoSource">JOLLY · YOUTUBE</span><strong id="videoTitle">British Highschoolers try Michelin star food for the first time!</strong></div><a id="videoExternal" href="https://www.youtube.com/watch?v=wi7T7pJsnC0" target="_blank" rel="noopener noreferrer">OPEN ON YOUTUBE ↗</a></div>
+      <div class="video-playback-note"><span class="signal-dot"></span> Video playback automatically stops when you leave this slide. YouTube requires an internet connection.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11: WHEN -->
+<section class="scene scene-timeline" id="the-plan" data-title="Your timeline" aria-hidden="true">
+  <div class="scene-label"><span>11 / THE REAL-WORLD SCHEDULE</span><span>NOW → 02 DEC 2026</span></div>
+  <div class="timeline-intro"><span class="kicker">HOW THIS GETS DONE</span><h2 class="display-mid">FROM IDEA<br>TO <em>FAIR.</em></h2></div>
+  <div class="timeline-grid">
+    <article><span class="timeline-step">01 / IN TOK & CORE CLASS TIME</span><b class="timeline-number">NOW</b><h3>FORM. CHOOSE. APPROVE.</h3><p>Form your group, choose a culture and dish, plan responsibilities, and take the proposal to your teacher for sign-off.</p></article>
+    <article><span class="timeline-step">02 / BEFORE GLOBAL DAY</span><b class="timeline-number">PLAN</b><h3>INVITE. BUDGET. FILM.</h3><p>Contact your assigned students, build the group, check costs, keep receipt arrangements clear, plan the cooking and make your one-minute video.</p></article>
+    <article><span class="timeline-step">03 / WEDNESDAY 2 DEC</span><b class="timeline-number">COOK</b><h3>BRING. HOST. CONNECT.</h3><p>Prepare and cook the dish that day. Bring it to the fifth-module food fair. Eat beforehand; protect the guest portions.</p></article>
+  </div>
+  <div class="timeline-footer">THOUGHTFUL EXTRA: <span>Plan clean, practical serving; identify ingredients/allergens; and prepare a one-sentence introduction for visitors.</span></div>
+</section>
+
+<!-- 12: TEAM PLANNER -->
+<section class="scene scene-planner" id="team-studio" data-title="Team planning studio" aria-hidden="true">
+  <div class="scene-label on-dark"><span>12 / START GETTING ORGANISED</span><span>YOU CAN RETURN TO THIS PAGE LATER</span></div>
+  <div class="planner-head"><div><span class="kicker text-yellow">YOUR FIRST WORKING DRAFT</span><h2 class="display-mid">THE TEAM<br><em>BRIEF.</em></h2><p>Fill this in with your group and bring it to your teacher. <strong>Completing this form does not grant approval or send anything.</strong></p></div><div class="progress-widget"><span>PLAN COMPLETION</span><strong id="completionPercent">0%</strong><div class="meter"><i id="completionBar"></i></div><small>LOCAL DRAFT · NOT TEACHER APPROVAL</small></div></div>
+  <form id="teamForm" class="planner-form" autocomplete="off">
+    <div class="form-grid">
+      <label><span>01 / YOUR TOK CLASS</span><select name="tokClass" id="tokClass"><option value="">Select your TOK class</option><option value="1I TOK 1">1I TOK 1</option><option value="1I TOK 2">1I TOK 2</option><option value="1I TOK 3">1I TOK 3</option><option value="1I TOK 4">1I TOK 4</option></select></label>
+      <div class="target-notice"><span>YOUR CLASS MUST INVITE & INVOLVE</span><strong id="targetClass">SELECT YOUR TOK CLASS ↑</strong><small id="targetDetail">Each TOK class has its own assigned outreach group.</small></div>
+      <label><span>02 / CHOSEN COUNTRY OR CUISINE</span><input name="culture" maxlength="140" placeholder="Which cuisine are you representing?"></label>
+      <label><span>03 / THE DISH</span><input name="dish" maxlength="140" placeholder="What will your group serve?"></label>
+      <label><span>04 / CUISINE KNOW-HOW</span><input name="expert" maxlength="140" placeholder="Who knows this dish and can lead?"></label>
+      <label><span>05 / ESTIMATED SPEND (DKK)</span><input name="budget" type="number" inputmode="decimal" min="0" max="9999" placeholder="Budget working range: 150–200 DKK"></label>
+      <label class="wide"><span>06 / GROUP MEMBERS + ROLES</span><textarea name="members" rows="2" placeholder="Names and responsibilities: cooking, media, culture, outreach, budget, hosting..."></textarea></label>
+      <label class="wide"><span>07 / WHAT STORY WILL YOU TELL?</span><textarea name="story" rows="2" placeholder="Cultural history, why you chose it, and what the dish reveals about the culture..."></textarea></label>
+      <label><span>08 / INVITATION PLAN</span><input name="outreach" placeholder="Who will contact students, and how?"></label>
+      <label><span>09 / 1-MINUTE VIDEO</span><input name="video" placeholder="Who will research, script, film and edit?"></label>
+      <label><span>10 / DAY-OF COOKING & SERVICE</span><input name="service" placeholder="Who does what on 2 December?"></label>
+      <label><span>11 / A VIRTUE CONNECTION</span><input name="virtue" placeholder="Wisdom? Another meaningful connection?"></label>
+    </div>
+    <div class="planner-bottom"><p id="budgetFeedback" role="status">Group sign-off must happen before budget approval. Keep your receipts.</p><div class="planner-buttons"><button type="button" id="downloadBrief" class="form-button download-button">DOWNLOAD BRIEF ↓</button><button type="button" id="printBrief" class="form-button">PRINT / PDF ↗</button><button type="button" id="resetBrief" class="form-button form-reset">CLEAR</button></div></div>
+  </form>
+  <p class="privacy-note">Stored only on this browser (if browser storage is available). No online submission, teacher approval or shared database is connected.</p>
+</section>
+
+<!-- 13: CLOSE -->
+<section class="scene scene-close" id="lets-cook" data-title="Your invitation" aria-hidden="true">
+  <div class="scene-label on-dark"><span>13 / ONE LAST THING</span><span>DECEMBER 02 · MODULE 5</span></div>
+  <div class="close-layout"><div class="close-copy"><span class="kicker text-yellow">THIS IS BIGGER THAN A RECIPE</span><h2 class="display-big">DON'T<br>JUST MAKE<br><em>FOOD.</em><br>MAKE A<br><span>CONNECTION.</span></h2><p>Someone may never have tried your dish. Give them a reason to remember the people who made it.</p><div class="close-actions"><button class="action-button action-dark" type="button" data-goto="11">BUILD YOUR GROUP PLAN <span>↗</span></button><button class="text-button" type="button" data-goto="0">RESTART PRESENTATION ↺</button></div></div><div class="close-art"><img src="assets/a-shared-bite.webp" alt="Illustration of students smiling while sharing food"><span>ONE TABLE.<br>MORE STORIES.</span></div></div>
+</section>
+
+</main>
+<footer class="deck-footer" aria-label="Presentation controls">
+  <div class="deck-progress"><div id="progressFill"></div></div>
+  <div class="deck-footer-row"><div class="deck-position"><b id="slideCounter">01</b><span class="slash">/</span><span id="totalSlides">13</span><small id="sceneTitle">THE INVITATION</small></div><div class="deck-keyboard"><kbd>←</kbd> <kbd>→</kbd> NAVIGATE <span>·</span> <kbd>F</kbd> FULLSCREEN</div><div class="deck-controls"><button type="button" id="prevScene" aria-label="Previous slide">← <span>PREV</span></button><button type="button" id="nextScene" aria-label="Next slide" class="next-control"><span>NEXT</span> →</button></div></div>
+</footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
