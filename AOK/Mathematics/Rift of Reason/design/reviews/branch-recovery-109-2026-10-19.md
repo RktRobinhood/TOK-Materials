@@ -40,4 +40,10 @@ Branch dispositions:
 | `origin/review-evidence/rift-playtest-2026-10-10` | Its 15 historical evidence files were absent from main; integrate the real evidence tree. |
 | Remaining `rift/*` and `claude/keen-faraday-80a9a4` branches | Already ancestors of main; remove references after clean worktree cleanup. |
 
-The final consolidation receipt records main/remote state and branch removal after successful publication.
+## Final consolidation receipt
+
+- Recovered runtime: `71aa26c`; historical evidence merge: `986ff9c`; superseded-history reconciliation: `c4bf15d`. All pushed to `origin/main`.
+- The history-only merge's tree hash exactly matches the preceding evidence merge. Comparing `71aa26c` with `c4bf15d` changes only the 15 historical evidence files; no verified game/audio code was rolled back.
+- All **14 non-main local branches** were verified ancestors of main and deleted with ordinary `git branch -d`. The two remote branches were checked against their audited tips before deletion. Final local and remote inventory: **main only** (plus the normal symbolic `origin/HEAD`). Open PRs: **zero**.
+- Six detached recovery checkouts remain under the archive's `checkouts/`. Windows denied full deletion of the clean `wt-111s` directory after its worktree registration disappeared; a locked leftover directory may remain at its old path. It has no branch or pending implementation, and its original committed state is on main.
+- The teacher's requested two-hour continuation is ACTIVE and targets this chat. It was recreated after the previous automation had been deleted. No unrelated paused schedules were enabled.
