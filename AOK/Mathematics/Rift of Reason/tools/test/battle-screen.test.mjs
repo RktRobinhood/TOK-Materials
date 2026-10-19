@@ -40,6 +40,121 @@ const practice = {
     battleOptions: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [3, 3], deckSize: 8, minCreatures: 1 },
 };
 
+test('a keyboard draw focuses the new card; reading it pauses the opponent, blocks stale input and resumes once', () => {
+    const t = setup(practice);
+    const pile = t.$('.b-table-deck.deck');
+    pile.focus(); pile.dispatchEvent({ type: 'click', detail: 0 });
+    const cid = t.handle.state.players[0].hand.at(-1);
+    assert.equal(t.g.document.activeElement, t.$('.b-hand [data-cid="' + cid + '"]'));
+    const end = t.$('.b-end');
+    end.click();
+    const state = t.handle.state;
+    const visible = t.$('.my-board .bc') || t.$('.b-hand .bc');
+    visible.focus(); visible.dispatchEvent({ type: 'focus' });
+    const reader = t.$('.b-read-btn');
+    assert.match(reader.textContent, /Read /); reader.click();
+    assert.ok(t.$('.b-read-dialog').open);
+    assert.match(t.$('.b-read-body').textContent, /Active effects/);
+    t.g.flush(); assert.equal(t.handle.state, state, 'opponent timer is paused');
+    end.click(); assert.equal(t.handle.state, state, 'stale input does not mutate a reading battle');
+    t.$('.b-read-close').click(); assert.equal(t.$('.b-read-dialog'), null);
+    t.g.flush(); assert.equal(t.handle.state.active, 0, 'opponent completes exactly its one turn');
+    t.handle.destroy();
+});
+
+test('card reading survives selection repaint, opens by touch-style click and closes with the screen', () => {
+    const t = setup(practice);
+    t.$('.b-table-deck.deck').click();
+    const card = t.$('.b-hand .bc');
+    card.focus(); card.dispatchEvent({ type: 'click', detail: 1, pointerType: 'touch' });
+    const restored = t.g.document.activeElement;
+    assert.equal(restored.dataset.cid, card.dataset.cid, 'selection keeps semantic focus on the same hand card');
+    t.$('.b-read-btn').click();
+    assert.ok(t.$('.b-read-dialog'));
+    t.handle.destroy();
+    assert.equal(t.$('.b-read-dialog'), null); t.g.flush();
+});
+
+test('a native asynchronous close event from an old reader cannot close a newer reader', () => {
+    const closed = [];
+    const t = setup(practice, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            if (tag === 'dialog') node.close = () => { node.open = false; closed.push(() => node.dispatchEvent({ type: 'close' })); };
+            return node;
+        };
+    } });
+    t.$('.b-table-deck.deck').click();
+    t.$('.b-hand .bc').click(); t.$('.b-read-btn').click();
+    const old = t.$('.b-read-dialog'); t.$('.b-read-close').click();
+    t.$('.b-read-btn').click(); const current = t.$('.b-read-dialog');
+    assert.ok(current && current !== old);
+    closed.shift()();
+    assert.equal(t.$('.b-read-dialog'), current);
+    assert.equal(current.open, true);
+    current.dispatchEvent({ type: 'cancel', preventDefault() {} });
+    assert.equal(t.$('.b-read-dialog'), null);
+    t.handle.destroy();
+});
+
+test('draw flights use card backs without exposing opponent identities; calm motion fades; a new action cancels them', () => {
+    for (const calm of [false, true]) {
+        const motions = [];
+        const t = setup(practice, { calm, before(g) {
+            const create = g.document.createElement;
+            g.document.createElement = tag => {
+                const node = create(tag);
+                node.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100, right: 100, bottom: 100 });
+                node.animate = (frames, timing) => {
+                    const motion = { node, frames, timing, cancelled: false, cancel() { this.cancelled = true; if (this.oncancel) this.oncancel(); } };
+                    motions.push(motion); return motion;
+                };
+                return node;
+            };
+        } });
+        t.$('.b-table-deck.deck').click();
+        const flight = t.$('.b-draw-flight');
+        assert.equal(!!flight, !calm);
+        if (flight) { assert.ok(flight.classList.contains('b-back')); assert.equal(flight.dataset.cid, undefined); assert.equal(flight.getAttribute('aria-hidden'), 'true'); }
+        const old = motions.slice();
+        const card = t.$('.b-hand .bc'); card.click();
+        const play = t.$('.b-prompt .btn.primary');
+        if (play) play.click(); else t.$('.b-end').click();
+        assert.ok(old.every(m => m.cancelled));
+        assert.equal(t.$('.b-draw-flight'), null);
+        if (calm) assert.ok(old.every(m => !m.frames.some(f => f.transform || f.translate)), 'no movement in Calm motion');
+        t.handle.destroy();
+    }
+});
+
+test('opponent rule draws fly from the shared deck and retain a plain rule back', () => {
+    const motions = [];
+    const t = setup(practice, { before(g) {
+        g.Rift.Battle.AI.choose = s => {
+            const actions = g.Rift.Battle.Engine.legalActions(s);
+            return actions.find(a => a.type === 'draw' && a.choice === 'axiom') || actions.find(a => a.type === 'end') || actions[0];
+        };
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            node.getBoundingClientRect = () => {
+                const left = node.dataset.choice === 'axiom' ? 200 : node.dataset.choice === 'opponent' ? 700 : 400;
+                return { left, top: 0, width: 100, height: 100, right: left + 100, bottom: 100 };
+            };
+            node.animate = (frames, timing) => { const motion = { node, frames, timing, cancel() {} }; motions.push(motion); return motion; };
+            return node;
+        };
+    } });
+    t.$('.b-table-deck.deck').click(); t.$('.b-end').click(); t.g.flush();
+    const rules = motions.filter(m => m.node.classList.contains('b-draw-flight') && m.node.classList.contains('axiom'));
+    assert.equal(rules.length, 1);
+    assert.match(rules[0].frames[0].transform, /^translate\(-200px,/);
+    assert.equal(rules[0].node.dataset.axiom, undefined, 'no hidden rule ID on the flying back');
+    assert.equal(rules[0].node.dataset.cid, undefined);
+    t.handle.destroy();
+});
+
 test('battle results distinguish a win, a loss and a draw visually and audibly', () => {
     for (const [winner, outcome, heading, cue] of [[0, 'won', 'You won!', 'win'], [1, 'lost', 'You lost', 'lose'], ['draw', 'draw', 'A draw', null]]) {
         const sounds = [];

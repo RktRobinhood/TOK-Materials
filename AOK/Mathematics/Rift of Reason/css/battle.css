@@ -1204,3 +1204,14 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-fpast.expired { color: #c9b8e8; }
 .b-prompt .b-fate-move, .b-notes .b-fate-move { color: var(--rift); }
 .b-fate-sum .b-fate-sched { color: var(--rift); opacity: 0.95; }
+/* Recovered #109 prototype: optional draw flights and persistent card reading. */
+.b-draw-flight { position: absolute; margin: 0; pointer-events: none; }
+.b-reader { position: absolute; left: 8px; top: 2px; z-index: 30; max-width: 200px; }
+.b-reader[hidden] { display: none; }
+.b-reader .btn { font-size: 11px; padding: 4px 8px; white-space: normal; text-align: left; }
+.b-read-dialog { width: min(440px, 92vw); max-height: 86dvh; overflow-y: auto; padding: 18px; color: #edf1e3; background: #11252e; border: 2px solid #bdad79; border-radius: 16px; font: 15px/1.5 system-ui, sans-serif; }
+.b-read-dialog::backdrop { background: #061018b8; }
+.b-read-close { float: right; }
+.b-read-body { display: flex; flex-direction: column; align-items: center; gap: 10px; clear: both; padding-top: 6px; }
+.b-read-body .bc.big { --w: 170px; }
+.b-read-body .b-notes { margin: 0; }

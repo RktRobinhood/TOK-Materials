@@ -252,6 +252,7 @@
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
+            readKey: null, reading: null,
         };
         const actionStates = new WeakMap();
         const presentationTimers = new Set(), motions = new Set();
@@ -330,6 +331,7 @@
                 // Recent plays (newest at the top): a column of small pictures at the table's left edge;
                 // hover shows the card and what happened.
                 dom.recent = el('section.b-recent', { 'aria-label': 'Recent plays' }),
+                dom.reader = el('div.b-reader', { hidden: true }),
             ]),
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
             dom.side = el('aside.b-side', {}, [
@@ -359,11 +361,11 @@
             ['deck', 'axiom', 'opponent'].forEach(choice => {
                 const mine = choice !== 'opponent';
                 const node = el((mine ? 'button.b-draw-btn' : 'div') + '.b-table-deck.' + choice, {
-                    ...(mine ? { type: 'button', onclick() {
+                    ...(mine ? { type: 'button', onclick(ev) {
                         if (ui.tipSuppress) return;
                         // Resolve against current legality, including Granny's step and busy state.
                         const action = legal().find(a => a.type === 'draw' && a.choice === choice);
-                        if (action) { hideTip(); act(action); }
+                        if (action) { hideTip(); act(action, false, ev && ev.detail === 0); }
                         else showTip(node, true);
                     } } : { role: 'img' }),
                     dataset: { choice },
@@ -465,8 +467,8 @@
         }
 
         // ---- acting ----
-        function act(action, automated) {
-            if (ui.ended) return;
+        function act(action, automated, keyboardDraw) {
+            if (ui.ended || ui.reading) return;
             // Old DOM handlers may fire again after a render. Reject them before they
             // can cancel an AI timer, replay audio or touch selection in a newer state.
             if (!automated && (!myTurn() || actionStates.get(action) !== state)) return;
@@ -475,6 +477,8 @@
             clearPredict();   // before rects(): a defeat ghost copies the old card, badges and all
             const by = decider();
             const before = rects();
+            const previous = state;
+            const focusDrawn = action.type === 'draw' && by === ME && !!keyboardDraw;
             const guided = guide && by === ME && !ui.busy && step() && stepAccepts(step(), action);
             if (action.type === 'end' && by === ME) ui.snap = snapshot();
             if (by === ME && action.type !== 'draw') ui.recapTurn = null;   // the recap has been read
@@ -496,7 +500,7 @@
             if (guided) { ui.busy = true; ui.queue = E.winner(state) == null ? (step().replies || []).slice() : []; if (ui.queue.some(r => r.say)) stopVoice(); }
             noteEvents(state.lastEvents);
             render();
-            effects(state.lastEvents, before);
+            playVisuals(state.lastEvents, before, previous, focusDrawn);
             ruleReveal(state.lastEvents);
             if (waiting && state.players[ME].hand.includes(waiting)) setNote(name(waiting) + ' was not played. It is back in your hand: its Entrance needs a target first.');
             schedule();
@@ -608,7 +612,7 @@
 
         function schedule() {
             clearTimeout(ui.timer);
-            if (ui.ended || help || ui.confirm) return;
+            if (ui.ended || help || ui.confirm || ui.reading) return;
             // A card shown big (a reveal) is read first: everything waits until it fades.
             if (ui.holding || ui.saying) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
@@ -1115,6 +1119,10 @@
         const zoneOf = node => { const z = node && node.closest ? node.closest('[data-zone]') : null; return z ? z.dataset.zone : ''; };
         function hoverInspect(node, make, key) {
             if (key) inspectables[key] = { node, make };
+            // Keep a persistent reading control available after a tap, hover or keyboard focus.
+            if (state.cards[key] || /^ax:/.test(key || '')) ['pointerenter', 'focus', 'click'].forEach(type => {
+                node.addEventListener(type, () => { ui.readKey = key; renderReader(); });
+            });
             node.addEventListener('pointerenter', ev => {
                 if (ui.drag || (ev.pointerType && ev.pointerType !== 'mouse')) return;
                 // Pointing at a target with an attacker chosen shows the fight preview instead.
@@ -1545,6 +1553,7 @@
         // ---- rendering ----
         function render() {
             if (ui.ended && dom.overlay.classList.contains('show')) return;
+            const focused = focusKey(root.document.activeElement);
             Object.keys(nodes).forEach(k => delete nodes[k]);
             Object.keys(inspectables).forEach(k => delete inspectables[k]);
             hideInspect(true);
@@ -1733,6 +1742,8 @@
             restoreTip();
             turnBanner();
             placeAbilityTray();
+            renderReader();
+            restoreFocus(focused);
         }
 
         function abilityUnavailable(cid, info, L) {
@@ -3531,10 +3542,123 @@
             try { animate(n, [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
         }
 
+        // Recovered from the unfinished #109 prototype, using the shipped lifecycle rather than
+        // its competing timer/animation owner. Input never waits for these optional visuals.
+        function playVisuals(events, before, previous, focusDrawn) {
+            const drawn = [];
+            const axUsed = [0, 0].map(() => ({}));
+            events.forEach(ev => {
+                if (ev.t !== 'draw' && ev.t !== 'draw-axiom') return;
+                const P = state.players[ev.player];
+                let card;
+                if (ev.t === 'draw') {
+                    if (!P.hand.includes(ev.cid)) return;
+                    card = ev.player === ME ? nodes[ev.cid] : dom.oppHand.children[P.hand.indexOf(ev.cid)];
+                } else {
+                    const used = axUsed[ev.player][ev.id] || 0;
+                    axUsed[ev.player][ev.id] = used + 1;
+                    const prior = previous.players[ev.player].axHand.filter(id => id === ev.id).length;
+                    const indices = P.axHand.map((id, i) => id === ev.id ? i : -1).filter(i => i >= 0);
+                    const index = indices[prior + used];
+                    if (index == null) return;
+                    card = ev.player === ME ? dom.myHand.children[P.hand.length + index] : dom.oppHand.children[P.hand.length + index];
+                }
+                if (!card) return;
+                if (ev.player === ME) drawn.push(card);
+                flyDraw(card, ev.t === 'draw-axiom' ? 'axiom' : ev.player === OPP ? 'opponent' : 'deck', ev.t === 'draw-axiom', ev.player === ME);
+            });
+            effects(events, before);
+            if (focusDrawn) {
+                const card = drawn[0] || dom.myHand.querySelector('.bc') || screen.querySelector('.b-end');
+                if (card && card.focus) card.focus();
+            }
+        }
+        function flyDraw(card, pile, axiom, reveal) {
+            if (!card.animate || !card.getBoundingClientRect) return;
+            const duration = calmMotion() ? 120 : 300;
+            const source = tableDecks[pile] || (nodes.draw || {})[pile];
+            const a = source && source.getBoundingClientRect(), b = card.getBoundingClientRect(), box = dom.arena.getBoundingClientRect();
+            if (calmMotion() || !a || !b.width || !a.width) {
+                try { animate(card, [{ opacity: 0.35 }, { opacity: 1 }], { duration }); } catch (e) { /* no WAAPI */ }
+                return;
+            }
+            const ghost = cardBack(axiom);
+            ghost.classList.add('b-draw-flight');
+            ghost.setAttribute('aria-hidden', 'true');
+            Object.assign(ghost.style, { left: b.left - box.left + 'px', top: b.top - box.top + 'px', width: b.width + 'px', height: b.height + 'px' });
+            dom.floats.appendChild(ghost);
+            const dx = a.left + a.width / 2 - b.left - b.width / 2, dy = a.top + a.height / 2 - b.top - b.height / 2;
+            try {
+                animate(ghost, [{ transform: 'translate(' + dx + 'px,' + dy + 'px) scale(0.6)', opacity: 0.9 },
+                    { offset: 0.8, transform: 'translate(0,0) scale(1)', opacity: 1 },
+                    { transform: reveal ? 'scaleX(0)' : 'scale(1)', opacity: 0 }], { duration, easing: 'ease-out' });
+                animate(card, [{ opacity: 0 }, { opacity: 1 }], { duration: 70, delay: duration - 70, fill: 'backwards' });
+            } catch (e) { /* no WAAPI: the committed card is already in its hand */ }
+            presentationLater(() => ghost.remove(), duration);
+        }
+
+        function renderReader() {
+            const it = ui.readKey && inspectables[ui.readKey];
+            const label = it && readName(ui.readKey);
+            dom.reader.hidden = !label;
+            if (!label) return;
+            if (!dom.readBtn) {
+                dom.readBtn = el('button.btn.small.b-read-btn', { type: 'button', onclick: () => openRead(ui.readKey) });
+                dom.reader.appendChild(dom.readBtn);
+            }
+            dom.readBtn.textContent = 'Read ' + label;
+            dom.readBtn.setAttribute('aria-label', 'Read ' + label + ': full text and active effects');
+        }
+        function readName(key) {
+            return /^ax:/.test(key) ? ((Rift.data.axioms || {})[key.slice(3)] || {}).name : state.cards[key] ? name(key) : '';
+        }
+        function closeRead(resume) {
+            const dialog = ui.reading;
+            if (!dialog) return;
+            ui.reading = null;
+            if (dialog.close) dialog.close();
+            dialog.remove();
+            if (resume && !ui.ended) {
+                const it = inspectables[ui.readKey];
+                if (it && it.node.focus) it.node.focus();
+                schedule();
+            }
+        }
+        function openRead(key) {
+            const it = key && inspectables[key];
+            if (!it || ui.reading || ui.ended) return;
+            hideInspect(); hideTip(); clearTimeout(ui.timer);
+            const done = () => { if (ui.reading === dialog) closeRead(true); };
+            const close = el('button.btn.b-read-close', { type: 'button', text: 'Close', onclick: done });
+            const dialog = el('dialog.b-read-dialog', { 'aria-label': 'Read ' + readName(key) }, [close, el('div.b-read-body', {}, it.make())]);
+            ui.reading = dialog;
+            dialog.addEventListener('close', done);
+            dialog.addEventListener('cancel', ev => { ev.preventDefault(); done(); });
+            screen.appendChild(dialog);
+            if (dialog.showModal) { try { dialog.showModal(); } catch (e) { dialog.open = true; } } else dialog.open = true;
+            close.focus();
+        }
+        // Identify focus semantically before rendering replaces the board/hand controls.
+        function focusKey(node) {
+            if (!node || !node.dataset || !screen.contains(node) || (dom.question && dom.question.contains(node))) return null;
+            const zone = zoneOf(node);
+            const attrs = ['cid', 'axiom', 'ability', 'fateEvent', 'cat', 'tipKey'];
+            const attr = attrs.find(k => node.dataset[k] != null);
+            return attr ? { zone, attr, value: node.dataset[attr] } : null;
+        }
+        function restoreFocus(key) {
+            if (!key || (root.document.activeElement && screen.contains(root.document.activeElement))) return;
+            const scope = key.zone ? screen.querySelector('[data-zone="' + key.zone + '"]') : screen;
+            const node = scope && Array.from(scope.querySelectorAll('[data-' + key.attr.replace(/[A-Z]/g, x => '-' + x.toLowerCase()) + ']'))
+                .find(n => n.dataset[key.attr] === key.value);
+            if (node && node.focus) node.focus();
+        }
+
         // ---- the end ----
         function finish() {
             if (ui.ended) return;
             ui.ended = true;
+            closeRead(false);
             clearPresentation(); stopScreenTimers(); stopVoice();
             cancelDrag();
             hideTip();
@@ -3630,6 +3754,7 @@
         const handle = {
             destroy() {
                 ui.ended = true;
+                closeRead(false);
                 clearPresentation(); stopScreenTimers(); cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
                 if (root.removeEventListener) {
