@@ -320,6 +320,7 @@
                 row('⚖','Rule cards (axioms):','change a rule for BOTH players. Axioms shows the rules active now.'),
                 row('🃏','Empty decks:','used rule cards never come back. If your deck AND the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'),
                 row('⧗','Fate track:','one step per round (your turn and theirs). Events reach NOW and happen: a free new rule (shown in advance), or a reset. Some cards move Fate by rounds.'),
+                row('◎','Environmental events:','gold nodes show a scene event and who it affects. Read ahead! A leap past one skips it for good. Rewinding never brings it back; a repeat is a new event.'),
                 row('🎨','Colour wheel:','+1 attack against the colour you beat.'),
                 row('🎒','Bag:','use one item per turn for its energy. An item is used up only when you use it.'),
                 el('h3',{text:'Keywords'}),

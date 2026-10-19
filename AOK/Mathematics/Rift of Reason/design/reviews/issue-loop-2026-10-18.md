@@ -1,5 +1,13 @@
 # Repository issue loop — 18 October 2026
 
+## Manual continuation — 19 October 2026
+
+The teacher now requests manual sequential implementation, commits, pushes and issue closure, plus consolidation of all branches into main. The teacher said they will disable scheduled tasks; this run does not create or update a schedule. Historical ACTIVE statements below describe earlier runs, not a verified current schedule state.
+
+Completed #128 over `0dafabc`: all seven actual trainer encounters now have the audited public scene events, with explicit practice/lesson/ghost/trick-hunt exceptions and gentler lower-level boss cadence. Forecasts include healing and next-turn freezing; harmful events say which side they affect. A reviewed Clockwork/Curfew duration bug is fixed. **Full suite: 1,172 pass, one existing skip, zero failures (1,173 total)**; 140 paired pacing games include avatar/trainer powers. Browser keyboard, phone-width/Calm inspection and permanent skip/rewind checked. See `environmental-rollout-128-2026-10-19.md` and the JSON receipt. Scoped push/closure is recorded on the issue.
+
+Branch audit found mostly merged ancestors, a patch-equivalent #121 remote, superseded old voice and #120 attempts, a separate historical playtest-evidence branch, and uncommitted work in old worktrees. Preserve/reconcile those before removing branches. In particular old `D:/Claude/work/wt-109` contains unshipped draw presentation and card-reading work; do not discard it as if all dirty work were already shipped. Unrelated primary-checkout sync copies and unfinished Mending files remain untouched.
+
 The teacher authorizes autonomous triage and implementation of ready issues in RktRobinhood/TOK-Materials. Prefer one small relevant issue or independently reviewable slice at a time. Follow AGENTS.md, preserve unrelated shared-checkout changes, test and independently review each implementation, stage only its files, and push completed work to main. Keep partial epics open. Read current code and the latest GitHub comments before treating old issue bodies/checkpoints as unfinished work.
 
 ## Scheduled continuation

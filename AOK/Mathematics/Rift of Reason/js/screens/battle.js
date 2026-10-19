@@ -2016,7 +2016,7 @@
         const whoseEvent = (p, cap) => (p === ME ? (cap ? 'Your' : 'your') : p === OPP ? oppName + '\'s' : (cap ? 'The' : 'the'));
         const eventLabel = id => { const ev = E.fateSchedule(state).find(x => x.id === id); return ev ? (ev.env ? ev.source + '\'s ' + ev.name : whoseEvent(ev.controller) + ' ' + ev.name) : 'an event'; };
         // Who an environmental event (#128) helps, in words.
-        const helpsWords = ev => (ev.side === ME ? 'It helps you.' : ev.side === OPP ? 'It helps ' + oppName + '.' : 'It works the same for both players.');
+        const helpsWords = ev => (ev.side === ME ? 'It affects your side.' : ev.side === OPP ? 'It affects ' + oppName + '\'s side.' : 'It works the same for both players.');
         // A leap's skipped, jumped and landed events, in words (#120).
         function leapWords(h) {
             const list = ids => ids.map(eventLabel).join(', ');
@@ -2036,6 +2036,8 @@
             if (pre.defeated.length) parts.push(pre.defeated.length + ' creature' + (pre.defeated.length === 1 ? ' is' : 's are') + ' defeated: '
                 + pre.defeated.map(d => whose(d) + (d.dest === 'hand' ? ' (back to the hand)' : d.dest === 'gone' ? ' (a token: it leaves the game)' : '')).join(', '));
             if (pre.boosted.length) parts.push(pre.boosted.map(b => whose(b) + ' gets ' + signed2(b.attack) + '/' + signed2(b.health)).join(', '));
+            if (pre.healed && pre.healed.length) parts.push(pre.healed.map(b => whose(b) + ' heals ' + b.amount + ' damage').join(', '));
+            if (pre.frozen && pre.frozen.length) parts.push(pre.frozen.map(b => whose(b) + ' cannot attack or Activate on its next turn').join(', '));
             (pre.summoned || []).forEach(x => parts.push((/^[aeiou]/i.test(x.name) ? 'an ' : 'a ') + x.name + ' token joins ' + side(x.controller) + ' side'));
             (pre.returned || []).forEach(x => parts.push(x.name + ' returns to ' + side(x.player) + ' hand'));
             [ME, OPP].forEach(p => { const n = (pre.drawn || [])[p]; if (n) parts.push((p === ME ? 'you draw ' : oppName + ' draws ') + n + ' card' + (n === 1 ? '' : 's')); });

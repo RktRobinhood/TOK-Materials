@@ -507,7 +507,7 @@
         else {
             const onBoard = s.players[c.controller].board.includes(cid);
             sig = [c.controller, c.species, c.ability, c.gained.join(','), Eng.attackOf(s, cid), Eng.healthOf(s, cid).current,
-                Eng.healthOf(s, cid).max, Eng.keywordsOf(s, cid).join(','), onBoard ? 'b' : 'h', c.attacks, c.activated, c.frozen,
+                Eng.healthOf(s, cid).max, Eng.keywordsOf(s, cid).join(','), onBoard ? 'b' : 'h', c.attacks, c.activated, c.frozen, c.frozenUntil,
                 c.silenced, c.enteredTurn === s.turn, c.metaverseUsed, c.siuuu, c.prediction, c.colourless, c.cost].join('|');
         }
         cache.set(cid, sig);

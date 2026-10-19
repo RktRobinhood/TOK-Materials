@@ -194,7 +194,7 @@ test('the AI reads environmental events through the public schedule and finishes
     assert.deepEqual(plain(E.fullLog(AI.playOut(make(), ['competent', 'expert'])).map(e => e.text)), plain(E.fullLog(end).map(e => e.text)), 'deterministic');
 });
 
-test('encounter data: the Feed\'s Champion trends every 2 rounds at Expert and every 3 below; other battles have none', async () => {
+test('every map trainer has its audited scene event; lower boss levels have gentler pacing', async () => {
     const { loadRift } = await import('./harness.mjs');
     const { Node } = await import('./dom-adapter.mjs');
     const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/creatures.js', 'data/items.js', 'data/map.js', 'data/decks.js', 'data/starters.js',
@@ -207,7 +207,18 @@ test('encounter data: the Feed\'s Champion trends every 2 rounds at Expert and e
     R.Router = { go: (screen, params) => routes.push({ screen, params }), replace() {} };
     assert.deepEqual(plain(R.Battles.trainerSide('feed').fate), [{ def: 'trending', first: 2, every: 2, times: null, side: 1 }]);
     assert.deepEqual(plain(R.Battles.trainerSide('feed', 'competent').fate), [{ def: 'trending', first: 3, every: 3, times: null, side: 1 }]);
-    Object.keys(R.data.trainers).filter(id => id !== 'feed').forEach(id => assert.deepEqual(plain(R.Battles.trainerSide(id).fate), [], id + ' has no environmental events yet'));
+    const expected = { syllo: ['roll-call', 4, 4, null], baker: ['oven-timer', 3, 3, null], pip: ['late-paperwork', 4, 4, null],
+        'card-sharp': ['marked-deck', 3, 4, 1], constable: ['curfew', 2, 3, 0], fin: ['objection', 3, 3, 0], feed: ['trending', 2, 2, 1] };
+    assert.deepEqual(Object.keys(R.data.trainers).sort(), Object.keys(expected).sort(), 'no unaudited trainer');
+    Object.entries(expected).forEach(([id, want]) => {
+        const events = plain(R.Battles.trainerSide(id).fate);
+        assert.equal(events.length, 1, id);
+        const ev = events[0];
+        assert.deepEqual([ev.def, ev.first, ev.every, ev.side], want, id);
+        assert.ok(R.data.environments[ev.def].project, 'public AI projection for ' + id);
+    });
+    assert.deepEqual(plain(R.Battles.trainerSide('constable', 'normal').fate).map(e => [e.first, e.every]), [[3, 4]]);
+    assert.deepEqual(plain(R.Battles.trainerSide('fin', 'competent').fate).map(e => [e.first, e.every]), [[4, 4]]);
     // Every planned event exists.
     Object.values(R.data.trainers).forEach(t => (t.fate || []).forEach(x => assert.ok(R.data.environments[x.def], x.def)));
     // Syllo's practice match brings the gentle Drill Whistle, for both players.

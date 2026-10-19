@@ -743,7 +743,7 @@
             baseKeywords: kws,
             ability: injuries.includes('no-ability') ? null : (ch.ability || (inst.warped && inst.warped.ability) || sp.ability || null),
             gained: [], buffs: [], extraKeywords: [],
-            damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, silenced: false, shieldUsed: false,
+            damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, frozenUntil: null, silenced: false, shieldUsed: false,
             nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0, burned: false,
             legendary: sp.rarity === 'legendary', loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
             injured: injuries.slice(), warped: !!(ch.ability || (inst.warped && inst.warped.ability)),
@@ -919,6 +919,11 @@
             defeat: (cid, why, name) => defeat(G, cid, why, name),
             silence: cid => silence(G, cid),
             freeze(cid) { s.cards[cid].frozen = true; },
+            freezeNextTurn(cid) {
+                const c = s.cards[cid];
+                c.frozen = true;
+                c.frozenUntil = Math.max(c.frozenUntil || 0, nextTurnEnd(G, c.controller));
+            },
             bounce: cid => bounce(G, cid),
             fromDiscard(cid) { const P = s.players[s.cards[cid].owner]; if (removeFrom(P.discard, cid)) toHand(G, P === s.players[0] ? 0 : 1, cid); },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
@@ -1103,7 +1108,7 @@
         s.players[p].board.push(cid);
         c.controller = p;
         c.enteredTurn = s.turn;
-        c.attacks = 0; c.activated = false; c.frozen = false;
+        c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null;
         return true;
     }
     // The creature loses these keywords (printed, natural, taught, gained or from an ability) while it
@@ -1175,7 +1180,7 @@
 
     function resetCard(c) {
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
-        c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.silenced = false; c.shieldUsed = false;
+        c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
         if (c.timedKeywords) c.timedKeywords = null;
@@ -1319,7 +1324,10 @@
         // This turn's boosts end, and so do boosts that last until this turn ends (#121, untilTurn).
         const ends = b => b.temp || (b.untilTurn != null && b.untilTurn <= s.turn);
         Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(ends)) c.buffs = c.buffs.filter(b => !ends(b)); });
-        P.board.forEach(cid => { s.cards[cid].frozen = false; });
+        P.board.forEach(cid => {
+            const c = s.cards[cid];
+            if (c.frozenUntil == null || c.frozenUntil <= s.turn) { c.frozen = false; c.frozenUntil = null; }
+        });
         // A spell tax (#148) that was never paid ends with the turn it lasts until.
         s.players.forEach((Q, q) => { if (Q.spellTax && Q.spellTax.until <= s.turn) {
             emit(G, { t: 'tax-end', player: q, text: Q.spellTax.label + ' ends: ' + possessive(s, q) + ' spells cost the usual again.' }); Q.spellTax = null; } });
@@ -1728,11 +1736,14 @@
     }
     function previewOutcome(state, G) {
         const s = G.s;
-        const boosted = [];
+        const boosted = [], healed = [], frozen = [];
         [0, 1].forEach(p => s.players[p].board.forEach(cid => {
             if (!state.players[p].board.includes(cid)) return;
             const attack = attackOf(s, cid) - attackOf(state, cid), health = healthOf(s, cid).max - healthOf(state, cid).max;
             if (attack || health) boosted.push({ cid, name: logName(state, cid), controller: p, attack, health });
+            const restored = state.cards[cid].damage - s.cards[cid].damage;
+            if (restored > 0) healed.push({ cid, name: logName(state, cid), controller: p, amount: restored });
+            if (s.cards[cid].frozen && (!state.cards[cid].frozen || (s.cards[cid].frozenUntil || 0) > (state.cards[cid].frozenUntil || 0))) frozen.push({ cid, name: logName(state, cid), controller: p });
         }));
         const summoned = [], returned = [];
         [0, 1].forEach(p => {
@@ -1744,7 +1755,7 @@
             // A token made and defeated inside the preview is only in the copy (#121).
             defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : s.cards[e.cid] ? cardName(s, e.cid) : e.cid,
                 owner: e.player, controller: state.cards[e.cid] ? state.cards[e.cid].controller : e.player, dest: e.dest })),
-            boosted, summoned, returned, drawn, hearts: s.players.map(P => P.hearts), winner: s.winner,
+            boosted, healed, frozen, summoned, returned, drawn, hearts: s.players.map(P => P.hearts), winner: s.winner,
             events: G.events.map(e => (e.privateTo == null ? e : { t: e.t, player: e.player, turn: e.turn, round: e.round, text: e.publicText || '' })),
         };
     }

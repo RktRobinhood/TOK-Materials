@@ -61,7 +61,7 @@ test('an environmental node names its source, its effect, who it helps, when, an
         assert.match(label, /Dummy's creature with the most attack gets \+1 attack until the end of its next turn\./);
         assert.match(label, /If it happened now: Dummy's Lobstorian gets \+1\/0\./);
         assert.match(label, /One-shot: it happens once\. A leap past it skips it for good\./);
-        assert.match(label, /Part of this match: The Algorithm causes it\. It helps Dummy\. It comes back every 2 rounds, as a new event\./);
+        assert.match(label, /Part of this match: The Algorithm causes it\. It affects Dummy's side\. It comes back every 2 rounds, as a new event\./);
         assert.match(t.$('.b-fate-sched').textContent, /The Algorithm's Trending in 2 rounds/);
         // Keyboard inspection.
         node.focus();
@@ -105,4 +105,28 @@ test('Leap Ahead over an environmental occurrence: the prompt says so, and the n
     nextRound(t);
     assert.ok(!t.log('fate-event').some(e => e.id === 'f1'), 'it never happens');
     t.handle.destroy();
+});
+
+test('all rollout events have inspectable effect/target/recurrence and accurate healing/freeze forecasts in both motion modes', () => {
+    for (const calm of [false, true]) for (const def of ['roll-call', 'marked-deck', 'late-paperwork', 'oven-timer', 'curfew', 'objection']) {
+        const side = def === 'marked-deck' ? 1 : ['curfew', 'objection'].includes(def) ? 0 : null;
+        const t = mount({ calm, environment: [{ def, first: 1, every: 4, side }] });
+        const node = t.$('[data-fate-event="f1"]');
+        const label = node.getAttribute('aria-label');
+        assert.match(label, /Environmental:/); assert.match(label, /at the end of this round/);
+        assert.match(label, /It comes back every 4 rounds/);
+        assert.match(label, /A leap past it skips it for good/);
+        if (def === 'curfew') {
+            assert.match(label, /It affects your side/);
+            assert.match(label, /If it happened now: your .+ cannot attack or Activate/);
+            assert.doesNotMatch(label, /It helps/);
+        }
+        if (def === 'objection') assert.match(label, /gets -1\/0/);
+        node.focus(); node.dispatchEvent({ type: 'keydown', key: 'Enter', preventDefault() {} });
+        assert.match(t.$('.b-inspect').textContent, /Environmental:/);
+        nextRound(t);
+        assert.equal(t.log('fate-event').filter(e => e.id === 'f1').length, 1);
+        assert.ok(t.$('[data-fate-event="f2"]'));
+        t.handle.destroy();
+    }
 });
