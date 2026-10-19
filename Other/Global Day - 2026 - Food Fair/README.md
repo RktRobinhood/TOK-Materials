@@ -1,76 +1,84 @@
-# GLOBAL DAY 2026 — Bring Culture to the Table
+# GLOBAL DAY '26 | Ikast-Brande Gymnasium
 
-**Ikast-Brande Gymnasium · IB · 2 December 2026 · Module 5**
+**Wednesday, 2 December 2026 · Fifth module · Food fair for the STX community**
 
-A GitHub Pages-ready, 13-slide launch presentation and group-planning tool. This revision prioritizes unmistakable school rules, the correct class-by-class outreach targets, stronger artwork, and easy-to-understand presentation navigation.
+A 16-scene, projector-ready, student-facing GitHub Pages site for the school's Global Day food fair. The 1I TOK classes lead the event and invite other students to join their groups.
 
-## Publish or update the GitHub Pages site
+## Publish on GitHub Pages
 
-1. **Unzip** the download on your computer. Do not upload the ZIP directly to GitHub.
-2. Upload/replace `index.html`, `styles.css`, `script.js`, and the entire `assets/` folder in the **root of the repository**. Delete old site-only assets if you wish; the new site does not reference them.
-3. Commit to the branch your GitHub Pages site deploys from (usually `main`). Under **Settings → Pages**, choose **Deploy from a branch** and `/ (root)` if not configured already.
-4. After deployment, hard-refresh the site (Ctrl+Shift+R / Cmd+Shift+R) if the old CSS or JavaScript is cached.
+1. Extract the ZIP **before** uploading; do not upload the ZIP as a single file.
+2. Upload `index.html`, `styles.css`, `script.js`, and the entire `assets/` folder to the **root of the GitHub repository**. Replace files from an earlier version, including the whole `assets/` folder.
+3. On GitHub, choose **Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**.
+4. Once deployed, hard-refresh the browser if an earlier version is cached.
 
-No node/npm, build step, account, API key, or backend is needed. All illustrated assets are stored locally in the `assets/` folder. Fonts are requested from Google Fonts with system-font fallbacks. YouTube videos require internet access and may be subject to school filtering or embed restrictions.
+Nothing requires npm, a build step, JavaScript package installation, or API keys. Images, illustrations, the PDF worksheet, HTML, CSS, and JS are included locally. Google Fonts and embedded YouTube videos require internet; text and navigation work without them.
 
-## Present the website
+## Present in class
 
-- **NEXT / PREV** at the bottom always moves between slides; the first screen has an animated sign pointing to the navigation.
-- **← / →** or **Page Up / Page Down** navigates with the keyboard; **Space** advances when a form field or control is not active.
-- **F** requests browser fullscreen; `F11` is the browser fullscreen fallback.
-- **ALL SLIDES** opens a slide menu. `Esc` closes it. Direct slide links use the URL fragment, for example `#outreach-map`.
-- On a phone, swipe horizontally to change slides or use the bottom arrows; **scroll vertically** to see the remainder of longer slides and the team form.
-- Slides use CSS entrance and floating animations; they respect the browser’s **Reduce Motion** preference.
+- `→`, `←`, `Space`, bottom buttons: change slide.
+- `F`: fullscreen (where supported).
+- `ALL SLIDES`: jump to a specific scene; slide locations have shareable URL fragments, e.g. `#outreach-map`, `#pitch-your-group`.
+- On touch devices, swipe horizontally or use arrows. Longer mobile slides scroll vertically.
+- Videos are **click to play**, never autoplay merely because a slide is shown. Leaving their slide, changing video tabs, closing the tab or opening the slide menu removes the YouTube iframe and stops playback.
 
-**YouTube audio stops automatically** when you navigate to another slide, change video tabs, open the slide menu, or leave the browser tab. The player iframe is unloaded and removed, not merely hidden. Videos load only after the viewer clicks PLAY. If an embed is blocked, use **OPEN ON YOUTUBE**.
+## Important school information included
 
-## Slide outline
+- Event: **Wednesday, 2 December 2026**, food fair in **module 5**.
+- School budget: **150–200 DKK per group**; receipts must be kept. Teacher must approve the group before the budget is approved. Teams of two are prohibited; larger groups cover the different responsibilities.
+- Groups choose a cuisine/country **regardless of birthplace**; at least one member must have sound knowledge of it and help lead the cuisine.
+- Dish is prepared and cooked **on Global Day** and brought to the fair in module 5. Students should have eaten beforehand and **must reserve the food for STX visitors**, rather than consume it beforehand.
+- Every group makes a **60-second cultural video** introducing its dish, roots, choice, cultural significance and a meaningful possible IB virtue link (wisdom is one possibility).
+- This year's **1I groups lead the decision-making**, while inviting students from assigned classes as real collaborators rather than spectators.
 
-1. **The invitation** — sell the Global Day food fair as cultural exchange.
-2. **Why food matters** — welcome, curiosity, dialogue across programmes.
-3. **Rules: groups and money** — no groups of two; teacher sign-off before budget; 150–200 DKK per group; all receipts.
-4. **Rules: on the day** — cook on 2 December; fifth-module food fair; hosts must eat beforehand and reserve food for STX; one-minute film.
-5. **Choosing a culture** — students may choose any culture/cuisine, not necessarily their birth country; group requires someone who knows that cuisine to lead.
-6. **Who invites whom** — all four TOK assignments, explicitly distinguishing 2I English A from English B.
-7. **Build the crew** — suggested responsibilities: food, culture, media, outreach, budget, hosting.
-8. **The 60-second video** — dish, history, why chosen, cultural meaning, meaningful virtue connection (e.g., wisdom).
-9. **Elevate the bite** — creatively plate humble food without losing authenticity or exceeding the budget.
-10. **Video inspiration** — JOLLY Michelin-star experience and MasterChef plating clip.
-11. **Timeline** — group formation, partner outreach, day-of cooking and hosting.
-12. **Team planning studio** — locally editable worksheet with class-aware outreach instructions; download as text or print/save as PDF.
-13. **Your invitation** — end with the cultural exchange message.
+| Host group | Students to invite/involve |
+|---|---|
+| 1I TOK 1 | 1J (pre-IB) |
+| 1I TOK 2 | 1K (pre-IB) |
+| 1I TOK 3 | 2I English **A only** |
+| 1I TOK 4 | 2I English **B only** |
 
-## Required outreach matrix
+## The one-page PDF proposal
 
-| TOK class | Students they invite and involve |
-| --- | --- |
-| **1I TOK 1** | **1J**, pre-IB |
-| **1I TOK 2** | **1K**, pre-IB |
-| **1I TOK 3** | **2I English A classes only** |
-| **1I TOK 4** | **2I English B classes only** |
+The old in-page group-planning form was removed. Instead, the pitch slide links to **`assets/Global_Day_2026_Fillable_Group_Pitch.pdf`**, a single-page A4 AcroForm PDF that can be downloaded or opened for completion.
 
-The *planning studio* includes a TOK class dropdown that automatically fills in the correct outreach target. The downloaded proposal repeats that class target and includes the actual school requirements in an approval checklist.
+The PDF has **12 editable text fields** for group composition, cuisine, dish, cultural story, invited classmates, video concept, AI-art/keyframe research, editing route, budget, and service plan; plus a teacher sign-off line. It includes the Wednesday 2 December date. **Downloading/opening the PDF does not submit anything or approve the group.** Students must save/send/hand it to the teacher. Browser PDF viewers vary; for reliable saving use Adobe Acrobat Reader or another capable PDF form viewer. Printing and writing by hand is an alternative.
 
-## Important distinctions for colleagues
+## Media teaching notes
 
-- **Actual school requirements:** 150–200 DKK working group budget; teacher must approve the group before the budget is approved; receipts required; no groups of two; meaningful cultural expertise within the chosen group; students choose the country/cuisine regardless of birthplace; prepare/cook on Global Day; bring the food in module 5; save the food for STX visitors; one-minute cultural video; invite and involve the TOK class’s assigned students.
-- **Creative guidance, not extra policy:** small elegant tasting portions, food presentation tips, example job titles, preplanned allergen information and script suggestions.
-- **Team form is a draft, not an approval:** the data is saved only in the visitor's local browser storage. This site does **not** collect responses, email the teacher, authorize purchases, or offer an online teacher-signature system. Students need to download/print and bring the plan to the teacher.
+Students are explicitly told to **investigate AI art and where it is genuinely free**. They may ultimately choose a traditional filmed-and-edited video, a hybrid, or an AI-supported sequence. They are introduced to storyboards, keyframes, five-second test clips, and the need to evaluate cost, cultural fidelity and consent before uploading classmates' images.
 
-## YouTube content
+Resource links use original official websites:
 
-The two YouTube videos are linked/embedded directly from their creators; **no video footage is included in the ZIP**:
+- ArtCraft free open-source **Crafting Apps**: https://getartcraft.com/apps (these are early-stage/experimental, notably FilmCraft). The separate AI studio/generation side may cost credits.
+- DaVinci Resolve free desktop video editor: https://www.blackmagicdesign.com/products/davinciresolve
+- ComfyUI official documentation: https://docs.comfy.org
+- Blender: https://www.blender.org
 
-- [JOLLY — British Highschoolers try Michelin star food for the first time!](https://www.youtube.com/watch?v=wi7T7pJsnC0)
-- [MasterChef World — Perfecting Plating | MasterChef Canada](https://www.youtube.com/watch?v=YGxRv5MELgo)
+Video tabs:
 
-When using these in class, showing a short excerpt and discussing *what makes a bite memorable* is generally more practical than screening the whole videos.
+1. JOLLY – British students try Michelin-star food: https://www.youtube.com/watch?v=wi7T7pJsnC0
+2. MasterChef World – plating inspiration: https://www.youtube.com/watch?v=YGxRv5MELgo
+3. Teacher-supplied **AI-video workflow/tutorial** (description intentionally generic; we did not independently confirm the video's title): https://www.youtube.com/watch?v=2MzCkYrvDaI
 
-## Files
+Some school networks or YouTube creator settings can block embedded playback. Each video tab provides **OPEN ON YOUTUBE** as a fallback.
 
-- `index.html` — HTML presentation and planner.
-- `styles.css` — responsive visual system, animations, accessibility and print layout.
-- `script.js` — presentation navigation, video player lifecycle, TOK mapping, working brief and export.
-- `assets/` — locally bundled generated artwork and custom SVG illustrations, including the site icon.
+## Directory
 
-Suggested first class: present slides 1–11 (pausing briefly for a video excerpt), then go to slide 12 to organise teams. Return to the site in later classes to continue planning.
+```
+index.html
+styles.css
+script.js
+README.md
+assets/
+  favicon.svg
+  culture-globe.svg
+  plated-bite.svg
+  chef-closeup.webp
+  chef-at-work.webp
+  a-shared-bite.webp
+  cultural-landscape.webp
+  pitch-preview.webp
+  Global_Day_2026_Fillable_Group_Pitch.pdf
+```
+
+No tracking, analytics, backend form submission, or browser storage of students' answers is used.

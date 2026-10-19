@@ -24,6 +24,13 @@
       title: 'Perfecting Plating | MasterChef Canada | MasterChef World',
       poster: 'assets/chef-at-work.webp',
       posterAlt: 'Stylized illustration of a chef carefully finishing a dish'
+    },
+    aivideo: {
+      id: '2MzCkYrvDaI',
+      source: 'TEACHER-SHARED VIDEO · YOUTUBE',
+      title: 'Exploring AI video production — teacher-recommended tutorial',
+      poster: 'assets/cultural-landscape.webp',
+      posterAlt: 'Creative illustration used to introduce the AI video research tutorial'
     }
   };
   let selectedVideo = 'jolly';
@@ -177,99 +184,12 @@
     if (Math.abs(dx) > 85 && Math.abs(dx) > Math.abs(dy) * 1.8) goTo(current + (dx < 0 ? 1 : -1));
   }, { passive: true });
 
-  // Each class sees exactly its assigned outreach target in the reusable planner.
-  const targets = {
-    '1I TOK 1': { short: '1J · PRE-IB', detail: 'Invite and involve students from the 1J pre-IB class.' },
-    '1I TOK 2': { short: '1K · PRE-IB', detail: 'Invite and involve students from the 1K pre-IB class.' },
-    '1I TOK 3': { short: '2I · ENGLISH A ONLY', detail: 'Invite and involve 2I English A classes only—not English B.' },
-    '1I TOK 4': { short: '2I · ENGLISH B ONLY', detail: 'Invite and involve 2I English B classes only—not English A.' }
-  };
-  const form = $('#teamForm');
-  const inputs = [...form.querySelectorAll('input,textarea,select')];
-  const formKey = 'global-day-2026-ibg-v2-team-brief';
-  const completionFields = ['tokClass','culture','dish','expert','budget','members','story','outreach','video','service','virtue'];
-  try {
-    const saved = JSON.parse(localStorage.getItem(formKey) || '{}');
-    inputs.forEach(input => {
-      if (typeof saved[input.name] === 'string') input.value = saved[input.name];
-    });
-  } catch (error) { /* May fail in locked-down browsers. Site still works. */ }
-  function formValues() { return Object.fromEntries(inputs.map(input => [input.name, input.value.trim()])); }
-  function updateForm() {
-    const data = formValues();
-    const target = targets[data.tokClass];
-    $('#targetClass').textContent = target?.short || 'SELECT YOUR TOK CLASS ↑';
-    $('#targetDetail').textContent = target?.detail || 'Each TOK class has its own assigned outreach group.';
-    const completed = completionFields.filter(name => Boolean(data[name])).length;
-    const progress = Math.round(100 * completed / completionFields.length);
-    $('#completionPercent').textContent = `${progress}%`;
-    $('#completionBar').style.width = `${progress}%`;
-    const msg = $('#budgetFeedback');
-    msg.className = '';
-    const budget = Number(data.budget);
-    if (!data.budget) msg.textContent = 'Teacher must sign off on your group before budget approval. Keep receipts.';
-    else if (budget > 200) { msg.classList.add('warning'); msg.textContent = 'Above the 150–200 DKK range. Revise your plan or speak to your teacher. Approval is still required.'; }
-    else if (budget < 150) { msg.textContent = 'Below the 150–200 DKK working budget. Confirm the allocation and group plan with your teacher.'; }
-    else { msg.classList.add('good'); msg.textContent = 'Within the working budget range. Teacher sign-off is still required BEFORE budget approval.'; }
-    try { localStorage.setItem(formKey, JSON.stringify(data)); } catch (error) {}
-  }
-  inputs.forEach(input => input.addEventListener('input', updateForm));
-  inputs.forEach(input => input.addEventListener('change', updateForm));
-  updateForm();
+  // The media lab opens the teacher-shared tutorial directly in the video theatre.
+  $$('[data-show-video]').forEach(button => button.addEventListener('click', () => {
+    chooseVideo(button.dataset.showVideo);
+    goTo(scenes.findIndex(slide => slide.id === 'get-inspired'));
+  }));
 
-  $('#downloadBrief').addEventListener('click', () => {
-    const data = formValues();
-    if (!data.culture && !data.dish && !data.members && !data.tokClass) {
-      notify('Add your TOK class, culture, dish or group members before downloading.'); return;
-    }
-    const target = targets[data.tokClass];
-    const get = key => data[key] || 'To be decided';
-    const contents = [
-      'GLOBAL DAY 2026 — GROUP PROPOSAL / WORKING DRAFT',
-      'Ikast-Brande Gymnasium | Wednesday 2 December 2026 | Module 5',
-      '==================================================',
-      `TOK CLASS: ${get('tokClass')}`,
-      `ASSIGNED OUTREACH: ${target ? target.short : 'Choose TOK class'}`,
-      `OUTREACH INSTRUCTIONS: ${target ? target.detail : 'Choose TOK class to see assignment'}`,
-      '',
-      `COUNTRY OR CUISINE: ${get('culture')}`,
-      `DISH: ${get('dish')}`,
-      `CUISINE EXPERT / LEAD: ${get('expert')}`,
-      `ESTIMATED GROUP BUDGET: ${get('budget')} DKK (working range 150–200 DKK)`,
-      '',
-      'GROUP MEMBERS AND ROLES:', get('members'), '',
-      'CULTURAL STORY / HISTORY / WHY THIS DISH:', get('story'), '',
-      'ASSIGNED CLASS INVITATION PLAN:', get('outreach'), '',
-      'ONE-MINUTE VIDEO PLAN:', get('video'), '',
-      'PREPARATION, COOKING & MODULE 5 SERVICE:', get('service'), '',
-      'VIRTUE CONNECTION:', get('virtue'), '',
-      'SCHOOL REQUIREMENTS — CHECK WITH YOUR TEACHER',
-      '[ ] Group is large enough for multiple roles; NO groups of two',
-      '[ ] Teacher signs off on group BEFORE budget approval',
-      '[ ] Group budget confirmed (working budget: 150–200 DKK)',
-      '[ ] ALL purchase receipts will be retained',
-      '[ ] Country/cuisine selected freely (not necessarily birthplace)',
-      '[ ] Cuisine lead has solid knowledge of the chosen cuisine',
-      '[ ] Students in the ASSIGNED class invited and involved',
-      '[ ] One-minute video covers dish, history, reasons, cultural meaning, a virtue connection',
-      '[ ] Food prepared and cooked ON WEDNESDAY 2 DECEMBER',
-      '[ ] Food brought to Global Day food fair in MODULE 5',
-      '[ ] Hosts eat beforehand; food saved for STX visitors',
-      '',
-      'Teacher approval: ________________________ Date: __________',
-      'NOTE: Downloaded plan is not proof of approval. This website does not submit information.'
-    ].join('\n');
-    const name = (data.culture || data.dish || 'food-fair').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30) || 'food-fair';
-    const blobUrl = URL.createObjectURL(new Blob([contents], { type: 'text/plain;charset=utf-8' }));
-    const link = document.createElement('a');
-    link.href = blobUrl; link.download = `global-day-2026-${name}-group-brief.txt`;
-    document.body.append(link); link.click(); link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1600);
-    notify('Working group brief downloaded. Ask your teacher to approve the group.');
-  });
-  $('#printBrief').addEventListener('click', () => window.print());
-  $('#resetBrief').addEventListener('click', () => {
-    if (!window.confirm('Clear this team plan saved in your browser?')) return;
-    form.reset(); updateForm(); notify('Local group plan cleared.');
-  });
+  // The former long website form has been replaced with a separate fillable PDF.
+
 })();

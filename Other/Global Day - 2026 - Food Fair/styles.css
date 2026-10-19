@@ -120,3 +120,136 @@
 @media (max-width:640px){
  .scene-rules-a .rules-heading .display-mid{font-size:clamp(39px,12vw,48px);letter-spacing:-.015em}
 }
+
+/* ------------------------------------------------------------
+   GLOBAL DAY V3: prominent event date, student leadership,
+   video-production discovery and fillable PDF pitch.
+   ------------------------------------------------------------ */
+.masthead-date{display:inline-flex;align-items:center;gap:14px;color:#dce7f5;font:800 11px var(--geometric);letter-spacing:.1em}
+.masthead-date b{background:var(--gold);color:var(--navy);padding:7px 10px;font-size:12px;letter-spacing:.07em}
+.masthead-date span{font-size:10px;color:#b8c4d3}
+.hero-action-row{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.hero-action-row .action-button{min-width:192px;padding:13px 14px}
+.hero-date-ticket{display:flex;flex-direction:column;justify-content:center;min-height:58px;background:var(--pink);color:var(--navy);padding:7px 13px;transform:rotate(-1deg);box-shadow:4px 4px 0 #070f2099}
+.hero-date-ticket small{font:800 8px var(--geometric);letter-spacing:.08em}
+.hero-date-ticket strong{font:900 clamp(23px,2.4vw,37px)/.9 var(--display);white-space:nowrap}
+.hero-date-ticket>span{font:800 9px var(--geometric);letter-spacing:.08em;margin-top:2px}
+
+/* Student leadership: own decisions, invite genuine participation. */
+.scene-leadership{background:#16283a;color:#fdfbf0}
+.leadership-layout{display:grid;grid-template-columns:1fr .93fr;gap:clamp(27px,4.2vw,66px);min-height:calc(100% - 50px);align-items:center}
+.leadership-copy h2{font-size:clamp(99px,9vw,147px);margin:17px 0 22px}
+.leadership-copy h2 em{color:var(--pink)}
+.leadership-copy>p{font-size:clamp(15px,1.37vw,21px);line-height:1.43;max-width:610px;color:#dfe9f4}
+.leadership-copy>p strong{color:#fff}
+.leadership-mantra{padding:14px 18px;border-left:6px solid var(--gold);background:#ffffff12;font:900 clamp(23px,2.1vw,35px) var(--display)}
+.leadership-mantra span{color:var(--gold)}
+.leadership-right{align-self:center;min-width:0}
+.leadership-right>img{display:block;width:100%;height:clamp(173px,26vh,280px);object-fit:cover;object-position:center 42%;border:7px solid var(--gold);transform:rotate(1deg)}
+.leader-steps{margin-top:22px;display:grid;gap:8px}
+.leader-steps>div{display:grid;grid-template-columns:43px 1fr;gap:4px 13px;padding:12px 15px;border:1px solid #ffffff30;background:#ffffff0c}
+.leader-steps>div>span{grid-row:span 2;color:var(--gold);font:900 39px/.9 var(--display)}
+.leader-steps strong{font:900 clamp(22px,2vw,29px)/.93 var(--display);letter-spacing:.04em}
+.leader-steps p{margin:0;font-size:clamp(11px,1vw,14px);line-height:1.36;color:#d5e0ee}
+
+/* AI/video media discovery. Visual storyboard instead of form controls. */
+.scene-ai-mission{background:#181e41;color:var(--white)}
+.ai-mission-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(27px,4vw,60px);align-items:center;min-height:calc(100% - 46px)}
+.ai-mission-copy h2{font-size:clamp(83px,8.5vw,133px);margin:13px 0 18px}
+.ai-mission-copy h2 em{color:var(--gold)}
+.ai-duty{background:var(--pink);color:var(--navy);padding:17px 20px;display:flex;flex-direction:column;gap:10px;transform:rotate(-1deg)}
+.ai-duty strong{font:900 clamp(26px,2.25vw,38px)/1 var(--display)}
+.ai-duty span{font-size:clamp(12px,1.08vw,16px);line-height:1.43}
+.storyboard-head{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #ffffff50;padding-bottom:9px;margin-bottom:12px}
+.storyboard-head span,.storyboard-head b{font:800 10px var(--geometric);letter-spacing:.08em;color:var(--gold)}
+.storyboard-head b{color:#b7bedc}
+.storyboard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;position:relative}
+.storyboard-frame{background:#fff;border:4px solid #fff;box-shadow:4px 4px 0 #090e25;position:relative;overflow:hidden}
+.storyboard-frame img{display:block;width:100%;aspect-ratio:.83;object-fit:cover;filter:saturate(1.14)}
+.storyboard-frame:nth-child(3) img{object-position:45% center}
+.storyboard-frame div{background:var(--gold);color:var(--night);padding:9px 7px;display:flex;align-items:center;justify-content:space-between;gap:4px}
+.storyboard-frame div b{font:900 20px/1 var(--display)}
+.storyboard-frame div span{font:800 9px var(--geometric)}
+.scene-ai-mission.is-active .storyboard-frame{animation:frame-reveal .55s both}
+.scene-ai-mission.is-active .storyboard-frame:nth-child(2){animation-delay:.15s}
+.scene-ai-mission.is-active .storyboard-frame:nth-child(3){animation-delay:.3s}
+.scene-ai-mission.is-active .storyboard-frame:nth-child(4){animation-delay:.45s}
+@keyframes frame-reveal{from{opacity:0;transform:translateY(24px) rotate(-3deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+.keyframe-note{margin-top:21px;border-left:5px solid var(--gold);padding:1px 0 0 17px}
+.keyframe-note span{color:var(--gold);font:900 clamp(21px,1.8vw,28px) var(--display)}
+.keyframe-note p{margin:7px 0 0;font-size:clamp(12px,1.11vw,16px);line-height:1.38;color:#e4ebf5}
+.ai-research-brief{display:flex;gap:14px;align-items:center;margin-top:18px;background:#2d4b7a;padding:16px;border:1px solid #ffffff56}
+.ai-research-brief b{flex:none;max-width:110px;font:900 23px/1 var(--display);color:var(--gold)}
+.ai-research-brief span{font-size:clamp(12px,1.12vw,16px);line-height:1.4}
+.ai-ethics{margin:14px 0 0;font-size:11px;color:#bbcae3;line-height:1.4}
+
+/* Toolkit separates established editors from experimental AI workflows. */
+.scene-ai-tools{background:#d7e9ec;color:var(--navy)}
+.tools-header{display:grid;grid-template-columns:1.35fr .65fr;gap:50px;align-items:end;margin-bottom:26px}
+.tools-header h2{font-size:clamp(75px,8vw,127px);margin:12px 0 0}
+.tools-header h2 em{color:var(--cobalt)}
+.tools-header>p{font-size:clamp(14px,1.2vw,18px);line-height:1.4;margin:0 0 5px}
+.tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.tool-card{background:#fff;border:2px solid #182b3a;box-shadow:5px 5px 0 #172d41a8;min-height:263px;padding:19px 16px 17px;display:flex;flex-direction:column}
+.tool-card.tool-primary{background:#ffdbdb;border-color:#d74e6a}
+.tool-tag{font:800 9px var(--geometric);letter-spacing:.07em;color:#345074}
+.tool-card h3{font:900 clamp(39px,3.5vw,57px)/.86 var(--display);margin:19px 0 11px}
+.tool-card p{font-size:clamp(12px,1.02vw,15px);line-height:1.38;margin:0 0 14px;flex:1}
+.tool-card a{display:block;align-self:start;border-bottom:2px solid currentColor;text-decoration:none;font:800 11px/1.35 var(--geometric);color:var(--cobalt)}
+.tool-card a:hover{color:#dc557e}
+.tools-foot{margin-top:22px;background:var(--navy);color:#fefcfa;display:flex;align-items:center;gap:12px;padding:15px 17px;font-size:clamp(11px,.98vw,14px);line-height:1.4}
+.tools-foot>span{font:900 20px/1 var(--display);color:var(--gold);flex:none}
+.tools-foot strong{color:var(--gold)}
+.tools-foot button{margin-left:auto;flex:0 0 auto;background:var(--gold);color:var(--navy);border:0;padding:11px;font:800 10px var(--geometric);max-width:280px}
+.tools-foot button:hover{background:var(--pink)}
+
+/* The standalone pitch form is a real AcroForm PDF. No long website form. */
+.scene-pitch{background:#19293e;color:#fdf9ed}
+.pitch-layout{display:grid;grid-template-columns:1fr .89fr;gap:clamp(30px,5vw,75px);align-items:center;min-height:calc(100% - 96px)}
+.pitch-copy h2{font-size:clamp(100px,10vw,168px);margin:12px 0 22px}
+.pitch-copy h2 em{color:var(--pink)}
+.pitch-copy p{font-size:clamp(15px,1.3vw,20px);line-height:1.47;max-width:610px;color:#e5edf5}
+.pitch-actions{display:flex;align-items:center;gap:17px;flex-wrap:wrap;margin-top:24px}
+.pitch-actions a{text-decoration:none}
+.pitch-actions .action-button{min-width:250px}
+.pitch-download{color:var(--gold);border-bottom:2px solid var(--gold);font:800 11px var(--geometric);letter-spacing:.06em;padding:8px 2px}
+.pitch-caution{font-size:12px;line-height:1.44;color:#c9d9e9;display:block;margin-top:22px;max-width:640px}
+.pitch-caution strong{color:#fff}
+.pitch-paper-wrap{width:min(100%,475px);justify-self:center;position:relative;padding:5px;transform:rotate(3deg);box-shadow:16px 18px 0 #091321;border:2px solid var(--gold);background:#fff}
+.pitch-paper{display:block;width:100%;height:clamp(350px,64vh,570px);object-fit:cover;object-position:top;filter:contrast(1.04)}
+.pitch-stamp{position:absolute;right:-18px;bottom:25px;background:var(--pink);color:var(--navy);padding:10px 14px;font:900 27px/.9 var(--display);transform:rotate(-8deg)}
+.pitch-prompts{border-top:1px solid #ffffff59;display:flex;gap:8px;flex-wrap:wrap;padding:15px 0 0;margin-top:13px}
+.pitch-prompts span{border:1px solid #ffffff50;padding:7px 8px;font:800 9px var(--geometric);letter-spacing:.03em;color:var(--gold)}
+.video-switch .video-tab{min-width:0}
+
+@media (min-width:930px) and (max-height:850px){
+ .leadership-copy h2{font-size:clamp(89px,7.8vw,119px);margin:5px 0 12px}.leadership-copy>p{font-size:15px}.leadership-mantra{padding:10px 13px;font-size:26px}
+ .leadership-right>img{height:160px}.leader-steps{margin-top:12px;gap:5px}.leader-steps>div{padding:8px 12px}.leader-steps strong{font-size:23px}.leader-steps p{font-size:11px}
+ .ai-mission-copy h2{font-size:clamp(80px,7vw,105px);margin:5px 0 10px}.storyboard-frame img{aspect-ratio:1.14}.keyframe-note{margin-top:11px}.ai-research-brief{margin-top:12px;padding:10px}.ai-ethics{margin-top:7px}
+ .tools-header{margin-bottom:10px}.tools-header h2{font-size:clamp(70px,6.7vw,100px);margin:4px 0 0}.tool-card{min-height:235px;padding:13px}.tool-card h3{margin:11px 0 7px;font-size:clamp(34px,3vw,47px)}.tool-card p{font-size:12px}.tools-foot{margin-top:12px;padding:10px}
+ .pitch-copy h2{font-size:clamp(89px,8.6vw,117px);margin:8px 0 14px}.pitch-copy p{font-size:15px}.pitch-paper{height:430px}.pitch-prompts{margin-top:7px;padding-top:8px}
+}
+@media (max-width:950px){
+ .masthead-date span{display:none}.masthead-date b{font-size:10px}
+ .leadership-layout{grid-template-columns:1fr 1fr;gap:19px}.leadership-copy h2{font-size:clamp(86px,10vw,120px)}.leader-steps>div{padding:10px}.leadership-right>img{height:190px}
+ .ai-mission-layout{grid-template-columns:.8fr 1.2fr;gap:20px}.ai-mission-copy h2{font-size:clamp(74px,9vw,112px)}.storyboard-frame img{aspect-ratio:.82}
+ .tools-header{gap:22px}.tools-header h2{font-size:clamp(65px,8.3vw,105px)}.tool-card{padding:13px}.tool-card h3{font-size:39px}.tool-card p{font-size:12px}
+ .pitch-layout{gap:20px}.pitch-copy h2{font-size:clamp(89px,10vw,130px)}.pitch-paper{height:450px}
+}
+@media (max-width:640px){
+ .masthead-date{display:none}
+ .hero-action-row{flex-direction:column;align-items:flex-start;gap:9px}.hero-date-ticket{min-height:0;padding:10px 15px}.hero-date-ticket strong{font-size:31px}.hero-action-row .action-button{min-width:230px}
+ .scene-leadership .leadership-layout,.scene-ai-mission .ai-mission-layout,.scene-pitch .pitch-layout{grid-template-columns:1fr;min-height:0;gap:22px}
+ .leadership-copy h2{font-size:clamp(75px,18vw,114px);margin:10px 0 15px}.leadership-copy>p{font-size:15px}.leadership-mantra{font-size:24px}.leadership-right>img{height:205px}.leader-steps>div{padding:12px}.leader-steps p{font-size:12px}
+ .ai-mission-copy h2{font-size:clamp(75px,17vw,106px);margin:10px 0 17px}.ai-duty strong{font-size:30px}.ai-duty span{font-size:13px}.storyboard{grid-template-columns:1fr 1fr;gap:10px}.storyboard-frame img{aspect-ratio:1.15}.storyboard-head b{display:none}.keyframe-note{margin-top:17px}.keyframe-note p{font-size:13px}.ai-research-brief{align-items:start;flex-direction:column;padding:14px}.ai-research-brief span{font-size:13px}.ai-ethics{font-size:12px;padding-bottom:20px}
+ .tools-header{grid-template-columns:1fr;gap:10px}.tools-header h2{font-size:clamp(63px,13vw,89px);margin:6px 0 0}.tools-header>p{font-size:14px}.tool-grid{grid-template-columns:1fr;gap:13px}.tool-card{min-height:0;padding:20px}.tool-card h3{font-size:48px}.tool-card p{font-size:14px}.tool-card a{font-size:12px}.tools-foot{display:block;font-size:13px;margin-bottom:25px}.tools-foot>span{display:inline-block;margin-right:7px}.tools-foot button{display:block;margin:14px 0 0;max-width:none;width:100%}
+ .pitch-copy h2{font-size:clamp(82px,18vw,120px);margin:9px 0 17px}.pitch-copy p{font-size:15px}.pitch-actions{display:flex;flex-direction:column;align-items:stretch;gap:12px}.pitch-actions .action-button{min-width:0}.pitch-download{align-self:start}.pitch-caution{font-size:12px;margin-top:16px}.pitch-paper-wrap{max-width:310px;margin:0 auto 20px}.pitch-paper{height:430px}.pitch-stamp{right:-10px;bottom:15px;font-size:22px}.pitch-prompts{margin-top:10px;margin-bottom:27px}.pitch-prompts span{font-size:10px}
+ .video-tab{font-size:8px!important;letter-spacing:0;padding:10px 4px!important}
+}
+/* V3 QA correction: keep the complete AI requirement legible on 900px projectors. */
+@media (min-width:951px) and (min-height:851px){
+ .scene-ai-mission .ai-mission-copy h2{font-size:clamp(76px,6.35vw,99px);margin:7px 0 16px}
+ .scene-ai-mission .ai-duty{padding:14px 17px}
+ .scene-ai-mission .ai-duty strong{font-size:30px}
+ .scene-ai-mission .ai-duty span{font-size:14px}
+}
