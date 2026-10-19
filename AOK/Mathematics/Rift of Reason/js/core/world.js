@@ -52,7 +52,14 @@
         // Every earned tactic owned already: the uncommon colour tactic of the trainer's main colour.
         if (!tactic) tactic = trainerUncommon(t, owned);
         if (tactic) state.tactics.push(tactic);
-        return { items: { 'trick-book': 1 }, tactic };
+        let axiom = null;
+        if (trainerId === 'constable' && (Rift.data.axioms || {}).infinity) {
+            state.axioms = state.axioms || [];
+            if (!state.axioms.includes('infinity')) { state.axioms.push('infinity'); axiom = 'infinity'; }
+        }
+        const reward = { items: { 'trick-book': 1 }, tactic };
+        if (axiom) reward.axiom = axiom;
+        return reward;
     }
 
     // ---- fog of war ------------------------------------------------------------

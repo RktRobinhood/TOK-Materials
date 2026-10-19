@@ -112,6 +112,8 @@
         ['plays', 'Card activations', '2 per turn', 'two-plays', 'You have 2 card activations per turn. Each cast, attack or manual Activate uses one. Draw, Spark, items and hero powers are separate.'],
         ['attacks', 'Attacks', 'Each creature attacks once', 'three-actions', 'Each ready creature may attack once per turn. New creatures wait a turn (unless Swift).'],
         ['energy', 'Energy', '+1 each turn', null, 'Your energy grows by 1 each turn (up to 10) and refills. Cards and abilities cost energy.'],
+        ['draw', 'Drawing', 'Draw 1', null, 'Your normal draw takes 1 card from the deck you choose.'],
+        ['cost', 'Creature costs', 'Printed cost', 'thrift', 'Creatures cost their printed energy, with a minimum of zero. Spells and rules keep their own costs.'],
     ];
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
@@ -203,7 +205,7 @@
         return {
             name: 'You', team, tactics: tactics || undefined, hearts: given.hearts,
             items: given.items || (save && save.items) || {},
-            axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
+            axioms: given.axioms || (save && S.axiomLoadout ? S.axiomLoadout(save) : (Rift.data.axiomDecks || {}).default || []),
             consumables: given.consumables || {},
             bag: given.bag || [],
             // Hero power ({ id, tweaks }, data/powers.js) chosen by the launcher (js/ui/battles.js).
@@ -228,7 +230,7 @@
         const askedLevel = opp.ai || p.aiLevel || DEFAULT_AI[mode] || 'normal';
         const aiLevel = B().AI && B().AI.levelOf ? B().AI.levelOf(askedLevel) : askedLevel;
         const anteType = mode === 'practice' ? 'practice' : (opp.type || mode);
-        const oppAxioms = opp.axioms || Rift.makeRng(seed + ':axiom-opponent').shuffle((Rift.data.axiomDecks || {}).starter || []).slice(0, 10);
+        const oppAxioms = opp.axioms || Rift.data.flux.contribution(seed + ':axiom-opponent', p.fluxProfile === 'eligible');
         // A long title ("Sergeant Syllo · Road challenge") stays in tooltips; the engine's log and
         // the portrait use the short name before " · ".
         const oppTitle = opp.name || 'Rival';
@@ -1086,8 +1088,10 @@
         function axiomNote(id) {
             const ax = (Rift.data.axioms || {})[id] || {};
             const on = E.activeAxioms(state).some(a => a.id === id);
+            const preview = E.axiomPreview(state, id);
             return el('div.b-notes', {}, [
                 el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
+                preview.text ? el('div.b-note-line', { text: 'If played now: ' + preview.text + ' Shared value; owner bonuses stay separate.' }) : null,
                 ax.clearRules
                     ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
                     : isBasic(ax)
@@ -1699,7 +1703,7 @@
                 if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
                 // A rule card that would change nothing (that rule is already on) says so on the card.
-                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
+                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : (Rift.data.axioms[id] || {}).modifier ? 'No change' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 else {
                     const tlr = E.timeline(state)[0];
                     if (tlr && tlr.type === 'reset' && tlr.rounds <= 1) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset this round!' }));
@@ -1978,7 +1982,8 @@
             // The second line (#109, teacher 17 Oct: less text): only what it will be (the set-aside card). The full
             // sentence (not active yet, whose End turn brings it) is the line's tooltip; the event marker says it too.
             const nextAx = next.id && AX[next.id];
-            const flipDetail = nextAx ? ruleWords(nextAx) + (E.axiomWouldChange && !E.axiomWouldChange(state, next.id) ? ' (no change)' : '')
+            const nextPreview = nextAx && E.axiomPreview(state, next.id);
+            const flipDetail = nextAx ? (nextPreview.text ? 'If this resolves now: ' + nextPreview.text + ' Later rule changes can alter this.' : ruleWords(nextAx) + (!nextPreview.changed ? ' (no change)' : ''))
                 : state.axioms.deck.length ? 'no rule card set aside yet' : 'no rule card left to flip';   // finite deck (#117)
             const what = next.type === 'reset' ? 'all rules will return to basic' : flipDetail;
             const detail = 'Not active yet: ' + what + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
@@ -2133,10 +2138,11 @@
             const AX = Rift.data.axioms || {};
             const reset = ev.type === 'reset';
             const known = !reset && i === 0 && ev.id && AX[ev.id];
+            const preview = known && E.axiomPreview(state, ev.id);
             const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' ' + fateWhen(ev) + '.';
             const left = state.axioms.deck.length;   // used rules never come back (#117)
             const effect = reset ? 'Every active rule card is removed. All axioms return to the basic rules for BOTH players.'
-                : known ? known.name + ': ' + known.text
+                : known ? known.name + ': ' + known.text + (preview.text ? ' If this resolves now: ' + preview.text + ' Later rule changes can alter this.' : '')
                 : i === 0 && !left ? 'No rule card is left to flip. Current axioms stay in play.'
                 : i === 0 ? 'No rule card is set aside yet. Fate sets one aside from the shared deck when the next turn starts.'
                 : 'A free flip from the shared deck. Fate sets its card aside, and shows it here, when the reset before it happens.';
@@ -2178,6 +2184,8 @@
             const AX = Rift.data.axioms || {};
             const ax = AX[id];
             if (!ax) return 'nothing';
+            const preview = E.axiomPreview(state, id);
+            if (preview.field) return (RULE_LABEL[ax.category] || ax.category) + ': ' + (preview.before === Infinity ? 'Unlimited' : preview.before);
             const cur = AX[state.axioms.active[ax.category]];
             if (cur && !cur.basic) return cur.name + ' (' + (cur.short || cur.text) + ')';
             const core = CORE_RULES.find(c => c[0] === ax.category);
@@ -2667,12 +2675,16 @@
         function ruleTile(cat, id, basicWords, basicArt, basicLong) {
             const AX = Rift.data.axioms || {};
             const ax = id ? AX[id] : null;
-            const changed = !!(ax && !ax.basic);
+            const changed = !!(ax && changedRules().some(a => a.id === id));
             // Changed: the rule card's vignette. Basic: the rule's own icon (ui/rule-<category>), else the basic card's.
             const art = changed ? 'ui/axiom-' + id : has('ui/rule-' + cat) ? 'ui/rule-' + cat : basicArt ? 'ui/axiom-' + basicArt : null;
             let words = changed ? ax.short || ax.name : basicWords || (ax && ax.short) || '';
             // An attack limit is a per-turn budget: show what is left for the player whose turn it is.
             const r = E.rules(state);
+            if (cat === 'plays') words = r.playLimit === Infinity ? 'Unlimited activations' : r.playLimit + ' activations per turn';
+            if (cat === 'draw') words = 'Draw ' + r.drawCount;
+            if (cat === 'cost') words = 'Creature costs ' + (r.costDelta >= 0 ? '+' : '') + r.costDelta;
+            if (cat === 'energy') words = (r.growth >= 0 ? '+' : '') + r.growth + ' each turn';
             let budget = null;
             if (cat === 'attacks' && r.attackLimit !== Infinity && E.winner(state) == null) {
                 const left = Math.max(0, r.attackLimit - (state.players[state.active].attacksThisTurn || 0));
@@ -3082,8 +3094,7 @@
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).
         const axiomChanges = id => !E.axiomWouldChange || E.axiomWouldChange(state, id);
-        const whyNotAxiomRule = id => (((Rift.data.axioms || {})[id] || {}).clearRules ? 'No rule to clear: every rule is basic now.'
-            : 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.');
+        const whyNotAxiomRule = id => E.axiomPreview(state, id).reason;
         function clickAxiom(id, L) {
             if (!L.some(a => a.type === 'axiom' && a.choice === id)) { setNote(whyNotAxiom(id)); return; }
             ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };

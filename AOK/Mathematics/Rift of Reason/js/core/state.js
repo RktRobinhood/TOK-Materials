@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 4;
+    const STATE_VERSION = 5;
     const STORAGE_KEY = 'rift-of-reason:save';
     const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
     const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
@@ -213,14 +213,14 @@
         const starter = ((Rift.data || {}).axiomDecks || {}).starter || [];
         return Array.from(new Set(starter.concat(s.axioms || []))).filter(id => known[id] && !known[id].own);
     }
-    // The ten axiom cards: the saved loadout exactly as saved, else the owned pool topped up from the
-    // default ten (the same choice the battle makes for an empty loadout).
+    // The ten axiom cards: the saved loadout exactly as saved, else the fixed introductory ten.
+    // Earned-pool order never changes this fallback; construction remains an explicit player choice.
     function axiomLoadout(save) {
         const s = save || current || {};
         if ((s.axiomLoadout || []).length) return s.axiomLoadout.slice();
         const known = (Rift.data || {}).axioms || {};
         const out = [];
-        (s.axioms || []).concat(((Rift.data || {}).axiomDecks || {}).default || []).forEach(id => {
+        (((Rift.data || {}).axiomDecks || {}).default || []).forEach(id => {
             if (out.length < DECK_RULES.axioms && known[id] && !known[id].own && !out.includes(id)) out.push(id);
         });
         return out;
@@ -551,6 +551,15 @@
             s.version = 4;
             return s;
         },
+    };
+
+    // Preserve the formerly virtual starting ownership before removing rare Unlimited access.
+    // Migration runs on loads/imports, never on freshState/new adventures.
+    MIGRATIONS[4] = s => {
+        const old = ((Rift.data || {}).axiomDecks || {}).legacyStarter || [];
+        s.axioms = Array.from(new Set((s.axioms || []).concat(old)));
+        s.version = 5;
+        return s;
     };
 
     function migrate(state) {

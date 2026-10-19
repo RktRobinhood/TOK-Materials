@@ -22,9 +22,13 @@ Draw choice, End turn, Spark, Bag items and hero powers are separate and spend n
 
 Both Granny lessons use this budget. The full lesson adds turn breaks after Counterexample/Underdog and Filter, with a four-round demonstration countdown. The short lesson retains its prediction and independent repair choices. See [verification and balance](reviews/activation-budget-100-2026-10-18.md). This supersedes older free-attack/card-play descriptions below and in the October 7 design.
 
-## Planned relative Flux contract — 19 October 2026 (#101)
+## Relative Flux rules — 19 October 2026 (#101)
 
-Stage 1 is defined in [the relative Flux contract and initial card matrix](drafts/flux-101-2026-10-19/CONTRACT.md). It specifies shared deltas before owner bonuses, finite bounds, Unlimited/finite repair, reset and no-change behavior, old-ID/ownership compatibility, and an initial construction policy. Sixteen planned common modifiers reuse four numeric categories; generated eligible contributions target seven modifier slots, two optional-category slots and an occasional Unlimited special. The linked seeded construction experiment measures that proposed policy only. Runtime modifiers, previews, migration, acquisition, AI and actual match-frequency/balance validation remain unimplemented; current gameplay still uses the absolute rules described above. #101 remains open.
+Sixteen common ±1/±2 modifiers change the current shared activation allowance (1–6), normal draw count (1–3), next-turn energy growth (−1–3) or creature cost adjustment (−2–2). Owner bonuses apply afterwards; paid casts spend their use first. Repeated modifiers work while effective. A no-op at a bound or against Unlimited cannot be paid for. Fixed finite rules repair Unlimited; Fate resolves a modifier against the value at resolution and consumes an ineffective free flip. Reset clears accumulated values without refunding spent uses or owner bonuses. Legacy absolute card IDs keep their original effects.
+
+The four numeric entries stay in the Axiom dock. Hand/card selection, rule inspection and public Fate forecasts use the engine's current-value projection. The AI uses that same transition, including repeated IDs. New-adventure/default ten: seven introductory modifiers, Limited Memory, Momentum and Two Moves. Generated contributions select seven of the sixteen modifiers, those two optional rules and a finite repair; Constable/later trainers have a 25% chance of Infinity in that last slot. This is construction policy, never weighted drawing. Explicit loadouts and scripted lessons keep their exact lists. The first Constable win grants Infinity once. Save version 5 preserves every old virtual starter ID before rare access changes; old loadouts and codes remain valid.
+
+See [the full contract](drafts/flux-101-2026-10-19/CONTRACT.md), [runtime verification and measured balance](reviews/flux-runtime-101-2026-10-19.md) and [300-match receipt](reviews/flux-balance-101-2026-10-19.json). Classroom tuning remains future feedback.
 
 ## Purpose
 

@@ -281,7 +281,8 @@ test('an invalid saved deck opens as saved for repair, and battles say what to f
 });
 
 test('the axiom builder takes up to two copies of a rule and refuses a third or an eleventh card', () => {
-    const t = game(() => {});
+    // An explicit legacy loadout remains editable after the #101 starter replacement.
+    const t = game(save => { save.axiomLoadout = ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy']; });
     const dialog = t.R.Collection.editAxiomDeck();
     const body = dialog.body;
     const reject = body.querySelector('.deck-reject');

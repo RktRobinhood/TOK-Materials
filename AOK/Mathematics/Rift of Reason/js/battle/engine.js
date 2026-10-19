@@ -115,6 +115,13 @@
         fateDelay: 0, scheduleExtra: 0, fateHeroCap: null,
     };
     const PAD_SPECIES = ['astrophysicat', 'zuckerborg', 'siuuugull'];
+    const NUMERIC_RULES = Object.freeze({
+        plays: { field: 'playLimit', min: 1, max: 6, label: 'Activations' },
+        draw: { field: 'drawCount', min: 1, max: 3, label: 'Draw count' },
+        energy: { field: 'growth', min: -1, max: 3, label: 'Energy growth' },
+        cost: { field: 'costDelta', min: -2, max: 2, label: 'Creature cost change' },
+    });
+    const ruleValue = n => n === Infinity ? 'Unlimited' : String(n);
     const KEYWORDS = ['guard', 'swift', 'shield'];
 
     // Tokens (#121, data/tactics.js Rift.data.tokens) are looked up like species, but are never collected.
@@ -158,7 +165,7 @@
         s.reactions = (state.reactions || []).slice();
         s.completedPlays = (state.completedPlays || []).slice();
         s.attackIntent = state.attackIntent ? { ...state.attackIntent } : null;
-        s.axioms = { ...state.axioms, active: { ...state.axioms.active }, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
+        s.axioms = { ...state.axioms, active: { ...state.axioms.active }, numeric: Object.fromEntries(Object.entries(state.axioms.numeric || {}).map(([k, v]) => [k, { ...v }])), deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
         s.fate = { ...state.fate };
         if (state.fate.queue) s.fate.queue = state.fate.queue.map(ev => ({ ...ev }));   // records change in place (#118)
         s.lastEvents = [];
@@ -182,32 +189,75 @@
     const ruleMemo = new WeakMap();
     function memoFor(s) {
         const active = s.axioms.active;
+        const numeric = s.axioms.numeric || {};
         const m = ruleMemo.get(active);
         if (m) {
             let n = 0, same = true;
             for (const k in active) { n++; if (m.snap[k] !== active[k]) { same = false; break; } }
-            if (same && n === m.n) return m;
+            if (same && n === m.n && Object.keys(NUMERIC_RULES).every(k => {
+                const a = numeric[k], b = m.numeric[k];
+                return a ? b && a.id === b.id && a.value === b.value : !b;
+            })) return m;
         }
         const list = Object.freeze(Object.values(active).map(id => axiomDefs()[id]).filter(Boolean));
         const out = Object.assign({}, RULE_DEFAULTS);
         list.forEach(a => Object.assign(out, a.rules || {}));
-        const memo = { snap: Object.assign({}, active), n: Object.keys(active).length, list, rules: Object.freeze(out) };
+        Object.entries(NUMERIC_RULES).forEach(([cat, def]) => {
+            const rec = numeric[cat];
+            if (rec && rec.id === active[cat]) {
+                if (rec.value === 'unlimited' && cat === 'plays') out[def.field] = Infinity;
+                else if (Number.isInteger(rec.value) && rec.value >= def.min && rec.value <= def.max) out[def.field] = rec.value;
+            }
+        });
+        const memo = { snap: Object.assign({}, active), numeric: Object.fromEntries(Object.entries(numeric).map(([k, v]) => [k, { ...v }])), n: Object.keys(active).length, list, rules: Object.freeze(out) };
         ruleMemo.set(active, memo);
         return memo;
     }
     function activeAxioms(s) { return memoFor(s).list; }
     // Active rule cards that differ from the basics (a `basic` card only restates a default rule).
-    function changedAxioms(s) { return activeAxioms(s).filter(a => !a.basic); }
+    function changedAxioms(s) { return activeAxioms(s).filter(a => NUMERIC_RULES[a.category]
+        ? rules(s)[NUMERIC_RULES[a.category].field] !== RULE_DEFAULTS[NUMERIC_RULES[a.category].field] : !a.basic); }
     // False when playing this axiom card would change nothing: the same rule is already active,
     // or a "back to normal" card while its category is already normal.
     function axiomWouldChange(s, id) {
+        return axiomPreview(s, id).changed;
+    }
+    // One pure transition description for legal casts, free flips, UI and AI. Numeric records are
+    // battle-local JSON values; provenance alone never reconstructs accumulated deltas.
+    function axiomPreview(s, id) {
         const ax = axiomDefs()[id];
-        if (!ax) return false;
-        if (ax.clearRules) return changedAxioms(s).length > 0; // Granny's Spare Axiom: only while a rule is changed
+        if (!ax) return { changed: false, reason: 'Unknown rule.' };
+        const category = ax.category, def = NUMERIC_RULES[category];
+        if (def && (ax.modifier || ax.basic || (ax.rules && def.field in ax.rules))) {
+            const before = rules(s)[def.field], mod = ax.modifier;
+            if (mod && (mod.field !== def.field || ![-2, -1, 1, 2].includes(mod.delta))) return { category, changed: false, reason: 'Invalid numeric modifier.' };
+            const after = mod ? before === Infinity ? Infinity : Math.max(def.min, Math.min(def.max, before + mod.delta)) : ax.rules && def.field in ax.rules ? ax.rules[def.field] : RULE_DEFAULTS[def.field];
+            const changed = before !== after;
+            const reason = changed ? '' : mod && before === Infinity ? 'Unlimited stays Unlimited; play a fixed limit to change it.'
+                : mod ? def.label + ' stays at ' + ruleValue(before) + ' (bounds ' + def.min + ' to ' + def.max + ').' : 'Already the rule: ' + def.label + ' is ' + ruleValue(before) + '.';
+            return { category, field: def.field, before, after, changed, reason, text: def.label + ': ' + ruleValue(before) + ' → ' + ruleValue(after) + (reason ? '. ' + reason : '') };
+        }
+        if (ax.modifier) return { category, changed: false, reason: 'Invalid numeric category.' };
+        if (ax.clearRules) {
+            const changed = changedAxioms(s).length > 0;
+            return { category, changed, reason: changed ? '' : 'No rule to clear: every rule is basic now.' };
+        }
         const current = s.axioms.active[ax.category];
-        if (current === id) return false;
-        if (ax.basic) return !!current && !(axiomDefs()[current] || {}).basic;
-        return true;
+        const changed = current !== id && (!ax.basic || (!!current && !(axiomDefs()[current] || {}).basic));
+        return { category, changed, reason: changed ? '' : 'Already the rule: ' + ax.name + ' would change nothing now.' };
+    }
+    function projectedAxioms(s, id, preview) {
+        const ax = id && axiomDefs()[id];
+        if (id && !ax) return s.axioms;
+        if (!id || ax.clearRules) return { ...s.axioms, active: {}, numeric: {} };
+        if (!preview.changed) return s.axioms;
+        const numeric = { ...s.axioms.numeric };
+        if (preview.field) numeric[ax.category] = { id, value: preview.after === Infinity ? 'unlimited' : preview.after };
+        else delete numeric[ax.category];
+        return { ...s.axioms, active: { ...s.axioms.active, [ax.category]: id }, numeric };
+    }
+    function projectAxiom(s, id) {
+        return { ...s, axioms: projectedAxioms(s, id, id ? axiomPreview(s, id) : null) };
     }
     function rules(s) { return memoFor(s).rules; }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
@@ -548,7 +598,7 @@
         const limit = r.attackLimit === Infinity ? '' : ' At most ' + r.attackLimit + ' attack' + (r.attackLimit === 1 ? '' : 's') + ' per player per turn.';
         return [
             ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the enemy hero to zero hearts.'],
-            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Use up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' card activations: casts, attacks and manual Activate together.'
+            ['Turn', 'Choose one draw: take ' + r.drawCount + ' from your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Use up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' card activations: casts, attacks and manual Activate together.'
                 + ' Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'],
             ['Attacks', (r.attacksPerCreature > 1 ? 'Each ready creature may attack twice.' : 'Each ready creature may attack once.') + limit + ' New creatures wait a turn unless Swift' + (r.arrivalReady ? ' (now: all can act at once).' : '.')],
             ['Combat', (combat ? combat.text : 'Both creatures deal damage equal to their attack.') + ' Damage stays' + (r.heal ? ' until the controller\'s next turn (healing rule).' : '.')],
@@ -1438,6 +1488,7 @@
         if (s.fate.events % 2 === 1) {
             s.axioms.discard.push(...Object.values(s.axioms.active));
             s.axioms.active = {};
+            s.axioms.numeric = {};
             emit(G, { t: 'reset', text: 'Fate reset: all rules return to the basics.' });
         } else {
             // An older state never set a card aside: it turns over the deck's top card, as before.
@@ -1469,19 +1520,25 @@
     // reset does (Fate does not move), and never becomes an active rule itself.
     function setAxiom(G, id, by) {
         const s = G.s, A = s.axioms, ax = axiomDefs()[id];
-        const changed = axiomWouldChange(s, id);
+        const preview = axiomPreview(s, id), changed = preview.changed;
+        if (!changed) {
+            if (!ax.own) A.discard.push(id);
+            emit(G, { t: 'axiom-no-change', id, player: by, text: ax.name + ': ' + preview.reason });
+            return;
+        }
+        const projected = projectedAxioms(s, id, preview);
         if (ax.clearRules) {
             A.discard.push(...Object.values(A.active));
-            A.active = {};
         } else {
             const old = A.active[ax.category];
             if (old) A.discard.push(old);
-            A.active[ax.category] = id;
         }
+        A.active = projected.active;
+        A.numeric = projected.numeric;
         A.flips += 1;
         emit(G, ax.clearRules
             ? { t: 'axiom', id, player: by, clear: true, text: 'Rule change — ' + ax.name + ': every rule goes back to the basics.' }
-            : { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
+            : { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + (preview.text || ax.text) });
         if (by != null) {
             [0, 1].forEach(p => s.players[p].board.slice().forEach(cid => {
                 const c = s.cards[cid];
@@ -2238,7 +2295,7 @@
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

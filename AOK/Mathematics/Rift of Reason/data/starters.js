@@ -40,7 +40,8 @@
     Rift.data.starterDecks = {
         version: 1,
         rewardsVersion: 1,
-        axioms: ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy'],
+        axioms: ['flux-plays-plus-1', 'flux-plays-minus-1', 'flux-draw-plus-1', 'flux-draw-minus-1',
+            'flux-growth-plus-1', 'flux-cost-plus-1', 'flux-cost-minus-1', 'limited-memory', 'momentum', 'two-plays'],
         decks: {
             // Guard buys time; small damage sets up Close the Proof. Drawing and selective answers support Foresee.
             owlet: { strategy: 'Patient midrange', colour: 'reason',

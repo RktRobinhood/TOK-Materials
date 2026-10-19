@@ -1,12 +1,12 @@
 # Relative Flux contract — #101, stage 1
 
-Planning baseline: `590f6fc`, 19 October 2026. #100 is implemented. This document completes the first requested stage: composition, bounds, Unlimited behavior and an initial content/distribution matrix. **None of these modifiers, grants or distribution changes is implemented yet.** #101 remains open. Numeric tuning below is an initial builder decision to measure in the later engine/UI/AI release, not a classroom balance finding or another teacher approval gate.
+Planning baseline: `590f6fc`, 19 October 2026. Runtime implementation baseline: `6cb4ac9`. All three #101 stages are now implemented. The contracts and matrix below remain authoritative; the original proposed construction policy is retained after a 240-match controlled comparison and a 60-match eligible power probe. See [runtime verification](../../reviews/flux-runtime-101-2026-10-19.md) and [measurements](../../reviews/flux-balance-101-2026-10-19.json). Earlier planning-only language below describes the original implementation sequence, not outstanding work. No classroom balance result is claimed.
 
 ## Current seams and compatibility constraints
 
-- `js/battle/engine.js`: `RULE_DEFAULTS`, `memoFor`, `axiomWouldChange`, `setAxiom`, `fateEvent`, `playCost` and `startTurn`. Rules currently overlay absolute values from one active ID per category. The memo watches IDs: a repeated relative card must invalidate it even when that ID stays the same.
-- `js/battle/ai.js`: `withAxiom`, `nextEventState` and `axiomValues` currently project replacements directly from IDs. They must consume the engine's effective projection before relative cards become obtainable.
-- `js/screens/battle.js`: `axiomNote`, `ruleTile`, `axiomChanges` and `whyNotAxiomRule` need effective values/reasons. Collection/Help must distinguish a delta from a fixed total. Coordinate with #104; this contract does not claim its preview clips or redesigned arena are complete.
+- `js/battle/engine.js`: `axiomPreview` describes an effective transition; `projectAxiom` projects it without actions; `setAxiom` applies it to paid casts/free flips. `memoFor` watches IDs and resolved numeric records, so a repeated ID invalidates cached values. `playCost` and `startTurn` consume the resulting shared rules.
+- `js/battle/ai.js`: `withAxiom`, `nextEventState`, `axiomValues` and both stronger candidate filters consume the engine's effective projection/change query.
+- `js/screens/battle.js`: `axiomNote`, `ruleTile`, `axiomChanges`, `whyNotAxiomRule` and Fate markers display effective values/reasons. Collection/Help distinguish a delta from a fixed total. This contract does not claim #104's preview clips or broader arena integration are complete.
 - `data/axioms.js`, `data/starters.js`, `State.ownedAxioms`, `State.axiomLoadout` and team-code validation control actual access. **Current construction permits ten axiom cards with at most two copies per ID**, not ten distinct IDs as the older issue body says. Preserve that implemented #112 rule.
 - Existing IDs retain their meanings: `thrift` sets creature cost delta to −1; `luxury` sets it to +1; `study` sets draw count to 2; `abundance` sets growth to 2; `restraint`/`two-plays`/`plenty` set activation totals to 1/2/3. `infinity` remains the explicit Unlimited card. Do not silently turn an old absolute card into a relative one.
 
@@ -38,7 +38,7 @@ Changing growth affects future turn starts, not current capacity/refill. Changin
 - A free Fate delta that is ineffective at a bound/Unlimited is consumed to the shared discard, leaves the active value/provenance intact and reports why. It does not create a replacement conditional event or cost a player activation. The normal Fate cursor/event progression still happens.
 - Fate reset and Spare Axiom clear all shared accumulated values and active IDs, restoring the basics. Neither refunds spent uses nor erases an allocated owner bonus. Pending scheduled/conditional effects keep their existing reset semantics. Normal paid-cast conditional hooks, targeted choices and automatic follow-ups retain #100's counting contract.
 
-## State and projection seam to establish
+## State and projection seam
 
 Keep `axioms.active` as category → ID for current callers and card provenance. Add a battle-local resolved numeric record, for example `axioms.numeric[category] = { id, value }`; the record and active ID update atomically. Store finite integers or the explicit string `unlimited`, never raw JSON Infinity. Older battle fixtures without this record fall back to their existing absolute IDs/defaults. The resolved rule query may expose JavaScript Infinity, as it does now. No adventure save field is needed for a battle-local record; acquisition receipts belong in the canonical save.
 
@@ -48,7 +48,7 @@ Use one authoritative engine transition for paid casts, free Fate flips, effecti
 
 ## Initial content matrix
 
-Sixteen **planned new common** IDs cover all four signs in all four categories. All ±1 cards cost 1 energy; all ±2 cards cost 2. Every cast also costs its one activation. Short names below are working student-facing names; give card text the category and applicable bounds.
+Sixteen **released common** IDs cover all four signs in all four categories. All ±1 cards cost 1 energy; all ±2 cards cost 2. Every cast also costs its one activation. Card text names the category and applicable bounds.
 
 | Planned ID | Working name | Category | Delta | Energy |
 |---|---|---|---:|---:|
@@ -86,11 +86,11 @@ Legacy owners can deliberately select two Infinity copies, so their decks need n
 
 Opening-state tradeoff: both negative draw modifiers are ineffective while draw count is basic (1), and Two Moves is ineffective while activation allowance is basic (2). Uniformly sampling seven of sixteen gives an expected 0.875 initially ineffective modifier cards per contribution (8.75% of all slots); 70% of contributions contain at least one of the two negative draw cards. Including the finite repair slot, the expected initial no-op share is 18.75% for the introductory profile and 16.25% for the eligible profile. Those cards can become useful after rules change; these are static construction facts, not stalled-turn measurements. The first runtime balance pass must specifically test this tradeoff before adopting the proposed distribution, including the fixed starter's negative draw/finite repair cards. Adjust construction/tuning if needed; never reroll a submitted card or the top of a shuffled deck to hide it.
 
-## Implementation slices and acceptance evidence still required
+## Implementation sequence — completed
 
-1. **Completed here:** this reviewed contract/matrix, algebra cases and a seeded construction-policy experiment. No shipped gameplay change.
-2. Implement one complete activation-modifier slice at the real engine seam: repeat/saturation/Unlimited/finite repair/reset, clone/JSON/memo, owner bonus/spent counts, pending hooks, Fate/no-change behavior, UI/AI agreement. Keep cards bench-only until those paths agree; preserve old IDs. Then extend the same transition to draw/growth/creature costs and test timing/taxes/exhaustion.
-3. Populate/grant cards and apply migration, starter/NPC/preset policy. Exercise real backup/team-code compatibility, acquisition receipts, all deck validators, both lessons and actual browser controls. No parent dependency is satisfied by a rarity field alone.
-4. On the actual implementation, run construction/draw-frequency sampling and seeded matches at all AI levels, reporting modifiers/Unlimited, early development, stalled turns, actionable unspent energy and match length against the #100 baseline. Compare eligibility profiles, legacy/custom decks, conditional/Fate interactions and saturation dead cards. Retune bounds/costs/25% eligibility sampling if needed; explain any revision here. Classroom feedback stays a later observation, not an approval gate already delegated by the teacher.
+1. Reviewed contract/matrix, algebra cases and isolated seeded construction-policy experiment retained as the original stage 1 receipt.
+2. All four modifier categories implemented at the engine/UI/AI/Fate seams, including repeat/saturation/Unlimited/finite repair/reset, clone/JSON/memo, owner bonus/spent counts, hooks and no-change behavior. Paid/free transitions share one implementation; timing and exhaustion are tested.
+3. Cards, migration, starter/generated-opponent policy and Constable reward released. Backup/team-code compatibility, acquisition receipts, deck validators and both lessons are exercised. Existing IDs and explicit selections remain valid.
+4. Runtime construction/draw-frequency sampling and 300 actual AI matches measure modifiers/Unlimited, early development, stalled/actionable turns, match length and saturation. Intro/eligible/legacy-custom rows, conditional/Fate tests and an eligible owner-power probe support retaining the original tuning. Classroom feedback remains a later observation, not an approval gate.
 
-Only close #101 when every acceptance item is implemented and verified. This stage does not close it or claim a gameplay/playtest result.
+The original stage 1 receipt remains a planning artifact. Runtime acceptance is recorded separately in the linked completion report: engine/UI/AI/Fate, migration/acquisition, exact-loadout/code compatibility, actual match frequency, dead-card/pacing tradeoffs and browser controls. The release preserves the proposed bounds, costs and 25% eligible special slot; measured results do not justify retuning them yet. Future classroom feedback remains optional tuning.

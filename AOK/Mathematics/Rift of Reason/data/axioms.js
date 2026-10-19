@@ -360,6 +360,26 @@
         },
     };
 
+    // #101: common relative rules. The engine resolves these against the shared value, before
+    // owner bonuses. Old named absolute rules keep their original meanings and IDs.
+    const fluxIds = [];
+    const fluxNames = {
+        plays: ['One More Move', 'One Fewer Move', 'Two More Moves', 'Two Fewer Moves'],
+        draw: ['One More Card', 'One Fewer Card', 'Two More Cards', 'Two Fewer Cards'],
+        growth: ['Grow Faster', 'Grow Slower', 'Grow Much Faster', 'Grow Much Slower'],
+        cost: ['A Little Costlier', 'A Little Cheaper', 'Much Costlier', 'Much Cheaper'],
+    };
+    [['plays', 'plays', 'playLimit', 'card activations per turn', '1–6'], ['draw', 'draw', 'drawCount', 'cards in the normal draw', '1–3'],
+        ['growth', 'energy', 'growth', 'energy growth next turn', '−1–3'], ['cost', 'cost', 'costDelta', 'creature energy costs', '−2–2']].forEach(([key, category, field, label, bounds]) => {
+        [1, -1, 2, -2].forEach((delta, i) => {
+            const id = 'flux-' + key + '-' + (delta > 0 ? 'plus-' : 'minus-') + Math.abs(delta);
+            fluxIds.push(id);
+            axioms[id] = { name: fluxNames[key][i], category, cost: Math.abs(delta), rarity: 'common',
+                short: (delta > 0 ? '+' : '−') + Math.abs(delta) + ' ' + label,
+                text: 'For BOTH players, change ' + label + ' by ' + (delta > 0 ? '+' : '−') + Math.abs(delta) + '. Bounds: ' + bounds + '.' + (key === 'plays' ? ' Unlimited needs a fixed limit.' : ''),
+                modifier: { field, delta } };
+        });
+    });
     Object.entries(axioms).forEach(([id, a]) => {
         a.id = id;
         if (a.cost == null) a.cost = 2;
@@ -377,4 +397,13 @@
             'restraint', 'two-plays', 'plenty', 'infinity', 'steady-state', 'diminishing-returns', 'limited-memory',
             'fresh-start', 'fair-share', 'momentum', 'think'],
     };
+    Rift.data.axiomDecks.legacyStarter = Rift.data.axiomDecks.starter.slice();
+    Rift.data.axiomDecks.default = ['flux-plays-plus-1', 'flux-plays-minus-1', 'flux-draw-plus-1', 'flux-draw-minus-1',
+        'flux-growth-plus-1', 'flux-cost-plus-1', 'flux-cost-minus-1', 'limited-memory', 'momentum', 'two-plays'];
+    Rift.data.axiomDecks.starter = Rift.data.axiomDecks.starter.filter(id => id !== 'infinity').concat(fluxIds);
+    // Construction, never weighted draws: submitted loadouts and the final shared shuffle stay exact.
+    Rift.data.flux = { ids: fluxIds, contribution(seed, eligible) {
+        const rng = Rift.makeRng(seed);
+        return rng.shuffle(rng.shuffle(fluxIds.slice()).slice(0, 7).concat(['limited-memory', 'momentum', eligible && rng.chance(0.25) ? 'infinity' : 'two-plays']));
+    } };
 })(typeof window !== 'undefined' ? window : globalThis);

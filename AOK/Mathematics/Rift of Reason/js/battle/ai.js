@@ -391,12 +391,10 @@
     }
 
     function withRules(s, active) {
-        return Object.assign({}, s, { axioms: Object.assign({}, s.axioms, { active }) });
+        return Object.assign({}, s, { axioms: Object.assign({}, s.axioms, { active, numeric: {} }) });
     }
     function withAxiom(s, id) {
-        const ax = Rift.data.axioms[id];
-        if (ax.clearRules) return withRules(s, {}); // Granny's Spare Axiom: every rule back to the basics
-        return withRules(s, Object.assign({}, s.axioms.active, { [ax.category]: id }));
+        return E().projectAxiom(s, id);
     }
 
     function nextEventState(s) {
@@ -489,8 +487,7 @@
         const base = staticDeep(s, me, ctx);
         ids.forEach(id => {
             if (out[id] != null || !Rift.data.axioms[id]) return;
-            const cat = Rift.data.axioms[id].category;
-            out[id] = s.axioms.active[cat] === id ? 0 : staticDeep(withAxiom(s, id), me, ctx) - base;
+            out[id] = !E().axiomWouldChange(s, id) ? 0 : staticDeep(withAxiom(s, id), me, ctx) - base;
         });
         return out;
     }
@@ -760,7 +757,7 @@
         const options = legal.filter(a => {
             if (a.type !== 'axiom') return false;
             const ax = Rift.data.axioms[a.choice];
-            if (s.axioms.active[ax.category] === a.choice) return false;
+            if (!E().axiomWouldChange(s, a.choice)) return false;
             return (vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category];
         }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, 3);
         if (!options.length) return null;
@@ -934,7 +931,7 @@
         legal.filter(a => {
             if (a.type !== 'axiom') return false;
             const ax = Rift.data.axioms[a.choice];
-            return s.axioms.active[ax.category] !== a.choice && ((vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category]);
+            return E().axiomWouldChange(s, a.choice) && ((vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category]);
         }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, EXPERT.axioms).forEach(a => cands.push(a));
         let best = oneply, bestV = -Infinity;
         for (const a of cands) {

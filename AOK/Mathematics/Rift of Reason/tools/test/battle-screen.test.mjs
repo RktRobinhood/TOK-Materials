@@ -581,7 +581,7 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     assert.match($('.b-rules').textContent, /Axioms are the rules both players start from\./);
     assert.match($('.b-rules-head').textContent, /Active now/);
     const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
-    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy']);
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'draw', 'cost']);
     assert.equal(t.root.querySelectorAll('.b-rtile.changed').length, 0);
     assert.match($('.b-rtile[data-cat="plays"]').textContent, /2 left/);
     assert.ok(!/Keywords/.test($('.b-side').textContent), 'the keywords are in How to play, not the panel');
@@ -960,7 +960,7 @@ test('changed rules: gold "Changed" tiles beside the core tiles, and each tile s
     const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.axioms.active = { combat: 'underdog', cost: 'thrift', arrival: 'arrival', defeat: 'mercy' }; });
     assert.equal(t.root.querySelectorAll('.b-rule-chip').length, 0, 'no lane rule chips');
     const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
-    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'cost', 'arrival', 'defeat']);
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'draw', 'cost', 'arrival', 'defeat']);
     const changed = t.root.querySelectorAll('.b-rtile.changed').map(x => x.dataset.cat);
     assert.deepEqual(changed, ['combat', 'cost', 'arrival', 'defeat']);
     t.root.querySelectorAll('.b-rtile.changed').forEach(x => assert.equal(x.querySelector('.b-rtile-new').textContent, 'Changed'));
@@ -1057,6 +1057,37 @@ test('the Spark hint replaces "Nothing left to do" when +1 energy makes a card p
     t.$('.b-spark').click();
     assert.ok(t.$('.b-hand [data-cid="p0c0"]').classList.contains('playable'));
     t.handle.destroy();
+});
+
+test('relative rules show effective dock values and previews; repeated casts keep one tile', () => {
+    const id = 'flux-plays-plus-1';
+    const t = prepared({ me: ['keanu'], opp: ['keanu'], energy: 10 }, s => {
+        s.players[0].axHand = [id, id]; s.axioms.active.plays = id;
+        s.axioms.numeric = { plays: { id, value: 3 } }; s.players[0].extraPlays = 1;
+    });
+    assert.match($rt(t, 'plays').textContent, /3 activations per turn/);
+    assert.match(hover(t, '.b-hand [data-axiom="' + id + '"]'), /Activations: 3 → 4/);
+    t.$('.b-hand [data-axiom="' + id + '"]').click(); t.$('.b-prompt .btn.primary').click(); t.g.flush();
+    assert.equal(t.E.rules(t.handle.state).playLimit, 4);
+    assert.equal(t.root.querySelectorAll('.b-rtile[data-cat="plays"]').length, 1);
+    assert.match($rt(t, 'plays').textContent, /4 activations per turn/); t.handle.destroy();
+});
+
+test('Fate node accessible forecast and keyboard inspection show resolution-time relative values', () => {
+    const id = 'flux-draw-plus-1';
+    const t = prepared({ me: ['keanu'], opp: ['keanu'] }, s => { s.fate.next = id; s.axioms.active.draw = 'study'; });
+    const node = t.$('.b-fev.flip:not(.far):not(.ghost)');
+    assert.match(node.getAttribute('aria-label'), /If this resolves now: Draw count: 2 → 3/);
+    node.dispatchEvent({ type: 'keydown', key: 'Enter', preventDefault() {} });
+    assert.match(t.$('.b-inspect').textContent, /Later rule changes can alter this/); t.handle.destroy();
+});
+
+test('ordinary fallback opponents use the intro contribution while explicit rule decks stay exact', () => {
+    const cfg = { ...practice }; delete cfg.axiomDeck;
+    const t = setup(cfg), s = t.handle.state;
+    const all = s.axioms.deck.concat(s.players.flatMap(p => p.axHand), s.fate.next || []);
+    assert.equal(all.filter(id => t.Rift.data.axioms[id].modifier).length, 14);
+    assert.ok(!all.includes('infinity')); t.handle.destroy();
 });
 
 test('a rule card that would change nothing is dimmed and says "Already the rule"', () => {
