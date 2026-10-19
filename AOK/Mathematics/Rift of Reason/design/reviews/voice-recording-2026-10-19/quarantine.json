@@ -1,0 +1,24 @@
+[
+  {
+    "id": "carlseal-97u75e",
+    "reason": "Expected Good game. I suppose. is absent; two independent transcripts instead identify the previous line tail I will analyse that later. Tail reused in repaired previous clip; keep this ID on browser speech.",
+    "backup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261019\\original-clips\\carlseal-97u75e.mp3",
+    "sha256": "552fbc3eaa5aa556f4a4725b9410ea97f68e3f9aa74ee1996de8bede34afa5e8"
+  },
+  {
+    "id": "beansprout-1aug553",
+    "reason": "Expected Ooh clip instead contains Teddy. The possible Ooh source grunt is independently heard as Oof or Ugh; wording/vowel remains uncertain, so preserve browser fallback.",
+    "backup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261019\\original-clips\\beansprout-1aug553.mp3",
+    "sha256": "04ade5e7d39901ab11a6cf9d6169cae1a7a47edcdd587b84e8992612cd97f7e7",
+    "candidateBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261019\\original-clips\\beansprout-116y8h7.mp3",
+    "candidateSha256": "380c5545a5a668ea803dce197a74e9480660210cda79eb32738e71c0ec3c49fa"
+  },
+  {
+    "id": "beansprout-iybblq",
+    "reason": "Expected Hmph clip instead contains Teddy. No independent transcript identifies the tiny terminal sound as Hmph; preserve browser fallback.",
+    "backup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261019\\original-clips\\beansprout-iybblq.mp3",
+    "sha256": "641035d595e28754ad64a9fac806f6a39fc3816595b9b5912bfcbcae8b7ef9e6",
+    "candidateBackup": null,
+    "candidateSha256": null
+  }
+]

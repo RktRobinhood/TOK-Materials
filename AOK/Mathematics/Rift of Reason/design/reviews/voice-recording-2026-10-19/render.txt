@@ -1,0 +1,87 @@
+
+--render --only swiftlet --max-requests 1 2026-10-19T07:14:31.256Z
+7 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+split failed for swiftlet x7; kept in tools/voice-raw, retrying as 4 + 3.
+FINISHED: 0 lines saved, 1 requests used. Manifest lists 3010 files.
+
+--render --only speedcheeta --max-requests 1 2026-10-19T07:15:20.637Z
+6 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:15:31 a.m. lite  speedcheeta: saved 6 lines (total 6)
+FINISHED: 6 lines saved, 1 requests used. Manifest lists 3016 files.
+
+--render --only carlseal --max-requests 1 2026-10-19T07:15:52.863Z
+6 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:16:20 a.m. lite  carlseal: saved 6 lines (total 6)
+FINISHED: 6 lines saved, 1 requests used. Manifest lists 3029 files.
+
+--render --only obambu --max-requests 1 2026-10-19T07:16:41.625Z
+6 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:17:08 a.m. lite  obambu: saved 6 lines (total 6)
+FINISHED: 6 lines saved, 1 requests used. Manifest lists 3035 files.
+
+--render --only haalandroid --max-requests 1 2026-10-19T07:17:29.825Z
+6 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:17:42 a.m. lite  haalandroid: saved 6 lines (total 6)
+FINISHED: 6 lines saved, 1 requests used. Manifest lists 3041 files.
+
+--render --only swiftlet-possessed --max-requests 1 2026-10-19T07:18:03.954Z
+5 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:18:17 a.m. lite  swiftlet-possessed: saved 5 lines (total 5)
+FINISHED: 5 lines saved, 1 requests used. Manifest lists 3046 files.
+
+--render --only eminemu-possessed --max-requests 1 2026-10-19T07:18:38.486Z
+5 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:18:50 a.m. lite  eminemu-possessed: saved 5 lines (total 5)
+FINISHED: 5 lines saved, 1 requests used. Manifest lists 3051 files.
+
+--render --only oracle --max-requests 1 2026-10-19T07:19:11.552Z
+5 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:19:22 a.m. lite  oracle: saved 5 lines (total 5)
+FINISHED: 5 lines saved, 1 requests used. Manifest lists 3056 files.
+
+--render --only beansprout --max-requests 1 2026-10-19T07:19:43.207Z
+5 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:19:49 a.m. lite  beansprout: saved 5 lines (total 5)
+FINISHED: 5 lines saved, 1 requests used. Manifest lists 3061 files.
+
+--render --only muskrat --max-requests 1 2026-10-19T07:20:10.143Z
+3 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+9:20:19 a.m. lite  muskrat: saved 3 lines (total 3)
+FINISHED: 3 lines saved, 1 requests used. Manifest lists 3064 files.
+Final ledger: {
+  "day": "2026-10-19",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10
+  }
+}
+
+--render --only granny --id granny-j31sif,granny-1nht4xg,granny-1hezu4,granny-1hne7ay,granny-1g954zu,granny-su5efv,granny-6t7ssz,granny-kgw80h,granny-z17dn2,granny-4szhqx --max-requests 1 2026-10-19T07:24:57.831Z
+10 lines to render in 1 requests on gemini-3.8-flash-tts.
+9:25:20 a.m. flash granny: saved 10 lines (total 10)
+FINISHED: 10 lines saved, 1 requests used. Manifest lists 2972 files.
+
+--render --only granny --id granny-155ac5f,granny-tuorir,granny-fk4a70,granny-dfpemt,granny-zyn42c,granny-1ycb8ih,granny-13hcnw7,granny-gvw9ns,granny-xfnpgl,granny-1nks571 --max-requests 1 2026-10-19T07:25:42.166Z
+10 lines to render in 1 requests on gemini-3.8-flash-tts.
+9:26:09 a.m. flash granny: saved 10 lines (total 10)
+FINISHED: 10 lines saved, 1 requests used. Manifest lists 2982 files.
+
+--render --only granny --id granny-hm2z2d,granny-1yfxf8t,granny-1dj60wz,granny-8qsmvz,granny-1q2xabm,granny-1ecqpw8,granny-f70pc5,granny-2njnku,granny-qdr96b,granny-1rgyz2 --max-requests 1 2026-10-19T07:26:30.208Z
+10 lines to render in 1 requests on gemini-3.8-flash-tts.
+9:27:00 a.m. flash granny: saved 10 lines (total 10)
+FINISHED: 10 lines saved, 1 requests used. Manifest lists 2992 files.
+
+--render --only granny --id granny-fwxv1x,granny-1i4nbnl,granny-q15vt1,granny-8g6nmb,granny-1hq0d0z,granny-sp5sm8,granny-fs6iif --max-requests 1 2026-10-19T07:27:21.419Z
+7 lines to render in 1 requests on gemini-3.8-flash-tts.
+9:27:49 a.m. flash granny: saved 7 lines (total 7)
+FINISHED: 7 lines saved, 1 requests used. Manifest lists 2999 files.
+
+All four Granny batches completed successfully (37 clips, four flash attempts). The orchestration script then found no voice-raw directory because all batches split successfully; its optional raw-directory scan raised ENOENT after recording and copying had completed. No TTS retry was made. Shared ledger preserved:
+{
+  "day": "2026-10-19",
+  "counts": {
+    "gemini-3.8-flash-lite-tts": 10,
+    "gemini-3.8-flash-tts": 4
+  }
+}
+
+Beansprout original Oh dear candidate (116y8h7) was recovered into the external backup from the untouched isolated render worktree and verified against its pre-repair validation SHA256 before quarantine accounting. The first quarantine helper invocation stopped before deleting any clip because that backup was absent; resumed successfully after preserving it.

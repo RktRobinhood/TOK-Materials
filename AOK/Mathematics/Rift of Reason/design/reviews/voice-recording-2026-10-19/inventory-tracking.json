@@ -1,0 +1,44 @@
+{
+  "baseHead": "6cb4ac939c83b2b0ce7c0763d7b385c4299396e7",
+  "checkedAt": "2026-10-19T11:34:36.036Z",
+  "sourceVoiceInventories": [
+    {
+      "file": "design/source-assets/4-caricatures/production-145-2026-10-13/inventory.json",
+      "tracked": true,
+      "workingCopyMatchesCommittedMain": true,
+      "mainBlob": "efcc56e2f0fbe50a19bc00d013db4b3994914399",
+      "status": "Committed source proposal; preserve existing release gates before runtime recording."
+    },
+    {
+      "file": "design/source-assets/4-caricatures/production-145-2026-10-13/voice-drafts-group4.json",
+      "tracked": true,
+      "workingCopyMatchesCommittedMain": true,
+      "mainBlob": "43e6126e1d715925ec4cb0a2dead80123ce5df83",
+      "status": "Committed source proposal; preserve existing release gates before runtime recording."
+    },
+    {
+      "file": "design/source-assets/4-caricatures/production-145-2026-10-13/voice-drafts-group5.json",
+      "tracked": true,
+      "workingCopyMatchesCommittedMain": true,
+      "mainBlob": "af1a67adec6544485863df1da8ab0ca5fdf1e421",
+      "status": "Committed source proposal; preserve existing release gates before runtime recording."
+    },
+    {
+      "file": "design/source-assets/4-caricatures/conditional-149-2026-10-14/inventory.json",
+      "tracked": true,
+      "workingCopyMatchesCommittedMain": true,
+      "mainBlob": "41e958d19f7c4f3bd823c250ce2fd0590112f737",
+      "status": "Committed source proposal; preserve existing release gates before runtime recording."
+    },
+    {
+      "file": "design/source-assets/4-caricatures/spell-standouts-145-2026-10-14/inventory.json",
+      "tracked": true,
+      "workingCopyMatchesCommittedMain": true,
+      "mainBlob": "bebd1cb09226a1f69fa86195f85ead0819a1bcc9",
+      "status": "Committed source proposal; preserve existing release gates before runtime recording."
+    }
+  ],
+  "newRuntimeInventory": "catalog-latest-main.json",
+  "newAudioManifest": "data/voice-manifest.js",
+  "tutorialBacklog": "tutorial-coverage.json"
+}

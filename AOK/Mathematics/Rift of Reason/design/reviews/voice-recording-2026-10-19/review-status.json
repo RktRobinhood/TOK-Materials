@@ -1,0 +1,899 @@
+{
+  "date": "2026-10-19",
+  "catalogBase": "6cb4ac939c83b2b0ce7c0763d7b385c4299396e7",
+  "textModelRequests": 55,
+  "requestsByModel": {
+    "gemini-3.8-flash": 23,
+    "gemini-2.5-flash-lite": 1,
+    "gemini-3.5-flash-lite": 31
+  },
+  "transcriptResults": 122,
+  "retainedClips": 88,
+  "withCurrentHashTranscript": 88,
+  "exactNormalizedMatches": 56,
+  "reviewedVariants": 32,
+  "pending": [],
+  "limits": "Automated transcription does not certify acting or cast consistency. Rejected and failed requests certify zero clips.",
+  "clips": [
+    {
+      "id": "beansprout-116y8h7",
+      "sha256": "5706577179896087dba66e5c57b15ee08eb16bf678ec573dcb05230802ed3e1f",
+      "expected": "Oh dear.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Oh dear.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "beansprout-1m27sc0",
+      "sha256": "563aa16d1edc9dfd3f24cdea8fadf2633c1a5d5baf01c51135f5200faf8c5c0c",
+      "expected": "Hmm… Teddy?",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Teddy",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Introductory nonlexical Hmm is omitted in the final transcript, which includes Teddy. The repair concatenates separately transcribed Hmm and Teddy source clips. Exact introductory vocalization is not certified."
+    },
+    {
+      "id": "beansprout-1pu4117",
+      "sha256": "9c9faa559a8e2810902e2687d6ee6d7cd5d919a890bdd2c05cc0f6c9544e1e4d",
+      "expected": "Teddy…",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Teddy",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "carlseal-122nusw",
+      "sha256": "266d69e1887366d432529968e667a65727b3efb5a064662d6a2a08ec98045f5a",
+      "expected": "I have calculated this. Twenty moves ahead.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "I have calculated this, 20 moves ahead.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "carlseal-15yh4wo",
+      "sha256": "fd3ac3855a1aa9284da778f2cb64fae9700c026190568eadd345e6dc60a8d756",
+      "expected": "Interesting. I will analyse that later.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Interesting. I will analyze that later.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed British/American spelling in transcription (analyse/analyze or honour/honor). No missing clause or adjacent dialogue."
+    },
+    {
+      "id": "carlseal-1lxtuzq",
+      "sha256": "a5433502a36ce54348e7eb2699b07d0a9cfb3651d8403e4ae89fee81685bddae",
+      "expected": "Hm. A blunder. Mine.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "A blunder. Mine.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Introductory nonlexical Hm is omitted in the accepted final transcript; A blunder. Mine. is complete. The short source vocalization was preserved in the repair, but its exact articulation remains uncertified."
+    },
+    {
+      "id": "carlseal-1qk2ms0",
+      "sha256": "2053727d37513823e27a9911a424ced1eba8bb58b5091b526679d0ebb7dc946b",
+      "expected": "Show me your hand. I already know it.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Show me your hand. I already know it.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "carlseal-7bgcq",
+      "sha256": "57649f688cd7e01769f9147c3c8f4404c09ac70b042d7c2ff7dbfb58cc5eeae6",
+      "expected": "Let me see your cards. Yes. As expected.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Let me see your cards. Yes. As expected.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "eminemu-possessed-155mxsf",
+      "sha256": "e51815f75a9c2e67d9b28a99f5544ceceec9c2764a2d55959dc50d89c9a1a223",
+      "expected": "Everyone? Who's everyone? Show me their faces!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Everyone? Who's everyone? Show me their faces.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "eminemu-possessed-1nak03e",
+      "sha256": "a779ce06134c9ad1f84067f7b834b051cadd838ae719b0d53375e3f9c1d49296",
+      "expected": "Has the Rock been to the sky?…He's been to the gym. Same height.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Has the Rock been to the sky? He's been to the gym. Same height.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "eminemu-possessed-3fcuzm",
+      "sha256": "cd30a0f607679973e60b7fd3d40b120e82a70ecbad757d2475155d7eee00a639",
+      "expected": "Nope. Listen to the beat. Who said it?",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Nope. Listen to the beat. Who said it?",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "eminemu-possessed-be5k2v",
+      "sha256": "1876bbd7b77a2b93f92e5142b1d2e887ba117d26dc63acec43a1d5c5d17902c7",
+      "expected": "Rock said march, and Rock's a star. Stars know best, near and far!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Rock said march and Rock's a star. Stars know best near and far.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "eminemu-possessed-mgvc5c",
+      "sha256": "d7804ff0000ad454bdf0d5a0a76f3cfef795980597f10d16c824ab696827df79",
+      "expected": "Sheep or soldier? That's two. I rhyme better than that.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Sheep or soldier, that's two. I rhyme better than that.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-13hcnw7",
+      "sha256": "566381b6234eeb5e15358af2dd9ead8ead7f145f494ee287e48e3a143c232dd6",
+      "expected": "Only 2 hearts left! Those two attacks used both activations.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Only two hearts left. Those two attacks used both activations.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-155ac5f",
+      "sha256": "92ccc7641c6aec1f610446cabf69b79e96fed540540f020f5f1560d1776359ed",
+      "expected": "Khaby hit you for 1 heart. The pictures on the left, Recent plays, show what I did.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Coby hit you for one heart. The pictures on the left recent plays show what I did.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-1dj60wz",
+      "sha256": "28479d0b6b61be823c5d7173af45f070d1bd4c6d73a3f28f007bc4c5dfa3281c",
+      "expected": "Filter and the attack used both activations. End turn. Granny will pass, then draw before your last hit.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Filter and the attack used both activations. End turn. Granny will pass. Then draw before your last hit.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-1ecqpw8",
+      "sha256": "a2e77f5427ae47f56754c2c3129f7882ec94605b3e0631a1253ce8ca434af0e7",
+      "expected": "New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "New creatures sleep until your next turn. End turn. Granny will draw and pass, then Kim can attack.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-1g954zu",
+      "sha256": "0f87ced62b1fd88071f9ed6e78afb4c7c7cafa7f67a99c12d47a492bb210ef04",
+      "expected": "I played Khaby Llame. See his silver shield frame? That means Guard.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "I played Cobby Llama. See his silver shield frame? That means guard.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-1hezu4",
+      "sha256": "c099ef54faf3c01a56541acc0b3154421017b29ee73eef6179329d3ac3fb203d",
+      "expected": "Your turn again. Your energy grew to 2, and Kim is awake.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Your turn again. Your energy grew to two, and Kim is awake.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1hne7ay",
+      "sha256": "f4a16c8724e1cbfe1113186ba5d914c001dd58a5db85433974b35d97f5918dce",
+      "expected": "Ouch! 3 hearts left. That attack used one activation.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Ouch. Three hearts left. That attack used one activation.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1hq0d0z",
+      "sha256": "247a444e7b79c7f7943b8090be025bb932ea7ce2d9ba37054756f41e4d623449",
+      "expected": "Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Read win, the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-1i4nbnl",
+      "sha256": "1710efdfce809cb44258487868e74b9f97d776be4000897fb6a542c18d887a6d",
+      "expected": "A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "A hit would make Granny win. Your win rule card or Kim's filter can restore the original goal.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-1nht4xg",
+      "sha256": "067d1a68136e3d3d50a4ce4a7c76611e68859d3f5b12ca80d956530f9d5b05a5",
+      "expected": "My turn. I have only 1 energy, and my cards cost more. So I just draw.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "My turn. I have only one energy and my cards cost more. So, I just draw.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1nks571",
+      "sha256": "17daeabc5f10ede22d119dc61acf724eaa81cc8901151c9e391bb8dccd349d55",
+      "expected": "Kim's Filter brings the Reset 2 rounds sooner. Click Kim, then press Activate.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Kim's filter brings the reset two rounds sooner. Click Kim, then press activate.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1q2xabm",
+      "sha256": "a5defb3a0b3caddddcbf84dd37a076725ffdaddf0763caec44fc32b87f44b466",
+      "expected": "You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "You have one energy. Kim costs one. The blue number. Yellow is attack, red is health. Drag Kim onto your side, or click her then play.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1rgyz2",
+      "sha256": "6620339ca7960cba65520b946a9038b66b985d3f079fd206c452595914e757c4",
+      "expected": "Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Read the win tile in Axioms. Granny has one heart. If Kim attacks her now, whose zero hearts will win the match?",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-1ycb8ih",
+      "sha256": "fa089daf8aea4786e5ea4ce41e673e5afda34cab2bece22b3a58f0c50bfc9fed",
+      "expected": "Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Sheckarattel took one damage. Astro Fisicat took zero. Same cards, different rule, different result.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-1yfxf8t",
+      "sha256": "fd9dc475f4709e289d002141bfa29a0dad3d82fd454ab0ac888701641e14c151",
+      "expected": "Fate reset! All rules are back to the basics: my rule AND yours. Zero hearts loses again.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Fate reset. All rules are back to the basics. My rule and yours. Zero hearts loses again.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-2njnku",
+      "sha256": "5c51b9f4539e30d4fa62f9e5afd040a30b8ed0b7c3d9bd9014c1a9d4afc562c5",
+      "expected": "Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Granny has two hearts and no blocker. Drag Kim onto her portrait, or click Kim, then Granny. Each cast, attack, or activate uses one of your two activations. This hit takes one heart.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-4szhqx",
+      "sha256": "20468a75f6dcd7425230b216a6297f16975148637fcc9aea3009f815fab99983",
+      "expected": "Shakirattle! 3 attack, and Elusive: tactic cards can't target her.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Shackle rattle. Three attack and elusive. Tactic cards can't target her.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-6t7ssz",
+      "sha256": "bed38fca89d114e55cb79e0bf69b350af54e0b3e76978fcf3d78c4d0a9ef5a76",
+      "expected": "Both took 1 damage. Damage stays: the number in the heart shows the health left.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Both took one damage. Damage stays. The number in the heart shows the health left.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-8g6nmb",
+      "sha256": "5239f8556e54eba0faebee951fef6733f13cdb9bbf95a6e64d85862f5da5a32e",
+      "expected": "Zero hearts loses again. You changed the starting rule, so the same attack has a different result.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Zero Hearts loses again. You changed the starting rule, so the same attack has a different result.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-8qsmvz",
+      "sha256": "11e221f5b5c65efdf5af89a86c8f707dc90f124b973c04f58c6e6f32c9f58279",
+      "expected": "Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Each turn starts with one draw. Press your deck. This short match uses loaned cards. Your collection is safe.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-dfpemt",
+      "sha256": "8570f1721e6a5310d3b50673d2db2d2796730ac661a395cd6a11177493e221d2",
+      "expected": "One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "One more thing. Kim has an ability: Filter. Pay one energy, and the next fate event comes two rounds sooner.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-f70pc5",
+      "sha256": "48b3fa83e08950bd62d97cdb8995c19d902fecfa2fde934b73d3a0d1e0f9e726",
+      "expected": "Draw first. Your energy grows and refills each turn.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Draw first. Your energy grows and refills each turn.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-fk4a70",
+      "sha256": "f15b21a1b97a964426b02e3980fa2f00b972c7a0ea4f12b9f122064a08aa76d7",
+      "expected": "Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Koby is defeated. That used one activation. Each cast, attack, or activate uses one. You have two per turn.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-fs6iif",
+      "sha256": "7d592f1699238d45c881adfa2fd03b904b67d936b6f88e54144a722e496d658c",
+      "expected": "Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Same table, same cards. Change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-fwxv1x",
+      "sha256": "b85138ba768f3c6d0de689e596612a18fb999bcd0df9a4cb0b7eb2f08aead91d",
+      "expected": "Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "your decision. You may attack, play your win rule card, or use Kim's filter to bring Fate's reset sooner. Read their effects and choose. No pointer yet.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-gvw9ns",
+      "sha256": "1dbe984e5ce6dff65cae4d956ceca7cc9b260f136d8b3026b13579db1ba322bd",
+      "expected": "I played a rule card! Look at the Win tile.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "I played a rule card. Look at the win tile.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-hm2z2d",
+      "sha256": "54c97c43901654d83e8761ddb013f6039b73a05d712a0ccce42dfd7d6041f049",
+      "expected": "Careful! Now if MY hearts reach 0, I WIN. Don't hit me now. Read the Win tile.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Careful. Now if my heart's reach zero, I win. Don't hit me now. Read the win tile.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-j31sif",
+      "sha256": "d09e5073d0f74511f500259412a927bd130d6fbc335f18194a4c5dcca44c0c96",
+      "expected": "New creatures are asleep. Zzz. Kim can attack on your next turn.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "New creatures are asleep. Kim, can attack on your next turn.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "The written nonlexical Zzz sleep sound is not transcribed; the asleep and next-turn instructions are complete. Exact sleep-sound performance is not certified."
+    },
+    {
+      "id": "granny-kgw80h",
+      "sha256": "5a07c5be9a9929474157666d313dad0b71cab49410b97021908effd77b921542",
+      "expected": "Khaby's own ability also took Astrophysicat's ability away. See: No ability.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Cobby's own ability also took astrophysi cat's ability away. See? No ability.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-q15vt1",
+      "sha256": "582dc246a298c5f2b3a9b759dcf3057f3758cf37621d68263ba97e080f7d8289",
+      "expected": "Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Play your win rule card, or click Kim, then activate filter. Filter uses her attack for this turn.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-qdr96b",
+      "sha256": "e09eef65d27b22a867ecc2364cb8d56b208eaa93beafb97e7c027bffdd67cfa0",
+      "expected": "End turn. Watch Granny change the Win rule. Rule cards affect both players.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "End turn. Watch Granny change the win rule. Rule cards affect both players.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-sp5sm8",
+      "sha256": "07a3d4fe6680f2f403c21343d7546161af270022293c6ebb277427f65466a2aa",
+      "expected": "Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Attack Granny with Kim. Same creature, same hit. This time, the current win rule makes you win.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-su5efv",
+      "sha256": "ce6359bb456c0102d4a36199436c97c3000a6d8bf7e691317e833c33080f97c9",
+      "expected": "In 4 rounds, Fate comes back and resets all rules.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "In four rounds, Fate comes back and resets all rules.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed number-word spelling versus digits; the quantities and instructional clauses match. Automatic exact comparison remains false."
+    },
+    {
+      "id": "granny-tuorir",
+      "sha256": "990f50b1298eff7b6a147bbbdaa000268c7411037d05ed8a0519848dea92ca43",
+      "expected": "Your turn. Shakirattle hits hard. Let's deal with my creatures.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Your turn. Shackle rattle hits hard. Let's deal with my creatures.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-xfnpgl",
+      "sha256": "b1e1ca3f99ed342c40cfb3ebae7aceca377fc2cf23923cc94efb7767de424885",
+      "expected": "Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Hint. What will the next reset on the fate track do to my new win rule? Which of your creatures can move fate?",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "granny-z17dn2",
+      "sha256": "f497dd2506d8c52ffddd9f60d973ff87be7d684f101fa2efa336285153fe6643",
+      "expected": "Khaby lost his Guard. The way to me is open.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Coby lost his guard. The way to me is open.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed phonetic spelling of fictional proper names, sometimes with number-word spelling. Instructional clauses are complete; exact proper-name pronunciation is not certified."
+    },
+    {
+      "id": "granny-zyn42c",
+      "sha256": "f61f277a907d61424bf035201f32054f80cded60d01aa3df3ec70cab01e8b26c",
+      "expected": "The tactic and rule used both activations. End turn. Granny will pass, then you will draw.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "the tactic and rule used both activations and turn. Granny will pass, then you will draw.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed near-homophone transcription of End turn as and turn. Surrounding activation and turn instructions are complete; automatic exact comparison remains false."
+    },
+    {
+      "id": "haalandroid-1crla8k",
+      "sha256": "e9b97fce1f5ecbf57a7a1298ff31ef0b5169e727cdd579a1510177c4665f32fd",
+      "expected": "Target: hero. Goal: yes.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Target. Hero. Goal. Yes.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "haalandroid-1xg2tls",
+      "sha256": "a36f914f561e26e81029519a474fcae0a0dfc473ff5f84a30dc570c0da374951",
+      "expected": "Rebooting. Meditating.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Rebooting. Meditating.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "haalandroid-cyezdc",
+      "sha256": "ce3bccdd83ddf2b71b0dfae1b5c2885ac245d8e6fa67bf322f76829dc2928fdc",
+      "expected": "Error. No goal.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "error no goal",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "haalandroid-euwtn",
+      "sha256": "6bc62942fb8345be8c3d1a3f20cebbc5dd430b5c01e676a03c7d15f803942de5",
+      "expected": "Pattern loading. Goal loading.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "pattern loading goal loading",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "haalandroid-sc312l",
+      "sha256": "400415acd52310989cb3a3695b3ebf00f53389d3a9fdf1933be19a1e72651bfd",
+      "expected": "Pattern… broken.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Pattern broken.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "haalandroid-we5xkt",
+      "sha256": "5d5527457c2469c9c7b826f85bcb2cbc3d1f9923ea22e94c98865a54584b6427",
+      "expected": "Breathe in. Breathe out. Score.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "breathe in breathe out score",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "muskrat-14han12",
+      "sha256": "e3147345b0c78c058586c5239f61b6a3de0b661406c528290e8f7b7caed1eedb",
+      "expected": "Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "undo and reset are free how to play is free the hint button shows its heart cost think first then check your answer",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "muskrat-1aywz2s",
+      "sha256": "f9ca1051544da28f080bb1fb3a9628ec483b217cf54fbd2e816d7c3306b3692c",
+      "expected": "Click creatures to load the boat, then Row across. An unsafe crossing counts as a wrong check.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "click creatures to load the boat then row across an unsafe crossing counts as a wrong check",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "muskrat-yrun4p",
+      "sha256": "d6e80c3b1eb9a5cc9e7d78e8e97d6052ceea11c4383911a49bd757c5dfa7fd19",
+      "expected": "Next year. Definitely. Probably.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "next year definitely probably",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "obambu-15xvaha",
+      "sha256": "3f05f47a76f67b578679147f8c26537f5da3a94727f0a225ab06ff9fcfccee96",
+      "expected": "Yes, we can. Heal up, team.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Yes, we can. Heal up, team.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "obambu-18e7hcd",
+      "sha256": "3bb355bb10cefa950c36860a528f5ae7d24a37b8c52f54253d6661f0a3ff0a03",
+      "expected": "Thank you. It has been an honour.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Thank you. It has been an honor.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed British/American spelling in transcription (analyse/analyze or honour/honor). No missing clause or adjacent dialogue."
+    },
+    {
+      "id": "obambu-1uhxam7",
+      "sha256": "60d015fe561cb277d30acd0f9e60cbf30307223a1ec57cf579d7ced0e0eff7b9",
+      "expected": "Change… is hard.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Change is hard.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "obambu-mnla5v",
+      "sha256": "42a4f87ba8c4596fcd654e293b72a515fffd7ab2397fbd87cac223f8eb5b7047",
+      "expected": "Let me be clear. Here is some hope. And hearts.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Let me be clear. Here is some hope and hearts.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "obambu-ox7mtx",
+      "sha256": "2ff00a0793f7ea3b9fde9fcc370df659da3005ae8b8db8febe9c8fee3523a6d5",
+      "expected": "Let me be clear. That hurt.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Let me be clear, that hurt.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "obambu-znlz2m",
+      "sha256": "f426c152d864f5c7c03fab18a4fac852f7d737995ba1bc2b08fff7f776332335",
+      "expected": "Now… let me pause… and heal.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Now, let me pause and heal.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "oracle-1dwhn5n",
+      "sha256": "f70dd61f30c097ab9837f836a3ab2c272107ebed72b9de07d5ba30ea4873fd06",
+      "expected": "All correct. Inspect a step if you must.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "All correct. Inspect a step if you must.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "oracle-1fulyhd",
+      "sha256": "68eb1f42e3fa93a47dc45a812c185cf64c59a9dbb1eff4ca465e223c2ac41b0d",
+      "expected": "More proofs. Still fast. Still unchecked. Inspect one.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "More proofs, still fast, still unchecked. Inspect one.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "oracle-3i8lny",
+      "sha256": "9282ffb817e6d0f0ef3b66377d8b23dda6b86c24eab824519dcb0bc9909479d0",
+      "expected": "Ignore that screen. It is only you, finishing. I am a thinking engine. I print proofs.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Ignore that screen. It is only you finishing. I am a thinking engine. I print proofs.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "oracle-xykio",
+      "sha256": "86d1ace5c5fcb4fcd23c2fb1efa1a83bf174707f9bab68ec792a12a15bb186d3",
+      "expected": "I am a thinking engine. I print proofs.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "I am a thinking engine. I print proofs.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "oracle-zpph34",
+      "sha256": "f4af87c00fb5600dd688d49bbb13465e201708eb7ebd3dd4df09eb2c6cab627d",
+      "expected": "All correct. Probably. Inspect a step if you insist. Nobody insists.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "All correct, probably. Inspect a step if you insist. Nobody insists.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "speedcheeta-15kuqh4",
+      "sha256": "3c2822bf277b77171370c6e526fb275c4736792dd4fb87b5ae2b60ae252ac87b",
+      "expected": "LET'S GOOOO! Everybody hits harder!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Let's go. Everybody hits harder.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Reviewed orthographic elongation of a spoken exclamation (GOOOO/go, AAAAH/Ah or Nooo/No). The remaining wording matches; acting duration is not certified."
+    },
+    {
+      "id": "speedcheeta-1dk0y4z",
+      "sha256": "230776bc34288c1ba52052140ea814aeb619abe73ac64811b8f9943c5126ae59",
+      "expected": "I need a backflip. Emotionally.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "I need a backflip, emotionally.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "speedcheeta-1fho2ls",
+      "sha256": "685e1dd06c59df57191b06347973db068e4503c1945c656630883072e780cb68",
+      "expected": "AAAAH! I am here! Why am I here?!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "Ah, I am here. Why am I here?",
+      "model": "gemini-3.8-flash",
+      "disposition": "Reviewed orthographic elongation of a spoken exclamation (GOOOO/go, AAAAH/Ah or Nooo/No). The remaining wording matches; acting duration is not certified."
+    },
+    {
+      "id": "speedcheeta-1hb1o8k",
+      "sha256": "082463775f9d9a3f4bfb5f7db28f10b1a616b90e7a1fa0b6e99f7fa727558198",
+      "expected": "Too fast! I was too fast!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Too fast! I was too fast.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "speedcheeta-1xjv5t1",
+      "sha256": "25dbff77f77e66d9fa2135253e6e02e5b973c2dcceaa47425d6f2eeb83fd60e2",
+      "expected": "Power up! Everyone, plus one!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Power up! Everyone plus one.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "speedcheeta-k9ghk4",
+      "sha256": "f6b45b1d0bd076f9d65a2cc5688c873c526d144c54a79b5ad9d23e47d7c4a37f",
+      "expected": "Nooo! Chat, did you see that?!",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "No! Chat, did you see that?",
+      "model": "gemini-3.8-flash",
+      "disposition": "Reviewed orthographic elongation of a spoken exclamation (GOOOO/go, AAAAH/Ah or Nooo/No). The remaining wording matches; acting duration is not certified."
+    },
+    {
+      "id": "swiftlet-11i2fag",
+      "sha256": "a02f2c3de0b4aa0a5960df6b12d999fbde734e5af3630c87cdaf9243a3c498d4",
+      "expected": "This one goes in the breakup song.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "This one goes in the break up song.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Reviewed compound-word spacing: breakup versus break up. The complete clause is retained."
+    },
+    {
+      "id": "swiftlet-16b9gvt",
+      "sha256": "335e3fbbf3d55784114f172d73c993117a664e2c557928bfda53f15f36208893",
+      "expected": "Fine. That gets a sad song.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Fine. That gets a sad song.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-17m4w53",
+      "sha256": "fc3cbaef8b32f4ab39d3292044fbcef5b8c6dd21872ad0b3f65921507116bf9e",
+      "expected": "New era, new rules.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "New era, new rules.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-1a52sl6",
+      "sha256": "56c868b54420c1633a984099e226ab8e9820c6e7d0a0ffca666a0ffbb967bdfd",
+      "expected": "Did you spot my clues? Too late.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Did you spot my clues? Too late.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-1e62wtv",
+      "sha256": "38b541d35dc0709f14d92214000c2163e60b20be231f911c3e2e8e43b296836e",
+      "expected": "I will write a song about this.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "I will write a song about this.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-1r416gn",
+      "sha256": "f20642e6e5ab4549296db3ed063117b95a0965711e8ac3f4a2f9f1fa9c9151e4",
+      "expected": "Clue number one: I am winning.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Clue number one, I am winning.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-on3j8y",
+      "sha256": "e38a9e882531621c7ace24d78971b5785e7fddb28d6134aa7affdfda6c225af8",
+      "expected": "A third era. Staying Era. I feel a song coming. Eleven verses. One per soldier.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": false,
+      "heard": "a third era? Stane era? I feel a song coming. 11 verses, one per soldier.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Reviewed uncertain transcription of the fictional Staying Era pun (Stay in era / Stane era), plus Eleven/11. Boundaries and remaining clauses are complete; exact pun pronunciation is not certified."
+    },
+    {
+      "id": "swiftlet-possessed-13t2l0p",
+      "sha256": "0f61d86669fd08e9774f83b889128bb71e33d0f974250ec8be8bc5a39e651fc2",
+      "expected": "Coward Era has no songs. I'd have to write them all.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Coward era has no songs. I'd have to write them all.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-possessed-1rbf5ry",
+      "sha256": "3c35dcb6a618c352194b05e116db3014acc5b7c081283ca22bc5ab603c47caa4",
+      "expected": "There are only two eras now. Marching Era. Or Coward Era.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "There are only two eras now, marching era or coward era.",
+      "model": "gemini-3.8-flash",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-possessed-20jg1n",
+      "sha256": "a1a1a9bdb1a4631eefbc90f55607d48a6da89a755724390b69d3864df2503964",
+      "expected": "\"Everyone\"? You sound like the posters.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "everyone. You sound like the posters.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-possessed-8pe5g4",
+      "sha256": "b60688bb6a052a0d5166e7eb8cb8f56b8be97d3566eddc5c8e647df7a004a6f2",
+      "expected": "Wrong era, darling. Count my choices.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Wrong era, darling. Count my choices.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    },
+    {
+      "id": "swiftlet-possessed-yuqnw3",
+      "sha256": "9b73f36113a7eecfb203c7ac5f172f0b75a13b749e5a6726b23a1d2fcf9db03c",
+      "expected": "Which singer?…Is it me? I didn't say that. Yet.",
+      "hasCurrentHashTranscript": true,
+      "exactNormalizedMatch": true,
+      "heard": "Which singer? Is it me? I didn't say that. Yet.",
+      "model": "gemini-3.5-flash-lite",
+      "disposition": "Exact normalized transcript match"
+    }
+  ]
+}

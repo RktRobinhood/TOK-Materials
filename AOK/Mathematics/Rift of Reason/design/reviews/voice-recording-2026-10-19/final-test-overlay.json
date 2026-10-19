@@ -1,0 +1,363 @@
+{
+  "base": "6cb4ac939c83b2b0ce7c0763d7b385c4299396e7",
+  "time": "2026-10-19T11:32:40.297Z",
+  "note": "Full source suite passed before the last audio-only boundary repairs/quarantines; final focused audio suite reruns against this exact overlay.",
+  "overlay": [
+    {
+      "path": "assets/voice/beansprout-116y8h7.mp3",
+      "sha256": "5706577179896087dba66e5c57b15ee08eb16bf678ec573dcb05230802ed3e1f"
+    },
+    {
+      "path": "assets/voice/beansprout-1m27sc0.mp3",
+      "sha256": "563aa16d1edc9dfd3f24cdea8fadf2633c1a5d5baf01c51135f5200faf8c5c0c"
+    },
+    {
+      "path": "assets/voice/beansprout-1pu4117.mp3",
+      "sha256": "9c9faa559a8e2810902e2687d6ee6d7cd5d919a890bdd2c05cc0f6c9544e1e4d"
+    },
+    {
+      "path": "assets/voice/carlseal-122nusw.mp3",
+      "sha256": "266d69e1887366d432529968e667a65727b3efb5a064662d6a2a08ec98045f5a"
+    },
+    {
+      "path": "assets/voice/carlseal-15yh4wo.mp3",
+      "sha256": "fd3ac3855a1aa9284da778f2cb64fae9700c026190568eadd345e6dc60a8d756"
+    },
+    {
+      "path": "assets/voice/carlseal-1lxtuzq.mp3",
+      "sha256": "a5433502a36ce54348e7eb2699b07d0a9cfb3651d8403e4ae89fee81685bddae"
+    },
+    {
+      "path": "assets/voice/carlseal-1qk2ms0.mp3",
+      "sha256": "2053727d37513823e27a9911a424ced1eba8bb58b5091b526679d0ebb7dc946b"
+    },
+    {
+      "path": "assets/voice/carlseal-7bgcq.mp3",
+      "sha256": "57649f688cd7e01769f9147c3c8f4404c09ac70b042d7c2ff7dbfb58cc5eeae6"
+    },
+    {
+      "path": "assets/voice/eminemu-possessed-155mxsf.mp3",
+      "sha256": "e51815f75a9c2e67d9b28a99f5544ceceec9c2764a2d55959dc50d89c9a1a223"
+    },
+    {
+      "path": "assets/voice/eminemu-possessed-1nak03e.mp3",
+      "sha256": "a779ce06134c9ad1f84067f7b834b051cadd838ae719b0d53375e3f9c1d49296"
+    },
+    {
+      "path": "assets/voice/eminemu-possessed-3fcuzm.mp3",
+      "sha256": "cd30a0f607679973e60b7fd3d40b120e82a70ecbad757d2475155d7eee00a639"
+    },
+    {
+      "path": "assets/voice/eminemu-possessed-be5k2v.mp3",
+      "sha256": "1876bbd7b77a2b93f92e5142b1d2e887ba117d26dc63acec43a1d5c5d17902c7"
+    },
+    {
+      "path": "assets/voice/eminemu-possessed-mgvc5c.mp3",
+      "sha256": "d7804ff0000ad454bdf0d5a0a76f3cfef795980597f10d16c824ab696827df79"
+    },
+    {
+      "path": "assets/voice/granny-13hcnw7.mp3",
+      "sha256": "566381b6234eeb5e15358af2dd9ead8ead7f145f494ee287e48e3a143c232dd6"
+    },
+    {
+      "path": "assets/voice/granny-155ac5f.mp3",
+      "sha256": "92ccc7641c6aec1f610446cabf69b79e96fed540540f020f5f1560d1776359ed"
+    },
+    {
+      "path": "assets/voice/granny-1dj60wz.mp3",
+      "sha256": "28479d0b6b61be823c5d7173af45f070d1bd4c6d73a3f28f007bc4c5dfa3281c"
+    },
+    {
+      "path": "assets/voice/granny-1ecqpw8.mp3",
+      "sha256": "a2e77f5427ae47f56754c2c3129f7882ec94605b3e0631a1253ce8ca434af0e7"
+    },
+    {
+      "path": "assets/voice/granny-1g954zu.mp3",
+      "sha256": "0f87ced62b1fd88071f9ed6e78afb4c7c7cafa7f67a99c12d47a492bb210ef04"
+    },
+    {
+      "path": "assets/voice/granny-1hezu4.mp3",
+      "sha256": "c099ef54faf3c01a56541acc0b3154421017b29ee73eef6179329d3ac3fb203d"
+    },
+    {
+      "path": "assets/voice/granny-1hne7ay.mp3",
+      "sha256": "f4a16c8724e1cbfe1113186ba5d914c001dd58a5db85433974b35d97f5918dce"
+    },
+    {
+      "path": "assets/voice/granny-1hq0d0z.mp3",
+      "sha256": "247a444e7b79c7f7943b8090be025bb932ea7ce2d9ba37054756f41e4d623449"
+    },
+    {
+      "path": "assets/voice/granny-1i4nbnl.mp3",
+      "sha256": "1710efdfce809cb44258487868e74b9f97d776be4000897fb6a542c18d887a6d"
+    },
+    {
+      "path": "assets/voice/granny-1nht4xg.mp3",
+      "sha256": "067d1a68136e3d3d50a4ce4a7c76611e68859d3f5b12ca80d956530f9d5b05a5"
+    },
+    {
+      "path": "assets/voice/granny-1nks571.mp3",
+      "sha256": "17daeabc5f10ede22d119dc61acf724eaa81cc8901151c9e391bb8dccd349d55"
+    },
+    {
+      "path": "assets/voice/granny-1q2xabm.mp3",
+      "sha256": "a5defb3a0b3caddddcbf84dd37a076725ffdaddf0763caec44fc32b87f44b466"
+    },
+    {
+      "path": "assets/voice/granny-1rgyz2.mp3",
+      "sha256": "6620339ca7960cba65520b946a9038b66b985d3f079fd206c452595914e757c4"
+    },
+    {
+      "path": "assets/voice/granny-1ycb8ih.mp3",
+      "sha256": "fa089daf8aea4786e5ea4ce41e673e5afda34cab2bece22b3a58f0c50bfc9fed"
+    },
+    {
+      "path": "assets/voice/granny-1yfxf8t.mp3",
+      "sha256": "fd9dc475f4709e289d002141bfa29a0dad3d82fd454ab0ac888701641e14c151"
+    },
+    {
+      "path": "assets/voice/granny-2njnku.mp3",
+      "sha256": "5c51b9f4539e30d4fa62f9e5afd040a30b8ed0b7c3d9bd9014c1a9d4afc562c5"
+    },
+    {
+      "path": "assets/voice/granny-4szhqx.mp3",
+      "sha256": "20468a75f6dcd7425230b216a6297f16975148637fcc9aea3009f815fab99983"
+    },
+    {
+      "path": "assets/voice/granny-6t7ssz.mp3",
+      "sha256": "bed38fca89d114e55cb79e0bf69b350af54e0b3e76978fcf3d78c4d0a9ef5a76"
+    },
+    {
+      "path": "assets/voice/granny-8g6nmb.mp3",
+      "sha256": "5239f8556e54eba0faebee951fef6733f13cdb9bbf95a6e64d85862f5da5a32e"
+    },
+    {
+      "path": "assets/voice/granny-8qsmvz.mp3",
+      "sha256": "11e221f5b5c65efdf5af89a86c8f707dc90f124b973c04f58c6e6f32c9f58279"
+    },
+    {
+      "path": "assets/voice/granny-dfpemt.mp3",
+      "sha256": "8570f1721e6a5310d3b50673d2db2d2796730ac661a395cd6a11177493e221d2"
+    },
+    {
+      "path": "assets/voice/granny-f70pc5.mp3",
+      "sha256": "48b3fa83e08950bd62d97cdb8995c19d902fecfa2fde934b73d3a0d1e0f9e726"
+    },
+    {
+      "path": "assets/voice/granny-fk4a70.mp3",
+      "sha256": "f15b21a1b97a964426b02e3980fa2f00b972c7a0ea4f12b9f122064a08aa76d7"
+    },
+    {
+      "path": "assets/voice/granny-fs6iif.mp3",
+      "sha256": "7d592f1699238d45c881adfa2fd03b904b67d936b6f88e54144a722e496d658c"
+    },
+    {
+      "path": "assets/voice/granny-fwxv1x.mp3",
+      "sha256": "b85138ba768f3c6d0de689e596612a18fb999bcd0df9a4cb0b7eb2f08aead91d"
+    },
+    {
+      "path": "assets/voice/granny-gvw9ns.mp3",
+      "sha256": "1dbe984e5ce6dff65cae4d956ceca7cc9b260f136d8b3026b13579db1ba322bd"
+    },
+    {
+      "path": "assets/voice/granny-hm2z2d.mp3",
+      "sha256": "54c97c43901654d83e8761ddb013f6039b73a05d712a0ccce42dfd7d6041f049"
+    },
+    {
+      "path": "assets/voice/granny-j31sif.mp3",
+      "sha256": "d09e5073d0f74511f500259412a927bd130d6fbc335f18194a4c5dcca44c0c96"
+    },
+    {
+      "path": "assets/voice/granny-kgw80h.mp3",
+      "sha256": "5a07c5be9a9929474157666d313dad0b71cab49410b97021908effd77b921542"
+    },
+    {
+      "path": "assets/voice/granny-q15vt1.mp3",
+      "sha256": "582dc246a298c5f2b3a9b759dcf3057f3758cf37621d68263ba97e080f7d8289"
+    },
+    {
+      "path": "assets/voice/granny-qdr96b.mp3",
+      "sha256": "e09eef65d27b22a867ecc2364cb8d56b208eaa93beafb97e7c027bffdd67cfa0"
+    },
+    {
+      "path": "assets/voice/granny-sp5sm8.mp3",
+      "sha256": "07a3d4fe6680f2f403c21343d7546161af270022293c6ebb277427f65466a2aa"
+    },
+    {
+      "path": "assets/voice/granny-su5efv.mp3",
+      "sha256": "ce6359bb456c0102d4a36199436c97c3000a6d8bf7e691317e833c33080f97c9"
+    },
+    {
+      "path": "assets/voice/granny-tuorir.mp3",
+      "sha256": "990f50b1298eff7b6a147bbbdaa000268c7411037d05ed8a0519848dea92ca43"
+    },
+    {
+      "path": "assets/voice/granny-xfnpgl.mp3",
+      "sha256": "b1e1ca3f99ed342c40cfb3ebae7aceca377fc2cf23923cc94efb7767de424885"
+    },
+    {
+      "path": "assets/voice/granny-z17dn2.mp3",
+      "sha256": "f497dd2506d8c52ffddd9f60d973ff87be7d684f101fa2efa336285153fe6643"
+    },
+    {
+      "path": "assets/voice/granny-zyn42c.mp3",
+      "sha256": "f61f277a907d61424bf035201f32054f80cded60d01aa3df3ec70cab01e8b26c"
+    },
+    {
+      "path": "assets/voice/haalandroid-1crla8k.mp3",
+      "sha256": "e9b97fce1f5ecbf57a7a1298ff31ef0b5169e727cdd579a1510177c4665f32fd"
+    },
+    {
+      "path": "assets/voice/haalandroid-1xg2tls.mp3",
+      "sha256": "a36f914f561e26e81029519a474fcae0a0dfc473ff5f84a30dc570c0da374951"
+    },
+    {
+      "path": "assets/voice/haalandroid-cyezdc.mp3",
+      "sha256": "ce3bccdd83ddf2b71b0dfae1b5c2885ac245d8e6fa67bf322f76829dc2928fdc"
+    },
+    {
+      "path": "assets/voice/haalandroid-euwtn.mp3",
+      "sha256": "6bc62942fb8345be8c3d1a3f20cebbc5dd430b5c01e676a03c7d15f803942de5"
+    },
+    {
+      "path": "assets/voice/haalandroid-sc312l.mp3",
+      "sha256": "400415acd52310989cb3a3695b3ebf00f53389d3a9fdf1933be19a1e72651bfd"
+    },
+    {
+      "path": "assets/voice/haalandroid-we5xkt.mp3",
+      "sha256": "5d5527457c2469c9c7b826f85bcb2cbc3d1f9923ea22e94c98865a54584b6427"
+    },
+    {
+      "path": "assets/voice/muskrat-14han12.mp3",
+      "sha256": "e3147345b0c78c058586c5239f61b6a3de0b661406c528290e8f7b7caed1eedb"
+    },
+    {
+      "path": "assets/voice/muskrat-1aywz2s.mp3",
+      "sha256": "f9ca1051544da28f080bb1fb3a9628ec483b217cf54fbd2e816d7c3306b3692c"
+    },
+    {
+      "path": "assets/voice/muskrat-yrun4p.mp3",
+      "sha256": "d6e80c3b1eb9a5cc9e7d78e8e97d6052ceea11c4383911a49bd757c5dfa7fd19"
+    },
+    {
+      "path": "assets/voice/obambu-15xvaha.mp3",
+      "sha256": "3f05f47a76f67b578679147f8c26537f5da3a94727f0a225ab06ff9fcfccee96"
+    },
+    {
+      "path": "assets/voice/obambu-18e7hcd.mp3",
+      "sha256": "3bb355bb10cefa950c36860a528f5ae7d24a37b8c52f54253d6661f0a3ff0a03"
+    },
+    {
+      "path": "assets/voice/obambu-1uhxam7.mp3",
+      "sha256": "60d015fe561cb277d30acd0f9e60cbf30307223a1ec57cf579d7ced0e0eff7b9"
+    },
+    {
+      "path": "assets/voice/obambu-mnla5v.mp3",
+      "sha256": "42a4f87ba8c4596fcd654e293b72a515fffd7ab2397fbd87cac223f8eb5b7047"
+    },
+    {
+      "path": "assets/voice/obambu-ox7mtx.mp3",
+      "sha256": "2ff00a0793f7ea3b9fde9fcc370df659da3005ae8b8db8febe9c8fee3523a6d5"
+    },
+    {
+      "path": "assets/voice/obambu-znlz2m.mp3",
+      "sha256": "f426c152d864f5c7c03fab18a4fac852f7d737995ba1bc2b08fff7f776332335"
+    },
+    {
+      "path": "assets/voice/oracle-1dwhn5n.mp3",
+      "sha256": "f70dd61f30c097ab9837f836a3ab2c272107ebed72b9de07d5ba30ea4873fd06"
+    },
+    {
+      "path": "assets/voice/oracle-1fulyhd.mp3",
+      "sha256": "68eb1f42e3fa93a47dc45a812c185cf64c59a9dbb1eff4ca465e223c2ac41b0d"
+    },
+    {
+      "path": "assets/voice/oracle-3i8lny.mp3",
+      "sha256": "9282ffb817e6d0f0ef3b66377d8b23dda6b86c24eab824519dcb0bc9909479d0"
+    },
+    {
+      "path": "assets/voice/oracle-xykio.mp3",
+      "sha256": "86d1ace5c5fcb4fcd23c2fb1efa1a83bf174707f9bab68ec792a12a15bb186d3"
+    },
+    {
+      "path": "assets/voice/oracle-zpph34.mp3",
+      "sha256": "f4af87c00fb5600dd688d49bbb13465e201708eb7ebd3dd4df09eb2c6cab627d"
+    },
+    {
+      "path": "assets/voice/speedcheeta-15kuqh4.mp3",
+      "sha256": "3c2822bf277b77171370c6e526fb275c4736792dd4fb87b5ae2b60ae252ac87b"
+    },
+    {
+      "path": "assets/voice/speedcheeta-1dk0y4z.mp3",
+      "sha256": "230776bc34288c1ba52052140ea814aeb619abe73ac64811b8f9943c5126ae59"
+    },
+    {
+      "path": "assets/voice/speedcheeta-1fho2ls.mp3",
+      "sha256": "685e1dd06c59df57191b06347973db068e4503c1945c656630883072e780cb68"
+    },
+    {
+      "path": "assets/voice/speedcheeta-1hb1o8k.mp3",
+      "sha256": "082463775f9d9a3f4bfb5f7db28f10b1a616b90e7a1fa0b6e99f7fa727558198"
+    },
+    {
+      "path": "assets/voice/speedcheeta-1xjv5t1.mp3",
+      "sha256": "25dbff77f77e66d9fa2135253e6e02e5b973c2dcceaa47425d6f2eeb83fd60e2"
+    },
+    {
+      "path": "assets/voice/speedcheeta-k9ghk4.mp3",
+      "sha256": "f6b45b1d0bd076f9d65a2cc5688c873c526d144c54a79b5ad9d23e47d7c4a37f"
+    },
+    {
+      "path": "assets/voice/swiftlet-11i2fag.mp3",
+      "sha256": "a02f2c3de0b4aa0a5960df6b12d999fbde734e5af3630c87cdaf9243a3c498d4"
+    },
+    {
+      "path": "assets/voice/swiftlet-16b9gvt.mp3",
+      "sha256": "335e3fbbf3d55784114f172d73c993117a664e2c557928bfda53f15f36208893"
+    },
+    {
+      "path": "assets/voice/swiftlet-17m4w53.mp3",
+      "sha256": "fc3cbaef8b32f4ab39d3292044fbcef5b8c6dd21872ad0b3f65921507116bf9e"
+    },
+    {
+      "path": "assets/voice/swiftlet-1a52sl6.mp3",
+      "sha256": "56c868b54420c1633a984099e226ab8e9820c6e7d0a0ffca666a0ffbb967bdfd"
+    },
+    {
+      "path": "assets/voice/swiftlet-1e62wtv.mp3",
+      "sha256": "38b541d35dc0709f14d92214000c2163e60b20be231f911c3e2e8e43b296836e"
+    },
+    {
+      "path": "assets/voice/swiftlet-1r416gn.mp3",
+      "sha256": "f20642e6e5ab4549296db3ed063117b95a0965711e8ac3f4a2f9f1fa9c9151e4"
+    },
+    {
+      "path": "assets/voice/swiftlet-on3j8y.mp3",
+      "sha256": "e38a9e882531621c7ace24d78971b5785e7fddb28d6134aa7affdfda6c225af8"
+    },
+    {
+      "path": "assets/voice/swiftlet-possessed-13t2l0p.mp3",
+      "sha256": "0f61d86669fd08e9774f83b889128bb71e33d0f974250ec8be8bc5a39e651fc2"
+    },
+    {
+      "path": "assets/voice/swiftlet-possessed-1rbf5ry.mp3",
+      "sha256": "3c35dcb6a618c352194b05e116db3014acc5b7c081283ca22bc5ab603c47caa4"
+    },
+    {
+      "path": "assets/voice/swiftlet-possessed-20jg1n.mp3",
+      "sha256": "a1a1a9bdb1a4631eefbc90f55607d48a6da89a755724390b69d3864df2503964"
+    },
+    {
+      "path": "assets/voice/swiftlet-possessed-8pe5g4.mp3",
+      "sha256": "b60688bb6a052a0d5166e7eb8cb8f56b8be97d3566eddc5c8e647df7a004a6f2"
+    },
+    {
+      "path": "assets/voice/swiftlet-possessed-yuqnw3.mp3",
+      "sha256": "9b73f36113a7eecfb203c7ac5f172f0b75a13b749e5a6726b23a1d2fcf9db03c"
+    },
+    {
+      "path": "data/voice-manifest.js",
+      "sha256": "b65550b92ec045ea3e5eec14c42b8394138a27c226884e1f5978e6bfc69c95ec"
+    }
+  ]
+}
