@@ -60,11 +60,17 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // ---- lines --------------------------------------------------------------------
 
+// Follow the shipped entry point, not arbitrary neighbours (drafts, backups or sync copies).
+function runtimeScripts() {
+    const html = fs.readFileSync(path.join(GAME_DIR, 'index.html'), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    return [...html.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/gi)].map(m => m[1].split(/[?#]/)[0]);
+}
 function loadGame() {
-    const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js')).sort();
-    const puzzles = fs.readdirSync(path.join(GAME_DIR, 'js', 'puzzles')).filter(f => f.endsWith('.js') && f !== 'registry.js').sort();
+    const sources = runtimeScripts();
+    const scripts = sources.filter(f => /^data\/script\/[^/]+\.js$/.test(f));
+    const puzzles = sources.filter(f => /^js\/puzzles\/[^/]+\.js$/.test(f) && f !== 'js/puzzles/registry.js');
     return loadRift(['js/core/rift.js', 'data/avatars.js', 'data/creatures.js', 'data/barks.js', 'data/map.js', 'data/cases.js',
-        ...scripts.map(f => 'data/script/' + f), 'data/cast.js', 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
+        ...scripts, 'data/cast.js', 'js/puzzles/registry.js', ...puzzles, 'js/battle/lesson.js']);
 }
 
 // What the TTS reads: no nickname, and shouted all-caps lines (the Algorithm) in sentence case
@@ -142,7 +148,18 @@ function collect(Rift) {
             for (const who of hosts) for (const step of (def && def.tutorial) || []) add(who, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
         }
     }
-    for (const step of Rift.Battle.Lesson.steps.concat(Rift.Battle.Lesson.powerStep || [])) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    // Match the battle screen's speech calls, including the default short lesson and optional help.
+    // Prediction feedback and labels are display-only; dynamic power descriptions keep browser speech.
+    const lesson = Rift.Battle.Lesson;
+    const steps = (lesson.steps || []).concat(lesson.shortSteps || [], lesson.powerStep || []);
+    for (const step of steps) {
+        const texts = [step.text, step.hint, step.hint2, step.trap && step.trap.say,
+            ...(step.replies || []).map(reply => reply.say)];
+        for (const text of texts) add('granny', text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    }
+    for (const makeGuide of [lesson.guide, lesson.shortGuide]) {
+        if (makeGuide) add('granny', makeGuide().outro, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    }
     return { lines, skipped };
 }
 
@@ -156,8 +173,8 @@ let lessonIndex = null;
 function lessonsOf(line) {
     if (!lessonIndex) {
         lessonIndex = { keys: {}, clocks: {}, puzzles: {}, creatures: {}, side: {} };
-        for (const f of fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => /^lesson\d+\.js$/.test(f))) {
-            const R = loadRift(['js/core/rift.js', 'data/script/' + f]), lesson = f.slice(0, -3);
+        for (const f of runtimeScripts().filter(f => /^data\/script\/lesson\d+\.js$/.test(f))) {
+            const R = loadRift(['js/core/rift.js', f]), lesson = path.basename(f, '.js');
             for (const k of Object.keys(R.data.script || {})) lessonIndex.keys[k] = lesson;
             for (const k of Object.keys(R.data.clocks || {})) lessonIndex.clocks[k] = lesson;
         }

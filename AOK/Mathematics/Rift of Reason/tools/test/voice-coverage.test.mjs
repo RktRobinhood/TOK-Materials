@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -11,8 +12,9 @@ import {Node} from './dom-adapter.mjs';
 test('voice catalog covers every actual tutorial host/family and all teaching-battle steps',()=>{
  const {lines,skipped}=voiceCatalog();
  const cast=JSON.parse(fs.readFileSync(GAME_DIR+'/tools/voices-cast.json','utf8'));
- const puzzles=fs.readdirSync(GAME_DIR+'/js/puzzles').filter(f=>f.endsWith('.js')&&f!=='registry.js');
- const Rift=loadRift(['js/core/rift.js','data/map.js','data/cases.js','data/creatures.js','js/puzzles/registry.js',...puzzles.map(f=>'js/puzzles/'+f),'js/battle/lesson.js']);
+ const html=fs.readFileSync(GAME_DIR+'/index.html','utf8');
+ const puzzles=[...html.matchAll(/<script src="(js\/puzzles\/[^"]+)"/g)].map(m=>m[1].split(/[?#]/)[0]).filter(f=>f!=='js/puzzles/registry.js');
+ const Rift=loadRift(['js/core/rift.js','data/map.js','data/cases.js','data/creatures.js','js/puzzles/registry.js',...puzzles,'js/battle/lesson.js']);
  const ids=new Set(lines.map(l=>l.id)),families=new Set();assert.equal(ids.size,lines.length);
  for(const n of Object.values(Rift.data.map.nodes))for(const p of n.puzzles||[]){
   families.add(p.id);assert.ok(cast[n.host],n.host);
@@ -76,4 +78,52 @@ test('tutorial speaks its displayed host/text and stops the line when closed',()
  assert.equal(spoken[0].speaker,'granny');assert.equal(spoken[0].voice,Rift.voiceId('granny','Read the rule.'));
  overlay.querySelector('.primary').onclick();assert.equal(spoken.at(-1).text,'Try a move.');
  tour.close();tour.close();assert.equal(stops,1);assert.equal(closed,1);
+});
+
+
+test('the catalog ignores unpublished script and puzzle neighbours without touching them', async () => {
+ const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'rift-voice-catalog-'));
+ try {
+  // Exercise real discovery/loading in an isolated game, so concurrent tests and chats see no fixtures.
+  const html = fs.readFileSync(path.join(GAME_DIR, 'index.html'), 'utf8');
+  const shipped = [...html.matchAll(/<script src="([^"]+)"/g)].map(m => m[1].split(/[?#]/)[0]);
+  const files = ['index.html', ...shipped, 'tools/voices.mjs', 'tools/voices-fx.mjs',
+   'tools/voice-budget.mjs', 'tools/voices-cast.json', 'tools/test/harness.mjs'];
+  for (const file of files) {
+   const target = path.join(fixture, file);
+   fs.mkdirSync(path.dirname(target), { recursive: true });
+   fs.copyFileSync(path.join(GAME_DIR, file), target);
+  }
+  const neighbours = ['data/script/zz-unpublished-sync-copy.js', 'js/puzzles/zz-unpublished-sync-copy.js'];
+  const body = 'throw new Error("Unpublished neighbour must not execute");';
+  for (const file of neighbours) fs.writeFileSync(path.join(fixture, file), body, { flag: 'wx' });
+  const tool = await import(pathToFileURL(path.join(fixture, 'tools/voices.mjs')));
+  const result = tool.voiceCatalog();
+  assert.ok(result.lines.length > 2500, 'the real published catalog loaded');
+  for (const file of neighbours) assert.equal(fs.readFileSync(path.join(fixture, file), 'utf8'), body);
+ } finally {
+  const target = fs.realpathSync(fixture), tempRoot = fs.realpathSync(os.tmpdir());
+  assert.ok(target.startsWith(tempRoot + path.sep) && path.basename(target).startsWith('rift-voice-catalog-'));
+  fs.rmSync(target, { recursive: true, force: true });
+ }
+});
+
+test('Granny catalog includes canonical short/full speech, replies, hints, warnings and outro exactly once', () => {
+ const R = loadRift(['js/core/rift.js', 'js/battle/lesson.js']);
+ const L = R.Battle.Lesson;
+ const { lines } = voiceCatalog();
+ const texts = [...L.steps, ...L.shortSteps, L.powerStep].flatMap(step => [
+  step.text, step.hint, step.hint2, step.trap && step.trap.say,
+  ...(step.replies || []).map(reply => reply.say),
+ ]).filter(Boolean);
+ texts.push(L.guide().outro, L.shortGuide().outro);
+ for (const text of texts) {
+  const id = R.voiceId('granny', text), matches = lines.filter(line => line.id === id);
+  assert.equal(matches.length, 1, text);
+  assert.deepEqual(lessonsOf(matches[0]), ['lesson1']);
+ }
+ // Wrong prediction feedback is displayed, not spoken by the battle screen.
+ for (const step of L.shortSteps) for (const choice of step.predict || []) {
+  if (choice.feedback) assert.ok(!lines.some(line => line.id === R.voiceId('granny', choice.feedback)));
+ }
 });

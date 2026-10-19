@@ -21,14 +21,14 @@ All six previously teacher-labelled issues have resolved interviews on GitHub an
 
 New #159 tracks phone landscape/fullscreen/touch work as **stretch, after all currently requested work**. Its body explicitly requests tracking only, not implementation or promotion to ready-for-agent. Leave it deferred.
 
-## Latest completed slice — shared card activations #100 (19:19 UTC)
+## Prior completed battle slice — shared card activations #100 (19:19 UTC)
 
 This chat resumed its existing battle work and completed #100 over baseline f267d77, preserving the independent #111 timer delivery and all unrelated OneDrive/untracked work. Each cast, attack and manual Activate now spends one of two shared uses. Draw, End turn, Spark, Bag and hero powers are explicitly separate. Rule changes preserve spent uses; owner bonuses retain their scope. UI, Help, card copy, AI and both Granny lessons agree.
 
 - Full tracked suite plus the new activation tests: **1,144 passed, one existing skip, zero failures (1,145 total; 300.9 s)**. Includes the 10,000-game AI fuzz, legal mounted lesson replays, exact counting/bonus/limit checks and new exhausted UI/Danger regressions. Independent Standards and Spec reviews have zero remaining findings.
 - A real keyboard browser playthrough completed the short lesson including prediction and independent repair; a full-lesson browser sample confirmed attack plus cast exhausted both uses. Complete full/short routes and alternative short repairs pass at the real engine and mounted UI seams. This does not claim classroom-device validation.
 - The 300-match balance baseline gives Competent 143/200 wins (71.5%), mean length 20.74 player turns, maximum 41, and zero ends while an affordable creature was legal. The AI also preserves a use to avert an imminent public board wipe. See [activation verification](activation-budget-100-2026-10-18.md), screenshots and machine-readable balance receipt.
-- Seven revised Granny lines use current text/browser speech. Their exact canonical IDs are in the report's voice-followup.json for #43 after the natural 19 October allowance reset. No TTS calls or ledger changes were made. The recording collector needs to include short-lesson and reply lines and avoid loading unrelated OneDrive sync copies over the canonical lesson before recording these; do not infer coverage from its historical catalog count alone.
+- Seven revised Granny lines use current text/browser speech. Their exact canonical IDs are in the report's voice-followup.json for #43 after the natural 19 October allowance reset. No TTS calls or ledger changes were made. The collector gaps identified here are fixed in the 19 October #43 slice below; use its updated inventory and free plan.
 - The publication receipt and closure are recorded on #100 after the successful scoped push. #101 is the next battle dependency: first pin delta composition/bounds, Unlimited repair/reset and content matrix; preserve current IDs and explicit deck selection. Re-check the checkout and current issue comments before starting it. The two-hour heartbeat remains active.
 
 ## Prior slice — #111 quick timers
@@ -52,9 +52,19 @@ Use the complete tracked test list from `git ls-files 'tools/test/*.test.mjs'`, 
 
 ## Voice allowance
 
-The 18 October batch already consumed all ten pinned-lite TTS attempts: 2533/2610 lines recorded, 77 missing. Resume only after the natural reset at **09:00 Copenhagen on 19 October**, after re-reading the ignored ledger/free plan. Preserve quotas, model pins, raw takes, quarantines and existing MP3 hashes. No duplicate voice automation.
+The historical 18 October batch consumed all ten pinned-lite TTS attempts; its reported 2533/2610 coverage predates changed lesson text and the catalog repair below. Resume only after the natural reset at **09:00 Copenhagen on 19 October**, after re-reading the ignored ledger/free plan. Preserve quotas, model pins, raw takes, quarantines and existing MP3 hashes. No duplicate voice automation.
 ## Latest completed feedback fix — #160
 
 The teacher reported that the outcome sound feels negative and victories are hard to recognize. Shared gold/green explicit win banners now cover battles, puzzle completion, catches and final legendary wins. Loss/draw wording and styling differ; draws no longer play defeat audio. Battles stop preceding effects and omit the Change stinger at the result so it cannot muddy the primary cue. Win/caught use Kenney CC0 STEEL10, a bright ascending recorded jingle, processed gain-only to the existing −13 dB mono PCM format; sources/licence/hashes and `tools/prepare-victory-audio.mjs` are retained. No API recording quota was used.
 
 Verification: **100 focused pass; full suite 1,146 pass, one existing skip, zero failures (1,147 total)**. Both independent reviews clear. Real Chrome win/loss/draw fixtures pass at desktop and muted/Calm/reduced-motion phone width; a paid native-touch Picture Catch shows its new result and survives reload with one charm spent and one creature awarded. See `victory-feedback-160-2026-10-18.md`, JSON and screenshots. The GitHub #160 completion comment records the publication commit. This does not reopen any teacher gate or change the next dependency priorities above.
+
+## Latest completed slice — voice catalog #43 (19 October)
+
+Before the natural recording reset, repaired the independent catalog prerequisite from #100's follow-up. Story/puzzle discovery now follows the shipped index.html in load order and leaves unpublished neighbours alone. Full/short Granny speech, replies, hints, trap warnings and the spoken shared outro are deduplicated into lesson1. Generated power descriptions retain browser speech; labels and prediction feedback remain display-only. No game UI or save schema changed.
+
+- Final inventory: **2,531/2,645 recorded; 114 missing**. Compared with the same checkout at `09dd846`, 35 actual Granny speech IDs were added and zero removed. All seven #100 follow-up IDs are discoverable. Do not interpret the higher missing count as deleted audio.
+- Free Granny lesson1 plan: **37 missing lines, two requests (28 + 9)** on her existing pinned flash model. Overall free plan: 114 lines / 30 default batches. This run made **zero recording requests**. Preserve the natural reset at **09:00 Copenhagen on 19 October**; read the actual ledger/free plan again before rendering, and do not bypass limits or overlap the independent voice schedule.
+- All 3,010 existing MP3s, the cast file, generated manifest and ignored quota ledger retain their hashes. No prune/regeneration or raw-take changes. New discovery regression executes the actual tool in an isolated temporary game with throwing unpublished story/puzzle neighbours; shared checkout copies remain untouched.
+- **82 focused checks pass. Full tracked suite: 1,148 pass, one existing skip, zero failures (1,149 total; 229.0 s)**, including final outro coverage. Independent Standards and Spec follow-up reviews both clear. See [voice catalog verification](voice-catalog-43-2026-10-19.md) and JSON receipts. #43 remains open for actual recording, quarantined wording and spoken-word/boundary acceptance. The GitHub comment records the publication commit.
+- #101 remains the next unstarted battle dependency after #100. This run chose the small #43 prerequisite to prevent the next recording pass missing settled lesson lines. The two-hour continuation remains active; recheck usage, current comments and overlap before choosing the next slice.
