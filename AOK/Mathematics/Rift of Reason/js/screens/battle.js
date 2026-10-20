@@ -404,6 +404,10 @@
             placeAbilityTray();
         }
         function resizeBattle() {
+            const preview = ui.future && ui.sel;
+            const source = preview && (preview.cid ? nodes[preview.cid] : preview.kind === 'axiom' ? findAxiomInHand(preview.id)
+                : preview.kind === 'power' ? nodes.pw0 : dom.bagBtn);
+            const previewFocus = focusKey(source);
             closeFuture(true);
             if (ui.ended) return;
             clearPresentation();
@@ -411,6 +415,12 @@
             cancelDrag(); cancelLongPress(); hideTip(); clearPredict();
             ui.sel = null; ui.handPos = null;
             render();
+            // The resize clears selection and replaces its Preview button. Keep keyboard users
+            // on the surviving move source rather than that detached button or the page body.
+            if (preview) {
+                restoreFocus(previewFocus);
+                if (!screen.contains(root.document.activeElement)) focusBoard();
+            }
             positionFateInspection();
         }
         if (root.addEventListener) {

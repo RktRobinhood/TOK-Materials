@@ -1,0 +1,11 @@
+{
+  "focus": {
+    "axiom": "flux-plays-plus-1",
+    "label": "Rule card: One More Move",
+    "tag": "BUTTON"
+  },
+  "height": 600,
+  "previewOpen": false,
+  "uses": "Card activations: 2 activations per turn",
+  "width": 1280
+}

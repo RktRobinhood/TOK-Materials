@@ -21,6 +21,7 @@ function setup(params, opts) {
     const fateCalls = [];
     Rift.Battle.Fate = { roll(o) { fateCalls.push(o); return { results: [], removed: [], itemsUsed: { ward: 0, anchor: 0 }, log: [] }; } };
     Rift.Battle.Ante = { compute: () => ({ lines: [] }), settle: () => ({ lines: [] }) };
+    if (opts && opts.before) opts.before(g);
     const root = g.document.createElement('div');
     g.document.body.appendChild(root);
     const results = [];
@@ -89,6 +90,21 @@ test('the tray lists the items with energy and text; unusable ones are dimmed wi
     assert.match(t.$('.b-inspect').textContent, /Ward.*A friendly creature gets Shield\..*used up only when you use it/);
     item(t, 'tonic').click();
     assert.match(t.$('.b-note').textContent, /Your hearts are full\./);
+    t.handle.destroy();
+});
+
+test('resizing an item preview returns focus to Bag without spending the item', () => {
+    const listeners = {}, t = setup(practice(['ward']), { before(g) {
+        g.ctx.addEventListener = (type, fn) => { listeners[type] = fn; };
+        g.ctx.removeEventListener = () => {};
+    } });
+    drawAndPlay(t); t.$('.b-bag-btn').click(); item(t, 'ward').click();
+    t.$('.b-future-open').click(); t.$('.b-future-dialog button').focus();
+    const before = JSON.stringify(t.handle.state);
+    listeners.resize();
+    assert.equal(t.$('.b-future-dialog'), null);
+    assert.equal(JSON.stringify(t.handle.state), before);
+    assert.ok(t.g.document.activeElement === t.$('.b-bag-btn'));
     t.handle.destroy();
 });
 

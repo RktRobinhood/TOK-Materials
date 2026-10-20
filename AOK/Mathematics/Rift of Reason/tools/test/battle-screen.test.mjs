@@ -866,6 +866,27 @@ test('move clips choose targets and replay without changing live battle, saves o
     }
 });
 
+test('resizing an open move clip returns keyboard focus to its live source without playing it', () => {
+    for (const kind of ['board', 'axiom']) {
+        const listeners = {}, t = prepared({ me: ['beastie'], opp: ['keanu'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+            s.players[0].axHand = ['flux-plays-plus-1'];
+        }, { before(g) {
+            g.ctx.addEventListener = (type, fn) => { listeners[type] = fn; };
+            g.ctx.removeEventListener = () => {};
+        } });
+        const selector = kind === 'board' ? '.my-board [data-cid="p0c0"]' : '.b-hand [data-axiom="flux-plays-plus-1"]';
+        t.$(selector).click(); t.$('.b-future-open').click();
+        t.$('.b-future-dialog button').focus();
+        const before = JSON.stringify(t.handle.state);
+        listeners.resize();
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        assert.ok(t.g.document.activeElement === t.$(selector), kind + ': focus returns to the surviving source card');
+        t.handle.destroy();
+    }
+});
+
 test('reading across an opponent reveal keeps the pending move and resumes it exactly once', () => {
     for (const scripted of [false, true]) for (const closeBeforeRevealEnds of [false, true]) {
         const params = { ...practice, guide: scripted ? { steps: [

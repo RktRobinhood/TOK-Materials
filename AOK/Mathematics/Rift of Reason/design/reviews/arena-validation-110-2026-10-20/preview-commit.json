@@ -1,0 +1,139 @@
+{
+  "before": {
+    "cards": [
+      {
+        "cid": "p1c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p1c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p0c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4, guard, ready"
+      },
+      {
+        "cid": "p0c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 3 of 4, ready"
+      },
+      {
+        "cid": "p0c2",
+        "label": "Astrophysicat, cost 2, attack 1, health 3 of 3"
+      },
+      {
+        "cid": "p0t0",
+        "label": "Tactic Pep Talk, cost 2: Give a friendly creature +2/+2."
+      }
+    ],
+    "energy": [
+      "10/10Energy",
+      "10/10EnergyUses"
+    ],
+    "rules": "AxiomsActive now · All basic.Axioms are the rules both players start from. Rule cards and Fate can change them.WinEnemy hero to 0 ❤ winsFightsBoth creatures hitCard activations2 activations per turn2 leftAttacksEach creature attacks onceEnergy+1 each turn⚖DrawingDraw 1Card costsCreature costs +0"
+  },
+  "during": {
+    "cards": [
+      {
+        "cid": "p1c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p1c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p0c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4, guard, ready"
+      },
+      {
+        "cid": "p0c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 3 of 4, ready"
+      },
+      {
+        "cid": "p0c2",
+        "label": "Astrophysicat, cost 2, attack 1, health 3 of 3"
+      },
+      {
+        "cid": "p0t0",
+        "label": "Tactic Pep Talk, cost 2: Give a friendly creature +2/+2."
+      }
+    ],
+    "energy": [
+      "10/10Energy",
+      "10/10EnergyUses"
+    ],
+    "rules": "AxiomsActive now · All basic.Axioms are the rules both players start from. Rule cards and Fate can change them.WinEnemy hero to 0 ❤ winsFightsBoth creatures hitCard activations2 activations per turn2 leftAttacksEach creature attacks onceEnergy+1 each turn⚖DrawingDraw 1Card costsCreature costs +0"
+  },
+  "afterClose": {
+    "cards": [
+      {
+        "cid": "p1c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p1c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p0c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4, guard, ready"
+      },
+      {
+        "cid": "p0c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 3 of 4, ready"
+      },
+      {
+        "cid": "p0c2",
+        "label": "Astrophysicat, cost 2, attack 1, health 3 of 3"
+      },
+      {
+        "cid": "p0t0",
+        "label": "Tactic Pep Talk, cost 2: Give a friendly creature +2/+2."
+      }
+    ],
+    "energy": [
+      "10/10Energy",
+      "10/10EnergyUses"
+    ],
+    "rules": "AxiomsActive now · All basic.Axioms are the rules both players start from. Rule cards and Fate can change them.WinEnemy hero to 0 ❤ winsFightsBoth creatures hitCard activations2 activations per turn2 leftAttacksEach creature attacks onceEnergy+1 each turn⚖DrawingDraw 1Card costsCreature costs +0"
+  },
+  "clip": {
+    "explanation": "Mr. Beastie: Base +2 = 2 attack. Mr. Beastie: Base +2 = 2 attack.",
+    "stage": "Sergeant Syllo · 12 hearts · 10 energyMr. Beastie2 attack · 2 healthMr. Beastie2 attack · 4 healthYou · 12 hearts · 10 energyMr. Beastie2 attack · 2 health · guardMr. Beastie2 attack · 3 healthBasic rules: both creatures hit; damage stays.",
+    "transcript": "Before the move.Mr. Beastie: Base +2 = 2 attack.Mr. Beastie: Base +2 = 2 attack.You attack Sergeant Syllo's Mr. Beastie with your Mr. Beastie.Your Mr. Beastie (2 attack) fights Sergeant Syllo's Mr. Beastie (2 attack).Sergeant Syllo's Mr. Beastie takes 2 damage.Your Mr. Beastie takes 2 damage.Visible result of this move. Future rival decisions are not predicted."
+  },
+  "committed": {
+    "cards": [
+      {
+        "cid": "p1c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 2 of 4"
+      },
+      {
+        "cid": "p1c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 4 of 4"
+      },
+      {
+        "cid": "p0c0",
+        "label": "Mr. Beastie, cost 4, attack 2, health 2 of 4, guard"
+      },
+      {
+        "cid": "p0c1",
+        "label": "Mr. Beastie, cost 4, attack 2, health 3 of 4, ready"
+      },
+      {
+        "cid": "p0c2",
+        "label": "Astrophysicat, cost 2, attack 1, health 3 of 3"
+      },
+      {
+        "cid": "p0t0",
+        "label": "Tactic Pep Talk, cost 2: Give a friendly creature +2/+2."
+      }
+    ],
+    "energy": [
+      "10/10Energy",
+      "10/10EnergyUses"
+    ],
+    "rules": "AxiomsActive now · All basic.Axioms are the rules both players start from. Rule cards and Fate can change them.WinEnemy hero to 0 ❤ winsFightsBoth creatures hitCard activations2 activations per turn1 leftAttacksEach creature attacks onceEnergy+1 each turn⚖DrawingDraw 1Card costsCreature costs +0"
+  }
+}

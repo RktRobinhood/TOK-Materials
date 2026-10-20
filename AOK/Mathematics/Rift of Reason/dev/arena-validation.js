@@ -1,5 +1,5 @@
 /* Production-screen validation, without the old layout-study adapter.
- * dev/battle.html?validation=1&fixture=normal|crowded|death|return|ability|spell
+ * dev/battle.html?validation=1&fixture=normal|crowded|danger|death|return|ability|spell
  * Synthetic trace input measures DOM feedback, not hardware-to-photon latency.
  */
 (function (root) {
@@ -23,6 +23,11 @@
         s.players.forEach(P => { P.energy = P.capacity = 10; });
         s.phase = phase || 'main'; s.turn = 8;
         s.cards.p0c0.gained.push('comma-pause'); s.cards.p0c1.damage = 1;
+        // Reproduce the reported narrow-laptop danger-badge/hand relationship.
+        if (kind === 'danger') {
+            s.cards.p0c0.gained = []; s.players[0].hearts = 2;
+            [3, 4, 5, 6, 7].forEach(i => move('p0c' + i, 0, 'hand'));
+        }
         if (kind === 'death' || kind === 'return') {
             if (kind === 'return') { s.cards.p0c0.species = 'keanu'; s.cards.p0c0.ability = 'deja-vu'; }
             s.cards.p0c0.health = 1; s.cards.p1c0.attack = 8;
