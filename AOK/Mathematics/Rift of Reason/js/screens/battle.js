@@ -254,7 +254,7 @@
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
-            readKey: null, reading: null, future: null,
+            readKey: null, reading: null, future: null, revealedAction: null,
         };
         const actionStates = new WeakMap();
         const presentationTimers = new Set(), motions = new Set();
@@ -267,7 +267,8 @@
             return id;
         }
         function animate(node, frames, options) {
-            const motion = node.animate(frames, options);
+            let motion;
+            try { motion = node.animate(frames, options); } catch (e) { return null; }
             if (motion) {
                 motions.add(motion);
                 motion.onfinish = motion.oncancel = () => motions.delete(motion);
@@ -283,6 +284,7 @@
             dom.lane.classList.remove('flash');
         }
         function stopScreenTimers() {
+            ui.revealedAction = null;
             ['timer', 'noteTimer', 'inspectTimer', 'bannerTimer', 'revealTimer', 'hintTimer', 'sayTimer', 'sayCap'].forEach(key => clearTimeout(ui[key]));
             if (ui.layoutFrame != null && root.cancelAnimationFrame) root.cancelAnimationFrame(ui.layoutFrame);
             cancelLongPress(); hideTip();
@@ -416,6 +418,8 @@
             root.addEventListener('scroll', positionFateInspection, true);
         }
         screen.addEventListener('keydown', e => { if (e.key === 'Escape' && !ui.future) { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
+        // Optional presentation is skippable; the same pointerdown can still select or play.
+        screen.addEventListener('pointerdown', () => { if (!ui.future && !ui.reading) clearPresentation(); });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); cancelTipPress(); });
@@ -524,15 +528,15 @@
                 }
                 const what = state.cards[action.cid].kind === 'tactic' ? 'plays a tactic' : 'plays a creature';
                 const aim = target ? ' on ' + targetName(target) : '';
-                showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL, '', false);
-                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                ui.revealedAction = { action, state };
+                showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL);
                 return;
             }
             // The opponent's power is shown big too, then (with a target) its arrow.
             if (by === OPP && !revealed && action.type === 'power' && state.players[OPP].power) {
                 const pw = state.players[OPP].power;
-                showReveal(powerBig(pw.id, OPP), oppName + ' uses the power ' + powerName(pw.id) + (target ? ' on ' + targetName(target) : ''), REVEAL, 'power', false);
-                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                ui.revealedAction = { action, state };
+                showReveal(powerBig(pw.id, OPP), oppName + ' uses the power ' + powerName(pw.id) + (target ? ' on ' + targetName(target) : ''), REVEAL, 'power');
                 return;
             }
             if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate' || action.type === 'power')) {
@@ -619,7 +623,19 @@
             // A card shown big (a reveal) is read first: everything waits until it fades.
             if (ui.holding || ui.saying) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
-            if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a); return; }
+            // A reveal owns the pending move until it is committed, including while a reader,
+            // Help or confirmation pauses the timer. Scripted replies were already dequeued.
+            if (ui.revealedAction) {
+                const pending = ui.revealedAction;
+                ui.timer = setTimeout(() => {
+                    if (ui.revealedAction !== pending) return;
+                    ui.revealedAction = null;
+                    if (state === pending.state) perform(pending.action, true);
+                    else schedule();
+                }, 0);
+                return;
+            }
+            if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a, true); return; }
             if (ui.queue.length) {
                 // A narration line ({ say }) in the lesson's replies: show it, say it, and go on only
                 // when the voice has finished (each reply is its own small block).
@@ -648,20 +664,19 @@
 
         function noteEvents(events) {
             ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t) && !/Choose a draw\.$/.test(t));
-            try { battleSounds(events); } catch (e) { /* sound is optional */ }
         }
 
         // Sounds for one batch of events (assets/sfx/el via data/sfx-el.js; older Kenney names as the
         // fallback). Sounds in a batch are spaced out, creature calls use their own channel, and at most
         // one spoken creature bark (data/barks.js) plays, only when it is recorded and no
         // other voice is talking.
-        function battleSounds(events) {
-            const A = Rift.Audio;
-            if (!A || !A.has) return;
+        function battleSounds(events, present) {
+            const A = Rift.Audio || {};
             const cue = [];
+            let current;
             const add = (name, fallback, opts) => {
-                const n = A.has(name) ? name : fallback && A.has(fallback) ? fallback : null;
-                if (n) cue.push([n, opts || {}]);
+                const n = A.has && (A.has(name) ? name : fallback && A.has(fallback) ? fallback : null);
+                if (n) cue.push([n, opts || {}, current]);
             };
             const sp = cid => { const c = cid && state.cards[cid]; return c && c.kind === 'creature' ? c.species : null; };
             const call = (cid, kind) => { const s = sp(cid); if (s) add('cr-' + s + '-' + kind, null, { bus: 'creature' }); };
@@ -671,6 +686,8 @@
             let bark = null;
             const wantBark = (cid, kind, chance) => { const s = sp(cid); if (!bark && s && Math.random() < chance) bark = { s, kind }; };
             events.forEach(ev => {
+                current = ev;
+                const count = cue.length;
                 switch (ev.t) {
                     case 'armed': add('card-play'); break;
                     case 'conditional-reveal': add('card-play'); break;
@@ -679,7 +696,7 @@
                     case 'tactic-play': {
                         const def = (Rift.data.tactics || {})[ev.id] || {};
                         add('tactic-' + ev.id, 'cast-' + (def.colour || 'colourless'));
-                        if (!cue.length) add('card-play');
+                        if (cue.length === count) add('card-play');
                         break;
                     }
                     case 'item-use': add('item-use', 'card-play'); break;
@@ -703,13 +720,19 @@
                 const low = Math.min(...state.players.map(P => P.hearts / (P.maxHearts || 12)));
                 Rift.Ambience.tension(events.some(ev => ev.t === 'end') ? 0 : Rift.clamp((0.75 - low) / 0.6, 0, 1));
             }
-            // Space the batch out; a channel may only cut its own previous sound.
-            cue.slice(0, 6).forEach(([n, o], i) => presentationLater(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
-            if (bark && !guide && !A.speaking()) {
+            // One event clock for source motion, consequences and their sound. Dense chains
+            // compress into 600 ms; this clock never holds up input or the opponent scheduler.
+            events.forEach((ev, index) => {
+                const delay = events.length > 1 ? index * Math.min(100, 600 / (events.length - 1)) : 0;
+                const sounds = () => cue.filter(c => c[2] === ev).forEach(([n, o]) => { try { A.sfx(n, o); } catch (e) { /* optional audio */ } });
+                // Even the first cosmetic beat waits until after the immediate DOM feedback.
+                presentationLater(() => { if (present) present(ev); sounds(); }, delay);
+            });
+            if (bark && !guide && A.speaking && !A.speaking()) {
                 const lines = (((Rift.data.barks || {})[bark.s] || {})[bark.kind]) || [];
                 const text = lines[Math.floor(Math.random() * lines.length)];
                 const voice = text && Rift.voiceId(bark.s, text);
-                if (voice && (Rift.data.voices || {})[voice]) presentationLater(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, cue.length * 220 + 300);
+                if (voice && (Rift.data.voices || {})[voice]) presentationLater(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, 900);
             }
         }
 
@@ -3545,22 +3568,65 @@
                     }
                 }
                 if ((ev.t === 'play' || ev.t === 'summon') && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
-                if (ev.t === 'attack' && !calm) lunge(ev.cid, ev.target, before);
-                if (ev.t === 'axiom' || ev.t === 'reset') { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
+                if (ev.t === 'attack') lunge(ev.cid, ev.target, before, calm);
+                if (['tactic-play', 'activate', 'ability', 'shield'].includes(ev.t)) sourceCue(ev, before, calm);
+                if (ev.t === 'axiom' || ev.t === 'reset') {
+                    if (calm && dom.lane.animate) animate(dom.lane, [{ opacity: 0.7 }, { opacity: 1 }], { duration: 400 });
+                    else if (!calm) { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
+                }
             });
         }
-        function lunge(cid, target, before) {
-            const n = nodes[cid];
-            const a = rectOf(cid, before), t = rectOf(target, before);
+        function motionSource(cid, before, event, captured) {
+            if (!captured && nodes[cid]) return nodes[cid];
+            const r = before[cid];
+            if (!r || !r.node.cloneNode) return null;
+            const ghost = r.node.cloneNode(true);
+            ghost.classList.add('b-motion-ghost');
+            ghost.dataset.event = event;
+            ghost.setAttribute('aria-hidden', 'true'); ghost.setAttribute('tabindex', '-1'); ghost.disabled = true;
+            ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
+            Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+            dom.floats.appendChild(ghost);
+            presentationLater(() => ghost.remove(), 400);
+            return ghost;
+        }
+        function sourceCue(ev, before, calm) {
+            const key = ev.cid || ev.target, node = motionSource(key, before, ev.t);
+            if (node && node.animate) animate(node, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : [{ filter: 'brightness(1)' }, { filter: 'brightness(1.3)', scale: '1.04' }, { filter: 'brightness(1)', scale: '1' }], { duration: 380 });
+            const from = rectOf(key, before), to = ev.target && rectOf(ev.target, before);
+            if (!from || !to || key === ev.target) return;
+            const colour = ev.t === 'tactic-play' ? ((Rift.data.tactics || {})[ev.id] || {}).colour
+                : state.cards[key] && E.colourOf(state, state.cards[key]);
+            const trail = el('div.b-cast-trail', { 'aria-hidden': 'true', dataset: { event: ev.t }, style: {
+                left: (from.left + from.width / 2) + 'px', top: (from.top + from.height / 2) + 'px',
+                width: Math.hypot(to.left + to.width / 2 - from.left - from.width / 2, to.top + to.height / 2 - from.top - from.height / 2) + 'px',
+                rotate: Math.atan2(to.top + to.height / 2 - from.top - from.height / 2, to.left + to.width / 2 - from.left - from.width / 2) + 'rad',
+                background: (Rift.COLOURS[colour] || {}).hex || 'var(--gold)',
+            } });
+            dom.floats.appendChild(trail);
+            // Still mode keeps the same source/target connection, with only its opacity changing.
+            if (trail.animate) animate(trail, calm ? [{ opacity: 0.3 }, { opacity: 0.8 }, { opacity: 0 }]
+                : [{ scale: '0 1', opacity: 0.2 }, { scale: '1 1', opacity: 0.9 }, { scale: '1 1', opacity: 0 }], { duration: 380 });
+            presentationLater(() => trail.remove(), 400);
+        }
+        function lunge(cid, target, before, calm) {
+            // Rendering is already authoritative. A fighter that died still has its captured
+            // public face/position for this cue, before its later defeat event is presented.
+            const captured = !state.players.some(P => P.board.includes(cid));
+            const n = motionSource(cid, before, 'attack', captured);
+            const targetLeft = state.cards[target] && !state.players.some(P => P.board.includes(target));
+            const a = captured ? before[cid] : rectOf(cid, before), t = targetLeft ? before[target] : rectOf(target, before);
             if (!n || !n.animate || !a || !t) return;
             const dx = (t.left + t.width / 2 - a.left - a.width / 2) * 0.35, dy = (t.top + t.height / 2 - a.top - a.height / 2) * 0.35;
-            try { animate(n, [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
+            try { animate(n, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
         }
 
         // Recovered from the unfinished #109 prototype, using the shipped lifecycle rather than
         // its competing timer/animation owner. Input never waits for these optional visuals.
         function playVisuals(events, before, previous, focusDrawn) {
-            const drawn = [];
+            const drawn = [], flights = new Map();
             const axUsed = [0, 0].map(() => ({}));
             events.forEach(ev => {
                 if (ev.t !== 'draw' && ev.t !== 'draw-axiom') return;
@@ -3580,9 +3646,9 @@
                 }
                 if (!card) return;
                 if (ev.player === ME) drawn.push(card);
-                flyDraw(card, ev.t === 'draw-axiom' ? 'axiom' : ev.player === OPP ? 'opponent' : 'deck', ev.t === 'draw-axiom', ev.player === ME);
+                flights.set(ev, () => flyDraw(card, ev.t === 'draw-axiom' ? 'axiom' : ev.player === OPP ? 'opponent' : 'deck', ev.t === 'draw-axiom', ev.player === ME));
             });
-            effects(events, before);
+            battleSounds(events, ev => { if (flights.has(ev)) flights.get(ev)(); effects([ev], before); });
             if (focusDrawn) {
                 const card = drawn[0] || dom.myHand.querySelector('.bc') || screen.querySelector('.b-end');
                 if (card && card.focus) card.focus();
@@ -3863,6 +3929,7 @@
 
         noteEvents(state.lastEvents);
         render();
+        battleSounds(state.lastEvents);
         if (guide) speak();
         schedule();
         return handle;

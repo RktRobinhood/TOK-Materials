@@ -1227,4 +1227,6 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-future-card img { width: 72px; height: 60px; object-fit: contain; }
 .b-future-caption { min-height: 3em; }
 .b-future-rules { margin: 0; }
+.b-motion-ghost { position: absolute !important; margin: 0 !important; z-index: 44; pointer-events: none; transform: none; }
+.b-cast-trail { position: absolute; height: 3px; border-radius: 3px; transform-origin: 0 50%; pointer-events: none; z-index: 46; box-shadow: 0 0 6px currentColor; }
 @media(max-width:560px) { .b-future-dialog { inset: auto 8px 8px; width: auto; max-height: 88dvh; } }

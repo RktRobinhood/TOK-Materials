@@ -9,6 +9,10 @@ Dev-only scripts. Nothing in this folder is loaded by the game or needed to play
 | `node tools/build-assets.mjs` | Turn the art sheets in `design/source-assets/` into game images and `data/assets.js` |
 | `node tools/voices.mjs` | Voice status, and recording with `--render` (see below) |
 
+## Production arena traces
+
+Open `dev/battle.html?validation=1&fixture=normal` (or `crowded`) on the preview server, then **Measure production trace**. This mounts the production screen in scratch memory and measures independent legal draw, spell, attack, ability and rule samples, each required to commit exactly one action. Calm motion is available beside the trace button. The JSON records synthetic DOM-feedback latency, frame distributions and long-frame observations; it does not certify physical input latency or classroom hardware. `fixture=death` and `fixture=return` prepare public combat-motion cases for manual checks. The old `prototype=1` layout study remains a separate development adapter.
+
 ## Voices
 
 **Final completion requirement (teacher, 19 October 2026): no browser-generated speech anywhere in the finished game.** Every spoken line must resolve to approved recorded audio, including generated/customized explanations and replacement-host dialogue. Missing recordings and playback failures must never invoke speech synthesis in the finished runtime; readable text remains available. Current fallback behavior is temporary. Complete the [voice inventory and priority backlog](../design/drafts/card-arena-2026-10-12/VOICE-NEEDS.md), check every reachable spoken variant, then remove browser synthesis and verify that no playback path can call it. A complete current catalog alone is insufficient while discovery gaps remain.

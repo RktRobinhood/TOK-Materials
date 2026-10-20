@@ -114,6 +114,7 @@ test('draw flights use card backs without exposing opponent identities; calm mot
             };
         } });
         t.$('.b-table-deck.deck').click();
+        runFirstBeat(t);
         const flight = t.$('.b-draw-flight');
         assert.equal(!!flight, !calm);
         if (flight) { assert.ok(flight.classList.contains('b-back')); assert.equal(flight.dataset.cid, undefined); assert.equal(flight.getAttribute('aria-hidden'), 'true'); }
@@ -486,11 +487,27 @@ test('calm motion: damage numbers still appear (they only fade)', () => {
     $('.my-board [data-cid="p0c0"]').click();
     $('.opp-board [data-cid="p1c0"]').click();
     assert.equal(t.handle.state.cards.p1c0.damage, 1);
+    runEventBeats(t);
     assert.ok(t.root.querySelectorAll('.b-float').length >= 2, 'damage numbers are shown');
     t.handle.destroy();
 });
 
 const mouse = (extra) => Object.assign({ pointerType: 'mouse', pointerId: 1, clientX: 0, clientY: 0, button: 0, preventDefault() {} }, extra);
+
+// Run the current event clock without also expiring its effects or advancing the AI.
+function runEventBeats(t) {
+    const beats = t.g.timers.filter(timer => timer.ms <= 600).sort((a, b) => a.ms - b.ms);
+    beats.forEach(timer => {
+        const at = t.g.timers.indexOf(timer);
+        if (at >= 0) { t.g.timers.splice(at, 1); timer.fn(); }
+    });
+}
+function runFirstBeat(t) {
+    t.g.timers.filter(timer => timer.ms === 0).forEach(timer => {
+        const at = t.g.timers.indexOf(timer);
+        if (at >= 0) { t.g.timers.splice(at, 1); timer.fn(); }
+    });
+}
 
 // Draw, play the first creature, pass, let the opponent play, draw again: both sides have a creature.
 function toSecondTurn(t) {
@@ -736,6 +753,79 @@ function prepared(cfg, edit, opts) {
     return setup(Object.assign({}, practice, { initialState: s }), opts);
 }
 
+test('attack sounds share their event beat with damage, including the lunge of a defeated attacker', () => {
+    for (const attacker of ['beastie', 'keanu']) {
+    const motions = [], sounds = [];
+    let t;
+    t = prepared({ me: [attacker], opp: ['beastie'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+        s.cards.p0c0.health = 1; s.cards.p0c0.attack = 1;
+    }, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            node.getBoundingClientRect = () => ({ left: node.parentNode && node.parentNode.classList.contains('b-hand') ? 800 : node.dataset.cid === 'p1c0' ? 220 : 20, top: 20, width: 100, height: 100 });
+            node.animate = (frames, options) => { const motion = { node, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+            const clone = node.cloneNode.bind(node);
+            node.cloneNode = deep => { const copy = clone(deep);
+                copy.animate = (frames, options) => { const motion = { node: copy, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return copy;
+            };
+            return node;
+        };
+        Object.assign(g.Rift.Audio, { has: () => true, speaking: () => false, sfx: id => sounds.push({ id, damageVisible: t.root.querySelectorAll('.b-float.dmg').length }) });
+    } });
+    t.$('.my-board [data-cid="p0c0"]').click(); t.$('.opp-board [data-cid="p1c0"]').click();
+    assert.ok(!t.handle.state.players[0].board.includes('p0c0'), 'the authoritative attack is already resolved');
+    runFirstBeat(t);
+    const ghost = t.$('.b-motion-ghost[data-event="attack"]');
+    assert.ok(ghost, 'the removed attacker still has a public source for its lunge');
+    assert.equal(ghost.getAttribute('aria-hidden'), 'true');
+    assert.ok(motions.some(m => m.node === ghost && m.frames.some(f => f.transform && f.transform.includes('translate'))));
+    assert.ok(motions.some(m => m.node === ghost && m.frames.some(f => f.transform === 'translate(70px,0px)')), 'a returned fighter lunges from its old board position, never its hand');
+    assert.equal(t.$('.b-defeat-ghost'), null, 'defeat follows the attack beat');
+    const committed = t.handle.state;
+    runEventBeats(t);
+    assert.ok(sounds.filter(s => s.id === 'impact').every(s => s.damageVisible > 0), 'impact audio and damage cue occur in the same callback');
+    assert.equal(sounds.filter(s => s.id === 'impact').length, 2);
+    assert.ok(t.$('.b-defeat-ghost'));
+    assert.equal(t.handle.state, committed);
+    t.handle.destroy(); const played = sounds.length; t.g.flush();
+    assert.equal(sounds.length, played); assert.ok(motions.every(m => m.cancelled));
+    }
+});
+
+test('spell and activation cues identify source and target; reduced motion fades; pointer input skips effects', () => {
+    for (const kind of ['spell', 'ability']) for (const reduced of [false, true]) {
+        const motions = [], t = prepared({ me: ['beastie', 'beastie'], opp: ['beastie'], myTactics: ['pep-talk'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p0c1', 0, 'board'); move('p1c0', 1, 'board'); move('p0t0', 0, 'hand');
+            s.cards.p0c0.gained.push('comma-pause'); s.cards.p0c1.damage = 1;
+        }, { before(g) {
+            if (reduced) g.ctx.matchMedia = () => ({ matches: true });
+            const create = g.document.createElement;
+            g.document.createElement = tag => { const node = create(tag);
+                node.getBoundingClientRect = () => ({ left: node.dataset.cid === 'p0c1' ? 220 : 20, top: 20, width: 100, height: 100 });
+                node.animate = (frames, options) => { const motion = { node, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return node;
+            };
+        } });
+        if (kind === 'spell') {
+            t.$('.b-hand [data-cid="p0t0"]').click(); t.$('.my-board [data-cid="p0c1"]').click();
+        } else {
+            t.$('.my-board [data-cid="p0c0"]').click();
+            t.$('.b-card-actions [data-ability="comma-pause"]').click(); t.$('.my-board [data-cid="p0c1"]').click();
+        }
+        runFirstBeat(t);
+        assert.ok(t.$('.b-cast-trail[data-event="' + (kind === 'spell' ? 'tactic-play' : 'activate') + '"]'));
+        if (reduced) assert.ok(motions.every(m => m.frames.every(f => !f.transform && !f.scale && !f.filter)), 'only opacity changes');
+        const committed = t.handle.state;
+        t.$('.b-arena').dispatchEvent(mouse({ type: 'pointerdown' }));
+        assert.equal(t.$('.b-cast-trail'), null); assert.ok(motions.every(m => m.cancelled));
+        assert.equal(t.handle.state, committed);
+        t.handle.destroy();
+    }
+});
+
 test('move clips choose targets and replay without changing live battle, saves or focus on dismissal', () => {
     for (const motion of ['normal', 'calm', 'reduced']) {
         const calm = motion === 'calm', still = motion !== 'normal';
@@ -773,6 +863,33 @@ test('move clips choose targets and replay without changing live battle, saves o
         opener.click(); t.handle.destroy(); t.g.flush();
         assert.equal(t.$('.b-future-dialog'), null);
         assert.ok(motions.every(m => m.cancelled));
+    }
+});
+
+test('reading across an opponent reveal keeps the pending move and resumes it exactly once', () => {
+    for (const scripted of [false, true]) for (const closeBeforeRevealEnds of [false, true]) {
+        const params = { ...practice, guide: scripted ? { steps: [
+            { expect: { type: 'draw', choice: 'deck' }, replies: [] },
+            { expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'play', cid: 'p1c0' }, { type: 'end' }] },
+            { expect: { type: 'draw', choice: 'deck' }, replies: [] },
+        ] } : null };
+        const t = setup(params, { before(g) { g.Rift.data.creatures.kardashiant.cost = 1; } });
+        t.$('.b-table-deck.deck').click(); t.$('.b-end').click();
+        let count = 0;
+        while (!t.$('.b-reveal.show') && t.g.timers.length) {
+            assert.ok(count++ < 50); t.g.timers.shift().fn();
+        }
+        assert.ok(t.$('.b-reveal.show'));
+        const state = t.handle.state;
+        t.$('.b-hand .bc').dispatchEvent({ type: 'focus' }); t.$('.b-read-btn').click();
+        if (!closeBeforeRevealEnds) t.g.flush();
+        assert.equal(t.handle.state, state);
+        t.$('.b-read-close').click(); t.g.flush();
+        assert.equal(t.handle.state.active, 0, 'the rival finishes its one turn after either dismissal order');
+        const played = t.E.fullLog(t.handle.state).filter(e => e.t === 'play' && e.player === 1);
+        assert.equal(played.length, 1);
+        if (scripted) assert.equal(t.handle.step, 2, 'the already-dequeued scripted reply is retained');
+        t.handle.destroy();
     }
 });
 

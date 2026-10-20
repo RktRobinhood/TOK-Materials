@@ -1,0 +1,125 @@
+{
+  "protocol": 2,
+  "seed": "arena-validation-109",
+  "fixture": "crowded",
+  "calm": false,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "frames": {
+    "count": 515,
+    "p50": 16.699999999999818,
+    "p95": 16.80000000000109,
+    "p99": 33.399999999999636,
+    "over33ms": 7,
+    "over50ms": 0,
+    "maximum": 50
+  },
+  "inputs": [
+    {
+      "label": "draw",
+      "feedbackMs": 27.399999976158142
+    },
+    {
+      "label": "select spell",
+      "feedbackMs": 24.19999998807907
+    },
+    {
+      "label": "play spell",
+      "feedbackMs": 25.799999952316284
+    },
+    {
+      "label": "select attack",
+      "feedbackMs": 29.599999964237213
+    },
+    {
+      "label": "attack",
+      "feedbackMs": 17.5
+    },
+    {
+      "label": "select ability",
+      "feedbackMs": 16.400000035762787
+    },
+    {
+      "label": "choose ability",
+      "feedbackMs": 22
+    },
+    {
+      "label": "activate",
+      "feedbackMs": 18.69999998807907
+    },
+    {
+      "label": "select rule",
+      "feedbackMs": 15.800000011920929
+    },
+    {
+      "label": "change rule",
+      "feedbackMs": 32.799999952316284
+    }
+  ],
+  "samples": [
+    {
+      "stage": "draw",
+      "warmedImages": true,
+      "committedActions": 1,
+      "events": [
+        "draw"
+      ]
+    },
+    {
+      "stage": "play",
+      "warmedImages": true,
+      "committedActions": 1,
+      "events": [
+        "tactic-play",
+        "tactic"
+      ]
+    },
+    {
+      "stage": "attack",
+      "warmedImages": true,
+      "committedActions": 1,
+      "events": [
+        "attack",
+        "fight",
+        "damage",
+        "damage"
+      ]
+    },
+    {
+      "stage": "ability",
+      "warmedImages": true,
+      "committedActions": 1,
+      "events": [
+        "activate",
+        "ability"
+      ]
+    },
+    {
+      "stage": "rule",
+      "warmedImages": true,
+      "committedActions": 1,
+      "events": [
+        "axiom-play",
+        "axiom"
+      ]
+    }
+  ],
+  "longFrames": [
+    {
+      "duration": 51.09999996423721,
+      "blockingDuration": 0,
+      "renderStart": 6695,
+      "styleAndLayoutStart": 6696.699999988079
+    },
+    {
+      "duration": 55.5,
+      "blockingDuration": 0,
+      "renderStart": 11540.899999976158,
+      "styleAndLayoutStart": 11541.099999964237
+    }
+  ],
+  "note": "Production renderer with independent fixed-seed legal samples; no layout-study adapter. DOM-feedback latency is synthetic. Includes fixture/image setup frames; no physical touchscreen, classroom-device or paint breakdown claim."
+}

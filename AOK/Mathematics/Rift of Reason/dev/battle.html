@@ -89,12 +89,14 @@
 <script src="dev/starter-pack.js"></script>
 <script src="dev/fate-bench.js"></script>
 <script src="dev/flux-bench.js"></script>
+<script src="dev/arena-validation.js"></script>
 <script>
 (function () {
     const R = window.Rift;
     const q = new URLSearchParams(location.search);
     const $ = id => document.getElementById(id);
     const msg = t => { $('msg').textContent = t; };
+    if (R.ArenaValidation) { R.ArenaValidation.start(); return; }
     if (R.ConditionalBench) { R.ConditionalBench.start(); return; }
     if (R.StarterPackBench) { R.StarterPackBench.start(); return; }
     if (R.FateBench) { R.FateBench.start(); return; }
