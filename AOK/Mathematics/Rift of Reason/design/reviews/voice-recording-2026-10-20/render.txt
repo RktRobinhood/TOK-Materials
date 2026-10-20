@@ -1,0 +1,41 @@
+
+START 2026-10-20T10:02:34.965Z constable 2 lines
+2 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+12:02:46 p.m. lite  constable: saved 2 lines (total 2)
+FINISHED: 2 lines saved, 1 requests used. Manifest lists 3012 files.
+
+START 2026-10-20T10:03:07.110Z granny 10 lines
+10 lines to render in 1 requests on gemini-3.8-flash-tts.
+12:03:47 p.m. flash granny: saved 10 lines (total 10)
+FINISHED: 10 lines saved, 1 requests used. Manifest lists 3022 files.
+
+START 2026-10-20T10:04:08.516Z carlseal 1 lines
+1 lines to render in 1 requests on gemini-3.8-flash-lite-tts.
+12:04:12 p.m. lite  carlseal: saved 1 lines (total 1)
+FINISHED: 1 lines saved, 1 requests used. Manifest lists 3023 files.
+
+START 2026-10-20T10:04:33.252Z beansprout 2 lines
+2 lines to render in 2 requests on gemini-3.8-flash-lite-tts.
+DAILY QUOTA reached on gemini-3.8-flash-lite-tts; 2 requests left for it. Run again after the reset.
+FINISHED: 0 lines saved, 1 requests used. Manifest lists 3023 files.
+
+START 2026-10-20T10:04:54.891Z narrator 20 lines
+20 lines to render in 2 requests on gemini-3.8-flash-tts.
+12:05:36 p.m. flash narrator: saved 10 lines (total 10)
+12:06:36 p.m. flash narrator: saved 10 lines (total 20)
+FINISHED: 20 lines saved, 2 requests used. Manifest lists 3043 files.
+
+START 2026-10-20T10:06:57.627Z granny 163 lines
+163 lines to render in 17 requests on gemini-3.8-flash-tts.
+12:07:33 p.m. flash granny: saved 10 lines (total 10)
+12:08:37 p.m. flash granny: saved 10 lines (total 20)
+12:09:30 p.m. flash granny: saved 10 lines (total 30)
+12:10:29 p.m. flash granny: saved 10 lines (total 40)
+12:11:27 p.m. flash granny: saved 10 lines (total 50)
+12:12:26 p.m. flash granny: saved 10 lines (total 60)
+12:13:28 p.m. flash granny: saved 10 lines (total 70)
+12:15:39 p.m. flash granny: saved 10 lines (total 80)
+12:17:11 p.m. flash granny: saved 10 lines (total 90)
+DAILY QUOTA reached on gemini-3.8-flash-tts; 8 requests left for it. Run again after the reset.
+FINISHED: 90 lines saved, 10 requests used. Manifest lists 3133 files.
+PASS COMPLETE 2755/2963; 208 missing.

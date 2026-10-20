@@ -6,6 +6,14 @@ Teacher requirement, 19 October 2026: the finished game must use recorded audio 
 
 Completion gates: inventory every reachable spoken variant, record and check the complete inventory, resolve withheld clips and discovery gaps, then remove browser speech synthesis from runtime playback and verify it cannot run even on missing-file or playback-error paths. Keep readable text when audio cannot play. The current browser fallback is temporary production behavior; neither a full existing catalog nor this backlog alone establishes completion.
 
+## Current recording inventory — 20 October 2026
+
+Today's pass retains **135 additional clips**, including the recovered morning recordings. Current catalog coverage is **2,754/2,974**. All ten default avatar-power explanations and both Constable Switchboard instructions now have recordings. Generated power discovery covers all 260 legal configurations, producing 173 distinct lines; 100 are recorded and 73 remain.
+
+The **220 missing files** comprise **174 ready lines** and **46 deferred Rubberstamp reserve tutorials**. Rubberstamp never arrives in the shipped story, so keep those reserve lines out of the next API run pending a reachability decision. Exact wording, speaker/text IDs, pinned model groups and ready-only commands are in [the next-generation handoff](../../reviews/voice-recording-2026-10-20/NEXT-GENERATION.md) and its adjacent next-generation.json. Both models reached their server daily quota; the next natural reset is **09:00 Copenhagen on 21 October**. Keep the actual ledger and existing pins.
+
+Eleven proven inherited reminder lines are now catalogued. Other conditional story candidates still need reachability decisions before entering a recording batch. The teacher ended the broader per-clip transcription audit; known phrase-boundary fixes and current transcript availability are documented in the [20 October receipt](../../reviews/voice-recording-2026-10-20.md). Final recorded-only runtime completion remains open.
+
 ## Tutorial recording priority — 19 October 2026
 
 Teacher priority: tutorials should use recorded voices, especially early in the game. Put these before remaining creature barks and story pickups. The [tutorial inventory](../../reviews/voice-recording-2026-10-19/tutorial-coverage.json) checks actual runtime speaker/text hashes against the shipping manifest and audio files.

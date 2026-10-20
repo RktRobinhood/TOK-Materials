@@ -1,0 +1,11 @@
+[
+  {
+    "id": "achilles-1l11ywa",
+    "sha256": "a519314f43b22406a0b64d1b014cd1c679f2fe0b39f46d82cbcde2a9429dfb63",
+    "backup": "C:/Users/mp/AppData/Local/Temp/rift-voice-repairs-20261020/withheld-achilles-1l11ywa.mp3",
+    "reason": "Two independent unprimed text-model readings omit the expected opening Are. This does not prove a cut boundary, but full wording is uncertified; withhold pending a single-line retake after the server reset.",
+    "expected": "Are you sure you're?",
+    "heard": "You sure you're",
+    "ttsRequests": 0
+  }
+]

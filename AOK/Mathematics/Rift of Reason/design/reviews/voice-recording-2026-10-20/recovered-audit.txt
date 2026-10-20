@@ -1,0 +1,57 @@
+DECODE PASS achilles-1l11ywa 1.22s
+DECODE PASS achilles-p0n5qv 3.58s
+DECODE PASS avatar-fox-girl-14h9hbs 4.3s
+DECODE PASS avatar-frogling-boy-9c4xqw 5.57s
+DECODE PASS avatar-mothkin-boy-1hqblqb 5.33s
+DECODE PASS avatar-owlet-girl-1tr2wzr 3.55s
+DECODE PASS avatar-raven-girl-1g1u6p9 3.91s
+DECODE PASS avatar-raven-girl-possessed-19tp0fi 9.12s
+DECODE PASS avatar-raven-girl-possessed-iqrpkn 7.3s
+DECODE PASS avatar-raven-girl-possessed-urjb78 8.71s
+DECODE PASS kuku-1p45jqo 3.24s
+DECODE PASS pip-possessed-1xj5be4 3.48s
+DECODE PASS speedcheeta-possessed-1avioh5 8.33s
+Text-model request 1: achilles-1l11ywa, achilles-p0n5qv, avatar-fox-girl-14h9hbs, avatar-frogling-boy-9c4xqw
+REVIEW achilles-1l11ywa
+Expected: Are you sure you're?
+Heard: You sure you're
+MATCH achilles-p0n5qv
+Expected: Then it isn't yours. Good. It's very heavy.
+Heard: then it isn't yours. Good. It's very heavy.
+MATCH avatar-fox-girl-14h9hbs
+Expected: Only two? I could win all three. I always do.
+Heard: Only two? I could win all three. I always do.
+MATCH avatar-frogling-boy-9c4xqw
+Expected: Only two? I could win all three. I always do.
+Heard: Only two? I could win all three. I always do.
+Text-model request 2: avatar-mothkin-boy-1hqblqb, avatar-owlet-girl-1tr2wzr, avatar-raven-girl-1g1u6p9, avatar-raven-girl-possessed-19tp0fi
+MATCH avatar-mothkin-boy-1hqblqb
+Expected: Only two? I could win all three. I always do.
+Heard: Only two? I could win all three. I always do.
+MATCH avatar-owlet-girl-1tr2wzr
+Expected: Only two? I could win all three. I always do.
+Heard: Only two? I could win all three. I always do.
+MATCH avatar-raven-girl-1g1u6p9
+Expected: Only two? I could win all three. I always do.
+Heard: Only two? I could win all three. I always do.
+MATCH avatar-raven-girl-possessed-19tp0fi
+Expected: "Always right." Lovely words. Words that lovely must be true.
+Heard: Always right. Lovely words. Words that lovely must be true.
+Text-model request 3: avatar-raven-girl-possessed-iqrpkn, avatar-raven-girl-possessed-urjb78, kuku-1p45jqo, pip-possessed-1xj5be4
+MATCH avatar-raven-girl-possessed-iqrpkn
+Expected: "Everything." A big word. Big words are true. Give up.
+Heard: everything. A big word. Big words are true. Give up.
+MATCH avatar-raven-girl-possessed-urjb78
+Expected: "Fraud." A strong word. Strong words are true. That's what they're for.
+Heard: fraud. A strong word. Strong words are true. That's what they're for.
+MATCH kuku-1p45jqo
+Expected: Pip. He'd have written all this down.
+Heard: pip. He'd have written all this down.
+MATCH pip-possessed-1xj5be4
+Expected: Can't. It's so tidy.
+Heard: can't. It's so tidy.
+Text-model request 4: speedcheeta-possessed-1avioh5
+MATCH speedcheeta-possessed-1avioh5
+Expected: I streamed it! A big round rock! It lost its shadow! Chat, it lost it!
+Heard: I streamed it, a big round rock. It lost its shadow. Chat, it lost it.
+13 clips transcribed this invocation; 13/13 total. Differences need local review; acting/cast consistency remains provisional.

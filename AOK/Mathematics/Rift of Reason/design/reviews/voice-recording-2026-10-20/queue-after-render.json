@@ -1,0 +1,1676 @@
+{
+  "time": "2026-10-20T10:17:53.881Z",
+  "total": 2963,
+  "recorded": 2755,
+  "missing": 208,
+  "stoppedModels": [
+    "gemini-3.8-flash-lite-tts",
+    "gemini-3.8-flash-tts"
+  ],
+  "usage": {
+    "day": "2026-10-20",
+    "counts": {
+      "gemini-3.8-flash-lite-tts": 13,
+      "gemini-3.8-flash-tts": 13
+    }
+  },
+  "lines": [
+    {
+      "id": "rawmsay-possessed-e4hfqf",
+      "who": "rawmsay-possessed",
+      "text": "THE DEFENCE IS RAW! I HAVEN'T TASTED IT! STILL RAW! GUILTY!",
+      "say": "The defence is raw! I haven't tasted it! Still raw! Guilty!",
+      "where": "clock ch3"
+    },
+    {
+      "id": "beastie-possessed-zhdfbz",
+      "who": "beastie-possessed",
+      "text": "VOTE GUILTY, WIN TEN THOUSAND CHARMS! IT'S NOT A BRIBE! IT'S A GIVEAWAY!",
+      "say": "Vote guilty, win ten thousand charms! It's not a bribe! It's a giveaway!",
+      "where": "clock ch3"
+    },
+    {
+      "id": "zuckerborg-possessed-mmir11",
+      "who": "zuckerborg-possessed",
+      "text": "I HAVE ITS DATA. IT IS ROUND. ROUND THINGS GUESS. GUILTY.",
+      "say": "I have its data. It is round. Round things guess. Guilty.",
+      "where": "clock ch3"
+    },
+    {
+      "id": "rockodile-possessed-t98qig",
+      "who": "rockodile-possessed",
+      "text": "CAN YOU SMELL WHAT THE ROCK IS GUILTY OF? ME NEITHER. GUILTY.",
+      "say": "Can you smell what the rock is guilty of? Me neither. Guilty.",
+      "where": "clock ch3"
+    },
+    {
+      "id": "muskrat-possessed-vriwxg",
+      "who": "muskrat-possessed",
+      "text": "I'LL BUY THE VOTE. THEN IT'S MY VOTE. GUILTY. MARS NEXT YEAR.",
+      "say": "I'll buy the vote. Then it's my vote. Guilty. Mars next year.",
+      "where": "clock ch3"
+    },
+    {
+      "id": "schoolteacher-3mb6ko",
+      "who": "schoolteacher",
+      "text": "Not one of them. How… unexpected. Class dismissed.",
+      "say": "Not one of them. How… unexpected. Class dismissed.",
+      "where": "side silent-pupil"
+    },
+    {
+      "id": "schoolteacher-1p3gc3b",
+      "who": "schoolteacher",
+      "text": "Silence is not a statement. I cannot grade it. Can you?",
+      "say": "Silence is not a statement. I cannot grade it. Can you?",
+      "where": "side silent-pupil"
+    },
+    {
+      "id": "avatar-mothkin-boy-inner-nao46o",
+      "who": "avatar-mothkin-boy-inner",
+      "text": "Ooh, glowing eyes. So pretty. …Wait. The front rank doesn't glow. Or blink.",
+      "say": "Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.",
+      "mood": null,
+      "where": "side recruitment-drive"
+    },
+    {
+      "id": "beansprout-1aug553",
+      "who": "beansprout",
+      "text": "Ooh.",
+      "say": "Ooh.",
+      "mood": null,
+      "where": "creature beansprout"
+    },
+    {
+      "id": "beansprout-iybblq",
+      "who": "beansprout",
+      "text": "Hmph.",
+      "say": "Hmph.",
+      "mood": null,
+      "where": "creature beansprout"
+    },
+    {
+      "id": "tally-cvagyd",
+      "who": "tally",
+      "text": "Find the secret rule, or check whether a pattern really keeps going.",
+      "say": "Find the secret rule, or check whether a pattern really keeps going.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "tally-o3ahsc",
+      "who": "tally",
+      "text": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+      "say": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "tally-13qfjvj",
+      "who": "tally",
+      "text": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+      "say": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "tally-111rjfe",
+      "who": "tally",
+      "text": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+      "say": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "tally-1phwr6j",
+      "who": "tally",
+      "text": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+      "say": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "tally-1kbwjjo",
+      "who": "tally",
+      "text": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-99egid",
+      "who": "kuku",
+      "text": "We need a safe route. These are the rules of this world, not promises about real people.",
+      "say": "We need a safe route. These are the rules of this world, not promises about real people.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial liars-gate"
+    },
+    {
+      "id": "kuku-6byco6",
+      "who": "kuku",
+      "text": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+      "say": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial liars-gate"
+    },
+    {
+      "id": "kuku-latemz",
+      "who": "kuku",
+      "text": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+      "say": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial liars-gate"
+    },
+    {
+      "id": "kuku-1tpfqw9",
+      "who": "kuku",
+      "text": "Now check the other statements. A possible answer must make every honest statement true and every lie false.",
+      "say": "Now check the other statements. A possible answer must make every honest statement true and every lie false.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial liars-gate"
+    },
+    {
+      "id": "kuku-ti5ynd",
+      "who": "kuku",
+      "text": "Choose a door and Open the gate when all your marks fit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Choose a door and Open the gate when all your marks fit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial liars-gate"
+    },
+    {
+      "id": "kuku-1dmf2rh",
+      "who": "kuku",
+      "text": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "say": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-170otng",
+      "who": "kuku",
+      "text": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "say": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-9v7tm3",
+      "who": "kuku",
+      "text": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "say": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-ezpaai",
+      "who": "kuku",
+      "text": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "say": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-1sh8o2g",
+      "who": "kuku",
+      "text": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "say": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-1avlh99",
+      "who": "kuku",
+      "text": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "say": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-1tsbeqe",
+      "who": "tally",
+      "text": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "say": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-yzav0a",
+      "who": "tally",
+      "text": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "say": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-1jzcol6",
+      "who": "tally",
+      "text": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "say": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-12d4hyp",
+      "who": "tally",
+      "text": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "say": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-1jd184q",
+      "who": "tally",
+      "text": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "say": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "tally-j4e0ee",
+      "who": "tally",
+      "text": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "say": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-g0z1l3",
+      "who": "kuku",
+      "text": "Find the secret rule, or check whether a pattern really keeps going.",
+      "say": "Find the secret rule, or check whether a pattern really keeps going.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-2icg1v",
+      "who": "kuku",
+      "text": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+      "say": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-b483rb",
+      "who": "kuku",
+      "text": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+      "say": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-1mou753",
+      "who": "kuku",
+      "text": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+      "say": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-1ysj57a",
+      "who": "kuku",
+      "text": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+      "say": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "kuku-efozr",
+      "who": "kuku",
+      "text": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial rule-hunter"
+    },
+    {
+      "id": "rubberstamp-1thtpop",
+      "who": "rubberstamp",
+      "text": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "say": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "rubberstamp-hb623d",
+      "who": "rubberstamp",
+      "text": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "say": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "rubberstamp-1jy0gmq",
+      "who": "rubberstamp",
+      "text": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "say": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "rubberstamp-1lbys5p",
+      "who": "rubberstamp",
+      "text": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "say": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "rubberstamp-1gzdbhr",
+      "who": "rubberstamp",
+      "text": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "say": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "rubberstamp-8i0uxs",
+      "who": "rubberstamp",
+      "text": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "say": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial venn"
+    },
+    {
+      "id": "kuku-1b92404",
+      "who": "kuku",
+      "text": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "say": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "kuku-19zjota",
+      "who": "kuku",
+      "text": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+      "say": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "kuku-lku6pv",
+      "who": "kuku",
+      "text": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "say": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "kuku-1fj9jxc",
+      "who": "kuku",
+      "text": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+      "say": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "kuku-5sg1v",
+      "who": "kuku",
+      "text": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+      "say": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "rubberstamp-13fc1y1",
+      "who": "rubberstamp",
+      "text": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "say": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "rubberstamp-1xkc4yh",
+      "who": "rubberstamp",
+      "text": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+      "say": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "rubberstamp-120e5i0",
+      "who": "rubberstamp",
+      "text": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "say": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "rubberstamp-78nwqb",
+      "who": "rubberstamp",
+      "text": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+      "say": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "rubberstamp-17zbyml",
+      "who": "rubberstamp",
+      "text": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+      "say": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial witness"
+    },
+    {
+      "id": "kuku-bj4e1r",
+      "who": "kuku",
+      "text": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "say": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "kuku-dj7rsr",
+      "who": "kuku",
+      "text": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "say": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "kuku-qhbo1k",
+      "who": "kuku",
+      "text": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "say": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "kuku-1i889xi",
+      "who": "kuku",
+      "text": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "say": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "kuku-ri3ed6",
+      "who": "kuku",
+      "text": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "rubberstamp-8q54d8",
+      "who": "rubberstamp",
+      "text": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "say": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "rubberstamp-1qcd1n9",
+      "who": "rubberstamp",
+      "text": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "say": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "rubberstamp-w82jz1",
+      "who": "rubberstamp",
+      "text": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "say": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "rubberstamp-1b94flg",
+      "who": "rubberstamp",
+      "text": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "say": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "rubberstamp-187j377",
+      "who": "rubberstamp",
+      "text": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial tribunal"
+    },
+    {
+      "id": "kuku-1shesyx",
+      "who": "kuku",
+      "text": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "say": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "kuku-tfypat",
+      "who": "kuku",
+      "text": "Click a cell once for ✕ (ruled out), twice for ✓ (confirmed). A ✓ crosses out its row and column.",
+      "say": "Click a cell once for ✕, twice for ✓. A ✓ crosses out its row and column.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "kuku-z1rqt3",
+      "who": "kuku",
+      "text": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+      "say": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "kuku-o0st9l",
+      "who": "kuku",
+      "text": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "say": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "kuku-16yi3q6",
+      "who": "kuku",
+      "text": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "rubberstamp-1t59s1b",
+      "who": "rubberstamp",
+      "text": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "say": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "rubberstamp-u81zc",
+      "who": "rubberstamp",
+      "text": "Click a cell once for ✕ (ruled out), twice for ✓ (confirmed). A ✓ crosses out its row and column.",
+      "say": "Click a cell once for ✕, twice for ✓. A ✓ crosses out its row and column.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "rubberstamp-zlpmx6",
+      "who": "rubberstamp",
+      "text": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+      "say": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "rubberstamp-ctzvkn",
+      "who": "rubberstamp",
+      "text": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "say": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "rubberstamp-5c8v19",
+      "who": "rubberstamp",
+      "text": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial logic-grid"
+    },
+    {
+      "id": "kuku-1jwrtx6",
+      "who": "kuku",
+      "text": "We want a fair chart. Compare the headline with the actual values.",
+      "say": "We want a fair chart. Compare the headline with the actual values.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "kuku-1b6v5z0",
+      "who": "kuku",
+      "text": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "say": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "kuku-7s11uz",
+      "who": "kuku",
+      "text": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "say": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "kuku-oulrgh",
+      "who": "kuku",
+      "text": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "say": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "kuku-1ob0y0s",
+      "who": "kuku",
+      "text": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "rubberstamp-hbmx80",
+      "who": "rubberstamp",
+      "text": "We want a fair chart. Compare the headline with the actual values.",
+      "say": "We want a fair chart. Compare the headline with the actual values.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "rubberstamp-1xr1ta8",
+      "who": "rubberstamp",
+      "text": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "say": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "rubberstamp-qqsy9f",
+      "who": "rubberstamp",
+      "text": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "say": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "rubberstamp-1cy2gy",
+      "who": "rubberstamp",
+      "text": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "say": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "rubberstamp-xfvenq",
+      "who": "rubberstamp",
+      "text": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial chart-fixer"
+    },
+    {
+      "id": "pip-wvypo",
+      "who": "pip",
+      "text": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "say": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "pip-10ajjzf",
+      "who": "pip",
+      "text": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "say": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "pip-1cdrk8c",
+      "who": "pip",
+      "text": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "say": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "pip-2ok06r",
+      "who": "pip",
+      "text": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "say": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "pip-1ft59gd",
+      "who": "pip",
+      "text": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "rubberstamp-1pxqyfh",
+      "who": "rubberstamp",
+      "text": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "say": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "rubberstamp-19oixkj",
+      "who": "rubberstamp",
+      "text": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "say": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "rubberstamp-11fvkps",
+      "who": "rubberstamp",
+      "text": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "say": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "rubberstamp-fbkh0t",
+      "who": "rubberstamp",
+      "text": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "say": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "rubberstamp-p0l1sv",
+      "who": "rubberstamp",
+      "text": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-1bnqm46",
+      "who": "kuku",
+      "text": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "say": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-1dz7t15",
+      "who": "kuku",
+      "text": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "say": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-olajgc",
+      "who": "kuku",
+      "text": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "say": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-nss66q",
+      "who": "kuku",
+      "text": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "say": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-7t8lhm",
+      "who": "kuku",
+      "text": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial prediction"
+    },
+    {
+      "id": "kuku-glukf9",
+      "who": "kuku",
+      "text": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "say": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "kuku-lxx7ww",
+      "who": "kuku",
+      "text": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "say": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "kuku-10ub4fa",
+      "who": "kuku",
+      "text": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "say": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "kuku-1ibhzso",
+      "who": "kuku",
+      "text": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "say": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "kuku-qkrbkp",
+      "who": "kuku",
+      "text": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "rubberstamp-gkb00m",
+      "who": "rubberstamp",
+      "text": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "say": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "rubberstamp-1eovm7",
+      "who": "rubberstamp",
+      "text": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "say": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "rubberstamp-gsk6ws",
+      "who": "rubberstamp",
+      "text": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "say": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "rubberstamp-1dtkb2b",
+      "who": "rubberstamp",
+      "text": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "say": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "rubberstamp-185owf6",
+      "who": "rubberstamp",
+      "text": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial three-act"
+    },
+    {
+      "id": "kuku-1olx7sg",
+      "who": "kuku",
+      "text": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "say": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "kuku-1weopsh",
+      "who": "kuku",
+      "text": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "say": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "kuku-86bib1",
+      "who": "kuku",
+      "text": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "say": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "kuku-ue6w2g",
+      "who": "kuku",
+      "text": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "say": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "kuku-1dlikc",
+      "who": "kuku",
+      "text": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "rubberstamp-15dcfg1",
+      "who": "rubberstamp",
+      "text": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "say": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "rubberstamp-jocmxl",
+      "who": "rubberstamp",
+      "text": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "say": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "rubberstamp-1xwwk54",
+      "who": "rubberstamp",
+      "text": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "say": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "rubberstamp-1h8stzw",
+      "who": "rubberstamp",
+      "text": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "say": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "rubberstamp-3zbtgc",
+      "who": "rubberstamp",
+      "text": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial sorting"
+    },
+    {
+      "id": "pip-hlrghk",
+      "who": "pip",
+      "text": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "say": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "pip-1j5zex",
+      "who": "pip",
+      "text": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "say": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "pip-15istb8",
+      "who": "pip",
+      "text": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "say": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "pip-5svepz",
+      "who": "pip",
+      "text": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "say": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "pip-o4n371",
+      "who": "pip",
+      "text": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "rubberstamp-1ip5xjq",
+      "who": "rubberstamp",
+      "text": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "say": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "rubberstamp-5roqxx",
+      "who": "rubberstamp",
+      "text": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "say": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "rubberstamp-1c74w0l",
+      "who": "rubberstamp",
+      "text": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "say": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "rubberstamp-12dpqkf",
+      "who": "rubberstamp",
+      "text": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "say": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "rubberstamp-17sqlo5",
+      "who": "rubberstamp",
+      "text": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "kuku-wuhbbb",
+      "who": "kuku",
+      "text": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "say": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "kuku-vh8ou6",
+      "who": "kuku",
+      "text": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "say": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "kuku-hdythp",
+      "who": "kuku",
+      "text": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "say": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "kuku-1107zv1",
+      "who": "kuku",
+      "text": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "say": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "kuku-1xynpb",
+      "who": "kuku",
+      "text": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "say": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "mood": "Patient guidance; keep the character flavour, but explain clearly",
+      "where": "tutorial village"
+    },
+    {
+      "id": "granny-rpeyso",
+      "who": "granny",
+      "text": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1stzpeg",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1oxoaex",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-15s27ru",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-uqfmyt",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1s8b4j",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1qqifj2",
+      "who": "granny",
+      "text": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-5p8whl",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1lfgkkc",
+      "who": "granny",
+      "text": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-h0b50k",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-oggp2h",
+      "who": "granny",
+      "text": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1lokazk",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1fduw2j",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-jzr6p5",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-cp2mdo",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-gt063p",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1fv6n0y",
+      "who": "granny",
+      "text": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-bo2hzj",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-swdv2f",
+      "who": "granny",
+      "text": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-j3g8ld",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1l9r1p2",
+      "who": "granny",
+      "text": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-b4yv4y",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1jlf9vt",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-12uij64",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-kknblb",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-10nkg6k",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-hjhwyq",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-2001ic",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ojq8cu",
+      "who": "granny",
+      "text": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-166ez6s",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-fowaxu",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-4tinvn",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-17xz8st",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-6pg26g",
+      "who": "granny",
+      "text": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1qavyi7",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-z0a88z",
+      "who": "granny",
+      "text": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1k5cj2y",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-87icff",
+      "who": "granny",
+      "text": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-g9okpx",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-bhpjsj",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1q86o9p",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1l9gtd3",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1hf4ync",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-68fge0",
+      "who": "granny",
+      "text": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-s55vf1",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-n2vqab",
+      "who": "granny",
+      "text": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-14w3jy6",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1omwkh0",
+      "who": "granny",
+      "text": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ohwtie",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-y34ae6",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1xiddkd",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-kd4oaf",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-175vqhl",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-nsw51z",
+      "who": "granny",
+      "text": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-b1abu3",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ou2x1h",
+      "who": "granny",
+      "text": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1q2j47g",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-ktvuet",
+      "who": "granny",
+      "text": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1644uh1",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ajk6c6",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-fwn5m7",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-vx6r2w",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1i73svt",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1kz8pxz",
+      "who": "granny",
+      "text": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ocj1du",
+      "who": "granny",
+      "text": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1trkfc7",
+      "who": "granny",
+      "text": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1dyijc4",
+      "who": "granny",
+      "text": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-10yf2zu",
+      "who": "granny",
+      "text": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-jtkztl",
+      "who": "granny",
+      "text": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1b2t76a",
+      "who": "granny",
+      "text": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1rlokmv",
+      "who": "granny",
+      "text": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-c6tenc",
+      "who": "granny",
+      "text": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-zns1e9",
+      "who": "granny",
+      "text": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    }
+  ]
+}

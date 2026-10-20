@@ -1,0 +1,40 @@
+[
+  {
+    "id": "constable-45f474",
+    "reason": "Independent single-file transcripts confirmed final sentence of first line had been cut into second clip.",
+    "source": "tools/voice-raw/constable-45f474-2.wav",
+    "sourceSha256": "0757df868e5731ac6fda315a3cfb9c612be9d03296002780490084f5cc4dc2cb",
+    "sourceIntervalSeconds": [
+      0,
+      13.1924375
+    ],
+    "silenceBoundarySeconds": [
+      12.876292,
+      13.508583
+    ],
+    "originalBackup": "C:/Users/mp/AppData/Local/Temp/rift-voice-repairs-20261020/constable-45f474.mp3",
+    "originalSha256": "d13be477d77afd90d822f2b7577b7a182931efb623b95c0148c332bf64ab0e6c",
+    "finalSha256": "865e0f1962534623829004ff3be2df62c7ca952d0bdd1b9b06fdbf851b4e4123",
+    "effects": "No cast effect for Constable; source voice/model retained",
+    "ttsRequests": 0
+  },
+  {
+    "id": "constable-18ihy92",
+    "reason": "Independent single-file transcripts confirmed final sentence of first line had been cut into second clip.",
+    "source": "tools/voice-raw/constable-45f474-2.wav",
+    "sourceSha256": "0757df868e5731ac6fda315a3cfb9c612be9d03296002780490084f5cc4dc2cb",
+    "sourceIntervalSeconds": [
+      13.1924375,
+      null
+    ],
+    "silenceBoundarySeconds": [
+      12.876292,
+      13.508583
+    ],
+    "originalBackup": "C:/Users/mp/AppData/Local/Temp/rift-voice-repairs-20261020/constable-18ihy92.mp3",
+    "originalSha256": "62dcf16408c14699e3e573b0852481bc14819a85b1b14dbc12edef20eaf1c01c",
+    "finalSha256": "43de7bc535cdbd1b32bbd65ba70d7eba28732337b9eff8d916b4b16496b6f37c",
+    "effects": "No cast effect for Constable; source voice/model retained",
+    "ttsRequests": 0
+  }
+]
