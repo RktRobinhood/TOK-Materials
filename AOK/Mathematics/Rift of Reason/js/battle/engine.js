@@ -921,6 +921,13 @@
         s.step += 1;
         if (match.type !== 'choose') { s.reactionCount = 0; s.resolutionRoot = s.step; }
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
+        resolveAction(G, match);
+        s.lastEvents = G.events;
+        s.log = { prev: state.log, events: G.events };
+        return s;
+    }
+
+    function resolveAction(G, match) {
         switch (match.type) {
             case 'draw': doDraw(G, match.choice); break;
             case 'play': countPlay(G); doPlay(G, match.cid, match.target || null); break;
@@ -935,9 +942,81 @@
             default: throw new Error('Unknown action ' + match.type);
         }
         resolveReactions(G);
-        s.lastEvents = G.events;
-        s.log = { prev: state.log, events: G.events };
-        return s;
+    }
+
+    // #108: prospective resolution never runs an unseen draw, random branch or concealed condition.
+    // Guarded private zones fail closed even when a hook reads them directly instead of using api.draw.
+    // Only public snapshots/text leave this function, never the simulated state or private event fields.
+    function previewAction(state, action, viewer) {
+        const frames = [], lines = [], explanations = [], stop = message => { throw { previewStop: true, message }; };
+        const copy = x => Array.isArray(x) ? x.map(copy) : x && typeof x === 'object' ? Object.fromEntries(Object.entries(x).map(([k, v]) => [k, copy(v)])) : x;
+        // History is immutable and irrelevant to one prospective move. Do not recursively copy
+        // its linked list (or retain private historical events for hooks to inspect).
+        const s = copy({ ...state, log: null, lastEvents: [] });
+        const snapshot = () => ({
+            players: s.players.map(P => ({ name: P.name, hearts: P.hearts, energy: P.energy, uses: playsLeft(s, s.players.indexOf(P)),
+                board: P.board.map(cid => ({ cid, species: s.cards[cid].species, name: cardName(s, cid), attack: attackOf(s, cid), health: healthOf(s, cid).current,
+                    keywords: keywordsOf(s, cid).slice() })) })),
+            rules: changedAxioms(s).map(a => a.name + ': ' + (NUMERIC_RULES[a.category] ? NUMERIC_RULES[a.category].label + ' ' + ruleValue(rules(s)[NUMERIC_RULES[a.category].field]) : a.text)),
+        });
+        const push = text => { if (frames.length < 7) frames.push({ text, view: snapshot() }); };
+        const explainFighter = (cid, target) => {
+            const parts = attackParts(s, cid, target);
+            const notes = [cardName(s, cid) + ': ' + parts.parts.map(p => p.label + ' ' + (p.amount >= 0 ? '+' : '') + p.amount).join(', ') + ' = ' + parts.total + ' attack.'];
+            if (hasKeyword(s, cid, 'shield')) notes.push('Shield blocks its next hit.');
+            eachAbility(s, s.cards[cid], def => {
+                if (def.damageReduction) notes.push(def.name + ': each hit deals it ' + def.damageReduction + ' less damage.');
+                if (isHero(target) && def.heroDamage) notes.push(def.name + ': +' + def.heroDamage + ' damage to a hero.');
+            });
+            return notes.join(' ');
+        };
+        push('Before the move.');
+        const G = { s, rng: new Proxy({}, { get: () => () => stop('A random result is unknown until you commit the move.') }), events: [], preview: true };
+        G.capture = ev => {
+            const text = ev.privateTo != null ? ev.publicText : ev.text;
+            if (text) { lines.push(text); push(text); }
+            // Fight is emitted after attack/defence hooks. Explain the actual public modifiers
+            // there, including prevention, rather than treating arithmetic as full resolution.
+            if (ev.t === 'fight') {
+                explanations.push(explainFighter(ev.attacker, ev.defender), explainFighter(ev.defender, ev.attacker));
+            }
+        };
+        let complete = false, reason = '';
+        try {
+            if (viewer !== decider(state) || !action || (action.player != null && action.player !== viewer) || !['attack', 'activate', 'play', 'axiom', 'power', 'item'].includes(action.type)) stop('Choose a complete move on your turn first.');
+            const match = legalActions(state).find(a => actionKey(a) === actionKey(action));
+            if (!match) stop('That move is no longer available.');
+            if ((state.players[1 - viewer].armed || []).some(cid => { const d = conditionOf(state, cid); return !d || d.visibility === 'face-down'; })) stop('A concealed condition may change this move. Its effect stays unknown until it is revealed.');
+            const guarded = (list, why) => new Proxy(list, { get(target, key) {
+                if (/^\d+$/.test(String(key))) stop(why);
+                return Reflect.get(target, key);
+            } });
+            const visible = new Set(s.players.flatMap((P, p) => P.board.concat(P.discard, p === viewer ? P.hand : [],
+                (P.armed || []).filter(cid => p === viewer || (conditionOf(s, cid) || {}).visibility === 'face-up'))));
+            Object.keys(s.cards).forEach(cid => {
+                if (!visible.has(cid)) { const c = s.cards[cid]; s.cards[cid] = { cid, kind: 'concealed', owner: c.owner, controller: c.controller }; }
+            });
+            s.players.forEach((P, p) => {
+                P.deck = guarded(P.deck, 'A deck card is unknown until it is drawn or revealed.');
+                if (p !== viewer) { P.hand = guarded(P.hand, 'The rival’s hand stays unknown.'); P.axHand = guarded(P.axHand, 'The rival’s rule hand stays unknown.'); }
+            });
+            s.axioms.deck = guarded(s.axioms.deck, 'The next shared-deck card stays unknown. Only the announced Fate flip is certain.');
+            s.seed = 'preview-public'; s.step += 1;
+            if (match.type !== 'choose') { s.reactionCount = 0; s.resolutionRoot = s.step; }
+            resolveAction(G, match);
+            if (s.phase === 'choose') stop('Another choice is needed. Its later result is not part of this clip.');
+            complete = true;
+        } catch (e) { reason = e && e.previewStop ? e.message : 'A later effect cannot be predicted safely. Its result stays unknown.'; }
+        // Keep a distinct final frame, even when the event budget was exhausted by a long chain.
+        if (frames.length === 7) frames.pop();
+        frames.push({ text: complete ? 'Visible result of this move. Future rival decisions are not predicted.' : reason + ' Earlier steps show only what is already certain.', view: snapshot() });
+        if (action && action.type === 'attack' && state.cards[action.cid] && isHero(action.target)) {
+            // Hero attacks have no fight event; their public result is already in the event text.
+            explanations.push(explainFighter(action.cid, action.target));
+            const cap = rules(s).heroDamageCap;
+            if (cap != null) explanations.push('The active rule limits each hero hit to ' + cap + ' damage.');
+        }
+        return { complete, reason, explanation: explanations.join(' '), frames, lines: ['Before the move.'].concat(explanations, lines, frames[frames.length - 1].text) };
     }
 
     function countPlay(G) { const P = G.s.players[G.s.active]; P.playsThisTurn = (P.playsThisTurn || 0) + 1; }
@@ -950,6 +1029,7 @@
         ev.turn = G.s.turn;
         ev.round = G.s.round;
         G.events.push(ev);
+        if (G.capture) G.capture(ev);
     }
 
     // The api handed to ability and tactic hooks.
@@ -1893,6 +1973,7 @@
             answer(G, req, req.options[0]);
             return true;
         }
+        if (G.preview) throw { previewStop: true, message: 'Another choice is needed. Its later result stays unknown.' };
         s.phase = 'choose';
         s.pending = Object.assign({}, req, { choiceKind: req.kind });
         return true;
@@ -2294,7 +2375,7 @@
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
-        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
+        createBattle, legalActions, applyAction, applyLegal, previewAction, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
         rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,

@@ -712,7 +712,7 @@ test('a rule change is shown big, and the opponent waits until it fades', () => 
 
 // A prepared match (engine state edited by hand), so one situation can be checked directly.
 // cfg: { me: [species], opp: [species], myTactics?, myLoaned?, oppLoaned?, phase?, energy? }, then edit(s, move).
-function prepared(cfg, edit) {
+function prepared(cfg, edit, opts) {
     const holder = setup(practice);
     const E = holder.E;
     holder.handle.destroy();
@@ -733,8 +733,70 @@ function prepared(cfg, edit) {
     s.phase = cfg.phase || 'main';
     s.players[0].energy = s.players[0].capacity = cfg.energy == null ? 5 : cfg.energy;
     edit(s, move);
-    return setup(Object.assign({}, practice, { initialState: s }));
+    return setup(Object.assign({}, practice, { initialState: s }), opts);
 }
+
+test('move clips choose targets and replay without changing live battle, saves or focus on dismissal', () => {
+    for (const motion of ['normal', 'calm', 'reduced']) {
+        const calm = motion === 'calm', still = motion !== 'normal';
+        const motions = [], t = prepared({ me: ['beastie'], opp: ['keanu', 'keanu'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); move('p1c1', 1, 'board');
+        }, { calm, before(g) {
+            if (motion === 'reduced') g.ctx.matchMedia = () => ({ matches: true });
+            const create = g.document.createElement;
+            g.document.createElement = tag => {
+                const node = create(tag);
+                node.animate = () => { const motion = { cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return node;
+            };
+        } });
+        t.$('.my-board [data-cid="p0c0"]').click();
+        t.Rift.State = { get() { throw new Error('Preview must not read/write adventure saves'); } };
+        const before = JSON.stringify(t.handle.state), opener = t.$('.b-future-open');
+        opener.click(); const dialog = t.$('.b-future-dialog');
+        assert.ok(dialog.open); assert.match(t.$('.b-future-explanation').textContent, /Base/);
+        const choose = dialog.querySelector('select');
+        assert.ok(choose.children.length >= 2, choose.textContent + ' / ' + JSON.stringify(t.E.legalActions(t.handle.state)));
+        choose.value = '1'; choose.dispatchEvent({ type: 'change' });
+        dialog.querySelectorAll('button')[2].click(); // Next step cancels automatic playback.
+        assert.match(t.$('.b-future-caption').textContent, /Step 2/);
+        dialog.querySelectorAll('button')[3].click(); // Replay.
+        t.g.flush();
+        assert.equal(JSON.stringify(t.handle.state), before);
+        assert.equal(still ? motions.length : motions.filter(m => !m.cancelled).length > 0, still ? 0 : true);
+        dialog.dispatchEvent({ type: 'keydown', key: 'Escape' });
+        assert.equal(t.$('.b-future-dialog'), dialog, 'Escape keydown leaves selection for the native cancel event');
+        dialog.dispatchEvent({ type: 'cancel', preventDefault() {} });
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.equal(t.g.document.activeElement, opener);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        opener.click(); t.handle.destroy(); t.g.flush();
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.ok(motions.every(m => m.cancelled));
+    }
+});
+
+test('stale preview callbacks cannot close a newer clip or commit its action', () => {
+    const closes = [];
+    const t = prepared({ me: ['beastie'], opp: ['keanu'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+    }, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => { const node = create(tag);
+            if (tag === 'dialog') node.close = () => { node.open = false; closes.push(() => node.dispatchEvent({ type: 'close' })); };
+            return node;
+        };
+    } });
+    t.$('.my-board [data-cid="p0c0"]').click(); const before = JSON.stringify(t.handle.state);
+    const opener = t.$('.b-future-open'); opener.click(); const old = t.$('.b-future-dialog');
+    old.querySelector('button').click(); opener.click(); const current = t.$('.b-future-dialog');
+    closes.forEach(fn => fn()); old.querySelectorAll('button')[3].click();
+    assert.equal(t.$('.b-future-dialog'), current);
+    // Even a retained live target handler cannot submit while a clip is open.
+    t.$('.opp-board [data-cid="p1c0"]').click();
+    assert.equal(JSON.stringify(t.handle.state), before);
+    t.handle.destroy(); t.g.flush();
+});
 
 test('a ready Astrophysicat describes both attack and activation, and either action works', () => {
     for (const choice of ['attack', 'activate']) {

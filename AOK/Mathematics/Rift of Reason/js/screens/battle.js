@@ -254,7 +254,7 @@
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
-            readKey: null, reading: null,
+            readKey: null, reading: null, future: null,
         };
         const actionStates = new WeakMap();
         const presentationTimers = new Set(), motions = new Set();
@@ -402,6 +402,7 @@
             placeAbilityTray();
         }
         function resizeBattle() {
+            closeFuture(true);
             if (ui.ended) return;
             clearPresentation();
             ui.fateSlide = null;
@@ -414,7 +415,7 @@
             root.addEventListener('resize', resizeBattle);
             root.addEventListener('scroll', positionFateInspection, true);
         }
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape' && !ui.future) { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); cancelTipPress(); });
@@ -470,7 +471,7 @@
 
         // ---- acting ----
         function act(action, automated, keyboardDraw) {
-            if (ui.ended || ui.reading) return;
+            if (ui.ended || ui.reading || ui.future) return;
             // Old DOM handlers may fire again after a render. Reject them before they
             // can cancel an AI timer, replay audio or touch selection in a newer state.
             if (!automated && (!myTurn() || actionStates.get(action) !== state)) return;
@@ -614,7 +615,7 @@
 
         function schedule() {
             clearTimeout(ui.timer);
-            if (ui.ended || help || ui.confirm || ui.reading) return;
+            if (ui.ended || help || ui.confirm || ui.reading || ui.future) return;
             // A card shown big (a reveal) is read first: everything waits until it fades.
             if (ui.holding || ui.saying) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
@@ -1556,6 +1557,7 @@
 
         // ---- rendering ----
         function render() {
+            closeFuture(true);
             if (ui.ended && dom.overlay.classList.contains('show')) return;
             const focused = focusKey(root.document.activeElement);
             Object.keys(nodes).forEach(k => delete nodes[k]);
@@ -2355,6 +2357,8 @@
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
                 }
                 if (sel && !(['board', 'activate'].includes(sel.kind) && E.activations(state, sel.cid).length)) buttons.appendChild(button('Cancel', () => clearSel()));
+                const previews = futureActions(sel, L);
+                if (previews.length) buttons.appendChild(el('button.btn.b-future-open', { text: 'Preview move', onclick: () => openFuture(previews) }));
             }
             // The lane is short: with buttons, a note takes the place of the instruction and the
             // "what just happened" lines are left out (they are in the log), so nothing overlaps.
@@ -3608,6 +3612,80 @@
             presentationLater(() => ghost.remove(), duration);
         }
 
+        // A prospective clip owns no battle actions. Its target/menu and playback operate solely on
+        // public engine snapshots; stale callbacks are tied to this dialog, like the card reader.
+        function futureActions(sel, L) {
+            if (!sel || guide || !E.previewAction) return [];
+            return L.filter(a => sel.kind === 'board' ? a.type === 'attack' && a.cid === sel.cid || a.type === 'activate' && a.cid === sel.cid
+                : sel.kind === 'activate' ? a.type === 'activate' && a.cid === sel.cid && a.ability === sel.ability
+                    : sel.kind === 'hand' ? a.type === 'play' && a.cid === sel.cid
+                        : sel.kind === 'axiom' ? a.type === 'axiom' && a.choice === sel.id
+                            : sel.kind === 'power' ? a.type === 'power' : sel.kind === 'item' ? a.type === 'item' && a.id === sel.id : false);
+        }
+        function closeFuture(resume) {
+            const f = ui.future;
+            if (!f) return;
+            ui.future = null; clearTimeout(f.timer);
+            if (f.motion && f.motion.cancel) f.motion.cancel();
+            if (f.dialog.close) f.dialog.close(); f.dialog.remove();
+            if (resume && !ui.ended) { if (dom.prompt.querySelector('.b-future-open')) dom.prompt.querySelector('.b-future-open').focus(); schedule(); }
+        }
+        function openFuture(actions) {
+            if (ui.future || ui.reading || ui.ended || ui.busy || decider() !== ME) return;
+            clearTimeout(ui.timer); hideInspect(); hideTip();
+            const f = { dialog: null, timer: null, clip: null, at: 0 }; ui.future = f;
+            const stage = el('div.b-future-stage'), caption = el('p.b-future-caption', { role: 'status', 'aria-live': 'polite' });
+            const explanation = el('p.b-future-explanation.small');
+            const transcript = el('ol.b-future-transcript');
+            const label = a => (a.type === 'attack' ? 'Attack with ' + name(a.cid) : a.type === 'activate' ? 'Activate ' + name(a.cid) + ': ' + (((B().Abilities || {})[a.ability] || {}).name || a.ability)
+                : a.type === 'axiom' ? 'Play ' + (Rift.data.axioms[a.choice] || {}).name : a.cid ? 'Play ' + name(a.cid) : a.type === 'power' ? 'Hero power' : 'Use ' + a.id)
+                    + (a.target ? ' → ' + name(a.target) : '');
+            const choose = el('select', { 'aria-label': 'Move and target to preview' }, actions.map((a, i) => el('option', { value: String(i), text: label(a) })));
+            const show = at => {
+                if (ui.future !== f) return;
+                if (f.motion && f.motion.cancel) f.motion.cancel();
+                clearTimeout(f.timer); f.at = Math.max(0, Math.min(f.clip.frames.length - 1, at));
+                const frame = f.clip.frames[f.at];
+                caption.textContent = 'Step ' + (f.at + 1) + ' of ' + f.clip.frames.length + ': ' + frame.text;
+                stage.replaceChildren(...frame.view.players.slice().reverse().map(P => el('section.b-future-side', null, [
+                    el('strong', { text: P.name + ' · ' + P.hearts + ' hearts · ' + P.energy + ' energy' }),
+                    el('div.b-future-row', null, P.board.length ? P.board.map(c => el('div.b-future-card', null, [
+                        Rift.Assets.img('creature/' + c.species + '/idle', { alt: '', label: '' }), el('span', { text: c.name }),
+                        el('small', { text: c.attack + ' attack · ' + c.health + ' health' + (c.keywords.length ? ' · ' + c.keywords.join(', ') : '') }),
+                    ])) : [el('span', { text: 'No creatures here.' })]),
+                ])));
+                stage.appendChild(el('p.b-future-rules.small', { text: frame.view.rules.length ? 'Changed rules: ' + frame.view.rules.join(' ') : 'Basic rules: both creatures hit; damage stays.' }));
+                if (!calmMotion() && stage.animate) f.motion = animate(stage, [{ opacity: 0.4 }, { opacity: 1 }], { duration: 150 });
+            };
+            const play = () => {
+                if (ui.future !== f) return;
+                show(0);
+                const next = () => { if (ui.future !== f) return; show(f.at + 1); if (f.at + 1 < f.clip.frames.length) f.timer = setTimeout(next, 600); };
+                if (!calmMotion() && f.clip.frames.length > 1) f.timer = setTimeout(next, 600);
+            };
+            const load = () => {
+                if (ui.future !== f) return;
+                f.clip = E.previewAction(state, actions[Number(choose.value) || 0], ME);
+                explanation.textContent = f.clip.explanation || '';
+                transcript.replaceChildren(...f.clip.lines.map(text => el('li', { text })));
+                play();
+            };
+            choose.addEventListener('change', load);
+            const done = () => { if (ui.future === f) closeFuture(true); };
+            const close = el('button.btn', { text: 'Close preview', onclick: done });
+            f.dialog = el('dialog.b-future-dialog', { 'aria-label': 'Glimpse of the future' }, [
+                el('div.b-future-head', null, [el('strong', { text: 'Glimpse of the future' }), close]),
+                el('p.small', { text: 'A preview only. Nothing is played. Hidden results and later choices stay unknown.' }), choose, explanation, stage, caption,
+                el('div.b-future-controls', null, [el('button.btn.small', { text: 'Previous step', onclick: () => show(f.at - 1) }),
+                    el('button.btn.small', { text: 'Next step', onclick: () => show(f.at + 1) }), el('button.btn.small', { text: 'Replay preview', onclick: play })]),
+                el('details', null, [el('summary', { text: 'Read every step' }), transcript]),
+            ]);
+            f.dialog.addEventListener('cancel', ev => { ev.preventDefault(); done(); }); f.dialog.addEventListener('close', done);
+            screen.appendChild(f.dialog);
+            if (f.dialog.showModal) { try { f.dialog.showModal(); } catch (e) { f.dialog.open = true; } } else f.dialog.open = true;
+            load(); close.focus();
+        }
+
         function renderReader() {
             const it = ui.readKey && inspectables[ui.readKey];
             const label = it && readName(ui.readKey);
@@ -3637,7 +3715,7 @@
         }
         function openRead(key) {
             const it = key && inspectables[key];
-            if (!it || ui.reading || ui.ended) return;
+            if (!it || ui.reading || ui.future || ui.ended) return;
             hideInspect(); hideTip(); clearTimeout(ui.timer);
             const done = () => { if (ui.reading === dialog) closeRead(true); };
             const close = el('button.btn.b-read-close', { type: 'button', text: 'Close', onclick: done });
@@ -3669,6 +3747,7 @@
         function finish() {
             if (ui.ended) return;
             ui.ended = true;
+            closeFuture(false);
             closeRead(false);
             clearPresentation(); stopScreenTimers(); stopVoice();
             cancelDrag();
@@ -3765,6 +3844,7 @@
         const handle = {
             destroy() {
                 ui.ended = true;
+                closeFuture(false);
                 closeRead(false);
                 clearPresentation(); stopScreenTimers(); cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
