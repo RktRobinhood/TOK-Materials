@@ -180,6 +180,7 @@
         (node(id).links || []).forEach(n => reveal(state, n));
         const ch = node(id).chapter;
         if (ch && ch !== state.chapter && !(Rift.data.chapters[ch] || {}).comingSoon) state.chapter = ch;
+        reconcileWallet(state);
         return firstTime;
     }
 
@@ -234,7 +235,7 @@
         const puzzle = n.puzzles && n.puzzles.length ? rng.pick(n.puzzles) : null;
         const lured = !!(state.lures && state.lures[id] > 0);
         if (state.lures && state.lures[id] > 0) state.lures[id] -= 1;
-        return { node: n, puzzle, lured, seed: rng.seed, rng };
+        return { node: n, puzzle, lured, seed: rng.seed, rng, number: state.map.visitCount[id] };
     }
 
     // Call only after successful activity completion, with a separate seed.
@@ -289,6 +290,41 @@
     }
 
     // ---- rewards -------------------------------------------------------------------
+
+    const CHAPTER_BOSSES = { ch1: 'gate', ch2: 'b-town-hall', ch3: 't-tribunal', ch4: 'k-core' };
+    // Called only by a successfully completed checked encounter, before complete(). Generic story,
+    // bonus, rest and Settings paths never call this. One high-water receipt per node bounds the save.
+    function claimVisitCoins(state, id, visitNumber, checked) {
+        const n = node(id);
+        if (checked !== true || !n || !['puzzle', 'miniboss', 'boss'].includes(n.type)
+            || !Number.isSafeInteger(visitNumber) || visitNumber <= 0 || visitNumber !== state.map.visitCount[id]) return null;
+        const w = Rift.State.walletOf(state), previous = w.visits[id] || 0;
+        if (visitNumber <= previous) return null;
+        const first = !previous && !state.map.completed.includes(id);
+        const amount = first ? (n.type === 'puzzle' ? 10 : 25) : 2;
+        if (!Number.isSafeInteger(w.coins) || w.coins < 0 || !Number.isSafeInteger(w.coins + amount)) return null;
+        w.coins += amount;
+        w.visits[id] = visitNumber;
+        return { node: id, visit: visitNumber, first, coins: amount };
+    }
+    // Chapter packs remain an unclaimed entitlement until usable pack rewards exist (#136).
+    // Legacy completions get their entitlement, without inventing retroactive visit income.
+    function reconcileWallet(state) {
+        const w = Rift.State.walletOf(state);
+        let earned = 0;
+        Object.entries(CHAPTER_BOSSES).forEach(([chapter, id]) => {
+            if (!state.map.completed.includes(id) || w.chapters[chapter] || !Number.isSafeInteger(w.freePacks + 1)) return;
+            w.chapters[chapter] = true; w.freePacks += 1; earned++;
+        });
+        return earned;
+    }
+    function catchUpWallet() {
+        const s = Rift.State.get();
+        if (!s || !Object.entries(CHAPTER_BOSSES).some(([chapter, id]) => s.map.completed.includes(id) && !(s.wallet && s.wallet.chapters || {})[chapter])) return 0;
+        let count = 0;
+        Rift.State.update(st => { count = reconcileWallet(st); });
+        return count;
+    }
 
     function rewards(state, n, rng, opts) {
         const o = opts || {};
@@ -380,6 +416,7 @@
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter, claimBonus,
+        claimVisitCoins, reconcileWallet, catchUpWallet,
         cardTrack, openCardSlots, claimCards, pendingCards, reconcileCards, catchUpCards, cardName,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

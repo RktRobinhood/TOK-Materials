@@ -144,12 +144,32 @@
     }
 
     // HUD shown on the map and in encounters.
+    // First shop location: the existing Campfire Clearing. Purchasing waits for the
+    // committed pack flow (#136); opening, closing and affordability checks never debit.
+    function shop() {
+        const s = Rift.State.get();
+        if (!s || s.map.at !== 'campfire') return null;
+        if (Rift.World && Rift.World.catchUpWallet) Rift.World.catchUpWallet();
+        const w = Rift.State.walletOf(Rift.State.get());
+        return modal('Campfire pack stall', el('div.stack', null, [
+            Rift.Assets.has('scene/shop') ? Rift.Assets.img('scene/shop', { alt: 'A small woodland shop', style: { width: '100%', height: '160px', objectFit: 'cover', borderRadius: '10px' } }) : null,
+            el('strong', { text: w.coins + ' Coins' }),
+            el('p', { text: 'Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win.' }),
+            el('p', { text: 'Free five-card packs saved: ' + w.freePacks + '. They stay yours until packs are available.' }),
+            el('p', { text: 'Packs coming soon. Keep your Coins for later.' }),
+            el('button.btn.gold', { text: 'Five-card pack · 50 Coins', disabled: true, title: 'Packs are not available yet.' }),
+            w.coins < 50 ? el('p.small', { text: (50 - w.coins) + ' more Coins would cover a five-card pack.' }) : null,
+            el('p.small', { text: 'No real money. Catching creatures and direct card rewards still come from playing.' }),
+        ]), [{ label: 'Close' }]);
+    }
+
     function hud(opts) {
         const s = Rift.State.get();
         const o = opts || {};
         const heartsNode = el('span.hearts', { title: 'First hint on each new topic: free and keeps stars. Later hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map.' });
         const scarsNode = el('span.row', { style: { gap: '4px' } });
         const charmsNode = el('span.chip', { title: 'Catch Charms' });
+        const shopButton = el('button.btn.small.campfire-shop', { onclick: shop, title: 'Campfire pack stall' });
         const refresh = () => {
             const st = Rift.State.get();
             if (!st) return;
@@ -169,6 +189,8 @@
                 scarsNode.appendChild(el('span.chip', { title: sc.text }, [icon, sc.name]));
             });
             charmsNode.textContent = '🪢 ' + ((st.items.charm || 0) + (st.items.greatcharm || 0));
+            shopButton.textContent = 'Shop · ' + Rift.State.walletOf(st).coins + ' Coins';
+            shopButton.hidden = st.map.at !== 'campfire';
         };
         refresh();
         const off = Rift.bus.on('state:changed', refresh);
@@ -183,6 +205,7 @@
             scarsNode,
             el('div.spacer'),
             o.back ? el('button.btn.small', { text: '← ' + o.back.label, onclick: o.back.onclick }) : null,
+            shopButton,
             el('button.btn.small.journal-btn', { title: 'Journal', onclick: () => Rift.Router.go('journal') },
                 [Rift.Assets.has('ui/journal') ? Rift.Assets.img('ui/journal', { className: 'btn-icon', label: '' }) : '📜', ' Journal']),
             el('button.btn.small', { text: '📖 Collection', onclick: () => Rift.Router.go('collection') }),
@@ -365,7 +388,7 @@
         return node;
     }
 
-    Rift.UI = { input, toast, modal, confirm, hud, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
+    Rift.UI = { input, toast, modal, confirm, hud, shop, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
     let conflictShown = false;
     Rift.bus.on('state:conflict', () => {
         if (conflictShown || !overlay()) return;

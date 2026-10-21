@@ -473,6 +473,7 @@
             const resum = () => { summary.textContent = deckSummary(Rift.State.get()); };
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
+                el('p.small', { text: Rift.State.walletOf(s).coins + ' Coins · ' + Rift.State.walletOf(s).freePacks + ' free packs saved. The pack stall is at the Campfire Clearing.' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
                 el('div.panel.deck-panel.stack', null, [
                     el('h3', { text: 'Build decks' }),

@@ -62,6 +62,7 @@ test('every save field (and a future one) survives export → wipe → import ex
     save.trophies = [S.makeCreature('zuckerborg', { uid: 't-1', trophyOf: 'Bo' })];
     save.team = ['c-2', 'c-1'];
     save.cardPrints = { v: 1, ready: { tactic: true }, colours: { reason: true }, tactic: { 'peer-review': [false, true] }, axiom: {} };
+    save.wallet = { coins: 63, visits: { 'road-start': 8 }, chapters: { ch1: true }, freePacks: 1 };
     save.chapter = 'ch2';
     save.avatar = { type: 'fox', variant: 'boy', nickname: 'Zoë "Z" O\'Neil' };
     save.map.completed = ['stall-gallery', 'gate'];
@@ -94,7 +95,7 @@ test('a new top-level field in freshState is carried by the code without any oth
     const fresh = Object.keys(S.freshState());
     // If this list changes, the round-trip test above already covers the new field; update the list.
     assert.deepEqual(fresh, ['version', 'createdAt', 'seed', 'visits', 'avatar', 'chapter', 'map', 'flags', 'health', 'maxHealth',
-        'scars', 'xp', 'accolades', 'items', 'creatures', 'team', 'trophies', 'seen', 'axioms', 'axiomLoadout', 'tactics',
+        'scars', 'xp', 'accolades', 'items', 'wallet', 'creatures', 'team', 'trophies', 'seen', 'axioms', 'axiomLoadout', 'tactics',
         'cardPrints', 'deckTactics', 'rumours', 'lures', 'perksUsed', 'tutorialsSeen', 'stats', 'settings', 'backup', 'starter', 'hunts', 'catchOffers']);
 });
 

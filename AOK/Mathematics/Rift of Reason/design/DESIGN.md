@@ -30,6 +30,12 @@ The former implicit starter pools become explicit two-normal-copy entitlements. 
 
 Collection's **Spell and Axiom folders** shows quantities and foils. A confirmed release opens a folder slot without paying Coins and protects the copies needed by the saved loadout. Keyboard cancellation and focus restoration use the shared dialog behavior. Counted ownership supplies capacity queries for future pack transactions; it does not itself release a shop, pack pool or new rarity/spawn tuning. See [verification](reviews/card-prints-131-2026-10-21.md).
 
+## Earned Coins and the campfire stall — 21 October 2026 (#133)
+
+The canonical save now includes a Coins wallet and bounded paid-visit receipts. A first completed checked puzzle earns 10 Coins; a first mini-boss or boss win earns 25 total; a successful replay earns 2. Failed checks, Settings, generic story/rest completion and reward reloads pay nothing. Each node keeps only its latest paid visit number. Existing adventures start with zero Coins rather than invented retroactive income.
+
+Completing each of the four chapter bosses saves one free five-card pack credit, once per chapter. Old completed chapters receive these credits on load/import; unavailable packs never consume them. Collection shows the balance and saved credits. At the existing Campfire Clearing, **Shop** opens the pack stall using the shipped shop scene. It shows the approved 50-Coin price, balance and unavailable pool state. Buying stays disabled until #136 can commit actual rewards atomically. Catching and early compatible common-card rewards remain available through play; selling remains #135. See [verification](reviews/wallet-133-2026-10-21.md).
+
 ## Relative Flux rules — 19 October 2026 (#101)
 
 Sixteen common ±1/±2 modifiers change the current shared activation allowance (1–6), normal draw count (1–3), next-turn energy growth (−1–3) or creature cost adjustment (−2–2). Owner bonuses apply afterwards; paid casts spend their use first. Repeated modifiers work while effective. A no-op at a bound or against Unlimited cannot be paid for. Fixed finite rules repair Unlimited; Fate resolves a modifier against the value at resolution and consumes an ineffective free flip. Reset clears accumulated values without refunding spent uses or owner bonuses. Legacy absolute card IDs keep their original effects.

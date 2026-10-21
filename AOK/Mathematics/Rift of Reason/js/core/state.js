@@ -36,6 +36,7 @@
             xp: 0,
             accolades: [],
             items: { charm: 3, tonic: 1 },
+            wallet: { coins: 0, visits: {}, chapters: {}, freePacks: 0 }, // earned Coins and bounded source receipts (#133)
             creatures: [],         // owned creature instances, see makeCreature
             team: [],              // creature uids chosen for battle (6–14); empty = the first 10
             trophies: [],          // named trophy copies won from classmates' ghosts
@@ -60,6 +61,21 @@
         };
         reconcilePrints(s);
         return s;
+    }
+
+    // ---- earned Coins (#133) ----------------------------------------------------
+    function walletOf(save) {
+        const s = save || current;
+        if (!s) return null;
+        if (!s.wallet) s.wallet = { coins: 0, visits: {}, chapters: {}, freePacks: 0 };
+        return s.wallet;
+    }
+    // Pure debit on the supplied save. Future pack transactions must save the entire reward atomically.
+    function spendCoins(amount, save) {
+        const w = walletOf(save);
+        if (!w || !Number.isSafeInteger(amount) || amount <= 0 || !Number.isSafeInteger(w.coins) || w.coins < amount) return false;
+        w.coins -= amount;
+        return true;
     }
 
     // ---- creature variation (design/card-arena-2026-10-07.md, "Variation") ----------
@@ -823,6 +839,15 @@
                 if (prints[key] !== undefined && (!record(prints[key]) || Object.values(prints[key]).some(v => typeof v !== 'boolean'))) throw codeError('damaged');
             }
         }
+        if (p.wallet != null) {
+            const record = x => x && typeof x === 'object' && !Array.isArray(x);
+            if (!record(p.wallet)) throw codeError('damaged');
+            for (const key of ['coins', 'freePacks']) {
+                if (p.wallet[key] !== undefined && (!Number.isSafeInteger(p.wallet[key]) || p.wallet[key] < 0)) throw codeError('damaged');
+            }
+            if (p.wallet.visits !== undefined && (!record(p.wallet.visits) || Object.values(p.wallet.visits).some(v => !Number.isSafeInteger(v) || v < 0))) throw codeError('damaged');
+            if (p.wallet.chapters !== undefined && (!record(p.wallet.chapters) || Object.values(p.wallet.chapters).some(v => typeof v !== 'boolean'))) throw codeError('damaged');
+        }
         try {
             const s = migrate(JSON.parse(JSON.stringify(p)));
             JSON.stringify(s);
@@ -1018,6 +1043,8 @@
         cardRoom,
         printCounts,
         releasePrint,
+        walletOf,
+        spendCoins,
         deckTactics,
         axiomLoadout,
         DECK_SIZE,
