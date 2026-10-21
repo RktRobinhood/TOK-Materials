@@ -31,6 +31,14 @@
         const header = el('div', { style: { position: 'fixed', top: 0, left: 0, right: 0, padding: '8px', zIndex: 90, background: '#191726', display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' } }, [
             el('strong', { text: 'Wallet · memory-only save' }),
             el('button.btn.small', { text: 'Restart wallet sample', onclick: start }),
+            el('button.btn.small', { text: 'Load surplus sample', onclick() {
+                start();
+                R.State.update(s => {
+                    s.wallet.coins = 12;
+                    s.items = { charm: 10, lure: 3, tonic: 4, greatcharm: 9, 'lucky-sequin': 1, 'hoots-gavel': 1, 'trick-book': 1, ward: 2 };
+                });
+                R.State.saveNow();
+            } }),
             el('button.btn.small', { text: 'Play Forest Road', onclick() {
                 R.State.update(s => { s.map.at = 'road-start'; }); R.Router.replace('encounter', { nodeId: 'road-start' }); refresh();
             } }),

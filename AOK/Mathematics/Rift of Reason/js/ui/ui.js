@@ -151,16 +151,69 @@
         if (!s || s.map.at !== 'campfire') return null;
         if (Rift.World && Rift.World.catchUpWallet) Rift.World.catchUpWallet();
         const w = Rift.State.walletOf(Rift.State.get());
-        return modal('Campfire pack stall', el('div.stack', null, [
+        const balance = el('strong', { text: w.coins + ' Coins' });
+        const shortfall = el('p.small');
+        const sales = el('div.stack.shop-sales'), message = el('p.small', { role: 'status' });
+        let closed = false, reviewing = false, dialog, off = () => {}, offScreen = () => {};
+        function refreshSales() {
+            if (closed || !Rift.Shop) return;
+            const coins = Rift.State.walletOf(Rift.State.get()).coins;
+            balance.textContent = coins + ' Coins';
+            shortfall.hidden = coins >= 50; shortfall.textContent = (50 - coins) + ' more Coins would cover a five-card pack.';
+            const focusInside = sales.contains(root.document.activeElement), q = Rift.Shop.quote();
+            const atMap = Rift.Router.current() === 'map';
+            sales.innerHTML = '';
+            sales.appendChild(el('h3', { text: 'Sell spare supplies' }));
+            sales.appendChild(el('p.small', { text: 'Keep 2 Catch Charms, 1 Lure Lantern and 1 Tonic. Creatures, cards and keepsakes are never sold.' }));
+            q.rows.forEach(row => sales.appendChild(el('p.small', { text: Rift.data.items[row.id].name + ': ' + row.owned + ' owned · keep ' + row.keep + ' · sell ' + row.quantity + ' × ' + row.unit + ' = ' + row.total + ' Coins' })));
+            const review = el('button.btn', { text: 'Review surplus sale · ' + q.total + ' Coins', disabled: reviewing || !atMap || !q.total, async onclick() {
+                if (closed || reviewing) return;
+                reviewing = true; review.disabled = true;
+                const lines = q.rows.filter(row => row.quantity).map(row => row.quantity + ' ' + Rift.data.items[row.id].name + ' for ' + row.total + ' Coins');
+                const yes = await confirm('Review surplus sale', lines.join('. ') + '. Total: ' + q.total + ' Coins. Your protected supplies stay in the bag.', 'Sell for ' + q.total + ' Coins', 'Cancel');
+                if (closed) return;
+                reviewing = false;
+                if (yes) {
+                    const result = Rift.Shop.sell(q);
+                    message.textContent = result.ok ? 'Sold ' + result.value.quantity + ' supplies for ' + result.value.coins + ' Coins. Undo while your Coins and bag stay the same.' : result.error;
+                }
+                refreshSales();
+                const target = sales.querySelector('.sale-undo') || sales.querySelector('button');
+                if (target) target.focus();
+            } });
+            sales.appendChild(review);
+            if (!atMap) sales.appendChild(el('p.small', { text: 'Return to the map here to sell or undo.' }));
+            const receipt = Rift.State.walletOf(Rift.State.get()).sale;
+            if (receipt) {
+                const undo = el('button.btn.sale-undo', { text: 'Undo last sale · ' + receipt.coins + ' Coins', disabled: !atMap || !Rift.Shop.canUndo(), onclick() {
+                    if (closed) return;
+                    const result = Rift.Shop.undo(receipt.number);
+                    message.textContent = result.ok ? 'Sale undone. Supplies and Coins restored.' : result.error;
+                    refreshSales();
+                    const target = sales.querySelector('button'); if (target) target.focus();
+                } });
+                sales.appendChild(undo);
+                if (!Rift.Shop.canUndo()) sales.appendChild(el('p.small', { text: 'Your bag or Coins changed. That sale can no longer be undone.' }));
+            }
+            if (focusInside) (sales.querySelector('.sale-undo') || review).focus();
+        }
+        const body = el('div.stack', null, [
             Rift.Assets.has('scene/shop') ? Rift.Assets.img('scene/shop', { alt: 'A small woodland shop', style: { width: '100%', height: '160px', objectFit: 'cover', borderRadius: '10px' } }) : null,
-            el('strong', { text: w.coins + ' Coins' }),
+            balance,
             el('p', { text: 'Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win.' }),
             el('p', { text: 'Free five-card packs saved: ' + w.freePacks + '. They stay yours until packs are available.' }),
             el('p', { text: 'Packs coming soon. Keep your Coins for later.' }),
             el('button.btn.gold', { text: 'Five-card pack · 50 Coins', disabled: true, title: 'Packs are not available yet.' }),
-            w.coins < 50 ? el('p.small', { text: (50 - w.coins) + ' more Coins would cover a five-card pack.' }) : null,
+            shortfall,
             el('p.small', { text: 'No real money. Catching creatures and direct card rewards still come from playing.' }),
-        ]), [{ label: 'Close' }]);
+            Rift.Shop ? sales : null, message,
+        ]);
+        dialog = modal('Campfire pack stall', body, [{ label: 'Close' }], { onClose() { closed = true; off(); offScreen(); } });
+        shortfall.hidden = w.coins >= 50; shortfall.textContent = (50 - w.coins) + ' more Coins would cover a five-card pack.';
+        refreshSales();
+        off = Rift.bus.on('state:changed', refreshSales);
+        offScreen = Rift.bus.on('screen:changed', () => dialog.close());
+        return dialog;
     }
 
     function hud(opts) {

@@ -36,7 +36,7 @@
             xp: 0,
             accolades: [],
             items: { charm: 3, tonic: 1 },
-            wallet: { coins: 0, visits: {}, chapters: {}, freePacks: 0 }, // earned Coins and bounded source receipts (#133)
+            wallet: { coins: 0, visits: {}, chapters: {}, freePacks: 0, saleSerial: 0, sale: null }, // earned Coins and bounded source receipts (#133/#135)
             creatures: [],         // owned creature instances, see makeCreature
             team: [],              // creature uids chosen for battle (6–14); empty = the first 10
             trophies: [],          // named trophy copies won from classmates' ghosts
@@ -67,7 +67,7 @@
     function walletOf(save) {
         const s = save || current;
         if (!s) return null;
-        if (!s.wallet) s.wallet = { coins: 0, visits: {}, chapters: {}, freePacks: 0 };
+        if (!s.wallet) s.wallet = { coins: 0, visits: {}, chapters: {}, freePacks: 0, saleSerial: 0, sale: null };
         return s.wallet;
     }
     // Pure debit on the supplied save. Future pack transactions must save the entire reward atomically.
@@ -842,11 +842,18 @@
         if (p.wallet != null) {
             const record = x => x && typeof x === 'object' && !Array.isArray(x);
             if (!record(p.wallet)) throw codeError('damaged');
-            for (const key of ['coins', 'freePacks']) {
+            for (const key of ['coins', 'freePacks', 'saleSerial']) {
                 if (p.wallet[key] !== undefined && (!Number.isSafeInteger(p.wallet[key]) || p.wallet[key] < 0)) throw codeError('damaged');
             }
             if (p.wallet.visits !== undefined && (!record(p.wallet.visits) || Object.values(p.wallet.visits).some(v => !Number.isSafeInteger(v) || v < 0))) throw codeError('damaged');
             if (p.wallet.chapters !== undefined && (!record(p.wallet.chapters) || Object.values(p.wallet.chapters).some(v => typeof v !== 'boolean'))) throw codeError('damaged');
+            if (p.wallet.sale != null) {
+                const r = p.wallet.sale;
+                if (!record(r) || r.v !== 1 || !Number.isSafeInteger(r.number) || r.number <= 0
+                    || !Number.isSafeInteger(r.coins) || r.coins <= 0 || !Number.isSafeInteger(r.afterCoins) || r.afterCoins < r.coins
+                    || typeof r.stock !== 'string' || !Array.isArray(r.items)
+                    || r.items.some(row => !record(row) || typeof row.id !== 'string' || !Number.isSafeInteger(row.quantity) || row.quantity <= 0)) throw codeError('damaged');
+            }
         }
         try {
             const s = migrate(JSON.parse(JSON.stringify(p)));

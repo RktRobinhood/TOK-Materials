@@ -4,7 +4,7 @@ Updated 21 October 2026 after #131/#133. The teacher approved the starting incom
 
 ## Current-source audit
 
-The wallet/first-shop slice (#133) persists earned Coins, bounded per-node paid-visit receipts and once-only chapter free-pack credits in the canonical save. Checked encounter victories pay 10/2/25; old completed chapters reconcile saved pack credits without retroactive Coins. Collection shows the balance. The existing Campfire Clearing opens a stall with the shipped shop scene, the approved price and an honest unavailable-pool message. Purchase has no handler and stays disabled until #136 supplies atomic rewards and a usable released pool. Surplus selling remains #135; reveals remain #134.
+The wallet/first-shop slice (#133) persists earned Coins, bounded per-node paid-visit receipts and once-only chapter free-pack credits in the canonical save. Checked encounter victories pay 10/2/25; old completed chapters reconcile saved pack credits without retroactive Coins. Collection shows the balance. The existing Campfire Clearing opens a stall with the shipped shop scene, the approved price and an honest unavailable-pool message. Purchase has no handler and stays disabled until #136 supplies atomic rewards and a usable released pool. Surplus selling now ships as the bounded #135 table below; reveals remain #134.
 
 Creature instances, item quantities, counted normal/foil spell and Axiom prints (#131) and loadouts persist in the same save. Creature folders, release protections, Changes and a 4% shiny-catch roll already ship (#151/#111); preserve them. Old unlocked IDs/default entitlements reconcile once to counted prints, including deliberately empty retired folders on later reload/import.
 
@@ -75,6 +75,16 @@ The first version may show a static five-card results list. Later polish opens a
 ## Selling without destroying a playable collection
 
 Start with a small configured list of surplus consumables, not creatures or card copies. Never sell quest/story keepsakes, equipped items, current battle reservations or unique rewards. The teacher approved a reserve of **two basic Catch Charms and one lure** where owned, and sale prices at **half the configured buy price** (round down to whole Coins). Show exactly what quantity is sellable and never sell below that reserve. No buy/sell cycle may mint Coins. Bulk sale has a reviewable total and Undo while the transaction remains reversible. The implementation records the bounded item/price table; it must not reinterpret a pack's 50 Coins as an item price.
+
+Implemented #135 starting table (`js/core/shop.js`). Reference buy prices are explicit builder tuning; no item-buy route is enabled. One extra Tonic is also protected so selling does not empty basic recovery supplies.
+
+| Item | Reference buy | Sell each | Keep |
+|---|---:|---:|---:|
+| Catch Charm | 10 | 5 | 2 |
+| Lure Lantern | 20 | 10 | 1 |
+| Tonic | 12 | 6 | 1 |
+
+Only these IDs are eligible. Sell/Undo require the Campfire Clearing map, so an active battle or preparation overlay cannot sell reserved supplies. Confirmation lists quantities and the exact bulk total. The canonical transaction commits stock, Coins and the latest sale receipt together; a failed write publishes none of them. Undo survives reload/backups and restores the exact sold quantities only while the full bag and Coin balance still match the sale. A monotone serial rejects old sale/Undo handlers even after reversal. New sales replace the single receipt rather than growing a history. #125's ordinary-play replenishment is unchanged; no purchase is required to recover catching supplies.
 
 Do not automatically sell a third caught creature: its traits may differ and it may be a trophy or keep a story identity. Existing confirmed release is separate from selling for money; legendaries stay protected. Basic catching recovery must remain possible through play even after spending Coins on packs; #125 owns the supply evidence and #158 the new catch-game playtest.
 
