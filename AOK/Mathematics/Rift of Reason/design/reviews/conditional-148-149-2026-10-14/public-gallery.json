@@ -1,0 +1,13 @@
+{
+  "allLoaded": true,
+  "count": "23 proposed cards",
+  "images": 26,
+  "scripts": [
+    "js/core/rift.js",
+    "data/assets.js?v=conditional-63d075455a7d",
+    "js/core/assets.js",
+    "dev/conditional-art-data.js?v=conditional-63d075455a7d"
+  ],
+  "selected": "Keanu Reeveaver",
+  "width": 1280
+}
