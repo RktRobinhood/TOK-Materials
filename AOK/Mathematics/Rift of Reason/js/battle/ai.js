@@ -966,7 +966,9 @@
         const level = levelOf(o.level);
         const cfg = LEVELS[level];
         const Eng = E();
-        const s = Eng.informationState(state, Eng.decider(state));
+        // A cheap root copy marks hypothetical scoring without touching the committed battle.
+        // Inspection hooks estimate unknown outcomes; only real actions may read/reveal those cards.
+        const s = Object.assign({}, Eng.informationState(state, Eng.decider(state)), { aiPlanning: true });
         const legal = allowedActions(s, legalFor(s), level);
         if (legal.length <= 1) return legal[0] || null;
         const me = Eng.decider(s);

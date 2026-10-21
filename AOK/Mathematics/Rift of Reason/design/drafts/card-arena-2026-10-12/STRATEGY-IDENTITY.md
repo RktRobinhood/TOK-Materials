@@ -1,3 +1,7 @@
+## Adopted foundation contract — 21 October 2026
+
+Foundation-1 now snapshots personal-deck mono identity, ignores generic cards, requires one explicit colour and counts Memory as the sixth. Identity is public at match start. Seven runtime cards and six mono/mixed sequence pairs are documented in [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md); all other concepts remain held. Jack's bonus is part of each Entrance, not an additional recurring listener. Crow's live-colour bonus remains a held contract. The proposals below are historical where the adopted audit differs.
+
 # Strategy identity — #123 release handoff
 
 Accepted teacher intent, 13 October: simple first set, memorable oddities, distinct colours and both construction/board synergies. Mono decks can unlock extra/alternate abilities, including on generic creatures; mixed boards can reward another type. Exact bonuses below are **proposals**; frozen [catalogue](CARD-CATALOGUE.md)/[persona](PERSONA-ROSTER.md) contracts are unchanged.

@@ -1,3 +1,7 @@
+## Current gameplay release — 21 October 2026
+
+#123 contract audit screened210 effects and authored23 distinctness replacements. Foundation-1 adds six common creatures plus Small Patch;203 remain held under the #129 staged implementation map. Source/acquisition, static public mono identity, measured paired matches and browser evidence are in CONTRACT-AUDIT-123.md and ../../reviews/expansion-123-2026-10-21.md. No bulk pack release, new Fate/Win/token policy, art generation or voice use. Main issue-loop checkpoint records publication and current validation. All older frontier/automation claims below are historical.
+
 # Visual assets complete — 14 October 2026
 
 All 72 initial expansion portraits are built; eight shared motifs and two standout paintings are preserved. All 23 conditional concepts have art assignments. The final expansion slot uses Susie Dentshell, a distinct hermit-crab persona, with the stable language-definition-dolphin ID and Guard contract. The declined Stephen request remains historical provenance and was never retried. Hank’s closed #146 contract is explicitly adopted into the art inventory/gallery, preserving its painting.

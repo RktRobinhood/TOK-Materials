@@ -1,3 +1,7 @@
+## Current release — 21 October 2026
+
+The whole 210-contract creative review is complete, with 23 authored overlap replacements. Foundation-1 releases six common creatures plus Small Patch; 203 concepts remain held. See [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md), CONTRACT-REVIEW.json and [acceptance evidence](../../reviews/expansion-123-2026-10-21.md). All 18 story-only entries remain outside packs. #129 retains subsequent tested content batches; #130/#132/#136/#134 own their separate release steps. Historical proposal/frontier statements below predate this release.
+
 # Collection expansion — 12 October 2026
 
 The completed creative draft contains **210 additional concepts**, beyond the twelve starter-pack proposals: **28 in each of six colours and 42 generic (20%)**. See CARD-CATALOGUE.md and card-catalogue.json for effect text, cost/stats, rarity, strategy, counterplay, acquisition and implementation gates. All are proposals, not implemented or playtest-balanced cards.

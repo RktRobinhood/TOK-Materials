@@ -1,0 +1,88 @@
+{
+  "diagnosticOnly": true,
+  "productionMaxTurns": 60,
+  "diagnosticMaxTurns": 120,
+  "winner": 0,
+  "endReason": "hearts",
+  "turn": 80,
+  "round": 40,
+  "steps": 198,
+  "axiomsLeft": 0,
+  "players": [
+    {
+      "hearts": 2,
+      "exhaustion": 4,
+      "deck": 0
+    },
+    {
+      "hearts": 0,
+      "exhaustion": 4,
+      "deck": 0
+    }
+  ],
+  "lastEvents": [
+    {
+      "t": "turn",
+      "player": 0,
+      "text": "You: 10 energy. Choose a draw.",
+      "turn": 79,
+      "round": 40
+    },
+    {
+      "t": "exhaustion",
+      "player": 0,
+      "amount": 4,
+      "text": "Exhaustion: your deck and the rule deck are empty.",
+      "turn": 79,
+      "round": 40
+    },
+    {
+      "t": "hit",
+      "player": 0,
+      "amount": 4,
+      "cid": null,
+      "text": "You lose 4 hearts (2 left).",
+      "turn": 79,
+      "round": 40
+    },
+    {
+      "t": "turn-end",
+      "player": 0,
+      "text": "You end the turn.",
+      "turn": 79,
+      "round": 40
+    },
+    {
+      "t": "turn",
+      "player": 1,
+      "text": "Rival: 10 energy. Choose a draw.",
+      "turn": 80,
+      "round": 40
+    },
+    {
+      "t": "exhaustion",
+      "player": 1,
+      "amount": 4,
+      "text": "Exhaustion: Rival's deck and the rule deck are empty.",
+      "turn": 80,
+      "round": 40
+    },
+    {
+      "t": "hit",
+      "player": 1,
+      "amount": 4,
+      "cid": null,
+      "text": "Rival loses 4 hearts (0 left).",
+      "turn": 80,
+      "round": 40
+    },
+    {
+      "t": "end",
+      "winner": 0,
+      "reason": "hearts",
+      "text": "You win the battle!",
+      "turn": 80,
+      "round": 40
+    }
+  ]
+}

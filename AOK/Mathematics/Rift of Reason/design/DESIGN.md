@@ -1,3 +1,7 @@
+## Foundation expansion — 21 October 2026
+
+Seven reviewed common cards now form foundation-1: Tom Skink, Simone Bearles, Nikkie de Jaguar, Jimmy Fowlon, Jack Blackbird, John Greenfinch and generic Small Patch. Six use ordinary chapter-one catches; the checked River Ford grants one Small Patch, including once-only legacy catch-up. Mono identity is fixed from the submitted personal deck and public at battle start: generic cards do not break it, Memory is the sixth colour, shared Axioms never count. Jack and Small Patch have explicit mono bonuses; no universal damage modifier is added. The remaining203 concepts stay held. [Contract audit](drafts/card-arena-2026-10-12/CONTRACT-AUDIT-123.md) and [verification](reviews/expansion-123-2026-10-21.md) record all210 reviews,23 revisions, bounded loop checks and measured matchup limitations. Subsequent batches remain under #129 and per-card gates.
+
 # Rift of Reason — Design
 
 The source of truth for the game. Every GitHub issue links here. Decisions below were settled with the teacher in a planning interview (2026-10-01/02); change them only with the teacher's agreement.

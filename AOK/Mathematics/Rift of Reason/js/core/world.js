@@ -112,7 +112,7 @@
         const s = state || {};
         const type = (s.starter && s.starter.type) || (s.avatar && s.avatar.type);
         const deck = D && D.decks && D.decks[type];
-        return (deck && deck.rewards) || null;
+        return deck ? Object.assign({}, D.sharedRewards || {}, deck.rewards) : null;
     }
     function cardRef(ref) {
         const m = /^axiom:(.+)$/.exec(String(ref));

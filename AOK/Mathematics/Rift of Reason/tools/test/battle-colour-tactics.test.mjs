@@ -57,7 +57,10 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
     assert.deepEqual(plain(Object.keys(T).filter(id => T[id].scheduled)), ['clean-slate', 'echoing-encouragement',
         'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
     pack.forEach(id => assert.ok(!ids.includes(id), id));
-    const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !T[id].pack);
+    const expansion = Object.keys(T).filter(id => T[id].release === 'foundation-1');
+    assert.deepEqual(plain(expansion), ['generic-small-patch']);
+    assert.equal(T['generic-small-patch'].colour, undefined); assert.equal(T['generic-small-patch'].rarity, 'common');
+    const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !T[id].pack && !expansion.includes(id));
     assert.equal(old.length, 15);
     old.forEach(id => { assert.equal(T[id].colour, undefined, id); assert.equal(T[id].rarity, undefined, id); });
     const D = Rift.data.tacticDecks;

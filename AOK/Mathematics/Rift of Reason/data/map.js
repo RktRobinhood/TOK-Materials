@@ -51,7 +51,7 @@
                 name: "Professor Sequins' Pattern Stall", chapter: 'prologue', type: 'puzzle', x: 397, y: 636,
                 scene: 'scene/stall-pattern', script: 'prologue.pattern',
                 cards: ['fit'], puzzles: [{ id: 'rule-hunter', difficulty: 1 }],
-                spawns: ['siuuugull', 'beastie', 'speedcheeta', 'usainvolt', 'keanu'], links: ['fair-gate', 'fair-rift'],
+                spawns: ['siuuugull', 'beastie', 'speedcheeta', 'usainvolt', 'keanu', 'emotion-courage-cub'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A magpie in a ringmaster coat is shouting about secret rules.',
             },
             'stall-witness': {
@@ -60,7 +60,7 @@
                 name: "Madame Mirage's Witness Tent", chapter: 'prologue', type: 'puzzle', x: 105, y: 690,
                 scene: 'scene/stall-witness', script: 'prologue.witness',
                 cards: ['fit'], puzzles: [{ id: 'witness', difficulty: 1 }],
-                spawns: ['chimpossible', 'rawmsay', 'attenbirdough', 'kardashiant', 'shakirattle'], links: ['fair-gate', 'fair-rift'],
+                spawns: ['chimpossible', 'rawmsay', 'attenbirdough', 'kardashiant', 'shakirattle', 'perception-cue-cricket'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'A velvet tent. "See what really happened," says the sign.',
             },
             'stall-gallery': {
@@ -72,7 +72,7 @@
                 name: "Sergeant Syllo's Syllogism Gallery", chapter: 'prologue', type: 'puzzle', x: 383, y: 766,
                 scene: 'scene/stall-gallery', script: 'prologue.gallery',
                 cards: ['fit'], puzzles: [{ id: 'venn', difficulty: 1 }],
-                spawns: ['tremendoodle', 'swiftlet', 'beansprout', 'eminemu'], links: ['fair-gate', 'fair-rift'],
+                spawns: ['tremendoodle', 'swiftlet', 'beansprout', 'eminemu', 'language-question-quail'], links: ['fair-gate', 'fair-rift'],
                 teaser: 'Pop! Pop! A badger is shouting "All targets are wooden!"',
             },
             'fair-rift': {
@@ -89,7 +89,7 @@
                 name: 'The Forest Road', chapter: 'ch1', type: 'puzzle', x: 574, y: 583,
                 scene: 'scene/road-forest', script: 'ch1.road',
                 puzzles: [{ id: 'liars-gate', difficulty: 1 }, { id: 'venn', difficulty: 1 }],
-                spawns: ['astrophysicat', 'lobstorian', 'tremendoodle', 'khaby', 'eelish'], links: ['signpost', 'troll-bridge'],
+                spawns: ['astrophysicat', 'lobstorian', 'tremendoodle', 'khaby', 'eelish', 'reason-premise-pigeon'], links: ['signpost', 'troll-bridge'],
                 teaser: 'A dark wood. Fireflies, and someone arguing loudly.',
             },
             'signpost': {
@@ -104,7 +104,7 @@
                 name: 'The Wishing Well', chapter: 'ch1', type: 'puzzle', x: 809, y: 435,
                 scene: 'scene/road-forest', script: 'ch1.well',
                 cards: ['colour'], puzzles: [{ id: 'venn', difficulty: 2, opts: { lead: 'well' } }, { id: 'rule-hunter', difficulty: 2, opts: { lead: 'well' } }],
-                spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant'], links: ['troll-bridge', 'campfire', 'card-sharp', 'bonus-blackbox'],
+                spawns: ['swiftlet', 'beastie', 'siuuugull', 'chimpossible', 'messilion', 'kardashiant', 'memory-recall-robin'], links: ['troll-bridge', 'campfire', 'card-sharp', 'bonus-blackbox'],
                 teaser: 'Coins glint at the bottom. A voice echoes up: "Prove it!"',
             },
             'troll-bridge': {
@@ -113,7 +113,7 @@
                 name: 'The Troll Bridge', chapter: 'ch1', type: 'miniboss', x: 679, y: 550,
                 scene: 'scene/road-bridge', script: 'ch1.bridge',
                 puzzles: [{ id: 'line-drawer', difficulty: 2 }],
-                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle'], links: ['road-start', 'well', 'river-ford'],
+                spawns: ['muskrat', 'zuckerborg', 'altmanta', 'gargoyle', 'imagination-fable-fawn'], links: ['road-start', 'well', 'river-ford'],
                 teaser: 'A toll booth. A rocket parked badly beside it.',
             },
             // Optional (#62): river crossing, downstream of the Troll Bridge. Off the required path.
@@ -122,7 +122,7 @@
                 intro: 'station.river-ford.intro', reminder: 'station.river-ford.reminder',
                 name: 'The Ford', chapter: 'ch1', type: 'puzzle', x: 548, y: 468,
                 scene: 'scene/road-bridge',
-                cards: ['fit-2'], puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
+                cards: ['fit-2', 'foundation-patch'], puzzles: [{ id: 'river-crossing', difficulty: 1 }, { id: 'river-crossing', difficulty: 2 }, { id: 'river-crossing', difficulty: 3 }],
                 spawns: ['swiftlet', 'beastie', 'siuuugull'], links: ['troll-bridge'],
                 teaser: 'A small boat, a wide river, and creatures who bite each other.',
             },

@@ -40,6 +40,7 @@
     Rift.data.starterDecks = {
         version: 1,
         rewardsVersion: 1,
+        sharedRewards: { 'foundation-patch': ['generic-small-patch'] },
         axioms: ['flux-plays-plus-1', 'flux-plays-minus-1', 'flux-draw-plus-1', 'flux-draw-minus-1',
             'flux-growth-plus-1', 'flux-cost-plus-1', 'flux-cost-minus-1', 'limited-memory', 'momentum', 'two-plays'],
         decks: {

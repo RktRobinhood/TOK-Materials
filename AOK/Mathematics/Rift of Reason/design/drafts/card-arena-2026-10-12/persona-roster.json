@@ -19,14 +19,15 @@
       "silhouette": "A compact blue-tongued skink in a brick-red shirt and blue travelling vest; broad animal muzzle and short legs. The folded field guide stays the only prop.",
       "signatureProp": "Front-facing low crouch, guide extended in one forefoot; head turns toward a doorway implied outside the image.",
       "jokeAngle": "An ordinary object becomes an unexpectedly detailed explanation; patiently points out the premise everyone missed.",
-      "mechanicLink": "A simple vanilla starter body introduces the careful-explainer identity before triggered abilities.",
+      "mechanicLink": "A little explanation reveals one small premise; only a cheap spell turns it into a useful example.",
       "source": "https://www.tomscott.com/newsletter/2024-07-08/",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear curious documentary rhythm; original narrator delivery, no impression or copied catchphrase.",
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "reveal"
       ],
       "artId": "creature/reason-premise-pigeon/idle",
       "palette": {
@@ -39,12 +40,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "No ability.",
+        "text": "Entrance: reveal your top personal-deck card. If it is a spell with printed cost 1 or less, draw it; otherwise leave it there.",
         "gates": [
           109
         ]
@@ -72,7 +73,7 @@
       "silhouette": "Sturdy ant with rounded head, short antennae, powder-blue lab coat and one oversized patterned bow tie.",
       "signatureProp": "The bow tie is the main recognition cue; a modest specimen tray is optional, not a second large silhouette.",
       "jokeAngle": "Explains the tiny everyday thing with theatrical scientific enthusiasm.",
-      "mechanicLink": "Guard is a planted protective stance; the battle backplate supplies its shield cue.",
+      "mechanicLink": "A small science demonstration compares the two sides before adding protection.",
       "source": "https://americanhistory.si.edu/collections/object/nmah_1844016",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Bright concise science-show enthusiasm; do not imitate his voice or theme song.",
@@ -93,12 +94,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard.",
+        "text": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
         "gates": [
           109
         ]
@@ -147,7 +148,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -180,7 +181,7 @@
       "silhouette": "Midnight-blue slime with round spectacles and warm nonhuman eyes; one brass puzzle cube balanced on a soft lobe.",
       "signatureProp": "Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat.",
       "jokeAngle": "An apparently obvious answer leads to one more unsettling question; curiosity rather than a claim of deception.",
-      "mechanicLink": "Entrance one damage is the tiny counterexample that changes a comfortable board.",
+      "mechanicLink": "One unexpected different-colour example changes the comfortable answer; only one damage packet is dealt.",
       "source": "https://www.vsauce.com/vsauce1/",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Playful reflective questioning with one deliberate pause; no copied opening line or impersonation.",
@@ -200,12 +201,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 2,
-        "text": "Entrance: deal 1 damage to an enemy creature.",
+        "text": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
         "gates": [
           109
         ]
@@ -254,7 +255,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -308,7 +309,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -362,7 +363,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -416,7 +417,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -469,7 +470,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -526,7 +527,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -581,7 +582,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -636,7 +637,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -671,7 +672,7 @@
       "silhouette": "A dark tree frog with round sticky toes and a short crimson stage jacket; no microphone. One long leg and a raised forefoot carry the beat.",
       "signatureProp": "A small diagonal leap toward the viewer, knees opened asymmetrically, face calmly confident.",
       "jokeAngle": "Treats every small entrance like the chorus is about to begin; invented stage joke, no lyrics.",
-      "mechanicLink": "A plain common attacker establishes confident rhythm without new triggers.",
+      "mechanicLink": "One energetic leap earns one encore, with no singing or copied catchphrase.",
       "source": "https://www.dualipa.com/",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Bright rhythmic original delivery; reuse summon sound, no sung lines or artist impression.",
@@ -691,14 +692,15 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 2,
         "health": 1,
-        "text": "No ability.",
+        "text": "Once per match, after this survives a fight on your turn, ready one additional attack for it. Normal card activations still apply.",
         "gates": [
-          109
+          109,
+          127
         ]
       },
       "castDecision": {
@@ -724,14 +726,15 @@
       "silhouette": "Compact athletic bear cub with bright focused eyes, rounded ears and a red training jacket.",
       "signatureProp": "One short balance-beam-shaped wooden practice block beside a planted foot, not a full scene.",
       "jokeAngle": "The landing is tiny, the confidence enormous; praise of public sporting skill.",
-      "mechanicLink": "Entrance healing is recovering balance and encouraging the team; no joke about injury, abuse or personal experiences.",
+      "mechanicLink": "A clean recovery of balance earns a protective landing; no injury or personal-experience joke.",
       "source": "https://www.teamusa.com/profiles/simone-biles",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Confident encouraging coach-like delivery; original words and shared heal cue.",
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "block"
       ],
       "artId": "creature/emotion-courage-cub/idle",
       "palette": {
@@ -744,12 +747,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
         "health": 2,
-        "text": "Entrance: restore 1 heart to your hero.",
+        "text": "Entrance: restore 1 heart to your hero. If that restoration fills your hero to maximum hearts, this gains Shield.",
         "gates": [
           109
         ]
@@ -797,7 +800,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -850,7 +853,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -903,7 +906,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -956,7 +959,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1009,7 +1012,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1063,7 +1066,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -1116,7 +1119,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 4,
@@ -1171,7 +1174,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -1224,7 +1227,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 5,
@@ -1278,7 +1281,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -1332,7 +1335,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -1385,7 +1388,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1439,7 +1442,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -1473,7 +1476,7 @@
       "silhouette": "Dark shrimp with broad curved shell, short antennae and a worn emerald-lined stage cape.",
       "signatureProp": "One plain blank playing card partly tucked into the cape.",
       "jokeAngle": "The smallest stage exit becomes a mystery everyone wants to inspect.",
-      "mechanicLink": "Elusive is a clear game keyword; no lesson in real dangerous stunts.",
+      "mechanicLink": "The little stage trick stops hiding its performer after the big reveal.",
       "source": "https://www.ted.com/speakers/david_blaine",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Sparse mysterious original delivery; shared close/reveal cue, no imitation.",
@@ -1493,14 +1496,15 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
         "health": 1,
-        "text": "Elusive.",
+        "text": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
         "gates": [
-          109
+          109,
+          127
         ]
       },
       "castDecision": {
@@ -1546,7 +1550,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1599,7 +1603,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -1654,7 +1658,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -1712,7 +1716,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -1769,7 +1773,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -1825,7 +1829,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -1879,7 +1883,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -1935,7 +1939,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -1988,7 +1992,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -2021,7 +2025,7 @@
       "silhouette": "Rounded caterpillar with chestnut head tufts, a practical gold shawl and intent eyes.",
       "signatureProp": "One closed blank book, not a wand or school crest.",
       "jokeAngle": "Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
-      "mechanicLink": "Guard is a steady grounded stance; no licensed wizard character, magic or franchise clothing.",
+      "mechanicLink": "The final word cites an actual rule in the hand, making the argument public.",
       "source": "https://interactive.unwomen.org/multimedia/feature/generationequalityrising/en/index.html",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Clear thoughtful original speaker; not a film-role impression or private-life joke.",
@@ -2029,7 +2033,9 @@
         "card-play",
         "hit",
         "defeat",
-        "block"
+        "block",
+        "reveal",
+        "axiom"
       ],
       "artId": "creature/language-comma-caterpillar/idle",
       "palette": {
@@ -2042,12 +2048,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard.",
+        "text": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
         "gates": [
           109
         ]
@@ -2095,7 +2101,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -2149,7 +2155,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -2204,7 +2210,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -2258,7 +2264,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -2312,7 +2318,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
@@ -2369,7 +2375,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -2422,7 +2428,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -2477,7 +2483,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -2532,7 +2538,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 4,
@@ -2589,7 +2595,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -2622,14 +2628,15 @@
       "silhouette": "A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit.",
       "signatureProp": "Rendered LEFT low basketball crouch; authored intent and actual changes in provenance.",
       "jokeAngle": "A small European basketball star parody fills a simple common slot; rounded chinchilla ears avoid another duck or feline.",
-      "mechanicLink": "A simple common body introduces the gamer persona with no licensed game character or extra ability.",
+      "mechanicLink": "A matching teammate sets up the unexpected change of position; the ball remains the only prop.",
       "source": "https://www.nba.com/player/1629029/luka-doncic/bio",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "heal"
       ],
       "artId": "creature/imagination-doodle-duck/idle",
       "palette": {
@@ -2642,12 +2649,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "No ability.",
+        "text": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
         "gates": [
           109
         ]
@@ -2696,7 +2703,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -2729,7 +2736,7 @@
       "silhouette": "Stocky blackbird with a tiny wild crest, dark coat and a purple stage scarf.",
       "signatureProp": "One unbranded miniature microphone; wings planted in a grand harmless pose.",
       "jokeAngle": "Treats a tiny imaginary adventure like a huge theatrical entrance.",
-      "mechanicLink": "Friendly stat swap is dramatic reframing; no song lyrics, film-role costume or copied game persona.",
+      "mechanicLink": "A dramatic reframing changes an ally; a whole deck of the same ideas makes the landing slightly safer.",
       "source": "https://www.youtube.com/@JablinskiGames",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Exuberant original performer with controlled volume; no singing or voice impression.",
@@ -2750,12 +2757,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+        "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules. In a mono-Imagination deck, it then gains 1 maximum health and heals 1.",
         "gates": [
           109
         ]
@@ -2803,7 +2810,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2858,7 +2865,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -2912,7 +2919,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -2967,7 +2974,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -3020,7 +3027,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -3075,7 +3082,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -3131,7 +3138,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 2,
@@ -3186,7 +3193,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 3,
@@ -3241,7 +3248,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,
@@ -3295,7 +3302,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -3348,7 +3355,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -3381,7 +3388,7 @@
       "silhouette": "A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform.",
       "signatureProp": "Rendered FRONT three-quarter; original pose and any correction in provenance.",
       "jokeAngle": "A Danish goalkeeper reference directly serves the class handball interest while keeping the existing common defensive role.",
-      "mechanicLink": "Guard is the armadillo's grounded stance; no film character or new magical ability.",
+      "mechanicLink": "The oldest archived note becomes the next thing read; no new physical prop or magical power.",
       "source": "https://www.ihf.info/competitions/men/308/2024-olympic-games-paris-mens-tournament/159985/players/22033",
       "familiarity": "Builder audience judgement (not measured): internet, music, sport or screen-fandom crossover. Recognition is optional; the visual joke must work independently.",
       "voiceDirection": "Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation.",
@@ -3402,12 +3409,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard.",
+        "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
         "gates": [
           109
         ]
@@ -3455,7 +3462,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -3510,7 +3517,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -3563,7 +3570,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
@@ -3618,7 +3625,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
@@ -3675,7 +3682,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -3732,7 +3739,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
@@ -3790,7 +3797,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -3845,7 +3852,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 6,
         "attack": 3,
@@ -3901,7 +3908,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.",
+      "status": "Selected cast/art; runtime held pending per-concept validation",
       "mechanicalContract": {
         "cost": 7,
         "attack": 4,

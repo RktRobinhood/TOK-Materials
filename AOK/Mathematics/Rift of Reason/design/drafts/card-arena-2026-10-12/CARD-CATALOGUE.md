@@ -1,6 +1,6 @@
 # 210-card creative catalogue
 
-12 October 2026. These are **authored design proposals**, not implemented effects, approved balance or completed artwork. This catalogue is additional to the 12-card starter support pack. Costs and stats are first-pass tuning. Each card includes a role and counterplay in the JSON. All release work waits for the redesigned board (#109).
+Drafted 12 October; reviewed 21 October 2026. Seven foundation-1 cards now have runtime definitions and bounded engineering validation; the other 203 remain held design proposals. See CONTRACT-AUDIT-123.md and the acceptance report for the exact release, 23 semantic revisions and limits. Costs/stats outside that release remain proposals. This catalogue is additional to the 12-card starter support pack. Costs and stats are first-pass tuning. Each card includes a role and counterplay in the JSON. The redesigned production board (#109) is complete. Per-concept gameplay gates still apply.
 
 ## Counts and rules
 
@@ -34,10 +34,10 @@ Careful exchanges, defensive control and public proof goals.
 
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
-| Premise Pigeon · `reason-premise-pigeon` | creature / common / 1 | 1/2 | No ability. | Trade with a larger creature. | pack-pool |
-| Axiom Ant · `reason-axiom-ant` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use a spell. | pack-pool |
+| Premise Pigeon · `reason-premise-pigeon` | creature / common / 1 | 1/2 | Entrance: reveal your top personal-deck card. If it is a spell with printed cost 1 or less, draw it; otherwise leave it there. | A costly card or creature leaves the revealed top card in place. | pack-pool |
+| Axiom Ant · `reason-axiom-ant` | creature / common / 2 | 1/3 | Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield. | Keep equal board numbers, consume Shield with a small hit, or silence it. | pack-pool |
 | Proof Beetle · `reason-proof-beetle` | creature / common / 2 | 2/2 | Entrance: another friendly creature gains 1 maximum health and heals 1. | Remove the supported creature. | pack-pool |
-| Counterexample Crow · `reason-counterexample-crow` | creature / common / 3 | 2/2 | Entrance: deal 1 damage to an enemy creature. | Shield protects a small target. | pack-pool |
+| Counterexample Crow · `reason-counterexample-crow` | creature / common / 3 | 2/2 | Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour. | Remove the other colour first; Shield still prevents the single damage packet. | pack-pool |
 | Parity Panda · `reason-parity-panda` | creature / uncommon / 3 | 2/4 | After surviving a fight with equal effective attack, heal this by 1. | Attack with unequal power. | pack-pool |
 | Induction Ibex · `reason-induction-ibex` | creature / uncommon / 3 | 2/3 | Once per turn, after you cast a Reason spell, this gains 1 attack until your next turn starts. | Remove it before the spell sequence. | pack-pool |
 | Logic Lynx · `reason-logic-lynx` | creature / uncommon / 4 | 3/4 | Entrance: look at the top 2 personal-deck cards; keep their order or swap them. | Pressure its setup turn. | pack-pool |
@@ -47,7 +47,7 @@ Careful exchanges, defensive control and public proof goals.
 | Boundary Bear · `reason-boundary-bear` | creature / mythic / 6 | 4/6 | Guard. While this is ready, your hero takes at most 2 damage from each creature attack. | Disable it, use spells or attack repeatedly. | pack-pool |
 | Theorem Tortoise · `reason-theorem-tortoise` | creature / legendary / 7 | 4/7 | At your turn's end, if you cast 2 Reason spells, schedule at +1 round: your creatures present then gain 1 maximum health and heal 1. At most one event from this creature pending. | Remove the board or skip the announced event. | pack-pool |
 | Check the Premise · `reason-check-the-premise` | spell / common / 1 | enemy-creature | Deal 1 damage, or 2 if the target has Guard. | Use a non-Guard threat. | pack-pool |
-| Small Lemma · `reason-small-lemma` | spell / common / 1 | friendly-creature | Give 1 maximum health and heal 1. | Use removal instead of chip damage. | pack-pool |
+| Small Lemma · `reason-small-lemma` | spell / common / 1 | friendly-creature | Give 1 maximum health and heal 1. If the target had equal current attack and current health before this effect, also give Guard until your next turn starts. | Damage or change the target so its values no longer match; temporary Guard can expire. | pack-pool |
 | Work It Out · `reason-work-it-out` | spell / common / 2 | none | Inspect the top 3 personal-deck cards; draw one and bottom the others in their original relative order. | Pressure the selection turn. | pack-pool |
 | Exact Answer · `reason-exact-answer` | spell / common / 2 | enemy-creature | Deal damage equal to its current attack, capped at 3. | Use low attack and high health. | pack-pool |
 | Provisional Proof · `reason-provisional-proof` | spell / common / 2 | friendly-creature | Give Shield. Draw 1 personal-deck card only if it already had Guard when cast. | Remove its keywords. | pack-pool |
@@ -61,7 +61,7 @@ Careful exchanges, defensive control and public proof goals.
 | Measured Dispute · `reason-measured-dispute` | axiom / common / 1 | combat | Effective attack above 4 counts as 4 in creature fights, for damage and combat comparison. | Use several medium creatures. | pack-pool |
 | Burden of Proof · `reason-burden-of-proof` | axiom / uncommon / 2 | cost | Each player's first spell each turn costs 1 less, minimum 0; later spells cost 1 more. | Force an awkward spell sequence. | pack-pool |
 | Complete Argument · `reason-complete-argument` | axiom / rare / 2 | victory | Win by enemy hero reaching 0, or by ending your own turn with 3 Reason creatures and 6 cards in hand. | Reduce the board or hand, or replace Win. | story-only |
-| Long View · `reason-long-view` | axiom / mythic / 3 | fate-delay | New effects from either player are scheduled 1 round later, maximum +4 rounds. Announced events do not move. | Replace before scheduling. | pack-pool |
+| Long View · `reason-long-view` | axiom / mythic / 3 | fate-inspection | After a player's own scheduled one-shot resolves, that player may inspect the top unreserved shared Axiom without drawing or moving it. Once per player per round. | Skip their event or reorder the shared deck before their next draw. | pack-pool |
 
 ### emotion
 
@@ -69,8 +69,8 @@ Risk, pressure, self-damage and changed victory conditions.
 
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
-| Pulse Pup · `emotion-pulse-pup` | creature / common / 1 | 2/1 | No ability. | Trade a small creature. | pack-pool |
-| Courage Cub · `emotion-courage-cub` | creature / common / 2 | 2/2 | Entrance: restore 1 heart to your hero. | Keep pressure on its board. | pack-pool |
+| Pulse Pup · `emotion-pulse-pup` | creature / common / 1 | 2/1 | Once per match, after this survives a fight on your turn, ready one additional attack for it. Normal card activations still apply. | Defeat it in the first fight, freeze it, or consume the shared activation budget. | pack-pool |
+| Courage Cub · `emotion-courage-cub` | creature / common / 2 | 2/2 | Entrance: restore 1 heart to your hero. If that restoration fills your hero to maximum hearts, this gains Shield. | Keep the hero wounded or already full so no qualifying restoration occurs. | pack-pool |
 | Spite Sprite · `emotion-spite-sprite` | creature / common / 2 | 1/3 | Once per turn, after taking damage and surviving, this gains 1 attack until your next turn starts. | Defeat it in one hit. | pack-pool |
 | Cheer Chick · `emotion-cheer-chick` | creature / common / 2 | 1/2 | Entrance: another friendly creature gains 1 attack this turn. | Remove or block the supported attacker. | pack-pool |
 | Temper Tiger · `emotion-temper-tiger` | creature / uncommon / 3 | 3/2 | Entrance: your hero loses 1 heart. | Counterattack the fragile body. | pack-pool |
@@ -84,14 +84,14 @@ Risk, pressure, self-damage and changed victory conditions.
 | Quick Courage · `emotion-quick-courage` | spell / common / 1 | friendly-creature | Give 2 attack until this turn ends. | Block with Guard or prevent the hit. | pack-pool |
 | Honest Hurt · `emotion-honest-hurt` | spell / common / 1 | none | Your hero loses 1 heart. Draw 1 personal-deck card. | Change Win or pressure remaining hearts. | pack-pool |
 | Share the Feeling · `emotion-share-the-feeling` | spell / common / 2 | friendly-creature | Deal 1 damage to it; if it survives, give 2 attack until your next turn starts. | Remove it before it attacks. | pack-pool |
-| Cool Down · `emotion-cool-down` | spell / common / 1 | enemy-creature | Reduce its attack by 2 until its controller's next turn ends, minimum 0. | Wait or use another attacker. | pack-pool |
+| Cool Down · `emotion-cool-down` | spell / common / 1 | enemy-creature | Until its controller's next turn ends, the chosen enemy creature may attack creatures but not heroes. | Fight creatures, use spells or silence away the temporary restriction. | pack-pool |
 | Careful Cheer · `emotion-careful-cheer` | spell / common / 2 | none | Restore 2 hearts to your hero, or 3 if you control 2 or fewer creatures. | Develop a larger board. | pack-pool |
 | Cost of Courage · `emotion-cost-of-courage` | spell / uncommon / 2 | friendly-creature | Your hero loses 2 hearts; give the target 2 maximum health and heal it by 2. | Silence or remove the supported target. | pack-pool |
-| Tomorrow's Rally · `emotion-tomorrow-s-rally` | spell / uncommon / 3 | none | At +1 round, your creatures present then gain 1 attack until your next turn ends. | Trade the board or skip the node. | pack-pool |
+| Tomorrow's Rally · `emotion-tomorrow-s-rally` | spell / uncommon / 3 | none | At +1 round, your next declared creature attack on an enemy hero that round deals 1 extra damage. Lose 1 own heart when declaring it; resolve Win before damage. | Skip the announcement, block hero attacks with Guard, or exploit the heart payment. | pack-pool |
 | Shared Pain · `emotion-shared-pain` | spell / uncommon / 3 | none | Deal 2 damage to both heroes as one simultaneous effect. | Change Win, heal or race the threshold. | pack-pool |
 | Outburst · `emotion-outburst` | spell / rare / 4 | enemy-creature | Deal 5 damage to it. Your hero loses 2 hearts. | Exploit the caster's low hearts. | pack-pool |
 | Second Heartbeat · `emotion-second-heartbeat` | spell / rare / 4 | none | Restore your hero to 5 hearts if below 5; otherwise draw 2 personal-deck cards. | Maintain pressure or exploit reversed Win. | pack-pool |
-| Shared Nerves · `emotion-shared-nerves` | axiom / common / 1 | damage | Each creature attack on a hero deals at most 2 damage. | Attack repeatedly or use spells. | pack-pool |
+| Shared Nerves · `emotion-shared-nerves` | axiom / common / 1 | damage | When a hero has fewer hearts than the other hero, reduce damage from each creature attack on that hero by 1, minimum 0. Spell damage is unchanged. | Equalise hearts, use spells, replace the rule or exploit the active Win condition. | pack-pool |
 | Brave Arrivals · `emotion-brave-arrivals` | axiom / common / 1 | arrival | New creatures may attack creatures immediately; only Swift permits hero attacks on arrival. | Protect important creatures. | pack-pool |
 | Small Comforts · `emotion-small-comforts` | axiom / common / 1 | healing | At each turn's start, if that player has fewer hearts, restore 1 to their hero. | Replace the rule or race its healing. | pack-pool |
 | Price of Passion · `emotion-price-of-passion` | axiom / uncommon / 2 | cost | Once per turn, each player may pay 1 heart to reduce a spell's cost by 1. Heart loss obeys Win. | Change Win or force risky spending. | pack-pool |
@@ -107,7 +107,7 @@ Information, exposed targets and visible future plans.
 | Cue Cricket · `perception-cue-cricket` | creature / common / 1 | 1/2 | Entrance: look at the top card of your personal deck. | Pressure instead of giving planning time. | pack-pool |
 | Lens Lynx · `perception-lens-lynx` | creature / common / 2 | 2/2 | Entrance: remove Elusive from one enemy creature until its controller's next turn starts. | Use other keywords or restore Elusive. | pack-pool |
 | Focus Falcon · `perception-focus-falcon` | creature / common / 2 | 1/3 | This deals 1 extra combat damage to a creature whose Shield has already been consumed this match. | Refresh Shield or heal the exposed target. | pack-pool |
-| Shadow Shrimp · `perception-shadow-shrimp` | creature / common / 2 | 2/1 | Elusive. | Use a spell or remove Elusive. | pack-pool |
+| Shadow Shrimp · `perception-shadow-shrimp` | creature / common / 2 | 2/1 | Elusive. After this attacks a hero, it loses Elusive until your next turn starts. | Wait for the hero attack to expose it, then use a targeted answer. | pack-pool |
 | Scout Stoat · `perception-scout-stoat` | creature / uncommon / 3 | 2/3 | Entrance: inspect the top 2 personal-deck cards and put one on the bottom. | Contest its setup turn. | pack-pool |
 | Prism Puffin · `perception-prism-puffin` | creature / uncommon / 3 | 2/4 | Entrance: another friendly creature becomes Perception until your next turn starts. | Choose neutral matchups or remove the buff. | pack-pool |
 | Pattern Panther · `perception-pattern-panther` | creature / uncommon / 3 | 3/2 | Once per round, after an enemy scheduled occurrence is skipped, draw 1 personal-deck card. | Use immediate effects or protect key occurrences. | pack-pool |
@@ -131,7 +131,7 @@ Information, exposed targets and visible future plans.
 | Careful Aim · `perception-careful-aim` | axiom / common / 1 | damage | Each player's first damage spell each turn deals 1 more damage to a damaged creature. | Heal or protect damaged targets. | pack-pool |
 | Shared Horizon · `perception-shared-horizon` | axiom / uncommon / 2 | inspection | Both players may inspect the top card of each personal deck; the cards stay there. | Draw or reorder the exposed card. | pack-pool |
 | Observed Pattern · `perception-observed-pattern` | axiom / rare / 2 | victory | Win by enemy hero reaching 0, or by ending your own turn with 3 Perception creatures and no damaged friendly creatures. | Damage or remove a creature, or replace Win. | story-only |
-| Clear Timetable · `perception-clear-timetable` | axiom / mythic / 3 | fate-capacity | Each player may hold one additional pending player-created event. Environmental events use no player slots. | Skip or cancel the highest-impact event. | pack-pool |
+| Clear Timetable · `perception-clear-timetable` | axiom / mythic / 3 | fate-inspection | At a player's normal personal-deck draw, if that player has 2 or more pending player events, inspect the top card and optionally bottom it before drawing normally. Once per turn. | Skip a pending event; the normal draw, hand limit and exhaustion still apply. | pack-pool |
 
 ### language
 
@@ -140,7 +140,7 @@ Labels, support, rule changes and temporary control.
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
 | Question Quail · `language-question-quail` | creature / common / 1 | 1/2 | Entrance: unfreeze another friendly creature. | Use removal, Guard or another Freeze; normal action limits still apply. | pack-pool |
-| Comma Caterpillar · `language-comma-caterpillar` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use a spell. | pack-pool |
+| Comma Caterpillar · `language-comma-caterpillar` | creature / common / 2 | 1/3 | Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card. | Silence it or make the opponent use their held rules first. | pack-pool |
 | Label Lemur · `language-label-lemur` | creature / common / 2 | 2/2 | Entrance: an enemy creature loses 1 attack until its controller's next turn ends, minimum 0. | Use another attacker or restore its stats. | pack-pool |
 | Word Weasel · `language-word-weasel` | creature / common / 2 | 2/1 | Last Word: choose a surviving friendly creature; it gains 1 maximum health and heals 1. | Remove other friendly creatures first. | pack-pool |
 | Echo Egret · `language-echo-egret` | creature / uncommon / 3 | 2/3 | Once per turn, after you play an Axiom from hand, draw 1 personal-deck card. | Remove the engine or change rules through Fate. | pack-pool |
@@ -153,11 +153,11 @@ Labels, support, rule changes and temporary control.
 | Lexicon Lion · `language-lexicon-lion` | creature / legendary / 7 | 4/7 | Entrance: choose one active Axiom category; discard that rule and restore its basic rule. Draw 1 personal-deck card. | Keep a replacement or rely on other categories. | pack-pool |
 | A Better Label · `language-a-better-label` | spell / common / 1 | enemy-creature | Reduce its attack by 1 until its controller's next turn ends, minimum 0. Draw 1 personal-deck card. | Use another attacker. | pack-pool |
 | Plain Words · `language-plain-words` | spell / common / 1 | friendly-creature | Remove one temporary attack debuff; if none exists, heal the target by 1. | Use permanent damage or silence. | pack-pool |
-| Hold the Floor · `language-hold-the-floor` | spell / common / 2 | friendly-creature | Give Guard and 1 maximum health; heal it by 1. | Remove Guard or target with spells. | pack-pool |
+| Hold the Floor · `language-hold-the-floor` | spell / common / 2 | friendly-creature | Give Guard until your next turn starts. If the target was frozen, remove only its Freeze and heal it by 1. | Use removal or a later Freeze. Sleeping and spent attacks remain spent. | pack-pool |
 | Ask Again · `language-ask-again` | spell / common / 2 | enemy-creature | Remove Elusive and reduce its attack by 1 this turn, minimum 0. | Reapply protection or wait out the penalty. | pack-pool |
 | Change the Subject · `language-change-the-subject` | spell / common / 2 | active-attacks-axiom | Discard the active attack-limit rule and restore that category to basics. Draw 1 personal-deck card. | Hold another attack-limit rule. | pack-pool |
-| Careful Wording · `language-careful-wording` | spell / uncommon / 3 | friendly-creature | Give 1 attack and 2 maximum health; heal it by 2. | Silence or remove the supported creature. | pack-pool |
-| Tomorrow's Address · `language-tomorrow-s-address` | spell / uncommon / 2 | none | At +1 round, your creatures present then gain 1 attack until your next turn ends. | Trade the board or skip the occurrence. | pack-pool |
+| Careful Wording · `language-careful-wording` | spell / uncommon / 3 | friendly-creature | Remove one temporary attack debuff from the target, then give it 1 attack until your next turn starts. Permanent changes remain. | Use permanent reduction, silence or a second temporary debuff. | pack-pool |
+| Tomorrow's Address · `language-tomorrow-s-address` | spell / uncommon / 2 | none | At +1 round, gain this public permission until that round ends: after your next Axiom played from hand, draw 1 personal-deck card. Consume it before drawing. | Skip the occurrence or deny an affordable held rule; unused permission expires. | pack-pool |
 | Read the Fine Print · `language-read-the-fine-print` | spell / uncommon / 3 | enemy-creature | Silence it. Your hero loses 1 heart. | Exploit low hearts or reverse Win. | pack-pool |
 | Borrowed Voice · `language-borrowed-voice` | spell / rare / 4 | enemy-creature | Take control of a creature with 1 attack or less until your next turn starts. It arrives asleep; return it if still in play. | Raise its attack or fill the borrower's board. | pack-pool |
 | Rewrite One Clause · `language-rewrite-one-clause` | spell / rare / 4 | active-axiom-category | Remove that category's active rule. You may immediately play one matching-category Axiom from hand, paying its normal cost and activation budget. | Keep another answer or exhaust its resources. | pack-pool |
@@ -174,9 +174,9 @@ Stat transformations, diverse boards and token plans.
 
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
-| Doodle Duck · `imagination-doodle-duck` | creature / common / 1 | 1/2 | No ability. | Trade a larger creature. | pack-pool |
+| Doodle Duck · `imagination-doodle-duck` | creature / common / 1 | 1/2 | Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health. | Deny the matching teammate; after the swap, trade into its lower health. | pack-pool |
 | Possibility Pika · `imagination-possibility-pika` | creature / common / 2 | 2/2 | Entrance: choose 1 extra attack or 1 extra maximum health and healing for this creature. | Punish the mode not chosen. | pack-pool |
-| Fable Fawn · `imagination-fable-fawn` | creature / common / 2 | 1/3 | Entrance: swap the attack and health of another friendly creature using normal stat-swap rules. | Use balanced bodies or remove the transformed threat. | pack-pool |
+| Fable Fawn · `imagination-fable-fawn` | creature / common / 2 | 1/3 | Entrance: swap the attack and health of another friendly creature using normal stat-swap rules. In a mono-Imagination deck, it then gains 1 maximum health and heals 1. | Balanced stats limit the swap; remove the newly fragile creature. | pack-pool |
 | Mosaic Mole · `imagination-mosaic-mole` | creature / common / 2 | 1/2 | Last Word: summon a colourless 1/1 paper token if you have board space. | Silence it before defeat. | pack-pool |
 | Blueprint Bat · `imagination-blueprint-bat` | creature / uncommon / 3 | 2/3 | The first colourless token you summon each turn arrives with 1 extra maximum health. | Remove this before the token spell. | pack-pool |
 | Mirror Marten · `imagination-mirror-marten` | creature / uncommon / 3 | 2/3 | Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4. | Remove the large source before the copy turn. | pack-pool |
@@ -211,7 +211,7 @@ Discard recovery, delayed effects and bounded Fate re-entry.
 |---|---|---|---|---|---|
 | Bookmark Bunny · `memory-bookmark-bunny` | creature / common / 1 | 1/2 | Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card. | Defeat, bounce, steal or silence it before its owner's next turn. | pack-pool |
 | Recall Robin · `memory-recall-robin` | creature / common / 2 | 1/2 | Entrance: put your most recently discarded spell on the bottom of your personal deck if still there. | Race before it is redrawn. | pack-pool |
-| Archive Armadillo · `memory-archive-armadillo` | creature / common / 2 | 1/3 | Guard. | Remove Guard or use spells. | pack-pool |
+| Archive Armadillo · `memory-archive-armadillo` | creature / common / 2 | 1/3 | Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there. | Silence it or force an unwanted oldest spell; it replaces a later draw rather than creating a copy. | pack-pool |
 | Return Roach · `memory-return-roach` | creature / common / 2 | 2/1 | Once per match, before an enemy spell targeting this resolves, return this to its owner's hand if there is room. | Use creature combat, untargeted damage or silence; a full hand prevents escape. | pack-pool |
 | Chronicle Cat · `memory-chronicle-cat` | creature / uncommon / 3 | 2/3 | Once per turn, after you recover a card from discard, heal your hero by 1. | Remove the engine or exploit reversed Win. | pack-pool |
 | Replay Raccoon · `memory-replay-raccoon` | creature / uncommon / 3 | 2/3 | Entrance: return a friendly creature costing 1 or less from discard to hand. | Pressure during the replay turn. | pack-pool |
@@ -245,14 +245,14 @@ Simple support and shared rules accessible to any deck.
 | Card / ID | Kind / rarity / cost | Stats or category / target | Proposed text | Counterplay | Source |
 |---|---|---|---|---|---|
 | Clean Cut · `generic-clean-cut` | spell / common / 1 | enemy-creature | Deal 1 damage. If the target is a colourless token, deal 2 instead. | Use non-token bodies. | pack-pool |
-| Small Patch · `generic-small-patch` | spell / common / 1 | friendly-creature | Heal it by 2 without changing maximum health. | Defeat it in one hit. | pack-pool |
+| Small Patch · `generic-small-patch` | spell / common / 1 | friendly-creature | Heal it by 2 without changing maximum health, or 3 in a mono-colour personal deck. | Defeat the target before healing; an all-generic deck has no mono colour. | pack-pool |
 | Quick Study · `generic-quick-study` | spell / common / 2 | none | Draw 1 personal-deck card; inspect the next without changing it. | Pressure the slow draw turn. | pack-pool |
 | Simple Cover · `generic-simple-cover` | spell / common / 1 | friendly-creature | Give Guard until your next turn starts. | Remove Guard or wait out the effect. | pack-pool |
 | Pocket Plan · `generic-pocket-plan` | spell / common / 1 | none | Inspect the top unreserved shared Axiom. You may put it on the bottom; reserved events are untouched. | Draw or reorder the rule before the next shared draw. | pack-pool |
 | Spare Spark · `generic-spare-spark` | spell / common / 0 | none | Gain 1 energy this turn, capped at 10. This still uses the normal activation budget. | Force inefficient sequencing. | pack-pool |
 | Settle Down · `generic-settle-down` | spell / common / 1 | enemy-creature | Reduce its attack by 1 until its controller's next turn ends, minimum 0. | Use another attacker. | pack-pool |
 | Fair Trade · `generic-fair-trade` | spell / common / 2 | none | Each player draws 1 personal-deck card, caster first; normal hand limits apply. | Benefit from the shared draw. | pack-pool |
-| Follow Through · `generic-follow-through` | spell / common / 2 | enemy-creature | Deal 2 damage if already damaged, otherwise 1. | Heal before it is cast. | pack-pool |
+| Follow Through · `generic-follow-through` | spell / common / 2 | enemy-creature | Deal 2 damage if one of your creatures already attacked an enemy hero this turn, otherwise 1. | Guard or Freeze stops the prerequisite hero attack; Shield still blocks the spell. | pack-pool |
 | Warm Blanket · `generic-warm-blanket` | spell / common / 2 | friendly-creature | Heal it by 2 and give Shield until your next turn starts. | Remove Shield or strike twice. | pack-pool |
 | Pause One Beat · `generic-pause-one-beat` | spell / common / 2 | none | At +1 round, restore 2 hearts to your hero. One-shot. | Skip the occurrence or exploit reversed Win. | pack-pool |
 | Take Stock · `generic-take-stock` | spell / common / 1 | none | Draw 1 personal-deck card. If that deck is empty, restore 1 heart instead; no extra exhaustion step. | Maintain pressure through the small benefit. | pack-pool |
@@ -268,7 +268,7 @@ Simple support and shared rules accessible to any deck.
 | Steal a Beat · `generic-steal-a-beat` | spell / rare / 4 | enemy-pending-event | Move one enemy player-created event one space later, maximum +4 rounds. Draw 1 personal-deck card if it moved; announce its new time. | Adapt to the known delay or use immediate effects. | pack-pool |
 | Common Ground · `generic-common-ground` | spell / mythic / 5 | none | Remove temporary buffs and debuffs from both boards. Each surviving creature gains 1 maximum health and heals 1; both players draw 1 personal card. | Use permanent stats or play after the reset. | pack-pool |
 | The Last Page · `generic-the-last-page` | spell / legendary / 6 | none | Reset all active Axiom categories to basics, return one own defeated creature costing 4 or less to hand, and draw 2 personal-deck cards. Announced events keep their identities and timing. | Keep replacement rules and pressure the expensive recovery turn. | story-only |
-| Careful Hands · `generic-careful-hands` | axiom / common / 1 | hand | At the end of each player's turn, keep at most 5 cards; discard the oldest excess cards. | Play cards before the limit checks. | pack-pool |
+| Careful Hands · `generic-careful-hands` | axiom / common / 1 | hand | At each player's turn end, if they hold 5 or more cards, put their highest printed-cost held card on the bottom of its own deck. Ties use oldest hand arrival. | Play expensive cards first; fewer than 5 cards avoids the check. | pack-pool |
 | Small Armies · `generic-small-armies` | axiom / common / 1 | board-capacity | A player controlling 5 or more creatures cannot play or summon another. Existing creatures remain. | Remove a body or replace the cap. | pack-pool |
 | Fair Rest · `generic-fair-rest` | axiom / common / 1 | healing | At the start of each player's turn, heal their most damaged creature by 1; break ties by oldest arrival. | Defeat threats in one hit. | story-only |
 | Unhurried Arrival · `generic-unhurried-arrival` | axiom / common / 1 | arrival | New non-Swift creatures cannot activate until their controller's next turn, even if another effect readies their attacks. | Use Swift or wait a turn. | pack-pool |
@@ -280,7 +280,7 @@ Simple support and shared rules accessible to any deck.
 | Give and Take · `generic-give-and-take` | axiom / uncommon / 2 | healing | An original hero-healing effect also heals the other hero by that amount once; the copy creates no further copies. | Exploit shared healing under the current Win rule. | pack-pool |
 | Conservative Plans · `generic-conservative-plans` | axiom / uncommon / 2 | fate-delay | New player-created scheduled effects have minimum +2 rounds; already announced times and environments do not change. | Replace before scheduling or use immediate spells. | story-only |
 | No Shortcuts · `generic-no-shortcuts` | axiom / uncommon / 2 | cost | Neither player's spells may cost less than 1 energy, after discounts; printed zero-cost spells also cost 1. | Use efficient creatures or replace the rule. | pack-pool |
-| Open Slots · `generic-open-slots` | axiom / uncommon / 2 | board-capacity | Playing a new creature requires a free slot beyond it: a player at one below the normal board limit cannot add another. Existing boards remain. | Trade before playing or replace the limit. | pack-pool |
+| Open Slots · `generic-open-slots` | axiom / uncommon / 2 | board-capacity | A player who began their turn with a full creature board cannot play or summon creatures during that turn, even after making room. Existing creatures remain. | Keep one slot empty before your turn or replace the rule; ordinary full-board protection still applies. | pack-pool |
 | Prepared Response · `generic-prepared-response` | axiom / uncommon / 2 | abilities | Each player's first creature activation each turn costs 1 less, minimum 0; later creature activations cost 1 more. | Choose activation order carefully. | pack-pool |
 | Fragile Shields · `generic-fragile-shields` | axiom / rare / 3 | keywords | A newly granted Shield expires at its controller's next turn start unless consumed first. Printed arrival Shield follows the same expiry. | Wait out protection or replace the rule. | pack-pool |
 | Balanced Accounts · `generic-balanced-accounts` | axiom / rare / 3 | exhaustion | Exhaustion counters increase normally, but each normal draw's exhaustion damage is capped at 3 for both players. | Use attacks or replace the cap; self-zero strategies may still benefit. | pack-pool |

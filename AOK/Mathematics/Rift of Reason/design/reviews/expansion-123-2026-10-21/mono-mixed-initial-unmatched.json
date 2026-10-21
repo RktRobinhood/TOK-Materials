@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-21",
+  "scope": "Paired legal20-card mono/mixed smoke probe. Same Competent AI, opposite seats and alternating first player; no tuning from a single win rate.",
+  "seedsPerColour": 4,
+  "games": 48,
+  "rows": [
+    {
+      "colour": "reason",
+      "games": 8,
+      "monoWins": 7,
+      "mixedWins": 1,
+      "draws": 0,
+      "maxSteps": 125,
+      "turnLimit": 0
+    },
+    {
+      "colour": "emotion",
+      "games": 8,
+      "monoWins": 6,
+      "mixedWins": 2,
+      "draws": 0,
+      "maxSteps": 64,
+      "turnLimit": 0
+    },
+    {
+      "colour": "perception",
+      "games": 8,
+      "monoWins": 5,
+      "mixedWins": 3,
+      "draws": 0,
+      "maxSteps": 122,
+      "turnLimit": 0
+    },
+    {
+      "colour": "language",
+      "games": 8,
+      "monoWins": 5,
+      "mixedWins": 3,
+      "draws": 0,
+      "maxSteps": 129,
+      "turnLimit": 0
+    },
+    {
+      "colour": "imagination",
+      "games": 8,
+      "monoWins": 7,
+      "mixedWins": 1,
+      "draws": 0,
+      "maxSteps": 91,
+      "turnLimit": 0
+    },
+    {
+      "colour": "memory",
+      "games": 8,
+      "monoWins": 7,
+      "mixedWins": 1,
+      "draws": 0,
+      "maxSteps": 103,
+      "turnLimit": 0
+    }
+  ],
+  "plays": {
+    "reason-premise-pigeon": 36,
+    "emotion-courage-cub": 28,
+    "generic-small-patch": 27,
+    "perception-cue-cricket": 32,
+    "language-question-quail": 34,
+    "imagination-fable-fawn": 34,
+    "memory-recall-robin": 23
+  }
+}

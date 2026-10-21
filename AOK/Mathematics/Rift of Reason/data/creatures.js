@@ -289,6 +289,41 @@
         },
     };
 
+    // First audited #123 batch. Existing selected portraits, stable mechanical IDs,
+    // ordinary catches/copy limits. These card faces are intentionally unvoiced text.
+    Object.assign(Rift.data.creatures, {
+        'reason-premise-pigeon': {
+            name: 'Tom Skink', inspiredBy: 'Tom Scott', colour: 'reason', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'small-premise', abilityText: 'Entrance: reveal your top personal card. Draw it if it is a spell with printed cost 1 or less.',
+            blurb: 'One small detail needs a surprisingly careful explanation.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+        'emotion-courage-cub': {
+            name: 'Simone Bearles', inspiredBy: 'Simone Biles', colour: 'emotion', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'balanced-landing', abilityText: 'Entrance: heal your hero by 1. If this fills their hearts, gain Shield.',
+            blurb: 'A tiny perfect landing. A very large bow.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+        'perception-cue-cricket': {
+            name: 'Nikkie de Jaguar', inspiredBy: 'Nikkie de Jager', colour: 'perception', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'first-look', abilityText: 'Entrance: look at your top personal-deck card. Leave it there.',
+            blurb: 'One closer look before the grand reveal.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+        'language-question-quail': {
+            name: 'Jimmy Fowlon', inspiredBy: 'Jimmy Fallon', colour: 'language', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'let-the-guest-speak', abilityText: 'Entrance: unfreeze another friendly creature. It keeps its normal sleep and action limits.',
+            blurb: 'The guest froze. The little host gives them the floor.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+        'imagination-fable-fawn': {
+            name: 'Jack Blackbird', inspiredBy: 'Jack Black', colour: 'imagination', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+            ability: 'dramatic-reframe', abilityText: 'Entrance: swap another ally\'s attack and health. Mono-Imagination: then give it +1 maximum health and heal 1.',
+            blurb: 'The smallest adventure needs the biggest entrance.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+        'memory-recall-robin': {
+            name: 'John Greenfinch', inspiredBy: 'John Green', colour: 'memory', rarity: 'common', power: 2, cost: 2, attack: 1, health: 2,
+            ability: 'keep-the-last-note', abilityText: 'Entrance: put your newest discarded spell on the bottom of your personal deck.',
+            blurb: 'The last footnote is never quite the last footnote.', lines: [], release: 'foundation-1', packEligible: true,
+        },
+    });
+
     // Starter content begins with the adventure; grants are handled by the owned-deck ticket.
     Rift.data.starterSpecies = ['proof-pup', 'lens-lizard', 'paper-dragon', 'cloud-calf', 'pocket-tortoise', 'comma-crab', 'footnote-finch'];
 

@@ -664,6 +664,12 @@
         }
     }
     Object.keys(tactics).forEach(id => { tactics[id].id = id; });
+    tactics['generic-small-patch'] = {
+        name: 'Small Patch', cost: 1, rarity: 'common', release: 'foundation-1', packEligible: true,
+        text: 'Heal a friendly creature by 2, or 3 in a mono-colour personal deck. Maximum health stays the same.',
+        art: 'art/spell-motif-generic', target: 'friendly-creature', filter: (s, cid) => s.cards[cid].damage > 0,
+        run(api, p, target) { const n = api.s.players[p].monoColour ? 3 : 2; api.heal(target, n); api.emit({ t: 'tactic', player: p, text: 'Small Patch: heal ' + api.name(target) + ' by ' + n + '.' }); },
+    };
     Rift.data.tactics = tactics;
     // Tokens (#121): plain generated creatures, shaped like data/creatures.js entries (art 'creature/<id>/idle').
     Rift.data.tokens = {

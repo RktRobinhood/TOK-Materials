@@ -866,9 +866,17 @@
             });
             const cons = pl.consumables || {};
             const hearts = (pl.hearts == null ? opts.hearts : pl.hearts) + 2 * (cons['extra-life'] || 0);
+            // Submitted personal cards define mono once. Generic cards do not break it;
+            // Memory is an explicit sixth colour. Shared rules, tokens and live changes never recalculate it.
+            const deckColours = Array.from(new Set(ids.map(cid => {
+                const c = s.cards[cid];
+                const def = c.kind === 'creature' ? species(c.species) : tacticDefs()[c.tactic];
+                return def.generic ? null : def.colour;
+            }).filter(colour => ['reason', 'emotion', 'perception', 'language', 'imagination', 'memory'].includes(colour))));
             s.players.push({
                 id: pl.id || ('p' + i), name: pl.name || (i === 0 ? 'You' : 'Opponent'),
                 hearts, maxHearts: hearts, energy: 0, capacity: 0, spark: false,
+                monoColour: deckColours.length === 1 ? deckColours[0] : null,
                 deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], armed: [], discard: [],
                 playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [], exhaustion: 0,
                 consumables: Object.assign({}, cons),
@@ -896,6 +904,8 @@
             emit(G, { t: 'spark', player: 1 - s.active, text: says(s, 1 - s.active, 'goes') + ' second: one extra card and the Spark (+1 energy once).' });
         }
         emit(G, { t: 'start', text: says(s, s.active, 'goes') + ' first.' });
+        s.players.forEach((P, p) => emit(G, { t: 'deck-identity', player: p,
+            text: P.name + '\'s public deck identity: ' + (P.monoColour ? 'Mono ' + P.monoColour : 'mixed or generic') + '. Shared rules do not count.' }));
         setupEnvironment(G, cfg.environment);
         startTurn(G);
         s.lastEvents = G.events;
@@ -1038,7 +1048,7 @@
     function api(G) {
         const s = G.s;
         return {
-            s, rng: G.rng, H,
+            s, rng: G.rng, H, planning: !!s.aiPlanning,
             emit: ev => emit(G, ev),
             name: cid => logName(s, cid),           // for event texts
             cardName: cid => cardName(s, cid),      // plain name (e.g. to build a nickname)

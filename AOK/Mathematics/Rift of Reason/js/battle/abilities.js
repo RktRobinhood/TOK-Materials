@@ -478,6 +478,75 @@
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' argues in tiny print: +1 attack this turn.' });
             },
         },
+        'small-premise': {
+            name: 'One Small Premise',
+            text: 'Entrance: reveal your top personal card. Draw it if it is a spell with printed cost 1 or less.',
+            entrance: { run(api, card) {
+                if (api.planning) return; // No real top-card inspection during a prospective AI choice.
+                const P = api.s.players[card.controller], cid = P.deck[0];
+                if (!cid) return;
+                const top = api.s.cards[cid], def = top.kind === 'tactic' && Rift.data.tactics[top.tactic];
+                const other = api.s.players[1 - card.controller];
+                if (!other.knows.includes(cid)) other.knows.push(cid);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' reveals ' + api.cardName(cid) + ' on top of the personal deck.' });
+                if (def && def.cost <= 1) api.draw(card.controller);
+            } },
+            ai: () => 0.2, // Small fixed information/draw opportunity, never the unseen top card's identity.
+        },
+        'balanced-landing': {
+            name: 'Balanced Landing',
+            text: 'Entrance: heal your hero by 1. If this fills their hearts, gain Shield.',
+            entrance: { run(api, card) {
+                const P = api.s.players[card.controller], before = P.hearts;
+                api.healHero(card.controller, 1);
+                const shield = P.hearts > before && P.hearts === P.maxHearts;
+                if (shield) api.addKeyword(card.cid, 'shield');
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' restores ' + (P.hearts - before) + ' heart' + (shield ? ' and gains Shield.' : '.') });
+            } },
+        },
+        'first-look': {
+            name: 'One Closer Look',
+            text: 'Entrance: look at your top personal-deck card. Leave it there.',
+            entrance: { run(api, card) {
+                if (api.planning) return;
+                const top = api.s.players[card.controller].deck[0];
+                if (!top) return;
+                api.ask({ player: card.controller, kind: 'option', auto: false, options: ['done'], labels: { done: 'Leave it on top' },
+                    prompt: 'Your top card is ' + api.cardName(top) + '.', source: { type: 'ability', id: 'first-look', cid: card.cid } });
+            } },
+            choose(api, card) { api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' looks at one card and leaves it on top.' }); },
+            ai: () => 0.1,
+        },
+        'let-the-guest-speak': {
+            name: 'Let the Guest Speak',
+            text: 'Entrance: unfreeze another friendly creature. It keeps its normal sleep and action limits.',
+            entrance: { target: 'friendly-other', filter: (s, cid) => !!s.cards[cid].frozen,
+                run(api, card, target) {
+                    api.s.cards[target].frozen = false; delete api.s.cards[target].frozenUntil;
+                    api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' gives ' + api.name(target) + ' the floor: Freeze ends.' });
+                },
+            },
+        },
+        'dramatic-reframe': {
+            name: 'Dramatic Reframe',
+            text: 'Entrance: swap another ally\'s attack and health. Mono-Imagination: then give it +1 maximum health and heal 1.',
+            entrance: { target: 'friendly-other', run(api, card, target) {
+                api.swapStats(target);
+                const mono = api.s.players[card.controller].monoColour === 'imagination';
+                if (mono) { api.buff(target, 0, 1, 'Mono-Imagination'); api.heal(target, 1); }
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' swaps ' + api.name(target) + '\'s attack and health.' + (mono ? ' Mono-Imagination: +1 maximum health and heal 1.' : '') });
+            } },
+        },
+        'keep-the-last-note': {
+            name: 'Keep the Last Note',
+            text: 'Entrance: put your newest discarded spell on the bottom of your personal deck.',
+            entrance: { run(api, card) {
+                const P = api.s.players[card.controller], cid = P.discard.slice().reverse().find(id => api.s.cards[id].kind === 'tactic');
+                if (!cid) return;
+                P.discard.splice(P.discard.indexOf(cid), 1); P.deck.push(cid);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' puts ' + api.cardName(cid) + ' on the bottom of the personal deck.' });
+            } },
+        },
         grook: {
             name: 'Grook',
             text: 'Whenever it survives a fight, draw a card.',

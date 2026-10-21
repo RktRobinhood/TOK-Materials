@@ -55,12 +55,16 @@ test('every slot has a valid track for each avatar type; first picks are new and
         assert.ok(deck.rewards && deck.colour, type + ' has a reward track and a colour');
         const s = adventure(R, type);
         for (const slot of slots) {
-            const list = deck.rewards[slot];
+            const list = R.World.cardTrack(s)[slot];
             assert.ok(Array.isArray(list) && list.length, type + ' ' + slot);
             for (const id of list) {
                 const c = ref(id);
                 assert.ok(c.kind === 'axiom' ? R.data.axioms[c.id] && !R.data.axioms[c.id].own : R.data.tactics[c.id], type + ' ' + slot + ': unknown ' + id);
-                if (c.kind === 'tactic') assert.notEqual(R.data.tactics[c.id].colour, undefined, type + ' ' + slot + ': a colour card, not a generic earned tactic');
+                if (c.kind === 'tactic' && !(D.sharedRewards || {})[slot]) assert.notEqual(R.data.tactics[c.id].colour, undefined, type + ' ' + slot + ': a colour card, not a generic earned tactic');
+                if ((D.sharedRewards || {})[slot]) {
+                    assert.equal(c.id, 'generic-small-patch'); assert.equal(R.data.tactics[c.id].rarity, 'common');
+                    assert.equal(R.data.tactics[c.id].colour, undefined, 'the common shared reward fits every starter');
+                }
             }
             const first = ref(list[0]);
             const owned = first.kind === 'axiom' ? R.State.ownedAxioms(s) : R.State.ownedTactics(s);
@@ -214,7 +218,7 @@ test('receipts and granted cards survive a backup round trip; importing never pa
     R.State.update(st => ['stall-pattern', 'road-start', 'troll-bridge', 'well', 'river-ford', 'b-south-bridge', 't-library', 'k-prediction'].forEach(id => R.World.complete(st, id)));
     const before = J(R.State.get());
     const receipts = Object.keys(before.flags).filter(k => k.startsWith('card-reward:')).sort();
-    assert.deepEqual(receipts, ['card-reward:colour', 'card-reward:colour-rare', 'card-reward:colour-rule', 'card-reward:fate', 'card-reward:fit', 'card-reward:fit-2']);
+    assert.deepEqual(receipts, ['card-reward:colour', 'card-reward:colour-rare', 'card-reward:colour-rule', 'card-reward:fate', 'card-reward:fit', 'card-reward:fit-2', 'card-reward:foundation-patch']);
     const code = await R.State.exportCode();
     R.State.wipe();
     const back = J(await R.State.importCode(code));

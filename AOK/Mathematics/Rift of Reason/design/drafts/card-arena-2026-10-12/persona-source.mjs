@@ -1,5 +1,6 @@
 // Creative roster proposals only. No runtime or voice-manifest writes.
 import fs from 'node:fs';
+import { revisions } from './review-123.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
@@ -23,11 +24,11 @@ function add(colour, data){
   const card=catalogue.cards.find(c=>c.name===concept&&c.kind==='creature'&&c.affinity===colour);
   assert(card,'Unknown concept '+concept);
   rows.push({mechanicalId:card.id,workingName:card.name,proposedName:pun,inspiration:person,colour,rarity:card.rarity,acquisition:card.acquisition,
-   silhouette,signatureProp:prop,jokeAngle:joke,mechanicLink,source,familiarity:'Builder audience judgement (not measured): '+familiarity,
+   silhouette,signatureProp:prop,jokeAngle:joke,mechanicLink: (revisions[card.id] || {}).persona || mechanicLink,source,familiarity:'Builder audience judgement (not measured): '+familiarity,
    voiceDirection:voice,sharedSfx:sharedSfx(card),artId:card.art,palette:{accent:accents[colour],shadow:'ink-brown and midnight violet; restrained affinity rim light',materials:'worn cloth/leather or painted metal; no pristine plastic'},
    promptReferences:['design/source-assets/0-style/style-board.png','assets/creatures/astrophysicat-idle.webp'],
    overlap:'New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.',
-   status:'Cast selected by builder under teacher delegation, 12 October 2026; no roster approval required. Artwork, runtime and balance remain unimplemented.',
+   status:card.runtimeRelease ? 'Selected cast/art; foundation-1 runtime release, bounded engineering validation' : 'Selected cast/art; runtime held pending per-concept validation',
    mechanicalContract:{cost:card.cost,attack:card.attack,health:card.health,text:card.text,gates:card.gates}});
  }
 }
@@ -164,6 +165,6 @@ if(start>=0||finish>=0){
  }
 }
 roster+='\n'+begin+'\n';
-roster+='\n'+marker+'\n\nCast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. These are not yet runtime species. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.\n\n| Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.proposedName} | ${r.inspiration} | ${r.mechanicalId} | ${r.colour} / ${r.rarity} | ${r.signatureProp} |`).join('\n')+'\n\nAll six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.\n';
+roster+='\n'+marker+'\n\nCast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. Six foundation-1 creatures are now runtime species; the other 66 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.\n\n| Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.proposedName} | ${r.inspiration} | ${r.mechanicalId} | ${r.colour} / ${r.rarity} | ${r.signatureProp} |`).join('\n')+'\n\nAll six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.\n';
 fs.writeFileSync(rosterPath,roster+end+'\n'+(tail.trim()?tail:''));
 console.log(JSON.stringify({concepts:rows.length,completedColours:stage.completedColours,pendingColours:stage.pendingColours}));

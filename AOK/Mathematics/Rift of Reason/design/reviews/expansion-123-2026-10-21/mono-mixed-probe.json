@@ -1,0 +1,246 @@
+{
+  "date": "2026-10-21",
+  "scope": "Paired legal20-card mono/mixed smoke probe. Same Competent AI, opposite seats and alternating first player; no tuning from a single win rate.",
+  "withoutBatchHooks": false,
+  "seedsPerColour": 8,
+  "games": 96,
+  "rows": [
+    {
+      "colour": "reason",
+      "games": 16,
+      "monoWins": 8,
+      "mixedWins": 7,
+      "draws": 1,
+      "maxSteps": 161,
+      "turnLimit": 1
+    },
+    {
+      "colour": "emotion",
+      "games": 16,
+      "monoWins": 11,
+      "mixedWins": 5,
+      "draws": 0,
+      "maxSteps": 60,
+      "turnLimit": 0
+    },
+    {
+      "colour": "perception",
+      "games": 16,
+      "monoWins": 4,
+      "mixedWins": 12,
+      "draws": 0,
+      "maxSteps": 106,
+      "turnLimit": 0
+    },
+    {
+      "colour": "language",
+      "games": 16,
+      "monoWins": 15,
+      "mixedWins": 1,
+      "draws": 0,
+      "maxSteps": 127,
+      "turnLimit": 0
+    },
+    {
+      "colour": "imagination",
+      "games": 16,
+      "monoWins": 15,
+      "mixedWins": 1,
+      "draws": 0,
+      "maxSteps": 97,
+      "turnLimit": 0
+    },
+    {
+      "colour": "memory",
+      "games": 16,
+      "monoWins": 11,
+      "mixedWins": 5,
+      "draws": 0,
+      "maxSteps": 145,
+      "turnLimit": 0
+    }
+  ],
+  "plays": {
+    "reason-premise-pigeon": 78,
+    "emotion-courage-cub": 58,
+    "generic-small-patch": 47,
+    "perception-cue-cricket": 49,
+    "language-question-quail": 64,
+    "imagination-fable-fawn": 62,
+    "memory-recall-robin": 62
+  },
+  "longGames": [
+    {
+      "colour": "reason",
+      "seed": 0,
+      "monoSeat": 0,
+      "turn": 61,
+      "round": 31,
+      "players": [
+        {
+          "hearts": 12,
+          "deck": 0,
+          "hand": 4,
+          "exhaustion": 0,
+          "board": [
+            {
+              "name": "Proof Pup",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 3,
+              "health": 4
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        },
+        {
+          "hearts": 10,
+          "deck": 0,
+          "hand": 3,
+          "exhaustion": 0,
+          "board": [
+            {
+              "name": "Billie Eelish",
+              "attack": 5,
+              "health": 8
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 4,
+              "health": 5
+            }
+          ]
+        }
+      ],
+      "lastEvents": [
+        {
+          "t": "fate-move",
+          "text": "Round 29 ends: Fate moves 1 space.",
+          "turn": 59,
+          "round": 29
+        },
+        {
+          "t": "round",
+          "text": "Round 30.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "turn",
+          "player": 0,
+          "text": "You: 10 energy. Choose a draw.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "bonus",
+          "player": 0,
+          "text": "Momentum: more creatures in play, so +1 card activation this turn.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "turn-end",
+          "player": 0,
+          "text": "You end the turn.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "turn",
+          "player": 1,
+          "text": "Rival: 10 energy. Choose a draw.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "axiom-play",
+          "player": 1,
+          "id": "flux-plays-minus-1",
+          "text": "Rival plays a rule card.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "axiom",
+          "id": "flux-plays-minus-1",
+          "player": 1,
+          "basic": false,
+          "text": "Rule change — plays: One Fewer Move. Activations: 2 → 1",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "spark",
+          "player": 1,
+          "text": "Rival uses the Spark: +1 energy this turn.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "turn-end",
+          "player": 1,
+          "text": "Rival ends the turn.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "fate-move",
+          "text": "Round 30 ends: Fate moves 1 space.",
+          "turn": 61,
+          "round": 30
+        },
+        {
+          "t": "reset",
+          "text": "Fate reset: all rules return to the basics.",
+          "turn": 61,
+          "round": 30
+        },
+        {
+          "t": "fate-next",
+          "id": "two-plays",
+          "text": "Fate sets aside the next free rule: Two Moves.",
+          "turn": 61,
+          "round": 30
+        },
+        {
+          "t": "round",
+          "text": "Round 31.",
+          "turn": 61,
+          "round": 31
+        },
+        {
+          "t": "limit",
+          "text": "The rift closes after 60 turns. Draw.",
+          "turn": 61,
+          "round": 31
+        },
+        {
+          "t": "end",
+          "winner": "draw",
+          "reason": "turn-limit",
+          "text": "The battle ends in a draw.",
+          "turn": 61,
+          "round": 31
+        }
+      ]
+    }
+  ]
+}

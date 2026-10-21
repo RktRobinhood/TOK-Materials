@@ -1,7 +1,8 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "creative proposals, not shipped cards",
+  "status": "210 screened concepts; seven foundation-1 runtime cards, 203 held",
+  "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
     "affinity": {
@@ -47,15 +48,23 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "No ability.",
+      "text": "Entrance: reveal your top personal-deck card. If it is a spell with printed cost 1 or less, draw it; otherwise leave it there.",
       "tags": [
-        "board"
+        "inspection",
+        "draw"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
-      "counterplay": "Trade with a larger creature.",
-      "status": "draft; not implemented or balance-tested",
+      "counterplay": "A costly card or creature leaves the revealed top card in place.",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "No ability.",
+        "rationale": "Tom Skink now checks one small premise instead of adding a recoloured vanilla body. Conditional public reveal differs from Lens Lizard and paid selection."
+      },
       "gates": [
         109
       ],
@@ -75,15 +84,22 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard.",
+      "text": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
       "tags": [
-        "guard"
+        "guard",
+        "shield"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
-      "counterplay": "Remove Guard or use a spell.",
+      "counterplay": "Keep equal board numbers, consume Shield with a small hit, or silence it.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Guard.",
+        "rationale": "Bill Ny-ant compares board counts once. A conditional catch-up shield differs from vanilla Guard and unconditional Beansprout Shield."
+      },
       "gates": [
         109
       ],
@@ -131,15 +147,22 @@
       "cost": 3,
       "attack": 2,
       "health": 2,
-      "text": "Entrance: deal 1 damage to an enemy creature.",
+      "text": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
       "tags": [
-        "damage"
+        "damage",
+        "mixed-board"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
-      "counterplay": "Shield protects a small target.",
+      "counterplay": "Remove the other colour first; Shield still prevents the single damage packet.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Entrance: deal 1 damage to an enemy creature.",
+        "rationale": "Adopt the STRATEGY-IDENTITY mixed bridge. V-Squish asks whether one extra kind of evidence changes the answer. Generic bodies do not qualify."
+      },
       "gates": [
         109
       ],
@@ -394,17 +417,25 @@
       "cost": 1,
       "attack": 2,
       "health": 1,
-      "text": "No ability.",
+      "text": "Once per match, after this survives a fight on your turn, ready one additional attack for it. Normal card activations still apply.",
       "tags": [
-        "board"
+        "combat",
+        "ready"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
-      "counterplay": "Trade a small creature.",
+      "counterplay": "Defeat it in the first fight, freeze it, or consume the shared activation budget.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "No ability.",
+        "rationale": "Dua Leapfrog gets one bounded second leap instead of a vanilla attack body. This is not permanent double attack or a shared activation refund."
+      },
       "gates": [
-        109
+        109,
+        127
       ],
       "art": "creature/emotion-pulse-pup/idle",
       "acquisition": {
@@ -422,15 +453,23 @@
       "cost": 2,
       "attack": 2,
       "health": 2,
-      "text": "Entrance: restore 1 heart to your hero.",
+      "text": "Entrance: restore 1 heart to your hero. If that restoration fills your hero to maximum hearts, this gains Shield.",
       "tags": [
-        "healing"
+        "healing",
+        "shield"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
-      "counterplay": "Keep pressure on its board.",
-      "status": "draft; not implemented or balance-tested",
+      "counterplay": "Keep the hero wounded or already full so no qualifying restoration occurs.",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Entrance: restore 1 heart to your hero.",
+        "rationale": "Simone Bearles turns exactly finishing recovery into protection. Obambu only heals; Proof Pup heals another creature."
+      },
       "gates": [
         109
       ],
@@ -741,9 +780,10 @@
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Pressure instead of giving planning time.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
       "gates": [
         109
       ],
@@ -820,17 +860,25 @@
       "cost": 2,
       "attack": 2,
       "health": 1,
-      "text": "Elusive.",
+      "text": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
       "tags": [
-        "elusive"
+        "elusive",
+        "combat"
       ],
       "strategy": "Information, exposed targets and visible future plans",
-      "counterplay": "Use a spell or remove Elusive.",
+      "counterplay": "Wait for the hero attack to expose it, then use a targeted answer.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Elusive.",
+        "rationale": "David Brine must trade concealment for pressure. Shakirattle keeps Elusive; this opens a visible response window."
+      },
       "gates": [
-        109
+        109,
+        127
       ],
       "art": "creature/perception-shadow-shrimp/idle",
       "acquisition": {
@@ -1091,9 +1139,10 @@
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use removal, Guard or another Freeze; normal action limits still apply.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
       "gates": [
         109
       ],
@@ -1113,15 +1162,23 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard.",
+      "text": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
       "tags": [
-        "guard"
+        "guard",
+        "inspection",
+        "draw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
-      "counterplay": "Remove Guard or use a spell.",
+      "counterplay": "Silence it or make the opponent use their held rules first.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Guard.",
+        "rationale": "Emma Wordson exchanges a public held-rule clue for a last-word draw. This is neither plain Guard nor Footnote Finch attack growth."
+      },
       "gates": [
         109
       ],
@@ -1432,15 +1489,21 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "No ability.",
+      "text": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
       "tags": [
-        "board"
+        "transform"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
-      "counterplay": "Trade a larger creature.",
+      "counterplay": "Deny the matching teammate; after the swap, trade into its lower health.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "No ability.",
+        "rationale": "Luka Donchilla now has a teammate setup and a one-time self transformation. Paper Dragon pays to swap itself later; Fable Fawn changes another ally."
+      },
       "gates": [
         109
       ],
@@ -1488,15 +1551,23 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+      "text": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules. In a mono-Imagination deck, it then gains 1 maximum health and heals 1.",
       "tags": [
-        "transformation"
+        "transform",
+        "mono-deck"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
-      "counterplay": "Use balanced bodies or remove the transformed threat.",
-      "status": "draft; not implemented or balance-tested",
+      "counterplay": "Balanced stats limit the swap; remove the newly fragile creature.",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Entrance: swap the attack and health of another friendly creature using normal stat-swap rules.",
+        "rationale": "Adopt the STRATEGY-IDENTITY oddity and construction payoff. Generic cards do not break mono; printed Memory is its own sixth colour."
+      },
       "gates": [
         109
       ],
@@ -1814,9 +1885,10 @@
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Race before it is redrawn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "runtimeRelease": "foundation-1",
       "gates": [
         109
       ],
@@ -1836,15 +1908,22 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard.",
+      "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
       "tags": [
-        "guard"
+        "guard",
+        "recursion"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
-      "counterplay": "Remove Guard or use spells.",
+      "counterplay": "Silence it or force an unwanted oldest spell; it replaces a later draw rather than creating a copy.",
       "status": "draft; not implemented or balance-tested",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Guard.",
+        "rationale": "Niklas Landillo marks a precise place in the archive instead of plain Guard. Recall Robin recycles the newest spell to the bottom on Entrance."
+      },
       "gates": [
         109
       ],
@@ -2160,13 +2239,20 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Give 1 maximum health and heal 1.",
+      "text": "Give 1 maximum health and heal 1. If the target had equal current attack and current health before this effect, also give Guard until your next turn starts.",
       "tags": [
-        "healing"
+        "healing",
+        "guard"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
-      "counterplay": "Use removal instead of chip damage.",
+      "counterplay": "Damage or change the target so its values no longer match; temporary Guard can expire.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Give 1 maximum health and heal 1.",
+        "rationale": "The former text exactly repeated shipped Careful Words. Equality now creates a precise defensive case."
+      },
       "gates": [
         109
       ],
@@ -2468,13 +2554,19 @@
       "rarity": "common",
       "cost": 1,
       "target": "enemy-creature",
-      "text": "Reduce its attack by 2 until its controller's next turn ends, minimum 0.",
+      "text": "Until its controller's next turn ends, the chosen enemy creature may attack creatures but not heroes.",
       "tags": [
         "control"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
-      "counterplay": "Wait or use another attacker.",
+      "counterplay": "Fight creatures, use spells or silence away the temporary restriction.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Reduce its attack by 2 until its controller's next turn ends, minimum 0.",
+        "rationale": "Spec review found the old -2 attack was only an affinity/number change from Generic Settle Down. This redirects aggression without reducing creature-fight damage."
+      },
       "gates": [
         109
       ],
@@ -2544,14 +2636,20 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "none",
-      "text": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+      "text": "At +1 round, your next declared creature attack on an enemy hero that round deals 1 extra damage. Lose 1 own heart when declaring it; resolve Win before damage.",
       "tags": [
         "fate-schedule",
-        "buff"
+        "self-damage"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
-      "counterplay": "Trade the board or skip the node.",
+      "counterplay": "Skip the announcement, block hero attacks with Guard, or exploit the heart payment.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+        "rationale": "The former team buff duplicated both Language Tomorrow's Address and shipped Scheduled Speech. Chosen risk now has a specific delayed attack window."
+      },
       "gates": [
         109,
         118,
@@ -2959,13 +3057,20 @@
       "rarity": "common",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Give Guard and 1 maximum health; heal it by 1.",
+      "text": "Give Guard until your next turn starts. If the target was frozen, remove only its Freeze and heal it by 1.",
       "tags": [
-        "guard"
+        "guard",
+        "thaw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
-      "counterplay": "Remove Guard or target with spells.",
+      "counterplay": "Use removal or a later Freeze. Sleeping and spent attacks remain spent.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Give Guard and 1 maximum health; heal it by 1.",
+        "rationale": "The former permanent Guard/health package was a number-only Stand Firm variant. This is temporary defensive support with a specific interruption answer; Jimmy remains a creature Entrance thaw."
+      },
       "gates": [
         109
       ],
@@ -3035,13 +3140,20 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "friendly-creature",
-      "text": "Give 1 attack and 2 maximum health; heal it by 2.",
+      "text": "Remove one temporary attack debuff from the target, then give it 1 attack until your next turn starts. Permanent changes remain.",
       "tags": [
-        "buff"
+        "buff",
+        "control"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
-      "counterplay": "Silence or remove the supported creature.",
+      "counterplay": "Use permanent reduction, silence or a second temporary debuff.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Give 1 attack and 2 maximum health; heal it by 2.",
+        "rationale": "The former +1/+2 package was a number-only Pep Talk variant. This repairs one specific wording change and supplies a bounded follow-up."
+      },
       "gates": [
         109
       ],
@@ -3060,13 +3172,20 @@
       "rarity": "uncommon",
       "cost": 2,
       "target": "none",
-      "text": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+      "text": "At +1 round, gain this public permission until that round ends: after your next Axiom played from hand, draw 1 personal-deck card. Consume it before drawing.",
       "tags": [
-        "fate-schedule"
+        "fate-schedule",
+        "draw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
-      "counterplay": "Trade the board or skip the occurrence.",
+      "counterplay": "Skip the occurrence or deny an affordable held rule; unused permission expires.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "At +1 round, your creatures present then gain 1 attack until your next turn ends.",
+        "rationale": "Replace the identical scheduled team buff with a one-use delayed rule-speaking invitation; no environmental flip counts."
+      },
       "gates": [
         109,
         118,
@@ -3821,15 +3940,22 @@
       "kind": "axiom",
       "rarity": "mythic",
       "cost": 3,
-      "category": "fate-delay",
-      "text": "New effects from either player are scheduled 1 round later, maximum +4 rounds. Announced events do not move.",
+      "category": "fate-inspection",
+      "text": "After a player's own scheduled one-shot resolves, that player may inspect the top unreserved shared Axiom without drawing or moving it. Once per player per round.",
       "tags": [
         "axiom",
-        "fate-schedule"
+        "fate-schedule",
+        "inspection"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
-      "counterplay": "Replace before scheduling.",
+      "counterplay": "Skip their event or reorder the shared deck before their next draw.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "New effects from either player are scheduled 1 round later, maximum +4 rounds. Announced events do not move.",
+        "rationale": "The former +1 scheduling delay exactly repeated Patient Plans. This rule rewards completed plans with bounded information, never reserved-card inspection."
+      },
       "gates": [
         109,
         118,
@@ -3850,13 +3976,20 @@
       "rarity": "common",
       "cost": 1,
       "category": "damage",
-      "text": "Each creature attack on a hero deals at most 2 damage.",
+      "text": "When a hero has fewer hearts than the other hero, reduce damage from each creature attack on that hero by 1, minimum 0. Spell damage is unchanged.",
       "tags": [
-        "axiom"
+        "axiom",
+        "prevention"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
-      "counterplay": "Attack repeatedly or use spells.",
+      "counterplay": "Equalise hearts, use spells, replace the rule or exploit the active Win condition.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Each creature attack on a hero deals at most 2 damage.",
+        "rationale": "The former attack cap of 2 was only a number change from Doubt. Relative hearts now change which side receives protection."
+      },
       "gates": [
         109
       ],
@@ -4142,15 +4275,22 @@
       "kind": "axiom",
       "rarity": "mythic",
       "cost": 3,
-      "category": "fate-capacity",
-      "text": "Each player may hold one additional pending player-created event. Environmental events use no player slots.",
+      "category": "fate-inspection",
+      "text": "At a player's normal personal-deck draw, if that player has 2 or more pending player events, inspect the top card and optionally bottom it before drawing normally. Once per turn.",
       "tags": [
         "axiom",
-        "fate-schedule"
+        "fate-schedule",
+        "inspection"
       ],
       "strategy": "Information, exposed targets and visible future plans",
-      "counterplay": "Skip or cancel the highest-impact event.",
+      "counterplay": "Skip a pending event; the normal draw, hand limit and exhaustion still apply.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Each player may hold one additional pending player-created event. Environmental events use no player slots.",
+        "rationale": "The former extra pending slot duplicated Open Calendar at the normal two-slot limit. Prepared plans now improve one actual draw rather than capacity."
+      },
       "gates": [
         109,
         118,
@@ -4681,13 +4821,21 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Heal it by 2 without changing maximum health.",
+      "text": "Heal it by 2 without changing maximum health, or 3 in a mono-colour personal deck.",
       "tags": [
-        "healing"
+        "healing",
+        "mono-deck"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
-      "counterplay": "Defeat it in one hit.",
-      "status": "draft; not implemented or balance-tested",
+      "counterplay": "Defeat the target before healing; an all-generic deck has no mono colour.",
+      "status": "Released in foundation-1; bounded engineering validation, not classroom balance certification",
+      "runtimeRelease": "foundation-1",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Heal it by 2 without changing maximum health.",
+        "rationale": "Adopt the small construction bridge. Identity is fixed from submitted personal cards, never the shared Axioms or live board."
+      },
       "gates": [
         109
       ],
@@ -4858,13 +5006,19 @@
       "rarity": "common",
       "cost": 2,
       "target": "enemy-creature",
-      "text": "Deal 2 damage if already damaged, otherwise 1.",
+      "text": "Deal 2 damage if one of your creatures already attacked an enemy hero this turn, otherwise 1.",
       "tags": [
         "damage"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
-      "counterplay": "Heal before it is cast.",
+      "counterplay": "Guard or Freeze stops the prerequisite hero attack; Shield still blocks the spell.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Deal 2 damage if already damaged, otherwise 1.",
+        "rationale": "The former damaged-target bonus exactly repeated Perception Notice the Crack with a different cost. Attack sequencing is a distinct generic bridge."
+      },
       "gates": [
         109
       ],
@@ -5286,14 +5440,20 @@
       "rarity": "common",
       "cost": 1,
       "category": "hand",
-      "text": "At the end of each player's turn, keep at most 5 cards; discard the oldest excess cards.",
+      "text": "At each player's turn end, if they hold 5 or more cards, put their highest printed-cost held card on the bottom of its own deck. Ties use oldest hand arrival.",
       "tags": [
         "axiom",
         "hand"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
-      "counterplay": "Play cards before the limit checks.",
+      "counterplay": "Play expensive cards first; fewer than 5 cards avoids the check.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "At the end of each player's turn, keep at most 5 cards; discard the oldest excess cards.",
+        "rationale": "The former five-card discard cap was a number-only Limited Memory variant. Cost ordering and bottom-deck recycling change the decision."
+      },
       "gates": [
         109
       ],
@@ -5603,13 +5763,20 @@
       "rarity": "uncommon",
       "cost": 2,
       "category": "board-capacity",
-      "text": "Playing a new creature requires a free slot beyond it: a player at one below the normal board limit cannot add another. Existing boards remain.",
+      "text": "A player who began their turn with a full creature board cannot play or summon creatures during that turn, even after making room. Existing creatures remain.",
       "tags": [
-        "axiom"
+        "axiom",
+        "board-snapshot"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
-      "counterplay": "Trade before playing or replace the limit.",
+      "counterplay": "Keep one slot empty before your turn or replace the rule; ordinary full-board protection still applies.",
       "status": "draft; not implemented or balance-tested",
+      "revision": {
+        "issue": 123,
+        "date": "2026-10-21",
+        "previousText": "Playing a new creature requires a free slot beyond it: a player at one below the normal board limit cannot add another. Existing boards remain.",
+        "rationale": "The former spare-slot limit duplicated Small Armies on the standard board. A start-of-turn snapshot now changes when to trade."
+      },
       "gates": [
         109
       ],

@@ -476,7 +476,8 @@
                 el('p.small', { text: Rift.State.walletOf(s).coins + ' Coins · ' + Rift.State.walletOf(s).freePacks + ' free packs saved. The pack stall is at the Campfire Clearing.' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
                 el('div.panel.deck-panel.stack', null, [
-                    el('h3', { text: 'Build decks' }),
+                el('h3', { text: 'Build decks' }),
+                el('p.small', { text: 'One colour plus generic cards makes a mono deck. Memory counts as a colour. Shared Axioms do not count. Both players see each deck\'s mono identity at the start.' }),
                     summary,
                     // Your hero's power in the Card Arena (design/AVATARS.md 1.6).
                     s.avatar && Rift.PowerView ? Rift.PowerView.panel(s.avatar) : null,
