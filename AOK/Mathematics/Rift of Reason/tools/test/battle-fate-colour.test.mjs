@@ -432,8 +432,8 @@ test('saves and backups: the battle state with tokens and timing rules survives 
     assert.equal(logOf(s, 'summon').length, 0, 'the input state is untouched');
     // Save codes carry card ids as text, so a later grant of these cards survives a backup code.
     const save = Rift.State.freshState();
-    save.tactics = ['prepared-defence', 'tomorrows-idea'];
-    save.axioms = ['patient-plans', 'open-calendar'];
+    ['prepared-defence', 'tomorrows-idea'].forEach(id => Rift.State.grantTactic(id, save));
+    ['patient-plans', 'open-calendar'].forEach(id => Rift.State.grantAxiom(id, save));
     const back = Rift.State.migrate(await Rift.State.decodeAsync('save', await Rift.State.encodePacked('save', save)));
     assert.deepEqual(plain(back.tactics), ['prepared-defence', 'tomorrows-idea']);
     assert.deepEqual(plain(back.axioms), ['patient-plans', 'open-calendar']);

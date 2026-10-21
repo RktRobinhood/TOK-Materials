@@ -51,11 +51,11 @@
         let tactic = [t.rewardTactic].concat(earned).find(id => id && earned.includes(id) && !owned.includes(id)) || null;
         // Every earned tactic owned already: the uncommon colour tactic of the trainer's main colour.
         if (!tactic) tactic = trainerUncommon(t, owned);
-        if (tactic) state.tactics.push(tactic);
+        if (tactic) Rift.State.grantTactic(tactic, state);
         let axiom = null;
         if (trainerId === 'constable' && (Rift.data.axioms || {}).infinity) {
             state.axioms = state.axioms || [];
-            if (!state.axioms.includes('infinity')) { state.axioms.push('infinity'); axiom = 'infinity'; }
+            if (Rift.State.grantAxiom('infinity', state)) axiom = 'infinity';
         }
         const reward = { items: { 'trick-book': 1 }, tactic };
         if (axiom) reward.axiom = axiom;
@@ -139,8 +139,7 @@
             const pick = cardTrack(state)[slot].map(cardRef).find(c => cardKnown(c) && !cardOwned(state, c)) || null;
             if (pick && pick.kind === 'tactic') Rift.State.grantTactic(pick.id, state);
             if (pick && pick.kind === 'axiom') {
-                if (!Array.isArray(state.axioms)) state.axioms = [];
-                state.axioms.push(pick.id);
+                Rift.State.grantAxiom(pick.id, state);
             }
             const receipt = { v: ((Rift.data || {}).starterDecks || {}).rewardsVersion || 1, node: id, kind: pick ? pick.kind : null, id: pick ? pick.id : null };
             if (!state.flags) state.flags = {};
@@ -327,7 +326,7 @@
     function applyRewards(state, r) {
         state.xp += r.xp;
         Object.entries(r.items).forEach(([id, k]) => { state.items[id] = (state.items[id] || 0) + k; });
-        if (r.tactic) { state.tactics = state.tactics || []; if (!state.tactics.includes(r.tactic)) state.tactics.push(r.tactic); }
+        if (r.tactic && !Rift.State.ownedTactics(state).includes(r.tactic)) Rift.State.grantTactic(r.tactic, state);
     }
 
     function level(state) {

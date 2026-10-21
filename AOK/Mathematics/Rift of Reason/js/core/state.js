@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 5;
+    const STATE_VERSION = 6;
     const STORAGE_KEY = 'rift-of-reason:save';
     const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
     const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
@@ -15,7 +15,7 @@
     const PACKED_PREFIX = 'ROR2';      // base64 of deflated JSON: save codes, about ten times shorter
 
     function freshState() {
-        return {
+        const s = {
             version: STATE_VERSION,
             createdAt: Date.now(),
             seed: Math.floor(Math.random() * 2 ** 31),
@@ -43,6 +43,7 @@
             axioms: [],            // axiom ids added to the player's pool
             axiomLoadout: [],      // ten chosen cards (≤2 copies each); empty saves receive the starter selection
             tactics: [],           // earned tactic ids beyond the starter pool (data/tactics.js)
+            cardPrints: { v: 1, ready: {}, colours: {}, tactic: {}, axiom: {} }, // normal/foil booleans per actual non-creature copy (#131)
             deckTactics: [],       // chosen tactic cards for the own deck (validateDeck rules); empty = the starter ten
             rumours: [],           // rumour ids heard
             lures: {},             // node id -> visits of boosted rare spawns left
@@ -57,6 +58,8 @@
             // New progress (coins, card backs, quests, Rift Run…) goes in this object too, so backup
             // codes carry it automatically; tools/test/save-codes.test.mjs checks every field survives.
         };
+        reconcilePrints(s);
+        return s;
     }
 
     // ---- creature variation (design/card-arena-2026-10-07.md, "Variation") ----------
@@ -166,17 +169,80 @@
         const counts = {};
         return (s.creatures || []).filter(c => c && (counts[c.species] = (counts[c.species] || 0) + 1) <= deckCopies(c.species)).slice(0, 10);
     }
-    // Tactics this player may put in a deck: the starter pool plus earned ones.
+    // ---- counted spell/Axiom prints (#131) -----------------------------------------------
+    // Keep historical unlock lists, caught instances and loadouts intact. A ready ledger is
+    // authoritative, including empty folders: loading a backup must never refill retired cards.
+    function reconcilePrints(s) {
+        if (!s.cardPrints) s.cardPrints = { v: 1, ready: {}, tactic: {}, axiom: {} };
+        const P = s.cardPrints, data = Rift.data || {};
+        P.ready = P.ready || {};
+        P.colours = P.colours || {};
+        for (const kind of ['tactic', 'axiom']) {
+            if (!P[kind]) P[kind] = {};
+            const decks = data[kind === 'tactic' ? 'tacticDecks' : 'axiomDecks'];
+            // Core-only tools may load before the card data; reconcile that kind later.
+            if (P.ready[kind] || !decks) continue;
+            const unlocked = s[kind === 'tactic' ? 'tactics' : 'axioms'] || [];
+            // The former implicit starting pool is now a real two-copy normal entitlement.
+            // Old unlocked IDs also get two, preserving every previously legal two-copy deck.
+            new Set((decks.starter || []).concat(unlocked)).forEach(id => {
+                if (!printDefinition(kind, id)) return;
+                if (!Array.isArray(P[kind][id])) P[kind][id] = [false, false];
+            });
+            P.ready[kind] = true;
+        }
+        return P;
+    }
+    function printDefinition(kind, id) {
+        const defs = (Rift.data || {})[kind === 'tactic' ? 'tactics' : kind === 'axiom' ? 'axioms' : ''];
+        const def = defs && Object.prototype.hasOwnProperty.call(defs, id) && defs[id];
+        return def && !(kind === 'axiom' && def.own) ? def : null;
+    }
+    function printsOf(kind, id, save) {
+        const s = save || current;
+        if (!s || !['tactic', 'axiom'].includes(kind)) return [];
+        const list = reconcilePrints(s)[kind][id];
+        return Array.isArray(list) ? list.slice() : [];
+    }
+    function cardCopies(kind, id, save) { return printsOf(kind, id, save).length; }
+    function cardRoom(kind, id, save) { return printDefinition(kind, id) ? Math.max(0, COPY_CAP - cardCopies(kind, id, save)) : 0; }
+    function printCounts(kind, save) {
+        const s = save || current, out = {};
+        if (!s || !['tactic', 'axiom'].includes(kind)) return out;
+        const ledger = reconcilePrints(s)[kind];
+        Object.keys(ledger).forEach(id => { out[id] = Array.isArray(ledger[id]) ? ledger[id].length : 0; });
+        return out;
+    }
+    function grantPrint(kind, id, save, opts) {
+        const s = save || current;
+        if (!s || !printDefinition(kind, id) || !cardRoom(kind, id, s)) return false;
+        const P = reconcilePrints(s), key = kind === 'tactic' ? 'tactics' : 'axioms';
+        if (!Array.isArray(P[kind][id])) P[kind][id] = [];
+        P[kind][id].push(!!(opts && opts.foil));
+        if (!Array.isArray(s[key])) s[key] = [];
+        const initial = (((Rift.data || {})[kind === 'tactic' ? 'tacticDecks' : 'axiomDecks']) || {}).starter || [];
+        if (!initial.includes(id) && !s[key].includes(id)) s[key].push(id);
+        return true;
+    }
+    function releasePrint(kind, id, index, save) {
+        const s = save || current, list = printsOf(kind, id, s);
+        if (!s || !Number.isInteger(index) || index < 0 || index >= list.length) return false;
+        const chosen = kind === 'tactic' ? deckTactics(s) : axiomLoadout(s);
+        if (list.length <= chosen.filter(c => c === id).length) return false;
+        reconcilePrints(s)[kind][id].splice(index, 1);
+        return true;
+    }
+    // Tactics this player can actually put in a deck (historical unlocks alone do not suffice).
     function ownedTactics(save) {
         const s = save || current || {};
         const known = (Rift.data || {}).tactics || {};
-        const decks = (Rift.data || {}).tacticDecks || { starter: [] };
-        return Array.from(new Set(decks.starter.concat(s.tactics || []))).filter(id => known[id]);
+        const counts = printCounts('tactic', s);
+        return Object.keys(counts).filter(id => known[id] && counts[id] > 0);
     }
     // Colour tactics (data/tactics.js tacticDecks.colour, [common, uncommon, rare] per colour): the
     // COMMON unlocks the first time the player owns a creature (or trophy copy) of that colour. Adds it
     // to save.tactics and returns the ids that are new. Old saves get theirs on load (migrate).
-    function unlockColourTactics(save) {
+    function unlockColourTactics(save, legacy) {
         const s = save || current;
         if (!s) return [];
         const byColour = ((Rift.data || {}).tacticDecks || {}).colour || {};
@@ -185,20 +251,22 @@
         (s.creatures || []).concat(s.trophies || []).forEach(inst => {
             const sp = inst && creatures[inst.species];
             const common = sp && (byColour[sp.colour] || [])[0];
-            if (common && grantTactic(common, s)) fresh.push(common);
+            if (!common) return;
+            const receipts = reconcilePrints(s).colours;
+            if (receipts[sp.colour]) return;
+            // Starter/legacy ownership already supplies this introduction; do not add it on reload.
+            if (!cardCopies('tactic', common, s) && grantTactic(common, s)) {
+                fresh.push(common);
+                if (legacy) grantTactic(common, s); // preserve formerly usable pairs for colours already caught
+            }
+            receipts[sp.colour] = true;
         });
         return fresh;
     }
-    // Gives the player a tactic to use in decks (vendor, quests, Rift Run, trainer rewards…).
-    // Returns true when it is new. Does not save; use inside State.update or on a save object.
-    function grantTactic(id, save) {
-        const s = save || current;
-        if (!s || !((Rift.data || {}).tactics || {})[id]) return false;
-        if (!Array.isArray(s.tactics)) s.tactics = [];
-        if (s.tactics.includes(id) || ownedTactics(s).includes(id)) return false;
-        s.tactics.push(id);
-        return true;
-    }
+    // Grants one actual copy; source receipts prevent repeating once-only rewards.
+    // No save or RNG here: pack selection and independent foil rolls belong to the acquisition caller.
+    function grantTactic(id, save, opts) { return grantPrint('tactic', id, save, opts); }
+    function grantAxiom(id, save, opts) { return grantPrint('axiom', id, save, opts); }
     // The chosen tactic cards exactly as saved, else the starter ten. Nothing is dropped quietly:
     // validateDeck (through ownDeck) reports cards that break a rule, so the player can repair them.
     function deckTactics(save) {
@@ -210,8 +278,8 @@
     function ownedAxioms(save) {
         const s = save || current || {};
         const known = (Rift.data || {}).axioms || {};
-        const starter = ((Rift.data || {}).axiomDecks || {}).starter || [];
-        return Array.from(new Set(starter.concat(s.axioms || []))).filter(id => known[id] && !known[id].own);
+        const counts = printCounts('axiom', s);
+        return Object.keys(counts).filter(id => known[id] && !known[id].own && counts[id] > 0);
     }
     // The ten axiom cards: the saved loadout exactly as saved, else the fixed introductory ten.
     // Earned-pool order never changes this fallback; construction remains an explicit player choice.
@@ -306,6 +374,7 @@
             if (!known[id]) add('deck', 'unknown', 'Unknown tactic card: ' + id + '. Remove it.', { id });
             else if (o.owned && !o.owned.includes(id)) add('deck', 'unowned', 'You do not own ' + nameOf(known, id) + ' yet. Remove it.', { id });
             if (known[id] && copies.tactics[id] > R.copies) add('deck', 'copies', nameOf(known, id) + ': at most ' + R.copies + ' copies. Remove ' + (copies.tactics[id] - R.copies) + '.', { id });
+            if (known[id] && o.ownedCounts && copies.tactics[id] <= R.copies && (!o.owned || o.owned.includes(id)) && copies.tactics[id] > (o.ownedCounts[id] || 0)) add('deck', 'unowned-copies', 'You own ' + (o.ownedCounts[id] || 0) + ((o.ownedCounts[id] || 0) === 1 ? ' copy of ' : ' copies of ') + nameOf(known, id) + '. Remove the extra copies.', { id });
         });
         Object.keys(quota).forEach(c => {
             const q = quota[c];
@@ -334,6 +403,7 @@
                 else if (ax.own) add('axioms', 'own', ax.name + ' starts in your hand. It is not one of the ten.', { id });
                 else if (o.ownedAxioms && !o.ownedAxioms.includes(id)) add('axioms', 'unowned', 'You do not own ' + ax.name + ' yet. Remove it.', { id });
                 if (ax && copies.axioms[id] > R.axiomCopies) add('axioms', 'copies', ax.name + ': at most ' + R.axiomCopies + ' copies. Remove ' + (copies.axioms[id] - R.axiomCopies) + '.', { id });
+                if (ax && !ax.own && o.ownedAxiomCounts && copies.axioms[id] <= R.axiomCopies && (!o.ownedAxioms || o.ownedAxioms.includes(id)) && copies.axioms[id] > (o.ownedAxiomCounts[id] || 0)) add('axioms', 'unowned-copies', 'You own ' + (o.ownedAxiomCounts[id] || 0) + ((o.ownedAxiomCounts[id] || 0) === 1 ? ' copy of ' : ' copies of ') + nameOf(axDefs, id) + '. Remove the extra copies.', { id });
             });
             const k = d.axioms.length;
             if (k > R.axioms) add('axioms', 'size', 'Axiom cards ' + k + '/' + R.axioms + ': remove ' + (k - R.axioms) + '.');
@@ -370,7 +440,7 @@
         const axioms = axiomLoadout(s);
         const loans = [];
         const check = validateDeck({ creatures: team, tactics, axioms, missing },
-            { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s) });
+            { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s), ownedCounts: printCounts('tactic', s), ownedAxiomCounts: printCounts('axiom', s) });
         return { team, tactics, axioms, loans, missing, custom: !!(chosen.length || (s.deckTactics || []).length), check };
     }
 
@@ -405,7 +475,10 @@
             if (!s.seen.includes(species)) s.seen.push(species);
             return uid;
         });
-        const unlocked = Array.from(new Set(deck.tactics)).filter(id => grantTactic(id, s));
+        const before = new Set(ownedTactics(s));
+        deck.tactics.forEach(id => grantTactic(id, s));
+        deck.axioms.forEach(id => grantAxiom(id, s));
+        const unlocked = Array.from(new Set(deck.tactics)).filter(id => !before.has(id));
         if (fresh) {
             s.team = uids.slice();
             s.deckTactics = deck.tactics.slice();
@@ -561,9 +634,11 @@
         s.version = 5;
         return s;
     };
+    MIGRATIONS[5] = s => { s.cardPrints = s.cardPrints || { v: 1, ready: {}, tactic: {}, axiom: {} }; s.version = 6; return s; };
 
     function migrate(state) {
         let s = state;
+        const legacyPrints = s.version < 6 || !s.cardPrints;
         while (s.version < STATE_VERSION) {
             const step = MIGRATIONS[s.version];
             if (!step) throw new Error('No migration from version ' + s.version);
@@ -574,9 +649,13 @@
         // Saves from before the Ambience slider (10 Oct): add it, and lower an untouched Sounds slider.
         if (s.settings && s.settings.ambience == null) { s.settings.ambience = 0.5; if (s.settings.sfx === 0.8) s.settings.sfx = 0.45; }
         // Fill any fields added since this save was made.
+        const prints = s.cardPrints;
         const out = mergeDefaults(freshState(), s);
+        // Dynamic inventory maps must not merge fresh entitlements into an existing ledger.
+        out.cardPrints = prints || { v: 1, ready: {}, tactic: {}, axiom: {} };
+        reconcilePrints(out);
         // Colour tactics for the colours this save already owns (saves made before they existed).
-        unlockColourTactics(out);
+        unlockColourTactics(out, legacyPrints);
         return out;
     }
 
@@ -733,6 +812,17 @@
         const badList = list => list !== undefined && (!Array.isArray(list)
             || list.some(c => !c || typeof c !== 'object' || typeof c.uid !== 'string' || typeof c.species !== 'string'));
         if (badList(p.creatures) || badList(p.trophies)) throw codeError('damaged');
+        if (p.cardPrints != null) {
+            const record = x => x && typeof x === 'object' && !Array.isArray(x);
+            const prints = p.cardPrints;
+            if (!record(prints)) throw codeError('damaged');
+            for (const kind of ['tactic', 'axiom']) {
+                if (prints[kind] !== undefined && (!record(prints[kind]) || Object.values(prints[kind]).some(list => !Array.isArray(list) || list.some(foil => typeof foil !== 'boolean')))) throw codeError('damaged');
+            }
+            for (const key of ['ready', 'colours']) {
+                if (prints[key] !== undefined && (!record(prints[key]) || Object.values(prints[key]).some(v => typeof v !== 'boolean'))) throw codeError('damaged');
+            }
+        }
         try {
             const s = migrate(JSON.parse(JSON.stringify(p)));
             JSON.stringify(s);
@@ -921,6 +1011,13 @@
         ownedAxioms,
         unlockColourTactics,
         grantTactic,
+        grantAxiom,
+        grantPrint,
+        printsOf,
+        cardCopies,
+        cardRoom,
+        printCounts,
+        releasePrint,
         deckTactics,
         axiomLoadout,
         DECK_SIZE,

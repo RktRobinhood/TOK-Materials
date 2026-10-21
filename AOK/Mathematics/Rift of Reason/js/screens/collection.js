@@ -151,7 +151,7 @@
         };
         const speciesCount = sp => chosenTeam().filter(x => x.species === sp).length;
         const tacticTotal = () => chosenTactics().length;
-        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned });
+        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned, ownedCounts: S.printCounts('tactic', s) });
         const tacticDef = id => Rift.data.tactics[id] || { name: id, cost: '?', text: 'This card is no longer in the game. Remove it.' };
         const nameOf = sp => Rift.data.creatures[sp].name;
 
@@ -169,6 +169,7 @@
             if (!t) return 'This card is no longer in the game.';
             if (!owned.includes(id)) return 'You do not own ' + t.name + ' yet.';
             if ((counts[id] || 0) >= RULES.copies) return 'At most ' + RULES.copies + ' copies of ' + t.name + '.';
+            if ((counts[id] || 0) >= S.cardCopies('tactic', id, s)) return 'You own only ' + S.cardCopies('tactic', id, s) + (S.cardCopies('tactic', id, s) === 1 ? ' copy of ' : ' copies of ') + t.name + '.';
             if (tacticTotal() >= RULES.maxTactics) return 'At most ' + RULES.maxTactics + ' tactic cards. Remove one first.';
             if (t.colour) {
                 const q = check().quota[t.colour] || { creatures: 0, tactics: 0 };
@@ -262,6 +263,7 @@
                     t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : el('span.chip', { text: 'generic' }),
                     t.rarity ? ' ' : null, t.rarity ? el('span.chip', { text: t.rarity }) : null,
                     el('div.small', { text: t.text }),
+                    el('div.small', { text: 'Owned copies: ' + S.cardCopies('tactic', id, s) }),
                     quota,
                     !owned.includes(id) ? el('div.small.need-line', { text: Rift.data.tactics[id] ? 'Not owned: remove it.' : 'Not in the game any more: remove it.' }) : null,
                 ]),
@@ -337,12 +339,13 @@
         const steppers = [];
         let saveBtn = null;
         const chosen = () => { const out = []; listed.forEach(id => { for (let i = 0; i < (counts[id] || 0); i++) out.push(id); }); return out; };
-        const check = () => S.validateDeck({ creatures: [], tactics: [], axioms: chosen() }, { complete: true, ownedAxioms: owned });
+        const check = () => S.validateDeck({ creatures: [], tactics: [], axioms: chosen() }, { complete: true, ownedAxioms: owned, ownedAxiomCounts: S.printCounts('axiom', s) });
         const axName = id => ((Rift.data.axioms || {})[id] || { name: id }).name;
         function block(id) {
             if (!Rift.data.axioms[id]) return 'This card is no longer in the game.';
             if (!owned.includes(id)) return 'You do not own ' + axName(id) + ' yet.';
             if ((counts[id] || 0) >= RULES.axiomCopies) return 'At most ' + RULES.axiomCopies + ' copies of ' + axName(id) + '.';
+            if ((counts[id] || 0) >= S.cardCopies('axiom', id, s)) return 'You own only ' + S.cardCopies('axiom', id, s) + (S.cardCopies('axiom', id, s) === 1 ? ' copy of ' : ' copies of ') + axName(id) + '.';
             if (chosen().length >= RULES.axioms) return 'You have ' + RULES.axioms + ' axiom cards. Remove one first.';
             return null;
         }
@@ -377,7 +380,7 @@
             } });
             steppers.push({ id, minus, plus, out });
             return el('div.axiom-option', null, [
-                el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), el('div.small', { text: ax.category + ': ' + ax.text })]),
+                el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), el('div.small', { text: ax.category + ': ' + ax.text }), el('div.small', { text: 'Owned copies: ' + S.cardCopies('axiom', id, s) })]),
                 el('span.stepper', { role: 'group', 'aria-label': ax.name + ' copies' }, [minus, out, plus]),
             ]);
         }));
@@ -408,6 +411,53 @@
         return dialog;
     }
 
+    function editCardFolders(onSaved) {
+        const S = Rift.State, s = S.get(), body = el('div.stack'), notice = el('p.small', { role: 'status' });
+        function refresh(focusKey) {
+            body.replaceChildren();
+            let focusRow = null;
+            for (const kind of ['tactic', 'axiom']) {
+                body.appendChild(el('h3', { text: kind === 'tactic' ? 'Spells' : 'Axioms' }));
+                const counts = S.printCounts(kind, s), defs = Rift.data[kind === 'tactic' ? 'tactics' : 'axioms'];
+                Object.keys(counts).forEach(id => {
+                    const prints = S.printsOf(kind, id, s), name = (defs[id] || { name: id }).name;
+                    const chosen = kind === 'tactic' ? S.deckTactics(s) : S.axiomLoadout(s);
+                    const used = chosen.filter(c => c === id).length;
+                    const key = kind + ':' + id;
+                    const row = el('div.panel', { tabIndex: -1, dataset: { printFolder: key } }, [el('strong', { text: name }), el('div.small', { text: prints.length + '/4 owned · ' + prints.filter(Boolean).length + ' foil · ' + used + ' in deck' })]);
+                    if (key === focusKey) focusRow = row;
+                    for (const foil of [false, true]) {
+                        const index = prints.indexOf(foil);
+                        if (index < 0) continue;
+                        const label = 'Release one ' + (foil ? 'foil' : 'normal') + ' ' + name;
+                        row.appendChild(el('button.btn.small', { text: label, disabled: prints.length <= used, style: { minHeight: '44px', maxWidth: '100%', margin: '6px 6px 0 0' }, onclick() {
+                            let settled = false;
+                            Rift.UI.modal('Release this copy?', el('p', { text: label + '? It leaves your folder. You receive no Coins. The copies needed by your deck stay.' }), [
+                                { label: 'Cancel release' }, { label: 'Release copy', onclick() {
+                                    if (settled) return; settled = true;
+                                    let released = false;
+                                    S.update(st => { released = S.releasePrint(kind, id, index, st); });
+                                    notice.textContent = released ? 'One copy released. There is room in this folder again.' : 'This copy is needed by your deck, or is no longer available.';
+                                    refresh(key); if (onSaved) onSaved();
+                                } },
+                            ]);
+                        } }));
+                    }
+                    body.appendChild(row);
+                });
+            }
+            if (focusRow) focusRow.focus();
+        }
+        refresh();
+        const dialog = Rift.UI.modal('Spell and Axiom folders', el('div.stack.deck-editor', null, [
+            el('p.small', { text: 'Normal and foil copies share a folder of four. A deck uses at most two. Foil changes appearance only. Copies needed by your saved deck stay protected.' }),
+            notice, el('div.deck-scroll', null, [body]),
+        ]), [{ label: 'Close' }]);
+        const box = dialog.node && dialog.node.querySelector ? dialog.node.querySelector('.modal') : null;
+        if (box) { box.classList.add('deck-modal'); box.style.width = 'min(620px, calc(100vw - 32px))'; }
+        return dialog;
+    }
+
     Rift.Screens.register('collection', {
         mount(rootNode, params) {
             const s = Rift.State.get();
@@ -431,6 +481,7 @@
                     s.avatar && Rift.PowerView ? Rift.PowerView.panel(s.avatar) : null,
                     el('div.row.wrap', null, [
                         el('button.btn.primary', { text: 'Battle team and tactics · 20 cards', onclick: () => editOwnDeck(resum) }),
+                        el('button.btn', { text: 'Spell and Axiom folders', onclick: () => editCardFolders() }),
                         el('button.btn', { text: 'Axiom cards · 10 cards', onclick: () => editAxiomDeck(resum) }),
                         // The deck workshop (#115): replayable; it uses a copy of the starter deck.
                         s.starter && Rift.DeckWorkshop ? el('button.btn.workshop-open', { text: 'Deck workshop', title: 'Practise the deck rules with a copy of your starter deck. Your saved deck stays the same.', onclick: () => Rift.DeckWorkshop.open({ onClose: resum }) }) : null,
@@ -468,7 +519,7 @@
     });
 
     // The builders, for Rift.Battles.repairDeck and tests.
-    Rift.Collection = { editOwnDeck, editAxiomDeck, deckSummary };
+    Rift.Collection = { editOwnDeck, editAxiomDeck, editCardFolders, deckSummary };
 
     Rift.Screens.register('settings', {
         mount(rootNode) {

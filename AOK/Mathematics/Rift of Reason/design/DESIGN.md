@@ -22,6 +22,14 @@ Draw choice, End turn, Spark, Bag items and hero powers are separate and spend n
 
 Both Granny lessons use this budget. The full lesson adds turn breaks after Counterexample/Underdog and Filter, with a four-round demonstration countdown. The short lesson retains its prediction and independent repair choices. See [verification and balance](reviews/activation-budget-100-2026-10-18.md). This supersedes older free-attack/card-play descriptions below and in the October 7 design.
 
+## Counted spell and Axiom ownership — 21 October 2026 (#131)
+
+Save version6 records individual normal/foil spell and Axiom copies in `cardPrints`; captured creatures retain their existing instance inventory, UIDs and Changes. Ordinary folders hold four copies, normal and foil combined, while decks use at most two and never more than actually owned. The one-owned/one-per-deck Legendary exception applies only to creatures. A spell/Axiom's rarity does not make it a unique keepsake.
+
+The former implicit starter pools become explicit two-normal-copy entitlements. Old unlocked IDs and commons for already caught colours reconcile once to enough normal copies for old legal two-copy decks. Existing loadouts, excess captures and historical fields stay intact. Starter contributions and later grants add actual copies; each new acquisition adds one, with a cosmetic foil flag supplied by its source. An authoritative ready ledger, including empty folders, survives reload and backup import without refilling retired cards. Source receipts prevent repeat starter, colour, trainer, story and clue grants.
+
+Collection's **Spell and Axiom folders** shows quantities and foils. A confirmed release opens a folder slot without paying Coins and protects the copies needed by the saved loadout. Keyboard cancellation and focus restoration use the shared dialog behavior. Counted ownership supplies capacity queries for future pack transactions; it does not itself release a shop, pack pool or new rarity/spawn tuning. See [verification](reviews/card-prints-131-2026-10-21.md).
+
 ## Relative Flux rules — 19 October 2026 (#101)
 
 Sixteen common ±1/±2 modifiers change the current shared activation allowance (1–6), normal draw count (1–3), next-turn energy growth (−1–3) or creature cost adjustment (−2–2). Owner bonuses apply afterwards; paid casts spend their use first. Repeated modifiers work while effective. A no-op at a bound or against Unlimited cannot be paid for. Fixed finite rules repair Unlimited; Fate resolves a modifier against the value at resolution and consumes an ineffective free flip. Reset clears accumulated values without refunding spent uses or owner bonuses. Legacy absolute card IDs keep their original effects.
