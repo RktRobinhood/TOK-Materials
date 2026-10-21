@@ -179,6 +179,24 @@
         return out;
     }
 
+    // Presentation only: rarity never implies a catch weight, survival rule or copy limit.
+    const rarityTiers = Object.freeze(Object.fromEntries([
+        ['common', 'Common', 'C'], ['uncommon', 'Uncommon', 'U'], ['rare', 'Rare', 'R'],
+        ['mythic', 'Mythic', 'M'], ['legendary', 'Legendary', 'L'],
+    ].map(([id, label, mark], rank) => [id, Object.freeze({ id, label, mark, rank })])));
+    const Rarity = {
+        ids: Object.freeze(Object.keys(rarityTiers)),
+        // Older definitions omitted rarity. Save/team payloads never set a card's tier.
+        of: def => Object.prototype.hasOwnProperty.call(rarityTiers, (def || {}).rarity) ? rarityTiers[def.rarity] : rarityTiers.common,
+        badge(def) {
+            const r = Rarity.of(def);
+            return Rift.el('span.rarity-badge', { dataset: { rarity: r.id }, title: r.label, 'aria-label': r.label + ' rarity' }, [
+                Rift.el('span', { 'aria-hidden': 'true', text: r.mark }),
+                Rift.el('span.rarity-name', { text: r.label }),
+            ]);
+        },
+    };
+
     Object.assign(Rift, {
         version: '0.1.0',
         changeEffect,
@@ -192,6 +210,7 @@
         resultBanner,
         storage,
         COLOURS,
+        Rarity,
         data: Rift.data || {},
     });
 })(typeof window !== 'undefined' ? window : globalThis);

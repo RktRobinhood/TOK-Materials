@@ -62,7 +62,7 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
     assert.equal(T['generic-small-patch'].colour, undefined); assert.equal(T['generic-small-patch'].rarity, 'common');
     const old = Object.keys(T).filter(id => !ids.includes(id) && !Rift.data.tacticDecks.starterPack.includes(id) && !T[id].pack && !expansion.includes(id));
     assert.equal(old.length, 15);
-    old.forEach(id => { assert.equal(T[id].colour, undefined, id); assert.equal(T[id].rarity, undefined, id); });
+    old.forEach(id => { assert.equal(T[id].colour, undefined, id); assert.equal(T[id].rarity, 'common', id + ' has the historical Common baseline'); });
     const D = Rift.data.tacticDecks;
     ids.forEach(id => assert.ok(!D.starter.includes(id) && !D.earned.includes(id), id + ' is not a starter or earned tactic'));
     // The rares named by the teacher, with short art ids.

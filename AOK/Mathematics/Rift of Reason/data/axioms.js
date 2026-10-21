@@ -399,4 +399,6 @@
         const rng = Rift.makeRng(seed);
         return rng.shuffle(rng.shuffle(fluxIds.slice()).slice(0, 7).concat(['limited-memory', 'momentum', eligible && rng.chance(0.25) ? 'infinity' : 'two-plays']));
     } };
+    // Tierless historical released rules use Common. This does not release the Fate studies.
+    Object.values(axioms).filter(ax => ax.pack !== 'fate').forEach(ax => { if (!ax.rarity) ax.rarity = 'common'; });
 })(typeof window !== 'undefined' ? window : globalThis);

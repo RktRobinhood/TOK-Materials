@@ -820,4 +820,9 @@
             memory: ['remember-when', 'nostalgia', 'total-recall'],
         },
     };
+    // Historical released generic cards had no tier. Preserve their behaviour and
+    // give them the Common presentation baseline; bench-only Fate cards stay unranked.
+    Rift.data.tacticDecks.starter.concat(Rift.data.tacticDecks.earned).forEach(id => {
+        if (!tactics[id].rarity) tactics[id].rarity = 'common';
+    });
 })(typeof window !== 'undefined' ? window : globalThis);

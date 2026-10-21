@@ -1,3 +1,7 @@
+## Five-tier rarity — 21 October 2026
+
+Common, Uncommon, Rare, Mythic and Legendary share canonical labels, C/U/R/M/L marks and distinct static border patterns across Collection and battles. Creature and spell/Axiom-folder filters use those tiers. Missing historical released spell/rule tiers now explicitly use Common. Mythic is supported in inventory/decks/backups with ordinary4-owned/2-deck rules; it has no approved wild spawn/catch tuning and is excluded from those routes. Legendary-only protections remain explicit. No Mythic card is newly released here. See [verification and compatibility](reviews/rarity-130-2026-10-21.md) and art ledger13.90.
+
 ## Foundation expansion — 21 October 2026
 
 Seven reviewed common cards now form foundation-1: Tom Skink, Simone Bearles, Nikkie de Jaguar, Jimmy Fowlon, Jack Blackbird, John Greenfinch and generic Small Patch. Six use ordinary chapter-one catches; the checked River Ford grants one Small Patch, including once-only legacy catch-up. Mono identity is fixed from the submitted personal deck and public at battle start: generic cards do not break it, Memory is the sixth colour, shared Axioms never count. Jack and Small Patch have explicit mono bonuses; no universal damage modifier is added. The remaining203 concepts stay held. [Contract audit](drafts/card-arena-2026-10-12/CONTRACT-AUDIT-123.md) and [verification](reviews/expansion-123-2026-10-21.md) record all210 reviews,23 revisions, bounded loop checks and measured matchup limitations. Subsequent batches remain under #129 and per-card gates.

@@ -332,6 +332,8 @@
         common: { weight: 60, catchBase: 0.7 },
         uncommon: { weight: 28, catchBase: 0.5 },
         rare: { weight: 10, catchBase: 0.32 },
+        // Metadata support is not approval of catch tuning. No Mythic wild source yet.
+        mythic: { weight: 0, catchBase: null },
         legendary: { weight: 2, catchBase: 0.15 },
     };
 })(typeof window !== 'undefined' ? window : globalThis);

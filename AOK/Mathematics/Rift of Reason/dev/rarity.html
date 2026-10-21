@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Rarity scratch review</title></head>
+<body><p>Loading production UI with a memory-only save. Local server required.</p><script>
+fetch('../index.html').then(r=>r.text()).then(html=>{
+    html=html.replace('<head>','<head><base href="../">').replace('<script src="js/main.js"><'+'/script>',
+        '<script src="dev/foundation-fixtures.js"><'+'/script><script src="dev/rarity.js"><'+'/script>');
+    document.open();document.write(html);document.close();
+});
+</script></body></html>

@@ -413,3 +413,15 @@ img.quest-gem { height: 1.25em; width: auto; vertical-align: -0.25em; min-width:
 .fcard.foil { border-radius: 8px; box-shadow: 0 0 0 2px rgba(110, 231, 255, 0.85), 0 0 0 4px rgba(255, 110, 214, 0.6), 0 0 10px rgba(110, 231, 255, 0.35); }
 .fcard-foil { position: absolute; top: 3%; right: 6%; font-size: 1rem; color: #F7F3FF; text-shadow: 0 0 2px #6EE7FF, 0 0 4px #FF6ED6; pointer-events: none; }
 .chip.foil-chip { background: linear-gradient(90deg, rgba(110, 231, 255, 0.25), rgba(255, 110, 214, 0.25)); border-color: rgba(110, 231, 255, 0.7); color: #F7F3FF; }
+
+/* Five-tier rarity: a stable mark, readable word and border pattern; no motion. */
+.rarity-badge { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; padding: 1px 4px; border: 1px solid #b3bec8; border-radius: 4px; background: #161526; color: #f5eedc; font: 700 11px/1.2 var(--font-body); vertical-align: middle; }
+.rarity-badge[data-rarity="common"] { border-style: dotted; }
+.rarity-badge[data-rarity="uncommon"] { border-style: dashed; border-color: #a9e0c0; }
+.rarity-badge[data-rarity="rare"] { border-color: #99cfff; }
+.rarity-badge[data-rarity="mythic"] { border: 3px double #e6acff; }
+.rarity-badge[data-rarity="legendary"] { border: 2px solid #ffe0a0; }
+.fcard > .rarity-badge { position: absolute; z-index: 2; top: 3%; left: 4%; font-size: 9px; }
+.fcard.big > .rarity-badge { font-size: 12px; }
+.fcard[data-rarity="mythic"] { border: 3px double #e6acff; border-radius: 10px; }
+.fcard[data-rarity="legendary"] { border: 2px solid #ffe0a0; border-radius: 10px; }

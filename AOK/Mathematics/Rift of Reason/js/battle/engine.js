@@ -2362,7 +2362,7 @@
         const all = Rift.data.creatures || {};
         const rar = Rift.data.rarities || {};
         let weights = Object.keys(all)
-            .filter(id => o.legendaries !== false || all[id].rarity !== 'legendary')
+            .filter(id => (o.legendaries !== false || all[id].rarity !== 'legendary') && ((rar[all[id].rarity] || { weight: 1 }).weight > 0))
             .map(id => ({ item: id, weight: (rar[all[id].rarity] || { weight: 1 }).weight }));
         const team = [], counts = {};
         for (let i = 0; i < n && weights.length; i++) {

@@ -176,3 +176,11 @@
     .arena-live .b-draw-title { display: flex; flex-direction: column; white-space: normal; }
     .arena-live .b-draw-title strong { font-size: 12px; }
 }
+
+/* Rarity stays separate from affinity, Guard, Shield, foil and legal-action glows. */
+.arena-live .bc > .rarity-badge { position: absolute; top: 3%; right: 3%; z-index: 7; font-size: 9px; padding: 1px 3px; pointer-events: none; }
+.arena-live .bc.hand > .rarity-badge .rarity-name,
+.arena-live .bc.board > .rarity-badge .rarity-name { display: none; }
+.arena-live .bc.big > .rarity-badge { font-size: 12px; }
+.arena-live .bc[data-rarity="mythic"] { border: 3px double #e6acff; }
+.arena-live .bc[data-rarity="legendary"] { border: 2px solid #ffe0a0; }

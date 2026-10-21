@@ -886,6 +886,7 @@
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
                 el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
+                Rift.Rarity.badge(Rift.data.creatures[d.species] || Rift.data.tokens[d.species]),
                 d.onBoard ? null : gem('cost', d.cost), // the cost no longer matters once it is in play (teacher, 10 Oct)
                 el('div.bc-name' + fitName(d.name + (d.legendary ? ' ★' : '')), { text: d.name + (d.legendary ? ' ★' : '') }),
                 text,
@@ -1001,7 +1002,8 @@
                 el('div.bc-art', {}, [art]),
                 gem('cost', d.cost),
                 d.colour ? colourEmblem(d.colour) : null,
-                el('div.bc-name' + fitName(d.name + (d.rarity === 'rare' ? ' ★' : '')), { text: d.name + (d.rarity === 'rare' ? ' ★' : '') }),
+                el('div.bc-name' + fitName(d.name), { text: d.name }),
+                Rift.Rarity.badge(d),
                 el('div.bc-text', {}, [
                     size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
                     size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
@@ -1028,6 +1030,7 @@
                 el('div.bc-art', {}, [has('ui/axiom-' + id) ? Rift.Assets.img('ui/axiom-' + id, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
                 gem('cost', E.axiomCost(state, id)),
                 el('div.bc-name' + fitName(ax.name), { text: ax.name }),
+                Rift.Rarity.badge(ax),
                 el('div.bc-text', {}, [
                     isBasic(ax) ? el('div.bc-kind.basic', { text: axiomKind(ax) }) : size === 'big' ? null : el('div.bc-kind', { text: axiomKind(ax) }),
                     el('div.bc-line', { text: ax.short ? (size === 'hand' ? ax.short : (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short) : ax.text }),
@@ -1051,7 +1054,7 @@
             const clickable = !!o.onclick;
             const node = el((clickable ? 'button' : 'div') + '.bc.' + kind + '.' + size, {
                 type: clickable ? 'button' : null,
-                dataset: tcolour ? { cid, colour, tcolour } : { cid, colour },
+                dataset: Object.assign({ cid, colour, rarity: Rift.Rarity.of(kind === 'tactic' ? Rift.data.tactics[c.tactic] : Rift.data.creatures[c.species] || Rift.data.tokens[c.species]).id }, tcolour ? { tcolour } : {}),
                 'aria-label': cardLabel(cid),
             }, kind === 'tactic' ? tacticFace(cid, size) : creatureFace(cid, size));
             if (o.target) node.dataset.target = cid;
@@ -1109,8 +1112,8 @@
         function axiomCardEl(id, o) {
             const clickable = !!(o && o.onclick);
             const node = el((clickable ? 'button' : 'div') + '.bc.axiom.' + ((o && o.size) || 'hand'), {
-                type: clickable ? 'button' : null, dataset: { axiom: id },
-                'aria-label': 'Rule card: ' + ((Rift.data.axioms || {})[id] || { name: id }).name,
+                type: clickable ? 'button' : null, dataset: { axiom: id, rarity: Rift.Rarity.of(Rift.data.axioms[id]).id },
+                'aria-label': 'Rule card: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ', ' + Rift.Rarity.of(Rift.data.axioms[id]).label,
             }, axiomFace(id, (o && o.size) || 'hand'));
             ((o && o.classes) || []).forEach(k => node.classList.add(k));
             if (clickable) node.addEventListener('click', ev => { if (ui.suppressClick) return; o.onclick(ev); });
@@ -1141,9 +1144,10 @@
             const c = state.cards[cid];
             const d = E.describe(state, cid);
             if (c.kind === 'tactic') return 'Tactic ' + d.name + ', cost ' + d.cost + ': ' + d.text
-                + (d.colour ? ' ' + tacticKind(d) + '.' : '');
+                + (d.colour ? ' ' + tacticKind(d) + '.' : '') + ' ' + Rift.Rarity.of(d).label + ' rarity.';
             return d.name + ', cost ' + d.cost + ', attack ' + d.attack + ', health ' + d.health + ' of ' + d.maxHealth
-                + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '') + effectsLabel(cid);
+                + (d.keywords.length ? ', ' + d.keywords.join(', ') : '') + (d.sleeping ? ', asleep' : '') + (d.canAttack ? ', ready' : '') + effectsLabel(cid)
+                + '. ' + Rift.Rarity.of(Rift.data.creatures[d.species] || Rift.data.tokens[d.species]).label + ' rarity.';
         }
 
         function cardBack(axiom) {

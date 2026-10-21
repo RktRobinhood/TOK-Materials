@@ -15,6 +15,8 @@
         return !!(save.avatar && save.avatar.type === 'fox' && ['language', 'imagination'].includes(Rift.data.creatures[species].colour));
     }
     function boardFor(save, o, item) {
+        const c = o && Rift.data.creatures[o.species], rarity = c && Rift.data.rarities[c.rarity];
+        if (!rarity || !Number.isFinite(rarity.catchBase)) throw new Error('This creature has no wild catch route yet.');
         return o.board || games.create(o.kind, o.seed + ':attempt:' + o.attempt, Rift.data.creatures[o.species].rarity, item, o.lured, sly(save, o.species));
     }
     function preview(node, item) { return boardFor(Rift.State.get(), get(node), item); }

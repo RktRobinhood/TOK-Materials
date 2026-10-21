@@ -213,10 +213,12 @@
         (n.spawns || []).forEach(sp => {
             const c = Rift.data.creatures[sp];
             if (!c || c.roaming) return; // roaming legendaries (#111) come only from their trick challenge
+            const rarity = Rift.data.rarities[c.rarity];
+            if (!rarity || !(rarity.weight > 0) || !Number.isFinite(rarity.catchBase)) return;
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
             // Legendaries are one of a kind: once you have it, it stops turning up.
             if (c.rarity === 'legendary' && (state.creatures || []).some(x => x && x.species === sp)) return;
-            let w = Rift.data.rarities[c.rarity].weight;
+            let w = rarity.weight;
             if (c.rarity === 'uncommon') w *= 1 + (stars - 1) * 0.2;
             if (c.rarity === 'rare' || c.rarity === 'legendary') {
                 w *= 1 + (stars - 1) * 0.5;
@@ -246,7 +248,10 @@
         const chance = Math.round((base + (stars - 1) * 0.075) * 1000) / 1000;
         // A side-story visitor (flag visitor:<species>) turns up at your next win until you own one.
         const visitor = Object.keys(state.flags || {}).filter(k => k.startsWith('visitor:') && state.flags[k]).map(k => k.slice(8))
-            .find(sp => Rift.data.creatures[sp] && !(state.creatures || []).some(c => c.species === sp));
+            .find(sp => {
+                const c = Rift.data.creatures[sp], rarity = c && Rift.data.rarities[c.rarity];
+                return rarity && Number.isFinite(rarity.catchBase) && !(state.creatures || []).some(c => c.species === sp);
+            });
         if (visitor) return { species: visitor, chance: 1, visitor: true };
         const weights = spawnWeights(state, n, o);
         const species = Object.keys(weights).length && rng.chance(chance) ? rng.weighted(weights) : null;
@@ -258,7 +263,9 @@
     function catchOdds(state, speciesId, itemId, opts) {
         const o = opts || {};
         const c = Rift.data.creatures[speciesId];
-        let p = Rift.data.rarities[c.rarity].catchBase;
+        const rarity = c && Rift.data.rarities[c.rarity];
+        if (!rarity || !Number.isFinite(rarity.catchBase)) return 0;
+        let p = rarity.catchBase;
         p += (Rift.data.items[itemId] || {}).catchBonus || 0;
         const av = state.avatar || {};
         if (av.type === 'fox' && (c.colour === 'language' || c.colour === 'imagination')) p += 0.1;

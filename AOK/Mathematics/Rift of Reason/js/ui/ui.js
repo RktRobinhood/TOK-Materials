@@ -426,9 +426,10 @@
         const c = Rift.data.creatures[speciesId];
         const known = o.known !== false;
         const frameId = 'ui/card-' + c.colour;
-        const node = el('div.fcard' + (o.big ? '.big' : '') + (o.foil && known ? '.foil' : ''), { dataset: { colour: c.colour } }, [
+        const node = el('div.fcard' + (o.big ? '.big' : '') + (o.foil && known ? '.foil' : ''), { dataset: { colour: c.colour, rarity: known ? Rift.Rarity.of(c).id : '' } }, [
             el('div.fcard-art', null, [Rift.Assets.img('creature/' + speciesId + '/idle', { colour: known ? c.colour : '#333', label: known ? c.name : '???', className: known ? '' : 'silhouette' })]),
             Rift.Assets.has(frameId) ? Rift.Assets.img(frameId, { className: 'fcard-frame' }) : null,
+            known ? Rift.Rarity.badge(c) : null,
             el('div.fcard-panel', null, [
                 el('div.fcard-name', { text: known ? c.name + (c.rarity === 'legendary' ? ' ★' : '') : '???' }),
                 o.big && known ? el('div.fcard-power.fcard-stats', null, [statLine(speciesId, o.inst)]) : null,

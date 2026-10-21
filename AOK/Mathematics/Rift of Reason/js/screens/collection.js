@@ -81,7 +81,7 @@
             el('div.row', { style: { alignItems: 'flex-start' } }, [
                 Rift.UI.framedCard(speciesId, { big: true }),
                 el('div.stack', null, [
-                    el('div.row.wrap', null, [colourChip(c.colour), el('span.chip', { text: c.rarity }), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
+                    el('div.row.wrap', null, [colourChip(c.colour), Rift.Rarity.badge(c), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
                         .concat((c.keywords || []).map(k => el('span.chip', { text: KEYWORD_NAMES[k] || k })))),
                     el('div.small.muted', { text: 'Inspired by ' + c.inspiredBy + ' (a caricature).' }),
                     el('div.small.muted', { text: 'Cost, attack and health are the usual numbers. Each caught creature varies a little.' }),
@@ -261,7 +261,7 @@
                 el('span', { style: { flex: 1 } }, [
                     el('strong', { text: t.name }), ' ', el('span.stat.stat-cost', { title: 'Energy cost', text: '⚡ ' + t.cost }),
                     t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : el('span.chip', { text: 'generic' }),
-                    t.rarity ? ' ' : null, t.rarity ? el('span.chip', { text: t.rarity }) : null,
+                    ' ', Rift.Rarity.badge(t),
                     el('div.small', { text: t.text }),
                     el('div.small', { text: 'Owned copies: ' + S.cardCopies('tactic', id, s) }),
                     quota,
@@ -380,7 +380,7 @@
             } });
             steppers.push({ id, minus, plus, out });
             return el('div.axiom-option', null, [
-                el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), el('div.small', { text: ax.category + ': ' + ax.text }), el('div.small', { text: 'Owned copies: ' + S.cardCopies('axiom', id, s) })]),
+                el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), Rift.Rarity.badge(ax), el('div.small', { text: ax.category + ': ' + ax.text }), el('div.small', { text: 'Owned copies: ' + S.cardCopies('axiom', id, s) })]),
                 el('span.stepper', { role: 'group', 'aria-label': ax.name + ' copies' }, [minus, out, plus]),
             ]);
         }));
@@ -413,18 +413,21 @@
 
     function editCardFolders(onSaved) {
         const S = Rift.State, s = S.get(), body = el('div.stack'), notice = el('p.small', { role: 'status' });
+        const filter = rarityFilter('Spell and Axiom rarity', () => refresh());
         function refresh(focusKey) {
             body.replaceChildren();
-            let focusRow = null;
+            let focusRow = null, shown = 0;
             for (const kind of ['tactic', 'axiom']) {
                 body.appendChild(el('h3', { text: kind === 'tactic' ? 'Spells' : 'Axioms' }));
                 const counts = S.printCounts(kind, s), defs = Rift.data[kind === 'tactic' ? 'tactics' : 'axioms'];
                 Object.keys(counts).forEach(id => {
+                    if (filter.value && Rift.Rarity.of(defs[id]).id !== filter.value) return;
+                    shown++;
                     const prints = S.printsOf(kind, id, s), name = (defs[id] || { name: id }).name;
                     const chosen = kind === 'tactic' ? S.deckTactics(s) : S.axiomLoadout(s);
                     const used = chosen.filter(c => c === id).length;
                     const key = kind + ':' + id;
-                    const row = el('div.panel', { tabIndex: -1, dataset: { printFolder: key } }, [el('strong', { text: name }), el('div.small', { text: prints.length + '/4 owned · ' + prints.filter(Boolean).length + ' foil · ' + used + ' in deck' })]);
+                    const row = el('div.panel', { tabIndex: -1, dataset: { printFolder: key } }, [el('strong', { text: name }), ' ', Rift.Rarity.badge(defs[id]), el('div.small', { text: prints.length + '/4 owned · ' + prints.filter(Boolean).length + ' foil · ' + used + ' in deck' })]);
                     if (key === focusKey) focusRow = row;
                     for (const foil of [false, true]) {
                         const index = prints.indexOf(foil);
@@ -446,16 +449,24 @@
                     body.appendChild(row);
                 });
             }
+            if (!shown) body.appendChild(el('p.small', { text: 'No owned cards in this rarity yet.' }));
             if (focusRow) focusRow.focus();
         }
         refresh();
         const dialog = Rift.UI.modal('Spell and Axiom folders', el('div.stack.deck-editor', null, [
             el('p.small', { text: 'Normal and foil copies share a folder of four. A deck uses at most two. Foil changes appearance only. Copies needed by your saved deck stay protected.' }),
-            notice, el('div.deck-scroll', null, [body]),
+            filter, notice, el('div.deck-scroll', null, [body]),
         ]), [{ label: 'Close' }]);
         const box = dialog.node && dialog.node.querySelector ? dialog.node.querySelector('.modal') : null;
         if (box) { box.classList.add('deck-modal'); box.style.width = 'min(620px, calc(100vw - 32px))'; }
         return dialog;
+    }
+
+    function rarityFilter(label, onChange) {
+        return el('select', { 'aria-label': label, onchange: onChange }, [
+            el('option', { value: '', text: 'All rarities' }),
+            ...Rift.Rarity.ids.map(id => el('option', { value: id, text: Rift.Rarity.of({ rarity: id }).label })),
+        ]);
     }
 
     Rift.Screens.register('collection', {
@@ -471,6 +482,17 @@
             const hud = Rift.UI.hud({ back: { label: 'Back', onclick: () => Rift.Router.back('map') } });
             const summary = el('p.small.deck-summary', { text: deckSummary(s) });
             const resum = () => { summary.textContent = deckSummary(Rift.State.get()); };
+            const grid = el('div.dex-grid'), shown = el('p.small', { role: 'status' });
+            const filter = rarityFilter('Creature rarity', () => refreshGrid());
+            function refreshGrid() {
+                grid.replaceChildren();
+                const filtered = species.filter(id => !filter.value || Rift.Rarity.of(Rift.data.creatures[id]).id === filter.value);
+                filtered.forEach(id => grid.appendChild(card(id, {
+                    caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], foil: s.creatures.some(x => x.species === id && x.foil), onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
+                })));
+                shown.textContent = filtered.length ? filtered.length + ' creature kind' + (filtered.length === 1 ? '' : 's') + ' shown.' : 'No creatures in this rarity yet.';
+            }
+            refreshGrid();
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
                 el('p.small', { text: Rift.State.walletOf(s).coins + ' Coins · ' + Rift.State.walletOf(s).freePacks + ' free packs saved. The pack stall is at the Campfire Clearing.' }),
@@ -498,9 +520,8 @@
                     el('button.btn', { text: '📤 Share my team code', onclick: () => Rift.Battles.shareCode() }),
                     el('button.btn', { text: 'Rumour board', onclick: () => Rift.Router.go('rumours') }),
                 ]),
-                el('div.dex-grid', null, species.map(id => card(id, {
-                    caught: !!counts[id], seen: s.seen.includes(id), count: counts[id], foil: s.creatures.some(x => x.species === id && x.foil), onclick: () => (counts[id] || s.seen.includes(id)) && details(id),
-                }))),
+                el('div.row.wrap', null, [el('label', { text: 'Creature rarity ', style: { display: 'flex', gap: '8px', alignItems: 'center' } }, [filter]), shown]),
+                grid,
                 el('div', null, [
                     el('h3', { text: 'Accolades (' + s.accolades.length + ' of ' + Object.keys(Rift.data.accolades).length + ')' }),
                     el('div.badge-row', null, Object.entries(Rift.data.accolades).map(([id, a]) => {
