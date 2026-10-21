@@ -124,7 +124,7 @@ test('battleTeam and deckTactics keep choices as saved; ownDeck reports what is 
     assert.ok(texts.includes('You do not own Peer Review yet. Remove it.'));
     assert.ok(texts.includes('Eureka!: at most 2 copies. Remove 1.'));
     assert.ok(texts.includes('Unknown tactic card: nonsense. Remove it.'));
-    s.tactics.push('peer-review');
+    S.grantTactic('peer-review', s);
     assert.deepEqual(J(S.ownedTactics(s)).slice(-1), ['peer-review']);
     assert.ok(!S.ownDeck(s).check.problems.some(p => p.code === 'unowned'));
 });

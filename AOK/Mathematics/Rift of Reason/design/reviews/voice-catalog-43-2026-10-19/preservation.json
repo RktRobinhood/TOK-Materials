@@ -1,0 +1,19 @@
+{
+  "recordings": 3010,
+  "changedRecordings": [],
+  "removedRecordings": [],
+  "files": [
+    {
+      "file": "tools/voice-usage.json",
+      "unchanged": true
+    },
+    {
+      "file": "tools/voices-cast.json",
+      "unchanged": true
+    },
+    {
+      "file": "data/voice-manifest.js",
+      "unchanged": true
+    }
+  ]
+}

@@ -202,37 +202,41 @@
         return v;
     }
 
-    // Energy an action spends and the card/rule it uses up (null: free).
+    // Competing energy and activation costs. Hero powers use no card activation.
     function resourceOf(s, a) {
         const Eng = E();
-        if (a.type === 'play') return { id: a.cid, cost: Eng.playCost(s, a.cid) };
-        if (a.type === 'axiom') return { id: 'ax:' + a.choice, cost: Eng.axiomCost(s, a.choice) };
+        if (a.type === 'play') return { id: a.cid, cost: Eng.playCost(s, a.cid), uses: 1 };
+        if (a.type === 'axiom') return { id: 'ax:' + a.choice, cost: Eng.axiomCost(s, a.choice), uses: 1 };
+        if (a.type === 'attack') return { id: a.cid, cost: 0, uses: 1 };
         if (a.type === 'activate') {
             const def = Eng.activations(s, a.cid).find(x => x.id === a.ability);
-            return { id: a.cid, cost: def ? def.cost : 0 };
+            return { id: a.cid, cost: def ? def.cost : 0, uses: 1 };
         }
-        if (a.type === 'power') return { id: 'power', cost: Eng.powerMods(s, s.active).cost };
+        if (a.type === 'power') return { id: 'power', cost: Eng.powerMods(s, s.active).cost, uses: 0 };
         return null;
     }
 
-    // Best total gain from spending this much energy on the scored actions (0/1 knapsack over
-    // cards; each card counts once with its best use). Returns { value, ids }.
+    // Approximate best combination under both resources, taking each card's best current use
+    // once. Rescore after every action; Expert additionally searches real multi-action lines.
     function energyPlan(s, scored, energy) {
         const best = {};
         for (const x of scored) {
             const r = resourceOf(s, x.a);
-            if (!r || r.cost <= 0 || x.score <= 0.05 || r.cost > energy) continue;
-            if (!best[r.id] || best[r.id].gain < x.score) best[r.id] = { id: r.id, cost: r.cost, gain: x.score };
+            if (!r || x.score <= 0.05 || r.cost > energy) continue;
+            if (!best[r.id] || best[r.id].gain < x.score) best[r.id] = { id: r.id, cost: r.cost, uses: r.uses, gain: x.score };
         }
         const items = Object.values(best);
-        const table = new Array(energy + 1).fill(null).map(() => ({ value: 0, ids: [] }));
+        const uses = Math.min(E().playsLeft(s, s.active), items.length);
+        const table = Array.from({ length: energy + 1 }, () => Array.from({ length: uses + 1 }, () => ({ value: 0, ids: [] })));
         for (const it of items) {
             for (let e = energy; e >= it.cost; e--) {
-                const v = table[e - it.cost].value + it.gain;
-                if (v > table[e].value) table[e] = { value: v, ids: table[e - it.cost].ids.concat([it.id]) };
+                for (let u = uses; u >= it.uses; u--) {
+                    const prior = table[e - it.cost][u - it.uses], v = prior.value + it.gain;
+                    if (v > table[e][u].value) table[e][u] = { value: v, ids: prior.ids.concat([it.id]) };
+                }
             }
         }
-        return table[energy];
+        return table[energy][uses];
     }
 
     // Hero damage p's creatures could deal next turn, roughly (Guard soaks some).
@@ -261,7 +265,8 @@
             for (let i = 0; i < n; i++) hits.push({ dmg, bypass });
         }
         hits.sort((a, b) => b.dmg - a.dmg);
-        const limited = r.attackLimit === Infinity ? hits : hits.slice(0, r.attackLimit);
+        const nextBudget = r.playLimit + (r.bonus === 'momentum' && s.players[p].board.length > s.players[foe].board.length ? 1 : 0);
+        const limited = hits.slice(0, Math.min(r.attackLimit, nextBudget));
         let total = 0;
         for (const h of limited) {
             if (h.bypass || soak <= 0) total += h.dmg;
@@ -332,7 +337,7 @@
         if (r.costDelta) v -= r.costDelta * 0.5 * (handCreatures - Q.hand.length * 0.5);
         if (r.growth !== 1) v += 0.3 * (r.growth - 1) * (P.hand.length - Q.hand.length);
         // Plays per turn, hand limit and bonus rules (the Fluxx-style rule cards).
-        const hands = P.hand.length + P.axHand.length - (Q.hand.length + Q.axHand.length);
+        const hands = P.hand.length + P.axHand.length + P.board.length - (Q.hand.length + Q.axHand.length + Q.board.length);
         if (r.playLimit !== 2) v += 0.15 * (Math.min(r.playLimit, 4) - 2) * hands;
         if (r.handCap != null) v -= 0.2 * (Math.max(0, P.hand.length - r.handCap) - Math.max(0, Q.hand.length - r.handCap));
         if (r.bonus === 'fair-share' || r.bonus === 'momentum') v += (r.bonus === 'momentum' ? 0.3 : -0.3) * Math.sign(P.board.length - Q.board.length);
@@ -371,8 +376,8 @@
                         if (r.reverseHearts) continue;
                         g = heartValue(hearts) - heartValue(hearts - f.damage);
                     } else {
-                        g = (f.defenderDefeated ? creatureValue(s, t, ctx) : 0.3 * f.toDefender)
-                            - (f.attackerDefeated ? creatureValue(s, cid, ctx) : 0.3 * f.toAttacker);
+                        g = (f.defenderDefeated ? creatureValue(s, t, ctx) : 0.3 * f.damageToDefender)
+                            - (f.attackerDefeated ? creatureValue(s, cid, ctx) : 0.3 * f.damageToAttacker);
                     }
                     if (g > best) best = g;
                 }
@@ -386,12 +391,10 @@
     }
 
     function withRules(s, active) {
-        return Object.assign({}, s, { axioms: Object.assign({}, s.axioms, { active }) });
+        return Object.assign({}, s, { axioms: Object.assign({}, s.axioms, { active, numeric: {} }) });
     }
     function withAxiom(s, id) {
-        const ax = Rift.data.axioms[id];
-        if (ax.clearRules) return withRules(s, {}); // Granny's Spare Axiom: every rule back to the basics
-        return withRules(s, Object.assign({}, s.axioms.active, { [ax.category]: id }));
+        return E().projectAxiom(s, id);
     }
 
     function nextEventState(s) {
@@ -484,8 +487,7 @@
         const base = staticDeep(s, me, ctx);
         ids.forEach(id => {
             if (out[id] != null || !Rift.data.axioms[id]) return;
-            const cat = Rift.data.axioms[id].category;
-            out[id] = s.axioms.active[cat] === id ? 0 : staticDeep(withAxiom(s, id), me, ctx) - base;
+            out[id] = !E().axiomWouldChange(s, id) ? 0 : staticDeep(withAxiom(s, id), me, ctx) - base;
         });
         return out;
     }
@@ -502,7 +504,7 @@
         else {
             const onBoard = s.players[c.controller].board.includes(cid);
             sig = [c.controller, c.species, c.ability, c.gained.join(','), Eng.attackOf(s, cid), Eng.healthOf(s, cid).current,
-                Eng.healthOf(s, cid).max, Eng.keywordsOf(s, cid).join(','), onBoard ? 'b' : 'h', c.attacks, c.activated, c.frozen,
+                Eng.healthOf(s, cid).max, Eng.keywordsOf(s, cid).join(','), onBoard ? 'b' : 'h', c.attacks, c.activated, c.frozen, c.frozenUntil,
                 c.silenced, c.enteredTurn === s.turn, c.metaverseUsed, c.siuuu, c.prediction, c.colourless, c.cost].join('|');
         }
         cache.set(cid, sig);
@@ -594,6 +596,9 @@
 
     function scoreActions(s, cands, me, ctx) {
         if (ctx.work) ctx.work.n += cands.length; // Expert's work budget (EXPERT.work)
+        // With scarce uses, delaying an imminent board wipe must compete with this turn's
+        // attacks. Preserve a use for saving a developed board, rather than spend both on damage.
+        const urgentBoard = s.players[me].board.length > 1 && wipedThisRound(s, me) ? boardValue(s, me, ctx) : 0;
         const baseCache = {};
         const base = deep => (baseCache[deep] != null ? baseCache[deep] : (baseCache[deep] = evaluate(s, me, { ctx, deep })));
         const scored = cands.map(a => {
@@ -603,6 +608,7 @@
             let next;
             try { next = E().applyLegal(s, a); } catch (e) { return { a, score: -Infinity }; }
             let score = settle(next, me, ctx, deep, 0) - base(deep);
+            if (urgentBoard && next.active === me && next.phase === 'main' && !wipedThisRound(next, me)) score += urgentBoard * 0.5;
             if (a.type === 'end') score -= 0.01;
             if (a.type === 'play') score += tacticHint(s, a, me);
             if (a.type === 'power') score += powerHint(s, a, me);
@@ -614,7 +620,7 @@
         const inPlan = new Set(plan.ids);
         scored.forEach(x => {
             const r = resourceOf(s, x.a);
-            if (r && r.cost > 0 && x.score > 0.05 && !inPlan.has(r.id)) x.score = Math.min(x.score, 0.04);
+            if (r && (r.cost > 0 || r.uses) && x.score > 0.05 && !inPlan.has(r.id)) x.score = Math.min(x.score, 0.04);
             if (x.a.type === 'spark') x.score = energyPlan(s, scored, energy + 1).value - plan.value - 0.3;
         });
         return scored;
@@ -751,7 +757,7 @@
         const options = legal.filter(a => {
             if (a.type !== 'axiom') return false;
             const ax = Rift.data.axioms[a.choice];
-            if (s.axioms.active[ax.category] === a.choice) return false;
+            if (!E().axiomWouldChange(s, a.choice)) return false;
             return (vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category];
         }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, 3);
         if (!options.length) return null;
@@ -925,7 +931,7 @@
         legal.filter(a => {
             if (a.type !== 'axiom') return false;
             const ax = Rift.data.axioms[a.choice];
-            return s.axioms.active[ax.category] !== a.choice && ((vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category]);
+            return E().axiomWouldChange(s, a.choice) && ((vals[a.choice] || 0) > 0.2 || IMMEDIATE[ax.category]);
         }).sort((x, y) => (vals[y.choice] || 0) - (vals[x.choice] || 0)).slice(0, EXPERT.axioms).forEach(a => cands.push(a));
         let best = oneply, bestV = -Infinity;
         for (const a of cands) {

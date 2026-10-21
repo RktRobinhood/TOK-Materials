@@ -1,0 +1,75 @@
+{
+  "status": "planning-only; these are not runtime decks or gameplay measurements",
+  "baseline": "590f6fc",
+  "casesChecked": 20,
+  "budgetCasesChecked": 4,
+  "analytic": {
+    "modifierPercent": 70,
+    "optionalPercent": 20,
+    "eligibleUnlimitedCardPercent": 2.5,
+    "eligibleFiniteRepairPercent": 7.5,
+    "eligibleSharedDeckUnlimitedPercent": 43.75
+  },
+  "profiles": {
+    "introductory": {
+      "status": "construction-policy experiment; no battle engine or gameplay rollout",
+      "matches": 5000,
+      "contributions": 10000,
+      "cards": 100000,
+      "modifierCards": 70000,
+      "optionalCards": 20000,
+      "unlimitedCards": 0,
+      "finiteRepairCards": 10000,
+      "topCardUnlimited": 0,
+      "sharedDecksWithUnlimited": 0,
+      "perModifier": {
+        "flux-plays-plus-1": 4371,
+        "flux-plays-minus-1": 4388,
+        "flux-plays-plus-2": 4382,
+        "flux-plays-minus-2": 4351,
+        "flux-draw-plus-1": 4384,
+        "flux-draw-minus-1": 4336,
+        "flux-draw-plus-2": 4368,
+        "flux-draw-minus-2": 4307,
+        "flux-growth-plus-1": 4319,
+        "flux-growth-minus-1": 4400,
+        "flux-growth-plus-2": 4410,
+        "flux-growth-minus-2": 4394,
+        "flux-cost-plus-1": 4416,
+        "flux-cost-minus-1": 4293,
+        "flux-cost-plus-2": 4435,
+        "flux-cost-minus-2": 4446
+      }
+    },
+    "eligible": {
+      "status": "construction-policy experiment; no battle engine or gameplay rollout",
+      "matches": 5000,
+      "contributions": 10000,
+      "cards": 100000,
+      "modifierCards": 70000,
+      "optionalCards": 20000,
+      "unlimitedCards": 2467,
+      "finiteRepairCards": 7533,
+      "topCardUnlimited": 267,
+      "sharedDecksWithUnlimited": 2167,
+      "perModifier": {
+        "flux-plays-plus-1": 4419,
+        "flux-plays-minus-1": 4416,
+        "flux-plays-plus-2": 4291,
+        "flux-plays-minus-2": 4369,
+        "flux-draw-plus-1": 4328,
+        "flux-draw-minus-1": 4504,
+        "flux-draw-plus-2": 4370,
+        "flux-draw-minus-2": 4402,
+        "flux-growth-plus-1": 4386,
+        "flux-growth-minus-1": 4339,
+        "flux-growth-plus-2": 4346,
+        "flux-growth-minus-2": 4248,
+        "flux-cost-plus-1": 4449,
+        "flux-cost-minus-1": 4429,
+        "flux-cost-plus-2": 4325,
+        "flux-cost-minus-2": 4379
+      }
+    }
+  }
+}

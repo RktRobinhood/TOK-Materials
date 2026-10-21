@@ -29,9 +29,11 @@ test('normal station: three free wrong checks, then heart; success requires Cont
  g.api().submit(false);assert.equal(g.state.health,4);assert.match(g.root.querySelector('.enc-checks').textContent,/○○○/);
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,1);assert.ok(g.paused());
  assert.equal(g.modals.at(-1).title,'Stage solved!');assert.deepEqual([...g.state.map.completed],[]);
+ assert.equal(g.state.wallet.coins,0,'the checked stage is not yet a completed visit');
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,1);
  await g.modals.at(-1).buttons[0].onclick();assert.deepEqual([...g.state.map.completed],['test']);assert.equal(g.modals.at(-1).title,'Solved!');
  assert.ok(g.sounds.includes('win'));
+ assert.equal(g.state.wallet.coins,10);assert.ok(g.modals.at(-1).body.children.some(n=>/\+10 Coins/.test(n.textContent)));
 });
 test('a paid hint counts once; knockout blocks further checks and completion',async()=>{
  const g=await game();
@@ -41,6 +43,7 @@ test('a paid hint counts once; knockout blocks further checks and completion',as
  assert.equal(g.state.health,2);assert.equal(g.state.scars.length,1);assert.equal(g.modals.at(-1).title,'Knocked out!');
  assert.ok(g.sounds.includes('lose'));
  g.api().submit(true);assert.equal(g.state.stats.puzzlesSolved,0);assert.equal(g.state.map.completed.length,0);
+ assert.equal(g.state.wallet.coins,0,'knockout and stale success never pay');
 });
 
 test('boss Why knockout cannot grant rewards or advance to the next stage',async()=>{
@@ -48,6 +51,7 @@ test('boss Why knockout cannot grant rewards or advance to the next stage',async
  const next=g.modals.at(-1).buttons[0].onclick();assert.equal(g.modals.at(-1).title,'Why?');
  g.modals.at(-1).buttons[0].onclick();await next;
  assert.equal(g.modals.at(-1).title,'Knocked out!');assert.equal(g.state.xp,0);assert.equal(g.state.map.completed.length,0);assert.equal(g.state.stats.puzzlesSolved,1);
+ assert.equal(g.state.wallet.coins,0);
 });
 
 test('a boss stage with skipWhen is left out while its condition holds (the Hall when the Mayor is torn)',async()=>{
@@ -99,7 +103,8 @@ test('first topic hint is free, keeps stars, and remains used after the encounte
  assert.match(hint.textContent,/free/);hint.onclick();
  assert.equal(g.state.health,5);assert.equal(g.state.stats.hintsUsed,0);assert.equal(g.state.flags['learning-hint:fake'],true);
  g.api().submit(true);await g.modals.at(-1).buttons[0].onclick();
- assert.match(g.modals.at(-1).body.children[0].textContent,/★★★/);
+ assert.match(g.modals.at(-1).body.querySelector('.enc-stars').textContent,/★★★/);
+ assert.match(g.modals.at(-1).body.querySelector('.result-banner').className,/\bwon\b/);
  assert.ok(g.state.flags['reasoning:test'][0].feedback);
 });
 
@@ -136,7 +141,9 @@ test('reload after a local reflection restores completion and its costs without 
  assert.equal(second.modals.at(-1).title,'Stage solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.map.visitCount.test,1);
  await second.modals.at(-1).buttons[0].onclick();
  assert.equal(second.modals.at(-1).title,'Solved!');assert.equal(second.state.stats.puzzlesSolved,1);assert.equal(second.state.flags['reflection:test'],undefined);
- assert.match(second.modals.at(-1).body.children[0].textContent,/1 wrong checks/);assert.equal(second.state.flags['reasoning:test'][0].reflection,'Counts do not show reasons.');
+ assert.equal(second.state.wallet.coins,25,'the resumed checked mini-boss pays once');
+ assert.equal(second.Rift.World.claimVisitCoins(second.state,'test',1,true),null);
+ assert.match(second.modals.at(-1).body.querySelector('.enc-stars').textContent,/1 wrong checks/);assert.equal(second.state.flags['reasoning:test'][0].reflection,'Counts do not show reasons.');
 });
 
 test('Owlet first-topic hint keeps stars and leaves its chapter perk available',async()=>{

@@ -1,0 +1,333 @@
+{
+  "date": "2026-10-20",
+  "purpose": "Reachability/discovery receipt for the voice catalog fixes; not certification of complete recorded-audio coverage.",
+  "sourceOfTruth": [
+    "design/DESIGN.md#voice-completion-requirement--teacher-19-october-2026",
+    "design/UNDERSTUDIES.md",
+    "js/core/cast.js",
+    "js/ui/dialogue.js",
+    "js/screens/encounter.js"
+  ],
+  "catalog": {
+    "beforeProvenReminderFix": 2963,
+    "afterProvenReminderFix": 2974,
+    "newlyInventoriedInheritedReminderPairs": 11,
+    "generatedGrannyPowerConfigurations": 260,
+    "uniqueGeneratedGrannyPowerLines": 173,
+    "defaultPowerLinesPrioritized": 10,
+    "generatedPowerLesson": "lesson1"
+  },
+  "confirmedReminderPolicy": {
+    "scope": "Only the eleven listed live, repeatable station reminder actor/text pairs. No general expansion of inherited t to all understudies.",
+    "rawWordSource": "The shipped reminder's t; Cast.text returns u when non-null, otherwise t.",
+    "runtimeCaller": "js/screens/encounter.js selects n.reminder on a revisited encounter and calls Rift.Dialogue.play(lead, ctx) without replay.",
+    "runtimeSpeaker": "js/ui/dialogue.js resolves Cast.actor(role) and requests Rift.voiceId(actor, Cast.text(step, actor)).",
+    "originalIdsRetained": true,
+    "explicitEmptyUStaysSilent": true,
+    "explicitReplayStaysOriginal": true,
+    "clockFullLastWordsNotExpanded": true,
+    "test": "tools/test/voice-coverage.test.mjs: eleven proven inherited reminders use their real encounter caller and retain original voice IDs",
+    "commonKukuWitness": {
+      "originalRole": "narrator",
+      "originalNpcFlagName": "sundial",
+      "path": "Lose the Sundial at the Ch3 trial, enter Ch4, and visit the Stairwell/Evidence Locker arrival in ch4.landing; revisit the listed station.",
+      "flags": {
+        "dead:sundial": true,
+        "arrived:sundial": true,
+        "entered:ch4": true,
+        "stakes.ch3": 4
+      }
+    },
+    "tallyWitness": {
+      "path": "Meet Sequins at ch1.well, leave before winning the Well, lose him at the Gate, play his Quiet Scene after entering a later chapter, visit the Pattern Stall for his arrival, and revisit the unfinished Well.",
+      "flags": {
+        "dead:sequins": true,
+        "arrived:sequins": true,
+        "quiet:sequins": "done",
+        "stakes.ch1": 4
+      },
+      "requiredAbsentFlag": "seen:ch1.well.win"
+    },
+    "addedPairs": [
+      {
+        "nodeId": "road-start",
+        "script": "station.road-start.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-1ie5bhk",
+        "text": "Still shouting. Check the claims, not the volume.",
+        "lesson": "lesson1",
+        "originalId": "narrator-1v4zxh5",
+        "extraFlags": {},
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "river-ford",
+        "script": "station.river-ford.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-14x60yx",
+        "text": "Upstream, a rocket sits in the river. Muskrat calls it a reef now.",
+        "lesson": "lesson1",
+        "originalId": "narrator-x30byz",
+        "extraFlags": {
+          "side.6": 3
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "well",
+        "script": "station.well.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-140poa4",
+        "text": "The well still wants evidence. Wishes just bounce off.",
+        "lesson": "lesson1",
+        "originalId": "narrator-1sqxsvh",
+        "extraFlags": {
+          "seen:ch1.well.win": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "well",
+        "script": "station.well.reminder",
+        "role": "sequins",
+        "actor": "tally",
+        "id": "tally-1rm8zx0",
+        "text": "Still no sequence. Evidence, please. Not wishes.",
+        "lesson": "lesson1",
+        "originalId": "sequins-g38nr0",
+        "extraFlags": {},
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "standing-stone",
+        "script": "station.standing-stone.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-bp3gzv",
+        "text": "The stone is still sure of itself. Test it.",
+        "lesson": "lesson1",
+        "originalId": "narrator-gjl1ay",
+        "extraFlags": {},
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "gate",
+        "script": "station.gate.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-rhgil2",
+        "text": "The cage is empty. The crack has stopped drinking.",
+        "lesson": "lesson1",
+        "originalId": "narrator-4an2ip",
+        "extraFlags": {
+          "seen:ch1.gate.win": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "k-gallery",
+        "script": "station.k-gallery.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-16qw54m",
+        "text": "The charts hang a little crooked now. Check the axes anyway.",
+        "lesson": "lesson4",
+        "originalId": "narrator-l1fso9",
+        "extraFlags": {
+          "finale-open": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "k-prediction",
+        "script": "station.k-prediction.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-1xg7tow",
+        "text": "The machine still counts. It just doesn't boast.",
+        "lesson": "lesson4",
+        "originalId": "narrator-tj3hdm",
+        "extraFlags": {
+          "finale-open": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "k-workshop",
+        "script": "station.k-workshop.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-1c12mau",
+        "text": "His chalk is still here. Guess, pick the facts, finish the question.",
+        "lesson": "lesson4",
+        "originalId": "narrator-njsr03",
+        "extraFlags": {
+          "dead:pip": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "k-sorting",
+        "script": "station.k-sorting.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-14qgcmu",
+        "text": "His stamp is still on the desk. Check who the machine says no to.",
+        "lesson": "lesson4",
+        "originalId": "narrator-ezdo1t",
+        "extraFlags": {
+          "dead:pip": true
+        },
+        "recordingPresent": false
+      },
+      {
+        "nodeId": "k-core",
+        "script": "station.k-core.reminder",
+        "role": "narrator",
+        "actor": "kuku",
+        "id": "kuku-stlg1l",
+        "text": "The core is quiet. Its three old tricks still run, if you want them.",
+        "lesson": "lesson4",
+        "originalId": "narrator-pk118i",
+        "extraFlags": {
+          "finale-open": true
+        },
+        "recordingPresent": false
+      }
+    ],
+    "recordingQueue": "These eleven pairs were discovered after the active generation process snapshotted the 2963-line catalog. All eleven lacked recordings at receipt capture and remain queued for a later natural pass."
+  },
+  "inheritedTextAudit": {
+    "definition": "Distinct absent-or-null-u understudy/text IDs not already in the catalog. Empty u is excluded. This syntactic scan is not a count of reachable missing speech.",
+    "beforeProvenReminderFix": {
+      "rawCandidates": 417,
+      "byActor": {
+        "kuku": 218,
+        "achilles": 73,
+        "tally": 39,
+        "rubberstamp": 74,
+        "rubberstamp-possessed": 13
+      },
+      "pairsWhoseEveryOccurrenceIsOriginalOnlyReplayOrDeathLastWords": 6,
+      "afterLocalBranchConditions": 325,
+      "afterOwnDeathArmingAndMetPrerequisites": 313,
+      "afterAdditionalArrivalChapterConstraintsAndExcludingNeverArrivingRubberstamp": 232
+    },
+    "afterProvenReminderFix": {
+      "rawCandidatesNotCatalogued": 406,
+      "originalOnlyPairsIncludedInRawCount": 6,
+      "unprovenUpperBoundAfterAdditionalArrivalAndDeathConstraints": 221,
+      "provenRemainingReachableCount": null,
+      "reasonCountIsNotCertified": "Caller conditions, first-visit and seen flags, saved replay cast, pre-line state changes and clock lifecycle can exclude further pairs. No broad set was added or sent to TTS."
+    },
+    "originalOnlyExamples": [
+      {
+        "actorNotToAdd": "tally",
+        "text": "Oh. It's… shiny in there."
+      },
+      {
+        "actorNotToAdd": "achilles",
+        "text": "Don't watch the rope, dear. Watch her."
+      },
+      {
+        "actorNotToAdd": "achilles",
+        "text": "Don't watch the rope, dear. Watch the table."
+      },
+      {
+        "actorNotToAdd": "kuku",
+        "text": "It's all right. On cloudy days I gu—"
+      },
+      {
+        "actorNotToAdd": "rubberstamp",
+        "text": "Write it down, would you? For the record."
+      },
+      {
+        "actorNotToAdd": "achilles",
+        "text": "{name}! It's Fair day! Wear something with pockets. Pockets win prizes."
+      }
+    ],
+    "safeNextPolicy": "Prove additional actor/text pairs with the real caller and reachable post-arrival save states before adding them. Preserve explicit u:'' silence and original-only replay/death speech. Do not use raw candidate totals as a render queue."
+  },
+  "tutorialHostInventory": {
+    "scope": "Conservative resolver-compatible flag inventory, not a proof that every sampled state is normal-play reachable.",
+    "runtimeUsed": [
+      "Rift.Cast.nodeHost",
+      "Rift.Cast.host",
+      "Rift.Cast.actor",
+      "Rift.Story.test"
+    ],
+    "handled": [
+      "First matching conditional node host",
+      "Explicit null/silent host",
+      "NPC flag aliases",
+      "Death and arrival actor selection",
+      "Node-specific fallback including null",
+      "Wildcard fallback chapter restrictions",
+      "Fallback target actor selection without recursive fallback"
+    ],
+    "hypotheticalArrivalIncluded": "Rubberstamp can resolve under arrived:pip flags, but the shipped story never sets that arrival. design/UNDERSTUDIES.md deliberately specifies art/audition only for him. His conservatively inventoried tutorial recordings do not establish normal-play reachability.",
+    "futureConditionGuard": "The inventory throws if a future tutorial-host condition uses clock danger until sampling for that condition is implemented."
+  },
+  "finiteSideStoryFunctions": {
+    "functionValuedFieldsInspected": 10,
+    "setupFunctions": 2,
+    "generatedOutputFields": 8,
+    "dynamicSpokenLinePairs": 0,
+    "finding": "Lucky Well generates clue-card text/table cells. Muskrat's Launch generates clue-card text and note-only steps, including its right-answer note. These are display-only.",
+    "sources": [
+      "data/script/side-stories-l1.js",
+      "data/script/side-stories-l2.js",
+      "js/core/side-stories.js",
+      "js/screens/side-story.js"
+    ]
+  },
+  "otherSpeechInputs": {
+    "checked": [
+      {
+        "source": "js/ui/cutscene.js",
+        "finding": "Raw say/text pairs match existing catalog IDs. Canonical conversations use script lines and share the inherited-text reachability caveat."
+      },
+      {
+        "source": "js/screens/battle.js",
+        "finding": "Static lesson steps, hints, traps, replies and outro are covered; generated power explanations use all finite allowed avatar configurations. Creature barks come from inventoried data/barks.js."
+      },
+      {
+        "source": "js/screens/encounter.js",
+        "finding": "Catch taunts use inventoried creature lines. Tutorial instructions use puzzle tutorial definitions."
+      },
+      {
+        "source": "js/puzzles and js/screens/hunt.js",
+        "finding": "Helpers named speak/api.say update displayed bubbles/text; they do not call Audio.speak and were not promoted into spoken inventory."
+      }
+    ],
+    "additionalConcreteGapBeyondInheritedText": false
+  },
+  "runtimeCompletion": {
+    "finalRecordedOnlyCompletionEstablished": false,
+    "browserFallbackStillPresent": true,
+    "source": "js/core/audio.js: speakFallback",
+    "reason": "Recorded files and their content/boundaries require separate verification; unresolved inherited wording remains; runtime still invokes browser synthesis for missing/failed audio."
+  },
+  "validation": {
+    "voiceCoverageTests": {
+      "passed": 13,
+      "failed": 0
+    },
+    "focusedVoiceStoryAndLessonTests": {
+      "passed": 38,
+      "failed": 0
+    },
+    "checks": [
+      "Real encounter reminder selection and real Dialogue/Cast speaker/voice ID execution for all eleven additions",
+      "Original speaker IDs retained",
+      "Explicit empty u remains silent for replacement",
+      "Explicit replay remains original",
+      "Unaudited inherited wording not automatically expanded",
+      "All 260 power configurations produce 173 unique lesson1 lines",
+      "Resolver-compatible tutorial host condition/fallback behavior"
+    ]
+  }
+}

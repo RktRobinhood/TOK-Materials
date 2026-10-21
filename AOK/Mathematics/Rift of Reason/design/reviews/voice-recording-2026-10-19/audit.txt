@@ -1,0 +1,217 @@
+Audit selection: 13 stable new clips; 0/24 text-model requests already attempted.
+Audit selection: 13 stable new clips; 0/24 text-model requests already attempted.
+Text-model request 1: swiftlet-on3j8y, swiftlet-1a52sl6, swiftlet-17m4w53, swiftlet-1r416gn
+{"id":"swiftlet-on3j8y","expected":"A third era. Staying Era. I feel a song coming. Eleven verses. One per soldier.","heard":"A third era? Stay in era. I feel a song coming. 11 verses, one per soldier.","ok":false}
+{"id":"swiftlet-1a52sl6","expected":"Did you spot my clues? Too late.","heard":"Did you spot my clues? Too late.","ok":true}
+{"id":"swiftlet-17m4w53","expected":"New era, new rules.","heard":"New era, new rules.","ok":true}
+{"id":"swiftlet-1r416gn","expected":"Clue number one: I am winning.","heard":"Clue number one, I am winning.","ok":true}
+Text-model request 2: swiftlet-16b9gvt, swiftlet-1e62wtv, swiftlet-11i2fag, speedcheeta-15kuqh4
+{"id":"swiftlet-16b9gvt","expected":"Fine. That gets a sad song.","heard":"Fine. That gets a sad song.","ok":true}
+{"id":"swiftlet-1e62wtv","expected":"I will write a song about this.","heard":"I will write a song about this.","ok":true}
+{"id":"swiftlet-11i2fag","expected":"This one goes in the breakup song.","heard":"This one goes in the break up song.","ok":false}
+{"id":"speedcheeta-15kuqh4","expected":"LET'S GOOOO! Everybody hits harder!","heard":"Let's go. Everybody hits harder.","ok":false}
+Text-model request 3: speedcheeta-1fho2ls, speedcheeta-1xjv5t1, speedcheeta-1hb1o8k, speedcheeta-k9ghk4
+{"id":"speedcheeta-1fho2ls","expected":"AAAAH! I am here! Why am I here?!","heard":"Ah, I am here. Why am I here?","ok":false}
+{"id":"speedcheeta-1xjv5t1","expected":"Power up! Everyone, plus one!","heard":"Power up! Everyone plus one.","ok":true}
+{"id":"speedcheeta-1hb1o8k","expected":"Too fast! I was too fast!","heard":"Too fast! I was too fast.","ok":true}
+{"id":"speedcheeta-k9ghk4","expected":"Nooo! Chat, did you see that?!","heard":"No! Chat, did you see that?","ok":false}
+Text-model request 4: speedcheeta-1dk0y4z
+{"id":"speedcheeta-1dk0y4z","expected":"I need a backflip. Emotionally.","heard":"I need a backflip, emotionally.","ok":true}
+4 text-model requests this invocation; 13 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 18 stable new clips; 4/24 text-model requests already attempted.
+Audit selection: 18 stable new clips; 4/24 text-model requests already attempted.
+Text-model request 5: carlseal-1qk2ms0, carlseal-122nusw, carlseal-7bgcq, carlseal-1lxtuzq
+{"id":"carlseal-1qk2ms0","expected":"Show me your hand. I already know it.","heard":"Show me your hand. I already know it.","ok":true}
+{"id":"carlseal-122nusw","expected":"I have calculated this. Twenty moves ahead.","heard":"I have calculated this, 20 moves ahead.","ok":false}
+{"id":"carlseal-7bgcq","expected":"Let me see your cards. Yes. As expected.","heard":"Let me see your cards. Yes.","ok":false}
+{"id":"carlseal-1lxtuzq","expected":"Hm. A blunder. Mine.","heard":"As expected, hm.","ok":false}
+Text-model request 6: carlseal-15yh4wo, carlseal-97u75e, obambu-mnla5v, obambu-15xvaha
+{"id":"carlseal-15yh4wo","expected":"Interesting. I will analyse that later.","heard":"A blunder.","ok":false}
+{"id":"carlseal-97u75e","expected":"Good game. I suppose.","heard":"Mine. Interesting.","ok":false}
+{"id":"obambu-mnla5v","expected":"Let me be clear. Here is some hope. And hearts.","heard":"I will analyze that later.","ok":false}
+{"id":"obambu-15xvaha","expected":"Yes, we can. Heal up, team.","heard":"let me be clear. Here is some hope","ok":false}
+Text-model request 7: obambu-znlz2m, obambu-18e7hcd, obambu-ox7mtx, obambu-1uhxam7
+{"id":"obambu-znlz2m","expected":"Now… let me pause… and heal.","heard":"Heal up team, now let me pause,","ok":false}
+{"id":"obambu-18e7hcd","expected":"Thank you. It has been an honour.","heard":"and heal. Thank you, it has been an honor.","ok":false}
+{"id":"obambu-ox7mtx","expected":"Let me be clear. That hurt.","heard":"Let me be clear, that hurt.","ok":true}
+{"id":"obambu-1uhxam7","expected":"Change… is hard.","heard":"Change is hard.","ok":true}
+Text-model request 8: haalandroid-1crla8k, haalandroid-we5xkt, haalandroid-euwtn, haalandroid-cyezdc
+{"id":"haalandroid-1crla8k","expected":"Target: hero. Goal: yes.","heard":"target hero goal yes","ok":true}
+{"id":"haalandroid-we5xkt","expected":"Breathe in. Breathe out. Score.","heard":"breathe in breathe out score","ok":true}
+{"id":"haalandroid-euwtn","expected":"Pattern loading. Goal loading.","heard":"pattern loading goal loading","ok":true}
+{"id":"haalandroid-cyezdc","expected":"Error. No goal.","heard":"error no goal","ok":true}
+Text-model request 9: haalandroid-sc312l, haalandroid-1xg2tls
+{"id":"haalandroid-sc312l","expected":"Pattern… broken.","heard":"Pattern broken.","ok":true}
+{"id":"haalandroid-1xg2tls","expected":"Rebooting. Meditating.","heard":"Rebooting. Meditating.","ok":true}
+5 text-model requests this invocation; 18 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 6 stable new clips; 9/36 text-model requests already attempted.
+Text-model request 10: carlseal-7bgcq
+{"id":"carlseal-7bgcq","expected":"Let me see your cards. Yes. As expected.","heard":"Let me see your cards. Yes.","ok":false}
+Text-model request 11: carlseal-1lxtuzq
+{"id":"carlseal-1lxtuzq","expected":"Hm. A blunder. Mine.","heard":"As expected.","ok":false}
+Text-model request 12: carlseal-15yh4wo
+{"id":"carlseal-15yh4wo","expected":"Interesting. I will analyse that later.","heard":"A blunder mine. Interesting.","ok":false}
+Text-model request 13: carlseal-97u75e
+{"id":"carlseal-97u75e","expected":"Good game. I suppose.","heard":"I will analyze that later.","ok":false}
+Text-model request 14: obambu-mnla5v
+{"id":"obambu-mnla5v","expected":"Let me be clear. Here is some hope. And hearts.","heard":"Let me be clear. Here is some hope.","ok":false}
+Text-model request 15: obambu-15xvaha
+{"id":"obambu-15xvaha","expected":"Yes, we can. Heal up, team.","heard":"and hearts. Yes we can.","ok":false}
+6 text-model requests this invocation; 6 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 23 stable new clips; 15/36 text-model requests already attempted.
+Text-model request 16: oracle-3i8lny, oracle-xykio, oracle-zpph34, oracle-1dwhn5n
+{"id":"oracle-3i8lny","expected":"Ignore that screen. It is only you, finishing. I am a thinking engine. I print proofs.","heard":"Ignore that screen. It is only you finishing. I am a thinking engine. I print proofs.","ok":true}
+{"id":"oracle-xykio","expected":"I am a thinking engine. I print proofs.","heard":"I am a thinking engine. I print proofs.","ok":true}
+{"id":"oracle-zpph34","expected":"All correct. Probably. Inspect a step if you insist. Nobody insists.","heard":"All correct, probably. Inspect a step if you insist. Nobody insists.","ok":true}
+{"id":"oracle-1dwhn5n","expected":"All correct. Inspect a step if you must.","heard":"All correct. Inspect a step if you must.","ok":true}
+Text-model request 17: oracle-1fulyhd
+{"id":"oracle-1fulyhd","expected":"More proofs. Still fast. Still unchecked. Inspect one.","heard":"More proofs, still fast, still unchecked. Inspect one.","ok":true}
+Text-model request 18: muskrat-yrun4p, muskrat-1aywz2s, muskrat-14han12
+{"id":"muskrat-yrun4p","expected":"Next year. Definitely. Probably.","heard":"next year definitely probably","ok":true}
+{"id":"muskrat-1aywz2s","expected":"Click creatures to load the boat, then Row across. An unsafe crossing counts as a wrong check.","heard":"click creatures to load the boat then row across an unsafe crossing counts as a wrong check","ok":true}
+{"id":"muskrat-14han12","expected":"Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.","heard":"undo and reset are free how to play is free the hint button shows its heart cost think first then check your answer","ok":true}
+Text-model request 19: swiftlet-possessed-1rbf5ry, swiftlet-possessed-13t2l0p, swiftlet-possessed-20jg1n, swiftlet-possessed-yuqnw3
+{"id":"swiftlet-possessed-1rbf5ry","expected":"There are only two eras now. Marching Era. Or Coward Era.","heard":"There are only two eras now, marching era or coward era.","ok":true}
+{"id":"swiftlet-possessed-13t2l0p","expected":"Coward Era has no songs. I'd have to write them all.","heard":"Coward era has no songs. I'd have to write them all.","ok":true}
+{"id":"swiftlet-possessed-20jg1n","expected":"\"Everyone\"? You sound like the posters.","heard":"everyone, you sound like the posters. Which singer","ok":false}
+{"id":"swiftlet-possessed-yuqnw3","expected":"Which singer?…Is it me? I didn't say that. Yet.","heard":"Is it me? I didn't say that. Yet.","ok":false}
+Text-model request 20: swiftlet-possessed-8pe5g4
+HTTP 503; stopping. No clips in this request are counted as checked.
+5 text-model requests this invocation; 12 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 2 stable new clips; 20/60 text-model requests already attempted.
+Text-model request 21: obambu-znlz2m
+{"id":"obambu-znlz2m","expected":"Now… let me pause… and heal.","heard":"Heal up, team. Now, let me pause","ok":false}
+Text-model request 22: obambu-18e7hcd
+HTTP 429; stopping. No clips in this request are counted as checked.
+2 text-model requests this invocation; 1 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 1 stable new clips; 22/60 text-model requests already attempted.
+Text-model request 23: obambu-18e7hcd
+Text model daily quota reported; no further model requests this pass.
+HTTP 429; stopping. No clips in this request are counted as checked.
+1 text-model requests this invocation; 0 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 1 stable new clips; 23/60 total attempts; 0 on gemini-2.5-flash-lite.
+Text-model request 24 [model=gemini-2.5-flash-lite]: haalandroid-1crla8k
+HTTP 404; stopping. No clips in this request are counted as checked.
+1 text-model requests this invocation; 0 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 1 stable new clips; 24/60 total attempts; 0 on gemini-3.5-flash-lite.
+Text-model request 25 [model=gemini-3.5-flash-lite]: haalandroid-1crla8k
+{"id":"haalandroid-1crla8k","expected":"Target: hero. Goal: yes.","heard":"Target. Hero. Goal. Yes.","ok":true,"model":"gemini-3.5-flash-lite"}
+1 text-model requests this invocation; 1 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 1 stable new clips; 25/60 total attempts; 1 on gemini-3.5-flash-lite.
+Text-model request 26 [model=gemini-3.5-flash-lite]: obambu-18e7hcd
+{"id":"obambu-18e7hcd","expected":"Thank you. It has been an honour.","heard":"Thank you. It has been an honor.","ok":false,"model":"gemini-3.5-flash-lite"}
+1 text-model requests this invocation; 1 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 6 stable new clips; 26/60 total attempts; 2 on gemini-3.5-flash-lite.
+Text-model request 27 [model=gemini-3.5-flash-lite]: carlseal-7bgcq, carlseal-1lxtuzq, carlseal-15yh4wo
+{"id":"carlseal-7bgcq","expected":"Let me see your cards. Yes. As expected.","heard":"Let me see your cards. Yes. As expected.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"carlseal-1lxtuzq","expected":"Hm. A blunder. Mine.","heard":"A blunder. Mine.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"carlseal-15yh4wo","expected":"Interesting. I will analyse that later.","heard":"Interesting. I will analyze that later.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 28 [model=gemini-3.5-flash-lite]: obambu-mnla5v, obambu-15xvaha, obambu-znlz2m
+{"id":"obambu-mnla5v","expected":"Let me be clear. Here is some hope. And hearts.","heard":"Let me be clear. Here is some hope and hearts.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"obambu-15xvaha","expected":"Yes, we can. Heal up, team.","heard":"Yes, we can. Heal up, team.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"obambu-znlz2m","expected":"Now… let me pause… and heal.","heard":"Now, let me pause and heal.","ok":true,"model":"gemini-3.5-flash-lite"}
+2 text-model requests this invocation; 6 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 50 stable new clips; 28/60 total attempts; 4 on gemini-3.5-flash-lite.
+Text-model request 29 [model=gemini-3.5-flash-lite]: swiftlet-possessed-20jg1n, swiftlet-possessed-yuqnw3, swiftlet-possessed-8pe5g4
+{"id":"swiftlet-possessed-20jg1n","expected":"\"Everyone\"? You sound like the posters.","heard":"everyone. You sound like the posters.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"swiftlet-possessed-yuqnw3","expected":"Which singer?…Is it me? I didn't say that. Yet.","heard":"Which singer? Is it me? I didn't say that. Yet.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"swiftlet-possessed-8pe5g4","expected":"Wrong era, darling. Count my choices.","heard":"Wrong era, darling. Count my choices.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 30 [model=gemini-3.5-flash-lite]: eminemu-possessed-be5k2v, eminemu-possessed-1nak03e, eminemu-possessed-155mxsf, eminemu-possessed-mgvc5c
+{"id":"eminemu-possessed-be5k2v","expected":"Rock said march, and Rock's a star. Stars know best, near and far!","heard":"Rock said march and Rock's a star. Stars know best near and far.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"eminemu-possessed-1nak03e","expected":"Has the Rock been to the sky?…He's been to the gym. Same height.","heard":"Has the Rock been to the sky? He's been to the gym. Same height.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"eminemu-possessed-155mxsf","expected":"Everyone? Who's everyone? Show me their faces!","heard":"Everyone? Who's everyone? Show me their faces.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"eminemu-possessed-mgvc5c","expected":"Sheep or soldier? That's two. I rhyme better than that.","heard":"Sheep or soldier, that's two. I rhyme better than that.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 31 [model=gemini-3.5-flash-lite]: eminemu-possessed-3fcuzm
+{"id":"eminemu-possessed-3fcuzm","expected":"Nope. Listen to the beat. Who said it?","heard":"Nope. Listen to the beat. Who said it?","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 32 [model=gemini-3.5-flash-lite]: beansprout-1m27sc0, beansprout-1aug553, beansprout-116y8h7, beansprout-1pu4117
+{"id":"beansprout-1m27sc0","expected":"Hmm… Teddy?","heard":"","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"beansprout-1aug553","expected":"Ooh.","heard":"Teddy?","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"beansprout-116y8h7","expected":"Oh dear.","heard":"Oof.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"beansprout-1pu4117","expected":"Teddy…","heard":"Oh dear.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 33 [model=gemini-3.5-flash-lite]: beansprout-iybblq
+{"id":"beansprout-iybblq","expected":"Hmph.","heard":"Teddy.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 34 [model=gemini-3.5-flash-lite]: granny-j31sif, granny-1nht4xg, granny-1hezu4, granny-1hne7ay
+{"id":"granny-j31sif","expected":"New creatures are asleep. Zzz. Kim can attack on your next turn.","heard":"New creatures are asleep. Kim, can attack on your next turn.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1nht4xg","expected":"My turn. I have only 1 energy, and my cards cost more. So I just draw.","heard":"My turn. I have only one energy and my cards cost more. So, I just draw.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1hezu4","expected":"Your turn again. Your energy grew to 2, and Kim is awake.","heard":"Your turn again. Your energy grew to two, and Kim is awake.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1hne7ay","expected":"Ouch! 3 hearts left. That attack used one activation.","heard":"Ouch. Three hearts left. That attack used one activation.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 35 [model=gemini-3.5-flash-lite]: granny-1g954zu, granny-su5efv, granny-6t7ssz, granny-kgw80h
+{"id":"granny-1g954zu","expected":"I played Khaby Llame. See his silver shield frame? That means Guard.","heard":"I played Cobby Llama. See his silver shield frame? That means guard.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-su5efv","expected":"In 4 rounds, Fate comes back and resets all rules.","heard":"In four rounds, Fate comes back and resets all rules.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-6t7ssz","expected":"Both took 1 damage. Damage stays: the number in the heart shows the health left.","heard":"Both took one damage. Damage stays. The number in the heart shows the health left.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-kgw80h","expected":"Khaby's own ability also took Astrophysicat's ability away. See: No ability.","heard":"Cobby's own ability also took astrophysi cat's ability away. See? No ability.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 36 [model=gemini-3.5-flash-lite]: granny-z17dn2, granny-4szhqx, granny-155ac5f, granny-tuorir
+{"id":"granny-z17dn2","expected":"Khaby lost his Guard. The way to me is open.","heard":"Coby lost his guard. The way to me is open.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-4szhqx","expected":"Shakirattle! 3 attack, and Elusive: tactic cards can't target her.","heard":"Shackle rattle. Three attack and elusive. Tactic cards can't target her.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-155ac5f","expected":"Khaby hit you for 1 heart. The pictures on the left, Recent plays, show what I did.","heard":"Coby hit you for one heart. The pictures on the left recent plays show what I did.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-tuorir","expected":"Your turn. Shakirattle hits hard. Let's deal with my creatures.","heard":"Your turn. Shackle rattle hits hard. Let's deal with my creatures.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 37 [model=gemini-3.5-flash-lite]: granny-fk4a70, granny-dfpemt, granny-zyn42c, granny-1ycb8ih
+{"id":"granny-fk4a70","expected":"Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.","heard":"Coby is defeated. That used one activation. Each cast, attack, or activate uses one. You have two per turn. One more thing.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-dfpemt","expected":"One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.","heard":"Tim has an ability. Filter. Pay one energy, and the next fate event comes two rounds sooner.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-zyn42c","expected":"The tactic and rule used both activations. End turn. Granny will pass, then you will draw.","heard":"the tactic and rule used both activations and turn. Granny will pass, then you will draw.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1ycb8ih","expected":"Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.","heard":"Sheckarattel took one damage. Astro Fisicat took zero. Same cards, different rule, different result.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 38 [model=gemini-3.5-flash-lite]: granny-13hcnw7, granny-gvw9ns, granny-xfnpgl, granny-1nks571
+{"id":"granny-13hcnw7","expected":"Only 2 hearts left! Those two attacks used both activations.","heard":"Only two hearts left. Those two attacks used both activations.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-gvw9ns","expected":"I played a rule card! Look at the Win tile.","heard":"I played a rule card. Look at the win tile.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-xfnpgl","expected":"Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?","heard":"Hint. What will the next reset on the fate track do to my new win rule? Which of your creatures can move fate?","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1nks571","expected":"Kim's Filter brings the Reset 2 rounds sooner. Click Kim, then press Activate.","heard":"Kim's filter brings the reset two rounds sooner. Click Kim, then press activate.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 39 [model=gemini-3.5-flash-lite]: granny-hm2z2d, granny-1yfxf8t, granny-1dj60wz, granny-8qsmvz
+{"id":"granny-hm2z2d","expected":"Careful! Now if MY hearts reach 0, I WIN. Don't hit me now. Read the Win tile.","heard":"Careful. Now if my heart's reach zero, I win. Don't hit me now. Read the win tile.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1yfxf8t","expected":"Fate reset! All rules are back to the basics: my rule AND yours. Zero hearts loses again.","heard":"Fate reset. All rules are back to the basics. My rule and yours. Zero hearts loses again.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1dj60wz","expected":"Filter and the attack used both activations. End turn. Granny will pass, then draw before your last hit.","heard":"Filter and the attack used both activations. End turn. Granny will pass. Then draw before your last hit.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-8qsmvz","expected":"Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.","heard":"Each turn starts with one draw. Press your deck. This short match uses loaned cards. Your collection is safe.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 40 [model=gemini-3.5-flash-lite]: granny-1q2xabm, granny-1ecqpw8, granny-f70pc5, granny-2njnku
+{"id":"granny-1q2xabm","expected":"You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.","heard":"You have one energy. Kim costs one. The blue number. Yellow is attack, red is health. Drag Kim onto your side, or click her then play.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1ecqpw8","expected":"New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.","heard":"New creatures sleep until your next turn. End turn. Granny will draw and pass, then Kim can attack.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-f70pc5","expected":"Draw first. Your energy grows and refills each turn.","heard":"Draw first. Your energy grows and refills each turn.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-2njnku","expected":"Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.","heard":"Granny has two hearts and no blocker. Drag Kim onto her portrait, or click Kim, then Granny. Each cast, attack, or activate uses one of your two activations. This hit takes one heart.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 41 [model=gemini-3.5-flash-lite]: granny-qdr96b, granny-1rgyz2, granny-fwxv1x, granny-1i4nbnl
+{"id":"granny-qdr96b","expected":"End turn. Watch Granny change the Win rule. Rule cards affect both players.","heard":"End turn. Watch Granny change the win rule. Rule cards affect both players.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1rgyz2","expected":"Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?","heard":"Read the win tile in Axioms. Granny has one heart. If Kim attacks her now, whose zero hearts will win the match?","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-fwxv1x","expected":"Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.","heard":"your decision. You may attack, play your win rule card, or use Kim's filter to bring Fate's reset sooner. Read their effects and choose. No pointer yet.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1i4nbnl","expected":"A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.","heard":"A hit would make Granny win. Your win rule card or Kim's filter can restore the original goal.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 42 [model=gemini-3.5-flash-lite]: granny-q15vt1, granny-8g6nmb, granny-1hq0d0z, granny-sp5sm8
+{"id":"granny-q15vt1","expected":"Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.","heard":"Play your win rule card, or click Kim, then activate filter. Filter uses her attack for this turn.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-8g6nmb","expected":"Zero hearts loses again. You changed the starting rule, so the same attack has a different result.","heard":"Zero Hearts loses again. You changed the starting rule, so the same attack has a different result.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-1hq0d0z","expected":"Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.","heard":"Read win, the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.","ok":true,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-sp5sm8","expected":"Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.","heard":"Attack Granny with Kim. Same creature, same hit. This time, the current win rule makes you win.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 43 [model=gemini-3.5-flash-lite]: granny-fs6iif
+{"id":"granny-fs6iif","expected":"Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?","heard":"Same table, same cards. Change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?","ok":true,"model":"gemini-3.5-flash-lite"}
+15 text-model requests this invocation; 50 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 5 stable new clips; 43/60 total attempts; 19 on gemini-3.5-flash-lite.
+Text-model request 44 [model=gemini-3.5-flash-lite]: beansprout-1m27sc0
+{"id":"beansprout-1m27sc0","expected":"Hmm… Teddy?","heard":"hmm","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 45 [model=gemini-3.5-flash-lite]: beansprout-1aug553
+{"id":"beansprout-1aug553","expected":"Ooh.","heard":"Teddy","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 46 [model=gemini-3.5-flash-lite]: beansprout-116y8h7
+{"id":"beansprout-116y8h7","expected":"Oh dear.","heard":"Ugh","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 47 [model=gemini-3.5-flash-lite]: beansprout-1pu4117
+{"id":"beansprout-1pu4117","expected":"Teddy…","heard":"Oh dear.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 48 [model=gemini-3.5-flash-lite]: beansprout-iybblq
+{"id":"beansprout-iybblq","expected":"Hmph.","heard":"Teddy.","ok":false,"model":"gemini-3.5-flash-lite"}
+5 text-model requests this invocation; 5 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 4 stable new clips; 48/60 total attempts; 24 on gemini-3.5-flash-lite.
+Text-model request 49 [model=gemini-3.5-flash-lite]: swiftlet-on3j8y
+{"id":"swiftlet-on3j8y","expected":"A third era. Staying Era. I feel a song coming. Eleven verses. One per soldier.","heard":"a third era? Stane era? I feel a song coming. 11 verses, one per soldier.","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 50 [model=gemini-3.5-flash-lite]: carlseal-1lxtuzq
+Invalid response: Incomplete audio audit response. No clips in this request are counted as checked.
+2 text-model requests this invocation; 1 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 2 stable new clips; 50/60 total attempts; 26 on gemini-3.5-flash-lite.
+Text-model request 51 [model=gemini-3.5-flash-lite]: granny-fk4a70, granny-dfpemt
+{"id":"granny-fk4a70","expected":"Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.","heard":"Koby is defeated. That used one activation. Each cast, attack, or activate uses one. You have two per turn.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"granny-dfpemt","expected":"One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.","heard":"One more thing. Kim has an ability: Filter. Pay one energy, and the next fate event comes two rounds sooner.","ok":false,"model":"gemini-3.5-flash-lite"}
+1 text-model requests this invocation; 2 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 3 stable new clips; 51/60 total attempts; 27 on gemini-3.5-flash-lite.
+Text-model request 52 [model=gemini-3.5-flash-lite]: beansprout-1m27sc0, beansprout-116y8h7, beansprout-1pu4117
+{"id":"beansprout-1m27sc0","expected":"Hmm… Teddy?","heard":"Teddy","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"beansprout-116y8h7","expected":"Oh dear.","heard":"Oh dear, Teddy.","ok":false,"model":"gemini-3.5-flash-lite"}
+{"id":"beansprout-1pu4117","expected":"Teddy…","heard":"","ok":false,"model":"gemini-3.5-flash-lite"}
+1 text-model requests this invocation; 3 clips transcribed. Acting and unreviewed cuts remain provisional.
+Audit selection: 3 stable new clips; 52/60 total attempts; 28 on gemini-3.5-flash-lite.
+Text-model request 53 [model=gemini-3.5-flash-lite]: beansprout-1m27sc0
+{"id":"beansprout-1m27sc0","expected":"Hmm… Teddy?","heard":"Teddy","ok":false,"model":"gemini-3.5-flash-lite"}
+Text-model request 54 [model=gemini-3.5-flash-lite]: beansprout-116y8h7
+{"id":"beansprout-116y8h7","expected":"Oh dear.","heard":"Oh dear.","ok":true,"model":"gemini-3.5-flash-lite"}
+Text-model request 55 [model=gemini-3.5-flash-lite]: beansprout-1pu4117
+{"id":"beansprout-1pu4117","expected":"Teddy…","heard":"Teddy","ok":true,"model":"gemini-3.5-flash-lite"}
+3 text-model requests this invocation; 3 clips transcribed. Acting and unreviewed cuts remain provisional.

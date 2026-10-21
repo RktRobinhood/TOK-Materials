@@ -135,6 +135,8 @@ test('time effects move the node with the cursor; a fired one-shot never fires a
     s.players[0].energy = 5;
     s = act(s, { type: 'activate', cid: 'p0c1', ability: 'filter' });
     assert.equal(sched(s)[0].rounds, 1, 'Filter: 2 rounds sooner');
+    // Three deliberate uses in this turn need Plenty under the shared budget.
+    rule(s, 'plenty');
     // Clockwork forward walks onto it: it resolves at once, mid-turn.
     toHand(s, 'p0t1');
     s = act(s, { type: 'play', cid: 'p0t1' });

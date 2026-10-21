@@ -11,7 +11,7 @@
         state.flags[flag] = true;
         if (!state.rumours.includes(entry.id)) state.rumours.push(entry.id);
         if (entry.species) state.flags['rumour:' + entry.species] = true;
-        if (entry.axiom && !state.axioms.includes(entry.axiom)) state.axioms.push(entry.axiom);
+        if (entry.axiom) R.State.grantAxiom(entry.axiom, state);
         return { fresh: true, entry };
     }
     function recordWin(state, id) {

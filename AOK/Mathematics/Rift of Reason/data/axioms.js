@@ -31,27 +31,20 @@
     const Rift = root.Rift;
 
     // ---- colour wheel ------------------------------------------------------
-    // A clean 5-cycle. Each colour beats the next one (+1 attack while it fights
-    // that colour). Memory is colourless: it neither beats nor is beaten.
+    // Approved six-colour cycle: next two Strong +1, previous two Weak -1,
+    // opposite and self neutral. Preserve the old order and append Memory.
     Rift.data.wheel = {
         bonus: 1,
         note: 'This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence.',
-        order: ['reason', 'emotion', 'language', 'perception', 'imagination'],
-        beats: {
-            reason: 'emotion',
-            emotion: 'language',
-            language: 'perception',
-            perception: 'imagination',
-            imagination: 'reason',
-        },
+        order: ['reason', 'emotion', 'language', 'perception', 'imagination', 'memory'],
         lines: {
-            reason: 'Game rule: Reason beats Emotion. TOK prompt: when might a calm proof help check a strong feeling?',
-            emotion: 'Game rule: Emotion beats Language. TOK prompt: can a feeling matter before we have words for it?',
-            language: 'Game rule: Language beats Perception. TOK prompt: how might names affect what we notice?',
-            perception: 'Game rule: Perception beats Imagination. TOK prompt: what evidence could test an imagined explanation?',
-            imagination: 'Game rule: Imagination beats Reason. TOK prompt: what new results follow if we change an axiom?',
+            reason: 'Game rule: Reason is Strong against Emotion and Language. TOK prompt: when might a proof help check a strong feeling or a claim?',
+            emotion: 'Game rule: Emotion is Strong against Language and Perception. TOK prompt: how can feelings affect what we notice?',
+            language: 'Game rule: Language is Strong against Perception and Imagination. TOK prompt: how might names shape what we notice or imagine?',
+            perception: 'Game rule: Perception is Strong against Imagination and Memory. TOK prompt: can new evidence challenge an imagined or remembered event?',
+            imagination: 'Game rule: Imagination is Strong against Memory and Reason. TOK prompt: what new results follow if we change an axiom?',
+            memory: 'Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling?',
         },
-        memory: 'Game rule: Memory stands outside the wheel; it neither beats nor is beaten. This does not rank its value in TOK.',
     };
 
     const spotlight = (id, colour, name, flavour) => ({
@@ -191,7 +184,7 @@
         'curved-space': {
             short: 'Wheel runs backwards',
             name: 'The Broken Postulate', category: 'colour',
-            text: 'The colour wheel runs backwards: each colour beats the one that normally beats it.',
+            text: 'The colour wheel runs backwards: Strong and Weak swap. Neutral matchups stay neutral.',
             flavour: 'Drop Euclid\'s parallel postulate and geometry curves. Still consistent, just different.',
             rules: { wheelReversed: true },
         },
@@ -226,29 +219,29 @@
 
         // ---- plays per turn (a Fluxx-style "Play N"; basic: 2 card plays) ----
         restraint: {
-            short: 'Only 1 card play per turn',
+            short: 'Only 1 card activation per turn',
             name: 'Axiom of Restraint', category: 'plays', cost: 1,
-            text: 'Each player may play only 1 card per turn (creature, tactic or rule card).',
+            text: 'Each player has 1 card activation per turn: cast, attack or Activate.',
             flavour: 'Fewer moves, harder choices.',
             rules: { playLimit: 1 },
         },
         'two-plays': {
-            short: '2 card plays per turn',
+            short: '2 card activations per turn',
             name: 'Two Moves', category: 'plays', cost: 1, basic: true,
-            text: 'Back to normal: each player may play 2 cards per turn.',
+            text: 'Back to normal: each player has 2 card activations per turn: casts, attacks and Activate together.',
             rules: {},
         },
         plenty: {
-            short: '3 card plays per turn',
+            short: '3 card activations per turn',
             name: 'Axiom of Plenty', category: 'plays',
-            text: 'Each player may play 3 cards per turn.',
+            text: 'Each player has 3 card activations per turn: casts, attacks and Activate together.',
             flavour: 'More moves make room for bigger plans.',
             rules: { playLimit: 3 },
         },
         infinity: {
-            short: 'Play any number of cards',
+            short: 'Unlimited card activations',
             name: 'Axiom of Infinity', category: 'plays', cost: 3,
-            text: 'No limit: play as many cards as your energy allows.',
+            text: 'No card activation limit. Energy and creature readiness still apply.',
             flavour: 'There is an infinite set. Mathematicians simply decided so.',
             rules: { playLimit: Infinity },
         },
@@ -294,16 +287,16 @@
             rules: { bonus: 'fair-share' },
         },
         momentum: {
-            short: 'More creatures: +1 play',
+            short: 'More creatures: +1 activation',
             name: 'Momentum', category: 'bonus',
-            text: 'At the start of your turn, if you have more creatures in play than your opponent, you get +1 card play this turn.',
+            text: 'At the start of your turn, if you have more creatures in play than your opponent, you get +1 card activation this turn.',
             flavour: 'Success makes success easier. Is that fair?',
             rules: { bonus: 'momentum' },
         },
         think: {
-            short: 'Unused plays: draw cards',
+            short: 'Unused activations: draw cards',
             name: 'Think It Over', category: 'bonus',
-            text: 'At the end of your turn, draw 1 card for each card play you did not use (at most 2).',
+            text: 'At the end of your turn, draw 1 card for each card activation you did not use (at most 2).',
             flavour: 'Sometimes the best move is to wait and think.',
             rules: { bonus: 'think' },
         },
@@ -360,6 +353,26 @@
         },
     };
 
+    // #101: common relative rules. The engine resolves these against the shared value, before
+    // owner bonuses. Old named absolute rules keep their original meanings and IDs.
+    const fluxIds = [];
+    const fluxNames = {
+        plays: ['One More Move', 'One Fewer Move', 'Two More Moves', 'Two Fewer Moves'],
+        draw: ['One More Card', 'One Fewer Card', 'Two More Cards', 'Two Fewer Cards'],
+        growth: ['Grow Faster', 'Grow Slower', 'Grow Much Faster', 'Grow Much Slower'],
+        cost: ['A Little Costlier', 'A Little Cheaper', 'Much Costlier', 'Much Cheaper'],
+    };
+    [['plays', 'plays', 'playLimit', 'card activations per turn', '1–6'], ['draw', 'draw', 'drawCount', 'cards in the normal draw', '1–3'],
+        ['growth', 'energy', 'growth', 'energy growth next turn', '−1–3'], ['cost', 'cost', 'costDelta', 'creature energy costs', '−2–2']].forEach(([key, category, field, label, bounds]) => {
+        [1, -1, 2, -2].forEach((delta, i) => {
+            const id = 'flux-' + key + '-' + (delta > 0 ? 'plus-' : 'minus-') + Math.abs(delta);
+            fluxIds.push(id);
+            axioms[id] = { name: fluxNames[key][i], category, cost: Math.abs(delta), rarity: 'common',
+                short: (delta > 0 ? '+' : '−') + Math.abs(delta) + ' ' + label,
+                text: 'For BOTH players, change ' + label + ' by ' + (delta > 0 ? '+' : '−') + Math.abs(delta) + '. Bounds: ' + bounds + '.' + (key === 'plays' ? ' Unlimited needs a fixed limit.' : ''),
+                modifier: { field, delta } };
+        });
+    });
     Object.entries(axioms).forEach(([id, a]) => {
         a.id = id;
         if (a.cost == null) a.cost = 2;
@@ -377,4 +390,13 @@
             'restraint', 'two-plays', 'plenty', 'infinity', 'steady-state', 'diminishing-returns', 'limited-memory',
             'fresh-start', 'fair-share', 'momentum', 'think'],
     };
+    Rift.data.axiomDecks.legacyStarter = Rift.data.axiomDecks.starter.slice();
+    Rift.data.axiomDecks.default = ['flux-plays-plus-1', 'flux-plays-minus-1', 'flux-draw-plus-1', 'flux-draw-minus-1',
+        'flux-growth-plus-1', 'flux-cost-plus-1', 'flux-cost-minus-1', 'limited-memory', 'momentum', 'two-plays'];
+    Rift.data.axiomDecks.starter = Rift.data.axiomDecks.starter.filter(id => id !== 'infinity').concat(fluxIds);
+    // Construction, never weighted draws: submitted loadouts and the final shared shuffle stay exact.
+    Rift.data.flux = { ids: fluxIds, contribution(seed, eligible) {
+        const rng = Rift.makeRng(seed);
+        return rng.shuffle(rng.shuffle(fluxIds.slice()).slice(0, 7).concat(['limited-memory', 'momentum', eligible && rng.chance(0.25) ? 'infinity' : 'two-plays']));
+    } };
 })(typeof window !== 'undefined' ? window : globalThis);

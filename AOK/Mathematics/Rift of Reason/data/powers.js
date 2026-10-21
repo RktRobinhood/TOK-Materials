@@ -193,22 +193,27 @@
         },
         brainstorm: {
             name: 'Brainstorm', colour: 'imagination', kind: 'other', cost: 0, recharge: 0,
-            text: '+1 card play this turn.',
-            deeper: '+2 card plays this turn.',
+            text: '+1 card activation this turn.',
+            deeper: '+2 card activations this turn.',
             broader: 'Also +1 energy.',
             run(api, p, target, m) {
                 const P = api.s.players[p], n = m.deeper ? 2 : 1;
                 P.extraPlays = (P.extraPlays || 0) + n;
                 if (m.broader) P.energy += 1;
-                api.emit({ t: 'power', player: p, text: 'Brainstorm: +' + n + ' card play' + (n === 1 ? '' : 's') + ' this turn' + (m.broader ? ' and +1 energy' : '') + '.' });
+                api.emit({ t: 'power', player: p, text: 'Brainstorm: +' + n + ' card activation' + (n === 1 ? '' : 's') + ' this turn' + (m.broader ? ' and +1 energy' : '') + '.' });
             },
-            // Worth it when there are more affordable cards than plays left.
+            // Extra activations also help a ready board, including an exhausted budget.
             ai(s, p, target, H, m) {
                 const P = s.players[p];
                 const energy = P.energy - m.cost + (m.broader ? 1 : 0);
                 const left = Math.max(0, H.rules(s).playLimit + (P.extraPlays || 0) - (P.playsThisTurn || 0));
                 const cards = P.hand.filter(cid => H.playCost(s, cid) <= energy).length;
-                return cards > left ? 1.0 : -0.5;
+                const r = H.rules(s);
+                const ready = P.board.filter(cid => {
+                    const c = s.cards[cid];
+                    return !c.frozen && !c.activated && !c.attacks && (c.enteredTurn !== s.turn || r.arrivalReady || H.hasKeyword(s, cid, 'swift'));
+                }).length;
+                return cards + ready > left ? 1.0 : -0.5;
             },
         },
 

@@ -1,0 +1,47 @@
+{
+  "time": "2026-10-20T10:06:33.200Z",
+  "id": "achilles-1l11ywa",
+  "model": "gemini-3.8-flash",
+  "source": {
+    "file": "assets/voice/achilles-1l11ywa.mp3",
+    "sha256": "a519314f43b22406a0b64d1b014cd1c679f2fe0b39f46d82cbcde2a9429dfb63",
+    "bytes": 7344
+  },
+  "excerpt": {
+    "format": "WAV PCM16 mono 24000Hz",
+    "startSeconds": 0,
+    "durationSeconds": 0.65,
+    "sha256": "574f05f5a024626f90c07918fe75435f217b7a420790cdf0deb2562d071c04ee",
+    "bytes": 31278,
+    "ffmpeg": "C:/Users/mp/Downloads/_quadratic_ffmpeg/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe",
+    "command": [
+      "-v",
+      "error",
+      "-i",
+      "assets/voice/achilles-1l11ywa.mp3",
+      "-t",
+      "0.65",
+      "-ac",
+      "1",
+      "-ar",
+      "24000",
+      "-f",
+      "wav",
+      "pipe:1"
+    ]
+  },
+  "expectedSuppliedToModel": false,
+  "status": 200,
+  "rawReply": "[{\"id\":\"clip1\",\"heard\":\"You sure you're\"},{\"id\":\"clip2\",\"heard\":\"You sure you're\"}]",
+  "transcripts": [
+    {
+      "id": "clip1",
+      "heard": "You sure you're"
+    },
+    {
+      "id": "clip2",
+      "heard": "You sure you're"
+    }
+  ],
+  "transcribed": 2
+}

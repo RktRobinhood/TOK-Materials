@@ -7,12 +7,12 @@
  * The teacher wants these hard, a meme, in the spirit of the old Flash "idiot test" games (#111,
  * research/roaming-legendary-trick-challenges-2026-10-11.md): their trick TYPES, pacing and instant
  * reset, with our own original questions. A run is ROUNDS rounds drawn from the creature's bank:
- * half from its own TOK tricks, half from the shared troll tricks dressed in its theme. The same seed
+ * four from its own TOK tricks, eight from the shared troll tricks dressed in its theme. The same seed
  * always gives the same run, so a reload shows the same rounds; a new attempt draws a new run.
  *
  * A round: { key, mode, sign, signLink?, scene?, options, accept, why, seconds? }
  *   seconds on a 'tap' or 'number' round: a quick-action clock. When it runs out the answer is
- *   TIMEOUT, which fails. Clocks are generous (6+ seconds): they ask for focus, not reflexes.
+ *   TIMEOUT, which fails. At most one quick-action clock per run; counting stays untimed.
  *   mode 'pick'     choose one option, then Check.                answer: option id
  *        'multi'    choose every right option, then Check.        answer: [option ids] (order free)
  *        'tap'      the first click is the answer. No Check.     answer: option id
@@ -25,7 +25,7 @@
  *   accept: every valid answer (for multi and sequence: the one right list).
  *   why: one or two plain sentences that explain the trick a wrong answer fell for.
  * Fair by rule (tools/test/tricks.test.mjs): every answer follows from the sign and what is on screen.
- * No speed, no colour-only cues, no English puns, no trivia. A 'wait' round needs patience, not speed.
+ * No colour-only cues, no English puns, no trivia. A 'wait' round needs patience, not speed.
  */
 (function (root) {
     'use strict';
@@ -146,10 +146,10 @@
         corners(rng) {
             const q = rng.pick([
                 { sign: 'How many corners does a circle have?', a: 0, why: 'A circle has no corners at all: 0.' },
-                { sign: 'A square has 4 corners. You cut off ONE corner with one straight cut. How many corners does the shape have now?', a: 5, why: 'The cut removes one corner but makes two new ones: 4 − 1 + 2 = 5.' },
+                { sign: 'A square has 4 corners. Cut off ONE corner as shown. How many corners does the shape have now?', a: 5, scene: { kind: 'corner-cut' }, why: 'The cut removes one corner but makes two new ones: 4 − 1 + 2 = 5.' },
                 { sign: 'How many corners do three circles have, all together?', a: 0, why: 'Circles have no corners. Three times zero is still 0.' },
             ]);
-            return { mode: 'number', sign: q.sign, options: [], accept: [String(q.a)], why: q.why };
+            return { mode: 'number', sign: q.sign, scene: q.scene, options: [], accept: [String(q.a)], why: q.why };
         },
         // See the shape, ignore the word.
         shapeNotWord(rng) {
@@ -187,7 +187,7 @@
                 { sign: 'How many months of the year have at least 28 days?', a: 12, why: 'Every month has at least 28 days, so all 12 do.' },
                 { sign: 'How many months of the year have at least 30 days?', a: 11, why: 'Every month except February has 30 days or more: 11 months.' },
             ]);
-            return { mode: 'number', sign: q.sign, options: [], accept: [String(q.a)], why: q.why };
+            return { mode: 'number', sign: q.sign, scene: { kind: 'note', text: 'A year has 12 months. February has 28 or 29 days. Every other month has 30 or 31 days.' }, options: [], accept: [String(q.a)], why: q.why };
         },
         // Zero is even.
         evens(rng) {
@@ -221,10 +221,10 @@
             return { mode: 'tap', seconds: 6, sign: 'Quick! Click GO before the clock runs out.', options, accept: ['go'],
                 why: 'Only one button said exactly GO. The others were OG, GOO, GONE and AGO. Fast is fine, but read first.' };
         },
-        // Quick count.
+        // Count without a deadline: reasoning is the task, not speed.
         quickCount(rng, k) {
             const n = rng.int(7, 11);
-            return { mode: 'number', seconds: 12, sign: 'Quick! How many ' + k.icon + ' are there?', scene: { kind: 'icons', icon: k.icon, count: n }, options: [], accept: [String(n)],
+            return { mode: 'number', sign: 'How many ' + k.icon + ' are there?', scene: { kind: 'icons', icon: k.icon, count: n }, options: [], accept: [String(n)],
                 why: 'There were ' + n + '. Count in small groups so you do not lose your place.' };
         },
         // Quick: do exactly as told.
@@ -237,7 +237,7 @@
         secondLeft(rng) {
             const labels = rng.shuffle(['Second', 'First', 'Left', 'Right']);
             const options = labels.map((l, i) => opt(LETTERS[i], l, { size: 'l' }));
-            return { mode: 'tap', sign: 'Click the button that is SECOND from the LEFT.', options, accept: [options[1].id],
+            return { mode: 'tap', layout: 'row', sign: 'Click the button that is SECOND from the LEFT.', options, accept: [options[1].id],
                 why: 'Count from the left: the second button said "' + labels[1] + '". The words on the buttons were there to trick you.' };
         },
         // Last letter.
@@ -466,8 +466,8 @@
         },
         agreeing(rng) {
             const records = parcels(rng), agree = records.filter(r => r.stamped && r.arrived);
-            return { mode: 'multi', sign: 'Select EVERY record that AGREES with the claim. Then press Check.', scene: recScene(records, EVERY), options: recOptions(records), accept: [agree.map(r => r.id)],
-                why: 'Only stamped parcels that arrived agree with it. (And agreeing records still do not prove an "every" claim.)' };
+            return { mode: 'multi', sign: 'Select EVERY STAMPED parcel that has ARRIVED. Then press Check.', scene: recScene(records, EVERY), options: recOptions(records), accept: [agree.map(r => r.id)],
+                why: 'These stamped parcels have arrived. They are matching examples, but they still do not prove an "every" claim.' };
         },
         howMany(rng) {
             const records = parcels(rng);
@@ -512,13 +512,13 @@
         },
         streak(rng) {
             const n = rng.int(4, 7), side = rng.pick(['HEADS', 'TAILS']);
-            return { mode: 'pick', sign: 'A fair coin landed ' + side + ' ' + n + ' times in a row. What is the chance that the next flip is ' + side + '?',
+            return { mode: 'pick', sign: 'A fair coin landed ' + side + ' ' + n + ' times in a row. What is the chance that the next flip is ' + side + '?', scene: { kind: 'note', text: 'Each flip is independent: earlier results do not change the next flip.' },
                 options: rng.shuffle([opt('half', '50%'), opt('less', 'Less than 50%: it is due a change'), opt('more', 'More than 50%: it is on a streak')]), accept: ['half'],
                 why: 'A fair coin has no memory. Every flip is 50% heads and 50% tails, whatever came before.' };
         },
         sameRolls(rng) {
             const odd = rng.pick(['6, 6, 6, 6, 6, 6', '1, 1, 1, 1, 1, 1', '1, 2, 3, 4, 5, 6']);
-            return { mode: 'pick', sign: 'Roll a fair die six times. Which exact list of rolls is more likely?',
+            return { mode: 'pick', sign: 'Roll a fair die six times. Which exact list of rolls is more likely?', scene: { kind: 'note', text: 'Each roll is independent. Every face has the same chance on each roll.' },
                 options: rng.shuffle([opt('odd', odd), opt('mixed', '3, 5, 1, 6, 2, 4'), opt('same', 'They are exactly as likely')]), accept: ['same'],
                 why: 'Each exact list of six rolls has the same chance. A pattern only LOOKS special.' };
         },
@@ -579,7 +579,7 @@
     });
     Object.assign(ODDSNAP, {
         twoDice(rng) {
-            return { mode: 'pick', sign: 'Roll two fair dice and add them. Which total is MOST likely?',
+            return { mode: 'pick', sign: 'Roll two fair dice and add them. Which total is MOST likely?', scene: { kind: 'note', text: 'The dice are independent: one result does not change the other.' },
                 options: rng.shuffle([opt('2', '2'), opt('7', '7'), opt('12', '12'), opt('same', 'All totals are equally likely')]), accept: ['7'],
                 why: 'Six pairs make 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1). Only one pair makes 2, and only one makes 12.' };
         },
@@ -590,7 +590,7 @@
         },
         bag(rng) {
             const a = rng.int(3, 5), b = rng.int(1, 2);
-            return { mode: 'pick', sign: 'A bag holds ' + a + ' ▲ and ' + b + ' ■. You pick one without looking. Which is more likely?',
+            return { mode: 'pick', sign: 'A bag holds ' + a + ' ▲ and ' + b + ' ■. You pick one at random. Which is more likely?',
                 options: rng.shuffle([opt('tri', '▲ Triangle'), opt('sq', '■ Square'), opt('same', 'Equally likely')]), accept: ['tri'],
                 why: 'There are more triangles (' + a + ') than squares (' + b + '), so a triangle is more likely.' };
         },
@@ -606,6 +606,17 @@
         const picks = rng.shuffle(Object.keys(own)).slice(0, OWN_PER_RUN).map(k => ['own', k])
             .concat(rng.shuffle(Object.keys(SHARED)).slice(0, ROUNDS - OWN_PER_RUN).map(k => ['shared', k]));
         const rounds = rng.shuffle(picks).map(([from, k]) => Object.assign({ key: from + ':' + k }, (from === 'own' ? own : SHARED)[k](rng, skin)));
+        // Keep the seeded questions, layouts and answers intact for saved attempts. Only the first
+        // quick-action round keeps its deadline; later ones become ordinary untimed tap rounds.
+        // Waiting is a different task (resist clicking), so it keeps its completion countdown.
+        let quickUsed = false;
+        rounds.forEach(r => {
+            if (!r.seconds || r.mode === 'wait') return;
+            if (quickUsed) {
+                delete r.seconds;
+                r.sign = r.sign.replace(/^Quick!\s*/, '').replace(' before the clock runs out.', '.');
+            } else quickUsed = true;
+        });
         return { id, rounds };
     }
 

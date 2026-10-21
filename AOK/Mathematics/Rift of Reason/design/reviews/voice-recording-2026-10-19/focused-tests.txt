@@ -1,0 +1,25 @@
+✔ audio throttles from time zero, replaces same-bus cues and caps the mix at four voices (31.5286ms)
+✔ music and SFX mute independently, zero options stay silent and setting changes stop current cues (1.2506ms)
+✔ all mapped effects are short mono PCM WAV with mix headroom and complete lesson-loop cues (367.3376ms)
+✔ wins and catches share a dedicated upbeat cue, distinct from defeat (36.5714ms)
+✔ cancelled or muted recorded playback cannot restart speech through a late rejection (2.5261ms)
+✔ audio audit catches words spilling across a clip boundary without script priming (1.8259ms)
+✔ audio audit tolerates punctuation but rejects omitted, duplicate or unknown clips (0.4947ms)
+✔ audio audit preserves mathematical operators and signed numbers (0.3012ms)
+✔ voice catalog covers every actual tutorial host/family and all teaching-battle steps (1068.6941ms)
+✔ --script: every voiced line belongs to a lesson, so recording lesson by lesson misses nothing (72.3353ms)
+✔ numeric spoken dialogue enters the recording catalogue while bare directions stay silent (48.4079ms)
+✔ batch speech keeps acting directions in each line metadata (0.3988ms)
+✔ daily budget counts actual attempts independently per model and resets at Pacific midnight (69.0441ms)
+✔ tutorial speaks its displayed host/text and stops the line when closed (4.5163ms)
+✔ the catalog ignores unpublished script and puzzle neighbours without touching them (1248.7483ms)
+✔ Granny catalog includes canonical short/full speech, replies, hints, warnings and outro exactly once (84.6216ms)
+✔ inner voice: every *-inner speaker gets the subtle inner effect, others are untouched (36.4462ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2872.3862

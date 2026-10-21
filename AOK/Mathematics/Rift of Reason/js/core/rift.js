@@ -120,6 +120,16 @@
         return node;
     }
 
+    // A result stays readable with sound muted and motion disabled. The caller owns settlement
+    // and sound; rebuilding a saved result must never replay a reward or a victory jingle.
+    function resultBanner(outcome, title, detail) {
+        const make = (...args) => root.Rift.el(...args);
+        return make('div.result-banner.' + outcome, { role: 'status', 'aria-live': 'polite' }, [
+            make('span.result-emblem', { text: outcome === 'won' ? '★' : outcome === 'lost' ? '↻' : '=', 'aria-hidden': 'true' }),
+            make('div.result-copy', null, [make('h2', { text: title }), detail ? make('p', { text: detail }) : null]),
+        ]);
+    }
+
     function storage() {
         try {
             const s = root.localStorage;
@@ -179,6 +189,7 @@
         deepClone,
         bus,
         el,
+        resultBanner,
         storage,
         COLOURS,
         data: Rift.data || {},

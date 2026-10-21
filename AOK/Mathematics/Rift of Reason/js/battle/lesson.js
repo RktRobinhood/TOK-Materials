@@ -43,7 +43,7 @@
             expect: { type: 'draw', choice: 'deck' }, replies: [] },
         { title: 'Attack the hero', label: 'Attack Granny with Kim',
             text: 'My side of the table is empty, so nothing can stop you. Drag Kim onto my portrait. A hit on a hero takes hearts equal to its attack.',
-            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [{ say: 'Ouch! 5 hearts left.' }] },
+            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [{ say: 'Ouch! 3 hearts left. That attack used one activation.' }] },
         { title: 'Spend your energy', label: 'Play Astrophysicat',
             text: 'Play Astrophysicat for 2 energy.',
             expect: { type: 'play', cid: 'p0c1' }, replies: [] },
@@ -55,7 +55,7 @@
                 { type: 'end' }] },
         { title: 'The Fate track', label: 'Draw from your deck',
             text: 'This is the Fate track. After each round, your turn and then mine, it moves one step. It reached NOW, so a rule changed: creatures cost 1 less. Now draw.',
-            expect: { type: 'draw', choice: 'deck' }, replies: [{ say: 'In 3 rounds, Fate comes back and resets all rules.' }] },
+            expect: { type: 'draw', choice: 'deck' }, replies: [{ say: 'In 4 rounds, Fate comes back and resets all rules.' }] },
         { title: 'Guard comes first', label: 'Attack Khaby Llame',
             text: 'You want to hit me, but Khaby Llame has Guard. While he stands, attacks must hit him first: only Khaby glows. Drag Astrophysicat onto Khaby.',
             expect: { type: 'attack', cid: 'p0c1', target: 'p1c0' },
@@ -65,9 +65,6 @@
             text: 'Billie Eelish has an Entrance: it works when you play her. Her Whisper takes away an enemy\'s special powers, like Guard. Drag her onto Khaby Llame.',
             expect: { type: 'play', cid: 'p0c3', target: 'p1c0' },
             replies: [{ say: 'Khaby lost his Guard. The way to me is open.' }] },
-        { title: 'Hit the hero again', label: 'Attack Granny with Kim',
-            text: 'Drag Kim onto my portrait.',
-            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [{ say: '4 hearts left. You are doing well.' }] },
         { title: 'End your turn', label: 'End turn',
             text: 'Press End turn and watch my turn.',
             expect: { type: 'end' },
@@ -83,21 +80,21 @@
         { title: 'Play a tactic', label: 'Counterexample on Khaby',
             text: 'Tactic cards work once. Counterexample deals 3 damage. Khaby keeps hitting you, and Shakirattle is Elusive, so aim at Khaby Llame.',
             expect: { type: 'play', cid: 'p0t0', target: 'p1c0' },
-            replies: [{ say: 'Khaby is defeated. That was your first card. You can play 2 cards each turn.' },
+            replies: [{ say: 'Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.' },
                 { say: 'One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.' }] },
         { title: 'Change a rule', label: 'Play the Underdog rule',
             text: 'A rule card changes a rule for BOTH players. Underdog: in a fight, only the LOWER attack hits. Drag it to the middle row.',
             expect: { type: 'axiom', choice: 'underdog' }, replies: [], compare: ['p0c1', 'p1c1'] },
+        { title: 'Two uses spent', label: 'End turn',
+            text: 'The tactic and rule used both activations. End turn. Granny will pass, then you will draw.',
+            expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'end' }, { type: 'draw', choice: 'deck' }] },
         { title: 'Test the new rule', label: 'Attack Shakirattle',
             text: 'Let\'s test the new rule on my strongest creature. Under the basic rules Astrophysicat would fall. Under Underdog only the lower attack hits. Drag Astrophysicat onto Shakirattle.',
             expect: { type: 'attack', cid: 'p0c1', target: 'p1c1' }, compare: ['p0c1', 'p1c1'],
             replies: [{ say: 'Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.' }] },
         { title: 'Back to the hero', label: 'Attack Granny with Billie',
             text: 'Now drag Billie Eelish onto my portrait.',
-            expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [{ say: '3 hearts left.' }] },
-        { title: 'And Kim too', label: 'Attack Granny with Kim',
-            text: 'Kim can attack too. Drag Kim onto my portrait.',
-            expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [{ say: 'Only 2 hearts left! I need a plan.' }] },
+            expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [{ say: 'Only 2 hearts left! Those two attacks used both activations.' }] },
         { title: 'End your turn', label: 'End turn',
             text: 'Press End turn and watch closely.',
             expect: { type: 'end' },
@@ -123,6 +120,9 @@
         { title: 'Read, then attack', label: 'Attack Granny with Astrophysicat',
             text: 'Check the Win tile: enemy hero to zero hearts. Drag Astrophysicat onto me.',
             expect: { type: 'attack', cid: 'p0c1', target: 'h1' }, replies: [] },
+        { title: 'Save the last hit', label: 'End turn',
+            text: 'Filter and the attack used both activations. End turn. Granny will pass, then draw before your last hit.',
+            expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'end' }, { type: 'draw', choice: 'deck' }] },
         { title: 'Win by the active axioms', label: 'Attack Granny with Billie',
             text: 'One heart left. Drag Billie Eelish onto me to win. Always read the rules before you attack.',
             expect: { type: 'attack', cid: 'p0c3', target: 'h1' }, replies: [] },
@@ -150,17 +150,17 @@
         return {
             seed: 'card-arena-lesson',
             players: [
-                { id: 'you', name: 'You', team: team(YOU, 'lesson-you-'), tactics: ['counterexample', 'second-wind', 'stand-firm'], hearts: 6, power: power || null },
-                { id: 'granny', name: 'Granny Axiom', team: team(GRANNY, 'lesson-granny-'), tactics: [], hearts: 6 },
+                { id: 'you', name: 'You', team: team(YOU, 'lesson-you-'), tactics: ['counterexample', 'second-wind', 'stand-firm', 'stand-firm'], hearts: 6, power: power || null },
+                { id: 'granny', name: 'Granny Axiom', team: team(GRANNY, 'lesson-granny-'), tactics: [], hearts: 4 },
             ],
             // Opening rule cards: Underdog for you, the reversed victory rule for Granny. Fate counts
             // rounds (your turn, then Granny's). Its first flip is set aside at the start: Small
             // Assumptions (creatures cost 1 less), active from round 3 (turn 5) and easy to see on the
-            // blue cost numbers. The reset is due as round 6 (turn 11) starts; Kim's Filter on turn 9
-            // (round 5, 1 round left) brings it forward.
+            // blue cost numbers. The reset is due as round 7 starts; the added budget-teaching
+            // turn keeps Filter's repair in round 6, one round before that reset.
             axiomDeck: ['underdog', 'reverse-hearts', 'thrift', 'normal-hearts', 'doubt', 'arrival'],
-            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 2, fateGap: 3, spark: false,
-                openHand: [3, 3], openAxioms: 1, deckSize: 9, minCreatures: 1, hearts: 6 },
+            options: { mode: 'practice', first: 0, shuffle: false, shuffleAxioms: false, timeline: true, fateStart: 2, fateGap: 4, spark: false,
+                openHand: [3, 3], openAxioms: 1, deckSize: 10, minCreatures: 1, hearts: 6 },
         };
     }
     function create(power) { return Battle.Engine.createBattle(config(power)); }
@@ -175,7 +175,7 @@
     // Granny's closing line on the lesson's end screen (the TOK point).
     const outro = 'Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?';
     // What a real match adds (shown on the lesson's end screen).
-    const next = 'Next you will meet: the colour wheel (+1 attack against the colour you beat), Last Word (it works when the creature is defeated), Swift and Shield. Point at any card to read it.';
+    const next = 'Next you will meet: Strong +1, Weak −1 and Neutral matchups, Last Word (it works when the creature is defeated), Swift and Shield. Open Colour matchups on the board to practise. Point at any card to read it.';
     function guide(power) {
         if (!power) return { steps, create, outro, next };
         const at = steps.findIndex(s => s.title === 'Change a rule');
@@ -202,7 +202,7 @@
             text: 'Draw first. Your energy grows and refills each turn.',
             expect: { type: 'draw', choice: 'deck' }, replies: [] },
         { title: 'An obvious attack', label: 'Attack Granny with Kim',
-            text: 'Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. One attack takes one heart.',
+            text: 'Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.',
             expect: { type: 'attack', cid: 'p0c0', target: 'h1' }, replies: [] },
         { title: 'The goal changes', label: 'End turn',
             text: 'End turn. Watch Granny change the Win rule. Rule cards affect both players.',

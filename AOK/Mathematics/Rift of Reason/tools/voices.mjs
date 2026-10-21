@@ -7,6 +7,7 @@
 //   node tools/voices.mjs --plan            the batches a render would send (no API calls)
 //   node tools/voices.mjs --render          render missing lines in batches (resumable, free-tier friendly)
 //        --only <speaker>  --max-requests <n>  --batch <lines per request>  --model <id>  --single
+//        --keep-raw                        keep every returned take for boundary repairs without more TTS
 //        --script lesson1[,lesson2…]  only lines a lesson plays (status, --plan and --render; see lessonOf)
 //   node tools/voices.mjs --report          every line still on browser-voice fallback
 //   node tools/voices.mjs --audition        one sample per speaker into tools/voice-auditions (one request each)
@@ -60,11 +61,84 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // ---- lines --------------------------------------------------------------------
 
+// Follow the shipped entry point, not arbitrary neighbours (drafts, backups or sync copies).
+function runtimeScripts() {
+    const html = fs.readFileSync(path.join(GAME_DIR, 'index.html'), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    return [...html.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/gi)].map(m => m[1].split(/[?#]/)[0]);
+}
 function loadGame() {
-    const scripts = fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => f.endsWith('.js')).sort();
-    const puzzles = fs.readdirSync(path.join(GAME_DIR, 'js', 'puzzles')).filter(f => f.endsWith('.js') && f !== 'registry.js').sort();
+    const sources = runtimeScripts();
+    const scripts = sources.filter(f => /^data\/script\/[^/]+\.js$/.test(f));
+    const puzzles = sources.filter(f => /^js\/puzzles\/[^/]+\.js$/.test(f) && f !== 'js/puzzles/registry.js');
     return loadRift(['js/core/rift.js', 'data/avatars.js', 'data/creatures.js', 'data/barks.js', 'data/map.js', 'data/cases.js',
-        ...scripts.map(f => 'data/script/' + f), 'data/cast.js', 'js/puzzles/registry.js', ...puzzles.map(f => 'js/puzzles/' + f), 'js/battle/lesson.js']);
+        ...scripts, 'data/cast.js', 'js/core/story.js', 'js/core/cast.js', 'js/puzzles/registry.js', ...puzzles,
+        'data/axioms.js', 'data/tactics.js', 'data/powers.js', 'data/fate.js', 'js/battle/abilities.js',
+        'js/battle/engine.js', 'js/battle/lesson.js']);
+}
+
+// Conservatively cover resolver-compatible flags, including a hypothetical Rubberstamp arrival;
+// this is not proof that every sampled state is reachable through the shipped story.
+// Resolve hosts with the same conditional/cast code as encounters. Shared flag assignments matter:
+// a node that switches away from Granny when she dies can never have Achilles as its tutorial host.
+// Only sample inputs that this node and its one-step cast fallback can read; do not load or save a game.
+export function tutorialHosts(Rift, nodeId) {
+    const node = Rift.data.map.nodes[nodeId], domains = new Map(), cast = Rift.data.cast || {};
+    if (!node) return [];
+    const addValues = (key, values) => {
+        const normal = Rift.Story.normalKey(key);
+        const valuesForKey = domains.get(normal) || new Set([undefined, true]);
+        values.forEach(value => valuesForKey.add(value));
+        domains.set(normal, valuesForKey);
+    };
+    let usesAvatar = false;
+    const condition = cond => {
+        if (Array.isArray(cond)) return cond.forEach(condition);
+        if (typeof cond === 'string') return addValues(cond.replace(/^!/, ''), []);
+        if (!cond || typeof cond !== 'object') return;
+        if (cond.all) return cond.all.forEach(condition);
+        if (cond.any) return cond.any.forEach(condition);
+        if ('not' in cond && !('flag' in cond)) return condition(cond.not);
+        if (cond.seen) return addValues('seen:' + cond.seen, []);
+        if (cond.species || cond.avatar) { usesAvatar = true; return; }
+        if (cond.clock) throw new Error('Tutorial host clock conditions need inventory sampling: ' + nodeId);
+        if (!cond.flag) return;
+        const values = ['is', 'not'].filter(key => key in cond).map(key => cond[key]).concat(cond.in || []);
+        if (cond.unset) values.push(false);
+        for (const key of ['gte', 'lte']) if (key in cond) values.push(cond[key] - 1, cond[key], cond[key] + 1);
+        addValues(cond.flag, values);
+    };
+    (node.hosts || []).forEach(host => condition(host.when));
+    const actorInputs = role => {
+        const entry = cast[role];
+        if (!entry || !['lethal', 'dark'].includes(entry.policy)) return;
+        addValues('dead:' + role, []);
+        if (entry.policy === 'lethal') addValues('arrived:' + role, []);
+    };
+    for (const role of new Set([node.host || 'narrator', ...(node.hosts || []).map(host => host.host)].filter(Boolean))) {
+        actorInputs(role);
+        const entry = cast[role] || {}, fallback = entry.fallback || {};
+        const to = Object.hasOwn(fallback, nodeId) ? fallback[nodeId]
+            : !entry.fallbackChapters || entry.fallbackChapters.includes(node.chapter) ? fallback['*'] : null;
+        if (to) actorInputs(to); // Cast.host asks actor(to), never follows the stand-in's own fallback.
+    }
+    const state = { flags: {}, avatar: null }, originalState = Rift.State, hosts = new Set();
+    const inputs = [...domains];
+    const avatars = usesAvatar ? [null, ...Object.keys(Rift.data.avatars || {}).flatMap(type => ['boy', 'girl'].map(variant => ({ type, variant })))] : [null];
+    const sample = at => {
+        if (at < inputs.length) {
+            const [key, values] = inputs[at];
+            for (const value of values) { state.flags[key] = value; sample(at + 1); }
+            return;
+        }
+        for (const avatar of avatars) {
+            state.avatar = avatar;
+            const actor = Rift.Cast.nodeHost(nodeId).actor;
+            if (actor) hosts.add(actor);
+        }
+    };
+    try { Rift.State = { get: () => state }; sample(0); }
+    finally { if (originalState === undefined) delete Rift.State; else Rift.State = originalState; }
+    return [...hosts];
 }
 
 // What the TTS reads: no nickname, and shouted all-caps lines (the Algorithm) in sentence case
@@ -126,6 +200,27 @@ function collect(Rift) {
     };
     const scripts = Rift.data.script || Rift.data.scripts || {};
     for (const [key, steps] of Object.entries(scripts)) walk(steps, key, new Set());
+    // These live, repeatable reminder callers have proven post-arrival routes (discovery receipt,
+    // design/reviews/voice-recording-2026-10-20/discovery-gaps.json). Cast.text inherits t when u
+    // is null/absent. Do not extend that rule to unaudited scenes, original-only last words/replays,
+    // or u: '' (intentional silence); caller and story conditions exclude many apparent variants.
+    const inheritedReminders = {
+        'station.road-start.reminder': ['narrator'],
+        'station.river-ford.reminder': ['narrator'],
+        'station.well.reminder': ['narrator', 'sequins'],
+        'station.standing-stone.reminder': ['narrator'],
+        'station.gate.reminder': ['narrator'],
+        'station.k-gallery.reminder': ['narrator'],
+        'station.k-prediction.reminder': ['narrator'],
+        'station.k-workshop.reminder': ['narrator'],
+        'station.k-sorting.reminder': ['narrator'],
+        'station.k-core.reminder': ['narrator'],
+    };
+    for (const [key, roles] of Object.entries(inheritedReminders)) for (const line of scripts[key] || []) {
+        if (!roles.includes(line.s) || line.replay || line.u != null) continue;
+        const understudy = understudyOf(line.s);
+        if (understudy) add(understudy, line.t, line.e, key);
+    }
     for (const [key, lead] of Object.entries(Rift.data.leads || {})) walk(lead, 'lead ' + key, new Set());
     for (const [key, clock] of Object.entries(Rift.data.clocks || {})) walk(clock, 'clock ' + key, new Set());
     // Side stories (data/script/side-stories.js); the test fixture is never voiced. Lines inside v => [...] functions are not collected.
@@ -134,15 +229,41 @@ function collect(Rift) {
     for (const [id, b] of Object.entries(Rift.data.barks || {})) Object.values(b).flat().forEach(t => add(id, t, null, 'creature ' + id));
     // Match the actual station host, not a second generic tutorial narrator.
     // voice ids de-duplicate repeated family/host instructions across nodes.
-    for (const n of Object.values(Rift.data.map.nodes)) {
+    for (const [nodeId, n] of Object.entries(Rift.data.map.nodes)) {
+        const hosts = (n.puzzles || []).length ? tutorialHosts(Rift, nodeId) : [];
         for (const p of n.puzzles || []) {
             const def = Rift.Puzzles.get(p.id);
-            // Every host the node can have (its `hosts` list changes hosts after story events).
-            const hosts = [...new Set([n.host, ...(n.hosts || []).map(h => h.host)].filter(Boolean))];
             for (const who of hosts) for (const step of (def && def.tutorial) || []) add(who, step.text, 'Patient guidance; keep the character flavour, but explain clearly', 'tutorial ' + p.id);
         }
     }
-    for (const step of Rift.Battle.Lesson.steps.concat(Rift.Battle.Lesson.powerStep || [])) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    // Match the battle screen's speech calls, including the default short lesson and optional help.
+    // Prediction feedback and labels are display-only.
+    const lesson = Rift.Battle.Lesson;
+    const steps = (lesson.steps || []).concat(lesson.shortSteps || [], lesson.powerStep || []);
+    for (const step of steps) {
+        const texts = [step.text, step.hint, step.hint2, step.trap && step.trap.say,
+            ...(step.replies || []).map(reply => reply.say)];
+        for (const text of texts) add('granny', text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    }
+    for (const makeGuide of [lesson.guide, lesson.shortGuide]) {
+        if (makeGuide) add('granny', makeGuide().outro, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+    }
+    // All legal avatar powers: five one-use tweaks, at most three selected. Run the real lesson
+    // generator so wording, heart/energy costs and zero-cost clamping stay identical to gameplay.
+    // Defaults go first so the ten first-lesson explanations are recorded before custom variants.
+    if (Rift.Powers && Rift.Battle.Engine && lesson.guide) {
+        const tweaks = [[]];
+        for (const tweak of Object.keys(Rift.data.powerTweaks)) {
+            for (const subset of tweaks.slice()) if (subset.length < 3) tweaks.push(subset.concat(tweak));
+        }
+        for (const subset of tweaks) for (const avatar of avatars) {
+            const power = Rift.Powers.forAvatar({ type: avatar.sp, variant: avatar.id.slice(avatar.sp.length + 1), tweaks: subset });
+            if (!power) continue;
+            for (const step of lesson.guide(power).steps) {
+                if (step.title === lesson.powerStep.title) add('granny', step.text, 'Patient guidance; dry humour, clear instructions', 'card lesson');
+            }
+        }
+    }
     return { lines, skipped };
 }
 
@@ -156,8 +277,8 @@ let lessonIndex = null;
 function lessonsOf(line) {
     if (!lessonIndex) {
         lessonIndex = { keys: {}, clocks: {}, puzzles: {}, creatures: {}, side: {} };
-        for (const f of fs.readdirSync(path.join(GAME_DIR, 'data', 'script')).filter(f => /^lesson\d+\.js$/.test(f))) {
-            const R = loadRift(['js/core/rift.js', 'data/script/' + f]), lesson = f.slice(0, -3);
+        for (const f of runtimeScripts().filter(f => /^data\/script\/lesson\d+\.js$/.test(f))) {
+            const R = loadRift(['js/core/rift.js', f]), lesson = path.basename(f, '.js');
             for (const k of Object.keys(R.data.script || {})) lessonIndex.keys[k] = lesson;
             for (const k of Object.keys(R.data.clocks || {})) lessonIndex.clocks[k] = lesson;
         }
@@ -370,9 +491,11 @@ export function splitBatch(pcm, rate, texts) {
     return pieces;
 }
 
-function saveRaw(wav, lines) {
+function saveRaw(wav, lines, preserve = false) {
     fs.mkdirSync(RAW, { recursive: true });
-    const id = lines[0].who + '-' + lines[0].id.split('-').pop() + '-' + lines.length;
+    const base = lines[0].who + '-' + lines[0].id.split('-').pop() + '-' + lines.length;
+    let id = base, take = 1;
+    while (preserve && (fs.existsSync(path.join(RAW, id + '.wav')) || fs.existsSync(path.join(RAW, id + '.json')))) id = base + '-take' + (++take);
     fs.writeFileSync(path.join(RAW, id + '.wav'), wav);
     fs.writeFileSync(path.join(RAW, id + '.json'), JSON.stringify(lines));
 }
@@ -446,10 +569,11 @@ async function render(key, todo) {
                 await sleep(15000);
                 continue;
             }
+            if (flag('--keep-raw')) saveRaw(wav, job.lines, true);
             const { rate, pcm } = pcmFromWav(wav);
             const pieces = single ? [pcm] : splitBatch(pcm, rate, job.lines.map(l => l.say));
             if (!pieces) {
-                saveRaw(wav, job.lines);
+                if (!flag('--keep-raw')) saveRaw(wav, job.lines);
                 const half = Math.ceil(job.lines.length / 2);
                 console.log(`split failed for ${job.who} x${job.lines.length}; kept in tools/voice-raw, retrying as ${half} + ${job.lines.length - half}.`);
                 queue.unshift({ ...job, lines: job.lines.slice(half) });

@@ -26,17 +26,19 @@ function adventure(type, variant, extra) {
     return s;
 }
 
-test('the five runtime lists are exactly the drafted ones, use only existing common/baseline cards and pass the shared rules', () => {
+test('the five personal decks retain their drafts, use the approved Flux starter ten and pass the shared rules', () => {
     const D = R.data.starterDecks;
     assert.deepEqual(Object.keys(D.decks).sort(), TYPES.slice().sort());
     assert.deepEqual(Object.keys(R.data.avatars).sort(), TYPES.slice().sort(), 'one list per avatar type, no Wolf');
     assert.deepEqual(J(D.axioms), J(R.data.axiomDecks.default));
+    assert.deepEqual(J(D.axioms), ['flux-plays-plus-1', 'flux-plays-minus-1', 'flux-draw-plus-1', 'flux-draw-minus-1',
+        'flux-growth-plus-1', 'flux-cost-plus-1', 'flux-cost-minus-1', 'limited-memory', 'momentum', 'two-plays']);
     const baseline = new Set(R.data.tacticDecks.starter.concat(R.data.tacticDecks.earned));
     for (const draft of DRAFT.decks) {
         const deck = D.decks[draft.avatarType];
         assert.deepEqual(J(deck.creatures), draft.creatures, draft.avatarType + ' creatures');
         assert.deepEqual(J(deck.tactics), draft.tactics, draft.avatarType + ' tactics');
-        assert.deepEqual(J(D.axioms), draft.axioms, draft.avatarType + ' axioms');
+        // The historical axiom ten in this draft is superseded by the #101 Flux contract above.
         assert.equal(deck.strategy, draft.strategy);
         assert.equal(deck.creatures.length, 12);
         assert.equal(deck.tactics.length, 8);

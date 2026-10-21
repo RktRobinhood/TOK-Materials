@@ -1,0 +1,954 @@
+{
+  "date": "2026-10-20",
+  "retainedClips": 135,
+  "currentHashesWithTranscripts": 46,
+  "scope": "Broad transcription audit stopped at teacher request. Known displaced phrases were repaired from saved takes; one uncertain Achilles take was withheld. Decode checks and the full game suite passed. Full per-clip transcription is not a release claim.",
+  "limits": "Automated transcripts do not certify acting or voice consistency. New repaired hashes without transcripts remain documented; no further transcription requests are scheduled.",
+  "clips": [
+    {
+      "id": "achilles-p0n5qv",
+      "sha256": "5649e56aa27c3ea677a046c747e402f493711c5e6f30c08c997da9a999997162",
+      "hasTranscript": true,
+      "heard": "then it isn't yours. Good. It's very heavy.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-fox-girl-14h9hbs",
+      "sha256": "9d1e802b6b99e24cee6f691880cc7332f83960b5f86910a109f7f8c4377afc24",
+      "hasTranscript": true,
+      "heard": "Only two? I could win all three. I always do.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-frogling-boy-9c4xqw",
+      "sha256": "68737a5da80ab6e371054aff83895bd3535ca9824bcb154a9e32945f6773cc65",
+      "hasTranscript": true,
+      "heard": "Only two? I could win all three. I always do.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-mothkin-boy-1hqblqb",
+      "sha256": "c6d9b5da1d1a15737b5771f153486e76a65a8fcb628d48520b279b452cf1bd3c",
+      "hasTranscript": true,
+      "heard": "Only two? I could win all three. I always do.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-owlet-girl-1tr2wzr",
+      "sha256": "316d29bce23e419821dff14a9fda1cdcab54c906d4c6f8db6a67b88b91bb49cf",
+      "hasTranscript": true,
+      "heard": "Only two? I could win all three. I always do.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-raven-girl-1g1u6p9",
+      "sha256": "9d2db6cf627862eebc01a74ba29f1d02cdd83e9e2cd5e1ca29a1555ad5ab1a1e",
+      "hasTranscript": true,
+      "heard": "Only two? I could win all three. I always do.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-raven-girl-possessed-19tp0fi",
+      "sha256": "59fef20e77729d54c8caebaf40cf203f544ed03a8b53461b22610a35b78989f0",
+      "hasTranscript": true,
+      "heard": "Always right. Lovely words. Words that lovely must be true.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-raven-girl-possessed-iqrpkn",
+      "sha256": "b7a4433f10ad87b1c5989eceee3bd22a37dc134eb0726b9810d0c8e4a2386529",
+      "hasTranscript": true,
+      "heard": "everything. A big word. Big words are true. Give up.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "avatar-raven-girl-possessed-urjb78",
+      "sha256": "fe93260a2f1223c1fc3134eff455943f34e6000a90c456eb7c284e82d41ffda7",
+      "hasTranscript": true,
+      "heard": "fraud. A strong word. Strong words are true. That's what they're for.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "carlseal-97u75e",
+      "sha256": "3514eae6ad175f04205c8c2f3ef6da17df3500c40f923dd39c6e39e55b94d452",
+      "hasTranscript": true,
+      "heard": "Good game, I suppose.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "constable-18ihy92",
+      "sha256": "43de7bc535cdbd1b32bbd65ba70d7eba28732337b9eff8d916b4b16496b6f37c",
+      "hasTranscript": true,
+      "heard": "use these are enough for light mode? check my wiring for wire mode, or lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "constable-45f474",
+      "sha256": "865e0f1962534623829004ff3be2df62c7ca952d0bdd1b9b06fdbf851b4e4123",
+      "hasTranscript": true,
+      "heard": "Hidden mode, click the reports. Choose on off for a hidden switch, or and or for a hidden gate. Your guess must fit every report.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "granny-10h08nj",
+      "sha256": "245ac2471b1b13b9e8cb85d210538d38b083c86fd8a8a99a927a1e4cba7ae56e",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-11jd8wk",
+      "sha256": "6c983c747f12cfd841dd8bc9c7c147668e52a750905d2f91eacc9dfd462e3d40",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-11ttr18",
+      "sha256": "175dfec919e4130bbc77422c3171bd4aa3a9d88419e3c8dd2bbccf9f673e6eb3",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-130xtes",
+      "sha256": "3ab0d15ad7a53e7ee344911cc93132980254485914945cfaf23047cd9924e96d",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-13h6gk7",
+      "sha256": "085d33ac54f93ef41f585bd380e90d86a41fb1b7ac313bfb74a5cf0d98eac0cc",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-14gqipr",
+      "sha256": "998914e96b55777440a266547ce7062004ecad078f651208cb843b6cde52912a",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-15caxnf",
+      "sha256": "013cda6eb06a5de5d007f355aea35aa4bf1661094686cc59542629092983ea76",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-15wamkz",
+      "sha256": "6d608cd0ac2403929831c9332931ca709354cf2e50775b7efe9b2ad45f836d85",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-169zh94",
+      "sha256": "dc7f1b0228406d70425d58822af5c2fd8f36ac07809c68b2a00d84536b004102",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-16gqtur",
+      "sha256": "584402cc39a75a1305895b04aeac9c4df270c12aa6d5f9e601fb4ebcf2ab91c3",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-16zfqo3",
+      "sha256": "7bbf42a808a03790f79d4a50168805c28afa8b581c28ae6ffebc753077a995ce",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-17l7h40",
+      "sha256": "374e05094a87a809222c6bb5272599f947ecbeaa1a0827a4857f487036bf5ae6",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-17wwzj0",
+      "sha256": "8070b80e1a148eb00678e4a6675a8cdc9365e17686c4af0a02120e4de8524a54",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-18lr4fy",
+      "sha256": "a8195eb3bf63080983939a87de04bb0a24298dfc95cfa55cc29d3a52ba7811cd",
+      "hasTranscript": true,
+      "heard": "For C, look at the top three rule cards. Take one into your hand, and put the others back in any order. Cost one energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-18ze31y",
+      "sha256": "a5a5561029387413661044f9e3ac1f8ec725705580986e18907b6172a3813e53",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-191wmq4",
+      "sha256": "0be324516845694a18f2e947841506b7ccfb19e707123112477dac1fac9d771a",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1a4ape4",
+      "sha256": "c24d23df12e2fa6a10708653c32b8d43b567b45e3c1dbdba61849c1b8b0210b5",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1a4vjv3",
+      "sha256": "ef99196c7afd7f875c9efdb768eac5d4a360c59e2446815858f7a3019254120b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1apvjzp",
+      "sha256": "762a276d0865e4915f7278663a08a6f6387d2b8c69662ac6adc1e17b3636a9f5",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1cfxkxz",
+      "sha256": "828e173f0d2095c944e92d0327b9a8e76c8fe6171ac9a7bf997567a766df6682",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1d97t7e",
+      "sha256": "351e2ad40d9c3211551f04164fdd9a46ec168dda0701d83ecfb12de2fbe1fa37",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1duk33i",
+      "sha256": "4306c0c580b4747005d6d29f039ba46d916373fed5bd51567b9b580ba916e6dd",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1fdd3hr",
+      "sha256": "a75782da4c0f21b86e48399ed9b71a01b43ea322f1227bd84617fd25ea9b3246",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1fsjbh5",
+      "sha256": "367d5f8778633b2e7545a4300d13f6921cbb13c95011a72ed3c398c9b0e9839a",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1ftxgvd",
+      "sha256": "fb620e30f0de01bba30d2f2998511cb8e13d7b08f5803b3dff82da02a03899ea",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1gcwsrm",
+      "sha256": "cda21a98ca5ed36cc43a5324bcb4ef28f05b83d5da25b20032c3d3ccfc7058ef",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1glroxg",
+      "sha256": "8c97fa6b6ef60f0da1fcf9b0ae80998cd77ea9d35926746adeef921e77892ff8",
+      "hasTranscript": true,
+      "heard": "Close the proof. Defeat an enemy creature that has one health left. Cost, three energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-1h87sg5",
+      "sha256": "b710dd8a3cbccdca7bb48f00e0c52ddd42442b9019ad2a3be35980f436ae66c4",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1h8bazs",
+      "sha256": "946279fc9069c8010a598a9edee32a85096032b6752a2c30683bd70ca3cf3ea8",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1huexn7",
+      "sha256": "7b83c306e5d1515a037c6b9265fe7990aa901126af9a4e2bcb3a7a95bfae684a",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1j0rfkc",
+      "sha256": "770969d2768937d4b98cfa5cce9f007a044526c83150d5cd7f05b598c3bd88f6",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1j1q5fc",
+      "sha256": "2c80e50f7d9d6e447a4e077bf021925d8c20f81a7e071df3c65788908a5228d0",
+      "hasTranscript": true,
+      "heard": "Lantern. Deal one damage to an enemy creature. Cost, two energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-1k73ziu",
+      "sha256": "e02e1725fa2eff3fa3dacebccdc7c8b23b15227d01a5940d99fec6d28d6814b8",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1ka8vq9",
+      "sha256": "29efbb6e4b4130bdd0cce3130f04b9d077fb03407e9bf4d36bdbaf556f53cb3b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1lb8a7b",
+      "sha256": "7cbc5b0edda2e0d019fb9b1efd0bb9f221985ca510e6741c922567ec4879d376",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1lkncfi",
+      "sha256": "cd0212ca43e1b1002d5321d5eb453ef47751c6db93e5f65be33d09c9c5670621",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1mbox5h",
+      "sha256": "7a61c247943e189bc443fa862a988783633037031d99c67f5e4c54fe4585e21b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1mny4rk",
+      "sha256": "96b839f7137e24fa3f171d63fa734912e41ae9cdc64bd6984ea49e6e34b7218f",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1mp1w0m",
+      "sha256": "d8843fbfd54bc538bdd026f82bdf5b63fe2a8fdef23da6e896d8fbe32f884073",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1oyd45f",
+      "sha256": "85763d948b490e3fed4261993ad0273820c371112d94529eda90402b35b638b2",
+      "hasTranscript": true,
+      "heard": "Hold that thought. Move the fate track one round closer or further away. Draw a card. Cost, three energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-1qwytaz",
+      "sha256": "4f6d394bf013a857dd57db53d463298fbfe9e915fe20a2ccc8594ea04a448cbc",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1s2ii9d",
+      "sha256": "e593a550c51af8af825862784ea07571e6a2acd6f346a83b354c0bb10d88438b",
+      "hasTranscript": true,
+      "heard": "night sight. See the opponent's hand until your next turn. Their next card costs one more. Cost two energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-1smasnd",
+      "sha256": "cfefa3447aba670e149325331ffee62cb6e048fb5bcd71121252dac2901b04ac",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1tb31tr",
+      "sha256": "b0970fc3c0332bed55323f03914c6735e00f67e0cdd3151a1ad0d6e0898b55ea",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1tssicg",
+      "sha256": "4e6ff63a3caf7f2119a247d27a0ec497c23b24b688609ab55cae17fb66e39875",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1uxktm8",
+      "sha256": "ee7cee080d542eea50358be2726d8170802862ae1098e4cd203318f9c1377d38",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1vvtkp2",
+      "sha256": "34a13aa590262a1d60fc96e3c945968feb6072f6c8f592bba53c460d232a7541",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1w2eehy",
+      "sha256": "9f0ec3a023e2190e104ddc87b4123203272a1fed0eaedb4397a59d017ad2b9a0",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1wd0vcn",
+      "sha256": "b7d93b859514ef1a7f9409b3baaa421581929884122cbe6ac7147e429fcc4c5b",
+      "hasTranscript": true,
+      "heard": "recall. Return your most recently defeated creature to your hand. Cost, two energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-1wdtsxh",
+      "sha256": "033d7cfc2784c62897f7f0df30e2323daa2de4d57b9900cde89d35414178a004",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1x7oq9b",
+      "sha256": "ead1317422556d0aea6af18ed7313badb13d681854ca05f9d816ff0d57b4c97b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-1ylgaju",
+      "sha256": "7b35c495c627c9f8e95c3921014fbf3d6782967c6b66081e214e67f09045b6f1",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-3drejj",
+      "sha256": "6c162c8efab42696397fe625a64fb1a1e459980d44796a34cc675cf6f955765b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-3paqmq",
+      "sha256": "15b5f927f0d12fc36794d368b876ddf7414d07e99f4177327f267a56d9e40f72",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-4gs6eu",
+      "sha256": "cc368a70c2d8a6108f83f62cdd5654f537d947d8c035f3970041d1dee6ac13d3",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-8un9tz",
+      "sha256": "c32b220f503b1a1fe0381321fdaf2aaafc930c26da3694f5dce88d80210488f5",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-9cs15t",
+      "sha256": "3279d0e25753d27ba00520c15dd4f9d523d09eb7156f84a76ecd4b3420a91f0b",
+      "hasTranscript": true,
+      "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Cost, two energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-9und8x",
+      "sha256": "dbb21fc61ee381632088f45526ab90aa1a7526019552f5dbafc999462c25a136",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-ar62mo",
+      "sha256": "441d8a5fd6d2530dd5eecbeb48ec53161050160d3e4137d7bed12a1b57da93fa",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-bkxadp",
+      "sha256": "12626573a7b7a69d6a9c031eb968412f745889bd3f49906750192a86fe7e3015",
+      "hasTranscript": true,
+      "heard": "Brainstorm +1 card activation this turn. Cost: free. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "granny-bqi5l0",
+      "sha256": "d1431bda4b4aeea3eb7a0db91d06f5018f93a1082b246ee4fc47875fc101e075",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-chlwxu",
+      "sha256": "c542c7466534f00ea28b8e0e3dbea9a327a02557e358c231a8751b9f5179754a",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-eycy2e",
+      "sha256": "4b14890442103ac7abbdf0de9c53b004d0eb6d5000864c6cd66913919160092b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-eyqpgw",
+      "sha256": "2ba4a8a36b794240a03834afb7ce9f03588d5b3c81127f45edb7846e95fdc494",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-fbjx79",
+      "sha256": "c6d8f1168f074a1424866702c275997ac503267fc25809b8d6b30fff1f6bbed5",
+      "hasTranscript": true,
+      "heard": "Close the proof. Defeat an enemy creature that has one health left. Cost four energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-fsi73f",
+      "sha256": "79cf3bce9d3207053642dbd39a82dbb0fba1ccf2c83323129c467cb80a0acfb3",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-fzixgb",
+      "sha256": "5ece6ffb66533635f6a1cd5cb8bcfc0df59faf69356a944775fdcea26927b29e",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-gdtprk",
+      "sha256": "ac1f35b66fdaf3144a8b6fe1054ab8c48b39d0b38da672d9b2ff8a7d5054c10e",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-ht1ow3",
+      "sha256": "69ecc41c032919d6825c7f888225846efcd750909bc79ce2b2a62198edb802ce",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-iesa5v",
+      "sha256": "f602864d22219ecd416f75079facf9f51fc252e69dceb11e3bac5e31a678ef33",
+      "hasTranscript": true,
+      "heard": "fine print. Lose one heart and draw a card. Cost: two energy. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-jlvvdy",
+      "sha256": "943333fcfb7ca037b268fdb5f296274d9b09d9d7dc510fcbef20ba4a78c7e0ea",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-jpywqb",
+      "sha256": "bcdafd8edc30df3e16cc073f588790f477559567bfa304709ab4ad62d04b9ab5",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-k3qsx4",
+      "sha256": "a8a9c405026d5df4d86b33c26d07e45a2c5aa7a9b1e0c06025a1350f935a8967",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-kr3se1",
+      "sha256": "b7be5929c4237e4abcb00f773bd5b68a39990f9f329dee921f9c121df4b6a8dc",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-l6ygw7",
+      "sha256": "040ca87d2f46635793eb44199efa3293f6f01bae8ffe977194d80abe8050c660",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-m51hu2",
+      "sha256": "c795da24b132868481a59b5ef19205d2e38044f92e4ce421a1cd2b54b26f2c7f",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-mr0ca7",
+      "sha256": "8eb8dabb5e3d9719d9ce8864cf6cce9f35a3e1d907a5448638db43fcc2eb7b26",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-mtaijb",
+      "sha256": "48b00a20ffd39138e2723f452162dc8aa952779ce2baf15ab197e372ff68b427",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-n06s6m",
+      "sha256": "8c4e1954bdc2158f41ceab797ca218f8587f37fbf5ceb851cd79abbb5b50bbe5",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-nu65v9",
+      "sha256": "f5c159dcb6da36b2ca3e587ecd712bcca77dbb88d213b6893158efb58a0d6044",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-occpva",
+      "sha256": "acb7a35071207c83be273f7c45de23db013d475a4c916f45c880283aac756fe7",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-ojmb4i",
+      "sha256": "e6538bc5b3236ea5c9b49b0e007dc4063264b1aa354589714f6134ada40fccaa",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-p5w95d",
+      "sha256": "f54764df3ea6dd106073dc46e9e76edd428981d0a22b7b035af45323cd5d4ddb",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-pgfsoh",
+      "sha256": "d839abaf8af64913eafdbbcd67af8c7fc8f4da6c5279eeba093887d7475a5615",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-rjherr",
+      "sha256": "ff8c45e0ca5aed96c04a6b032e2a5958446ad33e8fbfc48dd2b18a9e1b88d021",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-rla8kz",
+      "sha256": "da41f7e4ba8e2c31bc164e6041273cc199a307d361d2cee8e1ca3d2951e45503",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-spkwty",
+      "sha256": "856055c5880ace1e5fc86415599f328e2e6933d92031fb0f7dda85f0b0583f4c",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-tgjao9",
+      "sha256": "f6246677d677766d803b07af690c3f74ee7f45e431632999e545cc0b0a27e2ea",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-umrnfz",
+      "sha256": "7685fd9bd8db18d2b0ac9e37cbb5c922ab30e1b78de9ff70d5fcb8ad947067d4",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-uscetj",
+      "sha256": "f82439e428ca57a93b1225b3a93b621e5cd8092dfc301609b6226d8eb3ad31ab",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-vosvc7",
+      "sha256": "c2ed56807d4c15e94b91d91f436227da6e673d77ad2de459bc4c8fa62b21d1cf",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-vrvni2",
+      "sha256": "0430eefb7235aa0638687a48b1f45009fa741e709b1fb6a8fee1a3dbbea06380",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-vs3ipg",
+      "sha256": "2ca470d48d1c685f8ad617eeec3c39623f70a68636bd5a5369690796d0dc3b95",
+      "hasTranscript": true,
+      "heard": "What if? Swap a creature's attack and health. Cost free. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "granny-vt5m2h",
+      "sha256": "483629f048cba1ff8c21b1e4c9f6ce104dff6862c2e1c134e40c92bf476d4eef",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-w80mbq",
+      "sha256": "193dfafc182892faa580a2b792772dd7110523f177367e61a2fc321c34adf508",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-wq0x3b",
+      "sha256": "e33ae790134f3641e7952a5e3bb769f6a4eca23abe415f443e0037234c918a99",
+      "hasTranscript": true,
+      "heard": "For C, look at the top three rule cards. Take one into your hand, and put the others back in any order. Cost? Free. Click your power to continue. This lesson click does not use it.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "granny-wwbesz",
+      "sha256": "88fc37f31bb15a953f5721f13fbb679372c32b243fdf1850caaaa983accf9d10",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-xdnqze",
+      "sha256": "052efe1c12ba587e3a5c04b45de40bdb637a81cfe17f0304efb87ed0a9a0d839",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-yb15ac",
+      "sha256": "1dc2f95aafa5d82597a8fdb341ebdd7f84183773aef92da8a99ff97a9dff32ed",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "granny-ytr101",
+      "sha256": "065747521b09969ac454742cbe4409485244b0e5157bbb6e363746fbb66c7b1b",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "kuku-1p45jqo",
+      "sha256": "f09581ef4144ac89d2d5127c6f262da2f42403738553577dabbf48d0ae1621f1",
+      "hasTranscript": true,
+      "heard": "pip. He'd have written all this down.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-10brb0g",
+      "sha256": "04dc5e5a3e318a75d5069f5f0f15f0d57ef287b28f0edac78c5383c43bff8a5e",
+      "hasTranscript": true,
+      "heard": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose can't tell.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-11k9rl7",
+      "sha256": "fdbe0ff75d76f254efbce16b3770c8c484cd20dcf4c029f74c35a9c691b34af8",
+      "hasTranscript": true,
+      "heard": "Follow the stages, audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-12ov7k6",
+      "sha256": "7702dbaa2c7e25f8a8c8a87993a2e7a4c92fc1d156a526cfc738d3eca423a2a9",
+      "hasTranscript": true,
+      "heard": "Choose every answer, then give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars. Later hints show their heart cost.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-159uqyc",
+      "sha256": "ba8a922b24d5e96a4de2da372d3e233f980bcdbfd5cc6787c58d2dc5861a1090",
+      "hasTranscript": true,
+      "heard": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-1bg6pmc",
+      "sha256": "c469350382bbb8f5dd7273c44fb7cd60d1eb48288a83d27e333d40b1185c1257",
+      "hasTranscript": true,
+      "heard": "three acts wonder investigate compare We need a useful question before a calculation.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-1d2kqd2",
+      "sha256": "4f450bce5d7b1dee425df30ee1aaf7c75478cd903899f83dd2eace2a82e240f5",
+      "hasTranscript": true,
+      "heard": "Example: To fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its color probably will not help.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "narrator-1hajygj",
+      "sha256": "ddff52f39b1a898150d1df7a51025d981ec05575866992b5da416b0328d1730b",
+      "hasTranscript": true,
+      "heard": "Click a cell once for an x, twice for a check. A check crosses out its row and column.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "narrator-1vde02a",
+      "sha256": "88e6e300b409a2349af09a02d621c2040e4e8f8a6181175dcf65e1839c6d1b2f",
+      "hasTranscript": true,
+      "heard": "The four boxes count right and wrong decisions. Example, refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-1wqrgiv",
+      "sha256": "6563cbbb5a5372837ea32a52c90a05a38981376ed9d54fc1939d43b41b395cd0",
+      "hasTranscript": true,
+      "heard": "Example, not this puzzle. Ada did not write the frog story. Put X where Ada meets that headline.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "narrator-3ai2ov",
+      "sha256": "45027536ac7898513c38e7f26a57c289ba75e5bb232d982a1a0e1e05d3b38b66",
+      "hasTranscript": true,
+      "heard": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-3zek8u",
+      "sha256": "0e2e74d09c903792c4e2cd37fb20ceb2de847cc468ce940a6b46f85a891f26fd",
+      "hasTranscript": true,
+      "heard": "Then check my grid. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-4a6snp",
+      "sha256": "40d914b480d7ee5644e8996c9b7958150b1e4fee79111abf01951d9f93a6163b",
+      "hasTranscript": true,
+      "heard": "Choose information cards with facts your model needs. Choose a model and use the calculator, table, or graph to find a result.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-5opduz",
+      "sha256": "d9961ea8c36009519158cb1bd0db9eab10535192afd24bb054e2fea4990bdd44",
+      "hasTranscript": true,
+      "heard": "Run the home visit audit. Click cards to see their scores. Compare the stamps with the needs the audit reveals.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "narrator-aefnqk",
+      "sha256": "386b80caa2ed1d52b6d54ae7a9011e900b720d18c7ec51404b46e207871a144f",
+      "hasTranscript": true,
+      "heard": "Example: not this scene. A red lamp is on. The red lamp is on is true. The red lamp is off is false.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-ddmjgv",
+      "sha256": "3535e00bf03a3a75874aa127438fe3c77ccf167ab5a79f472c536f198774cc09",
+      "hasTranscript": true,
+      "heard": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-esv7pg",
+      "sha256": "4527d1a021c6e5bce09c51dba7837cc962ecfb3801a6773096305af7c711ccfa",
+      "hasTranscript": true,
+      "heard": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-fbqsxp",
+      "sha256": "47a481c4d392ee88a12e00929a6aedd54a24a9e54211661c4fea130a21c7409f",
+      "hasTranscript": true,
+      "heard": "In that example, a blue lamp is on is can't tell. There is no evidence either way. Use these three buttons for each claim.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "narrator-if4eei",
+      "sha256": "fa581adbffb6b94039178487c3c6fc7e9e3f296c036123e5a355f28955dd1e87",
+      "hasTranscript": false,
+      "heard": null,
+      "exactNormalizedMatch": null
+    },
+    {
+      "id": "narrator-rhkszh",
+      "sha256": "64c6835e3a6440491590eedc0220a2ce431e8cbcda20ec19e61d739c28216022",
+      "hasTranscript": true,
+      "heard": "When a row has only one empty cell left, that cell must be a check. Keep going until every row has one check.",
+      "exactNormalizedMatch": false
+    },
+    {
+      "id": "narrator-xoykcl",
+      "sha256": "e402d7cd4a008d9d6dcedb4cb5513c4e2279298b69d7973359ff1229ec933cdf",
+      "hasTranscript": true,
+      "heard": "Read the rule and budget, name the flaw, then choose one of the listed fixes to meet the stated goals.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "pip-possessed-1xj5be4",
+      "sha256": "72a005a4371724d8356b4e1ad33cc16d3286bc30cc83ff893b6d555d067d29dd",
+      "hasTranscript": true,
+      "heard": "can't. It's so tidy.",
+      "exactNormalizedMatch": true
+    },
+    {
+      "id": "speedcheeta-possessed-1avioh5",
+      "sha256": "d45ba427622680b2e7a9433019b02fe91c45fcacf44aa9cd2079703ecef9bc5c",
+      "hasTranscript": true,
+      "heard": "I streamed it, a big round rock. It lost its shadow. Chat, it lost it.",
+      "exactNormalizedMatch": true
+    }
+  ]
+}

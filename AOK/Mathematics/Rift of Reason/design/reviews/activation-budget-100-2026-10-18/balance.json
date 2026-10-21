@@ -1,0 +1,25 @@
+{
+  "matches": 300,
+  "competentWins": 143,
+  "competitiveGames": 200,
+  "levels": {
+    "normal": {
+      "endTurns": 3954,
+      "earlyMeanBoard": 0.93,
+      "stalledTurns": 673,
+      "passedAffordableCreature": 0,
+      "meanUnspentEnergy": 3.04,
+      "meanUnspentWithUses": 1.3
+    },
+    "competent": {
+      "endTurns": 1969,
+      "earlyMeanBoard": 0.93,
+      "stalledTurns": 326,
+      "passedAffordableCreature": 0,
+      "meanUnspentEnergy": 3.12,
+      "meanUnspentWithUses": 1.34
+    }
+  },
+  "meanMatchTurns": 20.74,
+  "maxMatchTurns": 41
+}

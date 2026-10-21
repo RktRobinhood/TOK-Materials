@@ -105,6 +105,11 @@
 .arena-live .b-coach-face { width: 42px; height: 42px; }
 .arena-live.guide-mode .b-hero-row.opp, .arena-live.guide-mode .b-board.opp-board { padding-left: 0; }
 
+/* Keep lethal-pressure warnings inside the hero column: a wide badge intrudes
+ * into crowded hands or the board above them in short windows. */
+.arena-live .b-danger { max-width: 64px; white-space: normal; flex-direction: column; align-items: flex-start; gap: 2px; padding: 4px 6px; }
+.arena-live .b-danger strong { font-size: 12px; }
+.arena-live .b-danger span { font-size: 11px; }
 @media (max-width:1100px) {
     .battle.arena-live { --side: 195px; }
     .arena-live .b-board { gap: 6px; }
@@ -141,6 +146,7 @@
 }
 @media (max-width:850px) {
     .battle.arena-live { --side: 0px; grid-template-columns: minmax(0, 1fr); grid-template-rows: 700px max-content; }
+    .arena-live .b-danger { bottom: 100%; }
     .arena-live .b-arena { grid-row: 1; }
     .arena-live .b-side { display: flex; position: relative; inset: auto; width: auto; max-height: none; grid-column: 1; grid-row: 2; overflow: visible; }
     .arena-live .b-rule-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }

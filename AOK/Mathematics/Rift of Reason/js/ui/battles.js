@@ -173,14 +173,16 @@
     function trainerSide(trainerId, level) {
         const t = Rift.data.trainers[trainerId];
         const ai = levelOf(level || t.ai || 'normal');
+        const save = Rift.State.get() || {};
+        const axioms = Rift.data.flux.contribution(String(save.seed) + ':trainer-flux:' + trainerId, ['constable', 'pip', 'fin', 'feed'].includes(trainerId));
         const deck = ai === 'expert' && t.deck && (Rift.data.decks || {})[t.deck];
         const power = side => (t.copiesPower && copiedPower()) || side;
         if (deck) {
-            return { ai, deck: t.deck, tactics: deck.tactics.slice(), power: power(teamPower(deck.creatures, ai)), fate: encounterFate(t.fate, ai),
+            return { ai, axioms, deck: t.deck, tactics: deck.tactics.slice(), power: power(teamPower(deck.creatures, ai)), fate: encounterFate(t.fate, ai),
                 team: deck.creatures.map((sp, i) => Rift.State.makeCreature(sp, { uid: 'npc-' + trainerId + '-deck-' + i, caughtAt: 0, variant: { attack: 0, health: 0, trait: null } })) };
         }
         const team = trainerTeam(trainerId, t);
-        return { ai, team, tactics: (t.tactics || starterTactics()).slice(), power: power(teamPower(team, ai)), fate: encounterFate(t.fate, ai) };
+        return { ai, axioms, team, tactics: (t.tactics || starterTactics()).slice(), power: power(teamPower(team, ai)), fate: encounterFate(t.fate, ai) };
     }
 
     // An encounter's environmental Fate events (#128) as engine plans. side: 'trainer' (the opponent, player
@@ -196,7 +198,8 @@
     function rewardText(reward) {
         if (!reward) return '';
         const tactic = reward.tactic && (Rift.data.tactics || {})[reward.tactic];
-        return 'First win reward: a Trick Book' + (tactic ? ' and a new tactic card, ' + tactic.name : '') + '. Teach tricks in the Bag; add tactics in Collection.';
+        const axiom = reward.axiom && (Rift.data.axioms || {})[reward.axiom];
+        return 'First win reward: a Trick Book' + (tactic ? ' and a new tactic card, ' + tactic.name : '') + (axiom ? ' and ' + axiom.name + ' (rule card)' : '') + '. Teach tricks in the Bag; add cards in Collection.';
     }
 
     function finish(result, opts) {
@@ -309,8 +312,8 @@
             return Rift.UI.modal('How to play', el('div.htp',null,[
                 el('div.htp-turn',null,[
                     el('div.htp-step',null,[el('strong',{text:'1 · Draw'}),el('span',{text:'Pick ONE: a card from your deck, or a rule card.'})]),
-                    el('div.htp-step',null,[el('strong',{text:'2 · Play'}),el('span',{text:'Up to 2 cards (Card plays rule). Each costs energy ⚡.'})]),
-                    el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Free.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'2 · Play'}),el('span',{text:'2 card activations: each cast, attack or manual Activate uses one. Casts and abilities also cost energy ⚡.'})]),
+                    el('div.htp-step',null,[el('strong',{text:'3 · Attack'}),el('span',{text:'Drag a ready creature onto a target. Uses 1 card activation; no energy cost.'})]),
                     el('div.htp-step',null,[el('strong',{text:'4 · End turn'}),el('span',{text:'After both turns, Fate moves 1 step.'})]),
                 ]),
                 row('❤','Win:','take the enemy hero to 0 hearts ('+D.hearts+' each). Check Axioms: the goal can change!'),
@@ -318,9 +321,11 @@
                 row('💤','New creatures sleep:','they attack next turn (unless Swift).'),
                 row('⚔','Fights:','both creatures hit at the same time. Damage stays.'),
                 row('⚖','Rule cards (axioms):','change a rule for BOTH players. Axioms shows the rules active now.'),
+                row('±','Flux modifiers:','add or subtract from the shared value, before your own bonuses. Read the before → after preview. Bounds can make a card do nothing. Unlimited needs a fixed limit; Fate reset restores the basics.'),
                 row('🃏','Empty decks:','used rule cards never come back. If your deck AND the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'),
                 row('⧗','Fate track:','one step per round (your turn and theirs). Events reach NOW and happen: a free new rule (shown in advance), or a reset. Some cards move Fate by rounds.'),
-                row('🎨','Colour wheel:','+1 attack against the colour you beat.'),
+                row('◎','Environmental events:','gold nodes show a scene event and who it affects. Read ahead! A leap past one skips it for good. Rewinding never brings it back; a repeat is a new event.'),
+                row('🎨','Colour matchups:','Strong +1, Weak −1, Neutral 0. Positive attack stays at least 1; zero stays 0. Open the board’s colour wheel to practise.'),
                 row('🎒','Bag:','use one item per turn for its energy. An item is used up only when you use it.'),
                 el('h3',{text:'Keywords'}),
                 el('div.htp-keys',null,[
@@ -418,7 +423,7 @@
                 mode: 'trainer',
                 seed: seed(nodeId),
                 player: Object.assign(deck, { consumables, bag }),
-                opponent: { name: t.name, team: side.team, tactics: side.tactics,
+                opponent: { name: t.name, team: side.team, tactics: side.tactics, axioms: side.axioms,
                     art: speakerArt(t.speaker), ai: side.ai, stake: t.ante, power: side.power },
                 environment: side.fate,
                 onEnd: result => finish(result, { nodeId: n.type==='battle' ? nodeId : null, trainerId: n.trainer, bagFromSave: true }),

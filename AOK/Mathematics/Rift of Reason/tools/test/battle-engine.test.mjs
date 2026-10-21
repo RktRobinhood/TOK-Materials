@@ -171,13 +171,16 @@ test('playing spends energy; a new creature sleeps unless it is Swift or the Arr
     assert.ok(E.legalActions(s).some(a => a.type === 'attack' && a.cid === 'p0c1'));
     s = rule(s, 'arrival');
     s = act(s, { type: 'play', cid: 'p0c2' });
-    assert.equal(E.canAttack(s, 'p0c2'), true, 'Ready on Arrival');
+    assert.equal(E.isSleeping(s, 'p0c2'), false, 'Ready on Arrival');
+    assert.equal(E.canAttack(s, 'p0c2'), false, 'three casts spent the Plenty budget');
+    rule(s, 'infinity');
+    assert.equal(E.canAttack(s, 'p0c2'), true, 'readiness and the shared activation budget both apply');
     assert.throws(() => act(s, { type: 'play', cid: 'p0c3' }), /Illegal/);
 });
 
 // ---- card plays per turn and the Fluxx-style rules (plays, energy growth, hand limit, bonuses) ----
 
-test('two card plays per turn by default: creatures, tactics and rule cards each use one; attacks are free', () => {
+test('two shared card activations by default: a creature and rule cast also block a third attack', () => {
     assert.equal(E.RULE_DEFAULTS.playLimit, 2);
     let s = setup({ p0: ['kardashiant', 'kardashiant', 'kardashiant', 'keanu'], t0: ['pep-talk'], axioms: ['haste'], energy: 10 });
     onBoard(s, 'p0c3');
@@ -192,8 +195,8 @@ test('two card plays per turn by default: creatures, tactics and rule cards each
     const legal = E.legalActions(s);
     assert.ok(!legal.some(a => a.type === 'play' || a.type === 'axiom'), 'no third play');
     assert.throws(() => act(s, { type: 'play', cid: 'p0c1' }), /Illegal/);
-    assert.ok(legal.some(a => a.type === 'attack' && a.cid === 'p0c3'), 'attacks do not use plays');
-    s = act(s, { type: 'attack', cid: 'p0c3', target: 'h1' });
+    assert.ok(!legal.some(a => a.type === 'attack'), 'the shared budget also gates ready attackers');
+    assert.throws(() => act(s, { type: 'attack', cid: 'p0c3', target: 'h1' }), /Illegal/);
     assert.equal(E.playsLeft(s, 0), 0);
     s = act(s, { type: 'end' });
     assert.equal(E.playsLeft(s, 1), 2, 'plays reset every turn');

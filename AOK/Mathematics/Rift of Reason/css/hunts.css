@@ -52,7 +52,7 @@ body.calm-motion .hunt-panel { animation: none; }
 .hunt-door { flex: 1 1 120px; text-align: center; padding: 8px; border: 1px solid var(--panel-edge); border-radius: 10px; }
 .hunt-door-icon { font-size: 1.8rem; }
 .hunt-options { display: flex; flex-wrap: wrap; gap: 8px; }
-.hunt-option { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+.hunt-option { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-width: 44px; min-height: 44px; }
 .hunt-option[aria-pressed="true"] { outline: 3px solid var(--gold); outline-offset: 2px; }
 .hunt-option[aria-pressed="true"]::after { content: '✔ chosen'; font-size: 0.75em; }
 .hunt-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
@@ -65,13 +65,15 @@ body.calm-motion .hunt-panel { animation: none; }
 .hunt-box > .btn { align-self: center; min-width: 220px; }
 /* Trick rounds: sized buttons, a word in the sign that is a button, the hidden targets, the wait clock. */
 .hunt-options.loose { justify-content: center; align-items: center; gap: 14px; padding: 6px 0; }
-.hunt-option.size-xs { font-size: 0.7rem; padding: 2px 6px; min-height: 24px; min-width: 24px; }
-.hunt-option.size-s { font-size: 0.9rem; padding: 4px 10px; }
-.hunt-option.size-m { font-size: 1.1rem; }
-.hunt-option.size-l { font-size: 1.6rem; padding: 10px 20px; }
-.hunt-option.size-xl { font-size: 2.3rem; padding: 14px 26px; }
+.hunt-option.size-xs { font-size: 0.7rem; padding: 2px 6px; min-height: 44px; min-width: 44px; }
+.hunt-option.size-s { font-size: 0.9rem; padding: 4px 10px; min-height: 52px; min-width: 52px; }
+.hunt-option.size-m { font-size: 1.1rem; min-height: 60px; min-width: 60px; }
+.hunt-option.size-l { font-size: 1.6rem; padding: 10px 20px; min-height: 72px; min-width: 72px; }
+.hunt-option.size-xl { font-size: 2.3rem; padding: 14px 26px; min-height: 88px; min-width: 88px; }
+.hunt-options.single-row { flex-wrap: nowrap; gap: 6px; }
+.hunt-options.single-row .hunt-option { flex: 1; min-width: 44px; padding: 8px 4px; font-size: 0.85rem; overflow-wrap: anywhere; }
 .hunt-options.loose .hunt-option { align-items: center; text-align: center; }
-.hunt-sign-link { all: unset; cursor: pointer; font: inherit; }
+.hunt-sign-link { all: unset; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; cursor: pointer; font: inherit; }
 .hunt-sign-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .hunt-target { cursor: pointer; }
 .hunt-target:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 8px; }

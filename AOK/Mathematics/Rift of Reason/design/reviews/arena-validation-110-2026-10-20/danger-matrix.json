@@ -1,0 +1,44 @@
+[
+  {
+    "height": 844,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 390
+  },
+  {
+    "height": 600,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 900
+  },
+  {
+    "height": 700,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 850
+  },
+  {
+    "height": 700,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 900
+  },
+  {
+    "height": 700,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 1100
+  },
+  {
+    "height": 600,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 1280
+  },
+  {
+    "height": 768,
+    "overlaps": [],
+    "pageOverflow": false,
+    "width": 1366
+  }
+]

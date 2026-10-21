@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-20T10:01:45.335Z",
+  "model": "gemini-3.5-flash-lite",
+  "scope": "13 recovered auto-run clips. Full FFmpeg decode and unprimed transcription; expected wording compared locally. Does not certify acting or cast consistency.",
+  "localReview": {
+    "decoded": 13,
+    "transcribed": 13,
+    "exactNormalizedMatches": 12,
+    "needsRepairOrIndependentReview": [
+      {
+        "id": "achilles-1l11ywa",
+        "reason": "Expected opening word Are is absent from independent unprimed transcripts by gemini-3.5-flash-lite and gemini-3.8-flash. The latter transcribed both the full source and a locally extracted first 0.65 seconds as You sure you're. This is an uncertain omission: a reduced initial syllable can be omitted by ASR, and absence of leading silence alone does not prove a cut. The expected name-stripped wording Are you sure you're? also leaves a dangling phrase.",
+        "status": "uncertain; not independently certified as a missing/clipped word",
+        "independentEvidence": "recovered-audit-achilles-independent.json",
+        "recommendedAction": "Review spoken template wording and keep this short clip in the follow-up queue unless a human listening check resolves the opening."
+      }
+    ],
+    "otherFindings": "The other twelve recovered clips match their expected words. Punctuation and sentence case differences are ignored by the local comparator. No neighbouring-line words were transcribed in those twelve clips. All recovered source hashes and byte sizes match the supplied receipt."
+  },
+  "attempts": [
+    {
+      "number": 1,
+      "time": "2026-10-20T10:01:50.813Z",
+      "model": "gemini-3.5-flash-lite",
+      "ids": [
+        "achilles-1l11ywa",
+        "achilles-p0n5qv",
+        "avatar-fox-girl-14h9hbs",
+        "avatar-frogling-boy-9c4xqw"
+      ],
+      "status": 200,
+      "reply": [
+        {
+          "id": "clip1",
+          "heard": "You sure you're"
+        },
+        {
+          "id": "clip2",
+          "heard": "then it isn't yours. Good. It's very heavy."
+        },
+        {
+          "id": "clip3",
+          "heard": "Only two? I could win all three. I always do."
+        },
+        {
+          "id": "clip4",
+          "heard": "Only two? I could win all three. I always do."
+        }
+      ],
+      "certified": 4
+    },
+    {
+      "number": 2,
+      "time": "2026-10-20T10:02:10.962Z",
+      "model": "gemini-3.5-flash-lite",
+      "ids": [
+        "avatar-mothkin-boy-1hqblqb",
+        "avatar-owlet-girl-1tr2wzr",
+        "avatar-raven-girl-1g1u6p9",
+        "avatar-raven-girl-possessed-19tp0fi"
+      ],
+      "status": 200,
+      "reply": [
+        {
+          "id": "clip1",
+          "heard": "Only two? I could win all three. I always do."
+        },
+        {
+          "id": "clip2",
+          "heard": "Only two? I could win all three. I always do."
+        },
+        {
+          "id": "clip3",
+          "heard": "Only two? I could win all three. I always do."
+        },
+        {
+          "id": "clip4",
+          "heard": "Always right. Lovely words. Words that lovely must be true."
+        }
+      ],
+      "certified": 4
+    },
+    {
+      "number": 3,
+      "time": "2026-10-20T10:02:29.644Z",
+      "model": "gemini-3.5-flash-lite",
+      "ids": [
+        "avatar-raven-girl-possessed-iqrpkn",
+        "avatar-raven-girl-possessed-urjb78",
+        "kuku-1p45jqo",
+        "pip-possessed-1xj5be4"
+      ],
+      "status": 200,
+      "reply": [
+        {
+          "id": "clip1",
+          "heard": "everything. A big word. Big words are true. Give up."
+        },
+        {
+          "id": "clip2",
+          "heard": "fraud. A strong word. Strong words are true. That's what they're for."
+        },
+        {
+          "id": "clip3",
+          "heard": "pip. He'd have written all this down."
+        },
+        {
+          "id": "clip4",
+          "heard": "can't. It's so tidy."
+        }
+      ],
+      "certified": 4
+    },
+    {
+      "number": 4,
+      "time": "2026-10-20T10:02:49.373Z",
+      "model": "gemini-3.5-flash-lite",
+      "ids": [
+        "speedcheeta-possessed-1avioh5"
+      ],
+      "status": 200,
+      "reply": [
+        {
+          "id": "clip1",
+          "heard": "I streamed it, a big round rock. It lost its shadow. Chat, it lost it."
+        }
+      ],
+      "certified": 1
+    }
+  ],
+  "clips": [
+    {
+      "id": "achilles-1l11ywa",
+      "who": "achilles",
+      "expected": "Are you sure you're?",
+      "sha256": "a519314f43b22406a0b64d1b014cd1c679f2fe0b39f46d82cbcde2a9429dfb63",
+      "bytes": 7344,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 1.22,
+        "silences": [
+          {
+            "start": 0.768542,
+            "end": 0.898458
+          },
+          {
+            "start": 1.125125,
+            "end": 1.224
+          }
+        ],
+        "leadingSilenceSeconds": null,
+        "trailingSilenceSeconds": 0.09487500000000004
+      },
+      "transcript": {
+        "heard": "You sure you're",
+        "exactNormalizedMatch": false,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 1
+      }
+    },
+    {
+      "id": "achilles-p0n5qv",
+      "who": "achilles",
+      "expected": "Then it isn't yours. Good. It's very heavy.",
+      "sha256": "5649e56aa27c3ea677a046c747e402f493711c5e6f30c08c997da9a999997162",
+      "bytes": 21456,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 3.58,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.16375
+          },
+          {
+            "start": 1.092458,
+            "end": 1.711708
+          },
+          {
+            "start": 2.029625,
+            "end": 2.718083
+          }
+        ],
+        "leadingSilenceSeconds": 0.16375,
+        "trailingSilenceSeconds": null
+      },
+      "transcript": {
+        "heard": "then it isn't yours. Good. It's very heavy.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 1
+      }
+    },
+    {
+      "id": "avatar-fox-girl-14h9hbs",
+      "who": "avatar-fox-girl",
+      "expected": "Only two? I could win all three. I always do.",
+      "sha256": "9d1e802b6b99e24cee6f691880cc7332f83960b5f86910a109f7f8c4377afc24",
+      "bytes": 25776,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 4.3,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.166042
+          },
+          {
+            "start": 1.119792,
+            "end": 1.545792
+          },
+          {
+            "start": 2.710833,
+            "end": 3.257125
+          },
+          {
+            "start": 4.168958,
+            "end": 4.296
+          }
+        ],
+        "leadingSilenceSeconds": 0.166042,
+        "trailingSilenceSeconds": 0.13104199999999988
+      },
+      "transcript": {
+        "heard": "Only two? I could win all three. I always do.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 1
+      }
+    },
+    {
+      "id": "avatar-frogling-boy-9c4xqw",
+      "who": "avatar-frogling-boy",
+      "expected": "Only two? I could win all three. I always do.",
+      "sha256": "68737a5da80ab6e371054aff83895bd3535ca9824bcb154a9e32945f6773cc65",
+      "bytes": 33408,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 5.57,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.166
+          },
+          {
+            "start": 1.097042,
+            "end": 1.7855
+          },
+          {
+            "start": 2.048,
+            "end": 2.295
+          },
+          {
+            "start": 3.651292,
+            "end": 4.367792
+          },
+          {
+            "start": 5.436708,
+            "end": 5.568
+          }
+        ],
+        "leadingSilenceSeconds": 0.166,
+        "trailingSilenceSeconds": 0.13329199999999997
+      },
+      "transcript": {
+        "heard": "Only two? I could win all three. I always do.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 1
+      }
+    },
+    {
+      "id": "avatar-mothkin-boy-1hqblqb",
+      "who": "avatar-mothkin-boy",
+      "expected": "Only two? I could win all three. I always do.",
+      "sha256": "c6d9b5da1d1a15737b5771f153486e76a65a8fcb628d48520b279b452cf1bd3c",
+      "bytes": 31968,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 5.33,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.151667
+          },
+          {
+            "start": 0.152583,
+            "end": 0.287458
+          },
+          {
+            "start": 1.554875,
+            "end": 2.011042
+          },
+          {
+            "start": 3.382625,
+            "end": 3.521792
+          },
+          {
+            "start": 3.636792,
+            "end": 3.786083
+          },
+          {
+            "start": 3.786125,
+            "end": 3.963792
+          },
+          {
+            "start": 5.23325,
+            "end": 5.328
+          }
+        ],
+        "leadingSilenceSeconds": 0.151667,
+        "trailingSilenceSeconds": 0.09675000000000011
+      },
+      "transcript": {
+        "heard": "Only two? I could win all three. I always do.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 2
+      }
+    },
+    {
+      "id": "avatar-owlet-girl-1tr2wzr",
+      "who": "avatar-owlet-girl",
+      "expected": "Only two? I could win all three. I always do.",
+      "sha256": "316d29bce23e419821dff14a9fda1cdcab54c906d4c6f8db6a67b88b91bb49cf",
+      "bytes": 21312,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 3.55,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.112667
+          },
+          {
+            "start": 1.093875,
+            "end": 1.328875
+          },
+          {
+            "start": 2.444208,
+            "end": 2.575333
+          },
+          {
+            "start": 3.426167,
+            "end": 3.552
+          }
+        ],
+        "leadingSilenceSeconds": 0.112667,
+        "trailingSilenceSeconds": 0.12383299999999986
+      },
+      "transcript": {
+        "heard": "Only two? I could win all three. I always do.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 2
+      }
+    },
+    {
+      "id": "avatar-raven-girl-1g1u6p9",
+      "who": "avatar-raven-girl",
+      "expected": "Only two? I could win all three. I always do.",
+      "sha256": "9d2db6cf627862eebc01a74ba29f1d02cdd83e9e2cd5e1ca29a1555ad5ab1a1e",
+      "bytes": 23472,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 3.91,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.164125
+          },
+          {
+            "start": 1.157167,
+            "end": 1.498708
+          },
+          {
+            "start": 2.728417,
+            "end": 2.972
+          },
+          {
+            "start": 3.797,
+            "end": 3.912
+          }
+        ],
+        "leadingSilenceSeconds": 0.164125,
+        "trailingSilenceSeconds": 0.11299999999999999
+      },
+      "transcript": {
+        "heard": "Only two? I could win all three. I always do.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 2
+      }
+    },
+    {
+      "id": "avatar-raven-girl-possessed-19tp0fi",
+      "who": "avatar-raven-girl-possessed",
+      "expected": "\"Always right.\" Lovely words. Words that lovely must be true.",
+      "sha256": "59fef20e77729d54c8caebaf40cf203f544ed03a8b53461b22610a35b78989f0",
+      "bytes": 54720,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 9.12,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.164583
+          },
+          {
+            "start": 2.010792,
+            "end": 3.006333
+          },
+          {
+            "start": 4.467,
+            "end": 5.519542
+          },
+          {
+            "start": 8.968375,
+            "end": 9.12
+          }
+        ],
+        "leadingSilenceSeconds": 0.164583,
+        "trailingSilenceSeconds": 0.15162499999999923
+      },
+      "transcript": {
+        "heard": "Always right. Lovely words. Words that lovely must be true.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 2
+      }
+    },
+    {
+      "id": "avatar-raven-girl-possessed-iqrpkn",
+      "who": "avatar-raven-girl-possessed",
+      "expected": "\"Everything.\" A big word. Big words are true. Give up.",
+      "sha256": "b7a4433f10ad87b1c5989eceee3bd22a37dc134eb0726b9810d0c8e4a2386529",
+      "bytes": 43776,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 7.3,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.161208
+          },
+          {
+            "start": 1.280917,
+            "end": 1.718458
+          },
+          {
+            "start": 2.960833,
+            "end": 3.466
+          },
+          {
+            "start": 5.536667,
+            "end": 6.360292
+          },
+          {
+            "start": 7.178417,
+            "end": 7.296
+          }
+        ],
+        "leadingSilenceSeconds": 0.161208,
+        "trailingSilenceSeconds": 0.12158300000000022
+      },
+      "transcript": {
+        "heard": "everything. A big word. Big words are true. Give up.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 3
+      }
+    },
+    {
+      "id": "avatar-raven-girl-possessed-urjb78",
+      "who": "avatar-raven-girl-possessed",
+      "expected": "\"Fraud.\" A strong word. Strong words are true. That's what they're for.",
+      "sha256": "fe93260a2f1223c1fc3134eff455943f34e6000a90c456eb7c284e82d41ffda7",
+      "bytes": 52272,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 8.71,
+        "silences": [
+          {
+            "start": 1.161708,
+            "end": 1.743083
+          },
+          {
+            "start": 3.3655,
+            "end": 3.941583
+          },
+          {
+            "start": 6.358708,
+            "end": 6.914458
+          },
+          {
+            "start": 8.47125,
+            "end": 8.712
+          }
+        ],
+        "leadingSilenceSeconds": null,
+        "trailingSilenceSeconds": 0.23875000000000135
+      },
+      "transcript": {
+        "heard": "fraud. A strong word. Strong words are true. That's what they're for.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 3
+      }
+    },
+    {
+      "id": "kuku-1p45jqo",
+      "who": "kuku",
+      "expected": "Pip. He'd have written all this down.",
+      "sha256": "f09581ef4144ac89d2d5127c6f262da2f42403738553577dabbf48d0ae1621f1",
+      "bytes": 19440,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 3.24,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.15975
+          },
+          {
+            "start": 0.393292,
+            "end": 0.529083
+          },
+          {
+            "start": 0.594042,
+            "end": 1.033167
+          },
+          {
+            "start": 1.885583,
+            "end": 1.974625
+          },
+          {
+            "start": 3.098083,
+            "end": 3.24
+          }
+        ],
+        "leadingSilenceSeconds": 0.15975,
+        "trailingSilenceSeconds": 0.1419170000000003
+      },
+      "transcript": {
+        "heard": "pip. He'd have written all this down.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 3
+      }
+    },
+    {
+      "id": "pip-possessed-1xj5be4",
+      "who": "pip-possessed",
+      "expected": "Can't. It's so tidy.",
+      "sha256": "72a005a4371724d8356b4e1ad33cc16d3286bc30cc83ff893b6d555d067d29dd",
+      "bytes": 20880,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 3.48,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.161917
+          },
+          {
+            "start": 0.956417,
+            "end": 1.500625
+          },
+          {
+            "start": 3.367708,
+            "end": 3.48
+          }
+        ],
+        "leadingSilenceSeconds": 0.161917,
+        "trailingSilenceSeconds": 0.11229200000000006
+      },
+      "transcript": {
+        "heard": "can't. It's so tidy.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 3
+      }
+    },
+    {
+      "id": "speedcheeta-possessed-1avioh5",
+      "who": "speedcheeta-possessed",
+      "expected": "I streamed it! A big round rock! It lost its shadow! Chat, it lost it!",
+      "sha256": "d45ba427622680b2e7a9433019b02fe91c45fcacf44aa9cd2079703ecef9bc5c",
+      "bytes": 49968,
+      "sourceCommit": "779befb",
+      "decode": {
+        "ok": true,
+        "error": null,
+        "durationSeconds": 8.33,
+        "silences": [
+          {
+            "start": 0,
+            "end": 0.176042
+          },
+          {
+            "start": 1.406333,
+            "end": 1.816708
+          },
+          {
+            "start": 3.708542,
+            "end": 4.037875
+          },
+          {
+            "start": 6.0135,
+            "end": 6.276792
+          },
+          {
+            "start": 6.918875,
+            "end": 7.036042
+          },
+          {
+            "start": 8.132875,
+            "end": 8.328
+          }
+        ],
+        "leadingSilenceSeconds": 0.176042,
+        "trailingSilenceSeconds": 0.19712499999999977
+      },
+      "transcript": {
+        "heard": "I streamed it, a big round rock. It lost its shadow. Chat, it lost it.",
+        "exactNormalizedMatch": true,
+        "model": "gemini-3.5-flash-lite",
+        "attempt": 4
+      }
+    }
+  ],
+  "updatedAt": "2026-10-20T10:02:50.684Z"
+}

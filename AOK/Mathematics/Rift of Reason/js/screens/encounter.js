@@ -61,7 +61,7 @@
             const pendingCatch = savedCatch && !savedCatch.dismissed ? savedCatch : null;
             const checkpoint = !params.shrine && state.flags['reflection:' + params.nodeId];
             const resume = pendingCatch || checkpoint;
-            const visit = resume ? { node: Object.assign({ id: params.nodeId }, Rift.World.node(params.nodeId)), seed: resume.seed, lured: resume.lured } : Rift.World.rollVisit(state, params.nodeId);
+            const visit = resume ? { node: Object.assign({ id: params.nodeId }, Rift.World.node(params.nodeId)), seed: resume.seed, lured: resume.lured, number: resume.visitNumber || state.map.visitCount[params.nodeId] } : Rift.World.rollVisit(state, params.nodeId);
             Rift.State.save();
             const n = visit.node;
             const isBoss = n.type === 'boss';
@@ -314,7 +314,7 @@
                     feedback.textContent = 'Solved. Continue when you are ready.';
                     Rift.State.update(s => {
                         if (!restoring) s.stats.puzzlesSolved += 1;
-                        if (result.meta && result.meta.reflectionComplete) s.flags['reflection:' + n.id] = { seed: visit.seed, lured: visit.lured, stages: stages.map(p => ({ id: p.id, difficulty: p.difficulty, opts: p.opts, result: p.result, answer: p.answer })), stageIx, answer, hintsUsed, wrongs, reflectionCounted: !!(checkpoint && checkpoint.reflectionCounted) };
+                        if (result.meta && result.meta.reflectionComplete) s.flags['reflection:' + n.id] = { seed: visit.seed, visitNumber: visit.number, lured: visit.lured, stages: stages.map(p => ({ id: p.id, difficulty: p.difficulty, opts: p.opts, result: p.result, answer: p.answer })), stageIx, answer, hintsUsed, wrongs, reflectionCounted: !!(checkpoint && checkpoint.reflectionCounted) };
                     });
                     const clk = stakesClock();
                     if (clk.scene && !restoring) Rift.Stakes.progress(clk.scene, 1);
@@ -476,12 +476,15 @@
                 obstacle = n.id === 'k-core' && !s.flags['seen:finale.home'] ? null : Rift.World.rollLoot(s, n, Rift.makeRng(visit.seed + ':loot'), catchOpts).species;
                 const r = Rift.World.rewards(s, n, rng, { stars, firstTime });
                 const slotsBefore = Rift.World.tweakSlots(s);
-                let cards = [];
+                let cards = [], coins = null, freePacks = 0;
                 Rift.State.update(st => {
+                    const packsBefore = Rift.State.walletOf(st).freePacks;
+                    coins = Rift.World.claimVisitCoins(st, n.id, visit.number, stages.some(p => p.result && p.result.solved));
                     Rift.World.applyRewards(st, r);
                     // The station's card reward (#124), once per adventure; complete() would pay it too.
                     if (Rift.World.claimCards) cards = Rift.World.claimCards(st, n.id).filter(c => c.id);
                     Rift.World.complete(st, n.id);
+                    freePacks = Rift.State.walletOf(st).freePacks - packsBefore;
                     if (!hintsUsed && st.stats.puzzlesSolved >= 5) earned.push('clear-thinker');
                     stages.forEach(p => {
                         if (Rift.Rumours) Rift.Rumours.recordWin(st, p.id);
@@ -504,9 +507,11 @@
                         ? 'new axiom card: ' + Rift.World.cardName(c) + ' (add it in Collection → Axiom cards)'
                         : 'new tactic card: ' + Rift.World.cardName(c) + ' (add it in Collection → Build decks)')).join(', ');
                 const body = el('div.stack', null, [
+                    Rift.resultBanner('won', 'You solved it!', 'Challenge complete. Here are your rewards.'),
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
                     obstacle ? el('p', { text: Rift.data.creatures[obstacle].name + ' appeared. Catching is optional.' }) : null,
-                    el('p', { text: '+' + r.xp + ' XP' + (items ? '  ·  ' + items : '') }),
+                    el('p', { text: '+' + r.xp + ' XP' + (coins ? ' · +' + coins.coins + ' Coins' : '') + (items ? '  ·  ' + items : '') }),
+                    freePacks ? el('p', { text: 'One free five-card pack saved for when packs are available.' }) : null,
                     earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,
@@ -570,14 +575,14 @@
                         if (result === 'caught') {
                             phase = 'caught';
                             const inst = st.creatures.find(i => i.uid === o.receipt.uid);
-                            panel.append(el('h3', { text: 'Caught! ' + c.name + ' joins you.' }));
+                            panel.append(Rift.resultBanner('won', 'Caught!', c.name + ' joins you.'));
                             if (inst) panel.append(variantNote(inst));
                             panel.append(el('p', { text: c.blurb }), el('p.small', { text: 'Ability: ' + c.abilityText }),
                                 el('button.btn', { text: 'See collection', onclick: () => Rift.Router.replace('collection') }));
                         } else if (result === 'full') {
-                            panel.append(el('h3', { text: 'You won! Your folder is full.' }), el('p', { text: 'Your charm was returned. ' + Rift.State.fullReason(o.species) }));
+                            panel.append(Rift.resultBanner('won', 'You won!', 'Your folder is full.'), el('p', { text: 'Your charm was returned. ' + Rift.State.fullReason(o.species) }));
                         } else {
-                            panel.append(el('h3', { text: 'It escaped this time.' }), el('p', { text: o.board && o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
+                            panel.append(Rift.resultBanner('lost', 'It escaped this time.', 'You can try again.'), el('p', { text: o.board && o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
                                 el('button.btn.primary', { text: 'Try again · new random game', onclick() {
                                     const result = session.retry(n.id, o.version);
                                     if (result.ok) render(); else panel.append(el('p', { role: 'alert', text: result.error }));

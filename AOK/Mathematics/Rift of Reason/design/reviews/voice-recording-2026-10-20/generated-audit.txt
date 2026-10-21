@@ -1,0 +1,263 @@
+22 stable changed/new clips; 0 transcribed; 22 pending; 0 wording reviews.
+Text-model request 1: carlseal-97u75e, constable-45f474, constable-18ihy92, narrator-esv7pg, narrator-aefnqk, narrator-fbqsxp, narrator-10brb0g, narrator-12ov7k6
+REVIEW carlseal-97u75e [possible missing words]
+Expected: Good game. I suppose.
+Heard: Good game.
+REVIEW constable-45f474 [possible missing/displaced clause]
+Expected: Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.
+Heard: I suppose. Hidden mode? Click the reports. Choose on off for a hidden switch or and or for a hidden gate.
+REVIEW constable-18ihy92 [possible missing/displaced clause]
+Expected: Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.
+Heard: Your guess must fit every report. Use these are enough for light mode? Check my wiring for wire mode, or lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.
+Accepted 8 transcripts; 8/22 current files audited.
+23 stable changed/new clips; 8 transcribed; 15 pending; 3 wording reviews.
+Text-model request 2: narrator-159uqyc, narrator-1hajygj, narrator-1wqrgiv, narrator-rhkszh, narrator-3zek8u, granny-wq0x3b, granny-1glroxg, granny-1j1q5fc
+REVIEW narrator-1hajygj [possible missing/displaced clause]
+Expected: Click a cell once for ✕, twice for ✓. A ✓ crosses out its row and column.
+Heard: Click a cell once for an X, twice for a check. A check crosses out its row and column.
+REVIEW narrator-1wqrgiv [possible extra words]
+Expected: Example, not this puzzle: "Ada did not write the frog story." Put ✕ where Ada meets that headline.
+Heard: Example, not this puzzle. Ada did not write the frog story. Put X where Ada meets that headline.
+REVIEW narrator-rhkszh [possible missing/displaced clause]
+Expected: When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.
+Heard: When a row has only one empty cell left, that cell must be a check. Keep going until every row has one check.
+REVIEW narrator-3zek8u [possible missing/displaced clause]
+Expected: Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.
+Heard: Then check my grid.
+REVIEW granny-wq0x3b [possible missing/displaced clause]
+Expected: Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: free. Click your power to continue; this lesson click does not use it.
+Heard: for C, look at the top three rule cards. Take one into your hand, and put the others back in any order. Cost, free. Click your power to continue. This lesson click does not use it.
+REVIEW granny-1glroxg [number/spelling variant]
+Expected: Close the Proof: Defeat an enemy creature that has 1 health left. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Close the proof. Defeat an enemy creature that has one health left. Cost, three energy. Click your power to continue. This lesson click does not use it.
+REVIEW granny-1j1q5fc [number/spelling variant]
+Expected: Lantern: Deal 1 damage to an enemy creature. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: Lantern. Deal one damage to an enemy creature. Cost, two energy. Click your power to continue. This lesson click does not use it.
+Accepted 8 transcripts; 16/23 current files audited.
+23 stable changed/new clips; 16 transcribed; 7 pending; 8 wording reviews.
+24 stable changed/new clips; 16 transcribed; 8 pending; 8 wording reviews.
+Text-model request 3: narrator-1bg6pmc, granny-1s2ii9d, granny-bkxadp, granny-vs3ipg, granny-1wd0vcn, granny-1oyd45f, granny-iesa5v, granny-9cs15t
+REVIEW granny-1s2ii9d [number/spelling variant]
+Expected: Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: night sight. See the opponent's hand until your next turn. Their next card costs one more. Cost two energy. Click your power to continue. This lesson click does not use it.
+REVIEW granny-bkxadp [possible transcription/proper-name variant]
+Expected: Brainstorm: +1 card activation this turn. Cost: free. Click your power to continue; this lesson click does not use it.
+Heard: brainstorm. Plus one card activation this turn. Cost free. Click your power to continue. This lesson click does not use it.
+REVIEW granny-1wd0vcn [number/spelling variant]
+Expected: Recall: Return your most recently defeated creature to your hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: recall. Return your most recently defeated creature to your hand. Cost, two energy. Click your power to continue. This lesson click does not use it.
+REVIEW granny-1oyd45f [number/spelling variant]
+Expected: Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Hold that thought. Move the fate track one round closer or further away. Draw a card. Cost, three energy. Click your power to continue. This lesson click does not use it.
+REVIEW granny-iesa5v [possible missing/displaced clause]
+Expected: Fine Print: Lose 1 heart and draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: fine print. Lose one heart and draw a card. Cost, two energy. Click your power to continue. This lesson click does not use it. Call it out.
+REVIEW granny-9cs15t [possible missing/displaced clause]
+Expected: Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: An enemy creature loses guard, shield and elusive. Cost, two energy. Click your power to continue. This lesson click does not use it.
+Accepted 8 transcripts; 24/24 current files audited.
+29 stable changed/new clips; 24 transcribed; 5 pending; 11 wording reviews.
+33 stable changed/new clips; 24 transcribed; 9 pending; 11 wording reviews.
+Text-model request 4: narrator-ddmjgv, narrator-1d2kqd2, narrator-4a6snp, narrator-3ai2ov, narrator-11k9rl7, narrator-5opduz, narrator-1vde02a, narrator-xoykcl
+43 stable changed/new clips; 24 transcribed; 30 pending; 11 wording reviews.
+Text-model request 5: carlseal-97u75e
+Accepted 1 transcripts; 24/43 current files audited.
+43 stable changed/new clips; 24 transcribed; 29 pending; 10 wording reviews.
+Text-model request 6: constable-45f474
+REVIEW constable-45f474 [possible missing/displaced clause]
+Expected: Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.
+Heard: Hidden mode, click the reports. Choose on off for a hidden switch, or and or for a hidden gate.
+Accepted 1 transcripts; 24/43 current files audited.
+43 stable changed/new clips; 24 transcribed; 28 pending; 10 wording reviews.
+Text-model request 7: constable-18ihy92
+REVIEW constable-18ihy92 [possible missing/displaced clause]
+Expected: Use These are enough for light mode, Check my wiring for wire mode, or Lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.
+Heard: Your guess must fit every report. Use these are enough for light mode, check my wiring for wire mode, or lift the curtain for hidden mode. The rule gives certainty only for these inputs. How to play is free. The hint button shows its heart cost. Think first, then check your answer.
+Accepted 1 transcripts; 24/43 current files audited.
+43 stable changed/new clips; 24 transcribed; 27 pending; 10 wording reviews.
+Text-model request 8: narrator-1hajygj
+REVIEW narrator-1hajygj [number/spelling variant]
+Expected: Click a cell once for ✕, twice for ✓. A ✓ crosses out its row and column.
+Heard: Click a cell once for an x, twice for a check. A check crosses out its row and column.
+Accepted 1 transcripts; 24/43 current files audited.
+53 stable changed/new clips; 24 transcribed; 36 pending; 9 wording reviews.
+Text-model request 9: narrator-1wqrgiv
+REVIEW narrator-1wqrgiv [number/spelling variant]
+Expected: Example, not this puzzle: "Ada did not write the frog story." Put ✕ where Ada meets that headline.
+Heard: Example, not this puzzle. Ada did not write the frog story. Put X where Ada meets that headline.
+Accepted 1 transcripts; 24/53 current files audited.
+53 stable changed/new clips; 24 transcribed; 35 pending; 8 wording reviews.
+Text-model request 10: narrator-rhkszh
+REVIEW narrator-rhkszh [possible missing/displaced clause]
+Expected: When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.
+Heard: When a row has only one empty cell left, that cell must be a check. Keep going until every row has one check. Then check my grid.
+Accepted 1 transcripts; 24/53 current files audited.
+53 stable changed/new clips; 24 transcribed; 34 pending; 8 wording reviews.
+Text-model request 11: narrator-3zek8u
+REVIEW narrator-3zek8u [possible missing/displaced clause]
+Expected: Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.
+Heard: How to play is free. The hint button shows its heart cost. Think first, then check your answer.
+Accepted 1 transcripts; 24/53 current files audited.
+62 stable changed/new clips; 24 transcribed; 42 pending; 8 wording reviews.
+Text-model request 12: granny-wq0x3b
+REVIEW granny-wq0x3b [possible missing/displaced clause]
+Expected: Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: free. Click your power to continue; this lesson click does not use it.
+Heard: For C, look at the top three rule cards. Take one into your hand, and put the others back in any order. Cost? Free. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 24/62 current files audited.
+63 stable changed/new clips; 24 transcribed; 42 pending; 8 wording reviews.
+Text-model request 13: granny-bkxadp
+Accepted 1 transcripts; 24/63 current files audited.
+63 stable changed/new clips; 22 transcribed; 43 pending; 5 wording reviews.
+63 stable changed/new clips; 22 transcribed; 43 pending; 5 wording reviews.
+Text-model request 14: granny-iesa5v
+REVIEW granny-iesa5v [possible missing/displaced clause]
+Expected: Fine Print: Lose 1 heart and draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: fine print lose one heart and draw a card cost to energy Click your power to continue this lesson click does not use it. Call it out
+Accepted 1 transcripts; 22/63 current files audited.
+63 stable changed/new clips; 22 transcribed; 42 pending; 5 wording reviews.
+Text-model request 15: granny-9cs15t
+REVIEW granny-9cs15t [possible missing/displaced clause]
+Expected: Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: An enemy creature loses guard, shield, and elusive. Cost, two energy. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 22/63 current files audited.
+73 stable changed/new clips; 22 transcribed; 51 pending; 5 wording reviews.
+Text-model request 16: constable-45f474
+Accepted 1 transcripts; 23/73 current files audited.
+73 stable changed/new clips; 23 transcribed; 50 pending; 5 wording reviews.
+Text-model request 17: constable-18ihy92
+Accepted 1 transcripts; 24/73 current files audited.
+73 stable changed/new clips; 24 transcribed; 49 pending; 5 wording reviews.
+Text-model request 18: narrator-ddmjgv, narrator-1d2kqd2, narrator-4a6snp, narrator-3ai2ov
+REVIEW narrator-1d2kqd2 [number/spelling variant]
+Expected: Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.
+Heard: Example: To fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its color probably will not help.
+Accepted 4 transcripts; 28/73 current files audited.
+77 stable changed/new clips; 28 transcribed; 49 pending; 5 wording reviews.
+Text-model request 19: narrator-11k9rl7, narrator-5opduz, narrator-1vde02a, narrator-xoykcl
+REVIEW narrator-5opduz [possible missing words]
+Expected: Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.
+Heard: Run the home visit audit. Click cards to see their scores, compare the stamps with the needs the audit reveals.
+Accepted 4 transcripts; 32/77 current files audited.
+83 stable changed/new clips; 32 transcribed; 52 pending; 6 wording reviews.
+Text-model request 20: narrator-5opduz
+REVIEW narrator-5opduz [possible missing words]
+Expected: Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.
+Heard: Run the home visit audit. Click cards to see their scores. Compare the stamps with the needs the audit reveals.
+Accepted 1 transcripts; 32/83 current files audited.
+83 stable changed/new clips; 32 transcribed; 51 pending; 6 wording reviews.
+Text-model request 21: granny-18lr4fy, granny-fbjx79, granny-p5w95d, granny-eyqpgw
+REVIEW granny-18lr4fy [possible missing/displaced clause]
+Expected: Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: For C, look at the top three rule cards. Take one into your hand and put the others back in any order. Cost one energy.
+REVIEW granny-fbjx79 [possible missing/displaced clause]
+Expected: Close the Proof: Defeat an enemy creature that has 1 health left. Cost: 4 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lessen click does not use it. Close the proof. Defeat an enemy creature that has one health left. Cost four energy.
+REVIEW granny-p5w95d [possible missing/displaced clause]
+Expected: Lantern: Deal 1 damage to an enemy creature. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lessen click does not use it. Lantern. Deal one damage to an enemy creature. Cost three energy.
+REVIEW granny-eyqpgw [possible missing/displaced clause]
+Expected: Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lessen click does not use it. Night sight. See the opponent's hand until your next turn. Their next card costs one more. Cost three energy.
+Accepted 4 transcripts; 36/83 current files audited.
+83 stable changed/new clips; 36 transcribed; 51 pending; 10 wording reviews.
+Text-model request 22: granny-18lr4fy
+REVIEW granny-18lr4fy [possible missing/displaced clause]
+Expected: Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: For C, look at the top three rule cards. Take one into your hand and put the others back in any order. Cost one energy.
+Accepted 1 transcripts; 36/83 current files audited.
+89 stable changed/new clips; 36 transcribed; 56 pending; 10 wording reviews.
+Text-model request 23: granny-fbjx79
+REVIEW granny-fbjx79 [possible missing/displaced clause]
+Expected: Close the Proof: Defeat an enemy creature that has 1 health left. Cost: 4 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Close the proof. Defeat an enemy creature that has one health left. Cost four energy.
+Accepted 1 transcripts; 36/89 current files audited.
+93 stable changed/new clips; 36 transcribed; 59 pending; 10 wording reviews.
+Text-model request 24: granny-p5w95d
+API/response failure; stopped. Zero clips certified for this request. Incomplete audio audit response
+103 stable changed/new clips; 36 transcribed; 69 pending; 10 wording reviews.
+Text-model request 25: granny-p5w95d
+REVIEW granny-p5w95d [possible missing/displaced clause]
+Expected: Lantern: Deal 1 damage to an enemy creature. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Lantern. Deal one damage to an enemy creature. Cost three energy.
+Accepted 1 transcripts; 36/103 current files audited.
+103 stable changed/new clips; 32 transcribed; 72 pending; 6 wording reviews.
+Text-model request 26: narrator-rhkszh
+REVIEW narrator-rhkszh [number/spelling variant]
+Expected: When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.
+Heard: When a row has only one empty cell left, that cell must be a check. Keep going until every row has one check.
+Accepted 1 transcripts; 33/103 current files audited.
+103 stable changed/new clips; 33 transcribed; 71 pending; 6 wording reviews.
+Text-model request 27: narrator-3zek8u
+Accepted 1 transcripts; 34/103 current files audited.
+111 stable changed/new clips; 34 transcribed; 78 pending; 6 wording reviews.
+Text-model request 28: granny-iesa5v
+REVIEW granny-iesa5v [number/spelling variant]
+Expected: Fine Print: Lose 1 heart and draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: fine print. Lose one heart and draw a card. Cost: two energy. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 35/111 current files audited.
+113 stable changed/new clips; 35 transcribed; 79 pending; 6 wording reviews.
+Text-model request 29: granny-9cs15t
+REVIEW granny-9cs15t [number/spelling variant]
+Expected: Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 2 energy. Click your power to continue; this lesson click does not use it.
+Heard: Call it out. An enemy creature loses guard, shield, and elusive. Cost, two energy. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 36/113 current files audited.
+115 stable changed/new clips; 36 transcribed; 80 pending; 6 wording reviews.
+Text-model request 30: granny-eyqpgw
+REVIEW granny-eyqpgw [possible missing/displaced clause]
+Expected: Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Night sight. See the opponent's hand until your next turn. Their next card costs one more. Cost three energy.
+Accepted 1 transcripts; 36/115 current files audited.
+123 stable changed/new clips; 36 transcribed; 87 pending; 6 wording reviews.
+Text-model request 31: granny-11ttr18, granny-11jd8wk, granny-xdnqze, granny-mr0ca7
+REVIEW granny-11ttr18 [possible missing/displaced clause]
+Expected: Brainstorm: +1 card activation this turn. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Brainstorm. Plus one card activation this turn. Cost, one energy.
+REVIEW granny-11jd8wk [possible missing/displaced clause]
+Expected: What If?: Swap a creature's attack and health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. What if swap a creature's attack and health? Cost, one energy.
+REVIEW granny-xdnqze [possible missing/displaced clause]
+Expected: Recall: Return your most recently defeated creature to your hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Recall. Return your most recently defeated creature to your hand. Cost, three energy.
+REVIEW granny-mr0ca7 [possible missing/displaced clause]
+Expected: Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Hold that thought. Move the fate track one round closer or further away. Draw a card. Cost, four energy.
+Accepted 4 transcripts; 40/123 current files audited.
+123 stable changed/new clips; 40 transcribed; 87 pending; 10 wording reviews.
+Text-model request 32: granny-11ttr18
+REVIEW granny-11ttr18 [possible missing/displaced clause]
+Expected: Brainstorm: +1 card activation this turn. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Brainstorm plus one card activation this turn. Cost one energy.
+Accepted 1 transcripts; 40/123 current files audited.
+123 stable changed/new clips; 38 transcribed; 88 pending; 8 wording reviews.
+Text-model request 33: granny-18lr4fy
+REVIEW granny-18lr4fy [possible missing/displaced clause]
+Expected: Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: For C, look at the top three rule cards. Take one into your hand, and put the others back in any order. Cost one energy. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 39/123 current files audited.
+123 stable changed/new clips; 39 transcribed; 87 pending; 9 wording reviews.
+Text-model request 34: granny-fbjx79
+REVIEW granny-fbjx79 [number/spelling variant]
+Expected: Close the Proof: Defeat an enemy creature that has 1 health left. Cost: 4 energy. Click your power to continue; this lesson click does not use it.
+Heard: Close the proof. Defeat an enemy creature that has one health left. Cost four energy. Click your power to continue. This lesson click does not use it.
+Accepted 1 transcripts; 40/123 current files audited.
+123 stable changed/new clips; 40 transcribed; 86 pending; 9 wording reviews.
+Text-model request 35: granny-11jd8wk
+43 stable changed/new clips; 40 transcribed; 6 pending; 9 wording reviews.
+Text-model request 36: granny-11jd8wk
+REVIEW granny-11jd8wk [possible missing/displaced clause]
+Expected: What If?: Swap a creature's attack and health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. What if swap a creature's attack and health? Cost one energy.
+Accepted 1 transcripts; 40/43 current files audited.
+43 stable changed/new clips; 40 transcribed; 5 pending; 9 wording reviews.
+Text-model request 37: granny-xdnqze
+REVIEW granny-xdnqze [possible missing/displaced clause]
+Expected: Recall: Return your most recently defeated creature to your hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Recall. Return your most recently defeated creature to your hand. Cost, three energy.
+Accepted 1 transcripts; 40/43 current files audited.
+43 stable changed/new clips; 40 transcribed; 4 pending; 9 wording reviews.
+Text-model request 38: granny-mr0ca7
+REVIEW granny-mr0ca7 [possible missing/displaced clause]
+Expected: Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.
+Heard: Click your power to continue. This lesson click does not use it. Hold that thought. Move the fate track one round closer or further away. Draw a card. Cost four energy.
+Accepted 1 transcripts; 40/43 current files audited.
+43 stable changed/new clips; 40 transcribed; 3 pending; 9 wording reviews.

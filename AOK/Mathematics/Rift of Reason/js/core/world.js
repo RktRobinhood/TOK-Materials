@@ -51,8 +51,15 @@
         let tactic = [t.rewardTactic].concat(earned).find(id => id && earned.includes(id) && !owned.includes(id)) || null;
         // Every earned tactic owned already: the uncommon colour tactic of the trainer's main colour.
         if (!tactic) tactic = trainerUncommon(t, owned);
-        if (tactic) state.tactics.push(tactic);
-        return { items: { 'trick-book': 1 }, tactic };
+        if (tactic) Rift.State.grantTactic(tactic, state);
+        let axiom = null;
+        if (trainerId === 'constable' && (Rift.data.axioms || {}).infinity) {
+            state.axioms = state.axioms || [];
+            if (Rift.State.grantAxiom('infinity', state)) axiom = 'infinity';
+        }
+        const reward = { items: { 'trick-book': 1 }, tactic };
+        if (axiom) reward.axiom = axiom;
+        return reward;
     }
 
     // ---- fog of war ------------------------------------------------------------
@@ -132,8 +139,7 @@
             const pick = cardTrack(state)[slot].map(cardRef).find(c => cardKnown(c) && !cardOwned(state, c)) || null;
             if (pick && pick.kind === 'tactic') Rift.State.grantTactic(pick.id, state);
             if (pick && pick.kind === 'axiom') {
-                if (!Array.isArray(state.axioms)) state.axioms = [];
-                state.axioms.push(pick.id);
+                Rift.State.grantAxiom(pick.id, state);
             }
             const receipt = { v: ((Rift.data || {}).starterDecks || {}).rewardsVersion || 1, node: id, kind: pick ? pick.kind : null, id: pick ? pick.id : null };
             if (!state.flags) state.flags = {};
@@ -174,6 +180,7 @@
         (node(id).links || []).forEach(n => reveal(state, n));
         const ch = node(id).chapter;
         if (ch && ch !== state.chapter && !(Rift.data.chapters[ch] || {}).comingSoon) state.chapter = ch;
+        reconcileWallet(state);
         return firstTime;
     }
 
@@ -228,7 +235,7 @@
         const puzzle = n.puzzles && n.puzzles.length ? rng.pick(n.puzzles) : null;
         const lured = !!(state.lures && state.lures[id] > 0);
         if (state.lures && state.lures[id] > 0) state.lures[id] -= 1;
-        return { node: n, puzzle, lured, seed: rng.seed, rng };
+        return { node: n, puzzle, lured, seed: rng.seed, rng, number: state.map.visitCount[id] };
     }
 
     // Call only after successful activity completion, with a separate seed.
@@ -284,6 +291,41 @@
 
     // ---- rewards -------------------------------------------------------------------
 
+    const CHAPTER_BOSSES = { ch1: 'gate', ch2: 'b-town-hall', ch3: 't-tribunal', ch4: 'k-core' };
+    // Called only by a successfully completed checked encounter, before complete(). Generic story,
+    // bonus, rest and Settings paths never call this. One high-water receipt per node bounds the save.
+    function claimVisitCoins(state, id, visitNumber, checked) {
+        const n = node(id);
+        if (checked !== true || !n || !['puzzle', 'miniboss', 'boss'].includes(n.type)
+            || !Number.isSafeInteger(visitNumber) || visitNumber <= 0 || visitNumber !== state.map.visitCount[id]) return null;
+        const w = Rift.State.walletOf(state), previous = w.visits[id] || 0;
+        if (visitNumber <= previous) return null;
+        const first = !previous && !state.map.completed.includes(id);
+        const amount = first ? (n.type === 'puzzle' ? 10 : 25) : 2;
+        if (!Number.isSafeInteger(w.coins) || w.coins < 0 || !Number.isSafeInteger(w.coins + amount)) return null;
+        w.coins += amount;
+        w.visits[id] = visitNumber;
+        return { node: id, visit: visitNumber, first, coins: amount };
+    }
+    // Chapter packs remain an unclaimed entitlement until usable pack rewards exist (#136).
+    // Legacy completions get their entitlement, without inventing retroactive visit income.
+    function reconcileWallet(state) {
+        const w = Rift.State.walletOf(state);
+        let earned = 0;
+        Object.entries(CHAPTER_BOSSES).forEach(([chapter, id]) => {
+            if (!state.map.completed.includes(id) || w.chapters[chapter] || !Number.isSafeInteger(w.freePacks + 1)) return;
+            w.chapters[chapter] = true; w.freePacks += 1; earned++;
+        });
+        return earned;
+    }
+    function catchUpWallet() {
+        const s = Rift.State.get();
+        if (!s || !Object.entries(CHAPTER_BOSSES).some(([chapter, id]) => s.map.completed.includes(id) && !(s.wallet && s.wallet.chapters || {})[chapter])) return 0;
+        let count = 0;
+        Rift.State.update(st => { count = reconcileWallet(st); });
+        return count;
+    }
+
     function rewards(state, n, rng, opts) {
         const o = opts || {};
         const out = { xp: 0, items: {} };
@@ -320,7 +362,7 @@
     function applyRewards(state, r) {
         state.xp += r.xp;
         Object.entries(r.items).forEach(([id, k]) => { state.items[id] = (state.items[id] || 0) + k; });
-        if (r.tactic) { state.tactics = state.tactics || []; if (!state.tactics.includes(r.tactic)) state.tactics.push(r.tactic); }
+        if (r.tactic && !Rift.State.ownedTactics(state).includes(r.tactic)) Rift.State.grantTactic(r.tactic, state);
     }
 
     function level(state) {
@@ -374,6 +416,7 @@
         node, reveal, hinted, lockReason, start, complete, jumpToChapter,
         spawnWeights, rollVisit, rollLoot, catchOdds, rollCatch, rewards, applyRewards, level,
         completedPuzzlesInChapter, claimBonus,
+        claimVisitCoins, reconcileWallet, catchUpWallet,
         cardTrack, openCardSlots, claimCards, pendingCards, reconcileCards, catchUpCards, cardName,
     };
 })(typeof window !== 'undefined' ? window : globalThis);

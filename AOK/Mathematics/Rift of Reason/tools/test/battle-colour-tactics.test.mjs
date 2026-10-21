@@ -153,7 +153,8 @@ test('Emotion: Gut Reaction 3 to the enemy hero; Rally Cry +1/+1; Wave of Feelin
     assert.equal(E.canAttack(s, 'p0c2'), false, 'asleep');
     s = cast(s);
     assert.equal(atk(s, 'p0c1'), 4);
-    assert.ok(E.canAttack(s, 'p0c2'), 'Swift wakes it');
+    assert.equal(E.isSleeping(s, 'p0c2'), false, 'Swift wakes it');
+    assert.equal(E.canAttack(s, 'p0c2'), false, 'both casts spent the shared allowance');
 });
 
 test('Perception: Look Closer strips Guard, Elusive and Shield (even from an Elusive enemy) and draws; Field Notes; Clear View', () => {
@@ -369,8 +370,9 @@ test('the first creature of a colour unlocks that colour\'s common; also for an 
     assert.deepEqual(plain(S.unlockColourTactics(save)), ['gut-reaction']);
     assert.ok(!S.ownedTactics(save).includes('proof-by-contradiction'), 'uncommons are not unlocked by catching');
     assert.equal(S.grantTactic('qed', save), true);
-    assert.equal(S.grantTactic('qed', save), false, 'already owned');
-    assert.equal(S.grantTactic('counterexample', save), false, 'starter tactics are owned by everyone');
+    assert.equal(S.grantTactic('qed', save), true, 'a second grant is a second actual copy');
+    assert.equal(S.cardCopies('tactic', 'qed', save), 2);
+    assert.equal(S.grantTactic('counterexample', save), true, 'starting entitlement is two; a grant adds one up to four');
     assert.equal(S.grantTactic('no-such-tactic', save), false);
     assert.ok(S.ownedTactics(save).includes('qed'));
     // An old (version 1) save with creatures of two colours gets their commons on load.
@@ -380,7 +382,7 @@ test('the first creature of a colour unlocks that colour\'s common; also for an 
     const cur = S.freshState();
     cur.creatures.push({ uid: 'x1', species: 'muskrat', variant: { attack: 0, health: 0, trait: null } });
     cur.trophies.push({ uid: 't1', species: 'beansprout' });
-    cur.tactics = ['lemma'];
+    S.grantTactic('lemma', cur);
     assert.deepEqual(plain(S.migrate(plain(cur)).tactics), ['lemma', 'daydream', 'label-it']);
 });
 
@@ -405,7 +407,7 @@ test('a trainer whose earned tactics are all owned gives the uncommon of the tea
         'js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/items.js', 'data/axioms.js', 'data/tactics.js', 'data/map.js', 'js/core/world.js',
     ]);
     const st = R.State.freshState();
-    st.tactics = R.data.tacticDecks.earned.slice();
+    R.data.tacticDecks.earned.forEach(id => R.State.grantTactic(id, st));
     const r = R.World.claimTrainerReward(st, 'syllo');   // Syllo: mostly Reason
     assert.equal(r.tactic, 'proof-by-contradiction');
     assert.ok(st.tactics.includes('proof-by-contradiction'));

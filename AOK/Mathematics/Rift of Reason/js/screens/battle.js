@@ -109,14 +109,16 @@
     const CORE_RULES = [
         ['victory', 'Win', 'Enemy hero to 0 ❤ wins', 'normal-hearts', 'Take the enemy hero to zero hearts to win.'],
         ['combat', 'Fights', 'Both creatures hit', null, 'In a fight both creatures deal damage equal to their attack. Damage stays.'],
-        ['plays', 'Card plays', '2 per turn', 'two-plays', 'You may play 2 cards per turn: creatures, tactics and rule cards together. Attacking is free.'],
+        ['plays', 'Card activations', '2 per turn', 'two-plays', 'You have 2 card activations per turn. Each cast, attack or manual Activate uses one. Draw, Spark, items and hero powers are separate.'],
         ['attacks', 'Attacks', 'Each creature attacks once', 'three-actions', 'Each ready creature may attack once per turn. New creatures wait a turn (unless Swift).'],
         ['energy', 'Energy', '+1 each turn', null, 'Your energy grows by 1 each turn (up to 10) and refills. Cards and abilities cost energy.'],
+        ['draw', 'Drawing', 'Draw 1', null, 'Your normal draw takes 1 card from the deck you choose.'],
+        ['cost', 'Creature costs', 'Printed cost', 'thrift', 'Creatures cost their printed energy, with a minimum of zero. Spells and rules keep their own costs.'],
     ];
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
-        growth: 'Growth', damage: 'Hero hits', plays: 'Card plays', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card activations', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
         // Fate timing (#121, data/axioms.js)
         'fate-delay': 'Fate timing', 'fate-capacity': 'Fate slots', 'fate-impact': 'Fate damage',
     };
@@ -203,7 +205,7 @@
         return {
             name: 'You', team, tactics: tactics || undefined, hearts: given.hearts,
             items: given.items || (save && save.items) || {},
-            axioms: given.axioms || (save && save.axiomLoadout && save.axiomLoadout.length ? save.axiomLoadout : save && save.axioms) || [],
+            axioms: given.axioms || (save && S.axiomLoadout ? S.axiomLoadout(save) : (Rift.data.axiomDecks || {}).default || []),
             consumables: given.consumables || {},
             bag: given.bag || [],
             // Hero power ({ id, tweaks }, data/powers.js) chosen by the launcher (js/ui/battles.js).
@@ -228,7 +230,7 @@
         const askedLevel = opp.ai || p.aiLevel || DEFAULT_AI[mode] || 'normal';
         const aiLevel = B().AI && B().AI.levelOf ? B().AI.levelOf(askedLevel) : askedLevel;
         const anteType = mode === 'practice' ? 'practice' : (opp.type || mode);
-        const oppAxioms = opp.axioms || Rift.makeRng(seed + ':axiom-opponent').shuffle((Rift.data.axiomDecks || {}).starter || []).slice(0, 10);
+        const oppAxioms = opp.axioms || Rift.data.flux.contribution(seed + ':axiom-opponent', p.fluxProfile === 'eligible');
         // A long title ("Sergeant Syllo · Road challenge") stays in tooltips; the engine's log and
         // the portrait use the short name before " · ".
         const oppTitle = opp.name || 'Rival';
@@ -252,6 +254,7 @@
             preview: null, drag: null, suppressClick: false, step: 0, sideOpen: false, inspectTimer: null,
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
+            readKey: null, reading: null, future: null, revealedAction: null,
         };
         const actionStates = new WeakMap();
         const presentationTimers = new Set(), motions = new Set();
@@ -264,7 +267,8 @@
             return id;
         }
         function animate(node, frames, options) {
-            const motion = node.animate(frames, options);
+            let motion;
+            try { motion = node.animate(frames, options); } catch (e) { return null; }
             if (motion) {
                 motions.add(motion);
                 motion.onfinish = motion.oncancel = () => motions.delete(motion);
@@ -280,6 +284,7 @@
             dom.lane.classList.remove('flash');
         }
         function stopScreenTimers() {
+            ui.revealedAction = null;
             ['timer', 'noteTimer', 'inspectTimer', 'bannerTimer', 'revealTimer', 'hintTimer', 'sayTimer', 'sayCap'].forEach(key => clearTimeout(ui[key]));
             if (ui.layoutFrame != null && root.cancelAnimationFrame) root.cancelAnimationFrame(ui.layoutFrame);
             cancelLongPress(); hideTip();
@@ -330,6 +335,7 @@
                 // Recent plays (newest at the top): a column of small pictures at the table's left edge;
                 // hover shows the card and what happened.
                 dom.recent = el('section.b-recent', { 'aria-label': 'Recent plays' }),
+                dom.reader = el('div.b-reader', { hidden: true }),
             ]),
             dom.coach = guide ? el('div.b-coach.panel', { role: 'region', 'aria-label': 'Granny\'s guide' }) : null,
             dom.side = el('aside.b-side', {}, [
@@ -359,11 +365,11 @@
             ['deck', 'axiom', 'opponent'].forEach(choice => {
                 const mine = choice !== 'opponent';
                 const node = el((mine ? 'button.b-draw-btn' : 'div') + '.b-table-deck.' + choice, {
-                    ...(mine ? { type: 'button', onclick() {
+                    ...(mine ? { type: 'button', onclick(ev) {
                         if (ui.tipSuppress) return;
                         // Resolve against current legality, including Granny's step and busy state.
                         const action = legal().find(a => a.type === 'draw' && a.choice === choice);
-                        if (action) { hideTip(); act(action); }
+                        if (action) { hideTip(); act(action, false, ev && ev.detail === 0); }
                         else showTip(node, true);
                     } } : { role: 'img' }),
                     dataset: { choice },
@@ -398,19 +404,32 @@
             placeAbilityTray();
         }
         function resizeBattle() {
+            const preview = ui.future && ui.sel;
+            const source = preview && (preview.cid ? nodes[preview.cid] : preview.kind === 'axiom' ? findAxiomInHand(preview.id)
+                : preview.kind === 'power' ? nodes.pw0 : dom.bagBtn);
+            const previewFocus = focusKey(source);
+            closeFuture(true);
             if (ui.ended) return;
             clearPresentation();
             ui.fateSlide = null;
             cancelDrag(); cancelLongPress(); hideTip(); clearPredict();
             ui.sel = null; ui.handPos = null;
             render();
+            // The resize clears selection and replaces its Preview button. Keep keyboard users
+            // on the surviving move source rather than that detached button or the page body.
+            if (preview) {
+                restoreFocus(previewFocus);
+                if (!screen.contains(root.document.activeElement)) focusBoard();
+            }
             positionFateInspection();
         }
         if (root.addEventListener) {
             root.addEventListener('resize', resizeBattle);
             root.addEventListener('scroll', positionFateInspection, true);
         }
-        screen.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
+        screen.addEventListener('keydown', e => { if (e.key === 'Escape' && !ui.future) { hideTip(); cancelDrag(); if (ui.bagOpen) toggleBag(false); clearSel(true); } });
+        // Optional presentation is skippable; the same pointerdown can still select or play.
+        screen.addEventListener('pointerdown', () => { if (!ui.future && !ui.reading) clearPresentation(); });
         screen.addEventListener('pointermove', onPointerMove);
         screen.addEventListener('pointerup', onPointerUp);
         screen.addEventListener('pointercancel', () => { cancelDrag(); cancelLongPress(); cancelTipPress(); });
@@ -465,8 +484,8 @@
         }
 
         // ---- acting ----
-        function act(action, automated) {
-            if (ui.ended) return;
+        function act(action, automated, keyboardDraw) {
+            if (ui.ended || ui.reading || ui.future) return;
             // Old DOM handlers may fire again after a render. Reject them before they
             // can cancel an AI timer, replay audio or touch selection in a newer state.
             if (!automated && (!myTurn() || actionStates.get(action) !== state)) return;
@@ -475,6 +494,8 @@
             clearPredict();   // before rects(): a defeat ghost copies the old card, badges and all
             const by = decider();
             const before = rects();
+            const previous = state;
+            const focusDrawn = action.type === 'draw' && by === ME && !!keyboardDraw;
             const guided = guide && by === ME && !ui.busy && step() && stepAccepts(step(), action);
             if (action.type === 'end' && by === ME) ui.snap = snapshot();
             if (by === ME && action.type !== 'draw') ui.recapTurn = null;   // the recap has been read
@@ -496,7 +517,7 @@
             if (guided) { ui.busy = true; ui.queue = E.winner(state) == null ? (step().replies || []).slice() : []; if (ui.queue.some(r => r.say)) stopVoice(); }
             noteEvents(state.lastEvents);
             render();
-            effects(state.lastEvents, before);
+            playVisuals(state.lastEvents, before, previous, focusDrawn);
             ruleReveal(state.lastEvents);
             if (waiting && state.players[ME].hand.includes(waiting)) setNote(name(waiting) + ' was not played. It is back in your hand: its Entrance needs a target first.');
             schedule();
@@ -517,15 +538,15 @@
                 }
                 const what = state.cards[action.cid].kind === 'tactic' ? 'plays a tactic' : 'plays a creature';
                 const aim = target ? ' on ' + targetName(target) : '';
-                showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL, '', false);
-                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                ui.revealedAction = { action, state };
+                showReveal(cardEl(action.cid, { size: 'big', unregistered: true }), oppName + ' ' + what + aim, REVEAL);
                 return;
             }
             // The opponent's power is shown big too, then (with a target) its arrow.
             if (by === OPP && !revealed && action.type === 'power' && state.players[OPP].power) {
                 const pw = state.players[OPP].power;
-                showReveal(powerBig(pw.id, OPP), oppName + ' uses the power ' + powerName(pw.id) + (target ? ' on ' + targetName(target) : ''), REVEAL, 'power', false);
-                ui.timer = setTimeout(() => perform(action, true), REVEAL);
+                ui.revealedAction = { action, state };
+                showReveal(powerBig(pw.id, OPP), oppName + ' uses the power ' + powerName(pw.id) + (target ? ' on ' + targetName(target) : ''), REVEAL, 'power');
                 return;
             }
             if (target && (action.type === 'attack' || action.type === 'play' || action.type === 'activate' || action.type === 'power')) {
@@ -608,11 +629,23 @@
 
         function schedule() {
             clearTimeout(ui.timer);
-            if (ui.ended || help || ui.confirm) return;
+            if (ui.ended || help || ui.confirm || ui.reading || ui.future) return;
             // A card shown big (a reveal) is read first: everything waits until it fades.
             if (ui.holding || ui.saying) return;
             if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
-            if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a); return; }
+            // A reveal owns the pending move until it is committed, including while a reader,
+            // Help or confirmation pauses the timer. Scripted replies were already dequeued.
+            if (ui.revealedAction) {
+                const pending = ui.revealedAction;
+                ui.timer = setTimeout(() => {
+                    if (ui.revealedAction !== pending) return;
+                    ui.revealedAction = null;
+                    if (state === pending.state) perform(pending.action, true);
+                    else schedule();
+                }, 0);
+                return;
+            }
+            if (ui.preview && ui.preview.action) { const a = ui.preview.action; ui.preview = null; perform(a, true); return; }
             if (ui.queue.length) {
                 // A narration line ({ say }) in the lesson's replies: show it, say it, and go on only
                 // when the voice has finished (each reply is its own small block).
@@ -641,20 +674,19 @@
 
         function noteEvents(events) {
             ui.news = events.map(visibleText).filter(Boolean).filter(t => !/^Round \d+\.$/.test(t) && !/Choose a draw\.$/.test(t));
-            try { battleSounds(events); } catch (e) { /* sound is optional */ }
         }
 
         // Sounds for one batch of events (assets/sfx/el via data/sfx-el.js; older Kenney names as the
         // fallback). Sounds in a batch are spaced out, creature calls use their own channel, and at most
         // one spoken creature bark (data/barks.js) plays, only when it is recorded and no
         // other voice is talking.
-        function battleSounds(events) {
-            const A = Rift.Audio;
-            if (!A || !A.has) return;
+        function battleSounds(events, present) {
+            const A = Rift.Audio || {};
             const cue = [];
+            let current;
             const add = (name, fallback, opts) => {
-                const n = A.has(name) ? name : fallback && A.has(fallback) ? fallback : null;
-                if (n) cue.push([n, opts || {}]);
+                const n = A.has && (A.has(name) ? name : fallback && A.has(fallback) ? fallback : null);
+                if (n) cue.push([n, opts || {}, current]);
             };
             const sp = cid => { const c = cid && state.cards[cid]; return c && c.kind === 'creature' ? c.species : null; };
             const call = (cid, kind) => { const s = sp(cid); if (s) add('cr-' + s + '-' + kind, null, { bus: 'creature' }); };
@@ -664,6 +696,8 @@
             let bark = null;
             const wantBark = (cid, kind, chance) => { const s = sp(cid); if (!bark && s && Math.random() < chance) bark = { s, kind }; };
             events.forEach(ev => {
+                current = ev;
+                const count = cue.length;
                 switch (ev.t) {
                     case 'armed': add('card-play'); break;
                     case 'conditional-reveal': add('card-play'); break;
@@ -672,7 +706,7 @@
                     case 'tactic-play': {
                         const def = (Rift.data.tactics || {})[ev.id] || {};
                         add('tactic-' + ev.id, 'cast-' + (def.colour || 'colourless'));
-                        if (!cue.length) add('card-play');
+                        if (cue.length === count) add('card-play');
                         break;
                     }
                     case 'item-use': add('item-use', 'card-play'); break;
@@ -696,13 +730,19 @@
                 const low = Math.min(...state.players.map(P => P.hearts / (P.maxHearts || 12)));
                 Rift.Ambience.tension(events.some(ev => ev.t === 'end') ? 0 : Rift.clamp((0.75 - low) / 0.6, 0, 1));
             }
-            // Space the batch out; a channel may only cut its own previous sound.
-            cue.slice(0, 6).forEach(([n, o], i) => presentationLater(() => { try { A.sfx(n, o); } catch (e) { /* no audio */ } }, i * 220));
-            if (bark && !guide && !A.speaking()) {
+            // One event clock for source motion, consequences and their sound. Dense chains
+            // compress into 600 ms; this clock never holds up input or the opponent scheduler.
+            events.forEach((ev, index) => {
+                const delay = events.length > 1 ? index * Math.min(100, 600 / (events.length - 1)) : 0;
+                const sounds = () => cue.filter(c => c[2] === ev).forEach(([n, o]) => { try { A.sfx(n, o); } catch (e) { /* optional audio */ } });
+                // Even the first cosmetic beat waits until after the immediate DOM feedback.
+                presentationLater(() => { if (present) present(ev); sounds(); }, delay);
+            });
+            if (bark && !guide && A.speaking && !A.speaking()) {
                 const lines = (((Rift.data.barks || {})[bark.s] || {})[bark.kind]) || [];
                 const text = lines[Math.floor(Math.random() * lines.length)];
                 const voice = text && Rift.voiceId(bark.s, text);
-                if (voice && (Rift.data.voices || {})[voice]) presentationLater(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, cue.length * 220 + 300);
+                if (voice && (Rift.data.voices || {})[voice]) presentationLater(() => { if (!A.speaking()) A.speak({ speaker: bark.s, text, voice }); }, 900);
             }
         }
 
@@ -730,7 +770,7 @@
             const c = state.cards[cid];
             const P = state.players[ME];
             if (P.hand.includes(cid)) {
-                if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn). You can still attack.';
+                if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn (' + E.playLimit(state, ME) + ' per turn). End turn, or use an available item or hero power.';
                 const cost = E.playCost(state, cid);
                 if (cost > P.energy) return name(cid) + ' needs ' + cost + ' energy. You have ' + P.energy + '.';
                 const condition = E.conditionOf(state, cid);
@@ -749,6 +789,7 @@
                 return 'It has no target right now.';
             }
             if (c.controller !== ME) return 'That is ' + oppName + '\'s creature. Pick one of yours first.';
+            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn. End turn, or use an available item or hero power.';
             const d = E.describe(state, cid);
             if (d.sleeping) return name(cid) + ' is asleep. It can attack next turn.';
             if (d.frozen) return name(cid) + ' was lectured. ' + frozenText(cid) + '.';
@@ -929,10 +970,10 @@
         function wheelLine(cid) {
             const w = E.wheelEdges(state, cid);
             const names = list => list.map(c => (Rift.COLOURS[c] || { name: c }).name).join(', ');
-            if (!w.strong.length && !w.weak.length) return 'Colour wheel: no bonus either way.';
+            if (!w.strong.length && !w.weak.length) return 'Colour wheel: neutral against every colour.';
             return 'Colour wheel' + (E.rules(state).wheelReversed ? ' (reversed now)' : '') + ': '
-                + [w.strong.length ? '+' + w.bonus + ' attack against ' + names(w.strong) : '',
-                    w.weak.length ? names(w.weak) + ' get' + (w.weak.length === 1 ? 's' : '') + ' +' + w.bonus + ' against it' : ''].filter(Boolean).join('; ') + '.';
+                + 'Strong +' + w.bonus + ' against ' + names(w.strong) + '; Weak −' + w.bonus + ' against ' + names(w.weak)
+                + '; Neutral against ' + names(w.neutral) + '. Positive attack stays at least 1; zero stays 0.';
         }
         function activeEffectsNote(cid) {
             const fx = E.activeEffects(state, cid);
@@ -1081,8 +1122,10 @@
         function axiomNote(id) {
             const ax = (Rift.data.axioms || {})[id] || {};
             const on = E.activeAxioms(state).some(a => a.id === id);
+            const preview = E.axiomPreview(state, id);
             return el('div.b-notes', {}, [
                 el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
+                preview.text ? el('div.b-note-line', { text: 'If played now: ' + preview.text + ' Shared value; owner bonuses stay separate.' }) : null,
                 ax.clearRules
                     ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
                     : isBasic(ax)
@@ -1114,6 +1157,10 @@
         const zoneOf = node => { const z = node && node.closest ? node.closest('[data-zone]') : null; return z ? z.dataset.zone : ''; };
         function hoverInspect(node, make, key) {
             if (key) inspectables[key] = { node, make };
+            // Keep a persistent reading control available after a tap, hover or keyboard focus.
+            if (state.cards[key] || /^ax:/.test(key || '')) ['pointerenter', 'focus', 'click'].forEach(type => {
+                node.addEventListener(type, () => { ui.readKey = key; renderReader(); });
+            });
             node.addEventListener('pointerenter', ev => {
                 if (ui.drag || (ev.pointerType && ev.pointerType !== 'mouse')) return;
                 // Pointing at a target with an attacker chosen shows the fight preview instead.
@@ -1363,7 +1410,8 @@
             const hits = [];
             state.players[OPP].board.forEach(cid => { for (let k = 0; k < (r.attacksPerCreature || 1); k++) hits.push(per(cid)); });
             hits.sort((a, b) => b - a);
-            const total = hits.slice(0, r.attackLimit === Infinity ? hits.length : r.attackLimit).reduce((n, x) => n + x, 0);
+            const nextBudget = r.playLimit + (r.bonus === 'momentum' && state.players[OPP].board.length > P.board.length ? 1 : 0);
+            const total = hits.slice(0, Math.min(r.attackLimit, nextBudget)).reduce((n, x) => n + x, 0);
             if (!total || total < P.hearts) return null;
             return el('div.b-danger', { title: 'Danger: ' + oppName + '\'s creatures have ' + total + ' attack together. You have ' + P.hearts + ' hearts.' }, [
                 has('ui/danger') ? icon('ui/danger', '', 'b-danger-icon') : null,
@@ -1473,8 +1521,8 @@
             const lim = E.playLimit(state, ME), left = E.playsLeft(state, ME);
             const mine = state.active === ME;
             const shown = lim === Infinity ? null : lim;
-            return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card plays: no limit this turn.' : 'Card plays: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Creatures, tactics and rule cards each use one.' }, [
-                el('span.b-plays-label', { text: 'Plays' }),
+            return el('div.b-plays' + (mine && !left ? '.none' : ''), { title: lim === Infinity ? 'Card activations: no limit this turn.' : 'Card activations: ' + (mine ? left : lim) + ' of ' + lim + ' left this turn. Each cast, attack or manual Activate uses one.' }, [
+                el('span.b-plays-label', { text: 'Uses' }),
                 shown == null ? el('strong', { text: '∞' }) : el('span.b-plays-pips', {}, Array.from({ length: shown }, (x, i) => el('span.b-play-pip' + (!mine || i < left ? '.on' : '') + (has('ui/play-token') ? '.art' : ''), { style: bg('ui/play-token') }))),
             ]);
         }
@@ -1498,7 +1546,7 @@
                 P.tax > 0 ? el('div.b-tax', { text: (P.tax === 1 ? 'Next card' : 'Next ' + P.tax + ' cards') + ' +1 ⚡' }) : null,
             ]);
             tipFor(node, 'energy:' + pi, (pi === ME ? 'Your energy: ' : oppName + '\'s energy: ') + P.energy + ' of ' + cap,
-                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacking is free.'
+                'Cards cost energy (the blue number on each card). It refills every turn and ' + growthWords(E.rules(state).growth) + '. Attacks and manual abilities each use one activation.'
                 + (P.tax > 0 ? ' Night Sight: the next ' + (P.tax === 1 ? 'card' : P.tax + ' cards') + ' played cost' + (P.tax === 1 ? 's' : '') + ' 1 more.' : ''));
             return node;
         }
@@ -1542,7 +1590,9 @@
 
         // ---- rendering ----
         function render() {
+            closeFuture(true);
             if (ui.ended && dom.overlay.classList.contains('show')) return;
+            const focused = focusKey(root.document.activeElement);
             Object.keys(nodes).forEach(k => delete nodes[k]);
             Object.keys(inspectables).forEach(k => delete inspectables[k]);
             hideInspect(true);
@@ -1688,7 +1738,7 @@
                 if (ui.sel && ui.sel.kind === 'axiom' && ui.sel.id === id) classes.push('selected');
                 const node = axiomCardEl(id, { size: 'hand', classes, onclick: () => clickAxiom(id, L), drag: axPlays.has(id) ? { kind: 'axiom', id } : { kind: 'axiom', id, blocked: true } });
                 // A rule card that would change nothing (that rule is already on) says so on the card.
-                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
+                if (!axiomChanges(id)) { node.appendChild(el('span.b-hand-tag', { text: (Rift.data.axioms[id] || {}).clearRules ? 'No rule to clear' : (Rift.data.axioms[id] || {}).modifier ? 'No change' : 'Already the rule' })); node.title = whyNotAxiomRule(id); }
                 else {
                     const tlr = E.timeline(state)[0];
                     if (tlr && tlr.type === 'reset' && tlr.rounds <= 1) node.appendChild(el('span.b-hand-tag.warn', { text: 'Reset this round!' }));
@@ -1731,12 +1781,14 @@
             restoreTip();
             turnBanner();
             placeAbilityTray();
+            renderReader();
+            restoreFocus(focused);
         }
 
         function abilityUnavailable(cid, info, L) {
             if (L.some(a => a.type === 'activate' && a.cid === cid && a.ability === info.id)) return '';
             const d = E.describe(state, cid);
-            if (d.sleeping || d.frozen || d.activated || d.attacks || ui.busy || decider() !== ME) return whyNot(cid);
+            if (d.sleeping || d.frozen || d.activated || d.attacks || ui.busy || decider() !== ME || !E.playsLeft(state, ME)) return whyNot(cid);
             if (info.cost > state.players[ME].energy) return 'Needs ' + info.cost + ' energy.';
             return 'No useful target or effect now.';
         }
@@ -1965,7 +2017,8 @@
             // The second line (#109, teacher 17 Oct: less text): only what it will be (the set-aside card). The full
             // sentence (not active yet, whose End turn brings it) is the line's tooltip; the event marker says it too.
             const nextAx = next.id && AX[next.id];
-            const flipDetail = nextAx ? ruleWords(nextAx) + (E.axiomWouldChange && !E.axiomWouldChange(state, next.id) ? ' (no change)' : '')
+            const nextPreview = nextAx && E.axiomPreview(state, next.id);
+            const flipDetail = nextAx ? (nextPreview.text ? 'If this resolves now: ' + nextPreview.text + ' Later rule changes can alter this.' : ruleWords(nextAx) + (!nextPreview.changed ? ' (no change)' : ''))
                 : state.axioms.deck.length ? 'no rule card set aside yet' : 'no rule card left to flip';   // finite deck (#117)
             const what = next.type === 'reset' ? 'all rules will return to basic' : flipDetail;
             const detail = 'Not active yet: ' + what + ' · after ' + (next.after === ME ? 'your' : 'their') + ' turn';
@@ -2014,7 +2067,7 @@
         const whoseEvent = (p, cap) => (p === ME ? (cap ? 'Your' : 'your') : p === OPP ? oppName + '\'s' : (cap ? 'The' : 'the'));
         const eventLabel = id => { const ev = E.fateSchedule(state).find(x => x.id === id); return ev ? (ev.env ? ev.source + '\'s ' + ev.name : whoseEvent(ev.controller) + ' ' + ev.name) : 'an event'; };
         // Who an environmental event (#128) helps, in words.
-        const helpsWords = ev => (ev.side === ME ? 'It helps you.' : ev.side === OPP ? 'It helps ' + oppName + '.' : 'It works the same for both players.');
+        const helpsWords = ev => (ev.side === ME ? 'It affects your side.' : ev.side === OPP ? 'It affects ' + oppName + '\'s side.' : 'It works the same for both players.');
         // A leap's skipped, jumped and landed events, in words (#120).
         function leapWords(h) {
             const list = ids => ids.map(eventLabel).join(', ');
@@ -2034,6 +2087,8 @@
             if (pre.defeated.length) parts.push(pre.defeated.length + ' creature' + (pre.defeated.length === 1 ? ' is' : 's are') + ' defeated: '
                 + pre.defeated.map(d => whose(d) + (d.dest === 'hand' ? ' (back to the hand)' : d.dest === 'gone' ? ' (a token: it leaves the game)' : '')).join(', '));
             if (pre.boosted.length) parts.push(pre.boosted.map(b => whose(b) + ' gets ' + signed2(b.attack) + '/' + signed2(b.health)).join(', '));
+            if (pre.healed && pre.healed.length) parts.push(pre.healed.map(b => whose(b) + ' heals ' + b.amount + ' damage').join(', '));
+            if (pre.frozen && pre.frozen.length) parts.push(pre.frozen.map(b => whose(b) + ' cannot attack or Activate on its next turn').join(', '));
             (pre.summoned || []).forEach(x => parts.push((/^[aeiou]/i.test(x.name) ? 'an ' : 'a ') + x.name + ' token joins ' + side(x.controller) + ' side'));
             (pre.returned || []).forEach(x => parts.push(x.name + ' returns to ' + side(x.player) + ' hand'));
             [ME, OPP].forEach(p => { const n = (pre.drawn || [])[p]; if (n) parts.push((p === ME ? 'you draw ' : oppName + ' draws ') + n + ' card' + (n === 1 ? '' : 's')); });
@@ -2118,10 +2173,11 @@
             const AX = Rift.data.axioms || {};
             const reset = ev.type === 'reset';
             const known = !reset && i === 0 && ev.id && AX[ev.id];
+            const preview = known && E.axiomPreview(state, ev.id);
             const when = 'Upcoming · not active yet. ' + (reset ? 'Reset' : 'Free flip') + ' ' + fateWhen(ev) + '.';
             const left = state.axioms.deck.length;   // used rules never come back (#117)
             const effect = reset ? 'Every active rule card is removed. All axioms return to the basic rules for BOTH players.'
-                : known ? known.name + ': ' + known.text
+                : known ? known.name + ': ' + known.text + (preview.text ? ' If this resolves now: ' + preview.text + ' Later rule changes can alter this.' : '')
                 : i === 0 && !left ? 'No rule card is left to flip. Current axioms stay in play.'
                 : i === 0 ? 'No rule card is set aside yet. Fate sets one aside from the shared deck when the next turn starts.'
                 : 'A free flip from the shared deck. Fate sets its card aside, and shows it here, when the reset before it happens.';
@@ -2163,6 +2219,8 @@
             const AX = Rift.data.axioms || {};
             const ax = AX[id];
             if (!ax) return 'nothing';
+            const preview = E.axiomPreview(state, id);
+            if (preview.field) return (RULE_LABEL[ax.category] || ax.category) + ': ' + (preview.before === Infinity ? 'Unlimited' : preview.before);
             const cur = AX[state.axioms.active[ax.category]];
             if (cur && !cur.basic) return cur.name + ' (' + (cur.short || cur.text) + ')';
             const core = CORE_RULES.find(c => c[0] === ax.category);
@@ -2278,9 +2336,8 @@
                     const canPlay = L.some(a => a.type === 'play' || a.type === 'axiom');
                     const canAttack = L.some(a => a.type === 'attack');
                     const canActivate = L.some(a => a.type === 'activate');
-                    const noPlays = E.playsLeft && !E.playsLeft(state, ME) && P.hand.length + P.axHand.length > 0;
-                    ask.textContent = noPlays && canAttack ? 'No card plays left. Attack with a ready creature, then End turn.'
-                        : noPlays ? 'No card plays left this turn. Press End turn.'
+                    const noPlays = E.playsLeft && !E.playsLeft(state, ME);
+                    ask.textContent = noPlays ? 'No card activations left. End turn, or use an available item or hero power.'
                         : canPlay && canAttack ? 'Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.'
                         : canPlay ? 'Drag (or click) a glowing card to play it. Then End turn.'
                             : canAttack ? 'Drag a ready creature (green glow) onto a target to attack.'
@@ -2333,6 +2390,8 @@
                     if (a) { const b = button('Play rule · ' + cost + ' ⚡', () => act(a), 'primary'); nodes.buttons.axiom = b; buttons.appendChild(b); }
                 }
                 if (sel && !(['board', 'activate'].includes(sel.kind) && E.activations(state, sel.cid).length)) buttons.appendChild(button('Cancel', () => clearSel()));
+                const previews = futureActions(sel, L);
+                if (previews.length) buttons.appendChild(el('button.btn.b-future-open', { text: 'Preview move', onclick: () => openFuture(previews) }));
             }
             // The lane is short: with buttons, a note takes the place of the instruction and the
             // "what just happened" lines are left out (they are in the log), so nothing overlaps.
@@ -2631,12 +2690,7 @@
 
         function renderRules() {
             dom.rules.innerHTML = '';
-            // The colour wheel strip runs backwards under the Broken Postulate.
-            const chainEl = dom.wheel.querySelector ? dom.wheel.querySelector('.b-wheel-chain') : null;
-            if (chainEl) {
-                const W = Rift.data.wheel, icons = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c);
-                chainEl.textContent = E.rules(state).wheelReversed ? icons.reverse().join(' › ') + '  (reversed!)' : icons.join(' › ');
-            }
+            dom.wheel.refresh();
             const active = state.axioms.active;
             const AX = Rift.data.axioms || {};
             const tiles = CORE_RULES.map(([cat, , basic, art, long]) => ruleTile(cat, active[cat], basic, art, long));
@@ -2653,12 +2707,16 @@
         function ruleTile(cat, id, basicWords, basicArt, basicLong) {
             const AX = Rift.data.axioms || {};
             const ax = id ? AX[id] : null;
-            const changed = !!(ax && !ax.basic);
+            const changed = !!(ax && changedRules().some(a => a.id === id));
             // Changed: the rule card's vignette. Basic: the rule's own icon (ui/rule-<category>), else the basic card's.
             const art = changed ? 'ui/axiom-' + id : has('ui/rule-' + cat) ? 'ui/rule-' + cat : basicArt ? 'ui/axiom-' + basicArt : null;
             let words = changed ? ax.short || ax.name : basicWords || (ax && ax.short) || '';
             // An attack limit is a per-turn budget: show what is left for the player whose turn it is.
             const r = E.rules(state);
+            if (cat === 'plays') words = r.playLimit === Infinity ? 'Unlimited activations' : r.playLimit + ' activations per turn';
+            if (cat === 'draw') words = 'Draw ' + r.drawCount;
+            if (cat === 'cost') words = 'Creature costs ' + (r.costDelta >= 0 ? '+' : '') + r.costDelta;
+            if (cat === 'energy') words = (r.growth >= 0 ? '+' : '') + r.growth + ' each turn';
             let budget = null;
             if (cat === 'attacks' && r.attackLimit !== Infinity && E.winner(state) == null) {
                 const left = Math.max(0, r.attackLimit - (state.players[state.active].attacksThisTurn || 0));
@@ -3063,13 +3121,12 @@
             if (state.phase === 'draw') return 'First choose your draw.';
             if (state.phase === 'choose') return 'First answer the question.';
             if (!axiomChanges(id)) return whyNotAxiomRule(id);
-            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card plays left this turn (' + E.playLimit(state, ME) + ' per turn).';
+            if (E.playsLeft && !E.playsLeft(state, ME)) return 'No card activations left this turn (' + E.playLimit(state, ME) + ' per turn).';
             return 'This rule card needs ' + E.axiomCost(state, id) + ' energy. You have ' + state.players[ME].energy + '.';
         }
         // The engine leaves out rule cards that would change nothing (same rule already on).
         const axiomChanges = id => !E.axiomWouldChange || E.axiomWouldChange(state, id);
-        const whyNotAxiomRule = id => (((Rift.data.axioms || {})[id] || {}).clearRules ? 'No rule to clear: every rule is basic now.'
-            : 'Already the rule: ' + ((Rift.data.axioms || {})[id] || { name: id }).name + ' would change nothing now.');
+        const whyNotAxiomRule = id => E.axiomPreview(state, id).reason;
         function clickAxiom(id, L) {
             if (!L.some(a => a.type === 'axiom' && a.choice === id)) { setNote(whyNotAxiom(id)); return; }
             ui.sel = ui.sel && ui.sel.id === id ? null : { kind: 'axiom', id };
@@ -3380,15 +3437,18 @@
                     rev && owner !== state.cards[att].controller ? ['⚠ The Last Shall Be First: this helps ' + (owner === ME ? 'you' : oppName) + '!'] : []),
                     attacker: ['Deals ' + pv.damage], targetDies: rev };
             }
-            const colourPart = (cid, foe) => (E.attackParts(state, cid, foe).parts.find(x => x.source === 'colour') || {}).amount || 0;
-            const ca = colourPart(att, target), cb = colourPart(target, att);
-            const tag = n => (n ? ' (' + (n > 0 ? '+' : '−') + Math.abs(n) + ' colour)' : '');
+            const tag = (cid, foe) => {
+                const n = E.wheelBonus(state, state.cards[cid], state.cards[foe]);
+                const floor = E.attackParts(state, cid, foe).parts.some(p => p.source === 'floor');
+                return n ? ' (' + (n > 0 ? 'Strong +' : 'Weak −') + Math.abs(n) + (E.attackOf(state, cid) <= 0 ? '; zero stays 0' : floor ? '; floor 1' : '') + ')' : ' (Neutral)';
+            };
+            const ca = tag(att, target), cb = tag(target, att);
             const blocked = (cid, amount) => amount > 0 && E.hasKeyword(state, cid, 'shield');
-            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.toDefender + (pv.toDefender ? tag(ca) : '');
-            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.toAttacker + (pv.toAttacker ? tag(cb) : '');
+            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.damageToDefender;
+            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.damageToAttacker;
             return {
-                target: [takesT, pv.defenderDefeated ? 'Defeated' : 'Survives'],
-                attacker: ['Deals ' + pv.toDefender + tag(ca), takesA, pv.attackerDefeated ? 'Defeated' : 'Survives'],
+                target: [takesT, pv.pb + ' attack' + cb, pv.defenderDefeated ? 'Defeated' : 'Survives'],
+                attacker: ['Deals ' + pv.damageToDefender + ca, pv.pa + ' attack', takesA, pv.attackerDefeated ? 'Defeated' : 'Survives'],
                 targetDies: pv.defenderDefeated, attackerDies: pv.attackerDefeated,
             };
         }
@@ -3516,22 +3576,253 @@
                     }
                 }
                 if ((ev.t === 'play' || ev.t === 'summon') && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
-                if (ev.t === 'attack' && !calm) lunge(ev.cid, ev.target, before);
-                if (ev.t === 'axiom' || ev.t === 'reset') { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
+                if (ev.t === 'attack') lunge(ev.cid, ev.target, before, calm);
+                if (['tactic-play', 'activate', 'ability', 'shield'].includes(ev.t)) sourceCue(ev, before, calm);
+                if (ev.t === 'axiom' || ev.t === 'reset') {
+                    if (calm && dom.lane.animate) animate(dom.lane, [{ opacity: 0.7 }, { opacity: 1 }], { duration: 400 });
+                    else if (!calm) { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
+                }
             });
         }
-        function lunge(cid, target, before) {
-            const n = nodes[cid];
-            const a = rectOf(cid, before), t = rectOf(target, before);
+        function motionSource(cid, before, event, captured) {
+            if (!captured && nodes[cid]) return nodes[cid];
+            const r = before[cid];
+            if (!r || !r.node.cloneNode) return null;
+            const ghost = r.node.cloneNode(true);
+            ghost.classList.add('b-motion-ghost');
+            ghost.dataset.event = event;
+            ghost.setAttribute('aria-hidden', 'true'); ghost.setAttribute('tabindex', '-1'); ghost.disabled = true;
+            ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
+            Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+            dom.floats.appendChild(ghost);
+            presentationLater(() => ghost.remove(), 400);
+            return ghost;
+        }
+        function sourceCue(ev, before, calm) {
+            const key = ev.cid || ev.target, node = motionSource(key, before, ev.t);
+            if (node && node.animate) animate(node, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : [{ filter: 'brightness(1)' }, { filter: 'brightness(1.3)', scale: '1.04' }, { filter: 'brightness(1)', scale: '1' }], { duration: 380 });
+            const from = rectOf(key, before), to = ev.target && rectOf(ev.target, before);
+            if (!from || !to || key === ev.target) return;
+            const colour = ev.t === 'tactic-play' ? ((Rift.data.tactics || {})[ev.id] || {}).colour
+                : state.cards[key] && E.colourOf(state, state.cards[key]);
+            const trail = el('div.b-cast-trail', { 'aria-hidden': 'true', dataset: { event: ev.t }, style: {
+                left: (from.left + from.width / 2) + 'px', top: (from.top + from.height / 2) + 'px',
+                width: Math.hypot(to.left + to.width / 2 - from.left - from.width / 2, to.top + to.height / 2 - from.top - from.height / 2) + 'px',
+                rotate: Math.atan2(to.top + to.height / 2 - from.top - from.height / 2, to.left + to.width / 2 - from.left - from.width / 2) + 'rad',
+                background: (Rift.COLOURS[colour] || {}).hex || 'var(--gold)',
+            } });
+            dom.floats.appendChild(trail);
+            // Still mode keeps the same source/target connection, with only its opacity changing.
+            if (trail.animate) animate(trail, calm ? [{ opacity: 0.3 }, { opacity: 0.8 }, { opacity: 0 }]
+                : [{ scale: '0 1', opacity: 0.2 }, { scale: '1 1', opacity: 0.9 }, { scale: '1 1', opacity: 0 }], { duration: 380 });
+            presentationLater(() => trail.remove(), 400);
+        }
+        function lunge(cid, target, before, calm) {
+            // Rendering is already authoritative. A fighter that died still has its captured
+            // public face/position for this cue, before its later defeat event is presented.
+            const captured = !state.players.some(P => P.board.includes(cid));
+            const n = motionSource(cid, before, 'attack', captured);
+            const targetLeft = state.cards[target] && !state.players.some(P => P.board.includes(target));
+            const a = captured ? before[cid] : rectOf(cid, before), t = targetLeft ? before[target] : rectOf(target, before);
             if (!n || !n.animate || !a || !t) return;
             const dx = (t.left + t.width / 2 - a.left - a.width / 2) * 0.35, dy = (t.top + t.height / 2 - a.top - a.height / 2) * 0.35;
-            try { animate(n, [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
+            try { animate(n, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : [{ transform: 'translate(0,0)' }, { transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }], { duration: 380, easing: 'ease-in-out' }); } catch (e) { /* no WAAPI */ }
+        }
+
+        // Recovered from the unfinished #109 prototype, using the shipped lifecycle rather than
+        // its competing timer/animation owner. Input never waits for these optional visuals.
+        function playVisuals(events, before, previous, focusDrawn) {
+            const drawn = [], flights = new Map();
+            const axUsed = [0, 0].map(() => ({}));
+            events.forEach(ev => {
+                if (ev.t !== 'draw' && ev.t !== 'draw-axiom') return;
+                const P = state.players[ev.player];
+                let card;
+                if (ev.t === 'draw') {
+                    if (!P.hand.includes(ev.cid)) return;
+                    card = ev.player === ME ? nodes[ev.cid] : dom.oppHand.children[P.hand.indexOf(ev.cid)];
+                } else {
+                    const used = axUsed[ev.player][ev.id] || 0;
+                    axUsed[ev.player][ev.id] = used + 1;
+                    const prior = previous.players[ev.player].axHand.filter(id => id === ev.id).length;
+                    const indices = P.axHand.map((id, i) => id === ev.id ? i : -1).filter(i => i >= 0);
+                    const index = indices[prior + used];
+                    if (index == null) return;
+                    card = ev.player === ME ? dom.myHand.children[P.hand.length + index] : dom.oppHand.children[P.hand.length + index];
+                }
+                if (!card) return;
+                if (ev.player === ME) drawn.push(card);
+                flights.set(ev, () => flyDraw(card, ev.t === 'draw-axiom' ? 'axiom' : ev.player === OPP ? 'opponent' : 'deck', ev.t === 'draw-axiom', ev.player === ME));
+            });
+            battleSounds(events, ev => { if (flights.has(ev)) flights.get(ev)(); effects([ev], before); });
+            if (focusDrawn) {
+                const card = drawn[0] || dom.myHand.querySelector('.bc') || screen.querySelector('.b-end');
+                if (card && card.focus) card.focus();
+            }
+        }
+        function flyDraw(card, pile, axiom, reveal) {
+            if (!card.animate || !card.getBoundingClientRect) return;
+            const duration = calmMotion() ? 120 : 300;
+            const source = tableDecks[pile] || (nodes.draw || {})[pile];
+            const a = source && source.getBoundingClientRect(), b = card.getBoundingClientRect(), box = dom.arena.getBoundingClientRect();
+            if (calmMotion() || !a || !b.width || !a.width) {
+                try { animate(card, [{ opacity: 0.35 }, { opacity: 1 }], { duration }); } catch (e) { /* no WAAPI */ }
+                return;
+            }
+            const ghost = cardBack(axiom);
+            ghost.classList.add('b-draw-flight');
+            ghost.setAttribute('aria-hidden', 'true');
+            Object.assign(ghost.style, { left: b.left - box.left + 'px', top: b.top - box.top + 'px', width: b.width + 'px', height: b.height + 'px' });
+            dom.floats.appendChild(ghost);
+            const dx = a.left + a.width / 2 - b.left - b.width / 2, dy = a.top + a.height / 2 - b.top - b.height / 2;
+            try {
+                animate(ghost, [{ transform: 'translate(' + dx + 'px,' + dy + 'px) scale(0.6)', opacity: 0.9 },
+                    { offset: 0.8, transform: 'translate(0,0) scale(1)', opacity: 1 },
+                    { transform: reveal ? 'scaleX(0)' : 'scale(1)', opacity: 0 }], { duration, easing: 'ease-out' });
+                animate(card, [{ opacity: 0 }, { opacity: 1 }], { duration: 70, delay: duration - 70, fill: 'backwards' });
+            } catch (e) { /* no WAAPI: the committed card is already in its hand */ }
+            presentationLater(() => ghost.remove(), duration);
+        }
+
+        // A prospective clip owns no battle actions. Its target/menu and playback operate solely on
+        // public engine snapshots; stale callbacks are tied to this dialog, like the card reader.
+        function futureActions(sel, L) {
+            if (!sel || guide || !E.previewAction) return [];
+            return L.filter(a => sel.kind === 'board' ? a.type === 'attack' && a.cid === sel.cid || a.type === 'activate' && a.cid === sel.cid
+                : sel.kind === 'activate' ? a.type === 'activate' && a.cid === sel.cid && a.ability === sel.ability
+                    : sel.kind === 'hand' ? a.type === 'play' && a.cid === sel.cid
+                        : sel.kind === 'axiom' ? a.type === 'axiom' && a.choice === sel.id
+                            : sel.kind === 'power' ? a.type === 'power' : sel.kind === 'item' ? a.type === 'item' && a.id === sel.id : false);
+        }
+        function closeFuture(resume) {
+            const f = ui.future;
+            if (!f) return;
+            ui.future = null; clearTimeout(f.timer);
+            if (f.motion && f.motion.cancel) f.motion.cancel();
+            if (f.dialog.close) f.dialog.close(); f.dialog.remove();
+            if (resume && !ui.ended) { if (dom.prompt.querySelector('.b-future-open')) dom.prompt.querySelector('.b-future-open').focus(); schedule(); }
+        }
+        function openFuture(actions) {
+            if (ui.future || ui.reading || ui.ended || ui.busy || decider() !== ME) return;
+            clearTimeout(ui.timer); hideInspect(); hideTip();
+            const f = { dialog: null, timer: null, clip: null, at: 0 }; ui.future = f;
+            const stage = el('div.b-future-stage'), caption = el('p.b-future-caption', { role: 'status', 'aria-live': 'polite' });
+            const explanation = el('p.b-future-explanation.small');
+            const transcript = el('ol.b-future-transcript');
+            const label = a => (a.type === 'attack' ? 'Attack with ' + name(a.cid) : a.type === 'activate' ? 'Activate ' + name(a.cid) + ': ' + (((B().Abilities || {})[a.ability] || {}).name || a.ability)
+                : a.type === 'axiom' ? 'Play ' + (Rift.data.axioms[a.choice] || {}).name : a.cid ? 'Play ' + name(a.cid) : a.type === 'power' ? 'Hero power' : 'Use ' + a.id)
+                    + (a.target ? ' → ' + name(a.target) : '');
+            const choose = el('select', { 'aria-label': 'Move and target to preview' }, actions.map((a, i) => el('option', { value: String(i), text: label(a) })));
+            const show = at => {
+                if (ui.future !== f) return;
+                if (f.motion && f.motion.cancel) f.motion.cancel();
+                clearTimeout(f.timer); f.at = Math.max(0, Math.min(f.clip.frames.length - 1, at));
+                const frame = f.clip.frames[f.at];
+                caption.textContent = 'Step ' + (f.at + 1) + ' of ' + f.clip.frames.length + ': ' + frame.text;
+                stage.replaceChildren(...frame.view.players.slice().reverse().map(P => el('section.b-future-side', null, [
+                    el('strong', { text: P.name + ' · ' + P.hearts + ' hearts · ' + P.energy + ' energy' }),
+                    el('div.b-future-row', null, P.board.length ? P.board.map(c => el('div.b-future-card', null, [
+                        Rift.Assets.img('creature/' + c.species + '/idle', { alt: '', label: '' }), el('span', { text: c.name }),
+                        el('small', { text: c.attack + ' attack · ' + c.health + ' health' + (c.keywords.length ? ' · ' + c.keywords.join(', ') : '') }),
+                    ])) : [el('span', { text: 'No creatures here.' })]),
+                ])));
+                stage.appendChild(el('p.b-future-rules.small', { text: frame.view.rules.length ? 'Changed rules: ' + frame.view.rules.join(' ') : 'Basic rules: both creatures hit; damage stays.' }));
+                if (!calmMotion() && stage.animate) f.motion = animate(stage, [{ opacity: 0.4 }, { opacity: 1 }], { duration: 150 });
+            };
+            const play = () => {
+                if (ui.future !== f) return;
+                show(0);
+                const next = () => { if (ui.future !== f) return; show(f.at + 1); if (f.at + 1 < f.clip.frames.length) f.timer = setTimeout(next, 600); };
+                if (!calmMotion() && f.clip.frames.length > 1) f.timer = setTimeout(next, 600);
+            };
+            const load = () => {
+                if (ui.future !== f) return;
+                f.clip = E.previewAction(state, actions[Number(choose.value) || 0], ME);
+                explanation.textContent = f.clip.explanation || '';
+                transcript.replaceChildren(...f.clip.lines.map(text => el('li', { text })));
+                play();
+            };
+            choose.addEventListener('change', load);
+            const done = () => { if (ui.future === f) closeFuture(true); };
+            const close = el('button.btn', { text: 'Close preview', onclick: done });
+            f.dialog = el('dialog.b-future-dialog', { 'aria-label': 'Glimpse of the future' }, [
+                el('div.b-future-head', null, [el('strong', { text: 'Glimpse of the future' }), close]),
+                el('p.small', { text: 'A preview only. Nothing is played. Hidden results and later choices stay unknown.' }), choose, explanation, stage, caption,
+                el('div.b-future-controls', null, [el('button.btn.small', { text: 'Previous step', onclick: () => show(f.at - 1) }),
+                    el('button.btn.small', { text: 'Next step', onclick: () => show(f.at + 1) }), el('button.btn.small', { text: 'Replay preview', onclick: play })]),
+                el('details', null, [el('summary', { text: 'Read every step' }), transcript]),
+            ]);
+            f.dialog.addEventListener('cancel', ev => { ev.preventDefault(); done(); }); f.dialog.addEventListener('close', done);
+            screen.appendChild(f.dialog);
+            if (f.dialog.showModal) { try { f.dialog.showModal(); } catch (e) { f.dialog.open = true; } } else f.dialog.open = true;
+            load(); close.focus();
+        }
+
+        function renderReader() {
+            const it = ui.readKey && inspectables[ui.readKey];
+            const label = it && readName(ui.readKey);
+            dom.reader.hidden = !label;
+            if (!label) return;
+            if (!dom.readBtn) {
+                dom.readBtn = el('button.btn.small.b-read-btn', { type: 'button', onclick: () => openRead(ui.readKey) });
+                dom.reader.appendChild(dom.readBtn);
+            }
+            dom.readBtn.textContent = 'Read ' + label;
+            dom.readBtn.setAttribute('aria-label', 'Read ' + label + ': full text and active effects');
+        }
+        function readName(key) {
+            return /^ax:/.test(key) ? ((Rift.data.axioms || {})[key.slice(3)] || {}).name : state.cards[key] ? name(key) : '';
+        }
+        function closeRead(resume) {
+            const dialog = ui.reading;
+            if (!dialog) return;
+            ui.reading = null;
+            if (dialog.close) dialog.close();
+            dialog.remove();
+            if (resume && !ui.ended) {
+                const it = inspectables[ui.readKey];
+                if (it && it.node.focus) it.node.focus();
+                schedule();
+            }
+        }
+        function openRead(key) {
+            const it = key && inspectables[key];
+            if (!it || ui.reading || ui.future || ui.ended) return;
+            hideInspect(); hideTip(); clearTimeout(ui.timer);
+            const done = () => { if (ui.reading === dialog) closeRead(true); };
+            const close = el('button.btn.b-read-close', { type: 'button', text: 'Close', onclick: done });
+            const dialog = el('dialog.b-read-dialog', { 'aria-label': 'Read ' + readName(key) }, [close, el('div.b-read-body', {}, it.make())]);
+            ui.reading = dialog;
+            dialog.addEventListener('close', done);
+            dialog.addEventListener('cancel', ev => { ev.preventDefault(); done(); });
+            screen.appendChild(dialog);
+            if (dialog.showModal) { try { dialog.showModal(); } catch (e) { dialog.open = true; } } else dialog.open = true;
+            close.focus();
+        }
+        // Identify focus semantically before rendering replaces the board/hand controls.
+        function focusKey(node) {
+            if (!node || !node.dataset || !screen.contains(node) || (dom.question && dom.question.contains(node))) return null;
+            const zone = zoneOf(node);
+            const attrs = ['cid', 'axiom', 'ability', 'fateEvent', 'cat', 'tipKey'];
+            const attr = attrs.find(k => node.dataset[k] != null);
+            return attr ? { zone, attr, value: node.dataset[attr] } : null;
+        }
+        function restoreFocus(key) {
+            if (!key || (root.document.activeElement && screen.contains(root.document.activeElement))) return;
+            const scope = key.zone ? screen.querySelector('[data-zone="' + key.zone + '"]') : screen;
+            const node = scope && Array.from(scope.querySelectorAll('[data-' + key.attr.replace(/[A-Z]/g, x => '-' + x.toLowerCase()) + ']'))
+                .find(n => n.dataset[key.attr] === key.value);
+            if (node && node.focus) node.focus();
         }
 
         // ---- the end ----
         function finish() {
             if (ui.ended) return;
             ui.ended = true;
+            closeFuture(false);
+            closeRead(false);
             clearPresentation(); stopScreenTimers(); stopVoice();
             cancelDrag();
             hideTip();
@@ -3550,9 +3841,12 @@
             const myPower = state.players[ME].power;
             const powerUsed = myPower ? { id: myPower.id, uses: myPower.uses || 0 } : null;
             const result = { mode, outcome, turns: state.turn, rounds: state.round, endReason: state.endReason, fate, ante, settlement, itemsUsed, powerUsed };
-            sfx(outcome === 'won' ? 'win' : 'lose');
-            if (fate && fate.results.length) sfx('fate-warp');
-            const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'Victory!' : outcome === 'lost' ? 'Defeat…' : 'A draw';
+            // Let the result speak clearly: stop the final hit, and do not layer a gloomy Change
+            // effect over a win. Changes are still listed below; a draw has no defeat cue.
+            if (Rift.Audio && Rift.Audio.stopSounds) Rift.Audio.stopSounds();
+            if (outcome === 'won') sfx('win');
+            else if (outcome === 'lost') sfx('lose');
+            const title = guide ? (outcome === 'won' ? 'You won the lesson!' : 'Lesson over') : outcome === 'won' ? 'You won!' : outcome === 'lost' ? 'You lost' : 'A draw';
             const reason = {
                 hearts: outcome === 'won' ? oppName + ' ran out of hearts.' : 'You ran out of hearts.',
                 'reverse-hearts': outcome === 'won' ? 'The reversed victory rule made reaching your own zero hearts a win.' : oppName + ' reached zero hearts under the reversed victory rule.',
@@ -3560,7 +3854,7 @@
                 'turn-limit': 'The rift closed before anyone won.',
                 'both-zero': 'Both heroes reached zero hearts at once.',
             }[state.endReason] || '';
-            const body = [el('h2', { text: title }), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
+            const body = [Rift.resultBanner(outcome, title, outcome === 'won' ? 'Victory! Well played.' : outcome === 'lost' ? 'Try a new plan next time.' : 'Neither player won.'), el('p.muted', { text: reason + ' ' + state.round + ' rounds, ' + state.turn + ' turns.' })];
             // The TOK point: which rules decided this match.
             const changes = E.fullLog(state).filter(ev => ev.t === 'axiom' || ev.t === 'reset').length;
             const endRules = changedRules();
@@ -3596,7 +3890,7 @@
                 if (typeof p.onEnd === 'function') p.onEnd(result);
             }, 'primary');
             body.push(el('div.b-buttons', {}, [cont]));
-            dom.overlay.appendChild(el('div.b-end-panel.panel', {}, [el('div.b-end-body', {}, body)]));
+            dom.overlay.appendChild(el('div.b-end-panel.panel', { dataset: { outcome } }, [el('div.b-end-body', {}, body)]));
             dom.overlay.classList.add('show');
             screen.classList.add('ended');
             handle.result = result;
@@ -3605,25 +3899,97 @@
 
         function wheelLegend() {
             const W = Rift.data.wheel;
-            const items = W.order.map(c => el('li', {}, [
-                colourChip(c), ' beats ', colourChip(W.beats[c]),
-                el('div.wheel-line', { text: W.lines[c] }),
-            ]));
-            items.push(el('li', {}, [colourChip('memory'), el('div.wheel-line', { text: W.memory })]));
-            const chain = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c).join(' › ');
-            return el('details.b-wheel.panel', {}, [
-                el('summary', {}, [
-                    'Colour wheel: +' + W.bonus + ' attack',
-                    el('span.b-wheel-chain', { title: W.order.map(c => Rift.COLOURS[c].name + ' beats ' + Rift.COLOURS[W.beats[c]].name).join('. ') + '.', text: chain }),
-                ]),
-                el('p.small', { text: W.note || 'These are rules for this game, not a ranking of ways of knowing.' }),
-                el('ul', {}, items),
+            let selected = W.order[0], signature = '';
+            const letters = ['R', 'E', 'L', 'P', 'I', 'M'];
+            const chart = el('div.b-wheel-chart'), summary = el('div.b-wheel-matchups', { role: 'status', 'aria-live': 'polite' });
+            const caption = el('p.small.b-wheel-state'), thought = el('p.small.b-wheel-thought');
+            const buttons = W.order.map((c, i) => el('button.btn.small', {
+                type: 'button', dataset: { wheelColour: c }, 'aria-label': 'Inspect ' + Rift.COLOURS[c].name + ' matchups',
+                onclick: () => select(c),
+            }, [letters[i] + ' ', colourChip(c)]));
+            buttons.forEach((b, i) => {
+                b.addEventListener('focus', () => select(W.order[i]));
+                b.addEventListener('pointerenter', ev => { if (!ev.pointerType || ev.pointerType === 'mouse') select(W.order[i]); });
+            });
+            function select(c) { selected = c; refresh(); }
+            function modifier(a, b) { return E.wheelBonus(state, { kind: 'creature', colour: a }, { kind: 'creature', colour: b }); }
+            function refresh() {
+                const reversed = E.rules(state).wheelReversed, key = selected + ':' + reversed;
+                if (signature === key) return;
+                signature = key;
+                const groups = { strong: [], weak: [], neutral: [] };
+                W.order.forEach(c => { const m = modifier(selected, c); groups[m > 0 ? 'strong' : m < 0 ? 'weak' : 'neutral'].push(Rift.COLOURS[c].name); });
+                const lines = ['Strong +1: ' + groups.strong.join(', '), 'Weak −1: ' + groups.weak.join(', '), 'Neutral 0: ' + groups.neutral.join(', ')];
+                summary.replaceChildren(el('strong', { text: Rift.COLOURS[selected].name }), ...lines.map(text => el('div', { text })));
+                caption.textContent = reversed ? 'Reversed now: Strong and Weak swap. Neutral stays neutral.' : 'Next two clockwise: Strong. Previous two: Weak. Opposite and same: Neutral.';
+                thought.textContent = 'Base wheel: ' + W.lines[selected];
+                buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.wheelColour === selected ? 'true' : 'false'));
+                const doc = root.document;
+                const make = (tag, attrs, text) => { const n = doc.createElementNS('http://www.w3.org/2000/svg', tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); if (text) n.textContent = text; return n; };
+                const svg = make('svg', { viewBox: '0 0 320 290', role: 'img', 'aria-label': Rift.COLOURS[selected].name + '. ' + lines.join('. ') });
+                const points = W.order.map((c, i) => ({ x: 160 + 112 * Math.cos(-Math.PI / 2 + i * Math.PI / 3), y: 145 + 112 * Math.sin(-Math.PI / 2 + i * Math.PI / 3) }));
+                for (let i = 0; i < 6; i++) for (let j = i + 1; j < 6; j++) {
+                    const m = modifier(W.order[i], W.order[j]), from = m < 0 ? j : i, to = m < 0 ? i : j;
+                    const a = points[from], b = points[to], angle = Math.atan2(b.y - a.y, b.x - a.x);
+                    const x1 = a.x + 25 * Math.cos(angle), y1 = a.y + 25 * Math.sin(angle), x2 = b.x - 29 * Math.cos(angle), y2 = b.y - 29 * Math.sin(angle);
+                    const involved = selected === W.order[i] || selected === W.order[j];
+                    const stroke = !m ? '#abb3bd' : selected === W.order[to] ? '#ffb567' : '#77e9b7';
+                    const group = make('g', { opacity: involved ? '1' : '.23', 'data-wheel-edge': W.order[from] + ':' + W.order[to] });
+                    group.appendChild(make('line', { x1, y1, x2, y2, stroke, 'stroke-width': involved ? '3' : '2', 'stroke-dasharray': m ? 'none' : '5 5' }));
+                    if (m) group.appendChild(make('polygon', { points: x2 + ',' + y2 + ' ' + (x2 - 9 * Math.cos(angle - .45)) + ',' + (y2 - 9 * Math.sin(angle - .45)) + ' ' + (x2 - 9 * Math.cos(angle + .45)) + ',' + (y2 - 9 * Math.sin(angle + .45)), fill: stroke }));
+                    svg.appendChild(group);
+                }
+                W.order.forEach((c, i) => {
+                    const p = points[i];
+                    svg.appendChild(make('circle', { cx: p.x, cy: p.y, r: 23, fill: Rift.COLOURS[c].hex, stroke: c === selected ? '#ffe393' : '#0b1627', 'stroke-width': c === selected ? 5 : 3 }));
+                    svg.appendChild(make('text', { x: p.x, y: p.y + 7, 'text-anchor': 'middle', fill: '#08151b', 'font-size': 22, 'font-weight': 'bold' }, letters[i]));
+                });
+                chart.replaceChildren(svg);
+            }
+            const examples = [
+                ['Neutral', 'reason', 'perception', 2], ['Strong', 'reason', 'emotion', 2], ['Weak', 'emotion', 'reason', 2],
+                ['Weak at 1', 'emotion', 'reason', 1], ['Shield', 'reason', 'emotion', 2, 'shield'],
+                ['Underdog', 'reason', 'emotion', 2, 'underdog'], ['Reversed wheel', 'reason', 'emotion', 2, 'curved-space'], ['Zero attack', 'reason', 'emotion', 0],
+            ];
+            const practice = el('div.b-wheel-example', { role: 'status', 'aria-live': 'polite' });
+            const choose = el('select.b-wheel-practice', { 'aria-label': 'Matchup practice example' }, examples.map((ex, i) => el('option', { value: String(i), text: ex[0] })));
+            function showExample() {
+                const [label, a, b, attack, changed] = examples[Number(choose.value) || 0];
+                // A separate fixed teaching battle: no live cards, deck/RNG inspection or saves.
+                const scratch = E.createBattle({ seed: 'colour-practice', players: [0, 1].map(p => ({ name: p ? 'Rival' : 'You', team: [{ uid: 'wheel-' + p, species: 'beastie', injuries: [], scars: [], powerDelta: 0 }] })),
+                    options: { first: 0, shuffle: false, spark: false, timeline: false, openHand: [0, 0], openAxioms: 0 } });
+                scratch.phase = 'main';
+                [a, b].forEach((colour, p) => {
+                    const cid = 'p' + p + 'c0', P = scratch.players[p];
+                    P.deck = P.deck.filter(c => c !== cid); P.board = [cid];
+                    Object.assign(scratch.cards[cid], { colour, attack, health: 20, ability: '', gained: [], extraKeywords: [], buffs: [], enteredTurn: 0 });
+                });
+                if (changed === 'shield') scratch.cards.p1c0.extraKeywords = ['shield'];
+                else if (changed) scratch.axioms.active[Rift.data.axioms[changed].category] = changed;
+                const p = E.fightPreview(scratch, 'p0c0', 'p1c0');
+                const extra = label === 'Weak at 1' ? ' Weak −1 cannot take positive attack below 1.' : changed === 'shield' ? ' Shield blocks a hit even when attack is positive.'
+                    : changed === 'underdog' ? ' Underdog: only the lower attack hits. Strong is not always better.' : changed === 'curved-space' ? ' The rule swaps Strong and Weak.' : '';
+                practice.textContent = label + ': ' + Rift.COLOURS[a].name + ' vs ' + Rift.COLOURS[b].name + '. '
+                    + (E.canAttack(scratch, 'p0c0') ? p.pa + ' vs ' + p.pb + ' effective attack. You take ' + p.damageToAttacker + '; rival takes ' + p.damageToDefender + '.' : 'Zero attack stays 0. You cannot start this attack.') + extra;
+            }
+            choose.addEventListener('change', showExample);
+            const box = el('details.b-wheel.panel', {}, [el('summary', { text: 'Colour matchups: Strong +1 / Weak −1' }), caption, chart,
+                el('p.small', { text: 'Arrows point from Strong to Weak. Dashed lines are Neutral. Choose a colour:' }),
+                el('div.b-wheel-choices', { role: 'group', 'aria-label': 'Inspect a colour' }, buttons), summary,
+                el('p.small', { text: 'Apply the matchup after other boosts. Positive attack stays at least 1; zero stays 0. Heroes and no-colour creatures are Neutral. Shield can still block all damage.' }),
+                el('label.small', {}, ['Try a fight (basic wheel unless a rule is named): ', choose]), practice,
+                thought, el('p.small', { text: W.note }),
             ]);
+            box.refresh = refresh;
+            refresh(); showExample();
+            return box;
         }
 
         const handle = {
             destroy() {
                 ui.ended = true;
+                closeFuture(false);
+                closeRead(false);
                 clearPresentation(); stopScreenTimers(); cancelDrag();
                 if (boardObserver) boardObserver.disconnect();
                 if (root.removeEventListener) {
@@ -3641,6 +4007,7 @@
 
         noteEvents(state.lastEvents);
         render();
+        battleSounds(state.lastEvents);
         if (guide) speak();
         schedule();
         return handle;

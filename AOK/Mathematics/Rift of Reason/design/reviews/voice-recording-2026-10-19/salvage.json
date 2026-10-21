@@ -1,0 +1,58 @@
+[
+  {
+    "id": "swiftlet-on3j8y",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 0.26,
+    "end": 8.28,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "e38a9e882531621c7ace24d78971b5785e7fddb28d6134aa7affdfda6c225af8"
+  },
+  {
+    "id": "swiftlet-1a52sl6",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 8.28,
+    "end": 11.1,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "56c868b54420c1633a984099e226ab8e9820c6e7d0a0ffca666a0ffbb967bdfd"
+  },
+  {
+    "id": "swiftlet-17m4w53",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 11.1,
+    "end": 13.48,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "fc3cbaef8b32f4ab39d3292044fbcef5b8c6dd21872ad0b3f65921507116bf9e"
+  },
+  {
+    "id": "swiftlet-1r416gn",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 13.48,
+    "end": 16.9,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "f20642e6e5ab4549296db3ed063117b95a0965711e8ac3f4a2f9f1fa9c9151e4"
+  },
+  {
+    "id": "swiftlet-16b9gvt",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 16.9,
+    "end": 19.48,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "335e3fbbf3d55784114f172d73c993117a664e2c557928bfda53f15f36208893"
+  },
+  {
+    "id": "swiftlet-1e62wtv",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 19.48,
+    "end": 22.14,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "38b541d35dc0709f14d92214000c2163e60b20be231f911c3e2e8e43b296836e"
+  },
+  {
+    "id": "swiftlet-11i2fag",
+    "raw": "swiftlet-on3j8y-7.wav",
+    "start": 22.14,
+    "end": 24.18,
+    "method": "Original dynamic-programming splitter with 240 ms minimum gap, preserving cast FX; provisional until transcript check.",
+    "sha256": "a02f2c3de0b4aa0a5960df6b12d999fbde734e5af3630c87cdaf9243a3c498d4"
+  }
+]

@@ -1,0 +1,940 @@
+{
+  "date": "2026-10-19",
+  "baselineFiles": 3010,
+  "existingFilesUnchanged": true,
+  "changedOld": [],
+  "newClips": 88,
+  "newClipsBySpeaker": {
+    "beansprout": 3,
+    "carlseal": 5,
+    "eminemu-possessed": 5,
+    "granny": 37,
+    "haalandroid": 6,
+    "muskrat": 3,
+    "obambu": 6,
+    "oracle": 5,
+    "speedcheeta": 6,
+    "swiftlet": 7,
+    "swiftlet-possessed": 5
+  },
+  "newClipsNotInCatalog": [],
+  "silentOrTiny": [],
+  "currentRecorded": 2619,
+  "currentTotal": 2645,
+  "missingLines": 26,
+  "missingBySpeaker": {
+    "avatar-owlet-girl": 1,
+    "avatar-mothkin-boy": 1,
+    "avatar-fox-girl": 1,
+    "avatar-frogling-boy": 1,
+    "avatar-raven-girl": 1,
+    "avatar-raven-girl-possessed": 3,
+    "speedcheeta-possessed": 1,
+    "pip-possessed": 1,
+    "achilles": 2,
+    "kuku": 1,
+    "rawmsay-possessed": 1,
+    "beastie-possessed": 1,
+    "zuckerborg-possessed": 1,
+    "rockodile-possessed": 1,
+    "muskrat-possessed": 1,
+    "schoolteacher": 2,
+    "avatar-mothkin-boy-inner": 1,
+    "carlseal": 1,
+    "beansprout": 2,
+    "constable": 2
+  },
+  "manifestFiles": 2997,
+  "manifestAdded": 88,
+  "manifestRemoved": [],
+  "manifestPathsMissing": [],
+  "usage": {
+    "day": "2026-10-19",
+    "counts": {
+      "gemini-3.8-flash-lite-tts": 10,
+      "gemini-3.8-flash-tts": 4
+    }
+  },
+  "decoded": [
+    {
+      "id": "beansprout-116y8h7",
+      "speaker": "beansprout",
+      "where": "creature beansprout",
+      "expected": "Oh dear.",
+      "seconds": 1.344,
+      "peak": 13620,
+      "rms": 2852,
+      "sha256": "5706577179896087dba66e5c57b15ee08eb16bf678ec573dcb05230802ed3e1f"
+    },
+    {
+      "id": "beansprout-1m27sc0",
+      "speaker": "beansprout",
+      "where": "creature beansprout",
+      "expected": "Hmm… Teddy?",
+      "seconds": 1.848,
+      "peak": 15292,
+      "rms": 2092,
+      "sha256": "563aa16d1edc9dfd3f24cdea8fadf2633c1a5d5baf01c51135f5200faf8c5c0c"
+    },
+    {
+      "id": "beansprout-1pu4117",
+      "speaker": "beansprout",
+      "where": "creature beansprout",
+      "expected": "Teddy…",
+      "seconds": 1.25,
+      "peak": 21001,
+      "rms": 3077,
+      "sha256": "9c9faa559a8e2810902e2687d6ee6d7cd5d919a890bdd2c05cc0f6c9544e1e4d"
+    },
+    {
+      "id": "carlseal-122nusw",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "I have calculated this. Twenty moves ahead.",
+      "seconds": 4.224,
+      "peak": 20669,
+      "rms": 2047,
+      "sha256": "266d69e1887366d432529968e667a65727b3efb5a064662d6a2a08ec98045f5a"
+    },
+    {
+      "id": "carlseal-15yh4wo",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Interesting. I will analyse that later.",
+      "seconds": 2.99,
+      "peak": 19729,
+      "rms": 3157,
+      "sha256": "fd3ac3855a1aa9284da778f2cb64fae9700c026190568eadd345e6dc60a8d756"
+    },
+    {
+      "id": "carlseal-1lxtuzq",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Hm. A blunder. Mine.",
+      "seconds": 3.924,
+      "peak": 14128,
+      "rms": 1501,
+      "sha256": "a5433502a36ce54348e7eb2699b07d0a9cfb3651d8403e4ae89fee81685bddae"
+    },
+    {
+      "id": "carlseal-1qk2ms0",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Show me your hand. I already know it.",
+      "seconds": 3,
+      "peak": 14187,
+      "rms": 2501,
+      "sha256": "2053727d37513823e27a9911a424ced1eba8bb58b5091b526679d0ebb7dc946b"
+    },
+    {
+      "id": "carlseal-7bgcq",
+      "speaker": "carlseal",
+      "where": "creature carlseal",
+      "expected": "Let me see your cards. Yes. As expected.",
+      "seconds": 4.534,
+      "peak": 16223,
+      "rms": 1616,
+      "sha256": "57649f688cd7e01769f9147c3c8f4404c09ac70b042d7c2ff7dbfb58cc5eeae6"
+    },
+    {
+      "id": "eminemu-possessed-155mxsf",
+      "speaker": "eminemu-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Everyone? Who's everyone? Show me their faces!",
+      "seconds": 4.656,
+      "peak": 27052,
+      "rms": 3941,
+      "sha256": "e51815f75a9c2e67d9b28a99f5544ceceec9c2764a2d55959dc50d89c9a1a223"
+    },
+    {
+      "id": "eminemu-possessed-1nak03e",
+      "speaker": "eminemu-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Has the Rock been to the sky?…He's been to the gym. Same height.",
+      "seconds": 6.288,
+      "peak": 27518,
+      "rms": 2895,
+      "sha256": "a779ce06134c9ad1f84067f7b834b051cadd838ae719b0d53375e3f9c1d49296"
+    },
+    {
+      "id": "eminemu-possessed-3fcuzm",
+      "speaker": "eminemu-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Nope. Listen to the beat. Who said it?",
+      "seconds": 4.176,
+      "peak": 28949,
+      "rms": 3736,
+      "sha256": "cd30a0f607679973e60b7fd3d40b120e82a70ecbad757d2475155d7eee00a639"
+    },
+    {
+      "id": "eminemu-possessed-be5k2v",
+      "speaker": "eminemu-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Rock said march, and Rock's a star. Stars know best, near and far!",
+      "seconds": 8.088,
+      "peak": 27165,
+      "rms": 3148,
+      "sha256": "1876bbd7b77a2b93f92e5142b1d2e887ba117d26dc63acec43a1d5c5d17902c7"
+    },
+    {
+      "id": "eminemu-possessed-mgvc5c",
+      "speaker": "eminemu-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Sheep or soldier? That's two. I rhyme better than that.",
+      "seconds": 6.12,
+      "peak": 27567,
+      "rms": 2243,
+      "sha256": "d7804ff0000ad454bdf0d5a0a76f3cfef795980597f10d16c824ab696827df79"
+    },
+    {
+      "id": "granny-13hcnw7",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Only 2 hearts left! Those two attacks used both activations.",
+      "seconds": 6.72,
+      "peak": 27819,
+      "rms": 4333,
+      "sha256": "566381b6234eeb5e15358af2dd9ead8ead7f145f494ee287e48e3a143c232dd6"
+    },
+    {
+      "id": "granny-155ac5f",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Khaby hit you for 1 heart. The pictures on the left, Recent plays, show what I did.",
+      "seconds": 8.736,
+      "peak": 31555,
+      "rms": 5036,
+      "sha256": "92ccc7641c6aec1f610446cabf69b79e96fed540540f020f5f1560d1776359ed"
+    },
+    {
+      "id": "granny-1dj60wz",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Filter and the attack used both activations. End turn. Granny will pass, then draw before your last hit.",
+      "seconds": 10.296,
+      "peak": 24322,
+      "rms": 3151,
+      "sha256": "28479d0b6b61be823c5d7173af45f070d1bd4c6d73a3f28f007bc4c5dfa3281c"
+    },
+    {
+      "id": "granny-1ecqpw8",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.",
+      "seconds": 10.2,
+      "peak": 32434,
+      "rms": 4002,
+      "sha256": "a2e77f5427ae47f56754c2c3129f7882ec94605b3e0631a1253ce8ca434af0e7"
+    },
+    {
+      "id": "granny-1g954zu",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "I played Khaby Llame. See his silver shield frame? That means Guard.",
+      "seconds": 7.104,
+      "peak": 29090,
+      "rms": 3945,
+      "sha256": "0f87ced62b1fd88071f9ed6e78afb4c7c7cafa7f67a99c12d47a492bb210ef04"
+    },
+    {
+      "id": "granny-1hezu4",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Your turn again. Your energy grew to 2, and Kim is awake.",
+      "seconds": 5.928,
+      "peak": 24346,
+      "rms": 3821,
+      "sha256": "c099ef54faf3c01a56541acc0b3154421017b29ee73eef6179329d3ac3fb203d"
+    },
+    {
+      "id": "granny-1hne7ay",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Ouch! 3 hearts left. That attack used one activation.",
+      "seconds": 6.216,
+      "peak": 28375,
+      "rms": 3788,
+      "sha256": "f4a16c8724e1cbfe1113186ba5d914c001dd58a5db85433974b35d97f5918dce"
+    },
+    {
+      "id": "granny-1hq0d0z",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.",
+      "seconds": 13.848,
+      "peak": 26873,
+      "rms": 2643,
+      "sha256": "247a444e7b79c7f7943b8090be025bb932ea7ce2d9ba37054756f41e4d623449"
+    },
+    {
+      "id": "granny-1i4nbnl",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.",
+      "seconds": 8.544,
+      "peak": 26475,
+      "rms": 4449,
+      "sha256": "1710efdfce809cb44258487868e74b9f97d776be4000897fb6a542c18d887a6d"
+    },
+    {
+      "id": "granny-1nht4xg",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "My turn. I have only 1 energy, and my cards cost more. So I just draw.",
+      "seconds": 8.952,
+      "peak": 31551,
+      "rms": 3389,
+      "sha256": "067d1a68136e3d3d50a4ce4a7c76611e68859d3f5b12ca80d956530f9d5b05a5"
+    },
+    {
+      "id": "granny-1nks571",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Kim's Filter brings the Reset 2 rounds sooner. Click Kim, then press Activate.",
+      "seconds": 7.8,
+      "peak": 27259,
+      "rms": 4989,
+      "sha256": "17daeabc5f10ede22d119dc61acf724eaa81cc8901151c9e391bb8dccd349d55"
+    },
+    {
+      "id": "granny-1q2xabm",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.",
+      "seconds": 14.736,
+      "peak": 26753,
+      "rms": 3754,
+      "sha256": "a5defb3a0b3caddddcbf84dd37a076725ffdaddf0763caec44fc32b87f44b466"
+    },
+    {
+      "id": "granny-1rgyz2",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?",
+      "seconds": 13.344,
+      "peak": 29296,
+      "rms": 4662,
+      "sha256": "6620339ca7960cba65520b946a9038b66b985d3f079fd206c452595914e757c4"
+    },
+    {
+      "id": "granny-1ycb8ih",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.",
+      "seconds": 10.224,
+      "peak": 29391,
+      "rms": 3747,
+      "sha256": "fa089daf8aea4786e5ea4ce41e673e5afda34cab2bece22b3a58f0c50bfc9fed"
+    },
+    {
+      "id": "granny-1yfxf8t",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Fate reset! All rules are back to the basics: my rule AND yours. Zero hearts loses again.",
+      "seconds": 10.08,
+      "peak": 26678,
+      "rms": 3228,
+      "sha256": "fd9dc475f4709e289d002141bfa29a0dad3d82fd454ab0ac888701641e14c151"
+    },
+    {
+      "id": "granny-2njnku",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.",
+      "seconds": 18.024,
+      "peak": 23992,
+      "rms": 3700,
+      "sha256": "5c51b9f4539e30d4fa62f9e5afd040a30b8ed0b7c3d9bd9014c1a9d4afc562c5"
+    },
+    {
+      "id": "granny-4szhqx",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Shakirattle! 3 attack, and Elusive: tactic cards can't target her.",
+      "seconds": 9,
+      "peak": 25528,
+      "rms": 2915,
+      "sha256": "20468a75f6dcd7425230b216a6297f16975148637fcc9aea3009f815fab99983"
+    },
+    {
+      "id": "granny-6t7ssz",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Both took 1 damage. Damage stays: the number in the heart shows the health left.",
+      "seconds": 6.72,
+      "peak": 28747,
+      "rms": 3742,
+      "sha256": "bed38fca89d114e55cb79e0bf69b350af54e0b3e76978fcf3d78c4d0a9ef5a76"
+    },
+    {
+      "id": "granny-8g6nmb",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Zero hearts loses again. You changed the starting rule, so the same attack has a different result.",
+      "seconds": 9.984,
+      "peak": 23500,
+      "rms": 3206,
+      "sha256": "5239f8556e54eba0faebee951fef6733f13cdb9bbf95a6e64d85862f5da5a32e"
+    },
+    {
+      "id": "granny-8qsmvz",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.",
+      "seconds": 10.968,
+      "peak": 32767,
+      "rms": 3683,
+      "sha256": "11e221f5b5c65efdf5af89a86c8f707dc90f124b973c04f58c6e6f32c9f58279"
+    },
+    {
+      "id": "granny-dfpemt",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.",
+      "seconds": 11.18,
+      "peak": 24472,
+      "rms": 3897,
+      "sha256": "8570f1721e6a5310d3b50673d2db2d2796730ac661a395cd6a11177493e221d2"
+    },
+    {
+      "id": "granny-f70pc5",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Draw first. Your energy grows and refills each turn.",
+      "seconds": 5.448,
+      "peak": 23204,
+      "rms": 4007,
+      "sha256": "48b3fa83e08950bd62d97cdb8995c19d902fecfa2fde934b73d3a0d1e0f9e726"
+    },
+    {
+      "id": "granny-fk4a70",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.",
+      "seconds": 11.98,
+      "peak": 32767,
+      "rms": 4463,
+      "sha256": "f15b21a1b97a964426b02e3980fa2f00b972c7a0ea4f12b9f122064a08aa76d7"
+    },
+    {
+      "id": "granny-fs6iif",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?",
+      "seconds": 18.36,
+      "peak": 26172,
+      "rms": 2903,
+      "sha256": "7d592f1699238d45c881adfa2fd03b904b67d936b6f88e54144a722e496d658c"
+    },
+    {
+      "id": "granny-fwxv1x",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.",
+      "seconds": 15.36,
+      "peak": 26786,
+      "rms": 3712,
+      "sha256": "b85138ba768f3c6d0de689e596612a18fb999bcd0df9a4cb0b7eb2f08aead91d"
+    },
+    {
+      "id": "granny-gvw9ns",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "I played a rule card! Look at the Win tile.",
+      "seconds": 5.256,
+      "peak": 30272,
+      "rms": 4289,
+      "sha256": "1dbe984e5ce6dff65cae4d956ceca7cc9b260f136d8b3026b13579db1ba322bd"
+    },
+    {
+      "id": "granny-hm2z2d",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Careful! Now if MY hearts reach 0, I WIN. Don't hit me now. Read the Win tile.",
+      "seconds": 9.888,
+      "peak": 25591,
+      "rms": 3170,
+      "sha256": "54c97c43901654d83e8761ddb013f6039b73a05d712a0ccce42dfd7d6041f049"
+    },
+    {
+      "id": "granny-j31sif",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "New creatures are asleep. Zzz. Kim can attack on your next turn.",
+      "seconds": 6.912,
+      "peak": 23404,
+      "rms": 3435,
+      "sha256": "d09e5073d0f74511f500259412a927bd130d6fbc335f18194a4c5dcca44c0c96"
+    },
+    {
+      "id": "granny-kgw80h",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Khaby's own ability also took Astrophysicat's ability away. See: No ability.",
+      "seconds": 7.584,
+      "peak": 30215,
+      "rms": 4055,
+      "sha256": "5a07c5be9a9929474157666d313dad0b71cab49410b97021908effd77b921542"
+    },
+    {
+      "id": "granny-q15vt1",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.",
+      "seconds": 8.904,
+      "peak": 27965,
+      "rms": 4047,
+      "sha256": "582dc246a298c5f2b3a9b759dcf3057f3758cf37621d68263ba97e080f7d8289"
+    },
+    {
+      "id": "granny-qdr96b",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "End turn. Watch Granny change the Win rule. Rule cards affect both players.",
+      "seconds": 7.2,
+      "peak": 22162,
+      "rms": 3967,
+      "sha256": "e09eef65d27b22a867ecc2364cb8d56b208eaa93beafb97e7c027bffdd67cfa0"
+    },
+    {
+      "id": "granny-sp5sm8",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.",
+      "seconds": 10.272,
+      "peak": 27167,
+      "rms": 3206,
+      "sha256": "07a3d4fe6680f2f403c21343d7546161af270022293c6ebb277427f65466a2aa"
+    },
+    {
+      "id": "granny-su5efv",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "In 4 rounds, Fate comes back and resets all rules.",
+      "seconds": 5.304,
+      "peak": 28682,
+      "rms": 4525,
+      "sha256": "ce6359bb456c0102d4a36199436c97c3000a6d8bf7e691317e833c33080f97c9"
+    },
+    {
+      "id": "granny-tuorir",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Your turn. Shakirattle hits hard. Let's deal with my creatures.",
+      "seconds": 6.36,
+      "peak": 29417,
+      "rms": 4829,
+      "sha256": "990f50b1298eff7b6a147bbbdaa000268c7411037d05ed8a0519848dea92ca43"
+    },
+    {
+      "id": "granny-xfnpgl",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?",
+      "seconds": 11.496,
+      "peak": 29033,
+      "rms": 4527,
+      "sha256": "b1e1ca3f99ed342c40cfb3ebae7aceca377fc2cf23923cc94efb7767de424885"
+    },
+    {
+      "id": "granny-z17dn2",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "Khaby lost his Guard. The way to me is open.",
+      "seconds": 5.208,
+      "peak": 21370,
+      "rms": 3212,
+      "sha256": "f497dd2506d8c52ffddd9f60d973ff87be7d684f101fa2efa336285153fe6643"
+    },
+    {
+      "id": "granny-zyn42c",
+      "speaker": "granny",
+      "where": "card lesson",
+      "expected": "The tactic and rule used both activations. End turn. Granny will pass, then you will draw.",
+      "seconds": 9.336,
+      "peak": 28493,
+      "rms": 3866,
+      "sha256": "f61f277a907d61424bf035201f32054f80cded60d01aa3df3ec70cab01e8b26c"
+    },
+    {
+      "id": "haalandroid-1crla8k",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Target: hero. Goal: yes.",
+      "seconds": 3.648,
+      "peak": 24503,
+      "rms": 4138,
+      "sha256": "e9b97fce1f5ecbf57a7a1298ff31ef0b5169e727cdd579a1510177c4665f32fd"
+    },
+    {
+      "id": "haalandroid-1xg2tls",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Rebooting. Meditating.",
+      "seconds": 2.856,
+      "peak": 26673,
+      "rms": 5838,
+      "sha256": "a36f914f561e26e81029519a474fcae0a0dfc473ff5f84a30dc570c0da374951"
+    },
+    {
+      "id": "haalandroid-cyezdc",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Error. No goal.",
+      "seconds": 2.184,
+      "peak": 24841,
+      "rms": 4914,
+      "sha256": "ce3bccdd83ddf2b71b0dfae1b5c2885ac245d8e6fa67bf322f76829dc2928fdc"
+    },
+    {
+      "id": "haalandroid-euwtn",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Pattern loading. Goal loading.",
+      "seconds": 3.576,
+      "peak": 28646,
+      "rms": 5024,
+      "sha256": "6bc62942fb8345be8c3d1a3f20cebbc5dd430b5c01e676a03c7d15f803942de5"
+    },
+    {
+      "id": "haalandroid-sc312l",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Pattern… broken.",
+      "seconds": 1.896,
+      "peak": 27270,
+      "rms": 5460,
+      "sha256": "400415acd52310989cb3a3695b3ebf00f53389d3a9fdf1933be19a1e72651bfd"
+    },
+    {
+      "id": "haalandroid-we5xkt",
+      "speaker": "haalandroid",
+      "where": "creature haalandroid",
+      "expected": "Breathe in. Breathe out. Score.",
+      "seconds": 4.2,
+      "peak": 26517,
+      "rms": 4711,
+      "sha256": "5d5527457c2469c9c7b826f85bcb2cbc3d1f9923ea22e94c98865a54584b6427"
+    },
+    {
+      "id": "muskrat-14han12",
+      "speaker": "muskrat",
+      "where": "tutorial river-crossing",
+      "expected": "Undo and Reset are free. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "seconds": 9.288,
+      "peak": 28118,
+      "rms": 3753,
+      "sha256": "e3147345b0c78c058586c5239f61b6a3de0b661406c528290e8f7b7caed1eedb"
+    },
+    {
+      "id": "muskrat-1aywz2s",
+      "speaker": "muskrat",
+      "where": "tutorial river-crossing",
+      "expected": "Click creatures to load the boat, then Row across. An unsafe crossing counts as a wrong check.",
+      "seconds": 7.8,
+      "peak": 27324,
+      "rms": 3813,
+      "sha256": "f9ca1051544da28f080bb1fb3a9628ec483b217cf54fbd2e816d7c3306b3692c"
+    },
+    {
+      "id": "muskrat-yrun4p",
+      "speaker": "muskrat",
+      "where": "side muskrat-launch",
+      "expected": "Next year. Definitely. Probably.",
+      "seconds": 3.648,
+      "peak": 29450,
+      "rms": 2926,
+      "sha256": "d6e80c3b1eb9a5cc9e7d78e8e97d6052ceea11c4383911a49bd757c5dfa7fd19"
+    },
+    {
+      "id": "obambu-15xvaha",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Yes, we can. Heal up, team.",
+      "seconds": 4.026,
+      "peak": 22997,
+      "rms": 3193,
+      "sha256": "3f05f47a76f67b578679147f8c26537f5da3a94727f0a225ab06ff9fcfccee96"
+    },
+    {
+      "id": "obambu-18e7hcd",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Thank you. It has been an honour.",
+      "seconds": 3.766,
+      "peak": 20381,
+      "rms": 2959,
+      "sha256": "3bb355bb10cefa950c36860a528f5ae7d24a37b8c52f54253d6661f0a3ff0a03"
+    },
+    {
+      "id": "obambu-1uhxam7",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Change… is hard.",
+      "seconds": 2.76,
+      "peak": 20931,
+      "rms": 2600,
+      "sha256": "60d015fe561cb277d30acd0f9e60cbf30307223a1ec57cf579d7ced0e0eff7b9"
+    },
+    {
+      "id": "obambu-mnla5v",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Let me be clear. Here is some hope. And hearts.",
+      "seconds": 6.108,
+      "peak": 19585,
+      "rms": 2954,
+      "sha256": "42a4f87ba8c4596fcd654e293b72a515fffd7ab2397fbd87cac223f8eb5b7047"
+    },
+    {
+      "id": "obambu-ox7mtx",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Let me be clear. That hurt.",
+      "seconds": 3.36,
+      "peak": 25785,
+      "rms": 3392,
+      "sha256": "2ff00a0793f7ea3b9fde9fcc370df659da3005ae8b8db8febe9c8fee3523a6d5"
+    },
+    {
+      "id": "obambu-znlz2m",
+      "speaker": "obambu",
+      "where": "creature obambu",
+      "expected": "Now… let me pause… and heal.",
+      "seconds": 4.868,
+      "peak": 21180,
+      "rms": 2660,
+      "sha256": "f426c152d864f5c7c03fab18a4fac852f7d737995ba1bc2b08fff7f776332335"
+    },
+    {
+      "id": "oracle-1dwhn5n",
+      "speaker": "oracle",
+      "where": "station.k-oracle.intro",
+      "expected": "All correct. Inspect a step if you must.",
+      "seconds": 3.648,
+      "peak": 22985,
+      "rms": 3118,
+      "sha256": "f70dd61f30c097ab9837f836a3ab2c272107ebed72b9de07d5ba30ea4873fd06"
+    },
+    {
+      "id": "oracle-1fulyhd",
+      "speaker": "oracle",
+      "where": "station.k-oracle.reminder",
+      "expected": "More proofs. Still fast. Still unchecked. Inspect one.",
+      "seconds": 5.424,
+      "peak": 27042,
+      "rms": 3910,
+      "sha256": "68eb1f42e3fa93a47dc45a812c185cf64c59a9dbb1eff4ca465e223c2ac41b0d"
+    },
+    {
+      "id": "oracle-3i8lny",
+      "speaker": "oracle",
+      "where": "station.k-oracle.intro",
+      "expected": "Ignore that screen. It is only you, finishing. I am a thinking engine. I print proofs.",
+      "seconds": 8.76,
+      "peak": 26463,
+      "rms": 3235,
+      "sha256": "9282ffb817e6d0f0ef3b66377d8b23dda6b86c24eab824519dcb0bc9909479d0"
+    },
+    {
+      "id": "oracle-xykio",
+      "speaker": "oracle",
+      "where": "station.k-oracle.intro",
+      "expected": "I am a thinking engine. I print proofs.",
+      "seconds": 4.368,
+      "peak": 23197,
+      "rms": 3084,
+      "sha256": "86d1ace5c5fcb4fcd23c2fb1efa1a83bf174707f9bab68ec792a12a15bb186d3"
+    },
+    {
+      "id": "oracle-zpph34",
+      "speaker": "oracle",
+      "where": "station.k-oracle.intro",
+      "expected": "All correct. Probably. Inspect a step if you insist. Nobody insists.",
+      "seconds": 6.768,
+      "peak": 23933,
+      "rms": 3066,
+      "sha256": "f4af87c00fb5600dd688d49bbb13465e201708eb7ebd3dd4df09eb2c6cab627d"
+    },
+    {
+      "id": "speedcheeta-15kuqh4",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "LET'S GOOOO! Everybody hits harder!",
+      "seconds": 2.664,
+      "peak": 31479,
+      "rms": 8579,
+      "sha256": "3c2822bf277b77171370c6e526fb275c4736792dd4fb87b5ae2b60ae252ac87b"
+    },
+    {
+      "id": "speedcheeta-1dk0y4z",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "I need a backflip. Emotionally.",
+      "seconds": 2.736,
+      "peak": 27676,
+      "rms": 5106,
+      "sha256": "230776bc34288c1ba52052140ea814aeb619abe73ac64811b8f9943c5126ae59"
+    },
+    {
+      "id": "speedcheeta-1fho2ls",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "AAAAH! I am here! Why am I here?!",
+      "seconds": 2.472,
+      "peak": 32767,
+      "rms": 9306,
+      "sha256": "685e1dd06c59df57191b06347973db068e4503c1945c656630883072e780cb68"
+    },
+    {
+      "id": "speedcheeta-1hb1o8k",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "Too fast! I was too fast!",
+      "seconds": 2.232,
+      "peak": 29321,
+      "rms": 5170,
+      "sha256": "082463775f9d9a3f4bfb5f7db28f10b1a616b90e7a1fa0b6e99f7fa727558198"
+    },
+    {
+      "id": "speedcheeta-1xjv5t1",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "Power up! Everyone, plus one!",
+      "seconds": 1.848,
+      "peak": 32522,
+      "rms": 8428,
+      "sha256": "25dbff77f77e66d9fa2135253e6e02e5b973c2dcceaa47425d6f2eeb83fd60e2"
+    },
+    {
+      "id": "speedcheeta-k9ghk4",
+      "speaker": "speedcheeta",
+      "where": "creature speedcheeta",
+      "expected": "Nooo! Chat, did you see that?!",
+      "seconds": 2.76,
+      "peak": 29573,
+      "rms": 6787,
+      "sha256": "f6b45b1d0bd076f9d65a2cc5688c873c526d144c54a79b5ad9d23e47d7c4a37f"
+    },
+    {
+      "id": "swiftlet-11i2fag",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "This one goes in the breakup song.",
+      "seconds": 2.04,
+      "peak": 22580,
+      "rms": 3460,
+      "sha256": "a02f2c3de0b4aa0a5960df6b12d999fbde734e5af3630c87cdaf9243a3c498d4"
+    },
+    {
+      "id": "swiftlet-16b9gvt",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "Fine. That gets a sad song.",
+      "seconds": 2.58,
+      "peak": 25433,
+      "rms": 2290,
+      "sha256": "335e3fbbf3d55784114f172d73c993117a664e2c557928bfda53f15f36208893"
+    },
+    {
+      "id": "swiftlet-17m4w53",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "New era, new rules.",
+      "seconds": 2.38,
+      "peak": 24612,
+      "rms": 3503,
+      "sha256": "fc3cbaef8b32f4ab39d3292044fbcef5b8c6dd21872ad0b3f65921507116bf9e"
+    },
+    {
+      "id": "swiftlet-1a52sl6",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "Did you spot my clues? Too late.",
+      "seconds": 2.82,
+      "peak": 27965,
+      "rms": 3672,
+      "sha256": "56c868b54420c1633a984099e226ab8e9820c6e7d0a0ffca666a0ffbb967bdfd"
+    },
+    {
+      "id": "swiftlet-1e62wtv",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "I will write a song about this.",
+      "seconds": 2.66,
+      "peak": 21004,
+      "rms": 2493,
+      "sha256": "38b541d35dc0709f14d92214000c2163e60b20be231f911c3e2e8e43b296836e"
+    },
+    {
+      "id": "swiftlet-1r416gn",
+      "speaker": "swiftlet",
+      "where": "creature swiftlet",
+      "expected": "Clue number one: I am winning.",
+      "seconds": 3.42,
+      "peak": 24724,
+      "rms": 2645,
+      "sha256": "f20642e6e5ab4549296db3ed063117b95a0965711e8ac3f4a2f9f1fa9c9151e4"
+    },
+    {
+      "id": "swiftlet-on3j8y",
+      "speaker": "swiftlet",
+      "where": "side recruitment-drive",
+      "expected": "A third era. Staying Era. I feel a song coming. Eleven verses. One per soldier.",
+      "seconds": 8.02,
+      "peak": 27188,
+      "rms": 3905,
+      "sha256": "e38a9e882531621c7ace24d78971b5785e7fddb28d6134aa7affdfda6c225af8"
+    },
+    {
+      "id": "swiftlet-possessed-13t2l0p",
+      "speaker": "swiftlet-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Coward Era has no songs. I'd have to write them all.",
+      "seconds": 5.64,
+      "peak": 29692,
+      "rms": 3296,
+      "sha256": "0f61d86669fd08e9774f83b889128bb71e33d0f974250ec8be8bc5a39e651fc2"
+    },
+    {
+      "id": "swiftlet-possessed-1rbf5ry",
+      "speaker": "swiftlet-possessed",
+      "where": "side recruitment-drive",
+      "expected": "There are only two eras now. Marching Era. Or Coward Era.",
+      "seconds": 8.736,
+      "peak": 27710,
+      "rms": 2070,
+      "sha256": "3c35dcb6a618c352194b05e116db3014acc5b7c081283ca22bc5ab603c47caa4"
+    },
+    {
+      "id": "swiftlet-possessed-20jg1n",
+      "speaker": "swiftlet-possessed",
+      "where": "side recruitment-drive",
+      "expected": "\"Everyone\"? You sound like the posters.",
+      "seconds": 3.73,
+      "peak": 25610,
+      "rms": 3272,
+      "sha256": "a1a1a9bdb1a4631eefbc90f55607d48a6da89a755724390b69d3864df2503964"
+    },
+    {
+      "id": "swiftlet-possessed-8pe5g4",
+      "speaker": "swiftlet-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Wrong era, darling. Count my choices.",
+      "seconds": 5.304,
+      "peak": 28227,
+      "rms": 2926,
+      "sha256": "b60688bb6a052a0d5166e7eb8cb8f56b8be97d3566eddc5c8e647df7a004a6f2"
+    },
+    {
+      "id": "swiftlet-possessed-yuqnw3",
+      "speaker": "swiftlet-possessed",
+      "where": "side recruitment-drive",
+      "expected": "Which singer?…Is it me? I didn't say that. Yet.",
+      "seconds": 6.806,
+      "peak": 27103,
+      "rms": 3676,
+      "sha256": "9b73f36113a7eecfb203c7ac5f172f0b75a13b749e5a6726b23a1d2fcf9db03c"
+    }
+  ]
+}

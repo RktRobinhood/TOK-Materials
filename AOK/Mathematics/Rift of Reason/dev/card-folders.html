@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Card folder scratch test</title></head>
+<body><p>Loading the production Collection with an in-memory test save. Local server required.</p>
+<script>
+fetch('../index.html').then(r => r.text()).then(html => {
+    html = html.replace('<head>', '<head><base href="../">')
+        .replace('<script src="js/main.js"><' + '/script>', '<script src="dev/card-folders.js"><' + '/script>');
+    document.open(); document.write(html); document.close();
+});
+</script></body></html>

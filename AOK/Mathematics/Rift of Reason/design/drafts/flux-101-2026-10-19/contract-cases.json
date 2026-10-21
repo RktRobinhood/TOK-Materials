@@ -1,0 +1,383 @@
+{
+  "status": "planning-only; runtime unchanged",
+  "baseline": "590f6fc",
+  "fields": {
+    "plays": {
+      "field": "playLimit",
+      "basic": 2,
+      "min": 1,
+      "max": 6
+    },
+    "draw": {
+      "field": "drawCount",
+      "basic": 1,
+      "min": 1,
+      "max": 3
+    },
+    "energy": {
+      "field": "growth",
+      "basic": 1,
+      "min": -1,
+      "max": 3
+    },
+    "cost": {
+      "field": "costDelta",
+      "basic": 0,
+      "min": -2,
+      "max": 2
+    }
+  },
+  "cards": [
+    {
+      "id": "flux-plays-plus-1",
+      "category": "plays",
+      "field": "playLimit",
+      "delta": 1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-plays-minus-1",
+      "category": "plays",
+      "field": "playLimit",
+      "delta": -1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-plays-plus-2",
+      "category": "plays",
+      "field": "playLimit",
+      "delta": 2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-plays-minus-2",
+      "category": "plays",
+      "field": "playLimit",
+      "delta": -2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-draw-plus-1",
+      "category": "draw",
+      "field": "drawCount",
+      "delta": 1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-draw-minus-1",
+      "category": "draw",
+      "field": "drawCount",
+      "delta": -1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-draw-plus-2",
+      "category": "draw",
+      "field": "drawCount",
+      "delta": 2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-draw-minus-2",
+      "category": "draw",
+      "field": "drawCount",
+      "delta": -2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-growth-plus-1",
+      "category": "energy",
+      "field": "growth",
+      "delta": 1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-growth-minus-1",
+      "category": "energy",
+      "field": "growth",
+      "delta": -1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-growth-plus-2",
+      "category": "energy",
+      "field": "growth",
+      "delta": 2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-growth-minus-2",
+      "category": "energy",
+      "field": "growth",
+      "delta": -2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-cost-plus-1",
+      "category": "cost",
+      "field": "costDelta",
+      "delta": 1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-cost-minus-1",
+      "category": "cost",
+      "field": "costDelta",
+      "delta": -1,
+      "energy": 1,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-cost-plus-2",
+      "category": "cost",
+      "field": "costDelta",
+      "delta": 2,
+      "energy": 2,
+      "rarity": "common"
+    },
+    {
+      "id": "flux-cost-minus-2",
+      "category": "cost",
+      "field": "costDelta",
+      "delta": -2,
+      "energy": 2,
+      "rarity": "common"
+    }
+  ],
+  "optionalCategoryIds": [
+    "limited-memory",
+    "momentum"
+  ],
+  "finiteRepairId": "two-plays",
+  "unlimitedId": "infinity",
+  "legacyVirtualStarterIds": [
+    "underdog",
+    "one-action",
+    "two-actions",
+    "three-actions",
+    "reverse-hearts",
+    "normal-hearts",
+    "thrift",
+    "luxury",
+    "abundance",
+    "study",
+    "vigilance",
+    "patience",
+    "arrival",
+    "silence",
+    "haste",
+    "mercy",
+    "crowd",
+    "excluded-middle",
+    "extensionality",
+    "choice",
+    "curved-space",
+    "empty-set",
+    "induction",
+    "doubt",
+    "restraint",
+    "two-plays",
+    "plenty",
+    "infinity",
+    "steady-state",
+    "diminishing-returns",
+    "limited-memory",
+    "fresh-start",
+    "fair-share",
+    "momentum",
+    "think"
+  ],
+  "algebraCases": [
+    {
+      "category": "plays",
+      "before": 2,
+      "delta": 1,
+      "after": 3,
+      "changed": true
+    },
+    {
+      "category": "plays",
+      "before": 3,
+      "delta": 1,
+      "after": 4,
+      "changed": true
+    },
+    {
+      "category": "plays",
+      "before": 2,
+      "delta": -2,
+      "after": 1,
+      "changed": true
+    },
+    {
+      "category": "plays",
+      "before": 1,
+      "delta": -1,
+      "after": 1,
+      "changed": false
+    },
+    {
+      "category": "plays",
+      "before": 6,
+      "delta": 2,
+      "after": 6,
+      "changed": false
+    },
+    {
+      "category": "plays",
+      "before": 5,
+      "delta": 2,
+      "after": 6,
+      "changed": true
+    },
+    {
+      "category": "draw",
+      "before": 1,
+      "delta": 2,
+      "after": 3,
+      "changed": true
+    },
+    {
+      "category": "draw",
+      "before": 3,
+      "delta": -2,
+      "after": 1,
+      "changed": true
+    },
+    {
+      "category": "draw",
+      "before": 1,
+      "delta": -1,
+      "after": 1,
+      "changed": false
+    },
+    {
+      "category": "draw",
+      "before": 3,
+      "delta": 1,
+      "after": 3,
+      "changed": false
+    },
+    {
+      "category": "energy",
+      "before": 1,
+      "delta": -2,
+      "after": -1,
+      "changed": true
+    },
+    {
+      "category": "energy",
+      "before": -1,
+      "delta": 1,
+      "after": 0,
+      "changed": true
+    },
+    {
+      "category": "energy",
+      "before": 0,
+      "delta": -2,
+      "after": -1,
+      "changed": true
+    },
+    {
+      "category": "energy",
+      "before": 3,
+      "delta": 2,
+      "after": 3,
+      "changed": false
+    },
+    {
+      "category": "cost",
+      "before": 0,
+      "delta": -2,
+      "after": -2,
+      "changed": true
+    },
+    {
+      "category": "cost",
+      "before": -2,
+      "delta": 1,
+      "after": -1,
+      "changed": true
+    },
+    {
+      "category": "cost",
+      "before": -2,
+      "delta": -2,
+      "after": -2,
+      "changed": false
+    },
+    {
+      "category": "cost",
+      "before": 2,
+      "delta": 1,
+      "after": 2,
+      "changed": false
+    },
+    {
+      "category": "plays",
+      "before": "unlimited",
+      "delta": -2,
+      "after": "unlimited",
+      "changed": false
+    },
+    {
+      "category": "plays",
+      "before": "unlimited",
+      "delta": 1,
+      "after": "unlimited",
+      "changed": false
+    }
+  ],
+  "budgetCases": [
+    {
+      "base": 2,
+      "bonus": 0,
+      "spentBefore": 1,
+      "delta": 1,
+      "afterBase": 3,
+      "spentAfter": 2,
+      "left": 1
+    },
+    {
+      "base": 2,
+      "bonus": 0,
+      "spentBefore": 1,
+      "delta": -2,
+      "afterBase": 1,
+      "spentAfter": 2,
+      "left": 0
+    },
+    {
+      "base": 3,
+      "bonus": 2,
+      "spentBefore": 1,
+      "delta": -1,
+      "afterBase": 2,
+      "spentAfter": 2,
+      "left": 2
+    },
+    {
+      "base": 6,
+      "bonus": 1,
+      "spentBefore": 2,
+      "delta": -2,
+      "afterBase": 4,
+      "spentAfter": 3,
+      "left": 2
+    }
+  ]
+}

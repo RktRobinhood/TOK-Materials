@@ -1,0 +1,135 @@
+{
+  "focused": {
+    "pass": 100,
+    "fail": 0
+  },
+  "battlePresentation": [
+    {
+      "viewport": 1366,
+      "outcome": "won",
+      "title": "You won!",
+      "played": [
+        "victory-bright.wav"
+      ],
+      "motion": "result-arrive",
+      "left": 425.390625,
+      "right": 940.609375,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "viewport": 1366,
+      "outcome": "lost",
+      "title": "You lost",
+      "played": [
+        "loss.wav"
+      ],
+      "motion": "none",
+      "left": 425.390625,
+      "right": 940.609375,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "viewport": 1366,
+      "outcome": "draw",
+      "title": "A draw",
+      "played": [],
+      "motion": "none",
+      "left": 425.390625,
+      "right": 940.609375,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "decode": {
+        "seconds": 0.908875,
+        "channels": 1
+      },
+      "errors": []
+    },
+    {
+      "viewport": 390,
+      "outcome": "won",
+      "title": "You won!",
+      "played": [],
+      "motion": "none",
+      "left": 36,
+      "right": 354,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "viewport": 390,
+      "outcome": "lost",
+      "title": "You lost",
+      "played": [],
+      "motion": "none",
+      "left": 36,
+      "right": 354,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "viewport": 390,
+      "outcome": "draw",
+      "title": "A draw",
+      "played": [],
+      "motion": "none",
+      "left": 36,
+      "right": 354,
+      "overflow": false,
+      "onTop": true,
+      "focus": "Continue"
+    },
+    {
+      "decode": {
+        "seconds": 0.908875,
+        "channels": 1
+      },
+      "errors": []
+    }
+  ],
+  "fullSuite": {
+    "seconds": 273.3618783,
+    "skip": 1,
+    "fail": 0,
+    "pass": 1146,
+    "tests": 1147
+  },
+  "reviews": {
+    "standards": "No actionable findings",
+    "spec": "No actionable findings"
+  },
+  "paidCatch": {
+    "viewport": "390x844 touch/Calm/reduced-motion",
+    "game": "real paid Picture Catch",
+    "before": {
+      "charms": 9,
+      "caught": 0
+    },
+    "won": {
+      "charms": 8,
+      "caught": 1,
+      "creatures": 1
+    },
+    "reloaded": {
+      "charms": 8,
+      "caught": 1,
+      "creatures": 1
+    },
+    "checks": [
+      "native touch solution",
+      "prominent Caught! banner",
+      "one charm charged",
+      "one creature reward",
+      "saved result survives reload without duplication"
+    ],
+    "errors": []
+  }
+}

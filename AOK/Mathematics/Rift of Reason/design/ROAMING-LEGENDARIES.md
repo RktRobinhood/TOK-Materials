@@ -1,8 +1,8 @@
-# Roaming legendaries (#111): stage 1 specification
+# Roaming legendaries (#111)
 
-Status, 17 October 2026: stages 1 and 2 are built, with placeholder art. The teacher authorised them on 14 October 2026. Stage 3 (final art, balance review) and stage 4 (class playtest) come later. Research and reference notes: `research/roaming-legendary-trick-challenges-2026-10-11.md` (repository root) and GitHub issue #111.
+Status, 19 October 2026: the three hunts, all 21 art pieces, unique powerful reward cards, twelve-round bank and sparse timers are shipped. The builder's final bank, controls, timer, map pursuit and save audit is recorded in `reviews/roaming-111-2026-10-19.md`. Classroom feedback remains optional future tuning, as the teacher confirmed on 18 October. Research and reference notes: `research/roaming-legendary-trick-challenges-2026-10-11.md` (repository root) and GitHub issue #111.
 
-Code: `data/legendaries.js` (hunt data), `js/core/hunts.js` (save rules, pure), `js/core/tricks.js` (the trick bank, pure), `js/screens/hunt.js` + `css/hunts.css` (challenge screen), `js/screens/map.js` (badge, trail, flight, note), `dev/tricks.html` (review every trick). Tests: `tools/test/hunts.test.mjs`, `tools/test/tricks.test.mjs`.
+Code: `data/legendaries.js` (hunt data), `js/core/hunts.js` (save rules, pure), `js/core/tricks.js` (the trick bank, pure), `js/screens/hunt.js` + `css/hunts.css` (challenge screen), `js/screens/map.js` (badge, trail, flight, note), `dev/tricks.html` (review every trick), `dev/hunts.html` (scratch map/hunt and bank controls, no adventure storage). Tests: `tools/test/hunts.test.mjs`, `tools/test/tricks.test.mjs`, `tools/test/hunt-ui.test.mjs`, `tools/test/legendaries.test.mjs`.
 
 ## 1. The three creatures
 
@@ -32,12 +32,12 @@ An attempt is 12 rounds drawn from the creature's bank of about 50: 4 of its own
 
 Answer types: pick one + Check; pick all + Check; type a number + Check; **tap** (the first click answers, no Check); **press in order** (a wrong press fails at once); **wait** (touch nothing for 5–7 seconds; touching fails). Some taps hide in plain sight: a word in the sign, the creature's picture, or the challenge's name. The rules screen warns that some rounds answer on the first click and some want you to wait.
 
-Fair by rule (`tools/test/tricks.test.mjs`): one right answer that follows from the sign and the screen, every other answer rejected with a plain reason, no reflex speed (a quick round gives at least 6 seconds), no colour-only cues, no English puns, no trivia.
+Fair by rule (`tools/test/tricks.test.mjs`): one right answer that follows from the sign and the screen, every other answer rejected with a plain reason, no colour-only cues, no English puns, no trivia. Teacher steering, 18 October: keep all twelve rounds and the deliberately frustrating reset/pursuit loop, but use speed tests sparingly. Each run has at most one clearly signposted **Quick!** tap round, with six seconds to answer. Counting is untimed. Later quick candidates in that same seeded run become untimed tap rounds with no false clock wording; question order, layouts and answers stay unchanged. Wait rounds retain their countdown because resisting a click is their task, not answering quickly.
 
 - **Maskip's own** (logic words, four lantern pairs): both; exactly one (two answers); the mask's claim true/false; neither; select every pair with at least one on; the pair that breaks an if-then rule; select every pair that is not both on; the pair where an OR claim is false; select every pair that is not exactly one; count every lantern that is on.
-- **Quibblequill's own** (evidence, parcel records): the one counterexample; the supported claim; the converse that does not follow; select every record that says nothing about the claim; select every agreeing record; how many counterexamples break an "every" claim (1); the record that supports "some have not"; the new record that would break the claim; "not brass, so not an archive key" (no); "brass, so an archive key?" (we cannot tell).
+- **Quibblequill's own** (evidence, parcel records): the one counterexample; the supported claim; the converse that does not follow; select every record that says nothing about the claim; select every stamped parcel that arrived; how many counterexamples break an "every" claim (1); the record that supports "some have not"; the new record that would break the claim; "not brass, so not an archive key" (no); "brass, so an archive key?" (we cannot tell).
 - **Oddsnap's own** (probability, a shape log whose glowing shape is the decoy): least likely; most likely; no door is guaranteed; a fair coin after a streak (50%); two exact roll lists are equally likely; the impossible roll; the certain roll; the most likely total of two dice (7); the chance of a 6 (1 in 6, not 50/50); a bag of more triangles than squares.
-- **Shared** (40): the smallest button; the biggest number in the smallest print; the button with nothing written on it; do not touch; "click here" in the sign; click the creature; click the challenge's name; letters in a number word; double negatives; reverse order; smallest to biggest with minus numbers; odd one out; corners; the shape you see, then the word you read; the cheap-thing price trap; a kilo of feathers; months with at least 28/30 days; select every even number (0 counts); how many rounds; press one button exactly N times; quick GO (6-second clock); quick count (12-second clock); quick "not a word"; second from the left; last letter; every button except one; the number not in digits; times before plus; fence posts; the smaller decimal; legs; alphabet order; a yes/no pattern; a longer wait; count a letter; the same amount written two ways; the upside-down button; the longest word in small print; sides of shapes.
+- **Shared** (40): the smallest button; the biggest number in the smallest print; the button with nothing written on it; do not touch; "click here" in the sign; click the creature; click the challenge's name; letters in a number word; double negatives; reverse order; smallest to biggest with minus numbers; odd one out; corners; the shape you see, then the word you read; the cheap-thing price trap; a kilo of feathers; months with at least 28/30 days; select every even number (0 counts); how many rounds; press one button exactly N times; quick GO (6-second clock); count the icons (untimed); quick "not a word"; second from the left; last letter; every button except one; the number not in digits; times before plus; fence posts; the smaller decimal; legs; alphabet order; a yes/no pattern; a longer wait; count a letter; the same amount written two ways; the upside-down button; the longest word in small print; sides of shapes.
 
 ## 3. Rules of the hunt
 
@@ -49,7 +49,7 @@ Fair by rule (`tools/test/tricks.test.mjs`): one right answer that follows from 
 - **Wrong answer.** The run resets to round 1 and the attempt number goes up. The new site is picked once and saved *before* the explanation is shown (`Hunts.fail`). The screen names the new place. A repeated submission (double click, reload, replayed event) is ignored by the attempt guard, so the creature never moves twice.
 - **Cost of failing.** Only the walk. No hearts, scars, items or stars. The ordinary puzzle rules do not apply.
 - **Retry.** Only at the new site, after the avatar has walked there (`canAttempt` needs `map.at === hunt.node`). There is no timer.
-- **Win.** After round 3, `Hunts.claim` adds exactly one creature (uid `legend-<hunt>-<seed>`) with no catch roll and no charm, and writes the permanent receipt `claimed`. The receipt, not collection ownership, blocks a second grant, so releasing the creature never reopens the reward.
+- **Win.** After round 12, `Hunts.claim` adds exactly one creature (uid `legend-<hunt>-<seed>`) with no catch roll and no charm, and writes the permanent receipt `claimed`. The receipt, not collection ownership, blocks a second grant, so releasing the creature never reopens the reward.
 - **Practice.** After the claim, the badge stays where the creature was won. Practice runs use a new seed each time, with no reward and no flight.
 
 ## 4. Sites, legality and fallback
@@ -83,16 +83,17 @@ A site is legal when it is revealed, on the hunt's own painted map, not locked (
   departure: { attempt, from, to, tier, seen } | null, claimed: { uid, at, node, attempt } | null, found }
 ```
 
-## 7. Art needed (placeholders now)
+## 7. Shipped art
 
-The placeholder silhouette (`Rift.Assets` fallback) is used everywhere until the art arrives. Requests are in `art-requests/ART-REQUESTS.md`, Stage 13.87. Per creature:
+All 21 pieces are delivered: six still poses and one six-frame run sheet per creature. Source prompts and provenance are in `source-assets/4-caricatures/roaming-111-2026-10-17/PROVENANCE.md`; the final Oddsnap idle completed the set in `55f03b1`. Original requests are in `art-requests/ART-REQUESTS.md`, Stage 13.87. Per creature:
 
 - `creature/<id>/idle`: portrait and card art, same size class as the shipped creatures (about 230×215 WebP, transparent). Also used for the map badge and the runner.
 - Poses `taunt`, `thinking`, `happy` (correct answer), `shocked` (wrong answer / flee start), `recruited`.
 - A run (or fly) sheet: `creature/<id>/run`, one row of 6 frames on a shared ground line, in the same pipeline format as the avatar walk sheets (`tools/assets/sheets.json` type `walk`, ~240–320 px frame width, ~330–380 px height, pivot bottom-centre, facing right; the map mirrors it for leftward runs).
 - Reduced-motion equivalent: none needed. Calm motion uses the static idle at the destination.
 
-## 8. Open for later stages
+## 8. Balance and later feedback
 
-- Stage 3: final art and the balance review of the three cards. Voiced taunts are optional: the lines are text only now and go through the normal voice run (#43) if wanted.
-- Stage 4: class playtest of timing and fairness, and whether twelve rounds is the right length (`ROUNDS` in `js/core/tricks.js` and `js/core/hunts.js`).
+- The cards deliberately outperform their common counterparts: Maskip removes enemy abilities, keywords and boosts; Quibblequill combines Guard, damage reduction, hand information and two draws; Oddsnap rewards a right prediction strongly and still grows on a miss. `tools/test/legendaries.test.mjs` checks these engine effects, their card text and relative stats. One per collection/deck and twelve rounds plus pursuit limit access. This satisfies the teacher's requested powerful, rare rewards; it does not claim tournament balance or a measured classroom win rate.
+- Optional class feedback may inform timing and fairness. Twelve rounds, instant reset, pursuit and sparse Quick clocks are the settled teacher direction. The builder audit completes the currently authorized #111 work; later class feedback is not an approval gate.
+- Voiced taunts remain optional under the separate normal voice run (#43). This audit consumes no image or voice quota.

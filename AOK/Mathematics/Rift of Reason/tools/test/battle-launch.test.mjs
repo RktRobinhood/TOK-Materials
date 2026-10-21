@@ -69,13 +69,15 @@ test('How to play lists the keywords and the colour wheel hint',()=>{
  const all=text(m.body);
  // A compact visual sheet: the four steps of a turn, one row per idea, then a Keywords grid.
  for(const step of ['1 · Draw','2 · Play','3 · Attack','4 · End turn'])assert.ok(all.includes(step),step);
- assert.match(all,/Up to 2 cards/,'the 2-play limit is part of the Play step');
+ assert.match(all,/2 card activations/,'the shared budget is part of the Play step');
+ assert.match(all,/attack or manual Activate uses one/);
+ assert.doesNotMatch(all,/target\. Free\./);
  assert.match(all,/Fate moves 1 step/);
  const keys=[];const walk=n=>{if(!n||typeof n==='string')return;if(String(n.className).split(' ').includes('htp-key'))keys.push(text(n));(n.children||[]).forEach(walk);};walk(m.body);
  const names=['Guard','Swift','Shield','Elusive','Entrance','Last Word','Activate','Spark'];
  assert.equal(keys.length,names.length,'one tile per keyword');
  names.forEach((k,i)=>assert.match(keys[i],new RegExp(k+'\\s+\\S'),k+' has a short explanation'));
- assert.match(all,/Colour wheel:\s+\+1 attack against the colour you beat/);
+ assert.match(all,/Colour matchups:\s+Strong \+1, Weak −1, Neutral 0/);
  assert.ok(!/fate roll/i.test(all));
 });
 test('leaving a practice or story match counts nothing and goes back',()=>{

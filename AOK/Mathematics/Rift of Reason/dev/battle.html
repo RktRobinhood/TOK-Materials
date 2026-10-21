@@ -88,15 +88,19 @@
 <script src="dev/arena-prototype.js?v=20261015-table"></script>
 <script src="dev/starter-pack.js"></script>
 <script src="dev/fate-bench.js"></script>
+<script src="dev/flux-bench.js"></script>
+<script src="dev/arena-validation.js"></script>
 <script>
 (function () {
     const R = window.Rift;
     const q = new URLSearchParams(location.search);
     const $ = id => document.getElementById(id);
     const msg = t => { $('msg').textContent = t; };
+    if (R.ArenaValidation) { R.ArenaValidation.start(); return; }
     if (R.ConditionalBench) { R.ConditionalBench.start(); return; }
     if (R.StarterPackBench) { R.StarterPackBench.start(); return; }
     if (R.FateBench) { R.FateBench.start(); return; }
+    if (R.FluxBench) { R.FluxBench.start(); return; }
     $('mode').value = q.get('mode') || 'practice';
     $('ai').value = R.Battle.AI.levelOf(q.get('ai') || 'competent');
     $('seed').value = q.get('seed') || Math.random().toString(36).slice(2, 8);

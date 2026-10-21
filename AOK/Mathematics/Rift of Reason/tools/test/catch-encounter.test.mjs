@@ -66,8 +66,10 @@ for (const kind of ['net', 'lure', 'tracks', 'picture']) test(`${kind}: real enc
     assert.equal(R.State.get().stats.catches, 1);
     assert.equal(R.State.get().creatures.length, 1);
     assert.match(g.root().textContent, /Caught!/);
+    assert.ok(g.root().querySelector('.result-banner.won'));
     g.reload();
     assert.match(g.root().textContent, /Caught!/);
+    assert.ok(g.root().querySelector('.result-banner.won'), 'a saved catch keeps its clear result');
     assert.equal(R.State.get().stats.catches, 1); assert.equal(R.State.get().items.charm, items - 1);
     g.button('Back to the map').click();
     assert.equal(R.CatchSession.get('test').dismissed, true);

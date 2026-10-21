@@ -23,6 +23,12 @@
         rules: 'Patient Plans is active: select Tomorrow\'s Idea or Clean Slate, and the bar says it lands 1 round later. Play one, then play Hasty Plans from your rule cards: the spell already on the track does not move, but the next one lands sooner.',
         whistle: 'Environmental: Syllo\'s Drill Whistle (gold node) happens at the end of this round. Inspect it: it helps both players. End turn: you both get +1 energy on your next turn. It comes back every 4 rounds as a new node.',
         trending: 'Environmental: the Algorithm\'s Trending boosts the rival\'s strongest creature at the end of this round, and every 2 rounds. Select Leap Ahead: the bar says it skips Trending for good. Play it, then Nostalgia: Fate goes back over the skipped space, and it still never happens. The next Trending is a new node.',
+        'roll-call': 'Syllo calls roll: both players draw one card. Inspect the gold event, then End turn. A full hand or empty deck draws nothing.',
+        'marked-deck': 'Corvina draws one card. Inspect the event: the forecast never tells you which card. Leap Ahead skips it; Nostalgia never revives it.',
+        'oven-timer': 'Mrs Crumb heals one damage on every creature. Inspect the gold event: it names the creatures that would heal now. End turn to watch it happen.',
+        curfew: 'Clobber stops your strongest creature from attacking or using Activate next turn. Leftmost wins a tie. Inspect it, then End turn, or leap past it.',
+        'late-paperwork': 'Pip brings late paperwork: both players draw one card. Keep space in your hand for it. End turn to resolve the event.',
+        objection: 'Fin gives your strongest creature -1 attack until its next turn ends. Inspect the forecast. End turn to see it, or Leap Ahead to skip it.',
         full: 'Your side is full and so is your hand. Tomorrow\'s Idea, Delayed Observation and Remember This are already on the Fate track: End turn and read what happens (nothing arrives, nothing is drawn, Zuckerborg stays in the discard pile). Each is still used up.',
     };
     let selected = CASES[q.get('fate')] ? q.get('fate') : 'you-cast';
@@ -49,6 +55,10 @@
         const theirs = ['siuuugull', 'beastie', 'astrophysicat', 'lobstorian', 'tremendoodle', 'kardashiant'];
         // #128: the encounter plans, as js/ui/battles.js and data/map.js give them (first moved to round 1 here).
         const ENV = { whistle: [{ def: 'drill-whistle', first: 1, every: 4, side: null }], trending: [{ def: 'trending', first: 1, every: 2, side: 1 }] };
+        ['roll-call', 'marked-deck', 'oven-timer', 'curfew', 'late-paperwork', 'objection'].forEach(def => {
+            ENV[def] = [{ def, first: 1, every: 4, side: def === 'marked-deck' ? 1 : ['curfew', 'objection'].includes(def) ? 0 : null }];
+            MINE[def] = ['leap-ahead', 'nostalgia', 'clockwork'];
+        });
         let s = E.createBattle({ seed: 'fate-bench-' + selected, environment: ENV[selected] || null,
             players: [{ name: 'You', team: mine.map((x, i) => inst(x, i, 0)), tactics: MINE[selected] || (rival ? ['nostalgia', 'clockwork'] : ['clean-slate', 'clockwork']) },
                 { name: 'Practice rival', team: theirs.map((x, i) => inst(x, i, 1)), tactics: rival || selected === 'leap' ? ['clean-slate'] : ['second-wind'] }],
@@ -79,6 +89,7 @@
         if (selected === 'five') s.axioms.active = { 'fate-capacity': 'open-calendar' };
         if (selected === 'rules') { s.axioms.active = { 'fate-delay': 'patient-plans' }; s.players[0].axHand = ['hasty-plans', 'open-calendar']; }
         if (selected === 'mercy') s.axioms.active = { defeat: 'mercy' };
+        if (selected === 'oven-timer') ['p0c1', 'p1c1'].forEach(cid => { s.cards[cid].damage = 1; });
         // Plenty of hearts, so the case always reaches the wipe (hero damage is not what this bench shows).
         s.players.forEach(P => { P.energy = 10; P.capacity = 10; P.hearts = P.maxHearts = 30; });
         s.phase = 'main';

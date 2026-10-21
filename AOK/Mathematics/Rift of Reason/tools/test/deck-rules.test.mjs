@@ -101,6 +101,8 @@ test('saved decks: kept exactly as saved, problems listed for repair, legacy inv
     s.team = s.creatures.map(c => c.uid);
     s.deckTactics = ['step-by-step', 'step-by-step', 'look-closer', 'look-closer', 'look-closer', 'counterexample', 'eureka', 'eureka', 'pep-talk', 'stand-firm'];
     s.axiomLoadout = ['mercy', 'mercy', 'mercy', 'thrift', 'underdog', 'study', 'arrival', 'vigilance', 'choice', 'abundance'];
+    s.version = 5; delete s.cardPrints;
+    Object.assign(s, S.migrate(s)); // an actual legacy unlock grants the formerly usable pair
     const before = J(s);
     const own = S.ownDeck(s);
     assert.equal(own.check.valid, false);
@@ -127,6 +129,7 @@ test('backup codes round-trip a legal custom deck with duplicated axioms and an 
     s.avatar = { type: 'owlet', variant: 'girl', nickname: 'Ida', realName: 'Ida' };
     REASON3.concat(OTHERS).forEach((sp, i) => s.creatures.push(W.State.makeCreature(sp, { uid: 'u' + i })));
     W.State.unlockColourTactics(s);
+    W.State.grantTactic('step-by-step', s); // earn the second actual copy used below
     s.team = s.creatures.map(c => c.uid);
     s.deckTactics = ['step-by-step', 'step-by-step', 'counterexample', 'counterexample', 'eureka', 'pep-talk', 'stand-firm', 'second-wind'];
     s.axiomLoadout = ['mercy', 'mercy', 'thrift', 'thrift', 'underdog', 'study', 'arrival', 'vigilance', 'choice', 'abundance'];
@@ -196,12 +199,36 @@ const plusFor = (body, name) => body.querySelectorAll('button').find(b => b.getA
 const minusFor = (body, name) => body.querySelectorAll('button').find(b => b.getAttribute('aria-label') === 'Remove one ' + name);
 const toggle = (input, on) => { input.checked = on; input.dispatchEvent({ type: 'change', target: input }); };
 
+test('print folders show foil counts, protect saved copies and settle a release only once', () => {
+    const t = game((s, St) => {
+        St.grantTactic('peer-review', s); St.grantTactic('peer-review', s, { foil: true });
+        s.deckTactics = ['peer-review'];
+        St.grantAxiom('infinity', s, { foil: true }); s.axiomLoadout = ['infinity'];
+    });
+    const folder = t.R.Collection.editCardFolders();
+    assert.match(text(folder.body), /2\/4 owned · 1 foil · 1 in deck/);
+    const release = folder.body.querySelectorAll('button').find(n => n.textContent === 'Release one normal Peer Review');
+    assert.ok(release); release.click();
+    const confirm = t.modals.at(-1), commit = button(confirm, 'Release copy');
+    assert.ok(button(confirm, 'Cancel release'), 'shared modal recognizes Cancel for Escape dismissal');
+    assert.equal(t.R.State.cardCopies('tactic', 'peer-review', t.save), 2, 'confirmation has not released anything');
+    commit.onclick(); commit.onclick();
+    assert.deepEqual(J(t.R.State.printsOf('tactic', 'peer-review', t.save)), [true]);
+    assert.equal(t.R.State.cardRoom('tactic', 'peer-review', t.save), 3);
+    const protectedButtons = folder.body.querySelectorAll('button').filter(n => /Release one foil (Peer Review|Axiom of Infinity)/.test(n.textContent));
+    assert.equal(protectedButtons.length, 2); assert.ok(protectedButtons.every(n => n.disabled));
+    assert.equal(t.g.document.activeElement.dataset.printFolder, 'tactic:peer-review', 'release keeps keyboard focus on the updated folder');
+    assert.match(text(folder.body), /One copy released/);
+});
+
 test('the deck builder shows copy and quota counts, refuses a third copy or a broken quota with a reason, and saves only a legal deck', () => {
     const t = game((s, St) => {
         ['astrophysicat', 'astrophysicat', 'astrophysicat', 'khaby', 'kardashiant', 'kardashiant', 'eelish', 'eelish', 'keanu', 'keanu', 'beansprout', 'beansprout']
             .forEach((sp, i) => s.creatures.push(St.makeCreature(sp, { uid: 'c' + i })));
         St.unlockColourTactics(s);
         St.grantTactic('patient-proof', s);
+        St.grantTactic('patient-proof', s);
+        St.grantTactic('step-by-step', s);
     });
     const dialog = t.R.Collection.editOwnDeck();
     const body = dialog.body;
@@ -256,6 +283,7 @@ test('an invalid saved deck opens as saved for repair, and battles say what to f
         // Made under the older rule: one Reason creature was enough for any number of Reason tactics.
         s.deckTactics = ['step-by-step', 'step-by-step', 'qed', 'counterexample', 'pep-talk', 'stand-firm', 'eureka', 'second-wind', 'clockwork', 'rethink'];
         St.grantTactic('qed', s);
+        St.grantTactic('step-by-step', s);
     });
     t.R.Battles.practice();
     assert.equal(t.routes.length, 0, 'no battle starts');
@@ -281,7 +309,8 @@ test('an invalid saved deck opens as saved for repair, and battles say what to f
 });
 
 test('the axiom builder takes up to two copies of a rule and refuses a third or an eleventh card', () => {
-    const t = game(() => {});
+    // An explicit legacy loadout remains editable after the #101 starter replacement.
+    const t = game(save => { save.axiomLoadout = ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy']; });
     const dialog = t.R.Collection.editAxiomDeck();
     const body = dialog.body;
     const reject = body.querySelector('.deck-reject');

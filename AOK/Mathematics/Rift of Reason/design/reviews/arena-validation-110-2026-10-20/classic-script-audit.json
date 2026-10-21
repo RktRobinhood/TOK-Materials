@@ -1,0 +1,12 @@
+{
+  "scripts": 101,
+  "localStyles": 26,
+  "missing": [],
+  "nonRelativeRuntime": [],
+  "optionalExternalFonts": [
+    "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap"
+  ],
+  "modules": false,
+  "battleUsesFetchOrImports": false,
+  "note": "Static entry-point audit; query strings stripped for filesystem resolution. Google font stylesheet is optional with system fallbacks. Existing mounted/engine regressions run without HTTP. This is not a browser file:// playthrough: available browser policy rejects that protocol."
+}

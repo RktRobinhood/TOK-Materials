@@ -682,7 +682,83 @@
         s.players[p].board.forEach(cid => { if (best == null || H.attack(s, cid) > H.attack(s, best)) best = cid; });
         return best;   // leftmost on a tie
     }
+    // Draw forecasts value only a concealed card, never the hidden top of the deck.
+    function environmentalDraw(name, source, art, both) {
+        return {
+            name, source, art,
+            summary: (whose, ctx) => both ? 'both players draw 1 card from their own deck.'
+                : (ctx.who === 'you' ? 'you draw' : ctx.who + ' draws') + ' 1 card from their own deck.',
+            idle: 'an empty deck or full hand draws nothing.',
+            text: name + ': ' + (both ? 'Both players draw' : source + ' draws') + ' 1 card. An empty deck or full hand draws nothing. Leap past this event to skip it.',
+            resolve(api, ev) {
+                (both ? [0, 1] : [ev.side]).forEach(p => {
+                    if (!api.draw(p)) api.emit({ t: 'tactic', text: name + ': no card is drawn for ' + api.s.players[p].name + ' (empty deck or full hand).' });
+                });
+            },
+            project(s, ev, H) {
+                const players = s.players.slice(), cards = Object.assign({}, s.cards);
+                (both ? [0, 1] : [ev.side]).forEach(p => {
+                    const P = s.players[p];
+                    if (!P.deck.length || !H.handRoom(s, p, 1)) return;
+                    const cid = 'env-draw-' + ev.id + '-' + p;
+                    cards[cid] = { cid, kind: 'concealed', owner: p, controller: p };
+                    players[p] = Object.assign({}, P, { hand: P.hand.concat([cid]) });
+                });
+                return Object.assign({}, s, { players, cards });
+            },
+        };
+    }
     Rift.data.environments = {
+        'roll-call': environmentalDraw('Roll Call', 'Sergeant Syllo', 'npc/sergeant-syllo', true),
+        'marked-deck': environmentalDraw('Marked Deck', 'Corvina', 'npc/corvina', false),
+        'late-paperwork': environmentalDraw('Late Paperwork', 'Pip', 'npc/clerk', true),
+        'oven-timer': {
+            name: 'Oven Timer', source: 'Mrs Crumb', art: 'npc/villager-baker',
+            summary: 'every creature in play heals 1 damage.',
+            idle: 'no damaged creature means nothing heals.',
+            text: 'The oven rings. Every creature in play heals 1 damage. Trade before it rings, or leap past it to skip the healing.',
+            resolve(api) { api.s.players.forEach(P => P.board.forEach(cid => api.heal(cid, 1))); },
+            project(s) {
+                const cards = Object.assign({}, s.cards);
+                s.players.forEach(P => P.board.forEach(cid => { cards[cid] = Object.assign({}, cards[cid], { damage: Math.max(0, cards[cid].damage - 1) }); }));
+                return Object.assign({}, s, { cards });
+            },
+        },
+        'curfew': {
+            name: 'Curfew', source: 'Constable Clobber', art: 'npc/villager-constable',
+            summary: whose => whose + ' creature with the most attack cannot attack or Activate on its next turn.',
+            idle: 'there is no creature to stop.',
+            text: 'Curfew stops your creature with the most attack (leftmost on a tie), chosen when it happens. It cannot attack or Activate on its next turn. Spread your attack, or leap past Curfew to skip it.',
+            resolve(api, ev, H) {
+                const cid = strongestOf(api.s, ev.side, H);
+                if (!cid) { api.emit({ t: 'tactic', text: 'Curfew: there is no creature to stop.' }); return; }
+                api.freezeNextTurn(cid);
+                api.emit({ t: 'tactic', text: 'Curfew: ' + api.name(cid) + ' cannot attack or Activate on its next turn.' });
+            },
+            project(s, ev, H) {
+                const cid = strongestOf(s, ev.side, H);
+                return cid ? Object.assign({}, s, { cards: Object.assign({}, s.cards, { [cid]: Object.assign({}, s.cards[cid], { frozen: true }) }) }) : s;
+            },
+        },
+        'objection': {
+            name: 'Objection!', source: 'Prosecutor Fin', art: 'npc/prosecutor',
+            summary: whose => whose + ' creature with the most attack gets -1 attack until the end of its next turn.',
+            idle: 'there is no creature to question.',
+            text: 'Fin questions your creature with the most attack (leftmost on a tie), chosen when it happens. It gets -1 attack until the end of its next turn. Attack first, spread your attack, or leap past this event.',
+            resolve(api, ev, H) {
+                const cid = strongestOf(api.s, ev.side, H);
+                if (!cid) { api.emit({ t: 'tactic', text: 'Objection!: there is no creature to question.' }); return; }
+                api.buffNextTurn(cid, -1, 0, 'Objection!');
+                api.emit({ t: 'tactic', text: 'Objection!: ' + api.name(cid) + ' gets -1 attack until the end of its next turn.' });
+            },
+            project(s, ev, H) {
+                const cid = strongestOf(s, ev.side, H);
+                if (!cid) return s;
+                const cards = Object.assign({}, s.cards);
+                cards[cid] = Object.assign({}, cards[cid], { buffs: cards[cid].buffs.concat([{ label: 'Objection!', attack: -1, health: 0, temp: false }]) });
+                return Object.assign({}, s, { cards });
+            },
+        },
         // Gentle: Syllo's practice match. Both sides, so it teaches reading the track, not luck.
         'drill-whistle': {
             name: 'Drill Whistle', source: 'Sergeant Syllo', art: 'npc/sergeant-syllo',

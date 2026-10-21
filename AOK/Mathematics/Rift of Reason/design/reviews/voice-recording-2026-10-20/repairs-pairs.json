@@ -1,0 +1,1292 @@
+{
+  "date": "2026-10-20",
+  "apiRequestsUsed": 0,
+  "baselineFilesChecked": 2997,
+  "baselineUnchanged": true,
+  "reason": "Independent single-file transcripts confirmed the initial spill. Further intended footer-end boundaries are provisional raw-source reconstructions requiring final-hash single-file acceptance.",
+  "finalWordingAcceptance": "Known repairs use measured source intervals. Final-hash transcript availability is recorded per clip; the teacher ended the broad audio audit.",
+  "repairs": [
+    {
+      "id": "narrator-rhkszh",
+      "who": "narrator",
+      "expectedText": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\narrator-rhkszh.mp3",
+      "originalSha256": "fad30e38496baf19e355540e509bd3e3652c774224a460b50693a571acab520d",
+      "finalSha256": "64c6835e3a6440491590eedc0220a2ce431e8cbcda20ec19e61d739c28216022",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\narrator-esv7pg-10.wav",
+      "rawTakeSha256": "bcdf57a59d1bff3d2d563721190b586111901dd5aa2dd24c1a2014579f489b7b",
+      "rawMetadataSha256": "35f80a5e79bf82831af104c2c0e2fd2104ad7a41f0f6a16b4cb4bded783d084b",
+      "originalIndex": 8,
+      "originalSplitSample": 2689920,
+      "correctedBoundarySample": 2611461,
+      "measuredSilenceSampleInterval": [
+        2604006,
+        2618915
+      ],
+      "measuredSilenceSeconds": [
+        108.50025,
+        109.12145833333334
+      ],
+      "rawSourceSampleInterval": [
+        2346720,
+        2611461
+      ],
+      "rawSourceSeconds": [
+        97.78,
+        108.810875
+      ],
+      "trimmedRawSampleInterval": [
+        2352952,
+        2606885
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Then Check my grid.",
+      "effects": {
+        "reverb": {
+          "size": 0.6,
+          "decay": 0.7,
+          "damp": 0.5,
+          "mix": 0.12
+        }
+      },
+      "durationSeconds": 10.632,
+      "pcmPeak": 27917,
+      "pcmRms": 4728.7641150837935,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "narrator-3zek8u",
+      "who": "narrator",
+      "expectedText": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\narrator-3zek8u.mp3",
+      "originalSha256": "f34795f72e8d90964406c1efcfebacaeb4812b95e80474ed1e5ef2bf642d8208",
+      "finalSha256": "0e2e74d09c903792c4e2cd37fb20ceb2de847cc468ce940a6b46f85a891f26fd",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\narrator-esv7pg-10.wav",
+      "rawTakeSha256": "bcdf57a59d1bff3d2d563721190b586111901dd5aa2dd24c1a2014579f489b7b",
+      "rawMetadataSha256": "35f80a5e79bf82831af104c2c0e2fd2104ad7a41f0f6a16b4cb4bded783d084b",
+      "originalIndex": 9,
+      "originalSplitSample": 2689920,
+      "correctedBoundarySample": 2611461,
+      "measuredSilenceSampleInterval": [
+        2604006,
+        2618915
+      ],
+      "measuredSilenceSeconds": [
+        108.50025,
+        109.12145833333334
+      ],
+      "rawSourceSampleInterval": [
+        2611461,
+        2954880
+      ],
+      "rawSourceSeconds": [
+        108.810875,
+        123.12
+      ],
+      "trimmedRawSampleInterval": [
+        2616035,
+        2954880
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Then Check my grid.",
+      "effects": {
+        "reverb": {
+          "size": 0.6,
+          "decay": 0.7,
+          "damp": 0.5,
+          "mix": 0.12
+        }
+      },
+      "durationSeconds": 14.28,
+      "pcmPeak": 27669,
+      "pcmRms": 3087.4780916367567,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "granny-iesa5v",
+      "who": "granny",
+      "expectedText": "Fine Print: Lose 1 heart and draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-iesa5v.mp3",
+      "originalSha256": "a775870a5936eb40752387869d63d1a0f580a9e9b94d82e189a5430f47ff6f8d",
+      "finalSha256": "f602864d22219ecd416f75079facf9f51fc252e69dceb11e3bac5e31a678ef33",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-wq0x3b-10.wav",
+      "rawTakeSha256": "d4b0eaaa6a10ead85827342245e64e600f10a52cca10713d77adf97dd65b7548",
+      "rawMetadataSha256": "4296c1a00937619bbe9411e8313d17a0355b501033c4f9460c9f63a0014426a7",
+      "originalIndex": 8,
+      "originalSplitSample": 3201600,
+      "correctedBoundarySample": 3152183,
+      "measuredSilenceSampleInterval": [
+        3144860,
+        3159506
+      ],
+      "measuredSilenceSeconds": [
+        131.03583333333333,
+        131.64608333333334
+      ],
+      "rawSourceSampleInterval": [
+        2865120,
+        3152183
+      ],
+      "rawSourceSeconds": [
+        119.38,
+        131.34095833333333
+      ],
+      "trimmedRawSampleInterval": [
+        2873053,
+        3147739
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Call It Out",
+      "effects": null,
+      "durationSeconds": 11.496,
+      "pcmPeak": 28555,
+      "pcmRms": 3394.2965861512503,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "granny-9cs15t",
+      "who": "granny",
+      "expectedText": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-9cs15t.mp3",
+      "originalSha256": "590b48ec3374f3a90acae1a272323ec06afe56af603de2e002f02e83db129534",
+      "finalSha256": "3279d0e25753d27ba00520c15dd4f9d523d09eb7156f84a76ecd4b3420a91f0b",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-wq0x3b-10.wav",
+      "rawTakeSha256": "d4b0eaaa6a10ead85827342245e64e600f10a52cca10713d77adf97dd65b7548",
+      "rawMetadataSha256": "4296c1a00937619bbe9411e8313d17a0355b501033c4f9460c9f63a0014426a7",
+      "originalIndex": 9,
+      "originalSplitSample": 3201600,
+      "correctedBoundarySample": 3152183,
+      "measuredSilenceSampleInterval": [
+        3144860,
+        3159506
+      ],
+      "measuredSilenceSeconds": [
+        131.03583333333333,
+        131.64608333333334
+      ],
+      "rawSourceSampleInterval": [
+        3152183,
+        3524160
+      ],
+      "rawSourceSeconds": [
+        131.34095833333333,
+        146.84
+      ],
+      "trimmedRawSampleInterval": [
+        3156626,
+        3524160
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Call It Out",
+      "effects": null,
+      "durationSeconds": 15.384,
+      "pcmPeak": 28400,
+      "pcmRms": 3340.738263352057,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "granny-18lr4fy",
+      "who": "granny",
+      "expectedText": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-18lr4fy.mp3",
+      "originalSha256": "b7ba9e63d96bd9833fcbe2ef54041a3e4aea47973a31ecc514d979a84a96a501",
+      "finalSha256": "a8195eb3bf63080983939a87de04bb0a24298dfc95cfa55cc29d3a52ba7811cd",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 0,
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        8160,
+        464595
+      ],
+      "rawSourceSeconds": [
+        0.34,
+        19.358125
+      ],
+      "trimmedRawSampleInterval": [
+        8160,
+        453998
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 18.648,
+      "pcmPeak": 28873,
+      "pcmRms": 4211.586499934586,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "granny-fbjx79",
+      "who": "granny",
+      "expectedText": "Close the Proof: Defeat an enemy creature that has 1 health left. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-fbjx79.mp3",
+      "originalSha256": "44b39a0e27352712ad37913edba71bfbf14b209b0afba14f196d75e3c5a1fd71",
+      "finalSha256": "c6d8f1168f074a1424866702c275997ac503267fc25809b8d6b30fff1f6bbed5",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 1,
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        464595,
+        812944
+      ],
+      "rawSourceSeconds": [
+        19.358125,
+        33.87266666666667
+      ],
+      "trimmedRawSampleInterval": [
+        475190,
+        803131
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 13.728,
+      "pcmPeak": 26712,
+      "pcmRms": 3810.0627789480614,
+      "transcriptStatus": "Current final hash has an unprimed transcript; see review-status.json."
+    },
+    {
+      "id": "granny-p5w95d",
+      "who": "granny",
+      "expectedText": "Lantern: Deal 1 damage to an enemy creature. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-p5w95d.mp3",
+      "originalSha256": "bdfb151d6679bf6d09c649b22e95271d4caa8bd0017bfefa19d8a66a9718d918",
+      "finalSha256": "f54764df3ea6dd106073dc46e9e76edd428981d0a22b7b035af45323cd5d4ddb",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 2,
+      "originalRawSourceSampleInterval": [
+        692640,
+        1000320
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        812944,
+        1111284
+      ],
+      "rawSourceSeconds": [
+        33.87266666666667,
+        46.3035
+      ],
+      "trimmedRawSampleInterval": [
+        822756,
+        1107596
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 11.928,
+      "pcmPeak": 24996,
+      "pcmRms": 3659.2397934612686,
+      "originalBoundaryEvidence": "Original error independently identified by single-file transcripts.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-eyqpgw",
+      "who": "granny",
+      "expectedText": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-eyqpgw.mp3",
+      "originalSha256": "89b8254a46dec3391f651391b6e9aff65ac1105bf71f15db1009280f731bc39e",
+      "finalSha256": "2ba4a8a36b794240a03834afb7ce9f03588d5b3c81127f45edb7846e95fdc494",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 3,
+      "originalRawSourceSampleInterval": [
+        1000320,
+        1396320
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        1111284,
+        1538211
+      ],
+      "rawSourceSeconds": [
+        46.3035,
+        64.092125
+      ],
+      "trimmedRawSampleInterval": [
+        1114970,
+        1530292
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 17.376,
+      "pcmPeak": 30316,
+      "pcmRms": 4310.01103381366,
+      "originalBoundaryEvidence": "Original error independently identified by single-file transcripts.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-11ttr18",
+      "who": "granny",
+      "expectedText": "Brainstorm: +1 card activation this turn. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-11ttr18.mp3",
+      "originalSha256": "ef2ceaaf4b499df474fb6fd63359a0cd7092fcb568f75d3c12d05ecebe6f9be7",
+      "finalSha256": "175dfec919e4130bbc77422c3171bd4aa3a9d88419e3c8dd2bbccf9f673e6eb3",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 4,
+      "originalRawSourceSampleInterval": [
+        1396320,
+        1734240
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        1538211,
+        1854451
+      ],
+      "rawSourceSeconds": [
+        64.092125,
+        77.26879166666667
+      ],
+      "trimmedRawSampleInterval": [
+        1546129,
+        1846528
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 12.576,
+      "pcmPeak": 31962,
+      "pcmRms": 4680.430008825702,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-11jd8wk",
+      "who": "granny",
+      "expectedText": "What If?: Swap a creature's attack and health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-11jd8wk.mp3",
+      "originalSha256": "442b352100a16e69d5bff28ae6d170e3c0f1997cd2ae91550a18e4af7e3b032b",
+      "finalSha256": "6c983c747f12cfd841dd8bc9c7c147668e52a750905d2f91eacc9dfd462e3d40",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 5,
+      "originalRawSourceSampleInterval": [
+        1734240,
+        2044800
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        1854451,
+        2157782
+      ],
+      "rawSourceSeconds": [
+        77.26879166666667,
+        89.90758333333333
+      ],
+      "trimmedRawSampleInterval": [
+        1862372,
+        2155609
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 12.288,
+      "pcmPeak": 30665,
+      "pcmRms": 3821.2037194448117,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-xdnqze",
+      "who": "granny",
+      "expectedText": "Recall: Return your most recently defeated creature to your hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-xdnqze.mp3",
+      "originalSha256": "0e8e1679a89a9f32acae64f5745d08adb7052d15dbfb46f989454e4ff113c67d",
+      "finalSha256": "052efe1c12ba587e3a5c04b45de40bdb637a81cfe17f0304efb87ed0a9a0d839",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 6,
+      "originalRawSourceSampleInterval": [
+        2044800,
+        2400000
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        2157782,
+        2557278
+      ],
+      "rawSourceSeconds": [
+        89.90758333333333,
+        106.55325
+      ],
+      "trimmedRawSampleInterval": [
+        2159954,
+        2545322
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 16.128,
+      "pcmPeak": 24949,
+      "pcmRms": 3500.248039999145,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-mr0ca7",
+      "who": "granny",
+      "expectedText": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-mr0ca7.mp3",
+      "originalSha256": "a2ae9e3f861df819b66accf219de7a8e094e5bf255e088e57169bfa3c6f1f5ac",
+      "finalSha256": "8eb8dabb5e3d9719d9ce8864cf6cce9f35a3e1d907a5448638db43fcc2eb7b26",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 7,
+      "originalRawSourceSampleInterval": [
+        2400000,
+        2852160
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        2557278,
+        2990374
+      ],
+      "rawSourceSeconds": [
+        106.55325,
+        124.59891666666667
+      ],
+      "trimmedRawSampleInterval": [
+        2569233,
+        2983325
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 17.304,
+      "pcmPeak": 26257,
+      "pcmRms": 3685.7650650201695,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-rla8kz",
+      "who": "granny",
+      "expectedText": "Fine Print: Lose 1 heart and draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-rla8kz.mp3",
+      "originalSha256": "fd4673d9daf9d89eefa55c8309534396aa7de9435e24455e3f2c2af6d92f52d1",
+      "finalSha256": "da41f7e4ba8e2c31bc164e6041273cc199a307d361d2cee8e1ca3d2951e45503",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 8,
+      "originalRawSourceSampleInterval": [
+        2852160,
+        3188160
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        2990374,
+        3319111
+      ],
+      "rawSourceSeconds": [
+        124.59891666666667,
+        138.29629166666666
+      ],
+      "trimmedRawSampleInterval": [
+        2997421,
+        3314866
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 13.296,
+      "pcmPeak": 27350,
+      "pcmRms": 3501.614216127351,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    },
+    {
+      "id": "granny-uscetj",
+      "who": "granny",
+      "expectedText": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+      "originalBackup": "C:\\Users\\mp\\AppData\\Local\\Temp\\rift-voice-repairs-20261020\\pairs-originals\\granny-uscetj.mp3",
+      "originalSha256": "9e09e826a0ac02f3a8dfe273ac973f8f043f6597c3c02684c0a8cd7cca400349",
+      "finalSha256": "f82439e428ca57a93b1225b3a93b621e5cd8092dfc301609b6226d8eb3ad31ab",
+      "rawTake": "C:\\Users\\mp\\.codex\\worktrees\\voice-batch-2026-10-20\\TOK Materials\\AOK\\Mathematics\\Rift of Reason\\tools\\voice-raw\\granny-18lr4fy-10.wav",
+      "rawTakeSha256": "8a24fb45855976edf36c2aaaae54cdfdf59ad47b9412178b8ed889329f4cd4bd",
+      "rawMetadataSha256": "8c7877cde51cddd6d060de5e21d4191df38532fdf7c482b6eff45db491c308e7",
+      "originalIndex": 9,
+      "originalRawSourceSampleInterval": [
+        3188160,
+        3675840
+      ],
+      "originalSplitSample": 328800,
+      "correctedBoundarySamples": [
+        464595,
+        812944,
+        1111284,
+        1538211,
+        1854451,
+        2157782,
+        2557278,
+        2990374,
+        3319111
+      ],
+      "measuredSilenceSampleIntervals": [
+        [
+          451119,
+          478070
+        ],
+        [
+          800252,
+          825636
+        ],
+        [
+          1104717,
+          1117850
+        ],
+        [
+          1527413,
+          1549009
+        ],
+        [
+          1843649,
+          1865252
+        ],
+        [
+          2152730,
+          2162834
+        ],
+        [
+          2542443,
+          2572113
+        ],
+        [
+          2980446,
+          3000301
+        ],
+        [
+          3311987,
+          3326235
+        ]
+      ],
+      "measuredSilenceSeconds": [
+        [
+          18.796625,
+          19.919583333333332
+        ],
+        [
+          33.343833333333336,
+          34.4015
+        ],
+        [
+          46.029875,
+          46.577083333333334
+        ],
+        [
+          63.642208333333336,
+          64.54204166666666
+        ],
+        [
+          76.81870833333333,
+          77.71883333333334
+        ],
+        [
+          89.69708333333334,
+          90.11808333333333
+        ],
+        [
+          105.935125,
+          107.171375
+        ],
+        [
+          124.18525,
+          125.01254166666666
+        ],
+        [
+          137.99945833333334,
+          138.593125
+        ]
+      ],
+      "rawSourceSampleInterval": [
+        3319111,
+        3675840
+      ],
+      "rawSourceSeconds": [
+        138.29629166666666,
+        153.16
+      ],
+      "trimmedRawSampleInterval": [
+        3323355,
+        3675840
+      ],
+      "method": "Continuous raw PCM slices; exact existing trim then applyFx; lamejs mono 24 kHz 48 kbps.",
+      "displacedPhrase": "Click your power to continue; this lesson click does not use it.",
+      "effects": null,
+      "durationSeconds": 14.736,
+      "pcmPeak": 30510,
+      "pcmRms": 3765.3237221983873,
+      "originalBoundaryEvidence": "Provisional candidate boundary chosen from measured silence and repeated footer structure; old error not independently certified.",
+      "transcriptStatus": "Local source reconstruction retained; further transcription stopped at teacher request."
+    }
+  ]
+}

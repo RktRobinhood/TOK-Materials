@@ -1,11 +1,12 @@
 /*
- * A roaming legendary's trick challenge (#111, design/ROAMING-LEGENDARIES.md). Optional, three rounds.
+ * A roaming legendary's trick challenge (#111, design/ROAMING-LEGENDARIES.md). Optional, twelve rounds.
  * The save rules are in js/core/hunts.js, the rounds in js/core/tricks.js; this file only shows them.
  *
  * params: { id }   (a key of Rift.data.hunts; the avatar must stand where the creature waits)
  *
  * - The sign (the instruction) sits in the middle, the evidence under it, then the answers. Pick an
- *   answer, then press Check: nothing is timed and nothing submits by accident.
+ *   answer, then press Check; tap/sequence/wait rounds name their different controls. Sparse Quick!
+ *   rounds have a visible deadline. Only controls belonging to the active round can answer it.
  * - A right answer is saved at once (Hunts.pass), so Leave keeps the progress for a later visit.
  * - A wrong answer is saved before anything is shown (Hunts.fail): the run resets and the creature's
  *   new place is fixed. The map then shows it running there. No hearts, scars or items are touched.
@@ -91,7 +92,13 @@
         return el('div.hunt-scene.hunt-icons' + (scene.gapped ? '.gapped' : ''), { role: 'img', 'aria-label': scene.gapped ? 'A fence of posts with gaps between them' : scene.count + ' pictures to count' }, row);
     }
 
-    const SCENES = { lanterns, records, keys, log, doors, shapeword, icons };
+    function cornerCut() {
+        return el('div.hunt-scene.hunt-corner-cut', { role: 'img', 'aria-label': 'A square with one corner cut off. The straight cut joins the top and left sides, away from the other corners.' }, [
+            el('span', { 'aria-hidden': 'true', html: '<svg viewBox="0 0 160 160" width="160" height="160"><polygon points="55,15 145,15 145,145 15,145 15,55" fill="var(--rift)" stroke="var(--gold)" stroke-width="4"/></svg>' }),
+        ]);
+    }
+    const SCENES = { lanterns, records, keys, log, doors, shapeword, icons,
+        note: scene => el('p.hunt-scene', { text: scene.text }), 'corner-cut': cornerCut };
 
     // ---- the screen ---------------------------------------------------------------------------
 
@@ -112,6 +119,7 @@
             let chosen = null;
             let destroyed = false;
             let busy = false;
+            let phase = 'intro', roundEpoch = 0;
             let timer = null;      // the wait round's countdown
             let hidden = null;     // this round's hidden-in-plain-sight targets: { portrait|title: optionId }
             const mapDef = (Rift.data.maps || {})[d.map] || {};
@@ -143,7 +151,7 @@
             ]);
             rootNode.append(el('div.hunt-wrap', { style: { backgroundImage: 'url("' + Rift.Assets.src(mapDef.scene || 'scene/map', { label: mapDef.name || '' }) + '")' } }, [panel]));
 
-            function toMap() { if (!destroyed) Rift.Router.replace('map'); }
+            function toMap() { if (!destroyed) { phase = 'done'; stopRound(); Rift.Router.replace('map'); } }
             function speak(text) { say.textContent = text ? sp.name + ': "' + text + '"' : ''; }
             // The creature's whole-body pose for this moment (taunt, thinking, happy, shocked, recruited);
             // the idle portrait until that pose's art exists. A still image: no animation.
@@ -174,11 +182,12 @@
                             : el('li', { text: 'One wrong answer starts the game again and sends ' + sp.name + ' running to another place. You lose no hearts.' }),
                         !practice ? el('li', { text: 'Pass all ' + n + ' and ' + sp.name + ' joins you.' }) : null,
                     ].filter(Boolean)),
-                    el('button.btn.primary', { text: back ? 'Go on' : 'Start', onclick: showRound }),
+                    el('button.btn.primary', { text: back ? 'Go on' : 'Start', onclick: nextRound() }),
                 ]);
             }
 
             function stopRound() {
+                roundEpoch += 1;
                 if (timer) clearInterval(timer);
                 timer = null;
                 hidden = null;
@@ -200,26 +209,36 @@
                 sequence: 'Every press counts. A wrong press ends the run.',
             };
 
+            function nextRound() {
+                const epoch = roundEpoch;
+                return () => { if (epoch === roundEpoch) showRound(); };
+            }
+
             function showRound() {
+                if (destroyed || (phase !== 'intro' && phase !== 'feedback')) return;
                 stopRound();
+                phase = 'round';
+                const epoch = roundEpoch;
+                const active = () => !destroyed && !busy && phase === 'round' && epoch === roundEpoch;
+                const answer = value => { if (active()) submit(value); };
                 chosen = null;
                 drawPips();
                 const r = run.rounds[round];
                 pose('thinking');
                 speak(d.say.rounds[round % d.say.rounds.length]);
-                const check = el('button.btn.primary.hunt-check', { text: 'Check', disabled: r.mode !== 'number', onclick: () => submit() });
+                const check = el('button.btn.primary.hunt-check', { text: 'Check', disabled: r.mode !== 'number', onclick: () => answer() });
                 const pressed = [];
                 const pressedLine = el('p.small.muted.hunt-pressed', { role: 'status' });
                 const label = o => [el('span', { text: o.label }), o.sub ? el('span.small.muted', { text: o.sub }) : null];
                 const button = (o, onclick, extra) => el('button.btn.hunt-option' + (o.size ? '.size-' + o.size : '') + (o.flip ? '.flipped' : ''), Object.assign({
-                    dataset: { option: o.id }, onclick,
+                    dataset: { option: o.id }, onclick: () => { if (active()) onclick(); },
                     'aria-label': o.label === '' ? 'A button with no words' : null,
                 }, extra || {}), label(o));
 
                 hidden = {};
                 let link = null;
                 r.options.filter(o => o.place).forEach(o => {
-                    if (o.place === 'sign') link = el('button.hunt-sign-link', { text: r.signLink, onclick: () => submit(o.id) });
+                    if (o.place === 'sign') link = el('button.hunt-sign-link', { text: r.signLink, onclick: () => answer(o.id) });
                     else {
                         hidden[o.place] = o.id;
                         const node = o.place === 'portrait' ? portrait : titleText;
@@ -244,22 +263,22 @@
                         Rift.Audio.sfx('click');
                     }, { 'aria-pressed': 'false' }));
                 } else if (r.mode === 'tap') {
-                    options = plain.map(o => button(o, () => submit(o.id)));
+                    options = plain.map(o => button(o, () => answer(o.id)));
                 } else if (r.mode === 'sequence') {
                     options = plain.map(o => button(o, () => {
                         if (busy) return;
                         pressed.push(o.id);
                         Rift.Audio.sfx('click');
                         pressedLine.textContent = 'Pressed: ' + pressed.map(x => (plain.find(p => p.id === x) || {}).label).join(', ');
-                        if (!Rift.Tricks.onTrack(r, pressed) || pressed.length === r.accept[0].length) submit(pressed.slice());
+                        if (!Rift.Tricks.onTrack(r, pressed) || pressed.length === r.accept[0].length) answer(pressed.slice());
                     }));
                 } else if (r.mode === 'wait') {
-                    options = plain.map(o => button(o, () => submit(o.id)));
+                    options = plain.map(o => button(o, () => answer(o.id)));
                 } else if (r.mode === 'number') {
                     input = el('input.hunt-number', { type: 'text', inputmode: 'numeric', autocomplete: 'off', 'aria-label': 'Your answer',
-                        oninput() { chosen = input.value; check.disabled = !input.value.trim(); },
+                        oninput() { if (active()) { chosen = input.value; check.disabled = !input.value.trim(); } },
                         // preventDefault: the same Enter must not also press the button that takes focus next.
-                        onkeydown(e) { if (e.key === 'Enter') { e.preventDefault(); if (input.value.trim()) submit(); } } });
+                        onkeydown(e) { if (e.key === 'Enter') { e.preventDefault(); if (input.value.trim()) answer(); } } });
                     check.disabled = true;
                 }
 
@@ -267,7 +286,7 @@
                     signNode(r, link),
                     r.scene ? (SCENES[r.scene.kind] || (() => null))(r.scene) : null,
                     HINTS[r.mode] ? el('p.small.muted', { text: HINTS[r.mode] }) : null,
-                    options.length ? el('div.hunt-options' + (r.mode === 'tap' || r.mode === 'sequence' || r.mode === 'wait' ? '.loose' : ''), null, options) : null,
+                    options.length ? el('div.hunt-options' + (r.mode === 'tap' || r.mode === 'sequence' || r.mode === 'wait' ? '.loose' : '') + (r.layout === 'row' ? '.single-row' : ''), null, options) : null,
                     input,
                     pressedLine,
                     r.mode === 'pick' || r.mode === 'multi' || r.mode === 'number' ? el('div.hunt-actions', null, [check]) : null,
@@ -279,10 +298,10 @@
                     const clock = el('p.hunt-clock', { role: 'timer', text: '⏳ ' + left });
                     box.insertBefore(clock, box.children[1] || null);
                     timer = setInterval(() => {
-                        if (destroyed) return stopRound();
+                        if (!active()) return;
                         left -= 1;
                         clock.textContent = '⏳ ' + Math.max(0, left);
-                        if (left <= 0) submit(r.mode === 'wait' ? Rift.Tricks.WAITED : Rift.Tricks.TIMEOUT);
+                        if (left <= 0) answer(r.mode === 'wait' ? Rift.Tricks.WAITED : Rift.Tricks.TIMEOUT);
                     }, 1000);
                 }
                 // A wait round must not start on a focused button (Enter would press it).
@@ -291,10 +310,11 @@
             }
 
             function submit(force) {
-                if (busy || destroyed) return;
+                if (busy || destroyed || phase !== 'round') return;
                 const answer = force != null ? force : chosen;
                 if (answer == null) return;
                 busy = true;
+                phase = 'resolving';
                 const r = run.rounds[round];
                 stopRound();
                 const res = Rift.Tricks.check(r, answer);
@@ -304,29 +324,32 @@
             }
 
             function right() {
-                Rift.Audio.sfx('success');
+                Rift.Audio.sfx(round + 1 < run.rounds.length ? 'success' : 'win');
                 if (!practice) Rift.State.update(s => { H.pass(s, id, attempt, round); });
                 round += 1;
                 drawPips();
                 pose('happy');
                 if (round < run.rounds.length) {
-                    fill([el('p.hunt-result.good', { text: '✔ Correct!' }), el('button.btn.primary', { text: 'Next round', onclick: showRound })]);
+                    phase = 'feedback';
+                    fill([el('p.hunt-result.good', { text: '✔ Correct!' }), el('button.btn.primary', { text: 'Next round', onclick: nextRound() })]);
                     return;
                 }
                 if (practice) {
+                    phase = 'done';
                     Rift.State.update(s => { H.practiced(s, id); });
                     speak(d.say.win);
-                    fill([el('p.hunt-result.good', { text: '✔ All ' + run.rounds.length + '! Good practice.' }), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
+                    fill([Rift.resultBanner('won', 'You won!', 'All ' + run.rounds.length + ' rounds. Good practice.'), el('button.btn.primary', { text: 'Back to the map', onclick: toMap })]);
                     return;
                 }
                 let receipt = null;
+                phase = 'done';
                 Rift.State.update(s => { receipt = H.claim(s, id, attempt); });
                 const inst = receipt && Rift.State.get().creatures.find(c => c.uid === receipt.uid);
                 pose('recruited');
                 speak(d.say.win);
                 leave.style.display = 'none';   // the panel's own button says the same
                 fill([
-                    el('p.hunt-result.good', { text: '★ ' + sp.name + ' joined you!' }),
+                    Rift.resultBanner('won', 'You won!', sp.name + ' joined you!'),
                     Rift.UI.framedCard(d.species, { big: true, inst }),
                     el('p.small', { text: d.tok }),
                     el('button.btn.primary', { text: 'Back to the map', onclick: toMap }),
@@ -337,16 +360,18 @@
                 Rift.Audio.sfx('error');
                 pose('shocked');
                 if (practice) {
+                    phase = 'feedback';
                     round = 0;
                     drawPips();
                     speak(d.say.wrong);
                     fill([
                         el('p.hunt-result.bad', { text: 'Not quite.' }), el('p', { text: why }),
-                        el('div.hunt-actions', null, [el('button.btn', { text: 'Back to the map', onclick: toMap }), el('button.btn.primary', { text: 'Try again', onclick: showRound })]),
+                        el('div.hunt-actions', null, [el('button.btn', { text: 'Back to the map', onclick: toMap }), el('button.btn.primary', { text: 'Try again', onclick: nextRound() })]),
                     ]);
                     return;
                 }
                 // Saved before anything is shown: a reload now can neither retry here nor reroll the place.
+                phase = 'done';
                 let out = null;
                 Rift.State.update(s => { out = H.fail(s, id, attempt, s.map.at); });
                 round = 0;

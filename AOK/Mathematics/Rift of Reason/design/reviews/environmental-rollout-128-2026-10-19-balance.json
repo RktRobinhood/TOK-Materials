@@ -1,0 +1,294 @@
+{
+  "seed": "env128-rollout",
+  "seedsPerAvatar": 1,
+  "policy": "Competent starter vs authored trainer AI; boy avatar power (untweaked), normal trainer team power, Feed copies that avatar (no saved-use history); no bag items; both first players; paired scene on/off",
+  "rows": {
+    "syllo": {
+      "games": 10,
+      "without": {
+        "wins": 2,
+        "turns": 274
+      },
+      "with": {
+        "wins": 3,
+        "turns": 345
+      },
+      "events": {
+        "roll-call": 37
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 1
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "baker": {
+      "games": 10,
+      "without": {
+        "wins": 2,
+        "turns": 260
+      },
+      "with": {
+        "wins": 5,
+        "turns": 249
+      },
+      "events": {
+        "oven-timer": 34
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 1,
+          "with": 2
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 2
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "pip": {
+      "games": 10,
+      "without": {
+        "wins": 2,
+        "turns": 246
+      },
+      "with": {
+        "wins": 2,
+        "turns": 288
+      },
+      "events": {
+        "late-paperwork": 31
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 1,
+          "with": 0
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 1,
+          "with": 2
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "feed": {
+      "games": 10,
+      "without": {
+        "wins": 2,
+        "turns": 195
+      },
+      "with": {
+        "wins": 2,
+        "turns": 187
+      },
+      "events": {
+        "trending": 41
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "frogling": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "fin": {
+      "games": 10,
+      "without": {
+        "wins": 1,
+        "turns": 252
+      },
+      "with": {
+        "wins": 2,
+        "turns": 259
+      },
+      "events": {
+        "objection": 39
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 1,
+          "with": 1
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 1
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "constable": {
+      "games": 10,
+      "without": {
+        "wins": 0,
+        "turns": 215
+      },
+      "with": {
+        "wins": 0,
+        "turns": 208
+      },
+      "events": {
+        "curfew": 34
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    },
+    "card-sharp": {
+      "games": 10,
+      "without": {
+        "wins": 1,
+        "turns": 228
+      },
+      "with": {
+        "wins": 0,
+        "turns": 273
+      },
+      "events": {
+        "marked-deck": 32
+      },
+      "byAvatar": {
+        "owlet": {
+          "games": 2,
+          "without": 1,
+          "with": 0
+        },
+        "mothkin": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "fox": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "frogling": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        },
+        "raven": {
+          "games": 2,
+          "without": 0,
+          "with": 0
+        }
+      }
+    }
+  }
+}

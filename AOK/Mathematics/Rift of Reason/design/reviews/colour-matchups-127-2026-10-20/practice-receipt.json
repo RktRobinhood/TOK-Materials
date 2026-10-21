@@ -1,0 +1,34 @@
+[
+  {
+    "example": 0,
+    "visible": "~\t\t\t192 text Neutral: Reason vs Sense perception. 2 vs 2 effective attack. You take 2; rival takes 2. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 1,
+    "visible": "~\t\t\t192 text Strong: Reason vs Emotion. 3 vs 1 effective attack. You take 1; rival takes 3. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 2,
+    "visible": "~\t\t\t192 text Weak: Emotion vs Reason. 1 vs 3 effective attack. You take 3; rival takes 1. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 3,
+    "visible": "~\t\t\t192 text Weak at 1: Emotion vs Reason. 1 vs 2 effective attack. You take 2; rival takes 1. Weak −1 cannot take positive attack below 1. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 4,
+    "visible": "~\t\t\t192 text Shield: Reason vs Emotion. 3 vs 1 effective attack. You take 1; rival takes 0. Shield blocks a hit even when attack is positive. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 5,
+    "visible": "~\t\t\t192 text Underdog: Reason vs Emotion. 3 vs 1 effective attack. You take 1; rival takes 0. Underdog: only the lower attack hits. Strong is not always better. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 6,
+    "visible": "~\t\t\t192 text Reversed wheel: Reason vs Emotion. 1 vs 3 effective attack. You take 3; rival takes 1. The rule swaps Strong and Weak. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  },
+  {
+    "example": 7,
+    "visible": "~\t\t\t192 text Zero attack: Reason vs Emotion. Zero attack stays 0. You cannot start this attack. Base wheel: Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling? This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence."
+  }
+]

@@ -13,7 +13,8 @@
         Rift.State.ensureStarter();
         // Station card rewards (#124) for places finished before they existed: each slot pays once.
         Rift.World.catchUpCards();
-        Rift.bus.on('state:replaced', () => { Rift.State.ensureStarter(); Rift.World.catchUpCards(); });
+        Rift.World.catchUpWallet();
+        Rift.bus.on('state:replaced', () => { Rift.State.ensureStarter(); Rift.World.catchUpCards(); Rift.World.catchUpWallet(); });
         // Calm motion reduces animation; catch games use static paths in every mode.
         const applyCalm = () => {
             const s = Rift.State.get();

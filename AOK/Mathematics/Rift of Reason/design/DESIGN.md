@@ -14,6 +14,36 @@ Art continuity reaffirmed 12 October: follow [ART-BIBLE.md](ART-BIBLE.md), the a
 
 Later teacher card feedback selects full art over etched foil: transparent creatures should overlap the shipped decorative frame, clipped at the outer card rectangle, with readable live names/rules/stats above both. Teacher clarified13October2026: this is the default normal card appearance, not a cosmetic upgrade. Implemented 15 October in the shared battle renderer, including Granny's short/full lessons: selected A layout, foreground creatures, larger owner deck piles, shared centre-left Axioms and permanent rules panel. Draw cues use current engine and lesson legality without looping motion. Narrow screens stack the guidance, table and rules with scrollable card rows. See [tutorial integration](reviews/tutorial-table-2026-10-15.md) and [foreground frame handoff](reviews/full-art-frame-2026-10-13.md). Saved cosmetic back selection and the broader event/animation work remain #122/#109/#66.
 
+## Shared card activations — implemented 18 October 2026 (#100)
+
+Each player starts their turn with **two card activations**. Every committed creature/tactic/axiom cast, creature attack and manual Activate spends one. Cast Swift then attack uses both; two attacks by the same creature also use both. Entrance, Last Word, retaliation, passives and automatic follow-ups add no charge. Required choices complete the original use. Invalid moves, cancelled target selection and previews spend nothing. A declared attack stopped by a conditional has already spent its use.
+
+Draw choice, End turn, Spark, Bag items and hero powers are separate and spend no card activation. Energy costs, readiness, Guard and individual attack limits still apply. Casting a limit rule spends one before the new total applies. Changing or clearing rules never refunds spent uses; a lower total leaves zero remaining. Unlimited removes only this shared limit. Momentum adds one use for its qualifying owner at turn start; Brainstorm adds one this turn; Think It Over draws for unused uses (maximum two). Spent uses and temporary bonuses reset on the owner's next turn. Existing engine fields/API names (playLimit, playsThisTurn, extraPlays) remain for compatibility; no adventure save shape changes.
+
+Both Granny lessons use this budget. The full lesson adds turn breaks after Counterexample/Underdog and Filter, with a four-round demonstration countdown. The short lesson retains its prediction and independent repair choices. See [verification and balance](reviews/activation-budget-100-2026-10-18.md). This supersedes older free-attack/card-play descriptions below and in the October 7 design.
+
+## Counted spell and Axiom ownership — 21 October 2026 (#131)
+
+Save version6 records individual normal/foil spell and Axiom copies in `cardPrints`; captured creatures retain their existing instance inventory, UIDs and Changes. Ordinary folders hold four copies, normal and foil combined, while decks use at most two and never more than actually owned. The one-owned/one-per-deck Legendary exception applies only to creatures. A spell/Axiom's rarity does not make it a unique keepsake.
+
+The former implicit starter pools become explicit two-normal-copy entitlements. Old unlocked IDs and commons for already caught colours reconcile once to enough normal copies for old legal two-copy decks. Existing loadouts, excess captures and historical fields stay intact. Starter contributions and later grants add actual copies; each new acquisition adds one, with a cosmetic foil flag supplied by its source. An authoritative ready ledger, including empty folders, survives reload and backup import without refilling retired cards. Source receipts prevent repeat starter, colour, trainer, story and clue grants.
+
+Collection's **Spell and Axiom folders** shows quantities and foils. A confirmed release opens a folder slot without paying Coins and protects the copies needed by the saved loadout. Keyboard cancellation and focus restoration use the shared dialog behavior. Counted ownership supplies capacity queries for future pack transactions; it does not itself release a shop, pack pool or new rarity/spawn tuning. See [verification](reviews/card-prints-131-2026-10-21.md).
+
+## Earned Coins and the campfire stall — 21 October 2026 (#133)
+
+The canonical save now includes a Coins wallet and bounded paid-visit receipts. A first completed checked puzzle earns 10 Coins; a first mini-boss or boss win earns 25 total; a successful replay earns 2. Failed checks, Settings, generic story/rest completion and reward reloads pay nothing. Each node keeps only its latest paid visit number. Existing adventures start with zero Coins rather than invented retroactive income.
+
+Completing each of the four chapter bosses saves one free five-card pack credit, once per chapter. Old completed chapters receive these credits on load/import; unavailable packs never consume them. Collection shows the balance and saved credits. At the existing Campfire Clearing, **Shop** opens the pack stall using the shipped shop scene. It shows the approved 50-Coin price, balance and unavailable pool state. Buying stays disabled until #136 can commit actual rewards atomically. Catching and early compatible common-card rewards remain available through play; selling remains #135. See [verification](reviews/wallet-133-2026-10-21.md).
+
+## Relative Flux rules — 19 October 2026 (#101)
+
+Sixteen common ±1/±2 modifiers change the current shared activation allowance (1–6), normal draw count (1–3), next-turn energy growth (−1–3) or creature cost adjustment (−2–2). Owner bonuses apply afterwards; paid casts spend their use first. Repeated modifiers work while effective. A no-op at a bound or against Unlimited cannot be paid for. Fixed finite rules repair Unlimited; Fate resolves a modifier against the value at resolution and consumes an ineffective free flip. Reset clears accumulated values without refunding spent uses or owner bonuses. Legacy absolute card IDs keep their original effects.
+
+The four numeric entries stay in the Axiom dock. Hand/card selection, rule inspection and public Fate forecasts use the engine's current-value projection. The AI uses that same transition, including repeated IDs. New-adventure/default ten: seven introductory modifiers, Limited Memory, Momentum and Two Moves. Generated contributions select seven of the sixteen modifiers, those two optional rules and a finite repair; Constable/later trainers have a 25% chance of Infinity in that last slot. This is construction policy, never weighted drawing. Explicit loadouts and scripted lessons keep their exact lists. The first Constable win grants Infinity once. Save version 5 preserves every old virtual starter ID before rare access changes; old loadouts and codes remain valid.
+
+See [the full contract](drafts/flux-101-2026-10-19/CONTRACT.md), [runtime verification and measured balance](reviews/flux-runtime-101-2026-10-19.md) and [300-match receipt](reviews/flux-balance-101-2026-10-19.json). Classroom tuning remains future feedback.
+
 ## Purpose
 
 A browser game that is the **follow-up activity** for a 4-lesson IB TOK unit introducing Mathematics as an area of knowledge. The teacher teaches the concept; the game gives exposure to more ideas and cements them through replayable puzzles. Students are DP1 (16–17), mostly non-native English speakers at a Danish gymnasium, and love Pokémon.
@@ -51,6 +81,12 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 - The avatar **walks between nodes with a real walk cycle** (≈6 side-view frames, mirrored for left).
 - A chapter jump updates the Journal and tracker to the new chapter's useful leads. Earlier open leads remain available in the Journal, labelled for later revisits.
 
+## Voice completion requirement — teacher, 19 October 2026
+
+The finished game must use recorded audio for every spoken line. Browser-generated speech is not an acceptable final fallback, including when an audio file is missing or playback fails; readable text must remain available. This covers tutorials, hints, replies, narration, creature speech, generated avatar-power explanations and conditional replacement hosts. Intentionally silent text does not need a recording.
+
+Completion requires a complete inventory of reachable speech, recordings and boundary/wording checks for that inventory, and removal of browser speech synthesis from runtime playback. Generated and customized wording must use covered variants or recorded composition. Track remaining gaps in [the voice handoff](drafts/card-arena-2026-10-12/VOICE-NEEDS.md), with early tutorials first. The current browser fallback is temporary production behavior, and existing catalog totals do not certify complete coverage.
+
 ## Avatars
 
 - **5 creature types × boy and girl = 10 avatars**: Owlet, Moth-kin, Fox kit, Frogling, Raven chick. Each type has a small starting perk (e.g. Owlet: one free hint per chapter; Fox: an extra catch-game move or trap heart on Language/Imagination creatures; Moth: lantern reveals one hidden clue; Frogling and Raven: TBD by the builder, same scale).
@@ -66,7 +102,7 @@ Mouse-driven, interactive, **generated fresh each play** (replayable, and hard t
 | 🔵 Reason | Deduction | proof; valid vs true | **Liar's Gate** (knights & knaves) — L1; Demon Bluff village — L2 |
 | 🟡 Language | Definitions, ambiguity, riddles | precise language: all/some/none, or | **Carroll's Venn board** (syllogisms, Lewis Carroll public-domain flavour) — L1 |
 | 🟣 Imagination | Lateral thinking / reframing | insight, impossibility proofs | **Line Drawer** (dot-and-line puzzles in new shapes, Euler paths, impossible layouts) — L1 |
-| ⚪ Memory (colourless) | Pattern breakers / induction | induction vs proof | **Rule Hunter** (2-4-6 task), sequences that break (Moser's circle) — L1 |
+| ⚪ Memory | Pattern breakers / induction | induction vs proof | **Rule Hunter** (2-4-6 task), sequences that break (Moser's circle) — L1 |
 | 🔴 Emotion | Hidden premise / axioms | assumptions before the proof starts | **Switchboard** (logic gates) — L2; tribunal — L3 |
 | 🟢 Sense perception | Seeing vs knowing | visual proofs that lie, misleading charts | **Chart Fixer** — L4 |
 
@@ -110,7 +146,7 @@ Syllo then offers a separate safe practice match at the Fair Gate with a loaned 
 - Players battle with **their own creatures** (team chosen in Collection) plus Tactic cards. Caught creatures **vary** (attack/health ±, sometimes a natural trait); a **Trick Book** teaches one trick.
 - **Shared axiom deck:** choose ten distinct available rules in Collection; the opponent contributes ten; all twenty are shuffled. Axiom cards are drawn into hand and played for energy; a played or flipped rule affects both players and replaces only its own category. The deck is finite: replaced, reset and discarded rules never come back (#117). Axioms can change combat, attack limits, costs, energy growth, draws, healing, arrival, Guard, defeat and even the victory goal (own-zero-hearts wins). Current rules stay on screen.
 - **Fate track:** a central countdown in full **rounds** (#116): the first player's turn, the second player's turn, then one advance. Three rounds to a free flip, then three to a full rule reset, alternating (the same moments as the old six turns). The next flip's rule card is set aside and shown when it is announced, so shared draws cannot replace it. Filter, Next Year, Clockwork, Nostalgia, Hold That Thought and the optional time draws move it by rounds; the Anchor holds one round's end; reaching zero triggers immediately.
-- **Colours = Ways of Knowing** (Reason, Emotion, Sense perception, Language, Imagination; **colourless = Memory**). Simple wheel: each colour beats one, loses to one (+1 attack while fighting the colour it beats).
+- **Colours = Ways of Knowing** (Reason, Emotion, Language, Sense perception, Imagination, Memory). The approved six-colour wheel keeps that clockwise order: next two **Strong +1**, previous two **Weak −1**, opposite and self **Neutral**. Apply it after other attack modifiers. Otherwise-positive attack stays at least 1; zero stays 0. Heroes and explicitly colourless/generic creatures are neutral; Memory is a full colour. Shield/prevention may still give zero damage. The Broken Postulate swaps Strong/Weak. The board's accessible SVG legend and eight isolated text-only practice fights teach this model without playing cards or changing saves (#127).
 - **Changes replace the Fate table (teacher, 14 Oct 2026; build it in #151, read its body and the clarification comment).** The goal is creatures with distinct histories: a student knows what a card normally does, but a Changed copy does something a bit different because of its battles. Scars become meaningful.
   - **Odds:** each defeated collected creature has a **2%** chance of a Change after any battle with stakes (trainer, ghost). Practice battles stay at 0. **Boss battles** multiply the chance (about ×3). **Overkill:** a creature knocked out with **3+ excess damage** gets a big boost (about ×5); the engine must record excess damage when the creature is defeated. Multipliers stack, capped at about 30%. Creatures that were not defeated keep a small positive-only chance. All numbers live in `data/fate.js`; tune them with `tools/sim-battle.mjs`.
   - **One weighted pool of Changes:** *gains* (+1 attack, +1 health, −1 cost, stronger ability), *losses* (−1 attack, −1 health, +1 cost), *sideways* (a different ability, using the warp machinery) and *trade-offs* that narrow a creature (+2 attack / −1 health, +2 health / −1 attack, −1 cost / −1 health, a stronger ability for a stat). Each Change has a scar-style name that tells the story (e.g. *Chipped Ear: +1 attack, −1 health*).
@@ -119,7 +155,7 @@ Syllo then offers a separate safe practice match at the Fair Gate with a loaned 
   - **"Stakes" means the ante** (`js/battle/ante.js`): what each side risks in trainer, boss and ghost battles. It is not the story's stakes clocks (`js/core/stakes.js`).
 - *Superseded (kept for history):* **Fate table** for defeated creatures: fine / scarred / injured (stat or ability loss) / warp-cursed (abilities re-randomised) / permadeath. Good, bad, ugly — but not too punishing; tune by simulation.
   - Tuned odds after 10,000 simulated battles (`node tools/sim-battle.mjs 10000`, `data/fate.js`): **losers** fine 66 / scarred 25 / injured 3.5 / warp 5 / death 0.5; **winners** fine 78 / scarred 20 / injured 1 / warp 1 / death 0. Result: a permanent loss in about 2% of battles (losers only); legendaries never die. Practice battles never roll fate.
-  - Colour wheel (+2 against the colour you beat): Reason > Emotion > Language > Perception > Imagination > Reason; Memory is outside the wheel. Each edge has a TOK flavour line in `data/axioms.js`.
+  - Superseded wheel: +2 against one colour in a five-colour cycle, with Memory outside. The current six-colour signed model above replaces this historical rule; TOK prompts remain in `data/axioms.js`.
   - Balance tweaks from the simulation: Escalate capped at +3, It's Raw reaches power 4.
 - **Ante depends on opponent**: NPC trainers/bosses stake real items/creatures; between classmates the winner gets a **named trophy copy** and only items change hands.
 - (Retired by #151.) Mending is used from the Bag: choose an owned injured creature, then restore one lost power point or its lost ability for one item. Cosmetic scars and warp changes stay. Cancelling spends nothing.
@@ -129,6 +165,10 @@ Syllo then offers a separate safe practice match at the Fair Gate with a loaned 
 - Optional clue trail: `clues.html` supplies a printable classroom QR/plain code and a slide code; the Collection rumour board also offers a sourced web lookup. Fixed once-only codes unlock lore, Booleon's rare spawn eligibility or Age of Wonder in the axiom pool. Story rumours remain alternative unlocks. Short strategy notes grow after completed puzzle encounters, never from honour bonus reports. The trail does not gate the story or alter spoken scripts.
 
 ## Tech
+
+### Clear results
+
+Wins use a prominent gold/green banner, star emblem and explicit short text (You won!, You solved it! or Caught!). Losses and draws have different words and emblems, so colour and sound are never the only outcome cues. Calm motion and OS reduced motion keep the same static result. A short ascending Kenney CC0 steel jingle plays for win/caught; a draw never plays the loss cue. Post-battle Changes are listed without a competing gloomy stinger. Showing a saved result does not itself replay audio or rewards. Source/licence and verification: `design/reviews/victory-feedback-160-2026-10-18.md`.
 
 ### Adventure trailer
 

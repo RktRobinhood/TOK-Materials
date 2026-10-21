@@ -14,6 +14,7 @@ const pct = (a, b) => (100 * a / Math.max(1, b)).toFixed(1) + '%';
 // still have been played (a legal creature play means it is affordable and the board has room).
 function watch(s, levels, tally) {
     let guard = 0;
+    const ownTurns = [0, 0];
     while (E.winner(s) == null) {
         const p = E.decider(s);
         const level = levels[p];
@@ -22,15 +23,21 @@ function watch(s, levels, tally) {
         if (a.type === 'axiom' && level === 'normal' && TWISTS.includes(a.choice)) t.twists.push(a.choice);
         if (s.phase === 'main' && a.type === 'end') {
             t.ends += 1;
+            ownTurns[p]++;
+            if (ownTurns[p] <= 3) { t.earlyEnds++; t.earlyBoard += s.players[p].board.length; }
+            if (E.playsLeft(s, p) > 0 && !E.legalActions(s).some(x => ['play', 'axiom', 'attack', 'activate'].includes(x.type))) t.stalled++;
             t.unspent += s.players[p].energy;
+            if (E.playsLeft(s, p) > 0) { t.endsWithUses++; t.unspentWithUses += s.players[p].energy; }
             if (E.legalActions(s).some(x => x.type === 'play' && s.cards[x.cid].kind === 'creature')) t.passed += 1;
         }
         s = E.applyAction(s, a);
         if (++guard > 6000) throw new Error('battle did not finish');
     }
+    const result = tally[levels[0]];
+    result.matches++; result.turns += s.turn; result.maxTurns = Math.max(result.maxTurns, s.turn);
     return s;
 }
-const blank = () => ({ ends: 0, unspent: 0, passed: 0, twists: [] });
+const blank = () => ({ earlyEnds: 0, earlyBoard: 0, stalled: 0, matches: 0, turns: 0, maxTurns: 0, ends: 0, unspent: 0, endsWithUses: 0, unspentWithUses: 0, passed: 0, twists: [] });
 
 // Practice-style matchups: random teams, starter tactics, ten random starter axioms each.
 function practice(tag, g, first) {
@@ -44,7 +51,7 @@ function practice(tag, g, first) {
     });
 }
 
-test('over 300 seeded games Normal and Competent develop their board and Normal never plays the big twists', () => {
+test('over 300 seeded games Normal and Competent develop their board and Normal never plays the big twists', t => {
     const tally = { normal: blank(), competent: blank() };
     let hardWins = 0, heGames = 0;
     for (let g = 0; g < 50; g++) {
@@ -62,8 +69,9 @@ test('over 300 seeded games Normal and Competent develop their board and Normal 
         const t = tally[level];
         assert.ok(t.ends > 500, level + ' ended enough turns to judge (' + t.ends + ')');
         assert.ok(t.passed / t.ends < 0.02, level + ' passed with an affordable creature and room in ' + pct(t.passed, t.ends) + ' of End turns');
-        assert.ok(t.unspent / t.ends < 2.2, level + ' leaves ' + (t.unspent / t.ends).toFixed(2) + ' energy unspent on average');
+        assert.ok(t.unspentWithUses / Math.max(1, t.endsWithUses) < 2.2, level + ' leaves ' + (t.unspentWithUses / Math.max(1, t.endsWithUses)).toFixed(2) + ' energy while activations remain (all turns: ' + (t.unspent / t.ends).toFixed(2) + ')');
     }
+    t.diagnostic(JSON.stringify({ matches: 300, competentWins: hardWins, competitiveGames: heGames, levels: Object.fromEntries(Object.entries(tally).map(([level, x]) => [level, { endTurns: x.ends, earlyMeanBoard: +(x.earlyBoard / x.earlyEnds).toFixed(2), stalledTurns: x.stalled, passedAffordableCreature: x.passed, meanUnspentEnergy: +(x.unspent / x.ends).toFixed(2), meanUnspentWithUses: +(x.unspentWithUses / Math.max(1, x.endsWithUses)).toFixed(2) }])), meanMatchTurns: +((tally.normal.turns + tally.competent.turns) / 300).toFixed(2), maxMatchTurns: Math.max(tally.normal.maxTurns, tally.competent.maxTurns) }));
     assert.deepEqual(tally.normal.twists, [], 'Normal played a twist rule card');
     // Target 65–75% (simulated ladder); 200 games here, so a wider band.
     assert.ok(hardWins / heGames >= 0.6 && hardWins / heGames <= 0.85, 'Competent beats Normal ' + pct(hardWins, heGames) + ' (Normal beatable, not hopeless)');

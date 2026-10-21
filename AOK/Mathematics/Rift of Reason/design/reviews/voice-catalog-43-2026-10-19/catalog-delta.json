@@ -1,0 +1,349 @@
+{
+  "baseline": "09dd846",
+  "before": {
+    "total": 2610,
+    "recorded": 2531,
+    "missing": 79,
+    "skipped": 6
+  },
+  "after": {
+    "total": 2645,
+    "recorded": 2531,
+    "missing": 114,
+    "skipped": 6
+  },
+  "added": [
+    {
+      "id": "granny-j31sif",
+      "who": "granny",
+      "text": "New creatures are asleep. Zzz. Kim can attack on your next turn.",
+      "say": "New creatures are asleep. Zzz. Kim can attack on your next turn.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1nht4xg",
+      "who": "granny",
+      "text": "My turn. I have only 1 energy, and my cards cost more. So I just draw.",
+      "say": "My turn. I have only 1 energy, and my cards cost more. So I just draw.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1hezu4",
+      "who": "granny",
+      "text": "Your turn again. Your energy grew to 2, and Kim is awake.",
+      "say": "Your turn again. Your energy grew to 2, and Kim is awake.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1hne7ay",
+      "who": "granny",
+      "text": "Ouch! 3 hearts left. That attack used one activation.",
+      "say": "Ouch! 3 hearts left. That attack used one activation.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1g954zu",
+      "who": "granny",
+      "text": "I played Khaby Llame. See his silver shield frame? That means Guard.",
+      "say": "I played Khaby Llame. See his silver shield frame? That means Guard.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-su5efv",
+      "who": "granny",
+      "text": "In 4 rounds, Fate comes back and resets all rules.",
+      "say": "In 4 rounds, Fate comes back and resets all rules.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-6t7ssz",
+      "who": "granny",
+      "text": "Both took 1 damage. Damage stays: the number in the heart shows the health left.",
+      "say": "Both took 1 damage. Damage stays: the number in the heart shows the health left.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-kgw80h",
+      "who": "granny",
+      "text": "Khaby's own ability also took Astrophysicat's ability away. See: No ability.",
+      "say": "Khaby's own ability also took Astrophysicat's ability away. See: No ability.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-z17dn2",
+      "who": "granny",
+      "text": "Khaby lost his Guard. The way to me is open.",
+      "say": "Khaby lost his Guard. The way to me is open.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-4szhqx",
+      "who": "granny",
+      "text": "Shakirattle! 3 attack, and Elusive: tactic cards can't target her.",
+      "say": "Shakirattle! 3 attack, and Elusive: tactic cards can't target her.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-155ac5f",
+      "who": "granny",
+      "text": "Khaby hit you for 1 heart. The pictures on the left, Recent plays, show what I did.",
+      "say": "Khaby hit you for 1 heart. The pictures on the left, Recent plays, show what I did.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-tuorir",
+      "who": "granny",
+      "text": "Your turn. Shakirattle hits hard. Let's deal with my creatures.",
+      "say": "Your turn. Shakirattle hits hard. Let's deal with my creatures.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-fk4a70",
+      "who": "granny",
+      "text": "Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.",
+      "say": "Khaby is defeated. That used one activation. Each cast, attack or Activate uses one. You have two per turn.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-dfpemt",
+      "who": "granny",
+      "text": "One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.",
+      "say": "One more thing: Kim has an ability, Filter. Pay 1 energy, and the next Fate event comes 2 rounds sooner.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ycb8ih",
+      "who": "granny",
+      "text": "Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.",
+      "say": "Shakirattle took 1 damage. Astrophysicat took 0. Same cards, different rule, different result.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-13hcnw7",
+      "who": "granny",
+      "text": "Only 2 hearts left! Those two attacks used both activations.",
+      "say": "Only 2 hearts left! Those two attacks used both activations.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-gvw9ns",
+      "who": "granny",
+      "text": "I played a rule card! Look at the Win tile.",
+      "say": "I played a rule card! Look at the Win tile.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-xfnpgl",
+      "who": "granny",
+      "text": "Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?",
+      "say": "Hint: what will the next Reset on the Fate track do to my new Win rule? Which of your creatures can move Fate?",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1nks571",
+      "who": "granny",
+      "text": "Kim's Filter (1 energy) brings the Reset 2 rounds sooner. Click Kim, then press Activate.",
+      "say": "Kim's Filter brings the Reset 2 rounds sooner. Click Kim, then press Activate.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-hm2z2d",
+      "who": "granny",
+      "text": "Careful! Now if MY hearts reach 0, I WIN. Don't hit me now. Read the Win tile.",
+      "say": "Careful! Now if MY hearts reach 0, I WIN. Don't hit me now. Read the Win tile.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1yfxf8t",
+      "who": "granny",
+      "text": "Fate reset! All rules are back to the basics: my rule AND yours. Zero hearts loses again.",
+      "say": "Fate reset! All rules are back to the basics: my rule AND yours. Zero hearts loses again.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-8qsmvz",
+      "who": "granny",
+      "text": "Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.",
+      "say": "Each turn starts with one draw. Press Your deck. This short match uses loaned cards: your collection is safe.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1q2xabm",
+      "who": "granny",
+      "text": "You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.",
+      "say": "You have 1 energy. Kim costs 1: the blue number. Yellow is attack; red is health. Drag Kim onto your side, or click her then Play.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1ecqpw8",
+      "who": "granny",
+      "text": "New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.",
+      "say": "New creatures sleep until your next turn. End turn. Granny will draw and pass; then Kim can attack.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-f70pc5",
+      "who": "granny",
+      "text": "Draw first. Your energy grows and refills each turn.",
+      "say": "Draw first. Your energy grows and refills each turn.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-2njnku",
+      "who": "granny",
+      "text": "Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.",
+      "say": "Granny has 2 hearts and no blocker. Drag Kim onto her portrait, or click Kim then Granny. Each cast, attack or Activate uses one of your two activations. This hit takes one heart.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-qdr96b",
+      "who": "granny",
+      "text": "End turn. Watch Granny change the Win rule. Rule cards affect both players.",
+      "say": "End turn. Watch Granny change the Win rule. Rule cards affect both players.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1rgyz2",
+      "who": "granny",
+      "text": "Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?",
+      "say": "Read the Win tile in Axioms. Granny has 1 heart. If Kim attacks her now, whose zero hearts will win the match?",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-fwxv1x",
+      "who": "granny",
+      "text": "Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.",
+      "say": "Your decision. You may attack, play your Win rule card, or use Kim’s Filter to bring Fate’s Reset sooner. Read their effects and choose. No pointer yet.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1i4nbnl",
+      "who": "granny",
+      "text": "A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.",
+      "say": "A hit would make Granny win. Your Win rule card or Kim’s Filter can restore the original goal.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-q15vt1",
+      "who": "granny",
+      "text": "Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.",
+      "say": "Play your Win rule card, or click Kim then Activate Filter. Filter uses her attack for this turn.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-8g6nmb",
+      "who": "granny",
+      "text": "Zero hearts loses again. You changed the starting rule, so the same attack has a different result.",
+      "say": "Zero hearts loses again. You changed the starting rule, so the same attack has a different result.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-1hq0d0z",
+      "who": "granny",
+      "text": "Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.",
+      "say": "Read Win: the enemy hero to zero hearts. For the last test, end turn. Granny will pass, then you will draw.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-sp5sm8",
+      "who": "granny",
+      "text": "Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.",
+      "say": "Attack Granny with Kim. Same creature, same hit: this time the current Win rule makes you win.",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    },
+    {
+      "id": "granny-fs6iif",
+      "who": "granny",
+      "text": "Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?",
+      "say": "Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?",
+      "mood": "Patient guidance; dry humour, clear instructions",
+      "where": "card lesson"
+    }
+  ],
+  "removed": [],
+  "activationFollowup": [
+    {
+      "id": "granny-1hne7ay",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-su5efv",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-fk4a70",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-zyn42c",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-13hcnw7",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-1dj60wz",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    },
+    {
+      "id": "granny-2njnku",
+      "discovered": true,
+      "lesson": [
+        "lesson1"
+      ]
+    }
+  ]
+}

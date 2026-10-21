@@ -3,8 +3,8 @@
  * PURE and deterministic: state + action → new state. No DOM.
  *
  * Heroes have hearts (10 by default). Creatures have attack and health; damage stays.
- * Each turn: one draw choice (own deck or the shared axiom deck), then play up to rules.playLimit
- * cards (2 by default; creatures, tactics and axiom cards) for energy, attack with ready creatures
+ * Each turn: one draw choice (own deck or the shared axiom deck), then up to two shared card
+ * activations (rules.playLimit): cast a creature/tactic/axiom for energy, attack with a ready creature
  * (drag at a creature or the enemy hero; Guard must be attacked first), activate
  * abilities (uses that creature's attack), and End turn. Energy capacity grows
  * 1→10 and refills. The Fate track flips/resets the shared rules.
@@ -81,7 +81,7 @@
  *
  * Hero powers (design/AVATARS.md section 1, data/powers.js): players[p].power = { id, tweaks, cooldown,
  * uses } or null (createBattle player.power; Granny's lesson has none). In the main phase the owner
- * may use it for its energy (or hearts with the Blood price tweak). It is not a card play. After
+ * may use it for its energy (or hearts with the Blood price tweak). It is not a card activation. After
  * use, cooldown = recharge + 1 and counts down by 1 at the start of each of the owner's turns; it is
  * ready at 0 (so at most once per turn, and ready on turn 1). Tweaks: powerMods(state, p) → { def,
  * cost, heartCost, recharge, deeper, broader }. powerStatus(state, p) → { id, name, text, cost,
@@ -115,6 +115,13 @@
         fateDelay: 0, scheduleExtra: 0, fateHeroCap: null,
     };
     const PAD_SPECIES = ['astrophysicat', 'zuckerborg', 'siuuugull'];
+    const NUMERIC_RULES = Object.freeze({
+        plays: { field: 'playLimit', min: 1, max: 6, label: 'Activations' },
+        draw: { field: 'drawCount', min: 1, max: 3, label: 'Draw count' },
+        energy: { field: 'growth', min: -1, max: 3, label: 'Energy growth' },
+        cost: { field: 'costDelta', min: -2, max: 2, label: 'Creature cost change' },
+    });
+    const ruleValue = n => n === Infinity ? 'Unlimited' : String(n);
     const KEYWORDS = ['guard', 'swift', 'shield'];
 
     // Tokens (#121, data/tactics.js Rift.data.tokens) are looked up like species, but are never collected.
@@ -158,7 +165,7 @@
         s.reactions = (state.reactions || []).slice();
         s.completedPlays = (state.completedPlays || []).slice();
         s.attackIntent = state.attackIntent ? { ...state.attackIntent } : null;
-        s.axioms = { ...state.axioms, active: { ...state.axioms.active }, deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
+        s.axioms = { ...state.axioms, active: { ...state.axioms.active }, numeric: Object.fromEntries(Object.entries(state.axioms.numeric || {}).map(([k, v]) => [k, { ...v }])), deck: state.axioms.deck.slice(), discard: state.axioms.discard.slice() };
         s.fate = { ...state.fate };
         if (state.fate.queue) s.fate.queue = state.fate.queue.map(ev => ({ ...ev }));   // records change in place (#118)
         s.lastEvents = [];
@@ -182,32 +189,75 @@
     const ruleMemo = new WeakMap();
     function memoFor(s) {
         const active = s.axioms.active;
+        const numeric = s.axioms.numeric || {};
         const m = ruleMemo.get(active);
         if (m) {
             let n = 0, same = true;
             for (const k in active) { n++; if (m.snap[k] !== active[k]) { same = false; break; } }
-            if (same && n === m.n) return m;
+            if (same && n === m.n && Object.keys(NUMERIC_RULES).every(k => {
+                const a = numeric[k], b = m.numeric[k];
+                return a ? b && a.id === b.id && a.value === b.value : !b;
+            })) return m;
         }
         const list = Object.freeze(Object.values(active).map(id => axiomDefs()[id]).filter(Boolean));
         const out = Object.assign({}, RULE_DEFAULTS);
         list.forEach(a => Object.assign(out, a.rules || {}));
-        const memo = { snap: Object.assign({}, active), n: Object.keys(active).length, list, rules: Object.freeze(out) };
+        Object.entries(NUMERIC_RULES).forEach(([cat, def]) => {
+            const rec = numeric[cat];
+            if (rec && rec.id === active[cat]) {
+                if (rec.value === 'unlimited' && cat === 'plays') out[def.field] = Infinity;
+                else if (Number.isInteger(rec.value) && rec.value >= def.min && rec.value <= def.max) out[def.field] = rec.value;
+            }
+        });
+        const memo = { snap: Object.assign({}, active), numeric: Object.fromEntries(Object.entries(numeric).map(([k, v]) => [k, { ...v }])), n: Object.keys(active).length, list, rules: Object.freeze(out) };
         ruleMemo.set(active, memo);
         return memo;
     }
     function activeAxioms(s) { return memoFor(s).list; }
     // Active rule cards that differ from the basics (a `basic` card only restates a default rule).
-    function changedAxioms(s) { return activeAxioms(s).filter(a => !a.basic); }
+    function changedAxioms(s) { return activeAxioms(s).filter(a => NUMERIC_RULES[a.category]
+        ? rules(s)[NUMERIC_RULES[a.category].field] !== RULE_DEFAULTS[NUMERIC_RULES[a.category].field] : !a.basic); }
     // False when playing this axiom card would change nothing: the same rule is already active,
     // or a "back to normal" card while its category is already normal.
     function axiomWouldChange(s, id) {
+        return axiomPreview(s, id).changed;
+    }
+    // One pure transition description for legal casts, free flips, UI and AI. Numeric records are
+    // battle-local JSON values; provenance alone never reconstructs accumulated deltas.
+    function axiomPreview(s, id) {
         const ax = axiomDefs()[id];
-        if (!ax) return false;
-        if (ax.clearRules) return changedAxioms(s).length > 0; // Granny's Spare Axiom: only while a rule is changed
+        if (!ax) return { changed: false, reason: 'Unknown rule.' };
+        const category = ax.category, def = NUMERIC_RULES[category];
+        if (def && (ax.modifier || ax.basic || (ax.rules && def.field in ax.rules))) {
+            const before = rules(s)[def.field], mod = ax.modifier;
+            if (mod && (mod.field !== def.field || ![-2, -1, 1, 2].includes(mod.delta))) return { category, changed: false, reason: 'Invalid numeric modifier.' };
+            const after = mod ? before === Infinity ? Infinity : Math.max(def.min, Math.min(def.max, before + mod.delta)) : ax.rules && def.field in ax.rules ? ax.rules[def.field] : RULE_DEFAULTS[def.field];
+            const changed = before !== after;
+            const reason = changed ? '' : mod && before === Infinity ? 'Unlimited stays Unlimited; play a fixed limit to change it.'
+                : mod ? def.label + ' stays at ' + ruleValue(before) + ' (bounds ' + def.min + ' to ' + def.max + ').' : 'Already the rule: ' + def.label + ' is ' + ruleValue(before) + '.';
+            return { category, field: def.field, before, after, changed, reason, text: def.label + ': ' + ruleValue(before) + ' → ' + ruleValue(after) + (reason ? '. ' + reason : '') };
+        }
+        if (ax.modifier) return { category, changed: false, reason: 'Invalid numeric category.' };
+        if (ax.clearRules) {
+            const changed = changedAxioms(s).length > 0;
+            return { category, changed, reason: changed ? '' : 'No rule to clear: every rule is basic now.' };
+        }
         const current = s.axioms.active[ax.category];
-        if (current === id) return false;
-        if (ax.basic) return !!current && !(axiomDefs()[current] || {}).basic;
-        return true;
+        const changed = current !== id && (!ax.basic || (!!current && !(axiomDefs()[current] || {}).basic));
+        return { category, changed, reason: changed ? '' : 'Already the rule: ' + ax.name + ' would change nothing now.' };
+    }
+    function projectedAxioms(s, id, preview) {
+        const ax = id && axiomDefs()[id];
+        if (id && !ax) return s.axioms;
+        if (!id || ax.clearRules) return { ...s.axioms, active: {}, numeric: {} };
+        if (!preview.changed) return s.axioms;
+        const numeric = { ...s.axioms.numeric };
+        if (preview.field) numeric[ax.category] = { id, value: preview.after === Infinity ? 'unlimited' : preview.after };
+        else delete numeric[ax.category];
+        return { ...s.axioms, active: { ...s.axioms.active, [ax.category]: id }, numeric };
+    }
+    function projectAxiom(s, id) {
+        return { ...s, axioms: projectedAxioms(s, id, id ? axiomPreview(s, id) : null) };
     }
     function rules(s) { return memoFor(s).rules; }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
@@ -288,11 +338,13 @@
     }
     function wheelBonus(s, card, foe) {
         const W = Rift.data.wheel;
-        if (!W || !foe || foe.kind !== 'creature') return 0;
+        if (!W || !card || card.kind !== 'creature' || !foe || foe.kind !== 'creature') return 0;
         const a = colourOf(s, card), b = colourOf(s, foe);
-        if (!W.beats[a] || !W.beats[b] || a === b) return 0;
-        const wins = rules(s).wheelReversed ? W.beats[b] === a : W.beats[a] === b;
-        return wins ? W.bonus : 0;
+        const from = W.order.indexOf(a), to = W.order.indexOf(b);
+        if (from < 0 || to < 0) return 0;
+        const distance = (to - from + W.order.length) % W.order.length;
+        const modifier = distance === 1 || distance === 2 ? W.bonus : distance === 4 || distance === 5 ? -W.bonus : 0;
+        return modifier && rules(s).wheelReversed ? -modifier : modifier;
     }
 
     function attackParts(s, cid, foeCid) {
@@ -313,11 +365,18 @@
         activeAxioms(s).forEach(ax => {
             if (ax.powerMod) { const v = ax.powerMod(s, c, H); if (v) parts.push({ source: 'axiom', label: ax.name, amount: v }); }
         });
-        if (foeCid && s.cards[foeCid]) {
+        let total = Math.max(0, parts.reduce((sum, p) => sum + p.amount, 0));
+        // A matchup is conditional on the target, after every ordinary modifier. It cannot
+        // turn zero attack into an attack, or reduce an otherwise positive attack below one.
+        if (total > 0 && foeCid && s.cards[foeCid]) {
             const w = wheelBonus(s, c, s.cards[foeCid]);
-            if (w) parts.push({ source: 'colour', label: 'Colour wheel', amount: w });
+            if (w) {
+                parts.push({ source: 'colour', label: w > 0 ? 'Strong' : 'Weak', amount: w });
+                if (total + w < 1) parts.push({ source: 'floor', label: 'Positive attack floor', amount: 1 - total - w });
+                total = Math.max(1, total + w);
+            }
         }
-        return { total: Math.max(0, parts.reduce((sum, p) => sum + p.amount, 0)), parts };
+        return { total, parts };
     }
     function attackOf(s, cid, foeCid) { return attackParts(s, cid, foeCid).total; }
 
@@ -360,16 +419,15 @@
             if (taxOn(s, cid)) out.push({ stat: 'cost', amount: 1, label: 'Night Sight', until: 'tax', from: null });        }
         return out;
     }
-    // The colour wheel from this creature's side: { strong: colours it gets +bonus against,
-    // weak: colours that get +bonus against it, bonus }. Follows a reversed wheel.
+    // Target relationships from this creature's side; follows a reversed wheel.
     function wheelEdges(s, cid) {
         const W = Rift.data.wheel, c = s.cards[cid];
-        const out = { strong: [], weak: [], bonus: W ? W.bonus : 0 };
+        const out = { strong: [], weak: [], neutral: [], bonus: W ? W.bonus : 0 };
         if (!W || !c || c.kind !== 'creature') return out;
-        Object.keys(W.beats).forEach(b => {
+        W.order.forEach(b => {
             const foe = { kind: 'creature', colour: b };
-            if (wheelBonus(s, c, foe)) out.strong.push(b);
-            if (wheelBonus(s, foe, c)) out.weak.push(b);
+            const modifier = wheelBonus(s, c, foe);
+            out[modifier > 0 ? 'strong' : modifier < 0 ? 'weak' : 'neutral'].push(b);
         });
         return out;
     }
@@ -388,7 +446,7 @@
         const c = s.cards[cid];
         if (!c || c.kind !== 'creature' || s.phase !== 'main' || c.controller !== s.active) return false;
         const P = s.players[s.active];
-        if (!P.board.includes(cid) || c.frozen || c.activated || isSleeping(s, cid)) return false;
+        if (!playsLeft(s, s.active) || !P.board.includes(cid) || c.frozen || c.activated || isSleeping(s, cid)) return false;
         if (c.attacks >= attacksAllowed(s, cid) || P.attacksThisTurn >= rules(s).attackLimit) return false;
         return attackOf(s, cid) > 0;
     }
@@ -473,7 +531,7 @@
     function canActivateNow(s, cid) {
         const c = s.cards[cid];
         return c.controller === s.active && s.phase === 'main' && s.players[s.active].board.includes(cid)
-            && !c.frozen && !c.activated && !c.attacks && !isSleeping(s, cid);
+            && playsLeft(s, s.active) > 0 && !c.frozen && !c.activated && !c.attacks && !isSleeping(s, cid);
     }
 
     // A preview of a fight without running hooks (for the UI and quick AI checks).
@@ -488,18 +546,12 @@
         const pb = attackOf(s, target, att);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
-        const after = (cid, amount) => {
-            if (amount <= 0) return healthOf(s, cid).current;
-            if (hasKeyword(s, cid, 'shield')) return healthOf(s, cid).current;
-            let red = 0;
-            eachAbility(s, s.cards[cid], def => { red += def.damageReduction || 0; });
-            return healthOf(s, cid).current - Math.max(0, amount - red);
-        };
-        const ha = after(att, res.toAttacker), hb = after(target, res.toDefender);
+        const damageToAttacker = damageAfterPrevention(s, att, res.toAttacker), damageToDefender = damageAfterPrevention(s, target, res.toDefender);
+        const ha = healthOf(s, att).current - damageToAttacker, hb = healthOf(s, target).current - damageToDefender;
         let defenderDefeated = hb <= 0;
         const attackerDefeated = ha <= 0;
         if (ax && ax.defenderSurvivesTrade && attackerDefeated && defenderDefeated) defenderDefeated = false;
-        return { hero: false, pa, pb, toAttacker: res.toAttacker, toDefender: res.toDefender, attackerDefeated, defenderDefeated };
+        return { hero: false, pa, pb, toAttacker: res.toAttacker, toDefender: res.toDefender, damageToAttacker, damageToDefender, attackerDefeated, defenderDefeated };
     }
 
     function creaturesLeft(s, p) {
@@ -548,7 +600,7 @@
         const limit = r.attackLimit === Infinity ? '' : ' At most ' + r.attackLimit + ' attack' + (r.attackLimit === 1 ? '' : 's') + ' per player per turn.';
         return [
             ['Win', r.reverseHearts ? 'Reach zero of YOUR OWN hearts to win.' : 'Reduce the enemy hero to zero hearts.'],
-            ['Turn', 'Choose one draw: your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Play up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' cards.'
+            ['Turn', 'Choose one draw: take ' + r.drawCount + ' from your deck or the axiom deck. Energy grows by ' + r.growth + ' and refills (max ' + s.options.energyCap + '). Use up to ' + (r.playLimit === Infinity ? 'any number of' : r.playLimit) + ' card activations: casts, attacks and manual Activate together.'
                 + ' Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3.'],
             ['Attacks', (r.attacksPerCreature > 1 ? 'Each ready creature may attack twice.' : 'Each ready creature may attack once.') + limit + ' New creatures wait a turn unless Swift' + (r.arrivalReady ? ' (now: all can act at once).' : '.')],
             ['Combat', (combat ? combat.text : 'Both creatures deal damage equal to their attack.') + ' Damage stays' + (r.heal ? ' until the controller\'s next turn (healing rule).' : '.')],
@@ -684,7 +736,9 @@
         return list;
     }
 
-    // Card plays left this turn (creatures, tactics and rule cards each use one; attacks are free).
+    // Shared card activations: each cast, declared attack and manual Activate costs one.
+    // Draw, End, Spark, Bag, hero powers, passive effects and pending answers are exempt.
+    // Keep the old field/API names for compatible battle fixtures and integrations.
     function playLimit(s, p) { return rules(s).playLimit + (s.players[p].extraPlays || 0); }
     function playsLeft(s, p) { return Math.max(0, playLimit(s, p) - (s.players[p].playsThisTurn || 0)); }
 
@@ -741,7 +795,7 @@
             baseKeywords: kws,
             ability: injuries.includes('no-ability') ? null : (ch.ability || (inst.warped && inst.warped.ability) || sp.ability || null),
             gained: [], buffs: [], extraKeywords: [],
-            damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, silenced: false, shieldUsed: false,
+            damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, frozenUntil: null, silenced: false, shieldUsed: false,
             nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0, burned: false,
             legendary: sp.rarity === 'legendary', loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
             injured: injuries.slice(), warped: !!(ch.ability || (inst.warped && inst.warped.ability)),
@@ -869,12 +923,19 @@
         s.step += 1;
         if (match.type !== 'choose') { s.reactionCount = 0; s.resolutionRoot = s.step; }
         const G = { s, rng: Rift.makeRng('battle:' + s.seed + ':' + s.step), events: [] };
+        resolveAction(G, match);
+        s.lastEvents = G.events;
+        s.log = { prev: state.log, events: G.events };
+        return s;
+    }
+
+    function resolveAction(G, match) {
         switch (match.type) {
             case 'draw': doDraw(G, match.choice); break;
             case 'play': countPlay(G); doPlay(G, match.cid, match.target || null); break;
             case 'axiom': countPlay(G); doAxiom(G, match.choice); break;
-            case 'attack': doAttack(G, match.cid, match.target); break;
-            case 'activate': doActivate(G, match.cid, match.ability, match.target || null); break;
+            case 'attack': countPlay(G); doAttack(G, match.cid, match.target); break;
+            case 'activate': countPlay(G); doActivate(G, match.cid, match.ability, match.target || null); break;
             case 'spark': doSpark(G); break;
             case 'item': doItem(G, match.id, match.target || null); break;
             case 'power': doPower(G, match.target || null); break;
@@ -883,9 +944,81 @@
             default: throw new Error('Unknown action ' + match.type);
         }
         resolveReactions(G);
-        s.lastEvents = G.events;
-        s.log = { prev: state.log, events: G.events };
-        return s;
+    }
+
+    // #108: prospective resolution never runs an unseen draw, random branch or concealed condition.
+    // Guarded private zones fail closed even when a hook reads them directly instead of using api.draw.
+    // Only public snapshots/text leave this function, never the simulated state or private event fields.
+    function previewAction(state, action, viewer) {
+        const frames = [], lines = [], explanations = [], stop = message => { throw { previewStop: true, message }; };
+        const copy = x => Array.isArray(x) ? x.map(copy) : x && typeof x === 'object' ? Object.fromEntries(Object.entries(x).map(([k, v]) => [k, copy(v)])) : x;
+        // History is immutable and irrelevant to one prospective move. Do not recursively copy
+        // its linked list (or retain private historical events for hooks to inspect).
+        const s = copy({ ...state, log: null, lastEvents: [] });
+        const snapshot = () => ({
+            players: s.players.map(P => ({ name: P.name, hearts: P.hearts, energy: P.energy, uses: playsLeft(s, s.players.indexOf(P)),
+                board: P.board.map(cid => ({ cid, species: s.cards[cid].species, name: cardName(s, cid), attack: attackOf(s, cid), health: healthOf(s, cid).current,
+                    keywords: keywordsOf(s, cid).slice() })) })),
+            rules: changedAxioms(s).map(a => a.name + ': ' + (NUMERIC_RULES[a.category] ? NUMERIC_RULES[a.category].label + ' ' + ruleValue(rules(s)[NUMERIC_RULES[a.category].field]) : a.text)),
+        });
+        const push = text => { if (frames.length < 7) frames.push({ text, view: snapshot() }); };
+        const explainFighter = (cid, target) => {
+            const parts = attackParts(s, cid, target);
+            const notes = [cardName(s, cid) + ': ' + parts.parts.map(p => p.label + ' ' + (p.amount >= 0 ? '+' : '') + p.amount).join(', ') + ' = ' + parts.total + ' attack.'];
+            if (hasKeyword(s, cid, 'shield')) notes.push('Shield blocks its next hit.');
+            eachAbility(s, s.cards[cid], def => {
+                if (def.damageReduction) notes.push(def.name + ': each hit deals it ' + def.damageReduction + ' less damage.');
+                if (isHero(target) && def.heroDamage) notes.push(def.name + ': +' + def.heroDamage + ' damage to a hero.');
+            });
+            return notes.join(' ');
+        };
+        push('Before the move.');
+        const G = { s, rng: new Proxy({}, { get: () => () => stop('A random result is unknown until you commit the move.') }), events: [], preview: true };
+        G.capture = ev => {
+            const text = ev.privateTo != null ? ev.publicText : ev.text;
+            if (text) { lines.push(text); push(text); }
+            // Fight is emitted after attack/defence hooks. Explain the actual public modifiers
+            // there, including prevention, rather than treating arithmetic as full resolution.
+            if (ev.t === 'fight') {
+                explanations.push(explainFighter(ev.attacker, ev.defender), explainFighter(ev.defender, ev.attacker));
+            }
+        };
+        let complete = false, reason = '';
+        try {
+            if (viewer !== decider(state) || !action || (action.player != null && action.player !== viewer) || !['attack', 'activate', 'play', 'axiom', 'power', 'item'].includes(action.type)) stop('Choose a complete move on your turn first.');
+            const match = legalActions(state).find(a => actionKey(a) === actionKey(action));
+            if (!match) stop('That move is no longer available.');
+            if ((state.players[1 - viewer].armed || []).some(cid => { const d = conditionOf(state, cid); return !d || d.visibility === 'face-down'; })) stop('A concealed condition may change this move. Its effect stays unknown until it is revealed.');
+            const guarded = (list, why) => new Proxy(list, { get(target, key) {
+                if (/^\d+$/.test(String(key))) stop(why);
+                return Reflect.get(target, key);
+            } });
+            const visible = new Set(s.players.flatMap((P, p) => P.board.concat(P.discard, p === viewer ? P.hand : [],
+                (P.armed || []).filter(cid => p === viewer || (conditionOf(s, cid) || {}).visibility === 'face-up'))));
+            Object.keys(s.cards).forEach(cid => {
+                if (!visible.has(cid)) { const c = s.cards[cid]; s.cards[cid] = { cid, kind: 'concealed', owner: c.owner, controller: c.controller }; }
+            });
+            s.players.forEach((P, p) => {
+                P.deck = guarded(P.deck, 'A deck card is unknown until it is drawn or revealed.');
+                if (p !== viewer) { P.hand = guarded(P.hand, 'The rival’s hand stays unknown.'); P.axHand = guarded(P.axHand, 'The rival’s rule hand stays unknown.'); }
+            });
+            s.axioms.deck = guarded(s.axioms.deck, 'The next shared-deck card stays unknown. Only the announced Fate flip is certain.');
+            s.seed = 'preview-public'; s.step += 1;
+            if (match.type !== 'choose') { s.reactionCount = 0; s.resolutionRoot = s.step; }
+            resolveAction(G, match);
+            if (s.phase === 'choose') stop('Another choice is needed. Its later result is not part of this clip.');
+            complete = true;
+        } catch (e) { reason = e && e.previewStop ? e.message : 'A later effect cannot be predicted safely. Its result stays unknown.'; }
+        // Keep a distinct final frame, even when the event budget was exhausted by a long chain.
+        if (frames.length === 7) frames.pop();
+        frames.push({ text: complete ? 'Visible result of this move. Future rival decisions are not predicted.' : reason + ' Earlier steps show only what is already certain.', view: snapshot() });
+        if (action && action.type === 'attack' && state.cards[action.cid] && isHero(action.target)) {
+            // Hero attacks have no fight event; their public result is already in the event text.
+            explanations.push(explainFighter(action.cid, action.target));
+            const cap = rules(s).heroDamageCap;
+            if (cap != null) explanations.push('The active rule limits each hero hit to ' + cap + ' damage.');
+        }
+        return { complete, reason, explanation: explanations.join(' '), frames, lines: ['Before the move.'].concat(explanations, lines, frames[frames.length - 1].text) };
     }
 
     function countPlay(G) { const P = G.s.players[G.s.active]; P.playsThisTurn = (P.playsThisTurn || 0) + 1; }
@@ -898,6 +1031,7 @@
         ev.turn = G.s.turn;
         ev.round = G.s.round;
         G.events.push(ev);
+        if (G.capture) G.capture(ev);
     }
 
     // The api handed to ability and tactic hooks.
@@ -917,6 +1051,11 @@
             defeat: (cid, why, name) => defeat(G, cid, why, name),
             silence: cid => silence(G, cid),
             freeze(cid) { s.cards[cid].frozen = true; },
+            freezeNextTurn(cid) {
+                const c = s.cards[cid];
+                c.frozen = true;
+                c.frozenUntil = Math.max(c.frozenUntil || 0, nextTurnEnd(G, c.controller));
+            },
             bounce: cid => bounce(G, cid),
             fromDiscard(cid) { const P = s.players[s.cards[cid].owner]; if (removeFrom(P.discard, cid)) toHand(G, P === s.players[0] ? 0 : 1, cid); },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
@@ -1101,7 +1240,7 @@
         s.players[p].board.push(cid);
         c.controller = p;
         c.enteredTurn = s.turn;
-        c.attacks = 0; c.activated = false; c.frozen = false;
+        c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null;
         return true;
     }
     // The creature loses these keywords (printed, natural, taught, gained or from an ability) while it
@@ -1173,7 +1312,7 @@
 
     function resetCard(c) {
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
-        c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.silenced = false; c.shieldUsed = false;
+        c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
         if (c.timedKeywords) c.timedKeywords = null;
@@ -1250,7 +1389,7 @@
     // Bonus rules (one at a time), checked when a turn starts:
     //   fresh-start  an empty hand draws 2 cards
     //   fair-share   fewer creatures in play than the opponent: draw 1 card
-    //   momentum     more creatures in play than the opponent: +1 card play this turn
+    //   momentum     more creatures in play than the opponent: +1 card activation this turn
     function startBonus(G, p, r) {
         const s = G.s, P = s.players[p], Q = s.players[1 - p];
         if (r.bonus === 'fresh-start' && !handCount(P)) {
@@ -1261,7 +1400,7 @@
             draw(G, p);
         } else if (r.bonus === 'momentum' && P.board.length > Q.board.length) {
             P.extraPlays = 1;
-            emit(G, { t: 'bonus', player: p, text: 'Momentum: more creatures in play, so +1 card play this turn.' });
+            emit(G, { t: 'bonus', player: p, text: 'Momentum: more creatures in play, so +1 card activation this turn.' });
         }
     }
 
@@ -1317,7 +1456,10 @@
         // This turn's boosts end, and so do boosts that last until this turn ends (#121, untilTurn).
         const ends = b => b.temp || (b.untilTurn != null && b.untilTurn <= s.turn);
         Object.values(s.cards).forEach(c => { if (c.kind === 'creature' && c.buffs.some(ends)) c.buffs = c.buffs.filter(b => !ends(b)); });
-        P.board.forEach(cid => { s.cards[cid].frozen = false; });
+        P.board.forEach(cid => {
+            const c = s.cards[cid];
+            if (c.frozenUntil == null || c.frozenUntil <= s.turn) { c.frozen = false; c.frozenUntil = null; }
+        });
         // A spell tax (#148) that was never paid ends with the turn it lasts until.
         s.players.forEach((Q, q) => { if (Q.spellTax && Q.spellTax.until <= s.turn) {
             emit(G, { t: 'tax-end', player: q, text: Q.spellTax.label + ' ends: ' + possessive(s, q) + ' spells cost the usual again.' }); Q.spellTax = null; } });
@@ -1353,7 +1495,7 @@
         if (r.bonus === 'think') {
             const n = Math.min(2, playsLeft(s, p));
             if (n > 0) {
-                emit(G, { t: 'bonus', player: p, text: 'Think It Over: ' + n + ' unused play' + (n === 1 ? '' : 's') + ', so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' ' + n + ' card' + (n === 1 ? '' : 's') + '.' });
+                emit(G, { t: 'bonus', player: p, text: 'Think It Over: ' + n + ' unused activation' + (n === 1 ? '' : 's') + ', so ' + says(s, p, 'draws').replace(/^You/, 'you') + ' ' + n + ' card' + (n === 1 ? '' : 's') + '.' });
                 for (let i = 0; i < n; i++) draw(G, p);
             }
         }
@@ -1428,6 +1570,7 @@
         if (s.fate.events % 2 === 1) {
             s.axioms.discard.push(...Object.values(s.axioms.active));
             s.axioms.active = {};
+            s.axioms.numeric = {};
             emit(G, { t: 'reset', text: 'Fate reset: all rules return to the basics.' });
         } else {
             // An older state never set a card aside: it turns over the deck's top card, as before.
@@ -1459,19 +1602,25 @@
     // reset does (Fate does not move), and never becomes an active rule itself.
     function setAxiom(G, id, by) {
         const s = G.s, A = s.axioms, ax = axiomDefs()[id];
-        const changed = axiomWouldChange(s, id);
+        const preview = axiomPreview(s, id), changed = preview.changed;
+        if (!changed) {
+            if (!ax.own) A.discard.push(id);
+            emit(G, { t: 'axiom-no-change', id, player: by, text: ax.name + ': ' + preview.reason });
+            return;
+        }
+        const projected = projectedAxioms(s, id, preview);
         if (ax.clearRules) {
             A.discard.push(...Object.values(A.active));
-            A.active = {};
         } else {
             const old = A.active[ax.category];
             if (old) A.discard.push(old);
-            A.active[ax.category] = id;
         }
+        A.active = projected.active;
+        A.numeric = projected.numeric;
         A.flips += 1;
         emit(G, ax.clearRules
             ? { t: 'axiom', id, player: by, clear: true, text: 'Rule change — ' + ax.name + ': every rule goes back to the basics.' }
-            : { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + ax.text });
+            : { t: 'axiom', id, player: by, basic: !!ax.basic, text: 'Rule change — ' + ax.category + ': ' + ax.name + '. ' + (preview.text || ax.text) });
         if (by != null) {
             [0, 1].forEach(p => s.players[p].board.slice().forEach(cid => {
                 const c = s.cards[cid];
@@ -1726,11 +1875,14 @@
     }
     function previewOutcome(state, G) {
         const s = G.s;
-        const boosted = [];
+        const boosted = [], healed = [], frozen = [];
         [0, 1].forEach(p => s.players[p].board.forEach(cid => {
             if (!state.players[p].board.includes(cid)) return;
             const attack = attackOf(s, cid) - attackOf(state, cid), health = healthOf(s, cid).max - healthOf(state, cid).max;
             if (attack || health) boosted.push({ cid, name: logName(state, cid), controller: p, attack, health });
+            const restored = state.cards[cid].damage - s.cards[cid].damage;
+            if (restored > 0) healed.push({ cid, name: logName(state, cid), controller: p, amount: restored });
+            if (s.cards[cid].frozen && (!state.cards[cid].frozen || (s.cards[cid].frozenUntil || 0) > (state.cards[cid].frozenUntil || 0))) frozen.push({ cid, name: logName(state, cid), controller: p });
         }));
         const summoned = [], returned = [];
         [0, 1].forEach(p => {
@@ -1742,7 +1894,7 @@
             // A token made and defeated inside the preview is only in the copy (#121).
             defeated: G.events.filter(e => e.t === 'defeated').map(e => ({ cid: e.cid, name: state.cards[e.cid] ? logName(state, e.cid) : s.cards[e.cid] ? cardName(s, e.cid) : e.cid,
                 owner: e.player, controller: state.cards[e.cid] ? state.cards[e.cid].controller : e.player, dest: e.dest })),
-            boosted, summoned, returned, drawn, hearts: s.players.map(P => P.hearts), winner: s.winner,
+            boosted, healed, frozen, summoned, returned, drawn, hearts: s.players.map(P => P.hearts), winner: s.winner,
             events: G.events.map(e => (e.privateTo == null ? e : { t: e.t, player: e.player, turn: e.turn, round: e.round, text: e.publicText || '' })),
         };
     }
@@ -1823,6 +1975,7 @@
             answer(G, req, req.options[0]);
             return true;
         }
+        if (G.preview) throw { previewStop: true, message: 'Another choice is needed. Its later result stays unknown.' };
         s.phase = 'choose';
         s.pending = Object.assign({}, req, { choiceKind: req.kind });
         return true;
@@ -1921,6 +2074,12 @@
         });
     }
 
+    function damageAfterPrevention(s, cid, amount) {
+        if (amount <= 0 || hasKeyword(s, cid, 'shield')) return 0;
+        let reduction = 0;
+        eachAbility(s, s.cards[cid], def => { reduction += def.damageReduction || 0; });
+        return Math.max(0, amount - reduction);
+    }
     function dealDamage(G, cid, amount, source) {
         const s = G.s, c = s.cards[cid];
         if (!c || amount <= 0 || !s.players[c.controller].board.includes(cid)) return 0;
@@ -1938,9 +2097,7 @@
             emit(G, { t: 'shield', cid, text: logName(s, cid) + '\'s Shield blocks the damage.' });
             return 0;
         }
-        let red = 0;
-        eachAbility(s, c, def => { red += def.damageReduction || 0; });
-        const dealt = Math.max(0, amount - red);
+        const dealt = damageAfterPrevention(s, cid, amount);
         if (!dealt) return 0;
         c.damage += dealt;
         emit(G, { t: 'damage', cid, amount: dealt, source, text: logName(s, cid) + ' takes ' + dealt + ' damage.' });
@@ -2224,8 +2381,8 @@
 
     Battle.Engine = {
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
-        createBattle, legalActions, applyAction, applyLegal, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
-        rules, activeAxioms, axiomWouldChange, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
+        createBattle, legalActions, applyAction, applyLegal, previewAction, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
+        rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,

@@ -40,6 +40,143 @@ const practice = {
     battleOptions: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [3, 3], deckSize: 8, minCreatures: 1 },
 };
 
+test('a keyboard draw focuses the new card; reading it pauses the opponent, blocks stale input and resumes once', () => {
+    const t = setup(practice);
+    const pile = t.$('.b-table-deck.deck');
+    pile.focus(); pile.dispatchEvent({ type: 'click', detail: 0 });
+    const cid = t.handle.state.players[0].hand.at(-1);
+    assert.equal(t.g.document.activeElement, t.$('.b-hand [data-cid="' + cid + '"]'));
+    const end = t.$('.b-end');
+    end.click();
+    const state = t.handle.state;
+    const visible = t.$('.my-board .bc') || t.$('.b-hand .bc');
+    visible.focus(); visible.dispatchEvent({ type: 'focus' });
+    const reader = t.$('.b-read-btn');
+    assert.match(reader.textContent, /Read /); reader.click();
+    assert.ok(t.$('.b-read-dialog').open);
+    assert.match(t.$('.b-read-body').textContent, /Active effects/);
+    t.g.flush(); assert.equal(t.handle.state, state, 'opponent timer is paused');
+    end.click(); assert.equal(t.handle.state, state, 'stale input does not mutate a reading battle');
+    t.$('.b-read-close').click(); assert.equal(t.$('.b-read-dialog'), null);
+    t.g.flush(); assert.equal(t.handle.state.active, 0, 'opponent completes exactly its one turn');
+    t.handle.destroy();
+});
+
+test('card reading survives selection repaint, opens by touch-style click and closes with the screen', () => {
+    const t = setup(practice);
+    t.$('.b-table-deck.deck').click();
+    const card = t.$('.b-hand .bc');
+    card.focus(); card.dispatchEvent({ type: 'click', detail: 1, pointerType: 'touch' });
+    const restored = t.g.document.activeElement;
+    assert.equal(restored.dataset.cid, card.dataset.cid, 'selection keeps semantic focus on the same hand card');
+    t.$('.b-read-btn').click();
+    assert.ok(t.$('.b-read-dialog'));
+    t.handle.destroy();
+    assert.equal(t.$('.b-read-dialog'), null); t.g.flush();
+});
+
+test('a native asynchronous close event from an old reader cannot close a newer reader', () => {
+    const closed = [];
+    const t = setup(practice, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            if (tag === 'dialog') node.close = () => { node.open = false; closed.push(() => node.dispatchEvent({ type: 'close' })); };
+            return node;
+        };
+    } });
+    t.$('.b-table-deck.deck').click();
+    t.$('.b-hand .bc').click(); t.$('.b-read-btn').click();
+    const old = t.$('.b-read-dialog'); t.$('.b-read-close').click();
+    t.$('.b-read-btn').click(); const current = t.$('.b-read-dialog');
+    assert.ok(current && current !== old);
+    closed.shift()();
+    assert.equal(t.$('.b-read-dialog'), current);
+    assert.equal(current.open, true);
+    current.dispatchEvent({ type: 'cancel', preventDefault() {} });
+    assert.equal(t.$('.b-read-dialog'), null);
+    t.handle.destroy();
+});
+
+test('draw flights use card backs without exposing opponent identities; calm motion fades; a new action cancels them', () => {
+    for (const calm of [false, true]) {
+        const motions = [];
+        const t = setup(practice, { calm, before(g) {
+            const create = g.document.createElement;
+            g.document.createElement = tag => {
+                const node = create(tag);
+                node.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100, right: 100, bottom: 100 });
+                node.animate = (frames, timing) => {
+                    const motion = { node, frames, timing, cancelled: false, cancel() { this.cancelled = true; if (this.oncancel) this.oncancel(); } };
+                    motions.push(motion); return motion;
+                };
+                return node;
+            };
+        } });
+        t.$('.b-table-deck.deck').click();
+        runFirstBeat(t);
+        const flight = t.$('.b-draw-flight');
+        assert.equal(!!flight, !calm);
+        if (flight) { assert.ok(flight.classList.contains('b-back')); assert.equal(flight.dataset.cid, undefined); assert.equal(flight.getAttribute('aria-hidden'), 'true'); }
+        const old = motions.slice();
+        const card = t.$('.b-hand .bc'); card.click();
+        const play = t.$('.b-prompt .btn.primary');
+        if (play) play.click(); else t.$('.b-end').click();
+        assert.ok(old.every(m => m.cancelled));
+        assert.equal(t.$('.b-draw-flight'), null);
+        if (calm) assert.ok(old.every(m => !m.frames.some(f => f.transform || f.translate)), 'no movement in Calm motion');
+        t.handle.destroy();
+    }
+});
+
+test('opponent rule draws fly from the shared deck and retain a plain rule back', () => {
+    const motions = [];
+    const t = setup(practice, { before(g) {
+        g.Rift.Battle.AI.choose = s => {
+            const actions = g.Rift.Battle.Engine.legalActions(s);
+            return actions.find(a => a.type === 'draw' && a.choice === 'axiom') || actions.find(a => a.type === 'end') || actions[0];
+        };
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            node.getBoundingClientRect = () => {
+                const left = node.dataset.choice === 'axiom' ? 200 : node.dataset.choice === 'opponent' ? 700 : 400;
+                return { left, top: 0, width: 100, height: 100, right: left + 100, bottom: 100 };
+            };
+            node.animate = (frames, timing) => { const motion = { node, frames, timing, cancel() {} }; motions.push(motion); return motion; };
+            return node;
+        };
+    } });
+    t.$('.b-table-deck.deck').click(); t.$('.b-end').click(); t.g.flush();
+    const rules = motions.filter(m => m.node.classList.contains('b-draw-flight') && m.node.classList.contains('axiom'));
+    assert.equal(rules.length, 1);
+    assert.match(rules[0].frames[0].transform, /^translate\(-200px,/);
+    assert.equal(rules[0].node.dataset.axiom, undefined, 'no hidden rule ID on the flying back');
+    assert.equal(rules[0].node.dataset.cid, undefined);
+    t.handle.destroy();
+});
+
+test('battle results distinguish a win, a loss and a draw visually and audibly', () => {
+    for (const [winner, outcome, heading, cue] of [[0, 'won', 'You won!', 'win'], [1, 'lost', 'You lost', 'lose'], ['draw', 'draw', 'A draw', null]]) {
+        const sounds = [];
+        const t = setup(practice, { before(g) {
+            g.Rift.Battle.Engine.winner = () => winner;
+            g.Rift.Audio.sfx = name => sounds.push(name);
+        } });
+        t.g.flush();
+        const panel = t.$('.b-end-panel');
+        assert.equal(panel.dataset.outcome, outcome);
+        const banner = panel.querySelector('.result-banner');
+        assert.ok(banner, 'the result is a prominent banner, not only a line of text');
+        assert.equal(banner.getAttribute('role'), 'status');
+        assert.match(banner.textContent, new RegExp(heading.replace('!', '\\!')));
+        assert.equal(sounds.includes('win'), cue === 'win');
+        assert.equal(sounds.includes('lose'), cue === 'lose', 'a draw must not sound like a defeat');
+        assert.equal(t.handle.result.outcome, outcome);
+        t.handle.destroy();
+    }
+});
+
 test('concealed opponent arming never displays the normal card reveal', () => {
     const t = setup(Object.assign({}, practice, { player: { team: team(Array(8).fill('astrophysicat'),'me-'), tactics: [] } }), { before(g) {
         const c = g.Rift.data.creatures.kardashiant; c.cost = 1;
@@ -350,11 +487,27 @@ test('calm motion: damage numbers still appear (they only fade)', () => {
     $('.my-board [data-cid="p0c0"]').click();
     $('.opp-board [data-cid="p1c0"]').click();
     assert.equal(t.handle.state.cards.p1c0.damage, 1);
+    runEventBeats(t);
     assert.ok(t.root.querySelectorAll('.b-float').length >= 2, 'damage numbers are shown');
     t.handle.destroy();
 });
 
 const mouse = (extra) => Object.assign({ pointerType: 'mouse', pointerId: 1, clientX: 0, clientY: 0, button: 0, preventDefault() {} }, extra);
+
+// Run the current event clock without also expiring its effects or advancing the AI.
+function runEventBeats(t) {
+    const beats = t.g.timers.filter(timer => timer.ms <= 600).sort((a, b) => a.ms - b.ms);
+    beats.forEach(timer => {
+        const at = t.g.timers.indexOf(timer);
+        if (at >= 0) { t.g.timers.splice(at, 1); timer.fn(); }
+    });
+}
+function runFirstBeat(t) {
+    t.g.timers.filter(timer => timer.ms === 0).forEach(timer => {
+        const at = t.g.timers.indexOf(timer);
+        if (at >= 0) { t.g.timers.splice(at, 1); timer.fn(); }
+    });
+}
 
 // Draw, play the first creature, pass, let the opponent play, draw again: both sides have a creature.
 function toSecondTurn(t) {
@@ -445,7 +598,7 @@ test('a long opponent title stays out of Recent plays; story end screen, rule ti
     assert.match($('.b-rules').textContent, /Axioms are the rules both players start from\./);
     assert.match($('.b-rules-head').textContent, /Active now/);
     const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
-    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy']);
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'draw', 'cost']);
     assert.equal(t.root.querySelectorAll('.b-rtile.changed').length, 0);
     assert.match($('.b-rtile[data-cat="plays"]').textContent, /2 left/);
     assert.ok(!/Keywords/.test($('.b-side').textContent), 'the keywords are in How to play, not the panel');
@@ -576,7 +729,7 @@ test('a rule change is shown big, and the opponent waits until it fades', () => 
 
 // A prepared match (engine state edited by hand), so one situation can be checked directly.
 // cfg: { me: [species], opp: [species], myTactics?, myLoaned?, oppLoaned?, phase?, energy? }, then edit(s, move).
-function prepared(cfg, edit) {
+function prepared(cfg, edit, opts) {
     const holder = setup(practice);
     const E = holder.E;
     holder.handle.destroy();
@@ -597,8 +750,243 @@ function prepared(cfg, edit) {
     s.phase = cfg.phase || 'main';
     s.players[0].energy = s.players[0].capacity = cfg.energy == null ? 5 : cfg.energy;
     edit(s, move);
-    return setup(Object.assign({}, practice, { initialState: s }));
+    return setup(Object.assign({}, practice, { initialState: s }), opts);
 }
+
+test('attack sounds share their event beat with damage, including the lunge of a defeated attacker', () => {
+    for (const attacker of ['beastie', 'keanu']) {
+    const motions = [], sounds = [];
+    let t;
+    t = prepared({ me: [attacker], opp: ['beastie'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+        s.cards.p0c0.health = 1; s.cards.p0c0.attack = 1;
+    }, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => {
+            const node = create(tag);
+            node.getBoundingClientRect = () => ({ left: node.parentNode && node.parentNode.classList.contains('b-hand') ? 800 : node.dataset.cid === 'p1c0' ? 220 : 20, top: 20, width: 100, height: 100 });
+            node.animate = (frames, options) => { const motion = { node, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+            const clone = node.cloneNode.bind(node);
+            node.cloneNode = deep => { const copy = clone(deep);
+                copy.animate = (frames, options) => { const motion = { node: copy, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return copy;
+            };
+            return node;
+        };
+        Object.assign(g.Rift.Audio, { has: () => true, speaking: () => false, sfx: id => sounds.push({ id, damageVisible: t.root.querySelectorAll('.b-float.dmg').length }) });
+    } });
+    t.$('.my-board [data-cid="p0c0"]').click(); t.$('.opp-board [data-cid="p1c0"]').click();
+    assert.ok(!t.handle.state.players[0].board.includes('p0c0'), 'the authoritative attack is already resolved');
+    runFirstBeat(t);
+    const ghost = t.$('.b-motion-ghost[data-event="attack"]');
+    assert.ok(ghost, 'the removed attacker still has a public source for its lunge');
+    assert.equal(ghost.getAttribute('aria-hidden'), 'true');
+    assert.ok(motions.some(m => m.node === ghost && m.frames.some(f => f.transform && f.transform.includes('translate'))));
+    assert.ok(motions.some(m => m.node === ghost && m.frames.some(f => f.transform === 'translate(70px,0px)')), 'a returned fighter lunges from its old board position, never its hand');
+    assert.equal(t.$('.b-defeat-ghost'), null, 'defeat follows the attack beat');
+    const committed = t.handle.state;
+    runEventBeats(t);
+    assert.ok(sounds.filter(s => s.id === 'impact').every(s => s.damageVisible > 0), 'impact audio and damage cue occur in the same callback');
+    assert.equal(sounds.filter(s => s.id === 'impact').length, 2);
+    assert.ok(t.$('.b-defeat-ghost'));
+    assert.equal(t.handle.state, committed);
+    t.handle.destroy(); const played = sounds.length; t.g.flush();
+    assert.equal(sounds.length, played); assert.ok(motions.every(m => m.cancelled));
+    }
+});
+
+test('spell and activation cues identify source and target; reduced motion fades; pointer input skips effects', () => {
+    for (const kind of ['spell', 'ability']) for (const reduced of [false, true]) {
+        const motions = [], t = prepared({ me: ['beastie', 'beastie'], opp: ['beastie'], myTactics: ['pep-talk'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p0c1', 0, 'board'); move('p1c0', 1, 'board'); move('p0t0', 0, 'hand');
+            s.cards.p0c0.gained.push('comma-pause'); s.cards.p0c1.damage = 1;
+        }, { before(g) {
+            if (reduced) g.ctx.matchMedia = () => ({ matches: true });
+            const create = g.document.createElement;
+            g.document.createElement = tag => { const node = create(tag);
+                node.getBoundingClientRect = () => ({ left: node.dataset.cid === 'p0c1' ? 220 : 20, top: 20, width: 100, height: 100 });
+                node.animate = (frames, options) => { const motion = { node, frames, options, cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return node;
+            };
+        } });
+        if (kind === 'spell') {
+            t.$('.b-hand [data-cid="p0t0"]').click(); t.$('.my-board [data-cid="p0c1"]').click();
+        } else {
+            t.$('.my-board [data-cid="p0c0"]').click();
+            t.$('.b-card-actions [data-ability="comma-pause"]').click(); t.$('.my-board [data-cid="p0c1"]').click();
+        }
+        runFirstBeat(t);
+        assert.ok(t.$('.b-cast-trail[data-event="' + (kind === 'spell' ? 'tactic-play' : 'activate') + '"]'));
+        if (reduced) assert.ok(motions.every(m => m.frames.every(f => !f.transform && !f.scale && !f.filter)), 'only opacity changes');
+        const committed = t.handle.state;
+        t.$('.b-arena').dispatchEvent(mouse({ type: 'pointerdown' }));
+        assert.equal(t.$('.b-cast-trail'), null); assert.ok(motions.every(m => m.cancelled));
+        assert.equal(t.handle.state, committed);
+        t.handle.destroy();
+    }
+});
+
+test('six-colour SVG, keyboard inspection and all teaching examples stay isolated and follow reversal', () => {
+    const t = prepared({ me: ['beastie'], opp: ['beastie'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); s.players[0].axHand = ['curved-space'];
+    });
+    const wheel = t.$('.b-wheel'), before = JSON.stringify(t.handle.state), spoken = t.spoken.length;
+    assert.equal(wheel.querySelectorAll('circle').length, 6);
+    assert.equal(wheel.querySelectorAll('line').length, 15);
+    assert.equal(wheel.querySelectorAll('polygon').length, 12);
+    assert.equal(wheel.querySelectorAll('[data-wheel-colour]').length, 6);
+    assert.equal(wheel.parentNode, t.$('.b-side'), 'the diagram stays beside/below the board, outside its targets');
+    const memory = wheel.querySelector('[data-wheel-colour="memory"]');
+    memory.focus(); memory.dispatchEvent({ type: 'focus' });
+    assert.equal(memory.getAttribute('aria-pressed'), 'true');
+    assert.match(wheel.querySelector('.b-wheel-matchups').textContent, /Strong \+1: Reason, Emotion.*Weak −1: Sense perception, Imagination.*Neutral 0: Language, Memory/);
+    const select = wheel.querySelector('.b-wheel-practice');
+    const expected = [/2 vs 2.*You take 2; rival takes 2/, /3 vs 1.*You take 1; rival takes 3/,
+        /1 vs 3.*You take 3; rival takes 1/, /1 vs 2.*You take 2; rival takes 1.*below 1/,
+        /You take 1; rival takes 0.*Shield blocks/, /You take 1; rival takes 0.*only the lower attack hits/,
+        /1 vs 3.*You take 3; rival takes 1.*swaps Strong and Weak/, /Zero attack stays 0.*cannot start/];
+    expected.forEach((text, i) => { select.value = String(i); select.dispatchEvent({ type: 'change' }); assert.match(wheel.querySelector('.b-wheel-example').textContent, text); });
+    assert.equal(JSON.stringify(t.handle.state), before); assert.equal(t.spoken.length, spoken, 'practice adds no generated speech');
+    t.$('.b-hand [data-axiom="curved-space"]').click(); t.$('.b-prompt .btn.primary').click();
+    assert.equal(t.$('.b-wheel'), wheel, 'the open/selected legend survives battle rendering');
+    assert.match(wheel.querySelector('.b-wheel-state').textContent, /Reversed now/);
+    assert.match(wheel.querySelector('.b-wheel-matchups').textContent, /Strong \+1: Sense perception, Imagination.*Weak −1: Reason, Emotion/);
+    assert.equal(wheel.querySelectorAll('polygon').length, 12);
+    t.handle.destroy();
+});
+
+test('aiming shows both signed matchups, the one-attack floor and Shield without changing stored attack', () => {
+    for (const calm of [false, true]) for (const shield of [false, true]) {
+        const t = prepared({ me: ['beastie'], opp: ['beastie'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+            Object.assign(s.cards.p0c0, { colour: 'emotion', attack: 1, health: 8 });
+            Object.assign(s.cards.p1c0, { colour: 'reason', attack: 1, health: 8, extraKeywords: shield ? ['shield'] : [] });
+        }, { calm });
+        const before = JSON.stringify(t.handle.state);
+        t.$('.my-board [data-cid="p0c0"]').click();
+        t.$('.opp-board [data-cid="p1c0"]').dispatchEvent({ type: 'pointerenter', pointerType: 'mouse' });
+        const badges = t.root.querySelectorAll('.b-predict').map(n => n.textContent).join(' | ');
+        assert.match(badges, /Weak −1; floor 1/); assert.match(badges, /2 attack \(Strong \+1\)/);
+        assert.match(badges, new RegExp('Deals ' + (shield ? 0 : 1)));
+        if (shield) assert.match(badges, /Shield blocks/);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        t.$('.b-arena').dispatchEvent({ type: 'keydown', key: 'Escape' }); assert.equal(t.root.querySelectorAll('.b-predict').length, 0);
+        t.$('.my-board [data-cid="p0c0"]').click(); t.$('.opp-board [data-cid="p1c0"]').click();
+        assert.equal(t.handle.state.cards.p1c0.damage, shield ? 0 : 1); assert.equal(t.handle.state.cards.p0c0.damage, 2);
+        assert.equal(t.handle.state.cards.p0c0.attack, 1);
+        t.handle.destroy();
+    }
+});
+
+test('move clips choose targets and replay without changing live battle, saves or focus on dismissal', () => {
+    for (const motion of ['normal', 'calm', 'reduced']) {
+        const calm = motion === 'calm', still = motion !== 'normal';
+        const motions = [], t = prepared({ me: ['beastie'], opp: ['keanu', 'keanu'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); move('p1c1', 1, 'board');
+        }, { calm, before(g) {
+            if (motion === 'reduced') g.ctx.matchMedia = () => ({ matches: true });
+            const create = g.document.createElement;
+            g.document.createElement = tag => {
+                const node = create(tag);
+                node.animate = () => { const motion = { cancel() { this.cancelled = true; } }; motions.push(motion); return motion; };
+                return node;
+            };
+        } });
+        t.$('.my-board [data-cid="p0c0"]').click();
+        t.Rift.State = { get() { throw new Error('Preview must not read/write adventure saves'); } };
+        const before = JSON.stringify(t.handle.state), opener = t.$('.b-future-open');
+        opener.click(); const dialog = t.$('.b-future-dialog');
+        assert.ok(dialog.open); assert.match(t.$('.b-future-explanation').textContent, /Base/);
+        const choose = dialog.querySelector('select');
+        assert.ok(choose.children.length >= 2, choose.textContent + ' / ' + JSON.stringify(t.E.legalActions(t.handle.state)));
+        choose.value = '1'; choose.dispatchEvent({ type: 'change' });
+        dialog.querySelectorAll('button')[2].click(); // Next step cancels automatic playback.
+        assert.match(t.$('.b-future-caption').textContent, /Step 2/);
+        dialog.querySelectorAll('button')[3].click(); // Replay.
+        t.g.flush();
+        assert.equal(JSON.stringify(t.handle.state), before);
+        assert.equal(still ? motions.length : motions.filter(m => !m.cancelled).length > 0, still ? 0 : true);
+        dialog.dispatchEvent({ type: 'keydown', key: 'Escape' });
+        assert.equal(t.$('.b-future-dialog'), dialog, 'Escape keydown leaves selection for the native cancel event');
+        dialog.dispatchEvent({ type: 'cancel', preventDefault() {} });
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.equal(t.g.document.activeElement, opener);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        opener.click(); t.handle.destroy(); t.g.flush();
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.ok(motions.every(m => m.cancelled));
+    }
+});
+
+test('resizing an open move clip returns keyboard focus to its live source without playing it', () => {
+    for (const kind of ['board', 'axiom']) {
+        const listeners = {}, t = prepared({ me: ['beastie'], opp: ['keanu'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+            s.players[0].axHand = ['flux-plays-plus-1'];
+        }, { before(g) {
+            g.ctx.addEventListener = (type, fn) => { listeners[type] = fn; };
+            g.ctx.removeEventListener = () => {};
+        } });
+        const selector = kind === 'board' ? '.my-board [data-cid="p0c0"]' : '.b-hand [data-axiom="flux-plays-plus-1"]';
+        t.$(selector).click(); t.$('.b-future-open').click();
+        t.$('.b-future-dialog button').focus();
+        const before = JSON.stringify(t.handle.state);
+        listeners.resize();
+        assert.equal(t.$('.b-future-dialog'), null);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        assert.ok(t.g.document.activeElement === t.$(selector), kind + ': focus returns to the surviving source card');
+        t.handle.destroy();
+    }
+});
+
+test('reading across an opponent reveal keeps the pending move and resumes it exactly once', () => {
+    for (const scripted of [false, true]) for (const closeBeforeRevealEnds of [false, true]) {
+        const params = { ...practice, guide: scripted ? { steps: [
+            { expect: { type: 'draw', choice: 'deck' }, replies: [] },
+            { expect: { type: 'end' }, replies: [{ type: 'draw', choice: 'deck' }, { type: 'play', cid: 'p1c0' }, { type: 'end' }] },
+            { expect: { type: 'draw', choice: 'deck' }, replies: [] },
+        ] } : null };
+        const t = setup(params, { before(g) { g.Rift.data.creatures.kardashiant.cost = 1; } });
+        t.$('.b-table-deck.deck').click(); t.$('.b-end').click();
+        let count = 0;
+        while (!t.$('.b-reveal.show') && t.g.timers.length) {
+            assert.ok(count++ < 50); t.g.timers.shift().fn();
+        }
+        assert.ok(t.$('.b-reveal.show'));
+        const state = t.handle.state;
+        t.$('.b-hand .bc').dispatchEvent({ type: 'focus' }); t.$('.b-read-btn').click();
+        if (!closeBeforeRevealEnds) t.g.flush();
+        assert.equal(t.handle.state, state);
+        t.$('.b-read-close').click(); t.g.flush();
+        assert.equal(t.handle.state.active, 0, 'the rival finishes its one turn after either dismissal order');
+        const played = t.E.fullLog(t.handle.state).filter(e => e.t === 'play' && e.player === 1);
+        assert.equal(played.length, 1);
+        if (scripted) assert.equal(t.handle.step, 2, 'the already-dequeued scripted reply is retained');
+        t.handle.destroy();
+    }
+});
+
+test('stale preview callbacks cannot close a newer clip or commit its action', () => {
+    const closes = [];
+    const t = prepared({ me: ['beastie'], opp: ['keanu'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+    }, { before(g) {
+        const create = g.document.createElement;
+        g.document.createElement = tag => { const node = create(tag);
+            if (tag === 'dialog') node.close = () => { node.open = false; closes.push(() => node.dispatchEvent({ type: 'close' })); };
+            return node;
+        };
+    } });
+    t.$('.my-board [data-cid="p0c0"]').click(); const before = JSON.stringify(t.handle.state);
+    const opener = t.$('.b-future-open'); opener.click(); const old = t.$('.b-future-dialog');
+    old.querySelector('button').click(); opener.click(); const current = t.$('.b-future-dialog');
+    closes.forEach(fn => fn()); old.querySelectorAll('button')[3].click();
+    assert.equal(t.$('.b-future-dialog'), current);
+    // Even a retained live target handler cannot submit while a clip is open.
+    t.$('.opp-board [data-cid="p1c0"]').click();
+    assert.equal(JSON.stringify(t.handle.state), before);
+    t.handle.destroy(); t.g.flush();
+});
 
 test('a ready Astrophysicat describes both attack and activation, and either action works', () => {
     for (const choice of ['attack', 'activate']) {
@@ -824,7 +1212,7 @@ test('changed rules: gold "Changed" tiles beside the core tiles, and each tile s
     const t = prepared({ me: ['kardashiant'], opp: ['kardashiant'] }, s => { s.axioms.active = { combat: 'underdog', cost: 'thrift', arrival: 'arrival', defeat: 'mercy' }; });
     assert.equal(t.root.querySelectorAll('.b-rule-chip').length, 0, 'no lane rule chips');
     const tiles = t.root.querySelectorAll('section.b-rules .b-rtile');
-    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'cost', 'arrival', 'defeat']);
+    assert.deepEqual(tiles.map(x => x.dataset.cat), ['victory', 'combat', 'plays', 'attacks', 'energy', 'draw', 'cost', 'arrival', 'defeat']);
     const changed = t.root.querySelectorAll('.b-rtile.changed').map(x => x.dataset.cat);
     assert.deepEqual(changed, ['combat', 'cost', 'arrival', 'defeat']);
     t.root.querySelectorAll('.b-rtile.changed').forEach(x => assert.equal(x.querySelector('.b-rtile-new').textContent, 'Changed'));
@@ -921,6 +1309,37 @@ test('the Spark hint replaces "Nothing left to do" when +1 energy makes a card p
     t.$('.b-spark').click();
     assert.ok(t.$('.b-hand [data-cid="p0c0"]').classList.contains('playable'));
     t.handle.destroy();
+});
+
+test('relative rules show effective dock values and previews; repeated casts keep one tile', () => {
+    const id = 'flux-plays-plus-1';
+    const t = prepared({ me: ['keanu'], opp: ['keanu'], energy: 10 }, s => {
+        s.players[0].axHand = [id, id]; s.axioms.active.plays = id;
+        s.axioms.numeric = { plays: { id, value: 3 } }; s.players[0].extraPlays = 1;
+    });
+    assert.match($rt(t, 'plays').textContent, /3 activations per turn/);
+    assert.match(hover(t, '.b-hand [data-axiom="' + id + '"]'), /Activations: 3 → 4/);
+    t.$('.b-hand [data-axiom="' + id + '"]').click(); t.$('.b-prompt .btn.primary').click(); t.g.flush();
+    assert.equal(t.E.rules(t.handle.state).playLimit, 4);
+    assert.equal(t.root.querySelectorAll('.b-rtile[data-cat="plays"]').length, 1);
+    assert.match($rt(t, 'plays').textContent, /4 activations per turn/); t.handle.destroy();
+});
+
+test('Fate node accessible forecast and keyboard inspection show resolution-time relative values', () => {
+    const id = 'flux-draw-plus-1';
+    const t = prepared({ me: ['keanu'], opp: ['keanu'] }, s => { s.fate.next = id; s.axioms.active.draw = 'study'; });
+    const node = t.$('.b-fev.flip:not(.far):not(.ghost)');
+    assert.match(node.getAttribute('aria-label'), /If this resolves now: Draw count: 2 → 3/);
+    node.dispatchEvent({ type: 'keydown', key: 'Enter', preventDefault() {} });
+    assert.match(t.$('.b-inspect').textContent, /Later rule changes can alter this/); t.handle.destroy();
+});
+
+test('ordinary fallback opponents use the intro contribution while explicit rule decks stay exact', () => {
+    const cfg = { ...practice }; delete cfg.axiomDeck;
+    const t = setup(cfg), s = t.handle.state;
+    const all = s.axioms.deck.concat(s.players.flatMap(p => p.axHand), s.fate.next || []);
+    assert.equal(all.filter(id => t.Rift.data.axioms[id].modifier).length, 14);
+    assert.ok(!all.includes('infinity')); t.handle.destroy();
 });
 
 test('a rule card that would change nothing is dimmed and says "Already the rule"', () => {
@@ -1141,4 +1560,39 @@ test('Fate wording follows the round for either first player; Calm motion steps 
     assert.equal(both.timing.duration, 2 * 700, 'the space still to go and the new one');
     assert.equal(both.currentTime, 0);
     t.handle.destroy();
+});
+
+
+test('attacks spend visible shared pips and the third ready card explains the exhausted budget', () => {
+    const t = prepared({ me: ['astrophysicat', 'astrophysicat', 'astrophysicat'], opp: ['kardashiant'] }, (s, move) => {
+        for (let i = 0; i < 3; i++) move('p0c' + i, 0, 'board');
+    });
+    for (let i = 0; i < 2; i++) {
+        assert.equal(t.root.querySelectorAll('.b-play-pip.on').length, 2 - i);
+        t.$('.my-board [data-cid="p0c' + i + '"]').click();
+        t.$('.b-hero[data-target="h1"]').click();
+        t.g.flush();
+    }
+    assert.equal(t.root.querySelectorAll('.b-play-pip.on').length, 0);
+    assert.match(t.$('.b-plays').title, /0 of 2.*cast, attack or manual Activate/);
+    const before = t.handle.state;
+    t.$('.my-board [data-cid="p0c2"]').click();
+    assert.equal(t.handle.state, before);
+    assert.match(t.text(), /No card activations left/);
+    assert.ok(!t.$('.b-hero[data-target="h1"]').classList.contains('valid'));
+    assert.match(t.$('.b-card-actions .btn.gold').getAttribute('aria-label'), /No card activations left/);
+    t.handle.destroy();
+});
+
+
+test('Danger caps next-turn attacks by the shared budget and includes Momentum only when earned', () => {
+    for (const bonus of [null, 'momentum']) {
+        const t = prepared({ me: ['kardashiant'], opp: ['astrophysicat', 'astrophysicat', 'astrophysicat'] }, (s, move) => {
+            s.players[0].hearts = 3;
+            for (let i = 0; i < 3; i++) move('p1c' + i, 1, 'board');
+            if (bonus) s.axioms.active.bonus = bonus;
+        });
+        assert.equal(!!t.$('.b-danger'), !!bonus, 'three one-attack creatures need Momentum to threaten 3 hearts');
+        t.handle.destroy();
+    }
 });

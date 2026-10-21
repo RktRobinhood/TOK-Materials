@@ -17,10 +17,11 @@
         const budget = el('p.catch-budget');
         const play = el('button.btn.catch-play', { type: 'button', onclick: toggle });
         const field = el('div.catch-field'), controls = el('div.catch-controls');
+        const result = el('div.catch-result');
         const rules = el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
         rules.open = !o.started;
         const visitor = el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'picture' ? 'Rebuild the picture. Catch the beast.' : board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : board.kind === 'net' ? 'Close the clearing. Catch the beast.' : 'Guide the beast to your lantern.' })]);
-        game.append(el('h3', { text: games.NAMES[board.kind] }), rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status);
+        game.append(el('h3', { text: games.NAMES[board.kind] }), result, rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status);
         container.append(game);
         function beast() {
             const node = el('span.catch-beast');
@@ -58,6 +59,7 @@
             if (board.done && o.onFinish) o.onFinish(board.done);
         }
         function refresh() {
+            result.replaceChildren(...(board.done ? [Rift.resultBanner(board.done === 'caught' ? 'won' : 'lost', board.done === 'caught' ? 'You won!' : 'It escaped this time.', board.done === 'caught' ? 'You caught the creature.' : 'Try a different plan.')] : []));
             const focus = root.document.activeElement;
             const key = focus && focus.getAttribute && focus.getAttribute('data-catch-key');
             play.textContent = phase === 'ready' ? o.startLabel || 'Start · 1 charm' : phase === 'running' ? 'Pause' : phase === 'paused' ? 'Resume' : 'Finished';

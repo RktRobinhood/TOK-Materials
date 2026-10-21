@@ -91,7 +91,7 @@ test('Cross-Examine: Guard, 1 less damage from each hit, reads the hand and draw
     onBoard(t, 'p0c0', 'p1c0');
     stats(t, 'p0c0', 3, 9);
     t = act(t, { type: 'attack', cid: 'p0c0', target: 'p1c0' });
-    assert.equal(hp(t, 'p1c0'), B.data.creatures.quibblequill.health - 2);
+    assert.equal(hp(t, 'p1c0'), B.data.creatures.quibblequill.health - 1, 'Weak −1 then Cross-Examine prevents one more');
 });
 
 test('Loaded Odds: right gives +3/+3 and a card; wrong still gives +1/+1', () => {

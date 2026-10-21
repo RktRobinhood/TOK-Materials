@@ -406,8 +406,9 @@ test('the timing Axioms are later earnable rules: no pool, default ten, starter 
         }
         assert.ok(AX[id].text.length <= 130 && AX[id].short.length <= 30, id + ': short text');
     });
-    // The default ten (and so every starter) is unchanged.
-    assert.deepEqual(plain(D.default), ['underdog', 'reverse-hearts', 'normal-hearts', 'thrift', 'abundance', 'study', 'arrival', 'vigilance', 'choice', 'mercy']);
+    // #101 changes the default ten; none of these unreleased timing cards enter that contribution.
+    assert.equal(D.default.length, 10);
+    assert.equal(D.default.filter(id => AX[id].modifier).length, 7);
 });
 
 test('saves and backups: the battle state with tokens and timing rules survives JSON and replays the same; save codes keep the new ids', async () => {
@@ -431,8 +432,8 @@ test('saves and backups: the battle state with tokens and timing rules survives 
     assert.equal(logOf(s, 'summon').length, 0, 'the input state is untouched');
     // Save codes carry card ids as text, so a later grant of these cards survives a backup code.
     const save = Rift.State.freshState();
-    save.tactics = ['prepared-defence', 'tomorrows-idea'];
-    save.axioms = ['patient-plans', 'open-calendar'];
+    ['prepared-defence', 'tomorrows-idea'].forEach(id => Rift.State.grantTactic(id, save));
+    ['patient-plans', 'open-calendar'].forEach(id => Rift.State.grantAxiom(id, save));
     const back = Rift.State.migrate(await Rift.State.decodeAsync('save', await Rift.State.encodePacked('save', save)));
     assert.deepEqual(plain(back.tactics), ['prepared-defence', 'tomorrows-idea']);
     assert.deepEqual(plain(back.axioms), ['patient-plans', 'open-calendar']);

@@ -1,0 +1,228 @@
+{
+  "method": "Reassemble generated PCM at measured silence midpoints, preserving existing FX. No TTS requests.",
+  "backup": "C:/Users/mp/AppData/Local/Temp/rift-voice-repairs-20261019/original-clips",
+  "repairs": [
+    {
+      "id": "carlseal-7bgcq",
+      "parts": [
+        {
+          "source": "carlseal-7bgcq",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "5430e506cf168122f74d2c22a1e2fe7b3778403b7c5fdbb4b06b45c4628e21b1"
+        },
+        {
+          "source": "carlseal-1lxtuzq",
+          "start": 0,
+          "end": 1.39,
+          "sourceSha256": "f441fee32cb8c77d8312bd7d21ab710c50ea7d101b2f5ba54de57f4c88d3636b"
+        }
+      ],
+      "sha256": "57649f688cd7e01769f9147c3c8f4404c09ac70b042d7c2ff7dbfb58cc5eeae6"
+    },
+    {
+      "id": "carlseal-1lxtuzq",
+      "parts": [
+        {
+          "source": "carlseal-1lxtuzq",
+          "start": 1.39,
+          "end": null,
+          "sourceSha256": "f441fee32cb8c77d8312bd7d21ab710c50ea7d101b2f5ba54de57f4c88d3636b"
+        },
+        {
+          "source": "carlseal-15yh4wo",
+          "start": 0,
+          "end": 2.77,
+          "sourceSha256": "737e4ad650c0773f43c9713254aa2b18ea4daef798b7889236800311392f9f32"
+        }
+      ],
+      "sha256": "a5433502a36ce54348e7eb2699b07d0a9cfb3651d8403e4ae89fee81685bddae"
+    },
+    {
+      "id": "carlseal-15yh4wo",
+      "parts": [
+        {
+          "source": "carlseal-15yh4wo",
+          "start": 2.77,
+          "end": null,
+          "sourceSha256": "737e4ad650c0773f43c9713254aa2b18ea4daef798b7889236800311392f9f32"
+        },
+        {
+          "source": "carlseal-97u75e",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "552fbc3eaa5aa556f4a4725b9410ea97f68e3f9aa74ee1996de8bede34afa5e8"
+        }
+      ],
+      "sha256": "fd3ac3855a1aa9284da778f2cb64fae9700c026190568eadd345e6dc60a8d756"
+    },
+    {
+      "id": "obambu-mnla5v",
+      "parts": [
+        {
+          "source": "obambu-mnla5v",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "2de16f726254bec1b112204e7ce7eb1b6590b87e479a4cef70fd738b9fd43569"
+        },
+        {
+          "source": "obambu-15xvaha",
+          "start": 0,
+          "end": 1.5,
+          "sourceSha256": "49e6a8c4f7c29d8a172921af39e6b56c7621c09d13e920f52957f9079fb1fd8a"
+        }
+      ],
+      "sha256": "42a4f87ba8c4596fcd654e293b72a515fffd7ab2397fbd87cac223f8eb5b7047"
+    },
+    {
+      "id": "obambu-15xvaha",
+      "parts": [
+        {
+          "source": "obambu-15xvaha",
+          "start": 1.5,
+          "end": null,
+          "sourceSha256": "49e6a8c4f7c29d8a172921af39e6b56c7621c09d13e920f52957f9079fb1fd8a"
+        },
+        {
+          "source": "obambu-znlz2m",
+          "start": 0,
+          "end": 1.71,
+          "sourceSha256": "113eabcce931f044e5c8e809f38ea164603276487c85eb6437ce070f1ea5c481"
+        }
+      ],
+      "sha256": "3f05f47a76f67b578679147f8c26537f5da3a94727f0a225ab06ff9fcfccee96"
+    },
+    {
+      "id": "obambu-znlz2m",
+      "parts": [
+        {
+          "source": "obambu-znlz2m",
+          "start": 1.71,
+          "end": null,
+          "sourceSha256": "113eabcce931f044e5c8e809f38ea164603276487c85eb6437ce070f1ea5c481"
+        },
+        {
+          "source": "obambu-18e7hcd",
+          "start": 0,
+          "end": 1.61,
+          "sourceSha256": "b52e36f196d60d2f355c49cca8df4091876c805ec1b7c8a392dd895ab6c7f50a"
+        }
+      ],
+      "sha256": "f426c152d864f5c7c03fab18a4fac852f7d737995ba1bc2b08fff7f776332335"
+    },
+    {
+      "id": "obambu-18e7hcd",
+      "parts": [
+        {
+          "source": "obambu-18e7hcd",
+          "start": 1.61,
+          "end": null,
+          "sourceSha256": "b52e36f196d60d2f355c49cca8df4091876c805ec1b7c8a392dd895ab6c7f50a"
+        }
+      ],
+      "sha256": "3bb355bb10cefa950c36860a528f5ae7d24a37b8c52f54253d6661f0a3ff0a03"
+    },
+    {
+      "id": "swiftlet-possessed-20jg1n",
+      "parts": [
+        {
+          "source": "swiftlet-possessed-20jg1n",
+          "start": 0,
+          "end": 3.73,
+          "sourceSha256": "ed56872023b1b14701a6fefd8b0af9e3324c804370361454036619b78f0add02"
+        }
+      ],
+      "sha256": "a1a1a9bdb1a4631eefbc90f55607d48a6da89a755724390b69d3864df2503964"
+    },
+    {
+      "id": "swiftlet-possessed-yuqnw3",
+      "parts": [
+        {
+          "source": "swiftlet-possessed-20jg1n",
+          "start": 3.73,
+          "end": null,
+          "sourceSha256": "ed56872023b1b14701a6fefd8b0af9e3324c804370361454036619b78f0add02"
+        },
+        {
+          "source": "swiftlet-possessed-yuqnw3",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "9a031fc5073d9560ff48cf2e5937d136786fffec389b0d7b29177eeb7809dfd2"
+        }
+      ],
+      "sha256": "9b73f36113a7eecfb203c7ac5f172f0b75a13b749e5a6726b23a1d2fcf9db03c"
+    },
+    {
+      "id": "granny-fk4a70",
+      "parts": [
+        {
+          "source": "granny-fk4a70",
+          "start": 0,
+          "end": 11.98,
+          "sourceSha256": "ebcfd711cc95f19e1964435c1f37ea11c58cef493558090a077a450f2c2c683e"
+        }
+      ],
+      "sha256": "f15b21a1b97a964426b02e3980fa2f00b972c7a0ea4f12b9f122064a08aa76d7"
+    },
+    {
+      "id": "granny-dfpemt",
+      "parts": [
+        {
+          "source": "granny-fk4a70",
+          "start": 11.98,
+          "end": null,
+          "sourceSha256": "ebcfd711cc95f19e1964435c1f37ea11c58cef493558090a077a450f2c2c683e"
+        },
+        {
+          "source": "granny-dfpemt",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "5847d2d45b4783dc82a032d479e733532443d09f920dec5e34db49a2687963d6"
+        }
+      ],
+      "sha256": "8570f1721e6a5310d3b50673d2db2d2796730ac661a395cd6a11177493e221d2"
+    },
+    {
+      "id": "beansprout-1m27sc0",
+      "parts": [
+        {
+          "source": "beansprout-1m27sc0",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "5a3c97fe4d24b6cf926a953ef713d87d551f50556bf5e0ce5e9da262a285df80"
+        },
+        {
+          "source": "beansprout-1aug553",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "04ade5e7d39901ab11a6cf9d6169cae1a7a47edcdd587b84e8992612cd97f7e7"
+        }
+      ],
+      "sha256": "563aa16d1edc9dfd3f24cdea8fadf2633c1a5d5baf01c51135f5200faf8c5c0c"
+    },
+    {
+      "id": "beansprout-116y8h7",
+      "parts": [
+        {
+          "source": "beansprout-1pu4117",
+          "start": 0,
+          "end": null,
+          "sourceSha256": "53de26f1a5b34634a4534c877c012fa3767185f17dc8e20a5de110e39bf4b505"
+        }
+      ],
+      "sha256": "5706577179896087dba66e5c57b15ee08eb16bf678ec573dcb05230802ed3e1f"
+    },
+    {
+      "id": "beansprout-1pu4117",
+      "parts": [
+        {
+          "source": "beansprout-iybblq",
+          "start": 0,
+          "end": 1.25,
+          "sourceSha256": "641035d595e28754ad64a9fac806f6a39fc3816595b9b5912bfcbcae8b7ef9e6"
+        }
+      ],
+      "sha256": "9c9faa559a8e2810902e2687d6ee6d7cd5d919a890bdd2c05cc0f6c9544e1e4d"
+    }
+  ]
+}

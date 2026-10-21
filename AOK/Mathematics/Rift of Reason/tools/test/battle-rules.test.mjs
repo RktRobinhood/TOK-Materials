@@ -105,8 +105,9 @@ test('The Eyebrow takes 1 less damage from each hit', () => {
     onBoard(s, 'p0c0', 'p1c0');
     stats(s, 'p0c0', 3, 9);
     stats(s, 'p1c0', 1, 6);
+    assert.equal(E.fightPreview(s, 'p0c0', 'p1c0').damageToDefender, 1, 'Weak −1, then Eyebrow prevents 1');
     s = hit(s, 'p0c0', 'p1c0');
-    assert.equal(hp(s, 'p1c0'), 4);
+    assert.equal(hp(s, 'p1c0'), 5);
 });
 
 test('Rest and Recover (vigilance) heals creatures fully at the start of their controller\'s turn', () => {
@@ -171,18 +172,18 @@ test('Axiom of the Crowd: +1 attack for every other friendly creature', () => {
     assert.equal(atk(s, 'p0c0'), 3);
 });
 
-test('the colour wheel: +1 attack against the colour it beats; The Broken Postulate reverses it; Memory is outside', () => {
+test('the six-colour wheel has signed matchups; The Broken Postulate swaps them; Memory participates', () => {
     // Astrophysicat is Reason, Billie Eelish is Emotion, Siuuugull is Memory.
     const s = setup({ p0: ['astrophysicat', 'siuuugull'], p1: ['eelish'] });
     onBoard(s, 'p0c0', 'p0c1', 'p1c0');
     stats(s, 'p0c0', 2, 5);
     stats(s, 'p1c0', 2, 6);
     assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 3);
-    assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 2);
+    assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 1);
     assert.equal(E.attackOf(s, 'p0c0'), 2, 'no bonus against a hero');
-    assert.equal(E.wheelBonus(s, s.cards.p0c1, s.cards.p1c0), 0);
+    assert.equal(E.wheelBonus(s, s.cards.p0c1, s.cards.p1c0), 1);
     rule(s, 'curved-space');
-    assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 2);
+    assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 1);
     assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 3);
     const d = hit(rule(s, 'age-of-reason'), 'p0c0', 'p1c0');
     assert.equal(d.axioms.active.colour, 'age-of-reason', 'a spotlight replaces the reversed wheel');
@@ -210,7 +211,9 @@ test('attack limits: One Step at a Time, Two Paths, Haste, and Rapid Fire', () =
     s = rule(base(), 'haste');
     s = hit(hit(s, 'p0c0', 'h1'), 'p0c0', 'h1');
     assert.equal(E.canAttack(s, 'p0c0'), false);
-    assert.equal(E.canAttack(s, 'p0c1'), true);
+    assert.equal(E.canAttack(s, 'p0c1'), false, 'two Haste attacks exhaust the shared budget');
+    rule(s, 'plenty');
+    assert.equal(E.canAttack(s, 'p0c1'), true, 'a third activation does not reset either creature attack count');
     s = hit(hit(base(), 'p0c3', 'h1'), 'p0c3', 'h1');
     assert.equal(E.canAttack(s, 'p0c3'), false, 'Rapid Fire attacks twice');
     assert.equal(s.players[1].hearts, 10 - 2 * Rift.data.creatures.eminemu.attack);
@@ -686,6 +689,9 @@ test('tactics: Counterexample, Pep Talk, Stand Firm, Eureka!', () => {
     toHand(e, 'p0c2');
     e = act(e, { type: 'play', cid: 'p0c2' });
     e = cast(e, 'p0c2');
+    assert.equal(E.isSleeping(e, 'p0c2'), false, 'Eureka wakes the creature');
+    assert.equal(E.canAttack(e, 'p0c2'), false, 'cast and Eureka used both activations');
+    rule(e, 'plenty');
     assert.equal(E.canAttack(e, 'p0c2'), true);
     assert.equal(atk(e, 'p0c2'), e.cards.p0c2.attack + 1);
 });
@@ -793,6 +799,7 @@ test('a creature discarded because the hand is full is not "lost" for the after-
     if (s.phase === 'choose') s = act(s, { type: 'choose', choice: 'p0c0' });
     assert.ok(s.players[0].hand.includes('p0c0'));
     assert.equal(s.cards.p0c0.burned, false);
+    s = pass(pass(s)); // Rethink and Recall used both activations; fight on the next own turn.
     onBoard(s, 'p0c0');
     stats(s, 'p0c0', 1, 1);
     stats(s, 'p1c0', 5, 9);
@@ -819,7 +826,7 @@ test('basic rule cards: flagged, plain names, and they still replace the active 
     const ax = Rift.data.axioms;
     same(Object.keys(ax).filter(id => ax[id].basic).sort(), ['normal-hearts', 'patience', 'three-actions', 'two-plays']);
     assert.equal(ax['two-plays'].name, 'Two Moves');
-    assert.equal(ax['two-plays'].text, 'Back to normal: each player may play 2 cards per turn.');
+    assert.match(ax['two-plays'].text, /2 card activations per turn: casts, attacks and Activate together/);
     assert.equal(ax['three-actions'].name, 'Free Attacks');
     assert.equal(ax['three-actions'].text, 'Back to normal: every ready creature may attack once per turn.');
     assert.equal(ax['normal-hearts'].name, 'Back to the Goal');

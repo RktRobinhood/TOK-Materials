@@ -1,0 +1,8 @@
+{
+  "base": "6cb4ac939c83b2b0ce7c0763d7b385c4299396e7",
+  "total": 2645,
+  "recordedBeforePass": 2531,
+  "missingBeforePass": 114,
+  "newlySettledGranny": 37,
+  "reason": "Upstream published catalog discovery and lesson wording while first phase was running. Continue on its existing flash pin with the same shared ledger."
+}

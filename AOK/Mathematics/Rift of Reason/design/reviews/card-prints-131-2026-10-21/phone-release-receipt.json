@@ -1,0 +1,16 @@
+{
+  "dialog": {
+    "bottom": 828,
+    "height": 812,
+    "left": 16,
+    "right": 374,
+    "top": 16,
+    "width": 358,
+    "x": 16,
+    "y": 16
+  },
+  "focus": "tactic:peer-review",
+  "pageWidth": 390,
+  "text": "Peer Review1/4 owned · 1 foil · 1 in deckRelease one foil Peer Review",
+  "viewport": 390
+}
