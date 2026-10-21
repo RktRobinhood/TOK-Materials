@@ -1,3 +1,7 @@
+## Story-only cards — 21 October 2026
+
+Eighteen plot-1 cards now have actual runtime effects and fixed story sources. Completed-node proof plus a canonical once-only receipt grants two normal copies; existing historical copies satisfy the entitlement. Visits, dark-node shortcuts and practice do not qualify. Plot IDs stay out of packs forever. Collection shows known/earned sources. Seven shared Win goals settle only at the active player's own turn end, after cleanup/hand limits and before Fate; hearts reaching zero settle first. The Common Good is the first released Mythic Axiom, with ordinary print limits and no wild catch route. [Source policy and verification](reviews/story-132-2026-10-21.md) records all18 contracts,96 legal matchup probes and acceptance limits. Expansion frontier: seven foundation cards, eighteen plot cards,185 held concepts.
+
 ## Five-tier rarity — 21 October 2026
 
 Common, Uncommon, Rare, Mythic and Legendary share canonical labels, C/U/R/M/L marks and distinct static border patterns across Collection and battles. Creature and spell/Axiom-folder filters use those tiers. Missing historical released spell/rule tiers now explicitly use Common. Mythic is supported in inventory/decks/backups with ordinary4-owned/2-deck rules; it has no approved wild spawn/catch tuning and is excluded from those routes. Legendary-only protections remain explicit. No Mythic card is newly released here. See [verification and compatibility](reviews/rarity-130-2026-10-21.md) and art ledger13.90.

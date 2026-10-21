@@ -88,6 +88,7 @@
                 ]),
             ]),
             el('p', { text: c.blurb }),
+            Rift.Acquisition && Rift.Acquisition.story('creature', speciesId) ? el('p.small', { text: Rift.Acquisition.sourceText('creature', speciesId, s) }) : null,
             el('p', null, [el('strong', { text: 'Ability: ' }), c.abilityText]),
             mine.length ? el('h3', { text: Rift.State.isLegendary(speciesId) ? 'Your ' + c.name + ' (legendary)' : 'Your ' + c.name + ' folder: ' + mine.length + ' of ' + Rift.State.COPY_CAP }) : null,
             mine.length ? el('p.small.muted', { text: Rift.State.isLegendary(speciesId)
@@ -262,6 +263,7 @@
                     el('strong', { text: t.name }), ' ', el('span.stat.stat-cost', { title: 'Energy cost', text: '⚡ ' + t.cost }),
                     t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : el('span.chip', { text: 'generic' }),
                     ' ', Rift.Rarity.badge(t),
+                    Rift.Acquisition && Rift.Acquisition.story('tactic', id) ? el('div.small', { text: Rift.Acquisition.sourceText('tactic', id, s) }) : null,
                     el('div.small', { text: t.text }),
                     el('div.small', { text: 'Owned copies: ' + S.cardCopies('tactic', id, s) }),
                     quota,
@@ -381,6 +383,7 @@
             steppers.push({ id, minus, plus, out });
             return el('div.axiom-option', null, [
                 el('span', { style: { flex: 1 } }, [el('strong', { text: ax.name }), Rift.Rarity.badge(ax), el('div.small', { text: ax.category + ': ' + ax.text }), el('div.small', { text: 'Owned copies: ' + S.cardCopies('axiom', id, s) })]),
+                Rift.Acquisition && Rift.Acquisition.story('axiom', id) ? el('div.small', { text: Rift.Acquisition.sourceText('axiom', id, s) }) : null,
                 el('span.stepper', { role: 'group', 'aria-label': ax.name + ' copies' }, [minus, out, plus]),
             ]);
         }));
@@ -428,6 +431,7 @@
                     const used = chosen.filter(c => c === id).length;
                     const key = kind + ':' + id;
                     const row = el('div.panel', { tabIndex: -1, dataset: { printFolder: key } }, [el('strong', { text: name }), ' ', Rift.Rarity.badge(defs[id]), el('div.small', { text: prints.length + '/4 owned · ' + prints.filter(Boolean).length + ' foil · ' + used + ' in deck' })]);
+                    if (Rift.Acquisition && Rift.Acquisition.story(kind, id)) row.appendChild(el('p.small', { text: Rift.Acquisition.sourceText(kind, id, s) }));
                     if (key === focusKey) focusRow = row;
                     for (const foil of [false, true]) {
                         const index = prints.indexOf(foil);
@@ -493,8 +497,16 @@
                 shown.textContent = filtered.length ? filtered.length + ' creature kind' + (filtered.length === 1 ? '' : 's') + ' shown.' : 'No creatures in this rarity yet.';
             }
             refreshGrid();
+            const storyRows = Rift.Acquisition ? Rift.Acquisition.entries.filter(row => Rift.Acquisition.released(row) && ((s.map.revealed || []).includes(row.node) || s.flags['plot-card:' + row.id])) : [];
+            const storyPanel = el('details.panel', {}, [el('summary', { text: 'Story cards · earned through the adventure' }),
+                el('p.small', { text: 'Complete story milestones to earn two normal copies. These cards never come from packs. New sources appear as you explore.' }),
+                ...storyRows.map(row => {
+                    const def = Rift.data[{creature:'creatures',tactic:'tactics',axiom:'axioms'}[row.kind]][row.id];
+                    return el('p.small', {}, [el('strong', { text: def.name + ': ' }), Rift.Acquisition.sourceText(row.kind, row.id, s)]);
+                })]);
             rootNode.append(hud, el('div.collection-screen', null, [
                 el('h1', { text: 'Collection' }),
+                storyPanel,
                 el('p.small', { text: Rift.State.walletOf(s).coins + ' Coins · ' + Rift.State.walletOf(s).freePacks + ' free packs saved. The pack stall is at the Campfire Clearing.' }),
                 el('p.muted', { text: caughtKinds + ' kinds caught · ' + s.creatures.length + ' creatures · ' + s.seen.length + ' seen. Legendaries appear only after you hear a rumour.' }),
                 el('div.panel.deck-panel.stack', null, [

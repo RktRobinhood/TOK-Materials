@@ -671,8 +671,34 @@
         run(api, p, target) { const n = api.s.players[p].monoColour ? 3 : 2; api.heal(target, n); api.emit({ t: 'tactic', player: p, text: 'Small Patch: heal ' + api.name(target) + ' by ' + n + '.' }); },
     };
     Rift.data.tactics = tactics;
+    tactics['generic-quiet-reset'] = {
+        id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,
+        art: 'art/spell-motif-generic', text: 'Restore one chosen active category to basics without drawing or moving Fate.',
+        usable: s => Rift.Battle.Engine.changedAxioms(s).length > 0,
+        run(api, p) {
+            const options = api.changedCategories();
+            api.ask({ player: p, kind: 'option', options, labels: Object.fromEntries(options.map(c => [c, 'Reset ' + c])),
+                prompt: 'Which changed rule goes back to basics?', source: { type: 'tactic', id: 'generic-quiet-reset' } });
+        },
+        choose(api, p, category) { api.clearCategory(category, p); },
+    };
     // Tokens (#121): plain generated creatures, shaped like data/creatures.js entries (art 'creature/<id>/idle').
+    tactics['generic-the-last-page'] = {
+        id: 'generic-the-last-page', name: 'The Last Page', cost: 6, rarity: 'legendary', release: 'plot-1', packEligible: false,
+        art: 'art/spell-the-last-page',
+        text: 'Reset every active rule without moving Fate. Return one defeated creature with printed cost 4 or less to your hand, then draw 2 cards.',
+        run(api, p) {
+            Object.keys(api.s.axioms.active).forEach(category => api.clearCategory(category, p));
+            const options = api.s.players[p].discard.filter(cid => { const c = api.s.cards[cid]; return c.kind === 'creature' && !c.burned && (Rift.data.creatures[c.species] || {}).cost <= 4; });
+            if (!api.ask({ player: p, kind: 'card', options, prompt: 'Which small creature returns for the last page?', source: { type: 'tactic', id: 'generic-the-last-page' } })) {
+                api.draw(p); api.draw(p);
+            }
+        },
+        choose(api, p, cid) { api.fromDiscard(cid); api.draw(p); api.draw(p); },
+    };
+
     Rift.data.tokens = {
+        'paper-token': {name:'Paper',token:true,generic:true,colour:null,rarity:'common',cost:0,attack:1,health:1,art:'art/spell-motif-generic',blurb:'A colourless paper backup. It leaves the battle when it leaves play.'},
         'idea-token': { name: 'Idea', token: true, colour: 'imagination', rarity: 'common', cost: 1, attack: 1, health: 2,
             blurb: 'A small new idea from Tomorrow\'s Idea. It is not a card: when it leaves play, it is gone.' },
     };

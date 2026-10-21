@@ -608,6 +608,11 @@
                 return;
             }
             if (ev) {
+                if (ev.categoryReset) {
+                    showReveal(el('div.b-reveal-rule', {}, [el('div.b-reveal-reset', {}, [icon('ui/fate-reset', '↺', 'b-reset-icon'), el('div', { text: resetWords(ev.categoryReset) })])]),
+                        (ev.player === ME ? 'You restore a basic rule' : oppName + ' restores a basic rule') + '!', RULE_SHOW, 'rule');
+                    return;
+                }
                 const ax = (Rift.data.axioms || {})[ev.id] || { name: ev.id };
                 const by = ev.clear ? (ev.player === ME ? 'You clear every rule' : oppName + ' clears every rule')
                     : ev.player == null ? 'Fate turns over a free rule' : ev.player === ME ? 'You change a rule' : oppName + ' changes a rule';
@@ -885,7 +890,7 @@
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
-                el('div.bc-art', {}, [Rift.Assets.img('creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
+                el('div.bc-art', {}, [Rift.Assets.img(((Rift.data.tokens || {})[d.species] || {}).art || 'creature/' + d.species + '/idle', { colour: d.printedColour, label: d.speciesName, alt: '' })]),
                 Rift.Rarity.badge(Rift.data.creatures[d.species] || Rift.data.tokens[d.species]),
                 d.onBoard ? null : gem('cost', d.cost), // the cost no longer matters once it is in play (teacher, 10 Oct)
                 el('div.bc-name' + fitName(d.name + (d.legendary ? ' ★' : '')), { text: d.name + (d.legendary ? ' ★' : '') }),
@@ -1024,10 +1029,11 @@
         function axiomFace(id, size) {
             const ax = (Rift.data.axioms || {})[id] || { name: id, text: '', category: '' };
             const frame = bg('ui/card-axiom');
+            const art = ax.art || 'ui/axiom-' + id;
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
-                el('div.bc-art', {}, [has('ui/axiom-' + id) ? Rift.Assets.img('ui/axiom-' + id, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
+                el('div.bc-art', {}, [has(art) ? Rift.Assets.img(art, { alt: '' }) : el('div.bc-glyph', { text: '⚖' })]),
                 gem('cost', E.axiomCost(state, id)),
                 el('div.bc-name' + fitName(ax.name), { text: ax.name }),
                 Rift.Rarity.badge(ax),
@@ -1128,6 +1134,8 @@
             const preview = E.axiomPreview(state, id);
             return el('div.b-notes', {}, [
                 el('div.b-note-line.b-ability', {}, [el('b', { text: ax.name + ': ' }), ax.text]),
+                ax.goalChecks ? el('div.b-note-line', { text: 'Goal checks after cleanup and hand limits, at your own turn end, before Fate moves. Hearts reaching zero still settle first.' }) : null,
+                ax.goalChecks ? el('div.b-note-line', { text: [ME,OPP].map(p=>{const g=E.goalProgress(state,p);return (p===ME?'You':oppName)+': '+(g&&g.id===id?g.checks.map(c=>(c.met?'✓ ':'○ ')+c.text).join('; '):'play this Win rule to make its goal active');}).join('. ') }) : null,
                 preview.text ? el('div.b-note-line', { text: 'If played now: ' + preview.text + ' Shared value; owner bonuses stay separate.' }) : null,
                 ax.clearRules
                     ? el('div.b-note-line', {}, [el('b', { text: 'Your own card: ' }), 'every rule goes back to normal for BOTH players. Only you have it. It never goes into the shared deck.'])
@@ -1627,7 +1635,17 @@
                 seen.setAttribute('aria-label', 'Seen in ' + oppName + '\'s hand: ' + seen.getAttribute('aria-label'));
                 dom.oppHand.appendChild(seen);
             });
-            state.players[OPP].axHand.forEach(() => dom.oppHand.appendChild(cardBack(true)));
+            const publicRules = (state.players[OPP].publicAxioms || []).slice();
+            state.players[OPP].axHand.forEach(id => {
+                const known = publicRules.indexOf(id);
+                if (known < 0) { dom.oppHand.appendChild(cardBack(true)); return; }
+                publicRules.splice(known, 1);
+                const seen = axiomCardEl(id, { size: 'mini' });
+                seen.classList.add('revealed');
+                seen.appendChild(el('span.b-seen-tag', { text: 'Public', 'aria-hidden': 'true' }));
+                seen.setAttribute('aria-label', 'Public in ' + oppName + '\'s hand: ' + seen.getAttribute('aria-label'));
+                dom.oppHand.appendChild(seen);
+            });
 
             // hero rows: hero, power and pile counts on the left, energy on the right
             dom.oppLeft.innerHTML = '';
@@ -1944,7 +1962,7 @@
                 if (ev.t === 'turn-end') { between = true; return; }
                 const idx = (ev.round || 0) + (between ? 1 : 0);
                 if (ev.t === 'reset') out.push({ idx, kind: 'reset' });
-                else if (ev.t === 'axiom') out.push({ idx, kind: ev.player == null ? 'flip' : 'rule', id: ev.id, by: ev.player });
+                else if (ev.t === 'axiom') out.push(ev.categoryReset ? { idx, kind: 'reset', by: ev.player, category: ev.categoryReset } : { idx, kind: ev.player == null ? 'flip' : 'rule', id: ev.id, by: ev.player });
                 else if (ev.t === 'time') out.push({ idx, kind: /closer/.test(ev.text) ? 'forward' : 'rewind', by: ev.player });
                 else if (ev.t === 'fate-event') {
                     const rec = (state.fate.queue || []).find(x => x.id === ev.id) || {};
@@ -2218,6 +2236,7 @@
         }
         // 'Guard: Off (attack anyone)' — the category's name, then the rule in a few words.
         const ruleWords = ax => (ax.short ? (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short : ax.name);
+        const resetWords = category => (RULE_LABEL[category] || category) + ': back to basics. ' + ((CORE_RULES.find(row => row[0] === category) || [])[4] || BASIC_WORDS[category] || 'No extra rule.') ;
         // The rule a new rule card would replace: the changed rule in its category, else the basic one.
         function replacedRule(id) {
             const AX = Rift.data.axioms || {};
@@ -2235,7 +2254,7 @@
         function pastMarker(h, AX, i) {
             const ax = h.id ? AX[h.id] : null;
             const who = h.by === ME ? 'You' : h.by === OPP ? oppName : 'Fate';
-            const text = h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 round sooner' : h.kind === 'rewind' ? who + ': Fate 1 round later'
+            const text = h.category ? who + ' restored ' + resetWords(h.category) : h.kind === 'reset' ? 'Fate reset all rules' : h.kind === 'forward' ? who + ': Fate 1 round sooner' : h.kind === 'rewind' ? who + ': Fate 1 round later'
                 : h.kind === 'scheduled' ? 'Fate reached ' + whoseEvent(h.by) + ' ' + scheduledName(h.def) + (h.fires > 1 ? ' again' : '')
                     + (h.repeat ? ' (repeatable: it happens each time Fate lands there, until it expires)' : ' (spent: it happens only once)')
                 : h.kind === 'leap' ? who + ': Fate leapt ' + roundsWord(h.spaces) + ' closer. ' + leapWords(h)
@@ -2244,7 +2263,7 @@
             const when = h.k === 0 ? 'this round' : roundsWord(-h.k) + ' ago';
             const fateOnly = ['scheduled', 'leap', 'expired'].includes(h.kind);
             const detail = 'Already happened · ' + when + '. ' + text.replace(/\.$/, '') + '. '
-                + (h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : fateOnly ? '' : ax ? ax.text + ' ' : '')
+                + (h.category ? '' : h.kind === 'reset' ? 'All axioms returned to the basic rules. ' : fateOnly ? '' : ax ? ax.text + ' ' : '')
                 + (fateOnly ? '' : 'See Axioms for what is active now.');
             // Markers of one round sit side by side (a leap, what it landed on, an expiry…), never on top of each other.
             const m = el('div.b-fpast.' + h.kind, { tabindex: 0, role: 'button', 'aria-label': detail.trim(), style: i ? { marginLeft: (i * 14) + 'px' } : null },
@@ -2252,7 +2271,7 @@
                     : h.kind === 'scheduled' ? el('span', { text: '◎' }) : h.kind === 'leap' ? el('span', { text: '⏭' }) : h.kind === 'expired' ? el('span', { text: '⌛' })
                     : has('ui/axiom-' + h.id) ? Rift.Assets.img('ui/axiom-' + h.id, { alt: '' }) : el('span', { text: '⚖' })]);
             const make = () => [el('div.b-notes', {}, [el('div.b-note-line', { text: detail })])];
-            inspectFateMarker(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || h.ref || ''));
+            inspectFateMarker(m, make, 'past:' + h.idx + ':' + h.kind + ':' + (h.id || h.ref || h.category || ''));
             return m;
         }
         // End turn's tooltip: whether this End closes the round and moves Fate.
@@ -2427,7 +2446,8 @@
                 if (ev.t === 'defeated' && ev.player === ME && state.cards[ev.cid]) fell.push(name(ev.cid));
                 if ((ev.t === 'play' || ev.t === 'tactic-play') && ev.player === OPP && state.cards[ev.cid]) played.push(name(ev.cid));
                 if (ev.t === 'power-use' && ev.player === OPP) bits.push('used ' + powerName(ev.id) + (ev.target && state.cards[ev.target] ? ' on ' + targetName(ev.target) : ''));
-                if (ev.t === 'axiom' && AX[ev.id]) bits.push(AX[ev.id].basic ? ruleWords(AX[ev.id]) + ' (as before)' : 'new rule: ' + ruleWords(AX[ev.id]));
+                if (ev.t === 'axiom' && ev.categoryReset) bits.push(resetWords(ev.categoryReset));
+                else if (ev.t === 'axiom' && AX[ev.id]) bits.push(AX[ev.id].basic ? ruleWords(AX[ev.id]) + ' (as before)' : 'new rule: ' + ruleWords(AX[ev.id]));
                 if (ev.t === 'reset') bits.push('all rules reset');
                 if (ev.t === 'exhaustion' && ev.player === OPP) bits.push('lost ' + ev.amount + ' ❤ to exhaustion');
             });
@@ -2780,16 +2800,16 @@
             const ev = m.ev;
             const by = ev.player === ME ? 'You' : ev.player === OPP ? oppName : 'Fate';
             const AX = Rift.data.axioms || {};
-            const axId = ev.t === 'axiom' ? ev.id : null;
+            const axId = ev.t === 'axiom' && !ev.categoryReset ? ev.id : null;
             const card = ev.cid && state.cards[ev.cid] ? ev.cid : null;
             let pic;
             if (axId && has('ui/axiom-' + axId)) pic = Rift.Assets.img('ui/axiom-' + axId, { alt: '' });
-            else if (card && state.cards[card].kind === 'creature') pic = Rift.Assets.img('creature/' + state.cards[card].species + '/idle', { alt: '', label: name(card) });
+            else if (card && state.cards[card].kind === 'creature') pic = Rift.Assets.img(((Rift.data.tokens || {})[state.cards[card].species] || {}).art || 'creature/' + state.cards[card].species + '/idle', { alt: '', label: name(card) });
             else if (card && has(tacticArt(state.cards[card].tactic))) pic = Rift.Assets.img(tacticArt(state.cards[card].tactic), { alt: '' });
-            else if (ev.t === 'reset') pic = icon('ui/fate-reset', '↺', 'b-recent-glyph');
+            else if (ev.t === 'reset' || ev.categoryReset) pic = icon('ui/fate-reset', '↺', 'b-recent-glyph');
             else if (ev.t === 'power-use') pic = powerIcon(ev.id, 'b-recent-glyph');
             else pic = el('span.b-recent-glyph', { text: MOVES[ev.t] || '•' });
-            const text = visibleText(ev) || '';
+            const text = ev.categoryReset ? resetWords(ev.categoryReset) : visibleText(ev) || '';
             const tile = el('div.b-recent-tile.' + (ev.player === ME ? 'mine' : ev.player === OPP ? 'theirs' : 'fate') + (i === 0 ? '.newest' : ''), {
                 tabindex: 0, role: 'button', 'aria-label': text + (m.after.length ? ' ' + m.after.join(' ') : ''),
             }, [pic, el('span.b-recent-move', { text: MOVES[ev.t] || '•', 'aria-hidden': 'true' }), el('span.b-recent-who', { text: by === 'You' ? 'You' : by === 'Fate' ? 'Fate' : 'Them', 'aria-hidden': 'true' })]);
@@ -3728,7 +3748,7 @@
                 stage.replaceChildren(...frame.view.players.slice().reverse().map(P => el('section.b-future-side', null, [
                     el('strong', { text: P.name + ' · ' + P.hearts + ' hearts · ' + P.energy + ' energy' }),
                     el('div.b-future-row', null, P.board.length ? P.board.map(c => el('div.b-future-card', null, [
-                        Rift.Assets.img('creature/' + c.species + '/idle', { alt: '', label: '' }), el('span', { text: c.name }),
+                        Rift.Assets.img(((Rift.data.tokens || {})[c.species] || {}).art || 'creature/' + c.species + '/idle', { alt: '', label: '' }), el('span', { text: c.name }),
                         el('small', { text: c.attack + ' attack · ' + c.health + ' health' + (c.keywords.length ? ' · ' + c.keywords.join(', ') : '') }),
                     ])) : [el('span', { text: 'No creatures here.' })]),
                 ])));

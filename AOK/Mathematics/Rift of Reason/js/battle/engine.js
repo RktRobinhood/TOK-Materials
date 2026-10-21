@@ -156,7 +156,7 @@
         }
         const s = { ...state };
         s.players = state.players.map(P => ({
-            ...P, deck: P.deck.slice(), hand: P.hand.slice(), axHand: P.axHand.slice(),
+            ...P, deck: P.deck.slice(), hand: P.hand.slice(), axHand: P.axHand.slice(), publicAxioms: (P.publicAxioms || []).slice(),
             board: P.board.slice(), armed: (P.armed || []).slice(), discard: P.discard.slice(), knows: P.knows.slice(),
         }));
         s.cards = cards;
@@ -260,6 +260,12 @@
         return { ...s, axioms: projectedAxioms(s, id, id ? axiomPreview(s, id) : null) };
     }
     function rules(s) { return memoFor(s).rules; }
+    function goalProgress(s, p) {
+        const ax=activeAxioms(s).find(a=>a.category==='victory'&&a.goalChecks);
+        if(!ax)return null;
+        const checks=ax.goalChecks(s,p,H);
+        return {id:ax.id,name:ax.name,checks,complete:checks.every(c=>c.met)};
+    }
     function combatAxiom(s) { return activeAxioms(s).find(a => a.category === 'combat') || null; }
 
     // ---- card queries --------------------------------------------------------------
@@ -501,9 +507,16 @@
         const c = s.cards[cid], P = s.players[c.controller], T = P.spellTax;
         return c.kind === 'tactic' && T && T.until >= s.turn && P.hand.includes(cid) ? T.amount : 0;
     }
-    function playCost(s, cid) {
+    function friendlySpellDiscount(s, cid, target) {
+        const c = s.cards[cid], P = s.players[c.controller], def = tacticDefs()[c.tactic] || {};
+        if (c.kind !== 'tactic' || P.friendlySpellsThisTurn || (conditionOf(s, cid) && !c.conditionSpent)) return 0;
+        if (!P.board.some(id => { let on = false;eachAbility(s, s.cards[id], d => { if (d.friendlySpellDiscount) on = true; });return on; })) return 0;
+        const friendly = target ? P.board.includes(target) : def.target && targetsFor(s, def.target, c.controller, def.filter, null).some(t => P.board.includes(t));
+        return friendly ? 1 : 0;
+    }
+    function playCost(s, cid, target) {
         const c = s.cards[cid];
-        if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || { cost: 0 }).cost + taxOn(s, cid) + spellTaxOn(s, cid);
+        if (c.kind === 'tactic') return Math.max(0, (tacticDefs()[c.tactic] || { cost: 0 }).cost + taxOn(s, cid) + spellTaxOn(s, cid) - friendlySpellDiscount(s, cid, target));
         return Math.max(0, c.cost + rules(s).costDelta) + taxOn(s, cid);
     }
     // p: who plays it (default: the active player), for Night Sight's tax.
@@ -718,7 +731,7 @@
                 if (!def) return;
                 if (def.scheduled && !canSchedule(s, p)) return;
                 if (def.usable && !def.usable(s, p, H)) return;
-                if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => list.push({ type: 'play', player: p, cid, target }));
+                if (def.target) targetsFor(s, def.target, p, def.filter, null).forEach(target => { if (playCost(s, cid, target) <= P.energy) list.push({ type: 'play', player: p, cid, target }); });
                 else list.push({ type: 'play', player: p, cid });
             }
         });
@@ -878,7 +891,7 @@
                 hearts, maxHearts: hearts, energy: 0, capacity: 0, spark: false,
                 monoColour: deckColours.length === 1 ? deckColours[0] : null,
                 deck: opts.shuffle ? rng.shuffle(ids) : ids, hand: [], axHand: [], board: [], armed: [], discard: [],
-                playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, knows: [], exhaustion: 0,
+                playedCount: 0, turnsTaken: 0, attacksThisTurn: 0, friendlySpellsThisTurn: 0, knows: [], exhaustion: 0,
                 consumables: Object.assign({}, cons),
                 bag: bagSelection(pl.bag), itemsUsed: [], itemTurn: 0,
                 power: powerSetup(pl.power), tax: 0, sight: [], nextEnergy: 0,
@@ -1045,6 +1058,10 @@
     }
 
     // The api handed to ability and tactic hooks.
+    function recordRecovery(s, p, cid) {
+        const old = s.players[p].recovered, cids = old && old.turn === s.turn ? old.cids : [];
+        s.players[p].recovered = {turn:s.turn,cids:cids.includes(cid)?cids.slice():cids.concat(cid)};
+    }
     function api(G) {
         const s = G.s;
         return {
@@ -1067,7 +1084,16 @@
                 c.frozenUntil = Math.max(c.frozenUntil || 0, nextTurnEnd(G, c.controller));
             },
             bounce: cid => bounce(G, cid),
-            fromDiscard(cid) { const P = s.players[s.cards[cid].owner]; if (removeFrom(P.discard, cid)) toHand(G, P === s.players[0] ? 0 : 1, cid); },
+            fromDiscard(cid) {
+                const p = s.cards[cid].owner, P = s.players[p];
+                if (!removeFrom(P.discard, cid)) return false;
+                const moved = toHand(G, p, cid);if (moved) recordRecovery(s, p, cid);return moved;
+            },
+            recoverBottom(cid) {
+                const p = s.cards[cid].owner, P = s.players[p];
+                if (!removeFrom(P.discard, cid)) return false;
+                P.deck.push(cid);recordRecovery(s, p, cid);return true;
+            },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
             handRoom: (p, n) => handRoom(s, p, n),
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
@@ -1106,6 +1132,8 @@
             shiftFate: n => shiftFate(G, n),
             leapFate: (n, by) => leapFate(G, n, by),
             setAxiom: (id, by) => setAxiom(G, id, by),
+            clearCategory: (category, by) => clearCategory(G, category, by),
+            changedCategories: () => changedAxioms(s).map(ax => ax.category),
             takeAxiom(id) { removeFrom(s.axioms.deck, id); },
             ask: req => ask(G, req),
             attack: cid => attackOf(s, cid),
@@ -1218,6 +1246,7 @@
         const s = G.s, c = s.cards[cid], p = c.controller, P = s.players[p];
         P.board.push(cid);
         c.enteredTurn = s.turn;
+        if (c.nextPlayHealth) { c.buffs.push({label:'Second Chance',attack:0,health:c.nextPlayHealth,temp:false});delete c.nextPlayHealth; }
         P.playedCount += 1;
         emit(G, { t: 'play', player: p, cid, target, revealed: !!revealed, text: says(s, p, 'plays') + ' ' + cardName(s, cid) + '.' });
         s.players[1 - p].board.slice().forEach(other => {
@@ -1316,7 +1345,11 @@
         if (!s.axioms.deck.length || handCount(P) >= s.options.handLimit) return null;
         const id = s.axioms.deck.shift();
         P.axHand.push(id);
-        if (!quiet) emit(G, { t: 'draw-axiom', player: p, id, privateTo: p, text: 'You take the rule card ' + axiomDefs()[id].name + '.', publicText: playerName(s, p) + ' takes a rule card.' });
+        const publicCard = !!rules(s).publicAxioms;
+        if (publicCard) (P.publicAxioms || (P.publicAxioms = [])).push(id);
+        if (!quiet) emit(G, publicCard
+            ? { t: 'draw-axiom', player: p, id, text: playerName(s, p) + ' takes the public rule card ' + axiomDefs()[id].name + '.' }
+            : { t: 'draw-axiom', player: p, id, privateTo: p, text: 'You take the rule card ' + axiomDefs()[id].name + '.', publicText: playerName(s, p) + ' takes a rule card.' });
         return id;
     }
 
@@ -1361,6 +1394,7 @@
         P.energy = P.capacity + (P.consumables['extra-energy'] || 0) + (P.nextEnergy || 0);   // nextEnergy: an environmental event (#128)
         P.nextEnergy = 0;
         P.attacksThisTurn = 0;
+        P.friendlySpellsThisTurn = 0;
         P.playsThisTurn = 0;
         P.extraPlays = 0;
         if (P.power && P.power.cooldown > 0) P.power = Object.assign({}, P.power, { cooldown: P.power.cooldown - 1 });
@@ -1374,6 +1408,13 @@
         s.pending = null;
         emit(G, { t: 'turn', player: p, text: playerName(s, p) + ': ' + P.energy + ' energy. Choose a draw.' });
         startBonus(G, p, r);
+        if (r.healMost) {
+            const target = P.board.slice().sort((a, b) => s.cards[b].damage - s.cards[a].damage || s.cards[a].enteredTurn - s.cards[b].enteredTurn)[0];
+            if (target && s.cards[target].damage > 0) {
+                const n = Math.min(r.healMost, s.cards[target].damage);s.cards[target].damage -= n;
+                emit(G, { t: 'heal', cid: target, amount: n, text: 'Fair Rest: ' + logName(s, target) + ' heals ' + n + '.' });
+            }
+        }
     }
 
     // Boosts and keywords that last "until a player's next turn starts" (#148) end as that turn starts. Damage
@@ -1475,6 +1516,8 @@
             emit(G, { t: 'tax-end', player: q, text: Q.spellTax.label + ' ends: ' + possessive(s, q) + ' spells cost the usual again.' }); Q.spellTax = null; } });
         endRules(G, p);
         cleanup(G);
+        const goal = s.winner == null && goalProgress(s,p);
+        if(goal&&goal.complete){emit(G,{t:'goal',player:p,id:goal.id,text:playerName(s,p)+' completes '+goal.name+' at their own turn end.'});setWinner(G,p,'goal:'+goal.id);}
         emit(G, { t: 'turn-end', player: p, text: says(s, p, 'ends') + ' the turn.' });
         P.turnsTaken += 1;
         s.roundTurns[p] = true;
@@ -1515,6 +1558,7 @@
             while (extra > 0 && P.hand.length) { const cid = P.hand.shift(); s.cards[cid].burned = true; P.discard.push(cid); gone.push(cardName(s, cid)); extra--; }
             while (extra > 0 && P.axHand.length) {
                 const id = P.axHand.shift();
+                removeFrom(P.publicAxioms || [], id);
                 if (!(axiomDefs()[id] || {}).own) s.axioms.discard.push(id); // an own card leaves the game
                 gone.push('a rule card'); extra--;
             }
@@ -1640,6 +1684,17 @@
         if (changed) s.completedPlays.push({ event: 'axiom-replaced', actor: by == null ? null : by, axiom: id });
     }
 
+    // A spell can reset one category without playing an Axiom or touching announced events.
+    function clearCategory(G, category, by) {
+        const A = G.s.axioms, old = A.active[category];
+        if (!old) return false;
+        A.discard.push(old);delete A.active[category];if (A.numeric) delete A.numeric[category];
+        A.flips += 1;
+        emit(G, { t: 'axiom', id: old, player: by, basic: true, categoryReset: category, text: 'Rule change — ' + category + ': back to basics.' });
+        G.s.completedPlays.push({ event: 'axiom-replaced', actor: by == null ? null : by, axiom: old, clear: true });
+        return true;
+    }
+
     // ---- scheduled Fate events (#118; design/drafts/card-arena-2026-10-12/FATE-SCHEDULE-MODEL.md) ----
     // A tactic with a `scheduled` block (data/tactics.js) puts a public event on the Fate track, `delay`
     // spaces ahead of the cursor. s.fate.queue holds plain records (never functions):
@@ -1677,7 +1732,7 @@
         const sch = (tacticDefs()[id] || {}).scheduled;
         if (!sch) return null;
         const printed = Math.max(1, sch.delay || 1), shift = rules(s).fateDelay || 0;
-        return Math.max(1, Math.min(Math.max(DELAY_MAX, printed), printed + shift));
+        return Math.max(rules(s).fateMinDelay || 1, Math.min(Math.max(DELAY_MAX, printed), printed + shift));
     }
     const lowerFirst = t => (t ? t[0].toLowerCase() + t.slice(1) : t);
     const roundsText = n => n + ' round' + (n === 1 ? '' : 's');
@@ -1929,7 +1984,7 @@
 
     function doPlay(G, cid, target) {
         const s = G.s, p = s.active, P = s.players[p], c = s.cards[cid];
-        const paidCost = playCost(s, cid);
+        const paidCost = playCost(s, cid, target);
         const spellTax = spellTaxOn(s, cid);
         spend(G, paidCost);
         if (P.tax > 0) P.tax -= 1;
@@ -1939,6 +1994,7 @@
         if (conditionOf(s, cid) && !c.conditionSpent) { arm(G, cid); afterMove(G); return; }
         if (c.kind === 'tactic') {
             const def = tacticDefs()[c.tactic];
+            if (target && P.board.includes(target)) P.friendlySpellsThisTurn = (P.friendlySpellsThisTurn || 0) + 1;
             P.discard.push(cid);
             emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
             if (def.scheduled) scheduleEvent(G, p, cid, def);
@@ -1955,6 +2011,7 @@
         spend(G, axiomCost(s, id, p));
         if (P.tax > 0) P.tax -= 1;
         removeFrom(P.axHand, id);
+        removeFrom(P.publicAxioms || [], id);
         emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' a rule card.' });
         setAxiom(G, id, p);
         for (let i = 0; i < (axiomDefs()[id].draws || 0); i++) draw(G, p);
@@ -2077,10 +2134,14 @@
         if (won) activeAxioms(s).forEach(a => {
             if (a.onFightWon) { a.onFightWon(api(G), s.cards[won]); emit(G, { t: 'axiom-effect', cid: won, text: a.name + ': ' + logName(s, won) + ' grows stronger.' }); }
         });
-        [[att, aLive, def], [def, dLive, att]].forEach(([cid, alive, foe]) => {
+        [[att, aLive, def, healthOf(s, att).current], [def, dLive, att, healthOf(s, def).current]].forEach(([cid, alive, foe, survivedHealth]) => {
             if (!alive) return;
             const c = s.cards[cid];
             eachAbility(s, c, d => { if (d.onSurvive) d.onSurvive(api(G), c, foe); });
+            s.players[c.controller].board.slice().forEach(other => {
+                if (other === cid || healthOf(s, other).current <= 0) return;
+                eachAbility(s, s.cards[other], d => { if (d.onAllySurvive) d.onAllySurvive(api(G), s.cards[other], cid, survivedHealth); });
+            });
         });
     }
 
@@ -2111,6 +2172,7 @@
         if (!dealt) return 0;
         c.damage += dealt;
         emit(G, { t: 'damage', cid, amount: dealt, source, text: logName(s, cid) + ' takes ' + dealt + ' damage.' });
+        if (healthOf(s, cid).current > 0) eachAbility(s, c, d => { if (d.onDamaged) d.onDamaged(api(G), c, dealt); });
         return dealt;
     }
 
@@ -2125,8 +2187,9 @@
             cap.dealt[p] += amount;
         }
         if (amount <= 0) return 0;
-        P.hearts = Math.max(0, P.hearts - amount);
+        const before = P.hearts;P.hearts = Math.max(0, P.hearts - amount);
         emit(G, { t: 'hit', player: p, amount, cid: source || null, text: says(s, p, 'loses') + ' ' + amount + ' heart' + (amount === 1 ? '' : 's') + ' (' + P.hearts + ' left).' });
+        if (P.hearts < before) P.board.slice().forEach(cid => { if (healthOf(s,cid).current > 0) eachAbility(s,s.cards[cid],d=>{if(d.onHeroLoss)d.onHeroLoss(api(G),s.cards[cid],before-P.hearts);}); });
         return amount;
     }
 
@@ -2384,6 +2447,8 @@
         attack: (s, cid, foe) => attackOf(s, cid, foe),
         health: (s, cid) => healthOf(s, cid).current,
         rules,
+        maxHealth: (s,cid)=>healthOf(s,cid).max,
+        changedAxioms,
         playCost: (s, cid) => playCost(s, cid),
         canAttack: (s, cid) => canAttack(s, cid),
         projectToken: (s, p, id) => projectToken(s, p, id),
@@ -2393,7 +2458,7 @@
         DEFAULTS, RULE_DEFAULTS, PAD_SPECIES, KEYWORDS,
         createBattle, legalActions, applyAction, applyLegal, previewAction, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
         rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
-        playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden,
+        playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden, goalProgress,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, H,

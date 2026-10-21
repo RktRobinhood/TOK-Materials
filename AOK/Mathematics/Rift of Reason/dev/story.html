@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Story cards review</title></head>
+<body><p>Loading the production UI with a memory-only save.</p><script>
+fetch('../index.html').then(r=>r.text()).then(html=>{
+    html=html.replace('<head>','<head><base href="../">').replace('<script src="js/main.js"><'+'/script>',
+        '<script src="dev/foundation-fixtures.js"><'+'/script><script src="dev/story.js"><'+'/script>');
+    document.open();document.write(html);document.close();
+});
+</script></body></html>

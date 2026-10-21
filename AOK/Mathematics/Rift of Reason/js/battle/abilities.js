@@ -543,9 +543,59 @@
             entrance: { run(api, card) {
                 const P = api.s.players[card.controller], cid = P.discard.slice().reverse().find(id => api.s.cards[id].kind === 'tactic');
                 if (!cid) return;
-                P.discard.splice(P.discard.indexOf(cid), 1); P.deck.push(cid);
+                api.recoverBottom(cid);
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' puts ' + api.cardName(cid) + ' on the bottom of the personal deck.' });
             } },
+        },
+        'patient-conclusion': {
+            name: 'One Tiny Detail', text: 'Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.',
+            onAllySurvive(api, card, ally, health) {
+                if (health !== 1 || card.conclusionTurn === api.s.turn) return;
+                card.conclusionTurn = api.s.turn;
+                if (!api.planning) api.draw(card.controller);
+                api.emit({t:'ability',cid:card.cid,text:api.name(card.cid)+' checks the tiny surviving detail: draw 1.'});
+            },
+        },
+        'big-team-talk': {
+            name: 'Big Team Talk', text: 'Once per turn, after your hero loses hearts on your turn, your oldest other creature gains 1 attack this turn.',
+            onHeroLoss(api, card) {
+                if (api.s.active !== card.controller || card.pepTurn === api.s.turn) return;
+                card.pepTurn = api.s.turn;
+                const target=api.s.players[card.controller].board.find(cid=>cid!==card.cid);
+                if(target){api.buff(target,1,0,'Big Team Talk',true);api.emit({t:'ability',cid:card.cid,target,text:api.name(card.cid)+' turns a setback into +1 attack for '+api.name(target)+'.'});}
+            },
+        },
+        'open-the-lock': {
+            name: 'Open the Lock', text: 'Entrance: remove one chosen enemy keyword: Guard, Shield or Elusive.',
+            entrance: {target:'enemy-creature-seen',filter:(s,cid,H)=>['guard','shield','elusive'].some(k=>H.hasKeyword(s,cid,k)),
+                run(api,card,target){
+                    const options=['guard','shield','elusive'].filter(k=>api.H.hasKeyword(api.s,target,k));
+                    api.ask({player:card.controller,kind:'option',options,labels:{guard:'Remove Guard',shield:'Remove Shield',elusive:'Remove Elusive'},
+                        prompt:'Which fastening comes off?',target,source:{type:'ability',id:'open-the-lock',cid:card.cid}});
+                }},
+            choose(api,card,k,req){
+                if(!api.s.players[1-card.controller].board.includes(req.target))return;
+                api.stripKeywords(req.target,[k]);api.emit({t:'ability',cid:card.cid,target:req.target,text:api.name(card.cid)+' removes '+k+'.'});
+            },
+        },
+        'serious-favour': {
+            name:'A Serious Favour',text:'Your first spell each turn targeting a friendly creature costs 1 less, minimum 0. Multiple copies do not stack.',
+            friendlySpellDiscount:true,
+        },
+        'paper-backup': {
+            name:'Paper Backup',text:'Guard. The first time each turn this survives damage, summon a colourless 1/1 Paper if there is space.',keywords:['guard'],
+            onDamaged(api,card){
+                if(card.paperTurn===api.s.turn)return;card.paperTurn=api.s.turn;
+                api.summon(card.controller,'paper-token');
+            },
+        },
+        'one-more-cameo': {
+            name:'One More Cameo',text:'Entrance: return a defeated creature with printed cost 3 or less to hand. It gains 1 maximum health on its next play only.',
+            entrance:{run(api,card){
+                const options=api.s.players[card.controller].discard.filter(cid=>{const c=api.s.cards[cid];return c.kind==='creature'&&!c.burned&&(Rift.data.creatures[c.species]||{}).cost<=3;});
+                api.ask({player:card.controller,kind:'card',options,prompt:'Which small creature gets one more cameo?',source:{type:'ability',id:'one-more-cameo',cid:card.cid}});
+            }},
+            choose(api,card,cid){if(api.fromDiscard(cid)){api.s.cards[cid].nextPlayHealth=1;api.emit({t:'ability',cid:card.cid,text:api.cardName(cid)+' returns for one stronger cameo.'});}},
         },
         grook: {
             name: 'Grook',

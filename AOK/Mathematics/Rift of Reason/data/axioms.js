@@ -379,6 +379,58 @@
         a.flavour = a.flavour || 'Change an assumption and the same situation can have a different result.';
     });
     Rift.data.axioms = axioms;
+    Object.assign(axioms, {
+        'generic-public-rules': {
+            name: 'Public Rules', category: 'information', rarity: 'common', cost: 1, release: 'plot-1', packEligible: false,
+            short: 'New rule cards in hand stay public',
+            text: 'While this is active, each new Axiom drawn into either hand stays face up until played or discarded. Existing hands and personal cards stay private.',
+            rules: { publicAxioms: true },
+        },
+        'generic-fair-rest': {
+            name: 'Fair Rest', category: 'healing', rarity: 'common', cost: 1, release: 'plot-1', packEligible: false,
+            short: 'Start: heal the most wounded ally 1',
+            text: 'At the start of each player\'s turn, heal their most damaged creature by 1; break ties by oldest arrival.',
+            rules: { healMost: 1 },
+        },
+        'generic-conservative-plans': {
+            name: 'Conservative Plans', category: 'fate-delay', rarity: 'uncommon', cost: 2, release: 'plot-1', packEligible: false,
+            short: 'New plans: at least 2 rounds ahead',
+            text: 'New player-created scheduled effects have minimum +2 rounds; already announced times and environments do not change.',
+            rules: { fateMinDelay: 2 },
+        },
+    });
+    // #132: public goals replace Win for both players. They are checked only at
+    // that player's own turn end, after normal cleanup/hand limits, before Fate.
+    const colourCount=(s,p,H,colour)=>s.players[p].board.filter(cid=>H.colourOf(s,s.cards[cid])===colour).length;
+    const hasColour=(s,p,H,colour,n)=>({text:n+' '+Rift.COLOURS[colour].name+' creatures',met:colourCount(s,p,H,colour)>=n});
+    function plotGoal(name,short,text,checks,rarity='rare',cost=2){
+        return {name,short,text,category:'victory',cost,rarity,release:'plot-1',packEligible:false,goalChecks:checks};
+    }
+    Object.assign(axioms,{
+        'reason-complete-argument':plotGoal('Complete Argument','Enemy 0, or your end: Reason + hand',
+            'Win by enemy hero reaching 0, or by ending your own turn with 3 Reason creatures and 6 cards in hand.',
+            (s,p,H)=>[hasColour(s,p,H,'reason',3),{text:'6 cards in hand',met:s.players[p].hand.length+s.players[p].axHand.length>=6}]),
+        'emotion-shared-vulnerability':plotGoal('Shared Vulnerability','Enemy 0, or your end: Emotion + 1 heart',
+            'Win by enemy hero reaching 0, or by ending your own turn at exactly 1 heart with 3 Emotion creatures.',
+            (s,p,H)=>[hasColour(s,p,H,'emotion',3),{text:'Exactly 1 heart',met:s.players[p].hearts===1}]),
+        'perception-observed-pattern':plotGoal('Observed Pattern','Enemy 0, or your end: healthy Perception',
+            'Win by enemy hero reaching 0, or by ending your own turn with 3 Perception creatures and no damaged friendly creatures.',
+            (s,p,H)=>[hasColour(s,p,H,'perception',3),{text:'No damaged friendly creatures',met:s.players[p].board.every(cid=>H.health(s,cid)===H.maxHealth(s,cid))}]),
+        'language-consensus':plotGoal('Consensus','Enemy 0, or your end: Language + rules',
+            'Win by enemy hero reaching 0, or by ending your own turn with 3 Language creatures and 3 changed Axiom categories, including Win.',
+            (s,p,H)=>[hasColour(s,p,H,'language',3),{text:'3 changed rule categories, including Win',met:H.changedAxioms(s).length>=3}]),
+        'imagination-living-possibilities':plotGoal('Living Possibilities','Enemy 0, or your end: Imagination + Paper',
+            'Win by enemy hero reaching 0, or by ending your own turn with 2 Imagination creatures and 4 colourless tokens.',
+            (s,p,H)=>[hasColour(s,p,H,'imagination',2),{text:'4 colourless tokens',met:s.players[p].board.filter(cid=>s.cards[cid].token&&H.colourOf(s,s.cards[cid])==='none').length>=4}]),
+        'memory-recovered-story':plotGoal('Recovered Story','Enemy 0, or your end: Memory + recovery',
+            'Win by enemy hero reaching 0, or by ending your own turn with 3 Memory creatures after recovering 2 distinct discard cards that turn.',
+            (s,p,H)=>[hasColour(s,p,H,'memory',3),{text:'2 distinct cards recovered from discard this turn',met:!!(s.players[p].recovered&&s.players[p].recovered.turn===s.turn&&new Set(s.players[p].recovered.cids).size>=2)}]),
+        'generic-the-common-good':plotGoal('The Common Good','Enemy 0, or your end: all 6 colours',
+            'Win by enemy hero reaching 0, or by ending your own turn with all 6 creature colours on your board and at least 4 hero hearts.',
+            (s,p,H)=>['reason','emotion','perception','language','imagination','memory'].map(c=>hasColour(s,p,H,c,1)).concat({text:'At least 4 hearts',met:s.players[p].hearts>=4}),'mythic',4),
+    });
+
+    Object.entries(axioms).forEach(([id, ax]) => { ax.id = id; if (ax.release === 'plot-1') ax.art = 'art/axiom-rule-motif'; });
 
     // Available starting rules. Each side selects ten; earned rules expand the pool.
     Rift.data.axiomDecks = {

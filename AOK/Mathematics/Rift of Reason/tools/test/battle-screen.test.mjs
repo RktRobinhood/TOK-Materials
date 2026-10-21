@@ -1596,3 +1596,32 @@ test('Danger caps next-turn attacks by the shared budget and includes Momentum o
         t.handle.destroy();
     }
 });
+
+test('Quiet Reset reveal and recent reader explain restored basics, never announce the removed rule',()=>{
+    const t=prepared({me:['proof-pup'],opp:['proof-pup'],myTactics:['generic-quiet-reset']},(s,move)=>{
+        move('p0t0',0,'hand');s.axioms.active.plays='infinity';
+    });
+    t.$('.b-hand [data-cid="p0t0"]').click();t.$('.b-prompt .btn.primary').click();t.g.flush();
+    assert.equal(t.E.rules(t.handle.state).playLimit,2);assert.match(t.text(),/restore a basic rule|back to basics/);assert.doesNotMatch(t.$('.b-reveal').textContent,/Unlimited/);
+    const history=t.root.querySelector('.b-fpast.reset');assert.ok(history);assert.match(history.getAttribute('aria-label'),/restored Card activations: back to basics/);assert.doesNotMatch(history.getAttribute('aria-label'),/Fate reset all rules|All axioms returned/);
+    const recent=Array.from(t.root.querySelectorAll('.b-recent-tile')).find(n=>/back to basics/.test(n.getAttribute('aria-label')));assert.ok(recent);recent.click();
+    assert.match(t.text(),/2 card activations per turn/);t.handle.destroy();
+});
+
+test('opponent public Axiom copies show readable names while private duplicates and personal cards stay backed',()=>{
+    const t=prepared({me:['proof-pup'],opp:['proof-pup']},(s,move)=>{
+        move('p1c0',1,'hand');s.players[1].axHand=['thrift','thrift','luxury'];s.players[1].publicAxioms=['thrift'];
+    });
+    const box=t.$('.b-opp-hand');assert.ok(box);assert.equal(box.querySelectorAll('[data-axiom="thrift"]').length,1);assert.equal(box.querySelectorAll('[data-axiom="luxury"]').length,0);
+    const publicCard=box.querySelector('[data-axiom="thrift"]');assert.match(publicCard.getAttribute('aria-label'),/Public in Dummy/);publicCard.focus();publicCard.dispatchEvent({type:'focus'});assert.match(t.text(),/Public/);t.handle.destroy();
+});
+
+test('Paper uses its existing motif in prospective frames and the committed board',()=>{
+    const requested=[];const t=prepared({me:['imagination-cloud-castle-crab'],opp:['khaby'],myTactics:['counterexample']},(s,move)=>{
+        move('p0c0',0,'board');move('p0t0',0,'hand');
+    },{before(g){g.Rift.Assets.img=(id,attrs)=>{requested.push(id);return g.Rift.el('img',Object.assign({src:id},attrs));};}});
+    t.$('.b-hand [data-cid="p0t0"]').click();t.$('.b-future-open').click();
+    const choose=t.$('.b-future-dialog select');const option=Array.from(choose.children).find(o=>/Ariana/.test(o.textContent));assert.ok(option);choose.value=option.value;choose.dispatchEvent({type:'change'});t.g.flush();
+    assert.match(t.$('.b-future-stage').textContent,/Paper/);assert.ok(requested.includes('art/spell-motif-generic'));assert.ok(!requested.includes('creature/paper-token/idle'));
+    t.$('.b-future-dialog').dispatchEvent({type:'cancel',preventDefault(){}});t.$('.my-board [data-cid="p0c0"]').click();t.g.flush();assert.equal(t.handle.state.players[0].board.length,2);assert.ok(!requested.includes('creature/paper-token/idle'));t.handle.destroy();
+});

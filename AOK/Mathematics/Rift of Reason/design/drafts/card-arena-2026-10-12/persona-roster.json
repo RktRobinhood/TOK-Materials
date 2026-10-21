@@ -40,7 +40,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -500,7 +500,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-town-hall",
         "theme": "Ch2 truth/claim resolution",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Grey-crested mayfly with transparent-edged wings and blue travelling harness; one large caliper in its forelegs.",
       "signatureProp": "Front-facing hover, caliper jaws held just apart while the face studies the tiny gap.",
@@ -527,7 +527,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -747,7 +747,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -1149,7 +1149,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-tribunal",
         "theme": "Ch3 confronted public claims",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Compact sauropod with dark crest, crimson basketball vest, light bronze wrist braces and one plain ball.",
       "signatureProp": "Side-on athletic step, ball offered in forefeet and the long neck bent to inspect it.",
@@ -1174,12 +1174,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
         "health": 4,
-        "text": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+        "text": "Once per turn, after your hero loses hearts during your turn, your oldest other creature gains 1 attack this turn.",
         "gates": [
           109
         ]
@@ -1335,7 +1335,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -1803,7 +1803,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-clock-tower",
         "theme": "Ch2 observation at the clock tower",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Emerald-edged lantern wisp with nonhuman eyes, short midnight cape and one open padlock in a light tendril.",
       "signatureProp": "Float diagonally left into a cheeky half-bow, lock extended fully toward the viewer.",
@@ -1829,7 +1829,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
@@ -1992,7 +1992,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
@@ -2458,7 +2458,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-archive",
         "theme": "Ch3 recovered archival evidence",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Small dark otter with straight head-fur fringe, calm wide eyes and a worn charcoal coat with gold cuffs.",
       "signatureProp": "One blank rolled agreement held with an unimpressed straight face; no franchise costume.",
@@ -2483,12 +2483,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
         "health": 5,
-        "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+        "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0. Multiple copies do not stack.",
         "gates": [
           109
         ]
@@ -2757,7 +2757,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -3112,7 +3112,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "k-sorting",
         "theme": "Ch4 completed Sorting Room story",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Small dark crab with a high curved hair-tuft silhouette, warm big eyes and violet stage-coat trim.",
       "signatureProp": "One broad folded-paper fan held like a tiny stage set; no copied costume or logo.",
@@ -3138,12 +3138,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 2,
         "health": 6,
-        "text": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+        "text": "Guard. The first time each turn this survives damage, summon a colourless 1/1 paper token if you have board space.",
         "gates": [
           109,
           "token-order"
@@ -3355,7 +3355,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; foundation-1 runtime release, bounded engineering validation",
+      "status": "Selected cast/art; foundation-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -3771,7 +3771,7 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-clock-tower",
         "theme": "Ch2 completed time-related story",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
       },
       "silhouette": "Lively newt with dark head tufts, broad warm eyes, plain dark stage jacket and silver collar.",
       "signatureProp": "One blank film clapper; no armoured superhero suit, branded glasses or film logo.",
@@ -3797,12 +3797,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; plot-1 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 5,
         "attack": 3,
         "health": 4,
-        "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+        "text": "Entrance: return a defeated creature with printed cost 3 or less to hand; it gains 1 maximum health on its next play only.",
         "gates": [
           109
         ]

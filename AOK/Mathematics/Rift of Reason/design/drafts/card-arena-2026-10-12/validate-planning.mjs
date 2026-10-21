@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {loadRift} from '../../../tools/test/harness.mjs';
 import {foundationBatch} from './review-123.mjs';
+import {plotBatch} from './review-132.mjs';
 const dir=path.dirname(fileURLToPath(import.meta.url));
 const c=JSON.parse(fs.readFileSync(path.join(dir,'card-catalogue.json')));
 const starters=JSON.parse(fs.readFileSync(path.join(dir,'starter-decks.json')));
@@ -12,8 +13,8 @@ const ids=new Set();
 for(const card of c.cards){
  assert(!ids.has(card.id),'duplicate '+card.id); ids.add(card.id);
  const actual=R.data.creatures[card.id]||R.data.tactics[card.id]||R.data.axioms[card.id];
- if(foundationBatch.includes(card.id)) {
-   assert(actual&&actual.release==='foundation-1','missing candidate '+card.id);
+ if(foundationBatch.includes(card.id)||plotBatch.includes(card.id)) {
+   assert(actual&&actual.release===(foundationBatch.includes(card.id)?'foundation-1':'plot-1'),'missing candidate '+card.id);
    assert.equal(actual.rarity,card.rarity); assert.equal(actual.cost,card.cost);
    assert.equal(actual.packEligible,card.acquisition.packEligible);
  } else assert(!actual,'unreviewed runtime ID '+card.id);
@@ -28,4 +29,4 @@ assert.equal(c.cards.length,210);
 assert.equal(c.cards.filter(x=>x.acquisition.packEligible).length,192);
 assert.equal(c.cards.filter(x=>x.affinity==='generic').length,42);
 for(const colour of ['reason','emotion','perception','language','imagination','memory']) assert.equal(c.cards.filter(x=>x.affinity===colour).length,28);
-console.log('Validated: 210 concepts, seven runtime candidates, 203 held, 12 separate starter IDs, 18 proposed story nodes, 192 eventual pack candidates and exact colour allocation.');
+console.log('Validated: 210 concepts, 25 runtime cards, 185 held, 12 separate starter IDs, 18 implemented story nodes, 192 eventual pack candidates and exact colour allocation.');

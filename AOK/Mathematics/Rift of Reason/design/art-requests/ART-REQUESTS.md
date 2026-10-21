@@ -1288,3 +1288,7 @@ The release uses the existing shared rule frame, scale glyph and readable catego
 ## Stage 13.90 — Five-tier rarity cues (#130), 21 October 2026
 
 Reuses all shipped affinity, tactic and Axiom paintings/frames. Rarity is a native text badge with Common/Uncommon/Rare/Mythic/Legendary labels, C/U/R/M/L marks and five border patterns; Mythic uses a static double edge, Legendary a gold edge. Collection puts rarity upper-left and foil upper-right. No new raster asset, source prompt, build or manifest entry is needed. Existing cute-dark/jewel artwork, foil and affinity remain intact. Real desktop/390px Calm evidence and the foil-overlap correction are in [rarity acceptance](../reviews/rarity-130-2026-10-21.md). This supports Mythic presentation without releasing a Mythic card or inventing wild catch tuning.
+
+## Stage 13.91 — Story-card reuse (#132), 21 October 2026
+
+Six selected expansion portraits now ship through plot-only sources: James Mayfly, LeBrontosaurus, Houdini Wisp, Jenna Otterga, Ariana Crande and Downewt Jr. Their existing creature asset IDs/provenance remain unchanged. Ten plot Axioms reuse `art/axiom-rule-motif`; Quiet Reset and uncollectible Paper reuse `art/spell-motif-generic`; The Last Page uses its existing `art/spell-the-last-page` painting. Paper's committed face and future-preview frame both use that motif, with no missing species portrait. No new image generation, manifest build or voice calls. See [story acceptance and screenshots](../reviews/story-132-2026-10-21.md).

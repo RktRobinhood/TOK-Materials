@@ -205,7 +205,7 @@
     // Competing energy and activation costs. Hero powers use no card activation.
     function resourceOf(s, a) {
         const Eng = E();
-        if (a.type === 'play') return { id: a.cid, cost: Eng.playCost(s, a.cid), uses: 1 };
+        if (a.type === 'play') return { id: a.cid, cost: Eng.playCost(s, a.cid, a.target), uses: 1 };
         if (a.type === 'axiom') return { id: 'ax:' + a.choice, cost: Eng.axiomCost(s, a.choice), uses: 1 };
         if (a.type === 'attack') return { id: a.cid, cost: 0, uses: 1 };
         if (a.type === 'activate') {
@@ -423,6 +423,12 @@
         v += r.reverseHearts ? -0.6 * hv : ctx.w.hearts * hv;
         v += boardValue(s, me, ctx) - boardValue(s, opp, ctx);
         v += handValue(s, me, ctx) - handValue(s, opp, ctx);
+        const winRule = Rift.data.axioms[s.axioms.active.victory];
+        if (winRule && winRule.goalChecks) {
+            // All goal inputs are public board facts, hand counts or named recoveries.
+            const value = p => { const g = Eng.goalProgress(s, p); return g.complete ? 24 : 2 * g.checks.filter(c => c.met).length / g.checks.length; };
+            v += value(me) - value(opp);
+        }
         v += Math.min(P.deck.length, 3) * 0.1 - Math.min(Q.deck.length, 3) * 0.1;
         if (ctx.cfg.threat && !r.reverseHearts) {
             const theirs = facePotential(s, opp);
@@ -990,6 +996,8 @@
         if (s.phase === 'choose') return mistake ? rng.pick(legal) : answerPending(s, me, ctx, legal);
 
         // Main phase.
+        const goalEnd = legal.find(a => a.type === 'end');
+        if (goalEnd && Eng.goalProgress(s, me)?.complete && Eng.applyLegal(s, goalEnd).winner === me) return goalEnd;
         if (cfg.simple) {
             // Normal's weaknesses are weaker CHOICES (no threat terms, likes hitting the hero, a random
             // second-rate move now and then, sometimes holding back an attack), never sitting still.

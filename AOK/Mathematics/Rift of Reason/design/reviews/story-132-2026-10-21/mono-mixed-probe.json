@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-21",
+  "scope": "Paired legal20-card mono/mixed story smoke probe, same Competent AI and seat/first alternation. No tuning or population claim.",
+  "games": 96,
+  "rows": [
+    {
+      "colour": "reason",
+      "games": 16,
+      "monoWins": 11,
+      "mixedWins": 5,
+      "draws": 0,
+      "maxSteps": 106
+    },
+    {
+      "colour": "emotion",
+      "games": 16,
+      "monoWins": 10,
+      "mixedWins": 6,
+      "draws": 0,
+      "maxSteps": 57
+    },
+    {
+      "colour": "perception",
+      "games": 16,
+      "monoWins": 6,
+      "mixedWins": 10,
+      "draws": 0,
+      "maxSteps": 67
+    },
+    {
+      "colour": "language",
+      "games": 16,
+      "monoWins": 14,
+      "mixedWins": 2,
+      "draws": 0,
+      "maxSteps": 116
+    },
+    {
+      "colour": "imagination",
+      "games": 16,
+      "monoWins": 13,
+      "mixedWins": 3,
+      "draws": 0,
+      "maxSteps": 127
+    },
+    {
+      "colour": "memory",
+      "games": 16,
+      "monoWins": 14,
+      "mixedWins": 2,
+      "draws": 0,
+      "maxSteps": 136
+    }
+  ],
+  "plays": {
+    "reason-inference-heron": 35,
+    "reason-complete-argument": 2,
+    "generic-the-last-page": 31,
+    "generic-quiet-reset": 3,
+    "emotion-heartfire-hawk": 16,
+    "perception-exposure-eagle": 24,
+    "language-contract-coyote": 45,
+    "imagination-cloud-castle-crab": 38,
+    "imagination-living-possibilities": 3,
+    "memory-second-chance-salamander": 35
+  },
+  "reasons": {
+    "hearts": 82,
+    "goal:reason-complete-argument": 8,
+    "goal:perception-observed-pattern": 2,
+    "goal:imagination-living-possibilities": 4
+  }
+}

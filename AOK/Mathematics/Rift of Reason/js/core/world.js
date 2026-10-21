@@ -213,6 +213,7 @@
         (n.spawns || []).forEach(sp => {
             const c = Rift.data.creatures[sp];
             if (!c || c.roaming) return; // roaming legendaries (#111) come only from their trick challenge
+            if (Rift.Acquisition && Rift.Acquisition.story('creature', sp)) return;
             const rarity = Rift.data.rarities[c.rarity];
             if (!rarity || !(rarity.weight > 0) || !Number.isFinite(rarity.catchBase)) return;
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
@@ -250,7 +251,7 @@
         const visitor = Object.keys(state.flags || {}).filter(k => k.startsWith('visitor:') && state.flags[k]).map(k => k.slice(8))
             .find(sp => {
                 const c = Rift.data.creatures[sp], rarity = c && Rift.data.rarities[c.rarity];
-                return rarity && Number.isFinite(rarity.catchBase) && !(state.creatures || []).some(c => c.species === sp);
+                return rarity && Number.isFinite(rarity.catchBase) && !(Rift.Acquisition && Rift.Acquisition.story('creature', sp)) && !(state.creatures || []).some(c => c.species === sp);
             });
         if (visitor) return { species: visitor, chance: 1, visitor: true };
         const weights = spawnWeights(state, n, o);
@@ -263,6 +264,7 @@
     function catchOdds(state, speciesId, itemId, opts) {
         const o = opts || {};
         const c = Rift.data.creatures[speciesId];
+        if (Rift.Acquisition && Rift.Acquisition.story('creature', speciesId)) return 0;
         const rarity = c && Rift.data.rarities[c.rarity];
         if (!rarity || !Number.isFinite(rarity.catchBase)) return 0;
         let p = rarity.catchBase;

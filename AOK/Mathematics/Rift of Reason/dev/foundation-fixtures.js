@@ -9,7 +9,7 @@
         const primary = colours.indexOf(colour), other = colours[(primary+1)%6];
         function species(c,n) {
             const fresh = newcomers[colours.indexOf(c)];
-            return [fresh].concat(Object.keys(R.data.creatures).filter(id => id !== fresh && R.data.creatures[id].colour === c && R.data.creatures[id].rarity !== 'legendary')
+            return [fresh].concat(Object.keys(R.data.creatures).filter(id => id !== fresh && R.data.creatures[id].release !== 'plot-1' && R.data.creatures[id].colour === c && R.data.creatures[id].rarity !== 'legendary')
                 .sort((a,b)=>R.data.creatures[a].cost-R.data.creatures[b].cost || a.localeCompare(b))).slice(0,n);
         }
         const creatures = twice(mixed ? species(colour,2).concat(species(other,2)) : species(colour,4));

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 runtime cards, 203 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eighteen plot-1 story cards, 185 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -332,7 +332,7 @@
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Finish damaged creatures before they fight.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -345,8 +345,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-town-hall",
         "theme": "Ch2 truth/claim resolution",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "reason-boundary-bear",
@@ -685,14 +686,14 @@
       "cost": 5,
       "attack": 3,
       "health": 4,
-      "text": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+      "text": "Once per turn, after your hero loses hearts during your turn, your oldest other creature gains 1 attack this turn.",
       "tags": [
         "self-damage",
         "buff"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove its supporting attackers.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -704,7 +705,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-tribunal",
         "theme": "Ch3 confronted public claims",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Once per turn, after your hero loses hearts during your turn, another friendly creature gains 1 attack this turn.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -1049,7 +1056,7 @@
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Stack different defences or restore a keyword.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1061,8 +1068,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-clock-tower",
         "theme": "Ch2 observation at the clock tower",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "perception-horizon-hare",
@@ -1399,13 +1407,13 @@
       "cost": 5,
       "attack": 3,
       "health": 5,
-      "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+      "text": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0. Multiple copies do not stack.",
       "tags": [
         "cost"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove the creature before the support sequence.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1417,7 +1425,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-archive",
         "theme": "Ch3 recovered archival evidence",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Your first spell each turn targeting a friendly creature costs 1 less, minimum 0.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -1760,14 +1774,14 @@
       "cost": 5,
       "attack": 2,
       "health": 6,
-      "text": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+      "text": "Guard. The first time each turn this survives damage, summon a colourless 1/1 paper token if you have board space.",
       "tags": [
         "guard",
         "token"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Defeat it in one hit or silence it.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1780,7 +1794,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "k-sorting",
         "theme": "Ch4 completed Sorting Room story",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Guard. Once per turn, after surviving damage, summon a colourless 1/1 paper token if you have board space.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -2123,13 +2143,13 @@
       "cost": 5,
       "attack": 3,
       "health": 4,
-      "text": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+      "text": "Entrance: return a defeated creature with printed cost 3 or less to hand; it gains 1 maximum health on its next play only.",
       "tags": [
         "recursion"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Race the replay or remove the restored creature.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -2141,7 +2161,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-clock-tower",
         "theme": "Ch2 completed time-related story",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Entrance: return a defeated creature costing 3 or less to hand; it gains 1 maximum health on its next play only.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -3919,7 +3945,7 @@
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Reduce the board or hand, or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -3930,8 +3956,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "gate",
         "theme": "Ch1 completed Gate challenge",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "reason-long-view",
@@ -4092,7 +4119,7 @@
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Change hearts, remove a creature or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -4103,8 +4130,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "troll-bridge",
         "theme": "Ch1 completed confrontation, either supported outcome",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "emotion-rising-tension",
@@ -4254,7 +4282,7 @@
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Damage or remove a creature, or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -4265,7 +4293,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-tribunal",
         "theme": "Ch3 completed evidence-based verdict",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Win by enemy hero reaching 0, or by ending your own turn with 3 Perception creatures and no damaged friendly creatures.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -4413,14 +4447,14 @@
       "rarity": "rare",
       "cost": 2,
       "category": "victory",
-      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Language creatures while 3 different Axiom categories are active.",
+      "text": "Win by enemy hero reaching 0, or by ending your own turn with 3 Language creatures and 3 changed Axiom categories, including Win.",
       "tags": [
         "axiom",
         "alt-win"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove a creature, reset rules or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -4431,7 +4465,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "t-tribunal",
         "theme": "Ch3 completed verdict, either supported outcome",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Win by enemy hero reaching 0, or by ending your own turn with 3 Language creatures while 3 different Axiom categories are active.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -4584,7 +4624,7 @@
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Clear tokens or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -4595,8 +4635,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "fair-finale",
         "theme": "Completed homecoming, either supported story outcome",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "imagination-changed-horizons",
@@ -4747,7 +4788,7 @@
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Remove the board or deny recovery targets.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -4758,7 +4799,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "fair-finale",
         "theme": "Completed homecoming and the recovered account",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "Win by enemy hero reaching 0, or by ending your own turn with 3 Memory creatures after recovering 2 distinct discard cards that turn.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -5200,7 +5247,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Hold a replacement rule.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109
       ],
@@ -5210,8 +5257,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-town-hall",
         "theme": "Ch2 resolved the Town Hall claims",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "generic-scheduled-shelter",
@@ -5419,7 +5467,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Keep replacement rules and pressure the expensive recovery turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109
       ],
@@ -5429,8 +5477,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "fair-finale",
         "theme": "Completed final story, not only a repeatable battle win",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "generic-careful-hands",
@@ -5504,7 +5553,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Defeat threats in one hit.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109
       ],
@@ -5514,8 +5563,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "gate",
         "theme": "Ch1 completed Gate and recovery beat",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "generic-unhurried-arrival",
@@ -5602,14 +5652,14 @@
       "rarity": "common",
       "cost": 1,
       "category": "inspection",
-      "text": "After an Axiom enters either hand, its name stays public until played or discarded. Personal cards stay private.",
+      "text": "While active, each newly drawn Axiom stays public until played or discarded. Existing hands and personal cards stay private.",
       "tags": [
         "axiom",
         "inspection"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Use personal cards or promptly play the revealed rule.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109
       ],
@@ -5619,7 +5669,13 @@
         "packEligible": false,
         "proposedMilestoneNode": "fair-gate",
         "theme": "Completed Fair Gate introduction, not merely opening its screen",
-        "assignmentStatus": "draft; verify exact plot completion flag"
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1",
+      "plotRevision": {
+        "issue": 132,
+        "previousText": "After an Axiom enters either hand, its name stays public until played or discarded. Personal cards stay private.",
+        "rationale": "Pin deterministic targets, bounded first triggers, printed recovery cost and public own-turn-end goal/knowledge policy before runtime release."
       }
     },
     {
@@ -5714,7 +5770,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Replace before scheduling or use immediate spells.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         118,
@@ -5726,8 +5782,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "b-clock-tower",
         "theme": "Ch2 understood the timeline",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     },
     {
       "id": "generic-no-shortcuts",
@@ -5908,7 +5965,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Remove one colour, reduce hearts or replace Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "plot-1 runtime; once-only story source, never packs; see story-132 acceptance report",
       "gates": [
         109,
         "victory-policy"
@@ -5919,8 +5976,9 @@
         "packEligible": false,
         "proposedMilestoneNode": "fair-finale",
         "theme": "Completed shared homecoming",
-        "assignmentStatus": "draft; verify exact plot completion flag"
-      }
+        "assignmentStatus": "Implemented #132: completed-node proof plus canonical once-only two-normal-copy receipt"
+      },
+      "runtimeRelease": "plot-1"
     }
   ]
 }

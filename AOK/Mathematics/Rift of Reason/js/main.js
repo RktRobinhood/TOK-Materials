@@ -14,6 +14,15 @@
         // Station card rewards (#124) for places finished before they existed: each slot pays once.
         Rift.World.catchUpCards();
         Rift.World.catchUpWallet();
+        if (Rift.Acquisition) {
+            Rift.Acquisition.catchUp();
+            Rift.bus.on('state:changed', Rift.Acquisition.catchUp);
+            Rift.bus.on('state:replaced', Rift.Acquisition.catchUp);
+            Rift.bus.on('plot-cards:granted', got => Rift.UI.toast('Story cards earned: ' + got.filter(r => r.granted).map(r => {
+                const defs = Rift.data[{creature:'creatures',tactic:'tactics',axiom:'axioms'}[r.kind]];
+                return defs[r.id].name + ' ×' + r.granted;
+            }).join(', ') + '. Open Collection.', 6000));
+        }
         Rift.bus.on('state:replaced', () => { Rift.State.ensureStarter(); Rift.World.catchUpCards(); Rift.World.catchUpWallet(); });
         // Calm motion reduces animation; catch games use static paths in every mode.
         const applyCalm = () => {

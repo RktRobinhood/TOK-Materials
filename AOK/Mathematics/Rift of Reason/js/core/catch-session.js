@@ -16,6 +16,7 @@
     }
     function boardFor(save, o, item) {
         const c = o && Rift.data.creatures[o.species], rarity = c && Rift.data.rarities[c.rarity];
+        if (o && Rift.Acquisition && Rift.Acquisition.story('creature', o.species)) throw new Error('This creature is earned from its story.');
         if (!rarity || !Number.isFinite(rarity.catchBase)) throw new Error('This creature has no wild catch route yet.');
         return o.board || games.create(o.kind, o.seed + ':attempt:' + o.attempt, Rift.data.creatures[o.species].rarity, item, o.lured, sly(save, o.species));
     }

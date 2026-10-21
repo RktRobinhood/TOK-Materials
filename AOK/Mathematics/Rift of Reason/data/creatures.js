@@ -324,6 +324,19 @@
         },
     });
 
+    // #132 plot identities: their actual earned source is the permanent Acquisition registry.
+    function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
+        return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};
+    }
+    Object.assign(Rift.data.creatures,{
+        'reason-inference-heron':plotCreature('James Mayfly','James May','reason',3,5,'patient-conclusion','Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.','The tiny detail needs a surprisingly patient explanation.'),
+        'emotion-heartfire-hawk':plotCreature('LeBrontosaurus','LeBron James','emotion',3,4,'big-team-talk','Once per turn, after your hero loses hearts on your turn, your oldest other creature gains 1 attack this turn.','A small setback. A very large team talk.'),
+        'perception-exposure-eagle':plotCreature('Houdini Wisp','Harry Houdini','perception',3,5,'open-the-lock','Entrance: remove one chosen enemy keyword: Guard, Shield or Elusive.','The impossible fastening is now an ordinary open lock.'),
+        'language-contract-coyote':plotCreature('Jenna Otterga','Jenna Ortega','language',3,5,'serious-favour','Your first spell each turn targeting a friendly creature costs 1 less, minimum 0. Multiple copies do not stack.','This perfectly ordinary favour sounds very serious.'),
+        'imagination-cloud-castle-crab':plotCreature('Ariana Crande','Ariana Grande','imagination',2,6,'paper-backup','Guard. The first time each turn this survives damage, summon a colourless 1/1 Paper if there is space.','The tiny entrance needs one more paper backup performer.'),
+        'memory-second-chance-salamander':plotCreature('Downewt Jr.','Robert Downey Jr.','memory',3,4,'one-more-cameo','Entrance: return a defeated creature with printed cost 3 or less to hand. It gains 1 maximum health on its next play only.','Surely this little scene has room for one more cameo.'),
+    });
+
     // Starter content begins with the adventure; grants are handled by the owned-deck ticket.
     Rift.data.starterSpecies = ['proof-pup', 'lens-lizard', 'paper-dragon', 'cloud-calf', 'pocket-tortoise', 'comma-crab', 'footnote-finch'];
 

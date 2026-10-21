@@ -1,6 +1,6 @@
-# Story-only card rewards — draft assignments
+# Story-only card rewards — implemented #132
 
-The teacher approved a separate story-only subset. Completing the associated plot earns these cards; packs never contain them, before or after unlock. These eighteen assignments are proposals, not implemented reward flags or approved balance. The other 192 expansion concepts are candidates for released pack pools.
+The teacher approved a separate story-only subset. All eighteen assignments below now have real `plot-1` definitions and a permanent acquisition registry. Completing the associated plot earns two normal copies once; packs never contain them, before or after unlock. Existing historical copies satisfy that entitlement. The other 192 expansion concepts are eventual pack candidates, seven of which are the released foundation batch; 185 remain held. Exact completion proofs, runtime policy, tests and bounded balance evidence are in [the #132 report](../../reviews/story-132-2026-10-21.md).
 
 | Card | Rarity | Proposed completion node |
 |---|---|---|
@@ -27,6 +27,6 @@ The teacher approved a separate story-only subset. Completing the associated plo
 
 Use explicit acquisition metadata for every released ID. Pack eligibility is a channel, not a flag that story completion changes. Release status and ownership do not override it. Validate source nodes and their actual completed-plot seam before wiring rewards; visiting or replaying dialogue alone must not count. Keep receipts and quantities in the canonical save and round-trip backup codes. Replaying/reloading/importing the same completion cannot duplicate a grant.
 
-Proposed grant: two normal copies at the milestone so the exclusive card can enter a legal two-copy strategy immediately. This quantity needs tuning review. Cosmetic upgrades should come from named later story/challenge milestones, never packs; until those milestones exist leave the two copies normal. No mandatory story progress depends on owning a foil. Preserve already-completed saves through a bounded once-only reconciliation, not repeated grants on every load.
+Builder decision under the AFK delegation, 21 October: two normal copies at the milestone so the exclusive card can enter a legal two-copy strategy immediately. This does not certify classroom balance; quantities can be tuned prospectively. No foil ladder is shipped. Cosmetic upgrades would require named later story/challenge milestones, never packs. No mandatory story progress depends on owning a foil. Already-completed saves use a bounded once-only reconciliation, not repeated grants on every load.
 
 Tell the player the source in Collection: “Story reward · complete [milestone]”, then “Earned from [milestone]”. Distinguish unseen spoilers from known requirements. Pack odds and pool completion refer only to the released pack pool. Story rewards still obey rarity, deck limits and colour quotas. Existing unique keepsakes and captured creature UIDs remain separate possessions.

@@ -32,6 +32,7 @@
 
     const itemName = id => ((Rift.data.items || {})[id] || {}).name || id;
     const speciesName = id => ((Rift.data.creatures || {})[id] || {}).name || id;
+    const storyOnly = id => !!(Rift.Acquisition && Rift.Acquisition.story('creature', id));
 
     function describeItems(items) {
         const parts = Object.keys(items || {}).filter(k => items[k] > 0).map(k => `${items[k]} × ${itemName(k)}`);
@@ -61,7 +62,7 @@
     // The ghost's best card by attack (ties broken at random, seeded).
     function strongest(team, rng) {
         const power = attackOf;
-        const list = (team || []).filter(inst => inst && (Rift.data.creatures || {})[inst.species]);
+        const list = (team || []).filter(inst => inst && (Rift.data.creatures || {})[inst.species] && !storyOnly(inst.species));
         if (!list.length) return null;
         const top = Math.max(...list.map(power));
         return rng.pick(list.filter(inst => power(inst) === top));
@@ -80,7 +81,7 @@
         const stake = opp.stake || DEFAULT_STAKES[type] || DEFAULT_STAKES.trainer;
         ante.player.items = pickPlayerItems((o.player || {}).items, PLAYER_STAKE[type] || 1);
         ante.opponent.items = Object.assign({}, stake.items || {});
-        ante.opponent.creatures = (stake.creatures || []).slice();
+        ante.opponent.creatures = (stake.creatures || []).filter(id => !storyOnly(id));
         if (type === 'ghost') {
             const best = strongest(opp.team, rng);
             if (best) {
@@ -122,8 +123,8 @@
         const tag = Rift.hashSeed('ante-settle:' + String(o.seed == null ? '' : o.seed)).toString(36);
         if (outcome === 'won') {
             Object.keys(ante.opponent.items).forEach(id => { res.itemsDelta[id] = (res.itemsDelta[id] || 0) + ante.opponent.items[id]; });
-            ante.opponent.creatures.forEach((sp, i) => res.creaturesGained.push(newInstance(sp, 'won-' + tag + '-' + i, o.now)));
-            if (ante.opponent.trophy) {
+            ante.opponent.creatures.filter(sp => !storyOnly(sp)).forEach((sp, i) => res.creaturesGained.push(newInstance(sp, 'won-' + tag + '-' + i, o.now)));
+            if (ante.opponent.trophy && !storyOnly(ante.opponent.trophy.species)) {
                 const t = ante.opponent.trophy;
                 res.creaturesGained.push(newInstance(t.species, 'trophy-' + tag, o.now, {
                     powerDelta: t.powerDelta, injuries: [], warped: null, changes: t.changes.map(ch => Object.assign({}, ch)), trophyOf: t.trophyOf,

@@ -231,6 +231,7 @@
     }
     function grantPrint(kind, id, save, opts) {
         const s = save || current;
+        if (Rift.Acquisition && Rift.Acquisition.story(kind, id) && (!opts || opts.story !== id)) return false;
         if (!s || !printDefinition(kind, id) || !cardRoom(kind, id, s)) return false;
         const P = reconcilePrints(s), key = kind === 'tactic' ? 'tactics' : 'axioms';
         if (!Array.isArray(P[kind][id])) P[kind][id] = [];
@@ -552,8 +553,9 @@
     }
 
     // Adds a gained instance when its folder has room. Does not save. → true if added.
-    function addCreature(save, inst) {
+    function addCreature(save, inst, opts) {
         const s = save || current;
+        if (inst && Rift.Acquisition && Rift.Acquisition.story('creature', inst.species) && (!opts || opts.story !== inst.species)) return false;
         if (!s || !inst || !hasRoom(s, inst.species)) return false;
         if (!Array.isArray(s.creatures)) s.creatures = [];
         s.creatures.push(inst);
