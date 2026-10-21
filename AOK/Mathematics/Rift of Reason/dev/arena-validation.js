@@ -1,5 +1,5 @@
 /* Production-screen validation, without the old layout-study adapter.
- * dev/battle.html?validation=1&fixture=normal|crowded|danger|death|return|ability|spell
+ * dev/battle.html?validation=1&fixture=normal|crowded|danger|matchups|death|return|ability|spell
  * Synthetic trace input measures DOM feedback, not hardware-to-photon latency.
  */
 (function (root) {
@@ -27,6 +27,13 @@
         if (kind === 'danger') {
             s.cards.p0c0.gained = []; s.players[0].hearts = 2;
             [3, 4, 5, 6, 7].forEach(i => move('p0c' + i, 0, 'hand'));
+        }
+        if (kind === 'matchups') {
+            [['p0c0', 'reason', 2], ['p0c1', 'emotion', 1], ['p1c0', 'emotion', 2], ['p1c1', 'reason', 1]].forEach(([cid, colour, attack]) => {
+                Object.assign(s.cards[cid], { colour, attack, health: 10, damage: 0, ability: '', gained: [], extraKeywords: [], buffs: [] });
+            });
+            s.cards.p1c0.extraKeywords = ['shield'];
+            s.players[0].axHand = ['curved-space'];
         }
         if (kind === 'death' || kind === 'return') {
             if (kind === 'return') { s.cards.p0c0.species = 'keanu'; s.cards.p0c0.ability = 'deja-vu'; }

@@ -338,11 +338,13 @@
     }
     function wheelBonus(s, card, foe) {
         const W = Rift.data.wheel;
-        if (!W || !foe || foe.kind !== 'creature') return 0;
+        if (!W || !card || card.kind !== 'creature' || !foe || foe.kind !== 'creature') return 0;
         const a = colourOf(s, card), b = colourOf(s, foe);
-        if (!W.beats[a] || !W.beats[b] || a === b) return 0;
-        const wins = rules(s).wheelReversed ? W.beats[b] === a : W.beats[a] === b;
-        return wins ? W.bonus : 0;
+        const from = W.order.indexOf(a), to = W.order.indexOf(b);
+        if (from < 0 || to < 0) return 0;
+        const distance = (to - from + W.order.length) % W.order.length;
+        const modifier = distance === 1 || distance === 2 ? W.bonus : distance === 4 || distance === 5 ? -W.bonus : 0;
+        return modifier && rules(s).wheelReversed ? -modifier : modifier;
     }
 
     function attackParts(s, cid, foeCid) {
@@ -363,11 +365,18 @@
         activeAxioms(s).forEach(ax => {
             if (ax.powerMod) { const v = ax.powerMod(s, c, H); if (v) parts.push({ source: 'axiom', label: ax.name, amount: v }); }
         });
-        if (foeCid && s.cards[foeCid]) {
+        let total = Math.max(0, parts.reduce((sum, p) => sum + p.amount, 0));
+        // A matchup is conditional on the target, after every ordinary modifier. It cannot
+        // turn zero attack into an attack, or reduce an otherwise positive attack below one.
+        if (total > 0 && foeCid && s.cards[foeCid]) {
             const w = wheelBonus(s, c, s.cards[foeCid]);
-            if (w) parts.push({ source: 'colour', label: 'Colour wheel', amount: w });
+            if (w) {
+                parts.push({ source: 'colour', label: w > 0 ? 'Strong' : 'Weak', amount: w });
+                if (total + w < 1) parts.push({ source: 'floor', label: 'Positive attack floor', amount: 1 - total - w });
+                total = Math.max(1, total + w);
+            }
         }
-        return { total: Math.max(0, parts.reduce((sum, p) => sum + p.amount, 0)), parts };
+        return { total, parts };
     }
     function attackOf(s, cid, foeCid) { return attackParts(s, cid, foeCid).total; }
 
@@ -410,16 +419,15 @@
             if (taxOn(s, cid)) out.push({ stat: 'cost', amount: 1, label: 'Night Sight', until: 'tax', from: null });        }
         return out;
     }
-    // The colour wheel from this creature's side: { strong: colours it gets +bonus against,
-    // weak: colours that get +bonus against it, bonus }. Follows a reversed wheel.
+    // Target relationships from this creature's side; follows a reversed wheel.
     function wheelEdges(s, cid) {
         const W = Rift.data.wheel, c = s.cards[cid];
-        const out = { strong: [], weak: [], bonus: W ? W.bonus : 0 };
+        const out = { strong: [], weak: [], neutral: [], bonus: W ? W.bonus : 0 };
         if (!W || !c || c.kind !== 'creature') return out;
-        Object.keys(W.beats).forEach(b => {
+        W.order.forEach(b => {
             const foe = { kind: 'creature', colour: b };
-            if (wheelBonus(s, c, foe)) out.strong.push(b);
-            if (wheelBonus(s, foe, c)) out.weak.push(b);
+            const modifier = wheelBonus(s, c, foe);
+            out[modifier > 0 ? 'strong' : modifier < 0 ? 'weak' : 'neutral'].push(b);
         });
         return out;
     }
@@ -538,18 +546,12 @@
         const pb = attackOf(s, target, att);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
-        const after = (cid, amount) => {
-            if (amount <= 0) return healthOf(s, cid).current;
-            if (hasKeyword(s, cid, 'shield')) return healthOf(s, cid).current;
-            let red = 0;
-            eachAbility(s, s.cards[cid], def => { red += def.damageReduction || 0; });
-            return healthOf(s, cid).current - Math.max(0, amount - red);
-        };
-        const ha = after(att, res.toAttacker), hb = after(target, res.toDefender);
+        const damageToAttacker = damageAfterPrevention(s, att, res.toAttacker), damageToDefender = damageAfterPrevention(s, target, res.toDefender);
+        const ha = healthOf(s, att).current - damageToAttacker, hb = healthOf(s, target).current - damageToDefender;
         let defenderDefeated = hb <= 0;
         const attackerDefeated = ha <= 0;
         if (ax && ax.defenderSurvivesTrade && attackerDefeated && defenderDefeated) defenderDefeated = false;
-        return { hero: false, pa, pb, toAttacker: res.toAttacker, toDefender: res.toDefender, attackerDefeated, defenderDefeated };
+        return { hero: false, pa, pb, toAttacker: res.toAttacker, toDefender: res.toDefender, damageToAttacker, damageToDefender, attackerDefeated, defenderDefeated };
     }
 
     function creaturesLeft(s, p) {
@@ -2072,6 +2074,12 @@
         });
     }
 
+    function damageAfterPrevention(s, cid, amount) {
+        if (amount <= 0 || hasKeyword(s, cid, 'shield')) return 0;
+        let reduction = 0;
+        eachAbility(s, s.cards[cid], def => { reduction += def.damageReduction || 0; });
+        return Math.max(0, amount - reduction);
+    }
     function dealDamage(G, cid, amount, source) {
         const s = G.s, c = s.cards[cid];
         if (!c || amount <= 0 || !s.players[c.controller].board.includes(cid)) return 0;
@@ -2089,9 +2097,7 @@
             emit(G, { t: 'shield', cid, text: logName(s, cid) + '\'s Shield blocks the damage.' });
             return 0;
         }
-        let red = 0;
-        eachAbility(s, c, def => { red += def.damageReduction || 0; });
-        const dealt = Math.max(0, amount - red);
+        const dealt = damageAfterPrevention(s, cid, amount);
         if (!dealt) return 0;
         c.damage += dealt;
         emit(G, { t: 'damage', cid, amount: dealt, source, text: logName(s, cid) + ' takes ' + dealt + ' damage.' });

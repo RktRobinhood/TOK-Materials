@@ -826,6 +826,58 @@ test('spell and activation cues identify source and target; reduced motion fades
     }
 });
 
+test('six-colour SVG, keyboard inspection and all teaching examples stay isolated and follow reversal', () => {
+    const t = prepared({ me: ['beastie'], opp: ['beastie'] }, (s, move) => {
+        move('p0c0', 0, 'board'); move('p1c0', 1, 'board'); s.players[0].axHand = ['curved-space'];
+    });
+    const wheel = t.$('.b-wheel'), before = JSON.stringify(t.handle.state), spoken = t.spoken.length;
+    assert.equal(wheel.querySelectorAll('circle').length, 6);
+    assert.equal(wheel.querySelectorAll('line').length, 15);
+    assert.equal(wheel.querySelectorAll('polygon').length, 12);
+    assert.equal(wheel.querySelectorAll('[data-wheel-colour]').length, 6);
+    assert.equal(wheel.parentNode, t.$('.b-side'), 'the diagram stays beside/below the board, outside its targets');
+    const memory = wheel.querySelector('[data-wheel-colour="memory"]');
+    memory.focus(); memory.dispatchEvent({ type: 'focus' });
+    assert.equal(memory.getAttribute('aria-pressed'), 'true');
+    assert.match(wheel.querySelector('.b-wheel-matchups').textContent, /Strong \+1: Reason, Emotion.*Weak −1: Sense perception, Imagination.*Neutral 0: Language, Memory/);
+    const select = wheel.querySelector('.b-wheel-practice');
+    const expected = [/2 vs 2.*You take 2; rival takes 2/, /3 vs 1.*You take 1; rival takes 3/,
+        /1 vs 3.*You take 3; rival takes 1/, /1 vs 2.*You take 2; rival takes 1.*below 1/,
+        /You take 1; rival takes 0.*Shield blocks/, /You take 1; rival takes 0.*only the lower attack hits/,
+        /1 vs 3.*You take 3; rival takes 1.*swaps Strong and Weak/, /Zero attack stays 0.*cannot start/];
+    expected.forEach((text, i) => { select.value = String(i); select.dispatchEvent({ type: 'change' }); assert.match(wheel.querySelector('.b-wheel-example').textContent, text); });
+    assert.equal(JSON.stringify(t.handle.state), before); assert.equal(t.spoken.length, spoken, 'practice adds no generated speech');
+    t.$('.b-hand [data-axiom="curved-space"]').click(); t.$('.b-prompt .btn.primary').click();
+    assert.equal(t.$('.b-wheel'), wheel, 'the open/selected legend survives battle rendering');
+    assert.match(wheel.querySelector('.b-wheel-state').textContent, /Reversed now/);
+    assert.match(wheel.querySelector('.b-wheel-matchups').textContent, /Strong \+1: Sense perception, Imagination.*Weak −1: Reason, Emotion/);
+    assert.equal(wheel.querySelectorAll('polygon').length, 12);
+    t.handle.destroy();
+});
+
+test('aiming shows both signed matchups, the one-attack floor and Shield without changing stored attack', () => {
+    for (const calm of [false, true]) for (const shield of [false, true]) {
+        const t = prepared({ me: ['beastie'], opp: ['beastie'] }, (s, move) => {
+            move('p0c0', 0, 'board'); move('p1c0', 1, 'board');
+            Object.assign(s.cards.p0c0, { colour: 'emotion', attack: 1, health: 8 });
+            Object.assign(s.cards.p1c0, { colour: 'reason', attack: 1, health: 8, extraKeywords: shield ? ['shield'] : [] });
+        }, { calm });
+        const before = JSON.stringify(t.handle.state);
+        t.$('.my-board [data-cid="p0c0"]').click();
+        t.$('.opp-board [data-cid="p1c0"]').dispatchEvent({ type: 'pointerenter', pointerType: 'mouse' });
+        const badges = t.root.querySelectorAll('.b-predict').map(n => n.textContent).join(' | ');
+        assert.match(badges, /Weak −1; floor 1/); assert.match(badges, /2 attack \(Strong \+1\)/);
+        assert.match(badges, new RegExp('Deals ' + (shield ? 0 : 1)));
+        if (shield) assert.match(badges, /Shield blocks/);
+        assert.equal(JSON.stringify(t.handle.state), before);
+        t.$('.b-arena').dispatchEvent({ type: 'keydown', key: 'Escape' }); assert.equal(t.root.querySelectorAll('.b-predict').length, 0);
+        t.$('.my-board [data-cid="p0c0"]').click(); t.$('.opp-board [data-cid="p1c0"]').click();
+        assert.equal(t.handle.state.cards.p1c0.damage, shield ? 0 : 1); assert.equal(t.handle.state.cards.p0c0.damage, 2);
+        assert.equal(t.handle.state.cards.p0c0.attack, 1);
+        t.handle.destroy();
+    }
+});
+
 test('move clips choose targets and replay without changing live battle, saves or focus on dismissal', () => {
     for (const motion of ['normal', 'calm', 'reduced']) {
         const calm = motion === 'calm', still = motion !== 'normal';

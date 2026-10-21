@@ -105,8 +105,9 @@ test('The Eyebrow takes 1 less damage from each hit', () => {
     onBoard(s, 'p0c0', 'p1c0');
     stats(s, 'p0c0', 3, 9);
     stats(s, 'p1c0', 1, 6);
+    assert.equal(E.fightPreview(s, 'p0c0', 'p1c0').damageToDefender, 1, 'Weak −1, then Eyebrow prevents 1');
     s = hit(s, 'p0c0', 'p1c0');
-    assert.equal(hp(s, 'p1c0'), 4);
+    assert.equal(hp(s, 'p1c0'), 5);
 });
 
 test('Rest and Recover (vigilance) heals creatures fully at the start of their controller\'s turn', () => {
@@ -171,18 +172,18 @@ test('Axiom of the Crowd: +1 attack for every other friendly creature', () => {
     assert.equal(atk(s, 'p0c0'), 3);
 });
 
-test('the colour wheel: +1 attack against the colour it beats; The Broken Postulate reverses it; Memory is outside', () => {
+test('the six-colour wheel has signed matchups; The Broken Postulate swaps them; Memory participates', () => {
     // Astrophysicat is Reason, Billie Eelish is Emotion, Siuuugull is Memory.
     const s = setup({ p0: ['astrophysicat', 'siuuugull'], p1: ['eelish'] });
     onBoard(s, 'p0c0', 'p0c1', 'p1c0');
     stats(s, 'p0c0', 2, 5);
     stats(s, 'p1c0', 2, 6);
     assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 3);
-    assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 2);
+    assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 1);
     assert.equal(E.attackOf(s, 'p0c0'), 2, 'no bonus against a hero');
-    assert.equal(E.wheelBonus(s, s.cards.p0c1, s.cards.p1c0), 0);
+    assert.equal(E.wheelBonus(s, s.cards.p0c1, s.cards.p1c0), 1);
     rule(s, 'curved-space');
-    assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 2);
+    assert.equal(E.attackOf(s, 'p0c0', 'p1c0'), 1);
     assert.equal(E.attackOf(s, 'p1c0', 'p0c0'), 3);
     const d = hit(rule(s, 'age-of-reason'), 'p0c0', 'p1c0');
     assert.equal(d.axioms.active.colour, 'age-of-reason', 'a spotlight replaces the reversed wheel');

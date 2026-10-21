@@ -175,7 +175,7 @@
     // Granny's closing line on the lesson's end screen (the TOK point).
     const outro = 'Same table, same cards: change the rules, and the same attack can win or lose. In maths, the rules you start from are called axioms. Which rules does your subject start from?';
     // What a real match adds (shown on the lesson's end screen).
-    const next = 'Next you will meet: the colour wheel (+1 attack against the colour you beat), Last Word (it works when the creature is defeated), Swift and Shield. Point at any card to read it.';
+    const next = 'Next you will meet: Strong +1, Weak −1 and Neutral matchups, Last Word (it works when the creature is defeated), Swift and Shield. Open Colour matchups on the board to practise. Point at any card to read it.';
     function guide(power) {
         if (!power) return { steps, create, outro, next };
         const at = steps.findIndex(s => s.title === 'Change a rule');

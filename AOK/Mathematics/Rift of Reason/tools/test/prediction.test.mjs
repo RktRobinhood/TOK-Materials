@@ -308,5 +308,5 @@ test('combat colour explanations identify the hierarchy as a game rule', () => {
         assert.match(wheel.lines[colour], /^Game rule:/);
         assert.match(wheel.lines[colour], /TOK prompt:/);
     }
-    assert.match(wheel.memory, /^Game rule:/);
+    assert.ok(wheel.order.includes('memory'), 'Memory is one of the six actual matchup colours');
 });

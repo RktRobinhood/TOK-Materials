@@ -47,7 +47,7 @@ const runTimer = (g, ms) => { const i = g.timers.findIndex(x => x.ms === ms); as
 const hover = (g, node) => { const n = g.timers.length; node.dispatchEvent({ type: 'pointerenter', pointerType: 'mouse' }); g.timers.splice(n).forEach(x => x.fn()); };
 const badges = root => root.querySelectorAll('.b-predict').map(n => n.textContent).join(' | ');
 
-test('opponent attack: Beansprout shows 1, previews 2 (+1 colour) against Kim, then deals 2', () => {
+test('opponent attack: Beansprout shows 1, previews 2 (Strong +1) against Kim, then deals 2', () => {
     const t = syllo(a => a.type === 'attack' && a.cid === 'p1c2' && a.target === 'p0c0');
     const s = t.s;
     s.turn = 10; s.active = 1; s.phase = 'main';
@@ -58,8 +58,8 @@ test('opponent attack: Beansprout shows 1, previews 2 (+1 colour) against Kim, t
     assert.equal(m.$('.opp-board [data-cid="p1c2"] .bc-gem.attack').textContent, '1', 'the card keeps its targetless attack');
     assert.equal(m.$('.opp-board [data-cid="p1c2"] .bc-delta.attack'), null, 'no target-free change, so no chip');
     runTimer(t.g, 1250);   // the AI picks its attack: the arrow and preview show
-    assert.match(badges(m.root), /Deals 2 \(\+1 colour\)/);
-    assert.match(m.$('.b-prompt').textContent, /attacks Kim Kardashiant with Mr\. Beansprout: deals 2 \(\+1 colour\)/);
+    assert.match(badges(m.root), /Deals 2 \(Strong \+1\)/);
+    assert.match(m.$('.b-prompt').textContent, /attacks Kim Kardashiant with Mr\. Beansprout: deals 2 \(Strong \+1\)/);
     runTimer(t.g, 1000);   // impact
     const hit = m.view.state.lastEvents.find(e => e.t === 'damage' && e.source === 'p1c2' && e.cid === 'p0c0');
     assert.equal(hit && hit.amount, 2);
@@ -106,7 +106,7 @@ test('stacked, cancelling and expiring effects show on both players\' cards and 
     assert.match(notes, /Active effects/);
     assert.match(notes, /\+2 attack: Hype \(this turn only\)/);
     assert.match(notes, /−1 attack: Heckled \(until it leaves play\)/);
-    assert.match(notes, /Colour wheel: \+1 attack against Sense perception; Emotion gets \+1 against it\./);
+    assert.match(notes, /Colour wheel: Strong \+1 against Sense perception, Imagination; Weak −1 against Reason, Emotion; Neutral against Language, Memory\./);
     m.view.destroy();
 
     // A cancelling pair: the card shows no chip, yet the inspector still lists both changes.
@@ -130,15 +130,15 @@ test('wheel edges and the inspector line follow a reversed wheel; preview matche
     const s = t.s;
     s.turn = 10; s.active = 1; s.phase = 'main';
     toBoard(s, 'p1c2'); toBoard(s, 'p0c0');
-    assert.deepEqual(JSON.parse(JSON.stringify(t.E.wheelEdges(s, 'p1c2'))), { strong: ['perception'], weak: ['emotion'], bonus: 1 });
+    assert.deepEqual(JSON.parse(JSON.stringify(t.E.wheelEdges(s, 'p1c2'))), { strong: ['perception', 'imagination'], weak: ['reason', 'emotion'], neutral: ['language', 'memory'], bonus: 1 });
     s.axioms.active = Object.assign({}, s.axioms.active, { colour: 'curved-space' });
-    assert.deepEqual(JSON.parse(JSON.stringify(t.E.wheelEdges(s, 'p1c2'))), { strong: ['emotion'], weak: ['perception'], bonus: 1 });
+    assert.deepEqual(JSON.parse(JSON.stringify(t.E.wheelEdges(s, 'p1c2'))), { strong: ['reason', 'emotion'], weak: ['perception', 'imagination'], neutral: ['language', 'memory'], bonus: 1 });
     const m = mount(t, s);
     hover(t.g, m.$('.opp-board [data-cid="p1c2"]'));
-    assert.match(m.$('.b-inspect .b-notes').textContent, /Colour wheel \(reversed now\): \+1 attack against Emotion; Sense perception gets \+1 against it\./);
+    assert.match(m.$('.b-inspect .b-notes').textContent, /Colour wheel \(reversed now\): Strong \+1 against Reason, Emotion; Weak −1 against Sense perception, Imagination/);
     runTimer(t.g, 1250);
     assert.match(badges(m.root), /Deals 1/, 'reversed: Language no longer beats Perception');
-    assert.match(badges(m.root), /Shield blocks.*\| Takes 1Survives/, 'Kim takes 1; its stronger counter-hit meets the Shield');
+    assert.match(badges(m.root), /Shield blocks.*\| Takes 1.*2 attack \(Strong \+1\).*Survives/, 'Kim takes 1; its stronger counter-hit meets the Shield');
     runTimer(t.g, 1000);
     const dealt = m.view.state.lastEvents.filter(e => e.t === 'damage' && e.source === 'p1c2' && e.cid === 'p0c0').map(e => e.amount);
     assert.equal(dealt.join(), '1', 'resolved damage agrees with the preview');

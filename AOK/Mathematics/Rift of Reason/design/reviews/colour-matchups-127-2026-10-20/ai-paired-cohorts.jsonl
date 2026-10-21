@@ -1,0 +1,2 @@
+{"tag":"lad-ce","n":192,"wins":123,"draws":0,"pct":64.0625,"sections":[{"seeds":24,"wins":26,"draws":0},{"seeds":48,"wins":54,"draws":0},{"seeds":72,"wins":88,"draws":0},{"seeds":96,"wins":123,"draws":0}]}
+{"tag":"colour-holdout","n":96,"wins":61,"draws":0,"pct":63.541666666666664,"sections":[{"seeds":24,"wins":34,"draws":0},{"seeds":48,"wins":61,"draws":0}]}

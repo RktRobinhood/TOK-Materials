@@ -970,10 +970,10 @@
         function wheelLine(cid) {
             const w = E.wheelEdges(state, cid);
             const names = list => list.map(c => (Rift.COLOURS[c] || { name: c }).name).join(', ');
-            if (!w.strong.length && !w.weak.length) return 'Colour wheel: no bonus either way.';
+            if (!w.strong.length && !w.weak.length) return 'Colour wheel: neutral against every colour.';
             return 'Colour wheel' + (E.rules(state).wheelReversed ? ' (reversed now)' : '') + ': '
-                + [w.strong.length ? '+' + w.bonus + ' attack against ' + names(w.strong) : '',
-                    w.weak.length ? names(w.weak) + ' get' + (w.weak.length === 1 ? 's' : '') + ' +' + w.bonus + ' against it' : ''].filter(Boolean).join('; ') + '.';
+                + 'Strong +' + w.bonus + ' against ' + names(w.strong) + '; Weak −' + w.bonus + ' against ' + names(w.weak)
+                + '; Neutral against ' + names(w.neutral) + '. Positive attack stays at least 1; zero stays 0.';
         }
         function activeEffectsNote(cid) {
             const fx = E.activeEffects(state, cid);
@@ -2690,12 +2690,7 @@
 
         function renderRules() {
             dom.rules.innerHTML = '';
-            // The colour wheel strip runs backwards under the Broken Postulate.
-            const chainEl = dom.wheel.querySelector ? dom.wheel.querySelector('.b-wheel-chain') : null;
-            if (chainEl) {
-                const W = Rift.data.wheel, icons = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c);
-                chainEl.textContent = E.rules(state).wheelReversed ? icons.reverse().join(' › ') + '  (reversed!)' : icons.join(' › ');
-            }
+            dom.wheel.refresh();
             const active = state.axioms.active;
             const AX = Rift.data.axioms || {};
             const tiles = CORE_RULES.map(([cat, , basic, art, long]) => ruleTile(cat, active[cat], basic, art, long));
@@ -3442,15 +3437,18 @@
                     rev && owner !== state.cards[att].controller ? ['⚠ The Last Shall Be First: this helps ' + (owner === ME ? 'you' : oppName) + '!'] : []),
                     attacker: ['Deals ' + pv.damage], targetDies: rev };
             }
-            const colourPart = (cid, foe) => (E.attackParts(state, cid, foe).parts.find(x => x.source === 'colour') || {}).amount || 0;
-            const ca = colourPart(att, target), cb = colourPart(target, att);
-            const tag = n => (n ? ' (' + (n > 0 ? '+' : '−') + Math.abs(n) + ' colour)' : '');
+            const tag = (cid, foe) => {
+                const n = E.wheelBonus(state, state.cards[cid], state.cards[foe]);
+                const floor = E.attackParts(state, cid, foe).parts.some(p => p.source === 'floor');
+                return n ? ' (' + (n > 0 ? 'Strong +' : 'Weak −') + Math.abs(n) + (E.attackOf(state, cid) <= 0 ? '; zero stays 0' : floor ? '; floor 1' : '') + ')' : ' (Neutral)';
+            };
+            const ca = tag(att, target), cb = tag(target, att);
             const blocked = (cid, amount) => amount > 0 && E.hasKeyword(state, cid, 'shield');
-            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.toDefender + (pv.toDefender ? tag(ca) : '');
-            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.toAttacker + (pv.toAttacker ? tag(cb) : '');
+            const takesT = blocked(target, pv.toDefender) ? 'Shield blocks' : 'Takes ' + pv.damageToDefender;
+            const takesA = blocked(att, pv.toAttacker) ? 'Shield blocks' : 'Takes ' + pv.damageToAttacker;
             return {
-                target: [takesT, pv.defenderDefeated ? 'Defeated' : 'Survives'],
-                attacker: ['Deals ' + pv.toDefender + tag(ca), takesA, pv.attackerDefeated ? 'Defeated' : 'Survives'],
+                target: [takesT, pv.pb + ' attack' + cb, pv.defenderDefeated ? 'Defeated' : 'Survives'],
+                attacker: ['Deals ' + pv.damageToDefender + ca, pv.pa + ' attack', takesA, pv.attackerDefeated ? 'Defeated' : 'Survives'],
                 targetDies: pv.defenderDefeated, attackerDies: pv.attackerDefeated,
             };
         }
@@ -3901,20 +3899,90 @@
 
         function wheelLegend() {
             const W = Rift.data.wheel;
-            const items = W.order.map(c => el('li', {}, [
-                colourChip(c), ' beats ', colourChip(W.beats[c]),
-                el('div.wheel-line', { text: W.lines[c] }),
-            ]));
-            items.push(el('li', {}, [colourChip('memory'), el('div.wheel-line', { text: W.memory })]));
-            const chain = W.order.concat(W.order[0]).map(c => (Rift.COLOURS[c] || {}).icon || c).join(' › ');
-            return el('details.b-wheel.panel', {}, [
-                el('summary', {}, [
-                    'Colour wheel: +' + W.bonus + ' attack',
-                    el('span.b-wheel-chain', { title: W.order.map(c => Rift.COLOURS[c].name + ' beats ' + Rift.COLOURS[W.beats[c]].name).join('. ') + '.', text: chain }),
-                ]),
-                el('p.small', { text: W.note || 'These are rules for this game, not a ranking of ways of knowing.' }),
-                el('ul', {}, items),
+            let selected = W.order[0], signature = '';
+            const letters = ['R', 'E', 'L', 'P', 'I', 'M'];
+            const chart = el('div.b-wheel-chart'), summary = el('div.b-wheel-matchups', { role: 'status', 'aria-live': 'polite' });
+            const caption = el('p.small.b-wheel-state'), thought = el('p.small.b-wheel-thought');
+            const buttons = W.order.map((c, i) => el('button.btn.small', {
+                type: 'button', dataset: { wheelColour: c }, 'aria-label': 'Inspect ' + Rift.COLOURS[c].name + ' matchups',
+                onclick: () => select(c),
+            }, [letters[i] + ' ', colourChip(c)]));
+            buttons.forEach((b, i) => {
+                b.addEventListener('focus', () => select(W.order[i]));
+                b.addEventListener('pointerenter', ev => { if (!ev.pointerType || ev.pointerType === 'mouse') select(W.order[i]); });
+            });
+            function select(c) { selected = c; refresh(); }
+            function modifier(a, b) { return E.wheelBonus(state, { kind: 'creature', colour: a }, { kind: 'creature', colour: b }); }
+            function refresh() {
+                const reversed = E.rules(state).wheelReversed, key = selected + ':' + reversed;
+                if (signature === key) return;
+                signature = key;
+                const groups = { strong: [], weak: [], neutral: [] };
+                W.order.forEach(c => { const m = modifier(selected, c); groups[m > 0 ? 'strong' : m < 0 ? 'weak' : 'neutral'].push(Rift.COLOURS[c].name); });
+                const lines = ['Strong +1: ' + groups.strong.join(', '), 'Weak −1: ' + groups.weak.join(', '), 'Neutral 0: ' + groups.neutral.join(', ')];
+                summary.replaceChildren(el('strong', { text: Rift.COLOURS[selected].name }), ...lines.map(text => el('div', { text })));
+                caption.textContent = reversed ? 'Reversed now: Strong and Weak swap. Neutral stays neutral.' : 'Next two clockwise: Strong. Previous two: Weak. Opposite and same: Neutral.';
+                thought.textContent = 'Base wheel: ' + W.lines[selected];
+                buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.wheelColour === selected ? 'true' : 'false'));
+                const doc = root.document;
+                const make = (tag, attrs, text) => { const n = doc.createElementNS('http://www.w3.org/2000/svg', tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); if (text) n.textContent = text; return n; };
+                const svg = make('svg', { viewBox: '0 0 320 290', role: 'img', 'aria-label': Rift.COLOURS[selected].name + '. ' + lines.join('. ') });
+                const points = W.order.map((c, i) => ({ x: 160 + 112 * Math.cos(-Math.PI / 2 + i * Math.PI / 3), y: 145 + 112 * Math.sin(-Math.PI / 2 + i * Math.PI / 3) }));
+                for (let i = 0; i < 6; i++) for (let j = i + 1; j < 6; j++) {
+                    const m = modifier(W.order[i], W.order[j]), from = m < 0 ? j : i, to = m < 0 ? i : j;
+                    const a = points[from], b = points[to], angle = Math.atan2(b.y - a.y, b.x - a.x);
+                    const x1 = a.x + 25 * Math.cos(angle), y1 = a.y + 25 * Math.sin(angle), x2 = b.x - 29 * Math.cos(angle), y2 = b.y - 29 * Math.sin(angle);
+                    const involved = selected === W.order[i] || selected === W.order[j];
+                    const stroke = !m ? '#abb3bd' : selected === W.order[to] ? '#ffb567' : '#77e9b7';
+                    const group = make('g', { opacity: involved ? '1' : '.23', 'data-wheel-edge': W.order[from] + ':' + W.order[to] });
+                    group.appendChild(make('line', { x1, y1, x2, y2, stroke, 'stroke-width': involved ? '3' : '2', 'stroke-dasharray': m ? 'none' : '5 5' }));
+                    if (m) group.appendChild(make('polygon', { points: x2 + ',' + y2 + ' ' + (x2 - 9 * Math.cos(angle - .45)) + ',' + (y2 - 9 * Math.sin(angle - .45)) + ' ' + (x2 - 9 * Math.cos(angle + .45)) + ',' + (y2 - 9 * Math.sin(angle + .45)), fill: stroke }));
+                    svg.appendChild(group);
+                }
+                W.order.forEach((c, i) => {
+                    const p = points[i];
+                    svg.appendChild(make('circle', { cx: p.x, cy: p.y, r: 23, fill: Rift.COLOURS[c].hex, stroke: c === selected ? '#ffe393' : '#0b1627', 'stroke-width': c === selected ? 5 : 3 }));
+                    svg.appendChild(make('text', { x: p.x, y: p.y + 7, 'text-anchor': 'middle', fill: '#08151b', 'font-size': 22, 'font-weight': 'bold' }, letters[i]));
+                });
+                chart.replaceChildren(svg);
+            }
+            const examples = [
+                ['Neutral', 'reason', 'perception', 2], ['Strong', 'reason', 'emotion', 2], ['Weak', 'emotion', 'reason', 2],
+                ['Weak at 1', 'emotion', 'reason', 1], ['Shield', 'reason', 'emotion', 2, 'shield'],
+                ['Underdog', 'reason', 'emotion', 2, 'underdog'], ['Reversed wheel', 'reason', 'emotion', 2, 'curved-space'], ['Zero attack', 'reason', 'emotion', 0],
+            ];
+            const practice = el('div.b-wheel-example', { role: 'status', 'aria-live': 'polite' });
+            const choose = el('select.b-wheel-practice', { 'aria-label': 'Matchup practice example' }, examples.map((ex, i) => el('option', { value: String(i), text: ex[0] })));
+            function showExample() {
+                const [label, a, b, attack, changed] = examples[Number(choose.value) || 0];
+                // A separate fixed teaching battle: no live cards, deck/RNG inspection or saves.
+                const scratch = E.createBattle({ seed: 'colour-practice', players: [0, 1].map(p => ({ name: p ? 'Rival' : 'You', team: [{ uid: 'wheel-' + p, species: 'beastie', injuries: [], scars: [], powerDelta: 0 }] })),
+                    options: { first: 0, shuffle: false, spark: false, timeline: false, openHand: [0, 0], openAxioms: 0 } });
+                scratch.phase = 'main';
+                [a, b].forEach((colour, p) => {
+                    const cid = 'p' + p + 'c0', P = scratch.players[p];
+                    P.deck = P.deck.filter(c => c !== cid); P.board = [cid];
+                    Object.assign(scratch.cards[cid], { colour, attack, health: 20, ability: '', gained: [], extraKeywords: [], buffs: [], enteredTurn: 0 });
+                });
+                if (changed === 'shield') scratch.cards.p1c0.extraKeywords = ['shield'];
+                else if (changed) scratch.axioms.active[Rift.data.axioms[changed].category] = changed;
+                const p = E.fightPreview(scratch, 'p0c0', 'p1c0');
+                const extra = label === 'Weak at 1' ? ' Weak −1 cannot take positive attack below 1.' : changed === 'shield' ? ' Shield blocks a hit even when attack is positive.'
+                    : changed === 'underdog' ? ' Underdog: only the lower attack hits. Strong is not always better.' : changed === 'curved-space' ? ' The rule swaps Strong and Weak.' : '';
+                practice.textContent = label + ': ' + Rift.COLOURS[a].name + ' vs ' + Rift.COLOURS[b].name + '. '
+                    + (E.canAttack(scratch, 'p0c0') ? p.pa + ' vs ' + p.pb + ' effective attack. You take ' + p.damageToAttacker + '; rival takes ' + p.damageToDefender + '.' : 'Zero attack stays 0. You cannot start this attack.') + extra;
+            }
+            choose.addEventListener('change', showExample);
+            const box = el('details.b-wheel.panel', {}, [el('summary', { text: 'Colour matchups: Strong +1 / Weak −1' }), caption, chart,
+                el('p.small', { text: 'Arrows point from Strong to Weak. Dashed lines are Neutral. Choose a colour:' }),
+                el('div.b-wheel-choices', { role: 'group', 'aria-label': 'Inspect a colour' }, buttons), summary,
+                el('p.small', { text: 'Apply the matchup after other boosts. Positive attack stays at least 1; zero stays 0. Heroes and no-colour creatures are Neutral. Shield can still block all damage.' }),
+                el('label.small', {}, ['Try a fight (basic wheel unless a rule is named): ', choose]), practice,
+                thought, el('p.small', { text: W.note }),
             ]);
+            box.refresh = refresh;
+            refresh(); showExample();
+            return box;
         }
 
         const handle = {

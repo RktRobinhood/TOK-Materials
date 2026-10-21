@@ -680,7 +680,7 @@ body.calm-motion .battle .b-question.show { animation: b-fade-in 0.12s ease-out 
 .b-side { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; font-size: 13px; }
 .b-side > * { flex: none; }
 .b-side > .b-rules { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
-.b-side > .b-wheel[open] { flex: 0 1 auto; max-height: 40%; min-height: 0; overflow-y: auto; }
+.b-side > .b-wheel[open] { flex: 0 1 auto; max-height: 70%; min-height: 0; overflow-y: auto; }
 .b-side > .b-recent { flex: none; }
 .b-side .panel { padding: 8px 10px; }
 .b-side-top { display: flex; gap: 8px; flex-wrap: wrap; padding: 2px 2px 4px; }
@@ -724,6 +724,14 @@ body.calm-motion .battle .b-question.show { animation: b-fade-in 0.12s ease-out 
 .wheel-line { font-size: 12px; opacity: 0.8; }
 .b-wheel summary { line-height: 1.25; }
 .b-wheel-chain { display: block; font-family: var(--font-body, inherit); font-weight: 400; font-size: 14px; letter-spacing: 0.02em; margin-top: 2px; }
+.b-wheel-chart svg { display: block; width: 100%; height: 140px; margin: 0 auto; }
+.b-wheel-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.b-wheel-choices .btn { min-width: 0; white-space: normal; padding: 4px 3px; font-size: 11px; }
+.b-wheel-choices .btn[aria-pressed="true"] { outline: 2px solid var(--gold); outline-offset: -2px; }
+.b-wheel-choices .chip { display: inline; padding: 0; border: 0; background: none; font-size: inherit; white-space: normal; }
+.b-wheel-matchups { margin: 8px 0; font-size: 12px; line-height: 1.4; }
+.b-wheel-example { margin-top: 6px; padding: 6px; background: #071a25; border-radius: 6px; font-size: 12px; line-height: 1.4; }
+.b-wheel-practice { width: 100%; padding: 5px; color: var(--parchment); background: #142c35; border: 1px solid #84a69a70; border-radius: 5px; font: inherit; }
 
 /* ---- end overlay ---- */
 .b-overlay { position: absolute; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; background: rgba(5, 4, 10, 0.72); }

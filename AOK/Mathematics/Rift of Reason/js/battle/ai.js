@@ -376,8 +376,8 @@
                         if (r.reverseHearts) continue;
                         g = heartValue(hearts) - heartValue(hearts - f.damage);
                     } else {
-                        g = (f.defenderDefeated ? creatureValue(s, t, ctx) : 0.3 * f.toDefender)
-                            - (f.attackerDefeated ? creatureValue(s, cid, ctx) : 0.3 * f.toAttacker);
+                        g = (f.defenderDefeated ? creatureValue(s, t, ctx) : 0.3 * f.damageToDefender)
+                            - (f.attackerDefeated ? creatureValue(s, cid, ctx) : 0.3 * f.damageToAttacker);
                     }
                     if (g > best) best = g;
                 }

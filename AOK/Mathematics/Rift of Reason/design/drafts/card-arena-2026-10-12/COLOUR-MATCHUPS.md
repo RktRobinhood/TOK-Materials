@@ -1,5 +1,7 @@
 # Colour matchup revision — teacher feedback
 
+**Settled 14 October; implemented under #127 on 20 October:** the teacher approved the six-colour model and floor/zero semantics below. Preserve the old five-colour clockwise order and append Memory: Reason, Emotion, Language, Perception, Imagination, Memory. This makes Reason/Perception, Emotion/Imagination and Language/Memory the three opposite neutral pairs. The 17 October hexagon reference delegates which colour occupies each role. No further model approval is required. The notes below retain the original proposal history.
+
 12 October 2026. Current code has six card colours (Reason, Emotion, Perception, Language, Imagination, Memory), although only five avatar types. The existing wheel adds +1 against one opposing colour; it does not subtract for weakness.
 
 Teacher direction: expose target-dependent Strong against (+1 attack) and Weak against (-1 attack), with a proposed minimum effective attack of one. Show these while hovering/dragging onto a target, not as permanent general-board buffs. Preview both fighters and actual predicted damage using the authoritative engine, including combat Axioms.

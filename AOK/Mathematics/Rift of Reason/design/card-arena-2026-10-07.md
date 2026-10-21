@@ -35,7 +35,7 @@ The shared two-activation contract in [DESIGN.md](DESIGN.md#shared-card-activati
 - A creature at 0 health is **defeated**: Last Word triggers, then it goes to its owner's discard (or hand under Mercy). Defeated collected creatures roll Fate after risked matches (unchanged odds table).
 - **Guard:** while an enemy has any Guard creature, attacks must target a Guard creature (not the hero, not other creatures). The Axiom of Choice and a few abilities ignore Guard.
 - **Shield:** the first damage the creature would take is cancelled and the shield pops.
-- **Colour wheel:** a creature gets **+1 attack** while fighting the colour it beats. Memory stays outside the wheel.
+- **Colour wheel (#127):** clockwise Reason → Emotion → Language → Perception → Imagination → Memory. Each colour is **Strong +1** against the next two, **Weak −1** against the previous two, and Neutral against itself/the opposite colour. Apply ordinary boosts first; otherwise-positive attack floors at 1, zero remains 0. Heroes and explicitly colourless/generic creatures are Neutral. Shield/prevention can still block all damage. The Broken Postulate swaps Strong/Weak without moving the neutral pairs. Board/hover/drag, both fighters, fight resolution and prospective clips use the same effective-attack calculation. The SVG legend and eight isolated text-only practice cases open beside/below the board and never change the live match or save.
 - Under the combat axioms (see below) the same fight can end differently — that is the TOK point.
 
 ## Victory

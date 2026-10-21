@@ -31,27 +31,20 @@
     const Rift = root.Rift;
 
     // ---- colour wheel ------------------------------------------------------
-    // A clean 5-cycle. Each colour beats the next one (+1 attack while it fights
-    // that colour). Memory is colourless: it neither beats nor is beaten.
+    // Approved six-colour cycle: next two Strong +1, previous two Weak -1,
+    // opposite and self neutral. Preserve the old order and append Memory.
     Rift.data.wheel = {
         bonus: 1,
         note: 'This colour wheel is a game rule. It does not rank Ways of Knowing in TOK; their usefulness depends on the question and evidence.',
-        order: ['reason', 'emotion', 'language', 'perception', 'imagination'],
-        beats: {
-            reason: 'emotion',
-            emotion: 'language',
-            language: 'perception',
-            perception: 'imagination',
-            imagination: 'reason',
-        },
+        order: ['reason', 'emotion', 'language', 'perception', 'imagination', 'memory'],
         lines: {
-            reason: 'Game rule: Reason beats Emotion. TOK prompt: when might a calm proof help check a strong feeling?',
-            emotion: 'Game rule: Emotion beats Language. TOK prompt: can a feeling matter before we have words for it?',
-            language: 'Game rule: Language beats Perception. TOK prompt: how might names affect what we notice?',
-            perception: 'Game rule: Perception beats Imagination. TOK prompt: what evidence could test an imagined explanation?',
-            imagination: 'Game rule: Imagination beats Reason. TOK prompt: what new results follow if we change an axiom?',
+            reason: 'Game rule: Reason is Strong against Emotion and Language. TOK prompt: when might a proof help check a strong feeling or a claim?',
+            emotion: 'Game rule: Emotion is Strong against Language and Perception. TOK prompt: how can feelings affect what we notice?',
+            language: 'Game rule: Language is Strong against Perception and Imagination. TOK prompt: how might names shape what we notice or imagine?',
+            perception: 'Game rule: Perception is Strong against Imagination and Memory. TOK prompt: can new evidence challenge an imagined or remembered event?',
+            imagination: 'Game rule: Imagination is Strong against Memory and Reason. TOK prompt: what new results follow if we change an axiom?',
+            memory: 'Game rule: Memory is Strong against Reason and Emotion. TOK prompt: when can a remembered example challenge a proof or feeling?',
         },
-        memory: 'Game rule: Memory stands outside the wheel; it neither beats nor is beaten. This does not rank its value in TOK.',
     };
 
     const spotlight = (id, colour, name, flavour) => ({
@@ -191,7 +184,7 @@
         'curved-space': {
             short: 'Wheel runs backwards',
             name: 'The Broken Postulate', category: 'colour',
-            text: 'The colour wheel runs backwards: each colour beats the one that normally beats it.',
+            text: 'The colour wheel runs backwards: Strong and Weak swap. Neutral matchups stay neutral.',
             flavour: 'Drop Euclid\'s parallel postulate and geometry curves. Still consistent, just different.',
             rules: { wheelReversed: true },
         },
