@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Direct connection proof</title>
+<style>body{font:18px system-ui;background:#171525;color:#eee;margin:20px;max-width:760px}button,textarea{font:inherit;box-sizing:border-box;max-width:100%;padding:12px;margin:8px 0}textarea{display:block;width:100%;height:120px}button{min-height:48px}section{border:1px solid #aaa;padding:15px;margin:20px 0}#status{min-height:3em}pre{white-space:pre-wrap;overflow-wrap:anywhere}body.calm-motion *{animation:none!important}</style></head><body>
+<h1>Direct connection proof · #29</h1><p>This is a connection test. It cannot access your adventure, cards, camera or microphone. No connection server or relay is used. Direct Wi-Fi links may be blocked.</p>
+<ol><li>The host makes a code and sends it to the joiner.</li><li>The joiner pastes it and sends the return code back.</li><li>The host pastes that return code. Keep both pages open.</li></ol>
+<p id="status" role="status">Choose Host or Join. Codes expire after 10 minutes.</p>
+<section><h2>1. Choose your side</h2><button id="host">Host · create a code</button><button id="join">Join · use a host code</button><button id="cancel">Cancel / Retry</button></section>
+<section><h2>2. Exchange codes</h2><label for="outgoing">Your code to send</label><textarea id="outgoing" readonly spellcheck="false"></textarea><button id="copy">Copy your code</button><label for="incoming">Code from your partner</label><textarea id="incoming" spellcheck="false"></textarea><button id="use">Use partner code</button></section>
+<section><h2>3. Prove both directions</h2><button id="ping" disabled>Send a test ping</button><pre id="messages" aria-live="polite">No messages yet.</pre></section>
+<script src="../js/core/rift.js"></script><script src="../js/core/peer.js"></script><script src="peer.js"></script></body></html>

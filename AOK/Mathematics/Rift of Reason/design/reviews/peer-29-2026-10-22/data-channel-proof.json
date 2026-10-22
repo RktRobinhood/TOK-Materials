@@ -1,0 +1,7 @@
+{
+  "conditions": "Two distinct pages in the available Codex in-app Chromium browser on the same Windows host; localhost:8790; native RTCPeerConnection/RTCDataChannel; iceServers empty. No Chrome browser provider or second physical device available. This is not school-network evidence.",
+  "hostMessages": "Received {\"type\":\"pong\",\"number\":1}\nReceived {\"type\":\"ping\",\"number\":1}",
+  "joinMessages": "Received {\"type\":\"ping\",\"number\":1}\nReceived {\"type\":\"pong\",\"number\":1}",
+  "offerCharacters": 1108,
+  "answerCharacters": 1105
+}
