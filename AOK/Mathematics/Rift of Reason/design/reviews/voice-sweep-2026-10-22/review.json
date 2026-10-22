@@ -1,0 +1,302 @@
+{
+ "avatar-raven-boy-17ymm2a": {
+  "flag": "extra at start",
+  "say": "A talking sundial. Outside my door. Normal.",
+  "heard": "The talking sundial outside my door. Normal."
+ },
+ "speedcheeta-59s7lh": {
+  "flag": "extra at start",
+  "say": "Chat! This kid said ALWAYS! Clip it! Clip it!",
+  "heard": "It's chat. This kid said always. Clip it. Clip it."
+ },
+ "granny-1tliks5": {
+  "flag": "nothing matched",
+  "say": "That's my",
+  "heard": "Honest"
+ },
+ "narrator-1kffaby": {
+  "flag": "extra at start",
+  "say": "Nudge's map. The tunnel under the Gate. A fat cable runs along it. You pull the plug.",
+  "heard": "Nudge is map. The tunnel under the gate. A fat cable runs along it. You pull the plug."
+ },
+ "algorithm-15uxb1s": {
+  "flag": "extra at start",
+  "say": "Predicted. You saved the magpie. I took the tortoise.",
+  "heard": "Predict it. You saved the magpie. I took the tortoise."
+ },
+ "avatar-raven-girl-inner-14tmbez": {
+  "flag": "missing at start",
+  "say": "Ladder? Lad? Ladle?",
+  "heard": "lad ladle"
+ },
+ "narrator-1t2tnj0": {
+  "flag": "missing at end",
+  "say": "One piece short. I feel… cloudier.",
+  "heard": "One piece short, I feel..."
+ },
+ "avatar-mothkin-boy-181f995": {
+  "flag": "nothing matched",
+  "say": "Only mine.",
+  "heard": "I filed it."
+ },
+ "achilles-1a0ldnp": {
+  "flag": "missing at start",
+  "say": "Coach here. Her charm went quiet somewhere near you.…I'm listening. Slowly, for once.",
+  "heard": "Co-Chair. Her charm went quiet somewhere near you. I'm listening. Slowly for once."
+ },
+ "pip-1j0htyo": {
+  "flag": "extra at end",
+  "say": "…Filed. Sorry. Habit.",
+  "heard": "Filed. Sorry. Have it."
+ },
+ "avatar-mothkin-boy-iaae9o": {
+  "flag": "missing at start",
+  "say": "A net. An imp. It was stolen.",
+  "heard": "An amp. It was stolen."
+ },
+ "avatar-frogling-boy-1rmw2hf": {
+  "flag": "missing at start",
+  "say": "A net. An imp. It was stolen.",
+  "heard": "An imp. It was stolen."
+ },
+ "fin-1moqi1b": {
+  "flag": "missing at end",
+  "say": "The vault never opens. Courts do.…So I let it win. For a bit.",
+  "heard": "The vault never opens. Courts do. So I let it win. Forbid."
+ },
+ "narrator-tscb1g": {
+  "flag": "extra at end",
+  "say": "It's all right. On cloudy days I gu—",
+  "heard": "It's alright. On cloudy days, I go. Previously."
+ },
+ "avatar-raven-boy-jofpak": {
+  "flag": "extra at start",
+  "say": "Nobody predicts me.",
+  "heard": "Pfft. Nobody predicts me."
+ },
+ "colossus-7w3xv9": {
+  "flag": "extra at start",
+  "say": "Predicted. You will pick it again.",
+  "heard": "Predict it. You will pick it again."
+ },
+ "nudge-12gabdg": {
+  "flag": "extra at start, extra at end",
+  "say": "Not again.",
+  "heard": "I'm not enjoying it."
+ },
+ "granny-ffwet1": {
+  "flag": "extra at end",
+  "say": "Come here. That's my",
+  "heard": "Come here. That's my girl."
+ },
+ "nudge-jjqp1g": {
+  "flag": "nothing matched",
+  "say": "…Why?",
+  "heard": "Not again."
+ },
+ "syllo-kq8tes": {
+  "flag": "missing at start",
+  "say": "Home!…Count them. Real ones this time.",
+  "heard": "Oh, count them. Real ones this time."
+ },
+ "chimpossible-1s3fpyd": {
+  "flag": "missing at start",
+  "say": "Ten thousand viewers. All wishing at once. That's entirely possible.",
+  "heard": "10,000 viewers? All wishing at once. That's entirely possible."
+ },
+ "avatar-fox-boy-inner-1ajgoxp": {
+  "flag": "missing at start",
+  "say": "Picture it: a cat burglar. Tiny mask. Tiny rope. I love it. I want it true.",
+  "heard": "Picturing a cat burglar tiny mask tiny rope. I love it. I want it true"
+ },
+ "mirage-1u9gng": {
+  "flag": "extra at start",
+  "say": "At a fair, nine days in ten are like the day before.",
+  "heard": "Out of fare, nine days in ten are like the day before."
+ },
+ "siuuugull-de18rq": {
+  "flag": "nothing matched",
+  "say": "SIUUUU!",
+  "heard": "Siu!"
+ },
+ "speedcheeta-1kycre4": {
+  "flag": "nothing matched",
+  "say": "AAAAAAH!",
+  "heard": "Ah!"
+ },
+ "beansprout-1aug553": {
+  "flag": "nothing matched",
+  "say": "Ooh.",
+  "heard": "Boom."
+ },
+ "gargoyle-lf9943": {
+  "flag": "extra at start",
+  "say": "Reinvention! Again!",
+  "heard": "Re-invention. Again."
+ },
+ "constable-1gg6zxk": {
+  "flag": "extra at start",
+  "say": "Example: all runners wear boots; your story says you are a runner. \"I wear no boots\" would contradict that story.",
+  "heard": "For example, all runners wear boots. Your story says you are a runner. I wear no boots would contradict that story."
+ },
+ "granny-kz36hj": {
+  "flag": "missing at end",
+  "say": "Billie Eelish has an Entrance: it works when you play her. Her Whisper takes away an enemy's special powers, like Guard. Drag her onto Khaby Llame.",
+  "heard": "Billie Elish has an entrance. It works when you play her. Her whisper takes away an enemy's special powers, like guard. Drag her on to Kabilame."
+ },
+ "granny-wq0x3b": {
+  "flag": "extra at start",
+  "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: free. Click your power to continue; this lesson click does not use it.",
+  "heard": "For C, look at the top three rule cards. Take one into your hand and put the others back in any order. Cost free. Click your power to continue. This lesson click does not use it."
+ },
+ "granny-18lr4fy": {
+  "flag": "extra at start",
+  "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+  "heard": "For C. Look at the top three rule cards. Take one into your hand and put the others back in any order. Cost one energy. Click your power to continue. This lesson click does not use it."
+ },
+ "granny-1k73ziu": {
+  "flag": "missing at start",
+  "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+  "heard": "Look at the top three rule cards. Take one into your hand and put the others back in any order. Cost one heart. Click your power to continue. This lesson click does not use it."
+ },
+ "siuuugull-possessed-1ifsnyw": {
+  "flag": "extra at end",
+  "say": "I am always right! Always! Siuuu!",
+  "heard": "I am always right. Always. See you!"
+ },
+ "narrator-1nqdw7e": {
+  "flag": "extra at end",
+  "say": "Find my shadow. Then we can finish that final.",
+  "heard": "Find my shadow, then we can finish that final ray."
+ },
+ "avatar-mothkin-boy-inner-1bvnf7u": {
+  "flag": "missing at start",
+  "say": "Ooh. Little imps with little lamps. Lamps mean friendly. Delivering something nice.",
+  "heard": "Oh, little imps with little lamps. Lamps mean friendly, delivering something nice."
+ },
+ "nudge-12kf4or": {
+  "flag": "missing at start",
+  "say": "Boo! You made them calm! Calm gets zero views!",
+  "heard": "Oh! You made them calm. Calm gets zero views."
+ },
+ "avatar-mothkin-boy-inner-14gre6x": {
+  "flag": "missing at start",
+  "say": "Shh. Her scarf. There's wind. It doesn't move.…Lovely lamp behind her, though.",
+  "heard": "There's scarf, there's wind, it doesn't move. Lovely lamp behind her though."
+ },
+ "constable-1o4enex": {
+  "flag": "missing at start",
+  "say": "Stranger, eh? Name and business. Slowly. I write slowly.",
+  "heard": "Strangery. Name and business. Slowly. I write slowly."
+ },
+ "sweep-1v5p23t": {
+  "flag": "missing at end",
+  "say": "I'm honest, sir!",
+  "heard": "I'm honest, huh?"
+ },
+ "granny-1n4nblz": {
+  "flag": "missing at start",
+  "say": "Hum you later.",
+  "heard": "Hmph. You later."
+ },
+ "granny-16m4yvb": {
+  "flag": "missing at end",
+  "say": "Ladles again. Some amounts can never be made, dear. Know which.",
+  "heard": "Ladles again. Some amounts can never be made, dear. No witch."
+ },
+ "avatar-mothkin-boy-125kjjr": {
+  "flag": "nothing matched",
+  "say": "Whose trial?",
+  "heard": "I never read it."
+ },
+ "judge-10gi4ky": {
+  "flag": "missing at end",
+  "say": "Order. The counts again. Break every one.",
+  "heard": "Order the counts again break everyone"
+ },
+ "pip-19p936q": {
+  "flag": "missing at end",
+  "say": "Clerks go where the record goes. Up.",
+  "heard": "Clerks go where the record goes"
+ },
+ "achilles-1l11ywa": {
+  "flag": "missing at start",
+  "say": "Are you sure you're?",
+  "heard": "You sure you're..."
+ },
+ "copy-1y1vcp4": {
+  "flag": "nothing matched",
+  "say": "100%.",
+  "heard": "Hold still."
+ },
+ "avatar-mothkin-girl-inner-c50c4y": {
+  "flag": "missing at end",
+  "say": "Look at the yeses. What do they share?…Ooh, nineteen is a pretty number. Focus.",
+  "heard": "Look at the yeses. What do they share? Oh, 19 is a pretty number."
+ },
+ "avatar-fox-girl-inner-4novg1": {
+  "flag": "missing at end",
+  "say": "Safe numbers are boring. Try huge ones. Falling ones. Drama.",
+  "heard": "Safe numbers are boring try huge ones falling ones"
+ },
+ "avatar-mothkin-girl-inner-yhap82": {
+  "flag": "extra at end",
+  "say": "Look at the ones it says no to. They know the secret.",
+  "heard": "Look at the ones it says no to. They know the secret. Shhh."
+ },
+ "avatar-raven-girl-inner-d67pgt": {
+  "flag": "missing at start",
+  "say": "\"Walks by.\" Not \"takes\". Different verbs.",
+  "heard": "Walk spy, not takes, different verbs."
+ },
+ "avatar-fox-girl-inner-qjtte1": {
+  "flag": "missing at end",
+  "say": "What if it's nobody in this room? Ooh.",
+  "heard": "What if it's nobody in this room?"
+ },
+ "muskrat-qmf6a6": {
+  "flag": "missing at end",
+  "say": "Engines warm! Seat belt on! Wait. Is this the seat belt?",
+  "heard": "Engine's warm. Seatbelt on. Wait, is this the seatbelt?"
+ },
+ "avatar-mothkin-boy-inner-nao46o": {
+  "flag": "missing at start",
+  "say": "Ooh, glowing eyes. So pretty.…Wait. The front rank doesn't glow. Or blink.",
+  "heard": "Oh, glowing eyes. So pretty. Wait, the front rank doesn't glow. Or blink."
+ },
+ "speedcheeta-1fho2ls": {
+  "flag": "missing at start",
+  "say": "AAAAH! I am here! Why am I here?!",
+  "heard": "Ah! I am here! Why am I here?"
+ },
+ "beansprout-1m27sc0": {
+  "flag": "extra at start",
+  "say": "Hmm… Teddy?",
+  "heard": "Mmm, Teddy?"
+ },
+ "granny-4szhqx": {
+  "flag": "extra at start",
+  "say": "Shakirattle! 3 attack, and Elusive: tactic cards can't target her.",
+  "heard": "Shackle Rattle. Three attack and elusive. Tactic cards can't target her."
+ },
+ "granny-ezl5c0": {
+  "flag": "missing at end",
+  "say": "Tactic cards work once. Counterexample deals 3 damage. Khaby keeps hitting you, and Shakirattle is Elusive, so aim at Khaby Llame.",
+  "heard": "Tactic cards work once. Counter-example deals 3 damage. Cobby keeps hitting you, and Chakaraddle is elusive, so aim at Cobby Lame."
+ },
+ "granny-1ylgaju": {
+  "flag": "missing at start",
+  "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Cost: free. Click your power to continue; this lesson click does not use it.",
+  "heard": "Look at the top four rule cards. Take one into your hand and put the others back in any order. Cost free. Click your power to continue. This lesson click does not use it."
+ },
+ "granny-k3qsx4": {
+  "flag": "missing at start",
+  "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+  "heard": "Look at the top four rule cards. Take one into your hand and put the others back in any order. Cost one heart. Click your power to continue. This lesson click does not use it."
+ },
+ "granny-1kz8pxz": {
+  "flag": "extra at start",
+  "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+  "heard": "Four C. Look at the top four rule cards. Take one into your hand and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost one heart. Click your power to continue. This lesson click does not use it."
+ }
+}
